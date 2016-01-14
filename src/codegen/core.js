@@ -10,8 +10,16 @@ const withUniversals = (datatype,methods)=> _.reduce(universal,(mem,umaker,uname
 	return mem;
 },methods)
 
+
+const idTypes = withUniversals("id",{
+	idofunitat: (O,[pos])=> "(LAYERS.units["+T.position(O,pos)+"] || [{}]).id",
+	loopid: (O)=> "CONTEXT.loopid",
+	id: (O,id)=> T.value(O.id)
+})
+
 const valueTypes = withUniversals("value",{
 	value: (O,[value])=> typeof value === "string" ? "'"+value+"'" : value,
+	currentplayer: (O)=> O.player,
 	sum: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" + ") + ")",
 	prod: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" * ") + ")",
 	ctxval: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
@@ -68,6 +76,15 @@ const T = {
 			return boolTypes[def[0]](O,_.tail(def));
 		} else {
 			throw "Unknown bool def: "+def;
+		}
+	},
+	id: (O,def)=> {
+		if (!_.isArray(def)){
+			return valueTypes.value(O,[def]);
+		} else if (valueTypes[def[0]]) {
+			return idTypes[def[0]](O,_.tail(def));
+		} else {
+			throw "Unknown id def: "+def;
 		}
 	},
 	value: (O,def)=> {

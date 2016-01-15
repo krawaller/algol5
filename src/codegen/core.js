@@ -30,14 +30,16 @@ const valueTypes = withUniversals("value",{
 const boolTypes = withUniversals("boolean",{
     truthy: (O,[value])=> "!!" + T.value(O,value),
     falsy: (O,[value])=> "!" + T.value(O,value),
-    same: (O,[v1,v2])=> "(" + T.value(O,v1) + "=" + T.value(O,v2) + ")",
+    same: (O,[v1,v2])=> "(" + T.value(O,v1) + "===" + T.value(O,v2) + ")",
+    different: (O,[v1,v2])=> "(" + T.value(O,v1) + "!==" + T.value(O,v2) + ")",
+    morethan: (O,[v1,v2])=> "(" + T.value(O,v1) + ">" + T.value(O,v2) + ")",
     anyat: (O,[set,pos])=> T.set(O,set)+".hasOwnProperty("+T.position(O,pos)+")",
     noneat: (O,[set,pos])=> "!("+T.set(O,set)+".hasOwnProperty("+T.position(O,pos)+"))",
     overlaps: (O,[s1,s2])=> T.boolean(O,['notempty',['intersect',s1,s2]]),  //"(!_.isEmpty("+T.set(O,["intersect",s1,s2])+"))",
     isempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length===0",
     notempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length!==0",
     and: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" && ") + ")",
-    or: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" || ") + ")",
+    or: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" || ") + ")"
 })
 
 const positionTypes = withUniversals("position",{

@@ -2,6 +2,14 @@ import expressionTester from '../expressiontester'
 
 expressionTester({
     boolean: {
+        'the morethan cmnd when true': {
+            def: ['morethan',3,2],
+            expected: true
+        },
+        'the morethan cmnd when true': {
+            def: ['morethan',3,2],
+            expected: true
+        },
         'the isempty cmnd for non-empty layer': {
             def: ['isempty',['layer','somelayer']],
             scope: { LAYERS: {somelayer: {foo:'bar'}} },
@@ -77,6 +85,22 @@ expressionTester({
             scope: {LAYERS:{}},
             expected: true
         },
+        'the same cmnd when same': {
+            def: ['same',4,['value',4]],
+            expected: true
+        },
+        'the same cmnd when different': {
+            def: ['same',4,['value',3]],
+            expected: false
+        },
+        'the different cmnd when same': {
+            def: ['different',4,['value',4]],
+            expected: false
+        },
+        'the different cmnd when different': {
+            def: ['different',4,['value',3]],
+            expected: true
+        }
     },
     position: {
         'the mark cmnd': {

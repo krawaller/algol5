@@ -15,9 +15,10 @@ expressionTester({
             def: ['value','foo'],
             expected: 'foo'
         },
-        'the sum cmnd': {
-            def: ['sum',3,['value',2],-8],
-            expected: -3
+        'the sum cmnd also using currentplayer': {
+            def: ['sum',3,['value',2],['currentplayer']],
+            options: {player:2},
+            expected: 7
         },
         'the ctxval cmnd': {
             def: ['ctxval',['value','someval']],
@@ -25,7 +26,17 @@ expressionTester({
                 CONTEXT: {someval:'foo'}
             },
             expected: 'foo'
-        }
+        },
+        'the playercase cmnd when plr1': {
+            def: ['playercase','foo','bar'],
+            options: {player:1},
+            expected: 'foo'
+        },
+        'the playercase cmnd when plr2': {
+            def: ['playercase','foo','bar'],
+            options: {player:2},
+            expected: 'bar'
+        },
     },
     set: {
         'the single cmnd': {

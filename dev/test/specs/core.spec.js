@@ -1,6 +1,83 @@
 import expressionTester from '../expressiontester'
 
 expressionTester({
+    boolean: {
+        'the isempty cmnd for non-empty layer': {
+            def: ['isempty',['layer','somelayer']],
+            scope: { LAYERS: {somelayer: {foo:'bar'}} },
+            expected: false
+        },
+        'the isempty cmnd for empty layer': {
+            def: ['isempty',['layer','somelayer']],
+            scope: { LAYERS: {somelayer: {}} },
+            expected: true
+        },
+        'the isempty cmnd for nonexisting layer': {
+            def: ['isempty',['layer','somelayer']],
+            scope: { LAYERS: {} },
+            expected: true
+        },
+        'the notempty cmnd for non-empty layer': {
+            def: ['notempty',['layer','somelayer']],
+            scope: { LAYERS: {somelayer: {foo:'bar'}} },
+            expected: true
+        },
+        'the notempty cmnd for empty layer': {
+            def: ['notempty',['layer','somelayer']],
+            scope: { LAYERS: {somelayer: {}} },
+            expected: false
+        },
+        'the notempty cmnd for nonexisting layer': {
+            def: ['notempty',['layer','somelayer']],
+            scope: { LAYERS: {} },
+            expected: false
+        },
+        'the overlaps cmnd when given two overlapping layers': {
+            def: ['overlaps',['layer','l1'],['layer','l2']],
+            scope: { LAYERS: {l1: {a:[]}, l2: {a:[]}}},
+            expected: true
+        },
+        'the overlaps cmnd when given two non-overlapping layers': {
+            def: ['overlaps',['layer','l1'],['layer','l2']],
+            scope: { LAYERS: {l1: {a:[]}, l2: {b:[]}}},
+            expected: false
+        },
+        'the overlaps cmnd when given unexisting layers': {
+            def: ['overlaps',['layer','l1'],['layer','l2']],
+            scope: { LAYERS: {} },
+            expected: false
+        },
+        'the anyat cmnd when pointing to layer with that pos': {
+            def: ['anyat','mylayer',['pos','a1']],
+            scope: {LAYERS:{mylayer:{a1:[]}}},
+            expected: true
+        },
+        'the anyat cmnd when pointing to layer without pos': {
+            def: ['anyat','mylayer',['pos','a1']],
+            scope: {LAYERS:{mylayer:{}}},
+            expected: false
+        },
+        'the anyat cmnd when pointing to nonexisting layer': {
+            def: ['anyat','mylayer',['pos','a1']],
+            scope: {LAYERS:{}},
+            expected: false
+        },
+        'the noneat cmnd when pointing to layer with that pos': {
+            def: ['noneat','mylayer',['pos','a1']],
+            scope: {LAYERS:{mylayer:{a1:[]}}},
+            expected: false
+        },
+        'the noneat cmnd when pointing to layer without pos': {
+            def: ['noneat','mylayer',['pos','a1']],
+            scope: {LAYERS:{mylayer:{}}},
+            expected: true
+        },
+        'the noneat cmnd when pointing to nonexisting layer': {
+            def: ['noneat','mylayer',['pos','a1']],
+            scope: {LAYERS:{}},
+            expected: true
+        },
+    },
     position: {
         'the mark cmnd': {
             def: ['mark','mymark'],
@@ -11,9 +88,27 @@ expressionTester({
         }
     },
     value: {
+        'passing primitive': {
+            def: 123,
+            expected: 123
+        },
+        'passing string': {
+            def: '123',
+            expected: '123'
+        },
         'the value cmnd': {
             def: ['value','foo'],
             expected: 'foo'
+        },
+        'the otherplayer when player is 1': {
+            def: ['otherplayer'],
+            options: {player:1},
+            expected: 2
+        },
+        'the otherplayer when player is 2': {
+            def: ['otherplayer'],
+            options: {player:2},
+            expected: 1
         },
         'the sum cmnd also using currentplayer': {
             def: ['sum',3,['value',2],['currentplayer']],
@@ -39,6 +134,11 @@ expressionTester({
         },
     },
     set: {
+        'when given name of layer': {
+            def: 'mylayer',
+            scope: { LAYERS: {mylayer:{a:1,b:2}} },
+            expected: {a:1,b:2}
+        },
         'the single cmnd': {
             def: ['single',['mark','mymark']],
             scope: {

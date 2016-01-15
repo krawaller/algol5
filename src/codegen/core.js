@@ -20,6 +20,7 @@ const idTypes = withUniversals("id",{
 const valueTypes = withUniversals("value",{
     value: (O,[value])=> typeof value === "string" ? "'"+value+"'" : value,
     currentplayer: (O)=> O.player,
+    otherplayer: (O)=> O.player === 1 ? 2 : 1,
     sum: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" + ") + ")",
     prod: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" * ") + ")",
     ctxval: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
@@ -30,10 +31,11 @@ const boolTypes = withUniversals("boolean",{
     truthy: (O,[value])=> "!!" + T.value(O,value),
     falsy: (O,[value])=> "!" + T.value(O,value),
     same: (O,[v1,v2])=> "(" + T.value(O,v1) + "=" + T.value(O,v2) + ")",
-    anyat: (O,[set,pos])=> T.set(O.set)+"["+T.position(O,pos)+"]",
-    overlaps: (O,[s1,s2])=> "(!_.isEmpty("+T.set(O,["intersect",s1,s2])+"))",
-    isempty: (O,[s1])=> "_.isEmpty("+T.set(O,s1)+")",
-    notempty: (O,[s1])=> "(!_.isEmpty("+T.set(O,s1)+"))",
+    anyat: (O,[set,pos])=> T.set(O,set)+".hasOwnProperty("+T.position(O,pos)+")",
+    noneat: (O,[set,pos])=> "!("+T.set(O,set)+".hasOwnProperty("+T.position(O,pos)+"))",
+    overlaps: (O,[s1,s2])=> T.boolean(O,['notempty',['intersect',s1,s2]]),  //"(!_.isEmpty("+T.set(O,["intersect",s1,s2])+"))",
+    isempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length===0",
+    notempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length!==0",
     and: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" && ") + ")",
     or: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" || ") + ")",
 })
@@ -47,51 +49,51 @@ const positionTypes = withUniversals("position",{
 const setTypes = withUniversals("set",{
     layer: (O,[layername])=> "(LAYERS["+T.value(O,layername)+"] || {})",
     single: (O,[pos])=> `
-(function(){
-    var ret = {};
-    ret[${T.position(O,pos)}]=1;
-    return ret;
-}())`,
+        (function(){
+            var ret = {};
+            ret[${T.position(O,pos)}]=1;
+            return ret;
+        }())`,
     union: (O,sets)=> {
         let ret = '',
             setdefs = sets.map((def,n)=>'s'+n+' = '+T.set(O,def)).join(', '),
             copies = sets.map((def,n)=>'for(k in s'+n+'){ret[k]=1;}').join(' ');
         return `
-(function(){
-    var k, ret={}, ${setdefs};
-    ${copies}
-    return ret;
-}())`
+            (function(){
+                var k, ret={}, ${setdefs};
+                ${copies}
+                return ret;
+            }())`
     },
     intersect: (O,sets)=> {
         let ret = '',
             setdefs = sets.map((def,n)=>'s'+n+' = '+T.set(O,def)).join(', '),
             test = _.tail(sets).map((def,n)=>'s'+(n+1)+'[key]').join(' && ');
         return `
-(function(){
-    var ret={}, ${setdefs};
-    for(var key in s0){
-        if (${test}){
-            ret[key]=s0[key];
-        }
-    }
-    return ret;
-}())`
+            (function(){
+                var ret={}, ${setdefs};
+                for(var key in s0){
+                    if (${test}){
+                        ret[key]=s0[key];
+                    }
+                }
+                return ret;
+            }())`
     },
     subtract: (O,sets)=> {
         let ret = '',
             setdefs = sets.map((def,n)=>'s'+n+' = '+T.set(O,def)).join(', '),
             test = _.tail(sets).map((def,n)=>'!s'+(n+1)+'.hasOwnProperty(key)').join(' && ');
         return `
-(function(){
-    var ret={}, ${setdefs};
-    for(var key in s0){
-        if (${test}){
-            ret[key]=s0[key];
-        }
-    }
-    return ret;
-}())`
+            (function(){
+                var ret={}, ${setdefs};
+                for(var key in s0){
+                    if (${test}){
+                        ret[key]=s0[key];
+                    }
+                }
+                return ret;
+            }())`
     }//"_.omit("+T.set(O,s1)+",Object.keys("+T.set(O,s2)+"))"
 })
 

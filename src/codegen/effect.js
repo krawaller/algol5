@@ -16,9 +16,9 @@ const effects = {
         let id = "ID"+(""+Math.random()).replace("\.","");
         return (
             "let "+id+" = 'unit'+(Object.keys(UNITS).length+1);"+
-            "UNITS["+id+"] = {id:"+id+",group:"+C.value(O,group)+",owner:"+C.value(O,owner)+(obj?","+_.map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):"")+"};"
+            "UNITS["+id+"] = {pos:"+C.position(O,pos)+", id:"+id+",group:"+C.value(O,group)+",owner:"+(owner ? C.value(O,owner) : O.player)+(obj?","+_.map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):"")+"};"
         );
     }
 }
 
-module.exports = effects
+export default effects

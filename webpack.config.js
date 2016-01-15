@@ -1,7 +1,7 @@
 module.exports = {  
-    entry: './src/index.js',
+    entry: './src/codegen/index.js',
     output: {
-        filename: 'bundle.js'
+        filename: 'lib.js'
     },
     module: {
         loaders: [

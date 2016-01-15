@@ -98,4 +98,4 @@ const T = {
     }
 }
 
-export default T;
+module.exports = T

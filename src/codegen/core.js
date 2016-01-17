@@ -27,6 +27,9 @@ const valueTypes = withUniversals("value",{
     dir: (O)=> "DIR",
     max: (O)=> "MAX",
     stopreason: (O)=> "STOPREASON",
+    countsofar: (O)=> "CURRENTCOUNT",
+    totalcount: (O)=> "TOTALCOUNT",
+    step: (O)=> "STEP",
     read: (O,[layer,pos,prop])=> "(LAYERS["+T.value(O,layer)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"][0]["+ T.value(O,prop)+"])"
 })
 

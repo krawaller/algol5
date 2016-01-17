@@ -2,8 +2,55 @@ import _ from 'lodash'
 import C from "./core"
 
 const G = {
+	// wants full walkerdef.
+	afterwalk: (O,def)=> {
+		let ret = ''
+		ret += 'var WALKLENGTH = WALK.length; '
+		if (def && def.count){
+			ret += 'var TOTALCOUNT = CURRENTCOUNT; '
+		}
+		return ret;
+	},
 	// wants full walkerdef
-	handlewalkblock: (O,def)=> {
+	drawwalksteps: (O,def)=> {
+		let ret = ''
+		if (def.draw.steps || def.draw.all || def.draw.counted){
+			ret += 'var STEP = 0; '
+			ret += 'for(var stepper=0;stepper<WALKLENGTH;stepper++){'
+			ret += 'POS=WALK[stepper]; '
+			ret += 'STEP++; '
+			if (def.count){
+				ret += 'CURRENTCOUNT = COUNTTRACK[stepper]; '
+			}
+			if (def.draw.steps){
+				ret += G.performdraw(O,def.draw.steps)
+			}
+			if (def.draw.all){
+				ret += G.performdraw(O,def.draw.all)
+			}
+			if (def.draw.counted){
+				ret += 'if (COUNT[POS]) {'
+				ret += G.performdraw(O,def.draw.counted)
+				ret += '} '
+			}
+			ret += '}'
+		}
+		return ret
+	},
+	// wants full walkerdef. 
+	drawwalkstart: (O,def)=> {
+		let ret = ''
+		if (def.draw.start){
+			ret += 'POS=STARTPOS; '
+			ret += G.performdraw(O,def.draw.start)
+			if (def.draw.all){
+				ret += G.performdraw(O,def.draw.all) // TODO - handle all + startasstep?
+			}
+		}
+		return ret
+	},
+	// wants full walkerdef
+	drawwalkblock: (O,def)=> {
 		let ret = ''
 		if (def.blocks && def.draw.block){
 			ret += 'if (STOPREASON="hitblock"){'
@@ -66,7 +113,8 @@ const G = {
 	// ASSUMES STARTPOS, DIR
 	prepwalkstart: (O,def)=> {
 		def = def || {}
-		let ret = 'var WALK = []; '
+		let ret =  ''
+		ret += 'var WALK = []; '
 		if (def.max){
 			ret += 'var MAX='+C.value(O,def.max)+'; '
 		}
@@ -98,10 +146,6 @@ const G = {
 			ret += 'COUNTTRACK.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
 		}
 		return ret;
-	},
-	// uses WALK, COUNTTRACK, STOPREASON
-	afterwalk: (O,def)=> {
-
 	}
 }
 

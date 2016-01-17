@@ -25,7 +25,7 @@ const G = {
 	// ASSUMES STARTPOS, DIR
 	prepwalkstart: (O,def)=> {
 		def = def || {}
-		let ret = ''
+		let ret = 'var WALK = []; '
 		if (def.max){
 			ret += 'var MAX='+C.value(O,def.max)+'; '
 		}
@@ -36,13 +36,25 @@ const G = {
 			ret += 'var POS = STARTPOS; '
 		}
 		if (def.steps){
-			ret += 'var STEPS = '+C.set(O,def.steps);+'; '
+			ret += 'var STEPS = '+C.set(O,def.steps)+'; '
 		}
 		if (def.blocks){
-			ret += 'var BLOCKS = '+C.set(O,def.blocks);+'; '
+			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
 		}
 		if (def.count){
-			ret += 'var COUNT = '+C.set(O,def.count);+'; '
+			ret += 'var COUNT = '+C.set(O,def.count)+'; '
+			ret += 'var COUNTTRACK = []; '
+			ret += 'var CURRENTCOUNT = 0; '
+		}
+		return ret;
+	},
+	// ASSUMES NEXTPOS, ..
+	takewalkstep: (O,def)=> {
+		def = def || {}
+		let ret = 'POS = NEXTPOS; '
+		ret += 'WALK.push(NEXTPOS); '
+		if (def.count){
+			ret += 'COUNTTRACK.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
 		}
 		return ret;
 	}
@@ -65,6 +77,12 @@ if (def.get("startasstep")){
 	walk.push(startpos);
 	if (tobecounted){
 		counttrack.push(prevcounttotal = (prevcounttotal + (tobecounted.contains(startpos)?1:0)));
+	}
+}
+while(!(reason=stopreason(startstate,max,dir,pos,walk.length,blocks,steps,def.get("prioritizeblocksoversteps")))){
+	walk.push(pos = startstate.getIn(["connections",pos,dir])||startstate.getIn(["connections",pos,dir+""]));
+	if (tobecounted){
+		counttrack.push(prevcounttotal = (prevcounttotal + (tobecounted.contains(pos)?1:0)));
 	}
 }
 */

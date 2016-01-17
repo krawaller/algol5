@@ -4,10 +4,26 @@ import lib from '../../../src/codegen/'
 let G = lib.G
 
 describe('the generate funcs',()=>{
+    test(G.takewalkstep,'the takewalkstep func', {
+        'for normal walk': {
+            scope: {WALK:['foo'],NEXTPOS:'bar',POS:'foo'},
+            mutations: {WALK:['foo','bar'],POS:'bar'}
+        },
+        'with count and nextpos not to be counted': {
+            arg: {count:'YES'},
+            scope: {WALK:['foo'],NEXTPOS:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{},POS:'foo'},
+            mutations: {COUNTTRACK:['whatev',7],CURRENTCOUNT:7}
+        },
+        'with count and nextpos should be counted': {
+            arg: {count:'YES'},
+            scope: {WALK:['foo'],NEXTPOS:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
+            mutations: {COUNTTRACK:['whatev',8],CURRENTCOUNT:8}
+        }
+    });
     test(G.prepwalkstart,'the prepwalkstart func', {
         'for vanilla def': {
             scope: {STARTPOS: 'somepos'},
-            mutations: {POS: 'somepos'}
+            mutations: {POS: 'somepos', WALK: []}
         },
         'when def has max': {
             arg: {max:['value',4]},
@@ -32,7 +48,7 @@ describe('the generate funcs',()=>{
         'with count': {
             arg: {count:['layer','somelayer']},
             scope: {LAYERS:{somelayer:'L'},STARTPOS:'somepos'},
-            mutations: {COUNT:'L'} // TODO - need more stuff too! :D
+            mutations: {COUNT:'L',COUNTTRACK: [], CURRENTCOUNT: 0}
         }
     });
     test(G.stopreason,'the stopreason func', {

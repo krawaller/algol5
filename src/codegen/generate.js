@@ -2,6 +2,24 @@ import _ from 'lodash'
 import C from "./core"
 
 const G = {
+	// assumes POS
+	performdraw: (O,def)=> {
+		let ret = ''
+		if (def.condition){
+			ret += 'if ('+C.boolean(O,def.condition)+'){ '
+		}
+		ret += 'var artifact='+G.artifactliteral(O,def)+'; '
+		ret += 'var targetlayer='+C.value(O,def.tolayer)+'; '
+		ret += 'LAYERS[targetlayer][POS]=(LAYERS[targetlayer][POS]||[]).concat([artifact]); '
+		if (def.include && def.include.owner){
+			ret += 'var otherlayer=["neutral",'+(O.player===1?'"my","opp"':'"opp","my"')+'][artifact.owner]+targetlayer; '
+			ret += 'LAYERS[otherlayer][POS]=(LAYERS[otherlayer][POS]||[]).concat([artifact]); '
+		}
+		if (def.condition){
+			ret += '} '
+		}
+		return ret;
+	},
 	// def has condition, tolayer and includes
 	artifactliteral: (O,def)=> {
 		let ret = '{';

@@ -26,6 +26,7 @@ const valueTypes = withUniversals("value",{
     ctxval: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
     dir: (O)=> "DIR",
     max: (O)=> "MAX",
+    stopreason: (O)=> "STOPREASON",
     read: (O,[layer,pos,prop])=> "(LAYERS["+T.value(O,layer)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"][0]["+ T.value(O,prop)+"])"
 })
 

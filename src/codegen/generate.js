@@ -2,6 +2,20 @@ import _ from 'lodash'
 import C from "./core"
 
 const G = {
+	// wants full walkerdef
+	handlewalkblock: (O,def)=> {
+		let ret = ''
+		if (def.blocks && def.draw.block){
+			ret += 'if (STOPREASON="hitblock"){'
+			ret += 'POS=NEXTPOS; '
+			ret += G.performdraw(O,def.draw.block);
+			if (def.draw.all){
+				ret += G.performdraw(O,def.draw.all);
+			}
+			ret += '} '
+		}
+		return ret
+	},
 	// assumes POS
 	performdraw: (O,def)=> {
 		let ret = ''

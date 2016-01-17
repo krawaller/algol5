@@ -4,8 +4,31 @@ import lib from '../../../src/codegen/'
 let G = lib.G
 
 describe('the generate funcs',()=>{
-    test(G.afterwalk, 'the afterwalk func', {
-
+    test(G.handlewalkblock, 'the handlewalkblock func', {
+        'when we hit block and want to draw it': {
+            arg: {
+                blocks: 'yep',
+                draw: {
+                    block: {
+                        tolayer: 'blocks',
+                        include: {why:['stopreason']}
+                    }
+                }
+            },
+            scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',LAYERS:{blocks:{}}},
+            mutations: {POS:'boom',LAYERS:{blocks:{boom:[{why:'hitblock'}]}}}
+        },
+        'when we hit block and also draw all': {
+            arg: {
+                blocks: 'yep',
+                draw: {
+                    block: { tolayer: 'blocks' },
+                    all: { tolayer: 'everything' }
+                }
+            },
+            scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',LAYERS:{blocks:{},everything:{}}},
+            mutations: {POS:'boom',LAYERS:{blocks:{boom:[{}]},everything:{boom:[{}]}}}
+        }
     });
     test(G.takewalkstep, 'the takewalkstep func', {
         'for normal walk': {

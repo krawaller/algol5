@@ -24,6 +24,8 @@ const valueTypes = withUniversals("value",{
     sum: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" + ") + ")",
     prod: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" * ") + ")",
     ctxval: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
+    dir: (O)=> "DIR",
+    max: (O)=> "MAX",
     read: (O,[layer,pos,prop])=> "(LAYERS["+T.value(O,layer)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"][0]["+ T.value(O,prop)+"])"
 })
 

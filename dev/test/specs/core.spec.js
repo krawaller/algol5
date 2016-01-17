@@ -158,6 +158,11 @@ describe('the core funcs',()=>{
             arg: ['playercase','foo','bar'],
             options: {player:2},
             expected: 'bar'
+        },
+        'the dir cmnd': {
+            arg: ['dir'],
+            scope: {DIR:7},
+            expected: 7
         }
     });
     test(C.set,'the set func',{

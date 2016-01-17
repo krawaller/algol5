@@ -2,6 +2,15 @@ import _ from 'lodash'
 import C from "./core"
 
 const G = {
+	// def has condition, tolayer and includes
+	artifactliteral: (O,def)=> {
+		let ret = '{';
+		if (def.include){
+			ret += _.map(def.include,(valdef,key)=>(key+': '+C.value(O,valdef))).join(', ');
+		}
+		ret += '} '
+		return ret;
+	},
 	// assumes CONNECTIONS, DIR, LENGTH
 	// and if used BLOCKS, STEPS, MAX
 	stopreason: (O,def)=> {
@@ -57,12 +66,44 @@ const G = {
 			ret += 'COUNTTRACK.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
 		}
 		return ret;
+	},
+	// uses WALK, COUNTTRACK, STOPREASON
+	afterwalk: (O,def)=> {
+
 	}
 }
 
 export default G
 
 /*
+// Painter has tolayer and can have condition, include
+// Pod is map with positions, each have list of contexts
+// returns state with painted stuff woo
+Algol.paintSeedPod = function(state,painter,pod){
+	//console.log("painting seed pod",pod)
+	return pod.reduce(function(state,seeds,pos){
+		var currentplr = state.getIn(["context","currentplayer"])
+		return seeds.reduce(function(state,seed){
+			state = state.mergeIn(["context"],seed);
+			if (!painter.has("condition")||this.evaluateBoolean(state,painter.get("condition"))){
+				var targetlayer = this.evaluateValue(state,painter.get("tolayer"));
+				var entity = (painter.get("include")||I.Map()).map(function(def){
+					return this.evaluateValue(state,def);
+				},this);
+				state = state.set("layers", entity.has("owner")
+					? this.sortEntity(state.get("layers"),entity.set("pos",pos),[targetlayer],currentplr)
+					: I.pushIn(state.get("layers"),[targetlayer,pos],entity));
+			}
+			return state;
+		},state,this);
+	},state,this).set("context",state.get("context"));
+};
+
+
+
+
+
+
 Algol.generateWalkerPodsInDir = function(startstate,def,recorder,startpos,dir){
 
 startstate = startstate.setIn(["context","dir"],dir).setIn(["context","start"],startpos);
@@ -85,4 +126,26 @@ while(!(reason=stopreason(startstate,max,dir,pos,walk.length,blocks,steps,def.ge
 		counttrack.push(prevcounttotal = (prevcounttotal + (tobecounted.contains(pos)?1:0)));
 	}
 }
+var context = I.Map({start:startpos,dir:dir,linelength:walk.length,stopreason:reason,max:max});
+if (tobecounted){
+	context = context.set("counttotal",prevcounttotal);
+}
+if (reason==="hitblock"){
+	blockpos = startstate.getIn(["connections",pos,dir])||startstate.getIn(["connections",pos,dir+""]);
+	context = context.set("blockpos",blockpos);
+	recorder = I.pushIn(recorder,["block",blockpos],context.set("target",blockpos));
+}
+recorder = I.pushIn(recorder,["start",startpos],context);
+_.each(walk,function(step,n){
+	var ctx = context.set("target",step).set("step",n+1);
+	if (tobecounted){
+		ctx = ctx.set("countsofar",counttrack[n]);
+	}
+	if (n+1===walk.length){
+		ctx = ctx.set("laststep",true);
+		recorder = I.pushIn(recorder,["last",step],ctx);
+	}
+	recorder = I.pushIn(recorder,["steps",step],ctx);
+});
+return recorder;
 */

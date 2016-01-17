@@ -4,6 +4,16 @@ import lib from '../../../src/codegen/'
 let C = lib.C
 
 describe('the core funcs',()=>{
+    test(C.list,'the list func', {
+        'the regular list cmnd': {
+            arg: ['list',[111,222,['value',333]]],
+            expected: [111,222,333]
+        },
+        'when given a straight list': {
+            arg: [11,22,33],
+            expected: [11,22,33]
+        }
+    });
     test(C.boolean,'the boolean func', {
         'the morethan cmnd when true': {
             arg: ['morethan',3,2],

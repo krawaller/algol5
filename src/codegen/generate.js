@@ -2,6 +2,41 @@ import _ from 'lodash'
 import C from "./core"
 
 const G = {
+	applywalker: (O,def)=> {
+		let ret = ''
+		ret += 'var STARTS = '+C.set(O,def.starts)+'; '
+		ret += 'for(var STARTPOS in STARTS){'
+		ret += G.walkfromstart(O,def)
+		ret += '} '
+		return ret
+	},
+	// wants full walkerdef. 
+	// assumes STARTPOS, CONNECTIONS
+	walkfromstart: (O,def)=> {
+		let ret = ''
+		ret += 'var DIR; '
+		ret += 'var alldirs = '+C.list(O,def.dirs)+'; '
+		ret += 'var nbrofdirs = alldirs.length; '
+		ret += 'for(var dirnbr=0; dirnbr<nbrofdirs; dirnbr++){'
+		ret += 'DIR = alldirs[dirnbr]; '
+		ret += G.walkindir(O,def);
+		ret += '} '
+		return ret
+	},
+	// wants full walkerdef. 
+	// assumes STARTPOS, DIR, CONNECTIONS
+	walkindir: (O,def)=> {
+		let ret = ''
+		ret += G.prepwalkstart(O,def)
+		ret += 'while(!(STOPREASON='+G.stopreason(O,def)+')){'
+		ret += G.takewalkstep(O,def)
+		ret += '}'
+		ret += G.afterwalk(O,def)
+		ret += G.drawwalkblock(O,def)
+		ret += G.drawwalkstart(O,def)
+		ret += G.drawwalksteps(O,def)
+		return ret;
+	},
 	// wants full walkerdef.
 	afterwalk: (O,def)=> {
 		let ret = ''
@@ -49,6 +84,14 @@ const G = {
 		}
 		return ret
 	},
+	drawwalklast: (O,def)=> {
+		let ret = ''
+		if (def.draw.last){
+			ret += 'POS=WALK[WALKLENGTH-1]; '
+			ret += G.performdraw(O,def.draw.last)
+		}
+		return ret
+	},
 	// wants full walkerdef
 	drawwalkblock: (O,def)=> {
 		let ret = ''
@@ -62,33 +105,6 @@ const G = {
 			ret += '} '
 		}
 		return ret
-	},
-	// assumes POS
-	performdraw: (O,def)=> {
-		let ret = ''
-		if (def.condition){
-			ret += 'if ('+C.boolean(O,def.condition)+'){ '
-		}
-		ret += 'var artifact='+G.artifactliteral(O,def)+'; '
-		ret += 'var targetlayer='+C.value(O,def.tolayer)+'; '
-		ret += 'LAYERS[targetlayer][POS]=(LAYERS[targetlayer][POS]||[]).concat([artifact]); '
-		if (def.include && def.include.owner){
-			ret += 'var otherlayer=["neutral",'+(O.player===1?'"my","opp"':'"opp","my"')+'][artifact.owner]+targetlayer; '
-			ret += 'LAYERS[otherlayer][POS]=(LAYERS[otherlayer][POS]||[]).concat([artifact]); '
-		}
-		if (def.condition){
-			ret += '} '
-		}
-		return ret;
-	},
-	// def has condition, tolayer and includes
-	artifactliteral: (O,def)=> {
-		let ret = '{';
-		if (def.include){
-			ret += _.map(def.include,(valdef,key)=>(key+': '+C.value(O,valdef))).join(', ');
-		}
-		ret += '} '
-		return ret;
 	},
 	// assumes CONNECTIONS, DIR, LENGTH
 	// and if used BLOCKS, STEPS, MAX
@@ -115,6 +131,8 @@ const G = {
 		def = def || {}
 		let ret =  ''
 		ret += 'var WALK = []; '
+		ret += 'var STOPREASON = ""; '
+		ret += 'var NEXTPOS = ""; '
 		if (def.max){
 			ret += 'var MAX='+C.value(O,def.max)+'; '
 		}
@@ -146,82 +164,37 @@ const G = {
 			ret += 'COUNTTRACK.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
 		}
 		return ret;
+	},
+
+	// ------------ GENERAL STUFF -----------
+
+	// assumes POS
+	performdraw: (O,def)=> {
+		let ret = ''
+		if (def.condition){
+			ret += 'if ('+C.boolean(O,def.condition)+'){ '
+		}
+		ret += 'var artifact='+G.artifactliteral(O,def)+'; '
+		ret += 'var targetlayer='+C.value(O,def.tolayer)+'; '
+		ret += 'LAYERS[targetlayer][POS]=(LAYERS[targetlayer][POS]||[]).concat([artifact]); '
+		if (def.include && def.include.owner){
+			ret += 'var otherlayer=["neutral",'+(O.player===1?'"my","opp"':'"opp","my"')+'][artifact.owner]+targetlayer; '
+			ret += 'LAYERS[otherlayer][POS]=(LAYERS[otherlayer][POS]||[]).concat([artifact]); '
+		}
+		if (def.condition){
+			ret += '} '
+		}
+		return ret;
+	},
+	// def has condition, tolayer and includes
+	artifactliteral: (O,def)=> {
+		let ret = '{';
+		if (def.include){
+			ret += _.map(def.include,(valdef,key)=>(key+': '+C.value(O,valdef))).join(', ');
+		}
+		ret += '} '
+		return ret;
 	}
 }
 
 export default G
-
-/*
-// Painter has tolayer and can have condition, include
-// Pod is map with positions, each have list of contexts
-// returns state with painted stuff woo
-Algol.paintSeedPod = function(state,painter,pod){
-	//console.log("painting seed pod",pod)
-	return pod.reduce(function(state,seeds,pos){
-		var currentplr = state.getIn(["context","currentplayer"])
-		return seeds.reduce(function(state,seed){
-			state = state.mergeIn(["context"],seed);
-			if (!painter.has("condition")||this.evaluateBoolean(state,painter.get("condition"))){
-				var targetlayer = this.evaluateValue(state,painter.get("tolayer"));
-				var entity = (painter.get("include")||I.Map()).map(function(def){
-					return this.evaluateValue(state,def);
-				},this);
-				state = state.set("layers", entity.has("owner")
-					? this.sortEntity(state.get("layers"),entity.set("pos",pos),[targetlayer],currentplr)
-					: I.pushIn(state.get("layers"),[targetlayer,pos],entity));
-			}
-			return state;
-		},state,this);
-	},state,this).set("context",state.get("context"));
-};
-
-
-
-
-
-
-Algol.generateWalkerPodsInDir = function(startstate,def,recorder,startpos,dir){
-
-startstate = startstate.setIn(["context","dir"],dir).setIn(["context","start"],startpos);
-var pos=startpos, walk = [], reason, blockpos,
-	blocks = def.has("blocks") && this.evaluatePositionSet(startstate,def.get("blocks")),
-	steps = def.has("steps") && this.evaluatePositionSet(startstate,def.get("steps")),
-	tobecounted = def.has("count") && this.evaluatePositionSet(startstate,def.get("count")),
-	prevcounttotal = 0, counttrack = [],
-	max = def.has("max") ? this.evaluateValue(startstate,def.get("max")) : undefined;
-startstate = startstate.setIn(["context","max"],max).setIn(["context","target"],startpos);
-if (def.get("startasstep")){
-	walk.push(startpos);
-	if (tobecounted){
-		counttrack.push(prevcounttotal = (prevcounttotal + (tobecounted.contains(startpos)?1:0)));
-	}
-}
-while(!(reason=stopreason(startstate,max,dir,pos,walk.length,blocks,steps,def.get("prioritizeblocksoversteps")))){
-	walk.push(pos = startstate.getIn(["connections",pos,dir])||startstate.getIn(["connections",pos,dir+""]));
-	if (tobecounted){
-		counttrack.push(prevcounttotal = (prevcounttotal + (tobecounted.contains(pos)?1:0)));
-	}
-}
-var context = I.Map({start:startpos,dir:dir,linelength:walk.length,stopreason:reason,max:max});
-if (tobecounted){
-	context = context.set("counttotal",prevcounttotal);
-}
-if (reason==="hitblock"){
-	blockpos = startstate.getIn(["connections",pos,dir])||startstate.getIn(["connections",pos,dir+""]);
-	context = context.set("blockpos",blockpos);
-	recorder = I.pushIn(recorder,["block",blockpos],context.set("target",blockpos));
-}
-recorder = I.pushIn(recorder,["start",startpos],context);
-_.each(walk,function(step,n){
-	var ctx = context.set("target",step).set("step",n+1);
-	if (tobecounted){
-		ctx = ctx.set("countsofar",counttrack[n]);
-	}
-	if (n+1===walk.length){
-		ctx = ctx.set("laststep",true);
-		recorder = I.pushIn(recorder,["last",step],ctx);
-	}
-	recorder = I.pushIn(recorder,["steps",step],ctx);
-});
-return recorder;
-*/

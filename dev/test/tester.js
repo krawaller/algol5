@@ -24,7 +24,11 @@ const tester = (func,desc,specs)=> {
                 if (!spec.mutations && !spec.hasOwnProperty("expected")) {
                     throw "Should seek result or mutation!"
                 }
-                eval(vars+(spec.hasOwnProperty("expected") ? 'result=': '')+code+";"+test);
+                var tobeexec = vars+(spec.hasOwnProperty("expected") ? 'result=': '')+code+";"+test
+                if (spec.debug){
+                    console.log("Code: ",tobeexec)
+                }
+                eval(tobeexec);
             });
         });
     });

@@ -4,6 +4,88 @@ import lib from '../../../src/codegen/'
 let G = lib.G
 
 describe('the generate funcs',()=>{
+    test(G.applywalker, 'the applywalker func', {
+        'for simple walk': {
+            arg: {
+                starts: ['layer','starts'],
+                dirs: [1,3,5],
+                draw: {
+                    steps: {
+                        tolayer: 'steps',
+                        include: {heading: ['dir'],nbr:['step']}
+                    }
+                }
+            },
+            scope: {
+                CONNECTIONS: {p0:{1:'p1'},p1:{1:'p2'},p2:{},q0:{3:'q1'},q1:{}},
+                LAYERS: { steps:{}, starts: {q0:'yes',p0:'yes'} }
+            },
+            mutations: {
+                LAYERS: {
+                    starts: {q0:'yes',p0:'yes'},
+                    steps:{
+                        p1: [{heading:1,nbr:1}],
+                        p2: [{heading:1,nbr:2}],
+                        q1: [{heading:3,nbr:1}]
+                    }
+                }
+            }
+        }
+    });
+    test(G.walkfromstart, 'the walkfromstart func', {
+        'for simple walk': {
+            arg: {
+                dirs: [1,3],
+                draw: {
+                    steps: {
+                        tolayer: 'steps',
+                        include: {heading: ['dir']}
+                    }
+                }
+            },
+            scope: {
+                STARTPOS: 'p0',
+                CONNECTIONS: {p0:{1:'p1',3:'q1'},p1:{1:'p2'},p2:{},q1:{}},
+                LAYERS: { steps:{} }
+            },
+            mutations: {
+                LAYERS: {
+                    steps:{
+                        p1: [{heading:1}], p2: [{heading:1}],
+                        q1: [{heading:3}]
+                    }
+                }
+            }
+        }
+    });
+    test(G.walkindir, 'the walkindir func', {
+        'for simple walk': {
+            arg: {
+                blocks: ['layer','intheway'],
+                draw: {
+                    steps: {tolayer: 'steps'},
+                    block: {tolayer: 'blocks'}
+                }
+            },
+            scope: {
+                STARTPOS: 'p0',
+                DIR: 1,
+                CONNECTIONS: {p0:{1:'p1'},p1:{1:'p2'},p2:{1:'p3'},p3:{1:'p4'}},
+                LAYERS: {
+                    steps:{},
+                    blocks:{},
+                    intheway:{p3:'yep'}
+                }
+            },
+            mutations: {
+                LAYERS: {
+                    steps:{p1:[{}],p2:[{}]},
+                    blocks:{p3:[{}]},
+                    intheway:{p3:'yep'}
+                }
+            }
+        }
+    });
     test(G.drawwalksteps, 'the drawwalksteps func', {
         'when just draw the steps': {
             arg: {
@@ -38,6 +120,15 @@ describe('the generate funcs',()=>{
             },
             scope: {POS:'sthelse',STARTPOS:'start',LAYERS:{begins:{},everything:{}}},
             mutations: {POS:'start',LAYERS:{begins:{start:[{}]},everything:{start:[{}]}}}
+        }
+    });
+    test(G.drawwalklast, 'the drawwalklast func', {
+        'for vanilla walk': {
+            arg: {
+                draw: { last: { tolayer: 'lasts' }}
+            },
+            scope: {POS:'wherever',WALKLENGTH:2,WALK:['foo','bar'],LAYERS:{lasts:{}}},
+            mutations: {LAYERS:{lasts:{bar:[{}]}}}
         }
     });
     test(G.drawwalkblock, 'the drawwalkblock func', {
@@ -81,11 +172,11 @@ describe('the generate funcs',()=>{
             scope: {WALK:['foo'],NEXTPOS:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
             mutations: {COUNTTRACK:['whatev',8],CURRENTCOUNT:8}
         },
-        /*'with count and nextpos should be counted and we intend to draw': {
+        'with count and nextpos should be counted and we intend to draw': {
             arg: {count:'YES',draw:{counted:'sure'}},
             scope: {COUNTED:['x'],WALK:['foo'],NEXTPOS:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
             mutations: {COUNTTRACK:['whatev',8],CURRENTCOUNT:8}
-        }*/
+        }
     });
     test(G.afterwalk, 'the afterwalk func', {
         'for vanilla walk': {
@@ -101,7 +192,7 @@ describe('the generate funcs',()=>{
     test(G.prepwalkstart, 'the prepwalkstart func', {
         'for vanilla def': {
             scope: {STARTPOS: 'somepos'},
-            mutations: {POS: 'somepos', WALK: []}
+            mutations: {POS: 'somepos', WALK: [],STOPREASON:'',NEXTPOS:''}
         },
         'when def has max': {
             arg: {max:['value',4]},

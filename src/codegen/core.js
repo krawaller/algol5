@@ -10,6 +10,12 @@ const withUniversals = (datatype,methods)=> _.reduce(universal,(mem,umaker,uname
     return mem;
 },methods)
 
+const listTypes = withUniversals("list",{
+    list: (O,[vals])=> {
+        var ret = vals.map(v=>T.value(O,v))
+        return '['+ret.join(',')+']'
+    }
+})
 
 const idTypes = withUniversals("id",{
     idofunitat: (O,[pos])=> "(LAYERS.units["+T.position(O,pos)+"] || [{}]).id",
@@ -106,6 +112,15 @@ const setTypes = withUniversals("set",{
 })
 
 const T = {
+    list: (O,def)=> {
+        if (listTypes[def[0]]) {
+            return listTypes[def[0]](O,_.tail(def));
+        } else if (_.isArray(def)) {
+            return listTypes.list(O,[def]);
+        } else {
+            throw "Unknown list def: "+def;
+        }
+    },
     set: (O,def)=> {
         if (!_.isArray(def)){
             return setTypes.layer(O,[def]);

@@ -173,8 +173,15 @@ describe('the core funcs',()=>{
             },
             expected: {somepos:1}
         },
-        'the layer cmnd': {
+        'the layer cmnd when needs to valueify': {
             arg: ['layer',['value','mylayer']],
+            scope: {
+                LAYERS: {mylayer:{a:1,b:2}}
+            },
+            expected: {a:1,b:2}
+        },
+        'the layer cmnd with str': {
+            arg: ['layer','mylayer'],
             scope: {
                 LAYERS: {mylayer:{a:1,b:2}}
             },

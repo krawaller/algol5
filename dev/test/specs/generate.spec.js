@@ -6,13 +6,33 @@ let G = lib.G
 describe('the generate funcs',()=>{
     test(G.prepwalkstart,'the prepwalkstart func', {
         'for vanilla def': {
-            scope: {CONTEXT: {some:'val'},DIR: 7, STARTPOS: 'somepos'},
-            mutations: {CONTEXT: {some:'val',dir: 7, start: 'somepos'}}
+            scope: {STARTPOS: 'somepos'},
+            mutations: {POS: 'somepos'}
         },
         'when def has max': {
             arg: {max:['value',4]},
-            scope: {CONTEXT: {some:'val'},DIR: 7, STARTPOS: 'somepos'},
-            mutations: {CONTEXT: {some:'val',dir: 7, start: 'somepos', max: 4}, MAX: 4}
+            scope: {DIR: 7, STARTPOS: 'somepos'},
+            mutations: {MAX: 4}
+        },
+        'with startasstep': {
+            arg: {startasstep:true},
+            scope: {CONNECTIONS:{foo:'bar',faux:{baz:'bin'}},STARTPOS:'somepos',DIR:'somedir'},
+            mutations: {CONNECTIONS:{foo:'bar',faux:{baz:'bin',somedir:'somepos'}},POS:'faux'}
+        },
+        'with steps': {
+            arg: {steps:['layer','somelayer']},
+            scope: {LAYERS:{somelayer:'L'},STARTPOS:'somepos'},
+            mutations: {STEPS:'L'}
+        },
+        'with blocks': {
+            arg: {blocks:['layer','somelayer']},
+            scope: {LAYERS:{somelayer:'L'},STARTPOS:'somepos'},
+            mutations: {BLOCKS:'L'}
+        },
+        'with count': {
+            arg: {count:['layer','somelayer']},
+            scope: {LAYERS:{somelayer:'L'},STARTPOS:'somepos'},
+            mutations: {COUNT:'L'} // TODO - need more stuff too! :D
         }
     });
     test(G.stopreason,'the stopreason func', {

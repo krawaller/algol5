@@ -25,10 +25,24 @@ const G = {
 	// ASSUMES STARTPOS, DIR
 	prepwalkstart: (O,def)=> {
 		def = def || {}
-		let ret = 'CONTEXT.dir=DIR; CONTEXT.start=STARTPOS; '
+		let ret = ''
 		if (def.max){
 			ret += 'var MAX='+C.value(O,def.max)+'; '
-			ret += 'CONTEXT.max=MAX; '
+		}
+		if (def.startasstep){
+			ret += 'var POS = "faux"; '
+			ret += 'CONNECTIONS.faux[DIR]=STARTPOS; '
+		} else {
+			ret += 'var POS = STARTPOS; '
+		}
+		if (def.steps){
+			ret += 'var STEPS = '+C.set(O,def.steps);+'; '
+		}
+		if (def.blocks){
+			ret += 'var BLOCKS = '+C.set(O,def.blocks);+'; '
+		}
+		if (def.count){
+			ret += 'var COUNT = '+C.set(O,def.count);+'; '
 		}
 		return ret;
 	}

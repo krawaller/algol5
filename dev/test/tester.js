@@ -28,7 +28,12 @@ const tester = (func,desc,specs)=> {
                 if (spec.debug){
                     console.log("Code: ",tobeexec)
                 }
-                eval(tobeexec);
+                try {
+                    eval(tobeexec);
+                } catch(e) {
+                    console.log("ERROR ERROR! Code:\n",tobeexec)
+                    throw e;
+                }
             });
         });
     });

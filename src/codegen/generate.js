@@ -1,40 +1,53 @@
 import _ from 'lodash'
 import C from "./core"
 
-/*
-Algol.generateNeighbourPods = function(state,def){
-	var cond = def.get("condition");
-	var ret = this.evaluatePositionSet(state,def.get("starts")).reduce(function(recorder,startpos){
-		var startstate = state.setIn(["context","start"],startpos),
-			tobecounted = def.has("count") && this.evaluatePositionSet(startstate,def.get("count")),
-			counttotal = 0;
-		//console.log("From here");
-		var neighbours = this.evaluateDirList(startstate,def.get("dirs")).reduce(function(map,dir){
-			startstate = startstate.setIn(["context","dir"],dir);
-			var targetpos = state.getIn(["connections",startpos,dir])||state.getIn(["connections",startpos,dir+""]);
-			//console.log("neighbour",startpos,dir,targetpos, targetpos && this.evaluateBoolean(startstate.setIn(["context","target"],targetpos),cond));
-			if (targetpos && (!cond || this.evaluateBoolean(startstate.setIn(["context","target"],targetpos),cond))){
-				if (tobecounted && tobecounted.contains(targetpos)){
-					counttotal++;
-				}
-				return map.set(dir,targetpos);
-			} else {
-				return map;
-			}
-			//return targetpos && (!cond || this.evaluateBoolean(startstate.setIn(["context","target"],targetpos),cond)) ? map.set(dir,targetpos) : map;
-		},I.Map(),this);
-		return neighbours.reduce(function(recorder,pos,dir){
-			return I.pushIn(recorder,["target",pos],I.Map({start:startpos,dir:dir,target:pos,neighbourcount:neighbours.size,counttotal:counttotal}));
-		},I.pushIn(recorder,["start",startpos],I.Map({start:startpos,neighbourcount:neighbours.size,counttotal:counttotal})),this);
-	},I.fromJS({start:{},target:{}}),this);
-	//console.log("NEI",def.toJS(),"ret",ret.toJS());
-	return ret;
-};
-*/
-
 const G = {
 
 	// ------------ NEIGHBOUR STUFF -----------
+
+	applyneighbours: (O,def)=> {
+		let ret = ''
+		ret += G.findneighbours(O,def)
+		ret += G.afterneighbourlook(O,def)
+		ret += G.drawneighbourstart(O,def)
+		ret += G.drawneighbourtargets(O,def)
+		return ret
+	},
+
+	findneighbours: (O,def)=> {
+		def = def || {}
+		let ret = ''
+		ret += 'var NEIGHBOURS=[]; '
+		if (def.start){
+			ret += 'var STARTPOS='+C.position(O,def.start)+'; '
+			ret += G.findneighboursfromstart(O,def)
+		} else {
+			ret += 'var STARTPOS; '
+			ret += 'var STARTS='+C.set(O,def.starts)+'; '
+			ret += 'for(var STARTPOS in STARTS){'
+			ret += G.findneighboursfromstart(O,def)
+			ret += '} '
+		}
+		return ret;
+	},
+
+	findneighboursfromstart: (O,def)=> {
+		def = def || {}
+		let ret = ''
+		if (def.dir){
+			ret += 'var DIR='+C.value(O,def.dir)+'; '
+			ret += G.findneighbourindir(O,def)
+		} else {
+			ret += 'var DIR; '
+			ret += 'var DIRS='+C.list(O,def.dirs)+'; '
+			ret += 'var nbrofdirs=DIRS.length; '
+			ret += 'for(var dirnbr=0;dirnbr<nbrofdirs;dirnbr++){'
+			ret += 'DIR=DIRS[dirnbr]; '
+			ret += G.findneighbourindir(O,def)
+			ret += '} '
+		}
+		return ret
+	},
 
 	// wants full neighbour def
 	// assumes STARTPOS, DIR, NEIGHBOURS
@@ -78,7 +91,7 @@ const G = {
 
 	// ------------ WALKER STUFF -----------
 
-	applywalker: (O,def)=> {
+	applywalker: (O,def)=> { // TODO - no loop if single start!
 		let ret = ''
 		ret += 'var STARTS = '+C.set(O,def.starts)+'; '
 		ret += 'for(var STARTPOS in STARTS){'
@@ -88,7 +101,7 @@ const G = {
 	},
 	// wants full walkerdef. 
 	// assumes STARTPOS, CONNECTIONS
-	walkfromstart: (O,def)=> {
+	walkfromstart: (O,def)=> {  // TODO - no loop if single dir!
 		let ret = ''
 		ret += 'var DIR; '
 		ret += 'var alldirs = '+C.list(O,def.dirs)+'; '

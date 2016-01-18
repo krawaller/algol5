@@ -91,25 +91,35 @@ const G = {
 
 	// ------------ WALKER STUFF -----------
 
-	applywalker: (O,def)=> { // TODO - no loop if single start!
+	applywalker: (O,def)=> {
 		let ret = ''
-		ret += 'var STARTS = '+C.set(O,def.starts)+'; '
-		ret += 'for(var STARTPOS in STARTS){'
-		ret += G.walkfromstart(O,def)
-		ret += '} '
+		if (def.starts){
+			ret += 'var STARTS = '+C.set(O,def.starts)+'; '
+			ret += 'for(var STARTPOS in STARTS){'
+			ret += G.walkfromstart(O,def)
+			ret += '} '
+		} else {
+			ret += 'var STARTPOS='+C.position(O,def.start)+'; '
+			ret += G.walkfromstart(O,def)
+		}
 		return ret
 	},
 	// wants full walkerdef. 
 	// assumes STARTPOS, CONNECTIONS
-	walkfromstart: (O,def)=> {  // TODO - no loop if single dir!
+	walkfromstart: (O,def)=> {
 		let ret = ''
-		ret += 'var DIR; '
-		ret += 'var alldirs = '+C.list(O,def.dirs)+'; '
-		ret += 'var nbrofdirs = alldirs.length; '
-		ret += 'for(var dirnbr=0; dirnbr<nbrofdirs; dirnbr++){'
-		ret += 'DIR = alldirs[dirnbr]; '
-		ret += G.walkindir(O,def);
-		ret += '} '
+		if (def.dirs){
+			ret += 'var DIR; '
+			ret += 'var alldirs = '+C.list(O,def.dirs)+'; '
+			ret += 'var nbrofdirs = alldirs.length; '
+			ret += 'for(var dirnbr=0; dirnbr<nbrofdirs; dirnbr++){'
+			ret += 'DIR = alldirs[dirnbr]; '
+			ret += G.walkindir(O,def)
+			ret += '} '
+		} else {
+			ret += 'var DIR='+C.value(O,def.dir)+'; '
+			ret += G.walkindir(O,def)
+		}
 		return ret
 	},
 	// wants full walkerdef. 

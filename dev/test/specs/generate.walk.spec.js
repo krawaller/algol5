@@ -30,6 +30,25 @@ describe('the generate funcs',()=>{
                     }
                 }
             }
+        },
+        'when just 1 start': {
+            arg: {
+                start: ['pos','q0'],
+                dirs: [1,3,5],
+                draw: {
+                    steps: {
+                        tolayer: 'steps',
+                        include: {heading: ['dir'],nbr:['step']}
+                    }
+                }
+            },
+            scope: {
+                CONNECTIONS: {q0:{3:'q1'},q1:{}},
+                LAYERS: { steps:{} }
+            },
+            mutations: {
+                LAYERS: { steps:{ q1: [{heading:3,nbr:1}] } }
+            }
         }
     });
     test(G.walkfromstart, 'the walkfromstart func', {
@@ -53,6 +72,29 @@ describe('the generate funcs',()=>{
                     steps:{
                         p1: [{heading:1}], p2: [{heading:1}],
                         q1: [{heading:3}]
+                    }
+                }
+            }
+        },
+        'when just 1 dir': {
+            arg: {
+                dir: 1,
+                draw: {
+                    steps: {
+                        tolayer: 'steps',
+                        include: {heading: ['dir']}
+                    }
+                }
+            },
+            scope: {
+                STARTPOS: 'p0',
+                CONNECTIONS: {p0:{1:'p1',3:'q1'},p1:{1:'p2'},p2:{},q1:{}},
+                LAYERS: { steps:{} }
+            },
+            mutations: {
+                LAYERS: {
+                    steps:{
+                        p1: [{heading:1}], p2: [{heading:1}]
                     }
                 }
             }

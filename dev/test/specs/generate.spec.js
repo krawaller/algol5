@@ -4,6 +4,18 @@ import lib from '../../../src/codegen/'
 let G = lib.G
 
 describe('the generate funcs',()=>{
+    test(G.addtolayer,'the addtolayer func',{
+        'when nothing at that pos': {
+            args: ['"mylayer"','"a1"','"foo"'],
+            scope: {LAYERS:{mylayer:{}}},
+            mutations: {LAYERS:{mylayer:{a1:["foo"]}}}
+        },
+        'when stuff already there': {
+            args: ['"mylayer"','"a1"','"foo"'],
+            scope: {LAYERS:{mylayer:{a1:["bar"]}}},
+            mutations: {LAYERS:{mylayer:{a1:["bar","foo"]}}}
+        }
+    })
     test(G.performdraw,'the performdraw func',{
         'with no owner or condition and nothing at the pos': {
             arg: {tolayer:'somelayer',include:{heading:['dir']}},

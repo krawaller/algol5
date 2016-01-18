@@ -4,6 +4,28 @@ import lib from '../../../src/codegen/'
 let C = lib.C
 
 describe('the core funcs',()=>{
+    test(C.prop,'the prop func', {
+        'the is cmnd when evals to true': {
+            args: [ ['is',['sum',2,5]], 'someprop'],
+            scope: {OBJ:{someprop:7}},
+            expected: true
+        },
+        'the is cmnd when evals to false': {
+            args: [ ['is',['sum',2,5]], 'someprop'],
+            scope: {OBJ:{someprop:5}},
+            expected: false
+        },
+        'the isnt cmnd when evals to true': {
+            args: [ ['isnt',['sum',2,5]], 'someprop'],
+            scope: {OBJ:{someprop:7}},
+            expected: false
+        },
+        'the ismt cmnd when evals to false': {
+            args: [ ['isnt',['sum',2,5]], 'someprop'],
+            scope: {OBJ:{someprop:5}},
+            expected: true
+        }
+    });
     test(C.list,'the list func', {
         'the regular list cmnd': {
             arg: ['list',[111,222,['value',333]]],

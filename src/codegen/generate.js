@@ -3,6 +3,41 @@ import C from "./core"
 
 const G = {
 
+	// ------------ FILTER STUFF -----------
+
+	applyfilter: (O,def)=> {
+		let ret = ''
+		ret += 'var SOURCELAYER = '+C.value(O,def.layer)+'; '
+		ret += 'for (var POS in LAYERS[SOURCELAYER]){'
+		ret += G.tryposition(O,def)
+		ret += '}'
+		return ret
+	},
+
+	// assumes SOURCELAYER, POS,
+	tryposition: (O,def)=> {
+		let ret = ''
+		ret += 'var TARGETLAYER = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
+		ret += 'if (LAYERS[SOURCELAYER][POS]){'
+		ret += 'for(var objnbr=0;objnbr<LAYERS[SOURCELAYER][POS].length;objnbr++){ '
+		ret += 'var OBJ = LAYERS[SOURCELAYER][POS][objnbr]; '
+		ret += G.tryobj(O,def)
+		ret += '} '
+		ret += '} '
+		return ret
+	},
+
+	// assumes POS, OBJ, TARGETLAYER
+	tryobj: (O,def)=> { // TODO - core datatype for matcher?
+		let ret = ''
+		let conds = (def.condition ? [C.boolean(O,def.condition)] : [])
+		conds = conds.concat(_.map(def.matching,(test,key)=> C.prop(O,test,key) ))
+		ret += 'if (' + conds.join(' && ') + '){'
+		ret += G.addtolayer(O,'TARGETLAYER','POS','OBJ')
+		ret += '} '
+		return ret
+	},
+
 	// ------------ NEIGHBOUR STUFF -----------
 
 	applyneighbours: (O,def)=> {
@@ -269,6 +304,12 @@ const G = {
 
 	// ------------ GENERAL STUFF -----------
 
+	addtolayer: (O,layer,pos,obj)=> {
+		let ret = ''
+		ret += 'LAYERS['+layer+']['+pos+']=(LAYERS['+layer+']['+pos+']||[]).concat(['+obj+']); '
+		return ret
+	},
+
 	// assumes POS
 	performdraw: (O,def)=> {
 		let ret = ''
@@ -277,10 +318,10 @@ const G = {
 		}
 		ret += 'var artifact='+G.artifactliteral(O,def)+'; '
 		ret += 'var targetlayer='+C.value(O,def.tolayer)+'; '
-		ret += 'LAYERS[targetlayer][POS]=(LAYERS[targetlayer][POS]||[]).concat([artifact]); '
+		ret += G.addtolayer(O,'targetlayer','POS','artifact')
 		if (def.include && def.include.owner){
 			ret += 'var otherlayer=["neutral",'+(O.player===1?'"my","opp"':'"opp","my"')+'][artifact.owner]+targetlayer; '
-			ret += 'LAYERS[otherlayer][POS]=(LAYERS[otherlayer][POS]||[]).concat([artifact]); '
+			ret += G.addtolayer(O,'otherlayer','POS','artifact')
 		}
 		if (def.condition){
 			ret += '} '

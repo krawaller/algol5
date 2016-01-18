@@ -24,6 +24,7 @@ const idTypes = withUniversals("id",{
 })
 
 const valueTypes = withUniversals("value",{
+    pos: (O,[pos])=> T.position(O,pos),
     value: (O,[value])=> typeof value === "string" ? "'"+value+"'" : value,
     currentplayer: (O)=> O.player,
     otherplayer: (O)=> O.player === 1 ? 2 : 1,
@@ -114,7 +115,19 @@ const setTypes = withUniversals("set",{
     }//"_.omit("+T.set(O,s1)+",Object.keys("+T.set(O,s2)+"))"
 })
 
+const propTypes = {
+    is: (O,[value],propname)=> 'OBJ.'+propname+'==='+T.value(O,value),
+    isnt: (O,[value],propname)=> 'OBJ.'+propname+'!=='+T.value(O,value)
+}
+
 const T = {
+    prop: (O,def,propname)=> {
+        if (propTypes[def[0]]){
+            return propTypes[def[0]](O,_.tail(def),propname);
+        } else {
+            throw "Unknown prop def: "+def;
+        }
+    },
     list: (O,def)=> {
         if (listTypes[def[0]]) {
             return listTypes[def[0]](O,_.tail(def));

@@ -127,8 +127,8 @@ describe('the generate funcs',()=>{
             arg: {
                 draw: { last: { tolayer: 'lasts' }}
             },
-            scope: {POS:'wherever',WALKLENGTH:2,WALK:['foo','bar'],LAYERS:{lasts:{}}},
-            mutations: {LAYERS:{lasts:{bar:[{}]}}}
+            scope: {STEP:7,POS:'wherever',WALKLENGTH:2,WALK:['foo','bar'],LAYERS:{lasts:{}}},
+            mutations: {STEP:2,LAYERS:{lasts:{bar:[{}]}}}
         }
     });
     test(G.drawwalkblock, 'the drawwalkblock func', {

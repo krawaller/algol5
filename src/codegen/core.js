@@ -35,6 +35,8 @@ const valueTypes = withUniversals("value",{
     stopreason: (O)=> "STOPREASON",
     countsofar: (O)=> "CURRENTCOUNT",
     totalcount: (O)=> "TOTALCOUNT",
+    walklength: (O)=> "WALKLENGTH",
+    neighbourcount: (O)=> "NEIGHBOURCOUNT",
     step: (O)=> "STEP",
     read: (O,[layer,pos,prop])=> "(LAYERS["+T.value(O,layer)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"][0]["+ T.value(O,prop)+"])"
 })
@@ -57,7 +59,8 @@ const boolTypes = withUniversals("boolean",{
 const positionTypes = withUniversals("position",{
     mark: (O,[markname])=> "MARKS[" + T.value(O,markname) + "]",
     ctxpos: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
-    pos: (O,[pos])=> T.value(O,pos)
+    pos: (O,[pos])=> T.value(O,pos),
+    target: (O)=> "POS"
 })
 
 const setTypes = withUniversals("set",{

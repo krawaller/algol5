@@ -122,6 +122,11 @@ describe('the core funcs',()=>{
                 MARKS: {mymark:'somepos'}
             },
             expected: 'somepos'
+        },
+        'the target cmnd': {
+            arg: ['target'],
+            scope: {POS:'mypos'},
+            expected: 'mypos'
         }
     });
     test(C.value,'the value func',{
@@ -173,6 +178,16 @@ describe('the core funcs',()=>{
             arg: ['dir'],
             scope: {DIR:7},
             expected: 7
+        },
+        'the walklength cmnd': {
+            arg: ['walklength'],
+            scope: {WALKLENGTH: 4},
+            expected: 4
+        },
+        'the neighbourcount cmnd': {
+            arg: ['neighbourcount'],
+            scope: {NEIGHBOURCOUNT: 4},
+            expected: 4
         }
     });
     test(C.set,'the set func',{

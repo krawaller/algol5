@@ -1,7 +1,83 @@
 import _ from 'lodash'
 import C from "./core"
 
+/*
+Algol.generateNeighbourPods = function(state,def){
+	var cond = def.get("condition");
+	var ret = this.evaluatePositionSet(state,def.get("starts")).reduce(function(recorder,startpos){
+		var startstate = state.setIn(["context","start"],startpos),
+			tobecounted = def.has("count") && this.evaluatePositionSet(startstate,def.get("count")),
+			counttotal = 0;
+		//console.log("From here");
+		var neighbours = this.evaluateDirList(startstate,def.get("dirs")).reduce(function(map,dir){
+			startstate = startstate.setIn(["context","dir"],dir);
+			var targetpos = state.getIn(["connections",startpos,dir])||state.getIn(["connections",startpos,dir+""]);
+			//console.log("neighbour",startpos,dir,targetpos, targetpos && this.evaluateBoolean(startstate.setIn(["context","target"],targetpos),cond));
+			if (targetpos && (!cond || this.evaluateBoolean(startstate.setIn(["context","target"],targetpos),cond))){
+				if (tobecounted && tobecounted.contains(targetpos)){
+					counttotal++;
+				}
+				return map.set(dir,targetpos);
+			} else {
+				return map;
+			}
+			//return targetpos && (!cond || this.evaluateBoolean(startstate.setIn(["context","target"],targetpos),cond)) ? map.set(dir,targetpos) : map;
+		},I.Map(),this);
+		return neighbours.reduce(function(recorder,pos,dir){
+			return I.pushIn(recorder,["target",pos],I.Map({start:startpos,dir:dir,target:pos,neighbourcount:neighbours.size,counttotal:counttotal}));
+		},I.pushIn(recorder,["start",startpos],I.Map({start:startpos,neighbourcount:neighbours.size,counttotal:counttotal})),this);
+	},I.fromJS({start:{},target:{}}),this);
+	//console.log("NEI",def.toJS(),"ret",ret.toJS());
+	return ret;
+};
+*/
+
 const G = {
+
+	// ------------ NEIGHBOUR STUFF -----------
+
+	// wants full neighbour def
+	// assumes STARTPOS, DIR, NEIGHBOURS
+	findneighbourindir: (O,def)=> {
+		def = def || {}
+		let ret = ''
+		ret += 'var POS=CONNECTIONS[STARTPOS][DIR]; '
+		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
+		ret += 'NEIGHBOURS.push(POS); '
+		ret += '} '
+		return ret
+	},
+
+	afterneighbourlook: (O,def)=> {
+		let ret = ''
+		ret += 'var NEIGHBOURCOUNT=NEIGHBOURS.length; '
+		return ret
+	},
+
+	drawneighbourstart: (O,def)=> {
+		def = def || {}
+		let ret = ''
+		if (def.draw && def.draw.start){
+			ret += 'POS=STARTPOS; '
+			ret += G.performdraw(O,def.draw.start)
+		}
+		return ret
+	},
+
+	drawneighbourtargets: (O,def)=> {
+		def = def || {}
+		let ret = ''
+		if (def.draw && def.draw.neighbours){
+			ret += 'for(var neighbournbr in NEIGHBOURS){'
+			ret += 'POS=[NEIGHBOURS[neighbournbr]]; '
+			ret += G.performdraw(O,def.draw.neighbours)
+			ret += '} '
+		}
+		return ret
+	},
+
+	// ------------ WALKER STUFF -----------
+
 	applywalker: (O,def)=> {
 		let ret = ''
 		ret += 'var STARTS = '+C.set(O,def.starts)+'; '
@@ -35,6 +111,46 @@ const G = {
 		ret += G.drawwalkblock(O,def)
 		ret += G.drawwalkstart(O,def)
 		ret += G.drawwalksteps(O,def)
+		ret += G.drawwalklast(O,def)
+		return ret;
+	},
+	// ASSUMES STARTPOS, DIR
+	prepwalkstart: (O,def)=> {
+		def = def || {}
+		let ret =  ''
+		ret += 'var WALK = []; '
+		ret += 'var STOPREASON = ""; '
+		ret += 'var NEXTPOS = ""; '
+		if (def.max){
+			ret += 'var MAX='+C.value(O,def.max)+'; '
+		}
+		if (def.startasstep){
+			ret += 'var POS = "faux"; '
+			ret += 'CONNECTIONS.faux[DIR]=STARTPOS; '
+		} else {
+			ret += 'var POS = STARTPOS; '
+		}
+		if (def.steps){
+			ret += 'var STEPS = '+C.set(O,def.steps)+'; '
+		}
+		if (def.blocks){
+			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
+		}
+		if (def.count){
+			ret += 'var COUNT = '+C.set(O,def.count)+'; '
+			ret += 'var COUNTTRACK = []; '
+			ret += 'var CURRENTCOUNT = 0; '
+		}
+		return ret;
+	},
+	// ASSUMES NEXTPOS, ..
+	takewalkstep: (O,def)=> {
+		def = def || {}
+		let ret = 'POS = NEXTPOS; '
+		ret += 'WALK.push(NEXTPOS); '
+		if (def.count){
+			ret += 'COUNTTRACK.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
+		}
 		return ret;
 	},
 	// wants full walkerdef.
@@ -45,6 +161,20 @@ const G = {
 			ret += 'var TOTALCOUNT = CURRENTCOUNT; '
 		}
 		return ret;
+	},
+	// wants full walkerdef
+	drawwalkblock: (O,def)=> {
+		let ret = ''
+		if (def.blocks && def.draw.block){
+			ret += 'if (STOPREASON="hitblock"){'
+			ret += 'POS=NEXTPOS; '
+			ret += G.performdraw(O,def.draw.block);
+			if (def.draw.all){
+				ret += G.performdraw(O,def.draw.all);
+			}
+			ret += '} '
+		}
+		return ret
 	},
 	// wants full walkerdef
 	drawwalksteps: (O,def)=> {
@@ -88,21 +218,8 @@ const G = {
 		let ret = ''
 		if (def.draw.last){
 			ret += 'POS=WALK[WALKLENGTH-1]; '
+			ret += 'STEP=WALKLENGTH; '
 			ret += G.performdraw(O,def.draw.last)
-		}
-		return ret
-	},
-	// wants full walkerdef
-	drawwalkblock: (O,def)=> {
-		let ret = ''
-		if (def.blocks && def.draw.block){
-			ret += 'if (STOPREASON="hitblock"){'
-			ret += 'POS=NEXTPOS; '
-			ret += G.performdraw(O,def.draw.block);
-			if (def.draw.all){
-				ret += G.performdraw(O,def.draw.all);
-			}
-			ret += '} '
 		}
 		return ret
 	},
@@ -125,45 +242,6 @@ const G = {
 			ret += 'BLOCKS[NEXTPOS] ? "hitblock" : '
 		}
 		return '('+ret+' null)';
-	},
-	// ASSUMES STARTPOS, DIR
-	prepwalkstart: (O,def)=> {
-		def = def || {}
-		let ret =  ''
-		ret += 'var WALK = []; '
-		ret += 'var STOPREASON = ""; '
-		ret += 'var NEXTPOS = ""; '
-		if (def.max){
-			ret += 'var MAX='+C.value(O,def.max)+'; '
-		}
-		if (def.startasstep){
-			ret += 'var POS = "faux"; '
-			ret += 'CONNECTIONS.faux[DIR]=STARTPOS; '
-		} else {
-			ret += 'var POS = STARTPOS; '
-		}
-		if (def.steps){
-			ret += 'var STEPS = '+C.set(O,def.steps)+'; '
-		}
-		if (def.blocks){
-			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
-		}
-		if (def.count){
-			ret += 'var COUNT = '+C.set(O,def.count)+'; '
-			ret += 'var COUNTTRACK = []; '
-			ret += 'var CURRENTCOUNT = 0; '
-		}
-		return ret;
-	},
-	// ASSUMES NEXTPOS, ..
-	takewalkstep: (O,def)=> {
-		def = def || {}
-		let ret = 'POS = NEXTPOS; '
-		ret += 'WALK.push(NEXTPOS); '
-		if (def.count){
-			ret += 'COUNTTRACK.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
-		}
-		return ret;
 	},
 
 	// ------------ GENERAL STUFF -----------

@@ -6,6 +6,17 @@ Effect methods will all mutate UNITS, which is assumed to have been
 previously copied
 */
 const effects = {
+    swap: (O,pos1,pos2)=> (
+        'var swappos1='+C.position(O,pos1)+'; '+
+        'var swappos2='+C.position(O,pos2)+'; '+
+        'var i, group1=(LAYERS.units[swappos1]||[]), group2=(LAYERS.units[swappos2]||[]); '+
+        'for(i=0;i<group1.length;i++){'+
+        'UNITS[group1[i].id].pos=swappos2; '+
+        '} '+
+        'for(i=0;i<group2.length;i++){'+
+        'UNITS[group2[i].id].pos=swappos1; '+
+        '} '
+    ),
     killid: (O,id)=> "UNITS["+C.id(O,id)+"].dead=true;",
     moveid: (O,id,pos)=> "UNITS["+C.id(O,id)+"].pos="+C.position(O,pos)+";",
     setid: (O,id,propname,val)=> "UNITS["+C.id(O,id)+"]["+C.value(O,propname)+"]="+C.value(O,val)+";",

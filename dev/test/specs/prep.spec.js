@@ -2,6 +2,38 @@ import P from '../../../src/prep'
 import test from '../libtester'
 
 test("the prep funcs",P,{
+	"boardlayers(board)": {
+		"for normal call": {
+			board: {height:2,width:2},
+			expected: {
+				board: {
+					a1:[{pos:'a1',x:1,y:1,colour:'dark'}],
+					a2:[{pos:'a2',x:1,y:2,colour:'light'}],
+					b1:[{pos:'b1',x:2,y:1,colour:'light'}],
+					b2:[{pos:'b2',x:2,y:2,colour:'dark'}]
+				},
+				light: {
+					a2:[{pos:'a2',x:1,y:2,colour:'light'}],
+					b1:[{pos:'b1',x:2,y:1,colour:'light'}]
+				},
+				dark: {
+					a1:[{pos:'a1',x:1,y:1,colour:'dark'}],
+					b2:[{pos:'b2',x:2,y:2,colour:'dark'}]
+				}
+			}
+		}
+	},
+	"boardconnections(board)": {
+		"for normal call": {
+			board: {height:2,width:2},
+			expected: {
+				a1:{1:'a2',2:'b2',3:'b1'},
+				a2:{3:'b2',4:'b1',5:'a1'},
+				b1:{7:'a1',8:'a2',1:'b2'},
+				b2:{5:'b1',6:'a1',7:'a2'}
+			}
+		}
+	},
 	"posconnections(pos,board)": {
 		"for normal call": {
 			pos: 'a1',

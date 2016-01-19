@@ -1,4 +1,4 @@
-import test from '../tester'
+import test from '../gentester'
 import lib from '../../../src/codegen/'
 
 let C = lib.C

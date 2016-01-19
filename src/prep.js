@@ -8,6 +8,21 @@ const colnametonumber = _.reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST
 const colnumbertoname = _.invert(colnametonumber)
 
 const P = {
+	posconnections: (pos,board)=> {
+		return [1,2,3,4,5,6,7,8].reduce((mem,dir)=>{
+			let newpos = P.offsetpos(pos,dir,1,0,board)
+			if (newpos){
+				mem[dir] = newpos
+			}
+			return (board.offsets||[]).reduce((innermem,[forward,right])=>{
+				let newpos = P.offsetpos(pos,dir,forward,right,board)
+				if (newpos){
+					innermem['o'+dir+'_'+forward+'_'+right] = newpos
+				}
+				return innermem;
+			},mem);
+		},{})
+	},
 	postocoords: (pos)=> ({
 		x: colnametonumber[pos[0]],
 		y: parseInt(pos.substr(1))

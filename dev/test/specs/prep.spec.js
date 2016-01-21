@@ -2,6 +2,20 @@ import P from '../../../src/prep'
 import test from '../libtester'
 
 test("the prep funcs",P,{
+	"addfromdef(world,layers,def)": {
+		"for straight pos": {
+			world: {layer1:{},layer2:{a1:['foo']}},
+			layers: ["layer1","layer2"],
+			def: 'a1',
+			expected: {layer1:{a1:[{pos:'a1'}]},layer2:{a1:['foo',{pos:'a1'}]}}
+		},
+		"for straight obj": {
+			world: {layer:{}},
+			layers: ["layer"],
+			def: {pos:'a1',foo:'bar'},
+			expected: {layer:{a1:[{pos:'a1',foo:'bar'}]}}
+		}
+	},
 	"boardlayers(board)": {
 		"for normal call": {
 			board: {height:2,width:2},

@@ -7,20 +7,6 @@ const colnametonumber = _.reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST
 
 const colnumbertoname = _.invert(colnametonumber)
 
-/*
-Algol.prepareBoardLayersFromBoardDef = function(boarddef){
-	var height = boarddef.get("height"), width = boarddef.get("width");
-	return I.Range(1,width+1).reduce(function(mem,x){
-		return I.Range(1,height+1).reduce(function(mem,y){
-			var pos = this.posObjToName({x:x,y:y},boarddef), clr = ["dark","light"][(x+(y%2))%2], obj = I.Map({
-				x: x, y: y, pos: pos, colour: clr
-			})
-			return mem.setIn(["board",pos],I.List([obj])).setIn([clr,pos],I.List([obj]));
-		},mem,this);
-	},I.Map(),this);
-};
-*/
-
 const P = {
 	boardlayers: (board)=> {
 		let ret = {board:{},light:{},dark:{}}
@@ -33,7 +19,7 @@ const P = {
 				ret[colour][pos] = [obj]
 			}
 		}
-		return ret		
+		return ret
 	},
 	boardconnections: (board)=> {
 		let ret = {}
@@ -74,7 +60,61 @@ const P = {
 			newy = coords.y + forwardmods[n][1]*forward + rightmods[n][1]*right,
 			withinbounds =  newx>0 && newx<=board.width && newy>0 && newy<=board.height;
 		return withinbounds && P.coordstopos({x:newx,y:newy})
+	},
+	addfromdef: (world,layers,def)=> {
+		let obj, pos
+		switch(def[0]){
+			default: 
+				if (_.isString(def)){
+					obj = {pos:def}
+				} else if (_.isObject(def)){
+					obj = def
+				} else {
+					throw "Unknown def: "+def
+				}
+		}
+		layers.forEach(layer=>{
+			world[layer][obj.pos] = (world[layer][obj.pos]||[]).concat(obj)
+		})
+		return world
 	} 
 }
-
+/*
+Algol.addEntitiesFromDef = function(coll,def,board){
+	var blueprint, topleft, bottomright,holes;
+	if (I.List.isList(def)){ 
+		if (def.first()==="pos"){ // [positions,<list>,dir,<blueprint>]
+			blueprint = (def.get(3) || I.Map());
+			return def.get(1).reduce(function(mem,pos){
+				return mem.push(blueprint.set("pos",pos).set("dir",def.get(2)||1));
+			},coll);
+		} else if (def.first()==="holerect") { // [holedrectangle,topleft,bottomright,holes,dir,blueprint]
+			blueprint = (def.get(5) || I.Map());
+			topleft = this.posNameToObj(def.get(1),board);  //parseInt(def.get(1));
+			bottomright = this.posNameToObj(def.get(2),board); //parseInt(def.get(2));
+			holes = def.get(3);
+			return rect =  _.reduce(_.range(topleft.y,bottomright.y+1),function(mem,r){
+				return _.reduce(_.range(topleft.x,bottomright.x+1),function(mem,c){
+					var name = this.posObjToName({x:c,y:r},board);
+					return holes.contains(name) ? mem : mem.push(blueprint.set("pos",name).set("dir",def.get(4)||1));
+				},mem,this);
+			},coll,this);
+		} else { // [rect,topleft,bottomright,dir,blueprint]
+			blueprint = (def.get(4) || I.Map());
+			//console.log("Strange def?",def.toJS());
+			topleft = this.posNameToObj(def.get(1),board);  //parseInt(def.get(1));
+			bottomright = this.posNameToObj(def.get(2),board); //parseInt(def.get(2));
+			return rect =  _.reduce(_.range(topleft.y,bottomright.y+1),function(mem,r){
+				return _.reduce(_.range(topleft.x,bottomright.x+1),function(mem,c){
+					return mem.push(blueprint.set("pos",this.posObjToName({x:c,y:r},board)).set("dir",def.get(3)||1));
+				},mem,this);
+			},coll,this);
+		}
+	} else if (I.Map.isMap(def)){ // single definition
+		return coll.push(def);
+	} else { // single pos
+		return coll.push(I.Map().set("pos",def));
+	}
+}
+*/
 export default P

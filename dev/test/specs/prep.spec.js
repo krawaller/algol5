@@ -3,7 +3,7 @@ import test from '../libtester'
 
 test("the prep funcs",P,{
 	"addfromdef(world,layers,def)": {
-		"for straight pos": {
+		"for straight pos with two target layers": {
 			world: {layer1:{},layer2:{a1:['foo']}},
 			layers: ["layer1","layer2"],
 			def: 'a1',
@@ -14,6 +14,68 @@ test("the prep funcs",P,{
 			layers: ["layer"],
 			def: {pos:'a1',foo:'bar'},
 			expected: {layer:{a1:[{pos:'a1',foo:'bar'}]}}
+		},
+		"for poslist with no blueprint": {
+			world: {layer:{a1:['foo']}},
+			layers: ["layer"],
+			def: ["pos",["a1","b2"]],
+			expected: {layer:{a1:['foo',{pos:'a1'}],b2:[{pos:'b2'}]}}
+		},
+		"for poslist with blueprint": {
+			world: {layer:{a1:['foo']}},
+			layers: ["layer"],
+			def: ["pos",["a1","b2"],{baz:'bin'}],
+			expected: {layer:{a1:['foo',{pos:'a1',baz:'bin'}],b2:[{pos:'b2',baz:'bin'}]}}
+		},
+		"for rectangle with no blueprint": {
+			world: {layer:{b1:['foo']}},
+			layers: ["layer"],
+			def: ["rect","b1","c2"],
+			expected: {
+				layer: {
+					b1: ['foo',{pos:'b1'}],
+					b2: [{pos:'b2'}],
+					c1: [{pos:'c1'}],
+					c2: [{pos:'c2'}]
+				}
+			}
+		},
+		"for rectangle with blueprint": {
+			world: {layer:{b1:['foo']}},
+			layers: ["layer"],
+			def: ["rect","b1","c2",{baz:'bin'}],
+			expected: {
+				layer: {
+					b1: ['foo',{pos:'b1',baz:'bin'}],
+					b2: [{pos:'b2',baz:'bin'}],
+					c1: [{pos:'c1',baz:'bin'}],
+					c2: [{pos:'c2',baz:'bin'}]
+				}
+			}
+		},
+		"for holed rectangle with no blueprint": {
+			world: {layer:{b1:['foo']}},
+			layers: ["layer"],
+			def: ["holerect","b1","c2",["b2"]],
+			expected: {
+				layer: {
+					b1: ['foo',{pos:'b1'}],
+					c1: [{pos:'c1'}],
+					c2: [{pos:'c2'}]
+				}
+			}
+		},
+		"for holed rectangle with blueprint": {
+			world: {layer:{b1:['foo']}},
+			layers: ["layer"],
+			def: ["holerect","b1","c2",["b2"],{baz:'bin'}],
+			expected: {
+				layer: {
+					b1: ['foo',{pos:'b1',baz:'bin'}],
+					c1: [{pos:'c1',baz:'bin'}],
+					c2: [{pos:'c2',baz:'bin'}]
+				}
+			}
 		}
 	},
 	"boardlayers(board)": {

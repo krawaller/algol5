@@ -64,6 +64,23 @@ const P = {
 	addfromdef: (world,layers,def)=> {
 		let obj, pos
 		switch(def[0]){
+			case "pos": // ["pos",list,blueprint]
+				return def[1].reduce((mem,pos)=>P.addfromdef(mem,layers,Object.assign({pos},def[2]||{})),world)
+			case "rect": // ["rect",bottomleft,topright,blueprint]
+			case "holerect": // ["holerect",bottomleft,topright,holes,blueprint]
+				let bottomleft = P.postocoords(def[1]),
+					topright = P.postocoords(def[2]),
+					blueprint = def[3]
+				let positions = _.reduce(_.range(bottomleft.y,topright.y+1),(mem,y)=>{
+					return _.reduce(_.range(bottomleft.x,topright.x+1),(innermem,x)=>{
+						return innermem.concat(P.coordstopos({x,y}))
+					},mem)
+				},[])
+				if (def[0]==="holerect"){
+					blueprint = def[4]
+					positions = _.filter(positions,p=>_.indexOf(def[3],p)===-1)
+				}
+				return P.addfromdef(world,layers,["pos",positions,blueprint])
 			default: 
 				if (_.isString(def)){
 					obj = {pos:def}

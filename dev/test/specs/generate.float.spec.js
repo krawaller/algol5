@@ -2,7 +2,7 @@ import test from '../gentester'
 import lib from '../../../src/codegen/'
 
 let G = lib.G
-
+/*
 describe('the floater funcs',()=>{
 	test(G.prepfloatfromstart, 'the prepfloatfromstart func', {
 		'for simpel setup': {
@@ -143,3 +143,4 @@ describe('the floater funcs',()=>{
     	}
     });
 });
+*/

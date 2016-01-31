@@ -9,20 +9,15 @@ const effects = {
     swap: (O,pos1,pos2)=> (
         'var swappos1='+C.position(O,pos1)+'; '+
         'var swappos2='+C.position(O,pos2)+'; '+
-        'var i, group1=(LAYERS.units[swappos1]||[]), group2=(LAYERS.units[swappos2]||[]); '+
-        'for(i=0;i<group1.length;i++){'+
-        'UNITS[group1[i].id].pos=swappos2; '+
-        '} '+
-        'for(i=0;i<group2.length;i++){'+
-        'UNITS[group2[i].id].pos=swappos1; '+
-        '} '
+        '(UNITS[ (LAYERS.units[swappos1] || {}).id ] || {}).pos=swappos2;'+
+        '(UNITS[ (LAYERS.units[swappos2] || {}).id ] || {}).pos=swappos1;'
     ),
     killid: (O,id)=> "UNITS["+C.id(O,id)+"].dead=true;",
     moveid: (O,id,pos)=> "UNITS["+C.id(O,id)+"].pos="+C.position(O,pos)+";",
     setid: (O,id,propname,val)=> "UNITS["+C.id(O,id)+"]["+C.value(O,propname)+"]="+C.value(O,val)+";",
-    kill1at: (O,pos)=> "(UNITS[ (LAYERS.units["+C.position(O,pos)+"] || [{}])[0].id ] || {}).dead=true;",
-    move1at: (O,from,to)=> "(UNITS[ (LAYERS.units["+C.position(O,from)+"] || [{}])[0].id ] || {}).pos="+C.position(O,to)+";",
-    set1at: (O,pos,propname,val)=> "(UNITS[ (LAYERS.units["+C.position(O,pos)+"] || [{}])[0].id ] || {})["+C.value(O,propname)+"]="+C.value(O,val)+";",
+    kill1at: (O,pos)=> "(UNITS[ (LAYERS.units["+C.position(O,pos)+"] || {}).id ] || {}).dead=true;",
+    move1at: (O,from,to)=> "(UNITS[ (LAYERS.units["+C.position(O,from)+"] || {}).id ] || {}).pos="+C.position(O,to)+";",
+    set1at: (O,pos,propname,val)=> "(UNITS[ (LAYERS.units["+C.position(O,pos)+"] || {}).id ] || {})["+C.value(O,propname)+"]="+C.value(O,val)+";",
     spawn: (O,pos,group,owner,obj)=>{
         let id = "ID"+(""+Math.random()).replace("\.","");
         return (

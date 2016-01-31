@@ -15,7 +15,7 @@ describe('the neighbour funcs',()=>{
                 LAYERS: {somelayer:{}}
             },
             mutations: {
-                LAYERS: {somelayer:{foo:[{found:3}],bar:[{found:3}]}}
+                LAYERS: {somelayer:{foo:{found:3},bar:{found:3}}}
             }
         },
         'when we dont care': {
@@ -41,7 +41,7 @@ describe('the neighbour funcs',()=>{
                 LAYERS: {somelayer:{}}
             },
             mutations: {
-                LAYERS: {somelayer:{start:[{found:3}]}}
+                LAYERS: {somelayer:{start:{found:3}}}
             }
         },
         'when we dont care': {
@@ -153,7 +153,7 @@ describe('the neighbour funcs',()=>{
                 MARKS: {mymark:'s0'},
                 LAYERS: {starts:{},neighbours:{}}
             },
-            mutations: { LAYERS: {starts:{s0:[{}]},neighbours:{s1:[{}]}} }
+            mutations: { LAYERS: {starts:{s0:{}},neighbours:{s1:{}}} }
         }
     });
 });

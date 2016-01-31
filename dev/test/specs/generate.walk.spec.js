@@ -24,9 +24,9 @@ describe('the generate funcs',()=>{
                 LAYERS: {
                     starts: {q0:'yes',p0:'yes'},
                     steps:{
-                        p1: [{heading:1,nbr:1}],
-                        p2: [{heading:1,nbr:2}],
-                        q1: [{heading:3,nbr:1}]
+                        p1: {heading:1,nbr:1},
+                        p2: {heading:1,nbr:2},
+                        q1: {heading:3,nbr:1}
                     }
                 }
             }
@@ -47,7 +47,7 @@ describe('the generate funcs',()=>{
                 LAYERS: { steps:{} }
             },
             mutations: {
-                LAYERS: { steps:{ q1: [{heading:3,nbr:1}] } }
+                LAYERS: { steps:{ q1: {heading:3,nbr:1} } }
             }
         }
     });
@@ -70,8 +70,9 @@ describe('the generate funcs',()=>{
             mutations: {
                 LAYERS: {
                     steps:{
-                        p1: [{heading:1}], p2: [{heading:1}],
-                        q1: [{heading:3}]
+                        p1: {heading:1},
+                        p2: {heading:1},
+                        q1: {heading:3}
                     }
                 }
             }
@@ -94,7 +95,7 @@ describe('the generate funcs',()=>{
             mutations: {
                 LAYERS: {
                     steps:{
-                        p1: [{heading:1}], p2: [{heading:1}]
+                        p1: {heading:1}, p2: {heading:1}
                     }
                 }
             }
@@ -121,8 +122,8 @@ describe('the generate funcs',()=>{
             },
             mutations: {
                 LAYERS: {
-                    steps:{p1:[{}],p2:[{}]},
-                    blocks:{p3:[{}]},
+                    steps:{p1:{},p2:{}},
+                    blocks:{p3:{}},
                     intheway:{p3:'yep'}
                 }
             }
@@ -134,7 +135,7 @@ describe('the generate funcs',()=>{
                 draw: { steps: { tolayer: 'steps', include: {nbr:['step']} }}
             },
             scope: {POS:'sthelse',LAYERS:{steps:{}},WALK:['foo','bar'],WALKLENGTH:2},
-            mutations: {LAYERS:{steps:{foo:[{nbr:1}],bar:[{nbr:2}]}}}
+            mutations: {LAYERS:{steps:{foo:{nbr:1},bar:{nbr:2}}}}
         },
         'with some countshit': {
             arg: {
@@ -142,7 +143,7 @@ describe('the generate funcs',()=>{
                 draw: { counted: { tolayer: 'counted', include: {nbr:['step'],sofar:['countsofar']} }}
             },
             scope: {CURRENTCOUNT:'foo',POS:'sthelse',LAYERS:{counted:{}},WALK:['foo','bar'],WALKLENGTH:2,COUNT:{bar:'yep'},COUNTTRACK:['x','y']},
-            mutations: {LAYERS:{counted:{bar:[{nbr:2,sofar:'y'}]}}}
+            mutations: {LAYERS:{counted:{bar:{nbr:2,sofar:'y'}}}}
         }
     });
     test(G.drawwalkstart, 'the drawwalkstart func', {
@@ -151,7 +152,7 @@ describe('the generate funcs',()=>{
                 draw: { start: { tolayer: 'begins' }}
             },
             scope: {POS:'sthelse',STARTPOS:'start',LAYERS:{begins:{}}},
-            mutations: {POS:'start',LAYERS:{begins:{start:[{}]}}}
+            mutations: {POS:'start',LAYERS:{begins:{start:{}}}}
         },
         'when we also draw all': {
             arg: {
@@ -161,7 +162,7 @@ describe('the generate funcs',()=>{
                 }
             },
             scope: {POS:'sthelse',STARTPOS:'start',LAYERS:{begins:{},everything:{}}},
-            mutations: {POS:'start',LAYERS:{begins:{start:[{}]},everything:{start:[{}]}}}
+            mutations: {POS:'start',LAYERS:{begins:{start:{}},everything:{start:{}}}}
         }
     });
     test(G.drawwalklast, 'the drawwalklast func', {
@@ -170,7 +171,7 @@ describe('the generate funcs',()=>{
                 draw: { last: { tolayer: 'lasts' }}
             },
             scope: {STEP:7,POS:'wherever',WALKLENGTH:2,WALK:['foo','bar'],LAYERS:{lasts:{}}},
-            mutations: {STEP:2,LAYERS:{lasts:{bar:[{}]}}}
+            mutations: {STEP:2,LAYERS:{lasts:{bar:{}}}}
         }
     });
     test(G.drawwalkblock, 'the drawwalkblock func', {
@@ -185,7 +186,7 @@ describe('the generate funcs',()=>{
                 }
             },
             scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',LAYERS:{blocks:{}}},
-            mutations: {POS:'boom',LAYERS:{blocks:{boom:[{why:'hitblock'}]}}}
+            mutations: {POS:'boom',LAYERS:{blocks:{boom:{why:'hitblock'}}}}
         },
         'when we hit block and also draw all': {
             arg: {
@@ -196,7 +197,7 @@ describe('the generate funcs',()=>{
                 }
             },
             scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',LAYERS:{blocks:{},everything:{}}},
-            mutations: {POS:'boom',LAYERS:{blocks:{boom:[{}]},everything:{boom:[{}]}}}
+            mutations: {POS:'boom',LAYERS:{blocks:{boom:{}},everything:{boom:{}}}}
         }
     });
     test(G.takewalkstep, 'the takewalkstep func', {

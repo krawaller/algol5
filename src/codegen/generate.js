@@ -96,10 +96,8 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		let ret = ''
 		ret += 'var TARGETLAYER = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
 		ret += 'if (LAYERS[SOURCELAYER][POS]){'
-		ret += 'for(var objnbr=0;objnbr<LAYERS[SOURCELAYER][POS].length;objnbr++){ '
-		ret += 'var OBJ = LAYERS[SOURCELAYER][POS][objnbr]; '
+		ret += 'var OBJ = LAYERS[SOURCELAYER][POS]; '
 		ret += G.tryobj(O,def)
-		ret += '} '
 		ret += '} '
 		return ret
 	},
@@ -387,7 +385,8 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 
 	addtolayer: (O,layer,pos,obj)=> {
 		let ret = ''
-		ret += 'LAYERS['+layer+']['+pos+']=(LAYERS['+layer+']['+pos+']||[]).concat(['+obj+']); '
+		ret += 'LAYERS['+layer+']['+pos+']='+obj+'; '
+		//ret += 'LAYERS['+layer+']['+pos+']=(LAYERS['+layer+']['+pos+']||[]).concat(['+obj+']); '
 		return ret
 	},
 

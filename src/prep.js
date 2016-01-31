@@ -15,8 +15,8 @@ const P = {
 				let pos = P.coordstopos({x,y}),
 					colour = ["dark","light"][(x+(y%2))%2],
 					obj = {colour,pos,x,y}
-				ret.board[pos] = [obj]
-				ret[colour][pos] = [obj]
+				ret.board[pos] = obj
+				ret[colour][pos] = obj
 			}
 		}
 		return ret
@@ -91,7 +91,7 @@ const P = {
 				}
 		}
 		layers.forEach(layer=>{
-			world[layer][obj.pos] = (world[layer][obj.pos]||[]).concat(obj)
+			world[layer][obj.pos] = obj; // (world[layer][obj.pos]||[]).concat(obj)
 		})
 		return world
 	} 

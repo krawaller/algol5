@@ -14,20 +14,20 @@ describe('the filter funcs',()=>{
             },
             scope: {
                 LAYERS: {
-                    source: {p1:[{foo:'bar'}],p2:[{foo:'bin'},{foo:'bar'}]},
+                    source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'}},
                     destination: {}
                 }
             },
             mutations: {
                 LAYERS: {
-                    source: {p1:[{foo:'bar'}],p2:[{foo:'bin'},{foo:'bar'}]},
-                    destination: {p2:[{foo:'bar'}]}
+                    source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'}},
+                    destination: {p2:{foo:'bar'}}
                 }
             }
         }
     });
     test(G.tryposition, 'the tryposition func', {
-        'when two objs, 1 matches': {
+        'when object matches': {
             arg: {
                 matching:{foo:['is','bar']},
                 tolayer: 'destination'
@@ -36,14 +36,14 @@ describe('the filter funcs',()=>{
                 SOURCELAYER: 'source',
                 POS: 'a1',
                 LAYERS: {
-                    source:{a1:[{},{foo:'bar'}]},
+                    source: {a1:{foo:'bar'}},
                     destination: {}
                 }
             },
             mutations: {
                 LAYERS: {
-                    source:{a1:[{},{foo:'bar'}]},
-                    destination: {a1:[{foo:'bar'}]}
+                    source: {a1:{foo:'bar'}},
+                    destination: {a1:{foo:'bar'}}
                 }
             }
         }
@@ -57,7 +57,7 @@ describe('the filter funcs',()=>{
                 TARGETLAYER: 'mylayer',
                 LAYERS: {mylayer:{}}
             },
-            mutations: {LAYERS:{mylayer:{somepos:[{someprop:2}]}}}
+            mutations: {LAYERS:{mylayer:{somepos:{someprop:2}}}}
         },
         'when simple matching but condition makes it false': {
             arg: {

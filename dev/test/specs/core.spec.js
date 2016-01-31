@@ -215,7 +215,7 @@ describe('the core funcs',()=>{
             arg: ['read', ["value","mylayer"],['mark','mymark'],['value','foo'] ],
             scope: {
                 MARKS:{mymark:'a1'},
-                LAYERS: {mylayer:{a1:[{foo:'bar'}]}}
+                LAYERS: {mylayer:{a1:{foo:'bar'}}}
             },
             expected: 'bar'
         }

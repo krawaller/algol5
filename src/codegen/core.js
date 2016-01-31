@@ -39,7 +39,7 @@ const valueTypes = withUniversals("value",{
     walklength: (O)=> "WALKLENGTH",
     neighbourcount: (O)=> "NEIGHBOURCOUNT",
     step: (O)=> "STEP",
-    read: (O,[layer,pos,prop])=> "(LAYERS["+T.value(O,layer)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"][0]["+ T.value(O,prop)+"])"
+    read: (O,[layer,pos,prop])=> "(LAYERS["+T.value(O,layer)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"]["+ T.value(O,prop)+"])"
 })
 
 const boolTypes = withUniversals("boolean",{

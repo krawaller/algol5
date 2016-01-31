@@ -9,11 +9,11 @@ describe("The effect commands",()=>{
             args: [['mark','1st'],['mark','2nd']],
             scope: {
                 MARKS: {'1st':'a','2nd':'b'},
-                LAYERS: {units: {a:[{id:'unit1',pos:'a'},{id:'unit3',pos:'a'}],b:[{id:'unit2',pos:'b'}]}},
-                UNITS: {unit1:{pos:'a'},unit2:{pos:'b'},unit3:{pos:'a'}}
+                LAYERS: {units: {a:{id:'unit1',pos:'a'},b:{id:'unit2',pos:'b'}}},
+                UNITS: {unit1:{pos:'a'},unit2:{pos:'b'}}
             },
             mutations: {
-                UNITS: {unit1:{pos:'b'},unit2:{pos:'a'},unit3:{pos:'b'}}
+                UNITS: {unit1:{pos:'b'},unit2:{pos:'a'}}
             }
         }
     })
@@ -32,7 +32,7 @@ describe("The effect commands",()=>{
         },
         'when someone is there': {
             args: [['mark','mymark']],
-            scope: { 'UNITS': {7:{}}, LAYERS: {units: {pos:[{id:7}]}}, 'MARKS': {mymark:'pos'}},
+            scope: { 'UNITS': {7:{}}, LAYERS: {units: {pos:{id:7}}}, 'MARKS': {mymark:'pos'}},
             mutations: { 'UNITS': {7:{dead:true}} },
         }
     });

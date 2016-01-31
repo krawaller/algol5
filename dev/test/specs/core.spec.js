@@ -210,6 +210,14 @@ describe('the core funcs',()=>{
             arg: ['neighbourcount'],
             scope: {NEIGHBOURCOUNT: 4},
             expected: 4
+        },
+        'the read cmnd': {
+            arg: ['read', ["value","mylayer"],['mark','mymark'],['value','foo'] ],
+            scope: {
+                MARKS:{mymark:'a1'},
+                LAYERS: {mylayer:{a1:[{foo:'bar'}]}}
+            },
+            expected: 'bar'
         }
     });
     test(C.set,'the set func',{

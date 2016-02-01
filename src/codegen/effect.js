@@ -19,10 +19,9 @@ const effects = {
     moveat: (O,from,to)=> "(UNITDATA[ (LAYERS.units["+C.position(O,from)+"] || {}).id ] || {}).pos="+C.position(O,to)+";",
     setat: (O,pos,propname,val)=> "(UNITDATA[ (LAYERS.units["+C.position(O,pos)+"] || {}).id ] || {})["+C.value(O,propname)+"]="+C.value(O,val)+";",
     spawn: (O,pos,group,owner,obj)=>{
-        let id = "ID"+(""+Math.random()).replace("\.","");
         return (
-            "var "+id+" = 'unit'+(Object.keys(UNITDATA).length+1);"+
-            "UNITDATA["+id+"] = {pos:"+C.position(O,pos)+", id:"+id+",group:"+C.value(O,group)+",owner:"+(owner ? C.value(O,owner) : O.player)+(obj?","+_.map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):"")+"};"
+            "var newunitid = 'unit'+(Object.keys(UNITDATA).length+1);"+
+            "UNITDATA[newunitid] = {pos:"+C.position(O,pos)+", id:newunitid,group:"+C.value(O,group)+",owner:"+(owner ? C.value(O,owner) : O.player)+(obj?","+_.map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):"")+"};"
         );
     }
 }

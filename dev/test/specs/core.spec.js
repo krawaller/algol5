@@ -284,6 +284,16 @@ describe('the core funcs',()=>{
             expected: {a:1,b:1,c:1}
         }
     });
+    test(C.id,'the id funcs',{
+        'for idat cmnd': {
+            arg: ['idat',['mark','mymark']],
+            scope: {
+                MARKS: {mymark:'pos'},
+                UNITLAYERS: {all:{pos:{id:7}}}
+            },
+            expected: 7
+        }
+    });
     test(C.layerref,'the layerref func',{
         'when no mappings specified': {
             arg: 'mylayer',

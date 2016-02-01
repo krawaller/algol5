@@ -18,7 +18,7 @@ const listTypes = withUniversals("list",{
 })
 
 const idTypes = withUniversals("id",{
-    idofunitat: (O,[pos])=> "(LAYERS.units["+T.position(O,pos)+"] || [{}]).id",
+    idat: (O,[pos])=> "(UNITLAYERS.all["+T.position(O,pos)+"] || [{}]).id",
     loopid: (O)=> "CONTEXT.loopid",
     id: (O,id)=> T.value(O.id)
 })
@@ -172,8 +172,10 @@ const T = {
     id: (O,def)=> {
         if (!_.isArray(def)){
             return valueTypes.value(O,[def]);
-        } else if (valueTypes[def[0]]) {
+        } else if (idTypes[def[0]]) {
             return idTypes[def[0]](O,_.tail(def));
+        } else if (valueTypes[def[0]]) {
+            return valueTypes[def[0]](O,_.tail(def));
         } else {
             throw "Unknown id def: "+def;
         }

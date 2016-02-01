@@ -78,6 +78,16 @@ describe("The effect commands",()=>{
             options: {player:666},
             scope: { UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'} },
             mutations: { UNITDATA: {unit1:{}, unit2:{id:'unit2',group:'fools',owner:666,pos:'somepos'}} }
+        },
+        'for pos, group, owner and prop obj': {
+            args: [['mark','mymark'],['value','fools'],['value',7],{foo:['value','bar'],baz:['value','bin']}],
+            scope: {UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'} },
+            mutations: {
+                UNITDATA: {
+                    unit1:{},
+                    unit2:{id:'unit2',group:'fools',owner:7,pos:'somepos',foo:'bar',baz:'bin'}},
+                MARKS: {mymark:'somepos'}
+            },
         }
     });
 });

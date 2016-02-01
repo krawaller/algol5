@@ -24,7 +24,7 @@ describe("The effect commands",()=>{
             mutations: { UNITDATA: { 42: {name:'foo',dead:true} } }
         }
     });
-    test(E.kill1at,'the kill1at func',{
+    test(E.killat,'the kill1at func',{
         'when noone there': {
             arg: ['mark','mymark'],
             scope: { UNITDATA: {}, LAYERS: {units: {}}, 'MARKS': {mymark:'pos'}},
@@ -41,6 +41,17 @@ describe("The effect commands",()=>{
             args: [42,['mark','mymark']],
             scope: { UNITDATA: { 42:{pos:'somepos'} }, MARKS: {mymark:'otherpos'} },
             mutations: { UNITDATA: { 42: {pos:'otherpos'} } }
+        }
+    });
+    test(E.moveat,'the moveat func',{
+        'for straight call': {
+            args: [['mark','from'],['mark','to']],
+            scope: {
+                UNITDATA: { 42: {pos:'origin'}},
+                LAYERS: { units: {origin:{id:42}} },
+                MARKS: {from:'origin',to:'destination'}
+            },
+            mutations: { UNITDATA: { 42: {pos:'destination'}} }
         }
     });
     test(E.spawn,'the spawn func',{

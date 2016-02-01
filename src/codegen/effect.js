@@ -15,9 +15,9 @@ const effects = {
     killid: (O,id)=> "UNITDATA["+C.id(O,id)+"].dead=true;",
     moveid: (O,id,pos)=> "UNITDATA["+C.id(O,id)+"].pos="+C.position(O,pos)+";",
     setid: (O,id,propname,val)=> "UNITDATA["+C.id(O,id)+"]["+C.value(O,propname)+"]="+C.value(O,val)+";",
-    kill1at: (O,pos)=> "(UNITDATA[ (LAYERS.units["+C.position(O,pos)+"] || {}).id ] || {}).dead=true;",
-    move1at: (O,from,to)=> "(UNITDATA[ (LAYERS.units["+C.position(O,from)+"] || {}).id ] || {}).pos="+C.position(O,to)+";",
-    set1at: (O,pos,propname,val)=> "(UNITDATA[ (LAYERS.units["+C.position(O,pos)+"] || {}).id ] || {})["+C.value(O,propname)+"]="+C.value(O,val)+";",
+    killat: (O,pos)=> "(UNITDATA[ (LAYERS.units["+C.position(O,pos)+"] || {}).id ] || {}).dead=true;",
+    moveat: (O,from,to)=> "(UNITDATA[ (LAYERS.units["+C.position(O,from)+"] || {}).id ] || {}).pos="+C.position(O,to)+";",
+    setat: (O,pos,propname,val)=> "(UNITDATA[ (LAYERS.units["+C.position(O,pos)+"] || {}).id ] || {})["+C.value(O,propname)+"]="+C.value(O,val)+";",
     spawn: (O,pos,group,owner,obj)=>{
         let id = "ID"+(""+Math.random()).replace("\.","");
         return (

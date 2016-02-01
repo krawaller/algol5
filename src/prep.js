@@ -96,42 +96,5 @@ const P = {
 		return world
 	} 
 }
-/*
-Algol.addEntitiesFromDef = function(coll,def,board){
-	var blueprint, topleft, bottomright,holes;
-	if (I.List.isList(def)){ 
-		if (def.first()==="pos"){ // [positions,<list>,dir,<blueprint>]
-			blueprint = (def.get(3) || I.Map());
-			return def.get(1).reduce(function(mem,pos){
-				return mem.push(blueprint.set("pos",pos).set("dir",def.get(2)||1));
-			},coll);
-		} else if (def.first()==="holerect") { // [holedrectangle,topleft,bottomright,holes,dir,blueprint]
-			blueprint = (def.get(5) || I.Map());
-			topleft = this.posNameToObj(def.get(1),board);  //parseInt(def.get(1));
-			bottomright = this.posNameToObj(def.get(2),board); //parseInt(def.get(2));
-			holes = def.get(3);
-			return rect =  _.reduce(_.range(topleft.y,bottomright.y+1),function(mem,r){
-				return _.reduce(_.range(topleft.x,bottomright.x+1),function(mem,c){
-					var name = this.posObjToName({x:c,y:r},board);
-					return holes.contains(name) ? mem : mem.push(blueprint.set("pos",name).set("dir",def.get(4)||1));
-				},mem,this);
-			},coll,this);
-		} else { // [rect,topleft,bottomright,dir,blueprint]
-			blueprint = (def.get(4) || I.Map());
-			//console.log("Strange def?",def.toJS());
-			topleft = this.posNameToObj(def.get(1),board);  //parseInt(def.get(1));
-			bottomright = this.posNameToObj(def.get(2),board); //parseInt(def.get(2));
-			return rect =  _.reduce(_.range(topleft.y,bottomright.y+1),function(mem,r){
-				return _.reduce(_.range(topleft.x,bottomright.x+1),function(mem,c){
-					return mem.push(blueprint.set("pos",this.posObjToName({x:c,y:r},board)).set("dir",def.get(3)||1));
-				},mem,this);
-			},coll,this);
-		}
-	} else if (I.Map.isMap(def)){ // single definition
-		return coll.push(def);
-	} else { // single pos
-		return coll.push(I.Map().set("pos",def));
-	}
-}
-*/
+
 export default P

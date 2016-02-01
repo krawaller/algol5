@@ -21,7 +21,7 @@ const effects = {
     spawn: (O,pos,group,owner,obj)=>{
         let id = "ID"+(""+Math.random()).replace("\.","");
         return (
-            "let "+id+" = 'unit'+(Object.keys(UNITDATA).length+1);"+
+            "var "+id+" = 'unit'+(Object.keys(UNITDATA).length+1);"+
             "UNITDATA["+id+"] = {pos:"+C.position(O,pos)+", id:"+id+",group:"+C.value(O,group)+",owner:"+(owner ? C.value(O,owner) : O.player)+(obj?","+_.map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):"")+"};"
         );
     }

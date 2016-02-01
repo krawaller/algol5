@@ -40,7 +40,7 @@ const valueTypes = withUniversals("value",{
     neighbourcount: (O)=> "NEIGHBOURCOUNT",
     step: (O)=> "STEP",
     read: (O,[layer,pos,prop])=> {
-        var ret = "("+T.layerref(O,layer)+"["+T.position(O,pos)+"] && "+T.layerref(O,layer)+"["+T.position(O,pos)+"]["+T.value(O,prop)+"])"
+        var ret = "("+T.set(O,layer)+"["+T.position(O,pos)+"] && "+T.set(O,layer)+"["+T.position(O,pos)+"]["+T.value(O,prop)+"])"
         //console.log("READ",ret)
         return ret;
     }
@@ -187,8 +187,10 @@ const T = {
             throw "Unknown value def: "+def;
         }
     },
-    layerref: (O,def)=> { // TODO - other layers!!
-        return "(ARTIFACTS["+T.value(O,def)+"]||{})";
+    // layername is a plain string
+    layerref: (O,layername)=> {
+        var bag = O && O.layermappings && O.layermappings[layername] || "ARTIFACTS"
+        return "("+bag+"."+layername+"||{})";
     }
 }
 

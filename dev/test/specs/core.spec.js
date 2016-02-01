@@ -212,7 +212,7 @@ describe('the core funcs',()=>{
             expected: 4
         },
         'the read cmnd': {
-            arg: ['read', ["value","mylayer"],['mark','mymark'],['value','foo'] ],
+            arg: ['read',["layer","mylayer"],['mark','mymark'],['value','foo'] ],
             scope: {
                 MARKS:{mymark:'a1'},
                 ARTIFACTS: {mylayer:{a1:{foo:'bar'}}}
@@ -235,13 +235,6 @@ describe('the core funcs',()=>{
         },
         'the layer cmnd with str': {
             arg: ['layer','mylayer'],
-            scope: {
-                ARTIFACTS: {mylayer:{a:1,b:2}}
-            },
-            expected: {a:1,b:2}
-        },
-        'the layer cmnd when needs to valueify': {
-            arg: ['layer',['value','mylayer']],
             scope: {
                 ARTIFACTS: {mylayer:{a:1,b:2}}
             },
@@ -290,5 +283,26 @@ describe('the core funcs',()=>{
             },
             expected: {a:1,b:1,c:1}
         }
-    })
+    });
+    test(C.layerref,'the layerref func',{
+        'when no mappings specified': {
+            arg: 'mylayer',
+            scope: {
+                ARTIFACTS: {'mylayer': 'FOO'}
+            },
+            expected: 'FOO'
+        },
+        'when a mapping is relevant': {
+            arg: 'mylayer',
+            options: {
+                layermappings: {
+                    mylayer: 'MUPPETS'
+                }
+            },
+            scope: {
+                MUPPETS: {mylayer:'FOO'}
+            },
+            expected: 'FOO'
+        }
+    });
 });

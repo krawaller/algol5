@@ -54,6 +54,24 @@ describe("The effect commands",()=>{
             mutations: { UNITDATA: { 42: {pos:'destination'}} }
         }
     });
+    test(E.setid,'the setid func',{
+        'for straight call': {
+            args: [42,'foo',['sum',2,3]],
+            scope: { UNITDATA: { 42:{foo:0} } },
+            mutations: { UNITDATA: { 42:{foo:5} } },
+        }
+    });
+    test(E.setat,'the setat func',{
+        'for straight call': {
+            args: [['mark','at'],['value','foo'],['sum',2,3]],
+            scope: {
+                UNITDATA: { 42: {foo:0}},
+                LAYERS: { units: {pos:{id:42}} },
+                MARKS: {at:'pos'}
+            },
+            mutations: { UNITDATA: { 42:{foo:5} } },
+        }
+    });
     test(E.spawn,'the spawn func',{
         'for just pos and group': {
             args: [['mark','mymark'],'fools'],

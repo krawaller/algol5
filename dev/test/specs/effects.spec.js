@@ -9,7 +9,7 @@ describe("The effect commands",()=>{
             args: [['mark','1st'],['mark','2nd']],
             scope: {
                 MARKS: {'1st':'a','2nd':'b'},
-                LAYERS: {units: {a:{id:'unit1',pos:'a'},b:{id:'unit2',pos:'b'}}},
+                UNITLAYERS: {all: {a:{id:'unit1',pos:'a'},b:{id:'unit2',pos:'b'}}},
                 UNITDATA: {unit1:{pos:'a'},unit2:{pos:'b'}}
             },
             mutations: {
@@ -27,12 +27,12 @@ describe("The effect commands",()=>{
     test(E.killat,'the kill1at func',{
         'when noone there': {
             arg: ['mark','mymark'],
-            scope: { UNITDATA: {}, LAYERS: {units: {}}, 'MARKS': {mymark:'pos'}},
+            scope: { UNITDATA: {}, UNITLAYERS: {all: {}}, 'MARKS': {mymark:'pos'}},
             mutations: { UNITDATA: {} }
         },
         'when someone is there': {
             args: [['mark','mymark']],
-            scope: { UNITDATA: {7:{}}, LAYERS: {units: {pos:{id:7}}}, 'MARKS': {mymark:'pos'}},
+            scope: { UNITDATA: {7:{}}, UNITLAYERS: {all: {pos:{id:7}}}, 'MARKS': {mymark:'pos'}},
             mutations: { UNITDATA: {7:{dead:true}} },
         }
     });
@@ -48,7 +48,7 @@ describe("The effect commands",()=>{
             args: [['mark','from'],['mark','to']],
             scope: {
                 UNITDATA: { 42: {pos:'origin'}},
-                LAYERS: { units: {origin:{id:42}} },
+                UNITLAYERS: { all: {origin:{id:42}} },
                 MARKS: {from:'origin',to:'destination'}
             },
             mutations: { UNITDATA: { 42: {pos:'destination'}} }
@@ -66,7 +66,7 @@ describe("The effect commands",()=>{
             args: [['mark','at'],['value','foo'],['sum',2,3]],
             scope: {
                 UNITDATA: { 42: {foo:0}},
-                LAYERS: { units: {pos:{id:42}} },
+                UNITLAYERS: { all: {pos:{id:42}} },
                 MARKS: {at:'pos'}
             },
             mutations: { UNITDATA: { 42:{foo:5} } },

@@ -12,10 +12,10 @@ describe('the neighbour funcs',()=>{
                 STARTPOS: 'start',
                 NEIGHBOURS: ['foo','bar'],
                 NEIGHBOURCOUNT: 3,
-                LAYERS: {somelayer:{}}
+                ARTIFACTS: {somelayer:{}}
             },
             mutations: {
-                LAYERS: {somelayer:{foo:{found:3},bar:{found:3}}}
+                ARTIFACTS: {somelayer:{foo:{found:3},bar:{found:3}}}
             }
         },
         'when we dont care': {
@@ -24,10 +24,10 @@ describe('the neighbour funcs',()=>{
                 STARTPOS: 'start',
                 NEIGHBOURS: ['foo','bar'],
                 NEIGHBOURCOUNT: 3,
-                LAYERS: {somelayer:{}}
+                ARTIFACTS: {somelayer:{}}
             },
             mutations: {
-                LAYERS: {somelayer:{}}
+                ARTIFACTS: {somelayer:{}}
             }
         }
     });
@@ -38,10 +38,10 @@ describe('the neighbour funcs',()=>{
                 POS: 'sthelse',
                 STARTPOS: 'start',
                 NEIGHBOURCOUNT: 3,
-                LAYERS: {somelayer:{}}
+                ARTIFACTS: {somelayer:{}}
             },
             mutations: {
-                LAYERS: {somelayer:{start:{found:3}}}
+                ARTIFACTS: {somelayer:{start:{found:3}}}
             }
         },
         'when we dont care': {
@@ -49,10 +49,10 @@ describe('the neighbour funcs',()=>{
                 POS: 'sthelse',
                 STARTPOS: 'start',
                 NEIGHBOURCOUNT: 3,
-                LAYERS: {somelayer:{}}
+                ARTIFACTS: {somelayer:{}}
             },
             mutations: {
-                LAYERS: {somelayer:{}}
+                ARTIFACTS: {somelayer:{}}
             }
         }
     });
@@ -83,7 +83,7 @@ describe('the neighbour funcs',()=>{
                 STARTPOS: 's0',
                 DIR: 2,
                 CONNECTIONS: {s0:{2:'somepos'}},
-                LAYERS: {mylayer:{somepos:'yep'}},
+                ARTIFACTS: {mylayer:{somepos:'yep'}},
                 NEIGHBOURS: []
             },
             mutations: { NEIGHBOURS: ['somepos'] }
@@ -94,7 +94,7 @@ describe('the neighbour funcs',()=>{
                 STARTPOS: 's0',
                 DIR: 2,
                 CONNECTIONS: {s0:{2:'somepos'}},
-                LAYERS: {mylayer:{}},
+                ARTIFACTS: {mylayer:{}},
                 NEIGHBOURS: []
             },
             mutations: { NEIGHBOURS: [] }
@@ -133,7 +133,7 @@ describe('the neighbour funcs',()=>{
             arg: {dir:2,starts:'mylayer'},
             scope: {
                 CONNECTIONS: {s0:{2:'s1'},p0:{2:'p1'}},
-                LAYERS: {mylayer:{s0:'yes',p0:'yes'}}
+                ARTIFACTS: {mylayer:{s0:'yes',p0:'yes'}}
             },
             mutations: { NEIGHBOURS: ['s1','p1']}
         }
@@ -151,9 +151,9 @@ describe('the neighbour funcs',()=>{
             scope: {
                 CONNECTIONS: {s0:{2:'s1'}},
                 MARKS: {mymark:'s0'},
-                LAYERS: {starts:{},neighbours:{}}
+                ARTIFACTS: {starts:{},neighbours:{}}
             },
-            mutations: { LAYERS: {starts:{s0:{}},neighbours:{s1:{}}} }
+            mutations: { ARTIFACTS: {starts:{s0:{}},neighbours:{s1:{}}} }
         }
     });
 });

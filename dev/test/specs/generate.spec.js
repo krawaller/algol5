@@ -7,53 +7,53 @@ describe('the generate funcs',()=>{
     test(G.addtolayer,'the addtolayer func',{
         'when nothing at that pos': {
             args: ['"mylayer"','"a1"','"foo"'],
-            scope: {LAYERS:{mylayer:{}}},
-            mutations: {LAYERS:{mylayer:{a1:"foo"}}}
+            scope: {ARTIFACTS:{mylayer:{}}},
+            mutations: {ARTIFACTS:{mylayer:{a1:"foo"}}}
         },
         'when stuff already there': {
             args: ['"mylayer"','"a1"','"foo"'],
-            scope: {LAYERS:{mylayer:{a1:"bar"}}},
-            mutations: {LAYERS:{mylayer:{a1:"foo"}}}
+            scope: {ARTIFACTS:{mylayer:{a1:"bar"}}},
+            mutations: {ARTIFACTS:{mylayer:{a1:"foo"}}}
         }
     })
     test(G.performdraw,'the performdraw func',{
         'with no owner or condition and nothing at the pos': {
             arg: {tolayer:'somelayer',include:{heading:['dir']}},
-            scope: {POS:'x',DIR:1,LAYERS:{somelayer:{}}},
-            mutations: {LAYERS:{somelayer:{x:{heading:1}}}}
+            scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{}}},
+            mutations: {ARTIFACTS:{somelayer:{x:{heading:1}}}}
         },
         'with no owner or condition and previous at the pos': {
             arg: {tolayer:'somelayer',include:{heading:['dir']}},
-            scope: {POS:'x',DIR:1,LAYERS:{somelayer:{x:'foo'}}},
-            mutations: {LAYERS:{somelayer:{x:{heading:1}}}}
+            scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{x:'foo'}}},
+            mutations: {ARTIFACTS:{somelayer:{x:{heading:1}}}}
         },
         'with condition which evaluates to false': {
             arg: {condition:['truthy',0],tolayer:'somelayer',include:{heading:['dir']}},
-            scope: {POS:'x',DIR:1,LAYERS:{somelayer:{}}},
-            mutations: {LAYERS:{somelayer:{}}}
+            scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{}}},
+            mutations: {ARTIFACTS:{somelayer:{}}}
         },
         'with condition which evaluates to true': {
             arg: {condition:['truthy',1],tolayer:'somelayer',include:{heading:['dir']}},
-            scope: {POS:'x',DIR:1,LAYERS:{somelayer:{}}},
-            mutations: {LAYERS:{somelayer:{x:{heading:1}}}}
+            scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{}}},
+            mutations: {ARTIFACTS:{somelayer:{x:{heading:1}}}}
         },
         'with owner which is opp': {
             options: {player:1},
             arg: {tolayer:'muppets',include:{owner:2}},
-            scope: {POS:'x',LAYERS:{muppets:{},oppmuppets:{}}},
-            mutations: {LAYERS:{muppets:{x:{owner:2}},oppmuppets:{x:{owner:2}}}}
+            scope: {POS:'x',ARTIFACTS:{muppets:{},oppmuppets:{}}},
+            mutations: {ARTIFACTS:{muppets:{x:{owner:2}},oppmuppets:{x:{owner:2}}}}
         },
         'with owner which is my': {
             options: {player:2},
             arg: {tolayer:'muppets',include:{owner:2}},
-            scope: {POS:'x',LAYERS:{muppets:{},mymuppets:{}}},
-            mutations: {LAYERS:{muppets:{x:{owner:2}},mymuppets:{x:{owner:2}}}}
+            scope: {POS:'x',ARTIFACTS:{muppets:{},mymuppets:{}}},
+            mutations: {ARTIFACTS:{muppets:{x:{owner:2}},mymuppets:{x:{owner:2}}}}
         },
         'with owner which is neutral': {
             options: {player:1},
             arg: {tolayer:'muppets',include:{owner:['dir']}},
-            scope: {DIR:0,POS:'x',LAYERS:{muppets:{},neutralmuppets:{}}},
-            mutations: {LAYERS:{muppets:{x:{owner:0}},neutralmuppets:{x:{owner:0}}}}
+            scope: {DIR:0,POS:'x',ARTIFACTS:{muppets:{},neutralmuppets:{}}},
+            mutations: {ARTIFACTS:{muppets:{x:{owner:0}},neutralmuppets:{x:{owner:0}}}}
         }
     });
     test(G.artifactliteral,'the artifactliteral func',{

@@ -39,7 +39,11 @@ const valueTypes = withUniversals("value",{
     walklength: (O)=> "WALKLENGTH",
     neighbourcount: (O)=> "NEIGHBOURCOUNT",
     step: (O)=> "STEP",
-    read: (O,[layer,pos,prop])=> "(LAYERS["+T.value(O,layer)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"] && LAYERS["+T.value(O,layer)+"]["+T.position(O,pos)+"]["+ T.value(O,prop)+"])"
+    read: (O,[layer,pos,prop])=> {
+        var ret = "("+T.layerref(O,layer)+"["+T.position(O,pos)+"] && "+T.layerref(O,layer)+"["+T.position(O,pos)+"]["+T.value(O,prop)+"])"
+        //console.log("READ",ret)
+        return ret;
+    }
 })
 
 const boolTypes = withUniversals("boolean",{
@@ -65,7 +69,10 @@ const positionTypes = withUniversals("position",{
 })
 
 const setTypes = withUniversals("set",{
-    layer: (O,[layername])=> "(LAYERS["+T.value(O,layername)+"] || {})",
+    layer: (O,def)=> {
+        //console.log("LAYER:",def)
+        return T.layerref(O,def[0]); // "(ARTIFACTS["+T.value(O,layername)+"] || {})", // TODO - vary!
+    },
     single: (O,[pos])=> `
         (function(){
             var ret = {};
@@ -139,7 +146,7 @@ const T = {
     },
     set: (O,def)=> {
         if (!_.isArray(def)){
-            return setTypes.layer(O,[def]);
+            return T.layerref(O,def);
         } else if (setTypes[def[0]]) {
             return setTypes[def[0]](O,_.tail(def));
         } else {
@@ -179,6 +186,9 @@ const T = {
         } else {
             throw "Unknown value def: "+def;
         }
+    },
+    layerref: (O,def)=> { // TODO - other layers!!
+        return "(ARTIFACTS["+T.value(O,def)+"]||{})";
     }
 }
 

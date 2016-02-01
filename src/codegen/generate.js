@@ -84,8 +84,8 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 
 	applyfilter: (O,def)=> {
 		let ret = ''
-		ret += 'var SOURCELAYER = '+C.value(O,def.layer)+'; '
-		ret += 'for (var POS in LAYERS[SOURCELAYER]){'
+		ret += 'var SOURCELAYER = '+C.layerref(O,def.layer)+'; '
+		ret += 'for (var POS in SOURCELAYER){'
 		ret += G.tryposition(O,def)
 		ret += '}'
 		return ret
@@ -94,21 +94,21 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	// assumes SOURCELAYER, POS,
 	tryposition: (O,def)=> {
 		let ret = ''
-		ret += 'var TARGETLAYER = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
-		ret += 'if (LAYERS[SOURCELAYER][POS]){'
-		ret += 'var OBJ = LAYERS[SOURCELAYER][POS]; '
+		ret += 'var TARGETLAYERNAME = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
+		ret += 'if (SOURCELAYER[POS]){'
+		ret += 'var OBJ = SOURCELAYER[POS]; '
 		ret += G.tryobj(O,def)
 		ret += '} '
 		return ret
 	},
 
-	// assumes POS, OBJ, TARGETLAYER
+	// assumes POS, OBJ, TARGETLAYERNAME
 	tryobj: (O,def)=> { // TODO - core datatype for matcher?
 		let ret = ''
 		let conds = (def.condition ? [C.boolean(O,def.condition)] : [])
 		conds = conds.concat(_.map(def.matching,(test,key)=> C.prop(O,test,key) ))
 		ret += 'if (' + conds.join(' && ') + '){'
-		ret += G.addtolayer(O,'TARGETLAYER','POS','OBJ')
+		ret += G.addtolayer(O,'TARGETLAYERNAME','POS','OBJ')
 		ret += '} '
 		return ret
 	},
@@ -385,8 +385,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 
 	addtolayer: (O,layer,pos,obj)=> {
 		let ret = ''
-		ret += 'LAYERS['+layer+']['+pos+']='+obj+'; '
-		//ret += 'LAYERS['+layer+']['+pos+']=(LAYERS['+layer+']['+pos+']||[]).concat(['+obj+']); '
+		ret += 'ARTIFACTS['+layer+']['+pos+']='+obj+'; '
 		return ret
 	},
 

@@ -18,10 +18,10 @@ describe('the generate funcs',()=>{
             },
             scope: {
                 CONNECTIONS: {p0:{1:'p1'},p1:{1:'p2'},p2:{},q0:{3:'q1'},q1:{}},
-                LAYERS: { steps:{}, starts: {q0:'yes',p0:'yes'} }
+                ARTIFACTS: { steps:{}, starts: {q0:'yes',p0:'yes'} }
             },
             mutations: {
-                LAYERS: {
+                ARTIFACTS: {
                     starts: {q0:'yes',p0:'yes'},
                     steps:{
                         p1: {heading:1,nbr:1},
@@ -44,10 +44,10 @@ describe('the generate funcs',()=>{
             },
             scope: {
                 CONNECTIONS: {q0:{3:'q1'},q1:{}},
-                LAYERS: { steps:{} }
+                ARTIFACTS: { steps:{} }
             },
             mutations: {
-                LAYERS: { steps:{ q1: {heading:3,nbr:1} } }
+                ARTIFACTS: { steps:{ q1: {heading:3,nbr:1} } }
             }
         }
     });
@@ -65,10 +65,10 @@ describe('the generate funcs',()=>{
             scope: {
                 STARTPOS: 'p0',
                 CONNECTIONS: {p0:{1:'p1',3:'q1'},p1:{1:'p2'},p2:{},q1:{}},
-                LAYERS: { steps:{} }
+                ARTIFACTS: { steps:{} }
             },
             mutations: {
-                LAYERS: {
+                ARTIFACTS: {
                     steps:{
                         p1: {heading:1},
                         p2: {heading:1},
@@ -90,10 +90,10 @@ describe('the generate funcs',()=>{
             scope: {
                 STARTPOS: 'p0',
                 CONNECTIONS: {p0:{1:'p1',3:'q1'},p1:{1:'p2'},p2:{},q1:{}},
-                LAYERS: { steps:{} }
+                ARTIFACTS: { steps:{} }
             },
             mutations: {
-                LAYERS: {
+                ARTIFACTS: {
                     steps:{
                         p1: {heading:1}, p2: {heading:1}
                     }
@@ -114,14 +114,14 @@ describe('the generate funcs',()=>{
                 STARTPOS: 'p0',
                 DIR: 1,
                 CONNECTIONS: {p0:{1:'p1'},p1:{1:'p2'},p2:{1:'p3'},p3:{1:'p4'}},
-                LAYERS: {
+                ARTIFACTS: {
                     steps:{},
                     blocks:{},
                     intheway:{p3:'yep'}
                 }
             },
             mutations: {
-                LAYERS: {
+                ARTIFACTS: {
                     steps:{p1:{},p2:{}},
                     blocks:{p3:{}},
                     intheway:{p3:'yep'}
@@ -134,16 +134,16 @@ describe('the generate funcs',()=>{
             arg: {
                 draw: { steps: { tolayer: 'steps', include: {nbr:['step']} }}
             },
-            scope: {POS:'sthelse',LAYERS:{steps:{}},WALK:['foo','bar'],WALKLENGTH:2},
-            mutations: {LAYERS:{steps:{foo:{nbr:1},bar:{nbr:2}}}}
+            scope: {POS:'sthelse',ARTIFACTS:{steps:{}},WALK:['foo','bar'],WALKLENGTH:2},
+            mutations: {ARTIFACTS:{steps:{foo:{nbr:1},bar:{nbr:2}}}}
         },
         'with some countshit': {
             arg: {
                 count: 'yes',
                 draw: { counted: { tolayer: 'counted', include: {nbr:['step'],sofar:['countsofar']} }}
             },
-            scope: {CURRENTCOUNT:'foo',POS:'sthelse',LAYERS:{counted:{}},WALK:['foo','bar'],WALKLENGTH:2,COUNT:{bar:'yep'},COUNTTRACK:['x','y']},
-            mutations: {LAYERS:{counted:{bar:{nbr:2,sofar:'y'}}}}
+            scope: {CURRENTCOUNT:'foo',POS:'sthelse',ARTIFACTS:{counted:{}},WALK:['foo','bar'],WALKLENGTH:2,COUNT:{bar:'yep'},COUNTTRACK:['x','y']},
+            mutations: {ARTIFACTS:{counted:{bar:{nbr:2,sofar:'y'}}}}
         }
     });
     test(G.drawwalkstart, 'the drawwalkstart func', {
@@ -151,8 +151,8 @@ describe('the generate funcs',()=>{
             arg: {
                 draw: { start: { tolayer: 'begins' }}
             },
-            scope: {POS:'sthelse',STARTPOS:'start',LAYERS:{begins:{}}},
-            mutations: {POS:'start',LAYERS:{begins:{start:{}}}}
+            scope: {POS:'sthelse',STARTPOS:'start',ARTIFACTS:{begins:{}}},
+            mutations: {POS:'start',ARTIFACTS:{begins:{start:{}}}}
         },
         'when we also draw all': {
             arg: {
@@ -161,8 +161,8 @@ describe('the generate funcs',()=>{
                     all: { tolayer: 'everything' }
                 }
             },
-            scope: {POS:'sthelse',STARTPOS:'start',LAYERS:{begins:{},everything:{}}},
-            mutations: {POS:'start',LAYERS:{begins:{start:{}},everything:{start:{}}}}
+            scope: {POS:'sthelse',STARTPOS:'start',ARTIFACTS:{begins:{},everything:{}}},
+            mutations: {POS:'start',ARTIFACTS:{begins:{start:{}},everything:{start:{}}}}
         }
     });
     test(G.drawwalklast, 'the drawwalklast func', {
@@ -170,8 +170,8 @@ describe('the generate funcs',()=>{
             arg: {
                 draw: { last: { tolayer: 'lasts' }}
             },
-            scope: {STEP:7,POS:'wherever',WALKLENGTH:2,WALK:['foo','bar'],LAYERS:{lasts:{}}},
-            mutations: {STEP:2,LAYERS:{lasts:{bar:{}}}}
+            scope: {STEP:7,POS:'wherever',WALKLENGTH:2,WALK:['foo','bar'],ARTIFACTS:{lasts:{}}},
+            mutations: {STEP:2,ARTIFACTS:{lasts:{bar:{}}}}
         }
     });
     test(G.drawwalkblock, 'the drawwalkblock func', {
@@ -185,8 +185,8 @@ describe('the generate funcs',()=>{
                     }
                 }
             },
-            scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',LAYERS:{blocks:{}}},
-            mutations: {POS:'boom',LAYERS:{blocks:{boom:{why:'hitblock'}}}}
+            scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{}}},
+            mutations: {POS:'boom',ARTIFACTS:{blocks:{boom:{why:'hitblock'}}}}
         },
         'when we hit block and also draw all': {
             arg: {
@@ -196,8 +196,8 @@ describe('the generate funcs',()=>{
                     all: { tolayer: 'everything' }
                 }
             },
-            scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',LAYERS:{blocks:{},everything:{}}},
-            mutations: {POS:'boom',LAYERS:{blocks:{boom:{}},everything:{boom:{}}}}
+            scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{},everything:{}}},
+            mutations: {POS:'boom',ARTIFACTS:{blocks:{boom:{}},everything:{boom:{}}}}
         }
     });
     test(G.takewalkstep, 'the takewalkstep func', {
@@ -249,22 +249,22 @@ describe('the generate funcs',()=>{
         },
         'with steps': {
             arg: {steps:['layer','somelayer']},
-            scope: {LAYERS:{somelayer:'L'},STARTPOS:'somepos'},
+            scope: {ARTIFACTS:{somelayer:'L'},STARTPOS:'somepos'},
             mutations: {STEPS:'L'}
         },
         'with blocks': {
             arg: {blocks:['layer','somelayer']},
-            scope: {LAYERS:{somelayer:'L'},STARTPOS:'somepos'},
+            scope: {ARTIFACTS:{somelayer:'L'},STARTPOS:'somepos'},
             mutations: {BLOCKS:'L'}
         },
         'with count': {
             arg: {count:['layer','somelayer']},
-            scope: {LAYERS:{somelayer:'L'},STARTPOS:'somepos'},
+            scope: {ARTIFACTS:{somelayer:'L'},STARTPOS:'somepos'},
             mutations: {COUNT:'L',COUNTTRACK: [], CURRENTCOUNT: 0}
         },
         'with count and intent to draw counted': {
             arg: {count:['layer','somelayer'],draw:{counted:'yes'}},
-            scope: {LAYERS:{somelayer:'L'},STARTPOS:'somepos'},
+            scope: {ARTIFACTS:{somelayer:'L'},STARTPOS:'somepos'},
             mutations: {COUNT:'L',COUNTTRACK: [], CURRENTCOUNT: 0}
         }
     });

@@ -13,13 +13,13 @@ describe('the filter funcs',()=>{
                 tolayer: 'destination'
             },
             scope: {
-                LAYERS: {
+                ARTIFACTS: {
                     source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'}},
                     destination: {}
                 }
             },
             mutations: {
-                LAYERS: {
+                ARTIFACTS: {
                     source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'}},
                     destination: {p2:{foo:'bar'}}
                 }
@@ -33,16 +33,14 @@ describe('the filter funcs',()=>{
                 tolayer: 'destination'
             },
             scope: {
-                SOURCELAYER: 'source',
+                SOURCELAYER: {a1:{foo:'bar'}},
                 POS: 'a1',
-                LAYERS: {
-                    source: {a1:{foo:'bar'}},
+                ARTIFACTS: {
                     destination: {}
                 }
             },
             mutations: {
-                LAYERS: {
-                    source: {a1:{foo:'bar'}},
+                ARTIFACTS: {
                     destination: {a1:{foo:'bar'}}
                 }
             }
@@ -54,10 +52,10 @@ describe('the filter funcs',()=>{
             scope: {
                 OBJ: {someprop:2},
                 POS: 'somepos',
-                TARGETLAYER: 'mylayer',
-                LAYERS: {mylayer:{}}
+                TARGETLAYERNAME: 'mylayer',
+                ARTIFACTS: {mylayer:{}}
             },
-            mutations: {LAYERS:{mylayer:{somepos:{someprop:2}}}}
+            mutations: {ARTIFACTS:{mylayer:{somepos:{someprop:2}}}}
         },
         'when simple matching but condition makes it false': {
             arg: {
@@ -67,10 +65,10 @@ describe('the filter funcs',()=>{
             scope: {
                 OBJ: {someprop:2},
                 POS: 'somepos',
-                TARGETLAYER: 'mylayer',
-                LAYERS: {mylayer:{}}
+                TARGETLAYERNAME: 'mylayer',
+                ARTIFACTS: {mylayer:{}}
             },
-            mutations: {LAYERS:{mylayer:{}}}
+            mutations: {ARTIFACTS:{mylayer:{}}}
         }
     });
 });

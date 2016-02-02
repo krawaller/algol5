@@ -251,7 +251,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	prepwalkstart: (O,def)=> {
 		def = def || {}
 		let ret =  ''
-		ret += 'var WALK = []; '
+		ret += 'var walkedsquares = []; '
 		ret += 'var STOPREASON = ""; '
 		ret += 'var nextpos = ""; '
 		if (def.max){
@@ -280,7 +280,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	takewalkstep: (O,def)=> {
 		def = def || {}
 		let ret = 'POS = nextpos; '
-		ret += 'WALK.push(nextpos); '
+		ret += 'walkedsquares.push(nextpos); '
 		if (def.count){
 			ret += 'COUNTTRACK.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
 		}
@@ -289,7 +289,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	// wants full walkerdef.
 	afterwalk: (O,def)=> {
 		let ret = ''
-		ret += 'var WALKLENGTH = WALK.length; '
+		ret += 'var WALKLENGTH = walkedsquares.length; '
 		if (def && def.count){
 			ret += 'var TOTALCOUNT = CURRENTCOUNT; '
 		}
@@ -315,7 +315,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		if (def.draw.steps || def.draw.all || def.draw.counted){
 			ret += 'var STEP = 0; '
 			ret += 'for(var stepper=0;stepper<WALKLENGTH;stepper++){'
-			ret += 'POS=WALK[stepper]; '
+			ret += 'POS=walkedsquares[stepper]; '
 			ret += 'STEP++; '
 			if (def.count){
 				ret += 'CURRENTCOUNT = COUNTTRACK[stepper]; '
@@ -350,7 +350,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	drawwalklast: (O,def)=> {
 		let ret = ''
 		if (def.draw.last){
-			ret += 'POS=WALK[WALKLENGTH-1]; '
+			ret += 'POS=walkedsquares[WALKLENGTH-1]; '
 			ret += 'STEP=WALKLENGTH; '
 			ret += G.performdraw(O,def.draw.last)
 		}

@@ -127,7 +127,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	findneighbours: (O,def)=> {
 		def = def || {}
 		let ret = ''
-		ret += 'var NEIGHBOURS=[]; '
+		ret += 'var foundneighbours=[]; '
 		if (def.start){
 			ret += 'var STARTPOS='+C.position(O,def.start)+'; '
 			ret += G.findneighboursfromstart(O,def)
@@ -160,20 +160,20 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	},
 
 	// wants full neighbour def
-	// assumes STARTPOS, DIR, NEIGHBOURS
+	// assumes STARTPOS, DIR, foundneighbours
 	findneighbourindir: (O,def)=> {
 		def = def || {}
 		let ret = ''
 		ret += 'var POS=connections[STARTPOS][DIR]; '
 		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
-		ret += 'NEIGHBOURS.push(POS); '
+		ret += 'foundneighbours.push(POS); '
 		ret += '} '
 		return ret
 	},
 
 	afterneighbourlook: (O,def)=> {
 		let ret = ''
-		ret += 'var NEIGHBOURCOUNT=NEIGHBOURS.length; '
+		ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
 		return ret
 	},
 
@@ -191,8 +191,8 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		def = def || {}
 		let ret = ''
 		if (def.draw && def.draw.neighbours){
-			ret += 'for(var neighbournbr in NEIGHBOURS){'
-			ret += 'POS=[NEIGHBOURS[neighbournbr]]; '
+			ret += 'for(var neighbournbr in foundneighbours){'
+			ret += 'POS=[foundneighbours[neighbournbr]]; '
 			ret += G.performdraw(O,def.draw.neighbours)
 			ret += '} '
 		}

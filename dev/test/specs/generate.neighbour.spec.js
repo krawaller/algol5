@@ -10,7 +10,7 @@ describe('the neighbour funcs',()=>{
             scope: {
                 POS: 'sthelse',
                 STARTPOS: 'start',
-                NEIGHBOURS: ['foo','bar'],
+                foundneighbours: ['foo','bar'],
                 NEIGHBOURCOUNT: 3,
                 ARTIFACTS: {somelayer:{}}
             },
@@ -22,7 +22,7 @@ describe('the neighbour funcs',()=>{
             scope: {
                 POS: 'sthelse',
                 STARTPOS: 'start',
-                NEIGHBOURS: ['foo','bar'],
+                foundneighbours: ['foo','bar'],
                 NEIGHBOURCOUNT: 3,
                 ARTIFACTS: {somelayer:{}}
             },
@@ -59,7 +59,7 @@ describe('the neighbour funcs',()=>{
     test(G.afterneighbourlook, 'the afterneighbourlook func', {
         'for vanilla look': {
             scope: {
-                NEIGHBOURS: ['foo','bar']
+                foundneighbours: ['foo','bar']
             },
             mutations: {
                 NEIGHBOURCOUNT: 2
@@ -73,9 +73,9 @@ describe('the neighbour funcs',()=>{
                 STARTPOS: 's0',
                 DIR: 2,
                 connections: {s0:{2:'s1'}},
-                NEIGHBOURS: ['foo']
+                foundneighbours: ['foo']
             },
-            mutations: { NEIGHBOURS: ['foo','s1'], POS: 's1' }
+            mutations: { foundneighbours: ['foo','s1'], POS: 's1' }
         },
         'with condition which evaluates to true': {
             arg: {condition:['anyat','mylayer',['target']]},
@@ -84,9 +84,9 @@ describe('the neighbour funcs',()=>{
                 DIR: 2,
                 connections: {s0:{2:'somepos'}},
                 ARTIFACTS: {mylayer:{somepos:'yep'}},
-                NEIGHBOURS: []
+                foundneighbours: []
             },
-            mutations: { NEIGHBOURS: ['somepos'] }
+            mutations: { foundneighbours: ['somepos'] }
         },
         'with condition which evaluates to false': {
             arg: {condition:['anyat','mylayer',['target']]},
@@ -95,9 +95,9 @@ describe('the neighbour funcs',()=>{
                 DIR: 2,
                 connections: {s0:{2:'somepos'}},
                 ARTIFACTS: {mylayer:{}},
-                NEIGHBOURS: []
+                foundneighbours: []
             },
-            mutations: { NEIGHBOURS: [] }
+            mutations: { foundneighbours: [] }
         }
     });
     test(G.findneighboursfromstart, 'the findneighbourfromstart func', {
@@ -106,18 +106,18 @@ describe('the neighbour funcs',()=>{
             scope: {
                 STARTPOS: 's0',
                 connections: {s0:{2:'s1'}},
-                NEIGHBOURS: ['foo']
+                foundneighbours: ['foo']
             },
-            mutations: { NEIGHBOURS: ['foo','s1'], POS: 's1', DIR: 2 }
+            mutations: { foundneighbours: ['foo','s1'], POS: 's1', DIR: 2 }
         },
         'when dirs in def': {
             arg: {dirs:[1,2]},
             scope: {
                 STARTPOS: 's0',
                 connections: {s0:{1:'s1',2:'s2'}},
-                NEIGHBOURS: ['foo']
+                foundneighbours: ['foo']
             },
-            mutations: { NEIGHBOURS: ['foo','s1','s2']}
+            mutations: { foundneighbours: ['foo','s1','s2']}
         }
     });
     test(G.findneighbours, 'the applyneighbours func', {
@@ -127,7 +127,7 @@ describe('the neighbour funcs',()=>{
                 connections: {s0:{2:'s1'}},
                 MARKS: {mymark:'s0'}
             },
-            mutations: { NEIGHBOURS: ['s1'], STARTPOS: 's0' }
+            mutations: { foundneighbours: ['s1'], STARTPOS: 's0' }
         },
         'with 2 starts': {
             arg: {dir:2,starts:'mylayer'},
@@ -135,7 +135,7 @@ describe('the neighbour funcs',()=>{
                 connections: {s0:{2:'s1'},p0:{2:'p1'}},
                 ARTIFACTS: {mylayer:{s0:'yes',p0:'yes'}}
             },
-            mutations: { NEIGHBOURS: ['s1','p1']}
+            mutations: { foundneighbours: ['s1','p1']}
         }
     });
     test(G.applyneighbours, 'the applyneighbours func', {

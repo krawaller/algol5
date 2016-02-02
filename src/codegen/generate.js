@@ -65,14 +65,14 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	floatindir: (O,def)=> {
 		let ret = ''
 		ret += 'var STOPREASON; '
-		ret += 'var NEXTPOS; '
+		ret += 'var nextpos; '
 		ret += 'if (!(STOPREASON='+G.stopreason(O,def)+')){ '
-		ret += 'NEWREACHED[NEXTPOS]=LENGTH; '
-		ret += 'REACHED[NEXTPOS]=LENGTH; '
+		ret += 'NEWREACHED[nextpos]=LENGTH; '
+		ret += 'REACHED[nextpos]=LENGTH; '
 		ret += 'TOTALREACHED++; '
 		if (def.blocks){
-			ret += '} else if (BLOCKS[NEXTPOS]){'
-			ret += 'BLOCKSREACHED[NEXTPOS]=LENGTH; '
+			ret += '} else if (BLOCKS[nextpos]){'
+			ret += 'BLOCKSREACHED[nextpos]=LENGTH; '
 			ret += '} '
 		} else {
 			ret += '} '
@@ -253,7 +253,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		let ret =  ''
 		ret += 'var WALK = []; '
 		ret += 'var STOPREASON = ""; '
-		ret += 'var NEXTPOS = ""; '
+		ret += 'var nextpos = ""; '
 		if (def.max){
 			ret += 'var MAX='+C.value(O,def.max)+'; '
 		}
@@ -276,11 +276,11 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		}
 		return ret;
 	},
-	// ASSUMES NEXTPOS, ..
+	// ASSUMES nextpos, ..
 	takewalkstep: (O,def)=> {
 		def = def || {}
-		let ret = 'POS = NEXTPOS; '
-		ret += 'WALK.push(NEXTPOS); '
+		let ret = 'POS = nextpos; '
+		ret += 'WALK.push(nextpos); '
 		if (def.count){
 			ret += 'COUNTTRACK.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
 		}
@@ -300,7 +300,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		let ret = ''
 		if (def.blocks && def.draw.block){
 			ret += 'if (STOPREASON==="hitblock"){' 
-			ret += 'POS=NEXTPOS; '
+			ret += 'POS=nextpos; '
 			ret += G.performdraw(O,def.draw.block);
 			if (def.draw.all){
 				ret += G.performdraw(O,def.draw.all);
@@ -359,7 +359,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 
 	// ------------ GENERAL STUFF -----------
 
-	// assumes connections, DIR, LENGTH, NEXTPOS
+	// assumes connections, DIR, LENGTH, nextpos
 	// and if used BLOCKS, STEPS, MAX
 	stopreason: (O,def)=> {
 		def = def || {}
@@ -367,18 +367,18 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		if (def.max){
 			ret += 'LENGTH === MAX ? "reachedmax" : '
 		}
-		ret += '!(NEXTPOS=connections[POS][DIR]) ? "outofbounds" : '
+		ret += '!(nextpos=connections[POS][DIR]) ? "outofbounds" : '
 		if (def.type==='floater'){
-			ret += 'REACHED[NEXTPOS] ? "alreadyreached" : '
+			ret += 'REACHED[nextpos] ? "alreadyreached" : '
 		}
 		if (def.blocks && def.steps && def.testblocksbeforesteps){
-			ret += 'BLOCKS[NEXTPOS] ? "hitblock" : '
+			ret += 'BLOCKS[nextpos] ? "hitblock" : '
 		}
 		if (def.steps){
-			ret += '!STEPS[NEXTPOS] ? "nomoresteps" : '
+			ret += '!STEPS[nextpos] ? "nomoresteps" : '
 		}
 		if (def.blocks && !def.testblocksbeforesteps){
-			ret += 'BLOCKS[NEXTPOS] ? "hitblock" : '
+			ret += 'BLOCKS[nextpos] ? "hitblock" : '
 		}
 		return '('+ret+' null)';
 	},

@@ -185,7 +185,7 @@ describe('the generate funcs',()=>{
                     }
                 }
             },
-            scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{}}},
+            scope: {POS:'sthelse',nextpos:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{}}},
             mutations: {POS:'boom',ARTIFACTS:{blocks:{boom:{why:'hitblock'}}}}
         },
         'when we hit block and also draw all': {
@@ -196,28 +196,28 @@ describe('the generate funcs',()=>{
                     all: { tolayer: 'everything' }
                 }
             },
-            scope: {POS:'sthelse',NEXTPOS:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{},everything:{}}},
+            scope: {POS:'sthelse',nextpos:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{},everything:{}}},
             mutations: {POS:'boom',ARTIFACTS:{blocks:{boom:{}},everything:{boom:{}}}}
         }
     });
     test(G.takewalkstep, 'the takewalkstep func', {
         'for normal walk': {
-            scope: {WALK:['foo'],NEXTPOS:'bar',POS:'foo'},
+            scope: {WALK:['foo'],nextpos:'bar',POS:'foo'},
             mutations: {WALK:['foo','bar'],POS:'bar'}
         },
         'with count and nextpos not to be counted': {
             arg: {count:'YES'},
-            scope: {WALK:['foo'],NEXTPOS:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{},POS:'foo'},
+            scope: {WALK:['foo'],nextpos:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{},POS:'foo'},
             mutations: {COUNTTRACK:['whatev',7],CURRENTCOUNT:7}
         },
         'with count and nextpos should be counted': {
             arg: {count:'YES'},
-            scope: {WALK:['foo'],NEXTPOS:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
+            scope: {WALK:['foo'],nextpos:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
             mutations: {COUNTTRACK:['whatev',8],CURRENTCOUNT:8}
         },
         'with count and nextpos should be counted and we intend to draw': {
             arg: {count:'YES',draw:{counted:'sure'}},
-            scope: {COUNTED:['x'],WALK:['foo'],NEXTPOS:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
+            scope: {COUNTED:['x'],WALK:['foo'],nextpos:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
             mutations: {COUNTTRACK:['whatev',8],CURRENTCOUNT:8}
         }
     });
@@ -235,7 +235,7 @@ describe('the generate funcs',()=>{
     test(G.prepwalkstart, 'the prepwalkstart func', {
         'for vanilla def': {
             scope: {STARTPOS: 'somepos'},
-            mutations: {POS: 'somepos', WALK: [],STOPREASON:'',NEXTPOS:''}
+            mutations: {POS: 'somepos', WALK: [],STOPREASON:'',nextpos:''}
         },
         'when def has max': {
             arg: {max:['value',4]},

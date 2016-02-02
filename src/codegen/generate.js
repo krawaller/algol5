@@ -277,7 +277,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
 		}
 		if (def.count){
-			ret += 'var COUNT = '+C.set(O,def.count)+'; '
+			ret += 'var walkpositionstocount = '+C.set(O,def.count)+'; '
 			ret += 'var countedwalkpositions = []; '
 			ret += 'var CURRENTCOUNT = 0; '
 		}
@@ -289,7 +289,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		let ret = 'POS = nextpos; '
 		ret += 'walkedsquares.push(nextpos); '
 		if (def.count){
-			ret += 'countedwalkpositions.push(CURRENTCOUNT+=(COUNT[POS]?1:0)); '
+			ret += 'countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0)); '
 		}
 		return ret;
 	},
@@ -335,7 +335,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 				ret += G.performdraw(O,def.draw.all)
 			}
 			if (def.draw.counted){
-				ret += 'if (COUNT[POS]) {'
+				ret += 'if (walkpositionstocount[POS]) {'
 				ret += G.performdraw(O,def.draw.counted)
 				ret += '} '
 			}

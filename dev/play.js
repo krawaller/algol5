@@ -16,6 +16,12 @@ let walkerdef = {
 			"include": {
 				"owner": ['sum',1,1]
 			}
+		},
+		"last": {
+			"tolayer": "endedupat",
+			"include": {
+				"foo": "bar"
+			}
 		}
 	}
 };

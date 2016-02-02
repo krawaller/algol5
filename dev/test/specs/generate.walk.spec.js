@@ -1,11 +1,59 @@
-import test from '../gentester'
+import gentest from '../gentester'
+import libtest from '../libtester'
 import lib from '../../../src/codegen/'
 
 let G = lib.G
 
+libtest('the static generate funcs',G, {
+    'decideWalkerOpts(def)': {
+        'when we care about steps, using single snuffs': {
+            def: {
+                draw: {
+                    foo: {},
+                    bar: {
+                        include:{
+                            nothing: 'interesting',
+                            usingstep: ['sum',2,['step']]
+                        }
+                    }
+                }
+            },
+            expected: { useswalkstep: true }
+        },
+        'when we care about steps, using double snuffs': {
+            def: {
+                draw: {
+                    foo: {},
+                    bar: {
+                        include:{
+                            nothing: 'interesting',
+                            usingstep: ['sum',2,[  "step" ]]
+                        }
+                    }
+                }
+            },
+            expected: { useswalkstep: true }
+        },
+        'when we dont care': {
+            def: {
+                draw: {
+                    foo: {},
+                    bar: {
+                        include:{
+                            nothing: 'interesting',
+                        }
+                    }
+                }
+            },
+            expected: { useswalkstep: false }
+        },
+    }
+})
+
 describe('the generate funcs',()=>{
-    test(G.applywalker, 'the applywalker func', {
+    gentest(G.applywalker, 'the applywalker func', {
         'for simple walk': {
+            options: {useswalkstep:true},
             arg: {
                 starts: ['layer','starts'],
                 dirs: [1,3,5],
@@ -32,6 +80,7 @@ describe('the generate funcs',()=>{
             }
         },
         'when just 1 start': {
+            options: {useswalkstep:true},
             arg: {
                 start: ['pos','q0'],
                 dirs: [1,3,5],
@@ -51,7 +100,7 @@ describe('the generate funcs',()=>{
             }
         }
     });
-    test(G.walkfromstart, 'the walkfromstart func', {
+    gentest(G.walkfromstart, 'the walkfromstart func', {
         'for simple walk': {
             arg: {
                 dirs: [1,3],
@@ -101,7 +150,7 @@ describe('the generate funcs',()=>{
             }
         }
     });
-    test(G.walkindir, 'the walkindir func', {
+    gentest(G.walkindir, 'the walkindir func', {
         'for simple walk': {
             arg: {
                 blocks: ['layer','intheway'],
@@ -129,24 +178,33 @@ describe('the generate funcs',()=>{
             }
         }
     });
-    test(G.drawwalksteps, 'the drawwalksteps func', {
-        'when just draw the steps': {
+    gentest(G.drawwalksteps, 'the drawwalksteps func', {
+        'when just draw the steps, NOT caring about stepnbr': {
+            arg: {
+                draw: { steps: { tolayer: 'steps' }}
+            },
+            scope: {STEP:'shouldnotbeoverwritten',POS:'sthelse',ARTIFACTS:{steps:{}},walkedsquares:['foo','bar'],WALKLENGTH:2},
+            mutations: {STEP:'shouldnotbeoverwritten',ARTIFACTS:{steps:{foo:{},bar:{}}}}
+        },
+        'when just draw the steps, caring about stepnbr': {
             arg: {
                 draw: { steps: { tolayer: 'steps', include: {nbr:['step']} }}
             },
+            options: {useswalkstep:true},
             scope: {POS:'sthelse',ARTIFACTS:{steps:{}},walkedsquares:['foo','bar'],WALKLENGTH:2},
             mutations: {ARTIFACTS:{steps:{foo:{nbr:1},bar:{nbr:2}}}}
         },
-        'with some countshit': {
+        'with some countshit, caring about stepnbr': {
             arg: {
                 count: 'yes',
                 draw: { counted: { tolayer: 'counted', include: {nbr:['step'],sofar:['countsofar']} }}
             },
+            options: {useswalkstep:true},
             scope: {CURRENTCOUNT:'foo',POS:'sthelse',ARTIFACTS:{counted:{}},walkedsquares:['foo','bar'],WALKLENGTH:2,COUNT:{bar:'yep'},COUNTTRACK:['x','y']},
             mutations: {ARTIFACTS:{counted:{bar:{nbr:2,sofar:'y'}}}}
         }
     });
-    test(G.drawwalkstart, 'the drawwalkstart func', {
+    gentest(G.drawwalkstart, 'the drawwalkstart func', {
         'when we draw simple start': {
             arg: {
                 draw: { start: { tolayer: 'begins' }}
@@ -165,16 +223,22 @@ describe('the generate funcs',()=>{
             mutations: {POS:'start',ARTIFACTS:{begins:{start:{}},everything:{start:{}}}}
         }
     });
-    test(G.drawwalklast, 'the drawwalklast func', {
+    gentest(G.drawwalklast, 'the drawwalklast func', {
         'for vanilla walk': {
+            options: {useswalkstep:true},
             arg: {
-                draw: { last: { tolayer: 'lasts' }}
+                draw: {
+                    last: {
+                        tolayer: 'lasts',
+                        include: {at:['step']}
+                    }
+                }
             },
             scope: {STEP:7,POS:'wherever',WALKLENGTH:2,walkedsquares:['foo','bar'],ARTIFACTS:{lasts:{}}},
-            mutations: {STEP:2,ARTIFACTS:{lasts:{bar:{}}}}
+            mutations: {STEP:2,ARTIFACTS:{lasts:{bar:{at:2}}}}
         }
     });
-    test(G.drawwalkblock, 'the drawwalkblock func', {
+    gentest(G.drawwalkblock, 'the drawwalkblock func', {
         'when we hit block and want to draw it': {
             arg: {
                 blocks: 'yep',
@@ -200,7 +264,7 @@ describe('the generate funcs',()=>{
             mutations: {POS:'boom',ARTIFACTS:{blocks:{boom:{}},everything:{boom:{}}}}
         }
     });
-    test(G.takewalkstep, 'the takewalkstep func', {
+    gentest(G.takewalkstep, 'the takewalkstep func', {
         'for normal walk': {
             scope: {walkedsquares:['foo'],nextpos:'bar',POS:'foo'},
             mutations: {walkedsquares:['foo','bar'],POS:'bar'}
@@ -221,7 +285,7 @@ describe('the generate funcs',()=>{
             mutations: {COUNTTRACK:['whatev',8],CURRENTCOUNT:8}
         }
     });
-    test(G.afterwalk, 'the afterwalk func', {
+    gentest(G.afterwalk, 'the afterwalk func', {
         'for vanilla walk': {
             scope: {walkedsquares:[1,2,3]},
             mutations: {WALKLENGTH:3}
@@ -232,7 +296,7 @@ describe('the generate funcs',()=>{
             mutations: {TOTALCOUNT:7}
         }
     });
-    test(G.prepwalkstart, 'the prepwalkstart func', {
+    gentest(G.prepwalkstart, 'the prepwalkstart func', {
         'for vanilla def': {
             scope: {STARTPOS: 'somepos'},
             mutations: {POS: 'somepos', walkedsquares: [],STOPREASON:'',nextpos:''}

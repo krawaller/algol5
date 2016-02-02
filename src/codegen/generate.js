@@ -201,11 +201,17 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 
 	// ------------ WALKER STUFF -----------
 
+	decideWalkerOpts: (def)=> { // TODO - should we maybe analyse the generated func instead of the def? hmm.
+		let ret = {}
+		ret.useswalkstep = _.some(def.draw,(instr,name)=> _.some(instr.include, (val,key)=> (JSON.stringify([val]).match(/\[ *'step' *\]|\[ *"step" *\]/))))
+		return ret
+	},
+
 	applywalker: (O,def)=> {
 		let ret = ''
 		if (def.starts){
-			ret += 'var STARTS = '+C.set(O,def.starts)+'; '
-			ret += 'for(var STARTPOS in STARTS){'
+			ret += 'var walkstarts = '+C.set(O,def.starts)+'; '
+			ret += 'for(var STARTPOS in walkstarts){'
 			ret += G.walkfromstart(O,def)
 			ret += '} '
 		} else {
@@ -220,10 +226,10 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		let ret = ''
 		if (def.dirs){
 			ret += 'var DIR; '
-			ret += 'var alldirs = '+C.list(O,def.dirs)+'; '
-			ret += 'var nbrofdirs = alldirs.length; '
-			ret += 'for(var dirnbr=0; dirnbr<nbrofdirs; dirnbr++){'
-			ret += 'DIR = alldirs[dirnbr]; '
+			ret += 'var allwalkerdirs = '+C.list(O,def.dirs)+'; '
+			ret += 'var nbrofwalkerdirs = allwalkerdirs.length; '
+			ret += 'for(var walkerdirnbr=0; walkerdirnbr<nbrofwalkerdirs; walkerdirnbr++){'
+			ret += 'DIR = allwalkerdirs[walkerdirnbr]; '
 			ret += G.walkindir(O,def)
 			ret += '} '
 		} else {
@@ -310,13 +316,13 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		return ret
 	},
 	// wants full walkerdef
-	drawwalksteps: (O,def)=> {
+	drawwalksteps: (O,def)=> { // TODO - only use STEP if we care!
 		let ret = ''
 		if (def.draw.steps || def.draw.all || def.draw.counted){
-			ret += 'var STEP = 0; '
+			if (O && O.useswalkstep) ret += 'var STEP = 0; '
 			ret += 'for(var stepper=0;stepper<WALKLENGTH;stepper++){'
 			ret += 'POS=walkedsquares[stepper]; '
-			ret += 'STEP++; '
+			if (O && O.useswalkstep) ret += 'STEP++; '
 			if (def.count){
 				ret += 'CURRENTCOUNT = COUNTTRACK[stepper]; '
 			}
@@ -351,7 +357,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		let ret = ''
 		if (def.draw.last){
 			ret += 'POS=walkedsquares[WALKLENGTH-1]; '
-			ret += 'STEP=WALKLENGTH; '
+			if (O && O.useswalkstep) ret += 'STEP=WALKLENGTH; '
 			ret += G.performdraw(O,def.draw.last)
 		}
 		return ret

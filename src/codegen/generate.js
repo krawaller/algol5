@@ -202,14 +202,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 
 	// ------------ WALKER STUFF -----------
 
-	decideWalkerOpts: (def)=> { // TODO - should we maybe analyse the generated func instead of the def? hmm.
-		let ret = {}
-		ret.useswalkstep = _.some(def.draw,(instr,name)=> _.some(instr.include, (val,key)=> (JSON.stringify([val]).match(/\[ *'step' *\]|\[ *"step" *\]/))))
-		return ret
-	},
-
 	applywalker: (O,def)=> {
-		O = Object.assign(G.decideWalkerOpts(def),O||{})
 		let ret = ''
 		if (def.starts){
 			ret += 'var walkstarts = '+C.set(O,def.starts)+'; '

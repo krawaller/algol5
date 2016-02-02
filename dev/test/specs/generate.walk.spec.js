@@ -4,52 +4,6 @@ import lib from '../../../src/codegen/'
 
 let G = lib.G
 
-libtest('the static generate funcs',G, {
-    'decideWalkerOpts(def)': {
-        'when we care about steps, using single snuffs': {
-            def: {
-                draw: {
-                    foo: {},
-                    bar: {
-                        include:{
-                            nothing: 'interesting',
-                            usingstep: ['sum',2,['step']]
-                        }
-                    }
-                }
-            },
-            expected: { useswalkstep: true }
-        },
-        'when we care about steps, using double snuffs': {
-            def: {
-                draw: {
-                    foo: {},
-                    bar: {
-                        include:{
-                            nothing: 'interesting',
-                            usingstep: ['sum',2,[  "step" ]]
-                        }
-                    }
-                }
-            },
-            expected: { useswalkstep: true }
-        },
-        'when we dont care': {
-            def: {
-                draw: {
-                    foo: {},
-                    bar: {
-                        include:{
-                            nothing: 'interesting',
-                        }
-                    }
-                }
-            },
-            expected: { useswalkstep: false }
-        },
-    }
-})
-
 describe('the generate funcs',()=>{
     gentest(G.applywalker, 'the applywalker func', {
         'for simple walk': {

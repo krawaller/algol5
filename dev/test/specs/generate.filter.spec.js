@@ -33,7 +33,7 @@ describe('the filter funcs',()=>{
                 tolayer: 'destination'
             },
             scope: {
-                SOURCELAYER: {a1:{foo:'bar'}},
+                filtersourcelayer: {a1:{foo:'bar'}},
                 POS: 'a1',
                 ARTIFACTS: {
                     destination: {}
@@ -52,7 +52,7 @@ describe('the filter funcs',()=>{
             scope: {
                 OBJ: {someprop:2},
                 POS: 'somepos',
-                targetlayername: 'mylayer',
+                filtertargetlayername: 'mylayer',
                 ARTIFACTS: {mylayer:{}}
             },
             mutations: {ARTIFACTS:{mylayer:{somepos:{someprop:2}}}}
@@ -65,7 +65,7 @@ describe('the filter funcs',()=>{
             scope: {
                 OBJ: {someprop:2},
                 POS: 'somepos',
-                targetlayername: 'mylayer',
+                filtertargetlayername: 'mylayer',
                 ARTIFACTS: {mylayer:{}}
             },
             mutations: {ARTIFACTS:{mylayer:{}}}

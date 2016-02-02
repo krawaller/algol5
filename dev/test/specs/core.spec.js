@@ -313,6 +313,13 @@ describe('the core funcs',()=>{
                 MUPPETS: {mylayer:'FOO'}
             },
             expected: 'FOO'
+        },
+        'when we want special case "units"': {
+            arg: 'units',
+            scope: {
+                UNITLAYERS: {all:'FOO'}
+            },
+            expected: 'FOO'
         }
     });
 });

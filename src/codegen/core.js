@@ -192,6 +192,10 @@ const T = {
     // layername is a plain string
     layerref: (O,layername)=> {
         var bag = O && O.layermappings && O.layermappings[layername] || "ARTIFACTS"
+        if (layername==='units'){
+            bag = "UNITLAYERS"
+            layername = "all"
+        }
         return "("+bag+"."+layername+"||{})";
     }
 }

@@ -299,7 +299,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	drawwalkblock: (O,def)=> {
 		let ret = ''
 		if (def.blocks && def.draw.block){
-			ret += 'if (STOPREASON="hitblock"){'
+			ret += 'if (STOPREASON==="hitblock"){' 
 			ret += 'POS=NEXTPOS; '
 			ret += G.performdraw(O,def.draw.block);
 			if (def.draw.all){
@@ -395,12 +395,25 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		if (def.condition){
 			ret += 'if ('+C.boolean(O,def.condition)+'){ '
 		}
-		ret += 'var artifact='+G.artifactliteral(O,def)+'; '
-		ret += 'var targetlayer='+C.value(O,def.tolayer)+'; '
-		ret += G.addtolayer(O,'targetlayer','POS','artifact')
-		if (def.include && def.include.owner){
-			ret += 'var otherlayer=["neutral",'+(O.player===1?'"my","opp"':'"opp","my"')+'][artifact.owner]+targetlayer; '
-			ret += G.addtolayer(O,'otherlayer','POS','artifact')
+		if (def.include && def.include.owner){ // if artifact has owner it must be added to more than one layer
+			ret += 'var artifact='+G.artifactliteral(O,def)+'; '
+			ret += 'var targetlayername='+C.value(O,def.tolayer)+'; '
+			ret += G.addtolayer(O,'targetlayername','POS','artifact')
+			if (def.include && def.include.owner){
+				var prefix, owner = C.value(O,def.include.owner);
+				if (owner === 0){
+					prefix = '"neutral"';
+				} else if (owner === O.player) {
+					prefix = '"my"'
+				} else if (_.isNumber(owner)) {
+					prefix = '"opp"'
+				} else {
+					prefix = '["neutral",'+(O.player===1?'"my","opp"':'"opp","my"')+'][artifact.owner]'
+				}
+				ret += G.addtolayer(O,prefix+' + targetlayername','POS','artifact')
+			}
+		} else {
+			ret += G.addtolayer(O,C.value(O,def.tolayer),'POS',G.artifactliteral(O,def))
 		}
 		if (def.condition){
 			ret += '} '

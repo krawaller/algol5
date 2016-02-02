@@ -6,11 +6,13 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "jasmine": "^2.4.1",
+    "js-beautify": "^1.6.2",
     "lodash": "^3.10.1",
     "sinon": "^1.17.2",
     "webpack": "^1.12.11"
   },
   "scripts": {
-    "test": "babel-node dev/test/run.js"
+    "test": "babel-node dev/test/run.js",
+    "play": "babel-node dev/play.js"
   }
 }

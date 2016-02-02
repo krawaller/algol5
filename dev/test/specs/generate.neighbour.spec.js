@@ -57,9 +57,27 @@ describe('the neighbour funcs',()=>{
         }
     });
     test(G.afterneighbourlook, 'the afterneighbourlook func', {
-        'for vanilla look': {
+        'for vanilla look when we dont care about count': {
             scope: {
-                foundneighbours: ['foo','bar']
+                foundneighbours: ['foo','bar'],
+                NEIGHBOURCOUNT: 'dontmutateme'
+            },
+            mutations: {
+                NEIGHBOURCOUNT: 'dontmutateme'
+            }
+        },
+        'when we do care about total count': {
+            scope: {
+                foundneighbours: ['foo','bar'],
+            },
+            arg: {
+                draw: {
+                    all: {
+                        include: {
+                            outof: ['neighbourcount']
+                        }
+                    }
+                }
             },
             mutations: {
                 NEIGHBOURCOUNT: 2

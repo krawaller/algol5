@@ -173,7 +173,8 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 
 	afterneighbourlook: (O,def)=> {
 		let ret = ''
-		ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
+		if (def && C.contains(def.draw,['neighbourcount']) )
+			ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
 		return ret
 	},
 

@@ -196,7 +196,7 @@ describe('the generate funcs',()=>{
                 count: 'yes',
                 draw: { counted: { tolayer: 'counted', include: {nbr:['step'],sofar:['countsofar']} }}
             },
-            scope: {CURRENTCOUNT:'foo',POS:'sthelse',ARTIFACTS:{counted:{}},walkedsquares:['foo','bar'],WALKLENGTH:2,COUNT:{bar:'yep'},COUNTTRACK:['x','y']},
+            scope: {CURRENTCOUNT:'foo',POS:'sthelse',ARTIFACTS:{counted:{}},walkedsquares:['foo','bar'],WALKLENGTH:2,COUNT:{bar:'yep'},countedwalkpositions:['x','y']},
             mutations: {ARTIFACTS:{counted:{bar:{nbr:2,sofar:'y'}}}}
         }
     });
@@ -266,18 +266,18 @@ describe('the generate funcs',()=>{
         },
         'with count and nextpos not to be counted': {
             arg: {count:'YES'},
-            scope: {walkedsquares:['foo'],nextpos:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{},POS:'foo'},
-            mutations: {COUNTTRACK:['whatev',7],CURRENTCOUNT:7}
+            scope: {walkedsquares:['foo'],nextpos:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,COUNT:{},POS:'foo'},
+            mutations: {countedwalkpositions:['whatev',7],CURRENTCOUNT:7}
         },
         'with count and nextpos should be counted': {
             arg: {count:'YES'},
-            scope: {walkedsquares:['foo'],nextpos:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
-            mutations: {COUNTTRACK:['whatev',8],CURRENTCOUNT:8}
+            scope: {walkedsquares:['foo'],nextpos:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
+            mutations: {countedwalkpositions:['whatev',8],CURRENTCOUNT:8}
         },
         'with count and nextpos should be counted and we intend to draw': {
             arg: {count:'YES',draw:{counted:'sure'}},
-            scope: {COUNTED:['x'],walkedsquares:['foo'],nextpos:'bar',COUNTTRACK:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
-            mutations: {COUNTTRACK:['whatev',8],CURRENTCOUNT:8}
+            scope: {COUNTED:['x'],walkedsquares:['foo'],nextpos:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,COUNT:{bar:'yes'},POS:'foo'},
+            mutations: {countedwalkpositions:['whatev',8],CURRENTCOUNT:8}
         }
     });
     gentest(G.afterwalk, 'the afterwalk func', {
@@ -319,12 +319,12 @@ describe('the generate funcs',()=>{
         'with count': {
             arg: {count:['layer','somelayer']},
             scope: {ARTIFACTS:{somelayer:'L'},STARTPOS:'somepos'},
-            mutations: {COUNT:'L',COUNTTRACK: [], CURRENTCOUNT: 0}
+            mutations: {COUNT:'L',countedwalkpositions: [], CURRENTCOUNT: 0}
         },
         'with count and intent to draw counted': {
             arg: {count:['layer','somelayer'],draw:{counted:'yes'}},
             scope: {ARTIFACTS:{somelayer:'L'},STARTPOS:'somepos'},
-            mutations: {COUNT:'L',COUNTTRACK: [], CURRENTCOUNT: 0}
+            mutations: {COUNT:'L',countedwalkpositions: [], CURRENTCOUNT: 0}
         }
     });
 });

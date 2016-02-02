@@ -85,13 +85,13 @@ describe('the generate funcs',()=>{
         },
         'when out of steps': {
             arg: {steps:"yes"},
-            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',STEPS:{}},
+            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',allowedsteps:{}},
             expected: 'nomoresteps',
             mutations: {nextpos:'newpos'}
         },
         'when navigates blocks and has steps and not reaching max': {
             arg: {steps:"yes",blocks:"indeed",max:"yup"},
-            scope: {LENGTH:2,MAX:3,connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',STEPS:{'newpos':1},BLOCKS:{}},
+            scope: {LENGTH:2,MAX:3,connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',allowedsteps:{'newpos':1},BLOCKS:{}},
             expected: null,
             mutations: {nextpos:'newpos'}
         },
@@ -102,13 +102,13 @@ describe('the generate funcs',()=>{
         },
         'when steps run out and there is a block in the way': {
             arg: {blocks:"yes",steps:"indeed"},
-            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',BLOCKS:{newpos:1},STEPS:{}},
+            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',BLOCKS:{newpos:1},allowedsteps:{}},
             expected: 'nomoresteps',
             mutations: {nextpos:'newpos'}
         },
         'when steps run out and there is a block in the way and we prio blocks': {
             arg: {blocks:"yes",steps:"indeed",testblocksbeforesteps:true},
-            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',BLOCKS:{newpos:1},STEPS:{}},
+            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',BLOCKS:{newpos:1},allowedsteps:{}},
             expected: 'hitblock',
             mutations: {nextpos:'newpos'}
         },

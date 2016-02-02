@@ -309,7 +309,7 @@ describe('the generate funcs',()=>{
         'with steps': {
             arg: {steps:['layer','somelayer']},
             scope: {ARTIFACTS:{somelayer:'L'},STARTPOS:'somepos'},
-            mutations: {STEPS:'L'}
+            mutations: {allowedsteps:'L'}
         },
         'with blocks': {
             arg: {blocks:['layer','somelayer']},

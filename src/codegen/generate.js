@@ -271,7 +271,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 			ret += 'var POS = STARTPOS; '
 		}
 		if (def.steps){
-			ret += 'var STEPS = '+C.set(O,def.steps)+'; '
+			ret += 'var allowedsteps = '+C.set(O,def.steps)+'; '
 		}
 		if (def.blocks){
 			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
@@ -369,7 +369,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	// ------------ GENERAL STUFF -----------
 
 	// assumes connections, DIR, LENGTH, nextpos
-	// and if used BLOCKS, STEPS, MAX
+	// and if used BLOCKS, allowedsteps, MAX
 	stopreason: (O,def)=> {
 		def = def || {}
 		let ret = ''
@@ -384,7 +384,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 			ret += 'BLOCKS[nextpos] ? "hitblock" : '
 		}
 		if (def.steps){
-			ret += '!STEPS[nextpos] ? "nomoresteps" : '
+			ret += '!allowedsteps[nextpos] ? "nomoresteps" : '
 		}
 		if (def.blocks && !def.testblocksbeforesteps){
 			ret += 'BLOCKS[nextpos] ? "hitblock" : '

@@ -31,7 +31,7 @@ describe('the floater funcs',()=>{
 				LASTLEVEL: 'whatev',
 				TOTALREACHED: 2,
 				LENGTH: 3,
-				CONNECTIONS: {a1:{1:'a2'},b1:{1:'b2'},a2:{1:'a3'},a3:{},b2:{}}
+				connections: {a1:{1:'a2'},b1:{1:'b2'},a2:{1:'a3'},a3:{},b2:{}}
 			},
 			mutations: {
 				REACHED: {a2:3,b2:3,a3:4},
@@ -51,7 +51,7 @@ describe('the floater funcs',()=>{
 				LASTLEVEL: 'whatev',
 				TOTALREACHED: 2,
 				LENGTH: 3,
-				CONNECTIONS: {a1:{1:'a2'},b1:{1:'b2'}}
+				connections: {a1:{1:'a2'},b1:{1:'b2'}}
 			},
 			mutations: {
 				LASTLEVEL: 2,
@@ -73,7 +73,7 @@ describe('the floater funcs',()=>{
 				NEWREACHED: {},
 				REACHED: {foo:'bar'},
 				TOTALREACHED: 4,
-				CONNECTIONS: {a1:{1:'a2',3:'a3'}}
+				connections: {a1:{1:'a2',3:'a3'}}
 			},
 			mutations: {
 				REACHED: {foo:'bar',a2:3,a3:3},
@@ -92,7 +92,7 @@ describe('the floater funcs',()=>{
 				NEWREACHED: {},
 				REACHED: {foo:'bar'},
 				TOTALREACHED: 4,
-				CONNECTIONS: {a1:{1:'a2'}}
+				connections: {a1:{1:'a2'}}
 			},
 			mutations: {
 				REACHED: {foo:'bar',a2:3},
@@ -113,7 +113,7 @@ describe('the floater funcs',()=>{
     			NEWREACHED: {},
     			REACHED: {foo:'bar'},
     			TOTALREACHED: 4,
-    			CONNECTIONS: {a1:{1:'a2'}}
+    			connections: {a1:{1:'a2'}}
     		},
     		mutations: {
     			REACHED: {foo:'bar',a2:3},
@@ -133,7 +133,7 @@ describe('the floater funcs',()=>{
     			POS: 'a1',
     			NEWREACHED: {},
     			REACHED: {},
-    			CONNECTIONS: {a1:{1:'a2'}},
+    			connections: {a1:{1:'a2'}},
     			BLOCKSREACHED: {}
     		},
     		mutations: {

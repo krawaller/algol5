@@ -164,7 +164,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	findneighbourindir: (O,def)=> {
 		def = def || {}
 		let ret = ''
-		ret += 'var POS=CONNECTIONS[STARTPOS][DIR]; '
+		ret += 'var POS=connections[STARTPOS][DIR]; '
 		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
 		ret += 'NEIGHBOURS.push(POS); '
 		ret += '} '
@@ -215,7 +215,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		return ret
 	},
 	// wants full walkerdef. 
-	// assumes STARTPOS, CONNECTIONS
+	// assumes STARTPOS, connections
 	walkfromstart: (O,def)=> {
 		let ret = ''
 		if (def.dirs){
@@ -233,7 +233,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		return ret
 	},
 	// wants full walkerdef. 
-	// assumes STARTPOS, DIR, CONNECTIONS
+	// assumes STARTPOS, DIR, connections
 	walkindir: (O,def)=> {
 		let ret = ''
 		ret += G.prepwalkstart(O,def)
@@ -259,7 +259,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		}
 		if (def.startasstep){
 			ret += 'var POS = "faux"; '
-			ret += 'CONNECTIONS.faux[DIR]=STARTPOS; '
+			ret += 'connections.faux[DIR]=STARTPOS; '
 		} else {
 			ret += 'var POS = STARTPOS; '
 		}
@@ -359,7 +359,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 
 	// ------------ GENERAL STUFF -----------
 
-	// assumes CONNECTIONS, DIR, LENGTH, NEXTPOS
+	// assumes connections, DIR, LENGTH, NEXTPOS
 	// and if used BLOCKS, STEPS, MAX
 	stopreason: (O,def)=> {
 		def = def || {}
@@ -367,7 +367,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		if (def.max){
 			ret += 'LENGTH === MAX ? "reachedmax" : '
 		}
-		ret += '!(NEXTPOS=CONNECTIONS[POS][DIR]) ? "outofbounds" : '
+		ret += '!(NEXTPOS=connections[POS][DIR]) ? "outofbounds" : '
 		if (def.type==='floater'){
 			ret += 'REACHED[NEXTPOS] ? "alreadyreached" : '
 		}

@@ -17,7 +17,7 @@ describe('the generate funcs',()=>{
                 }
             },
             scope: {
-                CONNECTIONS: {p0:{1:'p1'},p1:{1:'p2'},p2:{},q0:{3:'q1'},q1:{}},
+                connections: {p0:{1:'p1'},p1:{1:'p2'},p2:{},q0:{3:'q1'},q1:{}},
                 ARTIFACTS: { steps:{}, starts: {q0:'yes',p0:'yes'} }
             },
             mutations: {
@@ -43,7 +43,7 @@ describe('the generate funcs',()=>{
                 }
             },
             scope: {
-                CONNECTIONS: {q0:{3:'q1'},q1:{}},
+                connections: {q0:{3:'q1'},q1:{}},
                 ARTIFACTS: { steps:{} }
             },
             mutations: {
@@ -64,7 +64,7 @@ describe('the generate funcs',()=>{
             },
             scope: {
                 STARTPOS: 'p0',
-                CONNECTIONS: {p0:{1:'p1',3:'q1'},p1:{1:'p2'},p2:{},q1:{}},
+                connections: {p0:{1:'p1',3:'q1'},p1:{1:'p2'},p2:{},q1:{}},
                 ARTIFACTS: { steps:{} }
             },
             mutations: {
@@ -89,7 +89,7 @@ describe('the generate funcs',()=>{
             },
             scope: {
                 STARTPOS: 'p0',
-                CONNECTIONS: {p0:{1:'p1',3:'q1'},p1:{1:'p2'},p2:{},q1:{}},
+                connections: {p0:{1:'p1',3:'q1'},p1:{1:'p2'},p2:{},q1:{}},
                 ARTIFACTS: { steps:{} }
             },
             mutations: {
@@ -113,7 +113,7 @@ describe('the generate funcs',()=>{
             scope: {
                 STARTPOS: 'p0',
                 DIR: 1,
-                CONNECTIONS: {p0:{1:'p1'},p1:{1:'p2'},p2:{1:'p3'},p3:{1:'p4'}},
+                connections: {p0:{1:'p1'},p1:{1:'p2'},p2:{1:'p3'},p3:{1:'p4'}},
                 ARTIFACTS: {
                     steps:{},
                     blocks:{},
@@ -244,8 +244,8 @@ describe('the generate funcs',()=>{
         },
         'with startasstep': {
             arg: {startasstep:true},
-            scope: {CONNECTIONS:{foo:'bar',faux:{baz:'bin'}},STARTPOS:'somepos',DIR:'somedir'},
-            mutations: {CONNECTIONS:{foo:'bar',faux:{baz:'bin',somedir:'somepos'}},POS:'faux'}
+            scope: {connections:{foo:'bar',faux:{baz:'bin'}},STARTPOS:'somepos',DIR:'somedir'},
+            mutations: {connections:{foo:'bar',faux:{baz:'bin',somedir:'somepos'}},POS:'faux'}
         },
         'with steps': {
             arg: {steps:['layer','somelayer']},

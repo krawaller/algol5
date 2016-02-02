@@ -72,7 +72,7 @@ describe('the neighbour funcs',()=>{
             scope: {
                 STARTPOS: 's0',
                 DIR: 2,
-                CONNECTIONS: {s0:{2:'s1'}},
+                connections: {s0:{2:'s1'}},
                 NEIGHBOURS: ['foo']
             },
             mutations: { NEIGHBOURS: ['foo','s1'], POS: 's1' }
@@ -82,7 +82,7 @@ describe('the neighbour funcs',()=>{
             scope: {
                 STARTPOS: 's0',
                 DIR: 2,
-                CONNECTIONS: {s0:{2:'somepos'}},
+                connections: {s0:{2:'somepos'}},
                 ARTIFACTS: {mylayer:{somepos:'yep'}},
                 NEIGHBOURS: []
             },
@@ -93,7 +93,7 @@ describe('the neighbour funcs',()=>{
             scope: {
                 STARTPOS: 's0',
                 DIR: 2,
-                CONNECTIONS: {s0:{2:'somepos'}},
+                connections: {s0:{2:'somepos'}},
                 ARTIFACTS: {mylayer:{}},
                 NEIGHBOURS: []
             },
@@ -105,7 +105,7 @@ describe('the neighbour funcs',()=>{
             arg: {dir:2},
             scope: {
                 STARTPOS: 's0',
-                CONNECTIONS: {s0:{2:'s1'}},
+                connections: {s0:{2:'s1'}},
                 NEIGHBOURS: ['foo']
             },
             mutations: { NEIGHBOURS: ['foo','s1'], POS: 's1', DIR: 2 }
@@ -114,7 +114,7 @@ describe('the neighbour funcs',()=>{
             arg: {dirs:[1,2]},
             scope: {
                 STARTPOS: 's0',
-                CONNECTIONS: {s0:{1:'s1',2:'s2'}},
+                connections: {s0:{1:'s1',2:'s2'}},
                 NEIGHBOURS: ['foo']
             },
             mutations: { NEIGHBOURS: ['foo','s1','s2']}
@@ -124,7 +124,7 @@ describe('the neighbour funcs',()=>{
         'with single start': {
             arg: {dir:2,start:'mymark'},
             scope: {
-                CONNECTIONS: {s0:{2:'s1'}},
+                connections: {s0:{2:'s1'}},
                 MARKS: {mymark:'s0'}
             },
             mutations: { NEIGHBOURS: ['s1'], STARTPOS: 's0' }
@@ -132,7 +132,7 @@ describe('the neighbour funcs',()=>{
         'with 2 starts': {
             arg: {dir:2,starts:'mylayer'},
             scope: {
-                CONNECTIONS: {s0:{2:'s1'},p0:{2:'p1'}},
+                connections: {s0:{2:'s1'},p0:{2:'p1'}},
                 ARTIFACTS: {mylayer:{s0:'yes',p0:'yes'}}
             },
             mutations: { NEIGHBOURS: ['s1','p1']}
@@ -149,7 +149,7 @@ describe('the neighbour funcs',()=>{
                 }
             },
             scope: {
-                CONNECTIONS: {s0:{2:'s1'}},
+                connections: {s0:{2:'s1'}},
                 MARKS: {mymark:'s0'},
                 ARTIFACTS: {starts:{},neighbours:{}}
             },

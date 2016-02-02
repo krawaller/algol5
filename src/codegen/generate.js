@@ -133,8 +133,8 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 			ret += G.findneighboursfromstart(O,def)
 		} else {
 			ret += 'var STARTPOS; '
-			ret += 'var STARTS='+C.set(O,def.starts)+'; '
-			ret += 'for(var STARTPOS in STARTS){'
+			ret += 'var neighbourstarts='+C.set(O,def.starts)+'; '
+			ret += 'for(var STARTPOS in neighbourstarts){'
 			ret += G.findneighboursfromstart(O,def)
 			ret += '} '
 		}
@@ -149,10 +149,10 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 			ret += G.findneighbourindir(O,def)
 		} else {
 			ret += 'var DIR; '
-			ret += 'var DIRS='+C.list(O,def.dirs)+'; '
-			ret += 'var nbrofdirs=DIRS.length; '
-			ret += 'for(var dirnbr=0;dirnbr<nbrofdirs;dirnbr++){'
-			ret += 'DIR=DIRS[dirnbr]; '
+			ret += 'var neighbourdirs='+C.list(O,def.dirs)+'; '
+			ret += 'var nbrofneighbourdirs=neighbourdirs.length; '
+			ret += 'for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){'
+			ret += 'DIR=neighbourdirs[dirnbr]; '
 			ret += G.findneighbourindir(O,def)
 			ret += '} '
 		}

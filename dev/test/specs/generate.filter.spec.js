@@ -52,7 +52,7 @@ describe('the filter funcs',()=>{
             scope: {
                 OBJ: {someprop:2},
                 POS: 'somepos',
-                TARGETLAYERNAME: 'mylayer',
+                targetlayername: 'mylayer',
                 ARTIFACTS: {mylayer:{}}
             },
             mutations: {ARTIFACTS:{mylayer:{somepos:{someprop:2}}}}
@@ -65,7 +65,7 @@ describe('the filter funcs',()=>{
             scope: {
                 OBJ: {someprop:2},
                 POS: 'somepos',
-                TARGETLAYERNAME: 'mylayer',
+                targetlayername: 'mylayer',
                 ARTIFACTS: {mylayer:{}}
             },
             mutations: {ARTIFACTS:{mylayer:{}}}

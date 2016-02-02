@@ -94,7 +94,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	// assumes SOURCELAYER, POS,
 	tryposition: (O,def)=> {
 		let ret = ''
-		ret += 'var TARGETLAYERNAME = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
+		ret += 'var targetlayername = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
 		ret += 'if (SOURCELAYER[POS]){'
 		ret += 'var OBJ = SOURCELAYER[POS]; '
 		ret += G.tryobj(O,def)
@@ -102,13 +102,13 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		return ret
 	},
 
-	// assumes POS, OBJ, TARGETLAYERNAME
+	// assumes POS, OBJ, targetlayername
 	tryobj: (O,def)=> { // TODO - core datatype for matcher?
 		let ret = ''
 		let conds = (def.condition ? [C.boolean(O,def.condition)] : [])
 		conds = conds.concat(_.map(def.matching,(test,key)=> C.prop(O,test,key) ))
 		ret += 'if (' + conds.join(' && ') + '){'
-		ret += G.addtolayer(O,'TARGETLAYERNAME','POS','OBJ')
+		ret += G.addtolayer(O,'targetlayername','POS','OBJ')
 		ret += '} '
 		return ret
 	},

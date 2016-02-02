@@ -9,7 +9,10 @@ let walkerdef = {
 	"blocks": "units",
 	"draw": {
 		"steps": {
-			"tolayer": "targets"
+			"tolayer": "targets",
+			"include": {
+				"nowat": ["step"]
+			}
 		},
 		"block": {
 			"tolayer": "intheway",
@@ -20,7 +23,8 @@ let walkerdef = {
 		"last": {
 			"tolayer": "endedupat",
 			"include": {
-				"foo": "bar"
+				"foo": "bar",
+				"at": ['step']
 			}
 		}
 	}

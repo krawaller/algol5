@@ -53,7 +53,6 @@ libtest('the static generate funcs',G, {
 describe('the generate funcs',()=>{
     gentest(G.applywalker, 'the applywalker func', {
         'for simple walk': {
-            options: {useswalkstep:true},
             arg: {
                 starts: ['layer','starts'],
                 dirs: [1,3,5],
@@ -80,7 +79,6 @@ describe('the generate funcs',()=>{
             }
         },
         'when just 1 start': {
-            options: {useswalkstep:true},
             arg: {
                 start: ['pos','q0'],
                 dirs: [1,3,5],
@@ -190,7 +188,6 @@ describe('the generate funcs',()=>{
             arg: {
                 draw: { steps: { tolayer: 'steps', include: {nbr:['step']} }}
             },
-            options: {useswalkstep:true},
             scope: {POS:'sthelse',ARTIFACTS:{steps:{}},walkedsquares:['foo','bar'],WALKLENGTH:2},
             mutations: {ARTIFACTS:{steps:{foo:{nbr:1},bar:{nbr:2}}}}
         },
@@ -199,7 +196,6 @@ describe('the generate funcs',()=>{
                 count: 'yes',
                 draw: { counted: { tolayer: 'counted', include: {nbr:['step'],sofar:['countsofar']} }}
             },
-            options: {useswalkstep:true},
             scope: {CURRENTCOUNT:'foo',POS:'sthelse',ARTIFACTS:{counted:{}},walkedsquares:['foo','bar'],WALKLENGTH:2,COUNT:{bar:'yep'},COUNTTRACK:['x','y']},
             mutations: {ARTIFACTS:{counted:{bar:{nbr:2,sofar:'y'}}}}
         }
@@ -225,7 +221,6 @@ describe('the generate funcs',()=>{
     });
     gentest(G.drawwalklast, 'the drawwalklast func', {
         'for vanilla walk': {
-            options: {useswalkstep:true},
             arg: {
                 draw: {
                     last: {

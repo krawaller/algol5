@@ -208,6 +208,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	},
 
 	applywalker: (O,def)=> {
+		O = Object.assign(G.decideWalkerOpts(def),O||{})
 		let ret = ''
 		if (def.starts){
 			ret += 'var walkstarts = '+C.set(O,def.starts)+'; '
@@ -319,10 +320,11 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	drawwalksteps: (O,def)=> { // TODO - only use STEP if we care!
 		let ret = ''
 		if (def.draw.steps || def.draw.all || def.draw.counted){
-			if (O && O.useswalkstep) ret += 'var STEP = 0; '
+			var usesstep = C.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
+			if (usesstep) ret += 'var STEP = 0; '
 			ret += 'for(var stepper=0;stepper<WALKLENGTH;stepper++){'
 			ret += 'POS=walkedsquares[stepper]; '
-			if (O && O.useswalkstep) ret += 'STEP++; '
+			if (usesstep) ret += 'STEP++; '
 			if (def.count){
 				ret += 'CURRENTCOUNT = COUNTTRACK[stepper]; '
 			}
@@ -353,11 +355,12 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		}
 		return ret
 	},
+	// wants full walkerdef. 
 	drawwalklast: (O,def)=> {
 		let ret = ''
 		if (def.draw.last){
 			ret += 'POS=walkedsquares[WALKLENGTH-1]; '
-			if (O && O.useswalkstep) ret += 'STEP=WALKLENGTH; '
+			if (C.contains(def.draw.last,['step'])) ret += 'STEP=WALKLENGTH; '
 			ret += G.performdraw(O,def.draw.last)
 		}
 		return ret

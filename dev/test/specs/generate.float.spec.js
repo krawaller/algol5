@@ -2,8 +2,21 @@ import test from '../gentester'
 import lib from '../../../src/codegen/'
 
 let G = lib.G
-/*
+
 describe('the floater funcs',()=>{
+	test(G.stopreason,'the stopreason func',{
+		'should fail if already reached': {
+			arg: {type:'floater'},
+			scope: {
+				REACHED: {'bar':5},
+				POS: 'foo',
+				DIR: 1,
+				connections: {foo:{1:'bar'}},
+				nextpos: ''
+			},
+			expected: 'alreadyreached'
+		}
+	})
 	test(G.prepfloatfromstart, 'the prepfloatfromstart func', {
 		'for simpel setup': {
 			scope: {
@@ -13,7 +26,7 @@ describe('the floater funcs',()=>{
 				FLOATFROM: {start:1},
 				TOTALREACHED: 0,
 				LASTLEVEL: 0,
-				NEWLYREACHED: {},
+				NEWREACHED: {},
 				REACHED: {},
 				LENGTH: 1
 			}
@@ -143,4 +156,3 @@ describe('the floater funcs',()=>{
     	}
     });
 });
-*/

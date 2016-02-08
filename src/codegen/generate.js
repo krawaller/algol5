@@ -15,7 +15,7 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		let ret = ''
 		ret += 'var TOTALREACHED = 0; '
 		ret += 'var LASTLEVEL = 0; '
-		ret += 'var NEWLYREACHED = {}; '
+		ret += 'var NEWREACHED = {}; '
 		ret += 'var REACHED = {}; '
 		ret += 'var FLOATFROM = {}; '
 		ret += 'var LENGTH = 1; '

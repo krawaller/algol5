@@ -238,8 +238,12 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 	walkindir: (O,def)=> {
 		let ret = ''
 		ret += G.prepwalkstart(O,def)
+		if (def.max)
+			ret += 'var LENGTH=0; '
 		ret += 'while(!(STOPREASON='+G.stopreason(O,def)+')){'
 		ret += G.takewalkstep(O,def)
+		if (def.max)
+			ret += 'LENGTH++; '
 		ret += '}'
 		ret += G.afterwalk(O,def)
 		ret += G.drawwalkblock(O,def)
@@ -316,11 +320,11 @@ we have a positionset in FLOATFROM and NEWREACHED, after we're done we set NEWRE
 		if (def.draw.steps || def.draw.all || def.draw.counted){
 			var usesstep = C.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
 			if (usesstep) ret += 'var STEP = 0; '
-			ret += 'for(var stepper=0;stepper<WALKLENGTH;stepper++){'
-			ret += 'POS=walkedsquares[stepper]; '
+			ret += 'for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){'
+			ret += 'POS=walkedsquares[walkstepper]; '
 			if (usesstep) ret += 'STEP++; '
 			if (def.count){
-				ret += 'CURRENTCOUNT = countedwalkpositions[stepper]; '
+				ret += 'CURRENTCOUNT = countedwalkpositions[walkstepper]; '
 			}
 			if (def.draw.steps){
 				ret += G.performdraw(O,def.draw.steps)

@@ -9,24 +9,24 @@ const G = {
 		let ret = ''
 		ret += 'var filtersourcelayer = '+C.layerref(O,def.layer)+'; '
 		ret += 'for (var POS in filtersourcelayer){'
-		ret += G.tryposition(O,def)
+		ret += G.filterposition(O,def)
 		ret += '}'
 		return ret
 	},
 
 	// assumes filtersourcelayer, POS,
-	tryposition: (O,def)=> {
+	filterposition: (O,def)=> {
 		let ret = ''
 		ret += 'var filtertargetlayername = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
 		ret += 'if (filtersourcelayer[POS]){'
 		ret += 'var OBJ = filtersourcelayer[POS]; '
-		ret += G.tryobj(O,def)
+		ret += G.filterobject(O,def)
 		ret += '} '
 		return ret
 	},
 
 	// assumes POS, OBJ, filtertargetlayername
-	tryobj: (O,def)=> { // TODO - core datatype for matcher?
+	filterobject: (O,def)=> { // TODO - core datatype for matcher?
 		let ret = ''
 		let conds = (def.condition ? [C.boolean(O,def.condition)] : [])
 		conds = conds.concat(_.map(def.matching,(test,key)=> C.prop(O,test,key) ))

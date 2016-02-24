@@ -192,9 +192,14 @@ const T = {
     // layername is a plain string
     layerref: (O,layername)=> {
         var bag = O && O.layermappings && O.layermappings[layername] || "ARTIFACTS"
+        // special case for units
         if (layername==='units'){
             bag = "UNITLAYERS"
             layername = "all"
+        }
+        // special case for board layers
+        if ({board:1,light:1,dark:1}[layername]){
+            bag = "BOARD"
         }
         return "("+bag+"."+layername+"||{})";
     },

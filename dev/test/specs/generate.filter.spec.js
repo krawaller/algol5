@@ -26,7 +26,7 @@ describe('the filter funcs',()=>{
             }
         }
     });
-    test(G.tryposition, 'the tryposition func', {
+    test(G.filterposition, 'the filterposition func', {
         'when object matches': {
             arg: {
                 matching:{foo:['is','bar']},
@@ -46,7 +46,7 @@ describe('the filter funcs',()=>{
             }
         }
     });
-    test(G.tryobj, 'the tryobj func', {
+    test(G.filterobject, 'the filterobject func', {
         'when simple matching and evals to true': {
             arg: {matching:{someprop:['is',['sum',1,1]],otherprop:['isnt',7]}},
             scope: {

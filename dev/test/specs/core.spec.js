@@ -320,6 +320,27 @@ describe('the core funcs',()=>{
                 UNITLAYERS: {all:'FOO'}
             },
             expected: 'FOO'
-        }
+        },
+        'when we want special case "board"': {
+            arg: 'board',
+            scope: {
+                BOARD: {board:'FOO'}
+            },
+            expected: 'FOO'
+        },
+        'when we want special case "light"': {
+            arg: 'light',
+            scope: {
+                BOARD: {light:'FOO'}
+            },
+            expected: 'FOO'
+        },
+        'when we want special case "dark"': {
+            arg: 'dark',
+            scope: {
+                BOARD: {dark:'FOO'}
+            },
+            expected: 'FOO'
+        },
     });
 });

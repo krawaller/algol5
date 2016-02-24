@@ -96,7 +96,7 @@ const G = {
 
 	afterneighbourlook: (O,def)=> {
 		let ret = ''
-		if (def && C.contains(def.draw,['neighbourcount']) )
+		//if (def && C.contains(def.draw,['neighbourcount']) ) // no, because used in forloop
 			ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
 		return ret
 	},
@@ -115,8 +115,8 @@ const G = {
 		def = def || {}
 		let ret = ''
 		if (def.draw && def.draw.neighbours){
-			ret += 'for(var neighbournbr in foundneighbours){'
-			ret += 'POS=[foundneighbours[neighbournbr]]; '
+			ret += 'for(var neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){'
+			ret += 'POS=foundneighbours[neighbournbr]; '
 			ret += G.performdraw(O,def.draw.neighbours)
 			ret += '} '
 		}

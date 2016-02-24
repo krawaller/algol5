@@ -57,7 +57,9 @@ const boolTypes = withUniversals("boolean",{
     isempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length===0",
     notempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length!==0",
     and: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" && ") + ")",
-    or: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" || ") + ")"
+    or: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" || ") + ")",
+    true: (O)=> "true",
+    false: (O)=> "false"
 })
 
 const positionTypes = withUniversals("position",{

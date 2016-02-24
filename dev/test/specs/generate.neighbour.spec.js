@@ -6,16 +6,16 @@ let G = lib.G
 describe('the neighbour funcs',()=>{
     test(G.drawneighbourtargets, 'the drawneighbourtargets func', {
         'when we want to draw': {
-            arg: {draw:{neighbours:{tolayer:'somelayer',include:{found:['neighbourcount']}}}},
+            arg: {draw:{neighbours:{tolayer:'somelayer',include:{found:['neighbourcount'],at:['pos',['target']]}}}},
             scope: {
                 POS: 'sthelse',
                 STARTPOS: 'start',
                 foundneighbours: ['foo','bar'],
-                NEIGHBOURCOUNT: 3,
+                NEIGHBOURCOUNT: 2,
                 ARTIFACTS: {somelayer:{}}
             },
             mutations: {
-                ARTIFACTS: {somelayer:{foo:{found:3},bar:{found:3}}}
+                ARTIFACTS: {somelayer:{foo:{found:2,at:'foo'},bar:{found:2,at:'bar'}}}
             }
         },
         'when we dont care': {
@@ -57,15 +57,6 @@ describe('the neighbour funcs',()=>{
         }
     });
     test(G.afterneighbourlook, 'the afterneighbourlook func', {
-        'for vanilla look when we dont care about count': {
-            scope: {
-                foundneighbours: ['foo','bar'],
-                NEIGHBOURCOUNT: 'dontmutateme'
-            },
-            mutations: {
-                NEIGHBOURCOUNT: 'dontmutateme'
-            }
-        },
         'when we do care about total count': {
             scope: {
                 foundneighbours: ['foo','bar'],

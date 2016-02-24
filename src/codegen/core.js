@@ -40,9 +40,8 @@ const valueTypes = withUniversals("value",{
     neighbourcount: (O)=> "NEIGHBOURCOUNT",
     step: (O)=> "STEP",
     read: (O,[layer,pos,prop])=> {
-        var ret = "("+T.set(O,layer)+"["+T.position(O,pos)+"] && "+T.set(O,layer)+"["+T.position(O,pos)+"]["+T.value(O,prop)+"])"
-        //console.log("READ",ret)
-        return ret;
+        var pos = "("+T.set(O,layer)+"["+T.position(O,pos)+"]||{})";
+        return pos+"["+T.value(O,prop)+"]";
     }
 })
 
@@ -70,8 +69,7 @@ const positionTypes = withUniversals("position",{
 
 const setTypes = withUniversals("set",{
     layer: (O,def)=> {
-        //console.log("LAYER:",def)
-        return T.layerref(O,def[0]); // "(ARTIFACTS["+T.value(O,layername)+"] || {})", // TODO - vary!
+        return T.layerref(O,def[0]);
     },
     single: (O,[pos])=> `
         (function(){
@@ -192,14 +190,13 @@ const T = {
     // layername is a plain string
     layerref: (O,layername)=> {
         var bag = O && O.layermappings && O.layermappings[layername] || "ARTIFACTS"
-        // special case for units
+        // special case for units all
         if (layername==='units'){
-            bag = "UNITLAYERS"
-            layername = "all"
+            return "UNITLAYERS.all"
         }
         // special case for board layers
         if ({board:1,light:1,dark:1}[layername]){
-            bag = "BOARD"
+            return "BOARD."+layername
         }
         return "("+bag+"."+layername+"||{})";
     },

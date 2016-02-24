@@ -11,7 +11,7 @@ let walkerdef = {
 		"last": {
 			"tolayer": "endedupat",
 			"include": {
-				"foo": "bar"
+				"foo": ["read","board",["mark","mymark"],"mupp"]
 			}
 		}
 	}

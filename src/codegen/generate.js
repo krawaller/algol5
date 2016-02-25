@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import C from "./core"
+import U from "../utils"
 
 const G = {
 
@@ -96,7 +97,7 @@ const G = {
 
 	afterneighbourlook: (O,def)=> {
 		let ret = ''
-		//if (def && C.contains(def.draw,['neighbourcount']) ) // no, because used in forloop
+		//if (def && U.contains(def.draw,['neighbourcount']) ) // no, because used in forloop
 			ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
 		return ret
 	},
@@ -241,7 +242,7 @@ const G = {
 	drawwalksteps: (O,def)=> { // TODO - only use STEP if we care!
 		let ret = ''
 		if (def.draw.steps || def.draw.all || def.draw.counted){
-			var usesstep = C.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
+			var usesstep = U.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
 			if (usesstep) ret += 'var STEP = 0; '
 			ret += 'for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){'
 			ret += 'POS=walkedsquares[walkstepper]; '
@@ -281,7 +282,7 @@ const G = {
 		let ret = ''
 		if (def.draw.last){
 			ret += 'POS=walkedsquares[WALKLENGTH-1]; '
-			if (C.contains(def.draw.last,['step'])) ret += 'STEP=WALKLENGTH; '
+			if (U.contains(def.draw.last,['step'])) ret += 'STEP=WALKLENGTH; '
 			ret += G.performdraw(O,def.draw.last)
 		}
 		return ret

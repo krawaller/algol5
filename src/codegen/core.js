@@ -201,16 +201,6 @@ const T = {
             return "BOARD."+layername
         }
         return "("+bag+"."+layername+"||{})";
-    },
-
-    contains: (haystack,needle)=> {
-        if (_.isEqual(needle,haystack)){
-            return true
-        } else if (_.isArray(haystack) || _.isObject(haystack)){
-            return _.some(haystack,child=> T.contains(child,needle))
-        } else {
-            return false
-        }
     }
 }
 

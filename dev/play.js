@@ -16,7 +16,6 @@ let walkerdef = {
 		}
 	}
 };
-
 let walkercode = lib.G.applywalker({player:1},walkerdef)
 
 let neighbourdef = {
@@ -28,13 +27,13 @@ let neighbourdef = {
 		"neighbours": {
 			"tolayer": ["ifelse",["true"],"dorklayer","borklayer"],
 			"include": {
-				"found": ["neighbourcount"]
+				"found": ["neighbourcount"],
+				"owner": ["read","board",["mark","mymark"],"fjupp"]
 			}
 		}
 	}
 }
-
-let neighbourcode = lib.G.applyneighbours({player:1},neighbourdef)
+let neighbourcode = lib.G.applyneighbours({player:2},neighbourdef)
 
 console.log(js_beautify(walkercode,{indent_size:2}))
 

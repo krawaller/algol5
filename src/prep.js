@@ -62,19 +62,24 @@ const P = {
 			withinbounds =  newx>0 && newx<=board.width && newy>0 && newy<=board.height;
 		return withinbounds && P.coordstopos({x:newx,y:newy})
 	},
-	/*deduceInitialUnitData: (setup)=> {
+	deduceInitialUnitData: (setup)=> {
 		var id = 1;
-		return _.reduce(setup,(mem,def,group)=>{
-			return _.reduce( P.addfromdef({},'units',def), (mem,entity)=> {
-				let newid = 'unit'+(id++)
-				mem[newid] = Object.assign(entity,{
-					id: newid,
-
-				}
-				return mem
+		return _.reduce(setup,(mem,defsbyplr,group)=> {
+			return _.reduce(defsbyplr,(mem,entitydefs,plr)=> {
+				return _.reduce( entitydefs, (mem,entitydef)=> {
+					P.convertToEntities(entitydef).forEach(e=> {
+						let newid = 'unit'+(id++)
+						mem[newid] = Object.assign(e,{
+							id: newid,
+							group: group,
+							owner: parseInt(plr)
+						})
+					})
+					return mem
+				},mem)
 			},mem)
 		},{})
-	},*/
+	},
 
 	convertToEntities: (def)=> {
 		switch(def[0]){

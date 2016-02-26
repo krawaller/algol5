@@ -2,23 +2,23 @@ import P from '../../../src/prep'
 import test from '../libtester'
 
 test("the prep funcs",P,{
-	/*"deduceInitialUnitData(setup)": {
+	"deduceInitialUnitData(setup)": {
 		"it deduces unitData correctly": {
 			setup: {
 				muppets: {
 					1: ["c1"],
-					2: ["rect","a1","b2"]
+					2: [["rect","a1","b2"]]
 				}
 			},
 			expected: {
 				unit1: {id:"unit1",owner:1,pos:"c1",group:"muppets"},
 				unit2: {id:"unit2",owner:2,pos:"a1",group:"muppets"},
-				unit3: {id:"unit3",owner:2,pos:"a2",group:"muppets"},
-				unit4: {id:"unit4",owner:2,pos:"b1",group:"muppets"},
+				unit3: {id:"unit3",owner:2,pos:"b1",group:"muppets"},
+				unit4: {id:"unit4",owner:2,pos:"a2",group:"muppets"},
 				unit5: {id:"unit5",owner:2,pos:"b2",group:"muppets"}
 			}
 		}
-	},*/
+	},
 	"deduceUnitLayers(game)": {
 		"it deduces all layers correctly": {
 			game: {

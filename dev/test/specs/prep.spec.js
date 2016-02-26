@@ -2,6 +2,91 @@ import P from '../../../src/prep'
 import test from '../libtester'
 
 test("the prep funcs",P,{
+	"deduceUnitLayers(game)": {
+		"it deduces all layers correctly": {
+			game: {
+				setup: {
+					kings: 'FOO',
+					queens: 'BAR'
+				},
+				commands: {
+					fart: {
+						applyEffects: [
+							['spawn','somepos',['playercase','jacks','aces']]
+						]
+					}
+				}
+			},
+			expected: [
+				'aces',
+				'deadaces', 'deadjacks', 'deadkings', 'deadqueens',
+				'jacks', 'kings',
+				'myaces',
+				'mydeadaces','mydeadjacks','mydeadkings','mydeadqueens',
+				'myjacks','mykings','myqueens',
+				'neutralaces',
+				'neutraldeadaces','neutraldeadjacks','neutraldeadkings','neutraldeadqueens',
+				'neutraljacks','neutralkings','neutralqueens',
+				'oppaces',
+				'oppdeadaces','oppdeadjacks','oppdeadkings','oppdeadqueens',
+				'oppjacks','oppkings','oppqueens',
+				'queens'
+			].sort()
+		}
+	},
+	"deduceDynamicGroups(data)": {
+		"it finds spawn groups": {
+			data: ['BOGUS',['spawn','somepos',['playercase','group1','group2']]],
+			expected: ['group1','group2']
+		},
+		"it finds setid groups": {
+			data: {
+				FOO:'BAR',
+				EASY: ['setid','someid','group','group1'],
+				HARD: ['setid','someid',['playercase','health','group'],['ifelse','somebool','group2','group3']],
+				BOGUS: ['setid','someid',['playercase','what','ever'],['ifelse','somebool','alt3','alt4']]
+			},
+			expected: ['group1','group2','group3']
+		},
+		"it finds setat groups": {
+			data: {
+				FOO:'BAR',
+				EASY: ['setat','someid','group','group1'],
+				HARD: ['setat','someid',['playercase','health','group'],['ifelse','somebool','group2','group3']],
+				BOGUS: ['setat','someid',['playercase','what','ever'],['ifelse','somebool','alt3','alt4']]
+			},
+			expected: ['group1','group2','group3']
+		},
+	},
+	"deduceArtifactLayers(generators)": {
+		"for normal game": {
+			generators: {
+				foo: {
+					draw: {
+						boo: { tolayer: "alt1" },
+						hoo: { tolayer: ["playercase","alt2","alt3"] }
+					}
+				},
+				woo: {
+					draw: {
+						roo: { tolayer: ["ifelse","somecond","alt4","alt3"] }
+					}
+				}
+			},
+			expected: ["alt1","alt2","alt3","alt4"]
+		},
+		"when includes with owner": {
+			generators: {
+				foo: {
+					draw: {
+						boo: { tolayer: "alt1", include: { owner: 'someone'} },
+						hoo: { tolayer: ["playercase","alt2","alt3"] }
+					}
+				}
+			},
+			expected: ["alt1","myalt1","oppalt1","neutralalt1","alt2","alt3"].sort()
+		}
+	},
 	"addfromdef(world,layers,def)": {
 		"for straight pos with two target layers": {
 			world: {layer1:{},layer2:{a1:'foo'}},

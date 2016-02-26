@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import U from './utils'
 
 const colnametonumber = _.reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split(""),(mem,char,n)=> {
 	mem[char] = n+1;
@@ -94,7 +95,39 @@ const P = {
 			world[layer][obj.pos] = obj; // (world[layer][obj.pos]||[]).concat(obj)
 		})
 		return world
-	} 
+	},
+
+	/*
+	Parses gamedef to find all possible unit layers by looking at setup and dynamically created units
+	*/
+	deduceUnitLayers: (gamedef)=> _.uniq(Object.keys(gamedef.setup || {}).concat(P.deduceDynamicGroups(gamedef.commands))).reduce(
+		(list,g) => list.concat([g,"my"+g,"opp"+g,"neutral"+g,"mydead"+g,"oppdead"+g,"neutraldead"+g,"dead"+g]), []
+	).sort(),
+
+	/*
+	Parses command data to find all potential groups created by commands like spawn
+	Used in deduceUnitLayers
+	*/
+	deduceDynamicGroups: (data)=> (
+		data[0] === "spawn" ? U.possibilities(data[2])
+		: data[0] === "setat" && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
+		: data[0] === "setid" && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
+		: _.isArray(data) || _.isObject(data) ? _.reduce(data,(mem,def)=>mem.concat(P.deduceDynamicGroups(def)),[])
+		: []
+	).sort(),
+
+	/*
+	Calculates all possible artifact layers used in the game
+	*/
+	deduceArtifactLayers: (generators)=>
+		_.uniq(_.reduce(generators,(mem,gendef)=>{
+			return _.reduce(gendef.draw,(m,drawdef)=>{
+				return _.reduce(U.possibilities(drawdef.tolayer),(m,l)=>{
+					return m.concat( drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : l )
+				},m)
+			},mem)
+		},[])).sort()
+
 }
 
 export default P

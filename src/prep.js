@@ -110,8 +110,7 @@ const P = {
 	*/
 	deduceDynamicGroups: (data)=> (
 		data[0] === "spawn" ? U.possibilities(data[2])
-		: data[0] === "setat" && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
-		: data[0] === "setid" && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
+		: {setat:1,setid:1,setin:1}[data[0]] && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
 		: _.isArray(data) || _.isObject(data) ? _.reduce(data,(mem,def)=>mem.concat(P.deduceDynamicGroups(def)),[])
 		: []
 	).sort(),

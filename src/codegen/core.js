@@ -19,7 +19,7 @@ const listTypes = withUniversals("list",{
 
 const idTypes = withUniversals("id",{
     idat: (O,[pos])=> "(UNITLAYERS.all["+T.position(O,pos)+"] || [{}]).id",
-    loopid: (O)=> "CONTEXT.loopid",
+    loopid: (O)=> "LOOPID",
     id: (O,id)=> T.value(O.id)
 })
 
@@ -185,6 +185,10 @@ const T = {
             return valueTypes.value(O,[def]);
         } else if (valueTypes[def[0]]) {
             return valueTypes[def[0]](O,_.tail(def));
+        } else if (idTypes[def[0]]) {
+            return idTypes[def[0]](O,_.tail(def));
+        } else if (positionTypes[def[0]]) {
+            return positionTypes[def[0]](O,_.tail(def));
         } else {
             throw "Unknown value def: "+def;
         }
@@ -200,7 +204,7 @@ const T = {
         if ({board:1,light:1,dark:1}[layername]){
             return "BOARD."+layername
         }
-        return "("+bag+"."+layername+"||{})";
+        return bag+"."+layername; //"("+bag+"."+layername+"||{})";
     }
 }
 

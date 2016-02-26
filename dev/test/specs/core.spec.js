@@ -100,11 +100,6 @@ describe('the core funcs',()=>{
             scope: {ARTIFACTS:{mylayer:{}}},
             expected: false
         },
-        'the anyat cmnd when pointing to nonexisting layer': {
-            arg: ['anyat','mylayer',['pos','a1']],
-            scope: {ARTIFACTS:{}},
-            expected: false
-        },
         'the noneat cmnd when pointing to layer with that pos': {
             arg: ['noneat','mylayer',['pos','a1']],
             scope: {ARTIFACTS:{mylayer:{a1:[]}}},
@@ -113,11 +108,6 @@ describe('the core funcs',()=>{
         'the noneat cmnd when pointing to layer without pos': {
             arg: ['noneat','mylayer',['pos','a1']],
             scope: {ARTIFACTS:{mylayer:{}}},
-            expected: true
-        },
-        'the noneat cmnd when pointing to nonexisting layer': {
-            arg: ['noneat','mylayer',['pos','a1']],
-            scope: {ARTIFACTS:{}},
             expected: true
         },
         'the same cmnd when same': {
@@ -290,6 +280,13 @@ describe('the core funcs',()=>{
             scope: {
                 MARKS: {mymark:'pos'},
                 UNITLAYERS: {all:{pos:{id:7}}}
+            },
+            expected: 7
+        },
+        'for loopid cmnd': {
+            arg: ['loopid'],
+            scope: {
+                LOOPID: 7
             },
             expected: 7
         }

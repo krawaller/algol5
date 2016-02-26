@@ -57,6 +57,15 @@ test("the prep funcs",P,{
 			},
 			expected: ['group1','group2','group3']
 		},
+		"it finds setin groups": {
+			data: {
+				FOO:'BAR',
+				EASY: ['setin','someset','group','group1'],
+				HARD: ['setin','someset',['playercase','health','group'],['ifelse','somebool','group2','group3']],
+				BOGUS: ['setin','someset',['playercase','what','ever'],['ifelse','somebool','alt3','alt4']]
+			},
+			expected: ['group1','group2','group3']
+		},
 	},
 	"deduceArtifactLayers(generators)": {
 		"for normal game": {

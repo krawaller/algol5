@@ -4,6 +4,89 @@ import lib from '../../../src/codegen/'
 let E = lib.E
 
 describe("The effect commands",()=>{
+    test(E.killin,'the killin func',{
+        'for normal call': {
+            arg: ['layer','somelayer'],
+            scope: {
+                ARTIFACTS: { somelayer: {x1:"FOO",x2:"BAR",x3:"BAZ"} },
+                UNITLAYERS: { all: {x1:{id:'unit1'},x3:{id:'unit3'}} },
+                UNITDATA: { unit1: {}, unit2: {}, unit3: {} }
+            },
+            mutations: {
+                UNITDATA: { unit1: {dead:true}, unit2: {}, unit3: {dead:true} }
+            }
+        }
+    });
+    test(E.setin,'the setin func',{
+        'for normal call': {
+            args: [ ['layer','somelayer'], 'prop', ['sum',['loopid'],['target']] ],
+            scope: {
+                ARTIFACTS: { somelayer: {x1:"FOO",x2:"BAR",x3:"BAZ"} },
+                UNITLAYERS: { all: {x1:{id:'unit1'},x3:{id:'unit3'}} },
+                UNITDATA: { unit1: {}, unit2: {}, unit3: {} }
+            },
+            mutations: {
+                UNITDATA: { unit1: {prop:'unit1x1'}, unit2: {}, unit3: {prop:'unit3x3'} }
+            }
+        }
+    });
+    test(E.forposin,'the forposin func',{
+        'for normal call': {
+            args: [ ['layer','somelayer'], ['killat',['target']] ],
+            scope: {
+                ARTIFACTS: { somelayer: {x1:"FOO",x2:"BAR",x3:"BAZ"} },
+                UNITLAYERS: {
+                    all: {x1:{id:'unit1'},x3:{id:'unit3'}}
+                },
+                UNITDATA: {
+                    unit1: {}, unit2: {}, unit3: {}
+                }
+            },
+            mutations: {
+                UNITDATA: {
+                    unit1: {dead:true}, unit2: {}, unit3: {dead:true}
+                }
+            }
+        }
+    });
+    test(E.foridin,'the foridin func',{
+        'with non-unit area': {
+            args: [ ['layer','somelayer'], ['killid',['loopid']] ],
+            scope: {
+                ARTIFACTS: { somelayer: {x1:"FOO",x2:"BAR",x3:"BAZ"} },
+                UNITLAYERS: {
+                    all: {x1:{id:'unit1'},x3:{id:'unit3'}}
+                },
+                UNITDATA: {
+                    unit1: {}, unit2: {}, unit3: {}
+                }
+            },
+            mutations: {
+                UNITDATA: {
+                    unit1: {dead:true}, unit2: {}, unit3: {dead:true}
+                }
+            }
+        },
+        'with unit area': {
+            options: {
+                layermappings: { 'myclowns': 'UNITLAYERS' }
+            },
+            args: [ ['layer','myclowns'], ['killid',['loopid']] ],
+            scope: {
+                UNITLAYERS: {
+                    myclowns: {x1:{id:'unit1'},x3:{id:'unit3'}}
+                },
+                UNITDATA: {
+                    unit1: {}, unit2: {}, unit3: {}
+                }
+            },
+            mutations: {
+                UNITDATA: {
+                    unit1: {dead:true}, unit2: {}, unit3: {dead:true}
+                }
+            }
+        },
+    });
     test(E.swap,'the swap func',{
         'for straight swap': {
             args: [['mark','1st'],['mark','2nd']],
@@ -16,7 +99,7 @@ describe("The effect commands",()=>{
                 UNITDATA: {unit1:{pos:'b'},unit2:{pos:'a'}}
             }
         }
-    })
+    });
     test(E.killid,'the killid func',{
         'for straight call': {
             args: [42],

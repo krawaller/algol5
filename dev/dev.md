@@ -1,3 +1,8 @@
+ 
+
+-----------
+
+
 
 Highlevel TODO
 
@@ -6,7 +11,7 @@ Highlevel TODO
  [ ] Add offset generator
      * simple slight hack to neighbour
      * we're already adding offsets to boardconnections
-
+ [ ] Add foridin and forposin to effect
 
 
 

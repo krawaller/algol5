@@ -19,16 +19,12 @@ test("the prep funcs",P,{
 			},
 			expected: [
 				'aces',
-				'deadaces', 'deadjacks', 'deadkings', 'deadqueens',
 				'jacks', 'kings',
 				'myaces',
-				'mydeadaces','mydeadjacks','mydeadkings','mydeadqueens',
 				'myjacks','mykings','myqueens',
 				'neutralaces',
-				'neutraldeadaces','neutraldeadjacks','neutraldeadkings','neutraldeadqueens',
 				'neutraljacks','neutralkings','neutralqueens',
 				'oppaces',
-				'oppdeadaces','oppdeadjacks','oppdeadkings','oppdeadqueens',
 				'oppjacks','oppkings','oppqueens',
 				'queens'
 			].sort()

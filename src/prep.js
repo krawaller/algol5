@@ -101,7 +101,7 @@ const P = {
 	Parses gamedef to find all possible unit layers by looking at setup and dynamically created units
 	*/
 	deduceUnitLayers: (gamedef)=> _.uniq(Object.keys(gamedef.setup || {}).concat(P.deduceDynamicGroups(gamedef.commands))).reduce(
-		(list,g) => list.concat([g,"my"+g,"opp"+g,"neutral"+g,"mydead"+g,"oppdead"+g,"neutraldead"+g,"dead"+g]), []
+		(list,g) => list.concat([g,"my"+g,"opp"+g,"neutral"+g]), []
 	).sort(),
 
 	/*

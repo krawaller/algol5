@@ -13,7 +13,7 @@ describe("The effect commands",()=>{
                 UNITDATA: { unit1: {}, unit2: {}, unit3: {} }
             },
             mutations: {
-                UNITDATA: { unit1: {dead:true}, unit2: {}, unit3: {dead:true} }
+                UNITDATA: { unit2: {} }
             }
         }
     });
@@ -44,7 +44,7 @@ describe("The effect commands",()=>{
             },
             mutations: {
                 UNITDATA: {
-                    unit1: {dead:true}, unit2: {}, unit3: {dead:true}
+                    unit2: {}
                 }
             }
         }
@@ -63,7 +63,7 @@ describe("The effect commands",()=>{
             },
             mutations: {
                 UNITDATA: {
-                    unit1: {dead:true}, unit2: {}, unit3: {dead:true}
+                    unit2: {}
                 }
             }
         },
@@ -82,7 +82,7 @@ describe("The effect commands",()=>{
             },
             mutations: {
                 UNITDATA: {
-                    unit1: {dead:true}, unit2: {}, unit3: {dead:true}
+                    unit2: {}
                 }
             }
         },
@@ -102,9 +102,9 @@ describe("The effect commands",()=>{
     });
     test(E.killid,'the killid func',{
         'for straight call': {
-            args: [42],
-            scope: { UNITDATA: { 42:{name:'foo'} } },
-            mutations: { UNITDATA: { 42: {name:'foo',dead:true} } }
+            args: ['unit4'],
+            scope: { UNITDATA: { unit4:{name:'foo'}, someoneelse: 'FOO' } },
+            mutations: { UNITDATA: { someoneelse: 'FOO' } }
         }
     });
     test(E.killat,'the kill1at func',{
@@ -116,7 +116,7 @@ describe("The effect commands",()=>{
         'when someone is there': {
             args: [['mark','mymark']],
             scope: { UNITDATA: {7:{}}, UNITLAYERS: {all: {pos:{id:7}}}, 'MARKS': {mymark:'pos'}},
-            mutations: { UNITDATA: {7:{dead:true}} },
+            mutations: { UNITDATA: {} },
         }
     });
     test(E.moveid,'the moveid func',{
@@ -159,17 +159,17 @@ describe("The effect commands",()=>{
         'for just pos and group': {
             args: [['mark','mymark'],'fools'],
             options: {player:666},
-            scope: { UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'} },
-            mutations: { UNITDATA: {unit1:{}, unit2:{id:'unit2',group:'fools',owner:666,pos:'somepos'}} }
+            scope: { UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, nextunitid: 7 },
+            mutations: { UNITDATA: {unit1:{}, unit7:{id:'unit7',group:'fools',owner:666,pos:'somepos'}}, nextunitid: 8 }
         },
         'for pos, group, owner and prop obj': {
             args: [['mark','mymark'],['value','fools'],['value',7],{foo:['value','bar'],baz:['value','bin']}],
-            scope: {UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'} },
+            scope: {UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, nextunitid: 5},
             mutations: {
                 UNITDATA: {
                     unit1:{},
-                    unit2:{id:'unit2',group:'fools',owner:7,pos:'somepos',foo:'bar',baz:'bin'}},
-                MARKS: {mymark:'somepos'}
+                    unit5:{id:'unit5',group:'fools',owner:7,pos:'somepos',foo:'bar',baz:'bin'}},
+                nextunitid: 6
             },
         }
     });

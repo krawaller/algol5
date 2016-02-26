@@ -11,7 +11,16 @@ Highlevel TODO
  [ ] Add offset generator
      * simple slight hack to neighbour
      * we're already adding offsets to boardconnections
- [ ] Add foridin and forposin to effect
+ [d] Add foridin and forposin to effect
+ [ ] Delete `dead` groups? simplifies a lot!
+     * use a var if u must count or whatever!
+     * when kill, delete the unit entirely
+     * easier to copy units and default unit groups!
+     * speaking of, make unitgroups only use those that are actually used in battle! yeah?
+     * need spawn to use NEXTID
+     * maybe make an object:
+     	kings: [units,kings],
+     	queens: [units,]
 
 
 

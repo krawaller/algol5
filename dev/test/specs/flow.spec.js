@@ -7,7 +7,7 @@ describe("The flow commands",()=>{
     test(F.endgame,'the endgame func',{
         'when gamedef has no endgame at all': {
             arg: {},
-            mutations: { ending: undefined }
+            expected: undefined
         },
         'when no conditions are fulfilled': {
             arg: {
@@ -16,7 +16,7 @@ describe("The flow commands",()=>{
                     bar: { condition: ['false'] }
                 }
             },
-            mutations: { ending: undefined }
+            expected: undefined
         },
         'when a conditions is fulfilled': {
             options: {player:666},
@@ -26,7 +26,7 @@ describe("The flow commands",()=>{
                     foo: { condition: ['true'], who: ['currentplayer'] }
                 }
             },
-            mutations: { ending: ['foo',666] }
+            expected: ['foo',666]
         }
     });
 });

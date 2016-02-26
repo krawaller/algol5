@@ -29,4 +29,29 @@ describe("The flow commands",()=>{
             expected: ['foo',666]
         }
     });
+    test(F.preventendturn,'the preventendturn func',{
+        'when gamedef has no unless at all': {
+            arg: {},
+            expected: undefined
+        },
+        'when no conditions are fulfilled': {
+            arg: {
+                unless: {
+                    foo: ['false'],
+                    bar: ['false']
+                }
+            },
+            expected: undefined
+        },
+        'when a conditions is fulfilled': {
+            options: {player:666},
+            arg: {
+                unless: {
+                    foo: ['false'],
+                    bar: ['true']
+                }
+            },
+            expected: 'bar'
+        }
+    });
 });

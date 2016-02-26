@@ -1,4 +1,4 @@
- 
+
 
 -----------
 
@@ -12,7 +12,7 @@ Highlevel TODO
      * simple slight hack to neighbour
      * we're already adding offsets to boardconnections
  [d] Add foridin and forposin to effect
- [ ] Delete `dead` groups? simplifies a lot!
+ [d] Delete `dead` groups? simplifies a lot!
      * use a var if u must count or whatever!
      * when kill, delete the unit entirely
      * easier to copy units and default unit groups!

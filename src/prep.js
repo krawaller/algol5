@@ -62,11 +62,24 @@ const P = {
 			withinbounds =  newx>0 && newx<=board.width && newy>0 && newy<=board.height;
 		return withinbounds && P.coordstopos({x:newx,y:newy})
 	},
-	addfromdef: (world,layers,def)=> {
-		let obj, pos
+	/*deduceInitialUnitData: (setup)=> {
+		var id = 1;
+		return _.reduce(setup,(mem,def,group)=>{
+			return _.reduce( P.addfromdef({},'units',def), (mem,entity)=> {
+				let newid = 'unit'+(id++)
+				mem[newid] = Object.assign(entity,{
+					id: newid,
+
+				}
+				return mem
+			},mem)
+		},{})
+	},*/
+
+	convertToEntities: (def)=> {
 		switch(def[0]){
 			case "pos": // ["pos",list,blueprint]
-				return def[1].reduce((mem,pos)=>P.addfromdef(mem,layers,Object.assign({pos},def[2]||{})),world)
+				return def[1].map( pos=> Object.assign({pos:pos},def[2]) )
 			case "rect": // ["rect",bottomleft,topright,blueprint]
 			case "holerect": // ["holerect",bottomleft,topright,holes,blueprint]
 				let bottomleft = P.postocoords(def[1]),
@@ -81,20 +94,16 @@ const P = {
 					blueprint = def[4]
 					positions = _.filter(positions,p=>_.indexOf(def[3],p)===-1)
 				}
-				return P.addfromdef(world,layers,["pos",positions,blueprint])
+				return positions.map( pos=> Object.assign({pos:pos},blueprint) )
 			default: 
 				if (_.isString(def)){
-					obj = {pos:def}
+					return [{pos:def}]
 				} else if (_.isObject(def)){
-					obj = def
+					return [def]
 				} else {
 					throw "Unknown def: "+def
 				}
 		}
-		layers.forEach(layer=>{
-			world[layer][obj.pos] = obj; // (world[layer][obj.pos]||[]).concat(obj)
-		})
-		return world
 	},
 
 	/*

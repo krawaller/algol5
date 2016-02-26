@@ -314,11 +314,7 @@ const G = {
 		return '('+ret+' null)';
 	},
 
-	addtolayer: (O,layer,pos,obj)=> {
-		let ret = ''
-		ret += 'ARTIFACTS['+layer+']['+pos+']='+obj+'; '
-		return ret
-	},
+	addtolayer: (O,layer,pos,obj)=> 'ARTIFACTS['+layer+']['+pos+']='+obj+'; ',
 
 	// assumes POS
 	performdraw: (O,def)=> {

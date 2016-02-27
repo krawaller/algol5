@@ -21,6 +21,7 @@ Highlevel TODO
      * maybe make an object:
      	kings: [units,kings],
      	queens: [units,]
+ [ ] Calculate initial terrain 
 
 
 

@@ -9,6 +9,9 @@ const colnametonumber = _.reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST
 const colnumbertoname = _.invert(colnametonumber)
 
 const P = {
+	/*
+	Calculates the three BOARD layers (board,light,dark) and returns them
+	*/
 	boardlayers: (board)=> {
 		let ret = {board:{},light:{},dark:{}}
 		for (var x=1;x<=board.width;x++){
@@ -22,6 +25,9 @@ const P = {
 		}
 		return ret
 	},
+	/*
+	Calculates the connections object
+	*/
 	boardconnections: (board)=> {
 		let ret = {}
 		for (var x=1;x<=board.width;x++){
@@ -80,6 +86,41 @@ const P = {
 			},mem)
 		},{})
 	},
+
+	/*
+	Should be called with the result from deduceTerrainLayers and a full board
+	Will augment terrain with 'no<terrainname>' layers
+	*/
+	addNegationsToTerrain: (terrain,board)=> _.reduce(terrain,(mem,t,name)=>{
+		mem['no'+name] = {}
+		for(var pos in board){
+			if (!t[pos]){
+				mem['no'+name][pos] = {}
+			}
+		}
+		return mem
+	},terrain),
+
+	deduceTerrainLayers: (terraindefs,plr)=> _.reduce(terraindefs,(mem,def,name)=> {
+		mem[name] = {};
+		if (_.isArray(def)){ // no ownership
+			_.flatten(def.map(P.convertToEntities)).forEach(e=>{
+				mem[name][e.pos] = e;
+			})
+		} else { // per-player object
+			for(var owner in def){
+				owner = parseInt(owner)
+				_.flatten(def[owner].map(P.convertToEntities)).forEach(e=>{
+					e.owner = owner
+					mem[name][e.pos] = e
+					let prefix = owner === 0 ? 'neutral' : owner === plr ? 'my' : 'opp'
+					mem[prefix+name] = mem[prefix+name] || {}
+					mem[prefix+name][e.pos] = e
+				})
+			}
+		}
+		return mem;
+	},{}),
 
 	convertToEntities: (def)=> {
 		switch(def[0]){

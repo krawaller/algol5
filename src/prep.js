@@ -113,16 +113,17 @@ const P = {
 
 	/*
 	Parses gamedef to find all possible unit layers by looking at setup and dynamically created units
+	Returns an array of all possible layers
 	*/
 	deduceUnitLayers: (gamedef)=> _.uniq(Object.keys(gamedef.setup || {}).concat(P.deduceDynamicGroups(gamedef.commands))).reduce(
 		(list,g) => list.concat([g,"my"+g,"opp"+g,"neutral"+g]), []
 	).sort(),
 
 	/*
-	Parses command data to find all potential groups created by commands like spawn
+	Parses command data to find all potential groups created by commands like spawn.
 	Used in deduceUnitLayers
 	*/
-	deduceDynamicGroups: (data)=> (
+	deduceDynamicGroups: (data)=> _.uniq(
 		data[0] === "spawn" ? U.possibilities(data[2])
 		: {setat:1,setid:1,setin:1}[data[0]] && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
 		: _.isArray(data) || _.isObject(data) ? _.reduce(data,(mem,def)=>mem.concat(P.deduceDynamicGroups(def)),[])
@@ -132,14 +133,13 @@ const P = {
 	/*
 	Calculates all possible artifact layers used in the game
 	*/
-	deduceArtifactLayers: (generators)=>
-		_.uniq(_.reduce(generators,(mem,gendef)=>{
-			return _.reduce(gendef.draw,(m,drawdef)=>{
-				return _.reduce(U.possibilities(drawdef.tolayer),(m,l)=>{
-					return m.concat( drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : l )
-				},m)
-			},mem)
-		},[])).sort()
+	deduceArtifactLayers: (generators)=> _.uniq(_.reduce(generators,(mem,gendef)=>{
+		return _.reduce(gendef.draw,(m,drawdef)=>{
+			return _.reduce(U.possibilities(drawdef.tolayer),(m,l)=>{
+				return m.concat( drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : l )
+			},m)
+		},mem)
+	},[])).sort()
 
 }
 

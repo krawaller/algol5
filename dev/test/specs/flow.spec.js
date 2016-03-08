@@ -10,6 +10,7 @@ describe("The flow commands",()=>{
             expected: undefined
         },
         'when no conditions are fulfilled': {
+            options: {},
             arg: {
                 endgame: {
                     foo: { condition: ['false'] },
@@ -18,15 +19,25 @@ describe("The flow commands",()=>{
             },
             expected: undefined
         },
-        'when a conditions is fulfilled': {
+        'when a conditions is fulfilled with no specified `who`': {
             options: {player:666},
             arg: {
                 endgame: {
                     woo: { condition: ['false'] },
-                    foo: { condition: ['true'], who: ['currentplayer'] }
+                    foo: { condition: ['true'] }
                 }
             },
             expected: ['foo',666]
+        },
+        'when a conditions is fulfilled with specified player': {
+            options: {player:666},
+            arg: {
+                endgame: {
+                    woo: { condition: ['false'] },
+                    foo: { condition: ['true'], who: 5 }
+                }
+            },
+            expected: ['foo',5]
         }
     });
     test(F.preventendturn,'the preventendturn func',{

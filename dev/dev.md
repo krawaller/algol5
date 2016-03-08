@@ -21,9 +21,10 @@ Highlevel TODO
      * maybe make an object:
      	kings: [units,kings],
      	queens: [units,]
- [ ] Calculate initial terrain 
-
-
+ [d] Calculate initial terrain 
+ [ ] Implement forced moves if opp/you only has 1 option!
+ [ ] Implement CALC "layers", for example for Archimedes
+ [ ] Add highlight. it really would be nice, especially for formation win conditions
 
 
 ---------

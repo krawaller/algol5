@@ -101,7 +101,7 @@ const P = {
 		return mem
 	},terrain),
 
-	deduceTerrainLayers: (terraindefs,plr)=> _.reduce(terraindefs,(mem,def,name)=> {
+	deduceTerrainLayers: (terrain,plr)=> _.reduce(terrain,(mem,def,name)=> {
 		mem[name] = {};
 		if (_.isArray(def)){ // no ownership
 			_.flatten(def.map(P.convertToEntities)).forEach(e=>{

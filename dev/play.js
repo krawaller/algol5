@@ -21,7 +21,8 @@ let walkercode = lib.G.applywalker({player:1},walkerdef)
 let neighbourdef = {
 	"type": "neighbour",
 	"start": ["mark","mymark"],
-	"dirs": [1,2,3],
+	//"dirs": [1,2,3],
+	"dir": 1,
 	"condition": ["anyat","muppets",["target"]],
 	"draw": {
 		"neighbours": {

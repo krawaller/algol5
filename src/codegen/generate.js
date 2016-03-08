@@ -69,8 +69,12 @@ const G = {
 		def = def || {}
 		let ret = ''
 		if (def.dir){
-			ret += 'var DIR='+C.value(O,def.dir)+'; '
-			ret += G.findneighbourindir(O,def)
+			if (U.contains(def,['dir'])){
+				ret += 'var DIR='+C.value(O,def.dir)+'; '
+				ret += G.findneighbourindir(O,def)
+			} else {
+				ret += G.findneighbourindir(O,def,C.value(O,def.dir))
+			}
 		} else {
 			ret += 'var DIR; '
 			ret += 'var neighbourdirs='+C.list(O,def.dirs)+'; '
@@ -85,10 +89,10 @@ const G = {
 
 	// wants full neighbour def
 	// assumes STARTPOS, DIR, foundneighbours
-	findneighbourindir: (O,def)=> {
+	findneighbourindir: (O,def,dirtouse)=> {
 		def = def || {}
 		let ret = ''
-		ret += 'var POS=connections[STARTPOS][DIR]; '
+		ret += 'var POS=connections[STARTPOS]['+(dirtouse||'DIR')+']; '
 		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
 		ret += 'foundneighbours.push(POS); '
 		ret += '} '

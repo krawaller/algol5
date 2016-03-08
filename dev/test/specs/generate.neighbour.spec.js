@@ -86,6 +86,15 @@ describe('the neighbour funcs',()=>{
             },
             mutations: { foundneighbours: ['foo','s1'], POS: 's1' }
         },
+        'for vanilla look with provided dir': {
+            args: [{},7],
+            scope: {
+                STARTPOS: 's0',
+                connections: {s0:{7:'s1'}},
+                foundneighbours: ['foo']
+            },
+            mutations: { foundneighbours: ['foo','s1'], POS: 's1' }
+        },
         'with condition which evaluates to true': {
             arg: {condition:['anyat','mylayer',['target']]},
             scope: {
@@ -110,8 +119,18 @@ describe('the neighbour funcs',()=>{
         }
     });
     test(G.findneighboursfromstart, 'the findneighbourfromstart func', {
-        'when single dir in def': {
+        'when single dir in def that isnt referenced': {
             arg: {dir:2},
+            scope: {
+                STARTPOS: 's0',
+                connections: {s0:{2:'s1'}},
+                foundneighbours: ['foo'],
+                DIR: 'shouldnotbeoverwritten'
+            },
+            mutations: { foundneighbours: ['foo','s1'], POS: 's1', DIR: 'shouldnotbeoverwritten' }
+        },
+        'when single dir in def that is referenced': {
+            arg: {dir:2,something:{someval:['dir']}},
             scope: {
                 STARTPOS: 's0',
                 connections: {s0:{2:'s1'}},

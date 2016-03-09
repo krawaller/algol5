@@ -122,9 +122,9 @@ const setTypes = withUniversals("set",{
     }//"_.omit("+T.set(O,s1)+",Object.keys("+T.set(O,s2)+"))"
 })
 
-const propTypes = {
-    is: (O,[value],propname)=> 'OBJ.'+propname+'==='+T.value(O,value),
-    isnt: (O,[value],propname)=> 'OBJ.'+propname+'!=='+T.value(O,value)
+const propTypes = { // TODO - maybe move this to generate-filter, as not used anywhere else?
+    is: (O,[value],propname)=> 'filterobj.'+propname+'==='+T.value(O,value),
+    isnt: (O,[value],propname)=> 'filterobj.'+propname+'!=='+T.value(O,value)
 }
 
 const T = {

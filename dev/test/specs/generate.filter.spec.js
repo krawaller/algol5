@@ -50,7 +50,7 @@ describe('the filter funcs',()=>{
         'when simple matching and evals to true': {
             arg: {matching:{someprop:['is',['sum',1,1]],otherprop:['isnt',7]}},
             scope: {
-                OBJ: {someprop:2},
+                filterobj: {someprop:2},
                 POS: 'somepos',
                 filtertargetlayername: 'mylayer',
                 ARTIFACTS: {mylayer:{}}
@@ -63,7 +63,7 @@ describe('the filter funcs',()=>{
                 condition: ['truthy',0]
             },
             scope: {
-                OBJ: {someprop:2},
+                filterobj: {someprop:2},
                 POS: 'somepos',
                 filtertargetlayername: 'mylayer',
                 ARTIFACTS: {mylayer:{}}

@@ -36,6 +36,18 @@ let neighbourdef = {
 }
 let neighbourcode = lib.G.applyneighbours({player:2},neighbourdef)
 
-console.log(js_beautify(walkercode,{indent_size:2}))
+let filterdef = {
+	"type": "filter",
+	"layer": "units",
+	"matching": {
+		foo: ['is','bar']
+	},
+	"tolayer": "dorklayer"
+}
+let filtercode = lib.G.applyfilter({player:1},filterdef)
 
-console.log(js_beautify(neighbourcode,{indent_size:2}))
+console.log("\n***WALKER***\n",js_beautify(walkercode,{indent_size:2}))
+
+console.log("\n***NEIGHBOUR***\n",js_beautify(neighbourcode,{indent_size:2}))
+
+console.log("\n***FILTER***\n",js_beautify(filtercode,{indent_size:2}))

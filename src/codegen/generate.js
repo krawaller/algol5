@@ -20,19 +20,19 @@ const G = {
 		let ret = ''
 		ret += 'var filtertargetlayername = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
 		ret += 'if (filtersourcelayer[POS]){'
-		ret += 'var OBJ = filtersourcelayer[POS]; '
+		ret += 'var filterobj = filtersourcelayer[POS]; '
 		ret += G.filterobject(O,def)
 		ret += '} '
 		return ret
 	},
 
-	// assumes POS, OBJ, filtertargetlayername
+	// assumes POS, filterobj, filtertargetlayername
 	filterobject: (O,def)=> { // TODO - core datatype for matcher?
 		let ret = ''
 		let conds = (def.condition ? [C.boolean(O,def.condition)] : [])
 		conds = conds.concat(_.map(def.matching,(test,key)=> C.prop(O,test,key) ))
 		ret += 'if (' + conds.join(' && ') + '){'
-		ret += G.addtolayer(O,'filtertargetlayername','POS','OBJ')
+		ret += G.addtolayer(O,'filtertargetlayername','POS','filterobj')
 		ret += '} '
 		return ret
 	},

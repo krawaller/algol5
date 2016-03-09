@@ -29,7 +29,7 @@ let neighbourdef = {
 			"tolayer": ["ifelse",["true"],"dorklayer","borklayer"],
 			"include": {
 				"found": ["neighbourcount"],
-				"owner": ["read","board",["mark","mymark"],"fjupp"]
+				//"owner": ["read","board",["mark","mymark"],"fjupp"]
 			}
 		}
 	}

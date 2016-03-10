@@ -2,8 +2,6 @@
 
 -----------
 
-
-
 Highlevel TODO
 
  [ ] Add floater generator
@@ -24,39 +22,38 @@ Highlevel TODO
  [d] Calculate initial terrain 
  [ ] Implement forced moves if opp/you only has 1 option!
  [ ] Implement CALC "layers", for example for Archimedes
+ [ ] Also need multilayers, for example for Archers
  [ ] Add highlight. it really would be nice, especially for formation win conditions
 
+FLOW
+ [ ] Instruction type. Universals + if
+ [ ] Make a draw func for state. Is also plr specific, can output really nice obj!
+ [ ] Markeffect function
+     * just adds the mark from a presumed global (which will be a func arg)
+ [ ] apply generators func
+     * adds single or whole list of runGenerators. obs, needs if and ifelse and playercase!
 
----------
+------------
 
-LAYERS, split for perf and ease of reset. Into:
+     ****** SCOPE *******
 
-*    BOARD
-     *    board
-     *    dark
-     *    light
-*    TERRAIN
-     *    personalised variants
-*    UNITS
-     *    rebuilt per turn (?)
-*    ARTIFACTS
-     *    cleared after command (?)
+`player` and `otherplayer` is not in the scope, since the engine is player-specific.
+should also add support for PLAYERVAR and BATTLEVAR
 
+always there
+     connections  (permanent)
+     BOARD        (permanent)
+     TERRAIN      (playerspecific (maybe))
 
-In order to accomplish this we need to...
-
-*    fix generate.addtolayer
-*    fix prep.addfromdedf
-*    ...?
-
-
-
-
- -------------------- unit mutations?
-
- mark, no need
- but after command, always.
- shallowcopy before, then shallowfix for each manipulation?
+state
+     LAYERS       (recalculated, sometimes preserved)
+     UNITDATA     (mutating)
+     UNITLAYERS   (recalculated)
+     CONTEXT      (mutating through turn)
+     nextunitid
+     allowed
 
 
- mutate layers? would involve moving between bowls. loop through all. crude.
+     ****** FLOW *******
+
+

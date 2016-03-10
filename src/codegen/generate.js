@@ -338,7 +338,7 @@ const G = {
 					prefix = '"my"'
 				} else if (_.isNumber(owner)) {
 					prefix = '"opp"'
-				} else {
+				} else { // TODO - lift out this array here! 
 					prefix = '["neutral",'+(O.player===1?'"my","opp"':'"opp","my"')+'][artifact.owner]'
 				}
 				ret += G.addtolayer(O,prefix+' + targetlayername','POS','artifact')
@@ -359,6 +359,16 @@ const G = {
 		}
 		ret += '} '
 		return ret;
+	},
+
+	// called from instruction
+	applyGenerator: (O,def)=> {
+		switch(def.type){
+			case 'walker': return G.applywalker(O,def)
+			case 'neighbour': return G.applyneighbours(O,def)
+			case 'filter': return G.applyfilter(O,def)
+			default: throw 'Unknown generator def: '+def
+		}
 	}
 }
 

@@ -4,6 +4,73 @@ import lib from '../../../src/codegen/'
 let G = lib.G
 
 describe('the generate funcs',()=>{
+    test(G.applyGenerator,'the applyGenerator func',{
+        'with simple neighbour def': {
+            arg: {
+                type: 'neighbour',
+                dir:2,
+                start:'mymark',
+                draw: {
+                    start: { tolayer: 'starts'},
+                    neighbours: { tolayer: 'neighbours'}
+                }
+            },
+            scope: {
+                connections: {s0:{2:'s1'}},
+                MARKS: {mymark:'s0'},
+                ARTIFACTS: {starts:{},neighbours:{}}
+            },
+            mutations: { ARTIFACTS: {starts:{s0:{}},neighbours:{s1:{}}} }
+        },
+        'for simple walk': {
+            arg: {
+                type: 'walker',
+                starts: ['layer','starts'],
+                dirs: [1,3,5],
+                draw: {
+                    steps: {
+                        tolayer: 'steps',
+                        include: {heading: ['dir'],nbr:['step']}
+                    }
+                }
+            },
+            scope: {
+                connections: {p0:{1:'p1'},p1:{1:'p2'},p2:{},q0:{3:'q1'},q1:{}},
+                ARTIFACTS: { steps:{}, starts: {q0:'yes',p0:'yes'} }
+            },
+            mutations: {
+                ARTIFACTS: {
+                    starts: {q0:'yes',p0:'yes'},
+                    steps:{
+                        p1: {heading:1,nbr:1},
+                        p2: {heading:1,nbr:2},
+                        q1: {heading:3,nbr:1}
+                    }
+                }
+            }
+        },
+        'for vanilla filtering': {
+            arg: {
+                type: 'filter',
+                matching: {foo:['is','bar']},
+                condition: ['different',['pos',['target']],'p1'],
+                layer: 'source',
+                tolayer: 'destination'
+            },
+            scope: {
+                ARTIFACTS: {
+                    source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'}},
+                    destination: {}
+                }
+            },
+            mutations: {
+                ARTIFACTS: {
+                    source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'}},
+                    destination: {p2:{foo:'bar'}}
+                }
+            }
+        }
+    })
     test(G.addtolayer,'the addtolayer func',{
         'when nothing at that pos': {
             args: ['"mylayer"','"a1"','"foo"'],

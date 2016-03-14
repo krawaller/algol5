@@ -1,5 +1,7 @@
 import _ from 'lodash'
 
+import {js_beautify} from 'js-beautify'
+
 const tester = (func,desc,specs)=> {
     describe(desc,()=>{
         _.each(specs,(spec,name)=>{
@@ -31,7 +33,7 @@ const tester = (func,desc,specs)=> {
                 try {
                     eval(tobeexec);
                 } catch(e) {
-                    console.log("ERROR ERROR! Code:\n",tobeexec)
+                    console.log("ERROR ERROR! Code:\n",js_beautify(tobeexec,{indent_size:2}))
                     throw e;
                 }
             });

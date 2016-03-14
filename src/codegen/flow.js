@@ -17,7 +17,7 @@ const F = {
     instruction: (O,def)=> {
         if (instructionTypes[def[0]]) {
             return instructionTypes[def[0]](O,_.tail(def));
-        } else if (O && O.effect){
+        } else if (O && O.effect){ // TODO - need this check? fix through other means?
             return E.applyeffect(O,def)
         } else if (O && O.generators && O.generators[def]){
             return G.applyGenerator(O,O.generators[def])
@@ -25,11 +25,25 @@ const F = {
             throw "Unknown instruction def: "+def;
         }
     },
+    applyGeneratorInstructions: (O,instr)=> {
+        if (instr.runGenerator) {
+            return F.instruction(O,instr.runGenerator)
+        } else if (instr.runGenerators) {
+            return F.instruction(O,['all'].concat(instr.runGenerators))
+        } else {
+            return '';
+        }
+    },
+    linkToEndturn: (O)=> {
+        let ret = F.applyGeneratorInstructions(O,O.endturn || {})
+        return ret + _.map(O.endturn && O.endturn.unless,(cond,name)=> {
+            return 'if ('+C.boolean(O,cond)+'){ links.endblocked = "'+name+'"; } '
+        }).concat('links.endturn = "next"; ').join(' else ')
+    },
+
+    // TODO - incorporate into turnendlink!
     endgame: (O,gamedef)=> _.reduce(gamedef.endgame,(ret,def,name)=>
         ret + C.boolean(O,def.condition)+' ? ["'+name+'",'+C.value(O,def.who||['currentplayer'])+'] : '
-    ,'') + ' undefined ',
-    preventendturn: (O,gamedef)=> _.reduce(gamedef.unless,(ret,cond,name)=>
-        ret + C.boolean(O,cond)+' ? "'+name+'" : '
     ,'') + ' undefined ',
 }
 

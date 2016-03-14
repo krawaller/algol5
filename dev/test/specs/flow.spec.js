@@ -4,6 +4,64 @@ import lib from '../../../src/codegen/'
 let F = lib.F
 
 describe("The flow commands",()=>{
+    test(F.linkToEndturn,'the linkToEndturn func',{
+        'when linking to endturn and falsy unless': {
+            options: {
+                endturn: {
+                    unless: {
+                        stupid: ['false']
+                    }
+                }
+            },
+            scope: {links:{}},
+            mutations: {links:{endturn:'next'}}
+        },
+        'when linking to endturn and truthy unless': {
+            arg: ['endturn'],
+            options: {
+                endturn: {
+                    unless: {
+                        stupid: ['false'],
+                        silly: ['true']
+                    }
+                }
+            },
+            scope: {links:{}},
+            mutations: {links:{endblocked:'silly'}}
+        },
+        'when linking to endturn truthilly depending on single gen': {
+            options: {
+                endturn: {
+                    runGenerator: 'findblurbs',
+                    unless: {
+                        noblurbs: ['isempty','blurbs']
+                    }
+                },
+                generators: {
+                    'findblurbs': {
+                        type: 'filter',
+                        layer: 'borks',
+                        tolayer: 'blurbs',
+                        matching: {foo:['is','bar']}
+                    }
+                }
+            },
+            scope: {
+                ARTIFACTS: {
+                    borks: {a1: {foo:'bar'}},
+                    blurbs: {}
+                },
+                links: {}
+            },
+            mutations: {
+                ARTIFACTS: {
+                    borks: {a1: {foo:'bar'}},
+                    blurbs: {a1: {foo:'bar'}}
+                },
+                links: {endturn:'next'}
+            }
+        }
+    })
     test(F.instruction,'the instruction func',{
         'when generating': {
             arg: 'myfilter',
@@ -90,31 +148,6 @@ describe("The flow commands",()=>{
                 }
             },
             expected: ['foo',5]
-        }
-    });
-    test(F.preventendturn,'the preventendturn func',{
-        'when gamedef has no unless at all': {
-            arg: {},
-            expected: undefined
-        },
-        'when no conditions are fulfilled': {
-            arg: {
-                unless: {
-                    foo: ['false'],
-                    bar: ['false']
-                }
-            },
-            expected: undefined
-        },
-        'when a conditions is fulfilled': {
-            options: {player:666},
-            arg: {
-                unless: {
-                    foo: ['false'],
-                    bar: ['true']
-                }
-            },
-            expected: 'bar'
         }
     });
 });

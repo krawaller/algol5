@@ -4,6 +4,13 @@
 
 Highlevel TODO
 
+RIGHTNOW
+
+endturn stuff!
+
+
+STUFF
+
  [ ] Add floater generator
      * needed only for a few games
  [ ] Add offset generator
@@ -26,7 +33,9 @@ Highlevel TODO
  [ ] Add highlight. it really would be nice, especially for formation win conditions
 
 FLOW
- [ ] Instruction type. Universals + if
+ [d] Instruction type. Universals + if
+ [ ] add link to instruction
+     * special for endturn, put logic right into the linking!
  [ ] Make a draw func for state. Is also plr specific, can output really nice obj!
  [ ] Markeffect function
      * just adds the mark from a presumed global (which will be a func arg)
@@ -37,13 +46,15 @@ FLOW
 
      ****** SCOPE *******
 
-`player` and `otherplayer` is not in the scope, since the engine is player-specific.
+`player` and `otherplayer` is not in the passed-in scope, since the engine is player-specific.
 should also add support for PLAYERVAR and BATTLEVAR
 
 always there
      connections  (permanent)
      BOARD        (permanent)
      TERRAIN      (playerspecific (maybe))
+     player
+     otherplayer
 
 state
      LAYERS       (recalculated, sometimes preserved)
@@ -51,9 +62,12 @@ state
      UNITLAYERS   (recalculated)
      CONTEXT      (mutating through turn)
      nextunitid
-     allowed
+     links        (overwritten after every single event)
 
 
      ****** FLOW *******
+
+Any runGenerator(s) inside `.endgame` will be run if we attempt to `link` to endturn.
+Effects, however, will only be applied a successful endturn.
 
 

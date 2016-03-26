@@ -14,7 +14,7 @@ const instructionTypes = {
 
 
 const F = {
-    instruction: (O,def)=> {
+    instruction: (O,def)=> { // TODO - add in linktoendturn
         if (instructionTypes[def[0]]) {
             return instructionTypes[def[0]](O,_.tail(def));
         } else if (O && O.effect){ // TODO - need this check? fix through other means?
@@ -38,13 +38,15 @@ const F = {
         let ret = F.applyGeneratorInstructions(O,O.endturn || {})
         return ret + _.map(O.endturn && O.endturn.unless,(cond,name)=> {
             return 'if ('+C.boolean(O,cond)+'){ links.endblocked = "'+name+'"; } '
-        }).concat('links.endturn = "next"; ').join(' else ')
-    },
-
-    // TODO - incorporate into turnendlink!
-    endgame: (O,gamedef)=> _.reduce(gamedef.endgame,(ret,def,name)=>
-        ret + C.boolean(O,def.condition)+' ? ["'+name+'",'+C.value(O,def.who||['currentplayer'])+'] : '
-    ,'') + ' undefined ',
+        }).concat(_.map(O.endgame,(def,name)=> { // TODO - perhaps perffix below?
+            return `
+                if (${C.boolean(O,def.condition)}) { 
+                    var winner = ${C.value(O,def.who||['currentplayer'])};
+                    links.endturn = winner === ${O.player} ? 'win' : winner ? 'lose' : 'draw';
+                    links.gameendby = '${name}';
+                }`;
+        })).concat('links.endturn = "next"; ').join(' else ')
+    }
 }
 
 export default F

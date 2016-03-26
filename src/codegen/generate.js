@@ -338,8 +338,8 @@ const G = {
 					prefix = '"my"'
 				} else if (_.isNumber(owner)) {
 					prefix = '"opp"'
-				} else { // TODO - lift out this array here! 
-					prefix = '["neutral",'+(O.player===1?'"my","opp"':'"opp","my"')+'][artifact.owner]'
+				} else {
+					prefix = 'ownernames[artifact.owner]'
 				}
 				ret += G.addtolayer(O,prefix+' + targetlayername','POS','artifact')
 			}

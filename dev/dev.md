@@ -7,6 +7,8 @@ Highlevel TODO
 RIGHTNOW
 
 endturn stuff!
+stomp!
+copy!
 
 
 STUFF
@@ -55,6 +57,7 @@ always there
      TERRAIN      (playerspecific (maybe))
      player
      otherplayer
+     ownernames   (playerspecific) ["neutral", "opp", "my"]
 
 state
      LAYERS       (recalculated, sometimes preserved)
@@ -68,6 +71,6 @@ state
      ****** FLOW *******
 
 Any runGenerator(s) inside `.endgame` will be run if we attempt to `link` to endturn.
-Effects, however, will only be applied a successful endturn.
+Effects, however, will only be applied on a successful endturn.
 
 

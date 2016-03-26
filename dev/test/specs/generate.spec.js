@@ -107,19 +107,19 @@ describe('the generate funcs',()=>{
         'with owner which is opp': {
             options: {player:1},
             arg: {tolayer:'muppets',include:{owner:2}},
-            scope: {POS:'x',ARTIFACTS:{muppets:{},oppmuppets:{}}},
+            scope: {POS:'x',ARTIFACTS:{muppets:{},oppmuppets:{}},ownernames:['neutral','my','opps']},
             mutations: {ARTIFACTS:{muppets:{x:{owner:2}},oppmuppets:{x:{owner:2}}}}
         },
         'with owner which is my': {
             options: {player:2},
             arg: {tolayer:'muppets',include:{owner:2}},
-            scope: {POS:'x',ARTIFACTS:{muppets:{},mymuppets:{}}},
+            scope: {POS:'x',ARTIFACTS:{muppets:{},mymuppets:{}},ownernames:['neutral','opps','my']},
             mutations: {ARTIFACTS:{muppets:{x:{owner:2}},mymuppets:{x:{owner:2}}}}
         },
         'with owner which is neutral': {
             options: {player:1},
             arg: {tolayer:'muppets',include:{owner:['dir']}},
-            scope: {DIR:0,POS:'x',ARTIFACTS:{muppets:{},neutralmuppets:{}}},
+            scope: {DIR:0,POS:'x',ARTIFACTS:{muppets:{},neutralmuppets:{}},ownernames:['neutral','my','opps']},
             mutations: {ARTIFACTS:{muppets:{x:{owner:0}},neutralmuppets:{x:{owner:0}}}}
         }
     });

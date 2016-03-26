@@ -5,6 +5,53 @@ let F = lib.F
 
 describe("The flow commands",()=>{
     test(F.linkToEndturn,'the linkToEndturn func',{
+        'when losing, evaluated who': {
+            options: {
+                player: 1,
+                endgame: {
+                    gnarf: {condition:['true'], who:['ifelse',['true'],2,1]}
+                }
+            },
+            scope: {links:{}},
+            mutations: {links:{endturn:'lose',gameendby:'gnarf'}}
+        },
+        'when winning, no who': {
+            options: {
+                player: 1,
+                endgame: {
+                    gnarf: {condition:['true']}
+                }
+            },
+            scope: {links:{}},
+            mutations: {links:{endturn:'win',gameendby:'gnarf'}}
+        },
+        'when draw, depending on gen': {
+            options: {
+                player: 1,
+                endturn: {
+                    runGenerator: 'findblurbs',
+                },
+                endgame: {
+                    wee: {condition:['true'],who:['ifelse',['notempty','blurbs'],0,1]}
+                },
+                generators: {
+                    'findblurbs': {
+                        type: 'filter',
+                        layer: 'borks',
+                        tolayer: 'blurbs',
+                        matching: {foo:['is','bar']}
+                    }
+                }
+            },
+            scope: {
+                ARTIFACTS: {
+                    borks: {a1: {foo:'bar'}},
+                    blurbs: {}
+                },
+                links: {}
+            },
+            mutations: {links:{endturn:'draw',gameendby:'wee'}}
+        },
         'when linking to endturn and falsy unless': {
             options: {
                 endturn: {
@@ -60,6 +107,38 @@ describe("The flow commands",()=>{
                 },
                 links: {endturn:'next'}
             }
+        },
+        'when linking to endturn but unlessed by generator': {
+            options: {
+                endturn: {
+                    runGenerator: 'findblurbs',
+                    unless: {
+                        blurbs: ['notempty','blurbs']
+                    }
+                },
+                generators: {
+                    'findblurbs': {
+                        type: 'filter',
+                        layer: 'borks',
+                        tolayer: 'blurbs',
+                        matching: {foo:['is','bar']}
+                    }
+                }
+            },
+            scope: {
+                ARTIFACTS: {
+                    borks: {a1: {foo:'bar'}},
+                    blurbs: {}
+                },
+                links: {}
+            },
+            mutations: {
+                ARTIFACTS: {
+                    borks: {a1: {foo:'bar'}},
+                    blurbs: {a1: {foo:'bar'}}
+                },
+                links: {endblocked:'blurbs'}
+            }
         }
     })
     test(F.instruction,'the instruction func',{
@@ -112,42 +191,6 @@ describe("The flow commands",()=>{
             arg: ['ifplayer',2,['killid','unit4']],
             scope: { UNITDATA: { unit4:{name:'foo'}, someoneelse: 'FOO' } },
             mutations: { UNITDATA: { unit4:{name:'foo'}, someoneelse: 'FOO' } }
-        }
-    });
-    test(F.endgame,'the endgame func',{
-        'when gamedef has no endgame at all': {
-            arg: {},
-            expected: undefined
-        },
-        'when no conditions are fulfilled': {
-            options: {},
-            arg: {
-                endgame: {
-                    foo: { condition: ['false'] },
-                    bar: { condition: ['false'] }
-                }
-            },
-            expected: undefined
-        },
-        'when a conditions is fulfilled with no specified `who`': {
-            options: {player:666},
-            arg: {
-                endgame: {
-                    woo: { condition: ['false'] },
-                    foo: { condition: ['true'] }
-                }
-            },
-            expected: ['foo',666]
-        },
-        'when a conditions is fulfilled with specified player': {
-            options: {player:666},
-            arg: {
-                endgame: {
-                    woo: { condition: ['false'] },
-                    foo: { condition: ['true'], who: 5 }
-                }
-            },
-            expected: ['foo',5]
         }
     });
 });

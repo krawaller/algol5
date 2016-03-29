@@ -37,7 +37,7 @@ const F = {
     linkToEndturn: (O)=> {
         let ret = F.applyGeneratorInstructions(O,O.endturn || {})
         return ret + _.map(O.endturn && O.endturn.unless,(cond,name)=> {
-            return 'if ('+C.boolean(O,cond)+'){ links.endblocked = "'+name+'"; } '
+            return 'if ('+C.boolean(O,cond)+'){ blockedby = "'+name+'"; } '
         }).concat(_.map(O.endgame,(def,name)=> { // TODO - perhaps perffix below?
             return `
                 if (${C.boolean(O,def.condition)}) { 

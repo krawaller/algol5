@@ -104,6 +104,26 @@ describe('the generate funcs',()=>{
             scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{}}},
             mutations: {ARTIFACTS:{somelayer:{x:{heading:1}}}}
         },
+        'with unlessover which evaluates to false': {
+            arg: {unlessover:'otherlayer',tolayer:'somelayer',include:{heading:['dir']}},
+            scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{},otherlayer:{}}},
+            mutations: {ARTIFACTS:{somelayer:{x:{heading:1}},otherlayer:{}}}
+        },
+        'with unlessover which evaluates to true': {
+            arg: {unlessover:'otherlayer',tolayer:'somelayer',include:{heading:['dir']}},
+            scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{},otherlayer:{x:1}}},
+            mutations: {ARTIFACTS:{somelayer:{},otherlayer:{x:1}}}
+        },
+        'with ifover which evaluates to true': {
+            arg: {ifover:'otherlayer',tolayer:'somelayer',include:{heading:['dir']}},
+            scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{},otherlayer:{x:1}}},
+            mutations: {ARTIFACTS:{somelayer:{x:{heading:1}},otherlayer:{x:1}}}
+        },
+        'with ifover which evaluates to false': {
+            arg: {ifover:'otherlayer',tolayer:'somelayer',include:{heading:['dir']}},
+            scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{},otherlayer:{}}},
+            mutations: {ARTIFACTS:{somelayer:{},otherlayer:{}}}
+        },
         'with owner which is opp': {
             options: {player:1},
             arg: {tolayer:'muppets',include:{owner:2}},

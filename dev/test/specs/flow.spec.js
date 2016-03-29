@@ -73,8 +73,8 @@ describe("The flow commands",()=>{
                     }
                 }
             },
-            scope: {links:{}},
-            mutations: {links:{endblocked:'silly'}}
+            scope: {blockedby: "NOTHING"},
+            mutations: {blockedby:'silly'}
         },
         'when linking to endturn truthilly depending on single gen': {
             options: {
@@ -130,14 +130,14 @@ describe("The flow commands",()=>{
                     borks: {a1: {foo:'bar'}},
                     blurbs: {}
                 },
-                links: {}
+                blockedby: "NOTHING"
             },
             mutations: {
                 ARTIFACTS: {
                     borks: {a1: {foo:'bar'}},
                     blurbs: {a1: {foo:'bar'}}
                 },
-                links: {endblocked:'blurbs'}
+                blockedby: 'blurbs'
             }
         }
     })

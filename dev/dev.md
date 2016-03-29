@@ -33,6 +33,7 @@ STUFF
  [ ] Implement CALC "layers", for example for Archimedes
  [ ] Also need multilayers, for example for Archers
  [ ] Add highlight. it really would be nice, especially for formation win conditions
+ [d] Add ifover and unlessover to draw condition
 
 FLOW
  [d] Instruction type. Universals + if
@@ -55,18 +56,32 @@ always there
      connections  (permanent)
      BOARD        (permanent)
      TERRAIN      (playerspecific (maybe))
-     player
-     otherplayer
      ownernames   (playerspecific) ["neutral", "opp", "my"]
+     player
+     ishuman
+     playername
+     otherplayer
+     othername
+     otherhuman
 
-state
+step
      LAYERS       (recalculated, sometimes preserved)
      UNITDATA     (mutating)
      UNITLAYERS   (recalculated)
      CONTEXT      (mutating through turn)
      nextunitid
+     potentiallinks (overwritten after every single event)
      links        (overwritten after every single event)
+     path         (replaced using concat)
+     stepid
 
+turn
+     canend       (array of stepid:s, built)
+     steps        (step states by stepid)
+     blockedby    (string)
+battle
+     battleendstep (id of step when this battle ended)
+     winner       (player who won if battle has ended)
 
      ****** FLOW *******
 
@@ -74,3 +89,18 @@ Any runGenerator(s) inside `.endgame` will be run if we attempt to `link` to end
 Effects, however, will only be applied on a successful endturn.
 
 
+Links object! keys are positions (marks) or commands, values are the function to call
+
+potentiallinks = {
+     a1: 'selectunit', // replace with id? separate calculated?
+     win: 'endTurn',
+     move: 'move'
+}
+links = {
+     a1: 'root-b2-a1',
+     win: 'root-b2-win',
+     move: 'root-b2-move'
+}
+
+
+Functions will always be called with state object and key

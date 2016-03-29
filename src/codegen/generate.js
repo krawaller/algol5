@@ -323,8 +323,18 @@ const G = {
 	// assumes POS
 	performdraw: (O,def)=> {
 		let ret = ''
+		let cond = []
 		if (def.condition){
-			ret += 'if ('+C.boolean(O,def.condition)+'){ '
+			cond.push(C.boolean(O,def.condition))
+		}
+		if (def.unlessover){
+			cond.push( '!'+C.set(O,def.unlessover)+'[POS]' )
+		}
+		if (def.ifover){
+			cond.push( C.set(O,def.ifover)+'[POS]' )
+		}
+		if (cond.length){
+			ret += 'if ('+cond.join(' && ')+'){ '
 		}
 		if (def.include && def.include.owner){ // if artifact has owner it must be added to more than one layer
 			ret += 'var artifact='+G.artifactliteral(O,def)+'; '
@@ -346,7 +356,7 @@ const G = {
 		} else {
 			ret += G.addtolayer(O,C.value(O,def.tolayer),'POS',G.artifactliteral(O,def))
 		}
-		if (def.condition){
+		if (cond.length){
 			ret += '} '
 		}
 		return ret;

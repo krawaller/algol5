@@ -6,17 +6,27 @@ const tester = (func,desc,specs)=> {
     describe(desc,()=>{
         _.each(specs,(spec,name)=>{
             describe(name,()=>{
-                let vars = '', result, code;
+                let vars = '', result, code, test = '';
                 for(var g in spec.scope || {}){
                     vars += "let "+g+"="+JSON.stringify(spec.scope[g])+"; "
                 }
+                if (spec.norefs) {
+                    spec.norefs.forEach(norefvar=>{
+                        vars += 'let NOREF'+norefvar+' = '+norefvar+'; '
+                        test += `
+                            it("should not mutate ${norefvar}",function(){
+                                expect(${norefvar}!==NOREF${norefvar}).toBe(true);
+                            })
+                        `
+                    })
+                }
                 code = func.apply(null,[spec.options].concat(spec.args||[]).concat(spec.hasOwnProperty("arg") ? [spec.arg] : []));
-                let expects, test = ''
                 if (spec.mutations){
-                    let expects = _.map(spec.mutations,(newval,m)=> `expect(${m}).toEqual(${JSON.stringify(spec.mutations[m])}); `);
-                    test += `it("should perform expected mutations",function(){
-                        ${expects.join("; ")}
-                    });`
+                    test += _.map(spec.mutations,(newval,m)=>
+                        `it("should mutate ${m} as expected",function(){
+                            expect(${m}).toEqual(${JSON.stringify(spec.mutations[m])});
+                        }); `
+                    ).join(" ");
                 }
                 if (spec.hasOwnProperty("expected")) {
                     test += `it("should return expected result",function(){
@@ -32,6 +42,9 @@ const tester = (func,desc,specs)=> {
                 }
                 try {
                     eval(tobeexec);
+                    if (false){ //spec.norefs){
+                        console.log("WHAAA! Code:\n",js_beautify(tobeexec,{indent_size:2}))    
+                    }
                 } catch(e) {
                     console.log("ERROR ERROR! Code:\n",js_beautify(tobeexec,{indent_size:2}))
                     throw e;

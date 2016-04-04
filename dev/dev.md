@@ -47,41 +47,6 @@ FLOW
 
 ------------
 
-     ****** SCOPE *******
-
-`player` and `otherplayer` is not in the passed-in scope, since the engine is player-specific.
-should also add support for PLAYERVAR and BATTLEVAR
-
-always there
-     connections  (permanent)
-     BOARD        (permanent)
-     TERRAIN      (playerspecific (maybe))
-     ownernames   (playerspecific) ["neutral", "opp", "my"]
-     player
-     ishuman
-     playername
-     otherplayer
-     othername
-     otherhuman
-
-step
-     LAYERS       (recalculated, sometimes preserved)
-     UNITDATA     (mutating)
-     UNITLAYERS   (recalculated)
-     CONTEXT      (mutating through turn)
-     nextunitid
-     potentiallinks (overwritten after every single event)
-     links        (overwritten after every single event)
-     path         (replaced using concat)
-     stepid
-
-turn
-     canend       (array of stepid:s, built)
-     steps        (step states by stepid)
-     blockedby    (string)
-battle
-     battleendstep (id of step when this battle ended)
-     winner       (player who won if battle has ended)
 
      ****** FLOW *******
 
@@ -89,18 +54,57 @@ Any runGenerator(s) inside `.endgame` will be run if we attempt to `link` to end
 Effects, however, will only be applied on a successful endturn.
 
 
-Links object! keys are positions (marks) or commands, values are the function to call
+------------
 
-potentiallinks = {
-     a1: 'selectunit', // replace with id? separate calculated?
-     win: 'endTurn',
-     move: 'move'
+
+PASSCONTROL
+
+CMND
+     unpack statearg
+     perform effects
+     clear marks
+     run generators
+     set undo // if human
+     clear removemarks // if human
+     link
+
+MARK
+     unpack statearg
+          MARKS
+          
+     add mark
+     copy undo // if human
+     copy & augment removemarks // if human
+     run generators
+     link
+
+
+
+------------
+
+flow part funcs
+
+saveStep(id){
+     steps[id] = {
+          // all step-specific props
+     }
 }
-links = {
-     a1: 'root-b2-a1',
-     win: 'root-b2-win',
-     move: 'root-b2-move'
+
+depends on whether mark or cmnd!
+
+
+
+move1(prevstep){
+     unpack prevstep // utility?
+          * new ARTIFACTS!
+          * 
+     perform stuff
+          * new path
+          * new id
+          * apply effects
+          * apply generators (?)
+          * add potential links <--- figure out!
+     save obj to steps!
 }
 
 
-Functions will always be called with state object and key

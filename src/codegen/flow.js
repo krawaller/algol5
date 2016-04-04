@@ -19,13 +19,24 @@ const F = {
             return instructionTypes[def[0]](O,_.tail(def));
         } else if (O && O.effect){ // TODO - need this check? fix through other means?
             return E.applyeffect(O,def)
-        } else if (O && O.generators && O.generators[def]){
-            return G.applyGenerator(O,O.generators[def])
+        } else if (O && O.generating && O.rules && O.rules.generators[def]){
+            return G.applyGenerator(O,O.rules.generators[def])
         } else {
             throw "Unknown instruction def: "+def;
         }
     },
+    applyEffectInstructions: (O,instr)=> {
+        O = {effect:true, ...(O || {})}
+        if (instr.applyEffect) {
+            return F.instruction(O,instr.applyEffect)
+        } else if (instr.applyEffects) {
+            return F.instruction(O,['all'].concat(instr.applyEffects))
+        } else {
+            return '';
+        }
+    },
     applyGeneratorInstructions: (O,instr)=> {
+        O = {generating:true, ...(O || {})}
         if (instr.runGenerator) {
             return F.instruction(O,instr.runGenerator)
         } else if (instr.runGenerators) {
@@ -35,10 +46,10 @@ const F = {
         }
     },
     linkToEndturn: (O)=> {
-        let ret = F.applyGeneratorInstructions(O,O.endturn || {})
-        return ret + _.map(O.endturn && O.endturn.unless,(cond,name)=> {
+        let ret = F.applyGeneratorInstructions({generating:true, ...(O || {})},O.rules.endturn || {})
+        return ret + _.map(O.rules.endturn && O.rules.endturn.unless,(cond,name)=> {
             return 'if ('+C.boolean(O,cond)+'){ blockedby = "'+name+'"; } '
-        }).concat(_.map(O.endgame,(def,name)=> { // TODO - perhaps perffix below?
+        }).concat(_.map(O.rules.endgame,(def,name)=> { // TODO - perhaps perffix below?
             return `
                 if (${C.boolean(O,def.condition)}) { 
                     var winner = ${C.value(O,def.who||['currentplayer'])};
@@ -46,7 +57,35 @@ const F = {
                     links.gameendby = '${name}';
                 }`;
         })).concat('links.endturn = "next"; ').join(' else ')
+    },
+
+    // assumes markname, markpos, stepid
+    // mutates MARKS, removemarks, newid
+    addMark: (O)=> {
+        let ret = ''
+        ret += 'MARKS[markname] = markpos; '
+        if (!(O && O.AI)){
+            ret += 'removemarks = Object.assign({},removemarks); '
+            ret += 'removemarks[markname] = stepid; '
+        }
+        ret += 'newid = stepid+= "-"+markpos; '
+        return ret;
+    },
+
+    // assumes unpacked data
+    applyMarkConsequences: (O)=> {
+        // add mark
+        // copy & augment removemarks // if human
+        // copy undo // if human
+        // run generators
+        // link
     }
+
 }
 
 export default F
+
+
+
+
+

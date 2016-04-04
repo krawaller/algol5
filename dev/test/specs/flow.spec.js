@@ -4,12 +4,48 @@ import lib from '../../../src/codegen/'
 let F = lib.F
 
 describe("The flow commands",()=>{
+    test(F.addMark,'the addMark func',{
+        'when not passing AI flag': {
+            scope: {
+                markname: 'somemark',
+                markpos: 'somepos',
+                stepid: 'oldid',
+                MARKS: {othermark:'otherpos'},
+                removemarks: {othermark: 'otherid'},
+                newid: 'OVERWRITEME'
+            },
+            mutations: {
+                MARKS: {othermark:'otherpos',somemark:'somepos'},
+                removemarks: {othermark:'otherid','somemark':'oldid'},
+                newid: 'oldid-somepos'
+            },
+            norefs: ['removemarks']
+        },
+        'when passing AI flag': {
+            options: {AI:true},
+            scope: {
+                markname: 'somemark',
+                markpos: 'somepos',
+                stepid: 'oldid',
+                MARKS: {othermark:'otherpos'},
+                removemarks: 'SAVEME',
+                newid: 'OVERWRITEME'
+            },
+            mutations: {
+                MARKS: {othermark:'otherpos',somemark:'somepos'},
+                removemarks: 'SAVEME',
+                newid: 'oldid-somepos'
+            }
+        }
+    })
     test(F.linkToEndturn,'the linkToEndturn func',{
         'when losing, evaluated who': {
             options: {
                 player: 1,
-                endgame: {
-                    gnarf: {condition:['true'], who:['ifelse',['true'],2,1]}
+                rules: {
+                    endgame: {
+                        gnarf: {condition:['true'], who:['ifelse',['true'],2,1]}
+                    }
                 }
             },
             scope: {links:{}},
@@ -18,8 +54,10 @@ describe("The flow commands",()=>{
         'when winning, no who': {
             options: {
                 player: 1,
-                endgame: {
-                    gnarf: {condition:['true']}
+                rules: {
+                    endgame: {
+                        gnarf: {condition:['true']}
+                    }
                 }
             },
             scope: {links:{}},
@@ -28,18 +66,20 @@ describe("The flow commands",()=>{
         'when draw, depending on gen': {
             options: {
                 player: 1,
-                endturn: {
-                    runGenerator: 'findblurbs',
-                },
-                endgame: {
-                    wee: {condition:['true'],who:['ifelse',['notempty','blurbs'],0,1]}
-                },
-                generators: {
-                    'findblurbs': {
-                        type: 'filter',
-                        layer: 'borks',
-                        tolayer: 'blurbs',
-                        matching: {foo:['is','bar']}
+                rules: {
+                    endturn: {
+                        runGenerator: 'findblurbs',
+                    },
+                    endgame: {
+                        wee: {condition:['true'],who:['ifelse',['notempty','blurbs'],0,1]}
+                    },
+                    generators: {
+                        'findblurbs': {
+                            type: 'filter',
+                            layer: 'borks',
+                            tolayer: 'blurbs',
+                            matching: {foo:['is','bar']}
+                        }
                     }
                 }
             },
@@ -54,9 +94,11 @@ describe("The flow commands",()=>{
         },
         'when linking to endturn and falsy unless': {
             options: {
-                endturn: {
-                    unless: {
-                        stupid: ['false']
+                rules: {
+                    endturn: {
+                        unless: {
+                            stupid: ['false']
+                        }
                     }
                 }
             },
@@ -66,10 +108,12 @@ describe("The flow commands",()=>{
         'when linking to endturn and truthy unless': {
             arg: ['endturn'],
             options: {
-                endturn: {
-                    unless: {
-                        stupid: ['false'],
-                        silly: ['true']
+                rules: {
+                    endturn: {
+                        unless: {
+                            stupid: ['false'],
+                            silly: ['true']
+                        }
                     }
                 }
             },
@@ -78,18 +122,20 @@ describe("The flow commands",()=>{
         },
         'when linking to endturn truthilly depending on single gen': {
             options: {
-                endturn: {
-                    runGenerator: 'findblurbs',
-                    unless: {
-                        noblurbs: ['isempty','blurbs']
-                    }
-                },
-                generators: {
-                    'findblurbs': {
-                        type: 'filter',
-                        layer: 'borks',
-                        tolayer: 'blurbs',
-                        matching: {foo:['is','bar']}
+                rules: {
+                    endturn: {
+                        runGenerator: 'findblurbs',
+                        unless: {
+                            noblurbs: ['isempty','blurbs']
+                        }
+                    },
+                    generators: {
+                        'findblurbs': {
+                            type: 'filter',
+                            layer: 'borks',
+                            tolayer: 'blurbs',
+                            matching: {foo:['is','bar']}
+                        }
                     }
                 }
             },
@@ -110,18 +156,20 @@ describe("The flow commands",()=>{
         },
         'when linking to endturn but unlessed by generator': {
             options: {
-                endturn: {
-                    runGenerator: 'findblurbs',
-                    unless: {
-                        blurbs: ['notempty','blurbs']
-                    }
-                },
-                generators: {
-                    'findblurbs': {
-                        type: 'filter',
-                        layer: 'borks',
-                        tolayer: 'blurbs',
-                        matching: {foo:['is','bar']}
+                rules: {
+                    endturn: {
+                        runGenerator: 'findblurbs',
+                        unless: {
+                            blurbs: ['notempty','blurbs']
+                        }
+                    },
+                    generators: {
+                        'findblurbs': {
+                            type: 'filter',
+                            layer: 'borks',
+                            tolayer: 'blurbs',
+                            matching: {foo:['is','bar']}
+                        }
                     }
                 }
             },
@@ -145,13 +193,16 @@ describe("The flow commands",()=>{
         'when generating': {
             arg: 'myfilter',
             options: {
-                generators: {
-                    myfilter: {
-                        type: 'filter',
-                        matching: {foo:['is','bar']},
-                        condition: ['different',['pos',['target']],'p1'],
-                        layer: 'source',
-                        tolayer: 'destination'
+                generating: true,
+                rules: {
+                    generators: {
+                        myfilter: {
+                            type: 'filter',
+                            matching: {foo:['is','bar']},
+                            condition: ['different',['pos',['target']],'p1'],
+                            layer: 'source',
+                            tolayer: 'destination'
+                        }
                     }
                 }
             },

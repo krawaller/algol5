@@ -318,6 +318,7 @@ const G = {
 		return '('+ret+' null)';
 	},
 
+	// we only ever add to artifact layers.
 	addtolayer: (O,layer,pos,obj)=> 'ARTIFACTS['+layer+']['+pos+']='+obj+'; ',
 
 	// assumes POS
@@ -337,22 +338,20 @@ const G = {
 			ret += 'if ('+cond.join(' && ')+'){ '
 		}
 		if (def.include && def.include.owner){ // if artifact has owner it must be added to more than one layer
-			ret += 'var artifact='+G.artifactliteral(O,def)+'; '
 			ret += 'var targetlayername='+C.value(O,def.tolayer)+'; '
-			ret += G.addtolayer(O,'targetlayername','POS','artifact')
-			if (def.include && def.include.owner){
-				var prefix, owner = C.value(O,def.include.owner);
-				if (owner === 0){
-					prefix = '"neutral"';
-				} else if (owner === O.player) {
-					prefix = '"my"'
-				} else if (_.isNumber(owner)) {
-					prefix = '"opp"'
-				} else {
-					prefix = 'ownernames[artifact.owner]'
-				}
-				ret += G.addtolayer(O,prefix+' + targetlayername','POS','artifact')
+			var prefix, owner = C.value(O,def.include.owner);
+			if (owner === 0){
+				prefix = '"neutral"';
+			} else if (owner === O.player) {
+				prefix = '"my"'
+			} else if (_.isNumber(owner)) {
+				prefix = '"opp"'
+			} else {
+				prefix = 'ownernames[artifact.owner]'
 			}
+			ret += 'var artifact='+G.artifactliteral(O,def)+'; '
+			ret += G.addtolayer(O,'targetlayername','POS','artifact')
+			ret += G.addtolayer(O,prefix+' + targetlayername','POS','artifact')
 		} else {
 			ret += G.addtolayer(O,C.value(O,def.tolayer),'POS',G.artifactliteral(O,def))
 		}

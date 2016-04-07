@@ -27,7 +27,8 @@ describe("The effect commands",()=>{
             },
             mutations: {
                 UNITDATA: { unit1: {prop:'unit1x1'}, unit2: {}, unit3: {prop:'unit3x3'} }
-            }
+            },
+            norefs: ['UNITDATA.unit1','UNITDATA.unit3']
         }
     });
     test(E.forposin,'the forposin func',{
@@ -148,11 +149,12 @@ describe("The effect commands",()=>{
         'for straight call': {
             args: [['mark','at'],['value','foo'],['sum',2,3]],
             scope: {
-                UNITDATA: { 42: {foo:0}},
-                UNITLAYERS: { all: {pos:{id:42}} },
+                UNITDATA: { 'u42': {foo:0}},
+                UNITLAYERS: { all: {pos:{id:'u42'}} },
                 MARKS: {at:'pos'}
             },
-            mutations: { UNITDATA: { 42:{foo:5} } },
+            mutations: { UNITDATA: { 'u42':{foo:5} } },
+            norefs: ['UNITDATA.u42']
         }
     });
     test(E.spawn,'the spawn func',{
@@ -171,6 +173,38 @@ describe("The effect commands",()=>{
                     unit5:{id:'unit5',group:'fools',owner:7,pos:'somepos',foo:'bar',baz:'bin'}},
                 nextunitid: 6
             },
+        }
+    });
+    test(E.stompid,'the stompid func',{
+        'when there is a target': {
+            args: [42,['mark','mymark']],
+            scope: {
+                UNITDATA: { 42: {pos:'somepos'}, doomed: {}},
+                UNITLAYERS: { all: {otherpos: {id: 'doomed'}} },
+                MARKS: {mymark:'otherpos'}
+            },
+            mutations: { UNITDATA: { 42: {pos:'otherpos'} } }
+        }
+    });
+    test(E.stompat,'the stompat func',{
+        'when there is a target': {
+            args: [['mark','from'],['mark','to']],
+            scope: {
+                UNITDATA: { 42: {pos:'origin'}, doomed: {pos:'destination'}},
+                UNITLAYERS: { all: {origin:{id:42},destination:{id:'doomed'}} },
+                MARKS: {from:'origin',to:'destination'}
+            },
+            mutations: { UNITDATA: { 42: {pos:'destination'}} }
+        },
+        'when there is a target but no one to stomp': {
+            showcode: true,
+            args: [['mark','from'],['mark','to']],
+            scope: {
+                UNITDATA: { notdoomed: {pos:'destination'}},
+                UNITLAYERS: { all: {destination:{id:'notdoomed'}} },
+                MARKS: {from:'origin',to:'destination'}
+            },
+            mutations: { UNITDATA: { notdoomed: {pos:'destination'}} }
         }
     });
 });

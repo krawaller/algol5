@@ -4,7 +4,7 @@ import lib from '../../../src/codegen/'
 let G = lib.G
 
 describe('the neighbour funcs',()=>{
-    test(G.drawneighbourtargets, 'the drawneighbourtargets func', {
+    test(G.drawmanyneighbours, 'the drawmanyneighbours func', {
         'when we want to draw': {
             arg: {draw:{neighbours:{tolayer:'somelayer',include:{found:['neighbourcount'],at:['pos',['target']]}}}},
             scope: {
@@ -18,7 +18,21 @@ describe('the neighbour funcs',()=>{
                 ARTIFACTS: {somelayer:{foo:{found:2,at:'foo'},bar:{found:2,at:'bar'}}}
             }
         },
-        'when we dont care': {
+        'when we want to draw and include DIR': {
+            arg: {draw:{neighbours:{tolayer:'somelayer',include:{from:['dir']}}}},
+            scope: {
+                POS: 'sthelse',
+                STARTPOS: 'start',
+                foundneighbours: ['foo','bar'],
+                foundneighbourdirs: ['firstdir','seconddir'],
+                NEIGHBOURCOUNT: 2,
+                ARTIFACTS: {somelayer:{}}
+            },
+            mutations: {
+                ARTIFACTS: {somelayer:{foo:{from:'firstdir'},bar:{from:'seconddir'}}}
+            }
+        },
+        'when we dont care about drawing': {
             scope: {
                 POS: 'sthelse',
                 STARTPOS: 'start',
@@ -56,25 +70,6 @@ describe('the neighbour funcs',()=>{
             }
         }
     });
-    test(G.afterneighbourlook, 'the afterneighbourlook func', {
-        'when we do care about total count': {
-            scope: {
-                foundneighbours: ['foo','bar'],
-            },
-            arg: {
-                draw: {
-                    all: {
-                        include: {
-                            outof: ['neighbourcount']
-                        }
-                    }
-                }
-            },
-            mutations: {
-                NEIGHBOURCOUNT: 2
-            }
-        }
-    });
     test(G.findneighbourindir, 'the findneighbourindir func', {
         'for vanilla look': {
             arg: {},
@@ -85,6 +80,17 @@ describe('the neighbour funcs',()=>{
                 foundneighbours: ['foo']
             },
             mutations: { foundneighbours: ['foo','s1'], POS: 's1' }
+        },
+        'for vanilla look where we care about storing dir': {
+            arg: {draw:{neighbours:{include:{from:['dir']}}}},
+            scope: {
+                STARTPOS: 's0',
+                DIR: 2,
+                connections: {s0:{2:'s1'}},
+                foundneighbours: ['foo'],
+                foundneighbourdirs: ['wee']
+            },
+            mutations: { foundneighbours: ['foo','s1'], POS: 's1', foundneighbourdirs: ['wee',2] }
         },
         'for vanilla look with provided dir': {
             args: [{},7],
@@ -116,54 +122,6 @@ describe('the neighbour funcs',()=>{
                 foundneighbours: []
             },
             mutations: { foundneighbours: [] }
-        }
-    });
-    test(G.findneighboursfromstart, 'the findneighbourfromstart func', {
-        'when single dir in def that isnt referenced': {
-            arg: {dir:2},
-            scope: {
-                STARTPOS: 's0',
-                connections: {s0:{2:'s1'}},
-                foundneighbours: ['foo'],
-                DIR: 'shouldnotbeoverwritten'
-            },
-            mutations: { foundneighbours: ['foo','s1'], POS: 's1', DIR: 'shouldnotbeoverwritten' }
-        },
-        'when single dir in def that is referenced': {
-            arg: {dir:2,something:{someval:['dir']}},
-            scope: {
-                STARTPOS: 's0',
-                connections: {s0:{2:'s1'}},
-                foundneighbours: ['foo']
-            },
-            mutations: { foundneighbours: ['foo','s1'], POS: 's1', DIR: 2 }
-        },
-        'when dirs in def': {
-            arg: {dirs:[1,2]},
-            scope: {
-                STARTPOS: 's0',
-                connections: {s0:{1:'s1',2:'s2'}},
-                foundneighbours: ['foo']
-            },
-            mutations: { foundneighbours: ['foo','s1','s2']}
-        }
-    });
-    test(G.findneighbours, 'the applyneighbours func', {
-        'with single start': {
-            arg: {dir:2,start:'mymark'},
-            scope: {
-                connections: {s0:{2:'s1'}},
-                MARKS: {mymark:'s0'}
-            },
-            mutations: { foundneighbours: ['s1'], STARTPOS: 's0' }
-        },
-        'with 2 starts': {
-            arg: {dir:2,starts:'mylayer'},
-            scope: {
-                connections: {s0:{2:'s1'},p0:{2:'p1'}},
-                ARTIFACTS: {mylayer:{s0:'yes',p0:'yes'}}
-            },
-            mutations: { foundneighbours: ['s1','p1']}
         }
     });
     test(G.applyneighbours, 'the applyneighbours func', {

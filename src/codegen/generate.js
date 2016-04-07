@@ -41,68 +41,104 @@ const G = {
 
 	applyneighbours: (O,def)=> {
 		let ret = ''
-		ret += G.findneighbours(O,def)
-		ret += G.afterneighbourlook(O,def)
-		ret += G.drawneighbourstart(O,def)
-		ret += G.drawneighbourtargets(O,def)
-		return ret
-	},
-
-	findneighbours: (O,def)=> {
-		def = def || {}
-		let ret = ''
-		ret += 'var foundneighbours=[]; '
 		if (def.start){
 			ret += 'var STARTPOS='+C.position(O,def.start)+'; '
-			ret += G.findneighboursfromstart(O,def)
+			ret += G.findanddrawneighboursfromstart(O,def)
+			ret += G.drawneighbourstart(O,def);
 		} else {
-			ret += 'var STARTPOS; '
 			ret += 'var neighbourstarts='+C.set(O,def.starts)+'; '
 			ret += 'for(var STARTPOS in neighbourstarts){'
-			ret += G.findneighboursfromstart(O,def)
+			ret += G.findanddrawneighboursfromstart(O,def)
+			ret += G.drawneighbourstart(O,def);
 			ret += '} '
 		}
 		return ret;
 	},
 
-	findneighboursfromstart: (O,def)=> {
+	// assumes STARTPOS
+	findanddrawneighboursfromstart: (O,def)=> {
 		def = def || {}
 		let ret = ''
 		if (def.dir){
 			if (U.contains(def,['dir'])){
 				ret += 'var DIR='+C.value(O,def.dir)+'; '
-				ret += G.findneighbourindir(O,def)
+				ret += G.findanddrawsingleneighbour(O,def)
 			} else {
-				ret += G.findneighbourindir(O,def,C.value(O,def.dir))
+				ret += G.findanddrawsingleneighbour(O,def,C.value(O,def.dir))
 			}
 		} else {
-			ret += 'var DIR; '
-			ret += 'var neighbourdirs='+C.list(O,def.dirs)+'; '
-			ret += 'var nbrofneighbourdirs=neighbourdirs.length; '
-			ret += 'for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){'
-			ret += 'DIR=neighbourdirs[dirnbr]; '
-			ret += G.findneighbourindir(O,def)
-			ret += '} '
+			ret += G.findmanyneighbours(O,def);
+			ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
+			ret += G.drawmanyneighbours(O,def);
 		}
 		return ret
 	},
+
+	// assumes startpos
+	findmanyneighbours: (O,def)=> {
+		def = def || {}
+		let ret = ''
+		let usedir = U.contains(def.draw && def.draw.neighbours,['dir']);
+		ret += 'var DIR; '
+		ret += 'var foundneighbours = []; '
+		ret += 'var neighbourdirs='+C.list(O,def.dirs)+'; '
+		ret += 'var nbrofneighbourdirs=neighbourdirs.length; '
+		if (usedir){
+			ret += 'var foundneighbourdirs=[]; '	
+		}
+		ret += 'for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){'
+		ret += 'DIR=neighbourdirs[dirnbr]; '
+		ret += G.findneighbourindir(O,def)
+		ret += '} '
+		return ret;
+	},
+
 
 	// wants full neighbour def
 	// assumes STARTPOS, DIR, foundneighbours
 	findneighbourindir: (O,def,dirtouse)=> {
 		def = def || {}
 		let ret = ''
+		let usedir = U.contains(def.draw && def.draw.neighbours,['dir']);
 		ret += 'var POS=connections[STARTPOS]['+(dirtouse||'DIR')+']; '
 		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
 		ret += 'foundneighbours.push(POS); '
+		if (usedir){
+			ret += 'foundneighbourdirs.push(DIR); '
+		}
 		ret += '} '
 		return ret
 	},
 
-	afterneighbourlook: (O,def)=> {
+	// assumes POS, foundneighbours, NEIGHBOURCOUNT
+	// and foundneighbourdirs if used!
+	drawmanyneighbours: (O,def)=> {
+		def = def || {}
 		let ret = ''
-		//if (def && U.contains(def.draw,['neighbourcount']) ) // no, because used in forloop
-			ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
+		if (def.draw && def.draw.neighbours){
+			let usedir = U.contains(def.draw.neighbours,['dir']);
+			ret += 'for(var neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){'
+			ret += 'POS=foundneighbours[neighbournbr]; '
+			if (usedir){
+				ret += 'var DIR=foundneighbourdirs[neighbournbr]; '
+			}
+			ret += G.performdraw(O,def.draw.neighbours)
+			ret += '} '
+		}
+		return ret
+	},
+
+	// wants full neighbour def
+	// assumes STARTPOS, DIR
+	findanddrawsingleneighbour: (O,def,dirtouse)=> {
+		let ret = ''
+		ret += 'var POS=connections[STARTPOS]['+(dirtouse||'DIR')+']; '
+		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
+		ret += 'var NEIGHBOURCOUNT=1; ' // TODO - only if someone cares!
+		if (def.draw && def.draw.neighbours){
+			ret += G.performdraw(O,def.draw.neighbours);
+		}
+		ret += '} '
 		return ret
 	},
 
@@ -110,20 +146,12 @@ const G = {
 		def = def || {}
 		let ret = ''
 		if (def.draw && def.draw.start){
-			ret += 'POS=STARTPOS; '
-			ret += G.performdraw(O,def.draw.start)
-		}
-		return ret
-	},
-
-	drawneighbourtargets: (O,def)=> {
-		def = def || {}
-		let ret = ''
-		if (def.draw && def.draw.neighbours){
-			ret += 'for(var neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){'
-			ret += 'POS=foundneighbours[neighbournbr]; '
-			ret += G.performdraw(O,def.draw.neighbours)
-			ret += '} '
+			if (U.contains(def.draw.start,['target'])){
+				ret += 'POS=STARTPOS; '
+				ret += G.performdraw(O,def.draw.start)
+			} else {
+				ret += G.performdraw(O,def.draw.start,'STARTPOS')
+			}
 		}
 		return ret
 	},
@@ -321,18 +349,19 @@ const G = {
 	// we only ever add to artifact layers.
 	addtolayer: (O,layer,pos,obj)=> 'ARTIFACTS['+layer+']['+pos+']='+obj+'; ',
 
-	// assumes POS
-	performdraw: (O,def)=> {
+	// assumes vartouse is defined (defaults to POS)
+	performdraw: (O,def,vartouse)=> {
+		vartouse = vartouse || 'POS'
 		let ret = ''
 		let cond = []
 		if (def.condition){
 			cond.push(C.boolean(O,def.condition))
 		}
 		if (def.unlessover){
-			cond.push( '!'+C.set(O,def.unlessover)+'[POS]' )
+			cond.push( '!'+C.set(O,def.unlessover)+'['+vartouse+']' )
 		}
 		if (def.ifover){
-			cond.push( C.set(O,def.ifover)+'[POS]' )
+			cond.push( C.set(O,def.ifover)+'['+vartouse+']' )
 		}
 		if (cond.length){
 			ret += 'if ('+cond.join(' && ')+'){ '
@@ -350,10 +379,10 @@ const G = {
 				prefix = 'ownernames[artifact.owner]'
 			}
 			ret += 'var artifact='+G.artifactliteral(O,def)+'; '
-			ret += G.addtolayer(O,'targetlayername','POS','artifact')
-			ret += G.addtolayer(O,prefix+' + targetlayername','POS','artifact')
+			ret += G.addtolayer(O,'targetlayername',vartouse,'artifact')
+			ret += G.addtolayer(O,prefix+' + targetlayername',vartouse,'artifact')
 		} else {
-			ret += G.addtolayer(O,C.value(O,def.tolayer),'POS',G.artifactliteral(O,def))
+			ret += G.addtolayer(O,C.value(O,def.tolayer),vartouse,G.artifactliteral(O,def))
 		}
 		if (cond.length){
 			ret += '} '

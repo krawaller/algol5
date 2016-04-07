@@ -4,7 +4,62 @@ import lib from '../../../src/codegen/'
 let F = lib.F
 
 describe("The flow commands",()=>{
-    test(F.addMark,'the addMark func',{
+    test(F.applyEffectInstructions,'the applyEffectInstructions func',{
+        'for single effect with no conds': {
+            showcode: false, //true,
+            scope: {
+                UNITDATA: { unit1: {} }
+            },
+            arg: {
+                applyEffect: ['killid',['value','unit1']]
+            },
+            mutations: {
+                UNITDATA: {}
+            },
+            norefs: ['UNITDATA']
+        }
+    })
+    test(F.applyCommandConsequences,'the applyCommandConsequences func',{
+        'when not passing AI flag, with effect and generator': {
+            options: {
+                cmndname: 'flaunt',
+                rules: {
+                    generators: {
+                        findfoo: {
+                            type: 'neighbour',
+                            start: ['pos','start'],
+                            dir: 1,
+                            draw: {
+                                neighbours: {
+                                    tolayer: 'foos'
+                                }
+                            }
+                        }
+                    },
+                    commands: {
+                        flaunt: {
+                            applyEffect: ['killid',['value','unit1']],
+                            runGenerator: 'findfoo'
+                        }
+                    }
+                }
+            },
+            scope: {
+                UNITDATA: { unit1: {} },
+                cmndname: 'flaunt',
+                stepid: 'oldid',
+                newid: 'OVERWRITEME',
+                ARTIFACTS: {foos:{}},
+                connections: {start:{1:'a1'}}
+            },
+            mutations: {
+                UNITDATA: {},
+                newid: 'oldid-flaunt',
+                ARTIFACTS: {foos:{a1:{}}}
+            }
+        }
+    });
+    test(F.applyMarkConsequences,'the applyMarkConsequences func',{
         'when not passing AI flag': {
             scope: {
                 markname: 'somemark',

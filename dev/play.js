@@ -25,10 +25,17 @@ let neighbourdef = {
 	//"dir": 1,
 	"condition": ["anyat","muppets",["target"]],
 	"draw": {
+		"start": {
+			"tolayer": "fnork",
+			"include": {
+				"found": ["neighbourcount"],
+				"where": ["pos",["target"]]
+			}
+		},
 		"neighbours": {
 			"tolayer": ["ifelse",["true"],"dorklayer","borklayer"],
 			"include": {
-				"found": ["neighbourcount"],
+				"from": ["dir"],
 				"owner": ["read","board",["mark","mymark"],"fjupp"]
 			}
 		}

@@ -27,10 +27,11 @@ const F = {
     },
     applyEffectInstructions: (O,instr)=> {
         O = {effect:true, ...(O || {})}
+        let copy = 'UNITDATA = Object.assign({},UNITDATA); '
         if (instr.applyEffect) {
-            return F.instruction(O,instr.applyEffect)
+            return copy+F.instruction(O,instr.applyEffect)
         } else if (instr.applyEffects) {
-            return F.instruction(O,['all'].concat(instr.applyEffects))
+            return copy+F.instruction(O,['all'].concat(instr.applyEffects))
         } else {
             return '';
         }
@@ -60,8 +61,8 @@ const F = {
     },
 
     // assumes markname, markpos, stepid
-    // mutates MARKS, removemarks, newid
-    addMark: (O)=> {
+    // mutates MARKS, removemarks (but new ref), newid
+    applyMarkConsequences: (O)=> {
         let ret = ''
         ret += 'MARKS[markname] = markpos; '
         if (!(O && O.AI)){
@@ -72,13 +73,20 @@ const F = {
         return ret;
     },
 
-    // assumes unpacked data
-    applyMarkConsequences: (O)=> {
-        // add mark
-        // copy & augment removemarks // if human
-        // copy undo // if human
-        // run generators
-        // link
+    // assumes cmndname, stepid
+    applyCommandConsequences: (O)=> {
+        let ret = ''
+        ret += 'newid = stepid+"-"+cmndname; '
+        ret += F.applyEffectInstructions(O,O.rules.commands[O.cmndname]);
+        ret += F.applyGeneratorInstructions(O,O.rules.commands[O.cmndname]);
+        /*
+        perform effects
+        clear marks
+        run generators
+        set undo // if human
+        clear removemarks // if human
+        */
+        return ret;
     }
 
 }

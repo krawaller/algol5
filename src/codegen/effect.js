@@ -19,7 +19,11 @@ const E = {
     killid: (O,id)=> "delete UNITDATA["+C.id(O,id)+"]; ",
     killat: (O,pos)=> "delete UNITDATA[ (UNITLAYERS.all["+C.position(O,pos)+"] || {}).id ]; ",
     killin: (O,set)=> E.foridin(O,set,['killid',['loopid']]),
-    setid: (O,id,propname,val)=> "UNITDATA["+C.id(O,id)+"]=Object.assign({},UNITDATA["+C.id(O,id)+"],{"+C.value(O,propname)+":"+C.value(O,val)+"});",
+    setid: (O,id,propname,val)=> `
+        UNITDATA[${C.id(O,id)}]=Object.assign({},UNITDATA[${C.id(O,id)}],{
+            ${C.value(O,propname)}: ${C.value(O,val)}
+        });
+    `,
     setat: (O,pos,propname,val,and)=> `
         var unitid = (UNITLAYERS.all[${C.position(O,pos)}] || {}).id;
         if (unitid){
@@ -28,31 +32,33 @@ const E = {
         }
     `,
     setin: (O,set,propname,val)=> E.foridin(O,set,['setid',['loopid'],propname,val]),
-    spawn: (O,pos,group,owner,obj)=>{
-        return (
-            "var newunitid = 'unit'+(nextunitid++);"+
-            "UNITDATA[newunitid] = {pos:"+C.position(O,pos)+", id:newunitid,group:"+C.value(O,group)+",owner:"+(owner ? C.value(O,owner) : O.player)+(obj?","+_.map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):"")+"};"
-        );
-    },
-    forposin: (O,set,effect)=> {
-        let ret = '';
-        ret += 'for(var POS in '+C.set(O,set)+'){'
-        ret += E.applyeffect(O,effect); // TODO - check that it uses ['target'] ?
-        ret += '}'
-        return ret
-    },
+    spawn: (O,pos,group,owner,obj)=>`
+        var newunitid = 'unit'+(nextunitid++);
+        UNITDATA[newunitid] = {
+            pos: ${C.position(O,pos)},
+            id: newunitid,
+            group: ${C.value(O,group)},
+            owner: ${owner ? C.value(O,owner) : 'player'}
+            ${obj?","+_.map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):""}
+        }; 
+    `,
+    forposin: (O,set,effect)=> `
+        for(var POS in ${C.set(O,set)}){
+            ${E.applyeffect(O,effect)}
+        }
+    `,
     foridin: (O,set,effect)=> {
         let ret = '',
             setcode = C.set(O,set),
             obvious = setcode.substr(0,10) === 'UNITLAYERS'
-        ret += 'var LOOPID; '
-        ret += 'for(var POS in '+setcode+'){'
-        if (!obvious) ret += 'if (LOOPID=(UNITLAYERS.all[POS]||{}).id){'
-        if (obvious) ret += 'LOOPID='+setcode+'[POS].id; '
-        ret += E.applyeffect(O,effect)  // TODO - check that it uses ['loopid'] ?
-        if (!obvious) ret += '}'
-        ret += '}'
-        return ret;
+        return `
+            var LOOPID;
+            for(var POS in ${setcode}){
+                ${obvious ? 'LOOPID='+setcode+'[POS].id' : 'if (LOOPID=(UNITLAYERS.all[POS]||{}).id){' }
+                ${E.applyeffect(O,effect) /*TODO - check that it uses ['loopid'] ? */}
+                ${!obvious ? '}' : '' }
+            }
+        `
     }
 }
 

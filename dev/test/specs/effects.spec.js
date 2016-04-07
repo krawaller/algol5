@@ -69,6 +69,7 @@ describe("The effect commands",()=>{
             }
         },
         'with unit area': {
+            showcode: true,
             options: {
                 layermappings: { 'myclowns': 'UNITLAYERS' }
             },
@@ -160,8 +161,7 @@ describe("The effect commands",()=>{
     test(E.spawn,'the spawn func',{
         'for just pos and group': {
             args: [['mark','mymark'],'fools'],
-            options: {player:666},
-            scope: { UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, nextunitid: 7 },
+            scope: { UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, nextunitid: 7, player: 666 },
             mutations: { UNITDATA: {unit1:{}, unit7:{id:'unit7',group:'fools',owner:666,pos:'somepos'}}, nextunitid: 8 }
         },
         'for pos, group, owner and prop obj': {
@@ -197,7 +197,6 @@ describe("The effect commands",()=>{
             mutations: { UNITDATA: { 42: {pos:'destination'}} }
         },
         'when there is a target but no one to stomp': {
-            showcode: true,
             args: [['mark','from'],['mark','to']],
             scope: {
                 UNITDATA: { notdoomed: {pos:'destination'}},

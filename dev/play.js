@@ -5,9 +5,15 @@ import {js_beautify} from 'js-beautify'
 let walkerdef = {
 	"type": "walker",
 	"starts": "mymorons",
-	"dir": 2,
+	"dirs": [1,2],
 	"blocks": "units",
 	"draw": {
+		"start": {
+			"tolayer": "starts"
+		},
+		"steps": {
+			"tolayer": "steps"
+		},
 		"last": {
 			"tolayer": "endedupat",
 			"include": {
@@ -20,7 +26,7 @@ let walkercode = lib.G.applywalker({player:1},walkerdef)
 
 let neighbourdef = {
 	"type": "neighbour",
-	"start": ["mark","mymark"],
+	"starts": ["layer","mylayer"],
 	"dirs": [1,2,3],
 	//"dir": 1,
 	"condition": ["anyat","muppets",["target"]],
@@ -28,15 +34,16 @@ let neighbourdef = {
 		"start": {
 			"tolayer": "fnork",
 			"include": {
-				"found": ["neighbourcount"],
+				//"found": ["neighbourcount"],
 				"where": ["pos",["target"]]
 			}
 		},
 		"neighbours": {
 			"tolayer": ["ifelse",["true"],"dorklayer","borklayer"],
 			"include": {
-				"from": ["dir"],
-				"owner": ["read","board",["mark","mymark"],"fjupp"]
+				//"from": ["dir"],
+				"owner": ["read","board",["mark","mymark"],"fjupp"],
+				"found": ["neighbourcount"]
 			}
 		}
 	}

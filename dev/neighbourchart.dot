@@ -1,0 +1,7 @@
+digraph {
+	rankdir = LR
+	begin
+	begin -> loopstarts [label="many starts"]
+	loopstarts -> setstart
+	begin -> setstart
+}

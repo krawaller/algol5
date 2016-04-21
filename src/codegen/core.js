@@ -40,7 +40,7 @@ const valueTypes = withUniversals("value",{
     neighbourcount: (O)=> "NEIGHBOURCOUNT",
     step: (O)=> "STEP",
     read: (O,[layer,pos,prop])=> {
-        var pos = "("+T.set(O,layer)+"["+T.position(O,pos)+"]||{})";
+        var pos = layer === 'board' ? T.set(O,layer)+"["+T.position(O,pos)+"]" : "("+T.set(O,layer)+"["+T.position(O,pos)+"]||{})";
         return pos+"["+T.value(O,prop)+"]";
     }
 })
@@ -66,7 +66,8 @@ const positionTypes = withUniversals("position",{
     mark: (O,[markname])=> "MARKS[" + T.value(O,markname) + "]",
     ctxpos: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
     pos: (O,[pos])=> T.value(O,pos),
-    target: (O)=> "POS"
+    target: (O)=> "POS",
+    start: (O)=> "STARTPOS"
 })
 
 const setTypes = withUniversals("set",{

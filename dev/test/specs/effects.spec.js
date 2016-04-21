@@ -69,7 +69,6 @@ describe("The effect commands",()=>{
             }
         },
         'with unit area': {
-            showcode: true,
             options: {
                 layermappings: { 'myclowns': 'UNITLAYERS' }
             },

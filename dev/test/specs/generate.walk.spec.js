@@ -159,8 +159,8 @@ describe('the generate funcs',()=>{
             arg: {
                 draw: { start: { tolayer: 'begins' }}
             },
-            scope: {POS:'sthelse',STARTPOS:'start',ARTIFACTS:{begins:{}}},
-            mutations: {POS:'start',ARTIFACTS:{begins:{start:{}}}}
+            scope: {STARTPOS:'start',ARTIFACTS:{begins:{}}},
+            mutations: {ARTIFACTS:{begins:{start:{}}}}
         },
         'when we also draw all': {
             arg: {
@@ -169,8 +169,22 @@ describe('the generate funcs',()=>{
                     all: { tolayer: 'everything' }
                 }
             },
-            scope: {POS:'sthelse',STARTPOS:'start',ARTIFACTS:{begins:{},everything:{}}},
-            mutations: {POS:'start',ARTIFACTS:{begins:{start:{}},everything:{start:{}}}}
+            scope: {STARTPOS:'start',ARTIFACTS:{begins:{},everything:{}}},
+            mutations: {ARTIFACTS:{begins:{start:{}},everything:{start:{}}}}
+        },
+        'when using pos': {
+            arg: {
+                draw: {
+                    start: {
+                        tolayer: 'begins',
+                        include: {
+                            where: ['pos',['target']]
+                        }
+                    }
+                }
+            },
+            scope: {POS:'sthelse',STARTPOS:'start',ARTIFACTS:{begins:{}}},
+            mutations: {POS:'start',ARTIFACTS:{begins:{start:{where:'start'}}}}
         }
     });
     gentest(G.drawwalklast, 'the drawwalklast func', {
@@ -235,7 +249,8 @@ describe('the generate funcs',()=>{
         }
     });
     gentest(G.afterwalk, 'the afterwalk func', {
-        'for vanilla walk': {
+        'for vanilla walk with walklength use': {
+            arg: {draw: {steps: true}},
             scope: {walkedsquares:[1,2,3]},
             mutations: {WALKLENGTH:3}
         },
@@ -243,6 +258,10 @@ describe('the generate funcs',()=>{
             arg: {count:'yep'},
             scope: {walkedsquares:[1,2,3],CURRENTCOUNT:7},
             mutations: {TOTALCOUNT:7}
+        },
+        'if we dont need walklength': {
+            scope: {walkedsquares:[1,2,3],WALKLENGTH:'dontcalculateme'},
+            mutations: {WALKLENGTH:'dontcalculateme'}
         }
     });
     gentest(G.prepwalkstart, 'the prepwalkstart func', {

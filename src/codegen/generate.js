@@ -46,8 +46,9 @@ const G = {
 			ret += G.findanddrawneighboursfromstart(O,def)
 			ret += G.drawneighbourstart(O,def);
 		} else {
-			ret += 'var neighbourstarts='+C.set(O,def.starts)+'; '
-			ret += 'for(var STARTPOS in neighbourstarts){'
+			//ret += 'var neighbourstarts='+C.set(O,def.starts)+'; '
+			//if (!U.contains(def.draw.neighbours))
+			ret += 'for(var STARTPOS in '+C.set(O,def.starts)+'){'
 			ret += G.findanddrawneighboursfromstart(O,def)
 			ret += G.drawneighbourstart(O,def);
 			ret += '} '
@@ -68,8 +69,10 @@ const G = {
 			}
 		} else {
 			ret += G.findmanyneighbours(O,def);
-			ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
-			ret += G.drawmanyneighbours(O,def);
+			if (U.contains(def.draw,['neighbourcount'])){
+				ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
+				ret += G.drawmanyneighbours(O,def);
+			}
 		}
 		return ret
 	},
@@ -78,17 +81,28 @@ const G = {
 	findmanyneighbours: (O,def)=> {
 		def = def || {}
 		let ret = ''
-		let usedir = U.contains(def.draw && def.draw.neighbours,['dir']);
-		ret += 'var DIR; '
-		ret += 'var foundneighbours = []; '
-		ret += 'var neighbourdirs='+C.list(O,def.dirs)+'; '
-		ret += 'var nbrofneighbourdirs=neighbourdirs.length; '
-		if (usedir){
-			ret += 'var foundneighbourdirs=[]; '	
+		let usedir = U.contains(def.draw && def.draw.neighbours,['dir'])
+		let usecount = U.contains(def.draw,['neighbourcount'])
+		ret += 'var neighbourdirs='+C.list(O,def.dirs)+'; ' // TODO - extract if not dynamic
+		let predictednbrofdirs = U.listlength(def.dirs),
+			nbrvar = predictednbrofdirs;
+		if (!predictednbrofdirs){
+			ret += 'var nbrofneighbourdirs=neighbourdirs.length; '
+			nbrvar = 'nbrofneighbourdirs'
 		}
-		ret += 'for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){'
-		ret += 'DIR=neighbourdirs[dirnbr]; '
-		ret += G.findneighbourindir(O,def)
+		if (usecount){
+			ret += 'var foundneighbours = []; '
+			if (usedir){
+				ret += 'var foundneighbourdirs=[]; '	
+			}
+		}
+		ret += 'for(var dirnbr=0;dirnbr<'+nbrvar+';dirnbr++){'
+		if (usedir){
+			ret += 'var DIR=neighbourdirs[dirnbr]; '
+			ret += G.findneighbourindir(O,def)
+		} else {
+			ret += G.findneighbourindir(O,def,'neighbourdirs[dirnbr]')
+		}
 		ret += '} '
 		return ret;
 	},
@@ -99,12 +113,17 @@ const G = {
 	findneighbourindir: (O,def,dirtouse)=> {
 		def = def || {}
 		let ret = ''
-		let usedir = U.contains(def.draw && def.draw.neighbours,['dir']);
+		let usedir = U.contains(def.draw && def.draw.neighbours,['dir'])
+		let usecount = U.contains(def.draw,['neighbourcount'])
 		ret += 'var POS=connections[STARTPOS]['+(dirtouse||'DIR')+']; '
 		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
-		ret += 'foundneighbours.push(POS); '
-		if (usedir){
-			ret += 'foundneighbourdirs.push(DIR); '
+		if (usecount){
+			ret += 'foundneighbours.push(POS); '
+			if (usedir){
+				ret += 'foundneighbourdirs.push(DIR); '
+			}
+		} else if (def.draw && def.draw.neighbours){
+			ret += G.performdraw(O,def.draw.neighbours);
 		}
 		ret += '} '
 		return ret
@@ -158,8 +177,15 @@ const G = {
 
 	// ------------ WALKER STUFF -----------
 
+	/*
+	draw directly in whileloop if:
+	def.draw.steps and def.draw.all doesn't contain walklength or totalcount
+	*/
 	applywalker: (O,def)=> {
 		let ret = ''
+		if (def && def.draw && !U.contains([def.draw.steps,def.draw.all],['totalcount']) && !U.contains([def.draw.steps,def.draw.all],['walklength'])){
+			O = {drawduringwhile: true, ...O}
+		}
 		if (def.starts){
 			ret += 'var walkstarts = '+C.set(O,def.starts)+'; '
 			ret += 'for(var STARTPOS in walkstarts){'
@@ -174,37 +200,59 @@ const G = {
 	// wants full walkerdef. 
 	// assumes STARTPOS, connections
 	walkfromstart: (O,def)=> {
-		let ret = ''
+		let ret = '', usefordir
 		if (def.dirs){
-			ret += 'var DIR; '
-			ret += 'var allwalkerdirs = '+C.list(O,def.dirs)+'; '
-			ret += 'var nbrofwalkerdirs = allwalkerdirs.length; '
-			ret += 'for(var walkerdirnbr=0; walkerdirnbr<nbrofwalkerdirs; walkerdirnbr++){'
-			ret += 'DIR = allwalkerdirs[walkerdirnbr]; '
-			ret += G.walkindir(O,def)
+			ret += 'var allwalkerdirs = '+C.list(O,def.dirs)+'; ' // TODO - extract if not dynamic
+			let predictednbrofdirs = U.listlength(def.dirs),
+				nbrvar = predictednbrofdirs;
+			if (!predictednbrofdirs){
+				ret += 'var nbrofwalkerdirs = allwalkerdirs.length; '
+				nbrvar = 'nbrofwalkerdirs'
+			}
+			ret += 'for(var walkerdirnbr=0; walkerdirnbr<'+nbrvar+'; walkerdirnbr++){'
+			if (U.contains(def.draw,['dir'])){
+				ret += 'var DIR = allwalkerdirs[walkerdirnbr]; '
+			} else {
+				usefordir = 'allwalkerdirs[walkerdirnbr]'
+			}
+			ret += G.walkindir(O,def,usefordir)
 			ret += '} '
 		} else {
+			if (U.contains(def.draw,['dir'])){
+				ret += 'var DIR = '+C.value(O,def.dir)+'; '
+			} else {
+				usefordir = C.value(O,def.dir)
+			}
 			ret += 'var DIR='+C.value(O,def.dir)+'; '
-			ret += G.walkindir(O,def)
+			ret += G.walkindir(O,def,usefordir)
 		}
 		return ret
 	},
 	// wants full walkerdef. 
-	// assumes STARTPOS, DIR, connections
-	walkindir: (O,def)=> {
+	// assumes STARTPOS, connections
+	walkindir: (O,def,usefordir)=> {
 		let ret = ''
 		ret += G.prepwalkstart(O,def)
-		if (def.max)
+		if (def.max){
 			ret += 'var LENGTH=0; '
-		ret += 'while(!(STOPREASON='+G.stopreason(O,def)+')){'
+		}
+		if (O && O.drawduringwhile && U.contains([def.draw.steps,def.draw.all],['step'])){
+			ret += 'var STEP=0; '
+		}
+		ret += 'while(!(STOPREASON='+G.stopreason(O,def,usefordir)+')){'
 		ret += G.takewalkstep(O,def)
 		if (def.max)
 			ret += 'LENGTH++; '
+		if (O && O.drawduringwhile){
+			ret += G.drawwalksinglestep(O,def)
+		}
 		ret += '}'
 		ret += G.afterwalk(O,def)
 		ret += G.drawwalkblock(O,def)
 		ret += G.drawwalkstart(O,def)
-		ret += G.drawwalksteps(O,def)
+		if (!(O && O.drawduringwhile)){
+			ret += G.drawwalksteps(O,def)
+		}
 		ret += G.drawwalklast(O,def)
 		return ret;
 	},
@@ -240,17 +288,23 @@ const G = {
 	// ASSUMES nextpos, ..
 	takewalkstep: (O,def)=> {
 		def = def || {}
-		let ret = 'POS = nextpos; '
-		ret += 'walkedsquares.push(nextpos); '
+		let ret = 'walkedsquares.push(POS = nextpos); '
 		if (def.count){
 			ret += 'countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0)); '
+		}
+		if (def.draw && def.draw.steps && !U.contains(def.draw.steps,['walklength'])){
+			//ret += 
 		}
 		return ret;
 	},
 	// wants full walkerdef.
 	afterwalk: (O,def)=> {
+		def = def || {}
+		def.draw = def.draw || {}
 		let ret = ''
-		ret += 'var WALKLENGTH = walkedsquares.length; '
+		if (def.draw.steps || def.draw.last || U.contains(def.draw,['walklength'])){
+			ret += 'var WALKLENGTH = walkedsquares.length; '
+		}
 		if (def && def.count){
 			ret += 'var TOTALCOUNT = CURRENTCOUNT; '
 		}
@@ -271,40 +325,49 @@ const G = {
 		return ret
 	},
 	// wants full walkerdef
-	drawwalksteps: (O,def)=> { // TODO - only use STEP if we care!
+	drawwalksteps: (O,def)=> {
 		let ret = ''
 		if (def.draw.steps || def.draw.all || def.draw.counted){
 			var usesstep = U.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
 			if (usesstep) ret += 'var STEP = 0; '
 			ret += 'for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){'
 			ret += 'POS=walkedsquares[walkstepper]; '
-			if (usesstep) ret += 'STEP++; '
-			if (def.count){
-				ret += 'CURRENTCOUNT = countedwalkpositions[walkstepper]; '
-			}
-			if (def.draw.steps){
-				ret += G.performdraw(O,def.draw.steps)
-			}
-			if (def.draw.all){
-				ret += G.performdraw(O,def.draw.all)
-			}
-			if (def.draw.counted){
-				ret += 'if (walkpositionstocount[POS]) {'
-				ret += G.performdraw(O,def.draw.counted)
-				ret += '} '
-			}
+			ret += G.drawwalksinglestep(O,def)
 			ret += '}'
 		}
 		return ret
 	},
+	drawwalksinglestep: (O,def)=> {
+		var usesstep = U.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
+		let ret = '';
+		if (usesstep) ret += 'STEP++; '
+		if (def.count){
+			ret += 'CURRENTCOUNT = countedwalkpositions[walkstepper]; '
+		}
+		if (def.draw.steps){
+			ret += G.performdraw(O,def.draw.steps)
+		}
+		if (def.draw.all){
+			ret += G.performdraw(O,def.draw.all)
+		}
+		if (def.draw.counted){
+			ret += 'if (walkpositionstocount[POS]) {'
+			ret += G.performdraw(O,def.draw.counted)
+			ret += '} '
+		}
+		return ret
+	},
 	// wants full walkerdef. 
-	drawwalkstart: (O,def)=> {
+	drawwalkstart: (O,def)=> {   // TODO - handle all + startasstep?
 		let ret = ''
 		if (def.draw.start){
-			ret += 'POS=STARTPOS; '
-			ret += G.performdraw(O,def.draw.start)
+			var needspos = U.contains([def.draw.start,def.draw.all],['target']);
+			if (needspos){
+				ret += 'POS=STARTPOS; '
+			}
+			ret += G.performdraw(O,def.draw.start, needspos ? 0 : 'STARTPOS');
 			if (def.draw.all){
-				ret += G.performdraw(O,def.draw.all) // TODO - handle all + startasstep?
+				ret += G.performdraw(O,def.draw.all, needspos ? 0 : 'STARTPOS');
 			}
 		}
 		return ret
@@ -313,9 +376,13 @@ const G = {
 	drawwalklast: (O,def)=> {
 		let ret = ''
 		if (def.draw.last){
-			ret += 'POS=walkedsquares[WALKLENGTH-1]; '
 			if (U.contains(def.draw.last,['step'])) ret += 'STEP=WALKLENGTH; '
-			ret += G.performdraw(O,def.draw.last)
+			if (U.contains(def.draw.last,['target'])) {
+				ret += 'POS=walkedsquares[WALKLENGTH-1]; '
+				ret += G.performdraw(O,def.draw.last)
+			} else {
+				ret += G.performdraw(O,def.draw.last,'walkedsquares[WALKLENGTH-1]')
+			}
 		}
 		return ret
 	},
@@ -324,24 +391,24 @@ const G = {
 
 	// assumes connections, DIR, LENGTH, nextpos
 	// and if used BLOCKS, allowedsteps, MAX
-	stopreason: (O,def)=> {
+	stopreason: (O,def,usefordir,useforblocks)=> {
 		def = def || {}
 		let ret = ''
 		if (def.max){
 			ret += 'LENGTH === MAX ? "reachedmax" : '
 		}
-		ret += '!(nextpos=connections[POS][DIR]) ? "outofbounds" : '
+		ret += '!(nextpos=connections[POS]['+(usefordir || 'DIR')+']) ? "outofbounds" : '
 		if (def.type==='floater'){
 			ret += 'REACHED[nextpos] ? "alreadyreached" : '
 		}
 		if (def.blocks && def.steps && def.testblocksbeforesteps){
-			ret += 'BLOCKS[nextpos] ? "hitblock" : '
+			ret += (useforblocks||'BLOCKS')+'[nextpos] ? "hitblock" : '
 		}
 		if (def.steps){
 			ret += '!allowedsteps[nextpos] ? "nomoresteps" : '
 		}
 		if (def.blocks && !def.testblocksbeforesteps){
-			ret += 'BLOCKS[nextpos] ? "hitblock" : '
+			ret += (useforblocks||'BLOCKS')+'[nextpos] ? "hitblock" : '
 		}
 		return '('+ret+' null)';
 	},
@@ -350,7 +417,8 @@ const G = {
 	addtolayer: (O,layer,pos,obj)=> 'ARTIFACTS['+layer+']['+pos+']='+obj+'; ',
 
 	// assumes vartouse is defined (defaults to POS)
-	performdraw: (O,def,vartouse)=> {
+	// also assumed targetlayername if flag is true
+	performdraw: (O,def,vartouse,targetlayerpredefined)=> {
 		vartouse = vartouse || 'POS'
 		let ret = ''
 		let cond = []
@@ -367,7 +435,9 @@ const G = {
 			ret += 'if ('+cond.join(' && ')+'){ '
 		}
 		if (def.include && def.include.owner){ // if artifact has owner it must be added to more than one layer
-			ret += 'var targetlayername='+C.value(O,def.tolayer)+'; '
+			if (!targetlayerpredefined){
+				ret += 'var targetlayername='+C.value(O,def.tolayer)+'; '
+			}
 			var prefix, owner = C.value(O,def.include.owner);
 			if (owner === 0){
 				prefix = '"neutral"';
@@ -382,7 +452,12 @@ const G = {
 			ret += G.addtolayer(O,'targetlayername',vartouse,'artifact')
 			ret += G.addtolayer(O,prefix+' + targetlayername',vartouse,'artifact')
 		} else {
-			ret += G.addtolayer(O,C.value(O,def.tolayer),vartouse,G.artifactliteral(O,def))
+			ret += G.addtolayer(
+				O,
+				targetlayerpredefined ? 'targetlayername' : C.value(O,def.tolayer),
+				vartouse,
+				G.artifactliteral(O,def)
+			)
 		}
 		if (cond.length){
 			ret += '} '

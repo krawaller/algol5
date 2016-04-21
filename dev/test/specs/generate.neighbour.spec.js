@@ -71,8 +71,20 @@ describe('the neighbour funcs',()=>{
         }
     });
     test(G.findneighbourindir, 'the findneighbourindir func', {
-        'for vanilla look': {
-            arg: {},
+        'for vanilla look with no saving (so we draw)': {
+            arg: {draw:{neighbours:{tolayer:'somelayer'}}},
+            scope: {
+                STARTPOS: 's0',
+                DIR: 2,
+                connections: {s0:{2:'s1'}},
+                ARTIFACTS: {somelayer:{}}
+            },
+            mutations: {
+                ARTIFACTS: {somelayer:{s1:{}}}
+            }
+        },
+        'for vanilla look with saving': {
+            arg: {draw:['neighbourcount']},
             scope: {
                 STARTPOS: 's0',
                 DIR: 2,
@@ -81,8 +93,8 @@ describe('the neighbour funcs',()=>{
             },
             mutations: { foundneighbours: ['foo','s1'], POS: 's1' }
         },
-        'for vanilla look where we care about storing dir': {
-            arg: {draw:{neighbours:{include:{from:['dir']}}}},
+        'for vanilla look where we save and care about storing dir': {
+            arg: {draw:{neighbours:{include:{from:['dir'],count:['neighbourcount']}}}},
             scope: {
                 STARTPOS: 's0',
                 DIR: 2,
@@ -92,8 +104,8 @@ describe('the neighbour funcs',()=>{
             },
             mutations: { foundneighbours: ['foo','s1'], POS: 's1', foundneighbourdirs: ['wee',2] }
         },
-        'for vanilla look with provided dir': {
-            args: [{},7],
+        'for vanilla look with saving and provided dir': {
+            args: [{draw:['neighbourcount']},7],
             scope: {
                 STARTPOS: 's0',
                 connections: {s0:{7:'s1'}},
@@ -101,8 +113,8 @@ describe('the neighbour funcs',()=>{
             },
             mutations: { foundneighbours: ['foo','s1'], POS: 's1' }
         },
-        'with condition which evaluates to true': {
-            arg: {condition:['anyat','mylayer',['target']]},
+        'with saving and condition which evaluates to true': {
+            arg: {draw:['neighbourcount'],condition:['anyat','mylayer',['target']]},
             scope: {
                 STARTPOS: 's0',
                 DIR: 2,

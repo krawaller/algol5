@@ -26,7 +26,7 @@ describe('the filter funcs',()=>{
             }
         }
     });
-    test(G.filterposition, 'the filterposition func', {
+    /*test(G.filterposition, 'the filterposition func', {
         'when object matches': {
             arg: {
                 matching:{foo:['is','bar']},
@@ -70,5 +70,5 @@ describe('the filter funcs',()=>{
             },
             mutations: {ARTIFACTS:{mylayer:{}}}
         }
-    });
+    });*/
 });

@@ -9,6 +9,9 @@ const G = {
 	applyfilter: (O,def)=> {
 		let ret = ''
 		ret += 'var filtersourcelayer = '+C.layerref(O,def.layer)+'; '
+		if (!U.contains(def.tolayer,'target')){
+			ret += 'var filtertargetlayer = '+C.layerref(O,def.tolayer)+'; '
+		}
 		ret += 'for (var POS in filtersourcelayer){'
 		ret += G.filterposition(O,def)
 		ret += '}'
@@ -18,7 +21,9 @@ const G = {
 	// assumes filtersourcelayer, POS,
 	filterposition: (O,def)=> {
 		let ret = ''
-		ret += 'var filtertargetlayername = '+C.value(O,def.tolayer)+'; ' // decide here since might depend on POS
+		if (U.contains(def.tolayer,'target')){
+			ret += 'var filtertargetlayer = '+C.layerref(O,def.tolayer)+'; '
+		}
 		ret += 'if (filtersourcelayer[POS]){'
 		ret += 'var filterobj = filtersourcelayer[POS]; '
 		ret += G.filterobject(O,def)
@@ -32,7 +37,8 @@ const G = {
 		let conds = (def.condition ? [C.boolean(O,def.condition)] : [])
 		conds = conds.concat(_.map(def.matching,(test,key)=> C.prop(O,test,key) ))
 		ret += 'if (' + conds.join(' && ') + '){'
-		ret += G.addtolayer(O,'filtertargetlayername','POS','filterobj')
+		ret += G.addtolayerbyref(O,'filtertargetlayer','POS','filterobj');
+		//ret += G.addtolayer(O,'filtertargetlayername','POS','filterobj')
 		ret += '} '
 		return ret
 	},
@@ -96,7 +102,10 @@ const G = {
 				ret += 'var foundneighbourdirs=[]; '	
 			}
 		}
+		ret += 'var startconnections = connections[STARTPOS]; '
+		// TODO - unroll loop below
 		ret += 'for(var dirnbr=0;dirnbr<'+nbrvar+';dirnbr++){'
+		O = Object.assign({},O||{},{startconnections:'startconnections'})
 		if (usedir){
 			ret += 'var DIR=neighbourdirs[dirnbr]; '
 			ret += G.findneighbourindir(O,def)
@@ -115,8 +124,14 @@ const G = {
 		let ret = ''
 		let usedir = U.contains(def.draw && def.draw.neighbours,['dir'])
 		let usecount = U.contains(def.draw,['neighbourcount'])
-		ret += 'var POS=connections[STARTPOS]['+(dirtouse||'DIR')+']; '
-		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
+		ret += 'var POS='+(O && O.startconnections || 'connections[STARTPOS]')+'['+(dirtouse||'DIR')+']; '
+
+		let conds = ['POS']
+		if (def.condition) conds.push(C.boolean(O,def.condition))
+		if (def.ifover) conds.push(C.set(O,def.ifover)+'[POS]')
+		if (def.unlessover) conds.push('!'+C.set(O,def.unlessover)+'[POS]')
+		ret += 'if ('+conds.join(' && ')+'){'
+		//ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
 		if (usecount){
 			ret += 'foundneighbours.push(POS); '
 			if (usedir){
@@ -152,8 +167,14 @@ const G = {
 	findanddrawsingleneighbour: (O,def,dirtouse)=> {
 		let ret = ''
 		ret += 'var POS=connections[STARTPOS]['+(dirtouse||'DIR')+']; '
-		ret += 'if (POS'+(def.condition ? ' && '+C.boolean(O,def.condition) : '')+'){'
-		ret += 'var NEIGHBOURCOUNT=1; ' // TODO - only if someone cares!
+		let conds = ['POS']
+		if (def.condition) conds.push(C.boolean(O,def.condition))
+		if (def.ifover) conds.push(C.set(O,def.ifover)+'[POS]')
+		if (def.unlessover) conds.push('!'+C.set(O,def.unlessover)+'[POS]')
+		ret += 'if ('+conds.join(' && ')+'){'
+		if (U.contains(def.draw,['neighbourcount'])){
+			ret += 'var NEIGHBOURCOUNT=1; '
+		}
 		if (def.draw && def.draw.neighbours){
 			ret += G.performdraw(O,def.draw.neighbours);
 		}
@@ -415,6 +436,8 @@ const G = {
 
 	// we only ever add to artifact layers.
 	addtolayer: (O,layer,pos,obj)=> 'ARTIFACTS['+layer+']['+pos+']='+obj+'; ',
+
+	addtolayerbyref: (O,layerref,pos,obj)=> layerref+'['+pos+']='+obj+'; ',
 
 	// assumes vartouse is defined (defaults to POS)
 	// also assumed targetlayername if flag is true

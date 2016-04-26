@@ -152,6 +152,31 @@ describe('the neighbour funcs',()=>{
                 ARTIFACTS: {starts:{},neighbours:{}}
             },
             mutations: { ARTIFACTS: {starts:{s0:{}},neighbours:{s1:{}}} }
+        },
+        'using ifover and unlessover for neighbours': {
+            arg: {
+                dirs:[1,2,3],
+                start:'mymark',
+                ifover: 'required',
+                unlessover: 'forbidden',
+                draw: {
+                    neighbours: { tolayer: 'neighbours'}
+                }
+            },
+            scope: {
+                connections: {s0:{1:'s1',2:'s2',3:'s3'}},
+                MARKS: {mymark:'s0'},
+                ARTIFACTS: {
+                    neighbours:{},
+                    required:{s1:{},s3:{}},
+                    forbidden:{s1:{}}
+                }
+            },
+            mutations: { ARTIFACTS: {
+                neighbours:{s3:{}},
+                required:{s1:{},s3:{}},
+                forbidden:{s1:{}}
+            } }
         }
     });
 });

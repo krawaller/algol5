@@ -43,7 +43,7 @@ let neighbourdef = {
 			"include": {
 				//"from": ["dir"],
 				"owner": ["read","board",["mark","mymark"],"fjupp"],
-				"found": ["neighbourcount"]
+				//"found": ["neighbourcount"]
 			}
 		}
 	}

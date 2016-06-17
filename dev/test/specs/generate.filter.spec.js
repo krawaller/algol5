@@ -7,68 +7,23 @@ describe('the filter funcs',()=>{
     test(G.applyfilter, 'the applyfilter func', {
         'for vanilla filtering': {
             arg: {
-                matching: {foo:['is','bar']},
+                matching: {foo:['is','bar'],baz:['isnt',['sum',1,1]]},
                 condition: ['different',['pos',['target']],'p1'],
                 layer: 'source',
                 tolayer: 'destination'
             },
             scope: {
                 ARTIFACTS: {
-                    source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'}},
+                    source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'},p4:{baz:2}},
                     destination: {}
                 }
             },
             mutations: {
                 ARTIFACTS: {
-                    source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'}},
+                    source: {p1:{foo:'bar'},p2:{foo:'bar'},p3:{foo:'bin'},p4:{baz:2}},
                     destination: {p2:{foo:'bar'}}
                 }
             }
         }
     });
-    /*test(G.filterposition, 'the filterposition func', {
-        'when object matches': {
-            arg: {
-                matching:{foo:['is','bar']},
-                tolayer: 'destination'
-            },
-            scope: {
-                filtersourcelayer: {a1:{foo:'bar'}},
-                POS: 'a1',
-                ARTIFACTS: {
-                    destination: {}
-                }
-            },
-            mutations: {
-                ARTIFACTS: {
-                    destination: {a1:{foo:'bar'}}
-                }
-            }
-        }
-    });
-    test(G.filterobject, 'the filterobject func', {
-        'when simple matching and evals to true': {
-            arg: {matching:{someprop:['is',['sum',1,1]],otherprop:['isnt',7]}},
-            scope: {
-                filterobj: {someprop:2},
-                POS: 'somepos',
-                filtertargetlayername: 'mylayer',
-                ARTIFACTS: {mylayer:{}}
-            },
-            mutations: {ARTIFACTS:{mylayer:{somepos:{someprop:2}}}}
-        },
-        'when simple matching but condition makes it false': {
-            arg: {
-                matching: {someprop:['is',['sum',1,1]],otherprop:['isnt',7]},
-                condition: ['truthy',0]
-            },
-            scope: {
-                filterobj: {someprop:2},
-                POS: 'somepos',
-                filtertargetlayername: 'mylayer',
-                ARTIFACTS: {mylayer:{}}
-            },
-            mutations: {ARTIFACTS:{mylayer:{}}}
-        }
-    });*/
 });

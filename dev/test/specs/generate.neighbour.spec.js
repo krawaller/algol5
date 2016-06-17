@@ -204,6 +204,57 @@ describe('the neighbour funcs',()=>{
                     neighbours: {t0:{dir:1},t1:{dir:2}}
                 }
             }
+        },
+        'using count from multistart multidir': {
+            arg: {
+                dirs: [1,2],
+                starts: 'from',
+                draw: {
+                    start: { tolayer: 'starts'},
+                    neighbours: { tolayer: 'neighbours', include: {total:['neighbourcount']}}
+                }
+            },
+            scope: {
+                connections: {s0:{2:'t0'},s1:{1:'t1',2:'t2'}},
+                ARTIFACTS: {
+                    from:{s0:{},s1:{}},
+                    starts:{},
+                    neighbours:{}
+                }
+            },
+            mutations: {
+                ARTIFACTS: {
+                    from:{s0:{},s1:{}},
+                    starts:{s0:{},s1:{}},
+                    neighbours:{t0:{total:1},t1:{total:2},t2:{total:2}}}
+                }
+        },
+        'using neighbourcondition from multistart multidir': {
+            arg: {
+                dirs: [1,2],
+                starts: 'from',
+                condition: ['noneat',['single','mymark'],['target']],
+                draw: {
+                    start: { tolayer: 'starts'},
+                    neighbours: { tolayer: 'neighbours' }
+                }
+            },
+            scope: {
+                connections: {s0:{2:'t0'},s1:{1:'t1',2:'t2'}},
+                MARKS: { mymark: 't2'},
+                ARTIFACTS: {
+                    from:{s0:{},s1:{}},
+                    starts:{},
+                    neighbours:{}
+                }
+            },
+            mutations: {
+                ARTIFACTS: {
+                    from:{s0:{},s1:{}},
+                    starts:{s0:{},s1:{}},
+                    neighbours:{t0:{},t1:{}}
+                }
+            }
         }
     });
 });

@@ -43,7 +43,7 @@ var step = {
 		markname: pos,
 		markname: pos //, ...
 	}
-	nextunitid: string, // only used if game contains spawn
+	nextunitid: int, // only used if game contains spawn
 	potentiallinks: {
     	action: actionfunction,
     	action: actionfunction //, ...

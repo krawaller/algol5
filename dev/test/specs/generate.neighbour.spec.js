@@ -177,6 +177,33 @@ describe('the neighbour funcs',()=>{
                 required:{s1:{},s3:{}},
                 forbidden:{s1:{}}
             } }
+        },
+        'with start-dependant dir condition': {
+            arg: {
+                dir: ['ifelse',['anyat','dorks',['start']],1,2],
+                starts: 'blorks',
+                draw: {
+                    neighbours: {
+                        tolayer: 'neighbours',
+                        include: {dir:['dir']}
+                    },
+                }
+            },
+            scope: {
+                connections: {s0:{1:'t0',2:'X'},s1:{1:'X',2:'t1'}},
+                ARTIFACTS: {
+                    dorks: {s0:{}},
+                    blorks: {s0:{},s1:{}},
+                    neighbours: {}
+                }
+            },
+            mutations: {
+                ARTIFACTS: {
+                    dorks: {s0:{}},
+                    blorks: {s0:{},s1:{}},
+                    neighbours: {t0:{dir:1},t1:{dir:2}}
+                }
+            }
         }
     });
 });

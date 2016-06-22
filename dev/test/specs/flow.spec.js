@@ -38,6 +38,52 @@ describe("The flow commands",()=>{
                     },
                     commands: {
                         flaunt: {
+                            applyEffect: ['killid',['idat',['onlyin','doomed']]],
+                            runGenerator: 'findfoo'
+                        }
+                    }
+                }
+            },
+            scope: {
+                UNITDATA: { unit1: {} },
+                UNITLAYERS: { all: { somepos: {id:'unit1'} } },
+                cmndname: 'flaunt',
+                stepid: 'oldid',
+                newid: 'OVERWRITEME',
+                ARTIFACTS: {doomed:{'somepos':{}},foos:{}},
+                connections: {start:{1:'a1'}},
+                path: ['foo','bar'],
+                cleanartifactslate: {foos:{},bars:'YEAH!'},
+                MARKS: {baz:'bin'},
+            },
+            mutations: {
+                UNITDATA: {},
+                newid: 'oldid-flaunt',
+                ARTIFACTS: {foos:{a1:{}},bars:'YEAH!'},
+                path: ['foo','bar','flaunt'],
+                undo: 'oldid',
+                MARKS: {}
+            }
+        },
+        'when passing AI flag, with effect and generator': {
+            options: {
+                AI: true,
+                cmndname: 'flaunt',
+                rules: {
+                    generators: {
+                        findfoo: {
+                            type: 'neighbour',
+                            start: ['pos','start'],
+                            dir: 1,
+                            draw: {
+                                neighbours: {
+                                    tolayer: 'foos'
+                                }
+                            }
+                        }
+                    },
+                    commands: {
+                        flaunt: {
                             applyEffect: ['killid',['value','unit1']],
                             runGenerator: 'findfoo'
                         }
@@ -49,47 +95,83 @@ describe("The flow commands",()=>{
                 cmndname: 'flaunt',
                 stepid: 'oldid',
                 newid: 'OVERWRITEME',
-                ARTIFACTS: {foos:{}},
-                connections: {start:{1:'a1'}}
+                ARTIFACTS: {foos:{},moos:{}},
+                cleanartifactslate: {foos:{}},
+                connections: {start:{1:'a1'}},
+                MARKS: {baz:'bin'},
+                path: ['foo','bar'],
+                undo: 'DONTOVERWRITEME'
             },
             mutations: {
                 UNITDATA: {},
                 newid: 'oldid-flaunt',
-                ARTIFACTS: {foos:{a1:{}}}
+                ARTIFACTS: {foos:{a1:{}}},
+                MARKS: {},
+                path: ['foo','bar','flaunt'],
+                undo: 'DONTOVERWRITEME'
             }
         }
     });
     test(F.applyMarkConsequences,'the applyMarkConsequences func',{
         'when not passing AI flag': {
+            options: {
+                markname: 'somemark',
+                rules: {
+                    marks: {
+                        somemark: {
+                            runGenerator: 'findfoo'
+                        }
+                    },
+                    generators: {
+                        findfoo: {
+                            type: 'neighbour',
+                            start: ['pos','start'],
+                            dir: 1,
+                            draw: {
+                                neighbours: {
+                                    tolayer: 'foos'
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             scope: {
                 markname: 'somemark',
                 markpos: 'somepos',
                 stepid: 'oldid',
                 MARKS: {othermark:'otherpos'},
                 removemarks: {othermark: 'otherid'},
-                newid: 'OVERWRITEME'
+                newid: 'OVERWRITEME',
+                path: ['foo','bar'],
+                connections: {start:{1:'a1'}},
+                ARTIFACTS: {foos:{}}
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
                 removemarks: {othermark:'otherid','somemark':'oldid'},
-                newid: 'oldid-somepos'
+                newid: 'oldid-somepos',
+                path: ['foo','bar','somepos'],
+                ARTIFACTS: {foos:{a1:{}}}
             },
             norefs: ['removemarks']
         },
         'when passing AI flag': {
-            options: {AI:true},
+            options: {AI:true,rules:{marks:{},generators:{}},markname:'somemark'},
             scope: {
                 markname: 'somemark',
                 markpos: 'somepos',
                 stepid: 'oldid',
                 MARKS: {othermark:'otherpos'},
                 removemarks: 'SAVEME',
-                newid: 'OVERWRITEME'
+                newid: 'OVERWRITEME',
+                path: ['foo','bar']
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
                 removemarks: 'SAVEME',
-                newid: 'oldid-somepos'
+                newid: 'oldid-somepos',
+                path: ['foo','bar','somepos']
             }
         }
     })

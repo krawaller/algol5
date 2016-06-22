@@ -70,21 +70,38 @@ const F = {
             ret += 'removemarks[markname] = stepid; '
         }
         ret += 'newid = stepid+= "-"+markpos; '
+        ret += 'path.push(markpos); '
+        ret += F.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{});
+
+        /*
+        
+        (1) set mark, removemark (if human), newid & path
+        (2) run generators
+
+        */
         return ret;
     },
 
-    // assumes cmndname, stepid
+    // assumes cmndname, stepid, path, cleanartifactslate
     applyCommandConsequences: (O)=> {
         let ret = ''
+        if (!(O && O.AI)){
+            ret += 'var undo = stepid; '
+        }
         ret += 'newid = stepid+"-"+cmndname; '
+        ret += 'path.push(cmndname); '
         ret += F.applyEffectInstructions(O,O.rules.commands[O.cmndname]);
+        ret += 'ARTIFACTS = cleanartifactslate; '
+        ret += 'MARKS = {}; '
         ret += F.applyGeneratorInstructions(O,O.rules.commands[O.cmndname]);
         /*
-        perform effects
-        clear marks
-        run generators
-        set undo // if human
-        clear removemarks // if human
+
+        (1) set newid, path & undo (if human)
+        (2) apply effects
+        (3) clear artifacts & marks
+        (4) apply generators
+
+        clear removemarks // if human, in cleanup, not here
         */
         return ret;
     }

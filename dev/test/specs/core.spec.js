@@ -139,6 +139,16 @@ describe('the core funcs',()=>{
             arg: ['target'],
             scope: {POS:'mypos'},
             expected: 'mypos'
+        },
+        'the onlyin cmnd': {
+            arg: ['onlyin',['intersect','foo','bar']],
+            scope: {
+                ARTIFACTS: {
+                    foo: {p1: {}, p2: {}},
+                    bar: {p2: {}}
+                }
+            },
+            expected: 'p2'
         }
     });
     test(C.value,'the value func',{

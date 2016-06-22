@@ -67,7 +67,8 @@ const positionTypes = withUniversals("position",{
     ctxpos: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
     pos: (O,[pos])=> T.value(O,pos),
     target: (O)=> "POS",
-    start: (O)=> "STARTPOS"
+    start: (O)=> "STARTPOS",
+    onlyin: (O,[set])=> "Object.keys("+T.set(O,set)+")[0]"
 })
 
 const setTypes = withUniversals("set",{
@@ -151,7 +152,7 @@ const T = {
         } else if (setTypes[def[0]]) {
             return setTypes[def[0]](O,_.tail(def));
         } else {
-            throw "Unknown set def: "+def;
+            throw "Unknown set def: "+JSON.stringify(def);
         }
     },
     position: (O,def)=> {

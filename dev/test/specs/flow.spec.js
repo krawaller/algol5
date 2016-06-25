@@ -4,6 +4,55 @@ import lib from '../../../src/codegen/'
 let F = lib.F
 
 describe("The flow commands",()=>{
+    test(F.calculateUnitLayers,'the calculateUnitLayers func',{
+        'for regular calc': {
+            scope: {
+                UNITDATA: {
+                    unit1: {group: 'soldiers', owner: 0, pos: 'p1', id: 'unit1'},
+                    unit2: {group: 'soldiers', owner: 1, pos: 'p2', id: 'unit2'},
+                    unit3: {group: 'knights', owner: 2, pos: 'p3', id: 'unit3'}
+                },
+                cleanunitslate: {soldiers: {},knights:{},all:{},MYsoldiers:{},NEUsoldiers:{},knights:{},OPPknights:{},MYunits:{},OPPunits:{},NEUunits:{}},
+                ownernames: ['NEU','MY','OPP'],
+                UNITLAYERS: 'whatever'
+            },
+            mutations: {
+                //cleanunitslate: {soldiers: {},knights:{},all:{},MYsoldiers:{},NEUsoldiers:{},knights:{},OPPknights:{},MYunits:{},OPPunits:{},NEUunits:{}},
+                UNITLAYERS: {
+                    all: {
+                        p1: {group: 'soldiers', owner: 0, pos: 'p1', id: 'unit1'},
+                        p2: {group: 'soldiers', owner: 1, pos: 'p2', id: 'unit2'},
+                        p3: {group: 'knights', owner: 2, pos: 'p3', id: 'unit3'}
+                    },
+                    soldiers: {
+                        p1: {group: 'soldiers', owner: 0, pos: 'p1', id: 'unit1'},
+                        p2: {group: 'soldiers', owner: 1, pos: 'p2', id: 'unit2'}
+                    },
+                    MYsoldiers: {
+                        p2: {group: 'soldiers', owner: 1, pos: 'p2', id: 'unit2'}
+                    },
+                    NEUsoldiers: {
+                        p1: {group: 'soldiers', owner: 0, pos: 'p1', id: 'unit1'}
+                    },
+                    knights: {
+                        p3: {group: 'knights', owner: 2, pos: 'p3', id: 'unit3'}
+                    },
+                    OPPknights: {
+                        p3: {group: 'knights', owner: 2, pos: 'p3', id: 'unit3'}
+                    },
+                    MYunits: {
+                        p2: {group: 'soldiers', owner: 1, pos: 'p2', id: 'unit2'}
+                    },
+                    OPPunits: {
+                        p3: {group: 'knights', owner: 2, pos: 'p3', id: 'unit3'}
+                    },
+                    NEUunits: {
+                        p1: {group: 'soldiers', owner: 0, pos: 'p1', id: 'unit1'}
+                    }
+                }
+            }
+        }
+    })
     test(F.applyEffectInstructions,'the applyEffectInstructions func',{
         'for single effect with no conds': {
             showcode: false, //true,

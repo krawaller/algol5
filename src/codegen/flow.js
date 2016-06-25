@@ -104,6 +104,26 @@ const F = {
         clear removemarks // if human, in cleanup, not here
         */
         return ret;
+    },
+
+    // assumes UNITDATA, cleanunitslate, ownernames
+    // mutates UNITLAYERS
+    calculateUnitLayers: (O)=> {
+        let ret =  'UNITLAYERS = Object.assign({},cleanunitslate); '
+        ret += `
+            for (var unitid in UNITDATA) {
+                var currentunit = UNITDATA[unitid]
+                var unitgroup = currentunit.group;
+                var pos = currentunit.pos;
+                var owner = ownernames[currentunit.owner]
+                UNITLAYERS.all[pos]
+                    = UNITLAYERS[unitgroup][pos]
+                    = UNITLAYERS[owner + unitgroup][pos]
+                    = UNITLAYERS[owner +'units'][pos]
+                    = currentunit
+            }
+        `
+        return ret
     }
 
 }

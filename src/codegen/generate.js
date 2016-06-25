@@ -1,4 +1,6 @@
-import _ from 'lodash'
+import map from 'lodash/collection/map'
+import isNumber from 'lodash/lang/isNumber'
+
 import C from "./core"
 import U from "../utils"
 
@@ -35,7 +37,7 @@ const G = {
 	filterobject: (O,def)=> { // TODO - core datatype for matcher?
 		let ret = ''
 		let conds = (def.condition ? [C.boolean(O,def.condition)] : [])
-		conds = conds.concat(_.map(def.matching,(test,key)=> C.prop(O,test,key) ))
+		conds = conds.concat(map(def.matching,(test,key)=> C.prop(O,test,key) ))
 		ret += 'if (' + conds.join(' && ') + '){'
 		ret += G.addtolayerbyref(O,'filtertargetlayer','POS','filterobj');
 		//ret += G.addtolayer(O,'filtertargetlayername','POS','filterobj')
@@ -466,7 +468,7 @@ const G = {
 				prefix = '"neutral"';
 			} else if (owner === O.player) {
 				prefix = '"my"'
-			} else if (_.isNumber(owner)) {
+			} else if (isNumber(owner)) {
 				prefix = '"opp"'
 			} else {
 				prefix = 'ownernames[artifact.owner]'
@@ -491,7 +493,7 @@ const G = {
 	artifactliteral: (O,def)=> {
 		let ret = '{';
 		if (def.include){
-			ret += _.map(def.include,(valdef,key)=>(key+': '+C.value(O,valdef))).join(', ');
+			ret += map(def.include,(valdef,key)=>(key+': '+C.value(O,valdef))).join(', ');
 		}
 		ret += '} '
 		return ret;

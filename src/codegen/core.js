@@ -109,7 +109,9 @@ const T = {
     set_ifelse: universal.ifelse('set'),
     set_playercase: universal.playercase('set'),
 
+
     // layername is a plain string
+    // This method sometimes used directly from elsewhere
     layerref: (O,layername)=> {
         var bag = O && O.layermappings && O.layermappings[layername] || "ARTIFACTS"
         // special case for units all

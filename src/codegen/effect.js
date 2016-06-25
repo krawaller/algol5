@@ -1,4 +1,6 @@
-import _ from "lodash";
+import tail from "lodash/array/tail"
+import map from "lodash/collection/map"
+
 import C from "./core";
 
 /*
@@ -7,7 +9,7 @@ previously copied.
 Only setid and setat actually manipulates individual unit objects, and they make copies
 */
 const E = {
-    applyeffect: (O,def)=> E[def[0]].apply(E,[O].concat(_.tail(def))),
+    applyeffect: (O,def)=> E[def[0]].apply(E,[O].concat(tail(def))),
     swap: (O,pos1,pos2)=> (
         E.setat(O,pos1,'pos',['pos',pos2])+
         E.setat(O,pos2,'pos',['pos',pos1])
@@ -39,7 +41,7 @@ const E = {
             id: newunitid,
             group: ${C.value(O,group)},
             owner: ${owner ? C.value(O,owner) : 'player'}
-            ${obj?","+_.map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):""}
+            ${obj?","+map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):""}
         }; 
     `,
     forposin: (O,set,effect)=> `

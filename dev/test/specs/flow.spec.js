@@ -1,7 +1,7 @@
 import test from '../gentester'
 import lib from '../../../src/codegen/'
 
-let F = lib.F
+let F = lib
 
 describe("The flow commands",()=>{
     test(F.calculateUnitLayers,'the calculateUnitLayers func',{

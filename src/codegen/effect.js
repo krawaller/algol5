@@ -1,26 +1,25 @@
 import tail from "lodash/array/tail"
 import map from "lodash/collection/map"
 
-import C from "./core";
-
 /*
 Effect methods will all mutate UNITDATA, which is assumed to have been
 previously copied.
 Only setid and setat actually manipulates individual unit objects, and they make copies
 */
-const E = {
-    applyeffect: (O,def)=> E[def[0]].apply(E,[O].concat(tail(def))),
+
+export default C => Object.assign(C,{
+    applyeffect: (O,def)=> C[def[0]].apply(C,[O].concat(tail(def))),
     swap: (O,pos1,pos2)=> (
-        E.setat(O,pos1,'pos',['pos',pos2])+
-        E.setat(O,pos2,'pos',['pos',pos1])
+        C.setat(O,pos1,'pos',['pos',pos2])+
+        C.setat(O,pos2,'pos',['pos',pos1])
     ),
-    moveid: (O,id,pos)=> E.setid(O,id,'pos',['pos',pos]),
-    moveat: (O,from,to,and)=> E.setat(O,from,'pos',['pos',to],and),
-    stompid: (O,id,pos)=> E.moveid(O,id,pos)+' '+E.killat(O,pos),
-    stompat: (O,from,to)=> E.moveat(O,from,to,['killat',to]),
+    moveid: (O,id,pos)=> C.setid(O,id,'pos',['pos',pos]),
+    moveat: (O,from,to,and)=> C.setat(O,from,'pos',['pos',to],and),
+    stompid: (O,id,pos)=> C.moveid(O,id,pos)+' '+C.killat(O,pos),
+    stompat: (O,from,to)=> C.moveat(O,from,to,['killat',to]),
     killid: (O,id)=> "delete UNITDATA["+C.id(O,id)+"]; ",
     killat: (O,pos)=> "delete UNITDATA[ (UNITLAYERS.all["+C.position(O,pos)+"] || {}).id ]; ",
-    killin: (O,set)=> E.foridin(O,set,['killid',['loopid']]),
+    killin: (O,set)=> C.foridin(O,set,['killid',['loopid']]),
     setid: (O,id,propname,val)=> `
         UNITDATA[${C.id(O,id)}]=Object.assign({},UNITDATA[${C.id(O,id)}],{
             ${C.value(O,propname)}: ${C.value(O,val)}
@@ -30,10 +29,10 @@ const E = {
         var unitid = (UNITLAYERS.all[${C.position(O,pos)}] || {}).id;
         if (unitid){
             UNITDATA[unitid]=Object.assign({},UNITDATA[unitid],{${C.value(O,propname)}:${C.value(O,val)}});
-            ${and ? E.applyeffect(O,and) : ''}
+            ${and ? C.applyeffect(O,and) : ''}
         }
     `,
-    setin: (O,set,propname,val)=> E.foridin(O,set,['setid',['loopid'],propname,val]),
+    setin: (O,set,propname,val)=> C.foridin(O,set,['setid',['loopid'],propname,val]),
     spawn: (O,pos,group,owner,obj)=>`
         var newunitid = 'unit'+(nextunitid++);
         UNITDATA[newunitid] = {
@@ -46,7 +45,7 @@ const E = {
     `,
     forposin: (O,set,effect)=> `
         for(var POS in ${C.set(O,set)}){
-            ${E.applyeffect(O,effect)}
+            ${C.applyeffect(O,effect)}
         }
     `,
     foridin: (O,set,effect)=> {
@@ -57,11 +56,9 @@ const E = {
             var LOOPID;
             for(var POS in ${setcode}){
                 ${obvious ? 'LOOPID='+setcode+'[POS].id' : 'if (LOOPID=(UNITLAYERS.all[POS]||{}).id){' }
-                ${E.applyeffect(O,effect) /*TODO - check that it uses ['loopid'] ? */}
+                ${C.applyeffect(O,effect) /*TODO - check that it uses ['loopid'] ? */}
                 ${!obvious ? '}' : '' }
             }
         `
     }
-}
-
-export default E
+})

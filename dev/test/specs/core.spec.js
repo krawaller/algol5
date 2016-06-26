@@ -1,7 +1,7 @@
 import test from '../gentester'
 import lib from '../../../src/codegen/'
 
-let C = lib.C
+let C = lib
 
 describe('the core funcs',()=>{
     test(C.prop,'the prop func', {

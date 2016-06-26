@@ -2,7 +2,7 @@ import gentest from '../gentester'
 import libtest from '../libtester'
 import lib from '../../../src/codegen/'
 
-let G = lib.G
+let G = lib
 
 describe('the generate funcs',()=>{
     gentest(G.applywalker, 'the applywalker func', {

@@ -1,10 +1,9 @@
 import map from 'lodash/collection/map'
 import isNumber from 'lodash/lang/isNumber'
 
-import C from "./core"
 import U from "../utils"
 
-const G = {
+export default C => Object.assign(C,{
 
 	// ------------ FILTER STUFF -----------
 
@@ -15,7 +14,7 @@ const G = {
 			ret += 'var filtertargetlayer = '+C.layerref(O,def.tolayer)+'; '
 		}
 		ret += 'for (var POS in filtersourcelayer){'
-		ret += G.filterposition(O,def)
+		ret += C.filterposition(O,def)
 		ret += '}'
 		return ret
 	},
@@ -28,7 +27,7 @@ const G = {
 		}
 		ret += 'if (filtersourcelayer[POS]){'
 		ret += 'var filterobj = filtersourcelayer[POS]; '
-		ret += G.filterobject(O,def)
+		ret += C.filterobject(O,def)
 		ret += '} '
 		return ret
 	},
@@ -39,8 +38,8 @@ const G = {
 		let conds = (def.condition ? [C.boolean(O,def.condition)] : [])
 		conds = conds.concat(map(def.matching,(test,key)=> C.prop(O,test,key) ))
 		ret += 'if (' + conds.join(' && ') + '){'
-		ret += G.addtolayerbyref(O,'filtertargetlayer','POS','filterobj');
-		//ret += G.addtolayer(O,'filtertargetlayername','POS','filterobj')
+		ret += C.addtolayerbyref(O,'filtertargetlayer','POS','filterobj');
+		//ret += C.addtolayer(O,'filtertargetlayername','POS','filterobj')
 		ret += '} '
 		return ret
 	},
@@ -51,14 +50,14 @@ const G = {
 		let ret = ''
 		if (def.start){
 			ret += 'var STARTPOS='+C.position(O,def.start)+'; '
-			ret += G.findanddrawneighboursfromstart(O,def)
-			ret += G.drawneighbourstart(O,def);
+			ret += C.findanddrawneighboursfromstart(O,def)
+			ret += C.drawneighbourstart(O,def);
 		} else {
 			//ret += 'var neighbourstarts='+C.set(O,def.starts)+'; '
 			//if (!U.contains(def.draw.neighbours))
 			ret += 'for(var STARTPOS in '+C.set(O,def.starts)+'){'
-			ret += G.findanddrawneighboursfromstart(O,def)
-			ret += G.drawneighbourstart(O,def);
+			ret += C.findanddrawneighboursfromstart(O,def)
+			ret += C.drawneighbourstart(O,def);
 			ret += '} '
 		}
 		return ret;
@@ -71,15 +70,15 @@ const G = {
 		if (def.dir){
 			if (U.contains(def,['dir'])){
 				ret += 'var DIR='+C.value(O,def.dir)+'; '
-				ret += G.findanddrawsingleneighbour(O,def)
+				ret += C.findanddrawsingleneighbour(O,def)
 			} else {
-				ret += G.findanddrawsingleneighbour(O,def,C.value(O,def.dir))
+				ret += C.findanddrawsingleneighbour(O,def,C.value(O,def.dir))
 			}
 		} else {
-			ret += G.findmanyneighbours(O,def);
+			ret += C.findmanyneighbours(O,def);
 			if (U.contains(def.draw,['neighbourcount'])){
 				ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
-				ret += G.drawmanyneighbours(O,def);
+				ret += C.drawmanyneighbours(O,def);
 			}
 		}
 		return ret
@@ -110,9 +109,9 @@ const G = {
 		O = Object.assign({},O||{},{startconnections:'startconnections'})
 		if (usedir){
 			ret += 'var DIR=neighbourdirs[dirnbr]; '
-			ret += G.findneighbourindir(O,def)
+			ret += C.findneighbourindir(O,def)
 		} else {
-			ret += G.findneighbourindir(O,def,'neighbourdirs[dirnbr]')
+			ret += C.findneighbourindir(O,def,'neighbourdirs[dirnbr]')
 		}
 		ret += '} '
 		return ret;
@@ -140,7 +139,7 @@ const G = {
 				ret += 'foundneighbourdirs.push(DIR); '
 			}
 		} else if (def.draw && def.draw.neighbours){
-			ret += G.performdraw(O,def.draw.neighbours);
+			ret += C.performdraw(O,def.draw.neighbours);
 		}
 		ret += '} '
 		return ret
@@ -158,7 +157,7 @@ const G = {
 			if (usedir){
 				ret += 'var DIR=foundneighbourdirs[neighbournbr]; '
 			}
-			ret += G.performdraw(O,def.draw.neighbours)
+			ret += C.performdraw(O,def.draw.neighbours)
 			ret += '} '
 		}
 		return ret
@@ -178,7 +177,7 @@ const G = {
 			ret += 'var NEIGHBOURCOUNT=1; '
 		}
 		if (def.draw && def.draw.neighbours){
-			ret += G.performdraw(O,def.draw.neighbours);
+			ret += C.performdraw(O,def.draw.neighbours);
 		}
 		ret += '} '
 		return ret
@@ -190,9 +189,9 @@ const G = {
 		if (def.draw && def.draw.start){
 			if (U.contains(def.draw.start,['target'])){
 				ret += 'POS=STARTPOS; '
-				ret += G.performdraw(O,def.draw.start)
+				ret += C.performdraw(O,def.draw.start)
 			} else {
-				ret += G.performdraw(O,def.draw.start,'STARTPOS')
+				ret += C.performdraw(O,def.draw.start,'STARTPOS')
 			}
 		}
 		return ret
@@ -212,11 +211,11 @@ const G = {
 		if (def.starts){
 			ret += 'var walkstarts = '+C.set(O,def.starts)+'; '
 			ret += 'for(var STARTPOS in walkstarts){'
-			ret += G.walkfromstart(O,def)
+			ret += C.walkfromstart(O,def)
 			ret += '} '
 		} else {
 			ret += 'var STARTPOS='+C.position(O,def.start)+'; '
-			ret += G.walkfromstart(O,def)
+			ret += C.walkfromstart(O,def)
 		}
 		return ret
 	},
@@ -238,7 +237,7 @@ const G = {
 			} else {
 				usefordir = 'allwalkerdirs[walkerdirnbr]'
 			}
-			ret += G.walkindir(O,def,usefordir)
+			ret += C.walkindir(O,def,usefordir)
 			ret += '} '
 		} else {
 			if (U.contains(def.draw,['dir'])){
@@ -247,7 +246,7 @@ const G = {
 				usefordir = C.value(O,def.dir)
 			}
 			ret += 'var DIR='+C.value(O,def.dir)+'; '
-			ret += G.walkindir(O,def,usefordir)
+			ret += C.walkindir(O,def,usefordir)
 		}
 		return ret
 	},
@@ -255,28 +254,28 @@ const G = {
 	// assumes STARTPOS, connections
 	walkindir: (O,def,usefordir)=> {
 		let ret = ''
-		ret += G.prepwalkstart(O,def)
+		ret += C.prepwalkstart(O,def)
 		if (def.max){
 			ret += 'var LENGTH=0; '
 		}
 		if (O && O.drawduringwhile && U.contains([def.draw.steps,def.draw.all],['step'])){
 			ret += 'var STEP=0; '
 		}
-		ret += 'while(!(STOPREASON='+G.stopreason(O,def,usefordir)+')){'
-		ret += G.takewalkstep(O,def)
+		ret += 'while(!(STOPREASON='+C.stopreason(O,def,usefordir)+')){'
+		ret += C.takewalkstep(O,def)
 		if (def.max)
 			ret += 'LENGTH++; '
 		if (O && O.drawduringwhile){
-			ret += G.drawwalksinglestep(O,def)
+			ret += C.drawwalksinglestep(O,def)
 		}
 		ret += '}'
-		ret += G.afterwalk(O,def)
-		ret += G.drawwalkblock(O,def)
-		ret += G.drawwalkstart(O,def)
+		ret += C.afterwalk(O,def)
+		ret += C.drawwalkblock(O,def)
+		ret += C.drawwalkstart(O,def)
 		if (!(O && O.drawduringwhile)){
-			ret += G.drawwalksteps(O,def)
+			ret += C.drawwalksteps(O,def)
 		}
-		ret += G.drawwalklast(O,def)
+		ret += C.drawwalklast(O,def)
 		return ret;
 	},
 	// ASSUMES STARTPOS, DIR
@@ -339,9 +338,9 @@ const G = {
 		if (def.blocks && def.draw.block){
 			ret += 'if (STOPREASON==="hitblock"){' 
 			ret += 'POS=nextpos; '
-			ret += G.performdraw(O,def.draw.block);
+			ret += C.performdraw(O,def.draw.block);
 			if (def.draw.all){
-				ret += G.performdraw(O,def.draw.all);
+				ret += C.performdraw(O,def.draw.all);
 			}
 			ret += '} '
 		}
@@ -355,7 +354,7 @@ const G = {
 			if (usesstep) ret += 'var STEP = 0; '
 			ret += 'for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){'
 			ret += 'POS=walkedsquares[walkstepper]; '
-			ret += G.drawwalksinglestep(O,def)
+			ret += C.drawwalksinglestep(O,def)
 			ret += '}'
 		}
 		return ret
@@ -368,14 +367,14 @@ const G = {
 			ret += 'CURRENTCOUNT = countedwalkpositions[walkstepper]; '
 		}
 		if (def.draw.steps){
-			ret += G.performdraw(O,def.draw.steps)
+			ret += C.performdraw(O,def.draw.steps)
 		}
 		if (def.draw.all){
-			ret += G.performdraw(O,def.draw.all)
+			ret += C.performdraw(O,def.draw.all)
 		}
 		if (def.draw.counted){
 			ret += 'if (walkpositionstocount[POS]) {'
-			ret += G.performdraw(O,def.draw.counted)
+			ret += C.performdraw(O,def.draw.counted)
 			ret += '} '
 		}
 		return ret
@@ -388,9 +387,9 @@ const G = {
 			if (needspos){
 				ret += 'POS=STARTPOS; '
 			}
-			ret += G.performdraw(O,def.draw.start, needspos ? 0 : 'STARTPOS');
+			ret += C.performdraw(O,def.draw.start, needspos ? 0 : 'STARTPOS');
 			if (def.draw.all){
-				ret += G.performdraw(O,def.draw.all, needspos ? 0 : 'STARTPOS');
+				ret += C.performdraw(O,def.draw.all, needspos ? 0 : 'STARTPOS');
 			}
 		}
 		return ret
@@ -402,9 +401,9 @@ const G = {
 			if (U.contains(def.draw.last,['step'])) ret += 'STEP=WALKLENGTH; '
 			if (U.contains(def.draw.last,['target'])) {
 				ret += 'POS=walkedsquares[WALKLENGTH-1]; '
-				ret += G.performdraw(O,def.draw.last)
+				ret += C.performdraw(O,def.draw.last)
 			} else {
-				ret += G.performdraw(O,def.draw.last,'walkedsquares[WALKLENGTH-1]')
+				ret += C.performdraw(O,def.draw.last,'walkedsquares[WALKLENGTH-1]')
 			}
 		}
 		return ret
@@ -473,15 +472,15 @@ const G = {
 			} else {
 				prefix = 'ownernames[artifact.owner]'
 			}
-			ret += 'var artifact='+G.artifactliteral(O,def)+'; '
-			ret += G.addtolayer(O,'targetlayername',vartouse,'artifact')
-			ret += G.addtolayer(O,prefix+' + targetlayername',vartouse,'artifact')
+			ret += 'var artifact='+C.artifactliteral(O,def)+'; '
+			ret += C.addtolayer(O,'targetlayername',vartouse,'artifact')
+			ret += C.addtolayer(O,prefix+' + targetlayername',vartouse,'artifact')
 		} else {
-			ret += G.addtolayer(
+			ret += C.addtolayer(
 				O,
 				targetlayerpredefined ? 'targetlayername' : C.value(O,def.tolayer),
 				vartouse,
-				G.artifactliteral(O,def)
+				C.artifactliteral(O,def)
 			)
 		}
 		if (cond.length){
@@ -502,12 +501,10 @@ const G = {
 	// called from instruction
 	applyGenerator: (O,def)=> {
 		switch(def.type){
-			case 'walker': return G.applywalker(O,def)
-			case 'neighbour': return G.applyneighbours(O,def)
-			case 'filter': return G.applyfilter(O,def)
+			case 'walker': return C.applywalker(O,def)
+			case 'neighbour': return C.applyneighbours(O,def)
+			case 'filter': return C.applyfilter(O,def)
 			default: throw 'Unknown generator def: '+def
 		}
 	}
-}
-
-export default G
+})

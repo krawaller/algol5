@@ -1,7 +1,7 @@
 import test from '../gentester'
 import lib from '../../../src/codegen/'
 
-let E = lib.E
+let E = lib
 
 describe("The effect commands",()=>{
     test(E.killin,'the killin func',{

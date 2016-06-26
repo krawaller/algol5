@@ -1,7 +1,7 @@
 import test from '../gentester'
 import lib from '../../../src/codegen/'
 
-let G = lib.G
+let G = lib
 
 describe('the filter funcs',()=>{
     test(G.applyfilter, 'the applyfilter func', {

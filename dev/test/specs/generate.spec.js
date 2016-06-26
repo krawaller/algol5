@@ -1,7 +1,7 @@
 import test from '../gentester'
 import lib from '../../../src/codegen/'
 
-let G = lib.G
+let G = lib
 
 describe('the generate funcs',()=>{
     test(G.applyGenerator,'the applyGenerator func',{

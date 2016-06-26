@@ -1,7 +1,7 @@
 import test from '../gentester'
 import lib from '../../../src/codegen/'
 
-let G = lib.G
+let G = lib
 
 describe('the neighbour funcs',()=>{
     test(G.drawmanyneighbours, 'the drawmanyneighbours func', {

@@ -3,6 +3,7 @@ import addEffect from './effect'
 import addGenerate from './generate'
 import addGenerateFilter from './generate_filter'
 import addGenerateNeighbour from './generate_neighbour'
+import addGenerateWalker from './generate_walker'
 import addFlow from './flow'
 
 let o = {}
@@ -12,6 +13,7 @@ addEffect(o)
 addGenerate(o)
 addGenerateFilter(o)
 addGenerateNeighbour(o)
+addGenerateWalker(o)
 addFlow(o)
 
 export default o

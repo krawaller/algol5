@@ -5,6 +5,7 @@ import addGenerateFilter from './generate_filter'
 import addGenerateNeighbour from './generate_neighbour'
 import addGenerateWalker from './generate_walker'
 import addFlow from './flow'
+import addSeed from './seed'
 
 let o = {}
 
@@ -15,5 +16,6 @@ addGenerateFilter(o)
 addGenerateNeighbour(o)
 addGenerateWalker(o)
 addFlow(o)
+addSeed(o)
 
 export default o

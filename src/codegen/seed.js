@@ -29,13 +29,14 @@ export default C => Object.assign(C,{
     /*
     Calculates all possible artifact layers used in the game
     */
-    deduceArtifactLayers: (O)=> JSON.stringify(uniq(reduce(O.rules.generators,(mem,gendef)=>{
-        return reduce(gendef.draw,(m,drawdef)=>{
-            return reduce(U.possibilities(drawdef.tolayer),(m,l)=>{
-                return m.concat( drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : l )
-            },m)
+    deduceArtifactLayers: (O)=> JSON.stringify(reduce(O.rules.generators,(mem,gendef,key)=>{
+        return reduce(gendef.draw,(mem2,drawdef)=> {
+            return reduce(U.possibilities(drawdef.tolayer),(mem3,l)=> {
+                const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]
+                return reduce(list, (mem4,l)=> ({...mem4, [l]:{} }), mem3)
+            },mem2)
         },mem)
-    },[])).sort())
+    },{}))
 
 })
 

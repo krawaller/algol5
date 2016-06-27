@@ -3,7 +3,7 @@ import lib from '../../../src/codegen/'
 
 let F = lib
 
-describe("The flow commands",()=>{
+describe("The seed commands",()=>{
     test(F,'deduceArtifactLayers',{
         "for normal game": {
             options: {
@@ -23,7 +23,7 @@ describe("The flow commands",()=>{
                     }
                 }
             },
-            expected: ["alt1","alt2","alt3","alt4"]
+            expected: {"alt1":{},"alt2":{},"alt3":{},"alt4":{}}
         },
         "when includes with owner": {
             options: {
@@ -38,7 +38,7 @@ describe("The flow commands",()=>{
                     }
                 }
             },
-            expected: ["alt1","myalt1","oppalt1","neutralalt1","alt2","alt3"].sort()
+            expected: {"alt1":{},"myalt1":{},"oppalt1":{},"neutralalt1":{},"alt2":{},"alt3":{}}
         },
         "when includes with owner inside of playercase": {
             options: {
@@ -53,7 +53,7 @@ describe("The flow commands",()=>{
                     }
                 }
             },
-            expected: ["alt1","alt2","myalt2","oppalt2","neutralalt2","alt3","myalt3","oppalt3","neutralalt3"].sort()
+            expected: {"alt1":{},"alt2":{},"myalt2":{},"oppalt2":{},"neutralalt2":{},"alt3":{},"myalt3":{},"oppalt3":{},"neutralalt3":{}}
         }
     })
     test(F,'calculateUnitLayers',{

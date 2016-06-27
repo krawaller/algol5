@@ -24,7 +24,15 @@ const tester = (lib,funcname,specs)=> {
                         `
                     })
                 }
+                let origs = {}
+                for(var mock in spec.context){
+                    origs[mock] = lib[mock]
+                    lib[mock] = spec.context[mock]
+                }
                 code = lib[funcname].apply(null,[spec.options].concat(spec.args||[]).concat(spec.hasOwnProperty("arg") ? [spec.arg] : []));
+                for(var mock in origs){
+                    lib[mock] = origs[mock]
+                }
                 if (spec.mutations){
                     test += _.map(spec.mutations,(newval,m)=>
                         `it("should mutate ${m} as expected",function(){

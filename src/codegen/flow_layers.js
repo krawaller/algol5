@@ -1,9 +1,26 @@
 import uniq from "lodash/array/uniq"
 import reduce from "lodash/collection/reduce"
+import invert from "lodash/object/invert"
 
 import U from '../utils'
 
+const colnametonumber = reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split(""),(mem,char,n)=> {
+    mem[char] = n+1;
+    return mem;
+},{});
+
+const colnumbertoname = invert(colnametonumber)
+
+
 export default C => Object.assign(C,{
+
+    pos2coords: (O,pos)=> JSON.stringify({
+        x: colnametonumber[pos[0]],
+        y: parseInt(pos.substr(1))
+    }),
+
+    coords2pos: (O,coords)=> "'"+colnumbertoname[coords.x]+coords.y+"'",
+
 
     // assumes UNITDATA, cleanunitslate, ownernames
     // mutates UNITLAYERS

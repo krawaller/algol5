@@ -1,11 +1,11 @@
-import gentest from '../gentester'
+import test from '../gentester'
 import libtest from '../libtester'
 import lib from '../../../src/codegen/'
 
 let G = lib
 
 describe('the generate funcs',()=>{
-    gentest(G.applywalker, 'the applywalker func', {
+    test(G,'applywalker', {
         'for simple walk': {
             arg: {
                 starts: ['layer','starts'],
@@ -52,7 +52,7 @@ describe('the generate funcs',()=>{
             }
         }
     });
-    gentest(G.walkfromstart, 'the walkfromstart func', {
+    test(G,'walkfromstart', {
         'for simple walk': {
             arg: {
                 dirs: [1,3],
@@ -102,7 +102,7 @@ describe('the generate funcs',()=>{
             }
         }
     });
-    gentest(G.walkindir, 'the walkindir func', {
+    test(G,'walkindir', {
         'for simple walk': {
             arg: {
                 blocks: ['layer','intheway'],
@@ -130,7 +130,7 @@ describe('the generate funcs',()=>{
             }
         }
     });
-    gentest(G.drawwalksteps, 'the drawwalksteps func', {
+    test(G,'drawwalksteps', {
         'when just draw the steps, NOT caring about stepnbr': {
             arg: {
                 draw: { steps: { tolayer: 'steps' }}
@@ -154,7 +154,7 @@ describe('the generate funcs',()=>{
             mutations: {ARTIFACTS:{counted:{bar:{nbr:2,sofar:'y'}}}}
         }
     });
-    gentest(G.drawwalkstart, 'the drawwalkstart func', {
+    test(G,'drawwalkstart', {
         'when we draw simple start': {
             arg: {
                 draw: { start: { tolayer: 'begins' }}
@@ -187,7 +187,7 @@ describe('the generate funcs',()=>{
             mutations: {POS:'start',ARTIFACTS:{begins:{start:{where:'start'}}}}
         }
     });
-    gentest(G.drawwalklast, 'the drawwalklast func', {
+    test(G,'drawwalklast', {
         'for vanilla walk': {
             arg: {
                 draw: {
@@ -201,7 +201,7 @@ describe('the generate funcs',()=>{
             mutations: {STEP:2,ARTIFACTS:{lasts:{bar:{at:2}}}}
         }
     });
-    gentest(G.drawwalkblock, 'the drawwalkblock func', {
+    test(G,'drawwalkblock', {
         'when we hit block and want to draw it': {
             arg: {
                 blocks: 'yep',
@@ -227,7 +227,7 @@ describe('the generate funcs',()=>{
             mutations: {POS:'boom',ARTIFACTS:{blocks:{boom:{}},everything:{boom:{}}}}
         }
     });
-    gentest(G.takewalkstep, 'the takewalkstep func', {
+    test(G,'takewalkstep', {
         'for normal walk': {
             scope: {walkedsquares:['foo'],nextpos:'bar',POS:'foo'},
             mutations: {walkedsquares:['foo','bar'],POS:'bar'}
@@ -248,7 +248,7 @@ describe('the generate funcs',()=>{
             mutations: {countedwalkpositions:['whatev',8],CURRENTCOUNT:8}
         }
     });
-    gentest(G.afterwalk, 'the afterwalk func', {
+    test(G,'afterwalk', {
         'for vanilla walk with walklength use': {
             arg: {draw: {steps: true}},
             scope: {walkedsquares:[1,2,3]},
@@ -264,7 +264,7 @@ describe('the generate funcs',()=>{
             mutations: {WALKLENGTH:'dontcalculateme'}
         }
     });
-    gentest(G.prepwalkstart, 'the prepwalkstart func', {
+    test(G,'prepwalkstart', {
         'for vanilla def': {
             scope: {STARTPOS: 'somepos'},
             mutations: {POS: 'somepos', walkedsquares: [],STOPREASON:'',nextpos:''}

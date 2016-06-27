@@ -138,6 +138,17 @@ test("the prep funcs",P,{
 				}
 			},
 			expected: ["alt1","myalt1","oppalt1","neutralalt1","alt2","alt3"].sort()
+		},
+		"when includes with owner inside of playercase": {
+			generators: {
+				foo: {
+					draw: {
+						boo: { tolayer: "alt1" },
+						hoo: { tolayer: ["playercase","alt2","alt3"], include: { owner: 'someone'} }
+					}
+				}
+			},
+			expected: ["alt1","alt2","myalt2","oppalt2","neutralalt2","alt3","myalt3","oppalt3","neutralalt3"].sort()
 		}
 	},
 	"convertToEntities(def)": {

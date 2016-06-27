@@ -4,7 +4,7 @@ import lib from '../../../src/codegen/'
 let G = lib
 
 describe('the generate funcs',()=>{
-    test(G.applyGenerator,'the applyGenerator func',{
+    test(G,'applyGenerator',{
         'with simple neighbour def': {
             arg: {
                 type: 'neighbour',
@@ -71,7 +71,7 @@ describe('the generate funcs',()=>{
             }
         }
     })
-    test(G.addtolayer,'the addtolayer func',{
+    test(G,'addtolayer',{
         'when nothing at that pos': {
             args: ['"mylayer"','"a1"','"foo"'],
             scope: {ARTIFACTS:{mylayer:{}}},
@@ -83,7 +83,7 @@ describe('the generate funcs',()=>{
             mutations: {ARTIFACTS:{mylayer:{a1:"foo"}}}
         }
     })
-    test(G.performdraw,'the performdraw func',{
+    test(G,'performdraw',{
         'with no owner or condition and nothing at the pos': {
             arg: {tolayer:'somelayer',include:{heading:['dir']}},
             scope: {POS:'x',DIR:1,ARTIFACTS:{somelayer:{}}},
@@ -143,7 +143,7 @@ describe('the generate funcs',()=>{
             mutations: {ARTIFACTS:{muppets:{x:{owner:0}},neutralmuppets:{x:{owner:0}}}}
         }
     });
-    test(G.artifactliteral,'the artifactliteral func',{
+    test(G,'artifactliteral',{
         'when no includes': {
             arg: {what:'ever'},
             expected: {}
@@ -154,7 +154,7 @@ describe('the generate funcs',()=>{
             expected: {heading:1,limit:5}
         }
     });
-    test(G.stopreason,'the stopreason func', {
+    test(G,'stopreason', {
         'when def has max and we have reached it': {
             arg: {max:3},
             scope: {LENGTH:3,MAX:3},

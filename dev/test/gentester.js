@@ -2,8 +2,9 @@ import _ from 'lodash'
 
 import {js_beautify} from 'js-beautify'
 
-const tester = (func,desc,specs)=> {
-    describe(desc,()=>{
+const tester = (lib,funcname,specs)=> {
+    let func = 
+    describe('the '+funcname+' func',()=>{
         _.each(specs,(spec,name)=>{
             describe(name,()=>{
                 let vars = '', result, code, test = '';
@@ -23,7 +24,7 @@ const tester = (func,desc,specs)=> {
                         `
                     })
                 }
-                code = func.apply(null,[spec.options].concat(spec.args||[]).concat(spec.hasOwnProperty("arg") ? [spec.arg] : []));
+                code = lib[funcname].apply(null,[spec.options].concat(spec.args||[]).concat(spec.hasOwnProperty("arg") ? [spec.arg] : []));
                 if (spec.mutations){
                     test += _.map(spec.mutations,(newval,m)=>
                         `it("should mutate ${m} as expected",function(){

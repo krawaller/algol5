@@ -4,7 +4,7 @@ import lib from '../../../src/codegen/'
 let G = lib
 
 describe('the filter funcs',()=>{
-    test(G.applyfilter, 'the applyfilter func', {
+    test(G,'applyfilter', {
         'for vanilla filtering': {
             arg: {
                 matching: {foo:['is','bar'],baz:['isnt',['sum',1,1]]},

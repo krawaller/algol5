@@ -4,7 +4,7 @@ import lib from '../../../src/codegen/'
 let G = lib
 
 describe('the neighbour funcs',()=>{
-    test(G.drawmanyneighbours, 'the drawmanyneighbours func', {
+    test(G,'drawmanyneighbours', {
         'when we want to draw': {
             arg: {draw:{neighbours:{tolayer:'somelayer',include:{found:['neighbourcount'],at:['pos',['target']]}}}},
             scope: {
@@ -45,7 +45,7 @@ describe('the neighbour funcs',()=>{
             }
         }
     });
-    test(G.drawneighbourstart, 'the drawneighbourstart func', {
+    test(G,'drawneighbourstart', {
         'when we want to draw': {
             arg: {draw:{start:{tolayer:'somelayer',include:{found:['neighbourcount']}}}},
             scope: {
@@ -70,7 +70,7 @@ describe('the neighbour funcs',()=>{
             }
         }
     });
-    test(G.findneighbourindir, 'the findneighbourindir func', {
+    test(G,'findneighbourindir', {
         'for vanilla look with no saving (so we draw)': {
             arg: {draw:{neighbours:{tolayer:'somelayer'}}},
             scope: {
@@ -136,7 +136,7 @@ describe('the neighbour funcs',()=>{
             mutations: { foundneighbours: [] }
         }
     });
-    test(G.applyneighbours, 'the applyneighbours func', {
+    test(G,'applyneighbours', {
         'with simple def': {
             arg: {
                 dir:2,

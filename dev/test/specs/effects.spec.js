@@ -4,7 +4,7 @@ import lib from '../../../src/codegen/'
 let E = lib
 
 describe("The effect commands",()=>{
-    test(E.killin,'the killin func',{
+    test(E,'killin',{
         'for normal call': {
             arg: ['layer','somelayer'],
             scope: {
@@ -17,7 +17,7 @@ describe("The effect commands",()=>{
             }
         }
     });
-    test(E.setin,'the setin func',{
+    test(E,'setin',{
         'for normal call': {
             args: [ ['layer','somelayer'], 'prop', ['sum',['loopid'],['target']] ],
             scope: {
@@ -31,7 +31,7 @@ describe("The effect commands",()=>{
             norefs: ['UNITDATA.unit1','UNITDATA.unit3']
         }
     });
-    test(E.forposin,'the forposin func',{
+    test(E,'forposin',{
         'for normal call': {
             args: [ ['layer','somelayer'], ['killat',['target']] ],
             scope: {
@@ -50,7 +50,7 @@ describe("The effect commands",()=>{
             }
         }
     });
-    test(E.foridin,'the foridin func',{
+    test(E,'foridin',{
         'with non-unit area': {
             args: [ ['layer','somelayer'], ['killid',['loopid']] ],
             scope: {
@@ -88,7 +88,7 @@ describe("The effect commands",()=>{
             }
         },
     });
-    test(E.swap,'the swap func',{
+    test(E,'swap',{
         'for straight swap': {
             args: [['mark','1st'],['mark','2nd']],
             scope: {
@@ -101,14 +101,14 @@ describe("The effect commands",()=>{
             }
         }
     });
-    test(E.killid,'the killid func',{
+    test(E,'killid',{
         'for straight call': {
             args: ['unit4'],
             scope: { UNITDATA: { unit4:{name:'foo'}, someoneelse: 'FOO' } },
             mutations: { UNITDATA: { someoneelse: 'FOO' } }
         }
     });
-    test(E.killat,'the kill1at func',{
+    test(E,'killat',{
         'when noone there': {
             arg: ['mark','mymark'],
             scope: { UNITDATA: {}, UNITLAYERS: {all: {}}, 'MARKS': {mymark:'pos'}},
@@ -120,14 +120,14 @@ describe("The effect commands",()=>{
             mutations: { UNITDATA: {} },
         }
     });
-    test(E.moveid,'the moveid func',{
+    test(E,'moveid',{
         'for straight call': {
             args: [42,['mark','mymark']],
             scope: { UNITDATA: { 42:{pos:'somepos'} }, MARKS: {mymark:'otherpos'} },
             mutations: { UNITDATA: { 42: {pos:'otherpos'} } }
         }
     });
-    test(E.moveat,'the moveat func',{
+    test(E,'moveat',{
         'for straight call': {
             args: [['mark','from'],['mark','to']],
             scope: {
@@ -138,14 +138,14 @@ describe("The effect commands",()=>{
             mutations: { UNITDATA: { 42: {pos:'destination'}} }
         }
     });
-    test(E.setid,'the setid func',{
+    test(E,'setid',{
         'for straight call': {
             args: [42,'foo',['sum',2,3]],
             scope: { UNITDATA: { 42:{foo:0} } },
             mutations: { UNITDATA: { 42:{foo:5} } },
         }
     });
-    test(E.setat,'the setat func',{
+    test(E,'setat',{
         'for straight call': {
             args: [['mark','at'],['value','foo'],['sum',2,3]],
             scope: {
@@ -157,7 +157,7 @@ describe("The effect commands",()=>{
             norefs: ['UNITDATA.u42']
         }
     });
-    test(E.spawn,'the spawn func',{
+    test(E,'spawn',{
         'for just pos and group': {
             args: [['mark','mymark'],'fools'],
             scope: { UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, nextunitid: 7, player: 666 },
@@ -174,7 +174,7 @@ describe("The effect commands",()=>{
             },
         }
     });
-    test(E.stompid,'the stompid func',{
+    test(E,'stompid',{
         'when there is a target': {
             args: [42,['mark','mymark']],
             scope: {
@@ -185,7 +185,7 @@ describe("The effect commands",()=>{
             mutations: { UNITDATA: { 42: {pos:'otherpos'} } }
         }
     });
-    test(E.stompat,'the stompat func',{
+    test(E,'stompat',{
         'when there is a target': {
             args: [['mark','from'],['mark','to']],
             scope: {

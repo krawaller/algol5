@@ -4,7 +4,7 @@ import lib from '../../../src/codegen/'
 let C = lib
 
 describe('the core funcs',()=>{
-    test(C.prop,'the prop func', {
+    test(C,'prop', {
         'the is cmnd when evals to true': {
             args: [ ['is',['sum',2,5]], 'someprop'],
             scope: {filterobj:{someprop:7}},
@@ -26,7 +26,7 @@ describe('the core funcs',()=>{
             expected: true
         }
     });
-    test(C.list,'the list func', {
+    test(C,'list', {
         'the regular list cmnd': {
             arg: ['list',[111,222,['value',333]]],
             expected: [111,222,333]
@@ -36,7 +36,7 @@ describe('the core funcs',()=>{
             expected: [11,22,33]
         }
     });
-    test(C.boolean,'the boolean func', {
+    test(C, 'boolean', {
         'the morethan cmnd when true': {
             arg: ['morethan',3,2],
             expected: true
@@ -127,7 +127,7 @@ describe('the core funcs',()=>{
             expected: true
         }
     });
-    test(C.position,'the position func',{
+    test(C,'position',{
         'the mark cmnd': {
             arg: ['mark','mymark'],
             scope: {
@@ -151,7 +151,7 @@ describe('the core funcs',()=>{
             expected: 'p2'
         }
     });
-    test(C.value,'the value func',{
+    test(C,'value',{
         'passing primitive': {
             arg: 123,
             expected: 123
@@ -220,7 +220,7 @@ describe('the core funcs',()=>{
             expected: 'bar'
         }
     });
-    test(C.set,'the set func',{
+    test(C,'set',{
         'when given name of layer': {
             arg: 'mylayer',
             scope: { ARTIFACTS: {mylayer:{a:1,b:2}} },
@@ -284,7 +284,7 @@ describe('the core funcs',()=>{
             expected: {a:1,b:1,c:1}
         }
     });
-    test(C.id,'the id funcs',{
+    test(C,'id',{
         'for idat cmnd': {
             arg: ['idat',['mark','mymark']],
             scope: {
@@ -301,7 +301,7 @@ describe('the core funcs',()=>{
             expected: 7
         }
     });
-    test(C.layerref,'the layerref func',{
+    test(C,'layerref',{
         'when no mappings specified': {
             arg: 'mylayer',
             scope: {

@@ -4,7 +4,7 @@ import lib from '../../../src/codegen/'
 let F = lib
 
 describe("The flow commands",()=>{
-    test(F.calculateUnitLayers,'the calculateUnitLayers func',{
+    test(F,'calculateUnitLayers',{
         'for regular calc': {
             scope: {
                 UNITDATA: {
@@ -53,7 +53,7 @@ describe("The flow commands",()=>{
             }
         }
     })
-    test(F.applyEffectInstructions,'the applyEffectInstructions func',{
+    test(F,'applyEffectInstructions',{
         'for single effect with no conds': {
             showcode: false, //true,
             scope: {
@@ -68,7 +68,7 @@ describe("The flow commands",()=>{
             norefs: ['UNITDATA']
         }
     })
-    test(F.applyCommandConsequences,'the applyCommandConsequences func',{
+    test(F,'applyCommandConsequences',{
         'when not passing AI flag, with effect and generator': {
             options: {
                 cmndname: 'flaunt',
@@ -161,7 +161,7 @@ describe("The flow commands",()=>{
             }
         }
     });
-    test(F.applyMarkConsequences,'the applyMarkConsequences func',{
+    test(F,'applyMarkConsequences',{
         'when not passing AI flag': {
             options: {
                 markname: 'somemark',
@@ -224,7 +224,7 @@ describe("The flow commands",()=>{
             }
         }
     })
-    test(F.linkToEndturn,'the linkToEndturn func',{
+    test(F,'linkToEndturn',{
         'when losing, evaluated who': {
             options: {
                 player: 1,
@@ -375,7 +375,7 @@ describe("The flow commands",()=>{
             }
         }
     })
-    test(F.instruction,'the instruction func',{
+    test(F,'instruction',{
         'when generating': {
             arg: 'myfilter',
             options: {

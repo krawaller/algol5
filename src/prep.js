@@ -17,7 +17,7 @@ const P = {
 		let ret = {}
 		for (var x=1;x<=board.width;x++){
 			for(var y=1;y<=board.height;y++){
-				let pos = P.coordstopos({x,y})
+				let pos = U.coords2pos({x,y})
 				ret[pos] = P.posconnections(pos,board)
 			}
 		}
@@ -25,12 +25,12 @@ const P = {
 	},
 	posconnections: (pos,board)=> { // TODO - use to generate all
 		return [1,2,3,4,5,6,7,8].reduce((mem,dir)=>{
-			let newpos = P.offsetpos(pos,dir,1,0,board)
+			let newpos = U.offsetPos(pos,dir,1,0,board)
 			if (newpos){
 				mem[dir] = newpos
 			}
 			return (board.offsets||[]).reduce((innermem,[forward,right])=>{
-				let newpos = P.offsetpos(pos,dir,forward,right,board)
+				let newpos = U.offsetPos(pos,dir,forward,right,board)
 				if (newpos){
 					innermem['o'+dir+'_'+forward+'_'+right] = newpos
 				}
@@ -38,27 +38,12 @@ const P = {
 			},mem);
 		},{})
 	},
-	postocoords: (pos)=> ({
-		x: colnametonumber[pos[0]],
-		y: parseInt(pos.substr(1))
-	}),
-	coordstopos: (coords)=> colnumbertoname[coords.x]+coords.y,
-	offsetpos: (pos,dir,forward,right,board)=> {
-		let forwardmods = [[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]], // x,y
-			rightmods =   [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]],
-			n = dir-1,
-			coords = P.postocoords(pos),
-			newx = coords.x + forwardmods[n][0]*forward + rightmods[n][0]*right,
-			newy = coords.y + forwardmods[n][1]*forward + rightmods[n][1]*right,
-			withinbounds =  newx>0 && newx<=board.width && newy>0 && newy<=board.height;
-		return withinbounds && P.coordstopos({x:newx,y:newy})
-	},
 	deduceInitialUnitData: (setup)=> {
 		var id = 1;
 		return _.reduce(setup,(mem,defsbyplr,group)=> {
 			return _.reduce(defsbyplr,(mem,entitydefs,plr)=> {
 				return _.reduce( entitydefs, (mem,entitydef)=> {
-					P.convertToEntities(entitydef).forEach(e=> {
+					U.convertToEntities(entitydef).forEach(e=> {
 						let newid = 'unit'+(id++)
 						mem[newid] = Object.assign(e,{
 							id: newid,
@@ -89,13 +74,13 @@ const P = {
 	deduceTerrainLayers: (terrain,plr)=> _.reduce(terrain,(mem,def,name)=> {
 		mem[name] = {};
 		if (_.isArray(def)){ // no ownership
-			_.flatten(def.map(P.convertToEntities)).forEach(e=>{
+			_.flatten(def.map(U.convertToEntities)).forEach(e=>{
 				mem[name][e.pos] = e;
 			})
 		} else { // per-player object
 			for(var owner in def){
 				owner = parseInt(owner)
-				_.flatten(def[owner].map(P.convertToEntities)).forEach(e=>{
+				_.flatten(def[owner].map(U.convertToEntities)).forEach(e=>{
 					e.owner = owner
 					mem[name][e.pos] = e
 					let prefix = owner === 0 ? 'neutral' : owner === plr ? 'my' : 'opp'
@@ -106,36 +91,6 @@ const P = {
 		}
 		return mem;
 	},{}),
-
-	convertToEntities: (def)=> {
-		switch(def[0]){
-			case "pos": // ["pos",list,blueprint]
-				return def[1].map( pos=> Object.assign({pos:pos},def[2]) )
-			case "rect": // ["rect",bottomleft,topright,blueprint]
-			case "holerect": // ["holerect",bottomleft,topright,holes,blueprint]
-				let bottomleft = P.postocoords(def[1]),
-					topright = P.postocoords(def[2]),
-					blueprint = def[3]
-				let positions = _.reduce(_.range(bottomleft.y,topright.y+1),(mem,y)=>{
-					return _.reduce(_.range(bottomleft.x,topright.x+1),(innermem,x)=>{
-						return innermem.concat(P.coordstopos({x,y}))
-					},mem)
-				},[])
-				if (def[0]==="holerect"){
-					blueprint = def[4]
-					positions = _.filter(positions,p=>_.indexOf(def[3],p)===-1)
-				}
-				return positions.map( pos=> Object.assign({pos:pos},blueprint) )
-			default: 
-				if (_.isString(def)){
-					return [{pos:def}]
-				} else if (_.isObject(def)){
-					return [def]
-				} else {
-					throw "Unknown def: "+def
-				}
-		}
-	},
 
 	/*
 	Parses gamedef to find all possible unit layers by looking at setup and dynamically created units

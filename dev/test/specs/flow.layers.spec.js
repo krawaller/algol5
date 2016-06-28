@@ -5,6 +5,28 @@ let F = lib
 
 describe("The seed commands",()=> {
 
+    test(F,'boardLayers',{
+        "for normal call": {
+            arg: {height:2,width:2},
+            expected: {
+                board: {
+                    a1:{pos:'a1',x:1,y:1,colour:'dark'},
+                    a2:{pos:'a2',x:1,y:2,colour:'light'},
+                    b1:{pos:'b1',x:2,y:1,colour:'light'},
+                    b2:{pos:'b2',x:2,y:2,colour:'dark'}
+                },
+                light: {
+                    a2:{pos:'a2',x:1,y:2,colour:'light'},
+                    b1:{pos:'b1',x:2,y:1,colour:'light'}
+                },
+                dark: {
+                    a1:{pos:'a1',x:1,y:1,colour:'dark'},
+                    b2:{pos:'b2',x:2,y:2,colour:'dark'}
+                }
+            }
+        }
+    })
+
     test(F,'blankArtifactLayers',{
         "for normal game": {
             options: {

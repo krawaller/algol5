@@ -156,16 +156,6 @@ const P = {
 		: []
 	).sort(),
 
-	/*
-	Calculates all possible artifact layers used in the game
-	*/
-	deduceArtifactLayers: (generators)=> _.uniq(_.reduce(generators,(mem,gendef)=>{
-		return _.reduce(gendef.draw,(m,drawdef)=>{
-			return _.reduce(U.possibilities(drawdef.tolayer),(m,l)=>{
-				return m.concat( drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : l )
-			},m)
-		},mem)
-	},[])).sort()
 
 }
 

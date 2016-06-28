@@ -9,22 +9,7 @@ const colnametonumber = _.reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST
 const colnumbertoname = _.invert(colnametonumber)
 
 const P = {
-	/*
-	Calculates the three BOARD layers (board,light,dark) and returns them
-	*/
-	boardlayers: (board)=> {
-		let ret = {board:{},light:{},dark:{}}
-		for (var x=1;x<=board.width;x++){
-			for(var y=1;y<=board.height;y++){
-				let pos = P.coordstopos({x,y}),
-					colour = ["dark","light"][(x+(y%2))%2],
-					obj = {colour,pos,x,y}
-				ret.board[pos] = obj
-				ret[colour][pos] = obj
-			}
-		}
-		return ret
-	},
+
 	/*
 	Calculates the connections object
 	*/

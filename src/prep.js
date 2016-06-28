@@ -18,26 +18,12 @@ const P = {
 		for (var x=1;x<=board.width;x++){
 			for(var y=1;y<=board.height;y++){
 				let pos = U.coords2pos({x,y})
-				ret[pos] = P.posconnections(pos,board)
+				ret[pos] = U.posConnections(pos,board)
 			}
 		}
 		return ret
 	},
-	posconnections: (pos,board)=> { // TODO - use to generate all
-		return [1,2,3,4,5,6,7,8].reduce((mem,dir)=>{
-			let newpos = U.offsetPos(pos,dir,1,0,board)
-			if (newpos){
-				mem[dir] = newpos
-			}
-			return (board.offsets||[]).reduce((innermem,[forward,right])=>{
-				let newpos = U.offsetPos(pos,dir,forward,right,board)
-				if (newpos){
-					innermem['o'+dir+'_'+forward+'_'+right] = newpos
-				}
-				return innermem;
-			},mem);
-		},{})
-	},
+
 	deduceInitialUnitData: (setup)=> {
 		var id = 1;
 		return _.reduce(setup,(mem,defsbyplr,group)=> {

@@ -122,16 +122,5 @@ test("the prep funcs",P,{
 			}
 		}
 	},
-	"posconnections(pos,board)": {
-		"for normal call": {
-			pos: 'a1',
-			board: {height:2,width:2},
-			expected: {1:'a2',2:'b2',3:'b1'}
-		},
-		"with offsets": {
-			pos: 'a1',
-			board: {height:2,width:3,offsets:[[1,2],[0,2]]},
-			expected: {1:'a2',2:'b2',3:'b1',o1_1_2:'c2',o1_0_2:'c1'}
-		}
-	}
+
 })

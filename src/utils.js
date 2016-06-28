@@ -9,16 +9,17 @@ import filter from 'lodash/collection/filter'
 import range from 'lodash/utility/range'
 import indexOf from 'lodash/array/indexOf'
 
-/*
-Helper functions which all returns actual values, not stringified
-*/
-
 const colnametonumber = reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split(""),(mem,char,n)=> {
     mem[char] = n+1;
     return mem;
 },{});
 
 const colnumbertoname = invert(colnametonumber)
+
+
+/*
+Helper functions which all returns actual values, not stringified
+*/
 
 const U = {
 
@@ -63,6 +64,22 @@ const U = {
         return withinbounds && U.coords2pos({x:newx,y:newy})
     },
 
+	posConnections: (pos,board)=> {
+		return [1,2,3,4,5,6,7,8].reduce((mem,dir)=>{
+			let newpos = U.offsetPos(pos,dir,1,0,board)
+			if (newpos){
+				mem[dir] = newpos
+			}
+			return (board.offsets||[]).reduce((innermem,[forward,right])=>{
+				let newpos = U.offsetPos(pos,dir,forward,right,board)
+				if (newpos){
+					innermem['o'+dir+'_'+forward+'_'+right] = newpos
+				}
+				return innermem;
+			},mem);
+		},{})
+	},
+
     pos2coords: (pos)=> ({
         x: colnametonumber[pos[0]],
         y: parseInt(pos.substr(1))
@@ -79,10 +96,12 @@ const U = {
 	        return false
 	    }
 	},
+
 	possibilities: def=>
 		def[0] === 'ifelse' ? U.possibilities(def[2]).concat(U.possibilities(def[3]))
 		: def[0] === 'playercase' ? U.possibilities(def[1]).concat(U.possibilities(def[2]))
 		: [def],
+
 	listlength: def=> {
 		if (def[0] === 'list'){
 			return U.listlength(def[1]);
@@ -97,7 +116,7 @@ const U = {
 		} else {
 			return def.length;
 		}
-	}
+	},
 }
 
 module.exports = U

@@ -3,28 +3,8 @@ import lib from '../../../src/codegen/'
 
 let F = lib
 
-describe("The seed commands",()=>{
+describe("The seed commands",()=> {
 
-    test(F,'coords2pos', {
-        "for normal call": {
-            arg: {x:2,y:4},
-            expected: 'b4'
-        },
-        "for another normal call": {
-            arg: {x:5,y:1},
-            expected: 'e1'
-        }
-    })
-    test('pos2coords', {
-        "for normal call": {
-            arg: 'b4',
-            expected: {x:2,y:4}
-        },
-        "for another normal call": {
-            arg: 'e1',
-            expected: {x:5,y:1}
-        }
-    })
     test(F,'blankArtifactLayers',{
         "for normal game": {
             options: {

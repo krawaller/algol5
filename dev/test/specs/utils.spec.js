@@ -39,5 +39,39 @@ test("the prep funcs",U,{
 			board: {height:2,width:3},
 			expected: false
 		},
+	},
+	"convertToEntities(def)": {
+		"for straight pos": {
+			def: 'a1',
+			expected: [{pos:'a1'}]
+		},
+		"for straight obj": {
+			def: {pos:'a1',foo:'bar'},
+			expected: [{pos:'a1',foo:'bar'}]
+		},
+		"for poslist with no blueprint": {
+			def: ["pos",["a1","b2"]],
+			expected: [{pos:'a1'},{pos:'b2'}]
+		},
+		"for poslist with blueprint": {
+			def: ["pos",["a1","b2"],{baz:'bin'}],
+			expected: [{pos:'a1',baz:'bin'},{pos:'b2',baz:'bin'}]
+		},
+		"for rectangle with no blueprint": {
+			def: ["rect","b1","c2"],
+			expected: [{pos:'b1'},{pos:'c1'},{pos:'b2'},{pos:'c2'}]
+		},
+		"for rectangle with blueprint": {
+			def: ["rect","b1","c2",{baz:'bin'}],
+			expected: [{pos:'b1',baz:'bin'},{pos:'c1',baz:'bin'},{pos:'b2',baz:'bin'},{pos:'c2',baz:'bin'}]
+		},
+		"for holed rectangle with no blueprint": {
+			def: ["holerect","b1","c2",["b2"]],
+			expected: [{pos:'b1'},{pos:'c1'},{pos:'c2'}]
+		},
+		"for holed rectangle with blueprint": {
+			def: ["holerect","b1","c2",["b2"],{baz:'bin'}],
+			expected: [{pos:'b1',baz:'bin'},{pos:'c1',baz:'bin'},{pos:'c2',baz:'bin'}]
+		}
 	}
 })

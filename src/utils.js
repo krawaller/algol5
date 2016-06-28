@@ -1,9 +1,13 @@
 import isObject from 'lodash/lang/isObject'
 import isArray from 'lodash/lang/isArray'
 import isEqual from 'lodash/lang/isEqual'
+import isString from 'lodash/lang/isString'
 import invert from 'lodash/object/invert'
 import some from 'lodash/collection/some'
 import reduce from 'lodash/collection/reduce'
+import filter from 'lodash/collection/filter'
+import range from 'lodash/utility/range'
+import indexOf from 'lodash/array/indexOf'
 
 /*
 Helper functions which all returns actual values, not stringified
@@ -17,6 +21,36 @@ const colnametonumber = reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
 const colnumbertoname = invert(colnametonumber)
 
 const U = {
+
+	convertToEntities: (def)=> {
+		switch(def[0]){
+			case "pos": // ["pos",list,blueprint]
+				return def[1].map( pos=> Object.assign({pos:pos},def[2]) )
+			case "rect": // ["rect",bottomleft,topright,blueprint]
+			case "holerect": // ["holerect",bottomleft,topright,holes,blueprint]
+				let bottomleft = U.pos2coords(def[1]),
+					topright = U.pos2coords(def[2]),
+					blueprint = def[3]
+				let positions = reduce(range(bottomleft.y,topright.y+1),(mem,y)=>{
+					return reduce(range(bottomleft.x,topright.x+1),(innermem,x)=>{
+						return innermem.concat(U.coords2pos({x,y}))
+					},mem)
+				},[])
+				if (def[0]==="holerect"){
+					blueprint = def[4]
+					positions = filter(positions,p=>indexOf(def[3],p)===-1)
+				}
+				return positions.map( pos=> Object.assign({pos:pos},blueprint) )
+			default: 
+				if (isString(def)){
+					return [{pos:def}]
+				} else if (isObject(def)){
+					return [def]
+				} else {
+					throw "Unknown def: "+def
+				}
+		}
+	},
 
     offsetPos: (pos,dir,forward,right,board)=> {
         let forwardmods = [[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]], // x,y

@@ -1,7 +1,13 @@
 import U from '../../../src/utils'
 import test from '../libtester'
 
-test("the prep funcs",U,{
+test("the utils funcs",U,{
+	"boardPositions(board)": {
+		"for normal board": {
+			board: {height:2,width:3},
+			expected: ['a1','a2','b1','b2','c1','c2']
+		}
+	},
 	"coords2pos(coords)": {
 		"for normal call": {
 			coords: {x:2,y:4},

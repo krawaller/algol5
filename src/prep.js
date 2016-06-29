@@ -18,25 +18,6 @@ const P = {
 		return ret
 	},
 
-	deduceInitialUnitData: (setup)=> {
-		var id = 1;
-		return _.reduce(setup,(mem,defsbyplr,group)=> {
-			return _.reduce(defsbyplr,(mem,entitydefs,plr)=> {
-				return _.reduce( entitydefs, (mem,entitydef)=> {
-					U.convertToEntities(entitydef).forEach(e=> {
-						let newid = 'unit'+(id++)
-						mem[newid] = Object.assign(e,{
-							id: newid,
-							group: group,
-							owner: parseInt(plr)
-						})
-					})
-					return mem
-				},mem)
-			},mem)
-		},{})
-	},
-
 	/*
 	Should be called with the result from deduceTerrainLayers and a full board
 	Will augment terrain with 'no<terrainname>' layers

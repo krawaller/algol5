@@ -23,6 +23,16 @@ Helper functions which all returns actual values, not stringified
 
 const U = {
 
+	boardPositions: (board)=> reduce(
+		range(1,board.height+1),
+		(mem,y)=> reduce(
+			range(1,board.width+1),
+			(innermem,x)=> innermem.concat(U.coords2pos({x,y})),
+			mem
+		),
+		[]
+	).sort(),
+
 	/*
 	Used for actual data and figuring out next unit id (in case of spawn)
 	*/

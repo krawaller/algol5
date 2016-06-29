@@ -34,7 +34,27 @@ const U = {
 		[]
 	).sort(),
 
+	/*
 
+	*/
+	deduceInitialUnitData: (setup)=> {
+		var id = 1;
+		return reduce(setup,(mem,defsbyplr,group)=> {
+			return reduce(defsbyplr,(mem,entitydefs,plr)=> {
+				return reduce( entitydefs, (mem,entitydef)=> {
+					U.convertToEntities(entitydef).forEach(e=> {
+						let newid = 'unit'+(id++)
+						mem[newid] = Object.assign(e,{
+							id: newid,
+							group: group,
+							owner: parseInt(plr)
+						})
+					})
+					return mem
+				},mem)
+			},mem)
+		},{})
+	},
 
 	convertToEntities: (def)=> {
 		switch(def[0]){

@@ -85,5 +85,22 @@ test("the prep funcs",U,{
 			def: ["holerect","b1","c2",["b2"],{baz:'bin'}],
 			expected: [{pos:'b1',baz:'bin'},{pos:'c1',baz:'bin'},{pos:'c2',baz:'bin'}]
 		}
+	},
+	"deduceInitialUnitData(setup)": {
+		"it deduces unitData correctly": {
+			setup: {
+				muppets: {
+					1: ["c1"],
+					2: [["rect","a1","b2"]]
+				}
+			},
+			expected: {
+				unit1: {id:"unit1",owner:1,pos:"c1",group:"muppets"},
+				unit2: {id:"unit2",owner:2,pos:"a1",group:"muppets"},
+				unit3: {id:"unit3",owner:2,pos:"b1",group:"muppets"},
+				unit4: {id:"unit4",owner:2,pos:"a2",group:"muppets"},
+				unit5: {id:"unit5",owner:2,pos:"b2",group:"muppets"}
+			}
+		}
 	}
 })

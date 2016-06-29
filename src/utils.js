@@ -10,8 +10,8 @@ import range from 'lodash/utility/range'
 import indexOf from 'lodash/array/indexOf'
 
 const colnametonumber = reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split(""),(mem,char,n)=> {
-    mem[char] = n+1;
-    return mem;
+	mem[char] = n+1;
+	return mem;
 },{});
 
 const colnumbertoname = invert(colnametonumber)
@@ -22,6 +22,28 @@ Helper functions which all returns actual values, not stringified
 */
 
 const U = {
+
+	/*
+	Used for actual data and figuring out next unit id (in case of spawn)
+	*/
+	deduceInitialUnitData: (setup)=> {
+		var id = 1;
+		return reduce(setup,(mem,defsbyplr,group)=> {
+			return reduce(defsbyplr,(mem,entitydefs,plr)=> {
+				return reduce( entitydefs, (mem,entitydef)=> {
+					U.convertToEntities(entitydef).forEach(e=> {
+						let newid = 'unit'+(id++)
+						mem[newid] = Object.assign(e,{
+							id: newid,
+							group: group,
+							owner: parseInt(plr)
+						})
+					})
+					return mem
+				},mem)
+			},mem)
+		},{})
+	},
 
 	convertToEntities: (def)=> {
 		switch(def[0]){
@@ -53,16 +75,16 @@ const U = {
 		}
 	},
 
-    offsetPos: (pos,dir,forward,right,board)=> {
-        let forwardmods = [[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]], // x,y
-            rightmods =   [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]],
-            n = dir-1,
-            coords = U.pos2coords(pos),
-            newx = coords.x + forwardmods[n][0]*forward + rightmods[n][0]*right,
-            newy = coords.y + forwardmods[n][1]*forward + rightmods[n][1]*right,
-            withinbounds =  newx>0 && newx<=board.width && newy>0 && newy<=board.height;
-        return withinbounds && U.coords2pos({x:newx,y:newy})
-    },
+	offsetPos: (pos,dir,forward,right,board)=> {
+		let forwardmods = [[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]], // x,y
+			rightmods =   [[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1],[0,1],[1,1]],
+			n = dir-1,
+			coords = U.pos2coords(pos),
+			newx = coords.x + forwardmods[n][0]*forward + rightmods[n][0]*right,
+			newy = coords.y + forwardmods[n][1]*forward + rightmods[n][1]*right,
+			withinbounds =  newx>0 && newx<=board.width && newy>0 && newy<=board.height;
+		return withinbounds && U.coords2pos({x:newx,y:newy})
+	},
 
 	posConnections: (pos,board)=> {
 		return [1,2,3,4,5,6,7,8].reduce((mem,dir)=>{
@@ -80,21 +102,21 @@ const U = {
 		},{})
 	},
 
-    pos2coords: (pos)=> ({
-        x: colnametonumber[pos[0]],
-        y: parseInt(pos.substr(1))
-    }),
+	pos2coords: (pos)=> ({
+		x: colnametonumber[pos[0]],
+		y: parseInt(pos.substr(1))
+	}),
 
-    coords2pos: (coords)=> colnumbertoname[coords.x]+coords.y,
+	coords2pos: (coords)=> colnumbertoname[coords.x]+coords.y,
 
 	contains: (haystack,needle)=> {
-	    if (isEqual(needle,haystack)){
-	        return true
-	    } else if (isArray(haystack) || isObject(haystack)){
-	        return some(haystack,child=> U.contains(child,needle))
-	    } else {
-	        return false
-	    }
+		if (isEqual(needle,haystack)){
+			return true
+		} else if (isArray(haystack) || isObject(haystack)){
+			return some(haystack,child=> U.contains(child,needle))
+		} else {
+			return false
+		}
 	},
 
 	possibilities: def=>

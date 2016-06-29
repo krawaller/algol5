@@ -9,7 +9,6 @@ import U from '../utils'
 
 export default C => Object.assign(C,{
 
-
     // assumes UNITDATA, ownernames
     // mutates UNITLAYERS
     calculateUnitLayers: (O)=> `

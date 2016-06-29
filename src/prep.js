@@ -1,12 +1,6 @@
 import _ from 'lodash'
 import U from './utils'
 
-const colnametonumber = _.reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split(""),(mem,char,n)=> {
-	mem[char] = n+1;
-	return mem;
-},{});
-
-const colnumbertoname = _.invert(colnametonumber)
 
 const P = {
 

@@ -5,6 +5,54 @@ let F = lib
 
 describe("The seed commands",()=> {
 
+    test(F,'deduceInitialUnitData', {
+        "it deduces unitData correctly": {
+            options: {
+                rules: {
+                    setup: {
+                        muppets: {
+                            1: ["c1"],
+                            2: [["rect","a1","b2"]]
+                        }
+                    }
+                }
+            },
+            expected: {
+                unit1: {id:"unit1",owner:1,pos:"c1",group:"muppets"},
+                unit2: {id:"unit2",owner:2,pos:"a1",group:"muppets"},
+                unit3: {id:"unit3",owner:2,pos:"b1",group:"muppets"},
+                unit4: {id:"unit4",owner:2,pos:"a2",group:"muppets"},
+                unit5: {id:"unit5",owner:2,pos:"b2",group:"muppets"}
+            }
+        }
+    })
+
+    test(F,'blankUnitLayers', {
+        'for normal call': {
+            options: {
+                rules: {
+                    setup: {
+                        kings: 'FOO',
+                        queens: 'BAR'
+                    },
+                    commands: {
+                        fart: {
+                            applyEffects: [
+                                ['spawn','somepos',['playercase','jacks','aces']]
+                            ]
+                        }
+                    }
+                }
+            },
+            expected: {
+                'aces':{},'jacks':{},'kings':{},'queens':{},
+                'myaces':{},'myjacks':{},'mykings':{},'myqueens':{},
+                'neutralaces':{},'neutraljacks':{},'neutralkings':{},'neutralqueens':{},
+                'oppaces':{},'oppjacks':{},'oppkings':{},'oppqueens':{}
+            }
+        }
+    })
+
     test(F,'boardConnections', {
         "for normal call": {
             options: {rules:{board:{height:2,width:2}}},
@@ -19,7 +67,7 @@ describe("The seed commands",()=> {
 
     test(F,'boardLayers',{
         "for normal call": {
-            arg: {height:2,width:2},
+            options: {rules:{board:{height:2,width:2}}},
             expected: {
                 board: {
                     a1:{pos:'a1',x:1,y:1,colour:'dark'},
@@ -103,7 +151,7 @@ describe("The seed commands",()=> {
                 UNITLAYERS: 'whatever'
             },
             context: {
-                blankArtifactLayers: () => JSON.stringify({soldiers: {},knights:{},all:{},MYsoldiers:{},NEUsoldiers:{},knights:{},OPPknights:{},MYunits:{},OPPunits:{},NEUunits:{}})
+                blankUnitLayers: () => JSON.stringify({soldiers: {},knights:{},all:{},MYsoldiers:{},NEUsoldiers:{},knights:{},OPPknights:{},MYunits:{},OPPunits:{},NEUunits:{}})
             },
             mutations: {
                 UNITLAYERS: {

@@ -9,7 +9,7 @@ export default C => Object.assign(C,{
 
     // ******************** DATATYPE instruction **********************
 
-    instruction: (O,def)=> { // TODO - add in linktoendturn
+    instruction: (O,def)=> { // TODO - add in linktoendturn and other links
         if (C['instr_'+def[0]]) {
             return C['instr_'+def[0]](O,tail(def));
         } else if (O && O.effect){ // TODO - need this check? fix through other means?

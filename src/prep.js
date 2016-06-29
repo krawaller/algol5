@@ -37,26 +37,7 @@ const P = {
 			}
 		}
 		return mem;
-	},{}),
-
-	/*
-	Parses gamedef to find all possible unit layers by looking at setup and dynamically created units
-	Returns an array of all possible layers
-	*/
-	deduceUnitLayers: (gamedef)=> _.uniq(Object.keys(gamedef.setup || {}).concat(P.deduceDynamicGroups(gamedef.commands))).reduce(
-		(list,g) => list.concat([g,"my"+g,"opp"+g,"neutral"+g]), []
-	).sort(),
-
-	/*
-	Parses command data to find all potential groups created by commands like spawn.
-	Used in deduceUnitLayers
-	*/
-	deduceDynamicGroups: (data)=> _.uniq(
-		data[0] === "spawn" ? U.possibilities(data[2])
-		: {setat:1,setid:1,setin:1}[data[0]] && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
-		: _.isArray(data) || _.isObject(data) ? _.reduce(data,(mem,def)=>mem.concat(P.deduceDynamicGroups(def)),[])
-		: []
-	).sort(),
+	},{})
 
 }
 

@@ -4,9 +4,6 @@ import reduce from "lodash/collection/reduce"
 
 import U from '../utils'
 
-
-
-
 export default C => Object.assign(C,{
 
     /*
@@ -18,7 +15,7 @@ export default C => Object.assign(C,{
     // assumes UNITDATA, ownernames
     // mutates UNITLAYERS
     calculateUnitLayers: (O)=> `
-        UNITLAYERS = ${C.blankArtifactLayers(O)};
+        UNITLAYERS = ${C.blankUnitLayers(O)};
         for (var unitid in UNITDATA) {
             var currentunit = UNITDATA[unitid]
             var unitgroup = currentunit.group;
@@ -30,6 +27,37 @@ export default C => Object.assign(C,{
                 = UNITLAYERS[owner +'units'][unitpos]
                 = currentunit
         }`,
+
+    /*
+    Calculate blank unit layers yada yada
+    */
+    blankUnitLayers: (O)=> JSON.stringify(reduce(
+        Object.keys(O.rules.setup || {}).concat(U.deduceDynamicGroups(O.rules.commands)),
+        (mem,g)=>({ ...mem, [g]: {}, ['my'+g]: {}, ['opp'+g]: {}, ['neutral'+g]: {} }),
+        {}
+    )),
+
+    /*
+    the initial unit data blob
+    */
+    deduceInitialUnitData: (O)=> {
+        var id = 1;
+        return JSON.stringify(reduce(O.rules.setup,(mem,defsbyplr,group)=> {
+            return reduce(defsbyplr,(mem,entitydefs,plr)=> {
+                return reduce( entitydefs, (mem,entitydef)=> {
+                    U.convertToEntities(entitydef).forEach(e=> {
+                        let newid = 'unit'+(id++)
+                        mem[newid] = Object.assign(e,{
+                            id: newid,
+                            group: group,
+                            owner: parseInt(plr)
+                        })
+                    })
+                    return mem
+                },mem)
+            },mem)
+        },{}))
+    },
 
     /*
     Calculates all possible artifact layers used in the game
@@ -46,20 +74,12 @@ export default C => Object.assign(C,{
     /*
     Calculates the three BOARD layers (board,light,dark) and returns them
     */
-    boardLayers: (O,board)=> {
-        let ret = {board:{},light:{},dark:{}}
-        for (var x=1;x<=board.width;x++){
-            for(var y=1;y<=board.height;y++){
-                let pos = U.coords2pos({x,y}),
-                    colour = ["dark","light"][(x+(y%2))%2],
-                    obj = {colour,pos,x,y}
-                ret.board[pos] = obj
-                ret[colour][pos] = obj
-            }
-        }
-        return JSON.stringify(ret)
-    },
-
+    boardLayers: (O)=> JSON.stringify(reduce(U.boardPositions(O.rules.board),(mem,pos)=> {
+        let {x,y} = U.pos2coords(pos),
+            colour = ["dark","light"][(x+(y%2))%2]
+        mem.board[pos] = mem[colour][pos] = {colour,pos,x,y}
+        return mem
+    },{board:{},light:{},dark:{}}))
 })
 
 

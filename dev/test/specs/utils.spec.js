@@ -1,7 +1,7 @@
 import U from '../../../src/utils'
 import test from '../libtester'
 
-test("the utils funcs",U,{
+test("the UTILS funcs",U,{
 	"boardPositions(board)": {
 		"for normal board": {
 			board: {height:2,width:3},
@@ -92,21 +92,37 @@ test("the utils funcs",U,{
 			expected: [{pos:'b1',baz:'bin'},{pos:'c1',baz:'bin'},{pos:'c2',baz:'bin'}]
 		}
 	},
-	"deduceInitialUnitData(setup)": {
-		"it deduces unitData correctly": {
-			setup: {
-				muppets: {
-					1: ["c1"],
-					2: [["rect","a1","b2"]]
-				}
+	"deduceDynamicGroups(data)": {
+		"it finds spawn groups": {
+			data: ['BOGUS',['spawn','somepos',['playercase','group1','group2']]],
+			expected: ['group1','group2']
+		},
+		"it finds setid groups": {
+			data: {
+				FOO:'BAR',
+				EASY: ['setid','someid','group','group1'],
+				HARD: ['setid','someid',['playercase','health','group'],['ifelse','somebool','group2','group3']],
+				BOGUS: ['setid','someid',['playercase','what','ever'],['ifelse','somebool','alt3','alt4']]
 			},
-			expected: {
-				unit1: {id:"unit1",owner:1,pos:"c1",group:"muppets"},
-				unit2: {id:"unit2",owner:2,pos:"a1",group:"muppets"},
-				unit3: {id:"unit3",owner:2,pos:"b1",group:"muppets"},
-				unit4: {id:"unit4",owner:2,pos:"a2",group:"muppets"},
-				unit5: {id:"unit5",owner:2,pos:"b2",group:"muppets"}
-			}
-		}
+			expected: ['group1','group2','group3']
+		},
+		"it finds setat groups": {
+			data: {
+				FOO:'BAR',
+				EASY: ['setat','someid','group','group1'],
+				HARD: ['setat','someid',['playercase','health','group'],['ifelse','somebool','group2','group3']],
+				BOGUS: ['setat','someid',['playercase','what','ever'],['ifelse','somebool','alt3','alt4']]
+			},
+			expected: ['group1','group2','group3']
+		},
+		"it finds setin groups": {
+			data: {
+				FOO:'BAR',
+				EASY: ['setin','someset','group','group1'],
+				HARD: ['setin','someset',['playercase','health','group'],['ifelse','somebool','group2','group3']],
+				BOGUS: ['setin','someset',['playercase','what','ever'],['ifelse','somebool','alt3','alt4']]
+			},
+			expected: ['group1','group2','group3']
+		},
 	}
 })

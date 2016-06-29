@@ -8,6 +8,7 @@ import reduce from 'lodash/collection/reduce'
 import filter from 'lodash/collection/filter'
 import range from 'lodash/utility/range'
 import indexOf from 'lodash/array/indexOf'
+import uniq from 'lodash/array/uniq'
 
 const colnametonumber = reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split(""),(mem,char,n)=> {
 	mem[char] = n+1;
@@ -33,27 +34,7 @@ const U = {
 		[]
 	).sort(),
 
-	/*
-	Used for actual data and figuring out next unit id (in case of spawn)
-	*/
-	deduceInitialUnitData: (setup)=> {
-		var id = 1;
-		return reduce(setup,(mem,defsbyplr,group)=> {
-			return reduce(defsbyplr,(mem,entitydefs,plr)=> {
-				return reduce( entitydefs, (mem,entitydef)=> {
-					U.convertToEntities(entitydef).forEach(e=> {
-						let newid = 'unit'+(id++)
-						mem[newid] = Object.assign(e,{
-							id: newid,
-							group: group,
-							owner: parseInt(plr)
-						})
-					})
-					return mem
-				},mem)
-			},mem)
-		},{})
-	},
+
 
 	convertToEntities: (def)=> {
 		switch(def[0]){
@@ -149,6 +130,17 @@ const U = {
 			return def.length;
 		}
 	},
+
+	/*
+	Parses command data to find all potential groups created by commands like spawn.
+	Used in deduceUnitLayers
+	*/
+	deduceDynamicGroups: (data)=> uniq(
+		data[0] === "spawn" ? U.possibilities(data[2])
+		: {setat:1,setid:1,setin:1}[data[0]] && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
+		: isArray(data) || isObject(data) ? reduce(data,(mem,def)=>mem.concat(U.deduceDynamicGroups(def)),[])
+		: []
+	).sort(),
 }
 
 module.exports = U

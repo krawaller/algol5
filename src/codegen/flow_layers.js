@@ -10,7 +10,11 @@ export default C => Object.assign(C,{
     Calculates the connections object
     */
     boardConnections: (O)=>
-        JSON.stringify(reduce(U.boardPositions(O.rules.board),(ret,pos)=> ({...ret, [pos]:U.posConnections(pos,O.rules.board)}),{})),
+        JSON.stringify(reduce(
+            U.boardPositions(O.rules.board),
+            (ret,pos)=> ({...ret, [pos]:U.posConnections(pos,O.rules.board)}),
+            {}
+        )),
 
     // assumes UNITDATA, ownernames
     // mutates UNITLAYERS

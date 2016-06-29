@@ -34,7 +34,7 @@ export default C => Object.assign(C,{
     `,
     setin: (O,set,propname,val)=> C.foridin(O,set,['setid',['loopid'],propname,val]),
     spawn: (O,pos,group,owner,obj)=>`
-        var newunitid = 'unit'+(nextunitid++);
+        var newunitid = 'spawn'+(nextunitid++);
         UNITDATA[newunitid] = {
             pos: ${C.position(O,pos)},
             id: newunitid,

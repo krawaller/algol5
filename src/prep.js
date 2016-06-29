@@ -5,20 +5,6 @@ import U from './utils'
 const P = {
 
 	/*
-	Calculates the connections object
-	*/
-	boardconnections: (board)=> {
-		let ret = {}
-		for (var x=1;x<=board.width;x++){
-			for(var y=1;y<=board.height;y++){
-				let pos = U.coords2pos({x,y})
-				ret[pos] = U.posConnections(pos,board)
-			}
-		}
-		return ret
-	},
-
-	/*
 	Should be called with the result from deduceTerrainLayers and a full board
 	Will augment terrain with 'no<terrainname>' layers
 	*/
@@ -71,7 +57,6 @@ const P = {
 		: _.isArray(data) || _.isObject(data) ? _.reduce(data,(mem,def)=>mem.concat(P.deduceDynamicGroups(def)),[])
 		: []
 	).sort(),
-
 
 }
 

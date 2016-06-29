@@ -94,17 +94,6 @@ test("the prep funcs",P,{
 			},
 			expected: ['group1','group2','group3']
 		},
-	},
-	"boardconnections(board)": {
-		"for normal call": {
-			board: {height:2,width:2},
-			expected: {
-				a1:{1:'a2',2:'b2',3:'b1'},
-				a2:{3:'b2',4:'b1',5:'a1'},
-				b1:{7:'a1',8:'a2',1:'b2'},
-				b2:{5:'b1',6:'a1',7:'a2'}
-			}
-		}
-	},
+	}
 
 })

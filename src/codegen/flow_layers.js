@@ -1,6 +1,7 @@
 import uniq from "lodash/array/uniq"
 import reduce from "lodash/collection/reduce"
-
+import flatten from "lodash/array/flatten"
+import isArray from "lodash/lang/isArray"
 
 import U from '../utils'
 
@@ -83,7 +84,43 @@ export default C => Object.assign(C,{
             colour = ["dark","light"][(x+(y%2))%2]
         mem.board[pos] = mem[colour][pos] = {colour,pos,x,y}
         return mem
-    },{board:{},light:{},dark:{}}))
+    },{board:{},light:{},dark:{}})),
+
+    terrainLayers: (O,forplr)=> {
+        let terrain = reduce(O.rules.board.terrain,(mem,def,name)=> {
+            mem[name] = {};
+            if (isArray(def)){ // no ownership
+                flatten(def.map(U.convertToEntities)).forEach(e=>{
+                    mem[name][e.pos] = e;
+                })
+            } else { // per-player object
+                for(var owner in def){
+                    owner = parseInt(owner)
+                    flatten(def[owner].map(U.convertToEntities)).forEach(e=>{
+                        e.owner = owner
+                        mem[name][e.pos] = e
+                        let prefix = owner === 0 ? 'neutral' : owner === forplr ? 'my' : 'opp'
+                        mem[prefix+name] = mem[prefix+name] || {}
+                        mem[prefix+name][e.pos] = e
+                    })
+                }
+            }
+            return mem;
+        },{})
+
+        return JSON.stringify(reduce(terrain,(mem,t,name)=> {
+            let noname = 'no'+name
+            if (U.contains(O.rules,noname)){
+                mem['no'+name] = {}
+                U.boardPositions(O.rules.board).forEach( pos => {
+                    if (!t[pos]){
+                        mem['no'+name][pos] = {pos:pos}
+                    }
+                })
+            }
+            return mem
+        },terrain))
+    }
 })
 
 

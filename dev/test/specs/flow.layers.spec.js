@@ -5,6 +5,41 @@ let F = lib
 
 describe("The seed commands",()=> {
 
+    test(F,"terrainLayers", {
+        "it deduces correctly": {
+            options: {
+                rules: {
+                    board: {
+                        height: 1,
+                        width: 4,
+                        terrain: {
+                            holes: ["a1"],
+                            bunkers: {
+                                1: ["b1"],
+                                2: ["c1"],
+                                0: ["d1"]
+                            }
+                        }
+                    },
+                    whatev: {foo: ['blah','nobunkers']}
+                }
+            },
+            arg: 2,
+            expected: {
+                holes: {a1:{pos:'a1'}},
+                bunkers: {
+                    b1: {pos:'b1',owner:1},
+                    c1: {pos:'c1',owner:2},
+                    d1: {pos:'d1',owner:0}
+                },
+                mybunkers: { c1: {pos:'c1',owner:2} },
+                oppbunkers: { b1: {pos:'b1',owner:1} },
+                neutralbunkers: { d1: {pos:'d1',owner:0} },
+                nobunkers: {a1:{pos:'a1'}}
+            }
+        }
+    })
+
     test(F,'deduceInitialUnitData', {
         "it deduces unitData correctly": {
             options: {

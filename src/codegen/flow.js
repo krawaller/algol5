@@ -64,52 +64,40 @@ export default C => Object.assign(C,{
         })).concat('links.endturn = "next"; ').join(' else ')
     },
 
-    // assumes markname, markpos, stepid
-    // mutates MARKS, removemarks (but new ref), newid
-    applyMarkConsequences: (O)=> {
-        let ret = ''
-        ret += 'MARKS[markname] = markpos; '
-        if (!(O && O.AI)){
-            ret += 'removemarks = Object.assign({},removemarks); '
-            ret += 'removemarks[markname] = stepid; '
-        }
-        ret += 'newid = stepid+= "-"+markpos; '
-        ret += 'path.push(markpos); '
-        ret += C.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{});
+    /*
+    assumes markname, markpos, stepid
+    mutates MARKS, removemarks (but new ref), newid
+    */
+    applyMarkConsequences: (O)=> `
+        MARKS[markname] = markpos;
+        ${O && O.AI ? '' : `
+            removemarks = Object.assign({},removemarks);
+            removemarks[markname] = stepid;
+        `}
+        newid = stepid+= "-"+markpos;
+        path.push(markpos);
+        ${C.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{})}
+    `,
+ 
+    /*
+    assumes cmndname, stepid, path, cleanartifactslate
 
-        /*
-        
-        (1) set mark, removemark (if human), newid & path
-        (2) run generators
+    (1) set newid, path & undo (if human)
+    (2) apply effects
+    (3) clear artifacts & marks
+    (4) apply generators
 
-        */
-        return ret;
-    },
-
-    // assumes cmndname, stepid, path, cleanartifactslate
-    applyCommandConsequences: (O)=> {
-        let ret = ''
-        if (!(O && O.AI)){
-            ret += 'var undo = stepid; '
-        }
-        ret += 'newid = stepid+"-"+cmndname; '
-        ret += 'path.push(cmndname); '
-        ret += C.applyEffectInstructions(O,O.rules.commands[O.cmndname]);
-        ret += 'ARTIFACTS = cleanartifactslate; '
-        ret += 'MARKS = {}; '
-        ret += C.applyGeneratorInstructions(O,O.rules.commands[O.cmndname]);
-        /*
-
-        (1) set newid, path & undo (if human)
-        (2) apply effects
-        (3) clear artifacts & marks
-        (4) apply generators
-
-        clear removemarks // if human, in cleanup, not here
-        */
-        return ret;
-    }
-
+    clear removemarks // if human, in cleanup, not here
+    */
+    applyCommandConsequences: (O)=> `
+        ${O && O.AI ? '' : 'var undo = stepid; '}
+        newid = stepid+"-"+cmndname;
+        path.push(cmndname);
+        ${C.applyEffectInstructions(O,O.rules.commands[O.cmndname])}
+        ARTIFACTS = ${C.blankArtifactLayers(O)};
+        MARKS = {};
+        ${C.applyGeneratorInstructions(O,O.rules.commands[O.cmndname])}
+    `
 })
 
 

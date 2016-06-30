@@ -77,7 +77,8 @@ export default C => Object.assign(C,{
     },{})),
 
     /*
-    Calculates the three BOARD layers (board,light,dark) and returns them
+    Calculates the three BOARD layers (board,light,dark) and returns them.
+    These are the same for every player.
     */
     boardLayers: (O)=> JSON.stringify(reduce(U.boardPositions(O.rules.board),(mem,pos)=> {
         let {x,y} = U.pos2coords(pos),
@@ -86,6 +87,10 @@ export default C => Object.assign(C,{
         return mem
     },{board:{},light:{},dark:{}})),
 
+    /*
+    Calculates all terrain layers and returns them. 
+    This should be done per player if any terrain has owner.
+    */
     terrainLayers: (O,forplr)=> {
         let terrain = reduce(O.rules.board.terrain,(mem,def,name)=> {
             mem[name] = {};

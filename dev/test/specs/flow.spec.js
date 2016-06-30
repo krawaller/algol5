@@ -44,6 +44,9 @@ describe("The flow commands",()=>{
                     }
                 }
             },
+            context: {
+                blankArtifactLayers: ()=> JSON.stringify({foos:{},bars:'YEAH!'})
+            },
             scope: {
                 UNITDATA: { unit1: {} },
                 UNITLAYERS: { all: { somepos: {id:'unit1'} } },
@@ -53,7 +56,6 @@ describe("The flow commands",()=>{
                 ARTIFACTS: {doomed:{'somepos':{}},foos:{}},
                 connections: {start:{1:'a1'}},
                 path: ['foo','bar'],
-                cleanartifactslate: {foos:{},bars:'YEAH!'},
                 MARKS: {baz:'bin'},
             },
             mutations: {
@@ -96,11 +98,13 @@ describe("The flow commands",()=>{
                 stepid: 'oldid',
                 newid: 'OVERWRITEME',
                 ARTIFACTS: {foos:{},moos:{}},
-                cleanartifactslate: {foos:{}},
                 connections: {start:{1:'a1'}},
                 MARKS: {baz:'bin'},
                 path: ['foo','bar'],
                 undo: 'DONTOVERWRITEME'
+            },
+            context: {
+                blankArtifactLayers: ()=> JSON.stringify({foos:{}})
             },
             mutations: {
                 UNITDATA: {},

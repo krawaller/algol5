@@ -52,7 +52,6 @@ describe("The flow commands",()=>{
                 UNITLAYERS: { all: { somepos: {id:'unit1'} } },
                 cmndname: 'flaunt',
                 stepid: 'oldid',
-                newid: 'OVERWRITEME',
                 ARTIFACTS: {doomed:{'somepos':{}},foos:{}},
                 connections: {start:{1:'a1'}},
                 path: ['foo','bar'],
@@ -60,12 +59,13 @@ describe("The flow commands",()=>{
             },
             mutations: {
                 UNITDATA: {},
-                newid: 'oldid-flaunt',
+                stepid: 'oldid-flaunt',
                 ARTIFACTS: {foos:{a1:{}},bars:'YEAH!'},
                 path: ['foo','bar','flaunt'],
                 undo: 'oldid',
                 MARKS: {}
-            }
+            },
+            norefs: ['path']
         },
         'when passing AI flag, with effect and generator': {
             options: {
@@ -96,7 +96,6 @@ describe("The flow commands",()=>{
                 UNITDATA: { unit1: {} },
                 cmndname: 'flaunt',
                 stepid: 'oldid',
-                newid: 'OVERWRITEME',
                 ARTIFACTS: {foos:{},moos:{}},
                 connections: {start:{1:'a1'}},
                 MARKS: {baz:'bin'},
@@ -108,7 +107,7 @@ describe("The flow commands",()=>{
             },
             mutations: {
                 UNITDATA: {},
-                newid: 'oldid-flaunt',
+                stepid: 'oldid-flaunt',
                 ARTIFACTS: {foos:{a1:{}}},
                 MARKS: {},
                 path: ['foo','bar','flaunt'],
@@ -146,7 +145,6 @@ describe("The flow commands",()=>{
                 stepid: 'oldid',
                 MARKS: {othermark:'otherpos'},
                 removemarks: {othermark: 'otherid'},
-                newid: 'OVERWRITEME',
                 path: ['foo','bar'],
                 connections: {start:{1:'a1'}},
                 ARTIFACTS: {foos:{}}
@@ -154,11 +152,11 @@ describe("The flow commands",()=>{
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
                 removemarks: {othermark:'otherid','somemark':'oldid'},
-                newid: 'oldid-somepos',
+                stepid: 'oldid-somepos',
                 path: ['foo','bar','somepos'],
                 ARTIFACTS: {foos:{a1:{}}}
             },
-            norefs: ['removemarks']
+            norefs: ['removemarks','path']
         },
         'when passing AI flag': {
             options: {AI:true,rules:{marks:{},generators:{}},markname:'somemark'},
@@ -168,13 +166,12 @@ describe("The flow commands",()=>{
                 stepid: 'oldid',
                 MARKS: {othermark:'otherpos'},
                 removemarks: 'SAVEME',
-                newid: 'OVERWRITEME',
                 path: ['foo','bar']
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
                 removemarks: 'SAVEME',
-                newid: 'oldid-somepos',
+                stepid: 'oldid-somepos',
                 path: ['foo','bar','somepos']
             }
         }

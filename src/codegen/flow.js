@@ -66,7 +66,7 @@ export default C => Object.assign(C,{
 
     /*
     assumes markname, markpos, stepid
-    mutates MARKS, removemarks (but new ref), newid
+    mutates MARKS, removemarks (but new ref), stepid
     */
     applyMarkConsequences: (O)=> `
         MARKS[markname] = markpos;
@@ -74,15 +74,15 @@ export default C => Object.assign(C,{
             removemarks = Object.assign({},removemarks);
             removemarks[markname] = stepid;
         `}
-        newid = stepid+= "-"+markpos;
-        path.push(markpos);
+        stepid = stepid+= "-"+markpos;
+        path = path.concat(markpos);
         ${C.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{})}
     `,
  
     /*
-    assumes cmndname, stepid, path, cleanartifactslate
+    assumes cmndname, stepid, path
 
-    (1) set newid, path & undo (if human)
+    (1) set stepid, path & undo (if human)
     (2) apply effects
     (3) clear artifacts & marks
     (4) apply generators
@@ -91,12 +91,15 @@ export default C => Object.assign(C,{
     */
     applyCommandConsequences: (O)=> `
         ${O && O.AI ? '' : 'var undo = stepid; '}
-        newid = stepid+"-"+cmndname;
-        path.push(cmndname);
+        stepid = stepid+"-"+cmndname;
+        path = path.concat(cmndname);
         ${C.applyEffectInstructions(O,O.rules.commands[O.cmndname])}
         ARTIFACTS = ${C.blankArtifactLayers(O)};
         MARKS = {};
         ${C.applyGeneratorInstructions(O,O.rules.commands[O.cmndname])}
+    `,
+
+    applyStartTurnConsequences: (O,plr)=> `
     `
 })
 

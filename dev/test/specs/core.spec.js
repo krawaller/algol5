@@ -201,6 +201,12 @@ describe('the core funcs',()=>{
             scope: {DIR:7},
             expected: 7
         },
+        'the dir cmnd with a spec': {
+            arg: ['dir'],
+            options: {usefordir:'otherdir'},
+            scope: {DIR:7,otherdir:5},
+            expected: 5
+        },
         'the walklength cmnd': {
             arg: ['walklength'],
             scope: {WALKLENGTH: 4},

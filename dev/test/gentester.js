@@ -64,7 +64,7 @@ const tester = (lib,funcname,specs)=> {
                         console.log("Showing code for "+desc+", "+name+":\n",js_beautify(tobeexec,{indent_size:2}))    
                     }
                 } catch(e) {
-                    console.log("ERROR ERROR! Code:\n",js_beautify(tobeexec,{indent_size:2}))
+                    console.log("ERROR ERROR! "+funcname+", "+name+",  Code:\n",js_beautify(tobeexec,{indent_size:2}))
                     throw e;
                 }
             });

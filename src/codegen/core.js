@@ -222,7 +222,7 @@ export default T => {
         val_sum: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" + ") + ")",
         val_prod: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" * ") + ")",
         val_ctxval: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
-        val_dir: (O)=> "DIR",
+        val_dir: (O)=> O && O.usefordir || "DIR",
         val_max: (O)=> "MAX",
         val_stopreason: (O)=> "STOPREASON",
         val_countsofar: (O)=> "CURRENTCOUNT",

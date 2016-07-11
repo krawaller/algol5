@@ -40,7 +40,7 @@ export default C => Object.assign(C,{
 			} else {
 				usefordir = 'allwalkerdirs[walkerdirnbr]'
 			}
-			ret += C.walkindir(O,def,usefordir)
+			ret += C.walkindir({...(O||{}), usefordir},def)
 			ret += '} '
 		} else {
 			if (U.contains(def.draw,['dir'])){
@@ -49,13 +49,13 @@ export default C => Object.assign(C,{
 				usefordir = C.value(O,def.dir)
 			}
 			ret += 'var DIR='+C.value(O,def.dir)+'; '
-			ret += C.walkindir(O,def,usefordir)
+			ret += C.walkindir({...(O||{}), usefordir},def)
 		}
 		return ret
 	},
 	// wants full walkerdef. 
 	// assumes STARTPOS, connections
-	walkindir: (O,def,usefordir)=> {
+	walkindir: (O,def)=> {
 		let ret = ''
 		ret += C.prepwalkstart(O,def)
 		if (def.max){
@@ -64,7 +64,7 @@ export default C => Object.assign(C,{
 		if (O && O.drawduringwhile && U.contains([def.draw.steps,def.draw.all],['step'])){
 			ret += 'var STEP=0; '
 		}
-		ret += 'while(!(STOPREASON='+C.stopreason(O,def,usefordir)+')){'
+		ret += 'while(!(STOPREASON='+C.stopreason(O,def)+')){'
 		ret += C.takewalkstep(O,def)
 		if (def.max)
 			ret += 'LENGTH++; '
@@ -206,7 +206,8 @@ export default C => Object.assign(C,{
 				ret += 'POS=walkedsquares[WALKLENGTH-1]; '
 				ret += C.performdraw(O,def.draw.last)
 			} else {
-				ret += C.performdraw(O,def.draw.last,'walkedsquares[WALKLENGTH-1]')
+				ret += C.performdraw({...(O||{}),useforpos:'walkedsquares[WALKLENGTH-1]'},def.draw.last)
+				//ret += C.performdraw(O,def.draw.last,'walkedsquares[WALKLENGTH-1]')
 			}
 		}
 		return ret

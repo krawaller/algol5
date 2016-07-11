@@ -1,7 +1,8 @@
 `
 Qode quality stuff - make DIR, START etc an option
 
-DIR finished in neighbours
+DIR finished in neighbours, walker
+POS/START finished
 `
 
 

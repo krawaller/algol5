@@ -156,6 +156,7 @@ describe('the generate funcs',()=>{
     });
     test(G,'drawwalkstart', {
         'when we draw simple start': {
+            options: {useforpos:'STARTPOS'},
             arg: {
                 draw: { start: { tolayer: 'begins' }}
             },
@@ -163,6 +164,7 @@ describe('the generate funcs',()=>{
             mutations: {ARTIFACTS:{begins:{start:{}}}}
         },
         'when we also draw all': {
+            options: {useforpos:'STARTPOS'},
             arg: {
                 draw: {
                     start: { tolayer: 'begins' },

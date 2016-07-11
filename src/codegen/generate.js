@@ -9,13 +9,14 @@ export default C => Object.assign(C,{
 
 	// assumes connections, DIR, LENGTH, nextpos
 	// and if used BLOCKS, allowedsteps, MAX
-	stopreason: (O,def,usefordir,useforblocks)=> {
+	stopreason: (O,def,foo,useforblocks)=> {
 		def = def || {}
+		O = O || {}
 		let ret = ''
 		if (def.max){
 			ret += 'LENGTH === MAX ? "reachedmax" : '
 		}
-		ret += '!(nextpos=connections[POS]['+(usefordir || 'DIR')+']) ? "outofbounds" : '
+		ret += '!(nextpos=connections[POS]['+(O.usefordir || 'DIR')+']) ? "outofbounds" : '
 		if (def.type==='floater'){
 			ret += 'REACHED[nextpos] ? "alreadyreached" : '
 		}
@@ -38,8 +39,8 @@ export default C => Object.assign(C,{
 
 	// assumes vartouse is defined (defaults to POS)
 	// also assumed targetlayername if flag is true
-	performdraw: (O,def,vartouse,targetlayerpredefined)=> {
-		vartouse = vartouse || 'POS'
+	performdraw: (O,def,foo,targetlayerpredefined)=> {
+		let vartouse = O && O.useforpos || 'POS'
 		let ret = ''
 		let cond = []
 		if (def.condition){

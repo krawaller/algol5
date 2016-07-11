@@ -161,12 +161,13 @@ export default C => Object.assign(C,{
     def = def || {}
     let ret = ''
     if (def.draw && def.draw.start){
-      if (U.contains(def.draw.start,['target'])){
+      ret += C.performdraw({...(O||{}), useforpos: 'STARTPOS'},def.draw.start)
+      /*if (U.contains(def.draw.start,['target'])){
         ret += 'POS=STARTPOS; '
         ret += C.performdraw(O,def.draw.start)
       } else {
         ret += C.performdraw(O,def.draw.start,'STARTPOS')
-      }
+      }*/
     }
     return ret
   }

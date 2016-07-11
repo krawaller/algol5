@@ -140,6 +140,12 @@ describe('the core funcs',()=>{
             scope: {POS:'mypos'},
             expected: 'mypos'
         },
+        'the target cmnd with specified useforpos': {
+            options: {useforpos:'"a1"'},
+            arg: ['target'],
+            scope: {POS:'mypos'},
+            expected: 'a1'
+        },
         'the onlyin cmnd': {
             arg: ['onlyin',['intersect','foo','bar']],
             scope: {

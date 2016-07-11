@@ -22,7 +22,7 @@ let walkerdef = {
 		}
 	}
 };
-let walkercode = lib.G.applywalker({player:1},walkerdef)
+let walkercode = lib.applywalker({player:1},walkerdef)
 
 let neighbourdef = {
 	"type": "neighbour",
@@ -48,7 +48,7 @@ let neighbourdef = {
 		}
 	}
 }
-let neighbourcode = lib.G.applyneighbours({player:2},neighbourdef)
+let neighbourcode = lib.applyneighbours({player:2},neighbourdef)
 
 let filterdef = {
 	"type": "filter",
@@ -58,7 +58,7 @@ let filterdef = {
 	},
 	"tolayer": "dorklayer"
 }
-let filtercode = lib.G.applyfilter({player:1},filterdef)
+let filtercode = lib.applyfilter({player:1},filterdef)
 
 console.log("\n***WALKER***\n",js_beautify(walkercode,{indent_size:2}))
 

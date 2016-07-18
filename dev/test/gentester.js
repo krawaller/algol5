@@ -54,7 +54,7 @@ const tester = (lib,funcname,specs)=> {
                         `
                     }
                 }
-                if (!spec.mutations && !spec.hasOwnProperty("expected")) {
+                if (!spec.mutations && !spec.hasOwnProperty("expected") && !spec.additionally) {
                     throw "Should seek result or mutation!"
                 }
                 var varmsg = "'********************** Setting up environment ***********************'; "

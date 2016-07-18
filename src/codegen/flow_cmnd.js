@@ -1,3 +1,5 @@
+import { contains } from '../utils'
+
 export default C => Object.assign(C,{
 
     /* assumes step */
@@ -7,12 +9,13 @@ export default C => Object.assign(C,{
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({},step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
+        ${contains(O && O.rules && O.rules && O.rules.commands && O.rules.commands[O.cmndname],['spawn']) ? 'var newunitid = step.newunitid; ' : ''}
     `,
 
-    /*assumes step, turn, commandname*/ // TODO - add newunitid if needed!
+    /*assumes step, turn */
     saveCommandStep: (O)=> `
         var stepid = step.stepid;
-        var newstepid = stepid+'-'+commandname;
+        var newstepid = stepid+'-'+'${O.cmndname}';
         turn.steps[newstepid] = Object.assign({},step,{
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
@@ -20,7 +23,8 @@ export default C => Object.assign(C,{
             UNITLAYERS: UNITLAYERS,
             ${O && O.AI ? '' : `undo: stepid, `}
             stepid: newstepid,
-            path: step.path.concat(commandname)
+            path: step.path.concat('${O.cmndname}')
+            ${contains(O && O.rules && O.rules && O.rules.commands && O.rules.commands[O.cmndname],['spawn']) ? ', newunitid: newunitid' : ''}
         });
         ${O && O.AI ? '' : `delete turn.steps[newstepid].removemarks; `}
     `,

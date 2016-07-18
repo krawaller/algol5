@@ -5,7 +5,31 @@ let F = lib
 
 describe("The flow mark stuff",()=>{
     test(F,'prepareMarkStep',{
-        'for simple call': {
+        'when no generators': {
+            scope: {
+                step: {
+                    ARTIFACTS: {my:'artifacts'},
+                    UNITLAYERS: {my:'unitlayers'}
+                },
+                ARTIFACTS: 'dontoverwriteme',
+                UNITLAYERS: 'dontoverwriteme',
+            },
+            mutations: {
+                ARTIFACTS: 'dontoverwriteme',
+                UNITLAYERS: 'dontoverwriteme',
+            }
+        },
+        'when has generators': {
+            options: {
+                markname: 'somemark',
+                rules: {
+                    marks: {
+                        somemark: {
+                            runGenerator: 'weee!'
+                        }
+                    }
+                }
+            },
             scope: {
                 step: {
                     ARTIFACTS: {my:'artifacts'},
@@ -23,18 +47,18 @@ describe("The flow mark stuff",()=>{
         }
     })
     test(F,'saveMarkStep',{
-        'when no AI flag': {
+        'when no AI flag and no generator': {
             scope: {
                 markpos: 'somepos',
                 step: {
-                    ARTIFACTS: 'overwriteme',
+                    ARTIFACTS: 'dontoverwriteme',
                     MARKS: 'overwriteme',
                     otherstuff: 'saveme',
                     stepid: 'oldid',
                     path: ['foo'],
                     removemarks: { otherpos: 'otherid' }
                 },
-                ARTIFACTS: 'newartifacts',
+                ARTIFACTS: 'bogus',
                 MARKS: 'newmarks',
                 turn: {steps: {otherstep:'FOO'}}
             },
@@ -42,7 +66,7 @@ describe("The flow mark stuff",()=>{
                 turn: {steps: {
                     otherstep: 'FOO',
                     'oldid-somepos': {
-                        ARTIFACTS: 'newartifacts',
+                        ARTIFACTS: 'dontoverwriteme',
                         MARKS: 'newmarks',
                         stepid: 'oldid-somepos',
                         path: ['foo','somepos'],
@@ -54,6 +78,34 @@ describe("The flow mark stuff",()=>{
             additionally: {
                 'step was copied': 'step !== turn.steps["oldid-somepos"]',
                 'removemarks was copied': 'step.removemarks !== turn.steps["oldid-somepos"].removemarks'
+            }
+        },
+        'when no AI flag and has generator': {
+            options: {
+                markname: 'somemark',
+                rules: {
+                    marks: {
+                        somemark: {
+                            runGenerator: 'weee!'
+                        }
+                    }
+                }
+            },
+            scope: {
+                markpos: 'somepos',
+                step: {
+                    ARTIFACTS: 'overwriteme',
+                    MARKS: 'overwriteme',
+                    stepid: 'oldid',
+                    path: ['foo'],
+                    removemarks: { otherpos: 'otherid' }
+                },
+                ARTIFACTS: 'newartifacts',
+                MARKS: 'newmarks',
+                turn: {steps: {otherstep:'FOO'}}
+            },
+            additionally: {
+                'saved artifacts': 'turn.steps["oldid-somepos"].ARTIFACTS === ARTIFACTS'
             }
         }
     })

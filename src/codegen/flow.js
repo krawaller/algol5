@@ -64,31 +64,13 @@ export default C => Object.assign(C,{
         })).concat('links.endturn = "next"; ').join(' else ')
     },
 
-    /*
-    assumes markname, markpos, stepid
-    mutates MARKS and ARTIFACTS (via generators)
-    */
-    applyMarkConsequences: (O)=> `
-        MARKS[markname] = markpos;
-        ${C.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{})}
-    `,
- 
-
-    /*assumes step, turns, markpos*/
-    saveMarkStep: (O)=> `
-        var stepid = step.stepid;
-        var newstepid = stepid+'-'+markpos;
-        ${O && O.AI ? '' : `
-        var newremovemark = {};
-        newremovemark[markpos] = step.stepid;
-        `}
-        turn.steps[newstepid] = Object.assign({},step,{
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            ${O && O.AI ? '' : `removemarks: Object.assign({},step.removemarks,newremovemark), `}
-            stepid: newstepid,
-            path: step.path.concat(markpos)
-        });
+    /* assumes step */
+    // TODO - turnvars
+    prepareCommandStep: O=> `
+        var ARTIFACTS = step.ARTIFACTS;
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({},step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
     `,
 
     /*assumes step, turn, commandname*/ // TODO - add newunitid if needed!
@@ -99,6 +81,7 @@ export default C => Object.assign(C,{
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             UNITDATA: UNITDATA,
+            UNITLAYERS: UNITLAYERS,
             ${O && O.AI ? '' : `undo: stepid, `}
             stepid: newstepid,
             path: step.path.concat(commandname)
@@ -107,12 +90,16 @@ export default C => Object.assign(C,{
     `,
 
     /*
-    assumes cmndname
+    assumes cmndname as option
+    TODO
+        turnvars
+        link!
     */
     applyCommandConsequences: (O)=> `
         ${C.applyEffectInstructions(O,O.rules.commands[O.cmndname])}
-        ARTIFACTS = ${C.blankArtifactLayers(O)};
         MARKS = {};
+        ${C.calculateUnitLayers(O)};
+        ARTIFACTS = ${C.blankArtifactLayers(O)};
         ${C.applyGeneratorInstructions(O,O.rules.commands[O.cmndname])}
     `,
 

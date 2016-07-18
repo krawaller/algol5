@@ -4,41 +4,6 @@ import lib from '../../../src/codegen/'
 let F = lib
 
 describe("The flow commands",()=>{
-    test(F,'saveMarkStep',{
-        'when no AI flag': {
-            scope: {
-                markpos: 'somepos',
-                step: {
-                    ARTIFACTS: 'overwriteme',
-                    MARKS: 'overwriteme',
-                    otherstuff: 'saveme',
-                    stepid: 'oldid',
-                    path: ['foo'],
-                    removemarks: { otherpos: 'otherid' }
-                },
-                ARTIFACTS: 'newartifacts',
-                MARKS: 'newmarks',
-                turn: {steps: {otherstep:'FOO'}}
-            },
-            mutations: {
-                turn: {steps: {
-                    otherstep: 'FOO',
-                    'oldid-somepos': {
-                        ARTIFACTS: 'newartifacts',
-                        MARKS: 'newmarks',
-                        stepid: 'oldid-somepos',
-                        path: ['foo','somepos'],
-                        otherstuff: 'saveme',
-                        removemarks: { otherpos: 'otherid', somepos: 'oldid' }
-                    }
-                }}
-            },
-            additionally: {
-                'step was copied': 'step !== turn.steps["oldid-somepos"]',
-                'removemarks was copied': 'step.removemarks !== turn.steps["oldid-somepos"].removemarks'
-            }
-        }
-    })
     test(F,'saveCommandStep',{
         'when no AI flag': {
             scope: {
@@ -55,6 +20,7 @@ describe("The flow commands",()=>{
                 ARTIFACTS: 'newartifacts',
                 MARKS: 'newmarks',
                 UNITDATA: 'newunitdata',
+                UNITLAYERS: 'newunitlayers',
                 turn: {steps: {otherstep:'FOO'}}
             },
             mutations: {
@@ -64,6 +30,7 @@ describe("The flow commands",()=>{
                         ARTIFACTS: 'newartifacts',
                         MARKS: 'newmarks',
                         UNITDATA: 'newunitdata',
+                        UNITLAYERS: 'newunitlayers',
                         stepid: 'oldid-somecmnd',
                         path: ['foo','somecmnd'],
                         otherstuff: 'saveme',
@@ -91,132 +58,61 @@ describe("The flow commands",()=>{
             norefs: ['UNITDATA']
         }
     })
-    test(F,'applyCommandConsequences',{
-        'when not passing AI flag, with effect and generator': {
-            options: {
-                cmndname: 'flaunt',
-                rules: {
-                    generators: {
-                        findfoo: {
-                            type: 'neighbour',
-                            start: ['pos','start'],
-                            dir: 1,
-                            draw: {
-                                neighbours: {
-                                    tolayer: 'foos'
-                                }
-                            }
-                        }
-                    },
-                    commands: {
-                        flaunt: {
-                            applyEffect: ['killid',['idat',['onlyin','doomed']]],
-                            runGenerator: 'findfoo'
-                        }
-                    }
-                }
-            },
-            context: {
-                blankArtifactLayers: ()=> JSON.stringify({foos:{},bars:'YEAH!'})
-            },
+    test(F,'prepareCommandStep',{
+        'for simple call': {
             scope: {
-                UNITDATA: { unit1: {} },
-                UNITLAYERS: { all: { somepos: {id:'unit1'} } },
-                cmndname: 'flaunt',
-                stepid: 'oldid',
-                ARTIFACTS: {doomed:{'somepos':{}},foos:{}},
-                connections: {start:{1:'a1'}},
-                MARKS: {baz:'bin'},
+                step: {
+                    UNITDATA: {my:'unitdata'},
+                    MARKS: {my:'marks'},
+                    ARTIFACTS: {my:'artifacts'},
+                    UNITLAYERS: {my:'unitlayers'}
+                },
             },
             mutations: {
-                UNITDATA: {},
-                ARTIFACTS: {foos:{a1:{}},bars:'YEAH!'},
-                MARKS: {}
-            }
-        },
-        'when passing AI flag, with effect and generator': {
-            options: {
-                AI: true,
-                cmndname: 'flaunt',
-                rules: {
-                    generators: {
-                        findfoo: {
-                            type: 'neighbour',
-                            start: ['pos','start'],
-                            dir: 1,
-                            draw: {
-                                neighbours: {
-                                    tolayer: 'foos'
-                                }
-                            }
-                        }
-                    },
-                    commands: {
-                        flaunt: {
-                            applyEffect: ['killid',['value','unit1']],
-                            runGenerator: 'findfoo'
-                        }
-                    }
-                }
+                UNITDATA: {my:'unitdata'},
+                MARKS: {my:'marks'},
+                ARTIFACTS: {my:'artifacts'},
+                UNITLAYERS: {my:'unitlayers'}
             },
-            scope: {
-                UNITDATA: { unit1: {} },
-                cmndname: 'flaunt',
-                stepid: 'oldid',
-                ARTIFACTS: {foos:{},moos:{}},
-                connections: {start:{1:'a1'}},
-                MARKS: {baz:'bin'},
-                path: ['foo','bar'],
-                undo: 'DONTOVERWRITEME'
-            },
-            context: {
-                blankArtifactLayers: ()=> JSON.stringify({foos:{}})
-            },
-            mutations: {
-                UNITDATA: {},
-                ARTIFACTS: {foos:{a1:{}}},
-                MARKS: {},
-                undo: 'DONTOVERWRITEME'
-            }
-        }
-    });
-    test(F,'applyMarkConsequences',{
-        'for regular call': {
-            options: {
-                markname: 'somemark',
-                rules: {
-                    marks: {
-                        somemark: {
-                            runGenerator: 'findfoo'
-                        }
-                    },
-                    generators: {
-                        findfoo: {
-                            type: 'neighbour',
-                            start: ['pos','start'],
-                            dir: 1,
-                            draw: {
-                                neighbours: {
-                                    tolayer: 'foos'
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            scope: {
-                markname: 'somemark',
-                markpos: 'somepos',
-                MARKS: {othermark:'otherpos'},
-                connections: {start:{1:'a1'}},
-                ARTIFACTS: {foos:{}}
-            },
-            mutations: {
-                MARKS: {othermark:'otherpos',somemark:'somepos'},
-                ARTIFACTS: {foos:{a1:{}}}
+            additionally: {
+                'copy unitdata': 'UNITDATA !== step.UNITDATA',
+                'dont copy artifacts': 'ARTIFACTS === step.ARTIFACTS',
+                'dont copy marks': 'MARKS === step.MARKS',
+                'dont copy unitlayers': 'UNITLAYERS === step.UNITLAYERS'
             }
         }
     })
+    test(F,'applyCommandConsequences',{
+        'when not passing AI flag': {
+            options: {
+                cmndname: 'flaunt',
+                rules: {
+                    commands: {
+                        flaunt: 'FLAUNTRULEZ'
+                    }
+                }
+            },
+            context: {
+                blankArtifactLayers: ()=> '"blank"',
+                applyGeneratorInstructions: (O,cmndrule)=> 'ARTIFACTS += "-" + "'+cmndrule+'"; ',
+                applyEffectInstructions: (O,cmndrule)=> 'UNITDATA = "'+cmndrule+'"; ',
+                calculateUnitLayers: (O)=> 'UNITLAYERS = "new"; '
+            },
+            scope: {
+                UNITDATA: 'overwriteme',
+                cmndname: 'flaunt',
+                ARTIFACTS: "overwriteme",
+                MARKS: 'overwriteme',
+                UNITLAYERS: 'overwriteme'
+            },
+            mutations: {
+                UNITDATA: 'FLAUNTRULEZ',
+                ARTIFACTS: 'blank-FLAUNTRULEZ',
+                UNITLAYERS: 'new',
+                MARKS: {}
+            }
+        }
+    });
     test(F,'linkToEndturn',{
         'when losing, evaluated who': {
             options: {

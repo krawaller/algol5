@@ -45,6 +45,15 @@ const tester = (lib,funcname,specs)=> {
                         expect(result).toEqual(${JSON.stringify({r:spec.expected})}.r);
                     });`
                 }
+                if (spec.additionally){
+                    for(var additionaltestname in spec.additionally){
+                        test += `
+                        it("${additionaltestname}",function(){
+                            expect(${spec.additionally[additionaltestname]}).toBeTruthy();
+                        });
+                        `
+                    }
+                }
                 if (!spec.mutations && !spec.hasOwnProperty("expected")) {
                     throw "Should seek result or mutation!"
                 }

@@ -4,6 +4,78 @@ import lib from '../../../src/codegen/'
 let F = lib
 
 describe("The flow commands",()=>{
+    test(F,'saveMarkStep',{
+        'when no AI flag': {
+            scope: {
+                markpos: 'somepos',
+                step: {
+                    ARTIFACTS: 'overwriteme',
+                    MARKS: 'overwriteme',
+                    otherstuff: 'saveme',
+                    stepid: 'oldid',
+                    path: ['foo'],
+                    removemarks: { otherpos: 'otherid' }
+                },
+                ARTIFACTS: 'newartifacts',
+                MARKS: 'newmarks',
+                turn: {steps: {otherstep:'FOO'}}
+            },
+            mutations: {
+                turn: {steps: {
+                    otherstep: 'FOO',
+                    'oldid-somepos': {
+                        ARTIFACTS: 'newartifacts',
+                        MARKS: 'newmarks',
+                        stepid: 'oldid-somepos',
+                        path: ['foo','somepos'],
+                        otherstuff: 'saveme',
+                        removemarks: { otherpos: 'otherid', somepos: 'oldid' }
+                    }
+                }}
+            },
+            additionally: {
+                'step was copied': 'step !== turn.steps["oldid-somepos"]',
+                'removemarks was copied': 'step.removemarks !== turn.steps["oldid-somepos"].removemarks'
+            }
+        }
+    })
+    test(F,'saveCommandStep',{
+        'when no AI flag': {
+            scope: {
+                commandname: 'somecmnd',
+                step: {
+                    ARTIFACTS: 'overwriteme',
+                    MARKS: 'overwriteme',
+                    UNITDATA: 'overwriteme',
+                    otherstuff: 'saveme',
+                    stepid: 'oldid',
+                    path: ['foo'],
+                    removemarks: 'deleteme'
+                },
+                ARTIFACTS: 'newartifacts',
+                MARKS: 'newmarks',
+                UNITDATA: 'newunitdata',
+                turn: {steps: {otherstep:'FOO'}}
+            },
+            mutations: {
+                turn: {steps: {
+                    otherstep: 'FOO',
+                    'oldid-somecmnd': {
+                        ARTIFACTS: 'newartifacts',
+                        MARKS: 'newmarks',
+                        UNITDATA: 'newunitdata',
+                        stepid: 'oldid-somecmnd',
+                        path: ['foo','somecmnd'],
+                        otherstuff: 'saveme',
+                        undo: 'oldid'
+                    }
+                }}
+            },
+            additionally: {
+                'step was copied': 'step !== turn.steps["oldid-somecmnd"]'
+            }
+        }
+    })
     test(F,'applyEffectInstructions',{
         'for single effect with no conds': {
             showcode: false, //true,
@@ -54,18 +126,13 @@ describe("The flow commands",()=>{
                 stepid: 'oldid',
                 ARTIFACTS: {doomed:{'somepos':{}},foos:{}},
                 connections: {start:{1:'a1'}},
-                path: ['foo','bar'],
                 MARKS: {baz:'bin'},
             },
             mutations: {
                 UNITDATA: {},
-                stepid: 'oldid-flaunt',
                 ARTIFACTS: {foos:{a1:{}},bars:'YEAH!'},
-                path: ['foo','bar','flaunt'],
-                undo: 'oldid',
                 MARKS: {}
-            },
-            norefs: ['path']
+            }
         },
         'when passing AI flag, with effect and generator': {
             options: {
@@ -107,16 +174,14 @@ describe("The flow commands",()=>{
             },
             mutations: {
                 UNITDATA: {},
-                stepid: 'oldid-flaunt',
                 ARTIFACTS: {foos:{a1:{}}},
                 MARKS: {},
-                path: ['foo','bar','flaunt'],
                 undo: 'DONTOVERWRITEME'
             }
         }
     });
     test(F,'applyMarkConsequences',{
-        'when not passing AI flag': {
+        'for regular call': {
             options: {
                 markname: 'somemark',
                 rules: {
@@ -142,37 +207,13 @@ describe("The flow commands",()=>{
             scope: {
                 markname: 'somemark',
                 markpos: 'somepos',
-                stepid: 'oldid',
                 MARKS: {othermark:'otherpos'},
-                removemarks: {othermark: 'otherid'},
-                path: ['foo','bar'],
                 connections: {start:{1:'a1'}},
                 ARTIFACTS: {foos:{}}
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
-                removemarks: {othermark:'otherid','somemark':'oldid'},
-                stepid: 'oldid-somepos',
-                path: ['foo','bar','somepos'],
                 ARTIFACTS: {foos:{a1:{}}}
-            },
-            norefs: ['removemarks','path']
-        },
-        'when passing AI flag': {
-            options: {AI:true,rules:{marks:{},generators:{}},markname:'somemark'},
-            scope: {
-                markname: 'somemark',
-                markpos: 'somepos',
-                stepid: 'oldid',
-                MARKS: {othermark:'otherpos'},
-                removemarks: 'SAVEME',
-                path: ['foo','bar']
-            },
-            mutations: {
-                MARKS: {othermark:'otherpos',somemark:'somepos'},
-                removemarks: 'SAVEME',
-                stepid: 'oldid-somepos',
-                path: ['foo','bar','somepos']
             }
         }
     })

@@ -66,33 +66,50 @@ export default C => Object.assign(C,{
 
     /*
     assumes markname, markpos, stepid
-    mutates MARKS, removemarks (but new ref), stepid
+    mutates MARKS and ARTIFACTS (via generators)
     */
     applyMarkConsequences: (O)=> `
         MARKS[markname] = markpos;
-        ${O && O.AI ? '' : `
-            removemarks = Object.assign({},removemarks);
-            removemarks[markname] = stepid;
-        `}
-        stepid = stepid+= "-"+markpos;
-        path = path.concat(markpos);
         ${C.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{})}
     `,
  
+
+    /*assumes step, turns, markpos*/
+    saveMarkStep: (O)=> `
+        var stepid = step.stepid;
+        var newstepid = stepid+'-'+markpos;
+        ${O && O.AI ? '' : `
+        var newremovemark = {};
+        newremovemark[markpos] = step.stepid;
+        `}
+        turn.steps[newstepid] = Object.assign({},step,{
+            ARTIFACTS: ARTIFACTS,
+            MARKS: MARKS,
+            ${O && O.AI ? '' : `removemarks: Object.assign({},step.removemarks,newremovemark), `}
+            stepid: newstepid,
+            path: step.path.concat(markpos)
+        });
+    `,
+
+    /*assumes step, turn, commandname*/ // TODO - add newunitid if needed!
+    saveCommandStep: (O)=> `
+        var stepid = step.stepid;
+        var newstepid = stepid+'-'+commandname;
+        turn.steps[newstepid] = Object.assign({},step,{
+            ARTIFACTS: ARTIFACTS,
+            MARKS: MARKS,
+            UNITDATA: UNITDATA,
+            ${O && O.AI ? '' : `undo: stepid, `}
+            stepid: newstepid,
+            path: step.path.concat(commandname)
+        });
+        ${O && O.AI ? '' : `delete turn.steps[newstepid].removemarks; `}
+    `,
+
     /*
-    assumes cmndname, stepid, path
-
-    (1) set stepid, path & undo (if human)
-    (2) apply effects
-    (3) clear artifacts & marks
-    (4) apply generators
-
-    clear removemarks // if human, in cleanup, not here
+    assumes cmndname
     */
     applyCommandConsequences: (O)=> `
-        ${O && O.AI ? '' : 'var undo = stepid; '}
-        stepid = stepid+"-"+cmndname;
-        path = path.concat(cmndname);
         ${C.applyEffectInstructions(O,O.rules.commands[O.cmndname])}
         ARTIFACTS = ${C.blankArtifactLayers(O)};
         MARKS = {};

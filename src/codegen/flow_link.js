@@ -2,7 +2,7 @@ import map from "lodash/collection/map"
 
 export default C => Object.assign(C,{
 
-    linkToEndturn: (O)=> {
+    linkToEndturn(O) {
         let ret = C.applyGeneratorInstructions({generating:true, ...(O || {})},O.rules.endturn || {})
         return ret + map(O.rules.endturn && O.rules.endturn.unless,(cond,name)=> {
             return 'if ('+C.boolean(O,cond)+'){ blockedby = "'+name+'"; } '
@@ -14,7 +14,10 @@ export default C => Object.assign(C,{
                     links.gameendby = '${name}';
                 }`;
         })).concat('links.endturn = "next"; ').join(' else ')
-    }
+    },
+
+    applyLinkInstructions: (O)=> `
+    `
 
 })
 

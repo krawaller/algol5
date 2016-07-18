@@ -31,9 +31,6 @@ export default C => Object.assign(C,{
 
     /*
     assumes cmndname as option
-    TODO
-        turnvars
-        link!
     */
     applyCommandConsequences: (O)=> `
         ${C.applyEffectInstructions(O,O.rules.commands[O.cmndname])}
@@ -41,6 +38,7 @@ export default C => Object.assign(C,{
         ${C.calculateUnitLayers(O)};
         ARTIFACTS = ${C.blankArtifactLayers(O)};
         ${C.applyGeneratorInstructions(O,O.rules.commands[O.cmndname])}
+        ${C.applyLinkInstructions(O,O.rules.commands[O.cmndname])}
     `
 })
 

@@ -17,6 +17,7 @@ export default C => Object.assign(C,{
     applyMarkConsequences: (O)=> `
         var MARKS = Object.assign({},step.MARKS,{${O.markname}:markpos})
         ${C.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{})}
+        ${C.applyLinkInstructions(O,O.rules.marks[O.markname]||{})}
     `,
 
     /*assumes step, turns, markpos*/

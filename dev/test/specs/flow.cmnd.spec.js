@@ -133,7 +133,8 @@ describe("The flow commands",()=>{
                 blankArtifactLayers: ()=> '"blank"',
                 applyGeneratorInstructions: (O,cmndrule)=> 'ARTIFACTS += "-" + "'+cmndrule+'"; ',
                 applyEffectInstructions: (O,cmndrule)=> 'UNITDATA = "'+cmndrule+'"; ',
-                calculateUnitLayers: (O)=> 'UNITLAYERS = "new"; '
+                calculateUnitLayers: (O)=> 'UNITLAYERS = "new"; ',
+                applyLinkInstructions: (O)=> 'var links = ARTIFACTS+UNITLAYERS+UNITDATA+"link";'
             },
             scope: {
                 UNITDATA: 'overwriteme',
@@ -146,7 +147,8 @@ describe("The flow commands",()=>{
                 UNITDATA: 'FLAUNTRULEZ',
                 ARTIFACTS: 'blank-FLAUNTRULEZ',
                 UNITLAYERS: 'new',
-                MARKS: {}
+                MARKS: {},
+                links: 'blank-FLAUNTRULEZnewFLAUNTRULEZlink'
             }
         }
     });

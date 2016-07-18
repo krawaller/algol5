@@ -112,7 +112,8 @@ describe("The flow mark stuff",()=>{
     test(F,'applyMarkConsequences',{
         'for regular call': {
             context: {
-                applyGeneratorInstructions: (O,rules)=> 'ARTIFACTS = "'+rules+'"'
+                applyGeneratorInstructions: (O,rules)=> 'ARTIFACTS = "'+rules+'"',
+                applyLinkInstructions: (O)=> 'var links = ARTIFACTS+"link";'
             },
             options: {
                 markname: 'somemark',
@@ -131,7 +132,8 @@ describe("The flow mark stuff",()=>{
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
-                ARTIFACTS: 'MARKRULE'
+                ARTIFACTS: 'MARKRULE',
+                links: 'MARKRULElink'
             },
             additionally: {
                 'make sure to copy mark': 'MARKS !== step.MARKS'

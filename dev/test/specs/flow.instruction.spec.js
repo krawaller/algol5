@@ -31,17 +31,59 @@ describe("The flow instruction commands",()=>{
         }
     })
     test(lib,'applyEffectInstructions',{
-        'for single effect with no conds': {
-            showcode: false, //true,
-            scope: {
-                UNITDATA: { unit1: {} }
-            },
-            arg: {
-                applyEffect: ['killid',['value','unit1']]
+        'when many effects': {
+            arg: {applyEffects:'MYEFFECTS'},
+            options: {foo:'bar'},
+            context: {
+                instruction: (O,def)=> `var test = "${def.join("_")+O.foo+O.effect}"; `
             },
             mutations: {
-                UNITDATA: {}
+                test: 'all_MYEFFECTSbartrue'
             }
+        },
+        'when single effect': {
+            arg: {applyEffect:'MYEFFECT'},
+            options: {foo:'bar'},
+            context: {
+                instruction: (O,def)=> `var test = "${def+O.foo+O.effect}"; `
+            },
+            mutations: {
+                test: 'MYEFFECTbartrue'
+            }
+        },
+        'when no effect': {
+            arg: {},
+            context: { instruction: ()=> {throw "Dont call me!"} },
+            scope: { foo: "bar" },
+            mutations: { foo: "bar" }
+        }
+    })
+    test(lib,'applyGeneratorInstructions',{
+        'when many generators': {
+            arg: {runGenerators:'MYGENERATORS'},
+            options: {foo:'bar'},
+            context: {
+                instruction: (O,def)=> `var test = "${def.join("_")+O.foo+O.generating}"; `
+            },
+            mutations: {
+                test: 'all_MYGENERATORSbartrue'
+            }
+        },
+        'when single generator': {
+            arg: {runGenerator:'MYGENERATOR'},
+            options: {foo:'bar'},
+            context: {
+                instruction: (O,def)=> `var test = "${def+O.foo+O.generating}"; `
+            },
+            mutations: {
+                test: 'MYGENERATORbartrue'
+            }
+        },
+        'when no generators': {
+            arg: {},
+            context: { instruction: ()=> {throw "Dont call me!"} },
+            scope: { foo: "bar" },
+            mutations: { foo: "bar" }
         }
     })
     test(lib,'instruction',{

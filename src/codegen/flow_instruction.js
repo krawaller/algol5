@@ -3,10 +3,10 @@ import map from "lodash/collection/map"
 
 export default C => Object.assign(C,{
 
-    instruction: (O,def)=> { // TODO - add in linktoendturn and other links
+    instruction: (O,def)=> {
         if (C['instr_'+def[0]]) {
             return C['instr_'+def[0]](O,tail(def));
-        } else if (O && O.effect){ // TODO - need this check? fix through other means?
+        } else if (O && O.effect){
             return C.applyeffect(O,def)
         } else if (O && O.generating && O.rules && O.rules.generators[def]){
             return C.applyGenerator(O,O.rules.generators[def])

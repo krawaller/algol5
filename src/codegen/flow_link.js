@@ -16,8 +16,6 @@ export default C => Object.assign(C,{
         })).concat('links.endturn = "next"; ').join(' else ')
     },
 
-    applyLinkInstructions: (O)=> `
-    `
 
 })
 

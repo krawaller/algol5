@@ -9,6 +9,7 @@ import addFlowMark from './flow_mark'
 import addFlowCmnd from './flow_cmnd'
 import addFlowLink from './flow_link'
 import addFlowLayers from './flow_layers'
+import addFlowInstructions from './flow_instruction'
 
 let o = {}
 
@@ -23,5 +24,6 @@ addFlowMark(o)
 addFlowCmnd(o)
 addFlowLink(o)
 addFlowLayers(o)
+addFlowInstructions(o)
 
 export default o

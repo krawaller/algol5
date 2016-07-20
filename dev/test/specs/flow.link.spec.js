@@ -2,6 +2,21 @@ import test from '../gentester'
 import lib from '../../../src/codegen/'
 
 describe("The flow commands",()=>{
+    /*test(lib,'applyLink',{
+        'when linking to a command, can end turn': {
+            arg: 'somecmnd',
+            options: {
+                rules: {
+                    commands: {
+                        somecmnd: 'CMNDDEF'
+                    }
+                }
+            },
+            scope: {
+
+            }
+        }
+    })*/
     test(lib,'linkToEndturn',{
         'when losing, evaluated who': {
             options: {

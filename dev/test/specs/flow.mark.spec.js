@@ -47,7 +47,7 @@ describe("The flow mark stuff",()=>{
         }
     })
     test(F,'saveMarkStep',{
-        'when no AI flag and no generator': {
+        'when no generator': {
             scope: {
                 markpos: 'somepos',
                 step: {
@@ -56,31 +56,25 @@ describe("The flow mark stuff",()=>{
                     otherstuff: 'saveme',
                     stepid: 'oldid',
                     path: ['foo'],
-                    removemarks: { otherpos: 'otherid' }
                 },
                 ARTIFACTS: 'bogus',
                 MARKS: 'newmarks',
-                turn: {steps: {otherstep:'FOO'}}
+                newstepid: 'newid'
             },
             mutations: {
-                turn: {steps: {
-                    otherstep: 'FOO',
-                    'oldid-somepos': {
-                        ARTIFACTS: 'dontoverwriteme',
-                        MARKS: 'newmarks',
-                        stepid: 'oldid-somepos',
-                        path: ['foo','somepos'],
-                        otherstuff: 'saveme',
-                        removemarks: { otherpos: 'otherid', somepos: 'oldid' }
-                    }
-                }}
+                newstep: {
+                    ARTIFACTS: 'dontoverwriteme',
+                    MARKS: 'newmarks',
+                    stepid: 'newid',
+                    path: ['foo','somepos'],
+                    otherstuff: 'saveme'
+                }
             },
             additionally: {
-                'step was copied': 'step !== turn.steps["oldid-somepos"]',
-                'removemarks was copied': 'step.removemarks !== turn.steps["oldid-somepos"].removemarks'
+                'step was copied': 'step !== newstep'
             }
         },
-        'when no AI flag and has generator': {
+        'when has generator': {
             options: {
                 markname: 'somemark',
                 rules: {
@@ -92,28 +86,28 @@ describe("The flow mark stuff",()=>{
                 }
             },
             scope: {
+                newstepid: 'newid',
                 markpos: 'somepos',
                 step: {
                     ARTIFACTS: 'overwriteme',
                     MARKS: 'overwriteme',
                     stepid: 'oldid',
-                    path: ['foo'],
-                    removemarks: { otherpos: 'otherid' }
+                    path: ['foo']
                 },
                 ARTIFACTS: 'newartifacts',
                 MARKS: 'newmarks',
-                turn: {steps: {otherstep:'FOO'}}
             },
             additionally: {
-                'saved artifacts': 'turn.steps["oldid-somepos"].ARTIFACTS === ARTIFACTS'
+                'saved artifacts': 'newstep.ARTIFACTS === ARTIFACTS'
             }
         }
     })
     test(F,'applyMarkConsequences',{
         'for regular call': {
             context: {
-                applyGeneratorInstructions: (O,rules)=> 'ARTIFACTS = "'+rules+'"',
-                applyLinkInstructions: (O)=> 'var links = ARTIFACTS+"link";'
+                applyGeneratorInstructions: (O,rules)=> 'ARTIFACTS = "'+rules+'"; ',
+                applyLinkInstructions: (O)=> 'var links = ARTIFACTS+save+"link"; ',
+                saveMarkStep: (O)=> 'var save = "save"; '
             },
             options: {
                 markname: 'somemark',
@@ -126,14 +120,16 @@ describe("The flow mark stuff",()=>{
             scope: {
                 markpos: 'somepos',
                 step: {
-                    MARKS: {othermark:'otherpos'}
+                    MARKS: {othermark:'otherpos'},
+                    stepid: 'oldid'
                 },
                 ARTIFACTS: 'overwriteme'
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
                 ARTIFACTS: 'MARKRULE',
-                links: 'MARKRULElink'
+                links: 'MARKRULEsavelink',
+                newstepid: 'oldid-somepos'
             },
             additionally: {
                 'make sure to copy mark': 'MARKS !== step.MARKS'

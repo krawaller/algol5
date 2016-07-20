@@ -16,32 +16,28 @@ describe("The flow commands",()=>{
                     UNITDATA: 'overwriteme',
                     otherstuff: 'saveme',
                     stepid: 'oldid',
-                    path: ['foo'],
-                    removemarks: 'deleteme'
+                    path: ['foo']
                 },
                 ARTIFACTS: 'newartifacts',
                 MARKS: 'newmarks',
                 UNITDATA: 'newunitdata',
                 UNITLAYERS: 'newunitlayers',
-                turn: {steps: {otherstep:'FOO'}}
+                turn: {steps: {otherstep:'FOO'}},
+                newstepid: 'newid'
             },
             mutations: {
-                turn: {steps: {
-                    otherstep: 'FOO',
-                    'oldid-somecmnd': {
-                        ARTIFACTS: 'newartifacts',
-                        MARKS: 'newmarks',
-                        UNITDATA: 'newunitdata',
-                        UNITLAYERS: 'newunitlayers',
-                        stepid: 'oldid-somecmnd',
-                        path: ['foo','somecmnd'],
-                        otherstuff: 'saveme',
-                        undo: 'oldid'
-                    }
-                }}
+                newstep: {
+                    ARTIFACTS: 'newartifacts',
+                    MARKS: 'newmarks',
+                    UNITDATA: 'newunitdata',
+                    UNITLAYERS: 'newunitlayers',
+                    stepid: 'newid',
+                    path: ['foo','somecmnd'],
+                    otherstuff: 'saveme',
+                }
             },
             additionally: {
-                'step was copied': 'step !== turn.steps["oldid-somecmnd"]'
+                'step was copied': 'step !== newstep'
             }
         },
         'when cmnd has spawn': {
@@ -60,18 +56,18 @@ describe("The flow commands",()=>{
                     UNITDATA: 'overwriteme',
                     otherstuff: 'saveme',
                     stepid: 'oldid',
-                    path: ['foo'],
-                    removemarks: 'deleteme'
+                    path: ['foo']
                 },
                 ARTIFACTS: 'newartifacts',
                 MARKS: 'newmarks',
                 UNITDATA: 'newunitdata',
                 UNITLAYERS: 'newunitlayers',
                 turn: {steps: {otherstep:'FOO'}},
-                newunitid: 42
+                newunitid: 42,
+                newstepid: 'newid'
             },
             additionally: {
-                'saved newunitid': 'turn.steps["oldid-somecmnd"].newunitid === newunitid'
+                'saved newunitid': 'newstep.newunitid === newunitid'
             }
         }
     })
@@ -120,7 +116,7 @@ describe("The flow commands",()=>{
         }
     })
     test(F,'applyCommandConsequences',{
-        'when not passing AI flag': {
+        'for regular call': {
             options: {
                 cmndname: 'flaunt',
                 rules: {
@@ -134,21 +130,26 @@ describe("The flow commands",()=>{
                 applyGeneratorInstructions: (O,cmndrule)=> 'ARTIFACTS += "-" + "'+cmndrule+'"; ',
                 applyEffectInstructions: (O,cmndrule)=> 'UNITDATA = "'+cmndrule+'"; ',
                 calculateUnitLayers: (O)=> 'UNITLAYERS = "new"; ',
-                applyLinkInstructions: (O)=> 'var links = ARTIFACTS+UNITLAYERS+UNITDATA+"link";'
+                saveCommandStep: (O)=> 'var save = "save"; ',
+                applyLinkInstructions: (O)=> 'var links = ARTIFACTS+UNITLAYERS+UNITDATA+save+"link";'
             },
             scope: {
                 UNITDATA: 'overwriteme',
                 cmndname: 'flaunt',
                 ARTIFACTS: "overwriteme",
                 MARKS: 'overwriteme',
-                UNITLAYERS: 'overwriteme'
+                UNITLAYERS: 'overwriteme',
+                step: {
+                    stepid: 'old'
+                }
             },
             mutations: {
                 UNITDATA: 'FLAUNTRULEZ',
                 ARTIFACTS: 'blank-FLAUNTRULEZ',
                 UNITLAYERS: 'new',
                 MARKS: {},
-                links: 'blank-FLAUNTRULEZnewFLAUNTRULEZlink'
+                links: 'blank-FLAUNTRULEZnewFLAUNTRULEZsavelink',
+                newstepid: 'old-flaunt'
             }
         }
     });

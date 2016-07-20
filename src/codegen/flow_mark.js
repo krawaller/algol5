@@ -1,5 +1,7 @@
 export default C => Object.assign(C,{
 
+    // TODO - this isnt enough, linking can also use this data
+
     /* assumes step */
     prepareMarkStep: O=> {
         const rules = O && O.rules && O.rules.marks && O.rules.marks[O.markname] || {}
@@ -12,28 +14,23 @@ export default C => Object.assign(C,{
     /*
     assumes markname in options
     assumes step, markpos
-    mutates MARKS and ARTIFACTS (via generators)
+    mutates MARKS newstepid and ARTIFACTS (via generators)
     */
     applyMarkConsequences: (O)=> `
-        var MARKS = Object.assign({},step.MARKS,{${O.markname}:markpos})
+        var MARKS = Object.assign({},step.MARKS,{${O.markname}:markpos}); 
         ${C.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{})}
+        var newstepid = step.stepid+'-'+markpos;
+        ${C.saveMarkStep(O)}
         ${C.applyLinkInstructions(O,O.rules.marks[O.markname]||{})}
     `,
 
-    /*assumes step, turns, markpos*/
+    /*assumes step, newstepid, markpos*/
     saveMarkStep: (O)=> {
         const rules = O && O.rules && O.rules.marks && O.rules.marks[O.markname] || {}
         return `
-            var stepid = step.stepid;
-            var newstepid = stepid+'-'+markpos;
-            ${O && O.AI ? '' : `
-            var newremovemark = {};
-            newremovemark[markpos] = step.stepid;
-            `}
-            turn.steps[newstepid] = Object.assign({},step,{
+            var newstep = Object.assign({},step,{
                 ${rules.runGenerator || rules.runGenerators ? 'ARTIFACTS: ARTIFACTS,' : ''}
                 MARKS: MARKS,
-                ${O && O.AI ? '' : `removemarks: Object.assign({},step.removemarks,newremovemark), `}
                 stepid: newstepid,
                 path: step.path.concat(markpos)
             });

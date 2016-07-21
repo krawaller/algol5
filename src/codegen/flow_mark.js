@@ -19,16 +19,16 @@ export default C => Object.assign(C,{
     applyMarkConsequences: (O)=> `
         var MARKS = Object.assign({},step.MARKS,{${O.markname}:markpos}); 
         ${C.applyGeneratorInstructions(O,O.rules.marks[O.markname]||{})}
-        var newstepid = step.stepid+'-'+markpos;
         ${C.saveMarkStep(O)}
         ${C.applyLinkInstructions(O,O.rules.marks[O.markname]||{})}
     `,
 
-    /*assumes step, newstepid, markpos*/
+    /*assumes step, newstepid, markpos, turn*/
     saveMarkStep: (O)=> {
         const rules = O && O.rules && O.rules.marks && O.rules.marks[O.markname] || {}
         return `
-            var newstep = Object.assign({},step,{
+            var newstepid = step.stepid+'-'+markpos;
+            var newstep = turn.steps[newstepid] = Object.assign({},step,{
                 ${rules.runGenerator || rules.runGenerators ? 'ARTIFACTS: ARTIFACTS,' : ''}
                 MARKS: MARKS,
                 stepid: newstepid,

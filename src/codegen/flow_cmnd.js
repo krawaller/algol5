@@ -14,7 +14,8 @@ export default C => Object.assign(C,{
 
     /*assumes step, newstepid, turn */
     saveCommandStep: (O)=> `
-        var newstep = Object.assign({},step,{
+        var newstepid = step.stepid+'-'+'${O.cmndname}';
+        var newstep = turn.steps[newstepid] = Object.assign({},step,{
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             UNITDATA: UNITDATA,
@@ -27,7 +28,6 @@ export default C => Object.assign(C,{
 
     /*
     assumes cmndname as option
-    assumes step
     */
     applyCommandConsequences: (O)=> `
         ${C.applyEffectInstructions(O,O.rules.commands[O.cmndname])}
@@ -35,7 +35,6 @@ export default C => Object.assign(C,{
         ${C.calculateUnitLayers(O)};
         ARTIFACTS = ${C.blankArtifactLayers(O)};
         ${C.applyGeneratorInstructions(O,O.rules.commands[O.cmndname])}
-        var newstepid = step.stepid+'-'+'${O.cmndname}';
         ${C.saveCommandStep(O)}
         ${C.applyLinkInstructions(O,O.rules.commands[O.cmndname])}
     `

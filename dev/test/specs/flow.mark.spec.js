@@ -59,19 +59,22 @@ describe("The flow mark stuff",()=>{
                 },
                 ARTIFACTS: 'bogus',
                 MARKS: 'newmarks',
-                newstepid: 'newid'
+                turn: {steps:{foo:'bar'}}
             },
             mutations: {
+                newstepid: 'oldid-somepos',
                 newstep: {
                     ARTIFACTS: 'dontoverwriteme',
                     MARKS: 'newmarks',
-                    stepid: 'newid',
+                    stepid: 'oldid-somepos',
                     path: ['foo','somepos'],
                     otherstuff: 'saveme'
                 }
             },
             additionally: {
-                'step was copied': 'step !== newstep'
+                'step was copied': 'step !== newstep',
+                'newstep was saved': 'newstep === turn.steps["oldid-somepos"]',
+                'otherstep wasnt removed': 'turn.steps.foo === "bar"'
             }
         },
         'when has generator': {
@@ -86,7 +89,6 @@ describe("The flow mark stuff",()=>{
                 }
             },
             scope: {
-                newstepid: 'newid',
                 markpos: 'somepos',
                 step: {
                     ARTIFACTS: 'overwriteme',
@@ -96,6 +98,7 @@ describe("The flow mark stuff",()=>{
                 },
                 ARTIFACTS: 'newartifacts',
                 MARKS: 'newmarks',
+                turn: {steps:{}}
             },
             additionally: {
                 'saved artifacts': 'newstep.ARTIFACTS === ARTIFACTS'
@@ -120,16 +123,14 @@ describe("The flow mark stuff",()=>{
             scope: {
                 markpos: 'somepos',
                 step: {
-                    MARKS: {othermark:'otherpos'},
-                    stepid: 'oldid'
+                    MARKS: {othermark:'otherpos'}
                 },
                 ARTIFACTS: 'overwriteme'
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
                 ARTIFACTS: 'MARKRULE',
-                links: 'MARKRULEsavelink',
-                newstepid: 'oldid-somepos'
+                links: 'MARKRULEsavelink'
             },
             additionally: {
                 'make sure to copy mark': 'MARKS !== step.MARKS'

@@ -22,8 +22,7 @@ describe("The flow commands",()=>{
                 MARKS: 'newmarks',
                 UNITDATA: 'newunitdata',
                 UNITLAYERS: 'newunitlayers',
-                turn: {steps: {otherstep:'FOO'}},
-                newstepid: 'newid'
+                turn: {steps: {foo:'bar'}}
             },
             mutations: {
                 newstep: {
@@ -31,13 +30,15 @@ describe("The flow commands",()=>{
                     MARKS: 'newmarks',
                     UNITDATA: 'newunitdata',
                     UNITLAYERS: 'newunitlayers',
-                    stepid: 'newid',
+                    stepid: 'oldid-somecmnd',
                     path: ['foo','somecmnd'],
                     otherstuff: 'saveme',
                 }
             },
             additionally: {
-                'step was copied': 'step !== newstep'
+                'step was copied': 'step !== newstep',
+                'newstep was saved': 'newstep === turn.steps["oldid-somecmnd"]',
+                'otherstep wasnt removed': 'turn.steps.foo === "bar"'
             }
         },
         'when cmnd has spawn': {
@@ -56,15 +57,15 @@ describe("The flow commands",()=>{
                     UNITDATA: 'overwriteme',
                     otherstuff: 'saveme',
                     stepid: 'oldid',
-                    path: ['foo']
+                    path: ['foo'],
+                    turn: {steps:{}}
                 },
                 ARTIFACTS: 'newartifacts',
                 MARKS: 'newmarks',
                 UNITDATA: 'newunitdata',
                 UNITLAYERS: 'newunitlayers',
                 turn: {steps: {otherstep:'FOO'}},
-                newunitid: 42,
-                newstepid: 'newid'
+                newunitid: 42
             },
             additionally: {
                 'saved newunitid': 'newstep.newunitid === newunitid'
@@ -138,18 +139,14 @@ describe("The flow commands",()=>{
                 cmndname: 'flaunt',
                 ARTIFACTS: "overwriteme",
                 MARKS: 'overwriteme',
-                UNITLAYERS: 'overwriteme',
-                step: {
-                    stepid: 'old'
-                }
+                UNITLAYERS: 'overwriteme'
             },
             mutations: {
                 UNITDATA: 'FLAUNTRULEZ',
                 ARTIFACTS: 'blank-FLAUNTRULEZ',
                 UNITLAYERS: 'new',
                 MARKS: {},
-                links: 'blank-FLAUNTRULEZnewFLAUNTRULEZsavelink',
-                newstepid: 'old-flaunt'
+                links: 'blank-FLAUNTRULEZnewFLAUNTRULEZsavelink'
             }
         }
     });

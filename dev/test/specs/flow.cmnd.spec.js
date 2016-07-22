@@ -4,41 +4,28 @@ import lib from '../../../src/codegen/'
 let F = lib
 
 describe("The flow commands",()=>{
-    test(F,'saveCommandStep',{
-        'when no AI flag': {
+    test(F,'makeCommandStep',{
+        'when no spawn': {
             options: {
                 cmndname: 'somecmnd'
             },
             scope: {
+                newstepid: 'newid',
                 step: {
-                    ARTIFACTS: 'overwriteme',
-                    MARKS: 'overwriteme',
-                    UNITDATA: 'overwriteme',
-                    otherstuff: 'saveme',
-                    stepid: 'oldid',
                     path: ['foo']
                 },
                 ARTIFACTS: 'newartifacts',
                 MARKS: 'newmarks',
                 UNITDATA: 'newunitdata',
                 UNITLAYERS: 'newunitlayers',
-                turn: {steps: {foo:'bar'}}
             },
-            mutations: {
-                newstep: {
-                    ARTIFACTS: 'newartifacts',
-                    MARKS: 'newmarks',
-                    UNITDATA: 'newunitdata',
-                    UNITLAYERS: 'newunitlayers',
-                    stepid: 'oldid-somecmnd',
-                    path: ['foo','somecmnd'],
-                    otherstuff: 'saveme',
-                }
-            },
-            additionally: {
-                'step was copied': 'step !== newstep',
-                'newstep was saved': 'newstep === turn.steps["oldid-somecmnd"]',
-                'otherstep wasnt removed': 'turn.steps.foo === "bar"'
+            expected: {
+                ARTIFACTS: 'newartifacts',
+                MARKS: 'newmarks',
+                UNITDATA: 'newunitdata',
+                UNITLAYERS: 'newunitlayers',
+                stepid: 'newid',
+                path: ['foo','somecmnd']
             }
         },
         'when cmnd has spawn': {
@@ -52,23 +39,54 @@ describe("The flow commands",()=>{
             },
             scope: {
                 step: {
-                    ARTIFACTS: 'overwriteme',
-                    MARKS: 'overwriteme',
-                    UNITDATA: 'overwriteme',
-                    otherstuff: 'saveme',
-                    stepid: 'oldid',
-                    path: ['foo'],
-                    turn: {steps:{}}
+                    path: ['foo']
                 },
                 ARTIFACTS: 'newartifacts',
                 MARKS: 'newmarks',
                 UNITDATA: 'newunitdata',
                 UNITLAYERS: 'newunitlayers',
-                turn: {steps: {otherstep:'FOO'}},
+                newstepid: 'newid',
                 newunitid: 42
             },
+            expected: {
+                ARTIFACTS: 'newartifacts',
+                MARKS: 'newmarks',
+                UNITDATA: 'newunitdata',
+                UNITLAYERS: 'newunitlayers',
+                stepid: 'newid',
+                path: ['foo','somecmnd'],
+                newunitid: 42
+            }
+        }
+    })
+    test(F,'saveCommandStep',{
+        'for regular command': {
+            options: {
+                cmndname: 'somecmnd'
+            },
+            scope: {
+                step: {
+                    somestuff: 'overwriteme',
+                    otherstuff: 'saveme',
+                    stepid: 'oldid',
+                },
+                turn: {steps: {foo:'bar'}}
+            },
+            context: {
+                makeCommandStep: (O)=> `{somestuff:"${O.cmndname}",stepid:newstepid}`
+            },
+            mutations: {
+                newstepid: 'oldid-somecmnd',
+                newstep: {
+                    somestuff: 'somecmnd',
+                    stepid: 'oldid-somecmnd',
+                    otherstuff: 'saveme',
+                }
+            },
             additionally: {
-                'saved newunitid': 'newstep.newunitid === newunitid'
+                'step was copied': 'step !== newstep',
+                'newstep was saved': 'newstep === turn.steps["oldid-somecmnd"]',
+                'otherstep wasnt removed': 'turn.steps.foo === "bar"'
             }
         }
     })

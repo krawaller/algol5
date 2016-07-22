@@ -24,6 +24,12 @@ Helper functions which all returns actual values, not stringified
 
 const U = {
 
+	markGenerates: (O)=> U.markRules(O).runGenerator || U.markRules(O).runGenerators,
+
+	markRules: (O)=> O && O.rules && O.rules.marks && O.rules.marks[O.markname] || {},
+
+	cmndRules: (O)=> O && O.rules && O.rules.commands && O.rules.commands[O.cmndname] || {},
+
 	boardPositions: (board)=> reduce(
 		range(1,board.height+1),
 		(mem,y)=> reduce(

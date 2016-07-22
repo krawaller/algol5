@@ -18,7 +18,7 @@ export default C => Object.assign(C,{
     // assumes UNITDATA, ownernames
     // mutates UNITLAYERS
     calculateUnitLayers: (O)=> `
-        UNITLAYERS = ${C.blankUnitLayers(O)};
+        ${O && O.defineUnitlayers ? 'var ' : ''}UNITLAYERS = ${C.blankUnitLayers(O)};
         for (var unitid in UNITDATA) {
             var currentunit = UNITDATA[unitid]
             var unitgroup = currentunit.group;

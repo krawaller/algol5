@@ -22,26 +22,36 @@ describe("The flow start stuff",()=>{
     test(lib,'saveStartingStep',{
         'for regular start': {
             scope: {
-                ARTIFACTS: 'artifacts',
-                UNITDATA: 'unitdata',
-                UNITLAYERS: 'unitlayers',
-                MARKS: 'marks',
                 turn: {steps:{foo:'bar'}}
+            },
+            context: {
+                makeStartingStep: (O)=> '"start"'
             },
             mutations: {
                 turn: {
                     steps: {
                         foo: 'bar',
-                        root: {
-                            stepid: 'root',
-                            ARTIFACTS: 'artifacts',
-                            UNITDATA: 'unitdata',
-                            UNITLAYERS: 'unitlayers',
-                            MARKS: 'marks',
-                            path: []
-                        }
+                        root: 'start'
                     }
                 }
+            }
+        }
+    })
+    test(lib,'makeStartingStep',{
+        'for regular start': {
+            scope: {
+                ARTIFACTS: 'artifacts',
+                UNITDATA: 'unitdata',
+                UNITLAYERS: 'unitlayers',
+                MARKS: 'marks'
+            },
+            expected: {
+                stepid: 'root',
+                ARTIFACTS: 'artifacts',
+                UNITDATA: 'unitdata',
+                UNITLAYERS: 'unitlayers',
+                MARKS: 'marks',
+                path: []
             }
         }
     })

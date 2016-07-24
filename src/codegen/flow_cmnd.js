@@ -2,6 +2,13 @@ import { contains, cmndRules } from '../utils'
 
 export default C => Object.assign(C,{
 
+    commandFunctionContents: (O)=> `
+        ${C.prepareCommandStep(O)}
+        ${C.applyCommandConsequences(O)}
+        ${C.saveCommandStep(O)}
+        ${C.applyLinkInstructions(O,cmndRules(O))}
+    `,
+
     /*
     assumes step
     */
@@ -45,8 +52,6 @@ export default C => Object.assign(C,{
         ${C.calculateUnitLayers(O)};
         ARTIFACTS = ${C.blankArtifactLayers(O)};
         ${C.applyGeneratorInstructions(O,cmndRules(O))}
-        ${C.saveCommandStep(O)}
-        ${C.applyLinkInstructions(O,cmndRules(O))}
     `
 
 })

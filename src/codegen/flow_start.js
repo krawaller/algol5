@@ -15,15 +15,20 @@ export default C => Object.assign(C,{
     assumes turn
     */
     saveStartingStep: (O)=> `
-        var newstep = turn.steps.root = {
-            ARTIFACTS: ARTIFACTS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            MARKS: MARKS,
-            stepid: 'root',
-            path: []
-        };
+        var newstep = turn.steps.root = ${C.makeStartingStep(O)};
     `,
+
+    /*
+    assumes ARTIFACTS, UNITDATA, UNITLAYERS, MARKS
+    */
+    makeStartingStep: (O)=> `{
+        ARTIFACTS: ARTIFACTS,
+        UNITDATA: UNITDATA,
+        UNITLAYERS: UNITLAYERS,
+        MARKS: MARKS,
+        stepid: 'root',
+        path: []
+    }`,
 
     /*
     assumes

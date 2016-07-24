@@ -46,35 +46,21 @@ describe("The flow mark stuff",()=>{
             }
         }
     })
-    test(F,'saveMarkStep',{
+    test(F,'makeMarkStep',{
         'when no generator': {
             scope: {
+                MARKS: 'newmarks',
                 markpos: 'somepos',
                 step: {
-                    ARTIFACTS: 'dontoverwriteme',
-                    MARKS: 'overwriteme',
-                    otherstuff: 'saveme',
-                    stepid: 'oldid',
                     path: ['foo'],
                 },
-                ARTIFACTS: 'bogus',
+                newstepid: 'newid',
+                ARTIFACTS: 'dontincludeme'
+            },
+            expected: {
                 MARKS: 'newmarks',
-                turn: {steps:{foo:'bar'}}
-            },
-            mutations: {
-                newstepid: 'oldid-somepos',
-                newstep: {
-                    ARTIFACTS: 'dontoverwriteme',
-                    MARKS: 'newmarks',
-                    stepid: 'oldid-somepos',
-                    path: ['foo','somepos'],
-                    otherstuff: 'saveme'
-                }
-            },
-            additionally: {
-                'step was copied': 'step !== newstep',
-                'newstep was saved': 'newstep === turn.steps["oldid-somepos"]',
-                'otherstep wasnt removed': 'turn.steps.foo === "bar"'
+                path: ['foo','somepos'],
+                stepid: 'newid'
             }
         },
         'when has generator': {
@@ -89,19 +75,48 @@ describe("The flow mark stuff",()=>{
                 }
             },
             scope: {
+                MARKS: 'newmarks',
                 markpos: 'somepos',
                 step: {
-                    ARTIFACTS: 'overwriteme',
-                    MARKS: 'overwriteme',
-                    stepid: 'oldid',
-                    path: ['foo']
+                    path: ['foo'],
                 },
-                ARTIFACTS: 'newartifacts',
+                newstepid: 'newid',
+                ARTIFACTS: 'newartifacts'
+            },
+            expected: {
                 MARKS: 'newmarks',
-                turn: {steps:{}}
+                path: ['foo','somepos'],
+                stepid: 'newid',
+                ARTIFACTS: 'newartifacts'
+            }
+        }
+    })
+    test(F,'saveMarkStep',{
+        'for regular call': {
+            scope: {
+                markpos: 'somepos',
+                step: {
+                    stepid: 'oldid',
+                    data: 'overwriteme',
+                    otherdata: 'keepme'
+                },
+                turn: {steps: {foo:'bar'}}
+            },
+            context: {
+                makeMarkStep: (O)=> '{data:"newdata",stepid:newstepid}'
+            },
+            mutations: {
+                newstepid: "oldid-somepos",
+                newstep: {
+                    stepid: 'oldid-somepos',
+                    data: 'newdata',
+                    otherdata: 'keepme'
+                }
             },
             additionally: {
-                'saved artifacts': 'newstep.ARTIFACTS === ARTIFACTS'
+                'step was copied': 'step !== newstep',
+                'newstep was saved': 'newstep === turn.steps["oldid-somepos"]',
+                'otherstep wasnt removed': 'turn.steps.foo === "bar"'
             }
         }
     })

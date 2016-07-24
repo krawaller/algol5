@@ -134,6 +134,23 @@ describe("The flow commands",()=>{
             }
         }
     })
+    test(F,'commandFunctionContents',{
+        'for regular call': {
+            options: '"OPTS"',
+            scope: {
+                debug: ''
+            },
+            context: {
+                prepareCommandStep: (O)=> `debug +=${O}+"prep"; `,
+                applyCommandConsequences: (O)=> `debug +=${O}+"cons"; `,
+                saveCommandStep: (O)=> `debug +=${O}+"save"; `,
+                applyLinkInstructions: (O)=> `debug +=${O}+"link"; `,
+            },
+            mutations: {
+                debug: 'OPTSprepOPTSconsOPTSsaveOPTSlink'
+            }
+        }
+    })
     test(F,'applyCommandConsequences',{
         'for regular call': {
             options: {
@@ -148,9 +165,7 @@ describe("The flow commands",()=>{
                 blankArtifactLayers: ()=> '"blank"',
                 applyGeneratorInstructions: (O,cmndrule)=> 'ARTIFACTS += "-" + "'+cmndrule+'"; ',
                 applyEffectInstructions: (O,cmndrule)=> 'UNITDATA = "'+cmndrule+'"; ',
-                calculateUnitLayers: (O)=> 'UNITLAYERS = "new"; ',
-                saveCommandStep: (O)=> 'var save = "save"; ',
-                applyLinkInstructions: (O)=> 'var links = ARTIFACTS+UNITLAYERS+UNITDATA+save+"link";'
+                calculateUnitLayers: (O)=> 'UNITLAYERS = "new"; '
             },
             scope: {
                 UNITDATA: 'overwriteme',
@@ -163,8 +178,7 @@ describe("The flow commands",()=>{
                 UNITDATA: 'FLAUNTRULEZ',
                 ARTIFACTS: 'blank-FLAUNTRULEZ',
                 UNITLAYERS: 'new',
-                MARKS: {},
-                links: 'blank-FLAUNTRULEZnewFLAUNTRULEZsavelink'
+                MARKS: {}
             }
         }
     });

@@ -22,15 +22,24 @@ export default C => Object.assign(C,{
         ${C.applyLinkInstructions(O,markRules(O))}
     `,
 
-    /*assumes step, newstepid, markpos, turn*/
+    /*
+    assumes step, markpos, turn
+    */
     saveMarkStep: (O)=> `
         var newstepid = step.stepid+'-'+markpos;
-        var newstep = turn.steps[newstepid] = Object.assign({},step,{
-            ${markGenerates(O) ? 'ARTIFACTS: ARTIFACTS,' : ''}
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos)
-        });
+        var newstep = turn.steps[newstepid] = Object.assign({},step,${C.makeMarkStep(O)});
+    `,
+
+    /*
+    Assumes newstepid, step.path, ARTIFACTS, MARKS
+    */
+    makeMarkStep: (O)=> `
+    {
+        ${markGenerates(O) ? 'ARTIFACTS: ARTIFACTS,' : ''}
+        MARKS: MARKS,
+        stepid: newstepid,
+        path: step.path.concat(markpos)
+    }    
     `
 })
 

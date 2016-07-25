@@ -2,6 +2,17 @@ import { contains, cmndRules } from '../utils'
 
 export default C => Object.assign(C,{
 
+    /*
+    */
+    makeCommandFunction: O=> `
+        function(turn,step){
+            ${C.commandFunctionContents(O)}
+            return newstep;
+        }
+    `,
+
+    /*
+    */
     commandFunctionContents: (O)=> `
         ${C.prepareCommandStep(O)}
         ${C.applyCommandConsequences(O)}

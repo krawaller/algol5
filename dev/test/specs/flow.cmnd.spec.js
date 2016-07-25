@@ -4,6 +4,16 @@ import lib from '../../../src/codegen/'
 let F = lib
 
 describe("The flow commands",()=>{
+    test(F,'makeCommandFunction',{
+        'for regular mark': {
+            options: '"OPTS"',
+            context: {
+                commandFunctionContents: (O)=> 'var newstep = turn+step; '
+            },
+            execwith: [1,2],
+            expected: 3
+        }
+    })
     test(F,'makeCommandStep',{
         'when no spawn': {
             options: {

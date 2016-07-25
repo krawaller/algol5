@@ -60,17 +60,17 @@ const tester = (lib,funcname,specs)=> {
                 var varmsg = "'********************** Setting up environment ***********************'; "
                 var codmsg = "'************************ Code to be tested **************************'; "
                 var tstmsg = "'************************* Testing outcome ***************************'; "
+                if(spec.execwith){
+                    code = '('+code+')('+spec.execwith.map(a=>JSON.stringify(a)).join(',')+'); '
+                }
                 if (spec.hasOwnProperty("expected")){
                     code = 'result='+code+'; '
                 }
                 var tobeexec = varmsg+vars+codmsg+code+";"+tstmsg+test
-                if (spec.debug){
-                    console.log("Code: ",tobeexec)
-                }
                 try {
                     eval(tobeexec);
                     if (spec.showcode){ //spec.norefs){
-                        console.log("Showing code for "+desc+", "+name+":\n",js_beautify(tobeexec,{indent_size:2}))    
+                        console.log("Showing code for "+name+":\n",js_beautify(tobeexec,{indent_size:2}))    
                     }
                 } catch(e) {
                     console.log("ERROR ERROR! "+funcname+", "+name+",  Code:\n",js_beautify(tobeexec,{indent_size:2}))

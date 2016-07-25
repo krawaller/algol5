@@ -2,6 +2,48 @@ import test from '../gentester'
 import lib from '../../../src/codegen/'
 
 describe("The flow start stuff",()=>{
+    test(lib,'makeStartFunction',{
+        'for regular call': {
+            options: '"OPTS"',
+            context: {
+                startFunctionContents: (O)=> 'var turn = turn+step; '
+            },
+            execwith: [1,2],
+            expected: 3
+        }
+    })
+    test(lib,'startFunctionContents',{
+        'for regular call': {
+            options: {
+                rules: {startTurn: 'startdef'}
+            },
+            scope: {
+                debug: ''
+            },
+            context: {
+                makeNewTurn: O=> '"new"',
+                prepareStartingStep: O=> 'debug += "prep"; ',
+                applyStartingConsequences: O=> 'debug += "cons"; ',
+                saveStartingStep: O=> 'debug += "save"; ',
+                applyLinkInstructions: (O,def)=> 'debug += "link'+def+'"; '
+            },
+            mutations: {
+                turn: 'new',
+                debug: 'prepconssavelinkstartdef'
+            }
+        }
+    })
+    test(lib,'makeNewTurn',{
+        'for regular call': {
+            scope: {
+                player: 'foo'
+            },
+            expected: {
+                steps: {},
+                player: 'foo'
+            }
+        }
+    })
     test(lib,'prepareStartingStep',{
         'for regular start': {
             scope: {
@@ -63,11 +105,10 @@ describe("The flow start stuff",()=>{
                 }
             },
             context: {
-                saveStartingStep: (O)=> 'var save = "save"; ',
-                applyLinkInstructions: (O,def)=> 'var links = save+"links'+def+'"; '
+                applyGeneratorInstructions: (O,rules)=> 'var gen = "GEN'+rules+'"; ',
             },
             mutations: {
-                links: 'savelinksstartdef'
+                gen: 'GENstartdef'
             }
         }
     })

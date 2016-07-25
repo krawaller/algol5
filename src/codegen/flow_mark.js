@@ -1,9 +1,28 @@
 import { markGenerates, markRules } from '../utils'
 
+
 export default C => Object.assign(C,{
 
-    // TODO - this isnt enough, linking can also use this data
+    /*
+    */
+    makeMarkFunction: O=> `
+        function(turn,step,markpos){
+            ${C.markFunctionContents(O)}
+            return newstep;
+        }
+    `,
 
+    /*
+    */
+    markFunctionContents: (O)=> `
+        ${C.prepareMarkStep(O)}
+        ${C.applyMarkConsequences(O)}
+        ${C.saveMarkStep(O)}
+        ${C.applyLinkInstructions(O,markRules(O))}
+    `,
+
+
+    // TODO - this isnt enough, linking can also use this data
     /* assumes step */
     prepareMarkStep: O=> markGenerates(O) ? `
         var ARTIFACTS = Object.assign({},step.ARTIFACTS);
@@ -18,8 +37,6 @@ export default C => Object.assign(C,{
     applyMarkConsequences: (O)=> `
         var MARKS = Object.assign({},step.MARKS,{${O.markname}:markpos}); 
         ${C.applyGeneratorInstructions(O,markRules(O))}
-        ${C.saveMarkStep(O)}
-        ${C.applyLinkInstructions(O,markRules(O))}
     `,
 
     /*

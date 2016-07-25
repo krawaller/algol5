@@ -120,12 +120,37 @@ describe("The flow mark stuff",()=>{
             }
         }
     })
+    test(F,'makeMarkFunction',{
+        'for regular mark': {
+            options: '"OPTS"',
+            context: {
+                markFunctionContents: (O)=> 'var newstep = turn+step+markpos; '
+            },
+            execwith: [1,2,3],
+            expected: 6
+        }
+    })
+    test(F,'markFunctionContents',{
+        'for regular call': {
+            options: '"OPTS"',
+            scope: {
+                debug: ''
+            },
+            context: {
+                prepareMarkStep: (O)=> `debug +=${O}+"prep"; `,
+                applyMarkConsequences: (O)=> `debug +=${O}+"cons"; `,
+                saveMarkStep: (O)=> `debug +=${O}+"save"; `,
+                applyLinkInstructions: (O)=> `debug +=${O}+"link"; `,
+            },
+            mutations: {
+                debug: 'OPTSprepOPTSconsOPTSsaveOPTSlink'
+            }
+        }
+    })
     test(F,'applyMarkConsequences',{
         'for regular call': {
             context: {
-                applyGeneratorInstructions: (O,rules)=> 'ARTIFACTS = "'+rules+'"; ',
-                applyLinkInstructions: (O)=> 'var links = ARTIFACTS+save+"link"; ',
-                saveMarkStep: (O)=> 'var save = "save"; '
+                applyGeneratorInstructions: (O,rules)=> 'ARTIFACTS = "'+rules+'"; '
             },
             options: {
                 markname: 'somemark',
@@ -144,8 +169,7 @@ describe("The flow mark stuff",()=>{
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
-                ARTIFACTS: 'MARKRULE',
-                links: 'MARKRULEsavelink'
+                ARTIFACTS: 'MARKRULE'
             },
             additionally: {
                 'make sure to copy mark': 'MARKS !== step.MARKS'

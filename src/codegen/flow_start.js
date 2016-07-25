@@ -1,4 +1,29 @@
+import { startRules } from '../utils'
+
 export default C => Object.assign(C,{
+
+    makeStartFunction: O=> `
+        function(turn,step){
+            ${C.startFunctionContents(O)}
+            return turn;
+        }
+    `,
+
+    startFunctionContents: O=> `
+        var turn = ${C.makeNewTurn(O)};
+        ${C.prepareStartingStep(O)}
+        ${C.applyStartingConsequences(O)}
+        ${C.saveStartingStep(O)}
+        ${C.applyLinkInstructions(O,startRules(O))}
+    `,
+
+    /*
+    assumes turn, player (from closure)
+    */
+    makeNewTurn: (O)=> `{
+        steps: {},
+        player: player
+    }`,
 
     /*
     assumes step
@@ -9,7 +34,7 @@ export default C => Object.assign(C,{
         var ARTIFACTS = ${C.blankArtifactLayers(O)}; 
         var UNITDATA = step.UNITDATA;
         ${C.calculateUnitLayers({...O,defineUnitLayers:true})}
-    `,
+    `, // TODO - dont generate, reuse! :D
 
     /*
     assumes turn
@@ -34,8 +59,7 @@ export default C => Object.assign(C,{
     assumes
     */
     applyStartingConsequences: (O)=> `
-        ${C.saveStartingStep(O)}
-        ${C.applyLinkInstructions(O,O.rules.startTurn)}
+        ${C.applyGeneratorInstructions(O,startRules(O))}
     `
 
 })

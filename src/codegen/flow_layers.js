@@ -6,6 +6,9 @@ import U from '../utils'
 
 export default C => Object.assign(C,{
 
+    isTerrainNeutral: O=> !Object.keys(O && O.rules && O.rules.board && O.rules.board.terrain || {})
+        .filter(t=> t[1] || t[2]).length,
+
     /*
     Calculates the connections object
     */
@@ -28,7 +31,7 @@ export default C => Object.assign(C,{
                 = UNITLAYERS[unitgroup][unitpos]
                 = UNITLAYERS[owner + unitgroup][unitpos]
                 = UNITLAYERS[owner +'units'][unitpos]
-                = currentunit
+                = currentunit;
         }`,
 
     /*

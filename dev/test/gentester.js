@@ -67,11 +67,11 @@ const tester = (lib,funcname,specs)=> {
                     code = 'result='+code+'; '
                 }
                 var tobeexec = varmsg+vars+codmsg+code+";"+tstmsg+test
+                if (spec.showcode){ //spec.norefs){
+                    console.log("Showing code for "+name+":\n",js_beautify(tobeexec,{indent_size:2}))    
+                }
                 try {
                     eval(tobeexec);
-                    if (spec.showcode){ //spec.norefs){
-                        console.log("Showing code for "+name+":\n",js_beautify(tobeexec,{indent_size:2}))    
-                    }
                 } catch(e) {
                     console.log("ERROR ERROR! "+funcname+", "+name+",  Code:\n",js_beautify(tobeexec,{indent_size:2}))
                     throw e;

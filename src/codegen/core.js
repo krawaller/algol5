@@ -174,6 +174,7 @@ export default T => {
         bool_or: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" || ") + ")",
         bool_true: (O)=> "true",
         bool_false: (O)=> "false",
+        bool_valinlist: (O,[val,list])=> '('+T.list(O,list)+'.indexOf('+T.value(O,val)+')!==-1)',
 
         bool_ifelse: universal.ifelse('boolean'),
         bool_playercase: universal.playercase('boolean'),
@@ -217,6 +218,7 @@ export default T => {
 
         val_pos: (O,[pos])=> T.position(O,pos),
         val_value: (O,[value])=> typeof value === "string" ? "'"+value+"'" : value,
+        val_val: (O,[value])=> typeof value === "string" ? "'"+value+"'" : value,
         val_currentplayer: (O)=> O.player,
         val_otherplayer: (O)=> O.player === 1 ? 2 : 1,
         val_sum: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" + ") + ")",

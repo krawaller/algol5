@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "name": "Daggers",
+    "source": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
+    "tags": ["differentunits","asymmetric","multiplegoals","infiltrate","killking","capture"]
+  },
+  "board": {
+    "height": 8,
+    "width": 8,
+    "terrain": {
+      "bases": {"1":[["rect","a8","h8"]],"2":[["rect","a1","h1"]]}
+    }
+  },
+  "graphics": {
+    "tiles": { "bases": "playercolour" },
+    "icons": { "daggers": "bishops", "crowns": "kings" }
+  },
+  "setup": {
+    "crowns": {"1":["d8","e8"],"2":["c1","f1"]},
+    "daggers": {"1":[["rect","c7","f7"]],"2":["c3","f3",["rect","b2","g2"]]}
+  },
+  "endturn": {
+    "endgame": {
+      "infiltration":{ "condition": ["overlaps","mycrowns","oppbases"] },
+      "kingkill": { "condition": ["notempty","oppdeadcrowns"] }
+    }
+  },
+  "startturn": {
+    "allow": ["selectunit"]
+  },
+  "marks": {
+    "selectunit": {
+      "from": "myunits",
+      "runGenerator": ["ifelse",["anyat","mycrowns","selectunit"],"findcrowntargets","finddaggertargets"],
+      "allow": ["selectmovetarget"]
+    },
+    "selectmovetarget": {
+      "from": "movetarget",
+      "allow": ["move"]
+    }
+  },
+  "commands": {
+    "move": {
+      "applyEffects": [
+        ["kill","selectmovetarget"],
+        ["move","selectunit","selectmovetarget"]
+      ],
+      "allow": ["endturn"]
+    }
+  },
+  "generators": {
+    "findcrowntargets": {
+      "type": "neighbour",
+      "dirs": ["list",[1,2,3,4,5,6,7,8]],
+      "start": "selectunit",
+      "draw": {
+        "target": {
+          "condition": ["noneat","myunits",["target"]],
+          "tolayer": ["ifelse",["anyat","oppunits",["target"]],"killtarget","movetarget"]
+        }
+      }
+    },
+    "finddaggertargets": {
+      "type": "walker",
+      "start": "selectunit",
+      "dirs": ["list",[8,1,2,4,5,6]],
+      "blocks": "units",
+      "max": ["ifelse",["valinlist",["dir"],[8,1,2]],1,8],
+      "draw": {
+        "steps": {
+          "tolayer": "movetarget"
+        },
+        "block": {
+          "condition": ["and",
+            ["noneat","myunits",["target"]],
+            ["not",["and",
+              ["valinlist",["dir"],[1,5]],
+              ["anyat","oppdaggers",["target"]]
+            ]]
+          ],
+          "tolayer": "movetarget"
+        }
+      }
+    }
+  }
+}

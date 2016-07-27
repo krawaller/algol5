@@ -7,13 +7,32 @@ describe("The flow package commands",()=>{
             options: {foo:'"O"'},
             context: {
                 addCommonVariables: O=> `game.common = ${O.foo}; `,
-                addPlayerClosure: (O)=> `game.plr${O.player}=game.common; `
+                addPlayerClosure: O=> `game.plr${O.player}=game.common; `,
+                addCommonFunctions: O=> `game.cfunc = ${O.foo}; `
             },
             execwith: [],
             expected: {
                 common: 'O',
                 plr1: 'O',
-                plr2: 'O'
+                plr2: 'O',
+                cfunc: 'O'
+            }
+        }
+    })
+    test(lib,'addCommonFunctions',{
+        'for regular call': {
+            options: '"O"',
+            context: {
+                makeNewGameFunction: O=> O
+            },
+            scope: {
+                game: {foo:'bar'}
+            },
+            mutations: {
+                game: {
+                    foo: 'bar',
+                    newGame: 'O'
+                }
             }
         }
     })

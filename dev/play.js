@@ -2,6 +2,14 @@ import lib from '../src/codegen/'
 
 import {js_beautify} from 'js-beautify'
 
+import daggers from '../games/daggers.json'
+
+let code = lib.makeGameObject({rules:daggers});
+console.log("\n***DAGGERS***\n",js_beautify(code,{indent_size:2}))
+
+
+/*
+
 let walkerdef = {
 	"type": "walker",
 	"starts": "mymorons",
@@ -65,3 +73,4 @@ console.log("\n***WALKER***\n",js_beautify(walkercode,{indent_size:2}))
 console.log("\n***NEIGHBOUR***\n",js_beautify(neighbourcode,{indent_size:2}))
 
 console.log("\n***FILTER***\n",js_beautify(filtercode,{indent_size:2}))
+*/

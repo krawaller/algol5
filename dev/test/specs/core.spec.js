@@ -125,7 +125,15 @@ describe('the core funcs',()=>{
         'the different cmnd when different': {
             arg: ['different',4,['value',3]],
             expected: true
-        }
+        },
+        'the valinlist cmnd when true': {
+            arg: ['valinlist',['val',2],['list',[1,2,3]]],
+            expected: true
+        },
+        'the valinlist cmnd when false': {
+            arg: ['valinlist',['val',4],[1,2,3]],
+            expected: false
+        },
     });
     test(C,'position',{
         'the mark cmnd': {

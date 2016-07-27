@@ -8,8 +8,13 @@ export default C => Object.assign(C,{
             ${C.addCommonVariables(O)}
             ${C.addPlayerClosure({...O,player:1})}
             ${C.addPlayerClosure({...O,player:2})}
+            ${C.addCommonFunctions(O)}
             return game;
         }
+    `,
+
+    addCommonFunctions: O=> `
+        game.newGame = ${C.makeNewGameFunction(O)};
     `,
 
     // TODO - metadata

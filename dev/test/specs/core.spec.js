@@ -134,6 +134,14 @@ describe('the core funcs',()=>{
             arg: ['valinlist',['val',4],[1,2,3]],
             expected: false
         },
+        'the not cmnd when false': {
+            arg: ['not',['true']],
+            expected: false
+        },
+        'the not cmnd when true': {
+            arg: ['not',['false']],
+            expected: true
+        }
     });
     test(C,'position',{
         'the mark cmnd': {

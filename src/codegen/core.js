@@ -172,6 +172,7 @@ export default T => {
         bool_notempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length!==0",
         bool_and: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" && ") + ")",
         bool_or: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" || ") + ")",
+        bool_not: (O,[bool])=> "!"+T.boolean(O,bool),
         bool_true: (O)=> "true",
         bool_false: (O)=> "false",
         bool_valinlist: (O,[val,list])=> '('+T.list(O,list)+'.indexOf('+T.value(O,val)+')!==-1)',

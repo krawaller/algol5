@@ -2,6 +2,14 @@ import { startRules } from '../utils'
 
 export default C => Object.assign(C,{
 
+    makeNewGameFunction: O=> `
+        function(){
+            var turnseed = ${C.makeTurnSeed(O)};
+            var stepseed = ${C.makeStepSeed(O)};
+            return game.start1(turnseed,stepseed);
+        }
+    `,
+
     makeStartFunction: O=> `
         function(turn,step){
             ${C.startFunctionContents(O)}
@@ -34,7 +42,7 @@ export default C => Object.assign(C,{
         var ARTIFACTS = ${C.blankArtifactLayers(O)}; 
         var UNITDATA = step.UNITDATA;
         ${C.calculateUnitLayers({...O,defineUnitLayers:true})}
-    `, // TODO - dont generate, reuse! :D
+    `,
 
     /*
     assumes turn

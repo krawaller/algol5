@@ -2,6 +2,21 @@ import test from '../gentester'
 import lib from '../../../src/codegen/'
 
 describe("The flow start stuff",()=>{
+    test(lib,'makeNewGameFunction',{
+        'for regular call': {
+            context: {
+                makeStepSeed: O=> '"step"',
+                makeTurnSeed: O=> '"turn"'
+            },
+            scope: {
+                game: {
+                    start1: function(s,t){ return s+t; }
+                }
+            },
+            execwith: [],
+            expected: "turnstep"
+        }
+    })
     test(lib,'makeStartFunction',{
         'for regular call': {
             options: '"OPTS"',

@@ -2,6 +2,17 @@ import _ from 'lodash'
 
 import {js_beautify} from 'js-beautify'
 
+function stringifyWithMethods(def){
+    if (_.isArray(def)){
+        return JSON.stringify(def);
+    }
+    switch(typeof def){
+        case 'object': return '{' + _.map(def,(val,n)=> '"'+n+'": '+stringifyWithMethods(val)).join(',') + '}';
+        case 'function': return def;
+        default: return JSON.stringify(def);
+    }
+}
+
 const tester = (lib,funcname,specs)=> {
     let func = 
     describe('the '+funcname+' func',()=>{
@@ -9,7 +20,7 @@ const tester = (lib,funcname,specs)=> {
             describe(name,()=>{
                 let vars = '', result, code, test = '';
                 for(var g in spec.scope || {}){
-                    vars += "let "+g+"="+JSON.stringify(spec.scope[g])+"; "
+                    vars += "let "+g+"="+ stringifyWithMethods(spec.scope[g])+"; ";
                 }
                 if (spec.norefs) {
                     spec.norefs.forEach(norefvar=>{

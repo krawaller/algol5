@@ -42,8 +42,8 @@
   "commands": {
     "move": {
       "applyEffects": [
-        ["kill","selectmovetarget"],
-        ["move","selectunit","selectmovetarget"]
+        ["killat","selectmovetarget"],
+        ["moveat","selectunit","selectmovetarget"]
       ],
       "allow": ["endturn"]
     }

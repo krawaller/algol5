@@ -10,6 +10,14 @@ export default C => Object.assign(C,{
         }
     `,
 
+    makeTurnSeed: O=> `{
+        turn: 0
+    }`,
+
+    makeStepSeed: O=> `{
+        UNITDATA: ${C.deduceInitialUnitData(O)}
+    }`,
+
     makeStartFunction: O=> `
         function(turn,step){
             ${C.startFunctionContents(O)}

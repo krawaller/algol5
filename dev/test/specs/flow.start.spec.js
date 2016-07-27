@@ -17,6 +17,24 @@ describe("The flow start stuff",()=>{
             expected: "turnstep"
         }
     })
+    test(lib,'makeTurnSeed',{
+        'for regular call': {
+            expected: {
+                turn: 0
+            }
+        }
+    })
+    test(lib,'makeStepSeed',{
+        'for regular call': {
+            options: '"OPTS"',
+            context: {
+                deduceInitialUnitData: O=> O
+            },
+            expected: {
+                UNITDATA: 'OPTS'
+            }
+        }
+    })
     test(lib,'makeStartFunction',{
         'for regular call': {
             options: '"OPTS"',

@@ -8,7 +8,13 @@ Only setid and setat actually manipulates individual unit objects, and they make
 */
 
 export default C => Object.assign(C,{
-    applyeffect: (O,def)=> C[def[0]].apply(C,[O].concat(tail(def))),
+    applyeffect: (O,def)=> {
+        if (!C[def[0]]){
+            console.log(def);
+            throw "Unknown effect! "+def
+        }
+        C[def[0]].apply(C,[O].concat(tail(def)));
+    },
     swap: (O,pos1,pos2)=> (
         C.setat(O,pos1,'pos',['pos',pos2])+
         C.setat(O,pos2,'pos',['pos',pos1])

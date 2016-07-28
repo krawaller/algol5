@@ -1,14 +1,27 @@
 import tail from "lodash/array/tail";
 import isArray from "lodash/lang/isArray";
+import reduce from "lodash/collection/reduce";
 
 export default T => {
 
     const universal = {
         ifelse: (datatype)=> (O,[bool,alt1,alt2])=> "(" + T.boolean(O,bool) + "?" + T[datatype](O,alt1) + ":" + T[datatype](O,alt2) + ")",
-        playercase: (datatype)=> (O,[alt1,alt2])=> T[datatype](O,O.player === 1 ? alt1 : alt2)
+        playercase: (datatype)=> (O,[alt1,alt2])=> T[datatype](O,O.player === 1 ? alt1 : alt2),
+        actionor: (datatype)=> (O,[action,alt1,alt2])=> {
+            if (!T[datatype]){
+                console.log("ALARM",datatype)
+            }
+            return T[datatype](O,O.cmndname===action||O.markname===action||O.name===action?alt1:alt2)
+        }
     }
 
-    const methods = {
+    const toshort = {position:'pos',value:'val'}
+
+    const appliedUni = ['list','prop','set','position','bool','id','value'].reduce((acc,t)=>{
+        return Object.assign(acc,reduce(universal,(mem,fact,name)=> ({...mem, [(toshort[t]||t)+'_'+name]: fact(t)}),acc ));
+    },{})
+
+    const methods = Object.assign(appliedUni,{
 
         // ******************** DATATYPE List **********************
 
@@ -27,9 +40,6 @@ export default T => {
             return '['+ret.join(',')+']'
         },
 
-        list_ifelse: universal.ifelse('list'),
-        list_playercase: universal.playercase('list'),
-
         // ******************** DATATYPE prop **********************
 
         prop: (O,def,propname)=> {
@@ -42,9 +52,6 @@ export default T => {
 
         prop_is: (O,[value],propname)=> 'filterobj.'+propname+'==='+T.value(O,value),
         prop_isnt: (O,[value],propname)=> 'filterobj.'+propname+'!=='+T.value(O,value),
-
-        prop_ifelse: universal.ifelse('prop'),
-        prop_playercase: universal.playercase('prop'),
 
         // ******************** DATATYPE set **********************
 
@@ -109,9 +116,6 @@ export default T => {
                 }())`
         },
 
-        set_ifelse: universal.ifelse('set'),
-        set_playercase: universal.playercase('set'),
-
 
         // layername is a plain string
         // This method sometimes used directly from elsewhere
@@ -141,14 +145,11 @@ export default T => {
         },
 
         pos_mark: (O,[markname])=> "MARKS[" + T.value(O,markname) + "]",
-        pos_turnpos: (O,[pos])=> `TURNVARS[${pos}]`,
+        pos_turnpos: (O,[pos])=> `TURNVARS['${pos}']`,
         pos_pos: (O,[pos])=> T.value(O,pos),
         pos_target: (O)=> O && O.useforpos || "POS",
         pos_start: (O)=> "STARTPOS",
         pos_onlyin: (O,[set])=> "Object.keys("+T.set(O,set)+")[0]",
-
-        pos_ifelse: universal.ifelse('position'),
-        pos_playercase: universal.playercase('position'),
 
         // ******************** DATATYPE boolean **********************
 
@@ -177,9 +178,6 @@ export default T => {
         bool_false: (O)=> "false",
         bool_valinlist: (O,[val,list])=> '('+T.list(O,list)+'.indexOf('+T.value(O,val)+')!==-1)',
 
-        bool_ifelse: universal.ifelse('boolean'),
-        bool_playercase: universal.playercase('boolean'),
-
         // ******************** DATATYPE id **********************
 
         id: (O,def)=> {
@@ -197,9 +195,6 @@ export default T => {
         id_idat: (O,[pos])=> "(UNITLAYERS.all["+T.position(O,pos)+"] || [{}]).id",
         id_loopid: (O)=> "LOOPID",
         id_id: (O,id)=> T.value(O.id),
-
-        id_ifelse: universal.ifelse('id'),
-        id_playercase: universal.playercase('id'),
 
         // ******************** DATATYPE value **********************
 
@@ -238,9 +233,7 @@ export default T => {
             return pos+"["+T.value(O,prop)+"]";
         },
 
-        val_ifelse: universal.ifelse('value'),
-        val_playercase: universal.playercase('value')
-    }
+    })
 
     return Object.assign(T,methods)
 }

@@ -6,7 +6,7 @@ import daggers from '../games/daggers.json'
 import amazon from '../games/amazon.json'
 
 let code = lib.makeGameObject({rules:amazon});
-console.log("\n***DAGGERS***\n",js_beautify(code,{indent_size:2}))
+console.log("\n***DAGGERS***\n",js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n'))
 
 
 /*

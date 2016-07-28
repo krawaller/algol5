@@ -20,7 +20,7 @@
   "marks": {
     "selectunit": {
       "from": "myunits",
-      "runGenerators": ["findtargets"],
+      "runGenerator": "findtargets",
       "allow": ["selectmovetarget"]
     },
     "selectmovetarget": {
@@ -39,7 +39,7 @@
         ["moveat","selectunit","selectmovetarget"],
         ["setturnpos","movedto","selectmovetarget"]
       ],
-      "runGenerators": ["findtargets"],
+      "runGenerator": "findtargets",
       "allow": ["selectfiretarget"]
     },
     "fire": {
@@ -51,7 +51,8 @@
     "findtargets": {
       "type": "walker",
       "dirs": [1,2,3,4,5,6,7,8],
-      "starts": ["union","selectunit",["single",["turnpos","movedto"]]],
+      "start": ["actionor","selectunit","selectunit",["turnpos","movedto"]],
+      "OLDstarts": ["union","selectunit",["single",["turnpos","movedto"]]],
       "blocks": "units",
       "draw": {
         "steps": {

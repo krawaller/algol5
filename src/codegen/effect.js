@@ -13,7 +13,7 @@ export default C => Object.assign(C,{
             console.log(def);
             throw "Unknown effect! "+def
         }
-        C[def[0]].apply(C,[O].concat(tail(def)));
+        return C[def[0]].apply(C,[O].concat(tail(def)));
     },
     swap: (O,pos1,pos2)=> (
         C.setat(O,pos1,'pos',['pos',pos2])+

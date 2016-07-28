@@ -60,13 +60,16 @@ describe("The flow instruction commands",()=>{
     })
     test(lib,'applyGeneratorInstructions',{
         'when many generators': {
-            arg: {runGenerators:'MYGENERATORS'},
-            options: {foo:'bar'},
+            arg: {runGenerators:['foo','bar','baz']},
+            options: {rules:{generators:{foo:1,bar:2,baz:3}}},
+            scope: {
+                test: ''
+            },
             context: {
-                instruction: (O,def)=> `var test = "${def.join("_")+O.foo+O.generating}"; `
+                applyGenerator: (O,def)=> `test += "${def}"; `
             },
             mutations: {
-                test: 'all_MYGENERATORSbartrue'
+                test: '123'
             }
         },
         'when single generator': {
@@ -154,3 +157,12 @@ describe("The flow instruction commands",()=>{
         }
     });
 });
+
+
+
+
+
+
+
+
+

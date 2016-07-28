@@ -1,7 +1,32 @@
 import U from '../../../src/codegen'
 import test from '../libtester'
 
+import amazon from '../../../games/amazon.json'
+import daggers from '../../../games/daggers.json'
+
 test("the UTILS funcs",U,{
+	"contains(haystack,needle)": {
+		"for big true test": {
+			haystack: amazon,
+			needle: "queens",
+			expected: true
+		},
+		"for big false test": {
+			haystack: amazon,
+			needle: "kings",
+			expected: false
+		}
+	},
+	"usesTurnVars(O)": {
+		"for amazons": {
+			O: {rules:amazon},
+			expected: true
+		},
+		"for daggers": {
+			O: {rules:daggers},
+			expected: false
+		}
+	},
 	"boardPositions(board)": {
 		"for normal board": {
 			board: {height:2,width:3},

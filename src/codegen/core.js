@@ -141,7 +141,7 @@ export default T => {
         },
 
         pos_mark: (O,[markname])=> "MARKS[" + T.value(O,markname) + "]",
-        pos_ctxpos: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
+        pos_turnpos: (O,[pos])=> `TURNVARS[${pos}]`,
         pos_pos: (O,[pos])=> T.value(O,pos),
         pos_target: (O)=> O && O.useforpos || "POS",
         pos_start: (O)=> "STARTPOS",

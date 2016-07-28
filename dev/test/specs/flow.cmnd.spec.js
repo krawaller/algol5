@@ -142,6 +142,30 @@ describe("The flow commands",()=>{
             mutations: {
                 newunitid: 2
             }
+        },
+        'when uses turnvars': {
+            options: {
+                cmndname: 'somecmnd',
+                rules: {
+                    commands: {
+                        somecmnd: ['wah',{foo:['wee',['spawn']]}]
+                    }
+                }
+            },
+            context: {
+                usesTurnVars: (O)=> true
+            },
+            scope: {
+                step: {
+                    TURNVARS: {foo:'bar'}
+                },
+            },
+            mutations: {
+                TURNVARS: {foo: 'bar'}
+            },
+            additionally: {
+                'turnvars was copied': 'TURNVARS !== step.TURNVARS'
+            }
         }
     })
     test(F,'commandFunctionContents',{

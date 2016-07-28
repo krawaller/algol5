@@ -24,7 +24,14 @@ Helper functions which all returns actual values, not stringified
 
 export default U => Object.assign(U,{
 
-	usesTurnVars: (O)=> U.contains(O,['turnvar']) || U.contains(O,['turnpos']),
+	usesTurnVars: (O)=> {
+		O = O || {}
+		O.rules = O.rules || {}
+		O.rules.commands = O.rules.commands || {}
+		O.rules.marks = O.rules.marks || {}
+		let search = O.cmndname ? O.rules.commands[O.cmndname] : O.markname ? O.rules.marks[O.markname] : O.rules;
+		return U.contains(search,'turnvar') || U.contains(search,'turnpos') || U.contains(search,'setturnvar') || U.contains(search,'setturnpos');
+	},
 
 	markGenerates: (O)=> U.markRules(O).runGenerator || U.markRules(O).runGenerators,
 

@@ -4,6 +4,29 @@ import lib from '../../../src/codegen/'
 let E = lib
 
 describe("The effect commands",()=>{
+    test(E,'setturnvar',{
+        'for normal call': {
+            args: [['val','hideout'],['val','somepos']],
+            scope: {
+                TURNVARS: {foo:'bar'}
+            },
+            mutations: {
+                TURNVARS: {foo:'bar',hideout:'somepos'}
+            }
+        }
+    })
+    test(E,'setturnpos',{
+        'for normal call': {
+            args: [['val','hideout'],'secretmark'],
+            scope: {
+                MARKS: {secretmark: 'somepos'},
+                TURNVARS: {foo:'bar'}
+            },
+            mutations: {
+                TURNVARS: {foo:'bar',hideout:'somepos'}
+            }
+        }
+    })
     test(E,'killin',{
         'for normal call': {
             arg: ['layer','somelayer'],

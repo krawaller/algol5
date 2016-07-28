@@ -44,7 +44,23 @@ describe("The flow mark stuff",()=>{
                 'copy artifacts': 'ARTIFACTS !== step.ARTIFACTS',
                 'dont copy unitlayers': 'UNITLAYERS === step.UNITLAYERS'
             }
-        }
+        },
+        'when uses turnvars': {
+            scope: {
+                step: {
+                    TURNVARS: 'turnvars',
+                }
+            },
+            context: {
+                usesTurnVars: (O)=> true
+            },
+            mutations: {
+                TURNVARS: 'turnvars'
+            },
+            additionally: {
+                'turnvars was not copied': 'TURNVARS === step.TURNVARS'
+            }
+        },
     })
     test(F,'makeMarkStep',{
         'when no generator': {

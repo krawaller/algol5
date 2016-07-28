@@ -36,21 +36,22 @@
   "commands": {
     "move": {
       "applyEffects": [
-        ["move","selectunit","selectmovetarget"],
-        ["setcontextval","movedto",["markpos","selectmovetarget"]]
+        ["moveat","selectunit","selectmovetarget"],
+        ["setturnpos","movedto","selectmovetarget"]
       ],
       "runGenerators": ["findtargets"],
       "allow": ["selectfiretarget"]
     },
     "fire": {
-      "applyEffects": [ ["spawnunit",["markpos","selectfiretarget"],"fires",0] ],
+      "applyEffect": ["spawn","selectfiretarget","fires",0],
       "allow": ["endturn"]
     }
   },
   "generators": {
     "findtargets": {
       "type": "walker",
-      "starts": ["union","selectunit",["contextpos","movedto"]],
+      "dirs": [1,2,3,4,5,6,7,8],
+      "starts": ["union","selectunit",["single",["turnpos","movedto"]]],
       "blocks": "units",
       "draw": {
         "steps": {

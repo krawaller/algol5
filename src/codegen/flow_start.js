@@ -14,6 +14,7 @@ export default C => Object.assign(C,{
 
     makeStepSeed: O=> `{
         UNITDATA: ${C.deduceInitialUnitData(O)}
+        ${C.usesTurnVars(O) ? ', TURNVARS: {}' : ''}
     }`,
 
     makeStartFunction: O=> `
@@ -36,7 +37,8 @@ export default C => Object.assign(C,{
     */
     makeNewTurn: (O)=> `{
         steps: {},
-        player: player
+        player: player,
+        turn: turn.turn+1
     }`,
 
     /*
@@ -47,6 +49,7 @@ export default C => Object.assign(C,{
         var MARKS = {}; 
         var ARTIFACTS = ${C.blankArtifactLayers(O)}; 
         var UNITDATA = step.UNITDATA;
+        ${C.usesTurnVars(O) ? 'var TURNVARS = step.TURNVARS; ' : ''}
         ${C.calculateUnitLayers({...O,defineUnitLayers:true})}
     `,
 

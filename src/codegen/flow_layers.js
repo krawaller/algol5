@@ -36,7 +36,7 @@ export default C => Object.assign(C,{
     Calculate blank unit layers yada yada
     */
     blankUnitLayers: (O)=> JSON.stringify(reduce(
-        Object.keys(O.rules.setup || {}).concat(C.deduceDynamicGroups(O.rules.commands)),
+        Object.keys(O && O.rules && O.rules.setup || {}).concat(C.deduceDynamicGroups(O && O.rules && O.rules.commands || {})),
         (mem,g)=>({ ...mem, [g]: {}, ['my'+g]: {}, ['opp'+g]: {}, ['neutral'+g]: {} }),
         {}
     )),
@@ -66,7 +66,7 @@ export default C => Object.assign(C,{
     /*
     Calculates all possible artifact layers used in the game
     */
-    blankArtifactLayers: (O)=> JSON.stringify(reduce(O.rules.generators,(mem,gendef,key)=>{
+    blankArtifactLayers: (O)=> JSON.stringify(reduce(O && O.rules && O.rules.generators||{},(mem,gendef,key)=>{
         return reduce(gendef.draw,(mem2,drawdef)=> {
             return reduce(C.possibilities(drawdef.tolayer),(mem3,l)=> {
                 const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]

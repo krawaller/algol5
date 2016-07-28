@@ -3,8 +3,9 @@ import lib from '../src/codegen/'
 import {js_beautify} from 'js-beautify'
 
 import daggers from '../games/daggers.json'
+import amazon from '../games/amazon.json'
 
-let code = lib.makeGameObject({rules:daggers});
+let code = lib.makeGameObject({rules:amazon});
 console.log("\n***DAGGERS***\n",js_beautify(code,{indent_size:2}))
 
 

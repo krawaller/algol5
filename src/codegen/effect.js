@@ -5,6 +5,8 @@ import map from "lodash/collection/map"
 Effect methods will all mutate UNITDATA, which is assumed to have been
 previously copied.
 Only setid and setat actually manipulates individual unit objects, and they make copies
+
+setturnvar and setturnpos mutates TURNVARS
 */
 
 export default C => Object.assign(C,{
@@ -37,6 +39,12 @@ export default C => Object.assign(C,{
             UNITDATA[unitid]=Object.assign({},UNITDATA[unitid],{${C.value(O,propname)}:${C.value(O,val)}});
             ${and ? C.applyeffect(O,and) : ''}
         }
+    `,
+    setturnvar: (O,name,val)=> `
+        TURNVARS[${C.value(O,name)}] = ${C.value(O,val)};
+    `,
+    setturnpos: (O,name,pos)=> `
+        TURNVARS[${C.value(O,name)}] = ${C.position(O,pos)};
     `,
     setin: (O,set,propname,val)=> C.foridin(O,set,['setid',['loopid'],propname,val]),
     spawn: (O,pos,group,owner,obj)=>`

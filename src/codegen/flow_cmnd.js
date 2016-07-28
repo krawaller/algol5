@@ -26,6 +26,7 @@ export default C => Object.assign(C,{
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({},step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
+        ${C.usesTurnVars(O) ? 'var TURNVARS = Object.assign({},step.TURNVARS); ' : ''}
         ${C.contains(C.cmndRules(O),['spawn']) ? 'var newunitid = step.newunitid; ' : ''}
     `,
 

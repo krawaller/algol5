@@ -28,10 +28,22 @@ describe("The flow start stuff",()=>{
         'for regular call': {
             options: '"OPTS"',
             context: {
-                deduceInitialUnitData: O=> O
+                deduceInitialUnitData: O=> O,
+                usesTurnVars: (O)=> false,
             },
             expected: {
                 UNITDATA: 'OPTS'
+            }
+        },
+        'if using turnvars': {
+            options: '"OPTS"',
+            context: {
+                deduceInitialUnitData: O=> O,
+                usesTurnVars: (O)=> true,
+            },
+            expected: {
+                UNITDATA: 'OPTS',
+                TURNVARS: {}
             }
         }
     })
@@ -69,11 +81,13 @@ describe("The flow start stuff",()=>{
     test(lib,'makeNewTurn',{
         'for regular call': {
             scope: {
-                player: 'foo'
+                player: 'foo',
+                turn: {turn:7}
             },
             expected: {
                 steps: {},
-                player: 'foo'
+                player: 'foo',
+                turn:8
             }
         }
     })
@@ -91,6 +105,21 @@ describe("The flow start stuff",()=>{
                 MARKS: {},
                 didunits: 'wooyes',
                 ARTIFACTS: 2
+            }
+        },
+        'if using turnvars': {
+            scope: {
+                step: {TURNVARS: 'turnvars'},
+                UNITLAYERS: {}
+            },
+            context: {
+                usesTurnVars: (O)=> true,
+            },
+            mutations: {
+                TURNVARS: 'turnvars'
+            },
+            additionally: {
+                'didnt copy turnvars': 'TURNVARS === step.TURNVARS'
             }
         }
     })

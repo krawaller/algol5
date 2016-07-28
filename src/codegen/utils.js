@@ -22,7 +22,9 @@ const colnumbertoname = invert(colnametonumber)
 Helper functions which all returns actual values, not stringified
 */
 
-const U = {
+export default U => Object.assign(U,{
+
+	usesTurnVars: (O)=> U.contains(O,['turnvar']) || U.contains(O,['turnpos']),
 
 	markGenerates: (O)=> U.markRules(O).runGenerator || U.markRules(O).runGenerators,
 
@@ -169,6 +171,5 @@ const U = {
 		: isArray(data) || isObject(data) ? reduce(data,(mem,def)=>mem.concat(U.deduceDynamicGroups(def)),[])
 		: []
 	).sort(),
-}
+});
 
-module.exports = U

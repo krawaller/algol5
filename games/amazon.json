@@ -1,0 +1,62 @@
+{
+  "_STATUS": " ------ REQUIRES TURNVAR API! -------- ",
+  "meta": {
+    "name": "Amazons",
+    "source": "http://www.chessvariants.org/other.dir/amazons.html",
+    "tags": ["deploy","starve"],
+    "author": "Walter Zamkauskas",
+    "year": 1988
+  },
+  "graphics": {
+    "icons": { "queens": "queens", "fires": "pawns" }
+  },
+  "board": { "height": 10, "width": 10 },
+  "setup": {
+    "queens": {"1":["d10","g10","a7","j7"],"2":["a4","d1","g1","j4"]}
+  },
+  "startturn": {
+    "allow": ["selectunit"]
+  },
+  "marks": {
+    "selectunit": {
+      "from": "myunits",
+      "runGenerators": ["findtargets"],
+      "allow": ["selectmovetarget"]
+    },
+    "selectmovetarget": {
+      "nodeadends": true,
+      "from": "targets",
+      "allow": ["move"]
+    },
+    "selectfiretarget": {
+      "from": "targets",
+      "allow": ["fire"]
+    }
+  },
+  "commands": {
+    "move": {
+      "applyEffects": [
+        ["move","selectunit","selectmovetarget"],
+        ["setcontextval","movedto",["markpos","selectmovetarget"]]
+      ],
+      "runGenerators": ["findtargets"],
+      "allow": ["selectfiretarget"]
+    },
+    "fire": {
+      "applyEffects": [ ["spawnunit",["markpos","selectfiretarget"],"fires",0] ],
+      "allow": ["endturn"]
+    }
+  },
+  "generators": {
+    "findtargets": {
+      "type": "walker",
+      "starts": ["union","selectunit",["contextpos","movedto"]],
+      "blocks": "units",
+      "draw": {
+        "steps": {
+          "tolayer": "targets"
+        }
+      }
+    }
+  }
+}

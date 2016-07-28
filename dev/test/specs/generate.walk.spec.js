@@ -1,5 +1,4 @@
 import test from '../gentester'
-import libtest from '../libtester'
 import lib from '../../../src/codegen/'
 
 let G = lib

@@ -63,13 +63,13 @@ describe("The flow instruction commands",()=>{
             arg: {runGenerators:['foo','bar','baz']},
             options: {rules:{generators:{foo:1,bar:2,baz:3}}},
             scope: {
-                test: ''
+                foo: ''
             },
             context: {
-                applyGenerator: (O,def)=> `test += "${def}"; `
+                applyGenerator: (O,def)=> `foo += "${def}"; `
             },
             mutations: {
-                test: '123'
+                foo: '123'
             }
         },
         'when single generator': {

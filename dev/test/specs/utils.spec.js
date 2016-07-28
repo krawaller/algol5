@@ -1,4 +1,4 @@
-import U from '../../../src/utils'
+import U from '../../../src/codegen'
 import test from '../libtester'
 
 test("the UTILS funcs",U,{

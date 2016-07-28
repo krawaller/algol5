@@ -1,5 +1,3 @@
-import { startRules } from '../utils'
-
 export default C => Object.assign(C,{
 
     makeNewGameFunction: O=> `
@@ -30,7 +28,7 @@ export default C => Object.assign(C,{
         ${C.prepareStartingStep(O)}
         ${C.applyStartingConsequences(O)}
         ${C.saveStartingStep(O)}
-        ${C.applyLinkInstructions(O,startRules(O))}
+        ${C.applyLinkInstructions(O,C.startRules(O))}
     `,
 
     /*
@@ -75,7 +73,7 @@ export default C => Object.assign(C,{
     assumes
     */
     applyStartingConsequences: (O)=> `
-        ${C.applyGeneratorInstructions(O,startRules(O))}
+        ${C.applyGeneratorInstructions(O,C.startRules(O))}
     `
 
 })

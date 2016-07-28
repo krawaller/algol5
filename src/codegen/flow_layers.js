@@ -2,8 +2,6 @@ import reduce from "lodash/collection/reduce"
 import flatten from "lodash/array/flatten"
 import isArray from "lodash/lang/isArray"
 
-import U from '../utils'
-
 export default C => Object.assign(C,{
 
     isTerrainNeutral: O=> !Object.keys(O && O.rules && O.rules.board && O.rules.board.terrain || {})
@@ -13,8 +11,8 @@ export default C => Object.assign(C,{
     Calculates the connections object
     */
     boardConnections: (O)=> JSON.stringify(reduce(
-        U.boardPositions(O.rules.board),
-        (ret,pos)=> ({...ret, [pos]:U.posConnections(pos,O.rules.board)}),
+        C.boardPositions(O.rules.board),
+        (ret,pos)=> ({...ret, [pos]:C.posConnections(pos,O.rules.board)}),
         {}
     )),
 
@@ -38,7 +36,7 @@ export default C => Object.assign(C,{
     Calculate blank unit layers yada yada
     */
     blankUnitLayers: (O)=> JSON.stringify(reduce(
-        Object.keys(O.rules.setup || {}).concat(U.deduceDynamicGroups(O.rules.commands)),
+        Object.keys(O.rules.setup || {}).concat(C.deduceDynamicGroups(O.rules.commands)),
         (mem,g)=>({ ...mem, [g]: {}, ['my'+g]: {}, ['opp'+g]: {}, ['neutral'+g]: {} }),
         {}
     )),
@@ -51,7 +49,7 @@ export default C => Object.assign(C,{
         return JSON.stringify(reduce(O.rules.setup,(mem,defsbyplr,group)=> {
             return reduce(defsbyplr,(mem,entitydefs,plr)=> {
                 return reduce( entitydefs, (mem,entitydef)=> {
-                    U.convertToEntities(entitydef).forEach(e=> {
+                    C.convertToEntities(entitydef).forEach(e=> {
                         let newid = 'unit'+(id++)
                         mem[newid] = Object.assign(e,{
                             id: newid,
@@ -70,7 +68,7 @@ export default C => Object.assign(C,{
     */
     blankArtifactLayers: (O)=> JSON.stringify(reduce(O.rules.generators,(mem,gendef,key)=>{
         return reduce(gendef.draw,(mem2,drawdef)=> {
-            return reduce(U.possibilities(drawdef.tolayer),(mem3,l)=> {
+            return reduce(C.possibilities(drawdef.tolayer),(mem3,l)=> {
                 const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]
                 return reduce(list, (mem4,l)=> ({...mem4, [l]:{} }), mem3)
             },mem2)
@@ -81,8 +79,8 @@ export default C => Object.assign(C,{
     Calculates the three BOARD layers (board,light,dark) and returns them.
     These are the same for every player.
     */
-    boardLayers: (O)=> JSON.stringify(reduce(U.boardPositions(O.rules.board),(mem,pos)=> {
-        let {x,y} = U.pos2coords(pos),
+    boardLayers: (O)=> JSON.stringify(reduce(C.boardPositions(O.rules.board),(mem,pos)=> {
+        let {x,y} = C.pos2coords(pos),
             colour = ["dark","light"][(x+(y%2))%2]
         mem.board[pos] = mem[colour][pos] = {colour,pos,x,y}
         return mem
@@ -96,13 +94,13 @@ export default C => Object.assign(C,{
         let terrain = reduce(O.rules.board.terrain,(mem,def,name)=> {
             mem[name] = {};
             if (isArray(def)){ // no ownership
-                flatten(def.map(U.convertToEntities)).forEach(e=>{
+                flatten(def.map(C.convertToEntities)).forEach(e=>{
                     mem[name][e.pos] = e;
                 })
             } else { // per-player object
                 for(var owner in def){
                     owner = parseInt(owner)
-                    flatten(def[owner].map(U.convertToEntities)).forEach(e=>{
+                    flatten(def[owner].map(C.convertToEntities)).forEach(e=>{
                         e.owner = owner
                         mem[name][e.pos] = e
                         let prefix = owner === 0 ? 'neutral' : owner === forplr ? 'my' : 'opp'
@@ -116,9 +114,9 @@ export default C => Object.assign(C,{
 
         return JSON.stringify(reduce(terrain,(mem,t,name)=> {
             let noname = 'no'+name
-            if (U.contains(O.rules,noname)){
+            if (C.contains(O.rules,noname)){
                 mem['no'+name] = {}
-                U.boardPositions(O.rules.board).forEach( pos => {
+                C.boardPositions(O.rules.board).forEach( pos => {
                     if (!t[pos]){
                         mem['no'+name][pos] = {pos:pos}
                     }

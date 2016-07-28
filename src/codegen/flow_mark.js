@@ -1,6 +1,3 @@
-import { markGenerates, markRules } from '../utils'
-
-
 export default C => Object.assign(C,{
 
     /*
@@ -18,13 +15,13 @@ export default C => Object.assign(C,{
         ${C.prepareMarkStep(O)}
         ${C.applyMarkConsequences(O)}
         ${C.saveMarkStep(O)}
-        ${C.applyLinkInstructions(O,markRules(O))}
+        ${C.applyLinkInstructions(O,C.markRules(O))}
     `,
 
 
     // TODO - this isnt enough, linking can also use this data
     /* assumes step */
-    prepareMarkStep: O=> markGenerates(O) ? `
+    prepareMarkStep: O=> C.markGenerates(O) ? `
         var ARTIFACTS = Object.assign({},step.ARTIFACTS);
         var UNITLAYERS = step.UNITLAYERS;
     ` : ``,
@@ -36,7 +33,7 @@ export default C => Object.assign(C,{
     */
     applyMarkConsequences: (O)=> `
         var MARKS = Object.assign({},step.MARKS,{${O.markname}:markpos}); 
-        ${C.applyGeneratorInstructions(O,markRules(O))}
+        ${C.applyGeneratorInstructions(O,C.markRules(O))}
     `,
 
     /*
@@ -52,7 +49,7 @@ export default C => Object.assign(C,{
     */
     makeMarkStep: (O)=> `
     {
-        ${markGenerates(O) ? 'ARTIFACTS: ARTIFACTS,' : ''}
+        ${C.markGenerates(O) ? 'ARTIFACTS: ARTIFACTS,' : ''}
         MARKS: MARKS,
         stepid: newstepid,
         path: step.path.concat(markpos)

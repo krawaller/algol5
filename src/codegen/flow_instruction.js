@@ -21,7 +21,7 @@ export default C => Object.assign(C,{
     instr_ifelse: (O,[bool,alt1,alt2])=> "if (" + C.boolean(O,bool) + "){" + C.instruction(O,alt1) + "} else {" + C.instruction(O,alt2) + "}",
     instr_ifplayer: (O,[plr,instr])=> plr === O.player ? C.instruction(O,instr) : '',
     instr_playercase: (O,[alt1,alt2])=> C.instruction(O,O.player === 1 ? alt1 : alt2),
-    instr_all: (O,[defs])=> defs.map(d=>C.instruction(O,d)).join(' '),
+    instr_all: (O,defs)=> defs.map(d=>C.instruction(O,d)).join(' '),
 
     applyEffectInstructions: (O,instr)=> {
         O = {effect:true, ...(O || {})}

@@ -1,4 +1,4 @@
-import U from "../utils"
+
 
 export default C => Object.assign(C,{
 
@@ -8,7 +8,7 @@ export default C => Object.assign(C,{
 	*/
 	applywalker: (O,def)=> {
 		let ret = ''
-		if (def && def.draw && !U.contains([def.draw.steps,def.draw.all],['totalcount']) && !U.contains([def.draw.steps,def.draw.all],['walklength'])){
+		if (def && def.draw && !C.contains([def.draw.steps,def.draw.all],['totalcount']) && !C.contains([def.draw.steps,def.draw.all],['walklength'])){
 			O = {drawduringwhile: true, ...O}
 		}
 		if (def.starts){
@@ -28,14 +28,14 @@ export default C => Object.assign(C,{
 		let ret = '', usefordir
 		if (def.dirs){
 			ret += 'var allwalkerdirs = '+C.list(O,def.dirs)+'; ' // TODO - extract if not dynamic
-			let predictednbrofdirs = U.listlength(def.dirs),
+			let predictednbrofdirs = C.listlength(def.dirs),
 				nbrvar = predictednbrofdirs;
 			if (!predictednbrofdirs){
 				ret += 'var nbrofwalkerdirs = allwalkerdirs.length; '
 				nbrvar = 'nbrofwalkerdirs'
 			}
 			ret += 'for(var walkerdirnbr=0; walkerdirnbr<'+nbrvar+'; walkerdirnbr++){'
-			if (U.contains(def.draw,['dir'])){
+			if (C.contains(def.draw,['dir'])){
 				ret += 'var DIR = allwalkerdirs[walkerdirnbr]; '
 			} else {
 				usefordir = 'allwalkerdirs[walkerdirnbr]'
@@ -43,7 +43,7 @@ export default C => Object.assign(C,{
 			ret += C.walkindir({...(O||{}), usefordir},def)
 			ret += '} '
 		} else {
-			if (U.contains(def.draw,['dir'])){
+			if (C.contains(def.draw,['dir'])){
 				ret += 'var DIR = '+C.value(O,def.dir)+'; '
 			} else {
 				usefordir = C.value(O,def.dir)
@@ -61,7 +61,7 @@ export default C => Object.assign(C,{
 		if (def.max){
 			ret += 'var LENGTH=0; '
 		}
-		if (O && O.drawduringwhile && U.contains([def.draw.steps,def.draw.all],['step'])){
+		if (O && O.drawduringwhile && C.contains([def.draw.steps,def.draw.all],['step'])){
 			ret += 'var STEP=0; '
 		}
 		ret += 'while(!(STOPREASON='+C.stopreason(O,def)+')){'
@@ -117,7 +117,7 @@ export default C => Object.assign(C,{
 		if (def.count){
 			ret += 'countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0)); '
 		}
-		if (def.draw && def.draw.steps && !U.contains(def.draw.steps,['walklength'])){
+		if (def.draw && def.draw.steps && !C.contains(def.draw.steps,['walklength'])){
 			//ret += 
 		}
 		return ret;
@@ -127,7 +127,7 @@ export default C => Object.assign(C,{
 		def = def || {}
 		def.draw = def.draw || {}
 		let ret = ''
-		if (def.draw.steps || def.draw.last || U.contains(def.draw,['walklength'])){
+		if (def.draw.steps || def.draw.last || C.contains(def.draw,['walklength'])){
 			ret += 'var WALKLENGTH = walkedsquares.length; '
 		}
 		if (def && def.count){
@@ -153,7 +153,7 @@ export default C => Object.assign(C,{
 	drawwalksteps: (O,def)=> {
 		let ret = ''
 		if (def.draw.steps || def.draw.all || def.draw.counted){
-			var usesstep = U.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
+			var usesstep = C.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
 			if (usesstep) ret += 'var STEP = 0; '
 			ret += 'for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){'
 			ret += 'POS=walkedsquares[walkstepper]; '
@@ -163,7 +163,7 @@ export default C => Object.assign(C,{
 		return ret
 	},
 	drawwalksinglestep: (O,def)=> {
-		var usesstep = U.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
+		var usesstep = C.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
 		let ret = '';
 		if (usesstep) ret += 'STEP++; '
 		if (def.count){
@@ -186,7 +186,7 @@ export default C => Object.assign(C,{
 	drawwalkstart: (O,def)=> {   // TODO - handle all + startasstep?
 		let ret = ''
 		if (def.draw.start){
-			var needspos = U.contains([def.draw.start,def.draw.all],['target']);
+			var needspos = C.contains([def.draw.start,def.draw.all],['target']);
 			if (needspos){
 				ret += 'POS=STARTPOS; '
 			}
@@ -201,8 +201,8 @@ export default C => Object.assign(C,{
 	drawwalklast: (O,def)=> {
 		let ret = ''
 		if (def.draw.last){
-			if (U.contains(def.draw.last,['step'])) ret += 'STEP=WALKLENGTH; '
-			if (U.contains(def.draw.last,['target'])) {
+			if (C.contains(def.draw.last,['step'])) ret += 'STEP=WALKLENGTH; '
+			if (C.contains(def.draw.last,['target'])) {
 				ret += 'POS=walkedsquares[WALKLENGTH-1]; '
 				ret += C.performdraw(O,def.draw.last)
 			} else {

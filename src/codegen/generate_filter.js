@@ -1,7 +1,5 @@
 import map from 'lodash/collection/map'
 
-import U from "../utils"
-
 export default C => Object.assign(C,{
 
 	// ------------ FILTER STUFF -----------
@@ -9,7 +7,7 @@ export default C => Object.assign(C,{
 	applyfilter: (O,def)=> {
 		let ret = ''
 		ret += 'var filtersourcelayer = '+C.layerref(O,def.layer)+'; '
-		if (!U.contains(def.tolayer,'target')){
+		if (!C.contains(def.tolayer,'target')){
 			ret += 'var filtertargetlayer = '+C.layerref(O,def.tolayer)+'; '
 		}
 		ret += 'for (var POS in filtersourcelayer){'
@@ -21,7 +19,7 @@ export default C => Object.assign(C,{
 	// assumes filtersourcelayer, POS,
 	filterposition: (O,def)=> {
 		let ret = ''
-		if (U.contains(def.tolayer,'target')){
+		if (C.contains(def.tolayer,'target')){
 			ret += 'var filtertargetlayer = '+C.layerref(O,def.tolayer)+'; '
 		}
 		ret += 'if (filtersourcelayer[POS]){'

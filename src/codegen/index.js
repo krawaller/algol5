@@ -11,6 +11,7 @@ import addFlowLayers from './flow_layers'
 import addFlowInstructions from './flow_instruction'
 import addFlowStart from './flow_start'
 import addFlowPackage from './flow_package'
+import addUtils from './utils'
 
 let o = {}
 
@@ -27,5 +28,6 @@ addFlowLayers(o)
 addFlowInstructions(o)
 addFlowStart(o)
 addFlowPackage(o)
+addUtils(o)
 
 export default o

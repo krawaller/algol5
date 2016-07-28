@@ -1,4 +1,3 @@
-import U from "../utils"
 
 /*
 applyneighbours
@@ -27,7 +26,7 @@ export default C => Object.assign(C,{
       ret += C.drawneighbourstart(O,def);
     } else {
       //ret += 'var neighbourstarts='+C.set(O,def.starts)+'; '
-      //if (!U.contains(def.draw.neighbours))
+      //if (!C.contains(def.draw.neighbours))
       ret += 'for(var STARTPOS in '+C.set(O,def.starts)+'){'
       ret += C.findanddrawneighboursfromstart(O,def)
       ret += C.drawneighbourstart(O,def);
@@ -42,7 +41,7 @@ export default C => Object.assign(C,{
     def = def || {}
     let ret = ''
     if (def.dir){
-      if (U.contains(def,['dir'])){
+      if (C.contains(def,['dir'])){
         ret += 'var DIR='+C.value(O,def.dir)+'; '
         ret += C.findanddrawsingleneighbour(O,def)
       } else {
@@ -50,7 +49,7 @@ export default C => Object.assign(C,{
       }
     } else {
       ret += C.findmanyneighbours(O,def);
-      if (U.contains(def.draw,['neighbourcount'])){
+      if (C.contains(def.draw,['neighbourcount'])){
         ret += 'var NEIGHBOURCOUNT=foundneighbours.length; '
         ret += C.drawmanyneighbours(O,def);
       }
@@ -62,10 +61,10 @@ export default C => Object.assign(C,{
   findmanyneighbours: (O,def)=> {
     def = def || {}
     let ret = ''
-    let usedir = U.contains(def.draw && def.draw.neighbours,['dir'])
-    let usecount = U.contains(def.draw,['neighbourcount'])
+    let usedir = C.contains(def.draw && def.draw.neighbours,['dir'])
+    let usecount = C.contains(def.draw,['neighbourcount'])
     ret += 'var neighbourdirs='+C.list(O,def.dirs)+'; ' // TODO - extract if not dynamic
-    let predictednbrofdirs = U.listlength(def.dirs),
+    let predictednbrofdirs = C.listlength(def.dirs),
       nbrvar = predictednbrofdirs;
     if (!predictednbrofdirs){
       ret += 'var nbrofneighbourdirs=neighbourdirs.length; '
@@ -97,8 +96,8 @@ export default C => Object.assign(C,{
   findneighbourindir: (O,def,dirtouse)=> {
     def = def || {}
     let ret = ''
-    let usedir = U.contains(def.draw && def.draw.neighbours,['dir'])
-    let usecount = U.contains(def.draw,['neighbourcount'])
+    let usedir = C.contains(def.draw && def.draw.neighbours,['dir'])
+    let usecount = C.contains(def.draw,['neighbourcount'])
     ret += 'var POS='+(O && O.startconnections || 'connections[STARTPOS]')+'['+(dirtouse||'DIR')+']; '
 
     let conds = ['POS']
@@ -125,7 +124,7 @@ export default C => Object.assign(C,{
     def = def || {}
     let ret = ''
     if (def.draw && def.draw.neighbours){
-      let usedir = U.contains(def.draw.neighbours,['dir']);
+      let usedir = C.contains(def.draw.neighbours,['dir']);
       ret += 'for(var neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){'
       ret += 'POS=foundneighbours[neighbournbr]; '
       if (usedir){
@@ -147,7 +146,7 @@ export default C => Object.assign(C,{
     if (def.ifover) conds.push(C.set(O,def.ifover)+'[POS]')
     if (def.unlessover) conds.push('!'+C.set(O,def.unlessover)+'[POS]')
     ret += 'if ('+conds.join(' && ')+'){'
-    if (U.contains(def.draw,['neighbourcount'])){
+    if (C.contains(def.draw,['neighbourcount'])){
       ret += 'var NEIGHBOURCOUNT=1; '
     }
     if (def.draw && def.draw.neighbours){
@@ -162,7 +161,7 @@ export default C => Object.assign(C,{
     let ret = ''
     if (def.draw && def.draw.start){
       ret += C.performdraw({...(O||{}), useforpos: 'STARTPOS'},def.draw.start)
-      /*if (U.contains(def.draw.start,['target'])){
+      /*if (C.contains(def.draw.start,['target'])){
         ret += 'POS=STARTPOS; '
         ret += C.performdraw(O,def.draw.start)
       } else {

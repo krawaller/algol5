@@ -1,8 +1,6 @@
 import map from 'lodash/collection/map'
 import isNumber from 'lodash/lang/isNumber'
 
-import U from "../utils"
-
 export default C => Object.assign(C,{
 
 	// ------------ GENERAL STUFF -----------

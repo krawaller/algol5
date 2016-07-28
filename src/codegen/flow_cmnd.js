@@ -1,5 +1,3 @@
-import { contains, cmndRules } from '../utils'
-
 export default C => Object.assign(C,{
 
     /*
@@ -17,7 +15,7 @@ export default C => Object.assign(C,{
         ${C.prepareCommandStep(O)}
         ${C.applyCommandConsequences(O)}
         ${C.saveCommandStep(O)}
-        ${C.applyLinkInstructions(O,cmndRules(O))}
+        ${C.applyLinkInstructions(O,C.cmndRules(O))}
     `,
 
     /*
@@ -28,7 +26,7 @@ export default C => Object.assign(C,{
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({},step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        ${contains(cmndRules(O),['spawn']) ? 'var newunitid = step.newunitid; ' : ''}
+        ${C.contains(C.cmndRules(O),['spawn']) ? 'var newunitid = step.newunitid; ' : ''}
     `,
 
     /*
@@ -42,7 +40,7 @@ export default C => Object.assign(C,{
         UNITLAYERS: UNITLAYERS,
         stepid: newstepid,
         path: step.path.concat('${O.cmndname}')
-        ${contains(cmndRules(O),['spawn']) ? ', newunitid: newunitid' : ''}
+        ${C.contains(C.cmndRules(O),['spawn']) ? ', newunitid: newunitid' : ''}
     }
     `,
 
@@ -58,11 +56,11 @@ export default C => Object.assign(C,{
     assumes cmndname as option
     */
     applyCommandConsequences: (O)=> `
-        ${C.applyEffectInstructions(O,cmndRules(O))}
+        ${C.applyEffectInstructions(O,C.cmndRules(O))}
         MARKS = {};
         ${C.calculateUnitLayers(O)};
         ARTIFACTS = ${C.blankArtifactLayers(O)};
-        ${C.applyGeneratorInstructions(O,cmndRules(O))}
+        ${C.applyGeneratorInstructions(O,C.cmndRules(O))}
     `
 
 })

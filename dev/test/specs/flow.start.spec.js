@@ -87,7 +87,8 @@ describe("The flow start stuff",()=>{
             expected: {
                 steps: {},
                 player: 'foo',
-                turn:8
+                turn:8,
+                links: {}
             }
         }
     })

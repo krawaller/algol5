@@ -51,6 +51,7 @@ export default C => Object.assign(C,{
     saveCommandStep: (O)=> `
         var newstepid = step.stepid+'-'+'${O.cmndname}';
         var newstep = turn.steps[newstepid] = Object.assign({},step,${C.makeCommandStep(O)});
+        turn.links[newstepid] = {};
     `,
 
     /*

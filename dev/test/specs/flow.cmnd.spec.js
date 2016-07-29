@@ -80,7 +80,7 @@ describe("The flow commands",()=>{
                     otherstuff: 'saveme',
                     stepid: 'oldid',
                 },
-                turn: {steps: {foo:'bar'}}
+                turn: {steps: {foo:'bar'},links:{}}
             },
             context: {
                 makeCommandStep: (O)=> `{somestuff:"${O.cmndname}",stepid:newstepid}`
@@ -96,7 +96,8 @@ describe("The flow commands",()=>{
             additionally: {
                 'step was copied': 'step !== newstep',
                 'newstep was saved': 'newstep === turn.steps["oldid-somecmnd"]',
-                'otherstep wasnt removed': 'turn.steps.foo === "bar"'
+                'otherstep wasnt removed': 'turn.steps.foo === "bar"',
+                'stepid was added to links': 'turn.links[newstepid]'
             }
         }
     })

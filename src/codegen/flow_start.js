@@ -38,7 +38,8 @@ export default C => Object.assign(C,{
     makeNewTurn: (O)=> `{
         steps: {},
         player: player,
-        turn: turn.turn+1
+        turn: turn.turn+1,
+        links: {}
     }`,
 
     /*

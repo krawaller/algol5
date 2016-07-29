@@ -47,6 +47,7 @@ export default C => Object.assign(C,{
     saveMarkStep: (O)=> `
         var newstepid = step.stepid+'-'+markpos;
         var newstep = turn.steps[newstepid] = Object.assign({},step,${C.makeMarkStep(O)});
+        turn.links[newstepid] = {};
     `,
 
     /*

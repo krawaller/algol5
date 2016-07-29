@@ -116,7 +116,7 @@ describe("The flow mark stuff",()=>{
                     data: 'overwriteme',
                     otherdata: 'keepme'
                 },
-                turn: {steps: {foo:'bar'}}
+                turn: {steps: {foo:'bar'},links:{}}
             },
             context: {
                 makeMarkStep: (O)=> '{data:"newdata",stepid:newstepid}'
@@ -132,7 +132,8 @@ describe("The flow mark stuff",()=>{
             additionally: {
                 'step was copied': 'step !== newstep',
                 'newstep was saved': 'newstep === turn.steps["oldid-somepos"]',
-                'otherstep wasnt removed': 'turn.steps.foo === "bar"'
+                'otherstep wasnt removed': 'turn.steps.foo === "bar"',
+                'stepid was added to links': 'turn.links[newstepid]'
             }
         }
     })

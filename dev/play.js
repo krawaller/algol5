@@ -5,7 +5,7 @@ import {js_beautify} from 'js-beautify'
 import daggers from '../games/daggers.json'
 import amazon from '../games/amazon.json'
 
-let code = lib.makeGameObject({rules:amazon});
+let code = lib.makeGameObject({rules:daggers});
 console.log("\n***DAGGERS***\n",js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n'))
 
 

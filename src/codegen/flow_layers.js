@@ -90,7 +90,7 @@ export default C => Object.assign(C,{
     Calculates all terrain layers and returns them. 
     This should be done per player if any terrain has owner.
     */
-    terrainLayers: (O,forplr)=> {
+    terrainLayers: (O)=> {
         let terrain = reduce(O.rules.board.terrain,(mem,def,name)=> {
             mem[name] = {};
             if (isArray(def)){ // no ownership
@@ -103,7 +103,7 @@ export default C => Object.assign(C,{
                     flatten(def[owner].map(C.convertToEntities)).forEach(e=>{
                         e.owner = owner
                         mem[name][e.pos] = e
-                        let prefix = owner === 0 ? 'neutral' : owner === forplr ? 'my' : 'opp'
+                        let prefix = owner === 0 ? 'neutral' : owner === O.player ? 'my' : 'opp'
                         mem[prefix+name] = mem[prefix+name] || {}
                         mem[prefix+name][e.pos] = e
                     })

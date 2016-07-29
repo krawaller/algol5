@@ -1,10 +1,21 @@
 
-* finish packager
+
 * add endgame step thing
 * finish linking
 * add turn hydrator
 * add performcmnd func
 
+* fix newunitid vs nextunitid
+
+* O.name when start etc
+
+* anyat doesnt need hasOwnProperty
+
+
+* walker
+  - walkedsquares, maybe dont need to save (walklength same)
+  - stopreason, dont save needlessly
+  - dir, always store in var to prevent silly lookup
 
 var turntree = {
   steps: {
@@ -33,3 +44,6 @@ var step = {
 var linkcollection = { // action is cmnd or position
   action: LINK
 }
+
+----
+

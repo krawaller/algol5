@@ -49,7 +49,7 @@
   "generators": {
     "findcrowntargets": {
       "type": "neighbour",
-      "dirs": ["list",[1,2,3,4,5,6,7,8]],
+      "dirs": [1,2,3,4,5,6,7,8],
       "start": "selectunit",
       "draw": {
         "neighbours": {
@@ -61,7 +61,7 @@
     "finddaggertargets": {
       "type": "walker",
       "start": "selectunit",
-      "dirs": ["list",[8,1,2,4,5,6]],
+      "dirs": [8,1,2,4,5,6],
       "blocks": "units",
       "max": ["ifelse",["valinlist",["dir"],[8,1,2]],1,8],
       "draw": {

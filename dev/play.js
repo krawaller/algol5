@@ -1,13 +1,17 @@
 import lib from '../src/codegen/'
 
+import fs from 'fs'
+
 import {js_beautify} from 'js-beautify'
 
 import daggers from '../games/daggers.json'
 import amazon from '../games/amazon.json'
 
 let code = lib.makeGameObject({rules:daggers});
-console.log("\n***DAGGERS***\n",js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n'))
+code = js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n');
+console.log("\n***DAGGERS***\n",code)
 
+fs.writeFile('./daggers-output.js',code);
 
 /*
 

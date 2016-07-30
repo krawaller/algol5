@@ -15,22 +15,22 @@
     "queens": {"1":["d10","g10","a7","j7"],"2":["a4","d1","g1","j4"]}
   },
   "startturn": {
-    "allow": ["selectunit"]
+    "link": ["selectunit"]
   },
   "marks": {
     "selectunit": {
       "from": "myunits",
       "runGenerator": "findtargets",
-      "allow": ["selectmovetarget"]
+      "link": ["selectmovetarget"]
     },
     "selectmovetarget": {
       "nodeadends": true,
       "from": "targets",
-      "allow": ["move"]
+      "link": ["move"]
     },
     "selectfiretarget": {
       "from": "targets",
-      "allow": ["fire"]
+      "link": ["fire"]
     }
   },
   "commands": {
@@ -40,11 +40,11 @@
         ["setturnpos","movedto","selectmovetarget"]
       ],
       "runGenerator": "findtargets",
-      "allow": ["selectfiretarget"]
+      "link": ["selectfiretarget"]
     },
     "fire": {
       "applyEffect": ["spawn","selectfiretarget","fires",0],
-      "allow": ["endturn"]
+      "link": ["endturn"]
     }
   },
   "generators": {

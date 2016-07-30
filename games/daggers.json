@@ -20,21 +20,21 @@
     "daggers": {"1":[["rect","c7","f7"]],"2":["c3","f3",["rect","b2","g2"]]}
   },
   "endgame": {
-    "infiltration": ["overlaps","mycrowns","oppbases"],
-    "kingkill": ["notempty","oppdeadcrowns"]
+    "infiltration":{ "condition": ["overlaps","mycrowns","oppbases"] },
+    "kingkill": { "condition": ["notempty","oppdeadcrowns"] }
   },
   "startturn": {
-    "allow": ["selectunit"]
+    "link": "selectunit"
   },
   "marks": {
     "selectunit": {
       "from": "myunits",
       "runGenerator": ["ifelse",["anyat","mycrowns","selectunit"],"findcrowntargets","finddaggertargets"],
-      "allow": ["selectmovetarget"]
+      "link": "selectmovetarget"
     },
     "selectmovetarget": {
       "from": "movetarget",
-      "allow": ["move"]
+      "link": "move"
     }
   },
   "commands": {
@@ -43,7 +43,7 @@
         ["killat","selectmovetarget"],
         ["moveat","selectunit","selectmovetarget"]
       ],
-      "allow": ["endturn"]
+      "link": "endturn"
     }
   },
   "generators": {

@@ -27,8 +27,13 @@ describe("The flow commands",()=>{
                     }
                 }
             },
-            scope: {links:{}},
-            mutations: {links:{endturn:'lose',gameendby:'gnarf'}}
+            scope: {
+                newstepid: 'NEW',
+                turn: { links: { NEW: {} } },
+            },
+            mutations: {
+                turn: { links: { NEW: {lose:'gnarf'} } }
+            }
         },
         'when winning, no who': {
             options: {
@@ -39,8 +44,13 @@ describe("The flow commands",()=>{
                     }
                 }
             },
-            scope: {links:{}},
-            mutations: {links:{endturn:'win',gameendby:'gnarf'}}
+            scope: {
+                newstepid: 'NEW',
+                turn: { links: { NEW: {} } },
+            },
+            mutations: {
+                turn: { links: { NEW: {win:'gnarf'} } }
+            }
         },
         'when draw, depending on gen': {
             options: {
@@ -67,9 +77,12 @@ describe("The flow commands",()=>{
                     borks: {a1: {foo:'bar'}},
                     blurbs: {}
                 },
-                links: {}
+                newstepid: 'NEW',
+                turn: { links: { NEW: {} } },
             },
-            mutations: {links:{endturn:'draw',gameendby:'wee'}}
+            mutations: {
+                turn: { links: { NEW: {draw:'wee'} } }
+            }
         },
         'when linking to endturn and falsy unless': {
             options: {
@@ -81,8 +94,13 @@ describe("The flow commands",()=>{
                     }
                 }
             },
-            scope: {links:{}},
-            mutations: {links:{endturn:'next'}}
+            scope: {
+                newstepid: 'NEW',
+                turn: { links: { NEW: {} } },
+            },
+            mutations: {
+                turn: { links: { NEW: {endturn:'maybe'} } }
+            }
         },
         'when linking to endturn and truthy unless': {
             arg: ['endturn'],
@@ -96,8 +114,13 @@ describe("The flow commands",()=>{
                     }
                 }
             },
-            scope: {blockedby: "NOTHING"},
-            mutations: {blockedby:'silly'}
+            scope: {
+                newstepid: 'NEW',
+                turn: { links: { NEW: {} } },
+            },
+            mutations: {
+                turn: { links: { NEW: {} }, blockedby: 'silly' }
+            }
         },
         'when linking to endturn truthilly depending on single gen': {
             options: {
@@ -123,14 +146,15 @@ describe("The flow commands",()=>{
                     borks: {a1: {foo:'bar'}},
                     blurbs: {}
                 },
-                links: {}
+                newstepid: 'NEW',
+                turn: { links: { NEW: {} } },
             },
             mutations: {
+                turn: { links: { NEW: {endturn:'maybe'} } },
                 ARTIFACTS: {
                     borks: {a1: {foo:'bar'}},
                     blurbs: {a1: {foo:'bar'}}
-                },
-                links: {endturn:'next'}
+                }
             }
         },
         'when linking to endturn but unlessed by generator': {
@@ -157,14 +181,11 @@ describe("The flow commands",()=>{
                     borks: {a1: {foo:'bar'}},
                     blurbs: {}
                 },
-                blockedby: "NOTHING"
+                newstepid: 'NEW',
+                turn: { links: { NEW: {} } },
             },
             mutations: {
-                ARTIFACTS: {
-                    borks: {a1: {foo:'bar'}},
-                    blurbs: {a1: {foo:'bar'}}
-                },
-                blockedby: 'blurbs'
+                turn: { links: { NEW: {} }, blockedby: 'blurbs' }
             }
         }
     })

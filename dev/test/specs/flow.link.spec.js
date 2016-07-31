@@ -30,6 +30,7 @@ describe("The flow commands",()=>{
             scope: {
                 newstepid: 'NEW',
                 turn: { links: { NEW: {} } },
+                otherplayer: 'foo'
             },
             mutations: {
                 turn: { links: { NEW: {lose:'gnarf'} } }
@@ -47,6 +48,7 @@ describe("The flow commands",()=>{
             scope: {
                 newstepid: 'NEW',
                 turn: { links: { NEW: {} } },
+                otherplayer: 'foo'
             },
             mutations: {
                 turn: { links: { NEW: {win:'gnarf'} } }
@@ -79,6 +81,7 @@ describe("The flow commands",()=>{
                 },
                 newstepid: 'NEW',
                 turn: { links: { NEW: {} } },
+                otherplayer: 'foo',
             },
             mutations: {
                 turn: { links: { NEW: {draw:'wee'} } }
@@ -96,10 +99,11 @@ describe("The flow commands",()=>{
             },
             scope: {
                 newstepid: 'NEW',
+                otherplayer: 2,
                 turn: { links: { NEW: {} } },
             },
             mutations: {
-                turn: { links: { NEW: {endturn:'maybe'} } }
+                turn: { links: { NEW: {endturn:'start2'} } }
             }
         },
         'when linking to endturn and truthy unless': {
@@ -117,6 +121,7 @@ describe("The flow commands",()=>{
             scope: {
                 newstepid: 'NEW',
                 turn: { links: { NEW: {} } },
+                otherplayer: 'foo'
             },
             mutations: {
                 turn: { links: { NEW: {} }, blockedby: 'silly' }
@@ -148,9 +153,10 @@ describe("The flow commands",()=>{
                 },
                 newstepid: 'NEW',
                 turn: { links: { NEW: {} } },
+                otherplayer: 1
             },
             mutations: {
-                turn: { links: { NEW: {endturn:'maybe'} } },
+                turn: { links: { NEW: {endturn:'start1'} } },
                 ARTIFACTS: {
                     borks: {a1: {foo:'bar'}},
                     blurbs: {a1: {foo:'bar'}}
@@ -183,6 +189,7 @@ describe("The flow commands",()=>{
                 },
                 newstepid: 'NEW',
                 turn: { links: { NEW: {} } },
+                otherplayer: 'foo',
             },
             mutations: {
                 turn: { links: { NEW: {} }, blockedby: 'blurbs' }

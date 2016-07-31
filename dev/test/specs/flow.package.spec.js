@@ -92,7 +92,8 @@ describe("The flow package commands",()=>{
             },
             mutations: {
                 ownernames: ['neutral','my','opp'],
-                player: 1
+                player: 1,
+                otherplayer: 2
             }
         },
         'for game with non-neutral terrain, plr 2': {
@@ -106,7 +107,8 @@ describe("The flow package commands",()=>{
             mutations: {
                 terrain: 'terrain',
                 ownernames: ['neutral','opp','my'],
-                player: 2
+                player: 2,
+                otherplayer: 1
             }
         }
     })

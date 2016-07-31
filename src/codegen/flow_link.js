@@ -12,7 +12,7 @@ export default C => Object.assign(C,{
                 var result = winner === ${O.player} ? 'win' : winner ? 'lose' : 'draw';
                 turn.links[newstepid][result] = '${name}';
             }`
-        )).concat('turn.links[newstepid].endturn = "maybe"; ').join(' else ')
+        )).concat('turn.links[newstepid].endturn = "start"+otherplayer; ').join(' else ')
     },
 
     applyLink(O,name) {

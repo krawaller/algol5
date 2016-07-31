@@ -35,6 +35,7 @@ export default C => Object.assign(C,{
         ${C.isTerrainNeutral(O) ? '' : 'var terrain='+C.terrainLayers(O)+';' }
         var ownernames = ${O.player === 2 ? '["neutral","opp","my"]' : '["neutral","my","opp"]'};
         var player = ${O.player};
+        var otherplayer = ${O.player === 1 ? 2 : 1};
     `,
 
     addPlayerFunctions: O=> `

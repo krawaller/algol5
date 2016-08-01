@@ -26,7 +26,7 @@ export default C => Object.assign(C,{
     stompid: (O,id,pos)=> C.moveid(O,id,pos)+' '+C.killat(O,pos),
     stompat: (O,from,to)=> C.moveat(O,from,to,['killat',to]),
     killid: (O,id)=> "delete UNITDATA["+C.id(O,id)+"]; ",
-    killat: (O,pos)=> "delete UNITDATA[ (UNITLAYERS.all["+C.position(O,pos)+"] || {}).id ]; ",
+    killat: (O,pos)=> "delete UNITDATA[ (UNITLAYERS.units["+C.position(O,pos)+"] || {}).id ]; ",
     killin: (O,set)=> C.foridin(O,set,['killid',['loopid']]),
     setid: (O,id,propname,val)=> `
         UNITDATA[${C.id(O,id)}]=Object.assign({},UNITDATA[${C.id(O,id)}],{
@@ -34,7 +34,7 @@ export default C => Object.assign(C,{
         });
     `,
     setat: (O,pos,propname,val,and)=> `
-        var unitid = (UNITLAYERS.all[${C.position(O,pos)}] || {}).id;
+        var unitid = (UNITLAYERS.units[${C.position(O,pos)}] || {}).id;
         if (unitid){
             UNITDATA[unitid]=Object.assign({},UNITDATA[unitid],{${C.value(O,propname)}:${C.value(O,val)}});
             ${and ? C.applyeffect(O,and) : ''}
@@ -69,7 +69,7 @@ export default C => Object.assign(C,{
         return `
             var LOOPID;
             for(var POS in ${setcode}){
-                ${obvious ? 'LOOPID='+setcode+'[POS].id' : 'if (LOOPID=(UNITLAYERS.all[POS]||{}).id){' }
+                ${obvious ? 'LOOPID='+setcode+'[POS].id' : 'if (LOOPID=(UNITLAYERS.units[POS]||{}).id){' }
                 ${C.applyeffect(O,effect) /*TODO - check that it uses ['loopid'] ? */}
                 ${!obvious ? '}' : '' }
             }

@@ -98,7 +98,7 @@ describe("The flow start stuff",()=>{
                 step: {UNITDATA: 'woo'}
             },
             context: {
-                calculateUnitLayers: (O)=> 'var didunits=UNITDATA+"'+(O && O.defineUnitLayers?'yes':'no')+'"; ',
+                calculateUnitLayers: (O)=> 'var didunits=UNITDATA+"'+(O && O.defineUnitlayers?'yes':'no')+'"; ',
                 blankArtifactLayers: (O)=> '(Object.keys(MARKS).length === 0)+1'
             },
             mutations: {
@@ -110,8 +110,7 @@ describe("The flow start stuff",()=>{
         },
         'if using turnvars': {
             scope: {
-                step: {TURNVARS: 'turnvars'},
-                UNITLAYERS: {}
+                step: {TURNVARS: 'turnvars'}
             },
             context: {
                 usesTurnVars: (O)=> true,

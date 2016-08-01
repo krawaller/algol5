@@ -32,7 +32,7 @@ describe("The effect commands",()=>{
             arg: ['layer','somelayer'],
             scope: {
                 ARTIFACTS: { somelayer: {x1:"FOO",x2:"BAR",x3:"BAZ"} },
-                UNITLAYERS: { all: {x1:{id:'unit1'},x3:{id:'unit3'}} },
+                UNITLAYERS: { units: {x1:{id:'unit1'},x3:{id:'unit3'}} },
                 UNITDATA: { unit1: {}, unit2: {}, unit3: {} }
             },
             mutations: {
@@ -45,7 +45,7 @@ describe("The effect commands",()=>{
             args: [ ['layer','somelayer'], 'prop', ['sum',['loopid'],['target']] ],
             scope: {
                 ARTIFACTS: { somelayer: {x1:"FOO",x2:"BAR",x3:"BAZ"} },
-                UNITLAYERS: { all: {x1:{id:'unit1'},x3:{id:'unit3'}} },
+                UNITLAYERS: { units: {x1:{id:'unit1'},x3:{id:'unit3'}} },
                 UNITDATA: { unit1: {}, unit2: {}, unit3: {} }
             },
             mutations: {
@@ -60,7 +60,7 @@ describe("The effect commands",()=>{
             scope: {
                 ARTIFACTS: { somelayer: {x1:"FOO",x2:"BAR",x3:"BAZ"} },
                 UNITLAYERS: {
-                    all: {x1:{id:'unit1'},x3:{id:'unit3'}}
+                    units: {x1:{id:'unit1'},x3:{id:'unit3'}}
                 },
                 UNITDATA: {
                     unit1: {}, unit2: {}, unit3: {}
@@ -79,7 +79,7 @@ describe("The effect commands",()=>{
             scope: {
                 ARTIFACTS: { somelayer: {x1:"FOO",x2:"BAR",x3:"BAZ"} },
                 UNITLAYERS: {
-                    all: {x1:{id:'unit1'},x3:{id:'unit3'}}
+                    units: {x1:{id:'unit1'},x3:{id:'unit3'}}
                 },
                 UNITDATA: {
                     unit1: {}, unit2: {}, unit3: {}
@@ -116,7 +116,7 @@ describe("The effect commands",()=>{
             args: [['mark','1st'],['mark','2nd']],
             scope: {
                 MARKS: {'1st':'a','2nd':'b'},
-                UNITLAYERS: {all: {a:{id:'unit1',pos:'a'},b:{id:'unit2',pos:'b'}}},
+                UNITLAYERS: {units: {a:{id:'unit1',pos:'a'},b:{id:'unit2',pos:'b'}}},
                 UNITDATA: {unit1:{pos:'a'},unit2:{pos:'b'}}
             },
             mutations: {
@@ -134,12 +134,12 @@ describe("The effect commands",()=>{
     test(E,'killat',{
         'when noone there': {
             arg: ['mark','mymark'],
-            scope: { UNITDATA: {}, UNITLAYERS: {all: {}}, 'MARKS': {mymark:'pos'}},
+            scope: { UNITDATA: {}, UNITLAYERS: {units: {}}, 'MARKS': {mymark:'pos'}},
             mutations: { UNITDATA: {} }
         },
         'when someone is there': {
             args: [['mark','mymark']],
-            scope: { UNITDATA: {7:{}}, UNITLAYERS: {all: {pos:{id:7}}}, 'MARKS': {mymark:'pos'}},
+            scope: { UNITDATA: {7:{}}, UNITLAYERS: {units: {pos:{id:7}}}, 'MARKS': {mymark:'pos'}},
             mutations: { UNITDATA: {} },
         }
     });
@@ -155,7 +155,7 @@ describe("The effect commands",()=>{
             args: [['mark','from'],['mark','to']],
             scope: {
                 UNITDATA: { 42: {pos:'origin'}},
-                UNITLAYERS: { all: {origin:{id:42}} },
+                UNITLAYERS: { units: {origin:{id:42}} },
                 MARKS: {from:'origin',to:'destination'}
             },
             mutations: { UNITDATA: { 42: {pos:'destination'}} }
@@ -173,7 +173,7 @@ describe("The effect commands",()=>{
             args: [['mark','at'],['value','foo'],['sum',2,3]],
             scope: {
                 UNITDATA: { 'u42': {foo:0}},
-                UNITLAYERS: { all: {pos:{id:'u42'}} },
+                UNITLAYERS: { units: {pos:{id:'u42'}} },
                 MARKS: {at:'pos'}
             },
             mutations: { UNITDATA: { 'u42':{foo:5} } },
@@ -202,7 +202,7 @@ describe("The effect commands",()=>{
             args: [42,['mark','mymark']],
             scope: {
                 UNITDATA: { 42: {pos:'somepos'}, doomed: {}},
-                UNITLAYERS: { all: {otherpos: {id: 'doomed'}} },
+                UNITLAYERS: { units: {otherpos: {id: 'doomed'}} },
                 MARKS: {mymark:'otherpos'}
             },
             mutations: { UNITDATA: { 42: {pos:'otherpos'} } }
@@ -213,7 +213,7 @@ describe("The effect commands",()=>{
             args: [['mark','from'],['mark','to']],
             scope: {
                 UNITDATA: { 42: {pos:'origin'}, doomed: {pos:'destination'}},
-                UNITLAYERS: { all: {origin:{id:42},destination:{id:'doomed'}} },
+                UNITLAYERS: { units: {origin:{id:42},destination:{id:'doomed'}} },
                 MARKS: {from:'origin',to:'destination'}
             },
             mutations: { UNITDATA: { 42: {pos:'destination'}} }
@@ -222,7 +222,7 @@ describe("The effect commands",()=>{
             args: [['mark','from'],['mark','to']],
             scope: {
                 UNITDATA: { notdoomed: {pos:'destination'}},
-                UNITLAYERS: { all: {destination:{id:'notdoomed'}} },
+                UNITLAYERS: { units: {destination:{id:'notdoomed'}} },
                 MARKS: {from:'origin',to:'destination'}
             },
             mutations: { UNITDATA: { notdoomed: {pos:'destination'}} }

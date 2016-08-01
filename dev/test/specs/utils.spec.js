@@ -1,8 +1,8 @@
 import U from '../../../src/codegen'
 import test from '../libtester'
 
-import amazon from '../../../games/amazon.json'
-import daggers from '../../../games/daggers.json'
+import amazon from '../../../games/defs/amazon.json'
+import daggers from '../../../games/defs/daggers.json'
 
 test("the UTILS funcs",U,{
 	"contains(haystack,needle)": {

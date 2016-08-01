@@ -92,7 +92,7 @@ describe('the core funcs',()=>{
         },
         'the anyat cmnd when pointing to layer with that pos': {
             arg: ['anyat','mylayer',['pos','a1']],
-            scope: {ARTIFACTS:{mylayer:{a1:[]}}},
+            scope: {ARTIFACTS:{mylayer:{a1:1}}},
             expected: true
         },
         'the anyat cmnd when pointing to layer without pos': {
@@ -317,7 +317,7 @@ describe('the core funcs',()=>{
             arg: ['idat',['mark','mymark']],
             scope: {
                 MARKS: {mymark:'pos'},
-                UNITLAYERS: {all:{pos:{id:7}}}
+                UNITLAYERS: {units:{pos:{id:7}}}
             },
             expected: 7
         },
@@ -333,26 +333,20 @@ describe('the core funcs',()=>{
         'when no mappings specified': {
             arg: 'mylayer',
             scope: {
-                ARTIFACTS: {'mylayer': 'FOO'}
+                ARTIFACTS: {'mylayer': 'FOO'},
+            },
+            context: {
+                blankUnitLayers: ()=> ({})
             },
             expected: 'FOO'
         },
         'when a mapping is relevant': {
             arg: 'mylayer',
-            options: {
-                layermappings: {
-                    mylayer: 'MUPPETS'
-                }
-            },
             scope: {
-                MUPPETS: {mylayer:'FOO'}
+                UNITLAYERS: {mylayer:'FOO'}
             },
-            expected: 'FOO'
-        },
-        'when we want special case "units"': {
-            arg: 'units',
-            scope: {
-                UNITLAYERS: {all:'FOO'}
+            context: {
+                blankUnitLayers: ()=> ({mylayer:{}})
             },
             expected: 'FOO'
         },

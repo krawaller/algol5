@@ -51,7 +51,7 @@ export default C => Object.assign(C,{
         var ARTIFACTS = ${C.blankArtifactLayers(O)}; 
         var UNITDATA = step.UNITDATA;
         ${C.usesTurnVars(O) ? 'var TURNVARS = step.TURNVARS; ' : ''}
-        ${C.calculateUnitLayers({...O,defineUnitLayers:true})}
+        ${C.calculateUnitLayers({...O,defineUnitlayers:true})}
     `,
 
     /*

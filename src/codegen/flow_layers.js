@@ -25,7 +25,7 @@ export default C => Object.assign(C,{
             var unitgroup = currentunit.group;
             var unitpos = currentunit.pos;
             var owner = ownernames[currentunit.owner]
-            UNITLAYERS.all[unitpos]
+            UNITLAYERS.units[unitpos]
                 = UNITLAYERS[unitgroup][unitpos]
                 = UNITLAYERS[owner + unitgroup][unitpos]
                 = UNITLAYERS[owner +'units'][unitpos]
@@ -35,11 +35,14 @@ export default C => Object.assign(C,{
     /*
     Calculate blank unit layers yada yada
     */
-    blankUnitLayers: (O)=> JSON.stringify(reduce(
-        Object.keys(O && O.rules && O.rules.setup || {}).concat(C.deduceDynamicGroups(O && O.rules && O.rules.commands || {})),
-        (mem,g)=>({ ...mem, [g]: {}, ['my'+g]: {}, ['opp'+g]: {}, ['neutral'+g]: {} }),
-        {}
-    )),
+    blankUnitLayers: (O,pure)=> {
+        let ret = reduce(
+            Object.keys(O && O.rules && O.rules.setup || {}).concat(C.deduceDynamicGroups(O && O.rules && O.rules.commands || {})).concat('units'),
+            (mem,g)=>({ ...mem, [g]: {}, ['my'+g]: {}, ['opp'+g]: {}, ['neutral'+g]: {} }),
+            {}
+        )
+        return pure ? ret : JSON.stringify(ret)
+    },
 
     /*
     the initial unit data blob

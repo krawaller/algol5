@@ -60,7 +60,7 @@ export default C => Object.assign(C,{
     applyCommandConsequences: (O)=> `
         ${C.applyEffectInstructions(O,C.cmndRules(O))}
         MARKS = {};
-        ${C.calculateUnitLayers(O)};
+        ${C.calculateUnitLayers(O)}
         ARTIFACTS = ${C.blankArtifactLayers(O)};
         ${C.applyGeneratorInstructions(O,C.cmndRules(O))}
     `

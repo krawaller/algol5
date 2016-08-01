@@ -5,8 +5,6 @@
 * add turn hydrator
 * add performcmnd func
 
-* fix newunitid vs nextunitid
-
 * O.name when start etc
 
 * anyat doesnt need hasOwnProperty

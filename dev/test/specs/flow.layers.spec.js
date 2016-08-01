@@ -80,7 +80,8 @@ describe("The seed commands",()=> {
                 'aces':{},'jacks':{},'kings':{},'queens':{},
                 'myaces':{},'myjacks':{},'mykings':{},'myqueens':{},
                 'neutralaces':{},'neutraljacks':{},'neutralkings':{},'neutralqueens':{},
-                'oppaces':{},'oppjacks':{},'oppkings':{},'oppqueens':{}
+                'oppaces':{},'oppjacks':{},'oppkings':{},'oppqueens':{},
+                'myunits':{},'oppunits':{},'units':{},'neutralunits':{}
             }
         }
     })

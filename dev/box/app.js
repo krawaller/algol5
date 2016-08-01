@@ -1,5 +1,5 @@
-import daggers from '../../games/built/daggers'
+import krieg from '../../games/built/krieg'
 import play from '../../src/play'
 
-window.daggers = daggers
+window.krieg = krieg
 window.play = play

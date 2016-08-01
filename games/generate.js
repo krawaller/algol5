@@ -6,8 +6,9 @@ import {js_beautify} from 'js-beautify'
 
 import daggers from './defs/daggers.json'
 import amazon from './defs/amazon.json'
+import krieg from './defs/krieg.json'
 
-let code = lib.makeGameObject({rules:daggers});
+let code = lib.makeGameObject({rules:krieg});
 
 code = `
 	let makeGame = ${code};
@@ -16,7 +17,6 @@ code = `
 
 code = js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n');
 
-console.log(__dirname)
 //console.log("\n***DAGGERS***\n",code)
 
-fs.writeFileSync(__dirname+'/built/daggers.js',code);
+fs.writeFileSync(__dirname+'/built/krieg.js',code);

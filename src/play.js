@@ -28,13 +28,14 @@ let play = {
                     let newturn = play.tryToReachTurnEnd(game, game[func](turn,step))
                     if (newturn.canend){
                         turn.next[stepid] = newturn
+                        // TODO - save newturn too?
                     } else {
                         steplinks.win = newturn.blockedby || 'starvation' // TODO - gamespec logic?
                         turn.ends.win.push(stepid)
                         delete steplinks.endturn
                     }
                 } else {
-                    let nextstepid = stepid + '_' + action
+                    let nextstepid = stepid + '-' + action
                     checkSteps.push( steps[nextstepid] || (steps[nextstepid] = game[func](turn,step,action)) )
                 }
             }
@@ -56,7 +57,7 @@ let play = {
                 if (endgameactions[action] || action === 'endturn' || canalwaysend[func]){
                     turn.canend = true
                 } else {
-                    let nextstepid = stepid + '_' + action
+                    let nextstepid = stepid + '-' + action
                     checkSteps.push( steps[nextstepid] || (steps[nextstepid] = game[func](turn,step,action)) )
                 }
             }

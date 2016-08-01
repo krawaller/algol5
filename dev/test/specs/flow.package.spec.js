@@ -61,7 +61,7 @@ describe("The flow package commands",()=>{
             mutations: {
                 BOARD: 'layers',
                 connections: 'board',
-                terrain: 'terrain'
+                TERRAIN: 'terrain'
             }
         }
     })
@@ -105,7 +105,7 @@ describe("The flow package commands",()=>{
                 terrainLayers: O=> '"terrain"'
             },
             mutations: {
-                terrain: 'terrain',
+                TERRAIN: 'terrain',
                 ownernames: ['neutral','opp','my'],
                 player: 2,
                 otherplayer: 1

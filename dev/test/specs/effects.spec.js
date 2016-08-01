@@ -183,17 +183,17 @@ describe("The effect commands",()=>{
     test(E,'spawn',{
         'for just pos and group': {
             args: [['mark','mymark'],'fools'],
-            scope: { UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, nextunitid: 7, player: 666 },
-            mutations: { UNITDATA: {unit1:{}, spawn7:{id:'spawn7',group:'fools',owner:666,pos:'somepos'}}, nextunitid: 8 }
+            scope: { UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, clones: 7, player: 666 },
+            mutations: { UNITDATA: {unit1:{}, spawn7:{id:'spawn7',group:'fools',owner:666,pos:'somepos'}}, clones: 8 }
         },
         'for pos, group, owner and prop obj': {
             args: [['mark','mymark'],['value','fools'],['value',7],{foo:['value','bar'],baz:['value','bin']}],
-            scope: {UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, nextunitid: 5},
+            scope: {UNITDATA: {unit1:{}}, MARKS: {mymark:'somepos'}, clones: 5},
             mutations: {
                 UNITDATA: {
                     unit1:{},
                     spawn5:{id:'spawn5',group:'fools',owner:7,pos:'somepos',foo:'bar',baz:'bin'}},
-                nextunitid: 6
+                clones: 6
             },
         }
     });

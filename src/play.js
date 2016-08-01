@@ -1,4 +1,4 @@
-// TODO - make endturn point to correct start instead of 'maybe'
+
 
 let endgameactions = {win:1,lose:1,draw:1}
 
@@ -10,22 +10,29 @@ let play = {
             win: [],
             draw: [],
             lose: [],
-            next: []
+        }
+        turn.next = {
+
         }
         while(checkSteps.length){
             let step = checkSteps.pop()
             let stepid = step.stepid
-            let checkActions = Object.keys(links[stepid])
+            let steplinks = links[stepid]
+            let checkActions = Object.keys(steplinks)
             while(checkActions.length){
                 let action = checkActions.pop()
                 let func = links[action]
                 if (endgameactions[action]){
                     turn.ends[action].push(stepid)
                 } else if (action === 'endturn'){
-                    let newturn = game[func]()
-
-                    // ....
-                    
+                    let newturn = play.tryToReachTurnEnd(game, game[func]())
+                    if (newturn.canend){
+                        turn.next[stepid] = newturn
+                    } else {
+                        steplinks.win = newturn.blockedby || 'starvation' // TODO - gamespec logic?
+                        turn.ends.win.push(stepid)
+                        delete steplinks.endturn
+                    }
                 } else {
                     let nextstepid = stepid + '_' + action
                     checkSteps.push( steps[nextstepid] || (steps[nextstepid] = game[func](turn,step,action)) )

@@ -1474,15 +1474,15 @@ let makeGame =
           var MARKS = Object.assign({}, step.MARKS, {
             selectunit: markpos
           });
-          if (!!(ARTIFACTS.mycrowns[MARKS['selectunit']])) {
+          if (!!(UNITLAYERS.mycrowns[MARKS['selectunit']])) {
             var STARTPOS = MARKS['selectunit'];
             var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
             var startconnections = connections[STARTPOS];
             for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
               var POS = startconnections[neighbourdirs[dirnbr]];
               if (POS) {
-                if (!(ARTIFACTS.myunits[POS])) {
-                  ARTIFACTS[(!!(ARTIFACTS.oppunits[POS]) ? 'killtarget' : 'movetarget')][POS] = {};
+                if (!(UNITLAYERS.myunits[POS])) {
+                  ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'killtarget' : 'movetarget')][POS] = {};
                 }
               }
             } 
@@ -1496,7 +1496,7 @@ let makeGame =
               var nextpos = "";
               var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
               var POS = STARTPOS;
-              var BLOCKS = UNITLAYERS.all;
+              var BLOCKS = UNITLAYERS.units;
               var LENGTH = 0;
               while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(nextpos = connections[POS][DIR]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null))) {
                 walkedsquares.push(POS = nextpos);
@@ -1506,7 +1506,7 @@ let makeGame =
               var WALKLENGTH = walkedsquares.length;
               if (STOPREASON === "hitblock") {
                 POS = nextpos;
-                if ((!(ARTIFACTS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(ARTIFACTS.oppdaggers[POS])))) {
+                if ((!(UNITLAYERS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(UNITLAYERS.oppdaggers[POS])))) {
                   ARTIFACTS['movetarget'][POS] = {};
                 }
               }
@@ -1520,10 +1520,10 @@ let makeGame =
             path: step.path.concat(markpos)
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(MARKS.selectmovetarget);
-          var nbrofpositions = positions.length;
+          var linkedpositions = Object.keys(ARTIFACTS.movetarget);
+          var nbrofpositions = linkedpositions.length;
           for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn[newstepid][linkedpositions[linknbr]] = 'selectmovetarget1';
+            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget1';
           }
           return newstep;
         };
@@ -1539,7 +1539,7 @@ let makeGame =
             path: step.path.concat(markpos)
           });
           turn.links[newstepid] = {};
-          turn[newstepid].move = 'move1';
+          turn.links[newstepid].move = 'move1';
           return newstep;
         };
       game.move1 =
@@ -1548,8 +1548,8 @@ let makeGame =
           var MARKS = step.MARKS;
           var UNITDATA = Object.assign({}, step.UNITDATA);
           var UNITLAYERS = step.UNITLAYERS;
-          delete UNITDATA[(UNITLAYERS.all[MARKS['selectmovetarget']]  || {}).id];
-          var unitid = (UNITLAYERS.all[MARKS['selectunit']]  || {}).id;
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
               'pos': MARKS['selectmovetarget']
@@ -1575,7 +1575,7 @@ let makeGame =
             var unitgroup = currentunit.group;
             var unitpos = currentunit.pos;
             var owner = ownernames[currentunit.owner]
-            UNITLAYERS.all[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
           }
           ARTIFACTS = {
             "killtarget": {},
@@ -1591,27 +1591,7 @@ let makeGame =
             path: step.path.concat('move')
           });
           turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = ARTIFACTS.mycrowns,
-                  s1 = ARTIFACTS.oppbases;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else
-          if (Object.keys(ARTIFACTS.oppdeadcrowns ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'kingkill';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
+          turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
       game.start1 =
@@ -1620,7 +1600,9 @@ let makeGame =
             steps: {},
             player: player,
             turn: turn.turn + 1,
-            links: {}
+            links: {
+              root: {}
+            }
           };
           var MARKS = {};
           var ARTIFACTS = {
@@ -1647,7 +1629,7 @@ let makeGame =
             var unitgroup = currentunit.group;
             var unitpos = currentunit.pos;
             var owner = ownernames[currentunit.owner]
-            UNITLAYERS.all[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
           }
           var newstep = turn.steps.root = {
             ARTIFACTS: ARTIFACTS,
@@ -1657,7 +1639,11 @@ let makeGame =
             stepid: 'root',
             path: []
           };
-          undefined
+          var linkedpositions = Object.keys(UNITLAYERS.myunits);
+          var nbrofpositions = linkedpositions.length;
+          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
+            turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
+          }
           return turn;
         };
     })();
@@ -1808,15 +1794,15 @@ let makeGame =
           var MARKS = Object.assign({}, step.MARKS, {
             selectunit: markpos
           });
-          if (!!(ARTIFACTS.mycrowns[MARKS['selectunit']])) {
+          if (!!(UNITLAYERS.mycrowns[MARKS['selectunit']])) {
             var STARTPOS = MARKS['selectunit'];
             var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
             var startconnections = connections[STARTPOS];
             for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
               var POS = startconnections[neighbourdirs[dirnbr]];
               if (POS) {
-                if (!(ARTIFACTS.myunits[POS])) {
-                  ARTIFACTS[(!!(ARTIFACTS.oppunits[POS]) ? 'killtarget' : 'movetarget')][POS] = {};
+                if (!(UNITLAYERS.myunits[POS])) {
+                  ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'killtarget' : 'movetarget')][POS] = {};
                 }
               }
             } 
@@ -1830,7 +1816,7 @@ let makeGame =
               var nextpos = "";
               var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
               var POS = STARTPOS;
-              var BLOCKS = UNITLAYERS.all;
+              var BLOCKS = UNITLAYERS.units;
               var LENGTH = 0;
               while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(nextpos = connections[POS][DIR]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null))) {
                 walkedsquares.push(POS = nextpos);
@@ -1840,7 +1826,7 @@ let makeGame =
               var WALKLENGTH = walkedsquares.length;
               if (STOPREASON === "hitblock") {
                 POS = nextpos;
-                if ((!(ARTIFACTS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(ARTIFACTS.oppdaggers[POS])))) {
+                if ((!(UNITLAYERS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(UNITLAYERS.oppdaggers[POS])))) {
                   ARTIFACTS['movetarget'][POS] = {};
                 }
               }
@@ -1854,10 +1840,10 @@ let makeGame =
             path: step.path.concat(markpos)
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(MARKS.selectmovetarget);
-          var nbrofpositions = positions.length;
+          var linkedpositions = Object.keys(ARTIFACTS.movetarget);
+          var nbrofpositions = linkedpositions.length;
           for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn[newstepid][linkedpositions[linknbr]] = 'selectmovetarget2';
+            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget2';
           }
           return newstep;
         };
@@ -1873,7 +1859,7 @@ let makeGame =
             path: step.path.concat(markpos)
           });
           turn.links[newstepid] = {};
-          turn[newstepid].move = 'move2';
+          turn.links[newstepid].move = 'move2';
           return newstep;
         };
       game.move2 =
@@ -1882,8 +1868,8 @@ let makeGame =
           var MARKS = step.MARKS;
           var UNITDATA = Object.assign({}, step.UNITDATA);
           var UNITLAYERS = step.UNITLAYERS;
-          delete UNITDATA[(UNITLAYERS.all[MARKS['selectmovetarget']]  || {}).id];
-          var unitid = (UNITLAYERS.all[MARKS['selectunit']]  || {}).id;
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
               'pos': MARKS['selectmovetarget']
@@ -1909,7 +1895,7 @@ let makeGame =
             var unitgroup = currentunit.group;
             var unitpos = currentunit.pos;
             var owner = ownernames[currentunit.owner]
-            UNITLAYERS.all[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
           }
           ARTIFACTS = {
             "killtarget": {},
@@ -1925,27 +1911,7 @@ let makeGame =
             path: step.path.concat('move')
           });
           turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = ARTIFACTS.mycrowns,
-                  s1 = ARTIFACTS.oppbases;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else
-          if (Object.keys(ARTIFACTS.oppdeadcrowns ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'kingkill';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
+          turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
       game.start2 =
@@ -1954,7 +1920,9 @@ let makeGame =
             steps: {},
             player: player,
             turn: turn.turn + 1,
-            links: {}
+            links: {
+              root: {}
+            }
           };
           var MARKS = {};
           var ARTIFACTS = {
@@ -1981,7 +1949,7 @@ let makeGame =
             var unitgroup = currentunit.group;
             var unitpos = currentunit.pos;
             var owner = ownernames[currentunit.owner]
-            UNITLAYERS.all[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
           }
           var newstep = turn.steps.root = {
             ARTIFACTS: ARTIFACTS,
@@ -1991,7 +1959,11 @@ let makeGame =
             stepid: 'root',
             path: []
           };
-          undefined
+          var linkedpositions = Object.keys(UNITLAYERS.myunits);
+          var nbrofpositions = linkedpositions.length;
+          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
+            turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
+          }
           return turn;
         };
     })();

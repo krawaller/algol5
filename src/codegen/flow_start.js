@@ -29,7 +29,7 @@ export default C => Object.assign(C,{
         ${C.prepareStartingStep(O)}
         ${C.applyStartingConsequences(O)}
         ${C.saveStartingStep(O)}
-        ${C.applyLinkInstructions(O,C.startRules(O))}
+        ${C.applyLinkInstructions({...O,root:true},C.startRules(O))}
     `,
 
     /*
@@ -39,7 +39,7 @@ export default C => Object.assign(C,{
         steps: {},
         player: player,
         turn: turn.turn+1,
-        links: {}
+        links: {root:{}}
     }`,
 
     /*

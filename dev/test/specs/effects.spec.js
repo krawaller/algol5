@@ -96,6 +96,9 @@ describe("The effect commands",()=>{
                 layermappings: { 'myclowns': 'UNITLAYERS' }
             },
             args: [ ['layer','myclowns'], ['killid',['loopid']] ],
+            context: {
+                blankUnitLayers: ()=> ({myclowns:{}})
+            },
             scope: {
                 UNITLAYERS: {
                     myclowns: {x1:{id:'unit1'},x3:{id:'unit3'}}

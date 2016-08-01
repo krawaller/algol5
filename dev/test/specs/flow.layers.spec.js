@@ -3,7 +3,7 @@ import lib from '../../../src/codegen/'
 
 let F = lib
 
-describe("The seed commands",()=> {
+describe("The layer commands",()=> {
 
     test(F,"terrainLayers", {
         "it deduces correctly": {
@@ -21,9 +21,9 @@ describe("The seed commands",()=> {
                         }
                     },
                     whatev: {foo: ['blah','nobunkers']}
-                }
+                },
+                player: 2
             },
-            arg: 2,
             expected: {
                 holes: {a1:{pos:'a1'}},
                 bunkers: {
@@ -184,11 +184,11 @@ describe("The seed commands",()=> {
                 UNITLAYERS: 'whatever'
             },
             context: {
-                blankUnitLayers: () => JSON.stringify({soldiers: {},knights:{},all:{},MYsoldiers:{},NEUsoldiers:{},knights:{},OPPknights:{},MYunits:{},OPPunits:{},NEUunits:{}})
+                blankUnitLayers: () => JSON.stringify({units: {}, soldiers: {},knights:{},MYsoldiers:{},NEUsoldiers:{},knights:{},OPPknights:{},MYunits:{},OPPunits:{},NEUunits:{}})
             },
             mutations: {
                 UNITLAYERS: {
-                    all: {
+                    units: {
                         p1: {group: 'soldiers', owner: 0, pos: 'p1', id: 'unit1'},
                         p2: {group: 'soldiers', owner: 1, pos: 'p2', id: 'unit2'},
                         p3: {group: 'knights', owner: 2, pos: 'p3', id: 'unit3'}

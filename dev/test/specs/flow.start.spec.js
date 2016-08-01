@@ -88,7 +88,7 @@ describe("The flow start stuff",()=>{
                 steps: {},
                 player: 'foo',
                 turn:8,
-                links: {}
+                links: {root:{}}
             }
         }
     })

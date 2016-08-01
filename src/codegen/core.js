@@ -119,11 +119,11 @@ export default T => {
 
         // layername is a plain string
         // This method sometimes used directly from elsewhere
-        // TODO - TERRAIN!
         layerref: (O,layername)=> {
 
             var bag = {board:1,light:1,dark:1}[layername] ? "BOARD"
                 : T.blankUnitLayers(O,true)[layername] ? "UNITLAYERS"
+                : T.terrainLayers(O,true)[layername] ? "TERRAIN"
                 : "ARTIFACTS"
 
             return bag+"."+layername; //"("+bag+"."+layername+"||{})";

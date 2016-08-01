@@ -21,11 +21,11 @@ let play = {
             let checkActions = Object.keys(steplinks)
             while(checkActions.length){
                 let action = checkActions.pop()
-                let func = links[action]
+                let func = steplinks[action]
                 if (endgameactions[action]){
                     turn.ends[action].push(stepid)
                 } else if (action === 'endturn'){
-                    let newturn = play.tryToReachTurnEnd(game, game[func]())
+                    let newturn = play.tryToReachTurnEnd(game, game[func](turn,step))
                     if (newturn.canend){
                         turn.next[stepid] = newturn
                     } else {
@@ -39,6 +39,7 @@ let play = {
                 }
             }
         }
+        return turn;
     },
     tryToReachTurnEnd: (game,turn)=> {
         let {steps,links} = turn
@@ -47,10 +48,11 @@ let play = {
         while(!turn.canend && checkSteps.length){
             let step = checkSteps.pop()
             let stepid = step.stepid
-            let checkActions = Object.keys(links[stepid])
+            let steplinks = links[stepid]
+            let checkActions = Object.keys(steplinks)
             while(!turn.canend && checkActions.length){
                 let action = checkActions.pop()
-                let func = links[action]
+                let func = steplinks[action]
                 if (endgameactions[action] || action === 'endturn' || canalwaysend[func]){
                     turn.canend = true
                 } else {
@@ -59,6 +61,7 @@ let play = {
                 }
             }
         }
+        return turn;
     }
 }
 

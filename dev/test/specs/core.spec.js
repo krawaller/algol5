@@ -336,7 +336,8 @@ describe('the core funcs',()=>{
                 ARTIFACTS: {'mylayer': 'FOO'},
             },
             context: {
-                blankUnitLayers: ()=> ({})
+                blankUnitLayers: ()=> ({}),
+                terrainLayers: ()=> ({})
             },
             expected: 'FOO'
         },
@@ -371,5 +372,16 @@ describe('the core funcs',()=>{
             },
             expected: 'FOO'
         },
+        'when we wnat terrain': {
+            arg: 'base',
+            scope: {
+                TERRAIN: {base:'FOO'}
+            },
+            context: {
+                blankUnitLayers: ()=> ({}),
+                terrainLayers: ()=> ({base:true})
+            },
+            expected: 'FOO'
+        }
     });
 });

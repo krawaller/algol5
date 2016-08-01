@@ -28,15 +28,15 @@ export default C => Object.assign(C,{
     },
 
     linkToMark: (O,name)=> `
-        var linkedpositions = Object.keys(MARKS.${name});
-        var nbrofpositions = positions.length;
+        var linkedpositions = Object.keys(${C.set(O,O.rules.marks[name].from)});
+        var nbrofpositions = linkedpositions.length;
         for(var linknbr = 0; linknbr < nbrofpositions; linknbr++){
-            turn[newstepid][linkedpositions[linknbr]] = '${name+O.player}';
+            turn.links${O.root ? '.root' : '[newstepid]'}[linkedpositions[linknbr]] = '${name+O.player}';
         }
     `,
 
     linkToCommand: (O,name)=> `
-        turn[newstepid].${name} = '${name+O.player}';
+        turn.links${O.root ? '.root' : '[newstepid]'}.${name} = '${name+O.player}';
     `,
 
 })

@@ -1553,15 +1553,15 @@
 	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
 	        selectunit: markpos
 	      });
-	      if (!!ARTIFACTS.mycrowns[MARKS['selectunit']]) {
+	      if (!!UNITLAYERS.mycrowns[MARKS['selectunit']]) {
 	        var STARTPOS = MARKS['selectunit'];
 	        var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
 	        var startconnections = connections[STARTPOS];
 	        for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
 	          var POS = startconnections[neighbourdirs[dirnbr]];
 	          if (POS) {
-	            if (!ARTIFACTS.myunits[POS]) {
-	              ARTIFACTS[!!ARTIFACTS.oppunits[POS] ? 'killtarget' : 'movetarget'][POS] = {};
+	            if (!UNITLAYERS.myunits[POS]) {
+	              ARTIFACTS[!!UNITLAYERS.oppunits[POS] ? 'killtarget' : 'movetarget'][POS] = {};
 	            }
 	          }
 	        }
@@ -1575,7 +1575,7 @@
 	          var nextpos = "";
 	          var MAX = [8, 1, 2].indexOf(DIR) !== -1 ? 1 : 8;
 	          var POS = STARTPOS;
-	          var BLOCKS = UNITLAYERS.all;
+	          var BLOCKS = UNITLAYERS.units;
 	          var LENGTH = 0;
 	          while (!(STOPREASON = LENGTH === MAX ? "reachedmax" : !(nextpos = connections[POS][DIR]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null)) {
 	            walkedsquares.push(POS = nextpos);
@@ -1585,7 +1585,7 @@
 	          var WALKLENGTH = walkedsquares.length;
 	          if (STOPREASON === "hitblock") {
 	            POS = nextpos;
-	            if (!ARTIFACTS.myunits[POS] && !([1, 5].indexOf(DIR) !== -1 && !!ARTIFACTS.oppdaggers[POS])) {
+	            if (!UNITLAYERS.myunits[POS] && !([1, 5].indexOf(DIR) !== -1 && !!UNITLAYERS.oppdaggers[POS])) {
 	              ARTIFACTS['movetarget'][POS] = {};
 	            }
 	          }
@@ -1599,10 +1599,10 @@
 	        path: step.path.concat(markpos)
 	      });
 	      turn.links[newstepid] = {};
-	      var linkedpositions = (0, _keys2.default)(MARKS.selectmovetarget);
-	      var nbrofpositions = positions.length;
+	      var linkedpositions = (0, _keys2.default)(ARTIFACTS.movetarget);
+	      var nbrofpositions = linkedpositions.length;
 	      for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-	        turn[newstepid][linkedpositions[linknbr]] = 'selectmovetarget1';
+	        turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget1';
 	      }
 	      return newstep;
 	    };
@@ -1617,7 +1617,7 @@
 	        path: step.path.concat(markpos)
 	      });
 	      turn.links[newstepid] = {};
-	      turn[newstepid].move = 'move1';
+	      turn.links[newstepid].move = 'move1';
 	      return newstep;
 	    };
 	    game.move1 = function (turn, step) {
@@ -1625,8 +1625,8 @@
 	      var MARKS = step.MARKS;
 	      var UNITDATA = (0, _assign2.default)({}, step.UNITDATA);
 	      var UNITLAYERS = step.UNITLAYERS;
-	      delete UNITDATA[(UNITLAYERS.all[MARKS['selectmovetarget']] || {}).id];
-	      var unitid = (UNITLAYERS.all[MARKS['selectunit']] || {}).id;
+	      delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']] || {}).id];
+	      var unitid = (UNITLAYERS.units[MARKS['selectunit']] || {}).id;
 	      if (unitid) {
 	        UNITDATA[unitid] = (0, _assign2.default)({}, UNITDATA[unitid], {
 	          'pos': MARKS['selectmovetarget']
@@ -1652,7 +1652,7 @@
 	        var unitgroup = currentunit.group;
 	        var unitpos = currentunit.pos;
 	        var owner = ownernames[currentunit.owner];
-	        UNITLAYERS.all[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+	        UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
 	      }
 	      ARTIFACTS = {
 	        "killtarget": {},
@@ -1668,25 +1668,7 @@
 	        path: step.path.concat('move')
 	      });
 	      turn.links[newstepid] = {};
-	      if ((0, _keys2.default)(function () {
-	        var ret = {},
-	            s0 = ARTIFACTS.mycrowns,
-	            s1 = ARTIFACTS.oppbases;
-	        for (var key in s0) {
-	          if (s1[key]) {
-	            ret[key] = s0[key];
-	          }
-	        }
-	        return ret;
-	      }() || {}).length !== 0) {
-	        var winner = 1;
-	        var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-	        turn.links[newstepid][result] = 'infiltration';
-	      } else if ((0, _keys2.default)(ARTIFACTS.oppdeadcrowns || {}).length !== 0) {
-	        var winner = 1;
-	        var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-	        turn.links[newstepid][result] = 'kingkill';
-	      } else turn.links[newstepid].endturn = "start" + otherplayer;
+	      turn.links[newstepid].endturn = "start" + otherplayer;
 	      return newstep;
 	    };
 	    game.start1 = function (turn, step) {
@@ -1694,7 +1676,9 @@
 	        steps: {},
 	        player: player,
 	        turn: turn.turn + 1,
-	        links: {}
+	        links: {
+	          root: {}
+	        }
 	      };
 	      var MARKS = {};
 	      var ARTIFACTS = {
@@ -1721,7 +1705,7 @@
 	        var unitgroup = currentunit.group;
 	        var unitpos = currentunit.pos;
 	        var owner = ownernames[currentunit.owner];
-	        UNITLAYERS.all[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+	        UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
 	      }
 	      var newstep = turn.steps.root = {
 	        ARTIFACTS: ARTIFACTS,
@@ -1731,7 +1715,11 @@
 	        stepid: 'root',
 	        path: []
 	      };
-	      undefined;
+	      var linkedpositions = (0, _keys2.default)(UNITLAYERS.myunits);
+	      var nbrofpositions = linkedpositions.length;
+	      for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
+	        turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
+	      }
 	      return turn;
 	    };
 	  })();
@@ -1881,15 +1869,15 @@
 	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
 	        selectunit: markpos
 	      });
-	      if (!!ARTIFACTS.mycrowns[MARKS['selectunit']]) {
+	      if (!!UNITLAYERS.mycrowns[MARKS['selectunit']]) {
 	        var STARTPOS = MARKS['selectunit'];
 	        var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
 	        var startconnections = connections[STARTPOS];
 	        for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
 	          var POS = startconnections[neighbourdirs[dirnbr]];
 	          if (POS) {
-	            if (!ARTIFACTS.myunits[POS]) {
-	              ARTIFACTS[!!ARTIFACTS.oppunits[POS] ? 'killtarget' : 'movetarget'][POS] = {};
+	            if (!UNITLAYERS.myunits[POS]) {
+	              ARTIFACTS[!!UNITLAYERS.oppunits[POS] ? 'killtarget' : 'movetarget'][POS] = {};
 	            }
 	          }
 	        }
@@ -1903,7 +1891,7 @@
 	          var nextpos = "";
 	          var MAX = [8, 1, 2].indexOf(DIR) !== -1 ? 1 : 8;
 	          var POS = STARTPOS;
-	          var BLOCKS = UNITLAYERS.all;
+	          var BLOCKS = UNITLAYERS.units;
 	          var LENGTH = 0;
 	          while (!(STOPREASON = LENGTH === MAX ? "reachedmax" : !(nextpos = connections[POS][DIR]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null)) {
 	            walkedsquares.push(POS = nextpos);
@@ -1913,7 +1901,7 @@
 	          var WALKLENGTH = walkedsquares.length;
 	          if (STOPREASON === "hitblock") {
 	            POS = nextpos;
-	            if (!ARTIFACTS.myunits[POS] && !([1, 5].indexOf(DIR) !== -1 && !!ARTIFACTS.oppdaggers[POS])) {
+	            if (!UNITLAYERS.myunits[POS] && !([1, 5].indexOf(DIR) !== -1 && !!UNITLAYERS.oppdaggers[POS])) {
 	              ARTIFACTS['movetarget'][POS] = {};
 	            }
 	          }
@@ -1927,10 +1915,10 @@
 	        path: step.path.concat(markpos)
 	      });
 	      turn.links[newstepid] = {};
-	      var linkedpositions = (0, _keys2.default)(MARKS.selectmovetarget);
-	      var nbrofpositions = positions.length;
+	      var linkedpositions = (0, _keys2.default)(ARTIFACTS.movetarget);
+	      var nbrofpositions = linkedpositions.length;
 	      for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-	        turn[newstepid][linkedpositions[linknbr]] = 'selectmovetarget2';
+	        turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget2';
 	      }
 	      return newstep;
 	    };
@@ -1945,7 +1933,7 @@
 	        path: step.path.concat(markpos)
 	      });
 	      turn.links[newstepid] = {};
-	      turn[newstepid].move = 'move2';
+	      turn.links[newstepid].move = 'move2';
 	      return newstep;
 	    };
 	    game.move2 = function (turn, step) {
@@ -1953,8 +1941,8 @@
 	      var MARKS = step.MARKS;
 	      var UNITDATA = (0, _assign2.default)({}, step.UNITDATA);
 	      var UNITLAYERS = step.UNITLAYERS;
-	      delete UNITDATA[(UNITLAYERS.all[MARKS['selectmovetarget']] || {}).id];
-	      var unitid = (UNITLAYERS.all[MARKS['selectunit']] || {}).id;
+	      delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']] || {}).id];
+	      var unitid = (UNITLAYERS.units[MARKS['selectunit']] || {}).id;
 	      if (unitid) {
 	        UNITDATA[unitid] = (0, _assign2.default)({}, UNITDATA[unitid], {
 	          'pos': MARKS['selectmovetarget']
@@ -1980,7 +1968,7 @@
 	        var unitgroup = currentunit.group;
 	        var unitpos = currentunit.pos;
 	        var owner = ownernames[currentunit.owner];
-	        UNITLAYERS.all[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+	        UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
 	      }
 	      ARTIFACTS = {
 	        "killtarget": {},
@@ -1996,25 +1984,7 @@
 	        path: step.path.concat('move')
 	      });
 	      turn.links[newstepid] = {};
-	      if ((0, _keys2.default)(function () {
-	        var ret = {},
-	            s0 = ARTIFACTS.mycrowns,
-	            s1 = ARTIFACTS.oppbases;
-	        for (var key in s0) {
-	          if (s1[key]) {
-	            ret[key] = s0[key];
-	          }
-	        }
-	        return ret;
-	      }() || {}).length !== 0) {
-	        var winner = 2;
-	        var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-	        turn.links[newstepid][result] = 'infiltration';
-	      } else if ((0, _keys2.default)(ARTIFACTS.oppdeadcrowns || {}).length !== 0) {
-	        var winner = 2;
-	        var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-	        turn.links[newstepid][result] = 'kingkill';
-	      } else turn.links[newstepid].endturn = "start" + otherplayer;
+	      turn.links[newstepid].endturn = "start" + otherplayer;
 	      return newstep;
 	    };
 	    game.start2 = function (turn, step) {
@@ -2022,7 +1992,9 @@
 	        steps: {},
 	        player: player,
 	        turn: turn.turn + 1,
-	        links: {}
+	        links: {
+	          root: {}
+	        }
 	      };
 	      var MARKS = {};
 	      var ARTIFACTS = {
@@ -2049,7 +2021,7 @@
 	        var unitgroup = currentunit.group;
 	        var unitpos = currentunit.pos;
 	        var owner = ownernames[currentunit.owner];
-	        UNITLAYERS.all[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+	        UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
 	      }
 	      var newstep = turn.steps.root = {
 	        ARTIFACTS: ARTIFACTS,
@@ -2059,7 +2031,11 @@
 	        stepid: 'root',
 	        path: []
 	      };
-	      undefined;
+	      var linkedpositions = (0, _keys2.default)(UNITLAYERS.myunits);
+	      var nbrofpositions = linkedpositions.length;
+	      for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
+	        turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
+	      }
 	      return turn;
 	    };
 	  })();
@@ -2482,11 +2458,11 @@
 	            var checkActions = (0, _keys2.default)(steplinks);
 	            while (checkActions.length) {
 	                var action = checkActions.pop();
-	                var func = links[action];
+	                var func = steplinks[action];
 	                if (endgameactions[action]) {
 	                    turn.ends[action].push(stepid);
 	                } else if (action === 'endturn') {
-	                    var newturn = play.tryToReachTurnEnd(game, game[func]());
+	                    var newturn = play.tryToReachTurnEnd(game, game[func](turn, step));
 	                    if (newturn.canend) {
 	                        turn.next[stepid] = newturn;
 	                    } else {
@@ -2500,6 +2476,7 @@
 	                }
 	            }
 	        }
+	        return turn;
 	    },
 	    tryToReachTurnEnd: function tryToReachTurnEnd(game, turn) {
 	        var steps = turn.steps;
@@ -2510,10 +2487,11 @@
 	        while (!turn.canend && checkSteps.length) {
 	            var step = checkSteps.pop();
 	            var stepid = step.stepid;
-	            var checkActions = (0, _keys2.default)(links[stepid]);
+	            var steplinks = links[stepid];
+	            var checkActions = (0, _keys2.default)(steplinks);
 	            while (!turn.canend && checkActions.length) {
 	                var action = checkActions.pop();
-	                var func = links[action];
+	                var func = steplinks[action];
 	                if (endgameactions[action] || action === 'endturn' || canalwaysend[func]) {
 	                    turn.canend = true;
 	                } else {
@@ -2522,6 +2500,7 @@
 	                }
 	            }
 	        }
+	        return turn;
 	    }
 	};
 

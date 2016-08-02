@@ -1,0 +1,52 @@
+{
+  "STATUS": "dynamic layerref",
+  "meta": {
+    "name": "Semaphor",
+    "source": "http://www.di.fc.ul.pt/~jpn/gv/semaphor.htm",
+    "tags": ["commonunits","formation","deploy","chooseaction","changeunit"]
+  },
+  "graphics": {"icons":{"kings":"kings","pawns":"pawns","bishops":"bishops"}},
+  "board": {"width":4,"height":3},
+  "startturn": {
+    "link": ["selectdeploytarget","selectunit"]
+  },
+  "afterstep": {
+    "runGenerator": "findlines",
+    "link": "endturn"
+  },
+  "endgame": {
+    "madeline": {"condition":["notempty","line"]}
+  },
+  "marks": {
+    "selectdeploytarget": {
+      "from": ["subtract","board","units"],
+      "link": "deploy"
+    },
+    "selectunit": {
+      "from": ["union","pawns","bishops"],
+      "link": "promote"
+    }
+  },
+  "commands": {
+    "deploy": {
+      "applyEffect": ["spawn","selectdeploytarget","pawns",0]
+    },
+    "promote": {
+      "applyEffect": ["setat","selectunit","group",["ifelse",["anyat","pawns","selectunit"],"bishops","kings"]]
+    }
+  },
+  "generators": {
+    "findlines": {
+      "type": "walker",
+      "dirs": [1,2,3,4],
+      "starts": "units",
+      "steps": ["layer",["lookup","units",["start"],"group"]],
+      "draw": {
+        "steps": {
+          "condition": ["morethan",["walklength"],1],
+          "tolayer": "line"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "STATUS": "might not work wincheck? also lots of small other stuff",
+  "meta": {
+    "name": "Omenom",
+    "source": "http://www.di.fc.ul.pt/~jpn/gv/omemom.htm",
+    "tags": ["formation","nocapture","multiplesteps"],
+    "author": "Doug Engel"
+  },
+  "graphics": {"icons":{"soldiers":"pawns"}},
+  "board": {"height":4,"width":4},
+  "setup": {
+    "soldiers": {
+      "1": ["a4","d1"],
+      "2": ["a1","d4"]
+    }
+  },
+  "endgame": {
+    "madewinline": {"condition":["notempty","winline"]}
+  },
+  "startturn": {
+    "link": "selectunit"
+  },
+  "marks": {
+    "selectunit": {
+      "from": "myunits",
+      "runGenerators": ["findforbidden","findmovetargets"],
+      "link": "selectmovetarget"
+    },
+    "selectmovetarget": {
+      "from": "movetargets",
+      "link": "move"
+    }
+  },
+  "commands": {
+    "move": {
+      "applyEffects": [
+        ["move",["ifelse",["truthy",["markpos","selectunit"]],"selectunit",["firstposin",["subtract","myunits",["contextpos","hasmoved"]]]],"selectmovetarget"],
+        ["setcontextpos","hasmoved","selectmovetarget"]
+      ],
+      "runGenerators": ["findwinline",["if",["same",["contextval","performedsteps"],1],["findforbidden","findmovetargets"]]],
+      "allow": ["endturn",["if",["same",["contextval","performedsteps"],1],"selectmovetarget"]]
+    }
+  },
+  "generators": {
+    "findwinline": {
+      "type": "walker",
+      "starts": ["firstposin","oppunits"],
+      "steps": "myunits",
+      "blocks": "oppunits",
+      "prioritizeblocksoversteps": true,
+      "draw": {
+        "block": {
+          "condition": ["same",["walklength"],1],
+          "tolayer": "winline"
+        }
+      }
+    },
+    "findmovetargets": {
+      "type": "nextto",
+      "starts": ["ifelse",["truthy",["markpos","selectunit"]],"selectunit",["subtract","myunits",["contextpos","hasmoved"]]],
+      "condition": ["noneat","forbidden",["contextpos","target"]],
+      "draw": {
+        "target": {
+          "condition": ["noneat","units",["contextpos","target"]],
+          "tolayer": "movetargets"
+        }
+      }
+    },
+    "findforbidden": {
+      "type": "nextto",
+      "starts": ["subtract","myunits",["ifelse",["truthy",["markpos","selectunit"]],"selectunit",["subtract","myunits",["contextpos","hasmoved"]]]],
+      "draw": {
+        "target": {
+          "tolayer": "forbidden"
+        }
+      }
+    }
+  }
+}

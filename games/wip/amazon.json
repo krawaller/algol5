@@ -1,5 +1,5 @@
 {
-  "_STATUS": " ------ REQUIRES TURNVAR API! -------- ",
+  "_STATUS": " ------ actionor also done. probably ready? -------- ",
   "meta": {
     "name": "Amazons",
     "source": "http://www.chessvariants.org/other.dir/amazons.html",
@@ -14,23 +14,23 @@
   "setup": {
     "queens": {"1":["d10","g10","a7","j7"],"2":["a4","d1","g1","j4"]}
   },
-  "startturn": {
-    "link": ["selectunit"]
+  "startTurn": {
+    "link": "selectunit"
   },
   "marks": {
     "selectunit": {
       "from": "myunits",
       "runGenerator": "findtargets",
-      "link": ["selectmovetarget"]
+      "link": "selectmovetarget"
     },
     "selectmovetarget": {
       "nodeadends": true,
       "from": "targets",
-      "link": ["move"]
+      "link": "move"
     },
     "selectfiretarget": {
       "from": "targets",
-      "link": ["fire"]
+      "link": "fire"
     }
   },
   "commands": {
@@ -40,11 +40,11 @@
         ["setturnpos","movedto","selectmovetarget"]
       ],
       "runGenerator": "findtargets",
-      "link": ["selectfiretarget"]
+      "link": "selectfiretarget"
     },
     "fire": {
       "applyEffect": ["spawn","selectfiretarget","fires",0],
-      "link": ["endturn"]
+      "link": "endturn"
     }
   },
   "generators": {
@@ -52,7 +52,6 @@
       "type": "walker",
       "dirs": [1,2,3,4,5,6,7,8],
       "start": ["actionor","selectunit","selectunit",["turnpos","movedto"]],
-      "OLDstarts": ["union","selectunit",["single",["turnpos","movedto"]]],
       "blocks": "units",
       "draw": {
         "steps": {

@@ -9,6 +9,7 @@ export default C => Object.assign(C,{
             ${C.addPlayerClosure({...O,player:1})}
             ${C.addPlayerClosure({...O,player:2})}
             ${C.addCommonFunctions(O)}
+            game.commands = ${JSON.stringify(Object.keys(O.rules.commands).reduce((mem,c)=>{ mem[c] = 1; return mem; },{}))};
             return game;
         }
     `,

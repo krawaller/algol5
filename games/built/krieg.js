@@ -906,6 +906,9 @@ let makeGame =
         };
         return game.start1(turnseed, stepseed);
       };
+    game.commands = {
+      "move": 1
+    };
     return game;
   };
 export default makeGame()

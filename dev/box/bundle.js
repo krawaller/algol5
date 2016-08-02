@@ -977,6 +977,9 @@
 	    };
 	    return game.start1(turnseed, stepseed);
 	  };
+	  game.commands = {
+	    "move": 1
+	  };
 	  return game;
 	};
 	exports.default = makeGame();
@@ -1272,6 +1275,65 @@
 	var endgameactions = { win: 1, lose: 1, draw: 1 };
 
 	var play = {
+	    startGameSession: function startGameSession(game) {
+	        var turn = game.newGame();
+	        turn = play.hydrateTurn(game, turn);
+	        var session = {
+	            game: game,
+	            turn: turn,
+	            step: turn.steps.root,
+	            save: []
+	        };
+	        session.UI = play.getSessionUI(session);
+	        return session;
+	    },
+	    makeSessionAction: function makeSessionAction(session, action) {
+	        if (endgameactions[action]) {
+	            // end the session!
+	        } else if (action === 'endturn') {
+	                session.save = session.save.concat(play.calculateSave(session.turn, session.step));
+	                session.turn = play.hydrateTurn(session.game, session.turn.next[session.step.stepid]);
+	                session.step = session.turn.steps.root;
+	                session.UI = play.getSessionUI(session);
+	            } else {
+	                session.step = session.turn.steps[session.step.stepid + '-' + action];
+	                session.UI = play.getSessionUI(session);
+	            }
+	        return session;
+	    },
+	    calculateSave: function calculateSave(turn, step) {
+	        var ret = [];
+	        var id = 'root';
+	        var followActions = step.path.concat();
+	        while (followActions.length) {
+	            var action = followActions.shift();
+	            var available = (0, _keys2.default)(turn.links[id]).sort();
+	            var index = available.indexOf(action);
+	            if (index === -1) {
+	                throw "Didnt find action!";
+	            }
+	            if (available.length > 1) {
+	                ret.push(index);
+	            }
+	            id += '-' + action;
+	        }
+	        return ret;
+	    },
+	    getSessionUI: function getSessionUI(_ref) {
+	        var game = _ref.game;
+	        var turn = _ref.turn;
+	        var step = _ref.step;
+	        return (0, _keys2.default)(turn.links[step.stepid]).reduce(function (mem, action) {
+	            if (endgameactions[action] || action == 'endturn' || action === 'next') {
+	                mem.system.endturn = action;
+	            } else if (game.commands[action]) {
+	                mem.commands[action] = turn.links[step.stepid][action];
+	            } else {
+	                mem.marks[action] = turn.links[step.stepid][action];
+	            }
+	            return mem;
+	        }, { marks: {}, commands: {}, system: {} });
+	    },
 	    hydrateStep: function hydrateStep(game, turn, step) {
 	        var steps = turn.steps;
 	        var stepid = step.stepid;
@@ -1288,12 +1350,12 @@
 	            } else if (action === 'endturn') {
 	                var newturn = play.tryToReachTurnEnd(game, game[func](turn, step));
 	                if (newturn.canend) {
-	                    turn.next[stepid] = newturn; // TODO - save newturn too?
+	                    turn.next[stepid] = newturn;
 	                } else {
-	                        steplinks.win = newturn.blockedby || 'starvation'; // TODO - gamespec logic?
-	                        turn.ends.win.push(stepid);
-	                        delete steplinks.endturn;
-	                    }
+	                    steplinks.win = newturn.blockedby || 'starvation'; // TODO - gamespec logic?
+	                    turn.ends.win.push(stepid);
+	                    delete steplinks.endturn;
+	                }
 	                canend = true;
 	            } else {
 	                var nextstepid = stepid + '-' + action;
@@ -1301,7 +1363,7 @@
 	                if (play.hydrateStep(game, turn, nextstep)) {
 	                    canend = true;
 	                } else {
-	                    delete steplinks[action];
+	                    delete steplinks[action]; // TODO - only this is actually needed
 	                    delete steps[nextstepid];
 	                    delete links[nextstepid];
 	                }

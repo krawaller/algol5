@@ -14,9 +14,6 @@
   "startTurn": {
     "link": ["selecttower","selectcatapult"]
   },
-  "afterstep": {
-    "link": ["endturn"]
-  },
   "endGame": {
       "infiltration": {"condition":["overlaps","myunits","opphomerow"]}
   },

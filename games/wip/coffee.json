@@ -1,0 +1,95 @@
+{
+  "STATUS": "needs case and turn reference",
+  "meta": {
+    "name": "Coffee",
+    "source": "https://www.boardgamegeek.com/filepage/64972/coffee-rules-nestorgames",
+    "tags": ["deploy","formation","limitmoves"],
+    "author": "Néstor Romeral Andrés"
+  },
+  "graphics": {"icons": {"soldiers":"pawns","markers":"pawns"}},
+  "board": {"height":5,"width":5},
+  "endturn": {
+    "unless": {
+      "nolegal": ["isempty","markers"]
+    }
+  },
+  "endgame": {
+    "madeline": ["notempty","winline"]
+  },
+  "startTurn": {
+    "link": "selectdrop"
+  },
+  "afterstep": {
+    "runGenerators": ["findwinlines"],
+    "allow": ["endturn"]
+  },
+  "marks": {
+    "selectdrop": {
+      "from": ["ifelse",["same",["contextval","turn"],1],"board","markers"],
+      "runGenerator": "findgeneratees",
+      "allow": [
+        ["if",["notempty","uphill"],"uphill"],
+        ["if",["notempty","downhill"],"downhill"],
+        ["if",["notempty","vertical"],"vertical"],
+        ["if",["notempty","horisontal"],"horisontal"]
+      ]
+    }
+  },
+  "commands": {
+    "uphill": {
+      "applyEffects": [
+        ["forposin","markers",["killat",["target"]]],
+        ["spawn","selectdrop","soldiers"],
+        ["forposin","uphill",["spawn",["target"],"markers",0]]
+      ]
+    },
+    "downhill": {
+      "applyEffects": [
+        ["forposin","markers",["killat",["target"]]],
+        ["spawn","selectdrop","soldiers"],
+        ["forposin","downhill",["spawn",["target"],"markers",0]]
+      ]
+    },
+    "horisontal": {
+      "applyEffects": [
+        ["forposin","markers",["killat",["target"]]],
+        ["spawn","selectdrop","soldiers"],
+        ["forposin","horisontal",["spawn",["target"],"markers",0]]
+      ]
+    },
+    "vertical": {
+      "applyEffects": [
+        ["forposin","markers",["killat",["target"]]],
+        ["spawn","selectdrop","soldiers"],
+        ["forposin","vertical",["spawn",["target"],"markers",0]]        
+      ]
+    }
+  },
+  "generators": {
+    "findgeneratees": {
+      "type": "walker",
+      "dirs": [1,2,3,4,5,6,7,8],
+      "start": "selectdrop",
+      "draw": {
+        "steps": {
+          "unlessover": "units",
+          "tolayer": ["case",
+            ["dir"],
+            [[1,"vertical"],[2,"uphill"],[3,"horisontal"],[4,"downhill"],[5,"vertical"],[6,"uphill"],[7,"horisontal"],[8,"downhill"]]
+          ]
+        }
+      }
+    },
+    "findwinlines": {
+      "type": "walker",
+      "starts": "myunits",
+      "steps": "myunits",
+      "draw": {
+        "start": {
+          "condition": ["same",3,["walklength"]],
+          "tolayer": "winline"
+        }
+      }
+    }
+  }
+}

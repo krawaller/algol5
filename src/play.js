@@ -3,6 +3,60 @@
 let endgameactions = {win:1,lose:1,draw:1}
 
 let play = {
+    startGameSession: (game)=> {
+        let turn = game.newGame()
+        turn = play.hydrateTurn(game,turn)
+        let session = {
+            game: game,
+            turn: turn,
+            step: turn.steps.root,
+            save: [],
+        }
+        session.UI = play.getSessionUI(session)
+        return session;
+    },
+    makeSessionAction: (session,action)=> {
+        if (endgameactions[action]){
+            // end the session!
+        } else if (action==='endturn'){
+            session.save = session.save.concat( play.calculateSave(session.turn,session.step) )
+            session.turn = play.hydrateTurn(session.game, session.turn.next[session.step.stepid])
+            session.step = session.turn.steps.root
+            session.UI = play.getSessionUI(session)
+        } else {
+            session.step = session.turn.steps[session.step.stepid+'-'+action]
+            session.UI = play.getSessionUI(session)
+        }
+        return session
+    },
+    calculateSave: (turn,step)=> {
+        let ret = []
+        let id='root'
+        let followActions=step.path.concat('endturn');
+        while(followActions.length){
+            let action = followActions.shift()
+            let available = Object.keys(turn.links[id]).sort()
+            let index = available.indexOf(action)
+            if (index === -1){
+                throw "Didnt find action!"
+            }
+            if (available.length>1){
+                ret.push(index)
+            }
+            id += '-'+action
+        }
+        return ret
+    },
+    getSessionUI: ({game,turn,step})=> Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
+        if (endgameactions[action]||action=='endturn'||action==='next'){
+            mem.system.endturn = action
+        } else if (game.commands[action]){
+            mem.commands[action] = turn.links[step.stepid][action]
+        } else {
+            mem.marks[action] = turn.links[step.stepid][action]
+        }
+        return mem
+    },{marks:{},commands:{},system:{}}),
     hydrateStep: (game,turn,step)=> {
         let steps = turn.steps
         let stepid = step.stepid
@@ -19,7 +73,7 @@ let play = {
             } else if (action === 'endturn'){
                 let newturn = play.tryToReachTurnEnd(game, game[func](turn,step))
                 if (newturn.canend){
-                    turn.next[stepid] = newturn // TODO - save newturn too?
+                    turn.next[stepid] = newturn
                 } else {
                     steplinks.win = newturn.blockedby || 'starvation' // TODO - gamespec logic?
                     turn.ends.win.push(stepid)
@@ -32,7 +86,7 @@ let play = {
                 if (play.hydrateStep(game,turn,nextstep)){
                     canend = true
                 } else {
-                    delete steplinks[action]
+                    delete steplinks[action] // TODO - only this is actually needed
                     delete steps[nextstepid]
                     delete links[nextstepid]
                 }

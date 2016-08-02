@@ -5,7 +5,6 @@ import fs from 'fs'
 import {js_beautify} from 'js-beautify'
 
 import daggers from './defs/daggers.json'
-import amazon from './defs/amazon.json'
 import krieg from './defs/krieg.json'
 
 let code = lib.makeGameObject({rules:krieg});

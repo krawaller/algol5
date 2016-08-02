@@ -18,7 +18,6 @@ export default C => Object.assign(C,{
         ${C.applyLinkInstructions(O,C.markRules(O))}
     `,
 
-
     // TODO - this isnt enough, linking can also use this data
     /* assumes step */
     prepareMarkStep: O=> `

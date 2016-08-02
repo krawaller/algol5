@@ -1,0 +1,168 @@
+{
+  "meta": {
+    "name": "Murus Gallicus Advanced",
+    "source": "https://boardgamegeek.com/thread/844020/advanced-murus-gallicus",
+    "tags": ["differentunits","infiltrate","shoot"],
+    "author": "Phillip L. Leduc"
+  },
+  "graphics": { "tiles": {"homerow":"playercolour"}, "icons": {"towers":"rooks","walls":"pawns","catapults":"queens"} },
+  "board": {
+    "height": 7, "width": 8,
+    "terrain": { "homerow": { "1": [["rect","a1","h1"]], "2":[["rect","a7","h7"]] } }
+  }, 
+  "setup": { "towers": { "1": [["rect","a1","h1"]], "2":[["rect","a7","h7"]] } },
+  "startTurn": {
+    "link": ["selecttower","selectcatapult"]
+  },
+  "afterstep": {
+    "link": ["endturn"]
+  },
+  "endGame": {
+      "infiltration": {"condition":["overlaps","myunits","opphomerow"]}
+  },
+  "marks": {
+    "selecttower": {
+      "from": "mytowers",
+      "runGenerators": ["findmovetargets","findkilltargets"],
+      "links": ["selectmove","selectkill"]
+    },
+    "selectmove": {
+      "from": "movetargets",
+      "runGenerator": "findmoveresults",
+      "link": "move"
+    },
+    "selectkill": {
+      "from": "killtargets",
+      "links": [
+        "kill",
+        ["if",["anyat","oppcatapults","selectkill"],"sacrifice"]
+      ]
+    },
+    "selectcatapult": {
+      "from": "mycatapults",
+      "runGenerator": "findfiretargets",
+      "link": "selectfire"
+    },
+    "selectfire": {
+      "from": "firetargets",
+      "link": "fire"
+    }
+  },
+  "commands": {
+    "move": {
+      "applyEffects": [
+        ["killat","selecttower"],
+        ["foridin","madecatapults",["setid",["loopid"],"group","catapults"]],
+        ["foridin","madetowers",["setid",["loopid"],"group","towers"]],
+        ["forposin","madewalls",["spawn","target","walls"]]
+      ],
+      "link": "endturn"
+    },
+    "kill": {
+      "applyEffects": [
+        ["setat","selecttower","group","walls"],
+        ["ifelse",
+          ["anyat","oppcatapults","selectkill"],
+          ["setat","selectkill","group","towers"],
+          ["killat","selectkill"]
+        ]
+      ],
+      "link": "endturn"
+    },
+    "sacrifice": {
+      "applyEffects": [
+        ["setat","selectkill","group","walls"],
+        ["killat","selecttower"]
+      ],
+      "link": "endturn"
+    },
+    "fire": {
+      "applyEffects": [
+        ["ifelse",
+          ["anyat","oppwalls","selectfire"],
+          ["killat","selectfire"],
+          ["ifelse",
+            ["anyat","oppunits","selectfire"],
+            ["setat","selectfire","group",["ifelse",["anyat","oppcatapults","selectfire"],"towers","walls"]],
+            ["spawn","selectfire","walls"]
+          ]
+        ],
+        ["setat","selectcatapult","group","towers"]
+      ],
+      "link": "endturn"
+    }
+  },
+  "generators": {
+    "findfiretargets": {
+      "type": "walker",
+      "start": "selectcatapult",
+      "dirs": ["playercase",[7,8,1,2,3],[3,4,5,6,7]],
+      "max": 3,
+      "draw": {
+        "steps": {
+          "condition": ["and",
+            ["morethan",["step"],1],
+            ["noneat","myunits","target"]
+          ],
+          "tolayer": "firetargets"
+        }
+      }
+    },
+    "findmovetargets": {
+      "type": "walker",
+      "blocks": ["union","oppunits","mycatapults"],
+      "start": "selecttower",
+      "dir": [1,2,3,4,5,6,7,8],
+      "max": 2,
+      "draw": {
+        "steps": {
+          "condition": ["and",
+            ["same",["walklength"],2],
+            ["same",["step"],2]
+          ],
+          "tolayer": "movetargets",
+          "include": {"dir":["dir"]}
+        }
+      }
+    },
+    "findmoveresults": {
+      "type": "neighbours",
+      "dirs": ["relativedirs",["dirs",[5]],["lookup","movetargets","selectmove","dir"]],
+      "start": "selectmove",
+      "draw": {
+        "start": {
+          "tolayer": ["ifelse",
+            ["anyat","myunits","selectmove"],
+            ["ifelse",
+              ["anyat","mytowers","selectmove"],
+              "madecatapults",
+              "madetowers"
+            ],
+            "madewalls"
+          ]
+        },
+        "neighbours": {
+          "tolayer": ["ifelse",
+            ["anyat","myunits",["target"]],
+            ["ifelse",
+              ["anyat","mytowers",["target"]],
+              "madecatapults",
+              "madetowers"
+            ],
+            "madewalls"
+          ]
+        }
+      }
+    },
+    "findkilltargets": {
+      "type": "neighbours",
+      "starts": "selecttower",
+      "ifover": ["union","oppcatapults","oppwalls"],
+      "draw": {
+        "target": {
+          "tolayer": "killtargets"
+        }
+      }
+    }
+  }
+}

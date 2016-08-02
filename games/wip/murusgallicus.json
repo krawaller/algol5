@@ -1,0 +1,97 @@
+{
+  "STATUS": "probably missing relativedirs stuff",
+  "meta": {
+    "name": "Murus Gallicus",
+    "source": "https://boardgamegeek.com/filepage/46316/murus-gallicus-detailed-rules",
+    "tags": ["differentunits","infiltrate"],
+    "author": "Phillip L. Leduc"
+  },
+  "graphics": { "tiles": {"homerow":"playercolour"}, "icons": {"towers":"rooks","walls":"pawns"} },
+  "board": {
+    "height": 7, "width": 8,
+    "terrain": { "homerow": { "1": [["rect","a1","h1"]], "2":[["rect","a7","h7"]] } }
+  },
+  "setup": { "towers": { "1": [["rect","a1","h1"]], "2":[["rect","a7","h7"]] } },
+  "startTurn": {
+    "link": "selecttower"
+  },
+  "endGame": {
+    "infiltration": {"condition":["overlaps","opphomerow","myunits"]}
+  },
+  "marks": {
+    "selecttower": {
+      "from": "mytowers",
+      "runGenerators": ["findmovetargets","findkilltargets"],
+      "links": [ "selectmove", "selectkill" ]
+    },
+    "selectmove": {
+      "from": "movetargets",
+      "runGenerator": "findmoveresults",
+      "link": ["move"]
+    },
+    "selectkill": {
+      "from": "killtargets",
+      "link": ["kill"]
+    }
+  },
+  "commands": {
+    "move": {
+      "applyEffects": [
+        ["killat","selecttower"],
+        ["foridin","madetowers",["setid",["loopid"],"group","towers"]],
+        ["forposin","madewalls",["spawn","target","walls"]]
+      ],
+      "link": "endturn"
+    },
+    "kill": {
+      "applyEffects": [
+        ["setat","selecttower","group","walls"],
+        ["killat","selectkill"]
+      ],
+      "link": "endturn"
+    }
+  },
+  "generators": {
+    "findmovetargets": {
+      "type": "walker",
+      "dir": [1,2,3,4,5,6,7,8],
+      "blocks": ["union","oppunits","mytowers"],
+      "start": "selecttower",
+      "max": 2,
+      "draw": {
+        "steps": {
+          "condition": ["and",
+            ["same",["walklength"],2],
+            ["same",["step"],2]
+          ],
+          "tolayer": "movetargets",
+          "include": {"dir":["dir"]}
+        }
+      }
+    },
+    "findmoveresults": {
+      "type": "neighbour",
+      "dirs": ["relativedirs",["dirs",[5]],["lookup","movetargets","selectmove","dir"]],
+      "start": "selectmove",
+      "draw": {
+        "start": {
+          "tolayer": ["ifelse",["anyat","myunits","selectmove"],"madetowers","madewalls"]
+        },
+        "neighbours": {
+          "tolayer": ["ifelse",["anyat","myunits","target"],"madetowers","madewalls"]
+        }
+      }
+    },
+    "findkilltargets": {
+      "type": "neighbour",
+      "start": "selecttower",
+      "dir": [1,2,3,4,5,6,7,8],
+      "ifover": "oppwalls",
+      "draw": {
+        "neighbours": {
+          "tolayer": "killtargets"
+        }
+      }
+    }
+  }
+}

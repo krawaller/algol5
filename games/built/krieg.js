@@ -419,7 +419,9 @@ let makeGame =
       var otherplayer = 2;
       game.selectunit1 =
         function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS);
+          var ARTIFACTS = {
+            movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
+          };
           var UNITLAYERS = step.UNITLAYERS;
           var MARKS = Object.assign({}, step.MARKS, {
             selectunit: markpos
@@ -430,7 +432,9 @@ let makeGame =
           var startconnections = connections[STARTPOS];
           for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
             var POS = startconnections[neighbourdirs[dirnbr]];
-            if (POS && !UNITLAYERS.units[POS]) {}
+            if (POS && !UNITLAYERS.units[POS]) {
+              ARTIFACTS['movetargets'][POS] = {};
+            }
           } 
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -449,6 +453,8 @@ let makeGame =
         };
       game.selectmove1 =
         function(turn, step, markpos) {
+          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+          var UNITLAYERS = step.UNITLAYERS;
           var MARKS = Object.assign({}, step.MARKS, {
             selectmove: markpos
           });
@@ -464,7 +470,7 @@ let makeGame =
         };
       game.move1 =
         function(turn, step) {
-          var ARTIFACTS = step.ARTIFACTS;
+          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var MARKS = step.MARKS;
           var UNITDATA = Object.assign({}, step.UNITDATA);
           var UNITLAYERS = step.UNITLAYERS;
@@ -677,7 +683,9 @@ let makeGame =
       var otherplayer = 1;
       game.selectunit2 =
         function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS);
+          var ARTIFACTS = {
+            movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
+          };
           var UNITLAYERS = step.UNITLAYERS;
           var MARKS = Object.assign({}, step.MARKS, {
             selectunit: markpos
@@ -688,7 +696,9 @@ let makeGame =
           var startconnections = connections[STARTPOS];
           for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
             var POS = startconnections[neighbourdirs[dirnbr]];
-            if (POS && !UNITLAYERS.units[POS]) {}
+            if (POS && !UNITLAYERS.units[POS]) {
+              ARTIFACTS['movetargets'][POS] = {};
+            }
           } 
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -707,6 +717,8 @@ let makeGame =
         };
       game.selectmove2 =
         function(turn, step, markpos) {
+          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+          var UNITLAYERS = step.UNITLAYERS;
           var MARKS = Object.assign({}, step.MARKS, {
             selectmove: markpos
           });
@@ -722,7 +734,7 @@ let makeGame =
         };
       game.move2 =
         function(turn, step) {
-          var ARTIFACTS = step.ARTIFACTS;
+          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var MARKS = step.MARKS;
           var UNITDATA = Object.assign({}, step.UNITDATA);
           var UNITLAYERS = step.UNITLAYERS;

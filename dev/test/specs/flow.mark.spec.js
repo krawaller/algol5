@@ -5,20 +5,6 @@ let F = lib
 
 describe("The flow mark stuff",()=>{
     test(F,'prepareMarkStep',{
-        'when no generators': {
-            scope: {
-                step: {
-                    ARTIFACTS: {my:'artifacts'},
-                    UNITLAYERS: {my:'unitlayers'}
-                },
-                ARTIFACTS: 'dontoverwriteme',
-                UNITLAYERS: 'dontoverwriteme',
-            },
-            mutations: {
-                ARTIFACTS: 'dontoverwriteme',
-                UNITLAYERS: 'dontoverwriteme',
-            }
-        },
         'when has generators': {
             options: {
                 markname: 'somemark',
@@ -32,16 +18,18 @@ describe("The flow mark stuff",()=>{
             },
             scope: {
                 step: {
-                    ARTIFACTS: {my:'artifacts'},
                     UNITLAYERS: {my:'unitlayers'}
                 },
             },
             mutations: {
-                ARTIFACTS: {my:'artifacts'},
+                ARTIFACTS: 'artifactsformymark',
                 UNITLAYERS: {my:'unitlayers'}
             },
+            context: {
+                markRules: (O)=> '"mymark"',
+                copyArtifactsForAction: (O,def)=> '"artifactsfor"+'+def
+            },
             additionally: {
-                'copy artifacts': 'ARTIFACTS !== step.ARTIFACTS',
                 'dont copy unitlayers': 'UNITLAYERS === step.UNITLAYERS'
             }
         },

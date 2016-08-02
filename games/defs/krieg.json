@@ -65,7 +65,7 @@
         ]
       ],
       "draw": {
-        "target": {
+        "neighbours": {
           "tolayer": "movetargets"
         }
       }

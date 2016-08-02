@@ -22,14 +22,10 @@ export default C => Object.assign(C,{
     // TODO - this isnt enough, linking can also use this data
     /* assumes step */
     prepareMarkStep: O=> `
-        ${C.markGenerates(O) ? `
-            var ARTIFACTS = Object.assign({},step.ARTIFACTS);
-            var UNITLAYERS = step.UNITLAYERS;
-        ` : ``}
+        var ARTIFACTS = ${C.copyArtifactsForAction(O,C.markRules(O))};
+        var UNITLAYERS = step.UNITLAYERS;
         ${C.usesTurnVars(O) ? 'var TURNVARS = step.TURNVARS; ' : ''}
     `,
-
-
 
     /*
     assumes markname in options

@@ -4,6 +4,19 @@ import isArray from "lodash/lang/isArray"
 
 export default C => Object.assign(C,{
 
+    // assumes step
+    copyArtifactsForAction: (O,actiondef)=> {
+        let actionlayers = C.actionLayers(O,actiondef)
+        let ret = '{'
+        ret += actionlayers.map(l=>l+': Object.assign({},step.ARTIFACTS.'+l+')').join(', ')
+        ret += '}'
+        if (actionlayers.length === Object.keys(C.blankArtifactLayers(O,true)).length){
+            return ret;
+        } else {
+            return 'Object.assign({},step.ARTIFACTS,'+ret+')'
+        }
+    },
+
     isTerrainNeutral: O=> !Object.keys(O && O.rules && O.rules.board && O.rules.board.terrain || {})
         .filter(t=> t[1] || t[2]).length,
 
@@ -69,14 +82,12 @@ export default C => Object.assign(C,{
     /*
     Calculates all possible artifact layers used in the game
     */
-    blankArtifactLayers: (O)=> JSON.stringify(reduce(O && O.rules && O.rules.generators||{},(mem,gendef,key)=>{
-        return reduce(gendef.draw,(mem2,drawdef)=> {
-            return reduce(C.possibilities(drawdef.tolayer),(mem3,l)=> {
-                const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]
-                return reduce(list, (mem4,l)=> ({...mem4, [l]:{} }), mem3)
-            },mem2)
-        },mem)
-    },{})),
+    blankArtifactLayers: (O,pure)=> {
+        let ret = reduce(O && O.rules && O.rules.generators||{},(mem,gendef,key)=>{
+            return Object.assign(mem,C.generatorLayers(gendef));
+        },{})
+        return pure ? ret : JSON.stringify(ret)
+    },
 
     /*
     Calculates the three BOARD layers (board,light,dark) and returns them.

@@ -107,7 +107,6 @@ describe("The flow commands",()=>{
                 step: {
                     UNITDATA: {my:'unitdata'},
                     MARKS: {my:'marks'},
-                    ARTIFACTS: {my:'artifacts'},
                     UNITLAYERS: {my:'unitlayers'}
                 },
                 newunitid: 'dontoverwriteme'
@@ -115,13 +114,16 @@ describe("The flow commands",()=>{
             mutations: {
                 UNITDATA: {my:'unitdata'},
                 MARKS: {my:'marks'},
-                ARTIFACTS: {my:'artifacts'},
+                ARTIFACTS: 'artifactsformycmnd',
                 UNITLAYERS: {my:'unitlayers'},
                 newunitid: 'dontoverwriteme'
             },
+            context: {
+                cmndRules: (O)=> '"mycmnd"',
+                copyArtifactsForAction: (O,def)=> '"artifactsfor"+'+def
+            },
             additionally: {
                 'copy unitdata': 'UNITDATA !== step.UNITDATA',
-                'dont copy artifacts': 'ARTIFACTS === step.ARTIFACTS',
                 'dont copy marks': 'MARKS === step.MARKS',
                 'dont copy unitlayers': 'UNITLAYERS === step.UNITLAYERS'
             }

@@ -498,7 +498,9 @@
 	    var player = 1;
 	    var otherplayer = 2;
 	    game.selectunit1 = function (turn, step, markpos) {
-	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS);
+	      var ARTIFACTS = {
+	        movetargets: (0, _assign2.default)({}, step.ARTIFACTS.movetargets)
+	      };
 	      var UNITLAYERS = step.UNITLAYERS;
 	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
 	        selectunit: markpos
@@ -509,7 +511,9 @@
 	      var startconnections = connections[STARTPOS];
 	      for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
 	        var POS = startconnections[neighbourdirs[dirnbr]];
-	        if (POS && !UNITLAYERS.units[POS]) {}
+	        if (POS && !UNITLAYERS.units[POS]) {
+	          ARTIFACTS['movetargets'][POS] = {};
+	        }
 	      }
 	      var newstepid = step.stepid + '-' + markpos;
 	      var newstep = turn.steps[newstepid] = (0, _assign2.default)({}, step, {
@@ -527,6 +531,8 @@
 	      return newstep;
 	    };
 	    game.selectmove1 = function (turn, step, markpos) {
+	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS, {});
+	      var UNITLAYERS = step.UNITLAYERS;
 	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
 	        selectmove: markpos
 	      });
@@ -541,7 +547,7 @@
 	      return newstep;
 	    };
 	    game.move1 = function (turn, step) {
-	      var ARTIFACTS = step.ARTIFACTS;
+	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS, {});
 	      var MARKS = step.MARKS;
 	      var UNITDATA = (0, _assign2.default)({}, step.UNITDATA);
 	      var UNITLAYERS = step.UNITLAYERS;
@@ -752,7 +758,9 @@
 	    var player = 2;
 	    var otherplayer = 1;
 	    game.selectunit2 = function (turn, step, markpos) {
-	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS);
+	      var ARTIFACTS = {
+	        movetargets: (0, _assign2.default)({}, step.ARTIFACTS.movetargets)
+	      };
 	      var UNITLAYERS = step.UNITLAYERS;
 	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
 	        selectunit: markpos
@@ -763,7 +771,9 @@
 	      var startconnections = connections[STARTPOS];
 	      for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
 	        var POS = startconnections[neighbourdirs[dirnbr]];
-	        if (POS && !UNITLAYERS.units[POS]) {}
+	        if (POS && !UNITLAYERS.units[POS]) {
+	          ARTIFACTS['movetargets'][POS] = {};
+	        }
 	      }
 	      var newstepid = step.stepid + '-' + markpos;
 	      var newstep = turn.steps[newstepid] = (0, _assign2.default)({}, step, {
@@ -781,6 +791,8 @@
 	      return newstep;
 	    };
 	    game.selectmove2 = function (turn, step, markpos) {
+	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS, {});
+	      var UNITLAYERS = step.UNITLAYERS;
 	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
 	        selectmove: markpos
 	      });
@@ -795,7 +807,7 @@
 	      return newstep;
 	    };
 	    game.move2 = function (turn, step) {
-	      var ARTIFACTS = step.ARTIFACTS;
+	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS, {});
 	      var MARKS = step.MARKS;
 	      var UNITDATA = (0, _assign2.default)({}, step.UNITDATA);
 	      var UNITLAYERS = step.UNITLAYERS;
@@ -1260,43 +1272,51 @@
 	var endgameactions = { win: 1, lose: 1, draw: 1 };
 
 	var play = {
-	    hydrateTurn: function hydrateTurn(game, turn) {
+	    hydrateStep: function hydrateStep(game, turn, step) {
 	        var steps = turn.steps;
+	        var stepid = step.stepid;
 	        var links = turn.links;
-
-	        var checkSteps = [steps.root];
+	        var steplinks = links[stepid];
+	        var checkActions = (0, _keys2.default)(steplinks);
+	        var canend = false;
+	        while (checkActions.length) {
+	            var action = checkActions.pop();
+	            var func = steplinks[action];
+	            if (endgameactions[action]) {
+	                turn.ends[action].push(stepid);
+	                canend = true;
+	            } else if (action === 'endturn') {
+	                var newturn = play.tryToReachTurnEnd(game, game[func](turn, step));
+	                if (newturn.canend) {
+	                    turn.next[stepid] = newturn; // TODO - save newturn too?
+	                } else {
+	                        steplinks.win = newturn.blockedby || 'starvation'; // TODO - gamespec logic?
+	                        turn.ends.win.push(stepid);
+	                        delete steplinks.endturn;
+	                    }
+	                canend = true;
+	            } else {
+	                var nextstepid = stepid + '-' + action;
+	                var nextstep = steps[nextstepid] || (steps[nextstepid] = game[func](turn, step, action));
+	                if (play.hydrateStep(game, turn, nextstep)) {
+	                    canend = true;
+	                } else {
+	                    delete steplinks[action];
+	                    delete steps[nextstepid];
+	                    delete links[nextstepid];
+	                }
+	            }
+	        }
+	        return canend;
+	    },
+	    hydrateTurn: function hydrateTurn(game, turn) {
 	        turn.ends = {
 	            win: [],
 	            draw: [],
 	            lose: []
 	        };
 	        turn.next = {};
-	        while (checkSteps.length) {
-	            var step = checkSteps.pop();
-	            var stepid = step.stepid;
-	            var steplinks = links[stepid];
-	            var checkActions = (0, _keys2.default)(steplinks);
-	            while (checkActions.length) {
-	                var action = checkActions.pop();
-	                var func = steplinks[action];
-	                if (endgameactions[action]) {
-	                    turn.ends[action].push(stepid);
-	                } else if (action === 'endturn') {
-	                    var newturn = play.tryToReachTurnEnd(game, game[func](turn, step));
-	                    if (newturn.canend) {
-	                        turn.next[stepid] = newturn;
-	                        // TODO - save newturn too?
-	                    } else {
-	                            steplinks.win = newturn.blockedby || 'starvation'; // TODO - gamespec logic?
-	                            turn.ends.win.push(stepid);
-	                            delete steplinks.endturn;
-	                        }
-	                } else {
-	                    var nextstepid = stepid + '-' + action;
-	                    checkSteps.push(steps[nextstepid] || (steps[nextstepid] = game[func](turn, step, action)));
-	                }
-	            }
-	        }
+	        play.hydrateStep(game, turn, turn.steps.root);
 	        return turn;
 	    },
 	    tryToReachTurnEnd: function tryToReachTurnEnd(game, turn) {

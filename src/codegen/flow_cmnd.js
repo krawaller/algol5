@@ -22,7 +22,7 @@ export default C => Object.assign(C,{
     assumes step
     */
     prepareCommandStep: O=> `
-        var ARTIFACTS = step.ARTIFACTS;
+        var ARTIFACTS = ${C.copyArtifactsForAction(O,C.cmndRules(O))};
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({},step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;

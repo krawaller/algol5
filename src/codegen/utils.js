@@ -24,6 +24,23 @@ Helper functions which all returns actual values, not stringified
 
 export default U => Object.assign(U,{
 
+	/*
+	Calculate all Artifact layers affected by an action
+	*/
+	actionLayers: (O,actiondef)=> Object.keys((actiondef.runGenerators||[]).concat(actiondef.runGenerator || []).reduce((mem,gen)=> {
+		return Object.assign(mem,U.generatorLayers(O.rules.generators[gen]))
+	},{})),
+
+  /*
+  Calculates all layers used by a generator
+  */
+  generatorLayers: (gendef)=> reduce(gendef.draw,(mem2,drawdef)=> {
+    return reduce(U.possibilities(drawdef.tolayer),(mem3,l)=> {
+      const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]
+      return reduce(list, (mem4,l)=> ({...mem4, [l]:{} }), mem3)
+    },mem2)
+  },{}),
+
 	usesTurnVars: (O)=> {
 		O = O || {}
 		O.rules = O.rules || {}

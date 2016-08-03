@@ -27,6 +27,7 @@ let App = React.createClass({
   },
   render() {
     let s = this.state.session
+    console.log("GONNA RENDER",s)
     return (
       <div>
         <h4>Playing Krieg!</h4>

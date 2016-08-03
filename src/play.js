@@ -3,6 +3,31 @@ import mapValues from 'lodash/object/mapValues'
 let endgameactions = {win:1,lose:1,draw:1}
 
 let play = {
+    inflateFromSave: (game,turnnbr,save)=> {
+        let turn = game.newGame()
+        turn = play.hydrateTurn(game,turn)
+        let moves = save
+        let stepid = 'root'
+        while(turn.turn < turnnbr){
+            let action, available = Object.keys(turn.links[stepid]).sort()
+            if (available.length === 1){
+                action = available[0]
+            } else if (available.length > 1){
+                if (!moves.length){ throw "Many available but no save index left!" }
+                action = available[moves.shift()]
+            } else {
+                throw "No available actions!"
+            }
+            let func = turn.links[stepid][action]
+            if (action === 'endturn'){
+                turn = play.hydrateTurn(game,turn.next[stepid])
+                stepid = 'root'
+            } else {
+                stepid = stepid+'-'+[action]
+            } // TODO endgame funcs too!
+        }
+        return turn
+    },
     startGameSession: (game)=> {
         let turn = game.newGame()
         turn = play.hydrateTurn(game,turn)
@@ -77,14 +102,14 @@ let play = {
     },
     getSessionUI: ({game,turn,step,undo})=> Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
         if (endgameactions[action]||action=='endturn'||action==='next'){
-            mem.system.endturn = action
+            mem.system.push(action)
         } else if (game.commands[action]){
-            mem.commands[action] = turn.links[step.stepid][action]
+            mem.commands.push(action)
         } else {
-            mem.marks[action] = turn.links[step.stepid][action]
+            mem.marks.push(action)
         }
         return mem
-    },{marks:{},commands:{},system:undo.length?{undo:'undo'}:{}}), // TODO - refactor to be arrays, much better
+    },{marks:[],commands:[],system:undo.length?['undo']:[]}),
     hydrateStep: (game,turn,step)=> {
         let steps = turn.steps
         let stepid = step.stepid

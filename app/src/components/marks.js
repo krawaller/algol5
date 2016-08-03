@@ -14,7 +14,7 @@ let Marks = (props)=> {
         let callback = ()=> props.selectMark(pos)
         return <Square onClick={callback} key={pos} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc} also="mark activemark"/>
     })
-    let potentialMarks = map(props.potentialMarks,(func,pos)=> {
+    let potentialMarks = props.potentialMarks.map((pos)=> {
         let coords = lib.pos2coords(pos)
         let callback = ()=> props.selectMark(pos)
         return <Square onClick={callback} key={pos} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc} also="mark potentialmark"/>

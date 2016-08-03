@@ -3,10 +3,10 @@ import map from "lodash/collection/map"
 export default C => Object.assign(C,{
 
     linkToEndturn(O) {
-        let ret = C.applyGeneratorInstructions({...(O || {}), generating:true},O.rules.endturn || {})
-        return ret + map(O.rules.endturn && O.rules.endturn.unless,(cond,name)=> {
+        let ret = C.applyGeneratorInstructions({...(O || {}), generating:true},O.rules.endTurn || {})
+        return ret + map(O.rules.endTurn && O.rules.endTurn.unless,(cond,name)=> {
             return 'if ('+C.boolean(O,cond)+'){ turn.blockedby = "'+name+'"; } '
-        }).concat(map(O.rules.endgame,(def,name)=> `
+        }).concat(map(O.rules.endGame,(def,name)=> `
             if (${C.boolean(O,def.condition)}) { 
                 var winner = ${C.value(O,def.who||O.player)};
                 var result = winner === ${O.player} ? 'win' : winner ? 'lose' : 'draw';

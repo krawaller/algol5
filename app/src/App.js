@@ -18,6 +18,13 @@ let App = React.createClass({
       session: play.makeSessionAction(this.state.session,action)
     })
   },
+  removeMark(pos) {
+    let s = this.state.session
+    s.step = s.turn.steps[ s.marks[pos] ]
+    this.setState({
+      session: s
+    })
+  },
   render() {
     let s = this.state.session
     return (

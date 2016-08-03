@@ -1,4 +1,4 @@
-
+import mapValues from 'lodash/object/mapValues'
 
 let endgameactions = {win:1,lose:1,draw:1}
 
@@ -11,22 +11,50 @@ let play = {
             turn: turn,
             step: turn.steps.root,
             save: [],
+            marks: {},
+            undo: []
         }
         session.UI = play.getSessionUI(session)
         return session;
     },
     makeSessionAction: (session,action)=> {
-        if (endgameactions[action]){
+        if (session.marks[action]){ // removing a mark
+            session.step = session.turn.steps[session.marks[action]]
+
+            session.marks = Object.keys(session.step.MARKS).reduce((mem,markname)=>{
+                let pos = session.step.MARKS[markname]
+                mem[pos] = session.marks[pos]
+                return mem
+            },{})
+
+            session.UI = play.getSessionUI(session)
+        } else if (action==='undo') {
+            let [gobackto,removemarks] = session.undo.pop()
+            session.step = session.turn.steps[gobackto]
+
+            session.marks = removemarks
+
+            session.UI = play.getSessionUI(session)
+        } else if (endgameactions[action]){
             // TODO - end the session!
         } else if (action==='endturn'){
             session.save = session.save.concat( play.calculateSave(session.turn,session.step) )
             session.turn = play.hydrateTurn(session.game, session.turn.next[session.step.stepid])
             session.step = session.turn.steps.root
+            session.marks = {}
+            session.undo = []
             session.UI = play.getSessionUI(session)
         } else {
+            if (!session.game.commands[action]){
+                session.marks[action] = session.step.stepid
+            } else {
+                session.undo.push([session.step.stepid,session.marks])
+                session.marks = {}
+            }
             session.step = session.turn.steps[session.step.stepid+'-'+action]
             session.UI = play.getSessionUI(session)
         }
+        console.log("SESS",session)
         return session
     },
     calculateSave: (turn,step)=> {
@@ -38,7 +66,7 @@ let play = {
             let available = Object.keys(turn.links[id]).sort()
             let index = available.indexOf(action)
             if (index === -1){
-                throw "Didnt find action!"
+                throw "Didnt find action!" // TODO - make it work for win/lose/draw
             }
             if (available.length>1){
                 ret.push(index)
@@ -47,7 +75,7 @@ let play = {
         }
         return ret
     },
-    getSessionUI: ({game,turn,step})=> Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
+    getSessionUI: ({game,turn,step,undo})=> Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
         if (endgameactions[action]||action=='endturn'||action==='next'){
             mem.system.endturn = action
         } else if (game.commands[action]){
@@ -56,7 +84,7 @@ let play = {
             mem.marks[action] = turn.links[step.stepid][action]
         }
         return mem
-    },{marks:{},commands:{},system:{}}),
+    },{marks:{},commands:{},system:undo.length?{undo:'undo'}:{}}), // TODO - refactor to be arrays, much better
     hydrateStep: (game,turn,step)=> {
         let steps = turn.steps
         let stepid = step.stepid

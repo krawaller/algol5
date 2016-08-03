@@ -22,7 +22,7 @@ describe("The flow commands",()=>{
             options: {
                 player: 1,
                 rules: {
-                    endgame: {
+                    endGame: {
                         gnarf: {condition:['true'], who:['ifelse',['true'],2,1]}
                     }
                 }
@@ -40,7 +40,7 @@ describe("The flow commands",()=>{
             options: {
                 player: 1,
                 rules: {
-                    endgame: {
+                    endGame: {
                         gnarf: {condition:['true']}
                     }
                 }
@@ -58,10 +58,10 @@ describe("The flow commands",()=>{
             options: {
                 player: 1,
                 rules: {
-                    endturn: {
+                    endTurn: {
                         runGenerator: 'findblurbs',
                     },
-                    endgame: {
+                    endGame: {
                         wee: {condition:['true'],who:['ifelse',['notempty','blurbs'],0,1]}
                     },
                     generators: {
@@ -110,7 +110,7 @@ describe("The flow commands",()=>{
             arg: ['endturn'],
             options: {
                 rules: {
-                    endturn: {
+                    endTurn: {
                         unless: {
                             stupid: ['false'],
                             silly: ['true']
@@ -130,7 +130,7 @@ describe("The flow commands",()=>{
         'when linking to endturn truthilly depending on single gen': {
             options: {
                 rules: {
-                    endturn: {
+                    endTurn: {
                         runGenerator: 'findblurbs',
                         unless: {
                             noblurbs: ['isempty','blurbs']
@@ -166,7 +166,7 @@ describe("The flow commands",()=>{
         'when linking to endturn but unlessed by generator': {
             options: {
                 rules: {
-                    endturn: {
+                    endTurn: {
                         runGenerator: 'findblurbs',
                         unless: {
                             blurbs: ['notempty','blurbs']

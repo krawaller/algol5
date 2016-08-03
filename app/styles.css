@@ -1,0 +1,33 @@
+.board {
+    height: 300px;
+    width: 300px;
+    border: 1px solid black;
+    position: relative;
+}
+
+.square {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+
+.owner1 {
+    color: blue;
+}
+
+.owner2 {
+    color: red;
+}
+
+.mark {
+    border: 3px solid yellow;
+    border-radius: 500px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.potentialmark {
+    opacity: 0.2;
+}

@@ -65,10 +65,6 @@
 
 	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _keys = __webpack_require__(2);
 
 	var _keys2 = _interopRequireDefault(_keys);
@@ -980,9 +976,36 @@
 	  game.commands = {
 	    "move": 1
 	  };
+	  game.graphics = {
+	    "tiles": {
+	      "corners": "playercolour",
+	      "bases": "castle"
+	    },
+	    "icons": {
+	      "notfrozens": "knights",
+	      "frozens": "rooks"
+	    }
+	  };
+	  game.board = {
+	    "width": 4,
+	    "height": 4,
+	    "terrain": {
+	      "southeast": ["a4", "c2"],
+	      "northwest": ["b3", "d1"],
+	      "corners": {
+	        "1": ["a4"],
+	        "2": ["d1"]
+	      },
+	      "bases": {
+	        "1": ["b4", "a3", "b3"],
+	        "2": ["c2", "d2", "c1"]
+	      }
+	    }
+	  };
 	  return game;
 	};
-	exports.default = makeGame();
+	var instance = makeGame();
+	module.exports = instance;
 
 /***/ },
 /* 2 */
@@ -1289,7 +1312,7 @@
 	    },
 	    makeSessionAction: function makeSessionAction(session, action) {
 	        if (endgameactions[action]) {
-	            // end the session!
+	            // TODO - end the session!
 	        } else if (action === 'endturn') {
 	                session.save = session.save.concat(play.calculateSave(session.turn, session.step));
 	                session.turn = play.hydrateTurn(session.game, session.turn.next[session.step.stepid]);
@@ -1304,7 +1327,7 @@
 	    calculateSave: function calculateSave(turn, step) {
 	        var ret = [];
 	        var id = 'root';
-	        var followActions = step.path.concat();
+	        var followActions = step.path.concat('endturn');
 	        while (followActions.length) {
 	            var action = followActions.shift();
 	            var available = (0, _keys2.default)(turn.links[id]).sort();

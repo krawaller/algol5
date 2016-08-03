@@ -1,4 +1,4 @@
-let makeGame =
+let makeGame = (
   function() {
     var game = {};
     var connections = {
@@ -909,6 +909,34 @@ let makeGame =
     game.commands = {
       "move": 1
     };
+    game.graphics = {
+      "tiles": {
+        "corners": "playercolour",
+        "bases": "castle"
+      },
+      "icons": {
+        "notfrozens": "knights",
+        "frozens": "rooks"
+      }
+    };
+    game.board = {
+      "width": 4,
+      "height": 4,
+      "terrain": {
+        "southeast": ["a4", "c2"],
+        "northwest": ["b3", "d1"],
+        "corners": {
+          "1": ["a4"],
+          "2": ["d1"]
+        },
+        "bases": {
+          "1": ["b4", "a3", "b3"],
+          "2": ["c2", "d2", "c1"]
+        }
+      }
+    };
     return game;
-  };
-export default makeGame()
+  }
+);
+let instance = makeGame();
+module.exports = instance;

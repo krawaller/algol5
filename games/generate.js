@@ -10,8 +10,9 @@ import krieg from './defs/krieg.json'
 let code = lib.makeGameObject({rules:krieg});
 
 code = `
-	let makeGame = ${code};
-	export default makeGame() 
+	let makeGame = (${code});
+  let instance = makeGame();
+	module.exports = instance;
 `
 
 code = js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n');

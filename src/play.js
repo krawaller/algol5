@@ -17,7 +17,7 @@ let play = {
     },
     makeSessionAction: (session,action)=> {
         if (endgameactions[action]){
-            // end the session!
+            // TODO - end the session!
         } else if (action==='endturn'){
             session.save = session.save.concat( play.calculateSave(session.turn,session.step) )
             session.turn = play.hydrateTurn(session.game, session.turn.next[session.step.stepid])

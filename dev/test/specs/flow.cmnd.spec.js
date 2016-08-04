@@ -56,7 +56,7 @@ describe("The flow commands",()=>{
                 UNITDATA: 'newunitdata',
                 UNITLAYERS: 'newunitlayers',
                 newstepid: 'newid',
-                newunitid: 42
+                clones: 42
             },
             expected: {
                 ARTIFACTS: 'newartifacts',
@@ -65,7 +65,7 @@ describe("The flow commands",()=>{
                 UNITLAYERS: 'newunitlayers',
                 stepid: 'newid',
                 path: ['foo','somecmnd'],
-                newunitid: 42
+                clones: 42
             }
         }
     })
@@ -139,11 +139,11 @@ describe("The flow commands",()=>{
             },
             scope: {
                 step: {
-                    newunitid: 2
+                    clones: 2
                 },
             },
             mutations: {
-                newunitid: 2
+                clones: 2
             }
         },
         'when uses turnvars': {

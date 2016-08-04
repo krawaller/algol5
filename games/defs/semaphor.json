@@ -7,14 +7,10 @@
   },
   "graphics": {"icons":{"kings":"kings","pawns":"pawns","bishops":"bishops"}},
   "board": {"width":4,"height":3},
-  "startturn": {
-    "link": ["selectdeploytarget","selectunit"]
+  "startTurn": {
+    "links": ["selectdeploytarget","selectunit"]
   },
-  "afterstep": {
-    "runGenerator": "findlines",
-    "link": "endturn"
-  },
-  "endgame": {
+  "endGame": {
     "madeline": {"condition":["notempty","line"]}
   },
   "marks": {
@@ -29,10 +25,14 @@
   },
   "commands": {
     "deploy": {
-      "applyEffect": ["spawn","selectdeploytarget","pawns",0]
+      "applyEffect": ["spawn","selectdeploytarget","pawns",0],
+      "runGenerator": "findlines",
+      "link": "endturn"
     },
     "promote": {
-      "applyEffect": ["setat","selectunit","group",["ifelse",["anyat","pawns","selectunit"],"bishops","kings"]]
+      "applyEffect": ["setat","selectunit","group",["ifelse",["anyat","pawns","selectunit"],"bishops","kings"]],
+      "runGenerator": "findlines",
+      "link": "endturn"
     }
   },
   "generators": {
@@ -40,7 +40,7 @@
       "type": "walker",
       "dirs": [1,2,3,4],
       "starts": "units",
-      "steps": ["layer",["lookup","units",["start"],"group"]],
+      "steps": ["unitlayer",["read","units",["start"],"group"]],
       "draw": {
         "steps": {
           "condition": ["morethan",["walklength"],1],

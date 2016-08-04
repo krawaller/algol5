@@ -8,14 +8,17 @@ describe("The flow package commands",()=>{
             context: {
                 addCommonVariables: O=> `game.common = ${O.foo}; `,
                 addPlayerClosure: O=> `game.plr${O.player}=game.common; `,
-                addCommonFunctions: O=> `game.cfunc = ${O.foo}; `
+                addCommonFunctions: O=> `game.cfunc = ${O.foo}; `,
+                addGameData: O=> `game.data = ${O.foo}; `
+
             },
             execwith: [],
             expected: {
                 common: 'O',
                 plr1: 'O',
                 plr2: 'O',
-                cfunc: 'O'
+                cfunc: 'O',
+                data: 'O'
             }
         }
     })

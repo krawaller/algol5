@@ -37,29 +37,20 @@ let play = {
             turn: turn,
             step: turn.steps.root,
             save: [],
-            marks: {},
+            markTimeStamps: {},
             undo: []
         }
         session.UI = play.getSessionUI(session)
         return session;
     },
     makeSessionAction: (session,action)=> {
-        if (session.marks[action]){ // removing a mark
-            session.step = session.turn.steps[session.marks[action]]
-
-            session.marks = Object.keys(session.step.MARKS).reduce((mem,markname)=>{
-                let pos = session.step.MARKS[markname]
-                mem[pos] = session.marks[pos]
-                return mem
-            },{})
-
+        if (session.markTimeStamps[action]){ // removing a mark
+            session.step = session.turn.steps[session.markTimeStamps[action]]
+            delete session.markTimeStamps[action] // not really necessary
             session.UI = play.getSessionUI(session)
         } else if (action==='undo') {
-            let [gobackto,removemarks] = session.undo.pop()
+            let gobackto = session.undo.pop()
             session.step = session.turn.steps[gobackto]
-
-            session.marks = removemarks
-
             session.UI = play.getSessionUI(session)
         } else if (endgameactions[action]){
             // TODO - end the session!
@@ -67,15 +58,14 @@ let play = {
             session.save = session.save.concat( play.calculateSave(session.turn,session.step) )
             session.turn = play.hydrateTurn(session.game, session.turn.next[session.step.stepid])
             session.step = session.turn.steps.root
-            session.marks = {}
+            session.markTimeStamps = {}
             session.undo = []
             session.UI = play.getSessionUI(session)
         } else {
             if (!session.game.commands[action]){
-                session.marks[action] = session.step.stepid
+                session.markTimeStamps[action] = session.step.stepid
             } else {
-                session.undo.push([session.step.stepid,session.marks])
-                session.marks = {}
+                session.undo.push(session.step.stepid)
             }
             session.step = session.turn.steps[session.step.stepid+'-'+action]
             session.UI = play.getSessionUI(session)
@@ -101,7 +91,7 @@ let play = {
         }
         return ret
     },
-    getSessionUI: ({game,turn,step,undo})=> Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
+    getSessionUI: ({game,turn,step,undo,markTimeStamps})=> Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
         if (endgameactions[action]||action=='endturn'||action==='next'){
             mem.system.push(action)
         } else if (game.commands[action]){
@@ -110,7 +100,11 @@ let play = {
             mem.marks.push(action)
         }
         return mem
-    },{marks:[],commands:[],system:undo.length?['undo']:[]}),
+    },{marks:[],commands:[],system:undo.length?['undo']:[],removeMarks:Object.keys(step.MARKS).reduce((mem,markname)=>{
+        let pos = step.MARKS[markname]
+        mem[pos] = markTimeStamps[pos]
+        return mem
+    },{})}),
     hydrateStep: (game,turn,step)=> {
         let steps = turn.steps
         let stepid = step.stepid

@@ -116,17 +116,22 @@ export default T => {
                 }())`
         },
 
+        set_unitlayer: (O,[layername])=> {
+            return 'UNITLAYERS['+T.value(O,layername)+']'
+        },
 
         // layername is a plain string
         // This method sometimes used directly from elsewhere
         layerref: (O,layername)=> {
-
+            if (isArray(layername)){
+                layername = T.value(O,layername)
+            }
             var bag = {board:1,light:1,dark:1}[layername] ? "BOARD"
                 : T.blankUnitLayers(O,true)[layername] ? "UNITLAYERS"
                 : T.terrainLayers(O,true)[layername] ? "TERRAIN"
                 : "ARTIFACTS"
-
-            return bag+"."+layername; //"("+bag+"."+layername+"||{})";
+            return layername[0].match(/[a-z]/) ? bag+"."+layername : bag+"["+layername+"]"
+            //return bag+"."+layername; //"("+bag+"."+layername+"||{})";
         },
 
         // ******************** DATATYPE position **********************

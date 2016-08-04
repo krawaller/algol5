@@ -21982,7 +21982,7 @@
 /* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";var _keys=__webpack_require__(212);var _keys2=_interopRequireDefault(_keys);var _assign=__webpack_require__(224);var _assign2=_interopRequireDefault(_assign);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}module.exports={amazon:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a10":{"3":"b10","4":"b9","5":"a9"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"1":"a9","2":"b9","3":"b8","4":"b7","5":"a7"},"a9":{"1":"a10","2":"b10","3":"b9","4":"b8","5":"a8"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b10":{"3":"c10","4":"c9","5":"b9","6":"a9","7":"a10"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"1":"b9","2":"c9","3":"c8","4":"c7","5":"b7","6":"a7","7":"a8","8":"a9"},"b9":{"1":"b10","2":"c10","3":"c9","4":"c8","5":"b8","6":"a8","7":"a9","8":"a10"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c10":{"3":"d10","4":"d9","5":"c9","6":"b9","7":"b10"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"1":"c9","2":"d9","3":"d8","4":"d7","5":"c7","6":"b7","7":"b8","8":"b9"},"c9":{"1":"c10","2":"d10","3":"d9","4":"d8","5":"c8","6":"b8","7":"b9","8":"b10"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d10":{"3":"e10","4":"e9","5":"d9","6":"c9","7":"c10"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"1":"d9","2":"e9","3":"e8","4":"e7","5":"d7","6":"c7","7":"c8","8":"c9"},"d9":{"1":"d10","2":"e10","3":"e9","4":"e8","5":"d8","6":"c8","7":"c9","8":"c10"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e10":{"3":"f10","4":"f9","5":"e9","6":"d9","7":"d10"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"1":"e9","2":"f9","3":"f8","4":"f7","5":"e7","6":"d7","7":"d8","8":"d9"},"e9":{"1":"e10","2":"f10","3":"f9","4":"f8","5":"e8","6":"d8","7":"d9","8":"d10"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f10":{"3":"g10","4":"g9","5":"f9","6":"e9","7":"e10"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"1":"f9","2":"g9","3":"g8","4":"g7","5":"f7","6":"e7","7":"e8","8":"e9"},"f9":{"1":"f10","2":"g10","3":"g9","4":"g8","5":"f8","6":"e8","7":"e9","8":"e10"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g10":{"3":"h10","4":"h9","5":"g9","6":"f9","7":"f10"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"1":"g9","2":"h9","3":"h8","4":"h7","5":"g7","6":"f7","7":"f8","8":"f9"},"g9":{"1":"g10","2":"h10","3":"h9","4":"h8","5":"g8","6":"f8","7":"f9","8":"f10"},"h1":{"1":"h2","2":"i2","3":"i1","7":"g1","8":"g2"},"h10":{"3":"i10","4":"i9","5":"h9","6":"g9","7":"g10"},"h2":{"1":"h3","2":"i3","3":"i2","4":"i1","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","2":"i4","3":"i3","4":"i2","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","2":"i5","3":"i4","4":"i3","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","2":"i6","3":"i5","4":"i4","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","2":"i7","3":"i6","4":"i5","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","2":"i8","3":"i7","4":"i6","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"1":"h9","2":"i9","3":"i8","4":"i7","5":"h7","6":"g7","7":"g8","8":"g9"},"h9":{"1":"h10","2":"i10","3":"i9","4":"i8","5":"h8","6":"g8","7":"g9","8":"g10"},"i1":{"1":"i2","2":"j2","3":"j1","7":"h1","8":"h2"},"i10":{"3":"j10","4":"j9","5":"i9","6":"h9","7":"h10"},"i2":{"1":"i3","2":"j3","3":"j2","4":"j1","5":"i1","6":"h1","7":"h2","8":"h3"},"i3":{"1":"i4","2":"j4","3":"j3","4":"j2","5":"i2","6":"h2","7":"h3","8":"h4"},"i4":{"1":"i5","2":"j5","3":"j4","4":"j3","5":"i3","6":"h3","7":"h4","8":"h5"},"i5":{"1":"i6","2":"j6","3":"j5","4":"j4","5":"i4","6":"h4","7":"h5","8":"h6"},"i6":{"1":"i7","2":"j7","3":"j6","4":"j5","5":"i5","6":"h5","7":"h6","8":"h7"},"i7":{"1":"i8","2":"j8","3":"j7","4":"j6","5":"i6","6":"h6","7":"h7","8":"h8"},"i8":{"1":"i9","2":"j9","3":"j8","4":"j7","5":"i7","6":"h7","7":"h8","8":"h9"},"i9":{"1":"i10","2":"j10","3":"j9","4":"j8","5":"i8","6":"h8","7":"h9","8":"h10"},"j1":{"1":"j2","7":"i1","8":"i2"},"j10":{"5":"j9","6":"i9","7":"i10"},"j2":{"1":"j3","5":"j1","6":"i1","7":"i2","8":"i3"},"j3":{"1":"j4","5":"j2","6":"i2","7":"i3","8":"i4"},"j4":{"1":"j5","5":"j3","6":"i3","7":"i4","8":"i5"},"j5":{"1":"j6","5":"j4","6":"i4","7":"i5","8":"i6"},"j6":{"1":"j7","5":"j5","6":"i5","7":"i6","8":"i7"},"j7":{"1":"j8","5":"j6","6":"i6","7":"i7","8":"i8"},"j8":{"1":"j9","5":"j7","6":"i7","7":"i8","8":"i9"},"j9":{"1":"j10","5":"j8","6":"i8","7":"i9","8":"i10"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j8":{"colour":"dark","pos":"j8","x":10,"y":8},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"light":{"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j8":{"colour":"dark","pos":"j8","x":10,"y":8}}};var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);ARTIFACTS['targets'][POS]={};}var WALKLENGTH=walkedsquares.length;}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.targets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmovetarget1';}return newstep;};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmovetarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectfiretarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectfiretarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].fire='fire1';return newstep;};game.move1=function(turn,step){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}TURNVARS['movedto']=MARKS['selectmovetarget'];MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var STARTPOS=TURNVARS['movedto'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);ARTIFACTS['targets'][POS]={};}var WALKLENGTH=walkedsquares.length;}var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.targets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectfiretarget1';}return newstep;};game.fire1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfiretarget'],id:newunitid,group:'fires',owner:0};MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('fire'),clones:clones});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"targets":{}};var UNITDATA=step.UNITDATA;var TURNVARS=step.TURNVARS;var UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.myunits);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit1';}return turn;};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);ARTIFACTS['targets'][POS]={};}var WALKLENGTH=walkedsquares.length;}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.targets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmovetarget2';}return newstep;};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmovetarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectfiretarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectfiretarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].fire='fire2';return newstep;};game.move2=function(turn,step){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}TURNVARS['movedto']=MARKS['selectmovetarget'];MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var STARTPOS=TURNVARS['movedto'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);ARTIFACTS['targets'][POS]={};}var WALKLENGTH=walkedsquares.length;}var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.targets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectfiretarget2';}return newstep;};game.fire2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfiretarget'],id:newunitid,group:'fires',owner:0};MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('fire'),clones:clones});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"targets":{}};var UNITDATA=step.UNITDATA;var TURNVARS=step.TURNVARS;var UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.myunits);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"d10","id":"unit1","group":"queens","owner":1},"unit2":{"pos":"g10","id":"unit2","group":"queens","owner":1},"unit3":{"pos":"a7","id":"unit3","group":"queens","owner":1},"unit4":{"pos":"j7","id":"unit4","group":"queens","owner":1},"unit5":{"pos":"a4","id":"unit5","group":"queens","owner":2},"unit6":{"pos":"d1","id":"unit6","group":"queens","owner":2},"unit7":{"pos":"g1","id":"unit7","group":"queens","owner":2},"unit8":{"pos":"j4","id":"unit8","group":"queens","owner":2}},TURNVARS:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"move":1,"fire":1};game.graphics={"icons":{"queens":"queens","fires":"pawns"}};game.board={"height":10,"width":10};return game;}(),daggers:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"3":"b8","4":"b7","5":"a7"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"3":"c8","4":"c7","5":"b7","6":"a7","7":"a8"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"3":"d8","4":"d7","5":"c7","6":"b7","7":"b8"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"3":"e8","4":"e7","5":"d7","6":"c7","7":"c8"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"3":"f8","4":"f7","5":"e7","6":"d7","7":"d8"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"3":"g8","4":"g7","5":"f7","6":"e7","7":"e8"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"3":"h8","4":"h7","5":"g7","6":"f7","7":"f8"},"h1":{"1":"h2","7":"g1","8":"g2"},"h2":{"1":"h3","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"5":"h7","6":"g7","7":"g8"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8}}};(function(){var TERRAIN={"bases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1},"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}},"mybases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1}},"oppbases":{"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={killtarget:(0,_assign2.default)({},step.ARTIFACTS.killtarget),movetarget:(0,_assign2.default)({},step.ARTIFACTS.movetarget)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});if(!!UNITLAYERS.mycrowns[MARKS['selectunit']]){var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){if(!UNITLAYERS.myunits[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'killtarget':'movetarget'][POS]={};}}}}else{var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[8,1,2,4,5,6];for(var walkerdirnbr=0;walkerdirnbr<6;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var STOPREASON="";var nextpos="";var MAX=[8,1,2].indexOf(DIR)!==-1?1:8;var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;var LENGTH=0;while(!(STOPREASON=LENGTH===MAX?"reachedmax":!(nextpos=connections[POS][DIR])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);LENGTH++;ARTIFACTS['movetarget'][POS]={};}var WALKLENGTH=walkedsquares.length;if(STOPREASON==="hitblock"){POS=nextpos;if(!UNITLAYERS.myunits[POS]&&!([1,5].indexOf(DIR)!==-1&&!!UNITLAYERS.oppdaggers[POS])){ARTIFACTS['movetarget'][POS]={};}}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.movetarget);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmovetarget1';}return newstep;};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmovetarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"killtarget":{},"movetarget":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mycrowns,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else if((0,_keys2.default)(UNITLAYERS.oppcrowns).length===1){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='kingkill';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"killtarget":{},"movetarget":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.myunits);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit1';}return turn;};})();(function(){var TERRAIN={"bases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1},"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}},"oppbases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1}},"mybases":{"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={killtarget:(0,_assign2.default)({},step.ARTIFACTS.killtarget),movetarget:(0,_assign2.default)({},step.ARTIFACTS.movetarget)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});if(!!UNITLAYERS.mycrowns[MARKS['selectunit']]){var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){if(!UNITLAYERS.myunits[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'killtarget':'movetarget'][POS]={};}}}}else{var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[8,1,2,4,5,6];for(var walkerdirnbr=0;walkerdirnbr<6;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var STOPREASON="";var nextpos="";var MAX=[8,1,2].indexOf(DIR)!==-1?1:8;var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;var LENGTH=0;while(!(STOPREASON=LENGTH===MAX?"reachedmax":!(nextpos=connections[POS][DIR])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);LENGTH++;ARTIFACTS['movetarget'][POS]={};}var WALKLENGTH=walkedsquares.length;if(STOPREASON==="hitblock"){POS=nextpos;if(!UNITLAYERS.myunits[POS]&&!([1,5].indexOf(DIR)!==-1&&!!UNITLAYERS.oppdaggers[POS])){ARTIFACTS['movetarget'][POS]={};}}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.movetarget);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmovetarget2';}return newstep;};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmovetarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"killtarget":{},"movetarget":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mycrowns,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else if((0,_keys2.default)(UNITLAYERS.oppcrowns).length===1){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='kingkill';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"killtarget":{},"movetarget":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.myunits);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"d8","id":"unit1","group":"crowns","owner":1},"unit2":{"pos":"e8","id":"unit2","group":"crowns","owner":1},"unit3":{"pos":"c1","id":"unit3","group":"crowns","owner":2},"unit4":{"pos":"f1","id":"unit4","group":"crowns","owner":2},"unit5":{"pos":"c7","id":"unit5","group":"daggers","owner":1},"unit6":{"pos":"d7","id":"unit6","group":"daggers","owner":1},"unit7":{"pos":"e7","id":"unit7","group":"daggers","owner":1},"unit8":{"pos":"f7","id":"unit8","group":"daggers","owner":1},"unit9":{"pos":"c3","id":"unit9","group":"daggers","owner":2},"unit10":{"pos":"f3","id":"unit10","group":"daggers","owner":2},"unit11":{"pos":"b2","id":"unit11","group":"daggers","owner":2},"unit12":{"pos":"c2","id":"unit12","group":"daggers","owner":2},"unit13":{"pos":"d2","id":"unit13","group":"daggers","owner":2},"unit14":{"pos":"e2","id":"unit14","group":"daggers","owner":2},"unit15":{"pos":"f2","id":"unit15","group":"daggers","owner":2},"unit16":{"pos":"g2","id":"unit16","group":"daggers","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"bases":"playercolour"},"icons":{"daggers":"bishops","crowns":"kings"}};game.board={"height":8,"width":8,"terrain":{"bases":{"1":[["rect","a8","h8"]],"2":[["rect","a1","h1"]]}}};return game;}(),krieg:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"3":"b4","4":"b3","5":"a3"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"3":"c4","4":"c3","5":"b3","6":"a3","7":"a4"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"3":"d4","4":"d3","5":"c3","6":"b3","7":"b4"},"d1":{"1":"d2","7":"c1","8":"c2"},"d2":{"1":"d3","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"5":"d3","6":"c3","7":"c4"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4}}};(function(){var TERRAIN={"southeast":{"a4":{"pos":"a4"},"c2":{"pos":"c2"}},"northwest":{"b3":{"pos":"b3"},"d1":{"pos":"d1"}},"corners":{"a4":{"pos":"a4","owner":1},"d1":{"pos":"d1","owner":2}},"mycorners":{"a4":{"pos":"a4","owner":1}},"oppcorners":{"d1":{"pos":"d1","owner":2}},"bases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1},"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}},"mybases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1}},"oppbases":{"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var STARTPOS=MARKS['selectunit'];var neighbourdirs=!!TERRAIN.southeast[STARTPOS]?[1,3,4,5,7]:!!TERRAIN.northwest[STARTPOS]?[1,3,5,7,8]:[1,3,5,7];var nbrofneighbourdirs=neighbourdirs.length;var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){ARTIFACTS['movetargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.movetargets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmove1';}return newstep;};game.selectmove1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmove:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var LOOPID;for(var POS in UNITLAYERS.myfrozens){LOOPID=UNITLAYERS.myfrozens[POS].id;UNITDATA[LOOPID]=(0,_assign2.default)({},UNITDATA[LOOPID],{'group':'notfrozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'frozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmove']});}MARKS={};UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppcorners,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='cornerinfiltration';}else if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppbases,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length===2){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='occupation';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.mynotfrozens);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit1';}return turn;};})();(function(){var TERRAIN={"southeast":{"a4":{"pos":"a4"},"c2":{"pos":"c2"}},"northwest":{"b3":{"pos":"b3"},"d1":{"pos":"d1"}},"corners":{"a4":{"pos":"a4","owner":1},"d1":{"pos":"d1","owner":2}},"oppcorners":{"a4":{"pos":"a4","owner":1}},"mycorners":{"d1":{"pos":"d1","owner":2}},"bases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1},"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}},"oppbases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1}},"mybases":{"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var STARTPOS=MARKS['selectunit'];var neighbourdirs=!!TERRAIN.southeast[STARTPOS]?[1,3,4,5,7]:!!TERRAIN.northwest[STARTPOS]?[1,3,5,7,8]:[1,3,5,7];var nbrofneighbourdirs=neighbourdirs.length;var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){ARTIFACTS['movetargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.movetargets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmove2';}return newstep;};game.selectmove2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmove:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var LOOPID;for(var POS in UNITLAYERS.myfrozens){LOOPID=UNITLAYERS.myfrozens[POS].id;UNITDATA[LOOPID]=(0,_assign2.default)({},UNITDATA[LOOPID],{'group':'notfrozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'frozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmove']});}MARKS={};UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppcorners,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='cornerinfiltration';}else if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppbases,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length===2){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='occupation';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.mynotfrozens);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a4","id":"unit1","group":"notfrozens","owner":1},"unit2":{"pos":"b4","id":"unit2","group":"notfrozens","owner":1},"unit3":{"pos":"a3","id":"unit3","group":"notfrozens","owner":1},"unit4":{"pos":"b3","id":"unit4","group":"notfrozens","owner":1},"unit5":{"pos":"c2","id":"unit5","group":"notfrozens","owner":2},"unit6":{"pos":"c1","id":"unit6","group":"notfrozens","owner":2},"unit7":{"pos":"d2","id":"unit7","group":"notfrozens","owner":2},"unit8":{"pos":"d1","id":"unit8","group":"notfrozens","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"corners":"playercolour","bases":"castle"},"icons":{"notfrozens":"knights","frozens":"rooks"}};game.board={"width":4,"height":4,"terrain":{"southeast":["a4","c2"],"northwest":["b3","d1"],"corners":{"1":["a4"],"2":["d1"]},"bases":{"1":["b4","a3","b3"],"2":["c2","d2","c1"]}}};return game;}(),snijpunt:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"3":"b6","4":"b5","5":"a5"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"3":"c6","4":"c5","5":"b5","6":"a5","7":"a6"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"3":"d6","4":"d5","5":"c5","6":"b5","7":"b6"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"3":"e6","4":"e5","5":"d5","6":"c5","7":"c6"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"3":"f6","4":"f5","5":"e5","6":"d5","7":"d6"},"f1":{"1":"f2","7":"e1","8":"e2"},"f2":{"1":"f3","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"5":"f5","6":"e5","7":"e6"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6}}};(function(){var TERRAIN={"zone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1},"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"myzone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1}},"oppzone":{"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"corner":{"a6":{"pos":"a6"}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selecttarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{intersection:(0,_assign2.default)({},step.ARTIFACTS.intersection)});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selecttarget:markpos});var STARTPOS=MARKS['selecttarget'];var DIR=5;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][5])?"outofbounds":null)){walkedsquares.push(POS=nextpos);if(ARTIFACTS.enemyline[POS]){ARTIFACTS['intersection'][POS]={};}}var WALKLENGTH=walkedsquares.length;var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].snipe='snipe1';return newstep;};game.snipe1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{winline:(0,_assign2.default)({},step.ARTIFACTS.winline),loseline:(0,_assign2.default)({},step.ARTIFACTS.loseline)});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if((0,_keys2.default)(UNITLAYERS.mysniper||{}).length===0){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selecttarget'],id:newunitid,group:'sniper',owner:player};}else{var unitid=(UNITLAYERS.units[(0,_keys2.default)(UNITLAYERS.mysniper)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selecttarget']});}}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){if(!!UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]){var unitid=(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'owner':(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{})['owner']===2?1:2});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:(0,_keys2.default)(ARTIFACTS.intersection)[0],id:newunitid,group:'soldiers',owner:player};}}MARKS={};UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var walkstarts=UNITLAYERS.soldiers;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var allowedsteps=!!UNITLAYERS.mysoldiers[STARTPOS]?UNITLAYERS.mysoldiers:UNITLAYERS.oppsoldiers;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":!allowedsteps[nextpos]?"nomoresteps":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;if(WALKLENGTH>2){ARTIFACTS[!!UNITLAYERS.mysoldiers[STARTPOS]?'winline':'loseline'][POS]={};}}}var newstepid=step.stepid+'-'+'snipe';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('snipe'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.winline||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else if((0,_keys2.default)(ARTIFACTS.loseline||{}).length!==0){var winner=2;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeoppline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){var STARTPOS=(0,_keys2.default)(UNITLAYERS.oppsniper)[0];var DIR=3;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][3])?"outofbounds":null)){walkedsquares.push(POS=nextpos);if(!UNITLAYERS.units[POS]){ARTIFACTS['potentialempties'][POS]={};}ARTIFACTS['enemyline'][POS]={};}var WALKLENGTH=walkedsquares.length;var walkstarts=ARTIFACTS.potentialempties;for(var STARTPOS in walkstarts){var DIR=1;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][1])?"outofbounds":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;if(!UNITLAYERS.sniper[walkedsquares[WALKLENGTH-1]]){ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH-1]]={};}}}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)((0,_keys2.default)(ARTIFACTS.mandatory||{}).length===0?function(){var ret={},s0=TERRAIN.myzone,s1=UNITLAYERS.sniper;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}():ARTIFACTS.mandatory);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selecttarget1';}return turn;};})();(function(){var TERRAIN={"zone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1},"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"oppzone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1}},"myzone":{"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"corner":{"a6":{"pos":"a6"}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selecttarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{intersection:(0,_assign2.default)({},step.ARTIFACTS.intersection)});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selecttarget:markpos});var STARTPOS=MARKS['selecttarget'];var DIR=3;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][3])?"outofbounds":null)){walkedsquares.push(POS=nextpos);if(ARTIFACTS.enemyline[POS]){ARTIFACTS['intersection'][POS]={};}}var WALKLENGTH=walkedsquares.length;var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].snipe='snipe2';return newstep;};game.snipe2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{winline:(0,_assign2.default)({},step.ARTIFACTS.winline),loseline:(0,_assign2.default)({},step.ARTIFACTS.loseline)});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if((0,_keys2.default)(UNITLAYERS.mysniper||{}).length===0){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selecttarget'],id:newunitid,group:'sniper',owner:player};}else{var unitid=(UNITLAYERS.units[(0,_keys2.default)(UNITLAYERS.mysniper)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selecttarget']});}}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){if(!!UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]){var unitid=(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'owner':(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{})['owner']===2?1:2});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:(0,_keys2.default)(ARTIFACTS.intersection)[0],id:newunitid,group:'soldiers',owner:player};}}MARKS={};UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var walkstarts=UNITLAYERS.soldiers;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var allowedsteps=!!UNITLAYERS.mysoldiers[STARTPOS]?UNITLAYERS.mysoldiers:UNITLAYERS.oppsoldiers;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":!allowedsteps[nextpos]?"nomoresteps":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;if(WALKLENGTH>2){ARTIFACTS[!!UNITLAYERS.mysoldiers[STARTPOS]?'winline':'loseline'][POS]={};}}}var newstepid=step.stepid+'-'+'snipe';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('snipe'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.winline||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else if((0,_keys2.default)(ARTIFACTS.loseline||{}).length!==0){var winner=1;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeoppline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){var STARTPOS=(0,_keys2.default)(UNITLAYERS.oppsniper)[0];var DIR=5;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][5])?"outofbounds":null)){walkedsquares.push(POS=nextpos);if(!UNITLAYERS.units[POS]){ARTIFACTS['potentialempties'][POS]={};}ARTIFACTS['enemyline'][POS]={};}var WALKLENGTH=walkedsquares.length;var walkstarts=ARTIFACTS.potentialempties;for(var STARTPOS in walkstarts){var DIR=7;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][7])?"outofbounds":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;if(!UNITLAYERS.sniper[walkedsquares[WALKLENGTH-1]]){ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH-1]]={};}}}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)((0,_keys2.default)(ARTIFACTS.mandatory||{}).length===0?function(){var ret={},s0=TERRAIN.myzone,s1=UNITLAYERS.sniper;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}():ARTIFACTS.mandatory);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selecttarget2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"snipe":1};game.graphics={"icons":{"soldiers":"pawns","sniper":"kings"},"tiles":{"zone":"grass","corner":"castle"}};game.board={"height":6,"width":6,"terrain":{"zone":{"1":[["rect","b6","f6",5]],"2":[["rect","a1","a5",3]]},"corner":["a6"]}};return game;}()};
+	"use strict";var _keys=__webpack_require__(212);var _keys2=_interopRequireDefault(_keys);var _assign=__webpack_require__(224);var _assign2=_interopRequireDefault(_assign);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}module.exports={amazon:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a10":{"3":"b10","4":"b9","5":"a9"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"1":"a9","2":"b9","3":"b8","4":"b7","5":"a7"},"a9":{"1":"a10","2":"b10","3":"b9","4":"b8","5":"a8"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b10":{"3":"c10","4":"c9","5":"b9","6":"a9","7":"a10"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"1":"b9","2":"c9","3":"c8","4":"c7","5":"b7","6":"a7","7":"a8","8":"a9"},"b9":{"1":"b10","2":"c10","3":"c9","4":"c8","5":"b8","6":"a8","7":"a9","8":"a10"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c10":{"3":"d10","4":"d9","5":"c9","6":"b9","7":"b10"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"1":"c9","2":"d9","3":"d8","4":"d7","5":"c7","6":"b7","7":"b8","8":"b9"},"c9":{"1":"c10","2":"d10","3":"d9","4":"d8","5":"c8","6":"b8","7":"b9","8":"b10"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d10":{"3":"e10","4":"e9","5":"d9","6":"c9","7":"c10"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"1":"d9","2":"e9","3":"e8","4":"e7","5":"d7","6":"c7","7":"c8","8":"c9"},"d9":{"1":"d10","2":"e10","3":"e9","4":"e8","5":"d8","6":"c8","7":"c9","8":"c10"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e10":{"3":"f10","4":"f9","5":"e9","6":"d9","7":"d10"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"1":"e9","2":"f9","3":"f8","4":"f7","5":"e7","6":"d7","7":"d8","8":"d9"},"e9":{"1":"e10","2":"f10","3":"f9","4":"f8","5":"e8","6":"d8","7":"d9","8":"d10"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f10":{"3":"g10","4":"g9","5":"f9","6":"e9","7":"e10"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"1":"f9","2":"g9","3":"g8","4":"g7","5":"f7","6":"e7","7":"e8","8":"e9"},"f9":{"1":"f10","2":"g10","3":"g9","4":"g8","5":"f8","6":"e8","7":"e9","8":"e10"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g10":{"3":"h10","4":"h9","5":"g9","6":"f9","7":"f10"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"1":"g9","2":"h9","3":"h8","4":"h7","5":"g7","6":"f7","7":"f8","8":"f9"},"g9":{"1":"g10","2":"h10","3":"h9","4":"h8","5":"g8","6":"f8","7":"f9","8":"f10"},"h1":{"1":"h2","2":"i2","3":"i1","7":"g1","8":"g2"},"h10":{"3":"i10","4":"i9","5":"h9","6":"g9","7":"g10"},"h2":{"1":"h3","2":"i3","3":"i2","4":"i1","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","2":"i4","3":"i3","4":"i2","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","2":"i5","3":"i4","4":"i3","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","2":"i6","3":"i5","4":"i4","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","2":"i7","3":"i6","4":"i5","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","2":"i8","3":"i7","4":"i6","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"1":"h9","2":"i9","3":"i8","4":"i7","5":"h7","6":"g7","7":"g8","8":"g9"},"h9":{"1":"h10","2":"i10","3":"i9","4":"i8","5":"h8","6":"g8","7":"g9","8":"g10"},"i1":{"1":"i2","2":"j2","3":"j1","7":"h1","8":"h2"},"i10":{"3":"j10","4":"j9","5":"i9","6":"h9","7":"h10"},"i2":{"1":"i3","2":"j3","3":"j2","4":"j1","5":"i1","6":"h1","7":"h2","8":"h3"},"i3":{"1":"i4","2":"j4","3":"j3","4":"j2","5":"i2","6":"h2","7":"h3","8":"h4"},"i4":{"1":"i5","2":"j5","3":"j4","4":"j3","5":"i3","6":"h3","7":"h4","8":"h5"},"i5":{"1":"i6","2":"j6","3":"j5","4":"j4","5":"i4","6":"h4","7":"h5","8":"h6"},"i6":{"1":"i7","2":"j7","3":"j6","4":"j5","5":"i5","6":"h5","7":"h6","8":"h7"},"i7":{"1":"i8","2":"j8","3":"j7","4":"j6","5":"i6","6":"h6","7":"h7","8":"h8"},"i8":{"1":"i9","2":"j9","3":"j8","4":"j7","5":"i7","6":"h7","7":"h8","8":"h9"},"i9":{"1":"i10","2":"j10","3":"j9","4":"j8","5":"i8","6":"h8","7":"h9","8":"h10"},"j1":{"1":"j2","7":"i1","8":"i2"},"j10":{"5":"j9","6":"i9","7":"i10"},"j2":{"1":"j3","5":"j1","6":"i1","7":"i2","8":"i3"},"j3":{"1":"j4","5":"j2","6":"i2","7":"i3","8":"i4"},"j4":{"1":"j5","5":"j3","6":"i3","7":"i4","8":"i5"},"j5":{"1":"j6","5":"j4","6":"i4","7":"i5","8":"i6"},"j6":{"1":"j7","5":"j5","6":"i5","7":"i6","8":"i7"},"j7":{"1":"j8","5":"j6","6":"i6","7":"i7","8":"i8"},"j8":{"1":"j9","5":"j7","6":"i7","7":"i8","8":"i9"},"j9":{"1":"j10","5":"j8","6":"i8","7":"i9","8":"i10"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j8":{"colour":"dark","pos":"j8","x":10,"y":8},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"light":{"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j8":{"colour":"dark","pos":"j8","x":10,"y":8}}};var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);ARTIFACTS['targets'][POS]={};}var WALKLENGTH=walkedsquares.length;}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.targets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmovetarget1';}return newstep;};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmovetarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectfiretarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectfiretarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].fire='fire1';return newstep;};game.move1=function(turn,step){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}TURNVARS['movedto']=MARKS['selectmovetarget'];MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var STARTPOS=TURNVARS['movedto'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);ARTIFACTS['targets'][POS]={};}var WALKLENGTH=walkedsquares.length;}var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.targets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectfiretarget1';}return newstep;};game.fire1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfiretarget'],id:newunitid,group:'fires',owner:0};MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('fire'),clones:clones});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"targets":{}};var UNITDATA=step.UNITDATA;var TURNVARS=step.TURNVARS;var UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.myunits);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit1';}return turn;};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);ARTIFACTS['targets'][POS]={};}var WALKLENGTH=walkedsquares.length;}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.targets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmovetarget2';}return newstep;};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmovetarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectfiretarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectfiretarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].fire='fire2';return newstep;};game.move2=function(turn,step){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}TURNVARS['movedto']=MARKS['selectmovetarget'];MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var STARTPOS=TURNVARS['movedto'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);ARTIFACTS['targets'][POS]={};}var WALKLENGTH=walkedsquares.length;}var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.targets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectfiretarget2';}return newstep;};game.fire2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfiretarget'],id:newunitid,group:'fires',owner:0};MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('fire'),clones:clones});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"targets":{}};var UNITDATA=step.UNITDATA;var TURNVARS=step.TURNVARS;var UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.myunits);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"d10","id":"unit1","group":"queens","owner":1},"unit2":{"pos":"g10","id":"unit2","group":"queens","owner":1},"unit3":{"pos":"a7","id":"unit3","group":"queens","owner":1},"unit4":{"pos":"j7","id":"unit4","group":"queens","owner":1},"unit5":{"pos":"a4","id":"unit5","group":"queens","owner":2},"unit6":{"pos":"d1","id":"unit6","group":"queens","owner":2},"unit7":{"pos":"g1","id":"unit7","group":"queens","owner":2},"unit8":{"pos":"j4","id":"unit8","group":"queens","owner":2}},TURNVARS:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"move":1,"fire":1};game.graphics={"icons":{"queens":"queens","fires":"pawns"}};game.board={"height":10,"width":10};return game;}(),daggers:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"3":"b8","4":"b7","5":"a7"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"3":"c8","4":"c7","5":"b7","6":"a7","7":"a8"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"3":"d8","4":"d7","5":"c7","6":"b7","7":"b8"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"3":"e8","4":"e7","5":"d7","6":"c7","7":"c8"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"3":"f8","4":"f7","5":"e7","6":"d7","7":"d8"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"3":"g8","4":"g7","5":"f7","6":"e7","7":"e8"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"3":"h8","4":"h7","5":"g7","6":"f7","7":"f8"},"h1":{"1":"h2","7":"g1","8":"g2"},"h2":{"1":"h3","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"5":"h7","6":"g7","7":"g8"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8}}};(function(){var TERRAIN={"bases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1},"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}},"mybases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1}},"oppbases":{"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={killtarget:(0,_assign2.default)({},step.ARTIFACTS.killtarget),movetarget:(0,_assign2.default)({},step.ARTIFACTS.movetarget)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});if(!!UNITLAYERS.mycrowns[MARKS['selectunit']]){var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){if(!UNITLAYERS.myunits[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'killtarget':'movetarget'][POS]={};}}}}else{var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[8,1,2,4,5,6];for(var walkerdirnbr=0;walkerdirnbr<6;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var STOPREASON="";var nextpos="";var MAX=[8,1,2].indexOf(DIR)!==-1?1:8;var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;var LENGTH=0;while(!(STOPREASON=LENGTH===MAX?"reachedmax":!(nextpos=connections[POS][DIR])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);LENGTH++;ARTIFACTS['movetarget'][POS]={};}var WALKLENGTH=walkedsquares.length;if(STOPREASON==="hitblock"){POS=nextpos;if(!UNITLAYERS.myunits[POS]&&!([1,5].indexOf(DIR)!==-1&&!!UNITLAYERS.oppdaggers[POS])){ARTIFACTS['movetarget'][POS]={};}}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.movetarget);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmovetarget1';}return newstep;};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmovetarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"killtarget":{},"movetarget":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mycrowns,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else if((0,_keys2.default)(UNITLAYERS.oppcrowns).length===1){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='kingkill';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"killtarget":{},"movetarget":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.myunits);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit1';}return turn;};})();(function(){var TERRAIN={"bases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1},"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}},"oppbases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1}},"mybases":{"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={killtarget:(0,_assign2.default)({},step.ARTIFACTS.killtarget),movetarget:(0,_assign2.default)({},step.ARTIFACTS.movetarget)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});if(!!UNITLAYERS.mycrowns[MARKS['selectunit']]){var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){if(!UNITLAYERS.myunits[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'killtarget':'movetarget'][POS]={};}}}}else{var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[8,1,2,4,5,6];for(var walkerdirnbr=0;walkerdirnbr<6;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var STOPREASON="";var nextpos="";var MAX=[8,1,2].indexOf(DIR)!==-1?1:8;var POS=STARTPOS;var BLOCKS=UNITLAYERS.units;var LENGTH=0;while(!(STOPREASON=LENGTH===MAX?"reachedmax":!(nextpos=connections[POS][DIR])?"outofbounds":BLOCKS[nextpos]?"hitblock":null)){walkedsquares.push(POS=nextpos);LENGTH++;ARTIFACTS['movetarget'][POS]={};}var WALKLENGTH=walkedsquares.length;if(STOPREASON==="hitblock"){POS=nextpos;if(!UNITLAYERS.myunits[POS]&&!([1,5].indexOf(DIR)!==-1&&!!UNITLAYERS.oppdaggers[POS])){ARTIFACTS['movetarget'][POS]={};}}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.movetarget);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmovetarget2';}return newstep;};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmovetarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"killtarget":{},"movetarget":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mycrowns,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else if((0,_keys2.default)(UNITLAYERS.oppcrowns).length===1){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='kingkill';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"killtarget":{},"movetarget":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.myunits);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"d8","id":"unit1","group":"crowns","owner":1},"unit2":{"pos":"e8","id":"unit2","group":"crowns","owner":1},"unit3":{"pos":"c1","id":"unit3","group":"crowns","owner":2},"unit4":{"pos":"f1","id":"unit4","group":"crowns","owner":2},"unit5":{"pos":"c7","id":"unit5","group":"daggers","owner":1},"unit6":{"pos":"d7","id":"unit6","group":"daggers","owner":1},"unit7":{"pos":"e7","id":"unit7","group":"daggers","owner":1},"unit8":{"pos":"f7","id":"unit8","group":"daggers","owner":1},"unit9":{"pos":"c3","id":"unit9","group":"daggers","owner":2},"unit10":{"pos":"f3","id":"unit10","group":"daggers","owner":2},"unit11":{"pos":"b2","id":"unit11","group":"daggers","owner":2},"unit12":{"pos":"c2","id":"unit12","group":"daggers","owner":2},"unit13":{"pos":"d2","id":"unit13","group":"daggers","owner":2},"unit14":{"pos":"e2","id":"unit14","group":"daggers","owner":2},"unit15":{"pos":"f2","id":"unit15","group":"daggers","owner":2},"unit16":{"pos":"g2","id":"unit16","group":"daggers","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"bases":"playercolour"},"icons":{"daggers":"bishops","crowns":"kings"}};game.board={"height":8,"width":8,"terrain":{"bases":{"1":[["rect","a8","h8"]],"2":[["rect","a1","h1"]]}}};return game;}(),krieg:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"3":"b4","4":"b3","5":"a3"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"3":"c4","4":"c3","5":"b3","6":"a3","7":"a4"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"3":"d4","4":"d3","5":"c3","6":"b3","7":"b4"},"d1":{"1":"d2","7":"c1","8":"c2"},"d2":{"1":"d3","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"5":"d3","6":"c3","7":"c4"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4}}};(function(){var TERRAIN={"southeast":{"a4":{"pos":"a4"},"c2":{"pos":"c2"}},"northwest":{"b3":{"pos":"b3"},"d1":{"pos":"d1"}},"corners":{"a4":{"pos":"a4","owner":1},"d1":{"pos":"d1","owner":2}},"mycorners":{"a4":{"pos":"a4","owner":1}},"oppcorners":{"d1":{"pos":"d1","owner":2}},"bases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1},"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}},"mybases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1}},"oppbases":{"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var STARTPOS=MARKS['selectunit'];var neighbourdirs=!!TERRAIN.southeast[STARTPOS]?[1,3,4,5,7]:!!TERRAIN.northwest[STARTPOS]?[1,3,5,7,8]:[1,3,5,7];var nbrofneighbourdirs=neighbourdirs.length;var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){ARTIFACTS['movetargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.movetargets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmove1';}return newstep;};game.selectmove1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmove:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var LOOPID;for(var POS in UNITLAYERS.myfrozens){LOOPID=UNITLAYERS.myfrozens[POS].id;UNITDATA[LOOPID]=(0,_assign2.default)({},UNITDATA[LOOPID],{'group':'notfrozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'frozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmove']});}MARKS={};UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppcorners,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='cornerinfiltration';}else if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppbases,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length===2){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='occupation';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.mynotfrozens);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit1';}return turn;};})();(function(){var TERRAIN={"southeast":{"a4":{"pos":"a4"},"c2":{"pos":"c2"}},"northwest":{"b3":{"pos":"b3"},"d1":{"pos":"d1"}},"corners":{"a4":{"pos":"a4","owner":1},"d1":{"pos":"d1","owner":2}},"oppcorners":{"a4":{"pos":"a4","owner":1}},"mycorners":{"d1":{"pos":"d1","owner":2}},"bases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1},"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}},"oppbases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1}},"mybases":{"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var STARTPOS=MARKS['selectunit'];var neighbourdirs=!!TERRAIN.southeast[STARTPOS]?[1,3,4,5,7]:!!TERRAIN.northwest[STARTPOS]?[1,3,5,7,8]:[1,3,5,7];var nbrofneighbourdirs=neighbourdirs.length;var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){ARTIFACTS['movetargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};var linkedpositions=(0,_keys2.default)(ARTIFACTS.movetargets);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links[newstepid][linkedpositions[linknbr]]='selectmove2';}return newstep;};game.selectmove2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectmove:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var LOOPID;for(var POS in UNITLAYERS.myfrozens){LOOPID=UNITLAYERS.myfrozens[POS].id;UNITDATA[LOOPID]=(0,_assign2.default)({},UNITDATA[LOOPID],{'group':'notfrozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'frozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmove']});}MARKS={};UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppcorners,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='cornerinfiltration';}else if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppbases,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length===2){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='occupation';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',path:[]};var linkedpositions=(0,_keys2.default)(UNITLAYERS.mynotfrozens);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a4","id":"unit1","group":"notfrozens","owner":1},"unit2":{"pos":"b4","id":"unit2","group":"notfrozens","owner":1},"unit3":{"pos":"a3","id":"unit3","group":"notfrozens","owner":1},"unit4":{"pos":"b3","id":"unit4","group":"notfrozens","owner":1},"unit5":{"pos":"c2","id":"unit5","group":"notfrozens","owner":2},"unit6":{"pos":"c1","id":"unit6","group":"notfrozens","owner":2},"unit7":{"pos":"d2","id":"unit7","group":"notfrozens","owner":2},"unit8":{"pos":"d1","id":"unit8","group":"notfrozens","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"corners":"playercolour","bases":"castle"},"icons":{"notfrozens":"knights","frozens":"rooks"}};game.board={"width":4,"height":4,"terrain":{"southeast":["a4","c2"],"northwest":["b3","d1"],"corners":{"1":["a4"],"2":["d1"]},"bases":{"1":["b4","a3","b3"],"2":["c2","d2","c1"]}}};return game;}(),semaphor:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"3":"b3","4":"b2","5":"a2"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"3":"c3","4":"c2","5":"b2","6":"a2","7":"a3"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"3":"d3","4":"d2","5":"c2","6":"b2","7":"b3"},"d1":{"1":"d2","7":"c1","8":"c2"},"d2":{"1":"d3","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"5":"d2","6":"c2","7":"c3"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d2":{"colour":"dark","pos":"d2","x":4,"y":2}}};var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectdeploytarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectdeploytarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].deploy='deploy1';return newstep;};game.selectunit1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].promote='promote1';return newstep;};game.deploy1=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectdeploytarget'],id:newunitid,group:'pawns',owner:0};MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":!allowedsteps[nextpos]?"nomoresteps":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'deploy';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('deploy'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.promote1=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.pawns[MARKS['selectunit']]?'bishops':'kings'});}MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":!allowedsteps[nextpos]?"nomoresteps":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'promote';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('promote')});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"line":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)(function(){var ret={},s0=BOARD.board,s1=UNITLAYERS.units;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}());var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectdeploytarget1';}var linkedpositions=(0,_keys2.default)(function(){var k,ret={},s0=UNITLAYERS.pawns,s1=UNITLAYERS.bishops;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}());var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit1';}return turn;};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectdeploytarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectdeploytarget:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].deploy='deploy2';return newstep;};game.selectunit2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selectunit:markpos});var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].promote='promote2';return newstep;};game.deploy2=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectdeploytarget'],id:newunitid,group:'pawns',owner:0};MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":!allowedsteps[nextpos]?"nomoresteps":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'deploy';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('deploy'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.promote2=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.pawns[MARKS['selectunit']]?'bishops':'kings'});}MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":!allowedsteps[nextpos]?"nomoresteps":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'promote';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('promote')});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"line":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)(function(){var ret={},s0=BOARD.board,s1=UNITLAYERS.units;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}());var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectdeploytarget2';}var linkedpositions=(0,_keys2.default)(function(){var k,ret={},s0=UNITLAYERS.pawns,s1=UNITLAYERS.bishops;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}());var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selectunit2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"deploy":1,"promote":1};game.graphics={"icons":{"kings":"kings","pawns":"pawns","bishops":"bishops"}};game.board={"width":4,"height":3};return game;}(),snijpunt:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"3":"b6","4":"b5","5":"a5"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"3":"c6","4":"c5","5":"b5","6":"a5","7":"a6"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"3":"d6","4":"d5","5":"c5","6":"b5","7":"b6"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"3":"e6","4":"e5","5":"d5","6":"c5","7":"c6"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"3":"f6","4":"f5","5":"e5","6":"d5","7":"d6"},"f1":{"1":"f2","7":"e1","8":"e2"},"f2":{"1":"f3","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"5":"f5","6":"e5","7":"e6"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6}}};(function(){var TERRAIN={"zone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1},"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"myzone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1}},"oppzone":{"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"corner":{"a6":{"pos":"a6"}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selecttarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{intersection:(0,_assign2.default)({},step.ARTIFACTS.intersection)});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selecttarget:markpos});var STARTPOS=MARKS['selecttarget'];var DIR=5;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][5])?"outofbounds":null)){walkedsquares.push(POS=nextpos);if(ARTIFACTS.enemyline[POS]){ARTIFACTS['intersection'][POS]={};}}var WALKLENGTH=walkedsquares.length;var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].snipe='snipe1';return newstep;};game.snipe1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{winline:(0,_assign2.default)({},step.ARTIFACTS.winline),loseline:(0,_assign2.default)({},step.ARTIFACTS.loseline)});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if((0,_keys2.default)(UNITLAYERS.mysniper||{}).length===0){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selecttarget'],id:newunitid,group:'sniper',owner:player};}else{var unitid=(UNITLAYERS.units[(0,_keys2.default)(UNITLAYERS.mysniper)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selecttarget']});}}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){if(!!UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]){var unitid=(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'owner':(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{})['owner']===2?1:2});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:(0,_keys2.default)(ARTIFACTS.intersection)[0],id:newunitid,group:'soldiers',owner:player};}}MARKS={};UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var walkstarts=UNITLAYERS.soldiers;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var allowedsteps=!!UNITLAYERS.mysoldiers[STARTPOS]?UNITLAYERS.mysoldiers:UNITLAYERS.oppsoldiers;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":!allowedsteps[nextpos]?"nomoresteps":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;if(WALKLENGTH>2){ARTIFACTS[!!UNITLAYERS.mysoldiers[STARTPOS]?'winline':'loseline'][POS]={};}}}var newstepid=step.stepid+'-'+'snipe';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('snipe'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.winline||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else if((0,_keys2.default)(ARTIFACTS.loseline||{}).length!==0){var winner=2;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeoppline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){var STARTPOS=(0,_keys2.default)(UNITLAYERS.oppsniper)[0];var DIR=3;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][3])?"outofbounds":null)){walkedsquares.push(POS=nextpos);if(!UNITLAYERS.units[POS]){ARTIFACTS['potentialempties'][POS]={};}ARTIFACTS['enemyline'][POS]={};}var WALKLENGTH=walkedsquares.length;var walkstarts=ARTIFACTS.potentialempties;for(var STARTPOS in walkstarts){var DIR=1;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][1])?"outofbounds":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;if(!UNITLAYERS.sniper[walkedsquares[WALKLENGTH-1]]){ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH-1]]={};}}}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)((0,_keys2.default)(ARTIFACTS.mandatory||{}).length===0?function(){var ret={},s0=TERRAIN.myzone,s1=UNITLAYERS.sniper;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}():ARTIFACTS.mandatory);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selecttarget1';}return turn;};})();(function(){var TERRAIN={"zone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1},"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"oppzone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1}},"myzone":{"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"corner":{"a6":{"pos":"a6"}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selecttarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{intersection:(0,_assign2.default)({},step.ARTIFACTS.intersection)});var UNITLAYERS=step.UNITLAYERS;var MARKS=(0,_assign2.default)({},step.MARKS,{selecttarget:markpos});var STARTPOS=MARKS['selecttarget'];var DIR=3;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][3])?"outofbounds":null)){walkedsquares.push(POS=nextpos);if(ARTIFACTS.enemyline[POS]){ARTIFACTS['intersection'][POS]={};}}var WALKLENGTH=walkedsquares.length;var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos)});turn.links[newstepid]={};turn.links[newstepid].snipe='snipe2';return newstep;};game.snipe2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{winline:(0,_assign2.default)({},step.ARTIFACTS.winline),loseline:(0,_assign2.default)({},step.ARTIFACTS.loseline)});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if((0,_keys2.default)(UNITLAYERS.mysniper||{}).length===0){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selecttarget'],id:newunitid,group:'sniper',owner:player};}else{var unitid=(UNITLAYERS.units[(0,_keys2.default)(UNITLAYERS.mysniper)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selecttarget']});}}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){if(!!UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]){var unitid=(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'owner':(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{})['owner']===2?1:2});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:(0,_keys2.default)(ARTIFACTS.intersection)[0],id:newunitid,group:'soldiers',owner:player};}}MARKS={};UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var walkstarts=UNITLAYERS.soldiers;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;var allowedsteps=!!UNITLAYERS.mysoldiers[STARTPOS]?UNITLAYERS.mysoldiers:UNITLAYERS.oppsoldiers;while(!(STOPREASON=!(nextpos=connections[POS][allwalkerdirs[walkerdirnbr]])?"outofbounds":!allowedsteps[nextpos]?"nomoresteps":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;if(WALKLENGTH>2){ARTIFACTS[!!UNITLAYERS.mysoldiers[STARTPOS]?'winline':'loseline'][POS]={};}}}var newstepid=step.stepid+'-'+'snipe';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,path:step.path.concat('snipe'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.winline||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else if((0,_keys2.default)(ARTIFACTS.loseline||{}).length!==0){var winner=1;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeoppline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){var STARTPOS=(0,_keys2.default)(UNITLAYERS.oppsniper)[0];var DIR=5;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][5])?"outofbounds":null)){walkedsquares.push(POS=nextpos);if(!UNITLAYERS.units[POS]){ARTIFACTS['potentialempties'][POS]={};}ARTIFACTS['enemyline'][POS]={};}var WALKLENGTH=walkedsquares.length;var walkstarts=ARTIFACTS.potentialempties;for(var STARTPOS in walkstarts){var DIR=7;var walkedsquares=[];var STOPREASON="";var nextpos="";var POS=STARTPOS;while(!(STOPREASON=!(nextpos=connections[POS][7])?"outofbounds":null)){walkedsquares.push(POS=nextpos);}var WALKLENGTH=walkedsquares.length;if(!UNITLAYERS.sniper[walkedsquares[WALKLENGTH-1]]){ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH-1]]={};}}}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',clones:step.clones,path:[]};var linkedpositions=(0,_keys2.default)((0,_keys2.default)(ARTIFACTS.mandatory||{}).length===0?function(){var ret={},s0=TERRAIN.myzone,s1=UNITLAYERS.sniper;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}():ARTIFACTS.mandatory);var nbrofpositions=linkedpositions.length;for(var linknbr=0;linknbr<nbrofpositions;linknbr++){turn.links.root[linkedpositions[linknbr]]='selecttarget2';}return turn;};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"snipe":1};game.graphics={"icons":{"soldiers":"pawns","sniper":"kings"},"tiles":{"zone":"grass","corner":"castle"}};game.board={"height":6,"width":6,"terrain":{"zone":{"1":[["rect","b6","f6",5]],"2":[["rect","a1","a5",3]]},"corner":["a6"]}};return game;}()};
 
 /***/ },
 /* 212 */
@@ -22274,7 +22274,7 @@
 
 	var _play2 = _interopRequireDefault(_play);
 
-	var _units = __webpack_require__(310);
+	var _units = __webpack_require__(278);
 
 	var _units2 = _interopRequireDefault(_units);
 
@@ -22320,7 +22320,7 @@
 	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'board' },
+	        { className: 'board', style: { height: s.game.board.height * 50, width: s.game.board.width * 50 } },
 	        _react2.default.createElement(_units2.default, { icons: this.props.game.graphics.icons, unitdata: s.step.UNITDATA, board: this.props.game.board }),
 	        _react2.default.createElement(_marks2.default, { board: this.props.game.board, activeMarks: s.step.MARKS, potentialMarks: s.UI.marks, selectMark: this.doAction })
 	      ),
@@ -22337,10 +22337,6 @@
 
 	'use strict';
 
-	var _slicedToArray2 = __webpack_require__(233);
-
-	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
-
 	var _keys = __webpack_require__(212);
 
 	var _keys2 = _interopRequireDefault(_keys);
@@ -22349,7 +22345,7 @@
 	    value: true
 	});
 
-	var _mapValues = __webpack_require__(265);
+	var _mapValues = __webpack_require__(233);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
 
@@ -22395,36 +22391,21 @@
 	            turn: turn,
 	            step: turn.steps.root,
 	            save: [],
-	            marks: {},
+	            markTimeStamps: {},
 	            undo: []
 	        };
 	        session.UI = play.getSessionUI(session);
 	        return session;
 	    },
 	    makeSessionAction: function makeSessionAction(session, action) {
-	        if (session.marks[action]) {
+	        if (session.markTimeStamps[action]) {
 	            // removing a mark
-	            session.step = session.turn.steps[session.marks[action]];
-
-	            session.marks = (0, _keys2.default)(session.step.MARKS).reduce(function (mem, markname) {
-	                var pos = session.step.MARKS[markname];
-	                mem[pos] = session.marks[pos];
-	                return mem;
-	            }, {});
-
+	            session.step = session.turn.steps[session.markTimeStamps[action]];
+	            delete session.markTimeStamps[action]; // not really necessary
 	            session.UI = play.getSessionUI(session);
 	        } else if (action === 'undo') {
-	            var _session$undo$pop = session.undo.pop();
-
-	            var _session$undo$pop2 = (0, _slicedToArray3.default)(_session$undo$pop, 2);
-
-	            var gobackto = _session$undo$pop2[0];
-	            var removemarks = _session$undo$pop2[1];
-
+	            var gobackto = session.undo.pop();
 	            session.step = session.turn.steps[gobackto];
-
-	            session.marks = removemarks;
-
 	            session.UI = play.getSessionUI(session);
 	        } else if (endgameactions[action]) {
 	            // TODO - end the session!
@@ -22432,15 +22413,14 @@
 	            session.save = session.save.concat(play.calculateSave(session.turn, session.step));
 	            session.turn = play.hydrateTurn(session.game, session.turn.next[session.step.stepid]);
 	            session.step = session.turn.steps.root;
-	            session.marks = {};
+	            session.markTimeStamps = {};
 	            session.undo = [];
 	            session.UI = play.getSessionUI(session);
 	        } else {
 	            if (!session.game.commands[action]) {
-	                session.marks[action] = session.step.stepid;
+	                session.markTimeStamps[action] = session.step.stepid;
 	            } else {
-	                session.undo.push([session.step.stepid, session.marks]);
-	                session.marks = {};
+	                session.undo.push(session.step.stepid);
 	            }
 	            session.step = session.turn.steps[session.step.stepid + '-' + action];
 	            session.UI = play.getSessionUI(session);
@@ -22471,6 +22451,7 @@
 	        var turn = _ref.turn;
 	        var step = _ref.step;
 	        var undo = _ref.undo;
+	        var markTimeStamps = _ref.markTimeStamps;
 	        return (0, _keys2.default)(turn.links[step.stepid]).reduce(function (mem, action) {
 	            if (endgameactions[action] || action == 'endturn' || action === 'next') {
 	                mem.system.push(action);
@@ -22480,7 +22461,11 @@
 	                mem.marks.push(action);
 	            }
 	            return mem;
-	        }, { marks: [], commands: [], system: undo.length ? ['undo'] : [] });
+	        }, { marks: [], commands: [], system: undo.length ? ['undo'] : [], removeMarks: (0, _keys2.default)(step.MARKS).reduce(function (mem, markname) {
+	                var pos = step.MARKS[markname];
+	                mem[pos] = markTimeStamps[pos];
+	                return mem;
+	            }, {}) });
 	    },
 	    hydrateStep: function hydrateStep(game, turn, step) {
 	        var steps = turn.steps;
@@ -22561,492 +22546,7 @@
 /* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _isIterable2 = __webpack_require__(234);
-
-	var _isIterable3 = _interopRequireDefault(_isIterable2);
-
-	var _getIterator2 = __webpack_require__(259);
-
-	var _getIterator3 = _interopRequireDefault(_getIterator2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = (function () {
-	  function sliceIterator(arr, i) {
-	    var _arr = [];
-	    var _n = true;
-	    var _d = false;
-	    var _e = undefined;
-
-	    try {
-	      for (var _i = (0, _getIterator3.default)(arr), _s; !(_n = (_s = _i.next()).done); _n = true) {
-	        _arr.push(_s.value);
-
-	        if (i && _arr.length === i) break;
-	      }
-	    } catch (err) {
-	      _d = true;
-	      _e = err;
-	    } finally {
-	      try {
-	        if (!_n && _i["return"]) _i["return"]();
-	      } finally {
-	        if (_d) throw _e;
-	      }
-	    }
-
-	    return _arr;
-	  }
-
-	  return function (arr, i) {
-	    if (Array.isArray(arr)) {
-	      return arr;
-	    } else if ((0, _isIterable3.default)(Object(arr))) {
-	      return sliceIterator(arr, i);
-	    } else {
-	      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-	    }
-	  };
-	})();
-
-/***/ },
-/* 234 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(235), __esModule: true };
-
-/***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(236);
-	__webpack_require__(254);
-	module.exports = __webpack_require__(257);
-
-/***/ },
-/* 236 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(237);
-	var Iterators = __webpack_require__(240);
-	Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
-
-/***/ },
-/* 237 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var addToUnscopables = __webpack_require__(238)
-	  , step             = __webpack_require__(239)
-	  , Iterators        = __webpack_require__(240)
-	  , toIObject        = __webpack_require__(241);
-
-	// 22.1.3.4 Array.prototype.entries()
-	// 22.1.3.13 Array.prototype.keys()
-	// 22.1.3.29 Array.prototype.values()
-	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(242)(Array, 'Array', function(iterated, kind){
-	  this._t = toIObject(iterated); // target
-	  this._i = 0;                   // next index
-	  this._k = kind;                // kind
-	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
-	}, function(){
-	  var O     = this._t
-	    , kind  = this._k
-	    , index = this._i++;
-	  if(!O || index >= O.length){
-	    this._t = undefined;
-	    return step(1);
-	  }
-	  if(kind == 'keys'  )return step(0, index);
-	  if(kind == 'values')return step(0, O[index]);
-	  return step(0, [index, O[index]]);
-	}, 'values');
-
-	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
-	Iterators.Arguments = Iterators.Array;
-
-	addToUnscopables('keys');
-	addToUnscopables('values');
-	addToUnscopables('entries');
-
-/***/ },
-/* 238 */
-/***/ function(module, exports) {
-
-	module.exports = function(){ /* empty */ };
-
-/***/ },
-/* 239 */
-/***/ function(module, exports) {
-
-	module.exports = function(done, value){
-	  return {value: value, done: !!done};
-	};
-
-/***/ },
-/* 240 */
-/***/ function(module, exports) {
-
-	module.exports = {};
-
-/***/ },
-/* 241 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(229)
-	  , defined = __webpack_require__(216);
-	module.exports = function(it){
-	  return IObject(defined(it));
-	};
-
-/***/ },
-/* 242 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var LIBRARY        = __webpack_require__(243)
-	  , $export        = __webpack_require__(218)
-	  , redefine       = __webpack_require__(244)
-	  , hide           = __webpack_require__(245)
-	  , has            = __webpack_require__(248)
-	  , Iterators      = __webpack_require__(240)
-	  , $iterCreate    = __webpack_require__(249)
-	  , setToStringTag = __webpack_require__(250)
-	  , getProto       = __webpack_require__(228).getProto
-	  , ITERATOR       = __webpack_require__(251)('iterator')
-	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
-	  , FF_ITERATOR    = '@@iterator'
-	  , KEYS           = 'keys'
-	  , VALUES         = 'values';
-
-	var returnThis = function(){ return this; };
-
-	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
-	  $iterCreate(Constructor, NAME, next);
-	  var getMethod = function(kind){
-	    if(!BUGGY && kind in proto)return proto[kind];
-	    switch(kind){
-	      case KEYS: return function keys(){ return new Constructor(this, kind); };
-	      case VALUES: return function values(){ return new Constructor(this, kind); };
-	    } return function entries(){ return new Constructor(this, kind); };
-	  };
-	  var TAG        = NAME + ' Iterator'
-	    , DEF_VALUES = DEFAULT == VALUES
-	    , VALUES_BUG = false
-	    , proto      = Base.prototype
-	    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
-	    , $default   = $native || getMethod(DEFAULT)
-	    , methods, key;
-	  // Fix native
-	  if($native){
-	    var IteratorPrototype = getProto($default.call(new Base));
-	    // Set @@toStringTag to native iterators
-	    setToStringTag(IteratorPrototype, TAG, true);
-	    // FF fix
-	    if(!LIBRARY && has(proto, FF_ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
-	    // fix Array#{values, @@iterator}.name in V8 / FF
-	    if(DEF_VALUES && $native.name !== VALUES){
-	      VALUES_BUG = true;
-	      $default = function values(){ return $native.call(this); };
-	    }
-	  }
-	  // Define iterator
-	  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
-	    hide(proto, ITERATOR, $default);
-	  }
-	  // Plug for library
-	  Iterators[NAME] = $default;
-	  Iterators[TAG]  = returnThis;
-	  if(DEFAULT){
-	    methods = {
-	      values:  DEF_VALUES  ? $default : getMethod(VALUES),
-	      keys:    IS_SET      ? $default : getMethod(KEYS),
-	      entries: !DEF_VALUES ? $default : getMethod('entries')
-	    };
-	    if(FORCED)for(key in methods){
-	      if(!(key in proto))redefine(proto, key, methods[key]);
-	    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
-	  }
-	  return methods;
-	};
-
-/***/ },
-/* 243 */
-/***/ function(module, exports) {
-
-	module.exports = true;
-
-/***/ },
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(245);
-
-/***/ },
-/* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $          = __webpack_require__(228)
-	  , createDesc = __webpack_require__(246);
-	module.exports = __webpack_require__(247) ? function(object, key, value){
-	  return $.setDesc(object, key, createDesc(1, value));
-	} : function(object, key, value){
-	  object[key] = value;
-	  return object;
-	};
-
-/***/ },
-/* 246 */
-/***/ function(module, exports) {
-
-	module.exports = function(bitmap, value){
-	  return {
-	    enumerable  : !(bitmap & 1),
-	    configurable: !(bitmap & 2),
-	    writable    : !(bitmap & 4),
-	    value       : value
-	  };
-	};
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(223)(function(){
-	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
-	});
-
-/***/ },
-/* 248 */
-/***/ function(module, exports) {
-
-	var hasOwnProperty = {}.hasOwnProperty;
-	module.exports = function(it, key){
-	  return hasOwnProperty.call(it, key);
-	};
-
-/***/ },
-/* 249 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var $              = __webpack_require__(228)
-	  , descriptor     = __webpack_require__(246)
-	  , setToStringTag = __webpack_require__(250)
-	  , IteratorPrototype = {};
-
-	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(245)(IteratorPrototype, __webpack_require__(251)('iterator'), function(){ return this; });
-
-	module.exports = function(Constructor, NAME, next){
-	  Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
-	  setToStringTag(Constructor, NAME + ' Iterator');
-	};
-
-/***/ },
-/* 250 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var def = __webpack_require__(228).setDesc
-	  , has = __webpack_require__(248)
-	  , TAG = __webpack_require__(251)('toStringTag');
-
-	module.exports = function(it, tag, stat){
-	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
-	};
-
-/***/ },
-/* 251 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var store  = __webpack_require__(252)('wks')
-	  , uid    = __webpack_require__(253)
-	  , Symbol = __webpack_require__(219).Symbol;
-	module.exports = function(name){
-	  return store[name] || (store[name] =
-	    Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
-	};
-
-/***/ },
-/* 252 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var global = __webpack_require__(219)
-	  , SHARED = '__core-js_shared__'
-	  , store  = global[SHARED] || (global[SHARED] = {});
-	module.exports = function(key){
-	  return store[key] || (store[key] = {});
-	};
-
-/***/ },
-/* 253 */
-/***/ function(module, exports) {
-
-	var id = 0
-	  , px = Math.random();
-	module.exports = function(key){
-	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-	};
-
-/***/ },
-/* 254 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var $at  = __webpack_require__(255)(true);
-
-	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(242)(String, 'String', function(iterated){
-	  this._t = String(iterated); // target
-	  this._i = 0;                // next index
-	// 21.1.5.2.1 %StringIteratorPrototype%.next()
-	}, function(){
-	  var O     = this._t
-	    , index = this._i
-	    , point;
-	  if(index >= O.length)return {value: undefined, done: true};
-	  point = $at(O, index);
-	  this._i += point.length;
-	  return {value: point, done: false};
-	});
-
-/***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var toInteger = __webpack_require__(256)
-	  , defined   = __webpack_require__(216);
-	// true  -> String#at
-	// false -> String#codePointAt
-	module.exports = function(TO_STRING){
-	  return function(that, pos){
-	    var s = String(defined(that))
-	      , i = toInteger(pos)
-	      , l = s.length
-	      , a, b;
-	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
-	    a = s.charCodeAt(i);
-	    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-	      ? TO_STRING ? s.charAt(i) : a
-	      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-	  };
-	};
-
-/***/ },
-/* 256 */
-/***/ function(module, exports) {
-
-	// 7.1.4 ToInteger
-	var ceil  = Math.ceil
-	  , floor = Math.floor;
-	module.exports = function(it){
-	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-	};
-
-/***/ },
-/* 257 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var classof   = __webpack_require__(258)
-	  , ITERATOR  = __webpack_require__(251)('iterator')
-	  , Iterators = __webpack_require__(240);
-	module.exports = __webpack_require__(220).isIterable = function(it){
-	  var O = Object(it);
-	  return O[ITERATOR] !== undefined
-	    || '@@iterator' in O
-	    || Iterators.hasOwnProperty(classof(O));
-	};
-
-/***/ },
-/* 258 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(230)
-	  , TAG = __webpack_require__(251)('toStringTag')
-	  // ES3 wrong here
-	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
-
-	module.exports = function(it){
-	  var O, T, B;
-	  return it === undefined ? 'Undefined' : it === null ? 'Null'
-	    // @@toStringTag case
-	    : typeof (T = (O = Object(it))[TAG]) == 'string' ? T
-	    // builtinTag case
-	    : ARG ? cof(O)
-	    // ES3 arguments fallback
-	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
-	};
-
-/***/ },
-/* 259 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(260), __esModule: true };
-
-/***/ },
-/* 260 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(236);
-	__webpack_require__(254);
-	module.exports = __webpack_require__(261);
-
-/***/ },
-/* 261 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var anObject = __webpack_require__(262)
-	  , get      = __webpack_require__(264);
-	module.exports = __webpack_require__(220).getIterator = function(it){
-	  var iterFn = get(it);
-	  if(typeof iterFn != 'function')throw TypeError(it + ' is not iterable!');
-	  return anObject(iterFn.call(it));
-	};
-
-/***/ },
-/* 262 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isObject = __webpack_require__(263);
-	module.exports = function(it){
-	  if(!isObject(it))throw TypeError(it + ' is not an object!');
-	  return it;
-	};
-
-/***/ },
-/* 263 */
-/***/ function(module, exports) {
-
-	module.exports = function(it){
-	  return typeof it === 'object' ? it !== null : typeof it === 'function';
-	};
-
-/***/ },
-/* 264 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var classof   = __webpack_require__(258)
-	  , ITERATOR  = __webpack_require__(251)('iterator')
-	  , Iterators = __webpack_require__(240);
-	module.exports = __webpack_require__(220).getIteratorMethod = function(it){
-	  if(it != undefined)return it[ITERATOR]
-	    || it['@@iterator']
-	    || Iterators[classof(it)];
-	};
-
-/***/ },
-/* 265 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var createObjectMapper = __webpack_require__(266);
+	var createObjectMapper = __webpack_require__(234);
 
 	/**
 	 * Creates an object with the same keys as `object` and values generated by
@@ -23095,11 +22595,11 @@
 
 
 /***/ },
-/* 266 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCallback = __webpack_require__(267),
-	    baseForOwn = __webpack_require__(307);
+	var baseCallback = __webpack_require__(235),
+	    baseForOwn = __webpack_require__(275);
 
 	/**
 	 * Creates a function for `_.mapKeys` or `_.mapValues`.
@@ -23127,14 +22627,14 @@
 
 
 /***/ },
-/* 267 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMatches = __webpack_require__(268),
-	    baseMatchesProperty = __webpack_require__(296),
-	    bindCallback = __webpack_require__(303),
-	    identity = __webpack_require__(304),
-	    property = __webpack_require__(305);
+	var baseMatches = __webpack_require__(236),
+	    baseMatchesProperty = __webpack_require__(264),
+	    bindCallback = __webpack_require__(271),
+	    identity = __webpack_require__(272),
+	    property = __webpack_require__(273);
 
 	/**
 	 * The base implementation of `_.callback` which supports specifying the
@@ -23168,12 +22668,12 @@
 
 
 /***/ },
-/* 268 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsMatch = __webpack_require__(269),
-	    getMatchData = __webpack_require__(293),
-	    toObject = __webpack_require__(292);
+	var baseIsMatch = __webpack_require__(237),
+	    getMatchData = __webpack_require__(261),
+	    toObject = __webpack_require__(260);
 
 	/**
 	 * The base implementation of `_.matches` which does not clone `source`.
@@ -23204,11 +22704,11 @@
 
 
 /***/ },
-/* 269 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqual = __webpack_require__(270),
-	    toObject = __webpack_require__(292);
+	var baseIsEqual = __webpack_require__(238),
+	    toObject = __webpack_require__(260);
 
 	/**
 	 * The base implementation of `_.isMatch` without support for callback
@@ -23262,12 +22762,12 @@
 
 
 /***/ },
-/* 270 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqualDeep = __webpack_require__(271),
-	    isObject = __webpack_require__(280),
-	    isObjectLike = __webpack_require__(281);
+	var baseIsEqualDeep = __webpack_require__(239),
+	    isObject = __webpack_require__(248),
+	    isObjectLike = __webpack_require__(249);
 
 	/**
 	 * The base implementation of `_.isEqual` without support for `this` binding
@@ -23296,14 +22796,14 @@
 
 
 /***/ },
-/* 271 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var equalArrays = __webpack_require__(272),
-	    equalByTag = __webpack_require__(274),
-	    equalObjects = __webpack_require__(275),
-	    isArray = __webpack_require__(288),
-	    isTypedArray = __webpack_require__(291);
+	var equalArrays = __webpack_require__(240),
+	    equalByTag = __webpack_require__(242),
+	    equalObjects = __webpack_require__(243),
+	    isArray = __webpack_require__(256),
+	    isTypedArray = __webpack_require__(259);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -23404,10 +22904,10 @@
 
 
 /***/ },
-/* 272 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arraySome = __webpack_require__(273);
+	var arraySome = __webpack_require__(241);
 
 	/**
 	 * A specialized version of `baseIsEqualDeep` for arrays with support for
@@ -23461,7 +22961,7 @@
 
 
 /***/ },
-/* 273 */
+/* 241 */
 /***/ function(module, exports) {
 
 	/**
@@ -23490,7 +22990,7 @@
 
 
 /***/ },
-/* 274 */
+/* 242 */
 /***/ function(module, exports) {
 
 	/** `Object#toString` result references. */
@@ -23544,10 +23044,10 @@
 
 
 /***/ },
-/* 275 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(276);
+	var keys = __webpack_require__(244);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -23617,13 +23117,13 @@
 
 
 /***/ },
-/* 276 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(277),
-	    isArrayLike = __webpack_require__(282),
-	    isObject = __webpack_require__(280),
-	    shimKeys = __webpack_require__(286);
+	var getNative = __webpack_require__(245),
+	    isArrayLike = __webpack_require__(250),
+	    isObject = __webpack_require__(248),
+	    shimKeys = __webpack_require__(254);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeKeys = getNative(Object, 'keys');
@@ -23668,10 +23168,10 @@
 
 
 /***/ },
-/* 277 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isNative = __webpack_require__(278);
+	var isNative = __webpack_require__(246);
 
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -23690,11 +23190,11 @@
 
 
 /***/ },
-/* 278 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(279),
-	    isObjectLike = __webpack_require__(281);
+	var isFunction = __webpack_require__(247),
+	    isObjectLike = __webpack_require__(249);
 
 	/** Used to detect host constructors (Safari > 5). */
 	var reIsHostCtor = /^\[object .+?Constructor\]$/;
@@ -23744,10 +23244,10 @@
 
 
 /***/ },
-/* 279 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(280);
+	var isObject = __webpack_require__(248);
 
 	/** `Object#toString` result references. */
 	var funcTag = '[object Function]';
@@ -23788,7 +23288,7 @@
 
 
 /***/ },
-/* 280 */
+/* 248 */
 /***/ function(module, exports) {
 
 	/**
@@ -23822,7 +23322,7 @@
 
 
 /***/ },
-/* 281 */
+/* 249 */
 /***/ function(module, exports) {
 
 	/**
@@ -23840,11 +23340,11 @@
 
 
 /***/ },
-/* 282 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(283),
-	    isLength = __webpack_require__(285);
+	var getLength = __webpack_require__(251),
+	    isLength = __webpack_require__(253);
 
 	/**
 	 * Checks if `value` is array-like.
@@ -23861,10 +23361,10 @@
 
 
 /***/ },
-/* 283 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(284);
+	var baseProperty = __webpack_require__(252);
 
 	/**
 	 * Gets the "length" property value of `object`.
@@ -23882,7 +23382,7 @@
 
 
 /***/ },
-/* 284 */
+/* 252 */
 /***/ function(module, exports) {
 
 	/**
@@ -23902,7 +23402,7 @@
 
 
 /***/ },
-/* 285 */
+/* 253 */
 /***/ function(module, exports) {
 
 	/**
@@ -23928,14 +23428,14 @@
 
 
 /***/ },
-/* 286 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArguments = __webpack_require__(287),
-	    isArray = __webpack_require__(288),
-	    isIndex = __webpack_require__(289),
-	    isLength = __webpack_require__(285),
-	    keysIn = __webpack_require__(290);
+	var isArguments = __webpack_require__(255),
+	    isArray = __webpack_require__(256),
+	    isIndex = __webpack_require__(257),
+	    isLength = __webpack_require__(253),
+	    keysIn = __webpack_require__(258);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -23975,11 +23475,11 @@
 
 
 /***/ },
-/* 287 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(282),
-	    isObjectLike = __webpack_require__(281);
+	var isArrayLike = __webpack_require__(250),
+	    isObjectLike = __webpack_require__(249);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -24015,12 +23515,12 @@
 
 
 /***/ },
-/* 288 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(277),
-	    isLength = __webpack_require__(285),
-	    isObjectLike = __webpack_require__(281);
+	var getNative = __webpack_require__(245),
+	    isLength = __webpack_require__(253),
+	    isObjectLike = __webpack_require__(249);
 
 	/** `Object#toString` result references. */
 	var arrayTag = '[object Array]';
@@ -24061,7 +23561,7 @@
 
 
 /***/ },
-/* 289 */
+/* 257 */
 /***/ function(module, exports) {
 
 	/** Used to detect unsigned integer values. */
@@ -24091,14 +23591,14 @@
 
 
 /***/ },
-/* 290 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArguments = __webpack_require__(287),
-	    isArray = __webpack_require__(288),
-	    isIndex = __webpack_require__(289),
-	    isLength = __webpack_require__(285),
-	    isObject = __webpack_require__(280);
+	var isArguments = __webpack_require__(255),
+	    isArray = __webpack_require__(256),
+	    isIndex = __webpack_require__(257),
+	    isLength = __webpack_require__(253),
+	    isObject = __webpack_require__(248);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -24161,11 +23661,11 @@
 
 
 /***/ },
-/* 291 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isLength = __webpack_require__(285),
-	    isObjectLike = __webpack_require__(281);
+	var isLength = __webpack_require__(253),
+	    isObjectLike = __webpack_require__(249);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -24241,10 +23741,10 @@
 
 
 /***/ },
-/* 292 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(280);
+	var isObject = __webpack_require__(248);
 
 	/**
 	 * Converts `value` to an object if it's not one.
@@ -24261,11 +23761,11 @@
 
 
 /***/ },
-/* 293 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isStrictComparable = __webpack_require__(294),
-	    pairs = __webpack_require__(295);
+	var isStrictComparable = __webpack_require__(262),
+	    pairs = __webpack_require__(263);
 
 	/**
 	 * Gets the propery names, values, and compare flags of `object`.
@@ -24288,10 +23788,10 @@
 
 
 /***/ },
-/* 294 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(280);
+	var isObject = __webpack_require__(248);
 
 	/**
 	 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -24309,11 +23809,11 @@
 
 
 /***/ },
-/* 295 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(276),
-	    toObject = __webpack_require__(292);
+	var keys = __webpack_require__(244),
+	    toObject = __webpack_require__(260);
 
 	/**
 	 * Creates a two dimensional array of the key-value pairs for `object`,
@@ -24348,18 +23848,18 @@
 
 
 /***/ },
-/* 296 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(297),
-	    baseIsEqual = __webpack_require__(270),
-	    baseSlice = __webpack_require__(298),
-	    isArray = __webpack_require__(288),
-	    isKey = __webpack_require__(299),
-	    isStrictComparable = __webpack_require__(294),
-	    last = __webpack_require__(300),
-	    toObject = __webpack_require__(292),
-	    toPath = __webpack_require__(301);
+	var baseGet = __webpack_require__(265),
+	    baseIsEqual = __webpack_require__(238),
+	    baseSlice = __webpack_require__(266),
+	    isArray = __webpack_require__(256),
+	    isKey = __webpack_require__(267),
+	    isStrictComparable = __webpack_require__(262),
+	    last = __webpack_require__(268),
+	    toObject = __webpack_require__(260),
+	    toPath = __webpack_require__(269);
 
 	/**
 	 * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
@@ -24399,10 +23899,10 @@
 
 
 /***/ },
-/* 297 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(292);
+	var toObject = __webpack_require__(260);
 
 	/**
 	 * The base implementation of `get` without support for string paths
@@ -24434,7 +23934,7 @@
 
 
 /***/ },
-/* 298 */
+/* 266 */
 /***/ function(module, exports) {
 
 	/**
@@ -24472,11 +23972,11 @@
 
 
 /***/ },
-/* 299 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(288),
-	    toObject = __webpack_require__(292);
+	var isArray = __webpack_require__(256),
+	    toObject = __webpack_require__(260);
 
 	/** Used to match property names within property paths. */
 	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/,
@@ -24506,7 +24006,7 @@
 
 
 /***/ },
-/* 300 */
+/* 268 */
 /***/ function(module, exports) {
 
 	/**
@@ -24531,11 +24031,11 @@
 
 
 /***/ },
-/* 301 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(302),
-	    isArray = __webpack_require__(288);
+	var baseToString = __webpack_require__(270),
+	    isArray = __webpack_require__(256);
 
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
@@ -24565,7 +24065,7 @@
 
 
 /***/ },
-/* 302 */
+/* 270 */
 /***/ function(module, exports) {
 
 	/**
@@ -24584,10 +24084,10 @@
 
 
 /***/ },
-/* 303 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var identity = __webpack_require__(304);
+	var identity = __webpack_require__(272);
 
 	/**
 	 * A specialized version of `baseCallback` which only supports `this` binding
@@ -24629,7 +24129,7 @@
 
 
 /***/ },
-/* 304 */
+/* 272 */
 /***/ function(module, exports) {
 
 	/**
@@ -24655,12 +24155,12 @@
 
 
 /***/ },
-/* 305 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(284),
-	    basePropertyDeep = __webpack_require__(306),
-	    isKey = __webpack_require__(299);
+	var baseProperty = __webpack_require__(252),
+	    basePropertyDeep = __webpack_require__(274),
+	    isKey = __webpack_require__(267);
 
 	/**
 	 * Creates a function that returns the property value at `path` on a
@@ -24692,11 +24192,11 @@
 
 
 /***/ },
-/* 306 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(297),
-	    toPath = __webpack_require__(301);
+	var baseGet = __webpack_require__(265),
+	    toPath = __webpack_require__(269);
 
 	/**
 	 * A specialized version of `baseProperty` which supports deep paths.
@@ -24717,11 +24217,11 @@
 
 
 /***/ },
-/* 307 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(308),
-	    keys = __webpack_require__(276);
+	var baseFor = __webpack_require__(276),
+	    keys = __webpack_require__(244);
 
 	/**
 	 * The base implementation of `_.forOwn` without support for callback
@@ -24740,10 +24240,10 @@
 
 
 /***/ },
-/* 308 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createBaseFor = __webpack_require__(309);
+	var createBaseFor = __webpack_require__(277);
 
 	/**
 	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -24763,10 +24263,10 @@
 
 
 /***/ },
-/* 309 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(292);
+	var toObject = __webpack_require__(260);
 
 	/**
 	 * Creates a base function for `_.forIn` or `_.forInRight`.
@@ -24796,7 +24296,7 @@
 
 
 /***/ },
-/* 310 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24809,15 +24309,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _square = __webpack_require__(311);
+	var _square = __webpack_require__(279);
 
 	var _square2 = _interopRequireDefault(_square);
 
-	var _piece = __webpack_require__(312);
+	var _piece = __webpack_require__(280);
 
 	var _piece2 = _interopRequireDefault(_piece);
 
-	var _codegen = __webpack_require__(320);
+	var _codegen = __webpack_require__(288);
 
 	var _codegen2 = _interopRequireDefault(_codegen);
 
@@ -24849,7 +24349,7 @@
 	exports.default = Units;
 
 /***/ },
-/* 311 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24881,7 +24381,7 @@
 	exports.default = Square;
 
 /***/ },
-/* 312 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24894,7 +24394,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsCssTransitionGroup = __webpack_require__(313);
+	var _reactAddonsCssTransitionGroup = __webpack_require__(281);
 
 	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 
@@ -24930,13 +24430,13 @@
 	exports.default = Piece;
 
 /***/ },
-/* 313 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(314);
+	module.exports = __webpack_require__(282);
 
 /***/ },
-/* 314 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24956,8 +24456,8 @@
 
 	var React = __webpack_require__(2);
 
-	var ReactTransitionGroup = __webpack_require__(315);
-	var ReactCSSTransitionGroupChild = __webpack_require__(317);
+	var ReactTransitionGroup = __webpack_require__(283);
+	var ReactCSSTransitionGroupChild = __webpack_require__(285);
 
 	function createTransitionTimeoutPropValidator(transitionType) {
 	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
@@ -25028,7 +24528,7 @@
 	module.exports = ReactCSSTransitionGroup;
 
 /***/ },
-/* 315 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25048,7 +24548,7 @@
 
 	var React = __webpack_require__(2);
 	var ReactInstanceMap = __webpack_require__(124);
-	var ReactTransitionChildMapping = __webpack_require__(316);
+	var ReactTransitionChildMapping = __webpack_require__(284);
 
 	var emptyFunction = __webpack_require__(12);
 
@@ -25280,7 +24780,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 316 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25389,7 +24889,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 317 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25408,8 +24908,8 @@
 	var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(36);
 
-	var CSSCore = __webpack_require__(318);
-	var ReactTransitionEvents = __webpack_require__(319);
+	var CSSCore = __webpack_require__(286);
+	var ReactTransitionEvents = __webpack_require__(287);
 
 	var onlyChild = __webpack_require__(34);
 
@@ -25561,7 +25061,7 @@
 	module.exports = ReactCSSTransitionGroupChild;
 
 /***/ },
-/* 318 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25688,7 +25188,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 319 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25766,7 +25266,7 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 320 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25775,7 +25275,7 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(321);
+	var _core = __webpack_require__(289);
 
 	var _core2 = _interopRequireDefault(_core);
 
@@ -25853,20 +25353,20 @@
 	exports.default = o;
 
 /***/ },
-/* 321 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _stringify = __webpack_require__(322);
+	var _stringify = __webpack_require__(290);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _defineProperty2 = __webpack_require__(324);
+	var _defineProperty2 = __webpack_require__(292);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-	var _extends3 = __webpack_require__(327);
+	var _extends3 = __webpack_require__(295);
 
 	var _extends4 = _interopRequireDefault(_extends3);
 
@@ -25874,7 +25374,7 @@
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _slicedToArray2 = __webpack_require__(233);
+	var _slicedToArray2 = __webpack_require__(296);
 
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
@@ -25886,7 +25386,7 @@
 
 	var _tail2 = _interopRequireDefault(_tail);
 
-	var _isArray = __webpack_require__(288);
+	var _isArray = __webpack_require__(256);
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
@@ -26042,13 +25542,23 @@
 	            return "\n                (function(){\n                    var ret={}, " + setdefs + ";\n                    for(var key in s0){\n                        if (" + test + "){\n                            ret[key]=s0[key];\n                        }\n                    }\n                    return ret;\n                }())";
 	        },
 
+	        set_unitlayer: function set_unitlayer(O, _ref15) {
+	            var _ref16 = (0, _slicedToArray3.default)(_ref15, 1);
+
+	            var layername = _ref16[0];
+
+	            return 'UNITLAYERS[' + T.value(O, layername) + ']';
+	        },
+
 	        // layername is a plain string
 	        // This method sometimes used directly from elsewhere
 	        layerref: function layerref(O, layername) {
-
+	            if ((0, _isArray2.default)(layername)) {
+	                layername = T.value(O, layername);
+	            }
 	            var bag = { board: 1, light: 1, dark: 1 }[layername] ? "BOARD" : T.blankUnitLayers(O, true)[layername] ? "UNITLAYERS" : T.terrainLayers(O, true)[layername] ? "TERRAIN" : "ARTIFACTS";
-
-	            return bag + "." + layername; //"("+bag+"."+layername+"||{})";
+	            return layername[0].match(/[a-z]/) ? bag + "." + layername : bag + "[" + layername + "]";
+	            //return bag+"."+layername; //"("+bag+"."+layername+"||{})";
 	        },
 
 	        // ******************** DATATYPE position **********************
@@ -26063,22 +25573,22 @@
 	            }
 	        },
 
-	        pos_mark: function pos_mark(O, _ref15) {
-	            var _ref16 = (0, _slicedToArray3.default)(_ref15, 1);
-
-	            var markname = _ref16[0];
-	            return "MARKS[" + T.value(O, markname) + "]";
-	        },
-	        pos_turnpos: function pos_turnpos(O, _ref17) {
+	        pos_mark: function pos_mark(O, _ref17) {
 	            var _ref18 = (0, _slicedToArray3.default)(_ref17, 1);
 
-	            var pos = _ref18[0];
-	            return "TURNVARS['" + pos + "']";
+	            var markname = _ref18[0];
+	            return "MARKS[" + T.value(O, markname) + "]";
 	        },
-	        pos_pos: function pos_pos(O, _ref19) {
+	        pos_turnpos: function pos_turnpos(O, _ref19) {
 	            var _ref20 = (0, _slicedToArray3.default)(_ref19, 1);
 
 	            var pos = _ref20[0];
+	            return "TURNVARS['" + pos + "']";
+	        },
+	        pos_pos: function pos_pos(O, _ref21) {
+	            var _ref22 = (0, _slicedToArray3.default)(_ref21, 1);
+
+	            var pos = _ref22[0];
 	            return T.value(O, pos);
 	        },
 	        pos_target: function pos_target(O) {
@@ -26087,10 +25597,10 @@
 	        pos_start: function pos_start(O) {
 	            return "STARTPOS";
 	        },
-	        pos_onlyin: function pos_onlyin(O, _ref21) {
-	            var _ref22 = (0, _slicedToArray3.default)(_ref21, 1);
+	        pos_onlyin: function pos_onlyin(O, _ref23) {
+	            var _ref24 = (0, _slicedToArray3.default)(_ref23, 1);
 
-	            var set = _ref22[0];
+	            var set = _ref24[0];
 	            return "Object.keys(" + T.set(O, set) + ")[0]";
 	        },
 
@@ -26104,70 +25614,70 @@
 	            }
 	        },
 
-	        bool_truthy: function bool_truthy(O, _ref23) {
-	            var _ref24 = (0, _slicedToArray3.default)(_ref23, 1);
-
-	            var value = _ref24[0];
-	            return "!!" + T.value(O, value);
-	        },
-	        bool_falsy: function bool_falsy(O, _ref25) {
+	        bool_truthy: function bool_truthy(O, _ref25) {
 	            var _ref26 = (0, _slicedToArray3.default)(_ref25, 1);
 
 	            var value = _ref26[0];
+	            return "!!" + T.value(O, value);
+	        },
+	        bool_falsy: function bool_falsy(O, _ref27) {
+	            var _ref28 = (0, _slicedToArray3.default)(_ref27, 1);
+
+	            var value = _ref28[0];
 	            return "!" + T.value(O, value);
 	        },
-	        bool_same: function bool_same(O, _ref27) {
-	            var _ref28 = (0, _slicedToArray3.default)(_ref27, 2);
-
-	            var v1 = _ref28[0];
-	            var v2 = _ref28[1];
-	            return "(" + T.value(O, v1) + "===" + T.value(O, v2) + ")";
-	        },
-	        bool_different: function bool_different(O, _ref29) {
+	        bool_same: function bool_same(O, _ref29) {
 	            var _ref30 = (0, _slicedToArray3.default)(_ref29, 2);
 
 	            var v1 = _ref30[0];
 	            var v2 = _ref30[1];
-	            return "(" + T.value(O, v1) + "!==" + T.value(O, v2) + ")";
+	            return "(" + T.value(O, v1) + "===" + T.value(O, v2) + ")";
 	        },
-	        bool_morethan: function bool_morethan(O, _ref31) {
+	        bool_different: function bool_different(O, _ref31) {
 	            var _ref32 = (0, _slicedToArray3.default)(_ref31, 2);
 
 	            var v1 = _ref32[0];
 	            var v2 = _ref32[1];
-	            return "(" + T.value(O, v1) + ">" + T.value(O, v2) + ")";
+	            return "(" + T.value(O, v1) + "!==" + T.value(O, v2) + ")";
 	        },
-	        bool_anyat: function bool_anyat(O, _ref33) {
+	        bool_morethan: function bool_morethan(O, _ref33) {
 	            var _ref34 = (0, _slicedToArray3.default)(_ref33, 2);
 
-	            var set = _ref34[0];
-	            var pos = _ref34[1];
-	            return "!!(" + T.set(O, set) + "[" + T.position(O, pos) + "])";
+	            var v1 = _ref34[0];
+	            var v2 = _ref34[1];
+	            return "(" + T.value(O, v1) + ">" + T.value(O, v2) + ")";
 	        },
-	        bool_noneat: function bool_noneat(O, _ref35) {
+	        bool_anyat: function bool_anyat(O, _ref35) {
 	            var _ref36 = (0, _slicedToArray3.default)(_ref35, 2);
 
 	            var set = _ref36[0];
 	            var pos = _ref36[1];
-	            return "!(" + T.set(O, set) + "[" + T.position(O, pos) + "])";
+	            return "!!(" + T.set(O, set) + "[" + T.position(O, pos) + "])";
 	        },
-	        bool_overlaps: function bool_overlaps(O, _ref37) {
+	        bool_noneat: function bool_noneat(O, _ref37) {
 	            var _ref38 = (0, _slicedToArray3.default)(_ref37, 2);
 
-	            var s1 = _ref38[0];
-	            var s2 = _ref38[1];
-	            return T.boolean(O, ['notempty', ['intersect', s1, s2]]);
-	        }, //"(!isEmpty("+T.set(O,["intersect",s1,s2])+"))",
-	        bool_isempty: function bool_isempty(O, _ref39) {
-	            var _ref40 = (0, _slicedToArray3.default)(_ref39, 1);
+	            var set = _ref38[0];
+	            var pos = _ref38[1];
+	            return "!(" + T.set(O, set) + "[" + T.position(O, pos) + "])";
+	        },
+	        bool_overlaps: function bool_overlaps(O, _ref39) {
+	            var _ref40 = (0, _slicedToArray3.default)(_ref39, 2);
 
 	            var s1 = _ref40[0];
-	            return "Object.keys(" + T.set(O, s1) + " || {}).length===0";
-	        },
-	        bool_notempty: function bool_notempty(O, _ref41) {
+	            var s2 = _ref40[1];
+	            return T.boolean(O, ['notempty', ['intersect', s1, s2]]);
+	        }, //"(!isEmpty("+T.set(O,["intersect",s1,s2])+"))",
+	        bool_isempty: function bool_isempty(O, _ref41) {
 	            var _ref42 = (0, _slicedToArray3.default)(_ref41, 1);
 
 	            var s1 = _ref42[0];
+	            return "Object.keys(" + T.set(O, s1) + " || {}).length===0";
+	        },
+	        bool_notempty: function bool_notempty(O, _ref43) {
+	            var _ref44 = (0, _slicedToArray3.default)(_ref43, 1);
+
+	            var s1 = _ref44[0];
 	            return "Object.keys(" + T.set(O, s1) + " || {}).length!==0";
 	        },
 	        bool_and: function bool_and(O, bools) {
@@ -26180,10 +25690,10 @@
 	                return T.boolean(O, b);
 	            }).join(" || ") + ")";
 	        },
-	        bool_not: function bool_not(O, _ref43) {
-	            var _ref44 = (0, _slicedToArray3.default)(_ref43, 1);
+	        bool_not: function bool_not(O, _ref45) {
+	            var _ref46 = (0, _slicedToArray3.default)(_ref45, 1);
 
-	            var bool = _ref44[0];
+	            var bool = _ref46[0];
 	            return "!" + T.boolean(O, bool);
 	        },
 	        bool_true: function bool_true(O) {
@@ -26192,11 +25702,11 @@
 	        bool_false: function bool_false(O) {
 	            return "false";
 	        },
-	        bool_valinlist: function bool_valinlist(O, _ref45) {
-	            var _ref46 = (0, _slicedToArray3.default)(_ref45, 2);
+	        bool_valinlist: function bool_valinlist(O, _ref47) {
+	            var _ref48 = (0, _slicedToArray3.default)(_ref47, 2);
 
-	            var val = _ref46[0];
-	            var list = _ref46[1];
+	            var val = _ref48[0];
+	            var list = _ref48[1];
 	            return '(' + T.list(O, list) + '.indexOf(' + T.value(O, val) + ')!==-1)';
 	        },
 
@@ -26214,10 +25724,10 @@
 	            }
 	        },
 
-	        id_idat: function id_idat(O, _ref47) {
-	            var _ref48 = (0, _slicedToArray3.default)(_ref47, 1);
+	        id_idat: function id_idat(O, _ref49) {
+	            var _ref50 = (0, _slicedToArray3.default)(_ref49, 1);
 
-	            var pos = _ref48[0];
+	            var pos = _ref50[0];
 	            return "(UNITLAYERS.units[" + T.position(O, pos) + "] || [{}]).id";
 	        },
 	        id_loopid: function id_loopid(O) {
@@ -26243,22 +25753,22 @@
 	            }
 	        },
 
-	        val_pos: function val_pos(O, _ref49) {
-	            var _ref50 = (0, _slicedToArray3.default)(_ref49, 1);
-
-	            var pos = _ref50[0];
-	            return T.position(O, pos);
-	        },
-	        val_value: function val_value(O, _ref51) {
+	        val_pos: function val_pos(O, _ref51) {
 	            var _ref52 = (0, _slicedToArray3.default)(_ref51, 1);
 
-	            var value = _ref52[0];
-	            return typeof value === "string" ? "'" + value + "'" : value;
+	            var pos = _ref52[0];
+	            return T.position(O, pos);
 	        },
-	        val_val: function val_val(O, _ref53) {
+	        val_value: function val_value(O, _ref53) {
 	            var _ref54 = (0, _slicedToArray3.default)(_ref53, 1);
 
 	            var value = _ref54[0];
+	            return typeof value === "string" ? "'" + value + "'" : value;
+	        },
+	        val_val: function val_val(O, _ref55) {
+	            var _ref56 = (0, _slicedToArray3.default)(_ref55, 1);
+
+	            var value = _ref56[0];
 	            return typeof value === "string" ? "'" + value + "'" : value;
 	        },
 	        val_currentplayer: function val_currentplayer(O) {
@@ -26277,10 +25787,10 @@
 	                return T.value(O, v);
 	            }).join(" * ") + ")";
 	        },
-	        val_ctxval: function val_ctxval(O, _ref55) {
-	            var _ref56 = (0, _slicedToArray3.default)(_ref55, 1);
+	        val_ctxval: function val_ctxval(O, _ref57) {
+	            var _ref58 = (0, _slicedToArray3.default)(_ref57, 1);
 
-	            var name = _ref56[0];
+	            var name = _ref58[0];
 	            return "CONTEXT[" + T.value(O, name) + "]";
 	        },
 	        val_dir: function val_dir(O) {
@@ -26307,20 +25817,20 @@
 	        val_step: function val_step(O) {
 	            return "STEP";
 	        },
-	        val_read: function val_read(O, _ref57) {
-	            var _ref58 = (0, _slicedToArray3.default)(_ref57, 3);
+	        val_read: function val_read(O, _ref59) {
+	            var _ref60 = (0, _slicedToArray3.default)(_ref59, 3);
 
-	            var layer = _ref58[0];
-	            var pos = _ref58[1];
-	            var prop = _ref58[2];
+	            var layer = _ref60[0];
+	            var pos = _ref60[1];
+	            var prop = _ref60[2];
 
 	            var pos = layer === 'board' ? T.set(O, layer) + "[" + T.position(O, pos) + "]" : "(" + T.set(O, layer) + "[" + T.position(O, pos) + "]||{})";
 	            return pos + "[" + T.value(O, prop) + "]";
 	        },
-	        val_sizeof: function val_sizeof(O, _ref59) {
-	            var _ref60 = (0, _slicedToArray3.default)(_ref59, 1);
+	        val_sizeof: function val_sizeof(O, _ref61) {
+	            var _ref62 = (0, _slicedToArray3.default)(_ref61, 1);
 
-	            var set = _ref60[0];
+	            var set = _ref62[0];
 	            return "Object.keys(" + T.set(O, set) + ").length";
 	        }
 	    });
@@ -26329,13 +25839,13 @@
 	};
 
 /***/ },
-/* 322 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(323), __esModule: true };
+	module.exports = { "default": __webpack_require__(291), __esModule: true };
 
 /***/ },
-/* 323 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var core = __webpack_require__(220);
@@ -26344,14 +25854,14 @@
 	};
 
 /***/ },
-/* 324 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _defineProperty = __webpack_require__(325);
+	var _defineProperty = __webpack_require__(293);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -26373,13 +25883,13 @@
 	};
 
 /***/ },
-/* 325 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(326), __esModule: true };
+	module.exports = { "default": __webpack_require__(294), __esModule: true };
 
 /***/ },
-/* 326 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(228);
@@ -26388,7 +25898,7 @@
 	};
 
 /***/ },
-/* 327 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26410,6 +25920,491 @@
 	};
 
 	exports.__esModule = true;
+
+/***/ },
+/* 296 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _isIterable2 = __webpack_require__(297);
+
+	var _isIterable3 = _interopRequireDefault(_isIterable2);
+
+	var _getIterator2 = __webpack_require__(322);
+
+	var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = (function () {
+	  function sliceIterator(arr, i) {
+	    var _arr = [];
+	    var _n = true;
+	    var _d = false;
+	    var _e = undefined;
+
+	    try {
+	      for (var _i = (0, _getIterator3.default)(arr), _s; !(_n = (_s = _i.next()).done); _n = true) {
+	        _arr.push(_s.value);
+
+	        if (i && _arr.length === i) break;
+	      }
+	    } catch (err) {
+	      _d = true;
+	      _e = err;
+	    } finally {
+	      try {
+	        if (!_n && _i["return"]) _i["return"]();
+	      } finally {
+	        if (_d) throw _e;
+	      }
+	    }
+
+	    return _arr;
+	  }
+
+	  return function (arr, i) {
+	    if (Array.isArray(arr)) {
+	      return arr;
+	    } else if ((0, _isIterable3.default)(Object(arr))) {
+	      return sliceIterator(arr, i);
+	    } else {
+	      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+	    }
+	  };
+	})();
+
+/***/ },
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(298), __esModule: true };
+
+/***/ },
+/* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(299);
+	__webpack_require__(317);
+	module.exports = __webpack_require__(320);
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(300);
+	var Iterators = __webpack_require__(303);
+	Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var addToUnscopables = __webpack_require__(301)
+	  , step             = __webpack_require__(302)
+	  , Iterators        = __webpack_require__(303)
+	  , toIObject        = __webpack_require__(304);
+
+	// 22.1.3.4 Array.prototype.entries()
+	// 22.1.3.13 Array.prototype.keys()
+	// 22.1.3.29 Array.prototype.values()
+	// 22.1.3.30 Array.prototype[@@iterator]()
+	module.exports = __webpack_require__(305)(Array, 'Array', function(iterated, kind){
+	  this._t = toIObject(iterated); // target
+	  this._i = 0;                   // next index
+	  this._k = kind;                // kind
+	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , kind  = this._k
+	    , index = this._i++;
+	  if(!O || index >= O.length){
+	    this._t = undefined;
+	    return step(1);
+	  }
+	  if(kind == 'keys'  )return step(0, index);
+	  if(kind == 'values')return step(0, O[index]);
+	  return step(0, [index, O[index]]);
+	}, 'values');
+
+	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+	Iterators.Arguments = Iterators.Array;
+
+	addToUnscopables('keys');
+	addToUnscopables('values');
+	addToUnscopables('entries');
+
+/***/ },
+/* 301 */
+/***/ function(module, exports) {
+
+	module.exports = function(){ /* empty */ };
+
+/***/ },
+/* 302 */
+/***/ function(module, exports) {
+
+	module.exports = function(done, value){
+	  return {value: value, done: !!done};
+	};
+
+/***/ },
+/* 303 */
+/***/ function(module, exports) {
+
+	module.exports = {};
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// to indexed object, toObject with fallback for non-array-like ES3 strings
+	var IObject = __webpack_require__(229)
+	  , defined = __webpack_require__(216);
+	module.exports = function(it){
+	  return IObject(defined(it));
+	};
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var LIBRARY        = __webpack_require__(306)
+	  , $export        = __webpack_require__(218)
+	  , redefine       = __webpack_require__(307)
+	  , hide           = __webpack_require__(308)
+	  , has            = __webpack_require__(311)
+	  , Iterators      = __webpack_require__(303)
+	  , $iterCreate    = __webpack_require__(312)
+	  , setToStringTag = __webpack_require__(313)
+	  , getProto       = __webpack_require__(228).getProto
+	  , ITERATOR       = __webpack_require__(314)('iterator')
+	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
+	  , FF_ITERATOR    = '@@iterator'
+	  , KEYS           = 'keys'
+	  , VALUES         = 'values';
+
+	var returnThis = function(){ return this; };
+
+	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
+	  $iterCreate(Constructor, NAME, next);
+	  var getMethod = function(kind){
+	    if(!BUGGY && kind in proto)return proto[kind];
+	    switch(kind){
+	      case KEYS: return function keys(){ return new Constructor(this, kind); };
+	      case VALUES: return function values(){ return new Constructor(this, kind); };
+	    } return function entries(){ return new Constructor(this, kind); };
+	  };
+	  var TAG        = NAME + ' Iterator'
+	    , DEF_VALUES = DEFAULT == VALUES
+	    , VALUES_BUG = false
+	    , proto      = Base.prototype
+	    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
+	    , $default   = $native || getMethod(DEFAULT)
+	    , methods, key;
+	  // Fix native
+	  if($native){
+	    var IteratorPrototype = getProto($default.call(new Base));
+	    // Set @@toStringTag to native iterators
+	    setToStringTag(IteratorPrototype, TAG, true);
+	    // FF fix
+	    if(!LIBRARY && has(proto, FF_ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
+	    // fix Array#{values, @@iterator}.name in V8 / FF
+	    if(DEF_VALUES && $native.name !== VALUES){
+	      VALUES_BUG = true;
+	      $default = function values(){ return $native.call(this); };
+	    }
+	  }
+	  // Define iterator
+	  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
+	    hide(proto, ITERATOR, $default);
+	  }
+	  // Plug for library
+	  Iterators[NAME] = $default;
+	  Iterators[TAG]  = returnThis;
+	  if(DEFAULT){
+	    methods = {
+	      values:  DEF_VALUES  ? $default : getMethod(VALUES),
+	      keys:    IS_SET      ? $default : getMethod(KEYS),
+	      entries: !DEF_VALUES ? $default : getMethod('entries')
+	    };
+	    if(FORCED)for(key in methods){
+	      if(!(key in proto))redefine(proto, key, methods[key]);
+	    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+	  }
+	  return methods;
+	};
+
+/***/ },
+/* 306 */
+/***/ function(module, exports) {
+
+	module.exports = true;
+
+/***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(308);
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $          = __webpack_require__(228)
+	  , createDesc = __webpack_require__(309);
+	module.exports = __webpack_require__(310) ? function(object, key, value){
+	  return $.setDesc(object, key, createDesc(1, value));
+	} : function(object, key, value){
+	  object[key] = value;
+	  return object;
+	};
+
+/***/ },
+/* 309 */
+/***/ function(module, exports) {
+
+	module.exports = function(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	};
+
+/***/ },
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(223)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 311 */
+/***/ function(module, exports) {
+
+	var hasOwnProperty = {}.hasOwnProperty;
+	module.exports = function(it, key){
+	  return hasOwnProperty.call(it, key);
+	};
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $              = __webpack_require__(228)
+	  , descriptor     = __webpack_require__(309)
+	  , setToStringTag = __webpack_require__(313)
+	  , IteratorPrototype = {};
+
+	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+	__webpack_require__(308)(IteratorPrototype, __webpack_require__(314)('iterator'), function(){ return this; });
+
+	module.exports = function(Constructor, NAME, next){
+	  Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
+	  setToStringTag(Constructor, NAME + ' Iterator');
+	};
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var def = __webpack_require__(228).setDesc
+	  , has = __webpack_require__(311)
+	  , TAG = __webpack_require__(314)('toStringTag');
+
+	module.exports = function(it, tag, stat){
+	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
+	};
+
+/***/ },
+/* 314 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var store  = __webpack_require__(315)('wks')
+	  , uid    = __webpack_require__(316)
+	  , Symbol = __webpack_require__(219).Symbol;
+	module.exports = function(name){
+	  return store[name] || (store[name] =
+	    Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
+	};
+
+/***/ },
+/* 315 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(219)
+	  , SHARED = '__core-js_shared__'
+	  , store  = global[SHARED] || (global[SHARED] = {});
+	module.exports = function(key){
+	  return store[key] || (store[key] = {});
+	};
+
+/***/ },
+/* 316 */
+/***/ function(module, exports) {
+
+	var id = 0
+	  , px = Math.random();
+	module.exports = function(key){
+	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+	};
+
+/***/ },
+/* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $at  = __webpack_require__(318)(true);
+
+	// 21.1.3.27 String.prototype[@@iterator]()
+	__webpack_require__(305)(String, 'String', function(iterated){
+	  this._t = String(iterated); // target
+	  this._i = 0;                // next index
+	// 21.1.5.2.1 %StringIteratorPrototype%.next()
+	}, function(){
+	  var O     = this._t
+	    , index = this._i
+	    , point;
+	  if(index >= O.length)return {value: undefined, done: true};
+	  point = $at(O, index);
+	  this._i += point.length;
+	  return {value: point, done: false};
+	});
+
+/***/ },
+/* 318 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(319)
+	  , defined   = __webpack_require__(216);
+	// true  -> String#at
+	// false -> String#codePointAt
+	module.exports = function(TO_STRING){
+	  return function(that, pos){
+	    var s = String(defined(that))
+	      , i = toInteger(pos)
+	      , l = s.length
+	      , a, b;
+	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+	    a = s.charCodeAt(i);
+	    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+	      ? TO_STRING ? s.charAt(i) : a
+	      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+	  };
+	};
+
+/***/ },
+/* 319 */
+/***/ function(module, exports) {
+
+	// 7.1.4 ToInteger
+	var ceil  = Math.ceil
+	  , floor = Math.floor;
+	module.exports = function(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	};
+
+/***/ },
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var classof   = __webpack_require__(321)
+	  , ITERATOR  = __webpack_require__(314)('iterator')
+	  , Iterators = __webpack_require__(303);
+	module.exports = __webpack_require__(220).isIterable = function(it){
+	  var O = Object(it);
+	  return O[ITERATOR] !== undefined
+	    || '@@iterator' in O
+	    || Iterators.hasOwnProperty(classof(O));
+	};
+
+/***/ },
+/* 321 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// getting tag from 19.1.3.6 Object.prototype.toString()
+	var cof = __webpack_require__(230)
+	  , TAG = __webpack_require__(314)('toStringTag')
+	  // ES3 wrong here
+	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
+
+	module.exports = function(it){
+	  var O, T, B;
+	  return it === undefined ? 'Undefined' : it === null ? 'Null'
+	    // @@toStringTag case
+	    : typeof (T = (O = Object(it))[TAG]) == 'string' ? T
+	    // builtinTag case
+	    : ARG ? cof(O)
+	    // ES3 arguments fallback
+	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+	};
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(323), __esModule: true };
+
+/***/ },
+/* 323 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(299);
+	__webpack_require__(317);
+	module.exports = __webpack_require__(324);
+
+/***/ },
+/* 324 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var anObject = __webpack_require__(325)
+	  , get      = __webpack_require__(327);
+	module.exports = __webpack_require__(220).getIterator = function(it){
+	  var iterFn = get(it);
+	  if(typeof iterFn != 'function')throw TypeError(it + ' is not iterable!');
+	  return anObject(iterFn.call(it));
+	};
+
+/***/ },
+/* 325 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(326);
+	module.exports = function(it){
+	  if(!isObject(it))throw TypeError(it + ' is not an object!');
+	  return it;
+	};
+
+/***/ },
+/* 326 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  return typeof it === 'object' ? it !== null : typeof it === 'function';
+	};
+
+/***/ },
+/* 327 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var classof   = __webpack_require__(321)
+	  , ITERATOR  = __webpack_require__(314)('iterator')
+	  , Iterators = __webpack_require__(303);
+	module.exports = __webpack_require__(220).getIteratorMethod = function(it){
+	  if(it != undefined)return it[ITERATOR]
+	    || it['@@iterator']
+	    || Iterators[classof(it)];
+	};
 
 /***/ },
 /* 328 */
@@ -26449,7 +26444,7 @@
 /* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSlice = __webpack_require__(298),
+	var baseSlice = __webpack_require__(266),
 	    isIterateeCall = __webpack_require__(331);
 
 	/**
@@ -26494,9 +26489,9 @@
 /* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(282),
-	    isIndex = __webpack_require__(289),
-	    isObject = __webpack_require__(280);
+	var isArrayLike = __webpack_require__(250),
+	    isIndex = __webpack_require__(257),
+	    isObject = __webpack_require__(248);
 
 	/**
 	 * Checks if the provided arguments are from an iteratee call.
@@ -26610,7 +26605,7 @@
 /* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseForOwn = __webpack_require__(307),
+	var baseForOwn = __webpack_require__(275),
 	    createBaseEach = __webpack_require__(335);
 
 	/**
@@ -26631,9 +26626,9 @@
 /* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(283),
-	    isLength = __webpack_require__(285),
-	    toObject = __webpack_require__(292);
+	var getLength = __webpack_require__(251),
+	    isLength = __webpack_require__(253),
+	    toObject = __webpack_require__(260);
 
 	/**
 	 * Creates a `baseEach` or `baseEachRight` function.
@@ -26668,9 +26663,9 @@
 /* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCallback = __webpack_require__(267),
+	var baseCallback = __webpack_require__(235),
 	    baseReduce = __webpack_require__(337),
-	    isArray = __webpack_require__(288);
+	    isArray = __webpack_require__(256);
 
 	/**
 	 * Creates a function for `_.reduce` or `_.reduceRight`.
@@ -26824,9 +26819,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var arrayMap = __webpack_require__(340),
-	    baseCallback = __webpack_require__(267),
+	    baseCallback = __webpack_require__(235),
 	    baseMap = __webpack_require__(341),
-	    isArray = __webpack_require__(288);
+	    isArray = __webpack_require__(256);
 
 	/**
 	 * Creates an array of values by running each element in `collection` through
@@ -26925,7 +26920,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseEach = __webpack_require__(334),
-	    isArrayLike = __webpack_require__(282);
+	    isArrayLike = __webpack_require__(250);
 
 	/**
 	 * The base implementation of `_.map` without support for callback shorthands
@@ -27089,7 +27084,7 @@
 /* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(281);
+	var isObjectLike = __webpack_require__(249);
 
 	/** `Object#toString` result references. */
 	var numberTag = '[object Number]';
@@ -27205,7 +27200,7 @@
 
 	'use strict';
 
-	var _extends2 = __webpack_require__(327);
+	var _extends2 = __webpack_require__(295);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
@@ -27398,7 +27393,7 @@
 
 	'use strict';
 
-	var _extends2 = __webpack_require__(327);
+	var _extends2 = __webpack_require__(295);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
@@ -27759,7 +27754,7 @@
 
 	'use strict';
 
-	var _extends2 = __webpack_require__(327);
+	var _extends2 = __webpack_require__(295);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
@@ -27816,15 +27811,15 @@
 
 	"use strict";
 
-	var _defineProperty2 = __webpack_require__(324);
+	var _defineProperty2 = __webpack_require__(292);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-	var _extends4 = __webpack_require__(327);
+	var _extends4 = __webpack_require__(295);
 
 	var _extends5 = _interopRequireDefault(_extends4);
 
-	var _stringify = __webpack_require__(322);
+	var _stringify = __webpack_require__(290);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -27848,7 +27843,7 @@
 
 	var _flatten2 = _interopRequireDefault(_flatten);
 
-	var _isArray = __webpack_require__(288);
+	var _isArray = __webpack_require__(256);
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
@@ -28045,10 +28040,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var arrayPush = __webpack_require__(353),
-	    isArguments = __webpack_require__(287),
-	    isArray = __webpack_require__(288),
-	    isArrayLike = __webpack_require__(282),
-	    isObjectLike = __webpack_require__(281);
+	    isArguments = __webpack_require__(255),
+	    isArray = __webpack_require__(256),
+	    isArrayLike = __webpack_require__(250),
+	    isObjectLike = __webpack_require__(249);
 
 	/**
 	 * The base implementation of `_.flatten` with added support for restricting
@@ -28119,11 +28114,11 @@
 
 	"use strict";
 
-	var _extends2 = __webpack_require__(327);
+	var _extends2 = __webpack_require__(295);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _slicedToArray2 = __webpack_require__(233);
+	var _slicedToArray2 = __webpack_require__(296);
 
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
@@ -28236,7 +28231,7 @@
 
 	'use strict';
 
-	var _extends2 = __webpack_require__(327);
+	var _extends2 = __webpack_require__(295);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
@@ -28322,11 +28317,11 @@
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _stringify = __webpack_require__(322);
+	var _stringify = __webpack_require__(290);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _extends2 = __webpack_require__(327);
+	var _extends2 = __webpack_require__(295);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
@@ -28348,9 +28343,13 @@
 	    return (0, _assign2.default)(C, {
 
 	        makeGameObject: function makeGameObject(O) {
-	            return '\n        function(){\n            var game = {};\n            ' + C.addCommonVariables(O) + '\n            ' + C.addPlayerClosure((0, _extends3.default)({}, O, { player: 1 })) + '\n            ' + C.addPlayerClosure((0, _extends3.default)({}, O, { player: 2 })) + '\n            ' + C.addCommonFunctions(O) + '\n            game.commands = ' + (0, _stringify2.default)((0, _keys2.default)(O.rules.commands).reduce(function (mem, c) {
+	            return '\n        function(){\n            var game = {};\n            ' + C.addCommonVariables(O) + '\n            ' + C.addPlayerClosure((0, _extends3.default)({}, O, { player: 1 })) + '\n            ' + C.addPlayerClosure((0, _extends3.default)({}, O, { player: 2 })) + '\n            ' + C.addCommonFunctions(O) + '\n            ' + C.addGameData(O) + '\n            return game;\n        }\n    ';
+	        },
+
+	        addGameData: function addGameData(O) {
+	            return '\n        game.commands = ' + (0, _stringify2.default)((0, _keys2.default)(O.rules.commands).reduce(function (mem, c) {
 	                mem[c] = 1;return mem;
-	            }, {})) + ';\n            game.graphics = ' + (0, _stringify2.default)(O.rules.graphics) + ';\n            game.board = ' + (0, _stringify2.default)(O.rules.board) + ';\n            return game;\n        }\n    ';
+	            }, {})) + ';\n        game.graphics = ' + (0, _stringify2.default)(O.rules.graphics) + ';\n        game.board = ' + (0, _stringify2.default)(O.rules.board) + ';\n    ';
 	        },
 
 	        addCommonFunctions: function addCommonFunctions(O) {
@@ -28406,15 +28405,15 @@
 
 	'use strict';
 
-	var _slicedToArray2 = __webpack_require__(233);
+	var _slicedToArray2 = __webpack_require__(296);
 
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-	var _defineProperty2 = __webpack_require__(324);
+	var _defineProperty2 = __webpack_require__(292);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-	var _extends3 = __webpack_require__(327);
+	var _extends3 = __webpack_require__(295);
 
 	var _extends4 = _interopRequireDefault(_extends3);
 
@@ -28430,11 +28429,11 @@
 		value: true
 	});
 
-	var _isObject = __webpack_require__(280);
+	var _isObject = __webpack_require__(248);
 
 	var _isObject2 = _interopRequireDefault(_isObject);
 
-	var _isArray = __webpack_require__(288);
+	var _isArray = __webpack_require__(256);
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
@@ -28680,8 +28679,8 @@
 /* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqual = __webpack_require__(270),
-	    bindCallback = __webpack_require__(303);
+	var baseIsEqual = __webpack_require__(238),
+	    bindCallback = __webpack_require__(271);
 
 	/**
 	 * Performs a deep comparison between two values to determine if they are
@@ -28740,7 +28739,7 @@
 /* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(281);
+	var isObjectLike = __webpack_require__(249);
 
 	/** `Object#toString` result references. */
 	var stringTag = '[object String]';
@@ -28782,7 +28781,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var isIterateeCall = __webpack_require__(331),
-	    keys = __webpack_require__(276);
+	    keys = __webpack_require__(244);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -28847,10 +28846,10 @@
 /* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arraySome = __webpack_require__(273),
-	    baseCallback = __webpack_require__(267),
+	var arraySome = __webpack_require__(241),
+	    baseCallback = __webpack_require__(235),
 	    baseSome = __webpack_require__(362),
-	    isArray = __webpack_require__(288),
+	    isArray = __webpack_require__(256),
 	    isIterateeCall = __webpack_require__(331);
 
 	/**
@@ -28950,9 +28949,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var arrayFilter = __webpack_require__(364),
-	    baseCallback = __webpack_require__(267),
+	    baseCallback = __webpack_require__(235),
 	    baseFilter = __webpack_require__(365),
-	    isArray = __webpack_require__(288);
+	    isArray = __webpack_require__(256);
 
 	/**
 	 * Iterates over elements of `collection`, returning an array of all elements
@@ -29269,7 +29268,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var binaryIndexBy = __webpack_require__(371),
-	    identity = __webpack_require__(304);
+	    identity = __webpack_require__(272);
 
 	/** Used as references for the maximum length and index of an array. */
 	var MAX_ARRAY_LENGTH = 4294967295,
@@ -29376,7 +29375,7 @@
 /* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCallback = __webpack_require__(267),
+	var baseCallback = __webpack_require__(235),
 	    baseUniq = __webpack_require__(373),
 	    isIterateeCall = __webpack_require__(331),
 	    sortedUniq = __webpack_require__(378);
@@ -29519,7 +29518,7 @@
 /* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(280);
+	var isObject = __webpack_require__(248);
 
 	/**
 	 * Checks if `value` is in `cache` mimicking the return signature of
@@ -29545,7 +29544,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var SetCache = __webpack_require__(376),
-	    getNative = __webpack_require__(277);
+	    getNative = __webpack_require__(245);
 
 	/** Native method references. */
 	var Set = getNative(global, 'Set');
@@ -29573,7 +29572,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var cachePush = __webpack_require__(377),
-	    getNative = __webpack_require__(277);
+	    getNative = __webpack_require__(245);
 
 	/** Native method references. */
 	var Set = getNative(global, 'Set');
@@ -29608,7 +29607,7 @@
 /* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(280);
+	var isObject = __webpack_require__(248);
 
 	/**
 	 * Adds `value` to the cache.
@@ -29679,11 +29678,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _square = __webpack_require__(311);
+	var _square = __webpack_require__(279);
 
 	var _square2 = _interopRequireDefault(_square);
 
-	var _codegen = __webpack_require__(320);
+	var _codegen = __webpack_require__(288);
 
 	var _codegen2 = _interopRequireDefault(_codegen);
 

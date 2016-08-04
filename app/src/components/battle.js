@@ -30,7 +30,7 @@ let Battle = React.createClass({
     return (
       <div>
         <h4>Playing!</h4>
-        <div className="board">
+        <div className="board" style={{height:s.game.board.height*50,width:s.game.board.width*50}}>
           <Units icons={this.props.game.graphics.icons} unitdata={s.step.UNITDATA} board={this.props.game.board} />
           <Marks board={this.props.game.board} activeMarks={s.step.MARKS} potentialMarks={s.UI.marks} selectMark={this.doAction}/>
         </div>

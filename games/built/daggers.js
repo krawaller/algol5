@@ -1612,7 +1612,7 @@
             var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
             turn.links[newstepid][result] = 'infiltration';
           } else
-          if (Object.keys(ARTIFACTS.oppdeadcrowns ||  {}).length !== 0) {
+          if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
             var winner = 1;
             var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
             turn.links[newstepid][result] = 'kingkill';
@@ -1957,7 +1957,7 @@
             var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
             turn.links[newstepid][result] = 'infiltration';
           } else
-          if (Object.keys(ARTIFACTS.oppdeadcrowns ||  {}).length !== 0) {
+          if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
             var winner = 2;
             var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
             turn.links[newstepid][result] = 'kingkill';

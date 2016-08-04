@@ -21,7 +21,7 @@
   },
   "endGame": {
     "infiltration":{ "condition": ["overlaps","mycrowns","oppbases"] },
-    "kingkill": { "condition": ["notempty","oppdeadcrowns"] }
+    "kingkill": { "condition": ["same",["sizeof","oppcrowns"],1] }
   },
   "startTurn": {
     "link": "selectunit"

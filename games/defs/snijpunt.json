@@ -19,12 +19,12 @@
       "corner": ["a6"]
     }
   },
-  "endgame": {
+  "endGame": {
     "madeline": {"condition":["notempty","winline"]},
     "madeoppline": {"condition":["notempty","loseline"],"who":["otherplayer"]}
   },
-  "startturn": {
-    "runGenerators": ["findpotentialempties","findmandatory"],
+  "startTurn": {
+    "runGenerator": ["if",["notempty","oppsniper"],["all","findpotentialempties","findmandatory"]],
     "link": "selecttarget"
   },
   "marks": {
@@ -43,11 +43,11 @@
           ["moveat",["onlyin","mysniper"],"selecttarget"]
         ],
         ["if",
-          ["morethan",["contextval","turn"],1],
+          ["notempty","oppsniper"],
           ["ifelse",
             ["anyat","units",["onlyin","intersection"]],
             ["setat",["onlyin","intersection"],"owner",["ifelse",
-              ["same",["lookup","units",["onlyin","intersection"],"owner"],2],
+              ["same",["read","units",["onlyin","intersection"],"owner"],2],
               1,
               2
             ]],
@@ -85,7 +85,7 @@
     },
     "findpotentialempties": {
       "type": "walker",
-      "start": "oppsniper",
+      "start": ["onlyin","oppsniper"],
       "dir": ["playercase",3,5],
       "draw": {
         "all": {

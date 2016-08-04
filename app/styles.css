@@ -1,6 +1,6 @@
 .board {
-    height: 300px;
-    width: 300px;
+    height: 600px;
+    width: 600px;
     border: 1px solid black;
     position: relative;
 }
@@ -9,9 +9,6 @@
     position: absolute;
     font-size: 40px;
     transition: bottom 0.5s, left 0.5s;
-}
-
-.square > div {
     display: flex;
     justify-content: center;
     align-items: center;

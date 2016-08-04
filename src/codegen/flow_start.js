@@ -15,6 +15,7 @@ export default C => Object.assign(C,{
     makeStepSeed: O=> `{
         UNITDATA: ${C.deduceInitialUnitData(O)}
         ${C.usesTurnVars(O) ? ', TURNVARS: {}' : ''}
+        ${C.contains((O && O.rules || {}),'spawn') ? ', clones: 0' : ''}
     }`,
 
     makeStartFunction: O=> `
@@ -70,6 +71,7 @@ export default C => Object.assign(C,{
         UNITLAYERS: UNITLAYERS,
         MARKS: MARKS,
         stepid: 'root',
+        ${C.contains((O && O.rules || {}),'spawn') ? 'clones: step.clones, ' : ''}
         path: []
     }`,
 

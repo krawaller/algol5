@@ -1387,6 +1387,7 @@
 	            } else {
 	                stepid = stepid + '-' + [action];
 	            } // TODO endgame funcs too!
+	            console.log(action, available.length === 1);
 	        }
 	        return turn;
 	    },

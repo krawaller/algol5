@@ -53,7 +53,7 @@ export default C => Object.assign(C,{
             pos: ${C.position(O,pos)},
             id: newunitid,
             group: ${C.value(O,group)},
-            owner: ${owner ? C.value(O,owner) : 'player'}
+            owner: ${owner !== undefined ? C.value(O,owner) : 'player'}
             ${obj?","+map(obj,(val,key)=>key+":"+C.value(O,val)).join(","):""}
         }; 
     `,

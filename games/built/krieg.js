@@ -1,4 +1,4 @@
-let makeGame = (
+(
   function() {
     var game = {};
     var connections = {
@@ -999,6 +999,4 @@ let makeGame = (
     };
     return game;
   }
-);
-let instance = makeGame();
-module.exports = instance;
+)()

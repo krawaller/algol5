@@ -15,6 +15,7 @@
   "scripts": {
     "test": "babel-node dev/test/run.js",
     "generate": "babel-node games/generate.js",
+    "collect": "babel-node games/collect.js",
     "build": "webpack"
   }
 }

@@ -25,13 +25,13 @@ export default C => Object.assign(C,{
         var ARTIFACTS = ${C.copyArtifactsForAction(O,C.cmndRules(O))};
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({},step.UNITDATA);
+        ${C.contains(C.cmndRules(O),'spawn') ? 'var clones = step.clones; ' : ''}
         var UNITLAYERS = step.UNITLAYERS;
         ${C.usesTurnVars(O) ? 'var TURNVARS = Object.assign({},step.TURNVARS); ' : ''}
-        ${C.contains(C.cmndRules(O),['spawn']) ? 'var newunitid = step.newunitid; ' : ''}
     `,
 
     /*
-    assumed ARTIFACTS, MARKS, UNITDATA, UNITLAYERS, newstepid, step, newunitid
+    assumed ARTIFACTS, MARKS, UNITDATA, UNITLAYERS, newstepid, step, clones
     */
     makeCommandStep: (O)=> `
     {
@@ -41,7 +41,7 @@ export default C => Object.assign(C,{
         UNITLAYERS: UNITLAYERS,
         stepid: newstepid,
         path: step.path.concat('${O.cmndname}')
-        ${C.contains(C.cmndRules(O),['spawn']) ? ', newunitid: newunitid' : ''}
+        ${C.contains(C.cmndRules(O),'spawn') ? ', clones: clones' : ''}
     }
     `,
 

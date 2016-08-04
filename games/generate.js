@@ -4,19 +4,11 @@ import fs from 'fs'
 
 import {js_beautify} from 'js-beautify'
 
-import daggers from './defs/daggers.json'
-import krieg from './defs/krieg.json'
-
-let code = lib.makeGameObject({rules:krieg});
-
-code = `
-	let makeGame = (${code});
-  let instance = makeGame();
-	module.exports = instance;
-`
-
-code = js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n');
-
-//console.log("\n***DAGGERS***\n",code)
-
-fs.writeFileSync(__dirname+'/built/krieg.js',code);
+fs.readdirSync(__dirname+"/defs").forEach(gamename=>{
+  let rules = require('./defs/'+gamename)
+  console.log("building",gamename)
+  let code = lib.makeGameObject({rules});
+  code = `(${code})()`
+  code = js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n');
+  fs.writeFileSync(__dirname+'/built/'+gamename.replace('.json','.js'),code);
+})

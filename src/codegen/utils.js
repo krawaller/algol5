@@ -27,8 +27,12 @@ export default U => Object.assign(U,{
 	/*
 	Calculate all Artifact layers affected by an action
 	*/
-	actionLayers: (O,actiondef)=> Object.keys((actiondef.runGenerators||[]).concat(actiondef.runGenerator || []).reduce((mem,gen)=> {
-		return Object.assign(mem,U.generatorLayers(O.rules.generators[gen]))
+	actionLayers: (O,actiondef)=>  Object.keys((actiondef.runGenerators||[]).concat(actiondef.runGenerator ? [actiondef.runGenerator] : []).reduce((mem,gen)=> {
+		let gens = U.possibilities(gen)
+		gens.forEach(gen=>{
+			mem = Object.assign(mem,U.generatorLayers(O.rules.generators[gen]))
+		})
+		return mem
 	},{})),
 
   /*

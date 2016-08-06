@@ -3,6 +3,7 @@
     width: 600px;
     border: 1px solid black;
     position: relative;
+    background-color: aliceblue;
 }
 
 .square {
@@ -23,7 +24,7 @@
 }
 
 .mark {
-    border: 3px solid yellow;
+    border: 5px solid gold;
     border-radius: 500px;
     box-sizing: border-box;
     cursor: pointer;

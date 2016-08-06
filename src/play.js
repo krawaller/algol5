@@ -44,7 +44,8 @@ let play = {
         return session;
     },
     makeSessionAction: (session,action)=> {
-        if (session.markTimeStamps[action]){ // removing a mark
+        if (session.markTimeStamps[action] && !session.turn.links[session.step.stepid][action]){ // removing a mark
+            console.log("Going back to",session.markTimeStamps[action])
             session.step = session.turn.steps[session.markTimeStamps[action]]
             delete session.markTimeStamps[action] // not really necessary
             session.UI = play.getSessionUI(session)

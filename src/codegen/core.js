@@ -221,6 +221,7 @@ export default T => {
         val_otherplayer: (O)=> O.player === 1 ? 2 : 1,
         val_sum: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" + ") + ")",
         val_prod: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" * ") + ")",
+        val_minus: (O,[val1,val2])=> T.value(O,val1)+' - '+T.value(O,val2),
         val_ctxval: (O,[name])=> "CONTEXT[" + T.value(O,name) + "]",
         val_dir: (O)=> O && O.usefordir || "DIR",
         val_max: (O)=> "MAX",

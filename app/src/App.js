@@ -13,7 +13,7 @@ let App = React.createClass({
   },
   render() {
     if (!this.state.game){
-      let choices = Object.keys(games).map(g=> <p onClick={this.chooseGame.bind(this,g)}>{g}</p>)
+      let choices = Object.keys(games).map((g,n)=> <button key={n} onClick={this.chooseGame.bind(this,g)}>{g}</button>)
       return <div>
         {choices}
       </div>;

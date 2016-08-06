@@ -2125,7 +2125,8 @@
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             stepid: newstepid,
-            path: step.path.concat(markpos)
+            path: step.path.concat(markpos),
+            name: 'selectunit'
           });
           turn.links[newstepid] = {};
           var linkedpositions = Object.keys(ARTIFACTS.movetargets);
@@ -2134,6 +2135,14 @@
             turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget1';
           }
           return newstep;
+        };
+      game.selectunit1instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length))
         };
       game.selectmovetarget1 =
         function(turn, step, markpos) {
@@ -2159,13 +2168,22 @@
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             stepid: newstepid,
-            path: step.path.concat(markpos)
+            path: step.path.concat(markpos),
+            name: 'selectmovetarget'
           });
           turn.links[newstepid] = {};
           if ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length) > Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)) {
             turn.links[newstepid].jostle = 'jostle1';
           }
           return newstep;
+        };
+      game.selectmovetarget1instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)))
         };
       game.jostle1 =
         function(turn, step) {
@@ -2211,11 +2229,20 @@
             UNITDATA: UNITDATA,
             UNITLAYERS: UNITLAYERS,
             stepid: newstepid,
+            name: 'jostle',
             path: step.path.concat('jostle')
           });
           turn.links[newstepid] = {};
           turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
+        };
+      game.jostle1instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return ''
         };
       game.start1 =
         function(turn, step) {
@@ -2259,6 +2286,7 @@
             UNITLAYERS: UNITLAYERS,
             MARKS: MARKS,
             stepid: 'root',
+            name: 'start',
             path: []
           };
           var linkedpositions = Object.keys(UNITLAYERS.mycheckers);
@@ -2267,6 +2295,14 @@
             turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
           }
           return turn;
+        };
+      game.start1instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return 'Select which unit to jostle!'
         };
     })();
     (function() {
@@ -2298,7 +2334,8 @@
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             stepid: newstepid,
-            path: step.path.concat(markpos)
+            path: step.path.concat(markpos),
+            name: 'selectunit'
           });
           turn.links[newstepid] = {};
           var linkedpositions = Object.keys(ARTIFACTS.movetargets);
@@ -2307,6 +2344,14 @@
             turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget2';
           }
           return newstep;
+        };
+      game.selectunit2instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length))
         };
       game.selectmovetarget2 =
         function(turn, step, markpos) {
@@ -2332,13 +2377,22 @@
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             stepid: newstepid,
-            path: step.path.concat(markpos)
+            path: step.path.concat(markpos),
+            name: 'selectmovetarget'
           });
           turn.links[newstepid] = {};
           if ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length) > Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)) {
             turn.links[newstepid].jostle = 'jostle2';
           }
           return newstep;
+        };
+      game.selectmovetarget2instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)))
         };
       game.jostle2 =
         function(turn, step) {
@@ -2384,11 +2438,20 @@
             UNITDATA: UNITDATA,
             UNITLAYERS: UNITLAYERS,
             stepid: newstepid,
+            name: 'jostle',
             path: step.path.concat('jostle')
           });
           turn.links[newstepid] = {};
           turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
+        };
+      game.jostle2instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return ''
         };
       game.start2 =
         function(turn, step) {
@@ -2432,6 +2495,7 @@
             UNITLAYERS: UNITLAYERS,
             MARKS: MARKS,
             stepid: 'root',
+            name: 'start',
             path: []
           };
           var linkedpositions = Object.keys(UNITLAYERS.mycheckers);
@@ -2440,6 +2504,14 @@
             turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
           }
           return turn;
+        };
+      game.start2instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return 'Select which unit to jostle!'
         };
     })();
     game.newGame =

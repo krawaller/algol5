@@ -17,13 +17,15 @@
     }
   },
   "startTurn": {
-    "link": "selectunit"
+    "link": "selectunit",
+    "instruction": "Select which unit to jostle!"
   },
   "marks": {
     "selectunit": {
       "from": "mycheckers",
       "runGenerator": "findinitial",
-      "link": "selectmovetarget"
+      "link": "selectmovetarget",
+      "instruction": ["concat","The current position is worth ",["minus",["sizeof","initialfriend"],["sizeof","initialenemy"]]]
     },
     "selectmovetarget": {
       "from": "movetargets",
@@ -31,7 +33,8 @@
       "link": ["if",["morethan",
         ["minus",["sizeof","newfriend"],["sum",1,["sizeof","newenemy"]]],
         ["minus",["sizeof","initialfriend"],["sizeof","initialenemy"]]
-      ],"jostle"]
+      ],"jostle"],
+      "instruction": ["concat","That position would be worth ",["minus",["sizeof","newfriend"],["sum",1,["sizeof","newenemy"]]]]
     }
   },
   "commands": {

@@ -71,7 +71,6 @@ let play = {
             session.step = session.turn.steps[session.step.stepid+'-'+action]
             session.UI = play.getSessionUI(session)
         }
-        console.log("SESS",session)
         return session
     },
     calculateSave: (turn,step)=> {
@@ -101,7 +100,7 @@ let play = {
             mem.marks.push(action)
         }
         return mem
-    },{marks:[],commands:[],system:undo.length?['undo']:[],removeMarks:Object.keys(step.MARKS).reduce((mem,markname)=>{
+    },{foo:'BAR',instruction:game[step.name+turn.player+'instruction'](step), marks:[],commands:[],system:undo.length?['undo']:[],removeMarks:Object.keys(step.MARKS).reduce((mem,markname)=>{
         let pos = step.MARKS[markname]
         mem[pos] = markTimeStamps[pos]
         return mem

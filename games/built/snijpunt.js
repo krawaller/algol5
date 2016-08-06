@@ -859,11 +859,20 @@
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             stepid: newstepid,
-            path: step.path.concat(markpos)
+            path: step.path.concat(markpos),
+            name: 'selecttarget'
           });
           turn.links[newstepid] = {};
           turn.links[newstepid].snipe = 'snipe1';
           return newstep;
+        };
+      game.selecttarget1instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return ''
         };
       game.snipe1 =
         function(turn, step) {
@@ -964,6 +973,7 @@
             UNITDATA: UNITDATA,
             UNITLAYERS: UNITLAYERS,
             stepid: newstepid,
+            name: 'snipe',
             path: step.path.concat('snipe'),
             clones: clones
           });
@@ -979,6 +989,14 @@
             turn.links[newstepid][result] = 'madeoppline';
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
+        };
+      game.snipe1instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return ''
         };
       game.start1 =
         function(turn, step) {
@@ -1058,6 +1076,7 @@
             UNITLAYERS: UNITLAYERS,
             MARKS: MARKS,
             stepid: 'root',
+            name: 'start',
             clones: step.clones,
             path: []
           };
@@ -1078,6 +1097,14 @@
             turn.links.root[linkedpositions[linknbr]] = 'selecttarget1';
           }
           return turn;
+        };
+      game.start1instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return ''
         };
     })();
     (function() {
@@ -1204,11 +1231,20 @@
             ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             stepid: newstepid,
-            path: step.path.concat(markpos)
+            path: step.path.concat(markpos),
+            name: 'selecttarget'
           });
           turn.links[newstepid] = {};
           turn.links[newstepid].snipe = 'snipe2';
           return newstep;
+        };
+      game.selecttarget2instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return ''
         };
       game.snipe2 =
         function(turn, step) {
@@ -1309,6 +1345,7 @@
             UNITDATA: UNITDATA,
             UNITLAYERS: UNITLAYERS,
             stepid: newstepid,
+            name: 'snipe',
             path: step.path.concat('snipe'),
             clones: clones
           });
@@ -1324,6 +1361,14 @@
             turn.links[newstepid][result] = 'madeoppline';
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
+        };
+      game.snipe2instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return ''
         };
       game.start2 =
         function(turn, step) {
@@ -1403,6 +1448,7 @@
             UNITLAYERS: UNITLAYERS,
             MARKS: MARKS,
             stepid: 'root',
+            name: 'start',
             clones: step.clones,
             path: []
           };
@@ -1423,6 +1469,14 @@
             turn.links.root[linkedpositions[linknbr]] = 'selecttarget2';
           }
           return turn;
+        };
+      game.start2instruction =
+        function(step) {
+          var MARKS = step.MARKS;
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          var UNITDATA = step.UNITDATA;
+          return ''
         };
     })();
     game.newGame =

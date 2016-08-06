@@ -51,7 +51,7 @@ export default C => Object.assign(C,{
         var MARKS = {}; 
         var ARTIFACTS = ${C.blankArtifactLayers(O)}; 
         var UNITDATA = step.UNITDATA;
-        ${C.usesTurnVars(O) ? 'var TURNVARS = step.TURNVARS; ' : ''}
+        ${C.usesTurnVars(O) ? 'var TURNVARS = {}; ' : ''}
         ${C.calculateUnitLayers({...O,defineUnitlayers:true})}
     `,
 
@@ -71,8 +71,10 @@ export default C => Object.assign(C,{
         UNITLAYERS: UNITLAYERS,
         MARKS: MARKS,
         stepid: 'root',
+        name: 'start',
         ${C.contains((O && O.rules || {}),'spawn') ? 'clones: step.clones, ' : ''}
         path: []
+        ${C.usesTurnVars(O) ? ',TURNVARS: TURNVARS ' : ''}
     }`,
 
     /*

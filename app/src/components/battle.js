@@ -34,6 +34,7 @@ let Battle = React.createClass({
           <Units icons={this.props.game.graphics.icons} unitdata={s.step.UNITDATA} board={this.props.game.board} />
           <Marks board={this.props.game.board} activeMarks={s.step.MARKS} potentialMarks={s.UI.marks} selectMark={this.doAction}/>
         </div>
+        <div>{s.UI.instruction}</div>
         <Commands gameCommands={s.UI.commands} systemCommands={s.UI.system} performCommand={this.doAction}/>
       </div>
     );

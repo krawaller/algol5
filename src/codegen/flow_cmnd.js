@@ -40,8 +40,10 @@ export default C => Object.assign(C,{
         UNITDATA: UNITDATA,
         UNITLAYERS: UNITLAYERS,
         stepid: newstepid,
+        name: '${O.cmndname}',
         path: step.path.concat('${O.cmndname}')
         ${C.contains(C.cmndRules(O),'spawn') ? ', clones: clones' : ''}
+        ${C.usesTurnVars(O) ? ',TURNVARS: TURNVARS ' : ''}
     }
     `,
 

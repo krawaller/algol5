@@ -33,3 +33,21 @@
 .potentialmark {
     opacity: 0.2;
 }
+
+.fadein.pieces-enter {
+  opacity: 0.01;
+}
+
+.fadein.pieces-enter.pieces-enter-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.pieces-leave {
+  opacity: 1;
+}
+
+.pieces-leave.pieces-leave-active {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}

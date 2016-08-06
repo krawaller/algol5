@@ -53,7 +53,8 @@ export default C => Object.assign(C,{
         ${C.markGenerates(O) ? 'ARTIFACTS: ARTIFACTS,' : ''}
         MARKS: MARKS,
         stepid: newstepid,
-        path: step.path.concat(markpos)
+        path: step.path.concat(markpos),
+        name: '${O.markname}'
     }    
     `
 })

@@ -14,22 +14,26 @@
     "queens": {"1":["d10","g10","a7","j7"],"2":["a4","d1","g1","j4"]}
   },
   "startTurn": {
-    "link": "selectunit"
+    "link": "selectunit",
+    "instruction": "Select an amazon to move and fire with"
   },
   "marks": {
     "selectunit": {
       "from": "myunits",
       "runGenerator": "findtargets",
-      "link": "selectmovetarget"
+      "link": "selectmovetarget",
+      "instruction": "Select where to move the amazon"
     },
     "selectmovetarget": {
       "nodeadends": true,
       "from": "targets",
-      "link": "move"
+      "link": "move",
+      "instruction": "Choose Move to go here!"
     },
     "selectfiretarget": {
       "from": "targets",
-      "link": "fire"
+      "link": "fire",
+      "instruction": "Choose Fire to shoot here!"
     }
   },
   "commands": {
@@ -39,10 +43,11 @@
         ["setturnpos","movedto","selectmovetarget"]
       ],
       "runGenerator": "findtargets",
-      "link": "selectfiretarget"
+      "link": "selectfiretarget",
+      "instruction": "Now select where to fire at"
     },
     "fire": {
-      "applyEffect": ["spawn","selectfiretarget","fires",0],
+      "applyEffect": ["spawn","selectfiretarget","fires",0,{"from":["turnpos","movedto"]}],
       "link": "endturn"
     }
   },

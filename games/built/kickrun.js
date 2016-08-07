@@ -547,22 +547,17 @@
           var nbrofwalkerdirs = allwalkerdirs.length;
           for (var walkerdirnbr = 0; walkerdirnbr < nbrofwalkerdirs; walkerdirnbr++) {
             var DIR = allwalkerdirs[walkerdirnbr];
-            var walkedsquares = [];
-            var nextpos = "";
             var MAX = (!!(UNITLAYERS.myrunners[MARKS['selectunit']]) ? 4 : 1);
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
             var LENGTH = 0;
-            while (LENGTH < MAX && (nextpos = connections[POS][DIR]) && !BLOCKS[nextpos]) {
-              walkedsquares.push(POS = nextpos);
+            while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
               LENGTH++;
               if (((DIR !== 8) && (DIR !== 4))) {
                 ARTIFACTS['movetargets'][POS] = {};
               }
             }
-            var WALKLENGTH = walkedsquares.length;
-            if (STOPREASON === "hitblock") {
-              POS = nextpos;
+            if (BLOCKS[POS]) {
               if ((!!(UNITLAYERS.oppunits[POS]) && ((DIR === 8) || (DIR === 4)))) {
                 ARTIFACTS['movetargets'][POS] = {};
               }
@@ -796,22 +791,17 @@
           var nbrofwalkerdirs = allwalkerdirs.length;
           for (var walkerdirnbr = 0; walkerdirnbr < nbrofwalkerdirs; walkerdirnbr++) {
             var DIR = allwalkerdirs[walkerdirnbr];
-            var walkedsquares = [];
-            var nextpos = "";
             var MAX = (!!(UNITLAYERS.myrunners[MARKS['selectunit']]) ? 4 : 1);
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
             var LENGTH = 0;
-            while (LENGTH < MAX && (nextpos = connections[POS][DIR]) && !BLOCKS[nextpos]) {
-              walkedsquares.push(POS = nextpos);
+            while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
               LENGTH++;
               if (((DIR !== 8) && (DIR !== 4))) {
                 ARTIFACTS['movetargets'][POS] = {};
               }
             }
-            var WALKLENGTH = walkedsquares.length;
-            if (STOPREASON === "hitblock") {
-              POS = nextpos;
+            if (BLOCKS[POS]) {
               if ((!!(UNITLAYERS.oppunits[POS]) && ((DIR === 8) || (DIR === 4)))) {
                 ARTIFACTS['movetargets'][POS] = {};
               }

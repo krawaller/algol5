@@ -2112,15 +2112,11 @@
           var STARTPOS = MARKS['selectunit'];
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var walkedsquares = [];
-            var nextpos = "";
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
-            while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[nextpos]) {
-              walkedsquares.push(POS = nextpos);
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               ARTIFACTS['targets'][POS] = {};
             }
-            var WALKLENGTH = walkedsquares.length;
           }
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -2242,15 +2238,11 @@
           var STARTPOS = TURNVARS['movedto'];
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var walkedsquares = [];
-            var nextpos = "";
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
-            while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[nextpos]) {
-              walkedsquares.push(POS = nextpos);
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               ARTIFACTS['targets'][POS] = {};
             }
-            var WALKLENGTH = walkedsquares.length;
           }
           var newstepid = step.stepid + '-' + 'move';
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -2425,15 +2417,11 @@
           var STARTPOS = MARKS['selectunit'];
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var walkedsquares = [];
-            var nextpos = "";
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
-            while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[nextpos]) {
-              walkedsquares.push(POS = nextpos);
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               ARTIFACTS['targets'][POS] = {};
             }
-            var WALKLENGTH = walkedsquares.length;
           }
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -2555,15 +2543,11 @@
           var STARTPOS = TURNVARS['movedto'];
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var walkedsquares = [];
-            var nextpos = "";
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
-            while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[nextpos]) {
-              walkedsquares.push(POS = nextpos);
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               ARTIFACTS['targets'][POS] = {};
             }
-            var WALKLENGTH = walkedsquares.length;
           }
           var newstepid = step.stepid + '-' + 'move';
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {

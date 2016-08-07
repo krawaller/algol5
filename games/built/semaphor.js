@@ -344,11 +344,10 @@
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
-              var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
-                walkedsquares.push(POS = nextpos);
+              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+                walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
               for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
@@ -434,11 +433,10 @@
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
-              var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
-                walkedsquares.push(POS = nextpos);
+              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+                walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
               for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
@@ -675,11 +673,10 @@
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
-              var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
-                walkedsquares.push(POS = nextpos);
+              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+                walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
               for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
@@ -765,11 +762,10 @@
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
-              var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
-                walkedsquares.push(POS = nextpos);
+              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+                walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
               for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {

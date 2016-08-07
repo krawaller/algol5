@@ -1494,20 +1494,15 @@
             var allwalkerdirs = [8, 1, 2, 4, 5, 6];
             for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
               var DIR = allwalkerdirs[walkerdirnbr];
-              var walkedsquares = [];
-              var nextpos = "";
               var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
               var POS = STARTPOS;
               var BLOCKS = UNITLAYERS.units;
               var LENGTH = 0;
-              while (LENGTH < MAX && (nextpos = connections[POS][DIR]) && !BLOCKS[nextpos]) {
-                walkedsquares.push(POS = nextpos);
+              while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
                 LENGTH++;
                 ARTIFACTS['movetarget'][POS] = {};
               }
-              var WALKLENGTH = walkedsquares.length;
-              if (STOPREASON === "hitblock") {
-                POS = nextpos;
+              if (BLOCKS[POS]) {
                 if ((!(UNITLAYERS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(UNITLAYERS.oppdaggers[POS])))) {
                   ARTIFACTS['movetarget'][POS] = {};
                 }
@@ -1874,20 +1869,15 @@
             var allwalkerdirs = [8, 1, 2, 4, 5, 6];
             for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
               var DIR = allwalkerdirs[walkerdirnbr];
-              var walkedsquares = [];
-              var nextpos = "";
               var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
               var POS = STARTPOS;
               var BLOCKS = UNITLAYERS.units;
               var LENGTH = 0;
-              while (LENGTH < MAX && (nextpos = connections[POS][DIR]) && !BLOCKS[nextpos]) {
-                walkedsquares.push(POS = nextpos);
+              while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
                 LENGTH++;
                 ARTIFACTS['movetarget'][POS] = {};
               }
-              var WALKLENGTH = walkedsquares.length;
-              if (STOPREASON === "hitblock") {
-                POS = nextpos;
+              if (BLOCKS[POS]) {
                 if ((!(UNITLAYERS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(UNITLAYERS.oppdaggers[POS])))) {
                   ARTIFACTS['movetarget'][POS] = {};
                 }

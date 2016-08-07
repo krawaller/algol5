@@ -86,7 +86,9 @@ export default C => Object.assign(C,{
 	prepwalkstart: (O,def)=> {
 		def = def || {}
 		let ret =  ''
-		ret += 'var walkedsquares = []; '
+		if (C.needsWalkPath(O,def)){
+			ret += 'var walkedsquares = []; '
+		}
 		if (C.needsStopreason(O,def)){
 			ret += 'var STOPREASON = ""; '
 		}
@@ -114,12 +116,12 @@ export default C => Object.assign(C,{
 	},
 	takewalkstep: (O,def)=> {
 		def = def || {}
-		let ret = 'walkedsquares.push(POS); '
+		let ret = ''
+		if (C.needsWalkPath(O,def)){
+			ret += 'walkedsquares.push(POS); '
+		}
 		if (def.count){
 			ret += 'countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0)); '
-		}
-		if (def.draw && def.draw.steps && !C.contains(def.draw.steps,['walklength'])){
-			//ret += 
 		}
 		return ret;
 	},
@@ -128,7 +130,7 @@ export default C => Object.assign(C,{
 		def = def || {}
 		def.draw = def.draw || {}
 		let ret = ''
-		if (def.draw.steps || def.draw.last || C.contains(def.draw,['walklength'])){
+		if (C.needsWalkLength(O,def)){
 			ret += 'var WALKLENGTH = walkedsquares.length; '
 		}
 		if (def && def.count){
@@ -140,7 +142,7 @@ export default C => Object.assign(C,{
 	drawwalkblock: (O,def)=> {
 		let ret = ''
 		if (def.blocks && def.draw.block){
-			ret += 'if (STOPREASON==="hitblock"){' 
+			ret += 'if (BLOCKS[POS]){' 
 			ret += C.performdraw(O,def.draw.block);
 			if (def.draw.all){
 				ret += C.performdraw(O,def.draw.all);

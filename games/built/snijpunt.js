@@ -843,16 +843,12 @@
           });
           var STARTPOS = MARKS['selecttarget'];
           var DIR = 5;
-          var walkedsquares = [];
-          var nextpos = "";
           var POS = STARTPOS;
-          while ((nextpos = connections[POS][5])) {
-            walkedsquares.push(POS = nextpos);
+          while ((POS = connections[POS][5])) {
             if (ARTIFACTS.enemyline[POS]) {
               ARTIFACTS['intersection'][POS] = {};
             }
           }
-          var WALKLENGTH = walkedsquares.length;
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             ARTIFACTS: ARTIFACTS,
@@ -952,11 +948,10 @@
             var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
             for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
               var walkedsquares = [];
-              var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
-              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
-                walkedsquares.push(POS = nextpos);
+              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+                walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
               if ((WALKLENGTH > 2)) {
@@ -1040,25 +1035,20 @@
           if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
             var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
             var DIR = 3;
-            var walkedsquares = [];
-            var nextpos = "";
             var POS = STARTPOS;
-            while ((nextpos = connections[POS][3])) {
-              walkedsquares.push(POS = nextpos);
+            while ((POS = connections[POS][3])) {
               if (!UNITLAYERS.units[POS]) {
                 ARTIFACTS['potentialempties'][POS] = {};
               }
               ARTIFACTS['enemyline'][POS] = {};
             }
-            var WALKLENGTH = walkedsquares.length;
             var walkstarts = ARTIFACTS.potentialempties;
             for (var STARTPOS in walkstarts) {
               var DIR = 1;
               var walkedsquares = [];
-              var nextpos = "";
               var POS = STARTPOS;
-              while ((nextpos = connections[POS][1])) {
-                walkedsquares.push(POS = nextpos);
+              while ((POS = connections[POS][1])) {
+                walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
               if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
@@ -1211,16 +1201,12 @@
           });
           var STARTPOS = MARKS['selecttarget'];
           var DIR = 3;
-          var walkedsquares = [];
-          var nextpos = "";
           var POS = STARTPOS;
-          while ((nextpos = connections[POS][3])) {
-            walkedsquares.push(POS = nextpos);
+          while ((POS = connections[POS][3])) {
             if (ARTIFACTS.enemyline[POS]) {
               ARTIFACTS['intersection'][POS] = {};
             }
           }
-          var WALKLENGTH = walkedsquares.length;
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             ARTIFACTS: ARTIFACTS,
@@ -1320,11 +1306,10 @@
             var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
             for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
               var walkedsquares = [];
-              var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
-              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
-                walkedsquares.push(POS = nextpos);
+              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+                walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
               if ((WALKLENGTH > 2)) {
@@ -1408,25 +1393,20 @@
           if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
             var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
             var DIR = 5;
-            var walkedsquares = [];
-            var nextpos = "";
             var POS = STARTPOS;
-            while ((nextpos = connections[POS][5])) {
-              walkedsquares.push(POS = nextpos);
+            while ((POS = connections[POS][5])) {
               if (!UNITLAYERS.units[POS]) {
                 ARTIFACTS['potentialempties'][POS] = {};
               }
               ARTIFACTS['enemyline'][POS] = {};
             }
-            var WALKLENGTH = walkedsquares.length;
             var walkstarts = ARTIFACTS.potentialempties;
             for (var STARTPOS in walkstarts) {
               var DIR = 7;
               var walkedsquares = [];
-              var nextpos = "";
               var POS = STARTPOS;
-              while ((nextpos = connections[POS][7])) {
-                walkedsquares.push(POS = nextpos);
+              while ((POS = connections[POS][7])) {
+                walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
               if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {

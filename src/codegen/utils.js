@@ -24,6 +24,10 @@ Helper functions which all returns actual values, not stringified
 
 export default U => Object.assign(U,{
 
+	needsWalkPath: (O,def)=> !U.drawDuringWhile(O,def) || U.needsWalkLength(O,def),
+
+	needsWalkLength: (O,def)=> def.draw.last || U.contains(def.draw,['walklength']),
+
 	drawDuringWhile: (O,def)=> (
 		def && def.draw && 
 		!U.contains([def.draw.steps,def.draw.all],['totalcount']) && 

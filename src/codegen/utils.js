@@ -24,6 +24,14 @@ Helper functions which all returns actual values, not stringified
 
 export default U => Object.assign(U,{
 
+	drawDuringWhile: (O,def)=> (
+		def && def.draw && 
+		!U.contains([def.draw.steps,def.draw.all],['totalcount']) && 
+		!U.contains([def.draw.steps,def.draw.all],['walklength'])
+	),
+
+	needsStopreason: (O,actiondef)=> actiondef.draw.blocks || U.contains(actiondef,['stopreason']),
+
 	/*
 	Calculate all Artifact layers affected by an action
 	*/
@@ -177,6 +185,6 @@ export default U => Object.assign(U,{
 		: {setat:1,setid:1,setin:1}[data[0]] && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])
 		: isArray(data) || isObject(data) ? reduce(data,(mem,def)=>mem.concat(U.deduceDynamicGroups(def)),[])
 		: []
-	).sort(),
+	).sort()
 });
 

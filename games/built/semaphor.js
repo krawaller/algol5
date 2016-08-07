@@ -344,11 +344,10 @@
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-              while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[nextpos] ? "nomoresteps" : null))) {
+              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
                 walkedsquares.push(POS = nextpos);
               }
               var WALKLENGTH = walkedsquares.length;
@@ -435,11 +434,10 @@
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-              while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[nextpos] ? "nomoresteps" : null))) {
+              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
                 walkedsquares.push(POS = nextpos);
               }
               var WALKLENGTH = walkedsquares.length;
@@ -677,11 +675,10 @@
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-              while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[nextpos] ? "nomoresteps" : null))) {
+              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
                 walkedsquares.push(POS = nextpos);
               }
               var WALKLENGTH = walkedsquares.length;
@@ -768,11 +765,10 @@
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-              while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[nextpos] ? "nomoresteps" : null))) {
+              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
                 walkedsquares.push(POS = nextpos);
               }
               var WALKLENGTH = walkedsquares.length;

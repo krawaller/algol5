@@ -2113,11 +2113,10 @@
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var walkedsquares = [];
-            var STOPREASON = "";
             var nextpos = "";
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
-            while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null))) {
+            while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[nextpos]) {
               walkedsquares.push(POS = nextpos);
               ARTIFACTS['targets'][POS] = {};
             }
@@ -2244,11 +2243,10 @@
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var walkedsquares = [];
-            var STOPREASON = "";
             var nextpos = "";
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
-            while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null))) {
+            while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[nextpos]) {
               walkedsquares.push(POS = nextpos);
               ARTIFACTS['targets'][POS] = {};
             }
@@ -2428,11 +2426,10 @@
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var walkedsquares = [];
-            var STOPREASON = "";
             var nextpos = "";
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
-            while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null))) {
+            while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[nextpos]) {
               walkedsquares.push(POS = nextpos);
               ARTIFACTS['targets'][POS] = {};
             }
@@ -2559,11 +2556,10 @@
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var walkedsquares = [];
-            var STOPREASON = "";
             var nextpos = "";
             var POS = STARTPOS;
             var BLOCKS = UNITLAYERS.units;
-            while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null))) {
+            while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[nextpos]) {
               walkedsquares.push(POS = nextpos);
               ARTIFACTS['targets'][POS] = {};
             }

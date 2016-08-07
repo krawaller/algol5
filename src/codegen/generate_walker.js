@@ -8,9 +8,6 @@ export default C => Object.assign(C,{
 	*/
 	applywalker: (O,def)=> {
 		let ret = ''
-		if (def && def.draw && !C.contains([def.draw.steps,def.draw.all],['totalcount']) && !C.contains([def.draw.steps,def.draw.all],['walklength'])){
-			O = {drawduringwhile: true, ...O}
-		}
 		if (def.starts){
 			ret += 'var walkstarts = '+C.set(O,def.starts)+'; '
 			ret += 'for(var STARTPOS in walkstarts){'
@@ -61,21 +58,25 @@ export default C => Object.assign(C,{
 		if (def.max){
 			ret += 'var LENGTH=0; '
 		}
-		if (O && O.drawduringwhile && C.contains([def.draw.steps,def.draw.all],['step'])){
+		if (O && C.drawDuringWhile(O,def) && C.contains([def.draw.steps,def.draw.all],['step'])){
 			ret += 'var STEP=0; '
 		}
-		ret += 'while(!(STOPREASON='+C.stopreason(O,def)+')){'
+		if (C.needsStopreason(O,def)){
+			ret += 'while(!(STOPREASON='+C.stopreason(O,def)+')){'
+		} else {
+			ret += 'while('+C.stopcond(O,def)+'){'
+		}
 		ret += C.takewalkstep(O,def)
 		if (def.max)
 			ret += 'LENGTH++; '
-		if (O && O.drawduringwhile){
+		if (C.drawDuringWhile(O,def)){
 			ret += C.drawwalksinglestep(O,def)
 		}
 		ret += '}'
 		ret += C.afterwalk(O,def)
 		ret += C.drawwalkblock(O,def)
 		ret += C.drawwalkstart(O,def)
-		if (!(O && O.drawduringwhile)){
+		if (!C.drawDuringWhile(O,def)){
 			ret += C.drawwalksteps(O,def)
 		}
 		ret += C.drawwalklast(O,def)
@@ -86,8 +87,9 @@ export default C => Object.assign(C,{
 		def = def || {}
 		let ret =  ''
 		ret += 'var walkedsquares = []; '
-		ret += 'var STOPREASON = ""; '
-		ret += 'var nextpos = ""; '
+		if (C.needsStopreason(O,def)){
+			ret += 'var STOPREASON = ""; '
+		}
 		if (def.max){
 			ret += 'var MAX='+C.value(O,def.max)+'; '
 		}
@@ -110,10 +112,9 @@ export default C => Object.assign(C,{
 		}
 		return ret;
 	},
-	// ASSUMES nextpos, ..
 	takewalkstep: (O,def)=> {
 		def = def || {}
-		let ret = 'walkedsquares.push(POS = nextpos); '
+		let ret = 'walkedsquares.push(POS); '
 		if (def.count){
 			ret += 'countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0)); '
 		}
@@ -140,7 +141,6 @@ export default C => Object.assign(C,{
 		let ret = ''
 		if (def.blocks && def.draw.block){
 			ret += 'if (STOPREASON==="hitblock"){' 
-			ret += 'POS=nextpos; '
 			ret += C.performdraw(O,def.draw.block);
 			if (def.draw.all){
 				ret += C.performdraw(O,def.draw.all);

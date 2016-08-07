@@ -1495,13 +1495,12 @@
             for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
               var DIR = allwalkerdirs[walkerdirnbr];
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
               var POS = STARTPOS;
               var BLOCKS = UNITLAYERS.units;
               var LENGTH = 0;
-              while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(nextpos = connections[POS][DIR]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null))) {
+              while (LENGTH < MAX && (nextpos = connections[POS][DIR]) && !BLOCKS[nextpos]) {
                 walkedsquares.push(POS = nextpos);
                 LENGTH++;
                 ARTIFACTS['movetarget'][POS] = {};
@@ -1876,13 +1875,12 @@
             for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
               var DIR = allwalkerdirs[walkerdirnbr];
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
               var POS = STARTPOS;
               var BLOCKS = UNITLAYERS.units;
               var LENGTH = 0;
-              while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(nextpos = connections[POS][DIR]) ? "outofbounds" : BLOCKS[nextpos] ? "hitblock" : null))) {
+              while (LENGTH < MAX && (nextpos = connections[POS][DIR]) && !BLOCKS[nextpos]) {
                 walkedsquares.push(POS = nextpos);
                 LENGTH++;
                 ARTIFACTS['movetarget'][POS] = {};

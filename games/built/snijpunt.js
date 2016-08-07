@@ -844,10 +844,9 @@
           var STARTPOS = MARKS['selecttarget'];
           var DIR = 5;
           var walkedsquares = [];
-          var STOPREASON = "";
           var nextpos = "";
           var POS = STARTPOS;
-          while (!(STOPREASON = (!(nextpos = connections[POS][5]) ? "outofbounds" : null))) {
+          while ((nextpos = connections[POS][5])) {
             walkedsquares.push(POS = nextpos);
             if (ARTIFACTS.enemyline[POS]) {
               ARTIFACTS['intersection'][POS] = {};
@@ -953,11 +952,10 @@
             var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
             for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
-              while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[nextpos] ? "nomoresteps" : null))) {
+              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
                 walkedsquares.push(POS = nextpos);
               }
               var WALKLENGTH = walkedsquares.length;
@@ -1043,10 +1041,9 @@
             var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
             var DIR = 3;
             var walkedsquares = [];
-            var STOPREASON = "";
             var nextpos = "";
             var POS = STARTPOS;
-            while (!(STOPREASON = (!(nextpos = connections[POS][3]) ? "outofbounds" : null))) {
+            while ((nextpos = connections[POS][3])) {
               walkedsquares.push(POS = nextpos);
               if (!UNITLAYERS.units[POS]) {
                 ARTIFACTS['potentialempties'][POS] = {};
@@ -1058,10 +1055,9 @@
             for (var STARTPOS in walkstarts) {
               var DIR = 1;
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var POS = STARTPOS;
-              while (!(STOPREASON = (!(nextpos = connections[POS][1]) ? "outofbounds" : null))) {
+              while ((nextpos = connections[POS][1])) {
                 walkedsquares.push(POS = nextpos);
               }
               var WALKLENGTH = walkedsquares.length;
@@ -1216,10 +1212,9 @@
           var STARTPOS = MARKS['selecttarget'];
           var DIR = 3;
           var walkedsquares = [];
-          var STOPREASON = "";
           var nextpos = "";
           var POS = STARTPOS;
-          while (!(STOPREASON = (!(nextpos = connections[POS][3]) ? "outofbounds" : null))) {
+          while ((nextpos = connections[POS][3])) {
             walkedsquares.push(POS = nextpos);
             if (ARTIFACTS.enemyline[POS]) {
               ARTIFACTS['intersection'][POS] = {};
@@ -1325,11 +1320,10 @@
             var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
             for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var POS = STARTPOS;
               var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
-              while (!(STOPREASON = (!(nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[nextpos] ? "nomoresteps" : null))) {
+              while ((nextpos = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[nextpos]) {
                 walkedsquares.push(POS = nextpos);
               }
               var WALKLENGTH = walkedsquares.length;
@@ -1415,10 +1409,9 @@
             var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
             var DIR = 5;
             var walkedsquares = [];
-            var STOPREASON = "";
             var nextpos = "";
             var POS = STARTPOS;
-            while (!(STOPREASON = (!(nextpos = connections[POS][5]) ? "outofbounds" : null))) {
+            while ((nextpos = connections[POS][5])) {
               walkedsquares.push(POS = nextpos);
               if (!UNITLAYERS.units[POS]) {
                 ARTIFACTS['potentialempties'][POS] = {};
@@ -1430,10 +1423,9 @@
             for (var STARTPOS in walkstarts) {
               var DIR = 7;
               var walkedsquares = [];
-              var STOPREASON = "";
               var nextpos = "";
               var POS = STARTPOS;
-              while (!(STOPREASON = (!(nextpos = connections[POS][7]) ? "outofbounds" : null))) {
+              while ((nextpos = connections[POS][7])) {
                 walkedsquares.push(POS = nextpos);
               }
               var WALKLENGTH = walkedsquares.length;

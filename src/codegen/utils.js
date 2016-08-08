@@ -24,6 +24,11 @@ Helper functions which all returns actual values, not stringified
 
 export default U => Object.assign(U,{
 
+	needLevel: (O,expr)=>
+		U.contains(expr,['dir']) ? 'loop' :
+		U.contains(expr,['start']) ? 'dir' : 
+		'start',
+
 	needsWalkPath: (O,def)=> !U.drawDuringWhile(O,def) || U.needsWalkLength(O,def),
 
 	needsWalkLength: (O,def)=> def.draw.last || U.contains(def.draw,['walklength']),
@@ -162,6 +167,7 @@ export default U => Object.assign(U,{
 	possibilities: def=>
 		def[0] === 'ifelse' ? U.possibilities(def[2]).concat(U.possibilities(def[3]))
 		: def[0] === 'playercase' ? U.possibilities(def[1]).concat(U.possibilities(def[2]))
+		: def[0] === 'if' ? U.possibilities(def[2])
 		: [def],
 
 	listlength: def=> {

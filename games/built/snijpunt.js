@@ -838,9 +838,9 @@
             intersection: Object.assign({}, step.ARTIFACTS.intersection)
           });
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selecttarget: markpos
-          });
+          };
           var STARTPOS = MARKS['selecttarget'];
           var DIR = 5;
           var POS = STARTPOS;
@@ -945,11 +945,11 @@
           };
           var walkstarts = UNITLAYERS.soldiers;
           for (var STARTPOS in walkstarts) {
+            var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
             var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
             for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
               var walkedsquares = [];
               var POS = STARTPOS;
-              var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
               while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
                 walkedsquares.push(POS);
               }
@@ -1066,21 +1066,20 @@
             clones: step.clones,
             path: []
           };
-          var linkedpositions = Object.keys((Object.keys(ARTIFACTS.mandatory ||  {}).length === 0 ?
-            (function() {
-              var ret = {},
-                s0 = TERRAIN.myzone,
-                s1 = UNITLAYERS.sniper;
-              for (var key in s0) {
-                if (!s1[key]) {
-                  ret[key] = s0[key];
+          var newlinks = turn.links.root;
+          for (var linkpos in (Object.keys(ARTIFACTS.mandatory ||  {}).length === 0 ?
+              (function() {
+                var ret = {},
+                  s0 = TERRAIN.myzone,
+                  s1 = UNITLAYERS.sniper;
+                for (var key in s0) {
+                  if (!s1[key]) {
+                    ret[key] = s0[key];
+                  }
                 }
-              }
-              return ret;
-            }()) : ARTIFACTS.mandatory));
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selecttarget1';
+                return ret;
+              }()) : ARTIFACTS.mandatory)) {
+            newlinks[linkpos] = 'selecttarget1';
           }
           return turn;
         };
@@ -1196,9 +1195,9 @@
             intersection: Object.assign({}, step.ARTIFACTS.intersection)
           });
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selecttarget: markpos
-          });
+          };
           var STARTPOS = MARKS['selecttarget'];
           var DIR = 3;
           var POS = STARTPOS;
@@ -1303,11 +1302,11 @@
           };
           var walkstarts = UNITLAYERS.soldiers;
           for (var STARTPOS in walkstarts) {
+            var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
             var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
             for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
               var walkedsquares = [];
               var POS = STARTPOS;
-              var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
               while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
                 walkedsquares.push(POS);
               }
@@ -1424,21 +1423,20 @@
             clones: step.clones,
             path: []
           };
-          var linkedpositions = Object.keys((Object.keys(ARTIFACTS.mandatory ||  {}).length === 0 ?
-            (function() {
-              var ret = {},
-                s0 = TERRAIN.myzone,
-                s1 = UNITLAYERS.sniper;
-              for (var key in s0) {
-                if (!s1[key]) {
-                  ret[key] = s0[key];
+          var newlinks = turn.links.root;
+          for (var linkpos in (Object.keys(ARTIFACTS.mandatory ||  {}).length === 0 ?
+              (function() {
+                var ret = {},
+                  s0 = TERRAIN.myzone,
+                  s1 = UNITLAYERS.sniper;
+                for (var key in s0) {
+                  if (!s1[key]) {
+                    ret[key] = s0[key];
+                  }
                 }
-              }
-              return ret;
-            }()) : ARTIFACTS.mandatory));
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selecttarget2';
+                return ret;
+              }()) : ARTIFACTS.mandatory)) {
+            newlinks[linkpos] = 'selecttarget2';
           }
           return turn;
         };

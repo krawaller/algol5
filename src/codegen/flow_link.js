@@ -28,6 +28,13 @@ export default C => Object.assign(C,{
     },
 
     linkToMark: (O,name)=> `
+        var newlinks = turn.links${O.root ? '.root' : '[newstepid]'};
+        for(var linkpos in ${C.set(O,O.rules.marks[name].from)}){
+            newlinks[linkpos] = '${name+O.player}';
+        }
+    `,
+
+    linkToMarkOLD: (O,name)=> `
         var linkedpositions = Object.keys(${C.set(O,O.rules.marks[name].from)});
         var nbrofpositions = linkedpositions.length;
         for(var linknbr = 0; linknbr < nbrofpositions; linknbr++){

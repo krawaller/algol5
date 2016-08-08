@@ -2106,14 +2106,14 @@
             targets: Object.assign({}, step.ARTIFACTS.targets)
           };
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
+          var BLOCKS = UNITLAYERS.units;
           var STARTPOS = MARKS['selectunit'];
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var POS = STARTPOS;
-            var BLOCKS = UNITLAYERS.units;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               ARTIFACTS['targets'][POS] = {};
             }
@@ -2127,10 +2127,9 @@
             name: 'selectunit'
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.targets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget1';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.targets) {
+            newlinks[linkpos] = 'selectmovetarget1';
           }
           return newstep;
         };
@@ -2146,9 +2145,10 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
-            selectmovetarget: markpos
-          });
+          var MARKS = {
+            selectmovetarget: markpos,
+            selectunit: step.MARKS.selectunit
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -2172,9 +2172,9 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectfiretarget: markpos
-          });
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -2235,11 +2235,11 @@
           ARTIFACTS = {
             "targets": {}
           };
+          var BLOCKS = UNITLAYERS.units;
           var STARTPOS = TURNVARS['movedto'];
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var POS = STARTPOS;
-            var BLOCKS = UNITLAYERS.units;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               ARTIFACTS['targets'][POS] = {};
             }
@@ -2257,10 +2257,9 @@
             TURNVARS: TURNVARS
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.targets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectfiretarget1';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.targets) {
+            newlinks[linkpos] = 'selectfiretarget1';
           }
           return newstep;
         };
@@ -2385,10 +2384,9 @@
             path: [],
             TURNVARS: TURNVARS
           };
-          var linkedpositions = Object.keys(UNITLAYERS.myunits);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.myunits) {
+            newlinks[linkpos] = 'selectunit1';
           }
           return turn;
         };
@@ -2411,14 +2409,14 @@
             targets: Object.assign({}, step.ARTIFACTS.targets)
           };
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
+          var BLOCKS = UNITLAYERS.units;
           var STARTPOS = MARKS['selectunit'];
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var POS = STARTPOS;
-            var BLOCKS = UNITLAYERS.units;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               ARTIFACTS['targets'][POS] = {};
             }
@@ -2432,10 +2430,9 @@
             name: 'selectunit'
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.targets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget2';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.targets) {
+            newlinks[linkpos] = 'selectmovetarget2';
           }
           return newstep;
         };
@@ -2451,9 +2448,10 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
-            selectmovetarget: markpos
-          });
+          var MARKS = {
+            selectmovetarget: markpos,
+            selectunit: step.MARKS.selectunit
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -2477,9 +2475,9 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectfiretarget: markpos
-          });
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -2540,11 +2538,11 @@
           ARTIFACTS = {
             "targets": {}
           };
+          var BLOCKS = UNITLAYERS.units;
           var STARTPOS = TURNVARS['movedto'];
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var POS = STARTPOS;
-            var BLOCKS = UNITLAYERS.units;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               ARTIFACTS['targets'][POS] = {};
             }
@@ -2562,10 +2560,9 @@
             TURNVARS: TURNVARS
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.targets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectfiretarget2';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.targets) {
+            newlinks[linkpos] = 'selectfiretarget2';
           }
           return newstep;
         };
@@ -2690,10 +2687,9 @@
             path: [],
             TURNVARS: TURNVARS
           };
-          var linkedpositions = Object.keys(UNITLAYERS.myunits);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.myunits) {
+            newlinks[linkpos] = 'selectunit2';
           }
           return turn;
         };

@@ -539,9 +539,10 @@
             movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
           };
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
+          var BLOCKS = UNITLAYERS.units;
           var STARTPOS = MARKS['selectunit'];
           var allwalkerdirs = (!!(UNITLAYERS.myrunners[MARKS['selectunit']]) ? [1, 2, 3] : [8, 1, 3, 4]);
           var nbrofwalkerdirs = allwalkerdirs.length;
@@ -549,7 +550,6 @@
             var DIR = allwalkerdirs[walkerdirnbr];
             var MAX = (!!(UNITLAYERS.myrunners[MARKS['selectunit']]) ? 4 : 1);
             var POS = STARTPOS;
-            var BLOCKS = UNITLAYERS.units;
             var LENGTH = 0;
             while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
               LENGTH++;
@@ -572,10 +572,9 @@
             name: 'selectunit'
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.movetargets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget1';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.movetargets) {
+            newlinks[linkpos] = 'selectmovetarget1';
           }
           return newstep;
         };
@@ -591,9 +590,10 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
-            selectmovetarget: markpos
-          });
+          var MARKS = {
+            selectmovetarget: markpos,
+            selectunit: step.MARKS.selectunit
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -733,10 +733,9 @@
             name: 'start',
             path: []
           };
-          var linkedpositions = Object.keys(UNITLAYERS.myunits);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.myunits) {
+            newlinks[linkpos] = 'selectunit1';
           }
           return turn;
         };
@@ -783,9 +782,10 @@
             movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
           };
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
+          var BLOCKS = UNITLAYERS.units;
           var STARTPOS = MARKS['selectunit'];
           var allwalkerdirs = (!!(UNITLAYERS.myrunners[MARKS['selectunit']]) ? [5, 6, 7] : [4, 5, 7, 8]);
           var nbrofwalkerdirs = allwalkerdirs.length;
@@ -793,7 +793,6 @@
             var DIR = allwalkerdirs[walkerdirnbr];
             var MAX = (!!(UNITLAYERS.myrunners[MARKS['selectunit']]) ? 4 : 1);
             var POS = STARTPOS;
-            var BLOCKS = UNITLAYERS.units;
             var LENGTH = 0;
             while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
               LENGTH++;
@@ -816,10 +815,9 @@
             name: 'selectunit'
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.movetargets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget2';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.movetargets) {
+            newlinks[linkpos] = 'selectmovetarget2';
           }
           return newstep;
         };
@@ -835,9 +833,10 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
-            selectmovetarget: markpos
-          });
+          var MARKS = {
+            selectmovetarget: markpos,
+            selectunit: step.MARKS.selectunit
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -977,10 +976,9 @@
             name: 'start',
             path: []
           };
-          var linkedpositions = Object.keys(UNITLAYERS.myunits);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.myunits) {
+            newlinks[linkpos] = 'selectunit2';
           }
           return turn;
         };

@@ -7,7 +7,7 @@ export default C => Object.assign(C,{
 	def.draw.steps and def.draw.all doesn't contain walklength or totalcount
 	*/
 	applywalker: (O,def)=> {
-		let ret = ''
+		let ret = C.prepwalkbeforestart(O,def)
 		if (def.starts){
 			ret += 'var walkstarts = '+C.set(O,def.starts)+'; '
 			ret += 'for(var STARTPOS in walkstarts){'
@@ -22,7 +22,7 @@ export default C => Object.assign(C,{
 	// wants full walkerdef. 
 	// assumes STARTPOS, connections
 	walkfromstart: (O,def)=> {
-		let ret = '', usefordir
+		let ret = C.prepwalkbeforedir(O,def), usefordir
 		if (def.dirs){
 			ret += 'var allwalkerdirs = '+C.list(O,def.dirs)+'; ' // TODO - extract if not dynamic
 			let predictednbrofdirs = C.listlength(def.dirs),
@@ -82,6 +82,29 @@ export default C => Object.assign(C,{
 		ret += C.drawwalklast(O,def)
 		return ret;
 	},
+
+	prepwalkbeforestart: (O,def)=> {
+		let ret = ''
+		if (def.steps && C.needLevel(O,def.steps) === 'start'){
+			ret += 'var allowedsteps = '+C.set(O,def.steps)+'; '
+		}
+		if (def.blocks && C.needLevel(O,def.blocks) === 'start'){
+			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
+		}
+		return ret
+	},
+
+	prepwalkbeforedir: (O,def)=> {
+		let ret = ''
+		if (def.steps && C.needLevel(O,def.steps) === 'dir'){
+			ret += 'var allowedsteps = '+C.set(O,def.steps)+'; '
+		}
+		if (def.blocks && C.needLevel(O,def.blocks) === 'dir'){
+			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
+		}
+		return ret
+	},
+
 	// ASSUMES STARTPOS, DIR
 	prepwalkstart: (O,def)=> {
 		def = def || {}
@@ -101,10 +124,10 @@ export default C => Object.assign(C,{
 		} else {
 			ret += 'var POS = STARTPOS; '
 		}
-		if (def.steps){
+		if (def.steps && C.needLevel(O,def.steps) === 'loop'){
 			ret += 'var allowedsteps = '+C.set(O,def.steps)+'; '
 		}
-		if (def.blocks){
+		if (def.blocks && C.needLevel(O,def.blocks) === 'loop'){
 			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
 		}
 		if (def.count){

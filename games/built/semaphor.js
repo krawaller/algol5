@@ -246,9 +246,9 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectdeploytarget: markpos
-          });
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -272,9 +272,9 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -341,11 +341,11 @@
           };
           var walkstarts = UNITLAYERS.units;
           for (var STARTPOS in walkstarts) {
+            var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
               var POS = STARTPOS;
-              var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
               while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
                 walkedsquares.push(POS);
               }
@@ -430,11 +430,11 @@
           };
           var walkstarts = UNITLAYERS.units;
           for (var STARTPOS in walkstarts) {
+            var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
               var POS = STARTPOS;
-              var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
               while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
                 walkedsquares.push(POS);
               }
@@ -523,38 +523,36 @@
             clones: step.clones,
             path: []
           };
-          var linkedpositions = Object.keys(
-            (function() {
-              var ret = {},
-                s0 = BOARD.board,
-                s1 = UNITLAYERS.units;
-              for (var key in s0) {
-                if (!s1[key]) {
-                  ret[key] = s0[key];
+          var newlinks = turn.links.root;
+          for (var linkpos in
+              (function() {
+                var ret = {},
+                  s0 = BOARD.board,
+                  s1 = UNITLAYERS.units;
+                for (var key in s0) {
+                  if (!s1[key]) {
+                    ret[key] = s0[key];
+                  }
                 }
-              }
-              return ret;
-            }()));
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectdeploytarget1';
+                return ret;
+              }())) {
+            newlinks[linkpos] = 'selectdeploytarget1';
           }
-          var linkedpositions = Object.keys(
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.pawns,
-                s1 = UNITLAYERS.bishops;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }()));
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
+          var newlinks = turn.links.root;
+          for (var linkpos in
+              (function() {
+                var k, ret = {},
+                  s0 = UNITLAYERS.pawns,
+                  s1 = UNITLAYERS.bishops;
+                for (k in s0) {
+                  ret[k] = 1;
+                }
+                for (k in s1) {
+                  ret[k] = 1;
+                }
+                return ret;
+              }())) {
+            newlinks[linkpos] = 'selectunit1';
           }
           return turn;
         };
@@ -575,9 +573,9 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectdeploytarget: markpos
-          });
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -601,9 +599,9 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -670,11 +668,11 @@
           };
           var walkstarts = UNITLAYERS.units;
           for (var STARTPOS in walkstarts) {
+            var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
               var POS = STARTPOS;
-              var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
               while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
                 walkedsquares.push(POS);
               }
@@ -759,11 +757,11 @@
           };
           var walkstarts = UNITLAYERS.units;
           for (var STARTPOS in walkstarts) {
+            var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
             var allwalkerdirs = [1, 2, 3, 4];
             for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
               var walkedsquares = [];
               var POS = STARTPOS;
-              var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
               while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
                 walkedsquares.push(POS);
               }
@@ -852,38 +850,36 @@
             clones: step.clones,
             path: []
           };
-          var linkedpositions = Object.keys(
-            (function() {
-              var ret = {},
-                s0 = BOARD.board,
-                s1 = UNITLAYERS.units;
-              for (var key in s0) {
-                if (!s1[key]) {
-                  ret[key] = s0[key];
+          var newlinks = turn.links.root;
+          for (var linkpos in
+              (function() {
+                var ret = {},
+                  s0 = BOARD.board,
+                  s1 = UNITLAYERS.units;
+                for (var key in s0) {
+                  if (!s1[key]) {
+                    ret[key] = s0[key];
+                  }
                 }
-              }
-              return ret;
-            }()));
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectdeploytarget2';
+                return ret;
+              }())) {
+            newlinks[linkpos] = 'selectdeploytarget2';
           }
-          var linkedpositions = Object.keys(
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.pawns,
-                s1 = UNITLAYERS.bishops;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }()));
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
+          var newlinks = turn.links.root;
+          for (var linkpos in
+              (function() {
+                var k, ret = {},
+                  s0 = UNITLAYERS.pawns,
+                  s1 = UNITLAYERS.bishops;
+                for (k in s0) {
+                  ret[k] = 1;
+                }
+                for (k in s1) {
+                  ret[k] = 1;
+                }
+                return ret;
+              }())) {
+            newlinks[linkpos] = 'selectunit2';
           }
           return turn;
         };

@@ -2108,9 +2108,9 @@
             initialfriend: Object.assign({}, step.ARTIFACTS.initialfriend)
           });
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
           var STARTPOS = MARKS['selectunit'];
           var neighbourdirs = [1, 3, 5, 7];
           var startconnections = connections[STARTPOS];
@@ -2129,10 +2129,9 @@
             name: 'selectunit'
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.movetargets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget1';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.movetargets) {
+            newlinks[linkpos] = 'selectmovetarget1';
           }
           return newstep;
         };
@@ -2151,9 +2150,10 @@
             newfriend: Object.assign({}, step.ARTIFACTS.newfriend)
           });
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
-            selectmovetarget: markpos
-          });
+          var MARKS = {
+            selectmovetarget: markpos,
+            selectunit: step.MARKS.selectunit
+          };
           var STARTPOS = MARKS['selectmovetarget'];
           var neighbourdirs = [1, 3, 5, 7];
           var startconnections = connections[STARTPOS];
@@ -2289,10 +2289,9 @@
             name: 'start',
             path: []
           };
-          var linkedpositions = Object.keys(UNITLAYERS.mycheckers);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.mycheckers) {
+            newlinks[linkpos] = 'selectunit1';
           }
           return turn;
         };
@@ -2317,9 +2316,9 @@
             initialfriend: Object.assign({}, step.ARTIFACTS.initialfriend)
           });
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
           var STARTPOS = MARKS['selectunit'];
           var neighbourdirs = [1, 3, 5, 7];
           var startconnections = connections[STARTPOS];
@@ -2338,10 +2337,9 @@
             name: 'selectunit'
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.movetargets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmovetarget2';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.movetargets) {
+            newlinks[linkpos] = 'selectmovetarget2';
           }
           return newstep;
         };
@@ -2360,9 +2358,10 @@
             newfriend: Object.assign({}, step.ARTIFACTS.newfriend)
           });
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
-            selectmovetarget: markpos
-          });
+          var MARKS = {
+            selectmovetarget: markpos,
+            selectunit: step.MARKS.selectunit
+          };
           var STARTPOS = MARKS['selectmovetarget'];
           var neighbourdirs = [1, 3, 5, 7];
           var startconnections = connections[STARTPOS];
@@ -2498,10 +2497,9 @@
             name: 'start',
             path: []
           };
-          var linkedpositions = Object.keys(UNITLAYERS.mycheckers);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.mycheckers) {
+            newlinks[linkpos] = 'selectunit2';
           }
           return turn;
         };

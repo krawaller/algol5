@@ -423,9 +423,9 @@
             movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
           };
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
           var STARTPOS = MARKS['selectunit'];
           var neighbourdirs = (!!(TERRAIN.southeast[STARTPOS]) ? [1, 3, 4, 5, 7] : (!!(TERRAIN.northwest[STARTPOS]) ? [1, 3, 5, 7, 8] : [1, 3, 5, 7]));
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -445,10 +445,9 @@
             name: 'selectunit'
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.movetargets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmove1';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.movetargets) {
+            newlinks[linkpos] = 'selectmove1';
           }
           return newstep;
         };
@@ -464,9 +463,10 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
-            selectmove: markpos
-          });
+          var MARKS = {
+            selectmove: markpos,
+            selectunit: step.MARKS.selectunit
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -634,10 +634,9 @@
             name: 'start',
             path: []
           };
-          var linkedpositions = Object.keys(UNITLAYERS.mynotfrozens);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.mynotfrozens) {
+            newlinks[linkpos] = 'selectunit1';
           }
           return turn;
         };
@@ -754,9 +753,9 @@
             movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
           };
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
+          var MARKS = {
             selectunit: markpos
-          });
+          };
           var STARTPOS = MARKS['selectunit'];
           var neighbourdirs = (!!(TERRAIN.southeast[STARTPOS]) ? [1, 3, 4, 5, 7] : (!!(TERRAIN.northwest[STARTPOS]) ? [1, 3, 5, 7, 8] : [1, 3, 5, 7]));
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -776,10 +775,9 @@
             name: 'selectunit'
           });
           turn.links[newstepid] = {};
-          var linkedpositions = Object.keys(ARTIFACTS.movetargets);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links[newstepid][linkedpositions[linknbr]] = 'selectmove2';
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in ARTIFACTS.movetargets) {
+            newlinks[linkpos] = 'selectmove2';
           }
           return newstep;
         };
@@ -795,9 +793,10 @@
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
           var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = Object.assign({}, step.MARKS, {
-            selectmove: markpos
-          });
+          var MARKS = {
+            selectmove: markpos,
+            selectunit: step.MARKS.selectunit
+          };
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
             MARKS: MARKS,
@@ -965,10 +964,9 @@
             name: 'start',
             path: []
           };
-          var linkedpositions = Object.keys(UNITLAYERS.mynotfrozens);
-          var nbrofpositions = linkedpositions.length;
-          for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-            turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.mynotfrozens) {
+            newlinks[linkpos] = 'selectunit2';
           }
           return turn;
         };

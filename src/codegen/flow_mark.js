@@ -31,10 +31,28 @@ export default C => Object.assign(C,{
     assumes step, markpos
     mutates MARKS newstepid and ARTIFACTS (via generators)
     */
-    applyMarkConsequences: (O)=> `
-        var MARKS = Object.assign({},step.MARKS,{${O.markname}:markpos}); 
-        ${C.applyGeneratorInstructions(O,C.markRules(O))}
-    `,
+    applyMarkConsequences: (O)=> {
+        let name = O.markname
+        let def = C.markRules(O)
+        let newMarks = `Object.assign({},step.MARKS,{${O.markname}:markpos})`
+        if (def.flow !== 'cyclic'){
+            let marks = def.flow.reduce((mem,p)=>{
+                switch(p.type){
+                    case 'mark': return mem.concat(p.name)
+                    case 'command': return []
+                    default: return mem
+                }
+            },[])
+            if (name === 'selectfiretarget'){
+                console.log("CONS",def.flow,"path",marks)
+            }
+            newMarks = '{' + [name+': markpos'].concat(marks.map(mname=> mname+": step.MARKS."+mname)).join(',')+'}'
+        }
+        return `
+            var MARKS = ${newMarks}; 
+            ${C.applyGeneratorInstructions(O,C.markRules(O))}
+        `
+    },
 
     /*
     assumes step, markpos, turn

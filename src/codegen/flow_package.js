@@ -28,6 +28,7 @@ export default C => Object.assign(C,{
     addCommonVariables: O=> `
         var connections = ${C.boardConnections(O)};
         var BOARD = ${C.boardLayers(O)};
+        var relativedirs = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8]; 
         ${C.isTerrainNeutral(O) ? 'var TERRAIN='+C.terrainLayers(O)+'; ' : ''}
     `,
 

@@ -215,8 +215,10 @@ export default T => {
         },
 
         val_pos: (O,[pos])=> T.position(O,pos),
+        val_reldir: (O,[dir,rel])=> `relativedirs[${T.value(O,rel)}-2+${T.value(O,dir)}]`,
         val_value: (O,[value])=> typeof value === "string" ? "'"+value+"'" : value,
         val_val: (O,[value])=> typeof value === "string" ? "'"+value+"'" : value,
+        val_player: (O)=> O.player,
         val_currentplayer: (O)=> O.player,
         val_otherplayer: (O)=> O.player === 1 ? 2 : 1,
         val_sum: (O,vals)=> "(" + vals.map(v=>T.value(O,v)).join(" + ") + ")",

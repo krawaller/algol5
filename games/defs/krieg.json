@@ -70,5 +70,21 @@
         }
       }
     }
+  },
+  "AI": {
+    "generators": {},
+    "brains": {
+      "Bob": {
+        "generators": [],
+        "plus": {
+          "myfrozeninvaders": ["sizeof",["intersect","myfrozens","oppbases"]],
+          "mymobileinvaders": ["sizeof",["intersect","mynotfrozens","oppbases"]]
+        },
+        "minus": {
+          "oppfrozeninvaders": ["sizeof",["intersect","oppfrozens","mybases"]],
+          "oppmobileinvaders": ["sizeof",["intersect","oppnotfrozens","mybases"]]
+        }
+      }
+    }
   }
 }

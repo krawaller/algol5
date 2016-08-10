@@ -18,9 +18,16 @@ export default C => Object.assign(C,{
         game.commands = ${JSON.stringify(Object.keys(O.rules.commands).reduce((mem,c)=>{ mem[c] = 1; return mem; },{}))};
         game.graphics = ${JSON.stringify(O.rules.graphics)};
         game.board = ${JSON.stringify(O.rules.board)};
+        game.AI = ${JSON.stringify(Object.keys(O.rules.AI && O.rules.AI.brains||{}))}; 
     `,
 
     addCommonFunctions: O=> `
+        function reduce(coll,iterator,acc){
+            for(var key in coll){
+                acc = iterator(acc,coll[key],key);
+            }
+            return acc;
+        }
         game.newGame = ${C.makeNewGameFunction(O)};
     `,
 
@@ -50,6 +57,7 @@ export default C => Object.assign(C,{
         ${C.addAllMarkFunctions(O)}
         ${C.addAllCommandFunctions(O)}
         ${C.addStartTurnFunction(O)}
+        ${C.addAI(O)}
     `,
 
     addAllMarkFunctions: O=> map(O.rules.marks,(def,markname)=> C.addMarkFunction({...O,markname})).join(' '),

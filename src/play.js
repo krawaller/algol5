@@ -1,4 +1,5 @@
 import mapValues from 'lodash/object/mapValues'
+import reduce from 'lodash/collection/reduce'
 
 let endgameactions = {win:1,lose:1,draw:1}
 
@@ -29,7 +30,7 @@ let play = {
         }
         return turn
     },
-    startGameSession: (game)=> {
+    startGameSession: (game,plr1,plr2)=> {
         let turn = game.newGame()
         turn = play.hydrateTurn(game,turn)
         let session = {
@@ -38,7 +39,8 @@ let play = {
             step: turn.steps.root,
             save: [],
             markTimeStamps: {},
-            undo: []
+            undo: [],
+            players: [plr1,plr2]
         }
         session.UI = play.getSessionUI(session)
         return session;
@@ -91,20 +93,27 @@ let play = {
         }
         return ret
     },
-    getSessionUI: ({game,turn,step,undo,markTimeStamps})=> Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
-        if (endgameactions[action]||action=='endturn'||action==='next'){
-            mem.system.push(action)
-        } else if (game.commands[action]){
-            mem.commands.push(action)
-        } else {
-            mem.marks.push(action)
-        }
-        return mem
-    },{foo:'BAR',instruction:game[step.name+turn.player+'instruction'](step), marks:[],commands:[],system:undo.length?['undo']:[],removeMarks:Object.keys(step.MARKS).reduce((mem,markname)=>{
-        let pos = step.MARKS[markname]
-        mem[pos] = markTimeStamps[pos]
-        return mem
-    },{})}),
+    getSessionUI: ({game,turn,step,undo,markTimeStamps})=> {
+        let removeMarks = Object.keys(step.MARKS).reduce((mem,markname)=>{
+            let pos = step.MARKS[markname]
+            mem[pos] = markTimeStamps[pos]
+            return mem
+        },{})
+        let links = Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
+            if (endgameactions[action]||action=='endturn'||action==='next'){
+                mem.system.push(action)
+            } else if (game.commands[action]){
+                mem.commands.push(action)
+            } else {
+                mem.marks.push(action)
+            }
+            return mem
+        },{marks:[],commands:[],system:undo.length?['undo']:[]})
+        return Object.assign({
+            removeMarks,
+            instruction: game[step.name+turn.player+'instruction'](step)
+        },links)
+    },
     hydrateStep: (game,turn,step)=> {
         let steps = turn.steps
         let stepid = step.stepid
@@ -173,6 +182,24 @@ let play = {
             }
         }
         return turn;
+    },
+    findBestOption: (game,turn,brain)=> {
+        let func = game['brain_'+brain+'_'+turn.player],
+            winners = [], highscore = -1000000
+        if (turn.ends.win.length){
+            winners = turn.ends.win
+        } else {
+            for(var stepid in turn.next){
+                var stepscore = func(turn.steps[stepid])
+                if (stepscore > highscore){
+                    winners = [stepid]
+                    highscore = stepscore
+                } else if (stepscore === highscore) {
+                    winners.push(stepid)
+                }
+            }
+        }
+        return winners;
     }
 }
 

@@ -893,6 +893,12 @@
           return ''
         };
     })();
+    function reduce(coll, iterator, acc) {
+      for (var key in coll) {
+        acc = iterator(acc, coll[key], key);
+      }
+      return acc;
+    }
     game.newGame =
       function() {
         var turnseed = {
@@ -920,6 +926,7 @@
       "width": 4,
       "height": 3
     };
+    game.AI = [];
     return game;
   }
 )()

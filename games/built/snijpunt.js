@@ -1450,6 +1450,12 @@
           return ''
         };
     })();
+    function reduce(coll, iterator, acc) {
+      for (var key in coll) {
+        acc = iterator(acc, coll[key], key);
+      }
+      return acc;
+    }
     game.newGame =
       function() {
         var turnseed = {
@@ -1490,6 +1496,7 @@
         "corner": ["a6"]
       }
     };
+    game.AI = [];
     return game;
   }
 )()

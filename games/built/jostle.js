@@ -2513,6 +2513,12 @@
           return 'Select which unit to jostle!'
         };
     })();
+    function reduce(coll, iterator, acc) {
+      for (var key in coll) {
+        acc = iterator(acc, coll[key], key);
+      }
+      return acc;
+    }
     game.newGame =
       function() {
         var turnseed = {
@@ -2728,6 +2734,7 @@
       "height": 10,
       "width": 10
     };
+    game.AI = [];
     return game;
   }
 )()

@@ -649,6 +649,111 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      game.brain_Bob_1 =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          return Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myfrozens,
+                s1 = TERRAIN.oppbases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length + Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.mynotfrozens,
+                s1 = TERRAIN.oppbases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length - Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.oppfrozens,
+                s1 = TERRAIN.mybases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length - Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.oppnotfrozens,
+                s1 = TERRAIN.mybases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length;
+        };
+      game.brain_Bob_1_detailed =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          return {
+            myfrozeninvaders: Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = UNITLAYERS.myfrozens,
+                  s1 = TERRAIN.oppbases;
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length,
+            mymobileinvaders: Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = UNITLAYERS.mynotfrozens,
+                  s1 = TERRAIN.oppbases;
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length,
+            oppfrozeninvaders: -Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = UNITLAYERS.oppfrozens,
+                  s1 = TERRAIN.mybases;
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length,
+            oppmobileinvaders: -Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = UNITLAYERS.oppnotfrozens,
+                  s1 = TERRAIN.mybases;
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length
+          };
+        };
     })();
     (function() {
       var TERRAIN = {
@@ -979,7 +1084,118 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      game.brain_Bob_2 =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          return Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myfrozens,
+                s1 = TERRAIN.oppbases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length + Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.mynotfrozens,
+                s1 = TERRAIN.oppbases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length - Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.oppfrozens,
+                s1 = TERRAIN.mybases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length - Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.oppnotfrozens,
+                s1 = TERRAIN.mybases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length;
+        };
+      game.brain_Bob_2_detailed =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          return {
+            myfrozeninvaders: Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = UNITLAYERS.myfrozens,
+                  s1 = TERRAIN.oppbases;
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length,
+            mymobileinvaders: Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = UNITLAYERS.mynotfrozens,
+                  s1 = TERRAIN.oppbases;
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length,
+            oppfrozeninvaders: -Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = UNITLAYERS.oppfrozens,
+                  s1 = TERRAIN.mybases;
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length,
+            oppmobileinvaders: -Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = UNITLAYERS.oppnotfrozens,
+                  s1 = TERRAIN.mybases;
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length
+          };
+        };
     })();
+    function reduce(coll, iterator, acc) {
+      for (var key in coll) {
+        acc = iterator(acc, coll[key], key);
+      }
+      return acc;
+    }
     game.newGame =
       function() {
         var turnseed = {
@@ -1068,6 +1284,7 @@
         }
       }
     };
+    game.AI = ["Bob"];
     return game;
   }
 )()

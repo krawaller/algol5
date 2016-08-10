@@ -63,5 +63,47 @@
         }
       }
     }
+  },
+  "AI": {
+    "generators": {
+      "findroads": {
+        "type": "neighbour",
+        "dirs": [1,2,3,4,5,6,7,8],
+        "starts": "queens",
+        "unlessover": "units",
+        "draw": {
+          "start": {
+            "tolayer": ["ifelse",["anyat","myunits",["start"]],"myroads","opproads"],
+            "include": {
+              "count": ["neighbourcount"]
+            }
+          }
+        }
+      },
+      "findreach": {
+        "type": "walker",
+        "dirs": [1,2,3,4,5,6,7,8],
+        "starts": "queens",
+        "blocks": "units",
+        "draw": {
+          "steps": {
+            "tolayer": ["ifelse",["anyat","myunits",["start"]],"myreach","oppreach"]
+          }
+        }
+      }
+    },
+    "brains": {
+      "Steve": {
+        "generators": ["findroads","findreach"],
+        "plus": {
+          "myroads": ["harvest","myroads","count"],
+          "mydomain": ["sizeof","myreach"]
+        },
+        "minus": {
+          "opproads": ["harvest","opproads","count"],
+          "oppdomain": ["sizeof","oppreach"]
+        }
+      }
+    }
   }
 }

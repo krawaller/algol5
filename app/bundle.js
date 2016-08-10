@@ -21450,19 +21450,19 @@
 	  value: true
 	});
 
-	var _keys = __webpack_require__(176);
-
-	var _keys2 = _interopRequireDefault(_keys);
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _games = __webpack_require__(211);
+	var _shelf = __webpack_require__(176);
 
-	var _games2 = _interopRequireDefault(_games);
+	var _shelf2 = _interopRequireDefault(_shelf);
 
-	var _battle = __webpack_require__(231);
+	var _vestibule = __webpack_require__(232);
+
+	var _vestibule2 = _interopRequireDefault(_vestibule);
+
+	var _battle = __webpack_require__(289);
 
 	var _battle2 = _interopRequireDefault(_battle);
 
@@ -21473,31 +21473,20 @@
 	  getInitialState: function getInitialState() {
 	    return {};
 	  },
-	  chooseGame: function chooseGame(gamename) {
-	    this.setState({ game: _games2.default[gamename] });
+	  chooseGame: function chooseGame(game) {
+	    this.setState({ game: game });
+	  },
+	  selectParticipants: function selectParticipants(plr1, plr2) {
+	    this.setState({ participants: [plr1, plr2] });
 	  },
 	  render: function render() {
-	    var _this = this;
-
 	    if (!this.state.game) {
-	      var choices = (0, _keys2.default)(_games2.default).map(function (g, n) {
-	        return _react2.default.createElement(
-	          'button',
-	          { key: n, onClick: _this.chooseGame.bind(_this, g) },
-	          g
-	        );
-	      });
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        choices
-	      );
+	      return _react2.default.createElement(_shelf2.default, { chooseGame: this.chooseGame });
+	    } else if (!this.state.participants) {
+	      return _react2.default.createElement(_vestibule2.default, { game: this.state.game, selectParticipants: this.selectParticipants });
+	    } else {
+	      return _react2.default.createElement(_battle2.default, { game: this.state.game, participants: this.state.participants });
 	    }
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_battle2.default, { game: this.state.game })
-	    );
 	  }
 	});
 
@@ -21507,41 +21496,90 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(177), __esModule: true };
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _keys = __webpack_require__(177);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _games = __webpack_require__(212);
+
+	var _games2 = _interopRequireDefault(_games);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Shelf = _react2.default.createClass({
+	  displayName: 'Shelf',
+	  chooseGame: function chooseGame(gamename) {
+	    this.props.chooseGame(_games2.default[gamename]);
+	  },
+	  render: function render() {
+	    var _this = this;
+
+	    var choices = (0, _keys2.default)(_games2.default).map(function (g, n) {
+	      return _react2.default.createElement(
+	        'button',
+	        { key: n, onClick: _this.chooseGame.bind(_this, g) },
+	        g
+	      );
+	    });
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      choices
+	    );
+	  }
+	});
+
+	exports.default = Shelf;
 
 /***/ },
 /* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(178);
-	module.exports = __webpack_require__(198).Object.keys;
+	module.exports = { "default": __webpack_require__(178), __esModule: true };
 
 /***/ },
 /* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(179)
-	  , $keys    = __webpack_require__(181);
+	__webpack_require__(179);
+	module.exports = __webpack_require__(199).Object.keys;
 
-	__webpack_require__(196)('keys', function(){
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 Object.keys(O)
+	var toObject = __webpack_require__(180)
+	  , $keys    = __webpack_require__(182);
+
+	__webpack_require__(197)('keys', function(){
 	  return function keys(it){
 	    return $keys(toObject(it));
 	  };
 	});
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(180);
+	var defined = __webpack_require__(181);
 	module.exports = function(it){
 	  return Object(defined(it));
 	};
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -21551,25 +21589,25 @@
 	};
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys       = __webpack_require__(182)
-	  , enumBugKeys = __webpack_require__(195);
+	var $keys       = __webpack_require__(183)
+	  , enumBugKeys = __webpack_require__(196);
 
 	module.exports = Object.keys || function keys(O){
 	  return $keys(O, enumBugKeys);
 	};
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var has          = __webpack_require__(183)
-	  , toIObject    = __webpack_require__(184)
-	  , arrayIndexOf = __webpack_require__(187)(false)
-	  , IE_PROTO     = __webpack_require__(191)('IE_PROTO');
+	var has          = __webpack_require__(184)
+	  , toIObject    = __webpack_require__(185)
+	  , arrayIndexOf = __webpack_require__(188)(false)
+	  , IE_PROTO     = __webpack_require__(192)('IE_PROTO');
 
 	module.exports = function(object, names){
 	  var O      = toIObject(object)
@@ -21585,7 +21623,7 @@
 	};
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -21594,28 +21632,28 @@
 	};
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(185)
-	  , defined = __webpack_require__(180);
+	var IObject = __webpack_require__(186)
+	  , defined = __webpack_require__(181);
 	module.exports = function(it){
 	  return IObject(defined(it));
 	};
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(186);
+	var cof = __webpack_require__(187);
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 	  return cof(it) == 'String' ? it.split('') : Object(it);
 	};
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -21625,14 +21663,14 @@
 	};
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// false -> Array#indexOf
 	// true  -> Array#includes
-	var toIObject = __webpack_require__(184)
-	  , toLength  = __webpack_require__(188)
-	  , toIndex   = __webpack_require__(190);
+	var toIObject = __webpack_require__(185)
+	  , toLength  = __webpack_require__(189)
+	  , toIndex   = __webpack_require__(191);
 	module.exports = function(IS_INCLUDES){
 	  return function($this, el, fromIndex){
 	    var O      = toIObject($this)
@@ -21651,18 +21689,18 @@
 	};
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(189)
+	var toInteger = __webpack_require__(190)
 	  , min       = Math.min;
 	module.exports = function(it){
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 	};
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -21673,10 +21711,10 @@
 	};
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(189)
+	var toInteger = __webpack_require__(190)
 	  , max       = Math.max
 	  , min       = Math.min;
 	module.exports = function(index, length){
@@ -21685,20 +21723,20 @@
 	};
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var shared = __webpack_require__(192)('keys')
-	  , uid    = __webpack_require__(194);
+	var shared = __webpack_require__(193)('keys')
+	  , uid    = __webpack_require__(195);
 	module.exports = function(key){
 	  return shared[key] || (shared[key] = uid(key));
 	};
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(193)
+	var global = __webpack_require__(194)
 	  , SHARED = '__core-js_shared__'
 	  , store  = global[SHARED] || (global[SHARED] = {});
 	module.exports = function(key){
@@ -21706,7 +21744,7 @@
 	};
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -21715,7 +21753,7 @@
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports) {
 
 	var id = 0
@@ -21725,7 +21763,7 @@
 	};
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports) {
 
 	// IE 8- don't enum bug keys
@@ -21734,13 +21772,13 @@
 	).split(',');
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(197)
-	  , core    = __webpack_require__(198)
-	  , fails   = __webpack_require__(207);
+	var $export = __webpack_require__(198)
+	  , core    = __webpack_require__(199)
+	  , fails   = __webpack_require__(208);
 	module.exports = function(KEY, exec){
 	  var fn  = (core.Object || {})[KEY] || Object[KEY]
 	    , exp = {};
@@ -21749,13 +21787,13 @@
 	};
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(193)
-	  , core      = __webpack_require__(198)
-	  , ctx       = __webpack_require__(199)
-	  , hide      = __webpack_require__(201)
+	var global    = __webpack_require__(194)
+	  , core      = __webpack_require__(199)
+	  , ctx       = __webpack_require__(200)
+	  , hide      = __webpack_require__(202)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -21815,18 +21853,18 @@
 	module.exports = $export;
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(200);
+	var aFunction = __webpack_require__(201);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -21847,7 +21885,7 @@
 	};
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -21856,12 +21894,12 @@
 	};
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(202)
-	  , createDesc = __webpack_require__(210);
-	module.exports = __webpack_require__(206) ? function(object, key, value){
+	var dP         = __webpack_require__(203)
+	  , createDesc = __webpack_require__(211);
+	module.exports = __webpack_require__(207) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -21869,15 +21907,15 @@
 	};
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(203)
-	  , IE8_DOM_DEFINE = __webpack_require__(205)
-	  , toPrimitive    = __webpack_require__(209)
+	var anObject       = __webpack_require__(204)
+	  , IE8_DOM_DEFINE = __webpack_require__(206)
+	  , toPrimitive    = __webpack_require__(210)
 	  , dP             = Object.defineProperty;
 
-	exports.f = __webpack_require__(206) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(207) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -21890,17 +21928,17 @@
 	};
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(204);
+	var isObject = __webpack_require__(205);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -21908,24 +21946,24 @@
 	};
 
 /***/ },
-/* 205 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = !__webpack_require__(206) && !__webpack_require__(207)(function(){
-	  return Object.defineProperty(__webpack_require__(208)('div'), 'a', {get: function(){ return 7; }}).a != 7;
-	});
-
-/***/ },
 /* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(207)(function(){
-	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(207) && !__webpack_require__(208)(function(){
+	  return Object.defineProperty(__webpack_require__(209)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
 /* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(208)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 208 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -21937,11 +21975,11 @@
 	};
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(204)
-	  , document = __webpack_require__(193).document
+	var isObject = __webpack_require__(205)
+	  , document = __webpack_require__(194).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
@@ -21949,11 +21987,11 @@
 	};
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(204);
+	var isObject = __webpack_require__(205);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -21966,7 +22004,7 @@
 	};
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -21979,49 +22017,49 @@
 	};
 
 /***/ },
-/* 211 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";var _keys=__webpack_require__(212);var _keys2=_interopRequireDefault(_keys);var _assign=__webpack_require__(224);var _assign2=_interopRequireDefault(_assign);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}module.exports={amazon:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a10":{"3":"b10","4":"b9","5":"a9"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"1":"a9","2":"b9","3":"b8","4":"b7","5":"a7"},"a9":{"1":"a10","2":"b10","3":"b9","4":"b8","5":"a8"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b10":{"3":"c10","4":"c9","5":"b9","6":"a9","7":"a10"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"1":"b9","2":"c9","3":"c8","4":"c7","5":"b7","6":"a7","7":"a8","8":"a9"},"b9":{"1":"b10","2":"c10","3":"c9","4":"c8","5":"b8","6":"a8","7":"a9","8":"a10"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c10":{"3":"d10","4":"d9","5":"c9","6":"b9","7":"b10"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"1":"c9","2":"d9","3":"d8","4":"d7","5":"c7","6":"b7","7":"b8","8":"b9"},"c9":{"1":"c10","2":"d10","3":"d9","4":"d8","5":"c8","6":"b8","7":"b9","8":"b10"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d10":{"3":"e10","4":"e9","5":"d9","6":"c9","7":"c10"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"1":"d9","2":"e9","3":"e8","4":"e7","5":"d7","6":"c7","7":"c8","8":"c9"},"d9":{"1":"d10","2":"e10","3":"e9","4":"e8","5":"d8","6":"c8","7":"c9","8":"c10"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e10":{"3":"f10","4":"f9","5":"e9","6":"d9","7":"d10"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"1":"e9","2":"f9","3":"f8","4":"f7","5":"e7","6":"d7","7":"d8","8":"d9"},"e9":{"1":"e10","2":"f10","3":"f9","4":"f8","5":"e8","6":"d8","7":"d9","8":"d10"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f10":{"3":"g10","4":"g9","5":"f9","6":"e9","7":"e10"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"1":"f9","2":"g9","3":"g8","4":"g7","5":"f7","6":"e7","7":"e8","8":"e9"},"f9":{"1":"f10","2":"g10","3":"g9","4":"g8","5":"f8","6":"e8","7":"e9","8":"e10"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g10":{"3":"h10","4":"h9","5":"g9","6":"f9","7":"f10"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"1":"g9","2":"h9","3":"h8","4":"h7","5":"g7","6":"f7","7":"f8","8":"f9"},"g9":{"1":"g10","2":"h10","3":"h9","4":"h8","5":"g8","6":"f8","7":"f9","8":"f10"},"h1":{"1":"h2","2":"i2","3":"i1","7":"g1","8":"g2"},"h10":{"3":"i10","4":"i9","5":"h9","6":"g9","7":"g10"},"h2":{"1":"h3","2":"i3","3":"i2","4":"i1","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","2":"i4","3":"i3","4":"i2","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","2":"i5","3":"i4","4":"i3","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","2":"i6","3":"i5","4":"i4","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","2":"i7","3":"i6","4":"i5","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","2":"i8","3":"i7","4":"i6","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"1":"h9","2":"i9","3":"i8","4":"i7","5":"h7","6":"g7","7":"g8","8":"g9"},"h9":{"1":"h10","2":"i10","3":"i9","4":"i8","5":"h8","6":"g8","7":"g9","8":"g10"},"i1":{"1":"i2","2":"j2","3":"j1","7":"h1","8":"h2"},"i10":{"3":"j10","4":"j9","5":"i9","6":"h9","7":"h10"},"i2":{"1":"i3","2":"j3","3":"j2","4":"j1","5":"i1","6":"h1","7":"h2","8":"h3"},"i3":{"1":"i4","2":"j4","3":"j3","4":"j2","5":"i2","6":"h2","7":"h3","8":"h4"},"i4":{"1":"i5","2":"j5","3":"j4","4":"j3","5":"i3","6":"h3","7":"h4","8":"h5"},"i5":{"1":"i6","2":"j6","3":"j5","4":"j4","5":"i4","6":"h4","7":"h5","8":"h6"},"i6":{"1":"i7","2":"j7","3":"j6","4":"j5","5":"i5","6":"h5","7":"h6","8":"h7"},"i7":{"1":"i8","2":"j8","3":"j7","4":"j6","5":"i6","6":"h6","7":"h7","8":"h8"},"i8":{"1":"i9","2":"j9","3":"j8","4":"j7","5":"i7","6":"h7","7":"h8","8":"h9"},"i9":{"1":"i10","2":"j10","3":"j9","4":"j8","5":"i8","6":"h8","7":"h9","8":"h10"},"j1":{"1":"j2","7":"i1","8":"i2"},"j10":{"5":"j9","6":"i9","7":"i10"},"j2":{"1":"j3","5":"j1","6":"i1","7":"i2","8":"i3"},"j3":{"1":"j4","5":"j2","6":"i2","7":"i3","8":"i4"},"j4":{"1":"j5","5":"j3","6":"i3","7":"i4","8":"i5"},"j5":{"1":"j6","5":"j4","6":"i4","7":"i5","8":"i6"},"j6":{"1":"j7","5":"j5","6":"i5","7":"i6","8":"i7"},"j7":{"1":"j8","5":"j6","6":"i6","7":"i7","8":"i8"},"j8":{"1":"j9","5":"j7","6":"i7","7":"i8","8":"i9"},"j9":{"1":"j10","5":"j8","6":"i8","7":"i9","8":"i10"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j8":{"colour":"dark","pos":"j8","x":10,"y":8},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"light":{"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j8":{"colour":"dark","pos":"j8","x":10,"y":8}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS['targets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.targets){newlinks[linkpos]='selectmovetarget1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select where to move the amazon';};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmovetarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Choose Move to go here!';};game.selectfiretarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectfiretarget:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectfiretarget'});turn.links[newstepid]={};turn.links[newstepid].fire='fire1';return newstep;};game.selectfiretarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Choose Fire to shoot here!';};game.move1=function(turn,step){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}TURNVARS['movedto']=MARKS['selectmovetarget'];MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var BLOCKS=UNITLAYERS.units;var STARTPOS=TURNVARS['movedto'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS['targets'][POS]={};}}var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),TURNVARS:TURNVARS});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.targets){newlinks[linkpos]='selectfiretarget1';}return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Now select where to fire at';};game.fire1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfiretarget'],id:newunitid,group:'fires',owner:0,from:TURNVARS['movedto']};MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'fire',path:step.path.concat('fire'),clones:clones,TURNVARS:TURNVARS});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.fire1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"targets":{}};var UNITDATA=step.UNITDATA;var TURNVARS={};var UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[],TURNVARS:TURNVARS};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select an amazon to move and fire with';};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS['targets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.targets){newlinks[linkpos]='selectmovetarget2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select where to move the amazon';};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmovetarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Choose Move to go here!';};game.selectfiretarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectfiretarget:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectfiretarget'});turn.links[newstepid]={};turn.links[newstepid].fire='fire2';return newstep;};game.selectfiretarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Choose Fire to shoot here!';};game.move2=function(turn,step){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}TURNVARS['movedto']=MARKS['selectmovetarget'];MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var BLOCKS=UNITLAYERS.units;var STARTPOS=TURNVARS['movedto'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS['targets'][POS]={};}}var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),TURNVARS:TURNVARS});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.targets){newlinks[linkpos]='selectfiretarget2';}return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Now select where to fire at';};game.fire2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfiretarget'],id:newunitid,group:'fires',owner:0,from:TURNVARS['movedto']};MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'fire',path:step.path.concat('fire'),clones:clones,TURNVARS:TURNVARS});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.fire2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"targets":{}};var UNITDATA=step.UNITDATA;var TURNVARS={};var UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[],TURNVARS:TURNVARS};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select an amazon to move and fire with';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"d10","id":"unit1","group":"queens","owner":1},"unit2":{"pos":"g10","id":"unit2","group":"queens","owner":1},"unit3":{"pos":"a7","id":"unit3","group":"queens","owner":1},"unit4":{"pos":"j7","id":"unit4","group":"queens","owner":1},"unit5":{"pos":"a4","id":"unit5","group":"queens","owner":2},"unit6":{"pos":"d1","id":"unit6","group":"queens","owner":2},"unit7":{"pos":"g1","id":"unit7","group":"queens","owner":2},"unit8":{"pos":"j4","id":"unit8","group":"queens","owner":2}},TURNVARS:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"move":1,"fire":1};game.graphics={"icons":{"queens":"queens","fires":"pawns"}};game.board={"height":10,"width":10};return game;}(),daggers:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"3":"b8","4":"b7","5":"a7"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"3":"c8","4":"c7","5":"b7","6":"a7","7":"a8"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"3":"d8","4":"d7","5":"c7","6":"b7","7":"b8"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"3":"e8","4":"e7","5":"d7","6":"c7","7":"c8"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"3":"f8","4":"f7","5":"e7","6":"d7","7":"d8"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"3":"g8","4":"g7","5":"f7","6":"e7","7":"e8"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"3":"h8","4":"h7","5":"g7","6":"f7","7":"f8"},"h1":{"1":"h2","7":"g1","8":"g2"},"h2":{"1":"h3","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"5":"h7","6":"g7","7":"g8"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"bases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1},"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}},"mybases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1}},"oppbases":{"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={killtarget:(0,_assign2.default)({},step.ARTIFACTS.killtarget),movetarget:(0,_assign2.default)({},step.ARTIFACTS.movetarget)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};if(!!UNITLAYERS.mycrowns[MARKS['selectunit']]){var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){if(!UNITLAYERS.myunits[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'killtarget':'movetarget'][POS]={};}}}}else{var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[8,1,2,4,5,6];for(var walkerdirnbr=0;walkerdirnbr<6;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var MAX=[8,1,2].indexOf(DIR)!==-1?1:8;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){LENGTH++;ARTIFACTS['movetarget'][POS]={};}if(BLOCKS[POS]){if(!UNITLAYERS.myunits[POS]&&!([1,5].indexOf(DIR)!==-1&&!!UNITLAYERS.oppdaggers[POS])){ARTIFACTS['movetarget'][POS]={};}}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetarget){newlinks[linkpos]='selectmovetarget1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmovetarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"killtarget":{},"movetarget":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mycrowns,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else if((0,_keys2.default)(UNITLAYERS.oppcrowns).length===1){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='kingkill';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"killtarget":{},"movetarget":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"bases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1},"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}},"oppbases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1}},"mybases":{"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={killtarget:(0,_assign2.default)({},step.ARTIFACTS.killtarget),movetarget:(0,_assign2.default)({},step.ARTIFACTS.movetarget)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};if(!!UNITLAYERS.mycrowns[MARKS['selectunit']]){var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){if(!UNITLAYERS.myunits[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'killtarget':'movetarget'][POS]={};}}}}else{var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[8,1,2,4,5,6];for(var walkerdirnbr=0;walkerdirnbr<6;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var MAX=[8,1,2].indexOf(DIR)!==-1?1:8;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){LENGTH++;ARTIFACTS['movetarget'][POS]={};}if(BLOCKS[POS]){if(!UNITLAYERS.myunits[POS]&&!([1,5].indexOf(DIR)!==-1&&!!UNITLAYERS.oppdaggers[POS])){ARTIFACTS['movetarget'][POS]={};}}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetarget){newlinks[linkpos]='selectmovetarget2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmovetarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"killtarget":{},"movetarget":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mycrowns,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else if((0,_keys2.default)(UNITLAYERS.oppcrowns).length===1){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='kingkill';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"killtarget":{},"movetarget":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"d8","id":"unit1","group":"crowns","owner":1},"unit2":{"pos":"e8","id":"unit2","group":"crowns","owner":1},"unit3":{"pos":"c1","id":"unit3","group":"crowns","owner":2},"unit4":{"pos":"f1","id":"unit4","group":"crowns","owner":2},"unit5":{"pos":"c7","id":"unit5","group":"daggers","owner":1},"unit6":{"pos":"d7","id":"unit6","group":"daggers","owner":1},"unit7":{"pos":"e7","id":"unit7","group":"daggers","owner":1},"unit8":{"pos":"f7","id":"unit8","group":"daggers","owner":1},"unit9":{"pos":"c3","id":"unit9","group":"daggers","owner":2},"unit10":{"pos":"f3","id":"unit10","group":"daggers","owner":2},"unit11":{"pos":"b2","id":"unit11","group":"daggers","owner":2},"unit12":{"pos":"c2","id":"unit12","group":"daggers","owner":2},"unit13":{"pos":"d2","id":"unit13","group":"daggers","owner":2},"unit14":{"pos":"e2","id":"unit14","group":"daggers","owner":2},"unit15":{"pos":"f2","id":"unit15","group":"daggers","owner":2},"unit16":{"pos":"g2","id":"unit16","group":"daggers","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"bases":"playercolour"},"icons":{"daggers":"bishops","crowns":"kings"}};game.board={"height":8,"width":8,"terrain":{"bases":{"1":[["rect","a8","h8"]],"2":[["rect","a1","h1"]]}}};return game;}(),jostle:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a10":{"3":"b10","4":"b9","5":"a9"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"1":"a9","2":"b9","3":"b8","4":"b7","5":"a7"},"a9":{"1":"a10","2":"b10","3":"b9","4":"b8","5":"a8"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b10":{"3":"c10","4":"c9","5":"b9","6":"a9","7":"a10"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"1":"b9","2":"c9","3":"c8","4":"c7","5":"b7","6":"a7","7":"a8","8":"a9"},"b9":{"1":"b10","2":"c10","3":"c9","4":"c8","5":"b8","6":"a8","7":"a9","8":"a10"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c10":{"3":"d10","4":"d9","5":"c9","6":"b9","7":"b10"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"1":"c9","2":"d9","3":"d8","4":"d7","5":"c7","6":"b7","7":"b8","8":"b9"},"c9":{"1":"c10","2":"d10","3":"d9","4":"d8","5":"c8","6":"b8","7":"b9","8":"b10"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d10":{"3":"e10","4":"e9","5":"d9","6":"c9","7":"c10"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"1":"d9","2":"e9","3":"e8","4":"e7","5":"d7","6":"c7","7":"c8","8":"c9"},"d9":{"1":"d10","2":"e10","3":"e9","4":"e8","5":"d8","6":"c8","7":"c9","8":"c10"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e10":{"3":"f10","4":"f9","5":"e9","6":"d9","7":"d10"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"1":"e9","2":"f9","3":"f8","4":"f7","5":"e7","6":"d7","7":"d8","8":"d9"},"e9":{"1":"e10","2":"f10","3":"f9","4":"f8","5":"e8","6":"d8","7":"d9","8":"d10"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f10":{"3":"g10","4":"g9","5":"f9","6":"e9","7":"e10"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"1":"f9","2":"g9","3":"g8","4":"g7","5":"f7","6":"e7","7":"e8","8":"e9"},"f9":{"1":"f10","2":"g10","3":"g9","4":"g8","5":"f8","6":"e8","7":"e9","8":"e10"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g10":{"3":"h10","4":"h9","5":"g9","6":"f9","7":"f10"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"1":"g9","2":"h9","3":"h8","4":"h7","5":"g7","6":"f7","7":"f8","8":"f9"},"g9":{"1":"g10","2":"h10","3":"h9","4":"h8","5":"g8","6":"f8","7":"f9","8":"f10"},"h1":{"1":"h2","2":"i2","3":"i1","7":"g1","8":"g2"},"h10":{"3":"i10","4":"i9","5":"h9","6":"g9","7":"g10"},"h2":{"1":"h3","2":"i3","3":"i2","4":"i1","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","2":"i4","3":"i3","4":"i2","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","2":"i5","3":"i4","4":"i3","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","2":"i6","3":"i5","4":"i4","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","2":"i7","3":"i6","4":"i5","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","2":"i8","3":"i7","4":"i6","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"1":"h9","2":"i9","3":"i8","4":"i7","5":"h7","6":"g7","7":"g8","8":"g9"},"h9":{"1":"h10","2":"i10","3":"i9","4":"i8","5":"h8","6":"g8","7":"g9","8":"g10"},"i1":{"1":"i2","2":"j2","3":"j1","7":"h1","8":"h2"},"i10":{"3":"j10","4":"j9","5":"i9","6":"h9","7":"h10"},"i2":{"1":"i3","2":"j3","3":"j2","4":"j1","5":"i1","6":"h1","7":"h2","8":"h3"},"i3":{"1":"i4","2":"j4","3":"j3","4":"j2","5":"i2","6":"h2","7":"h3","8":"h4"},"i4":{"1":"i5","2":"j5","3":"j4","4":"j3","5":"i3","6":"h3","7":"h4","8":"h5"},"i5":{"1":"i6","2":"j6","3":"j5","4":"j4","5":"i4","6":"h4","7":"h5","8":"h6"},"i6":{"1":"i7","2":"j7","3":"j6","4":"j5","5":"i5","6":"h5","7":"h6","8":"h7"},"i7":{"1":"i8","2":"j8","3":"j7","4":"j6","5":"i6","6":"h6","7":"h7","8":"h8"},"i8":{"1":"i9","2":"j9","3":"j8","4":"j7","5":"i7","6":"h7","7":"h8","8":"h9"},"i9":{"1":"i10","2":"j10","3":"j9","4":"j8","5":"i8","6":"h8","7":"h9","8":"h10"},"j1":{"1":"j2","7":"i1","8":"i2"},"j10":{"5":"j9","6":"i9","7":"i10"},"j2":{"1":"j3","5":"j1","6":"i1","7":"i2","8":"i3"},"j3":{"1":"j4","5":"j2","6":"i2","7":"i3","8":"i4"},"j4":{"1":"j5","5":"j3","6":"i3","7":"i4","8":"i5"},"j5":{"1":"j6","5":"j4","6":"i4","7":"i5","8":"i6"},"j6":{"1":"j7","5":"j5","6":"i5","7":"i6","8":"i7"},"j7":{"1":"j8","5":"j6","6":"i6","7":"i7","8":"i8"},"j8":{"1":"j9","5":"j7","6":"i7","7":"i8","8":"i9"},"j9":{"1":"j10","5":"j8","6":"i8","7":"i9","8":"i10"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j8":{"colour":"dark","pos":"j8","x":10,"y":8},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"light":{"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j8":{"colour":"dark","pos":"j8","x":10,"y":8}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),initialenemy:(0,_assign2.default)({},step.ARTIFACTS.initialenemy),initialfriend:(0,_assign2.default)({},step.ARTIFACTS.initialfriend)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,3,5,7];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<4;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){ARTIFACTS[!UNITLAYERS.units[POS]?'movetargets':!!UNITLAYERS.oppunits[POS]?'initialenemy':'initialfriend'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmovetarget1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'The current position is worth '+''+((0,_keys2.default)(ARTIFACTS.initialfriend).length-(0,_keys2.default)(ARTIFACTS.initialenemy).length);};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{newenemy:(0,_assign2.default)({},step.ARTIFACTS.newenemy),newfriend:(0,_assign2.default)({},step.ARTIFACTS.newfriend)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var STARTPOS=MARKS['selectmovetarget'];var neighbourdirs=[1,3,5,7];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<4;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&UNITLAYERS.units[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'newenemy':'newfriend'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.newfriend).length-(1+(0,_keys2.default)(ARTIFACTS.newenemy).length)>(0,_keys2.default)(ARTIFACTS.initialfriend).length-(0,_keys2.default)(ARTIFACTS.initialenemy).length){turn.links[newstepid].jostle='jostle1';}return newstep;};game.selectmovetarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'That position would be worth '+''+((0,_keys2.default)(ARTIFACTS.newfriend).length-(1+(0,_keys2.default)(ARTIFACTS.newenemy).length));};game.jostle1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"checkers":{},"mycheckers":{},"oppcheckers":{},"neutralcheckers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"initialenemy":{},"initialfriend":{},"newenemy":{},"newfriend":{}};var newstepid=step.stepid+'-'+'jostle';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'jostle',path:step.path.concat('jostle')});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.jostle1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{},"initialenemy":{},"initialfriend":{},"newenemy":{},"newfriend":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"checkers":{},"mycheckers":{},"oppcheckers":{},"neutralcheckers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mycheckers){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select which unit to jostle!';};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),initialenemy:(0,_assign2.default)({},step.ARTIFACTS.initialenemy),initialfriend:(0,_assign2.default)({},step.ARTIFACTS.initialfriend)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,3,5,7];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<4;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){ARTIFACTS[!UNITLAYERS.units[POS]?'movetargets':!!UNITLAYERS.oppunits[POS]?'initialenemy':'initialfriend'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmovetarget2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'The current position is worth '+''+((0,_keys2.default)(ARTIFACTS.initialfriend).length-(0,_keys2.default)(ARTIFACTS.initialenemy).length);};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{newenemy:(0,_assign2.default)({},step.ARTIFACTS.newenemy),newfriend:(0,_assign2.default)({},step.ARTIFACTS.newfriend)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var STARTPOS=MARKS['selectmovetarget'];var neighbourdirs=[1,3,5,7];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<4;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&UNITLAYERS.units[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'newenemy':'newfriend'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.newfriend).length-(1+(0,_keys2.default)(ARTIFACTS.newenemy).length)>(0,_keys2.default)(ARTIFACTS.initialfriend).length-(0,_keys2.default)(ARTIFACTS.initialenemy).length){turn.links[newstepid].jostle='jostle2';}return newstep;};game.selectmovetarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'That position would be worth '+''+((0,_keys2.default)(ARTIFACTS.newfriend).length-(1+(0,_keys2.default)(ARTIFACTS.newenemy).length));};game.jostle2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"checkers":{},"mycheckers":{},"oppcheckers":{},"neutralcheckers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"initialenemy":{},"initialfriend":{},"newenemy":{},"newfriend":{}};var newstepid=step.stepid+'-'+'jostle';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'jostle',path:step.path.concat('jostle')});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.jostle2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{},"initialenemy":{},"initialfriend":{},"newenemy":{},"newfriend":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"checkers":{},"mycheckers":{},"oppcheckers":{},"neutralcheckers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mycheckers){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select which unit to jostle!';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"c4","id":"unit1","group":"checkers","owner":1},"unit2":{"pos":"c6","id":"unit2","group":"checkers","owner":1},"unit3":{"pos":"c8","id":"unit3","group":"checkers","owner":1},"unit4":{"pos":"d3","id":"unit4","group":"checkers","owner":1},"unit5":{"pos":"d5","id":"unit5","group":"checkers","owner":1},"unit6":{"pos":"d7","id":"unit6","group":"checkers","owner":1},"unit7":{"pos":"e4","id":"unit7","group":"checkers","owner":1},"unit8":{"pos":"e8","id":"unit8","group":"checkers","owner":1},"unit9":{"pos":"f3","id":"unit9","group":"checkers","owner":1},"unit10":{"pos":"f7","id":"unit10","group":"checkers","owner":1},"unit11":{"pos":"g4","id":"unit11","group":"checkers","owner":1},"unit12":{"pos":"g6","id":"unit12","group":"checkers","owner":1},"unit13":{"pos":"g8","id":"unit13","group":"checkers","owner":1},"unit14":{"pos":"h3","id":"unit14","group":"checkers","owner":1},"unit15":{"pos":"h5","id":"unit15","group":"checkers","owner":1},"unit16":{"pos":"h7","id":"unit16","group":"checkers","owner":1},"unit17":{"pos":"c3","id":"unit17","group":"checkers","owner":2},"unit18":{"pos":"c5","id":"unit18","group":"checkers","owner":2},"unit19":{"pos":"c7","id":"unit19","group":"checkers","owner":2},"unit20":{"pos":"d4","id":"unit20","group":"checkers","owner":2},"unit21":{"pos":"d6","id":"unit21","group":"checkers","owner":2},"unit22":{"pos":"d8","id":"unit22","group":"checkers","owner":2},"unit23":{"pos":"e3","id":"unit23","group":"checkers","owner":2},"unit24":{"pos":"e7","id":"unit24","group":"checkers","owner":2},"unit25":{"pos":"f4","id":"unit25","group":"checkers","owner":2},"unit26":{"pos":"f8","id":"unit26","group":"checkers","owner":2},"unit27":{"pos":"g3","id":"unit27","group":"checkers","owner":2},"unit28":{"pos":"g5","id":"unit28","group":"checkers","owner":2},"unit29":{"pos":"g7","id":"unit29","group":"checkers","owner":2},"unit30":{"pos":"h4","id":"unit30","group":"checkers","owner":2},"unit31":{"pos":"h6","id":"unit31","group":"checkers","owner":2},"unit32":{"pos":"h8","id":"unit32","group":"checkers","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"jostle":1};game.graphics={"icons":{"checkers":"pawns"}};game.board={"height":10,"width":10};return game;}(),kickrun:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"3":"b5","4":"b4","5":"a4"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"3":"c5","4":"c4","5":"b4","6":"a4","7":"a5"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"3":"d5","4":"d4","5":"c4","6":"b4","7":"b5"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"3":"e5","4":"e4","5":"d4","6":"c4","7":"c5"},"e1":{"1":"e2","7":"d1","8":"d2"},"e2":{"1":"e3","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"5":"e4","6":"d4","7":"d5"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"corners":{"a1":{"pos":"a1","owner":1},"e5":{"pos":"e5","owner":2}},"mycorners":{"a1":{"pos":"a1","owner":1}},"oppcorners":{"e5":{"pos":"e5","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=!!UNITLAYERS.myrunners[MARKS['selectunit']]?[1,2,3]:[8,1,3,4];var nbrofwalkerdirs=allwalkerdirs.length;for(var walkerdirnbr=0;walkerdirnbr<nbrofwalkerdirs;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var MAX=!!UNITLAYERS.myrunners[MARKS['selectunit']]?4:1;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){LENGTH++;if(DIR!==8&&DIR!==4){ARTIFACTS['movetargets'][POS]={};}}if(BLOCKS[POS]){if(!!UNITLAYERS.oppunits[POS]&&(DIR===8||DIR===4)){ARTIFACTS['movetargets'][POS]={};}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmovetarget1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmovetarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];}MARKS={};UNITLAYERS={"runners":{},"myrunners":{},"opprunners":{},"neutralrunners":{},"sidekickers":{},"mysidekickers":{},"oppsidekickers":{},"neutralsidekickers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myrunners,s1=TERRAIN.oppcorners;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"runners":{},"myrunners":{},"opprunners":{},"neutralrunners":{},"sidekickers":{},"mysidekickers":{},"oppsidekickers":{},"neutralsidekickers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"corners":{"a1":{"pos":"a1","owner":1},"e5":{"pos":"e5","owner":2}},"oppcorners":{"a1":{"pos":"a1","owner":1}},"mycorners":{"e5":{"pos":"e5","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=!!UNITLAYERS.myrunners[MARKS['selectunit']]?[5,6,7]:[4,5,7,8];var nbrofwalkerdirs=allwalkerdirs.length;for(var walkerdirnbr=0;walkerdirnbr<nbrofwalkerdirs;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var MAX=!!UNITLAYERS.myrunners[MARKS['selectunit']]?4:1;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){LENGTH++;if(DIR!==8&&DIR!==4){ARTIFACTS['movetargets'][POS]={};}}if(BLOCKS[POS]){if(!!UNITLAYERS.oppunits[POS]&&(DIR===8||DIR===4)){ARTIFACTS['movetargets'][POS]={};}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmovetarget2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmovetarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];}MARKS={};UNITLAYERS={"runners":{},"myrunners":{},"opprunners":{},"neutralrunners":{},"sidekickers":{},"mysidekickers":{},"oppsidekickers":{},"neutralsidekickers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myrunners,s1=TERRAIN.oppcorners;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"runners":{},"myrunners":{},"opprunners":{},"neutralrunners":{},"sidekickers":{},"mysidekickers":{},"oppsidekickers":{},"neutralsidekickers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a2","id":"unit1","group":"runners","owner":1},"unit2":{"pos":"b1","id":"unit2","group":"runners","owner":1},"unit3":{"pos":"d5","id":"unit3","group":"runners","owner":2},"unit4":{"pos":"e4","id":"unit4","group":"runners","owner":2},"unit5":{"pos":"a1","id":"unit5","group":"sidekickers","owner":1},"unit6":{"pos":"c1","id":"unit6","group":"sidekickers","owner":1},"unit7":{"pos":"a3","id":"unit7","group":"sidekickers","owner":1},"unit8":{"pos":"c5","id":"unit8","group":"sidekickers","owner":2},"unit9":{"pos":"e5","id":"unit9","group":"sidekickers","owner":2},"unit10":{"pos":"e3","id":"unit10","group":"sidekickers","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"corners":"playercolour"},"icons":{"runners":"bishops","sidekickers":"pawns"}};game.board={"height":5,"width":5,"terrain":{"corners":{"1":["a1"],"2":["e5"]}}};return game;}(),krieg:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"3":"b4","4":"b3","5":"a3"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"3":"c4","4":"c3","5":"b3","6":"a3","7":"a4"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"3":"d4","4":"d3","5":"c3","6":"b3","7":"b4"},"d1":{"1":"d2","7":"c1","8":"c2"},"d2":{"1":"d3","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"5":"d3","6":"c3","7":"c4"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"southeast":{"a4":{"pos":"a4"},"c2":{"pos":"c2"}},"northwest":{"b3":{"pos":"b3"},"d1":{"pos":"d1"}},"corners":{"a4":{"pos":"a4","owner":1},"d1":{"pos":"d1","owner":2}},"mycorners":{"a4":{"pos":"a4","owner":1}},"oppcorners":{"d1":{"pos":"d1","owner":2}},"bases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1},"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}},"mybases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1}},"oppbases":{"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var STARTPOS=MARKS['selectunit'];var neighbourdirs=!!TERRAIN.southeast[STARTPOS]?[1,3,4,5,7]:!!TERRAIN.northwest[STARTPOS]?[1,3,5,7,8]:[1,3,5,7];var nbrofneighbourdirs=neighbourdirs.length;var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){ARTIFACTS['movetargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmove1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var LOOPID;for(var POS in UNITLAYERS.myfrozens){LOOPID=UNITLAYERS.myfrozens[POS].id;UNITDATA[LOOPID]=(0,_assign2.default)({},UNITDATA[LOOPID],{'group':'notfrozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'frozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmove']});}MARKS={};UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppcorners,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='cornerinfiltration';}else if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppbases,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length===2){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='occupation';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mynotfrozens){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"southeast":{"a4":{"pos":"a4"},"c2":{"pos":"c2"}},"northwest":{"b3":{"pos":"b3"},"d1":{"pos":"d1"}},"corners":{"a4":{"pos":"a4","owner":1},"d1":{"pos":"d1","owner":2}},"oppcorners":{"a4":{"pos":"a4","owner":1}},"mycorners":{"d1":{"pos":"d1","owner":2}},"bases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1},"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}},"oppbases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1}},"mybases":{"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var STARTPOS=MARKS['selectunit'];var neighbourdirs=!!TERRAIN.southeast[STARTPOS]?[1,3,4,5,7]:!!TERRAIN.northwest[STARTPOS]?[1,3,5,7,8]:[1,3,5,7];var nbrofneighbourdirs=neighbourdirs.length;var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){ARTIFACTS['movetargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmove2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var LOOPID;for(var POS in UNITLAYERS.myfrozens){LOOPID=UNITLAYERS.myfrozens[POS].id;UNITDATA[LOOPID]=(0,_assign2.default)({},UNITDATA[LOOPID],{'group':'notfrozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'frozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmove']});}MARKS={};UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppcorners,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='cornerinfiltration';}else if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppbases,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length===2){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='occupation';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mynotfrozens){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a4","id":"unit1","group":"notfrozens","owner":1},"unit2":{"pos":"b4","id":"unit2","group":"notfrozens","owner":1},"unit3":{"pos":"a3","id":"unit3","group":"notfrozens","owner":1},"unit4":{"pos":"b3","id":"unit4","group":"notfrozens","owner":1},"unit5":{"pos":"c2","id":"unit5","group":"notfrozens","owner":2},"unit6":{"pos":"c1","id":"unit6","group":"notfrozens","owner":2},"unit7":{"pos":"d2","id":"unit7","group":"notfrozens","owner":2},"unit8":{"pos":"d1","id":"unit8","group":"notfrozens","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"corners":"playercolour","bases":"castle"},"icons":{"notfrozens":"knights","frozens":"rooks"}};game.board={"width":4,"height":4,"terrain":{"southeast":["a4","c2"],"northwest":["b3","d1"],"corners":{"1":["a4"],"2":["d1"]},"bases":{"1":["b4","a3","b3"],"2":["c2","d2","c1"]}}};return game;}(),murusgallicus:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"3":"b7","4":"b6","5":"a6"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"3":"c7","4":"c6","5":"b6","6":"a6","7":"a7"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"3":"d7","4":"d6","5":"c6","6":"b6","7":"b7"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"3":"e7","4":"e6","5":"d6","6":"c6","7":"c7"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"3":"f7","4":"f6","5":"e6","6":"d6","7":"d7"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"3":"g7","4":"g6","5":"f6","6":"e6","7":"e7"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"3":"h7","4":"h6","5":"g6","6":"f6","7":"f7"},"h1":{"1":"h2","7":"g1","8":"g2"},"h2":{"1":"h3","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"5":"h6","6":"g6","7":"g7"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"homerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1},"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}},"myhomerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1}},"opphomerow":{"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selecttower1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),killtargets:(0,_assign2.default)({},step.ARTIFACTS.killtargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttower:markpos};var BLOCKS=function(){var k,ret={},s0=UNITLAYERS.oppunits,s1=UNITLAYERS.mytowers;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}();var STARTPOS=MARKS['selecttower'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var MAX=2;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){walkedsquares.push(POS);LENGTH++;}var WALKLENGTH=walkedsquares.length;var STEP=0;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];STEP++;if(WALKLENGTH===2&&STEP===2){ARTIFACTS['movetargets'][POS]={dir:DIR};}}}var STARTPOS=MARKS['selecttower'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&UNITLAYERS.oppwalls[POS]){ARTIFACTS['killtargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttower'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove1';}var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.killtargets){newlinks[linkpos]='selectkill1';}return newstep;};game.selecttower1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{madetowers:(0,_assign2.default)({},step.ARTIFACTS.madetowers),madewalls:(0,_assign2.default)({},step.ARTIFACTS.madewalls)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selecttower:step.MARKS.selecttower};var STARTPOS=MARKS['selectmove'];var POS=connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']]||{})['dir']-2+5]];if(POS){ARTIFACTS[!!UNITLAYERS.myunits[POS]?'madetowers':'madewalls'][POS]={};}ARTIFACTS[!!UNITLAYERS.myunits[MARKS['selectmove']]?'madetowers':'madewalls'][STARTPOS]={};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmove1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectkill1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectkill:markpos,selecttower:step.MARKS.selecttower};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectkill'});turn.links[newstepid]={};turn.links[newstepid].kill='kill1';return newstep;};game.selectkill1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];for(var POS in ARTIFACTS.madetowers){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}for(var POS in ARTIFACTS.madewalls){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:POS,id:newunitid,group:'walls',owner:1,from:MARKS['selecttower']};}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.kill1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selecttower']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]||{}).id];MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'kill';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'kill',path:step.path.concat('kill')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.kill1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mytowers){newlinks[linkpos]='selecttower1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"homerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1},"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}},"opphomerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1}},"myhomerow":{"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selecttower2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),killtargets:(0,_assign2.default)({},step.ARTIFACTS.killtargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttower:markpos};var BLOCKS=function(){var k,ret={},s0=UNITLAYERS.oppunits,s1=UNITLAYERS.mytowers;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}();var STARTPOS=MARKS['selecttower'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var MAX=2;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){walkedsquares.push(POS);LENGTH++;}var WALKLENGTH=walkedsquares.length;var STEP=0;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];STEP++;if(WALKLENGTH===2&&STEP===2){ARTIFACTS['movetargets'][POS]={dir:DIR};}}}var STARTPOS=MARKS['selecttower'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&UNITLAYERS.oppwalls[POS]){ARTIFACTS['killtargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttower'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove2';}var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.killtargets){newlinks[linkpos]='selectkill2';}return newstep;};game.selecttower2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{madetowers:(0,_assign2.default)({},step.ARTIFACTS.madetowers),madewalls:(0,_assign2.default)({},step.ARTIFACTS.madewalls)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selecttower:step.MARKS.selecttower};var STARTPOS=MARKS['selectmove'];var POS=connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']]||{})['dir']-2+5]];if(POS){ARTIFACTS[!!UNITLAYERS.myunits[POS]?'madetowers':'madewalls'][POS]={};}ARTIFACTS[!!UNITLAYERS.myunits[MARKS['selectmove']]?'madetowers':'madewalls'][STARTPOS]={};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmove2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectkill2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectkill:markpos,selecttower:step.MARKS.selecttower};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectkill'});turn.links[newstepid]={};turn.links[newstepid].kill='kill2';return newstep;};game.selectkill2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];for(var POS in ARTIFACTS.madetowers){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}for(var POS in ARTIFACTS.madewalls){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:POS,id:newunitid,group:'walls',owner:2,from:MARKS['selecttower']};}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.kill2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selecttower']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]||{}).id];MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'kill';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'kill',path:step.path.concat('kill')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.kill2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mytowers){newlinks[linkpos]='selecttower2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a1","id":"unit1","group":"towers","owner":1},"unit2":{"pos":"b1","id":"unit2","group":"towers","owner":1},"unit3":{"pos":"c1","id":"unit3","group":"towers","owner":1},"unit4":{"pos":"d1","id":"unit4","group":"towers","owner":1},"unit5":{"pos":"e1","id":"unit5","group":"towers","owner":1},"unit6":{"pos":"f1","id":"unit6","group":"towers","owner":1},"unit7":{"pos":"g1","id":"unit7","group":"towers","owner":1},"unit8":{"pos":"h1","id":"unit8","group":"towers","owner":1},"unit9":{"pos":"a7","id":"unit9","group":"towers","owner":2},"unit10":{"pos":"b7","id":"unit10","group":"towers","owner":2},"unit11":{"pos":"c7","id":"unit11","group":"towers","owner":2},"unit12":{"pos":"d7","id":"unit12","group":"towers","owner":2},"unit13":{"pos":"e7","id":"unit13","group":"towers","owner":2},"unit14":{"pos":"f7","id":"unit14","group":"towers","owner":2},"unit15":{"pos":"g7","id":"unit15","group":"towers","owner":2},"unit16":{"pos":"h7","id":"unit16","group":"towers","owner":2}},clones:0};return game.start1(turnseed,stepseed);};game.commands={"move":1,"kill":1};game.graphics={"tiles":{"homerow":"playercolour"},"icons":{"towers":"rooks","walls":"pawns"}};game.board={"height":7,"width":8,"terrain":{"homerow":{"1":[["rect","a1","h1"]],"2":[["rect","a7","h7"]]}}};return game;}(),murusgallicusadvanced:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"3":"b7","4":"b6","5":"a6"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"3":"c7","4":"c6","5":"b6","6":"a6","7":"a7"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"3":"d7","4":"d6","5":"c6","6":"b6","7":"b7"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"3":"e7","4":"e6","5":"d6","6":"c6","7":"c7"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"3":"f7","4":"f6","5":"e6","6":"d6","7":"d7"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"3":"g7","4":"g6","5":"f6","6":"e6","7":"e7"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"3":"h7","4":"h6","5":"g6","6":"f6","7":"f7"},"h1":{"1":"h2","7":"g1","8":"g2"},"h2":{"1":"h3","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"5":"h6","6":"g6","7":"g7"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"homerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1},"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}},"myhomerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1}},"opphomerow":{"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selecttower1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),killtargets:(0,_assign2.default)({},step.ARTIFACTS.killtargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttower:markpos};var BLOCKS=function(){var k,ret={},s0=UNITLAYERS.oppunits,s1=UNITLAYERS.mycatapults;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}();var STARTPOS=MARKS['selecttower'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var MAX=2;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){walkedsquares.push(POS);LENGTH++;}var WALKLENGTH=walkedsquares.length;var STEP=0;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];STEP++;if(WALKLENGTH===2&&STEP===2){ARTIFACTS['movetargets'][POS]={dir:DIR};}}}var STARTPOS=MARKS['selecttower'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&function(){var k,ret={},s0=UNITLAYERS.oppcatapults,s1=UNITLAYERS.oppwalls;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}()[POS]){ARTIFACTS['killtargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttower'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove1';}var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.killtargets){newlinks[linkpos]='selectkill1';}return newstep;};game.selecttower1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{madecatapults:(0,_assign2.default)({},step.ARTIFACTS.madecatapults),madetowers:(0,_assign2.default)({},step.ARTIFACTS.madetowers),madewalls:(0,_assign2.default)({},step.ARTIFACTS.madewalls)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selecttower:step.MARKS.selecttower};var STARTPOS=MARKS['selectmove'];var POS=connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']]||{})['dir']-2+5]];if(POS){ARTIFACTS[!!UNITLAYERS.myunits[POS]?!!UNITLAYERS.mytowers[POS]?'madecatapults':'madetowers':'madewalls'][POS]={};}ARTIFACTS[!!UNITLAYERS.myunits[MARKS['selectmove']]?!!UNITLAYERS.mytowers[MARKS['selectmove']]?'madecatapults':'madetowers':'madewalls'][STARTPOS]={};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmove1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectkill1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectkill:markpos,selecttower:step.MARKS.selecttower};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectkill'});turn.links[newstepid]={};turn.links[newstepid].kill='kill1';if(!!UNITLAYERS.oppcatapults[MARKS['selectkill']]){turn.links[newstepid].sacrifice='sacrifice1';}return newstep;};game.selectkill1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectcatapult1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{firetargets:(0,_assign2.default)({},step.ARTIFACTS.firetargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectcatapult:markpos};var STARTPOS=MARKS['selectcatapult'];var allwalkerdirs=[7,8,1,2,3];for(var walkerdirnbr=0;walkerdirnbr<5;walkerdirnbr++){var MAX=3;var POS=STARTPOS;var LENGTH=0;var STEP=0;while(LENGTH<MAX&&(POS=connections[POS][allwalkerdirs[walkerdirnbr]])){LENGTH++;STEP++;if(STEP>1&&!UNITLAYERS.myunits[POS]){ARTIFACTS['firetargets'][POS]={};}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectcatapult'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.firetargets){newlinks[linkpos]='selectfire1';}return newstep;};game.selectcatapult1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectfire1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectfire:markpos,selectcatapult:step.MARKS.selectcatapult};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectfire'});turn.links[newstepid]={};turn.links[newstepid].fire='fire1';return newstep;};game.selectfire1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];for(var POS in ARTIFACTS.madecatapults){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'catapults'});}}for(var POS in ARTIFACTS.madetowers){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}for(var POS in ARTIFACTS.madewalls){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:POS,id:newunitid,group:'walls',owner:1,from:MARKS['selecttower']};}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.kill1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selecttower']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}if(!!UNITLAYERS.oppcatapults[MARKS['selectkill']]){var unitid=(UNITLAYERS.units[MARKS['selectkill']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}else{delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]||{}).id];}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'kill';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'kill',path:step.path.concat('kill')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.kill1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.sacrifice1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectkill']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'sacrifice';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'sacrifice',path:step.path.concat('sacrifice')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.sacrifice1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.fire1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if(!!UNITLAYERS.oppwalls[MARKS['selectfire']]){delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]||{}).id];}else{if(!!UNITLAYERS.oppunits[MARKS['selectfire']]){var unitid=(UNITLAYERS.units[MARKS['selectfire']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.oppcatapults[MARKS['selectfire']]?'towers':'walls'});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfire'],id:newunitid,group:'walls',owner:1,from:MARKS['selectcatapult']};}}var unitid=(UNITLAYERS.units[MARKS['selectcatapult']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'fire',path:step.path.concat('fire'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.fire1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mytowers){newlinks[linkpos]='selecttower1';}var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mycatapults){newlinks[linkpos]='selectcatapult1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"homerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1},"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}},"opphomerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1}},"myhomerow":{"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selecttower2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),killtargets:(0,_assign2.default)({},step.ARTIFACTS.killtargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttower:markpos};var BLOCKS=function(){var k,ret={},s0=UNITLAYERS.oppunits,s1=UNITLAYERS.mycatapults;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}();var STARTPOS=MARKS['selecttower'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var MAX=2;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){walkedsquares.push(POS);LENGTH++;}var WALKLENGTH=walkedsquares.length;var STEP=0;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];STEP++;if(WALKLENGTH===2&&STEP===2){ARTIFACTS['movetargets'][POS]={dir:DIR};}}}var STARTPOS=MARKS['selecttower'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&function(){var k,ret={},s0=UNITLAYERS.oppcatapults,s1=UNITLAYERS.oppwalls;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}()[POS]){ARTIFACTS['killtargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttower'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove2';}var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.killtargets){newlinks[linkpos]='selectkill2';}return newstep;};game.selecttower2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{madecatapults:(0,_assign2.default)({},step.ARTIFACTS.madecatapults),madetowers:(0,_assign2.default)({},step.ARTIFACTS.madetowers),madewalls:(0,_assign2.default)({},step.ARTIFACTS.madewalls)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selecttower:step.MARKS.selecttower};var STARTPOS=MARKS['selectmove'];var POS=connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']]||{})['dir']-2+5]];if(POS){ARTIFACTS[!!UNITLAYERS.myunits[POS]?!!UNITLAYERS.mytowers[POS]?'madecatapults':'madetowers':'madewalls'][POS]={};}ARTIFACTS[!!UNITLAYERS.myunits[MARKS['selectmove']]?!!UNITLAYERS.mytowers[MARKS['selectmove']]?'madecatapults':'madetowers':'madewalls'][STARTPOS]={};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmove2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectkill2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectkill:markpos,selecttower:step.MARKS.selecttower};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectkill'});turn.links[newstepid]={};turn.links[newstepid].kill='kill2';if(!!UNITLAYERS.oppcatapults[MARKS['selectkill']]){turn.links[newstepid].sacrifice='sacrifice2';}return newstep;};game.selectkill2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectcatapult2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{firetargets:(0,_assign2.default)({},step.ARTIFACTS.firetargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectcatapult:markpos};var STARTPOS=MARKS['selectcatapult'];var allwalkerdirs=[3,4,5,6,7];for(var walkerdirnbr=0;walkerdirnbr<5;walkerdirnbr++){var MAX=3;var POS=STARTPOS;var LENGTH=0;var STEP=0;while(LENGTH<MAX&&(POS=connections[POS][allwalkerdirs[walkerdirnbr]])){LENGTH++;STEP++;if(STEP>1&&!UNITLAYERS.myunits[POS]){ARTIFACTS['firetargets'][POS]={};}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectcatapult'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.firetargets){newlinks[linkpos]='selectfire2';}return newstep;};game.selectcatapult2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectfire2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectfire:markpos,selectcatapult:step.MARKS.selectcatapult};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectfire'});turn.links[newstepid]={};turn.links[newstepid].fire='fire2';return newstep;};game.selectfire2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];for(var POS in ARTIFACTS.madecatapults){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'catapults'});}}for(var POS in ARTIFACTS.madetowers){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}for(var POS in ARTIFACTS.madewalls){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:POS,id:newunitid,group:'walls',owner:2,from:MARKS['selecttower']};}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.kill2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selecttower']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}if(!!UNITLAYERS.oppcatapults[MARKS['selectkill']]){var unitid=(UNITLAYERS.units[MARKS['selectkill']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}else{delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]||{}).id];}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'kill';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'kill',path:step.path.concat('kill')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.kill2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.sacrifice2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectkill']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'sacrifice';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'sacrifice',path:step.path.concat('sacrifice')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.sacrifice2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.fire2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if(!!UNITLAYERS.oppwalls[MARKS['selectfire']]){delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]||{}).id];}else{if(!!UNITLAYERS.oppunits[MARKS['selectfire']]){var unitid=(UNITLAYERS.units[MARKS['selectfire']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.oppcatapults[MARKS['selectfire']]?'towers':'walls'});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfire'],id:newunitid,group:'walls',owner:2,from:MARKS['selectcatapult']};}}var unitid=(UNITLAYERS.units[MARKS['selectcatapult']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'fire',path:step.path.concat('fire'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.fire2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mytowers){newlinks[linkpos]='selecttower2';}var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mycatapults){newlinks[linkpos]='selectcatapult2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a1","id":"unit1","group":"towers","owner":1},"unit2":{"pos":"b1","id":"unit2","group":"towers","owner":1},"unit3":{"pos":"c1","id":"unit3","group":"towers","owner":1},"unit4":{"pos":"d1","id":"unit4","group":"towers","owner":1},"unit5":{"pos":"e1","id":"unit5","group":"towers","owner":1},"unit6":{"pos":"f1","id":"unit6","group":"towers","owner":1},"unit7":{"pos":"g1","id":"unit7","group":"towers","owner":1},"unit8":{"pos":"h1","id":"unit8","group":"towers","owner":1},"unit9":{"pos":"a7","id":"unit9","group":"towers","owner":2},"unit10":{"pos":"b7","id":"unit10","group":"towers","owner":2},"unit11":{"pos":"c7","id":"unit11","group":"towers","owner":2},"unit12":{"pos":"d7","id":"unit12","group":"towers","owner":2},"unit13":{"pos":"e7","id":"unit13","group":"towers","owner":2},"unit14":{"pos":"f7","id":"unit14","group":"towers","owner":2},"unit15":{"pos":"g7","id":"unit15","group":"towers","owner":2},"unit16":{"pos":"h7","id":"unit16","group":"towers","owner":2}},clones:0};return game.start1(turnseed,stepseed);};game.commands={"move":1,"kill":1,"sacrifice":1,"fire":1};game.graphics={"tiles":{"homerow":"playercolour"},"icons":{"towers":"rooks","walls":"pawns","catapults":"queens"}};game.board={"height":7,"width":8,"terrain":{"homerow":{"1":[["rect","a1","h1"]],"2":[["rect","a7","h7"]]}}};return game;}(),semaphor:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"3":"b3","4":"b2","5":"a2"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"3":"c3","4":"c2","5":"b2","6":"a2","7":"a3"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"3":"d3","4":"d2","5":"c2","6":"b2","7":"b3"},"d1":{"1":"d2","7":"c1","8":"c2"},"d2":{"1":"d3","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"5":"d2","6":"c2","7":"c3"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d2":{"colour":"dark","pos":"d2","x":4,"y":2}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectdeploytarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectdeploytarget:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectdeploytarget'});turn.links[newstepid]={};turn.links[newstepid].deploy='deploy1';return newstep;};game.selectdeploytarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectunit1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};turn.links[newstepid].promote='promote1';return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.deploy1=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectdeploytarget'],id:newunitid,group:'pawns',owner:0};MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'deploy';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'deploy',path:step.path.concat('deploy'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.deploy1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.promote1=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.pawns[MARKS['selectunit']]?'bishops':'kings'});}MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'promote';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'promote',path:step.path.concat('promote')});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.promote1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"line":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in function(){var ret={},s0=BOARD.board,s1=UNITLAYERS.units;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}()){newlinks[linkpos]='selectdeploytarget1';}var newlinks=turn.links.root;for(var linkpos in function(){var k,ret={},s0=UNITLAYERS.pawns,s1=UNITLAYERS.bishops;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}()){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectdeploytarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectdeploytarget:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectdeploytarget'});turn.links[newstepid]={};turn.links[newstepid].deploy='deploy2';return newstep;};game.selectdeploytarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectunit2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};turn.links[newstepid].promote='promote2';return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.deploy2=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectdeploytarget'],id:newunitid,group:'pawns',owner:0};MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'deploy';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'deploy',path:step.path.concat('deploy'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.deploy2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.promote2=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.pawns[MARKS['selectunit']]?'bishops':'kings'});}MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'promote';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'promote',path:step.path.concat('promote')});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.promote2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"line":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in function(){var ret={},s0=BOARD.board,s1=UNITLAYERS.units;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}()){newlinks[linkpos]='selectdeploytarget2';}var newlinks=turn.links.root;for(var linkpos in function(){var k,ret={},s0=UNITLAYERS.pawns,s1=UNITLAYERS.bishops;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}()){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"deploy":1,"promote":1};game.graphics={"icons":{"kings":"kings","pawns":"pawns","bishops":"bishops"}};game.board={"width":4,"height":3};return game;}(),snijpunt:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"3":"b6","4":"b5","5":"a5"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"3":"c6","4":"c5","5":"b5","6":"a5","7":"a6"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"3":"d6","4":"d5","5":"c5","6":"b5","7":"b6"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"3":"e6","4":"e5","5":"d5","6":"c5","7":"c6"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"3":"f6","4":"f5","5":"e5","6":"d5","7":"d6"},"f1":{"1":"f2","7":"e1","8":"e2"},"f2":{"1":"f3","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"5":"f5","6":"e5","7":"e6"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"zone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1},"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"myzone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1}},"oppzone":{"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"corner":{"a6":{"pos":"a6"}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selecttarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{intersection:(0,_assign2.default)({},step.ARTIFACTS.intersection)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttarget:markpos};var STARTPOS=MARKS['selecttarget'];var DIR=5;var POS=STARTPOS;while(POS=connections[POS][5]){if(ARTIFACTS.enemyline[POS]){ARTIFACTS['intersection'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttarget'});turn.links[newstepid]={};turn.links[newstepid].snipe='snipe1';return newstep;};game.selecttarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.snipe1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{winline:(0,_assign2.default)({},step.ARTIFACTS.winline),loseline:(0,_assign2.default)({},step.ARTIFACTS.loseline)});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if((0,_keys2.default)(UNITLAYERS.mysniper||{}).length===0){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selecttarget'],id:newunitid,group:'sniper',owner:player};}else{var unitid=(UNITLAYERS.units[(0,_keys2.default)(UNITLAYERS.mysniper)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selecttarget']});}}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){if(!!UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]){var unitid=(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'owner':(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{})['owner']===2?1:2});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:(0,_keys2.default)(ARTIFACTS.intersection)[0],id:newunitid,group:'soldiers',owner:player};}}MARKS={};UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var walkstarts=UNITLAYERS.soldiers;for(var STARTPOS in walkstarts){var allowedsteps=!!UNITLAYERS.mysoldiers[STARTPOS]?UNITLAYERS.mysoldiers:UNITLAYERS.oppsoldiers;var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;if(WALKLENGTH>2){ARTIFACTS[!!UNITLAYERS.mysoldiers[STARTPOS]?'winline':'loseline'][POS]={};}}}var newstepid=step.stepid+'-'+'snipe';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'snipe',path:step.path.concat('snipe'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.winline||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else if((0,_keys2.default)(ARTIFACTS.loseline||{}).length!==0){var winner=2;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeoppline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.snipe1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){var STARTPOS=(0,_keys2.default)(UNITLAYERS.oppsniper)[0];var DIR=3;var POS=STARTPOS;while(POS=connections[POS][3]){if(!UNITLAYERS.units[POS]){ARTIFACTS['potentialempties'][POS]={};}ARTIFACTS['enemyline'][POS]={};}var walkstarts=ARTIFACTS.potentialempties;for(var STARTPOS in walkstarts){var DIR=1;var walkedsquares=[];var POS=STARTPOS;while(POS=connections[POS][1]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;if(!UNITLAYERS.sniper[walkedsquares[WALKLENGTH-1]]){ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH-1]]={};}}}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in(0,_keys2.default)(ARTIFACTS.mandatory||{}).length===0?function(){var ret={},s0=TERRAIN.myzone,s1=UNITLAYERS.sniper;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}():ARTIFACTS.mandatory){newlinks[linkpos]='selecttarget1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"zone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1},"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"oppzone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1}},"myzone":{"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"corner":{"a6":{"pos":"a6"}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selecttarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{intersection:(0,_assign2.default)({},step.ARTIFACTS.intersection)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttarget:markpos};var STARTPOS=MARKS['selecttarget'];var DIR=3;var POS=STARTPOS;while(POS=connections[POS][3]){if(ARTIFACTS.enemyline[POS]){ARTIFACTS['intersection'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttarget'});turn.links[newstepid]={};turn.links[newstepid].snipe='snipe2';return newstep;};game.selecttarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.snipe2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{winline:(0,_assign2.default)({},step.ARTIFACTS.winline),loseline:(0,_assign2.default)({},step.ARTIFACTS.loseline)});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if((0,_keys2.default)(UNITLAYERS.mysniper||{}).length===0){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selecttarget'],id:newunitid,group:'sniper',owner:player};}else{var unitid=(UNITLAYERS.units[(0,_keys2.default)(UNITLAYERS.mysniper)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selecttarget']});}}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){if(!!UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]){var unitid=(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'owner':(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{})['owner']===2?1:2});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:(0,_keys2.default)(ARTIFACTS.intersection)[0],id:newunitid,group:'soldiers',owner:player};}}MARKS={};UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var walkstarts=UNITLAYERS.soldiers;for(var STARTPOS in walkstarts){var allowedsteps=!!UNITLAYERS.mysoldiers[STARTPOS]?UNITLAYERS.mysoldiers:UNITLAYERS.oppsoldiers;var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;if(WALKLENGTH>2){ARTIFACTS[!!UNITLAYERS.mysoldiers[STARTPOS]?'winline':'loseline'][POS]={};}}}var newstepid=step.stepid+'-'+'snipe';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'snipe',path:step.path.concat('snipe'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.winline||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else if((0,_keys2.default)(ARTIFACTS.loseline||{}).length!==0){var winner=1;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeoppline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.snipe2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){var STARTPOS=(0,_keys2.default)(UNITLAYERS.oppsniper)[0];var DIR=5;var POS=STARTPOS;while(POS=connections[POS][5]){if(!UNITLAYERS.units[POS]){ARTIFACTS['potentialempties'][POS]={};}ARTIFACTS['enemyline'][POS]={};}var walkstarts=ARTIFACTS.potentialempties;for(var STARTPOS in walkstarts){var DIR=7;var walkedsquares=[];var POS=STARTPOS;while(POS=connections[POS][7]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;if(!UNITLAYERS.sniper[walkedsquares[WALKLENGTH-1]]){ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH-1]]={};}}}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in(0,_keys2.default)(ARTIFACTS.mandatory||{}).length===0?function(){var ret={},s0=TERRAIN.myzone,s1=UNITLAYERS.sniper;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}():ARTIFACTS.mandatory){newlinks[linkpos]='selecttarget2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"snipe":1};game.graphics={"icons":{"soldiers":"pawns","sniper":"kings"},"tiles":{"zone":"grass","corner":"castle"}};game.board={"height":6,"width":6,"terrain":{"zone":{"1":[["rect","b6","f6",5]],"2":[["rect","a1","a5",3]]},"corner":["a6"]}};return game;}()};
-
-/***/ },
 /* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(213), __esModule: true };
+	"use strict";var _keys=__webpack_require__(213);var _keys2=_interopRequireDefault(_keys);var _assign=__webpack_require__(225);var _assign2=_interopRequireDefault(_assign);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}module.exports={amazon:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a10":{"3":"b10","4":"b9","5":"a9"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"1":"a9","2":"b9","3":"b8","4":"b7","5":"a7"},"a9":{"1":"a10","2":"b10","3":"b9","4":"b8","5":"a8"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b10":{"3":"c10","4":"c9","5":"b9","6":"a9","7":"a10"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"1":"b9","2":"c9","3":"c8","4":"c7","5":"b7","6":"a7","7":"a8","8":"a9"},"b9":{"1":"b10","2":"c10","3":"c9","4":"c8","5":"b8","6":"a8","7":"a9","8":"a10"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c10":{"3":"d10","4":"d9","5":"c9","6":"b9","7":"b10"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"1":"c9","2":"d9","3":"d8","4":"d7","5":"c7","6":"b7","7":"b8","8":"b9"},"c9":{"1":"c10","2":"d10","3":"d9","4":"d8","5":"c8","6":"b8","7":"b9","8":"b10"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d10":{"3":"e10","4":"e9","5":"d9","6":"c9","7":"c10"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"1":"d9","2":"e9","3":"e8","4":"e7","5":"d7","6":"c7","7":"c8","8":"c9"},"d9":{"1":"d10","2":"e10","3":"e9","4":"e8","5":"d8","6":"c8","7":"c9","8":"c10"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e10":{"3":"f10","4":"f9","5":"e9","6":"d9","7":"d10"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"1":"e9","2":"f9","3":"f8","4":"f7","5":"e7","6":"d7","7":"d8","8":"d9"},"e9":{"1":"e10","2":"f10","3":"f9","4":"f8","5":"e8","6":"d8","7":"d9","8":"d10"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f10":{"3":"g10","4":"g9","5":"f9","6":"e9","7":"e10"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"1":"f9","2":"g9","3":"g8","4":"g7","5":"f7","6":"e7","7":"e8","8":"e9"},"f9":{"1":"f10","2":"g10","3":"g9","4":"g8","5":"f8","6":"e8","7":"e9","8":"e10"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g10":{"3":"h10","4":"h9","5":"g9","6":"f9","7":"f10"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"1":"g9","2":"h9","3":"h8","4":"h7","5":"g7","6":"f7","7":"f8","8":"f9"},"g9":{"1":"g10","2":"h10","3":"h9","4":"h8","5":"g8","6":"f8","7":"f9","8":"f10"},"h1":{"1":"h2","2":"i2","3":"i1","7":"g1","8":"g2"},"h10":{"3":"i10","4":"i9","5":"h9","6":"g9","7":"g10"},"h2":{"1":"h3","2":"i3","3":"i2","4":"i1","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","2":"i4","3":"i3","4":"i2","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","2":"i5","3":"i4","4":"i3","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","2":"i6","3":"i5","4":"i4","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","2":"i7","3":"i6","4":"i5","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","2":"i8","3":"i7","4":"i6","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"1":"h9","2":"i9","3":"i8","4":"i7","5":"h7","6":"g7","7":"g8","8":"g9"},"h9":{"1":"h10","2":"i10","3":"i9","4":"i8","5":"h8","6":"g8","7":"g9","8":"g10"},"i1":{"1":"i2","2":"j2","3":"j1","7":"h1","8":"h2"},"i10":{"3":"j10","4":"j9","5":"i9","6":"h9","7":"h10"},"i2":{"1":"i3","2":"j3","3":"j2","4":"j1","5":"i1","6":"h1","7":"h2","8":"h3"},"i3":{"1":"i4","2":"j4","3":"j3","4":"j2","5":"i2","6":"h2","7":"h3","8":"h4"},"i4":{"1":"i5","2":"j5","3":"j4","4":"j3","5":"i3","6":"h3","7":"h4","8":"h5"},"i5":{"1":"i6","2":"j6","3":"j5","4":"j4","5":"i4","6":"h4","7":"h5","8":"h6"},"i6":{"1":"i7","2":"j7","3":"j6","4":"j5","5":"i5","6":"h5","7":"h6","8":"h7"},"i7":{"1":"i8","2":"j8","3":"j7","4":"j6","5":"i6","6":"h6","7":"h7","8":"h8"},"i8":{"1":"i9","2":"j9","3":"j8","4":"j7","5":"i7","6":"h7","7":"h8","8":"h9"},"i9":{"1":"i10","2":"j10","3":"j9","4":"j8","5":"i8","6":"h8","7":"h9","8":"h10"},"j1":{"1":"j2","7":"i1","8":"i2"},"j10":{"5":"j9","6":"i9","7":"i10"},"j2":{"1":"j3","5":"j1","6":"i1","7":"i2","8":"i3"},"j3":{"1":"j4","5":"j2","6":"i2","7":"i3","8":"i4"},"j4":{"1":"j5","5":"j3","6":"i3","7":"i4","8":"i5"},"j5":{"1":"j6","5":"j4","6":"i4","7":"i5","8":"i6"},"j6":{"1":"j7","5":"j5","6":"i5","7":"i6","8":"i7"},"j7":{"1":"j8","5":"j6","6":"i6","7":"i7","8":"i8"},"j8":{"1":"j9","5":"j7","6":"i7","7":"i8","8":"i9"},"j9":{"1":"j10","5":"j8","6":"i8","7":"i9","8":"i10"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j8":{"colour":"dark","pos":"j8","x":10,"y":8},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"light":{"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j8":{"colour":"dark","pos":"j8","x":10,"y":8}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS['targets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.targets){newlinks[linkpos]='selectmovetarget1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select where to move the amazon';};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmovetarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Choose Move to go here!';};game.selectfiretarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectfiretarget:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectfiretarget'});turn.links[newstepid]={};turn.links[newstepid].fire='fire1';return newstep;};game.selectfiretarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Choose Fire to shoot here!';};game.move1=function(turn,step){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}TURNVARS['movedto']=MARKS['selectmovetarget'];MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var BLOCKS=UNITLAYERS.units;var STARTPOS=TURNVARS['movedto'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS['targets'][POS]={};}}var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),TURNVARS:TURNVARS});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.targets){newlinks[linkpos]='selectfiretarget1';}return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Now select where to fire at';};game.fire1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfiretarget'],id:newunitid,group:'fires',owner:0,from:TURNVARS['movedto']};MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'fire',path:step.path.concat('fire'),clones:clones,TURNVARS:TURNVARS});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.fire1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"targets":{}};var UNITDATA=step.UNITDATA;var TURNVARS={};var UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[],TURNVARS:TURNVARS};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select an amazon to move and fire with';};game.brain_Steve_1=function(step){var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;ARTIFACTS.myroads={};ARTIFACTS.opproads={};ARTIFACTS.myreach={};ARTIFACTS.oppreach={};for(var STARTPOS in UNITLAYERS.queens){var neighbourdirs=[1,2,3,4,5,6,7,8];var foundneighbours=[];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){foundneighbours.push(POS);}}var NEIGHBOURCOUNT=foundneighbours.length;ARTIFACTS[!!UNITLAYERS.myunits[STARTPOS]?'myroads':'opproads'][STARTPOS]={count:NEIGHBOURCOUNT};}var BLOCKS=UNITLAYERS.units;var walkstarts=UNITLAYERS.queens;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS[!!UNITLAYERS.myunits[STARTPOS]?'myreach':'oppreach'][POS]={};}}}return reduce(ARTIFACTS.myroads,function(mem,obj){return mem+obj['count'];},0)+(0,_keys2.default)(ARTIFACTS.myreach).length-reduce(ARTIFACTS.opproads,function(mem,obj){return mem+obj['count'];},0)-(0,_keys2.default)(ARTIFACTS.oppreach).length;};game.brain_Steve_1_detailed=function(step){var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;ARTIFACTS.myroads={};ARTIFACTS.opproads={};ARTIFACTS.myreach={};ARTIFACTS.oppreach={};for(var STARTPOS in UNITLAYERS.queens){var neighbourdirs=[1,2,3,4,5,6,7,8];var foundneighbours=[];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){foundneighbours.push(POS);}}var NEIGHBOURCOUNT=foundneighbours.length;ARTIFACTS[!!UNITLAYERS.myunits[STARTPOS]?'myroads':'opproads'][STARTPOS]={count:NEIGHBOURCOUNT};}var BLOCKS=UNITLAYERS.units;var walkstarts=UNITLAYERS.queens;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS[!!UNITLAYERS.myunits[STARTPOS]?'myreach':'oppreach'][POS]={};}}}return{myroads:reduce(ARTIFACTS.myroads,function(mem,obj){return mem+obj['count'];},0),mydomain:(0,_keys2.default)(ARTIFACTS.myreach).length,opproads:-reduce(ARTIFACTS.opproads,function(mem,obj){return mem+obj['count'];},0),oppdomain:-(0,_keys2.default)(ARTIFACTS.oppreach).length};};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS['targets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.targets){newlinks[linkpos]='selectmovetarget2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select where to move the amazon';};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmovetarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Choose Move to go here!';};game.selectfiretarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectfiretarget:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectfiretarget'});turn.links[newstepid]={};turn.links[newstepid].fire='fire2';return newstep;};game.selectfiretarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Choose Fire to shoot here!';};game.move2=function(turn,step){var ARTIFACTS={targets:(0,_assign2.default)({},step.ARTIFACTS.targets)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}TURNVARS['movedto']=MARKS['selectmovetarget'];MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var BLOCKS=UNITLAYERS.units;var STARTPOS=TURNVARS['movedto'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS['targets'][POS]={};}}var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),TURNVARS:TURNVARS});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.targets){newlinks[linkpos]='selectfiretarget2';}return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Now select where to fire at';};game.fire2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var TURNVARS=(0,_assign2.default)({},step.TURNVARS);var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfiretarget'],id:newunitid,group:'fires',owner:0,from:TURNVARS['movedto']};MARKS={};UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"targets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'fire',path:step.path.concat('fire'),clones:clones,TURNVARS:TURNVARS});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.fire2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"targets":{}};var UNITDATA=step.UNITDATA;var TURNVARS={};var UNITLAYERS={"queens":{},"myqueens":{},"oppqueens":{},"neutralqueens":{},"fires":{},"myfires":{},"oppfires":{},"neutralfires":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[],TURNVARS:TURNVARS};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select an amazon to move and fire with';};game.brain_Steve_2=function(step){var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;ARTIFACTS.myroads={};ARTIFACTS.opproads={};ARTIFACTS.myreach={};ARTIFACTS.oppreach={};for(var STARTPOS in UNITLAYERS.queens){var neighbourdirs=[1,2,3,4,5,6,7,8];var foundneighbours=[];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){foundneighbours.push(POS);}}var NEIGHBOURCOUNT=foundneighbours.length;ARTIFACTS[!!UNITLAYERS.myunits[STARTPOS]?'myroads':'opproads'][STARTPOS]={count:NEIGHBOURCOUNT};}var BLOCKS=UNITLAYERS.units;var walkstarts=UNITLAYERS.queens;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS[!!UNITLAYERS.myunits[STARTPOS]?'myreach':'oppreach'][POS]={};}}}return reduce(ARTIFACTS.myroads,function(mem,obj){return mem+obj['count'];},0)+(0,_keys2.default)(ARTIFACTS.myreach).length-reduce(ARTIFACTS.opproads,function(mem,obj){return mem+obj['count'];},0)-(0,_keys2.default)(ARTIFACTS.oppreach).length;};game.brain_Steve_2_detailed=function(step){var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;ARTIFACTS.myroads={};ARTIFACTS.opproads={};ARTIFACTS.myreach={};ARTIFACTS.oppreach={};for(var STARTPOS in UNITLAYERS.queens){var neighbourdirs=[1,2,3,4,5,6,7,8];var foundneighbours=[];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){foundneighbours.push(POS);}}var NEIGHBOURCOUNT=foundneighbours.length;ARTIFACTS[!!UNITLAYERS.myunits[STARTPOS]?'myroads':'opproads'][STARTPOS]={count:NEIGHBOURCOUNT};}var BLOCKS=UNITLAYERS.units;var walkstarts=UNITLAYERS.queens;for(var STARTPOS in walkstarts){var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&!BLOCKS[POS]){ARTIFACTS[!!UNITLAYERS.myunits[STARTPOS]?'myreach':'oppreach'][POS]={};}}}return{myroads:reduce(ARTIFACTS.myroads,function(mem,obj){return mem+obj['count'];},0),mydomain:(0,_keys2.default)(ARTIFACTS.myreach).length,opproads:-reduce(ARTIFACTS.opproads,function(mem,obj){return mem+obj['count'];},0),oppdomain:-(0,_keys2.default)(ARTIFACTS.oppreach).length};};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"d10","id":"unit1","group":"queens","owner":1},"unit2":{"pos":"g10","id":"unit2","group":"queens","owner":1},"unit3":{"pos":"a7","id":"unit3","group":"queens","owner":1},"unit4":{"pos":"j7","id":"unit4","group":"queens","owner":1},"unit5":{"pos":"a4","id":"unit5","group":"queens","owner":2},"unit6":{"pos":"d1","id":"unit6","group":"queens","owner":2},"unit7":{"pos":"g1","id":"unit7","group":"queens","owner":2},"unit8":{"pos":"j4","id":"unit8","group":"queens","owner":2}},TURNVARS:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"move":1,"fire":1};game.graphics={"icons":{"queens":"queens","fires":"pawns"}};game.board={"height":10,"width":10};game.AI=["Steve"];return game;}(),daggers:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"3":"b8","4":"b7","5":"a7"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"3":"c8","4":"c7","5":"b7","6":"a7","7":"a8"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"3":"d8","4":"d7","5":"c7","6":"b7","7":"b8"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"3":"e8","4":"e7","5":"d7","6":"c7","7":"c8"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"3":"f8","4":"f7","5":"e7","6":"d7","7":"d8"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"3":"g8","4":"g7","5":"f7","6":"e7","7":"e8"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"3":"h8","4":"h7","5":"g7","6":"f7","7":"f8"},"h1":{"1":"h2","7":"g1","8":"g2"},"h2":{"1":"h3","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"5":"h7","6":"g7","7":"g8"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"bases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1},"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}},"mybases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1}},"oppbases":{"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={killtarget:(0,_assign2.default)({},step.ARTIFACTS.killtarget),movetarget:(0,_assign2.default)({},step.ARTIFACTS.movetarget)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};if(!!UNITLAYERS.mycrowns[MARKS['selectunit']]){var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){if(!UNITLAYERS.myunits[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'killtarget':'movetarget'][POS]={};}}}}else{var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[8,1,2,4,5,6];for(var walkerdirnbr=0;walkerdirnbr<6;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var MAX=[8,1,2].indexOf(DIR)!==-1?1:8;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){LENGTH++;ARTIFACTS['movetarget'][POS]={};}if(BLOCKS[POS]){if(!UNITLAYERS.myunits[POS]&&!([1,5].indexOf(DIR)!==-1&&!!UNITLAYERS.oppdaggers[POS])){ARTIFACTS['movetarget'][POS]={};}}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetarget){newlinks[linkpos]='selectmovetarget1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmovetarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"killtarget":{},"movetarget":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mycrowns,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else if((0,_keys2.default)(UNITLAYERS.oppcrowns).length===1){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='kingkill';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"killtarget":{},"movetarget":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"bases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1},"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}},"oppbases":{"a8":{"pos":"a8","owner":1},"b8":{"pos":"b8","owner":1},"c8":{"pos":"c8","owner":1},"d8":{"pos":"d8","owner":1},"e8":{"pos":"e8","owner":1},"f8":{"pos":"f8","owner":1},"g8":{"pos":"g8","owner":1},"h8":{"pos":"h8","owner":1}},"mybases":{"a1":{"pos":"a1","owner":2},"b1":{"pos":"b1","owner":2},"c1":{"pos":"c1","owner":2},"d1":{"pos":"d1","owner":2},"e1":{"pos":"e1","owner":2},"f1":{"pos":"f1","owner":2},"g1":{"pos":"g1","owner":2},"h1":{"pos":"h1","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={killtarget:(0,_assign2.default)({},step.ARTIFACTS.killtarget),movetarget:(0,_assign2.default)({},step.ARTIFACTS.movetarget)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};if(!!UNITLAYERS.mycrowns[MARKS['selectunit']]){var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){if(!UNITLAYERS.myunits[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'killtarget':'movetarget'][POS]={};}}}}else{var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=[8,1,2,4,5,6];for(var walkerdirnbr=0;walkerdirnbr<6;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var MAX=[8,1,2].indexOf(DIR)!==-1?1:8;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){LENGTH++;ARTIFACTS['movetarget'][POS]={};}if(BLOCKS[POS]){if(!UNITLAYERS.myunits[POS]&&!([1,5].indexOf(DIR)!==-1&&!!UNITLAYERS.oppdaggers[POS])){ARTIFACTS['movetarget'][POS]={};}}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetarget){newlinks[linkpos]='selectmovetarget2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmovetarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"killtarget":{},"movetarget":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mycrowns,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else if((0,_keys2.default)(UNITLAYERS.oppcrowns).length===1){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='kingkill';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"killtarget":{},"movetarget":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"crowns":{},"mycrowns":{},"oppcrowns":{},"neutralcrowns":{},"daggers":{},"mydaggers":{},"oppdaggers":{},"neutraldaggers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"d8","id":"unit1","group":"crowns","owner":1},"unit2":{"pos":"e8","id":"unit2","group":"crowns","owner":1},"unit3":{"pos":"c1","id":"unit3","group":"crowns","owner":2},"unit4":{"pos":"f1","id":"unit4","group":"crowns","owner":2},"unit5":{"pos":"c7","id":"unit5","group":"daggers","owner":1},"unit6":{"pos":"d7","id":"unit6","group":"daggers","owner":1},"unit7":{"pos":"e7","id":"unit7","group":"daggers","owner":1},"unit8":{"pos":"f7","id":"unit8","group":"daggers","owner":1},"unit9":{"pos":"c3","id":"unit9","group":"daggers","owner":2},"unit10":{"pos":"f3","id":"unit10","group":"daggers","owner":2},"unit11":{"pos":"b2","id":"unit11","group":"daggers","owner":2},"unit12":{"pos":"c2","id":"unit12","group":"daggers","owner":2},"unit13":{"pos":"d2","id":"unit13","group":"daggers","owner":2},"unit14":{"pos":"e2","id":"unit14","group":"daggers","owner":2},"unit15":{"pos":"f2","id":"unit15","group":"daggers","owner":2},"unit16":{"pos":"g2","id":"unit16","group":"daggers","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"bases":"playercolour"},"icons":{"daggers":"bishops","crowns":"kings"}};game.board={"height":8,"width":8,"terrain":{"bases":{"1":[["rect","a8","h8"]],"2":[["rect","a1","h1"]]}}};game.AI=[];return game;}(),jostle:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a10":{"3":"b10","4":"b9","5":"a9"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"1":"a8","2":"b8","3":"b7","4":"b6","5":"a6"},"a8":{"1":"a9","2":"b9","3":"b8","4":"b7","5":"a7"},"a9":{"1":"a10","2":"b10","3":"b9","4":"b8","5":"a8"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b10":{"3":"c10","4":"c9","5":"b9","6":"a9","7":"a10"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"1":"b8","2":"c8","3":"c7","4":"c6","5":"b6","6":"a6","7":"a7","8":"a8"},"b8":{"1":"b9","2":"c9","3":"c8","4":"c7","5":"b7","6":"a7","7":"a8","8":"a9"},"b9":{"1":"b10","2":"c10","3":"c9","4":"c8","5":"b8","6":"a8","7":"a9","8":"a10"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c10":{"3":"d10","4":"d9","5":"c9","6":"b9","7":"b10"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"1":"c8","2":"d8","3":"d7","4":"d6","5":"c6","6":"b6","7":"b7","8":"b8"},"c8":{"1":"c9","2":"d9","3":"d8","4":"d7","5":"c7","6":"b7","7":"b8","8":"b9"},"c9":{"1":"c10","2":"d10","3":"d9","4":"d8","5":"c8","6":"b8","7":"b9","8":"b10"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d10":{"3":"e10","4":"e9","5":"d9","6":"c9","7":"c10"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"1":"d8","2":"e8","3":"e7","4":"e6","5":"d6","6":"c6","7":"c7","8":"c8"},"d8":{"1":"d9","2":"e9","3":"e8","4":"e7","5":"d7","6":"c7","7":"c8","8":"c9"},"d9":{"1":"d10","2":"e10","3":"e9","4":"e8","5":"d8","6":"c8","7":"c9","8":"c10"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e10":{"3":"f10","4":"f9","5":"e9","6":"d9","7":"d10"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"1":"e8","2":"f8","3":"f7","4":"f6","5":"e6","6":"d6","7":"d7","8":"d8"},"e8":{"1":"e9","2":"f9","3":"f8","4":"f7","5":"e7","6":"d7","7":"d8","8":"d9"},"e9":{"1":"e10","2":"f10","3":"f9","4":"f8","5":"e8","6":"d8","7":"d9","8":"d10"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f10":{"3":"g10","4":"g9","5":"f9","6":"e9","7":"e10"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"1":"f8","2":"g8","3":"g7","4":"g6","5":"f6","6":"e6","7":"e7","8":"e8"},"f8":{"1":"f9","2":"g9","3":"g8","4":"g7","5":"f7","6":"e7","7":"e8","8":"e9"},"f9":{"1":"f10","2":"g10","3":"g9","4":"g8","5":"f8","6":"e8","7":"e9","8":"e10"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g10":{"3":"h10","4":"h9","5":"g9","6":"f9","7":"f10"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"1":"g8","2":"h8","3":"h7","4":"h6","5":"g6","6":"f6","7":"f7","8":"f8"},"g8":{"1":"g9","2":"h9","3":"h8","4":"h7","5":"g7","6":"f7","7":"f8","8":"f9"},"g9":{"1":"g10","2":"h10","3":"h9","4":"h8","5":"g8","6":"f8","7":"f9","8":"f10"},"h1":{"1":"h2","2":"i2","3":"i1","7":"g1","8":"g2"},"h10":{"3":"i10","4":"i9","5":"h9","6":"g9","7":"g10"},"h2":{"1":"h3","2":"i3","3":"i2","4":"i1","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","2":"i4","3":"i3","4":"i2","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","2":"i5","3":"i4","4":"i3","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","2":"i6","3":"i5","4":"i4","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","2":"i7","3":"i6","4":"i5","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"1":"h8","2":"i8","3":"i7","4":"i6","5":"h6","6":"g6","7":"g7","8":"g8"},"h8":{"1":"h9","2":"i9","3":"i8","4":"i7","5":"h7","6":"g7","7":"g8","8":"g9"},"h9":{"1":"h10","2":"i10","3":"i9","4":"i8","5":"h8","6":"g8","7":"g9","8":"g10"},"i1":{"1":"i2","2":"j2","3":"j1","7":"h1","8":"h2"},"i10":{"3":"j10","4":"j9","5":"i9","6":"h9","7":"h10"},"i2":{"1":"i3","2":"j3","3":"j2","4":"j1","5":"i1","6":"h1","7":"h2","8":"h3"},"i3":{"1":"i4","2":"j4","3":"j3","4":"j2","5":"i2","6":"h2","7":"h3","8":"h4"},"i4":{"1":"i5","2":"j5","3":"j4","4":"j3","5":"i3","6":"h3","7":"h4","8":"h5"},"i5":{"1":"i6","2":"j6","3":"j5","4":"j4","5":"i4","6":"h4","7":"h5","8":"h6"},"i6":{"1":"i7","2":"j7","3":"j6","4":"j5","5":"i5","6":"h5","7":"h6","8":"h7"},"i7":{"1":"i8","2":"j8","3":"j7","4":"j6","5":"i6","6":"h6","7":"h7","8":"h8"},"i8":{"1":"i9","2":"j9","3":"j8","4":"j7","5":"i7","6":"h7","7":"h8","8":"h9"},"i9":{"1":"i10","2":"j10","3":"j9","4":"j8","5":"i8","6":"h8","7":"h9","8":"h10"},"j1":{"1":"j2","7":"i1","8":"i2"},"j10":{"5":"j9","6":"i9","7":"i10"},"j2":{"1":"j3","5":"j1","6":"i1","7":"i2","8":"i3"},"j3":{"1":"j4","5":"j2","6":"i2","7":"i3","8":"i4"},"j4":{"1":"j5","5":"j3","6":"i3","7":"i4","8":"i5"},"j5":{"1":"j6","5":"j4","6":"i4","7":"i5","8":"i6"},"j6":{"1":"j7","5":"j5","6":"i5","7":"i6","8":"i7"},"j7":{"1":"j8","5":"j6","6":"i6","7":"i7","8":"i8"},"j8":{"1":"j9","5":"j7","6":"i7","7":"i8","8":"i9"},"j9":{"1":"j10","5":"j8","6":"i8","7":"i9","8":"i10"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j8":{"colour":"dark","pos":"j8","x":10,"y":8},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"light":{"a10":{"colour":"light","pos":"a10","x":1,"y":10},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a8":{"colour":"light","pos":"a8","x":1,"y":8},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"b9":{"colour":"light","pos":"b9","x":2,"y":9},"c10":{"colour":"light","pos":"c10","x":3,"y":10},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c8":{"colour":"light","pos":"c8","x":3,"y":8},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"d9":{"colour":"light","pos":"d9","x":4,"y":9},"e10":{"colour":"light","pos":"e10","x":5,"y":10},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e8":{"colour":"light","pos":"e8","x":5,"y":8},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"f9":{"colour":"light","pos":"f9","x":6,"y":9},"g10":{"colour":"light","pos":"g10","x":7,"y":10},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g8":{"colour":"light","pos":"g8","x":7,"y":8},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7},"h9":{"colour":"light","pos":"h9","x":8,"y":9},"i10":{"colour":"light","pos":"i10","x":9,"y":10},"i2":{"colour":"light","pos":"i2","x":9,"y":2},"i4":{"colour":"light","pos":"i4","x":9,"y":4},"i6":{"colour":"light","pos":"i6","x":9,"y":6},"i8":{"colour":"light","pos":"i8","x":9,"y":8},"j1":{"colour":"light","pos":"j1","x":10,"y":1},"j3":{"colour":"light","pos":"j3","x":10,"y":3},"j5":{"colour":"light","pos":"j5","x":10,"y":5},"j7":{"colour":"light","pos":"j7","x":10,"y":7},"j9":{"colour":"light","pos":"j9","x":10,"y":9}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"a9":{"colour":"dark","pos":"a9","x":1,"y":9},"b10":{"colour":"dark","pos":"b10","x":2,"y":10},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b8":{"colour":"dark","pos":"b8","x":2,"y":8},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"c9":{"colour":"dark","pos":"c9","x":3,"y":9},"d10":{"colour":"dark","pos":"d10","x":4,"y":10},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d8":{"colour":"dark","pos":"d8","x":4,"y":8},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"e9":{"colour":"dark","pos":"e9","x":5,"y":9},"f10":{"colour":"dark","pos":"f10","x":6,"y":10},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f8":{"colour":"dark","pos":"f8","x":6,"y":8},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"g9":{"colour":"dark","pos":"g9","x":7,"y":9},"h10":{"colour":"dark","pos":"h10","x":8,"y":10},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h8":{"colour":"dark","pos":"h8","x":8,"y":8},"i1":{"colour":"dark","pos":"i1","x":9,"y":1},"i3":{"colour":"dark","pos":"i3","x":9,"y":3},"i5":{"colour":"dark","pos":"i5","x":9,"y":5},"i7":{"colour":"dark","pos":"i7","x":9,"y":7},"i9":{"colour":"dark","pos":"i9","x":9,"y":9},"j10":{"colour":"dark","pos":"j10","x":10,"y":10},"j2":{"colour":"dark","pos":"j2","x":10,"y":2},"j4":{"colour":"dark","pos":"j4","x":10,"y":4},"j6":{"colour":"dark","pos":"j6","x":10,"y":6},"j8":{"colour":"dark","pos":"j8","x":10,"y":8}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),initialenemy:(0,_assign2.default)({},step.ARTIFACTS.initialenemy),initialfriend:(0,_assign2.default)({},step.ARTIFACTS.initialfriend)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,3,5,7];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<4;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){ARTIFACTS[!UNITLAYERS.units[POS]?'movetargets':!!UNITLAYERS.oppunits[POS]?'initialenemy':'initialfriend'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmovetarget1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'The current position is worth '+''+((0,_keys2.default)(ARTIFACTS.initialfriend).length-(0,_keys2.default)(ARTIFACTS.initialenemy).length);};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{newenemy:(0,_assign2.default)({},step.ARTIFACTS.newenemy),newfriend:(0,_assign2.default)({},step.ARTIFACTS.newfriend)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var STARTPOS=MARKS['selectmovetarget'];var neighbourdirs=[1,3,5,7];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<4;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&UNITLAYERS.units[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'newenemy':'newfriend'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.newfriend).length-(1+(0,_keys2.default)(ARTIFACTS.newenemy).length)>(0,_keys2.default)(ARTIFACTS.initialfriend).length-(0,_keys2.default)(ARTIFACTS.initialenemy).length){turn.links[newstepid].jostle='jostle1';}return newstep;};game.selectmovetarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'That position would be worth '+''+((0,_keys2.default)(ARTIFACTS.newfriend).length-(1+(0,_keys2.default)(ARTIFACTS.newenemy).length));};game.jostle1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"checkers":{},"mycheckers":{},"oppcheckers":{},"neutralcheckers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"initialenemy":{},"initialfriend":{},"newenemy":{},"newfriend":{}};var newstepid=step.stepid+'-'+'jostle';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'jostle',path:step.path.concat('jostle')});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.jostle1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{},"initialenemy":{},"initialfriend":{},"newenemy":{},"newfriend":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"checkers":{},"mycheckers":{},"oppcheckers":{},"neutralcheckers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mycheckers){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select which unit to jostle!';};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),initialenemy:(0,_assign2.default)({},step.ARTIFACTS.initialenemy),initialfriend:(0,_assign2.default)({},step.ARTIFACTS.initialfriend)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var STARTPOS=MARKS['selectunit'];var neighbourdirs=[1,3,5,7];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<4;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS){ARTIFACTS[!UNITLAYERS.units[POS]?'movetargets':!!UNITLAYERS.oppunits[POS]?'initialenemy':'initialfriend'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmovetarget2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'The current position is worth '+''+((0,_keys2.default)(ARTIFACTS.initialfriend).length-(0,_keys2.default)(ARTIFACTS.initialenemy).length);};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{newenemy:(0,_assign2.default)({},step.ARTIFACTS.newenemy),newfriend:(0,_assign2.default)({},step.ARTIFACTS.newfriend)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var STARTPOS=MARKS['selectmovetarget'];var neighbourdirs=[1,3,5,7];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<4;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&UNITLAYERS.units[POS]){ARTIFACTS[!!UNITLAYERS.oppunits[POS]?'newenemy':'newfriend'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.newfriend).length-(1+(0,_keys2.default)(ARTIFACTS.newenemy).length)>(0,_keys2.default)(ARTIFACTS.initialfriend).length-(0,_keys2.default)(ARTIFACTS.initialenemy).length){turn.links[newstepid].jostle='jostle2';}return newstep;};game.selectmovetarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'That position would be worth '+''+((0,_keys2.default)(ARTIFACTS.newfriend).length-(1+(0,_keys2.default)(ARTIFACTS.newenemy).length));};game.jostle2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});}MARKS={};UNITLAYERS={"checkers":{},"mycheckers":{},"oppcheckers":{},"neutralcheckers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"initialenemy":{},"initialfriend":{},"newenemy":{},"newfriend":{}};var newstepid=step.stepid+'-'+'jostle';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'jostle',path:step.path.concat('jostle')});turn.links[newstepid]={};turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.jostle2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{},"initialenemy":{},"initialfriend":{},"newenemy":{},"newfriend":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"checkers":{},"mycheckers":{},"oppcheckers":{},"neutralcheckers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mycheckers){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'Select which unit to jostle!';};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"c4","id":"unit1","group":"checkers","owner":1},"unit2":{"pos":"c6","id":"unit2","group":"checkers","owner":1},"unit3":{"pos":"c8","id":"unit3","group":"checkers","owner":1},"unit4":{"pos":"d3","id":"unit4","group":"checkers","owner":1},"unit5":{"pos":"d5","id":"unit5","group":"checkers","owner":1},"unit6":{"pos":"d7","id":"unit6","group":"checkers","owner":1},"unit7":{"pos":"e4","id":"unit7","group":"checkers","owner":1},"unit8":{"pos":"e8","id":"unit8","group":"checkers","owner":1},"unit9":{"pos":"f3","id":"unit9","group":"checkers","owner":1},"unit10":{"pos":"f7","id":"unit10","group":"checkers","owner":1},"unit11":{"pos":"g4","id":"unit11","group":"checkers","owner":1},"unit12":{"pos":"g6","id":"unit12","group":"checkers","owner":1},"unit13":{"pos":"g8","id":"unit13","group":"checkers","owner":1},"unit14":{"pos":"h3","id":"unit14","group":"checkers","owner":1},"unit15":{"pos":"h5","id":"unit15","group":"checkers","owner":1},"unit16":{"pos":"h7","id":"unit16","group":"checkers","owner":1},"unit17":{"pos":"c3","id":"unit17","group":"checkers","owner":2},"unit18":{"pos":"c5","id":"unit18","group":"checkers","owner":2},"unit19":{"pos":"c7","id":"unit19","group":"checkers","owner":2},"unit20":{"pos":"d4","id":"unit20","group":"checkers","owner":2},"unit21":{"pos":"d6","id":"unit21","group":"checkers","owner":2},"unit22":{"pos":"d8","id":"unit22","group":"checkers","owner":2},"unit23":{"pos":"e3","id":"unit23","group":"checkers","owner":2},"unit24":{"pos":"e7","id":"unit24","group":"checkers","owner":2},"unit25":{"pos":"f4","id":"unit25","group":"checkers","owner":2},"unit26":{"pos":"f8","id":"unit26","group":"checkers","owner":2},"unit27":{"pos":"g3","id":"unit27","group":"checkers","owner":2},"unit28":{"pos":"g5","id":"unit28","group":"checkers","owner":2},"unit29":{"pos":"g7","id":"unit29","group":"checkers","owner":2},"unit30":{"pos":"h4","id":"unit30","group":"checkers","owner":2},"unit31":{"pos":"h6","id":"unit31","group":"checkers","owner":2},"unit32":{"pos":"h8","id":"unit32","group":"checkers","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"jostle":1};game.graphics={"icons":{"checkers":"pawns"}};game.board={"height":10,"width":10};game.AI=[];return game;}(),kickrun:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"3":"b5","4":"b4","5":"a4"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"3":"c5","4":"c4","5":"b4","6":"a4","7":"a5"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"3":"d5","4":"d4","5":"c4","6":"b4","7":"b5"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"3":"e5","4":"e4","5":"d4","6":"c4","7":"c5"},"e1":{"1":"e2","7":"d1","8":"d2"},"e2":{"1":"e3","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"5":"e4","6":"d4","7":"d5"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"corners":{"a1":{"pos":"a1","owner":1},"e5":{"pos":"e5","owner":2}},"mycorners":{"a1":{"pos":"a1","owner":1}},"oppcorners":{"e5":{"pos":"e5","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=!!UNITLAYERS.myrunners[MARKS['selectunit']]?[1,2,3]:[8,1,3,4];var nbrofwalkerdirs=allwalkerdirs.length;for(var walkerdirnbr=0;walkerdirnbr<nbrofwalkerdirs;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var MAX=!!UNITLAYERS.myrunners[MARKS['selectunit']]?4:1;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){LENGTH++;if(DIR!==8&&DIR!==4){ARTIFACTS['movetargets'][POS]={};}}if(BLOCKS[POS]){if(!!UNITLAYERS.oppunits[POS]&&(DIR===8||DIR===4)){ARTIFACTS['movetargets'][POS]={};}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmovetarget1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmovetarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmovetarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];}MARKS={};UNITLAYERS={"runners":{},"myrunners":{},"opprunners":{},"neutralrunners":{},"sidekickers":{},"mysidekickers":{},"oppsidekickers":{},"neutralsidekickers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myrunners,s1=TERRAIN.oppcorners;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"runners":{},"myrunners":{},"opprunners":{},"neutralrunners":{},"sidekickers":{},"mysidekickers":{},"oppsidekickers":{},"neutralsidekickers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"corners":{"a1":{"pos":"a1","owner":1},"e5":{"pos":"e5","owner":2}},"oppcorners":{"a1":{"pos":"a1","owner":1}},"mycorners":{"e5":{"pos":"e5","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var BLOCKS=UNITLAYERS.units;var STARTPOS=MARKS['selectunit'];var allwalkerdirs=!!UNITLAYERS.myrunners[MARKS['selectunit']]?[5,6,7]:[4,5,7,8];var nbrofwalkerdirs=allwalkerdirs.length;for(var walkerdirnbr=0;walkerdirnbr<nbrofwalkerdirs;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var MAX=!!UNITLAYERS.myrunners[MARKS['selectunit']]?4:1;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){LENGTH++;if(DIR!==8&&DIR!==4){ARTIFACTS['movetargets'][POS]={};}}if(BLOCKS[POS]){if(!!UNITLAYERS.oppunits[POS]&&(DIR===8||DIR===4)){ARTIFACTS['movetargets'][POS]={};}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmovetarget2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmovetarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmovetarget:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmovetarget'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmovetarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmovetarget']});delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]||{}).id];}MARKS={};UNITLAYERS={"runners":{},"myrunners":{},"opprunners":{},"neutralrunners":{},"sidekickers":{},"mysidekickers":{},"oppsidekickers":{},"neutralsidekickers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myrunners,s1=TERRAIN.oppcorners;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"runners":{},"myrunners":{},"opprunners":{},"neutralrunners":{},"sidekickers":{},"mysidekickers":{},"oppsidekickers":{},"neutralsidekickers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.myunits){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a2","id":"unit1","group":"runners","owner":1},"unit2":{"pos":"b1","id":"unit2","group":"runners","owner":1},"unit3":{"pos":"d5","id":"unit3","group":"runners","owner":2},"unit4":{"pos":"e4","id":"unit4","group":"runners","owner":2},"unit5":{"pos":"a1","id":"unit5","group":"sidekickers","owner":1},"unit6":{"pos":"c1","id":"unit6","group":"sidekickers","owner":1},"unit7":{"pos":"a3","id":"unit7","group":"sidekickers","owner":1},"unit8":{"pos":"c5","id":"unit8","group":"sidekickers","owner":2},"unit9":{"pos":"e5","id":"unit9","group":"sidekickers","owner":2},"unit10":{"pos":"e3","id":"unit10","group":"sidekickers","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"corners":"playercolour"},"icons":{"runners":"bishops","sidekickers":"pawns"}};game.board={"height":5,"width":5,"terrain":{"corners":{"1":["a1"],"2":["e5"]}}};game.AI=[];return game;}(),krieg:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"3":"b4","4":"b3","5":"a3"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"3":"c4","4":"c3","5":"b3","6":"a3","7":"a4"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"3":"d4","4":"d3","5":"c3","6":"b3","7":"b4"},"d1":{"1":"d2","7":"c1","8":"c2"},"d2":{"1":"d3","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"5":"d3","6":"c3","7":"c4"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"southeast":{"a4":{"pos":"a4"},"c2":{"pos":"c2"}},"northwest":{"b3":{"pos":"b3"},"d1":{"pos":"d1"}},"corners":{"a4":{"pos":"a4","owner":1},"d1":{"pos":"d1","owner":2}},"mycorners":{"a4":{"pos":"a4","owner":1}},"oppcorners":{"d1":{"pos":"d1","owner":2}},"bases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1},"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}},"mybases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1}},"oppbases":{"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectunit1=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var STARTPOS=MARKS['selectunit'];var neighbourdirs=!!TERRAIN.southeast[STARTPOS]?[1,3,4,5,7]:!!TERRAIN.northwest[STARTPOS]?[1,3,5,7,8]:[1,3,5,7];var nbrofneighbourdirs=neighbourdirs.length;var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){ARTIFACTS['movetargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove1';}return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmove1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var LOOPID;for(var POS in UNITLAYERS.myfrozens){LOOPID=UNITLAYERS.myfrozens[POS].id;UNITDATA[LOOPID]=(0,_assign2.default)({},UNITDATA[LOOPID],{'group':'notfrozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'frozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmove']});}MARKS={};UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppcorners,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='cornerinfiltration';}else if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppbases,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length===2){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='occupation';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mynotfrozens){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.brain_Bob_1=function(step){var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;return(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myfrozens,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length+(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mynotfrozens,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length-(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.oppfrozens,s1=TERRAIN.mybases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length-(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.oppnotfrozens,s1=TERRAIN.mybases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length;};game.brain_Bob_1_detailed=function(step){var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;return{myfrozeninvaders:(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myfrozens,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length,mymobileinvaders:(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mynotfrozens,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length,oppfrozeninvaders:-(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.oppfrozens,s1=TERRAIN.mybases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length,oppmobileinvaders:-(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.oppnotfrozens,s1=TERRAIN.mybases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length};};})();(function(){var TERRAIN={"southeast":{"a4":{"pos":"a4"},"c2":{"pos":"c2"}},"northwest":{"b3":{"pos":"b3"},"d1":{"pos":"d1"}},"corners":{"a4":{"pos":"a4","owner":1},"d1":{"pos":"d1","owner":2}},"oppcorners":{"a4":{"pos":"a4","owner":1}},"mycorners":{"d1":{"pos":"d1","owner":2}},"bases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1},"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}},"oppbases":{"b4":{"pos":"b4","owner":1},"a3":{"pos":"a3","owner":1},"b3":{"pos":"b3","owner":1}},"mybases":{"c2":{"pos":"c2","owner":2},"d2":{"pos":"d2","owner":2},"c1":{"pos":"c1","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectunit2=function(turn,step,markpos){var ARTIFACTS={movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets)};var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var STARTPOS=MARKS['selectunit'];var neighbourdirs=!!TERRAIN.southeast[STARTPOS]?[1,3,4,5,7]:!!TERRAIN.northwest[STARTPOS]?[1,3,5,7,8]:[1,3,5,7];var nbrofneighbourdirs=neighbourdirs.length;var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&!UNITLAYERS.units[POS]){ARTIFACTS['movetargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove2';}return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selectunit:step.MARKS.selectunit};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmove2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var LOOPID;for(var POS in UNITLAYERS.myfrozens){LOOPID=UNITLAYERS.myfrozens[POS].id;UNITDATA[LOOPID]=(0,_assign2.default)({},UNITDATA[LOOPID],{'group':'notfrozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'frozens'});}var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selectmove']});}MARKS={};UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppcorners,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='cornerinfiltration';}else if((0,_keys2.default)(function(){var ret={},s0=TERRAIN.oppbases,s1=UNITLAYERS.myunits;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length===2){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='occupation';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"notfrozens":{},"mynotfrozens":{},"oppnotfrozens":{},"neutralnotfrozens":{},"frozens":{},"myfrozens":{},"oppfrozens":{},"neutralfrozens":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mynotfrozens){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.brain_Bob_2=function(step){var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;return(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myfrozens,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length+(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mynotfrozens,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length-(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.oppfrozens,s1=TERRAIN.mybases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length-(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.oppnotfrozens,s1=TERRAIN.mybases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length;};game.brain_Bob_2_detailed=function(step){var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;return{myfrozeninvaders:(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myfrozens,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length,mymobileinvaders:(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.mynotfrozens,s1=TERRAIN.oppbases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length,oppfrozeninvaders:-(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.oppfrozens,s1=TERRAIN.mybases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length,oppmobileinvaders:-(0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.oppnotfrozens,s1=TERRAIN.mybases;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()).length};};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a4","id":"unit1","group":"notfrozens","owner":1},"unit2":{"pos":"b4","id":"unit2","group":"notfrozens","owner":1},"unit3":{"pos":"a3","id":"unit3","group":"notfrozens","owner":1},"unit4":{"pos":"b3","id":"unit4","group":"notfrozens","owner":1},"unit5":{"pos":"c2","id":"unit5","group":"notfrozens","owner":2},"unit6":{"pos":"c1","id":"unit6","group":"notfrozens","owner":2},"unit7":{"pos":"d2","id":"unit7","group":"notfrozens","owner":2},"unit8":{"pos":"d1","id":"unit8","group":"notfrozens","owner":2}}};return game.start1(turnseed,stepseed);};game.commands={"move":1};game.graphics={"tiles":{"corners":"playercolour","bases":"castle"},"icons":{"notfrozens":"knights","frozens":"rooks"}};game.board={"width":4,"height":4,"terrain":{"southeast":["a4","c2"],"northwest":["b3","d1"],"corners":{"1":["a4"],"2":["d1"]},"bases":{"1":["b4","a3","b3"],"2":["c2","d2","c1"]}}};game.AI=["Bob"];return game;}(),murusgallicus:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"3":"b7","4":"b6","5":"a6"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"3":"c7","4":"c6","5":"b6","6":"a6","7":"a7"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"3":"d7","4":"d6","5":"c6","6":"b6","7":"b7"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"3":"e7","4":"e6","5":"d6","6":"c6","7":"c7"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"3":"f7","4":"f6","5":"e6","6":"d6","7":"d7"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"3":"g7","4":"g6","5":"f6","6":"e6","7":"e7"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"3":"h7","4":"h6","5":"g6","6":"f6","7":"f7"},"h1":{"1":"h2","7":"g1","8":"g2"},"h2":{"1":"h3","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"5":"h6","6":"g6","7":"g7"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"homerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1},"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}},"myhomerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1}},"opphomerow":{"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selecttower1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),killtargets:(0,_assign2.default)({},step.ARTIFACTS.killtargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttower:markpos};var BLOCKS=function(){var k,ret={},s0=UNITLAYERS.oppunits,s1=UNITLAYERS.mytowers;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}();var STARTPOS=MARKS['selecttower'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var MAX=2;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){walkedsquares.push(POS);LENGTH++;}var WALKLENGTH=walkedsquares.length;var STEP=0;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];STEP++;if(WALKLENGTH===2&&STEP===2){ARTIFACTS['movetargets'][POS]={dir:DIR};}}}var STARTPOS=MARKS['selecttower'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&UNITLAYERS.oppwalls[POS]){ARTIFACTS['killtargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttower'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove1';}var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.killtargets){newlinks[linkpos]='selectkill1';}return newstep;};game.selecttower1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{madetowers:(0,_assign2.default)({},step.ARTIFACTS.madetowers),madewalls:(0,_assign2.default)({},step.ARTIFACTS.madewalls)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selecttower:step.MARKS.selecttower};var STARTPOS=MARKS['selectmove'];var POS=connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']]||{})['dir']-2+5]];if(POS){ARTIFACTS[!!UNITLAYERS.myunits[POS]?'madetowers':'madewalls'][POS]={};}ARTIFACTS[!!UNITLAYERS.myunits[MARKS['selectmove']]?'madetowers':'madewalls'][STARTPOS]={};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmove1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectkill1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectkill:markpos,selecttower:step.MARKS.selecttower};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectkill'});turn.links[newstepid]={};turn.links[newstepid].kill='kill1';return newstep;};game.selectkill1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];for(var POS in ARTIFACTS.madetowers){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}for(var POS in ARTIFACTS.madewalls){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:POS,id:newunitid,group:'walls',owner:1,from:MARKS['selecttower']};}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.kill1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selecttower']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]||{}).id];MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'kill';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'kill',path:step.path.concat('kill')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.kill1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mytowers){newlinks[linkpos]='selecttower1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"homerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1},"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}},"opphomerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1}},"myhomerow":{"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selecttower2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),killtargets:(0,_assign2.default)({},step.ARTIFACTS.killtargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttower:markpos};var BLOCKS=function(){var k,ret={},s0=UNITLAYERS.oppunits,s1=UNITLAYERS.mytowers;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}();var STARTPOS=MARKS['selecttower'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var MAX=2;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){walkedsquares.push(POS);LENGTH++;}var WALKLENGTH=walkedsquares.length;var STEP=0;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];STEP++;if(WALKLENGTH===2&&STEP===2){ARTIFACTS['movetargets'][POS]={dir:DIR};}}}var STARTPOS=MARKS['selecttower'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&UNITLAYERS.oppwalls[POS]){ARTIFACTS['killtargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttower'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove2';}var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.killtargets){newlinks[linkpos]='selectkill2';}return newstep;};game.selecttower2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{madetowers:(0,_assign2.default)({},step.ARTIFACTS.madetowers),madewalls:(0,_assign2.default)({},step.ARTIFACTS.madewalls)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selecttower:step.MARKS.selecttower};var STARTPOS=MARKS['selectmove'];var POS=connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']]||{})['dir']-2+5]];if(POS){ARTIFACTS[!!UNITLAYERS.myunits[POS]?'madetowers':'madewalls'][POS]={};}ARTIFACTS[!!UNITLAYERS.myunits[MARKS['selectmove']]?'madetowers':'madewalls'][STARTPOS]={};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmove2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectkill2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectkill:markpos,selecttower:step.MARKS.selecttower};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectkill'});turn.links[newstepid]={};turn.links[newstepid].kill='kill2';return newstep;};game.selectkill2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];for(var POS in ARTIFACTS.madetowers){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}for(var POS in ARTIFACTS.madewalls){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:POS,id:newunitid,group:'walls',owner:2,from:MARKS['selecttower']};}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.kill2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selecttower']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]||{}).id];MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'kill';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'kill',path:step.path.concat('kill')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.kill2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"movetargets":{},"madetowers":{},"madewalls":{},"killtargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mytowers){newlinks[linkpos]='selecttower2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a1","id":"unit1","group":"towers","owner":1},"unit2":{"pos":"b1","id":"unit2","group":"towers","owner":1},"unit3":{"pos":"c1","id":"unit3","group":"towers","owner":1},"unit4":{"pos":"d1","id":"unit4","group":"towers","owner":1},"unit5":{"pos":"e1","id":"unit5","group":"towers","owner":1},"unit6":{"pos":"f1","id":"unit6","group":"towers","owner":1},"unit7":{"pos":"g1","id":"unit7","group":"towers","owner":1},"unit8":{"pos":"h1","id":"unit8","group":"towers","owner":1},"unit9":{"pos":"a7","id":"unit9","group":"towers","owner":2},"unit10":{"pos":"b7","id":"unit10","group":"towers","owner":2},"unit11":{"pos":"c7","id":"unit11","group":"towers","owner":2},"unit12":{"pos":"d7","id":"unit12","group":"towers","owner":2},"unit13":{"pos":"e7","id":"unit13","group":"towers","owner":2},"unit14":{"pos":"f7","id":"unit14","group":"towers","owner":2},"unit15":{"pos":"g7","id":"unit15","group":"towers","owner":2},"unit16":{"pos":"h7","id":"unit16","group":"towers","owner":2}},clones:0};return game.start1(turnseed,stepseed);};game.commands={"move":1,"kill":1};game.graphics={"tiles":{"homerow":"playercolour"},"icons":{"towers":"rooks","walls":"pawns"}};game.board={"height":7,"width":8,"terrain":{"homerow":{"1":[["rect","a1","h1"]],"2":[["rect","a7","h7"]]}}};game.AI=[];return game;}(),murusgallicusadvanced:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"1":"a7","2":"b7","3":"b6","4":"b5","5":"a5"},"a7":{"3":"b7","4":"b6","5":"a6"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"1":"b7","2":"c7","3":"c6","4":"c5","5":"b5","6":"a5","7":"a6","8":"a7"},"b7":{"3":"c7","4":"c6","5":"b6","6":"a6","7":"a7"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"1":"c7","2":"d7","3":"d6","4":"d5","5":"c5","6":"b5","7":"b6","8":"b7"},"c7":{"3":"d7","4":"d6","5":"c6","6":"b6","7":"b7"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"1":"d7","2":"e7","3":"e6","4":"e5","5":"d5","6":"c5","7":"c6","8":"c7"},"d7":{"3":"e7","4":"e6","5":"d6","6":"c6","7":"c7"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"1":"e7","2":"f7","3":"f6","4":"f5","5":"e5","6":"d5","7":"d6","8":"d7"},"e7":{"3":"f7","4":"f6","5":"e6","6":"d6","7":"d7"},"f1":{"1":"f2","2":"g2","3":"g1","7":"e1","8":"e2"},"f2":{"1":"f3","2":"g3","3":"g2","4":"g1","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","2":"g4","3":"g3","4":"g2","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","2":"g5","3":"g4","4":"g3","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","2":"g6","3":"g5","4":"g4","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"1":"f7","2":"g7","3":"g6","4":"g5","5":"f5","6":"e5","7":"e6","8":"e7"},"f7":{"3":"g7","4":"g6","5":"f6","6":"e6","7":"e7"},"g1":{"1":"g2","2":"h2","3":"h1","7":"f1","8":"f2"},"g2":{"1":"g3","2":"h3","3":"h2","4":"h1","5":"g1","6":"f1","7":"f2","8":"f3"},"g3":{"1":"g4","2":"h4","3":"h3","4":"h2","5":"g2","6":"f2","7":"f3","8":"f4"},"g4":{"1":"g5","2":"h5","3":"h4","4":"h3","5":"g3","6":"f3","7":"f4","8":"f5"},"g5":{"1":"g6","2":"h6","3":"h5","4":"h4","5":"g4","6":"f4","7":"f5","8":"f6"},"g6":{"1":"g7","2":"h7","3":"h6","4":"h5","5":"g5","6":"f5","7":"f6","8":"f7"},"g7":{"3":"h7","4":"h6","5":"g6","6":"f6","7":"f7"},"h1":{"1":"h2","7":"g1","8":"g2"},"h2":{"1":"h3","5":"h1","6":"g1","7":"g2","8":"g3"},"h3":{"1":"h4","5":"h2","6":"g2","7":"g3","8":"g4"},"h4":{"1":"h5","5":"h3","6":"g3","7":"g4","8":"g5"},"h5":{"1":"h6","5":"h4","6":"g4","7":"g5","8":"g6"},"h6":{"1":"h7","5":"h5","6":"g5","7":"g6","8":"g7"},"h7":{"5":"h6","6":"g6","7":"g7"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h6":{"colour":"dark","pos":"h6","x":8,"y":6},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b7":{"colour":"light","pos":"b7","x":2,"y":7},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d7":{"colour":"light","pos":"d7","x":4,"y":7},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f7":{"colour":"light","pos":"f7","x":6,"y":7},"g2":{"colour":"light","pos":"g2","x":7,"y":2},"g4":{"colour":"light","pos":"g4","x":7,"y":4},"g6":{"colour":"light","pos":"g6","x":7,"y":6},"h1":{"colour":"light","pos":"h1","x":8,"y":1},"h3":{"colour":"light","pos":"h3","x":8,"y":3},"h5":{"colour":"light","pos":"h5","x":8,"y":5},"h7":{"colour":"light","pos":"h7","x":8,"y":7}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a7":{"colour":"dark","pos":"a7","x":1,"y":7},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c7":{"colour":"dark","pos":"c7","x":3,"y":7},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e7":{"colour":"dark","pos":"e7","x":5,"y":7},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6},"g1":{"colour":"dark","pos":"g1","x":7,"y":1},"g3":{"colour":"dark","pos":"g3","x":7,"y":3},"g5":{"colour":"dark","pos":"g5","x":7,"y":5},"g7":{"colour":"dark","pos":"g7","x":7,"y":7},"h2":{"colour":"dark","pos":"h2","x":8,"y":2},"h4":{"colour":"dark","pos":"h4","x":8,"y":4},"h6":{"colour":"dark","pos":"h6","x":8,"y":6}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"homerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1},"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}},"myhomerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1}},"opphomerow":{"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selecttower1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),killtargets:(0,_assign2.default)({},step.ARTIFACTS.killtargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttower:markpos};var BLOCKS=function(){var k,ret={},s0=UNITLAYERS.oppunits,s1=UNITLAYERS.mycatapults;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}();var STARTPOS=MARKS['selecttower'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var MAX=2;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){walkedsquares.push(POS);LENGTH++;}var WALKLENGTH=walkedsquares.length;var STEP=0;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];STEP++;if(WALKLENGTH===2&&STEP===2){ARTIFACTS['movetargets'][POS]={dir:DIR};}}}var STARTPOS=MARKS['selecttower'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&function(){var k,ret={},s0=UNITLAYERS.oppcatapults,s1=UNITLAYERS.oppwalls;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}()[POS]){ARTIFACTS['killtargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttower'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove1';}var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.killtargets){newlinks[linkpos]='selectkill1';}return newstep;};game.selecttower1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{madecatapults:(0,_assign2.default)({},step.ARTIFACTS.madecatapults),madetowers:(0,_assign2.default)({},step.ARTIFACTS.madetowers),madewalls:(0,_assign2.default)({},step.ARTIFACTS.madewalls)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selecttower:step.MARKS.selecttower};var STARTPOS=MARKS['selectmove'];var POS=connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']]||{})['dir']-2+5]];if(POS){ARTIFACTS[!!UNITLAYERS.myunits[POS]?!!UNITLAYERS.mytowers[POS]?'madecatapults':'madetowers':'madewalls'][POS]={};}ARTIFACTS[!!UNITLAYERS.myunits[MARKS['selectmove']]?!!UNITLAYERS.mytowers[MARKS['selectmove']]?'madecatapults':'madetowers':'madewalls'][STARTPOS]={};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move1';return newstep;};game.selectmove1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectkill1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectkill:markpos,selecttower:step.MARKS.selecttower};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectkill'});turn.links[newstepid]={};turn.links[newstepid].kill='kill1';if(!!UNITLAYERS.oppcatapults[MARKS['selectkill']]){turn.links[newstepid].sacrifice='sacrifice1';}return newstep;};game.selectkill1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectcatapult1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{firetargets:(0,_assign2.default)({},step.ARTIFACTS.firetargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectcatapult:markpos};var STARTPOS=MARKS['selectcatapult'];var allwalkerdirs=[7,8,1,2,3];for(var walkerdirnbr=0;walkerdirnbr<5;walkerdirnbr++){var MAX=3;var POS=STARTPOS;var LENGTH=0;var STEP=0;while(LENGTH<MAX&&(POS=connections[POS][allwalkerdirs[walkerdirnbr]])){LENGTH++;STEP++;if(STEP>1&&!UNITLAYERS.myunits[POS]){ARTIFACTS['firetargets'][POS]={};}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectcatapult'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.firetargets){newlinks[linkpos]='selectfire1';}return newstep;};game.selectcatapult1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectfire1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectfire:markpos,selectcatapult:step.MARKS.selectcatapult};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectfire'});turn.links[newstepid]={};turn.links[newstepid].fire='fire1';return newstep;};game.selectfire1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];for(var POS in ARTIFACTS.madecatapults){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'catapults'});}}for(var POS in ARTIFACTS.madetowers){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}for(var POS in ARTIFACTS.madewalls){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:POS,id:newunitid,group:'walls',owner:1,from:MARKS['selecttower']};}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.kill1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selecttower']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}if(!!UNITLAYERS.oppcatapults[MARKS['selectkill']]){var unitid=(UNITLAYERS.units[MARKS['selectkill']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}else{delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]||{}).id];}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'kill';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'kill',path:step.path.concat('kill')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.kill1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.sacrifice1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectkill']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'sacrifice';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'sacrifice',path:step.path.concat('sacrifice')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.sacrifice1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.fire1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if(!!UNITLAYERS.oppwalls[MARKS['selectfire']]){delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]||{}).id];}else{if(!!UNITLAYERS.oppunits[MARKS['selectfire']]){var unitid=(UNITLAYERS.units[MARKS['selectfire']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.oppcatapults[MARKS['selectfire']]?'towers':'walls'});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfire'],id:newunitid,group:'walls',owner:1,from:MARKS['selectcatapult']};}}var unitid=(UNITLAYERS.units[MARKS['selectcatapult']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'fire',path:step.path.concat('fire'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.fire1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mytowers){newlinks[linkpos]='selecttower1';}var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mycatapults){newlinks[linkpos]='selectcatapult1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"homerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1},"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}},"opphomerow":{"a1":{"pos":"a1","owner":1},"b1":{"pos":"b1","owner":1},"c1":{"pos":"c1","owner":1},"d1":{"pos":"d1","owner":1},"e1":{"pos":"e1","owner":1},"f1":{"pos":"f1","owner":1},"g1":{"pos":"g1","owner":1},"h1":{"pos":"h1","owner":1}},"myhomerow":{"a7":{"pos":"a7","owner":2},"b7":{"pos":"b7","owner":2},"c7":{"pos":"c7","owner":2},"d7":{"pos":"d7","owner":2},"e7":{"pos":"e7","owner":2},"f7":{"pos":"f7","owner":2},"g7":{"pos":"g7","owner":2},"h7":{"pos":"h7","owner":2}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selecttower2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{movetargets:(0,_assign2.default)({},step.ARTIFACTS.movetargets),killtargets:(0,_assign2.default)({},step.ARTIFACTS.killtargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttower:markpos};var BLOCKS=function(){var k,ret={},s0=UNITLAYERS.oppunits,s1=UNITLAYERS.mycatapults;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}();var STARTPOS=MARKS['selecttower'];var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var DIR=allwalkerdirs[walkerdirnbr];var walkedsquares=[];var MAX=2;var POS=STARTPOS;var LENGTH=0;while(LENGTH<MAX&&(POS=connections[POS][DIR])&&!BLOCKS[POS]){walkedsquares.push(POS);LENGTH++;}var WALKLENGTH=walkedsquares.length;var STEP=0;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];STEP++;if(WALKLENGTH===2&&STEP===2){ARTIFACTS['movetargets'][POS]={dir:DIR};}}}var STARTPOS=MARKS['selecttower'];var neighbourdirs=[1,2,3,4,5,6,7,8];var startconnections=connections[STARTPOS];for(var dirnbr=0;dirnbr<8;dirnbr++){var POS=startconnections[neighbourdirs[dirnbr]];if(POS&&function(){var k,ret={},s0=UNITLAYERS.oppcatapults,s1=UNITLAYERS.oppwalls;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}()[POS]){ARTIFACTS['killtargets'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttower'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.movetargets){newlinks[linkpos]='selectmove2';}var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.killtargets){newlinks[linkpos]='selectkill2';}return newstep;};game.selecttower2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectmove2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{madecatapults:(0,_assign2.default)({},step.ARTIFACTS.madecatapults),madetowers:(0,_assign2.default)({},step.ARTIFACTS.madetowers),madewalls:(0,_assign2.default)({},step.ARTIFACTS.madewalls)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectmove:markpos,selecttower:step.MARKS.selecttower};var STARTPOS=MARKS['selectmove'];var POS=connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']]||{})['dir']-2+5]];if(POS){ARTIFACTS[!!UNITLAYERS.myunits[POS]?!!UNITLAYERS.mytowers[POS]?'madecatapults':'madetowers':'madewalls'][POS]={};}ARTIFACTS[!!UNITLAYERS.myunits[MARKS['selectmove']]?!!UNITLAYERS.mytowers[MARKS['selectmove']]?'madecatapults':'madetowers':'madewalls'][STARTPOS]={};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectmove'});turn.links[newstepid]={};turn.links[newstepid].move='move2';return newstep;};game.selectmove2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectkill2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectkill:markpos,selecttower:step.MARKS.selecttower};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectkill'});turn.links[newstepid]={};turn.links[newstepid].kill='kill2';if(!!UNITLAYERS.oppcatapults[MARKS['selectkill']]){turn.links[newstepid].sacrifice='sacrifice2';}return newstep;};game.selectkill2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectcatapult2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{firetargets:(0,_assign2.default)({},step.ARTIFACTS.firetargets)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectcatapult:markpos};var STARTPOS=MARKS['selectcatapult'];var allwalkerdirs=[3,4,5,6,7];for(var walkerdirnbr=0;walkerdirnbr<5;walkerdirnbr++){var MAX=3;var POS=STARTPOS;var LENGTH=0;var STEP=0;while(LENGTH<MAX&&(POS=connections[POS][allwalkerdirs[walkerdirnbr]])){LENGTH++;STEP++;if(STEP>1&&!UNITLAYERS.myunits[POS]){ARTIFACTS['firetargets'][POS]={};}}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectcatapult'});turn.links[newstepid]={};var newlinks=turn.links[newstepid];for(var linkpos in ARTIFACTS.firetargets){newlinks[linkpos]='selectfire2';}return newstep;};game.selectcatapult2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectfire2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectfire:markpos,selectcatapult:step.MARKS.selectcatapult};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectfire'});turn.links[newstepid]={};turn.links[newstepid].fire='fire2';return newstep;};game.selectfire2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.move2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];for(var POS in ARTIFACTS.madecatapults){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'catapults'});}}for(var POS in ARTIFACTS.madetowers){var unitid=(UNITLAYERS.units[POS]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}for(var POS in ARTIFACTS.madewalls){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:POS,id:newunitid,group:'walls',owner:2,from:MARKS['selecttower']};}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'move';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'move',path:step.path.concat('move'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.move2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.kill2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selecttower']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}if(!!UNITLAYERS.oppcatapults[MARKS['selectkill']]){var unitid=(UNITLAYERS.units[MARKS['selectkill']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}}else{delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]||{}).id];}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'kill';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'kill',path:step.path.concat('kill')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.kill2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.sacrifice2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectkill']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'walls'});}delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]||{}).id];MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'sacrifice';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'sacrifice',path:step.path.concat('sacrifice')});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.sacrifice2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.fire2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if(!!UNITLAYERS.oppwalls[MARKS['selectfire']]){delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]||{}).id];}else{if(!!UNITLAYERS.oppunits[MARKS['selectfire']]){var unitid=(UNITLAYERS.units[MARKS['selectfire']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.oppcatapults[MARKS['selectfire']]?'towers':'walls'});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectfire'],id:newunitid,group:'walls',owner:2,from:MARKS['selectcatapult']};}}var unitid=(UNITLAYERS.units[MARKS['selectcatapult']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':'towers'});}MARKS={};UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var newstepid=step.stepid+'-'+'fire';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'fire',path:step.path.concat('fire'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(function(){var ret={},s0=UNITLAYERS.myunits,s1=TERRAIN.opphomerow;for(var key in s0){if(s1[key]){ret[key]=s0[key];}}return ret;}()||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='infiltration';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.fire2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"firetargets":{},"movetargets":{},"madecatapults":{},"madetowers":{},"madewalls":{},"killtargets":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"towers":{},"mytowers":{},"opptowers":{},"neutraltowers":{},"catapults":{},"mycatapults":{},"oppcatapults":{},"neutralcatapults":{},"walls":{},"mywalls":{},"oppwalls":{},"neutralwalls":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mytowers){newlinks[linkpos]='selecttower2';}var newlinks=turn.links.root;for(var linkpos in UNITLAYERS.mycatapults){newlinks[linkpos]='selectcatapult2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{"unit1":{"pos":"a1","id":"unit1","group":"towers","owner":1},"unit2":{"pos":"b1","id":"unit2","group":"towers","owner":1},"unit3":{"pos":"c1","id":"unit3","group":"towers","owner":1},"unit4":{"pos":"d1","id":"unit4","group":"towers","owner":1},"unit5":{"pos":"e1","id":"unit5","group":"towers","owner":1},"unit6":{"pos":"f1","id":"unit6","group":"towers","owner":1},"unit7":{"pos":"g1","id":"unit7","group":"towers","owner":1},"unit8":{"pos":"h1","id":"unit8","group":"towers","owner":1},"unit9":{"pos":"a7","id":"unit9","group":"towers","owner":2},"unit10":{"pos":"b7","id":"unit10","group":"towers","owner":2},"unit11":{"pos":"c7","id":"unit11","group":"towers","owner":2},"unit12":{"pos":"d7","id":"unit12","group":"towers","owner":2},"unit13":{"pos":"e7","id":"unit13","group":"towers","owner":2},"unit14":{"pos":"f7","id":"unit14","group":"towers","owner":2},"unit15":{"pos":"g7","id":"unit15","group":"towers","owner":2},"unit16":{"pos":"h7","id":"unit16","group":"towers","owner":2}},clones:0};return game.start1(turnseed,stepseed);};game.commands={"move":1,"kill":1,"sacrifice":1,"fire":1};game.graphics={"tiles":{"homerow":"playercolour"},"icons":{"towers":"rooks","walls":"pawns","catapults":"queens"}};game.board={"height":7,"width":8,"terrain":{"homerow":{"1":[["rect","a1","h1"]],"2":[["rect","a7","h7"]]}}};game.AI=[];return game;}(),semaphor:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"3":"b3","4":"b2","5":"a2"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"3":"c3","4":"c2","5":"b2","6":"a2","7":"a3"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"3":"d3","4":"d2","5":"c2","6":"b2","7":"b3"},"d1":{"1":"d2","7":"c1","8":"c2"},"d2":{"1":"d3","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"5":"d2","6":"c2","7":"c3"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"d2":{"colour":"dark","pos":"d2","x":4,"y":2}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];var TERRAIN={};(function(){var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selectdeploytarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectdeploytarget:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectdeploytarget'});turn.links[newstepid]={};turn.links[newstepid].deploy='deploy1';return newstep;};game.selectdeploytarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectunit1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};turn.links[newstepid].promote='promote1';return newstep;};game.selectunit1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.deploy1=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectdeploytarget'],id:newunitid,group:'pawns',owner:0};MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'deploy';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'deploy',path:step.path.concat('deploy'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.deploy1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.promote1=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.pawns[MARKS['selectunit']]?'bishops':'kings'});}MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'promote';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'promote',path:step.path.concat('promote')});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.promote1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"line":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in function(){var ret={},s0=BOARD.board,s1=UNITLAYERS.units;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}()){newlinks[linkpos]='selectdeploytarget1';}var newlinks=turn.links.root;for(var linkpos in function(){var k,ret={},s0=UNITLAYERS.pawns,s1=UNITLAYERS.bishops;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}()){newlinks[linkpos]='selectunit1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selectdeploytarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectdeploytarget:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectdeploytarget'});turn.links[newstepid]={};turn.links[newstepid].deploy='deploy2';return newstep;};game.selectdeploytarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.selectunit2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{});var UNITLAYERS=step.UNITLAYERS;var MARKS={selectunit:markpos};var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selectunit'});turn.links[newstepid]={};turn.links[newstepid].promote='promote2';return newstep;};game.selectunit2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.deploy2=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selectdeploytarget'],id:newunitid,group:'pawns',owner:0};MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'deploy';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'deploy',path:step.path.concat('deploy'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.deploy2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.promote2=function(turn,step){var ARTIFACTS={line:(0,_assign2.default)({},step.ARTIFACTS.line)};var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var UNITLAYERS=step.UNITLAYERS;var unitid=(UNITLAYERS.units[MARKS['selectunit']]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'group':!!UNITLAYERS.pawns[MARKS['selectunit']]?'bishops':'kings'});}MARKS={};UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"line":{}};var walkstarts=UNITLAYERS.units;for(var STARTPOS in walkstarts){var allowedsteps=UNITLAYERS[(UNITLAYERS.units[STARTPOS]||{})['group']];var allwalkerdirs=[1,2,3,4];for(var walkerdirnbr=0;walkerdirnbr<4;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){POS=walkedsquares[walkstepper];if(WALKLENGTH>1){ARTIFACTS['line'][POS]={};}}}}var newstepid=step.stepid+'-'+'promote';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'promote',path:step.path.concat('promote')});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.line||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.promote2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"line":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"bishops":{},"mybishops":{},"oppbishops":{},"neutralbishops":{},"kings":{},"mykings":{},"oppkings":{},"neutralkings":{},"pawns":{},"mypawns":{},"opppawns":{},"neutralpawns":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in function(){var ret={},s0=BOARD.board,s1=UNITLAYERS.units;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}()){newlinks[linkpos]='selectdeploytarget2';}var newlinks=turn.links.root;for(var linkpos in function(){var k,ret={},s0=UNITLAYERS.pawns,s1=UNITLAYERS.bishops;for(k in s0){ret[k]=1;}for(k in s1){ret[k]=1;}return ret;}()){newlinks[linkpos]='selectunit2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"deploy":1,"promote":1};game.graphics={"icons":{"kings":"kings","pawns":"pawns","bishops":"bishops"}};game.board={"width":4,"height":3};game.AI=[];return game;}(),snijpunt:function(){var game={};var connections={"a1":{"1":"a2","2":"b2","3":"b1"},"a2":{"1":"a3","2":"b3","3":"b2","4":"b1","5":"a1"},"a3":{"1":"a4","2":"b4","3":"b3","4":"b2","5":"a2"},"a4":{"1":"a5","2":"b5","3":"b4","4":"b3","5":"a3"},"a5":{"1":"a6","2":"b6","3":"b5","4":"b4","5":"a4"},"a6":{"3":"b6","4":"b5","5":"a5"},"b1":{"1":"b2","2":"c2","3":"c1","7":"a1","8":"a2"},"b2":{"1":"b3","2":"c3","3":"c2","4":"c1","5":"b1","6":"a1","7":"a2","8":"a3"},"b3":{"1":"b4","2":"c4","3":"c3","4":"c2","5":"b2","6":"a2","7":"a3","8":"a4"},"b4":{"1":"b5","2":"c5","3":"c4","4":"c3","5":"b3","6":"a3","7":"a4","8":"a5"},"b5":{"1":"b6","2":"c6","3":"c5","4":"c4","5":"b4","6":"a4","7":"a5","8":"a6"},"b6":{"3":"c6","4":"c5","5":"b5","6":"a5","7":"a6"},"c1":{"1":"c2","2":"d2","3":"d1","7":"b1","8":"b2"},"c2":{"1":"c3","2":"d3","3":"d2","4":"d1","5":"c1","6":"b1","7":"b2","8":"b3"},"c3":{"1":"c4","2":"d4","3":"d3","4":"d2","5":"c2","6":"b2","7":"b3","8":"b4"},"c4":{"1":"c5","2":"d5","3":"d4","4":"d3","5":"c3","6":"b3","7":"b4","8":"b5"},"c5":{"1":"c6","2":"d6","3":"d5","4":"d4","5":"c4","6":"b4","7":"b5","8":"b6"},"c6":{"3":"d6","4":"d5","5":"c5","6":"b5","7":"b6"},"d1":{"1":"d2","2":"e2","3":"e1","7":"c1","8":"c2"},"d2":{"1":"d3","2":"e3","3":"e2","4":"e1","5":"d1","6":"c1","7":"c2","8":"c3"},"d3":{"1":"d4","2":"e4","3":"e3","4":"e2","5":"d2","6":"c2","7":"c3","8":"c4"},"d4":{"1":"d5","2":"e5","3":"e4","4":"e3","5":"d3","6":"c3","7":"c4","8":"c5"},"d5":{"1":"d6","2":"e6","3":"e5","4":"e4","5":"d4","6":"c4","7":"c5","8":"c6"},"d6":{"3":"e6","4":"e5","5":"d5","6":"c5","7":"c6"},"e1":{"1":"e2","2":"f2","3":"f1","7":"d1","8":"d2"},"e2":{"1":"e3","2":"f3","3":"f2","4":"f1","5":"e1","6":"d1","7":"d2","8":"d3"},"e3":{"1":"e4","2":"f4","3":"f3","4":"f2","5":"e2","6":"d2","7":"d3","8":"d4"},"e4":{"1":"e5","2":"f5","3":"f4","4":"f3","5":"e3","6":"d3","7":"d4","8":"d5"},"e5":{"1":"e6","2":"f6","3":"f5","4":"f4","5":"e4","6":"d4","7":"d5","8":"d6"},"e6":{"3":"f6","4":"f5","5":"e5","6":"d5","7":"d6"},"f1":{"1":"f2","7":"e1","8":"e2"},"f2":{"1":"f3","5":"f1","6":"e1","7":"e2","8":"e3"},"f3":{"1":"f4","5":"f2","6":"e2","7":"e3","8":"e4"},"f4":{"1":"f5","5":"f3","6":"e3","7":"e4","8":"e5"},"f5":{"1":"f6","5":"f4","6":"e4","7":"e5","8":"e6"},"f6":{"5":"f5","6":"e5","7":"e6"}};var BOARD={"board":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f5":{"colour":"light","pos":"f5","x":6,"y":5},"f6":{"colour":"dark","pos":"f6","x":6,"y":6}},"light":{"a2":{"colour":"light","pos":"a2","x":1,"y":2},"a4":{"colour":"light","pos":"a4","x":1,"y":4},"a6":{"colour":"light","pos":"a6","x":1,"y":6},"b1":{"colour":"light","pos":"b1","x":2,"y":1},"b3":{"colour":"light","pos":"b3","x":2,"y":3},"b5":{"colour":"light","pos":"b5","x":2,"y":5},"c2":{"colour":"light","pos":"c2","x":3,"y":2},"c4":{"colour":"light","pos":"c4","x":3,"y":4},"c6":{"colour":"light","pos":"c6","x":3,"y":6},"d1":{"colour":"light","pos":"d1","x":4,"y":1},"d3":{"colour":"light","pos":"d3","x":4,"y":3},"d5":{"colour":"light","pos":"d5","x":4,"y":5},"e2":{"colour":"light","pos":"e2","x":5,"y":2},"e4":{"colour":"light","pos":"e4","x":5,"y":4},"e6":{"colour":"light","pos":"e6","x":5,"y":6},"f1":{"colour":"light","pos":"f1","x":6,"y":1},"f3":{"colour":"light","pos":"f3","x":6,"y":3},"f5":{"colour":"light","pos":"f5","x":6,"y":5}},"dark":{"a1":{"colour":"dark","pos":"a1","x":1,"y":1},"a3":{"colour":"dark","pos":"a3","x":1,"y":3},"a5":{"colour":"dark","pos":"a5","x":1,"y":5},"b2":{"colour":"dark","pos":"b2","x":2,"y":2},"b4":{"colour":"dark","pos":"b4","x":2,"y":4},"b6":{"colour":"dark","pos":"b6","x":2,"y":6},"c1":{"colour":"dark","pos":"c1","x":3,"y":1},"c3":{"colour":"dark","pos":"c3","x":3,"y":3},"c5":{"colour":"dark","pos":"c5","x":3,"y":5},"d2":{"colour":"dark","pos":"d2","x":4,"y":2},"d4":{"colour":"dark","pos":"d4","x":4,"y":4},"d6":{"colour":"dark","pos":"d6","x":4,"y":6},"e1":{"colour":"dark","pos":"e1","x":5,"y":1},"e3":{"colour":"dark","pos":"e3","x":5,"y":3},"e5":{"colour":"dark","pos":"e5","x":5,"y":5},"f2":{"colour":"dark","pos":"f2","x":6,"y":2},"f4":{"colour":"dark","pos":"f4","x":6,"y":4},"f6":{"colour":"dark","pos":"f6","x":6,"y":6}}};var relativedirs=[1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];(function(){var TERRAIN={"zone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1},"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"myzone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1}},"oppzone":{"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"corner":{"a6":{"pos":"a6"}}};var ownernames=["neutral","my","opp"];var player=1;var otherplayer=2;game.selecttarget1=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{intersection:(0,_assign2.default)({},step.ARTIFACTS.intersection)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttarget:markpos};var STARTPOS=MARKS['selecttarget'];var DIR=5;var POS=STARTPOS;while(POS=connections[POS][5]){if(ARTIFACTS.enemyline[POS]){ARTIFACTS['intersection'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttarget'});turn.links[newstepid]={};turn.links[newstepid].snipe='snipe1';return newstep;};game.selecttarget1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.snipe1=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{winline:(0,_assign2.default)({},step.ARTIFACTS.winline),loseline:(0,_assign2.default)({},step.ARTIFACTS.loseline)});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if((0,_keys2.default)(UNITLAYERS.mysniper||{}).length===0){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selecttarget'],id:newunitid,group:'sniper',owner:player};}else{var unitid=(UNITLAYERS.units[(0,_keys2.default)(UNITLAYERS.mysniper)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selecttarget']});}}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){if(!!UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]){var unitid=(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'owner':(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{})['owner']===2?1:2});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:(0,_keys2.default)(ARTIFACTS.intersection)[0],id:newunitid,group:'soldiers',owner:player};}}MARKS={};UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var walkstarts=UNITLAYERS.soldiers;for(var STARTPOS in walkstarts){var allowedsteps=!!UNITLAYERS.mysoldiers[STARTPOS]?UNITLAYERS.mysoldiers:UNITLAYERS.oppsoldiers;var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;if(WALKLENGTH>2){ARTIFACTS[!!UNITLAYERS.mysoldiers[STARTPOS]?'winline':'loseline'][POS]={};}}}var newstepid=step.stepid+'-'+'snipe';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'snipe',path:step.path.concat('snipe'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.winline||{}).length!==0){var winner=1;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else if((0,_keys2.default)(ARTIFACTS.loseline||{}).length!==0){var winner=2;var result=winner===1?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeoppline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.snipe1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start1=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){var STARTPOS=(0,_keys2.default)(UNITLAYERS.oppsniper)[0];var DIR=3;var POS=STARTPOS;while(POS=connections[POS][3]){if(!UNITLAYERS.units[POS]){ARTIFACTS['potentialempties'][POS]={};}ARTIFACTS['enemyline'][POS]={};}var walkstarts=ARTIFACTS.potentialempties;for(var STARTPOS in walkstarts){var DIR=1;var walkedsquares=[];var POS=STARTPOS;while(POS=connections[POS][1]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;if(!UNITLAYERS.sniper[walkedsquares[WALKLENGTH-1]]){ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH-1]]={};}}}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in(0,_keys2.default)(ARTIFACTS.mandatory||{}).length===0?function(){var ret={},s0=TERRAIN.myzone,s1=UNITLAYERS.sniper;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}():ARTIFACTS.mandatory){newlinks[linkpos]='selecttarget1';}return turn;};game.start1instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();(function(){var TERRAIN={"zone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1},"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"oppzone":{"b6":{"pos":"b6","owner":1},"c6":{"pos":"c6","owner":1},"d6":{"pos":"d6","owner":1},"e6":{"pos":"e6","owner":1},"f6":{"pos":"f6","owner":1}},"myzone":{"a1":{"pos":"a1","owner":2},"a2":{"pos":"a2","owner":2},"a3":{"pos":"a3","owner":2},"a4":{"pos":"a4","owner":2},"a5":{"pos":"a5","owner":2}},"corner":{"a6":{"pos":"a6"}}};var ownernames=["neutral","opp","my"];var player=2;var otherplayer=1;game.selecttarget2=function(turn,step,markpos){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{intersection:(0,_assign2.default)({},step.ARTIFACTS.intersection)});var UNITLAYERS=step.UNITLAYERS;var MARKS={selecttarget:markpos};var STARTPOS=MARKS['selecttarget'];var DIR=3;var POS=STARTPOS;while(POS=connections[POS][3]){if(ARTIFACTS.enemyline[POS]){ARTIFACTS['intersection'][POS]={};}}var newstepid=step.stepid+'-'+markpos;var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,stepid:newstepid,path:step.path.concat(markpos),name:'selecttarget'});turn.links[newstepid]={};turn.links[newstepid].snipe='snipe2';return newstep;};game.selecttarget2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.snipe2=function(turn,step){var ARTIFACTS=(0,_assign2.default)({},step.ARTIFACTS,{winline:(0,_assign2.default)({},step.ARTIFACTS.winline),loseline:(0,_assign2.default)({},step.ARTIFACTS.loseline)});var MARKS=step.MARKS;var UNITDATA=(0,_assign2.default)({},step.UNITDATA);var clones=step.clones;var UNITLAYERS=step.UNITLAYERS;if((0,_keys2.default)(UNITLAYERS.mysniper||{}).length===0){var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:MARKS['selecttarget'],id:newunitid,group:'sniper',owner:player};}else{var unitid=(UNITLAYERS.units[(0,_keys2.default)(UNITLAYERS.mysniper)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'pos':MARKS['selecttarget']});}}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){if(!!UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]){var unitid=(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{}).id;if(unitid){UNITDATA[unitid]=(0,_assign2.default)({},UNITDATA[unitid],{'owner':(UNITLAYERS.units[(0,_keys2.default)(ARTIFACTS.intersection)[0]]||{})['owner']===2?1:2});}}else{var newunitid='spawn'+clones++;UNITDATA[newunitid]={pos:(0,_keys2.default)(ARTIFACTS.intersection)[0],id:newunitid,group:'soldiers',owner:player};}}MARKS={};UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var walkstarts=UNITLAYERS.soldiers;for(var STARTPOS in walkstarts){var allowedsteps=!!UNITLAYERS.mysoldiers[STARTPOS]?UNITLAYERS.mysoldiers:UNITLAYERS.oppsoldiers;var allwalkerdirs=[1,2,3,4,5,6,7,8];for(var walkerdirnbr=0;walkerdirnbr<8;walkerdirnbr++){var walkedsquares=[];var POS=STARTPOS;while((POS=connections[POS][allwalkerdirs[walkerdirnbr]])&&allowedsteps[POS]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;if(WALKLENGTH>2){ARTIFACTS[!!UNITLAYERS.mysoldiers[STARTPOS]?'winline':'loseline'][POS]={};}}}var newstepid=step.stepid+'-'+'snipe';var newstep=turn.steps[newstepid]=(0,_assign2.default)({},step,{ARTIFACTS:ARTIFACTS,MARKS:MARKS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,stepid:newstepid,name:'snipe',path:step.path.concat('snipe'),clones:clones});turn.links[newstepid]={};if((0,_keys2.default)(ARTIFACTS.winline||{}).length!==0){var winner=2;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeline';}else if((0,_keys2.default)(ARTIFACTS.loseline||{}).length!==0){var winner=1;var result=winner===2?'win':winner?'lose':'draw';turn.links[newstepid][result]='madeoppline';}else turn.links[newstepid].endturn="start"+otherplayer;return newstep;};game.snipe2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};game.start2=function(turn,step){var turn={steps:{},player:player,turn:turn.turn+1,links:{root:{}}};var MARKS={};var ARTIFACTS={"winline":{},"loseline":{},"intersection":{},"enemyline":{},"potentialempties":{},"mandatory":{}};var UNITDATA=step.UNITDATA;var UNITLAYERS={"sniper":{},"mysniper":{},"oppsniper":{},"neutralsniper":{},"soldiers":{},"mysoldiers":{},"oppsoldiers":{},"neutralsoldiers":{},"units":{},"myunits":{},"oppunits":{},"neutralunits":{}};for(var unitid in UNITDATA){var currentunit=UNITDATA[unitid];var unitgroup=currentunit.group;var unitpos=currentunit.pos;var owner=ownernames[currentunit.owner];UNITLAYERS.units[unitpos]=UNITLAYERS[unitgroup][unitpos]=UNITLAYERS[owner+unitgroup][unitpos]=UNITLAYERS[owner+'units'][unitpos]=currentunit;}if((0,_keys2.default)(UNITLAYERS.oppsniper||{}).length!==0){var STARTPOS=(0,_keys2.default)(UNITLAYERS.oppsniper)[0];var DIR=5;var POS=STARTPOS;while(POS=connections[POS][5]){if(!UNITLAYERS.units[POS]){ARTIFACTS['potentialempties'][POS]={};}ARTIFACTS['enemyline'][POS]={};}var walkstarts=ARTIFACTS.potentialempties;for(var STARTPOS in walkstarts){var DIR=7;var walkedsquares=[];var POS=STARTPOS;while(POS=connections[POS][7]){walkedsquares.push(POS);}var WALKLENGTH=walkedsquares.length;if(!UNITLAYERS.sniper[walkedsquares[WALKLENGTH-1]]){ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH-1]]={};}}}var newstep=turn.steps.root={ARTIFACTS:ARTIFACTS,UNITDATA:UNITDATA,UNITLAYERS:UNITLAYERS,MARKS:MARKS,stepid:'root',name:'start',clones:step.clones,path:[]};var newlinks=turn.links.root;for(var linkpos in(0,_keys2.default)(ARTIFACTS.mandatory||{}).length===0?function(){var ret={},s0=TERRAIN.myzone,s1=UNITLAYERS.sniper;for(var key in s0){if(!s1[key]){ret[key]=s0[key];}}return ret;}():ARTIFACTS.mandatory){newlinks[linkpos]='selecttarget2';}return turn;};game.start2instruction=function(step){var MARKS=step.MARKS;var ARTIFACTS=step.ARTIFACTS;var UNITLAYERS=step.UNITLAYERS;var UNITDATA=step.UNITDATA;return'';};})();function reduce(coll,iterator,acc){for(var key in coll){acc=iterator(acc,coll[key],key);}return acc;}game.newGame=function(){var turnseed={turn:0};var stepseed={UNITDATA:{},clones:0};return game.start1(turnseed,stepseed);};game.commands={"snipe":1};game.graphics={"icons":{"soldiers":"pawns","sniper":"kings"},"tiles":{"zone":"grass","corner":"castle"}};game.board={"height":6,"width":6,"terrain":{"zone":{"1":[["rect","b6","f6",5]],"2":[["rect","a1","a5",3]]},"corner":["a6"]}};game.AI=[];return game;}()};
 
 /***/ },
 /* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(214);
-	module.exports = __webpack_require__(220).Object.keys;
+	module.exports = { "default": __webpack_require__(214), __esModule: true };
 
 /***/ },
 /* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(215);
+	__webpack_require__(215);
+	module.exports = __webpack_require__(221).Object.keys;
 
-	__webpack_require__(217)('keys', function($keys){
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 Object.keys(O)
+	var toObject = __webpack_require__(216);
+
+	__webpack_require__(218)('keys', function($keys){
 	  return function keys(it){
 	    return $keys(toObject(it));
 	  };
 	});
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(216);
+	var defined = __webpack_require__(217);
 	module.exports = function(it){
 	  return Object(defined(it));
 	};
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -22031,13 +22069,13 @@
 	};
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(218)
-	  , core    = __webpack_require__(220)
-	  , fails   = __webpack_require__(223);
+	var $export = __webpack_require__(219)
+	  , core    = __webpack_require__(221)
+	  , fails   = __webpack_require__(224);
 	module.exports = function(KEY, exec){
 	  var fn  = (core.Object || {})[KEY] || Object[KEY]
 	    , exp = {};
@@ -22046,12 +22084,12 @@
 	};
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(219)
-	  , core      = __webpack_require__(220)
-	  , ctx       = __webpack_require__(221)
+	var global    = __webpack_require__(220)
+	  , core      = __webpack_require__(221)
+	  , ctx       = __webpack_require__(222)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -22097,7 +22135,7 @@
 	module.exports = $export;
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -22106,18 +22144,18 @@
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '1.2.6'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(222);
+	var aFunction = __webpack_require__(223);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -22138,7 +22176,7 @@
 	};
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -22147,7 +22185,7 @@
 	};
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -22159,38 +22197,38 @@
 	};
 
 /***/ },
-/* 224 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(225), __esModule: true };
-
-/***/ },
 /* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(226);
-	module.exports = __webpack_require__(220).Object.assign;
+	module.exports = { "default": __webpack_require__(226), __esModule: true };
 
 /***/ },
 /* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(218);
-
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(227)});
+	__webpack_require__(227);
+	module.exports = __webpack_require__(221).Object.assign;
 
 /***/ },
 /* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(219);
+
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(228)});
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// 19.1.2.1 Object.assign(target, source, ...)
-	var $        = __webpack_require__(228)
-	  , toObject = __webpack_require__(215)
-	  , IObject  = __webpack_require__(229);
+	var $        = __webpack_require__(229)
+	  , toObject = __webpack_require__(216)
+	  , IObject  = __webpack_require__(230);
 
 	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = __webpack_require__(223)(function(){
+	module.exports = __webpack_require__(224)(function(){
 	  var a = Object.assign
 	    , A = {}
 	    , B = {}
@@ -22219,7 +22257,7 @@
 	} : Object.assign;
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports) {
 
 	var $Object = Object;
@@ -22237,17 +22275,17 @@
 	};
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(230);
+	var cof = __webpack_require__(231);
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
 	  return cof(it) == 'String' ? it.split('') : Object(it);
 	};
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -22257,7 +22295,7 @@
 	};
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22266,83 +22304,156 @@
 	  value: true
 	});
 
+	var _defineProperty2 = __webpack_require__(233);
+
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _play = __webpack_require__(232);
+	var _play = __webpack_require__(237);
 
 	var _play2 = _interopRequireDefault(_play);
 
-	var _units = __webpack_require__(278);
+	var _battle = __webpack_require__(289);
 
-	var _units2 = _interopRequireDefault(_units);
-
-	var _marks = __webpack_require__(387);
-
-	var _marks2 = _interopRequireDefault(_marks);
-
-	var _commands = __webpack_require__(388);
-
-	var _commands2 = _interopRequireDefault(_commands);
+	var _battle2 = _interopRequireDefault(_battle);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Battle = _react2.default.createClass({
-	  displayName: 'Battle',
+	var Vestibule = _react2.default.createClass({
+	  displayName: 'Vestibule',
+	  componentWillMount: function componentWillMount() {
+	    this.opts = [{ type: "human", name: "Human" }].concat(this.props.game.AI.map(function (n) {
+	      return { name: n, type: "ai" };
+	    }));
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.select('plr1', this.opts[0]);
+	    this.select('plr2', this.opts[0]);
+	  },
 	  getInitialState: function getInitialState() {
-	    return {
-	      session: _play2.default.startGameSession(this.props.game)
-	    };
+	    return { plr1: 0, plr2: 0 };
 	  },
-	  doAction: function doAction(action) {
-	    this.setState({
-	      session: _play2.default.makeSessionAction(this.state.session, action)
-	    });
+	  select: function select(who, what) {
+	    this.setState((0, _defineProperty3.default)({}, who, what));
 	  },
-	  removeMark: function removeMark(pos) {
-	    var s = this.state.session;
-	    s.step = s.turn.steps[s.marks[pos]];
-	    this.setState({
-	      session: s
-	    });
+	  start: function start() {
+	    this.props.selectParticipants(this.state.plr1, this.state.plr2);
 	  },
 	  render: function render() {
-	    var s = this.state.session;
-	    console.log("GONNA RENDER", s);
+	    var _this = this;
+
+	    var game = this.props.game;
+	    var plr1opts = this.opts.map(function (o, n) {
+	      return _react2.default.createElement(
+	        'button',
+	        { key: n, onClick: _this.select.bind(_this, 'plr1', o) },
+	        o.name
+	      );
+	    });
+	    var plr2opts = this.opts.map(function (o, n) {
+	      return _react2.default.createElement(
+	        'button',
+	        { key: n, onClick: _this.select.bind(_this, 'plr2', o) },
+	        o.name
+	      );
+	    });
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        'h4',
+	        'p',
 	        null,
-	        'Playing!'
+	        'Plr1 is ',
+	        this.state.plr1.name,
+	        ': ',
+	        plr1opts
 	      ),
 	      _react2.default.createElement(
-	        'div',
-	        { className: 'board', style: { height: s.game.board.height * 50, width: s.game.board.width * 50 } },
-	        _react2.default.createElement(_units2.default, { icons: this.props.game.graphics.icons, unitdata: s.step.UNITDATA, board: this.props.game.board }),
-	        _react2.default.createElement(_marks2.default, { board: this.props.game.board, activeMarks: s.step.MARKS, potentialMarks: s.UI.marks, selectMark: this.doAction })
+	        'p',
+	        null,
+	        'Plr2 is ',
+	        this.state.plr2.name,
+	        ': ',
+	        plr2opts
 	      ),
 	      _react2.default.createElement(
-	        'div',
-	        null,
-	        s.UI.instruction
-	      ),
-	      _react2.default.createElement(_commands2.default, { gameCommands: s.UI.commands, systemCommands: s.UI.system, performCommand: this.doAction })
+	        'button',
+	        { onClick: this.start },
+	        'Start game!'
+	      )
 	    );
 	  }
 	});
 
-	exports.default = Battle;
+	exports.default = Vestibule;
 
 /***/ },
-/* 232 */
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _defineProperty = __webpack_require__(234);
+
+	var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (obj, key, value) {
+	  if (key in obj) {
+	    (0, _defineProperty2.default)(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
+
+	  return obj;
+	};
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(235), __esModule: true };
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(236);
+	var $Object = __webpack_require__(199).Object;
+	module.exports = function defineProperty(it, key, desc){
+	  return $Object.defineProperty(it, key, desc);
+	};
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(198);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(207), 'Object', {defineProperty: __webpack_require__(203).f});
+
+/***/ },
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _keys = __webpack_require__(212);
+	var _assign = __webpack_require__(225);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	var _keys = __webpack_require__(213);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
@@ -22350,9 +22461,13 @@
 	    value: true
 	});
 
-	var _mapValues = __webpack_require__(233);
+	var _mapValues = __webpack_require__(238);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
+
+	var _reduce = __webpack_require__(283);
+
+	var _reduce2 = _interopRequireDefault(_reduce);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22388,7 +22503,7 @@
 	        }
 	        return turn;
 	    },
-	    startGameSession: function startGameSession(game) {
+	    startGameSession: function startGameSession(game, plr1, plr2) {
 	        var turn = game.newGame();
 	        turn = play.hydrateTurn(game, turn);
 	        var session = {
@@ -22397,7 +22512,8 @@
 	            step: turn.steps.root,
 	            save: [],
 	            markTimeStamps: {},
-	            undo: []
+	            undo: [],
+	            players: [plr1, plr2]
 	        };
 	        session.UI = play.getSessionUI(session);
 	        return session;
@@ -22457,7 +22573,13 @@
 	        var step = _ref.step;
 	        var undo = _ref.undo;
 	        var markTimeStamps = _ref.markTimeStamps;
-	        return (0, _keys2.default)(turn.links[step.stepid]).reduce(function (mem, action) {
+
+	        var removeMarks = (0, _keys2.default)(step.MARKS).reduce(function (mem, markname) {
+	            var pos = step.MARKS[markname];
+	            mem[pos] = markTimeStamps[pos];
+	            return mem;
+	        }, {});
+	        var links = (0, _keys2.default)(turn.links[step.stepid]).reduce(function (mem, action) {
 	            if (endgameactions[action] || action == 'endturn' || action === 'next') {
 	                mem.system.push(action);
 	            } else if (game.commands[action]) {
@@ -22466,11 +22588,11 @@
 	                mem.marks.push(action);
 	            }
 	            return mem;
-	        }, { foo: 'BAR', instruction: game[step.name + turn.player + 'instruction'](step), marks: [], commands: [], system: undo.length ? ['undo'] : [], removeMarks: (0, _keys2.default)(step.MARKS).reduce(function (mem, markname) {
-	                var pos = step.MARKS[markname];
-	                mem[pos] = markTimeStamps[pos];
-	                return mem;
-	            }, {}) });
+	        }, { marks: [], commands: [], system: undo.length ? ['undo'] : [] });
+	        return (0, _assign2.default)({
+	            removeMarks: removeMarks,
+	            instruction: game[step.name + turn.player + 'instruction'](step)
+	        }, links);
 	    },
 	    hydrateStep: function hydrateStep(game, turn, step) {
 	        var steps = turn.steps;
@@ -22542,16 +22664,35 @@
 	            }
 	        }
 	        return turn;
+	    },
+	    findBestOption: function findBestOption(game, turn, brain) {
+	        var func = game['brain_' + brain + '_' + turn.player],
+	            winners = [],
+	            highscore = -1000000;
+	        if (turn.ends.win.length) {
+	            winners = turn.ends.win;
+	        } else {
+	            for (var stepid in turn.next) {
+	                var stepscore = func(turn.steps[stepid]);
+	                if (stepscore > highscore) {
+	                    winners = [stepid];
+	                    highscore = stepscore;
+	                } else if (stepscore === highscore) {
+	                    winners.push(stepid);
+	                }
+	            }
+	        }
+	        return winners;
 	    }
 	};
 
 	exports.default = play;
 
 /***/ },
-/* 233 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createObjectMapper = __webpack_require__(234);
+	var createObjectMapper = __webpack_require__(239);
 
 	/**
 	 * Creates an object with the same keys as `object` and values generated by
@@ -22600,11 +22741,11 @@
 
 
 /***/ },
-/* 234 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCallback = __webpack_require__(235),
-	    baseForOwn = __webpack_require__(275);
+	var baseCallback = __webpack_require__(240),
+	    baseForOwn = __webpack_require__(280);
 
 	/**
 	 * Creates a function for `_.mapKeys` or `_.mapValues`.
@@ -22632,14 +22773,14 @@
 
 
 /***/ },
-/* 235 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMatches = __webpack_require__(236),
-	    baseMatchesProperty = __webpack_require__(264),
-	    bindCallback = __webpack_require__(271),
-	    identity = __webpack_require__(272),
-	    property = __webpack_require__(273);
+	var baseMatches = __webpack_require__(241),
+	    baseMatchesProperty = __webpack_require__(269),
+	    bindCallback = __webpack_require__(276),
+	    identity = __webpack_require__(277),
+	    property = __webpack_require__(278);
 
 	/**
 	 * The base implementation of `_.callback` which supports specifying the
@@ -22673,12 +22814,12 @@
 
 
 /***/ },
-/* 236 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsMatch = __webpack_require__(237),
-	    getMatchData = __webpack_require__(261),
-	    toObject = __webpack_require__(260);
+	var baseIsMatch = __webpack_require__(242),
+	    getMatchData = __webpack_require__(266),
+	    toObject = __webpack_require__(265);
 
 	/**
 	 * The base implementation of `_.matches` which does not clone `source`.
@@ -22709,11 +22850,11 @@
 
 
 /***/ },
-/* 237 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqual = __webpack_require__(238),
-	    toObject = __webpack_require__(260);
+	var baseIsEqual = __webpack_require__(243),
+	    toObject = __webpack_require__(265);
 
 	/**
 	 * The base implementation of `_.isMatch` without support for callback
@@ -22767,12 +22908,12 @@
 
 
 /***/ },
-/* 238 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqualDeep = __webpack_require__(239),
-	    isObject = __webpack_require__(248),
-	    isObjectLike = __webpack_require__(249);
+	var baseIsEqualDeep = __webpack_require__(244),
+	    isObject = __webpack_require__(253),
+	    isObjectLike = __webpack_require__(254);
 
 	/**
 	 * The base implementation of `_.isEqual` without support for `this` binding
@@ -22801,14 +22942,14 @@
 
 
 /***/ },
-/* 239 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var equalArrays = __webpack_require__(240),
-	    equalByTag = __webpack_require__(242),
-	    equalObjects = __webpack_require__(243),
-	    isArray = __webpack_require__(256),
-	    isTypedArray = __webpack_require__(259);
+	var equalArrays = __webpack_require__(245),
+	    equalByTag = __webpack_require__(247),
+	    equalObjects = __webpack_require__(248),
+	    isArray = __webpack_require__(261),
+	    isTypedArray = __webpack_require__(264);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -22909,10 +23050,10 @@
 
 
 /***/ },
-/* 240 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arraySome = __webpack_require__(241);
+	var arraySome = __webpack_require__(246);
 
 	/**
 	 * A specialized version of `baseIsEqualDeep` for arrays with support for
@@ -22966,7 +23107,7 @@
 
 
 /***/ },
-/* 241 */
+/* 246 */
 /***/ function(module, exports) {
 
 	/**
@@ -22995,7 +23136,7 @@
 
 
 /***/ },
-/* 242 */
+/* 247 */
 /***/ function(module, exports) {
 
 	/** `Object#toString` result references. */
@@ -23049,10 +23190,10 @@
 
 
 /***/ },
-/* 243 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(244);
+	var keys = __webpack_require__(249);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -23122,13 +23263,13 @@
 
 
 /***/ },
-/* 244 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(245),
-	    isArrayLike = __webpack_require__(250),
-	    isObject = __webpack_require__(248),
-	    shimKeys = __webpack_require__(254);
+	var getNative = __webpack_require__(250),
+	    isArrayLike = __webpack_require__(255),
+	    isObject = __webpack_require__(253),
+	    shimKeys = __webpack_require__(259);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeKeys = getNative(Object, 'keys');
@@ -23173,10 +23314,10 @@
 
 
 /***/ },
-/* 245 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isNative = __webpack_require__(246);
+	var isNative = __webpack_require__(251);
 
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -23195,11 +23336,11 @@
 
 
 /***/ },
-/* 246 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(247),
-	    isObjectLike = __webpack_require__(249);
+	var isFunction = __webpack_require__(252),
+	    isObjectLike = __webpack_require__(254);
 
 	/** Used to detect host constructors (Safari > 5). */
 	var reIsHostCtor = /^\[object .+?Constructor\]$/;
@@ -23249,10 +23390,10 @@
 
 
 /***/ },
-/* 247 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(248);
+	var isObject = __webpack_require__(253);
 
 	/** `Object#toString` result references. */
 	var funcTag = '[object Function]';
@@ -23293,7 +23434,7 @@
 
 
 /***/ },
-/* 248 */
+/* 253 */
 /***/ function(module, exports) {
 
 	/**
@@ -23327,7 +23468,7 @@
 
 
 /***/ },
-/* 249 */
+/* 254 */
 /***/ function(module, exports) {
 
 	/**
@@ -23345,11 +23486,11 @@
 
 
 /***/ },
-/* 250 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(251),
-	    isLength = __webpack_require__(253);
+	var getLength = __webpack_require__(256),
+	    isLength = __webpack_require__(258);
 
 	/**
 	 * Checks if `value` is array-like.
@@ -23366,10 +23507,10 @@
 
 
 /***/ },
-/* 251 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(252);
+	var baseProperty = __webpack_require__(257);
 
 	/**
 	 * Gets the "length" property value of `object`.
@@ -23387,7 +23528,7 @@
 
 
 /***/ },
-/* 252 */
+/* 257 */
 /***/ function(module, exports) {
 
 	/**
@@ -23407,7 +23548,7 @@
 
 
 /***/ },
-/* 253 */
+/* 258 */
 /***/ function(module, exports) {
 
 	/**
@@ -23433,14 +23574,14 @@
 
 
 /***/ },
-/* 254 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArguments = __webpack_require__(255),
-	    isArray = __webpack_require__(256),
-	    isIndex = __webpack_require__(257),
-	    isLength = __webpack_require__(253),
-	    keysIn = __webpack_require__(258);
+	var isArguments = __webpack_require__(260),
+	    isArray = __webpack_require__(261),
+	    isIndex = __webpack_require__(262),
+	    isLength = __webpack_require__(258),
+	    keysIn = __webpack_require__(263);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -23480,11 +23621,11 @@
 
 
 /***/ },
-/* 255 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(250),
-	    isObjectLike = __webpack_require__(249);
+	var isArrayLike = __webpack_require__(255),
+	    isObjectLike = __webpack_require__(254);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -23520,12 +23661,12 @@
 
 
 /***/ },
-/* 256 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(245),
-	    isLength = __webpack_require__(253),
-	    isObjectLike = __webpack_require__(249);
+	var getNative = __webpack_require__(250),
+	    isLength = __webpack_require__(258),
+	    isObjectLike = __webpack_require__(254);
 
 	/** `Object#toString` result references. */
 	var arrayTag = '[object Array]';
@@ -23566,7 +23707,7 @@
 
 
 /***/ },
-/* 257 */
+/* 262 */
 /***/ function(module, exports) {
 
 	/** Used to detect unsigned integer values. */
@@ -23596,14 +23737,14 @@
 
 
 /***/ },
-/* 258 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArguments = __webpack_require__(255),
-	    isArray = __webpack_require__(256),
-	    isIndex = __webpack_require__(257),
-	    isLength = __webpack_require__(253),
-	    isObject = __webpack_require__(248);
+	var isArguments = __webpack_require__(260),
+	    isArray = __webpack_require__(261),
+	    isIndex = __webpack_require__(262),
+	    isLength = __webpack_require__(258),
+	    isObject = __webpack_require__(253);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -23666,11 +23807,11 @@
 
 
 /***/ },
-/* 259 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isLength = __webpack_require__(253),
-	    isObjectLike = __webpack_require__(249);
+	var isLength = __webpack_require__(258),
+	    isObjectLike = __webpack_require__(254);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -23746,10 +23887,10 @@
 
 
 /***/ },
-/* 260 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(248);
+	var isObject = __webpack_require__(253);
 
 	/**
 	 * Converts `value` to an object if it's not one.
@@ -23766,11 +23907,11 @@
 
 
 /***/ },
-/* 261 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isStrictComparable = __webpack_require__(262),
-	    pairs = __webpack_require__(263);
+	var isStrictComparable = __webpack_require__(267),
+	    pairs = __webpack_require__(268);
 
 	/**
 	 * Gets the propery names, values, and compare flags of `object`.
@@ -23793,10 +23934,10 @@
 
 
 /***/ },
-/* 262 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(248);
+	var isObject = __webpack_require__(253);
 
 	/**
 	 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -23814,11 +23955,11 @@
 
 
 /***/ },
-/* 263 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(244),
-	    toObject = __webpack_require__(260);
+	var keys = __webpack_require__(249),
+	    toObject = __webpack_require__(265);
 
 	/**
 	 * Creates a two dimensional array of the key-value pairs for `object`,
@@ -23853,18 +23994,18 @@
 
 
 /***/ },
-/* 264 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(265),
-	    baseIsEqual = __webpack_require__(238),
-	    baseSlice = __webpack_require__(266),
-	    isArray = __webpack_require__(256),
-	    isKey = __webpack_require__(267),
-	    isStrictComparable = __webpack_require__(262),
-	    last = __webpack_require__(268),
-	    toObject = __webpack_require__(260),
-	    toPath = __webpack_require__(269);
+	var baseGet = __webpack_require__(270),
+	    baseIsEqual = __webpack_require__(243),
+	    baseSlice = __webpack_require__(271),
+	    isArray = __webpack_require__(261),
+	    isKey = __webpack_require__(272),
+	    isStrictComparable = __webpack_require__(267),
+	    last = __webpack_require__(273),
+	    toObject = __webpack_require__(265),
+	    toPath = __webpack_require__(274);
 
 	/**
 	 * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
@@ -23904,10 +24045,10 @@
 
 
 /***/ },
-/* 265 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(260);
+	var toObject = __webpack_require__(265);
 
 	/**
 	 * The base implementation of `get` without support for string paths
@@ -23939,7 +24080,7 @@
 
 
 /***/ },
-/* 266 */
+/* 271 */
 /***/ function(module, exports) {
 
 	/**
@@ -23977,11 +24118,11 @@
 
 
 /***/ },
-/* 267 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(256),
-	    toObject = __webpack_require__(260);
+	var isArray = __webpack_require__(261),
+	    toObject = __webpack_require__(265);
 
 	/** Used to match property names within property paths. */
 	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/,
@@ -24011,7 +24152,7 @@
 
 
 /***/ },
-/* 268 */
+/* 273 */
 /***/ function(module, exports) {
 
 	/**
@@ -24036,11 +24177,11 @@
 
 
 /***/ },
-/* 269 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(270),
-	    isArray = __webpack_require__(256);
+	var baseToString = __webpack_require__(275),
+	    isArray = __webpack_require__(261);
 
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
@@ -24070,7 +24211,7 @@
 
 
 /***/ },
-/* 270 */
+/* 275 */
 /***/ function(module, exports) {
 
 	/**
@@ -24089,10 +24230,10 @@
 
 
 /***/ },
-/* 271 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var identity = __webpack_require__(272);
+	var identity = __webpack_require__(277);
 
 	/**
 	 * A specialized version of `baseCallback` which only supports `this` binding
@@ -24134,7 +24275,7 @@
 
 
 /***/ },
-/* 272 */
+/* 277 */
 /***/ function(module, exports) {
 
 	/**
@@ -24160,12 +24301,12 @@
 
 
 /***/ },
-/* 273 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(252),
-	    basePropertyDeep = __webpack_require__(274),
-	    isKey = __webpack_require__(267);
+	var baseProperty = __webpack_require__(257),
+	    basePropertyDeep = __webpack_require__(279),
+	    isKey = __webpack_require__(272);
 
 	/**
 	 * Creates a function that returns the property value at `path` on a
@@ -24197,11 +24338,11 @@
 
 
 /***/ },
-/* 274 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(265),
-	    toPath = __webpack_require__(269);
+	var baseGet = __webpack_require__(270),
+	    toPath = __webpack_require__(274);
 
 	/**
 	 * A specialized version of `baseProperty` which supports deep paths.
@@ -24222,11 +24363,11 @@
 
 
 /***/ },
-/* 275 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(276),
-	    keys = __webpack_require__(244);
+	var baseFor = __webpack_require__(281),
+	    keys = __webpack_require__(249);
 
 	/**
 	 * The base implementation of `_.forOwn` without support for callback
@@ -24245,10 +24386,10 @@
 
 
 /***/ },
-/* 276 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createBaseFor = __webpack_require__(277);
+	var createBaseFor = __webpack_require__(282);
 
 	/**
 	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -24268,10 +24409,10 @@
 
 
 /***/ },
-/* 277 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(260);
+	var toObject = __webpack_require__(265);
 
 	/**
 	 * Creates a base function for `_.forIn` or `_.forInRight`.
@@ -24301,7 +24442,336 @@
 
 
 /***/ },
-/* 278 */
+/* 283 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var arrayReduce = __webpack_require__(284),
+	    baseEach = __webpack_require__(285),
+	    createReduce = __webpack_require__(287);
+
+	/**
+	 * Reduces `collection` to a value which is the accumulated result of running
+	 * each element in `collection` through `iteratee`, where each successive
+	 * invocation is supplied the return value of the previous. If `accumulator`
+	 * is not provided the first element of `collection` is used as the initial
+	 * value. The `iteratee` is bound to `thisArg` and invoked with four arguments:
+	 * (accumulator, value, index|key, collection).
+	 *
+	 * Many lodash methods are guarded to work as iteratees for methods like
+	 * `_.reduce`, `_.reduceRight`, and `_.transform`.
+	 *
+	 * The guarded methods are:
+	 * `assign`, `defaults`, `defaultsDeep`, `includes`, `merge`, `sortByAll`,
+	 * and `sortByOrder`
+	 *
+	 * @static
+	 * @memberOf _
+	 * @alias foldl, inject
+	 * @category Collection
+	 * @param {Array|Object|string} collection The collection to iterate over.
+	 * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+	 * @param {*} [accumulator] The initial value.
+	 * @param {*} [thisArg] The `this` binding of `iteratee`.
+	 * @returns {*} Returns the accumulated value.
+	 * @example
+	 *
+	 * _.reduce([1, 2], function(total, n) {
+	 *   return total + n;
+	 * });
+	 * // => 3
+	 *
+	 * _.reduce({ 'a': 1, 'b': 2 }, function(result, n, key) {
+	 *   result[key] = n * 3;
+	 *   return result;
+	 * }, {});
+	 * // => { 'a': 3, 'b': 6 } (iteration order is not guaranteed)
+	 */
+	var reduce = createReduce(arrayReduce, baseEach);
+
+	module.exports = reduce;
+
+
+/***/ },
+/* 284 */
+/***/ function(module, exports) {
+
+	/**
+	 * A specialized version of `_.reduce` for arrays without support for callback
+	 * shorthands and `this` binding.
+	 *
+	 * @private
+	 * @param {Array} array The array to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @param {*} [accumulator] The initial value.
+	 * @param {boolean} [initFromArray] Specify using the first element of `array`
+	 *  as the initial value.
+	 * @returns {*} Returns the accumulated value.
+	 */
+	function arrayReduce(array, iteratee, accumulator, initFromArray) {
+	  var index = -1,
+	      length = array.length;
+
+	  if (initFromArray && length) {
+	    accumulator = array[++index];
+	  }
+	  while (++index < length) {
+	    accumulator = iteratee(accumulator, array[index], index, array);
+	  }
+	  return accumulator;
+	}
+
+	module.exports = arrayReduce;
+
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseForOwn = __webpack_require__(280),
+	    createBaseEach = __webpack_require__(286);
+
+	/**
+	 * The base implementation of `_.forEach` without support for callback
+	 * shorthands and `this` binding.
+	 *
+	 * @private
+	 * @param {Array|Object|string} collection The collection to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @returns {Array|Object|string} Returns `collection`.
+	 */
+	var baseEach = createBaseEach(baseForOwn);
+
+	module.exports = baseEach;
+
+
+/***/ },
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getLength = __webpack_require__(256),
+	    isLength = __webpack_require__(258),
+	    toObject = __webpack_require__(265);
+
+	/**
+	 * Creates a `baseEach` or `baseEachRight` function.
+	 *
+	 * @private
+	 * @param {Function} eachFunc The function to iterate over a collection.
+	 * @param {boolean} [fromRight] Specify iterating from right to left.
+	 * @returns {Function} Returns the new base function.
+	 */
+	function createBaseEach(eachFunc, fromRight) {
+	  return function(collection, iteratee) {
+	    var length = collection ? getLength(collection) : 0;
+	    if (!isLength(length)) {
+	      return eachFunc(collection, iteratee);
+	    }
+	    var index = fromRight ? length : -1,
+	        iterable = toObject(collection);
+
+	    while ((fromRight ? index-- : ++index < length)) {
+	      if (iteratee(iterable[index], index, iterable) === false) {
+	        break;
+	      }
+	    }
+	    return collection;
+	  };
+	}
+
+	module.exports = createBaseEach;
+
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseCallback = __webpack_require__(240),
+	    baseReduce = __webpack_require__(288),
+	    isArray = __webpack_require__(261);
+
+	/**
+	 * Creates a function for `_.reduce` or `_.reduceRight`.
+	 *
+	 * @private
+	 * @param {Function} arrayFunc The function to iterate over an array.
+	 * @param {Function} eachFunc The function to iterate over a collection.
+	 * @returns {Function} Returns the new each function.
+	 */
+	function createReduce(arrayFunc, eachFunc) {
+	  return function(collection, iteratee, accumulator, thisArg) {
+	    var initFromArray = arguments.length < 3;
+	    return (typeof iteratee == 'function' && thisArg === undefined && isArray(collection))
+	      ? arrayFunc(collection, iteratee, accumulator, initFromArray)
+	      : baseReduce(collection, baseCallback(iteratee, thisArg, 4), accumulator, initFromArray, eachFunc);
+	  };
+	}
+
+	module.exports = createReduce;
+
+
+/***/ },
+/* 288 */
+/***/ function(module, exports) {
+
+	/**
+	 * The base implementation of `_.reduce` and `_.reduceRight` without support
+	 * for callback shorthands and `this` binding, which iterates over `collection`
+	 * using the provided `eachFunc`.
+	 *
+	 * @private
+	 * @param {Array|Object|string} collection The collection to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @param {*} accumulator The initial value.
+	 * @param {boolean} initFromCollection Specify using the first or last element
+	 *  of `collection` as the initial value.
+	 * @param {Function} eachFunc The function to iterate over `collection`.
+	 * @returns {*} Returns the accumulated value.
+	 */
+	function baseReduce(collection, iteratee, accumulator, initFromCollection, eachFunc) {
+	  eachFunc(collection, function(value, index, collection) {
+	    accumulator = initFromCollection
+	      ? (initFromCollection = false, value)
+	      : iteratee(accumulator, value, index, collection);
+	  });
+	  return accumulator;
+	}
+
+	module.exports = baseReduce;
+
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _play = __webpack_require__(237);
+
+	var _play2 = _interopRequireDefault(_play);
+
+	var _units = __webpack_require__(290);
+
+	var _units2 = _interopRequireDefault(_units);
+
+	var _marks = __webpack_require__(394);
+
+	var _marks2 = _interopRequireDefault(_marks);
+
+	var _commands = __webpack_require__(395);
+
+	var _commands2 = _interopRequireDefault(_commands);
+
+	var _random = __webpack_require__(396);
+
+	var _random2 = _interopRequireDefault(_random);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Battle = _react2.default.createClass({
+	  displayName: 'Battle',
+	  getInitialState: function getInitialState() {
+	    return {
+	      session: _play2.default.startGameSession(this.props.game, this.props.participants[0], this.props.participants[1])
+	    };
+	  },
+	  doAction: function doAction(action) {
+	    this.setState({
+	      session: _play2.default.makeSessionAction(this.state.session, action)
+	    }, this.maybeAI);
+	  },
+	  componentDidMount: function componentDidMount() {
+	    this.maybeAI();
+	  },
+	  removeMark: function removeMark(pos) {
+	    var s = this.state.session;
+	    s.step = s.turn.steps[s.marks[pos]];
+	    this.setState({
+	      session: s
+	    });
+	  },
+	  askBrain: function askBrain(name) {
+	    var s = this.state.session;
+	    var p = this.props;
+	    var func = 'brain_' + name + '_' + s.turn.player;
+	    var score = s.game[func](s.step);
+	    var details = s.game[func + '_detailed'](s.step);
+	    console.log("WHAT DOES STEVE SAY?", score, details);
+	  },
+	  findBest: function findBest(brain) {
+	    var s = this.state.session;
+	    var best = _play2.default.findBestOption(s.game, s.turn, brain);
+	    console.log("BEST OPTIONS", best);
+	  },
+	  maybeAI: function maybeAI() {
+	    var s = this.state.session,
+	        p = s.players[s.turn.player - 1];
+	    console.log("Maybe AI!");
+	    if (s.step.stepid === 'root' && p.type === 'ai' && !this.aiThinking) {
+	      setTimeout(this.makeAImoves, 100);
+	    }
+	  },
+	  makeAImoves: function makeAImoves() {
+	    console.log("Gonna make AI moves");
+	    var s = this.state.session;
+	    var options = _play2.default.findBestOption(s.game, s.turn, s.players[s.turn.player - 1].name);
+	    var targetStepId = options[(0, _random2.default)(0, options.length - 1)];
+	    var targetStep = s.turn.steps[targetStepId];
+	    var moves = targetStep.path.concat('endturn');
+	    for (var i = 0; i < moves.length; i++) {
+	      setTimeout(this.doAction.bind(this, moves[i]), i * 800);
+	    }
+	    console.log("AI moves", moves);
+	  },
+	  render: function render() {
+	    var s = this.state.session,
+	        p = s.players[s.turn.player - 1];
+	    var cmnd = p.type === "ai" ? _react2.default.createElement(
+	      'div',
+	      null,
+	      'Awaiting ',
+	      p.name
+	    ) : _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        s.UI.instruction
+	      ),
+	      _react2.default.createElement(_commands2.default, { gameCommands: s.UI.commands, systemCommands: s.UI.system, performCommand: this.doAction, brains: this.props.game.AI })
+	    );
+	    console.log("GONNA RENDER", s);
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h4',
+	        null,
+	        'Playing!'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'board', style: { height: s.game.board.height * 50, width: s.game.board.width * 50 } },
+	        _react2.default.createElement(_units2.default, { icons: this.props.game.graphics.icons, unitdata: s.step.UNITDATA, board: this.props.game.board }),
+	        p.type !== "ai" && _react2.default.createElement(_marks2.default, { board: this.props.game.board, activeMarks: s.step.MARKS, potentialMarks: s.UI.marks, selectMark: this.doAction })
+	      ),
+	      cmnd
+	    );
+	  }
+	});
+
+	exports.default = Battle;
+
+/***/ },
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24310,7 +24780,7 @@
 	    value: true
 	});
 
-	var _extends2 = __webpack_require__(279);
+	var _extends2 = __webpack_require__(291);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
@@ -24318,15 +24788,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _unit = __webpack_require__(286);
+	var _unit = __webpack_require__(298);
 
 	var _unit2 = _interopRequireDefault(_unit);
 
-	var _reactAddonsCssTransitionGroup = __webpack_require__(288);
+	var _reactAddonsCssTransitionGroup = __webpack_require__(300);
 
 	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 
-	var _map = __webpack_require__(347);
+	var _map = __webpack_require__(353);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -24347,14 +24817,14 @@
 	exports.default = Units;
 
 /***/ },
-/* 279 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _assign = __webpack_require__(280);
+	var _assign = __webpack_require__(292);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -24375,42 +24845,42 @@
 	};
 
 /***/ },
-/* 280 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(281), __esModule: true };
+	module.exports = { "default": __webpack_require__(293), __esModule: true };
 
 /***/ },
-/* 281 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(282);
-	module.exports = __webpack_require__(198).Object.assign;
+	__webpack_require__(294);
+	module.exports = __webpack_require__(199).Object.assign;
 
 /***/ },
-/* 282 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(197);
+	var $export = __webpack_require__(198);
 
-	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(283)});
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(295)});
 
 /***/ },
-/* 283 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// 19.1.2.1 Object.assign(target, source, ...)
-	var getKeys  = __webpack_require__(181)
-	  , gOPS     = __webpack_require__(284)
-	  , pIE      = __webpack_require__(285)
-	  , toObject = __webpack_require__(179)
-	  , IObject  = __webpack_require__(185)
+	var getKeys  = __webpack_require__(182)
+	  , gOPS     = __webpack_require__(296)
+	  , pIE      = __webpack_require__(297)
+	  , toObject = __webpack_require__(180)
+	  , IObject  = __webpack_require__(186)
 	  , $assign  = Object.assign;
 
 	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = !$assign || __webpack_require__(207)(function(){
+	module.exports = !$assign || __webpack_require__(208)(function(){
 	  var A = {}
 	    , B = {}
 	    , S = Symbol()
@@ -24435,19 +24905,19 @@
 	} : $assign;
 
 /***/ },
-/* 284 */
+/* 296 */
 /***/ function(module, exports) {
 
 	exports.f = Object.getOwnPropertySymbols;
 
 /***/ },
-/* 285 */
+/* 297 */
 /***/ function(module, exports) {
 
 	exports.f = {}.propertyIsEnumerable;
 
 /***/ },
-/* 286 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24460,15 +24930,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _piece = __webpack_require__(287);
+	var _piece = __webpack_require__(299);
 
 	var _piece2 = _interopRequireDefault(_piece);
 
-	var _square = __webpack_require__(295);
+	var _square = __webpack_require__(307);
 
 	var _square2 = _interopRequireDefault(_square);
 
-	var _codegen = __webpack_require__(296);
+	var _codegen = __webpack_require__(308);
 
 	var _codegen2 = _interopRequireDefault(_codegen);
 
@@ -24520,7 +24990,7 @@
 	exports.default = Unit;
 
 /***/ },
-/* 287 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24533,7 +25003,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsCssTransitionGroup = __webpack_require__(288);
+	var _reactAddonsCssTransitionGroup = __webpack_require__(300);
 
 	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 
@@ -24569,13 +25039,13 @@
 	exports.default = Piece;
 
 /***/ },
-/* 288 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(289);
+	module.exports = __webpack_require__(301);
 
 /***/ },
-/* 289 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24595,8 +25065,8 @@
 
 	var React = __webpack_require__(2);
 
-	var ReactTransitionGroup = __webpack_require__(290);
-	var ReactCSSTransitionGroupChild = __webpack_require__(292);
+	var ReactTransitionGroup = __webpack_require__(302);
+	var ReactCSSTransitionGroupChild = __webpack_require__(304);
 
 	function createTransitionTimeoutPropValidator(transitionType) {
 	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
@@ -24667,7 +25137,7 @@
 	module.exports = ReactCSSTransitionGroup;
 
 /***/ },
-/* 290 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -24687,7 +25157,7 @@
 
 	var React = __webpack_require__(2);
 	var ReactInstanceMap = __webpack_require__(124);
-	var ReactTransitionChildMapping = __webpack_require__(291);
+	var ReactTransitionChildMapping = __webpack_require__(303);
 
 	var emptyFunction = __webpack_require__(12);
 
@@ -24919,7 +25389,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 291 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25028,7 +25498,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 292 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25047,8 +25517,8 @@
 	var React = __webpack_require__(2);
 	var ReactDOM = __webpack_require__(36);
 
-	var CSSCore = __webpack_require__(293);
-	var ReactTransitionEvents = __webpack_require__(294);
+	var CSSCore = __webpack_require__(305);
+	var ReactTransitionEvents = __webpack_require__(306);
 
 	var onlyChild = __webpack_require__(34);
 
@@ -25200,7 +25670,7 @@
 	module.exports = ReactCSSTransitionGroupChild;
 
 /***/ },
-/* 293 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25327,7 +25797,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 294 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25405,7 +25875,7 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
-/* 295 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25437,7 +25907,7 @@
 	exports.default = Square;
 
 /***/ },
-/* 296 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25446,61 +25916,65 @@
 	  value: true
 	});
 
-	var _core = __webpack_require__(297);
+	var _core = __webpack_require__(309);
 
 	var _core2 = _interopRequireDefault(_core);
 
-	var _effect = __webpack_require__(346);
+	var _effect = __webpack_require__(352);
 
 	var _effect2 = _interopRequireDefault(_effect);
 
-	var _generate = __webpack_require__(350);
+	var _generate = __webpack_require__(356);
 
 	var _generate2 = _interopRequireDefault(_generate);
 
-	var _generate_filter = __webpack_require__(352);
+	var _generate_filter = __webpack_require__(358);
 
 	var _generate_filter2 = _interopRequireDefault(_generate_filter);
 
-	var _generate_neighbour = __webpack_require__(353);
+	var _generate_neighbour = __webpack_require__(359);
 
 	var _generate_neighbour2 = _interopRequireDefault(_generate_neighbour);
 
-	var _generate_walker = __webpack_require__(354);
+	var _generate_walker = __webpack_require__(360);
 
 	var _generate_walker2 = _interopRequireDefault(_generate_walker);
 
-	var _flow_mark = __webpack_require__(355);
+	var _flow_mark = __webpack_require__(361);
 
 	var _flow_mark2 = _interopRequireDefault(_flow_mark);
 
-	var _flow_cmnd = __webpack_require__(356);
+	var _flow_cmnd = __webpack_require__(362);
 
 	var _flow_cmnd2 = _interopRequireDefault(_flow_cmnd);
 
-	var _flow_link = __webpack_require__(357);
+	var _flow_link = __webpack_require__(363);
 
 	var _flow_link2 = _interopRequireDefault(_flow_link);
 
-	var _flow_layers = __webpack_require__(358);
+	var _flow_layers = __webpack_require__(364);
 
 	var _flow_layers2 = _interopRequireDefault(_flow_layers);
 
-	var _flow_instruction = __webpack_require__(362);
+	var _flow_instruction = __webpack_require__(368);
 
 	var _flow_instruction2 = _interopRequireDefault(_flow_instruction);
 
-	var _flow_start = __webpack_require__(363);
+	var _flow_start = __webpack_require__(369);
 
 	var _flow_start2 = _interopRequireDefault(_flow_start);
 
-	var _flow_package = __webpack_require__(364);
+	var _flow_package = __webpack_require__(370);
 
 	var _flow_package2 = _interopRequireDefault(_flow_package);
 
-	var _utils = __webpack_require__(365);
+	var _utils = __webpack_require__(371);
 
 	var _utils2 = _interopRequireDefault(_utils);
+
+	var _flow_ai = __webpack_require__(393);
+
+	var _flow_ai2 = _interopRequireDefault(_flow_ai);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25520,32 +25994,33 @@
 	(0, _flow_start2.default)(o);
 	(0, _flow_package2.default)(o);
 	(0, _utils2.default)(o);
+	(0, _flow_ai2.default)(o);
 
 	exports.default = o;
 
 /***/ },
-/* 297 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _stringify = __webpack_require__(298);
+	var _stringify = __webpack_require__(310);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _defineProperty2 = __webpack_require__(300);
+	var _defineProperty2 = __webpack_require__(312);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-	var _extends3 = __webpack_require__(303);
+	var _extends3 = __webpack_require__(315);
 
 	var _extends4 = _interopRequireDefault(_extends3);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _slicedToArray2 = __webpack_require__(304);
+	var _slicedToArray2 = __webpack_require__(316);
 
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
@@ -25553,15 +26028,15 @@
 	    value: true
 	});
 
-	var _tail = __webpack_require__(336);
+	var _tail = __webpack_require__(348);
 
 	var _tail2 = _interopRequireDefault(_tail);
 
-	var _isArray = __webpack_require__(256);
+	var _isArray = __webpack_require__(261);
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
-	var _reduce = __webpack_require__(340);
+	var _reduce = __webpack_require__(283);
 
 	var _reduce2 = _interopRequireDefault(_reduce);
 
@@ -26025,6 +26500,13 @@
 
 	            var set = _ref66[0];
 	            return "Object.keys(" + T.set(O, set) + ").length";
+	        },
+	        val_harvest: function val_harvest(O, _ref67) {
+	            var _ref68 = (0, _slicedToArray3.default)(_ref67, 2);
+
+	            var set = _ref68[0];
+	            var prop = _ref68[1];
+	            return "reduce(" + T.set(O, set) + ",function(mem,obj){\n            return mem+obj[" + T.value(O, prop) + "];\n        },0)";
 	        }
 	    });
 
@@ -26032,29 +26514,29 @@
 	};
 
 /***/ },
-/* 298 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(299), __esModule: true };
+	module.exports = { "default": __webpack_require__(311), __esModule: true };
 
 /***/ },
-/* 299 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var core = __webpack_require__(220);
+	var core = __webpack_require__(221);
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return (core.JSON && core.JSON.stringify || JSON.stringify).apply(JSON, arguments);
 	};
 
 /***/ },
-/* 300 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _defineProperty = __webpack_require__(301);
+	var _defineProperty = __webpack_require__(313);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -26076,27 +26558,27 @@
 	};
 
 /***/ },
-/* 301 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(302), __esModule: true };
+	module.exports = { "default": __webpack_require__(314), __esModule: true };
 
 /***/ },
-/* 302 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $ = __webpack_require__(228);
+	var $ = __webpack_require__(229);
 	module.exports = function defineProperty(it, key, desc){
 	  return $.setDesc(it, key, desc);
 	};
 
 /***/ },
-/* 303 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _Object$assign = __webpack_require__(224)["default"];
+	var _Object$assign = __webpack_require__(225)["default"];
 
 	exports["default"] = _Object$assign || function (target) {
 	  for (var i = 1; i < arguments.length; i++) {
@@ -26115,18 +26597,18 @@
 	exports.__esModule = true;
 
 /***/ },
-/* 304 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _isIterable2 = __webpack_require__(305);
+	var _isIterable2 = __webpack_require__(317);
 
 	var _isIterable3 = _interopRequireDefault(_isIterable2);
 
-	var _getIterator2 = __webpack_require__(330);
+	var _getIterator2 = __webpack_require__(342);
 
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
 
@@ -26171,42 +26653,42 @@
 	})();
 
 /***/ },
-/* 305 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(306), __esModule: true };
+	module.exports = { "default": __webpack_require__(318), __esModule: true };
 
 /***/ },
-/* 306 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(307);
-	__webpack_require__(325);
-	module.exports = __webpack_require__(328);
+	__webpack_require__(319);
+	__webpack_require__(337);
+	module.exports = __webpack_require__(340);
 
 /***/ },
-/* 307 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(308);
-	var Iterators = __webpack_require__(311);
+	__webpack_require__(320);
+	var Iterators = __webpack_require__(323);
 	Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
 
 /***/ },
-/* 308 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var addToUnscopables = __webpack_require__(309)
-	  , step             = __webpack_require__(310)
-	  , Iterators        = __webpack_require__(311)
-	  , toIObject        = __webpack_require__(312);
+	var addToUnscopables = __webpack_require__(321)
+	  , step             = __webpack_require__(322)
+	  , Iterators        = __webpack_require__(323)
+	  , toIObject        = __webpack_require__(324);
 
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(313)(Array, 'Array', function(iterated, kind){
+	module.exports = __webpack_require__(325)(Array, 'Array', function(iterated, kind){
 	  this._t = toIObject(iterated); // target
 	  this._i = 0;                   // next index
 	  this._k = kind;                // kind
@@ -26232,13 +26714,13 @@
 	addToUnscopables('entries');
 
 /***/ },
-/* 309 */
+/* 321 */
 /***/ function(module, exports) {
 
 	module.exports = function(){ /* empty */ };
 
 /***/ },
-/* 310 */
+/* 322 */
 /***/ function(module, exports) {
 
 	module.exports = function(done, value){
@@ -26246,37 +26728,37 @@
 	};
 
 /***/ },
-/* 311 */
+/* 323 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 312 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(229)
-	  , defined = __webpack_require__(216);
+	var IObject = __webpack_require__(230)
+	  , defined = __webpack_require__(217);
 	module.exports = function(it){
 	  return IObject(defined(it));
 	};
 
 /***/ },
-/* 313 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var LIBRARY        = __webpack_require__(314)
-	  , $export        = __webpack_require__(218)
-	  , redefine       = __webpack_require__(315)
-	  , hide           = __webpack_require__(316)
-	  , has            = __webpack_require__(319)
-	  , Iterators      = __webpack_require__(311)
-	  , $iterCreate    = __webpack_require__(320)
-	  , setToStringTag = __webpack_require__(321)
-	  , getProto       = __webpack_require__(228).getProto
-	  , ITERATOR       = __webpack_require__(322)('iterator')
+	var LIBRARY        = __webpack_require__(326)
+	  , $export        = __webpack_require__(219)
+	  , redefine       = __webpack_require__(327)
+	  , hide           = __webpack_require__(328)
+	  , has            = __webpack_require__(331)
+	  , Iterators      = __webpack_require__(323)
+	  , $iterCreate    = __webpack_require__(332)
+	  , setToStringTag = __webpack_require__(333)
+	  , getProto       = __webpack_require__(229).getProto
+	  , ITERATOR       = __webpack_require__(334)('iterator')
 	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
 	  , FF_ITERATOR    = '@@iterator'
 	  , KEYS           = 'keys'
@@ -26334,24 +26816,24 @@
 	};
 
 /***/ },
-/* 314 */
+/* 326 */
 /***/ function(module, exports) {
 
 	module.exports = true;
 
 /***/ },
-/* 315 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(316);
+	module.exports = __webpack_require__(328);
 
 /***/ },
-/* 316 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $          = __webpack_require__(228)
-	  , createDesc = __webpack_require__(317);
-	module.exports = __webpack_require__(318) ? function(object, key, value){
+	var $          = __webpack_require__(229)
+	  , createDesc = __webpack_require__(329);
+	module.exports = __webpack_require__(330) ? function(object, key, value){
 	  return $.setDesc(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -26359,7 +26841,7 @@
 	};
 
 /***/ },
-/* 317 */
+/* 329 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -26372,16 +26854,16 @@
 	};
 
 /***/ },
-/* 318 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(223)(function(){
+	module.exports = !__webpack_require__(224)(function(){
 	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 319 */
+/* 331 */
 /***/ function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -26390,17 +26872,17 @@
 	};
 
 /***/ },
-/* 320 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $              = __webpack_require__(228)
-	  , descriptor     = __webpack_require__(317)
-	  , setToStringTag = __webpack_require__(321)
+	var $              = __webpack_require__(229)
+	  , descriptor     = __webpack_require__(329)
+	  , setToStringTag = __webpack_require__(333)
 	  , IteratorPrototype = {};
 
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(316)(IteratorPrototype, __webpack_require__(322)('iterator'), function(){ return this; });
+	__webpack_require__(328)(IteratorPrototype, __webpack_require__(334)('iterator'), function(){ return this; });
 
 	module.exports = function(Constructor, NAME, next){
 	  Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
@@ -26408,34 +26890,34 @@
 	};
 
 /***/ },
-/* 321 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var def = __webpack_require__(228).setDesc
-	  , has = __webpack_require__(319)
-	  , TAG = __webpack_require__(322)('toStringTag');
+	var def = __webpack_require__(229).setDesc
+	  , has = __webpack_require__(331)
+	  , TAG = __webpack_require__(334)('toStringTag');
 
 	module.exports = function(it, tag, stat){
 	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 	};
 
 /***/ },
-/* 322 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var store  = __webpack_require__(323)('wks')
-	  , uid    = __webpack_require__(324)
-	  , Symbol = __webpack_require__(219).Symbol;
+	var store  = __webpack_require__(335)('wks')
+	  , uid    = __webpack_require__(336)
+	  , Symbol = __webpack_require__(220).Symbol;
 	module.exports = function(name){
 	  return store[name] || (store[name] =
 	    Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
 	};
 
 /***/ },
-/* 323 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(219)
+	var global = __webpack_require__(220)
 	  , SHARED = '__core-js_shared__'
 	  , store  = global[SHARED] || (global[SHARED] = {});
 	module.exports = function(key){
@@ -26443,7 +26925,7 @@
 	};
 
 /***/ },
-/* 324 */
+/* 336 */
 /***/ function(module, exports) {
 
 	var id = 0
@@ -26453,14 +26935,14 @@
 	};
 
 /***/ },
-/* 325 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $at  = __webpack_require__(326)(true);
+	var $at  = __webpack_require__(338)(true);
 
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(313)(String, 'String', function(iterated){
+	__webpack_require__(325)(String, 'String', function(iterated){
 	  this._t = String(iterated); // target
 	  this._i = 0;                // next index
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -26475,11 +26957,11 @@
 	});
 
 /***/ },
-/* 326 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(327)
-	  , defined   = __webpack_require__(216);
+	var toInteger = __webpack_require__(339)
+	  , defined   = __webpack_require__(217);
 	// true  -> String#at
 	// false -> String#codePointAt
 	module.exports = function(TO_STRING){
@@ -26497,7 +26979,7 @@
 	};
 
 /***/ },
-/* 327 */
+/* 339 */
 /***/ function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -26508,13 +26990,13 @@
 	};
 
 /***/ },
-/* 328 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var classof   = __webpack_require__(329)
-	  , ITERATOR  = __webpack_require__(322)('iterator')
-	  , Iterators = __webpack_require__(311);
-	module.exports = __webpack_require__(220).isIterable = function(it){
+	var classof   = __webpack_require__(341)
+	  , ITERATOR  = __webpack_require__(334)('iterator')
+	  , Iterators = __webpack_require__(323);
+	module.exports = __webpack_require__(221).isIterable = function(it){
 	  var O = Object(it);
 	  return O[ITERATOR] !== undefined
 	    || '@@iterator' in O
@@ -26522,12 +27004,12 @@
 	};
 
 /***/ },
-/* 329 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(230)
-	  , TAG = __webpack_require__(322)('toStringTag')
+	var cof = __webpack_require__(231)
+	  , TAG = __webpack_require__(334)('toStringTag')
 	  // ES3 wrong here
 	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 
@@ -26543,43 +27025,43 @@
 	};
 
 /***/ },
-/* 330 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(331), __esModule: true };
+	module.exports = { "default": __webpack_require__(343), __esModule: true };
 
 /***/ },
-/* 331 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(307);
-	__webpack_require__(325);
-	module.exports = __webpack_require__(332);
+	__webpack_require__(319);
+	__webpack_require__(337);
+	module.exports = __webpack_require__(344);
 
 /***/ },
-/* 332 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject = __webpack_require__(333)
-	  , get      = __webpack_require__(335);
-	module.exports = __webpack_require__(220).getIterator = function(it){
+	var anObject = __webpack_require__(345)
+	  , get      = __webpack_require__(347);
+	module.exports = __webpack_require__(221).getIterator = function(it){
 	  var iterFn = get(it);
 	  if(typeof iterFn != 'function')throw TypeError(it + ' is not iterable!');
 	  return anObject(iterFn.call(it));
 	};
 
 /***/ },
-/* 333 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(334);
+	var isObject = __webpack_require__(346);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 334 */
+/* 346 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -26587,30 +27069,30 @@
 	};
 
 /***/ },
-/* 335 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var classof   = __webpack_require__(329)
-	  , ITERATOR  = __webpack_require__(322)('iterator')
-	  , Iterators = __webpack_require__(311);
-	module.exports = __webpack_require__(220).getIteratorMethod = function(it){
+	var classof   = __webpack_require__(341)
+	  , ITERATOR  = __webpack_require__(334)('iterator')
+	  , Iterators = __webpack_require__(323);
+	module.exports = __webpack_require__(221).getIteratorMethod = function(it){
 	  if(it != undefined)return it[ITERATOR]
 	    || it['@@iterator']
 	    || Iterators[classof(it)];
 	};
 
 /***/ },
-/* 336 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(337);
+	module.exports = __webpack_require__(349);
 
 
 /***/ },
-/* 337 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var drop = __webpack_require__(338);
+	var drop = __webpack_require__(350);
 
 	/**
 	 * Gets all but the first element of `array`.
@@ -26634,11 +27116,11 @@
 
 
 /***/ },
-/* 338 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSlice = __webpack_require__(266),
-	    isIterateeCall = __webpack_require__(339);
+	var baseSlice = __webpack_require__(271),
+	    isIterateeCall = __webpack_require__(351);
 
 	/**
 	 * Creates a slice of `array` with `n` elements dropped from the beginning.
@@ -26679,12 +27161,12 @@
 
 
 /***/ },
-/* 339 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(250),
-	    isIndex = __webpack_require__(257),
-	    isObject = __webpack_require__(248);
+	var isArrayLike = __webpack_require__(255),
+	    isIndex = __webpack_require__(262),
+	    isObject = __webpack_require__(253);
 
 	/**
 	 * Checks if the provided arguments are from an iteratee call.
@@ -26713,210 +27195,12 @@
 
 
 /***/ },
-/* 340 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var arrayReduce = __webpack_require__(341),
-	    baseEach = __webpack_require__(342),
-	    createReduce = __webpack_require__(344);
-
-	/**
-	 * Reduces `collection` to a value which is the accumulated result of running
-	 * each element in `collection` through `iteratee`, where each successive
-	 * invocation is supplied the return value of the previous. If `accumulator`
-	 * is not provided the first element of `collection` is used as the initial
-	 * value. The `iteratee` is bound to `thisArg` and invoked with four arguments:
-	 * (accumulator, value, index|key, collection).
-	 *
-	 * Many lodash methods are guarded to work as iteratees for methods like
-	 * `_.reduce`, `_.reduceRight`, and `_.transform`.
-	 *
-	 * The guarded methods are:
-	 * `assign`, `defaults`, `defaultsDeep`, `includes`, `merge`, `sortByAll`,
-	 * and `sortByOrder`
-	 *
-	 * @static
-	 * @memberOf _
-	 * @alias foldl, inject
-	 * @category Collection
-	 * @param {Array|Object|string} collection The collection to iterate over.
-	 * @param {Function} [iteratee=_.identity] The function invoked per iteration.
-	 * @param {*} [accumulator] The initial value.
-	 * @param {*} [thisArg] The `this` binding of `iteratee`.
-	 * @returns {*} Returns the accumulated value.
-	 * @example
-	 *
-	 * _.reduce([1, 2], function(total, n) {
-	 *   return total + n;
-	 * });
-	 * // => 3
-	 *
-	 * _.reduce({ 'a': 1, 'b': 2 }, function(result, n, key) {
-	 *   result[key] = n * 3;
-	 *   return result;
-	 * }, {});
-	 * // => { 'a': 3, 'b': 6 } (iteration order is not guaranteed)
-	 */
-	var reduce = createReduce(arrayReduce, baseEach);
-
-	module.exports = reduce;
-
-
-/***/ },
-/* 341 */
-/***/ function(module, exports) {
-
-	/**
-	 * A specialized version of `_.reduce` for arrays without support for callback
-	 * shorthands and `this` binding.
-	 *
-	 * @private
-	 * @param {Array} array The array to iterate over.
-	 * @param {Function} iteratee The function invoked per iteration.
-	 * @param {*} [accumulator] The initial value.
-	 * @param {boolean} [initFromArray] Specify using the first element of `array`
-	 *  as the initial value.
-	 * @returns {*} Returns the accumulated value.
-	 */
-	function arrayReduce(array, iteratee, accumulator, initFromArray) {
-	  var index = -1,
-	      length = array.length;
-
-	  if (initFromArray && length) {
-	    accumulator = array[++index];
-	  }
-	  while (++index < length) {
-	    accumulator = iteratee(accumulator, array[index], index, array);
-	  }
-	  return accumulator;
-	}
-
-	module.exports = arrayReduce;
-
-
-/***/ },
-/* 342 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseForOwn = __webpack_require__(275),
-	    createBaseEach = __webpack_require__(343);
-
-	/**
-	 * The base implementation of `_.forEach` without support for callback
-	 * shorthands and `this` binding.
-	 *
-	 * @private
-	 * @param {Array|Object|string} collection The collection to iterate over.
-	 * @param {Function} iteratee The function invoked per iteration.
-	 * @returns {Array|Object|string} Returns `collection`.
-	 */
-	var baseEach = createBaseEach(baseForOwn);
-
-	module.exports = baseEach;
-
-
-/***/ },
-/* 343 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var getLength = __webpack_require__(251),
-	    isLength = __webpack_require__(253),
-	    toObject = __webpack_require__(260);
-
-	/**
-	 * Creates a `baseEach` or `baseEachRight` function.
-	 *
-	 * @private
-	 * @param {Function} eachFunc The function to iterate over a collection.
-	 * @param {boolean} [fromRight] Specify iterating from right to left.
-	 * @returns {Function} Returns the new base function.
-	 */
-	function createBaseEach(eachFunc, fromRight) {
-	  return function(collection, iteratee) {
-	    var length = collection ? getLength(collection) : 0;
-	    if (!isLength(length)) {
-	      return eachFunc(collection, iteratee);
-	    }
-	    var index = fromRight ? length : -1,
-	        iterable = toObject(collection);
-
-	    while ((fromRight ? index-- : ++index < length)) {
-	      if (iteratee(iterable[index], index, iterable) === false) {
-	        break;
-	      }
-	    }
-	    return collection;
-	  };
-	}
-
-	module.exports = createBaseEach;
-
-
-/***/ },
-/* 344 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseCallback = __webpack_require__(235),
-	    baseReduce = __webpack_require__(345),
-	    isArray = __webpack_require__(256);
-
-	/**
-	 * Creates a function for `_.reduce` or `_.reduceRight`.
-	 *
-	 * @private
-	 * @param {Function} arrayFunc The function to iterate over an array.
-	 * @param {Function} eachFunc The function to iterate over a collection.
-	 * @returns {Function} Returns the new each function.
-	 */
-	function createReduce(arrayFunc, eachFunc) {
-	  return function(collection, iteratee, accumulator, thisArg) {
-	    var initFromArray = arguments.length < 3;
-	    return (typeof iteratee == 'function' && thisArg === undefined && isArray(collection))
-	      ? arrayFunc(collection, iteratee, accumulator, initFromArray)
-	      : baseReduce(collection, baseCallback(iteratee, thisArg, 4), accumulator, initFromArray, eachFunc);
-	  };
-	}
-
-	module.exports = createReduce;
-
-
-/***/ },
-/* 345 */
-/***/ function(module, exports) {
-
-	/**
-	 * The base implementation of `_.reduce` and `_.reduceRight` without support
-	 * for callback shorthands and `this` binding, which iterates over `collection`
-	 * using the provided `eachFunc`.
-	 *
-	 * @private
-	 * @param {Array|Object|string} collection The collection to iterate over.
-	 * @param {Function} iteratee The function invoked per iteration.
-	 * @param {*} accumulator The initial value.
-	 * @param {boolean} initFromCollection Specify using the first or last element
-	 *  of `collection` as the initial value.
-	 * @param {Function} eachFunc The function to iterate over `collection`.
-	 * @returns {*} Returns the accumulated value.
-	 */
-	function baseReduce(collection, iteratee, accumulator, initFromCollection, eachFunc) {
-	  eachFunc(collection, function(value, index, collection) {
-	    accumulator = initFromCollection
-	      ? (initFromCollection = false, value)
-	      : iteratee(accumulator, value, index, collection);
-	  });
-	  return accumulator;
-	}
-
-	module.exports = baseReduce;
-
-
-/***/ },
-/* 346 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -26924,11 +27208,11 @@
 	    value: true
 	});
 
-	var _tail = __webpack_require__(336);
+	var _tail = __webpack_require__(348);
 
 	var _tail2 = _interopRequireDefault(_tail);
 
-	var _map = __webpack_require__(347);
+	var _map = __webpack_require__(353);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -27008,13 +27292,13 @@
 	};
 
 /***/ },
-/* 347 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayMap = __webpack_require__(348),
-	    baseCallback = __webpack_require__(235),
-	    baseMap = __webpack_require__(349),
-	    isArray = __webpack_require__(256);
+	var arrayMap = __webpack_require__(354),
+	    baseCallback = __webpack_require__(240),
+	    baseMap = __webpack_require__(355),
+	    isArray = __webpack_require__(261);
 
 	/**
 	 * Creates an array of values by running each element in `collection` through
@@ -27082,7 +27366,7 @@
 
 
 /***/ },
-/* 348 */
+/* 354 */
 /***/ function(module, exports) {
 
 	/**
@@ -27109,11 +27393,11 @@
 
 
 /***/ },
-/* 349 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseEach = __webpack_require__(342),
-	    isArrayLike = __webpack_require__(250);
+	var baseEach = __webpack_require__(285),
+	    isArrayLike = __webpack_require__(255);
 
 	/**
 	 * The base implementation of `_.map` without support for callback shorthands
@@ -27138,12 +27422,12 @@
 
 
 /***/ },
-/* 350 */
+/* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -27151,11 +27435,11 @@
 		value: true
 	});
 
-	var _map = __webpack_require__(347);
+	var _map = __webpack_require__(353);
 
 	var _map2 = _interopRequireDefault(_map);
 
-	var _isNumber = __webpack_require__(351);
+	var _isNumber = __webpack_require__(357);
 
 	var _isNumber2 = _interopRequireDefault(_isNumber);
 
@@ -27299,10 +27583,10 @@
 	};
 
 /***/ },
-/* 351 */
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(249);
+	var isObjectLike = __webpack_require__(254);
 
 	/** `Object#toString` result references. */
 	var numberTag = '[object Number]';
@@ -27346,12 +27630,12 @@
 
 
 /***/ },
-/* 352 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -27359,7 +27643,7 @@
 		value: true
 	});
 
-	var _map = __webpack_require__(347);
+	var _map = __webpack_require__(353);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -27413,16 +27697,16 @@
 	};
 
 /***/ },
-/* 353 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _extends2 = __webpack_require__(303);
+	var _extends2 = __webpack_require__(315);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -27606,16 +27890,16 @@
 	};
 
 /***/ },
-/* 354 */
+/* 360 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _extends2 = __webpack_require__(303);
+	var _extends2 = __webpack_require__(315);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -27868,12 +28152,12 @@
 	};
 
 /***/ },
-/* 355 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -27924,9 +28208,6 @@
 	                            return mem;
 	                    }
 	                }, []);
-	                if (name === 'selectfiretarget') {
-	                    console.log("CONS", def.flow, "path", marks);
-	                }
 	                newMarks = '{' + [name + ': markpos'].concat(marks.map(function (mname) {
 	                    return mname + ": step.MARKS." + mname;
 	                })).join(',') + '}';
@@ -27951,12 +28232,12 @@
 	};
 
 /***/ },
-/* 356 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -28013,16 +28294,16 @@
 	};
 
 /***/ },
-/* 357 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _extends2 = __webpack_require__(303);
+	var _extends2 = __webpack_require__(315);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -28030,7 +28311,7 @@
 	    value: true
 	});
 
-	var _map = __webpack_require__(347);
+	var _map = __webpack_require__(353);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -28074,28 +28355,28 @@
 	};
 
 /***/ },
-/* 358 */
+/* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _defineProperty2 = __webpack_require__(300);
+	var _defineProperty2 = __webpack_require__(312);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-	var _extends4 = __webpack_require__(303);
+	var _extends4 = __webpack_require__(315);
 
 	var _extends5 = _interopRequireDefault(_extends4);
 
-	var _stringify = __webpack_require__(298);
+	var _stringify = __webpack_require__(310);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _keys = __webpack_require__(212);
+	var _keys = __webpack_require__(213);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -28103,15 +28384,15 @@
 	    value: true
 	});
 
-	var _reduce = __webpack_require__(340);
+	var _reduce = __webpack_require__(283);
 
 	var _reduce2 = _interopRequireDefault(_reduce);
 
-	var _flatten = __webpack_require__(359);
+	var _flatten = __webpack_require__(365);
 
 	var _flatten2 = _interopRequireDefault(_flatten);
 
-	var _isArray = __webpack_require__(256);
+	var _isArray = __webpack_require__(261);
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
@@ -28266,11 +28547,11 @@
 	};
 
 /***/ },
-/* 359 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFlatten = __webpack_require__(360),
-	    isIterateeCall = __webpack_require__(339);
+	var baseFlatten = __webpack_require__(366),
+	    isIterateeCall = __webpack_require__(351);
 
 	/**
 	 * Flattens a nested array. If `isDeep` is `true` the array is recursively
@@ -28304,14 +28585,14 @@
 
 
 /***/ },
-/* 360 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(361),
-	    isArguments = __webpack_require__(255),
-	    isArray = __webpack_require__(256),
-	    isArrayLike = __webpack_require__(250),
-	    isObjectLike = __webpack_require__(249);
+	var arrayPush = __webpack_require__(367),
+	    isArguments = __webpack_require__(260),
+	    isArray = __webpack_require__(261),
+	    isArrayLike = __webpack_require__(255),
+	    isObjectLike = __webpack_require__(254);
 
 	/**
 	 * The base implementation of `_.flatten` with added support for restricting
@@ -28351,7 +28632,7 @@
 
 
 /***/ },
-/* 361 */
+/* 367 */
 /***/ function(module, exports) {
 
 	/**
@@ -28377,20 +28658,20 @@
 
 
 /***/ },
-/* 362 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _extends2 = __webpack_require__(303);
+	var _extends2 = __webpack_require__(315);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _slicedToArray2 = __webpack_require__(304);
+	var _slicedToArray2 = __webpack_require__(316);
 
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -28398,11 +28679,11 @@
 	    value: true
 	});
 
-	var _tail = __webpack_require__(336);
+	var _tail = __webpack_require__(348);
 
 	var _tail2 = _interopRequireDefault(_tail);
 
-	var _map = __webpack_require__(347);
+	var _map = __webpack_require__(353);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -28494,16 +28775,16 @@
 	};
 
 /***/ },
-/* 363 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _extends2 = __webpack_require__(303);
+	var _extends2 = __webpack_require__(315);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -28576,24 +28857,24 @@
 	};
 
 /***/ },
-/* 364 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _keys = __webpack_require__(212);
+	var _keys = __webpack_require__(213);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _stringify = __webpack_require__(298);
+	var _stringify = __webpack_require__(310);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _extends2 = __webpack_require__(303);
+	var _extends2 = __webpack_require__(315);
 
 	var _extends3 = _interopRequireDefault(_extends2);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -28601,7 +28882,7 @@
 	    value: true
 	});
 
-	var _map = __webpack_require__(347);
+	var _map = __webpack_require__(353);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -28617,11 +28898,11 @@
 	        addGameData: function addGameData(O) {
 	            return '\n        game.commands = ' + (0, _stringify2.default)((0, _keys2.default)(O.rules.commands).reduce(function (mem, c) {
 	                mem[c] = 1;return mem;
-	            }, {})) + ';\n        game.graphics = ' + (0, _stringify2.default)(O.rules.graphics) + ';\n        game.board = ' + (0, _stringify2.default)(O.rules.board) + ';\n    ';
+	            }, {})) + ';\n        game.graphics = ' + (0, _stringify2.default)(O.rules.graphics) + ';\n        game.board = ' + (0, _stringify2.default)(O.rules.board) + ';\n        game.AI = ' + (0, _stringify2.default)((0, _keys2.default)(O.rules.AI && O.rules.AI.brains || {})) + '; \n    ';
 	        },
 
 	        addCommonFunctions: function addCommonFunctions(O) {
-	            return '\n        game.newGame = ' + C.makeNewGameFunction(O) + ';\n    ';
+	            return '\n        function reduce(coll,iterator,acc){\n            for(var key in coll){\n                acc = iterator(acc,coll[key],key);\n            }\n            return acc;\n        }\n        game.newGame = ' + C.makeNewGameFunction(O) + ';\n    ';
 	        },
 
 	        // TODO - metadata
@@ -28638,7 +28919,7 @@
 	        },
 
 	        addPlayerFunctions: function addPlayerFunctions(O) {
-	            return '\n        ' + C.addAllMarkFunctions(O) + '\n        ' + C.addAllCommandFunctions(O) + '\n        ' + C.addStartTurnFunction(O) + '\n    ';
+	            return '\n        ' + C.addAllMarkFunctions(O) + '\n        ' + C.addAllCommandFunctions(O) + '\n        ' + C.addStartTurnFunction(O) + '\n        ' + C.addAI(O) + '\n    ';
 	        },
 
 	        addAllMarkFunctions: function addAllMarkFunctions(O) {
@@ -28672,28 +28953,28 @@
 	};
 
 /***/ },
-/* 365 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _slicedToArray2 = __webpack_require__(304);
+	var _slicedToArray2 = __webpack_require__(316);
 
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-	var _defineProperty2 = __webpack_require__(300);
+	var _defineProperty2 = __webpack_require__(312);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
-	var _extends3 = __webpack_require__(303);
+	var _extends3 = __webpack_require__(315);
 
 	var _extends4 = _interopRequireDefault(_extends3);
 
-	var _keys = __webpack_require__(212);
+	var _keys = __webpack_require__(213);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _assign = __webpack_require__(224);
+	var _assign = __webpack_require__(225);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -28701,47 +28982,47 @@
 		value: true
 	});
 
-	var _isObject = __webpack_require__(248);
+	var _isObject = __webpack_require__(253);
 
 	var _isObject2 = _interopRequireDefault(_isObject);
 
-	var _isArray = __webpack_require__(256);
+	var _isArray = __webpack_require__(261);
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
-	var _isEqual = __webpack_require__(366);
+	var _isEqual = __webpack_require__(372);
 
 	var _isEqual2 = _interopRequireDefault(_isEqual);
 
-	var _isString = __webpack_require__(367);
+	var _isString = __webpack_require__(373);
 
 	var _isString2 = _interopRequireDefault(_isString);
 
-	var _invert = __webpack_require__(368);
+	var _invert = __webpack_require__(374);
 
 	var _invert2 = _interopRequireDefault(_invert);
 
-	var _some = __webpack_require__(369);
+	var _some = __webpack_require__(375);
 
 	var _some2 = _interopRequireDefault(_some);
 
-	var _reduce = __webpack_require__(340);
+	var _reduce = __webpack_require__(283);
 
 	var _reduce2 = _interopRequireDefault(_reduce);
 
-	var _filter = __webpack_require__(371);
+	var _filter = __webpack_require__(377);
 
 	var _filter2 = _interopRequireDefault(_filter);
 
-	var _range = __webpack_require__(374);
+	var _range = __webpack_require__(380);
 
 	var _range2 = _interopRequireDefault(_range);
 
-	var _indexOf = __webpack_require__(375);
+	var _indexOf = __webpack_require__(381);
 
 	var _indexOf2 = _interopRequireDefault(_indexOf);
 
-	var _uniq = __webpack_require__(380);
+	var _uniq = __webpack_require__(386);
 
 	var _uniq2 = _interopRequireDefault(_uniq);
 
@@ -28968,11 +29249,11 @@
 	};
 
 /***/ },
-/* 366 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqual = __webpack_require__(238),
-	    bindCallback = __webpack_require__(271);
+	var baseIsEqual = __webpack_require__(243),
+	    bindCallback = __webpack_require__(276);
 
 	/**
 	 * Performs a deep comparison between two values to determine if they are
@@ -29028,10 +29309,10 @@
 
 
 /***/ },
-/* 367 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObjectLike = __webpack_require__(249);
+	var isObjectLike = __webpack_require__(254);
 
 	/** `Object#toString` result references. */
 	var stringTag = '[object String]';
@@ -29069,11 +29350,11 @@
 
 
 /***/ },
-/* 368 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isIterateeCall = __webpack_require__(339),
-	    keys = __webpack_require__(244);
+	var isIterateeCall = __webpack_require__(351),
+	    keys = __webpack_require__(249);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -29135,14 +29416,14 @@
 
 
 /***/ },
-/* 369 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arraySome = __webpack_require__(241),
-	    baseCallback = __webpack_require__(235),
-	    baseSome = __webpack_require__(370),
-	    isArray = __webpack_require__(256),
-	    isIterateeCall = __webpack_require__(339);
+	var arraySome = __webpack_require__(246),
+	    baseCallback = __webpack_require__(240),
+	    baseSome = __webpack_require__(376),
+	    isArray = __webpack_require__(261),
+	    isIterateeCall = __webpack_require__(351);
 
 	/**
 	 * Checks if `predicate` returns truthy for **any** element of `collection`.
@@ -29208,10 +29489,10 @@
 
 
 /***/ },
-/* 370 */
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseEach = __webpack_require__(342);
+	var baseEach = __webpack_require__(285);
 
 	/**
 	 * The base implementation of `_.some` without support for callback shorthands
@@ -29237,13 +29518,13 @@
 
 
 /***/ },
-/* 371 */
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayFilter = __webpack_require__(372),
-	    baseCallback = __webpack_require__(235),
-	    baseFilter = __webpack_require__(373),
-	    isArray = __webpack_require__(256);
+	var arrayFilter = __webpack_require__(378),
+	    baseCallback = __webpack_require__(240),
+	    baseFilter = __webpack_require__(379),
+	    isArray = __webpack_require__(261);
 
 	/**
 	 * Iterates over elements of `collection`, returning an array of all elements
@@ -29304,7 +29585,7 @@
 
 
 /***/ },
-/* 372 */
+/* 378 */
 /***/ function(module, exports) {
 
 	/**
@@ -29335,10 +29616,10 @@
 
 
 /***/ },
-/* 373 */
+/* 379 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseEach = __webpack_require__(342);
+	var baseEach = __webpack_require__(285);
 
 	/**
 	 * The base implementation of `_.filter` without support for callback
@@ -29363,10 +29644,10 @@
 
 
 /***/ },
-/* 374 */
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isIterateeCall = __webpack_require__(339);
+	var isIterateeCall = __webpack_require__(351);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeCeil = Math.ceil,
@@ -29435,11 +29716,11 @@
 
 
 /***/ },
-/* 375 */
+/* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIndexOf = __webpack_require__(376),
-	    binaryIndex = __webpack_require__(378);
+	var baseIndexOf = __webpack_require__(382),
+	    binaryIndex = __webpack_require__(384);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeMax = Math.max;
@@ -29494,10 +29775,10 @@
 
 
 /***/ },
-/* 376 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var indexOfNaN = __webpack_require__(377);
+	var indexOfNaN = __webpack_require__(383);
 
 	/**
 	 * The base implementation of `_.indexOf` without support for binary searches.
@@ -29527,7 +29808,7 @@
 
 
 /***/ },
-/* 377 */
+/* 383 */
 /***/ function(module, exports) {
 
 	/**
@@ -29556,11 +29837,11 @@
 
 
 /***/ },
-/* 378 */
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var binaryIndexBy = __webpack_require__(379),
-	    identity = __webpack_require__(272);
+	var binaryIndexBy = __webpack_require__(385),
+	    identity = __webpack_require__(277);
 
 	/** Used as references for the maximum length and index of an array. */
 	var MAX_ARRAY_LENGTH = 4294967295,
@@ -29601,7 +29882,7 @@
 
 
 /***/ },
-/* 379 */
+/* 385 */
 /***/ function(module, exports) {
 
 	/* Native method references for those with the same name as other `lodash` methods. */
@@ -29664,13 +29945,13 @@
 
 
 /***/ },
-/* 380 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCallback = __webpack_require__(235),
-	    baseUniq = __webpack_require__(381),
-	    isIterateeCall = __webpack_require__(339),
-	    sortedUniq = __webpack_require__(386);
+	var baseCallback = __webpack_require__(240),
+	    baseUniq = __webpack_require__(387),
+	    isIterateeCall = __webpack_require__(351),
+	    sortedUniq = __webpack_require__(392);
 
 	/**
 	 * Creates a duplicate-free version of an array, using
@@ -29741,12 +30022,12 @@
 
 
 /***/ },
-/* 381 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIndexOf = __webpack_require__(376),
-	    cacheIndexOf = __webpack_require__(382),
-	    createCache = __webpack_require__(383);
+	var baseIndexOf = __webpack_require__(382),
+	    cacheIndexOf = __webpack_require__(388),
+	    createCache = __webpack_require__(389);
 
 	/** Used as the size to enable large array optimizations. */
 	var LARGE_ARRAY_SIZE = 200;
@@ -29807,10 +30088,10 @@
 
 
 /***/ },
-/* 382 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(248);
+	var isObject = __webpack_require__(253);
 
 	/**
 	 * Checks if `value` is in `cache` mimicking the return signature of
@@ -29832,11 +30113,11 @@
 
 
 /***/ },
-/* 383 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var SetCache = __webpack_require__(384),
-	    getNative = __webpack_require__(245);
+	/* WEBPACK VAR INJECTION */(function(global) {var SetCache = __webpack_require__(390),
+	    getNative = __webpack_require__(250);
 
 	/** Native method references. */
 	var Set = getNative(global, 'Set');
@@ -29860,11 +30141,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 384 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var cachePush = __webpack_require__(385),
-	    getNative = __webpack_require__(245);
+	/* WEBPACK VAR INJECTION */(function(global) {var cachePush = __webpack_require__(391),
+	    getNative = __webpack_require__(250);
 
 	/** Native method references. */
 	var Set = getNative(global, 'Set');
@@ -29896,10 +30177,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 385 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(248);
+	var isObject = __webpack_require__(253);
 
 	/**
 	 * Adds `value` to the cache.
@@ -29922,7 +30203,7 @@
 
 
 /***/ },
-/* 386 */
+/* 392 */
 /***/ function(module, exports) {
 
 	/**
@@ -29957,7 +30238,81 @@
 
 
 /***/ },
-/* 387 */
+/* 393 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _keys = __webpack_require__(213);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	var _assign = __webpack_require__(225);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _reduce = __webpack_require__(283);
+
+	var _reduce2 = _interopRequireDefault(_reduce);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (C) {
+	    return (0, _assign2.default)(C, {
+
+	        addAI: function addAI(O) {
+	            return (0, _reduce2.default)(O.rules.AI && O.rules.AI.brains, function (ret, def, name) {
+	                return ret + ('game.brain_' + name + '_' + O.player + ' = ' + C.makeBrainFunction(O, name) + ';') + ('game.brain_' + name + '_' + O.player + '_detailed = ' + C.makeBrainFunction(O, name, true) + ';');
+	            }, '');
+	        },
+
+	        makeBrainFunction: function makeBrainFunction(O, brain, detailed) {
+	            return '\n        function(step){\n            ' + C.prepBrain(O, brain) + '\n            ' + C.runBrainGenerators(O, brain) + '\n            return ' + (detailed ? C.calculateDetailedBrainScore(O, brain) : C.calculateBrainScore(O, brain)) + ';\n        }\n    ';
+	        },
+
+	        prepBrain: function prepBrain(O, brain) {
+	            return '\n        var ARTIFACTS = step.ARTIFACTS;\n        var UNITLAYERS = step.UNITLAYERS;\n        ' + O.rules.AI.brains[brain].generators.reduce(function (mem, genname) {
+	                return mem.concat((0, _keys2.default)(C.generatorLayers(O.rules.AI.generators[genname])));
+	            }, []).map(function (l) {
+	                return 'ARTIFACTS.' + l + ' = {}; ';
+	            }).join('') + '\n    ';
+	        },
+
+	        runBrainGenerators: function runBrainGenerators(O, brain) {
+	            return O.rules.AI.brains[brain].generators.reduce(function (mem, genname) {
+	                return mem + C.applyGenerator(O, O.rules.AI.generators[genname]);
+	            }, '');
+	        },
+
+	        calculateBrainScore: function calculateBrainScore(O, brain) {
+	            var plus = (0, _reduce2.default)(O.rules.AI.brains[brain].plus, function (mem, calc) {
+	                return console.log("CALC", calc) || mem.concat(C.value(O, calc));
+	            }, []).join(' + ');
+	            var minus = (0, _reduce2.default)(O.rules.AI.brains[brain].minus, function (mem, calc) {
+	                return mem + ' - ' + C.value(O, calc);
+	            }, '');
+	            return plus + minus;
+	        },
+
+	        calculateDetailedBrainScore: function calculateDetailedBrainScore(O, brain) {
+	            var plus = (0, _reduce2.default)(O.rules.AI.brains[brain].plus, function (mem, calc, name) {
+	                return mem.concat(name + ': ' + C.value(O, calc));
+	            }, []);
+	            var minus = (0, _reduce2.default)(O.rules.AI.brains[brain].minus, function (mem, calc, name) {
+	                return mem.concat(name + ': -' + C.value(O, calc));
+	            }, []);
+	            return '{' + plus.concat(minus).join(', ') + '}';
+	        }
+
+	    });
+	};
+
+/***/ },
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29970,15 +30325,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _square = __webpack_require__(295);
+	var _square = __webpack_require__(307);
 
 	var _square2 = _interopRequireDefault(_square);
 
-	var _codegen = __webpack_require__(296);
+	var _codegen = __webpack_require__(308);
 
 	var _codegen2 = _interopRequireDefault(_codegen);
 
-	var _map = __webpack_require__(347);
+	var _map = __webpack_require__(353);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -30013,7 +30368,7 @@
 	exports.default = Marks;
 
 /***/ },
-/* 388 */
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30048,6 +30403,9 @@
 	            name
 	        );
 	    });
+	    /*let brainCommands = props.brains.map(name => (
+	        <button key={name} onClick={()=>props.askBrain(name)}>Ask {name}</button>
+	    ))*/
 	    return _react2.default.createElement(
 	        'div',
 	        null,
@@ -30057,6 +30415,106 @@
 	};
 
 	exports.default = Commands;
+
+/***/ },
+/* 396 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseRandom = __webpack_require__(397),
+	    isIterateeCall = __webpack_require__(351);
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeMin = Math.min,
+	    nativeRandom = Math.random;
+
+	/**
+	 * Produces a random number between `min` and `max` (inclusive). If only one
+	 * argument is provided a number between `0` and the given number is returned.
+	 * If `floating` is `true`, or either `min` or `max` are floats, a floating-point
+	 * number is returned instead of an integer.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Number
+	 * @param {number} [min=0] The minimum possible value.
+	 * @param {number} [max=1] The maximum possible value.
+	 * @param {boolean} [floating] Specify returning a floating-point number.
+	 * @returns {number} Returns the random number.
+	 * @example
+	 *
+	 * _.random(0, 5);
+	 * // => an integer between 0 and 5
+	 *
+	 * _.random(5);
+	 * // => also an integer between 0 and 5
+	 *
+	 * _.random(5, true);
+	 * // => a floating-point number between 0 and 5
+	 *
+	 * _.random(1.2, 5.2);
+	 * // => a floating-point number between 1.2 and 5.2
+	 */
+	function random(min, max, floating) {
+	  if (floating && isIterateeCall(min, max, floating)) {
+	    max = floating = undefined;
+	  }
+	  var noMin = min == null,
+	      noMax = max == null;
+
+	  if (floating == null) {
+	    if (noMax && typeof min == 'boolean') {
+	      floating = min;
+	      min = 1;
+	    }
+	    else if (typeof max == 'boolean') {
+	      floating = max;
+	      noMax = true;
+	    }
+	  }
+	  if (noMin && noMax) {
+	    max = 1;
+	    noMax = false;
+	  }
+	  min = +min || 0;
+	  if (noMax) {
+	    max = min;
+	    min = 0;
+	  } else {
+	    max = +max || 0;
+	  }
+	  if (floating || min % 1 || max % 1) {
+	    var rand = nativeRandom();
+	    return nativeMin(min + (rand * (max - min + parseFloat('1e-' + ((rand + '').length - 1)))), max);
+	  }
+	  return baseRandom(min, max);
+	}
+
+	module.exports = random;
+
+
+/***/ },
+/* 397 */
+/***/ function(module, exports) {
+
+	/* Native method references for those with the same name as other `lodash` methods. */
+	var nativeFloor = Math.floor,
+	    nativeRandom = Math.random;
+
+	/**
+	 * The base implementation of `_.random` without support for argument juggling
+	 * and returning floating-point numbers.
+	 *
+	 * @private
+	 * @param {number} min The minimum possible value.
+	 * @param {number} max The maximum possible value.
+	 * @returns {number} Returns the random number.
+	 */
+	function baseRandom(min, max) {
+	  return min + nativeFloor(nativeRandom() * (max - min + 1));
+	}
+
+	module.exports = baseRandom;
+
 
 /***/ }
 /******/ ]);

@@ -238,7 +238,10 @@ export default T => {
             var pos = layer === 'board' ? T.set(O,layer)+"["+T.position(O,pos)+"]" : "("+T.set(O,layer)+"["+T.position(O,pos)+"]||{})";
             return pos+"["+T.value(O,prop)+"]";
         },
-        val_sizeof: (O,[set])=> `Object.keys(${T.set(O,set)}).length`
+        val_sizeof: (O,[set])=> `Object.keys(${T.set(O,set)}).length`,
+        val_harvest: (O,[set,prop])=> `reduce(${T.set(O,set)},function(mem,obj){
+            return mem+obj[${T.value(O,prop)}];
+        },0)`
     })
 
     return Object.assign(T,methods)

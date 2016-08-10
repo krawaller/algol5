@@ -43,9 +43,6 @@ export default C => Object.assign(C,{
                     default: return mem
                 }
             },[])
-            if (name === 'selectfiretarget'){
-                console.log("CONS",def.flow,"path",marks)
-            }
             newMarks = '{' + [name+': markpos'].concat(marks.map(mname=> mname+": step.MARKS."+mname)).join(',')+'}'
         }
         return `

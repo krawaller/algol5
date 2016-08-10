@@ -12,6 +12,8 @@ import addFlowInstructions from './flow_instruction'
 import addFlowStart from './flow_start'
 import addFlowPackage from './flow_package'
 import addUtils from './utils'
+import addAI from './flow_ai'
+
 
 let o = {}
 
@@ -29,5 +31,6 @@ addFlowInstructions(o)
 addFlowStart(o)
 addFlowPackage(o)
 addUtils(o)
+addAI(o)
 
 export default o

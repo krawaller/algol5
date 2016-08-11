@@ -72,17 +72,62 @@
     }
   },
   "AI": {
-    "generators": {},
+    "generators": {
+      "findmythreats": {
+        "type": "neighbour",
+        "starts": "myunits",
+        "dirs": ["playercase",
+          ["ifelse",["anyat","oppbases",["start"]],[4],[3,5]],
+          ["ifelse",["anyat","oppbases",["start"]],[8],[7,1]]
+        ],
+        "ifover": ["union","oppbases","oppcorners"],
+        "draw": {
+          "neighbours": {
+            "tolayer": ["ifelse",
+              ["anyat","myfrozens",["start"]],
+              ["ifelse",["anyat","units",["target"]],"myfrozenguardedthreat","myfrozenfreethreat"],
+              ["ifelse",["anyat","units",["target"]],"mymoverguardedthreat","mymoverfreethreat"]
+            ]
+          }
+        }
+      },
+      "findoppthreats": {
+        "type": "neighbour",
+        "starts": "oppunits",
+        "dirs": ["playercase",
+          ["ifelse",["anyat","mybases",["start"]],[8],[7,1]],
+          ["ifelse",["anyat","mybases",["start"]],[4],[3,5]]
+        ],
+        "ifover": ["union","mybases","mycorners"],
+        "draw": {
+          "neighbours": {
+            "tolayer": ["ifelse",
+              ["anyat","oppfrozens",["start"]],
+              ["ifelse",["anyat","units",["target"]],"oppfrozenguardedthreat","oppfrozenfreethreat"],
+              ["ifelse",["anyat","units",["target"]],"oppmoverguardedthreat","oppmoverfreethreat"]
+            ]
+          }
+        }
+      }
+    },
     "brains": {
-      "Bob": {
-        "generators": [],
+      "Fred": {
+        "generators": ["findmythreats","findoppthreats"],
         "plus": {
-          "myfrozeninvaders": ["sizeof",["intersect","myfrozens","oppbases"]],
-          "mymobileinvaders": ["sizeof",["intersect","mynotfrozens","oppbases"]]
+          "myfrozenguardedthreat": ["prod",1,["sizeof","myfrozenguardedthreat"]],
+          "myfrozenfreethreat": ["prod",2,["sizeof","myfrozenfreethreat"]],
+          "mymoverguardedthreat": ["prod",3,["sizeof","mymoverguardedthreat"]],
+          "mymoverfreethreat": ["prod",4,["sizeof","mymoverfreethreat"]],
+          "myfrozeninfiltrators": ["prod",5,["sizeof",["intersect","myfrozens","oppbases"]]],
+          "myfreeinfiltrators": ["prod",6,["sizeof",["intersect","mynotfrozens","oppbases"]]]
         },
         "minus": {
-          "oppfrozeninvaders": ["sizeof",["intersect","oppfrozens","mybases"]],
-          "oppmobileinvaders": ["sizeof",["intersect","oppnotfrozens","mybases"]]
+          "oppfrozenguardedthreat": ["prod",1,["sizeof","oppfrozenguardedthreat"]],
+          "oppfrozenfreethreat": ["prod",2,["sizeof","oppfrozenfreethreat"]],
+          "oppmoverguardedthreat": ["prod",3,["sizeof","oppmoverguardedthreat"]],
+          "oppmoverfreethreat": ["prod",4,["sizeof","oppmoverfreethreat"]],
+          "oppfrozeninfiltrators": ["prod",5,["sizeof",["intersect","oppfrozens","mybases"]]],
+          "oppfreeinfiltrators": ["prod",6,["sizeof",["intersect","oppnotfrozens","mybases"]]]
         }
       }
     }

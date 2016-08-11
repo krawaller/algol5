@@ -16,7 +16,11 @@
     "test": "babel-node dev/test/run.js",
     "generate": "babel-node games/generate.js",
     "collect": "babel-node games/collect.js",
+    "makeboards": "babel-node games/makeboards.js",
     "build": "webpack",
     "exp": "babel-node dev/exp.js"
+  },
+  "dependencies": {
+    "canvas": "^1.4.0"
   }
 }

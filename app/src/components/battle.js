@@ -35,7 +35,7 @@ let Battle = React.createClass({
     let func = 'brain_'+name+'_'+s.turn.player
     let score = s.game[func](s.step)
     let details = s.game[func+'_detailed'](s.step)
-    console.log("WHAT DOES STEVE SAY?",score,details)
+    console.log("WHAT DOES STEVE SAY?",score,details,this.findBest(name))
   },
   findBest(brain) {
     let s = this.state.session
@@ -69,7 +69,7 @@ let Battle = React.createClass({
       ? <div>Awaiting {p.name}</div>
       : (<div>
         <div>{s.UI.instruction}</div>
-        <Commands gameCommands={s.UI.commands} systemCommands={s.UI.system} performCommand={this.doAction} brains={this.props.game.AI}/>
+        <Commands gameCommands={s.UI.commands} systemCommands={s.UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
       </div>)
     console.log("GONNA RENDER",s)
     return (

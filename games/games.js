@@ -9665,11 +9665,65 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.brain_Bob_1 =
+      game.brain_Fred_1 =
         function(step) {
           var ARTIFACTS = step.ARTIFACTS;
           var UNITLAYERS = step.UNITLAYERS;
-          return Object.keys(
+          ARTIFACTS.myfrozenguardedthreat = {};
+          ARTIFACTS.myfrozenfreethreat = {};
+          ARTIFACTS.mymoverguardedthreat = {};
+          ARTIFACTS.mymoverfreethreat = {};
+          ARTIFACTS.oppfrozenguardedthreat = {};
+          ARTIFACTS.oppfrozenfreethreat = {};
+          ARTIFACTS.oppmoverguardedthreat = {};
+          ARTIFACTS.oppmoverfreethreat = {};
+          for (var STARTPOS in UNITLAYERS.myunits) {
+            var neighbourdirs = (!!(TERRAIN.oppbases[STARTPOS]) ? [4] : [3, 5]);
+            var nbrofneighbourdirs = neighbourdirs.length;
+            var startconnections = connections[STARTPOS];
+            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+              var POS = startconnections[neighbourdirs[dirnbr]];
+              if (POS &&
+                (function() {
+                  var k, ret = {},
+                    s0 = TERRAIN.oppbases,
+                    s1 = TERRAIN.oppcorners;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())[POS]) {
+                ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
+              }
+            } 
+          } 
+          for (var STARTPOS in UNITLAYERS.oppunits) {
+            var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [8] : [7, 1]);
+            var nbrofneighbourdirs = neighbourdirs.length;
+            var startconnections = connections[STARTPOS];
+            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+              var POS = startconnections[neighbourdirs[dirnbr]];
+              if (POS &&
+                (function() {
+                  var k, ret = {},
+                    s0 = TERRAIN.mybases,
+                    s1 = TERRAIN.mycorners;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())[POS]) {
+                ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
+              }
+            } 
+          } 
+          return (1 * Object.keys(ARTIFACTS.myfrozenguardedthreat).length) + (2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length) + (3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length) + (4 * Object.keys(ARTIFACTS.mymoverfreethreat).length) + (5 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.myfrozens,
@@ -9680,7 +9734,7 @@
                 }
               }
               return ret;
-            }())).length + Object.keys(
+            }())).length) + (6 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.mynotfrozens,
@@ -9691,7 +9745,7 @@
                 }
               }
               return ret;
-            }())).length - Object.keys(
+            }())).length) - (1 * Object.keys(ARTIFACTS.oppfrozenguardedthreat).length) - (2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length) - (3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length) - (4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length) - (5 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.oppfrozens,
@@ -9702,7 +9756,7 @@
                 }
               }
               return ret;
-            }())).length - Object.keys(
+            }())).length) - (6 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.oppnotfrozens,
@@ -9713,14 +9767,72 @@
                 }
               }
               return ret;
-            }())).length;
+            }())).length);
         };
-      game.brain_Bob_1_detailed =
+      game.brain_Fred_1_detailed =
         function(step) {
           var ARTIFACTS = step.ARTIFACTS;
           var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.myfrozenguardedthreat = {};
+          ARTIFACTS.myfrozenfreethreat = {};
+          ARTIFACTS.mymoverguardedthreat = {};
+          ARTIFACTS.mymoverfreethreat = {};
+          ARTIFACTS.oppfrozenguardedthreat = {};
+          ARTIFACTS.oppfrozenfreethreat = {};
+          ARTIFACTS.oppmoverguardedthreat = {};
+          ARTIFACTS.oppmoverfreethreat = {};
+          for (var STARTPOS in UNITLAYERS.myunits) {
+            var neighbourdirs = (!!(TERRAIN.oppbases[STARTPOS]) ? [4] : [3, 5]);
+            var nbrofneighbourdirs = neighbourdirs.length;
+            var startconnections = connections[STARTPOS];
+            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+              var POS = startconnections[neighbourdirs[dirnbr]];
+              if (POS &&
+                (function() {
+                  var k, ret = {},
+                    s0 = TERRAIN.oppbases,
+                    s1 = TERRAIN.oppcorners;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())[POS]) {
+                ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
+              }
+            } 
+          } 
+          for (var STARTPOS in UNITLAYERS.oppunits) {
+            var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [8] : [7, 1]);
+            var nbrofneighbourdirs = neighbourdirs.length;
+            var startconnections = connections[STARTPOS];
+            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+              var POS = startconnections[neighbourdirs[dirnbr]];
+              if (POS &&
+                (function() {
+                  var k, ret = {},
+                    s0 = TERRAIN.mybases,
+                    s1 = TERRAIN.mycorners;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())[POS]) {
+                ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
+              }
+            } 
+          } 
           return {
-            myfrozeninvaders: Object.keys(
+            myfrozenguardedthreat: (1 * Object.keys(ARTIFACTS.myfrozenguardedthreat).length),
+            myfrozenfreethreat: (2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length),
+            mymoverguardedthreat: (3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length),
+            mymoverfreethreat: (4 * Object.keys(ARTIFACTS.mymoverfreethreat).length),
+            myfrozeninfiltrators: (5 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.myfrozens,
@@ -9731,8 +9843,8 @@
                   }
                 }
                 return ret;
-              }())).length,
-            mymobileinvaders: Object.keys(
+              }())).length),
+            myfreeinfiltrators: (6 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.mynotfrozens,
@@ -9743,8 +9855,12 @@
                   }
                 }
                 return ret;
-              }())).length,
-            oppfrozeninvaders: -Object.keys(
+              }())).length),
+            oppfrozenguardedthreat: -(1 * Object.keys(ARTIFACTS.oppfrozenguardedthreat).length),
+            oppfrozenfreethreat: -(2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length),
+            oppmoverguardedthreat: -(3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length),
+            oppmoverfreethreat: -(4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length),
+            oppfrozeninfiltrators: -(5 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.oppfrozens,
@@ -9755,8 +9871,8 @@
                   }
                 }
                 return ret;
-              }())).length,
-            oppmobileinvaders: -Object.keys(
+              }())).length),
+            oppfreeinfiltrators: -(6 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.oppnotfrozens,
@@ -9767,7 +9883,7 @@
                   }
                 }
                 return ret;
-              }())).length
+              }())).length)
           };
         };
     })();
@@ -10100,11 +10216,65 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.brain_Bob_2 =
+      game.brain_Fred_2 =
         function(step) {
           var ARTIFACTS = step.ARTIFACTS;
           var UNITLAYERS = step.UNITLAYERS;
-          return Object.keys(
+          ARTIFACTS.myfrozenguardedthreat = {};
+          ARTIFACTS.myfrozenfreethreat = {};
+          ARTIFACTS.mymoverguardedthreat = {};
+          ARTIFACTS.mymoverfreethreat = {};
+          ARTIFACTS.oppfrozenguardedthreat = {};
+          ARTIFACTS.oppfrozenfreethreat = {};
+          ARTIFACTS.oppmoverguardedthreat = {};
+          ARTIFACTS.oppmoverfreethreat = {};
+          for (var STARTPOS in UNITLAYERS.myunits) {
+            var neighbourdirs = (!!(TERRAIN.oppbases[STARTPOS]) ? [8] : [7, 1]);
+            var nbrofneighbourdirs = neighbourdirs.length;
+            var startconnections = connections[STARTPOS];
+            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+              var POS = startconnections[neighbourdirs[dirnbr]];
+              if (POS &&
+                (function() {
+                  var k, ret = {},
+                    s0 = TERRAIN.oppbases,
+                    s1 = TERRAIN.oppcorners;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())[POS]) {
+                ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
+              }
+            } 
+          } 
+          for (var STARTPOS in UNITLAYERS.oppunits) {
+            var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [4] : [3, 5]);
+            var nbrofneighbourdirs = neighbourdirs.length;
+            var startconnections = connections[STARTPOS];
+            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+              var POS = startconnections[neighbourdirs[dirnbr]];
+              if (POS &&
+                (function() {
+                  var k, ret = {},
+                    s0 = TERRAIN.mybases,
+                    s1 = TERRAIN.mycorners;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())[POS]) {
+                ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
+              }
+            } 
+          } 
+          return (1 * Object.keys(ARTIFACTS.myfrozenguardedthreat).length) + (2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length) + (3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length) + (4 * Object.keys(ARTIFACTS.mymoverfreethreat).length) + (5 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.myfrozens,
@@ -10115,7 +10285,7 @@
                 }
               }
               return ret;
-            }())).length + Object.keys(
+            }())).length) + (6 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.mynotfrozens,
@@ -10126,7 +10296,7 @@
                 }
               }
               return ret;
-            }())).length - Object.keys(
+            }())).length) - (1 * Object.keys(ARTIFACTS.oppfrozenguardedthreat).length) - (2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length) - (3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length) - (4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length) - (5 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.oppfrozens,
@@ -10137,7 +10307,7 @@
                 }
               }
               return ret;
-            }())).length - Object.keys(
+            }())).length) - (6 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.oppnotfrozens,
@@ -10148,14 +10318,72 @@
                 }
               }
               return ret;
-            }())).length;
+            }())).length);
         };
-      game.brain_Bob_2_detailed =
+      game.brain_Fred_2_detailed =
         function(step) {
           var ARTIFACTS = step.ARTIFACTS;
           var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.myfrozenguardedthreat = {};
+          ARTIFACTS.myfrozenfreethreat = {};
+          ARTIFACTS.mymoverguardedthreat = {};
+          ARTIFACTS.mymoverfreethreat = {};
+          ARTIFACTS.oppfrozenguardedthreat = {};
+          ARTIFACTS.oppfrozenfreethreat = {};
+          ARTIFACTS.oppmoverguardedthreat = {};
+          ARTIFACTS.oppmoverfreethreat = {};
+          for (var STARTPOS in UNITLAYERS.myunits) {
+            var neighbourdirs = (!!(TERRAIN.oppbases[STARTPOS]) ? [8] : [7, 1]);
+            var nbrofneighbourdirs = neighbourdirs.length;
+            var startconnections = connections[STARTPOS];
+            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+              var POS = startconnections[neighbourdirs[dirnbr]];
+              if (POS &&
+                (function() {
+                  var k, ret = {},
+                    s0 = TERRAIN.oppbases,
+                    s1 = TERRAIN.oppcorners;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())[POS]) {
+                ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
+              }
+            } 
+          } 
+          for (var STARTPOS in UNITLAYERS.oppunits) {
+            var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [4] : [3, 5]);
+            var nbrofneighbourdirs = neighbourdirs.length;
+            var startconnections = connections[STARTPOS];
+            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+              var POS = startconnections[neighbourdirs[dirnbr]];
+              if (POS &&
+                (function() {
+                  var k, ret = {},
+                    s0 = TERRAIN.mybases,
+                    s1 = TERRAIN.mycorners;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())[POS]) {
+                ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
+              }
+            } 
+          } 
           return {
-            myfrozeninvaders: Object.keys(
+            myfrozenguardedthreat: (1 * Object.keys(ARTIFACTS.myfrozenguardedthreat).length),
+            myfrozenfreethreat: (2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length),
+            mymoverguardedthreat: (3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length),
+            mymoverfreethreat: (4 * Object.keys(ARTIFACTS.mymoverfreethreat).length),
+            myfrozeninfiltrators: (5 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.myfrozens,
@@ -10166,8 +10394,8 @@
                   }
                 }
                 return ret;
-              }())).length,
-            mymobileinvaders: Object.keys(
+              }())).length),
+            myfreeinfiltrators: (6 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.mynotfrozens,
@@ -10178,8 +10406,12 @@
                   }
                 }
                 return ret;
-              }())).length,
-            oppfrozeninvaders: -Object.keys(
+              }())).length),
+            oppfrozenguardedthreat: -(1 * Object.keys(ARTIFACTS.oppfrozenguardedthreat).length),
+            oppfrozenfreethreat: -(2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length),
+            oppmoverguardedthreat: -(3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length),
+            oppmoverfreethreat: -(4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length),
+            oppfrozeninfiltrators: -(5 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.oppfrozens,
@@ -10190,8 +10422,8 @@
                   }
                 }
                 return ret;
-              }())).length,
-            oppmobileinvaders: -Object.keys(
+              }())).length),
+            oppfreeinfiltrators: -(6 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.oppnotfrozens,
@@ -10202,7 +10434,7 @@
                   }
                 }
                 return ret;
-              }())).length
+              }())).length)
           };
         };
     })();
@@ -10300,7 +10532,7 @@
         }
       }
     };
-    game.AI = ["Bob"];
+    game.AI = ["Fred"];
     return game;
   }
 )(), murusgallicus: (

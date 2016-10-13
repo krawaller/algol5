@@ -1,5 +1,6 @@
 {
   "meta": {
+    "id": "amazon",
     "name": "Amazons",
     "source": "http://www.chessvariants.org/other.dir/amazons.html",
     "tags": ["deploy","starve"],

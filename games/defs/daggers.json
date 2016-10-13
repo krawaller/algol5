@@ -1,5 +1,6 @@
 {
   "meta": {
+    "id": "daggers",
     "name": "Daggers",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
     "tags": ["differentunits","asymmetric","multiplegoals","infiltrate","killking","capture"]

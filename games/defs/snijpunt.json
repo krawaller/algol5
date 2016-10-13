@@ -1,6 +1,6 @@
 {
-  "STATUS": "just needs turn reference!",
   "meta": {
+    "id": "snijpunt",
     "name": "Snijpunt",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/snijpunt.htm",
     "tags": ["formation","changeowner","deploy"]

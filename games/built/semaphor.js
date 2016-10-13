@@ -2,6 +2,7 @@
   function() {
     var game = {};
     var connections = {
+      "faux": {},
       "a1": {
         "1": "a2",
         "2": "b2",
@@ -927,6 +928,7 @@
       "height": 3
     };
     game.AI = [];
+    game.id = "semaphor";
     return game;
   }
 )()

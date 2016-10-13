@@ -1,6 +1,6 @@
 {
-  "STATUS": "dynamic layerref",
   "meta": {
+    "id": "semaphor",
     "name": "Semaphor",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/semaphor.htm",
     "tags": ["commonunits","formation","deploy","chooseaction","changeunit"]

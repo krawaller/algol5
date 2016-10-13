@@ -179,6 +179,7 @@ export default T => {
         bool_true: (O)=> "true",
         bool_false: (O)=> "false",
         bool_valinlist: (O,[val,list])=> '('+T.list(O,list)+'.indexOf('+T.value(O,val)+')!==-1)',
+        bool_justinone: (O,[pos,set1,set2])=> `((TEMP=${T.position(O,pos)}) && !${T.set(O,set1)}[TEMP] !== !${T.set(O,set2)}[TEMP])`,
 
         // ******************** DATATYPE id **********************
 
@@ -213,7 +214,7 @@ export default T => {
                 throw "Unknown value def: "+def;
             }
         },
-
+        val_indexlist: (O,[index,list])=> T.list(O,list)+'['+T.value(O,index)+']',
         val_pos: (O,[pos])=> T.position(O,pos),
         val_reldir: (O,[dir,rel])=> `relativedirs[${T.value(O,rel)}-2+${T.value(O,dir)}]`,
         val_value: (O,[value])=> typeof value === "string" ? "'"+value+"'" : value,

@@ -120,13 +120,14 @@ describe("The flow package commands",()=>{
             context: {
                 addAllMarkFunctions: O=> 'debug += "marks"; ',
                 addAllCommandFunctions: O=> 'debug += "cmnds"; ',
-                addStartTurnFunction: O=> 'debug += "start"; '
+                addStartTurnFunction: O=> 'debug += "start"; ',
+                addAI: O=> 'debug += "ai"; '
             },
             scope: {
                 debug : ''
             },
             mutations: {
-                debug: 'markscmndsstart'
+                debug: 'markscmndsstartai'
             }
         }
     })
@@ -141,13 +142,13 @@ describe("The flow package commands",()=>{
                 }
             },
             context: {
-                addMarkFunction: O=> 'debug += "'+O.markname+'"; '
+                addMarkFunction: O=> 'dbg += "'+O.markname+'"; '
             },
             scope: {
-                debug: ''
+                dbg: ''
             },
             mutations: {
-                debug: 'foobar'
+                dbg: 'foobar'
             }
         }
     })
@@ -155,10 +156,18 @@ describe("The flow package commands",()=>{
         'for regular game': {
             options: {
                 markname: 'somemark',
-                player: 666
+                player: 666,
+                rules: {
+                    marks: {
+                        somemark: {
+                            instruction: 'INSTR'
+                        }
+                    }
+                }
             },
             context: {
-                makeMarkFunction: O=> '"markfunc"'
+                makeMarkFunction: O=> '"markfunc"',
+                makeInstructionFunction: (O,instr)=> '"'+instr+'func"'
             },
             scope: {
                 game: {
@@ -168,7 +177,8 @@ describe("The flow package commands",()=>{
             mutations: {
                 game: {
                     othermark: 'foobar',
-                    somemark666: 'markfunc'
+                    somemark666: 'markfunc',
+                    somemark666instruction: 'INSTRfunc'
                 }
             }
         }
@@ -198,10 +208,18 @@ describe("The flow package commands",()=>{
         'for regular game': {
             options: {
                 cmndname: 'somecmnd',
-                player: 777
+                player: 777,
+                rules: {
+                    commands: {
+                        somecmnd: {
+                            instruction: 'INSTR'
+                        }
+                    }
+                }
             },
             context: {
-                makeCommandFunction: O=> '"cmndfunc"'
+                makeCommandFunction: O=> '"cmndfunc"',
+                makeInstructionFunction: (O,instr)=> '"'+instr+'func"'
             },
             scope: {
                 game: {
@@ -211,7 +229,8 @@ describe("The flow package commands",()=>{
             mutations: {
                 game: {
                     othercmnd: 'foobar',
-                    somecmnd777: 'cmndfunc'
+                    somecmnd777: 'cmndfunc',
+                    somecmnd777instruction: 'INSTRfunc'
                 }
             }
         }
@@ -219,10 +238,16 @@ describe("The flow package commands",()=>{
     test(lib,'addStartTurnFunction',{
         'for regular game': {
             options: {
-                player: 888
+                player: 888,
+                rules: {
+                    startTurn: {
+                        instruction: 'INSTR'
+                    }
+                }
             },
             context: {
-                makeStartFunction: O=> '"startfunc"'
+                makeStartFunction: O=> '"startfunc"',
+                makeInstructionFunction: (O,instr)=> '"'+instr+'func"'
             },
             scope: {
                 game: {
@@ -232,7 +257,8 @@ describe("The flow package commands",()=>{
             mutations: {
                 game: {
                     other: 'foobar',
-                    start888: 'startfunc'
+                    start888: 'startfunc',
+                    start888instruction: 'INSTRfunc'
                 }
             }
         }

@@ -75,9 +75,10 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var makeGame = function makeGame() {
+	(function () {
 	  var game = {};
 	  var connections = {
+	    "faux": {},
 	    "a1": {
 	      "1": "a2",
 	      "2": "b2",
@@ -395,6 +396,7 @@
 	      }
 	    }
 	  };
+	  var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
 	  (function () {
 	    var TERRAIN = {
 	      "southeast": {
@@ -498,9 +500,9 @@
 	        movetargets: (0, _assign2.default)({}, step.ARTIFACTS.movetargets)
 	      };
 	      var UNITLAYERS = step.UNITLAYERS;
-	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
+	      var MARKS = {
 	        selectunit: markpos
-	      });
+	      };
 	      var STARTPOS = MARKS['selectunit'];
 	      var neighbourdirs = !!TERRAIN.southeast[STARTPOS] ? [1, 3, 4, 5, 7] : !!TERRAIN.northwest[STARTPOS] ? [1, 3, 5, 7, 8] : [1, 3, 5, 7];
 	      var nbrofneighbourdirs = neighbourdirs.length;
@@ -516,31 +518,47 @@
 	        ARTIFACTS: ARTIFACTS,
 	        MARKS: MARKS,
 	        stepid: newstepid,
-	        path: step.path.concat(markpos)
+	        path: step.path.concat(markpos),
+	        name: 'selectunit'
 	      });
 	      turn.links[newstepid] = {};
-	      var linkedpositions = (0, _keys2.default)(ARTIFACTS.movetargets);
-	      var nbrofpositions = linkedpositions.length;
-	      for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-	        turn.links[newstepid][linkedpositions[linknbr]] = 'selectmove1';
+	      var newlinks = turn.links[newstepid];
+	      for (var linkpos in ARTIFACTS.movetargets) {
+	        newlinks[linkpos] = 'selectmove1';
 	      }
 	      return newstep;
+	    };
+	    game.selectunit1instruction = function (step) {
+	      var MARKS = step.MARKS;
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      var UNITDATA = step.UNITDATA;
+	      return '';
 	    };
 	    game.selectmove1 = function (turn, step, markpos) {
 	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS, {});
 	      var UNITLAYERS = step.UNITLAYERS;
-	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
-	        selectmove: markpos
-	      });
+	      var MARKS = {
+	        selectmove: markpos,
+	        selectunit: step.MARKS.selectunit
+	      };
 	      var newstepid = step.stepid + '-' + markpos;
 	      var newstep = turn.steps[newstepid] = (0, _assign2.default)({}, step, {
 	        MARKS: MARKS,
 	        stepid: newstepid,
-	        path: step.path.concat(markpos)
+	        path: step.path.concat(markpos),
+	        name: 'selectmove'
 	      });
 	      turn.links[newstepid] = {};
 	      turn.links[newstepid].move = 'move1';
 	      return newstep;
+	    };
+	    game.selectmove1instruction = function (step) {
+	      var MARKS = step.MARKS;
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      var UNITDATA = step.UNITDATA;
+	      return '';
 	    };
 	    game.move1 = function (turn, step) {
 	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS, {});
@@ -598,6 +616,7 @@
 	        UNITDATA: UNITDATA,
 	        UNITLAYERS: UNITLAYERS,
 	        stepid: newstepid,
+	        name: 'move',
 	        path: step.path.concat('move')
 	      });
 	      turn.links[newstepid] = {};
@@ -631,6 +650,13 @@
 	        turn.links[newstepid][result] = 'occupation';
 	      } else turn.links[newstepid].endturn = "start" + otherplayer;
 	      return newstep;
+	    };
+	    game.move1instruction = function (step) {
+	      var MARKS = step.MARKS;
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      var UNITDATA = step.UNITDATA;
+	      return '';
 	    };
 	    game.start1 = function (turn, step) {
 	      var turn = {
@@ -673,14 +699,232 @@
 	        UNITLAYERS: UNITLAYERS,
 	        MARKS: MARKS,
 	        stepid: 'root',
+	        name: 'start',
 	        path: []
 	      };
-	      var linkedpositions = (0, _keys2.default)(UNITLAYERS.mynotfrozens);
-	      var nbrofpositions = linkedpositions.length;
-	      for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-	        turn.links.root[linkedpositions[linknbr]] = 'selectunit1';
+	      var newlinks = turn.links.root;
+	      for (var linkpos in UNITLAYERS.mynotfrozens) {
+	        newlinks[linkpos] = 'selectunit1';
 	      }
 	      return turn;
+	    };
+	    game.start1instruction = function (step) {
+	      var MARKS = step.MARKS;
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      var UNITDATA = step.UNITDATA;
+	      return '';
+	    };
+	    game.brain_Fred_1 = function (step) {
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      ARTIFACTS.myfrozenguardedthreat = {};
+	      ARTIFACTS.myfrozenfreethreat = {};
+	      ARTIFACTS.mymoverguardedthreat = {};
+	      ARTIFACTS.mymoverfreethreat = {};
+	      ARTIFACTS.oppfrozenguardedthreat = {};
+	      ARTIFACTS.oppfrozenfreethreat = {};
+	      ARTIFACTS.oppmoverguardedthreat = {};
+	      ARTIFACTS.oppmoverfreethreat = {};
+	      for (var STARTPOS in UNITLAYERS.myunits) {
+	        var neighbourdirs = !!TERRAIN.oppbases[STARTPOS] ? [4] : [3, 5];
+	        var nbrofneighbourdirs = neighbourdirs.length;
+	        var startconnections = connections[STARTPOS];
+	        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+	          var POS = startconnections[neighbourdirs[dirnbr]];
+	          if (POS && function () {
+	            var k,
+	                ret = {},
+	                s0 = TERRAIN.oppbases,
+	                s1 = TERRAIN.oppcorners;
+	            for (k in s0) {
+	              ret[k] = 1;
+	            }
+	            for (k in s1) {
+	              ret[k] = 1;
+	            }
+	            return ret;
+	          }()[POS]) {
+	            ARTIFACTS[!!UNITLAYERS.myfrozens[STARTPOS] ? !!UNITLAYERS.units[POS] ? 'myfrozenguardedthreat' : 'myfrozenfreethreat' : !!UNITLAYERS.units[POS] ? 'mymoverguardedthreat' : 'mymoverfreethreat'][POS] = {};
+	          }
+	        }
+	      }
+	      for (var STARTPOS in UNITLAYERS.oppunits) {
+	        var neighbourdirs = !!TERRAIN.mybases[STARTPOS] ? [8] : [7, 1];
+	        var nbrofneighbourdirs = neighbourdirs.length;
+	        var startconnections = connections[STARTPOS];
+	        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+	          var POS = startconnections[neighbourdirs[dirnbr]];
+	          if (POS && function () {
+	            var k,
+	                ret = {},
+	                s0 = TERRAIN.mybases,
+	                s1 = TERRAIN.mycorners;
+	            for (k in s0) {
+	              ret[k] = 1;
+	            }
+	            for (k in s1) {
+	              ret[k] = 1;
+	            }
+	            return ret;
+	          }()[POS]) {
+	            ARTIFACTS[!!UNITLAYERS.oppfrozens[STARTPOS] ? !!UNITLAYERS.units[POS] ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat' : !!UNITLAYERS.units[POS] ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'][POS] = {};
+	          }
+	        }
+	      }
+	      return 1 * (0, _keys2.default)(ARTIFACTS.myfrozenguardedthreat).length + 2 * (0, _keys2.default)(ARTIFACTS.myfrozenfreethreat).length + 3 * (0, _keys2.default)(ARTIFACTS.mymoverguardedthreat).length + 4 * (0, _keys2.default)(ARTIFACTS.mymoverfreethreat).length + 5 * (0, _keys2.default)(function () {
+	        var ret = {},
+	            s0 = UNITLAYERS.myfrozens,
+	            s1 = TERRAIN.oppbases;
+	        for (var key in s0) {
+	          if (s1[key]) {
+	            ret[key] = s0[key];
+	          }
+	        }
+	        return ret;
+	      }()).length + 6 * (0, _keys2.default)(function () {
+	        var ret = {},
+	            s0 = UNITLAYERS.mynotfrozens,
+	            s1 = TERRAIN.oppbases;
+	        for (var key in s0) {
+	          if (s1[key]) {
+	            ret[key] = s0[key];
+	          }
+	        }
+	        return ret;
+	      }()).length - 1 * (0, _keys2.default)(ARTIFACTS.oppfrozenguardedthreat).length - 2 * (0, _keys2.default)(ARTIFACTS.oppfrozenfreethreat).length - 3 * (0, _keys2.default)(ARTIFACTS.oppmoverguardedthreat).length - 4 * (0, _keys2.default)(ARTIFACTS.oppmoverfreethreat).length - 5 * (0, _keys2.default)(function () {
+	        var ret = {},
+	            s0 = UNITLAYERS.oppfrozens,
+	            s1 = TERRAIN.mybases;
+	        for (var key in s0) {
+	          if (s1[key]) {
+	            ret[key] = s0[key];
+	          }
+	        }
+	        return ret;
+	      }()).length - 6 * (0, _keys2.default)(function () {
+	        var ret = {},
+	            s0 = UNITLAYERS.oppnotfrozens,
+	            s1 = TERRAIN.mybases;
+	        for (var key in s0) {
+	          if (s1[key]) {
+	            ret[key] = s0[key];
+	          }
+	        }
+	        return ret;
+	      }()).length;
+	    };
+	    game.brain_Fred_1_detailed = function (step) {
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      ARTIFACTS.myfrozenguardedthreat = {};
+	      ARTIFACTS.myfrozenfreethreat = {};
+	      ARTIFACTS.mymoverguardedthreat = {};
+	      ARTIFACTS.mymoverfreethreat = {};
+	      ARTIFACTS.oppfrozenguardedthreat = {};
+	      ARTIFACTS.oppfrozenfreethreat = {};
+	      ARTIFACTS.oppmoverguardedthreat = {};
+	      ARTIFACTS.oppmoverfreethreat = {};
+	      for (var STARTPOS in UNITLAYERS.myunits) {
+	        var neighbourdirs = !!TERRAIN.oppbases[STARTPOS] ? [4] : [3, 5];
+	        var nbrofneighbourdirs = neighbourdirs.length;
+	        var startconnections = connections[STARTPOS];
+	        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+	          var POS = startconnections[neighbourdirs[dirnbr]];
+	          if (POS && function () {
+	            var k,
+	                ret = {},
+	                s0 = TERRAIN.oppbases,
+	                s1 = TERRAIN.oppcorners;
+	            for (k in s0) {
+	              ret[k] = 1;
+	            }
+	            for (k in s1) {
+	              ret[k] = 1;
+	            }
+	            return ret;
+	          }()[POS]) {
+	            ARTIFACTS[!!UNITLAYERS.myfrozens[STARTPOS] ? !!UNITLAYERS.units[POS] ? 'myfrozenguardedthreat' : 'myfrozenfreethreat' : !!UNITLAYERS.units[POS] ? 'mymoverguardedthreat' : 'mymoverfreethreat'][POS] = {};
+	          }
+	        }
+	      }
+	      for (var STARTPOS in UNITLAYERS.oppunits) {
+	        var neighbourdirs = !!TERRAIN.mybases[STARTPOS] ? [8] : [7, 1];
+	        var nbrofneighbourdirs = neighbourdirs.length;
+	        var startconnections = connections[STARTPOS];
+	        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+	          var POS = startconnections[neighbourdirs[dirnbr]];
+	          if (POS && function () {
+	            var k,
+	                ret = {},
+	                s0 = TERRAIN.mybases,
+	                s1 = TERRAIN.mycorners;
+	            for (k in s0) {
+	              ret[k] = 1;
+	            }
+	            for (k in s1) {
+	              ret[k] = 1;
+	            }
+	            return ret;
+	          }()[POS]) {
+	            ARTIFACTS[!!UNITLAYERS.oppfrozens[STARTPOS] ? !!UNITLAYERS.units[POS] ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat' : !!UNITLAYERS.units[POS] ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'][POS] = {};
+	          }
+	        }
+	      }
+	      return {
+	        myfrozenguardedthreat: 1 * (0, _keys2.default)(ARTIFACTS.myfrozenguardedthreat).length,
+	        myfrozenfreethreat: 2 * (0, _keys2.default)(ARTIFACTS.myfrozenfreethreat).length,
+	        mymoverguardedthreat: 3 * (0, _keys2.default)(ARTIFACTS.mymoverguardedthreat).length,
+	        mymoverfreethreat: 4 * (0, _keys2.default)(ARTIFACTS.mymoverfreethreat).length,
+	        myfrozeninfiltrators: 5 * (0, _keys2.default)(function () {
+	          var ret = {},
+	              s0 = UNITLAYERS.myfrozens,
+	              s1 = TERRAIN.oppbases;
+	          for (var key in s0) {
+	            if (s1[key]) {
+	              ret[key] = s0[key];
+	            }
+	          }
+	          return ret;
+	        }()).length,
+	        myfreeinfiltrators: 6 * (0, _keys2.default)(function () {
+	          var ret = {},
+	              s0 = UNITLAYERS.mynotfrozens,
+	              s1 = TERRAIN.oppbases;
+	          for (var key in s0) {
+	            if (s1[key]) {
+	              ret[key] = s0[key];
+	            }
+	          }
+	          return ret;
+	        }()).length,
+	        oppfrozenguardedthreat: -(1 * (0, _keys2.default)(ARTIFACTS.oppfrozenguardedthreat).length),
+	        oppfrozenfreethreat: -(2 * (0, _keys2.default)(ARTIFACTS.oppfrozenfreethreat).length),
+	        oppmoverguardedthreat: -(3 * (0, _keys2.default)(ARTIFACTS.oppmoverguardedthreat).length),
+	        oppmoverfreethreat: -(4 * (0, _keys2.default)(ARTIFACTS.oppmoverfreethreat).length),
+	        oppfrozeninfiltrators: -(5 * (0, _keys2.default)(function () {
+	          var ret = {},
+	              s0 = UNITLAYERS.oppfrozens,
+	              s1 = TERRAIN.mybases;
+	          for (var key in s0) {
+	            if (s1[key]) {
+	              ret[key] = s0[key];
+	            }
+	          }
+	          return ret;
+	        }()).length),
+	        oppfreeinfiltrators: -(6 * (0, _keys2.default)(function () {
+	          var ret = {},
+	              s0 = UNITLAYERS.oppnotfrozens,
+	              s1 = TERRAIN.mybases;
+	          for (var key in s0) {
+	            if (s1[key]) {
+	              ret[key] = s0[key];
+	            }
+	          }
+	          return ret;
+	        }()).length)
+	      };
 	    };
 	  })();
 	  (function () {
@@ -786,9 +1030,9 @@
 	        movetargets: (0, _assign2.default)({}, step.ARTIFACTS.movetargets)
 	      };
 	      var UNITLAYERS = step.UNITLAYERS;
-	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
+	      var MARKS = {
 	        selectunit: markpos
-	      });
+	      };
 	      var STARTPOS = MARKS['selectunit'];
 	      var neighbourdirs = !!TERRAIN.southeast[STARTPOS] ? [1, 3, 4, 5, 7] : !!TERRAIN.northwest[STARTPOS] ? [1, 3, 5, 7, 8] : [1, 3, 5, 7];
 	      var nbrofneighbourdirs = neighbourdirs.length;
@@ -804,31 +1048,47 @@
 	        ARTIFACTS: ARTIFACTS,
 	        MARKS: MARKS,
 	        stepid: newstepid,
-	        path: step.path.concat(markpos)
+	        path: step.path.concat(markpos),
+	        name: 'selectunit'
 	      });
 	      turn.links[newstepid] = {};
-	      var linkedpositions = (0, _keys2.default)(ARTIFACTS.movetargets);
-	      var nbrofpositions = linkedpositions.length;
-	      for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-	        turn.links[newstepid][linkedpositions[linknbr]] = 'selectmove2';
+	      var newlinks = turn.links[newstepid];
+	      for (var linkpos in ARTIFACTS.movetargets) {
+	        newlinks[linkpos] = 'selectmove2';
 	      }
 	      return newstep;
+	    };
+	    game.selectunit2instruction = function (step) {
+	      var MARKS = step.MARKS;
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      var UNITDATA = step.UNITDATA;
+	      return '';
 	    };
 	    game.selectmove2 = function (turn, step, markpos) {
 	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS, {});
 	      var UNITLAYERS = step.UNITLAYERS;
-	      var MARKS = (0, _assign2.default)({}, step.MARKS, {
-	        selectmove: markpos
-	      });
+	      var MARKS = {
+	        selectmove: markpos,
+	        selectunit: step.MARKS.selectunit
+	      };
 	      var newstepid = step.stepid + '-' + markpos;
 	      var newstep = turn.steps[newstepid] = (0, _assign2.default)({}, step, {
 	        MARKS: MARKS,
 	        stepid: newstepid,
-	        path: step.path.concat(markpos)
+	        path: step.path.concat(markpos),
+	        name: 'selectmove'
 	      });
 	      turn.links[newstepid] = {};
 	      turn.links[newstepid].move = 'move2';
 	      return newstep;
+	    };
+	    game.selectmove2instruction = function (step) {
+	      var MARKS = step.MARKS;
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      var UNITDATA = step.UNITDATA;
+	      return '';
 	    };
 	    game.move2 = function (turn, step) {
 	      var ARTIFACTS = (0, _assign2.default)({}, step.ARTIFACTS, {});
@@ -886,6 +1146,7 @@
 	        UNITDATA: UNITDATA,
 	        UNITLAYERS: UNITLAYERS,
 	        stepid: newstepid,
+	        name: 'move',
 	        path: step.path.concat('move')
 	      });
 	      turn.links[newstepid] = {};
@@ -919,6 +1180,13 @@
 	        turn.links[newstepid][result] = 'occupation';
 	      } else turn.links[newstepid].endturn = "start" + otherplayer;
 	      return newstep;
+	    };
+	    game.move2instruction = function (step) {
+	      var MARKS = step.MARKS;
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      var UNITDATA = step.UNITDATA;
+	      return '';
 	    };
 	    game.start2 = function (turn, step) {
 	      var turn = {
@@ -961,16 +1229,240 @@
 	        UNITLAYERS: UNITLAYERS,
 	        MARKS: MARKS,
 	        stepid: 'root',
+	        name: 'start',
 	        path: []
 	      };
-	      var linkedpositions = (0, _keys2.default)(UNITLAYERS.mynotfrozens);
-	      var nbrofpositions = linkedpositions.length;
-	      for (var linknbr = 0; linknbr < nbrofpositions; linknbr++) {
-	        turn.links.root[linkedpositions[linknbr]] = 'selectunit2';
+	      var newlinks = turn.links.root;
+	      for (var linkpos in UNITLAYERS.mynotfrozens) {
+	        newlinks[linkpos] = 'selectunit2';
 	      }
 	      return turn;
 	    };
+	    game.start2instruction = function (step) {
+	      var MARKS = step.MARKS;
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      var UNITDATA = step.UNITDATA;
+	      return '';
+	    };
+	    game.brain_Fred_2 = function (step) {
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      ARTIFACTS.myfrozenguardedthreat = {};
+	      ARTIFACTS.myfrozenfreethreat = {};
+	      ARTIFACTS.mymoverguardedthreat = {};
+	      ARTIFACTS.mymoverfreethreat = {};
+	      ARTIFACTS.oppfrozenguardedthreat = {};
+	      ARTIFACTS.oppfrozenfreethreat = {};
+	      ARTIFACTS.oppmoverguardedthreat = {};
+	      ARTIFACTS.oppmoverfreethreat = {};
+	      for (var STARTPOS in UNITLAYERS.myunits) {
+	        var neighbourdirs = !!TERRAIN.oppbases[STARTPOS] ? [8] : [7, 1];
+	        var nbrofneighbourdirs = neighbourdirs.length;
+	        var startconnections = connections[STARTPOS];
+	        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+	          var POS = startconnections[neighbourdirs[dirnbr]];
+	          if (POS && function () {
+	            var k,
+	                ret = {},
+	                s0 = TERRAIN.oppbases,
+	                s1 = TERRAIN.oppcorners;
+	            for (k in s0) {
+	              ret[k] = 1;
+	            }
+	            for (k in s1) {
+	              ret[k] = 1;
+	            }
+	            return ret;
+	          }()[POS]) {
+	            ARTIFACTS[!!UNITLAYERS.myfrozens[STARTPOS] ? !!UNITLAYERS.units[POS] ? 'myfrozenguardedthreat' : 'myfrozenfreethreat' : !!UNITLAYERS.units[POS] ? 'mymoverguardedthreat' : 'mymoverfreethreat'][POS] = {};
+	          }
+	        }
+	      }
+	      for (var STARTPOS in UNITLAYERS.oppunits) {
+	        var neighbourdirs = !!TERRAIN.mybases[STARTPOS] ? [4] : [3, 5];
+	        var nbrofneighbourdirs = neighbourdirs.length;
+	        var startconnections = connections[STARTPOS];
+	        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+	          var POS = startconnections[neighbourdirs[dirnbr]];
+	          if (POS && function () {
+	            var k,
+	                ret = {},
+	                s0 = TERRAIN.mybases,
+	                s1 = TERRAIN.mycorners;
+	            for (k in s0) {
+	              ret[k] = 1;
+	            }
+	            for (k in s1) {
+	              ret[k] = 1;
+	            }
+	            return ret;
+	          }()[POS]) {
+	            ARTIFACTS[!!UNITLAYERS.oppfrozens[STARTPOS] ? !!UNITLAYERS.units[POS] ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat' : !!UNITLAYERS.units[POS] ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'][POS] = {};
+	          }
+	        }
+	      }
+	      return 1 * (0, _keys2.default)(ARTIFACTS.myfrozenguardedthreat).length + 2 * (0, _keys2.default)(ARTIFACTS.myfrozenfreethreat).length + 3 * (0, _keys2.default)(ARTIFACTS.mymoverguardedthreat).length + 4 * (0, _keys2.default)(ARTIFACTS.mymoverfreethreat).length + 5 * (0, _keys2.default)(function () {
+	        var ret = {},
+	            s0 = UNITLAYERS.myfrozens,
+	            s1 = TERRAIN.oppbases;
+	        for (var key in s0) {
+	          if (s1[key]) {
+	            ret[key] = s0[key];
+	          }
+	        }
+	        return ret;
+	      }()).length + 6 * (0, _keys2.default)(function () {
+	        var ret = {},
+	            s0 = UNITLAYERS.mynotfrozens,
+	            s1 = TERRAIN.oppbases;
+	        for (var key in s0) {
+	          if (s1[key]) {
+	            ret[key] = s0[key];
+	          }
+	        }
+	        return ret;
+	      }()).length - 1 * (0, _keys2.default)(ARTIFACTS.oppfrozenguardedthreat).length - 2 * (0, _keys2.default)(ARTIFACTS.oppfrozenfreethreat).length - 3 * (0, _keys2.default)(ARTIFACTS.oppmoverguardedthreat).length - 4 * (0, _keys2.default)(ARTIFACTS.oppmoverfreethreat).length - 5 * (0, _keys2.default)(function () {
+	        var ret = {},
+	            s0 = UNITLAYERS.oppfrozens,
+	            s1 = TERRAIN.mybases;
+	        for (var key in s0) {
+	          if (s1[key]) {
+	            ret[key] = s0[key];
+	          }
+	        }
+	        return ret;
+	      }()).length - 6 * (0, _keys2.default)(function () {
+	        var ret = {},
+	            s0 = UNITLAYERS.oppnotfrozens,
+	            s1 = TERRAIN.mybases;
+	        for (var key in s0) {
+	          if (s1[key]) {
+	            ret[key] = s0[key];
+	          }
+	        }
+	        return ret;
+	      }()).length;
+	    };
+	    game.brain_Fred_2_detailed = function (step) {
+	      var ARTIFACTS = step.ARTIFACTS;
+	      var UNITLAYERS = step.UNITLAYERS;
+	      ARTIFACTS.myfrozenguardedthreat = {};
+	      ARTIFACTS.myfrozenfreethreat = {};
+	      ARTIFACTS.mymoverguardedthreat = {};
+	      ARTIFACTS.mymoverfreethreat = {};
+	      ARTIFACTS.oppfrozenguardedthreat = {};
+	      ARTIFACTS.oppfrozenfreethreat = {};
+	      ARTIFACTS.oppmoverguardedthreat = {};
+	      ARTIFACTS.oppmoverfreethreat = {};
+	      for (var STARTPOS in UNITLAYERS.myunits) {
+	        var neighbourdirs = !!TERRAIN.oppbases[STARTPOS] ? [8] : [7, 1];
+	        var nbrofneighbourdirs = neighbourdirs.length;
+	        var startconnections = connections[STARTPOS];
+	        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+	          var POS = startconnections[neighbourdirs[dirnbr]];
+	          if (POS && function () {
+	            var k,
+	                ret = {},
+	                s0 = TERRAIN.oppbases,
+	                s1 = TERRAIN.oppcorners;
+	            for (k in s0) {
+	              ret[k] = 1;
+	            }
+	            for (k in s1) {
+	              ret[k] = 1;
+	            }
+	            return ret;
+	          }()[POS]) {
+	            ARTIFACTS[!!UNITLAYERS.myfrozens[STARTPOS] ? !!UNITLAYERS.units[POS] ? 'myfrozenguardedthreat' : 'myfrozenfreethreat' : !!UNITLAYERS.units[POS] ? 'mymoverguardedthreat' : 'mymoverfreethreat'][POS] = {};
+	          }
+	        }
+	      }
+	      for (var STARTPOS in UNITLAYERS.oppunits) {
+	        var neighbourdirs = !!TERRAIN.mybases[STARTPOS] ? [4] : [3, 5];
+	        var nbrofneighbourdirs = neighbourdirs.length;
+	        var startconnections = connections[STARTPOS];
+	        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+	          var POS = startconnections[neighbourdirs[dirnbr]];
+	          if (POS && function () {
+	            var k,
+	                ret = {},
+	                s0 = TERRAIN.mybases,
+	                s1 = TERRAIN.mycorners;
+	            for (k in s0) {
+	              ret[k] = 1;
+	            }
+	            for (k in s1) {
+	              ret[k] = 1;
+	            }
+	            return ret;
+	          }()[POS]) {
+	            ARTIFACTS[!!UNITLAYERS.oppfrozens[STARTPOS] ? !!UNITLAYERS.units[POS] ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat' : !!UNITLAYERS.units[POS] ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'][POS] = {};
+	          }
+	        }
+	      }
+	      return {
+	        myfrozenguardedthreat: 1 * (0, _keys2.default)(ARTIFACTS.myfrozenguardedthreat).length,
+	        myfrozenfreethreat: 2 * (0, _keys2.default)(ARTIFACTS.myfrozenfreethreat).length,
+	        mymoverguardedthreat: 3 * (0, _keys2.default)(ARTIFACTS.mymoverguardedthreat).length,
+	        mymoverfreethreat: 4 * (0, _keys2.default)(ARTIFACTS.mymoverfreethreat).length,
+	        myfrozeninfiltrators: 5 * (0, _keys2.default)(function () {
+	          var ret = {},
+	              s0 = UNITLAYERS.myfrozens,
+	              s1 = TERRAIN.oppbases;
+	          for (var key in s0) {
+	            if (s1[key]) {
+	              ret[key] = s0[key];
+	            }
+	          }
+	          return ret;
+	        }()).length,
+	        myfreeinfiltrators: 6 * (0, _keys2.default)(function () {
+	          var ret = {},
+	              s0 = UNITLAYERS.mynotfrozens,
+	              s1 = TERRAIN.oppbases;
+	          for (var key in s0) {
+	            if (s1[key]) {
+	              ret[key] = s0[key];
+	            }
+	          }
+	          return ret;
+	        }()).length,
+	        oppfrozenguardedthreat: -(1 * (0, _keys2.default)(ARTIFACTS.oppfrozenguardedthreat).length),
+	        oppfrozenfreethreat: -(2 * (0, _keys2.default)(ARTIFACTS.oppfrozenfreethreat).length),
+	        oppmoverguardedthreat: -(3 * (0, _keys2.default)(ARTIFACTS.oppmoverguardedthreat).length),
+	        oppmoverfreethreat: -(4 * (0, _keys2.default)(ARTIFACTS.oppmoverfreethreat).length),
+	        oppfrozeninfiltrators: -(5 * (0, _keys2.default)(function () {
+	          var ret = {},
+	              s0 = UNITLAYERS.oppfrozens,
+	              s1 = TERRAIN.mybases;
+	          for (var key in s0) {
+	            if (s1[key]) {
+	              ret[key] = s0[key];
+	            }
+	          }
+	          return ret;
+	        }()).length),
+	        oppfreeinfiltrators: -(6 * (0, _keys2.default)(function () {
+	          var ret = {},
+	              s0 = UNITLAYERS.oppnotfrozens,
+	              s1 = TERRAIN.mybases;
+	          for (var key in s0) {
+	            if (s1[key]) {
+	              ret[key] = s0[key];
+	            }
+	          }
+	          return ret;
+	        }()).length)
+	      };
+	    };
 	  })();
+	  function reduce(coll, iterator, acc) {
+	    for (var key in coll) {
+	      acc = iterator(acc, coll[key], key);
+	    }
+	    return acc;
+	  }
 	  game.newGame = function () {
 	    var turnseed = {
 	      turn: 0
@@ -1058,10 +1550,10 @@
 	      }
 	    }
 	  };
+	  game.AI = ["Fred"];
+	  game.id = "krieg";
 	  return game;
-	};
-	var instance = makeGame();
-	module.exports = instance;
+	})();
 
 /***/ },
 /* 2 */
@@ -1345,17 +1837,21 @@
 	    value: true
 	});
 
-	var _slicedToArray2 = __webpack_require__(22);
+	var _assign = __webpack_require__(14);
 
-	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
+	var _assign2 = _interopRequireDefault(_assign);
 
 	var _keys = __webpack_require__(2);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _mapValues = __webpack_require__(54);
+	var _mapValues = __webpack_require__(22);
 
 	var _mapValues2 = _interopRequireDefault(_mapValues);
+
+	var _reduce = __webpack_require__(67);
+
+	var _reduce2 = _interopRequireDefault(_reduce);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1391,7 +1887,7 @@
 	        }
 	        return turn;
 	    },
-	    startGameSession: function startGameSession(game) {
+	    startGameSession: function startGameSession(game, plr1, plr2) {
 	        var turn = game.newGame();
 	        turn = play.hydrateTurn(game, turn);
 	        var session = {
@@ -1399,36 +1895,23 @@
 	            turn: turn,
 	            step: turn.steps.root,
 	            save: [],
-	            marks: {},
-	            undo: []
+	            markTimeStamps: {},
+	            undo: [],
+	            players: [plr1, plr2]
 	        };
 	        session.UI = play.getSessionUI(session);
 	        return session;
 	    },
 	    makeSessionAction: function makeSessionAction(session, action) {
-	        if (session.marks[action]) {
+	        if (session.markTimeStamps[action] && !session.turn.links[session.step.stepid][action]) {
 	            // removing a mark
-	            session.step = session.turn.steps[session.marks[action]];
-
-	            session.marks = (0, _keys2.default)(session.step.MARKS).reduce(function (mem, markname) {
-	                var pos = session.step.MARKS[markname];
-	                mem[pos] = session.marks[pos];
-	                return mem;
-	            }, {});
-
+	            console.log("Going back to", session.markTimeStamps[action]);
+	            session.step = session.turn.steps[session.markTimeStamps[action]];
+	            delete session.markTimeStamps[action]; // not really necessary
 	            session.UI = play.getSessionUI(session);
 	        } else if (action === 'undo') {
-	            var _session$undo$pop = session.undo.pop();
-
-	            var _session$undo$pop2 = (0, _slicedToArray3.default)(_session$undo$pop, 2);
-
-	            var gobackto = _session$undo$pop2[0];
-	            var removemarks = _session$undo$pop2[1];
-
+	            var gobackto = session.undo.pop();
 	            session.step = session.turn.steps[gobackto];
-
-	            session.marks = removemarks;
-
 	            session.UI = play.getSessionUI(session);
 	        } else if (endgameactions[action]) {
 	            // TODO - end the session!
@@ -1436,20 +1919,18 @@
 	                session.save = session.save.concat(play.calculateSave(session.turn, session.step));
 	                session.turn = play.hydrateTurn(session.game, session.turn.next[session.step.stepid]);
 	                session.step = session.turn.steps.root;
-	                session.marks = {};
+	                session.markTimeStamps = {};
 	                session.undo = [];
 	                session.UI = play.getSessionUI(session);
 	            } else {
 	                if (!session.game.commands[action]) {
-	                    session.marks[action] = session.step.stepid;
+	                    session.markTimeStamps[action] = session.step.stepid;
 	                } else {
-	                    session.undo.push([session.step.stepid, session.marks]);
-	                    session.marks = {};
+	                    session.undo.push(session.step.stepid);
 	                }
 	                session.step = session.turn.steps[session.step.stepid + '-' + action];
 	                session.UI = play.getSessionUI(session);
 	            }
-	        console.log("SESS", session);
 	        return session;
 	    },
 	    calculateSave: function calculateSave(turn, step) {
@@ -1475,7 +1956,14 @@
 	        var turn = _ref.turn;
 	        var step = _ref.step;
 	        var undo = _ref.undo;
-	        return (0, _keys2.default)(turn.links[step.stepid]).reduce(function (mem, action) {
+	        var markTimeStamps = _ref.markTimeStamps;
+
+	        var removeMarks = (0, _keys2.default)(step.MARKS).reduce(function (mem, markname) {
+	            var pos = step.MARKS[markname];
+	            mem[pos] = markTimeStamps[pos];
+	            return mem;
+	        }, {});
+	        var links = (0, _keys2.default)(turn.links[step.stepid]).reduce(function (mem, action) {
 	            if (endgameactions[action] || action == 'endturn' || action === 'next') {
 	                mem.system.push(action);
 	            } else if (game.commands[action]) {
@@ -1485,6 +1973,10 @@
 	            }
 	            return mem;
 	        }, { marks: [], commands: [], system: undo.length ? ['undo'] : [] });
+	        return (0, _assign2.default)({
+	            removeMarks: removeMarks,
+	            instruction: game[step.name + turn.player + 'instruction'](step)
+	        }, links);
 	    },
 	    hydrateStep: function hydrateStep(game, turn, step) {
 	        var steps = turn.steps;
@@ -1556,6 +2048,25 @@
 	            }
 	        }
 	        return turn;
+	    },
+	    findBestOption: function findBestOption(game, turn, brain) {
+	        var func = game['brain_' + brain + '_' + turn.player],
+	            winners = [],
+	            highscore = -1000000;
+	        if (turn.ends.win.length) {
+	            winners = turn.ends.win;
+	        } else {
+	            for (var stepid in turn.next) {
+	                var stepscore = func(turn.steps[stepid]);
+	                if (stepscore > highscore) {
+	                    winners = [stepid];
+	                    highscore = stepscore;
+	                } else if (stepscore === highscore) {
+	                    winners.push(stepid);
+	                }
+	            }
+	        }
+	        return winners;
 	    }
 	};
 
@@ -1565,492 +2076,7 @@
 /* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	exports.__esModule = true;
-
-	var _isIterable2 = __webpack_require__(23);
-
-	var _isIterable3 = _interopRequireDefault(_isIterable2);
-
-	var _getIterator2 = __webpack_require__(48);
-
-	var _getIterator3 = _interopRequireDefault(_getIterator2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = (function () {
-	  function sliceIterator(arr, i) {
-	    var _arr = [];
-	    var _n = true;
-	    var _d = false;
-	    var _e = undefined;
-
-	    try {
-	      for (var _i = (0, _getIterator3.default)(arr), _s; !(_n = (_s = _i.next()).done); _n = true) {
-	        _arr.push(_s.value);
-
-	        if (i && _arr.length === i) break;
-	      }
-	    } catch (err) {
-	      _d = true;
-	      _e = err;
-	    } finally {
-	      try {
-	        if (!_n && _i["return"]) _i["return"]();
-	      } finally {
-	        if (_d) throw _e;
-	      }
-	    }
-
-	    return _arr;
-	  }
-
-	  return function (arr, i) {
-	    if (Array.isArray(arr)) {
-	      return arr;
-	    } else if ((0, _isIterable3.default)(Object(arr))) {
-	      return sliceIterator(arr, i);
-	    } else {
-	      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-	    }
-	  };
-	})();
-
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(24), __esModule: true };
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(25);
-	__webpack_require__(43);
-	module.exports = __webpack_require__(46);
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(26);
-	var Iterators = __webpack_require__(29);
-	Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var addToUnscopables = __webpack_require__(27)
-	  , step             = __webpack_require__(28)
-	  , Iterators        = __webpack_require__(29)
-	  , toIObject        = __webpack_require__(30);
-
-	// 22.1.3.4 Array.prototype.entries()
-	// 22.1.3.13 Array.prototype.keys()
-	// 22.1.3.29 Array.prototype.values()
-	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(31)(Array, 'Array', function(iterated, kind){
-	  this._t = toIObject(iterated); // target
-	  this._i = 0;                   // next index
-	  this._k = kind;                // kind
-	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
-	}, function(){
-	  var O     = this._t
-	    , kind  = this._k
-	    , index = this._i++;
-	  if(!O || index >= O.length){
-	    this._t = undefined;
-	    return step(1);
-	  }
-	  if(kind == 'keys'  )return step(0, index);
-	  if(kind == 'values')return step(0, O[index]);
-	  return step(0, [index, O[index]]);
-	}, 'values');
-
-	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
-	Iterators.Arguments = Iterators.Array;
-
-	addToUnscopables('keys');
-	addToUnscopables('values');
-	addToUnscopables('entries');
-
-/***/ },
-/* 27 */
-/***/ function(module, exports) {
-
-	module.exports = function(){ /* empty */ };
-
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
-
-	module.exports = function(done, value){
-	  return {value: value, done: !!done};
-	};
-
-/***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	module.exports = {};
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(19)
-	  , defined = __webpack_require__(6);
-	module.exports = function(it){
-	  return IObject(defined(it));
-	};
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var LIBRARY        = __webpack_require__(32)
-	  , $export        = __webpack_require__(8)
-	  , redefine       = __webpack_require__(33)
-	  , hide           = __webpack_require__(34)
-	  , has            = __webpack_require__(37)
-	  , Iterators      = __webpack_require__(29)
-	  , $iterCreate    = __webpack_require__(38)
-	  , setToStringTag = __webpack_require__(39)
-	  , getProto       = __webpack_require__(18).getProto
-	  , ITERATOR       = __webpack_require__(40)('iterator')
-	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
-	  , FF_ITERATOR    = '@@iterator'
-	  , KEYS           = 'keys'
-	  , VALUES         = 'values';
-
-	var returnThis = function(){ return this; };
-
-	module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
-	  $iterCreate(Constructor, NAME, next);
-	  var getMethod = function(kind){
-	    if(!BUGGY && kind in proto)return proto[kind];
-	    switch(kind){
-	      case KEYS: return function keys(){ return new Constructor(this, kind); };
-	      case VALUES: return function values(){ return new Constructor(this, kind); };
-	    } return function entries(){ return new Constructor(this, kind); };
-	  };
-	  var TAG        = NAME + ' Iterator'
-	    , DEF_VALUES = DEFAULT == VALUES
-	    , VALUES_BUG = false
-	    , proto      = Base.prototype
-	    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
-	    , $default   = $native || getMethod(DEFAULT)
-	    , methods, key;
-	  // Fix native
-	  if($native){
-	    var IteratorPrototype = getProto($default.call(new Base));
-	    // Set @@toStringTag to native iterators
-	    setToStringTag(IteratorPrototype, TAG, true);
-	    // FF fix
-	    if(!LIBRARY && has(proto, FF_ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
-	    // fix Array#{values, @@iterator}.name in V8 / FF
-	    if(DEF_VALUES && $native.name !== VALUES){
-	      VALUES_BUG = true;
-	      $default = function values(){ return $native.call(this); };
-	    }
-	  }
-	  // Define iterator
-	  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
-	    hide(proto, ITERATOR, $default);
-	  }
-	  // Plug for library
-	  Iterators[NAME] = $default;
-	  Iterators[TAG]  = returnThis;
-	  if(DEFAULT){
-	    methods = {
-	      values:  DEF_VALUES  ? $default : getMethod(VALUES),
-	      keys:    IS_SET      ? $default : getMethod(KEYS),
-	      entries: !DEF_VALUES ? $default : getMethod('entries')
-	    };
-	    if(FORCED)for(key in methods){
-	      if(!(key in proto))redefine(proto, key, methods[key]);
-	    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
-	  }
-	  return methods;
-	};
-
-/***/ },
-/* 32 */
-/***/ function(module, exports) {
-
-	module.exports = true;
-
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(34);
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $          = __webpack_require__(18)
-	  , createDesc = __webpack_require__(35);
-	module.exports = __webpack_require__(36) ? function(object, key, value){
-	  return $.setDesc(object, key, createDesc(1, value));
-	} : function(object, key, value){
-	  object[key] = value;
-	  return object;
-	};
-
-/***/ },
-/* 35 */
-/***/ function(module, exports) {
-
-	module.exports = function(bitmap, value){
-	  return {
-	    enumerable  : !(bitmap & 1),
-	    configurable: !(bitmap & 2),
-	    writable    : !(bitmap & 4),
-	    value       : value
-	  };
-	};
-
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(13)(function(){
-	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
-	});
-
-/***/ },
-/* 37 */
-/***/ function(module, exports) {
-
-	var hasOwnProperty = {}.hasOwnProperty;
-	module.exports = function(it, key){
-	  return hasOwnProperty.call(it, key);
-	};
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var $              = __webpack_require__(18)
-	  , descriptor     = __webpack_require__(35)
-	  , setToStringTag = __webpack_require__(39)
-	  , IteratorPrototype = {};
-
-	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(34)(IteratorPrototype, __webpack_require__(40)('iterator'), function(){ return this; });
-
-	module.exports = function(Constructor, NAME, next){
-	  Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
-	  setToStringTag(Constructor, NAME + ' Iterator');
-	};
-
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var def = __webpack_require__(18).setDesc
-	  , has = __webpack_require__(37)
-	  , TAG = __webpack_require__(40)('toStringTag');
-
-	module.exports = function(it, tag, stat){
-	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
-	};
-
-/***/ },
-/* 40 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var store  = __webpack_require__(41)('wks')
-	  , uid    = __webpack_require__(42)
-	  , Symbol = __webpack_require__(9).Symbol;
-	module.exports = function(name){
-	  return store[name] || (store[name] =
-	    Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
-	};
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var global = __webpack_require__(9)
-	  , SHARED = '__core-js_shared__'
-	  , store  = global[SHARED] || (global[SHARED] = {});
-	module.exports = function(key){
-	  return store[key] || (store[key] = {});
-	};
-
-/***/ },
-/* 42 */
-/***/ function(module, exports) {
-
-	var id = 0
-	  , px = Math.random();
-	module.exports = function(key){
-	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-	};
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	var $at  = __webpack_require__(44)(true);
-
-	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(31)(String, 'String', function(iterated){
-	  this._t = String(iterated); // target
-	  this._i = 0;                // next index
-	// 21.1.5.2.1 %StringIteratorPrototype%.next()
-	}, function(){
-	  var O     = this._t
-	    , index = this._i
-	    , point;
-	  if(index >= O.length)return {value: undefined, done: true};
-	  point = $at(O, index);
-	  this._i += point.length;
-	  return {value: point, done: false};
-	});
-
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var toInteger = __webpack_require__(45)
-	  , defined   = __webpack_require__(6);
-	// true  -> String#at
-	// false -> String#codePointAt
-	module.exports = function(TO_STRING){
-	  return function(that, pos){
-	    var s = String(defined(that))
-	      , i = toInteger(pos)
-	      , l = s.length
-	      , a, b;
-	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
-	    a = s.charCodeAt(i);
-	    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-	      ? TO_STRING ? s.charAt(i) : a
-	      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-	  };
-	};
-
-/***/ },
-/* 45 */
-/***/ function(module, exports) {
-
-	// 7.1.4 ToInteger
-	var ceil  = Math.ceil
-	  , floor = Math.floor;
-	module.exports = function(it){
-	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-	};
-
-/***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var classof   = __webpack_require__(47)
-	  , ITERATOR  = __webpack_require__(40)('iterator')
-	  , Iterators = __webpack_require__(29);
-	module.exports = __webpack_require__(10).isIterable = function(it){
-	  var O = Object(it);
-	  return O[ITERATOR] !== undefined
-	    || '@@iterator' in O
-	    || Iterators.hasOwnProperty(classof(O));
-	};
-
-/***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(20)
-	  , TAG = __webpack_require__(40)('toStringTag')
-	  // ES3 wrong here
-	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
-
-	module.exports = function(it){
-	  var O, T, B;
-	  return it === undefined ? 'Undefined' : it === null ? 'Null'
-	    // @@toStringTag case
-	    : typeof (T = (O = Object(it))[TAG]) == 'string' ? T
-	    // builtinTag case
-	    : ARG ? cof(O)
-	    // ES3 arguments fallback
-	    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
-	};
-
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(49), __esModule: true };
-
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(25);
-	__webpack_require__(43);
-	module.exports = __webpack_require__(50);
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var anObject = __webpack_require__(51)
-	  , get      = __webpack_require__(53);
-	module.exports = __webpack_require__(10).getIterator = function(it){
-	  var iterFn = get(it);
-	  if(typeof iterFn != 'function')throw TypeError(it + ' is not iterable!');
-	  return anObject(iterFn.call(it));
-	};
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isObject = __webpack_require__(52);
-	module.exports = function(it){
-	  if(!isObject(it))throw TypeError(it + ' is not an object!');
-	  return it;
-	};
-
-/***/ },
-/* 52 */
-/***/ function(module, exports) {
-
-	module.exports = function(it){
-	  return typeof it === 'object' ? it !== null : typeof it === 'function';
-	};
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var classof   = __webpack_require__(47)
-	  , ITERATOR  = __webpack_require__(40)('iterator')
-	  , Iterators = __webpack_require__(29);
-	module.exports = __webpack_require__(10).getIteratorMethod = function(it){
-	  if(it != undefined)return it[ITERATOR]
-	    || it['@@iterator']
-	    || Iterators[classof(it)];
-	};
-
-/***/ },
-/* 54 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var createObjectMapper = __webpack_require__(55);
+	var createObjectMapper = __webpack_require__(23);
 
 	/**
 	 * Creates an object with the same keys as `object` and values generated by
@@ -2099,11 +2125,11 @@
 
 
 /***/ },
-/* 55 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCallback = __webpack_require__(56),
-	    baseForOwn = __webpack_require__(96);
+	var baseCallback = __webpack_require__(24),
+	    baseForOwn = __webpack_require__(64);
 
 	/**
 	 * Creates a function for `_.mapKeys` or `_.mapValues`.
@@ -2131,14 +2157,14 @@
 
 
 /***/ },
-/* 56 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMatches = __webpack_require__(57),
-	    baseMatchesProperty = __webpack_require__(85),
-	    bindCallback = __webpack_require__(92),
-	    identity = __webpack_require__(93),
-	    property = __webpack_require__(94);
+	var baseMatches = __webpack_require__(25),
+	    baseMatchesProperty = __webpack_require__(53),
+	    bindCallback = __webpack_require__(60),
+	    identity = __webpack_require__(61),
+	    property = __webpack_require__(62);
 
 	/**
 	 * The base implementation of `_.callback` which supports specifying the
@@ -2172,12 +2198,12 @@
 
 
 /***/ },
-/* 57 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsMatch = __webpack_require__(58),
-	    getMatchData = __webpack_require__(82),
-	    toObject = __webpack_require__(81);
+	var baseIsMatch = __webpack_require__(26),
+	    getMatchData = __webpack_require__(50),
+	    toObject = __webpack_require__(49);
 
 	/**
 	 * The base implementation of `_.matches` which does not clone `source`.
@@ -2208,11 +2234,11 @@
 
 
 /***/ },
-/* 58 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqual = __webpack_require__(59),
-	    toObject = __webpack_require__(81);
+	var baseIsEqual = __webpack_require__(27),
+	    toObject = __webpack_require__(49);
 
 	/**
 	 * The base implementation of `_.isMatch` without support for callback
@@ -2266,12 +2292,12 @@
 
 
 /***/ },
-/* 59 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqualDeep = __webpack_require__(60),
-	    isObject = __webpack_require__(69),
-	    isObjectLike = __webpack_require__(70);
+	var baseIsEqualDeep = __webpack_require__(28),
+	    isObject = __webpack_require__(37),
+	    isObjectLike = __webpack_require__(38);
 
 	/**
 	 * The base implementation of `_.isEqual` without support for `this` binding
@@ -2300,14 +2326,14 @@
 
 
 /***/ },
-/* 60 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var equalArrays = __webpack_require__(61),
-	    equalByTag = __webpack_require__(63),
-	    equalObjects = __webpack_require__(64),
-	    isArray = __webpack_require__(77),
-	    isTypedArray = __webpack_require__(80);
+	var equalArrays = __webpack_require__(29),
+	    equalByTag = __webpack_require__(31),
+	    equalObjects = __webpack_require__(32),
+	    isArray = __webpack_require__(45),
+	    isTypedArray = __webpack_require__(48);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -2408,10 +2434,10 @@
 
 
 /***/ },
-/* 61 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arraySome = __webpack_require__(62);
+	var arraySome = __webpack_require__(30);
 
 	/**
 	 * A specialized version of `baseIsEqualDeep` for arrays with support for
@@ -2465,7 +2491,7 @@
 
 
 /***/ },
-/* 62 */
+/* 30 */
 /***/ function(module, exports) {
 
 	/**
@@ -2494,7 +2520,7 @@
 
 
 /***/ },
-/* 63 */
+/* 31 */
 /***/ function(module, exports) {
 
 	/** `Object#toString` result references. */
@@ -2548,10 +2574,10 @@
 
 
 /***/ },
-/* 64 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(65);
+	var keys = __webpack_require__(33);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -2621,13 +2647,13 @@
 
 
 /***/ },
-/* 65 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(66),
-	    isArrayLike = __webpack_require__(71),
-	    isObject = __webpack_require__(69),
-	    shimKeys = __webpack_require__(75);
+	var getNative = __webpack_require__(34),
+	    isArrayLike = __webpack_require__(39),
+	    isObject = __webpack_require__(37),
+	    shimKeys = __webpack_require__(43);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeKeys = getNative(Object, 'keys');
@@ -2672,10 +2698,10 @@
 
 
 /***/ },
-/* 66 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isNative = __webpack_require__(67);
+	var isNative = __webpack_require__(35);
 
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -2694,11 +2720,11 @@
 
 
 /***/ },
-/* 67 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(68),
-	    isObjectLike = __webpack_require__(70);
+	var isFunction = __webpack_require__(36),
+	    isObjectLike = __webpack_require__(38);
 
 	/** Used to detect host constructors (Safari > 5). */
 	var reIsHostCtor = /^\[object .+?Constructor\]$/;
@@ -2748,10 +2774,10 @@
 
 
 /***/ },
-/* 68 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(69);
+	var isObject = __webpack_require__(37);
 
 	/** `Object#toString` result references. */
 	var funcTag = '[object Function]';
@@ -2792,7 +2818,7 @@
 
 
 /***/ },
-/* 69 */
+/* 37 */
 /***/ function(module, exports) {
 
 	/**
@@ -2826,7 +2852,7 @@
 
 
 /***/ },
-/* 70 */
+/* 38 */
 /***/ function(module, exports) {
 
 	/**
@@ -2844,11 +2870,11 @@
 
 
 /***/ },
-/* 71 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(72),
-	    isLength = __webpack_require__(74);
+	var getLength = __webpack_require__(40),
+	    isLength = __webpack_require__(42);
 
 	/**
 	 * Checks if `value` is array-like.
@@ -2865,10 +2891,10 @@
 
 
 /***/ },
-/* 72 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(73);
+	var baseProperty = __webpack_require__(41);
 
 	/**
 	 * Gets the "length" property value of `object`.
@@ -2886,7 +2912,7 @@
 
 
 /***/ },
-/* 73 */
+/* 41 */
 /***/ function(module, exports) {
 
 	/**
@@ -2906,7 +2932,7 @@
 
 
 /***/ },
-/* 74 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/**
@@ -2932,14 +2958,14 @@
 
 
 /***/ },
-/* 75 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArguments = __webpack_require__(76),
-	    isArray = __webpack_require__(77),
-	    isIndex = __webpack_require__(78),
-	    isLength = __webpack_require__(74),
-	    keysIn = __webpack_require__(79);
+	var isArguments = __webpack_require__(44),
+	    isArray = __webpack_require__(45),
+	    isIndex = __webpack_require__(46),
+	    isLength = __webpack_require__(42),
+	    keysIn = __webpack_require__(47);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -2979,11 +3005,11 @@
 
 
 /***/ },
-/* 76 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(71),
-	    isObjectLike = __webpack_require__(70);
+	var isArrayLike = __webpack_require__(39),
+	    isObjectLike = __webpack_require__(38);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -3019,12 +3045,12 @@
 
 
 /***/ },
-/* 77 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(66),
-	    isLength = __webpack_require__(74),
-	    isObjectLike = __webpack_require__(70);
+	var getNative = __webpack_require__(34),
+	    isLength = __webpack_require__(42),
+	    isObjectLike = __webpack_require__(38);
 
 	/** `Object#toString` result references. */
 	var arrayTag = '[object Array]';
@@ -3065,7 +3091,7 @@
 
 
 /***/ },
-/* 78 */
+/* 46 */
 /***/ function(module, exports) {
 
 	/** Used to detect unsigned integer values. */
@@ -3095,14 +3121,14 @@
 
 
 /***/ },
-/* 79 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArguments = __webpack_require__(76),
-	    isArray = __webpack_require__(77),
-	    isIndex = __webpack_require__(78),
-	    isLength = __webpack_require__(74),
-	    isObject = __webpack_require__(69);
+	var isArguments = __webpack_require__(44),
+	    isArray = __webpack_require__(45),
+	    isIndex = __webpack_require__(46),
+	    isLength = __webpack_require__(42),
+	    isObject = __webpack_require__(37);
 
 	/** Used for native method references. */
 	var objectProto = Object.prototype;
@@ -3165,11 +3191,11 @@
 
 
 /***/ },
-/* 80 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isLength = __webpack_require__(74),
-	    isObjectLike = __webpack_require__(70);
+	var isLength = __webpack_require__(42),
+	    isObjectLike = __webpack_require__(38);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -3245,10 +3271,10 @@
 
 
 /***/ },
-/* 81 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(69);
+	var isObject = __webpack_require__(37);
 
 	/**
 	 * Converts `value` to an object if it's not one.
@@ -3265,11 +3291,11 @@
 
 
 /***/ },
-/* 82 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isStrictComparable = __webpack_require__(83),
-	    pairs = __webpack_require__(84);
+	var isStrictComparable = __webpack_require__(51),
+	    pairs = __webpack_require__(52);
 
 	/**
 	 * Gets the propery names, values, and compare flags of `object`.
@@ -3292,10 +3318,10 @@
 
 
 /***/ },
-/* 83 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(69);
+	var isObject = __webpack_require__(37);
 
 	/**
 	 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -3313,11 +3339,11 @@
 
 
 /***/ },
-/* 84 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var keys = __webpack_require__(65),
-	    toObject = __webpack_require__(81);
+	var keys = __webpack_require__(33),
+	    toObject = __webpack_require__(49);
 
 	/**
 	 * Creates a two dimensional array of the key-value pairs for `object`,
@@ -3352,18 +3378,18 @@
 
 
 /***/ },
-/* 85 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(86),
-	    baseIsEqual = __webpack_require__(59),
-	    baseSlice = __webpack_require__(87),
-	    isArray = __webpack_require__(77),
-	    isKey = __webpack_require__(88),
-	    isStrictComparable = __webpack_require__(83),
-	    last = __webpack_require__(89),
-	    toObject = __webpack_require__(81),
-	    toPath = __webpack_require__(90);
+	var baseGet = __webpack_require__(54),
+	    baseIsEqual = __webpack_require__(27),
+	    baseSlice = __webpack_require__(55),
+	    isArray = __webpack_require__(45),
+	    isKey = __webpack_require__(56),
+	    isStrictComparable = __webpack_require__(51),
+	    last = __webpack_require__(57),
+	    toObject = __webpack_require__(49),
+	    toPath = __webpack_require__(58);
 
 	/**
 	 * The base implementation of `_.matchesProperty` which does not clone `srcValue`.
@@ -3403,10 +3429,10 @@
 
 
 /***/ },
-/* 86 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(81);
+	var toObject = __webpack_require__(49);
 
 	/**
 	 * The base implementation of `get` without support for string paths
@@ -3438,7 +3464,7 @@
 
 
 /***/ },
-/* 87 */
+/* 55 */
 /***/ function(module, exports) {
 
 	/**
@@ -3476,11 +3502,11 @@
 
 
 /***/ },
-/* 88 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(77),
-	    toObject = __webpack_require__(81);
+	var isArray = __webpack_require__(45),
+	    toObject = __webpack_require__(49);
 
 	/** Used to match property names within property paths. */
 	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\n\\]|\\.)*?\1)\]/,
@@ -3510,7 +3536,7 @@
 
 
 /***/ },
-/* 89 */
+/* 57 */
 /***/ function(module, exports) {
 
 	/**
@@ -3535,11 +3561,11 @@
 
 
 /***/ },
-/* 90 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(91),
-	    isArray = __webpack_require__(77);
+	var baseToString = __webpack_require__(59),
+	    isArray = __webpack_require__(45);
 
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\n\\]|\\.)*?)\2)\]/g;
@@ -3569,7 +3595,7 @@
 
 
 /***/ },
-/* 91 */
+/* 59 */
 /***/ function(module, exports) {
 
 	/**
@@ -3588,10 +3614,10 @@
 
 
 /***/ },
-/* 92 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var identity = __webpack_require__(93);
+	var identity = __webpack_require__(61);
 
 	/**
 	 * A specialized version of `baseCallback` which only supports `this` binding
@@ -3633,7 +3659,7 @@
 
 
 /***/ },
-/* 93 */
+/* 61 */
 /***/ function(module, exports) {
 
 	/**
@@ -3659,12 +3685,12 @@
 
 
 /***/ },
-/* 94 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(73),
-	    basePropertyDeep = __webpack_require__(95),
-	    isKey = __webpack_require__(88);
+	var baseProperty = __webpack_require__(41),
+	    basePropertyDeep = __webpack_require__(63),
+	    isKey = __webpack_require__(56);
 
 	/**
 	 * Creates a function that returns the property value at `path` on a
@@ -3696,11 +3722,11 @@
 
 
 /***/ },
-/* 95 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(86),
-	    toPath = __webpack_require__(90);
+	var baseGet = __webpack_require__(54),
+	    toPath = __webpack_require__(58);
 
 	/**
 	 * A specialized version of `baseProperty` which supports deep paths.
@@ -3721,11 +3747,11 @@
 
 
 /***/ },
-/* 96 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(97),
-	    keys = __webpack_require__(65);
+	var baseFor = __webpack_require__(65),
+	    keys = __webpack_require__(33);
 
 	/**
 	 * The base implementation of `_.forOwn` without support for callback
@@ -3744,10 +3770,10 @@
 
 
 /***/ },
-/* 97 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createBaseFor = __webpack_require__(98);
+	var createBaseFor = __webpack_require__(66);
 
 	/**
 	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -3767,10 +3793,10 @@
 
 
 /***/ },
-/* 98 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toObject = __webpack_require__(81);
+	var toObject = __webpack_require__(49);
 
 	/**
 	 * Creates a base function for `_.forIn` or `_.forInRight`.
@@ -3797,6 +3823,204 @@
 	}
 
 	module.exports = createBaseFor;
+
+
+/***/ },
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var arrayReduce = __webpack_require__(68),
+	    baseEach = __webpack_require__(69),
+	    createReduce = __webpack_require__(71);
+
+	/**
+	 * Reduces `collection` to a value which is the accumulated result of running
+	 * each element in `collection` through `iteratee`, where each successive
+	 * invocation is supplied the return value of the previous. If `accumulator`
+	 * is not provided the first element of `collection` is used as the initial
+	 * value. The `iteratee` is bound to `thisArg` and invoked with four arguments:
+	 * (accumulator, value, index|key, collection).
+	 *
+	 * Many lodash methods are guarded to work as iteratees for methods like
+	 * `_.reduce`, `_.reduceRight`, and `_.transform`.
+	 *
+	 * The guarded methods are:
+	 * `assign`, `defaults`, `defaultsDeep`, `includes`, `merge`, `sortByAll`,
+	 * and `sortByOrder`
+	 *
+	 * @static
+	 * @memberOf _
+	 * @alias foldl, inject
+	 * @category Collection
+	 * @param {Array|Object|string} collection The collection to iterate over.
+	 * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+	 * @param {*} [accumulator] The initial value.
+	 * @param {*} [thisArg] The `this` binding of `iteratee`.
+	 * @returns {*} Returns the accumulated value.
+	 * @example
+	 *
+	 * _.reduce([1, 2], function(total, n) {
+	 *   return total + n;
+	 * });
+	 * // => 3
+	 *
+	 * _.reduce({ 'a': 1, 'b': 2 }, function(result, n, key) {
+	 *   result[key] = n * 3;
+	 *   return result;
+	 * }, {});
+	 * // => { 'a': 3, 'b': 6 } (iteration order is not guaranteed)
+	 */
+	var reduce = createReduce(arrayReduce, baseEach);
+
+	module.exports = reduce;
+
+
+/***/ },
+/* 68 */
+/***/ function(module, exports) {
+
+	/**
+	 * A specialized version of `_.reduce` for arrays without support for callback
+	 * shorthands and `this` binding.
+	 *
+	 * @private
+	 * @param {Array} array The array to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @param {*} [accumulator] The initial value.
+	 * @param {boolean} [initFromArray] Specify using the first element of `array`
+	 *  as the initial value.
+	 * @returns {*} Returns the accumulated value.
+	 */
+	function arrayReduce(array, iteratee, accumulator, initFromArray) {
+	  var index = -1,
+	      length = array.length;
+
+	  if (initFromArray && length) {
+	    accumulator = array[++index];
+	  }
+	  while (++index < length) {
+	    accumulator = iteratee(accumulator, array[index], index, array);
+	  }
+	  return accumulator;
+	}
+
+	module.exports = arrayReduce;
+
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseForOwn = __webpack_require__(64),
+	    createBaseEach = __webpack_require__(70);
+
+	/**
+	 * The base implementation of `_.forEach` without support for callback
+	 * shorthands and `this` binding.
+	 *
+	 * @private
+	 * @param {Array|Object|string} collection The collection to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @returns {Array|Object|string} Returns `collection`.
+	 */
+	var baseEach = createBaseEach(baseForOwn);
+
+	module.exports = baseEach;
+
+
+/***/ },
+/* 70 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getLength = __webpack_require__(40),
+	    isLength = __webpack_require__(42),
+	    toObject = __webpack_require__(49);
+
+	/**
+	 * Creates a `baseEach` or `baseEachRight` function.
+	 *
+	 * @private
+	 * @param {Function} eachFunc The function to iterate over a collection.
+	 * @param {boolean} [fromRight] Specify iterating from right to left.
+	 * @returns {Function} Returns the new base function.
+	 */
+	function createBaseEach(eachFunc, fromRight) {
+	  return function(collection, iteratee) {
+	    var length = collection ? getLength(collection) : 0;
+	    if (!isLength(length)) {
+	      return eachFunc(collection, iteratee);
+	    }
+	    var index = fromRight ? length : -1,
+	        iterable = toObject(collection);
+
+	    while ((fromRight ? index-- : ++index < length)) {
+	      if (iteratee(iterable[index], index, iterable) === false) {
+	        break;
+	      }
+	    }
+	    return collection;
+	  };
+	}
+
+	module.exports = createBaseEach;
+
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseCallback = __webpack_require__(24),
+	    baseReduce = __webpack_require__(72),
+	    isArray = __webpack_require__(45);
+
+	/**
+	 * Creates a function for `_.reduce` or `_.reduceRight`.
+	 *
+	 * @private
+	 * @param {Function} arrayFunc The function to iterate over an array.
+	 * @param {Function} eachFunc The function to iterate over a collection.
+	 * @returns {Function} Returns the new each function.
+	 */
+	function createReduce(arrayFunc, eachFunc) {
+	  return function(collection, iteratee, accumulator, thisArg) {
+	    var initFromArray = arguments.length < 3;
+	    return (typeof iteratee == 'function' && thisArg === undefined && isArray(collection))
+	      ? arrayFunc(collection, iteratee, accumulator, initFromArray)
+	      : baseReduce(collection, baseCallback(iteratee, thisArg, 4), accumulator, initFromArray, eachFunc);
+	  };
+	}
+
+	module.exports = createReduce;
+
+
+/***/ },
+/* 72 */
+/***/ function(module, exports) {
+
+	/**
+	 * The base implementation of `_.reduce` and `_.reduceRight` without support
+	 * for callback shorthands and `this` binding, which iterates over `collection`
+	 * using the provided `eachFunc`.
+	 *
+	 * @private
+	 * @param {Array|Object|string} collection The collection to iterate over.
+	 * @param {Function} iteratee The function invoked per iteration.
+	 * @param {*} accumulator The initial value.
+	 * @param {boolean} initFromCollection Specify using the first or last element
+	 *  of `collection` as the initial value.
+	 * @param {Function} eachFunc The function to iterate over `collection`.
+	 * @returns {*} Returns the accumulated value.
+	 */
+	function baseReduce(collection, iteratee, accumulator, initFromCollection, eachFunc) {
+	  eachFunc(collection, function(value, index, collection) {
+	    accumulator = initFromCollection
+	      ? (initFromCollection = false, value)
+	      : iteratee(accumulator, value, index, collection);
+	  });
+	  return accumulator;
+	}
+
+	module.exports = baseReduce;
 
 
 /***/ }

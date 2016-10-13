@@ -52,6 +52,9 @@ describe("The flow mark stuff",()=>{
     })
     test(F,'makeMarkStep',{
         'when no generator': {
+            options: {
+                markname: 'somemark'
+            },
             scope: {
                 MARKS: 'newmarks',
                 markpos: 'somepos',
@@ -64,7 +67,8 @@ describe("The flow mark stuff",()=>{
             expected: {
                 MARKS: 'newmarks',
                 path: ['foo','somepos'],
-                stepid: 'newid'
+                stepid: 'newid',
+                name: 'somemark'
             }
         },
         'when has generator': {
@@ -91,7 +95,8 @@ describe("The flow mark stuff",()=>{
                 MARKS: 'newmarks',
                 path: ['foo','somepos'],
                 stepid: 'newid',
-                ARTIFACTS: 'newartifacts'
+                ARTIFACTS: 'newartifacts',
+                name: 'somemark'
             }
         }
     })
@@ -155,26 +160,59 @@ describe("The flow mark stuff",()=>{
     test(F,'applyMarkConsequences',{
         'for regular call': {
             context: {
-                applyGeneratorInstructions: (O,rules)=> 'ARTIFACTS = "'+rules+'"; '
+                applyGeneratorInstructions: (O,def)=> 'ARTIFACTS = "'+def.who+'"; '
             },
             options: {
                 markname: 'somemark',
                 rules: {
                     marks: {
-                        somemark: 'MARKRULE'
+                        somemark: {
+                            who: 'ME',
+                            flow: [{name:'othermark',type:'mark'}]
+                        }
                     }
                 }
             },
             scope: {
                 markpos: 'somepos',
                 step: {
-                    MARKS: {othermark:'otherpos'}
+                    MARKS: {othermark:'otherpos',forgottenmark:'blaj'}
                 },
                 ARTIFACTS: 'overwriteme'
             },
             mutations: {
                 MARKS: {othermark:'otherpos',somemark:'somepos'},
-                ARTIFACTS: 'MARKRULE'
+                ARTIFACTS: 'ME'
+            },
+            additionally: {
+                'make sure to copy mark': 'MARKS !== step.MARKS'
+            }
+        },
+        'for cyclic': {
+            context: {
+                applyGeneratorInstructions: (O,def)=> 'ARTIFACTS = "'+def.who+'"; '
+            },
+            options: {
+                markname: 'somemark',
+                rules: {
+                    marks: {
+                        somemark: {
+                            who: 'ME',
+                            flow: 'cyclic'
+                        }
+                    }
+                }
+            },
+            scope: {
+                markpos: 'somepos',
+                step: {
+                    MARKS: {othermark:'otherpos',forgottenmark:'blaj'}
+                },
+                ARTIFACTS: 'overwriteme'
+            },
+            mutations: {
+                MARKS: {othermark:'otherpos',forgottenmark:'blaj',somemark:'somepos'},
+                ARTIFACTS: 'ME'
             },
             additionally: {
                 'make sure to copy mark': 'MARKS !== step.MARKS'

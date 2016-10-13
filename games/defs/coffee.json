@@ -1,6 +1,6 @@
 {
-  "STATUS": "needs case and turn reference",
   "meta": {
+    "id": "coffee",
     "name": "Coffee",
     "source": "https://www.boardgamegeek.com/filepage/64972/coffee-rules-nestorgames",
     "tags": ["deploy","formation","limitmoves"],
@@ -8,26 +8,22 @@
   },
   "graphics": {"icons": {"soldiers":"pawns","markers":"pawns"}},
   "board": {"height":5,"width":5},
-  "endturn": {
+  "endTurn": {
     "unless": {
       "nolegal": ["isempty","markers"]
     }
   },
-  "endgame": {
-    "madeline": ["notempty","winline"]
+  "endGame": {
+    "madeline": {"condition":["notempty","winline"]}
   },
   "startTurn": {
     "link": "selectdrop"
   },
-  "afterstep": {
-    "runGenerators": ["findwinlines"],
-    "allow": ["endturn"]
-  },
   "marks": {
     "selectdrop": {
-      "from": ["ifelse",["same",["contextval","turn"],1],"board","markers"],
+      "from": ["ifelse",["isempty","markers"],"board","markers"],
       "runGenerator": "findgeneratees",
-      "allow": [
+      "links": [
         ["if",["notempty","uphill"],"uphill"],
         ["if",["notempty","downhill"],"downhill"],
         ["if",["notempty","vertical"],"vertical"],
@@ -41,28 +37,36 @@
         ["forposin","markers",["killat",["target"]]],
         ["spawn","selectdrop","soldiers"],
         ["forposin","uphill",["spawn",["target"],"markers",0]]
-      ]
+      ],
+      "runGenerator": "findwinlines",
+      "link": "endturn"
     },
     "downhill": {
       "applyEffects": [
         ["forposin","markers",["killat",["target"]]],
         ["spawn","selectdrop","soldiers"],
         ["forposin","downhill",["spawn",["target"],"markers",0]]
-      ]
+      ],
+      "runGenerator": "findwinlines",
+      "link": "endturn"
     },
     "horisontal": {
       "applyEffects": [
         ["forposin","markers",["killat",["target"]]],
         ["spawn","selectdrop","soldiers"],
         ["forposin","horisontal",["spawn",["target"],"markers",0]]
-      ]
+      ],
+      "runGenerator": "findwinlines",
+      "link": "endturn"
     },
     "vertical": {
       "applyEffects": [
         ["forposin","markers",["killat",["target"]]],
         ["spawn","selectdrop","soldiers"],
         ["forposin","vertical",["spawn",["target"],"markers",0]]        
-      ]
+      ],
+      "runGenerator": "findwinlines",
+      "link": "endturn"
     }
   },
   "generators": {
@@ -73,9 +77,8 @@
       "draw": {
         "steps": {
           "unlessover": "units",
-          "tolayer": ["case",
-            ["dir"],
-            [[1,"vertical"],[2,"uphill"],[3,"horisontal"],[4,"downhill"],[5,"vertical"],[6,"uphill"],[7,"horisontal"],[8,"downhill"]]
+          "tolayer": ["indexlist",["dir"],
+            ["FOOBAR","vertical","uphill","horisontal","downhill","vertical","uphill","horisontal","downhill"]
           ]
         }
       }

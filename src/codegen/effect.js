@@ -4,7 +4,7 @@ import map from "lodash/collection/map"
 /*
 Effect methods will all mutate UNITDATA, which is assumed to have been
 previously copied.
-Only setid and setat actually manipulates individual unit objects, and they make copies
+Only pushid, setid and setat actually manipulates individual unit objects, and they make copies
 
 setturnvar and setturnpos mutates TURNVARS
 */
@@ -74,5 +74,35 @@ export default C => Object.assign(C,{
                 ${!obvious ? '}' : '' }
             }
         `
-    }
+    },
+    pushid: (O,id,dir,dist)=> `
+        var pushid = ${C.id(O,id)};
+        var pushdir = ${C.value(O,dir)};
+        var dist = ${C.value(O,dist)};
+        var newpos = UNITDATA[pushid].pos;
+        while(dist && connections[newpos][pushdir]){
+            newpos = connections[newpos][pushdir];
+            dist--;
+        }
+        UNITDATA[pushid]=Object.assign({},UNITDATA[pushid],{pos: newpos});
+    `,
+    pushin: (O,set,dir,dist)=> C.foridin(O,set,['pushid',['loopid'],dir,dist]),
 })
+
+
+
+/*
+
+offsetunit: function(state,id,dir,dist){
+        id = this.evaluateId(state,id);
+        dir = this.evaluateValue(state,dir);
+        dist = this.evaluateValue(state,dist) || 0;
+        var pos = state.getIn(["data","units",id,"pos"]);
+        while(dist && state.hasIn(["connections",pos,dir])){
+            pos = state.getIn(["connections",pos,dir]);
+            dist--;
+        }
+        return state.setIn(["data","units",id,"pos"],pos);
+    },
+*/
+

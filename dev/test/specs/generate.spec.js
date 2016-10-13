@@ -161,43 +161,43 @@ describe('the generate funcs',()=>{
             expected: 'reachedmax'
         },
         'when out of bounds': {
-            scope: {connections:{pos:{}},DIR:'x',POS:'pos',nextpos:''},
+            scope: {connections:{pos:{}},DIR:'x',POS:'pos'},
             expected: 'outofbounds'
         },
         'when hit a block': {
             arg: {blocks:"yes"},
-            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',BLOCKS:{newpos:1}},
+            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',BLOCKS:{newpos:1}},
             expected: 'hitblock',
-            mutations: {nextpos:'newpos'}
+            mutations: {POS:'newpos'}
         },
         'when out of steps': {
             arg: {steps:"yes"},
-            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',allowedsteps:{}},
+            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',allowedsteps:{}},
             expected: 'nomoresteps',
-            mutations: {nextpos:'newpos'}
+            mutations: {POS:'newpos'}
         },
         'when navigates blocks and has steps and not reaching max': {
             arg: {steps:"yes",blocks:"indeed",max:"yup"},
-            scope: {LENGTH:2,MAX:3,connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',allowedsteps:{'newpos':1},BLOCKS:{}},
+            scope: {LENGTH:2,MAX:3,connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',allowedsteps:{'newpos':1},BLOCKS:{}},
             expected: null,
-            mutations: {nextpos:'newpos'}
+            mutations: {POS:'newpos'}
         },
         'when there is connection and def doesnt use blocks or steps or max': {
-            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:''},
+            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos'},
             expected: null,
-            mutations: {nextpos:'newpos'}
+            mutations: {POS:'newpos'}
         },
         'when steps run out and there is a block in the way': {
             arg: {blocks:"yes",steps:"indeed"},
-            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',BLOCKS:{newpos:1},allowedsteps:{}},
+            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',BLOCKS:{newpos:1},allowedsteps:{}},
             expected: 'nomoresteps',
-            mutations: {nextpos:'newpos'}
+            mutations: {POS:'newpos'}
         },
         'when steps run out and there is a block in the way and we prio blocks': {
             arg: {blocks:"yes",steps:"indeed",testblocksbeforesteps:true},
-            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',nextpos:'',BLOCKS:{newpos:1},allowedsteps:{}},
+            scope: {connections:{pos:{'x':'newpos'}},DIR:'x',POS:'pos',BLOCKS:{newpos:1},allowedsteps:{}},
             expected: 'hitblock',
-            mutations: {nextpos:'newpos'}
+            mutations: {POS:'newpos'}
         },
         'when we are floating and we have already floated over that square': {
             arg: {type:'floater'},
@@ -205,8 +205,7 @@ describe('the generate funcs',()=>{
                 connections: {pos:{1:'sqr'}},
                 REACHED: {sqr:true},
                 DIR: 1,
-                POS: 'pos',
-                nextpos: 'whatev'
+                POS: 'pos'
             },
             expected: 'alreadyreached'
         }

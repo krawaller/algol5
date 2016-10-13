@@ -1,6 +1,6 @@
 {
   "spec_dir": "dev/test/specs",
   "spec_files": [
-    "**/*[sS]pec.js"
+    "**/generate.walk.[sS]pec.js"
   ]
 }

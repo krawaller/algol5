@@ -141,6 +141,46 @@ describe('the core funcs',()=>{
         'the not cmnd when true': {
             arg: ['not',['false']],
             expected: true
+        },
+        'the justinone when just in first': {
+            arg: ['justinone',['pos','a1'],['layer','dorks'],['layer','borks']],
+            scope: {
+                ARTIFACTS: {
+                    dorks: {a1:{}},
+                    borks: {}
+                }
+            },
+            expected: true
+        },
+        'the justinone when just in second': {
+            arg: ['justinone',['pos','a1'],['layer','dorks'],['layer','borks']],
+            scope: {
+                ARTIFACTS: {
+                    dorks: {},
+                    borks: {a1:{}}
+                }
+            },
+            expected: true
+        },
+        'the notboth when in none': {
+            arg: ['justinone',['pos','a1'],['layer','dorks'],['layer','borks']],
+            scope: {
+                ARTIFACTS: {
+                    dorks: {},
+                    borks: {}
+                }
+            },
+            expected: false
+        },
+        'the notboth when in both': {
+            arg: ['justinone',['pos','a1'],['layer','dorks'],['layer','borks']],
+            scope: {
+                ARTIFACTS: {
+                    dorks: {a1:{}},
+                    borks: {a1:{}}
+                }
+            },
+            expected: false
         }
     });
     test(C,'position',{

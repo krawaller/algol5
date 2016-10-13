@@ -40,7 +40,13 @@ const tester = (lib,funcname,specs)=> {
                     origs[mock] = lib[mock]
                     lib[mock] = spec.context[mock]
                 }
-                code = lib[funcname].apply(null,[spec.options].concat(spec.args||[]).concat(spec.hasOwnProperty("arg") ? [spec.arg] : []));
+                let flag = false;
+                try {
+                    code = lib[funcname].apply(null,[spec.options].concat(spec.args||[]).concat(spec.hasOwnProperty("arg") ? [spec.arg] : []));
+                } catch(e) {
+                    code = '"'+e+'";';
+                    flag = true;
+                }
                 for(var mock in origs){
                     lib[mock] = origs[mock]
                 }
@@ -77,11 +83,14 @@ const tester = (lib,funcname,specs)=> {
                 if (spec.hasOwnProperty("expected")){
                     code = 'result='+code+'; '
                 }
-                var tobeexec = varmsg+vars+codmsg+code+";"+tstmsg+test
-                if (spec.showcode){ //spec.norefs){
+                var tobeexec = 'var TEMP; '+varmsg+vars+codmsg+code+";"+tstmsg+test
+                if (spec.showcode){
                     console.log("Showing code for "+name+":\n",js_beautify(tobeexec,{indent_size:2}))    
                 }
                 try {
+                    if (flag){
+                        throw code;
+                    }
                     eval(tobeexec);
                 } catch(e) {
                     console.log("ERROR ERROR! "+funcname+", "+name+",  Code:\n",js_beautify(tobeexec,{indent_size:2}))

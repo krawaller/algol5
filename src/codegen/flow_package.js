@@ -18,7 +18,8 @@ export default C => Object.assign(C,{
         game.commands = ${JSON.stringify(Object.keys(O.rules.commands).reduce((mem,c)=>{ mem[c] = 1; return mem; },{}))};
         game.graphics = ${JSON.stringify(O.rules.graphics)};
         game.board = ${JSON.stringify(O.rules.board)};
-        game.AI = ${JSON.stringify(Object.keys(O.rules.AI && O.rules.AI.brains||{}))}; 
+        game.AI = ${JSON.stringify(Object.keys(O.rules.AI && O.rules.AI.brains||{}))};
+        game.id = "${O.rules.meta.id}";
     `,
 
     addCommonFunctions: O=> `

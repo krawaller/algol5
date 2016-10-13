@@ -1,5 +1,6 @@
 {
   "meta": {
+    "id": "murusgallicus",
     "name": "Murus Gallicus",
     "source": "https://boardgamegeek.com/filepage/46316/murus-gallicus-detailed-rules",
     "tags": ["differentunits","infiltrate"],
@@ -92,5 +93,55 @@
         }
       }
     }
+  },
+  "AI": {
+    "generators": {
+      "findmymoves": {
+        "type": "walker",
+        "dirs": [1,2,3,4,5,6,7,8],
+        "blocks": ["union","towers","oppwalls"],
+        "starts": "mytowers",
+        "max": 2,
+        "draw": {
+          "steps": {
+            "condition": ["and",
+              ["same",["walklength"],2],
+              ["same",["step"],2]
+            ],
+            "tolayer": "mymoves"
+          }
+        }
+      },
+      "findoppmoves": {
+        "type": "walker",
+        "dirs": [1,2,3,4,5,6,7,8],
+        "blocks": ["union","towers","mywalls"],
+        "starts": "opptowers",
+        "max": 2,
+        "draw": {
+          "steps": {
+            "condition": ["and",
+              ["same",["walklength"],2],
+              ["same",["step"],2]
+            ],
+            "tolayer": "oppmoves"
+          }
+        }
+      }
+    },
+    "brains": {
+      "Clive": {
+        "generators": ["findmymoves","findoppmoves"],
+        "plus": {
+          "mymoves": ["sizeof","mymoves"]
+        },
+        "minus": {
+          "oppmoves": ["sizeof","oppmoves"]
+        }
+      }
+    }
   }
 }
+
+
+

@@ -90,6 +90,7 @@ describe("The layer commands",()=> {
         "for normal call": {
             options: {rules:{board:{height:2,width:2}}},
             expected: {
+                faux:{},
                 a1:{1:'a2',2:'b2',3:'b1'},
                 a2:{3:'b2',4:'b1',5:'a1'},
                 b1:{7:'a1',8:'a2',1:'b2'},

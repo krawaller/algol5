@@ -72,10 +72,15 @@ let Battle = React.createClass({
         <Commands gameCommands={s.UI.commands} systemCommands={s.UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
       </div>)
     console.log("GONNA RENDER",s)
+    let style = {
+      height:s.game.board.height*50,
+      width:s.game.board.width*50,
+      backgroundImage: 'url(../games/boards/'+s.game.id+'.png)'
+    }
     return (
       <div>
         <h4>Playing!</h4>
-        <div className="board" style={{height:s.game.board.height*50,width:s.game.board.width*50}}>
+        <div className="board" style={style}>
           <Units icons={this.props.game.graphics.icons} unitdata={s.step.UNITDATA} board={this.props.game.board} />
           {p.type !== "ai" && <Marks board={this.props.game.board} activeMarks={s.step.MARKS} potentialMarks={s.UI.marks} selectMark={this.doAction}/>}
         </div>

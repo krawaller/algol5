@@ -110,16 +110,13 @@ describe("The flow start stuff",()=>{
         },
         'if using turnvars': {
             scope: {
-                step: {TURNVARS: 'turnvars'}
+                step: {}
             },
             context: {
                 usesTurnVars: (O)=> true,
             },
             mutations: {
-                TURNVARS: 'turnvars'
-            },
-            additionally: {
-                'didnt copy turnvars': 'TURNVARS === step.TURNVARS'
+                TURNVARS: {}
             }
         }
     })
@@ -155,7 +152,8 @@ describe("The flow start stuff",()=>{
                 UNITDATA: 'unitdata',
                 UNITLAYERS: 'unitlayers',
                 MARKS: 'marks',
-                path: []
+                path: [],
+                name: 'start'
             }
         }
     })

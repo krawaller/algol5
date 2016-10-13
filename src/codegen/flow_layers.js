@@ -26,7 +26,7 @@ export default C => Object.assign(C,{
     boardConnections: (O)=> JSON.stringify(reduce(
         C.boardPositions(O.rules.board),
         (ret,pos)=> ({...ret, [pos]:C.posConnections(pos,O.rules.board)}),
-        {}
+        {faux:{}}
     )),
 
     // assumes UNITDATA, ownernames

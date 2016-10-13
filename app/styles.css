@@ -3,7 +3,7 @@
     width: 600px;
     border: 1px solid black;
     position: relative;
-    background-color: aliceblue;
+    background-size: cover;
 }
 
 .square {
@@ -24,14 +24,14 @@
 }
 
 .mark {
-    border: 5px solid gold;
+    border: 5px solid white;
     border-radius: 500px;
     box-sizing: border-box;
     cursor: pointer;
 }
 
 .potentialmark {
-    opacity: 0.2;
+    opacity: 0.45;
 }
 
 .fadein.pieces-enter {

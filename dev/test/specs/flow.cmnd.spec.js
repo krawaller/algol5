@@ -35,7 +35,8 @@ describe("The flow commands",()=>{
                 UNITDATA: 'newunitdata',
                 UNITLAYERS: 'newunitlayers',
                 stepid: 'newid',
-                path: ['foo','somecmnd']
+                path: ['foo','somecmnd'],
+                name: 'somecmnd'
             }
         },
         'when cmnd has spawn': {
@@ -65,7 +66,8 @@ describe("The flow commands",()=>{
                 UNITLAYERS: 'newunitlayers',
                 stepid: 'newid',
                 path: ['foo','somecmnd'],
-                clones: 42
+                clones: 42,
+                name: 'somecmnd'
             }
         }
     })

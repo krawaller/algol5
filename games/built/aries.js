@@ -1331,137 +1331,25 @@
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
       var TERRAIN = {
-        "bases": {
-          "a8": {
-            "pos": "a8",
-            "owner": 1
-          },
-          "b8": {
-            "pos": "b8",
-            "owner": 1
-          },
-          "c8": {
-            "pos": "c8",
-            "owner": 1
-          },
-          "d8": {
-            "pos": "d8",
-            "owner": 1
-          },
-          "e8": {
-            "pos": "e8",
-            "owner": 1
-          },
-          "f8": {
-            "pos": "f8",
-            "owner": 1
-          },
-          "g8": {
-            "pos": "g8",
+        "corner": {
+          "a1": {
+            "pos": "a1",
             "owner": 1
           },
           "h8": {
             "pos": "h8",
-            "owner": 1
-          },
-          "a1": {
-            "pos": "a1",
-            "owner": 2
-          },
-          "b1": {
-            "pos": "b1",
-            "owner": 2
-          },
-          "c1": {
-            "pos": "c1",
-            "owner": 2
-          },
-          "d1": {
-            "pos": "d1",
-            "owner": 2
-          },
-          "e1": {
-            "pos": "e1",
-            "owner": 2
-          },
-          "f1": {
-            "pos": "f1",
-            "owner": 2
-          },
-          "g1": {
-            "pos": "g1",
-            "owner": 2
-          },
-          "h1": {
-            "pos": "h1",
             "owner": 2
           }
         },
-        "mybases": {
-          "a8": {
-            "pos": "a8",
+        "mycorner": {
+          "a1": {
+            "pos": "a1",
             "owner": 1
-          },
-          "b8": {
-            "pos": "b8",
-            "owner": 1
-          },
-          "c8": {
-            "pos": "c8",
-            "owner": 1
-          },
-          "d8": {
-            "pos": "d8",
-            "owner": 1
-          },
-          "e8": {
-            "pos": "e8",
-            "owner": 1
-          },
-          "f8": {
-            "pos": "f8",
-            "owner": 1
-          },
-          "g8": {
-            "pos": "g8",
-            "owner": 1
-          },
+          }
+        },
+        "oppcorner": {
           "h8": {
             "pos": "h8",
-            "owner": 1
-          }
-        },
-        "oppbases": {
-          "a1": {
-            "pos": "a1",
-            "owner": 2
-          },
-          "b1": {
-            "pos": "b1",
-            "owner": 2
-          },
-          "c1": {
-            "pos": "c1",
-            "owner": 2
-          },
-          "d1": {
-            "pos": "d1",
-            "owner": 2
-          },
-          "e1": {
-            "pos": "e1",
-            "owner": 2
-          },
-          "f1": {
-            "pos": "f1",
-            "owner": 2
-          },
-          "g1": {
-            "pos": "g1",
-            "owner": 2
-          },
-          "h1": {
-            "pos": "h1",
             "owner": 2
           }
         }
@@ -1471,43 +1359,27 @@
       var otherplayer = 2;
       game.selectunit1 =
         function(turn, step, markpos) {
-          var ARTIFACTS = {
-            killtarget: Object.assign({}, step.ARTIFACTS.killtarget),
-            movetarget: Object.assign({}, step.ARTIFACTS.movetarget)
-          };
+          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+            movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
+          });
           var UNITLAYERS = step.UNITLAYERS;
           var MARKS = {
             selectunit: markpos
           };
-          if (!!(UNITLAYERS.mycrowns[MARKS['selectunit']])) {
-            var STARTPOS = MARKS['selectunit'];
-            var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS) {
-                if (!(UNITLAYERS.myunits[POS])) {
-                  ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'killtarget' : 'movetarget')][POS] = {};
-                }
-              }
-            } 
-          } else {
-            var BLOCKS = UNITLAYERS.units;
-            var STARTPOS = MARKS['selectunit'];
-            var allwalkerdirs = [8, 1, 2, 4, 5, 6];
-            for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
-              var DIR = allwalkerdirs[walkerdirnbr];
-              var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-                LENGTH++;
-                ARTIFACTS['movetarget'][POS] = {};
-              }
-              if (BLOCKS[POS]) {
-                if ((!(UNITLAYERS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(UNITLAYERS.oppdaggers[POS])))) {
-                  ARTIFACTS['movetarget'][POS] = {};
-                }
+          var BLOCKS = UNITLAYERS.units;
+          var STARTPOS = MARKS['selectunit'];
+          var allwalkerdirs = [1, 3, 5, 7];
+          for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+              ARTIFACTS['movetargets'][POS] = {};
+            }
+            if (BLOCKS[POS]) {
+              if (UNITLAYERS.oppunits[POS]) {
+                ARTIFACTS['movetargets'][POS] = {
+                  dir: DIR
+                };
               }
             }
           }
@@ -1521,7 +1393,7 @@
           });
           turn.links[newstepid] = {};
           var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.movetarget) {
+          for (var linkpos in ARTIFACTS.movetargets) {
             newlinks[linkpos] = 'selectmovetarget1';
           }
           return newstep;
@@ -1536,14 +1408,36 @@
         };
       game.selectmovetarget1 =
         function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+            beingpushed: Object.assign({}, step.ARTIFACTS.beingpushed),
+            squished: Object.assign({}, step.ARTIFACTS.squished)
+          });
           var UNITLAYERS = step.UNITLAYERS;
           var MARKS = {
             selectmovetarget: markpos,
             selectunit: step.MARKS.selectunit
           };
+          if (!!(UNITLAYERS.oppunits[MARKS['selectmovetarget']])) {
+            var allowedsteps = UNITLAYERS.oppunits;
+            var BLOCKS = UNITLAYERS.myunits;
+            var STARTPOS = MARKS['selectmovetarget'];
+            var DIR = relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1];
+            var walkedsquares = [];
+            var STOPREASON = "";
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while (!(STOPREASON = (!(POS = connections[POS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
+              walkedsquares.push(POS);
+              ARTIFACTS['beingpushed'][POS] = {};
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((['hitblock', 'outofbounds'].indexOf(STOPREASON) !== -1)) {
+              ARTIFACTS['squished'][walkedsquares[WALKLENGTH - 1]] = {};
+            }
+          }
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+            ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             stepid: newstepid,
             path: step.path.concat(markpos),
@@ -1567,7 +1461,28 @@
           var MARKS = step.MARKS;
           var UNITDATA = Object.assign({}, step.UNITDATA);
           var UNITLAYERS = step.UNITLAYERS;
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          var LOOPID;
+          for (var POS in ARTIFACTS.beingpushed) {
+            if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
+              var pushid = LOOPID;
+              var pushdir = (ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'];
+              var dist = 1;
+              var newpos = UNITDATA[pushid].pos;
+              while (dist && connections[newpos][pushdir]) {
+                newpos = connections[newpos][pushdir];
+                dist--;
+              }
+              UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
+                pos: newpos
+              });
+            }
+          }
+          var LOOPID;
+          for (var POS in ARTIFACTS.squished) {
+            if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
+              delete UNITDATA[LOOPID];
+            }
+          }
           var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
@@ -1576,14 +1491,10 @@
           }
           MARKS = {};
           UNITLAYERS = {
-            "crowns": {},
-            "mycrowns": {},
-            "oppcrowns": {},
-            "neutralcrowns": {},
-            "daggers": {},
-            "mydaggers": {},
-            "oppdaggers": {},
-            "neutraldaggers": {},
+            "soldiers": {},
+            "mysoldiers": {},
+            "oppsoldiers": {},
+            "neutralsoldiers": {},
             "units": {},
             "myunits": {},
             "oppunits": {},
@@ -1597,8 +1508,9 @@
             UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
           }
           ARTIFACTS = {
-            "killtarget": {},
-            "movetarget": {}
+            "movetargets": {},
+            "beingpushed": {},
+            "squished": {}
           };
           var newstepid = step.stepid + '-' + 'move';
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -1614,8 +1526,8 @@
           if (Object.keys(
               (function() {
                 var ret = {},
-                  s0 = UNITLAYERS.mycrowns,
-                  s1 = TERRAIN.oppbases;
+                  s0 = TERRAIN.oppcorner,
+                  s1 = UNITLAYERS.myunits;
                 for (var key in s0) {
                   if (s1[key]) {
                     ret[key] = s0[key];
@@ -1625,12 +1537,7 @@
               }()) ||  {}).length !== 0) {
             var winner = 1;
             var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else
-          if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'kingkill';
+            turn.links[newstepid][result] = 'invade';
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
@@ -1654,19 +1561,16 @@
           };
           var MARKS = {};
           var ARTIFACTS = {
-            "killtarget": {},
-            "movetarget": {}
+            "movetargets": {},
+            "beingpushed": {},
+            "squished": {}
           };
           var UNITDATA = step.UNITDATA;
           var UNITLAYERS = {
-            "crowns": {},
-            "mycrowns": {},
-            "oppcrowns": {},
-            "neutralcrowns": {},
-            "daggers": {},
-            "mydaggers": {},
-            "oppdaggers": {},
-            "neutraldaggers": {},
+            "soldiers": {},
+            "mysoldiers": {},
+            "oppsoldiers": {},
+            "neutralsoldiers": {},
             "units": {},
             "myunits": {},
             "oppunits": {},
@@ -1705,137 +1609,25 @@
     })();
     (function() {
       var TERRAIN = {
-        "bases": {
-          "a8": {
-            "pos": "a8",
-            "owner": 1
-          },
-          "b8": {
-            "pos": "b8",
-            "owner": 1
-          },
-          "c8": {
-            "pos": "c8",
-            "owner": 1
-          },
-          "d8": {
-            "pos": "d8",
-            "owner": 1
-          },
-          "e8": {
-            "pos": "e8",
-            "owner": 1
-          },
-          "f8": {
-            "pos": "f8",
-            "owner": 1
-          },
-          "g8": {
-            "pos": "g8",
+        "corner": {
+          "a1": {
+            "pos": "a1",
             "owner": 1
           },
           "h8": {
             "pos": "h8",
-            "owner": 1
-          },
-          "a1": {
-            "pos": "a1",
-            "owner": 2
-          },
-          "b1": {
-            "pos": "b1",
-            "owner": 2
-          },
-          "c1": {
-            "pos": "c1",
-            "owner": 2
-          },
-          "d1": {
-            "pos": "d1",
-            "owner": 2
-          },
-          "e1": {
-            "pos": "e1",
-            "owner": 2
-          },
-          "f1": {
-            "pos": "f1",
-            "owner": 2
-          },
-          "g1": {
-            "pos": "g1",
-            "owner": 2
-          },
-          "h1": {
-            "pos": "h1",
             "owner": 2
           }
         },
-        "oppbases": {
-          "a8": {
-            "pos": "a8",
+        "oppcorner": {
+          "a1": {
+            "pos": "a1",
             "owner": 1
-          },
-          "b8": {
-            "pos": "b8",
-            "owner": 1
-          },
-          "c8": {
-            "pos": "c8",
-            "owner": 1
-          },
-          "d8": {
-            "pos": "d8",
-            "owner": 1
-          },
-          "e8": {
-            "pos": "e8",
-            "owner": 1
-          },
-          "f8": {
-            "pos": "f8",
-            "owner": 1
-          },
-          "g8": {
-            "pos": "g8",
-            "owner": 1
-          },
+          }
+        },
+        "mycorner": {
           "h8": {
             "pos": "h8",
-            "owner": 1
-          }
-        },
-        "mybases": {
-          "a1": {
-            "pos": "a1",
-            "owner": 2
-          },
-          "b1": {
-            "pos": "b1",
-            "owner": 2
-          },
-          "c1": {
-            "pos": "c1",
-            "owner": 2
-          },
-          "d1": {
-            "pos": "d1",
-            "owner": 2
-          },
-          "e1": {
-            "pos": "e1",
-            "owner": 2
-          },
-          "f1": {
-            "pos": "f1",
-            "owner": 2
-          },
-          "g1": {
-            "pos": "g1",
-            "owner": 2
-          },
-          "h1": {
-            "pos": "h1",
             "owner": 2
           }
         }
@@ -1845,43 +1637,27 @@
       var otherplayer = 1;
       game.selectunit2 =
         function(turn, step, markpos) {
-          var ARTIFACTS = {
-            killtarget: Object.assign({}, step.ARTIFACTS.killtarget),
-            movetarget: Object.assign({}, step.ARTIFACTS.movetarget)
-          };
+          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+            movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
+          });
           var UNITLAYERS = step.UNITLAYERS;
           var MARKS = {
             selectunit: markpos
           };
-          if (!!(UNITLAYERS.mycrowns[MARKS['selectunit']])) {
-            var STARTPOS = MARKS['selectunit'];
-            var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS) {
-                if (!(UNITLAYERS.myunits[POS])) {
-                  ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'killtarget' : 'movetarget')][POS] = {};
-                }
-              }
-            } 
-          } else {
-            var BLOCKS = UNITLAYERS.units;
-            var STARTPOS = MARKS['selectunit'];
-            var allwalkerdirs = [8, 1, 2, 4, 5, 6];
-            for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
-              var DIR = allwalkerdirs[walkerdirnbr];
-              var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-                LENGTH++;
-                ARTIFACTS['movetarget'][POS] = {};
-              }
-              if (BLOCKS[POS]) {
-                if ((!(UNITLAYERS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(UNITLAYERS.oppdaggers[POS])))) {
-                  ARTIFACTS['movetarget'][POS] = {};
-                }
+          var BLOCKS = UNITLAYERS.units;
+          var STARTPOS = MARKS['selectunit'];
+          var allwalkerdirs = [1, 3, 5, 7];
+          for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+              ARTIFACTS['movetargets'][POS] = {};
+            }
+            if (BLOCKS[POS]) {
+              if (UNITLAYERS.oppunits[POS]) {
+                ARTIFACTS['movetargets'][POS] = {
+                  dir: DIR
+                };
               }
             }
           }
@@ -1895,7 +1671,7 @@
           });
           turn.links[newstepid] = {};
           var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.movetarget) {
+          for (var linkpos in ARTIFACTS.movetargets) {
             newlinks[linkpos] = 'selectmovetarget2';
           }
           return newstep;
@@ -1910,14 +1686,36 @@
         };
       game.selectmovetarget2 =
         function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+            beingpushed: Object.assign({}, step.ARTIFACTS.beingpushed),
+            squished: Object.assign({}, step.ARTIFACTS.squished)
+          });
           var UNITLAYERS = step.UNITLAYERS;
           var MARKS = {
             selectmovetarget: markpos,
             selectunit: step.MARKS.selectunit
           };
+          if (!!(UNITLAYERS.oppunits[MARKS['selectmovetarget']])) {
+            var allowedsteps = UNITLAYERS.oppunits;
+            var BLOCKS = UNITLAYERS.myunits;
+            var STARTPOS = MARKS['selectmovetarget'];
+            var DIR = relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1];
+            var walkedsquares = [];
+            var STOPREASON = "";
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while (!(STOPREASON = (!(POS = connections[POS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
+              walkedsquares.push(POS);
+              ARTIFACTS['beingpushed'][POS] = {};
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((['hitblock', 'outofbounds'].indexOf(STOPREASON) !== -1)) {
+              ARTIFACTS['squished'][walkedsquares[WALKLENGTH - 1]] = {};
+            }
+          }
           var newstepid = step.stepid + '-' + markpos;
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+            ARTIFACTS: ARTIFACTS,
             MARKS: MARKS,
             stepid: newstepid,
             path: step.path.concat(markpos),
@@ -1941,7 +1739,28 @@
           var MARKS = step.MARKS;
           var UNITDATA = Object.assign({}, step.UNITDATA);
           var UNITLAYERS = step.UNITLAYERS;
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          var LOOPID;
+          for (var POS in ARTIFACTS.beingpushed) {
+            if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
+              var pushid = LOOPID;
+              var pushdir = (ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'];
+              var dist = 1;
+              var newpos = UNITDATA[pushid].pos;
+              while (dist && connections[newpos][pushdir]) {
+                newpos = connections[newpos][pushdir];
+                dist--;
+              }
+              UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
+                pos: newpos
+              });
+            }
+          }
+          var LOOPID;
+          for (var POS in ARTIFACTS.squished) {
+            if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
+              delete UNITDATA[LOOPID];
+            }
+          }
           var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
@@ -1950,14 +1769,10 @@
           }
           MARKS = {};
           UNITLAYERS = {
-            "crowns": {},
-            "mycrowns": {},
-            "oppcrowns": {},
-            "neutralcrowns": {},
-            "daggers": {},
-            "mydaggers": {},
-            "oppdaggers": {},
-            "neutraldaggers": {},
+            "soldiers": {},
+            "mysoldiers": {},
+            "oppsoldiers": {},
+            "neutralsoldiers": {},
             "units": {},
             "myunits": {},
             "oppunits": {},
@@ -1971,8 +1786,9 @@
             UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
           }
           ARTIFACTS = {
-            "killtarget": {},
-            "movetarget": {}
+            "movetargets": {},
+            "beingpushed": {},
+            "squished": {}
           };
           var newstepid = step.stepid + '-' + 'move';
           var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -1988,8 +1804,8 @@
           if (Object.keys(
               (function() {
                 var ret = {},
-                  s0 = UNITLAYERS.mycrowns,
-                  s1 = TERRAIN.oppbases;
+                  s0 = TERRAIN.oppcorner,
+                  s1 = UNITLAYERS.myunits;
                 for (var key in s0) {
                   if (s1[key]) {
                     ret[key] = s0[key];
@@ -1999,12 +1815,7 @@
               }()) ||  {}).length !== 0) {
             var winner = 2;
             var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else
-          if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'kingkill';
+            turn.links[newstepid][result] = 'invade';
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
@@ -2028,19 +1839,16 @@
           };
           var MARKS = {};
           var ARTIFACTS = {
-            "killtarget": {},
-            "movetarget": {}
+            "movetargets": {},
+            "beingpushed": {},
+            "squished": {}
           };
           var UNITDATA = step.UNITDATA;
           var UNITLAYERS = {
-            "crowns": {},
-            "mycrowns": {},
-            "oppcrowns": {},
-            "neutralcrowns": {},
-            "daggers": {},
-            "mydaggers": {},
-            "oppdaggers": {},
-            "neutraldaggers": {},
+            "soldiers": {},
+            "mysoldiers": {},
+            "oppsoldiers": {},
+            "neutralsoldiers": {},
             "units": {},
             "myunits": {},
             "oppunits": {},
@@ -2091,99 +1899,195 @@
         var stepseed = {
           UNITDATA: {
             "unit1": {
-              "pos": "d8",
+              "pos": "a1",
               "id": "unit1",
-              "group": "crowns",
+              "group": "soldiers",
               "owner": 1
             },
             "unit2": {
-              "pos": "e8",
+              "pos": "b1",
               "id": "unit2",
-              "group": "crowns",
+              "group": "soldiers",
               "owner": 1
             },
             "unit3": {
               "pos": "c1",
               "id": "unit3",
-              "group": "crowns",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit4": {
-              "pos": "f1",
+              "pos": "d1",
               "id": "unit4",
-              "group": "crowns",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit5": {
-              "pos": "c7",
+              "pos": "a2",
               "id": "unit5",
-              "group": "daggers",
+              "group": "soldiers",
               "owner": 1
             },
             "unit6": {
-              "pos": "d7",
+              "pos": "b2",
               "id": "unit6",
-              "group": "daggers",
+              "group": "soldiers",
               "owner": 1
             },
             "unit7": {
-              "pos": "e7",
+              "pos": "c2",
               "id": "unit7",
-              "group": "daggers",
+              "group": "soldiers",
               "owner": 1
             },
             "unit8": {
-              "pos": "f7",
+              "pos": "d2",
               "id": "unit8",
-              "group": "daggers",
+              "group": "soldiers",
               "owner": 1
             },
             "unit9": {
-              "pos": "c3",
+              "pos": "a3",
               "id": "unit9",
-              "group": "daggers",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit10": {
-              "pos": "f3",
+              "pos": "b3",
               "id": "unit10",
-              "group": "daggers",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit11": {
-              "pos": "b2",
+              "pos": "c3",
               "id": "unit11",
-              "group": "daggers",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit12": {
-              "pos": "c2",
+              "pos": "d3",
               "id": "unit12",
-              "group": "daggers",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit13": {
-              "pos": "d2",
+              "pos": "a4",
               "id": "unit13",
-              "group": "daggers",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit14": {
-              "pos": "e2",
+              "pos": "b4",
               "id": "unit14",
-              "group": "daggers",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit15": {
-              "pos": "f2",
+              "pos": "c4",
               "id": "unit15",
-              "group": "daggers",
-              "owner": 2
+              "group": "soldiers",
+              "owner": 1
             },
             "unit16": {
-              "pos": "g2",
+              "pos": "d4",
               "id": "unit16",
-              "group": "daggers",
+              "group": "soldiers",
+              "owner": 1
+            },
+            "unit17": {
+              "pos": "e5",
+              "id": "unit17",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit18": {
+              "pos": "f5",
+              "id": "unit18",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit19": {
+              "pos": "g5",
+              "id": "unit19",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit20": {
+              "pos": "h5",
+              "id": "unit20",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit21": {
+              "pos": "e6",
+              "id": "unit21",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit22": {
+              "pos": "f6",
+              "id": "unit22",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit23": {
+              "pos": "g6",
+              "id": "unit23",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit24": {
+              "pos": "h6",
+              "id": "unit24",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit25": {
+              "pos": "e7",
+              "id": "unit25",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit26": {
+              "pos": "f7",
+              "id": "unit26",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit27": {
+              "pos": "g7",
+              "id": "unit27",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit28": {
+              "pos": "h7",
+              "id": "unit28",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit29": {
+              "pos": "e8",
+              "id": "unit29",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit30": {
+              "pos": "f8",
+              "id": "unit30",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit31": {
+              "pos": "g8",
+              "id": "unit31",
+              "group": "soldiers",
+              "owner": 2
+            },
+            "unit32": {
+              "pos": "h8",
+              "id": "unit32",
+              "group": "soldiers",
               "owner": 2
             }
           }
@@ -2195,29 +2099,24 @@
     };
     game.graphics = {
       "tiles": {
-        "bases": "playercolour"
+        "corner": "playercolour"
       },
       "icons": {
-        "daggers": "bishops",
-        "crowns": "kings"
+        "soldiers": "rooks"
       }
     };
     game.board = {
       "height": 8,
       "width": 8,
       "terrain": {
-        "bases": {
-          "1": [
-            ["rect", "a8", "h8"]
-          ],
-          "2": [
-            ["rect", "a1", "h1"]
-          ]
+        "corner": {
+          "1": ["a1"],
+          "2": ["h8"]
         }
       }
     };
     game.AI = [];
-    game.id = "daggers";
+    game.id = "aries";
     return game;
   }
 )()

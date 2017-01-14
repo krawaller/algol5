@@ -286,6 +286,14 @@ describe('the core funcs',()=>{
                 ARTIFACTS: {mylayer:{a1:{foo:'bar'}}}
             },
             expected: 'bar'
+        },
+        'the score cmnd': {
+            arg: ['score',['layer','mylayer'],'foo'],
+            scope: {
+                ARTIFACTS: {mylayer:{a1:{},a2:{},a3:{}}},
+                foo: {a1:5,a3:8}
+            },
+            expected: 13
         }
     });
     test(C,'set',{

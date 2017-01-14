@@ -87,6 +87,23 @@ describe("The flow package commands",()=>{
         }
     })
     test(lib,'addPlayerVariables',{
+        'for game with non-neutral terrain, plr 2': {
+            options: {player:2},
+            context: {
+                isTerrainNeutral: O=> false,
+                boardConnections: O=> '"board"',
+                boardLayers: O=> '"layers"',
+                terrainLayers: O=> '"terrain"',
+                addAllScoringsForPlayer: O=> 'var addedScorings = true; '
+            },
+            mutations: {
+                TERRAIN: 'terrain',
+                ownernames: ['neutral','opp','my'],
+                player: 2,
+                otherplayer: 1,
+                addedScorings: true
+            }
+        },
         'for game with neutral terrain, plr 1': {
             options: {player:1},
             context: {
@@ -97,21 +114,6 @@ describe("The flow package commands",()=>{
                 ownernames: ['neutral','my','opp'],
                 player: 1,
                 otherplayer: 2
-            }
-        },
-        'for game with non-neutral terrain, plr 2': {
-            options: {player:2},
-            context: {
-                isTerrainNeutral: O=> false,
-                boardConnections: O=> '"board"',
-                boardLayers: O=> '"layers"',
-                terrainLayers: O=> '"terrain"'
-            },
-            mutations: {
-                TERRAIN: 'terrain',
-                ownernames: ['neutral','opp','my'],
-                player: 2,
-                otherplayer: 1
             }
         }
     })

@@ -5,6 +5,35 @@ import amazon from '../../../games/defs/amazon.json'
 import daggers from '../../../games/defs/daggers.json'
 
 test("the UTILS funcs",U,{
+	"generatorLayers(gendef)": {
+		"for generic generator": {
+			"gendef": {
+				"draw": {
+					"poo": {
+						"tolayer": ["ifelse","FOO","layer1","layer2"]
+					}
+				}
+			},
+			expected: {layer1:{},layer2:{}}
+		},
+		"for filter": {
+			gendef: {
+				tolayer: ["ifelse","FOO","layer1","layer2"],
+			},
+			expected: {layer1:{},layer2:{}}
+		}
+	},
+	"getTerrain(O)": {
+		"with AI": {
+			O: {
+				rules: {
+					board: { terrain: {foo:'bar'} },
+					AI: { terrain: {baz: 'bin'} }
+				},
+			},
+			expected: {foo:'bar',baz:'bin'}
+		}
+	},
 	"contains(haystack,needle)": {
 		"for big true test": {
 			haystack: amazon,

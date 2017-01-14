@@ -24,6 +24,11 @@ Helper functions which all returns actual values, not stringified
 
 export default U => Object.assign(U,{
 
+	getTerrain: (O)=> Object.assign({},
+		O && O.rules && O.rules.board && O.rules.board.terrain || {},
+		O && O.rules && O.rules.AI && O.rules.AI.terrain || {}
+	),
+
 	needLevel: (O,expr)=>
 		U.contains(expr,['dir']) ? 'loop' :
 		U.contains(expr,['start']) ? 'dir' : 
@@ -55,7 +60,7 @@ export default U => Object.assign(U,{
   /*
   Calculates all layers used by a generator
   */
-  generatorLayers: (gendef)=> reduce(gendef.draw,(mem2,drawdef)=> {
+  generatorLayers: (gendef)=> reduce(gendef.tolayer ? {foo:gendef} : gendef.draw,(mem2,drawdef)=> {
     return reduce(U.possibilities(drawdef.tolayer),(mem3,l)=> {
       const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]
       return reduce(list, (mem4,l)=> ({...mem4, [l]:{} }), mem3)

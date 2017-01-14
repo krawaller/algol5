@@ -1,0 +1,180 @@
+{
+  "STATUS": "Converting, still unsure. Need offsetunit effect!",
+  "meta": {
+    "id": "cannon",
+    "name": "Cannon",
+    "source": "http://www.iggamecenter.com/info/en/cannon.html",
+    "tags": ["formation","chooseaction","kingkill","shoot","capture"]
+  },
+  "board": {
+    "height": 10,
+    "width": 10,
+    "terrain": { "townplaces": {"1":[["rect","b10","i10"]],"2":[["rect","b1","i1"]] }}
+  },
+  "graphics": { "icons": {"soldiers":"pawns","flags":"kings"} },
+  "setup": { "soldiers": {
+    "1": [["rect","b7","b9",5],["rect","d7","d9",5],["rect","f7","f9",5],["rect","h7","h9",5],["rect","j7","j9",5]],
+    "2": [["rect","a2","a4",1],["rect","c2","c4",1],["rect","e2","e4",1],["rect","g2","g4",1],["rect","i2","i4",1]]
+  }},
+  "marks": {
+    "selectdeploy": {
+      "from": "mytownplaces",
+      "allow": ["deploy"]
+    },
+    "selectunit": {
+      "from": "mysoldiers",
+      "runGenerators": ["findmoveandkilltargets","findfleetargets","findpotentialtails","findmarchtargets", "findfiretargets" ],
+      "allow": [ "selectmove", "selectmarch", "selectfire" ]
+    },
+    "selectmove": {
+      "from": "movetargets",
+      "allow": [ "move" ]
+    },
+    "selectfire": {
+      "from": "firetargets",
+      "allow": [ "fire" ]
+    },
+    "selectmarch": {
+      "from": "marchtargets",
+      "runGenerators": ["findphalanxmembers"],
+      "allow": [ "march" ]
+    }
+  },
+  "commands": {
+    "deploy": {
+      "applyEffects": [ ["spawnunit","selectdeploy","flags",["contextval","currentplayer"]] ]
+    },
+    "move": {
+      "applyEffects": [
+        ["forallin","selectmove",["killunit",["loopid"]]],
+        ["move","selectunit","selectmove"]
+      ]
+    },
+    "march": {
+      "applyEffects": [ ["forallin","phalanx",
+        ["offsetunit",["loopid"],["lookup","marchtargets","selectmarch","dir"],1,0]
+      ] ]
+    },
+    "fire": {
+      "applyEffects": [ ["kill","selectfire"] ]
+    }
+  },
+  "startturn": {
+    "runGenerators": ["findscared"],
+    "allow": [ ["ifelse",["morethan",3,["contextval","turn"]], "selectdeploy", "selectunit" ] ]
+  },
+  "afterstep": {
+    "allow": [ "endturn" ]
+  },
+  "endturn": {
+    "endgame": {
+      "flagkill": {"condition":["notempty","oppdeadflags"]}
+    }
+  },
+  "generators": {
+    "findscared": {
+      "type": "nextto",
+      "starts": "mysoldiers",
+      "condition": ["anyat","oppunits",["contextpos","target"]],
+      "draw": {
+        "start": {
+          "condition": ["truthy",["contextval","neighbourcount"]],
+          "tolayer": "scared"
+        }
+      }
+    },
+    "findfleetargets": {
+      "type": "walker",
+      "starts": ["intersect","scared","selectunit"],
+      "dirs": ["relativedirs",["dirs",[4,6]],["lookup","units",["contextpos","start"],"dir"]],
+      "max": 2,
+      "blocks": "units",
+      "draw": {
+        "steps": {
+          "condition": ["same",["contextval","step"],2],
+          "tolayer": "movetargets"
+        }
+      }
+    },
+    "findmoveandkilltargets": {
+      "type": "nextto",
+      "dirs": ["relativedirs",["dirs",[7,8,1,2,3]],["lookup","units",["contextpos","start"],"dir"]],
+      "starts": "selectunit",
+      "condition": ["not",["or",[
+        ["anyat","myunits",["contextpos","target"]],
+        ["and",[
+          ["valinlist",["contextval","dir"],[7,3]],
+          ["noneat","units",["contextpos","target"]]
+        ]]
+      ]]],
+      "draw": {
+        "target": {
+          "tolayer": "movetargets"
+        }
+      }
+    },
+    "findpotentialtails": {
+      "type": "nextto",
+      "starts": "selectunit",
+      "condition": ["anyat","mysoldiers",["contextpos","target"]],
+      "draw": {
+        "target": {
+          "tolayer": "potentialtails",
+          "include": {
+            "dir": ["contextval","dir"]
+          }
+        }
+      }
+    },
+    "findmarchtargets": {
+      "type": "walker",
+      "starts": "potentialtails",
+      "dirs": ["relativedir",5,["lookup","potentialtails",["contextpos","start"],"dir"]],
+      "steps": "mysoldiers",
+      "blocks": ["subtract","board","units"],
+      "prioritizeblocksoversteps": true,
+      "max": 3,
+      "draw": {
+        "all": {
+          "tolayer": "potentialphalanx",
+          "condition": ["and",[
+            ["same",["contextval","linelength"],2],
+            ["same",["contextval","stopreason"],"hitblock"]
+          ]],
+          "include": {
+            "line": ["dirline",["contextval","dir"]]
+          }
+        },
+        "block": {
+          "condition": ["same",["contextval","linelength"],2],
+          "tolayer": "marchtargets",
+          "include": {
+            "line": ["dirline",["contextval","dir"]],
+            "dir": ["contextval","dir"]
+          }
+        }
+      }
+    },
+    "findphalanxmembers": {
+      "type": "filter",
+      "layer": "potentialphalanx",
+      "matching": {
+        "line": ["is",["lookup","marchtargets","selectmarch","line"]]
+      },
+      "tolayer": "phalanx"
+    },
+    "findfiretargets": {
+      "type": "walker",
+      "starts": "marchtargets",
+      "dirs": ["dir",["lookup","marchtargets",["contextpos","start"],"dir"]],
+      "blocks": "units",
+      "max": 2,
+      "draw": {
+        "block": {
+          "condition": ["anyat","oppunits",["contextpos","target"]],
+          "tolayer": "firetargets"
+        }
+      }
+    }
+  }
+}

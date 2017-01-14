@@ -708,7 +708,7 @@
               }
             } 
           } 
-          return (1 * Object.keys(ARTIFACTS.myfrozenguardedthreat).length) + (2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length) + (3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length) + (4 * Object.keys(ARTIFACTS.mymoverfreethreat).length) + (5 * Object.keys(
+          return Object.keys(ARTIFACTS.myfrozenguardedthreat).length + 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length + 3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length + 4 * Object.keys(ARTIFACTS.mymoverfreethreat).length + 5 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.myfrozens,
@@ -719,7 +719,7 @@
                 }
               }
               return ret;
-            }())).length) + (6 * Object.keys(
+            }())).length + 6 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.mynotfrozens,
@@ -730,7 +730,7 @@
                 }
               }
               return ret;
-            }())).length) - (1 * Object.keys(ARTIFACTS.oppfrozenguardedthreat).length) - (2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length) - (3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length) - (4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length) - (5 * Object.keys(
+            }())).length - Object.keys(ARTIFACTS.oppfrozenguardedthreat).length - 2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length - 3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length - 4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length - 5 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.oppfrozens,
@@ -741,7 +741,7 @@
                 }
               }
               return ret;
-            }())).length) - (6 * Object.keys(
+            }())).length - 6 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.oppnotfrozens,
@@ -752,7 +752,7 @@
                 }
               }
               return ret;
-            }())).length);
+            }())).length;
         };
       game.brain_Fred_1_detailed =
         function(step) {
@@ -813,11 +813,11 @@
             } 
           } 
           return {
-            myfrozenguardedthreat: (1 * Object.keys(ARTIFACTS.myfrozenguardedthreat).length),
-            myfrozenfreethreat: (2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length),
-            mymoverguardedthreat: (3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length),
-            mymoverfreethreat: (4 * Object.keys(ARTIFACTS.mymoverfreethreat).length),
-            myfrozeninfiltrators: (5 * Object.keys(
+            myfrozenguardedthreat: Object.keys(ARTIFACTS.myfrozenguardedthreat).length,
+            myfrozenfreethreat: 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length,
+            mymoverguardedthreat: 3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length,
+            mymoverfreethreat: 4 * Object.keys(ARTIFACTS.mymoverfreethreat).length,
+            myfrozeninfiltrators: 5 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.myfrozens,
@@ -828,8 +828,8 @@
                   }
                 }
                 return ret;
-              }())).length),
-            myfreeinfiltrators: (6 * Object.keys(
+              }())).length,
+            myfreeinfiltrators: 6 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.mynotfrozens,
@@ -840,12 +840,12 @@
                   }
                 }
                 return ret;
-              }())).length),
-            oppfrozenguardedthreat: -(1 * Object.keys(ARTIFACTS.oppfrozenguardedthreat).length),
-            oppfrozenfreethreat: -(2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length),
-            oppmoverguardedthreat: -(3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length),
-            oppmoverfreethreat: -(4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length),
-            oppfrozeninfiltrators: -(5 * Object.keys(
+              }())).length,
+            oppfrozenguardedthreat: -Object.keys(ARTIFACTS.oppfrozenguardedthreat).length,
+            oppfrozenfreethreat: -2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length,
+            oppmoverguardedthreat: -3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length,
+            oppmoverfreethreat: -4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length,
+            oppfrozeninfiltrators: -5 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.oppfrozens,
@@ -856,8 +856,8 @@
                   }
                 }
                 return ret;
-              }())).length),
-            oppfreeinfiltrators: -(6 * Object.keys(
+              }())).length,
+            oppfreeinfiltrators: -6 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.oppnotfrozens,
@@ -868,7 +868,7 @@
                   }
                 }
                 return ret;
-              }())).length)
+              }())).length
           };
         };
     })();
@@ -1259,7 +1259,7 @@
               }
             } 
           } 
-          return (1 * Object.keys(ARTIFACTS.myfrozenguardedthreat).length) + (2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length) + (3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length) + (4 * Object.keys(ARTIFACTS.mymoverfreethreat).length) + (5 * Object.keys(
+          return Object.keys(ARTIFACTS.myfrozenguardedthreat).length + 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length + 3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length + 4 * Object.keys(ARTIFACTS.mymoverfreethreat).length + 5 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.myfrozens,
@@ -1270,7 +1270,7 @@
                 }
               }
               return ret;
-            }())).length) + (6 * Object.keys(
+            }())).length + 6 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.mynotfrozens,
@@ -1281,7 +1281,7 @@
                 }
               }
               return ret;
-            }())).length) - (1 * Object.keys(ARTIFACTS.oppfrozenguardedthreat).length) - (2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length) - (3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length) - (4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length) - (5 * Object.keys(
+            }())).length - Object.keys(ARTIFACTS.oppfrozenguardedthreat).length - 2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length - 3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length - 4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length - 5 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.oppfrozens,
@@ -1292,7 +1292,7 @@
                 }
               }
               return ret;
-            }())).length) - (6 * Object.keys(
+            }())).length - 6 * Object.keys(
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.oppnotfrozens,
@@ -1303,7 +1303,7 @@
                 }
               }
               return ret;
-            }())).length);
+            }())).length;
         };
       game.brain_Fred_2_detailed =
         function(step) {
@@ -1364,11 +1364,11 @@
             } 
           } 
           return {
-            myfrozenguardedthreat: (1 * Object.keys(ARTIFACTS.myfrozenguardedthreat).length),
-            myfrozenfreethreat: (2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length),
-            mymoverguardedthreat: (3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length),
-            mymoverfreethreat: (4 * Object.keys(ARTIFACTS.mymoverfreethreat).length),
-            myfrozeninfiltrators: (5 * Object.keys(
+            myfrozenguardedthreat: Object.keys(ARTIFACTS.myfrozenguardedthreat).length,
+            myfrozenfreethreat: 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length,
+            mymoverguardedthreat: 3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length,
+            mymoverfreethreat: 4 * Object.keys(ARTIFACTS.mymoverfreethreat).length,
+            myfrozeninfiltrators: 5 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.myfrozens,
@@ -1379,8 +1379,8 @@
                   }
                 }
                 return ret;
-              }())).length),
-            myfreeinfiltrators: (6 * Object.keys(
+              }())).length,
+            myfreeinfiltrators: 6 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.mynotfrozens,
@@ -1391,12 +1391,12 @@
                   }
                 }
                 return ret;
-              }())).length),
-            oppfrozenguardedthreat: -(1 * Object.keys(ARTIFACTS.oppfrozenguardedthreat).length),
-            oppfrozenfreethreat: -(2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length),
-            oppmoverguardedthreat: -(3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length),
-            oppmoverfreethreat: -(4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length),
-            oppfrozeninfiltrators: -(5 * Object.keys(
+              }())).length,
+            oppfrozenguardedthreat: -Object.keys(ARTIFACTS.oppfrozenguardedthreat).length,
+            oppfrozenfreethreat: -2 * Object.keys(ARTIFACTS.oppfrozenfreethreat).length,
+            oppmoverguardedthreat: -3 * Object.keys(ARTIFACTS.oppmoverguardedthreat).length,
+            oppmoverfreethreat: -4 * Object.keys(ARTIFACTS.oppmoverfreethreat).length,
+            oppfrozeninfiltrators: -5 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.oppfrozens,
@@ -1407,8 +1407,8 @@
                   }
                 }
                 return ret;
-              }())).length),
-            oppfreeinfiltrators: -(6 * Object.keys(
+              }())).length,
+            oppfreeinfiltrators: -6 * Object.keys(
               (function() {
                 var ret = {},
                   s0 = UNITLAYERS.oppnotfrozens,
@@ -1419,7 +1419,7 @@
                   }
                 }
                 return ret;
-              }())).length)
+              }())).length
           };
         };
     })();

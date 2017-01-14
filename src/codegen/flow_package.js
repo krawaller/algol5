@@ -52,6 +52,7 @@ export default C => Object.assign(C,{
         var ownernames = ${O.player === 2 ? '["neutral","opp","my"]' : '["neutral","my","opp"]'};
         var player = ${O.player};
         var otherplayer = ${O.player === 1 ? 2 : 1};
+        ${C.addAllScoringsForPlayer(O)}
     `,
 
     addPlayerFunctions: O=> `

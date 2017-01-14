@@ -17,6 +17,7 @@
     "generate": "babel-node games/generate.js",
     "collect": "babel-node games/collect.js",
     "makeboards": "babel-node games/makeboards.js",
+    "app": "cd app; webpack;",
     "build": "webpack",
     "exp": "babel-node dev/exp.js"
   },

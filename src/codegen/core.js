@@ -159,7 +159,7 @@ export default T => {
             if (T['bool_'+def[0]]) {
                 return T['bool_'+def[0]](O,tail(def));
             } else {
-                throw "Unknown bool def: "+def;
+                throw "Unknown bool def: "+JSON.stringify(def);
             }
         },
 
@@ -242,7 +242,11 @@ export default T => {
         val_sizeof: (O,[set])=> `Object.keys(${T.set(O,set)}).length`,
         val_harvest: (O,[set,prop])=> `reduce(${T.set(O,set)},function(mem,obj){
             return mem+obj[${T.value(O,prop)}];
-        },0)`
+        },0)`,
+        val_score: (O,[set,score])=> `Object.keys(${T.set(O,set)}).reduce(function(mem,pos){
+            return mem+(${score}[pos]||0);
+        },0)`,
+        val_turn: (O)=> "turn.turn"
     })
 
     return Object.assign(T,methods)

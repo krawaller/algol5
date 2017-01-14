@@ -17,7 +17,7 @@ export default C => Object.assign(C,{
         }
     },
 
-    isTerrainNeutral: O=> !Object.keys(O && O.rules && O.rules.board && O.rules.board.terrain || {})
+    isTerrainNeutral: O=> !Object.keys(C.getTerrain(O))
         .filter(t=> t[1] || t[2]).length,
 
     /*
@@ -105,10 +105,10 @@ export default C => Object.assign(C,{
     This should be done per player if any terrain has owner.
     */
     terrainLayers: (O,pure)=> {
-        if (!O || !O.rules || !O.rules.board || !O.rules.board.terrain){
+        if (!Object.keys(C.getTerrain(O)).length){
             return pure ? {} : JSON.stringify({})
         }
-        let terrain = reduce(O.rules.board.terrain,(mem,def,name)=> {
+        let terrain = reduce(C.getTerrain(O),(mem,def,name)=> {
             mem[name] = {};
             if (isArray(def)){ // no ownership
                 flatten(def.map(C.convertToEntities)).forEach(e=>{

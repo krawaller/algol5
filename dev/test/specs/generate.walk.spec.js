@@ -113,18 +113,17 @@ describe('the generate funcs',()=>{
             scope: {
                 STARTPOS: 'p0',
                 DIR: 1,
+                BLOCKS: {p3:'yep'},
                 connections: {p0:{1:'p1'},p1:{1:'p2'},p2:{1:'p3'},p3:{1:'p4'}},
                 ARTIFACTS: {
                     steps:{},
-                    blocks:{},
-                    intheway:{p3:'yep'}
+                    blocks:{}
                 }
             },
             mutations: {
                 ARTIFACTS: {
                     steps:{p1:{},p2:{}},
-                    blocks:{p3:{}},
-                    intheway:{p3:'yep'}
+                    blocks:{p3:{}}
                 }
             }
         }
@@ -213,8 +212,8 @@ describe('the generate funcs',()=>{
                     }
                 }
             },
-            scope: {POS:'sthelse',nextpos:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{}}},
-            mutations: {POS:'boom',ARTIFACTS:{blocks:{boom:{why:'hitblock'}}}}
+            scope: {POS:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{}},BLOCKS:{boom:'yes'}},
+            mutations: {ARTIFACTS:{blocks:{boom:{why:'hitblock'}}}}
         },
         'when we hit block and also draw all': {
             arg: {
@@ -224,34 +223,41 @@ describe('the generate funcs',()=>{
                     all: { tolayer: 'everything' }
                 }
             },
-            scope: {POS:'sthelse',nextpos:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{},everything:{}}},
-            mutations: {POS:'boom',ARTIFACTS:{blocks:{boom:{}},everything:{boom:{}}}}
+            scope: {POS:'boom',STOPREASON:'hitblock',ARTIFACTS:{blocks:{},everything:{}},BLOCKS:{boom:'yes'}},
+            mutations: {ARTIFACTS:{blocks:{boom:{}},everything:{boom:{}}}}
         }
     });
     test(G,'takewalkstep', {
-        'for normal walk': {
-            scope: {walkedsquares:['foo'],nextpos:'bar',POS:'foo'},
-            mutations: {walkedsquares:['foo','bar'],POS:'bar'}
+        'for normal walk when we dont care': {
+            context: { needsWalkPath: O=> false },
+            scope: {walkedsquares:['foo']},
+            mutations: {walkedsquares:['foo']}
+        },
+        'for normal walk when we DO care': {
+            context: { needsWalkPath: O=> true },
+            scope: {walkedsquares:['foo'],POS:'bar'},
+            mutations: {walkedsquares:['foo','bar']}
         },
         'with count and nextpos not to be counted': {
             arg: {count:'YES'},
-            scope: {walkedsquares:['foo'],nextpos:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{},POS:'foo'},
+            scope: {walkedsquares:['foo'],countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{},POS:'bar'},
             mutations: {countedwalkpositions:['whatev',7],CURRENTCOUNT:7}
         },
         'with count and nextpos should be counted': {
             arg: {count:'YES'},
-            scope: {walkedsquares:['foo'],nextpos:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{bar:'yes'},POS:'foo'},
+            scope: {walkedsquares:['foo'],POS:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{bar:'yes'}},
             mutations: {countedwalkpositions:['whatev',8],CURRENTCOUNT:8}
         },
         'with count and nextpos should be counted and we intend to draw': {
             arg: {count:'YES',draw:{counted:'sure'}},
-            scope: {COUNTED:['x'],walkedsquares:['foo'],nextpos:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{bar:'yes'},POS:'foo'},
+            scope: {COUNTED:['x'],walkedsquares:['foo'],POS:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{bar:'yes'}},
             mutations: {countedwalkpositions:['whatev',8],CURRENTCOUNT:8}
         }
     });
     test(G,'afterwalk', {
         'for vanilla walk with walklength use': {
             arg: {draw: {steps: true}},
+            context: { needsWalkLength: ()=> true },
             scope: {walkedsquares:[1,2,3]},
             mutations: {WALKLENGTH:3}
         },
@@ -262,10 +268,11 @@ describe('the generate funcs',()=>{
         },
         'if we dont need walklength': {
             scope: {walkedsquares:[1,2,3],WALKLENGTH:'dontcalculateme'},
+            context: { needsWalkLength: ()=> false },
             mutations: {WALKLENGTH:'dontcalculateme'}
         }
     });
-    test(G,'prepwalkstart', {
+    /*test(G,'prepwalkstart', {
         'for vanilla def': {
             scope: {STARTPOS: 'somepos'},
             mutations: {POS: 'somepos', walkedsquares: [],STOPREASON:'',nextpos:''}
@@ -300,5 +307,5 @@ describe('the generate funcs',()=>{
             scope: {ARTIFACTS:{somelayer:'L'},STARTPOS:'somepos'},
             mutations: {walkpositionstocount:'L',countedwalkpositions: [], CURRENTCOUNT: 0}
         }
-    });
+    });*/
 });

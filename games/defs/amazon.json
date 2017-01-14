@@ -93,16 +93,22 @@
         }
       }
     },
+    "aspects": {
+      "myroads": ["harvest","myroads","count"],
+      "mydomain": ["sizeof","myreach"],
+      "opproads": ["harvest","opproads","count"],
+      "oppdomain": ["sizeof","oppreach"]
+    },
     "brains": {
       "Steve": {
         "generators": ["findroads","findreach"],
         "plus": {
-          "myroads": ["harvest","myroads","count"],
-          "mydomain": ["sizeof","myreach"]
+          "myroads": 1,
+          "mydomain": 1
         },
         "minus": {
-          "opproads": ["harvest","opproads","count"],
-          "oppdomain": ["sizeof","oppreach"]
+          "opproads": 1,
+          "oppdomain": 1
         }
       }
     }

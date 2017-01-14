@@ -35,7 +35,7 @@ let Battle = React.createClass({
     let func = 'brain_'+name+'_'+s.turn.player
     let score = s.game[func](s.step)
     let details = s.game[func+'_detailed'](s.step)
-    console.log("WHAT DOES STEVE SAY?",score,details,this.findBest(name))
+    console.log("WHAT DOES",name,"SAY?",score,details,this.findBest(name))
   },
   findBest(brain) {
     let s = this.state.session
@@ -45,7 +45,6 @@ let Battle = React.createClass({
   maybeAI() {
     let s = this.state.session,
         p = s.players[s.turn.player-1]
-    console.log("Maybe AI!")
     if (s.step.stepid === 'root' && p.type === 'ai' && !this.aiThinking){
       setTimeout(this.makeAImoves,100);
     }
@@ -56,7 +55,7 @@ let Battle = React.createClass({
     let options = play.findBestOption(s.game,s.turn,s.players[s.turn.player-1].name)
     let targetStepId = options[ random(0,options.length-1) ]
     let targetStep = s.turn.steps[targetStepId]
-    let moves = targetStep.path.concat('endturn')
+    let moves = targetStep.path.concat('endturn') // TODO - win here?
     for(let i=0; i<moves.length; i++){
       setTimeout( this.doAction.bind(this,moves[i]), i*800 )
     }

@@ -1294,11 +1294,261 @@
             "pos": "h7",
             "owner": 2
           }
+        },
+        "threatrow": {
+          "a3": {
+            "pos": "a3",
+            "owner": 1
+          },
+          "b3": {
+            "pos": "b3",
+            "owner": 1
+          },
+          "c3": {
+            "pos": "c3",
+            "owner": 1
+          },
+          "d3": {
+            "pos": "d3",
+            "owner": 1
+          },
+          "e3": {
+            "pos": "e3",
+            "owner": 1
+          },
+          "f3": {
+            "pos": "f3",
+            "owner": 1
+          },
+          "g3": {
+            "pos": "g3",
+            "owner": 1
+          },
+          "h3": {
+            "pos": "h3",
+            "owner": 1
+          },
+          "a5": {
+            "pos": "a5",
+            "owner": 2
+          },
+          "b5": {
+            "pos": "b5",
+            "owner": 2
+          },
+          "c5": {
+            "pos": "c5",
+            "owner": 2
+          },
+          "d5": {
+            "pos": "d5",
+            "owner": 2
+          },
+          "e5": {
+            "pos": "e5",
+            "owner": 2
+          },
+          "f5": {
+            "pos": "f5",
+            "owner": 2
+          },
+          "g5": {
+            "pos": "g5",
+            "owner": 2
+          },
+          "h5": {
+            "pos": "h5",
+            "owner": 2
+          }
+        },
+        "mythreatrow": {
+          "a3": {
+            "pos": "a3",
+            "owner": 1
+          },
+          "b3": {
+            "pos": "b3",
+            "owner": 1
+          },
+          "c3": {
+            "pos": "c3",
+            "owner": 1
+          },
+          "d3": {
+            "pos": "d3",
+            "owner": 1
+          },
+          "e3": {
+            "pos": "e3",
+            "owner": 1
+          },
+          "f3": {
+            "pos": "f3",
+            "owner": 1
+          },
+          "g3": {
+            "pos": "g3",
+            "owner": 1
+          },
+          "h3": {
+            "pos": "h3",
+            "owner": 1
+          }
+        },
+        "oppthreatrow": {
+          "a5": {
+            "pos": "a5",
+            "owner": 2
+          },
+          "b5": {
+            "pos": "b5",
+            "owner": 2
+          },
+          "c5": {
+            "pos": "c5",
+            "owner": 2
+          },
+          "d5": {
+            "pos": "d5",
+            "owner": 2
+          },
+          "e5": {
+            "pos": "e5",
+            "owner": 2
+          },
+          "f5": {
+            "pos": "f5",
+            "owner": 2
+          },
+          "g5": {
+            "pos": "g5",
+            "owner": 2
+          },
+          "h5": {
+            "pos": "h5",
+            "owner": 2
+          }
         }
       };
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
+      var mybasic = {
+        "h1": 0,
+        "g1": 0,
+        "f1": 0,
+        "e1": 0,
+        "d1": 0,
+        "c1": 0,
+        "b1": 0,
+        "a1": 0,
+        "h2": 0,
+        "g2": 0,
+        "f2": 1,
+        "e2": 1,
+        "d2": 1,
+        "c2": 1,
+        "b2": 0,
+        "a2": 0,
+        "h3": 0,
+        "g3": 0,
+        "f3": 2,
+        "e3": 2,
+        "d3": 2,
+        "c3": 2,
+        "b3": 0,
+        "a3": 0,
+        "h4": 0,
+        "g4": 0,
+        "f4": 3,
+        "e4": 3,
+        "d4": 3,
+        "c4": 3,
+        "b4": 0,
+        "a4": 0,
+        "h5": 2,
+        "g5": 3,
+        "f5": 4,
+        "e5": 4,
+        "d5": 4,
+        "c5": 4,
+        "b5": 3,
+        "a5": 2,
+        "h6": 1,
+        "g6": 1,
+        "f6": 1,
+        "e6": 1,
+        "d6": 1,
+        "c6": 1,
+        "b6": 1,
+        "a6": 1,
+        "h7": 0,
+        "g7": 0,
+        "f7": 0,
+        "e7": 0,
+        "d7": 0,
+        "c7": 0,
+        "b7": 0,
+        "a7": 0
+      };
+      var oppbasic = {
+        "h1": 0,
+        "g1": 0,
+        "f1": 0,
+        "e1": 0,
+        "d1": 0,
+        "c1": 0,
+        "b1": 0,
+        "a1": 0,
+        "h2": 1,
+        "g2": 1,
+        "f2": 1,
+        "e2": 1,
+        "d2": 1,
+        "c2": 1,
+        "b2": 1,
+        "a2": 1,
+        "h3": 2,
+        "g3": 3,
+        "f3": 4,
+        "e3": 4,
+        "d3": 4,
+        "c3": 4,
+        "b3": 3,
+        "a3": 2,
+        "h4": 0,
+        "g4": 0,
+        "f4": 3,
+        "e4": 3,
+        "d4": 3,
+        "c4": 3,
+        "b4": 0,
+        "a4": 0,
+        "h5": 0,
+        "g5": 0,
+        "f5": 2,
+        "e5": 2,
+        "d5": 2,
+        "c5": 2,
+        "b5": 0,
+        "a5": 0,
+        "h6": 0,
+        "g6": 0,
+        "f6": 1,
+        "e6": 1,
+        "d6": 1,
+        "c6": 1,
+        "b6": 0,
+        "a6": 0,
+        "h7": 0,
+        "g7": 0,
+        "f7": 0,
+        "e7": 0,
+        "d7": 0,
+        "c7": 0,
+        "b7": 0,
+        "a7": 0
+      };
       game.selecttower1 =
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1679,6 +1929,278 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      game.brain_Steve_1 =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.oppmoves = {};
+          ARTIFACTS.oppheavythreats = {};
+          ARTIFACTS.opplightthreats = {};
+          var BLOCKS =
+            (function() {
+              var k, ret = {},
+                s0 = UNITLAYERS.towers,
+                s1 = UNITLAYERS.mywalls;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }());
+          var walkstarts = UNITLAYERS.opptowers;
+          for (var STARTPOS in walkstarts) {
+            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+              var walkedsquares = [];
+              var MAX = 2;
+              var POS = STARTPOS;
+              var LENGTH = 0;
+              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+                walkedsquares.push(POS);
+                LENGTH++;
+              }
+              var WALKLENGTH = walkedsquares.length;
+              var STEP = 0;
+              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+                POS = walkedsquares[walkstepper];
+                STEP++;
+                if (((WALKLENGTH === 2) && (STEP === 2))) {
+                  ARTIFACTS['oppmoves'][POS] = {};
+                }
+              }
+            }
+          }
+          var filtersourcelayer = TERRAIN.mythreatrow;
+          for (var POS in filtersourcelayer) {
+            var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
+            if (filtersourcelayer[POS]) {
+              var filterobj = filtersourcelayer[POS];
+              if (!!(ARTIFACTS.oppmoves[POS])) {
+                filtertargetlayer[POS] = filterobj;
+              } 
+            } 
+          }
+          return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) - 10000 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
+        };
+      game.brain_Steve_1_detailed =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.oppmoves = {};
+          ARTIFACTS.oppheavythreats = {};
+          ARTIFACTS.opplightthreats = {};
+          var BLOCKS =
+            (function() {
+              var k, ret = {},
+                s0 = UNITLAYERS.towers,
+                s1 = UNITLAYERS.mywalls;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }());
+          var walkstarts = UNITLAYERS.opptowers;
+          for (var STARTPOS in walkstarts) {
+            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+              var walkedsquares = [];
+              var MAX = 2;
+              var POS = STARTPOS;
+              var LENGTH = 0;
+              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+                walkedsquares.push(POS);
+                LENGTH++;
+              }
+              var WALKLENGTH = walkedsquares.length;
+              var STEP = 0;
+              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+                POS = walkedsquares[walkstepper];
+                STEP++;
+                if (((WALKLENGTH === 2) && (STEP === 2))) {
+                  ARTIFACTS['oppmoves'][POS] = {};
+                }
+              }
+            }
+          }
+          var filtersourcelayer = TERRAIN.mythreatrow;
+          for (var POS in filtersourcelayer) {
+            var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
+            if (filtersourcelayer[POS]) {
+              var filterobj = filtersourcelayer[POS];
+              if (!!(ARTIFACTS.oppmoves[POS])) {
+                filtertargetlayer[POS] = filterobj;
+              } 
+            } 
+          }
+          return {
+            mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
+            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            oppwinmoves: -10000 * Object.keys(
+              (function() {
+                var k, ret = {},
+                  s0 = ARTIFACTS.oppmoves,
+                  s1 = TERRAIN.myhomerow;
+                for (k in s0) {
+                  ret[k] = 1;
+                }
+                for (k in s1) {
+                  ret[k] = 1;
+                }
+                return ret;
+              }())).length,
+            opplightthreats: -20 * Object.keys(ARTIFACTS.opplightthreats).length,
+            oppheavythreats: -500 * Object.keys(ARTIFACTS.oppheavythreats).length
+          };
+        };
+      game.brain_Joe_1 =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.oppmoves = {};
+          var BLOCKS =
+            (function() {
+              var k, ret = {},
+                s0 = UNITLAYERS.towers,
+                s1 = UNITLAYERS.mywalls;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }());
+          var walkstarts = UNITLAYERS.opptowers;
+          for (var STARTPOS in walkstarts) {
+            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+              var walkedsquares = [];
+              var MAX = 2;
+              var POS = STARTPOS;
+              var LENGTH = 0;
+              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+                walkedsquares.push(POS);
+                LENGTH++;
+              }
+              var WALKLENGTH = walkedsquares.length;
+              var STEP = 0;
+              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+                POS = walkedsquares[walkstepper];
+                STEP++;
+                if (((WALKLENGTH === 2) && (STEP === 2))) {
+                  ARTIFACTS['oppmoves'][POS] = {};
+                }
+              }
+            }
+          }
+          return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) - 100 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length;
+        };
+      game.brain_Joe_1_detailed =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.oppmoves = {};
+          var BLOCKS =
+            (function() {
+              var k, ret = {},
+                s0 = UNITLAYERS.towers,
+                s1 = UNITLAYERS.mywalls;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }());
+          var walkstarts = UNITLAYERS.opptowers;
+          for (var STARTPOS in walkstarts) {
+            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+              var walkedsquares = [];
+              var MAX = 2;
+              var POS = STARTPOS;
+              var LENGTH = 0;
+              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+                walkedsquares.push(POS);
+                LENGTH++;
+              }
+              var WALKLENGTH = walkedsquares.length;
+              var STEP = 0;
+              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+                POS = walkedsquares[walkstepper];
+                STEP++;
+                if (((WALKLENGTH === 2) && (STEP === 2))) {
+                  ARTIFACTS['oppmoves'][POS] = {};
+                }
+              }
+            }
+          }
+          return {
+            mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
+            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            oppwinmoves: -100 * Object.keys(
+              (function() {
+                var k, ret = {},
+                  s0 = ARTIFACTS.oppmoves,
+                  s1 = TERRAIN.myhomerow;
+                for (k in s0) {
+                  ret[k] = 1;
+                }
+                for (k in s1) {
+                  ret[k] = 1;
+                }
+                return ret;
+              }())).length
+          };
+        };
       game.brain_Clive_1 =
         function(step) {
           var ARTIFACTS = step.ARTIFACTS;
@@ -1757,7 +2279,11 @@
               }
             }
           }
-          return Object.keys(ARTIFACTS.mymoves).length - Object.keys(ARTIFACTS.oppmoves).length;
+          return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
         };
       game.brain_Clive_1_detailed =
         function(step) {
@@ -1839,6 +2365,12 @@
           }
           return {
             mymoves: Object.keys(ARTIFACTS.mymoves).length,
+            mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
             oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
           };
         };
@@ -1978,11 +2510,261 @@
             "pos": "h7",
             "owner": 2
           }
+        },
+        "threatrow": {
+          "a3": {
+            "pos": "a3",
+            "owner": 1
+          },
+          "b3": {
+            "pos": "b3",
+            "owner": 1
+          },
+          "c3": {
+            "pos": "c3",
+            "owner": 1
+          },
+          "d3": {
+            "pos": "d3",
+            "owner": 1
+          },
+          "e3": {
+            "pos": "e3",
+            "owner": 1
+          },
+          "f3": {
+            "pos": "f3",
+            "owner": 1
+          },
+          "g3": {
+            "pos": "g3",
+            "owner": 1
+          },
+          "h3": {
+            "pos": "h3",
+            "owner": 1
+          },
+          "a5": {
+            "pos": "a5",
+            "owner": 2
+          },
+          "b5": {
+            "pos": "b5",
+            "owner": 2
+          },
+          "c5": {
+            "pos": "c5",
+            "owner": 2
+          },
+          "d5": {
+            "pos": "d5",
+            "owner": 2
+          },
+          "e5": {
+            "pos": "e5",
+            "owner": 2
+          },
+          "f5": {
+            "pos": "f5",
+            "owner": 2
+          },
+          "g5": {
+            "pos": "g5",
+            "owner": 2
+          },
+          "h5": {
+            "pos": "h5",
+            "owner": 2
+          }
+        },
+        "oppthreatrow": {
+          "a3": {
+            "pos": "a3",
+            "owner": 1
+          },
+          "b3": {
+            "pos": "b3",
+            "owner": 1
+          },
+          "c3": {
+            "pos": "c3",
+            "owner": 1
+          },
+          "d3": {
+            "pos": "d3",
+            "owner": 1
+          },
+          "e3": {
+            "pos": "e3",
+            "owner": 1
+          },
+          "f3": {
+            "pos": "f3",
+            "owner": 1
+          },
+          "g3": {
+            "pos": "g3",
+            "owner": 1
+          },
+          "h3": {
+            "pos": "h3",
+            "owner": 1
+          }
+        },
+        "mythreatrow": {
+          "a5": {
+            "pos": "a5",
+            "owner": 2
+          },
+          "b5": {
+            "pos": "b5",
+            "owner": 2
+          },
+          "c5": {
+            "pos": "c5",
+            "owner": 2
+          },
+          "d5": {
+            "pos": "d5",
+            "owner": 2
+          },
+          "e5": {
+            "pos": "e5",
+            "owner": 2
+          },
+          "f5": {
+            "pos": "f5",
+            "owner": 2
+          },
+          "g5": {
+            "pos": "g5",
+            "owner": 2
+          },
+          "h5": {
+            "pos": "h5",
+            "owner": 2
+          }
         }
       };
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
+      var oppbasic = {
+        "h1": 0,
+        "g1": 0,
+        "f1": 0,
+        "e1": 0,
+        "d1": 0,
+        "c1": 0,
+        "b1": 0,
+        "a1": 0,
+        "h2": 0,
+        "g2": 0,
+        "f2": 1,
+        "e2": 1,
+        "d2": 1,
+        "c2": 1,
+        "b2": 0,
+        "a2": 0,
+        "h3": 0,
+        "g3": 0,
+        "f3": 2,
+        "e3": 2,
+        "d3": 2,
+        "c3": 2,
+        "b3": 0,
+        "a3": 0,
+        "h4": 0,
+        "g4": 0,
+        "f4": 3,
+        "e4": 3,
+        "d4": 3,
+        "c4": 3,
+        "b4": 0,
+        "a4": 0,
+        "h5": 2,
+        "g5": 3,
+        "f5": 4,
+        "e5": 4,
+        "d5": 4,
+        "c5": 4,
+        "b5": 3,
+        "a5": 2,
+        "h6": 1,
+        "g6": 1,
+        "f6": 1,
+        "e6": 1,
+        "d6": 1,
+        "c6": 1,
+        "b6": 1,
+        "a6": 1,
+        "h7": 0,
+        "g7": 0,
+        "f7": 0,
+        "e7": 0,
+        "d7": 0,
+        "c7": 0,
+        "b7": 0,
+        "a7": 0
+      };
+      var mybasic = {
+        "h1": 0,
+        "g1": 0,
+        "f1": 0,
+        "e1": 0,
+        "d1": 0,
+        "c1": 0,
+        "b1": 0,
+        "a1": 0,
+        "h2": 1,
+        "g2": 1,
+        "f2": 1,
+        "e2": 1,
+        "d2": 1,
+        "c2": 1,
+        "b2": 1,
+        "a2": 1,
+        "h3": 2,
+        "g3": 3,
+        "f3": 4,
+        "e3": 4,
+        "d3": 4,
+        "c3": 4,
+        "b3": 3,
+        "a3": 2,
+        "h4": 0,
+        "g4": 0,
+        "f4": 3,
+        "e4": 3,
+        "d4": 3,
+        "c4": 3,
+        "b4": 0,
+        "a4": 0,
+        "h5": 0,
+        "g5": 0,
+        "f5": 2,
+        "e5": 2,
+        "d5": 2,
+        "c5": 2,
+        "b5": 0,
+        "a5": 0,
+        "h6": 0,
+        "g6": 0,
+        "f6": 1,
+        "e6": 1,
+        "d6": 1,
+        "c6": 1,
+        "b6": 0,
+        "a6": 0,
+        "h7": 0,
+        "g7": 0,
+        "f7": 0,
+        "e7": 0,
+        "d7": 0,
+        "c7": 0,
+        "b7": 0,
+        "a7": 0
+      };
       game.selecttower2 =
         function(turn, step, markpos) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -2363,6 +3145,278 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      game.brain_Steve_2 =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.oppmoves = {};
+          ARTIFACTS.oppheavythreats = {};
+          ARTIFACTS.opplightthreats = {};
+          var BLOCKS =
+            (function() {
+              var k, ret = {},
+                s0 = UNITLAYERS.towers,
+                s1 = UNITLAYERS.mywalls;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }());
+          var walkstarts = UNITLAYERS.opptowers;
+          for (var STARTPOS in walkstarts) {
+            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+              var walkedsquares = [];
+              var MAX = 2;
+              var POS = STARTPOS;
+              var LENGTH = 0;
+              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+                walkedsquares.push(POS);
+                LENGTH++;
+              }
+              var WALKLENGTH = walkedsquares.length;
+              var STEP = 0;
+              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+                POS = walkedsquares[walkstepper];
+                STEP++;
+                if (((WALKLENGTH === 2) && (STEP === 2))) {
+                  ARTIFACTS['oppmoves'][POS] = {};
+                }
+              }
+            }
+          }
+          var filtersourcelayer = TERRAIN.mythreatrow;
+          for (var POS in filtersourcelayer) {
+            var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
+            if (filtersourcelayer[POS]) {
+              var filterobj = filtersourcelayer[POS];
+              if (!!(ARTIFACTS.oppmoves[POS])) {
+                filtertargetlayer[POS] = filterobj;
+              } 
+            } 
+          }
+          return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) - 10000 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
+        };
+      game.brain_Steve_2_detailed =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.oppmoves = {};
+          ARTIFACTS.oppheavythreats = {};
+          ARTIFACTS.opplightthreats = {};
+          var BLOCKS =
+            (function() {
+              var k, ret = {},
+                s0 = UNITLAYERS.towers,
+                s1 = UNITLAYERS.mywalls;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }());
+          var walkstarts = UNITLAYERS.opptowers;
+          for (var STARTPOS in walkstarts) {
+            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+              var walkedsquares = [];
+              var MAX = 2;
+              var POS = STARTPOS;
+              var LENGTH = 0;
+              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+                walkedsquares.push(POS);
+                LENGTH++;
+              }
+              var WALKLENGTH = walkedsquares.length;
+              var STEP = 0;
+              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+                POS = walkedsquares[walkstepper];
+                STEP++;
+                if (((WALKLENGTH === 2) && (STEP === 2))) {
+                  ARTIFACTS['oppmoves'][POS] = {};
+                }
+              }
+            }
+          }
+          var filtersourcelayer = TERRAIN.mythreatrow;
+          for (var POS in filtersourcelayer) {
+            var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
+            if (filtersourcelayer[POS]) {
+              var filterobj = filtersourcelayer[POS];
+              if (!!(ARTIFACTS.oppmoves[POS])) {
+                filtertargetlayer[POS] = filterobj;
+              } 
+            } 
+          }
+          return {
+            mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
+            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            oppwinmoves: -10000 * Object.keys(
+              (function() {
+                var k, ret = {},
+                  s0 = ARTIFACTS.oppmoves,
+                  s1 = TERRAIN.myhomerow;
+                for (k in s0) {
+                  ret[k] = 1;
+                }
+                for (k in s1) {
+                  ret[k] = 1;
+                }
+                return ret;
+              }())).length,
+            opplightthreats: -20 * Object.keys(ARTIFACTS.opplightthreats).length,
+            oppheavythreats: -500 * Object.keys(ARTIFACTS.oppheavythreats).length
+          };
+        };
+      game.brain_Joe_2 =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.oppmoves = {};
+          var BLOCKS =
+            (function() {
+              var k, ret = {},
+                s0 = UNITLAYERS.towers,
+                s1 = UNITLAYERS.mywalls;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }());
+          var walkstarts = UNITLAYERS.opptowers;
+          for (var STARTPOS in walkstarts) {
+            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+              var walkedsquares = [];
+              var MAX = 2;
+              var POS = STARTPOS;
+              var LENGTH = 0;
+              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+                walkedsquares.push(POS);
+                LENGTH++;
+              }
+              var WALKLENGTH = walkedsquares.length;
+              var STEP = 0;
+              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+                POS = walkedsquares[walkstepper];
+                STEP++;
+                if (((WALKLENGTH === 2) && (STEP === 2))) {
+                  ARTIFACTS['oppmoves'][POS] = {};
+                }
+              }
+            }
+          }
+          return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) - 100 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length;
+        };
+      game.brain_Joe_2_detailed =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          ARTIFACTS.oppmoves = {};
+          var BLOCKS =
+            (function() {
+              var k, ret = {},
+                s0 = UNITLAYERS.towers,
+                s1 = UNITLAYERS.mywalls;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }());
+          var walkstarts = UNITLAYERS.opptowers;
+          for (var STARTPOS in walkstarts) {
+            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+              var walkedsquares = [];
+              var MAX = 2;
+              var POS = STARTPOS;
+              var LENGTH = 0;
+              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+                walkedsquares.push(POS);
+                LENGTH++;
+              }
+              var WALKLENGTH = walkedsquares.length;
+              var STEP = 0;
+              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+                POS = walkedsquares[walkstepper];
+                STEP++;
+                if (((WALKLENGTH === 2) && (STEP === 2))) {
+                  ARTIFACTS['oppmoves'][POS] = {};
+                }
+              }
+            }
+          }
+          return {
+            mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
+            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            oppwinmoves: -100 * Object.keys(
+              (function() {
+                var k, ret = {},
+                  s0 = ARTIFACTS.oppmoves,
+                  s1 = TERRAIN.myhomerow;
+                for (k in s0) {
+                  ret[k] = 1;
+                }
+                for (k in s1) {
+                  ret[k] = 1;
+                }
+                return ret;
+              }())).length
+          };
+        };
       game.brain_Clive_2 =
         function(step) {
           var ARTIFACTS = step.ARTIFACTS;
@@ -2441,7 +3495,11 @@
               }
             }
           }
-          return Object.keys(ARTIFACTS.mymoves).length - Object.keys(ARTIFACTS.oppmoves).length;
+          return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
         };
       game.brain_Clive_2_detailed =
         function(step) {
@@ -2523,6 +3581,12 @@
           }
           return {
             mymoves: Object.keys(ARTIFACTS.mymoves).length,
+            mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
+            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
             oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
           };
         };
@@ -2669,7 +3733,7 @@
         }
       }
     };
-    game.AI = ["Clive"];
+    game.AI = ["Steve", "Joe", "Clive"];
     game.id = "murusgallicus";
     return game;
   }

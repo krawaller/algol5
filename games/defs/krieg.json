@@ -111,24 +111,38 @@
         }
       }
     },
+    "aspects": {
+      "myfrozenguardedthreat": ["sizeof","myfrozenguardedthreat"],
+      "myfrozenfreethreat": ["sizeof","myfrozenfreethreat"],
+      "mymoverguardedthreat": ["sizeof","mymoverguardedthreat"],
+      "mymoverfreethreat": ["sizeof","mymoverfreethreat"],
+      "myfrozeninfiltrators": ["sizeof",["intersect","myfrozens","oppbases"]],
+      "myfreeinfiltrators": ["sizeof",["intersect","mynotfrozens","oppbases"]],
+      "oppfrozenguardedthreat": ["sizeof","oppfrozenguardedthreat"],
+      "oppfrozenfreethreat": ["sizeof","oppfrozenfreethreat"],
+      "oppmoverguardedthreat": ["sizeof","oppmoverguardedthreat"],
+      "oppmoverfreethreat": ["sizeof","oppmoverfreethreat"],
+      "oppfrozeninfiltrators": ["sizeof",["intersect","oppfrozens","mybases"]],
+      "oppfreeinfiltrators": ["sizeof",["intersect","oppnotfrozens","mybases"]]
+    },
     "brains": {
       "Fred": {
         "generators": ["findmythreats","findoppthreats"],
         "plus": {
-          "myfrozenguardedthreat": ["prod",1,["sizeof","myfrozenguardedthreat"]],
-          "myfrozenfreethreat": ["prod",2,["sizeof","myfrozenfreethreat"]],
-          "mymoverguardedthreat": ["prod",3,["sizeof","mymoverguardedthreat"]],
-          "mymoverfreethreat": ["prod",4,["sizeof","mymoverfreethreat"]],
-          "myfrozeninfiltrators": ["prod",5,["sizeof",["intersect","myfrozens","oppbases"]]],
-          "myfreeinfiltrators": ["prod",6,["sizeof",["intersect","mynotfrozens","oppbases"]]]
+          "myfrozenguardedthreat": 1,
+          "myfrozenfreethreat": 2,
+          "mymoverguardedthreat": 3,
+          "mymoverfreethreat": 4,
+          "myfrozeninfiltrators": 5,
+          "myfreeinfiltrators": 6
         },
         "minus": {
-          "oppfrozenguardedthreat": ["prod",1,["sizeof","oppfrozenguardedthreat"]],
-          "oppfrozenfreethreat": ["prod",2,["sizeof","oppfrozenfreethreat"]],
-          "oppmoverguardedthreat": ["prod",3,["sizeof","oppmoverguardedthreat"]],
-          "oppmoverfreethreat": ["prod",4,["sizeof","oppmoverfreethreat"]],
-          "oppfrozeninfiltrators": ["prod",5,["sizeof",["intersect","oppfrozens","mybases"]]],
-          "oppfreeinfiltrators": ["prod",6,["sizeof",["intersect","oppnotfrozens","mybases"]]]
+          "oppfrozenguardedthreat": 1,
+          "oppfrozenfreethreat": 2,
+          "oppmoverguardedthreat": 3,
+          "oppmoverfreethreat": 4,
+          "oppfrozeninfiltrators": 5,
+          "oppfreeinfiltrators": 6
         }
       }
     }

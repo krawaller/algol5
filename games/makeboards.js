@@ -23,6 +23,7 @@ function draw(game,to){
     , layers = lib.terrainLayers({rules:game},true)
     , layernames = Object.keys(terraindef)
     , tilemap = game.graphics.tiles
+    , tiletypes = Object.keys(game.graphics.tiles||{})
     , height = board.height*TILE+EDGE*2
     , width = board.width*TILE+EDGE*2
     , canvas = new Canvas(width, height)
@@ -31,7 +32,7 @@ function draw(game,to){
     for (var col=1; col <= board.width; col++){
       var pos = lib.coords2pos({x:col,y:row})
       var dark = !((col+(row%2))%2)
-      var sqr = layernames.reduce(function(mem,name){
+      var sqr = tiletypes.reduce(function(mem,name){
         return layers[name][pos] ? tilemap[name]==='playercolour' ? {1:'player1base',2:'player2base'}[layers[name][pos].owner] : tilemap[name] : mem;
       },'empty');
       var img = new Image()

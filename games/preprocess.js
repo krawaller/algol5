@@ -27,10 +27,8 @@ let preProcess = {
           })
         }
       })
-      if (name === 'selectfiretarget'){
-        console.log("FIRETARGET",def.flow)
-      }
     }
+    game.flow = actions
     return game
   }
 }

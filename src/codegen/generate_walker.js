@@ -132,7 +132,9 @@ export default C => Object.assign(C,{
 		}
 		if (def.count){
 			ret += 'var walkpositionstocount = '+C.set(O,def.count)+'; '
-			ret += 'var countedwalkpositions = []; '
+			if (C.contains(def.draw,['countsofar'])){
+				ret += 'var countedwalkpositions = []; '
+			}
 			ret += 'var CURRENTCOUNT = 0; '
 		}
 		return ret;
@@ -144,7 +146,11 @@ export default C => Object.assign(C,{
 			ret += 'walkedsquares.push(POS); '
 		}
 		if (def.count){
-			ret += 'countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0)); '
+			if (C.contains(def.draw,['countsofar'])){
+				ret += 'countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0)); '
+			} else {
+				ret += 'CURRENTCOUNT+=(walkpositionstocount[POS]?1:0); '
+			}
 		}
 		return ret;
 	},
@@ -191,7 +197,7 @@ export default C => Object.assign(C,{
 		var usesstep = C.contains([def.draw.steps,def.draw.all,def.draw.counted],['step'])
 		let ret = '';
 		if (usesstep) ret += 'STEP++; '
-		if (def.count){
+		if (def.count && C.contains(def.draw,['countsofar'])){
 			ret += 'CURRENTCOUNT = countedwalkpositions[walkstepper]; '
 		}
 		if (def.draw.steps){
@@ -214,10 +220,12 @@ export default C => Object.assign(C,{
 			var needspos = C.contains([def.draw.start,def.draw.all],['target']);
 			if (needspos){
 				ret += 'POS=STARTPOS; '
+			} else {
+				O = {...O, useforpos: 'STARTPOS'}
 			}
-			ret += C.performdraw(O,def.draw.start, needspos ? 0 : 'STARTPOS');
+			ret += C.performdraw(O,def.draw.start);
 			if (def.draw.all){
-				ret += C.performdraw(O,def.draw.all, needspos ? 0 : 'STARTPOS');
+				ret += C.performdraw(O,def.draw.all);
 			}
 		}
 		return ret

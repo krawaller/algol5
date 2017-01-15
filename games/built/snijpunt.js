@@ -957,7 +957,7 @@
               }
               var WALKLENGTH = walkedsquares.length;
               if ((WALKLENGTH > 2)) {
-                ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][POS] = {};
+                ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][STARTPOS] = {};
               }
             }
           }
@@ -1314,7 +1314,7 @@
               }
               var WALKLENGTH = walkedsquares.length;
               if ((WALKLENGTH > 2)) {
-                ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][POS] = {};
+                ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][STARTPOS] = {};
               }
             }
           }

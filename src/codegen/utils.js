@@ -173,6 +173,7 @@ export default U => Object.assign(U,{
 		def[0] === 'ifelse' ? U.possibilities(def[2]).concat(U.possibilities(def[3]))
 		: def[0] === 'playercase' ? U.possibilities(def[1]).concat(U.possibilities(def[2]))
 		: def[0] === 'if' ? U.possibilities(def[2])
+		: def[0] === 'ifplayer' ? U.possibilities(def[2])
 		: def[0] === 'indexlist' ? def[2]
 		: [def],
 

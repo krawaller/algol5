@@ -636,7 +636,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][POS] = {};
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
           var newstepid = step.stepid + '-' + 'uphill';
@@ -738,7 +738,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][POS] = {};
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
           var newstepid = step.stepid + '-' + 'downhill';
@@ -840,7 +840,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][POS] = {};
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
           var newstepid = step.stepid + '-' + 'horisontal';
@@ -942,7 +942,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][POS] = {};
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
           var newstepid = step.stepid + '-' + 'vertical';
@@ -1169,7 +1169,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][POS] = {};
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
           var newstepid = step.stepid + '-' + 'uphill';
@@ -1271,7 +1271,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][POS] = {};
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
           var newstepid = step.stepid + '-' + 'downhill';
@@ -1373,7 +1373,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][POS] = {};
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
           var newstepid = step.stepid + '-' + 'horisontal';
@@ -1475,7 +1475,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][POS] = {};
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
           var newstepid = step.stepid + '-' + 'vertical';

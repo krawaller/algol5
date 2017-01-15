@@ -239,17 +239,17 @@ describe('the generate funcs',()=>{
             mutations: {walkedsquares:['foo','bar']}
         },
         'with count and nextpos not to be counted': {
-            arg: {count:'YES'},
+            arg: {count:'YES',draw:['countsofar']},
             scope: {walkedsquares:['foo'],countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{},POS:'bar'},
             mutations: {countedwalkpositions:['whatev',7],CURRENTCOUNT:7}
         },
         'with count and nextpos should be counted': {
-            arg: {count:'YES'},
+            arg: {count:'YES',draw:['countsofar']},
             scope: {walkedsquares:['foo'],POS:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{bar:'yes'}},
             mutations: {countedwalkpositions:['whatev',8],CURRENTCOUNT:8}
         },
         'with count and nextpos should be counted and we intend to draw': {
-            arg: {count:'YES',draw:{counted:'sure'}},
+            arg: {count:'YES',draw:{counted:'sure',foo:['countsofar']}},
             scope: {COUNTED:['x'],walkedsquares:['foo'],POS:'bar',countedwalkpositions:['whatev'],CURRENTCOUNT:7,walkpositionstocount:{bar:'yes'}},
             mutations: {countedwalkpositions:['whatev',8],CURRENTCOUNT:8}
         }

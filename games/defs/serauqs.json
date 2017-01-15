@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "id": "serauqs",
+    "name": "Serauqs",
+    "source": "https://boardgamegeek.com/image/274401/serauqs",
+    "tags": ["formation"]
+  },
+  "graphics": {
+    "icons": {"soldiers":"pawns","wild":"kings"},
+    "tiles": {"corners":"grass","middle":"castle"}
+  },
+  "board": {
+    "height":4,
+    "width":4,
+    "terrain": {
+      "base": {"1":[["rect","a1","d1"]],"2":[["rect","a4","d4"]]},
+      "corners": ["a1","a4","d1","d4"],
+      "middle": [["rect","b2","c3"]]
+    }
+  },
+  "setup": { "soldiers": {"1":[["rect","a1","d1"]],"2":[["rect","a4","d4"]]} },
+  "endGame": {
+    "madeline": {"condition":["notempty","winline"]},
+    "madex": {"condition":["morethan",["sizeof",["intersect","corners",["union","myunits","oppwild"]]],3]},
+    "tookcenter": {"condition":["morethan",["sizeof",["intersect","middle",["union","myunits","oppwild"]]],3]}
+  },
+  "startTurn": {
+    "link": "selectunit"
+  },
+  "marks": {
+    "selectunit": {
+      "from": "myunits",
+      "runGenerator": "findmovetargets",
+      "link": ["ifelse",["morethan",3,["turn"]],"makewild","selectmovetarget"]
+    },
+    "selectmovetarget": {
+      "from": "movetargets",
+      "link": "move"
+    }
+  },
+  "commands": {
+    "makewild": {
+      "applyEffect": ["setat","selectunit","group","wild"],
+      "link": "endturn"
+    },
+    "move": {
+      "applyEffect": ["moveat","selectunit","selectmovetarget"],
+      "runGenerator": "findwinline",
+      "link": "endturn"
+    }
+  },
+  "generators": {
+    "findmovetargets": {
+      "type": "neighbour",
+      "start": "selectunit",
+      "dirs": [1,2,3,4,5,6,7,8],
+      "unlessover": "units",
+      "draw": {
+        "neighbours": {
+          "tolayer": "movetargets"
+        }
+      }
+    },
+    "findwinline": {
+      "type": "walker",
+      "starts": ["union","myunits","oppwild"],
+      "dirs": [1,2,3,4,5,6,7,8],
+      "steps": ["union","myunits","oppwild"],
+      "count": "mybase",
+      "draw": {
+        "start": {
+          "condition": ["and",
+            ["same",["walklength"],3],
+            ["different",["totalcount"],3]
+          ],
+          "tolayer": "winline"
+        }
+      }
+    }
+  }
+}

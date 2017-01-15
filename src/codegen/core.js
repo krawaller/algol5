@@ -5,7 +5,12 @@ import reduce from "lodash/collection/reduce";
 export default T => {
 
     const universal = {
-        ifelse: (datatype)=> (O,[bool,alt1,alt2])=> "(" + T.boolean(O,bool) + "?" + T[datatype](O,alt1) + ":" + T[datatype](O,alt2) + ")",
+        ifelse: (datatype)=> (O,[bool,alt1,alt2])=> {
+            if (typeof T[datatype] !== "function"){
+                console.log("ODIWNFE",datatype,"FOO",typeof T[datatype],T[datatype])
+            }
+            return "(" + T.boolean(O,bool) + "?" + T[datatype](O,alt1) + ":" + T[datatype](O,alt2) + ")"
+        },
         playercase: (datatype)=> (O,[alt1,alt2])=> T[datatype](O,O.player === 1 ? alt1 : alt2),
         actionor: (datatype)=> (O,[action,alt1,alt2])=> {
             if (!T[datatype]){
@@ -15,9 +20,9 @@ export default T => {
         }
     }
 
-    const toshort = {position:'pos',value:'val'}
+    const toshort = {position:'pos',value:'val',boolean:'bool'}
 
-    const appliedUni = ['list','prop','set','position','bool','id','value'].reduce((acc,t)=>{
+    const appliedUni = ['list','prop','set','position','bool','boolean','id','value'].reduce((acc,t)=>{
         return Object.assign(acc,reduce(universal,(mem,fact,name)=> ({...mem, [(toshort[t]||t)+'_'+name]: fact(t)}),acc ));
     },{})
 

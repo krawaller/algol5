@@ -61,7 +61,7 @@ export default C => Object.assign(C,{
   findmanyneighbours: (O,def)=> {
     def = def || {}
     let ret = ''
-    let usedir = C.contains(def.draw && def.draw.neighbours,['dir'])
+    let usedir = C.contains([def.draw.neighbours,def.condition],['dir'])
     let usecount = C.contains(def.draw,['neighbourcount'])
     ret += 'var neighbourdirs='+C.list(O,def.dirs)+'; ' // TODO - extract if not dynamic
     let predictednbrofdirs = C.listlength(def.dirs),

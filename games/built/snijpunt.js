@@ -1053,9 +1053,11 @@
                 walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
-              if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
-                ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH - 1]] = {};
-              }
+              if (WALKLENGTH) {
+                if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
+                  ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH - 1]] = {};
+                }
+              } 
             }
           }
           var newstep = turn.steps.root = {
@@ -1410,9 +1412,11 @@
                 walkedsquares.push(POS);
               }
               var WALKLENGTH = walkedsquares.length;
-              if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
-                ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH - 1]] = {};
-              }
+              if (WALKLENGTH) {
+                if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
+                  ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH - 1]] = {};
+                }
+              } 
             }
           }
           var newstep = turn.steps.root = {

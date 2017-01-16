@@ -234,6 +234,7 @@ export default C => Object.assign(C,{
 	drawwalklast: (O,def)=> {
 		let ret = ''
 		if (def.draw.last){
+			ret += 'if (WALKLENGTH){ '
 			if (C.contains(def.draw.last,['step'])) ret += 'STEP=WALKLENGTH; '
 			if (C.contains(def.draw.last,['target'])) {
 				ret += 'POS=walkedsquares[WALKLENGTH-1]; '
@@ -242,6 +243,7 @@ export default C => Object.assign(C,{
 				ret += C.performdraw({...(O||{}),useforpos:'walkedsquares[WALKLENGTH-1]'},def.draw.last)
 				//ret += C.performdraw(O,def.draw.last,'walkedsquares[WALKLENGTH-1]')
 			}
+			ret += '} '
 		}
 		return ret
 	}

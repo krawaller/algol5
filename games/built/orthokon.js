@@ -531,6 +531,20 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      game.brain_Bob_1 =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          return Object.keys(UNITLAYERS.myunits).length;
+        };
+      game.brain_Bob_1_detailed =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          return {
+            headcount: Object.keys(UNITLAYERS.myunits).length
+          };
+        };
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -741,6 +755,20 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      game.brain_Bob_2 =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          return Object.keys(UNITLAYERS.myunits).length;
+        };
+      game.brain_Bob_2_detailed =
+        function(step) {
+          var ARTIFACTS = step.ARTIFACTS;
+          var UNITLAYERS = step.UNITLAYERS;
+          return {
+            headcount: Object.keys(UNITLAYERS.myunits).length
+          };
+        };
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -819,7 +847,7 @@
       "height": 4,
       "width": 4
     };
-    game.AI = [];
+    game.AI = ["Bob"];
     game.id = "orthokon";
     return game;
   }

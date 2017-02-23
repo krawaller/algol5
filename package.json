@@ -5,23 +5,23 @@
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-es2016": "^6.0.10",
-    "babel-preset-react": "^6.3.13",
     "jasmine": "^2.4.1",
     "js-beautify": "^1.6.2",
-    "lodash": "^3.10.1",
     "sinon": "^1.17.2",
+    "uglify-loader": "^1.4.0",
     "webpack": "^1.12.11"
   },
   "scripts": {
-    "test": "babel-node dev/test/run.js",
-    "generate": "babel-node games/generate.js",
-    "collect": "babel-node games/collect.js",
-    "makeboards": "babel-node games/makeboards.js",
     "app": "cd app; webpack;",
-    "build": "webpack",
-    "exp": "babel-node dev/exp.js"
+    "testlogic": "babel-node src/games/logic/test/run.js",
+    "generate": "babel-node src/games/generate.js",
+    "collect": "babel-node src/games/collect.js",
+    "makeboards": "babel-node src/games/makeboards.js",
+    "games": "npm run generate && npm run collect && npm run makeboards",
+    "build": "webpack"
   },
   "dependencies": {
+    "lodash": "^3.10.1",
     "canvas": "^1.4.0"
   }
 }

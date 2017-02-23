@@ -63,12 +63,13 @@ let Battle = React.createClass({
   },
   render() {
     let s = this.state.session,
-        p = s.players[s.turn.player-1]
+        UI = s.UI,
+        p = UI.players[UI.playing-1];
     let cmnd = p.type === "ai"
       ? <div>Awaiting {p.name}</div>
       : (<div>
-        <div>{s.UI.instruction}</div>
-        <Commands gameCommands={s.UI.commands} systemCommands={s.UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
+        <div>{UI.instruction}</div>
+        <Commands gameCommands={UI.commands} systemCommands={UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
       </div>)
     console.log("GONNA RENDER",s)
     let style = {
@@ -80,8 +81,8 @@ let Battle = React.createClass({
       <div>
         <h4>Playing!</h4>
         <div className="board" style={style}>
-          <Units icons={this.props.game.graphics.icons} unitdata={s.step.UNITDATA} board={this.props.game.board} />
-          {p.type !== "ai" && <Marks board={this.props.game.board} activeMarks={s.step.MARKS} potentialMarks={s.UI.marks} selectMark={this.doAction}/>}
+          <Units unitdata={UI.units} board={UI.board} />
+          {p.type !== "ai" && <Marks board={UI.board} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
         </div>
         {cmnd}
       </div>

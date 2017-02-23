@@ -1,5 +1,6 @@
 import mapValues from 'lodash/object/mapValues'
 import reduce from 'lodash/collection/reduce'
+import values from 'lodash/object/values'
 
 let endgameactions = {win:1,lose:1,draw:1}
 
@@ -120,25 +121,24 @@ let play = {
     */
     getSessionUI: (session)=> {
         let {game,turn,step,undo,markTimeStamps} = session
-        let removeMarks = Object.keys(step.MARKS).reduce((mem,markname)=>{
-            let pos = step.MARKS[markname]
-            mem[pos] = markTimeStamps[pos]
-            return mem
-        },{})
         let links = Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
             if (endgameactions[action]||action=='endturn'||action==='next'){
                 mem.system.push(action)
             } else if (game.commands[action]){
                 mem.commands.push(action)
             } else {
-                mem.marks.push(action)
+                mem.potentialMarks.push(action)
             }
             return mem
-        },{marks:[],commands:[],system:undo.length?['undo']:[]})
+        },{potentialMarks:[],commands:[],system:undo.length?['undo']:[]})
         return Object.assign({
-            removeMarks,
+            activeMarks: values(step.MARKS),
+            units: mapValues(step.UNITDATA,u=> Object.assign({},u,{group: game.graphics.icons[u.group]})),
+            players: session.players,
+            playing: turn.player,
+            board: game.board,
             instruction: game[step.name+turn.player+'instruction'](step)
-        },links)
+        }, links)
     },
     /*
     used in .hydrateTurn
@@ -181,7 +181,7 @@ let play = {
         return canend
     },
     /*
-    Used in .inflateFromSave, .startGameSession, .makeSessionAction (when ending turn)
+    Used in .inflateFromSave, .startGameSession and .makeSessionAction (when ending turn)
     Will create links for current turn for all steps that can lead to turn end
     */
     hydrateTurn: (game,turn)=> {

@@ -28,8 +28,8 @@ let Unit = React.createClass({
     let coords = lib.pos2coords(s.pos)
     let cls = (unit.from?'':'fadein ') + (s.old ? 'hasold' : '')
     return <Square also={cls} key={unit.id} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc}>
-      <Piece dir={unit.dir} owner={unit.owner} icon={p.icons[unit.group]} />
-      {s.old && <Piece dir={s.old.dir} owner={s.old.owner} icon={p.icons[s.old.group]} />}
+      <Piece dir={unit.dir} owner={unit.owner} icon={unit.group} />
+      {s.old && <Piece dir={s.old.dir} owner={s.old.owner} icon={s.old.group} />}
     </Square>
   }
 })

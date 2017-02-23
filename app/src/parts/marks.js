@@ -9,7 +9,7 @@ import map from 'lodash/collection/map'
 let Marks = (props)=> {
     let tileheightpc = 100/props.board.height
     let tilewidthpc = 100/props.board.width
-    let activeMarks = map(props.activeMarks,(pos,markname)=> {
+    let activeMarks = props.activeMarks.map(pos => {
         let coords = lib.pos2coords(pos)
         let callback = ()=> props.selectMark(pos)
         return <Square onClick={callback} key={pos} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc} also="mark activemark"/>

@@ -11,25 +11,18 @@ import random from 'lodash/number/random'
 let Battle = React.createClass({
   getInitialState() {
     return {
-      session: play.startGameSession(this.props.game,this.props.participants[0],this.props.participants[1])
+      UI: play.startGameSession(this.props.game.id,this.props.participants[0],this.props.participants[1])
     }
   },
   doAction(action) {
     this.setState({
-      session: play.makeSessionAction(this.state.session,action)
+      UI: play.makeSessionAction(this.state.UI.sessionId,action)
     },this.maybeAI)
   },
   componentDidMount(){
     this.maybeAI()
   },
-  removeMark(pos) {
-    let s = this.state.session
-    s.step = s.turn.steps[ s.marks[pos] ]
-    this.setState({
-      session: s
-    })
-  },
-  askBrain(name) {
+  askBrain(name) { // TODO - broken now
     let s = this.state.session
     let p = this.props
     let func = 'brain_'+name+'_'+s.turn.player
@@ -39,31 +32,29 @@ let Battle = React.createClass({
   },
   findBest(brain) {
     let s = this.state.session
-    let best = play.findBestOption(s.game,s.turn,brain)
+    let best = play.findBestOption(s.UI.sessionId,brain)
     console.log("BEST OPTIONS",best)
   },
   maybeAI() {
-    let s = this.state.session,
-        p = s.players[s.turn.player-1]
-    if (s.step.stepid === 'root' && p.type === 'ai' && !this.aiThinking){
+    let UI = this.state.UI,
+        plr = UI.players[UI.playing-1]
+    if (UI.turnStart && plr.type === 'ai' && !this.aiThinking){
       setTimeout(this.makeAImoves,100);
     }
   },
   makeAImoves() {
     console.log("Gonna make AI moves")
-    let s = this.state.session
-    let options = play.findBestOption(s.game,s.turn,s.players[s.turn.player-1].name)
-    let targetStepId = options[ random(0,options.length-1) ]
-    let targetStep = s.turn.steps[targetStepId]
-    let moves = targetStep.path.concat('endturn') // TODO - win here?
+    let UI = this.state.UI
+    let plr = UI.players[UI.playing-1]
+    let options = play.findBestOption(UI.sessionId, plr.name)
+    let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
     for(let i=0; i<moves.length; i++){
       setTimeout( this.doAction.bind(this,moves[i]), i*800 )
     }
     console.log("AI moves",moves)
   },
   render() {
-    let s = this.state.session,
-        UI = s.UI,
+    let UI = this.state.UI,
         p = UI.players[UI.playing-1];
     let cmnd = p.type === "ai"
       ? <div>Awaiting {p.name}</div>
@@ -71,11 +62,11 @@ let Battle = React.createClass({
         <div>{UI.instruction}</div>
         <Commands gameCommands={UI.commands} systemCommands={UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
       </div>)
-    console.log("GONNA RENDER",s)
+    console.log("GONNA RENDER",UI)
     let style = {
-      height:s.game.board.height*50,
-      width:s.game.board.width*50,
-      backgroundImage: 'url(../games/boards/'+s.game.id+'.png)'
+      height:UI.board.height*50,
+      width:UI.board.width*50,
+      backgroundImage: 'url(../games/boards/'+UI.gameId+'.png)'
     }
     return (
       <div>

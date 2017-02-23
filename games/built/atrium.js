@@ -1041,7 +1041,7 @@
       "width": 5
     };
     game.AI = [];
-    game.id = "Atrium";
+    game.id = "atrium";
     return game;
   }
 )()

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import play from '../../../src/play'
+import algol from '../../../dist/algol'
 
 import Units from '../parts/units'
 import Marks from '../parts/marks'
@@ -11,12 +11,12 @@ import random from 'lodash/number/random'
 let Battle = React.createClass({
   getInitialState() {
     return {
-      UI: play.startGameSession(this.props.game.id,this.props.participants[0],this.props.participants[1])
+      UI: algol.startGameSession(this.props.game.id,this.props.participants[0],this.props.participants[1])
     }
   },
   doAction(action) {
     this.setState({
-      UI: play.makeSessionAction(this.state.UI.sessionId,action)
+      UI: algol.makeSessionAction(this.state.UI.sessionId,action)
     },this.maybeAI)
   },
   componentDidMount(){
@@ -32,7 +32,7 @@ let Battle = React.createClass({
   },
   findBest(brain) {
     let s = this.state.session
-    let best = play.findBestOption(s.UI.sessionId,brain)
+    let best = algol.findBestOption(s.UI.sessionId,brain)
     console.log("BEST OPTIONS",best)
   },
   maybeAI() {
@@ -46,7 +46,7 @@ let Battle = React.createClass({
     console.log("Gonna make AI moves")
     let UI = this.state.UI
     let plr = UI.players[UI.playing-1]
-    let options = play.findBestOption(UI.sessionId, plr.name)
+    let options = algol.findBestOption(UI.sessionId, plr.name)
     let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
     for(let i=0; i<moves.length; i++){
       setTimeout( this.doAction.bind(this,moves[i]), i*800 )
@@ -66,7 +66,7 @@ let Battle = React.createClass({
     let style = {
       height:UI.board.height*50,
       width:UI.board.width*50,
-      backgroundImage: 'url(../games/boards/'+UI.gameId+'.png)'
+      backgroundImage: 'url(../dist/boards/'+UI.gameId+'.png)'
     }
     return (
       <div>

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import play from '../../../src/play'
-
 import Battle from './battle'
 
 let Vestibule = React.createClass({

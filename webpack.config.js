@@ -1,7 +1,9 @@
 module.exports = {  
-    entry: './dev/box/app.js',
+    entry: './src/engine.js',
     output: {
-        filename: './dev/box/bundle.js'
+        filename: './dist/algol.js',
+        library: 'algol',
+        libraryTarget: 'commonjs2'
     },
     module: {
         loaders: [
@@ -9,6 +11,11 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
+            },
+            {
+                test: /SKITIT/,
+                exclude: /.spec.js/, // excluding .spec files
+                loader: "uglify"
             }
         ]
     }

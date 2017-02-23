@@ -1,6 +1,6 @@
 import React from 'react';
 
-import games from '../../../games/games' // TODO - replace with metadata file
+import games from '../../../src/games/temp/ALLGAMES' // TODO - replace with metadata file
 
 let Shelf = React.createClass({
   chooseGame(gamename){

@@ -22540,9 +22540,9 @@
 	            session.UI = play.getSessionUI(session);
 	        }
 	        // undoing last action (stored in session)
-	        else if (action === 'undo') {
-	                var gobackto = session.undo.pop();
-	                session.step = session.turn.steps[gobackto];
+	        else if (action === 'undo' || action.substr(0, 5) === 'undo ') {
+	                var undo = session.undo.pop();
+	                session.step = session.turn.steps[undo.backTo];
 	                session.UI = play.getSessionUI(session);
 	            }
 	            // ending the game!
@@ -22564,7 +22564,10 @@
 	                            if (!session.game.commands[action]) {
 	                                session.markTimeStamps[action] = session.step.stepid;
 	                            } else {
-	                                session.undo.push(session.step.stepid);
+	                                session.undo.push({
+	                                    backTo: session.step.stepid,
+	                                    actionName: action
+	                                });
 	                            }
 	                            session.step = session.turn.steps[session.step.stepid + '-' + action];
 	                            session.UI = play.getSessionUI(session);
@@ -22611,7 +22614,9 @@
 	                mem.potentialMarks.push(action);
 	            }
 	            return mem;
-	        }, { potentialMarks: [], commands: [], system: undo.length ? ['undo'] : [] });
+	        }, { potentialMarks: [], commands: [], system: undo.length ? ['undo ' + undo[undo.length - 1].actionName] : [] });
+	        var instrfuncname = step.name + turn.player + 'instruction';
+	        var instruction = game[step.name + turn.player + 'instruction'](step);
 	        return (0, _assign2.default)({
 	            activeMarks: (0, _values2.default)(step.MARKS),
 	            units: (0, _mapValues2.default)(step.UNITDATA, function (u) {
@@ -22620,7 +22625,7 @@
 	            players: session.players,
 	            playing: turn.player,
 	            board: game.board,
-	            instruction: game[step.name + turn.player + 'instruction'](step)
+	            instruction: instruction
 	        }, links);
 	    },
 	    /*
@@ -22664,7 +22669,7 @@
 	        return canend;
 	    },
 	    /*
-	    Used in .inflateFromSave, .startGameSession, .makeSessionAction (when ending turn)
+	    Used in .inflateFromSave, .startGameSession and .makeSessionAction (when ending turn)
 	    Will create links for current turn for all steps that can lead to turn end
 	    */
 	    hydrateTurn: function hydrateTurn(game, turn) {

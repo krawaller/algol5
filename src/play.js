@@ -64,9 +64,9 @@ let play = {
             session.UI = play.getSessionUI(session)
         }
         // undoing last action (stored in session)
-        else if (action==='undo') {
-            let gobackto = session.undo.pop()
-            session.step = session.turn.steps[gobackto]
+        else if (action==='undo' || action.substr(0,5) === 'undo ') {
+            let undo = session.undo.pop()
+            session.step = session.turn.steps[undo.backTo]
             session.UI = play.getSessionUI(session)
         }
         // ending the game!
@@ -88,7 +88,10 @@ let play = {
             if (!session.game.commands[action]){
                 session.markTimeStamps[action] = session.step.stepid
             } else {
-                session.undo.push(session.step.stepid)
+                session.undo.push({
+                    backTo: session.step.stepid,
+                    actionName: action
+                });
             }
             session.step = session.turn.steps[session.step.stepid+'-'+action]
             session.UI = play.getSessionUI(session)
@@ -130,14 +133,16 @@ let play = {
                 mem.potentialMarks.push(action)
             }
             return mem
-        },{potentialMarks:[],commands:[],system:undo.length?['undo']:[]})
+        },{potentialMarks:[],commands:[],system:undo.length?[ 'undo '+undo[undo.length-1].actionName ]:[]})
+        let instrfuncname = step.name+turn.player+'instruction'
+        let instruction = game[step.name+turn.player+'instruction'](step)
         return Object.assign({
             activeMarks: values(step.MARKS),
             units: mapValues(step.UNITDATA,u=> Object.assign({},u,{group: game.graphics.icons[u.group]})),
             players: session.players,
             playing: turn.player,
             board: game.board,
-            instruction: game[step.name+turn.player+'instruction'](step)
+            instruction: instruction
         }, links)
     },
     /*

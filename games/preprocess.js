@@ -1,3 +1,13 @@
+/*
+Used in the `generate.js` build script to preprocess individual
+game definitions.
+
+TODO
+ - add id to metadata
+ - add AI list to metadata (or have it already there with desc?)
+*/
+
+
 import lib from '../src/codegen'
 
 import fs from 'fs'
@@ -5,9 +15,9 @@ import fs from 'fs'
 let preProcess = {
   preProcess(game){
     game = this.mapFlow(game)
-    //fs.writeFileSync(__dirname+'/processed/'+game.meta.name+'.json',JSON.stringify(game))
     return game
   },
+  // Flow information right now used in logic building (flow_mark.js)
   mapFlow(game){
     let actions = [{name:'start',def:game.startTurn,type:'start',path:[]}]
     while(actions.length){

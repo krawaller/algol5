@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "id": "Atrium",
+    "name": "Atrium",
+    "source": "http://www.di.fc.ul.pt/~jpn/gv/atrium.htm",
+    "tags": ["formation","nocapture"],
+    "author": "Guy Jeandel",
+    "year": 2004
+  },
+  "graphics": {"icons":{"kings":"kings","queens":"queens"}},
+  "board": {"height":5,"width":5},
+  "setup": {
+    "kings": {
+      "1": ["a2","c5","e2"],
+      "2": ["b1","b5","e3"]
+    },
+    "queens": {
+      "1": ["a3","d5","d1"],
+      "2": ["a4","c1","e4"]
+    }
+  },
+  "endGame": {
+    "madewinline": { "condition": ["notempty","winline"] }
+  },
+  "startTurn": {
+    "link": "selectunit"
+  },
+  "marks": {
+    "selectunit": {
+      "from": "myunits",
+      "runGenerator": "findmovetargets",
+      "link": "selectmovetarget"
+    },
+    "selectmovetarget": {
+      "from": "movetargets",
+      "link": "move"
+    }
+  },
+  "commands": {
+    "move": {
+      "applyEffect": ["moveat","selectunit","selectmovetarget"],
+      "runGenerator": "findwinlines",
+      "link": "endturn"
+    }
+  },
+  "generators": {
+    "findmovetargets": {
+      "type": "neighbour",
+      "start": "selectunit",
+      "dirs": [1,2,3,4,5,6,7,8],
+      "unlessover": "units",
+      "draw": {
+        "neighbours": {
+          "tolayer": "movetargets"
+        }
+      }
+    },
+    "findwinlines": {
+      "type": "walker",
+      "starts": "myunits",
+      "dirs": [1,2,3,4,5,6,7,8],
+      "steps": ["ifelse",["anyat","mykings",["start"]],"mykings","myqueens"],
+      "draw": {
+        "start": {
+          "condition": ["same",["walklength"],2],
+          "tolayer": "winline"
+        }
+      }
+    }
+  }
+}

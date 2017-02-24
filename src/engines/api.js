@@ -9,7 +9,7 @@ let api = {
     /*
     Return object with metadata for all games. Typically used for making a game list
     */
-    getGameData(){
+    getGameLibrary(){
         return meta;
     },
     /*

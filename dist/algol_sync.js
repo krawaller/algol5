@@ -73,7 +73,7 @@ module.exports =
 	    /*
 	    Return object with metadata for all games. Typically used for making a game list
 	    */
-	    getGameData: function getGameData() {
+	    getGameLibrary: function getGameLibrary() {
 	        return _meta2.default;
 	    },
 

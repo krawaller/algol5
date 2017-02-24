@@ -1,6 +1,8 @@
 import React from 'react';
 
-import games from '../../../src/games/temp/ALLGAMES' // TODO - replace with metadata file
+import algol from '../../../dist/algol_sync'
+
+const games = algol.getGameLibrary();
 
 let Shelf = React.createClass({
   chooseGame(gamename){

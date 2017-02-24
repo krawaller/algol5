@@ -1,6 +1,6 @@
 import React from 'react';
 
-import algol from '../../../dist/algol'
+import algol from '../../../dist/algol_sync'
 
 import Units from '../parts/units'
 import Marks from '../parts/marks'

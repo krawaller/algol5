@@ -1,47 +1,19 @@
 import mapValues from 'lodash/object/mapValues'
-import reduce from 'lodash/collection/reduce'
 import values from 'lodash/object/values'
 
-import lib from './games/logic'
+import lib from '../games/logic'
 
-import games from './games/temp/ALLGAMES'
+import games from '../games/temp/ALLGAMES'
 
-let endgameactions = {win:1,lose:1,draw:1}
+const endgameactions = {win:1,lose:1,draw:1}
 
-let next = 1
-function newSessionId(){
-    return 's'+(next++);
-}
-
-let sessions = {}
+let nextSessionId = 1
 
 let engine = {
     /*
-    Public API function, called from app.
+    Used in API.makeSessionAction and API.inflateFromSave
     */
-    startGameSession(gameId,plr1,plr2){
-        console.log("NEW GAME SESSION",gameId)
-        let game = games[gameId];
-        let turn = game.newGame()
-        turn = engine.hydrateTurn(game,turn)
-        let session = {
-            game: game,
-            turn: turn,
-            step: turn.steps.root,
-            save: [],
-            markTimeStamps: {},
-            undo: [],
-            players: [plr1,plr2],
-            id: newSessionId()
-        }
-        sessions[session.id] = session;
-        return engine.getSessionUI(session);
-    },
-    /*
-    Public API function, called from app.
-    */
-    makeSessionAction(sessionId,action){
-        let session = sessions[sessionId];
+    makeSessionAction(session,action){
          // removing an existing mark, going back in time
         if (session.markTimeStamps[action] && !session.turn.links[session.step.stepid][action]){
             console.log("Going back to",session.markTimeStamps[action])
@@ -76,34 +48,31 @@ let engine = {
                     actionName: action
                 });
             }
-            session.step = session.turn.steps[session.step.stepid+'-'+action]
+            session.step = session.turn.steps[session.step.stepid+'-'+action] // TODO - or create, if not there!
         }
-        return engine.getSessionUI(session)
+        return session;
     },
     /*
-    Public API function. Returns array of best moves according to named brain.
+    Used in API.startGameSession and API.inflateFromSave
     */
-    findBestOption(sessionId,brain){
-        let {game,turn} = sessions[sessionId]
-        let func = game['brain_'+brain+'_'+turn.player],
-            winners = [], highscore = -1000000
-        if (turn.ends.win.length){
-            winners = turn.ends.win.map(winId => turn.steps[winId].path);
-        } else {
-            for(var stepid in turn.next){
-                var stepscore = func(turn.steps[stepid])
-                if (stepscore > highscore){
-                    winners = [turn.steps[stepid].path]
-                    highscore = stepscore
-                } else if (stepscore === highscore) {
-                    winners.push(turn.steps[stepid].path)
-                }
-            }
-        }
-        return winners;
+    newSession(gameId,plr1,plr2){
+        let game = games[gameId];
+        let turn = game.newGame()
+        turn = engine.hydrateTurn(game,turn)
+        let session = {
+            game: game,
+            turn: turn,
+            step: turn.steps.root,
+            save: [],
+            markTimeStamps: {},
+            undo: [],
+            players: [plr1,plr2],
+            id: 's'+(nextSessionId++)
+        };
+        return session;
     },
     /*
-    Inner utility function used in .makeSessionAction when ending a turn.
+    used in .makeSessionAction when ending a turn.
     */
     calculateSave(turn,step){
         let ret = []
@@ -124,7 +93,7 @@ let engine = {
         return ret
     },
     /*
-    Used in .startGameSession and .makeSessionAction. Returns an object used to draw board in an app.
+    Used in API.startGameSession and API.makeSessionAction. Returns an object used to draw board in an app.
     */
     getSessionUI(session){
         let {game,turn,step,undo,markTimeStamps} = session
@@ -203,7 +172,7 @@ let engine = {
     Used in .inflateFromSave, .startGameSession and .makeSessionAction (when ending turn)
     Will create links for current turn for all steps that can lead to turn end
     */
-    hydrateTurn(game,turn){
+    hydrateTurn(game,turn){ // TODO - forcefully flag if we're AI analyzing! or just always do it :P
         turn.ends = {
             win: [],
             draw: [],
@@ -214,7 +183,7 @@ let engine = {
         return turn;
     },
     /*
-    Inner utility, used in .hydrateStep
+    used in .hydrateStep
     */
     tryToReachTurnEnd(game,turn){
         let {steps,links} = turn
@@ -237,37 +206,6 @@ let engine = {
             }
         }
         return turn;
-    },
-
-
-    /*
-    Not in use yet.
-    */
-    inflateFromSave(game,turnnbr,save){
-        let turn = game.newGame()
-        turn = engine.hydrateTurn(game,turn)
-        let moves = save
-        let stepid = 'root'
-        while(turn.turn < turnnbr){
-            let action, available = Object.keys(turn.links[stepid]).sort()
-            if (available.length === 1){
-                action = available[0]
-            } else if (available.length > 1){
-                if (!moves.length){ throw "Many available but no save index left!" }
-                action = available[moves.shift()]
-            } else {
-                throw "No available actions!"
-            }
-            let func = turn.links[stepid][action]
-            if (action === 'endturn'){
-                turn = engine.hydrateTurn(game,turn.next[stepid])
-                stepid = 'root'
-            } else {
-                stepid = stepid+'-'+[action]
-            } // TODO endgame funcs too!
-            console.log(action,available.length === 1)
-        }
-        return turn // TODO return session instead?
     }
 }
 

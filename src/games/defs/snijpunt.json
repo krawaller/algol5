@@ -51,7 +51,7 @@
               1,
               2
             ]],
-            ["spawn",["onlyin","intersection"],"soldiers"]
+            ["spawn",["onlyin","intersection"],"soldiers",["currentplayer"],{"from":["pos","selecttarget"]}]
           ]
         ]
       ],

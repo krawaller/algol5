@@ -2257,7 +2257,7 @@
             stepid: newstepid,
             name: 'move',
             path: step.path.concat('move')
-            ,
+              ,
             TURNVARS: TURNVARS
           });
           turn.links[newstepid] = {};
@@ -2645,7 +2645,7 @@
             stepid: newstepid,
             name: 'move',
             path: step.path.concat('move')
-            ,
+              ,
             TURNVARS: TURNVARS
           });
           turn.links[newstepid] = {};
@@ -39979,7 +39979,8 @@
                 pos: Object.keys(ARTIFACTS.intersection)[0],
                 id: newunitid,
                 group: 'soldiers',
-                owner: player
+                owner: 1,
+                from: MARKS['selecttarget']
               };
             }
           }
@@ -40338,7 +40339,8 @@
                 pos: Object.keys(ARTIFACTS.intersection)[0],
                 id: newunitid,
                 group: 'soldiers',
-                owner: player
+                owner: 2,
+                from: MARKS['selecttarget']
               };
             }
           }

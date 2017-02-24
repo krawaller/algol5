@@ -2255,7 +2255,7 @@
             stepid: newstepid,
             name: 'move',
             path: step.path.concat('move')
-            ,
+              ,
             TURNVARS: TURNVARS
           });
           turn.links[newstepid] = {};
@@ -2643,7 +2643,7 @@
             stepid: newstepid,
             name: 'move',
             path: step.path.concat('move')
-            ,
+              ,
             TURNVARS: TURNVARS
           });
           turn.links[newstepid] = {};

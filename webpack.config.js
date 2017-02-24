@@ -1,7 +1,7 @@
 module.exports = {  
-    entry: './src/engine.js',
+    entry: './src/engines/api.js',
     output: {
-        filename: './dist/algol.js',
+        filename: './dist/algol_sync.js',
         library: 'algol',
         libraryTarget: 'commonjs2'
     },

@@ -911,7 +911,8 @@
                 pos: Object.keys(ARTIFACTS.intersection)[0],
                 id: newunitid,
                 group: 'soldiers',
-                owner: player
+                owner: 1,
+                from: MARKS['selecttarget']
               };
             }
           }
@@ -1270,7 +1271,8 @@
                 pos: Object.keys(ARTIFACTS.intersection)[0],
                 id: newunitid,
                 group: 'soldiers',
-                owner: player
+                owner: 2,
+                from: MARKS['selecttarget']
               };
             }
           }

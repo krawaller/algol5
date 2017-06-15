@@ -1,8 +1,6 @@
 import React from 'react';
 
-import algol from '../../../dist/algol_sync'
-
-const games = algol.getGameLibrary();
+import games from '../../../dist/gamelibrary'
 
 let Shelf = React.createClass({
   chooseGame(gamename){

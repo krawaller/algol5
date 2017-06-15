@@ -1,6 +1,6 @@
 /*
 Build script that loops over the game files in the `built` folder
-(created by `generate.js`), and collects them into a single file
+(created by `generate.js`), and collects their metadata into a single file
 at `games.js`. this file exports an object containing all games.
 */
 
@@ -14,6 +14,6 @@ let meta = fs.readdirSync(__dirname+"/defs").reduce((mem,gamename)=>{
   return mem;
 },{})
 
-fs.writeFileSync(__dirname+'/temp/meta.js',`
+fs.writeFileSync(__dirname+'/../../dist/gamelibrary.js',`
   module.exports = ${JSON.stringify(meta)};
 `)

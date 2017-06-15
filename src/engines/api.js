@@ -1,24 +1,22 @@
+/*
+The public methods of the Algol system.
+Meant to be consumed by an app.
+*/
+
 import engine from './engine'
 
 import games from '../games/temp/ALLGAMES'
-import meta from '../games/temp/meta'
 
 let sessions = {}
 
 let api = {
-    /*
-    Return object with metadata for all games. Typically used for making a game list
-    */
-    getGameLibrary(){
-        return meta;
-    },
     /*
     Start a new session for a given game with the given players
     */
     startGameSession(gameId,plr1,plr2){
         let session = engine.newSession(gameId,plr1,plr2);
         sessions[session.id] = session;
-        return engine.getSessionUI(session);
+        return engine.getSessionUI(session, session.step);
     },
     /*
     Make a mark, do a command, etc. Perform an action in a session!
@@ -26,7 +24,7 @@ let api = {
     makeSessionAction(sessionId,action){
         let session = sessions[sessionId];
         session = engine.makeSessionAction(session,action);
-        return engine.getSessionUI(session);
+        return engine.getSessionUI(session, session.step);
     },
     /*
     Returns array of best moves according to named brain.
@@ -78,7 +76,7 @@ let api = {
             } // TODO endgame funcs too!
             console.log(action,available.length === 1)
         }
-        return turn // TODO return session instead?
+        return turn // TODO return session instead? Rather, session id?
     }
 }
 

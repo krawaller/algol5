@@ -18,8 +18,8 @@
     "generate": "babel-node src/games/generate.js",
     "collect": "babel-node src/games/collect.js",
     "makeboards": "babel-node src/games/makeboards.js",
-    "meta": "babel-node src/games/meta.js",
-    "games": "npm run generate && npm run collect && npm run makeboards && npm run meta",
+    "makemeta": "babel-node src/games/makemeta.js",
+    "games": "npm run generate && npm run collect && npm run makeboards && npm run makemeta",
     "build": "webpack"
   },
   "dependencies": {

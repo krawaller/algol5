@@ -83,7 +83,7 @@ module.exports =
 	    startGameSession: function startGameSession(gameId, plr1, plr2) {
 	        var session = _engine2.default.newSession(gameId, plr1, plr2);
 	        sessions[session.id] = session;
-	        return _engine2.default.getSessionUI(session);
+	        return _engine2.default.getSessionUI(session, session.step);
 	    },
 
 	    /*
@@ -92,7 +92,7 @@ module.exports =
 	    makeSessionAction: function makeSessionAction(sessionId, action) {
 	        var session = sessions[sessionId];
 	        session = _engine2.default.makeSessionAction(session, action);
-	        return _engine2.default.getSessionUI(session);
+	        return _engine2.default.getSessionUI(session, session.step);
 	    },
 
 	    /*
@@ -219,6 +219,8 @@ module.exports =
 	                // ending the turn, creating a new one
 	                else if (action === 'endturn') {
 	                        session.save = session.save.concat(engine.calculateSave(session.turn, session.step));
+	                        console.log("Ending turn", "save", session.save, "turn", session.turn, "step", session.step);
+	                        console.log("Compressed", engine.compressedHistoryForTurn(session));
 	                        session.turn = engine.hydrateTurn(session.game, session.turn.next[session.step.stepid]);
 	                        session.step = session.turn.steps.root;
 	                        session.markTimeStamps = {};
@@ -285,10 +287,9 @@ module.exports =
 	    /*
 	    Used in API.startGameSession and API.makeSessionAction. Returns an object used to draw board in an app.
 	    */
-	    getSessionUI: function getSessionUI(session) {
+	    getSessionUI: function getSessionUI(session, step) {
 	        var game = session.game,
 	            turn = session.turn,
-	            step = session.step,
 	            undo = session.undo,
 	            markTimeStamps = session.markTimeStamps;
 
@@ -411,6 +412,25 @@ module.exports =
 	            }
 	        }
 	        return turn;
+	    },
+	    compressedHistoryForTurn: function compressedHistoryForTurn(session) {
+	        var turn = session.turn;
+	        return session.step.path.reduce(function (mem, action) {
+	            mem.id += '-' + action;
+	            if (session.game.commands[action]) {
+	                var UI = engine.getSessionUI(session, turn.steps[mem.id]);
+	                UI.potentialMarks = {};
+	                UI.activeMarks = mem.marks.map(function (pos) {
+	                    return { pos: pos, coords: _logic2.default.pos2coords(pos) };
+	                });
+	                UI.description = action + '(' + mem.marks.join(',') + ')';
+	                mem.UIs.push(UI);
+	                mem.marks = [];
+	            } else {
+	                mem.marks.push(action);
+	            }
+	            return mem;
+	        }, { marks: [], UIs: [], id: 'root' }).UIs;
 	    }
 	};
 

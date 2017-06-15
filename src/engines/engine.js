@@ -1,3 +1,8 @@
+/*
+The engine for the public API.
+Consumed by api.js
+*/
+
 import mapValues from 'lodash/object/mapValues'
 import values from 'lodash/object/values'
 
@@ -12,6 +17,7 @@ let nextSessionId = 1
 let engine = {
     /*
     Used in API.makeSessionAction and API.inflateFromSave
+    Mutates the given session according to the given action and returns it.
     */
     makeSessionAction(session,action){
          // removing an existing mark, going back in time
@@ -54,6 +60,8 @@ let engine = {
     },
     /*
     Used in API.startGameSession and API.inflateFromSave
+    Creates a new session and returns it.
+    Pure.
     */
     newSession(gameId,plr1,plr2){
         let game = games[gameId];
@@ -72,7 +80,10 @@ let engine = {
         return session;
     },
     /*
-    used in .makeSessionAction when ending a turn.
+    Used in .makeSessionAction when ending a turn.
+    Calculates array of choices leading up to the given step in the given turn.
+    Returns that array.
+    Pure.
     */
     calculateSave(turn,step){
         let ret = []
@@ -93,10 +104,12 @@ let engine = {
         return ret
     },
     /*
-    Used in API.startGameSession and API.makeSessionAction. Returns an object used to draw board in an app.
+    Used in API.startGameSession and API.makeSessionAction.
+    Returns an object used to draw board in an app.
+    Pure.
     */
-    getSessionUI(session){
-        let {game,turn,step,undo,markTimeStamps} = session
+    getSessionUI(session, step){
+        let {game,turn,undo,markTimeStamps} = session
         let links = Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
             if (endgameactions[action]||action=='endturn'||action==='next'){
                 mem.system.push(action)
@@ -129,7 +142,10 @@ let engine = {
         }, links)
     },
     /*
-    used in .hydrateTurn
+    Used in .hydrateTurn, and will recursively call itself
+    Mutates the given turn with links for the given step
+    Will create linked steps if they didn't exist
+    Returns whether or not the given step can lead to turn end
     */
     hydrateStep(game,turn,step){
         let steps = turn.steps
@@ -170,7 +186,8 @@ let engine = {
     },
     /*
     Used in .inflateFromSave, .startGameSession and .makeSessionAction (when ending turn)
-    Will create links for current turn for all steps that can lead to turn end
+    Mutates the given turn with all steps that can lead to turn end, and links for those steps
+    Returns the mutated turn
     */
     hydrateTurn(game,turn){ // TODO - forcefully flag if we're AI analyzing! or just always do it :P
         turn.ends = {
@@ -183,7 +200,8 @@ let engine = {
         return turn;
     },
     /*
-    used in .hydrateStep
+    Used in .hydrateStep for links leading to a new turn, to see if that turn is a dead end
+    Mutates the given turn with .canend boolean
     */
     tryToReachTurnEnd(game,turn){
         let {steps,links} = turn
@@ -201,11 +219,32 @@ let engine = {
                     turn.canend = true
                 } else {
                     let nextstepid = stepid + '-' + action
+                    // TODO - maybe save the created steps into the turn, so we don't have to recreate?
                     checkSteps.push( steps[nextstepid] || (steps[nextstepid] = game[func](turn,step,action)) )
                 }
             }
         }
         return turn;
+    },
+    /*
+    WIP?
+    Returns array of UI objects for given turn, with adjusted marks
+    */
+    compressedHistoryForTurn(session,turn){
+        return session.step.path.reduce((mem,action)=>{
+            mem.id += '-' + action
+            if (session.game.commands[action]){
+                let UI = engine.getSessionUI(session, turn.steps[mem.id]);
+                UI.potentialMarks = {};
+                UI.activeMarks = mem.marks.map(pos=>({pos, coords: lib.pos2coords(pos)}));
+                UI.description = action + '(' + mem.marks.join(',') + ')';
+                mem.UIs.push(UI);
+                mem.marks = [];
+            } else {
+                mem.marks.push(action);
+            }
+            return mem;
+        },{marks:[], UIs: [], id: 'root'}).UIs;
     }
 }
 

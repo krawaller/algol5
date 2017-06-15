@@ -1,12 +1,6 @@
 /*
 Build script that will loop over all game definitions in the `defs` folder,
 and create individual background images for that game into `/boards`.
-
-The code in a built file evaluates to an object with methods to make
-moves in that particular game.
-
-After this is done, these files can then be merged together by the script
-in `collect.js`.
 */
 
 var fs = require('fs')

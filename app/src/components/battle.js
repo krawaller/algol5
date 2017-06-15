@@ -1,6 +1,8 @@
 import React from 'react';
 
-import algol from '../../../dist/algol'
+import makeAlgol from '../../../dist/algol_async';
+
+let algol = makeAlgol('../dist/algol_worker.js', 1);
 
 import Units from '../parts/units'
 import Marks from '../parts/marks'
@@ -8,19 +10,34 @@ import Commands from '../parts/commands'
 
 import random from 'lodash/random'
 
+console.log("ALGOL", algol);
+
 let Battle = React.createClass({
   getInitialState() {
     return {
-      UI: algol.startGameSession(this.props.game.id,this.props.participants[0],this.props.participants[1])
+      UI: { waiting: 'loading', players: [], board: {} }
+      //UI: algol.startGameSession(this.props.gameId,this.props.participants[0],this.props.participants[1])
     }
   },
   doAction(action) {
-    this.setState({
+    this.setState({UI: {...this.state.UI, waiting: action}}, ()=>{
+      console.log('Ok, gonna do async action', action);
+      algol.makeSessionAction(this.state.UI.sessionId,action).then(UI=>{
+        console.log('Weee, got new UI!', UI);
+        this.setState({UI:UI}, this.maybeAI);
+      });
+    });
+    /*this.setState({
       UI: algol.makeSessionAction(this.state.UI.sessionId,action)
-    },this.maybeAI)
+    },this.maybeAI)*/
   },
   componentDidMount(){
-    this.maybeAI()
+    console.log("So, initiating algol async call...");
+    algol.startGameSession(this.props.gameId,this.props.participants[0],this.props.participants[1]).then(UI =>{
+      console.log("WTF!", UI);
+      this.setState({UI:UI}, this.maybeAI)
+    });
+    //this.maybeAI()
   },
   askBrain(name) { // TODO - broken now
     let s = this.state.session
@@ -46,18 +63,22 @@ let Battle = React.createClass({
     console.log("Gonna make AI moves")
     let UI = this.state.UI
     let plr = UI.players[UI.playing-1]
-    let options = algol.findBestOption(UI.sessionId, plr.name)
-    let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
-    for(let i=0; i<moves.length; i++){
-      setTimeout( this.doAction.bind(this,moves[i]), i*800 )
-    }
-    console.log("AI moves",moves)
+    this.setState({UI: {...this.state.UI, waiting: 'AI thinking'}}, ()=>{
+      algol.findBestOption(UI.sessionId, plr.name).then(options => {
+        let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
+        for(let i=0; i<moves.length; i++){
+          setTimeout( this.doAction.bind(this,moves[i]), i*800 ) // TODO - make less naïve code here
+        }
+        console.log("AI moves",moves)
+      });
+    });
   },
   render() {
     let UI = this.state.UI,
         p = UI.players[UI.playing-1];
-    let cmnd = p.type === "ai"
+    let cmnd = (p && p.type === "ai")
       ? <div>Awaiting {p.name}</div>
+      : UI.waiting ? <div>...calculating...</div>
       : (<div>
         <div>{UI.instruction}</div>
         <Commands gameCommands={UI.commands} systemCommands={UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
@@ -72,8 +93,8 @@ let Battle = React.createClass({
       <div>
         <h4>Playing!</h4>
         <div className="board" style={style}>
-          <Units unitdata={UI.units} board={UI.board} />
-          {p.type !== "ai" && <Marks board={UI.board} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
+          {UI.units && <Units unitdata={UI.units} board={UI.board} />}
+          {p && p.type !== "ai" && !UI.waiting && <Marks board={UI.board} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
         </div>
         {cmnd}
       </div>

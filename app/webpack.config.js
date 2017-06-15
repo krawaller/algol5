@@ -10,7 +10,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                  presets: ['es2015','react']
+                  presets: [__dirname+'/node_modules/babel-preset-es2015',__dirname+'/node_modules/babel-preset-react']
                 }
             }
         ]

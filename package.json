@@ -20,10 +20,12 @@
     "makeboards": "babel-node src/games/makeboards.js",
     "makemeta": "babel-node src/games/makemeta.js",
     "games": "npm run generate && npm run collect && npm run makeboards && npm run makemeta",
-    "build": "webpack"
+    "build": "webpack",
+    "buildasync": "cd dist; workerwrap algol.js"
   },
   "dependencies": {
-    "canvas": "^1.6.3",
-    "lodash": "^3.10.1"
+    "canvas": "1.6.5",
+    "lodash": "4.17.4",
+    "workerwrapper": "github:krawaller/workerwrapper"
   }
 }

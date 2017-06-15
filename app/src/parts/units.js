@@ -3,7 +3,7 @@ import Unit from './unit'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 
 // icons, board, unitdata
 let Units = (props)=> {

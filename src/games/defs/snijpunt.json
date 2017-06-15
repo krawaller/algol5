@@ -25,7 +25,8 @@
   },
   "startTurn": {
     "runGenerator": ["if",["notempty","oppsniper"],["all","findpotentialempties","findmandatory"]],
-    "link": "selecttarget"
+    "link": "selecttarget",
+    "instruction": ["ifelse",["isempty","mysniper"],"Select initial sniper deployment","Select where to snipe from"]
   },
   "marks": {
     "selecttarget": {

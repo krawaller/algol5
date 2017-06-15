@@ -1,12 +1,12 @@
 import React from 'react';
 
-import algol from '../../../dist/algol_sync'
+import algol from '../../../dist/algol'
 
 import Units from '../parts/units'
 import Marks from '../parts/marks'
 import Commands from '../parts/commands'
 
-import random from 'lodash/number/random'
+import random from 'lodash/random'
 
 let Battle = React.createClass({
   getInitialState() {

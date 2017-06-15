@@ -1,5 +1,5 @@
-import map from 'lodash/collection/map'
-import isNumber from 'lodash/lang/isNumber'
+import map from 'lodash/map'
+import isNumber from 'lodash/isNumber'
 
 export default C => Object.assign(C,{
 

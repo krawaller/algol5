@@ -1,5 +1,5 @@
-import tail from "lodash/array/tail"
-import map from "lodash/collection/map"
+import tail from "lodash/tail"
+import map from "lodash/map"
 
 /*
 Effect methods will all mutate UNITDATA, which is assumed to have been

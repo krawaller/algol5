@@ -1094,7 +1094,7 @@
           var ARTIFACTS = step.ARTIFACTS;
           var UNITLAYERS = step.UNITLAYERS;
           var UNITDATA = step.UNITDATA;
-          return ''
+          return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from')
         };
     })();
     (function() {
@@ -1454,7 +1454,7 @@
           var ARTIFACTS = step.ARTIFACTS;
           var UNITLAYERS = step.UNITLAYERS;
           var UNITDATA = step.UNITDATA;
-          return ''
+          return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from')
         };
     })();
     function reduce(coll, iterator, acc) {

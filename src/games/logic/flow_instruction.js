@@ -1,5 +1,5 @@
-import tail from "lodash/array/tail"
-import map from "lodash/collection/map"
+import tail from "lodash/tail"
+import map from "lodash/map"
 
 export default C => Object.assign(C,{
 

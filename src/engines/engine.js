@@ -3,8 +3,8 @@ The engine for the public API.
 Consumed by api.js
 */
 
-import mapValues from 'lodash/object/mapValues'
-import values from 'lodash/object/values'
+import mapValues from 'lodash/mapValues'
+import values from 'lodash/values'
 
 import lib from '../games/logic'
 

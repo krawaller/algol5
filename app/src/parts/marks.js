@@ -2,7 +2,7 @@ import React from 'react'
 
 import Square from './square'
 
-import map from 'lodash/collection/map'
+import map from 'lodash/map'
 
 // activeMarks, potentialMarks, board, selectMark
 let Marks = (props)=> {

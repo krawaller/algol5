@@ -13,15 +13,15 @@
     "webpack": "^1.12.11"
   },
   "scripts": {
-    "app": "cd app; webpack;",
-    "testlogic": "babel-node src/games/logic/test/run.js",
-    "generate": "babel-node src/games/generate.js",
-    "collect": "babel-node src/games/collect.js",
-    "makeboards": "babel-node src/games/makeboards.js",
-    "makemeta": "babel-node src/games/makemeta.js",
+    "testlogic": "babel-node ./games/logic/test/run.js",
+    "generate": "babel-node ./games/generate.js",
+    "collect": "babel-node ./games/collect.js",
+    "makeboards": "babel-node ./games/makeboards.js",
+    "makemeta": "babel-node ./games/makemeta.js",
     "games": "npm run generate && npm run collect && npm run makeboards && npm run makemeta",
-    "build": "webpack",
-    "buildasync": "cd dist; workerwrap algol.js"
+    "bundle": "webpack",
+    "bundleasync": "cd dist; workerwrap algol.js",
+    "build": "npm run games && npm run bundle && npm run bundleasync"
   },
   "dependencies": {
     "canvas": "1.6.5",

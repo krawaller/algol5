@@ -63,5 +63,5 @@ function draw(game,to){
 
 fs.readdirSync(__dirname+'/defs').filter(function(file){return file !== '.DS_Store'}).forEach(function(file){
   var rules = require(__dirname+'/defs/'+file)
-  draw(rules,__dirname+'/../../dist/boards/'+file.replace('.json','.png'))
+  draw(rules,__dirname+'/../dist/boards/'+file.replace('.json','.png'))
 })

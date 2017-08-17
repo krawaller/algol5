@@ -1,8 +1,9 @@
 import React from 'react';
 
-import makeAlgol from '../../../dist/algol_async';
+import makeAlgol from '../../../logic/dist/algol_async';
 
-let algol = makeAlgol('../dist/algol_worker.js', 1);
+// Path here will be relative to 'index.html'
+let algol = makeAlgol('../logic/dist/algol_worker.js', 1);
 
 import Units from '../parts/units'
 import Marks from '../parts/marks'

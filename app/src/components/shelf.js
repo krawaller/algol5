@@ -1,6 +1,6 @@
 import React from 'react';
 
-import games from '../../../dist/gamelibrary'
+import games from '../../../logic/dist/gamelibrary'
 
 let Shelf = React.createClass({
   chooseGame(gamename){

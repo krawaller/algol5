@@ -96,7 +96,7 @@ let engine = {
             if (index === -1){
                 throw "Didnt find action!" // TODO - make it work for win/lose/draw
             }
-            if (available.length>1){
+            if (available.length>1){ // We only store the step if we had choices, otherwise it is implied
                 ret.push(index)
             }
             id += '-'+action

@@ -13,7 +13,7 @@
     "webpack": "^1.12.11"
   },
   "scripts": {
-    "testlogic": "babel-node ./games/logic/test/run.js",
+    "testlogicdetails": "babel-node ./games/logic/test/run.js",
     "generate": "babel-node ./games/generate.js",
     "collect": "babel-node ./games/collect.js",
     "makeboards": "babel-node ./games/makeboards.js",
@@ -21,7 +21,8 @@
     "games": "npm run generate && npm run collect && npm run makeboards && npm run makemeta",
     "bundle": "webpack",
     "bundleasync": "cd dist; workerwrap algol.js",
-    "build": "npm run games && npm run bundle && npm run bundleasync"
+    "build": "npm run games && npm run bundle && npm run bundleasync",
+    "test": "cd test; babel-node run.js"
   },
   "dependencies": {
     "canvas": "1.6.5",

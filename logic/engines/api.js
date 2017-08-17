@@ -23,7 +23,7 @@ let api = {
     */
     makeSessionAction(sessionId,action){
         let session = sessions[sessionId];
-        console.log('Gonna do',action,'in session',sessionId,'which has state',session);
+        //console.log('Gonna do',action,'in session',sessionId,'which has state',session);
         session = engine.makeSessionAction(session,action);
         return engine.getSessionUI(session, session.step);
     },

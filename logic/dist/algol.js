@@ -83,7 +83,7 @@ module.exports =
 	    */
 	    makeSessionAction: function makeSessionAction(sessionId, action) {
 	        var session = sessions[sessionId];
-	        console.log('Gonna do', action, 'in session', sessionId, 'which has state', session);
+	        //console.log('Gonna do',action,'in session',sessionId,'which has state',session);
 	        session = _engine2.default.makeSessionAction(session, action);
 	        return _engine2.default.getSessionUI(session, session.step);
 	    },
@@ -279,6 +279,7 @@ module.exports =
 	                throw "Didnt find action!"; // TODO - make it work for win/lose/draw
 	            }
 	            if (available.length > 1) {
+	                // We only store the step if we had choices, otherwise it is implied
 	                ret.push(index);
 	            }
 	            id += '-' + action;

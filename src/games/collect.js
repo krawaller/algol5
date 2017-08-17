@@ -1,7 +1,7 @@
 /*
-Build script that loops over the game files in the `built` folder
+Build script that loops over the game files in the `temp/indiv` folder
 (created by `generate.js`), and collects them into a single file
-at `games.js`. this file exports an object containing all games.
+at `temp/ALLGAMES.js`. That file exports an object containing all games.
 */
 
 import fs from 'fs'

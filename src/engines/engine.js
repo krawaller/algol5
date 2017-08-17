@@ -144,7 +144,8 @@ let engine = {
     /*
     Used in .hydrateTurn, and will recursively call itself
     Mutates the given turn with links for the given step
-    Will create linked steps if they didn't exist
+    Will create linked steps if they didn't exist and hydrate those,
+    but only keep them around if they lead to turn end.
     Returns whether or not the given step can lead to turn end
     */
     hydrateStep(game,turn,step){
@@ -201,7 +202,7 @@ let engine = {
     },
     /*
     Used in .hydrateStep for links leading to a new turn, to see if that turn is a dead end
-    Mutates the given turn with .canend boolean
+    Mutates the given turn with .canend boolean, and returns same boolean
     */
     tryToReachTurnEnd(game,turn){
         let {steps,links} = turn
@@ -219,7 +220,6 @@ let engine = {
                     turn.canend = true
                 } else {
                     let nextstepid = stepid + '-' + action
-                    // TODO - maybe save the created steps into the turn, so we don't have to recreate?
                     checkSteps.push( steps[nextstepid] || (steps[nextstepid] = game[func](turn,step,action)) )
                 }
             }

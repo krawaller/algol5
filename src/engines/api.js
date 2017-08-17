@@ -28,7 +28,7 @@ let api = {
         return engine.getSessionUI(session, session.step);
     },
     /*
-    Returns array of best moves according to named brain.
+    Returns array of best moves for finishing current turn according to named brain.
     */
     findBestOption(sessionId,brain){
         let {game,turn} = sessions[sessionId]
@@ -77,7 +77,7 @@ let api = {
             } // TODO endgame funcs too!
             console.log(action,available.length === 1)
         }
-        return turn // TODO return session instead? Rather, session id?
+        return turn // TODO return session instead? Rather, session id? Or UI, even?
     }
 }
 

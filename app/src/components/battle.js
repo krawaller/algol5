@@ -88,7 +88,7 @@ let Battle = React.createClass({
     let style = {
       height:UI.board.height*50,
       width:UI.board.width*50,
-      backgroundImage: 'url(../dist/boards/'+UI.gameId+'.png)'
+      backgroundImage: 'url(../logic/dist/boards/'+UI.gameId+'.png)'
     }
     return (
       <div>

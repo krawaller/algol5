@@ -21693,6 +21693,8 @@
 	      console.log('Ok, gonna do async action', action);
 	      algol.makeSessionAction(_this.state.UI.sessionId, action).then(function (UI) {
 	        console.log('Weee, got new UI!', UI);
+	        //let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
+	        //console.log("Available now", available.sort());
 	        _this.setState({ UI: UI }, _this.maybeAI);
 	      });
 	    });

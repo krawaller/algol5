@@ -1,3 +1,11 @@
+/*
+This test loops all games and makes random moves for NUMBEROFTURNS turns,
+making sure no error is thrown. If an error is thrown, the path to the
+state is logged to the console before the error is thrown.
+*/
+
+const NUMBEROFTURNS = 10;
+
 import algol from '../../dist/algol';
 import games from '../../dist/gamelibrary';
 import _ from 'lodash';
@@ -16,20 +24,18 @@ function makeRandomMovesInGame(gameId, n){
     try {
       UI = algol.makeSessionAction(UI.sessionId, cmnd);
     } catch(e){
-      console.log('Random moves bombed! Path', path);
+      console.log(`Random moves in game ${gameId} bombed! Path`, path);
       throw e;
     }
   } while (turncount < n && path[path.length-1] !== 'win'); // TODO - check gamestatus in UI once implemented
 }
 
-const TURNS = 10;
-
-describe(`doing ${TURNS} random moves`, ()=> {
-  Object.keys(games).map(gameKey => {
+describe(`doing ${NUMBEROFTURNS} random moves`, ()=> {
+  Object.keys(games).forEach(gameKey => {
     let game = games[gameKey];
     it(`works in game ${game.id}`, ()=> {
       expect(()=> {
-        makeRandomMovesInGame(game.id, TURNS);
+        makeRandomMovesInGame(game.id, NUMBEROFTURNS);
       }).not.toThrow();
     });
   });

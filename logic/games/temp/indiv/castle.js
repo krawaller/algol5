@@ -8886,7 +8886,7 @@
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
               ARTIFACTS['movetargets'][POS] = {};
             }
-            if (BLOCKS[POS]) {
+            if (BLOCKS[POS] && allowedsteps[POS]) {
               if (UNITLAYERS.oppunits[POS]) {
                 ARTIFACTS['movetargets'][POS] = {};
               }
@@ -9073,6 +9073,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -10229,7 +10237,7 @@
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
               ARTIFACTS['movetargets'][POS] = {};
             }
-            if (BLOCKS[POS]) {
+            if (BLOCKS[POS] && allowedsteps[POS]) {
               if (UNITLAYERS.oppunits[POS]) {
                 ARTIFACTS['movetargets'][POS] = {};
               }
@@ -10416,6 +10424,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {

@@ -60,6 +60,9 @@ export default C => Object.assign(C,{
         ${C.addAllCommandFunctions(O)}
         ${C.addStartTurnFunction(O)}
         ${C.addAI(O)}
+        function debug1(){
+            return {ARTIFACTS:ARTIFACTS,UNITLAYERS:UNITLAYERS,UNITDATA:UNITDATA,MARKS:MARKS};
+        }
     `,
 
     addAllMarkFunctions: O=> map(O.rules.marks,(def,markname)=> C.addMarkFunction({...O,markname})).join(' '),

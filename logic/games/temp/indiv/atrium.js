@@ -722,6 +722,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -937,6 +945,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {

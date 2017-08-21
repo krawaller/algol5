@@ -2485,6 +2485,14 @@
             oppdomain: -Object.keys(ARTIFACTS.oppreach).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -2873,6 +2881,14 @@
             oppdomain: -Object.keys(ARTIFACTS.oppreach).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {

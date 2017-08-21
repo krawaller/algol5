@@ -76,6 +76,7 @@
       "start": "selectunit",
       "steps": ["ifelse",["anyat","walls",["start"]],"walls",["subtract","nowalls","mythrones"]],
       "blocks": "units",
+      "testblocksbeforesteps": false,
       "draw": {
         "steps": {
           "tolayer": "movetargets"

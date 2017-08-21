@@ -25,8 +25,6 @@ let Battle = React.createClass({
       console.log('Ok, gonna do async action', action);
       algol.makeSessionAction(this.state.UI.sessionId,action).then(UI=>{
         console.log('Weee, got new UI!', UI);
-        //let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
-        //console.log("Available now", available.sort());
         this.setState({UI:UI}, this.maybeAI);
       });
     });
@@ -87,6 +85,10 @@ let Battle = React.createClass({
         <Commands gameCommands={UI.commands} systemCommands={UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
       </div>)
     console.log("GONNA RENDER",UI)
+    if (!UI.waiting){
+      let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
+      console.log("Available now", available.sort());
+    }
     let style = {
       height:UI.board.height*50,
       width:UI.board.width*50,

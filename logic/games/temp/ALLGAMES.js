@@ -2487,6 +2487,14 @@
             oppdomain: -Object.keys(ARTIFACTS.oppreach).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -2875,6 +2883,14 @@
             oppdomain: -Object.keys(ARTIFACTS.oppreach).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -4571,6 +4587,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -4851,6 +4875,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -5810,6 +5842,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -6025,6 +6065,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -15020,7 +15068,7 @@
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
               ARTIFACTS['movetargets'][POS] = {};
             }
-            if (BLOCKS[POS]) {
+            if (BLOCKS[POS] && allowedsteps[POS]) {
               if (UNITLAYERS.oppunits[POS]) {
                 ARTIFACTS['movetargets'][POS] = {};
               }
@@ -15207,6 +15255,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -16363,7 +16419,7 @@
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
               ARTIFACTS['movetargets'][POS] = {};
             }
-            if (BLOCKS[POS]) {
+            if (BLOCKS[POS] && allowedsteps[POS]) {
               if (UNITLAYERS.oppunits[POS]) {
                 ARTIFACTS['movetargets'][POS] = {};
               }
@@ -16550,6 +16606,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -17751,6 +17815,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -18284,6 +18356,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -20027,6 +20107,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -20401,6 +20489,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -22720,6 +22816,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -23565,6 +23669,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -26026,6 +26138,14 @@
           var UNITDATA = step.UNITDATA;
           return 'Select which unit to jostle!'
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -26234,6 +26354,14 @@
           var UNITDATA = step.UNITDATA;
           return 'Select which unit to jostle!'
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -27211,6 +27339,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -27454,6 +27590,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -28431,6 +28575,14 @@
               }())).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -28982,6 +29134,14 @@
               }())).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -31457,6 +31617,14 @@
             oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -32673,6 +32841,14 @@
             oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -34820,6 +34996,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -35660,6 +35844,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -36357,6 +36549,14 @@
             headcount: Object.keys(UNITLAYERS.myunits).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -36581,6 +36781,14 @@
             headcount: Object.keys(UNITLAYERS.myunits).length
           };
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -37231,6 +37439,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -37558,6 +37774,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -38441,6 +38665,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -38964,6 +39196,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -40164,6 +40404,14 @@
           var UNITDATA = step.UNITDATA;
           return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from')
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -40524,6 +40772,14 @@
           var UNITDATA = step.UNITDATA;
           return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from')
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -41308,6 +41564,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var ownernames = ["neutral", "opp", "my"];
@@ -41547,6 +41811,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -42811,6 +43083,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -43382,6 +43662,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {
@@ -44304,6 +44592,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     (function() {
       var TERRAIN = {
@@ -44608,6 +44904,14 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
+      function debug1() {
+        return {
+          ARTIFACTS: ARTIFACTS,
+          UNITLAYERS: UNITLAYERS,
+          UNITDATA: UNITDATA,
+          MARKS: MARKS
+        };
+      }
     })();
     function reduce(coll, iterator, acc) {
       for (var key in coll) {

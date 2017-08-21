@@ -171,7 +171,11 @@ export default C => Object.assign(C,{
 	drawwalkblock: (O,def)=> {
 		let ret = ''
 		if (def.blocks && def.draw.block){
-			ret += 'if (BLOCKS[POS]){' 
+			let conds = ['BLOCKS[POS]'];
+			if (def.steps && ! def.testblocksbeforesteps){
+				conds.push('allowedsteps[POS]');
+			}
+			ret += `if (${conds.join(' && ')}){` 
 			ret += C.performdraw(O,def.draw.block);
 			if (def.draw.all){
 				ret += C.performdraw(O,def.draw.all);

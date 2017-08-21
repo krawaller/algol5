@@ -22,6 +22,7 @@ export default C => Object.assign(C,{
         game.id = "${O.rules.meta.id}";
     `,
 
+    // TODO - move out reduce to toplevel
     addCommonFunctions: O=> `
         function reduce(coll,iterator,acc){
             for(var key in coll){
@@ -30,6 +31,14 @@ export default C => Object.assign(C,{
             return acc;
         }
         game.newGame = ${C.makeNewGameFunction(O)};
+        game.debug = function(){
+            return {
+                BOARD: BOARD,
+                connections: connections,
+                plr1: game.debug1(),
+                plr2: game.debug2()
+            };
+        }
     `,
 
     // TODO - metadata
@@ -60,8 +69,8 @@ export default C => Object.assign(C,{
         ${C.addAllCommandFunctions(O)}
         ${C.addStartTurnFunction(O)}
         ${C.addAI(O)}
-        function debug1(){
-            return {ARTIFACTS:ARTIFACTS,UNITLAYERS:UNITLAYERS,UNITDATA:UNITDATA,MARKS:MARKS};
+        game.debug${O.player} = function(){
+            return {TERRAIN:TERRAIN};
         }
     `,
 

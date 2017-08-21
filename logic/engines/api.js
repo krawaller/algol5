@@ -78,6 +78,10 @@ let api = {
             console.log(action,available.length === 1)
         }
         return turn // TODO return session instead? Rather, session id? Or UI, even?
+    },
+
+    debug(gameid){
+        return games[gameid].debug();
     }
 }
 

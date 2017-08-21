@@ -545,12 +545,9 @@
             headcount: Object.keys(UNITLAYERS.myunits).length
           };
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -777,12 +774,9 @@
             headcount: Object.keys(UNITLAYERS.myunits).length
           };
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -851,6 +845,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };

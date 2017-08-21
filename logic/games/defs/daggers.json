@@ -55,7 +55,7 @@
       "draw": {
         "neighbours": {
           "condition": ["noneat","myunits",["target"]],
-          "tolayer": ["ifelse",["anyat","oppunits",["target"]],"killtarget","movetarget"]
+          "tolayer": "movetarget"
         }
       }
     },

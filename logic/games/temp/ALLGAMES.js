@@ -2487,12 +2487,9 @@
             oppdomain: -Object.keys(ARTIFACTS.oppreach).length
           };
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -2883,12 +2880,9 @@
             oppdomain: -Object.keys(ARTIFACTS.oppreach).length
           };
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -2959,6 +2953,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1,
       "fire": 1
@@ -4587,12 +4589,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -4875,12 +4874,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -5093,6 +5089,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };
@@ -5842,12 +5846,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -6065,12 +6066,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -6163,6 +6161,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };
@@ -15255,12 +15261,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -16606,12 +16609,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -16728,6 +16728,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };
@@ -17815,12 +17823,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -18356,12 +18361,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -18383,6 +18385,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "uphill": 1,
       "downhill": 1,
@@ -19877,7 +19887,6 @@
       game.selectunit1 =
         function(turn, step, markpos) {
           var ARTIFACTS = {
-            killtarget: Object.assign({}, step.ARTIFACTS.killtarget),
             movetarget: Object.assign({}, step.ARTIFACTS.movetarget)
           };
           var UNITLAYERS = step.UNITLAYERS;
@@ -19892,7 +19901,7 @@
               var POS = startconnections[neighbourdirs[dirnbr]];
               if (POS) {
                 if (!(UNITLAYERS.myunits[POS])) {
-                  ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'killtarget' : 'movetarget')][POS] = {};
+                  ARTIFACTS['movetarget'][POS] = {};
                 }
               }
             } 
@@ -20002,7 +20011,6 @@
             UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
           }
           ARTIFACTS = {
-            "killtarget": {},
             "movetarget": {}
           };
           var newstepid = step.stepid + '-' + 'move';
@@ -20059,7 +20067,6 @@
           };
           var MARKS = {};
           var ARTIFACTS = {
-            "killtarget": {},
             "movetarget": {}
           };
           var UNITDATA = step.UNITDATA;
@@ -20107,12 +20114,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -20259,7 +20263,6 @@
       game.selectunit2 =
         function(turn, step, markpos) {
           var ARTIFACTS = {
-            killtarget: Object.assign({}, step.ARTIFACTS.killtarget),
             movetarget: Object.assign({}, step.ARTIFACTS.movetarget)
           };
           var UNITLAYERS = step.UNITLAYERS;
@@ -20274,7 +20277,7 @@
               var POS = startconnections[neighbourdirs[dirnbr]];
               if (POS) {
                 if (!(UNITLAYERS.myunits[POS])) {
-                  ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'killtarget' : 'movetarget')][POS] = {};
+                  ARTIFACTS['movetarget'][POS] = {};
                 }
               }
             } 
@@ -20384,7 +20387,6 @@
             UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
           }
           ARTIFACTS = {
-            "killtarget": {},
             "movetarget": {}
           };
           var newstepid = step.stepid + '-' + 'move';
@@ -20441,7 +20443,6 @@
           };
           var MARKS = {};
           var ARTIFACTS = {
-            "killtarget": {},
             "movetarget": {}
           };
           var UNITDATA = step.UNITDATA;
@@ -20489,12 +20490,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -20611,6 +20609,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };
@@ -22816,12 +22822,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -23669,12 +23672,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -23793,6 +23793,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "deploy": 1,
       "move": 1,
@@ -26138,12 +26146,9 @@
           var UNITDATA = step.UNITDATA;
           return 'Select which unit to jostle!'
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -26354,12 +26359,9 @@
           var UNITDATA = step.UNITDATA;
           return 'Select which unit to jostle!'
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -26572,6 +26574,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "jostle": 1
     };
@@ -27339,12 +27349,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -27590,12 +27597,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -27676,6 +27680,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };
@@ -28575,12 +28587,9 @@
               }())).length
           };
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -29134,12 +29143,9 @@
               }())).length
           };
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -29208,6 +29214,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };
@@ -31617,12 +31631,9 @@
             oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
           };
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -32841,12 +32852,9 @@
             oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
           };
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -32965,6 +32973,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1,
       "kill": 1
@@ -34996,12 +35012,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -35844,12 +35857,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -35968,6 +35978,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1,
       "kill": 1,
@@ -36549,12 +36567,9 @@
             headcount: Object.keys(UNITLAYERS.myunits).length
           };
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -36781,12 +36796,9 @@
             headcount: Object.keys(UNITLAYERS.myunits).length
           };
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -36855,6 +36867,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };
@@ -37439,12 +37459,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -37774,12 +37791,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -37801,6 +37815,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "deploy": 1,
       "promote": 1
@@ -38665,12 +38687,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -39196,12 +39215,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -39270,6 +39286,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "makewild": 1,
       "move": 1
@@ -40404,12 +40428,9 @@
           var UNITDATA = step.UNITDATA;
           return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from')
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -40772,12 +40793,9 @@
           var UNITDATA = step.UNITDATA;
           return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from')
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -40799,6 +40817,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "snipe": 1
     };
@@ -41564,12 +41590,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -41811,12 +41834,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -41987,6 +42007,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };
@@ -43083,12 +43111,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -43662,12 +43687,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -43748,6 +43770,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1,
       "swap": 1
@@ -44592,12 +44622,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug1 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -44904,12 +44931,9 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      function debug1() {
+      game.debug2 = function() {
         return {
-          ARTIFACTS: ARTIFACTS,
-          UNITLAYERS: UNITLAYERS,
-          UNITDATA: UNITDATA,
-          MARKS: MARKS
+          TERRAIN: TERRAIN
         };
       }
     })();
@@ -44990,6 +45014,14 @@
         };
         return game.start1(turnseed, stepseed);
       };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    }
     game.commands = {
       "move": 1
     };

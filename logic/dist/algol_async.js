@@ -44,7 +44,7 @@ module.exports = function(pathToLib, nbrOfWorkers){
     freeUpWorker(worker);
   }
 
-  return ["startGameSession","makeSessionAction","findBestOption","inflateFromSave"].reduce(function(mem,method){
+  return ["startGameSession","makeSessionAction","findBestOption","inflateFromSave","debug"].reduce(function(mem,method){
     mem[method] = libMethod.bind(null,method);
     return mem;
   },{});

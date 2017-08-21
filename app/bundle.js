@@ -21692,13 +21692,7 @@
 	    this.setState({ UI: _extends({}, this.state.UI, { waiting: action }) }, function () {
 	      console.log('Ok, gonna do async action', action);
 	      algol.makeSessionAction(_this.state.UI.sessionId, action).then(function (UI) {
-	        //console.log('Weee, got new UI!', UI);
-	        var available = UI.commands.concat(UI.potentialMarks.map(function (m) {
-	          return m.pos;
-	        })).concat(UI.system.filter(function (c) {
-	          return c.substr(0, 4) !== 'undo';
-	        }));
-	        console.log("Available now", available.sort());
+	        console.log('Weee, got new UI!', UI);
 	        _this.setState({ UI: UI }, _this.maybeAI);
 	      });
 	    });
@@ -21784,6 +21778,9 @@
 	      }));
 	      console.log("Available now", available.sort());
 	    }
+	    algol.debug(UI.gameId).then(function (res) {
+	      console.log("DEBUG", res);
+	    });
 	    var style = {
 	      height: UI.board.height * 50,
 	      width: UI.board.width * 50,
@@ -21864,7 +21861,7 @@
 	    freeUpWorker(worker);
 	  }
 
-	  return ["startGameSession", "makeSessionAction", "findBestOption", "inflateFromSave"].reduce(function (mem, method) {
+	  return ["startGameSession", "makeSessionAction", "findBestOption", "inflateFromSave", "debug"].reduce(function (mem, method) {
 	    mem[method] = libMethod.bind(null, method);
 	    return mem;
 	  }, {});

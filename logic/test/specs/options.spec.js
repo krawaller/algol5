@@ -38,6 +38,25 @@ const scripts = [
     [["q11","move","endturn"],["c9", "f1", "h2", "h6", "l2", "l6", "n1", "q8"]],
     [["c9"],["a9", "b9", "c10", "c11", "c8", "d9", "e9", "f9", "g9", "h9", "i9", "j9", "k9", "l9", "m9", "n9", "o9", "p9", "q9", "r9", "s9"]]
   ]],
+  ["Basic Coffee script", "coffee", [
+    [[],["a1", "a2", "a3", "a4", "a5", "b1", "b2", "b3", "b4", "b5", "c1", "c2", "c3", "c4", "c5", "d1", "d2", "d3", "d4", "d5", "e1", "e2", "e3", "e4", "e5"]],
+    [["c3"],["downhill", "horisontal", "uphill", "vertical"]],
+    [["downhill","endturn"],["a5", "b4", "d2", "e1"]],
+    [["b4"],["horisontal", "uphill", "vertical"]],
+    [["uphill","endturn"],["a3", "c5"]],
+    [["c5","vertical","endturn"],["c1", "c2", "c4"]],
+    [["c2"],["downhill", "horisontal", "uphill"]],
+  ]],
+  ["Basic Daggers script", "daggers", [
+    [[],["c7", "d7", "d8", "e7", "e8", "f7"]],
+    [["c7"],["a5", "b6", "b8", "c4", "c5", "c6", "c8", "d6", "e5", "f4", "g3", "h2"]],
+    [["g3","move","endturn"],["b2", "c1", "c2", "c3", "d2", "e2", "f1", "f2", "f3", "g2"]],
+    [["f2"],["e1", "e3", "g1", "g3"]],
+    [["e3","move","endturn"],["d7", "d8", "e7", "e8", "f7", "g3"]],
+    [["g3"],["e1", "f2", "f4", "g4", "h2", "h4"]],
+    [["f2","move","endturn"],["b2", "c1", "c2", "c3", "d2", "e2", "e3", "f1", "f3", "g2"]],
+    [["f1"],["e1", "f2", "g1"]]
+  ]],
   ["Basic Kickrun script", "kickrun", [
     [["c1"], ["c2", "d1"]],
     [["c2","move","endturn"], ["c5", "d5", "e3", "e4"]],

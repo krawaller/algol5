@@ -148,6 +148,15 @@ const scripts = [
     [["d4","d2","move","endturn"],["b1", "c1", "c3", "c4"]],
     [["b1"],["a1", "a2", "b3", "d3"]],
   ]],
+  ["Basic Semaphor script", "semaphor", [
+    [[],["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3", "d1", "d2", "d3"]],
+    [["c2"],["deploy"]],
+    [["deploy","endturn"],["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3", "d1", "d2", "d3"]],
+    [["c2"],["promote"]],
+    [["promote","endturn","c2","promote","endturn"],["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c3", "d1", "d2", "d3"]],
+    [["b2","deploy","endturn","b2","promote","endturn","b2","promote","endturn"],["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"]],
+    [["a2","deploy","endturn","a2","promote","endturn","a2","promote"],["win"]]
+  ]],
   ["Basic Transet script", "transet", [
     [[], ["a1", "b1", "c1", "d1", "e1"]],
     [["c1"], ["b2", "c2", "d2"]],

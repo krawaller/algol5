@@ -157,6 +157,29 @@ const scripts = [
     [["b2","deploy","endturn","b2","promote","endturn","b2","promote","endturn"],["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"]],
     [["a2","deploy","endturn","a2","promote","endturn","a2","promote"],["win"]]
   ]],
+  ["Basic Serauqs script", "serauqs", [
+    [[],["a1", "b1", "c1", "d1"]],
+    [["d1"],["makewild"]],
+    [["makewild","endturn"],["a4", "b4", "c4", "d4"]],
+    [["a4","makewild","endturn"],["a1", "b1", "c1", "d1"]],
+    [["b1"],["a2", "b2", "c2"]],
+    [["b2"],["move"]],
+    [["move","endturn"],["a4", "b4", "c4", "d4"]]
+  ]],
+  ["Basic Snijpunt script", "snijpunt", [
+    [[],["b6", "c6", "d6", "e6", "f6"]],
+    [["d6","snipe","endturn"],["a1", "a2", "a3", "a4", "a5"]],
+    [["a3","snipe","endturn"],["b6", "c6", "e6", "f6"]],
+    [["c6","snipe","endturn"],["a1", "a2", "a4", "a5"]],
+    [["a4","snipe","endturn"],["b6", "d6", "e6", "f6"]],
+    [["d6","snipe","endturn"],["a1", "a2", "a5"]],
+    [["a2","snipe","endturn"],["b6", "c6", "e6", "f6"]],
+    [["c6","snipe","endturn"],["a1", "a5"]],
+    [["a5","snipe","endturn"],["b6", "d6", "e6", "f6"]],
+    [["d6","snipe","endturn"],["a1"]],
+    [["a1","snipe","endturn"],["b6", "c6", "e6", "f6"]],
+    [["c6","snipe","endturn"],["a2", "a3", "a4", "a5"]]
+  ]],
   ["Basic Transet script", "transet", [
     [[], ["a1", "b1", "c1", "d1", "e1"]],
     [["c1"], ["b2", "c2", "d2"]],

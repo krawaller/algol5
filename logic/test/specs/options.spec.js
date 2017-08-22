@@ -141,6 +141,13 @@ const scripts = [
     [["f7","d5","move","endturn"],["a1", "c1", "d3", "e1", "g1", "h1"]],
     [["d3"], ["b1", "b3", "b5", "d1", "f1", "f3", "f5"]]
   ]],
+  ["Basic Orthokon script", "orthokon", [
+    [[],["a1", "b1", "c1", "d1"]],
+    [["a1"],["a3", "c3"]],
+    [["c3","move","endturn"],["a4", "b4", "d4"]],
+    [["d4","d2","move","endturn"],["b1", "c1", "c3", "c4"]],
+    [["b1"],["a1", "a2", "b3", "d3"]],
+  ]],
   ["Basic Transet script", "transet", [
     [[], ["a1", "b1", "c1", "d1", "e1"]],
     [["c1"], ["b2", "c2", "d2"]],

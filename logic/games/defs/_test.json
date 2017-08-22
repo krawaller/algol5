@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "id": "_test",
+    "name": "Test",
+    "tags": [],
+    "exclude": true
+  },
+  "graphics": {
+    "icons": { "stepsfirsts": "queens", "blocksfirsts": "queens", "defaultfirsts": "queens", "noblocks": "queens", "pawns": "pawns" },
+    "tiles": { "steps":"grass"}
+  },
+  "board": {
+    "height": 10,
+    "width": 10,
+    "terrain": {
+      "steps": [["rect","a1","d4"]]
+    }
+  },
+  "setup": {
+    "stepsfirsts": {"1":["a3"]},
+    "blocksfirsts": {"1":["b3"]},
+    "defaultfirsts": {"1": ["c3"]},
+    "noblocks": {"1": ["d3"]},
+    "pawns": {"2": ["a1","a5","b1","b5","c1","c5","d1","d5"]}
+  },
+  "startTurn": {
+    "link": "selectunit"
+  },
+  "marks": {
+    "selectunit": {
+      "from": "myunits",
+      "runGenerators": ["stepsfirst","blocksfirst","defaultfirst","noblock"],
+      "link": "selectmark"
+    },
+    "selectmark": {
+      "from": ["union","marks","blocks"],
+      "link": "endturn"
+    }
+  },
+  "commands": {
+
+  },
+  "generators": {
+    "stepsfirst": {
+      "type": "walker",
+      "dirs": [1,5],
+      "starts": ["intersect","mystepsfirsts",["single",["mark","selectunit"]]],
+      "steps": "steps",
+      "testblocksbeforesteps": false,
+      "blocks": "units",
+      "draw": {
+        "steps": {
+          "tolayer": "marks"
+        },
+        "block": {
+          "tolayer": "blocks"
+        }
+      }
+    },
+    "blocksfirst": {
+      "type": "walker",
+      "dirs": [1,5],
+      "starts": ["intersect","myblocksfirsts",["single",["mark","selectunit"]]],
+      "steps": "steps",
+      "testblocksbeforesteps": true,
+      "blocks": "units",
+      "draw": {
+        "steps": {
+          "tolayer": "marks"
+        },
+        "block": {
+          "tolayer": "blocks"
+        }
+      }
+    },
+    "defaultfirst": {
+      "type": "walker",
+      "dirs": [1,5],
+      "starts": ["intersect","mydefaultfirsts",["single",["mark","selectunit"]]],
+      "steps": "steps",
+      "blocks": "units",
+      "draw": {
+        "steps": {
+          "tolayer": "marks"
+        },
+        "block": {
+          "tolayer": "blocks"
+        }
+      }
+    },
+    "noblock": {
+      "type": "walker",
+      "dirs": [1,5],
+      "starts": ["intersect","mynoblocks",["single",["mark","selectunit"]]],
+      "steps": "steps",
+      "blocks": "units",
+      "draw": {
+        "steps": {
+          "tolayer": "marks"
+        }
+      }
+    }
+  }
+}

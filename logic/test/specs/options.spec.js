@@ -6,6 +6,8 @@ in the resulting UI is exactly what is expected (excluding undos and removeMarks
 import algol from '../../dist/algol';
 import games from '../../dist/gamelibrary';
 
+import {optionsInUI} from '../../engines/utils';
+
 const scripts = [
   ["Basic Amazon script", "amazon", [
     [["d10"],["a10", "b10", "b8", "c10", "c9", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "e10", "e9", "f10", "f8", "g7", "h6", "i5"]],
@@ -213,8 +215,7 @@ describe('Following scripted moves', ()=> {
       cmnds.forEach(cmnd => {
         UI = algol.makeSessionAction(UI.sessionId, cmnd);
       });
-      const available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo')).sort();
-      expect(available).toEqual(expectedUI);
+      expect(optionsInUI(UI)).toEqual(expectedUI);
     });
   }));
 });

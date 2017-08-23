@@ -9,13 +9,14 @@ const NUMBEROFTURNS = 10;
 import algol from '../../dist/algol';
 import games from '../../dist/gamelibrary';
 import _ from 'lodash';
+import {optionsInUI} from '../../engines/utils';
 
 function makeRandomMovesInGame(gameId, n){
   let UI = algol.startGameSession(gameId, 'plr1', 'plr2');
   let turncount = 0;
   let path = [];
   do {
-    let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
+    let available = optionsInUI(UI);
     let cmnd = _.shuffle(available)[0];
     if (cmnd === 'endturn'){
       turncount++;

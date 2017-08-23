@@ -89,7 +89,7 @@ let Battle = React.createClass({
       let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
       console.log("Available now", available.sort());
     }
-    algol.debug(UI.gameId).then(res => {
+    algol.debug(UI.sessionId).then(res => {
       console.log("DEBUG", res);
     });
     let style = {

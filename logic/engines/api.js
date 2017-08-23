@@ -3,9 +3,11 @@ The public methods of the Algol system.
 Meant to be consumed by an app.
 */
 
-import engine from './engine'
+import engine from './engine';
 
-import games from '../games/temp/ALLGAMES'
+import games from '../games/temp/ALLGAMES';
+
+import omit from 'lodash/omit';
 
 let sessions = {}
 
@@ -33,7 +35,7 @@ let api = {
     findBestOption(sessionId,brain){
         let {game,turn} = sessions[sessionId]
         let func = game['brain_'+brain+'_'+turn.player],
-            winners = [], highscore = -1000000
+            winners = [], highscore = -1000000;
         if (turn.ends.win.length){
             winners = turn.ends.win.map(winId => turn.steps[winId].path);
         } else {
@@ -80,8 +82,12 @@ let api = {
         return turn // TODO return session instead? Rather, session id? Or UI, even?
     },
 
-    debug(gameid){
-        return games[gameid].debug();
+    debug(sessionId){
+        let session = sessions[sessionId];
+        return {
+            ...omit(session, ['game']),
+            ...session.game.debug()
+        };
     }
 }
 

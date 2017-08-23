@@ -21778,7 +21778,7 @@
 	      }));
 	      console.log("Available now", available.sort());
 	    }
-	    algol.debug(UI.gameId).then(function (res) {
+	    algol.debug(UI.sessionId).then(function (res) {
 	      console.log("DEBUG", res);
 	    });
 	    var style = {

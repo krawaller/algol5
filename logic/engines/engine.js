@@ -10,6 +10,8 @@ import lib from '../games/logic'
 
 import games from '../games/temp/ALLGAMES'
 
+import {calcTurnSave} from './utils'
+
 const endgameactions = {win:1,lose:1,draw:1}
 
 let nextSessionId = 1
@@ -37,11 +39,11 @@ let engine = {
         }
         // ending the turn, creating a new one
         else if (action==='endturn'){
-            session.save = session.save.concat( engine.calculateSave(session.turn,session.step) )
-            session.turn = engine.hydrateTurn(session.game, session.turn.next[session.step.stepid])
-            session.step = session.turn.steps.root
-            session.markTimeStamps = {}
-            session.undo = []
+            session.save = session.save.concat( calcTurnSave(session.turn,session.step,'endturn') );
+            session.turn = engine.hydrateTurn(session.game, session.turn.next[session.step.stepid]);
+            session.step = session.turn.steps.root;
+            session.markTimeStamps = {};
+            session.undo = [];
             // TODO also add to session history
         }
         // doing an action or adding a mark
@@ -78,30 +80,6 @@ let engine = {
             id: 's'+(nextSessionId++)
         };
         return session;
-    },
-    /*
-    Used in .makeSessionAction when ending a turn.
-    Calculates array of choices leading up to the given step in the given turn.
-    Returns that array.
-    Pure.
-    */
-    calculateSave(turn,step){
-        let ret = []
-        let id='root'
-        let followActions=step.path.concat('endturn');
-        while(followActions.length){
-            let action = followActions.shift()
-            let available = Object.keys(turn.links[id]).sort()
-            let index = available.indexOf(action)
-            if (index === -1){
-                throw "Didnt find action!" // TODO - make it work for win/lose/draw
-            }
-            if (available.length>1){ // We only store the step if we had choices, otherwise it is implied
-                ret.push(index)
-            }
-            id += '-'+action
-        }
-        return ret
     },
     /*
     Used in API.startGameSession and API.makeSessionAction.

@@ -21676,8 +21676,6 @@
 	// Path here will be relative to 'index.html'
 	var algol = (0, _algol_async2.default)('../logic/dist/algol_worker.js', 1);
 
-	console.log("ALGOL", algol);
-
 	var Battle = _react2.default.createClass({
 	  displayName: 'Battle',
 	  getInitialState: function getInitialState() {
@@ -21690,25 +21688,21 @@
 	    var _this = this;
 
 	    this.setState({ UI: _extends({}, this.state.UI, { waiting: action }) }, function () {
-	      console.log('Ok, gonna do async action', action);
-	      algol.makeSessionAction(_this.state.UI.sessionId, action).then(function (UI) {
-	        console.log('Weee, got new UI!', UI);
-	        _this.setState({ UI: UI }, _this.maybeAI);
+	      algol.performAction(_this.state.UI.sessionId, action).then(function (UI) {
+	        algol.debug(UI.sessionId).then(function (res) {
+	          _this.setState({ UI: UI }, _this.maybeAI);
+	          console.log("Performed", action, " => ", { UI: UI, debug: res });
+	        });
 	      });
 	    });
-	    /*this.setState({
-	      UI: algol.makeSessionAction(this.state.UI.sessionId,action)
-	    },this.maybeAI)*/
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this2 = this;
 
 	    console.log("So, initiating algol async call...");
-	    algol.startGameSession(this.props.gameId, this.props.participants[0], this.props.participants[1]).then(function (UI) {
-	      console.log("WTF!", UI);
+	    algol.startGame(this.props.gameId, this.props.participants[0], this.props.participants[1]).then(function (UI) {
 	      _this2.setState({ UI: UI }, _this2.maybeAI);
 	    });
-	    //this.maybeAI()
 	  },
 	  askBrain: function askBrain(name) {
 	    // TODO - broken now
@@ -21769,18 +21763,14 @@
 	      ),
 	      _react2.default.createElement(_commands2.default, { gameCommands: UI.commands, systemCommands: UI.system, performCommand: this.doAction, brains: this.props.game.AI, askBrain: this.askBrain })
 	    );
-	    console.log("GONNA RENDER", UI);
 	    if (!UI.waiting) {
 	      var available = UI.commands.concat(UI.potentialMarks.map(function (m) {
 	        return m.pos;
 	      })).concat(UI.system.filter(function (c) {
 	        return c.substr(0, 4) !== 'undo';
 	      }));
-	      console.log("Available now", available.sort());
+	      //console.log("Available now", available.sort());
 	    }
-	    algol.debug(UI.sessionId).then(function (res) {
-	      console.log("DEBUG", res);
-	    });
 	    var style = {
 	      height: UI.board.height * 50,
 	      width: UI.board.width * 50,
@@ -21861,7 +21851,7 @@
 	    freeUpWorker(worker);
 	  }
 
-	  return ["startGameSession", "makeSessionAction", "findBestOption", "inflateFromSave", "debug"].reduce(function (mem, method) {
+	  return ["startGame", "performAction", "findBestOption", "debug"].reduce(function (mem, method) {
 	    mem[method] = libMethod.bind(null, method);
 	    return mem;
 	  }, {});

@@ -12,7 +12,7 @@ import _ from 'lodash';
 import optionsInUI from '../../engine/various/optionsinui';
 
 function makeRandomMovesInGame(gameId, n){
-  let UI = algol.startGameSession(gameId, 'plr1', 'plr2');
+  let UI = algol.startGame(gameId, 'plr1', 'plr2');
   let turncount = 0;
   let path = [];
   do {
@@ -23,7 +23,7 @@ function makeRandomMovesInGame(gameId, n){
     }
     path.push(cmnd);
     try {
-      UI = algol.makeSessionAction(UI.sessionId, cmnd);
+      UI = algol.performAction(UI.sessionId, cmnd);
     } catch(e){
       console.log(`Random moves in game ${gameId} bombed! Path`, path);
       throw e;

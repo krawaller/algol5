@@ -11,8 +11,6 @@ import Commands from '../parts/commands'
 
 import random from 'lodash/random'
 
-console.log("ALGOL", algol);
-
 let Battle = React.createClass({
   getInitialState() {
     return {
@@ -22,23 +20,19 @@ let Battle = React.createClass({
   },
   doAction(action) {
     this.setState({UI: {...this.state.UI, waiting: action}}, ()=>{
-      console.log('Ok, gonna do async action', action);
-      algol.makeSessionAction(this.state.UI.sessionId,action).then(UI=>{
-        console.log('Weee, got new UI!', UI);
-        this.setState({UI:UI}, this.maybeAI);
+      algol.performAction(this.state.UI.sessionId,action).then(UI=>{
+        algol.debug(UI.sessionId).then(res => {
+          this.setState({UI:UI}, this.maybeAI);
+          console.log("Performed",action," => ",{UI,debug:res});
+        });
       });
     });
-    /*this.setState({
-      UI: algol.makeSessionAction(this.state.UI.sessionId,action)
-    },this.maybeAI)*/
   },
   componentDidMount(){
     console.log("So, initiating algol async call...");
-    algol.startGameSession(this.props.gameId,this.props.participants[0],this.props.participants[1]).then(UI =>{
-      console.log("WTF!", UI);
+    algol.startGame(this.props.gameId,this.props.participants[0],this.props.participants[1]).then(UI =>{
       this.setState({UI:UI}, this.maybeAI)
     });
-    //this.maybeAI()
   },
   askBrain(name) { // TODO - broken now
     let s = this.state.session
@@ -84,14 +78,10 @@ let Battle = React.createClass({
         <div>{UI.instruction}</div>
         <Commands gameCommands={UI.commands} systemCommands={UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
       </div>)
-    console.log("GONNA RENDER",UI)
     if (!UI.waiting){
       let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
-      console.log("Available now", available.sort());
+      //console.log("Available now", available.sort());
     }
-    algol.debug(UI.sessionId).then(res => {
-      console.log("DEBUG", res);
-    });
     let style = {
       height:UI.board.height*50,
       width:UI.board.width*50,

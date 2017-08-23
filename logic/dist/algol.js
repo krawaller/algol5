@@ -51,12 +51,10 @@ module.exports =
 	    value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }(); /*
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         The public methods of the Algol system.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Meant to be consumed by an app.
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /*
+	                                                                                                                                                                                                                                                                  The public methods of the Algol system.
+	                                                                                                                                                                                                                                                                  Meant to be consumed by an app.
+	                                                                                                                                                                                                                                                                  */
 
 	var _omit = __webpack_require__(1);
 
@@ -90,6 +88,10 @@ module.exports =
 
 	var _hydrateturn2 = _interopRequireDefault(_hydrateturn);
 
+	var _findbestturnend = __webpack_require__(233);
+
+	var _findbestturnend2 = _interopRequireDefault(_findbestturnend);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var sessions = {};
@@ -98,7 +100,7 @@ module.exports =
 	    /*
 	    Start a new session for a given game with the given players
 	    */
-	    startGameSession: function startGameSession(gameId, plr1, plr2) {
+	    startGame: function startGame(gameId, plr1, plr2) {
 	        var session = (0, _newsession2.default)(gameId, plr1, plr2);
 	        sessions[session.id] = session;
 	        return (0, _getsessionui2.default)(session, session.step);
@@ -107,7 +109,7 @@ module.exports =
 	    /*
 	    Make a mark, do a command, etc. Perform an action in a session!
 	    */
-	    makeSessionAction: function makeSessionAction(sessionId, action) {
+	    performAction: function performAction(sessionId, action) {
 	        var session = sessions[sessionId];
 	        //console.log('Gonna do',action,'in session',sessionId,'which has state',session);
 	        session = (0, _makesessionaction2.default)(session, action);
@@ -118,67 +120,12 @@ module.exports =
 	    Returns array of best moves for finishing current turn according to named brain.
 	    */
 	    findBestOption: function findBestOption(sessionId, brain) {
-	        var _sessions$sessionId = sessions[sessionId],
-	            game = _sessions$sessionId.game,
-	            turn = _sessions$sessionId.turn;
-
-	        var func = game['brain_' + brain + '_' + turn.player],
-	            winners = [],
-	            highscore = -1000000;
-	        if (turn.ends.win.length) {
-	            winners = turn.ends.win.map(function (winId) {
-	                return turn.steps[winId].path;
-	            });
-	        } else {
-	            for (var stepid in turn.next) {
-	                var stepscore = func(turn.steps[stepid]);
-	                if (stepscore > highscore) {
-	                    winners = [turn.steps[stepid].path];
-	                    highscore = stepscore;
-	                } else if (stepscore === highscore) {
-	                    winners.push(turn.steps[stepid].path);
-	                }
-	            }
-	        }
-	        return winners;
+	        return (0, _findbestturnend2.default)(sessionId, brain);
 	    },
 
 	    /*
-	    Not in use yet.
-	    a save is = [turnnbr,moves]
+	    Take a wild guess! :D
 	    */
-	    inflateFromSave: function inflateFromSave(gameId, save) {
-	        var _save = _slicedToArray(save, 2),
-	            turnnbr = _save[0],
-	            moves = _save[1];
-
-	        var game = _ALLGAMES2.default[gameId];
-	        var turn = (0, _hydrateturn2.default)(game, game.newGame());
-	        var stepid = 'root';
-	        while (turn.turn < turnnbr) {
-	            var action = void 0,
-	                available = Object.keys(turn.links[stepid]).sort();
-	            if (available.length === 1) {
-	                action = available[0];
-	            } else if (available.length > 1) {
-	                if (!moves.length) {
-	                    throw "Many available but no save index left!";
-	                }
-	                action = available[moves.shift()];
-	            } else {
-	                throw "No available actions!";
-	            }
-	            var func = turn.links[stepid][action];
-	            if (action === 'endturn') {
-	                turn = (0, _hydrateturn2.default)(game, turn.next[stepid]);
-	                stepid = 'root';
-	            } else {
-	                stepid = stepid + '-' + [action];
-	            } // TODO endgame funcs too!
-	            console.log(action, available.length === 1);
-	        }
-	        return turn; // TODO return session instead? Rather, session id? Or UI, even?
-	    },
 	    debug: function debug(sessionId) {
 	        var session = sessions[sessionId];
 	        return _extends({}, (0, _omit2.default)(session, ['game']), session.game.debug());
@@ -9861,6 +9808,45 @@ module.exports =
 	    id += '-' + cmnd;
 	  }
 	  return save;
+	}
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = findBestTurnEnd;
+	/*
+	Returns array of best moves for finishing current turn according to named brain.
+	*/
+	function findBestTurnEnd(sessionId, brain) {
+	    var _sessions$sessionId = sessions[sessionId],
+	        game = _sessions$sessionId.game,
+	        turn = _sessions$sessionId.turn;
+
+	    var func = game['brain_' + brain + '_' + turn.player],
+	        winners = [],
+	        highscore = -1000000;
+	    if (turn.ends.win.length) {
+	        winners = turn.ends.win.map(function (winId) {
+	            return turn.steps[winId].path;
+	        });
+	    } else {
+	        for (var stepid in turn.next) {
+	            var stepscore = func(turn.steps[stepid]);
+	            if (stepscore > highscore) {
+	                winners = [turn.steps[stepid].path];
+	                highscore = stepscore;
+	            } else if (stepscore === highscore) {
+	                winners.push(turn.steps[stepid].path);
+	            }
+	        }
+	    }
+	    return winners;
 	}
 
 /***/ })

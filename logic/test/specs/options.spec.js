@@ -210,10 +210,10 @@ const scripts = [
 
 describe('Following scripted moves', ()=> {
   scripts.forEach(([name, gameId,lines], n) => it(`works for ${name}`, () => {
-    let UI = algol.startGameSession(gameId, 'plr1', 'plr2');
+    let UI = algol.startGame(gameId, 'plr1', 'plr2');
     lines.forEach(([cmnds, expectedUI]) => {
       cmnds.forEach(cmnd => {
-        UI = algol.makeSessionAction(UI.sessionId, cmnd);
+        UI = algol.performAction(UI.sessionId, cmnd);
       });
       expect(optionsInUI(UI)).toEqual(expectedUI);
     });

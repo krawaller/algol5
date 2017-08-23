@@ -9,7 +9,7 @@ const NUMBEROFTURNS = 10;
 import algol from '../../dist/algol';
 import games from '../../dist/gamelibrary';
 import _ from 'lodash';
-import {optionsInUI} from '../../engines/utils';
+import optionsInUI from '../../engine/various/optionsinui';
 
 function makeRandomMovesInGame(gameId, n){
   let UI = algol.startGameSession(gameId, 'plr1', 'plr2');

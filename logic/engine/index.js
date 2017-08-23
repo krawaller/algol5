@@ -3,22 +3,27 @@ The public methods of the Algol system.
 Meant to be consumed by an app.
 */
 
-import engine from './engine';
+import omit from 'lodash/omit';
 
 import games from '../games/temp/ALLGAMES';
 
-import omit from 'lodash/omit';
+import isTurnEndCommand from './various/isturnendcmnd';
+import encodeSessionSave from './save/encodesessionsave';
+import newSession from './session/newsession';
+import getSessionUI from './session/getsessionui';
+import makeSessionAction from './session/makesessionaction';
+import hydrateTurn from './hydration/hydrateturn';
 
 let sessions = {}
 
-let api = {
+const api = {
     /*
     Start a new session for a given game with the given players
     */
     startGameSession(gameId,plr1,plr2){
-        let session = engine.newSession(gameId,plr1,plr2);
+        let session = newSession(gameId,plr1,plr2);
         sessions[session.id] = session;
-        return engine.getSessionUI(session, session.step);
+        return getSessionUI(session, session.step);
     },
     /*
     Make a mark, do a command, etc. Perform an action in a session!
@@ -26,8 +31,8 @@ let api = {
     makeSessionAction(sessionId,action){
         let session = sessions[sessionId];
         //console.log('Gonna do',action,'in session',sessionId,'which has state',session);
-        session = engine.makeSessionAction(session,action);
-        return engine.getSessionUI(session, session.step);
+        session = makeSessionAction(session,action);
+        return getSessionUI(session, session.step);
     },
     /*
     Returns array of best moves for finishing current turn according to named brain.
@@ -58,7 +63,7 @@ let api = {
     inflateFromSave(gameId,save){
         let [turnnbr,moves] = save
         let game = games[gameId]
-        let turn = engine.hydrateTurn(game, game.newGame())
+        let turn = hydrateTurn(game, game.newGame())
         let stepid = 'root'
         while(turn.turn < turnnbr){
             let action, available = Object.keys(turn.links[stepid]).sort()
@@ -72,7 +77,7 @@ let api = {
             }
             let func = turn.links[stepid][action]
             if (action === 'endturn'){
-                turn = engine.hydrateTurn(game,turn.next[stepid])
+                turn = hydrateTurn(game,turn.next[stepid])
                 stepid = 'root'
             } else {
                 stepid = stepid+'-'+[action]

@@ -6,7 +6,7 @@ in the resulting UI is exactly what is expected (excluding undos and removeMarks
 import algol from '../../dist/algol';
 import games from '../../dist/gamelibrary';
 
-import {optionsInUI} from '../../engines/utils';
+import optionsInUI from '../../engine/various/optionsinui';
 
 const scripts = [
   ["Basic Amazon script", "amazon", [

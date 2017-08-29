@@ -21689,10 +21689,11 @@
 
 	    this.setState({ UI: _extends({}, this.state.UI, { waiting: action }) }, function () {
 	      algol.performAction(_this.state.UI.sessionId, action).then(function (UI) {
-	        algol.debug(UI.sessionId).then(function (res) {
-	          _this.setState({ UI: UI }, _this.maybeAI);
-	          console.log("Performed", action, " => ", { UI: UI, debug: res });
-	        });
+	        _this.setState({ UI: UI }, _this.maybeAI);
+	        /*algol.debug(UI.sessionId).then(res => {
+	          this.setState({UI:UI}, this.maybeAI);
+	          console.log("Performed",action," => ",{UI,debug:res});
+	        });*/
 	      });
 	    });
 	  },

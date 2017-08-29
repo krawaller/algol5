@@ -7,12 +7,11 @@ import omit from 'lodash/omit';
 
 import games from '../games/temp/ALLGAMES';
 
-import isTurnEndCommand from './various/isturnendcmnd';
-import encodeSessionSave from './save/encodesessionsave';
+import decodeSessionSave from './save/decodesessionsave';
+import optionsInUI from './various/optionsinui';
 import newSession from './session/newsession';
 import getSessionUI from './session/getsessionui';
 import makeSessionAction from './session/makesessionaction';
-import hydrateTurn from './hydration/hydrateturn';
 import findBestTurnEnd from './ai/findbestturnend';
 
 let sessions = {}
@@ -20,9 +19,10 @@ let sessions = {}
 const api = {
     /*
     Start a new session for a given game with the given players
+    BattleId is optional, otherwise one will be randomised
     */
-    startGame(gameId,plr1,plr2){
-        let session = newSession(gameId,plr1,plr2);
+    startGame(gameId,plr1,plr2,battleid){
+        let session = newSession(gameId,plr1,plr2,battleid);
         sessions[session.id] = session;
         return getSessionUI(session, session.step);
     },
@@ -50,6 +50,26 @@ const api = {
             ...omit(session, ['game']),
             ...session.game.debug()
         };
+    },
+    /*
+    Yeeeah
+    */
+    inflateFromSave(saveString){
+        let {gameId, battleId, turnNumber, moveIndexes} = decodeSessionSave(saveString);
+        let UI = api.startGame(gameId,'plr1','plr2',battleId);
+        while(UI.turn < turnNumber){
+            let action, available = optionsInUI(UI);
+            if (available.length === 1){
+                action = available[0]
+            } else if (available.length > 1){
+                if (!moveIndexes.length){ throw "Many available but no save index left!" }
+                action = available[moveIndexes.shift()]
+            } else {
+                throw "No available actions!"
+            }
+            UI = api.performAction(UI.sessionId, action);
+        }
+        return UI;
     }
 }
 

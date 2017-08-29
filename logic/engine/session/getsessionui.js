@@ -40,6 +40,8 @@ export default function getSessionUI(session, step){
         instruction: instruction,
         sessionId: session.id,
         turnStart: session.step.stepid === 'root',
-        gameId: game.id
+        gameId: game.id,
+        turn: turn.turn,
+        save: session.saveString
     }, links)
 }

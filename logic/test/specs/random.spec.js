@@ -4,11 +4,12 @@ making sure no error is thrown. If an error is thrown, the path to the
 state is logged to the console before the error is thrown.
 */
 
-const NUMBEROFTURNS = 10;
+const NUMBEROFTURNS = 3;
 
 import algol from '../../dist/algol';
 import games from '../../dist/gamelibrary';
-import _ from 'lodash';
+import shuffle from 'lodash/shuffle';
+import omit from 'lodash/omit';
 import optionsInUI from '../../engine/various/optionsinui';
 
 function makeRandomMovesInGame(gameId, n){
@@ -17,7 +18,7 @@ function makeRandomMovesInGame(gameId, n){
   let path = [];
   do {
     let available = optionsInUI(UI);
-    let cmnd = _.shuffle(available)[0];
+    let cmnd = shuffle(available)[0];
     if (cmnd === 'endturn'){
       turncount++;
     }
@@ -29,15 +30,21 @@ function makeRandomMovesInGame(gameId, n){
       throw e;
     }
   } while (turncount < n && path[path.length-1] !== 'win'); // TODO - check gamestatus in UI once implemented
+  return UI;
 }
 
 describe(`doing ${NUMBEROFTURNS} random moves`, ()=> {
-  Object.keys(games).forEach(gameKey => {
+  Object.keys(omit(games,['_test'])).forEach(gameKey => {
     let game = games[gameKey];
-    it(`works in game ${game.id}`, ()=> {
-      expect(()=> {
-        makeRandomMovesInGame(game.id, NUMBEROFTURNS);
-      }).not.toThrow();
+    describe(`in game ${game.id}`, ()=> {
+      let UI;
+      it(`doesnt throw and can be restored`, ()=> {
+        expect(()=> {
+          UI = makeRandomMovesInGame(game.id, NUMBEROFTURNS);
+        }).not.toThrow();
+        let restored = algol.inflateFromSave(UI.save);
+        expect(omit(restored,['sessionId'])).toEqual(omit(UI,['sessionId']));
+      });
     });
   });
 });

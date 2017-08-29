@@ -6,6 +6,8 @@ Mutates the given session according to the given action and returns it.
 import hydrateTurn from '../hydration/hydrateturn';
 import isGameEndCommand from '../various/isgameendcmnd';
 import calcTurnSave from '../save/calcturnsave'
+import encodeSessionSave from '../save/encodesessionsave';
+import decodeSessionSave from '../save/decodesessionsave';
 
 export default function makeSessionAction(session,action){
       // removing an existing mark, going back in time
@@ -27,6 +29,12 @@ export default function makeSessionAction(session,action){
     else if (action==='endturn'){
         session.savedIndexes = session.savedIndexes.concat( calcTurnSave(session.turn,session.step,'endturn') );
         session.turn = hydrateTurn(session.game, session.turn.next[session.step.stepid]);
+        session.saveString = encodeSessionSave({
+            gameId: session.gameId,
+            turnNumber: session.turn.turn,
+            battleId: session.battleId,
+            moveIndexes: session.savedIndexes
+        });
         session.step = session.turn.steps.root;
         session.markTimeStamps = {};
         session.undo = [];

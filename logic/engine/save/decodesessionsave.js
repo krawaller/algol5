@@ -24,5 +24,11 @@ export default function decodeSessionSave(garble){
   const garbledGameId = garble.substr(0,lengthOfEncodedGameId);
   const battleId = garble.substr(lengthOfEncodedGameId,lengthOfEncodedBattleId);
   const [turnNumber, ...moveIndexes] = inflate( decodeString( garble.substr(lengthOfEncodedGameId + lengthOfEncodedBattleId) ) );
-  return {gameId: decodeGameId(garbledGameId, garble.substr(lengthOfEncodedGameId,1)), battleId, turnNumber, moveIndexes};
+  return {
+    gameId: decodeGameId(garbledGameId, garble.substr(lengthOfEncodedGameId,1)),
+    battleId,
+    turnNumber: Math.abs(turnNumber),
+    moveIndexes,
+    ended: turnNumber < 0
+  };
 }

@@ -208,10 +208,11 @@ module.exports =
 	            gameId = _decodeSessionSave.gameId,
 	            battleId = _decodeSessionSave.battleId,
 	            turnNumber = _decodeSessionSave.turnNumber,
-	            moveIndexes = _decodeSessionSave.moveIndexes;
+	            moveIndexes = _decodeSessionSave.moveIndexes,
+	            ended = _decodeSessionSave.ended;
 
 	        var UI = api.startGame(gameId, 'plr1', 'plr2', battleId);
-	        while (UI.turn < turnNumber) {
+	        while (UI.turn < turnNumber || UI.turn == turnNumber && ended && !UI.endedBy) {
 	            var action = void 0,
 	                available = (0, _optionsinui2.default)(UI);
 	            if (available.length === 1) {
@@ -225,6 +226,10 @@ module.exports =
 	                throw "No available actions!";
 	            }
 	            UI = api.performAction(UI.sessionId, action);
+	        }
+	        if (moveIndexes.length) {
+	            console.log(moveIndexes);
+	            throw "Oh noes, we had indexes still to go :(";
 	        }
 	        return UI;
 	    }
@@ -4602,7 +4607,13 @@ module.exports =
 	      turnNumber = _inflate2[0],
 	      moveIndexes = _inflate2.slice(1);
 
-	  return { gameId: (0, _gameid.decodeGameId)(garbledGameId, garble.substr(_gameid.lengthOfEncodedGameId, 1)), battleId: battleId, turnNumber: turnNumber, moveIndexes: moveIndexes };
+	  return {
+	    gameId: (0, _gameid.decodeGameId)(garbledGameId, garble.substr(_gameid.lengthOfEncodedGameId, 1)),
+	    battleId: battleId,
+	    turnNumber: Math.abs(turnNumber),
+	    moveIndexes: moveIndexes,
+	    ended: turnNumber < 0
+	  };
 	}
 
 /***/ }),
@@ -5512,22 +5523,7 @@ module.exports =
 	        undo = session.undo,
 	        markTimeStamps = session.markTimeStamps;
 
-	    var links = Object.keys(turn.links[step.stepid]).reduce(function (mem, action) {
-	        if ((0, _isgameendcmnd2.default)(action) || action == 'endturn' || action === 'next') {
-	            mem.system.push(action);
-	        } else if (game.commands[action]) {
-	            mem.commands.push(action);
-	        } else {
-	            mem.potentialMarks.push({
-	                coords: _logic2.default.pos2coords(action),
-	                pos: action
-	            });
-	        }
-	        return mem;
-	    }, { potentialMarks: [], commands: [], system: undo.length ? ['undo ' + undo[undo.length - 1].actionName] : [] });
-	    var instrfuncname = step.name + turn.player + 'instruction';
-	    var instruction = game[step.name + turn.player + 'instruction'](step);
-	    return Object.assign({
+	    var UI = {
 	        activeMarks: (0, _values2.default)(step.MARKS).map(function (pos) {
 	            return { pos: pos, coords: _logic2.default.pos2coords(pos) };
 	        }),
@@ -5541,13 +5537,37 @@ module.exports =
 	        players: session.players,
 	        playing: turn.player,
 	        board: game.board,
-	        instruction: instruction,
 	        sessionId: session.id,
 	        turnStart: session.step.stepid === 'root',
 	        gameId: game.id,
 	        turn: turn.turn,
-	        save: session.saveString
-	    }, links);
+	        save: session.saveString,
+	        potentialMarks: [],
+	        commands: [],
+	        system: []
+	    };
+	    if (!session.endedBy) {
+	        var links = Object.keys(turn.links[step.stepid]).reduce(function (mem, action) {
+	            if ((0, _isgameendcmnd2.default)(action) || action == 'endturn' || action === 'next') {
+	                mem.system.push(action);
+	            } else if (game.commands[action]) {
+	                mem.commands.push(action);
+	            } else {
+	                mem.potentialMarks.push({
+	                    coords: _logic2.default.pos2coords(action),
+	                    pos: action
+	                });
+	            }
+	            return mem;
+	        }, { potentialMarks: [], commands: [], system: undo.length ? ['undo ' + undo[undo.length - 1].actionName] : [] });
+	        Object.assign(UI, links, {
+	            instruction: game[step.name + turn.player + 'instruction'](step)
+	        });
+	    } else {
+	        UI.endedBy = session.endedBy;
+	        UI.winner = session.winner;
+	    }
+	    return UI;
 	}
 
 /***/ }),
@@ -10530,9 +10550,18 @@ module.exports =
 	            session.step = session.turn.steps[undo.backTo];
 	        }
 	        // ending the game!
-	        else if ((0, _isgameendcmnd2.default)(action)) {}
-	            //  TODO - finish this functionality
-
+	        else if ((0, _isgameendcmnd2.default)(action)) {
+	                session.savedIndexes = session.savedIndexes.concat((0, _calcturnsave2.default)(session.turn, session.step, action));
+	                session.saveString = (0, _encodesessionsave2.default)({
+	                    gameId: session.gameId,
+	                    turnNumber: session.turn.turn,
+	                    battleId: session.battleId,
+	                    moveIndexes: session.savedIndexes,
+	                    ended: true
+	                });
+	                session.winner = action === 'win' ? session.turn.player : action === 'lose' ? { 1: 2, 2: 1 }[session.turn.player] : 0;
+	                session.endedBy = session.turn.links[session.step.stepid][action];
+	            }
 	            // ending the turn, creating a new one
 	            else if (action === 'endturn') {
 	                    session.savedIndexes = session.savedIndexes.concat((0, _calcturnsave2.default)(session.turn, session.step, 'endturn'));
@@ -10637,9 +10666,10 @@ module.exports =
 	  var gameId = _ref.gameId,
 	      turnNumber = _ref.turnNumber,
 	      moveIndexes = _ref.moveIndexes,
-	      battleId = _ref.battleId;
+	      battleId = _ref.battleId,
+	      ended = _ref.ended;
 
-	  return (0, _gameid.encodeGameId)(gameId, battleId[0]) + battleId + compressString((0, _arrayCompress.compress)([turnNumber].concat(_toConsumableArray(moveIndexes))));
+	  return (0, _gameid.encodeGameId)(gameId, battleId[0]) + battleId + compressString((0, _arrayCompress.compress)([turnNumber * (ended ? -1 : 1)].concat(_toConsumableArray(moveIndexes))));
 	}
 
 /***/ }),

@@ -4,7 +4,7 @@ making sure no error is thrown. If an error is thrown, the path to the
 state is logged to the console before the error is thrown.
 */
 
-const NUMBEROFTURNS = 3;
+const NUMBEROFTURNS = 8;
 
 import algol from '../../dist/algol';
 import games from '../../dist/gamelibrary';

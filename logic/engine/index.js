@@ -55,9 +55,9 @@ const api = {
     Yeeeah
     */
     inflateFromSave(saveString){
-        let {gameId, battleId, turnNumber, moveIndexes} = decodeSessionSave(saveString);
+        let {gameId, battleId, turnNumber, moveIndexes, ended} = decodeSessionSave(saveString);
         let UI = api.startGame(gameId,'plr1','plr2',battleId);
-        while(UI.turn < turnNumber){
+        while(UI.turn < turnNumber || UI.turn == turnNumber && ended && !UI.endedBy){
             let action, available = optionsInUI(UI);
             if (available.length === 1){
                 action = available[0]
@@ -68,6 +68,10 @@ const api = {
                 throw "No available actions!"
             }
             UI = api.performAction(UI.sessionId, action);
+        }
+        if (moveIndexes.length){
+            console.log(moveIndexes)
+            throw "Oh noes, we had indexes still to go :("
         }
         return UI;
     }

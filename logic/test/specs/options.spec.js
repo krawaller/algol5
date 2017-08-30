@@ -107,7 +107,8 @@ const scripts = [
     [["b2"],["a2", "b1", "b3"]],
     [["b3","move","endturn"],["a3", "b4", "c2"]],
     [["c2"],["b2", "d1"]],
-    [["d1","move"],["win"]]
+    [["d1","move"],["win"]],
+    [["win"],[]]
   ]],
   ["Basic Murus Gallicus script", "murusgallicus", [
     [[],["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]],

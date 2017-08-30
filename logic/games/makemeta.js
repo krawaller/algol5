@@ -14,6 +14,6 @@ let meta = fs.readdirSync(__dirname+"/defs").reduce((mem,gamename)=>{
   return mem;
 },{})
 
-fs.writeFileSync(__dirname+'/../dist/gamelibrary.js',`
+fs.writeFileSync(__dirname+'/temp/gamelibrary.js',`
   module.exports = ${JSON.stringify(meta)};
 `)

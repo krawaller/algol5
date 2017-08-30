@@ -23,7 +23,16 @@ export default function makeSessionAction(session,action){
     }
     // ending the game!
     else if (isGameEndCommand(action)){
-        //  TODO - finish this functionality
+        session.savedIndexes = session.savedIndexes.concat( calcTurnSave(session.turn,session.step,action) );
+        session.saveString = encodeSessionSave({
+            gameId: session.gameId,
+            turnNumber: session.turn.turn,
+            battleId: session.battleId,
+            moveIndexes: session.savedIndexes,
+            ended: true
+        });
+        session.winner = (action === 'win' ? session.turn.player : action === 'lose' ? {1:2,2:1}[session.turn.player] : 0);
+        session.endedBy = session.turn.links[session.step.stepid][action];
     }
     // ending the turn, creating a new one
     else if (action==='endturn'){

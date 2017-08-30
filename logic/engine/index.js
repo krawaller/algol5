@@ -40,7 +40,7 @@ const api = {
     Returns array of best moves for finishing current turn according to named brain.
     */
     findBestOption(sessionId,brain){
-        return findBestTurnEnd(sessionId, brain);
+        return findBestTurnEnd(sessions[sessionId], brain);
     },
     /*
     Take a wild guess! :D

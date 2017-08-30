@@ -1,8 +1,7 @@
 /*
 Returns array of best moves for finishing current turn according to named brain.
 */
-export default function findBestTurnEnd(sessionId,brain){
-    let {game,turn} = sessions[sessionId]
+export default function findBestTurnEnd({game,turn},brain){
     let func = game['brain_'+brain+'_'+turn.player],
         winners = [], highscore = -1000000;
     if (turn.ends.win.length){

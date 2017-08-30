@@ -121,7 +121,7 @@ module.exports =
 	    Returns array of best moves for finishing current turn according to named brain.
 	    */
 	    findBestOption: function findBestOption(sessionId, brain) {
-	        return (0, _findbestturnend2.default)(sessionId, brain);
+	        return (0, _findbestturnend2.default)(sessions[sessionId], brain);
 	    },
 
 	    /*
@@ -10632,10 +10632,9 @@ module.exports =
 	/*
 	Returns array of best moves for finishing current turn according to named brain.
 	*/
-	function findBestTurnEnd(sessionId, brain) {
-	    var _sessions$sessionId = sessions[sessionId],
-	        game = _sessions$sessionId.game,
-	        turn = _sessions$sessionId.turn;
+	function findBestTurnEnd(_ref, brain) {
+	    var game = _ref.game,
+	        turn = _ref.turn;
 
 	    var func = game['brain_' + brain + '_' + turn.player],
 	        winners = [],

@@ -6,6 +6,7 @@ Meant to be consumed by an app.
 import omit from 'lodash/omit';
 
 import games from '../games/temp/ALLGAMES';
+import library from '../games/temp/gamelibrary';
 
 import decodeSessionSave from './save/decodesessionsave';
 import optionsInUI from './various/optionsinui';
@@ -74,6 +75,12 @@ const api = {
             throw "Oh noes, we had indexes still to go :("
         }
         return UI;
+    },
+    /*
+    Wooh! :D
+    */
+    gameLibrary(){
+        return library;
     }
 }
 

@@ -1,10 +1,5 @@
 import React from 'react';
 
-import makeAlgol from '../../../logic/dist/algol_async';
-
-// Path here will be relative to 'index.html'
-let algol = makeAlgol('../logic/dist/algol_worker.js', 1);
-
 import Units from '../parts/units'
 import Marks from '../parts/marks'
 import Commands from '../parts/commands'
@@ -20,7 +15,7 @@ let Battle = React.createClass({
   },
   doAction(action) {
     this.setState({UI: {...this.state.UI, waiting: action}}, ()=>{
-      algol.performAction(this.state.UI.sessionId,action).then(UI=>{
+      this.props.algol.performAction(this.state.UI.sessionId,action).then(UI=>{
         this.setState({UI:UI}, this.maybeAI);
         /*algol.debug(UI.sessionId).then(res => {
           this.setState({UI:UI}, this.maybeAI);
@@ -31,7 +26,7 @@ let Battle = React.createClass({
   },
   componentDidMount(){
     console.log("So, initiating algol async call...");
-    algol.startGame(this.props.gameId,this.props.participants[0],this.props.participants[1]).then(UI =>{
+    this.props.algol.startGame(this.props.gameId,this.props.participants[0],this.props.participants[1]).then(UI =>{
       this.setState({UI:UI}, this.maybeAI)
     });
   },
@@ -45,7 +40,7 @@ let Battle = React.createClass({
   },
   findBest(brain) {
     let s = this.state.session
-    let best = algol.findBestOption(s.UI.sessionId,brain)
+    let best = this.props.algol.findBestOption(s.UI.sessionId,brain)
     console.log("BEST OPTIONS",best)
   },
   maybeAI() {

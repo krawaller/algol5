@@ -4,6 +4,9 @@ import Shelf from './components/shelf'
 import Vestibule from './components/vestibule'
 import Battle from './components/battle'
 
+import makeAlgol from '../../logic/dist/algol_async';
+let algol = makeAlgol('../logic/dist/algol_worker.js', 1); // Path here will be relative to 'index.html'
+
 let App = React.createClass({
   getInitialState() {
     return {}
@@ -16,11 +19,11 @@ let App = React.createClass({
   },
   render() {
     if (!this.state.game){
-      return <Shelf chooseGame={this.chooseGame} />;
+      return <Shelf chooseGame={this.chooseGame} algol={algol} />;
     } else if (!this.state.participants) {
       return <Vestibule game={this.state.game} selectParticipants={this.selectParticipants}/>;
     } else {
-      return <Battle game={this.state.game} gameId={this.state.game.id} participants={this.state.participants} />;
+      return <Battle game={this.state.game} algol={algol} gameId={this.state.game.id} participants={this.state.participants} />;
     }
   }
 })

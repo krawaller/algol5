@@ -23,7 +23,7 @@ let App = React.createClass({
     } else if (!this.state.participants) {
       return <Vestibule game={this.state.game} selectParticipants={this.selectParticipants}/>;
     } else {
-      return <Battle game={this.state.game} algol={algol} gameId={this.state.game.id} participants={this.state.participants} />;
+      return <Battle game={this.state.game} algol={algol} participants={this.state.participants} />;
     }
   }
 })

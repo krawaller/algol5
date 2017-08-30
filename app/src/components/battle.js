@@ -10,7 +10,7 @@ let Battle = React.createClass({
   getInitialState() {
     return {
       UI: { waiting: 'loading', players: [], board: {} }
-      //UI: algol.startGameSession(this.props.gameId,this.props.participants[0],this.props.participants[1])
+      //UI: algol.startGameSession(this.props.game.id,this.props.participants[0],this.props.participants[1])
     }
   },
   doAction(action) {
@@ -26,7 +26,7 @@ let Battle = React.createClass({
   },
   componentDidMount(){
     console.log("So, initiating algol async call...");
-    this.props.algol.startGame(this.props.gameId,this.props.participants[0],this.props.participants[1]).then(UI =>{
+    this.props.algol.startGame(this.props.game.id,this.props.participants[0],this.props.participants[1]).then(UI =>{
       this.setState({UI:UI}, this.maybeAI)
     });
   },
@@ -55,7 +55,7 @@ let Battle = React.createClass({
     let UI = this.state.UI
     let plr = UI.players[UI.playing-1]
     this.setState({UI: {...this.state.UI, waiting: 'AI thinking'}}, ()=>{
-      algol.findBestOption(UI.sessionId, plr.name).then(options => {
+      this.props.algol.findBestOption(UI.sessionId, plr.name).then(options => {
         let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
         for(let i=0; i<moves.length; i++){
           setTimeout( this.doAction.bind(this,moves[i]), i*800 ) // TODO - make less naïve code here
@@ -79,9 +79,9 @@ let Battle = React.createClass({
       //console.log("Available now", available.sort());
     }
     let style = {
-      height:UI.board.height*50,
-      width:UI.board.width*50,
-      backgroundImage: 'url(../logic/dist/boards/'+UI.gameId+'.png)'
+      height:this.props.game.board.height*50,
+      width:this.props.game.board.width*50,
+      backgroundImage: 'url(../logic/dist/boards/'+this.props.game.id+'.png)'
     }
     return (
       <div>

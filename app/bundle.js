@@ -21491,7 +21491,7 @@
 	    } else if (!this.state.participants) {
 	      return _react2.default.createElement(_vestibule2.default, { game: this.state.game, selectParticipants: this.selectParticipants });
 	    } else {
-	      return _react2.default.createElement(_battle2.default, { game: this.state.game, algol: algol, gameId: this.state.game.id, participants: this.state.participants });
+	      return _react2.default.createElement(_battle2.default, { game: this.state.game, algol: algol, participants: this.state.participants });
 	    }
 	  }
 	});
@@ -21702,7 +21702,7 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      UI: { waiting: 'loading', players: [], board: {} }
-	      //UI: algol.startGameSession(this.props.gameId,this.props.participants[0],this.props.participants[1])
+	      //UI: algol.startGameSession(this.props.game.id,this.props.participants[0],this.props.participants[1])
 	    };
 	  },
 	  doAction: function doAction(action) {
@@ -21722,7 +21722,7 @@
 	    var _this2 = this;
 
 	    console.log("So, initiating algol async call...");
-	    this.props.algol.startGame(this.props.gameId, this.props.participants[0], this.props.participants[1]).then(function (UI) {
+	    this.props.algol.startGame(this.props.game.id, this.props.participants[0], this.props.participants[1]).then(function (UI) {
 	      _this2.setState({ UI: UI }, _this2.maybeAI);
 	    });
 	  },
@@ -21754,7 +21754,7 @@
 	    var UI = this.state.UI;
 	    var plr = UI.players[UI.playing - 1];
 	    this.setState({ UI: _extends({}, this.state.UI, { waiting: 'AI thinking' }) }, function () {
-	      algol.findBestOption(UI.sessionId, plr.name).then(function (options) {
+	      _this3.props.algol.findBestOption(UI.sessionId, plr.name).then(function (options) {
 	        var moves = options[(0, _random2.default)(0, options.length - 1)].concat('endturn'); // TODO - win here?
 	        for (var i = 0; i < moves.length; i++) {
 	          setTimeout(_this3.doAction.bind(_this3, moves[i]), i * 800); // TODO - make less naïve code here
@@ -21794,9 +21794,9 @@
 	      //console.log("Available now", available.sort());
 	    }
 	    var style = {
-	      height: UI.board.height * 50,
-	      width: UI.board.width * 50,
-	      backgroundImage: 'url(../logic/dist/boards/' + UI.gameId + '.png)'
+	      height: this.props.game.board.height * 50,
+	      width: this.props.game.board.width * 50,
+	      backgroundImage: 'url(../logic/dist/boards/' + this.props.game.id + '.png)'
 	    };
 	    return _react2.default.createElement(
 	      'div',

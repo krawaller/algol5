@@ -21754,8 +21754,8 @@
 	    var UI = this.state.UI;
 	    var plr = UI.players[UI.playing - 1];
 	    this.setState({ UI: _extends({}, this.state.UI, { waiting: 'AI thinking' }) }, function () {
-	      _this3.props.algol.findBestOption(UI.sessionId, plr.name).then(function (options) {
-	        var moves = options[(0, _random2.default)(0, options.length - 1)].concat('endturn'); // TODO - win here?
+	      _this3.props.algol.findBestOption(UI.sessionId, plr.name).then(function (moves) {
+	        //let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
 	        for (var i = 0; i < moves.length; i++) {
 	          setTimeout(_this3.doAction.bind(_this3, moves[i]), i * 800); // TODO - make less naïve code here
 	        }

@@ -10843,16 +10843,16 @@ module.exports =
 	        highscore = -1000000;
 	    if (turn.ends.win.length) {
 	        winners = turn.ends.win.map(function (winId) {
-	            return turn.steps[winId].path;
+	            return turn.steps[winId].path.concat('win');
 	        });
 	    } else {
 	        for (var stepid in turn.next) {
 	            var stepscore = func(turn.steps[stepid]);
 	            if (stepscore > highscore) {
-	                winners = [turn.steps[stepid].path];
+	                winners = [turn.steps[stepid].path.concat('endturn')];
 	                highscore = stepscore;
 	            } else if (stepscore === highscore) {
-	                winners.push(turn.steps[stepid].path);
+	                winners.push(turn.steps[stepid].path.concat('endturn'));
 	            }
 	        }
 	    }
@@ -10885,9 +10885,9 @@ module.exports =
 	  var turn = _ref.turn;
 
 	  var ends = (0, _endstepsforturnbycmnd2.default)(turn);
-	  var from = ends.win.length ? ends.win : ends.endturn.length ? ends.endturn : ends.draw.length ? ends.draw : ends.lose;
-	  var targetStepId = from[(0, _random2.default)(0, from.length - 1)];
-	  return turn.steps[targetStepId].path;
+	  var fromName = ends.win.length ? 'win' : ends.endturn.length ? 'endturn' : ends.draw.length ? 'draw' : 'lose';
+	  var targetStepId = ends[fromName][(0, _random2.default)(0, ends[fromName].length - 1)];
+	  return turn.steps[targetStepId].path.concat(fromName);
 	}
 
 /***/ }),

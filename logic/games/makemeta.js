@@ -10,7 +10,7 @@ let meta = fs.readdirSync(__dirname+"/defs").reduce((mem,gamename)=>{
   console.log("Meta for",gamename)
   let json = JSON.parse(fs.readFileSync(__dirname+"/defs/"+gamename));
   let id = gamename.replace('.json','')
-  mem[id] = {...json.meta, AI: Object.keys(json.AI && json.AI.brains || {}), board: json.board}
+  mem[id] = {...json.meta, AI: Object.keys(json.AI && json.AI.brains || {}).concat("Randy"), board: json.board}
   return mem;
 },{})
 

@@ -55,8 +55,8 @@ let Battle = React.createClass({
     let UI = this.state.UI
     let plr = UI.players[UI.playing-1]
     this.setState({UI: {...this.state.UI, waiting: 'AI thinking'}}, ()=>{
-      this.props.algol.findBestOption(UI.sessionId, plr.name).then(options => {
-        let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
+      this.props.algol.findBestOption(UI.sessionId, plr.name).then(moves => {
+        //let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
         for(let i=0; i<moves.length; i++){
           setTimeout( this.doAction.bind(this,moves[i]), i*800 ) // TODO - make less naïve code here
         }
@@ -74,10 +74,10 @@ let Battle = React.createClass({
         <div>{UI.instruction}</div>
         <Commands gameCommands={UI.commands} systemCommands={UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
       </div>)
-    if (!UI.waiting){
+    /*if (!UI.waiting){
       let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
-      //console.log("Available now", available.sort());
-    }
+      console.log("Available now", available.sort());
+    }*/
     let style = {
       height:this.props.game.board.height*50,
       width:this.props.game.board.width*50,
@@ -88,7 +88,7 @@ let Battle = React.createClass({
         <h4>Playing!</h4>
         <div className="board" style={style}>
           {UI.units && <Units unitdata={UI.units} board={UI.board} />}
-          {p && p.type !== "ai" && !UI.waiting && <Marks board={UI.board} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
+          {p && <Marks board={UI.board} ai={p.type === "ai"} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
         </div>
         {cmnd}
       </div>

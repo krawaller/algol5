@@ -10,11 +10,11 @@ let Marks = (props)=> {
     let tilewidthpc = 100/props.board.width
     let activeMarks = map(props.activeMarks, ({pos,coords}) => {
         let callback = ()=> props.selectMark(pos)
-        return <Square onClick={callback} key={pos} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc} also="mark activemark"/>
+        return <Square onClick={props.ai ? ()=>{} : callback } key={pos} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc} also="mark activemark"/>
     })
     let potentialMarks = map(props.potentialMarks,({pos,coords})=> {
         let callback = ()=> props.selectMark(pos)
-        return <Square onClick={callback} key={pos} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc} also="mark potentialmark"/>
+        return <Square onClick={props.ai ? ()=>{} : callback } key={pos} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc} also="mark potentialmark"/>
     })
     return <div>{activeMarks}{potentialMarks}</div>
 };

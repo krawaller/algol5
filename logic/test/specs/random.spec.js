@@ -7,7 +7,6 @@ state is logged to the console before the error is thrown.
 const NUMBEROFTURNS = 8;
 
 import algol from '../../dist/algol';
-import games from '../../dist/gamelibrary';
 import shuffle from 'lodash/shuffle';
 import omit from 'lodash/omit';
 import optionsInUI from '../../engine/various/optionsinui';
@@ -34,6 +33,7 @@ function makeRandomMovesInGame(gameId, n){
 }
 
 describe(`doing ${NUMBEROFTURNS} random moves`, ()=> {
+  let games = algol.gameLibrary();
   Object.keys(omit(games,['_test'])).forEach(gameKey => {
     let game = games[gameKey];
     describe(`in game ${game.id}`, ()=> {

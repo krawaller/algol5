@@ -21785,14 +21785,10 @@
 	      ),
 	      _react2.default.createElement(_commands2.default, { gameCommands: UI.commands, systemCommands: UI.system, performCommand: this.doAction, brains: this.props.game.AI, askBrain: this.askBrain })
 	    );
-	    if (!UI.waiting) {
-	      var available = UI.commands.concat(UI.potentialMarks.map(function (m) {
-	        return m.pos;
-	      })).concat(UI.system.filter(function (c) {
-	        return c.substr(0, 4) !== 'undo';
-	      }));
-	      //console.log("Available now", available.sort());
-	    }
+	    /*if (!UI.waiting){
+	      let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
+	      console.log("Available now", available.sort());
+	    }*/
 	    var style = {
 	      height: this.props.game.board.height * 50,
 	      width: this.props.game.board.width * 50,
@@ -21810,7 +21806,7 @@
 	        'div',
 	        { className: 'board', style: style },
 	        UI.units && _react2.default.createElement(_units2.default, { unitdata: UI.units, board: UI.board }),
-	        p && p.type !== "ai" && !UI.waiting && _react2.default.createElement(_marks2.default, { board: UI.board, activeMarks: UI.activeMarks, potentialMarks: UI.potentialMarks, selectMark: this.doAction })
+	        p && _react2.default.createElement(_marks2.default, { board: UI.board, ai: p.type === "ai", activeMarks: UI.activeMarks, potentialMarks: UI.potentialMarks, selectMark: this.doAction })
 	      ),
 	      cmnd
 	    );
@@ -26565,7 +26561,7 @@
 	        var callback = function callback() {
 	            return props.selectMark(pos);
 	        };
-	        return _react2.default.createElement(_square2.default, { onClick: callback, key: pos, x: coords.x, y: coords.y, height: tileheightpc, width: tilewidthpc, also: 'mark activemark' });
+	        return _react2.default.createElement(_square2.default, { onClick: props.ai ? function () {} : callback, key: pos, x: coords.x, y: coords.y, height: tileheightpc, width: tilewidthpc, also: 'mark activemark' });
 	    });
 	    var potentialMarks = (0, _map2.default)(props.potentialMarks, function (_ref2) {
 	        var pos = _ref2.pos;
@@ -26574,7 +26570,7 @@
 	        var callback = function callback() {
 	            return props.selectMark(pos);
 	        };
-	        return _react2.default.createElement(_square2.default, { onClick: callback, key: pos, x: coords.x, y: coords.y, height: tileheightpc, width: tilewidthpc, also: 'mark potentialmark' });
+	        return _react2.default.createElement(_square2.default, { onClick: props.ai ? function () {} : callback, key: pos, x: coords.x, y: coords.y, height: tileheightpc, width: tilewidthpc, also: 'mark potentialmark' });
 	    });
 	    return _react2.default.createElement(
 	        'div',

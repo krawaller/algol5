@@ -4,6 +4,7 @@ Meant to be consumed by an app.
 */
 
 import omit from 'lodash/omit';
+import random from 'lodash/random';
 
 import games from '../games/temp/ALLGAMES';
 import library from '../games/temp/gamelibrary';
@@ -13,9 +14,12 @@ import optionsInUI from './various/optionsinui';
 import newSession from './session/newsession';
 import getSessionUI from './session/getsessionui';
 import makeSessionAction from './session/makesessionaction';
-import findBestTurnEnd from './ai/findbestturnend';
+import findBestTurnEndPaths from './ai/findbestturnendpaths';
+import getRandomTurnEndPath from './ai/getrandomturnendpath';
 
 let sessions = {}
+
+// TODO - rename startGame to startBattle
 
 const api = {
     /*
@@ -38,9 +42,15 @@ const api = {
     },
     /*
     Returns array of best moves for finishing current turn according to named brain.
+    TODO - randomize all using battleId as a seed
     */
     findBestOption(sessionId,brain){
-        return findBestTurnEnd(sessions[sessionId], brain);
+        switch(brain){
+            case "Randy": return getRandomTurnEndPath(sessions[sessionId]);
+            default:
+                let paths = findBestTurnEndPaths(sessions[sessionId], brain);
+                return paths[random(0,paths.length-1)];
+        }
     },
     /*
     Take a wild guess! :D

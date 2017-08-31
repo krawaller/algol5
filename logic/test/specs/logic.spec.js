@@ -3,8 +3,6 @@ This test executes the "unit tests" in the test game "_test.json".
 */
 
 import algol from '../../dist/algol';
-import games from '../../dist/gamelibrary';
-
 import optionsInUI from '../../engine/various/optionsinui';
 
 describe("the game logic", () => {

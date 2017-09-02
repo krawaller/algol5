@@ -3,11 +3,10 @@ The public methods of the Algol system.
 Meant to be consumed by an app.
 */
 
+import {games,meta} from '../gamesproxy';
+
 import omit from 'lodash/omit';
 import random from 'lodash/random';
-
-import games from '../games/temp/ALLGAMES';
-import library from '../games/temp/gamelibrary';
 
 import decodeSessionSave from './save/decodesessionsave';
 import optionsInUI from './various/optionsinui';
@@ -90,7 +89,7 @@ const api = {
     Wooh! :D
     */
     gameLibrary(){
-        return library;
+        return meta;
     }
 }
 

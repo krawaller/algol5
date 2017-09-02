@@ -81,7 +81,7 @@ let Battle = React.createClass({
     let style = {
       height:this.props.game.board.height*50,
       width:this.props.game.board.width*50,
-      backgroundImage: 'url(../logic/dist/boards/'+this.props.game.id+'.png)'
+      backgroundImage: 'url(../graphics/dist/'+this.props.game.id+'.png)' // TODO - provide this from root
     }
     return (
       <div>

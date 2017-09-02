@@ -1,5 +1,5 @@
 module.exports = {  
-    entry: './engine/index.js',
+    entry: './src/index.js',
     output: {
         filename: './dist/algol.js',
         library: 'algol',

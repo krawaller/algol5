@@ -8,16 +8,16 @@ import mapValues from 'lodash/mapValues'
 import values from 'lodash/values'
 
 import isEndGameCommand from '../various/isgameendcmnd';
-import lib from '../../games/logic';
+import { pos2coords } from '../../gamesproxy';
 
 export default function getSessionUI(session, step){
     let {game,turn,undo,markTimeStamps} = session;
     let UI = {
-        activeMarks: values(step.MARKS).map(pos=>({pos, coords: lib.pos2coords(pos)})),
+        activeMarks: values(step.MARKS).map(pos=>({pos, coords: pos2coords(pos)})),
         units: mapValues(step.UNITDATA,u=> Object.assign({},u,{
             group: game.graphics.icons[u.group],
-            coords: lib.pos2coords(u.pos),
-            spawnCoords: u.from ? lib.pos2coords(u.from) : undefined
+            coords: pos2coords(u.pos),
+            spawnCoords: u.from ? pos2coords(u.from) : undefined
         })),
         players: session.players,
         playing: turn.player,
@@ -39,7 +39,7 @@ export default function getSessionUI(session, step){
                 mem.commands.push(action)
             } else {
                 mem.potentialMarks.push({
-                    coords: lib.pos2coords(action),
+                    coords: pos2coords(action),
                     pos: action
                 })
             }

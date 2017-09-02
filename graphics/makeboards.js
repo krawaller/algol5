@@ -3,21 +3,37 @@ Build script that will loop over all game definitions in the `defs` folder,
 and create individual background images for that game into `/boards`.
 */
 
+var META_PATH = __dirname + '/../library/dist/meta';
+var BOARD_PARTS_PATH = __dirname + '/boardparts';
+var OUTPUT_PATH = __dirname + '/dist';
+
 var fs = require('fs')
   , Canvas = require('canvas')
   , Image = Canvas.Image;
 
-import lib from './logic'
+// TODO - import? 
+var colnametonumber = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split("").reduce(function(mem,char,n) {
+	mem[char] = n+1;
+	return mem;
+},{});
+const colnumbertoname = Object.keys(colnametonumber).reduce(function(mem,key){
+  var val = colnametonumber[key];
+  mem[val] = key;
+  return mem;
+},{});
+var coords2pos = function(coords) { return colnumbertoname[coords.x]+coords.y}
+
+var games = require(META_PATH);
 
 var pics = {
-  castle: fs.readFileSync(__dirname+'/boardparts/castle.png'),
-  corner: fs.readFileSync(__dirname+'/boardparts/corner.png'),
-  empty: fs.readFileSync(__dirname+'/boardparts/empty.png'),
-  grass: fs.readFileSync(__dirname+'/boardparts/grass.png'),
-  player1base: fs.readFileSync(__dirname+'/boardparts/player1base.png'),
-  player2base: fs.readFileSync(__dirname+'/boardparts/player2base.png'),
-  side: fs.readFileSync(__dirname+'/boardparts/side.png'),
-  water: fs.readFileSync(__dirname+'/boardparts/water.png')
+  castle: fs.readFileSync(BOARD_PARTS_PATH + '/castle.png'),
+  corner: fs.readFileSync(BOARD_PARTS_PATH + '/corner.png'),
+  empty: fs.readFileSync(BOARD_PARTS_PATH + '/empty.png'),
+  grass: fs.readFileSync(BOARD_PARTS_PATH + '/grass.png'),
+  player1base: fs.readFileSync(BOARD_PARTS_PATH + '/player1base.png'),
+  player2base: fs.readFileSync(BOARD_PARTS_PATH + '/player2base.png'),
+  side: fs.readFileSync(BOARD_PARTS_PATH + '/side.png'),
+  water: fs.readFileSync(BOARD_PARTS_PATH + '/water.png')
 }
 
 const TILE = 200, EDGE = 0
@@ -25,7 +41,7 @@ const TILE = 200, EDGE = 0
 function draw(game,to){
   var board = game.board
     , terraindef = board.terrain || {}
-    , layers = lib.terrainLayers({rules:game},true)
+    , layers = game.board.terrainLayers  //lib.terrainLayers({rules:game},true)
     , layernames = Object.keys(terraindef)
     , tilemap = game.graphics.tiles
     , tiletypes = Object.keys(game.graphics.tiles||{})
@@ -35,7 +51,7 @@ function draw(game,to){
     , ctx = canvas.getContext('2d')
   for(var row = 1; row <= board.height; row++){
     for (var col=1; col <= board.width; col++){
-      var pos = lib.coords2pos({x:col,y:row})
+      var pos = coords2pos({x:col,y:row})
       var dark = !((col+(row%2))%2)
       var sqr = tiletypes.reduce(function(mem,name){
         return layers[name][pos] ? tilemap[name]==='playercolour' ? {1:'player1base',2:'player2base'}[layers[name][pos].owner] : tilemap[name] : mem;
@@ -61,7 +77,7 @@ function draw(game,to){
   stream.on('end', function(){ console.log('saved',to); });
 }
 
-fs.readdirSync(__dirname+'/defs').filter(function(file){return file !== '.DS_Store'}).forEach(function(file){
-  var rules = require(__dirname+'/defs/'+file)
-  draw(rules,__dirname+'/../dist/boards/'+file.replace('.json','.png'))
-})
+Object.keys(games).forEach(function(game){
+  var rules = games[game];
+  draw(rules,OUTPUT_PATH + '/'+game+'.png');
+});

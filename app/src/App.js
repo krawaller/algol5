@@ -4,8 +4,8 @@ import Shelf from './components/shelf'
 import Vestibule from './components/vestibule'
 import Battle from './components/battle'
 
-import makeAlgol from '../../logic/dist/algol_async';
-let algol = makeAlgol('../logic/dist/algol_worker.js', 1); // Path here will be relative to 'index.html'
+import makeAlgol from '../../engine/dist/algol_async';
+let algol = makeAlgol('../engine/dist/algol_worker.js', 1); // Path here will be relative to 'index.html'
 
 let App = React.createClass({
   getInitialState() {

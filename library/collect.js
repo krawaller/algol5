@@ -7,8 +7,8 @@ which is imported from within the engine files.
 
 import fs from 'fs'
 
-let games = fs.readdirSync(__dirname+"/temp/indiv/").map(gamename=>{
-  let code = fs.readFileSync(__dirname+"/temp/indiv/"+gamename)
+let games = fs.readdirSync(__dirname+"/temp/").filter(f => f != '.DS_Store').map(gamename=>{
+  let code = fs.readFileSync(__dirname+"/temp/"+gamename)
   console.log("Collecting",gamename)
   return gamename.replace('.js','')+': '+code
 })
@@ -19,4 +19,4 @@ let file = `
   };
 `
 
-fs.writeFileSync(__dirname+'/temp/ALLGAMES.js',file);
+fs.writeFileSync(__dirname+'/dist/library.js',file);

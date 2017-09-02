@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "node makeboards"
+  },
+  "dependencies": {
+    "canvas": "^1.6.6"
+  }
+}

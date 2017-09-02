@@ -5,7 +5,7 @@ Pure.
 */
 
 import hydrateTurn from '../hydration/hydrateturn';
-import games from '../../games/temp/ALLGAMES';
+import {games} from '../../gamesproxy';
 import {generateBattleId} from '../id/battleid';
 
 let nextSessionId = 1;

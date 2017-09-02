@@ -21472,7 +21472,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var algol = (0, _algol_async2.default)('../logic/dist/algol_worker.js', 1); // Path here will be relative to 'index.html'
+	var algol = (0, _algol_async2.default)('../engine/dist/algol_worker.js', 1); // Path here will be relative to 'index.html'
 
 	var App = _react2.default.createClass({
 	  displayName: 'App',
@@ -21792,7 +21792,7 @@
 	    var style = {
 	      height: this.props.game.board.height * 50,
 	      width: this.props.game.board.width * 50,
-	      backgroundImage: 'url(../logic/dist/boards/' + this.props.game.id + '.png)'
+	      backgroundImage: 'url(../graphics/dist/' + this.props.game.id + '.png)' // TODO - provide this from root
 	    };
 	    return _react2.default.createElement(
 	      'div',

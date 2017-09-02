@@ -13,21 +13,14 @@
     "webpack": "^1.12.11"
   },
   "scripts": {
-    "testlogicdetails": "babel-node ./games/logic/test/run.js",
-    "generate": "babel-node ./games/generate.js",
-    "collect": "babel-node ./games/collect.js",
-    "makeboards": "babel-node ./games/makeboards.js",
-    "makemeta": "babel-node ./games/makemeta.js",
-    "games": "npm run generate && npm run collect && npm run makeboards && npm run makemeta",
     "bundle": "webpack",
     "bundleasync": "cd dist; workerwrap algol.js",
-    "build": "npm run games && npm run bundle && npm run bundleasync",
+    "build": "npm run bundle && npm run bundleasync",
     "test": "cd test; babel-node run.js",
     "play": "babel-node play"
   },
   "dependencies": {
     "array-compress": "^1.0.12",
-    "canvas": "1.6.5",
     "classical-cipher": "0.0.3",
     "js-string-compression": "^1.0.1",
     "lodash": "4.17.4",

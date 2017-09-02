@@ -1,0 +1,10 @@
+{
+  "presets": [
+    "babel-preset-es2015",
+    "babel-preset-es2016",
+    "babel-preset-stage-0"
+  ],
+  "ignore": [
+    "node_modules"
+  ]
+}

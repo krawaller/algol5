@@ -21710,11 +21710,11 @@
 
 	    this.setState({ UI: _extends({}, this.state.UI, { waiting: action }) }, function () {
 	      _this.props.algol.performAction(_this.state.UI.sessionId, action).then(function (UI) {
-	        _this.setState({ UI: UI }, _this.maybeAI);
-	        /*algol.debug(UI.sessionId).then(res => {
-	          this.setState({UI:UI}, this.maybeAI);
-	          console.log("Performed",action," => ",{UI,debug:res});
-	        });*/
+	        //this.setState({UI:UI}, this.maybeAI);
+	        _this.props.algol.debug(UI.sessionId).then(function (res) {
+	          _this.setState({ UI: UI }, _this.maybeAI);
+	          console.log("Performed", action, " => ", { UI: UI, debug: res });
+	        });
 	      });
 	    });
 	  },
@@ -21755,7 +21755,6 @@
 	    var plr = UI.players[UI.playing - 1];
 	    this.setState({ UI: _extends({}, this.state.UI, { waiting: 'AI thinking' }) }, function () {
 	      _this3.props.algol.findBestOption(UI.sessionId, plr.name).then(function (moves) {
-	        //let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
 	        for (var i = 0; i < moves.length; i++) {
 	          setTimeout(_this3.doAction.bind(_this3, moves[i]), i * 800); // TODO - make less naïve code here
 	        }

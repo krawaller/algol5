@@ -40,18 +40,19 @@
 
 .fadein.pieces-enter {
   opacity: 0.01;
+  transition: opacity .5s ease-in;
 }
 
 .fadein.pieces-enter.pieces-enter-active {
   opacity: 1;
-  transition: opacity .5s ease-in;
 }
 
 .pieces-leave {
   opacity: 1;
+  transition: opacity .5s ease-in, transform 0.5s ease-in;
 }
 
 .pieces-leave.pieces-leave-active {
   opacity: 0.01;
-  transition: opacity .5s ease-in;
+  transform: scale(2, 2)
 }

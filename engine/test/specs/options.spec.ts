@@ -211,17 +211,15 @@ const scripts: Test[] = [
   ]],
 ];
 
-
-  scripts.forEach(([name, gameId,lines], n) => {
-    test("Following scripted moves for "+name, t => {
-      t.plan(lines.length);
-      let UI = algol.startGame(gameId, 'plr1', 'plr2');
-      lines.forEach(([cmnds, expectedUI], i) => {
-        cmnds.forEach(cmnd => {
-          UI = algol.performAction(UI.sessionId, cmnd);
-        });
-        t.deepEqual(optionsInUI(UI), expectedUI, "worked for line" + (i));
+scripts.forEach(([name, gameId,lines], n) => {
+  test("Following scripted moves for "+name, t => {
+    t.plan(lines.length);
+    let UI = algol.startGame(gameId, 'plr1', 'plr2');
+    lines.forEach(([cmnds, expectedUI], i) => {
+      cmnds.forEach(cmnd => {
+        UI = algol.performAction(UI.sessionId, cmnd);
       });
+      t.deepEqual(optionsInUI(UI), expectedUI, "worked for line" + (i));
     });
   });
-
+});

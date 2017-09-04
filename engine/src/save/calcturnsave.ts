@@ -1,4 +1,6 @@
-export default function calcTurnSave(turn,step,finishCmnd){
+import { Turn, Step } from '../types';
+
+export default function calcTurnSave(turn: Turn, step: Step, finishCmnd): number[]{
   let id = 'root';
   let remaining = step.path.concat(finishCmnd);
   let save = [];
@@ -8,7 +10,7 @@ export default function calcTurnSave(turn,step,finishCmnd){
     if (available.length > 1){
       let index = available.indexOf(cmnd);
       if (index === -1){
-        throw "Didnt find action!" // TODO - make it work for win/lose/draw
+        throw "Didnt find action!";
       }
       save.push(index);
     }

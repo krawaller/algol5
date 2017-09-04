@@ -20,6 +20,6 @@ function compressString(str){
 /*
 Should return an encoded sessionSave
 */
-export default function encodeSessionSave({gameId, turnNumber, moveIndexes, battleId, ended}: SaveData){
+export default function encodeSessionSave({gameId, turnNumber, moveIndexes, battleId, ended}: SaveData): string {
   return encodeGameId(gameId, battleId[0]) + battleId + compressString( compress([turnNumber*(ended?-1:1), ...moveIndexes]) );
 }

@@ -17,7 +17,7 @@ let Battle = React.createClass({
     this.setState({UI: {...this.state.UI, waiting: action}}, ()=>{
       this.props.algol.performAction(this.state.UI.sessionId,action).then(UI=>{
         this.setState({UI:UI}, this.maybeAI);
-        /*algol.debug(UI.sessionId).then(res => {
+        /*this.props.algol.debug(UI.sessionId).then(res => {
           this.setState({UI:UI}, this.maybeAI);
           console.log("Performed",action," => ",{UI,debug:res});
         });*/
@@ -56,7 +56,6 @@ let Battle = React.createClass({
     let plr = UI.players[UI.playing-1]
     this.setState({UI: {...this.state.UI, waiting: 'AI thinking'}}, ()=>{
       this.props.algol.findBestOption(UI.sessionId, plr.name).then(moves => {
-        //let moves = options[ random(0,options.length-1) ].concat('endturn') // TODO - win here?
         for(let i=0; i<moves.length; i++){
           setTimeout( this.doAction.bind(this,moves[i]), i*800 ) // TODO - make less naïve code here
         }

@@ -22,7 +22,7 @@ function decodeString(str){
 /*
 Should return {gameId, turnNumber, moveIndexes};
 */
-export default function decodeSessionSave(garble): SaveData {
+export default function decodeSessionSave(garble: string): SaveData {
   const garbledGameId = garble.substr(0,lengthOfEncodedGameId);
   const battleId = garble.substr(lengthOfEncodedGameId,lengthOfEncodedBattleId);
   const [turnNumber, ...moveIndexes] = inflate( decodeString( garble.substr(lengthOfEncodedGameId + lengthOfEncodedBattleId) ) );

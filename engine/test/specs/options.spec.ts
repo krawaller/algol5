@@ -3,11 +3,14 @@ This test executes scipted steps, for each making sure that the available option
 in the resulting UI is exactly what is expected (excluding undos and removeMarks).
 */
 
-import algol from '../../dist/algol';
+import algol from '../../src';
+import optionsInUI from '../../src/various/optionsinui';
+import * as test from "tape";
 
-import optionsInUI from '../../engine/various/optionsinui';
+type Line = [string[], string[]];
+type Test = [string, string, Line[]];
 
-const scripts = [
+const scripts: Test[] = [
   ["Basic Amazon script", "amazon", [
     [["d10"],["a10", "b10", "b8", "c10", "c9", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "e10", "e9", "f10", "f8", "g7", "h6", "i5"]],
     [["d4","move"],["a1", "b2", "b4", "b6", "c3", "c4", "c5", "d10", "d2", "d3", "d5", "d6", "d7", "d8", "d9", "e3", "e4", "e5", "f2", "f4", "f6", "g4", "g7", "h4", "h8", "i4", "i9", "j10"]],
@@ -208,14 +211,17 @@ const scripts = [
   ]],
 ];
 
-describe('Following scripted moves', ()=> {
-  scripts.forEach(([name, gameId,lines], n) => it(`works for ${name}`, () => {
-    let UI = algol.startGame(gameId, 'plr1', 'plr2');
-    lines.forEach(([cmnds, expectedUI]) => {
-      cmnds.forEach(cmnd => {
-        UI = algol.performAction(UI.sessionId, cmnd);
+
+  scripts.forEach(([name, gameId,lines], n) => {
+    test("Following scripted moves for "+name, t => {
+      t.plan(lines.length);
+      let UI = algol.startGame(gameId, 'plr1', 'plr2');
+      lines.forEach(([cmnds, expectedUI], i) => {
+        cmnds.forEach(cmnd => {
+          UI = algol.performAction(UI.sessionId, cmnd);
+        });
+        t.deepEqual(optionsInUI(UI), expectedUI, "worked for line" + (i));
       });
-      expect(optionsInUI(UI)).toEqual(expectedUI);
     });
-  }));
-});
+  });
+

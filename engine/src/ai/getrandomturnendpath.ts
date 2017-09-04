@@ -1,4 +1,4 @@
-import random from 'lodash/random';
+import * as random from 'lodash/random';
 
 import endStepsForTurnByCommand from '../various/endstepsforturnbycmnd';
 

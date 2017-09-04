@@ -1,7 +1,9 @@
 import { compress } from 'array-compress';
 import { encodeGameId } from '../id/gameid';
 
-import LZ from 'lz-string';
+import * as LZ from 'lz-string';
+
+import { SaveData } from '../types';
 
 //import cc from 'classical-cipher';
 
@@ -18,6 +20,6 @@ function compressString(str){
 /*
 Should return an encoded sessionSave
 */
-export default function encodeSessionSave({gameId, turnNumber, moveIndexes, battleId, ended}){
+export default function encodeSessionSave({gameId, turnNumber, moveIndexes, battleId, ended}: SaveData){
   return encodeGameId(gameId, battleId[0]) + battleId + compressString( compress([turnNumber*(ended?-1:1), ...moveIndexes]) );
 }

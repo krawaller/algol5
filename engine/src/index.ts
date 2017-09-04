@@ -25,7 +25,7 @@ const api = {
     Start a new session for a given game with the given players
     BattleId is optional, otherwise one will be randomised
     */
-    startGame(gameId,plr1,plr2,battleid){
+    startGame(gameId,plr1,plr2,battleid?: string){
         let session = newSession(gameId,plr1,plr2,battleid);
         sessions[session.id] = session;
         return getSessionUI(session, session.step);

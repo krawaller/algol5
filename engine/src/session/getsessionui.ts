@@ -4,15 +4,17 @@ Returns an object used to draw board in an app.
 Pure.
 */
 
-import mapValues from 'lodash/mapValues'
-import values from 'lodash/values'
+import * as mapValues from 'lodash/mapValues';
+import * as values from 'lodash/values';
 
 import isEndGameCommand from '../various/isgameendcmnd';
 import { pos2coords } from '../../gamesproxy';
 
-export default function getSessionUI(session, step){
+import {UI} from '../types';
+
+export default function getSessionUI(session, step): UI {
     let {game,turn,undo,markTimeStamps} = session;
-    let UI = {
+    let UI: UI = {
         activeMarks: values(step.MARKS).map(pos=>({pos, coords: pos2coords(pos)})),
         units: mapValues(step.UNITDATA,u=> Object.assign({},u,{
             group: game.graphics.icons[u.group],

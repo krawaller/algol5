@@ -1,9 +1,11 @@
 import { inflate } from 'array-compress';
 
-import LZ from 'lz-string';
+import * as LZ from 'lz-string';
 
 import {lengthOfEncodedGameId, decodeGameId } from '../id/gameid';
 import {lengthOfEncodedBattleId} from '../id/battleid';
+
+import { SaveData } from '../types';
 
 //import stringcompr from 'js-string-compression';
 //let hm = new stringcompr.Hauffman();
@@ -20,7 +22,7 @@ function decodeString(str){
 /*
 Should return {gameId, turnNumber, moveIndexes};
 */
-export default function decodeSessionSave(garble){
+export default function decodeSessionSave(garble): SaveData {
   const garbledGameId = garble.substr(0,lengthOfEncodedGameId);
   const battleId = garble.substr(lengthOfEncodedGameId,lengthOfEncodedBattleId);
   const [turnNumber, ...moveIndexes] = inflate( decodeString( garble.substr(lengthOfEncodedGameId + lengthOfEncodedBattleId) ) );

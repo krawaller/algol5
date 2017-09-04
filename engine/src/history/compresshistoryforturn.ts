@@ -11,7 +11,7 @@ export default function compressedHistoryForTurn(session,turn){
         mem.id += '-' + action
         if (session.game.commands[action]){
             let UI = getSessionUI(session, turn.steps[mem.id]);
-            UI.potentialMarks = {};
+            UI.potentialMarks = [];
             UI.activeMarks = mem.marks.map(pos=>({pos, coords: pos2coords(pos)}));
             UI.description = action + '(' + mem.marks.join(',') + ')';
             mem.UIs.push(UI);

@@ -41,8 +41,7 @@
   "commands": {
     "move": {
       "applyEffects": [
-        ["killat","selectmovetarget"],
-        ["moveat","selectunit","selectmovetarget"]
+        ["stompat","selectunit","selectmovetarget"]
       ],
       "link": "endturn"
     }

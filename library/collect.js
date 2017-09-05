@@ -13,10 +13,14 @@ let games = fs.readdirSync(__dirname+"/temp/").filter(f => f != '.DS_Store').map
   return gamename.replace('.js','')+': '+code
 })
 
+let envelope = fs.readFileSync(__dirname + "/logic/envelope.js") + '';
+
 let file = `
-  module.exports = {
-    ${games.join(', ')}
-  };
+${envelope}
+
+module.exports = {
+  ${games.join(', ')}
+};
 `
 
 fs.writeFileSync(__dirname+'/dist/library.js',file);

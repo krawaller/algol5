@@ -58,48 +58,17 @@ export default C => Object.assign(C,{
         return pure ? ret : JSON.stringify(ret)
     },
 
-    /*
-    Can not quite delete this yet, used in core and meta
-    */
-    terrainLayers: (O,pure)=> {
-        if (!Object.keys(C.getTerrain(O)).length){
-            return pure ? {} : JSON.stringify({})
-        }
-        let terrain = reduce(C.getTerrain(O),(mem,def,name)=> {
-            mem[name] = {};
-            if (isArray(def)){ // no ownership
-                flatten(def.map(C.convertToEntities)).forEach(e=>{
-                    mem[name][e.pos] = e;
-                })
-            } else { // per-player object
-                for(var owner in def){
-                    owner = parseInt(owner)
-                    flatten(def[owner].map(C.convertToEntities)).forEach(e=>{
-                        e.owner = owner
-                        mem[name][e.pos] = e
-                        let prefix = owner === 0 ? 'neutral' : owner === O.player ? 'my' : 'opp'
-                        mem[prefix+name] = mem[prefix+name] || {}
-                        mem[prefix+name][e.pos] = e
-                    })
+    isTerrainLayerRef: (O, name)=> {
+        let names = Object.keys(C.getTerrain(O));
+        let variants = names.reduce((mem, n) => {
+            ['my','opp','neutral','no'].forEach(prefix => {
+                if (C.contains(O.rules,prefix+n)){
+                    mem.push(prefix+n);
                 }
-            }
+            });
             return mem;
-        },{})
-
-        let ret = reduce(terrain,(mem,t,name)=> {
-            let noname = 'no'+name
-            if (C.contains(O.rules,noname)){
-                mem['no'+name] = {}
-                C.boardPositions(O.rules.board).forEach( pos => {
-                    if (!t[pos]){
-                        mem['no'+name][pos] = {pos:pos}
-                    }
-                })
-            }
-            return mem
-        },terrain)
-
-        return pure ? ret : JSON.stringify(ret)
+        }, []);
+        return names.concat(variants).indexOf(name) !== -1;
     }
 })
 

@@ -133,7 +133,7 @@ export default T => {
             }
             var bag = {board:1,light:1,dark:1}[layername] ? "BOARD"
                 : T.blankUnitLayers(O,true)[layername] ? "UNITLAYERS"
-                : T.terrainLayers(O,true)[layername] ? "TERRAIN"
+                : T.isTerrainLayerRef(O,layername) ? "TERRAIN"
                 : "ARTIFACTS"
             return layername[0].match(/[a-z]/) ? bag+"."+layername : bag+"["+layername+"]"
             //return bag+"."+layername; //"("+bag+"."+layername+"||{})";

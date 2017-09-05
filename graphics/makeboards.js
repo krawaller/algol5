@@ -41,7 +41,7 @@ const TILE = 200, EDGE = 0
 function draw(game,to){
   var board = game.board
     , terraindef = board.terrain || {}
-    , layers = game.board.terrainLayers  //lib.terrainLayers({rules:game},true)
+    , layers = game.board.terrainLayers
     , layernames = Object.keys(terraindef)
     , tilemap = game.graphics.tiles
     , tiletypes = Object.keys(game.graphics.tiles||{})

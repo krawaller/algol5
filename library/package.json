@@ -17,6 +17,7 @@
     "build": "npm run generate && npm run collect && npm run makemeta"
   },
   "dependencies": {
+    "eval": "^0.1.2",
     "lodash": "4.17.4"
   }
 }

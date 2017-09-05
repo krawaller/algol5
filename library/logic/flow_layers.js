@@ -20,15 +20,6 @@ export default C => Object.assign(C,{
     isTerrainNeutral: O=> !Object.keys(C.getTerrain(O))
         .filter(t=> t[1] || t[2]).length,
 
-    /*
-    Calculates the connections object
-    */
-    boardConnections: (O)=> JSON.stringify(reduce(
-        C.boardPositions(O.rules.board),
-        (ret,pos)=> ({...ret, [pos]:C.posConnections(pos,O.rules.board)}),
-        {faux:{}}
-    )),
-
     // assumes UNITDATA, ownernames
     // mutates UNITLAYERS
     calculateUnitLayers: (O)=> `
@@ -58,28 +49,6 @@ export default C => Object.assign(C,{
     },
 
     /*
-    the initial unit data blob
-    */
-    deduceInitialUnitData: (O)=> {
-        var id = 1;
-        return JSON.stringify(reduce(O.rules.setup,(mem,defsbyplr,group)=> {
-            return reduce(defsbyplr,(mem,entitydefs,plr)=> {
-                return reduce( entitydefs, (mem,entitydef)=> {
-                    C.convertToEntities(entitydef).forEach(e=> {
-                        let newid = 'unit'+(id++)
-                        mem[newid] = Object.assign(e,{
-                            id: newid,
-                            group: group,
-                            owner: parseInt(plr)
-                        })
-                    })
-                    return mem
-                },mem)
-            },mem)
-        },{}))
-    },
-
-    /*
     Calculates all possible artifact layers used in the game
     */
     blankArtifactLayers: (O,pure)=> {
@@ -90,19 +59,7 @@ export default C => Object.assign(C,{
     },
 
     /*
-    Calculates the three BOARD layers (board,light,dark) and returns them.
-    These are the same for every player.
-    */
-    boardLayers: (O)=> JSON.stringify(reduce(C.boardPositions(O.rules.board),(mem,pos)=> {
-        let {x,y} = C.pos2coords(pos),
-            colour = ["dark","light"][(x+(y%2))%2]
-        mem.board[pos] = mem[colour][pos] = {colour,pos,x,y}
-        return mem
-    },{board:{},light:{},dark:{}})),
-
-    /*
-    Calculates all terrain layers and returns them. 
-    This should be done per player if any terrain has owner.
+    Can not quite delete this yet, used in core and meta
     */
     terrainLayers: (O,pure)=> {
         if (!Object.keys(C.getTerrain(O)).length){

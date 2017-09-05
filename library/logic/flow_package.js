@@ -43,10 +43,11 @@ export default C => Object.assign(C,{
 
     // TODO - metadata
     addCommonVariables: O=> `
-        var connections = ${C.boardConnections(O)};
-        var BOARD = ${C.boardLayers(O)};
+        var boardDef = ${JSON.stringify(O.rules.board)};
+        var connections = boardConnections(boardDef);
+        var BOARD = boardLayers(boardDef);
         var relativedirs = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8]; 
-        ${C.isTerrainNeutral(O) ? 'var TERRAIN='+C.terrainLayers(O)+'; ' : ''}
+        ${C.isTerrainNeutral(O) ? 'var TERRAIN = terrainLayers(boardDef); ' : ''}
     `,
 
     addPlayerClosure: (O)=> `
@@ -57,7 +58,7 @@ export default C => Object.assign(C,{
     `,
 
     addPlayerVariables: O=> `
-        ${C.isTerrainNeutral(O) ? '' : 'var TERRAIN='+C.terrainLayers(O)+';' }
+        ${C.isTerrainNeutral(O) ? '' : 'var TERRAIN = terrainLayers(boardDef);' }
         var ownernames = ${O.player === 2 ? '["neutral","opp","my"]' : '["neutral","my","opp"]'};
         var player = ${O.player};
         var otherplayer = ${O.player === 1 ? 2 : 1};

@@ -14,7 +14,7 @@ var colnumber2name = Object.keys(colname2number).reduce(function(mem,key){
 
 function pos2coords(pos) {
   return {
-		x: colnametonumber[pos[0]],
+		x: colname2number[pos[0]],
 		y: parseInt(pos.substr(1))
 	}
 }
@@ -27,7 +27,7 @@ function boardPositions(board){
   var ret = [];
   for(var y = 1; y<= board.height; y++){
     for(var x = 1; x <= board.width; x++){
-      ret.concat(coords2pos({x: x, y: y}));
+      ret.push(coords2pos({x: x, y: y}));
     }
   }
   return ret.sort();
@@ -67,6 +67,7 @@ Calculates the connections object
 function boardConnections(board){
   return boardPositions(board).reduce(function(mem, pos){
     mem[pos] = posConnections(pos, board);
+    return mem;
   },{faux:{}});
 }
 
@@ -77,7 +78,8 @@ function boardLayers(board){
   return boardPositions(board).reduce( function(mem, pos){
     var coords = pos2coords(pos);
     var colour = ["dark","light"][(coords.x+(coords.y%2))%2];
-    mem.boards[pos] = mem[colour][pos] = {colour: colour, x: coords.x, y: coords.y, pos: pos};
+    mem.board[pos] = mem[colour][pos] = {colour: colour, x: coords.x, y: coords.y, pos: pos};
+    return mem;
   }, {board:{},light:{},dark:{}});
 }
 
@@ -88,7 +90,7 @@ function convertToEntities(def) {
     case "rect": // ["rect",bottomleft,topright,blueprint]
     case "holerect": // ["holerect",bottomleft,topright,holes,blueprint]
       var bottomleft = pos2coords(def[1]);
-      var topright = U.pos2coords(def[2]);
+      var topright = pos2coords(def[2]);
       var blueprint = def[3];
       var positions = [];
       for (var x=bottomleft.x; x<=topright.x; x++){
@@ -123,7 +125,7 @@ function deduceInitialUnitData(setup) {
       var entitydefs = defsbyplr[plr];
       return entitydefs.reduce(function(mem,entitydef) {
         convertToEntities(entitydef).forEach(function(e){
-          let newid = 'unit'+(id++);
+          var newid = 'unit'+(id++);
           mem[newid] = Object.assign(e, {
             id: newid,
             group: group,
@@ -145,7 +147,7 @@ function terrainLayers(board, forplayer){
   if (!Object.keys(terrainDef).length){
     return {};
   }
-  let terrain = Object.keys(terrainDef).reduce(function(mem,name) {
+  var terrain = Object.keys(terrainDef).reduce(function(mem,name) {
     var def = terrainDef[name];
     mem[name] = {};
     if (isArray(def)){ // no ownership, we got array of entityddefs directly
@@ -172,7 +174,7 @@ function terrainLayers(board, forplayer){
   },{});
   // add no-variants of layers and return
   return Object.keys(terrain).reduce(function(mem, name){
-    var t = terrain[t];
+    var t = terrain[name];
     var noname = 'no'+name;
     mem[noname] = {};
     boardPositions(board).forEach(function(pos){
@@ -180,5 +182,6 @@ function terrainLayers(board, forplayer){
         mem[noname][pos] = {pos:pos};
       }
     });
+    return mem;
   }, terrain);
 }

@@ -8,7 +8,7 @@
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-    var TERRAIN = terrainLayers(boardDef);
+    var TERRAIN = terrainLayers(boardDef, 0);
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;

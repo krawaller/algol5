@@ -13,7 +13,7 @@ export default C => Object.assign(C,{
     }`,
 
     makeStepSeed: O=> `{
-        UNITDATA: deduceInitialUnitData(${JSON.stringify(O.rules.setup)})
+        UNITDATA: deduceInitialUnitData(${JSON.stringify(O.rules.setup || {})})
         ${C.usesTurnVars(O) ? ', TURNVARS: {}' : ''}
         ${C.contains((O && O.rules || {}),'spawn') ? ', clones: 0' : ''}
     }`,

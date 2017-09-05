@@ -47,7 +47,7 @@ export default C => Object.assign(C,{
         var connections = boardConnections(boardDef);
         var BOARD = boardLayers(boardDef);
         var relativedirs = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8]; 
-        ${C.isTerrainNeutral(O) ? 'var TERRAIN = terrainLayers(boardDef); ' : ''}
+        ${C.isTerrainNeutral(O) ? `var TERRAIN = terrainLayers(boardDef, 0${O.rules.AI && O.rules.AI.terrain ? `, ${JSON.stringify(O.rules.AI.terrain)}` : ''}); ` : ''}
     `,
 
     addPlayerClosure: (O)=> `
@@ -58,7 +58,7 @@ export default C => Object.assign(C,{
     `,
 
     addPlayerVariables: O=> `
-        ${C.isTerrainNeutral(O) ? '' : 'var TERRAIN = terrainLayers(boardDef);' }
+        ${C.isTerrainNeutral(O) ? '' : `var TERRAIN = terrainLayers(boardDef, ${O.player}${O.rules.AI && O.rules.AI.terrain ? `, ${JSON.stringify(O.rules.AI.terrain)}` : ''}); `}
         var ownernames = ${O.player === 2 ? '["neutral","opp","my"]' : '["neutral","my","opp"]'};
         var player = ${O.player};
         var otherplayer = ${O.player === 1 ? 2 : 1};

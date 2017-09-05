@@ -19,7 +19,16 @@
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1, {
+        "threatrow": {
+          "1": [
+            ["rect", "a3", "h3"]
+          ],
+          "2": [
+            ["rect", "a5", "h5"]
+          ]
+        }
+      });
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -971,7 +980,16 @@
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2, {
+        "threatrow": {
+          "1": [
+            ["rect", "a3", "h3"]
+          ],
+          "2": [
+            ["rect", "a5", "h5"]
+          ]
+        }
+      });
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;

@@ -142,8 +142,8 @@ function deduceInitialUnitData(setup) {
 Calculates all terrain layers and returns them. 
 This should be done per player if any terrain has owner.
 */
-function terrainLayers(board, forplayer){
-  var terrainDef = board.terrain || {};
+function terrainLayers(board, forplayer, aiterrain){
+  var terrainDef = Object.assign({}, board.terrain || {}, aiterrain || {});
   if (!Object.keys(terrainDef).length){
     return {};
   }

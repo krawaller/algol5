@@ -143,8 +143,8 @@ function deduceInitialUnitData(setup) {
 Calculates all terrain layers and returns them. 
 This should be done per player if any terrain has owner.
 */
-function terrainLayers(board, forplayer){
-  var terrainDef = board.terrain || {};
+function terrainLayers(board, forplayer, aiterrain){
+  var terrainDef = Object.assign({}, board.terrain || {}, aiterrain || {});
   if (!Object.keys(terrainDef).length){
     return {};
   }
@@ -204,7 +204,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -480,7 +480,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -831,7 +831,7 @@ module.exports = {
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-    var TERRAIN = terrainLayers(boardDef);
+    var TERRAIN = terrainLayers(boardDef, 0);
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
@@ -1684,7 +1684,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -1946,7 +1946,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -2275,7 +2275,7 @@ module.exports = {
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-    var TERRAIN = terrainLayers(boardDef);
+    var TERRAIN = terrainLayers(boardDef, 0);
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
@@ -2802,7 +2802,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -3040,7 +3040,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -3361,7 +3361,7 @@ module.exports = {
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-    var TERRAIN = terrainLayers(boardDef);
+    var TERRAIN = terrainLayers(boardDef, 0);
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
@@ -4450,7 +4450,7 @@ module.exports = {
           turn: 0
         };
         var stepseed = {
-          UNITDATA: deduceInitialUnitData(undefined)
+          UNITDATA: deduceInitialUnitData({})
             ,
           clones: 0
         };
@@ -4505,7 +4505,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -4746,7 +4746,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -5078,7 +5078,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -5707,7 +5707,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -6418,7 +6418,7 @@ module.exports = {
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-    var TERRAIN = terrainLayers(boardDef);
+    var TERRAIN = terrainLayers(boardDef, 0);
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
@@ -6907,7 +6907,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -7132,7 +7132,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -7438,7 +7438,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -7901,7 +7901,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -8446,7 +8446,16 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1, {
+        "threatrow": {
+          "1": [
+            ["rect", "a3", "h3"]
+          ],
+          "2": [
+            ["rect", "a5", "h5"]
+          ]
+        }
+      });
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -9398,7 +9407,16 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2, {
+        "threatrow": {
+          "1": [
+            ["rect", "a3", "h3"]
+          ],
+          "2": [
+            ["rect", "a5", "h5"]
+          ]
+        }
+      });
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -10436,7 +10454,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -11146,7 +11164,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -11934,7 +11952,7 @@ module.exports = {
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-    var TERRAIN = terrainLayers(boardDef);
+    var TERRAIN = terrainLayers(boardDef, 0);
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
@@ -12452,7 +12470,7 @@ module.exports = {
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-    var TERRAIN = terrainLayers(boardDef);
+    var TERRAIN = terrainLayers(boardDef, 0);
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
@@ -13129,7 +13147,7 @@ module.exports = {
           turn: 0
         };
         var stepseed = {
-          UNITDATA: deduceInitialUnitData(undefined)
+          UNITDATA: deduceInitialUnitData({})
             ,
           clones: 0
         };
@@ -13187,7 +13205,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -13616,7 +13634,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -14135,7 +14153,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -14408,7 +14426,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -14692,7 +14710,7 @@ module.exports = {
           turn: 0
         };
         var stepseed = {
-          UNITDATA: deduceInitialUnitData(undefined)
+          UNITDATA: deduceInitialUnitData({})
             ,
           clones: 0
         };
@@ -14748,7 +14766,7 @@ module.exports = {
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-    var TERRAIN = terrainLayers(boardDef);
+    var TERRAIN = terrainLayers(boardDef, 0);
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
@@ -15293,7 +15311,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -15782,7 +15800,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
@@ -16360,7 +16378,7 @@ module.exports = {
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
@@ -16582,7 +16600,7 @@ module.exports = {
       }
     })();
     (function() {
-      var TERRAIN = terrainLayers(boardDef);
+      var TERRAIN = terrainLayers(boardDef, 2);
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;

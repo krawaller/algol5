@@ -88,15 +88,11 @@
           newlinks[linkpos] = 'selectmovetarget1';
         }
         return newstep;
-      }
-      game.selectunit1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length))
-        };
+      };
+      game.selectunit1instruction = function(step) {
+        var ARTIFACTS = step.ARTIFACTS;
+        return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length));
+      };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           newenemy: Object.assign({}, step.ARTIFACTS.newenemy),
@@ -129,15 +125,11 @@
           turn.links[newstepid].jostle = 'jostle1';
         }
         return newstep;
-      }
-      game.selectmovetarget1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)))
-        };
+      };
+      game.selectmovetarget1instruction = function(step) {
+        var ARTIFACTS = step.ARTIFACTS;
+        return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)));
+      };
       game.jostle1 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -299,15 +291,11 @@
           newlinks[linkpos] = 'selectmovetarget2';
         }
         return newstep;
-      }
-      game.selectunit2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length))
-        };
+      };
+      game.selectunit2instruction = function(step) {
+        var ARTIFACTS = step.ARTIFACTS;
+        return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length));
+      };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           newenemy: Object.assign({}, step.ARTIFACTS.newenemy),
@@ -340,15 +328,11 @@
           turn.links[newstepid].jostle = 'jostle2';
         }
         return newstep;
-      }
-      game.selectmovetarget2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)))
-        };
+      };
+      game.selectmovetarget2instruction = function(step) {
+        var ARTIFACTS = step.ARTIFACTS;
+        return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)));
+      };
       game.jostle2 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});

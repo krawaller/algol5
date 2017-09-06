@@ -69,15 +69,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].deploy = 'deploy1';
         return newstep;
-      }
-      game.selectdeploytarget1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectdeploytarget1instruction = function(step) {
+        return '';
+      };
       game.selectunit1 = function(turn, step, markpos) {
         var MARKS = {
           selectunit: markpos
@@ -92,15 +87,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].promote = 'promote1';
         return newstep;
-      }
-      game.selectunit1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectunit1instruction = function(step) {
+        return '';
+      };
       game.deploy1 =
         function(turn, step) {
           var ARTIFACTS = {
@@ -395,15 +385,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].deploy = 'deploy2';
         return newstep;
-      }
-      game.selectdeploytarget2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectdeploytarget2instruction = function(step) {
+        return '';
+      };
       game.selectunit2 = function(turn, step, markpos) {
         var MARKS = {
           selectunit: markpos
@@ -418,15 +403,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].promote = 'promote2';
         return newstep;
-      }
-      game.selectunit2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectunit2instruction = function(step) {
+        return '';
+      };
       game.deploy2 =
         function(turn, step) {
           var ARTIFACTS = {

@@ -90,15 +90,10 @@
           newlinks[linkpos] = 'selectmovetarget1';
         }
         return newstep;
-      }
-      game.selectunit1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return 'Select where to move the amazon'
-        };
+      };
+      game.selectunit1instruction = function(step) {
+        return 'Select where to move the amazon';
+      };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
           selectmovetarget: markpos,
@@ -114,15 +109,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].move = 'move1';
         return newstep;
-      }
-      game.selectmovetarget1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return 'Choose Move to go here!'
-        };
+      };
+      game.selectmovetarget1instruction = function(step) {
+        return 'Choose Move to go here!';
+      };
       game.selectfiretarget1 = function(turn, step, markpos) {
         var MARKS = {
           selectfiretarget: markpos
@@ -137,15 +127,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].fire = 'fire1';
         return newstep;
-      }
-      game.selectfiretarget1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return 'Choose Fire to shoot here!'
-        };
+      };
+      game.selectfiretarget1instruction = function(step) {
+        return 'Choose Fire to shoot here!';
+      };
       game.move1 =
         function(turn, step) {
           var ARTIFACTS = {
@@ -476,15 +461,10 @@
           newlinks[linkpos] = 'selectmovetarget2';
         }
         return newstep;
-      }
-      game.selectunit2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return 'Select where to move the amazon'
-        };
+      };
+      game.selectunit2instruction = function(step) {
+        return 'Select where to move the amazon';
+      };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
           selectmovetarget: markpos,
@@ -500,15 +480,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].move = 'move2';
         return newstep;
-      }
-      game.selectmovetarget2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return 'Choose Move to go here!'
-        };
+      };
+      game.selectmovetarget2instruction = function(step) {
+        return 'Choose Move to go here!';
+      };
       game.selectfiretarget2 = function(turn, step, markpos) {
         var MARKS = {
           selectfiretarget: markpos
@@ -523,15 +498,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].fire = 'fire2';
         return newstep;
-      }
-      game.selectfiretarget2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return 'Choose Fire to shoot here!'
-        };
+      };
+      game.selectfiretarget2instruction = function(step) {
+        return 'Choose Fire to shoot here!';
+      };
       game.move2 =
         function(turn, step) {
           var ARTIFACTS = {

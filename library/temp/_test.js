@@ -237,15 +237,10 @@
           newlinks[linkpos] = 'selectmark1';
         }
         return newstep;
-      }
-      game.selectunit1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectunit1instruction = function(step) {
+        return '';
+      };
       game.selectmark1 = function(turn, step, markpos) {
         var MARKS = {
           selectmark: markpos,
@@ -261,15 +256,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
-      }
-      game.selectmark1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectmark1instruction = function(step) {
+        return '';
+      };
       game.start1 =
         function(turn, step) {
           var turn = {
@@ -509,15 +499,10 @@
           newlinks[linkpos] = 'selectmark2';
         }
         return newstep;
-      }
-      game.selectunit2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectunit2instruction = function(step) {
+        return '';
+      };
       game.selectmark2 = function(turn, step, markpos) {
         var MARKS = {
           selectmark: markpos,
@@ -533,15 +518,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
-      }
-      game.selectmark2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectmark2instruction = function(step) {
+        return '';
+      };
       game.start2 =
         function(turn, step) {
           var turn = {

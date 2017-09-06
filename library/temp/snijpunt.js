@@ -105,15 +105,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].snipe = 'snipe1';
         return newstep;
-      }
-      game.selecttarget1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selecttarget1instruction = function(step) {
+        return '';
+      };
       game.snipe1 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -376,15 +371,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].snipe = 'snipe2';
         return newstep;
-      }
-      game.selecttarget2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selecttarget2instruction = function(step) {
+        return '';
+      };
       game.snipe2 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {

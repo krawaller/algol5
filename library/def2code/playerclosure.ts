@@ -2,7 +2,8 @@
 import lib from '../logic/';
 
 import { Definition } from './types';
-import makeMarkFunc from './mark';
+import addMarkFunc from './mark';
+import addCommandFunc from './command';
 
 export default function playerClosure(def: Definition, player: 1 | 2){
   const O = { rules: def, player };
@@ -14,9 +15,11 @@ export default function playerClosure(def: Definition, player: 1 | 2){
       var otherplayer = ${player === 1 ? 2 : 1};
       ${lib.addAllScoringsForPlayer(O)}
       ${Object.keys(def.marks||{}).map(
-        markname => makeMarkFunc(def, markname, player)
+        markname => addMarkFunc(def, markname, player)
       ).join(' ')}
-      ${lib.addAllCommandFunctions(O)}
+      ${Object.keys(def.commands||{}).map(
+        cmndname => addCommandFunc(def, cmndname, player)
+      ).join(' ')}
       ${lib.addStartTurnFunction(O)}
       ${lib.addAI(O)}
       game.debug${player} = function(){

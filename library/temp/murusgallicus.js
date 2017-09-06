@@ -284,15 +284,10 @@
           newlinks[linkpos] = 'selectkill1';
         }
         return newstep;
-      }
-      game.selecttower1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selecttower1instruction = function(step) {
+        return '';
+      };
       game.selectmove1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
@@ -320,15 +315,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].move = 'move1';
         return newstep;
-      }
-      game.selectmove1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectmove1instruction = function(step) {
+        return '';
+      };
       game.selectkill1 = function(turn, step, markpos) {
         var MARKS = {
           selectkill: markpos,
@@ -344,15 +334,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].kill = 'kill1';
         return newstep;
-      }
-      game.selectkill1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectkill1instruction = function(step) {
+        return '';
+      };
       game.move1 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -1240,15 +1225,10 @@
           newlinks[linkpos] = 'selectkill2';
         }
         return newstep;
-      }
-      game.selecttower2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selecttower2instruction = function(step) {
+        return '';
+      };
       game.selectmove2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
@@ -1276,15 +1256,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].move = 'move2';
         return newstep;
-      }
-      game.selectmove2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectmove2instruction = function(step) {
+        return '';
+      };
       game.selectkill2 = function(turn, step, markpos) {
         var MARKS = {
           selectkill: markpos,
@@ -1300,15 +1275,10 @@
         turn.links[newstepid] = {};
         turn.links[newstepid].kill = 'kill2';
         return newstep;
-      }
-      game.selectkill2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectkill2instruction = function(step) {
+        return '';
+      };
       game.move2 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});

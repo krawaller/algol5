@@ -101,15 +101,10 @@
           turn.links[newstepid].horisontal = 'horisontal1';
         }
         return newstep;
-      }
-      game.selectdrop1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectdrop1instruction = function(step) {
+        return '';
+      };
       game.uphill1 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -638,15 +633,10 @@
           turn.links[newstepid].horisontal = 'horisontal2';
         }
         return newstep;
-      }
-      game.selectdrop2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      };
+      game.selectdrop2instruction = function(step) {
+        return '';
+      };
       game.uphill2 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {

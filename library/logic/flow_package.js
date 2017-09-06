@@ -41,7 +41,6 @@ export default C => Object.assign(C,{
         }
     `,
 
-    // TODO - metadata
     addCommonVariables: O=> `
         var boardDef = ${JSON.stringify(O.rules.board)};
         var connections = boardConnections(boardDef);

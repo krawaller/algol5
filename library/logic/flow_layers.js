@@ -1,6 +1,6 @@
-import reduce from "lodash/reduce"
-import flatten from "lodash/flatten"
-import isArray from "lodash/isArray"
+import * as reduce from "lodash/reduce"
+import * as flatten from "lodash/flatten"
+import * as isArray from "lodash/isArray"
 
 export default C => Object.assign(C,{
 

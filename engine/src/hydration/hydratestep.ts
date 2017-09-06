@@ -34,7 +34,7 @@ export default function hydrateStep(game: Game, turn: Turn, step: Step): boolean
       }
       canend = true
     } else {
-      let nextstepid = stepid + '-' + action
+      let nextstepid = stepid + '-' + action;
       let nextstep = steps[nextstepid] || (steps[nextstepid] = game[func](turn,step,action))
       if (hydrateStep(game,turn,nextstep)){
         canend = true

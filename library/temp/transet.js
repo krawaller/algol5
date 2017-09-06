@@ -1,6 +1,36 @@
 (
   function() {
     var game = {};
+    game.commands = {
+      "move": 1,
+      "swap": 1
+    };
+    game.graphics = {
+      "icons": {
+        "pinets": "pawns",
+        "piokers": "bishops",
+        "piases": "kings"
+      },
+      "tiles": {
+        "base": "playercolour"
+      }
+    };
+    game.board = {
+      "height": 5,
+      "width": 5,
+      "terrain": {
+        "base": {
+          "1": [
+            ["rect", "a1", "e1"]
+          ],
+          "2": [
+            ["rect", "a5", "e5"]
+          ]
+        }
+      }
+    };
+    game.AI = [];
+    game.id = "transet";
     var boardDef = {
       "height": 5,
       "width": 5,
@@ -18,65 +48,100 @@
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
+    function reduce(coll, iterator, acc) {
+      for (var key in coll) {
+        acc = iterator(acc, coll[key], key);
+      }
+      return acc;
+    }
+    game.newGame = function() {
+      var turnseed = {
+        turn: 0
+      };
+      var stepseed = {
+        UNITDATA: deduceInitialUnitData({
+          "pinets": {
+            "1": ["a1", "e1"],
+            "2": ["a5", "e5"]
+          },
+          "piokers": {
+            "1": ["b1", "d1"],
+            "2": ["b5", "d5"]
+          },
+          "piases": {
+            "1": ["c1"],
+            "2": ["c5"]
+          }
+        })
+      };
+      return game.start1(turnseed, stepseed);
+    };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    };
     (function() {
       var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
-      game.selectunit1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectunit: markpos
-          };
-          var STARTPOS = MARKS['selectunit'];
-          var neighbourdirs = (!!(UNITLAYERS.pinets[MARKS['selectunit']]) ? [1] : (!!(UNITLAYERS.piokers[MARKS['selectunit']]) ? [8, 2] : [8, 1, 2]));
-          var nbrofneighbourdirs = neighbourdirs.length;
-          var startconnections = connections[STARTPOS];
-          for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
-            var POS = startconnections[neighbourdirs[dirnbr]];
-            if (POS && !UNITLAYERS.myunits[POS]) {
-              ARTIFACTS['movetargets'][POS] = {};
-            }
-          } 
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectunit'
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.movetargets) {
-            newlinks[linkpos] = 'selectmovetarget1';
-          }
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 =
-                  (function() {
-                    var ret = {};
-                    ret[MARKS['selectunit']] = 1;
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (!s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }())) {
-            newlinks[linkpos] = 'selectswapunit1';
-          }
-          return newstep;
+      game.selectunit1 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectunit: markpos
         };
+        var STARTPOS = MARKS['selectunit'];
+        var neighbourdirs = (!!(UNITLAYERS.pinets[MARKS['selectunit']]) ? [1] : (!!(UNITLAYERS.piokers[MARKS['selectunit']]) ? [8, 2] : [8, 1, 2]));
+        var nbrofneighbourdirs = neighbourdirs.length;
+        var startconnections = connections[STARTPOS];
+        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+          var POS = startconnections[neighbourdirs[dirnbr]];
+          if (POS && !UNITLAYERS.myunits[POS]) {
+            ARTIFACTS['movetargets'][POS] = {};
+          }
+        } 
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectunit'
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.movetargets) {
+          newlinks[linkpos] = 'selectmovetarget1';
+        }
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 =
+                (function() {
+                  var ret = {};
+                  ret[MARKS['selectunit']] = 1;
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (!s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())) {
+          newlinks[linkpos] = 'selectswapunit1';
+        }
+        return newstep;
+      }
       game.selectunit1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -85,43 +150,41 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectmovetarget1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectmovetarget: markpos,
-            selectunit: step.MARKS.selectunit
-          };
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectmovetarget'
-          });
-          turn.links[newstepid] = {};
-          if ((!!(UNITLAYERS.units[MARKS['selectmovetarget']]) && !(TERRAIN.oppbase[MARKS['selectmovetarget']]))) {
-            var newlinks = turn.links[newstepid];
-            for (var linkpos in
-                (function() {
-                  var ret = {},
-                    s0 = TERRAIN.oppbase,
-                    s1 = UNITLAYERS.oppunits;
-                  for (var key in s0) {
-                    if (!s1[key]) {
-                      ret[key] = s0[key];
-                    }
-                  }
-                  return ret;
-                }())) {
-              newlinks[linkpos] = 'selectdeportdestination1';
-            }
-          } else {
-            turn.links[newstepid].move = 'move1';
-          }
-          return newstep;
+      game.selectmovetarget1 = function(turn, step, markpos) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectmovetarget: markpos,
+          selectunit: step.MARKS.selectunit
         };
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectmovetarget'
+        });
+        turn.links[newstepid] = {};
+        if ((!!(UNITLAYERS.units[MARKS['selectmovetarget']]) && !(TERRAIN.oppbase[MARKS['selectmovetarget']]))) {
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in
+              (function() {
+                var ret = {},
+                  s0 = TERRAIN.oppbase,
+                  s1 = UNITLAYERS.oppunits;
+                for (var key in s0) {
+                  if (!s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())) {
+            newlinks[linkpos] = 'selectdeportdestination1';
+          }
+        } else {
+          turn.links[newstepid].move = 'move1';
+        }
+        return newstep;
+      }
       game.selectmovetarget1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -130,26 +193,23 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectdeportdestination1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectdeportdestination: markpos,
-            selectunit: step.MARKS.selectunit,
-            selectmovetarget: step.MARKS.selectmovetarget
-          };
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectdeportdestination'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].move = 'move1';
-          return newstep;
+      game.selectdeportdestination1 = function(turn, step, markpos) {
+        var MARKS = {
+          selectdeportdestination: markpos,
+          selectunit: step.MARKS.selectunit,
+          selectmovetarget: step.MARKS.selectmovetarget
         };
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectdeportdestination'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].move = 'move1';
+        return newstep;
+      }
       game.selectdeportdestination1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -158,43 +218,42 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectswapunit1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            swap1steps: Object.assign({}, step.ARTIFACTS.swap1steps)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectswapunit: markpos,
-            selectunit: step.MARKS.selectunit
-          };
-          var STARTPOS = MARKS['selectunit'];
-          var neighbourdirs = [1, 3, 5, 7];
-          var startconnections = connections[STARTPOS];
-          for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
-            var DIR = neighbourdirs[dirnbr];
-            var POS = startconnections[DIR];
-            if (POS && !UNITLAYERS.units[POS]) {
-              ARTIFACTS['swap1steps'][POS] = {
-                dir: DIR
-              };
-            }
-          } 
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectswapunit'
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.swap1steps) {
-            newlinks[linkpos] = 'selectswap1target1';
-          }
-          return newstep;
+      game.selectswapunit1 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          swap1steps: Object.assign({}, step.ARTIFACTS.swap1steps)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectswapunit: markpos,
+          selectunit: step.MARKS.selectunit
         };
+        var STARTPOS = MARKS['selectunit'];
+        var neighbourdirs = [1, 3, 5, 7];
+        var startconnections = connections[STARTPOS];
+        for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
+          var DIR = neighbourdirs[dirnbr];
+          var POS = startconnections[DIR];
+          if (POS && !UNITLAYERS.units[POS]) {
+            ARTIFACTS['swap1steps'][POS] = {
+              dir: DIR
+            };
+          }
+        } 
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectswapunit'
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.swap1steps) {
+          newlinks[linkpos] = 'selectswap1target1';
+        }
+        return newstep;
+      }
       game.selectswapunit1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -203,53 +262,52 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectswap1target1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            swap2step: Object.assign({}, step.ARTIFACTS.swap2step)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectswap1target: markpos,
-            selectunit: step.MARKS.selectunit,
-            selectswapunit: step.MARKS.selectswapunit
-          };
-          var STARTPOS = MARKS['selectswapunit'];
-          var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.swap1steps[MARKS['selectswap1target']] || {})['dir'] - 2 + 5]];
-          if (POS && !
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.units,
-                s1 =
-                (function() {
-                  var ret = {};
-                  ret[MARKS['selectswap1target']] = 1;
-                  return ret;
-                }());
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }())[POS]) {
-            ARTIFACTS['swap2step'][POS] = {};
-          }
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectswap1target'
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.swap2step ||  {}).length !== 0) {
-            turn.links[newstepid].swap = 'swap1';
-          }
-          return newstep;
+      game.selectswap1target1 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          swap2step: Object.assign({}, step.ARTIFACTS.swap2step)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectswap1target: markpos,
+          selectunit: step.MARKS.selectunit,
+          selectswapunit: step.MARKS.selectswapunit
         };
+        var STARTPOS = MARKS['selectswapunit'];
+        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.swap1steps[MARKS['selectswap1target']] || {})['dir'] - 2 + 5]];
+        if (POS && !
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.units,
+              s1 =
+              (function() {
+                var ret = {};
+                ret[MARKS['selectswap1target']] = 1;
+                return ret;
+              }());
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }())[POS]) {
+          ARTIFACTS['swap2step'][POS] = {};
+        }
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectswap1target'
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.swap2step ||  {}).length !== 0) {
+          turn.links[newstepid].swap = 'swap1';
+        }
+        return newstep;
+      }
       game.selectswap1target1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -512,60 +570,59 @@
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
-      game.selectunit2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectunit: markpos
-          };
-          var STARTPOS = MARKS['selectunit'];
-          var neighbourdirs = (!!(UNITLAYERS.pinets[MARKS['selectunit']]) ? [5] : (!!(UNITLAYERS.piokers[MARKS['selectunit']]) ? [4, 6] : [4, 5, 6]));
-          var nbrofneighbourdirs = neighbourdirs.length;
-          var startconnections = connections[STARTPOS];
-          for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
-            var POS = startconnections[neighbourdirs[dirnbr]];
-            if (POS && !UNITLAYERS.myunits[POS]) {
-              ARTIFACTS['movetargets'][POS] = {};
-            }
-          } 
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectunit'
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.movetargets) {
-            newlinks[linkpos] = 'selectmovetarget2';
-          }
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 =
-                  (function() {
-                    var ret = {};
-                    ret[MARKS['selectunit']] = 1;
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (!s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }())) {
-            newlinks[linkpos] = 'selectswapunit2';
-          }
-          return newstep;
+      game.selectunit2 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectunit: markpos
         };
+        var STARTPOS = MARKS['selectunit'];
+        var neighbourdirs = (!!(UNITLAYERS.pinets[MARKS['selectunit']]) ? [5] : (!!(UNITLAYERS.piokers[MARKS['selectunit']]) ? [4, 6] : [4, 5, 6]));
+        var nbrofneighbourdirs = neighbourdirs.length;
+        var startconnections = connections[STARTPOS];
+        for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+          var POS = startconnections[neighbourdirs[dirnbr]];
+          if (POS && !UNITLAYERS.myunits[POS]) {
+            ARTIFACTS['movetargets'][POS] = {};
+          }
+        } 
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectunit'
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.movetargets) {
+          newlinks[linkpos] = 'selectmovetarget2';
+        }
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 =
+                (function() {
+                  var ret = {};
+                  ret[MARKS['selectunit']] = 1;
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (!s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())) {
+          newlinks[linkpos] = 'selectswapunit2';
+        }
+        return newstep;
+      }
       game.selectunit2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -574,43 +631,41 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectmovetarget2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectmovetarget: markpos,
-            selectunit: step.MARKS.selectunit
-          };
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectmovetarget'
-          });
-          turn.links[newstepid] = {};
-          if ((!!(UNITLAYERS.units[MARKS['selectmovetarget']]) && !(TERRAIN.oppbase[MARKS['selectmovetarget']]))) {
-            var newlinks = turn.links[newstepid];
-            for (var linkpos in
-                (function() {
-                  var ret = {},
-                    s0 = TERRAIN.oppbase,
-                    s1 = UNITLAYERS.oppunits;
-                  for (var key in s0) {
-                    if (!s1[key]) {
-                      ret[key] = s0[key];
-                    }
-                  }
-                  return ret;
-                }())) {
-              newlinks[linkpos] = 'selectdeportdestination2';
-            }
-          } else {
-            turn.links[newstepid].move = 'move2';
-          }
-          return newstep;
+      game.selectmovetarget2 = function(turn, step, markpos) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectmovetarget: markpos,
+          selectunit: step.MARKS.selectunit
         };
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectmovetarget'
+        });
+        turn.links[newstepid] = {};
+        if ((!!(UNITLAYERS.units[MARKS['selectmovetarget']]) && !(TERRAIN.oppbase[MARKS['selectmovetarget']]))) {
+          var newlinks = turn.links[newstepid];
+          for (var linkpos in
+              (function() {
+                var ret = {},
+                  s0 = TERRAIN.oppbase,
+                  s1 = UNITLAYERS.oppunits;
+                for (var key in s0) {
+                  if (!s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())) {
+            newlinks[linkpos] = 'selectdeportdestination2';
+          }
+        } else {
+          turn.links[newstepid].move = 'move2';
+        }
+        return newstep;
+      }
       game.selectmovetarget2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -619,26 +674,23 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectdeportdestination2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectdeportdestination: markpos,
-            selectunit: step.MARKS.selectunit,
-            selectmovetarget: step.MARKS.selectmovetarget
-          };
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectdeportdestination'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].move = 'move2';
-          return newstep;
+      game.selectdeportdestination2 = function(turn, step, markpos) {
+        var MARKS = {
+          selectdeportdestination: markpos,
+          selectunit: step.MARKS.selectunit,
+          selectmovetarget: step.MARKS.selectmovetarget
         };
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectdeportdestination'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].move = 'move2';
+        return newstep;
+      }
       game.selectdeportdestination2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -647,43 +699,42 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectswapunit2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            swap1steps: Object.assign({}, step.ARTIFACTS.swap1steps)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectswapunit: markpos,
-            selectunit: step.MARKS.selectunit
-          };
-          var STARTPOS = MARKS['selectunit'];
-          var neighbourdirs = [1, 3, 5, 7];
-          var startconnections = connections[STARTPOS];
-          for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
-            var DIR = neighbourdirs[dirnbr];
-            var POS = startconnections[DIR];
-            if (POS && !UNITLAYERS.units[POS]) {
-              ARTIFACTS['swap1steps'][POS] = {
-                dir: DIR
-              };
-            }
-          } 
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectswapunit'
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.swap1steps) {
-            newlinks[linkpos] = 'selectswap1target2';
-          }
-          return newstep;
+      game.selectswapunit2 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          swap1steps: Object.assign({}, step.ARTIFACTS.swap1steps)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectswapunit: markpos,
+          selectunit: step.MARKS.selectunit
         };
+        var STARTPOS = MARKS['selectunit'];
+        var neighbourdirs = [1, 3, 5, 7];
+        var startconnections = connections[STARTPOS];
+        for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
+          var DIR = neighbourdirs[dirnbr];
+          var POS = startconnections[DIR];
+          if (POS && !UNITLAYERS.units[POS]) {
+            ARTIFACTS['swap1steps'][POS] = {
+              dir: DIR
+            };
+          }
+        } 
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectswapunit'
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.swap1steps) {
+          newlinks[linkpos] = 'selectswap1target2';
+        }
+        return newstep;
+      }
       game.selectswapunit2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -692,53 +743,52 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectswap1target2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            swap2step: Object.assign({}, step.ARTIFACTS.swap2step)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectswap1target: markpos,
-            selectunit: step.MARKS.selectunit,
-            selectswapunit: step.MARKS.selectswapunit
-          };
-          var STARTPOS = MARKS['selectswapunit'];
-          var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.swap1steps[MARKS['selectswap1target']] || {})['dir'] - 2 + 5]];
-          if (POS && !
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.units,
-                s1 =
-                (function() {
-                  var ret = {};
-                  ret[MARKS['selectswap1target']] = 1;
-                  return ret;
-                }());
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }())[POS]) {
-            ARTIFACTS['swap2step'][POS] = {};
-          }
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectswap1target'
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.swap2step ||  {}).length !== 0) {
-            turn.links[newstepid].swap = 'swap2';
-          }
-          return newstep;
+      game.selectswap1target2 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          swap2step: Object.assign({}, step.ARTIFACTS.swap2step)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectswap1target: markpos,
+          selectunit: step.MARKS.selectunit,
+          selectswapunit: step.MARKS.selectswapunit
         };
+        var STARTPOS = MARKS['selectswapunit'];
+        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.swap1steps[MARKS['selectswap1target']] || {})['dir'] - 2 + 5]];
+        if (POS && !
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.units,
+              s1 =
+              (function() {
+                var ret = {};
+                ret[MARKS['selectswap1target']] = 1;
+                return ret;
+              }());
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }())[POS]) {
+          ARTIFACTS['swap2step'][POS] = {};
+        }
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectswap1target'
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.swap2step ||  {}).length !== 0) {
+          turn.links[newstepid].swap = 'swap2';
+        }
+        return newstep;
+      }
       game.selectswap1target2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -996,73 +1046,6 @@
         };
       }
     })();
-    function reduce(coll, iterator, acc) {
-      for (var key in coll) {
-        acc = iterator(acc, coll[key], key);
-      }
-      return acc;
-    }
-    game.newGame =
-      function() {
-        var turnseed = {
-          turn: 0
-        };
-        var stepseed = {
-          UNITDATA: deduceInitialUnitData({
-            "pinets": {
-              "1": ["a1", "e1"],
-              "2": ["a5", "e5"]
-            },
-            "piokers": {
-              "1": ["b1", "d1"],
-              "2": ["b5", "d5"]
-            },
-            "piases": {
-              "1": ["c1"],
-              "2": ["c5"]
-            }
-          })
-        };
-        return game.start1(turnseed, stepseed);
-      };
-    game.debug = function() {
-      return {
-        BOARD: BOARD,
-        connections: connections,
-        plr1: game.debug1(),
-        plr2: game.debug2()
-      };
-    }
-    game.commands = {
-      "move": 1,
-      "swap": 1
-    };
-    game.graphics = {
-      "icons": {
-        "pinets": "pawns",
-        "piokers": "bishops",
-        "piases": "kings"
-      },
-      "tiles": {
-        "base": "playercolour"
-      }
-    };
-    game.board = {
-      "height": 5,
-      "width": 5,
-      "terrain": {
-        "base": {
-          "1": [
-            ["rect", "a1", "e1"]
-          ],
-          "2": [
-            ["rect", "a5", "e5"]
-          ]
-        }
-      }
-    };
-    game.AI = [];
-    game.id = "transet";
     return game;
   }
 )()

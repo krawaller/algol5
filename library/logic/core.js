@@ -1,6 +1,6 @@
-import tail from "lodash/tail";
-import isArray from "lodash/isArray";
-import reduce from "lodash/reduce";
+import * as tail from "lodash/tail";
+import * as isArray from "lodash/isArray";
+import * as reduce from "lodash/reduce";
 
 export default T => {
 

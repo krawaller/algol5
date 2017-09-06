@@ -1,23 +1,5 @@
 export default C => Object.assign(C,{
 
-    makeNewGameFunction: O=> `
-        function(){
-            var turnseed = ${C.makeTurnSeed(O)};
-            var stepseed = ${C.makeStepSeed(O)};
-            return game.start1(turnseed,stepseed);
-        }
-    `,
-
-    makeTurnSeed: O=> `{
-        turn: 0
-    }`,
-
-    makeStepSeed: O=> `{
-        UNITDATA: deduceInitialUnitData(${JSON.stringify(O.rules.setup || {})})
-        ${C.usesTurnVars(O) ? ', TURNVARS: {}' : ''}
-        ${C.contains((O && O.rules || {}),'spawn') ? ', clones: 0' : ''}
-    }`,
-
     makeStartFunction: O=> `
         function(turn,step){
             ${C.startFunctionContents(O)}

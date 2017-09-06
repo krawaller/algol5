@@ -5,7 +5,7 @@ at `temp/ALLGAMES.js`. That file exports an object containing all games,
 which is imported from within the engine files.
 */
 
-import fs from 'fs'
+import * as fs from 'fs';
 
 let games = fs.readdirSync(__dirname+"/temp/").filter(f => f != '.DS_Store').map(gamename=>{
   let code = fs.readFileSync(__dirname+"/temp/"+gamename)

@@ -1,6 +1,38 @@
 (
   function() {
     var game = {};
+    game.commands = {
+      "move": 1,
+      "kill": 1,
+      "sacrifice": 1,
+      "fire": 1
+    };
+    game.graphics = {
+      "tiles": {
+        "homerow": "playercolour"
+      },
+      "icons": {
+        "towers": "rooks",
+        "walls": "pawns",
+        "catapults": "queens"
+      }
+    };
+    game.board = {
+      "height": 7,
+      "width": 8,
+      "terrain": {
+        "homerow": {
+          "1": [
+            ["rect", "a1", "h1"]
+          ],
+          "2": [
+            ["rect", "a7", "h7"]
+          ]
+        }
+      }
+    };
+    game.AI = [];
+    game.id = "murusgallicusadvanced";
     var boardDef = {
       "height": 7,
       "width": 8,
@@ -18,26 +50,101 @@
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
+    function reduce(coll, iterator, acc) {
+      for (var key in coll) {
+        acc = iterator(acc, coll[key], key);
+      }
+      return acc;
+    }
+    game.newGame = function() {
+      var turnseed = {
+        turn: 0
+      };
+      var stepseed = {
+        UNITDATA: deduceInitialUnitData({
+            "towers": {
+              "1": [
+                ["rect", "a1", "h1"]
+              ],
+              "2": [
+                ["rect", "a7", "h7"]
+              ]
+            }
+          })
+          ,
+        clones: 0
+      };
+      return game.start1(turnseed, stepseed);
+    };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    };
     (function() {
       var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
-      game.selecttower1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-            killtargets: Object.assign({}, step.ARTIFACTS.killtargets)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selecttower: markpos
-          };
-          var BLOCKS =
+      game.selecttower1 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
+          killtargets: Object.assign({}, step.ARTIFACTS.killtargets)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selecttower: markpos
+        };
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.oppunits,
+              s1 = UNITLAYERS.mycatapults;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var STARTPOS = MARKS['selecttower'];
+        var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+          var DIR = allwalkerdirs[walkerdirnbr];
+          var walkedsquares = [];
+          var MAX = 2;
+          var POS = STARTPOS;
+          var LENGTH = 0;
+          while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            walkedsquares.push(POS);
+            LENGTH++;
+          }
+          var WALKLENGTH = walkedsquares.length;
+          var STEP = 0;
+          for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            STEP++;
+            if (((WALKLENGTH === 2) && (STEP === 2))) {
+              ARTIFACTS['movetargets'][POS] = {
+                dir: DIR
+              };
+            }
+          }
+        }
+        var STARTPOS = MARKS['selecttower'];
+        var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        var startconnections = connections[STARTPOS];
+        for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
+          var POS = startconnections[neighbourdirs[dirnbr]];
+          if (POS &&
             (function() {
               var k, ret = {},
-                s0 = UNITLAYERS.oppunits,
-                s1 = UNITLAYERS.mycatapults;
+                s0 = UNITLAYERS.oppcatapults,
+                s1 = UNITLAYERS.oppwalls;
               for (k in s0) {
                 ret[k] = 1;
               }
@@ -45,71 +152,29 @@
                 ret[k] = 1;
               }
               return ret;
-            }());
-          var STARTPOS = MARKS['selecttower'];
-          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var DIR = allwalkerdirs[walkerdirnbr];
-            var walkedsquares = [];
-            var MAX = 2;
-            var POS = STARTPOS;
-            var LENGTH = 0;
-            while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-              walkedsquares.push(POS);
-              LENGTH++;
-            }
-            var WALKLENGTH = walkedsquares.length;
-            var STEP = 0;
-            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-              POS = walkedsquares[walkstepper];
-              STEP++;
-              if (((WALKLENGTH === 2) && (STEP === 2))) {
-                ARTIFACTS['movetargets'][POS] = {
-                  dir: DIR
-                };
-              }
-            }
+            }())[POS]) {
+            ARTIFACTS['killtargets'][POS] = {};
           }
-          var STARTPOS = MARKS['selecttower'];
-          var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-          var startconnections = connections[STARTPOS];
-          for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
-            var POS = startconnections[neighbourdirs[dirnbr]];
-            if (POS &&
-              (function() {
-                var k, ret = {},
-                  s0 = UNITLAYERS.oppcatapults,
-                  s1 = UNITLAYERS.oppwalls;
-                for (k in s0) {
-                  ret[k] = 1;
-                }
-                for (k in s1) {
-                  ret[k] = 1;
-                }
-                return ret;
-              }())[POS]) {
-              ARTIFACTS['killtargets'][POS] = {};
-            }
-          } 
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selecttower'
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.movetargets) {
-            newlinks[linkpos] = 'selectmove1';
-          }
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.killtargets) {
-            newlinks[linkpos] = 'selectkill1';
-          }
-          return newstep;
-        };
+        } 
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selecttower'
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.movetargets) {
+          newlinks[linkpos] = 'selectmove1';
+        }
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.killtargets) {
+          newlinks[linkpos] = 'selectkill1';
+        }
+        return newstep;
+      }
       game.selecttower1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -118,36 +183,35 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectmove1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            madecatapults: Object.assign({}, step.ARTIFACTS.madecatapults),
-            madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
-            madewalls: Object.assign({}, step.ARTIFACTS.madewalls)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectmove: markpos,
-            selecttower: step.MARKS.selecttower
-          };
-          var STARTPOS = MARKS['selectmove'];
-          var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']] || {})['dir'] - 2 + 5]];
-          if (POS) {
-            ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? 'madecatapults' : 'madetowers') : 'madewalls')][POS] = {};
-          }
-          ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS['selectmove']]) ? (!!(UNITLAYERS.mytowers[MARKS['selectmove']]) ? 'madecatapults' : 'madetowers') : 'madewalls')][STARTPOS] = {};
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectmove'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].move = 'move1';
-          return newstep;
+      game.selectmove1 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          madecatapults: Object.assign({}, step.ARTIFACTS.madecatapults),
+          madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
+          madewalls: Object.assign({}, step.ARTIFACTS.madewalls)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectmove: markpos,
+          selecttower: step.MARKS.selecttower
         };
+        var STARTPOS = MARKS['selectmove'];
+        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']] || {})['dir'] - 2 + 5]];
+        if (POS) {
+          ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? 'madecatapults' : 'madetowers') : 'madewalls')][POS] = {};
+        }
+        ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS['selectmove']]) ? (!!(UNITLAYERS.mytowers[MARKS['selectmove']]) ? 'madecatapults' : 'madetowers') : 'madewalls')][STARTPOS] = {};
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectmove'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].move = 'move1';
+        return newstep;
+      }
       game.selectmove1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -156,28 +220,26 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectkill1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectkill: markpos,
-            selecttower: step.MARKS.selecttower
-          };
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectkill'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].kill = 'kill1';
-          if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
-            turn.links[newstepid].sacrifice = 'sacrifice1';
-          }
-          return newstep;
+      game.selectkill1 = function(turn, step, markpos) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectkill: markpos,
+          selecttower: step.MARKS.selecttower
         };
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectkill'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].kill = 'kill1';
+        if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
+          turn.links[newstepid].sacrifice = 'sacrifice1';
+        }
+        return newstep;
+      }
       game.selectkill1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -186,45 +248,44 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectcatapult1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            firetargets: Object.assign({}, step.ARTIFACTS.firetargets)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectcatapult: markpos
-          };
-          var STARTPOS = MARKS['selectcatapult'];
-          var allwalkerdirs = [7, 8, 1, 2, 3];
-          for (var walkerdirnbr = 0; walkerdirnbr < 5; walkerdirnbr++) {
-            var MAX = 3;
-            var POS = STARTPOS;
-            var LENGTH = 0;
-            var STEP = 0;
-            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]])) {
-              LENGTH++;
-              STEP++;
-              if (((STEP > 1) && !(UNITLAYERS.myunits[POS]))) {
-                ARTIFACTS['firetargets'][POS] = {};
-              }
+      game.selectcatapult1 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          firetargets: Object.assign({}, step.ARTIFACTS.firetargets)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectcatapult: markpos
+        };
+        var STARTPOS = MARKS['selectcatapult'];
+        var allwalkerdirs = [7, 8, 1, 2, 3];
+        for (var walkerdirnbr = 0; walkerdirnbr < 5; walkerdirnbr++) {
+          var MAX = 3;
+          var POS = STARTPOS;
+          var LENGTH = 0;
+          var STEP = 0;
+          while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]])) {
+            LENGTH++;
+            STEP++;
+            if (((STEP > 1) && !(UNITLAYERS.myunits[POS]))) {
+              ARTIFACTS['firetargets'][POS] = {};
             }
           }
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectcatapult'
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.firetargets) {
-            newlinks[linkpos] = 'selectfire1';
-          }
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectcatapult'
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.firetargets) {
+          newlinks[linkpos] = 'selectfire1';
+        }
+        return newstep;
+      }
       game.selectcatapult1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -233,25 +294,22 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectfire1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectfire: markpos,
-            selectcatapult: step.MARKS.selectcatapult
-          };
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectfire'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].fire = 'fire1';
-          return newstep;
+      game.selectfire1 = function(turn, step, markpos) {
+        var MARKS = {
+          selectfire: markpos,
+          selectcatapult: step.MARKS.selectcatapult
         };
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectfire'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].fire = 'fire1';
+        return newstep;
+      }
       game.selectfire1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -733,21 +791,62 @@
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
-      game.selecttower2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-            killtargets: Object.assign({}, step.ARTIFACTS.killtargets)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selecttower: markpos
-          };
-          var BLOCKS =
+      game.selecttower2 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
+          killtargets: Object.assign({}, step.ARTIFACTS.killtargets)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selecttower: markpos
+        };
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.oppunits,
+              s1 = UNITLAYERS.mycatapults;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var STARTPOS = MARKS['selecttower'];
+        var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+          var DIR = allwalkerdirs[walkerdirnbr];
+          var walkedsquares = [];
+          var MAX = 2;
+          var POS = STARTPOS;
+          var LENGTH = 0;
+          while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            walkedsquares.push(POS);
+            LENGTH++;
+          }
+          var WALKLENGTH = walkedsquares.length;
+          var STEP = 0;
+          for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            STEP++;
+            if (((WALKLENGTH === 2) && (STEP === 2))) {
+              ARTIFACTS['movetargets'][POS] = {
+                dir: DIR
+              };
+            }
+          }
+        }
+        var STARTPOS = MARKS['selecttower'];
+        var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        var startconnections = connections[STARTPOS];
+        for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
+          var POS = startconnections[neighbourdirs[dirnbr]];
+          if (POS &&
             (function() {
               var k, ret = {},
-                s0 = UNITLAYERS.oppunits,
-                s1 = UNITLAYERS.mycatapults;
+                s0 = UNITLAYERS.oppcatapults,
+                s1 = UNITLAYERS.oppwalls;
               for (k in s0) {
                 ret[k] = 1;
               }
@@ -755,71 +854,29 @@
                 ret[k] = 1;
               }
               return ret;
-            }());
-          var STARTPOS = MARKS['selecttower'];
-          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var DIR = allwalkerdirs[walkerdirnbr];
-            var walkedsquares = [];
-            var MAX = 2;
-            var POS = STARTPOS;
-            var LENGTH = 0;
-            while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-              walkedsquares.push(POS);
-              LENGTH++;
-            }
-            var WALKLENGTH = walkedsquares.length;
-            var STEP = 0;
-            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-              POS = walkedsquares[walkstepper];
-              STEP++;
-              if (((WALKLENGTH === 2) && (STEP === 2))) {
-                ARTIFACTS['movetargets'][POS] = {
-                  dir: DIR
-                };
-              }
-            }
+            }())[POS]) {
+            ARTIFACTS['killtargets'][POS] = {};
           }
-          var STARTPOS = MARKS['selecttower'];
-          var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-          var startconnections = connections[STARTPOS];
-          for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
-            var POS = startconnections[neighbourdirs[dirnbr]];
-            if (POS &&
-              (function() {
-                var k, ret = {},
-                  s0 = UNITLAYERS.oppcatapults,
-                  s1 = UNITLAYERS.oppwalls;
-                for (k in s0) {
-                  ret[k] = 1;
-                }
-                for (k in s1) {
-                  ret[k] = 1;
-                }
-                return ret;
-              }())[POS]) {
-              ARTIFACTS['killtargets'][POS] = {};
-            }
-          } 
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selecttower'
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.movetargets) {
-            newlinks[linkpos] = 'selectmove2';
-          }
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.killtargets) {
-            newlinks[linkpos] = 'selectkill2';
-          }
-          return newstep;
-        };
+        } 
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selecttower'
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.movetargets) {
+          newlinks[linkpos] = 'selectmove2';
+        }
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.killtargets) {
+          newlinks[linkpos] = 'selectkill2';
+        }
+        return newstep;
+      }
       game.selecttower2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -828,36 +885,35 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectmove2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            madecatapults: Object.assign({}, step.ARTIFACTS.madecatapults),
-            madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
-            madewalls: Object.assign({}, step.ARTIFACTS.madewalls)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectmove: markpos,
-            selecttower: step.MARKS.selecttower
-          };
-          var STARTPOS = MARKS['selectmove'];
-          var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']] || {})['dir'] - 2 + 5]];
-          if (POS) {
-            ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? 'madecatapults' : 'madetowers') : 'madewalls')][POS] = {};
-          }
-          ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS['selectmove']]) ? (!!(UNITLAYERS.mytowers[MARKS['selectmove']]) ? 'madecatapults' : 'madetowers') : 'madewalls')][STARTPOS] = {};
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectmove'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].move = 'move2';
-          return newstep;
+      game.selectmove2 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          madecatapults: Object.assign({}, step.ARTIFACTS.madecatapults),
+          madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
+          madewalls: Object.assign({}, step.ARTIFACTS.madewalls)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectmove: markpos,
+          selecttower: step.MARKS.selecttower
         };
+        var STARTPOS = MARKS['selectmove'];
+        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']] || {})['dir'] - 2 + 5]];
+        if (POS) {
+          ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? 'madecatapults' : 'madetowers') : 'madewalls')][POS] = {};
+        }
+        ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS['selectmove']]) ? (!!(UNITLAYERS.mytowers[MARKS['selectmove']]) ? 'madecatapults' : 'madetowers') : 'madewalls')][STARTPOS] = {};
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectmove'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].move = 'move2';
+        return newstep;
+      }
       game.selectmove2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -866,28 +922,26 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectkill2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectkill: markpos,
-            selecttower: step.MARKS.selecttower
-          };
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectkill'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].kill = 'kill2';
-          if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
-            turn.links[newstepid].sacrifice = 'sacrifice2';
-          }
-          return newstep;
+      game.selectkill2 = function(turn, step, markpos) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectkill: markpos,
+          selecttower: step.MARKS.selecttower
         };
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectkill'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].kill = 'kill2';
+        if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
+          turn.links[newstepid].sacrifice = 'sacrifice2';
+        }
+        return newstep;
+      }
       game.selectkill2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -896,45 +950,44 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectcatapult2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            firetargets: Object.assign({}, step.ARTIFACTS.firetargets)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectcatapult: markpos
-          };
-          var STARTPOS = MARKS['selectcatapult'];
-          var allwalkerdirs = [3, 4, 5, 6, 7];
-          for (var walkerdirnbr = 0; walkerdirnbr < 5; walkerdirnbr++) {
-            var MAX = 3;
-            var POS = STARTPOS;
-            var LENGTH = 0;
-            var STEP = 0;
-            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]])) {
-              LENGTH++;
-              STEP++;
-              if (((STEP > 1) && !(UNITLAYERS.myunits[POS]))) {
-                ARTIFACTS['firetargets'][POS] = {};
-              }
+      game.selectcatapult2 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          firetargets: Object.assign({}, step.ARTIFACTS.firetargets)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectcatapult: markpos
+        };
+        var STARTPOS = MARKS['selectcatapult'];
+        var allwalkerdirs = [3, 4, 5, 6, 7];
+        for (var walkerdirnbr = 0; walkerdirnbr < 5; walkerdirnbr++) {
+          var MAX = 3;
+          var POS = STARTPOS;
+          var LENGTH = 0;
+          var STEP = 0;
+          while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]])) {
+            LENGTH++;
+            STEP++;
+            if (((STEP > 1) && !(UNITLAYERS.myunits[POS]))) {
+              ARTIFACTS['firetargets'][POS] = {};
             }
           }
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectcatapult'
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.firetargets) {
-            newlinks[linkpos] = 'selectfire2';
-          }
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectcatapult'
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.firetargets) {
+          newlinks[linkpos] = 'selectfire2';
+        }
+        return newstep;
+      }
       game.selectcatapult2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -943,25 +996,22 @@
           var UNITDATA = step.UNITDATA;
           return ''
         };
-      game.selectfire2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectfire: markpos,
-            selectcatapult: step.MARKS.selectcatapult
-          };
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectfire'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].fire = 'fire2';
-          return newstep;
+      game.selectfire2 = function(turn, step, markpos) {
+        var MARKS = {
+          selectfire: markpos,
+          selectcatapult: step.MARKS.selectcatapult
         };
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectfire'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].fire = 'fire2';
+        return newstep;
+      }
       game.selectfire2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -1438,73 +1488,6 @@
         };
       }
     })();
-    function reduce(coll, iterator, acc) {
-      for (var key in coll) {
-        acc = iterator(acc, coll[key], key);
-      }
-      return acc;
-    }
-    game.newGame =
-      function() {
-        var turnseed = {
-          turn: 0
-        };
-        var stepseed = {
-          UNITDATA: deduceInitialUnitData({
-              "towers": {
-                "1": [
-                  ["rect", "a1", "h1"]
-                ],
-                "2": [
-                  ["rect", "a7", "h7"]
-                ]
-              }
-            })
-            ,
-          clones: 0
-        };
-        return game.start1(turnseed, stepseed);
-      };
-    game.debug = function() {
-      return {
-        BOARD: BOARD,
-        connections: connections,
-        plr1: game.debug1(),
-        plr2: game.debug2()
-      };
-    }
-    game.commands = {
-      "move": 1,
-      "kill": 1,
-      "sacrifice": 1,
-      "fire": 1
-    };
-    game.graphics = {
-      "tiles": {
-        "homerow": "playercolour"
-      },
-      "icons": {
-        "towers": "rooks",
-        "walls": "pawns",
-        "catapults": "queens"
-      }
-    };
-    game.board = {
-      "height": 7,
-      "width": 8,
-      "terrain": {
-        "homerow": {
-          "1": [
-            ["rect", "a1", "h1"]
-          ],
-          "2": [
-            ["rect", "a7", "h7"]
-          ]
-        }
-      }
-    };
-    game.AI = [];
-    game.id = "murusgallicusadvanced";
     return game;
   }
 )()

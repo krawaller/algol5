@@ -1,4 +1,4 @@
-import map from 'lodash/map'
+import * as map from 'lodash/map'
 
 export default C => Object.assign(C,{
 

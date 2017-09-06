@@ -1,6 +1,24 @@
 (
   function() {
     var game = {};
+    game.commands = {
+      "uphill": 1,
+      "downhill": 1,
+      "horisontal": 1,
+      "vertical": 1
+    };
+    game.graphics = {
+      "icons": {
+        "soldiers": "pawns",
+        "markers": "pawns"
+      }
+    };
+    game.board = {
+      "height": 5,
+      "width": 5
+    };
+    game.AI = [];
+    game.id = "coffee";
     var boardDef = {
       "height": 5,
       "width": 5
@@ -9,57 +27,81 @@
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
     var TERRAIN = terrainLayers(boardDef, 0);
+    function reduce(coll, iterator, acc) {
+      for (var key in coll) {
+        acc = iterator(acc, coll[key], key);
+      }
+      return acc;
+    }
+    game.newGame = function() {
+      var turnseed = {
+        turn: 0
+      };
+      var stepseed = {
+        UNITDATA: deduceInitialUnitData({})
+          ,
+        clones: 0
+      };
+      return game.start1(turnseed, stepseed);
+    };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    };
     (function() {
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
-      game.selectdrop1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            FOOBAR: Object.assign({}, step.ARTIFACTS.FOOBAR),
-            vertical: Object.assign({}, step.ARTIFACTS.vertical),
-            uphill: Object.assign({}, step.ARTIFACTS.uphill),
-            horisontal: Object.assign({}, step.ARTIFACTS.horisontal),
-            downhill: Object.assign({}, step.ARTIFACTS.downhill)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectdrop: markpos
-          };
-          var STARTPOS = MARKS['selectdrop'];
-          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var DIR = allwalkerdirs[walkerdirnbr];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][DIR])) {
-              if (!UNITLAYERS.units[POS]) {
-                ARTIFACTS[['FOOBAR', 'vertical', 'uphill', 'horisontal', 'downhill', 'vertical', 'uphill', 'horisontal', 'downhill'][DIR]][POS] = {};
-              }
+      game.selectdrop1 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          FOOBAR: Object.assign({}, step.ARTIFACTS.FOOBAR),
+          vertical: Object.assign({}, step.ARTIFACTS.vertical),
+          uphill: Object.assign({}, step.ARTIFACTS.uphill),
+          horisontal: Object.assign({}, step.ARTIFACTS.horisontal),
+          downhill: Object.assign({}, step.ARTIFACTS.downhill)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectdrop: markpos
+        };
+        var STARTPOS = MARKS['selectdrop'];
+        var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+          var DIR = allwalkerdirs[walkerdirnbr];
+          var POS = STARTPOS;
+          while ((POS = connections[POS][DIR])) {
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS[['FOOBAR', 'vertical', 'uphill', 'horisontal', 'downhill', 'vertical', 'uphill', 'horisontal', 'downhill'][DIR]][POS] = {};
             }
           }
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectdrop'
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.uphill ||  {}).length !== 0) {
-            turn.links[newstepid].uphill = 'uphill1';
-          }
-          if (Object.keys(ARTIFACTS.downhill ||  {}).length !== 0) {
-            turn.links[newstepid].downhill = 'downhill1';
-          }
-          if (Object.keys(ARTIFACTS.vertical ||  {}).length !== 0) {
-            turn.links[newstepid].vertical = 'vertical1';
-          }
-          if (Object.keys(ARTIFACTS.horisontal ||  {}).length !== 0) {
-            turn.links[newstepid].horisontal = 'horisontal1';
-          }
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectdrop'
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.uphill ||  {}).length !== 0) {
+          turn.links[newstepid].uphill = 'uphill1';
+        }
+        if (Object.keys(ARTIFACTS.downhill ||  {}).length !== 0) {
+          turn.links[newstepid].downhill = 'downhill1';
+        }
+        if (Object.keys(ARTIFACTS.vertical ||  {}).length !== 0) {
+          turn.links[newstepid].vertical = 'vertical1';
+        }
+        if (Object.keys(ARTIFACTS.horisontal ||  {}).length !== 0) {
+          turn.links[newstepid].horisontal = 'horisontal1';
+        }
+        return newstep;
+      }
       game.selectdrop1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -551,53 +593,52 @@
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
-      game.selectdrop2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            FOOBAR: Object.assign({}, step.ARTIFACTS.FOOBAR),
-            vertical: Object.assign({}, step.ARTIFACTS.vertical),
-            uphill: Object.assign({}, step.ARTIFACTS.uphill),
-            horisontal: Object.assign({}, step.ARTIFACTS.horisontal),
-            downhill: Object.assign({}, step.ARTIFACTS.downhill)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selectdrop: markpos
-          };
-          var STARTPOS = MARKS['selectdrop'];
-          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var DIR = allwalkerdirs[walkerdirnbr];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][DIR])) {
-              if (!UNITLAYERS.units[POS]) {
-                ARTIFACTS[['FOOBAR', 'vertical', 'uphill', 'horisontal', 'downhill', 'vertical', 'uphill', 'horisontal', 'downhill'][DIR]][POS] = {};
-              }
+      game.selectdrop2 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          FOOBAR: Object.assign({}, step.ARTIFACTS.FOOBAR),
+          vertical: Object.assign({}, step.ARTIFACTS.vertical),
+          uphill: Object.assign({}, step.ARTIFACTS.uphill),
+          horisontal: Object.assign({}, step.ARTIFACTS.horisontal),
+          downhill: Object.assign({}, step.ARTIFACTS.downhill)
+        });
+        var UNITLAYERS = step.UNITLAYERS;
+        var MARKS = {
+          selectdrop: markpos
+        };
+        var STARTPOS = MARKS['selectdrop'];
+        var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+          var DIR = allwalkerdirs[walkerdirnbr];
+          var POS = STARTPOS;
+          while ((POS = connections[POS][DIR])) {
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS[['FOOBAR', 'vertical', 'uphill', 'horisontal', 'downhill', 'vertical', 'uphill', 'horisontal', 'downhill'][DIR]][POS] = {};
             }
           }
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selectdrop'
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.uphill ||  {}).length !== 0) {
-            turn.links[newstepid].uphill = 'uphill2';
-          }
-          if (Object.keys(ARTIFACTS.downhill ||  {}).length !== 0) {
-            turn.links[newstepid].downhill = 'downhill2';
-          }
-          if (Object.keys(ARTIFACTS.vertical ||  {}).length !== 0) {
-            turn.links[newstepid].vertical = 'vertical2';
-          }
-          if (Object.keys(ARTIFACTS.horisontal ||  {}).length !== 0) {
-            turn.links[newstepid].horisontal = 'horisontal2';
-          }
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selectdrop'
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.uphill ||  {}).length !== 0) {
+          turn.links[newstepid].uphill = 'uphill2';
+        }
+        if (Object.keys(ARTIFACTS.downhill ||  {}).length !== 0) {
+          turn.links[newstepid].downhill = 'downhill2';
+        }
+        if (Object.keys(ARTIFACTS.vertical ||  {}).length !== 0) {
+          turn.links[newstepid].vertical = 'vertical2';
+        }
+        if (Object.keys(ARTIFACTS.horisontal ||  {}).length !== 0) {
+          turn.links[newstepid].horisontal = 'horisontal2';
+        }
+        return newstep;
+      }
       game.selectdrop2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -1085,50 +1126,6 @@
         };
       }
     })();
-    function reduce(coll, iterator, acc) {
-      for (var key in coll) {
-        acc = iterator(acc, coll[key], key);
-      }
-      return acc;
-    }
-    game.newGame =
-      function() {
-        var turnseed = {
-          turn: 0
-        };
-        var stepseed = {
-          UNITDATA: deduceInitialUnitData({})
-            ,
-          clones: 0
-        };
-        return game.start1(turnseed, stepseed);
-      };
-    game.debug = function() {
-      return {
-        BOARD: BOARD,
-        connections: connections,
-        plr1: game.debug1(),
-        plr2: game.debug2()
-      };
-    }
-    game.commands = {
-      "uphill": 1,
-      "downhill": 1,
-      "horisontal": 1,
-      "vertical": 1
-    };
-    game.graphics = {
-      "icons": {
-        "soldiers": "pawns",
-        "markers": "pawns"
-      }
-    };
-    game.board = {
-      "height": 5,
-      "width": 5
-    };
-    game.AI = [];
-    game.id = "coffee";
     return game;
   }
 )()

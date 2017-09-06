@@ -1,4 +1,4 @@
-import reduce from 'lodash/reduce'
+import * as reduce from 'lodash/reduce'
 
 export default C => Object.assign(C,{
 

@@ -9,20 +9,17 @@ After this is done, these files can then be merged together by the script
 in `collect.js`.
 */
 
+import compileGameToCode from './def2code/';
 
-import lib from './logic/'
+import * as fs from 'fs';
 
-import preProcess from './preprocess'
-
-import fs from 'fs'
-
-import {js_beautify} from 'js-beautify'
+import {js_beautify} from 'js-beautify';
 
 fs.readdirSync(__dirname+"/defs").forEach(gamename=>{
-  let rules = preProcess.preProcess(require('./defs/'+gamename))
-  console.log("building",gamename)
-  let code = lib.makeGameObject({rules});
+  let rules = require('./defs/'+gamename);
+  console.log("Building",gamename)
+  let code = compileGameToCode(rules);
   code = `(${code})()`
   code = js_beautify(code,{indent_size:2}).replace(/\n{1,}/g,'\n');
   fs.writeFileSync(__dirname+'/temp/'+gamename.replace('.json','.js'),code);
-})
+});

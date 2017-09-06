@@ -1,6 +1,36 @@
 (
   function() {
     var game = {};
+    game.commands = {
+      "snipe": 1
+    };
+    game.graphics = {
+      "icons": {
+        "soldiers": "pawns",
+        "sniper": "kings"
+      },
+      "tiles": {
+        "zone": "grass",
+        "corner": "castle"
+      }
+    };
+    game.board = {
+      "height": 6,
+      "width": 6,
+      "terrain": {
+        "zone": {
+          "1": [
+            ["rect", "b6", "f6", 5]
+          ],
+          "2": [
+            ["rect", "a1", "a5", 3]
+          ]
+        },
+        "corner": ["a6"]
+      }
+    };
+    game.AI = [];
+    game.id = "snijpunt";
     var boardDef = {
       "height": 6,
       "width": 6,
@@ -19,40 +49,63 @@
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);
     var relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
+    function reduce(coll, iterator, acc) {
+      for (var key in coll) {
+        acc = iterator(acc, coll[key], key);
+      }
+      return acc;
+    }
+    game.newGame = function() {
+      var turnseed = {
+        turn: 0
+      };
+      var stepseed = {
+        UNITDATA: deduceInitialUnitData({})
+          ,
+        clones: 0
+      };
+      return game.start1(turnseed, stepseed);
+    };
+    game.debug = function() {
+      return {
+        BOARD: BOARD,
+        connections: connections,
+        plr1: game.debug1(),
+        plr2: game.debug2()
+      };
+    };
     (function() {
       var TERRAIN = terrainLayers(boardDef, 1);
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
-      game.selecttarget1 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            intersection: Object.assign({}, step.ARTIFACTS.intersection)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selecttarget: markpos
-          };
-          var STARTPOS = MARKS['selecttarget'];
-          var DIR = 5;
-          var POS = STARTPOS;
-          while ((POS = connections[POS][5])) {
-            if (ARTIFACTS.enemyline[POS]) {
-              ARTIFACTS['intersection'][POS] = {};
-            }
-          }
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selecttarget'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].snipe = 'snipe1';
-          return newstep;
+      game.selecttarget1 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          intersection: Object.assign({}, step.ARTIFACTS.intersection)
+        });
+        var MARKS = {
+          selecttarget: markpos
         };
+        var STARTPOS = MARKS['selecttarget'];
+        var DIR = 5;
+        var POS = STARTPOS;
+        while ((POS = connections[POS][5])) {
+          if (ARTIFACTS.enemyline[POS]) {
+            ARTIFACTS['intersection'][POS] = {};
+          }
+        }
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selecttarget'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].snipe = 'snipe1';
+        return newstep;
+      }
       game.selecttarget1instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -297,35 +350,33 @@
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
-      game.selecttarget2 =
-        function(turn, step, markpos) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            intersection: Object.assign({}, step.ARTIFACTS.intersection)
-          });
-          var UNITLAYERS = step.UNITLAYERS;
-          var MARKS = {
-            selecttarget: markpos
-          };
-          var STARTPOS = MARKS['selecttarget'];
-          var DIR = 3;
-          var POS = STARTPOS;
-          while ((POS = connections[POS][3])) {
-            if (ARTIFACTS.enemyline[POS]) {
-              ARTIFACTS['intersection'][POS] = {};
-            }
-          }
-          var newstepid = step.stepid + '-' + markpos;
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            stepid: newstepid,
-            path: step.path.concat(markpos),
-            name: 'selecttarget'
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].snipe = 'snipe2';
-          return newstep;
+      game.selecttarget2 = function(turn, step, markpos) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          intersection: Object.assign({}, step.ARTIFACTS.intersection)
+        });
+        var MARKS = {
+          selecttarget: markpos
         };
+        var STARTPOS = MARKS['selecttarget'];
+        var DIR = 3;
+        var POS = STARTPOS;
+        while ((POS = connections[POS][3])) {
+          if (ARTIFACTS.enemyline[POS]) {
+            ARTIFACTS['intersection'][POS] = {};
+          }
+        }
+        var newstepid = step.stepid + '-' + markpos;
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          stepid: newstepid,
+          path: step.path.concat(markpos),
+          name: 'selecttarget'
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].snipe = 'snipe2';
+        return newstep;
+      }
       game.selecttarget2instruction =
         function(step) {
           var MARKS = step.MARKS;
@@ -565,62 +616,6 @@
         };
       }
     })();
-    function reduce(coll, iterator, acc) {
-      for (var key in coll) {
-        acc = iterator(acc, coll[key], key);
-      }
-      return acc;
-    }
-    game.newGame =
-      function() {
-        var turnseed = {
-          turn: 0
-        };
-        var stepseed = {
-          UNITDATA: deduceInitialUnitData({})
-            ,
-          clones: 0
-        };
-        return game.start1(turnseed, stepseed);
-      };
-    game.debug = function() {
-      return {
-        BOARD: BOARD,
-        connections: connections,
-        plr1: game.debug1(),
-        plr2: game.debug2()
-      };
-    }
-    game.commands = {
-      "snipe": 1
-    };
-    game.graphics = {
-      "icons": {
-        "soldiers": "pawns",
-        "sniper": "kings"
-      },
-      "tiles": {
-        "zone": "grass",
-        "corner": "castle"
-      }
-    };
-    game.board = {
-      "height": 6,
-      "width": 6,
-      "terrain": {
-        "zone": {
-          "1": [
-            ["rect", "b6", "f6", 5]
-          ],
-          "2": [
-            ["rect", "a1", "a5", 3]
-          ]
-        },
-        "corner": ["a6"]
-      }
-    };
-    game.AI = [];
-    game.id = "snijpunt";
     return game;
   }
 )()

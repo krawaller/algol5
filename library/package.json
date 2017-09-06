@@ -1,20 +1,14 @@
 {
   "devDependencies": {
-    "babel-cli": "^6.4.0",
-    "babel-core": "^6.4.0",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-es2016": "^6.0.10",
-    "babel-preset-stage-0": "^6.22.0",
-    "jasmine": "^2.4.1",
-    "js-beautify": "^1.6.2",
-    "sinon": "^1.17.2"
+    "@types/node": "^8.0.26",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.5.2"
   },
   "scripts": {
-    "testlogicdetails": "babel-node ./logic/test/run.js",
-    "generate": "babel-node ./generate.js",
-    "collect": "babel-node ./collect.js",
-    "makemeta": "babel-node ./makemeta.js",
-    "build": "npm run generate && npm run collect && npm run makemeta"
+    "compile": "ts-node ./compile.ts",
+    "collect": "ts-node ./collect.ts",
+    "makemeta": "ts-node ./makemeta.ts",
+    "build": "npm run compile && npm run collect && npm run makemeta"
   },
   "dependencies": {
     "eval": "^0.1.2",

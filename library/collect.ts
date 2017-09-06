@@ -13,7 +13,7 @@ let games = fs.readdirSync(__dirname+"/temp/").filter(f => f != '.DS_Store').map
   return gamename.replace('.js','')+': '+code
 })
 
-let envelope = fs.readFileSync(__dirname + "/logic/envelope.js") + '';
+let envelope = fs.readFileSync(__dirname + "/envelope.js") + '';
 
 let file = `
 ${envelope}

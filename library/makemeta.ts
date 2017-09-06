@@ -8,7 +8,7 @@ import * as fs from 'fs';
 import * as omit from 'lodash/omit';
 import * as _eval from 'eval';
 
-let terrainLayers = _eval(fs.readFileSync(__dirname + "/logic/envelope.js") + '  module.exports = terrainLayers;' );
+let terrainLayers = _eval(fs.readFileSync(__dirname + "/envelope.js") + '  module.exports = terrainLayers;' );
 
 let meta = fs.readdirSync(__dirname+"/defs").reduce((mem,gamename)=>{
   console.log("Meta for",gamename);

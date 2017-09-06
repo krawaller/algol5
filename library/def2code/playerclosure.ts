@@ -4,6 +4,7 @@ import lib from '../logic/';
 import { Definition } from './types';
 import addMarkFunc from './mark';
 import addCommandFunc from './command';
+import addStartFunc from './start';
 
 export default function playerClosure(def: Definition, player: 1 | 2){
   const O = { rules: def, player };
@@ -20,7 +21,7 @@ export default function playerClosure(def: Definition, player: 1 | 2){
       ${Object.keys(def.commands||{}).map(
         cmndname => addCommandFunc(def, cmndname, player)
       ).join(' ')}
-      ${lib.addStartTurnFunction(O)}
+      ${addStartFunc(def, player)}
       ${lib.addAI(O)}
       game.debug${player} = function(){
         return {TERRAIN:TERRAIN};

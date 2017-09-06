@@ -381,14 +381,9 @@
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
-      game.deploy1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      game.deploy1instruction = function(step) {
+        return '';
+      };
       game.move1 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -466,14 +461,9 @@
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
-      game.move1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      game.move1instruction = function(step) {
+        return '';
+      };
       game.jump1 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -552,142 +542,131 @@
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
-      game.jump1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
-      game.start1 =
-        function(turn, step) {
-          var turn = {
-            steps: {},
-            player: player,
-            turn: turn.turn + 1,
-            links: {
-              root: {}
-            }
-          };
-          var MARKS = {};
-          var ARTIFACTS = {
-            "nokings": {},
-            "nosoldiers": {},
-            "kingwalk": {},
-            "adjacentenemies": {},
-            "splashed": {},
-            "willdie": {},
-            "jumptargets": {}
-          };
-          var UNITDATA = step.UNITDATA;
-          var UNITLAYERS = {
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "kings": {},
-            "mykings": {},
-            "oppkings": {},
-            "neutralkings": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+      game.jump1instruction = function(step) {
+        return '';
+      };
+      game.start1 = function(turn, step) {
+        var turn = {
+          steps: {},
+          player: player,
+          turn: turn.turn + 1,
+          links: {
+            root: {}
           }
-          for (var STARTPOS in
+        };
+        var MARKS = {};
+        var ARTIFACTS = {
+          "nokings": {},
+          "nosoldiers": {},
+          "kingwalk": {},
+          "adjacentenemies": {},
+          "splashed": {},
+          "willdie": {},
+          "jumptargets": {}
+        };
+        var UNITDATA = step.UNITDATA;
+        var UNITLAYERS = {
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "kings": {},
+          "mykings": {},
+          "oppkings": {},
+          "neutralkings": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        for (var STARTPOS in
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.edges,
+                s1 = UNITLAYERS.mysoldiers;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())) {
+          var neighbourdirs = (!!(TERRAIN.homerow[STARTPOS]) ? [1, 3, 5, 7] : [1, 5]);
+          var nbrofneighbourdirs = neighbourdirs.length;
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS) {
+              ARTIFACTS['nokings'][POS] = {};
+            }
+          } 
+        } 
+        for (var STARTPOS in UNITLAYERS.mykings) {
+          var neighbourdirs = [1, 3, 5, 7];
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
+              ARTIFACTS['nosoldiers'][POS] = {};
+            }
+          } 
+        } 
+        var newstep = turn.steps.root = {
+          ARTIFACTS: ARTIFACTS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          MARKS: MARKS,
+          stepid: 'root',
+          name: 'start',
+          clones: step.clones,
+          path: []
+        };
+        if ((turn.turn > 2)) {
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.myunits) {
+            newlinks[linkpos] = 'selectunit1';
+          }
+        } else {
+          var newlinks = turn.links.root;
+          for (var linkpos in
               (function() {
                 var ret = {},
-                  s0 = TERRAIN.edges,
-                  s1 = UNITLAYERS.mysoldiers;
+                  s0 = BOARD.board,
+                  s1 =
+                  (function() {
+                    var k, ret = {},
+                      s0 = UNITLAYERS.units,
+                      s1 = ARTIFACTS.nokings;
+                    for (k in s0) {
+                      ret[k] = 1;
+                    }
+                    for (k in s1) {
+                      ret[k] = 1;
+                    }
+                    return ret;
+                  }());
                 for (var key in s0) {
-                  if (s1[key]) {
+                  if (!s1[key]) {
                     ret[key] = s0[key];
                   }
                 }
                 return ret;
               }())) {
-            var neighbourdirs = (!!(TERRAIN.homerow[STARTPOS]) ? [1, 3, 5, 7] : [1, 5]);
-            var nbrofneighbourdirs = neighbourdirs.length;
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS) {
-                ARTIFACTS['nokings'][POS] = {};
-              }
-            } 
-          } 
-          for (var STARTPOS in UNITLAYERS.mykings) {
-            var neighbourdirs = [1, 3, 5, 7];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
-                ARTIFACTS['nosoldiers'][POS] = {};
-              }
-            } 
-          } 
-          var newstep = turn.steps.root = {
-            ARTIFACTS: ARTIFACTS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            MARKS: MARKS,
-            stepid: 'root',
-            name: 'start',
-            clones: step.clones,
-            path: []
-          };
-          if ((turn.turn > 2)) {
-            var newlinks = turn.links.root;
-            for (var linkpos in UNITLAYERS.myunits) {
-              newlinks[linkpos] = 'selectunit1';
-            }
-          } else {
-            var newlinks = turn.links.root;
-            for (var linkpos in
-                (function() {
-                  var ret = {},
-                    s0 = BOARD.board,
-                    s1 =
-                    (function() {
-                      var k, ret = {},
-                        s0 = UNITLAYERS.units,
-                        s1 = ARTIFACTS.nokings;
-                      for (k in s0) {
-                        ret[k] = 1;
-                      }
-                      for (k in s1) {
-                        ret[k] = 1;
-                      }
-                      return ret;
-                    }());
-                  for (var key in s0) {
-                    if (!s1[key]) {
-                      ret[key] = s0[key];
-                    }
-                  }
-                  return ret;
-                }())) {
-              newlinks[linkpos] = 'selectkingdeploy1';
-            }
+            newlinks[linkpos] = 'selectkingdeploy1';
           }
-          return turn;
-        };
-      game.start1instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+        }
+        return turn;
+      }
+      game.start1instruction = function(step) {
+        return '';
+      };
       game.debug1 = function() {
         return {
           TERRAIN: TERRAIN
@@ -981,14 +960,9 @@
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
-      game.deploy2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      game.deploy2instruction = function(step) {
+        return '';
+      };
       game.move2 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -1066,14 +1040,9 @@
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
-      game.move2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+      game.move2instruction = function(step) {
+        return '';
+      };
       game.jump2 =
         function(turn, step) {
           var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -1152,142 +1121,131 @@
           } else turn.links[newstepid].endturn = "start" + otherplayer;
           return newstep;
         };
-      game.jump2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
-      game.start2 =
-        function(turn, step) {
-          var turn = {
-            steps: {},
-            player: player,
-            turn: turn.turn + 1,
-            links: {
-              root: {}
-            }
-          };
-          var MARKS = {};
-          var ARTIFACTS = {
-            "nokings": {},
-            "nosoldiers": {},
-            "kingwalk": {},
-            "adjacentenemies": {},
-            "splashed": {},
-            "willdie": {},
-            "jumptargets": {}
-          };
-          var UNITDATA = step.UNITDATA;
-          var UNITLAYERS = {
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "kings": {},
-            "mykings": {},
-            "oppkings": {},
-            "neutralkings": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+      game.jump2instruction = function(step) {
+        return '';
+      };
+      game.start2 = function(turn, step) {
+        var turn = {
+          steps: {},
+          player: player,
+          turn: turn.turn + 1,
+          links: {
+            root: {}
           }
-          for (var STARTPOS in
+        };
+        var MARKS = {};
+        var ARTIFACTS = {
+          "nokings": {},
+          "nosoldiers": {},
+          "kingwalk": {},
+          "adjacentenemies": {},
+          "splashed": {},
+          "willdie": {},
+          "jumptargets": {}
+        };
+        var UNITDATA = step.UNITDATA;
+        var UNITLAYERS = {
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "kings": {},
+          "mykings": {},
+          "oppkings": {},
+          "neutralkings": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        for (var STARTPOS in
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.edges,
+                s1 = UNITLAYERS.mysoldiers;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())) {
+          var neighbourdirs = (!!(TERRAIN.homerow[STARTPOS]) ? [1, 3, 5, 7] : [1, 5]);
+          var nbrofneighbourdirs = neighbourdirs.length;
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS) {
+              ARTIFACTS['nokings'][POS] = {};
+            }
+          } 
+        } 
+        for (var STARTPOS in UNITLAYERS.mykings) {
+          var neighbourdirs = [1, 3, 5, 7];
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
+              ARTIFACTS['nosoldiers'][POS] = {};
+            }
+          } 
+        } 
+        var newstep = turn.steps.root = {
+          ARTIFACTS: ARTIFACTS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          MARKS: MARKS,
+          stepid: 'root',
+          name: 'start',
+          clones: step.clones,
+          path: []
+        };
+        if ((turn.turn > 2)) {
+          var newlinks = turn.links.root;
+          for (var linkpos in UNITLAYERS.myunits) {
+            newlinks[linkpos] = 'selectunit2';
+          }
+        } else {
+          var newlinks = turn.links.root;
+          for (var linkpos in
               (function() {
                 var ret = {},
-                  s0 = TERRAIN.edges,
-                  s1 = UNITLAYERS.mysoldiers;
+                  s0 = BOARD.board,
+                  s1 =
+                  (function() {
+                    var k, ret = {},
+                      s0 = UNITLAYERS.units,
+                      s1 = ARTIFACTS.nokings;
+                    for (k in s0) {
+                      ret[k] = 1;
+                    }
+                    for (k in s1) {
+                      ret[k] = 1;
+                    }
+                    return ret;
+                  }());
                 for (var key in s0) {
-                  if (s1[key]) {
+                  if (!s1[key]) {
                     ret[key] = s0[key];
                   }
                 }
                 return ret;
               }())) {
-            var neighbourdirs = (!!(TERRAIN.homerow[STARTPOS]) ? [1, 3, 5, 7] : [1, 5]);
-            var nbrofneighbourdirs = neighbourdirs.length;
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS) {
-                ARTIFACTS['nokings'][POS] = {};
-              }
-            } 
-          } 
-          for (var STARTPOS in UNITLAYERS.mykings) {
-            var neighbourdirs = [1, 3, 5, 7];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
-                ARTIFACTS['nosoldiers'][POS] = {};
-              }
-            } 
-          } 
-          var newstep = turn.steps.root = {
-            ARTIFACTS: ARTIFACTS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            MARKS: MARKS,
-            stepid: 'root',
-            name: 'start',
-            clones: step.clones,
-            path: []
-          };
-          if ((turn.turn > 2)) {
-            var newlinks = turn.links.root;
-            for (var linkpos in UNITLAYERS.myunits) {
-              newlinks[linkpos] = 'selectunit2';
-            }
-          } else {
-            var newlinks = turn.links.root;
-            for (var linkpos in
-                (function() {
-                  var ret = {},
-                    s0 = BOARD.board,
-                    s1 =
-                    (function() {
-                      var k, ret = {},
-                        s0 = UNITLAYERS.units,
-                        s1 = ARTIFACTS.nokings;
-                      for (k in s0) {
-                        ret[k] = 1;
-                      }
-                      for (k in s1) {
-                        ret[k] = 1;
-                      }
-                      return ret;
-                    }());
-                  for (var key in s0) {
-                    if (!s1[key]) {
-                      ret[key] = s0[key];
-                    }
-                  }
-                  return ret;
-                }())) {
-              newlinks[linkpos] = 'selectkingdeploy2';
-            }
+            newlinks[linkpos] = 'selectkingdeploy2';
           }
-          return turn;
-        };
-      game.start2instruction =
-        function(step) {
-          var MARKS = step.MARKS;
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          var UNITDATA = step.UNITDATA;
-          return ''
-        };
+        }
+        return turn;
+      }
+      game.start2instruction = function(step) {
+        return '';
+      };
       game.debug2 = function() {
         return {
           TERRAIN: TERRAIN

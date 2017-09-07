@@ -1729,12 +1729,13 @@ module.exports = {
             UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
               pos: newpos
             });
+            // TODO - check that it uses ['loopid'] ?
           }
         }
         var LOOPID;
         for (var POS in ARTIFACTS.squished) {
           if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
-            delete UNITDATA[LOOPID];
+            delete UNITDATA[LOOPID]; // TODO - check that it uses ['loopid'] ?
           }
         }
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
@@ -1967,12 +1968,13 @@ module.exports = {
             UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
               pos: newpos
             });
+            // TODO - check that it uses ['loopid'] ?
           }
         }
         var LOOPID;
         for (var POS in ARTIFACTS.squished) {
           if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
-            delete UNITDATA[LOOPID];
+            delete UNITDATA[LOOPID]; // TODO - check that it uses ['loopid'] ?
           }
         }
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
@@ -6960,6 +6962,7 @@ module.exports = {
           UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
             'group': 'notfrozens'
           });
+          // TODO - check that it uses ['loopid'] ?
         }
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
         if (unitid) {
@@ -7397,6 +7400,7 @@ module.exports = {
           UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
             'group': 'notfrozens'
           });
+          // TODO - check that it uses ['loopid'] ?
         }
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
         if (unitid) {
@@ -11229,6 +11233,7 @@ module.exports = {
             UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
               'owner': 1
             });
+            // TODO - check that it uses ['loopid'] ?
           }
         }
         MARKS = {};
@@ -11434,6 +11439,7 @@ module.exports = {
             UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
               'owner': 2
             });
+            // TODO - check that it uses ['loopid'] ?
           }
         }
         MARKS = {};

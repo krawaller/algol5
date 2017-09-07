@@ -149,6 +149,7 @@
             UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
               'owner': 1
             });
+            // TODO - check that it uses ['loopid'] ?
           }
         }
         MARKS = {};
@@ -354,6 +355,7 @@
             UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
               'owner': 2
             });
+            // TODO - check that it uses ['loopid'] ?
           }
         }
         MARKS = {};

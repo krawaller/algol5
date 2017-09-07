@@ -150,6 +150,7 @@
           UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
             'group': 'notfrozens'
           });
+          // TODO - check that it uses ['loopid'] ?
         }
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
         if (unitid) {
@@ -587,6 +588,7 @@
           UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
             'group': 'notfrozens'
           });
+          // TODO - check that it uses ['loopid'] ?
         }
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
         if (unitid) {

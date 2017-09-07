@@ -23,16 +23,6 @@ export default C => Object.assign(C,{
     instr_playercase: (O,[alt1,alt2])=> C.instruction(O,O.player === 1 ? alt1 : alt2),
     instr_all: (O,defs)=> defs.map(d=>C.instruction(O,d)).join(' '),
 
-    applyEffectInstructions: (O,instr)=> {
-        O = {effect:true, ...(O || {})}
-        if (instr.applyEffect) {
-            return C.instruction(O,instr.applyEffect)
-        } else if (instr.applyEffects) {
-            return C.instruction(O,['all'].concat(instr.applyEffects))
-        } else {
-            return '';
-        }
-    },
     applyGeneratorInstructions: (O,instr)=> {
         O = {generating:true, ...(O || {})}
         if (instr.runGenerator) {

@@ -2,6 +2,7 @@ import lib from '../logic/';
 
 import { Definition } from './types';
 import applyLinkInstructions from './link';
+import applyEffectInstructions from './effect';
 import {ifCodeContains} from './utils';
 
 export default function addCommandFunction(def: Definition, cmndname: string, player: 1 | 2){
@@ -17,7 +18,7 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
       var UNITLAYERS = step.UNITLAYERS;
       ${lib.usesTurnVars(O) ? 'var TURNVARS = Object.assign({},step.TURNVARS); ' : ''}
 
-      ${lib.applyEffectInstructions(O,cmndDef)}
+      ${applyEffectInstructions(def,cmndDef,player)}
       MARKS = {};
       ${lib.calculateUnitLayers(O)}
       ARTIFACTS = ${lib.blankArtifactLayers(O)};

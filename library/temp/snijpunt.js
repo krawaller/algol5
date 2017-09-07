@@ -109,121 +109,120 @@
       game.selecttarget1instruction = function(step) {
         return '';
       };
-      game.snipe1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            winline: Object.assign({}, step.ARTIFACTS.winline),
-            loseline: Object.assign({}, step.ARTIFACTS.loseline)
-          });
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          if (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0) {
-            var newunitid = 'spawn' + (clones++);
-            UNITDATA[newunitid] = {
-              pos: MARKS['selecttarget'],
-              id: newunitid,
-              group: 'sniper',
-              owner: player
-            };
-          } else {
-            var unitid = (UNITLAYERS.units[Object.keys(UNITLAYERS.mysniper)[0]]  || {}).id;
+      game.snipe1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          winline: Object.assign({}, step.ARTIFACTS.winline),
+          loseline: Object.assign({}, step.ARTIFACTS.loseline)
+        });
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        if (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0) {
+          var newunitid = 'spawn' + (clones++);
+          UNITDATA[newunitid] = {
+            pos: MARKS['selecttarget'],
+            id: newunitid,
+            group: 'sniper',
+            owner: player
+          };
+        } else {
+          var unitid = (UNITLAYERS.units[Object.keys(UNITLAYERS.mysniper)[0]]  || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+              'pos': MARKS['selecttarget']
+            });
+          }
+        }
+        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+          if (!!(UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]])) {
+            var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
             if (unitid) {
               UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'pos': MARKS['selecttarget']
+                'owner': (((UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]] || {})['owner'] === 2) ? 1 : 2)
               });
             }
+          } else {
+            var newunitid = 'spawn' + (clones++);
+            UNITDATA[newunitid] = {
+              pos: Object.keys(ARTIFACTS.intersection)[0],
+              id: newunitid,
+              group: 'soldiers',
+              owner: 1,
+              from: MARKS['selecttarget']
+            };
           }
-          if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
-            if (!!(UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]])) {
-              var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
-              if (unitid) {
-                UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                  'owner': (((UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]] || {})['owner'] === 2) ? 1 : 2)
-                });
-              }
-            } else {
-              var newunitid = 'spawn' + (clones++);
-              UNITDATA[newunitid] = {
-                pos: Object.keys(ARTIFACTS.intersection)[0],
-                id: newunitid,
-                group: 'soldiers',
-                owner: 1,
-                from: MARKS['selecttarget']
-              };
-            }
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "sniper": {},
-            "mysniper": {},
-            "oppsniper": {},
-            "neutralsniper": {},
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "winline": {},
-            "loseline": {},
-            "intersection": {},
-            "enemyline": {},
-            "potentialempties": {},
-            "mandatory": {}
-          };
-          var walkstarts = UNITLAYERS.soldiers;
-          for (var STARTPOS in walkstarts) {
-            var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
-                walkedsquares.push(POS);
-              }
-              var WALKLENGTH = walkedsquares.length;
-              if ((WALKLENGTH > 2)) {
-                ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][STARTPOS] = {};
-              }
-            }
-          }
-          var newstepid = step.stepid + '-' + 'snipe';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'snipe',
-            path: step.path.concat('snipe'),
-            clones: clones
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else
-          if (Object.keys(ARTIFACTS.loseline ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeoppline';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "sniper": {},
+          "mysniper": {},
+          "oppsniper": {},
+          "neutralsniper": {},
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "winline": {},
+          "loseline": {},
+          "intersection": {},
+          "enemyline": {},
+          "potentialempties": {},
+          "mandatory": {}
+        };
+        var walkstarts = UNITLAYERS.soldiers;
+        for (var STARTPOS in walkstarts) {
+          var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((WALKLENGTH > 2)) {
+              ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][STARTPOS] = {};
+            }
+          }
+        }
+        var newstepid = step.stepid + '-' + 'snipe';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'snipe',
+          path: step.path.concat('snipe'),
+          clones: clones
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else
+        if (Object.keys(ARTIFACTS.loseline ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeoppline';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.snipe1instruction = function(step) {
         return '';
       };
@@ -365,121 +364,120 @@
       game.selecttarget2instruction = function(step) {
         return '';
       };
-      game.snipe2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            winline: Object.assign({}, step.ARTIFACTS.winline),
-            loseline: Object.assign({}, step.ARTIFACTS.loseline)
-          });
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          if (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0) {
-            var newunitid = 'spawn' + (clones++);
-            UNITDATA[newunitid] = {
-              pos: MARKS['selecttarget'],
-              id: newunitid,
-              group: 'sniper',
-              owner: player
-            };
-          } else {
-            var unitid = (UNITLAYERS.units[Object.keys(UNITLAYERS.mysniper)[0]]  || {}).id;
+      game.snipe2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          winline: Object.assign({}, step.ARTIFACTS.winline),
+          loseline: Object.assign({}, step.ARTIFACTS.loseline)
+        });
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        if (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0) {
+          var newunitid = 'spawn' + (clones++);
+          UNITDATA[newunitid] = {
+            pos: MARKS['selecttarget'],
+            id: newunitid,
+            group: 'sniper',
+            owner: player
+          };
+        } else {
+          var unitid = (UNITLAYERS.units[Object.keys(UNITLAYERS.mysniper)[0]]  || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+              'pos': MARKS['selecttarget']
+            });
+          }
+        }
+        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+          if (!!(UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]])) {
+            var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
             if (unitid) {
               UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'pos': MARKS['selecttarget']
+                'owner': (((UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]] || {})['owner'] === 2) ? 1 : 2)
               });
             }
+          } else {
+            var newunitid = 'spawn' + (clones++);
+            UNITDATA[newunitid] = {
+              pos: Object.keys(ARTIFACTS.intersection)[0],
+              id: newunitid,
+              group: 'soldiers',
+              owner: 2,
+              from: MARKS['selecttarget']
+            };
           }
-          if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
-            if (!!(UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]])) {
-              var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
-              if (unitid) {
-                UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                  'owner': (((UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]] || {})['owner'] === 2) ? 1 : 2)
-                });
-              }
-            } else {
-              var newunitid = 'spawn' + (clones++);
-              UNITDATA[newunitid] = {
-                pos: Object.keys(ARTIFACTS.intersection)[0],
-                id: newunitid,
-                group: 'soldiers',
-                owner: 2,
-                from: MARKS['selecttarget']
-              };
-            }
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "sniper": {},
-            "mysniper": {},
-            "oppsniper": {},
-            "neutralsniper": {},
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "winline": {},
-            "loseline": {},
-            "intersection": {},
-            "enemyline": {},
-            "potentialempties": {},
-            "mandatory": {}
-          };
-          var walkstarts = UNITLAYERS.soldiers;
-          for (var STARTPOS in walkstarts) {
-            var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
-                walkedsquares.push(POS);
-              }
-              var WALKLENGTH = walkedsquares.length;
-              if ((WALKLENGTH > 2)) {
-                ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][STARTPOS] = {};
-              }
-            }
-          }
-          var newstepid = step.stepid + '-' + 'snipe';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'snipe',
-            path: step.path.concat('snipe'),
-            clones: clones
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else
-          if (Object.keys(ARTIFACTS.loseline ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeoppline';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "sniper": {},
+          "mysniper": {},
+          "oppsniper": {},
+          "neutralsniper": {},
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "winline": {},
+          "loseline": {},
+          "intersection": {},
+          "enemyline": {},
+          "potentialempties": {},
+          "mandatory": {}
+        };
+        var walkstarts = UNITLAYERS.soldiers;
+        for (var STARTPOS in walkstarts) {
+          var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((WALKLENGTH > 2)) {
+              ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][STARTPOS] = {};
+            }
+          }
+        }
+        var newstepid = step.stepid + '-' + 'snipe';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'snipe',
+          path: step.path.concat('snipe'),
+          clones: clones
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else
+        if (Object.keys(ARTIFACTS.loseline ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeoppline';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.snipe2instruction = function(step) {
         return '';
       };

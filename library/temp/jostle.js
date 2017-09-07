@@ -130,57 +130,56 @@
         var ARTIFACTS = step.ARTIFACTS;
         return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)));
       };
-      game.jostle1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "checkers": {},
-            "mycheckers": {},
-            "oppcheckers": {},
-            "neutralcheckers": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "movetargets": {},
-            "initialenemy": {},
-            "initialfriend": {},
-            "newenemy": {},
-            "newfriend": {}
-          };
-          var newstepid = step.stepid + '-' + 'jostle';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'jostle',
-            path: step.path.concat('jostle')
+      game.jostle1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "checkers": {},
+          "mycheckers": {},
+          "oppcheckers": {},
+          "neutralcheckers": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetargets": {},
+          "initialenemy": {},
+          "initialfriend": {},
+          "newenemy": {},
+          "newfriend": {}
+        };
+        var newstepid = step.stepid + '-' + 'jostle';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'jostle',
+          path: step.path.concat('jostle')
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.jostle1instruction = function(step) {
         return '';
       };
@@ -322,57 +321,56 @@
         var ARTIFACTS = step.ARTIFACTS;
         return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)));
       };
-      game.jostle2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "checkers": {},
-            "mycheckers": {},
-            "oppcheckers": {},
-            "neutralcheckers": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "movetargets": {},
-            "initialenemy": {},
-            "initialfriend": {},
-            "newenemy": {},
-            "newfriend": {}
-          };
-          var newstepid = step.stepid + '-' + 'jostle';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'jostle',
-            path: step.path.concat('jostle')
+      game.jostle2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "checkers": {},
+          "mycheckers": {},
+          "oppcheckers": {},
+          "neutralcheckers": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetargets": {},
+          "initialenemy": {},
+          "initialfriend": {},
+          "newenemy": {},
+          "newfriend": {}
+        };
+        var newstepid = step.stepid + '-' + 'jostle';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'jostle',
+          path: step.path.concat('jostle')
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.jostle2instruction = function(step) {
         return '';
       };

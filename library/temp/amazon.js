@@ -131,135 +131,133 @@
       game.selectfiretarget1instruction = function(step) {
         return 'Choose Fire to shoot here!';
       };
-      game.move1 =
-        function(turn, step) {
-          var ARTIFACTS = {
-            targets: Object.assign({}, step.ARTIFACTS.targets)
-          };
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var TURNVARS = Object.assign({}, step.TURNVARS);
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-          }
-          TURNVARS['movedto'] = MARKS['selectmovetarget'];
-          MARKS = {};
-          UNITLAYERS = {
-            "queens": {},
-            "myqueens": {},
-            "oppqueens": {},
-            "neutralqueens": {},
-            "fires": {},
-            "myfires": {},
-            "oppfires": {},
-            "neutralfires": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "targets": {}
-          };
-          var BLOCKS = UNITLAYERS.units;
-          var STARTPOS = TURNVARS['movedto'];
-          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-              ARTIFACTS['targets'][POS] = {};
-            }
-          }
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
-              ,
-            TURNVARS: TURNVARS
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.targets) {
-            newlinks[linkpos] = 'selectfiretarget1';
-          }
-          return newstep;
+      game.move1 = function(turn, step) {
+        var ARTIFACTS = {
+          targets: Object.assign({}, step.ARTIFACTS.targets)
         };
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var TURNVARS = Object.assign({}, step.TURNVARS);
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
+          });
+        }
+        TURNVARS['movedto'] = MARKS['selectmovetarget'];
+        MARKS = {};
+        UNITLAYERS = {
+          "queens": {},
+          "myqueens": {},
+          "oppqueens": {},
+          "neutralqueens": {},
+          "fires": {},
+          "myfires": {},
+          "oppfires": {},
+          "neutralfires": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "targets": {}
+        };
+        var BLOCKS = UNITLAYERS.units;
+        var STARTPOS = TURNVARS['movedto'];
+        var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+          var POS = STARTPOS;
+          while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+            ARTIFACTS['targets'][POS] = {};
+          }
+        }
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+            ,
+          TURNVARS: TURNVARS
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.targets) {
+          newlinks[linkpos] = 'selectfiretarget1';
+        }
+        return newstep;
+      }
       game.move1instruction = function(step) {
         return 'Now select where to fire at';
       };
-      game.fire1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          var TURNVARS = Object.assign({}, step.TURNVARS);
-          var newunitid = 'spawn' + (clones++);
-          UNITDATA[newunitid] = {
-            pos: MARKS['selectfiretarget'],
-            id: newunitid,
-            group: 'fires',
-            owner: 0,
-            from: TURNVARS['movedto']
-          };
-          MARKS = {};
-          UNITLAYERS = {
-            "queens": {},
-            "myqueens": {},
-            "oppqueens": {},
-            "neutralqueens": {},
-            "fires": {},
-            "myfires": {},
-            "oppfires": {},
-            "neutralfires": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "targets": {}
-          };
-          var newstepid = step.stepid + '-' + 'fire';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'fire',
-            path: step.path.concat('fire'),
-            clones: clones,
-            TURNVARS: TURNVARS
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+      game.fire1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        var TURNVARS = Object.assign({}, step.TURNVARS);
+        var newunitid = 'spawn' + (clones++);
+        UNITDATA[newunitid] = {
+          pos: MARKS['selectfiretarget'],
+          id: newunitid,
+          group: 'fires',
+          owner: 0,
+          from: TURNVARS['movedto']
         };
+        MARKS = {};
+        UNITLAYERS = {
+          "queens": {},
+          "myqueens": {},
+          "oppqueens": {},
+          "neutralqueens": {},
+          "fires": {},
+          "myfires": {},
+          "oppfires": {},
+          "neutralfires": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "targets": {}
+        };
+        var newstepid = step.stepid + '-' + 'fire';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'fire',
+          path: step.path.concat('fire'),
+          clones: clones,
+          TURNVARS: TURNVARS
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.fire1instruction = function(step) {
         return '';
       };
@@ -486,135 +484,133 @@
       game.selectfiretarget2instruction = function(step) {
         return 'Choose Fire to shoot here!';
       };
-      game.move2 =
-        function(turn, step) {
-          var ARTIFACTS = {
-            targets: Object.assign({}, step.ARTIFACTS.targets)
-          };
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var TURNVARS = Object.assign({}, step.TURNVARS);
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-          }
-          TURNVARS['movedto'] = MARKS['selectmovetarget'];
-          MARKS = {};
-          UNITLAYERS = {
-            "queens": {},
-            "myqueens": {},
-            "oppqueens": {},
-            "neutralqueens": {},
-            "fires": {},
-            "myfires": {},
-            "oppfires": {},
-            "neutralfires": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "targets": {}
-          };
-          var BLOCKS = UNITLAYERS.units;
-          var STARTPOS = TURNVARS['movedto'];
-          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-              ARTIFACTS['targets'][POS] = {};
-            }
-          }
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
-              ,
-            TURNVARS: TURNVARS
-          });
-          turn.links[newstepid] = {};
-          var newlinks = turn.links[newstepid];
-          for (var linkpos in ARTIFACTS.targets) {
-            newlinks[linkpos] = 'selectfiretarget2';
-          }
-          return newstep;
+      game.move2 = function(turn, step) {
+        var ARTIFACTS = {
+          targets: Object.assign({}, step.ARTIFACTS.targets)
         };
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var TURNVARS = Object.assign({}, step.TURNVARS);
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
+          });
+        }
+        TURNVARS['movedto'] = MARKS['selectmovetarget'];
+        MARKS = {};
+        UNITLAYERS = {
+          "queens": {},
+          "myqueens": {},
+          "oppqueens": {},
+          "neutralqueens": {},
+          "fires": {},
+          "myfires": {},
+          "oppfires": {},
+          "neutralfires": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "targets": {}
+        };
+        var BLOCKS = UNITLAYERS.units;
+        var STARTPOS = TURNVARS['movedto'];
+        var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+          var POS = STARTPOS;
+          while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+            ARTIFACTS['targets'][POS] = {};
+          }
+        }
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+            ,
+          TURNVARS: TURNVARS
+        });
+        turn.links[newstepid] = {};
+        var newlinks = turn.links[newstepid];
+        for (var linkpos in ARTIFACTS.targets) {
+          newlinks[linkpos] = 'selectfiretarget2';
+        }
+        return newstep;
+      }
       game.move2instruction = function(step) {
         return 'Now select where to fire at';
       };
-      game.fire2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          var TURNVARS = Object.assign({}, step.TURNVARS);
-          var newunitid = 'spawn' + (clones++);
-          UNITDATA[newunitid] = {
-            pos: MARKS['selectfiretarget'],
-            id: newunitid,
-            group: 'fires',
-            owner: 0,
-            from: TURNVARS['movedto']
-          };
-          MARKS = {};
-          UNITLAYERS = {
-            "queens": {},
-            "myqueens": {},
-            "oppqueens": {},
-            "neutralqueens": {},
-            "fires": {},
-            "myfires": {},
-            "oppfires": {},
-            "neutralfires": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "targets": {}
-          };
-          var newstepid = step.stepid + '-' + 'fire';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'fire',
-            path: step.path.concat('fire'),
-            clones: clones,
-            TURNVARS: TURNVARS
-          });
-          turn.links[newstepid] = {};
-          turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+      game.fire2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        var TURNVARS = Object.assign({}, step.TURNVARS);
+        var newunitid = 'spawn' + (clones++);
+        UNITDATA[newunitid] = {
+          pos: MARKS['selectfiretarget'],
+          id: newunitid,
+          group: 'fires',
+          owner: 0,
+          from: TURNVARS['movedto']
         };
+        MARKS = {};
+        UNITLAYERS = {
+          "queens": {},
+          "myqueens": {},
+          "oppqueens": {},
+          "neutralqueens": {},
+          "fires": {},
+          "myfires": {},
+          "oppfires": {},
+          "neutralfires": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "targets": {}
+        };
+        var newstepid = step.stepid + '-' + 'fire';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'fire',
+          path: step.path.concat('fire'),
+          clones: clones,
+          TURNVARS: TURNVARS
+        });
+        turn.links[newstepid] = {};
+        turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.fire2instruction = function(step) {
         return '';
       };

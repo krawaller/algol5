@@ -4,8 +4,6 @@ import addGenerate from './generate'
 import addGenerateFilter from './generate_filter'
 import addGenerateNeighbour from './generate_neighbour'
 import addGenerateWalker from './generate_walker'
-import addFlowCmnd from './flow_cmnd'
-import addFlowLink from './flow_link'
 import addFlowLayers from './flow_layers'
 import addFlowInstructions from './flow_instruction'
 import addUtils from './utils'
@@ -20,8 +18,6 @@ addGenerate(o)
 addGenerateFilter(o)
 addGenerateNeighbour(o)
 addGenerateWalker(o)
-addFlowCmnd(o)
-addFlowLink(o)
 addFlowLayers(o)
 addFlowInstructions(o)
 addUtils(o)

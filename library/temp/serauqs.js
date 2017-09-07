@@ -151,279 +151,277 @@
       game.selectmovetarget1instruction = function(step) {
         return '';
       };
-      game.makewild1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'wild'
-            });
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "wild": {},
-            "mywild": {},
-            "oppwild": {},
-            "neutralwild": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "movetargets": {},
-            "winline": {}
-          };
-          var newstepid = step.stepid + '-' + 'makewild';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'makewild',
-            path: step.path.concat('makewild')
+      game.makewild1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': 'wild'
           });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else
-          if ((Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.corners,
-                  s1 =
-                  (function() {
-                    var k, ret = {},
-                      s0 = UNITLAYERS.myunits,
-                      s1 = UNITLAYERS.oppwild;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }())).length > 3)) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madex';
-          } else
-          if ((Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.middle,
-                  s1 =
-                  (function() {
-                    var k, ret = {},
-                      s0 = UNITLAYERS.myunits,
-                      s1 = UNITLAYERS.oppwild;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }())).length > 3)) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'tookcenter';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "wild": {},
+          "mywild": {},
+          "oppwild": {},
+          "neutralwild": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetargets": {},
+          "winline": {}
+        };
+        var newstepid = step.stepid + '-' + 'makewild';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'makewild',
+          path: step.path.concat('makewild')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else
+        if ((Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.corners,
+                s1 =
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.myunits,
+                    s1 = UNITLAYERS.oppwild;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length > 3)) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madex';
+        } else
+        if ((Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.middle,
+                s1 =
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.myunits,
+                    s1 = UNITLAYERS.oppwild;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length > 3)) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'tookcenter';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.makewild1instruction = function(step) {
         return '';
       };
-      game.move1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            winline: Object.assign({}, step.ARTIFACTS.winline)
+      game.move1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          winline: Object.assign({}, step.ARTIFACTS.winline)
+        });
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "wild": {},
-            "mywild": {},
-            "oppwild": {},
-            "neutralwild": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "movetargets": {},
-            "winline": {}
-          };
-          var allowedsteps =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.myunits,
-                s1 = UNITLAYERS.oppwild;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.myunits,
-                s1 = UNITLAYERS.oppwild;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var POS = STARTPOS;
-              var walkpositionstocount = TERRAIN.mybase;
-              var CURRENTCOUNT = 0;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
-                walkedsquares.push(POS);
-                CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var TOTALCOUNT = CURRENTCOUNT;
-              if (((WALKLENGTH === 3) && (TOTALCOUNT !== 3))) {
-                ARTIFACTS['winline'][STARTPOS] = {};
-              }
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "wild": {},
+          "mywild": {},
+          "oppwild": {},
+          "neutralwild": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetargets": {},
+          "winline": {}
+        };
+        var allowedsteps =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.myunits,
+              s1 = UNITLAYERS.oppwild;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.myunits,
+              s1 = UNITLAYERS.oppwild;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            var walkpositionstocount = TERRAIN.mybase;
+            var CURRENTCOUNT = 0;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+              CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var TOTALCOUNT = CURRENTCOUNT;
+            if (((WALKLENGTH === 3) && (TOTALCOUNT !== 3))) {
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else
-          if ((Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.corners,
-                  s1 =
-                  (function() {
-                    var k, ret = {},
-                      s0 = UNITLAYERS.myunits,
-                      s1 = UNITLAYERS.oppwild;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
+        }
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else
+        if ((Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.corners,
+                s1 =
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.myunits,
+                    s1 = UNITLAYERS.oppwild;
+                  for (k in s0) {
+                    ret[k] = 1;
                   }
-                }
-                return ret;
-              }())).length > 3)) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madex';
-          } else
-          if ((Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.middle,
-                  s1 =
-                  (function() {
-                    var k, ret = {},
-                      s0 = UNITLAYERS.myunits,
-                      s1 = UNITLAYERS.oppwild;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
+                  for (k in s1) {
+                    ret[k] = 1;
                   }
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
                 }
-                return ret;
-              }())).length > 3)) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'tookcenter';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
+              }
+              return ret;
+            }())).length > 3)) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madex';
+        } else
+        if ((Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.middle,
+                s1 =
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.myunits,
+                    s1 = UNITLAYERS.oppwild;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length > 3)) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'tookcenter';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.move1instruction = function(step) {
         return '';
       };
@@ -550,279 +548,277 @@
       game.selectmovetarget2instruction = function(step) {
         return '';
       };
-      game.makewild2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'wild'
-            });
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "wild": {},
-            "mywild": {},
-            "oppwild": {},
-            "neutralwild": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "movetargets": {},
-            "winline": {}
-          };
-          var newstepid = step.stepid + '-' + 'makewild';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'makewild',
-            path: step.path.concat('makewild')
+      game.makewild2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': 'wild'
           });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else
-          if ((Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.corners,
-                  s1 =
-                  (function() {
-                    var k, ret = {},
-                      s0 = UNITLAYERS.myunits,
-                      s1 = UNITLAYERS.oppwild;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }())).length > 3)) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madex';
-          } else
-          if ((Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.middle,
-                  s1 =
-                  (function() {
-                    var k, ret = {},
-                      s0 = UNITLAYERS.myunits,
-                      s1 = UNITLAYERS.oppwild;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }())).length > 3)) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'tookcenter';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "wild": {},
+          "mywild": {},
+          "oppwild": {},
+          "neutralwild": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetargets": {},
+          "winline": {}
+        };
+        var newstepid = step.stepid + '-' + 'makewild';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'makewild',
+          path: step.path.concat('makewild')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else
+        if ((Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.corners,
+                s1 =
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.myunits,
+                    s1 = UNITLAYERS.oppwild;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length > 3)) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madex';
+        } else
+        if ((Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.middle,
+                s1 =
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.myunits,
+                    s1 = UNITLAYERS.oppwild;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length > 3)) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'tookcenter';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.makewild2instruction = function(step) {
         return '';
       };
-      game.move2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            winline: Object.assign({}, step.ARTIFACTS.winline)
+      game.move2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          winline: Object.assign({}, step.ARTIFACTS.winline)
+        });
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "wild": {},
-            "mywild": {},
-            "oppwild": {},
-            "neutralwild": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "movetargets": {},
-            "winline": {}
-          };
-          var allowedsteps =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.myunits,
-                s1 = UNITLAYERS.oppwild;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.myunits,
-                s1 = UNITLAYERS.oppwild;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var POS = STARTPOS;
-              var walkpositionstocount = TERRAIN.mybase;
-              var CURRENTCOUNT = 0;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
-                walkedsquares.push(POS);
-                CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var TOTALCOUNT = CURRENTCOUNT;
-              if (((WALKLENGTH === 3) && (TOTALCOUNT !== 3))) {
-                ARTIFACTS['winline'][STARTPOS] = {};
-              }
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "wild": {},
+          "mywild": {},
+          "oppwild": {},
+          "neutralwild": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetargets": {},
+          "winline": {}
+        };
+        var allowedsteps =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.myunits,
+              s1 = UNITLAYERS.oppwild;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.myunits,
+              s1 = UNITLAYERS.oppwild;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            var walkpositionstocount = TERRAIN.mybase;
+            var CURRENTCOUNT = 0;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+              CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var TOTALCOUNT = CURRENTCOUNT;
+            if (((WALKLENGTH === 3) && (TOTALCOUNT !== 3))) {
+              ARTIFACTS['winline'][STARTPOS] = {};
             }
           }
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else
-          if ((Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.corners,
-                  s1 =
-                  (function() {
-                    var k, ret = {},
-                      s0 = UNITLAYERS.myunits,
-                      s1 = UNITLAYERS.oppwild;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
+        }
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else
+        if ((Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.corners,
+                s1 =
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.myunits,
+                    s1 = UNITLAYERS.oppwild;
+                  for (k in s0) {
+                    ret[k] = 1;
                   }
-                }
-                return ret;
-              }())).length > 3)) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madex';
-          } else
-          if ((Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.middle,
-                  s1 =
-                  (function() {
-                    var k, ret = {},
-                      s0 = UNITLAYERS.myunits,
-                      s1 = UNITLAYERS.oppwild;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  }());
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
+                  for (k in s1) {
+                    ret[k] = 1;
                   }
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
                 }
-                return ret;
-              }())).length > 3)) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'tookcenter';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
+              }
+              return ret;
+            }())).length > 3)) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madex';
+        } else
+        if ((Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.middle,
+                s1 =
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.myunits,
+                    s1 = UNITLAYERS.oppwild;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }());
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }())).length > 3)) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'tookcenter';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.move2instruction = function(step) {
         return '';
       };

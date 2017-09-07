@@ -162,78 +162,77 @@
       game.selectmovetarget1instruction = function(step) {
         return '';
       };
-      game.move1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "crowns": {},
-            "mycrowns": {},
-            "oppcrowns": {},
-            "neutralcrowns": {},
-            "daggers": {},
-            "mydaggers": {},
-            "oppdaggers": {},
-            "neutraldaggers": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "movetarget": {}
-          };
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
+      game.move1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.mycrowns,
-                  s1 = TERRAIN.oppbases;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else
-          if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'kingkill';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "crowns": {},
+          "mycrowns": {},
+          "oppcrowns": {},
+          "neutralcrowns": {},
+          "daggers": {},
+          "mydaggers": {},
+          "oppdaggers": {},
+          "neutraldaggers": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetarget": {}
+        };
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.mycrowns,
+                s1 = TERRAIN.oppbases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else
+        if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'kingkill';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.move1instruction = function(step) {
         return '';
       };
@@ -378,78 +377,77 @@
       game.selectmovetarget2instruction = function(step) {
         return '';
       };
-      game.move2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "crowns": {},
-            "mycrowns": {},
-            "oppcrowns": {},
-            "neutralcrowns": {},
-            "daggers": {},
-            "mydaggers": {},
-            "oppdaggers": {},
-            "neutraldaggers": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "movetarget": {}
-          };
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
+      game.move2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.mycrowns,
-                  s1 = TERRAIN.oppbases;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else
-          if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'kingkill';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "crowns": {},
+          "mycrowns": {},
+          "oppcrowns": {},
+          "neutralcrowns": {},
+          "daggers": {},
+          "mydaggers": {},
+          "oppdaggers": {},
+          "neutraldaggers": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetarget": {}
+        };
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.mycrowns,
+                s1 = TERRAIN.oppbases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else
+        if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'kingkill';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.move2instruction = function(step) {
         return '';
       };

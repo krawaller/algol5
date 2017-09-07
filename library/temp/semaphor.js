@@ -91,172 +91,170 @@
       game.selectunit1instruction = function(step) {
         return '';
       };
-      game.deploy1 =
-        function(turn, step) {
-          var ARTIFACTS = {
-            line: Object.assign({}, step.ARTIFACTS.line)
-          };
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          var newunitid = 'spawn' + (clones++);
-          UNITDATA[newunitid] = {
-            pos: MARKS['selectdeploytarget'],
-            id: newunitid,
-            group: 'pawns',
-            owner: 0
-          };
-          MARKS = {};
-          UNITLAYERS = {
-            "bishops": {},
-            "mybishops": {},
-            "oppbishops": {},
-            "neutralbishops": {},
-            "kings": {},
-            "mykings": {},
-            "oppkings": {},
-            "neutralkings": {},
-            "pawns": {},
-            "mypawns": {},
-            "opppawns": {},
-            "neutralpawns": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "line": {}
-          };
-          var walkstarts = UNITLAYERS.units;
-          for (var STARTPOS in walkstarts) {
-            var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-            var allwalkerdirs = [1, 2, 3, 4];
-            for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
-              var walkedsquares = [];
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
-                walkedsquares.push(POS);
-              }
-              var WALKLENGTH = walkedsquares.length;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                if ((WALKLENGTH > 1)) {
-                  ARTIFACTS['line'][POS] = {};
-                }
+      game.deploy1 = function(turn, step) {
+        var ARTIFACTS = {
+          line: Object.assign({}, step.ARTIFACTS.line)
+        };
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        var newunitid = 'spawn' + (clones++);
+        UNITDATA[newunitid] = {
+          pos: MARKS['selectdeploytarget'],
+          id: newunitid,
+          group: 'pawns',
+          owner: 0
+        };
+        MARKS = {};
+        UNITLAYERS = {
+          "bishops": {},
+          "mybishops": {},
+          "oppbishops": {},
+          "neutralbishops": {},
+          "kings": {},
+          "mykings": {},
+          "oppkings": {},
+          "neutralkings": {},
+          "pawns": {},
+          "mypawns": {},
+          "opppawns": {},
+          "neutralpawns": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "line": {}
+        };
+        var walkstarts = UNITLAYERS.units;
+        for (var STARTPOS in walkstarts) {
+          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
+          var allwalkerdirs = [1, 2, 3, 4];
+          for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((WALKLENGTH > 1)) {
+                ARTIFACTS['line'][POS] = {};
               }
             }
           }
-          var newstepid = step.stepid + '-' + 'deploy';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'deploy',
-            path: step.path.concat('deploy'),
-            clones: clones
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + 'deploy';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'deploy',
+          path: step.path.concat('deploy'),
+          clones: clones
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.deploy1instruction = function(step) {
         return '';
       };
-      game.promote1 =
-        function(turn, step) {
-          var ARTIFACTS = {
-            line: Object.assign({}, step.ARTIFACTS.line)
-          };
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': (!!(UNITLAYERS.pawns[MARKS['selectunit']]) ? 'bishops' : 'kings')
-            });
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "bishops": {},
-            "mybishops": {},
-            "oppbishops": {},
-            "neutralbishops": {},
-            "kings": {},
-            "mykings": {},
-            "oppkings": {},
-            "neutralkings": {},
-            "pawns": {},
-            "mypawns": {},
-            "opppawns": {},
-            "neutralpawns": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "line": {}
-          };
-          var walkstarts = UNITLAYERS.units;
-          for (var STARTPOS in walkstarts) {
-            var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-            var allwalkerdirs = [1, 2, 3, 4];
-            for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
-              var walkedsquares = [];
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
-                walkedsquares.push(POS);
-              }
-              var WALKLENGTH = walkedsquares.length;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                if ((WALKLENGTH > 1)) {
-                  ARTIFACTS['line'][POS] = {};
-                }
+      game.promote1 = function(turn, step) {
+        var ARTIFACTS = {
+          line: Object.assign({}, step.ARTIFACTS.line)
+        };
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': (!!(UNITLAYERS.pawns[MARKS['selectunit']]) ? 'bishops' : 'kings')
+          });
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "bishops": {},
+          "mybishops": {},
+          "oppbishops": {},
+          "neutralbishops": {},
+          "kings": {},
+          "mykings": {},
+          "oppkings": {},
+          "neutralkings": {},
+          "pawns": {},
+          "mypawns": {},
+          "opppawns": {},
+          "neutralpawns": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "line": {}
+        };
+        var walkstarts = UNITLAYERS.units;
+        for (var STARTPOS in walkstarts) {
+          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
+          var allwalkerdirs = [1, 2, 3, 4];
+          for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((WALKLENGTH > 1)) {
+                ARTIFACTS['line'][POS] = {};
               }
             }
           }
-          var newstepid = step.stepid + '-' + 'promote';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'promote',
-            path: step.path.concat('promote')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + 'promote';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'promote',
+          path: step.path.concat('promote')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.promote1instruction = function(step) {
         return '';
       };
@@ -391,172 +389,170 @@
       game.selectunit2instruction = function(step) {
         return '';
       };
-      game.deploy2 =
-        function(turn, step) {
-          var ARTIFACTS = {
-            line: Object.assign({}, step.ARTIFACTS.line)
-          };
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          var newunitid = 'spawn' + (clones++);
-          UNITDATA[newunitid] = {
-            pos: MARKS['selectdeploytarget'],
-            id: newunitid,
-            group: 'pawns',
-            owner: 0
-          };
-          MARKS = {};
-          UNITLAYERS = {
-            "bishops": {},
-            "mybishops": {},
-            "oppbishops": {},
-            "neutralbishops": {},
-            "kings": {},
-            "mykings": {},
-            "oppkings": {},
-            "neutralkings": {},
-            "pawns": {},
-            "mypawns": {},
-            "opppawns": {},
-            "neutralpawns": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "line": {}
-          };
-          var walkstarts = UNITLAYERS.units;
-          for (var STARTPOS in walkstarts) {
-            var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-            var allwalkerdirs = [1, 2, 3, 4];
-            for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
-              var walkedsquares = [];
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
-                walkedsquares.push(POS);
-              }
-              var WALKLENGTH = walkedsquares.length;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                if ((WALKLENGTH > 1)) {
-                  ARTIFACTS['line'][POS] = {};
-                }
+      game.deploy2 = function(turn, step) {
+        var ARTIFACTS = {
+          line: Object.assign({}, step.ARTIFACTS.line)
+        };
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        var newunitid = 'spawn' + (clones++);
+        UNITDATA[newunitid] = {
+          pos: MARKS['selectdeploytarget'],
+          id: newunitid,
+          group: 'pawns',
+          owner: 0
+        };
+        MARKS = {};
+        UNITLAYERS = {
+          "bishops": {},
+          "mybishops": {},
+          "oppbishops": {},
+          "neutralbishops": {},
+          "kings": {},
+          "mykings": {},
+          "oppkings": {},
+          "neutralkings": {},
+          "pawns": {},
+          "mypawns": {},
+          "opppawns": {},
+          "neutralpawns": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "line": {}
+        };
+        var walkstarts = UNITLAYERS.units;
+        for (var STARTPOS in walkstarts) {
+          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
+          var allwalkerdirs = [1, 2, 3, 4];
+          for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((WALKLENGTH > 1)) {
+                ARTIFACTS['line'][POS] = {};
               }
             }
           }
-          var newstepid = step.stepid + '-' + 'deploy';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'deploy',
-            path: step.path.concat('deploy'),
-            clones: clones
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + 'deploy';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'deploy',
+          path: step.path.concat('deploy'),
+          clones: clones
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.deploy2instruction = function(step) {
         return '';
       };
-      game.promote2 =
-        function(turn, step) {
-          var ARTIFACTS = {
-            line: Object.assign({}, step.ARTIFACTS.line)
-          };
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': (!!(UNITLAYERS.pawns[MARKS['selectunit']]) ? 'bishops' : 'kings')
-            });
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "bishops": {},
-            "mybishops": {},
-            "oppbishops": {},
-            "neutralbishops": {},
-            "kings": {},
-            "mykings": {},
-            "oppkings": {},
-            "neutralkings": {},
-            "pawns": {},
-            "mypawns": {},
-            "opppawns": {},
-            "neutralpawns": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "line": {}
-          };
-          var walkstarts = UNITLAYERS.units;
-          for (var STARTPOS in walkstarts) {
-            var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
-            var allwalkerdirs = [1, 2, 3, 4];
-            for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
-              var walkedsquares = [];
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
-                walkedsquares.push(POS);
-              }
-              var WALKLENGTH = walkedsquares.length;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                if ((WALKLENGTH > 1)) {
-                  ARTIFACTS['line'][POS] = {};
-                }
+      game.promote2 = function(turn, step) {
+        var ARTIFACTS = {
+          line: Object.assign({}, step.ARTIFACTS.line)
+        };
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': (!!(UNITLAYERS.pawns[MARKS['selectunit']]) ? 'bishops' : 'kings')
+          });
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "bishops": {},
+          "mybishops": {},
+          "oppbishops": {},
+          "neutralbishops": {},
+          "kings": {},
+          "mykings": {},
+          "oppkings": {},
+          "neutralkings": {},
+          "pawns": {},
+          "mypawns": {},
+          "opppawns": {},
+          "neutralpawns": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "line": {}
+        };
+        var walkstarts = UNITLAYERS.units;
+        for (var STARTPOS in walkstarts) {
+          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
+          var allwalkerdirs = [1, 2, 3, 4];
+          for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((WALKLENGTH > 1)) {
+                ARTIFACTS['line'][POS] = {};
               }
             }
           }
-          var newstepid = step.stepid + '-' + 'promote';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'promote',
-            path: step.path.concat('promote')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'madeline';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + 'promote';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'promote',
+          path: step.path.concat('promote')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'madeline';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.promote2instruction = function(step) {
         return '';
       };

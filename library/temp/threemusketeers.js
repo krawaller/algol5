@@ -114,88 +114,87 @@
       game.selectmovetarget1instruction = function(step) {
         return '';
       };
-      game.move1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            musketeerline: Object.assign({}, step.ARTIFACTS.musketeerline),
-            strandedmusketeers: Object.assign({}, step.ARTIFACTS.strandedmusketeers)
+      game.move1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          musketeerline: Object.assign({}, step.ARTIFACTS.musketeerline),
+          strandedmusketeers: Object.assign({}, step.ARTIFACTS.strandedmusketeers)
+        });
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "kings": {},
-            "mykings": {},
-            "oppkings": {},
-            "neutralkings": {},
-            "pawns": {},
-            "mypawns": {},
-            "opppawns": {},
-            "neutralpawns": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "strandedmusketeers": {},
-            "musketeerline": {},
-            "movetargets": {}
-          };
-          var walkstarts = UNITLAYERS.kings;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 3, 5, 7];
-            for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
-              var POS = STARTPOS;
-              var walkpositionstocount = UNITLAYERS.kings;
-              var CURRENTCOUNT = 0;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]])) {
-                CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
-              }
-              var TOTALCOUNT = CURRENTCOUNT;
-              if ((2 === TOTALCOUNT)) {
-                ARTIFACTS['musketeerline'][STARTPOS] = {};
-              }
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "kings": {},
+          "mykings": {},
+          "oppkings": {},
+          "neutralkings": {},
+          "pawns": {},
+          "mypawns": {},
+          "opppawns": {},
+          "neutralpawns": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "strandedmusketeers": {},
+          "musketeerline": {},
+          "movetargets": {}
+        };
+        var walkstarts = UNITLAYERS.kings;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 3, 5, 7];
+          for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var POS = STARTPOS;
+            var walkpositionstocount = UNITLAYERS.kings;
+            var CURRENTCOUNT = 0;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]])) {
+              CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
+            }
+            var TOTALCOUNT = CURRENTCOUNT;
+            if ((2 === TOTALCOUNT)) {
+              ARTIFACTS['musketeerline'][STARTPOS] = {};
             }
           }
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.musketeerline ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'musketeersinline';
-          } else
-          if ((Object.keys(ARTIFACTS.strandedmusketeers).length === 3)) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'strandedmusketeers';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
+        }
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.musketeerline ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'musketeersinline';
+        } else
+        if ((Object.keys(ARTIFACTS.strandedmusketeers).length === 3)) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'strandedmusketeers';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.move1instruction = function(step) {
         return '';
       };
@@ -318,103 +317,102 @@
       game.selectmovetarget2instruction = function(step) {
         return '';
       };
-      game.move2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-            musketeerline: Object.assign({}, step.ARTIFACTS.musketeerline),
-            strandedmusketeers: Object.assign({}, step.ARTIFACTS.strandedmusketeers)
+      game.move2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
+          musketeerline: Object.assign({}, step.ARTIFACTS.musketeerline),
+          strandedmusketeers: Object.assign({}, step.ARTIFACTS.strandedmusketeers)
+        });
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
-            });
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "kings": {},
-            "mykings": {},
-            "oppkings": {},
-            "neutralkings": {},
-            "pawns": {},
-            "mypawns": {},
-            "opppawns": {},
-            "neutralpawns": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "strandedmusketeers": {},
-            "musketeerline": {},
-            "movetargets": {}
-          };
-          var walkstarts = UNITLAYERS.kings;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 3, 5, 7];
-            for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
-              var POS = STARTPOS;
-              var walkpositionstocount = UNITLAYERS.kings;
-              var CURRENTCOUNT = 0;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]])) {
-                CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
-              }
-              var TOTALCOUNT = CURRENTCOUNT;
-              if ((2 === TOTALCOUNT)) {
-                ARTIFACTS['musketeerline'][STARTPOS] = {};
-              }
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "kings": {},
+          "mykings": {},
+          "oppkings": {},
+          "neutralkings": {},
+          "pawns": {},
+          "mypawns": {},
+          "opppawns": {},
+          "neutralpawns": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "strandedmusketeers": {},
+          "musketeerline": {},
+          "movetargets": {}
+        };
+        var walkstarts = UNITLAYERS.kings;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 3, 5, 7];
+          for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var POS = STARTPOS;
+            var walkpositionstocount = UNITLAYERS.kings;
+            var CURRENTCOUNT = 0;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]])) {
+              CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
+            }
+            var TOTALCOUNT = CURRENTCOUNT;
+            if ((2 === TOTALCOUNT)) {
+              ARTIFACTS['musketeerline'][STARTPOS] = {};
             }
           }
-          for (var STARTPOS in UNITLAYERS.kings) {
-            var neighbourdirs = [1, 3, 5, 7];
-            var foundneighbours = [];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS && UNITLAYERS.pawns[POS]) {
-                foundneighbours.push(POS);
-              }
-            } 
-            var NEIGHBOURCOUNT = foundneighbours.length;
-            if (!NEIGHBOURCOUNT) {
-              ARTIFACTS['strandedmusketeers'][STARTPOS] = {};
+        }
+        for (var STARTPOS in UNITLAYERS.kings) {
+          var neighbourdirs = [1, 3, 5, 7];
+          var foundneighbours = [];
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS && UNITLAYERS.pawns[POS]) {
+              foundneighbours.push(POS);
             }
           } 
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(ARTIFACTS.musketeerline ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'musketeersinline';
-          } else
-          if ((Object.keys(ARTIFACTS.strandedmusketeers).length === 3)) {
-            var winner = 1;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'strandedmusketeers';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
+          var NEIGHBOURCOUNT = foundneighbours.length;
+          if (!NEIGHBOURCOUNT) {
+            ARTIFACTS['strandedmusketeers'][STARTPOS] = {};
+          }
+        } 
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(ARTIFACTS.musketeerline ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'musketeersinline';
+        } else
+        if ((Object.keys(ARTIFACTS.strandedmusketeers).length === 3)) {
+          var winner = 1;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'strandedmusketeers';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.move2instruction = function(step) {
         return '';
       };

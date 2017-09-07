@@ -4,6 +4,8 @@ import { Definition } from './types';
 
 import {ifCodeContains} from './utils';
 
+import applyLinkInstructions from './link';
+
 export default function addMarkFunction(def: Definition, markname: string, player: 1 | 2){
   const O = {rules: def, markname, player};
   const markDef = def.marks[markname];
@@ -22,7 +24,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
     var MARKS = ${newMarkObject}; 
     ${lib.applyGeneratorInstructions(O,markDef)}
   `;
-  const linking = lib.applyLinkInstructions(O,markDef);
+  const linking = applyLinkInstructions(def, markDef, player, false);  // lib.applyLinkInstructions(O,markDef);
   const preludium = ifCodeContains(body + linking, {
     TURNVARS: 'var TURNVARS = step.TURNVARS; ',
     ARTIFACTS: 'var ARTIFACTS = ' + lib.copyArtifactsForAction(O,markDef) + '; ',

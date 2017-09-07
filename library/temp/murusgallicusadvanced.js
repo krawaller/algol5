@@ -293,372 +293,368 @@
       game.selectfire1instruction = function(step) {
         return '';
       };
-      game.move1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
-          for (var POS in ARTIFACTS.madecatapults) {
-            var unitid = (UNITLAYERS.units[POS]  || {}).id;
-            if (unitid) {
-              UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'group': 'catapults'
-              });
-            }
-          }
-          for (var POS in ARTIFACTS.madetowers) {
-            var unitid = (UNITLAYERS.units[POS]  || {}).id;
-            if (unitid) {
-              UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'group': 'towers'
-              });
-            }
-          }
-          for (var POS in ARTIFACTS.madewalls) {
-            var newunitid = 'spawn' + (clones++);
-            UNITDATA[newunitid] = {
-              pos: POS,
-              id: newunitid,
-              group: 'walls',
-              owner: 1,
-              from: MARKS['selecttower']
-            };
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "towers": {},
-            "mytowers": {},
-            "opptowers": {},
-            "neutraltowers": {},
-            "catapults": {},
-            "mycatapults": {},
-            "oppcatapults": {},
-            "neutralcatapults": {},
-            "walls": {},
-            "mywalls": {},
-            "oppwalls": {},
-            "neutralwalls": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "firetargets": {},
-            "movetargets": {},
-            "madecatapults": {},
-            "madetowers": {},
-            "madewalls": {},
-            "killtargets": {}
-          };
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move'),
-            clones: clones
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 = TERRAIN.opphomerow;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
-      game.move1instruction = function(step) {
-        return '';
-      };
-      game.kill1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selecttower']]  || {}).id;
+      game.move1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
+        for (var POS in ARTIFACTS.madecatapults) {
+          var unitid = (UNITLAYERS.units[POS]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'walls'
+              'group': 'catapults'
             });
           }
-          if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
-            var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
-            if (unitid) {
-              UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'group': 'towers'
-              });
-            }
-          } else {
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]  || {}).id];
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "towers": {},
-            "mytowers": {},
-            "opptowers": {},
-            "neutraltowers": {},
-            "catapults": {},
-            "mycatapults": {},
-            "oppcatapults": {},
-            "neutralcatapults": {},
-            "walls": {},
-            "mywalls": {},
-            "oppwalls": {},
-            "neutralwalls": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "firetargets": {},
-            "movetargets": {},
-            "madecatapults": {},
-            "madetowers": {},
-            "madewalls": {},
-            "killtargets": {}
-          };
-          var newstepid = step.stepid + '-' + 'kill';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'kill',
-            path: step.path.concat('kill')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 = TERRAIN.opphomerow;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
-      game.kill1instruction = function(step) {
-        return '';
-      };
-      game.sacrifice1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'walls'
-            });
-          }
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
-          MARKS = {};
-          UNITLAYERS = {
-            "towers": {},
-            "mytowers": {},
-            "opptowers": {},
-            "neutraltowers": {},
-            "catapults": {},
-            "mycatapults": {},
-            "oppcatapults": {},
-            "neutralcatapults": {},
-            "walls": {},
-            "mywalls": {},
-            "oppwalls": {},
-            "neutralwalls": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "firetargets": {},
-            "movetargets": {},
-            "madecatapults": {},
-            "madetowers": {},
-            "madewalls": {},
-            "killtargets": {}
-          };
-          var newstepid = step.stepid + '-' + 'sacrifice';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'sacrifice',
-            path: step.path.concat('sacrifice')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 = TERRAIN.opphomerow;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
-      game.sacrifice1instruction = function(step) {
-        return '';
-      };
-      game.fire1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          if (!!(UNITLAYERS.oppwalls[MARKS['selectfire']])) {
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]  || {}).id];
-          } else {
-            if (!!(UNITLAYERS.oppunits[MARKS['selectfire']])) {
-              var unitid = (UNITLAYERS.units[MARKS['selectfire']]  || {}).id;
-              if (unitid) {
-                UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                  'group': (!!(UNITLAYERS.oppcatapults[MARKS['selectfire']]) ? 'towers' : 'walls')
-                });
-              }
-            } else {
-              var newunitid = 'spawn' + (clones++);
-              UNITDATA[newunitid] = {
-                pos: MARKS['selectfire'],
-                id: newunitid,
-                group: 'walls',
-                owner: 1,
-                from: MARKS['selectcatapult']
-              };
-            }
-          }
-          var unitid = (UNITLAYERS.units[MARKS['selectcatapult']]  || {}).id;
+        }
+        for (var POS in ARTIFACTS.madetowers) {
+          var unitid = (UNITLAYERS.units[POS]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
               'group': 'towers'
             });
           }
-          MARKS = {};
-          UNITLAYERS = {
-            "towers": {},
-            "mytowers": {},
-            "opptowers": {},
-            "neutraltowers": {},
-            "catapults": {},
-            "mycatapults": {},
-            "oppcatapults": {},
-            "neutralcatapults": {},
-            "walls": {},
-            "mywalls": {},
-            "oppwalls": {},
-            "neutralwalls": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
+        }
+        for (var POS in ARTIFACTS.madewalls) {
+          var newunitid = 'spawn' + (clones++);
+          UNITDATA[newunitid] = {
+            pos: POS,
+            id: newunitid,
+            group: 'walls',
+            owner: 1,
+            from: MARKS['selecttower']
           };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "firetargets": {},
-            "movetargets": {},
-            "madecatapults": {},
-            "madetowers": {},
-            "madewalls": {},
-            "killtargets": {}
-          };
-          var newstepid = step.stepid + '-' + 'fire';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'fire',
-            path: step.path.concat('fire'),
-            clones: clones
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 = TERRAIN.opphomerow;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "towers": {},
+          "mytowers": {},
+          "opptowers": {},
+          "neutraltowers": {},
+          "catapults": {},
+          "mycatapults": {},
+          "oppcatapults": {},
+          "neutralcatapults": {},
+          "walls": {},
+          "mywalls": {},
+          "oppwalls": {},
+          "neutralwalls": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "firetargets": {},
+          "movetargets": {},
+          "madecatapults": {},
+          "madetowers": {},
+          "madewalls": {},
+          "killtargets": {}
+        };
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move'),
+          clones: clones
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.opphomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
+      game.move1instruction = function(step) {
+        return '';
+      };
+      game.kill1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selecttower']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': 'walls'
+          });
+        }
+        if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
+          var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+              'group': 'towers'
+            });
+          }
+        } else {
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]  || {}).id];
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "towers": {},
+          "mytowers": {},
+          "opptowers": {},
+          "neutraltowers": {},
+          "catapults": {},
+          "mycatapults": {},
+          "oppcatapults": {},
+          "neutralcatapults": {},
+          "walls": {},
+          "mywalls": {},
+          "oppwalls": {},
+          "neutralwalls": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "firetargets": {},
+          "movetargets": {},
+          "madecatapults": {},
+          "madetowers": {},
+          "madewalls": {},
+          "killtargets": {}
+        };
+        var newstepid = step.stepid + '-' + 'kill';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'kill',
+          path: step.path.concat('kill')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.opphomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
+      game.kill1instruction = function(step) {
+        return '';
+      };
+      game.sacrifice1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': 'walls'
+          });
+        }
+        delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
+        MARKS = {};
+        UNITLAYERS = {
+          "towers": {},
+          "mytowers": {},
+          "opptowers": {},
+          "neutraltowers": {},
+          "catapults": {},
+          "mycatapults": {},
+          "oppcatapults": {},
+          "neutralcatapults": {},
+          "walls": {},
+          "mywalls": {},
+          "oppwalls": {},
+          "neutralwalls": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "firetargets": {},
+          "movetargets": {},
+          "madecatapults": {},
+          "madetowers": {},
+          "madewalls": {},
+          "killtargets": {}
+        };
+        var newstepid = step.stepid + '-' + 'sacrifice';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'sacrifice',
+          path: step.path.concat('sacrifice')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.opphomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
+      game.sacrifice1instruction = function(step) {
+        return '';
+      };
+      game.fire1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        if (!!(UNITLAYERS.oppwalls[MARKS['selectfire']])) {
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]  || {}).id];
+        } else {
+          if (!!(UNITLAYERS.oppunits[MARKS['selectfire']])) {
+            var unitid = (UNITLAYERS.units[MARKS['selectfire']]  || {}).id;
+            if (unitid) {
+              UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+                'group': (!!(UNITLAYERS.oppcatapults[MARKS['selectfire']]) ? 'towers' : 'walls')
+              });
+            }
+          } else {
+            var newunitid = 'spawn' + (clones++);
+            UNITDATA[newunitid] = {
+              pos: MARKS['selectfire'],
+              id: newunitid,
+              group: 'walls',
+              owner: 1,
+              from: MARKS['selectcatapult']
+            };
+          }
+        }
+        var unitid = (UNITLAYERS.units[MARKS['selectcatapult']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': 'towers'
+          });
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "towers": {},
+          "mytowers": {},
+          "opptowers": {},
+          "neutraltowers": {},
+          "catapults": {},
+          "mycatapults": {},
+          "oppcatapults": {},
+          "neutralcatapults": {},
+          "walls": {},
+          "mywalls": {},
+          "oppwalls": {},
+          "neutralwalls": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "firetargets": {},
+          "movetargets": {},
+          "madecatapults": {},
+          "madetowers": {},
+          "madewalls": {},
+          "killtargets": {}
+        };
+        var newstepid = step.stepid + '-' + 'fire';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'fire',
+          path: step.path.concat('fire'),
+          clones: clones
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.opphomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.fire1instruction = function(step) {
         return '';
       };
@@ -944,372 +940,368 @@
       game.selectfire2instruction = function(step) {
         return '';
       };
-      game.move2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
-          for (var POS in ARTIFACTS.madecatapults) {
-            var unitid = (UNITLAYERS.units[POS]  || {}).id;
-            if (unitid) {
-              UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'group': 'catapults'
-              });
-            }
-          }
-          for (var POS in ARTIFACTS.madetowers) {
-            var unitid = (UNITLAYERS.units[POS]  || {}).id;
-            if (unitid) {
-              UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'group': 'towers'
-              });
-            }
-          }
-          for (var POS in ARTIFACTS.madewalls) {
-            var newunitid = 'spawn' + (clones++);
-            UNITDATA[newunitid] = {
-              pos: POS,
-              id: newunitid,
-              group: 'walls',
-              owner: 2,
-              from: MARKS['selecttower']
-            };
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "towers": {},
-            "mytowers": {},
-            "opptowers": {},
-            "neutraltowers": {},
-            "catapults": {},
-            "mycatapults": {},
-            "oppcatapults": {},
-            "neutralcatapults": {},
-            "walls": {},
-            "mywalls": {},
-            "oppwalls": {},
-            "neutralwalls": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "firetargets": {},
-            "movetargets": {},
-            "madecatapults": {},
-            "madetowers": {},
-            "madewalls": {},
-            "killtargets": {}
-          };
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move'),
-            clones: clones
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 = TERRAIN.opphomerow;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
-      game.move2instruction = function(step) {
-        return '';
-      };
-      game.kill2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selecttower']]  || {}).id;
+      game.move2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
+        for (var POS in ARTIFACTS.madecatapults) {
+          var unitid = (UNITLAYERS.units[POS]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'walls'
+              'group': 'catapults'
             });
           }
-          if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
-            var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
-            if (unitid) {
-              UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'group': 'towers'
-              });
-            }
-          } else {
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]  || {}).id];
-          }
-          MARKS = {};
-          UNITLAYERS = {
-            "towers": {},
-            "mytowers": {},
-            "opptowers": {},
-            "neutraltowers": {},
-            "catapults": {},
-            "mycatapults": {},
-            "oppcatapults": {},
-            "neutralcatapults": {},
-            "walls": {},
-            "mywalls": {},
-            "oppwalls": {},
-            "neutralwalls": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "firetargets": {},
-            "movetargets": {},
-            "madecatapults": {},
-            "madetowers": {},
-            "madewalls": {},
-            "killtargets": {}
-          };
-          var newstepid = step.stepid + '-' + 'kill';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'kill',
-            path: step.path.concat('kill')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 = TERRAIN.opphomerow;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
-      game.kill2instruction = function(step) {
-        return '';
-      };
-      game.sacrifice2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'walls'
-            });
-          }
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
-          MARKS = {};
-          UNITLAYERS = {
-            "towers": {},
-            "mytowers": {},
-            "opptowers": {},
-            "neutraltowers": {},
-            "catapults": {},
-            "mycatapults": {},
-            "oppcatapults": {},
-            "neutralcatapults": {},
-            "walls": {},
-            "mywalls": {},
-            "oppwalls": {},
-            "neutralwalls": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "firetargets": {},
-            "movetargets": {},
-            "madecatapults": {},
-            "madetowers": {},
-            "madewalls": {},
-            "killtargets": {}
-          };
-          var newstepid = step.stepid + '-' + 'sacrifice';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'sacrifice',
-            path: step.path.concat('sacrifice')
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 = TERRAIN.opphomerow;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
-        };
-      game.sacrifice2instruction = function(step) {
-        return '';
-      };
-      game.fire2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var clones = step.clones;
-          var UNITLAYERS = step.UNITLAYERS;
-          if (!!(UNITLAYERS.oppwalls[MARKS['selectfire']])) {
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]  || {}).id];
-          } else {
-            if (!!(UNITLAYERS.oppunits[MARKS['selectfire']])) {
-              var unitid = (UNITLAYERS.units[MARKS['selectfire']]  || {}).id;
-              if (unitid) {
-                UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                  'group': (!!(UNITLAYERS.oppcatapults[MARKS['selectfire']]) ? 'towers' : 'walls')
-                });
-              }
-            } else {
-              var newunitid = 'spawn' + (clones++);
-              UNITDATA[newunitid] = {
-                pos: MARKS['selectfire'],
-                id: newunitid,
-                group: 'walls',
-                owner: 2,
-                from: MARKS['selectcatapult']
-              };
-            }
-          }
-          var unitid = (UNITLAYERS.units[MARKS['selectcatapult']]  || {}).id;
+        }
+        for (var POS in ARTIFACTS.madetowers) {
+          var unitid = (UNITLAYERS.units[POS]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
               'group': 'towers'
             });
           }
-          MARKS = {};
-          UNITLAYERS = {
-            "towers": {},
-            "mytowers": {},
-            "opptowers": {},
-            "neutraltowers": {},
-            "catapults": {},
-            "mycatapults": {},
-            "oppcatapults": {},
-            "neutralcatapults": {},
-            "walls": {},
-            "mywalls": {},
-            "oppwalls": {},
-            "neutralwalls": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
+        }
+        for (var POS in ARTIFACTS.madewalls) {
+          var newunitid = 'spawn' + (clones++);
+          UNITDATA[newunitid] = {
+            pos: POS,
+            id: newunitid,
+            group: 'walls',
+            owner: 2,
+            from: MARKS['selecttower']
           };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
-          }
-          ARTIFACTS = {
-            "firetargets": {},
-            "movetargets": {},
-            "madecatapults": {},
-            "madetowers": {},
-            "madewalls": {},
-            "killtargets": {}
-          };
-          var newstepid = step.stepid + '-' + 'fire';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'fire',
-            path: step.path.concat('fire'),
-            clones: clones
-          });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = UNITLAYERS.myunits,
-                  s1 = TERRAIN.opphomerow;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'infiltration';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "towers": {},
+          "mytowers": {},
+          "opptowers": {},
+          "neutraltowers": {},
+          "catapults": {},
+          "mycatapults": {},
+          "oppcatapults": {},
+          "neutralcatapults": {},
+          "walls": {},
+          "mywalls": {},
+          "oppwalls": {},
+          "neutralwalls": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "firetargets": {},
+          "movetargets": {},
+          "madecatapults": {},
+          "madetowers": {},
+          "madewalls": {},
+          "killtargets": {}
+        };
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move'),
+          clones: clones
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.opphomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
+      game.move2instruction = function(step) {
+        return '';
+      };
+      game.kill2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selecttower']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': 'walls'
+          });
+        }
+        if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
+          var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+              'group': 'towers'
+            });
+          }
+        } else {
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]  || {}).id];
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "towers": {},
+          "mytowers": {},
+          "opptowers": {},
+          "neutraltowers": {},
+          "catapults": {},
+          "mycatapults": {},
+          "oppcatapults": {},
+          "neutralcatapults": {},
+          "walls": {},
+          "mywalls": {},
+          "oppwalls": {},
+          "neutralwalls": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "firetargets": {},
+          "movetargets": {},
+          "madecatapults": {},
+          "madetowers": {},
+          "madewalls": {},
+          "killtargets": {}
+        };
+        var newstepid = step.stepid + '-' + 'kill';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'kill',
+          path: step.path.concat('kill')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.opphomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
+      game.kill2instruction = function(step) {
+        return '';
+      };
+      game.sacrifice2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': 'walls'
+          });
+        }
+        delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
+        MARKS = {};
+        UNITLAYERS = {
+          "towers": {},
+          "mytowers": {},
+          "opptowers": {},
+          "neutraltowers": {},
+          "catapults": {},
+          "mycatapults": {},
+          "oppcatapults": {},
+          "neutralcatapults": {},
+          "walls": {},
+          "mywalls": {},
+          "oppwalls": {},
+          "neutralwalls": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "firetargets": {},
+          "movetargets": {},
+          "madecatapults": {},
+          "madetowers": {},
+          "madewalls": {},
+          "killtargets": {}
+        };
+        var newstepid = step.stepid + '-' + 'sacrifice';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'sacrifice',
+          path: step.path.concat('sacrifice')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.opphomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
+      game.sacrifice2instruction = function(step) {
+        return '';
+      };
+      game.fire2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var clones = step.clones;
+        var UNITLAYERS = step.UNITLAYERS;
+        if (!!(UNITLAYERS.oppwalls[MARKS['selectfire']])) {
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]  || {}).id];
+        } else {
+          if (!!(UNITLAYERS.oppunits[MARKS['selectfire']])) {
+            var unitid = (UNITLAYERS.units[MARKS['selectfire']]  || {}).id;
+            if (unitid) {
+              UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+                'group': (!!(UNITLAYERS.oppcatapults[MARKS['selectfire']]) ? 'towers' : 'walls')
+              });
+            }
+          } else {
+            var newunitid = 'spawn' + (clones++);
+            UNITDATA[newunitid] = {
+              pos: MARKS['selectfire'],
+              id: newunitid,
+              group: 'walls',
+              owner: 2,
+              from: MARKS['selectcatapult']
+            };
+          }
+        }
+        var unitid = (UNITLAYERS.units[MARKS['selectcatapult']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'group': 'towers'
+          });
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "towers": {},
+          "mytowers": {},
+          "opptowers": {},
+          "neutraltowers": {},
+          "catapults": {},
+          "mycatapults": {},
+          "oppcatapults": {},
+          "neutralcatapults": {},
+          "walls": {},
+          "mywalls": {},
+          "oppwalls": {},
+          "neutralwalls": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
+        };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "firetargets": {},
+          "movetargets": {},
+          "madecatapults": {},
+          "madetowers": {},
+          "madewalls": {},
+          "killtargets": {}
+        };
+        var newstepid = step.stepid + '-' + 'fire';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'fire',
+          path: step.path.concat('fire'),
+          clones: clones
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.opphomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'infiltration';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.fire2instruction = function(step) {
         return '';
       };

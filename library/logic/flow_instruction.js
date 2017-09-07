@@ -42,15 +42,6 @@ export default C => Object.assign(C,{
         } else {
             return '';
         }
-    },
-
-    applyLinkInstructions: (O,instr)=> {
-        O = {linking:true, ...(O || {})}
-        if (instr.links) {
-            return C.instruction(O,['all'].concat(instr.links))
-        } else if (instr.link) {
-            return C.instruction(O,instr.link)
-        }
     }
 
 })

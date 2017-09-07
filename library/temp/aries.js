@@ -162,92 +162,91 @@
       game.selectmovetarget1instruction = function(step) {
         return '';
       };
-      game.move1 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var LOOPID;
-          for (var POS in ARTIFACTS.beingpushed) {
-            if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
-              var pushid = LOOPID;
-              var pushdir = (ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'];
-              var dist = 1;
-              var newpos = UNITDATA[pushid].pos;
-              while (dist && connections[newpos][pushdir]) {
-                newpos = connections[newpos][pushdir];
-                dist--;
-              }
-              UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-                pos: newpos
-              });
+      game.move1 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var LOOPID;
+        for (var POS in ARTIFACTS.beingpushed) {
+          if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
+            var pushid = LOOPID;
+            var pushdir = (ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'];
+            var dist = 1;
+            var newpos = UNITDATA[pushid].pos;
+            while (dist && connections[newpos][pushdir]) {
+              newpos = connections[newpos][pushdir];
+              dist--;
             }
-          }
-          var LOOPID;
-          for (var POS in ARTIFACTS.squished) {
-            if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
-              delete UNITDATA[LOOPID];
-            }
-          }
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
+            UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
+              pos: newpos
             });
           }
-          MARKS = {};
-          UNITLAYERS = {
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        var LOOPID;
+        for (var POS in ARTIFACTS.squished) {
+          if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
+            delete UNITDATA[LOOPID];
           }
-          ARTIFACTS = {
-            "movetargets": {},
-            "beingpushed": {},
-            "squished": {}
-          };
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
+        }
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.oppcorner,
-                  s1 = UNITLAYERS.myunits;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 1;
-            var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'invade';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetargets": {},
+          "beingpushed": {},
+          "squished": {}
+        };
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.oppcorner,
+                s1 = UNITLAYERS.myunits;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 1;
+          var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'invade';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.move1instruction = function(step) {
         return '';
       };
@@ -401,92 +400,91 @@
       game.selectmovetarget2instruction = function(step) {
         return '';
       };
-      game.move2 =
-        function(turn, step) {
-          var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
-          var MARKS = step.MARKS;
-          var UNITDATA = Object.assign({}, step.UNITDATA);
-          var UNITLAYERS = step.UNITLAYERS;
-          var LOOPID;
-          for (var POS in ARTIFACTS.beingpushed) {
-            if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
-              var pushid = LOOPID;
-              var pushdir = (ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'];
-              var dist = 1;
-              var newpos = UNITDATA[pushid].pos;
-              while (dist && connections[newpos][pushdir]) {
-                newpos = connections[newpos][pushdir];
-                dist--;
-              }
-              UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-                pos: newpos
-              });
+      game.move2 = function(turn, step) {
+        var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+        var MARKS = step.MARKS;
+        var UNITDATA = Object.assign({}, step.UNITDATA);
+        var UNITLAYERS = step.UNITLAYERS;
+        var LOOPID;
+        for (var POS in ARTIFACTS.beingpushed) {
+          if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
+            var pushid = LOOPID;
+            var pushdir = (ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'];
+            var dist = 1;
+            var newpos = UNITDATA[pushid].pos;
+            while (dist && connections[newpos][pushdir]) {
+              newpos = connections[newpos][pushdir];
+              dist--;
             }
-          }
-          var LOOPID;
-          for (var POS in ARTIFACTS.squished) {
-            if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
-              delete UNITDATA[LOOPID];
-            }
-          }
-          var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selectmovetarget']
+            UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
+              pos: newpos
             });
           }
-          MARKS = {};
-          UNITLAYERS = {
-            "soldiers": {},
-            "mysoldiers": {},
-            "oppsoldiers": {},
-            "neutralsoldiers": {},
-            "units": {},
-            "myunits": {},
-            "oppunits": {},
-            "neutralunits": {}
-          };
-          for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        var LOOPID;
+        for (var POS in ARTIFACTS.squished) {
+          if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
+            delete UNITDATA[LOOPID];
           }
-          ARTIFACTS = {
-            "movetargets": {},
-            "beingpushed": {},
-            "squished": {}
-          };
-          var newstepid = step.stepid + '-' + 'move';
-          var newstep = turn.steps[newstepid] = Object.assign({}, step, {
-            ARTIFACTS: ARTIFACTS,
-            MARKS: MARKS,
-            UNITDATA: UNITDATA,
-            UNITLAYERS: UNITLAYERS,
-            stepid: newstepid,
-            name: 'move',
-            path: step.path.concat('move')
+        }
+        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+            'pos': MARKS['selectmovetarget']
           });
-          turn.links[newstepid] = {};
-          if (Object.keys(
-              (function() {
-                var ret = {},
-                  s0 = TERRAIN.oppcorner,
-                  s1 = UNITLAYERS.myunits;
-                for (var key in s0) {
-                  if (s1[key]) {
-                    ret[key] = s0[key];
-                  }
-                }
-                return ret;
-              }()) ||  {}).length !== 0) {
-            var winner = 2;
-            var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-            turn.links[newstepid][result] = 'invade';
-          } else turn.links[newstepid].endturn = "start" + otherplayer;
-          return newstep;
+        }
+        MARKS = {};
+        UNITLAYERS = {
+          "soldiers": {},
+          "mysoldiers": {},
+          "oppsoldiers": {},
+          "neutralsoldiers": {},
+          "units": {},
+          "myunits": {},
+          "oppunits": {},
+          "neutralunits": {}
         };
+        for (var unitid in UNITDATA) {
+          var currentunit = UNITDATA[unitid]
+          var unitgroup = currentunit.group;
+          var unitpos = currentunit.pos;
+          var owner = ownernames[currentunit.owner]
+          UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
+        }
+        ARTIFACTS = {
+          "movetargets": {},
+          "beingpushed": {},
+          "squished": {}
+        };
+        var newstepid = step.stepid + '-' + 'move';
+        var newstep = turn.steps[newstepid] = Object.assign({}, step, {
+          ARTIFACTS: ARTIFACTS,
+          MARKS: MARKS,
+          UNITDATA: UNITDATA,
+          UNITLAYERS: UNITLAYERS,
+          stepid: newstepid,
+          name: 'move',
+          path: step.path.concat('move')
+        });
+        turn.links[newstepid] = {};
+        if (Object.keys(
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.oppcorner,
+                s1 = UNITLAYERS.myunits;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }()) ||  {}).length !== 0) {
+          var winner = 2;
+          var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
+          turn.links[newstepid][result] = 'invade';
+        } else turn.links[newstepid].endturn = "start" + otherplayer;
+        return newstep;
+      }
       game.move2instruction = function(step) {
         return '';
       };

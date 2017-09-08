@@ -3,7 +3,7 @@ import lib from '../logic/';
 import { Definition } from './types';
 import applyLinkInstructions from './link';
 import applyEffectInstructions from './effect';
-import {ifCodeContains} from './utils';
+import {ifCodeContains, usesTurnVars, contains} from './utils';
 
 export default function addCommandFunction(def: Definition, cmndname: string, player: 1 | 2){
   const O = {rules: def, player, cmndname};
@@ -14,9 +14,9 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
       var ARTIFACTS = ${lib.copyArtifactsForAction(O,cmndDef)};
       var MARKS = step.MARKS;
       var UNITDATA = Object.assign({},step.UNITDATA);
-      ${lib.contains(cmndDef,'spawn') ? 'var clones = step.clones; ' : ''}
+      ${contains(cmndDef,'spawn') ? 'var clones = step.clones; ' : ''}
       var UNITLAYERS = step.UNITLAYERS;
-      ${lib.usesTurnVars(O) ? 'var TURNVARS = Object.assign({},step.TURNVARS); ' : ''}
+      ${usesTurnVars(cmndDef) ? 'var TURNVARS = Object.assign({},step.TURNVARS); ' : ''}
 
       ${applyEffectInstructions(def,cmndDef,player)}
       MARKS = {};
@@ -33,8 +33,8 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
         stepid: newstepid,
         name: '${O.cmndname}',
         path: step.path.concat('${O.cmndname}')
-        ${lib.contains(cmndDef,'spawn') ? ', clones: clones' : ''}
-        ${lib.usesTurnVars(O) ? ',TURNVARS: TURNVARS ' : ''}
+        ${contains(cmndDef,'spawn') ? ', clones: clones' : ''}
+        ${usesTurnVars(cmndDef) ? ',TURNVARS: TURNVARS ' : ''}
       });
       turn.links[newstepid] = {};
 

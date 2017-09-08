@@ -1,7 +1,7 @@
 import lib from '../logic/';
 
 import { Definition } from './types';
-import {ifCodeContains} from './utils';
+import {ifCodeContains,usesTurnVars,contains} from './utils';
 import applyLinkInstructions from './link';
 
 export default function addStartFunction(def: Definition, player: 1 | 2){
@@ -20,7 +20,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
       var MARKS = {}; 
       var ARTIFACTS = ${lib.blankArtifactLayers(O)}; 
       var UNITDATA = step.UNITDATA;
-      ${lib.usesTurnVars(O) ? 'var TURNVARS = {}; ' : ''}
+      ${usesTurnVars(def) ? 'var TURNVARS = {}; ' : ''}
       ${lib.calculateUnitLayers({...O,defineUnitlayers:true})}
 
       ${lib.applyGeneratorInstructions(O,startDef)}
@@ -31,9 +31,9 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
         MARKS: MARKS,
         stepid: 'root',
         name: 'start',
-        ${lib.contains((O && O.rules || {}),'spawn') ? 'clones: step.clones, ' : ''}
+        ${contains(def,'spawn') ? 'clones: step.clones, ' : ''}
         path: []
-        ${lib.usesTurnVars(O) ? ',TURNVARS: TURNVARS ' : ''}
+        ${usesTurnVars(def) ? ',TURNVARS: TURNVARS ' : ''}
       };
 
       ${applyLinkInstructions(def, startDef, player, true)}

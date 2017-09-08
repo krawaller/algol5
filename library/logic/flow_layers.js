@@ -17,9 +17,6 @@ export default C => Object.assign(C,{
         }
     },
 
-    isTerrainNeutral: O=> !Object.keys(C.getTerrain(O))
-        .filter(t=> t[1] || t[2]).length,
-
     // assumes UNITDATA, ownernames
     // mutates UNITLAYERS
     calculateUnitLayers: (O)=> `

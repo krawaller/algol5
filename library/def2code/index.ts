@@ -3,6 +3,7 @@ import lib from '../logic/';
 import playerClosure from './playerclosure';
 import { Definition } from './types';
 import preProcess from './preprocess';
+import { isTerrainNeutral, contains, usesTurnVars } from './utils';
 
 export default function compileGameCode(def: Definition){
   def = preProcess(def);
@@ -19,7 +20,7 @@ export default function compileGameCode(def: Definition){
       var connections = boardConnections(boardDef);
       var BOARD = boardLayers(boardDef);
       var relativedirs = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];
-      ${lib.isTerrainNeutral({ rules: def }) ? `var TERRAIN = terrainLayers(boardDef, 0${def.AI && def.AI.terrain ? `, ${JSON.stringify(def.AI.terrain)}` : ''}); ` : ''}
+      ${isTerrainNeutral(def) ? `var TERRAIN = terrainLayers(boardDef, 0${def.AI && def.AI.terrain ? `, ${JSON.stringify(def.AI.terrain)}` : ''}); ` : ''}
 
       function reduce(coll,iterator,acc){
         for(var key in coll){
@@ -31,8 +32,8 @@ export default function compileGameCode(def: Definition){
         var turnseed = { turn: 0 };
         var stepseed = {
           UNITDATA: deduceInitialUnitData(${JSON.stringify(def.setup || {})})
-          ${lib.usesTurnVars(O) ? ', TURNVARS: {}' : ''}
-          ${lib.contains((O && O.rules || {}),'spawn') ? ', clones: 0' : ''}
+          ${usesTurnVars(def) ? ', TURNVARS: {}' : ''}
+          ${contains(def,'spawn') ? ', clones: 0' : ''}
         };
         return game.start1(turnseed,stepseed);
       };

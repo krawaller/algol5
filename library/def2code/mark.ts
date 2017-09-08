@@ -24,7 +24,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
     var MARKS = ${newMarkObject}; 
     ${lib.applyGeneratorInstructions(O,markDef)}
   `;
-  const linking = applyLinkInstructions(def, markDef, player, false);  // lib.applyLinkInstructions(O,markDef);
+  const linking = applyLinkInstructions(def, markDef, player, false);
   const preludium = ifCodeContains(body + linking, {
     TURNVARS: 'var TURNVARS = step.TURNVARS; ',
     ARTIFACTS: 'var ARTIFACTS = ' + lib.copyArtifactsForAction(O,markDef) + '; ',

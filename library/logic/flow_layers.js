@@ -4,19 +4,6 @@ import * as isArray from "lodash/isArray"
 
 export default C => Object.assign(C,{
 
-    // assumes step
-    copyArtifactsForAction: (O,actiondef)=> {
-        let actionlayers = C.actionLayers(O,actiondef)
-        let ret = '{'
-        ret += actionlayers.map(l=>l+': Object.assign({},step.ARTIFACTS.'+l+')').join(', ')
-        ret += '}'
-        if (actionlayers.length === Object.keys(C.blankArtifactLayers(O,true)).length){
-            return ret;
-        } else {
-            return 'Object.assign({},step.ARTIFACTS,'+ret+')'
-        }
-    },
-
     // assumes UNITDATA, ownernames
     // mutates UNITLAYERS
     calculateUnitLayers: (O)=> `
@@ -42,16 +29,6 @@ export default C => Object.assign(C,{
             (mem,g)=>({ ...mem, [g]: {}, ['my'+g]: {}, ['opp'+g]: {}, ['neutral'+g]: {} }),
             {}
         )
-        return pure ? ret : JSON.stringify(ret)
-    },
-
-    /*
-    Calculates all possible artifact layers used in the game
-    */
-    blankArtifactLayers: (O,pure)=> {
-        let ret = reduce(O && O.rules && O.rules.generators||{},(mem,gendef,key)=>{
-            return Object.assign(mem,C.generatorLayers(gendef));
-        },{})
         return pure ? ret : JSON.stringify(ret)
     },
 

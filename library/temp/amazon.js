@@ -59,6 +59,89 @@
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
+      game.brain_Steve_1 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.myroads = {};
+        ARTIFACTS.opproads = {};
+        ARTIFACTS.myreach = {};
+        ARTIFACTS.oppreach = {};
+        for (var STARTPOS in UNITLAYERS.queens) {
+          var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          var foundneighbours = [];
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS && !UNITLAYERS.units[POS]) {
+              foundneighbours.push(POS);
+            }
+          } 
+          var NEIGHBOURCOUNT = foundneighbours.length;
+          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
+            count: NEIGHBOURCOUNT
+          };
+        } 
+        var BLOCKS = UNITLAYERS.units;
+        var walkstarts = UNITLAYERS.queens;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
+            }
+          }
+        }
+        return reduce(ARTIFACTS.myroads, function(mem, obj) {
+          return mem + obj['count'];
+        }, 0) + Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
+          return mem + obj['count'];
+        }, 0) - Object.keys(ARTIFACTS.oppreach).length;
+      };
+      game.brain_Steve_1_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.myroads = {};
+        ARTIFACTS.opproads = {};
+        ARTIFACTS.myreach = {};
+        ARTIFACTS.oppreach = {};
+        for (var STARTPOS in UNITLAYERS.queens) {
+          var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          var foundneighbours = [];
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS && !UNITLAYERS.units[POS]) {
+              foundneighbours.push(POS);
+            }
+          } 
+          var NEIGHBOURCOUNT = foundneighbours.length;
+          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
+            count: NEIGHBOURCOUNT
+          };
+        } 
+        var BLOCKS = UNITLAYERS.units;
+        var walkstarts = UNITLAYERS.queens;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
+            }
+          }
+        }
+        return {
+          myroads: reduce(ARTIFACTS.myroads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0),
+          mydomain: Object.keys(ARTIFACTS.myreach).length,
+          opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0),
+          oppdomain: -Object.keys(ARTIFACTS.oppreach).length
+        };
+      };
       game.selectunit1 = function(turn, step, markpos) {
         var ARTIFACTS = {
           targets: Object.assign({}, step.ARTIFACTS.targets)
@@ -317,91 +400,6 @@
       game.start1instruction = function(step) {
         return 'Select an amazon to move and fire with';
       };
-      game.brain_Steve_1 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.myroads = {};
-          ARTIFACTS.opproads = {};
-          ARTIFACTS.myreach = {};
-          ARTIFACTS.oppreach = {};
-          for (var STARTPOS in UNITLAYERS.queens) {
-            var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            var foundneighbours = [];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS && !UNITLAYERS.units[POS]) {
-                foundneighbours.push(POS);
-              }
-            } 
-            var NEIGHBOURCOUNT = foundneighbours.length;
-            ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
-              count: NEIGHBOURCOUNT
-            };
-          } 
-          var BLOCKS = UNITLAYERS.units;
-          var walkstarts = UNITLAYERS.queens;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
-              }
-            }
-          }
-          return reduce(ARTIFACTS.myroads, function(mem, obj) {
-            return mem + obj['count'];
-          }, 0) + Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
-          }, 0) - Object.keys(ARTIFACTS.oppreach).length;
-        };
-      game.brain_Steve_1_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.myroads = {};
-          ARTIFACTS.opproads = {};
-          ARTIFACTS.myreach = {};
-          ARTIFACTS.oppreach = {};
-          for (var STARTPOS in UNITLAYERS.queens) {
-            var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            var foundneighbours = [];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS && !UNITLAYERS.units[POS]) {
-                foundneighbours.push(POS);
-              }
-            } 
-            var NEIGHBOURCOUNT = foundneighbours.length;
-            ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
-              count: NEIGHBOURCOUNT
-            };
-          } 
-          var BLOCKS = UNITLAYERS.units;
-          var walkstarts = UNITLAYERS.queens;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
-              }
-            }
-          }
-          return {
-            myroads: reduce(ARTIFACTS.myroads, function(mem, obj) {
-              return mem + obj['count'];
-            }, 0),
-            mydomain: Object.keys(ARTIFACTS.myreach).length,
-            opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
-              return mem + obj['count'];
-            }, 0),
-            oppdomain: -Object.keys(ARTIFACTS.oppreach).length
-          };
-        };
       game.debug1 = function() {
         return {
           TERRAIN: TERRAIN
@@ -412,6 +410,89 @@
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
+      game.brain_Steve_2 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.myroads = {};
+        ARTIFACTS.opproads = {};
+        ARTIFACTS.myreach = {};
+        ARTIFACTS.oppreach = {};
+        for (var STARTPOS in UNITLAYERS.queens) {
+          var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          var foundneighbours = [];
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS && !UNITLAYERS.units[POS]) {
+              foundneighbours.push(POS);
+            }
+          } 
+          var NEIGHBOURCOUNT = foundneighbours.length;
+          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
+            count: NEIGHBOURCOUNT
+          };
+        } 
+        var BLOCKS = UNITLAYERS.units;
+        var walkstarts = UNITLAYERS.queens;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
+            }
+          }
+        }
+        return reduce(ARTIFACTS.myroads, function(mem, obj) {
+          return mem + obj['count'];
+        }, 0) + Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
+          return mem + obj['count'];
+        }, 0) - Object.keys(ARTIFACTS.oppreach).length;
+      };
+      game.brain_Steve_2_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.myroads = {};
+        ARTIFACTS.opproads = {};
+        ARTIFACTS.myreach = {};
+        ARTIFACTS.oppreach = {};
+        for (var STARTPOS in UNITLAYERS.queens) {
+          var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          var foundneighbours = [];
+          var startconnections = connections[STARTPOS];
+          for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
+            var POS = startconnections[neighbourdirs[dirnbr]];
+            if (POS && !UNITLAYERS.units[POS]) {
+              foundneighbours.push(POS);
+            }
+          } 
+          var NEIGHBOURCOUNT = foundneighbours.length;
+          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
+            count: NEIGHBOURCOUNT
+          };
+        } 
+        var BLOCKS = UNITLAYERS.units;
+        var walkstarts = UNITLAYERS.queens;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
+            }
+          }
+        }
+        return {
+          myroads: reduce(ARTIFACTS.myroads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0),
+          mydomain: Object.keys(ARTIFACTS.myreach).length,
+          opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0),
+          oppdomain: -Object.keys(ARTIFACTS.oppreach).length
+        };
+      };
       game.selectunit2 = function(turn, step, markpos) {
         var ARTIFACTS = {
           targets: Object.assign({}, step.ARTIFACTS.targets)
@@ -670,91 +751,6 @@
       game.start2instruction = function(step) {
         return 'Select an amazon to move and fire with';
       };
-      game.brain_Steve_2 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.myroads = {};
-          ARTIFACTS.opproads = {};
-          ARTIFACTS.myreach = {};
-          ARTIFACTS.oppreach = {};
-          for (var STARTPOS in UNITLAYERS.queens) {
-            var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            var foundneighbours = [];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS && !UNITLAYERS.units[POS]) {
-                foundneighbours.push(POS);
-              }
-            } 
-            var NEIGHBOURCOUNT = foundneighbours.length;
-            ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
-              count: NEIGHBOURCOUNT
-            };
-          } 
-          var BLOCKS = UNITLAYERS.units;
-          var walkstarts = UNITLAYERS.queens;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
-              }
-            }
-          }
-          return reduce(ARTIFACTS.myroads, function(mem, obj) {
-            return mem + obj['count'];
-          }, 0) + Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
-          }, 0) - Object.keys(ARTIFACTS.oppreach).length;
-        };
-      game.brain_Steve_2_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.myroads = {};
-          ARTIFACTS.opproads = {};
-          ARTIFACTS.myreach = {};
-          ARTIFACTS.oppreach = {};
-          for (var STARTPOS in UNITLAYERS.queens) {
-            var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            var foundneighbours = [];
-            var startconnections = connections[STARTPOS];
-            for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
-              var POS = startconnections[neighbourdirs[dirnbr]];
-              if (POS && !UNITLAYERS.units[POS]) {
-                foundneighbours.push(POS);
-              }
-            } 
-            var NEIGHBOURCOUNT = foundneighbours.length;
-            ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
-              count: NEIGHBOURCOUNT
-            };
-          } 
-          var BLOCKS = UNITLAYERS.units;
-          var walkstarts = UNITLAYERS.queens;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var POS = STARTPOS;
-              while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
-              }
-            }
-          }
-          return {
-            myroads: reduce(ARTIFACTS.myroads, function(mem, obj) {
-              return mem + obj['count'];
-            }, 0),
-            mydomain: Object.keys(ARTIFACTS.myreach).length,
-            opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
-              return mem + obj['count'];
-            }, 0),
-            oppdomain: -Object.keys(ARTIFACTS.oppreach).length
-          };
-        };
       game.debug2 = function() {
         return {
           TERRAIN: TERRAIN

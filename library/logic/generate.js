@@ -118,13 +118,4 @@ export default C => Object.assign(C,{
 		return ret;
 	},
 
-	// called from instruction
-	applyGenerator: (O,def)=> {
-		switch(def.type){
-			case 'walker': return C.applywalker(O,def)
-			case 'neighbour': return C.applyneighbours(O,def)
-			case 'filter': return C.applyfilter(O,def)
-			default: throw 'Unknown generator def: '+def
-		}
-	}
 })

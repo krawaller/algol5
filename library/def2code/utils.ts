@@ -2,6 +2,10 @@ import * as isObject from 'lodash/isObject';
 import * as isArray from 'lodash/isArray';
 import * as isEqual from 'lodash/isEqual';
 import * as some from 'lodash/some';
+import * as reduce from 'lodash/reduce';
+import * as invert from 'lodash/invert';
+
+import lib from '../logic/';
 
 import {Definition} from './types';
 
@@ -14,6 +18,26 @@ export function getTerrain(gameDef: Definition) {
     gameDef && gameDef.board && gameDef.board.terrain || {},
     gameDef && gameDef.AI && gameDef.AI.terrain || {}
   );
+}
+
+export function blankArtifactLayers(gameDef: Definition, pure?:boolean) {
+  let ret = reduce(gameDef.generators,(mem,genDef,key)=>{
+      return Object.assign(mem,lib.generatorLayers(genDef));
+  },{})
+  return pure ? ret : JSON.stringify(ret);
+}
+
+export function copyArtifactsForAction(gameDef: Definition, actionDef) {
+  const O = {rules: gameDef};
+  let actionlayers = lib.actionLayers(O,actionDef);
+  let ret = '{'
+  ret += actionlayers.map(l=>l+': Object.assign({},step.ARTIFACTS.'+l+')').join(', ')
+  ret += '}'
+  if (actionlayers.length === Object.keys(blankArtifactLayers(gameDef,true)).length){
+      return ret;
+  } else {
+      return 'Object.assign({},step.ARTIFACTS,'+ret+')'
+  }
 }
 
 export function isTerrainNeutral(gameDef: Definition) {
@@ -34,4 +58,23 @@ export function contains(haystack,needle): boolean {
 
 export function usesTurnVars(search: Definition | any): boolean {
   return contains(search,'turnvar') || contains(search,'turnpos') || contains(search,'setturnvar') || contains(search,'setturnpos');
+}
+
+
+const colnametonumber = reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split(""),(mem,char,n)=> {
+	mem[char] = n+1;
+	return mem;
+},{});
+
+const colnumbertoname = invert(colnametonumber);
+
+export function pos2coords(pos) {
+  return {
+		x: colnametonumber[pos[0]],
+		y: parseInt(pos.substr(1))
+	}
+}
+
+export function coords2pos(coords){
+  return colnumbertoname[coords.x]+coords.y;
 }

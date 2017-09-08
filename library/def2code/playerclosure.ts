@@ -5,6 +5,7 @@ import { Definition } from './types';
 import addMarkFunc from './mark';
 import addCommandFunc from './command';
 import addStartFunc from './start';
+import addAI from './ai';
 
 export default function playerClosure(def: Definition, player: 1 | 2){
   const O = { rules: def, player };
@@ -14,7 +15,7 @@ export default function playerClosure(def: Definition, player: 1 | 2){
       var ownernames = ${player === 2 ? '["neutral","opp","my"]' : '["neutral","my","opp"]'};
       var player = ${player};
       var otherplayer = ${player === 1 ? 2 : 1};
-      ${lib.addAllScoringsForPlayer(O)}
+      ${addAI(def, player)}
       ${Object.keys(def.marks||{}).map(
         markname => addMarkFunc(def, markname, player)
       ).join(' ')}
@@ -22,7 +23,6 @@ export default function playerClosure(def: Definition, player: 1 | 2){
         cmndname => addCommandFunc(def, cmndname, player)
       ).join(' ')}
       ${addStartFunc(def, player)}
-      ${lib.addAI(O)}
       game.debug${player} = function(){
         return {TERRAIN:TERRAIN};
       }

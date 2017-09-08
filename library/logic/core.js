@@ -16,7 +16,7 @@ export default T => {
             if (!T[datatype]){
                 console.log("ALARM",datatype)
             }
-            return T[datatype](O,O.cmndname===action||O.markname===action||O.name===action?alt1:alt2)
+            return T[datatype](O,O.cmndname===action||O.markname===action||O.name===action||O.action===action?alt1:alt2)
         }
     }
 

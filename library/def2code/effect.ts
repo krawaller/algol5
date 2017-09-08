@@ -4,6 +4,7 @@ import lib from '../logic/';
 import { Definition } from './types';
 import obey from './obey';
 
+// TODO - add action name!
 
 /*
 Effect methods will all mutate UNITDATA, which is assumed to have been

@@ -3,6 +3,7 @@ import * as map from 'lodash/map';
 import lib from '../logic/';
 import { Definition } from './types';
 import obey from './obey';
+import applyGenerators from './generate';
 
 function addLink(gameDef: Definition, name: string, player: 1 | 2, root: boolean){
   const O = {rules: gameDef, player};
@@ -19,9 +20,10 @@ function addLink(gameDef: Definition, name: string, player: 1 | 2, root: boolea
       }
     `;
   } else if (name === "endturn"){
-    const endTurnDef = gameDef.endTurn;
-    let ret = lib.applyGeneratorInstructions({...(O || {}), generating:true},endTurnDef || {})
-    return ret + map(endTurnDef && endTurnDef.unless,(cond,name)=> {
+    const endTurnDef = gameDef.endTurn || {};
+    let ret = applyGenerators(gameDef, endTurnDef, player, "endturn");
+    //let ret = lib.applyGeneratorInstructions({...(O || {}), generating:true},endTurnDef || {})
+    return ret + map(endTurnDef.unless,(cond,name)=> {
       return 'if ('+lib.boolean(O,cond)+'){ turn.blockedby = "'+name+'"; } '
     }).concat(map(gameDef.endGame,(def,name)=> `
       if (${lib.boolean(O,def.condition)}) { 

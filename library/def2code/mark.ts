@@ -2,9 +2,10 @@ import lib from '../logic/';
 
 import { Definition } from './types';
 
-import {ifCodeContains} from './utils';
+import {ifCodeContains,copyArtifactsForAction} from './utils';
 
 import applyLinkInstructions from './link';
+import applyGeneratorInstructions from './generate';
 
 export default function addMarkFunction(def: Definition, markname: string, player: 1 | 2){
   const O = {rules: def, markname, player};
@@ -22,12 +23,12 @@ export default function addMarkFunction(def: Definition, markname: string, playe
   }
   const body = `
     var MARKS = ${newMarkObject}; 
-    ${lib.applyGeneratorInstructions(O,markDef)}
+    ${applyGeneratorInstructions(def,markDef,player,markname)}
   `;
   const linking = applyLinkInstructions(def, markDef, player, false);
   const preludium = ifCodeContains(body + linking, {
     TURNVARS: 'var TURNVARS = step.TURNVARS; ',
-    ARTIFACTS: 'var ARTIFACTS = ' + lib.copyArtifactsForAction(O,markDef) + '; ',
+    ARTIFACTS: 'var ARTIFACTS = ' + copyArtifactsForAction(def,markDef) + '; ',
     UNITLAYERS: 'var UNITLAYERS = step.UNITLAYERS; '
   });
   const instruction = lib.value(O, markDef.instruction||'');

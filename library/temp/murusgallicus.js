@@ -211,6 +211,445 @@
         "b7": 0,
         "a7": 0
       };
+      game.brain_Steve_1 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.oppmoves = {};
+        ARTIFACTS.oppheavythreats = {};
+        ARTIFACTS.opplightthreats = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        var filtersourcelayer = TERRAIN.mythreatrow;
+        for (var POS in filtersourcelayer) {
+          var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
+          if (filtersourcelayer[POS]) {
+            var filterobj = filtersourcelayer[POS];
+            if (!!(ARTIFACTS.oppmoves[POS])) {
+              filtertargetlayer[POS] = filterobj;
+            } 
+          } 
+        }
+        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) - 10000 * Object.keys(
+          (function() {
+            var k, ret = {},
+              s0 = ARTIFACTS.oppmoves,
+              s1 = TERRAIN.myhomerow;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
+      };
+      game.brain_Steve_1_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.oppmoves = {};
+        ARTIFACTS.oppheavythreats = {};
+        ARTIFACTS.opplightthreats = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        var filtersourcelayer = TERRAIN.mythreatrow;
+        for (var POS in filtersourcelayer) {
+          var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
+          if (filtersourcelayer[POS]) {
+            var filterobj = filtersourcelayer[POS];
+            if (!!(ARTIFACTS.oppmoves[POS])) {
+              filtertargetlayer[POS] = filterobj;
+            } 
+          } 
+        }
+        return {
+          mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
+          mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          oppwinmoves: -10000 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length,
+          opplightthreats: -20 * Object.keys(ARTIFACTS.opplightthreats).length,
+          oppheavythreats: -500 * Object.keys(ARTIFACTS.oppheavythreats).length
+        };
+      };
+      game.brain_Joe_1 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.oppmoves = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) - 100 * Object.keys(
+          (function() {
+            var k, ret = {},
+              s0 = ARTIFACTS.oppmoves,
+              s1 = TERRAIN.myhomerow;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }())).length;
+      };
+      game.brain_Joe_1_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.oppmoves = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        return {
+          mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
+          mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          oppwinmoves: -100 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length
+        };
+      };
+      game.brain_Clive_1 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.mymoves = {};
+        ARTIFACTS.oppmoves = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.oppwalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.mytowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['mymoves'][POS] = {};
+              }
+            }
+          }
+        }
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
+      };
+      game.brain_Clive_1_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.mymoves = {};
+        ARTIFACTS.oppmoves = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.oppwalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.mytowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['mymoves'][POS] = {};
+              }
+            }
+          }
+        }
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        return {
+          mymoves: Object.keys(ARTIFACTS.mymoves).length,
+          mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
+        };
+      };
       game.selecttower1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
@@ -553,451 +992,6 @@
       game.start1instruction = function(step) {
         return '';
       };
-      game.brain_Steve_1 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.oppmoves = {};
-          ARTIFACTS.oppheavythreats = {};
-          ARTIFACTS.opplightthreats = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          var filtersourcelayer = TERRAIN.mythreatrow;
-          for (var POS in filtersourcelayer) {
-            var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
-            if (filtersourcelayer[POS]) {
-              var filterobj = filtersourcelayer[POS];
-              if (!!(ARTIFACTS.oppmoves[POS])) {
-                filtertargetlayer[POS] = filterobj;
-              } 
-            } 
-          }
-          return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) - 10000 * Object.keys(
-            (function() {
-              var k, ret = {},
-                s0 = ARTIFACTS.oppmoves,
-                s1 = TERRAIN.myhomerow;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
-        };
-      game.brain_Steve_1_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.oppmoves = {};
-          ARTIFACTS.oppheavythreats = {};
-          ARTIFACTS.opplightthreats = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          var filtersourcelayer = TERRAIN.mythreatrow;
-          for (var POS in filtersourcelayer) {
-            var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
-            if (filtersourcelayer[POS]) {
-              var filterobj = filtersourcelayer[POS];
-              if (!!(ARTIFACTS.oppmoves[POS])) {
-                filtertargetlayer[POS] = filterobj;
-              } 
-            } 
-          }
-          return {
-            mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
-            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            oppwinmoves: -10000 * Object.keys(
-              (function() {
-                var k, ret = {},
-                  s0 = ARTIFACTS.oppmoves,
-                  s1 = TERRAIN.myhomerow;
-                for (k in s0) {
-                  ret[k] = 1;
-                }
-                for (k in s1) {
-                  ret[k] = 1;
-                }
-                return ret;
-              }())).length,
-            opplightthreats: -20 * Object.keys(ARTIFACTS.opplightthreats).length,
-            oppheavythreats: -500 * Object.keys(ARTIFACTS.oppheavythreats).length
-          };
-        };
-      game.brain_Joe_1 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.oppmoves = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) - 100 * Object.keys(
-            (function() {
-              var k, ret = {},
-                s0 = ARTIFACTS.oppmoves,
-                s1 = TERRAIN.myhomerow;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }())).length;
-        };
-      game.brain_Joe_1_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.oppmoves = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          return {
-            mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
-            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            oppwinmoves: -100 * Object.keys(
-              (function() {
-                var k, ret = {},
-                  s0 = ARTIFACTS.oppmoves,
-                  s1 = TERRAIN.myhomerow;
-                for (k in s0) {
-                  ret[k] = 1;
-                }
-                for (k in s1) {
-                  ret[k] = 1;
-                }
-                return ret;
-              }())).length
-          };
-        };
-      game.brain_Clive_1 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.mymoves = {};
-          ARTIFACTS.oppmoves = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.oppwalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.mytowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['mymoves'][POS] = {};
-                }
-              }
-            }
-          }
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
-        };
-      game.brain_Clive_1_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.mymoves = {};
-          ARTIFACTS.oppmoves = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.oppwalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.mytowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['mymoves'][POS] = {};
-                }
-              }
-            }
-          }
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          return {
-            mymoves: Object.keys(ARTIFACTS.mymoves).length,
-            mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
-          };
-        };
       game.debug1 = function() {
         return {
           TERRAIN: TERRAIN
@@ -1133,6 +1127,445 @@
         "c7": 0,
         "b7": 0,
         "a7": 0
+      };
+      game.brain_Steve_2 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.oppmoves = {};
+        ARTIFACTS.oppheavythreats = {};
+        ARTIFACTS.opplightthreats = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        var filtersourcelayer = TERRAIN.mythreatrow;
+        for (var POS in filtersourcelayer) {
+          var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
+          if (filtersourcelayer[POS]) {
+            var filterobj = filtersourcelayer[POS];
+            if (!!(ARTIFACTS.oppmoves[POS])) {
+              filtertargetlayer[POS] = filterobj;
+            } 
+          } 
+        }
+        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) - 10000 * Object.keys(
+          (function() {
+            var k, ret = {},
+              s0 = ARTIFACTS.oppmoves,
+              s1 = TERRAIN.myhomerow;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
+      };
+      game.brain_Steve_2_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.oppmoves = {};
+        ARTIFACTS.oppheavythreats = {};
+        ARTIFACTS.opplightthreats = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        var filtersourcelayer = TERRAIN.mythreatrow;
+        for (var POS in filtersourcelayer) {
+          var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
+          if (filtersourcelayer[POS]) {
+            var filterobj = filtersourcelayer[POS];
+            if (!!(ARTIFACTS.oppmoves[POS])) {
+              filtertargetlayer[POS] = filterobj;
+            } 
+          } 
+        }
+        return {
+          mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
+          mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          oppwinmoves: -10000 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length,
+          opplightthreats: -20 * Object.keys(ARTIFACTS.opplightthreats).length,
+          oppheavythreats: -500 * Object.keys(ARTIFACTS.oppheavythreats).length
+        };
+      };
+      game.brain_Joe_2 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.oppmoves = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) - 100 * Object.keys(
+          (function() {
+            var k, ret = {},
+              s0 = ARTIFACTS.oppmoves,
+              s1 = TERRAIN.myhomerow;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }())).length;
+      };
+      game.brain_Joe_2_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.oppmoves = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        return {
+          mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
+          mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          oppwinmoves: -100 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length
+        };
+      };
+      game.brain_Clive_2 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.mymoves = {};
+        ARTIFACTS.oppmoves = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.oppwalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.mytowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['mymoves'][POS] = {};
+              }
+            }
+          }
+        }
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          return mem + (mybasic[pos] || 0);
+        }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
+      };
+      game.brain_Clive_2_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        ARTIFACTS.mymoves = {};
+        ARTIFACTS.oppmoves = {};
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.oppwalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.mytowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['mymoves'][POS] = {};
+              }
+            }
+          }
+        }
+        var BLOCKS =
+          (function() {
+            var k, ret = {},
+              s0 = UNITLAYERS.towers,
+              s1 = UNITLAYERS.mywalls;
+            for (k in s0) {
+              ret[k] = 1;
+            }
+            for (k in s1) {
+              ret[k] = 1;
+            }
+            return ret;
+          }());
+        var walkstarts = UNITLAYERS.opptowers;
+        for (var STARTPOS in walkstarts) {
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var MAX = 2;
+            var POS = STARTPOS;
+            var LENGTH = 0;
+            while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
+              walkedsquares.push(POS);
+              LENGTH++;
+            }
+            var WALKLENGTH = walkedsquares.length;
+            var STEP = 0;
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              STEP++;
+              if (((WALKLENGTH === 2) && (STEP === 2))) {
+                ARTIFACTS['oppmoves'][POS] = {};
+              }
+            }
+          }
+        }
+        return {
+          mymoves: Object.keys(ARTIFACTS.mymoves).length,
+          mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
+          oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
+        };
       };
       game.selecttower2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1476,451 +1909,6 @@
       game.start2instruction = function(step) {
         return '';
       };
-      game.brain_Steve_2 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.oppmoves = {};
-          ARTIFACTS.oppheavythreats = {};
-          ARTIFACTS.opplightthreats = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          var filtersourcelayer = TERRAIN.mythreatrow;
-          for (var POS in filtersourcelayer) {
-            var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
-            if (filtersourcelayer[POS]) {
-              var filterobj = filtersourcelayer[POS];
-              if (!!(ARTIFACTS.oppmoves[POS])) {
-                filtertargetlayer[POS] = filterobj;
-              } 
-            } 
-          }
-          return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) - 10000 * Object.keys(
-            (function() {
-              var k, ret = {},
-                s0 = ARTIFACTS.oppmoves,
-                s1 = TERRAIN.myhomerow;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
-        };
-      game.brain_Steve_2_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.oppmoves = {};
-          ARTIFACTS.oppheavythreats = {};
-          ARTIFACTS.opplightthreats = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          var filtersourcelayer = TERRAIN.mythreatrow;
-          for (var POS in filtersourcelayer) {
-            var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
-            if (filtersourcelayer[POS]) {
-              var filterobj = filtersourcelayer[POS];
-              if (!!(ARTIFACTS.oppmoves[POS])) {
-                filtertargetlayer[POS] = filterobj;
-              } 
-            } 
-          }
-          return {
-            mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
-            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            oppwinmoves: -10000 * Object.keys(
-              (function() {
-                var k, ret = {},
-                  s0 = ARTIFACTS.oppmoves,
-                  s1 = TERRAIN.myhomerow;
-                for (k in s0) {
-                  ret[k] = 1;
-                }
-                for (k in s1) {
-                  ret[k] = 1;
-                }
-                return ret;
-              }())).length,
-            opplightthreats: -20 * Object.keys(ARTIFACTS.opplightthreats).length,
-            oppheavythreats: -500 * Object.keys(ARTIFACTS.oppheavythreats).length
-          };
-        };
-      game.brain_Joe_2 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.oppmoves = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) - 100 * Object.keys(
-            (function() {
-              var k, ret = {},
-                s0 = ARTIFACTS.oppmoves,
-                s1 = TERRAIN.myhomerow;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }())).length;
-        };
-      game.brain_Joe_2_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.oppmoves = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          return {
-            mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
-            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            oppwinmoves: -100 * Object.keys(
-              (function() {
-                var k, ret = {},
-                  s0 = ARTIFACTS.oppmoves,
-                  s1 = TERRAIN.myhomerow;
-                for (k in s0) {
-                  ret[k] = 1;
-                }
-                for (k in s1) {
-                  ret[k] = 1;
-                }
-                return ret;
-              }())).length
-          };
-        };
-      game.brain_Clive_2 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.mymoves = {};
-          ARTIFACTS.oppmoves = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.oppwalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.mytowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['mymoves'][POS] = {};
-                }
-              }
-            }
-          }
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
-        };
-      game.brain_Clive_2_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          ARTIFACTS.mymoves = {};
-          ARTIFACTS.oppmoves = {};
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.oppwalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.mytowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['mymoves'][POS] = {};
-                }
-              }
-            }
-          }
-          var BLOCKS =
-            (function() {
-              var k, ret = {},
-                s0 = UNITLAYERS.towers,
-                s1 = UNITLAYERS.mywalls;
-              for (k in s0) {
-                ret[k] = 1;
-              }
-              for (k in s1) {
-                ret[k] = 1;
-              }
-              return ret;
-            }());
-          var walkstarts = UNITLAYERS.opptowers;
-          for (var STARTPOS in walkstarts) {
-            var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
-            for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
-              var walkedsquares = [];
-              var MAX = 2;
-              var POS = STARTPOS;
-              var LENGTH = 0;
-              while (LENGTH < MAX && (POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-                walkedsquares.push(POS);
-                LENGTH++;
-              }
-              var WALKLENGTH = walkedsquares.length;
-              var STEP = 0;
-              for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-                POS = walkedsquares[walkstepper];
-                STEP++;
-                if (((WALKLENGTH === 2) && (STEP === 2))) {
-                  ARTIFACTS['oppmoves'][POS] = {};
-                }
-              }
-            }
-          }
-          return {
-            mymoves: Object.keys(ARTIFACTS.mymoves).length,
-            mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
-            oppmoves: -Object.keys(ARTIFACTS.oppmoves).length
-          };
-        };
       game.debug2 = function() {
         return {
           TERRAIN: TERRAIN

@@ -59,6 +59,18 @@
       var ownernames = ["neutral", "my", "opp"];
       var player = 1;
       var otherplayer = 2;
+      game.brain_Bob_1 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return Object.keys(UNITLAYERS.myunits).length;
+      };
+      game.brain_Bob_1_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return {
+          headcount: Object.keys(UNITLAYERS.myunits).length
+        };
+      };
       game.selectunit1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
@@ -241,20 +253,6 @@
       game.start1instruction = function(step) {
         return '';
       };
-      game.brain_Bob_1 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          return Object.keys(UNITLAYERS.myunits).length;
-        };
-      game.brain_Bob_1_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          return {
-            headcount: Object.keys(UNITLAYERS.myunits).length
-          };
-        };
       game.debug1 = function() {
         return {
           TERRAIN: TERRAIN
@@ -265,6 +263,18 @@
       var ownernames = ["neutral", "opp", "my"];
       var player = 2;
       var otherplayer = 1;
+      game.brain_Bob_2 = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return Object.keys(UNITLAYERS.myunits).length;
+      };
+      game.brain_Bob_2_detailed = function(step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return {
+          headcount: Object.keys(UNITLAYERS.myunits).length
+        };
+      };
       game.selectunit2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
@@ -447,20 +457,6 @@
       game.start2instruction = function(step) {
         return '';
       };
-      game.brain_Bob_2 =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          return Object.keys(UNITLAYERS.myunits).length;
-        };
-      game.brain_Bob_2_detailed =
-        function(step) {
-          var ARTIFACTS = step.ARTIFACTS;
-          var UNITLAYERS = step.UNITLAYERS;
-          return {
-            headcount: Object.keys(UNITLAYERS.myunits).length
-          };
-        };
       game.debug2 = function() {
         return {
           TERRAIN: TERRAIN

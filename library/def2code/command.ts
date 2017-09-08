@@ -3,7 +3,14 @@ import lib from '../logic/';
 import { Definition } from './types';
 import applyLinkInstructions from './link';
 import applyEffectInstructions from './effect';
-import {ifCodeContains, usesTurnVars, contains} from './utils';
+import applyGeneratorInstructions from './generate';
+import {
+  ifCodeContains,
+  usesTurnVars,
+  contains,
+  blankArtifactLayers,
+  copyArtifactsForAction
+} from './utils';
 
 export default function addCommandFunction(def: Definition, cmndname: string, player: 1 | 2){
   const O = {rules: def, player, cmndname};
@@ -11,7 +18,7 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
   const instruction = lib.value(O, cmndDef.instruction||'');
   return `
     game.${cmndname}${player} = function(turn,step){
-      var ARTIFACTS = ${lib.copyArtifactsForAction(O,cmndDef)};
+      var ARTIFACTS = ${copyArtifactsForAction(def,cmndDef)};
       var MARKS = step.MARKS;
       var UNITDATA = Object.assign({},step.UNITDATA);
       ${contains(cmndDef,'spawn') ? 'var clones = step.clones; ' : ''}
@@ -21,8 +28,8 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
       ${applyEffectInstructions(def,cmndDef,player)}
       MARKS = {};
       ${lib.calculateUnitLayers(O)}
-      ARTIFACTS = ${lib.blankArtifactLayers(O)};
-      ${lib.applyGeneratorInstructions(O,cmndDef)}
+      ARTIFACTS = ${blankArtifactLayers(def)};
+      ${applyGeneratorInstructions(def,cmndDef,player,cmndname)}
 
       var newstepid = step.stepid+'-'+'${cmndname}';
       var newstep = turn.steps[newstepid] = Object.assign({},step,{

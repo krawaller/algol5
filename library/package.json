@@ -1,6 +1,9 @@
 {
   "devDependencies": {
     "@types/node": "^8.0.26",
+    "@types/tape": "^4.2.30",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.2"
   },
@@ -8,7 +11,8 @@
     "compile": "ts-node ./compile.ts",
     "collect": "ts-node ./collect.ts",
     "makemeta": "ts-node ./makemeta.ts",
-    "build": "npm run compile && npm run collect && npm run makemeta"
+    "build": "npm run compile && npm run collect && npm run makemeta",
+    "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec"
   },
   "dependencies": {
     "eval": "^0.1.2",

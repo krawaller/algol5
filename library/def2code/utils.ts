@@ -20,24 +20,23 @@ export function getTerrain(gameDef: Definition) {
   );
 }
 
-export function blankArtifactLayers(gameDef: Definition, pure?:boolean) {
-  let ret = reduce(gameDef.generators,(mem,genDef,key)=>{
-      return Object.assign(mem,lib.generatorLayers(genDef));
-  },{})
-  return pure ? ret : JSON.stringify(ret);
+  /*
+  Calculates all layers used by a generator
+  */
+export function generatorLayers(gendef){
+  return reduce(gendef.tolayer ? {foo:gendef} : gendef.draw,(mem2,drawdef)=> {
+    return reduce(lib.possibilities(drawdef.tolayer),(mem3,l)=> {
+      const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]
+      return reduce(list, (mem4,l)=> ({...mem4, [l]:{} }), mem3)
+    },mem2)
+  },{});
 }
 
-export function copyArtifactsForAction(gameDef: Definition, actionDef) {
-  const O = {rules: gameDef};
-  let actionlayers = lib.actionLayers(O,actionDef);
-  let ret = '{'
-  ret += actionlayers.map(l=>l+': Object.assign({},step.ARTIFACTS.'+l+')').join(', ')
-  ret += '}'
-  if (actionlayers.length === Object.keys(blankArtifactLayers(gameDef,true)).length){
-      return ret;
-  } else {
-      return 'Object.assign({},step.ARTIFACTS,'+ret+')'
-  }
+export function blankArtifactLayers(gameDef: Definition, pure?:boolean) {
+  let ret = reduce(gameDef.generators,(mem,genDef,key)=>{
+      return Object.assign(mem,generatorLayers(genDef));
+  },{})
+  return pure ? ret : JSON.stringify(ret);
 }
 
 export function isTerrainNeutral(gameDef: Definition) {

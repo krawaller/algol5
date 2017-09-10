@@ -51,6 +51,13 @@ const scripts: Test[] = [
     "d4","deploy","endturn",
     "c4","e4","jump","win"
   ]],
+  ["Gogol non-ending script (also filter test)", "gogol", [
+    "d5","deploy","endturn",
+    "c5","deploy","endturn",
+    "d1","b4","move","endturn",
+    "c5","a3","jump","endturn",
+    "a1"
+  ]],
   ["Basic Jostle script", "jostle", [
     "h3","h2","jostle","endturn",
     "g5","f5","jostle","endturn",

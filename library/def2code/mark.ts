@@ -2,7 +2,8 @@ import lib from '../logic/';
 
 import { Definition } from './types';
 
-import {ifCodeContains,copyArtifactsForAction} from './utils';
+import {ifCodeContains} from './utils';
+import {copyArtifactsForAction} from './common';
 
 import applyLinkInstructions from './link';
 import applyGeneratorInstructions from './generate';

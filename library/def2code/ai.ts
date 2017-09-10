@@ -2,7 +2,7 @@ import * as reduce from 'lodash/reduce';
 
 import lib from '../logic/';
 
-import {coords2pos} from './utils';
+import {coords2pos, generatorLayers} from './utils';
 
 import { Definition } from './types';
 import {executeGenerator} from './generate';
@@ -38,7 +38,7 @@ function addBrain(gameDef: Definition, player: 1 | 2, brain: string){
     var UNITLAYERS = step.UNITLAYERS;
     var ARTIFACTS = step.ARTIFACTS;
     ${ (gameDef.AI.brains[brain].generators||[]).reduce((mem,genname)=>{
-      return mem.concat(Object.keys(lib.generatorLayers(gameDef.AI.generators[genname])))
+      return mem.concat(Object.keys(generatorLayers(gameDef.AI.generators[genname])))
       },[]).map(l=> 'ARTIFACTS.'+l+' = {}; ').join('')
     }
   `;

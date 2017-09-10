@@ -46,27 +46,6 @@ export default U => Object.assign(U,{
 
 	needsStopreason: (O,actiondef)=> actiondef.draw.blocks || U.contains(actiondef,['stopreason']),
 
-	/*
-	Calculate all Artifact layers affected by an action
-	*/
-	actionLayers: (O,actiondef)=>  Object.keys((actiondef.runGenerators||[]).concat(actiondef.runGenerator ? [actiondef.runGenerator] : []).reduce((mem,gen)=> {
-		let gens = U.possibilities(gen)
-		gens.forEach(gen=>{
-			mem = Object.assign(mem,U.generatorLayers(O.rules.generators[gen]))
-		})
-		return mem
-	},{})),
-
-  /*
-  Calculates all layers used by a generator
-  */
-  generatorLayers: (gendef)=> reduce(gendef.tolayer ? {foo:gendef} : gendef.draw,(mem2,drawdef)=> {
-    return reduce(U.possibilities(drawdef.tolayer),(mem3,l)=> {
-      const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]
-      return reduce(list, (mem4,l)=> ({...mem4, [l]:{} }), mem3)
-    },mem2)
-  },{}),
-
 	startRules: (O)=> O && O.rules && O.rules.startTurn || {},
 
 	markRules: (O)=> O && O.rules && O.rules.marks && O.rules.marks[O.markname] || {},

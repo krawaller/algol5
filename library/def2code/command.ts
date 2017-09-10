@@ -9,8 +9,9 @@ import {
   usesTurnVars,
   contains,
   blankArtifactLayers,
-  copyArtifactsForAction
 } from './utils';
+
+import {copyArtifactsForAction} from './common';
 
 export default function addCommandFunction(def: Definition, cmndname: string, player: 1 | 2){
   const O = {rules: def, player, cmndname};

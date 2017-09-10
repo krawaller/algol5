@@ -281,7 +281,7 @@
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -857,7 +857,7 @@
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
               filtertargetlayer[POS] = filterobj;
             }
           }

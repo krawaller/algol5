@@ -45,19 +45,6 @@ export default T => {
             return '['+ret.join(',')+']'
         },
 
-        // ******************** DATATYPE prop **********************
-
-        prop: (O,def,propname)=> {
-            if (T['prop_'+def[0]]){
-                return T['prop_'+def[0]](O,tail(def),propname);
-            } else {
-                throw "Unknown prop def: "+def;
-            }
-        },
-
-        prop_is: (O,[value],propname)=> 'filterobj.'+propname+'==='+T.value(O,value),
-        prop_isnt: (O,[value],propname)=> 'filterobj.'+propname+'!=='+T.value(O,value),
-
         // ******************** DATATYPE set **********************
 
         set: (O,def)=> {

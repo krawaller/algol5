@@ -8,7 +8,13 @@ export default function executeFilter(gameDef: Definition, player: 1 | 2, actio
   const toLayerDependsOnTarget = lib.contains(filterDef.tolayer, 'target');
   const assignTargetLayerVar = `var filtertargetlayer = ${lib.layerref(O, filterDef.tolayer)};`;
   const condition = (filterDef.condition ? [lib.boolean(O,filterDef.condition)] : []).concat(
-    map(filterDef.matching,(test,key)=> lib.prop(O,test,key) )
+    map(filterDef.matching,(test,key)=> {
+      switch(test[0]){
+        case "is": return `filterobj.${key} === ${lib.value(O,test[1])}`;
+        case "isnt": return `filterobj.${key} !== ${lib.value(O,test[1])}`;
+        default: throw "Unknown prop test def: " + test;
+      }
+    })
   ).join(' && ');
   return `
     var filtersourcelayer = ${lib.layerref(O, filterDef.layer)};
@@ -25,6 +31,19 @@ export default function executeFilter(gameDef: Definition, player: 1 | 2, actio
   `;
 }
 /*
+        prop: (O,def,propname)=> {
+            if (T['prop_'+def[0]]){
+                return T['prop_'+def[0]](O,tail(def),propname);
+            } else {
+                throw "Unknown prop def: "+def;
+            }
+        },
+
+        prop_is: (O,[value],propname)=> 'filterobj.'+propname+'==='+T.value(O,value),
+        prop_isnt: (O,[value],propname)=> 'filterobj.'+propname+'!=='+T.value(O,value),
+
+
+
 
 	addtolayerbyref: (O,layerref,pos,obj)=> layerref+'['+pos+']='+obj+'; ',
 

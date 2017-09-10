@@ -4930,7 +4930,7 @@ module.exports = {
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -5506,7 +5506,7 @@ module.exports = {
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -8021,7 +8021,7 @@ module.exports = {
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && !!(ARTIFACTS.oppmoves[POS])) {
+            if (!!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -8091,7 +8091,7 @@ module.exports = {
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && !!(ARTIFACTS.oppmoves[POS])) {
+            if (!!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -8938,7 +8938,7 @@ module.exports = {
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && !!(ARTIFACTS.oppmoves[POS])) {
+            if (!!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -9008,7 +9008,7 @@ module.exports = {
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && !!(ARTIFACTS.oppmoves[POS])) {
+            if (!!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
             }
           }

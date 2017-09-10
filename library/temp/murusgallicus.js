@@ -258,7 +258,7 @@
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && !!(ARTIFACTS.oppmoves[POS])) {
+            if (!!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -328,7 +328,7 @@
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && !!(ARTIFACTS.oppmoves[POS])) {
+            if (!!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -1175,7 +1175,7 @@
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && !!(ARTIFACTS.oppmoves[POS])) {
+            if (!!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -1245,7 +1245,7 @@
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (false && !!(ARTIFACTS.oppmoves[POS])) {
+            if (!!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
             }
           }

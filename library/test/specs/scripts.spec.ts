@@ -46,6 +46,11 @@ const scripts: Test[] = [
     "e8","d6","move","endturn",
     "d7","d5","jump","endturn"
   ]],
+  ["Gogol ending script (tests filter)", "gogol", [
+    "c4","deploy","endturn",
+    "d4","deploy","endturn",
+    "c4","e4","jump","win"
+  ]],
   ["Basic Jostle script", "jostle", [
     "h3","h2","jostle","endturn",
     "g5","f5","jostle","endturn",
@@ -144,7 +149,6 @@ const scripts: Test[] = [
 
 scripts.forEach(([name, gameId,commands], n) => {
   test("Following scripted moves for "+name, t => {
-    t.plan(commands.length);
     let game = library[gameId];
     let turn = game.newGame();
     let at = 'root';
@@ -158,14 +162,15 @@ scripts.forEach(([name, gameId,commands], n) => {
         }, "can end turn by calling " + func);
         at = 'root';
       } else if (cmnd === 'win' || cmnd === 'lose' || cmnd === 'draw'){
-        t.ok(!!func, gameId + " win condition!");
+        t.ok(!!func && !game[func], gameId + " win condition!");
       } else {
         instr = game[func+'instruction'](turn.steps[at]);
         t.doesNotThrow(()=> {
           let step = game[func](turn,turn.steps[at],cmnd);
-          at = step.stepid
+          at = step.stepid;
         }, "can do " + cmnd + " by calling " + func);
       }
     });
+    t.end();
   });
 });

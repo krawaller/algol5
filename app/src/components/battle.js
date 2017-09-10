@@ -16,11 +16,11 @@ let Battle = React.createClass({
   doAction(action) {
     this.setState({UI: {...this.state.UI, waiting: action}}, ()=>{
       this.props.algol.performAction(this.state.UI.sessionId,action).then(UI=>{
-        this.setState({UI:UI}, this.maybeAI);
-        /*this.props.algol.debug(UI.sessionId).then(res => {
+        //this.setState({UI:UI}, this.maybeAI);
+        this.props.algol.debug(UI.sessionId).then(res => {
           this.setState({UI:UI}, this.maybeAI);
           console.log("Performed",action," => ",{UI,debug:res});
-        });*/
+        });
       });
     });
   },

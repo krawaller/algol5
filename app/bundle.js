@@ -21710,11 +21710,11 @@
 
 	    this.setState({ UI: _extends({}, this.state.UI, { waiting: action }) }, function () {
 	      _this.props.algol.performAction(_this.state.UI.sessionId, action).then(function (UI) {
-	        _this.setState({ UI: UI }, _this.maybeAI);
-	        /*this.props.algol.debug(UI.sessionId).then(res => {
-	          this.setState({UI:UI}, this.maybeAI);
-	          console.log("Performed",action," => ",{UI,debug:res});
-	        });*/
+	        //this.setState({UI:UI}, this.maybeAI);
+	        _this.props.algol.debug(UI.sessionId).then(function (res) {
+	          _this.setState({ UI: UI }, _this.maybeAI);
+	          console.log("Performed", action, " => ", { UI: UI, debug: res });
+	        });
 	      });
 	    });
 	  },

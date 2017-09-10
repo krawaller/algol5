@@ -258,10 +258,10 @@
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (!!(ARTIFACTS.oppmoves[POS])) {
+            if (false && !!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
           return mem + (mybasic[pos] || 0);
@@ -328,10 +328,10 @@
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (!!(ARTIFACTS.oppmoves[POS])) {
+            if (false && !!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         return {
           mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
@@ -1175,10 +1175,10 @@
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (!!(ARTIFACTS.oppmoves[POS])) {
+            if (false && !!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
           return mem + (mybasic[pos] || 0);
@@ -1245,10 +1245,10 @@
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (!!(ARTIFACTS.oppmoves[POS])) {
+            if (false && !!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         return {
           mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,

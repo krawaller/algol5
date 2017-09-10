@@ -58,8 +58,6 @@ export default C => Object.assign(C,{
 	// we only ever add to artifact layers.
 	addtolayer: (O,layer,pos,obj)=> 'ARTIFACTS['+layer+']['+pos+']='+obj+'; ',
 
-	addtolayerbyref: (O,layerref,pos,obj)=> layerref+'['+pos+']='+obj+'; ',
-
 	// assumes vartouse is defined (defaults to POS)
 	// also assumed targetlayername if flag is true
 	performdraw: (O,def,foo,targetlayerpredefined)=> {

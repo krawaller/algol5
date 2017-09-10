@@ -1,5 +1,6 @@
 import lib from '../logic/';
 import { Definition } from './types';
+import executeFilter from './filter';
 import obey from './obey';
 
 export function executeGenerator(gameDef: Definition, player: 1 | 2, action: string, genDef: any){
@@ -7,7 +8,7 @@ export function executeGenerator(gameDef: Definition, player: 1 | 2, action: st
   switch(genDef.type){
     case 'walker': return lib.applywalker(O,genDef);
     case 'neighbour': return lib.applyneighbours(O,genDef);
-    case 'filter': return lib.applyfilter(O,genDef);
+    case 'filter': return executeFilter(gameDef, player, action, genDef); //lib.applyfilter(O,genDef);
     default: throw 'Unknown generator def: '+genDef;
   }
 }

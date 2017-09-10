@@ -4930,10 +4930,10 @@ module.exports = {
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (false && filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -5116,7 +5116,7 @@ module.exports = {
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.willdie)[0]]  || {}).id];
+        delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]]  || {}).id];
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
@@ -5506,10 +5506,10 @@ module.exports = {
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (false && filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -5692,7 +5692,7 @@ module.exports = {
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.willdie)[0]]  || {}).id];
+        delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]]  || {}).id];
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
@@ -8021,10 +8021,10 @@ module.exports = {
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (!!(ARTIFACTS.oppmoves[POS])) {
+            if (false && !!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
           return mem + (mybasic[pos] || 0);
@@ -8091,10 +8091,10 @@ module.exports = {
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (!!(ARTIFACTS.oppmoves[POS])) {
+            if (false && !!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         return {
           mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,
@@ -8938,10 +8938,10 @@ module.exports = {
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (!!(ARTIFACTS.oppmoves[POS])) {
+            if (false && !!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
           return mem + (mybasic[pos] || 0);
@@ -9008,10 +9008,10 @@ module.exports = {
           var filtertargetlayer = ARTIFACTS[(!!(UNITLAYERS.oppwalls[POS]) ? 'oppheavythreats' : 'opplightthreats')];
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (!!(ARTIFACTS.oppmoves[POS])) {
+            if (false && !!(ARTIFACTS.oppmoves[POS])) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         return {
           mytowercount: 2 * Object.keys(UNITLAYERS.mytowers).length,

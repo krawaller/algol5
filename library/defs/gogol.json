@@ -66,7 +66,7 @@
     },
     "jump": {
       "applyEffects": [
-        ["killat",["onlyin","willdie"]],
+        ["killat",["onlyin","splashed"]],
         ["moveat","selectunit","selectjumptarget"]
       ],
       "link": "endturn"

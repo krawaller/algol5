@@ -281,10 +281,10 @@
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (false && filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -467,7 +467,7 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.willdie)[0]]  || {}).id];
+        delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]]  || {}).id];
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
@@ -857,10 +857,10 @@
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (false && filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
               filtertargetlayer[POS] = filterobj;
-            } 
-          } 
+            }
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -1043,7 +1043,7 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.willdie)[0]]  || {}).id];
+        delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]]  || {}).id];
         var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {

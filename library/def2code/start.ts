@@ -2,6 +2,7 @@ import lib from '../logic/';
 
 import { Definition } from './types';
 import {ifCodeContains,usesTurnVars,contains,blankArtifactLayers} from './utils';
+import { calculateUnitLayers } from './common';
 import applyLinkInstructions from './link';
 import applyGenerators from './generate';
 
@@ -22,8 +23,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
       var ARTIFACTS = ${blankArtifactLayers(def)};
       var UNITDATA = step.UNITDATA;
       ${usesTurnVars(def) ? 'var TURNVARS = {}; ' : ''}
-      ${lib.calculateUnitLayers({...O,defineUnitlayers:true})}
-
+      ${calculateUnitLayers(def, player, true)}
       ${applyGenerators(def,startDef,player,"startturn")}
       var newstep = turn.steps.root = {
         ARTIFACTS: ARTIFACTS,

@@ -19,3 +19,38 @@ export function copyArtifactsForAction(gameDef: Definition, actionDef) {
       return 'Object.assign({},step.ARTIFACTS,'+ret+')'
   }
 }
+
+
+export function calculateUnitLayers(gameDef: Definition, player: 1 | 2, defineVariable: boolean){
+  const O = {rules: gameDef, player};
+  return `
+    ${defineVariable ? 'var ' : ''}UNITLAYERS = ${lib.blankUnitLayers(O)};
+    for (var unitid in UNITDATA) {
+        var currentunit = UNITDATA[unitid]
+        var unitgroup = currentunit.group;
+        var unitpos = currentunit.pos;
+        var owner = ownernames[currentunit.owner]
+        UNITLAYERS.units[unitpos]
+            = UNITLAYERS[unitgroup][unitpos]
+            = UNITLAYERS[owner + unitgroup][unitpos]
+            = UNITLAYERS[owner +'units'][unitpos]
+            = currentunit;
+    }
+  `;
+}
+
+/*
+: (O)=> `
+        ${O && O.defineUnitlayers ? 'var ' : ''}UNITLAYERS = ${C.blankUnitLayers(O)};
+        for (var unitid in UNITDATA) {
+            var currentunit = UNITDATA[unitid]
+            var unitgroup = currentunit.group;
+            var unitpos = currentunit.pos;
+            var owner = ownernames[currentunit.owner]
+            UNITLAYERS.units[unitpos]
+                = UNITLAYERS[unitgroup][unitpos]
+                = UNITLAYERS[owner + unitgroup][unitpos]
+                = UNITLAYERS[owner +'units'][unitpos]
+                = currentunit;
+        }`,
+        */

@@ -11,7 +11,7 @@ import {
   blankArtifactLayers,
 } from './utils';
 
-import {copyArtifactsForAction} from './common';
+import {copyArtifactsForAction, calculateUnitLayers} from './common';
 
 export default function addCommandFunction(def: Definition, cmndname: string, player: 1 | 2){
   const O = {rules: def, player, cmndname};
@@ -28,7 +28,7 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
 
       ${applyEffectInstructions(def,cmndDef,player)}
       MARKS = {};
-      ${lib.calculateUnitLayers(O)}
+      ${calculateUnitLayers(def, player, false)}
       ARTIFACTS = ${blankArtifactLayers(def)};
       ${applyGeneratorInstructions(def,cmndDef,player,cmndname)}
 

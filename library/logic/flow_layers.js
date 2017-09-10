@@ -4,22 +4,6 @@ import * as isArray from "lodash/isArray"
 
 export default C => Object.assign(C,{
 
-    // assumes UNITDATA, ownernames
-    // mutates UNITLAYERS
-    calculateUnitLayers: (O)=> `
-        ${O && O.defineUnitlayers ? 'var ' : ''}UNITLAYERS = ${C.blankUnitLayers(O)};
-        for (var unitid in UNITDATA) {
-            var currentunit = UNITDATA[unitid]
-            var unitgroup = currentunit.group;
-            var unitpos = currentunit.pos;
-            var owner = ownernames[currentunit.owner]
-            UNITLAYERS.units[unitpos]
-                = UNITLAYERS[unitgroup][unitpos]
-                = UNITLAYERS[owner + unitgroup][unitpos]
-                = UNITLAYERS[owner +'units'][unitpos]
-                = currentunit;
-        }`,
-
     /*
     Calculate blank unit layers yada yada
     */

@@ -38,7 +38,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
         ${body}
         var newstepid = step.stepid+'-'+markpos;
         var newstep = turn.steps[newstepid] = Object.assign({},step,{
-          ${lib.markGenerates(O) ? 'ARTIFACTS: ARTIFACTS,' : ''}
+          ${markDef.runGenerator || markDef.runGenerators ? 'ARTIFACTS: ARTIFACTS,' : ''}
           MARKS: MARKS,
           stepid: newstepid,
           path: step.path.concat(markpos),

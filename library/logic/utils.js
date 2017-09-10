@@ -67,8 +67,6 @@ export default U => Object.assign(U,{
     },mem2)
   },{}),
 
-	markGenerates: (O)=> U.markRules(O).runGenerator || U.markRules(O).runGenerators,
-
 	startRules: (O)=> O && O.rules && O.rules.startTurn || {},
 
 	markRules: (O)=> O && O.rules && O.rules.marks && O.rules.marks[O.markname] || {},

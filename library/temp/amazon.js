@@ -75,12 +75,12 @@
             if (POS && !UNITLAYERS.units[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var walkstarts = UNITLAYERS.queens;
         for (var STARTPOS in walkstarts) {
@@ -114,12 +114,12 @@
             if (POS && !UNITLAYERS.units[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var walkstarts = UNITLAYERS.queens;
         for (var STARTPOS in walkstarts) {
@@ -426,12 +426,12 @@
             if (POS && !UNITLAYERS.units[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var walkstarts = UNITLAYERS.queens;
         for (var STARTPOS in walkstarts) {
@@ -465,12 +465,12 @@
             if (POS && !UNITLAYERS.units[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var walkstarts = UNITLAYERS.queens;
         for (var STARTPOS in walkstarts) {

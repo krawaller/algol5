@@ -858,12 +858,12 @@ module.exports = {
             if (POS && !UNITLAYERS.units[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var walkstarts = UNITLAYERS.queens;
         for (var STARTPOS in walkstarts) {
@@ -897,12 +897,12 @@ module.exports = {
             if (POS && !UNITLAYERS.units[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var walkstarts = UNITLAYERS.queens;
         for (var STARTPOS in walkstarts) {
@@ -1209,12 +1209,12 @@ module.exports = {
             if (POS && !UNITLAYERS.units[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var walkstarts = UNITLAYERS.queens;
         for (var STARTPOS in walkstarts) {
@@ -1248,12 +1248,12 @@ module.exports = {
             if (POS && !UNITLAYERS.units[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var walkstarts = UNITLAYERS.queens;
         for (var STARTPOS in walkstarts) {
@@ -2171,7 +2171,7 @@ module.exports = {
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -2365,7 +2365,7 @@ module.exports = {
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -2670,7 +2670,7 @@ module.exports = {
               ARTIFACTS['movetargets'][POS] = {};
             }
           }
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var STARTPOS = MARKS['selectunit'];
         var allowedsteps = (!!(TERRAIN.walls[STARTPOS]) ? TERRAIN.walls :
@@ -2882,7 +2882,7 @@ module.exports = {
               ARTIFACTS['movetargets'][POS] = {};
             }
           }
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var STARTPOS = MARKS['selectunit'];
         var allowedsteps = (!!(TERRAIN.walls[STARTPOS]) ? TERRAIN.walls :
@@ -4239,7 +4239,7 @@ module.exports = {
                 ARTIFACTS['movetarget'][POS] = {};
               }
             }
-          } 
+          }
         } else {
           var BLOCKS = UNITLAYERS.units;
           var STARTPOS = MARKS['selectunit'];
@@ -4454,7 +4454,7 @@ module.exports = {
                 ARTIFACTS['movetarget'][POS] = {};
               }
             }
-          } 
+          }
         } else {
           var BLOCKS = UNITLAYERS.units;
           var STARTPOS = MARKS['selectunit'];
@@ -4813,7 +4813,7 @@ module.exports = {
               dir: DIR
             };
           }
-        } 
+        }
         for (var STARTPOS in ARTIFACTS.adjacentenemies) {
           var DIR = relativedirs[(ARTIFACTS.adjacentenemies[STARTPOS] || {})['dir'] - 2 + 1];
           var POS = connections[STARTPOS][DIR];
@@ -4840,7 +4840,7 @@ module.exports = {
               dir: DIR
             };
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -5252,8 +5252,8 @@ module.exports = {
             if (POS) {
               ARTIFACTS['nokings'][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.mykings) {
           var neighbourdirs = [1, 3, 5, 7];
           var startconnections = connections[STARTPOS];
@@ -5262,8 +5262,8 @@ module.exports = {
             if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
               ARTIFACTS['nosoldiers'][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         var newstep = turn.steps.root = {
           ARTIFACTS: ARTIFACTS,
           UNITDATA: UNITDATA,
@@ -5389,7 +5389,7 @@ module.exports = {
               dir: DIR
             };
           }
-        } 
+        }
         for (var STARTPOS in ARTIFACTS.adjacentenemies) {
           var DIR = relativedirs[(ARTIFACTS.adjacentenemies[STARTPOS] || {})['dir'] - 2 + 1];
           var POS = connections[STARTPOS][DIR];
@@ -5416,7 +5416,7 @@ module.exports = {
               dir: DIR
             };
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -5828,8 +5828,8 @@ module.exports = {
             if (POS) {
               ARTIFACTS['nokings'][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.mykings) {
           var neighbourdirs = [1, 3, 5, 7];
           var startconnections = connections[STARTPOS];
@@ -5838,8 +5838,8 @@ module.exports = {
             if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
               ARTIFACTS['nosoldiers'][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         var newstep = turn.steps.root = {
           ARTIFACTS: ARTIFACTS,
           UNITDATA: UNITDATA,
@@ -5972,7 +5972,7 @@ module.exports = {
           if (POS) {
             ARTIFACTS[(!(UNITLAYERS.units[POS]) ? 'movetargets' : (!!(UNITLAYERS.oppunits[POS]) ? 'initialenemy' : 'initialfriend'))][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -6010,7 +6010,7 @@ module.exports = {
           if (POS && UNITLAYERS.units[POS]) {
             ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'newenemy' : 'newfriend')][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -6163,7 +6163,7 @@ module.exports = {
           if (POS) {
             ARTIFACTS[(!(UNITLAYERS.units[POS]) ? 'movetargets' : (!!(UNITLAYERS.oppunits[POS]) ? 'initialenemy' : 'initialfriend'))][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -6201,7 +6201,7 @@ module.exports = {
           if (POS && UNITLAYERS.units[POS]) {
             ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'newenemy' : 'newfriend')][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -6924,8 +6924,8 @@ module.exports = {
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.oppunits) {
           var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [8] : [7, 1]);
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -6947,8 +6947,8 @@ module.exports = {
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         return Object.keys(ARTIFACTS.myfrozenguardedthreat).length + 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length + 3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length + 4 * Object.keys(ARTIFACTS.mymoverfreethreat).length + 5 * Object.keys(
           (function() {
             var ret = {},
@@ -7027,8 +7027,8 @@ module.exports = {
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.oppunits) {
           var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [8] : [7, 1]);
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -7050,8 +7050,8 @@ module.exports = {
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         return {
           myfrozenguardedthreat: Object.keys(ARTIFACTS.myfrozenguardedthreat).length,
           myfrozenfreethreat: 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length,
@@ -7128,7 +7128,7 @@ module.exports = {
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -7360,8 +7360,8 @@ module.exports = {
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.oppunits) {
           var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [4] : [3, 5]);
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -7383,8 +7383,8 @@ module.exports = {
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         return Object.keys(ARTIFACTS.myfrozenguardedthreat).length + 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length + 3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length + 4 * Object.keys(ARTIFACTS.mymoverfreethreat).length + 5 * Object.keys(
           (function() {
             var ret = {},
@@ -7463,8 +7463,8 @@ module.exports = {
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.oppunits) {
           var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [4] : [3, 5]);
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -7486,8 +7486,8 @@ module.exports = {
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         return {
           myfrozenguardedthreat: Object.keys(ARTIFACTS.myfrozenguardedthreat).length,
           myfrozenfreethreat: 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length,
@@ -7564,7 +7564,7 @@ module.exports = {
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -8467,7 +8467,7 @@ module.exports = {
           if (POS && UNITLAYERS.oppwalls[POS]) {
             ARTIFACTS['killtargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -9384,7 +9384,7 @@ module.exports = {
           if (POS && UNITLAYERS.oppwalls[POS]) {
             ARTIFACTS['killtargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -9837,7 +9837,7 @@ module.exports = {
             }())[POS]) {
             ARTIFACTS['killtargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -10484,7 +10484,7 @@ module.exports = {
             }())[POS]) {
             ARTIFACTS['killtargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -11192,7 +11192,7 @@ module.exports = {
           if (POS && UNITLAYERS.oppunits[POS]) {
             ARTIFACTS['victims'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -11396,7 +11396,7 @@ module.exports = {
           if (POS && UNITLAYERS.oppunits[POS]) {
             ARTIFACTS['victims'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -12291,7 +12291,7 @@ module.exports = {
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -12688,7 +12688,7 @@ module.exports = {
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -13732,7 +13732,7 @@ module.exports = {
           if (POS && !!(UNITLAYERS.oppunits[POS])) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -13935,7 +13935,7 @@ module.exports = {
           if (POS && !(UNITLAYERS.units[POS])) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -14040,12 +14040,12 @@ module.exports = {
             if (POS && UNITLAYERS.pawns[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           if (!NEIGHBOURCOUNT) {
             ARTIFACTS['strandedmusketeers'][STARTPOS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + 'move';
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -14243,7 +14243,7 @@ module.exports = {
           if (POS && !UNITLAYERS.myunits[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -14360,7 +14360,7 @@ module.exports = {
               dir: DIR
             };
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -14681,7 +14681,7 @@ module.exports = {
           if (POS && !UNITLAYERS.myunits[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -14798,7 +14798,7 @@ module.exports = {
               dir: DIR
             };
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -15201,7 +15201,7 @@ module.exports = {
           if (POS && (((DIR === 1) || (DIR === 5)) ? !(UNITLAYERS.units[POS]) : !(UNITLAYERS.myunits[POS]))) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -15397,7 +15397,7 @@ module.exports = {
           if (POS && (((DIR === 1) || (DIR === 5)) ? !(UNITLAYERS.units[POS]) : !(UNITLAYERS.myunits[POS]))) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,

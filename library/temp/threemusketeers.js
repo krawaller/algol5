@@ -76,7 +76,7 @@
           if (POS && !!(UNITLAYERS.oppunits[POS])) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -279,7 +279,7 @@
           if (POS && !(UNITLAYERS.units[POS])) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -384,12 +384,12 @@
             if (POS && UNITLAYERS.pawns[POS]) {
               foundneighbours.push(POS);
             }
-          } 
+          }
           var NEIGHBOURCOUNT = foundneighbours.length;
           if (!NEIGHBOURCOUNT) {
             ARTIFACTS['strandedmusketeers'][STARTPOS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + 'move';
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,

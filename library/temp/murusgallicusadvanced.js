@@ -155,7 +155,7 @@
             }())[POS]) {
             ARTIFACTS['killtargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -802,7 +802,7 @@
             }())[POS]) {
             ARTIFACTS['killtargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,

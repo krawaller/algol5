@@ -127,7 +127,7 @@
               ARTIFACTS['movetargets'][POS] = {};
             }
           }
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var STARTPOS = MARKS['selectunit'];
         var allowedsteps = (!!(TERRAIN.walls[STARTPOS]) ? TERRAIN.walls :
@@ -339,7 +339,7 @@
               ARTIFACTS['movetargets'][POS] = {};
             }
           }
-        } 
+        }
         var BLOCKS = UNITLAYERS.units;
         var STARTPOS = MARKS['selectunit'];
         var allowedsteps = (!!(TERRAIN.walls[STARTPOS]) ? TERRAIN.walls :

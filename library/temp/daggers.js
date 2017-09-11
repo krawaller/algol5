@@ -104,7 +104,7 @@
                 ARTIFACTS['movetarget'][POS] = {};
               }
             }
-          } 
+          }
         } else {
           var BLOCKS = UNITLAYERS.units;
           var STARTPOS = MARKS['selectunit'];
@@ -319,7 +319,7 @@
                 ARTIFACTS['movetarget'][POS] = {};
               }
             }
-          } 
+          }
         } else {
           var BLOCKS = UNITLAYERS.units;
           var STARTPOS = MARKS['selectunit'];

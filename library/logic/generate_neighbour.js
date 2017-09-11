@@ -18,23 +18,6 @@ export default C => Object.assign(C,{
 
   // ------------ NEIGHBOUR STUFF -----------
 
-  applyneighbours: (O,def)=> {
-    let ret = ''
-    if (def.start){
-      ret += 'var STARTPOS='+C.position(O,def.start)+'; '
-      ret += C.findanddrawneighboursfromstart(O,def)
-      ret += C.drawneighbourstart(O,def);
-    } else {
-      //ret += 'var neighbourstarts='+C.set(O,def.starts)+'; '
-      //if (!C.contains(def.draw.neighbours))
-      ret += 'for(var STARTPOS in '+C.set(O,def.starts)+'){'
-      ret += C.findanddrawneighboursfromstart(O,def)
-      ret += C.drawneighbourstart(O,def);
-      ret += '} '
-    }
-    return ret;
-  },
-
   // Used in applyneighbours
   // assumes STARTPOS
   findanddrawneighboursfromstart: (O,def)=> {

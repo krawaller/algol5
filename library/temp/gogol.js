@@ -164,7 +164,7 @@
               dir: DIR
             };
           }
-        } 
+        }
         for (var STARTPOS in ARTIFACTS.adjacentenemies) {
           var DIR = relativedirs[(ARTIFACTS.adjacentenemies[STARTPOS] || {})['dir'] - 2 + 1];
           var POS = connections[STARTPOS][DIR];
@@ -191,7 +191,7 @@
               dir: DIR
             };
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -603,8 +603,8 @@
             if (POS) {
               ARTIFACTS['nokings'][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.mykings) {
           var neighbourdirs = [1, 3, 5, 7];
           var startconnections = connections[STARTPOS];
@@ -613,8 +613,8 @@
             if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
               ARTIFACTS['nosoldiers'][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         var newstep = turn.steps.root = {
           ARTIFACTS: ARTIFACTS,
           UNITDATA: UNITDATA,
@@ -740,7 +740,7 @@
               dir: DIR
             };
           }
-        } 
+        }
         for (var STARTPOS in ARTIFACTS.adjacentenemies) {
           var DIR = relativedirs[(ARTIFACTS.adjacentenemies[STARTPOS] || {})['dir'] - 2 + 1];
           var POS = connections[STARTPOS][DIR];
@@ -767,7 +767,7 @@
               dir: DIR
             };
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -1179,8 +1179,8 @@
             if (POS) {
               ARTIFACTS['nokings'][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.mykings) {
           var neighbourdirs = [1, 3, 5, 7];
           var startconnections = connections[STARTPOS];
@@ -1189,8 +1189,8 @@
             if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
               ARTIFACTS['nosoldiers'][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         var newstep = turn.steps.root = {
           ARTIFACTS: ARTIFACTS,
           UNITDATA: UNITDATA,

@@ -116,8 +116,8 @@
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.oppunits) {
           var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [8] : [7, 1]);
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -139,8 +139,8 @@
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         return Object.keys(ARTIFACTS.myfrozenguardedthreat).length + 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length + 3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length + 4 * Object.keys(ARTIFACTS.mymoverfreethreat).length + 5 * Object.keys(
           (function() {
             var ret = {},
@@ -219,8 +219,8 @@
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.oppunits) {
           var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [8] : [7, 1]);
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -242,8 +242,8 @@
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         return {
           myfrozenguardedthreat: Object.keys(ARTIFACTS.myfrozenguardedthreat).length,
           myfrozenfreethreat: 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length,
@@ -320,7 +320,7 @@
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -552,8 +552,8 @@
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.oppunits) {
           var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [4] : [3, 5]);
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -575,8 +575,8 @@
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         return Object.keys(ARTIFACTS.myfrozenguardedthreat).length + 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length + 3 * Object.keys(ARTIFACTS.mymoverguardedthreat).length + 4 * Object.keys(ARTIFACTS.mymoverfreethreat).length + 5 * Object.keys(
           (function() {
             var ret = {},
@@ -655,8 +655,8 @@
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         for (var STARTPOS in UNITLAYERS.oppunits) {
           var neighbourdirs = (!!(TERRAIN.mybases[STARTPOS]) ? [4] : [3, 5]);
           var nbrofneighbourdirs = neighbourdirs.length;
@@ -678,8 +678,8 @@
               }())[POS]) {
               ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
             }
-          } 
-        } 
+          }
+        }
         return {
           myfrozenguardedthreat: Object.keys(ARTIFACTS.myfrozenguardedthreat).length,
           myfrozenfreethreat: 2 * Object.keys(ARTIFACTS.myfrozenfreethreat).length,
@@ -756,7 +756,7 @@
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
           }
-        } 
+        }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,

@@ -1,7 +1,8 @@
-import lib from '../logic/';
-import { Definition } from './types';
+import lib from '../../logic/';
+
+import { Definition } from '../types';
 import executeFilter from './filter';
-import obey from './obey';
+import obey from '../obey';
 
 export function executeGenerator(gameDef: Definition, player: 1 | 2, action: string, genDef: any){
   const O = {rules: gameDef, player, action};

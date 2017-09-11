@@ -7,6 +7,7 @@ export default C => Object.assign(C,{
     /*
     Calculate blank unit layers yada yada
     */
+    // TODO - TRANSLATE: already moved over, so kill off when no local usage
     blankUnitLayers: (O,pure)=> {
         let ret = reduce(
             Object.keys(O && O.rules && O.rules.setup || {}).concat(C.deduceDynamicGroups(O && O.rules && O.rules.commands || {})).concat('units'),

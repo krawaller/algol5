@@ -4,10 +4,30 @@ import * as isEqual from 'lodash/isEqual';
 import * as some from 'lodash/some';
 import * as reduce from 'lodash/reduce';
 import * as invert from 'lodash/invert';
+import * as uniq from 'lodash/uniq';
 
 import lib from '../logic/';
 
 import {Definition} from './types';
+
+
+// only used in blankUnitLayers, but needs to be its own function since it is recursive
+export function deduceDynamicGroups(rules: any){
+  return uniq(
+		rules[0] === "spawn" ? possibilities(rules[2])
+		: {setat:1,setid:1,setin:1}[rules[0]] && contains(possibilities(rules[2]),'group') ? possibilities(rules[3])
+		: isArray(rules) || isObject(rules) ? reduce(rules,(mem,def)=>mem.concat(deduceDynamicGroups(def)),[])
+		: []
+	).sort();
+}
+
+export function blankUnitLayers(gameDef: Definition){
+  return reduce(
+    Object.keys(gameDef.setup || {}).concat(deduceDynamicGroups(gameDef.commands || {})).concat('units'),
+    (mem,g)=>({ ...mem, [g]: {}, ['my'+g]: {}, ['opp'+g]: {}, ['neutral'+g]: {} }),
+    {}
+  );
+}
 
 export function ifCodeContains(code: string, lines: {[needle: string]: string}) {
   return Object.keys(lines).reduce((mem,needle) => code.match(needle) ? mem + ' ' + lines[needle] : mem, '');
@@ -25,18 +45,17 @@ export function getTerrain(gameDef: Definition) {
   */
 export function generatorLayers(gendef){
   return reduce(gendef.tolayer ? {foo:gendef} : gendef.draw,(mem2,drawdef)=> {
-    return reduce(lib.possibilities(drawdef.tolayer),(mem3,l)=> {
+    return reduce(possibilities(drawdef.tolayer),(mem3,l)=> {
       const list = drawdef.include && drawdef.include.hasOwnProperty("owner") ? [l,"my"+l,"opp"+l,"neutral"+l] : [l]
       return reduce(list, (mem4,l)=> ({...mem4, [l]:{} }), mem3)
     },mem2)
   },{});
 }
 
-export function blankArtifactLayers(gameDef: Definition, pure?:boolean) {
-  let ret = reduce(gameDef.generators,(mem,genDef,key)=>{
-      return Object.assign(mem,generatorLayers(genDef));
-  },{})
-  return pure ? ret : JSON.stringify(ret);
+export function blankArtifactLayers(gameDef: Definition) {
+  return reduce(gameDef.generators,(mem,genDef,key)=>{
+    return Object.assign(mem,generatorLayers(genDef));
+  },{});
 }
 
 export function isTerrainNeutral(gameDef: Definition) {
@@ -76,4 +95,13 @@ export function pos2coords(pos) {
 
 export function coords2pos(coords){
   return colnumbertoname[coords.x]+coords.y;
+}
+
+export function	possibilities(def){
+	return def[0] === 'ifelse' ? possibilities(def[2]).concat(possibilities(def[3]))
+		: def[0] === 'playercase' ? possibilities(def[1]).concat(possibilities(def[2]))
+		: def[0] === 'if' ? possibilities(def[2])
+		: def[0] === 'ifplayer' ? possibilities(def[2])
+		: def[0] === 'indexlist' ? def[2]
+		: [def];
 }

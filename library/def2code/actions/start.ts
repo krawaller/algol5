@@ -1,10 +1,10 @@
-import lib from '../logic/';
+import lib from '../../logic/';
 
-import { Definition } from './types';
-import {ifCodeContains,usesTurnVars,contains,blankArtifactLayers} from './utils';
-import { calculateUnitLayers } from './common';
+import { Definition } from '../types';
+import {ifCodeContains,usesTurnVars,contains,blankArtifactLayers} from '../utils';
+import { calculateUnitLayers } from '../common';
 import applyLinkInstructions from './link';
-import applyGenerators from './generate';
+import applyGenerators from '../artifacts/generate';
 
 export default function addStartFunction(def: Definition, player: 1 | 2){
   const O = {rules: def, player};
@@ -20,7 +20,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
       };
 
       var MARKS = {}; 
-      var ARTIFACTS = ${blankArtifactLayers(def)};
+      var ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
       var UNITDATA = step.UNITDATA;
       ${usesTurnVars(def) ? 'var TURNVARS = {}; ' : ''}
       ${calculateUnitLayers(def, player, true)}

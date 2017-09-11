@@ -1,12 +1,12 @@
-import lib from '../logic/';
+import lib from '../../logic/';
 
-import { Definition } from './types';
+import { Definition } from '../types';
 
-import {ifCodeContains} from './utils';
-import {copyArtifactsForAction} from './common';
+import {ifCodeContains} from '../utils';
+import {copyArtifactsForAction} from '../common';
 
 import applyLinkInstructions from './link';
-import applyGeneratorInstructions from './generate';
+import applyGeneratorInstructions from '../artifacts/generate';
 
 export default function addMarkFunction(def: Definition, markname: string, player: 1 | 2){
   const O = {rules: def, markname, player};

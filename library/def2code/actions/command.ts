@@ -1,17 +1,17 @@
-import lib from '../logic/';
+import lib from '../../logic/';
 
-import { Definition } from './types';
+import { Definition } from '../types';
 import applyLinkInstructions from './link';
 import applyEffectInstructions from './effect';
-import applyGeneratorInstructions from './generate';
+import applyGeneratorInstructions from '../artifacts/generate';
 import {
   ifCodeContains,
   usesTurnVars,
   contains,
   blankArtifactLayers,
-} from './utils';
+} from '../utils';
 
-import {copyArtifactsForAction, calculateUnitLayers} from './common';
+import {copyArtifactsForAction, calculateUnitLayers} from '../common';
 
 export default function addCommandFunction(def: Definition, cmndname: string, player: 1 | 2){
   const O = {rules: def, player, cmndname};
@@ -29,7 +29,7 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
       ${applyEffectInstructions(def,cmndDef,player)}
       MARKS = {};
       ${calculateUnitLayers(def, player, false)}
-      ARTIFACTS = ${blankArtifactLayers(def)};
+      ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
       ${applyGeneratorInstructions(def,cmndDef,player,cmndname)}
 
       var newstepid = step.stepid+'-'+'${cmndname}';

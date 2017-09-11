@@ -2,9 +2,9 @@
 import lib from '../logic/';
 import { isTerrainNeutral } from './utils';
 import { Definition } from './types';
-import addMarkFunc from './mark';
-import addCommandFunc from './command';
-import addStartFunc from './start';
+import addMarkFunc from './actions/mark';
+import addCommandFunc from './actions/command';
+import addStartFunc from './actions/start';
 import addAI from './ai';
 
 export default function playerClosure(def: Definition, player: 1 | 2){

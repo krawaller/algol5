@@ -1,11 +1,12 @@
 import * as map from 'lodash/map';
 
-import lib from '../logic/';
-import { Definition } from './types';
+import lib from '../../logic/';
+import { Definition } from '../types';
+import { contains } from '../utils';
 
 export default function executeFilter(gameDef: Definition, player: 1 | 2, action: string, filterDef: any){
   const O = {rules: gameDef, player, action};
-  const toLayerDependsOnTarget = lib.contains(filterDef.tolayer, 'target');
+  const toLayerDependsOnTarget = contains(filterDef.tolayer, 'target');
   const assignTargetLayerVar = `var filtertargetlayer = ${lib.layerref(O, filterDef.tolayer)};`;
   const condition = (filterDef.condition ? [lib.boolean(O,filterDef.condition)] : []).concat(
     map(filterDef.matching,(test,key)=> {

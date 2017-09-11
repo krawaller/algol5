@@ -1,8 +1,8 @@
 import * as map from 'lodash/map';
 
-import lib from '../logic/';
-import { Definition } from './types';
-import obey from './obey';
+import lib from '../../logic/';
+import { Definition } from '../types';
+import obey from '../obey';
 
 // TODO - add action name!
 

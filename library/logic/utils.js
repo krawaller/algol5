@@ -97,6 +97,7 @@ export default U => Object.assign(U,{
 	Parses command data to find all potential groups created by commands like spawn.
 	Used in deduceUnitLayers
 	*/
+	// TODO - TRANSLATE: already moved over (as part of blankUnitLayers), so kill off when no local usage
 	deduceDynamicGroups: (data)=> uniq(
 		data[0] === "spawn" ? U.possibilities(data[2])
 		: {setat:1,setid:1,setin:1}[data[0]] && U.contains(U.possibilities(data[2]),'group') ? U.possibilities(data[3])

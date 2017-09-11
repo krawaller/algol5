@@ -1,9 +1,9 @@
 import * as map from 'lodash/map';
 
-import lib from '../logic/';
-import { Definition } from './types';
-import obey from './obey';
-import applyGenerators from './generate';
+import lib from '../../logic/';
+import { Definition } from '../types';
+import obey from '../obey';
+import applyGenerators from '../artifacts/generate';
 
 function addLink(gameDef: Definition, name: string, player: 1 | 2, root: boolean){
   const O = {rules: gameDef, player};

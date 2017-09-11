@@ -5,7 +5,7 @@ import lib from '../logic/';
 import {coords2pos, generatorLayers} from './utils';
 
 import { Definition } from './types';
-import {executeGenerator} from './generate';
+import {executeGenerator} from './artifacts/generate';
 
 
 function calculateBrainScore(gameDef: Definition, player: 1 | 2, brain: string){

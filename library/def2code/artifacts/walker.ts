@@ -11,8 +11,8 @@ def.draw.steps and def.draw.all doesn't contain walklength or totalcount
 export default function executeWalker(gameDef: Definition, player: 1 | 2, action: string, walkDef){
   const O = {rules: gameDef, player, action};
   const intro = `
-    ${needLevel(walkDef.steps) === 'start' ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
-    ${needLevel(walkDef.blocks) === 'start' ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
+    ${needLevel(walkDef.steps,'start') ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
+    ${needLevel(walkDef.blocks,'start') ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
   `;
   if (walkDef.starts){
     return intro + `
@@ -33,8 +33,8 @@ function walkFromStart(gameDef: Definition, player: 1 | 2, action: string, wal
   const dirMatters = contains(walkDef.draw, ['dir']) || walkDef.startasstep; // because startasstep accesses faux with DIR
   let O:any = {rules: gameDef, player, action};
   const intro = `
-    ${needLevel(walkDef.steps) === 'dir' ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
-    ${needLevel(walkDef.blocks) === 'dir' ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
+    ${needLevel(walkDef.steps,'dir') ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
+    ${needLevel(walkDef.blocks,'dir') ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
   `;
   if (walkDef.dirs){
     let dirVar = dirMatters ? 'DIR' : 'allwalkerdirs[walkerdirnbr]';
@@ -57,35 +57,44 @@ function walkFromStart(gameDef: Definition, player: 1 | 2, action: string, wal
   }
 }
 
+
+// TODO - totalcount might not always be needed
 function walkInDir(gameDef: Definition, player: 1 | 2, action: string, walkDef, dirVar){
   const O = {rules: gameDef, player, action, usefordir: dirVar};
-  const drawDuringWhile = lib.drawDuringWhile(O,walkDef);
+  const drawDuringWhile = !contains([walkDef.draw.steps,walkDef.draw.all],['totalcount']) && !contains([walkDef.draw.steps,walkDef.draw.all],['walklength']);
   const drawingStepsNow = drawDuringWhile && contains([walkDef.draw.steps,walkDef.draw.all],['step']);
-  const needsStopReason = lib.needsStopreason(O,walkDef);
+  const needsStopReason =  walkDef.draw.blocks || contains(walkDef,['stopreason']);
+  const needsWalkLength = walkDef.draw.last || contains(walkDef.draw,['walklength']);
+  const needsWalkPath = !drawDuringWhile || needsWalkLength;
   const whileCondition = needsStopReason ? `!(STOPREASON=${lib.stopreason(O,walkDef)})` : lib.stopcond(O,walkDef);
+  const countSoFar = walkDef.count && contains(walkDef.draw,['countsofar']);
   return `
-    ${lib.needsWalkPath(O,walkDef) ? 'var walkedsquares = []; ' :''}
+    ${needsWalkPath ? 'var walkedsquares = []; ' :''}
     ${needsStopReason ? 'var STOPREASON = "";' : ''}
     ${walkDef.max ? `var MAX = ${lib.value(O,walkDef.max)};` : ''}
     ${walkDef.startasstep ? 'var POS = "faux";' : ''}
     ${walkDef.startasstep ? 'connections.faux[DIR]=STARTPOS;' : ''}
     ${!walkDef.startasstep ? 'var POS = STARTPOS;' : ''}
-    ${needLevel(walkDef.steps) === 'loop' ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
-    ${needLevel(walkDef.blocks) === 'loop' ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
+    ${needLevel(walkDef.steps,'loop') ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
+    ${needLevel(walkDef.blocks,'loop') ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
     ${walkDef.count ? `var walkpositionstocount = ${lib.set(O,walkDef.count)};` : ''}
     ${walkDef.count ? `var CURRENTCOUNT = 0;` : ''}
-    ${walkDef.count && contains(walkDef.draw,['countsofar']) ? `var countedwalkpositions = [];` : ''}
+    ${countSoFar ? `var countedwalkpositions = [];` : ''}
     
     ${walkDef.max ? `var LENGTH = 0;` : ''}
     ${drawingStepsNow ? `var STEP = 0;` : ''}
     
     while(${ whileCondition }){
-      ${lib.takewalkstep(O,walkDef)}
+      ${needsWalkPath ? 'walkedsquares.push(POS);' : ''}
+      ${countSoFar ? 'countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0));' : ''}
+      ${walkDef.count && !countSoFar ? 'CURRENTCOUNT+=(walkpositionstocount[POS]?1:0); ' : ''}
       ${walkDef.max ? `LENGTH++;` : ''}
       ${drawDuringWhile ? lib.drawwalksinglestep(O,walkDef) : ''}
     }
 
-    ${lib.afterwalk(O,walkDef)}
+    ${needsWalkLength ? 'var WALKLENGTH = walkedsquares.length; ' : ''}
+    ${walkDef.count ? 'var TOTALCOUNT = CURRENTCOUNT; ' : ''}
+
     ${lib.drawwalkblock(O,walkDef)}
     ${lib.drawwalkstart(O,walkDef)}
     ${!drawDuringWhile ? lib.drawwalksteps(O,walkDef) : ''}
@@ -93,46 +102,7 @@ function walkInDir(gameDef: Definition, player: 1 | 2, action: string, walkDef,
   `;
 }
 
-/*
-
-// wants full walkerdef. 
-	// assumes STARTPOS, connections
-	walkindir: (O,def)=> {
-		let ret = ''
-
-		if (def.max){
-			ret += 'var LENGTH=0; '
-		}
-		if (O && C.drawDuringWhile(O,def) && C.contains([def.draw.steps,def.draw.all],['step'])){
-			ret += 'var STEP=0; '
-		}
-		if (C.needsStopreason(O,def)){
-			ret += 'while(!(STOPREASON='+C.stopreason(O,def)+')){'
-		} else {
-			ret += 'while('+C.stopcond(O,def)+'){'
-		}
-		ret += C.takewalkstep(O,def)
-		if (def.max)
-			ret += 'LENGTH++; '
-		if (C.drawDuringWhile(O,def)){
-			ret += C.drawwalksinglestep(O,def)
-		}
-		ret += '}'
-		ret += C.afterwalk(O,def)
-		ret += C.drawwalkblock(O,def)
-		ret += C.drawwalkstart(O,def)
-		if (!C.drawDuringWhile(O,def)){
-			ret += C.drawwalksteps(O,def)
-		}
-		ret += C.drawwalklast(O,def)
-		return ret;
-	},
-*/
-
-
-
-
 // when do we need it? :D
-function needLevel(expr){
-  return contains(expr,['dir']) ? 'loop' : contains(expr,['start']) ? 'dir' : expr ? 'start' : '';
+function needLevel(expr, when){
+  return (contains(expr,['dir']) ? 'loop' : contains(expr,['start']) ? 'dir' : expr ? 'start' : '') === when;
 }

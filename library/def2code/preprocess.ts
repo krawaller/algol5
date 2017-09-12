@@ -41,7 +41,6 @@ function mapFlow(game: Definition) {
 function augmentSingleGenerator(genDef){
   if ((genDef.type === 'walker' || genDef.type === 'neighbour') && !genDef.dir && !genDef.dirs){
     genDef.dirs = [1,2,3,4,5,6,7,8];
-    console.log("AUGMENTING", genDef.type);
   }
   return genDef;
 }

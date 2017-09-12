@@ -45,63 +45,61 @@ function walkFromStart(gameDef: Definition, player: 1 | 2, action: string, wal
       ${!predictedNbrOfDirs ? 'var nbrofwalkerdirs=allwalkerdirs.length; ' : ''}
       for(var walkerdirnbr=0; walkerdirnbr<${nbrOfDirs}; walkerdirnbr++){
         ${dirMatters ? 'var DIR = allwalkerdirs[walkerdirnbr]; ' : ''}
-        ${lib.walkindir({...O, usefordir: dirVar},walkDef)}
+        ${walkInDir(gameDef,player,action,walkDef,dirVar)}
       }
     `;
   } else {
     let dirVar = dirMatters ? 'DIR' : lib.value(O,walkDef.dir);
     return intro + `
       ${dirMatters ? `var DIR = ${lib.value(O,walkDef.dir)}; ` : ''}
-      ${lib.walkindir({...O, usefordir: dirVar},walkDef)}
+      ${walkInDir(gameDef,player,action,walkDef,dirVar)}
     `;
   }
 }
 
 function walkInDir(gameDef: Definition, player: 1 | 2, action: string, walkDef, dirVar){
-  
+  const O = {rules: gameDef, player, action, usefordir: dirVar};
+  const drawDuringWhile = lib.drawDuringWhile(O,walkDef);
+  const drawingStepsNow = drawDuringWhile && contains([walkDef.draw.steps,walkDef.draw.all],['step']);
+  const needsStopReason = lib.needsStopreason(O,walkDef);
+  const whileCondition = needsStopReason ? `!(STOPREASON=${lib.stopreason(O,walkDef)})` : lib.stopcond(O,walkDef);
+  return `
+    ${lib.needsWalkPath(O,walkDef) ? 'var walkedsquares = []; ' :''}
+    ${needsStopReason ? 'var STOPREASON = "";' : ''}
+    ${walkDef.max ? `var MAX = ${lib.value(O,walkDef.max)};` : ''}
+    ${walkDef.startasstep ? 'var POS = "faux";' : ''}
+    ${walkDef.startasstep ? 'connections.faux[DIR]=STARTPOS;' : ''}
+    ${!walkDef.startasstep ? 'var POS = STARTPOS;' : ''}
+    ${needLevel(walkDef.steps) === 'loop' ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
+    ${needLevel(walkDef.blocks) === 'loop' ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
+    ${walkDef.count ? `var walkpositionstocount = ${lib.set(O,walkDef.count)};` : ''}
+    ${walkDef.count ? `var CURRENTCOUNT = 0;` : ''}
+    ${walkDef.count && contains(walkDef.draw,['countsofar']) ? `var countedwalkpositions = [];` : ''}
+    
+    ${walkDef.max ? `var LENGTH = 0;` : ''}
+    ${drawingStepsNow ? `var STEP = 0;` : ''}
+    
+    while(${ whileCondition }){
+      ${lib.takewalkstep(O,walkDef)}
+      ${walkDef.max ? `LENGTH++;` : ''}
+      ${drawDuringWhile ? lib.drawwalksinglestep(O,walkDef) : ''}
+    }
+
+    ${lib.afterwalk(O,walkDef)}
+    ${lib.drawwalkblock(O,walkDef)}
+    ${lib.drawwalkstart(O,walkDef)}
+    ${!drawDuringWhile ? lib.drawwalksteps(O,walkDef) : ''}
+    ${lib.drawwalklast(O,walkDef)}
+  `;
 }
 
 /*
-	// ASSUMES STARTPOS, DIR
-	prepwalkstart: (O,def)=> {
-		def = def || {}
-		let ret =  ''
-		if (C.needsWalkPath(O,def)){
-			ret += 'var walkedsquares = []; '
-		}
-		if (C.needsStopreason(O,def)){
-			ret += 'var STOPREASON = ""; '
-		}
-		if (def.max){
-			ret += 'var MAX='+C.value(O,def.max)+'; '
-		}
-		if (def.startasstep){
-			ret += 'var POS = "faux"; '
-			ret += 'connections.faux[DIR]=STARTPOS; '
-		} else {
-			ret += 'var POS = STARTPOS; '
-		}
-		if (def.steps && C.needLevel(O,def.steps) === 'loop'){
-			ret += 'var allowedsteps = '+C.set(O,def.steps)+'; '
-		}
-		if (def.blocks && C.needLevel(O,def.blocks) === 'loop'){
-			ret += 'var BLOCKS = '+C.set(O,def.blocks)+'; '
-		}
-		if (def.count){
-			ret += 'var walkpositionstocount = '+C.set(O,def.count)+'; '
-			if (C.contains(def.draw,['countsofar'])){
-				ret += 'var countedwalkpositions = []; '
-			}
-			ret += 'var CURRENTCOUNT = 0; '
-		}
-		return ret;
-	},
 
 // wants full walkerdef. 
 	// assumes STARTPOS, connections
 	walkindir: (O,def)=> {
 		let ret = ''
-		ret += C.prepwalkstart(O,def)
+
 		if (def.max){
 			ret += 'var LENGTH=0; '
 		}

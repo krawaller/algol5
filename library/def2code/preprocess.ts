@@ -11,6 +11,8 @@ import { Definition } from './types';
 import * as fs from 'fs';
 import { possibilities } from './utils';
 
+import * as mapValues from 'lodash/mapValues';
+
   // Flow information right now used in logic building (flow_mark.js)
 function mapFlow(game: Definition) {
   let actions = [{name:'start',def:game.startTurn,type:'start',path:[]}]
@@ -36,6 +38,27 @@ function mapFlow(game: Definition) {
   return game;
 }
 
+function augmentSingleGenerator(genDef){
+  if ((genDef.type === 'walker' || genDef.type === 'neighbour') && !genDef.dir && !genDef.dirs){
+    genDef.dirs = [1,2,3,4,5,6,7,8];
+    console.log("AUGMENTING", genDef.type);
+  }
+  return genDef;
+}
+
+function augmentGenerators(gameDef: Definition) {
+  if (!gameDef.generators){
+    gameDef.generators = {};
+  }
+  gameDef.generators = mapValues(gameDef.generators, augmentSingleGenerator);
+  if (gameDef.AI && gameDef.AI.generators) {
+    gameDef.AI.generators = mapValues(gameDef.AI.generators, augmentSingleGenerator);
+  }
+  return gameDef;
+}
+
 export default function preProcess(def: Definition){
-  return mapFlow(def);
+  def = mapFlow(def);
+  def = augmentGenerators(def);
+  return def;
 }

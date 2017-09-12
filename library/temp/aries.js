@@ -136,7 +136,7 @@
           var STOPREASON = "";
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
-          while (!(STOPREASON = (!(POS = connections[POS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
+          while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
             walkedsquares.push(POS);
             ARTIFACTS['beingpushed'][POS] = {};
           }
@@ -375,7 +375,7 @@
           var STOPREASON = "";
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
-          while (!(STOPREASON = (!(POS = connections[POS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
+          while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
             walkedsquares.push(POS);
             ARTIFACTS['beingpushed'][POS] = {};
           }

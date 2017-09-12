@@ -1680,7 +1680,7 @@ module.exports = {
           var STOPREASON = "";
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
-          while (!(STOPREASON = (!(POS = connections[POS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
+          while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
             walkedsquares.push(POS);
             ARTIFACTS['beingpushed'][POS] = {};
           }
@@ -1919,7 +1919,7 @@ module.exports = {
           var STOPREASON = "";
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
-          while (!(STOPREASON = (!(POS = connections[POS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
+          while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
             walkedsquares.push(POS);
             ARTIFACTS['beingpushed'][POS] = {};
           }
@@ -3240,15 +3240,17 @@ module.exports = {
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'uphill';
@@ -3336,15 +3338,17 @@ module.exports = {
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'downhill';
@@ -3432,15 +3436,17 @@ module.exports = {
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'horisontal';
@@ -3528,15 +3534,17 @@ module.exports = {
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'vertical';
@@ -3742,15 +3750,17 @@ module.exports = {
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'uphill';
@@ -3838,15 +3848,17 @@ module.exports = {
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'downhill';
@@ -3934,15 +3946,17 @@ module.exports = {
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'horisontal';
@@ -4030,15 +4044,17 @@ module.exports = {
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'vertical';
@@ -13155,7 +13171,6 @@ module.exports = {
           selecttarget: markpos
         };
         var STARTPOS = MARKS['selecttarget'];
-        var DIR = 5;
         var POS = STARTPOS;
         while ((POS = connections[POS][5])) {
           if (ARTIFACTS.enemyline[POS]) {
@@ -13336,7 +13351,6 @@ module.exports = {
         }
         if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
           var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
-          var DIR = 3;
           var POS = STARTPOS;
           while ((POS = connections[POS][3])) {
             if (!UNITLAYERS.units[POS]) {
@@ -13346,7 +13360,6 @@ module.exports = {
           }
           var walkstarts = ARTIFACTS.potentialempties;
           for (var STARTPOS in walkstarts) {
-            var DIR = 1;
             var walkedsquares = [];
             var POS = STARTPOS;
             while ((POS = connections[POS][1])) {
@@ -13410,7 +13423,6 @@ module.exports = {
           selecttarget: markpos
         };
         var STARTPOS = MARKS['selecttarget'];
-        var DIR = 3;
         var POS = STARTPOS;
         while ((POS = connections[POS][3])) {
           if (ARTIFACTS.enemyline[POS]) {
@@ -13591,7 +13603,6 @@ module.exports = {
         }
         if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
           var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
-          var DIR = 5;
           var POS = STARTPOS;
           while ((POS = connections[POS][5])) {
             if (!UNITLAYERS.units[POS]) {
@@ -13601,7 +13612,6 @@ module.exports = {
           }
           var walkstarts = ARTIFACTS.potentialempties;
           for (var STARTPOS in walkstarts) {
-            var DIR = 7;
             var walkedsquares = [];
             var POS = STARTPOS;
             while ((POS = connections[POS][7])) {

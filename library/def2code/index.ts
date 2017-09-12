@@ -5,6 +5,8 @@ import { Definition } from './types';
 import preProcess from './preprocess';
 import { isTerrainNeutral, contains, usesTurnVars } from './utils';
 
+// TODO - remove some shit from game.blah ?
+
 export default function compileGameCode(def: Definition){
   def = preProcess(def);
   const O = { rules: def };

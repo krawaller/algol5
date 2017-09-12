@@ -87,7 +87,6 @@
           selecttarget: markpos
         };
         var STARTPOS = MARKS['selecttarget'];
-        var DIR = 5;
         var POS = STARTPOS;
         while ((POS = connections[POS][5])) {
           if (ARTIFACTS.enemyline[POS]) {
@@ -268,7 +267,6 @@
         }
         if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
           var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
-          var DIR = 3;
           var POS = STARTPOS;
           while ((POS = connections[POS][3])) {
             if (!UNITLAYERS.units[POS]) {
@@ -278,7 +276,6 @@
           }
           var walkstarts = ARTIFACTS.potentialempties;
           for (var STARTPOS in walkstarts) {
-            var DIR = 1;
             var walkedsquares = [];
             var POS = STARTPOS;
             while ((POS = connections[POS][1])) {
@@ -342,7 +339,6 @@
           selecttarget: markpos
         };
         var STARTPOS = MARKS['selecttarget'];
-        var DIR = 3;
         var POS = STARTPOS;
         while ((POS = connections[POS][3])) {
           if (ARTIFACTS.enemyline[POS]) {
@@ -523,7 +519,6 @@
         }
         if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
           var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
-          var DIR = 5;
           var POS = STARTPOS;
           while ((POS = connections[POS][5])) {
             if (!UNITLAYERS.units[POS]) {
@@ -533,7 +528,6 @@
           }
           var walkstarts = ARTIFACTS.potentialempties;
           for (var STARTPOS in walkstarts) {
-            var DIR = 7;
             var walkedsquares = [];
             var POS = STARTPOS;
             while ((POS = connections[POS][7])) {

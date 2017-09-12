@@ -65,7 +65,9 @@ export function isTerrainNeutral(gameDef: Definition) {
 }
 
 export function contains(haystack,needle): boolean {
-  if (isEqual(needle,haystack)){
+  if (!haystack){
+    return false;
+  } else if (isEqual(needle,haystack)){
     return true;
   } else if (isArray(haystack) || isObject(haystack)){
     return some(haystack,child=> contains(child,needle));

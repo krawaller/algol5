@@ -165,15 +165,17 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'uphill';
@@ -261,15 +263,17 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'downhill';
@@ -357,15 +361,17 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'horisontal';
@@ -453,15 +459,17 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'vertical';
@@ -667,15 +675,17 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'uphill';
@@ -763,15 +773,17 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'downhill';
@@ -859,15 +871,17 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'horisontal';
@@ -955,15 +969,17 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = UNITLAYERS.myunits;
         for (var STARTPOS in walkstarts) {
-          var DIR = undefined;
-          var walkedsquares = [];
-          var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          var WALKLENGTH = walkedsquares.length;
-          if ((3 === WALKLENGTH)) {
-            ARTIFACTS['winline'][STARTPOS] = {};
+          var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var walkedsquares = [];
+            var POS = STARTPOS;
+            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            var WALKLENGTH = walkedsquares.length;
+            if ((3 === WALKLENGTH)) {
+              ARTIFACTS['winline'][STARTPOS] = {};
+            }
           }
         }
         var newstepid = step.stepid + '-' + 'vertical';

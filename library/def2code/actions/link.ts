@@ -7,7 +7,7 @@ import applyGenerators from '../artifacts/generate';
 
 // TODO: Add action! 
 
-function addLink(gameDef: Definition, name: string, player: 1 | 2, root: boolean){
+function addLink(gameDef: Definition, player: 1 | 2, action: string, name: string, root: boolean){
   const expr = makeExpr(gameDef, player, "ADD ACTION HERE OMG");
   if (gameDef && gameDef.commands && gameDef.commands[name]){
     return `
@@ -39,10 +39,10 @@ function addLink(gameDef: Definition, name: string, player: 1 | 2, root: boolea
   }
 }
 
-export default function applyLinkInstructions(gameDef: Definition, actionDef: any, player: 1 | 2, root: boolean){
+export default function applyLinkInstructions(gameDef: Definition, player: 1 | 2, action: string, actionDef: any, root: boolean){
   if (actionDef.links){
-    return obey(gameDef, player, ['all'].concat(actionDef.links), (link) => addLink(gameDef, link, player, root));
+    return obey(gameDef, player, ['all'].concat(actionDef.links), (link) => addLink(gameDef, player, action, link, root));
   } else {
-    return obey(gameDef, player, actionDef.link, (link) => addLink(gameDef, link, player, root));
+    return obey(gameDef, player, actionDef.link, (link) => addLink(gameDef, player, action, link, root))
   }
 }

@@ -44,7 +44,7 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
       });
       turn.links[newstepid] = {};
 
-      ${applyLinkInstructions(def, cmndDef, player, false)}
+      ${applyLinkInstructions(def, player, cmndname, cmndDef, false)}
 
       return newstep;
     }

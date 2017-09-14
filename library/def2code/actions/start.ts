@@ -36,7 +36,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
         ${usesTurnVars(def) ? ',TURNVARS: TURNVARS ' : ''}
       };
 
-      ${applyLinkInstructions(def, startDef, player, true)}
+      ${applyLinkInstructions(def, player, 'start', startDef, true)}
 
       return turn;
     }

@@ -6,7 +6,6 @@ import withUniversal from './universal';
 import {layerRef} from '../common';
 import position from './position';
 import value from './value';
-import lib from '../../logic/';
 
 function innerSet(gameDef: Definition, player: 1 | 2, action: string, expression){
   if (!isArray(expression)){

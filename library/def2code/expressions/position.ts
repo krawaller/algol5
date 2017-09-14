@@ -34,7 +34,6 @@ function innerPosition(gameDef: Definition, player: 1 | 2, action: string, expr
       return `Object.keys(${parse.set(set)})[0]`;
     }
     default:
-      console.log("Unknown position", expression);
       throw "Unknown position " + expression;
   }
 }

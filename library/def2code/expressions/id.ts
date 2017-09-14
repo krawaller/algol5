@@ -4,8 +4,6 @@ import { Definition } from '../types';
 import withUniversal from './universal';
 import makeParser from './';
 
-import lib from '../../logic/';
-
 function innerId(gameDef: Definition, player: 1 | 2, action: string, expression){
   const parse = makeParser(gameDef, player, action);
   if (!isArray(expression)){

@@ -12,7 +12,7 @@ import {
 
 import {copyArtifactsForAction, calculateUnitLayers} from '../common';
 
-export default function addCommandFunction(def: Definition, cmndname: string, player: 1 | 2){
+export default function addCommandFunction(def: Definition, player: 1 | 2, cmndname: string){
   const cmndDef = def.commands[cmndname];
   const instruction = value(def, player, cmndname, cmndDef.instruction || '');
   return `
@@ -28,7 +28,7 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
       MARKS = {};
       ${calculateUnitLayers(def, player, false)}
       ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
-      ${applyGeneratorInstructions(def,cmndDef,player,cmndname)}
+      ${applyGeneratorInstructions(def,player,cmndname,cmndDef)}
 
       var newstepid = step.stepid+'-'+'${cmndname}';
       var newstep = turn.steps[newstepid] = Object.assign({},step,{

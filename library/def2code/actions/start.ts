@@ -23,7 +23,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
       var UNITDATA = step.UNITDATA;
       ${usesTurnVars(def) ? 'var TURNVARS = {}; ' : ''}
       ${calculateUnitLayers(def, player, true)}
-      ${applyGenerators(def,startDef,player,"startturn")}
+      ${applyGenerators(def,player,"startturn",startDef)}
       var newstep = turn.steps.root = {
         ARTIFACTS: ARTIFACTS,
         UNITDATA: UNITDATA,
@@ -36,7 +36,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
         ${usesTurnVars(def) ? ',TURNVARS: TURNVARS ' : ''}
       };
 
-      ${applyLinkInstructions(def, player, 'start', startDef, true)}
+      ${applyLinkInstructions(def, player, 'startturn', startDef, true)}
 
       return turn;
     }

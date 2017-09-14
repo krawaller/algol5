@@ -14,7 +14,7 @@ export function executeGenerator(gameDef: Definition, player: 1 | 2, action: st
   }
 }
 
-export default function applyGenerators(gameDef: Definition, actionDef: any, player: 1 | 2, action: string){
+export default function applyGenerators(gameDef: Definition, player: 1 | 2, action: string, actionDef: any){
   if (actionDef.runGenerators){
     return obey(gameDef, player, ['all'].concat(actionDef.runGenerators), (generator) => executeGenerator(gameDef, player, action, gameDef.generators[generator]));
   } else if (actionDef.runGenerator){

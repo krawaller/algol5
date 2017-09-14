@@ -23,7 +23,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
   }
   const body = `
     var MARKS = ${newMarkObject}; 
-    ${applyGeneratorInstructions(def,markDef,player,markname)}
+    ${applyGeneratorInstructions(def,player,markname,markDef)}
   `;
   const linking = applyLinkInstructions(def, player, markname, markDef, false);
   const preludium = ifCodeContains(body + linking, {

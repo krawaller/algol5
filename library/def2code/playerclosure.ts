@@ -18,7 +18,7 @@ export default function playerClosure(def: Definition, player: 1 | 2){
         markname => addMarkFunc(def, markname, player)
       ).join(' ')}
       ${Object.keys(def.commands||{}).map(
-        cmndname => addCommandFunc(def, cmndname, player)
+        cmndname => addCommandFunc(def, player, cmndname)
       ).join(' ')}
       ${addStartFunc(def, player)}
       game.debug${player} = function(){

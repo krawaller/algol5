@@ -23,7 +23,7 @@ function addLink(gameDef: Definition, player: 1 | 2, action: string, name: stri
     `;
   } else if (name === "endturn"){
     const endTurnDef = gameDef.endTurn || {};
-    let ret = applyGenerators(gameDef, endTurnDef, player, "endturn");
+    let ret = applyGenerators(gameDef, player, "endturn", endTurnDef);
     //let ret = lib.applyGeneratorInstructions({...(O || {}), generating:true},endTurnDef || {})
     return ret + map(endTurnDef.unless,(cond,name)=> {
       return 'if ('+expr.bool(cond)+'){ turn.blockedby = "'+name+'"; } '

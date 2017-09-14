@@ -3,6 +3,7 @@ import { Definition } from '../types';
 import lib from '../../logic/';
 import { contains, listlength } from '../utils';
 import draw from './draw';
+import makeParse from '../expressions';
 
 /*
 draw directly in whileloop if:
@@ -10,39 +11,39 @@ def.draw.steps and def.draw.all doesn't contain walklength or totalcount
 */
 
 export default function executeWalker(gameDef: Definition, player: 1 | 2, action: string, walkDef){
-  const O = {rules: gameDef, player, action};
+  const parse = makeParse(gameDef, player, action);
   const intro = `
-    ${needLevel(walkDef.steps,'start') ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
-    ${needLevel(walkDef.blocks,'start') ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
+    ${needLevel(walkDef.steps,'start') ? `var allowedsteps = ${parse.set(walkDef.steps)};` : ''}
+    ${needLevel(walkDef.blocks,'start') ? `var BLOCKS = ${parse.set(walkDef.blocks)};` : ''}
   `;
   if (walkDef.starts){
     return intro + `
-      var walkstarts = ${lib.set(O,walkDef.starts)};
+      var walkstarts = ${parse.set(walkDef.starts)};
       for(var STARTPOS in walkstarts) {
         ${walkFromStart(gameDef, player, action, walkDef)}
       }
     `;
   } else {
     return intro + `
-      var STARTPOS = ${lib.position(O,walkDef.start)};
+      var STARTPOS = ${parse.position(walkDef.start)};
       ${walkFromStart(gameDef, player, action, walkDef)}
     `;
   }
 }
 
 function walkFromStart(gameDef: Definition, player: 1 | 2, action: string, walkDef){
+  const parse = makeParse(gameDef, player, action);
   const dirMatters = contains(walkDef.draw, ['dir']) || walkDef.startasstep; // because startasstep accesses faux with DIR
-  let O:any = {rules: gameDef, player, action};
   const intro = `
-    ${needLevel(walkDef.steps,'dir') ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
-    ${needLevel(walkDef.blocks,'dir') ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
+    ${needLevel(walkDef.steps,'dir') ? `var allowedsteps = ${parse.set(walkDef.steps)};` : ''}
+    ${needLevel(walkDef.blocks,'dir') ? `var BLOCKS = ${parse.set(walkDef.blocks)};` : ''}
   `;
   if (walkDef.dirs){
     let dirVar = dirMatters ? 'DIR' : 'allwalkerdirs[walkerdirnbr]';
     const predictedNbrOfDirs = listlength(walkDef.dirs);
     let nbrOfDirs = predictedNbrOfDirs || 'nbrofwalkerdirs';
     return intro + `
-      var allwalkerdirs = ${lib.list(O,walkDef.dirs)};
+      var allwalkerdirs = ${parse.list(walkDef.dirs)};
       ${!predictedNbrOfDirs ? 'var nbrofwalkerdirs=allwalkerdirs.length; ' : ''}
       for(var walkerdirnbr=0; walkerdirnbr<${nbrOfDirs}; walkerdirnbr++){
         ${dirMatters ? 'var DIR = allwalkerdirs[walkerdirnbr]; ' : ''}
@@ -50,9 +51,9 @@ function walkFromStart(gameDef: Definition, player: 1 | 2, action: string, wal
       }
     `;
   } else {
-    let dirVar = dirMatters ? 'DIR' : lib.value(O,walkDef.dir);
+    let dirVar = dirMatters ? 'DIR' : parse.value(walkDef.dir);
     return intro + `
-      ${dirMatters ? `var DIR = ${lib.value(O,walkDef.dir)}; ` : ''}
+      ${dirMatters ? `var DIR = ${parse.value(walkDef.dir)}; ` : ''}
       ${walkInDir(gameDef,player,action,walkDef,dirVar)}
     `;
   }
@@ -61,13 +62,14 @@ function walkFromStart(gameDef: Definition, player: 1 | 2, action: string, wal
 
 // TODO - totalcount might not always be needed
 function walkInDir(gameDef: Definition, player: 1 | 2, action: string, walkDef, dirVar){
+  const parse = makeParse(gameDef, player, action);
   const O = {rules: gameDef, player, action, usefordir: dirVar};
   const drawDuringWhile = !contains([walkDef.draw.steps,walkDef.draw.all],['totalcount']) && !contains([walkDef.draw.steps,walkDef.draw.all],['walklength']);
   const drawStepsInLoop = drawDuringWhile && contains([walkDef.draw.steps,walkDef.draw.all,walkDef.draw.counted],['step']);
   const needsStopReason = walkDef.draw.blocks || contains(walkDef,['stopreason']);
   const needsWalkLength = walkDef.draw.last || contains(walkDef.draw,['walklength']);
   const needsWalkPath = !drawDuringWhile || needsWalkLength;
-  const whileCondition = needsStopReason ? `!(STOPREASON=${lib.stopreason(O,walkDef)})` : lib.stopcond(O,walkDef);
+  const whileCondition = needsStopReason ? `!(STOPREASON=${calcStopReason(walkDef,dirVar)})` : calcStopCondition(walkDef,dirVar);
   const countSoFar = walkDef.count && contains(walkDef.draw,['countsofar']);
   const drawBlockCond = ['BLOCKS[POS]'].concat(walkDef.steps && !walkDef.testblocksbeforesteps ? 'allowedsteps[POS]' : []).join(' && ');
   const shouldDrawStart = walkDef.draw.start || walkDef.draw.all;
@@ -79,13 +81,13 @@ function walkInDir(gameDef: Definition, player: 1 | 2, action: string, walkDef,
   return `
     ${needsWalkPath                    ? 'var walkedsquares = [];                                                    ' :''}
     ${needsStopReason                  ? 'var STOPREASON = "";                                                       ' : ''}
-    ${walkDef.max                      ? `var MAX = ${lib.value(O,walkDef.max)};                                     ` : ''}
+    ${walkDef.max                      ? `var MAX = ${parse.value(walkDef.max)};                                     ` : ''}
     ${walkDef.startasstep              ? 'var POS = "faux";                                                          ' : ''}
     ${walkDef.startasstep              ? 'connections.faux[DIR]=STARTPOS;                                            ' : ''}
     ${!walkDef.startasstep             ? 'var POS = STARTPOS;' : ''}
-    ${needLevel(walkDef.steps,'loop')  ? `var allowedsteps = ${lib.set(O,walkDef.steps)};` : ''}
-    ${needLevel(walkDef.blocks,'loop') ? `var BLOCKS = ${lib.set(O,walkDef.blocks)};` : ''}
-    ${walkDef.count                    ? `var walkpositionstocount = ${lib.set(O,walkDef.count)};` : ''}
+    ${needLevel(walkDef.steps,'loop')  ? `var allowedsteps = ${parse.set(walkDef.steps)};` : ''}
+    ${needLevel(walkDef.blocks,'loop') ? `var BLOCKS = ${parse.set(walkDef.blocks)};` : ''}
+    ${walkDef.count                    ? `var walkpositionstocount = ${parse.set(walkDef.count)};` : ''}
     ${walkDef.count                    ? `var CURRENTCOUNT = 0;` : ''}
     ${countSoFar                       ? `var countedwalkpositions = [];` : ''}
     ${walkDef.max                      ? `var LENGTH = 0;` : ''}
@@ -146,6 +148,58 @@ function walkInDir(gameDef: Definition, player: 1 | 2, action: string, walkDef,
 // when do we need it? :D
 function needLevel(expr, when){
   return (contains(expr,['dir']) ? 'loop' : contains(expr,['start']) ? 'dir' : expr ? 'start' : '') === when;
+}
+
+
+
+// ---- TODO: the two helpers below will likely be of use in floater too, so might be nice to put them elsewhere
+
+
+// assumes connections, DIR, LENGTH
+// and if used BLOCKS, allowedsteps, MAX
+function calcStopReason(genDef: Definition, dirVar = 'DIR', blocksVar = 'BLOCKS') {
+  let ret = ''
+  if (genDef.max){
+    ret += 'LENGTH === MAX ? "reachedmax" : '
+  }
+  ret += '!(POS=connections[POS]['+dirVar+']) ? "outofbounds" : '
+  if (genDef.type==='floater'){
+    ret += 'REACHED[POS] ? "alreadyreached" : '
+  }
+  if (genDef.blocks && genDef.steps && genDef.testblocksbeforesteps){
+    ret += blocksVar+'[POS] ? "hitblock" : '
+  }
+  if (genDef.steps){
+    ret += '!allowedsteps[POS] ? "nomoresteps" : '
+  }
+  if (genDef.blocks && !genDef.testblocksbeforesteps){
+    ret += blocksVar+'[POS] ? "hitblock" : '
+  }
+  return '('+ret+' null)';
+}
+
+	// assumes connections, DIR, LENGTH
+	// and if used BLOCKS, allowedsteps, MAX
+
+function calcStopCondition(genDef: Definition, dirVar = 'DIR', blocksVar = 'BLOCKS') {
+  let conds = []
+  if (genDef.max){
+    conds.push('LENGTH < MAX')
+  }
+  conds.push('(POS=connections[POS]['+dirVar+'])')
+  if (genDef.type==='floater'){
+    conds.push('!REACHED[POS]')
+  }
+  if (genDef.blocks && genDef.steps && genDef.testblocksbeforesteps){
+    conds.push( '!'+ blocksVar+'[POS]' )
+  }
+  if (genDef.steps){
+    conds.push( 'allowedsteps[POS]' )
+  }
+  if (genDef.blocks && !genDef.testblocksbeforesteps){
+    conds.push( '!'+ blocksVar+'[POS]' )
+  }
+  return conds.join(' && ');
 }
 
 

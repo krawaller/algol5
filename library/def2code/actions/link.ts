@@ -41,8 +41,8 @@ function addLink(gameDef: Definition, player: 1 | 2, action: string, name: stri
 
 export default function applyLinkInstructions(gameDef: Definition, player: 1 | 2, action: string, actionDef: any, root: boolean){
   if (actionDef.links){
-    return obey(gameDef, player, ['all'].concat(actionDef.links), (link) => addLink(gameDef, player, action, link, root));
+    return obey(gameDef, player, action, ['all'].concat(actionDef.links), (link) => addLink(gameDef, player, action, link, root));
   } else {
-    return obey(gameDef, player, actionDef.link, (link) => addLink(gameDef, player, action, link, root))
+    return obey(gameDef, player, action, actionDef.link, (link) => addLink(gameDef, player, action, link, root))
   }
 }

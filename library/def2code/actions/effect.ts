@@ -256,9 +256,9 @@ function executeEffect(gameDef: Definition, player: 1 | 2, action: string, effe
 
 export default function applyEffectInstructions(gameDef: Definition, player: 1 | 2, action: string, actionDef: any) {
   if (actionDef.applyEffects){
-    return obey(gameDef, player, ['all'].concat(actionDef.applyEffects), (effect) => executeEffect(gameDef, player, action, effect));
+    return obey(gameDef, player, action, ['all'].concat(actionDef.applyEffects), (effect) => executeEffect(gameDef, player, action, effect));
   } else if (actionDef.applyEffect){
-    return obey(gameDef, player, actionDef.applyEffect, (effect) => executeEffect(gameDef, player, action, effect));
+    return obey(gameDef, player, action, actionDef.applyEffect, (effect) => executeEffect(gameDef, player, action, effect));
   } else {
     return '';
   }

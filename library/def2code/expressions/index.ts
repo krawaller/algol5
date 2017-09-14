@@ -4,7 +4,6 @@ import list from './list';
 import position from './position';
 import set from './set';
 import value from './value';
-import layerRef from './layerref';
 
 import { Definition } from '../types';
 
@@ -16,6 +15,5 @@ export default function parseExpression(gameDef: Definition, player: 1 | 2, act
     position: (expr) => position(gameDef, player, action, expr),
     set: (expr) => set(gameDef, player, action, expr),
     value: (expr) => value(gameDef, player, action, expr),
-    layerRef: (expr) => layerRef(gameDef, player, action, expr)
   };
 }

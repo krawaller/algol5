@@ -4,11 +4,12 @@ import lib from '../../logic/';
 import { Definition } from '../types';
 import { contains } from '../utils';
 import makeParse from '../expressions';
+import { layerRef } from '../common';
 
 export default function executeFilter(gameDef: Definition, player: 1 | 2, action: string, filterDef: any){
 	const parse = makeParse(gameDef, player, action);
   const toLayerDependsOnTarget = contains(filterDef.tolayer, 'target');
-  const assignTargetLayerVar = `var filtertargetlayer = ${parse.layerRef(filterDef.tolayer)};`;
+  const assignTargetLayerVar = `var filtertargetlayer = ${layerRef(gameDef,player,action,filterDef.tolayer)};`;
   const condition = (filterDef.condition ? [parse.bool(filterDef.condition)] : []).concat(
     map(filterDef.matching,(test,key)=> {
       switch(test[0]){
@@ -19,7 +20,7 @@ export default function executeFilter(gameDef: Definition, player: 1 | 2, actio
     })
   ).join(' && ');
   return `
-    var filtersourcelayer = ${parse.layerRef(filterDef.layer)};
+    var filtersourcelayer = ${layerRef(gameDef,player,action,filterDef.layer)};
     ${!toLayerDependsOnTarget ? assignTargetLayerVar : ''}
     for (var POS in filtersourcelayer){
       ${toLayerDependsOnTarget ? assignTargetLayerVar : ''}

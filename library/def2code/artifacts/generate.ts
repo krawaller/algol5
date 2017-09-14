@@ -16,9 +16,9 @@ export function executeGenerator(gameDef: Definition, player: 1 | 2, action: st
 
 export default function applyGenerators(gameDef: Definition, player: 1 | 2, action: string, actionDef: any){
   if (actionDef.runGenerators){
-    return obey(gameDef, player, ['all'].concat(actionDef.runGenerators), (generator) => executeGenerator(gameDef, player, action, gameDef.generators[generator]));
+    return obey(gameDef, player, action, ['all'].concat(actionDef.runGenerators), (generator) => executeGenerator(gameDef, player, action, gameDef.generators[generator]));
   } else if (actionDef.runGenerator){
-    return obey(gameDef, player, actionDef.runGenerator, (generator) => executeGenerator(gameDef, player, action, gameDef.generators[generator]));
+    return obey(gameDef, player, action, actionDef.runGenerator, (generator) => executeGenerator(gameDef, player, action, gameDef.generators[generator]));
   } else {
     return '';
   }

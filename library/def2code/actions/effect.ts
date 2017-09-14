@@ -26,9 +26,8 @@ setturnvar and setturnpos mutates TURNVARS
     },
 */
 
-function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string {
-  const expr = makeExpr(gameDef, player, "FILL IN ACTION HERE OMG!");
-  const action = "TODO: populate me for reals :(";
+function executeEffect(gameDef: Definition, player: 1 | 2, action: string, effect: any): string {
+  const expr = makeExpr(gameDef, player, action);
   const O = {rules: gameDef, player};
   const [type, ...args] = effect;
   switch(type){
@@ -40,8 +39,8 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       ), */
       const [pos1,pos2] = args;
       return (
-        executeEffect(gameDef, player, ['setat',pos1,'pos',['pos', pos2]]) + ' ' +
-        executeEffect(gameDef, player, ['setat',pos2,'pos',['pos', pos1]])
+        executeEffect(gameDef, player,action, ['setat',pos1,'pos',['pos', pos2]]) + ' ' +
+        executeEffect(gameDef, player,action, ['setat',pos2,'pos',['pos', pos1]])
       );
     }
     case "moveid": { // "movebyid""
@@ -49,14 +48,14 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       moveid: (O,id,pos)=> C.setid(O,id,'pos',['pos',pos]),
       */
       const [id,pos] = args;
-      return executeEffect(gameDef, player, ['setid',id,'pos',['pos',pos]]);
+      return executeEffect(gameDef, player,action, ['setid',id,'pos',['pos',pos]]);
     }
     case "moveat": {
       /*
       moveat: (O,from,to,and)=> C.setat(O,from,'pos',['pos',to],and),
       */
       const [from,to,andThen] = args; // TODO - instead of then, just do double?
-      return executeEffect(gameDef, player, ['setat',from,'pos',['pos',to],andThen]);
+      return executeEffect(gameDef, player,action, ['setat',from,'pos',['pos',to],andThen]);
     }
     case "stompid": {// "stompbyid"
       /*
@@ -64,8 +63,8 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       */
       const [id,pos] = args;
       return (
-        executeEffect(gameDef, player, ['killat',pos]) + ' ' +
-        executeEffect(gameDef, player, ['moveid',id,pos])
+        executeEffect(gameDef, player,action, ['killat',pos]) + ' ' +
+        executeEffect(gameDef, player,action, ['moveid',id,pos])
       );
     }
     case "stompat": {
@@ -73,7 +72,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       stompat: (O,from,to)=> C.moveat(O,from,to,['killat',to]),
       */
       const [from,to] = args; // TODO - instead of then, just do double?
-      return executeEffect(gameDef, player, ['moveat', from, to, ['killat', to]]);
+      return executeEffect(gameDef, player,action, ['moveat', from, to, ['killat', to]]);
     }
     case "killid": { // "killbyid"
       /*
@@ -94,7 +93,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       killin: (O,set)=> C.foridin(O,set,['killid',['loopid']]),
       */
       const [set] = args;
-      return executeEffect(gameDef, player, ['foridin',set,['killid',['loopid']]]);
+      return executeEffect(gameDef, player,action, ['foridin',set,['killid',['loopid']]]);
     }
     case "setid": { // set by id
       /*
@@ -124,7 +123,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
         var unitid = (UNITLAYERS.units[${expr.position(pos)}] || {}).id;
         if (unitid){
           UNITDATA[unitid]=Object.assign({},UNITDATA[unitid],{${expr.value(propname)}:${expr.value(val)}});
-          ${andThen ? executeEffect(gameDef, player, andThen) : ''}
+          ${andThen ? executeEffect(gameDef, player,action, andThen) : ''}
         }
       `;
     }
@@ -149,7 +148,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       setin: (O,set,propname,val)=> C.foridin(O,set,['setid',['loopid'],propname,val]),
       */
       const [set,propname,val] = args;
-      return executeEffect(gameDef, player, ['foridin',set,['setid',['loopid'],propname,val]]);
+      return executeEffect(gameDef, player,action, ['foridin',set,['setid',['loopid'],propname,val]]);
     }
     case "spawn": {
       /*
@@ -185,7 +184,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       const [set,effect] = args;
       return `
         for(var POS in ${expr.set(set)}){
-          ${executeEffect(gameDef,player,effect)}
+          ${executeEffect(gameDef,player,action,effect)}
         }
       `;
     }
@@ -211,7 +210,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
         var LOOPID;
         for(var POS in ${setcode}){
           ${obvious ? 'LOOPID='+setcode+'[POS].id' : 'if (LOOPID=(UNITLAYERS.units[POS]||{}).id){' }
-          ${executeEffect(gameDef,player,effect)}  // TODO - check that it uses ['loopid'] ?
+          ${executeEffect(gameDef,player,action,effect)}  // TODO - check that it uses ['loopid'] ?
           ${!obvious ? '}' : '' }
         }
       `;
@@ -247,7 +246,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       pushin: (O,set,dir,dist)=> C.foridin(O,set,['pushid',['loopid'],dir,dist]),
       */
       const [set,dir,dist] = args;
-      return executeEffect(gameDef,player,['foridin',set,['pushid',['loopid'],dir,dist]]);
+      return executeEffect(gameDef,player,action,['foridin',set,['pushid',['loopid'],dir,dist]]);
     }
     default:
       console.log("BAD EFFECT",effect);
@@ -255,11 +254,11 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
   }
 }
 
-export default function applyEffectInstructions(gameDef: Definition, actionDef: any, player: 1 | 2) {
+export default function applyEffectInstructions(gameDef: Definition, player: 1 | 2, action: string, actionDef: any) {
   if (actionDef.applyEffects){
-    return obey(gameDef, player, ['all'].concat(actionDef.applyEffects), (effect) => executeEffect(gameDef, player, effect));
+    return obey(gameDef, player, ['all'].concat(actionDef.applyEffects), (effect) => executeEffect(gameDef, player, action, effect));
   } else if (actionDef.applyEffect){
-    return obey(gameDef, player, actionDef.applyEffect, (effect) => executeEffect(gameDef, player, effect));
+    return obey(gameDef, player, actionDef.applyEffect, (effect) => executeEffect(gameDef, player, action, effect));
   } else {
     return '';
   }

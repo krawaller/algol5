@@ -24,7 +24,7 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
       var UNITLAYERS = step.UNITLAYERS;
       ${usesTurnVars(cmndDef) ? 'var TURNVARS = Object.assign({},step.TURNVARS); ' : ''}
 
-      ${applyEffectInstructions(def,cmndDef,player)}
+      ${applyEffectInstructions(def,player,cmndname,cmndDef)}
       MARKS = {};
       ${calculateUnitLayers(def, player, false)}
       ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};

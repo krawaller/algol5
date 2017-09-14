@@ -24,7 +24,7 @@ function innerPosition(gameDef: Definition, player: 1 | 2, action: string, expr
       return parse.value(pos);
     }
     case "target": {
-      return "POS"; // TODO - had useforpos in O here.... OMG! GONNA BREAK :P
+      return "POS"; // TODO - had useforpos in O here.... OMG! GONNA BREAK :P or not. 
     }
     case "start": {
       return "STARTPOS";

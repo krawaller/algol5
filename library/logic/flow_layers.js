@@ -17,6 +17,7 @@ export default C => Object.assign(C,{
         return pure ? ret : JSON.stringify(ret)
     },
 
+    // already moved over
     isTerrainLayerRef: (O, name)=> {
         let names = Object.keys(C.getTerrain(O));
         let variants = names.reduce((mem, n) => {

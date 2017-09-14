@@ -1,23 +1,25 @@
-import lib from '../logic/';
+import bool from './expressions/bool';
 
 import { Definition } from './types';
 
+// TODO - add action! :P
+
 export default function obey(gameDef: Definition, player: 1 | 2, instr: any, callback: Function){
-  const O = {rules: gameDef, player};
+  const action = "TODO - PASS ME IN!";
   const [type, ...details] = instr;
   switch(type){
     case 'if': {
-      const [bool,newInstr] = details;
+      const [expr,newInstr] = details;
       return `
-        if (${lib.boolean(O,bool)}){
+        if (${bool(gameDef,player,action,expr)}){
           ${obey(gameDef, player, newInstr, callback)}
         }
       `;
     }
     case 'ifelse': {
-      const [bool,alt1,alt2] = details;
+      const [expr,alt1,alt2] = details;
       return `
-        if (${lib.boolean(O,bool)}){
+        if (${bool(gameDef,player,action,expr)}){
           ${obey(gameDef, player, alt1, callback)}
         } else {
           ${obey(gameDef, player, alt2, callback)}

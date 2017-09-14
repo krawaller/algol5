@@ -1,6 +1,6 @@
 import * as reduce from 'lodash/reduce';
 
-import lib from '../logic/';
+import value from './expressions/value';
 
 import {coords2pos, generatorLayers} from './utils';
 
@@ -9,31 +9,28 @@ import {executeGenerator} from './artifacts/generate';
 
 
 function calculateBrainScore(gameDef: Definition, player: 1 | 2, brain: string){
-  const O = {rules: gameDef, player};
   let aspects = gameDef.AI.aspects;
   let plus = reduce(gameDef.AI.brains[brain].plus,(mem,weight,name)=>
-      mem.concat( (weight === 1 ? '' : weight+' * ')+lib.value(O,aspects[name]) )
+      mem.concat( (weight === 1 ? '' : weight+' * ')+value(gameDef,player,brain,aspects[name]) )
   ,[]).join(' + ');
   let minus = reduce(gameDef.AI.brains[brain].minus,(mem,weight,name)=>
-      mem + ' - ' + (weight === 1 ? '' : weight+' * ')+lib.value(O,aspects[name])
+      mem + ' - ' + (weight === 1 ? '' : weight+' * ')+value(gameDef,player,brain,aspects[name])
   ,'');
   return plus + minus;
 }
 
 function calculateDetailedBrainScore(gameDef: Definition, player: 1 | 2, brain: string){
-  const O = {rules: gameDef, player};
   let aspects = gameDef.AI.aspects
   let plus = reduce(gameDef.AI.brains[brain].plus,(mem,weight,name)=>
-      mem.concat(name+': '+(weight === 1 ? '' : weight+' * ')+lib.value(O,aspects[name]))
+      mem.concat(name+': '+(weight === 1 ? '' : weight+' * ')+value(gameDef,player,brain,aspects[name]))
   ,[])
   let minus = reduce(gameDef.AI.brains[brain].minus,(mem,weight,name)=>
-      mem.concat(name+': -'+(weight === 1 ? '' : weight+' * ')+lib.value(O,aspects[name]))
+      mem.concat(name+': -'+(weight === 1 ? '' : weight+' * ')+value(gameDef,player,brain,aspects[name]))
   ,[])
   return '{'+plus.concat(minus).join(', ')+'}'
 }
 
 function addBrain(gameDef: Definition, player: 1 | 2, brain: string){
-  const O = {rules: gameDef, player};
   const brainPrep = `
     var UNITLAYERS = step.UNITLAYERS;
     var ARTIFACTS = step.ARTIFACTS;
@@ -68,7 +65,6 @@ function scoring(scoreDef){
 }
 
 export default function addAI(gameDef: Definition, player: 1 | 2){
-  const O = {rules: gameDef, player};
   const scorings = reduce(gameDef.AI && gameDef.AI.scorings,
     (str,def,name)=> {
       let names = (player === 1 ? ['my'+name,'opp'+name] : ['opp'+name,'my'+name])

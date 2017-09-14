@@ -1,5 +1,4 @@
 
-import lib from '../logic/';
 import playerClosure from './playerclosure';
 import { Definition } from './types';
 import preProcess from './preprocess';
@@ -9,7 +8,6 @@ import { isTerrainNeutral, contains, usesTurnVars } from './utils';
 
 export default function compileGameCode(def: Definition){
   def = preProcess(def);
-  const O = { rules: def };
   return `
     function(){
       var game = {};

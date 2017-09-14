@@ -1,4 +1,3 @@
-import lib from '../logic/';
 import {blankArtifactLayers,generatorLayers,possibilities,blankUnitLayers} from './utils';
 import {Definition} from './types';
 

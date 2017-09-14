@@ -145,7 +145,7 @@
             if ((['hitblock', 'outofbounds'].indexOf(STOPREASON) !== -1)) {
               ARTIFACTS['squished'][walkedsquares[WALKLENGTH - 1]] = {};
             }
-          } 
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -384,7 +384,7 @@
             if ((['hitblock', 'outofbounds'].indexOf(STOPREASON) !== -1)) {
               ARTIFACTS['squished'][walkedsquares[WALKLENGTH - 1]] = {};
             }
-          } 
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {

@@ -1,9 +1,8 @@
-import lib from '../../logic/';
-
 import { Definition } from '../types';
 import applyLinkInstructions from './link';
 import applyEffectInstructions from './effect';
 import applyGeneratorInstructions from '../artifacts/generate';
+import value from '../expressions/value';
 import {
   ifCodeContains,
   usesTurnVars,
@@ -14,9 +13,8 @@ import {
 import {copyArtifactsForAction, calculateUnitLayers} from '../common';
 
 export default function addCommandFunction(def: Definition, cmndname: string, player: 1 | 2){
-  const O = {rules: def, player, cmndname};
   const cmndDef = def.commands[cmndname];
-  const instruction = lib.value(O, cmndDef.instruction||'');
+  const instruction = value(def, player, cmndname, cmndDef.instruction || '');
   return `
     game.${cmndname}${player} = function(turn,step){
       var ARTIFACTS = ${copyArtifactsForAction(def,cmndDef)};
@@ -39,8 +37,8 @@ export default function addCommandFunction(def: Definition, cmndname: string, pl
         UNITDATA: UNITDATA,
         UNITLAYERS: UNITLAYERS,
         stepid: newstepid,
-        name: '${O.cmndname}',
-        path: step.path.concat('${O.cmndname}')
+        name: '${cmndname}',
+        path: step.path.concat('${cmndname}')
         ${contains(cmndDef,'spawn') ? ', clones: clones' : ''}
         ${usesTurnVars(cmndDef) ? ',TURNVARS: TURNVARS ' : ''}
       });

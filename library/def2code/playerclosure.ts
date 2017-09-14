@@ -1,5 +1,4 @@
 
-import lib from '../logic/';
 import { isTerrainNeutral } from './utils';
 import { Definition } from './types';
 import addMarkFunc from './actions/mark';
@@ -8,7 +7,6 @@ import addStartFunc from './actions/start';
 import addAI from './ai';
 
 export default function playerClosure(def: Definition, player: 1 | 2){
-  const O = { rules: def, player };
   return `
     (function(){
       ${isTerrainNeutral(def) ? '' : `var TERRAIN = terrainLayers(boardDef, ${player}${def.AI && def.AI.terrain ? `, ${JSON.stringify(def.AI.terrain)}` : ''}); `}

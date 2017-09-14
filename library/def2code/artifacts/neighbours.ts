@@ -1,7 +1,7 @@
 
 import { Definition } from '../types';
 import lib from '../../logic/';
-import {contains} from '../utils';
+import {contains, listlength} from '../utils';
 import draw from './draw';
 
 // TODO - not drawing counted?
@@ -81,7 +81,7 @@ function findManyNeighbours(gameDef: Definition, player: 1 | 2, action: string,
   const O = {rules: gameDef, player, action, startconnections:'startconnections'}; // startconnections matter for findneighbourindir
   const dirMatters = contains([nghDef.draw.neighbours,nghDef.condition],['dir']);
   const countMatters = contains(nghDef.draw, ['neighbourcount']);
-  const predictedNbrOfDirs = lib.listlength(nghDef.dirs);
+  const predictedNbrOfDirs = listlength(nghDef.dirs);
   let nbrOfDirs = predictedNbrOfDirs || 'nbrofneighbourdirs';
   return `
     var neighbourdirs = ${lib.list(O,nghDef.dirs)};

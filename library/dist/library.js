@@ -1689,7 +1689,7 @@ module.exports = {
             if ((['hitblock', 'outofbounds'].indexOf(STOPREASON) !== -1)) {
               ARTIFACTS['squished'][walkedsquares[WALKLENGTH - 1]] = {};
             }
-          } 
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -1928,7 +1928,7 @@ module.exports = {
             if ((['hitblock', 'outofbounds'].indexOf(STOPREASON) !== -1)) {
               ARTIFACTS['squished'][walkedsquares[WALKLENGTH - 1]] = {};
             }
-          } 
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -11171,7 +11171,7 @@ module.exports = {
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
             ARTIFACTS['movetargets'][walkedsquares[WALKLENGTH - 1]] = {};
-          } 
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -11375,7 +11375,7 @@ module.exports = {
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
             ARTIFACTS['movetargets'][walkedsquares[WALKLENGTH - 1]] = {};
-          } 
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -13358,6 +13358,14 @@ module.exports = {
             }
             ARTIFACTS['enemyline'][POS] = {};
           }
+          ARTIFACTS['enemyline'][STARTPOS] = {};
+          for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS['potentialempties'][POS] = {};
+            }
+            ARTIFACTS['enemyline'][POS] = {};
+          }
           var walkstarts = ARTIFACTS.potentialempties;
           for (var STARTPOS in walkstarts) {
             var walkedsquares = [];
@@ -13370,7 +13378,7 @@ module.exports = {
               if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
                 ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH - 1]] = {};
               }
-            } 
+            }
           }
         }
         var newstep = turn.steps.root = {
@@ -13610,6 +13618,14 @@ module.exports = {
             }
             ARTIFACTS['enemyline'][POS] = {};
           }
+          ARTIFACTS['enemyline'][STARTPOS] = {};
+          for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            if (!UNITLAYERS.units[POS]) {
+              ARTIFACTS['potentialempties'][POS] = {};
+            }
+            ARTIFACTS['enemyline'][POS] = {};
+          }
           var walkstarts = ARTIFACTS.potentialempties;
           for (var STARTPOS in walkstarts) {
             var walkedsquares = [];
@@ -13622,7 +13638,7 @@ module.exports = {
               if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
                 ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH - 1]] = {};
               }
-            } 
+            }
           }
         }
         var newstep = turn.steps.root = {

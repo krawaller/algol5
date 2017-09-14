@@ -6,8 +6,6 @@ import * as reduce from 'lodash/reduce';
 import * as invert from 'lodash/invert';
 import * as uniq from 'lodash/uniq';
 
-import lib from '../logic/';
-
 import {Definition} from './types';
 
 
@@ -27,6 +25,19 @@ export function blankUnitLayers(gameDef: Definition){
     (mem,g)=>({ ...mem, [g]: {}, ['my'+g]: {}, ['opp'+g]: {}, ['neutral'+g]: {} }),
     {}
   );
+}
+
+export function isTerrainLayerRef(gameDef: Definition, name) {
+    let names = Object.keys(getTerrain(gameDef));
+    let variants = names.reduce((mem, n) => {
+      ['my','opp','neutral','no'].forEach(prefix => {
+        if (contains(gameDef,prefix+n)){
+          mem.push(prefix+n);
+        }
+      });
+      return mem;
+    }, []);
+    return names.concat(variants).indexOf(name) !== -1;
 }
 
 export function ifCodeContains(code: string, lines: {[needle: string]: string}) {
@@ -106,4 +117,20 @@ export function	possibilities(def){
 		: def[0] === 'ifplayer' ? possibilities(def[2])
 		: def[0] === 'indexlist' ? def[2]
 		: [def];
+}
+
+export function listlength(def){
+  if (def[0] === 'list'){
+    return listlength(def[1]);
+  } else if (def[0] === 'playercase'){
+    let len1 = listlength(def[1])
+    let len2 = listlength(def[2])
+    return len1 && len2 && len1 === len2 ? len1 : undefined;
+  } else if (def[0] === 'ifelse'){
+    let len1 = listlength(def[2])
+    let len2 = listlength(def[3])
+    return len1 && len2 && len1 === len2 ? len1 : undefined;
+  } else {
+    return def.length;
+  }
 }

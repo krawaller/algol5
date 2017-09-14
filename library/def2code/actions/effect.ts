@@ -1,10 +1,10 @@
 import * as map from 'lodash/map';
 
-import lib from '../../logic/';
 import { Definition } from '../types';
 import obey from '../obey';
+import makeExpr from '../expressions';
 
-// TODO - add action name!
+// TODO - add action name!!
 
 /*
 Effect methods will all mutate UNITDATA, which is assumed to have been
@@ -27,6 +27,8 @@ setturnvar and setturnpos mutates TURNVARS
 */
 
 function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string {
+  const expr = makeExpr(gameDef, player, "FILL IN ACTION HERE OMG!");
+  const action = "TODO: populate me for reals :(";
   const O = {rules: gameDef, player};
   const [type, ...args] = effect;
   switch(type){
@@ -78,14 +80,14 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       killid: (O,id)=> "delete UNITDATA["+C.id(O,id)+"]; ",
       */
       const [id] = args;
-      return `delete UNITDATA[${lib.id(O,id)}]; `;
+      return `delete UNITDATA[${expr.id(id)}]; `;
     }
     case "killat": {
       /*
       killat: (O,pos)=> "delete UNITDATA[ (UNITLAYERS.units["+C.position(O,pos)+"] || {}).id ]; ",
       */
       const [pos] = args;
-      return `delete UNITDATA[ (UNITLAYERS.units[${lib.position(O,pos)}] || {}).id ]; `;
+      return `delete UNITDATA[ (UNITLAYERS.units[${expr.position(pos)}] || {}).id ]; `;
     }
     case "killin": { // kill all in a set
       /*
@@ -103,8 +105,8 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       `,*/
       const [id,propname,val] = args;
       return `
-        UNITDATA[${lib.id(O,id)}]=Object.assign({},UNITDATA[${lib.id(O,id)}],{
-          ${lib.value(O,propname)}: ${lib.value(O,val)}
+        UNITDATA[${expr.id(id)}]=Object.assign({},UNITDATA[${expr.id(id)}],{
+          ${expr.value(propname)}: ${expr.value(val)}
         });
       `;
     }
@@ -119,9 +121,9 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       `*/
       const [pos,propname,val,andThen] = args;
       return `
-        var unitid = (UNITLAYERS.units[${lib.position(O,pos)}] || {}).id;
+        var unitid = (UNITLAYERS.units[${expr.position(pos)}] || {}).id;
         if (unitid){
-          UNITDATA[unitid]=Object.assign({},UNITDATA[unitid],{${lib.value(O,propname)}:${lib.value(O,val)}});
+          UNITDATA[unitid]=Object.assign({},UNITDATA[unitid],{${expr.value(propname)}:${expr.value(val)}});
           ${andThen ? executeEffect(gameDef, player, andThen) : ''}
         }
       `;
@@ -132,7 +134,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
         TURNVARS[${C.value(O,name)}] = ${C.value(O,val)};
       `,*/
       const [name,val] = args;
-      return `TURNVARS[${lib.value(O,name)}] = ${lib.value(O,val)}; `;
+      return `TURNVARS[${expr.value(name)}] = ${expr.value(val)}; `;
     }
     case "setturnpos": {
       /*
@@ -140,7 +142,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
         TURNVARS[${C.value(O,name)}] = ${C.position(O,pos)};
       `,*/
       const [name,pos] = args;
-      return `TURNVARS[${lib.value(O,name)}] = ${lib.position(O,pos)}; `;
+      return `TURNVARS[${expr.value(name)}] = ${expr.position(pos)}; `;
     }
     case "setin": {
       /*
@@ -165,11 +167,11 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       return `
         var newunitid = 'spawn'+(clones++);
         UNITDATA[newunitid] = {
-          pos: ${lib.position(O,pos)},
+          pos: ${expr.position(pos)},
           id: newunitid,
-          group: ${lib.value(O,group)},
-          owner: ${owner !== undefined ? lib.value(O,owner) : 'player' /* TODO player variable here? */ }
-          ${obj?","+map(obj,(val,key)=>key+":"+lib.value(O,val)).join(","):""}
+          group: ${expr.value(group)},
+          owner: ${owner !== undefined ? expr.value(owner) : 'player' /* TODO player variable here? */ }
+          ${obj?","+map(obj,(val,key)=>key+":"+expr.value(val)).join(","):""}
         }; 
       `;
     }
@@ -182,7 +184,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       `*/
       const [set,effect] = args;
       return `
-        for(var POS in ${lib.set(O,set)}){
+        for(var POS in ${expr.set(set)}){
           ${executeEffect(gameDef,player,effect)}
         }
       `;
@@ -203,7 +205,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
         `
       }*/
       const [set,effect] = args;
-      const setcode = lib.set(O,set);
+      const setcode = expr.set(set);
       const obvious = setcode.substr(0,10) === 'UNITLAYERS';
       return `
         var LOOPID;
@@ -229,9 +231,9 @@ function executeEffect(gameDef: Definition, player: 1 | 2, effect: any): string
       `*/
       const [id,dir,dist] = args;
       return `
-        var pushid = ${lib.id(O,id)};
-        var pushdir = ${lib.value(O,dir)};
-        var dist = ${lib.value(O,dist)};
+        var pushid = ${expr.id(id)};
+        var pushdir = ${expr.value(dir)};
+        var dist = ${expr.value(dist)};
         var newpos = UNITDATA[pushid].pos;
         while(dist && connections[newpos][pushdir]){
           newpos = connections[newpos][pushdir];

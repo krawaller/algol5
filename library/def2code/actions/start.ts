@@ -1,4 +1,4 @@
-import lib from '../../logic/';
+import value from '../expressions/value';
 
 import { Definition } from '../types';
 import {ifCodeContains,usesTurnVars,contains,blankArtifactLayers} from '../utils';
@@ -7,9 +7,8 @@ import applyLinkInstructions from './link';
 import applyGenerators from '../artifacts/generate';
 
 export default function addStartFunction(def: Definition, player: 1 | 2){
-  const O = {rules: def, player};
   const startDef = def.startTurn || {};
-  const instruction = lib.value(O, startDef.instruction||'');
+  const instruction = value(def, player, "start", startDef.instruction||'');
   return `
     game.start${player} = function(turn,step){
       var turn = {

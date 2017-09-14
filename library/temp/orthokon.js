@@ -91,7 +91,7 @@
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
             ARTIFACTS['movetargets'][walkedsquares[WALKLENGTH - 1]] = {};
-          } 
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -295,7 +295,7 @@
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
             ARTIFACTS['movetargets'][walkedsquares[WALKLENGTH - 1]] = {};
-          } 
+          }
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {

@@ -1,12 +1,14 @@
 import * as map from 'lodash/map';
 
-import lib from '../../logic/';
+import makeExpr from '../expressions';
 import { Definition } from '../types';
 import obey from '../obey';
 import applyGenerators from '../artifacts/generate';
 
+// TODO: Add action! 
+
 function addLink(gameDef: Definition, name: string, player: 1 | 2, root: boolean){
-  const O = {rules: gameDef, player};
+  const expr = makeExpr(gameDef, player, "ADD ACTION HERE OMG");
   if (gameDef && gameDef.commands && gameDef.commands[name]){
     return `
       turn.links${root ? '.root' : '[newstepid]'}.${name} = '${name+player}';
@@ -15,7 +17,7 @@ function addLink(gameDef: Definition, name: string, player: 1 | 2, root: boolea
     const markDef = gameDef.marks[name];
     return `
       var newlinks = turn.links${root ? '.root' : '[newstepid]'};
-      for(var linkpos in ${lib.set(O,markDef.from)}){
+      for(var linkpos in ${expr.set(markDef.from)}){
           newlinks[linkpos] = '${name+player}';
       }
     `;
@@ -24,10 +26,10 @@ function addLink(gameDef: Definition, name: string, player: 1 | 2, root: boolea
     let ret = applyGenerators(gameDef, endTurnDef, player, "endturn");
     //let ret = lib.applyGeneratorInstructions({...(O || {}), generating:true},endTurnDef || {})
     return ret + map(endTurnDef.unless,(cond,name)=> {
-      return 'if ('+lib.boolean(O,cond)+'){ turn.blockedby = "'+name+'"; } '
+      return 'if ('+expr.bool(cond)+'){ turn.blockedby = "'+name+'"; } '
     }).concat(map(gameDef.endGame,(def,name)=> `
-      if (${lib.boolean(O,def.condition)}) { 
-        var winner = ${lib.value(O,def.who||player)};
+      if (${expr.bool(def.condition)}) { 
+        var winner = ${expr.value(def.who||player)};
         var result = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
         turn.links[newstepid][result] = '${name}';
       }`

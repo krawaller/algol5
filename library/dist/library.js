@@ -1785,7 +1785,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'invade';
@@ -2024,7 +2024,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'invade';
@@ -2275,7 +2275,7 @@ module.exports = {
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madewinline';
@@ -2469,7 +2469,7 @@ module.exports = {
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madewinline';
@@ -2789,12 +2789,12 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
         } else
-        if (Object.keys(UNITLAYERS.oppunits ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.oppunits).length === 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'genocide';
@@ -3001,12 +3001,12 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
         } else
-        if (Object.keys(UNITLAYERS.oppunits ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.oppunits).length === 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'genocide';
@@ -3163,16 +3163,16 @@ module.exports = {
           name: 'selectdrop'
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.uphill ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.uphill).length !== 0) {
           turn.links[newstepid].uphill = 'uphill1';
         }
-        if (Object.keys(ARTIFACTS.downhill ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.downhill).length !== 0) {
           turn.links[newstepid].downhill = 'downhill1';
         }
-        if (Object.keys(ARTIFACTS.vertical ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.vertical).length !== 0) {
           turn.links[newstepid].vertical = 'vertical1';
         }
-        if (Object.keys(ARTIFACTS.horisontal ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
           turn.links[newstepid].horisontal = 'horisontal1';
         }
         return newstep;
@@ -3265,10 +3265,10 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -3363,10 +3363,10 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -3461,10 +3461,10 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -3559,10 +3559,10 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -3623,7 +3623,7 @@ module.exports = {
           path: []
         };
         var newlinks = turn.links.root;
-        for (var linkpos in (Object.keys(UNITLAYERS.markers ||  {}).length === 0 ? BOARD.board : UNITLAYERS.markers)) {
+        for (var linkpos in (Object.keys(UNITLAYERS.markers).length === 0 ? BOARD.board : UNITLAYERS.markers)) {
           newlinks[linkpos] = 'selectdrop1';
         }
         return turn;
@@ -3673,16 +3673,16 @@ module.exports = {
           name: 'selectdrop'
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.uphill ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.uphill).length !== 0) {
           turn.links[newstepid].uphill = 'uphill2';
         }
-        if (Object.keys(ARTIFACTS.downhill ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.downhill).length !== 0) {
           turn.links[newstepid].downhill = 'downhill2';
         }
-        if (Object.keys(ARTIFACTS.vertical ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.vertical).length !== 0) {
           turn.links[newstepid].vertical = 'vertical2';
         }
-        if (Object.keys(ARTIFACTS.horisontal ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
           turn.links[newstepid].horisontal = 'horisontal2';
         }
         return newstep;
@@ -3775,10 +3775,10 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -3873,10 +3873,10 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -3971,10 +3971,10 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -4069,10 +4069,10 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -4133,7 +4133,7 @@ module.exports = {
           path: []
         };
         var newlinks = turn.links.root;
-        for (var linkpos in (Object.keys(UNITLAYERS.markers ||  {}).length === 0 ? BOARD.board : UNITLAYERS.markers)) {
+        for (var linkpos in (Object.keys(UNITLAYERS.markers).length === 0 ? BOARD.board : UNITLAYERS.markers)) {
           newlinks[linkpos] = 'selectdrop2';
         }
         return turn;
@@ -4372,7 +4372,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -4587,7 +4587,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -5033,12 +5033,12 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
         } else
-        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings ||  {}).length === 0)) {
+        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings).length === 0)) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'kingkill';
@@ -5112,12 +5112,12 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
         } else
-        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings ||  {}).length === 0)) {
+        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings).length === 0)) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'kingkill';
@@ -5192,12 +5192,12 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
         } else
-        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings ||  {}).length === 0)) {
+        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings).length === 0)) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'kingkill';
@@ -5609,12 +5609,12 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
         } else
-        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings ||  {}).length === 0)) {
+        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings).length === 0)) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'kingkill';
@@ -5688,12 +5688,12 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
         } else
-        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings ||  {}).length === 0)) {
+        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings).length === 0)) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'kingkill';
@@ -5768,12 +5768,12 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
         } else
-        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings ||  {}).length === 0)) {
+        if (((turn.turn > 2) && Object.keys(UNITLAYERS.oppkings).length === 0)) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'kingkill';
@@ -6552,7 +6552,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -6751,7 +6751,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -7254,7 +7254,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'cornerinfiltration';
@@ -7690,7 +7690,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'cornerinfiltration';
@@ -8632,7 +8632,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -8704,7 +8704,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -9549,7 +9549,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -9621,7 +9621,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -10081,7 +10081,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -10168,7 +10168,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -10246,7 +10246,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -10346,7 +10346,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -10728,7 +10728,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -10815,7 +10815,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -10893,7 +10893,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -10993,7 +10993,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -11713,7 +11713,7 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.line).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -11795,7 +11795,7 @@ module.exports = {
           path: step.path.concat('promote')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.line).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -12011,7 +12011,7 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.line).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -12093,7 +12093,7 @@ module.exports = {
           path: step.path.concat('promote')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.line ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.line).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -12397,7 +12397,7 @@ module.exports = {
           path: step.path.concat('makewild')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -12557,7 +12557,7 @@ module.exports = {
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -12794,7 +12794,7 @@ module.exports = {
           path: step.path.concat('makewild')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -12954,7 +12954,7 @@ module.exports = {
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -13201,7 +13201,7 @@ module.exports = {
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var clones = step.clones;
         var UNITLAYERS = step.UNITLAYERS;
-        if (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.mysniper).length === 0) {
           var newunitid = 'spawn' + (clones++);
           UNITDATA[newunitid] = {
             pos: MARKS['selecttarget'],
@@ -13217,7 +13217,7 @@ module.exports = {
             });
           }
         }
-        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+        if (Object.keys(UNITLAYERS.oppsniper).length !== 0) {
           if (!!(UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]])) {
             var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
             if (unitid) {
@@ -13294,12 +13294,12 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
         } else
-        if (Object.keys(ARTIFACTS.loseline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.loseline).length !== 0) {
           var winner = 2;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeoppline';
@@ -13349,7 +13349,7 @@ module.exports = {
           var owner = ownernames[currentunit.owner]
           UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
         }
-        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+        if (Object.keys(UNITLAYERS.oppsniper).length !== 0) {
           var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
           var POS = STARTPOS;
           while ((POS = connections[POS][3])) {
@@ -13392,7 +13392,7 @@ module.exports = {
           path: []
         };
         var newlinks = turn.links.root;
-        for (var linkpos in (Object.keys(ARTIFACTS.mandatory ||  {}).length === 0 ?
+        for (var linkpos in (Object.keys(ARTIFACTS.mandatory).length === 0 ?
             (function() {
               var ret = {},
                 s0 = TERRAIN.myzone,
@@ -13461,7 +13461,7 @@ module.exports = {
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var clones = step.clones;
         var UNITLAYERS = step.UNITLAYERS;
-        if (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.mysniper).length === 0) {
           var newunitid = 'spawn' + (clones++);
           UNITDATA[newunitid] = {
             pos: MARKS['selecttarget'],
@@ -13477,7 +13477,7 @@ module.exports = {
             });
           }
         }
-        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+        if (Object.keys(UNITLAYERS.oppsniper).length !== 0) {
           if (!!(UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]])) {
             var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
             if (unitid) {
@@ -13554,12 +13554,12 @@ module.exports = {
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
         } else
-        if (Object.keys(ARTIFACTS.loseline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.loseline).length !== 0) {
           var winner = 1;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeoppline';
@@ -13609,7 +13609,7 @@ module.exports = {
           var owner = ownernames[currentunit.owner]
           UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
         }
-        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+        if (Object.keys(UNITLAYERS.oppsniper).length !== 0) {
           var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
           var POS = STARTPOS;
           while ((POS = connections[POS][5])) {
@@ -13652,7 +13652,7 @@ module.exports = {
           path: []
         };
         var newlinks = turn.links.root;
-        for (var linkpos in (Object.keys(ARTIFACTS.mandatory ||  {}).length === 0 ?
+        for (var linkpos in (Object.keys(ARTIFACTS.mandatory).length === 0 ?
             (function() {
               var ret = {},
                 s0 = TERRAIN.myzone,
@@ -13865,7 +13865,7 @@ module.exports = {
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.musketeerline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
           var winner = 2;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'musketeersinline';
@@ -14083,7 +14083,7 @@ module.exports = {
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.musketeerline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'musketeersinline';
@@ -14446,7 +14446,7 @@ module.exports = {
           name: 'selectswap1target'
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.swap2step ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.swap2step).length !== 0) {
           turn.links[newstepid].swap = 'swap1';
         }
         return newstep;
@@ -14530,7 +14530,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -14610,7 +14610,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -14884,7 +14884,7 @@ module.exports = {
           name: 'selectswap1target'
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.swap2step ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.swap2step).length !== 0) {
           turn.links[newstepid].swap = 'swap2';
         }
         return newstep;
@@ -14968,7 +14968,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -15048,7 +15048,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -15332,7 +15332,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'swanhome';
@@ -15528,7 +15528,7 @@ module.exports = {
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'swanhome';

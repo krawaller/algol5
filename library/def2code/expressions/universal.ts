@@ -27,22 +27,3 @@ export default function withUniversal(parser){
     return innerUniversal(gameDef, player, action, parser, expression);
   }
 }
-
-
-/*
-    const universal = {
-        ifelse: (datatype)=> (O,[bool,alt1,alt2])=> {
-            if (typeof T[datatype] !== "function"){
-                console.log("ODIWNFE",datatype,"FOO",typeof T[datatype],T[datatype])
-            }
-            return "(" + T.boolean(O,bool) + "?" + T[datatype](O,alt1) + ":" + T[datatype](O,alt2) + ")"
-        },
-        playercase: (datatype)=> (O,[alt1,alt2])=> T[datatype](O,O.player === 1 ? alt1 : alt2),
-        actionor: (datatype)=> (O,[action,alt1,alt2])=> {
-            if (!T[datatype]){
-                console.log("ALARM",datatype)
-            }
-            return T[datatype](O,O.cmndname===action||O.markname===action||O.name===action||O.action===action?alt1:alt2)
-        }
-    }
-*/

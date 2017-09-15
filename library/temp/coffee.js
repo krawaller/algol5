@@ -88,16 +88,16 @@
           name: 'selectdrop'
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.uphill ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.uphill).length !== 0) {
           turn.links[newstepid].uphill = 'uphill1';
         }
-        if (Object.keys(ARTIFACTS.downhill ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.downhill).length !== 0) {
           turn.links[newstepid].downhill = 'downhill1';
         }
-        if (Object.keys(ARTIFACTS.vertical ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.vertical).length !== 0) {
           turn.links[newstepid].vertical = 'vertical1';
         }
-        if (Object.keys(ARTIFACTS.horisontal ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
           turn.links[newstepid].horisontal = 'horisontal1';
         }
         return newstep;
@@ -190,10 +190,10 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -288,10 +288,10 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -386,10 +386,10 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -484,10 +484,10 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -548,7 +548,7 @@
           path: []
         };
         var newlinks = turn.links.root;
-        for (var linkpos in (Object.keys(UNITLAYERS.markers ||  {}).length === 0 ? BOARD.board : UNITLAYERS.markers)) {
+        for (var linkpos in (Object.keys(UNITLAYERS.markers).length === 0 ? BOARD.board : UNITLAYERS.markers)) {
           newlinks[linkpos] = 'selectdrop1';
         }
         return turn;
@@ -598,16 +598,16 @@
           name: 'selectdrop'
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.uphill ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.uphill).length !== 0) {
           turn.links[newstepid].uphill = 'uphill2';
         }
-        if (Object.keys(ARTIFACTS.downhill ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.downhill).length !== 0) {
           turn.links[newstepid].downhill = 'downhill2';
         }
-        if (Object.keys(ARTIFACTS.vertical ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.vertical).length !== 0) {
           turn.links[newstepid].vertical = 'vertical2';
         }
-        if (Object.keys(ARTIFACTS.horisontal ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
           turn.links[newstepid].horisontal = 'horisontal2';
         }
         return newstep;
@@ -700,10 +700,10 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -798,10 +798,10 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -896,10 +896,10 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -994,10 +994,10 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(UNITLAYERS.markers ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.markers).length === 0) {
           turn.blockedby = "nolegal";
         } else
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -1058,7 +1058,7 @@
           path: []
         };
         var newlinks = turn.links.root;
-        for (var linkpos in (Object.keys(UNITLAYERS.markers ||  {}).length === 0 ? BOARD.board : UNITLAYERS.markers)) {
+        for (var linkpos in (Object.keys(UNITLAYERS.markers).length === 0 ? BOARD.board : UNITLAYERS.markers)) {
           newlinks[linkpos] = 'selectdrop2';
         }
         return turn;

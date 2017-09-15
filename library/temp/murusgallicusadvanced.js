@@ -383,7 +383,7 @@
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -470,7 +470,7 @@
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -548,7 +548,7 @@
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -648,7 +648,7 @@
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -1030,7 +1030,7 @@
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -1117,7 +1117,7 @@
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -1195,7 +1195,7 @@
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
@@ -1295,7 +1295,7 @@
                 }
               }
               return ret;
-            }()) ||  {}).length !== 0) {
+            }())).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';

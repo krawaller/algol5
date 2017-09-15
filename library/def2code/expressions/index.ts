@@ -13,7 +13,9 @@ export default function parseExpression(gameDef: Definition, player: 1 | 2, act
     id: (expr) => id(gameDef, player, action, expr),
     list: (expr) => list(gameDef, player, action, expr),
     position: (expr) => position(gameDef, player, action, expr),
+    pos: (expr) => position(gameDef, player, action, expr),
     set: (expr) => set(gameDef, player, action, expr),
     value: (expr) => value(gameDef, player, action, expr),
+    val: (expr) => value(gameDef, player, action, expr),
   };
 }

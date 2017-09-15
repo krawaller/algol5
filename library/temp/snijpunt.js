@@ -117,7 +117,7 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var clones = step.clones;
         var UNITLAYERS = step.UNITLAYERS;
-        if (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.mysniper).length === 0) {
           var newunitid = 'spawn' + (clones++);
           UNITDATA[newunitid] = {
             pos: MARKS['selecttarget'],
@@ -133,7 +133,7 @@
             });
           }
         }
-        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+        if (Object.keys(UNITLAYERS.oppsniper).length !== 0) {
           if (!!(UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]])) {
             var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
             if (unitid) {
@@ -210,12 +210,12 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
         } else
-        if (Object.keys(ARTIFACTS.loseline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.loseline).length !== 0) {
           var winner = 2;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeoppline';
@@ -265,7 +265,7 @@
           var owner = ownernames[currentunit.owner]
           UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
         }
-        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+        if (Object.keys(UNITLAYERS.oppsniper).length !== 0) {
           var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
           var POS = STARTPOS;
           while ((POS = connections[POS][3])) {
@@ -308,7 +308,7 @@
           path: []
         };
         var newlinks = turn.links.root;
-        for (var linkpos in (Object.keys(ARTIFACTS.mandatory ||  {}).length === 0 ?
+        for (var linkpos in (Object.keys(ARTIFACTS.mandatory).length === 0 ?
             (function() {
               var ret = {},
                 s0 = TERRAIN.myzone,
@@ -377,7 +377,7 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var clones = step.clones;
         var UNITLAYERS = step.UNITLAYERS;
-        if (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0) {
+        if (Object.keys(UNITLAYERS.mysniper).length === 0) {
           var newunitid = 'spawn' + (clones++);
           UNITDATA[newunitid] = {
             pos: MARKS['selecttarget'],
@@ -393,7 +393,7 @@
             });
           }
         }
-        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+        if (Object.keys(UNITLAYERS.oppsniper).length !== 0) {
           if (!!(UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]])) {
             var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
             if (unitid) {
@@ -470,12 +470,12 @@
           clones: clones
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
         } else
-        if (Object.keys(ARTIFACTS.loseline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.loseline).length !== 0) {
           var winner = 1;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeoppline';
@@ -525,7 +525,7 @@
           var owner = ownernames[currentunit.owner]
           UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
         }
-        if (Object.keys(UNITLAYERS.oppsniper ||  {}).length !== 0) {
+        if (Object.keys(UNITLAYERS.oppsniper).length !== 0) {
           var STARTPOS = Object.keys(UNITLAYERS.oppsniper)[0];
           var POS = STARTPOS;
           while ((POS = connections[POS][5])) {
@@ -568,7 +568,7 @@
           path: []
         };
         var newlinks = turn.links.root;
-        for (var linkpos in (Object.keys(ARTIFACTS.mandatory ||  {}).length === 0 ?
+        for (var linkpos in (Object.keys(ARTIFACTS.mandatory).length === 0 ?
             (function() {
               var ret = {},
                 s0 = TERRAIN.myzone,

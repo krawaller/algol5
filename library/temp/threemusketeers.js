@@ -183,7 +183,7 @@
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.musketeerline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
           var winner = 2;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'musketeersinline';
@@ -401,7 +401,7 @@
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.musketeerline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'musketeersinline';

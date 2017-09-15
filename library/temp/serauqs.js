@@ -199,7 +199,7 @@
           path: step.path.concat('makewild')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -359,7 +359,7 @@
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -596,7 +596,7 @@
           path: step.path.concat('makewild')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
@@ -756,7 +756,7 @@
           path: step.path.concat('move')
         });
         turn.links[newstepid] = {};
-        if (Object.keys(ARTIFACTS.winline ||  {}).length !== 0) {
+        if (Object.keys(ARTIFACTS.winline).length !== 0) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';

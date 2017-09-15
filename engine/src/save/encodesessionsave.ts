@@ -1,4 +1,4 @@
-import { compress } from 'array-compress';
+import { compress } from '../../lib/array-compress';
 import { encodeGameId } from '../id/gameid';
 
 import * as LZ from 'lz-string';

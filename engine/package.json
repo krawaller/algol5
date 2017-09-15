@@ -21,7 +21,6 @@
     "play": "babel-node play"
   },
   "dependencies": {
-    "array-compress": "^1.0.12",
     "classical-cipher": "0.0.3",
     "js-string-compression": "^1.0.1",
     "lodash": "4.17.4",

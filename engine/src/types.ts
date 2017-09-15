@@ -18,7 +18,7 @@ export type UI = {
   }[],
   units: {
     [id: string]: {
-      group: string,
+      icon: string,
       coords: Coords,
       spawnCoords?: Coords
     }

@@ -1,4 +1,4 @@
-import { inflate } from 'array-compress';
+import { inflate } from '../../lib/array-compress';
 
 import * as LZ from 'lz-string';
 

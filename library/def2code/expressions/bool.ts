@@ -80,24 +80,3 @@ function innerBool(gameDef: Definition, player: 1 | 2, action: string, expressi
 const bool = withUniversal(innerBool);
 
 export default bool;
-
-/*
-        bool_truthy: (O,[value])=> "!!" + T.value(O,value),
-        bool_falsy: (O,[value])=> "!" + T.value(O,value),
-        bool_same: (O,[v1,v2])=> "(" + T.value(O,v1) + "===" + T.value(O,v2) + ")",
-        bool_different: (O,[v1,v2])=> "(" + T.value(O,v1) + "!==" + T.value(O,v2) + ")",
-        bool_morethan: (O,[v1,v2])=> "(" + T.value(O,v1) + ">" + T.value(O,v2) + ")",
-        bool_anyat: (O,[set,pos])=> "!!("+T.set(O,set)+"["+T.position(O,pos)+"])",
-        bool_noneat: (O,[set,pos])=> "!("+T.set(O,set)+"["+T.position(O,pos)+"])",
-        bool_overlaps: (O,[s1,s2])=> T.boolean(O,['notempty',['intersect',s1,s2]]),  //"(!isEmpty("+T.set(O,["intersect",s1,s2])+"))",
-        bool_isempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length===0",
-        bool_notempty: (O,[s1])=> "Object.keys("+T.set(O,s1)+" || {}).length!==0",
-        bool_and: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" && ") + ")",
-        bool_or: (O,bools)=> "(" + bools.map(b=>T.boolean(O,b)).join(" || ") + ")",
-        bool_not: (O,[bool])=> "!"+T.boolean(O,bool),
-        bool_true: (O)=> "true",
-        bool_false: (O)=> "false",
-        bool_valinlist: (O,[val,list])=> '('+T.list(O,list)+'.indexOf('+T.value(O,val)+')!==-1)',
-        bool_justinone: (O,[pos,set1,set2])=> `((TEMP=${T.position(O,pos)}) && !${T.set(O,set1)}[TEMP] !== !${T.set(O,set2)}[TEMP])`,
-
-*/

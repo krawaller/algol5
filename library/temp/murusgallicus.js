@@ -263,12 +263,10 @@
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length +
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) +
-          2 *
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) -
           10000 * Object.keys(
@@ -342,10 +340,9 @@
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 *
-            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
+          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
           oppwinmoves: -10000 * Object.keys(
             (function() {
               var k, ret = {},
@@ -403,12 +400,10 @@
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length +
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) +
-          2 *
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) -
           100 * Object.keys(
@@ -470,10 +465,9 @@
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 *
-            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
+          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
           oppwinmoves: -100 * Object.keys(
             (function() {
               var k, ret = {},
@@ -566,8 +560,7 @@
             }
           }
         }
-        return Object.keys(ARTIFACTS.mymoves).length + 3 *
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+        return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) +
           Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
@@ -654,10 +647,9 @@
         }
         return {
           mymoves: Object.keys(ARTIFACTS.mymoves).length,
-          mytowerpos: 3 *
-            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
+          mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
@@ -1194,12 +1186,10 @@
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length +
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) +
-          2 *
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) -
           10000 * Object.keys(
@@ -1273,10 +1263,9 @@
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 *
-            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
+          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
           oppwinmoves: -10000 * Object.keys(
             (function() {
               var k, ret = {},
@@ -1334,12 +1323,10 @@
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length +
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) +
-          2 *
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+          2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) -
           100 * Object.keys(
@@ -1401,10 +1388,9 @@
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 *
-            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
+          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
           oppwinmoves: -100 * Object.keys(
             (function() {
               var k, ret = {},
@@ -1497,8 +1483,7 @@
             }
           }
         }
-        return Object.keys(ARTIFACTS.mymoves).length + 3 *
-          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+        return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0) +
           Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
@@ -1585,10 +1570,9 @@
         }
         return {
           mymoves: Object.keys(ARTIFACTS.mymoves).length,
-          mytowerpos: 3 *
-            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-              return mem + (mybasic[pos] || 0);
-            }, 0),
+          mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0),
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),

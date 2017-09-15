@@ -91,19 +91,19 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
     }
     case "harvest": {
       const [set,prop] = args;
-      return `
-        reduce(${parse.set(set)},function(mem,obj){
+      return (
+       `reduce(${parse.set(set)},function(mem,obj){
           return mem+obj[${parse.val(prop)}];
         },0)
-      `;
+      `);
     }
     case "score": { // TODO - real reduce, or do object.keys above too? also, parse score name?
       const [set,score] = args;
-      return `
-        Object.keys(${parse.set(set)}).reduce(function(mem,pos){
+      return (
+        `Object.keys(${parse.set(set)}).reduce(function(mem,pos){
           return mem + (${score}[pos]||0);
         },0)
-      `;
+      `);
     }
     case "turn": {
       return "turn.turn";

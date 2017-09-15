@@ -20,5 +20,6 @@ export default function findBestTurnEndPaths({game,turn}:Session, brain: string)
       }
     }
   }
+  console.log("FFS",winners,"OMG",turn.ends)
   return winners;
 }

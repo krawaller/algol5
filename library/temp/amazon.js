@@ -92,12 +92,10 @@
             }
           }
         }
-        return
-        reduce(ARTIFACTS.myroads, function(mem, obj) {
+        return reduce(ARTIFACTS.myroads, function(mem, obj) {
             return mem + obj['count'];
           }, 0) +
-          Object.keys(ARTIFACTS.myreach).length -
-          reduce(ARTIFACTS.opproads, function(mem, obj) {
+          Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
             return mem + obj['count'];
           }, 0) -
           Object.keys(ARTIFACTS.oppreach).length;
@@ -140,10 +138,9 @@
             return mem + obj['count'];
           }, 0),
           mydomain: Object.keys(ARTIFACTS.myreach).length,
-          opproads: -
-            reduce(ARTIFACTS.opproads, function(mem, obj) {
-              return mem + obj['count'];
-            }, 0),
+          opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0),
           oppdomain: -Object.keys(ARTIFACTS.oppreach).length
         };
       };
@@ -448,12 +445,10 @@
             }
           }
         }
-        return
-        reduce(ARTIFACTS.myroads, function(mem, obj) {
+        return reduce(ARTIFACTS.myroads, function(mem, obj) {
             return mem + obj['count'];
           }, 0) +
-          Object.keys(ARTIFACTS.myreach).length -
-          reduce(ARTIFACTS.opproads, function(mem, obj) {
+          Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
             return mem + obj['count'];
           }, 0) -
           Object.keys(ARTIFACTS.oppreach).length;
@@ -496,10 +491,9 @@
             return mem + obj['count'];
           }, 0),
           mydomain: Object.keys(ARTIFACTS.myreach).length,
-          opproads: -
-            reduce(ARTIFACTS.opproads, function(mem, obj) {
-              return mem + obj['count'];
-            }, 0),
+          opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0),
           oppdomain: -Object.keys(ARTIFACTS.oppreach).length
         };
       };

@@ -17,8 +17,7 @@
     "bundleasync": "cd dist; workerwrap algol.js",
     "build": "npm run bundle && npm run bundleasync",
     "oldtest": "cd test; babel-node run.js",
-    "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec",
-    "play": "babel-node play"
+    "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec"
   },
   "dependencies": {
     "classical-cipher": "0.0.3",

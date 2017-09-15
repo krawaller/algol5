@@ -1,5 +1,4 @@
-import value from '../expressions/value';
-
+import makeExpr from '../expressions';
 import { Definition } from '../types';
 import {ifCodeContains,usesTurnVars,contains,blankArtifactLayers} from '../utils';
 import { calculateUnitLayers } from '../common';
@@ -7,8 +6,9 @@ import applyLinkInstructions from './link';
 import applyGenerators from '../artifacts/generate';
 
 export default function addStartFunction(def: Definition, player: 1 | 2){
+  const expr = makeExpr(def, player, "start");
   const startDef = def.startTurn || {};
-  const instruction = value(def, player, "start", startDef.instruction||'');
+  const instruction = expr.val(startDef.instruction||'');
   return `
     game.start${player} = function(turn,step){
       var turn = {

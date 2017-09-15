@@ -5,10 +5,8 @@ import { Definition } from '../types';
 import obey from '../obey';
 import applyGenerators from '../artifacts/generate';
 
-// TODO: Add action! 
-
 function addLink(gameDef: Definition, player: 1 | 2, action: string, name: string, root: boolean){
-  const expr = makeExpr(gameDef, player, "ADD ACTION HERE OMG");
+  const expr = makeExpr(gameDef, player, action);
   if (gameDef && gameDef.commands && gameDef.commands[name]){
     return `
       turn.links${root ? '.root' : '[newstepid]'}.${name} = '${name+player}';

@@ -91,7 +91,7 @@
       };
       game.selectunit1instruction = function(step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length));
+        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + ''));
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -121,14 +121,14 @@
           name: 'selectmovetarget'
         });
         turn.links[newstepid] = {};
-        if ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length) > Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)) {
+        if (((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) > (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length))) {
           turn.links[newstepid].jostle = 'jostle1';
         }
         return newstep;
       };
       game.selectmovetarget1instruction = function(step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)));
+        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + ''));
       };
       game.jostle1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -282,7 +282,7 @@
       };
       game.selectunit2instruction = function(step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length));
+        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + ''));
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -312,14 +312,14 @@
           name: 'selectmovetarget'
         });
         turn.links[newstepid] = {};
-        if ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length) > Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)) {
+        if (((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) > (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length))) {
           turn.links[newstepid].jostle = 'jostle2';
         }
         return newstep;
       };
       game.selectmovetarget2instruction = function(step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)));
+        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + ''));
       };
       game.jostle2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});

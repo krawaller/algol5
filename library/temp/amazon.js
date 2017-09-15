@@ -92,11 +92,15 @@
             }
           }
         }
-        return reduce(ARTIFACTS.myroads, function(mem, obj) {
-          return mem + obj['count'];
-        }, 0) + Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
-          return mem + obj['count'];
-        }, 0) - Object.keys(ARTIFACTS.oppreach).length;
+        return
+        reduce(ARTIFACTS.myroads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0) +
+          Object.keys(ARTIFACTS.myreach).length -
+          reduce(ARTIFACTS.opproads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0) -
+          Object.keys(ARTIFACTS.oppreach).length;
       };
       game.brain_Steve_1_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -136,9 +140,10 @@
             return mem + obj['count'];
           }, 0),
           mydomain: Object.keys(ARTIFACTS.myreach).length,
-          opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
-          }, 0),
+          opproads: -
+            reduce(ARTIFACTS.opproads, function(mem, obj) {
+              return mem + obj['count'];
+            }, 0),
           oppdomain: -Object.keys(ARTIFACTS.oppreach).length
         };
       };
@@ -443,11 +448,15 @@
             }
           }
         }
-        return reduce(ARTIFACTS.myroads, function(mem, obj) {
-          return mem + obj['count'];
-        }, 0) + Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
-          return mem + obj['count'];
-        }, 0) - Object.keys(ARTIFACTS.oppreach).length;
+        return
+        reduce(ARTIFACTS.myroads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0) +
+          Object.keys(ARTIFACTS.myreach).length -
+          reduce(ARTIFACTS.opproads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0) -
+          Object.keys(ARTIFACTS.oppreach).length;
       };
       game.brain_Steve_2_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -487,9 +496,10 @@
             return mem + obj['count'];
           }, 0),
           mydomain: Object.keys(ARTIFACTS.myreach).length,
-          opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
-          }, 0),
+          opproads: -
+            reduce(ARTIFACTS.opproads, function(mem, obj) {
+              return mem + obj['count'];
+            }, 0),
           oppdomain: -Object.keys(ARTIFACTS.oppreach).length
         };
       };

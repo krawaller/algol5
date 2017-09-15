@@ -2,12 +2,11 @@ import * as isArray from 'lodash/isArray';
 import * as tail from 'lodash/tail';
 
 import { Definition } from '../types';
-import withUniversal from './universal';
 import {layerRef} from '../common';
-import position from './position';
-import value from './value';
+import makeParser from './';
 
-function innerSet(gameDef: Definition, player: 1 | 2, action: string, expression){
+export default function parseSet(gameDef: Definition, player: 1 | 2, action: string, expression){
+  const parse = makeParser(gameDef, player, action, "set");
   if (!isArray(expression)){
     return layerRef(gameDef, player, action, expression);
   }
@@ -22,14 +21,14 @@ function innerSet(gameDef: Definition, player: 1 | 2, action: string, expressio
       return `
         (function(){
             var ret = {};
-            ret[${position(gameDef,player,action,pos)}]=1;
+            ret[${parse.position(pos)}]=1;
             return ret;
         }())`;
     }
     case "union": {
       const sets = details;
       let ret = '',
-          setdefs = sets.map((def,n)=>'s'+n+' = '+set(gameDef,player,action,def)).join(', '),
+          setdefs = sets.map((def,n)=>'s'+n+' = '+parse.set(def)).join(', '),
           copies = sets.map((def,n)=>'for(k in s'+n+'){ret[k]=1;}').join(' ');
       return `
         (function(){
@@ -41,7 +40,7 @@ function innerSet(gameDef: Definition, player: 1 | 2, action: string, expressio
     case "intersect": {
       const sets = details;
       let ret = '',
-          setdefs = sets.map((def,n)=>'s'+n+' = '+set(gameDef,player,action,def)).join(', '),
+          setdefs = sets.map((def,n)=>'s'+n+' = '+parse.set(def)).join(', '),
           test = tail(sets).map((def,n)=>'s'+(n+1)+'[key]').join(' && ');
       return `
         (function(){
@@ -57,7 +56,7 @@ function innerSet(gameDef: Definition, player: 1 | 2, action: string, expressio
     case "subtract": {
       const sets = details;
       let ret = '',
-          setdefs = sets.map((def,n)=>'s'+n+' = '+set(gameDef,player,action,def)).join(', '),
+          setdefs = sets.map((def,n)=>'s'+n+' = '+parse.set(def)).join(', '),
           test = tail(sets).map((def,n)=>'!s'+(n+1)+'[key]').join(' && ');
       return `
         (function(){
@@ -72,14 +71,10 @@ function innerSet(gameDef: Definition, player: 1 | 2, action: string, expressio
     }
     case "unitlayer": { // TODO - anyone ever using this?
       const [layerName] = details;
-      return 'UNITLAYERS['+value(gameDef,player,action,layerName)+']';
+      return 'UNITLAYERS['+parse.value(layerName)+']';
     }
     default:
       console.log("Unknown set", expression);
       throw "UNKNOWN SET DEF! " + expression;
   }
 }
-
-const set = withUniversal(innerSet);
-
-export default set;

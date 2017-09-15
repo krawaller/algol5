@@ -4,18 +4,19 @@ import list from './list';
 import position from './position';
 import set from './set';
 import value from './value';
+import universal from './universal';
 
 import { Definition } from '../types';
 
-export default function parseExpression(gameDef: Definition, player: 1 | 2, action: string){
-  return {
-    bool: (expr) => bool(gameDef, player, action, expr),
-    id: (expr) => id(gameDef, player, action, expr),
-    list: (expr) => list(gameDef, player, action, expr),
-    position: (expr) => position(gameDef, player, action, expr),
-    pos: (expr) => position(gameDef, player, action, expr),
-    set: (expr) => set(gameDef, player, action, expr),
-    value: (expr) => value(gameDef, player, action, expr),
-    val: (expr) => value(gameDef, player, action, expr),
-  };
+export default function makeParser(gameDef: Definition, player: 1 | 2, action: string, from?: string){
+  return ({
+    bool: expr => universal(gameDef, player, action, bool, expr, from),
+    id: expr => universal(gameDef, player, action, id, expr, from),
+    list: expr => universal(gameDef, player, action, list, expr, from),
+    position: expr => universal(gameDef, player, action, position, expr, from),
+    pos: expr => universal(gameDef, player, action, position, expr, from),
+    set: expr => universal(gameDef, player, action, set, expr, from),
+    value: expr => universal(gameDef, player, action, value, expr, from),
+    val: expr => universal(gameDef, player, action, value, expr, from),
+  });
 }

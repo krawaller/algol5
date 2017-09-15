@@ -1,7 +1,7 @@
 import {blankArtifactLayers,generatorLayers,possibilities,blankUnitLayers,isTerrainLayerRef} from './utils';
 import {Definition} from './types';
 import * as isArray from 'lodash/isArray';
-import value from './expressions/value';
+import makeParser from './expressions';
 
 export function copyArtifactsForAction(gameDef: Definition, actionDef) {
   let actionlayers = Object.keys((actionDef.runGenerators||[]).concat(actionDef.runGenerator ? [actionDef.runGenerator] : []).reduce((mem,gen)=> {
@@ -22,8 +22,9 @@ export function copyArtifactsForAction(gameDef: Definition, actionDef) {
 }
 
 export function layerRef(gameDef: Definition, player: 1 | 2, action: string, layername){
+  const parse = makeParser(gameDef, player, action);
   if (isArray(layername)){
-    layername = value(gameDef, player, action, layername);
+    layername = parse.val(layername);
   }
   var bag = {board:1,light:1,dark:1}[layername] ? "BOARD"
     : blankUnitLayers(gameDef)[layername] ? "UNITLAYERS"

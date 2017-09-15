@@ -1,7 +1,5 @@
 import * as reduce from 'lodash/reduce';
-
-import value from './expressions/value';
-
+import makeParser from './expressions';
 import {coords2pos, generatorLayers} from './utils';
 
 import { Definition } from './types';
@@ -9,23 +7,25 @@ import {executeGenerator} from './artifacts/generate';
 
 
 function calculateBrainScore(gameDef: Definition, player: 1 | 2, brain: string){
+  const parse = makeParser(gameDef, player, brain);
   let aspects = gameDef.AI.aspects;
   let plus = reduce(gameDef.AI.brains[brain].plus,(mem,weight,name)=>
-      mem.concat( (weight === 1 ? '' : weight+' * ')+value(gameDef,player,brain,aspects[name]) )
+      mem.concat( (weight === 1 ? '' : weight+' * ')+parse.val(aspects[name]) )
   ,[]).join(' + ');
   let minus = reduce(gameDef.AI.brains[brain].minus,(mem,weight,name)=>
-      mem + ' - ' + (weight === 1 ? '' : weight+' * ')+value(gameDef,player,brain,aspects[name])
+      mem + ' - ' + (weight === 1 ? '' : weight+' * ')+parse.val(aspects[name])
   ,'');
   return plus + minus;
 }
 
 function calculateDetailedBrainScore(gameDef: Definition, player: 1 | 2, brain: string){
+  const parse = makeParser(gameDef, player, brain);
   let aspects = gameDef.AI.aspects
   let plus = reduce(gameDef.AI.brains[brain].plus,(mem,weight,name)=>
-      mem.concat(name+': '+(weight === 1 ? '' : weight+' * ')+value(gameDef,player,brain,aspects[name]))
+      mem.concat(name+': '+(weight === 1 ? '' : weight+' * ')+parse.val(aspects[name]))
   ,[])
   let minus = reduce(gameDef.AI.brains[brain].minus,(mem,weight,name)=>
-      mem.concat(name+': -'+(weight === 1 ? '' : weight+' * ')+value(gameDef,player,brain,aspects[name]))
+      mem.concat(name+': -'+(weight === 1 ? '' : weight+' * ')+parse.val(aspects[name]))
   ,[])
   return '{'+plus.concat(minus).join(', ')+'}'
 }

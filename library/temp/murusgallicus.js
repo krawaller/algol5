@@ -263,23 +263,27 @@
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - 10000 * Object.keys(
-          (function() {
-            var k, ret = {},
-              s0 = ARTIFACTS.oppmoves,
-              s1 = TERRAIN.myhomerow;
-            for (k in s0) {
-              ret[k] = 1;
-            }
-            for (k in s1) {
-              ret[k] = 1;
-            }
-            return ret;
-          }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
+        return 2 * Object.keys(UNITLAYERS.mytowers).length +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          2 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          10000 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
       };
       game.brain_Steve_1_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -338,9 +342,10 @@
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 2 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           oppwinmoves: -10000 * Object.keys(
             (function() {
               var k, ret = {},
@@ -398,23 +403,27 @@
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - 100 * Object.keys(
-          (function() {
-            var k, ret = {},
-              s0 = ARTIFACTS.oppmoves,
-              s1 = TERRAIN.myhomerow;
-            for (k in s0) {
-              ret[k] = 1;
-            }
-            for (k in s1) {
-              ret[k] = 1;
-            }
-            return ret;
-          }())).length;
+        return 2 * Object.keys(UNITLAYERS.mytowers).length +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          2 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          100 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length;
       };
       game.brain_Joe_1_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -461,9 +470,10 @@
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 2 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           oppwinmoves: -100 * Object.keys(
             (function() {
               var k, ret = {},
@@ -556,11 +566,14 @@
             }
           }
         }
-        return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
+        return Object.keys(ARTIFACTS.mymoves).length + 3 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          Object.keys(ARTIFACTS.oppmoves).length;
       };
       game.brain_Clive_1_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -641,9 +654,10 @@
         }
         return {
           mymoves: Object.keys(ARTIFACTS.mymoves).length,
-          mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 3 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
@@ -1180,23 +1194,27 @@
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - 10000 * Object.keys(
-          (function() {
-            var k, ret = {},
-              s0 = ARTIFACTS.oppmoves,
-              s1 = TERRAIN.myhomerow;
-            for (k in s0) {
-              ret[k] = 1;
-            }
-            for (k in s1) {
-              ret[k] = 1;
-            }
-            return ret;
-          }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
+        return 2 * Object.keys(UNITLAYERS.mytowers).length +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          2 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          10000 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
       };
       game.brain_Steve_2_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -1255,9 +1273,10 @@
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 2 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           oppwinmoves: -10000 * Object.keys(
             (function() {
               var k, ret = {},
@@ -1315,23 +1334,27 @@
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - 100 * Object.keys(
-          (function() {
-            var k, ret = {},
-              s0 = ARTIFACTS.oppmoves,
-              s1 = TERRAIN.myhomerow;
-            for (k in s0) {
-              ret[k] = 1;
-            }
-            for (k in s1) {
-              ret[k] = 1;
-            }
-            return ret;
-          }())).length;
+        return 2 * Object.keys(UNITLAYERS.mytowers).length +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          2 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          100 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length;
       };
       game.brain_Joe_2_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -1378,9 +1401,10 @@
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 2 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           oppwinmoves: -100 * Object.keys(
             (function() {
               var k, ret = {},
@@ -1473,11 +1497,14 @@
             }
           }
         }
-        return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
+        return Object.keys(ARTIFACTS.mymoves).length + 3 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          Object.keys(ARTIFACTS.oppmoves).length;
       };
       game.brain_Clive_2_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -1558,9 +1585,10 @@
         }
         return {
           mymoves: Object.keys(ARTIFACTS.mymoves).length,
-          mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 3 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),

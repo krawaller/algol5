@@ -1,14 +1,15 @@
-import bool from './expressions/bool';
+import makeParser from './expressions';
 
 import { Definition } from './types';
 
 export default function obey(gameDef: Definition, player: 1 | 2, action: string, instr: any, callback: Function){
+  const parse = makeParser(gameDef, player, action);
   const [type, ...details] = instr;
   switch(type){
     case 'if': {
       const [expr,newInstr] = details;
       return `
-        if (${bool(gameDef,player,action,expr)}){
+        if (${parse.bool(expr)}){
           ${obey(gameDef, player, action, newInstr, callback)}
         }
       `;
@@ -16,7 +17,7 @@ export default function obey(gameDef: Definition, player: 1 | 2, action: string,
     case 'ifelse': {
       const [expr,alt1,alt2] = details;
       return `
-        if (${bool(gameDef,player,action,expr)}){
+        if (${parse.bool(expr)}){
           ${obey(gameDef, player, action, alt1, callback)}
         } else {
           ${obey(gameDef, player, action, alt2, callback)}

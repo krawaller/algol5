@@ -1,6 +1,5 @@
 
 import { Definition } from '../types';
-import lib from '../../logic/';
 import { contains, listlength } from '../utils';
 import draw from './draw';
 import makeParse from '../expressions';

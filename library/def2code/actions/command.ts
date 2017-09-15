@@ -2,7 +2,7 @@ import { Definition } from '../types';
 import applyLinkInstructions from './link';
 import applyEffectInstructions from './effect';
 import applyGeneratorInstructions from '../artifacts/generate';
-import value from '../expressions/value';
+import makeParser from '../expressions';
 import {
   ifCodeContains,
   usesTurnVars,
@@ -13,8 +13,9 @@ import {
 import {copyArtifactsForAction, calculateUnitLayers} from '../common';
 
 export default function addCommandFunction(def: Definition, player: 1 | 2, cmndname: string){
+  const parse = makeParser(def,player,cmndname);
   const cmndDef = def.commands[cmndname];
-  const instruction = value(def, player, cmndname, cmndDef.instruction || '');
+  const instruction = parse.val(cmndDef.instruction || '');
   return `
     game.${cmndname}${player} = function(turn,step){
       var ARTIFACTS = ${copyArtifactsForAction(def,cmndDef)};

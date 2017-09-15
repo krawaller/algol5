@@ -875,11 +875,15 @@ module.exports = {
             }
           }
         }
-        return reduce(ARTIFACTS.myroads, function(mem, obj) {
-          return mem + obj['count'];
-        }, 0) + Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
-          return mem + obj['count'];
-        }, 0) - Object.keys(ARTIFACTS.oppreach).length;
+        return
+        reduce(ARTIFACTS.myroads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0) +
+          Object.keys(ARTIFACTS.myreach).length -
+          reduce(ARTIFACTS.opproads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0) -
+          Object.keys(ARTIFACTS.oppreach).length;
       };
       game.brain_Steve_1_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -919,9 +923,10 @@ module.exports = {
             return mem + obj['count'];
           }, 0),
           mydomain: Object.keys(ARTIFACTS.myreach).length,
-          opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
-          }, 0),
+          opproads: -
+            reduce(ARTIFACTS.opproads, function(mem, obj) {
+              return mem + obj['count'];
+            }, 0),
           oppdomain: -Object.keys(ARTIFACTS.oppreach).length
         };
       };
@@ -1226,11 +1231,15 @@ module.exports = {
             }
           }
         }
-        return reduce(ARTIFACTS.myroads, function(mem, obj) {
-          return mem + obj['count'];
-        }, 0) + Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
-          return mem + obj['count'];
-        }, 0) - Object.keys(ARTIFACTS.oppreach).length;
+        return
+        reduce(ARTIFACTS.myroads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0) +
+          Object.keys(ARTIFACTS.myreach).length -
+          reduce(ARTIFACTS.opproads, function(mem, obj) {
+            return mem + obj['count'];
+          }, 0) -
+          Object.keys(ARTIFACTS.oppreach).length;
       };
       game.brain_Steve_2_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -1270,9 +1279,10 @@ module.exports = {
             return mem + obj['count'];
           }, 0),
           mydomain: Object.keys(ARTIFACTS.myreach).length,
-          opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
-          }, 0),
+          opproads: -
+            reduce(ARTIFACTS.opproads, function(mem, obj) {
+              return mem + obj['count'];
+            }, 0),
           oppdomain: -Object.keys(ARTIFACTS.oppreach).length
         };
       };
@@ -6006,7 +6016,7 @@ module.exports = {
       };
       game.selectunit1instruction = function(step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length));
+        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + ''));
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -6036,14 +6046,14 @@ module.exports = {
           name: 'selectmovetarget'
         });
         turn.links[newstepid] = {};
-        if ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length) > Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)) {
+        if (((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) > (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length))) {
           turn.links[newstepid].jostle = 'jostle1';
         }
         return newstep;
       };
       game.selectmovetarget1instruction = function(step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)));
+        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + ''));
       };
       game.jostle1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -6197,7 +6207,7 @@ module.exports = {
       };
       game.selectunit2instruction = function(step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('The current position is worth ' + '') + (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length));
+        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + ''));
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -6227,14 +6237,14 @@ module.exports = {
           name: 'selectmovetarget'
         });
         turn.links[newstepid] = {};
-        if ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length) > Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)) {
+        if (((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) > (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length))) {
           turn.links[newstepid].jostle = 'jostle2';
         }
         return newstep;
       };
       game.selectmovetarget2instruction = function(step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('That position would be worth ' + '') + (Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)));
+        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + ''));
       };
       game.jostle2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -8042,23 +8052,27 @@ module.exports = {
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - 10000 * Object.keys(
-          (function() {
-            var k, ret = {},
-              s0 = ARTIFACTS.oppmoves,
-              s1 = TERRAIN.myhomerow;
-            for (k in s0) {
-              ret[k] = 1;
-            }
-            for (k in s1) {
-              ret[k] = 1;
-            }
-            return ret;
-          }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
+        return 2 * Object.keys(UNITLAYERS.mytowers).length +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          2 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          10000 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
       };
       game.brain_Steve_1_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -8117,9 +8131,10 @@ module.exports = {
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 2 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           oppwinmoves: -10000 * Object.keys(
             (function() {
               var k, ret = {},
@@ -8177,23 +8192,27 @@ module.exports = {
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - 100 * Object.keys(
-          (function() {
-            var k, ret = {},
-              s0 = ARTIFACTS.oppmoves,
-              s1 = TERRAIN.myhomerow;
-            for (k in s0) {
-              ret[k] = 1;
-            }
-            for (k in s1) {
-              ret[k] = 1;
-            }
-            return ret;
-          }())).length;
+        return 2 * Object.keys(UNITLAYERS.mytowers).length +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          2 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          100 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length;
       };
       game.brain_Joe_1_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -8240,9 +8259,10 @@ module.exports = {
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 2 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           oppwinmoves: -100 * Object.keys(
             (function() {
               var k, ret = {},
@@ -8335,11 +8355,14 @@ module.exports = {
             }
           }
         }
-        return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
+        return Object.keys(ARTIFACTS.mymoves).length + 3 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          Object.keys(ARTIFACTS.oppmoves).length;
       };
       game.brain_Clive_1_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -8420,9 +8443,10 @@ module.exports = {
         }
         return {
           mymoves: Object.keys(ARTIFACTS.mymoves).length,
-          mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 3 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
@@ -8959,23 +8983,27 @@ module.exports = {
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - 10000 * Object.keys(
-          (function() {
-            var k, ret = {},
-              s0 = ARTIFACTS.oppmoves,
-              s1 = TERRAIN.myhomerow;
-            for (k in s0) {
-              ret[k] = 1;
-            }
-            for (k in s1) {
-              ret[k] = 1;
-            }
-            return ret;
-          }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
+        return 2 * Object.keys(UNITLAYERS.mytowers).length +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          2 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          10000 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length - 20 * Object.keys(ARTIFACTS.opplightthreats).length - 500 * Object.keys(ARTIFACTS.oppheavythreats).length;
       };
       game.brain_Steve_2_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -9034,9 +9062,10 @@ module.exports = {
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 2 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           oppwinmoves: -10000 * Object.keys(
             (function() {
               var k, ret = {},
@@ -9094,23 +9123,27 @@ module.exports = {
             }
           }
         }
-        return 2 * Object.keys(UNITLAYERS.mytowers).length + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - 100 * Object.keys(
-          (function() {
-            var k, ret = {},
-              s0 = ARTIFACTS.oppmoves,
-              s1 = TERRAIN.myhomerow;
-            for (k in s0) {
-              ret[k] = 1;
-            }
-            for (k in s1) {
-              ret[k] = 1;
-            }
-            return ret;
-          }())).length;
+        return 2 * Object.keys(UNITLAYERS.mytowers).length +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          2 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          100 * Object.keys(
+            (function() {
+              var k, ret = {},
+                s0 = ARTIFACTS.oppmoves,
+                s1 = TERRAIN.myhomerow;
+              for (k in s0) {
+                ret[k] = 1;
+              }
+              for (k in s1) {
+                ret[k] = 1;
+              }
+              return ret;
+            }())).length;
       };
       game.brain_Joe_2_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -9157,9 +9190,10 @@ module.exports = {
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
-          mytowerpos: 2 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 2 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           oppwinmoves: -100 * Object.keys(
             (function() {
               var k, ret = {},
@@ -9252,11 +9286,14 @@ module.exports = {
             }
           }
         }
-        return Object.keys(ARTIFACTS.mymoves).length + 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) + Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-          return mem + (mybasic[pos] || 0);
-        }, 0) - Object.keys(ARTIFACTS.oppmoves).length;
+        return Object.keys(ARTIFACTS.mymoves).length + 3 *
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) +
+          Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+            return mem + (mybasic[pos] || 0);
+          }, 0) -
+          Object.keys(ARTIFACTS.oppmoves).length;
       };
       game.brain_Clive_2_detailed = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -9337,9 +9374,10 @@ module.exports = {
         }
         return {
           mymoves: Object.keys(ARTIFACTS.mymoves).length,
-          mytowerpos: 3 * Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
-            return mem + (mybasic[pos] || 0);
-          }, 0),
+          mytowerpos: 3 *
+            Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
+              return mem + (mybasic[pos] || 0);
+            }, 0),
           mywallpos: Object.keys(UNITLAYERS.mytowers).reduce(function(mem, pos) {
             return mem + (mybasic[pos] || 0);
           }, 0),
@@ -13410,7 +13448,7 @@ module.exports = {
       }
       game.start1instruction = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
-        return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
+        return (Object.keys(UNITLAYERS.mysniper).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
       };
       game.debug1 = function() {
         return {
@@ -13670,7 +13708,7 @@ module.exports = {
       }
       game.start2instruction = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
-        return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
+        return (Object.keys(UNITLAYERS.mysniper).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
       };
       game.debug2 = function() {
         return {

@@ -1,6 +1,5 @@
 import * as map from 'lodash/map';
 
-import lib from '../../logic/';
 import { Definition } from '../types';
 import { contains } from '../utils';
 import makeParse from '../expressions';

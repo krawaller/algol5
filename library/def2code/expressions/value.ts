@@ -1,12 +1,12 @@
 import { Definition } from '../types';
-//import withUniversal from './universal';
 import makeParser from './';
 import * as isArray from 'lodash/isArray';
 
-import lib from '../../logic';
-
-function innerValue(gameDef: Definition, player: 1 | 2, action: string, expression){
-  const parse = makeParser(gameDef, player, action);
+export default function parseValue(gameDef: Definition, player: 1 | 2, action: string, expression, from){
+  const parse = makeParser(gameDef, player, action, "value");
+  if (!isArray(expression)){
+    return parse.val(["value",expression]);
+  }
   const [type, ...args] = expression;
   switch(type){
     case "indexlist": {
@@ -19,15 +19,15 @@ function innerValue(gameDef: Definition, player: 1 | 2, action: string, express
     }
     case "reldir": {
       const [dir,rel] = args;
-      return `relativedirs[${parse.val(rel) - 2 + parse.val(dir)}]`;
+      return `relativedirs[${parse.val(rel)} - 2 + ${parse.val(dir)}]`;
     }
     case "value": {
       const [val] = args;
-      return typeof value === "string" ? `'${value}'` : value;
+      return typeof val === "string" ? `'${val}'` : val;
     }
     case "val": {
       const [val] = args;
-      return typeof value === "string" ? `'${value}'` : value;
+      return typeof val === "string" ? `'${val}'` : val;
     }
     case "player": {
       return player;
@@ -109,29 +109,19 @@ function innerValue(gameDef: Definition, player: 1 | 2, action: string, express
       return "turn.turn";
     }
     default: {
-      if (!isArray(expression)){ // TODO - really?
-        return parse.val([expression]);
-      } else {
+      try {
+        if (from === 'id') throw "No, coming from id, dont try that";
+        const ret = parse.id(expression);
+        return ret;
+      } catch(e) {
         try {
-          const ret = parse.id(expression);
+          if (from === 'position') throw "No, coming from position, dont try that";
+          const ret = parse.pos(expression);
           return ret;
         } catch(e) {
-          try {
-            const ret = parse.pos(expression);
-            return ret;
-          } catch(e) {
-            throw "Unknown value def: " + expression;
-          }
+          throw "Unknown value def: " + expression;
         }
       }
     }
   }
-}
-
-//const value = withUniversal(innerValue);
-//export default value;
-
-export default function value(gameDef: Definition, player: 1 | 2, action: string, expression){
-  const O = {rules: gameDef, player, action};
-  return lib.value(O,expression);
 }

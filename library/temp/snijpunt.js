@@ -326,7 +326,7 @@
       }
       game.start1instruction = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
-        return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
+        return (Object.keys(UNITLAYERS.mysniper).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
       };
       game.debug1 = function() {
         return {
@@ -586,7 +586,7 @@
       }
       game.start2instruction = function(step) {
         var UNITLAYERS = step.UNITLAYERS;
-        return (Object.keys(UNITLAYERS.mysniper ||  {}).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
+        return (Object.keys(UNITLAYERS.mysniper).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
       };
       game.debug2 = function() {
         return {

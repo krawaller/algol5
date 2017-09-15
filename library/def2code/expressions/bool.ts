@@ -1,9 +1,8 @@
 import { Definition } from '../types';
-import withUniversal from './universal';
 import makeParser from './';
 
-function innerBool(gameDef: Definition, player: 1 | 2, action: string, expression){
-  const parse = makeParser(gameDef, player, action);
+export default function parseBool(gameDef: Definition, player: 1 | 2, action: string, expression){
+  const parse = makeParser(gameDef, player, action, "boolean");
   const [type, ...args] = expression;
   switch(type){
     case "truthy": {
@@ -76,7 +75,3 @@ function innerBool(gameDef: Definition, player: 1 | 2, action: string, expressi
       throw "Unknown bool! Boolshit! " + expression;
   }
 }
-
-const bool = withUniversal(innerBool);
-
-export default bool;

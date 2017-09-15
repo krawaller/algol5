@@ -1,11 +1,10 @@
 import * as isArray from 'lodash/isArray';
 
 import { Definition } from '../types';
-import withUniversal from './universal';
 import makeParser from './';
 
-function innerPosition(gameDef: Definition, player: 1 | 2, action: string, expression){
-  const parse = makeParser(gameDef,player,action);
+export default function parsePosition(gameDef: Definition, player: 1 | 2, action: string, expression){
+  const parse = makeParser(gameDef,player,action,"position");
   if (!isArray(expression)){
     return parse.position(["mark",expression]);
   }
@@ -37,7 +36,3 @@ function innerPosition(gameDef: Definition, player: 1 | 2, action: string, expr
       throw "Unknown position " + expression;
   }
 }
-
-const position = withUniversal(innerPosition);
-
-export default position;

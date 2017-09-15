@@ -1,11 +1,10 @@
 import * as isArray from 'lodash/isArray';
 
 import { Definition } from '../types';
-import withUniversal from './universal';
 import makeParser from './';
 
-function innerId(gameDef: Definition, player: 1 | 2, action: string, expression){
-  const parse = makeParser(gameDef, player, action);
+export default function parseId(gameDef: Definition, player: 1 | 2, action: string, expression, from){
+  const parse = makeParser(gameDef, player, action, "id");
   if (!isArray(expression)){
     return parse.value(expression);
   }
@@ -19,6 +18,7 @@ function innerId(gameDef: Definition, player: 1 | 2, action: string, expression
       return "LOOPID";
     default:
       try {
+        if (from === 'value') throw "No, coming from value, dont try that";
         const val = parse.value(expression);
         return val;
       } catch(e) {
@@ -26,7 +26,3 @@ function innerId(gameDef: Definition, player: 1 | 2, action: string, expression
       }
   }
 }
-
-const id = withUniversal(innerId);
-
-export default id;

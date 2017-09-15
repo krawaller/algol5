@@ -1,7 +1,7 @@
-import value from '../expressions/value';
 
 import { Definition } from '../types';
 
+import makeExpr from '../expressions';
 import {ifCodeContains} from '../utils';
 import {copyArtifactsForAction} from '../common';
 
@@ -9,6 +9,7 @@ import applyLinkInstructions from './link';
 import applyGeneratorInstructions from '../artifacts/generate';
 
 export default function addMarkFunction(def: Definition, markname: string, player: 1 | 2){
+  const expr = makeExpr(def, player, markname);
   const markDef = def.marks[markname];
   let newMarkObject = `Object.assign({},step.MARKS,{${markname}:markpos})`;
   if (markDef.flow !== 'cyclic'){
@@ -31,7 +32,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
     ARTIFACTS: 'var ARTIFACTS = ' + copyArtifactsForAction(def,markDef) + '; ',
     UNITLAYERS: 'var UNITLAYERS = step.UNITLAYERS; '
   });
-  const instruction = value(def, player, markname, markDef.instruction||'');
+  const instruction = expr.val(markDef.instruction||'');
   return `
       game.${markname}${player} = function(turn,step,markpos){
         ${preludium}

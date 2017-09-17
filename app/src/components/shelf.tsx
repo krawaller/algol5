@@ -1,6 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 
-class Shelf extends React.Component {
+type PropType = {
+  algol: any;
+  chooseGame: (any) => any
+};
+type StateType = {
+  lib: any;
+};
+
+class Shelf extends React.Component <PropType,StateType> {
   constructor(props){
     super(props);
     this.state = {lib: {}};

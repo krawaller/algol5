@@ -1,6 +1,8 @@
-import React from 'react'
+import * as React from 'react';
 
-let Square = (props)=> {
+type SquareProps = any;
+
+let Square = (props: SquareProps)=> {
     let css = {
         height: props.height+"%",
         width: props.width+"%",

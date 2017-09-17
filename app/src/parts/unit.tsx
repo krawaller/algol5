@@ -1,14 +1,20 @@
-import React from 'react'
-import Piece from './piece'
-import Square from './square'
+import * as React from 'react';
+import Piece from './piece';
+import Square from './square';
 
-let Unit = React.createClass({
-  getInitialState(){ return {coords: this.props.unit.spawnCoords || this.props.unit.coords}},
+type UnitState = any;
+type UnitProps = any
+
+class Unit extends React.Component <UnitProps,UnitState> {
+  constructor(p){
+    super(p);
+    this.state = {coords: this.props.unit.spawnCoords || this.props.unit.coords};
+  }
   componentDidMount() {
     if (this.props.unit.spawnCoords){
       setTimeout(()=> this.setState({coords:this.props.unit.coords}),10)
     }
-  },
+  }
   componentWillReceiveProps(nextProps) {
     let next = {coords:nextProps.unit.coords}
     /*if (false && (nextProps.unit.owner !== this.props.owner || nextProps.unit.group !== this.props.group)){
@@ -16,7 +22,7 @@ let Unit = React.createClass({
       setTimeout(()=>this.setState({old:undefined}),300)
     }*/
     this.setState(next)
-  },
+  }
   render() {
     let {board,unit} = this.props
     let tileheightpc = 100/board.height
@@ -28,6 +34,6 @@ let Unit = React.createClass({
       { /* s.old && <Piece dir={s.old.dir} owner={s.old.owner} icon={s.old.group} /> */ }
     </Square>
   }
-})
+}
 
 export default Unit

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react';
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
@@ -20,7 +20,9 @@ const lineicons = {
     kings: "♔"
 };
 
-let Piece = (props)=> {
+type PieceProps = any;
+
+let Piece = (props: PieceProps)=> {
     let cls = "piece dir"+(props.dir||1)+" owner"+(props.owner||0)
     return (
         <div className={cls}>

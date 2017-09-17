@@ -1,24 +1,38 @@
-import React from 'react';
+import * as React from 'react';
 
 import Battle from './battle'
 
-let Vestibule = React.createClass({
+type Player = {name:string} | null;
+
+type Props = {
+  game: any
+  selectParticipants: (p1:Player,p2:Player) => any;
+};
+type State = {
+  plr1: Player
+  plr2: Player
+};
+
+class Vestibule extends React.Component <Props,State> {
+  opts: any
+  constructor(p){
+    super(p);
+    this.state = {plr1:{name:''},plr2:{name:''}};
+    this.start = this.start.bind(this);
+  }
   componentWillMount() {
     this.opts = [{type:"human",name:"Human"}].concat(this.props.game.AI.map(n=>({name:n,type:"ai"})))
-  },
+  }
   componentDidMount() {
     this.select('plr1',this.opts[0])
     this.select('plr2',this.opts[0])
-  },
-  getInitialState() {
-    return {plr1:0,plr2:0};
-  },
+  }
   select(who,what) {
     this.setState({[who]:what})
-  },
+  }
   start(){
     this.props.selectParticipants(this.state.plr1,this.state.plr2)
-  },
+  }
   render() {
     let game = this.props.game
     let plr1opts = this.opts.map((o,n)=> <button key={n} onClick={this.select.bind(this,'plr1',o)}>{o.name}</button>)
@@ -29,6 +43,6 @@ let Vestibule = React.createClass({
       <button onClick={this.start}>Start game!</button>
     </div>
   }
-})
+}
 
 export default Vestibule;

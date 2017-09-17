@@ -1,11 +1,13 @@
-import React from 'react'
+import * as React from 'react';
 
 import Square from './square'
 
-import map from 'lodash/map'
+import * as map from 'lodash/map';
+
+type MarkProps = any;
 
 // activeMarks, potentialMarks, board, selectMark
-let Marks = (props)=> {
+let Marks = (props: MarkProps)=> {
     let tileheightpc = 100/props.board.height
     let tilewidthpc = 100/props.board.width
     let activeMarks = map(props.activeMarks, ({pos,coords}) => {

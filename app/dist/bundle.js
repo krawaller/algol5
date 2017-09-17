@@ -21472,7 +21472,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var algol = (0, _algol_async2.default)('../engine/dist/algol_worker.js', 1); // Path here will be relative to 'index.html'
+	var algol = (0, _algol_async2.default)('algol_worker.js', 1); // Path here will be relative to 'index.html'
 
 	var App = _react2.default.createClass({
 	  displayName: 'App',
@@ -21791,7 +21791,7 @@
 	    var style = {
 	      height: this.props.game.board.height * 50,
 	      width: this.props.game.board.width * 50,
-	      backgroundImage: 'url(../graphics/dist/' + this.props.game.id + '.png)' // TODO - provide this from root
+	      backgroundImage: 'url(images/' + this.props.game.id + '.png)' // Relative to index file
 	    };
 	    return _react2.default.createElement(
 	      'div',
@@ -21916,7 +21916,7 @@
 	    return _react2.default.createElement(
 	      _square2.default,
 	      { also: cls, key: unit.id, x: coords.x, y: coords.y, height: tileheightpc, width: tilewidthpc },
-	      _react2.default.createElement(_piece2.default, { dir: unit.dir, owner: unit.owner, icon: unit.group })
+	      _react2.default.createElement(_piece2.default, { dir: unit.dir, owner: unit.owner, icon: unit.icon })
 	    );
 	  }
 	});

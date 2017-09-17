@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "library": "cd library; npm run build;",
+    "graphics": "cd graphics; npm run build;",
+    "engine": "cd engine; npm run build;",
+    "app": "cd app; npm run build;",
+    "build": "npm run library; npm run graphics; npm run engine; npm run app;"
+  }
+}

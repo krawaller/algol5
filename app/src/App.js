@@ -5,7 +5,7 @@ import Vestibule from './components/vestibule'
 import Battle from './components/battle'
 
 import makeAlgol from '../../engine/dist/algol_async';
-let algol = makeAlgol('../engine/dist/algol_worker.js', 1); // Path here will be relative to 'index.html'
+let algol = makeAlgol('algol_worker.js', 1); // Path here will be relative to 'index.html'
 
 let App = React.createClass({
   getInitialState() {

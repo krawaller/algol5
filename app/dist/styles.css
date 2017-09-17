@@ -1,0 +1,58 @@
+.board {
+    height: 600px;
+    width: 600px;
+    border: 1px solid black;
+    position: relative;
+    background-size: cover;
+}
+
+.square {
+    position: absolute;
+    font-size: 40px;
+    transition: bottom 0.5s, left 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.owner0 {
+    color: gold;
+}
+
+.owner1 {
+    color: blue;
+}
+
+.owner2 {
+    color: red;
+}
+
+.mark {
+    border: 5px solid white;
+    border-radius: 500px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.potentialmark {
+    opacity: 0.45;
+}
+
+.fadein.pieces-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.fadein.pieces-enter.pieces-enter-active {
+  opacity: 1;
+}
+
+.pieces-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in, transform 0.5s ease-in;
+}
+
+.pieces-leave.pieces-leave-active {
+  opacity: 0.01;
+  transform: scale(2, 2)
+}

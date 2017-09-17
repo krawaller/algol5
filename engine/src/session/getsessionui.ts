@@ -17,7 +17,7 @@ export default function getSessionUI(session: Session, step: Step): UI {
   let UI: UI = {
     activeMarks: values(step.MARKS).map(pos=>({pos, coords: pos2coords(pos)})),
     units: mapValues(step.UNITDATA,u=> Object.assign({},u,{
-      group: game.graphics.icons[u.group],
+      icon: game.graphics.icons[u.group],
       coords: pos2coords(u.pos),
       spawnCoords: u.from ? pos2coords(u.from) : undefined
     })),

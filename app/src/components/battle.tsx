@@ -83,17 +83,28 @@ class Battle extends React.Component <BattleProps,BattleState> {
       let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
       console.log("Available now", available.sort());
     }*/
+    const tileSize = 50;
+    const borderSize = tileSize * (75/200); // TODO - fetch?
     let style = {
-      height:this.props.game.board.height*50,
-      width:this.props.game.board.width*50,
+      height:this.props.game.board.height*tileSize + borderSize * 2,
+      width:this.props.game.board.width*tileSize + borderSize * 2,
       backgroundImage: 'url(images/'+this.props.game.id+'.png)' // Relative to index file
+    }
+    const offset = {
+      top: borderSize,
+      left: borderSize,
+      height: style.height - 2*borderSize,
+      width: style.width - 2*borderSize,
+      position: "relative" as "relative"
     }
     return (
       <div>
         <h4>Playing!</h4>
         <div className="board" style={style}>
-          {UI.units && <Units unitdata={UI.units} board={UI.board} />}
-          {p && <Marks board={UI.board} ai={p.type === "ai"} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
+          <div style={offset}>
+            {UI.units && <Units unitdata={UI.units} board={UI.board} />}
+            {p && <Marks board={UI.board} ai={p.type === "ai"} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
+          </div>
         </div>
         {cmnd}
       </div>

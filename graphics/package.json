@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "clean": "rm -rf dist; mkdir dist;",
+    "clean": "rm -rf dist; mkdir dist; mkdir dist/pics",
     "build": "npm run clean && node makeboards"
   },
   "dependencies": {

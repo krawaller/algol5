@@ -88,7 +88,7 @@ class Battle extends React.Component <BattleProps,BattleState> {
     let style = {
       height:this.props.game.board.height*tileSize + borderSize * 2,
       width:this.props.game.board.width*tileSize + borderSize * 2,
-      backgroundImage: 'url(images/'+this.props.game.id+'.png)' // Relative to index file
+      //backgroundImage: 'url(images/'+this.props.game.id+'.png)' // Relative to index file
     }
     const offset = {
       top: borderSize,
@@ -100,7 +100,7 @@ class Battle extends React.Component <BattleProps,BattleState> {
     return (
       <div>
         <h4>Playing!</h4>
-        <div className="board" style={style}>
+        <div className={"board " + this.props.game.id} style={style}>
           <div style={offset}>
             {UI.units && <Units unitdata={UI.units} board={UI.board} />}
             {p && <Marks board={UI.board} ai={p.type === "ai"} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}

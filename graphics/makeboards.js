@@ -7,6 +7,7 @@ and create individual background images for that game into `/boards`.
 var META_PATH = __dirname + '/../library/dist/meta';
 var BOARD_PARTS_PATH = __dirname + '/boardparts';
 var OUTPUT_PATH = __dirname + '/dist';
+var OUTPUT_PIC_PATH = OUTPUT_PATH + '/pics';
 
 var fs = require('fs')
   , Canvas = require('canvas')
@@ -44,6 +45,8 @@ var pics = {
 }
 
 const TILE = 200, EDGE = 75;
+
+let dataURIusages = {};
 
 function draw(game,to){
   var board = game.board
@@ -106,9 +109,21 @@ function draw(game,to){
 
   stream.on('data', function(chunk){ out.write(chunk); });
   stream.on('end', function(){ console.log('saved',to); });
+
+  let dataURI = canvas.toDataURL('image/png');
+  dataURIusages[dataURI] = dataURIusages[dataURI] || [];
+  dataURIusages[dataURI].push(game.id);
 }
 
 Object.keys(games).forEach(function(game){
   var rules = games[game];
-  draw(rules,OUTPUT_PATH + '/'+game+'.png');
+  draw(rules,OUTPUT_PIC_PATH + '/'+game+'.png');
 });
+
+var CSS = Object.keys(dataURIusages).reduce(function(mem, uri){
+  var gamelist = dataURIusages[uri];
+  mem += gamelist.map(function(id){ return "."+id; }).join(", ") + " { background-image: url(" + uri + "); }\n";
+  return mem;
+}, '');
+
+fs.writeFileSync(OUTPUT_PATH + '/boards.css', CSS);

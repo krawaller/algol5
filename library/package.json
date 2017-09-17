@@ -2,6 +2,7 @@
   "devDependencies": {
     "@types/node": "^8.0.26",
     "@types/tape": "^4.2.30",
+    "js-beautify": "^1.6.14",
     "tap-spec": "^4.1.1",
     "tape": "^4.8.0",
     "ts-node": "^3.3.0",

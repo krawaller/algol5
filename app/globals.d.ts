@@ -1,0 +1,1 @@
+declare const BUILT_AT: string;

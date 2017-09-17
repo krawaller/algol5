@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as moment from 'moment';
 
 type PropType = {
   algol: any;
@@ -21,7 +22,14 @@ class Shelf extends React.Component <PropType,StateType> {
   }
   render() {
     let choices = Object.keys(this.state.lib).map((g,n)=> <button key={n} onClick={this.chooseGame.bind(this,g)}>{g}</button>)
-    return <div>{choices}</div>;
+    const dateStr = moment(BUILT_AT).format('YYYY-MM-DD HH:mm');
+    return (
+      <div>
+        <h2>Welcome to Algol!</h2>
+        <p>Built at {dateStr}</p>
+        <div>{choices}</div>
+      </div>
+    );
   }
 }
 

@@ -22,7 +22,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
-      }
+      },
+      'BUILT_AT': JSON.stringify(Date.now())
     }),
     new webpack.optimize.UglifyJsPlugin({
       comments: false,

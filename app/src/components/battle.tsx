@@ -59,7 +59,6 @@ class Battle extends React.Component <BattleProps,BattleState> {
     }
   }
   makeAImoves() {
-    console.log("Gonna make AI moves")
     let UI = this.state.UI
     let plr = UI.players[UI.playing-1]
     this.setState({UI: {...this.state.UI, waiting: 'AI thinking'}}, ()=>{
@@ -67,7 +66,6 @@ class Battle extends React.Component <BattleProps,BattleState> {
         for(let i=0; i<moves.length; i++){
           setTimeout( this.doAction.bind(this,moves[i]), i*800 ) // TODO - make less naïve code here
         }
-        console.log("AI moves",moves)
       });
     });
   }

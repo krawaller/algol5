@@ -1,5 +1,5 @@
 module.exports = {
-  devtool: 'eval',
+  devtool: 'eval-source-map',
   entry: __dirname + '/src/index.ts',
   output: {
     path: __dirname + '/dist',

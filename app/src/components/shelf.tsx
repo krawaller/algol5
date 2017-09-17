@@ -27,7 +27,7 @@ class Shelf extends React.Component <PropType,StateType> {
       <div>
         <h2>Welcome to Algol!</h2>
         <p>Built at {dateStr}</p>
-        <div>{choices}</div>
+        <div>{choices.length ? choices : <span>...loading games...</span>}</div>
       </div>
     );
   }

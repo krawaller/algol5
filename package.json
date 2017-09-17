@@ -1,9 +1,14 @@
 {
   "scripts": {
-    "library": "cd library; npm run build;",
-    "graphics": "cd graphics; npm run build;",
-    "engine": "cd engine; npm run build;",
-    "app": "cd app; npm run build;",
-    "build": "npm run library; npm run graphics; npm run engine; npm run app;"
+    "installlibrary": "cd library; npm install;",
+    "installgraphics": "cd graphics; npm install;",
+    "installengine": "cd engine; npm install;",
+    "installapp": "cd app; npm install;",
+    "install": "npm run installlibrary; npm run installgraphics; npm run installengine; npm run installapp;",
+    "buildlibrary": "cd library; npm run build;",
+    "buildgraphics": "cd graphics; npm run build;",
+    "buildengine": "cd engine; npm run build;",
+    "buildapp": "cd app; npm run build;",
+    "build": "npm run buildlibrary; npm run buildgraphics; npm run buildengine; npm run buildapp;"
   }
 }

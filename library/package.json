@@ -11,7 +11,8 @@
     "compile": "ts-node ./compile.ts",
     "collect": "ts-node ./collect.ts",
     "makemeta": "ts-node ./makemeta.ts",
-    "build": "npm run compile && npm run collect && npm run makemeta",
+    "clean": "rm -rf dist; mkdir dist;",
+    "build": "npm run clean && npm run compile && npm run collect && npm run makemeta",
     "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec"
   },
   "dependencies": {

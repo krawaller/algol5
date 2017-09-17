@@ -13,10 +13,10 @@
     "webpack": "^2.5.1"
   },
   "scripts": {
+    "clean": "rm -rf dist; mkdir dist;",
     "bundle": "webpack",
     "bundleasync": "cd dist; workerwrap algol.js",
-    "build": "npm run bundle && npm run bundleasync",
-    "oldtest": "cd test; babel-node run.js",
+    "build": "npm run clean && npm run bundle && npm run bundleasync",
     "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec"
   },
   "dependencies": {

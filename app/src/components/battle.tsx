@@ -14,7 +14,6 @@ class Battle extends React.Component <BattleProps,BattleState> {
     super(p);
     this.state = {
       UI: { waiting: 'loading', players: [], board: {} }
-      //UI: algol.startGameSession(this.props.game.id,this.props.participants[0],this.props.participants[1])
     };
     this.doAction = this.doAction.bind(this);
     this.maybeAI = this.maybeAI.bind(this);
@@ -72,13 +71,11 @@ class Battle extends React.Component <BattleProps,BattleState> {
   render() {
     let UI = this.state.UI,
         p = UI.players[UI.playing-1];
-    let cmnd = (p && p.type === "ai")
+    let info = (p && p.type === "ai")
       ? <div>Awaiting {p.name}</div>
-      : UI.waiting ? <div>...calculating...</div>
-      : (<div>
-        <div>{UI.instruction}</div>
-        <Commands gameCommands={UI.commands} systemCommands={UI.system} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>
-      </div>)
+      :  UI.waiting ? <div>...calculating...</div>
+      : UI.instruction;
+    let plrCanAct = !(p && p.type === "ai") && !UI.waiting;
     /*if (!UI.waiting){
       let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
       console.log("Available now", available.sort());
@@ -106,7 +103,10 @@ class Battle extends React.Component <BattleProps,BattleState> {
             {p && <Marks board={UI.board} ai={p.type === "ai"} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
           </div>
         </div>
-        {cmnd}
+        <div>
+          {UI && UI.commands && <Commands locked={!plrCanAct} gameCommands={UI.commands} undo={UI.undo} submit={UI.submit} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>}
+          <div>{info}</div>
+      </div>
       </div>
     );
   }

@@ -30,26 +30,26 @@ export default function getSessionUI(session: Session, step: Step): UI {
     turn: turn.turn,
     save: session.saveString,
     potentialMarks: [],
-    commands: [],
-    system: []
+    commands: Object.keys(game.commands).reduce((mem,c)=>({...mem,[c]:null}),{}),
+    submit: null,
+    undo: null,
+    instruction: null,
   };
   if (!session.endedBy){
-    let links = Object.keys(turn.links[step.stepid]).reduce((mem,action)=> {
+    UI.undo = undo.length ? undo[undo.length-1].actionName : null;
+    let links = Object.keys(turn.links[step.stepid]).forEach(action=> {
       if (isEndGameCommand(action)||action=='endturn'||action==='next'){
-        mem.system.push(action)
+        UI.submit = action as typeof UI.submit;
       } else if (game.commands[action]){
-        mem.commands.push(action)
+        UI.commands[action] = action;
       } else {
-        mem.potentialMarks.push({
+        UI.potentialMarks.push({
           coords: pos2coords(action),
           pos: action
-        })
+        });
       }
-      return mem
-    },{potentialMarks:[],commands:[],system:undo.length?[ 'undo '+undo[undo.length-1].actionName ]:[]});
-    Object.assign(UI, links, {
-      instruction: game[step.name+turn.player+'instruction'](step)
     });
+    UI.instruction = game[step.name+turn.player+'instruction'](step);
   } else {
     UI.endedBy = session.endedBy;
     UI.winner = session.winner;

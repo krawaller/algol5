@@ -38,11 +38,15 @@ export type UI = {
     coords: Coords,
     pos: Position
   }[],
-  commands: string[],
-  system: string[],
+  commands: {
+    [cmndname: string]: string;
+  },
+  submit: 'endturn' | 'win' | 'draw' | 'lose' | null
+  undo: string | null
   endedBy?: string,
   description?: string,
-  winner?: 0 | 1 | 2
+  winner?: 0 | 1 | 2,
+  instruction
 };
 
 type FunctionName = string;

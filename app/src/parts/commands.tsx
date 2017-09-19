@@ -8,7 +8,7 @@ let Commands = (props: CommandProps)=> {
         <button key={name} disabled={props.locked || !props.gameCommands[name]} onClick={()=>props.performCommand(name)}>{name}</button>
     ))
     let systemCommands = ["undo","submit"].map((name)=> (
-        <button className={"syscommands " + name} key={name} disabled={props.locked || !props[name]} onClick={()=>props.performCommand(props[name])}>{name}</button>
+        <button className={"syscommands " + name} key={name} disabled={props.locked || !props[name]} onClick={()=>props.performCommand(name === 'undo' ? name : props[name])}>{name}</button>
     ))
     /*let brainCommands = props.brains.map(name => (
         <button key={name} onClick={()=>props.askBrain(name)}>Ask {name}</button>

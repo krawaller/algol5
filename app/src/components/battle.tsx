@@ -71,7 +71,9 @@ class Battle extends React.Component <BattleProps,BattleState> {
   render() {
     let UI = this.state.UI,
         p = UI.players[UI.playing-1];
-    let info = (p && p.type === "ai")
+    let info = UI.endedBy
+      ? UI.instruction 
+      : (p && p.type === "ai")
       ? <div>Awaiting {p.name}</div>
       :  UI.waiting ? <div>...calculating...</div>
       : UI.instruction;

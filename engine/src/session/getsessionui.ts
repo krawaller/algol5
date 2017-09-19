@@ -53,6 +53,7 @@ export default function getSessionUI(session: Session, step: Step): UI {
   } else {
     UI.endedBy = session.endedBy;
     UI.winner = session.winner;
+    UI.instruction = UI.winner ? "Player " + UI.winner + " wins by " + UI.endedBy : "Game ends in a draw!";
   }
   return UI;
 }

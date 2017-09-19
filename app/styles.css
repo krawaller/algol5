@@ -57,6 +57,8 @@
   transform: scale(2, 2)
 }
 
-.syscommands {
-  margin-left: 20px;
+.commandbtn {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 80px;
 }

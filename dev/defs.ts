@@ -7,6 +7,4 @@ type AND = ["and",BOOL]
 type OR = ["or",BOOL,BOOL]
 type NOT = ["not",BOOL]
 
-interface BOOL {
-	
-}
+type BOOL = TRUE | FALSE | AND | OR | NOT;

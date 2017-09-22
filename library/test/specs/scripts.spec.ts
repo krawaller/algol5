@@ -39,6 +39,11 @@ const scripts: Test[] = [
     "g3","f2","move","endturn",
     "f1"
   ]],
+  ["Basic Duplo script", "duplo", [
+    "a1","deploy","b2","deploy","endturn",
+    "c6","deploy","c5","deploy","endturn",
+    "b2","d4","expand","endturn"
+  ]],
   ["Basic Gogol script", "gogol", [
     "g4","deploy","endturn",
     "f4","deploy","endturn",
@@ -162,6 +167,7 @@ scripts.forEach(([name, gameId,commands], n) => {
     let instr;
     commands.forEach(cmnd => {
       let func = turn.links[at][cmnd];
+      //console.log(cmnd, at, turn.links[at], func);
       if (cmnd === 'endturn') {
         instr = game[func+'instruction'](turn.steps[at]);
         t.doesNotThrow(()=> {

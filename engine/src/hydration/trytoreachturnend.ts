@@ -18,7 +18,7 @@ export default function tryToReachTurnEnd(game: Game, turn: Turn): Turn {
     while(!turn.canend && checkActions.length){
       let action = checkActions.pop()
       let func = steplinks[action]
-      if (isTurnEndAction(action) || canalwaysend[func]){
+      if (isTurnEndAction(action) || canalwaysend[action]){
         turn.canend = true
       } else {
         let nextstepid = stepid + '-' + action

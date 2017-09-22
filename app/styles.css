@@ -15,6 +15,10 @@
     align-items: center;
 }
 
+.piece {
+    transition: color 0.5s ease;
+}
+
 .owner0 {
     color: gold;
 }

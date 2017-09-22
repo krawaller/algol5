@@ -112,8 +112,9 @@
         for (var STARTPOS in walkstarts) {
           var allwalkerdirs = [1, 5];
           for (var walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
+            var STOPREASON = "";
             var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
+            while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
               ARTIFACTS['marks'][POS] = {};
             }
             if (BLOCKS[POS] && allowedsteps[POS]) {
@@ -143,8 +144,9 @@
         for (var STARTPOS in walkstarts) {
           var allwalkerdirs = [1, 5];
           for (var walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
+            var STOPREASON = "";
             var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS] && allowedsteps[POS]) {
+            while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
               ARTIFACTS['marks'][POS] = {};
             }
             if (BLOCKS[POS]) {
@@ -174,8 +176,9 @@
         for (var STARTPOS in walkstarts) {
           var allwalkerdirs = [1, 5];
           for (var walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
+            var STOPREASON = "";
             var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
+            while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
               ARTIFACTS['marks'][POS] = {};
             }
             if (BLOCKS[POS] && allowedsteps[POS]) {
@@ -368,8 +371,9 @@
         for (var STARTPOS in walkstarts) {
           var allwalkerdirs = [1, 5];
           for (var walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
+            var STOPREASON = "";
             var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
+            while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
               ARTIFACTS['marks'][POS] = {};
             }
             if (BLOCKS[POS] && allowedsteps[POS]) {
@@ -399,8 +403,9 @@
         for (var STARTPOS in walkstarts) {
           var allwalkerdirs = [1, 5];
           for (var walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
+            var STOPREASON = "";
             var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS] && allowedsteps[POS]) {
+            while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
               ARTIFACTS['marks'][POS] = {};
             }
             if (BLOCKS[POS]) {
@@ -430,8 +435,9 @@
         for (var STARTPOS in walkstarts) {
           var allwalkerdirs = [1, 5];
           for (var walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
+            var STOPREASON = "";
             var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
+            while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
               ARTIFACTS['marks'][POS] = {};
             }
             if (BLOCKS[POS] && allowedsteps[POS]) {

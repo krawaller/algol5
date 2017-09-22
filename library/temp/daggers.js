@@ -111,10 +111,11 @@
           var allwalkerdirs = [8, 1, 2, 4, 5, 6];
           for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
             var DIR = allwalkerdirs[walkerdirnbr];
+            var STOPREASON = "";
             var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
             var POS = STARTPOS;
             var LENGTH = 0;
-            while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
               LENGTH++;
               ARTIFACTS['movetarget'][POS] = {};
             }
@@ -326,10 +327,11 @@
           var allwalkerdirs = [8, 1, 2, 4, 5, 6];
           for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
             var DIR = allwalkerdirs[walkerdirnbr];
+            var STOPREASON = "";
             var MAX = (([8, 1, 2].indexOf(DIR) !== -1) ? 1 : 8);
             var POS = STARTPOS;
             var LENGTH = 0;
-            while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+            while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
               LENGTH++;
               ARTIFACTS['movetarget'][POS] = {};
             }

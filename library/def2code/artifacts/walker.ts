@@ -65,9 +65,10 @@ function walkInDir(gameDef: Definition, player: 1 | 2, action: string, walkDef,
   const O = {rules: gameDef, player, action, usefordir: dirVar};
   const drawDuringWhile = !contains([walkDef.draw.steps,walkDef.draw.all],['totalcount']) && !contains([walkDef.draw.steps,walkDef.draw.all],['walklength']);
   const drawStepsInLoop = drawDuringWhile && contains([walkDef.draw.steps,walkDef.draw.all,walkDef.draw.counted],['step']);
-  const needsStopReason = walkDef.draw.blocks || contains(walkDef,['stopreason']);
+  const needsStopReason = walkDef.draw.block || contains(walkDef,['stopreason']); // TODO - drawblock? :P
   const needsWalkLength = walkDef.draw.last || contains(walkDef.draw,['walklength']);
   const needsWalkPath = !drawDuringWhile || needsWalkLength;
+  const blockNeedsStep = contains(walkDef.draw.block, ['step']);
   const whileCondition = needsStopReason ? `!(STOPREASON=${calcStopReason(walkDef,dirVar)})` : calcStopCondition(walkDef,dirVar);
   const countSoFar = walkDef.count && contains(walkDef.draw,['countsofar']);
   const drawBlockCond = ['BLOCKS[POS]'].concat(walkDef.steps && !walkDef.testblocksbeforesteps ? 'allowedsteps[POS]' : []).join(' && ');
@@ -108,6 +109,7 @@ function walkInDir(gameDef: Definition, player: 1 | 2, action: string, walkDef,
                                           }
     ${needsWalkLength                  ? 'var WALKLENGTH = walkedsquares.length; ' : ''}
     ${walkDef.count                    ? 'var TOTALCOUNT = CURRENTCOUNT; ' : ''}
+    ${blockNeedsStep                   ? 'var STEP = WALKLENGTH + 1; ' : ''}
     ${walkDef.draw.block               ? `if (${drawBlockCond}){
                                             ${draw(gameDef,player,action,walkDef.draw.block)}
                                             ${draw(gameDef,player,action,walkDef.draw.all)}

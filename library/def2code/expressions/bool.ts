@@ -25,6 +25,10 @@ export default function parseBool(gameDef: Definition, player: 1 | 2, action: s
       const [v1,v2] = args;
       return `(${parse.val(v1)} > ${parse.val(v2)})`;
     }
+    case "moreorequal": {
+      const [v1,v2] = args;
+      return `(${parse.val(v1)} >= ${parse.val(v2)})`;
+    }
     case "anyat": {
       const [set,pos] = args;
       return `!!(${parse.set(set)}[${parse.pos(pos)}])`;

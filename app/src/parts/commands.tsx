@@ -7,18 +7,21 @@ let Commands = (props: CommandProps)=> {
     let gameCommands = Object.keys(props.gameCommands).map((name)=> (
         <button
             key={name}
-            disabled={props.locked || !(props.gameCommands[name] || props.undo === name)}
-            onClick={()=>props.performCommand(props.undo === name ? "undo" : name)}
+            disabled={props.locked || !props.gameCommands[name]}
+            onClick={()=>props.performCommand(name)} //props.undo === name ? "undo" : name)}
             className="commandbtn"
-        >{props.undo === name ? "undo " + name : name}</button>
+        >{name}</button>
     ))
     let submitButton = (
         <button className="submitbtn commandbtn" key={"submit"} disabled={props.locked || !props["submit"]} onClick={()=>props.performCommand(props["submit"])}>submit</button>
     );
+    let undoButton = (
+        <button className="submitbtn commandbtn" key={"undo"} disabled={props.locked || !props.undo} onClick={()=>props.performCommand("undo")}>undo</button>
+    )
     /*let brainCommands = props.brains.map(name => (
         <button key={name} onClick={()=>props.askBrain(name)}>Ask {name}</button>
     ))*/
-    return <div>{gameCommands}{submitButton}</div>
+    return <div>{gameCommands}{undoButton}{submitButton}</div>
 };
 
 export default Commands

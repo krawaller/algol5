@@ -5,7 +5,7 @@
 const games = [
   "_test", "amazon", "aries", "atrium", "castle", "coffee", "daggers", "gogol", "jostle", "kickrun", "krieg",
   "murusgallicus", "murusgallicusadvanced", "orthokon", "semaphor", "serauqs", "snijpunt", "transet","threemusketeers",
-  "uglyduck"
+  "uglyduck","duplo"
 ];
 
 import ALPHA from '../various/base64chars';

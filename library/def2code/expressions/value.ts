@@ -35,7 +35,7 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
     case "currentplayer": {
       return player;
     }
-    case "otherplayer": { // TODO - obsolete? the above too, anyone using?
+    case "otherplayer": {
       return player === 1 ? 2 : 1;
     }
     case "sum": {

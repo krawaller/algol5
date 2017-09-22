@@ -87,8 +87,9 @@
         var allwalkerdirs = [1, 3, 5, 7];
         for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
+          var STOPREASON = "";
           var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+          while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
             ARTIFACTS['movetargets'][POS] = {};
           }
           if (BLOCKS[POS]) {
@@ -326,8 +327,9 @@
         var allwalkerdirs = [1, 3, 5, 7];
         for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
+          var STOPREASON = "";
           var POS = STARTPOS;
-          while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
+          while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
             ARTIFACTS['movetargets'][POS] = {};
           }
           if (BLOCKS[POS]) {

@@ -11,10 +11,11 @@ import * as random from 'lodash/random';
 import decodeSessionSave from './save/decodesessionsave';
 import optionsInUI from './various/optionsinui';
 import newSession from './session/newsession';
-import getSessionUI from './session/getsessionui';
+import getBattleUI from './ui/getbattleui';
 import makeSessionAction from './session/makesessionaction';
 import findBestTurnEndPaths from './ai/findbestturnendpaths';
 import getRandomTurnEndPath from './ai/getrandomturnendpath';
+import compressHistoryForTurn from './history/compresshistoryforturn';
 
 import { Session } from './types';
 
@@ -30,7 +31,7 @@ const api = {
   startGame(gameId,plr1,plr2,battleid?: string){
     let session = newSession(gameId,plr1,plr2,battleid);
     sessions[session.id] = session;
-    return getSessionUI(session, session.step);
+    return getBattleUI(session, session.step);
   },
   /*
   Make a mark, do a command, etc. Perform an action in a session!
@@ -39,7 +40,7 @@ const api = {
     let session = sessions[sessionId];
     //console.log('Gonna do',action,'in session',sessionId,'which has state',session);
     session = makeSessionAction(session,action);
-    return getSessionUI(session, session.step);
+    return getBattleUI(session, session.step);
   },
   /*
   Returns array of best moves for finishing current turn according to named brain.
@@ -69,7 +70,7 @@ const api = {
   inflateFromSave(saveString){
     let {gameId, battleId, turnNumber, moveIndexes, ended} = decodeSessionSave(saveString);
     let UI = api.startGame(gameId,'plr1','plr2',battleId);
-    while(UI.turn < turnNumber || UI.turn == turnNumber && ended && !UI.endedBy){
+    while(UI.current.turn < turnNumber || UI.current.turn == turnNumber && ended && !UI.endedBy){
       let action, available = optionsInUI(UI);
       if (available.length === 1){
         action = available[0]
@@ -92,6 +93,13 @@ const api = {
   */
   gameLibrary(){
     return meta;
+  },
+  /*
+  History woo!
+  */
+  getHistoryForTurn(sessionId){
+    let session = sessions[sessionId];
+    return compressHistoryForTurn(session);
   }
 }
 

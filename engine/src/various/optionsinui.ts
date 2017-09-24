@@ -1,13 +1,14 @@
 /*
 Return a sorted array with all commands available in the UI at this time
 */
-import {UI} from '../types';
+import {BattleUI} from '../types';
 
-export default function optionsInUI(UI:UI): string[] {
-  let ret = [].concat(UI.potentialMarks.map(m => m.pos));
-  ret = ret.concat( Object.keys(UI.commands).reduce((mem,c)=> {
-    return UI.commands[c] ? mem.concat(c) : mem;
+export default function optionsInUI(UI:BattleUI): string[] {
+  const current = UI.current;
+  let ret = [].concat(current.potentialMarks.map(m => m.pos));
+  ret = ret.concat( Object.keys(current.commands).reduce((mem,c)=> {
+    return current.commands[c] ? mem.concat(c) : mem;
   }, []));
-  ret = ret.concat( UI.submit || [] );
-  return ret.sort(); //UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo')).sort();
+  ret = ret.concat( current.submit || [] );
+  return ret.sort();
 }

@@ -11,8 +11,24 @@ export type Coords = {
   y: number
 };
 
-export type UI = {
-  activeMarks: {
+export type BattleUI = {
+  save?: string,
+  gameId: string
+  sessionId: string,
+  endedBy?: string,
+  winner?: 0 | 1 | 2,
+  players: [string,string],
+  board: { // TODO - remove?
+    height: number,
+    width: number
+  },
+  current: CurrentStepUI,
+  history?: StepUI[],
+}
+
+export type StepUI = {
+  playing: 1 | 2,
+  marks: {
     pos: string,
     coords: Coords,
   }[],
@@ -23,31 +39,25 @@ export type UI = {
       spawnCoords?: Coords
     }
   },
-  players: [string,string],
-  playing: 1 | 2,
-  board: {
-    height: number,
-    width: number
-  },
-  sessionId: string,
   turnStart: boolean,
-  gameId: string
   turn: number,
-  save: string,
+  description?: string,
+}
+
+export type StepControlUI = {
   potentialMarks: {
     coords: Coords,
     pos: Position
   }[],
+  instruction: string,
   commands: {
     [cmndname: string]: string;
   },
   submit: 'endturn' | 'win' | 'draw' | 'lose' | null
   undo: string | null
-  endedBy?: string,
-  description?: string,
-  winner?: 0 | 1 | 2,
-  instruction
 };
+
+export type CurrentStepUI = StepUI & StepControlUI;
 
 type FunctionName = string;
 type Position = string;

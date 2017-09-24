@@ -5,6 +5,8 @@ This test makes sure that executing the win command correctly ends a game.
 import algol from '../../src';
 import * as omit from 'lodash/omit';
 
+import makePlayer from '../makeplayer';
+
 import optionsInUI from '../../src/various/optionsinui';
 
 import * as test from 'tape';
@@ -23,7 +25,7 @@ const path = [
 
 test(`The win mechanics`, t => {
   t.plan(4);
-  let UI = algol.startGame('krieg', 'plr1', 'plr2');
+  let UI = algol.startGame('krieg', makePlayer(1), makePlayer(2));
   let remaining = path.slice(0);
   while(remaining.length){
     let action = remaining.shift();

@@ -17,7 +17,9 @@ import findBestTurnEndPaths from './ai/findbestturnendpaths';
 import getRandomTurnEndPath from './ai/getrandomturnendpath';
 import compressHistoryForTurn from './history/compresshistoryforturn';
 
-import { Session } from './types';
+import makePlayer from '../test/makeplayer';
+
+import { Session, Player } from './types';
 
 let sessions: {[sessionid: string]: Session} = {};
 
@@ -28,7 +30,7 @@ const api = {
   Start a new session for a given game with the given players
   BattleId is optional, otherwise one will be randomised
   */
-  startGame(gameId,plr1,plr2,battleid?: string){
+  startGame(gameId,plr1:Player,plr2:Player,battleid?: string){
     let session = newSession(gameId,plr1,plr2,battleid);
     sessions[session.id] = session;
     return getBattleUI(session, session.step);
@@ -69,7 +71,7 @@ const api = {
   */
   inflateFromSave(saveString){
     let {gameId, battleId, turnNumber, moveIndexes, ended} = decodeSessionSave(saveString);
-    let UI = api.startGame(gameId,'plr1','plr2',battleId);
+    let UI = api.startGame(gameId,makePlayer(1),makePlayer(2),battleId); // TODO - make save handle player info! :P
     while(UI.current.turn < turnNumber || UI.current.turn == turnNumber && ended && !UI.endedBy){
       let action, available = optionsInUI(UI);
       if (available.length === 1){

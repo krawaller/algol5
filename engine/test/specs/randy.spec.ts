@@ -6,10 +6,11 @@ also test if AI:s can finish games correctly.
 
 import algol from '../../src';
 import * as test from 'tape';
+import makePlayer from '../makeplayer';
 
 test(`The Randy AI plays Semaphor against itself to the end`, t => {
   t.plan(1);
-  let UI = algol.startGame('semaphor', 'plr1', 'plr2');
+  let UI = algol.startGame('semaphor', makePlayer(1), makePlayer(2));
   while (!UI.endedBy) {
     let cmnds = algol.findBestOption(UI.sessionId, 'Randy');
     cmnds.forEach(cmnd => {

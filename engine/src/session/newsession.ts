@@ -8,11 +8,11 @@ import hydrateTurn from '../hydration/hydrateturn';
 import {games} from '../../gamesproxy';
 import {generateBattleId} from '../id/battleid';
 
-import { Session } from '../types';
+import { Session, Player } from '../types';
 
 let nextSessionId = 1;
 
-export default function newSession(gameId: string, plr1: string, plr2: string, battleId: string): Session {
+export default function newSession(gameId: string, plr1: Player, plr2: Player, battleId: string): Session {
   let game = games[gameId];
   let turn = game.newGame()
   turn = hydrateTurn(game,turn)
@@ -24,7 +24,7 @@ export default function newSession(gameId: string, plr1: string, plr2: string, b
     savedIndexes: [],
     markTimeStamps: {},
     undo: [],
-    players: [plr1, plr2] as [string,string],
+    players: [plr1, plr2] as [Player,Player],
     id: 's'+(nextSessionId++),
     battleId: battleId || generateBattleId()
   };

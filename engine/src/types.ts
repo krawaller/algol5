@@ -11,13 +11,18 @@ export type Coords = {
   y: number
 };
 
+export type Player = {
+  type: string,
+  name: string,
+}
+
 export type BattleUI = {
   save?: string,
   gameId: string
   sessionId: string,
   endedBy?: string,
   winner?: 0 | 1 | 2,
-  players: [string,string],
+  players: [Player,Player],
   board: { // TODO - remove?
     height: number,
     width: number
@@ -144,7 +149,7 @@ export type Session = {
   savedIndexes: number[],
   markTimeStamps: {},
   undo: any[],
-  players: [string,string],
+  players: [Player,Player],
   id: string,
   battleId: string,
   winner?: 0 | 1 | 2,

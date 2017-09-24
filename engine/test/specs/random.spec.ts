@@ -8,6 +8,7 @@ const NUMBEROFTURNS = 8;
 
 import algol from '../../src';
 import optionsInUI from '../../src/various/optionsinui';
+import makePlayer from '../makeplayer';
 
 import * as test from "tape";
 
@@ -16,7 +17,7 @@ import * as omit from 'lodash/omit';
 
 
 function makeRandomMovesInGame(gameId, n){
-  let UI = algol.startGame(gameId, 'plr1', 'plr2');
+  let UI = algol.startGame(gameId, makePlayer(1), makePlayer(2));
   let turncount = 0;
   let path = [];
   do {

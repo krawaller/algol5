@@ -6,14 +6,26 @@ import Commands from '../parts/commands';
 
 import random from 'lodash/random';
 
-type BattleState = any;
-type BattleProps = any;
+import { BattleUI } from '../../../engine/src/types';
+
+type BattleState = {
+  waiting: string | undefined,
+  players: string[],
+  UI?: BattleUI
+};
+type BattleProps = {
+  game: any,
+  algol: any,
+  participants: [string,string]
+};
 
 class Battle extends React.Component <BattleProps,BattleState> {
   constructor(p){
     super(p);
     this.state = {
-      UI: { waiting: 'loading', players: [], board: {} }
+      waiting: 'loading',
+      players: [],
+      UI: null,
     };
     this.doAction = this.doAction.bind(this);
     this.maybeAI = this.maybeAI.bind(this);
@@ -21,9 +33,9 @@ class Battle extends React.Component <BattleProps,BattleState> {
     this.makeAImoves = this.makeAImoves.bind(this);
   }
   doAction(action) {
-    this.setState({UI: {...this.state.UI, waiting: action}}, ()=>{
+    this.setState({waiting: action}, ()=>{
       this.props.algol.performAction(this.state.UI.sessionId,action).then(UI=>{
-        this.setState({UI:UI}, this.maybeAI);
+        this.setState({UI:UI,waiting:undefined}, this.maybeAI);
         /*this.props.algol.debug(UI.sessionId).then(res => {
           this.setState({UI:UI}, this.maybeAI);
           console.log("Executed",action," => ",{UI,debug:res});
@@ -38,29 +50,28 @@ class Battle extends React.Component <BattleProps,BattleState> {
     });
   }
   askBrain(name) { // TODO - broken now
-    let s = this.state.session
+    /*let s = this.state.session
     let p = this.props
     let func = 'brain_'+name+'_'+s.turn.player
     let score = s.game[func](s.step)
     let details = s.game[func+'_detailed'](s.step)
-    console.log("WHAT DOES",name,"SAY?",score,details,this.findBest(name))
+    console.log("WHAT DOES",name,"SAY?",score,details,this.findBest(name))*/
   }
   findBest(brain) {
-    let s = this.state.session
-    let best = this.props.algol.findBestOption(s.UI.sessionId,brain)
+    let best = this.props.algol.findBestOption(this.state.UI.sessionId,brain)
     console.log("BEST OPTIONS",best)
   }
   maybeAI() {
     let UI = this.state.UI,
-        plr = UI.players[UI.playing-1]
-    if (UI.turnStart && plr.type === 'ai'){
+        plr = UI.players[UI.current.playing-1]
+    if (UI.current.turnStart && plr.type === 'ai'){
       setTimeout(this.makeAImoves,100);
     }
   }
   makeAImoves() {
     let UI = this.state.UI
-    let plr = UI.players[UI.playing-1]
-    this.setState({UI: {...this.state.UI, waiting: 'AI thinking'}}, ()=>{
+    let plr = UI.players[UI.current.playing-1]
+    this.setState({waiting: 'AI thinking'}, ()=>{
       this.props.algol.findBestOption(UI.sessionId, plr.name).then(moves => {
         for(let i=0; i<moves.length; i++){
           setTimeout( this.doAction.bind(this,moves[i]), i*800 ) // TODO - make less naïve code here
@@ -69,15 +80,19 @@ class Battle extends React.Component <BattleProps,BattleState> {
     });
   }
   render() {
+    if (!this.state.UI){
+      return <div>...loading...</div>;
+    }
     let UI = this.state.UI,
-        p = UI.players[UI.playing-1];
+        current = UI.current,
+        p = UI.players[current.playing-1];
     let info = UI.endedBy
-      ? UI.instruction 
+      ? current.instruction 
       : (p && p.type === "ai")
       ? <div>Awaiting {p.name}</div>
-      :  UI.waiting ? <div>...calculating...</div>
-      : UI.instruction;
-    let plrCanAct = !(p && p.type === "ai") && !UI.waiting;
+      :  this.state.waiting ? <div>...calculating...</div>
+      : current.instruction;
+    let plrCanAct = !(p && p.type === "ai") && !this.state.waiting;
     /*if (!UI.waiting){
       let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
       console.log("Available now", available.sort());
@@ -101,12 +116,12 @@ class Battle extends React.Component <BattleProps,BattleState> {
         <h4>Playing!</h4>
         <div className={"board " + this.props.game.id} style={style}>
           <div style={offset}>
-            {UI.units && <Units unitdata={UI.units} board={UI.board} />}
-            {p && <Marks board={UI.board} ai={p.type === "ai"} activeMarks={UI.activeMarks} potentialMarks={UI.potentialMarks} selectMark={this.doAction}/>}
+            {current.units && <Units unitdata={current.units} board={this.props.game.board} />}
+            {p && <Marks board={this.props.game.board} ai={p.type === "ai"} activeMarks={current.marks} potentialMarks={current.potentialMarks} selectMark={this.doAction}/>}
           </div>
         </div>
         <div>
-          {UI && UI.commands && <Commands locked={!plrCanAct} gameCommands={UI.commands} undo={UI.undo} submit={UI.submit} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>}
+          {UI && current.commands && <Commands locked={!plrCanAct} gameCommands={current.commands} undo={current.undo} submit={current.submit} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>}
           <div>{info}</div>
       </div>
       </div>

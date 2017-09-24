@@ -5,9 +5,9 @@ Returns array of UI objects for given turn, with adjusted marks
 
 import getStepUI from '../ui/getstepui';
 import {pos2coords} from '../../gamesproxy';
-import { Session, Turn, BattleUI } from '../types';
+import { Session, Turn, StepUI } from '../types';
 
-export default function compressedHistoryForTurn(session: Session): BattleUI[] {
+export default function compressedHistoryForTurn(session: Session): StepUI[] {
   return session.step.path.reduce((mem,action)=> {
     mem.id += '-' + action
     if (session.game.commands[action]){ // TODO - do boilUntil here instead? :D have cmnds array as default?

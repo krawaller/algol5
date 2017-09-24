@@ -28,11 +28,11 @@ export type BattleUI = {
     width: number
   },
   current: CurrentStepUI,
-  history?: StepUI[],
+  history: StepUI[],
 }
 
 export type StepUI = {
-  playing: 1 | 2,
+  playing: 0 | 1 | 2, // Can be 0 for start setup
   marks: {
     pos: string,
     coords: Coords,
@@ -44,7 +44,6 @@ export type StepUI = {
       spawnCoords?: Coords
     }
   },
-  turnStart: boolean,
   turn: number,
   description?: string,
 }
@@ -59,7 +58,8 @@ export type StepControlUI = {
     [cmndname: string]: string;
   },
   submit: 'endturn' | 'win' | 'draw' | 'lose' | null
-  undo: string | null
+  undo: string | null,
+  turnStart: boolean,
 };
 
 export type CurrentStepUI = StepUI & StepControlUI;
@@ -154,5 +154,6 @@ export type Session = {
   battleId: string,
   winner?: 0 | 1 | 2,
   endedBy?: string,
-  saveString?: string
+  saveString?: string,
+  history: StepUI[]
 }

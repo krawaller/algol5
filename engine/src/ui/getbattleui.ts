@@ -22,6 +22,7 @@ export default function getBattleUI(session: Session, step: Step): BattleUI {
     current: {
       ...getStepUI(session, step),
       ...getStepControlUI(session, step)
-    }
+    },
+    history: session.history
   };
 }

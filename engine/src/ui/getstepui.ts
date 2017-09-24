@@ -19,7 +19,6 @@ export default function getStepUI(session: Session, step: Step): StepUI {
       spawnCoords: u.from ? pos2coords(u.from) : undefined
     })),
     playing: turn.player,
-    turnStart: session.step.stepid === 'root',
     turn: turn.turn,
     description: session.endedBy
       ? session.winner

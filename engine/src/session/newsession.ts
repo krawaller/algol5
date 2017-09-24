@@ -7,7 +7,7 @@ Pure.
 import hydrateTurn from '../hydration/hydrateturn';
 import {games} from '../../gamesproxy';
 import {generateBattleId} from '../id/battleid';
-
+import makeFirstHistoryEntry from '../history/makefirsthistoryentry';
 import { Session, Player } from '../types';
 
 let nextSessionId = 1;
@@ -16,7 +16,7 @@ export default function newSession(gameId: string, plr1: Player, plr2: Player, b
   let game = games[gameId];
   let turn = game.newGame()
   turn = hydrateTurn(game,turn)
-  let session = {
+  let session:Session = {
     gameId: gameId,
     game: game,
     turn: turn,
@@ -26,7 +26,9 @@ export default function newSession(gameId: string, plr1: Player, plr2: Player, b
     undo: [],
     players: [plr1, plr2] as [Player,Player],
     id: 's'+(nextSessionId++),
-    battleId: battleId || generateBattleId()
+    battleId: battleId || generateBattleId(),
+    history: []
   };
+  session.history.push(makeFirstHistoryEntry(session));
   return session;
 }

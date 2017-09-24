@@ -10,6 +10,7 @@ import {BattleUI, CurrentStepUI, StepUI, StepControlUI, Session, Step} from '../
 export default function getStepControlUI(session: Session, step: Step): StepControlUI {
   let {game,turn,undo,markTimeStamps} = session;
   let controls: StepControlUI = {
+    turnStart: session.step.stepid === 'root',
     potentialMarks: [],
     commands: Object.keys(game.commands).reduce((mem,c)=>({...mem,[c]:null}),{}),
     submit: null,

@@ -8,6 +8,7 @@ import isGameEndCommand from '../various/isgameendcmnd';
 import calcTurnSave from '../save/calcturnsave'
 import encodeSessionSave from '../save/encodesessionsave';
 import decodeSessionSave from '../save/decodesessionsave';
+import compressHistoryForTurn from '../history/compresshistoryforturn';
 
 import { Session } from '../types'
 
@@ -23,8 +24,9 @@ export default function makeSessionAction(session: Session, action: string): Ses
     let undo = session.undo.pop()
     session.step = session.turn.steps[undo.backTo]
   }
-  // ending the game!
+  // ending the battle!
   else if (isGameEndCommand(action)){
+    session.history = session.history.concat( compressHistoryForTurn(session) );
     session.savedIndexes = session.savedIndexes.concat( calcTurnSave(session.turn,session.step,action) );
     session.saveString = encodeSessionSave({
       gameId: session.gameId,
@@ -38,6 +40,7 @@ export default function makeSessionAction(session: Session, action: string): Ses
   }
   // ending the turn, creating a new one
   else if (action==='endturn'){
+    session.history = session.history.concat( compressHistoryForTurn(session) );
     session.savedIndexes = session.savedIndexes.concat( calcTurnSave(session.turn,session.step,'endturn') );
     session.turn = hydrateTurn(session.game, session.turn.next[session.step.stepid]);
     session.saveString = encodeSessionSave({
@@ -49,7 +52,6 @@ export default function makeSessionAction(session: Session, action: string): Ses
     session.step = session.turn.steps.root;
     session.markTimeStamps = {};
     session.undo = [];
-    // TODO also add to session history
   }
   // doing an action or adding a mark
   else {

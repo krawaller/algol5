@@ -9,6 +9,12 @@
 
 -[ ] Finish storing plr names/type in save
 -[ ] Implement history
+    -[x] create history entries
+    -[x] add initial start history entry
+    -[x] move turnstart to the currentstep version
+    -[ ] add boiluntil
+    -[ ] add cmnd exclusion logic
+    -[ ] add unit tests
 
 ## Library TODO
 

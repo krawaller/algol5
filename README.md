@@ -15,6 +15,7 @@
     -[ ] add boiluntil
     -[ ] add cmnd exclusion logic
     -[ ] add unit tests
+-[ ] Make possibilities deal with turnvars (descent)
 
 ## Library TODO
 

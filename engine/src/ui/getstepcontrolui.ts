@@ -5,7 +5,7 @@
 import isEndGameCommand from '../various/isgameendcmnd';
 import { pos2coords } from '../../gamesproxy';
 
-import {BattleUI, CurrentStepUI, StepUI, StepControlUI, Session, Step} from '../types';
+import {BattleUI, StepUI, StepControlUI, Session, Step} from '../types';
 
 export default function getStepControlUI(session: Session, step: Step): StepControlUI {
   let {game,turn,undo,markTimeStamps} = session;

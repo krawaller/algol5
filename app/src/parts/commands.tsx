@@ -21,7 +21,12 @@ let Commands = (props: CommandProps)=> {
     /*let brainCommands = props.brains.map(name => (
         <button key={name} onClick={()=>props.askBrain(name)}>Ask {name}</button>
     ))*/
-    return <div>{gameCommands}{undoButton}{submitButton}</div>
+    return (
+        <div className="commands">
+            <div>{gameCommands}</div>
+            <div>{undoButton}{submitButton}</div>
+        </div>
+    );
 };
 
 export default Commands

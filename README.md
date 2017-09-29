@@ -4,6 +4,11 @@
 
 -[ ] Show saved battles per game
 -[ ] Show history after implementation
+    -[x] Show history list
+    -[x] State flag for current step
+    -[ ] Nicify "current"
+    -[ ] Playback controls
+    -[ ] Button current<->history toggle
 
 ## Engine TODO
 

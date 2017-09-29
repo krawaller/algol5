@@ -72,7 +72,7 @@ const api = {
   inflateFromSave(saveString){
     let {gameId, battleId, turnNumber, moveIndexes, ended} = decodeSessionSave(saveString);
     let UI = api.startGame(gameId,makePlayer(1),makePlayer(2),battleId); // TODO - make save handle player info! :P
-    while(UI.current.turn < turnNumber || UI.current.turn == turnNumber && ended && !UI.endedBy){
+    while(UI.current.UI.turn < turnNumber || UI.current.UI.turn == turnNumber && ended && !UI.endedBy){
       let action, available = optionsInUI(UI);
       if (available.length === 1){
         action = available[0]

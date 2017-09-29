@@ -61,9 +61,63 @@
   transform: scale(2, 2)
 }
 
+.commands {
+    display: flex;
+}
+
+.commands > div {
+    display: flex;
+    flex-direction: column;
+}
+
 .commandbtn {
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
     width: 80px;
+}
+
+.history {
+    position: absolute;
+    padding-left: 20px;
+    width: 200px;
+}
+
+.turn {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    border-bottom: 1px solid lightgray;
+}
+
+.turn.player0 {color: darkgray;}
+.turn.player1 {color: blue;}
+.turn.player2 {color: red;}
+
+.turn.player0 > div:first-child {background-color: darkgray;}
+.turn.player1 > div:first-child {background-color: blue;}
+.turn.player2> div:first-child {background-color: red;}
+
+.turn > div:first-child {
+    text-align: center;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    margin-right: 15px;
+}
+
+.turn > div:last-child {
+    flex: 1;
+}
+
+.turn > div:last-child > div {
+    cursor: pointer;
+}
+
+.turn > div:last-child > div:hover, .currentStep {
+    background-color: gold;
 }

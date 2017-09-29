@@ -27,7 +27,10 @@ export type BattleUI = {
     height: number,
     width: number
   },
-  current: CurrentStepUI,
+  current: {
+    UI: StepUI,
+    controls: StepControlUI
+  },
   history: StepUI[],
 }
 
@@ -61,8 +64,6 @@ export type StepControlUI = {
   undo: string | null,
   turnStart: boolean,
 };
-
-export type CurrentStepUI = StepUI & StepControlUI;
 
 type FunctionName = string;
 type Position = string;

@@ -3,6 +3,7 @@ import * as React from 'react';
 import Units from '../parts/units';
 import Marks from '../parts/marks';
 import Commands from '../parts/commands';
+import History from '../parts/history';
 
 import random from 'lodash/random';
 
@@ -11,7 +12,8 @@ import { BattleUI } from '../../../engine/src/types';
 type BattleState = {
   waiting: string | undefined,
   players: string[],
-  UI?: BattleUI
+  UI?: BattleUI,
+  step: number
 };
 type BattleProps = {
   game: any,
@@ -26,11 +28,16 @@ class Battle extends React.Component <BattleProps,BattleState> {
       waiting: 'loading',
       players: [],
       UI: null,
+      step: -1,
     };
     this.doAction = this.doAction.bind(this);
     this.maybeAI = this.maybeAI.bind(this);
     this.askBrain = this.askBrain.bind(this);
     this.makeAImoves = this.makeAImoves.bind(this);
+    this.selectStep = this.selectStep.bind(this);
+  }
+  selectStep(idx: number) {
+    this.setState({step: idx});
   }
   doAction(action) {
     this.setState({waiting: action}, ()=>{
@@ -64,14 +71,14 @@ class Battle extends React.Component <BattleProps,BattleState> {
   }
   maybeAI() {
     let UI = this.state.UI,
-        plr = UI.players[UI.current.playing-1]
-    if (UI.current.turnStart && plr.type === 'ai'){
+        plr = UI.players[UI.current.UI.playing-1]
+    if (UI.current.controls.turnStart && plr.type === 'ai'){
       setTimeout(this.makeAImoves,100);
     }
   }
   makeAImoves() {
     let UI = this.state.UI
-    let plr = UI.players[UI.current.playing-1]
+    let plr = UI.players[UI.current.UI.playing-1]
     this.setState({waiting: 'AI thinking'}, ()=>{
       this.props.algol.findBestOption(UI.sessionId, plr.name).then(moves => {
         for(let i=0; i<moves.length; i++){
@@ -84,15 +91,19 @@ class Battle extends React.Component <BattleProps,BattleState> {
     if (!this.state.UI){
       return <div>...loading...</div>;
     }
+    let inHistory = this.state.step !== -1;
     let UI = this.state.UI,
-        current = UI.current,
-        p = UI.players[current.playing-1];
-    let info = UI.endedBy
-      ? current.instruction 
+        ctrls = UI.current.controls,
+        step = (!inHistory ? UI.current.UI : UI.history[this.state.step]),
+        p = UI.players[UI.current.UI.playing-1];
+    let info = inHistory
+      ? 'showing history'
+      : UI.endedBy
+      ? ctrls.instruction 
       : (p && p.type === "ai")
       ? <div>Awaiting {p.name}</div>
       :  this.state.waiting ? <div>...calculating...</div>
-      : current.instruction;
+      : ctrls.instruction;
     let plrCanAct = !(p && p.type === "ai") && !this.state.waiting;
     /*if (!UI.waiting){
       let available = UI.commands.concat(UI.potentialMarks.map(m => m.pos)).concat(UI.system.filter(c => c.substr(0,4) !== 'undo'));
@@ -100,9 +111,10 @@ class Battle extends React.Component <BattleProps,BattleState> {
     }*/
     const tileSize = 50;
     const borderSize = tileSize * (75/200); // TODO - fetch?
-    let style = {
+    const style = {
       height:this.props.game.board.height*tileSize + borderSize * 2,
       width:this.props.game.board.width*tileSize + borderSize * 2,
+      position: 'relative' as "relative",
       //backgroundImage: 'url(images/'+this.props.game.id+'.png)' // Relative to index file
     }
     const offset = {
@@ -116,13 +128,14 @@ class Battle extends React.Component <BattleProps,BattleState> {
       <div>
         <h4>Playing!</h4>
         <div className={"board " + this.props.game.id} style={style}>
+          <History history={UI.history} offset={style.width} selectStep={this.selectStep} currentStep={this.state.step}/>
           <div style={offset}>
-            {current.units && <Units unitdata={current.units} board={this.props.game.board} />}
-            {p && <Marks board={this.props.game.board} ai={p.type === "ai"} activeMarks={current.marks} potentialMarks={current.potentialMarks} selectMark={this.doAction}/>}
+            {step.units && <Units unitdata={step.units} board={this.props.game.board} />}
+            {p && <Marks board={this.props.game.board} ai={p.type === "ai"} activeMarks={step.marks} potentialMarks={inHistory ? [] : ctrls.potentialMarks} selectMark={this.doAction}/>}
           </div>
         </div>
         <div>
-          {UI && current.commands && <Commands locked={!plrCanAct} gameCommands={current.commands} undo={current.undo} submit={current.submit} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>}
+          {UI && !inHistory && ctrls.commands && <Commands locked={!plrCanAct} gameCommands={ctrls.commands} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>}
           <div>{info}</div>
       </div>
       </div>

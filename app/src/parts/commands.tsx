@@ -1,6 +1,14 @@
 import * as React from 'react'
 
-type CommandProps = any;
+type CommandProps = {
+    locked: boolean
+    performCommand: (cmnd: string) => void
+    undo?: string
+    submit?: string
+    gameCommands: { [cmndname: string]: string; }
+    firstTurn: boolean
+    openHistory: () => void
+};
 
 // gameCommands, systemCommands, performCommand
 let Commands = (props: CommandProps)=> {
@@ -13,10 +21,13 @@ let Commands = (props: CommandProps)=> {
         >{name}</button>
     ))
     let submitButton = (
-        <button className="submitbtn commandbtn" key={"submit"} disabled={props.locked || !props["submit"]} onClick={()=>props.performCommand(props["submit"])}>submit</button>
+        <button className="submitbtn commandbtn" key={"submit"} disabled={props.locked || !props.submit} onClick={()=>props.performCommand(props.submit)}>submit</button>
     );
     let undoButton = (
         <button className="submitbtn commandbtn" key={"undo"} disabled={props.locked || !props.undo} onClick={()=>props.performCommand("undo")}>undo</button>
+    )
+    let historyButton = (
+        <button className="commandbtn" disabled={!props.firstTurn} onClick={()=>props.openHistory()}>history</button>
     )
     /*let brainCommands = props.brains.map(name => (
         <button key={name} onClick={()=>props.askBrain(name)}>Ask {name}</button>
@@ -24,7 +35,7 @@ let Commands = (props: CommandProps)=> {
     return (
         <div className="commands">
             <div>{gameCommands}</div>
-            <div>{undoButton}{submitButton}</div>
+            <div>{submitButton}{undoButton}{historyButton}</div>
         </div>
     );
 };

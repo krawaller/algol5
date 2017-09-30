@@ -17,6 +17,7 @@
     -[x] create history entries
     -[x] add initial start history entry
     -[x] move turnstart to the currentstep version
+    -[x] add stepnumber to historycreation, dont force app to do it
     -[ ] add boiluntil
     -[ ] add cmnd exclusion logic
     -[ ] add unit tests

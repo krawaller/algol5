@@ -29,17 +29,20 @@ export type BattleUI = {
   },
   current: {
     UI: StepUI,
-    controls: StepControlUI
+    controls: StepControlUI,
+    history: StepUI[]
   },
   history: StepUI[],
 }
 
+export type PositionList = {
+  pos: string,
+  coords: Coords,
+}[];
+
 export type StepUI = {
   playing: 0 | 1 | 2, // Can be 0 for start setup
-  marks: {
-    pos: string,
-    coords: Coords,
-  }[],
+  marks: PositionList
   units: {
     [id: string]: {
       icon: string,
@@ -49,13 +52,11 @@ export type StepUI = {
   },
   turn: number,
   description?: string,
+  idx?: number,
 }
 
 export type StepControlUI = {
-  potentialMarks: {
-    coords: Coords,
-    pos: Position
-  }[],
+  potentialMarks: PositionList
   instruction: string,
   commands: {
     [cmndname: string]: string;
@@ -156,5 +157,6 @@ export type Session = {
   winner?: 0 | 1 | 2,
   endedBy?: string,
   saveString?: string,
-  history: StepUI[]
+  history: StepUI[],
+  currentSteps: StepUI[],
 }

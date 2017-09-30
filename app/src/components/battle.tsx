@@ -88,13 +88,18 @@ class Battle extends React.Component <BattleProps,BattleState> {
     });
   }
   render() {
-    if (!this.state.UI){
+    const UI = this.state.UI;
+    if (!UI){
       return <div>...loading...</div>;
     }
-    let inHistory = this.state.step !== -1;
-    let UI = this.state.UI,
-        ctrls = UI.current.controls,
-        step = (!inHistory ? UI.current.UI : UI.history[this.state.step]),
+    const totalHistory = UI.history.concat(UI.current.history).concat({
+      ...UI.current.UI,
+      idx: -1,
+      description: '...playing...'
+    });
+    const inHistory = this.state.step !== -1;
+    let ctrls = UI.current.controls,
+        step = (!inHistory ? UI.current.UI : totalHistory[this.state.step]),
         p = UI.players[UI.current.UI.playing-1];
     let info = inHistory
       ? 'showing history'
@@ -128,14 +133,14 @@ class Battle extends React.Component <BattleProps,BattleState> {
       <div>
         <h4>Playing!</h4>
         <div className={"board " + this.props.game.id} style={style}>
-          <History history={UI.history} offset={style.width} selectStep={this.selectStep} currentStep={this.state.step}/>
+          <History history={totalHistory} offset={style.width} selectStep={this.selectStep} currentStep={this.state.step}/>
           <div style={offset}>
             {step.units && <Units unitdata={step.units} board={this.props.game.board} />}
-            {p && <Marks board={this.props.game.board} ai={p.type === "ai"} activeMarks={step.marks} potentialMarks={inHistory ? [] : ctrls.potentialMarks} selectMark={this.doAction}/>}
+            {p && <Marks board={this.props.game.board} disabled={p.type === "ai" || inHistory} activeMarks={step.marks} potentialMarks={inHistory ? [] : ctrls.potentialMarks} selectMark={this.doAction}/>}
           </div>
         </div>
         <div>
-          {UI && !inHistory && ctrls.commands && <Commands locked={!plrCanAct} gameCommands={ctrls.commands} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction} brains={this.props.game.AI} askBrain={this.askBrain}/>}
+          {UI && !inHistory && ctrls.commands && <Commands openHistory={()=>this.selectStep(0)} firstTurn={UI.current.UI.turn > 1} locked={!plrCanAct} gameCommands={ctrls.commands} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction}/>}
           <div>{info}</div>
       </div>
       </div>

@@ -27,7 +27,8 @@ export default function newSession(gameId: string, plr1: Player, plr2: Player, b
     players: [plr1, plr2] as [Player,Player],
     id: 's'+(nextSessionId++),
     battleId: battleId || generateBattleId(),
-    history: []
+    history: [],
+    currentSteps: []
   };
   session.history.push(makeFirstHistoryEntry(session));
   return session;

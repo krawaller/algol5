@@ -31,10 +31,8 @@ const Turn = ({selectStep, currentStep, turn: {turn,steps,player}}: {turn: Turn,
 );
 
 const History = ({offset,history,selectStep,currentStep}: HistoryProps)=> {
-    let stepNum = 0;
-    const turns: Turn[] = history.slice(0).reduce((mem, step: StepUI & {idx:number}) => {
-      step.idx = stepNum++;
-      if (stepNum===1 || mem[mem.length-1].turn != step.turn){
+    const turns: Turn[] = history.slice(0).reduce((mem, step: StepUI, n) => {
+      if (!n || mem[mem.length-1].turn != step.turn){
         mem.push({
           turn: step.turn,
           steps: [step],
@@ -48,7 +46,6 @@ const History = ({offset,history,selectStep,currentStep}: HistoryProps)=> {
 
     return (
         <div className="history" style={{left:offset}}>
-          <div className="turn" onClick={()=> selectStep(-1)}>current</div>
           {turns.slice(0).reverse().map(t => <Turn key={t.turn} turn={t} selectStep={selectStep} currentStep={currentStep} />)}
         </div>
     );

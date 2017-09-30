@@ -21,7 +21,8 @@ export default function getBattleUI(session: Session, step: Step): BattleUI {
     winner: session.winner,
     current: {
       UI: getStepUI(session, step),
-      controls: getStepControlUI(session, step)
+      controls: getStepControlUI(session, step),
+      history: session.currentSteps
     },
     history: session.history
   };

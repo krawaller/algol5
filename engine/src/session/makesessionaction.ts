@@ -23,6 +23,8 @@ export default function makeSessionAction(session: Session, action: string): Ses
   else if (action==='undo' || action.substr(0,5) === 'undo ') {
     let undo = session.undo.pop()
     session.step = session.turn.steps[undo.backTo]
+    session.currentSteps = [];
+    session.currentSteps = compressHistoryForTurn(session);
   }
   // ending the battle!
   else if (isGameEndCommand(action)){
@@ -52,18 +54,20 @@ export default function makeSessionAction(session: Session, action: string): Ses
     session.step = session.turn.steps.root;
     session.markTimeStamps = {};
     session.undo = [];
+    session.currentSteps = [];
   }
-  // doing an action or adding a mark
-  else {
-    if (!session.game.commands[action]){
-      session.markTimeStamps[action] = session.step.stepid
-    } else {
-      session.undo.push({
-        backTo: session.step.stepid,
-        actionName: action
-      });
-    }
+  // adding a mark
+  else if (!session.game.commands[action]){
+    session.markTimeStamps[action] = session.step.stepid
     session.step = session.turn.steps[session.step.stepid+'-'+action] // TODO - or create, if not there!
+  // performing a command
+  } else {
+    session.undo.push({
+      backTo: session.step.stepid,
+      actionName: action
+    });
+    session.step = session.turn.steps[session.step.stepid+'-'+action] // TODO - or create, if not there!
+    session.currentSteps = compressHistoryForTurn(session);
   }
   return session;
 }

@@ -74,7 +74,7 @@
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
-    width: 80px;
+    width: 100px;
 }
 
 .history {
@@ -120,4 +120,9 @@
 
 .turn > div:last-child > div:hover, .currentStep {
     background-color: gold;
+}
+
+.playback {
+    display: flex;
+    flex-direction: column;
 }

@@ -6,7 +6,7 @@ type CommandProps = {
     undo?: string
     submit?: string
     gameCommands: { [cmndname: string]: string; }
-    firstTurn: boolean
+    hasHistory: boolean
     openHistory: () => void
 };
 
@@ -27,7 +27,7 @@ let Commands = (props: CommandProps)=> {
         <button className="submitbtn commandbtn" key={"undo"} disabled={props.locked || !props.undo} onClick={()=>props.performCommand("undo")}>undo</button>
     )
     let historyButton = (
-        <button className="commandbtn" disabled={!props.firstTurn} onClick={()=>props.openHistory()}>history</button>
+        <button className="commandbtn" disabled={!props.hasHistory} onClick={()=>props.openHistory()}>history</button>
     )
     /*let brainCommands = props.brains.map(name => (
         <button key={name} onClick={()=>props.askBrain(name)}>Ask {name}</button>

@@ -4,6 +4,7 @@ import Units from '../parts/units';
 import Marks from '../parts/marks';
 import Commands from '../parts/commands';
 import History from '../parts/history';
+import Playback from '../parts/playback';
 
 import random from 'lodash/random';
 
@@ -92,11 +93,15 @@ class Battle extends React.Component <BattleProps,BattleState> {
     if (!UI){
       return <div>...loading...</div>;
     }
-    const totalHistory = UI.history.concat(UI.current.history).concat({
-      ...UI.current.UI,
-      idx: -1,
-      description: '...playing...'
-    });
+    let totalHistory = UI.history.concat(UI.current.history)
+    if (!UI.endedBy){
+      totalHistory.push({
+        ...UI.current.UI,
+        idx: -1,
+        description: '...playing...'
+      });
+    }
+    const maxStep = UI.endedBy ? totalHistory.length - 1 : totalHistory.length - 2;
     const inHistory = this.state.step !== -1;
     let ctrls = UI.current.controls,
         step = (!inHistory ? UI.current.UI : totalHistory[this.state.step]),
@@ -140,7 +145,8 @@ class Battle extends React.Component <BattleProps,BattleState> {
           </div>
         </div>
         <div>
-          {UI && !inHistory && ctrls.commands && <Commands openHistory={()=>this.selectStep(0)} firstTurn={UI.current.UI.turn > 1} locked={!plrCanAct} gameCommands={ctrls.commands} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction}/>}
+          {UI && !inHistory && ctrls.commands && <Commands openHistory={()=>this.selectStep(0)} hasHistory={maxStep > 0} locked={!plrCanAct} gameCommands={ctrls.commands} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction}/>}
+          {UI && inHistory && <Playback stepIndex={this.state.step} maxStep={maxStep} selectStep={this.selectStep} onGoing={!UI.endedBy} />}
           <div>{info}</div>
       </div>
       </div>

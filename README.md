@@ -7,8 +7,8 @@
     -[x] Show history list
     -[x] State flag for current step
     -[ ] Nicify "current"
-    -[ ] Playback controls
-    -[ ] Button current<->history toggle
+    -[x] Playback controls
+    -[x] Button current<->history toggle
 
 ## Engine TODO
 
@@ -30,5 +30,6 @@
 ## Graphics TODO
 
 -[ ] Add playing pieces to pics/css
+-[ ] Dimensions and positions to css
 -[ ] SVGify
 -[ ] Make nicer :P

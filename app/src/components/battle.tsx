@@ -10,6 +10,8 @@ import random from 'lodash/random';
 
 import { BattleUI } from '../../../engine/src/types';
 
+import optionsInUI from '../../../engine/src/various/optionsinui.ts';
+
 type BattleState = {
   waiting: string | undefined,
   players: string[],
@@ -44,7 +46,7 @@ class Battle extends React.Component <BattleProps,BattleState> {
     this.setState({waiting: action}, ()=>{
       this.props.algol.performAction(this.state.UI.sessionId,action).then(UI=>{
         this.setState({UI:UI,waiting:undefined}, this.maybeAI);
-        console.log("UI",UI);
+        console.log("Action",action,"Options",optionsInUI(UI),"UI",UI);
         /*this.props.algol.debug(UI.sessionId).then(res => {
           this.setState({UI:UI}, this.maybeAI);
           console.log("Executed",action," => ",{UI,debug:res});

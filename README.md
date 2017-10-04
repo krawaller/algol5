@@ -26,9 +26,9 @@
 ## Library TODO
 
 -[ ] Add rules etc to games
--[ ] Tests for shoveoff
--[ ] Tests for descent
--[ ] Tests for duplo
+-[x] Tests for shoveoff
+-[x] Tests for descent
+-[x] Tests for duplo
 
 ## Graphics TODO
 

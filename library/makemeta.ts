@@ -20,7 +20,7 @@ let meta = fs.readdirSync(__dirname+"/defs").reduce((mem,gamename)=>{
     AI: Object.keys(json.AI && json.AI.brains || {}).concat("Randy"),
     board: {
       ...omit(json.board,["terrain"]),
-      terrainLayers: omit(allTerrainLayers, Object.keys(allTerrainLayers).filter(l => !json.graphics.tiles[l]))
+      terrainLayers: omit(allTerrainLayers, Object.keys(allTerrainLayers).filter(l => !(json.graphics.tiles||{})[l]))
     },
     graphics: json.graphics
   };

@@ -169,7 +169,7 @@ function executeEffect(gameDef: Definition, player: 1 | 2, action: string, effe
           pos: ${expr.position(pos)},
           id: newunitid,
           group: ${expr.value(group)},
-          owner: ${owner !== undefined ? expr.value(owner) : 'player' /* TODO player variable here? */ }
+          owner: ${owner !== undefined ? expr.value(owner) : 'player' }
           ${obj?","+map(obj,(val,key)=>key+":"+expr.value(val)).join(","):""}
         }; 
       `;

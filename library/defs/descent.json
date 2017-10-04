@@ -19,20 +19,34 @@
   "endGame": {
     "madeline": {"condition":["notempty","winline"]}
   },
-  "startTurn": { "link": "selectunit" },
+  "startTurn": {
+    "link": "selectunit",
+    "instruction": "Select a unit to move and dig with"
+  },
   "marks": {
     "selectunit": {
       "from": "myunits",
       "runGenerator": "findmovetargets",
-      "link": "selectmovetarget"
+      "link": "selectmovetarget",
+      "instruction": "Select where to move this unit"
     },
     "selectmovetarget": {
       "from": "movetargets",
-      "link": "move"
+      "link": "move",
+      "instruction": "Press \"move\" to confirm this movement"
     },
     "selectdigtarget": {
       "from": "digtargets",
-      "link": "dig"
+      "link": "dig",
+      "instruction": ["ifelse",
+        ["anyat","rooks","selectdigtarget"],
+        "Press \"dig\" to turn this level 3 square to level 2",
+        ["ifelse",
+          ["anyat","knights","selectdigtarget"],
+          "Press \"dig\" to turn this level 2 square to level 1",
+          "Press \"dig\" to remove this square"
+        ]
+      ]
     }
   },
   "commands": {
@@ -47,7 +61,8 @@
         ["moveat","selectunit","selectmovetarget"],
         ["spawn","selectunit",["turnvar","heightfrom"],0]
       ],
-      "link": "selectdigtarget"
+      "link": "selectdigtarget",
+      "instruction": "Select a square next to the moved unit to dig"
     },
     "dig": {
       "applyEffect": ["ifelse",

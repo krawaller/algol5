@@ -98,7 +98,7 @@
         return newstep;
       };
       game.selectunit1instruction = function(step) {
-        return '';
+        return 'Select where to move this unit';
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -117,7 +117,7 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(step) {
-        return '';
+        return 'Press "move" to confirm this movement';
       };
       game.selectdigtarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -135,7 +135,9 @@
         return newstep;
       };
       game.selectdigtarget1instruction = function(step) {
-        return '';
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 3 square to level 2' : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 2 square to level 1' : 'Press "dig" to remove this square'));
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -237,7 +239,7 @@
         return newstep;
       }
       game.move1instruction = function(step) {
-        return '';
+        return 'Select a square next to the moved unit to dig';
       };
       game.dig1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -403,7 +405,7 @@
         return turn;
       }
       game.start1instruction = function(step) {
-        return '';
+        return 'Select a unit to move and dig with';
       };
       game.debug1 = function() {
         return {
@@ -450,7 +452,7 @@
         return newstep;
       };
       game.selectunit2instruction = function(step) {
-        return '';
+        return 'Select where to move this unit';
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -469,7 +471,7 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(step) {
-        return '';
+        return 'Press "move" to confirm this movement';
       };
       game.selectdigtarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -487,7 +489,9 @@
         return newstep;
       };
       game.selectdigtarget2instruction = function(step) {
-        return '';
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 3 square to level 2' : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 2 square to level 1' : 'Press "dig" to remove this square'));
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -589,7 +593,7 @@
         return newstep;
       }
       game.move2instruction = function(step) {
-        return '';
+        return 'Select a square next to the moved unit to dig';
       };
       game.dig2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -755,7 +759,7 @@
         return turn;
       }
       game.start2instruction = function(step) {
-        return '';
+        return 'Select a unit to move and dig with';
       };
       game.debug2 = function() {
         return {

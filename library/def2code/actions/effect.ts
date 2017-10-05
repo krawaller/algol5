@@ -248,6 +248,9 @@ function executeEffect(gameDef: Definition, player: 1 | 2, action: string, effe
       const [set,dir,dist] = args;
       return executeEffect(gameDef,player,action,['foridin',set,['pushid',['loopid'],dir,dist]]);
     }
+    case "multi": {
+      return args.map( e => executeEffect(gameDef,player,action,e) ).join('');
+    }
     default:
       console.log("BAD EFFECT",effect);
       throw "Unknown effect! "+effect;

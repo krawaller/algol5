@@ -315,12 +315,15 @@
           };
         }
         if (!!(UNITLAYERS.units[MARKS['selecttarget']])) {
-          var unitid = (UNITLAYERS.units[MARKS['selecttarget']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'owner': 0
-            });
-          }
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selecttarget']]  || {}).id];
+          var newunitid = 'spawn' + (clones++);
+          UNITDATA[newunitid] = {
+            pos: MARKS['selecttarget'],
+            id: newunitid,
+            group: 'soldiers',
+            owner: 0,
+            from: MARKS['selectunit']
+          };
         }
         MARKS = {};
         UNITLAYERS = {
@@ -713,12 +716,15 @@
           };
         }
         if (!!(UNITLAYERS.units[MARKS['selecttarget']])) {
-          var unitid = (UNITLAYERS.units[MARKS['selecttarget']]  || {}).id;
-          if (unitid) {
-            UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'owner': 0
-            });
-          }
+          delete UNITDATA[(UNITLAYERS.units[MARKS['selecttarget']]  || {}).id];
+          var newunitid = 'spawn' + (clones++);
+          UNITDATA[newunitid] = {
+            pos: MARKS['selecttarget'],
+            id: newunitid,
+            group: 'soldiers',
+            owner: 0,
+            from: MARKS['selectunit']
+          };
         }
         MARKS = {};
         UNITLAYERS = {

@@ -75,7 +75,12 @@
     "expand": {
       "applyEffects": [
         ["forposin","spawns",["spawn",["target"],"soldiers",["player"],{"from":["pos","selectunit"]}]],
-        ["if",["anyat","units","selecttarget"],["setat","selecttarget","owner",0]]
+        ["if",["anyat","units","selecttarget"],
+          ["multi",
+            ["killat","selecttarget"],
+            ["spawn","selecttarget","soldiers",0,{"from":["pos","selectunit"]}]
+          ]
+        ]
       ],
       "link": "endturn"
     }

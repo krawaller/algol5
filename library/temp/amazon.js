@@ -176,7 +176,7 @@
         }
         return newstep;
       };
-      game.selectunit1instruction = function(step) {
+      game.selectunit1instruction = function(turn, step) {
         return 'Select where to move the amazon';
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -195,8 +195,8 @@
         turn.links[newstepid].move = 'move1';
         return newstep;
       };
-      game.selectmovetarget1instruction = function(step) {
-        return 'Choose Move to go here!';
+      game.selectmovetarget1instruction = function(turn, step) {
+        return 'Press "move" to go here';
       };
       game.selectfiretarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -213,8 +213,8 @@
         turn.links[newstepid].fire = 'fire1';
         return newstep;
       };
-      game.selectfiretarget1instruction = function(step) {
-        return 'Choose Fire to shoot here!';
+      game.selectfiretarget1instruction = function(turn, step) {
+        return 'Press "fire" to destroy this square';
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = {
@@ -284,8 +284,8 @@
         }
         return newstep;
       }
-      game.move1instruction = function(step) {
-        return 'Now select where to fire at';
+      game.move1instruction = function(turn, step) {
+        return 'Now select where to fire at from here';
       };
       game.fire1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -343,7 +343,7 @@
         turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.fire1instruction = function(step) {
+      game.fire1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -399,7 +399,7 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
+      game.start1instruction = function(turn, step) {
         return 'Select an amazon to move and fire with';
       };
       game.debug1 = function() {
@@ -529,7 +529,7 @@
         }
         return newstep;
       };
-      game.selectunit2instruction = function(step) {
+      game.selectunit2instruction = function(turn, step) {
         return 'Select where to move the amazon';
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -548,8 +548,8 @@
         turn.links[newstepid].move = 'move2';
         return newstep;
       };
-      game.selectmovetarget2instruction = function(step) {
-        return 'Choose Move to go here!';
+      game.selectmovetarget2instruction = function(turn, step) {
+        return 'Press "move" to go here';
       };
       game.selectfiretarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -566,8 +566,8 @@
         turn.links[newstepid].fire = 'fire2';
         return newstep;
       };
-      game.selectfiretarget2instruction = function(step) {
-        return 'Choose Fire to shoot here!';
+      game.selectfiretarget2instruction = function(turn, step) {
+        return 'Press "fire" to destroy this square';
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = {
@@ -637,8 +637,8 @@
         }
         return newstep;
       }
-      game.move2instruction = function(step) {
-        return 'Now select where to fire at';
+      game.move2instruction = function(turn, step) {
+        return 'Now select where to fire at from here';
       };
       game.fire2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -696,7 +696,7 @@
         turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.fire2instruction = function(step) {
+      game.fire2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -752,7 +752,7 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
+      game.start2instruction = function(turn, step) {
         return 'Select an amazon to move and fire with';
       };
       game.debug2 = function() {

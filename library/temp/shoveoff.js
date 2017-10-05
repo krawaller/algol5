@@ -176,7 +176,7 @@
         }
         return newstep;
       };
-      game.selectpushpoint1instruction = function(step) {
+      game.selectpushpoint1instruction = function(turn, step) {
         return '';
       };
       game.north1 = function(turn, step) {
@@ -286,7 +286,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.north1instruction = function(step) {
+      game.north1instruction = function(turn, step) {
         return '';
       };
       game.south1 = function(turn, step) {
@@ -396,7 +396,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.south1instruction = function(step) {
+      game.south1instruction = function(turn, step) {
         return '';
       };
       game.east1 = function(turn, step) {
@@ -506,7 +506,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.east1instruction = function(step) {
+      game.east1instruction = function(turn, step) {
         return '';
       };
       game.west1 = function(turn, step) {
@@ -616,7 +616,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.west1instruction = function(step) {
+      game.west1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -679,7 +679,7 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
+      game.start1instruction = function(turn, step) {
         return '';
       };
       game.debug1 = function() {
@@ -774,7 +774,7 @@
         }
         return newstep;
       };
-      game.selectpushpoint2instruction = function(step) {
+      game.selectpushpoint2instruction = function(turn, step) {
         return '';
       };
       game.north2 = function(turn, step) {
@@ -884,7 +884,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.north2instruction = function(step) {
+      game.north2instruction = function(turn, step) {
         return '';
       };
       game.south2 = function(turn, step) {
@@ -994,7 +994,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.south2instruction = function(step) {
+      game.south2instruction = function(turn, step) {
         return '';
       };
       game.east2 = function(turn, step) {
@@ -1104,7 +1104,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.east2instruction = function(step) {
+      game.east2instruction = function(turn, step) {
         return '';
       };
       game.west2 = function(turn, step) {
@@ -1214,7 +1214,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.west2instruction = function(step) {
+      game.west2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -1277,7 +1277,7 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
+      game.start2instruction = function(turn, step) {
         return '';
       };
       game.debug2 = function() {

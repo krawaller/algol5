@@ -32,7 +32,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
     ARTIFACTS: 'var ARTIFACTS = ' + copyArtifactsForAction(def,markDef) + '; ',
     UNITLAYERS: 'var UNITLAYERS = step.UNITLAYERS; '
   });
-  const instruction = expr.val(markDef.instruction||'');
+  const instruction = expr.val(def.meta.instructions[markname]||'');
   return `
       game.${markname}${player} = function(turn,step,markpos){
         ${preludium}
@@ -49,7 +49,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
         ${linking}
         return newstep;
       };
-      game.${markname}${player}instruction = function(step){
+      game.${markname}${player}instruction = function(turn,step){
         ${ifCodeContains(instruction,{
           MARKS: 'var MARKS = step.MARKS; ',
           ARTIFACTS: 'var ARTIFACTS = step.ARTIFACTS; ',

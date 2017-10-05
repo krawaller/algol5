@@ -5,7 +5,14 @@
     "source": "http://www.chessvariants.org/other.dir/amazons.html",
     "tags": ["deploy","starve"],
     "author": "Walter Zamkauskas",
-    "year": 1988
+    "year": 1988,
+    "instructions": {
+      "startTurn": "Select an amazon to move and fire with",
+      "selectunit": "Select where to move the amazon",
+      "selectmovetarget": "Press \"move\" to go here",
+      "move": "Now select where to fire at from here",
+      "selectfiretarget": "Press \"fire\" to destroy this square"
+    }
   },
   "graphics": {
     "icons": { "queens": "queens", "fires": "pawns" }
@@ -15,26 +22,22 @@
     "queens": {"1":["d10","g10","a7","j7"],"2":["a4","d1","g1","j4"]}
   },
   "startTurn": {
-    "link": "selectunit",
-    "instruction": "Select an amazon to move and fire with"
+    "link": "selectunit"
   },
   "marks": {
     "selectunit": {
       "from": "myunits",
       "runGenerator": "findtargets",
-      "link": "selectmovetarget",
-      "instruction": "Select where to move the amazon"
+      "link": "selectmovetarget"
     },
     "selectmovetarget": {
       "nodeadends": true,
       "from": "targets",
-      "link": "move",
-      "instruction": "Choose Move to go here!"
+      "link": "move"
     },
     "selectfiretarget": {
       "from": "targets",
-      "link": "fire",
-      "instruction": "Choose Fire to shoot here!"
+      "link": "fire"
     }
   },
   "commands": {
@@ -44,8 +47,7 @@
         ["setturnpos","movedto","selectmovetarget"]
       ],
       "runGenerator": "findtargets",
-      "link": "selectfiretarget",
-      "instruction": "Now select where to fire at"
+      "link": "selectfiretarget"
     },
     "fire": {
       "applyEffect": ["spawn","selectfiretarget","fires",0,{"from":["turnpos","movedto"]}],

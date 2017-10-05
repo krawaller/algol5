@@ -241,7 +241,7 @@
         }
         return newstep;
       };
-      game.selectunit1instruction = function(step) {
+      game.selectunit1instruction = function(turn, step) {
         return '';
       };
       game.selectmark1 = function(turn, step, markpos) {
@@ -260,7 +260,7 @@
         turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       };
-      game.selectmark1instruction = function(step) {
+      game.selectmark1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -326,7 +326,7 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
+      game.start1instruction = function(turn, step) {
         return '';
       };
       game.debug1 = function() {
@@ -500,7 +500,7 @@
         }
         return newstep;
       };
-      game.selectunit2instruction = function(step) {
+      game.selectunit2instruction = function(turn, step) {
         return '';
       };
       game.selectmark2 = function(turn, step, markpos) {
@@ -519,7 +519,7 @@
         turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       };
-      game.selectmark2instruction = function(step) {
+      game.selectmark2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -585,7 +585,7 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
+      game.start2instruction = function(turn, step) {
         return '';
       };
       game.debug2 = function() {

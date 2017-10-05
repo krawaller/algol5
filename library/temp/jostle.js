@@ -89,9 +89,9 @@
         }
         return newstep;
       };
-      game.selectunit1instruction = function(step) {
+      game.selectunit1instruction = function(turn, step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + ''));
+        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + '') + ('. Select a lower value neighbour to jostle to' + ''));
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -126,9 +126,9 @@
         }
         return newstep;
       };
-      game.selectmovetarget1instruction = function(step) {
+      game.selectmovetarget1instruction = function(turn, step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + ''));
+        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + '') + ('. Press "jostle" to move here' + ''));
       };
       game.jostle1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -180,7 +180,7 @@
         turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.jostle1instruction = function(step) {
+      game.jostle1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -233,7 +233,7 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
+      game.start1instruction = function(turn, step) {
         return 'Select which unit to jostle!';
       };
       game.debug1 = function() {
@@ -280,9 +280,9 @@
         }
         return newstep;
       };
-      game.selectunit2instruction = function(step) {
+      game.selectunit2instruction = function(turn, step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + ''));
+        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + '') + ('. Select a lower value neighbour to jostle to' + ''));
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -317,9 +317,9 @@
         }
         return newstep;
       };
-      game.selectmovetarget2instruction = function(step) {
+      game.selectmovetarget2instruction = function(turn, step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + ''));
+        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + '') + ('. Press "jostle" to move here' + ''));
       };
       game.jostle2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -371,7 +371,7 @@
         turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.jostle2instruction = function(step) {
+      game.jostle2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -424,7 +424,7 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
+      game.start2instruction = function(turn, step) {
         return 'Select which unit to jostle!';
       };
       game.debug2 = function() {

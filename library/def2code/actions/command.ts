@@ -15,7 +15,7 @@ import {copyArtifactsForAction, calculateUnitLayers} from '../common';
 export default function addCommandFunction(def: Definition, player: 1 | 2, cmndname: string){
   const parse = makeParser(def,player,cmndname);
   const cmndDef = def.commands[cmndname];
-  const instruction = parse.val(cmndDef.instruction || '');
+  const instruction = parse.val(def.meta.instructions[cmndname] || '');
   return `
     game.${cmndname}${player} = function(turn,step){
       var ARTIFACTS = ${copyArtifactsForAction(def,cmndDef)};
@@ -49,7 +49,7 @@ export default function addCommandFunction(def: Definition, player: 1 | 2, cmnd
 
       return newstep;
     }
-    game.${cmndname}${player}instruction = function(step){
+    game.${cmndname}${player}instruction = function(turn,step){
       ${ifCodeContains(instruction,{
         MARKS: 'var MARKS = step.MARKS; ',
         ARTIFACTS: 'var ARTIFACTS = step.ARTIFACTS; ',

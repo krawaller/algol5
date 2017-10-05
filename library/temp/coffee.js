@@ -102,7 +102,7 @@
         }
         return newstep;
       };
-      game.selectdrop1instruction = function(step) {
+      game.selectdrop1instruction = function(turn, step) {
         return '';
       };
       game.uphill1 = function(turn, step) {
@@ -200,7 +200,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.uphill1instruction = function(step) {
+      game.uphill1instruction = function(turn, step) {
         return '';
       };
       game.downhill1 = function(turn, step) {
@@ -298,7 +298,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.downhill1instruction = function(step) {
+      game.downhill1instruction = function(turn, step) {
         return '';
       };
       game.horisontal1 = function(turn, step) {
@@ -396,7 +396,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.horisontal1instruction = function(step) {
+      game.horisontal1instruction = function(turn, step) {
         return '';
       };
       game.vertical1 = function(turn, step) {
@@ -494,7 +494,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.vertical1instruction = function(step) {
+      game.vertical1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -553,7 +553,7 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
+      game.start1instruction = function(turn, step) {
         return '';
       };
       game.debug1 = function() {
@@ -612,7 +612,7 @@
         }
         return newstep;
       };
-      game.selectdrop2instruction = function(step) {
+      game.selectdrop2instruction = function(turn, step) {
         return '';
       };
       game.uphill2 = function(turn, step) {
@@ -710,7 +710,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.uphill2instruction = function(step) {
+      game.uphill2instruction = function(turn, step) {
         return '';
       };
       game.downhill2 = function(turn, step) {
@@ -808,7 +808,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.downhill2instruction = function(step) {
+      game.downhill2instruction = function(turn, step) {
         return '';
       };
       game.horisontal2 = function(turn, step) {
@@ -906,7 +906,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.horisontal2instruction = function(step) {
+      game.horisontal2instruction = function(turn, step) {
         return '';
       };
       game.vertical2 = function(turn, step) {
@@ -1004,7 +1004,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.vertical2instruction = function(step) {
+      game.vertical2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -1063,7 +1063,7 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
+      game.start2instruction = function(turn, step) {
         return '';
       };
       game.debug2 = function() {

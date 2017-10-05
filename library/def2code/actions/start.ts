@@ -8,7 +8,7 @@ import applyGenerators from '../artifacts/generate';
 export default function addStartFunction(def: Definition, player: 1 | 2){
   const expr = makeExpr(def, player, "start");
   const startDef = def.startTurn || {};
-  const instruction = expr.val(startDef.instruction||'');
+  const instruction = expr.val(def.meta.instructions.startTurn||'');
   return `
     game.start${player} = function(turn,step){
       var turn = {
@@ -40,7 +40,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
 
       return turn;
     }
-    game.start${player}instruction = function(step){
+    game.start${player}instruction = function(turn,step){
       ${ifCodeContains(instruction,{
         MARKS: 'var MARKS = step.MARKS; ',
         ARTIFACTS: 'var ARTIFACTS = step.ARTIFACTS; ',

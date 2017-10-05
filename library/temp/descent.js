@@ -97,7 +97,7 @@
         }
         return newstep;
       };
-      game.selectunit1instruction = function(step) {
+      game.selectunit1instruction = function(turn, step) {
         return 'Select where to move this unit';
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -116,7 +116,7 @@
         turn.links[newstepid].move = 'move1';
         return newstep;
       };
-      game.selectmovetarget1instruction = function(step) {
+      game.selectmovetarget1instruction = function(turn, step) {
         return 'Press "move" to confirm this movement';
       };
       game.selectdigtarget1 = function(turn, step, markpos) {
@@ -134,7 +134,7 @@
         turn.links[newstepid].dig = 'dig1';
         return newstep;
       };
-      game.selectdigtarget1instruction = function(step) {
+      game.selectdigtarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
         return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 3 square to level 2' : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 2 square to level 1' : 'Press "dig" to remove this square'));
@@ -238,8 +238,8 @@
         }
         return newstep;
       }
-      game.move1instruction = function(step) {
-        return 'Select a square next to the moved unit to dig';
+      game.move1instruction = function(turn, step) {
+        return 'Now select a neighbouring square to dig';
       };
       game.dig1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -334,7 +334,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.dig1instruction = function(step) {
+      game.dig1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -404,7 +404,7 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
+      game.start1instruction = function(turn, step) {
         return 'Select a unit to move and dig with';
       };
       game.debug1 = function() {
@@ -451,7 +451,7 @@
         }
         return newstep;
       };
-      game.selectunit2instruction = function(step) {
+      game.selectunit2instruction = function(turn, step) {
         return 'Select where to move this unit';
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -470,7 +470,7 @@
         turn.links[newstepid].move = 'move2';
         return newstep;
       };
-      game.selectmovetarget2instruction = function(step) {
+      game.selectmovetarget2instruction = function(turn, step) {
         return 'Press "move" to confirm this movement';
       };
       game.selectdigtarget2 = function(turn, step, markpos) {
@@ -488,7 +488,7 @@
         turn.links[newstepid].dig = 'dig2';
         return newstep;
       };
-      game.selectdigtarget2instruction = function(step) {
+      game.selectdigtarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
         return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 3 square to level 2' : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 2 square to level 1' : 'Press "dig" to remove this square'));
@@ -592,8 +592,8 @@
         }
         return newstep;
       }
-      game.move2instruction = function(step) {
-        return 'Select a square next to the moved unit to dig';
+      game.move2instruction = function(turn, step) {
+        return 'Now select a neighbouring square to dig';
       };
       game.dig2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -688,7 +688,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.dig2instruction = function(step) {
+      game.dig2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -758,7 +758,7 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
+      game.start2instruction = function(turn, step) {
         return 'Select a unit to move and dig with';
       };
       game.debug2 = function() {

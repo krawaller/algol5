@@ -120,7 +120,7 @@
         }
         return newstep;
       };
-      game.selectunit1instruction = function(step) {
+      game.selectunit1instruction = function(turn, step) {
         return '';
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -139,7 +139,7 @@
         turn.links[newstepid].move = 'move1';
         return newstep;
       };
-      game.selectmovetarget1instruction = function(step) {
+      game.selectmovetarget1instruction = function(turn, step) {
         return '';
       };
       game.move1 = function(turn, step) {
@@ -208,7 +208,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.move1instruction = function(step) {
+      game.move1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -261,7 +261,7 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
+      game.start1instruction = function(turn, step) {
         return '';
       };
       game.debug1 = function() {
@@ -320,7 +320,7 @@
         }
         return newstep;
       };
-      game.selectunit2instruction = function(step) {
+      game.selectunit2instruction = function(turn, step) {
         return '';
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -339,7 +339,7 @@
         turn.links[newstepid].move = 'move2';
         return newstep;
       };
-      game.selectmovetarget2instruction = function(step) {
+      game.selectmovetarget2instruction = function(turn, step) {
         return '';
       };
       game.move2 = function(turn, step) {
@@ -408,7 +408,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.move2instruction = function(step) {
+      game.move2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -461,7 +461,7 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
+      game.start2instruction = function(turn, step) {
         return '';
       };
       game.debug2 = function() {

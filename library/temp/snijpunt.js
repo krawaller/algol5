@@ -105,7 +105,7 @@
         turn.links[newstepid].snipe = 'snipe1';
         return newstep;
       };
-      game.selecttarget1instruction = function(step) {
+      game.selecttarget1instruction = function(turn, step) {
         return '';
       };
       game.snipe1 = function(turn, step) {
@@ -222,7 +222,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.snipe1instruction = function(step) {
+      game.snipe1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -324,9 +324,8 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
-        var UNITLAYERS = step.UNITLAYERS;
-        return (Object.keys(UNITLAYERS.mysniper).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
+      game.start1instruction = function(turn, step) {
+        return '';
       };
       game.debug1 = function() {
         return {
@@ -365,7 +364,7 @@
         turn.links[newstepid].snipe = 'snipe2';
         return newstep;
       };
-      game.selecttarget2instruction = function(step) {
+      game.selecttarget2instruction = function(turn, step) {
         return '';
       };
       game.snipe2 = function(turn, step) {
@@ -482,7 +481,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.snipe2instruction = function(step) {
+      game.snipe2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -584,9 +583,8 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
-        var UNITLAYERS = step.UNITLAYERS;
-        return (Object.keys(UNITLAYERS.mysniper).length === 0 ? 'Select initial sniper deployment' : 'Select where to snipe from');
+      game.start2instruction = function(turn, step) {
+        return '';
       };
       game.debug2 = function() {
         return {

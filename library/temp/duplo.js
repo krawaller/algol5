@@ -68,8 +68,9 @@
         turn.links[newstepid].deploy = 'deploy1';
         return newstep;
       };
-      game.selectdeploy1instruction = function(step) {
-        return '';
+      game.selectdeploy1instruction = function(turn, step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? 'Press "deploy" to place your second unit here' : 'Press "deploy" to place your first unit here');
       };
       game.selectunit1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -182,8 +183,8 @@
         }
         return newstep;
       };
-      game.selectunit1instruction = function(step) {
-        return '';
+      game.selectunit1instruction = function(turn, step) {
+        return 'Now select which square to expand to';
       };
       game.selecttarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -215,8 +216,8 @@
         turn.links[newstepid].expand = 'expand1';
         return newstep;
       };
-      game.selecttarget1instruction = function(step) {
-        return '';
+      game.selecttarget1instruction = function(turn, step) {
+        return 'Press "expand" to expand to here';
       };
       game.deploy1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -293,8 +294,9 @@
         }
         return newstep;
       }
-      game.deploy1instruction = function(step) {
-        return '';
+      game.deploy1instruction = function(turn, step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? 'Now select where to deploy your second and last initial unit' : '');
       };
       game.expand1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -364,7 +366,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.expand1instruction = function(step) {
+      game.expand1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -436,8 +438,8 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
-        return '';
+      game.start1instruction = function(turn, step) {
+        return ((turn.turn > 2) ? 'Select unit to expand from' : 'Select where to deploy the first of your two initial units');
       };
       game.debug1 = function() {
         return {
@@ -464,8 +466,9 @@
         turn.links[newstepid].deploy = 'deploy2';
         return newstep;
       };
-      game.selectdeploy2instruction = function(step) {
-        return '';
+      game.selectdeploy2instruction = function(turn, step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? 'Press "deploy" to place your second unit here' : 'Press "deploy" to place your first unit here');
       };
       game.selectunit2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -578,8 +581,8 @@
         }
         return newstep;
       };
-      game.selectunit2instruction = function(step) {
-        return '';
+      game.selectunit2instruction = function(turn, step) {
+        return 'Now select which square to expand to';
       };
       game.selecttarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -611,8 +614,8 @@
         turn.links[newstepid].expand = 'expand2';
         return newstep;
       };
-      game.selecttarget2instruction = function(step) {
-        return '';
+      game.selecttarget2instruction = function(turn, step) {
+        return 'Press "expand" to expand to here';
       };
       game.deploy2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -689,8 +692,9 @@
         }
         return newstep;
       }
-      game.deploy2instruction = function(step) {
-        return '';
+      game.deploy2instruction = function(turn, step) {
+        var UNITLAYERS = step.UNITLAYERS;
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? 'Now select where to deploy your second and last initial unit' : '');
       };
       game.expand2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -760,7 +764,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.expand2instruction = function(step) {
+      game.expand2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -832,8 +836,8 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
-        return '';
+      game.start2instruction = function(turn, step) {
+        return ((turn.turn > 2) ? 'Select unit to expand from' : 'Select where to deploy the first of your two initial units');
       };
       game.debug2 = function() {
         return {

@@ -5,7 +5,20 @@
     "source": "http://www.marksteeregames.com/Jostle_Go_rules.pdf",
     "tags": [],
     "author": "Mark Steere",
-    "year": 2010
+    "year": 2010,
+    "instructions": {
+      "startTurn": "Select which unit to jostle!",
+      "selectunit": ["concat",
+        "The current position is worth ",
+        ["minus",["sizeof","initialfriend"],["sizeof","initialenemy"]],
+        ". Select a lower value neighbour to jostle to"
+      ],
+      "selectmovetarget": ["concat",
+        "That position would be worth ",
+        ["minus",["sizeof","newfriend"],["sum",1,["sizeof","newenemy"]]],
+        ". Press \"jostle\" to move here"
+      ]
+    }
   },
   "graphics": {
     "icons": { "checkers": "pawns" }
@@ -18,15 +31,13 @@
     }
   },
   "startTurn": {
-    "link": "selectunit",
-    "instruction": "Select which unit to jostle!"
+    "link": "selectunit"
   },
   "marks": {
     "selectunit": {
       "from": "mycheckers",
       "runGenerator": "findinitial",
-      "link": "selectmovetarget",
-      "instruction": ["concat","The current position is worth ",["minus",["sizeof","initialfriend"],["sizeof","initialenemy"]]]
+      "link": "selectmovetarget"
     },
     "selectmovetarget": {
       "from": "movetargets",
@@ -34,8 +45,7 @@
       "link": ["if",["morethan",
         ["minus",["sizeof","newfriend"],["sum",1,["sizeof","newenemy"]]],
         ["minus",["sizeof","initialfriend"],["sizeof","initialenemy"]]
-      ],"jostle"],
-      "instruction": ["concat","That position would be worth ",["minus",["sizeof","newfriend"],["sum",1,["sizeof","newenemy"]]]]
+      ],"jostle"]
     }
   },
   "commands": {

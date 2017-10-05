@@ -114,7 +114,7 @@
         turn.links[newstepid].deploy = 'deploy1';
         return newstep;
       };
-      game.selectkingdeploy1instruction = function(step) {
+      game.selectkingdeploy1instruction = function(turn, step) {
         return '';
       };
       game.selectunit1 = function(turn, step, markpos) {
@@ -246,7 +246,7 @@
         }
         return newstep;
       };
-      game.selectunit1instruction = function(step) {
+      game.selectunit1instruction = function(turn, step) {
         return '';
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -265,7 +265,7 @@
         turn.links[newstepid].move = 'move1';
         return newstep;
       };
-      game.selectmovetarget1instruction = function(step) {
+      game.selectmovetarget1instruction = function(turn, step) {
         return '';
       };
       game.selectjumptarget1 = function(turn, step, markpos) {
@@ -298,7 +298,7 @@
         turn.links[newstepid].jump = 'jump1';
         return newstep;
       };
-      game.selectjumptarget1instruction = function(step) {
+      game.selectjumptarget1instruction = function(turn, step) {
         return '';
       };
       game.deploy1 = function(turn, step) {
@@ -380,7 +380,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.deploy1instruction = function(step) {
+      game.deploy1instruction = function(turn, step) {
         return '';
       };
       game.move1 = function(turn, step) {
@@ -459,7 +459,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.move1instruction = function(step) {
+      game.move1instruction = function(turn, step) {
         return '';
       };
       game.jump1 = function(turn, step) {
@@ -539,7 +539,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.jump1instruction = function(step) {
+      game.jump1instruction = function(turn, step) {
         return '';
       };
       game.start1 = function(turn, step) {
@@ -661,7 +661,7 @@
         }
         return turn;
       }
-      game.start1instruction = function(step) {
+      game.start1instruction = function(turn, step) {
         return '';
       };
       game.debug1 = function() {
@@ -690,7 +690,7 @@
         turn.links[newstepid].deploy = 'deploy2';
         return newstep;
       };
-      game.selectkingdeploy2instruction = function(step) {
+      game.selectkingdeploy2instruction = function(turn, step) {
         return '';
       };
       game.selectunit2 = function(turn, step, markpos) {
@@ -822,7 +822,7 @@
         }
         return newstep;
       };
-      game.selectunit2instruction = function(step) {
+      game.selectunit2instruction = function(turn, step) {
         return '';
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -841,7 +841,7 @@
         turn.links[newstepid].move = 'move2';
         return newstep;
       };
-      game.selectmovetarget2instruction = function(step) {
+      game.selectmovetarget2instruction = function(turn, step) {
         return '';
       };
       game.selectjumptarget2 = function(turn, step, markpos) {
@@ -874,7 +874,7 @@
         turn.links[newstepid].jump = 'jump2';
         return newstep;
       };
-      game.selectjumptarget2instruction = function(step) {
+      game.selectjumptarget2instruction = function(turn, step) {
         return '';
       };
       game.deploy2 = function(turn, step) {
@@ -956,7 +956,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.deploy2instruction = function(step) {
+      game.deploy2instruction = function(turn, step) {
         return '';
       };
       game.move2 = function(turn, step) {
@@ -1035,7 +1035,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.move2instruction = function(step) {
+      game.move2instruction = function(turn, step) {
         return '';
       };
       game.jump2 = function(turn, step) {
@@ -1115,7 +1115,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.jump2instruction = function(step) {
+      game.jump2instruction = function(turn, step) {
         return '';
       };
       game.start2 = function(turn, step) {
@@ -1237,7 +1237,7 @@
         }
         return turn;
       }
-      game.start2instruction = function(step) {
+      game.start2instruction = function(turn, step) {
         return '';
       };
       game.debug2 = function() {

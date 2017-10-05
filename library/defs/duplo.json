@@ -5,7 +5,26 @@
     "source": "http://www.di.fc.ul.pt/~jpn/gv/duplo.htm",
     "author": "Walter Joris",
     "year": 2002,
-    "tags": []
+    "tags": [],
+    "instructions": {
+      "startTurn": ["ifelse",
+        ["morethan",["turn"],2],
+        "Select unit to expand from",
+        "Select where to deploy the first of your two initial units"
+      ],
+      "selectdeploy": ["ifelse",
+        ["same",["sizeof","myunits"],1],
+        "Press \"deploy\" to place your second unit here",
+        "Press \"deploy\" to place your first unit here"
+      ],
+      "deploy": ["ifelse",
+        ["same",["sizeof","myunits"],1],
+        "Now select where to deploy your second and last initial unit",
+        ""
+      ],
+      "selectunit": "Now select which square to expand to",
+      "selecttarget": "Press \"expand\" to expand to here" 
+    }
   },
   "canalwaysend": {"deploy":true},
   "board": {

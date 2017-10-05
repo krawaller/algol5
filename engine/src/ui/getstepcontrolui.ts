@@ -31,7 +31,10 @@ export default function getStepControlUI(session: Session, step: Step): StepCont
         });
       }
     });
-    controls.instruction = game[step.name+turn.player+'instruction'](step);
+    controls.instruction = game[step.name+turn.player+'instruction'](turn,step);
+    if (!controls.instruction && controls.submit){
+      controls.instruction = "Press \"submit\" to end your turn";
+    }
   } else {
     controls.instruction = session.winner ? "Player " + session.winner + " won by " + session.endedBy : "Game ended in a draw!";
   }

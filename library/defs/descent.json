@@ -3,7 +3,22 @@
     "id": "descent",
     "name": "Descent",
     "source": "https://www.boardgamegeek.com/boardgame/150586/descent",
-    "tags":[]
+    "tags":[],
+    "instructions": {
+      "startTurn": "Select a unit to move and dig with",
+      "selectunit": "Select where to move this unit",
+      "selectmovetarget": "Press \"move\" to confirm this movement",
+      "move": "Now select a neighbouring square to dig",
+      "selectdigtarget": ["ifelse",
+        ["anyat","rooks","selectdigtarget"],
+        "Press \"dig\" to turn this level 3 square to level 2",
+        ["ifelse",
+          ["anyat","knights","selectdigtarget"],
+          "Press \"dig\" to turn this level 2 square to level 1",
+          "Press \"dig\" to remove this square"
+        ]
+      ]
+    }
   },
   "graphics": {"icons": {"pawns":"pawns","knights":"knights","rooks":"rooks"} },
   "board": {
@@ -20,33 +35,21 @@
     "madeline": {"condition":["notempty","winline"]}
   },
   "startTurn": {
-    "link": "selectunit",
-    "instruction": "Select a unit to move and dig with"
+    "link": "selectunit"
   },
   "marks": {
     "selectunit": {
       "from": "myunits",
       "runGenerator": "findmovetargets",
-      "link": "selectmovetarget",
-      "instruction": "Select where to move this unit"
+      "link": "selectmovetarget"
     },
     "selectmovetarget": {
       "from": "movetargets",
-      "link": "move",
-      "instruction": "Press \"move\" to confirm this movement"
+      "link": "move"
     },
     "selectdigtarget": {
       "from": "digtargets",
-      "link": "dig",
-      "instruction": ["ifelse",
-        ["anyat","rooks","selectdigtarget"],
-        "Press \"dig\" to turn this level 3 square to level 2",
-        ["ifelse",
-          ["anyat","knights","selectdigtarget"],
-          "Press \"dig\" to turn this level 2 square to level 1",
-          "Press \"dig\" to remove this square"
-        ]
-      ]
+      "link": "dig"
     }
   },
   "commands": {
@@ -61,8 +64,7 @@
         ["moveat","selectunit","selectmovetarget"],
         ["spawn","selectunit",["turnvar","heightfrom"],0]
       ],
-      "link": "selectdigtarget",
-      "instruction": "Select a square next to the moved unit to dig"
+      "link": "selectdigtarget"
     },
     "dig": {
       "applyEffect": ["ifelse",

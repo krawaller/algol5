@@ -59,5 +59,7 @@ function augmentGenerators(gameDef: Definition) {
 export default function preProcess(def: Definition){
   def = mapFlow(def);
   def = augmentGenerators(def);
+  def.meta = def.meta || {};
+  def.meta.instructions = def.meta.instructions || {};
   return def;
 }

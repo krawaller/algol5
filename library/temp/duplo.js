@@ -69,8 +69,9 @@
         return newstep;
       };
       game.selectdeploy1instruction = function(turn, step) {
+        var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? 'Press "deploy" to place your second unit here' : 'Press "deploy" to place your first unit here');
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? (('Press "deploy" to place your second unit at' + '') + (MARKS['selectdeploy'] + '')) : (('Press "deploy" to place your first unit at ' + '') + (MARKS['selectdeploy'] + '')));
       };
       game.selectunit1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -217,7 +218,8 @@
         return newstep;
       };
       game.selecttarget1instruction = function(turn, step) {
-        return 'Press "expand" to expand to here';
+        var MARKS = step.MARKS;
+        return (('Press "expand" to expand to from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selecttarget'] + ''));
       };
       game.deploy1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -470,8 +472,9 @@
         return newstep;
       };
       game.selectdeploy2instruction = function(turn, step) {
+        var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? 'Press "deploy" to place your second unit here' : 'Press "deploy" to place your first unit here');
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? (('Press "deploy" to place your second unit at' + '') + (MARKS['selectdeploy'] + '')) : (('Press "deploy" to place your first unit at ' + '') + (MARKS['selectdeploy'] + '')));
       };
       game.selectunit2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -618,7 +621,8 @@
         return newstep;
       };
       game.selecttarget2instruction = function(turn, step) {
-        return 'Press "expand" to expand to here';
+        var MARKS = step.MARKS;
+        return (('Press "expand" to expand to from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selecttarget'] + ''));
       };
       game.deploy2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});

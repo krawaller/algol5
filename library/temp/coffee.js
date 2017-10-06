@@ -103,7 +103,31 @@
         return newstep;
       };
       game.selectdrop1instruction = function(turn, step) {
-        return '';
+        var ARTIFACTS = step.ARTIFACTS;
+        return (('Press ' + '') + ([{
+            cond: Object.keys(ARTIFACTS.uphill).length !== 0,
+            val: '"uphill"'
+          }, {
+            cond: Object.keys(ARTIFACTS.downhill).length !== 0,
+            val: '"downhill"'
+          }, {
+            cond: Object.keys(ARTIFACTS.vertical).length !== 0,
+            val: '"vertical"'
+          }, {
+            cond: Object.keys(ARTIFACTS.horisontal).length !== 0,
+            val: '"horisontal"'
+          }].filter(function(elem) {
+            return elem.cond;
+          }).reduce(function(mem, elem, n, list) {
+            mem += elem.val;
+            if (n === list.length - 2) {
+              mem += " or ";
+            } else if (n < list.length - 2) {
+              mem += ", ";
+            }
+            return mem;
+          }, "") +
+          '') + (' to give your opponent placing options in that direction' + ''));
       };
       game.uphill1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -554,7 +578,8 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return '';
+        var UNITLAYERS = step.UNITLAYERS;
+        return (Object.keys(UNITLAYERS.neutralunits).length === 0 ? 'Select any square to place the first unit of the game' : 'Select which neutral unit to take over');
       };
       game.debug1 = function() {
         return {
@@ -613,7 +638,31 @@
         return newstep;
       };
       game.selectdrop2instruction = function(turn, step) {
-        return '';
+        var ARTIFACTS = step.ARTIFACTS;
+        return (('Press ' + '') + ([{
+            cond: Object.keys(ARTIFACTS.uphill).length !== 0,
+            val: '"uphill"'
+          }, {
+            cond: Object.keys(ARTIFACTS.downhill).length !== 0,
+            val: '"downhill"'
+          }, {
+            cond: Object.keys(ARTIFACTS.vertical).length !== 0,
+            val: '"vertical"'
+          }, {
+            cond: Object.keys(ARTIFACTS.horisontal).length !== 0,
+            val: '"horisontal"'
+          }].filter(function(elem) {
+            return elem.cond;
+          }).reduce(function(mem, elem, n, list) {
+            mem += elem.val;
+            if (n === list.length - 2) {
+              mem += " or ";
+            } else if (n < list.length - 2) {
+              mem += ", ";
+            }
+            return mem;
+          }, "") +
+          '') + (' to give your opponent placing options in that direction' + ''));
       };
       game.uphill2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1064,7 +1113,8 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return '';
+        var UNITLAYERS = step.UNITLAYERS;
+        return (Object.keys(UNITLAYERS.neutralunits).length === 0 ? 'Select any square to place the first unit of the game' : 'Select which neutral unit to take over');
       };
       game.debug2 = function() {
         return {

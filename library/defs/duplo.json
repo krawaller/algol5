@@ -14,8 +14,8 @@
       ],
       "selectdeploy": ["ifelse",
         ["same",["sizeof","myunits"],1],
-        "Press \"deploy\" to place your second unit here",
-        "Press \"deploy\" to place your first unit here"
+        ["concat","Press \"deploy\" to place your second unit at", ["pos","selectdeploy"]],
+        ["concat","Press \"deploy\" to place your first unit at ",["pos","selectdeploy"]]
       ],
       "deploy": ["ifelse",
         ["same",["sizeof","myunits"],1],
@@ -23,7 +23,7 @@
         ""
       ],
       "selectunit": "Now select which square to expand to",
-      "selecttarget": "Press \"expand\" to expand to here" 
+      "selecttarget": ["concat","Press \"expand\" to expand to from ",["pos","selectunit"]," to ",["pos","selecttarget"]]
     }
   },
   "canalwaysend": {"deploy":true},

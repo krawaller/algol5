@@ -117,7 +117,9 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return 'Press "move" to confirm this movement';
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return (('Press "move" to ' + '') + ((((UNITLAYERS.units[MARKS['selectunit']] || {})['group'] === (UNITLAYERS.units[MARKS['selectmovetarget']] || {})['group']) ? 'walk' : ((!!(UNITLAYERS.rooks[MARKS['selectunit']]) || !!(UNITLAYERS.pawns[MARKS['selectmovetarget']])) ? 'descend' : 'climb')) + '') + (' from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.selectdigtarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -137,7 +139,7 @@
       game.selectdigtarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 3 square to level 2' : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 2 square to level 1' : 'Press "dig" to remove this square'));
+        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? (('Press "dig" to turn ' + '') + (MARKS['selectdigtarget'] + '') + (' from level 3 to level 2' + '')) : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? (('Press "dig" to turn ' + '') + (MARKS['selectdigtarget'] + '') + (' from level 2 to level 1' + '')) : (('Press "dig" to destroy ' + '') + (MARKS['selectdigtarget'] + ''))));
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -471,7 +473,9 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return 'Press "move" to confirm this movement';
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return (('Press "move" to ' + '') + ((((UNITLAYERS.units[MARKS['selectunit']] || {})['group'] === (UNITLAYERS.units[MARKS['selectmovetarget']] || {})['group']) ? 'walk' : ((!!(UNITLAYERS.rooks[MARKS['selectunit']]) || !!(UNITLAYERS.pawns[MARKS['selectmovetarget']])) ? 'descend' : 'climb')) + '') + (' from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.selectdigtarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -491,7 +495,7 @@
       game.selectdigtarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 3 square to level 2' : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? 'Press "dig" to turn this level 2 square to level 1' : 'Press "dig" to remove this square'));
+        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? (('Press "dig" to turn ' + '') + (MARKS['selectdigtarget'] + '') + (' from level 3 to level 2' + '')) : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? (('Press "dig" to turn ' + '') + (MARKS['selectdigtarget'] + '') + (' from level 2 to level 1' + '')) : (('Press "dig" to destroy ' + '') + (MARKS['selectdigtarget'] + ''))));
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {

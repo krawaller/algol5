@@ -91,7 +91,7 @@
       };
       game.selectunit1instruction = function(turn, step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + '') + ('. Select a lower value neighbour to jostle to' + ''));
+        return (('This unit neighbours ' + '') + (Object.keys(ARTIFACTS.initialfriend).length + '') + (((Object.keys(ARTIFACTS.initialfriend).length === 1) ? ' friend' : ' friends') + '') + (' and ' + '') + (Object.keys(ARTIFACTS.initialenemy).length + '') + (((Object.keys(ARTIFACTS.initialenemy).length === 1) ? ' enemy' : ' enemies') + '') + (' making the square worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + '') + ('. Select a higher value square to jostle to' + ''));
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -127,8 +127,9 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
+        var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
-        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + '') + ('. Press "jostle" to move here' + ''));
+        return (('From ' + '') + (MARKS['selectmovetarget'] + '') + (' you would neighbour ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - 1) + '') + (((Object.keys(ARTIFACTS.newfriend).length === 2) ? ' friend' : ' friends') + '') + (' and ' + '') + (Object.keys(ARTIFACTS.newenemy).length + '') + (((Object.keys(ARTIFACTS.newenemy).length === 2) ? ' enemy' : ' enemies') + '') + (', making it worth ' + '') + (((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length) + '') + ('. Press "jostle" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.jostle1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -282,7 +283,7 @@
       };
       game.selectunit2instruction = function(turn, step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('The current position is worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + '') + ('. Select a lower value neighbour to jostle to' + ''));
+        return (('This unit neighbours ' + '') + (Object.keys(ARTIFACTS.initialfriend).length + '') + (((Object.keys(ARTIFACTS.initialfriend).length === 1) ? ' friend' : ' friends') + '') + (' and ' + '') + (Object.keys(ARTIFACTS.initialenemy).length + '') + (((Object.keys(ARTIFACTS.initialenemy).length === 1) ? ' enemy' : ' enemies') + '') + (' making the square worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + '') + ('. Select a higher value square to jostle to' + ''));
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -318,8 +319,9 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
+        var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
-        return (('That position would be worth ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - (1 + Object.keys(ARTIFACTS.newenemy).length)) + '') + ('. Press "jostle" to move here' + ''));
+        return (('From ' + '') + (MARKS['selectmovetarget'] + '') + (' you would neighbour ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - 1) + '') + (((Object.keys(ARTIFACTS.newfriend).length === 2) ? ' friend' : ' friends') + '') + (' and ' + '') + (Object.keys(ARTIFACTS.newenemy).length + '') + (((Object.keys(ARTIFACTS.newenemy).length === 2) ? ' enemy' : ' enemies') + '') + (', making it worth ' + '') + (((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length) + '') + ('. Press "jostle" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.jostle2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});

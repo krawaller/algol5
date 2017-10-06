@@ -5,7 +5,17 @@
     "source": "http://www.di.fc.ul.pt/~jpn/gv/atrium.htm",
     "tags": ["formation","nocapture"],
     "author": "Guy Jeandel",
-    "year": 2004
+    "year": 2004,
+    "instructions": {
+      "startTurn": "Select which unit to move",
+      "selectunit": "Select orthogonal empty neighbour to move to",
+      "selectmovetarget": ["concat",
+        "Press \"move\" to walk from ",
+        ["pos","selectunit"],
+        " to ",
+        ["pos","selectmovetarget"]
+      ]
+    }
   },
   "graphics": {"icons":{"kings":"kings","queens":"queens"}},
   "board": {"height":5,"width":5},
@@ -47,7 +57,7 @@
     "findmovetargets": {
       "type": "neighbour",
       "start": "selectunit",
-      "dirs": [1,2,3,4,5,6,7,8],
+      "dirs": [1,3,5,7],
       "unlessover": "units",
       "draw": {
         "neighbours": {

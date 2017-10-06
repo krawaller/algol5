@@ -9,14 +9,31 @@
     "instructions": {
       "startTurn": "Select which unit to jostle!",
       "selectunit": ["concat",
-        "The current position is worth ",
+        "This unit neighbours ",
+        ["sizeof","initialfriend"],
+        ["ifelse",["same",["sizeof","initialfriend"],1], " friend", " friends"],
+        " and ",
+        ["sizeof","initialenemy"],
+        ["ifelse",["same",["sizeof","initialenemy"],1], " enemy", " enemies"],
+        " making the square worth ",
         ["minus",["sizeof","initialfriend"],["sizeof","initialenemy"]],
-        ". Select a lower value neighbour to jostle to"
+        ". Select a higher value square to jostle to"
       ],
       "selectmovetarget": ["concat",
-        "That position would be worth ",
-        ["minus",["sizeof","newfriend"],["sum",1,["sizeof","newenemy"]]],
-        ". Press \"jostle\" to move here"
+        "From ",
+        ["pos","selectmovetarget"],
+        " you would neighbour ",
+        ["minus",["sizeof","newfriend"],1],
+        ["ifelse",["same",["sizeof","newfriend"],2], " friend", " friends"],
+        " and ",
+        ["sizeof","newenemy"],
+        ["ifelse",["same",["sizeof","newenemy"],2], " enemy", " enemies"],
+        ", making it worth ",
+        ["minus", ["minus",["sizeof","newfriend"],1], ["sizeof","newenemy"]],
+        ". Press \"jostle\" to move from ",
+        ["pos","selectunit"],
+        " to ",
+        ["pos","selectmovetarget"]
       ]
     }
   },

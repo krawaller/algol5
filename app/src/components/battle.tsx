@@ -57,7 +57,7 @@ class Battle extends React.Component <BattleProps,BattleState> {
   componentDidMount(){
     console.log("So, initiating algol async call...");
     this.props.algol.startGame(this.props.game.id,this.props.participants[0],this.props.participants[1]).then(UI =>{
-      this.setState({UI:UI}, this.maybeAI)
+      this.setState({UI:UI,waiting:undefined}, this.maybeAI)
     });
   }
   askBrain(name) { // TODO - broken now

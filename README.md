@@ -29,6 +29,8 @@
 -[x] Tests for shoveoff
 -[x] Tests for descent
 -[x] Tests for duplo
+-[ ] Prevent pushback in Aries
+-[x] Prevent diagonal moves in Atrium
 
 ## Graphics TODO
 

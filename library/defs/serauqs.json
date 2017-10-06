@@ -3,7 +3,22 @@
     "id": "serauqs",
     "name": "Serauqs",
     "source": "https://boardgamegeek.com/image/274401/serauqs",
-    "tags": ["formation"]
+    "tags": ["formation"],
+    "instructions": {
+      "startTurn": ["ifelse",
+        ["morethan",["turn"],2],
+        "Select which unit to move",
+        "Select which unit to make wild"
+      ],
+      "selectunit": ["ifelse",
+        ["morethan",["turn"],2],
+        "Select where to move this unit",
+        "Press \"makewild\" to make this unit match for your opponent too"
+      ],
+      "selectmovetarget": ["concat",
+        "Press \"move\" to move from ",["pos","selectunit"]," to ",["pos","selectmovetarget"]
+      ]
+    }
   },
   "graphics": {
     "icons": {"soldiers":"pawns","wild":"kings"},

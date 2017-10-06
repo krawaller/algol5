@@ -69,9 +69,9 @@
           selectunit: markpos
         };
         var STARTPOS = MARKS['selectunit'];
-        var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
-        for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
+        for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
@@ -93,7 +93,7 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return '';
+        return 'Select orthogonal empty neighbour to move to';
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -112,7 +112,8 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return '';
+        var MARKS = step.MARKS;
+        return (('Press "move" to walk from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -242,7 +243,7 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return '';
+        return 'Select which unit to move';
       };
       game.debug1 = function() {
         return {
@@ -263,9 +264,9 @@
           selectunit: markpos
         };
         var STARTPOS = MARKS['selectunit'];
-        var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
+        var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
-        for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
+        for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && !UNITLAYERS.units[POS]) {
             ARTIFACTS['movetargets'][POS] = {};
@@ -287,7 +288,7 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return '';
+        return 'Select orthogonal empty neighbour to move to';
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -306,7 +307,8 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return '';
+        var MARKS = step.MARKS;
+        return (('Press "move" to walk from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -436,7 +438,7 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return '';
+        return 'Select which unit to move';
       };
       game.debug2 = function() {
         return {

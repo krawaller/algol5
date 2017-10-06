@@ -9,6 +9,20 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
   }
   const [type, ...args] = expression;
   switch(type){
+    case "orlist": {
+      return `[${args.map(([cond,val]) => `{cond: ${parse.bool(cond)}, val: ${parse.val(val)}}`)}].filter(function(elem){
+        return elem.cond;
+      }).reduce(function(mem, elem, n, list){
+        mem += elem.val;
+        if (n === list.length - 2){
+          mem += " or ";
+        } else if (n < list.length - 2){
+          mem += ", ";
+        }
+        return mem;
+      },"")
+      `
+    }
     case "indexlist": {
       const [index,list] = args;
       return `${parse.list(list)}[${parse.val(index)}]`;

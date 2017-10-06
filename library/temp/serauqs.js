@@ -130,7 +130,7 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return '';
+        return ((turn.turn > 2) ? 'Select where to move this unit' : 'Press "makewild" to make this unit match for your opponent too');
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -149,7 +149,8 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return '';
+        var MARKS = step.MARKS;
+        return (('Press "move" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.makewild1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -477,7 +478,7 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return '';
+        return ((turn.turn > 2) ? 'Select which unit to move' : 'Select which unit to make wild');
       };
       game.debug1 = function() {
         return {
@@ -527,7 +528,7 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return '';
+        return ((turn.turn > 2) ? 'Select where to move this unit' : 'Press "makewild" to make this unit match for your opponent too');
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -546,7 +547,8 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return '';
+        var MARKS = step.MARKS;
+        return (('Press "move" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.makewild2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -874,7 +876,7 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return '';
+        return ((turn.turn > 2) ? 'Select which unit to move' : 'Select which unit to make wild');
       };
       game.debug2 = function() {
         return {

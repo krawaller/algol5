@@ -9,9 +9,17 @@
     "instructions": {
       "startTurn": "Select an amazon to move and fire with",
       "selectunit": "Select where to move the amazon",
-      "selectmovetarget": "Press \"move\" to go here",
-      "move": "Now select where to fire at from here",
-      "selectfiretarget": "Press \"fire\" to destroy this square"
+      "selectmovetarget": ["concat",
+        "Press \"move\" to go from ",
+        ["pos","selectunit"],
+        " to ",
+        ["pos","selectmovetarget"]
+      ],
+      "move": "Now select where to fire at",
+      "selectfiretarget": ["concat",
+        "Press \"fire\" to destroy the square at ",
+        ["pos","selectfiretarget"]
+      ]
     }
   },
   "graphics": {

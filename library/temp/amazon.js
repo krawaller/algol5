@@ -196,7 +196,8 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return 'Press "move" to go here';
+        var MARKS = step.MARKS;
+        return (('Press "move" to go from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.selectfiretarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -214,7 +215,8 @@
         return newstep;
       };
       game.selectfiretarget1instruction = function(turn, step) {
-        return 'Press "fire" to destroy this square';
+        var MARKS = step.MARKS;
+        return (('Press "fire" to destroy the square at ' + '') + (MARKS['selectfiretarget'] + ''));
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = {
@@ -285,7 +287,7 @@
         return newstep;
       }
       game.move1instruction = function(turn, step) {
-        return 'Now select where to fire at from here';
+        return 'Now select where to fire at';
       };
       game.fire1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -549,7 +551,8 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return 'Press "move" to go here';
+        var MARKS = step.MARKS;
+        return (('Press "move" to go from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
       };
       game.selectfiretarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -567,7 +570,8 @@
         return newstep;
       };
       game.selectfiretarget2instruction = function(turn, step) {
-        return 'Press "fire" to destroy this square';
+        var MARKS = step.MARKS;
+        return (('Press "fire" to destroy the square at ' + '') + (MARKS['selectfiretarget'] + ''));
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = {
@@ -638,7 +642,7 @@
         return newstep;
       }
       game.move2instruction = function(turn, step) {
-        return 'Now select where to fire at from here';
+        return 'Now select where to fire at';
       };
       game.fire2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});

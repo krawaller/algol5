@@ -27,11 +27,12 @@ scripts.forEach(([name, gameId,lines], n) => {
           if (cmnd === 'win' || cmnd === 'lose' || cmnd === 'draw'){
             t.ok(!!func && !game[func], gameId + " win condition!");
           } else if (cmnd === 'endturn'){
-            instr = game[func+'instruction'](turn.steps[at]);
             turn = game[func](turn, turn.steps[at]);
             at = 'root';
+            instr = game[func+'instruction'](turn,turn.steps[at]);
           } else {
             let step = game[func](turn,turn.steps[at],cmnd);
+            instr = game[func+'instruction'](turn,step);
             at = step.stepid;
           }
         });

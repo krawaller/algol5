@@ -1,2 +1,1 @@
-
-export type Definition = any;
+export * from '../../types';

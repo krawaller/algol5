@@ -8,9 +8,9 @@ import Playback from '../parts/playback';
 
 import random from 'lodash/random';
 
-import { BattleUI } from '../../../engine/src/types';
+import { BattleUI } from '../../../types';
 
-import optionsInUI from '../../../engine/src/various/optionsinui.ts';
+import optionsInUI from '../../../engine/src/various/optionsinui';
 
 type BattleState = {
   waiting: string | undefined,

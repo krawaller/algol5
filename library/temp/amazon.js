@@ -204,7 +204,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "move" to go from'
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to go from'
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
@@ -238,7 +244,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "fire" to destroy the square at'
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'fire'
+          }, {
+            type: 'text',
+            text: 'to destroy the square at'
           }, {
             type: 'posref',
             pos: MARKS['selectfiretarget']
@@ -317,19 +329,7 @@
         return {
           type: 'text',
           text: 'Now select where to fire at'
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.fire1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -391,19 +391,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -619,7 +607,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "move" to go from'
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to go from'
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
@@ -653,7 +647,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "fire" to destroy the square at'
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'fire'
+          }, {
+            type: 'text',
+            text: 'to destroy the square at'
           }, {
             type: 'posref',
             pos: MARKS['selectfiretarget']
@@ -732,19 +732,7 @@
         return {
           type: 'text',
           text: 'Now select where to fire at'
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.fire2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -806,19 +794,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.start2 = function(turn, step) {
         var turn = {

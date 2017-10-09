@@ -56,9 +56,7 @@ export default function addCommandFunction(def: Definition, player: 1 | 2, cmnd
         UNITLAYERS: 'var UNITLAYERS = step.UNITLAYERS; ',
         UNITDATA: 'var UNITDATA = step.UNITDATA; ',
       })}
-      return ${instruction} || turn.links[step.stepid].endturn ? ${expr.content(
-        ['line','Press','endturn','to confirm']
-      )} : '';
+      return ${instruction};
     };
   `;
 }

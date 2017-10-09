@@ -244,19 +244,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -484,19 +472,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.start2 = function(turn, step) {
         var turn = {

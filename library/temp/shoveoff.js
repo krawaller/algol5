@@ -293,19 +293,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.south1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -418,19 +406,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.east1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -543,19 +519,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.west1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -668,19 +632,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -957,19 +909,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.south2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1082,19 +1022,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.east2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1207,19 +1135,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.west2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1332,19 +1248,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.start2 = function(turn, step) {
         var turn = {

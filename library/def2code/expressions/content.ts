@@ -6,7 +6,18 @@ import makeParser from './';
 export default function parseContent(gameDef: Definition, player: 1 | 2, action: string, expression, from){
   const parse = makeParser(gameDef, player, action, "id");
   if (typeof expression === 'string'){
-    return parse.content([gameDef.commands[expression] || expression === 'endturn' ? 'cmnd' : 'text', expression]);
+    if (gameDef.commands[expression] || expression === 'endturn'){
+      return parse.content(['cmnd',expression]);
+    } else if (gameDef.marks[expression]){
+      return parse.content(['pos',expression]);
+    } else {
+      return parse.content(['text',expression]);
+    }
+  } else if (typeof expression === 'number'){
+    return parse.content(['text',expression]);
+  } else if (!isArray(expression)){
+    console.log("WEIRD",expression);
+    throw "Weird content expression format: " + expression;
   }
   const [type, ...args] = expression;
   switch(type){
@@ -51,7 +62,7 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
       `
     }
     default:
-      return `{type:'text',text:${parse.value(expression)}}`;
+      return parse.content(["line", ...expression]);  //`{type:'text',text:${parse.value(expression)}}`;
       //throw "Unknown content: " + expression;
   }
 }

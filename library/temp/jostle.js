@@ -96,10 +96,16 @@
           content: [{
             type: 'text',
             text: 'This unit neighbours '
-          }, {
-            type: 'text',
-            text: Object.keys(ARTIFACTS.initialfriend).length
-          }, ((Object.keys(ARTIFACTS.initialfriend).length === 1) ? {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'sizeof'
+            }, {
+              type: 'text',
+              text: 'initialfriend'
+            }]
+          }), ((Object.keys(ARTIFACTS.initialfriend).length === 1) ? {
             type: 'text',
             text: ' friend'
           } : {
@@ -108,10 +114,16 @@
           }), {
             type: 'text',
             text: ' and '
-          }, {
-            type: 'text',
-            text: Object.keys(ARTIFACTS.initialenemy).length
-          }, ((Object.keys(ARTIFACTS.initialenemy).length === 1) ? {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'sizeof'
+            }, {
+              type: 'text',
+              text: 'initialenemy'
+            }]
+          }), ((Object.keys(ARTIFACTS.initialenemy).length === 1) ? {
             type: 'text',
             text: ' enemy'
           } : {
@@ -120,10 +132,31 @@
           }), {
             type: 'text',
             text: ' making the square worth '
-          }, {
-            type: 'text',
-            text: (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)
-          }, {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'minus'
+            }, collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'sizeof'
+              }, {
+                type: 'text',
+                text: 'initialfriend'
+              }]
+            }), collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'sizeof'
+              }, {
+                type: 'text',
+                text: 'initialenemy'
+              }]
+            })]
+          }), {
             type: 'text',
             text: '. Select a higher value square to jostle to'
           }]
@@ -176,10 +209,25 @@
           }, {
             type: 'text',
             text: ' you would neighbour '
-          }, {
-            type: 'text',
-            text: (Object.keys(ARTIFACTS.newfriend).length - 1)
-          }, ((Object.keys(ARTIFACTS.newfriend).length === 2) ? {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'minus'
+            }, collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'sizeof'
+              }, {
+                type: 'text',
+                text: 'newfriend'
+              }]
+            }), {
+              type: 'text',
+              text: 1
+            }]
+          }), ((Object.keys(ARTIFACTS.newfriend).length === 2) ? {
             type: 'text',
             text: ' friend'
           } : {
@@ -188,10 +236,16 @@
           }), {
             type: 'text',
             text: ' and '
-          }, {
-            type: 'text',
-            text: Object.keys(ARTIFACTS.newenemy).length
-          }, ((Object.keys(ARTIFACTS.newenemy).length === 2) ? {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'sizeof'
+            }, {
+              type: 'text',
+              text: 'newenemy'
+            }]
+          }), ((Object.keys(ARTIFACTS.newenemy).length === 2) ? {
             type: 'text',
             text: ' enemy'
           } : {
@@ -200,10 +254,40 @@
           }), {
             type: 'text',
             text: ', making it worth '
-          }, {
-            type: 'text',
-            text: ((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length)
-          }, {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'minus'
+            }, collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'minus'
+              }, collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: 'sizeof'
+                }, {
+                  type: 'text',
+                  text: 'newfriend'
+                }]
+              }), {
+                type: 'text',
+                text: 1
+              }]
+            }), collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'sizeof'
+              }, {
+                type: 'text',
+                text: 'newenemy'
+              }]
+            })]
+          }), {
             type: 'text',
             text: '. Press "jostle" to move from '
           }, {
@@ -272,19 +356,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -393,10 +465,16 @@
           content: [{
             type: 'text',
             text: 'This unit neighbours '
-          }, {
-            type: 'text',
-            text: Object.keys(ARTIFACTS.initialfriend).length
-          }, ((Object.keys(ARTIFACTS.initialfriend).length === 1) ? {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'sizeof'
+            }, {
+              type: 'text',
+              text: 'initialfriend'
+            }]
+          }), ((Object.keys(ARTIFACTS.initialfriend).length === 1) ? {
             type: 'text',
             text: ' friend'
           } : {
@@ -405,10 +483,16 @@
           }), {
             type: 'text',
             text: ' and '
-          }, {
-            type: 'text',
-            text: Object.keys(ARTIFACTS.initialenemy).length
-          }, ((Object.keys(ARTIFACTS.initialenemy).length === 1) ? {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'sizeof'
+            }, {
+              type: 'text',
+              text: 'initialenemy'
+            }]
+          }), ((Object.keys(ARTIFACTS.initialenemy).length === 1) ? {
             type: 'text',
             text: ' enemy'
           } : {
@@ -417,10 +501,31 @@
           }), {
             type: 'text',
             text: ' making the square worth '
-          }, {
-            type: 'text',
-            text: (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)
-          }, {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'minus'
+            }, collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'sizeof'
+              }, {
+                type: 'text',
+                text: 'initialfriend'
+              }]
+            }), collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'sizeof'
+              }, {
+                type: 'text',
+                text: 'initialenemy'
+              }]
+            })]
+          }), {
             type: 'text',
             text: '. Select a higher value square to jostle to'
           }]
@@ -473,10 +578,25 @@
           }, {
             type: 'text',
             text: ' you would neighbour '
-          }, {
-            type: 'text',
-            text: (Object.keys(ARTIFACTS.newfriend).length - 1)
-          }, ((Object.keys(ARTIFACTS.newfriend).length === 2) ? {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'minus'
+            }, collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'sizeof'
+              }, {
+                type: 'text',
+                text: 'newfriend'
+              }]
+            }), {
+              type: 'text',
+              text: 1
+            }]
+          }), ((Object.keys(ARTIFACTS.newfriend).length === 2) ? {
             type: 'text',
             text: ' friend'
           } : {
@@ -485,10 +605,16 @@
           }), {
             type: 'text',
             text: ' and '
-          }, {
-            type: 'text',
-            text: Object.keys(ARTIFACTS.newenemy).length
-          }, ((Object.keys(ARTIFACTS.newenemy).length === 2) ? {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'sizeof'
+            }, {
+              type: 'text',
+              text: 'newenemy'
+            }]
+          }), ((Object.keys(ARTIFACTS.newenemy).length === 2) ? {
             type: 'text',
             text: ' enemy'
           } : {
@@ -497,10 +623,40 @@
           }), {
             type: 'text',
             text: ', making it worth '
-          }, {
-            type: 'text',
-            text: ((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length)
-          }, {
+          }, collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'minus'
+            }, collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'minus'
+              }, collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: 'sizeof'
+                }, {
+                  type: 'text',
+                  text: 'newfriend'
+                }]
+              }), {
+                type: 'text',
+                text: 1
+              }]
+            }), collapseLine({
+              type: 'line',
+              content: [{
+                type: 'text',
+                text: 'sizeof'
+              }, {
+                type: 'text',
+                text: 'newenemy'
+              }]
+            })]
+          }), {
             type: 'text',
             text: '. Press "jostle" to move from '
           }, {
@@ -569,19 +725,7 @@
         return {
           type: 'text',
           text: ''
-        } || turn.links[step.stepid].endturn ? collapseLine({
-          type: 'line',
-          content: [{
-            type: 'text',
-            text: 'Press'
-          }, {
-            type: 'cmndref',
-            cmnd: 'endturn'
-          }, {
-            type: 'text',
-            text: 'to confirm'
-          }]
-        }) : '';
+        };
       };
       game.start2 = function(turn, step) {
         var turn = {

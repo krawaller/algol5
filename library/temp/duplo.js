@@ -71,7 +71,25 @@
       game.selectdeploy1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? (('Press "deploy" to place your second unit at' + '') + (MARKS['selectdeploy'] + '')) : (('Press "deploy" to place your first unit at ' + '') + (MARKS['selectdeploy'] + '')));
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "deploy" to place your second unit at'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdeploy']
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "deploy" to place your first unit at '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdeploy']
+          }]
+        }));
       };
       game.selectunit1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -185,7 +203,10 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return 'Now select which square to expand to';
+        return {
+          type: 'text',
+          text: 'Now select which square to expand to'
+        };
       };
       game.selecttarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -219,7 +240,22 @@
       };
       game.selecttarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
-        return (('Press "expand" to expand to from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selecttarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "expand" to expand to from '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: ' to '
+          }, {
+            type: 'posref',
+            pos: MARKS['selecttarget']
+          }]
+        });
       };
       game.deploy1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -298,7 +334,25 @@
       }
       game.deploy1instruction = function(turn, step) {
         var UNITLAYERS = step.UNITLAYERS;
-        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? 'Now select where to deploy your second and last initial unit' : '');
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? {
+          type: 'text',
+          text: 'Now select where to deploy your second and last initial unit'
+        } : {
+          type: 'text',
+          text: ''
+        }) || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.expand1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -372,7 +426,22 @@
         return newstep;
       }
       game.expand1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -444,7 +513,13 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return ((turn.turn > 2) ? 'Select unit to expand from' : 'Select where to deploy the first of your two initial units');
+        return ((turn.turn > 2) ? {
+          type: 'text',
+          text: 'Select unit to expand from'
+        } : {
+          type: 'text',
+          text: 'Select where to deploy the first of your two initial units'
+        });
       };
       game.debug1 = function() {
         return {
@@ -474,7 +549,25 @@
       game.selectdeploy2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? (('Press "deploy" to place your second unit at' + '') + (MARKS['selectdeploy'] + '')) : (('Press "deploy" to place your first unit at ' + '') + (MARKS['selectdeploy'] + '')));
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "deploy" to place your second unit at'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdeploy']
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "deploy" to place your first unit at '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdeploy']
+          }]
+        }));
       };
       game.selectunit2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -588,7 +681,10 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return 'Now select which square to expand to';
+        return {
+          type: 'text',
+          text: 'Now select which square to expand to'
+        };
       };
       game.selecttarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -622,7 +718,22 @@
       };
       game.selecttarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
-        return (('Press "expand" to expand to from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selecttarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "expand" to expand to from '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: ' to '
+          }, {
+            type: 'posref',
+            pos: MARKS['selecttarget']
+          }]
+        });
       };
       game.deploy2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -701,7 +812,25 @@
       }
       game.deploy2instruction = function(turn, step) {
         var UNITLAYERS = step.UNITLAYERS;
-        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? 'Now select where to deploy your second and last initial unit' : '');
+        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? {
+          type: 'text',
+          text: 'Now select where to deploy your second and last initial unit'
+        } : {
+          type: 'text',
+          text: ''
+        }) || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.expand2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -775,7 +904,22 @@
         return newstep;
       }
       game.expand2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -847,7 +991,13 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return ((turn.turn > 2) ? 'Select unit to expand from' : 'Select where to deploy the first of your two initial units');
+        return ((turn.turn > 2) ? {
+          type: 'text',
+          text: 'Select unit to expand from'
+        } : {
+          type: 'text',
+          text: 'Select where to deploy the first of your two initial units'
+        });
       };
       game.debug2 = function() {
         return {

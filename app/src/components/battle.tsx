@@ -5,6 +5,7 @@ import Marks from '../parts/marks';
 import Commands from '../parts/commands';
 import History from '../parts/history';
 import Playback from '../parts/playback';
+import Content from '../parts/content';
 
 import random from 'lodash/random';
 
@@ -113,8 +114,9 @@ class Battle extends React.Component <BattleProps,BattleState> {
       : UI.endedBy
       ? ctrls.instruction 
       : (p && p.type === "ai")
-      ? <div>Awaiting {p.name}</div>
-      :  this.state.waiting ? <div>...calculating...</div>
+      ? "Awaiting "+p.name
+      : this.state.waiting
+      ? "...calculating..."
       : ctrls.instruction;
     let plrCanAct = !(p && p.type === "ai") && !this.state.waiting;
     /*if (!UI.waiting){
@@ -149,7 +151,7 @@ class Battle extends React.Component <BattleProps,BattleState> {
         <div>
           {UI && !inHistory && ctrls.commands && <Commands openHistory={()=>this.selectStep(0)} hasHistory={maxStep > 0} locked={!plrCanAct} gameCommands={ctrls.commands} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction}/>}
           {UI && inHistory && <Playback stepIndex={this.state.step} maxStep={maxStep} selectStep={this.selectStep} onGoing={!UI.endedBy} />}
-          <div>{info}</div>
+          <div><Content content={info} performCommand={this.doAction} /></div>
       </div>
       </div>
     );

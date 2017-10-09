@@ -98,7 +98,10 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return 'Select where to move this unit';
+        return {
+          type: 'text',
+          text: 'Select where to move this unit'
+        };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -119,7 +122,34 @@
       game.selectmovetarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return (('Press "move" to ' + '') + ((((UNITLAYERS.units[MARKS['selectunit']] || {})['group'] === (UNITLAYERS.units[MARKS['selectmovetarget']] || {})['group']) ? 'walk' : ((!!(UNITLAYERS.rooks[MARKS['selectunit']]) || !!(UNITLAYERS.pawns[MARKS['selectmovetarget']])) ? 'descend' : 'climb')) + '') + (' from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "move" to '
+          }, (((UNITLAYERS.units[MARKS['selectunit']] || {})['group'] === (UNITLAYERS.units[MARKS['selectmovetarget']] || {})['group']) ? {
+            type: 'text',
+            text: 'walk'
+          } : ((!!(UNITLAYERS.rooks[MARKS['selectunit']]) || !!(UNITLAYERS.pawns[MARKS['selectmovetarget']])) ? {
+            type: 'text',
+            text: 'descend'
+          } : {
+            type: 'text',
+            text: 'climb'
+          })), {
+            type: 'text',
+            text: ' from '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: ' to '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.selectdigtarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -139,7 +169,40 @@
       game.selectdigtarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? (('Press "dig" to turn ' + '') + (MARKS['selectdigtarget'] + '') + (' from level 3 to level 2' + '')) : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? (('Press "dig" to turn ' + '') + (MARKS['selectdigtarget'] + '') + (' from level 2 to level 1' + '')) : (('Press "dig" to destroy ' + '') + (MARKS['selectdigtarget'] + ''))));
+        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "dig" to turn '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdigtarget']
+          }, {
+            type: 'text',
+            text: ' from level 3 to level 2'
+          }]
+        }) : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "dig" to turn '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdigtarget']
+          }, {
+            type: 'text',
+            text: ' from level 2 to level 1'
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "dig" to destroy '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdigtarget']
+          }]
+        })));
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -241,7 +304,22 @@
         return newstep;
       }
       game.move1instruction = function(turn, step) {
-        return 'Now select a neighbouring square to dig';
+        return {
+          type: 'text',
+          text: 'Now select a neighbouring square to dig'
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.dig1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -337,7 +415,22 @@
         return newstep;
       }
       game.dig1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -407,7 +500,10 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return 'Select a unit to move and dig with';
+        return {
+          type: 'text',
+          text: 'Select a unit to move and dig with'
+        };
       };
       game.debug1 = function() {
         return {
@@ -454,7 +550,10 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return 'Select where to move this unit';
+        return {
+          type: 'text',
+          text: 'Select where to move this unit'
+        };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -475,7 +574,34 @@
       game.selectmovetarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return (('Press "move" to ' + '') + ((((UNITLAYERS.units[MARKS['selectunit']] || {})['group'] === (UNITLAYERS.units[MARKS['selectmovetarget']] || {})['group']) ? 'walk' : ((!!(UNITLAYERS.rooks[MARKS['selectunit']]) || !!(UNITLAYERS.pawns[MARKS['selectmovetarget']])) ? 'descend' : 'climb')) + '') + (' from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "move" to '
+          }, (((UNITLAYERS.units[MARKS['selectunit']] || {})['group'] === (UNITLAYERS.units[MARKS['selectmovetarget']] || {})['group']) ? {
+            type: 'text',
+            text: 'walk'
+          } : ((!!(UNITLAYERS.rooks[MARKS['selectunit']]) || !!(UNITLAYERS.pawns[MARKS['selectmovetarget']])) ? {
+            type: 'text',
+            text: 'descend'
+          } : {
+            type: 'text',
+            text: 'climb'
+          })), {
+            type: 'text',
+            text: ' from '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: ' to '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.selectdigtarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -495,7 +621,40 @@
       game.selectdigtarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? (('Press "dig" to turn ' + '') + (MARKS['selectdigtarget'] + '') + (' from level 3 to level 2' + '')) : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? (('Press "dig" to turn ' + '') + (MARKS['selectdigtarget'] + '') + (' from level 2 to level 1' + '')) : (('Press "dig" to destroy ' + '') + (MARKS['selectdigtarget'] + ''))));
+        return (!!(UNITLAYERS.rooks[MARKS['selectdigtarget']]) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "dig" to turn '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdigtarget']
+          }, {
+            type: 'text',
+            text: ' from level 3 to level 2'
+          }]
+        }) : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "dig" to turn '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdigtarget']
+          }, {
+            type: 'text',
+            text: ' from level 2 to level 1'
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "dig" to destroy '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectdigtarget']
+          }]
+        })));
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -597,7 +756,22 @@
         return newstep;
       }
       game.move2instruction = function(turn, step) {
-        return 'Now select a neighbouring square to dig';
+        return {
+          type: 'text',
+          text: 'Now select a neighbouring square to dig'
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.dig2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -693,7 +867,22 @@
         return newstep;
       }
       game.dig2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -763,7 +952,10 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return 'Select a unit to move and dig with';
+        return {
+          type: 'text',
+          text: 'Select a unit to move and dig with'
+        };
       };
       game.debug2 = function() {
         return {

@@ -177,7 +177,10 @@
         return newstep;
       };
       game.selectpushpoint1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.north1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -287,7 +290,22 @@
         return newstep;
       }
       game.north1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.south1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -397,7 +415,22 @@
         return newstep;
       }
       game.south1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.east1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -507,7 +540,22 @@
         return newstep;
       }
       game.east1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.west1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -617,7 +665,22 @@
         return newstep;
       }
       game.west1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -680,7 +743,10 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.debug1 = function() {
         return {
@@ -775,7 +841,10 @@
         return newstep;
       };
       game.selectpushpoint2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.north2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -885,7 +954,22 @@
         return newstep;
       }
       game.north2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.south2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -995,7 +1079,22 @@
         return newstep;
       }
       game.south2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.east2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1105,7 +1204,22 @@
         return newstep;
       }
       game.east2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.west2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1215,7 +1329,22 @@
         return newstep;
       }
       game.west2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -1278,7 +1407,10 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.debug2 = function() {
         return {

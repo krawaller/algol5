@@ -4,6 +4,7 @@ import list from './list';
 import position from './position';
 import set from './set';
 import value from './value';
+import content from './content';
 import universal from './universal';
 
 import { Definition } from '../types';
@@ -18,5 +19,6 @@ export default function makeParser(gameDef: Definition, player: 1 | 2, action: 
     set: expr => universal(gameDef, player, action, set, expr, from),
     value: expr => universal(gameDef, player, action, value, expr, from),
     val: expr => universal(gameDef, player, action, value, expr, from),
+    content: expr => universal(gameDef, player, action, content, expr, from),
   });
 }

@@ -15,7 +15,7 @@
         "Select where to move this unit",
         "Press \"makewild\" to make this unit match for your opponent too"
       ],
-      "selectmovetarget": ["concat",
+      "selectmovetarget": ["line",
         "Press \"move\" to move from ",["pos","selectunit"]," to ",["pos","selectmovetarget"]
       ]
     }

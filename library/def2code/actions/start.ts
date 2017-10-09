@@ -8,7 +8,7 @@ import applyGenerators from '../artifacts/generate';
 export default function addStartFunction(def: Definition, player: 1 | 2){
   const expr = makeExpr(def, player, "start");
   const startDef = def.startTurn || {};
-  const instruction = expr.val(def.meta.instructions.startTurn||'');
+  const instruction = expr.content(def.meta.instructions.startTurn||'');
   return `
     game.start${player} = function(turn,step){
       var turn = {

@@ -8,7 +8,7 @@
     "year": 2010,
     "instructions": {
       "startTurn": "Select which unit to jostle!",
-      "selectunit": ["concat",
+      "selectunit": ["line",
         "This unit neighbours ",
         ["sizeof","initialfriend"],
         ["ifelse",["same",["sizeof","initialfriend"],1], " friend", " friends"],
@@ -19,7 +19,7 @@
         ["minus",["sizeof","initialfriend"],["sizeof","initialenemy"]],
         ". Select a higher value square to jostle to"
       ],
-      "selectmovetarget": ["concat",
+      "selectmovetarget": ["line",
         "From ",
         ["pos","selectmovetarget"],
         " you would neighbour ",

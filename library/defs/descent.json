@@ -7,7 +7,7 @@
     "instructions": {
       "startTurn": "Select a unit to move and dig with",
       "selectunit": "Select where to move this unit",
-      "selectmovetarget": ["concat",
+      "selectmovetarget": ["line",
         "Press \"move\" to ",
         ["ifelse",
           ["same",["read","units","selectunit","group"],["read","units","selectmovetarget","group"]],
@@ -29,15 +29,15 @@
       "move": "Now select a neighbouring square to dig",
       "selectdigtarget": ["ifelse",
         ["anyat","rooks","selectdigtarget"],
-        ["concat",
+        ["line",
           "Press \"dig\" to turn ",["pos","selectdigtarget"]," from level 3 to level 2"
         ],
         ["ifelse",
           ["anyat","knights","selectdigtarget"],
-          ["concat",
+          ["line",
             "Press \"dig\" to turn ",["pos","selectdigtarget"]," from level 2 to level 1"
           ],
-          ["concat","Press \"dig\" to destroy ",["pos","selectdigtarget"]]
+          ["line","Press \"dig\" to destroy ",["pos","selectdigtarget"]]
         ]
       ]
     }

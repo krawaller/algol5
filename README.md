@@ -1,5 +1,7 @@
 # Project
 
+-[ ] Centralise types
+
 ## App TODO
 
 -[ ] Show saved battles per game
@@ -21,7 +23,8 @@
     -[ ] add boiluntil
     -[ ] add cmnd exclusion logic
     -[ ] add unit tests
--[ ] Make possibilities deal with turnvars (descent)
+-[x] Make possibilities deal with turnvars (see bogus layers in descent)
+-[ ] New content data type, convert instructions  
 
 ## Library TODO
 

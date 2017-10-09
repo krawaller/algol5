@@ -130,7 +130,13 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return ((turn.turn > 2) ? 'Select where to move this unit' : 'Press "makewild" to make this unit match for your opponent too');
+        return ((turn.turn > 2) ? {
+          type: 'text',
+          text: 'Select where to move this unit'
+        } : {
+          type: 'text',
+          text: 'Press "makewild" to make this unit match for your opponent too'
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -150,7 +156,22 @@
       };
       game.selectmovetarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
-        return (('Press "move" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "move" to move from '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: ' to '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.makewild1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -264,7 +285,22 @@
         return newstep;
       }
       game.makewild1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -424,7 +460,22 @@
         return newstep;
       }
       game.move1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -478,7 +529,13 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return ((turn.turn > 2) ? 'Select which unit to move' : 'Select which unit to make wild');
+        return ((turn.turn > 2) ? {
+          type: 'text',
+          text: 'Select which unit to move'
+        } : {
+          type: 'text',
+          text: 'Select which unit to make wild'
+        });
       };
       game.debug1 = function() {
         return {
@@ -528,7 +585,13 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return ((turn.turn > 2) ? 'Select where to move this unit' : 'Press "makewild" to make this unit match for your opponent too');
+        return ((turn.turn > 2) ? {
+          type: 'text',
+          text: 'Select where to move this unit'
+        } : {
+          type: 'text',
+          text: 'Press "makewild" to make this unit match for your opponent too'
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -548,7 +611,22 @@
       };
       game.selectmovetarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
-        return (('Press "move" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "move" to move from '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: ' to '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.makewild2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -662,7 +740,22 @@
         return newstep;
       }
       game.makewild2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -822,7 +915,22 @@
         return newstep;
       }
       game.move2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -876,7 +984,13 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return ((turn.turn > 2) ? 'Select which unit to move' : 'Select which unit to make wild');
+        return ((turn.turn > 2) ? {
+          type: 'text',
+          text: 'Select which unit to move'
+        } : {
+          type: 'text',
+          text: 'Select which unit to make wild'
+        });
       };
       game.debug2 = function() {
         return {

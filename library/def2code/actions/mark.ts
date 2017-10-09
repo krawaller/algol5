@@ -32,7 +32,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
     ARTIFACTS: 'var ARTIFACTS = ' + copyArtifactsForAction(def,markDef) + '; ',
     UNITLAYERS: 'var UNITLAYERS = step.UNITLAYERS; '
   });
-  const instruction = expr.val(def.meta.instructions[markname]||'');
+  const instruction = expr.content(def.meta.instructions[markname]||'');
   return `
       game.${markname}${player} = function(turn,step,markpos){
         ${preludium}

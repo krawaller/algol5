@@ -7,15 +7,14 @@
     "instructions": {
       "startTurn": "Select which unit to move",
       "selectunit": "Select where to move to",
-      "selectmovetarget": ["concat",
-        "Press \"move\" to move from ",
+      "selectmovetarget": ["line",
+        "Press \"move\" to move from",
         ["pos","selectunit"],
-        " to ",
+        "to",
         ["pos","selectmovetarget"],
-        ["ifelse",
+        ["if",
           ["notempty","squished"],
-          ["concat"," and squash the enemy at ",["pos",["onlyin","squished"]]],
-          ""
+          ["line"," and squash the enemy at ",["pos",["onlyin","squished"]]]
         ]
       ]
     }

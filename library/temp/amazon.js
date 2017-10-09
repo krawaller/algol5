@@ -177,7 +177,10 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return 'Select where to move the amazon';
+        return {
+          type: 'text',
+          text: 'Select where to move the amazon'
+        };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -197,7 +200,22 @@
       };
       game.selectmovetarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
-        return (('Press "move" to go from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "move" to go from'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: 'to'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.selectfiretarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -216,7 +234,16 @@
       };
       game.selectfiretarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
-        return (('Press "fire" to destroy the square at ' + '') + (MARKS['selectfiretarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "fire" to destroy the square at'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectfiretarget']
+          }]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = {
@@ -287,7 +314,22 @@
         return newstep;
       }
       game.move1instruction = function(turn, step) {
-        return 'Now select where to fire at';
+        return {
+          type: 'text',
+          text: 'Now select where to fire at'
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.fire1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -346,7 +388,22 @@
         return newstep;
       }
       game.fire1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -402,7 +459,10 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return 'Select an amazon to move and fire with';
+        return {
+          type: 'text',
+          text: 'Select an amazon to move and fire with'
+        };
       };
       game.debug1 = function() {
         return {
@@ -532,7 +592,10 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return 'Select where to move the amazon';
+        return {
+          type: 'text',
+          text: 'Select where to move the amazon'
+        };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -552,7 +615,22 @@
       };
       game.selectmovetarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
-        return (('Press "move" to go from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "move" to go from'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: 'to'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.selectfiretarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -571,7 +649,16 @@
       };
       game.selectfiretarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
-        return (('Press "fire" to destroy the square at ' + '') + (MARKS['selectfiretarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "fire" to destroy the square at'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectfiretarget']
+          }]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = {
@@ -642,7 +729,22 @@
         return newstep;
       }
       game.move2instruction = function(turn, step) {
-        return 'Now select where to fire at';
+        return {
+          type: 'text',
+          text: 'Now select where to fire at'
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.fire2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -701,7 +803,22 @@
         return newstep;
       }
       game.fire2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -757,7 +874,10 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return 'Select an amazon to move and fire with';
+        return {
+          type: 'text',
+          text: 'Select an amazon to move and fire with'
+        };
       };
       game.debug2 = function() {
         return {

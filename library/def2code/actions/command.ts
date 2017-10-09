@@ -13,9 +13,9 @@ import {
 import {copyArtifactsForAction, calculateUnitLayers} from '../common';
 
 export default function addCommandFunction(def: Definition, player: 1 | 2, cmndname: string){
-  const parse = makeParser(def,player,cmndname);
+  const expr = makeParser(def,player,cmndname);
   const cmndDef = def.commands[cmndname];
-  const instruction = parse.val(def.meta.instructions[cmndname] || '');
+  const instruction = expr.content(def.meta.instructions[cmndname] || '');
   return `
     game.${cmndname}${player} = function(turn,step){
       var ARTIFACTS = ${copyArtifactsForAction(def,cmndDef)};
@@ -56,7 +56,9 @@ export default function addCommandFunction(def: Definition, player: 1 | 2, cmnd
         UNITLAYERS: 'var UNITLAYERS = step.UNITLAYERS; ',
         UNITDATA: 'var UNITDATA = step.UNITDATA; ',
       })}
-      return ${instruction};
+      return ${instruction} || turn.links[step.stepid].endturn ? ${expr.content(
+        ['line','Press','endturn','to confirm']
+      )} : '';
     };
   `;
 }

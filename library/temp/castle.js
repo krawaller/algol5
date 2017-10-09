@@ -171,7 +171,10 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -190,7 +193,10 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -260,7 +266,22 @@
         return newstep;
       }
       game.move1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -309,7 +330,10 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.debug1 = function() {
         return {
@@ -384,7 +408,10 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -403,7 +430,10 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -473,7 +503,22 @@
         return newstep;
       }
       game.move2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -522,7 +567,10 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.debug2 = function() {
         return {

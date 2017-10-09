@@ -242,7 +242,10 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.selectmark1 = function(turn, step, markpos) {
         var MARKS = {
@@ -261,7 +264,10 @@
         return newstep;
       };
       game.selectmark1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -327,7 +333,10 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.debug1 = function() {
         return {
@@ -501,7 +510,10 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.selectmark2 = function(turn, step, markpos) {
         var MARKS = {
@@ -520,7 +532,10 @@
         return newstep;
       };
       game.selectmark2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -586,7 +601,10 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        };
       };
       game.debug2 = function() {
         return {

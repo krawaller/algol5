@@ -91,7 +91,43 @@
       };
       game.selectunit1instruction = function(turn, step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('This unit neighbours ' + '') + (Object.keys(ARTIFACTS.initialfriend).length + '') + (((Object.keys(ARTIFACTS.initialfriend).length === 1) ? ' friend' : ' friends') + '') + (' and ' + '') + (Object.keys(ARTIFACTS.initialenemy).length + '') + (((Object.keys(ARTIFACTS.initialenemy).length === 1) ? ' enemy' : ' enemies') + '') + (' making the square worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + '') + ('. Select a higher value square to jostle to' + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'This unit neighbours '
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.initialfriend).length
+          }, ((Object.keys(ARTIFACTS.initialfriend).length === 1) ? {
+            type: 'text',
+            text: ' friend'
+          } : {
+            type: 'text',
+            text: ' friends'
+          }), {
+            type: 'text',
+            text: ' and '
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.initialenemy).length
+          }, ((Object.keys(ARTIFACTS.initialenemy).length === 1) ? {
+            type: 'text',
+            text: ' enemy'
+          } : {
+            type: 'text',
+            text: ' enemies'
+          }), {
+            type: 'text',
+            text: ' making the square worth '
+          }, {
+            type: 'text',
+            text: (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)
+          }, {
+            type: 'text',
+            text: '. Select a higher value square to jostle to'
+          }]
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -129,7 +165,58 @@
       game.selectmovetarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
-        return (('From ' + '') + (MARKS['selectmovetarget'] + '') + (' you would neighbour ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - 1) + '') + (((Object.keys(ARTIFACTS.newfriend).length === 2) ? ' friend' : ' friends') + '') + (' and ' + '') + (Object.keys(ARTIFACTS.newenemy).length + '') + (((Object.keys(ARTIFACTS.newenemy).length === 2) ? ' enemy' : ' enemies') + '') + (', making it worth ' + '') + (((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length) + '') + ('. Press "jostle" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'From '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }, {
+            type: 'text',
+            text: ' you would neighbour '
+          }, {
+            type: 'text',
+            text: (Object.keys(ARTIFACTS.newfriend).length - 1)
+          }, ((Object.keys(ARTIFACTS.newfriend).length === 2) ? {
+            type: 'text',
+            text: ' friend'
+          } : {
+            type: 'text',
+            text: ' friends'
+          }), {
+            type: 'text',
+            text: ' and '
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.newenemy).length
+          }, ((Object.keys(ARTIFACTS.newenemy).length === 2) ? {
+            type: 'text',
+            text: ' enemy'
+          } : {
+            type: 'text',
+            text: ' enemies'
+          }), {
+            type: 'text',
+            text: ', making it worth '
+          }, {
+            type: 'text',
+            text: ((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length)
+          }, {
+            type: 'text',
+            text: '. Press "jostle" to move from '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: ' to '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.jostle1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -182,7 +269,22 @@
         return newstep;
       }
       game.jostle1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -235,7 +337,10 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return 'Select which unit to jostle!';
+        return {
+          type: 'text',
+          text: 'Select which unit to jostle!'
+        };
       };
       game.debug1 = function() {
         return {
@@ -283,7 +388,43 @@
       };
       game.selectunit2instruction = function(turn, step) {
         var ARTIFACTS = step.ARTIFACTS;
-        return (('This unit neighbours ' + '') + (Object.keys(ARTIFACTS.initialfriend).length + '') + (((Object.keys(ARTIFACTS.initialfriend).length === 1) ? ' friend' : ' friends') + '') + (' and ' + '') + (Object.keys(ARTIFACTS.initialenemy).length + '') + (((Object.keys(ARTIFACTS.initialenemy).length === 1) ? ' enemy' : ' enemies') + '') + (' making the square worth ' + '') + ((Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length) + '') + ('. Select a higher value square to jostle to' + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'This unit neighbours '
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.initialfriend).length
+          }, ((Object.keys(ARTIFACTS.initialfriend).length === 1) ? {
+            type: 'text',
+            text: ' friend'
+          } : {
+            type: 'text',
+            text: ' friends'
+          }), {
+            type: 'text',
+            text: ' and '
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.initialenemy).length
+          }, ((Object.keys(ARTIFACTS.initialenemy).length === 1) ? {
+            type: 'text',
+            text: ' enemy'
+          } : {
+            type: 'text',
+            text: ' enemies'
+          }), {
+            type: 'text',
+            text: ' making the square worth '
+          }, {
+            type: 'text',
+            text: (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)
+          }, {
+            type: 'text',
+            text: '. Select a higher value square to jostle to'
+          }]
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -321,7 +462,58 @@
       game.selectmovetarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
-        return (('From ' + '') + (MARKS['selectmovetarget'] + '') + (' you would neighbour ' + '') + ((Object.keys(ARTIFACTS.newfriend).length - 1) + '') + (((Object.keys(ARTIFACTS.newfriend).length === 2) ? ' friend' : ' friends') + '') + (' and ' + '') + (Object.keys(ARTIFACTS.newenemy).length + '') + (((Object.keys(ARTIFACTS.newenemy).length === 2) ? ' enemy' : ' enemies') + '') + (', making it worth ' + '') + (((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length) + '') + ('. Press "jostle" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'From '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }, {
+            type: 'text',
+            text: ' you would neighbour '
+          }, {
+            type: 'text',
+            text: (Object.keys(ARTIFACTS.newfriend).length - 1)
+          }, ((Object.keys(ARTIFACTS.newfriend).length === 2) ? {
+            type: 'text',
+            text: ' friend'
+          } : {
+            type: 'text',
+            text: ' friends'
+          }), {
+            type: 'text',
+            text: ' and '
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.newenemy).length
+          }, ((Object.keys(ARTIFACTS.newenemy).length === 2) ? {
+            type: 'text',
+            text: ' enemy'
+          } : {
+            type: 'text',
+            text: ' enemies'
+          }), {
+            type: 'text',
+            text: ', making it worth '
+          }, {
+            type: 'text',
+            text: ((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length)
+          }, {
+            type: 'text',
+            text: '. Press "jostle" to move from '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: ' to '
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.jostle2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -374,7 +566,22 @@
         return newstep;
       }
       game.jostle2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -427,7 +634,10 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return 'Select which unit to jostle!';
+        return {
+          type: 'text',
+          text: 'Select which unit to jostle!'
+        };
       };
       game.debug2 = function() {
         return {

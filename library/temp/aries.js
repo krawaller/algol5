@@ -116,7 +116,10 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return 'Select where to move to';
+        return {
+          type: 'text',
+          text: 'Select where to move to'
+        };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -163,7 +166,33 @@
       game.selectmovetarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
-        return (('Press "move" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + '') + ((Object.keys(ARTIFACTS.squished).length !== 0 ? ((' and squash the enemy at ' + '') + (Object.keys(ARTIFACTS.squished)[0] + '')) : '') + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "move" to move from'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: 'to'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }, Object.keys(ARTIFACTS.squished).length !== 0 ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: ' and squash the enemy at '
+            }, {
+              type: 'posref',
+              pos: Object.keys(ARTIFACTS.squished)[0]
+            }]
+          }) : {
+            type: 'nothing'
+          }]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -252,7 +281,22 @@
         return newstep;
       }
       game.move1instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start1 = function(turn, step) {
         var turn = {
@@ -303,7 +347,10 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return 'Select which unit to move';
+        return {
+          type: 'text',
+          text: 'Select which unit to move'
+        };
       };
       game.debug1 = function() {
         return {
@@ -358,7 +405,10 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return 'Select where to move to';
+        return {
+          type: 'text',
+          text: 'Select where to move to'
+        };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -405,7 +455,33 @@
       game.selectmovetarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
-        return (('Press "move" to move from ' + '') + (MARKS['selectunit'] + '') + (' to ' + '') + (MARKS['selectmovetarget'] + '') + ((Object.keys(ARTIFACTS.squished).length !== 0 ? ((' and squash the enemy at ' + '') + (Object.keys(ARTIFACTS.squished)[0] + '')) : '') + ''));
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press "move" to move from'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: 'to'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }, Object.keys(ARTIFACTS.squished).length !== 0 ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: ' and squash the enemy at '
+            }, {
+              type: 'posref',
+              pos: Object.keys(ARTIFACTS.squished)[0]
+            }]
+          }) : {
+            type: 'nothing'
+          }]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -494,7 +570,22 @@
         return newstep;
       }
       game.move2instruction = function(turn, step) {
-        return '';
+        return {
+          type: 'text',
+          text: ''
+        } || turn.links[step.stepid].endturn ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'endturn'
+          }, {
+            type: 'text',
+            text: 'to confirm'
+          }]
+        }) : '';
       };
       game.start2 = function(turn, step) {
         var turn = {
@@ -545,7 +636,10 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return 'Select which unit to move';
+        return {
+          type: 'text',
+          text: 'Select which unit to move'
+        };
       };
       game.debug2 = function() {
         return {

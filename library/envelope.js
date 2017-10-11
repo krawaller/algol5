@@ -187,7 +187,9 @@ function terrainLayers(board, forplayer, aiterrain){
 }
 
 function mergeStrings(str1, str2){
-  return str1 + " " + str2; // TODO - make smarter
+  var nextChar = str2 && str2.length ? str2[str2.length-1] : 'X';
+  var between = lastChar.match(/[,!\.?]/) ? '' : ' ';
+  return str1 + between + str2;
 }
 
 function collapseLine(line){

@@ -14,16 +14,15 @@
       ],
       "selectdeploy": ["ifelse",
         ["same",["sizeof","myunits"],1],
-        ["line","Press \"deploy\" to place your second unit at", ["pos","selectdeploy"]],
-        ["line","Press \"deploy\" to place your first unit at ",["pos","selectdeploy"]]
+        ["line","Press","deploy","to place your second unit at","selectdeploy"],
+        ["line","Press","deploy","to place your first unit at","selectdeploy"]
       ],
-      "deploy": ["ifelse",
+      "deploy": ["if",
         ["same",["sizeof","myunits"],1],
-        "Now select where to deploy your second and last initial unit",
-        ""
+        "Now select where to deploy your second and last initial unit"
       ],
       "selectunit": "Now select which square to expand to",
-      "selecttarget": ["line","Press \"expand\" to expand to from ",["pos","selectunit"]," to ",["pos","selecttarget"]]
+      "selecttarget": ["line","Press","expand","to expand to from ","selectunit","to","selecttarget"]
     }
   },
   "canalwaysend": {"deploy":true},

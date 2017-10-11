@@ -12,14 +12,14 @@
         "Select which neutral unit to take over"
       ],
       "selectdrop": ["line",
-        "Press ",
+        "Press",
         ["orlist",
           [["notempty","uphill"],"uphill"],
           [["notempty","downhill"],"downhill"],
           [["notempty","vertical"],"vertical"],
           [["notempty","horisontal"],"horisontal"]
         ],
-        " to give your opponent placing options in that direction"
+        "to give your opponent placing options in that direction"
       ]
     }
   },

@@ -170,7 +170,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "move" to move from'
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to move from'
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
@@ -184,7 +190,7 @@
             type: 'line',
             content: [{
               type: 'text',
-              text: ' and squash the enemy at '
+              text: 'and squash the enemy at'
             }, {
               type: 'posref',
               pos: Object.keys(ARTIFACTS.squished)[0]
@@ -447,7 +453,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "move" to move from'
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to move from'
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
@@ -461,7 +473,7 @@
             type: 'line',
             content: [{
               type: 'text',
-              text: ' and squash the enemy at '
+              text: 'and squash the enemy at'
             }, {
               type: 'posref',
               pos: Object.keys(ARTIFACTS.squished)[0]

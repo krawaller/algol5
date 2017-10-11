@@ -8,13 +8,13 @@
       "startTurn": "Select which unit to move",
       "selectunit": "Select where to move to",
       "selectmovetarget": ["line",
-        "Press \"move\" to move from",
-        ["pos","selectunit"],
+        "Press","move","to move from",
+        "selectunit",
         "to",
-        ["pos","selectmovetarget"],
+        "selectmovetarget",
         ["if",
           ["notempty","squished"],
-          ["line"," and squash the enemy at ",["pos",["onlyin","squished"]]]
+          ["line","and squash the enemy at",["pos",["onlyin","squished"]]]
         ]
       ]
     }

@@ -10,10 +10,10 @@
       "startTurn": "Select which unit to move",
       "selectunit": "Select orthogonal empty neighbour to move to",
       "selectmovetarget": ["line",
-        "Press \"move\" to walk from ",
-        ["pos","selectunit"],
-        " to ",
-        ["pos","selectmovetarget"]
+        "Press","move","to walk from ",
+        "selectunit",
+        "to",
+        "selectmovetarget"
       ]
     }
   },

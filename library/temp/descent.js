@@ -126,7 +126,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "move" to '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to'
           }, (((UNITLAYERS.units[MARKS['selectunit']] || {})['group'] === (UNITLAYERS.units[MARKS['selectmovetarget']] || {})['group']) ? {
             type: 'text',
             text: 'walk'
@@ -138,13 +144,13 @@
             text: 'climb'
           })), {
             type: 'text',
-            text: ' from '
+            text: 'from'
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
           }, {
             type: 'text',
-            text: ' to '
+            text: 'to'
           }, {
             type: 'posref',
             pos: MARKS['selectmovetarget']
@@ -173,31 +179,49 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "dig" to turn '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'dig'
+          }, {
+            type: 'text',
+            text: 'to lower'
           }, {
             type: 'posref',
             pos: MARKS['selectdigtarget']
           }, {
             type: 'text',
-            text: ' from level 3 to level 2'
+            text: 'from level 3 to level 2'
           }]
         }) : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? collapseLine({
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "dig" to turn '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'dig'
+          }, {
+            type: 'text',
+            text: 'to lower'
           }, {
             type: 'posref',
             pos: MARKS['selectdigtarget']
           }, {
             type: 'text',
-            text: ' from level 2 to level 1'
+            text: 'from level 2 to level 1'
           }]
         }) : collapseLine({
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "dig" to destroy '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'dig'
+          }, {
+            type: 'text',
+            text: 'to destroy'
           }, {
             type: 'posref',
             pos: MARKS['selectdigtarget']
@@ -554,7 +578,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "move" to '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to'
           }, (((UNITLAYERS.units[MARKS['selectunit']] || {})['group'] === (UNITLAYERS.units[MARKS['selectmovetarget']] || {})['group']) ? {
             type: 'text',
             text: 'walk'
@@ -566,13 +596,13 @@
             text: 'climb'
           })), {
             type: 'text',
-            text: ' from '
+            text: 'from'
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
           }, {
             type: 'text',
-            text: ' to '
+            text: 'to'
           }, {
             type: 'posref',
             pos: MARKS['selectmovetarget']
@@ -601,31 +631,49 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "dig" to turn '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'dig'
+          }, {
+            type: 'text',
+            text: 'to lower'
           }, {
             type: 'posref',
             pos: MARKS['selectdigtarget']
           }, {
             type: 'text',
-            text: ' from level 3 to level 2'
+            text: 'from level 3 to level 2'
           }]
         }) : (!!(UNITLAYERS.knights[MARKS['selectdigtarget']]) ? collapseLine({
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "dig" to turn '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'dig'
+          }, {
+            type: 'text',
+            text: 'to lower'
           }, {
             type: 'posref',
             pos: MARKS['selectdigtarget']
           }, {
             type: 'text',
-            text: ' from level 2 to level 1'
+            text: 'from level 2 to level 1'
           }]
         }) : collapseLine({
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "dig" to destroy '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'dig'
+          }, {
+            type: 'text',
+            text: 'to destroy'
           }, {
             type: 'posref',
             pos: MARKS['selectdigtarget']

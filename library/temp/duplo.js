@@ -75,7 +75,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "deploy" to place your second unit at'
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'deploy'
+          }, {
+            type: 'text',
+            text: 'to place your second unit at'
           }, {
             type: 'posref',
             pos: MARKS['selectdeploy']
@@ -84,7 +90,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "deploy" to place your first unit at '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'deploy'
+          }, {
+            type: 'text',
+            text: 'to place your first unit at'
           }, {
             type: 'posref',
             pos: MARKS['selectdeploy']
@@ -244,13 +256,19 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "expand" to expand to from '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'expand'
+          }, {
+            type: 'text',
+            text: 'to expand to from '
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
           }, {
             type: 'text',
-            text: ' to '
+            text: 'to'
           }, {
             type: 'posref',
             pos: MARKS['selecttarget']
@@ -334,13 +352,12 @@
       }
       game.deploy1instruction = function(turn, step) {
         var UNITLAYERS = step.UNITLAYERS;
-        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? {
+        return (Object.keys(UNITLAYERS.myunits).length === 1) ? {
           type: 'text',
           text: 'Now select where to deploy your second and last initial unit'
         } : {
-          type: 'text',
-          text: ''
-        });
+          type: 'nothing'
+        };
       };
       game.expand1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -529,7 +546,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "deploy" to place your second unit at'
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'deploy'
+          }, {
+            type: 'text',
+            text: 'to place your second unit at'
           }, {
             type: 'posref',
             pos: MARKS['selectdeploy']
@@ -538,7 +561,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "deploy" to place your first unit at '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'deploy'
+          }, {
+            type: 'text',
+            text: 'to place your first unit at'
           }, {
             type: 'posref',
             pos: MARKS['selectdeploy']
@@ -698,13 +727,19 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "expand" to expand to from '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'expand'
+          }, {
+            type: 'text',
+            text: 'to expand to from '
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
           }, {
             type: 'text',
-            text: ' to '
+            text: 'to'
           }, {
             type: 'posref',
             pos: MARKS['selecttarget']
@@ -788,13 +823,12 @@
       }
       game.deploy2instruction = function(turn, step) {
         var UNITLAYERS = step.UNITLAYERS;
-        return ((Object.keys(UNITLAYERS.myunits).length === 1) ? {
+        return (Object.keys(UNITLAYERS.myunits).length === 1) ? {
           type: 'text',
           text: 'Now select where to deploy your second and last initial unit'
         } : {
-          type: 'text',
-          text: ''
-        });
+          type: 'nothing'
+        };
       };
       game.expand2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});

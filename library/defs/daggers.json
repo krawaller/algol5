@@ -3,7 +3,14 @@
     "id": "daggers",
     "name": "Daggers",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
-    "tags": ["differentunits","asymmetric","multiplegoals","infiltrate","killking","capture"]
+    "tags": ["differentunits","asymmetric","multiplegoals","infiltrate","killking","capture"],
+    "instructions": {
+      "startTurn": "Select which unit to move",
+      "selectunit": "Select where to move to",
+      "selectmovetarget": ["line",
+        "Press","move","to go from","selectunit","to","selectmovetarget"
+      ]
+    }
   },
   "board": {
     "height": 8,

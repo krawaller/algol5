@@ -61,8 +61,21 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
       },{type:"line",content:[]})
       `
     }
+    case "pluralise": {
+      const [num,sing,plur] = args;
+      return `{
+        type: "text",
+        text: (temp = ${parse.val(num)}) + ' ' + ( temp === 1 ? ${parse.val(sing)} : ${parse.val(plur)})
+      }`;
+    }
     default:
-      return parse.content(["line", ...expression]);  //`{type:'text',text:${parse.value(expression)}}`;
-      //throw "Unknown content: " + expression;
+      try {
+        return `{
+          type: 'text',
+          text: ${parse.val(expression)}
+        }`
+      } catch(e){
+         return parse.content(["line", ...expression]);
+      }
   }
 }

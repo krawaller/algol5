@@ -120,13 +120,19 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "move" to walk from '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to walk from '
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
           }, {
             type: 'text',
-            text: ' to '
+            text: 'to'
           }, {
             type: 'posref',
             pos: MARKS['selectmovetarget']
@@ -339,13 +345,19 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press "move" to walk from '
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to walk from '
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
           }, {
             type: 'text',
-            text: ' to '
+            text: 'to'
           }, {
             type: 'posref',
             pos: MARKS['selectmovetarget']

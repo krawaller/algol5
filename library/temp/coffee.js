@@ -108,7 +108,7 @@
           type: 'line',
           content: [{
               type: 'text',
-              text: 'Press '
+              text: 'Press'
             },
             [{
               cond: Object.keys(ARTIFACTS.uphill).length !== 0,
@@ -149,7 +149,7 @@
               content: []
             }), {
               type: 'text',
-              text: ' to give your opponent placing options in that direction'
+              text: 'to give your opponent placing options in that direction'
             }
           ]
         });
@@ -686,7 +686,7 @@
           type: 'line',
           content: [{
               type: 'text',
-              text: 'Press '
+              text: 'Press'
             },
             [{
               cond: Object.keys(ARTIFACTS.uphill).length !== 0,
@@ -727,7 +727,7 @@
               content: []
             }), {
               type: 'text',
-              text: ' to give your opponent placing options in that direction'
+              text: 'to give your opponent placing options in that direction'
             }
           ]
         });

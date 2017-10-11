@@ -144,7 +144,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: 'Select where to move to'
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -164,10 +164,29 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ''
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to go from'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: 'to'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -299,7 +318,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: 'Select which unit to move'
         };
       };
       game.debug1 = function() {
@@ -372,7 +391,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: 'Select where to move to'
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -392,10 +411,29 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ''
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: 'Press'
+          }, {
+            type: 'cmndref',
+            cmnd: 'move'
+          }, {
+            type: 'text',
+            text: 'to go from'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectunit']
+          }, {
+            type: 'text',
+            text: 'to'
+          }, {
+            type: 'posref',
+            pos: MARKS['selectmovetarget']
+          }]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -527,7 +565,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: 'Select which unit to move'
         };
       };
       game.debug2 = function() {

@@ -23,7 +23,7 @@ const lineicons = {
 type PieceProps = any;
 
 let Piece = (props: PieceProps)=> {
-    let cls = "piece dir"+(props.dir||1)+" owner"+(props.owner||0)
+    let cls = "piece owner"+(props.owner||0)
     return (
         <div className={cls}>
             {fullicons[props.icon]||''}

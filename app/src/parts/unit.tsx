@@ -2,6 +2,8 @@ import * as React from 'react';
 import Piece from './piece';
 import Square from './square';
 
+import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 type UnitState = any;
 type UnitProps = any
 
@@ -30,7 +32,9 @@ class Unit extends React.Component <UnitProps,UnitState> {
     let coords = this.state.coords
     let cls = (unit.spawnCoords ? '' : 'fadein ') /* + (s.old ? 'hasold' : '') */
     return <Square also={cls} key={unit.id} x={coords.x} y={coords.y} height={tileheightpc} width={tilewidthpc}>
-      <Piece dir={unit.dir} owner={unit.owner} icon={unit.icon} />
+      <ReactCSSTransitionGroup transitionName="icon" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+        <Piece key={unit.id + '_' + unit.icon} owner={unit.owner} icon={unit.icon} />
+      </ReactCSSTransitionGroup>
       { /* s.old && <Piece dir={s.old.dir} owner={s.old.owner} icon={s.old.group} /> */ }
     </Square>
   }

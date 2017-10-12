@@ -10,13 +10,17 @@
     position: absolute;
     font-size: 40px;
     transition: bottom 0.5s, left 0.5s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    line-height: 50px;
 }
 
 .piece {
+    position: absolute;
     transition: color 0.5s ease;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .owner0 {
@@ -40,6 +44,24 @@
 
 .potentialmark {
     opacity: 0.45;
+}
+
+.icon-enter {
+    transform: scale(0.1,0.1);
+    transition: transform 0.5s ease-in;
+}
+
+.icon-enter.icon-enter-active {
+    transform: scale(1,1);
+}
+
+.icon-leave {
+    transform: scale(1,1);
+    transition: transform 0.5s ease-in;
+}
+
+.icon-leave.icon-leave.active {
+    transform: scale(0.1,0.1);
 }
 
 .fadein.pieces-enter {

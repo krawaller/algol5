@@ -165,6 +165,7 @@
       };
       game.selectmovetarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
         return collapseLine({
           type: 'line',
           content: [{
@@ -175,17 +176,49 @@
             cmnd: 'move'
           }, {
             type: 'text',
-            text: 'to go from'
+            text: 'to go'
+          }, ((BOARD.board[MARKS['selectmovetarget']].y > BOARD.board[MARKS['selectunit']].y) ? {
+            type: 'text',
+            text: 'uphill'
+          } : (BOARD.board[MARKS['selectunit']].y > BOARD.board[MARKS['selectmovetarget']].y) ? {
+            type: 'text',
+            text: 'downhill'
+          } : {
+            type: 'nothing'
+          }), {
+            type: 'text',
+            text: 'from'
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
-          }, {
-            type: 'text',
-            text: 'to'
-          }, {
-            type: 'posref',
-            pos: MARKS['selectmovetarget']
-          }]
+          }, (!!(UNITLAYERS.units[MARKS['selectmovetarget']]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'and kill the enemy'
+            }, (!!(UNITLAYERS.crowns[MARKS['selectmovetarget']]) ? {
+              type: 'text',
+              text: 'king'
+            } : {
+              type: 'text',
+              text: 'bishop'
+            }), {
+              type: 'text',
+              text: 'at'
+            }, {
+              type: 'posref',
+              pos: MARKS['selectmovetarget']
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'to'
+            }, {
+              type: 'posref',
+              pos: MARKS['selectmovetarget']
+            }]
+          }))]
         });
       };
       game.move1 = function(turn, step) {
@@ -412,6 +445,7 @@
       };
       game.selectmovetarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
         return collapseLine({
           type: 'line',
           content: [{
@@ -422,17 +456,49 @@
             cmnd: 'move'
           }, {
             type: 'text',
-            text: 'to go from'
+            text: 'to go'
+          }, ((BOARD.board[MARKS['selectmovetarget']].y > BOARD.board[MARKS['selectunit']].y) ? {
+            type: 'text',
+            text: 'uphill'
+          } : (BOARD.board[MARKS['selectunit']].y > BOARD.board[MARKS['selectmovetarget']].y) ? {
+            type: 'text',
+            text: 'downhill'
+          } : {
+            type: 'nothing'
+          }), {
+            type: 'text',
+            text: 'from'
           }, {
             type: 'posref',
             pos: MARKS['selectunit']
-          }, {
-            type: 'text',
-            text: 'to'
-          }, {
-            type: 'posref',
-            pos: MARKS['selectmovetarget']
-          }]
+          }, (!!(UNITLAYERS.units[MARKS['selectmovetarget']]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'and kill the enemy'
+            }, (!!(UNITLAYERS.crowns[MARKS['selectmovetarget']]) ? {
+              type: 'text',
+              text: 'king'
+            } : {
+              type: 'text',
+              text: 'bishop'
+            }), {
+              type: 'text',
+              text: 'at'
+            }, {
+              type: 'posref',
+              pos: MARKS['selectmovetarget']
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: 'to'
+            }, {
+              type: 'posref',
+              pos: MARKS['selectmovetarget']
+            }]
+          }))]
         });
       };
       game.move2 = function(turn, step) {

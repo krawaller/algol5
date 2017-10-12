@@ -252,6 +252,7 @@
       };
       game.selecttarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
         return collapseLine({
           type: 'line',
           content: [{
@@ -272,6 +273,11 @@
           }, {
             type: 'posref',
             pos: MARKS['selecttarget']
+          }, !!(UNITLAYERS.units[MARKS['selecttarget']]) ? {
+            type: 'text',
+            text: 'and neutralise the enemy there'
+          } : {
+            type: 'nothing'
           }]
         });
       };
@@ -723,6 +729,7 @@
       };
       game.selecttarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
         return collapseLine({
           type: 'line',
           content: [{
@@ -743,6 +750,11 @@
           }, {
             type: 'posref',
             pos: MARKS['selecttarget']
+          }, !!(UNITLAYERS.units[MARKS['selecttarget']]) ? {
+            type: 'text',
+            text: 'and neutralise the enemy there'
+          } : {
+            type: 'nothing'
           }]
         });
       };

@@ -15,6 +15,8 @@ let Piece = ({content, performCommand})=> {
       return <button className="commandbtn" onClick={()=>performCommand(content.cmnd)}>{content.cmnd}</button>;
     case "playerref":
       return <span>{content.player}</span>;
+    case "nothing":
+      return null;
     default:
       console.log("Oh no :(", content);
       throw "Unknown content: " + content;

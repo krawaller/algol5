@@ -22,7 +22,10 @@
         "Now select where to deploy your second and last initial unit"
       ],
       "selectunit": "Now select which square to expand to",
-      "selecttarget": ["line","Press","expand","to expand to from ","selectunit","to","selecttarget"]
+      "selecttarget": ["line",
+        "Press","expand","to expand to from ","selectunit","to","selecttarget",
+        ["if",["anyat","units","selecttarget"],"and neutralise the enemy there"]
+      ]
     }
   },
   "canalwaysend": {"deploy":true},

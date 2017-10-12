@@ -26,7 +26,7 @@
         "to",
         "selectmovetarget"
       ],
-      "move": "Now select a neighbouring square to dig",
+      "move": "Now select an empty neighbouring square to dig",
       "selectdigtarget": ["ifelse",
         ["anyat","rooks","selectdigtarget"],
         ["line",

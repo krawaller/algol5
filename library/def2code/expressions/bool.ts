@@ -57,6 +57,14 @@ export default function parseBool(gameDef: Definition, player: 1 | 2, action: s
       const bools = args;
       return `(${ bools.map(b => parse.bool(b)).join(' || ') })`;
     }
+    case "higher": {
+      const [pos1,pos2] = args;
+      return `(BOARD.board[${parse.pos(pos1)}].y > BOARD.board[${parse.pos(pos2)}].y)`;
+    }
+    case "further": {
+      const [pos1,pos2] = args;
+      return `(BOARD[${parse.pos(pos1)}].x > BOARD[${parse.pos(pos2)}].x)`;
+    }
     case "not": {
       const [bool] = args;
       return `!${parse.bool(bool)}`;

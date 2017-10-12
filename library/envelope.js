@@ -188,7 +188,7 @@ function terrainLayers(board, forplayer, aiterrain){
 
 function mergeStrings(str1, str2){
   var nextChar = str2 && str2.length ? str2[str2.length-1] : 'X';
-  var between = lastChar.match(/[,!\.?]/) ? '' : ' ';
+  var between = nextChar.match(/[,!\.?]/) ? '' : ' ';
   return str1 + between + str2;
 }
 

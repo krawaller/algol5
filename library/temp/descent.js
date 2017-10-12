@@ -330,7 +330,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Now select a neighbouring square to dig'
+          text: 'Now select an empty neighbouring square to dig'
         };
       };
       game.dig1 = function(turn, step) {
@@ -782,7 +782,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Now select a neighbouring square to dig'
+          text: 'Now select an empty neighbouring square to dig'
         };
       };
       game.dig2 = function(turn, step) {

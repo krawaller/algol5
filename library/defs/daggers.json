@@ -8,7 +8,25 @@
       "startTurn": "Select which unit to move",
       "selectunit": "Select where to move to",
       "selectmovetarget": ["line",
-        "Press","move","to go from","selectunit","to","selectmovetarget"
+        "Press","move","to go",
+        ["ifelse",
+          ["higher","selectmovetarget","selectunit"],
+          "uphill",
+          ["if",
+            ["higher","selectunit","selectmovetarget"],
+            "downhill"
+          ]
+        ],
+        "from","selectunit",
+        ["ifelse",
+          ["anyat","units","selectmovetarget"],
+          ["line","and kill the enemy",["ifelse",
+            ["anyat","crowns","selectmovetarget"],
+            "king",
+            "bishop"
+          ],"at","selectmovetarget"],
+          ["line","to","selectmovetarget"]
+        ]
       ]
     }
   },

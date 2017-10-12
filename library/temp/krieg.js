@@ -114,7 +114,7 @@
                 }
                 return ret;
               }())[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? "myfrozenguardedthreat" : "myfrozenfreethreat") : (!!(UNITLAYERS.units[POS]) ? "mymoverguardedthreat" : "mymoverfreethreat"))][POS] = {};
             }
           }
         }
@@ -137,7 +137,7 @@
                 }
                 return ret;
               }())[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? "oppfrozenguardedthreat" : "oppfrozenfreethreat") : (!!(UNITLAYERS.units[POS]) ? "oppmoverguardedthreat" : "oppmoverfreethreat"))][POS] = {};
             }
           }
         }
@@ -217,7 +217,7 @@
                 }
                 return ret;
               }())[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? "myfrozenguardedthreat" : "myfrozenfreethreat") : (!!(UNITLAYERS.units[POS]) ? "mymoverguardedthreat" : "mymoverfreethreat"))][POS] = {};
             }
           }
         }
@@ -240,7 +240,7 @@
                 }
                 return ret;
               }())[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? "oppfrozenguardedthreat" : "oppfrozenfreethreat") : (!!(UNITLAYERS.units[POS]) ? "oppmoverguardedthreat" : "oppmoverfreethreat"))][POS] = {};
             }
           }
         }
@@ -311,14 +311,14 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = (!!(TERRAIN.southeast[STARTPOS]) ? [1, 3, 4, 5, 7] : (!!(TERRAIN.northwest[STARTPOS]) ? [1, 3, 5, 7, 8] : [1, 3, 5, 7]));
         var nbrofneighbourdirs = neighbourdirs.length;
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && !UNITLAYERS.units[POS]) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -339,7 +339,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: "Select an empty square to move to"
         };
       };
       game.selectmove1 = function(turn, step, markpos) {
@@ -359,10 +359,41 @@
         return newstep;
       };
       game.selectmove1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ''
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, ((!!(TERRAIN.oppbases[MARKS["selectmove"]]) && !(TERRAIN.oppbases[MARKS["selectunit"]])) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "into the opponent base at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmove"]
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "to"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmove"]
+            }]
+          }))]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -373,20 +404,20 @@
         for (var POS in UNITLAYERS.myfrozens) {
           LOOPID = UNITLAYERS.myfrozens[POS].id
           UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
-            'group': 'notfrozens'
+            "group": "notfrozens"
           });
           // TODO - check that it uses ['loopid'] ?
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': 'frozens'
+            "group": "frozens"
           });
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmove']
+            "pos": MARKS["selectmove"]
           });
         }
         MARKS = {};
@@ -462,7 +493,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -516,10 +547,19 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ''
-        };
+        return ((turn.turn > 2) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a unit to move that your didn't move last turn"
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a unit to move"
+          }]
+        }));
       };
       game.debug1 = function() {
         return {
@@ -562,7 +602,7 @@
                 }
                 return ret;
               }())[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? "myfrozenguardedthreat" : "myfrozenfreethreat") : (!!(UNITLAYERS.units[POS]) ? "mymoverguardedthreat" : "mymoverfreethreat"))][POS] = {};
             }
           }
         }
@@ -585,7 +625,7 @@
                 }
                 return ret;
               }())[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? "oppfrozenguardedthreat" : "oppfrozenfreethreat") : (!!(UNITLAYERS.units[POS]) ? "oppmoverguardedthreat" : "oppmoverfreethreat"))][POS] = {};
             }
           }
         }
@@ -665,7 +705,7 @@
                 }
                 return ret;
               }())[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'myfrozenguardedthreat' : 'myfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'mymoverguardedthreat' : 'mymoverfreethreat'))][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.myfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? "myfrozenguardedthreat" : "myfrozenfreethreat") : (!!(UNITLAYERS.units[POS]) ? "mymoverguardedthreat" : "mymoverfreethreat"))][POS] = {};
             }
           }
         }
@@ -688,7 +728,7 @@
                 }
                 return ret;
               }())[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? 'oppfrozenguardedthreat' : 'oppfrozenfreethreat') : (!!(UNITLAYERS.units[POS]) ? 'oppmoverguardedthreat' : 'oppmoverfreethreat'))][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.oppfrozens[STARTPOS]) ? (!!(UNITLAYERS.units[POS]) ? "oppfrozenguardedthreat" : "oppfrozenfreethreat") : (!!(UNITLAYERS.units[POS]) ? "oppmoverguardedthreat" : "oppmoverfreethreat"))][POS] = {};
             }
           }
         }
@@ -759,14 +799,14 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = (!!(TERRAIN.southeast[STARTPOS]) ? [1, 3, 4, 5, 7] : (!!(TERRAIN.northwest[STARTPOS]) ? [1, 3, 5, 7, 8] : [1, 3, 5, 7]));
         var nbrofneighbourdirs = neighbourdirs.length;
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && !UNITLAYERS.units[POS]) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -787,7 +827,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: "Select an empty square to move to"
         };
       };
       game.selectmove2 = function(turn, step, markpos) {
@@ -807,10 +847,41 @@
         return newstep;
       };
       game.selectmove2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ''
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, ((!!(TERRAIN.oppbases[MARKS["selectmove"]]) && !(TERRAIN.oppbases[MARKS["selectunit"]])) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "into the opponent base at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmove"]
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "to"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmove"]
+            }]
+          }))]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -821,20 +892,20 @@
         for (var POS in UNITLAYERS.myfrozens) {
           LOOPID = UNITLAYERS.myfrozens[POS].id
           UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
-            'group': 'notfrozens'
+            "group": "notfrozens"
           });
           // TODO - check that it uses ['loopid'] ?
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': 'frozens'
+            "group": "frozens"
           });
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmove']
+            "pos": MARKS["selectmove"]
           });
         }
         MARKS = {};
@@ -910,7 +981,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -964,10 +1035,19 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ''
-        };
+        return ((turn.turn > 2) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a unit to move that your didn't move last turn"
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a unit to move"
+          }]
+        }));
       };
       game.debug2 = function() {
         return {

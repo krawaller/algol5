@@ -73,7 +73,7 @@
       game.selectdeploytarget1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectunit1 = function(turn, step, markpos) {
@@ -94,7 +94,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.deploy1 = function(turn, step) {
@@ -107,9 +107,9 @@
         var UNITLAYERS = step.UNITLAYERS;
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdeploytarget'],
+          pos: MARKS["selectdeploytarget"],
           id: newunitid,
-          group: 'pawns',
+          group: "pawns",
           owner: 0
         };
         MARKS = {};
@@ -143,7 +143,7 @@
         };
         var walkstarts = UNITLAYERS.units;
         for (var STARTPOS in walkstarts) {
-          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
+          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
           var allwalkerdirs = [1, 2, 3, 4];
           for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
             var walkedsquares = [];
@@ -155,7 +155,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH > 1)) {
-                ARTIFACTS['line'][POS] = {};
+                ARTIFACTS["line"][POS] = {};
               }
             }
           }
@@ -182,7 +182,7 @@
       game.deploy1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.promote1 = function(turn, step) {
@@ -192,10 +192,10 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': (!!(UNITLAYERS.pawns[MARKS['selectunit']]) ? 'bishops' : 'kings')
+            "group": (!!(UNITLAYERS.pawns[MARKS["selectunit"]]) ? "bishops" : "kings")
           });
         }
         MARKS = {};
@@ -229,7 +229,7 @@
         };
         var walkstarts = UNITLAYERS.units;
         for (var STARTPOS in walkstarts) {
-          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
+          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
           var allwalkerdirs = [1, 2, 3, 4];
           for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
             var walkedsquares = [];
@@ -241,7 +241,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH > 1)) {
-                ARTIFACTS['line'][POS] = {};
+                ARTIFACTS["line"][POS] = {};
               }
             }
           }
@@ -267,7 +267,7 @@
       game.promote1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -355,7 +355,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -386,7 +386,7 @@
       game.selectdeploytarget2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectunit2 = function(turn, step, markpos) {
@@ -407,7 +407,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.deploy2 = function(turn, step) {
@@ -420,9 +420,9 @@
         var UNITLAYERS = step.UNITLAYERS;
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdeploytarget'],
+          pos: MARKS["selectdeploytarget"],
           id: newunitid,
-          group: 'pawns',
+          group: "pawns",
           owner: 0
         };
         MARKS = {};
@@ -456,7 +456,7 @@
         };
         var walkstarts = UNITLAYERS.units;
         for (var STARTPOS in walkstarts) {
-          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
+          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
           var allwalkerdirs = [1, 2, 3, 4];
           for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
             var walkedsquares = [];
@@ -468,7 +468,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH > 1)) {
-                ARTIFACTS['line'][POS] = {};
+                ARTIFACTS["line"][POS] = {};
               }
             }
           }
@@ -495,7 +495,7 @@
       game.deploy2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.promote2 = function(turn, step) {
@@ -505,10 +505,10 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': (!!(UNITLAYERS.pawns[MARKS['selectunit']]) ? 'bishops' : 'kings')
+            "group": (!!(UNITLAYERS.pawns[MARKS["selectunit"]]) ? "bishops" : "kings")
           });
         }
         MARKS = {};
@@ -542,7 +542,7 @@
         };
         var walkstarts = UNITLAYERS.units;
         for (var STARTPOS in walkstarts) {
-          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})['group']];
+          var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
           var allwalkerdirs = [1, 2, 3, 4];
           for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
             var walkedsquares = [];
@@ -554,7 +554,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH > 1)) {
-                ARTIFACTS['line'][POS] = {};
+                ARTIFACTS["line"][POS] = {};
               }
             }
           }
@@ -580,7 +580,7 @@
       game.promote2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -668,7 +668,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

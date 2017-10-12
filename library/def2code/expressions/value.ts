@@ -23,11 +23,11 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
     }
     case "value": {
       const [val] = args;
-      return typeof val === "string" ? `'${val}'` : val;
+      return typeof val === "string" ? `"${val}"` : val;
     }
     case "val": {
       const [val] = args;
-      return typeof val === "string" ? `'${val}'` : val;
+      return typeof val === "string" ? `"${val}"` : val;
     }
     case "player": {
       return player;

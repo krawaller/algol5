@@ -83,18 +83,18 @@
           selectunit: markpos
         };
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var allwalkerdirs = [1, 3, 5, 7];
         for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
           var STOPREASON = "";
           var POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
           if (BLOCKS[POS]) {
             if (UNITLAYERS.oppunits[POS]) {
-              ARTIFACTS['movetargets'][POS] = {
+              ARTIFACTS["movetargets"][POS] = {
                 dir: DIR
               };
             }
@@ -118,7 +118,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select where to move to'
+          text: "Select where to move to"
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -131,23 +131,23 @@
           selectmovetarget: markpos,
           selectunit: step.MARKS.selectunit
         };
-        if (!!(UNITLAYERS.oppunits[MARKS['selectmovetarget']])) {
+        if (!!(UNITLAYERS.oppunits[MARKS["selectmovetarget"]])) {
           var allowedsteps = UNITLAYERS.oppunits;
           var BLOCKS = UNITLAYERS.myunits;
-          var STARTPOS = MARKS['selectmovetarget'];
-          var DIR = relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1];
+          var STARTPOS = MARKS["selectmovetarget"];
+          var DIR = relativedirs[(ARTIFACTS.movetargets[MARKS["selectmovetarget"]] || {})["dir"] - 2 + 1];
           var walkedsquares = [];
           var STOPREASON = "";
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
             walkedsquares.push(POS);
-            ARTIFACTS['beingpushed'][POS] = {};
+            ARTIFACTS["beingpushed"][POS] = {};
           }
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            if ((['hitblock', 'outofbounds'].indexOf(STOPREASON) !== -1)) {
-              ARTIFACTS['squished'][walkedsquares[WALKLENGTH - 1]] = {};
+            if ((["hitblock", "outofbounds"].indexOf(STOPREASON) !== -1)) {
+              ARTIFACTS["squished"][walkedsquares[WALKLENGTH - 1]] = {};
             }
           }
         }
@@ -170,27 +170,27 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'move'
+            cmnd: "move"
           }, {
             type: 'text',
-            text: 'to move from'
+            text: "to move from"
           }, {
             type: 'posref',
-            pos: MARKS['selectunit']
+            pos: MARKS["selectunit"]
           }, {
             type: 'text',
-            text: 'to'
+            text: "to"
           }, {
             type: 'posref',
-            pos: MARKS['selectmovetarget']
+            pos: MARKS["selectmovetarget"]
           }, Object.keys(ARTIFACTS.squished).length !== 0 ? collapseLine({
             type: 'line',
             content: [{
               type: 'text',
-              text: 'and squash the enemy at'
+              text: "and squash the enemy at"
             }, {
               type: 'posref',
               pos: Object.keys(ARTIFACTS.squished)[0]
@@ -209,7 +209,7 @@
         for (var POS in ARTIFACTS.beingpushed) {
           if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
             var pushid = LOOPID;
-            var pushdir = (ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'];
+            var pushdir = (ARTIFACTS.movetargets[MARKS["selectmovetarget"]] || {})["dir"];
             var dist = 1;
             var newpos = UNITDATA[pushid].pos;
             while (dist && connections[newpos][pushdir]) {
@@ -228,10 +228,10 @@
             delete UNITDATA[LOOPID]; // TODO - check that it uses ['loopid'] ?
           }
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         MARKS = {};
@@ -289,7 +289,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -343,7 +343,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select which unit to move'
+          text: "Select which unit to move"
         };
       };
       game.debug1 = function() {
@@ -366,18 +366,18 @@
           selectunit: markpos
         };
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var allwalkerdirs = [1, 3, 5, 7];
         for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
           var STOPREASON = "";
           var POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
           if (BLOCKS[POS]) {
             if (UNITLAYERS.oppunits[POS]) {
-              ARTIFACTS['movetargets'][POS] = {
+              ARTIFACTS["movetargets"][POS] = {
                 dir: DIR
               };
             }
@@ -401,7 +401,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select where to move to'
+          text: "Select where to move to"
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -414,23 +414,23 @@
           selectmovetarget: markpos,
           selectunit: step.MARKS.selectunit
         };
-        if (!!(UNITLAYERS.oppunits[MARKS['selectmovetarget']])) {
+        if (!!(UNITLAYERS.oppunits[MARKS["selectmovetarget"]])) {
           var allowedsteps = UNITLAYERS.oppunits;
           var BLOCKS = UNITLAYERS.myunits;
-          var STARTPOS = MARKS['selectmovetarget'];
-          var DIR = relativedirs[(ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'] - 2 + 1];
+          var STARTPOS = MARKS["selectmovetarget"];
+          var DIR = relativedirs[(ARTIFACTS.movetargets[MARKS["selectmovetarget"]] || {})["dir"] - 2 + 1];
           var walkedsquares = [];
           var STOPREASON = "";
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
             walkedsquares.push(POS);
-            ARTIFACTS['beingpushed'][POS] = {};
+            ARTIFACTS["beingpushed"][POS] = {};
           }
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            if ((['hitblock', 'outofbounds'].indexOf(STOPREASON) !== -1)) {
-              ARTIFACTS['squished'][walkedsquares[WALKLENGTH - 1]] = {};
+            if ((["hitblock", "outofbounds"].indexOf(STOPREASON) !== -1)) {
+              ARTIFACTS["squished"][walkedsquares[WALKLENGTH - 1]] = {};
             }
           }
         }
@@ -453,27 +453,27 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'move'
+            cmnd: "move"
           }, {
             type: 'text',
-            text: 'to move from'
+            text: "to move from"
           }, {
             type: 'posref',
-            pos: MARKS['selectunit']
+            pos: MARKS["selectunit"]
           }, {
             type: 'text',
-            text: 'to'
+            text: "to"
           }, {
             type: 'posref',
-            pos: MARKS['selectmovetarget']
+            pos: MARKS["selectmovetarget"]
           }, Object.keys(ARTIFACTS.squished).length !== 0 ? collapseLine({
             type: 'line',
             content: [{
               type: 'text',
-              text: 'and squash the enemy at'
+              text: "and squash the enemy at"
             }, {
               type: 'posref',
               pos: Object.keys(ARTIFACTS.squished)[0]
@@ -492,7 +492,7 @@
         for (var POS in ARTIFACTS.beingpushed) {
           if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
             var pushid = LOOPID;
-            var pushdir = (ARTIFACTS.movetargets[MARKS['selectmovetarget']] || {})['dir'];
+            var pushdir = (ARTIFACTS.movetargets[MARKS["selectmovetarget"]] || {})["dir"];
             var dist = 1;
             var newpos = UNITDATA[pushid].pos;
             while (dist && connections[newpos][pushdir]) {
@@ -511,10 +511,10 @@
             delete UNITDATA[LOOPID]; // TODO - check that it uses ['loopid'] ?
           }
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         MARKS = {};
@@ -572,7 +572,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -626,7 +626,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select which unit to move'
+          text: "Select which unit to move"
         };
       };
       game.debug2 = function() {

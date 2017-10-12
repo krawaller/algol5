@@ -68,13 +68,13 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && !!(UNITLAYERS.oppunits[POS])) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -95,7 +95,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -117,7 +117,7 @@
       game.selectmovetarget1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move1 = function(turn, step) {
@@ -128,12 +128,12 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id];
         }
         MARKS = {};
         UNITLAYERS = {
@@ -174,7 +174,7 @@
             }
             var TOTALCOUNT = CURRENTCOUNT;
             if ((2 === TOTALCOUNT)) {
-              ARTIFACTS['musketeerline'][STARTPOS] = {};
+              ARTIFACTS["musketeerline"][STARTPOS] = {};
             }
           }
         }
@@ -204,7 +204,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -262,7 +262,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -283,13 +283,13 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && !(UNITLAYERS.units[POS])) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -310,7 +310,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -332,7 +332,7 @@
       game.selectmovetarget2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move2 = function(turn, step) {
@@ -343,12 +343,12 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id];
         }
         MARKS = {};
         UNITLAYERS = {
@@ -389,7 +389,7 @@
             }
             var TOTALCOUNT = CURRENTCOUNT;
             if ((2 === TOTALCOUNT)) {
-              ARTIFACTS['musketeerline'][STARTPOS] = {};
+              ARTIFACTS["musketeerline"][STARTPOS] = {};
             }
           }
         }
@@ -405,7 +405,7 @@
           }
           var NEIGHBOURCOUNT = foundneighbours.length;
           if (!NEIGHBOURCOUNT) {
-            ARTIFACTS['strandedmusketeers'][STARTPOS] = {};
+            ARTIFACTS["strandedmusketeers"][STARTPOS] = {};
           }
         }
         var newstepid = step.stepid + '-' + 'move';
@@ -434,7 +434,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -492,7 +492,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

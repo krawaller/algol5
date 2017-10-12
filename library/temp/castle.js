@@ -117,19 +117,19 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && ((!!(TERRAIN.walls[STARTPOS]) && !(TERRAIN.walls[POS])) || (!(TERRAIN.walls[STARTPOS]) && !!(TERRAIN.walls[POS])))) {
             if (!UNITLAYERS.myunits[POS]) {
-              ARTIFACTS['movetargets'][POS] = {};
+              ARTIFACTS["movetargets"][POS] = {};
             }
           }
         }
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var allowedsteps = (!!(TERRAIN.walls[STARTPOS]) ? TERRAIN.walls :
           (function() {
             var ret = {},
@@ -147,11 +147,11 @@
           var STOPREASON = "";
           var POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
           if (BLOCKS[POS] && allowedsteps[POS]) {
             if (UNITLAYERS.oppunits[POS]) {
-              ARTIFACTS['movetargets'][POS] = {};
+              ARTIFACTS["movetargets"][POS] = {};
             }
           }
         }
@@ -173,7 +173,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -195,7 +195,7 @@
       game.selectmovetarget1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move1 = function(turn, step) {
@@ -203,12 +203,12 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id];
         }
         MARKS = {};
         UNITLAYERS = {
@@ -268,7 +268,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -320,7 +320,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -342,19 +342,19 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && ((!!(TERRAIN.walls[STARTPOS]) && !(TERRAIN.walls[POS])) || (!(TERRAIN.walls[STARTPOS]) && !!(TERRAIN.walls[POS])))) {
             if (!UNITLAYERS.myunits[POS]) {
-              ARTIFACTS['movetargets'][POS] = {};
+              ARTIFACTS["movetargets"][POS] = {};
             }
           }
         }
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var allowedsteps = (!!(TERRAIN.walls[STARTPOS]) ? TERRAIN.walls :
           (function() {
             var ret = {},
@@ -372,11 +372,11 @@
           var STOPREASON = "";
           var POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
           if (BLOCKS[POS] && allowedsteps[POS]) {
             if (UNITLAYERS.oppunits[POS]) {
-              ARTIFACTS['movetargets'][POS] = {};
+              ARTIFACTS["movetargets"][POS] = {};
             }
           }
         }
@@ -398,7 +398,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -420,7 +420,7 @@
       game.selectmovetarget2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move2 = function(turn, step) {
@@ -428,12 +428,12 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id];
         }
         MARKS = {};
         UNITLAYERS = {
@@ -493,7 +493,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -545,7 +545,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

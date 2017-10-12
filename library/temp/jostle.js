@@ -65,13 +65,13 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS) {
-            ARTIFACTS[(!(UNITLAYERS.units[POS]) ? 'movetargets' : (!!(UNITLAYERS.oppunits[POS]) ? 'initialenemy' : 'initialfriend'))][POS] = {};
+            ARTIFACTS[(!(UNITLAYERS.units[POS]) ? "movetargets" : (!!(UNITLAYERS.oppunits[POS]) ? "initialenemy" : "initialfriend"))][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -95,25 +95,25 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'This unit neighbours'
+            text: "This unit neighbours"
           }, {
             type: "text",
-            text: (temp = Object.keys(ARTIFACTS.initialfriend).length) + ' ' + (temp === 1 ? 'friend' : 'friends')
+            text: (temp = Object.keys(ARTIFACTS.initialfriend).length) + ' ' + (temp === 1 ? "friend" : "friends")
           }, {
             type: 'text',
-            text: 'and'
+            text: "and"
           }, {
             type: "text",
-            text: (temp = Object.keys(ARTIFACTS.initialenemy).length) + ' ' + (temp === 1 ? 'enemy' : 'enemies')
+            text: (temp = Object.keys(ARTIFACTS.initialenemy).length) + ' ' + (temp === 1 ? "enemy" : "enemies")
           }, {
             type: 'text',
-            text: 'making the square worth'
+            text: "making the square worth"
           }, {
             type: 'text',
             text: (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)
           }, {
             type: 'text',
-            text: '. Select a higher value square to jostle to'
+            text: ". Select a higher value square to jostle to"
           }]
         });
       };
@@ -127,13 +127,13 @@
           selectmovetarget: markpos,
           selectunit: step.MARKS.selectunit
         };
-        var STARTPOS = MARKS['selectmovetarget'];
+        var STARTPOS = MARKS["selectmovetarget"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && UNITLAYERS.units[POS]) {
-            ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'newenemy' : 'newfriend')][POS] = {};
+            ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? "newenemy" : "newfriend")][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -157,40 +157,46 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'From '
+            text: "From"
           }, {
             type: 'posref',
-            pos: MARKS['selectmovetarget']
+            pos: MARKS["selectmovetarget"]
           }, {
             type: 'text',
-            text: 'you would neighbour'
+            text: "you would neighbour"
           }, {
             type: "text",
-            text: (temp = (Object.keys(ARTIFACTS.newfriend).length - 1)) + ' ' + (temp === 1 ? 'friend' : 'friends')
+            text: (temp = (Object.keys(ARTIFACTS.newfriend).length - 1)) + ' ' + (temp === 1 ? "friend" : "friends")
           }, {
             type: 'text',
-            text: 'and'
+            text: "and"
           }, {
             type: "text",
-            text: (temp = Object.keys(ARTIFACTS.newenemy).length) + ' ' + (temp === 1 ? 'enemy' : 'enemies')
+            text: (temp = Object.keys(ARTIFACTS.newenemy).length) + ' ' + (temp === 1 ? "enemy" : "enemies")
           }, {
             type: 'text',
-            text: ', making it worth'
+            text: ", making it worth"
           }, {
             type: 'text',
             text: ((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length)
           }, {
             type: 'text',
-            text: '. Press "jostle" to move from'
+            text: ". Press"
           }, {
-            type: 'posref',
-            pos: MARKS['selectunit']
+            type: 'cmndref',
+            cmnd: "jostle"
           }, {
             type: 'text',
-            text: 'to'
+            text: "to move from"
           }, {
             type: 'posref',
-            pos: MARKS['selectmovetarget']
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
           }]
         });
       };
@@ -199,10 +205,10 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         MARKS = {};
@@ -247,7 +253,7 @@
       game.jostle1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -303,7 +309,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select which unit to jostle!'
+          text: "Select which unit to jostle!"
         };
       };
       game.debug1 = function() {
@@ -326,13 +332,13 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS) {
-            ARTIFACTS[(!(UNITLAYERS.units[POS]) ? 'movetargets' : (!!(UNITLAYERS.oppunits[POS]) ? 'initialenemy' : 'initialfriend'))][POS] = {};
+            ARTIFACTS[(!(UNITLAYERS.units[POS]) ? "movetargets" : (!!(UNITLAYERS.oppunits[POS]) ? "initialenemy" : "initialfriend"))][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -356,25 +362,25 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'This unit neighbours'
+            text: "This unit neighbours"
           }, {
             type: "text",
-            text: (temp = Object.keys(ARTIFACTS.initialfriend).length) + ' ' + (temp === 1 ? 'friend' : 'friends')
+            text: (temp = Object.keys(ARTIFACTS.initialfriend).length) + ' ' + (temp === 1 ? "friend" : "friends")
           }, {
             type: 'text',
-            text: 'and'
+            text: "and"
           }, {
             type: "text",
-            text: (temp = Object.keys(ARTIFACTS.initialenemy).length) + ' ' + (temp === 1 ? 'enemy' : 'enemies')
+            text: (temp = Object.keys(ARTIFACTS.initialenemy).length) + ' ' + (temp === 1 ? "enemy" : "enemies")
           }, {
             type: 'text',
-            text: 'making the square worth'
+            text: "making the square worth"
           }, {
             type: 'text',
             text: (Object.keys(ARTIFACTS.initialfriend).length - Object.keys(ARTIFACTS.initialenemy).length)
           }, {
             type: 'text',
-            text: '. Select a higher value square to jostle to'
+            text: ". Select a higher value square to jostle to"
           }]
         });
       };
@@ -388,13 +394,13 @@
           selectmovetarget: markpos,
           selectunit: step.MARKS.selectunit
         };
-        var STARTPOS = MARKS['selectmovetarget'];
+        var STARTPOS = MARKS["selectmovetarget"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && UNITLAYERS.units[POS]) {
-            ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? 'newenemy' : 'newfriend')][POS] = {};
+            ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? "newenemy" : "newfriend")][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -418,40 +424,46 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'From '
+            text: "From"
           }, {
             type: 'posref',
-            pos: MARKS['selectmovetarget']
+            pos: MARKS["selectmovetarget"]
           }, {
             type: 'text',
-            text: 'you would neighbour'
+            text: "you would neighbour"
           }, {
             type: "text",
-            text: (temp = (Object.keys(ARTIFACTS.newfriend).length - 1)) + ' ' + (temp === 1 ? 'friend' : 'friends')
+            text: (temp = (Object.keys(ARTIFACTS.newfriend).length - 1)) + ' ' + (temp === 1 ? "friend" : "friends")
           }, {
             type: 'text',
-            text: 'and'
+            text: "and"
           }, {
             type: "text",
-            text: (temp = Object.keys(ARTIFACTS.newenemy).length) + ' ' + (temp === 1 ? 'enemy' : 'enemies')
+            text: (temp = Object.keys(ARTIFACTS.newenemy).length) + ' ' + (temp === 1 ? "enemy" : "enemies")
           }, {
             type: 'text',
-            text: ', making it worth'
+            text: ", making it worth"
           }, {
             type: 'text',
             text: ((Object.keys(ARTIFACTS.newfriend).length - 1) - Object.keys(ARTIFACTS.newenemy).length)
           }, {
             type: 'text',
-            text: '. Press "jostle" to move from'
+            text: ". Press"
           }, {
-            type: 'posref',
-            pos: MARKS['selectunit']
+            type: 'cmndref',
+            cmnd: "jostle"
           }, {
             type: 'text',
-            text: 'to'
+            text: "to move from"
           }, {
             type: 'posref',
-            pos: MARKS['selectmovetarget']
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
           }]
         });
       };
@@ -460,10 +472,10 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         MARKS = {};
@@ -508,7 +520,7 @@
       game.jostle2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -564,7 +576,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select which unit to jostle!'
+          text: "Select which unit to jostle!"
         };
       };
       game.debug2 = function() {

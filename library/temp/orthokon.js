@@ -80,7 +80,7 @@
           selectunit: markpos
         };
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var walkedsquares = [];
@@ -90,7 +90,7 @@
           }
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            ARTIFACTS['movetargets'][walkedsquares[WALKLENGTH - 1]] = {};
+            ARTIFACTS["movetargets"][walkedsquares[WALKLENGTH - 1]] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -111,7 +111,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -123,13 +123,13 @@
           selectmovetarget: markpos,
           selectunit: step.MARKS.selectunit
         };
-        var STARTPOS = MARKS['selectmovetarget'];
+        var STARTPOS = MARKS["selectmovetarget"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && UNITLAYERS.oppunits[POS]) {
-            ARTIFACTS['victims'][POS] = {};
+            ARTIFACTS["victims"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -147,7 +147,7 @@
       game.selectmovetarget1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move1 = function(turn, step) {
@@ -155,17 +155,17 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         var LOOPID;
         for (var POS in ARTIFACTS.victims) {
           if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
             UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
-              'owner': 1
+              "owner": 1
             });
             // TODO - check that it uses ['loopid'] ?
           }
@@ -209,7 +209,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -262,7 +262,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -296,7 +296,7 @@
           selectunit: markpos
         };
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var walkedsquares = [];
@@ -306,7 +306,7 @@
           }
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
-            ARTIFACTS['movetargets'][walkedsquares[WALKLENGTH - 1]] = {};
+            ARTIFACTS["movetargets"][walkedsquares[WALKLENGTH - 1]] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -327,7 +327,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -339,13 +339,13 @@
           selectmovetarget: markpos,
           selectunit: step.MARKS.selectunit
         };
-        var STARTPOS = MARKS['selectmovetarget'];
+        var STARTPOS = MARKS["selectmovetarget"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && UNITLAYERS.oppunits[POS]) {
-            ARTIFACTS['victims'][POS] = {};
+            ARTIFACTS["victims"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -363,7 +363,7 @@
       game.selectmovetarget2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move2 = function(turn, step) {
@@ -371,17 +371,17 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         var LOOPID;
         for (var POS in ARTIFACTS.victims) {
           if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
             UNITDATA[LOOPID] = Object.assign({}, UNITDATA[LOOPID], {
-              'owner': 2
+              "owner": 2
             });
             // TODO - check that it uses ['loopid'] ?
           }
@@ -425,7 +425,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -478,7 +478,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

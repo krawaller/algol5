@@ -111,7 +111,7 @@
             }
             return ret;
           }());
-        var STARTPOS = MARKS['selecttower'];
+        var STARTPOS = MARKS["selecttower"];
         var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
@@ -129,13 +129,13 @@
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS['movetargets'][POS] = {
+              ARTIFACTS["movetargets"][POS] = {
                 dir: DIR
               };
             }
           }
         }
-        var STARTPOS = MARKS['selecttower'];
+        var STARTPOS = MARKS["selecttower"];
         var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
@@ -153,7 +153,7 @@
               }
               return ret;
             }())[POS]) {
-            ARTIFACTS['killtargets'][POS] = {};
+            ARTIFACTS["killtargets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -178,7 +178,7 @@
       game.selecttower1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmove1 = function(turn, step, markpos) {
@@ -192,12 +192,12 @@
           selectmove: markpos,
           selecttower: step.MARKS.selecttower
         };
-        var STARTPOS = MARKS['selectmove'];
-        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']] || {})['dir'] - 2 + 5]];
+        var STARTPOS = MARKS["selectmove"];
+        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS["selectmove"]] || {})["dir"] - 2 + 5]];
         if (POS) {
-          ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? 'madecatapults' : 'madetowers') : 'madewalls')][POS] = {};
+          ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? "madecatapults" : "madetowers") : "madewalls")][POS] = {};
         }
-        ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS['selectmove']]) ? (!!(UNITLAYERS.mytowers[MARKS['selectmove']]) ? 'madecatapults' : 'madetowers') : 'madewalls')][STARTPOS] = {};
+        ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? (!!(UNITLAYERS.mytowers[MARKS["selectmove"]]) ? "madecatapults" : "madetowers") : "madewalls")][STARTPOS] = {};
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -213,7 +213,7 @@
       game.selectmove1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectkill1 = function(turn, step, markpos) {
@@ -231,7 +231,7 @@
         });
         turn.links[newstepid] = {};
         turn.links[newstepid].kill = 'kill1';
-        if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
+        if (!!(UNITLAYERS.oppcatapults[MARKS["selectkill"]])) {
           turn.links[newstepid].sacrifice = 'sacrifice1';
         }
         return newstep;
@@ -239,7 +239,7 @@
       game.selectkill1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectcatapult1 = function(turn, step, markpos) {
@@ -250,7 +250,7 @@
         var MARKS = {
           selectcatapult: markpos
         };
-        var STARTPOS = MARKS['selectcatapult'];
+        var STARTPOS = MARKS["selectcatapult"];
         var allwalkerdirs = [7, 8, 1, 2, 3];
         for (var walkerdirnbr = 0; walkerdirnbr < 5; walkerdirnbr++) {
           var MAX = 3;
@@ -261,7 +261,7 @@
             LENGTH++;
             STEP++;
             if (((STEP > 1) && !(UNITLAYERS.myunits[POS]))) {
-              ARTIFACTS['firetargets'][POS] = {};
+              ARTIFACTS["firetargets"][POS] = {};
             }
           }
         }
@@ -283,7 +283,7 @@
       game.selectcatapult1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectfire1 = function(turn, step, markpos) {
@@ -305,7 +305,7 @@
       game.selectfire1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move1 = function(turn, step) {
@@ -314,12 +314,12 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var clones = step.clones;
         var UNITLAYERS = step.UNITLAYERS;
-        delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
+        delete UNITDATA[(UNITLAYERS.units[MARKS["selecttower"]]  || {}).id];
         for (var POS in ARTIFACTS.madecatapults) {
           var unitid = (UNITLAYERS.units[POS]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'catapults'
+              "group": "catapults"
             });
           }
         }
@@ -327,7 +327,7 @@
           var unitid = (UNITLAYERS.units[POS]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'towers'
+              "group": "towers"
             });
           }
         }
@@ -336,9 +336,9 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'walls',
+            group: "walls",
             owner: 1,
-            from: MARKS['selecttower']
+            from: MARKS["selecttower"]
           };
         }
         MARKS = {};
@@ -408,7 +408,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.kill1 = function(turn, step) {
@@ -416,21 +416,21 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selecttower']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selecttower"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': 'walls'
+            "group": "walls"
           });
         }
-        if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
-          var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
+        if (!!(UNITLAYERS.oppcatapults[MARKS["selectkill"]])) {
+          var unitid = (UNITLAYERS.units[MARKS["selectkill"]]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'towers'
+              "group": "towers"
             });
           }
         } else {
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]  || {}).id];
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectkill"]]  || {}).id];
         }
         MARKS = {};
         UNITLAYERS = {
@@ -498,7 +498,7 @@
       game.kill1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.sacrifice1 = function(turn, step) {
@@ -506,13 +506,13 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectkill"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': 'walls'
+            "group": "walls"
           });
         }
-        delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
+        delete UNITDATA[(UNITLAYERS.units[MARKS["selecttower"]]  || {}).id];
         MARKS = {};
         UNITLAYERS = {
           "towers": {},
@@ -579,7 +579,7 @@
       game.sacrifice1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.fire1 = function(turn, step) {
@@ -588,31 +588,31 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var clones = step.clones;
         var UNITLAYERS = step.UNITLAYERS;
-        if (!!(UNITLAYERS.oppwalls[MARKS['selectfire']])) {
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]  || {}).id];
+        if (!!(UNITLAYERS.oppwalls[MARKS["selectfire"]])) {
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectfire"]]  || {}).id];
         } else {
-          if (!!(UNITLAYERS.oppunits[MARKS['selectfire']])) {
-            var unitid = (UNITLAYERS.units[MARKS['selectfire']]  || {}).id;
+          if (!!(UNITLAYERS.oppunits[MARKS["selectfire"]])) {
+            var unitid = (UNITLAYERS.units[MARKS["selectfire"]]  || {}).id;
             if (unitid) {
               UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'group': (!!(UNITLAYERS.oppcatapults[MARKS['selectfire']]) ? 'towers' : 'walls')
+                "group": (!!(UNITLAYERS.oppcatapults[MARKS["selectfire"]]) ? "towers" : "walls")
               });
             }
           } else {
             var newunitid = 'spawn' + (clones++);
             UNITDATA[newunitid] = {
-              pos: MARKS['selectfire'],
+              pos: MARKS["selectfire"],
               id: newunitid,
-              group: 'walls',
+              group: "walls",
               owner: 1,
-              from: MARKS['selectcatapult']
+              from: MARKS["selectcatapult"]
             };
           }
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectcatapult']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectcatapult"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': 'towers'
+            "group": "towers"
           });
         }
         MARKS = {};
@@ -682,7 +682,7 @@
       game.fire1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -752,7 +752,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -788,7 +788,7 @@
             }
             return ret;
           }());
-        var STARTPOS = MARKS['selecttower'];
+        var STARTPOS = MARKS["selecttower"];
         var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
@@ -806,13 +806,13 @@
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS['movetargets'][POS] = {
+              ARTIFACTS["movetargets"][POS] = {
                 dir: DIR
               };
             }
           }
         }
-        var STARTPOS = MARKS['selecttower'];
+        var STARTPOS = MARKS["selecttower"];
         var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
@@ -830,7 +830,7 @@
               }
               return ret;
             }())[POS]) {
-            ARTIFACTS['killtargets'][POS] = {};
+            ARTIFACTS["killtargets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -855,7 +855,7 @@
       game.selecttower2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmove2 = function(turn, step, markpos) {
@@ -869,12 +869,12 @@
           selectmove: markpos,
           selecttower: step.MARKS.selecttower
         };
-        var STARTPOS = MARKS['selectmove'];
-        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS['selectmove']] || {})['dir'] - 2 + 5]];
+        var STARTPOS = MARKS["selectmove"];
+        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS["selectmove"]] || {})["dir"] - 2 + 5]];
         if (POS) {
-          ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? 'madecatapults' : 'madetowers') : 'madewalls')][POS] = {};
+          ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? "madecatapults" : "madetowers") : "madewalls")][POS] = {};
         }
-        ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS['selectmove']]) ? (!!(UNITLAYERS.mytowers[MARKS['selectmove']]) ? 'madecatapults' : 'madetowers') : 'madewalls')][STARTPOS] = {};
+        ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? (!!(UNITLAYERS.mytowers[MARKS["selectmove"]]) ? "madecatapults" : "madetowers") : "madewalls")][STARTPOS] = {};
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
@@ -890,7 +890,7 @@
       game.selectmove2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectkill2 = function(turn, step, markpos) {
@@ -908,7 +908,7 @@
         });
         turn.links[newstepid] = {};
         turn.links[newstepid].kill = 'kill2';
-        if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
+        if (!!(UNITLAYERS.oppcatapults[MARKS["selectkill"]])) {
           turn.links[newstepid].sacrifice = 'sacrifice2';
         }
         return newstep;
@@ -916,7 +916,7 @@
       game.selectkill2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectcatapult2 = function(turn, step, markpos) {
@@ -927,7 +927,7 @@
         var MARKS = {
           selectcatapult: markpos
         };
-        var STARTPOS = MARKS['selectcatapult'];
+        var STARTPOS = MARKS["selectcatapult"];
         var allwalkerdirs = [3, 4, 5, 6, 7];
         for (var walkerdirnbr = 0; walkerdirnbr < 5; walkerdirnbr++) {
           var MAX = 3;
@@ -938,7 +938,7 @@
             LENGTH++;
             STEP++;
             if (((STEP > 1) && !(UNITLAYERS.myunits[POS]))) {
-              ARTIFACTS['firetargets'][POS] = {};
+              ARTIFACTS["firetargets"][POS] = {};
             }
           }
         }
@@ -960,7 +960,7 @@
       game.selectcatapult2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectfire2 = function(turn, step, markpos) {
@@ -982,7 +982,7 @@
       game.selectfire2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move2 = function(turn, step) {
@@ -991,12 +991,12 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var clones = step.clones;
         var UNITLAYERS = step.UNITLAYERS;
-        delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
+        delete UNITDATA[(UNITLAYERS.units[MARKS["selecttower"]]  || {}).id];
         for (var POS in ARTIFACTS.madecatapults) {
           var unitid = (UNITLAYERS.units[POS]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'catapults'
+              "group": "catapults"
             });
           }
         }
@@ -1004,7 +1004,7 @@
           var unitid = (UNITLAYERS.units[POS]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'towers'
+              "group": "towers"
             });
           }
         }
@@ -1013,9 +1013,9 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'walls',
+            group: "walls",
             owner: 2,
-            from: MARKS['selecttower']
+            from: MARKS["selecttower"]
           };
         }
         MARKS = {};
@@ -1085,7 +1085,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.kill2 = function(turn, step) {
@@ -1093,21 +1093,21 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selecttower']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selecttower"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': 'walls'
+            "group": "walls"
           });
         }
-        if (!!(UNITLAYERS.oppcatapults[MARKS['selectkill']])) {
-          var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
+        if (!!(UNITLAYERS.oppcatapults[MARKS["selectkill"]])) {
+          var unitid = (UNITLAYERS.units[MARKS["selectkill"]]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'group': 'towers'
+              "group": "towers"
             });
           }
         } else {
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectkill']]  || {}).id];
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectkill"]]  || {}).id];
         }
         MARKS = {};
         UNITLAYERS = {
@@ -1175,7 +1175,7 @@
       game.kill2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.sacrifice2 = function(turn, step) {
@@ -1183,13 +1183,13 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectkill']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectkill"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': 'walls'
+            "group": "walls"
           });
         }
-        delete UNITDATA[(UNITLAYERS.units[MARKS['selecttower']]  || {}).id];
+        delete UNITDATA[(UNITLAYERS.units[MARKS["selecttower"]]  || {}).id];
         MARKS = {};
         UNITLAYERS = {
           "towers": {},
@@ -1256,7 +1256,7 @@
       game.sacrifice2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.fire2 = function(turn, step) {
@@ -1265,31 +1265,31 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var clones = step.clones;
         var UNITLAYERS = step.UNITLAYERS;
-        if (!!(UNITLAYERS.oppwalls[MARKS['selectfire']])) {
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectfire']]  || {}).id];
+        if (!!(UNITLAYERS.oppwalls[MARKS["selectfire"]])) {
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectfire"]]  || {}).id];
         } else {
-          if (!!(UNITLAYERS.oppunits[MARKS['selectfire']])) {
-            var unitid = (UNITLAYERS.units[MARKS['selectfire']]  || {}).id;
+          if (!!(UNITLAYERS.oppunits[MARKS["selectfire"]])) {
+            var unitid = (UNITLAYERS.units[MARKS["selectfire"]]  || {}).id;
             if (unitid) {
               UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'group': (!!(UNITLAYERS.oppcatapults[MARKS['selectfire']]) ? 'towers' : 'walls')
+                "group": (!!(UNITLAYERS.oppcatapults[MARKS["selectfire"]]) ? "towers" : "walls")
               });
             }
           } else {
             var newunitid = 'spawn' + (clones++);
             UNITDATA[newunitid] = {
-              pos: MARKS['selectfire'],
+              pos: MARKS["selectfire"],
               id: newunitid,
-              group: 'walls',
+              group: "walls",
               owner: 2,
-              from: MARKS['selectcatapult']
+              from: MARKS["selectcatapult"]
             };
           }
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectcatapult']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectcatapult"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'group': 'towers'
+            "group": "towers"
           });
         }
         MARKS = {};
@@ -1359,7 +1359,7 @@
       game.fire2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -1429,7 +1429,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

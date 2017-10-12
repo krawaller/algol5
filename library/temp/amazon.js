@@ -77,7 +77,7 @@
             }
           }
           var NEIGHBOURCOUNT = foundneighbours.length;
-          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
+          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
         }
@@ -88,15 +88,15 @@
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var POS = STARTPOS;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")][POS] = {};
             }
           }
         }
         return reduce(ARTIFACTS.myroads, function(mem, obj) {
-            return mem + obj['count'];
+            return mem + obj["count"];
           }, 0) +
           Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
+            return mem + obj["count"];
           }, 0) -
           Object.keys(ARTIFACTS.oppreach).length;
       };
@@ -118,7 +118,7 @@
             }
           }
           var NEIGHBOURCOUNT = foundneighbours.length;
-          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
+          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
         }
@@ -129,17 +129,17 @@
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var POS = STARTPOS;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")][POS] = {};
             }
           }
         }
         return {
           myroads: reduce(ARTIFACTS.myroads, function(mem, obj) {
-            return mem + obj['count'];
+            return mem + obj["count"];
           }, 0),
           mydomain: Object.keys(ARTIFACTS.myreach).length,
           opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
+            return mem + obj["count"];
           }, 0),
           oppdomain: -Object.keys(ARTIFACTS.oppreach).length
         };
@@ -153,12 +153,12 @@
           selectunit: markpos
         };
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-            ARTIFACTS['targets'][POS] = {};
+            ARTIFACTS["targets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -179,7 +179,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select where to move the amazon'
+          text: "Select where to move the amazon"
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -204,22 +204,22 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'move'
+            cmnd: "move"
           }, {
             type: 'text',
-            text: 'to go from'
+            text: "to go from"
           }, {
             type: 'posref',
-            pos: MARKS['selectunit']
+            pos: MARKS["selectunit"]
           }, {
             type: 'text',
-            text: 'to'
+            text: "to"
           }, {
             type: 'posref',
-            pos: MARKS['selectmovetarget']
+            pos: MARKS["selectmovetarget"]
           }]
         });
       };
@@ -244,16 +244,16 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'fire'
+            cmnd: "fire"
           }, {
             type: 'text',
-            text: 'to destroy the square at'
+            text: "to destroy the square at"
           }, {
             type: 'posref',
-            pos: MARKS['selectfiretarget']
+            pos: MARKS["selectfiretarget"]
           }]
         });
       };
@@ -265,13 +265,13 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
         var TURNVARS = Object.assign({}, step.TURNVARS);
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
-        TURNVARS['movedto'] = MARKS['selectmovetarget'];
+        TURNVARS["movedto"] = MARKS["selectmovetarget"];
         MARKS = {};
         UNITLAYERS = {
           "queens": {},
@@ -303,7 +303,7 @@
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-            ARTIFACTS['targets'][POS] = {};
+            ARTIFACTS["targets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + 'move';
@@ -328,7 +328,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Now select where to fire at'
+          text: "Now select where to fire at"
         };
       };
       game.fire1 = function(turn, step) {
@@ -340,9 +340,9 @@
         var TURNVARS = Object.assign({}, step.TURNVARS);
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectfiretarget'],
+          pos: MARKS["selectfiretarget"],
           id: newunitid,
-          group: 'fires',
+          group: "fires",
           owner: 0,
           from: TURNVARS['movedto']
         };
@@ -390,7 +390,7 @@
       game.fire1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -449,7 +449,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select an amazon to move and fire with'
+          text: "Select an amazon to move and fire with"
         };
       };
       game.debug1 = function() {
@@ -480,7 +480,7 @@
             }
           }
           var NEIGHBOURCOUNT = foundneighbours.length;
-          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
+          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
         }
@@ -491,15 +491,15 @@
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var POS = STARTPOS;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")][POS] = {};
             }
           }
         }
         return reduce(ARTIFACTS.myroads, function(mem, obj) {
-            return mem + obj['count'];
+            return mem + obj["count"];
           }, 0) +
           Object.keys(ARTIFACTS.myreach).length - reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
+            return mem + obj["count"];
           }, 0) -
           Object.keys(ARTIFACTS.oppreach).length;
       };
@@ -521,7 +521,7 @@
             }
           }
           var NEIGHBOURCOUNT = foundneighbours.length;
-          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myroads' : 'opproads')][STARTPOS] = {
+          ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")][STARTPOS] = {
             count: NEIGHBOURCOUNT
           };
         }
@@ -532,17 +532,17 @@
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
             var POS = STARTPOS;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? 'myreach' : 'oppreach')][POS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")][POS] = {};
             }
           }
         }
         return {
           myroads: reduce(ARTIFACTS.myroads, function(mem, obj) {
-            return mem + obj['count'];
+            return mem + obj["count"];
           }, 0),
           mydomain: Object.keys(ARTIFACTS.myreach).length,
           opproads: -reduce(ARTIFACTS.opproads, function(mem, obj) {
-            return mem + obj['count'];
+            return mem + obj["count"];
           }, 0),
           oppdomain: -Object.keys(ARTIFACTS.oppreach).length
         };
@@ -556,12 +556,12 @@
           selectunit: markpos
         };
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-            ARTIFACTS['targets'][POS] = {};
+            ARTIFACTS["targets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -582,7 +582,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select where to move the amazon'
+          text: "Select where to move the amazon"
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -607,22 +607,22 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'move'
+            cmnd: "move"
           }, {
             type: 'text',
-            text: 'to go from'
+            text: "to go from"
           }, {
             type: 'posref',
-            pos: MARKS['selectunit']
+            pos: MARKS["selectunit"]
           }, {
             type: 'text',
-            text: 'to'
+            text: "to"
           }, {
             type: 'posref',
-            pos: MARKS['selectmovetarget']
+            pos: MARKS["selectmovetarget"]
           }]
         });
       };
@@ -647,16 +647,16 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'fire'
+            cmnd: "fire"
           }, {
             type: 'text',
-            text: 'to destroy the square at'
+            text: "to destroy the square at"
           }, {
             type: 'posref',
-            pos: MARKS['selectfiretarget']
+            pos: MARKS["selectfiretarget"]
           }]
         });
       };
@@ -668,13 +668,13 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
         var TURNVARS = Object.assign({}, step.TURNVARS);
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
-        TURNVARS['movedto'] = MARKS['selectmovetarget'];
+        TURNVARS["movedto"] = MARKS["selectmovetarget"];
         MARKS = {};
         UNITLAYERS = {
           "queens": {},
@@ -706,7 +706,7 @@
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-            ARTIFACTS['targets'][POS] = {};
+            ARTIFACTS["targets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + 'move';
@@ -731,7 +731,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Now select where to fire at'
+          text: "Now select where to fire at"
         };
       };
       game.fire2 = function(turn, step) {
@@ -743,9 +743,9 @@
         var TURNVARS = Object.assign({}, step.TURNVARS);
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectfiretarget'],
+          pos: MARKS["selectfiretarget"],
           id: newunitid,
-          group: 'fires',
+          group: "fires",
           owner: 0,
           from: TURNVARS['movedto']
         };
@@ -793,7 +793,7 @@
       game.fire2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -852,7 +852,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select an amazon to move and fire with'
+          text: "Select an amazon to move and fire with"
         };
       };
       game.debug2 = function() {

@@ -97,14 +97,14 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
-        var neighbourdirs = (!!(UNITLAYERS.pinets[MARKS['selectunit']]) ? [1] : (!!(UNITLAYERS.piokers[MARKS['selectunit']]) ? [8, 2] : [8, 1, 2]));
+        var STARTPOS = MARKS["selectunit"];
+        var neighbourdirs = (!!(UNITLAYERS.pinets[MARKS["selectunit"]]) ? [1] : (!!(UNITLAYERS.piokers[MARKS["selectunit"]]) ? [8, 2] : [8, 1, 2]));
         var nbrofneighbourdirs = neighbourdirs.length;
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && !UNITLAYERS.myunits[POS]) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -128,7 +128,7 @@
                 s1 =
                 (function() {
                   var ret = {};
-                  ret[MARKS['selectunit']] = 1;
+                  ret[MARKS["selectunit"]] = 1;
                   return ret;
                 }());
               for (var key in s0) {
@@ -145,7 +145,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -162,7 +162,7 @@
           name: 'selectmovetarget'
         });
         turn.links[newstepid] = {};
-        if ((!!(UNITLAYERS.units[MARKS['selectmovetarget']]) && !(TERRAIN.oppbase[MARKS['selectmovetarget']]))) {
+        if ((!!(UNITLAYERS.units[MARKS["selectmovetarget"]]) && !(TERRAIN.oppbase[MARKS["selectmovetarget"]]))) {
           var newlinks = turn.links[newstepid];
           for (var linkpos in
               (function() {
@@ -186,7 +186,7 @@
       game.selectmovetarget1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectdeportdestination1 = function(turn, step, markpos) {
@@ -209,7 +209,7 @@
       game.selectdeportdestination1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectswapunit1 = function(turn, step, markpos) {
@@ -221,14 +221,14 @@
           selectswapunit: markpos,
           selectunit: step.MARKS.selectunit
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var DIR = neighbourdirs[dirnbr];
           var POS = startconnections[DIR];
           if (POS && !UNITLAYERS.units[POS]) {
-            ARTIFACTS['swap1steps'][POS] = {
+            ARTIFACTS["swap1steps"][POS] = {
               dir: DIR
             };
           }
@@ -251,7 +251,7 @@
       game.selectswapunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectswap1target1 = function(turn, step, markpos) {
@@ -264,8 +264,8 @@
           selectunit: step.MARKS.selectunit,
           selectswapunit: step.MARKS.selectswapunit
         };
-        var STARTPOS = MARKS['selectswapunit'];
-        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.swap1steps[MARKS['selectswap1target']] || {})['dir'] - 2 + 5]];
+        var STARTPOS = MARKS["selectswapunit"];
+        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.swap1steps[MARKS["selectswap1target"]] || {})["dir"] - 2 + 5]];
         if (POS && !
           (function() {
             var k, ret = {},
@@ -273,7 +273,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectswap1target']] = 1;
+                ret[MARKS["selectswap1target"]] = 1;
                 return ret;
               }());
             for (k in s0) {
@@ -284,7 +284,7 @@
             }
             return ret;
           }())[POS]) {
-          ARTIFACTS['swap2step'][POS] = {};
+          ARTIFACTS["swap2step"][POS] = {};
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -303,7 +303,7 @@
       game.selectswap1target1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move1 = function(turn, step) {
@@ -311,22 +311,22 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        if (!!(UNITLAYERS.units[MARKS['selectmovetarget']])) {
-          if (!!(TERRAIN.oppbase[MARKS['selectmovetarget']])) {
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+        if (!!(UNITLAYERS.units[MARKS["selectmovetarget"]])) {
+          if (!!(TERRAIN.oppbase[MARKS["selectmovetarget"]])) {
+            delete UNITDATA[(UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id];
           } else {
-            var unitid = (UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id;
+            var unitid = (UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id;
             if (unitid) {
               UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'pos': MARKS['selectdeportdestination']
+                "pos": MARKS["selectdeportdestination"]
               });
             }
           }
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         MARKS = {};
@@ -392,7 +392,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.swap1 = function(turn, step) {
@@ -400,16 +400,16 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectswap1target']
+            "pos": MARKS["selectswap1target"]
           });
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectswapunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectswapunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': Object.keys(ARTIFACTS.swap2step)[0]
+            "pos": Object.keys(ARTIFACTS.swap2step)[0]
           });
         }
         MARKS = {};
@@ -475,7 +475,7 @@
       game.swap1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -537,7 +537,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -559,14 +559,14 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
-        var neighbourdirs = (!!(UNITLAYERS.pinets[MARKS['selectunit']]) ? [5] : (!!(UNITLAYERS.piokers[MARKS['selectunit']]) ? [4, 6] : [4, 5, 6]));
+        var STARTPOS = MARKS["selectunit"];
+        var neighbourdirs = (!!(UNITLAYERS.pinets[MARKS["selectunit"]]) ? [5] : (!!(UNITLAYERS.piokers[MARKS["selectunit"]]) ? [4, 6] : [4, 5, 6]));
         var nbrofneighbourdirs = neighbourdirs.length;
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
           var POS = startconnections[neighbourdirs[dirnbr]];
           if (POS && !UNITLAYERS.myunits[POS]) {
-            ARTIFACTS['movetargets'][POS] = {};
+            ARTIFACTS["movetargets"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -590,7 +590,7 @@
                 s1 =
                 (function() {
                   var ret = {};
-                  ret[MARKS['selectunit']] = 1;
+                  ret[MARKS["selectunit"]] = 1;
                   return ret;
                 }());
               for (var key in s0) {
@@ -607,7 +607,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -624,7 +624,7 @@
           name: 'selectmovetarget'
         });
         turn.links[newstepid] = {};
-        if ((!!(UNITLAYERS.units[MARKS['selectmovetarget']]) && !(TERRAIN.oppbase[MARKS['selectmovetarget']]))) {
+        if ((!!(UNITLAYERS.units[MARKS["selectmovetarget"]]) && !(TERRAIN.oppbase[MARKS["selectmovetarget"]]))) {
           var newlinks = turn.links[newstepid];
           for (var linkpos in
               (function() {
@@ -648,7 +648,7 @@
       game.selectmovetarget2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectdeportdestination2 = function(turn, step, markpos) {
@@ -671,7 +671,7 @@
       game.selectdeportdestination2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectswapunit2 = function(turn, step, markpos) {
@@ -683,14 +683,14 @@
           selectswapunit: markpos,
           selectunit: step.MARKS.selectunit
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 3, 5, 7];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
           var DIR = neighbourdirs[dirnbr];
           var POS = startconnections[DIR];
           if (POS && !UNITLAYERS.units[POS]) {
-            ARTIFACTS['swap1steps'][POS] = {
+            ARTIFACTS["swap1steps"][POS] = {
               dir: DIR
             };
           }
@@ -713,7 +713,7 @@
       game.selectswapunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectswap1target2 = function(turn, step, markpos) {
@@ -726,8 +726,8 @@
           selectunit: step.MARKS.selectunit,
           selectswapunit: step.MARKS.selectswapunit
         };
-        var STARTPOS = MARKS['selectswapunit'];
-        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.swap1steps[MARKS['selectswap1target']] || {})['dir'] - 2 + 5]];
+        var STARTPOS = MARKS["selectswapunit"];
+        var POS = connections[STARTPOS][relativedirs[(ARTIFACTS.swap1steps[MARKS["selectswap1target"]] || {})["dir"] - 2 + 5]];
         if (POS && !
           (function() {
             var k, ret = {},
@@ -735,7 +735,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectswap1target']] = 1;
+                ret[MARKS["selectswap1target"]] = 1;
                 return ret;
               }());
             for (k in s0) {
@@ -746,7 +746,7 @@
             }
             return ret;
           }())[POS]) {
-          ARTIFACTS['swap2step'][POS] = {};
+          ARTIFACTS["swap2step"][POS] = {};
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -765,7 +765,7 @@
       game.selectswap1target2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move2 = function(turn, step) {
@@ -773,22 +773,22 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        if (!!(UNITLAYERS.units[MARKS['selectmovetarget']])) {
-          if (!!(TERRAIN.oppbase[MARKS['selectmovetarget']])) {
-            delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+        if (!!(UNITLAYERS.units[MARKS["selectmovetarget"]])) {
+          if (!!(TERRAIN.oppbase[MARKS["selectmovetarget"]])) {
+            delete UNITDATA[(UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id];
           } else {
-            var unitid = (UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id;
+            var unitid = (UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id;
             if (unitid) {
               UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'pos': MARKS['selectdeportdestination']
+                "pos": MARKS["selectdeportdestination"]
               });
             }
           }
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         MARKS = {};
@@ -854,7 +854,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.swap2 = function(turn, step) {
@@ -862,16 +862,16 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectswap1target']
+            "pos": MARKS["selectswap1target"]
           });
         }
-        var unitid = (UNITLAYERS.units[MARKS['selectswapunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectswapunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': Object.keys(ARTIFACTS.swap2step)[0]
+            "pos": Object.keys(ARTIFACTS.swap2step)[0]
           });
         }
         MARKS = {};
@@ -937,7 +937,7 @@
       game.swap2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -999,7 +999,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

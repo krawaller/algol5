@@ -117,7 +117,7 @@
       game.selectkingdeploy1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectunit1 = function(turn, step, markpos) {
@@ -151,31 +151,31 @@
             var POS = STARTPOS;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               if (!ARTIFACTS.nokings[POS]) {
-                ARTIFACTS['kingwalk'][POS] = {};
+                ARTIFACTS["kingwalk"][POS] = {};
               }
             }
           }
         }
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
           var DIR = neighbourdirs[dirnbr];
           var POS = startconnections[DIR];
           if (POS && UNITLAYERS.oppunits[POS]) {
-            ARTIFACTS['adjacentenemies'][POS] = {
+            ARTIFACTS["adjacentenemies"][POS] = {
               dir: DIR
             };
           }
         }
         for (var STARTPOS in ARTIFACTS.adjacentenemies) {
-          var DIR = relativedirs[(ARTIFACTS.adjacentenemies[STARTPOS] || {})['dir'] - 2 + 1];
+          var DIR = relativedirs[(ARTIFACTS.adjacentenemies[STARTPOS] || {})["dir"] - 2 + 1];
           var POS = connections[STARTPOS][DIR];
           if (POS && !
             (function() {
               var k, ret = {},
                 s0 = UNITLAYERS.units,
-                s1 = (!!(UNITLAYERS.mykings[MARKS['selectunit']]) ? ARTIFACTS.nokings : ARTIFACTS.nosoldiers);
+                s1 = (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? ARTIFACTS.nokings : ARTIFACTS.nosoldiers);
               for (k in s0) {
                 ret[k] = 1;
               }
@@ -185,12 +185,12 @@
               return ret;
             }())[POS]) {
             var NEIGHBOURCOUNT = 1;
-            ARTIFACTS['jumptargets'][POS] = {
+            ARTIFACTS["jumptargets"][POS] = {
               dir: DIR
             };
           }
           if (!!NEIGHBOURCOUNT) {
-            ARTIFACTS['willdie'][STARTPOS] = {
+            ARTIFACTS["willdie"][STARTPOS] = {
               dir: DIR
             };
           }
@@ -205,7 +205,7 @@
         });
         turn.links[newstepid] = {};
         var newlinks = turn.links[newstepid];
-        for (var linkpos in (!!(UNITLAYERS.mykings[MARKS['selectunit']]) ? ARTIFACTS.kingwalk :
+        for (var linkpos in (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? ARTIFACTS.kingwalk :
             (function() {
               var ret = {},
                 s0 = BOARD.board,
@@ -252,7 +252,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -274,7 +274,7 @@
       game.selectmovetarget1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectjumptarget1 = function(turn, step, markpos) {
@@ -290,7 +290,7 @@
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS["selectjumptarget"]] || {})["dir"]) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -310,7 +310,7 @@
       game.selectjumptarget1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.deploy1 = function(turn, step) {
@@ -321,9 +321,9 @@
         var UNITLAYERS = step.UNITLAYERS;
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectkingdeploy'],
+          pos: MARKS["selectkingdeploy"],
           id: newunitid,
-          group: 'kings',
+          group: "kings",
           owner: player
         };
         MARKS = {};
@@ -395,7 +395,7 @@
       game.deploy1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move1 = function(turn, step) {
@@ -403,10 +403,10 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         MARKS = {};
@@ -477,7 +477,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.jump1 = function(turn, step) {
@@ -486,10 +486,10 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
         delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]]  || {}).id];
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectjumptarget']
+            "pos": MARKS["selectjumptarget"]
           });
         }
         MARKS = {};
@@ -560,7 +560,7 @@
       game.jump1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -622,7 +622,7 @@
           for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
             var POS = startconnections[neighbourdirs[dirnbr]];
             if (POS) {
-              ARTIFACTS['nokings'][POS] = {};
+              ARTIFACTS["nokings"][POS] = {};
             }
           }
         }
@@ -632,7 +632,7 @@
           for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
             var POS = startconnections[neighbourdirs[dirnbr]];
             if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
-              ARTIFACTS['nosoldiers'][POS] = {};
+              ARTIFACTS["nosoldiers"][POS] = {};
             }
           }
         }
@@ -685,7 +685,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -717,7 +717,7 @@
       game.selectkingdeploy2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectunit2 = function(turn, step, markpos) {
@@ -751,31 +751,31 @@
             var POS = STARTPOS;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
               if (!ARTIFACTS.nokings[POS]) {
-                ARTIFACTS['kingwalk'][POS] = {};
+                ARTIFACTS["kingwalk"][POS] = {};
               }
             }
           }
         }
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
           var DIR = neighbourdirs[dirnbr];
           var POS = startconnections[DIR];
           if (POS && UNITLAYERS.oppunits[POS]) {
-            ARTIFACTS['adjacentenemies'][POS] = {
+            ARTIFACTS["adjacentenemies"][POS] = {
               dir: DIR
             };
           }
         }
         for (var STARTPOS in ARTIFACTS.adjacentenemies) {
-          var DIR = relativedirs[(ARTIFACTS.adjacentenemies[STARTPOS] || {})['dir'] - 2 + 1];
+          var DIR = relativedirs[(ARTIFACTS.adjacentenemies[STARTPOS] || {})["dir"] - 2 + 1];
           var POS = connections[STARTPOS][DIR];
           if (POS && !
             (function() {
               var k, ret = {},
                 s0 = UNITLAYERS.units,
-                s1 = (!!(UNITLAYERS.mykings[MARKS['selectunit']]) ? ARTIFACTS.nokings : ARTIFACTS.nosoldiers);
+                s1 = (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? ARTIFACTS.nokings : ARTIFACTS.nosoldiers);
               for (k in s0) {
                 ret[k] = 1;
               }
@@ -785,12 +785,12 @@
               return ret;
             }())[POS]) {
             var NEIGHBOURCOUNT = 1;
-            ARTIFACTS['jumptargets'][POS] = {
+            ARTIFACTS["jumptargets"][POS] = {
               dir: DIR
             };
           }
           if (!!NEIGHBOURCOUNT) {
-            ARTIFACTS['willdie'][STARTPOS] = {
+            ARTIFACTS["willdie"][STARTPOS] = {
               dir: DIR
             };
           }
@@ -805,7 +805,7 @@
         });
         turn.links[newstepid] = {};
         var newlinks = turn.links[newstepid];
-        for (var linkpos in (!!(UNITLAYERS.mykings[MARKS['selectunit']]) ? ARTIFACTS.kingwalk :
+        for (var linkpos in (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? ARTIFACTS.kingwalk :
             (function() {
               var ret = {},
                 s0 = BOARD.board,
@@ -852,7 +852,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -874,7 +874,7 @@
       game.selectmovetarget2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectjumptarget2 = function(turn, step, markpos) {
@@ -890,7 +890,7 @@
         for (var POS in filtersourcelayer) {
           if (filtersourcelayer[POS]) {
             var filterobj = filtersourcelayer[POS];
-            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS['selectjumptarget']] || {})['dir']) {
+            if (filterobj.dir === (ARTIFACTS.jumptargets[MARKS["selectjumptarget"]] || {})["dir"]) {
               filtertargetlayer[POS] = filterobj;
             }
           }
@@ -910,7 +910,7 @@
       game.selectjumptarget2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.deploy2 = function(turn, step) {
@@ -921,9 +921,9 @@
         var UNITLAYERS = step.UNITLAYERS;
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectkingdeploy'],
+          pos: MARKS["selectkingdeploy"],
           id: newunitid,
-          group: 'kings',
+          group: "kings",
           owner: player
         };
         MARKS = {};
@@ -995,7 +995,7 @@
       game.deploy2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.move2 = function(turn, step) {
@@ -1003,10 +1003,10 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
         }
         MARKS = {};
@@ -1077,7 +1077,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.jump2 = function(turn, step) {
@@ -1086,10 +1086,10 @@
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
         delete UNITDATA[(UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]]  || {}).id];
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectjumptarget']
+            "pos": MARKS["selectjumptarget"]
           });
         }
         MARKS = {};
@@ -1160,7 +1160,7 @@
       game.jump2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -1222,7 +1222,7 @@
           for (var dirnbr = 0; dirnbr < nbrofneighbourdirs; dirnbr++) {
             var POS = startconnections[neighbourdirs[dirnbr]];
             if (POS) {
-              ARTIFACTS['nokings'][POS] = {};
+              ARTIFACTS["nokings"][POS] = {};
             }
           }
         }
@@ -1232,7 +1232,7 @@
           for (var dirnbr = 0; dirnbr < 4; dirnbr++) {
             var POS = startconnections[neighbourdirs[dirnbr]];
             if (POS && (!!(TERRAIN.homerow[POS]) || (!!(TERRAIN.edges[STARTPOS]) && !!(TERRAIN.edges[POS])))) {
-              ARTIFACTS['nosoldiers'][POS] = {};
+              ARTIFACTS["nosoldiers"][POS] = {};
             }
           }
         }
@@ -1285,7 +1285,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

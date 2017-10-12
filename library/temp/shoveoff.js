@@ -115,7 +115,7 @@
         var MARKS = {
           selectpushpoint: markpos
         };
-        var STARTPOS = MARKS['selectpushpoint'];
+        var STARTPOS = MARKS["selectpushpoint"];
         var allwalkerdirs = [1, 3, 5, 7];
         for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
@@ -127,7 +127,7 @@
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
             if ((WALKLENGTH === 3) && !UNITLAYERS.oppunits[walkedsquares[WALKLENGTH - 1]]) {
-              ARTIFACTS['targetedgepoints'][walkedsquares[WALKLENGTH - 1]] = {
+              ARTIFACTS["targetedgepoints"][walkedsquares[WALKLENGTH - 1]] = {
                 dir: relativedirs[5 - 2 + DIR]
               };
             }
@@ -135,7 +135,7 @@
         }
         var walkstarts = ARTIFACTS.targetedgepoints;
         for (var STARTPOS in walkstarts) {
-          var DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {})['dir'];
+          var DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {})["dir"];
           var walkedsquares = [];
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
@@ -144,13 +144,13 @@
             walkedsquares.push(POS);
             STEP++;
             if ((STEP !== 1)) {
-              ARTIFACTS[((DIR === 1) ? 'pushsouth' : ((DIR === 3) ? 'pushwest' : ((DIR === 5) ? 'pushnorth' : 'pusheast')))][POS] = {};
+              ARTIFACTS[((DIR === 1) ? "pushsouth" : ((DIR === 3) ? "pushwest" : ((DIR === 5) ? "pushnorth" : "pusheast")))][POS] = {};
             }
           }
           var WALKLENGTH = walkedsquares.length;
-          ARTIFACTS[((DIR === 1) ? 'squishsouth' : ((DIR === 3) ? 'squishwest' : ((DIR === 5) ? 'squishnorth' : 'squisheast')))][STARTPOS] = {};
+          ARTIFACTS[((DIR === 1) ? "squishsouth" : ((DIR === 3) ? "squishwest" : ((DIR === 5) ? "squishnorth" : "squisheast")))][STARTPOS] = {};
           if (WALKLENGTH) {
-            ARTIFACTS[((DIR === 1) ? 'spawnsouth' : ((DIR === 3) ? 'spawnwest' : ((DIR === 5) ? 'spawnnorth' : 'spawneast')))][walkedsquares[WALKLENGTH - 1]] = {};
+            ARTIFACTS[((DIR === 1) ? "spawnsouth" : ((DIR === 3) ? "spawnwest" : ((DIR === 5) ? "spawnnorth" : "spawneast")))][walkedsquares[WALKLENGTH - 1]] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -179,7 +179,7 @@
       game.selectpushpoint1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.north1 = function(turn, step) {
@@ -212,7 +212,7 @@
         UNITDATA[newunitid] = {
           pos: Object.keys(ARTIFACTS.spawnnorth)[0],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: ((8 > Object.keys(UNITLAYERS.myunits).length) ? 1 : 0)
         };
         MARKS = {};
@@ -265,7 +265,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH === 4)) {
-                ARTIFACTS['fourinarow'][POS] = {};
+                ARTIFACTS["fourinarow"][POS] = {};
               }
             }
           }
@@ -292,7 +292,7 @@
       game.north1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.south1 = function(turn, step) {
@@ -325,7 +325,7 @@
         UNITDATA[newunitid] = {
           pos: Object.keys(ARTIFACTS.spawnsouth)[0],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: ((8 > Object.keys(UNITLAYERS.myunits).length) ? 1 : 0)
         };
         MARKS = {};
@@ -378,7 +378,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH === 4)) {
-                ARTIFACTS['fourinarow'][POS] = {};
+                ARTIFACTS["fourinarow"][POS] = {};
               }
             }
           }
@@ -405,7 +405,7 @@
       game.south1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.east1 = function(turn, step) {
@@ -438,7 +438,7 @@
         UNITDATA[newunitid] = {
           pos: Object.keys(ARTIFACTS.spawneast)[0],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: ((8 > Object.keys(UNITLAYERS.myunits).length) ? 1 : 0)
         };
         MARKS = {};
@@ -491,7 +491,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH === 4)) {
-                ARTIFACTS['fourinarow'][POS] = {};
+                ARTIFACTS["fourinarow"][POS] = {};
               }
             }
           }
@@ -518,7 +518,7 @@
       game.east1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.west1 = function(turn, step) {
@@ -551,7 +551,7 @@
         UNITDATA[newunitid] = {
           pos: Object.keys(ARTIFACTS.spawnwest)[0],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: ((8 > Object.keys(UNITLAYERS.myunits).length) ? 1 : 0)
         };
         MARKS = {};
@@ -604,7 +604,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH === 4)) {
-                ARTIFACTS['fourinarow'][POS] = {};
+                ARTIFACTS["fourinarow"][POS] = {};
               }
             }
           }
@@ -631,7 +631,7 @@
       game.west1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -697,7 +697,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -731,7 +731,7 @@
         var MARKS = {
           selectpushpoint: markpos
         };
-        var STARTPOS = MARKS['selectpushpoint'];
+        var STARTPOS = MARKS["selectpushpoint"];
         var allwalkerdirs = [1, 3, 5, 7];
         for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
@@ -743,7 +743,7 @@
           var WALKLENGTH = walkedsquares.length;
           if (WALKLENGTH) {
             if ((WALKLENGTH === 3) && !UNITLAYERS.oppunits[walkedsquares[WALKLENGTH - 1]]) {
-              ARTIFACTS['targetedgepoints'][walkedsquares[WALKLENGTH - 1]] = {
+              ARTIFACTS["targetedgepoints"][walkedsquares[WALKLENGTH - 1]] = {
                 dir: relativedirs[5 - 2 + DIR]
               };
             }
@@ -751,7 +751,7 @@
         }
         var walkstarts = ARTIFACTS.targetedgepoints;
         for (var STARTPOS in walkstarts) {
-          var DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {})['dir'];
+          var DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {})["dir"];
           var walkedsquares = [];
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
@@ -760,13 +760,13 @@
             walkedsquares.push(POS);
             STEP++;
             if ((STEP !== 1)) {
-              ARTIFACTS[((DIR === 1) ? 'pushsouth' : ((DIR === 3) ? 'pushwest' : ((DIR === 5) ? 'pushnorth' : 'pusheast')))][POS] = {};
+              ARTIFACTS[((DIR === 1) ? "pushsouth" : ((DIR === 3) ? "pushwest" : ((DIR === 5) ? "pushnorth" : "pusheast")))][POS] = {};
             }
           }
           var WALKLENGTH = walkedsquares.length;
-          ARTIFACTS[((DIR === 1) ? 'squishsouth' : ((DIR === 3) ? 'squishwest' : ((DIR === 5) ? 'squishnorth' : 'squisheast')))][STARTPOS] = {};
+          ARTIFACTS[((DIR === 1) ? "squishsouth" : ((DIR === 3) ? "squishwest" : ((DIR === 5) ? "squishnorth" : "squisheast")))][STARTPOS] = {};
           if (WALKLENGTH) {
-            ARTIFACTS[((DIR === 1) ? 'spawnsouth' : ((DIR === 3) ? 'spawnwest' : ((DIR === 5) ? 'spawnnorth' : 'spawneast')))][walkedsquares[WALKLENGTH - 1]] = {};
+            ARTIFACTS[((DIR === 1) ? "spawnsouth" : ((DIR === 3) ? "spawnwest" : ((DIR === 5) ? "spawnnorth" : "spawneast")))][walkedsquares[WALKLENGTH - 1]] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -795,7 +795,7 @@
       game.selectpushpoint2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.north2 = function(turn, step) {
@@ -828,7 +828,7 @@
         UNITDATA[newunitid] = {
           pos: Object.keys(ARTIFACTS.spawnnorth)[0],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: ((8 > Object.keys(UNITLAYERS.myunits).length) ? 2 : 0)
         };
         MARKS = {};
@@ -881,7 +881,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH === 4)) {
-                ARTIFACTS['fourinarow'][POS] = {};
+                ARTIFACTS["fourinarow"][POS] = {};
               }
             }
           }
@@ -908,7 +908,7 @@
       game.north2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.south2 = function(turn, step) {
@@ -941,7 +941,7 @@
         UNITDATA[newunitid] = {
           pos: Object.keys(ARTIFACTS.spawnsouth)[0],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: ((8 > Object.keys(UNITLAYERS.myunits).length) ? 2 : 0)
         };
         MARKS = {};
@@ -994,7 +994,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH === 4)) {
-                ARTIFACTS['fourinarow'][POS] = {};
+                ARTIFACTS["fourinarow"][POS] = {};
               }
             }
           }
@@ -1021,7 +1021,7 @@
       game.south2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.east2 = function(turn, step) {
@@ -1054,7 +1054,7 @@
         UNITDATA[newunitid] = {
           pos: Object.keys(ARTIFACTS.spawneast)[0],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: ((8 > Object.keys(UNITLAYERS.myunits).length) ? 2 : 0)
         };
         MARKS = {};
@@ -1107,7 +1107,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH === 4)) {
-                ARTIFACTS['fourinarow'][POS] = {};
+                ARTIFACTS["fourinarow"][POS] = {};
               }
             }
           }
@@ -1134,7 +1134,7 @@
       game.east2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.west2 = function(turn, step) {
@@ -1167,7 +1167,7 @@
         UNITDATA[newunitid] = {
           pos: Object.keys(ARTIFACTS.spawnwest)[0],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: ((8 > Object.keys(UNITLAYERS.myunits).length) ? 2 : 0)
         };
         MARKS = {};
@@ -1220,7 +1220,7 @@
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
               if ((WALKLENGTH === 4)) {
-                ARTIFACTS['fourinarow'][POS] = {};
+                ARTIFACTS["fourinarow"][POS] = {};
               }
             }
           }
@@ -1247,7 +1247,7 @@
       game.west2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -1313,7 +1313,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

@@ -75,31 +75,31 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'deploy'
+            cmnd: "deploy"
           }, {
             type: 'text',
-            text: 'to place your second unit at'
+            text: "to place your second unit at"
           }, {
             type: 'posref',
-            pos: MARKS['selectdeploy']
+            pos: MARKS["selectdeploy"]
           }]
         }) : collapseLine({
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'deploy'
+            cmnd: "deploy"
           }, {
             type: 'text',
-            text: 'to place your first unit at'
+            text: "to place your first unit at"
           }, {
             type: 'posref',
-            pos: MARKS['selectdeploy']
+            pos: MARKS["selectdeploy"]
           }]
         }));
       };
@@ -114,7 +114,7 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
@@ -122,7 +122,7 @@
           var POS = startconnections[DIR];
           if (POS) {
             if (!(UNITLAYERS.myunits[POS])) {
-              ARTIFACTS['spawndirs'][POS] = {
+              ARTIFACTS["spawndirs"][POS] = {
                 dir: DIR
               };
             }
@@ -131,14 +131,14 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = ARTIFACTS.spawndirs;
         for (var STARTPOS in walkstarts) {
-          var DIR = relativedirs[5 - 2 + (ARTIFACTS.spawndirs[STARTPOS] || {})['dir']];
+          var DIR = relativedirs[5 - 2 + (ARTIFACTS.spawndirs[STARTPOS] || {})["dir"]];
           var walkedsquares = [];
           var POS = STARTPOS;
           while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
             walkedsquares.push(POS);
           }
           var WALKLENGTH = walkedsquares.length;
-          ARTIFACTS['growstarts'][STARTPOS] = {
+          ARTIFACTS["growstarts"][STARTPOS] = {
             dir: relativedirs[5 - 2 + DIR],
             strength: WALKLENGTH
           };
@@ -158,9 +158,9 @@
         var BLOCKS = UNITLAYERS.oppunits;
         var walkstarts = ARTIFACTS.growstarts;
         for (var STARTPOS in walkstarts) {
-          var DIR = (ARTIFACTS.growstarts[STARTPOS] || {})['dir'];
+          var DIR = (ARTIFACTS.growstarts[STARTPOS] || {})["dir"];
           var STOPREASON = "";
-          var MAX = (ARTIFACTS.growstarts[STARTPOS] || {})['strength'];
+          var MAX = (ARTIFACTS.growstarts[STARTPOS] || {})["strength"];
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
           var LENGTH = 0;
@@ -169,13 +169,13 @@
             LENGTH++;
             STEP++;
             if ((STEP === MAX)) {
-              ARTIFACTS['targets'][POS] = {
+              ARTIFACTS["targets"][POS] = {
                 dir: relativedirs[5 - 2 + DIR]
               };
             }
           }
           if (BLOCKS[POS]) {
-            ARTIFACTS['potentialopptargets'][POS] = {
+            ARTIFACTS["potentialopptargets"][POS] = {
               dir: DIR,
               strength: MAX
             };
@@ -184,17 +184,17 @@
         var allowedsteps = UNITLAYERS.oppunits;
         var walkstarts = ARTIFACTS.potentialopptargets;
         for (var STARTPOS in walkstarts) {
-          var DIR = (ARTIFACTS.potentialopptargets[STARTPOS] || {})['dir'];
+          var DIR = (ARTIFACTS.potentialopptargets[STARTPOS] || {})["dir"];
           var STOPREASON = "";
-          var MAX = (ARTIFACTS.potentialopptargets[STARTPOS] || {})['strength'];
+          var MAX = (ARTIFACTS.potentialopptargets[STARTPOS] || {})["strength"];
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
           var LENGTH = 0;
           while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(POS = connections[POS][DIR]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : null))) {
             LENGTH++;
           }
-          if ((STOPREASON !== 'reachedmax')) {
-            ARTIFACTS['targets'][STARTPOS] = {
+          if ((STOPREASON !== "reachedmax")) {
+            ARTIFACTS["targets"][STARTPOS] = {
               dir: relativedirs[5 - 2 + DIR]
             };
           }
@@ -217,7 +217,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Now select which square to expand to'
+          text: "Now select which square to expand to"
         };
       };
       game.selecttarget1 = function(turn, step, markpos) {
@@ -230,13 +230,13 @@
           selectunit: step.MARKS.selectunit
         };
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selecttarget'];
+        var STARTPOS = MARKS["selecttarget"];
         var POS = STARTPOS;
-        while ((POS = connections[POS][(ARTIFACTS.targets[MARKS['selecttarget']] || {})['dir']]) && !BLOCKS[POS]) {
-          ARTIFACTS['spawns'][POS] = {};
+        while ((POS = connections[POS][(ARTIFACTS.targets[MARKS["selecttarget"]] || {})["dir"]]) && !BLOCKS[POS]) {
+          ARTIFACTS["spawns"][POS] = {};
         }
         if (!(UNITLAYERS.units[STARTPOS])) {
-          ARTIFACTS['spawns'][STARTPOS] = {};
+          ARTIFACTS["spawns"][STARTPOS] = {};
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -257,25 +257,25 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'expand'
+            cmnd: "expand"
           }, {
             type: 'text',
-            text: 'to expand to from '
+            text: "to expand to from "
           }, {
             type: 'posref',
-            pos: MARKS['selectunit']
+            pos: MARKS["selectunit"]
           }, {
             type: 'text',
-            text: 'to'
+            text: "to"
           }, {
             type: 'posref',
-            pos: MARKS['selecttarget']
-          }, !!(UNITLAYERS.units[MARKS['selecttarget']]) ? {
+            pos: MARKS["selecttarget"]
+          }, !!(UNITLAYERS.units[MARKS["selecttarget"]]) ? {
             type: 'text',
-            text: 'and neutralise the enemy there'
+            text: "and neutralise the enemy there"
           } : {
             type: 'nothing'
           }]
@@ -289,9 +289,9 @@
         var UNITLAYERS = step.UNITLAYERS;
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdeploy'],
+          pos: MARKS["selectdeploy"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         MARKS = {};
@@ -360,7 +360,7 @@
         var UNITLAYERS = step.UNITLAYERS;
         return (Object.keys(UNITLAYERS.myunits).length === 1) ? {
           type: 'text',
-          text: 'Now select where to deploy your second and last initial unit'
+          text: "Now select where to deploy your second and last initial unit"
         } : {
           type: 'nothing'
         };
@@ -376,20 +376,20 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'soldiers',
+            group: "soldiers",
             owner: 1,
-            from: MARKS['selectunit']
+            from: MARKS["selectunit"]
           };
         }
-        if (!!(UNITLAYERS.units[MARKS['selecttarget']])) {
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selecttarget']]  || {}).id];
+        if (!!(UNITLAYERS.units[MARKS["selecttarget"]])) {
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selecttarget"]]  || {}).id];
           var newunitid = 'spawn' + (clones++);
           UNITDATA[newunitid] = {
-            pos: MARKS['selecttarget'],
+            pos: MARKS["selecttarget"],
             id: newunitid,
-            group: 'soldiers',
+            group: "soldiers",
             owner: 0,
-            from: MARKS['selectunit']
+            from: MARKS["selectunit"]
           };
         }
         MARKS = {};
@@ -439,7 +439,7 @@
       game.expand1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -514,10 +514,10 @@
       game.start1instruction = function(turn, step) {
         return ((turn.turn > 2) ? {
           type: 'text',
-          text: 'Select unit to expand from'
+          text: "Select unit to expand from"
         } : {
           type: 'text',
-          text: 'Select where to deploy the first of your two initial units'
+          text: "Select where to deploy the first of your two initial units"
         });
       };
       game.debug1 = function() {
@@ -552,31 +552,31 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'deploy'
+            cmnd: "deploy"
           }, {
             type: 'text',
-            text: 'to place your second unit at'
+            text: "to place your second unit at"
           }, {
             type: 'posref',
-            pos: MARKS['selectdeploy']
+            pos: MARKS["selectdeploy"]
           }]
         }) : collapseLine({
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'deploy'
+            cmnd: "deploy"
           }, {
             type: 'text',
-            text: 'to place your first unit at'
+            text: "to place your first unit at"
           }, {
             type: 'posref',
-            pos: MARKS['selectdeploy']
+            pos: MARKS["selectdeploy"]
           }]
         }));
       };
@@ -591,7 +591,7 @@
         var MARKS = {
           selectunit: markpos
         };
-        var STARTPOS = MARKS['selectunit'];
+        var STARTPOS = MARKS["selectunit"];
         var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         var startconnections = connections[STARTPOS];
         for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
@@ -599,7 +599,7 @@
           var POS = startconnections[DIR];
           if (POS) {
             if (!(UNITLAYERS.myunits[POS])) {
-              ARTIFACTS['spawndirs'][POS] = {
+              ARTIFACTS["spawndirs"][POS] = {
                 dir: DIR
               };
             }
@@ -608,14 +608,14 @@
         var allowedsteps = UNITLAYERS.myunits;
         var walkstarts = ARTIFACTS.spawndirs;
         for (var STARTPOS in walkstarts) {
-          var DIR = relativedirs[5 - 2 + (ARTIFACTS.spawndirs[STARTPOS] || {})['dir']];
+          var DIR = relativedirs[5 - 2 + (ARTIFACTS.spawndirs[STARTPOS] || {})["dir"]];
           var walkedsquares = [];
           var POS = STARTPOS;
           while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
             walkedsquares.push(POS);
           }
           var WALKLENGTH = walkedsquares.length;
-          ARTIFACTS['growstarts'][STARTPOS] = {
+          ARTIFACTS["growstarts"][STARTPOS] = {
             dir: relativedirs[5 - 2 + DIR],
             strength: WALKLENGTH
           };
@@ -635,9 +635,9 @@
         var BLOCKS = UNITLAYERS.oppunits;
         var walkstarts = ARTIFACTS.growstarts;
         for (var STARTPOS in walkstarts) {
-          var DIR = (ARTIFACTS.growstarts[STARTPOS] || {})['dir'];
+          var DIR = (ARTIFACTS.growstarts[STARTPOS] || {})["dir"];
           var STOPREASON = "";
-          var MAX = (ARTIFACTS.growstarts[STARTPOS] || {})['strength'];
+          var MAX = (ARTIFACTS.growstarts[STARTPOS] || {})["strength"];
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
           var LENGTH = 0;
@@ -646,13 +646,13 @@
             LENGTH++;
             STEP++;
             if ((STEP === MAX)) {
-              ARTIFACTS['targets'][POS] = {
+              ARTIFACTS["targets"][POS] = {
                 dir: relativedirs[5 - 2 + DIR]
               };
             }
           }
           if (BLOCKS[POS]) {
-            ARTIFACTS['potentialopptargets'][POS] = {
+            ARTIFACTS["potentialopptargets"][POS] = {
               dir: DIR,
               strength: MAX
             };
@@ -661,17 +661,17 @@
         var allowedsteps = UNITLAYERS.oppunits;
         var walkstarts = ARTIFACTS.potentialopptargets;
         for (var STARTPOS in walkstarts) {
-          var DIR = (ARTIFACTS.potentialopptargets[STARTPOS] || {})['dir'];
+          var DIR = (ARTIFACTS.potentialopptargets[STARTPOS] || {})["dir"];
           var STOPREASON = "";
-          var MAX = (ARTIFACTS.potentialopptargets[STARTPOS] || {})['strength'];
+          var MAX = (ARTIFACTS.potentialopptargets[STARTPOS] || {})["strength"];
           var POS = "faux";
           connections.faux[DIR] = STARTPOS;
           var LENGTH = 0;
           while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(POS = connections[POS][DIR]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : null))) {
             LENGTH++;
           }
-          if ((STOPREASON !== 'reachedmax')) {
-            ARTIFACTS['targets'][STARTPOS] = {
+          if ((STOPREASON !== "reachedmax")) {
+            ARTIFACTS["targets"][STARTPOS] = {
               dir: relativedirs[5 - 2 + DIR]
             };
           }
@@ -694,7 +694,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Now select which square to expand to'
+          text: "Now select which square to expand to"
         };
       };
       game.selecttarget2 = function(turn, step, markpos) {
@@ -707,13 +707,13 @@
           selectunit: step.MARKS.selectunit
         };
         var BLOCKS = UNITLAYERS.units;
-        var STARTPOS = MARKS['selecttarget'];
+        var STARTPOS = MARKS["selecttarget"];
         var POS = STARTPOS;
-        while ((POS = connections[POS][(ARTIFACTS.targets[MARKS['selecttarget']] || {})['dir']]) && !BLOCKS[POS]) {
-          ARTIFACTS['spawns'][POS] = {};
+        while ((POS = connections[POS][(ARTIFACTS.targets[MARKS["selecttarget"]] || {})["dir"]]) && !BLOCKS[POS]) {
+          ARTIFACTS["spawns"][POS] = {};
         }
         if (!(UNITLAYERS.units[STARTPOS])) {
-          ARTIFACTS['spawns'][STARTPOS] = {};
+          ARTIFACTS["spawns"][STARTPOS] = {};
         }
         var newstepid = step.stepid + '-' + markpos;
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -734,25 +734,25 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'expand'
+            cmnd: "expand"
           }, {
             type: 'text',
-            text: 'to expand to from '
+            text: "to expand to from "
           }, {
             type: 'posref',
-            pos: MARKS['selectunit']
+            pos: MARKS["selectunit"]
           }, {
             type: 'text',
-            text: 'to'
+            text: "to"
           }, {
             type: 'posref',
-            pos: MARKS['selecttarget']
-          }, !!(UNITLAYERS.units[MARKS['selecttarget']]) ? {
+            pos: MARKS["selecttarget"]
+          }, !!(UNITLAYERS.units[MARKS["selecttarget"]]) ? {
             type: 'text',
-            text: 'and neutralise the enemy there'
+            text: "and neutralise the enemy there"
           } : {
             type: 'nothing'
           }]
@@ -766,9 +766,9 @@
         var UNITLAYERS = step.UNITLAYERS;
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdeploy'],
+          pos: MARKS["selectdeploy"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         MARKS = {};
@@ -837,7 +837,7 @@
         var UNITLAYERS = step.UNITLAYERS;
         return (Object.keys(UNITLAYERS.myunits).length === 1) ? {
           type: 'text',
-          text: 'Now select where to deploy your second and last initial unit'
+          text: "Now select where to deploy your second and last initial unit"
         } : {
           type: 'nothing'
         };
@@ -853,20 +853,20 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'soldiers',
+            group: "soldiers",
             owner: 2,
-            from: MARKS['selectunit']
+            from: MARKS["selectunit"]
           };
         }
-        if (!!(UNITLAYERS.units[MARKS['selecttarget']])) {
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selecttarget']]  || {}).id];
+        if (!!(UNITLAYERS.units[MARKS["selecttarget"]])) {
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selecttarget"]]  || {}).id];
           var newunitid = 'spawn' + (clones++);
           UNITDATA[newunitid] = {
-            pos: MARKS['selecttarget'],
+            pos: MARKS["selecttarget"],
             id: newunitid,
-            group: 'soldiers',
+            group: "soldiers",
             owner: 0,
-            from: MARKS['selectunit']
+            from: MARKS["selectunit"]
           };
         }
         MARKS = {};
@@ -916,7 +916,7 @@
       game.expand2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -991,10 +991,10 @@
       game.start2instruction = function(turn, step) {
         return ((turn.turn > 2) ? {
           type: 'text',
-          text: 'Select unit to expand from'
+          text: "Select unit to expand from"
         } : {
           type: 'text',
-          text: 'Select where to deploy the first of your two initial units'
+          text: "Select where to deploy the first of your two initial units"
         });
       };
       game.debug2 = function() {

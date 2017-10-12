@@ -86,11 +86,11 @@
         var MARKS = {
           selecttarget: markpos
         };
-        var STARTPOS = MARKS['selecttarget'];
+        var STARTPOS = MARKS["selecttarget"];
         var POS = STARTPOS;
         while ((POS = connections[POS][5])) {
           if (ARTIFACTS.enemyline[POS]) {
-            ARTIFACTS['intersection'][POS] = {};
+            ARTIFACTS["intersection"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -108,7 +108,7 @@
       game.selecttarget1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.snipe1 = function(turn, step) {
@@ -123,16 +123,16 @@
         if (Object.keys(UNITLAYERS.mysniper).length === 0) {
           var newunitid = 'spawn' + (clones++);
           UNITDATA[newunitid] = {
-            pos: MARKS['selecttarget'],
+            pos: MARKS["selecttarget"],
             id: newunitid,
-            group: 'sniper',
+            group: "sniper",
             owner: player
           };
         } else {
           var unitid = (UNITLAYERS.units[Object.keys(UNITLAYERS.mysniper)[0]]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selecttarget']
+              "pos": MARKS["selecttarget"]
             });
           }
         }
@@ -141,7 +141,7 @@
             var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
             if (unitid) {
               UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'owner': (((UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]] || {})['owner'] === 2) ? 1 : 2)
+                "owner": (((UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]] || {})["owner"] === 2) ? 1 : 2)
               });
             }
           } else {
@@ -149,9 +149,9 @@
             UNITDATA[newunitid] = {
               pos: Object.keys(ARTIFACTS.intersection)[0],
               id: newunitid,
-              group: 'soldiers',
+              group: "soldiers",
               owner: 1,
-              from: MARKS['selecttarget']
+              from: MARKS["selecttarget"]
             };
           }
         }
@@ -197,7 +197,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((WALKLENGTH > 2)) {
-              ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][STARTPOS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? "winline" : "loseline")][STARTPOS] = {};
             }
           }
         }
@@ -228,7 +228,7 @@
       game.snipe1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -276,17 +276,17 @@
           var POS = STARTPOS;
           while ((POS = connections[POS][3])) {
             if (!UNITLAYERS.units[POS]) {
-              ARTIFACTS['potentialempties'][POS] = {};
+              ARTIFACTS["potentialempties"][POS] = {};
             }
-            ARTIFACTS['enemyline'][POS] = {};
+            ARTIFACTS["enemyline"][POS] = {};
           }
-          ARTIFACTS['enemyline'][STARTPOS] = {};
+          ARTIFACTS["enemyline"][STARTPOS] = {};
           for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (!UNITLAYERS.units[POS]) {
-              ARTIFACTS['potentialempties'][POS] = {};
+              ARTIFACTS["potentialempties"][POS] = {};
             }
-            ARTIFACTS['enemyline'][POS] = {};
+            ARTIFACTS["enemyline"][POS] = {};
           }
           var walkstarts = ARTIFACTS.potentialempties;
           for (var STARTPOS in walkstarts) {
@@ -298,7 +298,7 @@
             var WALKLENGTH = walkedsquares.length;
             if (WALKLENGTH) {
               if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
-                ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH - 1]] = {};
+                ARTIFACTS["mandatory"][walkedsquares[WALKLENGTH - 1]] = {};
               }
             }
           }
@@ -333,7 +333,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -354,11 +354,11 @@
         var MARKS = {
           selecttarget: markpos
         };
-        var STARTPOS = MARKS['selecttarget'];
+        var STARTPOS = MARKS["selecttarget"];
         var POS = STARTPOS;
         while ((POS = connections[POS][3])) {
           if (ARTIFACTS.enemyline[POS]) {
-            ARTIFACTS['intersection'][POS] = {};
+            ARTIFACTS["intersection"][POS] = {};
           }
         }
         var newstepid = step.stepid + '-' + markpos;
@@ -376,7 +376,7 @@
       game.selecttarget2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.snipe2 = function(turn, step) {
@@ -391,16 +391,16 @@
         if (Object.keys(UNITLAYERS.mysniper).length === 0) {
           var newunitid = 'spawn' + (clones++);
           UNITDATA[newunitid] = {
-            pos: MARKS['selecttarget'],
+            pos: MARKS["selecttarget"],
             id: newunitid,
-            group: 'sniper',
+            group: "sniper",
             owner: player
           };
         } else {
           var unitid = (UNITLAYERS.units[Object.keys(UNITLAYERS.mysniper)[0]]  || {}).id;
           if (unitid) {
             UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-              'pos': MARKS['selecttarget']
+              "pos": MARKS["selecttarget"]
             });
           }
         }
@@ -409,7 +409,7 @@
             var unitid = (UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]]  || {}).id;
             if (unitid) {
               UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-                'owner': (((UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]] || {})['owner'] === 2) ? 1 : 2)
+                "owner": (((UNITLAYERS.units[Object.keys(ARTIFACTS.intersection)[0]] || {})["owner"] === 2) ? 1 : 2)
               });
             }
           } else {
@@ -417,9 +417,9 @@
             UNITDATA[newunitid] = {
               pos: Object.keys(ARTIFACTS.intersection)[0],
               id: newunitid,
-              group: 'soldiers',
+              group: "soldiers",
               owner: 2,
-              from: MARKS['selecttarget']
+              from: MARKS["selecttarget"]
             };
           }
         }
@@ -465,7 +465,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((WALKLENGTH > 2)) {
-              ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? 'winline' : 'loseline')][STARTPOS] = {};
+              ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? "winline" : "loseline")][STARTPOS] = {};
             }
           }
         }
@@ -496,7 +496,7 @@
       game.snipe2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -544,17 +544,17 @@
           var POS = STARTPOS;
           while ((POS = connections[POS][5])) {
             if (!UNITLAYERS.units[POS]) {
-              ARTIFACTS['potentialempties'][POS] = {};
+              ARTIFACTS["potentialempties"][POS] = {};
             }
-            ARTIFACTS['enemyline'][POS] = {};
+            ARTIFACTS["enemyline"][POS] = {};
           }
-          ARTIFACTS['enemyline'][STARTPOS] = {};
+          ARTIFACTS["enemyline"][STARTPOS] = {};
           for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (!UNITLAYERS.units[POS]) {
-              ARTIFACTS['potentialempties'][POS] = {};
+              ARTIFACTS["potentialempties"][POS] = {};
             }
-            ARTIFACTS['enemyline'][POS] = {};
+            ARTIFACTS["enemyline"][POS] = {};
           }
           var walkstarts = ARTIFACTS.potentialempties;
           for (var STARTPOS in walkstarts) {
@@ -566,7 +566,7 @@
             var WALKLENGTH = walkedsquares.length;
             if (WALKLENGTH) {
               if (!UNITLAYERS.sniper[walkedsquares[WALKLENGTH - 1]]) {
-                ARTIFACTS['mandatory'][walkedsquares[WALKLENGTH - 1]] = {};
+                ARTIFACTS["mandatory"][walkedsquares[WALKLENGTH - 1]] = {};
               }
             }
           }
@@ -601,7 +601,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

@@ -68,14 +68,14 @@
         var MARKS = {
           selectdrop: markpos
         };
-        var STARTPOS = MARKS['selectdrop'];
+        var STARTPOS = MARKS["selectdrop"];
         var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
           var POS = STARTPOS;
           while ((POS = connections[POS][DIR])) {
             if (!UNITLAYERS.units[POS]) {
-              ARTIFACTS[['FOOBAR', 'vertical', 'uphill', 'horisontal', 'downhill', 'vertical', 'uphill', 'horisontal', 'downhill'][DIR]][POS] = {};
+              ARTIFACTS[["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"][DIR]][POS] = {};
             }
           }
         }
@@ -108,31 +108,31 @@
           type: 'line',
           content: [{
               type: 'text',
-              text: 'Press'
+              text: "Press"
             },
             [{
               cond: Object.keys(ARTIFACTS.uphill).length !== 0,
               content: {
                 type: 'cmndref',
-                cmnd: 'uphill'
+                cmnd: "uphill"
               }
             }, {
               cond: Object.keys(ARTIFACTS.downhill).length !== 0,
               content: {
                 type: 'cmndref',
-                cmnd: 'downhill'
+                cmnd: "downhill"
               }
             }, {
               cond: Object.keys(ARTIFACTS.vertical).length !== 0,
               content: {
                 type: 'cmndref',
-                cmnd: 'vertical'
+                cmnd: "vertical"
               }
             }, {
               cond: Object.keys(ARTIFACTS.horisontal).length !== 0,
               content: {
                 type: 'cmndref',
-                cmnd: 'horisontal'
+                cmnd: "horisontal"
               }
             }].filter(function(elem) {
               return elem.cond;
@@ -149,7 +149,7 @@
               content: []
             }), {
               type: 'text',
-              text: 'to give your opponent placing options in that direction'
+              text: "to give your opponent placing options in that direction"
             }
           ]
         });
@@ -167,9 +167,9 @@
         }
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdrop'],
+          pos: MARKS["selectdrop"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         for (var POS in ARTIFACTS.uphill) {
@@ -177,7 +177,7 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'markers',
+            group: "markers",
             owner: 0
           };
         }
@@ -223,7 +223,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][STARTPOS] = {};
+              ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
         }
@@ -252,7 +252,7 @@
       game.uphill1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.downhill1 = function(turn, step) {
@@ -268,9 +268,9 @@
         }
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdrop'],
+          pos: MARKS["selectdrop"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         for (var POS in ARTIFACTS.downhill) {
@@ -278,7 +278,7 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'markers',
+            group: "markers",
             owner: 0
           };
         }
@@ -324,7 +324,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][STARTPOS] = {};
+              ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
         }
@@ -353,7 +353,7 @@
       game.downhill1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.horisontal1 = function(turn, step) {
@@ -369,9 +369,9 @@
         }
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdrop'],
+          pos: MARKS["selectdrop"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         for (var POS in ARTIFACTS.horisontal) {
@@ -379,7 +379,7 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'markers',
+            group: "markers",
             owner: 0
           };
         }
@@ -425,7 +425,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][STARTPOS] = {};
+              ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
         }
@@ -454,7 +454,7 @@
       game.horisontal1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.vertical1 = function(turn, step) {
@@ -470,9 +470,9 @@
         }
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdrop'],
+          pos: MARKS["selectdrop"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         for (var POS in ARTIFACTS.vertical) {
@@ -480,7 +480,7 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'markers',
+            group: "markers",
             owner: 0
           };
         }
@@ -526,7 +526,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][STARTPOS] = {};
+              ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
         }
@@ -555,7 +555,7 @@
       game.vertical1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -618,10 +618,10 @@
         var UNITLAYERS = step.UNITLAYERS;
         return (Object.keys(UNITLAYERS.neutralunits).length === 0 ? {
           type: 'text',
-          text: 'Select any square to place the first unit of the game'
+          text: "Select any square to place the first unit of the game"
         } : {
           type: 'text',
-          text: 'Select which neutral unit to take over'
+          text: "Select which neutral unit to take over"
         });
       };
       game.debug1 = function() {
@@ -646,14 +646,14 @@
         var MARKS = {
           selectdrop: markpos
         };
-        var STARTPOS = MARKS['selectdrop'];
+        var STARTPOS = MARKS["selectdrop"];
         var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
         for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           var DIR = allwalkerdirs[walkerdirnbr];
           var POS = STARTPOS;
           while ((POS = connections[POS][DIR])) {
             if (!UNITLAYERS.units[POS]) {
-              ARTIFACTS[['FOOBAR', 'vertical', 'uphill', 'horisontal', 'downhill', 'vertical', 'uphill', 'horisontal', 'downhill'][DIR]][POS] = {};
+              ARTIFACTS[["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"][DIR]][POS] = {};
             }
           }
         }
@@ -686,31 +686,31 @@
           type: 'line',
           content: [{
               type: 'text',
-              text: 'Press'
+              text: "Press"
             },
             [{
               cond: Object.keys(ARTIFACTS.uphill).length !== 0,
               content: {
                 type: 'cmndref',
-                cmnd: 'uphill'
+                cmnd: "uphill"
               }
             }, {
               cond: Object.keys(ARTIFACTS.downhill).length !== 0,
               content: {
                 type: 'cmndref',
-                cmnd: 'downhill'
+                cmnd: "downhill"
               }
             }, {
               cond: Object.keys(ARTIFACTS.vertical).length !== 0,
               content: {
                 type: 'cmndref',
-                cmnd: 'vertical'
+                cmnd: "vertical"
               }
             }, {
               cond: Object.keys(ARTIFACTS.horisontal).length !== 0,
               content: {
                 type: 'cmndref',
-                cmnd: 'horisontal'
+                cmnd: "horisontal"
               }
             }].filter(function(elem) {
               return elem.cond;
@@ -727,7 +727,7 @@
               content: []
             }), {
               type: 'text',
-              text: 'to give your opponent placing options in that direction'
+              text: "to give your opponent placing options in that direction"
             }
           ]
         });
@@ -745,9 +745,9 @@
         }
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdrop'],
+          pos: MARKS["selectdrop"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         for (var POS in ARTIFACTS.uphill) {
@@ -755,7 +755,7 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'markers',
+            group: "markers",
             owner: 0
           };
         }
@@ -801,7 +801,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][STARTPOS] = {};
+              ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
         }
@@ -830,7 +830,7 @@
       game.uphill2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.downhill2 = function(turn, step) {
@@ -846,9 +846,9 @@
         }
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdrop'],
+          pos: MARKS["selectdrop"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         for (var POS in ARTIFACTS.downhill) {
@@ -856,7 +856,7 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'markers',
+            group: "markers",
             owner: 0
           };
         }
@@ -902,7 +902,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][STARTPOS] = {};
+              ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
         }
@@ -931,7 +931,7 @@
       game.downhill2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.horisontal2 = function(turn, step) {
@@ -947,9 +947,9 @@
         }
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdrop'],
+          pos: MARKS["selectdrop"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         for (var POS in ARTIFACTS.horisontal) {
@@ -957,7 +957,7 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'markers',
+            group: "markers",
             owner: 0
           };
         }
@@ -1003,7 +1003,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][STARTPOS] = {};
+              ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
         }
@@ -1032,7 +1032,7 @@
       game.horisontal2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.vertical2 = function(turn, step) {
@@ -1048,9 +1048,9 @@
         }
         var newunitid = 'spawn' + (clones++);
         UNITDATA[newunitid] = {
-          pos: MARKS['selectdrop'],
+          pos: MARKS["selectdrop"],
           id: newunitid,
-          group: 'soldiers',
+          group: "soldiers",
           owner: player
         };
         for (var POS in ARTIFACTS.vertical) {
@@ -1058,7 +1058,7 @@
           UNITDATA[newunitid] = {
             pos: POS,
             id: newunitid,
-            group: 'markers',
+            group: "markers",
             owner: 0
           };
         }
@@ -1104,7 +1104,7 @@
             }
             var WALKLENGTH = walkedsquares.length;
             if ((3 === WALKLENGTH)) {
-              ARTIFACTS['winline'][STARTPOS] = {};
+              ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
         }
@@ -1133,7 +1133,7 @@
       game.vertical2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -1196,10 +1196,10 @@
         var UNITLAYERS = step.UNITLAYERS;
         return (Object.keys(UNITLAYERS.neutralunits).length === 0 ? {
           type: 'text',
-          text: 'Select any square to place the first unit of the game'
+          text: "Select any square to place the first unit of the game"
         } : {
           type: 'text',
-          text: 'Select which neutral unit to take over'
+          text: "Select which neutral unit to take over"
         });
       };
       game.debug2 = function() {

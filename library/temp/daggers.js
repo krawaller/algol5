@@ -93,21 +93,21 @@
         var MARKS = {
           selectunit: markpos
         };
-        if (!!(UNITLAYERS.mycrowns[MARKS['selectunit']])) {
-          var STARTPOS = MARKS['selectunit'];
+        if (!!(UNITLAYERS.mycrowns[MARKS["selectunit"]])) {
+          var STARTPOS = MARKS["selectunit"];
           var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           var startconnections = connections[STARTPOS];
           for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
             var POS = startconnections[neighbourdirs[dirnbr]];
             if (POS) {
               if (!(UNITLAYERS.myunits[POS])) {
-                ARTIFACTS['movetarget'][POS] = {};
+                ARTIFACTS["movetarget"][POS] = {};
               }
             }
           }
         } else {
           var BLOCKS = UNITLAYERS.units;
-          var STARTPOS = MARKS['selectunit'];
+          var STARTPOS = MARKS["selectunit"];
           var allwalkerdirs = [8, 1, 2, 4, 5, 6];
           for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
             var DIR = allwalkerdirs[walkerdirnbr];
@@ -117,11 +117,11 @@
             var LENGTH = 0;
             while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
               LENGTH++;
-              ARTIFACTS['movetarget'][POS] = {};
+              ARTIFACTS["movetarget"][POS] = {};
             }
             if (BLOCKS[POS]) {
               if ((!(UNITLAYERS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(UNITLAYERS.oppdaggers[POS])))) {
-                ARTIFACTS['movetarget'][POS] = {};
+                ARTIFACTS["movetarget"][POS] = {};
               }
             }
           }
@@ -144,7 +144,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select where to move to'
+          text: "Select where to move to"
         };
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
@@ -170,53 +170,53 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'move'
+            cmnd: "move"
           }, {
             type: 'text',
-            text: 'to go'
-          }, ((BOARD.board[MARKS['selectmovetarget']].y > BOARD.board[MARKS['selectunit']].y) ? {
+            text: "to go"
+          }, ((BOARD.board[MARKS["selectmovetarget"]].y > BOARD.board[MARKS["selectunit"]].y) ? {
             type: 'text',
-            text: 'uphill'
-          } : (BOARD.board[MARKS['selectunit']].y > BOARD.board[MARKS['selectmovetarget']].y) ? {
+            text: "uphill"
+          } : (BOARD.board[MARKS["selectunit"]].y > BOARD.board[MARKS["selectmovetarget"]].y) ? {
             type: 'text',
-            text: 'downhill'
+            text: "downhill"
           } : {
             type: 'nothing'
           }), {
             type: 'text',
-            text: 'from'
+            text: "from"
           }, {
             type: 'posref',
-            pos: MARKS['selectunit']
-          }, (!!(UNITLAYERS.units[MARKS['selectmovetarget']]) ? collapseLine({
+            pos: MARKS["selectunit"]
+          }, (!!(UNITLAYERS.units[MARKS["selectmovetarget"]]) ? collapseLine({
             type: 'line',
             content: [{
               type: 'text',
-              text: 'and kill the enemy'
-            }, (!!(UNITLAYERS.crowns[MARKS['selectmovetarget']]) ? {
+              text: "and kill the enemy"
+            }, (!!(UNITLAYERS.crowns[MARKS["selectmovetarget"]]) ? {
               type: 'text',
-              text: 'king'
+              text: "king"
             } : {
               type: 'text',
-              text: 'bishop'
+              text: "bishop"
             }), {
               type: 'text',
-              text: 'at'
+              text: "at"
             }, {
               type: 'posref',
-              pos: MARKS['selectmovetarget']
+              pos: MARKS["selectmovetarget"]
             }]
           }) : collapseLine({
             type: 'line',
             content: [{
               type: 'text',
-              text: 'to'
+              text: "to"
             }, {
               type: 'posref',
-              pos: MARKS['selectmovetarget']
+              pos: MARKS["selectmovetarget"]
             }]
           }))]
         });
@@ -226,12 +226,12 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id];
         }
         MARKS = {};
         UNITLAYERS = {
@@ -295,7 +295,7 @@
       game.move1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -351,7 +351,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select which unit to move'
+          text: "Select which unit to move"
         };
       };
       game.debug1 = function() {
@@ -373,21 +373,21 @@
         var MARKS = {
           selectunit: markpos
         };
-        if (!!(UNITLAYERS.mycrowns[MARKS['selectunit']])) {
-          var STARTPOS = MARKS['selectunit'];
+        if (!!(UNITLAYERS.mycrowns[MARKS["selectunit"]])) {
+          var STARTPOS = MARKS["selectunit"];
           var neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           var startconnections = connections[STARTPOS];
           for (var dirnbr = 0; dirnbr < 8; dirnbr++) {
             var POS = startconnections[neighbourdirs[dirnbr]];
             if (POS) {
               if (!(UNITLAYERS.myunits[POS])) {
-                ARTIFACTS['movetarget'][POS] = {};
+                ARTIFACTS["movetarget"][POS] = {};
               }
             }
           }
         } else {
           var BLOCKS = UNITLAYERS.units;
-          var STARTPOS = MARKS['selectunit'];
+          var STARTPOS = MARKS["selectunit"];
           var allwalkerdirs = [8, 1, 2, 4, 5, 6];
           for (var walkerdirnbr = 0; walkerdirnbr < 6; walkerdirnbr++) {
             var DIR = allwalkerdirs[walkerdirnbr];
@@ -397,11 +397,11 @@
             var LENGTH = 0;
             while (!(STOPREASON = (LENGTH === MAX ? "reachedmax" : !(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
               LENGTH++;
-              ARTIFACTS['movetarget'][POS] = {};
+              ARTIFACTS["movetarget"][POS] = {};
             }
             if (BLOCKS[POS]) {
               if ((!(UNITLAYERS.myunits[POS]) && !(([1, 5].indexOf(DIR) !== -1) && !!(UNITLAYERS.oppdaggers[POS])))) {
-                ARTIFACTS['movetarget'][POS] = {};
+                ARTIFACTS["movetarget"][POS] = {};
               }
             }
           }
@@ -424,7 +424,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select where to move to'
+          text: "Select where to move to"
         };
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
@@ -450,53 +450,53 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: 'Press'
+            text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: 'move'
+            cmnd: "move"
           }, {
             type: 'text',
-            text: 'to go'
-          }, ((BOARD.board[MARKS['selectmovetarget']].y > BOARD.board[MARKS['selectunit']].y) ? {
+            text: "to go"
+          }, ((BOARD.board[MARKS["selectmovetarget"]].y > BOARD.board[MARKS["selectunit"]].y) ? {
             type: 'text',
-            text: 'uphill'
-          } : (BOARD.board[MARKS['selectunit']].y > BOARD.board[MARKS['selectmovetarget']].y) ? {
+            text: "uphill"
+          } : (BOARD.board[MARKS["selectunit"]].y > BOARD.board[MARKS["selectmovetarget"]].y) ? {
             type: 'text',
-            text: 'downhill'
+            text: "downhill"
           } : {
             type: 'nothing'
           }), {
             type: 'text',
-            text: 'from'
+            text: "from"
           }, {
             type: 'posref',
-            pos: MARKS['selectunit']
-          }, (!!(UNITLAYERS.units[MARKS['selectmovetarget']]) ? collapseLine({
+            pos: MARKS["selectunit"]
+          }, (!!(UNITLAYERS.units[MARKS["selectmovetarget"]]) ? collapseLine({
             type: 'line',
             content: [{
               type: 'text',
-              text: 'and kill the enemy'
-            }, (!!(UNITLAYERS.crowns[MARKS['selectmovetarget']]) ? {
+              text: "and kill the enemy"
+            }, (!!(UNITLAYERS.crowns[MARKS["selectmovetarget"]]) ? {
               type: 'text',
-              text: 'king'
+              text: "king"
             } : {
               type: 'text',
-              text: 'bishop'
+              text: "bishop"
             }), {
               type: 'text',
-              text: 'at'
+              text: "at"
             }, {
               type: 'posref',
-              pos: MARKS['selectmovetarget']
+              pos: MARKS["selectmovetarget"]
             }]
           }) : collapseLine({
             type: 'line',
             content: [{
               type: 'text',
-              text: 'to'
+              text: "to"
             }, {
               type: 'posref',
-              pos: MARKS['selectmovetarget']
+              pos: MARKS["selectmovetarget"]
             }]
           }))]
         });
@@ -506,12 +506,12 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
-        var unitid = (UNITLAYERS.units[MARKS['selectunit']]  || {}).id;
+        var unitid = (UNITLAYERS.units[MARKS["selectunit"]]  || {}).id;
         if (unitid) {
           UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
-            'pos': MARKS['selectmovetarget']
+            "pos": MARKS["selectmovetarget"]
           });
-          delete UNITDATA[(UNITLAYERS.units[MARKS['selectmovetarget']]  || {}).id];
+          delete UNITDATA[(UNITLAYERS.units[MARKS["selectmovetarget"]]  || {}).id];
         }
         MARKS = {};
         UNITLAYERS = {
@@ -575,7 +575,7 @@
       game.move2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -631,7 +631,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: 'Select which unit to move'
+          text: "Select which unit to move"
         };
       };
       game.debug2 = function() {

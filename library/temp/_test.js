@@ -99,7 +99,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectunit']] = 1;
+                ret[MARKS["selectunit"]] = 1;
                 return ret;
               }());
             for (var key in s0) {
@@ -115,10 +115,10 @@
             var STOPREASON = "";
             var POS = STARTPOS;
             while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-              ARTIFACTS['marks'][POS] = {};
+              ARTIFACTS["marks"][POS] = {};
             }
             if (BLOCKS[POS] && allowedsteps[POS]) {
-              ARTIFACTS['blocks'][POS] = {};
+              ARTIFACTS["blocks"][POS] = {};
             }
           }
         }
@@ -131,7 +131,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectunit']] = 1;
+                ret[MARKS["selectunit"]] = 1;
                 return ret;
               }());
             for (var key in s0) {
@@ -147,10 +147,10 @@
             var STOPREASON = "";
             var POS = STARTPOS;
             while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
-              ARTIFACTS['marks'][POS] = {};
+              ARTIFACTS["marks"][POS] = {};
             }
             if (BLOCKS[POS]) {
-              ARTIFACTS['blocks'][POS] = {};
+              ARTIFACTS["blocks"][POS] = {};
             }
           }
         }
@@ -163,7 +163,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectunit']] = 1;
+                ret[MARKS["selectunit"]] = 1;
                 return ret;
               }());
             for (var key in s0) {
@@ -179,10 +179,10 @@
             var STOPREASON = "";
             var POS = STARTPOS;
             while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-              ARTIFACTS['marks'][POS] = {};
+              ARTIFACTS["marks"][POS] = {};
             }
             if (BLOCKS[POS] && allowedsteps[POS]) {
-              ARTIFACTS['blocks'][POS] = {};
+              ARTIFACTS["blocks"][POS] = {};
             }
           }
         }
@@ -195,7 +195,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectunit']] = 1;
+                ret[MARKS["selectunit"]] = 1;
                 return ret;
               }());
             for (var key in s0) {
@@ -210,7 +210,7 @@
           for (var walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
             var POS = STARTPOS;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
-              ARTIFACTS['marks'][POS] = {};
+              ARTIFACTS["marks"][POS] = {};
             }
           }
         }
@@ -244,7 +244,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmark1 = function(turn, step, markpos) {
@@ -266,7 +266,7 @@
       game.selectmark1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start1 = function(turn, step) {
@@ -335,7 +335,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug1 = function() {
@@ -367,7 +367,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectunit']] = 1;
+                ret[MARKS["selectunit"]] = 1;
                 return ret;
               }());
             for (var key in s0) {
@@ -383,10 +383,10 @@
             var STOPREASON = "";
             var POS = STARTPOS;
             while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-              ARTIFACTS['marks'][POS] = {};
+              ARTIFACTS["marks"][POS] = {};
             }
             if (BLOCKS[POS] && allowedsteps[POS]) {
-              ARTIFACTS['blocks'][POS] = {};
+              ARTIFACTS["blocks"][POS] = {};
             }
           }
         }
@@ -399,7 +399,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectunit']] = 1;
+                ret[MARKS["selectunit"]] = 1;
                 return ret;
               }());
             for (var key in s0) {
@@ -415,10 +415,10 @@
             var STOPREASON = "";
             var POS = STARTPOS;
             while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
-              ARTIFACTS['marks'][POS] = {};
+              ARTIFACTS["marks"][POS] = {};
             }
             if (BLOCKS[POS]) {
-              ARTIFACTS['blocks'][POS] = {};
+              ARTIFACTS["blocks"][POS] = {};
             }
           }
         }
@@ -431,7 +431,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectunit']] = 1;
+                ret[MARKS["selectunit"]] = 1;
                 return ret;
               }());
             for (var key in s0) {
@@ -447,10 +447,10 @@
             var STOPREASON = "";
             var POS = STARTPOS;
             while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-              ARTIFACTS['marks'][POS] = {};
+              ARTIFACTS["marks"][POS] = {};
             }
             if (BLOCKS[POS] && allowedsteps[POS]) {
-              ARTIFACTS['blocks'][POS] = {};
+              ARTIFACTS["blocks"][POS] = {};
             }
           }
         }
@@ -463,7 +463,7 @@
               s1 =
               (function() {
                 var ret = {};
-                ret[MARKS['selectunit']] = 1;
+                ret[MARKS["selectunit"]] = 1;
                 return ret;
               }());
             for (var key in s0) {
@@ -478,7 +478,7 @@
           for (var walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
             var POS = STARTPOS;
             while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
-              ARTIFACTS['marks'][POS] = {};
+              ARTIFACTS["marks"][POS] = {};
             }
           }
         }
@@ -512,7 +512,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.selectmark2 = function(turn, step, markpos) {
@@ -534,7 +534,7 @@
       game.selectmark2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.start2 = function(turn, step) {
@@ -603,7 +603,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ''
+          text: ""
         };
       };
       game.debug2 = function() {

@@ -15,7 +15,8 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
         steps: {},
         player: player,
         turn: turn.turn+1,
-        links: {root:{}}
+        links: {root:{}},
+        endMarks: {}
       };
 
       var MARKS = {}; 

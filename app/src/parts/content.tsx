@@ -1,14 +1,21 @@
 import * as React from 'react';
 
-let Piece = ({content, performCommand})=> {
+type ContentProps = {
+  content: any,
+  performCommand?: (cmnd:string) => void
+};
+
+let Content = ({content, performCommand}: ContentProps)=> {
   if (typeof content === 'string'){
     return <span>{content}</span>;
   }
   switch(content.type){
     case "line":
-      return <span>{content.content.map((c,i)=><Piece content={c} performCommand={performCommand} key={i}/>)}</span>;
+      return <span>{content.content.map((c,i)=><Content content={c} performCommand={performCommand} key={i}/>)}</span>;
     case "text":
       return <span>{content.text}</span>;
+    case "end":
+      return <span>{content.name}</span>;
     case "posref":
       return <span>{content.pos}</span>;
     case "cmndref":
@@ -23,4 +30,4 @@ let Piece = ({content, performCommand})=> {
   }
 };
 
-export default Piece
+export default Content

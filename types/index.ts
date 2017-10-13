@@ -51,13 +51,15 @@ export type StepUI = {
     }
   },
   turn: number,
-  description?: string,
+  description?: Content,
   idx?: number,
 }
 
+export type Content = string | {type: string, [other:string]: any};
+
 export type StepControlUI = {
   potentialMarks: PositionList
-  instruction: string,
+  instruction: Content,
   commands: {
     [cmndname: string]: string;
   },
@@ -119,6 +121,11 @@ export type Turn = {
   links: {
     [stepid: string]: {
       [action: string]: FunctionName
+    }
+  },
+  endMarks: {
+    [stepid: string]: {
+      [action: string]: Layer
     }
   },
   canend?: boolean,

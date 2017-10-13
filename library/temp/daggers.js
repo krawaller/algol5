@@ -305,7 +305,8 @@
           turn: turn.turn + 1,
           links: {
             root: {}
-          }
+          },
+          endMarks: {}
         };
         var MARKS = {};
         var ARTIFACTS = {
@@ -585,7 +586,8 @@
           turn: turn.turn + 1,
           links: {
             root: {}
-          }
+          },
+          endMarks: {}
         };
         var MARKS = {};
         var ARTIFACTS = {

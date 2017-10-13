@@ -11,7 +11,7 @@
     "links": ["selectdeploytarget","selectunit"]
   },
   "endGame": {
-    "madeline": {"condition":["notempty","line"]}
+    "madeline": {"condition":["notempty","line"],"show":"line"}
   },
   "marks": {
     "selectdeploytarget": {
@@ -41,9 +41,10 @@
       "dirs": [1,2,3,4],
       "starts": "units",
       "steps": ["unitlayer",["read","units",["start"],"group"]],
+      "startasstep": true,
       "draw": {
         "steps": {
-          "condition": ["morethan",["walklength"],1],
+          "condition": ["morethan",["walklength"],2],
           "tolayer": "line"
         }
       }

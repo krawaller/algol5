@@ -1,4 +1,5 @@
 import * as React from 'react'
+import Content from './content';
 
 import {StepUI} from '../../../engine/src/types';
 
@@ -16,7 +17,9 @@ type Turn = {
 }
 
 const Step = ({step,selectStep,current}: {step: StepUI & {idx:number}, current: boolean, selectStep: (idx: number) => void}) => (
-  <div className={"step" + (current ? " currentStep" : "")} onClick={()=>selectStep(step.idx)}>{step.description}</div>
+  <div className={"step" + (current ? " currentStep" : "")} onClick={()=>selectStep(step.idx)}>
+    <Content content={step.description} />
+  </div>
 );
 
 const Turn = ({selectStep, currentStep, turn: {turn,steps,player}}: {turn: Turn, currentStep: number, selectStep: (idx: number)=>void}) => (
@@ -43,7 +46,6 @@ const History = ({offset,history,selectStep,currentStep}: HistoryProps)=> {
       }
       return mem;
     }, []);
-
     return (
         <div className="history" style={{left:offset}}>
           {turns.slice(0).reverse().map(t => <Turn key={t.turn} turn={t} selectStep={selectStep} currentStep={currentStep} />)}

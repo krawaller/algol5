@@ -30,6 +30,10 @@ function addLink(gameDef: Definition, player: 1 | 2, action: string, name: stri
         var winner = ${expr.value(def.who||player)};
         var result = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
         turn.links[newstepid][result] = '${name}';
+        ${def.show ? `
+        turn.endMarks[newstepid] = turn.endMarks[newstepid] || {};
+        turn.endMarks[newstepid].${name} = ${expr.set(def.show)};
+        ` : ''}
       }`
     )).concat('turn.links[newstepid].endturn = "start"+otherplayer; ').join(' else ')
   } else {

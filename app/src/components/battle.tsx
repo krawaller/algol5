@@ -45,8 +45,12 @@ class Battle extends React.Component <BattleProps,BattleState> {
   }
   doAction(action) {
     this.setState({waiting: action}, ()=>{
-      this.props.algol.performAction(this.state.UI.sessionId,action).then(UI=>{
-        this.setState({UI:UI,waiting:undefined}, this.maybeAI);
+      this.props.algol.performAction(this.state.UI.sessionId,action).then((UI:BattleUI)=>{
+        this.setState({
+          UI:UI,
+          waiting:undefined,
+          step: UI.endedBy ? UI.history.length + UI.current.history.length - 1 : this.state.step
+        }, this.maybeAI);
         console.log("Action",action,"Options",optionsInUI(UI),"UI",UI);
         /*this.props.algol.debug(UI.sessionId).then(res => {
           this.setState({UI:UI}, this.maybeAI);
@@ -145,7 +149,7 @@ class Battle extends React.Component <BattleProps,BattleState> {
           <History history={totalHistory} offset={style.width} selectStep={this.selectStep} currentStep={this.state.step}/>
           <div style={offset}>
             {step.units && <Units unitdata={step.units} board={this.props.game.board} />}
-            {p && <Marks board={this.props.game.board} disabled={p.type === "ai" || inHistory} activeMarks={step.marks} potentialMarks={inHistory ? [] : ctrls.potentialMarks} selectMark={this.doAction}/>}
+            {p && <Marks board={this.props.game.board} disabled={p.type === "ai" || inHistory || !!UI.endedBy } activeMarks={step.marks} potentialMarks={inHistory ? [] : ctrls.potentialMarks} selectMark={this.doAction}/>}
           </div>
         </div>
         <div>

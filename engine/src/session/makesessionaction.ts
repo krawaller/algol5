@@ -9,6 +9,7 @@ import calcTurnSave from '../save/calcturnsave'
 import encodeSessionSave from '../save/encodesessionsave';
 import decodeSessionSave from '../save/decodesessionsave';
 import compressHistoryForTurn from '../history/compresshistoryforturn';
+import makeEndGameHistoryEntry from '../history/makeendgamehistoryentry';
 
 import { Session } from '../types'
 
@@ -28,7 +29,9 @@ export default function makeSessionAction(session: Session, action: string): Ses
   }
   // ending the battle!
   else if (isGameEndCommand(action)){
-    session.history = session.history.concat( compressHistoryForTurn(session) );
+    session.winner = <0|1|2>(action === 'win' ? session.turn.player : action === 'lose' ? {1:2,2:1}[session.turn.player] : 0);
+    session.endedBy = session.turn.links[session.step.stepid][action];
+    session.currentSteps.push(makeEndGameHistoryEntry(session)); // = session.history.concat(compressHistoryForTurn(session)).concat(makeEndGameHistoryEntry(session));
     session.savedIndexes = session.savedIndexes.concat( calcTurnSave(session.turn,session.step,action) );
     session.saveString = encodeSessionSave({
       gameId: session.gameId,
@@ -37,8 +40,6 @@ export default function makeSessionAction(session: Session, action: string): Ses
       moveIndexes: session.savedIndexes,
       ended: true
     });
-    session.winner = <0|1|2>(action === 'win' ? session.turn.player : action === 'lose' ? {1:2,2:1}[session.turn.player] : 0);
-    session.endedBy = session.turn.links[session.step.stepid][action];
   }
   // ending the turn, creating a new one
   else if (action==='endturn'){

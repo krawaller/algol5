@@ -146,15 +146,17 @@
           var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
           var allwalkerdirs = [1, 2, 3, 4];
           for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
-              if ((WALKLENGTH > 1)) {
+              if ((WALKLENGTH > 2)) {
                 ARTIFACTS["line"][POS] = {};
               }
             }
@@ -176,6 +178,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.line;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -232,15 +236,17 @@
           var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
           var allwalkerdirs = [1, 2, 3, 4];
           for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
-              if ((WALKLENGTH > 1)) {
+              if ((WALKLENGTH > 2)) {
                 ARTIFACTS["line"][POS] = {};
               }
             }
@@ -261,6 +267,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.line;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -277,7 +285,8 @@
           turn: turn.turn + 1,
           links: {
             root: {}
-          }
+          },
+          endMarks: {}
         };
         var MARKS = {};
         var ARTIFACTS = {
@@ -459,15 +468,17 @@
           var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
           var allwalkerdirs = [1, 2, 3, 4];
           for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
-              if ((WALKLENGTH > 1)) {
+              if ((WALKLENGTH > 2)) {
                 ARTIFACTS["line"][POS] = {};
               }
             }
@@ -489,6 +500,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.line;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -545,15 +558,17 @@
           var allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
           var allwalkerdirs = [1, 2, 3, 4];
           for (var walkerdirnbr = 0; walkerdirnbr < 4; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
             for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
               POS = walkedsquares[walkstepper];
-              if ((WALKLENGTH > 1)) {
+              if ((WALKLENGTH > 2)) {
                 ARTIFACTS["line"][POS] = {};
               }
             }
@@ -574,6 +589,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.line;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -590,7 +607,8 @@
           turn: turn.turn + 1,
           links: {
             root: {}
-          }
+          },
+          endMarks: {}
         };
         var MARKS = {};
         var ARTIFACTS = {

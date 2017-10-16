@@ -117,10 +117,15 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? {
           type: 'text',
-          text: ""
-        };
+          text: "Select a square closer to home to move your king to"
+        } : {
+          type: 'text',
+          text: "Select a square closer to the enemy lines to move your pawn to"
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -139,10 +144,74 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to"
+          }, (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? {
+            type: 'text',
+            text: "retreat your king"
+          } : {
+            type: 'text',
+            text: "advance your pawn"
+          }), {
+            type: 'text',
+            text: "from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, (!!(TERRAIN.opphomerow[MARKS["selectmovetarget"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "into the opponent base at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmovetarget"]
+            }]
+          }) : (!!(TERRAIN.myhomerow[MARKS["selectmovetarget"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "back home to"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmovetarget"]
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "to"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmovetarget"]
+            }]
+          }))), !!(UNITLAYERS.oppunits[MARKS["selectmovetarget"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: ", killing the enemy"
+            }, (!!(UNITLAYERS.kings[MARKS["selectmovetarget"]]) ? {
+              type: 'text',
+              text: "king"
+            } : {
+              type: 'text',
+              text: "pawn"
+            })]
+          }) : {
+            type: 'nothing'
+          }]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -276,10 +345,41 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: Object.keys(UNITLAYERS.mysoldiers).length !== 0,
+              content: {
+                type: 'text',
+                text: "a pawn to advance"
+              }
+            }, {
+              cond: Object.keys(UNITLAYERS.mykings).length !== 0,
+              content: {
+                type: 'text',
+                text: "a king to retreat"
+              }
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            })
+          ]
+        });
       };
       game.debug1 = function() {
         return {
@@ -326,10 +426,15 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? {
           type: 'text',
-          text: ""
-        };
+          text: "Select a square closer to home to move your king to"
+        } : {
+          type: 'text',
+          text: "Select a square closer to the enemy lines to move your pawn to"
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -348,10 +453,74 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to"
+          }, (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? {
+            type: 'text',
+            text: "retreat your king"
+          } : {
+            type: 'text',
+            text: "advance your pawn"
+          }), {
+            type: 'text',
+            text: "from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, (!!(TERRAIN.opphomerow[MARKS["selectmovetarget"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "into the opponent base at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmovetarget"]
+            }]
+          }) : (!!(TERRAIN.myhomerow[MARKS["selectmovetarget"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "back home to"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmovetarget"]
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "to"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectmovetarget"]
+            }]
+          }))), !!(UNITLAYERS.oppunits[MARKS["selectmovetarget"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: ", killing the enemy"
+            }, (!!(UNITLAYERS.kings[MARKS["selectmovetarget"]]) ? {
+              type: 'text',
+              text: "king"
+            } : {
+              type: 'text',
+              text: "pawn"
+            })]
+          }) : {
+            type: 'nothing'
+          }]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -485,10 +654,41 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: Object.keys(UNITLAYERS.mysoldiers).length !== 0,
+              content: {
+                type: 'text',
+                text: "a pawn to advance"
+              }
+            }, {
+              cond: Object.keys(UNITLAYERS.mykings).length !== 0,
+              content: {
+                type: 'text',
+                text: "a king to retreat"
+              }
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            })
+          ]
+        });
       };
       game.debug2 = function() {
         return {

@@ -177,6 +177,7 @@
         return newstep;
       };
       game.selectpushpoint1instruction = function(turn, step) {
+        var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
         return collapseLine({
           type: 'line',
@@ -223,7 +224,10 @@
               content: []
             }), {
               type: 'text',
-              text: "to shove in that direction and make room for the new unit"
+              text: "to shove in that direction and make room for the new unit at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectpushpoint"]
             }
           ]
         });
@@ -862,6 +866,7 @@
         return newstep;
       };
       game.selectpushpoint2instruction = function(turn, step) {
+        var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
         return collapseLine({
           type: 'line',
@@ -908,7 +913,10 @@
               content: []
             }), {
               type: 'text',
-              text: "to shove in that direction and make room for the new unit"
+              text: "to shove in that direction and make room for the new unit at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectpushpoint"]
             }
           ]
         });

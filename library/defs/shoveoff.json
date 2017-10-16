@@ -25,7 +25,7 @@
           [["notempty","spawnwest"],"west"],
           [["notempty","spawneast"],"east"]
         ],
-        "to shove in that direction and make room for the new unit"
+        "to shove in that direction and make room for the new unit at","selectpushpoint"
       ]
     }
   },

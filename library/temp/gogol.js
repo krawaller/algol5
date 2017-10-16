@@ -115,10 +115,19 @@
         return newstep;
       };
       game.selectkingdeploy1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "deploy"
+          }, {
+            type: 'text',
+            text: "to place your king here"
+          }]
+        });
       };
       game.selectunit1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -250,10 +259,91 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return (!!(UNITLAYERS.kings[MARKS["selectunit"]]) ? collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select where to"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.kingwalk).length !== 0,
+              content: {
+                type: 'text',
+                text: "move"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.jumptargets).length !== 0,
+              content: {
+                type: 'text',
+                text: "jump"
+              }
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "your king"
+            },
+            Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = ARTIFACTS.nokings,
+                  s1 =
+                  (function() {
+                    var k, ret = {},
+                      s0 = ARTIFACTS.kingwalk,
+                      s1 = ARTIFACTS.jumptargets;
+                    for (k in s0) {
+                      ret[k] = 1;
+                    }
+                    for (k in s1) {
+                      ret[k] = 1;
+                    }
+                    return ret;
+                  }());
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length !== 0 ? {
+              type: 'text',
+              text: "without making a forbidden configuration"
+            } : {
+              type: 'nothing'
+            }
+          ]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move"
+          }, Object.keys(ARTIFACTS.jumptargets).length !== 0 ? {
+            type: 'text',
+            text: "or jump"
+          } : {
+            type: 'nothing'
+          }, Object.keys(ARTIFACTS.nosoldiers).length !== 0 ? {
+            type: 'text',
+            text: "without making a forbidden configuration"
+          } : {
+            type: 'nothing'
+          }]
+        }));
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -272,10 +362,29 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }]
+        });
       };
       game.selectjumptarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -308,10 +417,36 @@
         return newstep;
       };
       game.selectjumptarget1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "jump"
+          }, {
+            type: 'text',
+            text: "to jump from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectjumptarget"]
+          }, {
+            type: 'text',
+            text: " and kill the enemy at"
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.splashed)[0]
+          }]
+        });
       };
       game.deploy1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -684,10 +819,13 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
+        return ((turn.turn > 2) ? {
           type: 'text',
-          text: ""
-        };
+          text: "Select a unit to move"
+        } : {
+          type: 'text',
+          text: "Select where to deploy your king"
+        });
       };
       game.debug1 = function() {
         return {
@@ -716,10 +854,19 @@
         return newstep;
       };
       game.selectkingdeploy2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "deploy"
+          }, {
+            type: 'text',
+            text: "to place your king here"
+          }]
+        });
       };
       game.selectunit2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -851,10 +998,91 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return (!!(UNITLAYERS.kings[MARKS["selectunit"]]) ? collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select where to"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.kingwalk).length !== 0,
+              content: {
+                type: 'text',
+                text: "move"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.jumptargets).length !== 0,
+              content: {
+                type: 'text',
+                text: "jump"
+              }
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "your king"
+            },
+            Object.keys(
+              (function() {
+                var ret = {},
+                  s0 = ARTIFACTS.nokings,
+                  s1 =
+                  (function() {
+                    var k, ret = {},
+                      s0 = ARTIFACTS.kingwalk,
+                      s1 = ARTIFACTS.jumptargets;
+                    for (k in s0) {
+                      ret[k] = 1;
+                    }
+                    for (k in s1) {
+                      ret[k] = 1;
+                    }
+                    return ret;
+                  }());
+                for (var key in s0) {
+                  if (s1[key]) {
+                    ret[key] = s0[key];
+                  }
+                }
+                return ret;
+              }())).length !== 0 ? {
+              type: 'text',
+              text: "without making a forbidden configuration"
+            } : {
+              type: 'nothing'
+            }
+          ]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move"
+          }, Object.keys(ARTIFACTS.jumptargets).length !== 0 ? {
+            type: 'text',
+            text: "or jump"
+          } : {
+            type: 'nothing'
+          }, Object.keys(ARTIFACTS.nosoldiers).length !== 0 ? {
+            type: 'text',
+            text: "without making a forbidden configuration"
+          } : {
+            type: 'nothing'
+          }]
+        }));
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -873,10 +1101,29 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }]
+        });
       };
       game.selectjumptarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -909,10 +1156,36 @@
         return newstep;
       };
       game.selectjumptarget2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "jump"
+          }, {
+            type: 'text',
+            text: "to jump from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectjumptarget"]
+          }, {
+            type: 'text',
+            text: " and kill the enemy at"
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.splashed)[0]
+          }]
+        });
       };
       game.deploy2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -1285,10 +1558,13 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
+        return ((turn.turn > 2) ? {
           type: 'text',
-          text: ""
-        };
+          text: "Select a unit to move"
+        } : {
+          type: 'text',
+          text: "Select where to deploy your king"
+        });
       };
       game.debug2 = function() {
         return {

@@ -143,10 +143,70 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.movetargets).length !== 0,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "a square to move the"
+                }, {
+                  type: 'posref',
+                  pos: MARKS["selectunit"]
+                }, {
+                  type: "unittyperef",
+                  name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+                }, {
+                  type: 'text',
+                  text: "to"
+                }]
+              })
+            }, {
+              cond: Object.keys(turn.links[step.stepid]).filter(function(action) {
+                var func = turn.links[step.stepid][action];
+                return func.substr(0, func.length - 1) === "selectswapunit";
+              }).length,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "another unit to swap the"
+                }, {
+                  type: 'posref',
+                  pos: MARKS["selectunit"]
+                }, {
+                  type: "unittyperef",
+                  name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+                }, {
+                  type: 'text',
+                  text: "with"
+                }]
+              })
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            })
+          ]
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -184,10 +244,42 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return ((!!(UNITLAYERS.units[MARKS["selectmovetarget"]]) && !(TERRAIN.oppbase[MARKS["selectmovetarget"]])) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where the enemy at"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }, {
+            type: 'text',
+            text: "should end up"
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }]
+        }));
       };
       game.selectdeportdestination1 = function(turn, step, markpos) {
         var MARKS = {
@@ -207,10 +299,35 @@
         return newstep;
       };
       game.selectdeportdestination1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }, {
+            type: 'text',
+            text: "and deport the enemy to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectdeportdestination"]
+          }]
+        });
       };
       game.selectswapunit1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -249,10 +366,26 @@
         return newstep;
       };
       game.selectswapunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a neighbouring square for"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to step to. The"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectswapunit"]
+          }, {
+            type: 'text',
+            text: "unit will step in the opposite direction"
+          }]
+        });
       };
       game.selectswap1target1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -301,10 +434,42 @@
         return newstep;
       };
       game.selectswap1target1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "swap"
+          }, {
+            type: 'text',
+            text: "to step"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectswap1target"]
+          }, {
+            type: 'text',
+            text: "and step"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectswapunit"]
+          }, {
+            type: 'text',
+            text: "in the other direction to"
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.swap2step)[0]
+          }]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -538,7 +703,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ""
+          text: "Select a unit to move"
         };
       };
       game.debug1 = function() {
@@ -606,10 +771,70 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.movetargets).length !== 0,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "a square to move the"
+                }, {
+                  type: 'posref',
+                  pos: MARKS["selectunit"]
+                }, {
+                  type: "unittyperef",
+                  name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+                }, {
+                  type: 'text',
+                  text: "to"
+                }]
+              })
+            }, {
+              cond: Object.keys(turn.links[step.stepid]).filter(function(action) {
+                var func = turn.links[step.stepid][action];
+                return func.substr(0, func.length - 1) === "selectswapunit";
+              }).length,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "another unit to swap the"
+                }, {
+                  type: 'posref',
+                  pos: MARKS["selectunit"]
+                }, {
+                  type: "unittyperef",
+                  name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+                }, {
+                  type: 'text',
+                  text: "with"
+                }]
+              })
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            })
+          ]
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -647,10 +872,42 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return ((!!(UNITLAYERS.units[MARKS["selectmovetarget"]]) && !(TERRAIN.oppbase[MARKS["selectmovetarget"]])) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where the enemy at"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }, {
+            type: 'text',
+            text: "should end up"
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }]
+        }));
       };
       game.selectdeportdestination2 = function(turn, step, markpos) {
         var MARKS = {
@@ -670,10 +927,35 @@
         return newstep;
       };
       game.selectdeportdestination2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }, {
+            type: 'text',
+            text: "and deport the enemy to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectdeportdestination"]
+          }]
+        });
       };
       game.selectswapunit2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -712,10 +994,26 @@
         return newstep;
       };
       game.selectswapunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a neighbouring square for"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to step to. The"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectswapunit"]
+          }, {
+            type: 'text',
+            text: "unit will step in the opposite direction"
+          }]
+        });
       };
       game.selectswap1target2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -764,10 +1062,42 @@
         return newstep;
       };
       game.selectswap1target2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "swap"
+          }, {
+            type: 'text',
+            text: "to step"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectswap1target"]
+          }, {
+            type: 'text',
+            text: "and step"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectswapunit"]
+          }, {
+            type: 'text',
+            text: "in the other direction to"
+          }, {
+            type: 'text',
+            text: Object.keys(ARTIFACTS.swap2step)[0]
+          }]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -1001,7 +1331,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ""
+          text: "Select a unit to move"
         };
       };
       game.debug2 = function() {

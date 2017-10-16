@@ -24,6 +24,8 @@ let Content = ({content, performCommand}: ContentProps)=> {
       return <span>{content.player}</span>;
     case "nothing":
       return null;
+    case "unittyperef":
+      return <span>{content.name}</span>;
     default:
       console.log("Oh no :(", content);
       throw "Unknown content: " + content;

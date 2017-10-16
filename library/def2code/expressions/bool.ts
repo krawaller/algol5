@@ -5,6 +5,20 @@ export default function parseBool(gameDef: Definition, player: 1 | 2, action: s
   const parse = makeParser(gameDef, player, action, "boolean");
   const [type, ...args] = expression;
   switch(type){
+    case "cmndavailable": {
+
+    }
+    case "markavailable": {
+      const [markname] = args;
+      let special = makeParser(gameDef, player, action, "position");
+      let name = special.val(markname);
+      return `
+        Object.keys(turn.links[step.stepid]).filter(function(action){
+          var func = turn.links[step.stepid][action];
+          return func.substr(0,func.length-1) === ${name};
+        }).length
+      `
+    }
     case "truthy": {
       const [val] = args;
       return `!!${parse.val(val)}`;

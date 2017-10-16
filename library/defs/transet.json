@@ -3,7 +3,33 @@
     "id": "transet",
     "name": "Transet",
     "source": "http://sagme.blogspot.se/2013/05/transet.html",
-    "tags": ["infiltration","differentunits"]
+    "tags": ["infiltration","differentunits"],
+    "instructions": {
+      "startTurn": "Select a unit to move",
+      "selectunit": ["line",
+        "Select",["orlist",
+          [["notempty","movetargets"],["line","a square to move the","selectunit",["nameat","selectunit"],"to"]],
+          [["markavailable","selectswapunit"],["line","another unit to swap the","selectunit",["nameat","selectunit"],"with"]]
+        ]
+      ],
+      "selectmovetarget": ["ifelse",
+        ["and",
+          ["anyat","units","selectmovetarget"],
+          ["noneat","oppbase","selectmovetarget"]
+        ],
+        ["line","Select where the enemy at","selectmovetarget","should end up"],
+        ["line","Press","move","to go from","selectunit","to","selectmovetarget"]
+      ],
+      "selectdeportdestination": ["line",
+        "Press","move","to go from","selectunit","to","selectmovetarget","and deport the enemy to","selectdeportdestination"
+      ],
+      "selectswapunit": ["line",
+        "Select a neighbouring square for","selectunit","to step to. The","selectswapunit","unit will step in the opposite direction"
+      ],
+      "selectswap1target": ["line",
+        "Press","swap","to step","selectunit","to","selectswap1target","and step","selectswapunit","in the other direction to",["onlyin","swap2step"]
+      ]
+    }
   },
   "graphics": {
     "icons": {"pinets":"pawns","piokers":"bishops","piases":"kings"},

@@ -68,6 +68,13 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
         text: (temp = ${parse.val(num)}) + ' ' + ( temp === 1 ? ${parse.val(sing)} : ${parse.val(plur)})
       }`;
     }
+    case "nameat": {
+      const [pos] = args;
+      return `{
+        type: "unittyperef",
+        name: game.graphics.icons[${parse.val(["read","units",pos,"group"])}]
+      }`
+    }
     default:
       try {
         return `{

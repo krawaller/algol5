@@ -177,10 +177,56 @@
         return newstep;
       };
       game.selectpushpoint1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Press"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.spawnsouth).length !== 0,
+              content: {
+                type: 'cmndref',
+                cmnd: "south"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.spawnnorth).length !== 0,
+              content: {
+                type: 'cmndref',
+                cmnd: "north"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.spawnwest).length !== 0,
+              content: {
+                type: 'cmndref',
+                cmnd: "west"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.spawneast).length !== 0,
+              content: {
+                type: 'cmndref',
+                cmnd: "east"
+              }
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "to shove in that direction and make room for the new unit"
+            }
+          ]
+        });
       };
       game.north1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -696,10 +742,32 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to shove in"
+          }, ((Object.keys(UNITLAYERS.myunits).length === 7) ? {
+            type: 'text',
+            text: "your last off-board unit"
+          } : ((Object.keys(UNITLAYERS.myunits).length === 8) ? {
+            type: 'text',
+            text: "a neutral unit"
+          } : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "one of your"
+            }, {
+              type: 'text',
+              text: (8 - Object.keys(UNITLAYERS.myunits).length)
+            }, {
+              type: 'text',
+              text: "remaining off-board units"
+            }]
+          })))]
+        });
       };
       game.debug1 = function() {
         return {
@@ -794,10 +862,56 @@
         return newstep;
       };
       game.selectpushpoint2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Press"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.spawnsouth).length !== 0,
+              content: {
+                type: 'cmndref',
+                cmnd: "south"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.spawnnorth).length !== 0,
+              content: {
+                type: 'cmndref',
+                cmnd: "north"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.spawnwest).length !== 0,
+              content: {
+                type: 'cmndref',
+                cmnd: "west"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.spawneast).length !== 0,
+              content: {
+                type: 'cmndref',
+                cmnd: "east"
+              }
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "to shove in that direction and make room for the new unit"
+            }
+          ]
+        });
       };
       game.north2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1313,10 +1427,32 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to shove in"
+          }, ((Object.keys(UNITLAYERS.myunits).length === 7) ? {
+            type: 'text',
+            text: "your last off-board unit"
+          } : ((Object.keys(UNITLAYERS.myunits).length === 8) ? {
+            type: 'text',
+            text: "a neutral unit"
+          } : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "one of your"
+            }, {
+              type: 'text',
+              text: (8 - Object.keys(UNITLAYERS.myunits).length)
+            }, {
+              type: 'text',
+              text: "remaining off-board units"
+            }]
+          })))]
+        });
       };
       game.debug2 = function() {
         return {

@@ -2,7 +2,7 @@ type Line = [string[], string[]];
 type Test = [string, string, Line[]];
 
 const scripts: Test[] = [
-  ["Basic Amazon script", "amazon", [
+  ["Basic Amazon script", "amazons", [
     [["d10"],["a10", "b10", "b8", "c10", "c9", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "e10", "e9", "f10", "f8", "g7", "h6", "i5"]],
     [["d4","move"],["a1", "b2", "b4", "b6", "c3", "c4", "c5", "d10", "d2", "d3", "d5", "d6", "d7", "d8", "d9", "e3", "e4", "e5", "f2", "f4", "f6", "g4", "g7", "h4", "h8", "i4", "i9", "j10"]],
     [["g4","fire","endturn","g1"],["e1", "e3", "f1", "f2", "g2", "g3", "h1", "h2", "i1", "i3", "j1"]],

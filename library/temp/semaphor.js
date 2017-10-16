@@ -71,10 +71,23 @@
         return newstep;
       };
       game.selectdeploytarget1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "deploy"
+          }, {
+            type: 'text',
+            text: "to place a pawn at"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectdeploytarget"]
+          }]
+        });
       };
       game.selectunit1 = function(turn, step, markpos) {
         var MARKS = {
@@ -92,10 +105,27 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "promote"
+          }, {
+            type: 'text',
+            text: "to turn the"
+          }, (!!(UNITLAYERS.pawns[MARKS["selectunit"]]) ? {
+            type: 'text',
+            text: "pawn into a bishop"
+          } : {
+            type: 'text',
+            text: "bishop into a king"
+          })]
+        });
       };
       game.deploy1 = function(turn, step) {
         var ARTIFACTS = {
@@ -362,10 +392,86 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: (Object.keys(UNITLAYERS.units).length !== 12),
+              content: {
+                type: 'text',
+                text: "an empty square to deploy to"
+              }
+            }, {
+              cond: Object.keys(
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.bishops,
+                    s1 = UNITLAYERS.pawns;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())).length !== 0,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                    type: 'text',
+                    text: "a"
+                  },
+                  [{
+                    cond: Object.keys(UNITLAYERS.pawns).length !== 0,
+                    content: {
+                      type: 'text',
+                      text: "pawn"
+                    }
+                  }, {
+                    cond: Object.keys(UNITLAYERS.bishops).length !== 0,
+                    content: {
+                      type: 'text',
+                      text: "bishop"
+                    }
+                  }].filter(function(elem) {
+                    return elem.cond;
+                  }).reduce(function(mem, elem, n, list) {
+                    mem.content.push(elem.content);
+                    if (n === list.length - 2) {
+                      mem.content.push("or");
+                    } else if (n < list.length - 2) {
+                      mem.content.push(",");
+                    }
+                    return mem;
+                  }, {
+                    type: "line",
+                    content: []
+                  }), {
+                    type: 'text',
+                    text: "to promote"
+                  }
+                ]
+              })
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            })
+          ]
+        });
       };
       game.debug1 = function() {
         return {
@@ -393,10 +499,23 @@
         return newstep;
       };
       game.selectdeploytarget2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "deploy"
+          }, {
+            type: 'text',
+            text: "to place a pawn at"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectdeploytarget"]
+          }]
+        });
       };
       game.selectunit2 = function(turn, step, markpos) {
         var MARKS = {
@@ -414,10 +533,27 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "promote"
+          }, {
+            type: 'text',
+            text: "to turn the"
+          }, (!!(UNITLAYERS.pawns[MARKS["selectunit"]]) ? {
+            type: 'text',
+            text: "pawn into a bishop"
+          } : {
+            type: 'text',
+            text: "bishop into a king"
+          })]
+        });
       };
       game.deploy2 = function(turn, step) {
         var ARTIFACTS = {
@@ -684,10 +820,86 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: (Object.keys(UNITLAYERS.units).length !== 12),
+              content: {
+                type: 'text',
+                text: "an empty square to deploy to"
+              }
+            }, {
+              cond: Object.keys(
+                (function() {
+                  var k, ret = {},
+                    s0 = UNITLAYERS.bishops,
+                    s1 = UNITLAYERS.pawns;
+                  for (k in s0) {
+                    ret[k] = 1;
+                  }
+                  for (k in s1) {
+                    ret[k] = 1;
+                  }
+                  return ret;
+                }())).length !== 0,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                    type: 'text',
+                    text: "a"
+                  },
+                  [{
+                    cond: Object.keys(UNITLAYERS.pawns).length !== 0,
+                    content: {
+                      type: 'text',
+                      text: "pawn"
+                    }
+                  }, {
+                    cond: Object.keys(UNITLAYERS.bishops).length !== 0,
+                    content: {
+                      type: 'text',
+                      text: "bishop"
+                    }
+                  }].filter(function(elem) {
+                    return elem.cond;
+                  }).reduce(function(mem, elem, n, list) {
+                    mem.content.push(elem.content);
+                    if (n === list.length - 2) {
+                      mem.content.push("or");
+                    } else if (n < list.length - 2) {
+                      mem.content.push(",");
+                    }
+                    return mem;
+                  }, {
+                    type: "line",
+                    content: []
+                  }), {
+                    type: 'text',
+                    text: "to promote"
+                  }
+                ]
+              })
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            })
+          ]
+        });
       };
       game.debug2 = function() {
         return {

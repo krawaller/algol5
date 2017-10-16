@@ -10,7 +10,7 @@ import * as _eval from 'eval';
 
 let terrainLayers = _eval(fs.readFileSync(__dirname + "/envelope.js") + '  module.exports = terrainLayers;' );
 
-let meta = fs.readdirSync(__dirname+"/defs").reduce((mem,gamename)=>{
+let meta = fs.readdirSync(__dirname+"/defs").filter(g => g !== '.DS_Store').reduce((mem,gamename)=>{
   console.log("Meta for",gamename);
   let json = JSON.parse(fs.readFileSync(__dirname+"/defs/"+gamename).toString());
   let id = gamename.replace('.json','');

@@ -1,4 +1,5 @@
 {
+  "STATUS": "functioning but culled due to board size",
   "meta": {
     "id": "castle",
     "name": "Castle",

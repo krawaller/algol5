@@ -1,6 +1,7 @@
 {
   "meta": {
     "id": "serauqs",
+    "TODO": "maybe can move lines?",
     "name": "Serauqs",
     "source": "https://boardgamegeek.com/image/274401/serauqs",
     "tags": ["formation"],
@@ -13,7 +14,7 @@
       "selectunit": ["ifelse",
         ["morethan",["turn"],2],
         "Select where to move this unit",
-        "Press","makewild","to make this unit match for your opponent too"
+        ["line","Press","makewild","to make this unit match for your opponent too"]
       ],
       "selectmovetarget": ["line",
         "Press","move","to move from","selectunit","to","selectmovetarget"

@@ -133,10 +133,19 @@
         return ((turn.turn > 2) ? {
           type: 'text',
           text: "Select where to move this unit"
-        } : {
-          type: 'text',
-          text: "Press"
-        });
+        } : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "makewild"
+          }, {
+            type: 'text',
+            text: "to make this unit match for your opponent too"
+          }]
+        }));
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -571,10 +580,19 @@
         return ((turn.turn > 2) ? {
           type: 'text',
           text: "Select where to move this unit"
-        } : {
-          type: 'text',
-          text: "Press"
-        });
+        } : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "makewild"
+          }, {
+            type: 'text',
+            text: "to make this unit match for your opponent too"
+          }]
+        }));
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {

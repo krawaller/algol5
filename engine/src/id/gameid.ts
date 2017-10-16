@@ -3,7 +3,7 @@
 // All games must be part of this array, and order must never be changed!
 // When you add a new game, add it to the end of the list!
 const games = [
-  "_test", "amazon", "aries", "atrium", "castle", "coffee", "daggers", "gogol", "jostle", "kickrun", "krieg",
+  "_test", "amazons", "aries", "atrium", "castle", "coffee", "daggers", "gogol", "jostle", "kickrun", "krieg",
   "murusgallicus", "murusgallicusadvanced", "orthokon", "semaphor", "serauqs", "snijpunt", "transet","threemusketeers",
   "uglyduck","duplo","descent","shoveoff"
 ];

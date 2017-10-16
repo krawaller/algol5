@@ -15,7 +15,7 @@ import * as fs from 'fs';
 
 import {js_beautify} from 'js-beautify';
 
-fs.readdirSync(__dirname+"/defs").forEach(gamename=>{
+fs.readdirSync(__dirname+"/defs").filter(g => g !== '.DS_Store').forEach(gamename=>{
   let rules = require('./defs/'+gamename);
   console.log("Building",gamename)
   let code = compileGameToCode(rules);

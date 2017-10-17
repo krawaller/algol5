@@ -30,7 +30,7 @@
     }
   },
   "graphics": {
-    "icons": {"soldiers":"pawns"}
+    "icons": {"soldiers":"pawn"}
   },
   "board": {
     "height":4,
@@ -47,7 +47,7 @@
     "soldiers": {"0":[["rect","a1","d4"]]}
   },
   "endGame": {
-    "madeline": {"condition":["notempty","fourinarow"]}
+    "madeline": {"condition":["notempty","fourinarow"],"show":"fourinarow"}
   },
   "startTurn": {
     "link": "selectpushpoint"

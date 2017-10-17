@@ -6,7 +6,7 @@
     "tags": ["formation","changeowner","deploy"]
   },
   "graphics": {
-    "icons": {"soldiers":"pawns","sniper":"kings"},
+    "icons": {"soldiers":"pawn","sniper":"king"},
     "tiles": {"zone":"grass","corner":"castle"}
   },
   "board": {

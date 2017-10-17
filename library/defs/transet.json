@@ -8,8 +8,8 @@
       "startTurn": "Select a unit to move",
       "selectunit": ["line",
         "Select",["orlist",
-          [["notempty","movetargets"],["line","a square to move the","selectunit",["nameat","selectunit"],"to"]],
-          [["markavailable","selectswapunit"],["line","another unit to swap the","selectunit",["nameat","selectunit"],"with"]]
+          [["notempty","movetargets"],["line","a square to move the","selectunit",["unitnameat","selectunit"],"to"]],
+          [["markavailable","selectswapunit"],["line","another unit to swap the","selectunit",["unitnameat","selectunit"],"with"]]
         ]
       ],
       "selectmovetarget": ["ifelse",
@@ -32,7 +32,7 @@
     }
   },
   "graphics": {
-    "icons": {"pinets":"pawns","piokers":"bishops","piases":"kings"},
+    "icons": {"pinets":"pawn","piokers":"bishop","piases":"king"},
     "tiles": {"base":"playercolour"}
   },
   "board": {
@@ -51,7 +51,7 @@
     "piases": {"1":["c1"],"2":["c5"]}
   },
   "endGame": {
-    "infiltration": {"condition":["overlaps","myunits","oppbase"]}
+    "infiltration": {"condition":["overlaps","myunits","oppbase"],"show":["intersect","myunits","oppbase"]}
   },
   "startTurn": {
     "link": "selectunit"

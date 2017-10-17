@@ -9,7 +9,7 @@
         "corner": "playercolour"
       },
       "icons": {
-        "soldiers": "rooks"
+        "soldiers": "rook"
       }
     };
     game.board = {
@@ -283,6 +283,19 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'invade';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].invade =
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.oppcorner,
+                s1 = UNITLAYERS.myunits;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -567,6 +580,19 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'invade';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].invade =
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.oppcorner,
+                s1 = UNITLAYERS.myunits;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

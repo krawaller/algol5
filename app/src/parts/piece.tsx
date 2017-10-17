@@ -3,21 +3,21 @@ import * as React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 const fullicons = {
-    pawns: "♟",
-    knights: "♞",
-    bishops: "♝",
-    rooks: "♜",
-    queens: "♛",
-    kings: "♚"
+    pawn: "♟",
+    knight: "♞",
+    bishop: "♝",
+    rook: "♜",
+    queen: "♛",
+    king: "♚"
 };
 
 const lineicons = {
-    pawns: "♙",
-    knights: "♘",
-    bishops: "♗",
-    rooks: "♖",
-    queens: "♕",
-    kings: "♔"
+    pawn: "♙",
+    knight: "♘",
+    bishop: "♗",
+    rook: "♖",
+    queen: "♕",
+    king: "♔"
 };
 
 type PieceProps = any;

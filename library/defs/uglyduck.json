@@ -36,7 +36,7 @@
       ]
     }
   },
-  "graphics": {"icons": {"soldiers":"pawns","kings":"kings"},"tiles":{"homerow":"playercolour"}},
+  "graphics": {"icons": {"soldiers":"pawn","kings":"king"},"tiles":{"homerow":"playercolour"}},
   "board": {
     "height":5,
     "width":5,
@@ -54,7 +54,7 @@
     "link": "selectunit"
   },
   "endGame": {
-    "swanhome": {"condition":["overlaps","mykings","myhomerow"]}
+    "swanhome": {"condition":["overlaps","mykings","myhomerow"],"show":["intersect","mykings","myhomerow"]}
   },
   "marks": {
     "selectunit": {

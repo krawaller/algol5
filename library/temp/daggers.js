@@ -9,8 +9,8 @@
         "bases": "playercolour"
       },
       "icons": {
-        "daggers": "bishops",
-        "crowns": "kings"
+        "daggers": "bishop",
+        "crowns": "king"
       }
     };
     game.board = {
@@ -142,10 +142,21 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select where to move to"
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+          }]
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -196,13 +207,10 @@
             content: [{
               type: 'text',
               text: "and kill the enemy"
-            }, (!!(UNITLAYERS.crowns[MARKS["selectmovetarget"]]) ? {
-              type: 'text',
-              text: "king"
-            } : {
-              type: 'text',
-              text: "bishop"
-            }), {
+            }, {
+              type: "unittyperef",
+              name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectmovetarget"]] || {})["group"]]
+            }, {
               type: 'text',
               text: "at"
             }, {
@@ -284,6 +292,19 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].infiltration =
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.mycrowns,
+                s1 = TERRAIN.oppbases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else
         if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
           var winner = 1;
@@ -350,10 +371,25 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select which unit to move"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "bishop"
+          }, {
+            type: 'text',
+            text: "or"
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug1 = function() {
         return {
@@ -423,10 +459,21 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select where to move to"
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+          }]
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -477,13 +524,10 @@
             content: [{
               type: 'text',
               text: "and kill the enemy"
-            }, (!!(UNITLAYERS.crowns[MARKS["selectmovetarget"]]) ? {
-              type: 'text',
-              text: "king"
-            } : {
-              type: 'text',
-              text: "bishop"
-            }), {
+            }, {
+              type: "unittyperef",
+              name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectmovetarget"]] || {})["group"]]
+            }, {
               type: 'text',
               text: "at"
             }, {
@@ -565,6 +609,19 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].infiltration =
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.mycrowns,
+                s1 = TERRAIN.oppbases;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else
         if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
           var winner = 2;
@@ -631,10 +688,25 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select which unit to move"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "bishop"
+          }, {
+            type: 'text',
+            text: "or"
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug2 = function() {
         return {

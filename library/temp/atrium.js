@@ -6,8 +6,8 @@
     };
     game.graphics = {
       "icons": {
-        "kings": "kings",
-        "queens": "queens"
+        "kings": "king",
+        "queens": "queen"
       }
     };
     game.board = {
@@ -93,10 +93,24 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select orthogonal empty neighbour to move to"
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select orthogonal empty neighbour to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+          }, {
+            type: 'text',
+            text: "to"
+          }]
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -116,6 +130,7 @@
       };
       game.selectmovetarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
         return collapseLine({
           type: 'line',
           content: [{
@@ -126,10 +141,13 @@
             cmnd: "move"
           }, {
             type: 'text',
-            text: "to walk from "
+            text: "to walk the"
           }, {
             type: 'posref',
             pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
           }, {
             type: 'text',
             text: "to"
@@ -183,13 +201,15 @@
           var allowedsteps = (!!(UNITLAYERS.mykings[STARTPOS]) ? UNITLAYERS.mykings : UNITLAYERS.myqueens);
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((WALKLENGTH === 2)) {
+            if ((WALKLENGTH === 3)) {
               ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
@@ -209,6 +229,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madewinline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madewinline = ARTIFACTS.winline;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -319,10 +341,24 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select orthogonal empty neighbour to move to"
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select orthogonal empty neighbour to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+          }, {
+            type: 'text',
+            text: "to"
+          }]
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -342,6 +378,7 @@
       };
       game.selectmovetarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
         return collapseLine({
           type: 'line',
           content: [{
@@ -352,10 +389,13 @@
             cmnd: "move"
           }, {
             type: 'text',
-            text: "to walk from "
+            text: "to walk the"
           }, {
             type: 'posref',
             pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
           }, {
             type: 'text',
             text: "to"
@@ -409,13 +449,15 @@
           var allowedsteps = (!!(UNITLAYERS.mykings[STARTPOS]) ? UNITLAYERS.mykings : UNITLAYERS.myqueens);
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((WALKLENGTH === 2)) {
+            if ((WALKLENGTH === 3)) {
               ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
@@ -435,6 +477,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madewinline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madewinline = ARTIFACTS.winline;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

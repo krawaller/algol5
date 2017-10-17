@@ -7,9 +7,9 @@
     };
     game.graphics = {
       "icons": {
-        "pinets": "pawns",
-        "piokers": "bishops",
-        "piases": "kings"
+        "pinets": "pawn",
+        "piokers": "bishop",
+        "piases": "king"
       },
       "tiles": {
         "base": "playercolour"
@@ -551,6 +551,19 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].infiltration =
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.oppbase;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -634,6 +647,19 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].infiltration =
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.oppbase;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -1179,6 +1205,19 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].infiltration =
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.oppbase;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -1262,6 +1301,19 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'infiltration';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].infiltration =
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.myunits,
+                s1 = TERRAIN.oppbase;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

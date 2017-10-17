@@ -6,7 +6,7 @@
     "exclude": true
   },
   "graphics": {
-    "icons": { "stepsfirsts": "queens", "blocksfirsts": "queens", "defaultfirsts": "queens", "noblocks": "queens", "pawns": "pawns" },
+    "icons": { "stepsfirsts": "queen", "blocksfirsts": "queen", "defaultfirsts": "queen", "noblocks": "queen", "pawns": "pawn" },
     "tiles": { "steps":"grass"}
   },
   "board": {

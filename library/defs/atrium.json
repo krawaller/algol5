@@ -8,16 +8,17 @@
     "year": 2004,
     "instructions": {
       "startTurn": "Select which unit to move",
-      "selectunit": "Select orthogonal empty neighbour to move to",
+      "selectunit": ["line","Select orthogonal empty neighbour to move the","selectunit",["unitnameat","selectunit"],"to"],
       "selectmovetarget": ["line",
-        "Press","move","to walk from ",
+        "Press","move","to walk the",
         "selectunit",
+        ["unitnameat","selectunit"],
         "to",
         "selectmovetarget"
       ]
     }
   },
-  "graphics": {"icons":{"kings":"kings","queens":"queens"}},
+  "graphics": {"icons":{"kings":"king","queens":"queen"}},
   "board": {"height":5,"width":5},
   "setup": {
     "kings": {
@@ -30,7 +31,7 @@
     }
   },
   "endGame": {
-    "madewinline": { "condition": ["notempty","winline"] }
+    "madewinline": { "condition": ["notempty","winline"], "show": "winline" }
   },
   "startTurn": {
     "link": "selectunit"
@@ -68,11 +69,12 @@
     "findwinlines": {
       "type": "walker",
       "starts": "myunits",
+      "startasstep": true,
       "dirs": [1,2,3,4,5,6,7,8],
       "steps": ["ifelse",["anyat","mykings",["start"]],"mykings","myqueens"],
       "draw": {
         "start": {
-          "condition": ["same",["walklength"],2],
+          "condition": ["same",["walklength"],3],
           "tolayer": "winline"
         }
       }

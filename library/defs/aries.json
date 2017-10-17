@@ -19,7 +19,7 @@
       ]
     }
   },
-  "graphics": { "tiles": {"corner":"playercolour"}, "icons": {"soldiers":"rooks"} },
+  "graphics": { "tiles": {"corner":"playercolour"}, "icons": {"soldiers":"rook"} },
   "board": {
     "height": 8, "width": 8,
     "terrain": { "corner": {"1":["a1"],"2":["h8"]} }
@@ -27,7 +27,7 @@
   "setup": { "soldiers": { "1": [["rect","a1","d4"]], "2": [["rect","e5","h8"]] } },
   "startTurn": { "link": "selectunit" },
   "endGame": {
-    "invade": {"condition":["overlaps","oppcorner","myunits"]}
+    "invade": {"condition":["overlaps","oppcorner","myunits"],"show":["intersect","oppcorner","myunits"]}
   },
   "marks": {
     "selectunit": {

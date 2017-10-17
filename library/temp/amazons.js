@@ -7,8 +7,8 @@
     };
     game.graphics = {
       "icons": {
-        "queens": "queens",
-        "fires": "pawns"
+        "queens": "queen",
+        "fires": "pawn"
       }
     };
     game.board = {

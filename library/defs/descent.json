@@ -42,7 +42,7 @@
       ]
     }
   },
-  "graphics": {"icons": {"pawns":"pawns","knights":"knights","rooks":"rooks"} },
+  "graphics": {"icons": {"pawns":"pawn","knights":"knight","rooks":"rook"} },
   "board": {
     "height": 4, "width": 4
   },
@@ -54,7 +54,7 @@
     }
   },
   "endGame": {
-    "madeline": {"condition":["notempty","winline"]}
+    "madeline": {"condition":["notempty","winline"],"show":"winline"}
   },
   "startTurn": {
     "link": "selectunit"
@@ -135,6 +135,7 @@
     "findwinlines": {
       "type": "walker",
       "starts": "myunits",
+      "startasstep": true,
       "steps": ["ifelse",
         ["anyat","myrooks",["start"]],
         "myrooks",
@@ -146,7 +147,7 @@
       ],
       "draw": {
         "steps": {
-          "condition": ["morethan",["walklength"],1],
+          "condition": ["morethan",["walklength"],2],
           "tolayer": "winline"
         }
       }

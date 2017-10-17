@@ -10,8 +10,8 @@
         "bases": "castle"
       },
       "icons": {
-        "notfrozens": "knights",
-        "frozens": "rooks"
+        "notfrozens": "knight",
+        "frozens": "rook"
       }
     };
     game.board = {
@@ -471,6 +471,19 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'cornerinfiltration';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].cornerinfiltration =
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.oppcorners,
+                s1 = UNITLAYERS.myunits;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else
         if ((Object.keys(
             (function() {
@@ -487,6 +500,19 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'occupation';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].occupation =
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.oppbases,
+                s1 = UNITLAYERS.myunits;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -960,6 +986,19 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'cornerinfiltration';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].cornerinfiltration =
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.oppcorners,
+                s1 = UNITLAYERS.myunits;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else
         if ((Object.keys(
             (function() {
@@ -976,6 +1015,19 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'occupation';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].occupation =
+            (function() {
+              var ret = {},
+                s0 = TERRAIN.oppbases,
+                s1 = UNITLAYERS.myunits;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

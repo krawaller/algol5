@@ -22,7 +22,7 @@
       ]
     }
   },
-  "graphics": {"tiles":{"corners":"playercolour"},"icons":{"runners":"bishops","sidekickers":"pawns"}},
+  "graphics": {"tiles":{"corners":"playercolour"},"icons":{"runners":"bishop","sidekickers":"pawn"}},
   "board": {
     "height":5,"width":5,
     "terrain": { "corners": {"1":["a1"],"2":["e5"]} }
@@ -52,7 +52,7 @@
     }
   },
   "endGame": {
-    "infiltration": {"condition":["overlaps","myrunners","oppcorners"]}
+    "infiltration": {"condition":["overlaps","myrunners","oppcorners"],"show":["intersect","myrunners","oppcorners"]}
   },
   "generators": {
     "findmovetargets": {

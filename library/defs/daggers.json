@@ -5,8 +5,8 @@
     "source": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
     "tags": ["differentunits","asymmetric","multiplegoals","infiltrate","killking","capture"],
     "instructions": {
-      "startTurn": "Select which unit to move",
-      "selectunit": "Select where to move to",
+      "startTurn": ["line","Select a","bishop","or","king","to move"],
+      "selectunit": ["line","Select where to move the","selectunit",["unitnameat","selectunit"]],
       "selectmovetarget": ["line",
         "Press","move","to go",
         ["ifelse",
@@ -20,11 +20,7 @@
         "from","selectunit",
         ["ifelse",
           ["anyat","units","selectmovetarget"],
-          ["line","and kill the enemy",["ifelse",
-            ["anyat","crowns","selectmovetarget"],
-            "king",
-            "bishop"
-          ],"at","selectmovetarget"],
+          ["line","and kill the enemy",["unitnameat","selectmovetarget"],"at","selectmovetarget"],
           ["line","to","selectmovetarget"]
         ]
       ]
@@ -39,14 +35,14 @@
   },
   "graphics": {
     "tiles": { "bases": "playercolour" },
-    "icons": { "daggers": "bishops", "crowns": "kings" }
+    "icons": { "daggers": "bishop", "crowns": "king" }
   },
   "setup": {
     "crowns": {"1":["d8","e8"],"2":["c1","f1"]},
     "daggers": {"1":[["rect","c7","f7"]],"2":["c3","f3",["rect","b2","g2"]]}
   },
   "endGame": {
-    "infiltration":{ "condition": ["overlaps","mycrowns","oppbases"] },
+    "infiltration":{ "condition": ["overlaps","mycrowns","oppbases"], "show": ["intersect","mycrowns","oppbases"]},
     "kingkill": { "condition": ["same",["sizeof","oppcrowns"],1] }
   },
   "startTurn": {

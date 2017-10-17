@@ -7,7 +7,7 @@
     "author": "L. Lynn Smith",
     "year": 2001
   },
-  "graphics": {"icons":{"soldiers":"pawns"}},
+  "graphics": {"icons":{"soldiers":"pawn"}},
   "board": {"height":4,"width":4},
   "setup": {
     "soldiers": {

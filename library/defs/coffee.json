@@ -23,7 +23,7 @@
       ]
     }
   },
-  "graphics": {"icons": {"soldiers":"pawns","markers":"pawns"}},
+  "graphics": {"icons": {"soldiers":"pawn","markers":"pawn"}},
   "board": {"height":5,"width":5},
   "endTurn": {
     "unless": {
@@ -31,7 +31,7 @@
     }
   },
   "endGame": {
-    "madeline": {"condition":["notempty","winline"]}
+    "madeline": {"condition":["notempty","winline"],"show": "winline"}
   },
   "startTurn": {
     "link": "selectdrop"
@@ -104,9 +104,10 @@
       "type": "walker",
       "starts": "myunits",
       "steps": "myunits",
+      "startasstep": true,
       "draw": {
         "start": {
-          "condition": ["same",3,["walklength"]],
+          "condition": ["same",4,["walklength"]],
           "tolayer": "winline"
         }
       }

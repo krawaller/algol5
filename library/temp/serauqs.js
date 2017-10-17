@@ -7,8 +7,8 @@
     };
     game.graphics = {
       "icons": {
-        "soldiers": "pawns",
-        "wild": "kings"
+        "soldiers": "pawn",
+        "wild": "king"
       },
       "tiles": {
         "corners": "grass",

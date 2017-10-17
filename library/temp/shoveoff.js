@@ -9,7 +9,7 @@
     };
     game.graphics = {
       "icons": {
-        "soldiers": "pawns"
+        "soldiers": "pawn"
       }
     };
     game.board = {
@@ -336,6 +336,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.fourinarow;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -449,6 +451,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.fourinarow;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -562,6 +566,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.fourinarow;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -675,6 +681,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.fourinarow;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -1025,6 +1033,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.fourinarow;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -1138,6 +1148,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.fourinarow;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -1251,6 +1263,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.fourinarow;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -1364,6 +1378,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.fourinarow;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

@@ -6,8 +6,8 @@
     };
     game.graphics = {
       "icons": {
-        "soldiers": "pawns",
-        "kings": "kings"
+        "soldiers": "pawn",
+        "kings": "king"
       },
       "tiles": {
         "homerow": "playercolour"
@@ -202,11 +202,11 @@
               type: 'text',
               text: ", killing the enemy"
             }, (!!(UNITLAYERS.kings[MARKS["selectmovetarget"]]) ? {
-              type: 'text',
-              text: "king"
+              type: "unittyperef",
+              name: "king"
             } : {
-              type: 'text',
-              text: "pawn"
+              type: "unittyperef",
+              name: "pawn"
             })]
           }) : {
             type: 'nothing'
@@ -284,6 +284,19 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'swanhome';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].swanhome =
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.mykings,
+                s1 = TERRAIN.myhomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -511,11 +524,11 @@
               type: 'text',
               text: ", killing the enemy"
             }, (!!(UNITLAYERS.kings[MARKS["selectmovetarget"]]) ? {
-              type: 'text',
-              text: "king"
+              type: "unittyperef",
+              name: "king"
             } : {
-              type: 'text',
-              text: "pawn"
+              type: "unittyperef",
+              name: "pawn"
             })]
           }) : {
             type: 'nothing'
@@ -593,6 +606,19 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'swanhome';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].swanhome =
+            (function() {
+              var ret = {},
+                s0 = UNITLAYERS.mykings,
+                s1 = TERRAIN.myhomerow;
+              for (var key in s0) {
+                if (s1[key]) {
+                  ret[key] = s0[key];
+                }
+              }
+              return ret;
+            }());
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

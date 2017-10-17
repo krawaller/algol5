@@ -22,7 +22,7 @@
     }
   },
   "graphics": {
-    "icons": {"soldiers":"pawns","wild":"kings"},
+    "icons": {"soldiers":"pawn","wild":"king"},
     "tiles": {"corners":"grass","middle":"castle"}
   },
   "board": {

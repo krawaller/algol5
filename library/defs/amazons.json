@@ -15,7 +15,7 @@
     }
   },
   "graphics": {
-    "icons": { "queens": "queens", "fires": "pawns" }
+    "icons": { "queens": "queen", "fires": "pawn" }
   },
   "board": { "height": 10, "width": 10 },
   "setup": {

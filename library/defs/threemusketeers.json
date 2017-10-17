@@ -3,9 +3,23 @@
     "id": "threemusketeers",
     "name": "Three Musketeers",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/3musketeers.htm",
-    "tags": ["asymmetric","formation"]
+    "tags": ["asymmetric","formation"],
+    "instructions": {
+      "startTurn": ["playercase",
+        ["line","Select which","king","to move"],
+        ["line","Select which","pawn","to move"]
+      ],
+      "selectunit": ["playercase",
+        ["line","Select a","pawn","adjacent to the","selectunit","king","to attack"],
+        ["line","Select an empty space adjacent to the","selectunit","pawn","to move to"]
+      ],
+      "selectmovetarget": ["playercase",
+        ["line","Press","move","to make your","selectunit","king","attack the","selectmovetarget","pawn"],
+        ["line","Press","move","to go from","selectunit","to","selectmovetarget"]
+      ]
+    }
   },
-  "graphics": { "icons": {"pawns":"pawns","kings":"kings"}},
+  "graphics": { "icons": {"pawns":"pawn","kings":"king"}},
   "board": { "height": 5, "width": 5 },
   "setup": {
     "kings": {"1":["a1","c3","e5"]},
@@ -15,7 +29,7 @@
     "link": "selectunit"
   },
   "endGame": {
-    "musketeersinline": {"condition":["notempty","musketeerline"],"who":2},
+    "musketeersinline": {"condition":["notempty","musketeerline"],"who":2,"show":"kings"},
     "strandedmusketeers": {"condition":["same",["sizeof","strandedmusketeers"],3],"who":1}
   },
   "marks": {

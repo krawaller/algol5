@@ -6,8 +6,8 @@
     };
     game.graphics = {
       "icons": {
-        "pawns": "pawns",
-        "kings": "kings"
+        "pawns": "pawn",
+        "kings": "king"
       }
     };
     game.board = {
@@ -93,10 +93,29 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "pawn"
+          }, {
+            type: 'text',
+            text: "adjacent to the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "to attack"
+          }]
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -115,10 +134,35 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to make your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "attack the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }, {
+            type: "unittyperef",
+            name: "pawn"
+          }]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -193,6 +237,8 @@
           var winner = 2;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'musketeersinline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].musketeersinline = UNITLAYERS.kings;
         } else
         if ((Object.keys(ARTIFACTS.strandedmusketeers).length === 3)) {
           var winner = 1;
@@ -261,10 +307,19 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select which"
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug1 = function() {
         return {
@@ -309,10 +364,23 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select an empty space adjacent to the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "pawn"
+          }, {
+            type: 'text',
+            text: "to move to"
+          }]
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -331,10 +399,29 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to go from"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -424,6 +511,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'musketeersinline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].musketeersinline = UNITLAYERS.kings;
         } else
         if ((Object.keys(ARTIFACTS.strandedmusketeers).length === 3)) {
           var winner = 1;
@@ -492,10 +581,19 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select which"
+          }, {
+            type: "unittyperef",
+            name: "pawn"
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug2 = function() {
         return {

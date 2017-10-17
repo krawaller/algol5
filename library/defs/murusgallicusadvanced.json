@@ -6,7 +6,7 @@
     "tags": ["differentunits","infiltrate","shoot"],
     "author": "Phillip L. Leduc"
   },
-  "graphics": { "tiles": {"homerow":"playercolour"}, "icons": {"towers":"rooks","walls":"pawns","catapults":"queens"} },
+  "graphics": { "tiles": {"homerow":"playercolour"}, "icons": {"towers":"rook","walls":"pawn","catapults":"queen"} },
   "board": {
     "height": 7, "width": 8,
     "terrain": { "homerow": { "1": [["rect","a1","h1"]], "2":[["rect","a7","h7"]] } }
@@ -16,7 +16,7 @@
     "links": ["selecttower","selectcatapult"]
   },
   "endGame": {
-    "infiltration": {"condition":["overlaps","myunits","opphomerow"]}
+    "infiltration": {"condition":["overlaps","myunits","opphomerow"],"show":["intersect","myunits","opphomerow"]}
   },
   "marks": {
     "selecttower": {

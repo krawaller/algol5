@@ -6,7 +6,7 @@
     };
     game.graphics = {
       "icons": {
-        "checkers": "pawns"
+        "checkers": "pawn"
       }
     };
     game.board = {

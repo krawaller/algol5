@@ -4,11 +4,11 @@
     game.commands = {};
     game.graphics = {
       "icons": {
-        "stepsfirsts": "queens",
-        "blocksfirsts": "queens",
-        "defaultfirsts": "queens",
-        "noblocks": "queens",
-        "pawns": "pawns"
+        "stepsfirsts": "queen",
+        "blocksfirsts": "queen",
+        "defaultfirsts": "queen",
+        "noblocks": "queen",
+        "pawns": "pawn"
       },
       "tiles": {
         "steps": "grass"

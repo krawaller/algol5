@@ -5,11 +5,14 @@ import makeParser from './';
 
 export default function parseContent(gameDef: Definition, player: 1 | 2, action: string, expression, from){
   const parse = makeParser(gameDef, player, action, "id");
+  const usedIcons = Object.keys(gameDef.graphics.icons).map(g => gameDef.graphics.icons[g]);
   if (typeof expression === 'string'){
     if (gameDef.commands[expression] || expression === 'endturn'){
       return parse.content(['cmnd',expression]);
     } else if (gameDef.marks[expression]){
       return parse.content(['pos',expression]);
+    } else if (usedIcons.indexOf(expression) !== -1) {
+      return parse.content(['unitname',expression]);
     } else {
       return parse.content(['text',expression]);
     }
@@ -68,7 +71,14 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
         text: (temp = ${parse.val(num)}) + ' ' + ( temp === 1 ? ${parse.val(sing)} : ${parse.val(plur)})
       }`;
     }
-    case "nameat": {
+    case "unitname": {
+      const [name] = args;
+      return `{
+        type: "unittyperef",
+        name: ${parse.val(name)}
+      }`
+    }
+    case "unitnameat": {
       const [pos] = args;
       return `{
         type: "unittyperef",

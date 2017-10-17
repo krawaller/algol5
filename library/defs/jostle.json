@@ -34,7 +34,7 @@
     }
   },
   "graphics": {
-    "icons": { "checkers": "pawns" }
+    "icons": { "checkers": "pawn" }
   },
   "board": { "height": 10, "width": 10 },
   "setup": {

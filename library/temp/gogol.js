@@ -11,8 +11,8 @@
         "homerow": "playercolour"
       },
       "icons": {
-        "kings": "kings",
-        "soldiers": "pawns"
+        "kings": "king",
+        "soldiers": "pawn"
       }
     };
     game.board = {
@@ -295,7 +295,10 @@
               content: []
             }), {
               type: 'text',
-              text: "your king"
+              text: "your"
+            }, {
+              type: "unittyperef",
+              name: "king"
             },
             Object.keys(
               (function() {
@@ -337,6 +340,12 @@
             text: "or jump"
           } : {
             type: 'nothing'
+          }, {
+            type: 'text',
+            text: "your"
+          }, {
+            type: "unittyperef",
+            name: "pawn"
           }, Object.keys(ARTIFACTS.nosoldiers).length !== 0 ? {
             type: 'text',
             text: "without making a forbidden configuration"
@@ -419,6 +428,7 @@
       game.selectjumptarget1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
+        var UNITLAYERS = step.UNITLAYERS;
         return collapseLine({
           type: 'line',
           content: [{
@@ -441,7 +451,13 @@
             pos: MARKS["selectjumptarget"]
           }, {
             type: 'text',
-            text: " and kill the enemy at"
+            text: " and kill the"
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {})["group"]]
+          }, {
+            type: 'text',
+            text: "at"
           }, {
             type: 'text',
             text: Object.keys(ARTIFACTS.splashed)[0]
@@ -1034,7 +1050,10 @@
               content: []
             }), {
               type: 'text',
-              text: "your king"
+              text: "your"
+            }, {
+              type: "unittyperef",
+              name: "king"
             },
             Object.keys(
               (function() {
@@ -1076,6 +1095,12 @@
             text: "or jump"
           } : {
             type: 'nothing'
+          }, {
+            type: 'text',
+            text: "your"
+          }, {
+            type: "unittyperef",
+            name: "pawn"
           }, Object.keys(ARTIFACTS.nosoldiers).length !== 0 ? {
             type: 'text',
             text: "without making a forbidden configuration"
@@ -1158,6 +1183,7 @@
       game.selectjumptarget2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var ARTIFACTS = step.ARTIFACTS;
+        var UNITLAYERS = step.UNITLAYERS;
         return collapseLine({
           type: 'line',
           content: [{
@@ -1180,7 +1206,13 @@
             pos: MARKS["selectjumptarget"]
           }, {
             type: 'text',
-            text: " and kill the enemy at"
+            text: " and kill the"
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {})["group"]]
+          }, {
+            type: 'text',
+            text: "at"
           }, {
             type: 'text',
             text: Object.keys(ARTIFACTS.splashed)[0]

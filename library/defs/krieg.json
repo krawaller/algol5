@@ -20,7 +20,7 @@
   },
   "graphics": {
     "tiles": { "corners": "playercolour", "bases": "castle" },
-    "icons": { "notfrozens": "knights", "frozens": "rooks" }
+    "icons": { "notfrozens": "knight", "frozens": "rook" }
   },
   "board": {
     "width": 4, "height": 4,
@@ -49,8 +49,8 @@
     "link": "selectunit"
   },
   "endGame": {
-    "cornerinfiltration": {"condition": ["overlaps","oppcorners","myunits"]},
-    "occupation": {"condition": ["same",["sizeof",["intersect","oppbases","myunits"]],2]}
+    "cornerinfiltration": {"condition": ["overlaps","oppcorners","myunits"],"show":["intersect","oppcorners","myunits"]},
+    "occupation": {"condition": ["same",["sizeof",["intersect","oppbases","myunits"]],2], "show":["intersect","oppbases","myunits"]}
   },
   "commands": {
     "move": {

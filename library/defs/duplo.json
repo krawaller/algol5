@@ -34,7 +34,7 @@
     "width": 8
   },
   "graphics": {
-    "icons": { "soldiers": "pawns" }
+    "icons": { "soldiers": "pawn" }
   },
   "endGame": {
     "boardfull":{

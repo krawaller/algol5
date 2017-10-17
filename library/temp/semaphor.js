@@ -7,9 +7,9 @@
     };
     game.graphics = {
       "icons": {
-        "kings": "kings",
-        "pawns": "pawns",
-        "bishops": "bishops"
+        "kings": "king",
+        "pawns": "pawn",
+        "bishops": "bishop"
       }
     };
     game.board = {
@@ -428,14 +428,14 @@
                   [{
                     cond: Object.keys(UNITLAYERS.pawns).length !== 0,
                     content: {
-                      type: 'text',
-                      text: "pawn"
+                      type: "unittyperef",
+                      name: "pawn"
                     }
                   }, {
                     cond: Object.keys(UNITLAYERS.bishops).length !== 0,
                     content: {
-                      type: 'text',
-                      text: "bishop"
+                      type: "unittyperef",
+                      name: "bishop"
                     }
                   }].filter(function(elem) {
                     return elem.cond;
@@ -856,14 +856,14 @@
                   [{
                     cond: Object.keys(UNITLAYERS.pawns).length !== 0,
                     content: {
-                      type: 'text',
-                      text: "pawn"
+                      type: "unittyperef",
+                      name: "pawn"
                     }
                   }, {
                     cond: Object.keys(UNITLAYERS.bishops).length !== 0,
                     content: {
-                      type: 'text',
-                      text: "bishop"
+                      type: "unittyperef",
+                      name: "bishop"
                     }
                   }].filter(function(elem) {
                     return elem.cond;

@@ -224,8 +224,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((4 === WALKLENGTH)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((4 === WALKLENGTH)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }
@@ -329,8 +332,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((4 === WALKLENGTH)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((4 === WALKLENGTH)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }
@@ -434,8 +440,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((4 === WALKLENGTH)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((4 === WALKLENGTH)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }
@@ -539,8 +548,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((4 === WALKLENGTH)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((4 === WALKLENGTH)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }
@@ -819,8 +831,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((4 === WALKLENGTH)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((4 === WALKLENGTH)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }
@@ -924,8 +939,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((4 === WALKLENGTH)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((4 === WALKLENGTH)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }
@@ -1029,8 +1047,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((4 === WALKLENGTH)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((4 === WALKLENGTH)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }
@@ -1134,8 +1155,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((4 === WALKLENGTH)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((4 === WALKLENGTH)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }

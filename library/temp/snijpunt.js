@@ -190,13 +190,15 @@
           var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((WALKLENGTH > 2)) {
+            if ((WALKLENGTH > 3)) {
               ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? "winline" : "loseline")][STARTPOS] = {};
             }
           }
@@ -217,11 +219,15 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.winline;
         } else
         if (Object.keys(ARTIFACTS.loseline).length !== 0) {
           var winner = 2;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeoppline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeoppline = ARTIFACTS.loseline;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -459,13 +465,15 @@
           var allowedsteps = (!!(UNITLAYERS.mysoldiers[STARTPOS]) ? UNITLAYERS.mysoldiers : UNITLAYERS.oppsoldiers);
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((WALKLENGTH > 2)) {
+            if ((WALKLENGTH > 3)) {
               ARTIFACTS[(!!(UNITLAYERS.mysoldiers[STARTPOS]) ? "winline" : "loseline")][STARTPOS] = {};
             }
           }
@@ -486,11 +494,15 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.winline;
         } else
         if (Object.keys(ARTIFACTS.loseline).length !== 0) {
           var winner = 1;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeoppline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeoppline = ARTIFACTS.loseline;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

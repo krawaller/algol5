@@ -106,7 +106,7 @@
       "steps": "myunits",
       "startasstep": true,
       "draw": {
-        "start": {
+        "steps": {
           "condition": ["same",4,["walklength"]],
           "tolayer": "winline"
         }

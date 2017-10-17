@@ -20,8 +20,8 @@
     }
   },
   "endGame": {
-    "madeline": {"condition":["notempty","winline"]},
-    "madeoppline": {"condition":["notempty","loseline"],"who":["otherplayer"]}
+    "madeline": {"condition":["notempty","winline"],"show":"winline"},
+    "madeoppline": {"condition":["notempty","loseline"],"who":["otherplayer"],"show":"loseline"}
   },
   "startTurn": {
     "runGenerator": ["if",["notempty","oppsniper"],["all","findpotentialempties","findmandatory"]],
@@ -66,9 +66,10 @@
       "starts": "soldiers",
       "dirs": [1,2,3,4,5,6,7,8],
       "steps": ["ifelse",["anyat","mysoldiers",["start"]],"mysoldiers","oppsoldiers"],
+      "startasstep": true,
       "draw": {
         "start": {
-          "condition": ["morethan",["walklength"],2],
+          "condition": ["morethan",["walklength"],3],
           "tolayer": ["ifelse",["anyat","mysoldiers",["start"]],"winline","loseline"]
         }
       }

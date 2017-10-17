@@ -73,7 +73,7 @@
       "dirs": [1,2,3,4,5,6,7,8],
       "steps": ["ifelse",["anyat","mykings",["start"]],"mykings","myqueens"],
       "draw": {
-        "start": {
+        "steps": {
           "condition": ["same",["walklength"],3],
           "tolayer": "winline"
         }

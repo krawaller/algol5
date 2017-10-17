@@ -209,8 +209,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((WALKLENGTH === 3)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((WALKLENGTH === 3)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }
@@ -457,8 +460,11 @@
               walkedsquares.push(POS);
             }
             var WALKLENGTH = walkedsquares.length;
-            if ((WALKLENGTH === 3)) {
-              ARTIFACTS["winline"][STARTPOS] = {};
+            for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if ((WALKLENGTH === 3)) {
+                ARTIFACTS["winline"][POS] = {};
+              }
             }
           }
         }

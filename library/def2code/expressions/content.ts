@@ -47,8 +47,12 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
       return `{type:'playerref',player:${parse.val(plr)}}`;
     }
     case "cmnd": {
-      const [cmnd] = args;
-      return `{type:'cmndref',cmnd:${parse.val(cmnd)}}`;
+      const [cmnd,alias] = args;
+      if (alias){
+        return `{type:'cmndref',cmnd:${parse.val(cmnd)},alias:${parse.val(alias)}}`;
+      } else {
+        return `{type:'cmndref',cmnd:${parse.val(cmnd)}}`;
+      }
     }
     case "orlist": {
       return `[${args.map(([cond,content]) => `{cond: ${parse.bool(cond)}, content: ${parse.content(content)}}`)}].filter(function(elem){

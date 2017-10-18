@@ -1,4 +1,5 @@
 {
+  "TODO": "use different unit type for placeholders? Reference oppnent plr properly",
   "meta": {
     "id": "coffee",
     "name": "Coffee",

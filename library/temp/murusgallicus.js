@@ -731,10 +731,60 @@
         return newstep;
       };
       game.selecttower1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.movetargets).length !== 0,
+              content: {
+                type: 'text',
+                text: "a move target"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.killtargets).length !== 0,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "an enemy"
+                }, {
+                  type: "unittyperef",
+                  name: "pawn"
+                }, {
+                  type: 'text',
+                  text: "to kill"
+                }]
+              })
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "for the"
+            }, {
+              type: 'posref',
+              pos: MARKS["selecttower"]
+            }, {
+              type: "unittyperef",
+              name: "rook"
+            }
+          ]
+        });
       };
       game.selectmove1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -765,10 +815,32 @@
         return newstep;
       };
       game.selectmove1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to overturn your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selecttower"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "towards"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmove"]
+          }]
+        });
       };
       game.selectkill1 = function(turn, step, markpos) {
         var MARKS = {
@@ -787,10 +859,38 @@
         return newstep;
       };
       game.selectkill1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "kill"
+          }, {
+            type: 'text',
+            text: "to make a section of the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selecttower"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "crush the enemy"
+          }, {
+            type: "unittyperef",
+            name: "pawn"
+          }, {
+            type: 'text',
+            text: "at"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectkill"]
+          }]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -1038,10 +1138,19 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "to act with"
+          }]
+        });
       };
       game.debug1 = function() {
         return {
@@ -1699,10 +1808,60 @@
         return newstep;
       };
       game.selecttower2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.movetargets).length !== 0,
+              content: {
+                type: 'text',
+                text: "a move target"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.killtargets).length !== 0,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "an enemy"
+                }, {
+                  type: "unittyperef",
+                  name: "pawn"
+                }, {
+                  type: 'text',
+                  text: "to kill"
+                }]
+              })
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "for the"
+            }, {
+              type: 'posref',
+              pos: MARKS["selecttower"]
+            }, {
+              type: "unittyperef",
+              name: "rook"
+            }
+          ]
+        });
       };
       game.selectmove2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1733,10 +1892,32 @@
         return newstep;
       };
       game.selectmove2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to overturn your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selecttower"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "towards"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmove"]
+          }]
+        });
       };
       game.selectkill2 = function(turn, step, markpos) {
         var MARKS = {
@@ -1755,10 +1936,38 @@
         return newstep;
       };
       game.selectkill2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "kill"
+          }, {
+            type: 'text',
+            text: "to make a section of the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selecttower"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "crush the enemy"
+          }, {
+            type: "unittyperef",
+            name: "pawn"
+          }, {
+            type: 'text',
+            text: "at"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectkill"]
+          }]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -2006,10 +2215,19 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "to act with"
+          }]
+        });
       };
       game.debug2 = function() {
         return {

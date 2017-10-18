@@ -10,16 +10,18 @@ let Content = ({content, performCommand}: ContentProps)=> {
     return <span>{content}</span>;
   }
   switch(content.type){
+    case "page":
+    return <div>{content.content.map((c,i)=><Content content={c} performCommand={performCommand} key={i}/>)}</div>;
     case "line":
-      return <span>{content.content.map((c,i)=><Content content={c} performCommand={performCommand} key={i}/>)}</span>;
+      return <p className="line">{content.content.map((c,i)=><Content content={c} performCommand={performCommand} key={i}/>)}</p>;
     case "text":
-      return <span>{content.text}</span>;
+      return <span className={(content.text[0]||'').match(/[\,\.\!\?\:\;]/) ? "noleftmargin" : ""}>{content.text}</span>;
     case "end":
       return <span>{content.name}</span>;
     case "posref":
       return <span>{content.pos}</span>;
     case "cmndref":
-      return <button className="commandbtn" onClick={()=>performCommand(content.cmnd)}>{content.cmnd}</button>;
+      return <button onClick={()=>performCommand(content.cmnd)}>{content.alias || content.cmnd}</button>;
     case "playerref":
       return <span>{content.player}</span>;
     case "nothing":

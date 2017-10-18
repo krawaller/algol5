@@ -24,7 +24,8 @@
     -[ ] add cmnd exclusion logic
     -[ ] add unit tests
 -[x] Make possibilities deal with turnvars (see bogus layers in descent)
--[ ] New content data type, convert instructions  
+-[x] New content data type, convert instructions
+-[ ] Delete earlier marks from new win step
 
 ## Library TODO
 

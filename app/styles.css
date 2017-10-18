@@ -148,3 +148,7 @@
     display: flex;
     flex-direction: column;
 }
+
+.line > :not(:first-child):not(.noleftmargin) {
+    margin-left: 5px;
+}

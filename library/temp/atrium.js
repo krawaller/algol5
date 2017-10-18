@@ -99,7 +99,7 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: "Select orthogonal empty neighbour to move the"
+            text: "Select an orthogonal empty neighbour to move the"
           }, {
             type: 'posref',
             pos: MARKS["selectunit"]
@@ -296,10 +296,25 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select which unit to move"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "or"
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug1 = function() {
         return {
@@ -350,7 +365,7 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: "Select orthogonal empty neighbour to move the"
+            text: "Select an orthogonal empty neighbour to move the"
           }, {
             type: 'posref',
             pos: MARKS["selectunit"]
@@ -547,10 +562,25 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select which unit to move"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "or"
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug2 = function() {
         return {

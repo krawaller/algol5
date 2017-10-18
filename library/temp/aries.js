@@ -116,10 +116,20 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select where to move to"
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }]
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -176,10 +186,13 @@
             cmnd: "move"
           }, {
             type: 'text',
-            text: "to move from"
+            text: "to move your"
           }, {
             type: 'posref',
             pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
           }, {
             type: 'text',
             text: "to"
@@ -355,10 +368,19 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select which unit to move"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug1 = function() {
         return {
@@ -413,10 +435,20 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select where to move to"
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }]
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -473,10 +505,13 @@
             cmnd: "move"
           }, {
             type: 'text',
-            text: "to move from"
+            text: "to move your"
           }, {
             type: 'posref',
             pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
           }, {
             type: 'text',
             text: "to"
@@ -652,10 +687,19 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select which unit to move"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug2 = function() {
         return {

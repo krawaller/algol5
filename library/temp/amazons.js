@@ -177,10 +177,20 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select where to move the amazon"
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }]
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -448,10 +458,19 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select an amazon to move and fire with"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }, {
+            type: 'text',
+            text: "to move and fire with"
+          }]
+        });
       };
       game.debug1 = function() {
         return {
@@ -581,10 +600,20 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select where to move the amazon"
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }]
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -852,10 +881,19 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select an amazon to move and fire with"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a"
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }, {
+            type: 'text',
+            text: "to move and fire with"
+          }]
+        });
       };
       game.debug2 = function() {
         return {

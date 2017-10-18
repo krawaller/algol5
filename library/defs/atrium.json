@@ -7,8 +7,8 @@
     "author": "Guy Jeandel",
     "year": 2004,
     "instructions": {
-      "startTurn": "Select which unit to move",
-      "selectunit": ["line","Select orthogonal empty neighbour to move the","selectunit",["unitnameat","selectunit"],"to"],
+      "startTurn": ["line","Select a","king","or","queen","to move"],
+      "selectunit": ["line","Select an orthogonal empty neighbour to move the","selectunit",["unitnameat","selectunit"],"to"],
       "selectmovetarget": ["line",
         "Press","move","to walk the",
         "selectunit",

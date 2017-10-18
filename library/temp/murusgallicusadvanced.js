@@ -176,10 +176,60 @@
         return newstep;
       };
       game.selecttower1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.movetargets).length !== 0,
+              content: {
+                type: 'text',
+                text: "a move target"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.killtargets).length !== 0,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "an enemy"
+                }, {
+                  type: "unittyperef",
+                  name: "pawn"
+                }, {
+                  type: 'text',
+                  text: "to kill"
+                }]
+              })
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "for the"
+            }, {
+              type: 'posref',
+              pos: MARKS["selecttower"]
+            }, {
+              type: "unittyperef",
+              name: "rook"
+            }
+          ]
+        });
       };
       game.selectmove1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -211,10 +261,32 @@
         return newstep;
       };
       game.selectmove1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to overturn your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selecttower"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "towards"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmove"]
+          }]
+        });
       };
       game.selectkill1 = function(turn, step, markpos) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -237,10 +309,84 @@
         return newstep;
       };
       game.selectkill1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "kill"
+          }, {
+            type: 'text',
+            text: "to make a section of the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selecttower"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, (!!(UNITLAYERS.walls[MARKS["selectkill"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "crush the enemy"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }, {
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectkill"]
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "reduce the enemy"
+            }, {
+              type: 'text',
+              text: "catapult"
+            }, {
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectkill"]
+            }, {
+              type: 'text',
+              text: "to a tower, or"
+            }, {
+              type: 'cmndref',
+              cmnd: "sacrifice"
+            }, {
+              type: 'text',
+              text: "your"
+            }, {
+              type: 'text',
+              text: "tower"
+            }, {
+              type: 'text',
+              text: "entirely to turn the"
+            }, {
+              type: 'text',
+              text: "catapult"
+            }, {
+              type: 'text',
+              text: "to a"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }, {
+              type: 'text',
+              text: "!"
+            }]
+          }))]
+        });
       };
       game.selectcatapult1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -281,10 +427,20 @@
         return newstep;
       };
       game.selectcatapult1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to fire the top section of your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectcatapult"]
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }]
+        });
       };
       game.selectfire1 = function(turn, step, markpos) {
         var MARKS = {
@@ -303,10 +459,84 @@
         return newstep;
       };
       game.selectfire1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "fire"
+          }, {
+            type: 'text',
+            text: "to shoot a section of the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectcatapult"]
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }, (!!(UNITLAYERS.walls[MARKS["selectfire"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "and destroy the enemy"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }, {
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectfire"]
+            }]
+          }) : (!!(UNITLAYERS.units[MARKS["selectfire"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: ", reducing the enemy"
+            }, {
+              type: "unittyperef",
+              name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectfire"]] || {})["group"]]
+            }, {
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectfire"]
+            }, {
+              type: 'text',
+              text: "to a"
+            }, (!!(UNITLAYERS.catapults[MARKS["selectfire"]]) ? {
+              type: "unittyperef",
+              name: "rook"
+            } : {
+              type: "unittyperef",
+              name: "pawn"
+            })]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectfire"]
+            }, {
+              type: 'text',
+              text: ", gaining a"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }, {
+              type: 'text',
+              text: "there"
+            }]
+          })))]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -803,10 +1033,44 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select a"
+            },
+            [{
+              cond: Object.keys(UNITLAYERS.mytowers).length !== 0,
+              content: {
+                type: "unittyperef",
+                name: "rook"
+              }
+            }, {
+              cond: Object.keys(UNITLAYERS.mycatapults).length !== 0,
+              content: {
+                type: "unittyperef",
+                name: "queen"
+              }
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "to act with"
+            }
+          ]
+        });
       };
       game.debug1 = function() {
         return {
@@ -906,10 +1170,60 @@
         return newstep;
       };
       game.selecttower2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select"
+            },
+            [{
+              cond: Object.keys(ARTIFACTS.movetargets).length !== 0,
+              content: {
+                type: 'text',
+                text: "a move target"
+              }
+            }, {
+              cond: Object.keys(ARTIFACTS.killtargets).length !== 0,
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "an enemy"
+                }, {
+                  type: "unittyperef",
+                  name: "pawn"
+                }, {
+                  type: 'text',
+                  text: "to kill"
+                }]
+              })
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "for the"
+            }, {
+              type: 'posref',
+              pos: MARKS["selecttower"]
+            }, {
+              type: "unittyperef",
+              name: "rook"
+            }
+          ]
+        });
       };
       game.selectmove2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -941,10 +1255,32 @@
         return newstep;
       };
       game.selectmove2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to overturn your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selecttower"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, {
+            type: 'text',
+            text: "towards"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmove"]
+          }]
+        });
       };
       game.selectkill2 = function(turn, step, markpos) {
         var UNITLAYERS = step.UNITLAYERS;
@@ -967,10 +1303,84 @@
         return newstep;
       };
       game.selectkill2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "kill"
+          }, {
+            type: 'text',
+            text: "to make a section of the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selecttower"]
+          }, {
+            type: "unittyperef",
+            name: "rook"
+          }, (!!(UNITLAYERS.walls[MARKS["selectkill"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "crush the enemy"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }, {
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectkill"]
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "reduce the enemy"
+            }, {
+              type: 'text',
+              text: "catapult"
+            }, {
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectkill"]
+            }, {
+              type: 'text',
+              text: "to a tower, or"
+            }, {
+              type: 'cmndref',
+              cmnd: "sacrifice"
+            }, {
+              type: 'text',
+              text: "your"
+            }, {
+              type: 'text',
+              text: "tower"
+            }, {
+              type: 'text',
+              text: "entirely to turn the"
+            }, {
+              type: 'text',
+              text: "catapult"
+            }, {
+              type: 'text',
+              text: "to a"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }, {
+              type: 'text',
+              text: "!"
+            }]
+          }))]
+        });
       };
       game.selectcatapult2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -1011,10 +1421,20 @@
         return newstep;
       };
       game.selectcatapult2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to fire the top section of your"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectcatapult"]
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }]
+        });
       };
       game.selectfire2 = function(turn, step, markpos) {
         var MARKS = {
@@ -1033,10 +1453,84 @@
         return newstep;
       };
       game.selectfire2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "fire"
+          }, {
+            type: 'text',
+            text: "to shoot a section of the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectcatapult"]
+          }, {
+            type: "unittyperef",
+            name: "queen"
+          }, (!!(UNITLAYERS.walls[MARKS["selectfire"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "and destroy the enemy"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }, {
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectfire"]
+            }]
+          }) : (!!(UNITLAYERS.units[MARKS["selectfire"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: ", reducing the enemy"
+            }, {
+              type: "unittyperef",
+              name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectfire"]] || {})["group"]]
+            }, {
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectfire"]
+            }, {
+              type: 'text',
+              text: "to a"
+            }, (!!(UNITLAYERS.catapults[MARKS["selectfire"]]) ? {
+              type: "unittyperef",
+              name: "rook"
+            } : {
+              type: "unittyperef",
+              name: "pawn"
+            })]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "at"
+            }, {
+              type: 'posref',
+              pos: MARKS["selectfire"]
+            }, {
+              type: 'text',
+              text: ", gaining a"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }, {
+              type: 'text',
+              text: "there"
+            }]
+          })))]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -1533,10 +2027,44 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var UNITLAYERS = step.UNITLAYERS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+              type: 'text',
+              text: "Select a"
+            },
+            [{
+              cond: Object.keys(UNITLAYERS.mytowers).length !== 0,
+              content: {
+                type: "unittyperef",
+                name: "rook"
+              }
+            }, {
+              cond: Object.keys(UNITLAYERS.mycatapults).length !== 0,
+              content: {
+                type: "unittyperef",
+                name: "queen"
+              }
+            }].filter(function(elem) {
+              return elem.cond;
+            }).reduce(function(mem, elem, n, list) {
+              mem.content.push(elem.content);
+              if (n === list.length - 2) {
+                mem.content.push("or");
+              } else if (n < list.length - 2) {
+                mem.content.push(",");
+              }
+              return mem;
+            }, {
+              type: "line",
+              content: []
+            }), {
+              type: 'text',
+              text: "to act with"
+            }
+          ]
+        });
       };
       game.debug2 = function() {
         return {

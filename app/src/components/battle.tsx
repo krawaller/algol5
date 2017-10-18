@@ -44,6 +44,9 @@ class Battle extends React.Component <BattleProps,BattleState> {
     this.setState({step: idx});
   }
   doAction(action) {
+    if (action === "history"){
+      return this.selectStep(0);
+    }
     this.setState({waiting: action}, ()=>{
       this.props.algol.performAction(this.state.UI.sessionId,action).then((UI:BattleUI)=>{
         this.setState({

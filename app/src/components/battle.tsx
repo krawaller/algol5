@@ -157,7 +157,7 @@ class Battle extends React.Component <BattleProps,BattleState> {
         </div>
         <div>
           {UI && !inHistory && ctrls.commands && <Commands openHistory={()=>this.selectStep(0)} hasHistory={maxStep > 0} locked={!plrCanAct} gameCommands={ctrls.commands} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction}/>}
-          {UI && inHistory && <Playback stepIndex={this.state.step} maxStep={maxStep} selectStep={this.selectStep} onGoing={!UI.endedBy} />}
+          {UI && inHistory && <Playback turn={step.turn} idx={this.state.step} stepIdx={step.stepIdx} maxStepIdx={step.maxStepIdx} maxIdx={maxStep} selectStep={this.selectStep} onGoing={!UI.endedBy} />}
           <div><Content content={info} performCommand={this.doAction} /></div>
       </div>
       </div>

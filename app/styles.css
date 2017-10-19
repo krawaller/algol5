@@ -156,7 +156,8 @@
 .posref {
     border: 1px solid black;
     display: inline-block;
-    width: 20px;
+    padding: 0 3px;
+    min-width: 20px;
     height: 20px;
     text-align: center;
     line-height: 20px;

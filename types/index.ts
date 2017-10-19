@@ -53,9 +53,13 @@ export type StepUI = {
   turn: number,
   description?: Content,
   idx?: number,
+  stepIdx?: number,
+  maxStepIdx?: number,
 }
 
-export type Content = string | {type: string, [other:string]: any};
+export type ComplexContent = {type: string, [other:string]: any};
+
+export type Content = ComplexContent | string;
 
 export type StepControlUI = {
   potentialMarks: PositionList

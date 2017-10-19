@@ -349,8 +349,8 @@
               type: 'text',
               text: "reduce the enemy"
             }, {
-              type: 'text',
-              text: "catapult"
+              type: "unittyperef",
+              name: "queen"
             }, {
               type: 'text',
               text: "at"
@@ -359,7 +359,13 @@
               pos: MARKS["selectkill"]
             }, {
               type: 'text',
-              text: "to a tower, or"
+              text: "to a"
+            }, {
+              type: "unittyperef",
+              name: "rook"
+            }, {
+              type: 'text',
+              text: ", or"
             }, {
               type: 'cmndref',
               cmnd: "sacrifice"
@@ -367,14 +373,14 @@
               type: 'text',
               text: "your"
             }, {
-              type: 'text',
-              text: "tower"
+              type: "unittyperef",
+              name: "rook"
             }, {
               type: 'text',
               text: "entirely to turn the"
             }, {
-              type: 'text',
-              text: "catapult"
+              type: "unittyperef",
+              name: "queen"
             }, {
               type: 'text',
               text: "to a"
@@ -1343,8 +1349,8 @@
               type: 'text',
               text: "reduce the enemy"
             }, {
-              type: 'text',
-              text: "catapult"
+              type: "unittyperef",
+              name: "queen"
             }, {
               type: 'text',
               text: "at"
@@ -1353,7 +1359,13 @@
               pos: MARKS["selectkill"]
             }, {
               type: 'text',
-              text: "to a tower, or"
+              text: "to a"
+            }, {
+              type: "unittyperef",
+              name: "rook"
+            }, {
+              type: 'text',
+              text: ", or"
             }, {
               type: 'cmndref',
               cmnd: "sacrifice"
@@ -1361,14 +1373,14 @@
               type: 'text',
               text: "your"
             }, {
-              type: 'text',
-              text: "tower"
+              type: "unittyperef",
+              name: "rook"
             }, {
               type: 'text',
               text: "entirely to turn the"
             }, {
-              type: 'text',
-              text: "catapult"
+              type: "unittyperef",
+              name: "queen"
             }, {
               type: 'text',
               text: "to a"

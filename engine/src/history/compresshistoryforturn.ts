@@ -8,7 +8,7 @@ import {pos2coords} from '../../gamesproxy';
 import { Session, Turn, StepUI } from '../types';
 
 export default function compressedHistoryForTurn(session: Session): StepUI[] {
-  return session.step.path.reduce((mem,action)=> {
+  return session.step.path.reduce((mem,action,n)=> {
     mem.id += '-' + action
     if (session.game.commands[action]){ // TODO - do boilUntil here instead? :D have cmnds array as default?
       let UI = getStepUI(session, session.turn.steps[mem.id]);
@@ -21,5 +21,9 @@ export default function compressedHistoryForTurn(session: Session): StepUI[] {
       mem.marks.push(action);
     }
     return mem;
-  },{marks:[], UIs: [], id: 'root'}).UIs;
+  },{marks:[], UIs: [], id: 'root'}).UIs.map((UI,n,list) => ({
+    ...UI,
+    stepIdx: n + 1,
+    maxStepIdx: list.length
+  }));
 }

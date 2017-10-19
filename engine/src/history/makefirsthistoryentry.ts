@@ -13,5 +13,7 @@ export default function seedHistory(newSession: Session): StepUI {
   UI.playing = 0;
   UI.turn = 0;
   UI.idx = 0;
+  UI.stepIdx = 1;
+  UI.maxStepIdx = 1;
   return UI;
 }

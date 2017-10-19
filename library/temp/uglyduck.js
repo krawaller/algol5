@@ -119,13 +119,31 @@
       game.selectunit1instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? {
-          type: 'text',
-          text: "Select a square closer to home to move your king to"
-        } : {
-          type: 'text',
-          text: "Select a square closer to the enemy lines to move your pawn to"
-        });
+        return (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a square closer to home to move your"
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "to"
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a square closer to the enemy lines to move your"
+          }, {
+            type: "unittyperef",
+            name: "pawn"
+          }, {
+            type: 'text',
+            text: "to"
+          }]
+        }));
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var MARKS = {
@@ -157,13 +175,25 @@
           }, {
             type: 'text',
             text: "to"
-          }, (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? {
-            type: 'text',
-            text: "retreat your king"
-          } : {
-            type: 'text',
-            text: "advance your pawn"
-          }), {
+          }, (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "retreat your"
+            }, {
+              type: "unittyperef",
+              name: "king"
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "advance your"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }]
+          })), {
             type: 'text',
             text: "from"
           }, {
@@ -201,13 +231,10 @@
             content: [{
               type: 'text',
               text: ", killing the enemy"
-            }, (!!(UNITLAYERS.kings[MARKS["selectmovetarget"]]) ? {
+            }, {
               type: "unittyperef",
-              name: "king"
-            } : {
-              type: "unittyperef",
-              name: "pawn"
-            })]
+              name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectmovetarget"]] || {})["group"]]
+            }]
           }) : {
             type: 'nothing'
           }]
@@ -367,16 +394,34 @@
             },
             [{
               cond: Object.keys(UNITLAYERS.mysoldiers).length !== 0,
-              content: {
-                type: 'text',
-                text: "a pawn to advance"
-              }
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "a"
+                }, {
+                  type: "unittyperef",
+                  name: "pawn"
+                }, {
+                  type: 'text',
+                  text: "to advance"
+                }]
+              })
             }, {
               cond: Object.keys(UNITLAYERS.mykings).length !== 0,
-              content: {
-                type: 'text',
-                text: "a king to retreat"
-              }
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "a"
+                }, {
+                  type: "unittyperef",
+                  name: "king"
+                }, {
+                  type: 'text',
+                  text: "to retreat"
+                }]
+              })
             }].filter(function(elem) {
               return elem.cond;
             }).reduce(function(mem, elem, n, list) {
@@ -441,13 +486,31 @@
       game.selectunit2instruction = function(turn, step) {
         var MARKS = step.MARKS;
         var UNITLAYERS = step.UNITLAYERS;
-        return (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? {
-          type: 'text',
-          text: "Select a square closer to home to move your king to"
-        } : {
-          type: 'text',
-          text: "Select a square closer to the enemy lines to move your pawn to"
-        });
+        return (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a square closer to home to move your"
+          }, {
+            type: "unittyperef",
+            name: "king"
+          }, {
+            type: 'text',
+            text: "to"
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a square closer to the enemy lines to move your"
+          }, {
+            type: "unittyperef",
+            name: "pawn"
+          }, {
+            type: 'text',
+            text: "to"
+          }]
+        }));
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var MARKS = {
@@ -479,13 +542,25 @@
           }, {
             type: 'text',
             text: "to"
-          }, (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? {
-            type: 'text',
-            text: "retreat your king"
-          } : {
-            type: 'text',
-            text: "advance your pawn"
-          }), {
+          }, (!!(UNITLAYERS.mykings[MARKS["selectunit"]]) ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "retreat your"
+            }, {
+              type: "unittyperef",
+              name: "king"
+            }]
+          }) : collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "advance your"
+            }, {
+              type: "unittyperef",
+              name: "pawn"
+            }]
+          })), {
             type: 'text',
             text: "from"
           }, {
@@ -523,13 +598,10 @@
             content: [{
               type: 'text',
               text: ", killing the enemy"
-            }, (!!(UNITLAYERS.kings[MARKS["selectmovetarget"]]) ? {
+            }, {
               type: "unittyperef",
-              name: "king"
-            } : {
-              type: "unittyperef",
-              name: "pawn"
-            })]
+              name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectmovetarget"]] || {})["group"]]
+            }]
           }) : {
             type: 'nothing'
           }]
@@ -689,16 +761,34 @@
             },
             [{
               cond: Object.keys(UNITLAYERS.mysoldiers).length !== 0,
-              content: {
-                type: 'text',
-                text: "a pawn to advance"
-              }
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "a"
+                }, {
+                  type: "unittyperef",
+                  name: "pawn"
+                }, {
+                  type: 'text',
+                  text: "to advance"
+                }]
+              })
             }, {
               cond: Object.keys(UNITLAYERS.mykings).length !== 0,
-              content: {
-                type: 'text',
-                text: "a king to retreat"
-              }
+              content: collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "a"
+                }, {
+                  type: "unittyperef",
+                  name: "king"
+                }, {
+                  type: 'text',
+                  text: "to retreat"
+                }]
+              })
             }].filter(function(elem) {
               return elem.cond;
             }).reduce(function(mem, elem, n, list) {

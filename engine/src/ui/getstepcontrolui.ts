@@ -3,6 +3,8 @@
 */
 
 import isEndGameCommand from '../various/isgameendcmnd';
+import getStepInstruction from './getstepinstruction';
+import getStepSystemInstruction from './getstepsysteminstruction';
 import { pos2coords } from '../../gamesproxy';
 
 import {BattleUI, StepUI, StepControlUI, Session, Step} from '../types';
@@ -35,68 +37,15 @@ export default function getStepControlUI(session: Session, step: Step): StepCont
         });
       }
     });
-    let instruction = game[step.name+turn.player+'instruction'](turn,step);
-    if (isEmptyContent(controls.instruction) && controls.submit){
-      instruction = {
-        type: "line",
-        content: [{
-          type: "text",
-          text: "Press"
-        },{
-          type: "cmndref",
-          cmnd: "endturn",
-          alias: "submit"
-        },{
-          type: "text",
-          text: "to end your turn."
-        }]
-      };
-    };
-    if (instruction.type !== "line"){
-      instruction = {
-        type: "line",
-        content: [instruction]
-      };
+    controls.instruction = getStepInstruction(session, step, !!controls.submit);
+
+    let system = getStepSystemInstruction(session, step, controls.undo);
+    if (system){
+      controls.instruction.content.push(system);
     }
-    controls.instruction = {
-      type: "page",
-      content: [instruction]
-    };
-    let hasHistory = turn.turn > 1 || step.path.length > 1; // TODO ?
-    let hasUndo = !!controls.undo;
-    if (hasHistory && !hasUndo){
-      controls.instruction.content.push({
-        type: "line",
-        content: [
-          {type:"text",text:"You can also check the"},
-          {type:"cmndref",cmnd:"history"},
-          {type:"text",text:"of previous positions"}
-        ]
-      });
-    } else if (!hasHistory && hasUndo){
-      controls.instruction.content.push({
-        type: "line",
-        content: [
-          {type:"text",text:"You may also"},
-          {type:"cmndref",cmnd:"undo",alias:"undo the " + controls.undo},
-          {type:"text",text:"."}
-        ]
-      });
-    } else if (hasHistory && hasUndo){
-      controls.instruction.content.push({
-        type: "line",
-        content: [
-          {type:"text",text:"You can also check the"},
-          {type:"cmndref",cmnd:"history"},
-          {type:"text",text:"of previous positions, or"},
-          {type:"cmndref",cmnd:"undo",alias:"undo the " + controls.undo},
-          {type:"text",text:"."}
-        ]
-      });
-    }
+
   } else {
-    // TODO - this is never shown, because we don't have instruction anymore. move this?
-    controls.instruction = session.winner ? "Player " + session.winner + " won by " + session.endedBy : "Game ended in a draw!";
+
   }
   return controls;
 }

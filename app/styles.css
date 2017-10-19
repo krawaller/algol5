@@ -152,3 +152,25 @@
 .line > :not(:first-child):not(.noleftmargin) {
     margin-left: 5px;
 }
+
+.posref {
+    border: 1px solid black;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+.unittyperef {
+    display: inline-block;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0 5px;
+    line-height: 20px;
+    vertical-align: middle;
+    color: white;
+    background-color: #555;
+}

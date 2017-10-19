@@ -19,15 +19,15 @@ let Content = ({content, performCommand}: ContentProps)=> {
     case "end":
       return <span>{content.name}</span>;
     case "posref":
-      return <span>{content.pos}</span>;
+      return <span className="posref">{content.pos}</span>;
     case "cmndref":
       return <button onClick={()=>performCommand(content.cmnd)}>{content.alias || content.cmnd}</button>;
     case "playerref":
-      return <span>{content.player}</span>;
+      return <span className="playerref">{content.player}</span>;
     case "nothing":
       return null;
     case "unittyperef":
-      return <span>{content.name}</span>;
+      return <span className="unittyperef">{content.name}</span>;
     default:
       console.log("Oh no :(", content);
       throw "Unknown content: " + content;

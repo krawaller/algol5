@@ -11,6 +11,7 @@
     -[ ] Nicify "current"
     -[x] Playback controls
     -[x] Button current<->history toggle
+-[ ] SquareInfo impl
 
 ## Engine TODO
 
@@ -26,6 +27,7 @@
 -[x] Make possibilities deal with turnvars (see bogus layers in descent)
 -[x] New content data type, convert instructions
 -[ ] Delete earlier marks from new win step
+-[ ] SquareInfo func
 
 ## Library TODO
 

@@ -37,7 +37,7 @@ export default function getStepControlUI(session: Session, step: Step): StepCont
         });
       }
     });
-    controls.instruction = getStepInstruction(session, step, !!controls.submit);
+    controls.instruction = getStepInstruction(session, step, controls.submit);
 
     let system = getStepSystemInstruction(session, step, controls.undo);
     if (system){

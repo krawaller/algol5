@@ -109,10 +109,21 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }]
+        });
       };
       game.selectmovetarget1 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -145,10 +156,68 @@
         return newstep;
       };
       game.selectmovetarget1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }, Object.keys(ARTIFACTS.victims).length !== 0 ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "and take over"
+            }, {
+              type: "line",
+              content: [{
+                type: "text",
+                text: Object.keys(ARTIFACTS.victims).length
+              }, Object.keys(ARTIFACTS.victims).length === 1 ? collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "enemy"
+                }, {
+                  type: "unittyperef",
+                  alias: "pawn",
+                  name: "pawn".replace(/s$/, '')
+                }]
+              }) : collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "enemy"
+                }, {
+                  type: "unittyperef",
+                  alias: "pawns",
+                  name: "pawns".replace(/s$/, '')
+                }]
+              })]
+            }]
+          }) : {
+            type: 'nothing'
+          }]
+        });
       };
       game.move1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -261,10 +330,20 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select which"
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug1 = function() {
         return {
@@ -326,10 +405,21 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }]
+        });
       };
       game.selectmovetarget2 = function(turn, step, markpos) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
@@ -362,10 +452,68 @@
         return newstep;
       };
       game.selectmovetarget2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        var MARKS = step.MARKS;
+        var ARTIFACTS = step.ARTIFACTS;
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Press"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "to move the"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectunit"]
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'posref',
+            pos: MARKS["selectmovetarget"]
+          }, Object.keys(ARTIFACTS.victims).length !== 0 ? collapseLine({
+            type: 'line',
+            content: [{
+              type: 'text',
+              text: "and take over"
+            }, {
+              type: "line",
+              content: [{
+                type: "text",
+                text: Object.keys(ARTIFACTS.victims).length
+              }, Object.keys(ARTIFACTS.victims).length === 1 ? collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "enemy"
+                }, {
+                  type: "unittyperef",
+                  alias: "pawn",
+                  name: "pawn".replace(/s$/, '')
+                }]
+              }) : collapseLine({
+                type: 'line',
+                content: [{
+                  type: 'text',
+                  text: "enemy"
+                }, {
+                  type: "unittyperef",
+                  alias: "pawns",
+                  name: "pawns".replace(/s$/, '')
+                }]
+              })]
+            }]
+          }) : {
+            type: 'nothing'
+          }]
+        });
       };
       game.move2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
@@ -478,10 +626,20 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: ""
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select which"
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to move"
+          }]
+        });
       };
       game.debug2 = function() {
         return {

@@ -126,7 +126,8 @@
             text: "Select a square closer to home to move your"
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to"
@@ -138,7 +139,8 @@
             text: "Select a square closer to the enemy lines to move your"
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to"
@@ -182,7 +184,8 @@
               text: "retreat your"
             }, {
               type: "unittyperef",
-              name: "king"
+              alias: "king",
+              name: "king".replace(/s$/, '')
             }]
           }) : collapseLine({
             type: 'line',
@@ -191,7 +194,8 @@
               text: "advance your"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }]
           })), {
             type: 'text',
@@ -401,7 +405,8 @@
                   text: "a"
                 }, {
                   type: "unittyperef",
-                  name: "pawn"
+                  alias: "pawn",
+                  name: "pawn".replace(/s$/, '')
                 }, {
                   type: 'text',
                   text: "to advance"
@@ -416,7 +421,8 @@
                   text: "a"
                 }, {
                   type: "unittyperef",
-                  name: "king"
+                  alias: "king",
+                  name: "king".replace(/s$/, '')
                 }, {
                   type: 'text',
                   text: "to retreat"
@@ -493,7 +499,8 @@
             text: "Select a square closer to home to move your"
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to"
@@ -505,7 +512,8 @@
             text: "Select a square closer to the enemy lines to move your"
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to"
@@ -549,7 +557,8 @@
               text: "retreat your"
             }, {
               type: "unittyperef",
-              name: "king"
+              alias: "king",
+              name: "king".replace(/s$/, '')
             }]
           }) : collapseLine({
             type: 'line',
@@ -558,7 +567,8 @@
               text: "advance your"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }]
           })), {
             type: 'text',
@@ -768,7 +778,8 @@
                   text: "a"
                 }, {
                   type: "unittyperef",
-                  name: "pawn"
+                  alias: "pawn",
+                  name: "pawn".replace(/s$/, '')
                 }, {
                   type: 'text',
                   text: "to advance"
@@ -783,7 +794,8 @@
                   text: "a"
                 }, {
                   type: "unittyperef",
-                  name: "king"
+                  alias: "king",
+                  name: "king".replace(/s$/, '')
                 }, {
                   type: 'text',
                   text: "to retreat"

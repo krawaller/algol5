@@ -303,13 +303,15 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "or"
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move"
@@ -569,13 +571,15 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "or"
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move"

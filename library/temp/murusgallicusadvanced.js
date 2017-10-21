@@ -199,7 +199,8 @@
                   text: "an enemy"
                 }, {
                   type: "unittyperef",
-                  name: "pawn"
+                  alias: "pawn",
+                  name: "pawn".replace(/s$/, '')
                 }, {
                   type: 'text',
                   text: "to kill"
@@ -226,7 +227,8 @@
               pos: MARKS["selecttower"]
             }, {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             }
           ]
         });
@@ -278,7 +280,8 @@
             pos: MARKS["selecttower"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "towards"
@@ -327,7 +330,8 @@
             pos: MARKS["selecttower"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, (!!(UNITLAYERS.walls[MARKS["selectkill"]]) ? collapseLine({
             type: 'line',
             content: [{
@@ -335,7 +339,8 @@
               text: "crush the enemy"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }, {
               type: 'text',
               text: "at"
@@ -350,7 +355,8 @@
               text: "reduce the enemy"
             }, {
               type: "unittyperef",
-              name: "queen"
+              alias: "queen",
+              name: "queen".replace(/s$/, '')
             }, {
               type: 'text',
               text: "at"
@@ -362,7 +368,8 @@
               text: "to a"
             }, {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             }, {
               type: 'text',
               text: ", or"
@@ -374,19 +381,22 @@
               text: "your"
             }, {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             }, {
               type: 'text',
               text: "entirely to turn the"
             }, {
               type: "unittyperef",
-              name: "queen"
+              alias: "queen",
+              name: "queen".replace(/s$/, '')
             }, {
               type: 'text',
               text: "to a"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }, {
               type: 'text',
               text: "!"
@@ -444,7 +454,8 @@
             pos: MARKS["selectcatapult"]
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }]
         });
       };
@@ -483,7 +494,8 @@
             pos: MARKS["selectcatapult"]
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }, (!!(UNITLAYERS.walls[MARKS["selectfire"]]) ? collapseLine({
             type: 'line',
             content: [{
@@ -491,7 +503,8 @@
               text: "and destroy the enemy"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }, {
               type: 'text',
               text: "at"
@@ -518,10 +531,12 @@
               text: "to a"
             }, (!!(UNITLAYERS.catapults[MARKS["selectfire"]]) ? {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             } : {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             })]
           }) : collapseLine({
             type: 'line',
@@ -536,7 +551,8 @@
               text: ", gaining a"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }, {
               type: 'text',
               text: "there"
@@ -1050,13 +1066,15 @@
               cond: Object.keys(UNITLAYERS.mytowers).length !== 0,
               content: {
                 type: "unittyperef",
-                name: "rook"
+                alias: "rook",
+                name: "rook".replace(/s$/, '')
               }
             }, {
               cond: Object.keys(UNITLAYERS.mycatapults).length !== 0,
               content: {
                 type: "unittyperef",
-                name: "queen"
+                alias: "queen",
+                name: "queen".replace(/s$/, '')
               }
             }].filter(function(elem) {
               return elem.cond;
@@ -1199,7 +1217,8 @@
                   text: "an enemy"
                 }, {
                   type: "unittyperef",
-                  name: "pawn"
+                  alias: "pawn",
+                  name: "pawn".replace(/s$/, '')
                 }, {
                   type: 'text',
                   text: "to kill"
@@ -1226,7 +1245,8 @@
               pos: MARKS["selecttower"]
             }, {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             }
           ]
         });
@@ -1278,7 +1298,8 @@
             pos: MARKS["selecttower"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "towards"
@@ -1327,7 +1348,8 @@
             pos: MARKS["selecttower"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, (!!(UNITLAYERS.walls[MARKS["selectkill"]]) ? collapseLine({
             type: 'line',
             content: [{
@@ -1335,7 +1357,8 @@
               text: "crush the enemy"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }, {
               type: 'text',
               text: "at"
@@ -1350,7 +1373,8 @@
               text: "reduce the enemy"
             }, {
               type: "unittyperef",
-              name: "queen"
+              alias: "queen",
+              name: "queen".replace(/s$/, '')
             }, {
               type: 'text',
               text: "at"
@@ -1362,7 +1386,8 @@
               text: "to a"
             }, {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             }, {
               type: 'text',
               text: ", or"
@@ -1374,19 +1399,22 @@
               text: "your"
             }, {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             }, {
               type: 'text',
               text: "entirely to turn the"
             }, {
               type: "unittyperef",
-              name: "queen"
+              alias: "queen",
+              name: "queen".replace(/s$/, '')
             }, {
               type: 'text',
               text: "to a"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }, {
               type: 'text',
               text: "!"
@@ -1444,7 +1472,8 @@
             pos: MARKS["selectcatapult"]
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }]
         });
       };
@@ -1483,7 +1512,8 @@
             pos: MARKS["selectcatapult"]
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }, (!!(UNITLAYERS.walls[MARKS["selectfire"]]) ? collapseLine({
             type: 'line',
             content: [{
@@ -1491,7 +1521,8 @@
               text: "and destroy the enemy"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }, {
               type: 'text',
               text: "at"
@@ -1518,10 +1549,12 @@
               text: "to a"
             }, (!!(UNITLAYERS.catapults[MARKS["selectfire"]]) ? {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             } : {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             })]
           }) : collapseLine({
             type: 'line',
@@ -1536,7 +1569,8 @@
               text: ", gaining a"
             }, {
               type: "unittyperef",
-              name: "pawn"
+              alias: "pawn",
+              name: "pawn".replace(/s$/, '')
             }, {
               type: 'text',
               text: "there"
@@ -2050,13 +2084,15 @@
               cond: Object.keys(UNITLAYERS.mytowers).length !== 0,
               content: {
                 type: "unittyperef",
-                name: "rook"
+                alias: "rook",
+                name: "rook".replace(/s$/, '')
               }
             }, {
               cond: Object.keys(UNITLAYERS.mycatapults).length !== 0,
               content: {
                 type: "unittyperef",
-                name: "queen"
+                alias: "queen",
+                name: "queen".replace(/s$/, '')
               }
             }].filter(function(elem) {
               return elem.cond;

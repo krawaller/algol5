@@ -5,7 +5,8 @@ import makeParser from './';
 
 export default function parseContent(gameDef: Definition, player: 1 | 2, action: string, expression, from){
   const parse = makeParser(gameDef, player, action, "id");
-  const usedIcons = Object.keys(gameDef.graphics.icons).map(g => gameDef.graphics.icons[g]);
+  const usedIcons = Object.keys(gameDef.graphics.icons)
+    .reduce((mem,g) => mem.concat(gameDef.graphics.icons[g]).concat(gameDef.graphics.icons[g]+'s'), []);
   if (typeof expression === 'string'){
     if (gameDef.commands[expression] || expression === 'endturn'){
       return parse.content(['cmnd',expression]);
@@ -71,15 +72,16 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
     case "pluralise": {
       const [num,sing,plur] = args;
       return `{
-        type: "text",
-        text: (temp = ${parse.val(num)}) + ' ' + ( temp === 1 ? ${parse.val(sing)} : ${parse.val(plur)})
+        type: "line",
+        content: [{type:"text",text: ${parse.val(num)}}, ${parse.val(num)} === 1 ? ${parse.content(sing)} : ${parse.content(plur)}]
       }`;
     }
     case "unitname": {
       const [name] = args;
       return `{
         type: "unittyperef",
-        name: ${parse.val(name)}
+        alias: ${parse.val(name)},
+        name: ${parse.val(name)}.replace(/s$/,'')
       }`
     }
     case "unitnameat": {

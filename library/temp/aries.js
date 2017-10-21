@@ -127,7 +127,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }]
         });
       };
@@ -192,7 +193,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to"
@@ -375,7 +377,8 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move"
@@ -446,7 +449,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }]
         });
       };
@@ -511,7 +515,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to"
@@ -694,7 +699,8 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move"

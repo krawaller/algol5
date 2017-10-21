@@ -378,13 +378,15 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "bishop"
+            alias: "bishop",
+            name: "bishop".replace(/s$/, '')
           }, {
             type: 'text',
             text: "or"
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move"
@@ -695,13 +697,15 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "bishop"
+            alias: "bishop",
+            name: "bishop".replace(/s$/, '')
           }, {
             type: 'text',
             text: "or"
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move"

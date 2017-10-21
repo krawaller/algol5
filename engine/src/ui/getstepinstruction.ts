@@ -11,12 +11,12 @@ function isEmptyContent(content){
   return !content || (content.type === "text" && !content.text);
 }
 
-export default function getStepInstruction(session: Session, step: Step, canSubmit: boolean): ComplexContent {
+export default function getStepInstruction(session: Session, step: Step, submitCmnd: string): ComplexContent {
   let {game,turn} = session;
   let instruction;
   if (!session.endedBy){
     instruction = game[step.name+turn.player+'instruction'](turn,step);
-    if (isEmptyContent(instruction) && canSubmit){
+    if (isEmptyContent(instruction) && submitCmnd){
       instruction = {
         type: "line",
         content: [{
@@ -24,7 +24,7 @@ export default function getStepInstruction(session: Session, step: Step, canSubm
           text: "Press"
         },{
           type: "cmndref",
-          cmnd: "endturn",
+          cmnd: submitCmnd,
           alias: "submit"
         },{
           type: "text",
@@ -49,6 +49,5 @@ export default function getStepInstruction(session: Session, step: Step, canSubm
     type: "page",
     content: [instruction]
   };
-  console.log("INSTR",instruction);
   return instruction;
 }

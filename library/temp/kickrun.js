@@ -133,7 +133,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "bishop"
+            alias: "bishop",
+            name: "bishop".replace(/s$/, '')
           }]
         }) : collapseLine({
           type: 'line',
@@ -145,7 +146,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }]
         }));
       };
@@ -428,7 +430,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "bishop"
+            alias: "bishop",
+            name: "bishop".replace(/s$/, '')
           }]
         }) : collapseLine({
           type: 'line',
@@ -440,7 +443,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }]
         }));
       };

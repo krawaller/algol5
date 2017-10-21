@@ -175,3 +175,7 @@
     color: white;
     background-color: #555;
 }
+
+.step p, .step p{
+    margin: 0;
+}

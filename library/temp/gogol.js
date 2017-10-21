@@ -298,7 +298,8 @@
               text: "your"
             }, {
               type: "unittyperef",
-              name: "king"
+              alias: "king",
+              name: "king".replace(/s$/, '')
             },
             Object.keys(
               (function() {
@@ -345,7 +346,8 @@
             text: "your"
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, Object.keys(ARTIFACTS.nosoldiers).length !== 0 ? {
             type: 'text',
             text: "without making a forbidden configuration"
@@ -1053,7 +1055,8 @@
               text: "your"
             }, {
               type: "unittyperef",
-              name: "king"
+              alias: "king",
+              name: "king".replace(/s$/, '')
             },
             Object.keys(
               (function() {
@@ -1100,7 +1103,8 @@
             text: "your"
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, Object.keys(ARTIFACTS.nosoldiers).length !== 0 ? {
             type: 'text',
             text: "without making a forbidden configuration"

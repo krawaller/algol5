@@ -27,7 +27,7 @@ let Content = ({content, performCommand}: ContentProps)=> {
     case "nothing":
       return null;
     case "unittyperef":
-      return <span className="unittyperef">{content.name}</span>;
+      return <span className="unittyperef">{content.alias || content.name}</span>;
     default:
       console.log("Oh no :(", content);
       throw "Unknown content: " + content;

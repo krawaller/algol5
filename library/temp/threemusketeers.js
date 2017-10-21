@@ -101,7 +101,8 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, {
             type: 'text',
             text: "adjacent to the"
@@ -110,7 +111,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to attack"
@@ -151,7 +153,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "attack the"
@@ -160,7 +163,8 @@
             pos: MARKS["selectmovetarget"]
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }]
         });
       };
@@ -314,7 +318,8 @@
             text: "Select which"
           }, {
             type: "unittyperef",
-            name: "king"
+            alias: "king",
+            name: "king".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move"
@@ -375,7 +380,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move to"
@@ -588,7 +594,8 @@
             text: "Select which"
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move"

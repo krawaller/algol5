@@ -97,14 +97,32 @@
             type: 'text',
             text: "This unit neighbours"
           }, {
-            type: "text",
-            text: (temp = Object.keys(ARTIFACTS.initialfriend).length) + ' ' + (temp === 1 ? "friend" : "friends")
+            type: "line",
+            content: [{
+              type: "text",
+              text: Object.keys(ARTIFACTS.initialfriend).length
+            }, Object.keys(ARTIFACTS.initialfriend).length === 1 ? {
+              type: 'text',
+              text: "friend"
+            } : {
+              type: 'text',
+              text: "friends"
+            }]
           }, {
             type: 'text',
             text: "and"
           }, {
-            type: "text",
-            text: (temp = Object.keys(ARTIFACTS.initialenemy).length) + ' ' + (temp === 1 ? "enemy" : "enemies")
+            type: "line",
+            content: [{
+              type: "text",
+              text: Object.keys(ARTIFACTS.initialenemy).length
+            }, Object.keys(ARTIFACTS.initialenemy).length === 1 ? {
+              type: 'text',
+              text: "enemy"
+            } : {
+              type: 'text',
+              text: "enemies"
+            }]
           }, {
             type: 'text',
             text: "making the square worth"
@@ -165,14 +183,32 @@
             type: 'text',
             text: "you would neighbour"
           }, {
-            type: "text",
-            text: (temp = (Object.keys(ARTIFACTS.newfriend).length - 1)) + ' ' + (temp === 1 ? "friend" : "friends")
+            type: "line",
+            content: [{
+              type: "text",
+              text: (Object.keys(ARTIFACTS.newfriend).length - 1)
+            }, (Object.keys(ARTIFACTS.newfriend).length - 1) === 1 ? {
+              type: 'text',
+              text: "friend"
+            } : {
+              type: 'text',
+              text: "friends"
+            }]
           }, {
             type: 'text',
             text: "and"
           }, {
-            type: "text",
-            text: (temp = Object.keys(ARTIFACTS.newenemy).length) + ' ' + (temp === 1 ? "enemy" : "enemies")
+            type: "line",
+            content: [{
+              type: "text",
+              text: Object.keys(ARTIFACTS.newenemy).length
+            }, Object.keys(ARTIFACTS.newenemy).length === 1 ? {
+              type: 'text',
+              text: "enemy"
+            } : {
+              type: 'text',
+              text: "enemies"
+            }]
           }, {
             type: 'text',
             text: ", making it worth"
@@ -365,14 +401,32 @@
             type: 'text',
             text: "This unit neighbours"
           }, {
-            type: "text",
-            text: (temp = Object.keys(ARTIFACTS.initialfriend).length) + ' ' + (temp === 1 ? "friend" : "friends")
+            type: "line",
+            content: [{
+              type: "text",
+              text: Object.keys(ARTIFACTS.initialfriend).length
+            }, Object.keys(ARTIFACTS.initialfriend).length === 1 ? {
+              type: 'text',
+              text: "friend"
+            } : {
+              type: 'text',
+              text: "friends"
+            }]
           }, {
             type: 'text',
             text: "and"
           }, {
-            type: "text",
-            text: (temp = Object.keys(ARTIFACTS.initialenemy).length) + ' ' + (temp === 1 ? "enemy" : "enemies")
+            type: "line",
+            content: [{
+              type: "text",
+              text: Object.keys(ARTIFACTS.initialenemy).length
+            }, Object.keys(ARTIFACTS.initialenemy).length === 1 ? {
+              type: 'text',
+              text: "enemy"
+            } : {
+              type: 'text',
+              text: "enemies"
+            }]
           }, {
             type: 'text',
             text: "making the square worth"
@@ -433,14 +487,32 @@
             type: 'text',
             text: "you would neighbour"
           }, {
-            type: "text",
-            text: (temp = (Object.keys(ARTIFACTS.newfriend).length - 1)) + ' ' + (temp === 1 ? "friend" : "friends")
+            type: "line",
+            content: [{
+              type: "text",
+              text: (Object.keys(ARTIFACTS.newfriend).length - 1)
+            }, (Object.keys(ARTIFACTS.newfriend).length - 1) === 1 ? {
+              type: 'text',
+              text: "friend"
+            } : {
+              type: 'text',
+              text: "friends"
+            }]
           }, {
             type: 'text',
             text: "and"
           }, {
-            type: "text",
-            text: (temp = Object.keys(ARTIFACTS.newenemy).length) + ' ' + (temp === 1 ? "enemy" : "enemies")
+            type: "line",
+            content: [{
+              type: "text",
+              text: Object.keys(ARTIFACTS.newenemy).length
+            }, Object.keys(ARTIFACTS.newenemy).length === 1 ? {
+              type: 'text',
+              text: "enemy"
+            } : {
+              type: 'text',
+              text: "enemies"
+            }]
           }, {
             type: 'text',
             text: ", making it worth"

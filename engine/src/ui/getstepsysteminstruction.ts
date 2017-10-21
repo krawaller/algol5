@@ -42,6 +42,5 @@ export default function getStepSystemInstruction(session: Session, step: Step, u
       ]
     };
   }
-  console.log("SYSTEM",instruction);
   return instruction;
 }

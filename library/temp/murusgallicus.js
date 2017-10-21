@@ -754,7 +754,8 @@
                   text: "an enemy"
                 }, {
                   type: "unittyperef",
-                  name: "pawn"
+                  alias: "pawn",
+                  name: "pawn".replace(/s$/, '')
                 }, {
                   type: 'text',
                   text: "to kill"
@@ -781,7 +782,8 @@
               pos: MARKS["selecttower"]
             }, {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             }
           ]
         });
@@ -832,7 +834,8 @@
             pos: MARKS["selecttower"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "towards"
@@ -876,13 +879,15 @@
             pos: MARKS["selecttower"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "crush the enemy"
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, {
             type: 'text',
             text: "at"
@@ -1145,7 +1150,8 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to act with"
@@ -1831,7 +1837,8 @@
                   text: "an enemy"
                 }, {
                   type: "unittyperef",
-                  name: "pawn"
+                  alias: "pawn",
+                  name: "pawn".replace(/s$/, '')
                 }, {
                   type: 'text',
                   text: "to kill"
@@ -1858,7 +1865,8 @@
               pos: MARKS["selecttower"]
             }, {
               type: "unittyperef",
-              name: "rook"
+              alias: "rook",
+              name: "rook".replace(/s$/, '')
             }
           ]
         });
@@ -1909,7 +1917,8 @@
             pos: MARKS["selecttower"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "towards"
@@ -1953,13 +1962,15 @@
             pos: MARKS["selecttower"]
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "crush the enemy"
           }, {
             type: "unittyperef",
-            name: "pawn"
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
           }, {
             type: 'text',
             text: "at"
@@ -2222,7 +2233,8 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "rook"
+            alias: "rook",
+            name: "rook".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to act with"

@@ -188,7 +188,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }]
         });
       };
@@ -465,7 +466,8 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move and fire with"
@@ -611,7 +613,8 @@
             pos: MARKS["selectunit"]
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }]
         });
       };
@@ -888,7 +891,8 @@
             text: "Select a"
           }, {
             type: "unittyperef",
-            name: "queen"
+            alias: "queen",
+            name: "queen".replace(/s$/, '')
           }, {
             type: 'text',
             text: "to move and fire with"

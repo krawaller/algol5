@@ -429,13 +429,15 @@
                     cond: Object.keys(UNITLAYERS.pawns).length !== 0,
                     content: {
                       type: "unittyperef",
-                      name: "pawn"
+                      alias: "pawn",
+                      name: "pawn".replace(/s$/, '')
                     }
                   }, {
                     cond: Object.keys(UNITLAYERS.bishops).length !== 0,
                     content: {
                       type: "unittyperef",
-                      name: "bishop"
+                      alias: "bishop",
+                      name: "bishop".replace(/s$/, '')
                     }
                   }].filter(function(elem) {
                     return elem.cond;
@@ -857,13 +859,15 @@
                     cond: Object.keys(UNITLAYERS.pawns).length !== 0,
                     content: {
                       type: "unittyperef",
-                      name: "pawn"
+                      alias: "pawn",
+                      name: "pawn".replace(/s$/, '')
                     }
                   }, {
                     cond: Object.keys(UNITLAYERS.bishops).length !== 0,
                     content: {
                       type: "unittyperef",
-                      name: "bishop"
+                      alias: "bishop",
+                      name: "bishop".replace(/s$/, '')
                     }
                   }].filter(function(elem) {
                     return elem.cond;

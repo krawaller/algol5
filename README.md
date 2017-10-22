@@ -26,12 +26,15 @@
     -[ ] add unit tests
 -[x] Make possibilities deal with turnvars (see bogus layers in descent)
 -[x] New content data type, convert instructions
--[ ] Delete earlier marks from new win step
 -[ ] SquareInfo func
+-[ ] Allow non-super-hydration
+    -[ ] mechanism for when
+    -[ ] handle in domark/docmnd
+
 
 ## Library TODO
 
--[ ] Add rules etc to games
+-[x] Add instructions to all games
 -[x] Tests for shoveoff
 -[x] Tests for descent
 -[x] Tests for duplo

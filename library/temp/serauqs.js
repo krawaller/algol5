@@ -240,6 +240,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.winline;
         } else
         if ((Object.keys(
             (function() {
@@ -268,6 +270,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madex';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madex = TERRAIN.corners;
         } else
         if ((Object.keys(
             (function() {
@@ -296,6 +300,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'tookcenter';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].tookcenter = TERRAIN.middle;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -373,17 +379,19 @@
         for (var STARTPOS in walkstarts) {
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
             var walkpositionstocount = TERRAIN.mybase;
             var CURRENTCOUNT = 0;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
               CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
             }
             var WALKLENGTH = walkedsquares.length;
             var TOTALCOUNT = CURRENTCOUNT;
-            if (((WALKLENGTH === 3) && (TOTALCOUNT !== 3))) {
+            if (((WALKLENGTH === 4) && (TOTALCOUNT !== 4))) {
               ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
@@ -403,6 +411,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.winline;
         } else
         if ((Object.keys(
             (function() {
@@ -431,6 +441,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madex';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madex = TERRAIN.corners;
         } else
         if ((Object.keys(
             (function() {
@@ -459,6 +471,8 @@
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'tookcenter';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].tookcenter = TERRAIN.middle;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -687,6 +701,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.winline;
         } else
         if ((Object.keys(
             (function() {
@@ -715,6 +731,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madex';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madex = TERRAIN.corners;
         } else
         if ((Object.keys(
             (function() {
@@ -743,6 +761,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'tookcenter';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].tookcenter = TERRAIN.middle;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -820,17 +840,19 @@
         for (var STARTPOS in walkstarts) {
           var allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
           for (var walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
+            var DIR = allwalkerdirs[walkerdirnbr];
             var walkedsquares = [];
-            var POS = STARTPOS;
+            var POS = "faux";
+            connections.faux[DIR] = STARTPOS;
             var walkpositionstocount = TERRAIN.mybase;
             var CURRENTCOUNT = 0;
-            while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS]) {
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
               walkedsquares.push(POS);
               CURRENTCOUNT += (walkpositionstocount[POS] ? 1 : 0);
             }
             var WALKLENGTH = walkedsquares.length;
             var TOTALCOUNT = CURRENTCOUNT;
-            if (((WALKLENGTH === 3) && (TOTALCOUNT !== 3))) {
+            if (((WALKLENGTH === 4) && (TOTALCOUNT !== 4))) {
               ARTIFACTS["winline"][STARTPOS] = {};
             }
           }
@@ -850,6 +872,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madeline';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madeline = ARTIFACTS.winline;
         } else
         if ((Object.keys(
             (function() {
@@ -878,6 +902,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'madex';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].madex = TERRAIN.corners;
         } else
         if ((Object.keys(
             (function() {
@@ -906,6 +932,8 @@
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
           turn.links[newstepid][result] = 'tookcenter';
+          turn.endMarks[newstepid] = turn.endMarks[newstepid] ||  {};
+          turn.endMarks[newstepid].tookcenter = TERRAIN.middle;
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

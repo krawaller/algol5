@@ -94,7 +94,7 @@
       "count": "mybase",
       "startasstep": true,
       "draw": {
-        "start": {
+        "steps": {
           "condition": ["and",
             ["same",["walklength"],4],
             ["different",["totalcount"],4]

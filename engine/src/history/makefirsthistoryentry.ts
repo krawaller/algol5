@@ -1,6 +1,5 @@
 /*
-WIP?
-Returns array of UI objects for given turn, with adjusted marks
+
 */
 
 import getStepUI from '../ui/getstepui';

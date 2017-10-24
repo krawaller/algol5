@@ -12,7 +12,8 @@ export default function hydrateTurn(game: Game, turn: Turn): Turn { // TODO - fo
     win: [],
     draw: [],
     lose: [],
-  }
+  };
+  turn.deadEnds = {};
   turn.next = {}
   hydrateStep(game,turn,turn.steps.root)
   return turn;

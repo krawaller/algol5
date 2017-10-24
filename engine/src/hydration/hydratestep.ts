@@ -39,9 +39,11 @@ export default function hydrateStep(game: Game, turn: Turn, step: Step): boolean
       if (hydrateStep(game,turn,nextstep)){
         canend = true
       } else {
-        delete steplinks[action] // TODO - only this is actually needed
-        delete steps[nextstepid]
-        delete links[nextstepid]
+        //delete steplinks[action] // TODO - only this is actually needed
+        //delete steps[nextstepid]
+        //delete links[nextstepid]
+        turn.deadEnds[stepid] = turn.deadEnds[stepid] || {};
+        turn.deadEnds[stepid][action] = true;
       }
     }
   }

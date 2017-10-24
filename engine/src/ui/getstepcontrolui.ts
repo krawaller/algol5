@@ -22,6 +22,7 @@ export default function getStepControlUI(session: Session, step: Step): StepCont
     submit: null,
     undo: null,
     instruction: null,
+    deadEnds: session.turn.deadEnds[step.stepid],
   };
   if (!session.endedBy){
     controls.undo = undo.length ? undo[undo.length-1].actionName : null;

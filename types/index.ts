@@ -70,6 +70,9 @@ export type StepControlUI = {
   submit: 'endturn' | 'win' | 'draw' | 'lose' | null
   undo: string | null,
   turnStart: boolean,
+  deadEnds: {
+    [action: string]: true;
+  }
 };
 
 type FunctionName = string;
@@ -114,6 +117,11 @@ export type Turn = {
     lose: string[],
     draw: string[]
   },
+  deadEnds: {
+    [stepid: string]: {
+      [action: string]: true
+    }
+  }
   steps: {
     [stepid: string]: Step
   },
@@ -170,6 +178,7 @@ export type Session = {
   saveString?: string,
   history: StepUI[],
   currentSteps: StepUI[],
+  inflating?: boolean,
 }
 
 export type Definition = any;

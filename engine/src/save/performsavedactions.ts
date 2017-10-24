@@ -3,11 +3,13 @@ import decodeSessionSave from './decodesessionsave';
 import makePlayer from '../../test/makeplayer';
 import optionsInUI from '../various/optionsinui';
 
+import { BattleUI, SaveData } from '../types';
+
 import api from '../.';
 
-export default function inflateFromSave(saveString: string){
-  let {gameId, battleId, turnNumber, moveIndexes, ended} = decodeSessionSave(saveString);
-  let UI = api.startGame(gameId,makePlayer(1),makePlayer(2),battleId); // TODO - make save handle player info! :P
+export default function performSavedActions(UI: BattleUI, saveData: SaveData): BattleUI {
+  let {gameId, battleId, turnNumber, moveIndexes, ended} = saveData // decodeSessionSave(saveString);
+  //let UI = api.startGame(gameId,makePlayer(1),makePlayer(2),battleId); // TODO - make save handle player info! :P
   while(UI.current.UI.turn < turnNumber || UI.current.UI.turn == turnNumber && ended && !UI.endedBy){
     let action, available = optionsInUI(UI);
     if (available.length === 1){

@@ -8,7 +8,7 @@ import {games,meta} from '../gamesproxy';
 import * as omit from 'lodash/omit';
 import * as random from 'lodash/random';
 
-import inflateFromSave from './save/inflatefromsave';
+import performSavedActions from './save/performsavedactions';
 import decodeSessionSave from './save/decodesessionsave';
 import optionsInUI from './various/optionsinui';
 import newSession from './session/newsession';
@@ -71,7 +71,12 @@ const api = {
   Yeeeah
   */
   inflateFromSave(saveString){
-    return inflateFromSave(saveString);
+    let saveData = decodeSessionSave(saveString);
+    let UI = api.startGame(saveData.gameId,makePlayer(1),makePlayer(2),saveData.battleId); // TODO - make save handle player info! :P
+    sessions[UI.sessionId].inflating = true;
+    UI = performSavedActions(UI, saveData);
+    sessions[UI.sessionId].inflating = false;
+    return UI;
   },
   /*
   Wooh! :D

@@ -17,7 +17,7 @@ scripts.forEach(([name, gameId,lines], n) => {
       cmnds.forEach(cmnd => {
         UI = algol.performAction(UI.sessionId, cmnd);
       });
-      t.deepEqual(optionsInUI(UI), expectedUI, "executed " + ((cmnds.length?cmnds:["start"]).join(",")) + ", got UI " + expectedUI.join(","));
+      t.deepEqual(optionsInUI(UI,true), expectedUI, "executed " + ((cmnds.length?cmnds:["start"]).join(",")) + ", got UI " + expectedUI.join(","));
     });
   });
 });

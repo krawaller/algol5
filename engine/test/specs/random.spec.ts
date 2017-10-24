@@ -21,7 +21,7 @@ function makeRandomMovesInGame(gameId, n){
   let turncount = 0;
   let path = [];
   do {
-    let available = optionsInUI(UI);
+    let available = optionsInUI(UI,true);
     let cmnd = shuffle(available)[0];
     if (cmnd === 'endturn'){
       turncount++;
@@ -48,6 +48,7 @@ Object.keys(omit(games,['_test'])).forEach(gameKey => {
       UI = makeRandomMovesInGame(game.id, NUMBEROFTURNS);
     }, `No error is thrown`);
     let restored = algol.inflateFromSave(UI.save);
+    console.log("Save str length", UI.save.length);
     t.deepEqual( omit(restored,['sessionId']), omit(UI,['sessionId']), `Save restores to same state` );
   });
 });

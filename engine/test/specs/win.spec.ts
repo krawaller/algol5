@@ -31,7 +31,7 @@ test(`The win mechanics`, t => {
     let action = remaining.shift();
     UI = algol.performAction(UI.sessionId, action);
   }
-  t.deepEqual(optionsInUI(UI), [], 'No options are available in a finished game');
+  t.deepEqual(optionsInUI(UI,true), [], 'No options are available in a finished game');
   t.equal(UI.winner, 1, 'The winner was correctly registered');
   t.equal(UI.endedBy, 'cornerinfiltration', 'The win condition was correctly registered');
   let newUI = algol.inflateFromSave(UI.save);

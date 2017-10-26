@@ -181,4 +181,91 @@ export type Session = {
   inflating?: boolean,
 }
 
-export type Definition = any;
+/* ---------------------------------------- Definition stuff ----------------------------------------  */
+
+export type Meta = any;
+export type Graphics = any;
+export type Board = any;
+export type Setup = any;
+export type AI = any;
+export type CommandDef = any;
+export type MarkDef = any;
+export type StartTurn = any;
+export type EndGameDef = any;
+export type GeneratorDef = WalkerDef | NeighbourDef | FilterDef;
+
+export type DrawDef = {
+  tolayer: any
+  include?: any
+  condition?: any
+  ifover?: any
+  unlessover?: any
+}
+
+export type WalkerDef = {
+  type: 'walker'
+  dir?: any
+  dirs?: any
+  start?: any
+  starts?: any
+  steps?: any
+  testblocksbeforesteps?: boolean
+  blocks?: any
+  count?: any
+  startasstep?: boolean
+  max?: any
+  draw: {
+    start?: DrawDef
+    steps?: DrawDef
+    block?: DrawDef
+    last?: DrawDef
+    all?: DrawDef
+    count?: DrawDef
+  }
+}
+
+export type NeighbourDef = {
+  type: 'neighbour'
+  condition?: any
+  ifover?: any
+  unlessover?: any
+  draw: {
+    start?: DrawDef
+    neighbours?: DrawDef
+  }
+}
+
+export type FilterDef = {
+  type: 'filter'
+  layer: any
+  tolayer: any
+  matching?: any
+}
+
+export type Definition = {
+  TODO?: string
+  meta: Meta
+  graphics: Graphics
+  board: Board
+  setup?: Setup
+  startTurn?: StartTurn
+  canalwaysend?: {
+    [name: string]: true
+  }
+  endGame?: {
+    [endgamename: string]: EndGameDef
+  }
+  endTurn?: {
+    unless: any
+  }
+  AI?: AI
+  commands: {
+    [cmndname: string]: CommandDef
+  }
+  marks: {
+    [markname: string]: MarkDef
+  }
+  generators: {
+    [genname: string]: GeneratorDef
+  }
+};

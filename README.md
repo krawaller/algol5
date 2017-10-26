@@ -27,9 +27,9 @@
 -[x] Make possibilities deal with turnvars (see bogus layers in descent)
 -[x] New content data type, convert instructions
 -[ ] SquareInfo func
--[ ] Allow non-super-hydration
-    -[ ] mechanism for when
-    -[ ] handle in domark/docmnd
+-[x] Allow non-super-hydration
+    -[x] mechanism for when
+    -[x] handle in domark/docmnd
 
 
 ## Library TODO

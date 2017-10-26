@@ -1,4 +1,5 @@
 {
+  "TODO": "findaffected SHOULD BE AN OFFSET",
   "meta": {
     "id": "shoveoff",
     "name": "Shove off",
@@ -104,7 +105,6 @@
   },
   "generators": {
     "findaffected": {
-      "TODO": "SHOULD BE AN OFFSET",
       "type": "walker",
       "start": "selectpushpoint",
       "dirs": [1,3,5,7],

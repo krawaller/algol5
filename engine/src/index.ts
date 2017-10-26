@@ -10,6 +10,7 @@ import * as random from 'lodash/random';
 
 import performSavedActions from './save/performsavedactions';
 import decodeSessionSave from './save/decodesessionsave';
+import updateSessionSave from './save/updatesessionsave';
 import optionsInUI from './various/optionsinui';
 import newSession from './session/newsession';
 import getBattleUI from './ui/getbattleui';
@@ -17,6 +18,7 @@ import makeSessionAction from './session/makesessionaction';
 import findBestTurnEndPaths from './ai/findbestturnendpaths';
 import getRandomTurnEndPath from './ai/getrandomturnendpath';
 import compressHistoryForTurn from './history/compresshistoryforturn';
+import hydrateTurn from './hydration/hydrateturn';
 
 import makePlayer from '../test/makeplayer';
 
@@ -73,10 +75,13 @@ const api = {
   inflateFromSave(saveString){
     let saveData = decodeSessionSave(saveString);
     let UI = api.startGame(saveData.gameId,makePlayer(1),makePlayer(2),saveData.battleId); // TODO - make save handle player info! :P
-    sessions[UI.sessionId].inflating = true;
+    let session = sessions[UI.sessionId];
+    session.inflating = true;
     UI = performSavedActions(UI, saveData);
-    sessions[UI.sessionId].inflating = false;
-    return UI;
+    session.inflating = false;
+    session.turn = hydrateTurn(session.game, session.turn);
+    session = updateSessionSave(session);
+    return getBattleUI(session,session.step);
   },
   /*
   Wooh! :D

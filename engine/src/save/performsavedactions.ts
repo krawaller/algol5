@@ -15,7 +15,11 @@ export default function performSavedActions(UI: BattleUI, saveData: SaveData): B
     if (available.length === 1){
       action = available[0]
     } else if (available.length > 1){
-      if (!moveIndexes.length){ throw "Many available but no save index left!" }
+      if (!moveIndexes.length){
+        throw "Many available but no save index left!"
+      } else if (!available[moveIndexes[0]]){
+        throw "Index didnt refer to action!";
+      }
       action = available[moveIndexes.shift()]
     } else {
       throw "No available actions!"

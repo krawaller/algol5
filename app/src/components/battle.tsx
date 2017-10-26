@@ -145,6 +145,14 @@ class Battle extends React.Component <BattleProps,BattleState> {
       width: style.width - 2*borderSize,
       position: "relative" as "relative"
     }
+    if (!ctrls.deadEnds){ ctrls.deadEnds = {}};
+    const availablePotentialMarks = ctrls.potentialMarks.filter(m => !ctrls.deadEnds[m.pos]);
+    const availableCmnds = Object.keys(ctrls.commands).reduce((mem,cmnd) => {
+      if (!ctrls.deadEnds[cmnd]){
+        mem[cmnd] = ctrls.commands[cmnd];
+      }
+      return mem;
+    }, {});
     return (
       <div>
         <h4>Playing!</h4>
@@ -152,11 +160,11 @@ class Battle extends React.Component <BattleProps,BattleState> {
           <History history={totalHistory} offset={style.width} selectStep={this.selectStep} currentStep={this.state.step}/>
           <div style={offset}>
             {step.units && <Units unitdata={step.units} board={this.props.game.board} />}
-            {p && <Marks board={this.props.game.board} disabled={p.type === "ai" || inHistory || !!UI.endedBy } activeMarks={step.marks} potentialMarks={inHistory ? [] : ctrls.potentialMarks} selectMark={this.doAction}/>}
+            {p && <Marks board={this.props.game.board} disabled={p.type === "ai" || inHistory || !!UI.endedBy } activeMarks={step.marks} potentialMarks={inHistory ? [] : availablePotentialMarks} selectMark={this.doAction}/>}
           </div>
         </div>
         <div>
-          {UI && !inHistory && ctrls.commands && false && <Commands openHistory={()=>this.selectStep(0)} hasHistory={maxStep > 0} locked={!plrCanAct} gameCommands={ctrls.commands} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction}/>}
+          {UI && !inHistory && ctrls.commands && false && <Commands openHistory={()=>this.selectStep(0)} hasHistory={maxStep > 0} locked={!plrCanAct} gameCommands={availableCmnds} undo={ctrls.undo} submit={ctrls.submit} performCommand={this.doAction}/>}
           {UI && inHistory && <Playback turn={step.turn} idx={this.state.step} stepIdx={step.stepIdx} maxStepIdx={step.maxStepIdx} maxIdx={maxStep} selectStep={this.selectStep} onGoing={!UI.endedBy} />}
           <p><Content content={info} performCommand={this.doAction} /></p>
       </div>

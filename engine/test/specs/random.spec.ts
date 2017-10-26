@@ -15,7 +15,6 @@ import * as test from "tape";
 import * as shuffle from 'lodash/shuffle';
 import * as omit from 'lodash/omit';
 
-
 function makeRandomMovesInGame(gameId, n){
   let UI = algol.startGame(gameId, makePlayer(1), makePlayer(2));
   let turncount = 0;
@@ -48,7 +47,6 @@ Object.keys(omit(games,['_test'])).forEach(gameKey => {
       UI = makeRandomMovesInGame(game.id, NUMBEROFTURNS);
     }, `No error is thrown`);
     let restored = algol.inflateFromSave(UI.save);
-    console.log("Save str length", UI.save.length);
     t.deepEqual( omit(restored,['sessionId']), omit(UI,['sessionId']), `Save restores to same state` );
   });
 });

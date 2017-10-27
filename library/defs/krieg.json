@@ -4,6 +4,7 @@
     "name": "Krieg",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/krieg.htm",
     "tags": ["infiltrate","multiplegoals"],
+    "tagline": "Outmanouver your opponent to gain access to his corner",
     "instructions": {
       "startTurn": ["ifelse",
         ["morethan",["turn"],2],

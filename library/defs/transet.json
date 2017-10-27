@@ -3,6 +3,7 @@
     "id": "transet",
     "name": "Transet",
     "source": "http://sagme.blogspot.se/2013/05/transet.html",
+    "tagline": "Catch your opponent off guard through swapping your units as you seek access to his base",
     "tags": ["infiltration","differentunits"],
     "instructions": {
       "startTurn": "Select a unit to move",

@@ -4,6 +4,7 @@
     "id": "uglyduck",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/uglyduck.htm",
     "tags": ["capture","differentunits"],
+    "tagline": "Be the first to bring your ugly duck home as a swan!",
     "instructions": {
       "startTurn": ["line","Select",["orlist",
         [["notempty","mysoldiers"],["line","a","pawn","to advance"]],

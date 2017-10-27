@@ -1,4 +1,5 @@
 {
+  "TODO": "Endturn doesn't show up! :(",
   "meta": {
     "id": "duplo",
     "name": "Duplo",
@@ -6,6 +7,7 @@
     "author": "Walter Joris",
     "year": 2002,
     "tags": [],
+    "tagline": "A fierce battle of extending lines",
     "instructions": {
       "startTurn": ["ifelse",
         ["morethan",["turn"],2],

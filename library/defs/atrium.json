@@ -6,6 +6,7 @@
     "tags": ["formation","nocapture"],
     "author": "Guy Jeandel",
     "year": 2004,
+    "tagline": "Be the first to form a line with one of your three unit types",
     "instructions": {
       "startTurn": ["line","Select a","king","or","queen","to move"],
       "selectunit": ["line","Select an orthogonal empty neighbour to move the","selectunit",["unitnameat","selectunit"],"to"],

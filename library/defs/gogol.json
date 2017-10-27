@@ -4,6 +4,7 @@
     "name": "Gogol",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/gogol.htm",
     "tags": ["deploy","infiltrate","kingkill","multiplegoals","differentunits","jump"],
+    "tagline": "Use your units that can move anywhere to hunt down the enemy king",
     "instructions": {
       "startTurn": ["ifelse",["morethan",["turn"],2],"Select a unit to move","Select where to deploy your king"],
       "selectkingdeploy": ["line","Press","deploy","to place your king here"],

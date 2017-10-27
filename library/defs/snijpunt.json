@@ -1,8 +1,10 @@
 {
+  "TODO": "Instruction, and make decision on control!",
   "meta": {
     "id": "snijpunt",
     "name": "Snijpunt",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/snijpunt.htm",
+    "tagline": "Snipe the board to form a winning line",
     "tags": ["formation","changeowner","deploy"]
   },
   "graphics": {

@@ -6,6 +6,7 @@
     "tags": ["changeowner","stalemate"],
     "author": "L. Lynn Smith",
     "year": 2001,
+    "tagline": "Take over your opponent's army before he steals yours",
     "instructions": {
       "startTurn": ["line","Select which","pawn","to move"],
       "selectunit": ["line","Select where to move the","selectunit","pawn"],

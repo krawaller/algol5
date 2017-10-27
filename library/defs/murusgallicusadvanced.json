@@ -5,6 +5,7 @@
     "source": "https://boardgamegeek.com/thread/844020/advanced-murus-gallicus",
     "tags": ["differentunits","infiltrate","shoot"],
     "author": "Phillip L. Leduc",
+    "tagline": "More Murus Gallicus - now with catapults too!",
     "instructions": {
       "startTurn": ["line","Select a",["orlist",[["notempty","mytowers"],"rook"],[["notempty","mycatapults"],"queen"]],"to act with"],
       "selecttower": ["line",

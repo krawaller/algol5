@@ -4,6 +4,7 @@
     "name": "Aries",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/aries.htm",
     "tags":["push","infiltrate","eradicate","multiplegoals"],
+    "tagline": "Push your opponent's rooks off the board and invade his corner",
     "instructions": {
       "startTurn": ["line","Select a","rook","to move"],
       "selectunit": ["line","Select where to move your","selectunit","rook"],

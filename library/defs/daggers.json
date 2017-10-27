@@ -4,6 +4,7 @@
     "name": "Daggers",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
     "tags": ["differentunits","asymmetric","multiplegoals","infiltrate","killking","capture"],
+    "tagline": "Will the superior position at the top of the hill beat overwhelming numbers?",
     "instructions": {
       "startTurn": ["line","Select a","bishop","or","king","to move"],
       "selectunit": ["line","Select where to move the","selectunit",["unitnameat","selectunit"]],

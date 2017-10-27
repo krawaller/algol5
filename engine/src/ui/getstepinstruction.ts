@@ -8,7 +8,7 @@ import { pos2coords } from '../../gamesproxy';
 import {BattleUI, StepUI, StepControlUI, Session, Step, ComplexContent} from '../types';
 
 function isEmptyContent(content){
-  return !content || (content.type === "text" && !content.text);
+  return !content || (content.type === "text" && !content.text) || content.type === "nothing";
 }
 
 export default function getStepInstruction(session: Session, step: Step, submitCmnd: string): ComplexContent {

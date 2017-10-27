@@ -243,6 +243,7 @@ export type FilterDef = {
 }
 
 export type Definition = {
+  flow?: any
   TODO?: string
   meta: Meta
   graphics: Graphics

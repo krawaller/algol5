@@ -1,5 +1,5 @@
 
-import { Definition } from '../types';
+import { Definition, GeneratorDef, WalkerDef } from '../types';
 import { contains, listlength } from '../utils';
 import draw from './draw';
 import makeParse from '../expressions';
@@ -158,15 +158,15 @@ function needLevel(expr, when){
 
 // assumes connections, DIR, LENGTH
 // and if used BLOCKS, allowedsteps, MAX
-function calcStopReason(genDef: Definition, dirVar = 'DIR', blocksVar = 'BLOCKS') {
+function calcStopReason(genDef: WalkerDef, dirVar = 'DIR', blocksVar = 'BLOCKS') {
   let ret = ''
   if (genDef.max){
     ret += 'LENGTH === MAX ? "reachedmax" : '
   }
   ret += '!(POS=connections[POS]['+dirVar+']) ? "outofbounds" : '
-  if (genDef.type==='floater'){
+  /*if (genDef.type==='floater'){
     ret += 'REACHED[POS] ? "alreadyreached" : '
-  }
+  }*/
   if (genDef.blocks && genDef.steps && genDef.testblocksbeforesteps){
     ret += blocksVar+'[POS] ? "hitblock" : '
   }
@@ -182,15 +182,15 @@ function calcStopReason(genDef: Definition, dirVar = 'DIR', blocksVar = 'BLOCKS'
 	// assumes connections, DIR, LENGTH
 	// and if used BLOCKS, allowedsteps, MAX
 
-function calcStopCondition(genDef: Definition, dirVar = 'DIR', blocksVar = 'BLOCKS') {
+function calcStopCondition(genDef: WalkerDef, dirVar = 'DIR', blocksVar = 'BLOCKS') {
   let conds = []
   if (genDef.max){
     conds.push('LENGTH < MAX')
   }
   conds.push('(POS=connections[POS]['+dirVar+'])')
-  if (genDef.type==='floater'){
+  /*if (genDef.type==='floater'){
     conds.push('!REACHED[POS]')
-  }
+  }*/
   if (genDef.blocks && genDef.steps && genDef.testblocksbeforesteps){
     conds.push( '!'+ blocksVar+'[POS]' )
   }

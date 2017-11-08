@@ -3,8 +3,8 @@ Used in API.makeSessionAction and API.inflateFromSave
 Mutates the given session according to the given action and returns it.
 */
 
-import executeCommand from './executeCommand';
-import addMark from './addMark';
+import executeCommand from './executecommand';
+import addMark from './addmark';
 import removeMark from './removemark';
 import undoCommand from './undocommand';
 import endBattle from './endbattle';

@@ -309,7 +309,7 @@
         if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
           var winner = 1;
           var result = winner === 1 ? 'win' : winner ? 'lose' : 'draw';
-          turn.links[newstepid][result] = 'kingkill';
+          turn.links[newstepid][result] = 'regicide';
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
@@ -628,7 +628,7 @@
         if ((Object.keys(UNITLAYERS.oppcrowns).length === 1)) {
           var winner = 2;
           var result = winner === 2 ? 'win' : winner ? 'lose' : 'draw';
-          turn.links[newstepid][result] = 'kingkill';
+          turn.links[newstepid][result] = 'regicide';
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }

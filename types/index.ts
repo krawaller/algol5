@@ -245,6 +245,7 @@ export type FilterDef = {
 export type Definition = {
   flow?: any
   TODO?: string
+  STATUS?: string
   meta: Meta
   graphics: Graphics
   board: Board

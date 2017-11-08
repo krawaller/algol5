@@ -7,4 +7,6 @@ from worldofabstractgames
 [x] Descent - https://www.boardgamegeek.com/boardgame/150586/descent, really a stacking game, but easy to fake! 
 [ ] Kasteel - http://sagme.blogspot.se/2015/09/kasteel.html
 [ ] Pushfight (requires float) - http://pushfightgame.com/examples.htm
-[ ] Essentia - https://www.boardgamegeek.com/boardgame/67542/essentia 
+[ ] Essentia - https://www.boardgamegeek.com/boardgame/67542/essentia
+[ ] FlipFlop (and 2 more) - http://www.nestorgames.com/rulebooks/FLIPFLOP_EN.pdf
+[ ] Go with the Floe - http://www.nestorgames.com/#gowiththefloe_detail 

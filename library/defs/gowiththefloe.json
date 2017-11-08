@@ -1,0 +1,134 @@
+{
+  "STATUS": "wip",
+  "meta": {
+    "id": "gowiththefloe",
+    "name": "Go with the floe",
+    "tagline": "Can the seals escape the polar bears?",
+    "instructions": {
+      "startTurn": ["Select a unit to move"],
+      "selectunit": ["Select where to move"],
+      "selectmovetarget": ["Press","move","to go here"],
+      "selecteattarget": ["Press","eat","to, well, eat"]
+    }
+  },
+  "graphics": {
+    "tiles": {"water":"water"},
+    "icons": {"seals":"queen","bears":"queen","holes":"pawn"}
+  },
+  "board": {
+    "height": 8,
+    "width": 8,
+    "terrain": {
+      "water": ["a1","a2","a7","a8","b1","b8","g1","g8","h1","h2","h7","h8"]
+    }
+  },
+  "setup": {
+    "seals": {"1": ["b2","b7"]},
+    "bears": {"2": ["g2","g7"]}
+  },
+  "startTurn": {
+    "link": "selectunit"
+  },
+  "endGame": {
+    "safeseal": {
+      "condition":["different",["sizeof","canmove"],["sizeof","seals"]],
+      "show":["subtract","seals","canmove"],
+      "who":1
+    },
+    "sealseaten": {"condition":["isempty","seals"],"who":2}
+  },
+  "marks": {
+    "selectunit": {
+      "from":"myunits",
+      "runGenerators": [
+        "findmovetargets",
+        ["ifplayer",2,"findeattargets"]
+      ],
+      "links": [
+        "selectmovetarget",
+        ["ifplayer",2,"selecteattarget"]
+      ]
+    },
+    "selectmovetarget": {
+      "from": "movetargets",
+      "runGenerator": "findcracks",
+      "link": "move"
+    },
+    "selecteattarget": {
+      "from": "eattargets",
+      "link": "eat"
+    }
+  },
+  "commands": {
+    "move": {
+      "applyEffects": [
+        ["moveat","selectunit","selectmovetarget"],
+        ["spawnin","cracks","holes",0]
+      ],
+      "runGenerator": "findsealsmoves",
+      "link": "endturn"
+    },
+    "eat": {
+      "applyEffects": [
+        ["killat","selectunit"],
+        ["killat","selecteattarget"]
+      ],
+      "runGenerator": "findsealsmoves",
+      "link": "endturn"
+    }
+  },
+  "generators": {
+    "findeattargets": {
+      "type": "neighbour",
+      "start": "selectunit",
+      "ifover": "seals",
+      "draw": {
+        "neighbours": {
+          "tolayer": "eattargets"
+        }
+      }
+    },
+    "findmovetargets": {
+      "type": "walker",
+      "start": "selectunit",
+      "max": 2,
+      "blocks": ["union","seals","bears","water"],
+      "draw": {
+        "steps": {
+          "unlessover": "holes",
+          "tolayer": "movetargets",
+          "include": {
+            "dir": ["dir"]
+          }
+        }
+      }
+    },
+    "findsealsmoves": {
+      "type": "walker",
+      "starts": "seals",
+      "max": 2,
+      "count": ["subtract","nowater","holes"],
+      "draw": {
+        "start": {
+          "condition": ["morethan",["totalcount"],0],
+          "tolayer": "canmove"
+        }
+      }
+    },
+    "findcracks": {
+      "type": "walker",
+      "start": "selectmovetarget",
+      "dir": ["reldir",["read","movetargets","selectmovetarget","dir"],5],
+      "blocks": ["single","selectunit"],
+      "draw": {
+        "steps": {
+          "unlessover": "holes",
+          "tolayer": "cracks"
+        },
+        "block": {
+          "tolayer": "cracks"
+        }
+      }
+    }
+  }
+}

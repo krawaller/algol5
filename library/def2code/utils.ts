@@ -12,7 +12,8 @@ import {Definition} from './types';
 // only used in blankUnitLayers, but needs to be its own function since it is recursive
 export function deduceDynamicGroups(rules: any){
   return uniq(
-		rules[0] === "spawn" ? possibilities(rules[2])
+    rules[0] === "spawn" ? possibilities(rules[2])
+    : rules[0] === "spawnin" ? possibilities(rules[2])
 		: {setat:1,setid:1,setin:1}[rules[0]] && contains(possibilities(rules[2]),'group') ? possibilities(rules[3])
 		: isArray(rules) || isObject(rules) ? reduce(rules,(mem,def)=>mem.concat(deduceDynamicGroups(def)),[])
 		: []

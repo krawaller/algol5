@@ -3,10 +3,15 @@
     "id": "amazons",
     "name": "Amazons",
     "source": "http://www.chessvariants.org/other.dir/amazons.html",
-    "tags": ["deploy","starve"],
     "author": "Walter Zamkauskas",
     "year": 1988,
-    "tagline": "Make sure your opponent is trapped first as you burn the board together",
+    "about": {
+      "tagline": "Make sure your opponent is trapped first as you burn the board together",
+      "tags": ["deploy","starve"],
+      "links": {
+        "Nestor Games": "http://nestorgames.com/#amazons_detail"
+      }
+    },
     "instructions": {
       "startTurn": ["Select a","queen","to move and fire with"],
       "selectunit": ["Select where to move the","selectunit","queen"],

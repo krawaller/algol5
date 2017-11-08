@@ -2,9 +2,37 @@
   "meta": {
     "id": "daggers",
     "name": "Daggers",
-    "source": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
-    "tags": ["differentunits","asymmetric","multiplegoals","infiltrate","killking","capture"],
-    "tagline": "Will the superior position at the top of the hill beat overwhelming numbers?",
+    "about": {
+      "tags": ["differentunits","asymmetric","multiplegoals","infiltrate","killking","capture"],
+      "tagline": "Will the superior position at the top of the hill beat overwhelming numbers?",
+      "links": {
+        "World of Abstract Games": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
+        "Board game geek": "https://boardgamegeek.com/boardgame/186029/daggers"
+      }
+    },
+    "rules": {
+      "flow": "Players take turn moving a single unit",
+      "goals": {
+        "regicide": {
+          "who": [1,2],
+          "rule": ["line","Kill an enemy","king"]
+        },
+        "infiltration": {
+          "who": [1,2],
+          "rule": ["line","Move a","king","to the enemy",["tile","base"]]
+        }
+      },
+      "units": {
+        "bishop": {
+          "who": [1,2],
+          "rule": ["line","Moves vertical or diagonal, 1 step uphill or any number of steps downhill. Captures",["unitname","kings"],"vertically, or any piece diagonally."]
+        },
+        "king": {
+          "who": [1,2],
+          "rule": "Moves 1 step in any direction, capturing any enemy."
+        }
+      }
+    },
     "instructions": {
       "startTurn": ["line","Select a","bishop","or","king","to move"],
       "selectunit": ["line","Select where to move the","selectunit",["unitnameat","selectunit"]],
@@ -44,7 +72,7 @@
   },
   "endGame": {
     "infiltration":{ "condition": ["overlaps","mycrowns","oppbases"], "show": ["intersect","mycrowns","oppbases"]},
-    "kingkill": { "condition": ["same",["sizeof","oppcrowns"],1] }
+    "regicide": { "condition": ["same",["sizeof","oppcrowns"],1] }
   },
   "startTurn": {
     "link": "selectunit"

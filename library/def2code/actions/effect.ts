@@ -150,6 +150,10 @@ function executeEffect(gameDef: Definition, player: 1 | 2, action: string, effe
       const [set,propname,val] = args;
       return executeEffect(gameDef, player,action, ['foridin',set,['setid',['loopid'],propname,val]]);
     }
+    case "spawnin": {
+      const [set,group,owner,obj] = args;
+      return executeEffect(gameDef, player, action, ['forposin',set,['spawn',['target'],group,owner,obj]]);
+    }
     case "spawn": {
       /*
       spawn: (O,pos,group,owner,obj)=>`

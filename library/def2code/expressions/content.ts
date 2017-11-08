@@ -76,6 +76,14 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
         content: [{type:"text",text: ${parse.val(num)}}, ${parse.val(num)} === 1 ? ${parse.content(sing)} : ${parse.content(plur)}]
       }`;
     }
+    case "tile": {
+      const [type, alias] = args;
+      return `{
+        type: "tileref",
+        name: ${parse.val(type)}
+        alias: ${parse.val(alias || type)}
+      }`
+    }
     case "unitname": {
       const [name] = args;
       return `{

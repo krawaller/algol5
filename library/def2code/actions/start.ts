@@ -32,7 +32,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
         MARKS: MARKS,
         stepid: 'root',
         name: 'start',
-        ${contains(def,'spawn') ? 'clones: step.clones, ' : ''}
+        ${contains(def,'spawn') || contains(def,'spawnin') ? 'clones: step.clones, ' : ''}
         path: []
         ${usesTurnVars(def) ? ',TURNVARS: TURNVARS ' : ''}
       };

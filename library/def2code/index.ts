@@ -33,7 +33,7 @@ export default function compileGameCode(def: Definition){
         var stepseed = {
           UNITDATA: deduceInitialUnitData(${JSON.stringify(def.setup || {})})
           ${usesTurnVars(def) ? ', TURNVARS: {}' : ''}
-          ${contains(def,'spawn') ? ', clones: 0' : ''}
+          ${contains(def,'spawn') || contains(def,'spawnin') ? ', clones: 0' : ''}
         };
         return game.start1(turnseed,stepseed);
       };

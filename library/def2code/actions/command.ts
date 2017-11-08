@@ -21,7 +21,7 @@ export default function addCommandFunction(def: Definition, player: 1 | 2, cmnd
       var ARTIFACTS = ${copyArtifactsForAction(def,cmndDef)};
       var MARKS = step.MARKS;
       var UNITDATA = Object.assign({},step.UNITDATA);
-      ${contains(cmndDef,'spawn') ? 'var clones = step.clones; ' : ''}
+      ${contains(cmndDef,'spawn') || contains(cmndDef,'spawnin') ? 'var clones = step.clones; ' : ''}
       var UNITLAYERS = step.UNITLAYERS;
       ${usesTurnVars(cmndDef) ? 'var TURNVARS = Object.assign({},step.TURNVARS); ' : ''}
 
@@ -40,7 +40,7 @@ export default function addCommandFunction(def: Definition, player: 1 | 2, cmnd
         stepid: newstepid,
         name: '${cmndname}',
         path: step.path.concat('${cmndname}')
-        ${contains(cmndDef,'spawn') ? ', clones: clones' : ''}
+        ${contains(cmndDef,'spawn') || contains(cmndDef,'spawnin') ? ', clones: clones' : ''}
         ${usesTurnVars(cmndDef) ? ',TURNVARS: TURNVARS ' : ''}
       });
       turn.links[newstepid] = {};

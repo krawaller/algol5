@@ -11,22 +11,30 @@ const FullRules = ({rules}: {rules: RuleDescription}) => {
   ]);
   if (rules.concepts){
     ret.push(<h3>Game concepts</h3>);
-    Object.keys(rules.concepts).forEach(name => ret.push(
-      <div>
-        <h4>{name}</h4>
-        <Content content={rules.concepts[name]}/>
-      </div>
-    ));
+    ret.push(
+      <ul>
+        {Object.keys(rules.concepts).map(name => (
+          <li>
+            <strong>{name}: </strong>
+            <Content content={rules.concepts[name]} flatLines={true}/>
+          </li>
+        ))}
+      </ul>
+    );
   }
   ["actions","tiles","goals","units"].forEach(kind => {
     if (rules[kind]){
       ret.push(<h3>{kind}</h3>);
-      Object.keys(rules[kind]).forEach(name => ret.push(
-        <div>
-          <h4>{name}</h4>
-          <Content content={rules[kind][name].rule}/>
-        </div>
-      ));
+      ret.push(
+        <ul>
+          {Object.keys(rules[kind]).map(name => (
+            <li>
+              <strong>{name}: </strong>
+              <Content content={rules[kind][name].rule} flatLines={true}/>
+            </li>
+          ))}
+        </ul>
+      );
     }
   });
   return <div className="fullrules">{ret}</div>

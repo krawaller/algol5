@@ -158,7 +158,14 @@
                 type: 'line',
                 content: [{
                   type: 'text',
-                  text: "a square to move the"
+                  text: "a square to"
+                }, {
+                  type: 'cmndref',
+                  cmnd: "move",
+                  noclick: true
+                }, {
+                  type: 'text',
+                  text: "the"
                 }, {
                   type: 'posref',
                   pos: MARKS["selectunit"]
@@ -250,7 +257,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: "Select where the enemy at"
+            text: "Select where the enemy,"
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectmovetarget"]] || {})["group"]]
+          }, {
+            type: 'text',
+            text: "at"
           }, {
             type: 'posref',
             pos: MARKS["selectmovetarget"]
@@ -727,10 +740,17 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select a unit to move"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a unit to"
+          }, {
+            type: 'cmndref',
+            cmnd: "move",
+            noclick: true
+          }]
+        });
       };
       game.debug1 = function() {
         return {
@@ -812,7 +832,14 @@
                 type: 'line',
                 content: [{
                   type: 'text',
-                  text: "a square to move the"
+                  text: "a square to"
+                }, {
+                  type: 'cmndref',
+                  cmnd: "move",
+                  noclick: true
+                }, {
+                  type: 'text',
+                  text: "the"
                 }, {
                   type: 'posref',
                   pos: MARKS["selectunit"]
@@ -904,7 +931,13 @@
           type: 'line',
           content: [{
             type: 'text',
-            text: "Select where the enemy at"
+            text: "Select where the enemy,"
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectmovetarget"]] || {})["group"]]
+          }, {
+            type: 'text',
+            text: "at"
           }, {
             type: 'posref',
             pos: MARKS["selectmovetarget"]
@@ -1381,10 +1414,17 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return {
-          type: 'text',
-          text: "Select a unit to move"
-        };
+        return collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select a unit to"
+          }, {
+            type: 'cmndref',
+            cmnd: "move",
+            noclick: true
+          }]
+        });
       };
       game.debug2 = function() {
         return {

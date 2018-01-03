@@ -12,6 +12,8 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
       return parse.content(['cmnd',expression]);
     } else if (gameDef.endGame && gameDef.endGame[expression]){
       return parse.content(['goal',expression]);
+    } else if (gameDef.meta.rules && gameDef.meta.rules.concepts && gameDef.meta.rules.concepts[expression]) {
+      return parse.content(['concept',expression]);
     } else if (gameDef.marks[expression]){
       return parse.content(['pos',expression]);
     } else if (usedIcons.indexOf(expression) !== -1) {
@@ -90,6 +92,13 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
       const [name] = args;
       return `{
         type: "goalref",
+        name: ${parse.val(name)}
+      }`
+    }
+    case "concept": {
+      const [name] = args;
+      return `{
+        type: "conceptref",
         name: ${parse.val(name)}
       }`
     }

@@ -26,7 +26,7 @@ let Content = ({content, performCommand, flatLines}: ContentProps)=> {
     case "posref":
       return <span className="posref">{content.pos}</span>;
     case "cmndref":
-      return <button disabled={!performCommand} onClick={()=>performCommand && performCommand(content.cmnd)}>{content.alias || content.cmnd}</button>;
+      return <button disabled={!performCommand || content.noclick} onClick={()=>performCommand && performCommand(content.cmnd)}>{content.alias || content.cmnd}</button>;
     case "playerref":
       return <span className="playerref">{content.player}</span>;
     case "nothing":

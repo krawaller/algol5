@@ -37,20 +37,27 @@ let meta = fs.readdirSync(__dirname+"/defs").filter(g => g !== '.DS_Store').redu
     const rules = json.meta.rules;
     mem[id].rules = {};
     flat.forEach(key => mem[id].rules[key] = eval(envelope + parse.content(rules[key])));
-    perline.forEach(key => mem[id].rules[key] = Object.keys(rules[key]).reduce(
-      (m, name) => ({...m, [name]: eval(envelope + parse.content(rules[key][name]))}),
-      {}
-    ));
-    perobj.forEach(key => mem[id].rules[key] = Object.keys(rules[key]).reduce(
-      (m, name) => ({...m, [name]: {
-        rule: eval(envelope + parse.content(rules[key][name].rule)),
-        who: rules[key][name].who
-      }}),
-      {}
-    ));
+    perline.forEach(key => {
+      if (rules[key]) {
+        mem[id].rules[key] = Object.keys(rules[key]).reduce(
+        (m, name) => ({...m, [name]: eval(envelope + parse.content(rules[key][name]))}),
+        {})
+      }
+    });
+    perobj.forEach(key => {
+      if (rules[key]){
+        mem[id].rules[key] = Object.keys(rules[key]).reduce(
+          (m, name) => ({...m, [name]: {
+            rule: eval(envelope + parse.content(rules[key][name].rule)),
+            who: rules[key][name].who
+          }}),
+          {}
+        );
+      }
+    });
   }
   return mem;
-},{})
+},{});
 
 fs.writeFileSync(__dirname+'/dist/meta.js',`
   module.exports = ${JSON.stringify(meta)};

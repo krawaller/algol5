@@ -189,11 +189,11 @@
             type: 'text',
             text: "to go"
           }, ((BOARD.board[MARKS["selectmovetarget"]].y > BOARD.board[MARKS["selectunit"]].y) ? {
-            type: 'text',
-            text: "uphill"
+            type: "conceptref",
+            name: "uphill"
           } : (BOARD.board[MARKS["selectunit"]].y > BOARD.board[MARKS["selectmovetarget"]].y) ? {
-            type: 'text',
-            text: "downhill"
+            type: "conceptref",
+            name: "downhill"
           } : {
             type: 'nothing'
           }), {
@@ -508,11 +508,11 @@
             type: 'text',
             text: "to go"
           }, ((BOARD.board[MARKS["selectmovetarget"]].y > BOARD.board[MARKS["selectunit"]].y) ? {
-            type: 'text',
-            text: "uphill"
+            type: "conceptref",
+            name: "uphill"
           } : (BOARD.board[MARKS["selectunit"]].y > BOARD.board[MARKS["selectmovetarget"]].y) ? {
-            type: 'text',
-            text: "downhill"
+            type: "conceptref",
+            name: "downhill"
           } : {
             type: 'nothing'
           }), {

@@ -17,7 +17,7 @@ type GameBoxProps = {
 const GameBox = (props: GameBoxProps) => (
   <div>
     <button onClick={props.choose}>{props.meta.name} </button>
-    <span> - {props.meta.tagline} </span>
+    <span> - {props.meta.tagline || (props.meta.about && props.meta.about.tagline)} </span>
   </div>
 );
 

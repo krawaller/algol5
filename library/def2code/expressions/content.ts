@@ -10,6 +10,8 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
   if (typeof expression === 'string'){
     if (gameDef.commands[expression] || expression === 'endturn'){
       return parse.content(['cmnd',expression]);
+    } else if (gameDef.endGame && gameDef.endGame[expression]){
+      return parse.content(['goal',expression]);
     } else if (gameDef.marks[expression]){
       return parse.content(['pos',expression]);
     } else if (usedIcons.indexOf(expression) !== -1) {
@@ -82,6 +84,13 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
         type: "tileref",
         name: ${parse.val(type)},
         alias: ${parse.val(alias || type)}
+      }`
+    }
+    case "goal": {
+      const [name] = args;
+      return `{
+        type: "goalref",
+        name: ${parse.val(name)}
       }`
     }
     case "unitname": {

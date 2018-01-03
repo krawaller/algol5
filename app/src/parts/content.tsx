@@ -1,7 +1,9 @@
 import * as React from 'react';
 
+import {Content} from '../../../types';
+
 type ContentProps = {
-  content: any,
+  content: Content,
   performCommand?: (cmnd:string) => void
 };
 
@@ -28,6 +30,12 @@ let Content = ({content, performCommand}: ContentProps)=> {
       return null;
     case "unittyperef":
       return <span className="unittyperef">{content.alias || content.name}</span>;
+    case "goalref":
+      return <span className="goalref">{content.name}</span>;
+    case "conceptref":
+      return <span className="conceptref">{content.name}</span>;
+    case "tileref":
+      return <span className="tileref">{content.name}</span>;
     default:
       console.log("Oh no :(", content);
       throw "Unknown content: " + content;

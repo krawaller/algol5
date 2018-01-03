@@ -1,6 +1,7 @@
 # Project
 
--[ ] Centralise types
+-[X] Centralize types
+-[ ] Clean up types
 
 ## App TODO
 
@@ -18,6 +19,7 @@
 -[x] Make possibilities deal with turnvars (see bogus layers in descent)
 -[x] New content data type, convert instructions
 -[ ] SquareInfo func
+-[ ] Offset! :D
 
 
 ## Library TODO

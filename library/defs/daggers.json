@@ -75,11 +75,11 @@
     "height": 8,
     "width": 8,
     "terrain": {
-      "bases": {"1":[["rect","a8","h8"]],"2":[["rect","a1","h1"]]}
+      "base": {"1":[["rect","a8","h8"]],"2":[["rect","a1","h1"]]}
     }
   },
   "graphics": {
-    "tiles": { "bases": "playercolour" },
+    "tiles": { "base": "playercolour" },
     "icons": { "daggers": "bishop", "crowns": "king" }
   },
   "setup": {
@@ -87,7 +87,7 @@
     "daggers": {"1":[["rect","c7","f7"]],"2":["c3","f3",["rect","b2","g2"]]}
   },
   "endGame": {
-    "infiltration":{ "condition": ["overlaps","mycrowns","oppbases"], "show": ["intersect","mycrowns","oppbases"]},
+    "infiltration":{ "condition": ["overlaps","mycrowns","oppbase"], "show": ["intersect","mycrowns","oppbase"]},
     "regicide": { "condition": ["same",["sizeof","oppcrowns"],1] }
   },
   "startTurn": {

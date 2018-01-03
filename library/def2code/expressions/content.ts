@@ -52,12 +52,12 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
       return `{type:'playerref',player:${parse.val(plr)}}`;
     }
     case "cmnd": {
-      const [cmnd,alias] = args;
-      if (alias){
-        return `{type:'cmndref',cmnd:${parse.val(cmnd)},alias:${parse.val(alias)}}`;
-      } else {
-        return `{type:'cmndref',cmnd:${parse.val(cmnd)}}`;
+      let [cmnd,alias,noclick] = args;
+      if (typeof alias === 'boolean'){
+        noclick = alias;
+        alias = undefined;
       }
+      return `{type: 'cmndref',cmnd:${parse.val(cmnd)}${alias?`,alias:${parse.val(alias)}`:''}${noclick?',noclick:true':''}}`;
     }
     case "orlist": {
       return `[${args.map(([cond,content]) => `{cond: ${parse.bool(cond)}, content: ${parse.content(content)}}`)}].filter(function(elem){

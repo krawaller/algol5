@@ -183,7 +183,33 @@ export type Session = {
 
 /* ---------------------------------------- Definition stuff ----------------------------------------  */
 
-export type Meta = any;
+export type RuleObject = {
+  who: (0 | 1 | 2)[]
+  rule: Content
+}
+
+export type RuleDescription = {
+  flow: Content
+  concepts?: {
+    [conceptName: string]: Content
+  },
+  actions: {
+    [actionName: string]: RuleObject
+  },
+  tiles: {
+    [tileName: string]: RuleObject
+  },
+  goals: {
+    [goalName: string]: RuleObject
+  },
+  units: {
+    [unitName: string]: RuleObject
+  },
+};
+export type Meta = {
+  rules?: RuleDescription,
+  [otherMeta: string]: any
+};
 export type Graphics = any;
 export type Board = any;
 export type Setup = any;

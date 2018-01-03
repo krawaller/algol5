@@ -7,9 +7,9 @@ import * as fs from 'fs';
 let master = ``;
 let usage = 'let concat = "wohoo"';
 
-const filenames = fs.readdirSync(__dirname+"/../../defs");
+const filenames = fs.readdirSync(__dirname+"/../../defs").filter(f => f != '.DS_Store');
 
-let games = filenames.filter(f => f != '.DS_Store').map(gamename=>{
+let games = filenames.map(gamename=>{
   const code = fs.readFileSync(__dirname+"/../../defs/"+gamename);
   const file = `
   /* File generated from JSON to check types. Don't fix errors in this file, go to the JSON! */

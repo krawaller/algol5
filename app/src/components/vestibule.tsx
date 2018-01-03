@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Battle from './battle'
+import FullRules from '../parts/fullrules';
 
 type Player = {name:string} | null;
 
@@ -41,6 +42,14 @@ class Vestibule extends React.Component <Props,State> {
       <p>Plr1 is {this.state.plr1.name}: {plr1opts}</p>
       <p>Plr2 is {this.state.plr2.name}: {plr2opts}</p>
       <button onClick={this.start}>Start game!</button>
+      {
+        game.rules && (
+          <div>
+            <hr/>
+            <FullRules rules={game.rules} />
+          </div>
+        )
+      }
     </div>
   }
 }

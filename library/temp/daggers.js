@@ -6,7 +6,7 @@
     };
     game.graphics = {
       "tiles": {
-        "bases": "playercolour"
+        "base": "playercolour"
       },
       "icons": {
         "daggers": "bishop",
@@ -17,7 +17,7 @@
       "height": 8,
       "width": 8,
       "terrain": {
-        "bases": {
+        "base": {
           "1": [
             ["rect", "a8", "h8"]
           ],
@@ -33,7 +33,7 @@
       "height": 8,
       "width": 8,
       "terrain": {
-        "bases": {
+        "base": {
           "1": [
             ["rect", "a8", "h8"]
           ],
@@ -281,7 +281,7 @@
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.mycrowns,
-                s1 = TERRAIN.oppbases;
+                s1 = TERRAIN.oppbase;
               for (var key in s0) {
                 if (s1[key]) {
                   ret[key] = s0[key];
@@ -297,7 +297,7 @@
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.mycrowns,
-                s1 = TERRAIN.oppbases;
+                s1 = TERRAIN.oppbase;
               for (var key in s0) {
                 if (s1[key]) {
                   ret[key] = s0[key];
@@ -600,7 +600,7 @@
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.mycrowns,
-                s1 = TERRAIN.oppbases;
+                s1 = TERRAIN.oppbase;
               for (var key in s0) {
                 if (s1[key]) {
                   ret[key] = s0[key];
@@ -616,7 +616,7 @@
             (function() {
               var ret = {},
                 s0 = UNITLAYERS.mycrowns,
-                s1 = TERRAIN.oppbases;
+                s1 = TERRAIN.oppbase;
               for (var key in s0) {
                 if (s1[key]) {
                   ret[key] = s0[key];

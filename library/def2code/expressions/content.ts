@@ -80,7 +80,7 @@ export default function parseContent(gameDef: Definition, player: 1 | 2, action
       const [type, alias] = args;
       return `{
         type: "tileref",
-        name: ${parse.val(type)}
+        name: ${parse.val(type)},
         alias: ${parse.val(alias || type)}
       }`
     }

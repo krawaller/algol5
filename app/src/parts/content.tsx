@@ -1,22 +1,23 @@
 import * as React from 'react';
 
-import {Content} from '../../../types';
+import {Content, StepControlUI} from '../../../types';
 
 type ContentProps = {
   content: Content
   flatLines?: boolean
   performCommand?: (cmnd:string) => void
+  UI?: StepControlUI
 };
 
-let Content = ({content, performCommand, flatLines}: ContentProps)=> {
+let Content = ({content, performCommand, flatLines,UI}: ContentProps)=> {
   if (typeof content === 'string'){
     return <span>{content}</span>;
   }
   switch(content.type){
     case "page":
-    return <div>{content.content.map((c,i)=><Content content={c} performCommand={performCommand} key={i}/>)}</div>;
+    return <div>{content.content.map((c,i)=><Content content={c} performCommand={performCommand} key={i} UI={UI}/>)}</div>;
     case "line": {
-      const line = content.content.map((c,i)=><Content content={c} performCommand={performCommand} key={i}/>);
+      const line = content.content.map((c,i)=><Content content={c} performCommand={performCommand} key={i} UI={UI}/>);
       return flatLines ? <span className="line">{line}</span> : <p className="line">{line}</p>;
     }
     case "text":
@@ -26,7 +27,7 @@ let Content = ({content, performCommand, flatLines}: ContentProps)=> {
     case "posref":
       return <span className="posref">{content.pos}</span>;
     case "cmndref":
-      return <button disabled={!performCommand || content.noclick} onClick={()=>performCommand && performCommand(content.cmnd)}>{content.alias || content.cmnd}</button>;
+      return <button disabled={!performCommand || !UI || !(UI.commands[content.cmnd] || (UI.submit && content.alias === 'submit'))} onClick={()=>performCommand && performCommand(content.cmnd)}>{content.alias || content.cmnd}</button>;
     case "playerref":
       return <span className="playerref">{content.player}</span>;
     case "nothing":

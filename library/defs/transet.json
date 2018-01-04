@@ -47,10 +47,10 @@
       }
     },
     "instructions": {
-      "startTurn": ["line","Select a unit to",["cmnd","move",true]],
+      "startTurn": ["line","Select a unit to","move"],
       "selectunit": ["line",
         "Select",["orlist",
-          [["notempty","movetargets"],["line","a square to",["cmnd","move",true],"the","selectunit",["unitnameat","selectunit"],"to"]],
+          [["notempty","movetargets"],["line","a square to","move","the","selectunit",["unitnameat","selectunit"],"to"]],
           [["markavailable","selectswapunit"],["line","another unit to swap the","selectunit",["unitnameat","selectunit"],"with"]]
         ]
       ],

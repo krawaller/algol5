@@ -161,8 +161,7 @@
                   text: "a square to"
                 }, {
                   type: 'cmndref',
-                  cmnd: "move",
-                  noclick: true
+                  cmnd: "move"
                 }, {
                   type: 'text',
                   text: "the"
@@ -747,8 +746,7 @@
             text: "Select a unit to"
           }, {
             type: 'cmndref',
-            cmnd: "move",
-            noclick: true
+            cmnd: "move"
           }]
         });
       };
@@ -835,8 +833,7 @@
                   text: "a square to"
                 }, {
                   type: 'cmndref',
-                  cmnd: "move",
-                  noclick: true
+                  cmnd: "move"
                 }, {
                   type: 'text',
                   text: "the"
@@ -1421,8 +1418,7 @@
             text: "Select a unit to"
           }, {
             type: 'cmndref',
-            cmnd: "move",
-            noclick: true
+            cmnd: "move"
           }]
         });
       };

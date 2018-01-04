@@ -2,7 +2,7 @@
   function() {
     var game = {};
     game.commands = {
-      "makewild": 1,
+      "promote": 1,
       "move": 1
     };
     game.graphics = {
@@ -120,7 +120,7 @@
         });
         turn.links[newstepid] = {};
         if ((3 > turn.turn)) {
-          turn.links[newstepid].makewild = 'makewild1';
+          turn.links[newstepid].promote = 'promote1';
         } else {
           var newlinks = turn.links[newstepid];
           for (var linkpos in ARTIFACTS.movetargets) {
@@ -130,20 +130,53 @@
         return newstep;
       };
       game.selectunit1instruction = function(turn, step) {
-        return ((turn.turn > 2) ? {
-          type: 'text',
-          text: "Select where to move this unit"
-        } : collapseLine({
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return ((turn.turn > 2) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "the"
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+          }, !!(UNITLAYERS.wild[MARKS["selectunit"]]) ? {
+            type: 'text',
+            text: "(remeber that it matches for your opponent too!)"
+          } : {
+            type: 'nothing'
+          }]
+        }) : collapseLine({
           type: 'line',
           content: [{
             type: 'text',
             text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: "makewild"
+            cmnd: "promote"
           }, {
             type: 'text',
-            text: "to make this unit match for your opponent too"
+            text: "to turn this"
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to a"
+          }, {
+            type: "unittyperef",
+            alias: "king",
+            name: "king".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: ", making it match for your opponent too"
           }]
         }));
       };
@@ -175,7 +208,7 @@
             cmnd: "move"
           }, {
             type: 'text',
-            text: "to move from"
+            text: "to go from"
           }, {
             type: 'posref',
             pos: MARKS["selectunit"]
@@ -188,7 +221,7 @@
           }]
         });
       };
-      game.makewild1 = function(turn, step) {
+      game.promote1 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
@@ -225,15 +258,15 @@
           "movetargets": {},
           "winline": {}
         };
-        var newstepid = step.stepid + '-' + 'makewild';
+        var newstepid = step.stepid + '-' + 'promote';
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
           MARKS: MARKS,
           UNITDATA: UNITDATA,
           UNITLAYERS: UNITLAYERS,
           stepid: newstepid,
-          name: 'makewild',
-          path: step.path.concat('makewild')
+          name: 'promote',
+          path: step.path.concat('promote')
         });
         turn.links[newstepid] = {};
         if (Object.keys(ARTIFACTS.winline).length !== 0) {
@@ -305,7 +338,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.makewild1instruction = function(turn, step) {
+      game.promote1instruction = function(turn, step) {
         return {
           type: 'text',
           text: ""
@@ -538,13 +571,46 @@
         return turn;
       }
       game.start1instruction = function(turn, step) {
-        return ((turn.turn > 2) ? {
-          type: 'text',
-          text: "Select which unit to move"
-        } : {
-          type: 'text',
-          text: "Select which unit to make wild"
-        });
+        return ((turn.turn > 2) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select which"
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "or"
+          }, {
+            type: "unittyperef",
+            alias: "king",
+            name: "king".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select which"
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'cmndref',
+            cmnd: "promote"
+          }]
+        }));
       };
       game.debug1 = function() {
         return {
@@ -584,7 +650,7 @@
         });
         turn.links[newstepid] = {};
         if ((3 > turn.turn)) {
-          turn.links[newstepid].makewild = 'makewild2';
+          turn.links[newstepid].promote = 'promote2';
         } else {
           var newlinks = turn.links[newstepid];
           for (var linkpos in ARTIFACTS.movetargets) {
@@ -594,20 +660,53 @@
         return newstep;
       };
       game.selectunit2instruction = function(turn, step) {
-        return ((turn.turn > 2) ? {
-          type: 'text',
-          text: "Select where to move this unit"
-        } : collapseLine({
+        var MARKS = step.MARKS;
+        var UNITLAYERS = step.UNITLAYERS;
+        return ((turn.turn > 2) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select where to"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }, {
+            type: 'text',
+            text: "the"
+          }, {
+            type: "unittyperef",
+            name: game.graphics.icons[(UNITLAYERS.units[MARKS["selectunit"]] || {})["group"]]
+          }, !!(UNITLAYERS.wild[MARKS["selectunit"]]) ? {
+            type: 'text',
+            text: "(remeber that it matches for your opponent too!)"
+          } : {
+            type: 'nothing'
+          }]
+        }) : collapseLine({
           type: 'line',
           content: [{
             type: 'text',
             text: "Press"
           }, {
             type: 'cmndref',
-            cmnd: "makewild"
+            cmnd: "promote"
           }, {
             type: 'text',
-            text: "to make this unit match for your opponent too"
+            text: "to turn this"
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to a"
+          }, {
+            type: "unittyperef",
+            alias: "king",
+            name: "king".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: ", making it match for your opponent too"
           }]
         }));
       };
@@ -639,7 +738,7 @@
             cmnd: "move"
           }, {
             type: 'text',
-            text: "to move from"
+            text: "to go from"
           }, {
             type: 'posref',
             pos: MARKS["selectunit"]
@@ -652,7 +751,7 @@
           }]
         });
       };
-      game.makewild2 = function(turn, step) {
+      game.promote2 = function(turn, step) {
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
@@ -689,15 +788,15 @@
           "movetargets": {},
           "winline": {}
         };
-        var newstepid = step.stepid + '-' + 'makewild';
+        var newstepid = step.stepid + '-' + 'promote';
         var newstep = turn.steps[newstepid] = Object.assign({}, step, {
           ARTIFACTS: ARTIFACTS,
           MARKS: MARKS,
           UNITDATA: UNITDATA,
           UNITLAYERS: UNITLAYERS,
           stepid: newstepid,
-          name: 'makewild',
-          path: step.path.concat('makewild')
+          name: 'promote',
+          path: step.path.concat('promote')
         });
         turn.links[newstepid] = {};
         if (Object.keys(ARTIFACTS.winline).length !== 0) {
@@ -769,7 +868,7 @@
         } else turn.links[newstepid].endturn = "start" + otherplayer;
         return newstep;
       }
-      game.makewild2instruction = function(turn, step) {
+      game.promote2instruction = function(turn, step) {
         return {
           type: 'text',
           text: ""
@@ -1002,13 +1101,46 @@
         return turn;
       }
       game.start2instruction = function(turn, step) {
-        return ((turn.turn > 2) ? {
-          type: 'text',
-          text: "Select which unit to move"
-        } : {
-          type: 'text',
-          text: "Select which unit to make wild"
-        });
+        return ((turn.turn > 2) ? collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select which"
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "or"
+          }, {
+            type: "unittyperef",
+            alias: "king",
+            name: "king".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'cmndref',
+            cmnd: "move"
+          }]
+        }) : collapseLine({
+          type: 'line',
+          content: [{
+            type: 'text',
+            text: "Select which"
+          }, {
+            type: "unittyperef",
+            alias: "pawn",
+            name: "pawn".replace(/s$/, '')
+          }, {
+            type: 'text',
+            text: "to"
+          }, {
+            type: 'cmndref',
+            cmnd: "promote"
+          }]
+        }));
       };
       game.debug2 = function() {
         return {

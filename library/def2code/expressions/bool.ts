@@ -6,7 +6,17 @@ export default function parseBool(gameDef: Definition, player: 1 | 2, action: s
   const [type, ...args] = expression;
   switch(type){
     case "cmndavailable": {
-
+      if (action === "rules"){
+        return 'false';
+      }
+      const [cmndname] = args;
+      let special = makeParser(gameDef, player, action, "position");
+      let name = special.val(cmndname);
+      return `
+        Object.keys(turn.links[step.stepid]).filter(function(action){
+          return action === ${name};
+        }).length
+      `
     }
     case "markavailable": {
       const [markname] = args;

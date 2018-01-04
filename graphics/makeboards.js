@@ -7,7 +7,7 @@ and create individual background images for that game into `/boards`.
 var META_PATH = __dirname + '/../library/dist/meta';
 var BOARD_PARTS_PATH = __dirname + '/boardparts';
 var OUTPUT_PATH = __dirname + '/dist';
-var OUTPUT_PIC_PATH = OUTPUT_PATH + '/pics';
+var OUTPUT_BOARD_PIC_PATH = OUTPUT_PATH + '/boards';
 
 var fs = require('fs')
   , Canvas = require('canvas')
@@ -117,7 +117,7 @@ function draw(game,to){
 
 Object.keys(games).forEach(function(game){
   var rules = games[game];
-  draw(rules,OUTPUT_PIC_PATH + '/'+game+'.png');
+  draw(rules,OUTPUT_BOARD_PIC_PATH + '/'+game+'.png');
 });
 
 var CSS = Object.keys(dataURIusages).reduce(function(mem, uri){

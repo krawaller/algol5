@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "clean": "rm -rf dist; mkdir dist; mkdir dist/pics",
-    "build": "npm run clean && node makeboards"
+    "clean": "rm -rf dist; mkdir dist; mkdir dist/boards",
+    "copypieces": "cp -r pieces-svg dist/pieces",
+    "build": "npm run clean && npm run copypieces && node makeboards"
   },
   "dependencies": {
     "canvas": "^1.6.6"

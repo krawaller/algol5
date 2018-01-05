@@ -1,7 +1,7 @@
 /*
 Build script that loops over the game files in the `temp/indiv` folder
-(created by `generate.js`), and collects them into a single file
-at `temp/ALLGAMES.js`. That file exports an object containing all games,
+(created by `compile.js`), and collects them into a single file
+at `dist/library.js`. That file exports an object containing all games,
 which is imported from within the engine files.
 */
 

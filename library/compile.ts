@@ -1,6 +1,6 @@
 /*
 Build script that will loop over all game definitions in the `defs` folder,
-and create individual game generator files inside the `built` folder.
+and create individual game generator files inside the `temp` folder.
 
 The code in a built file evaluates to an object with methods to make
 moves in that particular game.

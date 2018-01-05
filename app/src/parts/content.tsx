@@ -26,8 +26,16 @@ let Content = ({content, performCommand, flatLines,UI}: ContentProps)=> {
       return <span>{content.name}</span>;
     case "posref":
       return <span className="posref">{content.pos}</span>;
-    case "cmndref":
-      return <button disabled={!performCommand || !UI || !(UI.commands[content.cmnd] || (UI.submit && content.alias === 'submit'))} onClick={()=>performCommand && performCommand(content.cmnd)}>{content.alias || content.cmnd}</button>;
+    case "cmndref": {
+      const enabled =
+        performCommand && UI && (
+          UI.commands[content.cmnd] ||
+          (UI.submit && content.alias === 'submit') ||
+          (UI.undo && content.cmnd === 'undo') ||
+          content.cmnd === 'history'
+        );
+      return <button disabled={!enabled} onClick={()=>enabled && performCommand(content.cmnd)}>{content.alias || content.cmnd}</button>;
+    }
     case "playerref":
       return <span className="playerref">{content.player}</span>;
     case "nothing":

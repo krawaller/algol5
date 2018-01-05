@@ -1,3 +1,5 @@
+export * from './explanation';
+
 export type SaveData = {
   gameId: string,
   turnNumber: number,

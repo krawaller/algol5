@@ -59,9 +59,8 @@ export type StepUI = {
   maxStepIdx?: number,
 }
 
-export type ComplexContent = {type: string, [other:string]: any};
-
-export type Content = ComplexContent | string;
+import {ComplexContent, Content} from './content';
+export * from './content';
 
 export type StepControlUI = {
   potentialMarks: PositionList
@@ -254,6 +253,10 @@ export type WalkerDef = {
 
 export type NeighbourDef = {
   type: 'neighbour'
+  dir?: any
+  dirs?: any
+  start?: any
+  starts?: any
   condition?: any
   ifover?: any
   unlessover?: any

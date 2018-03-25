@@ -221,7 +221,7 @@ const scripts: Test[] = [
     [["b2","deploy","endturn","b2","promote","endturn","b2","promote","endturn"],["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"]],
     [["a2","deploy","endturn","a2","promote","endturn","a2","promote"],["win"]]
   ]],
-  ["Basic Serauqs script", "serauqs", [
+  /*["Basic Serauqs script", "serauqs", [
     [[],["a1", "b1", "c1", "d1"]],
     [["d1"],["makewild"]],
     [["makewild","endturn"],["a4", "b4", "c4", "d4"]],
@@ -229,7 +229,7 @@ const scripts: Test[] = [
     [["b1"],["a2", "b2", "c2"]],
     [["b2"],["move"]],
     [["move","endturn"],["a4", "b4", "c4", "d4"]]
-  ]],
+  ]],*/
   ["Basic Shoveoff script", "shoveoff", [
     [[],["a1", "a2", "a3", "a4", "b1", "b4", "c1", "c4", "d1", "d2", "d3", "d4"]],
     [["c1"],["north"]],

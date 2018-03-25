@@ -13,7 +13,7 @@ function isEmptyContent(content){
 
 export default function getStepInstruction(session: Session, step: Step, submitCmnd: string): ComplexContent {
   let {game,turn} = session;
-  let instruction;
+  let instruction; // TODO type!
   if (!session.endedBy){
     instruction = game[step.name+turn.player+'instruction'](turn,step);
     if (isEmptyContent(instruction) && submitCmnd){

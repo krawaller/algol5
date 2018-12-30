@@ -1,3 +1,8 @@
+/*
+NOTE - these scripts are being migrated to /gamescripts, and while that is ongoing they are duplicated here and there.
+So if u make a change here, do it over there too!
+*/
+
 type Line = string[][]; //[string[], string[]];
 type Test = [string, string, Line[]];
 

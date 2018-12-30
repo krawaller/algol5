@@ -12,6 +12,7 @@ previously copied.
 Only pushid, setid and setat actually manipulates individual unit objects, and they make copies
 
 setturnvar and setturnpos mutates TURNVARS
+setbattlevar and setbattlepos mutates BATTLEPOS
 */
 
 
@@ -142,6 +143,14 @@ function executeEffect(gameDef: Definition, player: 1 | 2, action: string, effe
       `,*/
       const [name,pos] = args;
       return `TURNVARS[${expr.value(name)}] = ${expr.position(pos)}; `;
+    }
+    case "setbattlevar": {
+      const [name,val] = args;
+      return `BATTLEVARS[${expr.value(name)}] = ${expr.value(val)}; `;
+    }
+    case "setbattlepos": {
+      const [name,pos] = args;
+      return `BATTLEVARS[${expr.value(name)}] = ${expr.position(pos)}; `;
     }
     case "setin": {
       /*

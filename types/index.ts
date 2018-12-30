@@ -109,6 +109,9 @@ export type Step = {
   TURNVARS?: {
     [varname: string]: any
   },
+  BATTLEVARS?: {
+    [varname: string]: any
+  },
   clones?: any, // whaaat?
 };
 

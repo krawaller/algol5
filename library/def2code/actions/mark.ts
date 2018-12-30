@@ -29,6 +29,7 @@ export default function addMarkFunction(def: Definition, markname: string, playe
   const linking = applyLinkInstructions(def, player, markname, markDef, false);
   const preludium = ifCodeContains(body + linking, {
     TURNVARS: 'var TURNVARS = step.TURNVARS; ',
+    BATTLEVARS: 'var BATTLEVARS = step.BATTLEVARS; ',
     ARTIFACTS: 'var ARTIFACTS = ' + copyArtifactsForAction(def,markDef) + '; ',
     UNITLAYERS: 'var UNITLAYERS = step.UNITLAYERS; '
   });

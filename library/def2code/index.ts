@@ -2,7 +2,7 @@
 import playerClosure from './playerclosure';
 import { Definition } from './types';
 import preProcess from './preprocess';
-import { isTerrainNeutral, contains, usesTurnVars } from './utils';
+import { isTerrainNeutral, contains, usesTurnVars, usesBattleVars } from './utils';
 
 // TODO - remove some shit from game.blah ?
 
@@ -33,6 +33,7 @@ export default function compileGameCode(def: Definition){
         var stepseed = {
           UNITDATA: deduceInitialUnitData(${JSON.stringify(def.setup || {})})
           ${usesTurnVars(def) ? ', TURNVARS: {}' : ''}
+          ${usesBattleVars(def) ? ', BATTLEVARS: {}' : ''}
           ${contains(def,'spawn') || contains(def,'spawnin') ? ', clones: 0' : ''}
         };
         return game.start1(turnseed,stepseed);

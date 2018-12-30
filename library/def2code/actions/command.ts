@@ -6,6 +6,7 @@ import makeParser from '../expressions';
 import {
   ifCodeContains,
   usesTurnVars,
+  usesBattleVars,
   contains,
   blankArtifactLayers,
 } from '../utils';
@@ -24,6 +25,7 @@ export default function addCommandFunction(def: Definition, player: 1 | 2, cmnd
       ${contains(cmndDef,'spawn') || contains(cmndDef,'spawnin') ? 'var clones = step.clones; ' : ''}
       var UNITLAYERS = step.UNITLAYERS;
       ${usesTurnVars(cmndDef) ? 'var TURNVARS = Object.assign({},step.TURNVARS); ' : ''}
+      ${usesBattleVars(cmndDef) ? 'var BATTLEVARS = Object.assign({},step.BATTLEVARS); ' : ''}
 
       ${applyEffectInstructions(def,player,cmndname,cmndDef)}
       MARKS = {};
@@ -42,6 +44,7 @@ export default function addCommandFunction(def: Definition, player: 1 | 2, cmnd
         path: step.path.concat('${cmndname}')
         ${contains(cmndDef,'spawn') || contains(cmndDef,'spawnin') ? ', clones: clones' : ''}
         ${usesTurnVars(cmndDef) ? ',TURNVARS: TURNVARS ' : ''}
+        ${usesBattleVars(cmndDef) ? ',BATTLEVARS: BATTLEVARS ' : ''}
       });
       turn.links[newstepid] = {};
 

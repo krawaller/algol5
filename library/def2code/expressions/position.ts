@@ -18,6 +18,10 @@ export default function parsePosition(gameDef: Definition, player: 1 | 2, actio
       const [pos] = args;
       return `TURNVARS['${pos}']`; // TODO - Not parse value here?
     }
+    case "battlepos": {
+      const [pos] = args;
+      return `BATTLEVARS['${pos}']`; // TODO - Not parse value here?
+    }
     case "pos": {
       const [pos] = args;
       return parse.value(pos);

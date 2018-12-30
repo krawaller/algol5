@@ -1,6 +1,6 @@
 import makeExpr from '../expressions';
 import { Definition } from '../types';
-import {ifCodeContains,usesTurnVars,contains,blankArtifactLayers} from '../utils';
+import {ifCodeContains,usesTurnVars,usesBattleVars,contains,blankArtifactLayers} from '../utils';
 import { calculateUnitLayers } from '../common';
 import applyLinkInstructions from './link';
 import applyGenerators from '../artifacts/generate';
@@ -23,6 +23,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
       var ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
       var UNITDATA = step.UNITDATA;
       ${usesTurnVars(def) ? 'var TURNVARS = {}; ' : ''}
+      ${usesBattleVars(def) ? 'var BATTLEVARS = step.BATTLEVARS; ' : ''}
       ${calculateUnitLayers(def, player, true)}
       ${applyGenerators(def,player,"startturn",startDef)}
       var newstep = turn.steps.root = {
@@ -35,6 +36,7 @@ export default function addStartFunction(def: Definition, player: 1 | 2){
         ${contains(def,'spawn') || contains(def,'spawnin') ? 'clones: step.clones, ' : ''}
         path: []
         ${usesTurnVars(def) ? ',TURNVARS: TURNVARS ' : ''}
+        ${usesBattleVars(def) ? ',BATTLEVARS: BATTLEVARS ' : ''}
       };
 
       ${applyLinkInstructions(def, player, 'startturn', startDef, true)}

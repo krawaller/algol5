@@ -92,6 +92,9 @@ export function usesTurnVars(search: Definition | any): boolean {
   return contains(search,'turnvar') || contains(search,'turnpos') || contains(search,'setturnvar') || contains(search,'setturnpos');
 }
 
+export function usesBattleVars(search: Definition | any): boolean {
+  return contains(search,'battlevar') || contains(search,'battlepos') || contains(search,'setbattlevar') || contains(search,'setbattlepos');
+}
 
 const colnametonumber = reduce("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ".split(""),(mem,char,n)=> {
 	mem[char] = n+1;

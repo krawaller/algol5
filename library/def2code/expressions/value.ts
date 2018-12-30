@@ -116,6 +116,14 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
       const [name] = args;
       return `TURNVARS[${parse.value(name)}]`;
     }
+    case "battlevar": {
+      const [name] = args;
+      return `BATTLEVARS[${parse.value(name)}]`;
+    }
+    case "battleval": {
+      const [name] = args;
+      return `BATTLEVARS[${parse.value(name)}]`;
+    }
     default: {
       try {
         if (from === 'id') throw "No, coming from id, dont try that";

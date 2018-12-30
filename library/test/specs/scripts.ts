@@ -1,4 +1,4 @@
-type Line = [string[], string[]];
+type Line = string[][]; //[string[], string[]];
 type Test = [string, string, Line[]];
 
 const scripts: Test[] = [
@@ -17,6 +17,9 @@ const scripts: Test[] = [
     [["g5","g4","move","endturn"],["a4", "b4", "c4", "d1", "d2", "d3", "g3"]],
     [["c4"],["c5", "c6", "c7", "c8", "d4", "e4", "f4", "g4"]],
     [["g4","move","endturn"],["e5", "e6", "e7", "e8", "f5", "g6", "h4", "h5"]],
+  ]],
+  ["Aries pushback hindrance", "aries", [
+    [["d3", "f3", "move", "endturn", "f5", "f3", "move", "endturn", "f2"],[],["f3"]]
   ]],
   ["Basic Atrium script", "atrium", [
     [[],["a2", "a3", "c5", "d1", "d5", "e2"]],
@@ -221,15 +224,6 @@ const scripts: Test[] = [
     [["b2","deploy","endturn","b2","promote","endturn","b2","promote","endturn"],["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"]],
     [["a2","deploy","endturn","a2","promote","endturn","a2","promote"],["win"]]
   ]],
-  /*["Basic Serauqs script", "serauqs", [
-    [[],["a1", "b1", "c1", "d1"]],
-    [["d1"],["makewild"]],
-    [["makewild","endturn"],["a4", "b4", "c4", "d4"]],
-    [["a4","makewild","endturn"],["a1", "b1", "c1", "d1"]],
-    [["b1"],["a2", "b2", "c2"]],
-    [["b2"],["move"]],
-    [["move","endturn"],["a4", "b4", "c4", "d4"]]
-  ]],*/
   ["Basic Shoveoff script", "shoveoff", [
     [[],["a1", "a2", "a3", "a4", "b1", "b4", "c1", "c4", "d1", "d2", "d3", "d4"]],
     [["c1"],["north"]],
@@ -281,6 +275,15 @@ const scripts: Test[] = [
     [["d2"], ["a1", "b1", "c1", "c3", "d3", "e1", "e3"]],
     [["d3","b5","move","endturn"], ["a5", "b5", "c5", "d5", "e5"]]
   ]],
+  /*["Basic Serauqs script", "serauqs", [
+    [[],["a1", "b1", "c1", "d1"]],
+    [["d1"],["makewild"]],
+    [["makewild","endturn"],["a4", "b4", "c4", "d4"]],
+    [["a4","makewild","endturn"],["a1", "b1", "c1", "d1"]],
+    [["b1"],["a2", "b2", "c2"]],
+    [["b2"],["move"]],
+    [["move","endturn"],["a4", "b4", "c4", "d4"]]
+  ]],*/
 ];
 
 export default scripts;

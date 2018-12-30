@@ -49,15 +49,17 @@
       };
       var stepseed = {
         UNITDATA: deduceInitialUnitData({
-          "soldiers": {
-            "1": [
-              ["rect", "a1", "d4"]
-            ],
-            "2": [
-              ["rect", "e5", "h8"]
-            ]
-          }
-        })
+            "soldiers": {
+              "1": [
+                ["rect", "a1", "d4"]
+              ],
+              "2": [
+                ["rect", "e5", "h8"]
+              ]
+            }
+          })
+          ,
+        BATTLEVARS: {}
       };
       return game.start1(turnseed, stepseed);
     };
@@ -75,6 +77,7 @@
       var player = 1;
       var otherplayer = 2;
       game.selectunit1 = function(turn, step, markpos) {
+        var BATTLEVARS = step.BATTLEVARS;
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
         });
@@ -93,7 +96,7 @@
             ARTIFACTS["movetargets"][POS] = {};
           }
           if (BLOCKS[POS]) {
-            if (UNITLAYERS.oppunits[POS]) {
+            if (!((POS === BATTLEVARS['pushsquare']) && ((UNITLAYERS.units[MARKS["selectunit"]] || {})["id"] === BATTLEVARS["pusheeid"])) && UNITLAYERS.oppunits[POS]) {
               ARTIFACTS["movetargets"][POS] = {
                 dir: DIR
               };
@@ -220,6 +223,9 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
+        var BATTLEVARS = Object.assign({}, step.BATTLEVARS);
+        BATTLEVARS["pusheeid"] = (UNITLAYERS.units[MARKS["selectmovetarget"]] || {})["id"];
+        BATTLEVARS["pushsquare"] = MARKS["selectmovetarget"];
         var LOOPID;
         for (var POS in ARTIFACTS.beingpushed) {
           if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
@@ -281,6 +287,8 @@
           stepid: newstepid,
           name: 'move',
           path: step.path.concat('move')
+            ,
+          BATTLEVARS: BATTLEVARS
         });
         turn.links[newstepid] = {};
         if (Object.keys(
@@ -337,6 +345,7 @@
           "squished": {}
         };
         var UNITDATA = step.UNITDATA;
+        var BATTLEVARS = step.BATTLEVARS;
         var UNITLAYERS = {
           "soldiers": {},
           "mysoldiers": {},
@@ -362,6 +371,8 @@
           stepid: 'root',
           name: 'start',
           path: []
+            ,
+          BATTLEVARS: BATTLEVARS
         };
         var newlinks = turn.links.root;
         for (var linkpos in UNITLAYERS.myunits) {
@@ -397,6 +408,7 @@
       var player = 2;
       var otherplayer = 1;
       game.selectunit2 = function(turn, step, markpos) {
+        var BATTLEVARS = step.BATTLEVARS;
         var ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
           movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
         });
@@ -415,7 +427,7 @@
             ARTIFACTS["movetargets"][POS] = {};
           }
           if (BLOCKS[POS]) {
-            if (UNITLAYERS.oppunits[POS]) {
+            if (!((POS === BATTLEVARS['pushsquare']) && ((UNITLAYERS.units[MARKS["selectunit"]] || {})["id"] === BATTLEVARS["pusheeid"])) && UNITLAYERS.oppunits[POS]) {
               ARTIFACTS["movetargets"][POS] = {
                 dir: DIR
               };
@@ -542,6 +554,9 @@
         var MARKS = step.MARKS;
         var UNITDATA = Object.assign({}, step.UNITDATA);
         var UNITLAYERS = step.UNITLAYERS;
+        var BATTLEVARS = Object.assign({}, step.BATTLEVARS);
+        BATTLEVARS["pusheeid"] = (UNITLAYERS.units[MARKS["selectmovetarget"]] || {})["id"];
+        BATTLEVARS["pushsquare"] = MARKS["selectmovetarget"];
         var LOOPID;
         for (var POS in ARTIFACTS.beingpushed) {
           if (LOOPID = (UNITLAYERS.units[POS] || {}).id) {
@@ -603,6 +618,8 @@
           stepid: newstepid,
           name: 'move',
           path: step.path.concat('move')
+            ,
+          BATTLEVARS: BATTLEVARS
         });
         turn.links[newstepid] = {};
         if (Object.keys(
@@ -659,6 +676,7 @@
           "squished": {}
         };
         var UNITDATA = step.UNITDATA;
+        var BATTLEVARS = step.BATTLEVARS;
         var UNITLAYERS = {
           "soldiers": {},
           "mysoldiers": {},
@@ -684,6 +702,8 @@
           stepid: 'root',
           name: 'start',
           path: []
+            ,
+          BATTLEVARS: BATTLEVARS
         };
         var newlinks = turn.links.root;
         for (var linkpos in UNITLAYERS.myunits) {

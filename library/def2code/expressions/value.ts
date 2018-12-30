@@ -79,6 +79,10 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
     case "step": {
       return "STEP";
     }
+    case "idat": {
+      const [pos] = args;
+      return parse.val(["read","units",pos,"id"]);
+    }
     case "read": {
       const [layer,pos,prop] = args;
       return layer === 'board' // no need for failsafe

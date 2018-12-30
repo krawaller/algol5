@@ -275,15 +275,15 @@ const scripts: Test[] = [
     [["d2"], ["a1", "b1", "c1", "c3", "d3", "e1", "e3"]],
     [["d3","b5","move","endturn"], ["a5", "b5", "c5", "d5", "e5"]]
   ]],
-  /*["Basic Serauqs script", "serauqs", [
+  ["Basic Serauqs script", "serauqs", [
     [[],["a1", "b1", "c1", "d1"]],
-    [["d1"],["makewild"]],
-    [["makewild","endturn"],["a4", "b4", "c4", "d4"]],
-    [["a4","makewild","endturn"],["a1", "b1", "c1", "d1"]],
+    [["d1"],["promote"]],
+    [["promote","endturn"],["a4", "b4", "c4", "d4"]],
+    [["a4","promote","endturn"],["a1", "b1", "c1", "d1"]],
     [["b1"],["a2", "b2", "c2"]],
     [["b2"],["move"]],
     [["move","endturn"],["a4", "b4", "c4", "d4"]]
-  ]],*/
+  ]]
 ];
 
 export default scripts;

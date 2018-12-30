@@ -24,7 +24,7 @@
 
 ## Library TODO
 
--[ ] Serauqs tests bug out, fix!
+-[x] Serauqs tests bug out, fix!
 -[x] Prevent pushback in Aries
 
 

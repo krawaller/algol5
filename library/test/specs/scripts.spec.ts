@@ -20,7 +20,7 @@ scripts.forEach(([name, gameId,lines], n) => {
     let turn = game.newGame();
     let at = 'root';
     let instr;
-    lines.forEach(([cmnds,expectedOpts], i) => {
+    lines.forEach(([cmnds,expectedOpts,forbiddenOpts=[]], i) => {
       t.doesNotThrow( () => {
         cmnds.forEach(cmnd => {
           let func = turn.links[at][cmnd];
@@ -37,8 +37,15 @@ scripts.forEach(([name, gameId,lines], n) => {
           }
         });
       }, "can perform " + (i ? [] : ['start']).concat(cmnds).join(","));
-      const missingOpts = expectedOpts.filter(o => !turn.links[at]);
-      t.deepEqual(missingOpts,[],"UI was " + (expectedOpts.length ? expectedOpts.join(",") : 'empty'));
+      const links = turn.links[at];
+      if (expectedOpts.length) {
+        const missingOpts = expectedOpts.filter(o => !links[o]);
+        t.deepEqual(missingOpts,[],"UI included " + expectedOpts.join(","));  
+      }
+      if (forbiddenOpts.length) {
+        const unwantedOpts = Object.keys(links).filter(o => forbiddenOpts.indexOf(o) !== -1);
+        t.deepEqual(unwantedOpts, [], "UI didnt include " + forbiddenOpts.join(","));
+      }
     });
     t.end();
   });

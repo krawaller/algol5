@@ -41,9 +41,17 @@ export default function parseBool(gameDef: Definition, player: 1 | 2, action: s
       const [v1,v2] = args;
       return `(${parse.val(v1)} === ${parse.val(v2)})`;
     }
+    case "samepos": {
+      const [p1,p2] = args;
+      return `(${parse.pos(p1)} === ${parse.pos(p2)})`;
+    }
     case "different": {
       const [v1,v2] = args;
       return `(${parse.val(v1)} !== ${parse.val(v2)})`;
+    }
+    case "differentpos": {
+      const [p1,p2] = args;
+      return `(${parse.pos(p1)} !== ${parse.pos(p2)})`;
     }
     case "morethan": {
       const [v1,v2] = args;

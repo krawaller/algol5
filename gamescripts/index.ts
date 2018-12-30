@@ -1,3 +1,5 @@
+import {GameTestSuite} from './types';
+
 import amazons from './pergame/amazons';
 import aries from './pergame/aries';
 import atrium from './pergame/atrium';
@@ -24,6 +26,6 @@ import transet from './pergame/transet';
 const gameScripts = {
   amazons, aries, atrium, castle, coffee, daggers, descent, duplo, gogol, gowiththefloe, jostle, kickrun, krieg, murusgallicus, murusgallicusadvanced,
   orthokon, semaphor, serauqs, shoveoff, snijpunt, threemusketeers, transet
-};
+} as { [gameId: string]: GameTestSuite }
 
 export default gameScripts;

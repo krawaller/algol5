@@ -42,7 +42,8 @@
             "2": ["a4", "d1", "g1", "j4"]
           }
         }),
-        TURNVARS: {},
+        TURNVARS: {}
+        ,
         clones: 0
       };
       return game.start1(turnseed, stepseed);

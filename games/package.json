@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "fs-extra": "^7.0.1",
+    "js-beautify": "^1.8.9"
+  }
+}

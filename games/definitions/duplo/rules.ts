@@ -1,0 +1,154 @@
+import {Definition} from '../../types';
+
+const duploRules: Definition = {
+  canalwaysend: {
+    deploy: true
+  },
+  endGame: {
+    boardfull: {
+      condition: ["same", ["sizeof", "units"], 64],
+      who: ["ifelse", ["morethan", ["sizeof", "myunits"],
+          ["sizeof", "oppunits"]
+        ],
+        ["player"],
+        ["ifelse", ["same", ["sizeof", "oppunits"],
+            ["sizeof", "myunits"]
+          ],
+          ["otherplayer"], 0
+        ]
+      ]
+    }
+  },
+  startTurn: {
+    link: ["ifelse", ["morethan", ["turn"], 2], "selectunit", "selectdeploy"]
+  },
+  marks: {
+    selectdeploy: {
+      from: ["subtract", "board", "units"],
+      link: "deploy"
+    },
+    selectunit: {
+      from: "myunits",
+      runGenerators: ["findspawndirs", "findgrowstarts", "findexpandpoints", "findoppstrengths"],
+      link: "selecttarget"
+    },
+    selecttarget: {
+      from: "targets",
+      runGenerators: ["findspawns"],
+      link: "expand"
+    }
+  },
+  commands: {
+    deploy: {
+      applyEffect: ["spawn", "selectdeploy", "soldiers"],
+      link: ["ifelse", ["morethan", ["sizeof", "mysoldiers"], 1], "endturn", "selectdeploy"]
+    },
+    expand: {
+      applyEffects: [
+        ["forposin", "spawns", ["spawn", ["target"], "soldiers", ["player"], {
+          from: ["pos", "selectunit"]
+        }]],
+        ["if", ["anyat", "units", "selecttarget"],
+          ["multi", ["killat", "selecttarget"],
+            ["spawn", "selecttarget", "soldiers", 0, {
+              from: ["pos", "selectunit"]
+            }]
+          ]
+        ]
+      ],
+      link: "endturn"
+    }
+  },
+  generators: {
+    findspawndirs: {
+      type: "neighbour",
+      start: "selectunit",
+      draw: {
+        neighbours: {
+          condition: ["noneat", "myunits", ["target"]],
+          tolayer: "spawndirs",
+          include: {
+            dir: ["dir"]
+          }
+        }
+      }
+    },
+    findgrowstarts: {
+      type: "walker",
+      starts: "spawndirs",
+      steps: "myunits",
+      dir: ["reldir", ["read", "spawndirs", ["start"], "dir"], 5],
+      draw: {
+        start: {
+          tolayer: "growstarts",
+          include: {
+            dir: ["reldir", ["dir"], 5],
+            strength: ["walklength"]
+          }
+        }
+      }
+    },
+    findexpandpoints: {
+      type: "walker",
+      starts: "growstarts",
+      dir: ["read", "growstarts", ["start"], "dir"],
+      startasstep: true,
+      blocks: "oppunits",
+      steps: ["subtract", "board", "units"],
+      testblocksbeforesteps: true,
+      max: ["read", "growstarts", ["start"], "strength"],
+      draw: {
+        steps: {
+          condition: ["same", ["step"],
+            ["max"]
+          ],
+          tolayer: "targets",
+          include: {
+            dir: ["reldir", ["dir"], 5]
+          }
+        },
+        block: {
+          tolayer: "potentialopptargets",
+          include: {
+            dir: ["dir"],
+            strength: ["max"]
+          }
+        }
+      }
+    },
+    findoppstrengths: {
+      type: "walker",
+      starts: "potentialopptargets",
+      dir: ["read", "potentialopptargets", ["start"], "dir"],
+      max: ["read", "potentialopptargets", ["start"], "strength"],
+      startasstep: true,
+      steps: "oppunits",
+      draw: {
+        start: {
+          tolayer: "targets",
+          condition: ["different", ["stopreason"], "reachedmax"],
+          include: {
+            dir: ["reldir", ["dir"], 5]
+          }
+        }
+      }
+    },
+    findspawns: {
+      type: "walker",
+      start: "selecttarget",
+      dir: ["read", "targets", "selecttarget", "dir"],
+      blocks: "units",
+      draw: {
+        start: {
+          condition: ["noneat", "units", ["start"]],
+          tolayer: "spawns"
+        },
+        steps: {
+          tolayer: "spawns"
+        }
+      }
+    }
+  }
+};
+
+export default duploRules;

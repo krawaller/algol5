@@ -1,0 +1,33 @@
+import {Instructions} from '../../types';
+
+const uglyduckInstructions: Instructions = {
+  startTurn: ["line", "Select", ["orlist", [
+      ["notempty", "mysoldiers"],
+      ["line", "a", "pawn", "to advance"]
+    ],
+    [
+      ["notempty", "mykings"],
+      ["line", "a", "king", "to retreat"]
+    ]
+  ]],
+  selectunit: ["ifelse", ["anyat", "mykings", "selectunit"],
+    ["line", "Select a square closer to home to move your", "king", "to"],
+    ["line", "Select a square closer to the enemy lines to move your", "pawn", "to"]
+  ],
+  selectmovetarget: ["line", "Press", "move", "to", ["ifelse", ["anyat", "mykings", "selectunit"],
+      ["line", "retreat your", "king"],
+      ["line", "advance your", "pawn"]
+    ], "from", "selectunit", ["ifelse", ["anyat", "opphomerow", "selectmovetarget"],
+      ["line", "into the opponent base at", "selectmovetarget"],
+      ["ifelse", ["anyat", "myhomerow", "selectmovetarget"],
+        ["line", "back home to", "selectmovetarget"],
+        ["line", "to", "selectmovetarget"]
+      ]
+    ],
+    ["if", ["anyat", "oppunits", "selectmovetarget"],
+      ["line", ", killing the enemy", ["unitnameat", "selectmovetarget"]]
+    ]
+  ]
+};
+
+export default uglyduckInstructions;

@@ -1,6 +1,11 @@
 {
+  "scripts": {
+    "fetch": "npx ts-node ./fetch"
+  },
   "devDependencies": {
     "fs-extra": "^7.0.1",
-    "js-beautify": "^1.8.9"
+    "js-beautify": "^1.8.9",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
   }
 }

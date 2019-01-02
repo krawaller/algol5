@@ -1,6 +1,7 @@
 import {Setup} from '../../types';
+import { GowiththefloeUnit } from './_types';
 
-const gowiththefloeSetup: Setup = {
+const gowiththefloeSetup: Setup<GowiththefloeUnit> = {
   seals: {
     "1": ["b2", "b7"]
   },

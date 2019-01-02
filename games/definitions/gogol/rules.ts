@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { GogolTerrain, GogolUnit } from './_types';
 
-const gogolRules: Definition = {
+const gogolRules: Definition<GogolTerrain, GogolUnit> = {
   startTurn: {
     runGenerators: ["findforbiddenkingspots", "findforbiddensoldierspots"],
     link: ["ifelse", ["morethan", ["turn"], 2], "selectunit", "selectkingdeploy"]

@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { DuploTerrain, DuploUnit } from './_types';
 
-const duploRules: Definition = {
+const duploRules: Definition<DuploTerrain, DuploUnit> = {
   canalwaysend: {
     deploy: true
   },

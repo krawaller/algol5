@@ -1,6 +1,7 @@
 import {Instructions} from '../../types';
+import { JostlePhase } from './_types';
 
-const jostleInstructions: Instructions = {
+const jostleInstructions: Instructions<JostlePhase> = {
   startTurn: "Select which unit to jostle!",
   selectunit: ["line", "This unit neighbours", ["pluralise", ["sizeof", "initialfriend"], "friend", "friends"], "and", ["pluralise", ["sizeof", "initialenemy"], "enemy", "enemies"], "making the square worth", ["minus", ["sizeof", "initialfriend"],
     ["sizeof", "initialenemy"]

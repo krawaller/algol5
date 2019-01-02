@@ -1,6 +1,7 @@
 import {Setup} from '../../types';
+import { TransetUnit } from './_types';
 
-const transetSetup: Setup = {
+const transetSetup: Setup<TransetUnit> = {
   pinets: {
     "1": ["a1", "e1"],
     "2": ["a5", "e5"]

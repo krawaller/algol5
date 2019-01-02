@@ -1,6 +1,7 @@
 import {Board} from '../../types';
+import { AriesTerrain } from './_types';
 
-const ariesBoard: Board = {
+const ariesBoard: Board<AriesTerrain> = {
   height: 8,
   width: 8,
   terrain: {

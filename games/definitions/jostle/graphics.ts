@@ -1,6 +1,7 @@
 import {Graphics} from '../../types';
+import { JostleTerrain, JostleUnit } from './_types';
 
-const jostleGraphics: Graphics = {
+const jostleGraphics: Graphics<JostleTerrain, JostleUnit> = {
   icons: {
     checkers: "pawn"
   }

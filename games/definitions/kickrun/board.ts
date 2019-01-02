@@ -1,6 +1,7 @@
 import {Board} from '../../types';
+import { KickrunTerrain } from './_types';
 
-const kickrunBoard: Board = {
+const kickrunBoard: Board<KickrunTerrain> = {
   height: 5,
   width: 5,
   terrain: {

@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { _testTerrain, _testUnit } from './_types';
 
-const _testRules: Definition = {
+const _testRules: Definition<_testTerrain, _testUnit> = {
   startTurn: {
     link: "selectunit"
   },

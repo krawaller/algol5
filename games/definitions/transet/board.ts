@@ -1,6 +1,7 @@
 import {Board} from '../../types';
+import { TransetTerrain } from './_types';
 
-const transetBoard: Board = {
+const transetBoard: Board<TransetTerrain> = {
   height: 5,
   width: 5,
   terrain: {

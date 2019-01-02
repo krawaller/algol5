@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { KickrunTerrain, KickrunUnit } from './_types';
 
-const kickrunRules: Definition = {
+const kickrunRules: Definition<KickrunTerrain, KickrunUnit> = {
   startTurn: {
     link: "selectunit"
   },

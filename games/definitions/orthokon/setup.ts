@@ -1,6 +1,7 @@
 import {Setup} from '../../types';
+import { OrthokonUnit } from './_types';
 
-const orthokonSetup: Setup = {
+const orthokonSetup: Setup<OrthokonUnit> = {
   soldiers: {
     "1": [
       ["rect", "a1", "d1"]

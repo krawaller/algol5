@@ -1,6 +1,7 @@
 import {Setup} from '../../types';
+import { _testUnit } from './_types';
 
-const _testSetup: Setup = {
+const _testSetup: Setup<_testUnit> = {
   stepsfirsts: {
     "1": ["a3"]
   },

@@ -1,6 +1,7 @@
 import {Instructions} from '../../types';
+import { GogolPhase } from './_types';
 
-const gogolInstructions: Instructions = {
+const gogolInstructions: Instructions<GogolPhase> = {
   startTurn: ["ifelse", ["morethan", ["turn"], 2], "Select a unit to move", "Select where to deploy your king"],
   selectkingdeploy: ["line", "Press", "deploy", "to place your king here"],
   selectunit: ["ifelse", ["anyat", "kings", "selectunit"],

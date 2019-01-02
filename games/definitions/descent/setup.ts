@@ -1,6 +1,7 @@
 import {Setup} from '../../types';
+import { DescentUnit } from './_types';
 
-const descentSetup: Setup = {
+const descentSetup: Setup<DescentUnit> = {
   rooks: {
     "0": [
       ["rect", "a2", "d3"], "b4", "c1"

@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { SerauqsTerrain, SerauqsUnit } from './_types';
 
-const serauqsRules: Definition = {
+const serauqsRules: Definition<SerauqsTerrain, SerauqsUnit> = {
   endGame: {
     madeline: {
       condition: ["notempty", "winline"],

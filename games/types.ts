@@ -27,9 +27,9 @@ export type Meta = {
   rules?: RuleDescription;
   [otherMeta: string]: any;
 };
-export type Graphics = any;
-export type Board = any;
-export type Setup = any;
+export type Graphics<Terrains, Units> = any;
+export type Board<Terrains> = any;
+export type Setup<Units> = any;
 export type AI = any;
 export type CommandDef = any;
 export type MarkDef = any;
@@ -89,7 +89,7 @@ export type FilterDef = {
   matching?: any;
 };
 
-export type Definition = {
+export type Definition<Terrains, Units> = {
   flow?: any;
   TODO?: string;
   STATUS?: string;
@@ -121,4 +121,4 @@ export type GameTestSuite = {
   [desc: string]: Line[];
 };
 
-export type Instructions = any;
+export type Instructions<Phase> = any;

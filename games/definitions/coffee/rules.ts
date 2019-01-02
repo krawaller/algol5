@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { CoffeeTerrain, CoffeeUnit } from './_types';
 
-const coffeeRules: Definition = {
+const coffeeRules: Definition<CoffeeTerrain, CoffeeUnit> = {
   TODO: "use different unit type for placeholders? Reference oppnent plr properly",
   endTurn: {
     unless: {

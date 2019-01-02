@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { AtriumTerrain, AtriumUnit } from './_types';
 
-const atriumRules: Definition = {
+const atriumRules: Definition<AtriumTerrain, AtriumUnit> = {
   endGame: {
     madewinline: {
       condition: ["notempty", "winline"],

@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { ThreemusketeersTerrain, ThreemusketeersUnit } from './_types';
 
-const threemusketeersRules: Definition = {
+const threemusketeersRules: Definition<ThreemusketeersTerrain, ThreemusketeersUnit> = {
   startTurn: {
     link: "selectunit"
   },

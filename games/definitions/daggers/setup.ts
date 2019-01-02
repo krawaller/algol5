@@ -1,6 +1,7 @@
 import {Setup} from '../../types';
+import { DaggersUnit } from './_types';
 
-const daggersSetup: Setup = {
+const daggersSetup: Setup<DaggersUnit> = {
   crowns: {
     "1": ["d8", "e8"],
     "2": ["c1", "f1"]

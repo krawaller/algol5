@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { MurusgallicusTerrain, MurusgallicusUnit } from './_types';
 
-const murusgallicusRules: Definition = {
+const murusgallicusRules: Definition<MurusgallicusTerrain, MurusgallicusUnit> = {
   startTurn: {
     link: "selecttower"
   },

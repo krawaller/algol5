@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { AriesTerrain, AriesUnit } from './_types';
 
-const ariesRules: Definition = {
+const ariesRules: Definition<AriesTerrain, AriesUnit> = {
   startTurn: {
     link: "selectunit"
   },

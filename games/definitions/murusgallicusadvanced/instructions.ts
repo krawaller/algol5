@@ -1,6 +1,7 @@
 import {Instructions} from '../../types';
+import { MurusgallicusadvancedPhase } from './_types';
 
-const murusgallicusadvancedInstructions: Instructions = {
+const murusgallicusadvancedInstructions: Instructions<MurusgallicusadvancedPhase> = {
   startTurn: ["line", "Select a", ["orlist", [
       ["notempty", "mytowers"], "rook"
     ],

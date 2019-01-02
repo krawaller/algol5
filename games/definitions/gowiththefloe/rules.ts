@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { GowiththefloeTerrain, GowiththefloeUnit } from './_types';
 
-const gowiththefloeRules: Definition = {
+const gowiththefloeRules: Definition<GowiththefloeTerrain, GowiththefloeUnit> = {
   STATUS: "wip",
   startTurn: {
     link: "selectunit"

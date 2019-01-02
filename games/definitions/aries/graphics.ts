@@ -1,6 +1,7 @@
 import {Graphics} from '../../types';
+import { AriesTerrain, AriesUnit } from './_types';
 
-const ariesGraphics: Graphics = {
+const ariesGraphics: Graphics<AriesTerrain, AriesUnit> = {
   tiles: {
     corner: "playercolour"
   },

@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { JostleTerrain, JostleUnit } from './_types';
 
-const jostleRules: Definition = {
+const jostleRules: Definition<JostleTerrain, JostleUnit> = {
   startTurn: {
     link: "selectunit"
   },

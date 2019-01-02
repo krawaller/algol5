@@ -1,6 +1,7 @@
 import {Instructions} from '../../types';
+import { TransetPhase } from './_types';
 
-const transetInstructions: Instructions = {
+const transetInstructions: Instructions<TransetPhase> = {
   startTurn: ["line", "Select a unit to", "move"],
   selectunit: ["line", "Select", ["orlist", [
       ["notempty", "movetargets"],

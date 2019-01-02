@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { ShoveoffTerrain, ShoveoffUnit } from './_types';
 
-const shoveoffRules: Definition = {
+const shoveoffRules: Definition<ShoveoffTerrain, ShoveoffUnit> = {
   TODO: "findaffected SHOULD BE AN OFFSET",
   endGame: {
     madeline: {

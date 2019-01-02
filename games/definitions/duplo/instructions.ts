@@ -1,6 +1,7 @@
 import {Instructions} from '../../types';
+import { DuploPhase } from './_types';
 
-const duploInstructions: Instructions = {
+const duploInstructions: Instructions<DuploPhase> = {
   startTurn: ["ifelse", ["morethan", ["turn"], 2], "Select unit to expand from", "Select where to deploy the first of your two initial units"],
   selectdeploy: ["ifelse", ["same", ["sizeof", "myunits"], 1],
     ["line", "Press", "deploy", "to place your second unit at", "selectdeploy"],

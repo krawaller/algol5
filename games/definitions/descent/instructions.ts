@@ -1,6 +1,7 @@
 import {Instructions} from '../../types';
+import { DescentPhase } from './_types';
 
-const descentInstructions: Instructions = {
+const descentInstructions: Instructions<DescentPhase> = {
   startTurn: "Select a unit to move and dig with",
   selectunit: "Select where to move this unit",
   selectmovetarget: ["line", "Press", "move", "to", ["ifelse", ["same", ["read", "units", "selectunit", "group"],

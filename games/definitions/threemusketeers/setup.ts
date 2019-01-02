@@ -1,6 +1,7 @@
 import {Setup} from '../../types';
+import { ThreemusketeersUnit } from './_types';
 
-const threemusketeersSetup: Setup = {
+const threemusketeersSetup: Setup<ThreemusketeersUnit> = {
   kings: {
     "1": ["a1", "c3", "e5"]
   },

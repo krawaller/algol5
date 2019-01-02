@@ -1,6 +1,7 @@
 import {Board} from '../../types';
+import { UglyduckTerrain } from './_types';
 
-const uglyduckBoard: Board = {
+const uglyduckBoard: Board<UglyduckTerrain> = {
   height: 5,
   width: 5,
   terrain: {

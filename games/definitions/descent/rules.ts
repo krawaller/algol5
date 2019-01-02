@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { DescentTerrain, DescentUnit } from './_types';
 
-const descentRules: Definition = {
+const descentRules: Definition<DescentTerrain, DescentUnit> = {
   endGame: {
     madeline: {
       condition: ["notempty", "winline"],

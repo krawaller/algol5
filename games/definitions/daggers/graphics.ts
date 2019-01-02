@@ -1,6 +1,7 @@
 import {Graphics} from '../../types';
+import { DaggersTerrain, DaggersUnit } from './_types';
 
-const daggersGraphics: Graphics = {
+const daggersGraphics: Graphics<DaggersTerrain, DaggersUnit> = {
   tiles: {
     base: "playercolour"
   },

@@ -1,6 +1,7 @@
 import {Graphics} from '../../types';
+import { SerauqsTerrain, SerauqsUnit } from './_types';
 
-const serauqsGraphics: Graphics = {
+const serauqsGraphics: Graphics<SerauqsTerrain, SerauqsUnit> = {
   icons: {
     soldiers: "pawn",
     wild: "king"

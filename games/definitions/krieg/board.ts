@@ -1,6 +1,7 @@
 import {Board} from '../../types';
+import { KriegTerrain } from './_types';
 
-const kriegBoard: Board = {
+const kriegBoard: Board<KriegTerrain> = {
   width: 4,
   height: 4,
   terrain: {

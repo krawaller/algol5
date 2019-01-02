@@ -1,6 +1,7 @@
 import {Definition} from '../../types';
+import { OrthokonTerrain, OrthokonUnit } from './_types';
 
-const orthokonRules: Definition = {
+const orthokonRules: Definition<OrthokonTerrain, OrthokonUnit> = {
   startTurn: {
     link: "selectunit"
   },

@@ -4,6 +4,10 @@ const path = require("path");
 function possibles(def) {
   if (typeof def === "string") return [def];
   switch (def[0]) {
+    case "ifplayer":
+      return possibles(def[2]);
+    case "playercase":
+      return possibles(def[1]).concat(possibles(def[2]));
     case "if":
       return possibles(def[2]);
     case "ifelse":

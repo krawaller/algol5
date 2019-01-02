@@ -42,9 +42,12 @@ export type CommandDef = any;
 export type MarkDef = any;
 export type StartTurn = any;
 export type EndGameDef = any;
-export type GeneratorDef = WalkerDef | NeighbourDef | FilterDef;
+export type GeneratorDef<ArtifactLayer, Layer> =
+  | WalkerDef<ArtifactLayer, Layer>
+  | NeighbourDef<ArtifactLayer, Layer>
+  | FilterDef<ArtifactLayer, Layer>;
 
-export type DrawDef = {
+export type DrawDef<ArtifactLayer, Layer> = {
   tolayer: any;
   include?: any;
   condition?: any;
@@ -52,7 +55,7 @@ export type DrawDef = {
   unlessover?: any;
 };
 
-export type WalkerDef = {
+export type WalkerDef<ArtifactLayer, Layer> = {
   type: "walker";
   dir?: any;
   dirs?: any;
@@ -65,16 +68,16 @@ export type WalkerDef = {
   startasstep?: boolean;
   max?: any;
   draw: {
-    start?: DrawDef;
-    steps?: DrawDef;
-    block?: DrawDef;
-    last?: DrawDef;
-    all?: DrawDef;
-    count?: DrawDef;
+    start?: DrawDef<ArtifactLayer, Layer>;
+    steps?: DrawDef<ArtifactLayer, Layer>;
+    block?: DrawDef<ArtifactLayer, Layer>;
+    last?: DrawDef<ArtifactLayer, Layer>;
+    all?: DrawDef<ArtifactLayer, Layer>;
+    count?: DrawDef<ArtifactLayer, Layer>;
   };
 };
 
-export type NeighbourDef = {
+export type NeighbourDef<ArtifactLayer, Layer> = {
   type: "neighbour";
   dir?: any;
   dirs?: any;
@@ -84,15 +87,15 @@ export type NeighbourDef = {
   ifover?: any;
   unlessover?: any;
   draw: {
-    start?: DrawDef;
-    neighbours?: DrawDef;
+    start?: DrawDef<ArtifactLayer, Layer>;
+    neighbours?: DrawDef<ArtifactLayer, Layer>;
   };
 };
 
-export type FilterDef = {
+export type FilterDef<ArtifactLayer, Layer> = {
   type: "filter";
   layer: any;
-  tolayer: any;
+  tolayer: ArtifactLayer;
   matching?: any;
 };
 
@@ -119,7 +122,7 @@ export type Definition<
   };
   commands: { [cmndname in Command]: CommandDef };
   marks: { [markname in Mark]: MarkDef };
-  generators: { [genname in Generator]: GeneratorDef };
+  generators: { [genname in Generator]: GeneratorDef<ArtifactLayer, Layer> };
 };
 
 export type Line = string[][]; //[string[], string[]];

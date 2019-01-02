@@ -3,7 +3,8 @@ import { ThreemusketeersTerrain } from './_types';
 
 const threemusketeersBoard: Board<ThreemusketeersTerrain> = {
   height: 5,
-  width: 5
+  width: 5,
+  terrain: {}
 };
 
 export default threemusketeersBoard;

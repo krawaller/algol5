@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { SerauqsTerrain, SerauqsUnit } from './_types';
+import { SerauqsUnit, SerauqsArtifactLayer, SerauqsLayer, SerauqsGenerator, SerauqsMark, SerauqsCommand } from './_types';
 
-const serauqsRules: Definition<SerauqsTerrain, SerauqsUnit> = {
+const serauqsRules: Definition<SerauqsUnit, SerauqsArtifactLayer, SerauqsLayer, SerauqsGenerator, SerauqsMark, SerauqsCommand> = {
   endGame: {
     madeline: {
       condition: ["notempty", "winline"],

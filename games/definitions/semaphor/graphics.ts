@@ -6,7 +6,8 @@ const semaphorGraphics: Graphics<SemaphorTerrain, SemaphorUnit> = {
     kings: "king",
     pawns: "pawn",
     bishops: "bishop"
-  }
+  },
+  tiles: {}
 };
 
 export default semaphorGraphics;

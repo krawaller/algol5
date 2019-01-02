@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { DuploTerrain, DuploUnit } from './_types';
+import { DuploUnit, DuploArtifactLayer, DuploLayer, DuploGenerator, DuploMark, DuploCommand } from './_types';
 
-const duploRules: Definition<DuploTerrain, DuploUnit> = {
+const duploRules: Definition<DuploUnit, DuploArtifactLayer, DuploLayer, DuploGenerator, DuploMark, DuploCommand> = {
   canalwaysend: {
     deploy: true
   },

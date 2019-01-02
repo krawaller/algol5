@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { AriesTerrain, AriesUnit } from './_types';
+import { AriesUnit, AriesArtifactLayer, AriesLayer, AriesGenerator, AriesMark, AriesCommand } from './_types';
 
-const ariesRules: Definition<AriesTerrain, AriesUnit> = {
+const ariesRules: Definition<AriesUnit, AriesArtifactLayer, AriesLayer, AriesGenerator, AriesMark, AriesCommand> = {
   startTurn: {
     link: "selectunit"
   },

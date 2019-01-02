@@ -10,11 +10,18 @@ export default function stub(gameId) {
   // ------------- ANALYSIS -----------
   fs.writeFileSync(
     path.join(defPath, "_types.ts"),
-    `export type ${capId}Terrain = never;
+    `import { CommonLayer } from '../../types';
+
+export type ${capId}Terrain = never;
 export type ${capId}Unit = never;
 export type ${capId}Mark = never;
 export type ${capId}Command = never;
 export type ${capId}Phase = "startTurn";
+export type ${capId}UnitLayer = never;
+export type ${capId}ArtifactLayer = never;
+export type ${capId}TerrainLayer = never;
+export type ${capId}Layer = CommonLayer;
+export type ${capId}Generator = never;
 `
   );
 
@@ -100,9 +107,9 @@ export default ${capId}Meta;
   fs.writeFileSync(
     path.join(defPath, "rules.ts"),
     `import {Rules} from '../../types';
-import { ${capId}Terrain, ${capId}Unit } from './_types';
+import { ${capId}Unit, ${capId}ArtifactLayer, ${capId}Layer, ${capId}Generator, ${capId}Mark, ${capId}Command } from './_types';
 
-const ${capId}Rules: Rules<${capId}Terrain, ${capId}Unit> = {
+const ${capId}Rules: Rules<${capId}Unit, ${capId}ArtifactLayer, ${capId}Layer, > = {
   startTurn: {
 
   },

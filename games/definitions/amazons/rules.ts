@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { AmazonsTerrain, AmazonsUnit } from './_types';
+import { AmazonsUnit, AmazonsArtifactLayer, AmazonsLayer, AmazonsGenerator, AmazonsMark, AmazonsCommand } from './_types';
 
-const amazonsRules: Definition<AmazonsTerrain, AmazonsUnit> = {
+const amazonsRules: Definition<AmazonsUnit, AmazonsArtifactLayer, AmazonsLayer, AmazonsGenerator, AmazonsMark, AmazonsCommand> = {
   startTurn: {
     link: "selectunit"
   },

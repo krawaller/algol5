@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { KriegTerrain, KriegUnit } from './_types';
+import { KriegUnit, KriegArtifactLayer, KriegLayer, KriegGenerator, KriegMark, KriegCommand } from './_types';
 
-const kriegRules: Definition<KriegTerrain, KriegUnit> = {
+const kriegRules: Definition<KriegUnit, KriegArtifactLayer, KriegLayer, KriegGenerator, KriegMark, KriegCommand> = {
   marks: {
     selectunit: {
       from: "mynotfrozens",

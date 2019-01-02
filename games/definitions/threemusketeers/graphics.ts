@@ -5,7 +5,8 @@ const threemusketeersGraphics: Graphics<ThreemusketeersTerrain, ThreemusketeersU
   icons: {
     pawns: "pawn",
     kings: "king"
-  }
+  },
+  tiles: {}
 };
 
 export default threemusketeersGraphics;

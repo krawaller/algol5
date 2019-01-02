@@ -33,6 +33,10 @@ fs.readdirSync("../library/defs")
       setup,
       ...rules
     } = json;
+    graphics.icons = graphics.icons || {};
+    graphics.tiles = graphics.tiles || {};
+    board.terrain = board.terrain || {};
+
     let scripts;
     try {
       scripts = fs
@@ -64,9 +68,17 @@ export default ${gameId}Meta;
     fs.writeFileSync(
       "./definitions/" + gameId + "/rules.ts",
       `import {Definition} from '../../types';
-${importTypes(gameId, "Terrain", "Unit")}
+${importTypes(
+        gameId,
+        "Unit",
+        "ArtifactLayer",
+        "Layer",
+        "Generator",
+        "Mark",
+        "Command"
+      )}
 
-const ${gameId}Rules: Definition<${capId}Terrain, ${capId}Unit> = ${makeNice(
+const ${gameId}Rules: Definition<${capId}Unit, ${capId}ArtifactLayer, ${capId}Layer, ${capId}Generator, ${capId}Mark, ${capId}Command> = ${makeNice(
         rules
       )};
 

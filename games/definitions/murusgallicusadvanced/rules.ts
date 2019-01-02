@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { MurusgallicusadvancedTerrain, MurusgallicusadvancedUnit } from './_types';
+import { MurusgallicusadvancedUnit, MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedMark, MurusgallicusadvancedCommand } from './_types';
 
-const murusgallicusadvancedRules: Definition<MurusgallicusadvancedTerrain, MurusgallicusadvancedUnit> = {
+const murusgallicusadvancedRules: Definition<MurusgallicusadvancedUnit, MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedMark, MurusgallicusadvancedCommand> = {
   startTurn: {
     links: ["selecttower", "selectcatapult"]
   },

@@ -27,9 +27,16 @@ export type Meta = {
   rules?: RuleDescription;
   [otherMeta: string]: any;
 };
-export type Graphics<Terrains, Units> = any;
-export type Board<Terrains> = any;
-export type Setup<Units> = any;
+export type Graphics<Terrain extends string, Unit extends string> = {
+  icons: { [unit in Unit]: any };
+  tiles: Partial<{ [terrain in Terrain]: any }>;
+};
+export type Board<Terrain extends string> = {
+  height: Number;
+  width: Number;
+  terrain: { [terrain in Terrain]: any };
+};
+export type Setup<Unit extends string> = Partial<{ [unit in Unit]: any }>;
 export type AI = any;
 export type CommandDef = any;
 export type MarkDef = any;
@@ -89,7 +96,14 @@ export type FilterDef = {
   matching?: any;
 };
 
-export type Definition<Terrains, Units> = {
+export type Definition<
+  Unit,
+  ArtifactLayer,
+  Layer,
+  Generator extends string,
+  Mark extends string,
+  Command extends string
+> = {
   flow?: any;
   TODO?: string;
   STATUS?: string;
@@ -103,16 +117,9 @@ export type Definition<Terrains, Units> = {
   endTurn?: {
     unless: any;
   };
-  AI?: AI;
-  commands: {
-    [cmndname: string]: CommandDef;
-  };
-  marks: {
-    [markname: string]: MarkDef;
-  };
-  generators: {
-    [genname: string]: GeneratorDef;
-  };
+  commands: { [cmndname in Command]: CommandDef };
+  marks: { [markname in Mark]: MarkDef };
+  generators: { [genname in Generator]: GeneratorDef };
 };
 
 export type Line = string[][]; //[string[], string[]];
@@ -122,3 +129,12 @@ export type GameTestSuite = {
 };
 
 export type Instructions<Phase extends string> = { [phase in Phase]: any };
+
+export type CommonLayer =
+  | "myunits"
+  | "oppunits"
+  | "neutralunits"
+  | "units"
+  | "board"
+  | "light"
+  | "dark";

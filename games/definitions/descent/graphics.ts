@@ -6,7 +6,8 @@ const descentGraphics: Graphics<DescentTerrain, DescentUnit> = {
     pawns: "pawn",
     knights: "knight",
     rooks: "rook"
-  }
+  },
+  tiles: {}
 };
 
 export default descentGraphics;

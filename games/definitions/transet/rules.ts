@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { TransetTerrain, TransetUnit } from './_types';
+import { TransetUnit, TransetArtifactLayer, TransetLayer, TransetGenerator, TransetMark, TransetCommand } from './_types';
 
-const transetRules: Definition<TransetTerrain, TransetUnit> = {
+const transetRules: Definition<TransetUnit, TransetArtifactLayer, TransetLayer, TransetGenerator, TransetMark, TransetCommand> = {
   endGame: {
     infiltration: {
       condition: ["overlaps", "myunits", "oppbase"],

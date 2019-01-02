@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { GowiththefloeTerrain, GowiththefloeUnit } from './_types';
+import { GowiththefloeUnit, GowiththefloeArtifactLayer, GowiththefloeLayer, GowiththefloeGenerator, GowiththefloeMark, GowiththefloeCommand } from './_types';
 
-const gowiththefloeRules: Definition<GowiththefloeTerrain, GowiththefloeUnit> = {
+const gowiththefloeRules: Definition<GowiththefloeUnit, GowiththefloeArtifactLayer, GowiththefloeLayer, GowiththefloeGenerator, GowiththefloeMark, GowiththefloeCommand> = {
   STATUS: "wip",
   startTurn: {
     link: "selectunit"

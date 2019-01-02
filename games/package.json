@@ -3,6 +3,8 @@
     "fetch": "npx ts-node ./fetch"
   },
   "devDependencies": {
+    "@types/fs-extra": "^5.0.4",
+    "@types/node": "^10.12.18",
     "fs-extra": "^7.0.1",
     "js-beautify": "^1.8.9",
     "ts-node": "^7.0.1",

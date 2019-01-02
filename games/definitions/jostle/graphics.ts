@@ -4,7 +4,8 @@ import { JostleTerrain, JostleUnit } from './_types';
 const jostleGraphics: Graphics<JostleTerrain, JostleUnit> = {
   icons: {
     checkers: "pawn"
-  }
+  },
+  tiles: {}
 };
 
 export default jostleGraphics;

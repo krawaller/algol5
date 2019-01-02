@@ -5,7 +5,8 @@ const atriumGraphics: Graphics<AtriumTerrain, AtriumUnit> = {
   icons: {
     kings: "king",
     queens: "queen"
-  }
+  },
+  tiles: {}
 };
 
 export default atriumGraphics;

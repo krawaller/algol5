@@ -121,4 +121,4 @@ export type GameTestSuite = {
   [desc: string]: Line[];
 };
 
-export type Instructions<Phase> = any;
+export type Instructions<Phase extends string> = { [phase in Phase]: any };

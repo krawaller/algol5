@@ -14,7 +14,7 @@ export default function stub(gameId) {
 export type ${capId}Unit = never;
 export type ${capId}Mark = never;
 export type ${capId}Command = never;
-export type ${capId}Phase = "startTurn" | ${capId}Command | ${capId}Mark;
+export type ${capId}Phase = "startTurn";
 `
   );
 

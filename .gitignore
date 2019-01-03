@@ -3,3 +3,4 @@ npm-debug.log
 dist
 thumbs.db
 bogus
+.DS_Store

@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit } from './_types';
 
-const orthokonRules: Definition<OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit> = {
+const orthokonFlow: Flow<OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit> = {
   startTurn: {
     link: "selectunit"
   },
@@ -28,4 +28,4 @@ const orthokonRules: Definition<OrthokonArtifactLayer, OrthokonCommand, Orthokon
   }
 };
 
-export default orthokonRules;
+export default orthokonFlow;

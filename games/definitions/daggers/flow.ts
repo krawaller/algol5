@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { DaggersArtifactLayer, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersUnit } from './_types';
 
-const daggersRules: Definition<DaggersArtifactLayer, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersUnit> = {
+const daggersFlow: Flow<DaggersArtifactLayer, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersUnit> = {
   endGame: {
     infiltration: {
       condition: ["overlaps", "mycrowns", "oppbase"],
@@ -35,4 +35,4 @@ const daggersRules: Definition<DaggersArtifactLayer, DaggersCommand, DaggersGene
   }
 };
 
-export default daggersRules;
+export default daggersFlow;

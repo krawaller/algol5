@@ -29,7 +29,7 @@ fs.readdirSync("../library/defs")
       board,
       setup,
       generators,
-      ...rules
+      ...flow
     } = json;
     graphics.icons = graphics.icons || {};
     graphics.tiles = graphics.tiles || {};
@@ -62,16 +62,16 @@ export default ${gameId}Meta;
 `
     );
 
-    // -------------- RULES --------------
-    const rsig = typeSignature("Definition", gameId);
+    // -------------- Flow --------------
+    const fsig = typeSignature("Flow", gameId);
     fs.writeFileSync(
-      "./definitions/" + gameId + "/rules.ts",
-      `import {Definition} from '../../types';
-import { ${rsig} } from './_types';
+      "./definitions/" + gameId + "/flow.ts",
+      `import {Flow} from '../../types';
+import { ${fsig} } from './_types';
 
-const ${gameId}Rules: Definition<${rsig}> = ${makeNice(rules)};
+const ${gameId}Flow: Flow<${fsig}> = ${makeNice(flow)};
 
-export default ${gameId}Rules;
+export default ${gameId}Flow;
 `
     );
 

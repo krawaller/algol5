@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { _testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit } from './_types';
 
-const _testRules: Definition<_testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit> = {
+const _testFlow: Flow<_testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit> = {
   startTurn: {
     link: "selectunit"
   },
@@ -19,4 +19,4 @@ const _testRules: Definition<_testArtifactLayer, _testCommand, _testGenerator, _
   commands: {}
 };
 
-export default _testRules;
+export default _testFlow;

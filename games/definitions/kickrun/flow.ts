@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { KickrunArtifactLayer, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunUnit } from './_types';
 
-const kickrunRules: Definition<KickrunArtifactLayer, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunUnit> = {
+const kickrunFlow: Flow<KickrunArtifactLayer, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunUnit> = {
   startTurn: {
     link: "selectunit"
   },
@@ -30,4 +30,4 @@ const kickrunRules: Definition<KickrunArtifactLayer, KickrunCommand, KickrunGene
   }
 };
 
-export default kickrunRules;
+export default kickrunFlow;

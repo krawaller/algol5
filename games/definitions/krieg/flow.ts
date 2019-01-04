@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { KriegArtifactLayer, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegUnit } from './_types';
 
-const kriegRules: Definition<KriegArtifactLayer, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegUnit> = {
+const kriegFlow: Flow<KriegArtifactLayer, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegUnit> = {
   marks: {
     selectunit: {
       from: "mynotfrozens",
@@ -38,4 +38,4 @@ const kriegRules: Definition<KriegArtifactLayer, KriegCommand, KriegGenerator, K
   }
 };
 
-export default kriegRules;
+export default kriegFlow;

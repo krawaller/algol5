@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit } from './_types';
 
-const threemusketeersRules: Definition<ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit> = {
+const threemusketeersFlow: Flow<ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit> = {
   startTurn: {
     link: "selectunit"
   },
@@ -36,4 +36,4 @@ const threemusketeersRules: Definition<ThreemusketeersArtifactLayer, Threemusket
   }
 };
 
-export default threemusketeersRules;
+export default threemusketeersFlow;

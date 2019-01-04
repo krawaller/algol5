@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeUnit } from './_types';
 
-const coffeeRules: Definition<CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeUnit> = {
+const coffeeFlow: Flow<CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeUnit> = {
   TODO: "use different unit type for placeholders? Reference oppnent plr properly",
   endTurn: {
     unless: {
@@ -69,4 +69,4 @@ const coffeeRules: Definition<CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerato
   }
 };
 
-export default coffeeRules;
+export default coffeeFlow;

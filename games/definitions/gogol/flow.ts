@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { GogolArtifactLayer, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolUnit } from './_types';
 
-const gogolRules: Definition<GogolArtifactLayer, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolUnit> = {
+const gogolFlow: Flow<GogolArtifactLayer, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolUnit> = {
   startTurn: {
     runGenerators: ["findforbiddenkingspots", "findforbiddensoldierspots"],
     link: ["ifelse", ["morethan", ["turn"], 2], "selectunit", "selectkingdeploy"]
@@ -55,4 +55,4 @@ const gogolRules: Definition<GogolArtifactLayer, GogolCommand, GogolGenerator, G
   }
 };
 
-export default gogolRules;
+export default gogolFlow;

@@ -36,7 +36,7 @@ import ${gid}Setup from '../../definitions/${gid}/setup';
 import ${gid}Graphics from '../../definitions/${gid}/graphics';
 import ${gid}Instruction from '../../definitions/${gid}/instructions';
 import ${gid}Meta from '../../definitions/${gid}/meta';
-import ${gid}Rules from '../../definitions/${gid}/rules';
+import ${gid}Flow from '../../definitions/${gid}/flow';
 import ${gid}Scripts from '../../definitions/${gid}/scripts';
 import ${gid}Generators from '../../definitions/${gid}/generators';
 
@@ -48,7 +48,7 @@ const ${gid}FullDef: FullDef<${signature}> = {
   instructions: ${gid}Instruction,
   generators: ${gid}Generators,
   meta: ${gid}Meta,
-  rules: ${gid}Rules,
+  flow: ${gid}Flow,
   scripts: ${gid}Scripts,
 };
 

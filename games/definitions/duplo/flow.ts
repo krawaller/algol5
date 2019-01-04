@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { DuploArtifactLayer, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploUnit } from './_types';
 
-const duploRules: Definition<DuploArtifactLayer, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploUnit> = {
+const duploFlow: Flow<DuploArtifactLayer, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploUnit> = {
   canalwaysend: {
     deploy: true
   },
@@ -62,4 +62,4 @@ const duploRules: Definition<DuploArtifactLayer, DuploCommand, DuploGenerator, D
   }
 };
 
-export default duploRules;
+export default duploFlow;

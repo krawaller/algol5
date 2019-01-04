@@ -26,13 +26,13 @@ export default function analyze(gameId) {
   const terrains = Object.keys(board.terrain || {});
   const graphics = require(path.join(defPath, "graphics.ts")).default;
   const units = Object.keys(graphics.icons);
-  const rules = require(path.join(defPath, "rules.ts")).default;
+  const flow = require(path.join(defPath, "flow.ts")).default;
   const generators = require(path.join(defPath, "generators.ts")).default;
-  const marks = Object.keys(rules.marks);
-  const commands = Object.keys(rules.commands);
+  const marks = Object.keys(flow.marks);
+  const commands = Object.keys(flow.commands);
   const nonEndCommands = commands.filter(
     c =>
-      possibles(rules.commands[c].link).filter(l => l !== "endturn").length > 0
+      possibles(flow.commands[c].link).filter(l => l !== "endturn").length > 0
   );
 
   function ownify(u) {

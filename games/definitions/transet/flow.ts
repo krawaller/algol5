@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { TransetArtifactLayer, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetUnit } from './_types';
 
-const transetRules: Definition<TransetArtifactLayer, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetUnit> = {
+const transetFlow: Flow<TransetArtifactLayer, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetUnit> = {
   endGame: {
     infiltration: {
       condition: ["overlaps", "myunits", "oppbase"],
@@ -61,4 +61,4 @@ const transetRules: Definition<TransetArtifactLayer, TransetCommand, TransetGene
   }
 };
 
-export default transetRules;
+export default transetFlow;

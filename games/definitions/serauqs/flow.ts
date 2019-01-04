@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { SerauqsArtifactLayer, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsUnit } from './_types';
 
-const serauqsRules: Definition<SerauqsArtifactLayer, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsUnit> = {
+const serauqsFlow: Flow<SerauqsArtifactLayer, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsUnit> = {
   endGame: {
     madeline: {
       condition: ["notempty", "winline"],
@@ -43,4 +43,4 @@ const serauqsRules: Definition<SerauqsArtifactLayer, SerauqsCommand, SerauqsGene
   }
 };
 
-export default serauqsRules;
+export default serauqsFlow;

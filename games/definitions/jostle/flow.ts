@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { JostleArtifactLayer, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleUnit } from './_types';
 
-const jostleRules: Definition<JostleArtifactLayer, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleUnit> = {
+const jostleFlow: Flow<JostleArtifactLayer, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleUnit> = {
   startTurn: {
     link: "selectunit"
   },
@@ -31,4 +31,4 @@ const jostleRules: Definition<JostleArtifactLayer, JostleCommand, JostleGenerato
   }
 };
 
-export default jostleRules;
+export default jostleFlow;

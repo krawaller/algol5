@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit } from './_types';
 
-const murusgallicusRules: Definition<MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit> = {
+const murusgallicusFlow: Flow<MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit> = {
   startTurn: {
     link: "selecttower"
   },
@@ -48,4 +48,4 @@ const murusgallicusRules: Definition<MurusgallicusArtifactLayer, MurusgallicusCo
   }
 };
 
-export default murusgallicusRules;
+export default murusgallicusFlow;

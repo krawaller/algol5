@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { UglyduckArtifactLayer, UglyduckCommand, UglyduckGenerator, UglyduckLayer, UglyduckMark, UglyduckUnit } from './_types';
 
-const uglyduckRules: Definition<UglyduckArtifactLayer, UglyduckCommand, UglyduckGenerator, UglyduckLayer, UglyduckMark, UglyduckUnit> = {
+const uglyduckFlow: Flow<UglyduckArtifactLayer, UglyduckCommand, UglyduckGenerator, UglyduckLayer, UglyduckMark, UglyduckUnit> = {
   startTurn: {
     link: "selectunit"
   },
@@ -35,4 +35,4 @@ const uglyduckRules: Definition<UglyduckArtifactLayer, UglyduckCommand, Uglyduck
   }
 };
 
-export default uglyduckRules;
+export default uglyduckFlow;

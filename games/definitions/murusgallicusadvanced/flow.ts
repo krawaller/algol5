@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedUnit } from './_types';
 
-const murusgallicusadvancedRules: Definition<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedUnit> = {
+const murusgallicusadvancedFlow: Flow<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedUnit> = {
   startTurn: {
     links: ["selecttower", "selectcatapult"]
   },
@@ -83,4 +83,4 @@ const murusgallicusadvancedRules: Definition<MurusgallicusadvancedArtifactLayer,
   }
 };
 
-export default murusgallicusadvancedRules;
+export default murusgallicusadvancedFlow;

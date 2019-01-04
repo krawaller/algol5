@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { DescentArtifactLayer, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentUnit } from './_types';
 
-const descentRules: Definition<DescentArtifactLayer, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentUnit> = {
+const descentFlow: Flow<DescentArtifactLayer, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentUnit> = {
   endGame: {
     madeline: {
       condition: ["notempty", "winline"],
@@ -51,4 +51,4 @@ const descentRules: Definition<DescentArtifactLayer, DescentCommand, DescentGene
   }
 };
 
-export default descentRules;
+export default descentFlow;

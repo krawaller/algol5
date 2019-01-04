@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { AmazonsArtifactLayer, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsUnit } from './_types';
 
-const amazonsRules: Definition<AmazonsArtifactLayer, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsUnit> = {
+const amazonsFlow: Flow<AmazonsArtifactLayer, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsUnit> = {
   startTurn: {
     link: "selectunit"
   },
@@ -39,4 +39,4 @@ const amazonsRules: Definition<AmazonsArtifactLayer, AmazonsCommand, AmazonsGene
   }
 };
 
-export default amazonsRules;
+export default amazonsFlow;

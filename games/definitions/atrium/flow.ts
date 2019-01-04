@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit } from './_types';
 
-const atriumRules: Definition<AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit> = {
+const atriumFlow: Flow<AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit> = {
   endGame: {
     madewinline: {
       condition: ["notempty", "winline"],
@@ -31,4 +31,4 @@ const atriumRules: Definition<AtriumArtifactLayer, AtriumCommand, AtriumGenerato
   }
 };
 
-export default atriumRules;
+export default atriumFlow;

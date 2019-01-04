@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { GowiththefloeArtifactLayer, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeUnit } from './_types';
 
-const gowiththefloeRules: Definition<GowiththefloeArtifactLayer, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeUnit> = {
+const gowiththefloeFlow: Flow<GowiththefloeArtifactLayer, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeUnit> = {
   STATUS: "wip",
   startTurn: {
     link: "selectunit"
@@ -55,4 +55,4 @@ const gowiththefloeRules: Definition<GowiththefloeArtifactLayer, GowiththefloeCo
   }
 };
 
-export default gowiththefloeRules;
+export default gowiththefloeFlow;

@@ -1,7 +1,7 @@
-import {Definition} from '../../types';
+import {Flow} from '../../types';
 import { AriesArtifactLayer, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesUnit } from './_types';
 
-const ariesRules: Definition<AriesArtifactLayer, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesUnit> = {
+const ariesFlow: Flow<AriesArtifactLayer, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesUnit> = {
   startTurn: {
     link: "selectunit"
   },
@@ -37,4 +37,4 @@ const ariesRules: Definition<AriesArtifactLayer, AriesCommand, AriesGenerator, A
   }
 };
 
-export default ariesRules;
+export default ariesFlow;

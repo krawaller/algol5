@@ -99,7 +99,7 @@ export type FilterDef<ArtifactLayer extends string, Layer extends string> = {
   matching?: any;
 };
 
-export type Definition<
+export type Flow<
   ArtifactLayer extends string,
   Command extends string,
   Generator extends string,
@@ -163,7 +163,7 @@ export type FullDef<
   graphics: Graphics<Terrain, Unit>;
   instructions: Instructions<Phase>;
   meta: Meta;
-  rules: Definition<ArtifactLayer, Command, Generator, Layer, Mark, Unit>;
+  flow: Flow<ArtifactLayer, Command, Generator, Layer, Mark, Unit>;
   generators: Generators<ArtifactLayer, Generator, Layer>;
   scripts: GameTestSuite;
 };
@@ -171,14 +171,7 @@ export type FullDef<
 export function typeSignature(type, gameId) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return {
-    Definition: [
-      "ArtifactLayer",
-      "Command",
-      "Generator",
-      "Layer",
-      "Mark",
-      "Unit"
-    ],
+    Flow: ["ArtifactLayer", "Command", "Generator", "Layer", "Mark", "Unit"],
     Graphics: ["Terrain", "Unit"],
     Instructions: ["Phase"],
     Board: ["Terrain"],

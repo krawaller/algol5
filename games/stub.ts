@@ -108,14 +108,14 @@ export default ${capId}Meta;
 `
   );
 
-  // ----------- RULES --------------
-  const rsig = typeSignature("Definition", gameId);
+  // ----------- FLOW --------------
+  const fsig = typeSignature("Flow", gameId);
   fs.writeFileSync(
-    path.join(defPath, "rules.ts"),
-    `import {Definition} from '../../types';
-import { ${rsig} } from './_types';
+    path.join(defPath, "flow.ts"),
+    `import {Flow} from '../../types';
+import { ${fsig} } from './_types';
 
-const ${capId}Rules: Rules<${rsig}> = {
+const ${capId}Flow: Flow<${fsig}> = {
   startTurn: {
 
   },
@@ -127,7 +127,7 @@ const ${capId}Rules: Rules<${rsig}> = {
   }
 };
 
-export default ${capId}Rules;
+export default ${capId}Flow;
 `
   );
 
@@ -136,9 +136,9 @@ export default ${capId}Rules;
   fs.writeFileSync(
     path.join(defPath, "generators.ts"),
     `import {Generators} from '../../types';
-import { ${rsig} } from './_types';
+import { ${gensig} } from './_types';
 
-const ${capId}Generators: Generators<${rsig}> = {
+const ${capId}Generators: Generators<${gensig}> = {
 
 };
 

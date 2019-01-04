@@ -38,6 +38,7 @@ import ${gid}Instruction from '../../definitions/${gid}/instructions';
 import ${gid}Meta from '../../definitions/${gid}/meta';
 import ${gid}Rules from '../../definitions/${gid}/rules';
 import ${gid}Scripts from '../../definitions/${gid}/scripts';
+import ${gid}Generators from '../../definitions/${gid}/generators';
 
 const ${gid}FullDef: FullDef<${signature}> = {
   AI: ${gid}AI,
@@ -45,6 +46,7 @@ const ${gid}FullDef: FullDef<${signature}> = {
   setup: ${gid}Setup,
   graphics: ${gid}Graphics,
   instructions: ${gid}Instruction,
+  generators: ${gid}Generators,
   meta: ${gid}Meta,
   rules: ${gid}Rules,
   scripts: ${gid}Scripts,

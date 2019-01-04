@@ -28,6 +28,7 @@ fs.readdirSync("../library/defs")
       graphics,
       board,
       setup,
+      generators,
       ...rules
     } = json;
     graphics.icons = graphics.icons || {};
@@ -139,7 +140,21 @@ export default ${gameId}Setup;
 `
     );
 
-    fs.writeFileSync("./definitions/" + gameId + "/scripts.ts", scripts);
+    // -------------- GENERATORS --------------
+    const gensig = typeSignature("Generators", gameId);
+    fs.writeFileSync(
+      "./definitions/" + gameId + "/generators.ts",
+      `import {Generators} from '../../types';
+import { ${gensig} } from './_types';
 
+const ${gameId}Generators: Generators<${gensig}> = ${makeNice(
+        generators || {}
+      )};
+
+export default ${gameId}Generators;
+`
+    );
+
+    fs.writeFileSync("./definitions/" + gameId + "/scripts.ts", scripts);
     analyze(gameId);
   });

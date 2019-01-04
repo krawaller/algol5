@@ -124,13 +124,25 @@ const ${capId}Rules: Rules<${rsig}> = {
   },
   marks: {
 
-  },
-  generators: {
-
   }
 };
 
 export default ${capId}Rules;
+`
+  );
+
+  // ----------- GENERATORS --------------
+  const gensig = typeSignature("Generators", gameId);
+  fs.writeFileSync(
+    path.join(defPath, "generators.ts"),
+    `import {Generators} from '../../types';
+import { ${rsig} } from './_types';
+
+const ${capId}Generators: Generators<${rsig}> = {
+
+};
+
+export default ${capId}Generators;
 `
   );
 

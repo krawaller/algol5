@@ -122,8 +122,13 @@ export type Definition<
   };
   commands: { [cmndname in Command]: CommandDef };
   marks: { [markname in Mark]: MarkDef };
-  generators: { [genname in Generator]: GeneratorDef<ArtifactLayer, Layer> };
 };
+
+export type Generators<
+  ArtifactLayer extends string,
+  GeneratorName extends string,
+  Layer extends string
+> = { [genname in GeneratorName]: GeneratorDef<ArtifactLayer, Layer> };
 
 export type Line = string[][]; //[string[], string[]];
 export type Test = [string, string, Line[]];
@@ -159,6 +164,7 @@ export type FullDef<
   instructions: Instructions<Phase>;
   meta: Meta;
   rules: Definition<ArtifactLayer, Command, Generator, Layer, Mark, Unit>;
+  generators: Generators<ArtifactLayer, Generator, Layer>;
   scripts: GameTestSuite;
 };
 
@@ -177,6 +183,7 @@ export function typeSignature(type, gameId) {
     Instructions: ["Phase"],
     Board: ["Terrain"],
     Setup: ["Unit"],
+    Generators: ["ArtifactLayer", "Generator", "Layer"],
     FullDef: [
       "ArtifactLayer",
       "Command",

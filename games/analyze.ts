@@ -27,6 +27,7 @@ export default function analyze(gameId) {
   const graphics = require(path.join(defPath, "graphics.ts")).default;
   const units = Object.keys(graphics.icons);
   const rules = require(path.join(defPath, "rules.ts")).default;
+  const generators = require(path.join(defPath, "generators.ts")).default;
   const marks = Object.keys(rules.marks);
   const commands = Object.keys(rules.commands);
   const nonEndCommands = commands.filter(
@@ -54,11 +55,11 @@ export default function analyze(gameId) {
     }
   }
 
-  const generators = Object.keys(rules.generators);
+  const generatorNames = Object.keys(generators);
   let artifactLayers = [];
 
-  for (let g of generators) {
-    const gen = rules.generators[g];
+  for (let g of generatorNames) {
+    const gen = generators[g];
     const draws = gen.type === "filter" ? { filter: gen } : gen.draw;
     for (let d of Object.keys(draws)) {
       const draw = draws[d];
@@ -104,7 +105,9 @@ export type ${capId}UnitLayer = ${
       unitLayers.length ? unitLayers.map(t => `"${t}"`).join(" | ") : "never"
     };
 export type ${capId}Generator = ${
-      generators.length ? generators.map(t => `"${t}"`).join(" | ") : "never"
+      generatorNames.length
+        ? generatorNames.map(t => `"${t}"`).join(" | ")
+        : "never"
     };
 export type ${capId}ArtifactLayer = ${
       artifactLayers.length

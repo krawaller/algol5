@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { MurusgallicusadvancedUnit, MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedMark, MurusgallicusadvancedCommand } from './_types';
+import { MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedUnit } from './_types';
 
-const murusgallicusadvancedRules: Definition<MurusgallicusadvancedUnit, MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedMark, MurusgallicusadvancedCommand> = {
+const murusgallicusadvancedRules: Definition<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedUnit> = {
   startTurn: {
     links: ["selecttower", "selectcatapult"]
   },

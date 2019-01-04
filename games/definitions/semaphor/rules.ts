@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { SemaphorUnit, SemaphorArtifactLayer, SemaphorLayer, SemaphorGenerator, SemaphorMark, SemaphorCommand } from './_types';
+import { SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit } from './_types';
 
-const semaphorRules: Definition<SemaphorUnit, SemaphorArtifactLayer, SemaphorLayer, SemaphorGenerator, SemaphorMark, SemaphorCommand> = {
+const semaphorRules: Definition<SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit> = {
   startTurn: {
     links: ["selectdeploytarget", "selectunit"]
   },

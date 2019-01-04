@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { ThreemusketeersUnit, ThreemusketeersArtifactLayer, ThreemusketeersLayer, ThreemusketeersGenerator, ThreemusketeersMark, ThreemusketeersCommand } from './_types';
+import { ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit } from './_types';
 
-const threemusketeersRules: Definition<ThreemusketeersUnit, ThreemusketeersArtifactLayer, ThreemusketeersLayer, ThreemusketeersGenerator, ThreemusketeersMark, ThreemusketeersCommand> = {
+const threemusketeersRules: Definition<ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit> = {
   startTurn: {
     link: "selectunit"
   },

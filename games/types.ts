@@ -42,12 +42,12 @@ export type CommandDef = any;
 export type MarkDef = any;
 export type StartTurn = any;
 export type EndGameDef = any;
-export type GeneratorDef<ArtifactLayer, Layer> =
+export type GeneratorDef<ArtifactLayer extends string, Layer extends string> =
   | WalkerDef<ArtifactLayer, Layer>
   | NeighbourDef<ArtifactLayer, Layer>
   | FilterDef<ArtifactLayer, Layer>;
 
-export type DrawDef<ArtifactLayer, Layer> = {
+export type DrawDef<ArtifactLayer extends string, Layer extends string> = {
   tolayer: any;
   include?: any;
   condition?: any;
@@ -55,7 +55,7 @@ export type DrawDef<ArtifactLayer, Layer> = {
   unlessover?: any;
 };
 
-export type WalkerDef<ArtifactLayer, Layer> = {
+export type WalkerDef<ArtifactLayer extends string, Layer extends string> = {
   type: "walker";
   dir?: any;
   dirs?: any;
@@ -77,7 +77,7 @@ export type WalkerDef<ArtifactLayer, Layer> = {
   };
 };
 
-export type NeighbourDef<ArtifactLayer, Layer> = {
+export type NeighbourDef<ArtifactLayer extends string, Layer extends string> = {
   type: "neighbour";
   dir?: any;
   dirs?: any;
@@ -92,7 +92,7 @@ export type NeighbourDef<ArtifactLayer, Layer> = {
   };
 };
 
-export type FilterDef<ArtifactLayer, Layer> = {
+export type FilterDef<ArtifactLayer extends string, Layer extends string> = {
   type: "filter";
   layer: any;
   tolayer: ArtifactLayer;
@@ -100,12 +100,12 @@ export type FilterDef<ArtifactLayer, Layer> = {
 };
 
 export type Definition<
-  Unit,
-  ArtifactLayer,
-  Layer,
+  ArtifactLayer extends string,
+  Command extends string,
   Generator extends string,
+  Layer extends string,
   Mark extends string,
-  Command extends string
+  Unit extends string
 > = {
   flow?: any;
   TODO?: string;
@@ -141,3 +141,53 @@ export type CommonLayer =
   | "board"
   | "light"
   | "dark";
+
+export type FullDef<
+  ArtifactLayer extends string,
+  Command extends string,
+  Generator extends string,
+  Layer extends string,
+  Mark extends string,
+  Phase extends string,
+  Terrain extends string,
+  Unit extends string
+> = {
+  AI: AI;
+  board: Board<Terrain>;
+  setup: Setup<Unit>;
+  graphics: Graphics<Terrain, Unit>;
+  instructions: Instructions<Phase>;
+  meta: Meta;
+  rules: Definition<ArtifactLayer, Command, Generator, Layer, Mark, Unit>;
+  scripts: GameTestSuite;
+};
+
+export function typeSignature(type, gameId) {
+  const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
+  return {
+    Definition: [
+      "ArtifactLayer",
+      "Command",
+      "Generator",
+      "Layer",
+      "Mark",
+      "Unit"
+    ],
+    Graphics: ["Terrain", "Unit"],
+    Instructions: ["Phase"],
+    Board: ["Terrain"],
+    Setup: ["Unit"],
+    FullDef: [
+      "ArtifactLayer",
+      "Command",
+      "Generator",
+      "Layer",
+      "Mark",
+      "Phase",
+      "Terrain",
+      "Unit"
+    ]
+  }[type]
+    .map(t => capId + t)
+    .join(", ");
+}

@@ -1,7 +1,21 @@
-import {Definition} from '../../types';
-import { AriesUnit, AriesArtifactLayer, AriesLayer, AriesGenerator, AriesMark, AriesCommand } from './_types';
+import { Definition } from "../../types";
+import {
+  AriesArtifactLayer,
+  AriesCommand,
+  AriesGenerator,
+  AriesLayer,
+  AriesMark,
+  AriesUnit
+} from "./_types";
 
-const ariesRules: Definition<AriesUnit, AriesArtifactLayer, AriesLayer, AriesGenerator, AriesMark, AriesCommand> = {
+const ariesRules: Definition<
+  AriesArtifactLayer,
+  AriesCommand,
+  AriesGenerator,
+  AriesLayer,
+  AriesMark,
+  AriesUnit
+> = {
   startTurn: {
     link: "selectunit"
   },
@@ -19,7 +33,11 @@ const ariesRules: Definition<AriesUnit, AriesArtifactLayer, AriesLayer, AriesGen
     },
     selectmovetarget: {
       from: "movetargets",
-      runGenerator: ["if", ["anyat", "oppunits", "selectmovetarget"], "findpushresults"],
+      runGenerator: [
+        "if",
+        ["anyat", "oppunits", "selectmovetarget"],
+        "findpushresults"
+      ],
       link: "move"
     }
   },
@@ -28,7 +46,12 @@ const ariesRules: Definition<AriesUnit, AriesArtifactLayer, AriesLayer, AriesGen
       applyEffects: [
         ["setbattlevar", "pusheeid", ["idat", "selectmovetarget"]],
         ["setbattlepos", "pushsquare", "selectmovetarget"],
-        ["pushin", "beingpushed", ["read", "movetargets", "selectmovetarget", "dir"], 1],
+        [
+          "pushin",
+          "beingpushed",
+          ["read", "movetargets", "selectmovetarget", "dir"],
+          1
+        ],
         ["killin", "squished"],
         ["moveat", "selectunit", "selectmovetarget"]
       ],
@@ -47,13 +70,14 @@ const ariesRules: Definition<AriesUnit, AriesArtifactLayer, AriesLayer, AriesGen
         },
         block: {
           ifover: "oppunits",
-          condition: ["not", ["and", ["samepos", ["target"],
-              ["battlepos", "pushsquare"]
-            ],
-            ["same", ["idat", "selectunit"],
-              ["battlevar", "pusheeid"]
+          condition: [
+            "not",
+            [
+              "and",
+              ["samepos", ["target"], ["battlepos", "pushsquare"]],
+              ["same", ["idat", "selectunit"], ["battlevar", "pusheeid"]]
             ]
-          ]],
+          ],
           tolayer: "movetargets",
           include: {
             dir: ["dir"]
@@ -74,9 +98,7 @@ const ariesRules: Definition<AriesUnit, AriesArtifactLayer, AriesLayer, AriesGen
           tolayer: "beingpushed"
         },
         last: {
-          condition: ["valinlist", ["stopreason"],
-            ["hitblock", "outofbounds"]
-          ],
+          condition: ["valinlist", ["stopreason"], ["hitblock", "outofbounds"]],
           tolayer: "squished"
         }
       }

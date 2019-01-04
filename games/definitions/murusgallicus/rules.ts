@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { MurusgallicusUnit, MurusgallicusArtifactLayer, MurusgallicusLayer, MurusgallicusGenerator, MurusgallicusMark, MurusgallicusCommand } from './_types';
+import { MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit } from './_types';
 
-const murusgallicusRules: Definition<MurusgallicusUnit, MurusgallicusArtifactLayer, MurusgallicusLayer, MurusgallicusGenerator, MurusgallicusMark, MurusgallicusCommand> = {
+const murusgallicusRules: Definition<MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit> = {
   startTurn: {
     link: "selecttower"
   },

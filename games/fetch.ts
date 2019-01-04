@@ -3,15 +3,12 @@ const beautify = require("js-beautify");
 import analyze from "./analyze";
 import stub from "./stub";
 
+import { typeSignature } from "./types";
+
 function makeNice(obj = {}) {
   return beautify(JSON.stringify(obj).replace(/"([a-zA-Z]+)":/g, "$1:"), {
     indent_size: 2
   });
-}
-
-function importTypes(gameId, ...types) {
-  const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
-  return `import { ${types.map(t => capId + t).join(", ")} } from './_types';`;
 }
 
 fs.removeSync("./definitions");
@@ -65,22 +62,13 @@ export default ${gameId}Meta;
     );
 
     // -------------- RULES --------------
+    const rsig = typeSignature("Definition", gameId);
     fs.writeFileSync(
       "./definitions/" + gameId + "/rules.ts",
       `import {Definition} from '../../types';
-${importTypes(
-        gameId,
-        "Unit",
-        "ArtifactLayer",
-        "Layer",
-        "Generator",
-        "Mark",
-        "Command"
-      )}
+import { ${rsig} } from './_types';
 
-const ${gameId}Rules: Definition<${capId}Unit, ${capId}ArtifactLayer, ${capId}Layer, ${capId}Generator, ${capId}Mark, ${capId}Command> = ${makeNice(
-        rules
-      )};
+const ${gameId}Rules: Definition<${rsig}> = ${makeNice(rules)};
 
 export default ${gameId}Rules;
 `
@@ -98,12 +86,13 @@ export default ${gameId}AI;
     );
 
     // -------------- INSTRUCTIONS --------------
+    const isig = typeSignature("Instructions", gameId);
     fs.writeFileSync(
       "./definitions/" + gameId + "/instructions.ts",
       `import {Instructions} from '../../types';
-${importTypes(gameId, "Phase")}
+import { ${isig} } from './_types';
 
-const ${gameId}Instructions: Instructions<${capId}Phase> = ${makeNice(
+const ${gameId}Instructions: Instructions<${isig}> = ${makeNice(
         instructions || {}
       )};
 
@@ -112,38 +101,39 @@ export default ${gameId}Instructions;
     );
 
     // -------------- GRAPHICS --------------
+    const gsig = typeSignature("Graphics", gameId);
     fs.writeFileSync(
       "./definitions/" + gameId + "/graphics.ts",
       `import {Graphics} from '../../types';
-${importTypes(gameId, "Terrain", "Unit")}
+import { ${gsig} } from './_types';
 
-const ${gameId}Graphics: Graphics<${capId}Terrain, ${capId}Unit> = ${makeNice(
-        graphics || {}
-      )};
+const ${gameId}Graphics: Graphics<${gsig}> = ${makeNice(graphics || {})};
 
 export default ${gameId}Graphics;
 `
     );
 
     // -------------- BOARD --------------
+    const bsig = typeSignature("Board", gameId);
     fs.writeFileSync(
       "./definitions/" + gameId + "/board.ts",
       `import {Board} from '../../types';
-${importTypes(gameId, "Terrain")}
+import { ${bsig} } from './_types';
 
-const ${gameId}Board: Board<${capId}Terrain> = ${makeNice(board || {})};
+const ${gameId}Board: Board<${bsig}> = ${makeNice(board || {})};
 
 export default ${gameId}Board;
 `
     );
 
     // -------------- SETUP --------------
+    const ssig = typeSignature("Setup", gameId);
     fs.writeFileSync(
       "./definitions/" + gameId + "/setup.ts",
       `import {Setup} from '../../types';
-${importTypes(gameId, "Unit")}
+import { ${ssig} } from './_types';
 
-const ${gameId}Setup: Setup<${capId}Unit> = ${makeNice(setup || {})};
+const ${gameId}Setup: Setup<${ssig}> = ${makeNice(setup || {})};
 
 export default ${gameId}Setup;
 `

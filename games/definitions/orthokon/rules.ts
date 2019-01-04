@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { OrthokonUnit, OrthokonArtifactLayer, OrthokonLayer, OrthokonGenerator, OrthokonMark, OrthokonCommand } from './_types';
+import { OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit } from './_types';
 
-const orthokonRules: Definition<OrthokonUnit, OrthokonArtifactLayer, OrthokonLayer, OrthokonGenerator, OrthokonMark, OrthokonCommand> = {
+const orthokonRules: Definition<OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit> = {
   startTurn: {
     link: "selectunit"
   },

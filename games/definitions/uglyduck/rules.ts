@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { UglyduckUnit, UglyduckArtifactLayer, UglyduckLayer, UglyduckGenerator, UglyduckMark, UglyduckCommand } from './_types';
+import { UglyduckArtifactLayer, UglyduckCommand, UglyduckGenerator, UglyduckLayer, UglyduckMark, UglyduckUnit } from './_types';
 
-const uglyduckRules: Definition<UglyduckUnit, UglyduckArtifactLayer, UglyduckLayer, UglyduckGenerator, UglyduckMark, UglyduckCommand> = {
+const uglyduckRules: Definition<UglyduckArtifactLayer, UglyduckCommand, UglyduckGenerator, UglyduckLayer, UglyduckMark, UglyduckUnit> = {
   startTurn: {
     link: "selectunit"
   },

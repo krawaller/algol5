@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { _testUnit, _testArtifactLayer, _testLayer, _testGenerator, _testMark, _testCommand } from './_types';
+import { _testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit } from './_types';
 
-const _testRules: Definition<_testUnit, _testArtifactLayer, _testLayer, _testGenerator, _testMark, _testCommand> = {
+const _testRules: Definition<_testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit> = {
   startTurn: {
     link: "selectunit"
   },

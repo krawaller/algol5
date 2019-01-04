@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { ShoveoffUnit, ShoveoffArtifactLayer, ShoveoffLayer, ShoveoffGenerator, ShoveoffMark, ShoveoffCommand } from './_types';
+import { ShoveoffArtifactLayer, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffUnit } from './_types';
 
-const shoveoffRules: Definition<ShoveoffUnit, ShoveoffArtifactLayer, ShoveoffLayer, ShoveoffGenerator, ShoveoffMark, ShoveoffCommand> = {
+const shoveoffRules: Definition<ShoveoffArtifactLayer, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffUnit> = {
   TODO: "findaffected SHOULD BE AN OFFSET",
   endGame: {
     madeline: {

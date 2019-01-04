@@ -1,6 +1,8 @@
 const fs = require("fs-extra");
 const path = require("path");
 
+import { typeSignature } from "./types";
+
 export default function stub(gameId) {
   const defPath = path.join(__dirname, "./definitions", gameId);
   fs.ensureDirSync(defPath);
@@ -37,12 +39,13 @@ export default ${capId}AI;
   );
 
   // --------- BOARD ----------
+  const bsig = typeSignature("Board", gameId);
   fs.writeFileSync(
     path.join(defPath, "board.ts"),
     `import {Board} from '../../types';
-import { ${capId}Terrain } from './_types';
+import { ${bsig} } from './_types';
 
-const ${capId}Board: Board<${capId}Terrain> = {
+const ${capId}Board: Board<${bsig}> = {
   height: 666,
   width: 666,
   terrain: {
@@ -55,12 +58,13 @@ export default ${capId}Board;
   );
 
   // --------- GRAPHICS ----------
+  const gsig = typeSignature("Graphics", gameId);
   fs.writeFileSync(
     path.join(defPath, "graphics.ts"),
     `import {Graphics} from '../../types';
-import { ${capId}Terrain, ${capId}Unit } from './_types';
+import { ${gsig} } from './_types';
 
-const ${capId}Graphics: Graphics<${capId}Terrain, ${capId}Unit> = {
+const ${capId}Graphics: Graphics<${gsig}> = {
   icons: {
 
   },
@@ -74,12 +78,13 @@ export default ${capId}Graphics;
   );
 
   // --------- INSTRUCTIONS ----------
+  const isig = typeSignature("Instructions", gameId);
   fs.writeFileSync(
     path.join(defPath, "instructions.ts"),
     `import {Instructions} from '../../types';
-import { ${capId}Phase } from './_types';
+import { ${isig} } from './_types';
 
-const ${capId}Instructions: Instructions<${capId}Phase> = {
+const ${capId}Instructions: Instructions<${isig}> = {
 
 };
 
@@ -104,12 +109,13 @@ export default ${capId}Meta;
   );
 
   // ----------- RULES --------------
+  const rsig = typeSignature("Definition", gameId);
   fs.writeFileSync(
     path.join(defPath, "rules.ts"),
-    `import {Rules} from '../../types';
-import { ${capId}Unit, ${capId}ArtifactLayer, ${capId}Layer, ${capId}Generator, ${capId}Mark, ${capId}Command } from './_types';
+    `import {Definition} from '../../types';
+import { ${rsig} } from './_types';
 
-const ${capId}Rules: Rules<${capId}Unit, ${capId}ArtifactLayer, ${capId}Layer, > = {
+const ${capId}Rules: Rules<${rsig}> = {
   startTurn: {
 
   },
@@ -142,13 +148,14 @@ export default ${capId}Tests;
   );
 
   // ------------ SETUP -------------
+  const ssig = typeSignature("Setup", gameId);
   fs.writeFileSync(
     path.join(defPath, "scripts.ts"),
     `import {Setup} from '../../types';
 
-import { ${capId}Unit } from './_types';
+import {${ssig} } from './_types';
 
-const ${capId}Setup: Setup<${capId}Unit> = {
+const ${capId}Setup: Setup<${ssig}> = {
 
 };
 

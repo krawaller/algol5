@@ -1,7 +1,7 @@
 import {Definition} from '../../types';
-import { AtriumUnit, AtriumArtifactLayer, AtriumLayer, AtriumGenerator, AtriumMark, AtriumCommand } from './_types';
+import { AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit } from './_types';
 
-const atriumRules: Definition<AtriumUnit, AtriumArtifactLayer, AtriumLayer, AtriumGenerator, AtriumMark, AtriumCommand> = {
+const atriumRules: Definition<AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit> = {
   endGame: {
     madewinline: {
       condition: ["notempty", "winline"],

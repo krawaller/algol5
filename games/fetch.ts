@@ -4,7 +4,10 @@ const beautify = require("js-beautify");
 import analyze from "./analyze";
 import stub from "./stub";
 
-import { typeSignature } from "./types";
+import updateGame from "./update";
+
+import { FullDef } from "./types";
+import update from "./update";
 
 function makeNice(obj = {}) {
   return beautify(JSON.stringify(obj).replace(/"([a-zA-Z]+)":/g, "$1:"), {
@@ -35,10 +38,6 @@ fs.readdirSync("../library/defs")
     graphics.icons = graphics.icons || {};
     graphics.tiles = graphics.tiles || {};
     board.terrain = board.terrain || {};
-
-    fs.ensureDirSync("./definitions/" + gameId);
-
-    // ---------------- SCRIPTS ----------
     let scripts;
     try {
       scripts = require(path.join(
@@ -46,82 +45,20 @@ fs.readdirSync("../library/defs")
         "../gamescripts/pergame/" + gameId
       )).default;
     } catch (e) {}
-    const scriptsPath = "./definitions/" + gameId + "/scripts.ts";
-    const scriptsFile = fs.readFileSync(scriptsPath).toString();
-    fs.writeFileSync(
-      scriptsPath,
-      scriptsFile.replace(/ = {[\s\S]*};/, ` = ${makeNice(scripts || {})};`)
-    );
 
-    // -------------- META --------------
-    const metaPath = "./definitions/" + gameId + "/meta.ts";
-    const metaFile = fs.readFileSync(metaPath).toString();
-    fs.writeFileSync(
-      metaPath,
-      metaFile.replace(/ = {[\s\S]*};/, ` = ${makeNice(otherMeta || {})};`)
-    );
+    const gameDef: FullDef = {
+      scripts,
+      AI,
+      graphics,
+      board,
+      setup,
+      generators,
+      meta: otherMeta,
+      instructions,
+      flow
+    };
 
-    // -------------- FLOW --------------
-    const flowPath = "./definitions/" + gameId + "/flow.ts";
-    const flowFile = fs.readFileSync(flowPath).toString();
-    fs.writeFileSync(
-      flowPath,
-      flowFile.replace(/ = {[\s\S]*};/, ` = ${makeNice(flow || {})};`)
-    );
-
-    // -------------- AI --------------
-    const aiPath = "./definitions/" + gameId + "/ai.ts";
-    const aiFile = fs.readFileSync(aiPath).toString();
-    fs.writeFileSync(
-      aiPath,
-      aiFile.replace(/ = {[\s\S]*};/, ` = ${makeNice(AI || {})};`)
-    );
-
-    // -------------- INSTRUCTIONS --------------
-    const instructionsPath = "./definitions/" + gameId + "/instructions.ts";
-    const instructionsFile = fs.readFileSync(instructionsPath).toString();
-    fs.writeFileSync(
-      instructionsPath,
-      instructionsFile.replace(
-        / = {[\s\S]*};/,
-        ` = ${makeNice(instructions || {})};`
-      )
-    );
-
-    // -------------- GRAPHICS --------------
-    const graphicsPath = "./definitions/" + gameId + "/graphics.ts";
-    const graphicsFile = fs.readFileSync(graphicsPath).toString();
-    fs.writeFileSync(
-      graphicsPath,
-      graphicsFile.replace(/ = {[\s\S]*};/, ` = ${makeNice(graphics || {})};`)
-    );
-
-    // -------------- BOARD --------------
-    const boardPath = "./definitions/" + gameId + "/board.ts";
-    const boardFile = fs.readFileSync(boardPath).toString();
-    fs.writeFileSync(
-      boardPath,
-      boardFile.replace(/ = {[\s\S]*};/, ` = ${makeNice(board || {})};`)
-    );
-
-    // -------------- SETUP --------------
-    const setupPath = "./definitions/" + gameId + "/setup.ts";
-    const setupFile = fs.readFileSync(setupPath).toString();
-    fs.writeFileSync(
-      setupPath,
-      setupFile.replace(/ = {[\s\S]*};/, ` = ${makeNice(setup || {})};`)
-    );
-
-    // -------------- GENERATORS --------------
-    const generatorsPath = "./definitions/" + gameId + "/generators.ts";
-    const generatorsFile = fs.readFileSync(generatorsPath).toString();
-    fs.writeFileSync(
-      generatorsPath,
-      generatorsFile.replace(
-        / = {[\s\S]*};/,
-        ` = ${makeNice(generators || {})};`
-      )
-    );
+    updateGame(gameId, gameDef);
 
     analyze(gameId);
   });

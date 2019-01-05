@@ -148,14 +148,14 @@ export type CommonLayer =
   | "dark";
 
 export type FullDef<
-  ArtifactLayer extends string,
-  Command extends string,
-  Generator extends string,
-  Layer extends string,
-  Mark extends string,
-  Phase extends string,
-  Terrain extends string,
-  Unit extends string
+  ArtifactLayer extends string = string,
+  Command extends string = string,
+  Generator extends string = string,
+  Layer extends string = string,
+  Mark extends string = string,
+  Phase extends string = string,
+  Terrain extends string = string,
+  Unit extends string = string
 > = {
   AI: AI;
   board: Board<Terrain>;

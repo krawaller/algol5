@@ -1,5 +1,6 @@
 const fs = require("fs-extra");
 const path = require("path");
+import { FullDef } from "./types";
 
 function possibles(def) {
   if (typeof def === "string") return [def];
@@ -19,15 +20,13 @@ function possibles(def) {
   }
 }
 
-export default function analyze(gameId) {
+export default function analyze(def: FullDef) {
+  const gameId = def.meta.id;
   const defPath = path.join(__dirname, "./definitions", gameId);
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
-  const board = require(path.join(defPath, "board.ts")).default;
+  const { board, graphics, generators, flow } = def;
   const terrains = Object.keys(board.terrain || {});
-  const graphics = require(path.join(defPath, "graphics.ts")).default;
   const units = Object.keys(graphics.icons);
-  const flow = require(path.join(defPath, "flow.ts")).default;
-  const generators = require(path.join(defPath, "generators.ts")).default;
   const marks = Object.keys(flow.marks);
   const commands = Object.keys(flow.commands);
   const nonEndCommands = commands.filter(
@@ -77,53 +76,56 @@ export default function analyze(gameId) {
     (l, n) => artifactLayers.indexOf(l) === n
   );
 
-  fs.writeFileSync(
-    path.join(defPath, "_types.ts"),
-    `import { CommonLayer } from '../../types';
+  const analysis = `import { CommonLayer } from '../../types';
 
 export type ${capId}Terrain = ${
-      terrains.length ? terrains.map(t => `"${t}"`).join(" | ") : "never"
-    };
+    terrains.length ? terrains.map(t => `"${t}"`).join(" | ") : "never"
+  };
 export type ${capId}Unit = ${
-      units.length ? units.map(t => `"${t}"`).join(" | ") : "never"
-    };
+    units.length ? units.map(t => `"${t}"`).join(" | ") : "never"
+  };
 export type ${capId}Mark = ${
-      marks.length ? marks.map(t => `"${t}"`).join(" | ") : "never"
-    };
+    marks.length ? marks.map(t => `"${t}"`).join(" | ") : "never"
+  };
 export type ${capId}Command = ${
-      commands.length ? commands.map(t => `"${t}"`).join(" | ") : "never"
-    };
+    commands.length ? commands.map(t => `"${t}"`).join(" | ") : "never"
+  };
 export type ${capId}PhaseCommand = ${
-      nonEndCommands.length
-        ? nonEndCommands.map(t => `"${t}"`).join(" | ")
-        : "never"
-    };
+    nonEndCommands.length
+      ? nonEndCommands.map(t => `"${t}"`).join(" | ")
+      : "never"
+  };
 export type ${capId}Phase = "startTurn" | ${capId}Mark${
-      nonEndCommands.length ? ` | ${capId}PhaseCommand` : ""
-    };
+    nonEndCommands.length ? ` | ${capId}PhaseCommand` : ""
+  };
 export type ${capId}UnitLayer = ${
-      unitLayers.length ? unitLayers.map(t => `"${t}"`).join(" | ") : "never"
-    };
+    unitLayers.length ? unitLayers.map(t => `"${t}"`).join(" | ") : "never"
+  };
 export type ${capId}Generator = ${
-      generatorNames.length
-        ? generatorNames.map(t => `"${t}"`).join(" | ")
-        : "never"
-    };
+    generatorNames.length
+      ? generatorNames.map(t => `"${t}"`).join(" | ")
+      : "never"
+  };
 export type ${capId}ArtifactLayer = ${
-      artifactLayers.length
-        ? artifactLayers.map(t => `"${t}"`).join(" | ")
-        : "never"
-    };
+    artifactLayers.length
+      ? artifactLayers.map(t => `"${t}"`).join(" | ")
+      : "never"
+  };
 export type ${capId}TerrainLayer = ${
-      terrainLayers.length
-        ? terrainLayers.map(t => `"${t}"`).join(" | ")
-        : "never"
-    };
+    terrainLayers.length
+      ? terrainLayers.map(t => `"${t}"`).join(" | ")
+      : "never"
+  };
 export type ${capId}Layer = CommonLayer${
-      unitLayers.length ? ` | ${capId}UnitLayer` : ""
-    }${artifactLayers.length ? ` | ${capId}ArtifactLayer` : ""}${
-      terrainLayers.length ? ` | ${capId}TerrainLayer` : ""
-    };
-`
-  );
+    unitLayers.length ? ` | ${capId}UnitLayer` : ""
+  }${artifactLayers.length ? ` | ${capId}ArtifactLayer` : ""}${
+    terrainLayers.length ? ` | ${capId}TerrainLayer` : ""
+  };
+`;
+
+  return new Promise((resolve, reject) => {
+    fs.writeFile(path.join(defPath, "_types.ts"), analysis, err => {
+      resolve();
+    });
+  }).then(() => console.log("Analysed", gameId));
 }

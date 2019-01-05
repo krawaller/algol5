@@ -3,15 +3,22 @@ const path = require("path");
 
 import { typeSignature } from "./types";
 
-export default function stub(gameId) {
-  const defPath = path.join(__dirname, "./definitions", gameId);
-  fs.ensureDirSync(defPath);
+async function stubAI(gameId) {
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "ai.ts"),
+    `import {AI} from '../../types';
 
+const ${gameId}AI: AI = {};
+
+export default ${gameId}AI;
+`
+  );
+}
+
+async function stubAnalysis(gameId) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
-
-  // ------------- ANALYSIS -----------
-  fs.writeFileSync(
-    path.join(defPath, "_types.ts"),
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "_types.ts"),
     `import { CommonLayer } from '../../types';
 
 export type ${capId}Terrain = never;
@@ -26,22 +33,12 @@ export type ${capId}Layer = CommonLayer;
 export type ${capId}Generator = never;
 `
   );
+}
 
-  // --------- AI ----------
-  fs.writeFileSync(
-    path.join(defPath, "ai.ts"),
-    `import {AI} from '../../types';
-
-const ${gameId}AI: AI = {};
-
-export default ${gameId}AI;
-`
-  );
-
-  // --------- BOARD ----------
+async function stubBoard(gameId) {
   const bsig = typeSignature("Board", gameId);
-  fs.writeFileSync(
-    path.join(defPath, "board.ts"),
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "board.ts"),
     `import {Board} from '../../types';
 import { ${bsig} } from './_types';
 
@@ -56,11 +53,12 @@ const ${gameId}Board: Board<${bsig}> = {
 export default ${gameId}Board;
 `
   );
+}
 
-  // --------- GRAPHICS ----------
+async function stubGraphics(gameId) {
   const gsig = typeSignature("Graphics", gameId);
-  fs.writeFileSync(
-    path.join(defPath, "graphics.ts"),
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "graphics.ts"),
     `import {Graphics} from '../../types';
 import { ${gsig} } from './_types';
 
@@ -76,11 +74,12 @@ const ${gameId}Graphics: Graphics<${gsig}> = {
 export default ${gameId}Graphics;
 `
   );
+}
 
-  // --------- INSTRUCTIONS ----------
+async function stubInstructions(gameId) {
   const isig = typeSignature("Instructions", gameId);
-  fs.writeFileSync(
-    path.join(defPath, "instructions.ts"),
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "instructions.ts"),
     `import {Instructions} from '../../types';
 import { ${isig} } from './_types';
 
@@ -91,10 +90,11 @@ const ${gameId}Instructions: Instructions<${isig}> = {
 export default ${gameId}Instructions;
 `
   );
+}
 
-  // ------------ META ----------------
-  fs.writeFileSync(
-    path.join(defPath, "meta.ts"),
+async function stubMeta(gameId) {
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "meta.ts"),
     `import {Meta} from '../../types';
 
 const ${gameId}Meta: Meta = {
@@ -107,11 +107,12 @@ const ${gameId}Meta: Meta = {
 export default ${gameId}Meta;
 `
   );
+}
 
-  // ----------- FLOW --------------
+async function stubFlow(gameId) {
   const fsig = typeSignature("Flow", gameId);
-  fs.writeFileSync(
-    path.join(defPath, "flow.ts"),
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "flow.ts"),
     `import {Flow} from '../../types';
 import { ${fsig} } from './_types';
 
@@ -130,11 +131,12 @@ const ${gameId}Flow: Flow<${fsig}> = {
 export default ${gameId}Flow;
 `
   );
+}
 
-  // ----------- GENERATORS --------------
+async function stubGenerators(gameId) {
   const gensig = typeSignature("Generators", gameId);
-  fs.writeFileSync(
-    path.join(defPath, "generators.ts"),
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "generators.ts"),
     `import {Generators} from '../../types';
 import { ${gensig} } from './_types';
 
@@ -145,10 +147,11 @@ const ${gameId}Generators: Generators<${gensig}> = {
 export default ${gameId}Generators;
 `
   );
+}
 
-  // ------------ SCRIPTS ------------
-  fs.writeFileSync(
-    path.join(defPath, "scripts.ts"),
+async function stubScripts(gameId) {
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "scripts.ts"),
     `import {GameTestSuite} from '../../types';
 
 const ${gameId}Tests: GameTestSuite = {
@@ -158,11 +161,12 @@ const ${gameId}Tests: GameTestSuite = {
 export default ${gameId}Tests;
 `
   );
+}
 
-  // ------------ SETUP -------------
+async function stubSetup(gameId) {
   const ssig = typeSignature("Setup", gameId);
-  fs.writeFileSync(
-    path.join(defPath, "setup.ts"),
+  await fs.writeFile(
+    path.join(__dirname, "./definitions", gameId, "setup.ts"),
     `import {Setup} from '../../types';
 import { ${ssig} } from './_types';
 
@@ -173,4 +177,21 @@ const ${gameId}Setup: Setup<${ssig}> = {
 export default ${gameId}Setup;
 `
   );
+}
+
+export default async function stub(gameId) {
+  await fs.ensureDir(path.join(__dirname, "./definitions", gameId));
+  await Promise.all([
+    stubAI(gameId),
+    stubAnalysis(gameId),
+    stubBoard(gameId),
+    stubFlow(gameId),
+    stubGenerators(gameId),
+    stubGraphics(gameId),
+    stubInstructions(gameId),
+    stubMeta(gameId),
+    stubScripts(gameId),
+    stubSetup(gameId)
+  ]);
+  return console.log("Stubbed", gameId);
 }

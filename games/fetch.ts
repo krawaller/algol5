@@ -10,12 +10,11 @@ fs.removeSync("./definitions");
 
 fs.readdirSync("../library/defs")
   .filter(f => f !== ".DS_Store")
-  .forEach(fname => {
+  .forEach(async fname => {
     const gameId = fname.split(".")[0];
-    stub(gameId);
-    const json = JSON.parse(
-      fs.readFileSync("../library/defs/" + fname).toString()
-    );
+    await stub(gameId);
+    const oldDef = await fs.readFile("../library/defs/" + fname);
+    const json = JSON.parse(oldDef.toString());
     const {
       meta: { instructions = {}, ...otherMeta } = {},
       AI,

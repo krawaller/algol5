@@ -32,9 +32,9 @@ export type ${capId}Generator = never;
     path.join(defPath, "ai.ts"),
     `import {AI} from '../../types';
 
-const ${capId}AI: AI = {};
+const ${gameId}AI: AI = {};
 
-export default ${capId}AI;
+export default ${gameId}AI;
 `
   );
 
@@ -45,7 +45,7 @@ export default ${capId}AI;
     `import {Board} from '../../types';
 import { ${bsig} } from './_types';
 
-const ${capId}Board: Board<${bsig}> = {
+const ${gameId}Board: Board<${bsig}> = {
   height: 666,
   width: 666,
   terrain: {
@@ -53,7 +53,7 @@ const ${capId}Board: Board<${bsig}> = {
   }
 };
 
-export default ${capId}Board;
+export default ${gameId}Board;
 `
   );
 
@@ -64,7 +64,7 @@ export default ${capId}Board;
     `import {Graphics} from '../../types';
 import { ${gsig} } from './_types';
 
-const ${capId}Graphics: Graphics<${gsig}> = {
+const ${gameId}Graphics: Graphics<${gsig}> = {
   icons: {
 
   },
@@ -73,7 +73,7 @@ const ${capId}Graphics: Graphics<${gsig}> = {
   }
 };
 
-export default ${capId}Graphics;
+export default ${gameId}Graphics;
 `
   );
 
@@ -84,11 +84,11 @@ export default ${capId}Graphics;
     `import {Instructions} from '../../types';
 import { ${isig} } from './_types';
 
-const ${capId}Instructions: Instructions<${isig}> = {
+const ${gameId}Instructions: Instructions<${isig}> = {
 
 };
 
-export default ${capId}Instructions;
+export default ${gameId}Instructions;
 `
   );
 
@@ -97,14 +97,14 @@ export default ${capId}Instructions;
     path.join(defPath, "meta.ts"),
     `import {Meta} from '../../types';
 
-const ${capId}Meta: Meta = {
+const ${gameId}Meta: Meta = {
   id: "${gameId}",
   name: "",
   tags: [],
   tagline: "",
 };
 
-export default ${capId}Meta;
+export default ${gameId}Meta;
 `
   );
 
@@ -115,7 +115,7 @@ export default ${capId}Meta;
     `import {Flow} from '../../types';
 import { ${fsig} } from './_types';
 
-const ${capId}Flow: Flow<${fsig}> = {
+const ${gameId}Flow: Flow<${fsig}> = {
   startTurn: {
 
   },
@@ -127,7 +127,7 @@ const ${capId}Flow: Flow<${fsig}> = {
   }
 };
 
-export default ${capId}Flow;
+export default ${gameId}Flow;
 `
   );
 
@@ -138,11 +138,11 @@ export default ${capId}Flow;
     `import {Generators} from '../../types';
 import { ${gensig} } from './_types';
 
-const ${capId}Generators: Generators<${gensig}> = {
+const ${gameId}Generators: Generators<${gensig}> = {
 
 };
 
-export default ${capId}Generators;
+export default ${gameId}Generators;
 `
   );
 
@@ -151,11 +151,11 @@ export default ${capId}Generators;
     path.join(defPath, "scripts.ts"),
     `import {GameTestSuite} from '../../types';
 
-const ${capId}Tests: GameTestSuite = {
+const ${gameId}Tests: GameTestSuite = {
 
 };
 
-export default ${capId}Tests;
+export default ${gameId}Tests;
 `
   );
 
@@ -167,11 +167,11 @@ export default ${capId}Tests;
 
 import {${ssig} } from './_types';
 
-const ${capId}Setup: Setup<${ssig}> = {
+const ${gameId}Setup: Setup<${ssig}> = {
 
 };
 
-export default ${capId}Setup;
+export default ${gameId}Setup;
 `
   );
 }

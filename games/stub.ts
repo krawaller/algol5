@@ -164,8 +164,7 @@ export default ${gameId}Tests;
   fs.writeFileSync(
     path.join(defPath, "setup.ts"),
     `import {Setup} from '../../types';
-
-import {${ssig} } from './_types';
+import { ${ssig} } from './_types';
 
 const ${gameId}Setup: Setup<${ssig}> = {
 

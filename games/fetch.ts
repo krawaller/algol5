@@ -1,3 +1,4 @@
+const path = require("path");
 const fs = require("fs-extra");
 const beautify = require("js-beautify");
 import analyze from "./analyze";
@@ -35,34 +36,32 @@ fs.readdirSync("../library/defs")
     graphics.tiles = graphics.tiles || {};
     board.terrain = board.terrain || {};
 
-    let scripts;
-    try {
-      scripts = fs
-        .readFileSync("../gamescripts/pergame/" + gameId + ".ts")
-        .toString()
-        .replace("../types", "../../types");
-    } catch (e) {
-      scripts = `import { GameTestSuite } from '../../types';
-
-const ${gameId}Tests: GameTestSuite = {};
-
-export default ${gameId}Tests;
-`;
-    }
     fs.ensureDirSync("./definitions/" + gameId);
 
-    // -------------- META --------------
+    // ---------------- SCRIPTS ----------
+    let scripts;
+    try {
+      scripts = require(path.join(
+        __dirname,
+        "../gamescripts/pergame/" + gameId
+      )).default;
+    } catch (e) {}
+    const scriptsPath = "./definitions/" + gameId + "/scripts.ts";
+    const scriptsFile = fs.readFileSync(scriptsPath).toString();
     fs.writeFileSync(
-      "./definitions/" + gameId + "/meta.ts",
-      `import {Meta} from '../../types';
-
-const ${gameId}Meta: Meta = ${makeNice(otherMeta || {})};
-
-export default ${gameId}Meta;
-`
+      scriptsPath,
+      scriptsFile.replace(/ = {[\s\S]*};/, ` = ${makeNice(scripts || {})};`)
     );
 
-    // -------------- Flow --------------
+    // -------------- META --------------
+    const metaPath = "./definitions/" + gameId + "/meta.ts";
+    const file = fs.readFileSync(metaPath).toString();
+    fs.writeFileSync(
+      metaPath,
+      file.replace(/ = {[\s\S]*};/, ` = ${makeNice(otherMeta || {})};`)
+    );
+
+    // -------------- FLOW --------------
     const fsig = typeSignature("Flow", gameId);
     fs.writeFileSync(
       "./definitions/" + gameId + "/flow.ts",
@@ -155,6 +154,5 @@ export default ${gameId}Generators;
 `
     );
 
-    fs.writeFileSync("./definitions/" + gameId + "/scripts.ts", scripts);
     analyze(gameId);
   });

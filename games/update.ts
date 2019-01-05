@@ -1,6 +1,6 @@
-const fs = require("fs-extra");
-const path = require("path");
-const beautify = require("js-beautify");
+import * as fs from "fs-extra";
+import * as path from "path";
+import * as beautify from "js-beautify";
 import { FullDef } from "./types";
 import analyze from "./analyze";
 
@@ -10,26 +10,20 @@ function makeNice(obj = {}) {
   });
 }
 
-export default function update(gameId, def: FullDef) {
-  return Promise.all(
-    Object.keys(def).map(aspect => {
-      const apath = `./definitions/${gameId}/${aspect}.ts`;
-      return new Promise((resolve, reject) => {
-        fs.readFile(apath, (err, f) => {
-          fs.writeFile(
-            apath,
-            f
-              .toString()
-              .replace(/ = {[\s\S]*};/, ` = ${makeNice(def[aspect])};`),
-            () => {
-              resolve();
-            }
-          );
-        });
-      });
+export default async function update(gameId, def: FullDef) {
+  await Promise.all(
+    Object.keys(def).map(async aspect => {
+      const apath = path.join(
+        __dirname,
+        `./definitions/${gameId}/${aspect}.ts`
+      );
+      const f = await fs.readFile(apath);
+      const newFile = f
+        .toString()
+        .replace(/ = {[\s\S]*};/, ` = ${makeNice(def[aspect])};`);
+      return await fs.writeFile(apath, newFile);
     })
-  ).then(() => {
-    console.log("Updated files for", gameId);
-    analyze(def);
-  });
+  );
+  console.log("Updated files for", gameId);
+  return analyze(def);
 }

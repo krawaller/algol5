@@ -1,6 +1,11 @@
-const fs = require("fs-extra");
-const path = require("path");
+import * as fs from "fs-extra";
+import * as path from "path";
+
 import { FullDef } from "./types";
+
+function ownify(u) {
+  return [u, "my" + u, "neutral" + u, "opp" + u];
+}
 
 function possibles(def) {
   if (typeof def === "string") return [def];
@@ -20,7 +25,7 @@ function possibles(def) {
   }
 }
 
-export default function analyze(def: FullDef) {
+export default async function analyze(def: FullDef) {
   const gameId = def.meta.id;
   const defPath = path.join(__dirname, "./definitions", gameId);
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
@@ -33,10 +38,6 @@ export default function analyze(def: FullDef) {
     c =>
       possibles(flow.commands[c].link).filter(l => l !== "endturn").length > 0
   );
-
-  function ownify(u) {
-    return [u, "my" + u, "neutral" + u, "opp" + u];
-  }
 
   const unitLayers = units.reduce((mem, u) => mem.concat(ownify(u)), []);
 
@@ -123,9 +124,6 @@ export type ${capId}Layer = CommonLayer${
   };
 `;
 
-  return new Promise((resolve, reject) => {
-    fs.writeFile(path.join(defPath, "_types.ts"), analysis, err => {
-      resolve();
-    });
-  }).then(() => console.log("Analysed", gameId));
+  await fs.writeFile(path.join(defPath, "_types.ts"), analysis);
+  console.log("Analysed", gameId);
 }

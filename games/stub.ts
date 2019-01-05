@@ -162,7 +162,7 @@ export default ${gameId}Tests;
   // ------------ SETUP -------------
   const ssig = typeSignature("Setup", gameId);
   fs.writeFileSync(
-    path.join(defPath, "scripts.ts"),
+    path.join(defPath, "setup.ts"),
     `import {Setup} from '../../types';
 
 import {${ssig} } from './_types';

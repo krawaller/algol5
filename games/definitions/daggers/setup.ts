@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { DaggersUnit } from './_types';
 
 const daggersSetup: Setup<DaggersUnit> = {

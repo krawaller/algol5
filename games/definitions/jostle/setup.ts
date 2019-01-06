@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { JostleUnit } from './_types';
 
 const jostleSetup: Setup<JostleUnit> = {

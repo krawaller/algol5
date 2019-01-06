@@ -1,4 +1,4 @@
-import {AI} from '../../types';
+import {AI} from '../../../types';
 
 const serauqsAI: AI = {};
 

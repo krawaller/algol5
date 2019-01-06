@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { GowiththefloeArtifactLayer, GowiththefloeGenerator, GowiththefloeLayer } from './_types';
 
 const gowiththefloeGenerators: Generators<GowiththefloeArtifactLayer, GowiththefloeGenerator, GowiththefloeLayer> = {

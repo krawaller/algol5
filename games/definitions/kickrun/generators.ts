@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { KickrunArtifactLayer, KickrunGenerator, KickrunLayer } from './_types';
 
 const kickrunGenerators: Generators<KickrunArtifactLayer, KickrunGenerator, KickrunLayer> = {

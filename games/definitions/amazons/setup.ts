@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { AmazonsUnit } from './_types';
 
 const amazonsSetup: Setup<AmazonsUnit> = {

@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { ShoveoffUnit } from './_types';
 
 const shoveoffSetup: Setup<ShoveoffUnit> = {

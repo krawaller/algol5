@@ -1,4 +1,4 @@
-import {Flow} from '../../types';
+import {Flow} from '../../../types';
 import { TransetArtifactLayer, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetUnit } from './_types';
 
 const transetFlow: Flow<TransetArtifactLayer, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetUnit> = {

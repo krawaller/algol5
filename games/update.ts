@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as beautify from "js-beautify";
-import { FullDef } from "./types";
+import { FullDef } from "../types";
 import analyze from "./analyze";
 
 function makeNice(obj = {}) {

@@ -1,4 +1,4 @@
-import {Flow} from '../../types';
+import {Flow} from '../../../types';
 import { KickrunArtifactLayer, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunUnit } from './_types';
 
 const kickrunFlow: Flow<KickrunArtifactLayer, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunUnit> = {

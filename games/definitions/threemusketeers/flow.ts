@@ -1,4 +1,4 @@
-import {Flow} from '../../types';
+import {Flow} from '../../../types';
 import { ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit } from './_types';
 
 const threemusketeersFlow: Flow<ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit> = {

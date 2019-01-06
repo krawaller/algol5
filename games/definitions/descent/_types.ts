@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type DescentTerrain = never;
 export type DescentUnit = "pawns" | "knights" | "rooks";

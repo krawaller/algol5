@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { TransetArtifactLayer, TransetGenerator, TransetLayer } from './_types';
 
 const transetGenerators: Generators<TransetArtifactLayer, TransetGenerator, TransetLayer> = {

@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { SemaphorPhase } from './_types';
 
 const semaphorInstructions: Instructions<SemaphorPhase> = {

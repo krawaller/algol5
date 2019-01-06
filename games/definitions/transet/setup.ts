@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { TransetUnit } from './_types';
 
 const transetSetup: Setup<TransetUnit> = {

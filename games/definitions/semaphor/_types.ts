@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type SemaphorTerrain = never;
 export type SemaphorUnit = "kings" | "pawns" | "bishops";

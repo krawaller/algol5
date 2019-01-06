@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { AriesUnit } from './_types';
 
 const ariesSetup: Setup<AriesUnit> = {

@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { UglyduckArtifactLayer, UglyduckGenerator, UglyduckLayer } from './_types';
 
 const uglyduckGenerators: Generators<UglyduckArtifactLayer, UglyduckGenerator, UglyduckLayer> = {

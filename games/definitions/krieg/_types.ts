@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type KriegTerrain = "southeast" | "northwest" | "corners" | "bases";
 export type KriegUnit = "notfrozens" | "frozens";

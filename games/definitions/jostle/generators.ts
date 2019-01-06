@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { JostleArtifactLayer, JostleGenerator, JostleLayer } from './_types';
 
 const jostleGenerators: Generators<JostleArtifactLayer, JostleGenerator, JostleLayer> = {

@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { GogolTerrain, GogolUnit } from './_types';
 
 const gogolGraphics: Graphics<GogolTerrain, GogolUnit> = {

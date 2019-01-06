@@ -1,4 +1,4 @@
-import {Flow} from '../../types';
+import {Flow} from '../../../types';
 import { OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit } from './_types';
 
 const orthokonFlow: Flow<OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit> = {

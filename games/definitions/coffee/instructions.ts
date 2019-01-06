@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { CoffeePhase } from './_types';
 
 const coffeeInstructions: Instructions<CoffeePhase> = {

@@ -1,4 +1,4 @@
-import {Board} from '../../types';
+import {Board} from '../../../types';
 import { ThreemusketeersTerrain } from './_types';
 
 const threemusketeersBoard: Board<ThreemusketeersTerrain> = {

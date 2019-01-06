@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { MurusgallicusUnit } from './_types';
 
 const murusgallicusSetup: Setup<MurusgallicusUnit> = {

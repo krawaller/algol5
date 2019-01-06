@@ -1,4 +1,4 @@
-import {Flow} from '../../types';
+import {Flow} from '../../../types';
 import { SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit } from './_types';
 
 const semaphorFlow: Flow<SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit> = {

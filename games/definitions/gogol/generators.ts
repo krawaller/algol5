@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { GogolArtifactLayer, GogolGenerator, GogolLayer } from './_types';
 
 const gogolGenerators: Generators<GogolArtifactLayer, GogolGenerator, GogolLayer> = {

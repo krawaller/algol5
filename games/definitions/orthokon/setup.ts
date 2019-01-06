@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { OrthokonUnit } from './_types';
 
 const orthokonSetup: Setup<OrthokonUnit> = {

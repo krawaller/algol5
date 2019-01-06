@@ -4,7 +4,7 @@ import stub from "./stub";
 
 import updateGame from "./update";
 
-import { FullDef } from "./types";
+import { FullDef } from "../types";
 
 fs.removeSync("./definitions");
 

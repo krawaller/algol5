@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { DuploPhase } from './_types';
 
 const duploInstructions: Instructions<DuploPhase> = {

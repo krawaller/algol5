@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { ShoveoffArtifactLayer, ShoveoffGenerator, ShoveoffLayer } from './_types';
 
 const shoveoffGenerators: Generators<ShoveoffArtifactLayer, ShoveoffGenerator, ShoveoffLayer> = {

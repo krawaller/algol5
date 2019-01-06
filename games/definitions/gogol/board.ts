@@ -1,4 +1,4 @@
-import {Board} from '../../types';
+import {Board} from '../../../types';
 import { GogolTerrain } from './_types';
 
 const gogolBoard: Board<GogolTerrain> = {

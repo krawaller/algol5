@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { MurusgallicusadvancedPhase } from './_types';
 
 const murusgallicusadvancedInstructions: Instructions<MurusgallicusadvancedPhase> = {

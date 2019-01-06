@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { DaggersPhase } from './_types';
 
 const daggersInstructions: Instructions<DaggersPhase> = {

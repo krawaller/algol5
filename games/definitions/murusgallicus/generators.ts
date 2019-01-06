@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { MurusgallicusArtifactLayer, MurusgallicusGenerator, MurusgallicusLayer } from './_types';
 
 const murusgallicusGenerators: Generators<MurusgallicusArtifactLayer, MurusgallicusGenerator, MurusgallicusLayer> = {

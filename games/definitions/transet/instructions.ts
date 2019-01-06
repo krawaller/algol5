@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { TransetPhase } from './_types';
 
 const transetInstructions: Instructions<TransetPhase> = {

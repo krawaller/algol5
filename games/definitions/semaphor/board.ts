@@ -1,4 +1,4 @@
-import {Board} from '../../types';
+import {Board} from '../../../types';
 import { SemaphorTerrain } from './_types';
 
 const semaphorBoard: Board<SemaphorTerrain> = {

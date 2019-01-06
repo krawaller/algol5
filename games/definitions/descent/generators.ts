@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { DescentArtifactLayer, DescentGenerator, DescentLayer } from './_types';
 
 const descentGenerators: Generators<DescentArtifactLayer, DescentGenerator, DescentLayer> = {

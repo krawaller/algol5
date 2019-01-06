@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type AriesTerrain = "corner";
 export type AriesUnit = "soldiers";

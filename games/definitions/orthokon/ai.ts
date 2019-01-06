@@ -1,4 +1,4 @@
-import {AI} from '../../types';
+import {AI} from '../../../types';
 
 const orthokonAI: AI = {
   aspects: {

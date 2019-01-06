@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type TransetTerrain = "base";
 export type TransetUnit = "pinets" | "piokers" | "piases";

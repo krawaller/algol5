@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { DaggersTerrain, DaggersUnit } from './_types';
 
 const daggersGraphics: Graphics<DaggersTerrain, DaggersUnit> = {

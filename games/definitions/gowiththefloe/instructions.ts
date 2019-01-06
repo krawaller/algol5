@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { GowiththefloePhase } from './_types';
 
 const gowiththefloeInstructions: Instructions<GowiththefloePhase> = {

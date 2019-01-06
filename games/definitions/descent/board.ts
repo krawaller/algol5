@@ -1,4 +1,4 @@
-import {Board} from '../../types';
+import {Board} from '../../../types';
 import { DescentTerrain } from './_types';
 
 const descentBoard: Board<DescentTerrain> = {

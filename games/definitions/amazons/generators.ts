@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { AmazonsArtifactLayer, AmazonsGenerator, AmazonsLayer } from './_types';
 
 const amazonsGenerators: Generators<AmazonsArtifactLayer, AmazonsGenerator, AmazonsLayer> = {

@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 
-import { FullDef } from "./types";
+import { FullDef } from "../types";
 
 function ownify(u) {
   return [u, "my" + u, "neutral" + u, "opp" + u];
@@ -77,7 +77,7 @@ export default async function analyze(def: FullDef) {
     (l, n) => artifactLayers.indexOf(l) === n
   );
 
-  const analysis = `import { CommonLayer } from '../../types';
+  const analysis = `import { CommonLayer } from '../../../types';
 
 export type ${capId}Terrain = ${
     terrains.length ? terrains.map(t => `"${t}"`).join(" | ") : "never"

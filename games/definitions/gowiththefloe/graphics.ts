@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { GowiththefloeTerrain, GowiththefloeUnit } from './_types';
 
 const gowiththefloeGraphics: Graphics<GowiththefloeTerrain, GowiththefloeUnit> = {

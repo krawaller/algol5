@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { SemaphorTerrain, SemaphorUnit } from './_types';
 
 const semaphorGraphics: Graphics<SemaphorTerrain, SemaphorUnit> = {

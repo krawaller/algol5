@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { AriesArtifactLayer, AriesGenerator, AriesLayer } from './_types';
 
 const ariesGenerators: Generators<AriesArtifactLayer, AriesGenerator, AriesLayer> = {

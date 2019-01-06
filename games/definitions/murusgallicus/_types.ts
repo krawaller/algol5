@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type MurusgallicusTerrain = "homerow";
 export type MurusgallicusUnit = "towers" | "walls";

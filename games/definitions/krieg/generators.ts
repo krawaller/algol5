@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { KriegArtifactLayer, KriegGenerator, KriegLayer } from './_types';
 
 const kriegGenerators: Generators<KriegArtifactLayer, KriegGenerator, KriegLayer> = {

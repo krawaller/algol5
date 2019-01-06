@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { OrthokonPhase } from './_types';
 
 const orthokonInstructions: Instructions<OrthokonPhase> = {

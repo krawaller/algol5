@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { DescentUnit } from './_types';
 
 const descentSetup: Setup<DescentUnit> = {

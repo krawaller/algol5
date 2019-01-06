@@ -1,4 +1,4 @@
-import {Meta} from '../../types';
+import {Meta} from '../../../types';
 
 const shoveoffMeta: Meta = {
   id: "shoveoff",

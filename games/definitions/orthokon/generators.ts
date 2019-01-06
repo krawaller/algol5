@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { OrthokonArtifactLayer, OrthokonGenerator, OrthokonLayer } from './_types';
 
 const orthokonGenerators: Generators<OrthokonArtifactLayer, OrthokonGenerator, OrthokonLayer> = {

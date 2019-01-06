@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { SemaphorArtifactLayer, SemaphorGenerator, SemaphorLayer } from './_types';
 
 const semaphorGenerators: Generators<SemaphorArtifactLayer, SemaphorGenerator, SemaphorLayer> = {

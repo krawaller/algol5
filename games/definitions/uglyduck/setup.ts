@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { UglyduckUnit } from './_types';
 
 const uglyduckSetup: Setup<UglyduckUnit> = {

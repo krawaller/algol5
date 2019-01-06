@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { KickrunTerrain, KickrunUnit } from './_types';
 
 const kickrunGraphics: Graphics<KickrunTerrain, KickrunUnit> = {

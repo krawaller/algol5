@@ -1,4 +1,4 @@
-import {GameTestSuite} from '../../types';
+import {GameTestSuite} from '../../../types';
 
 const gowiththefloeTests: GameTestSuite = {
   basic: [

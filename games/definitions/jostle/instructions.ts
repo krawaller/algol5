@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { JostlePhase } from './_types';
 
 const jostleInstructions: Instructions<JostlePhase> = {

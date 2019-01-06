@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { GogolUnit } from './_types';
 
 const gogolSetup: Setup<GogolUnit> = {

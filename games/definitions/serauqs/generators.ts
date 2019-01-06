@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { SerauqsArtifactLayer, SerauqsGenerator, SerauqsLayer } from './_types';
 
 const serauqsGenerators: Generators<SerauqsArtifactLayer, SerauqsGenerator, SerauqsLayer> = {

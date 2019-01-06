@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { SerauqsPhase } from './_types';
 
 const serauqsInstructions: Instructions<SerauqsPhase> = {

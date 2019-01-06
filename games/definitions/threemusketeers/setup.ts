@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { ThreemusketeersUnit } from './_types';
 
 const threemusketeersSetup: Setup<ThreemusketeersUnit> = {

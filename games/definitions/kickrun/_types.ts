@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type KickrunTerrain = "corners";
 export type KickrunUnit = "runners" | "sidekickers";

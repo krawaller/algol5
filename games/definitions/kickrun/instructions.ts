@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { KickrunPhase } from './_types';
 
 const kickrunInstructions: Instructions<KickrunPhase> = {

@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { GowiththefloeUnit } from './_types';
 
 const gowiththefloeSetup: Setup<GowiththefloeUnit> = {

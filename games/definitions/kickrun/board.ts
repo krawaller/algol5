@@ -1,4 +1,4 @@
-import {Board} from '../../types';
+import {Board} from '../../../types';
 import { KickrunTerrain } from './_types';
 
 const kickrunBoard: Board<KickrunTerrain> = {

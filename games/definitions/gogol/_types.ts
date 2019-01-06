@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type GogolTerrain = "homerow" | "edges";
 export type GogolUnit = "kings" | "soldiers";

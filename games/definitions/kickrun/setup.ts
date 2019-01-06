@@ -1,4 +1,4 @@
-import {Setup} from '../../types';
+import {Setup} from '../../../types';
 import { KickrunUnit } from './_types';
 
 const kickrunSetup: Setup<KickrunUnit> = {

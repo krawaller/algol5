@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { CoffeeArtifactLayer, CoffeeGenerator, CoffeeLayer } from './_types';
 
 const coffeeGenerators: Generators<CoffeeArtifactLayer, CoffeeGenerator, CoffeeLayer> = {

@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type GowiththefloeTerrain = "water";
 export type GowiththefloeUnit = "seals" | "bears" | "holes";

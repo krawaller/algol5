@@ -1,4 +1,4 @@
-import {Flow} from '../../types';
+import {Flow} from '../../../types';
 import { _testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit } from './_types';
 
 const _testFlow: Flow<_testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit> = {

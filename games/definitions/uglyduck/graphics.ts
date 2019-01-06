@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { UglyduckTerrain, UglyduckUnit } from './_types';
 
 const uglyduckGraphics: Graphics<UglyduckTerrain, UglyduckUnit> = {

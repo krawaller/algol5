@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { TransetTerrain, TransetUnit } from './_types';
 
 const transetGraphics: Graphics<TransetTerrain, TransetUnit> = {

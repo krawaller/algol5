@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { DaggersArtifactLayer, DaggersGenerator, DaggersLayer } from './_types';
 
 const daggersGenerators: Generators<DaggersArtifactLayer, DaggersGenerator, DaggersLayer> = {

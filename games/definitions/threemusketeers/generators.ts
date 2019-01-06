@@ -1,4 +1,4 @@
-import {Generators} from '../../types';
+import {Generators} from '../../../types';
 import { ThreemusketeersArtifactLayer, ThreemusketeersGenerator, ThreemusketeersLayer } from './_types';
 
 const threemusketeersGenerators: Generators<ThreemusketeersArtifactLayer, ThreemusketeersGenerator, ThreemusketeersLayer> = {

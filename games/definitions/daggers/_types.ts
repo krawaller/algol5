@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../types';
+import { CommonLayer } from '../../../types';
 
 export type DaggersTerrain = "base";
 export type DaggersUnit = "daggers" | "crowns";

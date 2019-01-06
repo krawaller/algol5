@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { AtriumPhase } from './_types';
 
 const atriumInstructions: Instructions<AtriumPhase> = {

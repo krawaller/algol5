@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { CoffeeTerrain, CoffeeUnit } from './_types';
 
 const coffeeGraphics: Graphics<CoffeeTerrain, CoffeeUnit> = {

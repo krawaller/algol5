@@ -1,4 +1,4 @@
-import {Graphics} from '../../types';
+import {Graphics} from '../../../types';
 import { AmazonsTerrain, AmazonsUnit } from './_types';
 
 const amazonsGraphics: Graphics<AmazonsTerrain, AmazonsUnit> = {

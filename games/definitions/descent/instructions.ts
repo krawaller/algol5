@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { DescentPhase } from './_types';
 
 const descentInstructions: Instructions<DescentPhase> = {

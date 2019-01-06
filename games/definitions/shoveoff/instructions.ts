@@ -1,4 +1,4 @@
-import {Instructions} from '../../types';
+import {Instructions} from '../../../types';
 import { ShoveoffPhase } from './_types';
 
 const shoveoffInstructions: Instructions<ShoveoffPhase> = {

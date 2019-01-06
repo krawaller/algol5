@@ -1,52 +1,40 @@
 import {GameTestSuite} from '../../../types';
 
 const murusgallicusadvancedTests: GameTestSuite = {
-  basic: [
-    [
-      [],
-      ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]
-    ],
-    [
-      ["b1", "d3", "move", "endturn"],
-      ["a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7"]
-    ],
-    [
-      ["d7", "d5", "move", "endturn"],
-      ["a1", "c1", "d1", "e1", "f1", "g1", "h1"]
-    ],
-    [
-      ["d1", "d3", "move", "endturn"],
-      ["a7", "b7", "c7", "e7", "f7", "g7", "h7"]
-    ],
-    [
-      ["e7", "c5", "move", "endturn"],
-      ["a1", "c1", "d3", "e1", "f1", "g1", "h1"]
-    ],
-    [
-      ["f1", "d3", "move", "endturn"],
-      ["a7", "b7", "c7", "d6", "f7", "g7", "h7"]
-    ],
-    [
-      ["a7", "a5", "move", "endturn"],
-      ["a1", "c1", "d3", "e1", "g1", "h1"]
-    ],
-    [
-      ["d3"],
-      ["a3", "a6", "b3", "b5", "d5", "d6", "f3", "f5", "g3", "g6"]
-    ],
-    [
-      ["d6", "fire", "endturn"],
-      ["b7", "c7", "f7", "g7", "h7"]
-    ],
-    [
-      ["f7", "d5", "move", "endturn"],
-      ["a1", "c1", "d3", "e1", "g1", "h1"]
-    ],
-    [
-      ["d3"],
-      ["b1", "b3", "b5", "d1", "f1", "f3", "f5"]
-    ]
-  ]
+  basic: [{
+    commands: [],
+    include: ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]
+  }, {
+    commands: ["b1", "d3", "move", "endturn"],
+    include: ["a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7"]
+  }, {
+    commands: ["d7", "d5", "move", "endturn"],
+    include: ["a1", "c1", "d1", "e1", "f1", "g1", "h1"]
+  }, {
+    commands: ["d1", "d3", "move", "endturn"],
+    include: ["a7", "b7", "c7", "e7", "f7", "g7", "h7"]
+  }, {
+    commands: ["e7", "c5", "move", "endturn"],
+    include: ["a1", "c1", "d3", "e1", "f1", "g1", "h1"]
+  }, {
+    commands: ["f1", "d3", "move", "endturn"],
+    include: ["a7", "b7", "c7", "d6", "f7", "g7", "h7"]
+  }, {
+    commands: ["a7", "a5", "move", "endturn"],
+    include: ["a1", "c1", "d3", "e1", "g1", "h1"]
+  }, {
+    commands: ["d3"],
+    include: ["a3", "a6", "b3", "b5", "d5", "d6", "f3", "f5", "g3", "g6"]
+  }, {
+    commands: ["d6", "fire", "endturn"],
+    include: ["b7", "c7", "f7", "g7", "h7"]
+  }, {
+    commands: ["f7", "d5", "move", "endturn"],
+    include: ["a1", "c1", "d3", "e1", "g1", "h1"]
+  }, {
+    commands: ["d3"],
+    include: ["b1", "b3", "b5", "d1", "f1", "f3", "f5"]
+  }]
 };
 
 export default murusgallicusadvancedTests;

@@ -8,39 +8,40 @@ import optionsInUI from "../../src/various/optionsinui";
 import * as test from "tape";
 import makePlayer from "../makeplayer";
 import defs from "../../../games/dist/lib";
+import { ScriptLine } from '../../../types';
 
 Object.keys(defs).forEach(gameId => {
   Object.keys(defs[gameId].scripts).forEach(script => {
     test("Running " + gameId + " script " + script, t => {
-      const lines = defs[gameId].scripts[script];
+      const lines: ScriptLine[] = defs[gameId].scripts[script];
       let UI = algol.startGame(gameId, makePlayer(1), makePlayer(2));
-      lines.forEach(([cmnds, expectedOpts, forbiddenOpts = []], i) => {
-        cmnds.forEach(cmnd => {
+      lines.forEach(({commands, include = [], exclude = []}, i) => {
+        commands.forEach(cmnd => {
           UI = algol.performAction(UI.sessionId, cmnd);
         });
         const opts = optionsInUI(UI, true);
-        if (expectedOpts.length) {
-          const missingOpts = expectedOpts.filter(o => opts.indexOf(o) === -1);
+        if (include.length) {
+          const missingOpts = include.filter(o => opts.indexOf(o) === -1);
           t.deepEqual(
             missingOpts,
             [],
             "UI after " +
-              (cmnds.length ? cmnds : ["start"]).join(",") +
+              (commands.length ? commands : ["start"]).join(",") +
               " included " +
-              expectedOpts.join(",")
+              include.join(",")
           );
         }
-        if (forbiddenOpts.length) {
+        if (exclude.length) {
           const unwantedOpts = opts.filter(
-            o => forbiddenOpts.indexOf(o) !== -1
+            o => exclude.indexOf(o) !== -1
           );
           t.deepEqual(
             unwantedOpts,
             [],
             "UI after " +
-              (cmnds.length ? cmnds : ["start"]).join(",") +
+              (commands.length ? commands : ["start"]).join(",") +
               " didn't include " +
-              forbiddenOpts.join(",")
+              exclude.join(",")
           );
         }
       });

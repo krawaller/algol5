@@ -370,10 +370,14 @@ export type Generators<
   Layer extends string = string
 > = { [genname in GeneratorName]: GeneratorDef<ArtifactLayer, Layer> };
 
-export type Line = string[][]; //[string[], string[]];
-export type Test = [string, string, Line[]];
+export type ScriptLine = {
+  commands: string[],
+  include?: string[],
+  exclude?: string[]
+}
+export type Test = [string, string, ScriptLine[]];
 export type GameTestSuite = {
-  [desc: string]: Line[];
+  [desc: string]: ScriptLine[];
 };
 
 export type Instructions<Phase extends string = string> = {

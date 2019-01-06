@@ -4,14 +4,13 @@ This test executes scipted steps
 
 import * as library from "../../dist/library.js";
 import * as test from "tape";
-
+import { GameTestSuite } from "../../../types";
 import defs from "../../../games/dist/lib";
 
 const gameIds = Object.keys(library);
 
 gameIds.forEach(gameId => {
-  console.log("GAME", gameId);
-  const suite = defs[gameId].scripts;
+  const suite: GameTestSuite = defs[gameId].scripts;
   if (suite) {
     const game = library[gameId];
     Object.keys(suite).forEach(testCaseName => {
@@ -19,9 +18,9 @@ gameIds.forEach(gameId => {
         const lines = suite[testCaseName];
         let turn = game.newGame();
         let at = "root";
-        lines.forEach(([cmnds, expectedOpts, forbiddenOpts = []], i) => {
+        lines.forEach(({commands, include = [], exclude = []}, i) => {
           t.doesNotThrow(() => {
-            cmnds.forEach(cmnd => {
+            commands.forEach(cmnd => {
               let func = turn.links[at][cmnd];
               if (cmnd === "win" || cmnd === "lose" || cmnd === "draw") {
                 t.ok(!!func && !game[func], gameId + " win condition!");
@@ -35,24 +34,24 @@ gameIds.forEach(gameId => {
                 at = step.stepid;
               }
             });
-          }, "can perform " + (i ? [] : ["start"]).concat(cmnds).join(","));
+          }, "can perform " + (i ? [] : ["start"]).concat(commands).join(","));
           const links = turn.links[at];
-          if (expectedOpts.length) {
-            const missingOpts = expectedOpts.filter(o => !links[o]);
+          if (include.length) {
+            const missingOpts = include.filter(o => !links[o]);
             t.deepEqual(
               missingOpts,
               [],
-              "UI included " + expectedOpts.join(",")
+              "UI included " + include.join(",")
             );
           }
-          if (forbiddenOpts.length) {
+          if (exclude.length) {
             const unwantedOpts = Object.keys(links).filter(
-              o => forbiddenOpts.indexOf(o) !== -1
+              o => exclude.indexOf(o) !== -1
             );
             t.deepEqual(
               unwantedOpts,
               [],
-              "UI didnt include " + forbiddenOpts.join(",")
+              "UI didnt include " + exclude.join(",")
             );
           }
         });

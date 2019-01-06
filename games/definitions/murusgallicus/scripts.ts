@@ -1,84 +1,64 @@
 import {GameTestSuite} from '../../../types';
 
 const murusgallicusTests: GameTestSuite = {
-  basic: [
-    [
-      [],
-      ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]
-    ],
-    [
-      ["a1"],
-      ["a3", "c3"]
-    ],
-    [
-      ["c3", "move", "endturn"],
-      ["a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7"]
-    ],
-    [
-      ["a7"],
-      ["a5", "c5"]
-    ],
-    [
-      ["c5", "move", "endturn"],
-      ["b1", "c1", "d1", "e1", "f1", "g1", "h1"]
-    ],
-    [
-      ["c1"],
-      ["a3", "c3", "e3"]
-    ],
-    [
-      ["c3", "move", "endturn"],
-      ["b7", "c7", "d7", "e7", "f7", "g7", "h7"]
-    ],
-    [
-      ["b7"],
-      ["b5", "d5"]
-    ],
-    [
-      ["b5", "move", "endturn"],
-      ["b1", "c3", "d1", "e1", "f1", "g1", "h1"]
-    ],
-    [
-      ["c3"],
-      ["a1", "a3", "a5", "c1", "e3", "e5"]
-    ],
-    [
-      ["e5", "move", "endturn"],
-      ["b6", "c7", "d7", "e7", "f7", "g7", "h7"]
-    ],
-    [
-      ["d7"],
-      ["b5", "d5", "f5"]
-    ],
-    [
-      ["f5", "move", "endturn"],
-      ["b1", "d1", "e1", "f1", "g1", "h1"]
-    ],
-    [
-      ["d1"],
-      ["b3", "d3", "f3"]
-    ],
-    [
-      ["d3", "move", "endturn"],
-      ["b6", "c7", "e7", "f7", "g7", "h7"]
-    ],
-    [
-      ["f7", "d5", "move", "endturn"],
-      ["b1", "e1", "f1", "g1", "h1"]
-    ],
-    [
-      ["b1", "d3", "move", "endturn"],
-      ["b6", "c7", "e6", "e7", "g7", "h7"]
-    ],
-    [
-      ["e6"],
-      ["c4", "c6", "e5", "g4", "g6"]
-    ],
-    [
-      ["e5", "kill", "endturn"],
-      ["c2", "d3", "e1", "f1", "g1", "h1"]
-    ]
-  ]
+  basic: [{
+    commands: [],
+    include: ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]
+  }, {
+    commands: ["a1"],
+    include: ["a3", "c3"]
+  }, {
+    commands: ["c3", "move", "endturn"],
+    include: ["a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7"]
+  }, {
+    commands: ["a7"],
+    include: ["a5", "c5"]
+  }, {
+    commands: ["c5", "move", "endturn"],
+    include: ["b1", "c1", "d1", "e1", "f1", "g1", "h1"]
+  }, {
+    commands: ["c1"],
+    include: ["a3", "c3", "e3"]
+  }, {
+    commands: ["c3", "move", "endturn"],
+    include: ["b7", "c7", "d7", "e7", "f7", "g7", "h7"]
+  }, {
+    commands: ["b7"],
+    include: ["b5", "d5"]
+  }, {
+    commands: ["b5", "move", "endturn"],
+    include: ["b1", "c3", "d1", "e1", "f1", "g1", "h1"]
+  }, {
+    commands: ["c3"],
+    include: ["a1", "a3", "a5", "c1", "e3", "e5"]
+  }, {
+    commands: ["e5", "move", "endturn"],
+    include: ["b6", "c7", "d7", "e7", "f7", "g7", "h7"]
+  }, {
+    commands: ["d7"],
+    include: ["b5", "d5", "f5"]
+  }, {
+    commands: ["f5", "move", "endturn"],
+    include: ["b1", "d1", "e1", "f1", "g1", "h1"]
+  }, {
+    commands: ["d1"],
+    include: ["b3", "d3", "f3"]
+  }, {
+    commands: ["d3", "move", "endturn"],
+    include: ["b6", "c7", "e7", "f7", "g7", "h7"]
+  }, {
+    commands: ["f7", "d5", "move", "endturn"],
+    include: ["b1", "e1", "f1", "g1", "h1"]
+  }, {
+    commands: ["b1", "d3", "move", "endturn"],
+    include: ["b6", "c7", "e6", "e7", "g7", "h7"]
+  }, {
+    commands: ["e6"],
+    include: ["c4", "c6", "e5", "g4", "g6"]
+  }, {
+    commands: ["e5", "kill", "endturn"],
+    include: ["c2", "d3", "e1", "f1", "g1", "h1"]
+  }]
 };
 
 export default murusgallicusTests;

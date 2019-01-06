@@ -33,11 +33,26 @@ export * from '../../definitions/${gid}/index';
 
 fs.writeFileSync(
   path.join(out, "lib.ts"),
-  `${gameIds.map(gid => `import ${gid} from './games/${gid}';`).join("\n")}
+  `${gameIds
+    .map(gid => `import ${gid} from '../definitions/${gid}/index';`)
+    .join("\n")}
 
 const lib = {
 ${gameIds.map(gid => `  ${gid},\n`).join("")}};
 
 export default lib;
+`
+);
+
+fs.writeFileSync(
+  path.join(out, "meta.ts"),
+  `${gameIds
+    .map(gid => `import ${gid}Meta from '../definitions/${gid}/meta';`)
+    .join("\n")}
+
+const meta = {
+${gameIds.map(gid => `  ${gid}: ${gid}Meta,\n`).join("")}};
+
+export default meta;
 `
 );

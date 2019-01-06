@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "fetch": "npx ts-node ./fetch",
-    "export": "npx ts-node ./export"
+    "fetch": "npx ts-node ./commands/fetch",
+    "export": "npx ts-node ./commands/export"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.4",

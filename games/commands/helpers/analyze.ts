@@ -1,7 +1,9 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 
-import { FullDef } from "../types";
+import { FullDef } from "../../../types";
+
+const defFolder = path.join(__dirname, "../../definitions");
 
 function ownify(u) {
   return [u, "my" + u, "neutral" + u, "opp" + u];
@@ -27,7 +29,7 @@ function possibles(def) {
 
 export default async function analyze(def: FullDef) {
   const gameId = def.meta.id;
-  const defPath = path.join(__dirname, "./definitions", gameId);
+  const defPath = path.join(defFolder, gameId);
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   const { board, graphics, generators, flow } = def;
   const terrains = Object.keys(board.terrain || {});

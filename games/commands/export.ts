@@ -1,8 +1,8 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 
-const defs = path.join(__dirname, "definitions");
-const out = path.join(__dirname, "dist");
+const defs = path.join(__dirname, "../definitions");
+const out = path.join(__dirname, "../dist");
 
 fs.removeSync(out);
 fs.ensureDirSync(out);

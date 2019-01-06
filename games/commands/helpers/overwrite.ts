@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as beautify from "js-beautify";
-import { FullDef } from "../types";
+import { FullDef } from "../../../types";
 import analyze from "./analyze";
 
 function makeNice(obj = {}) {
@@ -15,7 +15,7 @@ export default async function overwrite(gameId, def: FullDef) {
     Object.keys(def).map(async aspect => {
       const apath = path.join(
         __dirname,
-        `./definitions/${gameId}/${aspect}.ts`
+        `../../definitions/${gameId}/${aspect}.ts`
       );
       const f = await fs.readFile(apath);
       const newFile = f

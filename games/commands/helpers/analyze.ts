@@ -1,6 +1,8 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 
+import templateAnalysis from "./templates/analysis";
+
 import { FullDef } from "../../../types";
 
 const defFolder = path.join(__dirname, "../../definitions");
@@ -27,7 +29,14 @@ function possibles(def) {
   }
 }
 
-export default async function analyze(def: FullDef) {
+export default async function analyze(def: FullDef | string) {
+  if (typeof def === "string") {
+    await fs.writeFile(
+      path.join(defFolder, def, "_types.ts"),
+      templateAnalysis(def)
+    );
+    def = require(path.join(defFolder, def)).default as FullDef;
+  }
   const gameId = def.meta.id;
   const defPath = path.join(defFolder, gameId);
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));

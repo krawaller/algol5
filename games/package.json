@@ -3,7 +3,8 @@
     "export": "npx ts-node ./commands/export",
     "revise": "npx ts-node ./commands/revise",
     "retemplateAll": "npx ts-node ./commands/retemplateAll",
-    "stub": "npx ts-node ./commands/stub $*"
+    "stub": "npx ts-node ./commands/stub $*",
+    "analyze": "npx ts-node ./commands/analyze $*"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.4",

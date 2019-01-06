@@ -1,18 +1,16 @@
-// This will only exist momentarily before the first analysis is done, so you should never see this file!
+// This will only exist momentarily before the first analysis is done or while an analysis is being updated
 
 export default function templateAI(gameId) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
-  return `import { CommonLayer } from '../../../types';
-
-export type ${capId}Terrain = never;
-export type ${capId}Unit = never;
-export type ${capId}Mark = never;
-export type ${capId}Command = never;
-export type ${capId}Phase = "startTurn";
-export type ${capId}UnitLayer = never;
-export type ${capId}ArtifactLayer = never;
-export type ${capId}TerrainLayer = never;
-export type ${capId}Layer = CommonLayer;
-export type ${capId}Generator = never;
-`
+  return `export type ${capId}Terrain = any;
+export type ${capId}Unit = any;
+export type ${capId}Mark = any;
+export type ${capId}Command = any;
+export type ${capId}Phase = any;
+export type ${capId}UnitLayer = any;
+export type ${capId}ArtifactLayer = any;
+export type ${capId}TerrainLayer = any;
+export type ${capId}Layer = any;
+export type ${capId}Generator = any;
+`;
 }

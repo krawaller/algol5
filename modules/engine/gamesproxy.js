@@ -1,5 +1,5 @@
-let GAMES = require('../library/dist/library');
-let META = require('../library/dist/meta');
+let GAMES = require('../logic/dist/library');
+let META = require('../logic/dist/meta');
 
 export const games = GAMES;
 export const meta = META;

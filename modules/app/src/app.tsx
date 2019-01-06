@@ -4,7 +4,7 @@ import Shelf from './components/shelf'
 import Vestibule from './components/vestibule'
 import Battle from './components/battle'
 
-import * as makeAlgol from '../../engine/dist/algol_async';
+import * as makeAlgol from '../../session/dist/algol_async';
 let algol = makeAlgol('algol_worker.js', 1); // Path here will be relative to 'index.html'
 
 type Props = {};

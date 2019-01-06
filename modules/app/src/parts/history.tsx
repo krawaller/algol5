@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Content from './content';
 
-import {StepUI} from '../../../engine/src/types';
+import {StepUI} from '../../../session/src/types'; // TODO import from types instead!
 
 type HistoryProps = {
   offset: number;

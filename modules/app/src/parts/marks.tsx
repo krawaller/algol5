@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Square from './square'
 
-import { PositionList } from '../../../engine/src/types';
+import { PositionList } from '../../../session/src/types'; // TODO import from types module instead!
 
 type MarkProps = {
     board: {height: number, width: number},

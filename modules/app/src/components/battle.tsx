@@ -11,7 +11,7 @@ import random from 'lodash/random';
 
 import { BattleUI } from '../../../types';
 
-import optionsInUI from '../../../engine/src/various/optionsinui';
+import optionsInUI from '../../../session/src/various/optionsinui'; // TODO MOVE TO COMMON
 
 type BattleState = {
   waiting: string | undefined,

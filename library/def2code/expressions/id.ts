@@ -1,15 +1,21 @@
-import * as isArray from 'lodash/isArray';
+import * as isArray from "lodash/isArray";
 
-import { Definition } from '../types';
-import makeParser from './';
+import { FullDef } from "../types";
+import makeParser from "./";
 
-export default function parseId(gameDef: Definition, player: 1 | 2, action: string, expression, from){
+export default function parseId(
+  gameDef: FullDef,
+  player: 1 | 2,
+  action: string,
+  expression,
+  from
+) {
   const parse = makeParser(gameDef, player, action, "id");
-  if (!isArray(expression)){
+  if (!isArray(expression)) {
     return parse.value(expression);
   }
   const [type, ...args] = expression;
-  switch(type){
+  switch (type) {
     case "idat": {
       const [pos] = expression;
       return `(UNITLAYERS.units[${parse.position(pos)}] || [{}]).id`;
@@ -18,10 +24,10 @@ export default function parseId(gameDef: Definition, player: 1 | 2, action: str
       return "LOOPID";
     default:
       try {
-        if (from === 'value') throw "No, coming from value, dont try that";
+        if (from === "value") throw "No, coming from value, dont try that";
         const val = parse.value(expression);
         return val;
-      } catch(e) {
+      } catch (e) {
         throw "Unknown id: " + expression;
       }
   }

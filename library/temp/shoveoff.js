@@ -10,7 +10,8 @@
     game.graphics = {
       "icons": {
         "soldiers": "pawn"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "height": 4,

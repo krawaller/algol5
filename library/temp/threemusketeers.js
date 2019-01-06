@@ -8,17 +8,20 @@
       "icons": {
         "pawns": "pawn",
         "kings": "king"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "height": 5,
-      "width": 5
+      "width": 5,
+      "terrain": {}
     };
     game.AI = [];
     game.id = "threemusketeers";
     var boardDef = {
       "height": 5,
-      "width": 5
+      "width": 5,
+      "terrain": {}
     };
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);

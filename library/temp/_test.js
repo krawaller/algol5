@@ -244,7 +244,7 @@
       game.selectunit1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ""
+          text: "bar"
         };
       };
       game.selectmark1 = function(turn, step, markpos) {
@@ -266,7 +266,7 @@
       game.selectmark1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ""
+          text: "baz"
         };
       };
       game.start1 = function(turn, step) {
@@ -336,7 +336,7 @@
       game.start1instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ""
+          text: "foo"
         };
       };
       game.debug1 = function() {
@@ -513,7 +513,7 @@
       game.selectunit2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ""
+          text: "bar"
         };
       };
       game.selectmark2 = function(turn, step, markpos) {
@@ -535,7 +535,7 @@
       game.selectmark2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ""
+          text: "baz"
         };
       };
       game.start2 = function(turn, step) {
@@ -605,7 +605,7 @@
       game.start2instruction = function(turn, step) {
         return {
           type: 'text',
-          text: ""
+          text: "foo"
         };
       };
       game.debug2 = function() {

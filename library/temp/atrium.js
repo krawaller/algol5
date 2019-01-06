@@ -8,17 +8,20 @@
       "icons": {
         "kings": "king",
         "queens": "queen"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "height": 5,
-      "width": 5
+      "width": 5,
+      "terrain": {}
     };
     game.AI = [];
     game.id = "atrium";
     var boardDef = {
       "height": 5,
-      "width": 5
+      "width": 5,
+      "terrain": {}
     };
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);

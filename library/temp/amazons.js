@@ -9,17 +9,20 @@
       "icons": {
         "queens": "queen",
         "fires": "pawn"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "height": 10,
-      "width": 10
+      "width": 10,
+      "terrain": {}
     };
     game.AI = ["Steve"];
     game.id = "amazons";
     var boardDef = {
       "height": 10,
-      "width": 10
+      "width": 10,
+      "terrain": {}
     };
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);

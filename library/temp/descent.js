@@ -10,17 +10,20 @@
         "pawns": "pawn",
         "knights": "knight",
         "rooks": "rook"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "height": 4,
-      "width": 4
+      "width": 4,
+      "terrain": {}
     };
     game.AI = [];
     game.id = "descent";
     var boardDef = {
       "height": 4,
-      "width": 4
+      "width": 4,
+      "terrain": {}
     };
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);

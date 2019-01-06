@@ -1,41 +1,71 @@
-import {blankArtifactLayers,generatorLayers,possibilities,blankUnitLayers,isTerrainLayerRef} from './utils';
-import {Definition} from './types';
-import * as isArray from 'lodash/isArray';
-import makeParser from './expressions';
+import {
+  blankArtifactLayers,
+  generatorLayers,
+  possibilities,
+  blankUnitLayers,
+  isTerrainLayerRef
+} from "./utils";
+import { FullDef } from "./types";
+import * as isArray from "lodash/isArray";
+import makeParser from "./expressions";
 
-export function copyArtifactsForAction(gameDef: Definition, actionDef) {
-  let actionlayers = Object.keys((actionDef.runGenerators||[]).concat(actionDef.runGenerator ? [actionDef.runGenerator] : []).reduce((mem,gen)=> {
-		let gens = possibilities(gen);
-		gens.forEach(gen=>{
-			mem = Object.assign(mem,generatorLayers(gameDef.generators[gen]))
-		})
-		return mem
-	},{}));
-  let ret = '{'
-  ret += actionlayers.map(l=>l+': Object.assign({},step.ARTIFACTS.'+l+')').join(', ')
-  ret += '}'
-  if (actionlayers.length === Object.keys(blankArtifactLayers(gameDef)).length){
-      return ret;
+export function copyArtifactsForAction(gameDef: FullDef, actionDef) {
+  let actionlayers = Object.keys(
+    (actionDef.runGenerators || [])
+      .concat(actionDef.runGenerator ? [actionDef.runGenerator] : [])
+      .reduce((mem, gen) => {
+        let gens = possibilities(gen);
+        gens.forEach(gen => {
+          mem = Object.assign(mem, generatorLayers(gameDef.generators[gen]));
+        });
+        return mem;
+      }, {})
+  );
+  let ret = "{";
+  ret += actionlayers
+    .map(l => l + ": Object.assign({},step.ARTIFACTS." + l + ")")
+    .join(", ");
+  ret += "}";
+  if (
+    actionlayers.length === Object.keys(blankArtifactLayers(gameDef)).length
+  ) {
+    return ret;
   } else {
-      return 'Object.assign({},step.ARTIFACTS,'+ret+')'
+    return "Object.assign({},step.ARTIFACTS," + ret + ")";
   }
 }
 
-export function layerRef(gameDef: Definition, player: 1 | 2, action: string, layername){
+export function layerRef(
+  gameDef: FullDef,
+  player: 1 | 2,
+  action: string,
+  layername
+) {
   const parse = makeParser(gameDef, player, action);
-  if (isArray(layername)){
+  if (isArray(layername)) {
     layername = parse.val(layername);
   }
-  var bag = {board:1,light:1,dark:1}[layername] ? "BOARD"
-    : blankUnitLayers(gameDef)[layername] ? "UNITLAYERS"
-    : isTerrainLayerRef(gameDef,layername) ? "TERRAIN"
-    : "ARTIFACTS"
-  return layername[0].match(/[a-z]/) ? bag+"."+layername : bag+"["+layername+"]"; // TODO - what is this last bit?
+  var bag = { board: 1, light: 1, dark: 1 }[layername]
+    ? "BOARD"
+    : blankUnitLayers(gameDef)[layername]
+    ? "UNITLAYERS"
+    : isTerrainLayerRef(gameDef, layername)
+    ? "TERRAIN"
+    : "ARTIFACTS";
+  return layername[0].match(/[a-z]/)
+    ? bag + "." + layername
+    : bag + "[" + layername + "]"; // TODO - what is this last bit?
 }
 
-export function calculateUnitLayers(gameDef: Definition, player: 1 | 2, defineVariable: boolean){
+export function calculateUnitLayers(
+  gameDef: FullDef,
+  player: 1 | 2,
+  defineVariable: boolean
+) {
   return `
-    ${defineVariable ? 'var ' : ''}UNITLAYERS = ${JSON.stringify(blankUnitLayers(gameDef))};
+    ${defineVariable ? "var " : ""}UNITLAYERS = ${JSON.stringify(
+    blankUnitLayers(gameDef)
+  )};
     for (var unitid in UNITDATA) {
         var currentunit = UNITDATA[unitid]
         var unitgroup = currentunit.group;

@@ -7,17 +7,20 @@
     game.graphics = {
       "icons": {
         "checkers": "pawn"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "height": 10,
-      "width": 10
+      "width": 10,
+      "terrain": {}
     };
     game.AI = [];
     game.id = "jostle";
     var boardDef = {
       "height": 10,
-      "width": 10
+      "width": 10,
+      "terrain": {}
     };
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);

@@ -8,17 +8,20 @@
     game.graphics = {
       "icons": {
         "soldiers": "pawn"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "height": 8,
-      "width": 8
+      "width": 8,
+      "terrain": {}
     };
     game.AI = [];
     game.id = "duplo";
     var boardDef = {
       "height": 8,
-      "width": 8
+      "width": 8,
+      "terrain": {}
     };
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);

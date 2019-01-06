@@ -1,15 +1,20 @@
-import * as isArray from 'lodash/isArray';
+import * as isArray from "lodash/isArray";
 
-import { Definition } from '../types';
-import makeParser from './';
+import { FullDef } from "../types";
+import makeParser from "./";
 
-export default function parsePosition(gameDef: Definition, player: 1 | 2, action: string, expression){
-  const parse = makeParser(gameDef,player,action,"position");
-  if (!isArray(expression)){
-    return parse.position(["mark",expression]);
+export default function parsePosition(
+  gameDef: FullDef,
+  player: 1 | 2,
+  action: string,
+  expression
+) {
+  const parse = makeParser(gameDef, player, action, "position");
+  if (!isArray(expression)) {
+    return parse.position(["mark", expression]);
   }
   const [type, ...args] = expression;
-  switch(type){
+  switch (type) {
     case "mark": {
       const [markName] = args;
       return `MARKS[${parse.value(markName)}]`;
@@ -27,12 +32,13 @@ export default function parsePosition(gameDef: Definition, player: 1 | 2, actio
       return parse.value(pos);
     }
     case "target": {
-      return "POS"; // TODO - had useforpos in O here.... OMG! GONNA BREAK :P or not. 
+      return "POS"; // TODO - had useforpos in O here.... OMG! GONNA BREAK :P or not.
     }
     case "start": {
       return "STARTPOS";
     }
-    case "onlyin": { // TODO - is really "firstin"
+    case "onlyin": {
+      // TODO - is really "firstin"
       const [set] = args;
       return `Object.keys(${parse.set(set)})[0]`;
     }

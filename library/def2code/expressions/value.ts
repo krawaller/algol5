@@ -1,16 +1,22 @@
-import { Definition } from '../types';
-import makeParser from './';
-import * as isArray from 'lodash/isArray';
+import { FullDef } from "../types";
+import makeParser from "./";
+import * as isArray from "lodash/isArray";
 
-export default function parseValue(gameDef: Definition, player: 1 | 2, action: string, expression, from){
+export default function parseValue(
+  gameDef: FullDef,
+  player: 1 | 2,
+  action: string,
+  expression,
+  from
+) {
   const parse = makeParser(gameDef, player, action, "value");
-  if (!isArray(expression)){
-    return parse.val(["value",expression]);
+  if (!isArray(expression)) {
+    return parse.val(["value", expression]);
   }
   const [type, ...args] = expression;
-  switch(type){
+  switch (type) {
     case "indexlist": {
-      const [index,list] = args;
+      const [index, list] = args;
       return `${parse.list(list)}[${parse.val(index)}]`;
     }
     case "pos": {
@@ -18,7 +24,7 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
       return parse.pos(pos);
     }
     case "reldir": {
-      const [dir,rel] = args;
+      const [dir, rel] = args;
       return `relativedirs[${parse.val(rel)} - 2 + ${parse.val(dir)}]`;
     }
     case "value": {
@@ -39,16 +45,16 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
       return player === 1 ? 2 : 1;
     }
     case "sum": {
-      return `(${args.map(v => parse.val(v)).join(' + ')})`;
+      return `(${args.map(v => parse.val(v)).join(" + ")})`;
     }
     case "concat": {
-      return `(${args.map(v => `(${parse.val(v)}+'')`).join(' + ')})`;
+      return `(${args.map(v => `(${parse.val(v)}+'')`).join(" + ")})`;
     }
     case "prod": {
-      return `(${args.map(v => parse.val(v)).join(' * ')})`;
+      return `(${args.map(v => parse.val(v)).join(" * ")})`;
     }
     case "minus": {
-      const [val1,val2] = args;
+      const [val1, val2] = args;
       return `(${parse.val(val1)} - ${parse.val(val2)})`;
     }
     case "ctxval": {
@@ -81,11 +87,11 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
     }
     case "idat": {
       const [pos] = args;
-      return parse.val(["read","units",pos,"id"]);
+      return parse.val(["read", "units", pos, "id"]);
     }
     case "read": {
-      const [layer,pos,prop] = args;
-      return layer === 'board' // no need for failsafe
+      const [layer, pos, prop] = args;
+      return layer === "board" // no need for failsafe
         ? `${parse.set(layer)}[${parse.pos(pos)}][${parse.val(prop)}]`
         : `(${parse.set(layer)}[${parse.pos(pos)}]||{})[${parse.val(prop)}]`;
     }
@@ -94,20 +100,19 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
       return `Object.keys(${parse.set(set)}).length`;
     }
     case "harvest": {
-      const [set,prop] = args;
-      return (
-       `reduce(${parse.set(set)},function(mem,obj){
+      const [set, prop] = args;
+      return `reduce(${parse.set(set)},function(mem,obj){
           return mem+obj[${parse.val(prop)}];
         },0)
-      `);
+      `;
     }
-    case "score": { // TODO - real reduce, or do object.keys above too? also, parse score name?
-      const [set,score] = args;
-      return (
-        `Object.keys(${parse.set(set)}).reduce(function(mem,pos){
+    case "score": {
+      // TODO - real reduce, or do object.keys above too? also, parse score name?
+      const [set, score] = args;
+      return `Object.keys(${parse.set(set)}).reduce(function(mem,pos){
           return mem + (${score}[pos]||0);
         },0)
-      `);
+      `;
     }
     case "turn": {
       return "turn.turn";
@@ -130,15 +135,16 @@ export default function parseValue(gameDef: Definition, player: 1 | 2, action: 
     }
     default: {
       try {
-        if (from === 'id') throw "No, coming from id, dont try that";
+        if (from === "id") throw "No, coming from id, dont try that";
         const ret = parse.id(expression);
         return ret;
-      } catch(e) {
+      } catch (e) {
         try {
-          if (from === 'position') throw "No, coming from position, dont try that";
+          if (from === "position")
+            throw "No, coming from position, dont try that";
           const ret = parse.pos(expression);
           return ret;
-        } catch(e) {
+        } catch (e) {
           throw "Unknown value def: " + expression;
         }
       }

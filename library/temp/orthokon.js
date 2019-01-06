@@ -7,17 +7,20 @@
     game.graphics = {
       "icons": {
         "soldiers": "pawn"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "height": 4,
-      "width": 4
+      "width": 4,
+      "terrain": {}
     };
     game.AI = ["Bob"];
     game.id = "orthokon";
     var boardDef = {
       "height": 4,
-      "width": 4
+      "width": 4,
+      "terrain": {}
     };
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);

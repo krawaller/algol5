@@ -1,50 +1,86 @@
-import * as map from 'lodash/map';
+import * as map from "lodash/map";
 
-import makeExpr from '../expressions';
-import { Definition } from '../types';
-import obey from '../obey';
-import applyGenerators from '../artifacts/generate';
+import makeExpr from "../expressions";
+import { FullDef } from "../types";
+import obey from "../obey";
+import applyGenerators from "../artifacts/generate";
 
-function addLink(gameDef: Definition, player: 1 | 2, action: string, name: string, root: boolean){
+function addLink(
+  gameDef: FullDef,
+  player: 1 | 2,
+  action: string,
+  name: string,
+  root: boolean
+) {
   const expr = makeExpr(gameDef, player, action);
-  if (gameDef && gameDef.commands && gameDef.commands[name]){
+  if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     return `
-      turn.links${root ? '.root' : '[newstepid]'}.${name} = '${name+player}';
+      turn.links${root ? ".root" : "[newstepid]"}.${name} = '${name + player}';
     `;
-  } else if (gameDef && gameDef.marks && gameDef.marks[name]){
-    const markDef = gameDef.marks[name];
+  } else if (gameDef && gameDef.flow.marks && gameDef.flow.marks[name]) {
+    const markDef = gameDef.flow.marks[name];
     return `
-      var newlinks = turn.links${root ? '.root' : '[newstepid]'};
+      var newlinks = turn.links${root ? ".root" : "[newstepid]"};
       for(var linkpos in ${expr.set(markDef.from)}){
-          newlinks[linkpos] = '${name+player}';
+          newlinks[linkpos] = '${name + player}';
       }
     `;
-  } else if (name === "endturn"){
-    const endTurnDef = gameDef.endTurn || {unless:null};
+  } else if (name === "endturn") {
+    const endTurnDef = gameDef.flow.endTurn || { unless: null };
     let ret = applyGenerators(gameDef, player, "endturn", endTurnDef);
     //let ret = lib.applyGeneratorInstructions({...(O || {}), generating:true},endTurnDef || {})
-    return ret + map(endTurnDef.unless,(cond,name)=> {
-      return 'if ('+expr.bool(cond)+'){ turn.blockedby = "'+name+'"; } '
-    }).concat(map(gameDef.endGame,(def,name)=> `
+    return (
+      ret +
+      map(endTurnDef.unless, (cond, name) => {
+        return (
+          "if (" + expr.bool(cond) + '){ turn.blockedby = "' + name + '"; } '
+        );
+      })
+        .concat(
+          map(
+            gameDef.flow.endGame,
+            (def, name) => `
       if (${expr.bool(def.condition)}) { 
-        var winner = ${expr.value(def.who||player)};
+        var winner = ${expr.value(def.who || player)};
         var result = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
         turn.links[newstepid][result] = '${name}';
-        ${def.show ? `
+        ${
+          def.show
+            ? `
         turn.endMarks[newstepid] = turn.endMarks[newstepid] || {};
         turn.endMarks[newstepid].${name} = ${expr.set(def.show)};
-        ` : ''}
+        `
+            : ""
+        }
       }`
-    )).concat('turn.links[newstepid].endturn = "start"+otherplayer; ').join(' else ')
+          )
+        )
+        .concat('turn.links[newstepid].endturn = "start"+otherplayer; ')
+        .join(" else ")
+    );
   } else {
-    throw "Unknown link: "+name
+    throw "Unknown link: " + name;
   }
 }
 
-export default function applyLinkInstructions(gameDef: Definition, player: 1 | 2, action: string, actionDef: any, root: boolean){
-  if (actionDef.links){
-    return obey(gameDef, player, action, ['all'].concat(actionDef.links), (link) => addLink(gameDef, player, action, link, root));
+export default function applyLinkInstructions(
+  gameDef: FullDef,
+  player: 1 | 2,
+  action: string,
+  actionDef: any,
+  root: boolean
+) {
+  if (actionDef.links) {
+    return obey(
+      gameDef,
+      player,
+      action,
+      ["all"].concat(actionDef.links),
+      link => addLink(gameDef, player, action, link, root)
+    );
   } else {
-    return obey(gameDef, player, action, actionDef.link, (link) => addLink(gameDef, player, action, link, root))
+    return obey(gameDef, player, action, actionDef.link, link =>
+      addLink(gameDef, player, action, link, root)
+    );
   }
 }

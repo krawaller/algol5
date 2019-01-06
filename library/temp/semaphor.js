@@ -10,17 +10,20 @@
         "kings": "king",
         "pawns": "pawn",
         "bishops": "bishop"
-      }
+      },
+      "tiles": {}
     };
     game.board = {
       "width": 4,
-      "height": 3
+      "height": 3,
+      "terrain": {}
     };
     game.AI = [];
     game.id = "semaphor";
     var boardDef = {
       "width": 4,
-      "height": 3
+      "height": 3,
+      "terrain": {}
     };
     var connections = boardConnections(boardDef);
     var BOARD = boardLayers(boardDef);

@@ -11,7 +11,7 @@
     font-size: 40px;
     transition: bottom 0.5s, left 0.5s;
     text-align: center;
-    line-height: 50px;
+    line-height: 40px;
 }
 
 .piece {
@@ -21,6 +21,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    font-family: "Arial Unicode MS";
 }
 
 .owner0 {

@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs-extra");
 import stub from "./stub";
 
-import updateGame from "./update";
+import overwriteGame from "./overwrite";
 
 import { FullDef } from "../types";
 
@@ -45,5 +45,5 @@ fs.readdirSync("./dev/prev")
       flow
     };
 
-    updateGame(gameId, gameDef);
+    overwriteGame(gameId, gameDef);
   });

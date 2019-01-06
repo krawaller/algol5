@@ -10,7 +10,7 @@ function makeNice(obj = {}) {
   });
 }
 
-export default async function update(gameId, def: FullDef) {
+export default async function overwrite(gameId, def: FullDef) {
   await Promise.all(
     Object.keys(def).map(async aspect => {
       const apath = path.join(
@@ -24,6 +24,6 @@ export default async function update(gameId, def: FullDef) {
       return await fs.writeFile(apath, newFile);
     })
   );
-  console.log("Updated files for", gameId);
+  console.log("Overwrote definitions for", gameId);
   return analyze(def);
 }

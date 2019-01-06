@@ -8,12 +8,12 @@ import { FullDef } from "../types";
 
 fs.removeSync("./definitions");
 
-fs.readdirSync("../library/defs")
+fs.readdirSync("./dev/prev")
   .filter(f => f !== ".DS_Store")
   .forEach(async fname => {
     const gameId = fname.split(".")[0];
     await stub(gameId);
-    const oldDef = await fs.readFile("../library/defs/" + fname);
+    const oldDef = await fs.readFile("./dev/prev/" + fname);
     const json = JSON.parse(oldDef.toString());
     const {
       meta: { instructions = {}, ...otherMeta } = {},
@@ -29,10 +29,8 @@ fs.readdirSync("../library/defs")
     board.terrain = board.terrain || {};
     let scripts;
     try {
-      scripts = require(path.join(
-        __dirname,
-        "../gamescripts/pergame/" + gameId
-      )).default;
+      scripts = require(path.join(__dirname, "./dev/scripts/" + gameId))
+        .default;
     } catch (e) {}
 
     const gameDef: FullDef = {

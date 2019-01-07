@@ -4,6 +4,7 @@ import * as path from "path";
 import templateAnalysis from "./templates/analysis";
 
 import { FullDef } from "../../../types";
+import dateStamp from "./datestamp";
 
 const defFolder = path.join(__dirname, "../../definitions");
 
@@ -137,4 +138,5 @@ export type ${capId}Layer = CommonLayer${
 
   await fs.writeFile(path.join(defPath, "_types.ts"), analysis);
   console.log("Analysed", gameId);
+  dateStamp();
 }

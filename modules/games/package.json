@@ -4,7 +4,8 @@
     "revise": "npx ts-node ./commands/revise",
     "retemplateAll": "npx ts-node ./commands/retemplateAll",
     "stub": "npx ts-node ./commands/stub $*",
-    "analyze": "npx ts-node ./commands/analyze $*"
+    "analyze": "npx ts-node ./commands/analyze $*",
+    "watch": "npx ts-node ./commands/watch $*"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.4",
@@ -13,6 +14,7 @@
     "fs-extra": "^7.0.1",
     "js-beautify": "^1.8.9",
     "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.2",
+    "watchr": "^4.1.0"
   }
 }

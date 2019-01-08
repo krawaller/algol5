@@ -5,7 +5,7 @@
 import * as mapValues from 'lodash/mapValues';
 import * as values from 'lodash/values';
 
-import { pos2coords } from '../../gamesproxy';
+import {pos2coords} from '../../../common';
 
 import {StepUI, Session, Step} from '../types';
 

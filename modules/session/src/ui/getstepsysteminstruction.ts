@@ -3,7 +3,7 @@
 */
 
 import isEndGameCommand from '../various/isgameendcmnd';
-import { pos2coords } from '../../gamesproxy';
+import {pos2coords} from '../../../common';
 
 import {BattleUI, StepUI, StepControlUI, Session, Step, ComplexContent} from '../types';
 

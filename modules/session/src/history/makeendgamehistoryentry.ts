@@ -3,7 +3,7 @@
 */
 
 import getStepUI from '../ui/getstepui';
-import {pos2coords} from '../../gamesproxy';
+import {pos2coords} from '../../../common';
 import { Session, Turn, StepUI } from '../types';
 
 export default function makeEndGameHistoryEntry(session: Session): StepUI {

@@ -5,7 +5,7 @@
 import isEndGameCommand from '../various/isgameendcmnd';
 import getStepInstruction from './getstepinstruction';
 import getStepSystemInstruction from './getstepsysteminstruction';
-import { pos2coords } from '../../gamesproxy';
+import {pos2coords} from '../../../common';
 
 import {BattleUI, StepUI, StepControlUI, Session, Step} from '../types';
 

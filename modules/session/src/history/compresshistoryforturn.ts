@@ -3,7 +3,7 @@ Returns array of UI objects for given turn, with adjusted marks
 */
 
 import getStepUI from '../ui/getstepui';
-import {pos2coords} from '../../gamesproxy';
+import {pos2coords} from '../../../common';
 import { Session, Turn, StepUI } from '../types';
 
 export default function compressedHistoryForTurn(session: Session): StepUI[] {

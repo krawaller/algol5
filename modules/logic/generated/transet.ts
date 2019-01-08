@@ -581,12 +581,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.move1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.swap1 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
     let MARKS = step.MARKS;
@@ -680,12 +674,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.swap1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start1 = function(lastTurn, step) {
     let turn: {
       [f: string]: any
@@ -1266,12 +1254,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.move2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.swap2 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
     let MARKS = step.MARKS;
@@ -1365,12 +1347,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.swap2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start2 = function(lastTurn, step) {
     let turn: {
       [f: string]: any

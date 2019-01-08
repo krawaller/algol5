@@ -220,12 +220,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.deploy1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.promote1 = function(turn, step) {
     let ARTIFACTS = {
       line: Object.assign({}, step.ARTIFACTS.line)
@@ -309,12 +303,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.promote1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start1 = function(lastTurn, step) {
     let turn: {
       [f: string]: any
@@ -656,12 +644,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.deploy2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.promote2 = function(turn, step) {
     let ARTIFACTS = {
       line: Object.assign({}, step.ARTIFACTS.line)
@@ -745,12 +727,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.promote2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start2 = function(lastTurn, step) {
     let turn: {
       [f: string]: any

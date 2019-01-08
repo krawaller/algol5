@@ -38,7 +38,8 @@ export default function getStepControlUI(session: Session, step: Step): StepCont
         });
       }
     });
-    controls.instruction = getStepInstruction(session, step, controls.submit);
+    const canOnlyEnd = controls.potentialMarks.length === 0 && Object.keys(controls.commands).filter(cmnd => !!controls.commands[cmnd]).length === 0;
+    controls.instruction = canOnlyEnd ? {content:[]} : getStepInstruction(session, step, controls.submit);
 
     let system = getStepSystemInstruction(session, step, controls.undo);
     if (system){

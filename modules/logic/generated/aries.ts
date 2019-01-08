@@ -327,12 +327,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.move1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start1 = function(lastTurn, step) {
     let turn: {
       [f: string]: any
@@ -667,12 +661,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.move2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start2 = function(lastTurn, step) {
     let turn: {
       [f: string]: any

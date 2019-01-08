@@ -344,12 +344,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.north1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.south1 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
@@ -463,12 +457,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.south1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.east1 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
@@ -582,12 +570,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.east1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.west1 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
@@ -701,12 +683,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.west1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start1 = function(lastTurn, step) {
     let turn: {
       [f: string]: any
@@ -1070,12 +1046,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.north2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.south2 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
@@ -1189,12 +1159,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.south2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.east2 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
@@ -1308,12 +1272,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.east2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.west2 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
@@ -1427,12 +1385,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.west2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start2 = function(lastTurn, step) {
     let turn: {
       [f: string]: any

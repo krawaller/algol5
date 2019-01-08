@@ -8,7 +8,8 @@ import {
   usesTurnVars,
   usesBattleVars,
   contains,
-  blankArtifactLayers
+  blankArtifactLayers,
+  possibilities
 } from "../utils";
 
 import { copyArtifactsForAction, calculateUnitLayers } from "../common";
@@ -21,6 +22,9 @@ export default function addCommandFunction(
   const expr = makeParser(def, player, cmndname);
   const cmndDef = def.flow.commands[cmndname];
   const instruction = expr.content(def.instructions[cmndname] || "");
+
+  const deadEnd = (cmndDef.links || []).concat(cmndDef.link || []).reduce((list, l) => list.concat(possibilities(l)), []).filter(l => l !== 'endturn').length === 0;
+
   return `
     game.${cmndname}${player} = function(turn,step){
       let ARTIFACTS = ${copyArtifactsForAction(def, cmndDef)};
@@ -72,6 +76,7 @@ export default function addCommandFunction(
 
       return newstep;
     }
+    ${deadEnd ? '' : `
     game.${cmndname}${player}instruction = function(turn,step){
       ${ifCodeContains(instruction, {
         MARKS: "let MARKS = step.MARKS; ",
@@ -81,5 +86,6 @@ export default function addCommandFunction(
       })}
       return ${instruction};
     };
+    `}
   `;
 }

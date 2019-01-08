@@ -30,8 +30,10 @@ gameIds.forEach(gameId => {
                 game[func + "instruction"](turn, turn.steps[at]);
               } else {
                 let step = game[func](turn, turn.steps[at], cmnd);
-                game[func + "instruction"](turn, step);
                 at = step.stepid;
+                if (!{endturn:1,win:1}[Object.keys(turn.links[at]).toString()]) {
+                  game[func + "instruction"](turn, step);
+                }
               }
             });
           }, "can perform " + (i ? [] : ["start"]).concat(commands).join(","));

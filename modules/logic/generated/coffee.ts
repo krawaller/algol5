@@ -275,12 +275,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.uphill1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.downhill1 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       winline: Object.assign({}, step.ARTIFACTS.winline)
@@ -387,12 +381,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.downhill1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.horisontal1 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       winline: Object.assign({}, step.ARTIFACTS.winline)
@@ -499,12 +487,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.horisontal1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.vertical1 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       winline: Object.assign({}, step.ARTIFACTS.winline)
@@ -611,12 +593,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.vertical1instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start1 = function(lastTurn, step) {
     let turn: {
       [f: string]: any
@@ -909,12 +885,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.uphill2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.downhill2 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       winline: Object.assign({}, step.ARTIFACTS.winline)
@@ -1021,12 +991,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.downhill2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.horisontal2 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       winline: Object.assign({}, step.ARTIFACTS.winline)
@@ -1133,12 +1097,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.horisontal2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.vertical2 = function(turn, step) {
     let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
       winline: Object.assign({}, step.ARTIFACTS.winline)
@@ -1245,12 +1203,6 @@ game.debug = function() {
     } else turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
   }
-  game.vertical2instruction = function(turn, step) {
-    return {
-      type: 'text',
-      text: ""
-    };
-  };
   game.start2 = function(lastTurn, step) {
     let turn: {
       [f: string]: any

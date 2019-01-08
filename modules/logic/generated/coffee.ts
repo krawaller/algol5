@@ -16,6 +16,14 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "FOOBAR": {},
+  "vertical": {},
+  "uphill": {},
+  "horisontal": {},
+  "downhill": {},
+  "winline": {}
+};
 game.commands = {
   "uphill": 1,
   "downhill": 1,
@@ -64,13 +72,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selectdrop1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      FOOBAR: Object.assign({}, step.ARTIFACTS.FOOBAR),
-      vertical: Object.assign({}, step.ARTIFACTS.vertical),
-      uphill: Object.assign({}, step.ARTIFACTS.uphill),
-      horisontal: Object.assign({}, step.ARTIFACTS.horisontal),
-      downhill: Object.assign({}, step.ARTIFACTS.downhill)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectdrop: markpos
@@ -82,7 +84,15 @@ game.debug = function() {
       let POS = STARTPOS;
       while ((POS = connections[POS][DIR])) {
         if (!UNITLAYERS.units[POS]) {
-          ARTIFACTS[["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"][DIR]][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            [
+              ["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"][DIR]
+            ]: {
+              ...ARTIFACTS[["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"][DIR]],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -170,9 +180,7 @@ game.debug = function() {
     });
   };
   game.uphill1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -222,14 +230,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -246,7 +246,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((4 === WALKLENGTH)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -276,9 +282,7 @@ game.debug = function() {
     return newstep;
   }
   game.downhill1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -328,14 +332,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -352,7 +348,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((4 === WALKLENGTH)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -382,9 +384,7 @@ game.debug = function() {
     return newstep;
   }
   game.horisontal1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -434,14 +434,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -458,7 +450,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((4 === WALKLENGTH)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -488,9 +486,7 @@ game.debug = function() {
     return newstep;
   }
   game.vertical1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -540,14 +536,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -564,7 +552,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((4 === WALKLENGTH)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -606,14 +600,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "markers": {},
@@ -674,13 +661,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selectdrop2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      FOOBAR: Object.assign({}, step.ARTIFACTS.FOOBAR),
-      vertical: Object.assign({}, step.ARTIFACTS.vertical),
-      uphill: Object.assign({}, step.ARTIFACTS.uphill),
-      horisontal: Object.assign({}, step.ARTIFACTS.horisontal),
-      downhill: Object.assign({}, step.ARTIFACTS.downhill)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectdrop: markpos
@@ -692,7 +673,15 @@ game.debug = function() {
       let POS = STARTPOS;
       while ((POS = connections[POS][DIR])) {
         if (!UNITLAYERS.units[POS]) {
-          ARTIFACTS[["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"][DIR]][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            [
+              ["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"][DIR]
+            ]: {
+              ...ARTIFACTS[["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"][DIR]],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -780,9 +769,7 @@ game.debug = function() {
     });
   };
   game.uphill2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -832,14 +819,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -856,7 +835,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((4 === WALKLENGTH)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -886,9 +871,7 @@ game.debug = function() {
     return newstep;
   }
   game.downhill2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -938,14 +921,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -962,7 +937,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((4 === WALKLENGTH)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -992,9 +973,7 @@ game.debug = function() {
     return newstep;
   }
   game.horisontal2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -1044,14 +1023,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -1068,7 +1039,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((4 === WALKLENGTH)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -1098,9 +1075,7 @@ game.debug = function() {
     return newstep;
   }
   game.vertical2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -1150,14 +1125,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -1174,7 +1141,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((4 === WALKLENGTH)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -1216,14 +1189,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "FOOBAR": {},
-      "vertical": {},
-      "uphill": {},
-      "horisontal": {},
-      "downhill": {},
-      "winline": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "markers": {},

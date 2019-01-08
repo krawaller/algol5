@@ -16,6 +16,9 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "targets": {}
+};
 game.commands = {
   "move": 1,
   "fire": 1
@@ -86,9 +89,15 @@ game.debug = function() {
           }
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
-        ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")][STARTPOS] = {
-          count: NEIGHBOURCOUNT
-        };
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")]: {
+            ...ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")],
+            [STARTPOS]: {
+              count: NEIGHBOURCOUNT
+            }
+          }
+        }
       }
     }  { 
       let BLOCKS = UNITLAYERS.units;
@@ -98,7 +107,13 @@ game.debug = function() {
         for (let walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           let POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-            ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              [(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")]: {
+                ...ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -130,9 +145,15 @@ game.debug = function() {
           }
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
-        ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")][STARTPOS] = {
-          count: NEIGHBOURCOUNT
-        };
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")]: {
+            ...ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")],
+            [STARTPOS]: {
+              count: NEIGHBOURCOUNT
+            }
+          }
+        }
       }
     }  { 
       let BLOCKS = UNITLAYERS.units;
@@ -142,7 +163,13 @@ game.debug = function() {
         for (let walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           let POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-            ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              [(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")]: {
+                ...ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -159,9 +186,7 @@ game.debug = function() {
     };
   };
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = {
-      targets: Object.assign({}, step.ARTIFACTS.targets)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -172,7 +197,13 @@ game.debug = function() {
     for (let walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
       let POS = STARTPOS;
       while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-        ARTIFACTS["targets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["targets"]: {
+            ...ARTIFACTS["targets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -283,9 +314,7 @@ game.debug = function() {
     });
   };
   game.move1 = function(turn, step) {
-    let ARTIFACTS = {
-      targets: Object.assign({}, step.ARTIFACTS.targets)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -322,16 +351,19 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targets": {}
-    };
     let BLOCKS = UNITLAYERS.units;
     let STARTPOS = TURNVARS['movedto'];
     let allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
     for (let walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
       let POS = STARTPOS;
       while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-        ARTIFACTS["targets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["targets"]: {
+            ...ARTIFACTS["targets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + 'move';
@@ -360,7 +392,7 @@ game.debug = function() {
     };
   };
   game.fire1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -396,9 +428,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targets": {}
-    };
     let newstepid = step.stepid + '-' + 'fire';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -428,9 +457,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "targets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let TURNVARS = {};
     let UNITLAYERS = {
@@ -517,9 +544,15 @@ game.debug = function() {
           }
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
-        ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")][STARTPOS] = {
-          count: NEIGHBOURCOUNT
-        };
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")]: {
+            ...ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")],
+            [STARTPOS]: {
+              count: NEIGHBOURCOUNT
+            }
+          }
+        }
       }
     }  { 
       let BLOCKS = UNITLAYERS.units;
@@ -529,7 +562,13 @@ game.debug = function() {
         for (let walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           let POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-            ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              [(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")]: {
+                ...ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -561,9 +600,15 @@ game.debug = function() {
           }
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
-        ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")][STARTPOS] = {
-          count: NEIGHBOURCOUNT
-        };
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")]: {
+            ...ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myroads" : "opproads")],
+            [STARTPOS]: {
+              count: NEIGHBOURCOUNT
+            }
+          }
+        }
       }
     }  { 
       let BLOCKS = UNITLAYERS.units;
@@ -573,7 +618,13 @@ game.debug = function() {
         for (let walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
           let POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-            ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              [(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")]: {
+                ...ARTIFACTS[(!!(UNITLAYERS.myunits[STARTPOS]) ? "myreach" : "oppreach")],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -590,9 +641,7 @@ game.debug = function() {
     };
   };
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = {
-      targets: Object.assign({}, step.ARTIFACTS.targets)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -603,7 +652,13 @@ game.debug = function() {
     for (let walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
       let POS = STARTPOS;
       while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-        ARTIFACTS["targets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["targets"]: {
+            ...ARTIFACTS["targets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -714,9 +769,7 @@ game.debug = function() {
     });
   };
   game.move2 = function(turn, step) {
-    let ARTIFACTS = {
-      targets: Object.assign({}, step.ARTIFACTS.targets)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -753,16 +806,19 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targets": {}
-    };
     let BLOCKS = UNITLAYERS.units;
     let STARTPOS = TURNVARS['movedto'];
     let allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
     for (let walkerdirnbr = 0; walkerdirnbr < 8; walkerdirnbr++) {
       let POS = STARTPOS;
       while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && !BLOCKS[POS]) {
-        ARTIFACTS["targets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["targets"]: {
+            ...ARTIFACTS["targets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + 'move';
@@ -791,7 +847,7 @@ game.debug = function() {
     };
   };
   game.fire2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -827,9 +883,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targets": {}
-    };
     let newstepid = step.stepid + '-' + 'fire';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -859,9 +912,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "targets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let TURNVARS = {};
     let UNITLAYERS = {

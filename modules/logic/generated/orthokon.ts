@@ -16,6 +16,10 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "victims": {},
+  "movetargets": {}
+};
 game.commands = {
   "move": 1
 };
@@ -79,9 +83,7 @@ game.debug = function() {
     };
   };
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -97,7 +99,13 @@ game.debug = function() {
       }
       var WALKLENGTH = walkedsquares.length;
       if (WALKLENGTH) {
-        ARTIFACTS["movetargets"][walkedsquares[WALKLENGTH - 1]] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["movetargets"]: {
+            ...ARTIFACTS["movetargets"],
+            [walkedsquares[WALKLENGTH - 1]]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -133,9 +141,7 @@ game.debug = function() {
     });
   };
   game.selectmovetarget1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      victims: Object.assign({}, step.ARTIFACTS.victims)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmovetarget: markpos,
@@ -147,7 +153,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 4; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && UNITLAYERS.oppunits[POS]) {
-        ARTIFACTS["victims"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["victims"]: {
+            ...ARTIFACTS["victims"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -227,7 +239,7 @@ game.debug = function() {
     });
   };
   game.move1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -267,10 +279,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "victims": {},
-      "movetargets": {}
-    };
     let newstepid = step.stepid + '-' + 'move';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -298,10 +306,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "victims": {},
-      "movetargets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "soldiers": {},
@@ -375,9 +380,7 @@ game.debug = function() {
     };
   };
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -393,7 +396,13 @@ game.debug = function() {
       }
       var WALKLENGTH = walkedsquares.length;
       if (WALKLENGTH) {
-        ARTIFACTS["movetargets"][walkedsquares[WALKLENGTH - 1]] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["movetargets"]: {
+            ...ARTIFACTS["movetargets"],
+            [walkedsquares[WALKLENGTH - 1]]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -429,9 +438,7 @@ game.debug = function() {
     });
   };
   game.selectmovetarget2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      victims: Object.assign({}, step.ARTIFACTS.victims)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmovetarget: markpos,
@@ -443,7 +450,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 4; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && UNITLAYERS.oppunits[POS]) {
-        ARTIFACTS["victims"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["victims"]: {
+            ...ARTIFACTS["victims"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -523,7 +536,7 @@ game.debug = function() {
     });
   };
   game.move2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -563,10 +576,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "victims": {},
-      "movetargets": {}
-    };
     let newstepid = step.stepid + '-' + 'move';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -594,10 +603,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "victims": {},
-      "movetargets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "soldiers": {},

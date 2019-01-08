@@ -16,6 +16,11 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "movetargets": {},
+  "beingpushed": {},
+  "squished": {}
+};
 game.commands = {
   "move": 1
 };
@@ -77,9 +82,7 @@ game.debug = function() {
   let otherplayer = 2;
   game.selectunit1 = function(turn, step, markpos) {
     let BATTLEVARS = step.BATTLEVARS;
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -92,13 +95,25 @@ game.debug = function() {
       let STOPREASON = "";
       let POS = STARTPOS;
       while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
-        ARTIFACTS["movetargets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["movetargets"]: {
+            ...ARTIFACTS["movetargets"],
+            [POS]: {}
+          }
+        }
       }
       if (BLOCKS[POS]) {
         if (!((POS === BATTLEVARS['pushsquare']) && ((UNITLAYERS.units[MARKS["selectunit"]] || {})["id"] === BATTLEVARS["pusheeid"])) && UNITLAYERS.oppunits[POS]) {
-          ARTIFACTS["movetargets"][POS] = {
-            dir: DIR
-          };
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["movetargets"]: {
+              ...ARTIFACTS["movetargets"],
+              [POS]: {
+                dir: DIR
+              }
+            }
+          }
         }
       }
     }
@@ -135,10 +150,7 @@ game.debug = function() {
     });
   };
   game.selectmovetarget1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      beingpushed: Object.assign({}, step.ARTIFACTS.beingpushed),
-      squished: Object.assign({}, step.ARTIFACTS.squished)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmovetarget: markpos,
@@ -155,12 +167,24 @@ game.debug = function() {
       connections.faux[DIR] = STARTPOS;
       while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
         walkedsquares.push(POS);
-        ARTIFACTS["beingpushed"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["beingpushed"]: {
+            ...ARTIFACTS["beingpushed"],
+            [POS]: {}
+          }
+        }
       }
       var WALKLENGTH = walkedsquares.length;
       if (WALKLENGTH) {
         if ((["hitblock", "outofbounds"].indexOf(STOPREASON) !== -1)) {
-          ARTIFACTS["squished"][walkedsquares[WALKLENGTH - 1]] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["squished"]: {
+              ...ARTIFACTS["squished"],
+              [walkedsquares[WALKLENGTH - 1]]: {}
+            }
+          }
         }
       }
     }
@@ -218,7 +242,7 @@ game.debug = function() {
     });
   };
   game.move1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -278,11 +302,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "beingpushed": {},
-      "squished": {}
-    };
     let newstepid = step.stepid + '-' + 'move';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -340,11 +359,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "beingpushed": {},
-      "squished": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let BATTLEVARS = step.BATTLEVARS;
     let UNITLAYERS = {
@@ -411,9 +426,7 @@ game.debug = function() {
   let otherplayer = 1;
   game.selectunit2 = function(turn, step, markpos) {
     let BATTLEVARS = step.BATTLEVARS;
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -426,13 +439,25 @@ game.debug = function() {
       let STOPREASON = "";
       let POS = STARTPOS;
       while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
-        ARTIFACTS["movetargets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["movetargets"]: {
+            ...ARTIFACTS["movetargets"],
+            [POS]: {}
+          }
+        }
       }
       if (BLOCKS[POS]) {
         if (!((POS === BATTLEVARS['pushsquare']) && ((UNITLAYERS.units[MARKS["selectunit"]] || {})["id"] === BATTLEVARS["pusheeid"])) && UNITLAYERS.oppunits[POS]) {
-          ARTIFACTS["movetargets"][POS] = {
-            dir: DIR
-          };
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["movetargets"]: {
+              ...ARTIFACTS["movetargets"],
+              [POS]: {
+                dir: DIR
+              }
+            }
+          }
         }
       }
     }
@@ -469,10 +494,7 @@ game.debug = function() {
     });
   };
   game.selectmovetarget2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      beingpushed: Object.assign({}, step.ARTIFACTS.beingpushed),
-      squished: Object.assign({}, step.ARTIFACTS.squished)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmovetarget: markpos,
@@ -489,12 +511,24 @@ game.debug = function() {
       connections.faux[DIR] = STARTPOS;
       while (!(STOPREASON = (!(POS = connections[POS][DIR]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
         walkedsquares.push(POS);
-        ARTIFACTS["beingpushed"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["beingpushed"]: {
+            ...ARTIFACTS["beingpushed"],
+            [POS]: {}
+          }
+        }
       }
       var WALKLENGTH = walkedsquares.length;
       if (WALKLENGTH) {
         if ((["hitblock", "outofbounds"].indexOf(STOPREASON) !== -1)) {
-          ARTIFACTS["squished"][walkedsquares[WALKLENGTH - 1]] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["squished"]: {
+              ...ARTIFACTS["squished"],
+              [walkedsquares[WALKLENGTH - 1]]: {}
+            }
+          }
         }
       }
     }
@@ -552,7 +586,7 @@ game.debug = function() {
     });
   };
   game.move2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -612,11 +646,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "beingpushed": {},
-      "squished": {}
-    };
     let newstepid = step.stepid + '-' + 'move';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -674,11 +703,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "beingpushed": {},
-      "squished": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let BATTLEVARS = step.BATTLEVARS;
     let UNITLAYERS = {

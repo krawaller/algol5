@@ -16,6 +16,14 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "firetargets": {},
+  "movetargets": {},
+  "madecatapults": {},
+  "madetowers": {},
+  "madewalls": {},
+  "killtargets": {}
+};
 game.commands = {
   "move": 1,
   "kill": 1,
@@ -85,10 +93,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selecttower1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-      killtargets: Object.assign({}, step.ARTIFACTS.killtargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selecttower: markpos
@@ -124,9 +129,15 @@ game.debug = function() {
           POS = walkedsquares[walkstepper];
           STEP++;
           if (((WALKLENGTH === 2) && (STEP === 2))) {
-            ARTIFACTS["movetargets"][POS] = {
-              dir: DIR
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["movetargets"]: {
+                ...ARTIFACTS["movetargets"],
+                [POS]: {
+                  dir: DIR
+                }
+              }
+            }
           }
         }
       }
@@ -149,7 +160,13 @@ game.debug = function() {
             }
             return ret;
           }())[POS]) {
-          ARTIFACTS["killtargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["killtargets"]: {
+              ...ARTIFACTS["killtargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -233,11 +250,7 @@ game.debug = function() {
     });
   };
   game.selectmove1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      madecatapults: Object.assign({}, step.ARTIFACTS.madecatapults),
-      madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
-      madewalls: Object.assign({}, step.ARTIFACTS.madewalls)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmove: markpos,
@@ -246,9 +259,21 @@ game.debug = function() {
     let STARTPOS = MARKS["selectmove"];
     let POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS["selectmove"]] || {})["dir"] - 2 + 5]];
     if (POS) {
-      ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? "madecatapults" : "madetowers") : "madewalls")][POS] = {};
+      ARTIFACTS = {
+        ...ARTIFACTS,
+        [(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? "madecatapults" : "madetowers") : "madewalls")]: {
+          ...ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? "madecatapults" : "madetowers") : "madewalls")],
+          [POS]: {}
+        }
+      }
     }
-    ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? (!!(UNITLAYERS.mytowers[MARKS["selectmove"]]) ? "madecatapults" : "madetowers") : "madewalls")][STARTPOS] = {};
+    ARTIFACTS = {
+      ...ARTIFACTS,
+      [(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? (!!(UNITLAYERS.mytowers[MARKS["selectmove"]]) ? "madecatapults" : "madetowers") : "madewalls")]: {
+        ...ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? (!!(UNITLAYERS.mytowers[MARKS["selectmove"]]) ? "madecatapults" : "madetowers") : "madewalls")],
+        [STARTPOS]: {}
+      }
+    }
     let newstepid = step.stepid + '-' + markpos;
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -407,9 +432,7 @@ game.debug = function() {
     });
   };
   game.selectcatapult1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      firetargets: Object.assign({}, step.ARTIFACTS.firetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectcatapult: markpos
@@ -425,7 +448,13 @@ game.debug = function() {
         LENGTH++;
         STEP++;
         if (((STEP > 1) && !(UNITLAYERS.myunits[POS]))) {
-          ARTIFACTS["firetargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["firetargets"]: {
+              ...ARTIFACTS["firetargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -563,7 +592,7 @@ game.debug = function() {
     });
   };
   game.move1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -626,14 +655,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'move';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -678,7 +699,7 @@ game.debug = function() {
     return newstep;
   }
   game.kill1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -730,14 +751,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'kill';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -781,7 +794,7 @@ game.debug = function() {
     return newstep;
   }
   game.sacrifice1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -821,14 +834,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'sacrifice';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -872,7 +877,7 @@ game.debug = function() {
     return newstep;
   }
   game.fire1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -937,14 +942,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'fire';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -1001,14 +998,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "towers": {},
@@ -1113,10 +1103,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selecttower2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-      killtargets: Object.assign({}, step.ARTIFACTS.killtargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selecttower: markpos
@@ -1152,9 +1139,15 @@ game.debug = function() {
           POS = walkedsquares[walkstepper];
           STEP++;
           if (((WALKLENGTH === 2) && (STEP === 2))) {
-            ARTIFACTS["movetargets"][POS] = {
-              dir: DIR
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["movetargets"]: {
+                ...ARTIFACTS["movetargets"],
+                [POS]: {
+                  dir: DIR
+                }
+              }
+            }
           }
         }
       }
@@ -1177,7 +1170,13 @@ game.debug = function() {
             }
             return ret;
           }())[POS]) {
-          ARTIFACTS["killtargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["killtargets"]: {
+              ...ARTIFACTS["killtargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -1261,11 +1260,7 @@ game.debug = function() {
     });
   };
   game.selectmove2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      madecatapults: Object.assign({}, step.ARTIFACTS.madecatapults),
-      madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
-      madewalls: Object.assign({}, step.ARTIFACTS.madewalls)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmove: markpos,
@@ -1274,9 +1269,21 @@ game.debug = function() {
     let STARTPOS = MARKS["selectmove"];
     let POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS["selectmove"]] || {})["dir"] - 2 + 5]];
     if (POS) {
-      ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? "madecatapults" : "madetowers") : "madewalls")][POS] = {};
+      ARTIFACTS = {
+        ...ARTIFACTS,
+        [(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? "madecatapults" : "madetowers") : "madewalls")]: {
+          ...ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? (!!(UNITLAYERS.mytowers[POS]) ? "madecatapults" : "madetowers") : "madewalls")],
+          [POS]: {}
+        }
+      }
     }
-    ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? (!!(UNITLAYERS.mytowers[MARKS["selectmove"]]) ? "madecatapults" : "madetowers") : "madewalls")][STARTPOS] = {};
+    ARTIFACTS = {
+      ...ARTIFACTS,
+      [(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? (!!(UNITLAYERS.mytowers[MARKS["selectmove"]]) ? "madecatapults" : "madetowers") : "madewalls")]: {
+        ...ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? (!!(UNITLAYERS.mytowers[MARKS["selectmove"]]) ? "madecatapults" : "madetowers") : "madewalls")],
+        [STARTPOS]: {}
+      }
+    }
     let newstepid = step.stepid + '-' + markpos;
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -1435,9 +1442,7 @@ game.debug = function() {
     });
   };
   game.selectcatapult2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      firetargets: Object.assign({}, step.ARTIFACTS.firetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectcatapult: markpos
@@ -1453,7 +1458,13 @@ game.debug = function() {
         LENGTH++;
         STEP++;
         if (((STEP > 1) && !(UNITLAYERS.myunits[POS]))) {
-          ARTIFACTS["firetargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["firetargets"]: {
+              ...ARTIFACTS["firetargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -1591,7 +1602,7 @@ game.debug = function() {
     });
   };
   game.move2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -1654,14 +1665,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'move';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -1706,7 +1709,7 @@ game.debug = function() {
     return newstep;
   }
   game.kill2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -1758,14 +1761,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'kill';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -1809,7 +1804,7 @@ game.debug = function() {
     return newstep;
   }
   game.sacrifice2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -1849,14 +1844,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'sacrifice';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -1900,7 +1887,7 @@ game.debug = function() {
     return newstep;
   }
   game.fire2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -1965,14 +1952,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'fire';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -2029,14 +2008,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "firetargets": {},
-      "movetargets": {},
-      "madecatapults": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "towers": {},

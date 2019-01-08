@@ -16,6 +16,11 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "strandedmusketeers": {},
+  "musketeerline": {},
+  "movetargets": {}
+};
 game.commands = {
   "move": 1
 };
@@ -68,9 +73,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -81,7 +84,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 4; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && !!(UNITLAYERS.oppunits[POS])) {
-        ARTIFACTS["movetargets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["movetargets"]: {
+            ...ARTIFACTS["movetargets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -176,10 +185,7 @@ game.debug = function() {
     });
   };
   game.move1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      musketeerline: Object.assign({}, step.ARTIFACTS.musketeerline),
-      strandedmusketeers: Object.assign({}, step.ARTIFACTS.strandedmusketeers)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -212,11 +218,7 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "strandedmusketeers": {},
-      "musketeerline": {},
-      "movetargets": {}
-    }; {
+    {
       let walkstarts = UNITLAYERS.kings;
       for (let STARTPOS in walkstarts) {
         let allwalkerdirs = [1, 3, 5, 7];
@@ -229,7 +231,13 @@ game.debug = function() {
           }
           var TOTALCOUNT = CURRENTCOUNT;
           if ((2 === TOTALCOUNT)) {
-            ARTIFACTS["musketeerline"][STARTPOS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["musketeerline"]: {
+                ...ARTIFACTS["musketeerline"],
+                [STARTPOS]: {}
+              }
+            }
           }
         }
       }
@@ -272,11 +280,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "strandedmusketeers": {},
-      "musketeerline": {},
-      "movetargets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "kings": {},
@@ -342,9 +346,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -355,7 +357,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 4; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && !(UNITLAYERS.units[POS])) {
-        ARTIFACTS["movetargets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["movetargets"]: {
+            ...ARTIFACTS["movetargets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -435,10 +443,7 @@ game.debug = function() {
     });
   };
   game.move2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      musketeerline: Object.assign({}, step.ARTIFACTS.musketeerline),
-      strandedmusketeers: Object.assign({}, step.ARTIFACTS.strandedmusketeers)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -471,11 +476,7 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "strandedmusketeers": {},
-      "musketeerline": {},
-      "movetargets": {}
-    }; {
+    {
       let walkstarts = UNITLAYERS.kings;
       for (let STARTPOS in walkstarts) {
         let allwalkerdirs = [1, 3, 5, 7];
@@ -488,7 +489,13 @@ game.debug = function() {
           }
           var TOTALCOUNT = CURRENTCOUNT;
           if ((2 === TOTALCOUNT)) {
-            ARTIFACTS["musketeerline"][STARTPOS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["musketeerline"]: {
+                ...ARTIFACTS["musketeerline"],
+                [STARTPOS]: {}
+              }
+            }
           }
         }
       }
@@ -505,7 +512,13 @@ game.debug = function() {
         }
         let NEIGHBOURCOUNT = foundneighbours.length;
         if (!NEIGHBOURCOUNT) {
-          ARTIFACTS["strandedmusketeers"][STARTPOS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["strandedmusketeers"]: {
+              ...ARTIFACTS["strandedmusketeers"],
+              [STARTPOS]: {}
+            }
+          }
         }
       }
     }
@@ -547,11 +560,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "strandedmusketeers": {},
-      "musketeerline": {},
-      "movetargets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "kings": {},

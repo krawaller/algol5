@@ -16,6 +16,12 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "movetargets": {},
+  "madetowers": {},
+  "madewalls": {},
+  "killtargets": {}
+};
 game.commands = {
   "move": 1,
   "kill": 1
@@ -244,7 +250,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -319,7 +331,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -397,7 +415,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -459,7 +483,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -525,7 +555,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["mymoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["mymoves"]: {
+                  ...ARTIFACTS["mymoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -562,7 +598,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -613,7 +655,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["mymoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["mymoves"]: {
+                  ...ARTIFACTS["mymoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -650,7 +698,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -668,10 +722,7 @@ game.debug = function() {
     };
   };
   game.selecttower1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-      killtargets: Object.assign({}, step.ARTIFACTS.killtargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selecttower: markpos
@@ -707,9 +758,15 @@ game.debug = function() {
           POS = walkedsquares[walkstepper];
           STEP++;
           if (((WALKLENGTH === 2) && (STEP === 2))) {
-            ARTIFACTS["movetargets"][POS] = {
-              dir: DIR
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["movetargets"]: {
+                ...ARTIFACTS["movetargets"],
+                [POS]: {
+                  dir: DIR
+                }
+              }
+            }
           }
         }
       }
@@ -720,7 +777,13 @@ game.debug = function() {
       for (let dirnbr = 0; dirnbr < 8; dirnbr++) {
         let POS = startconnections[neighbourdirs[dirnbr]];
         if (POS && UNITLAYERS.oppwalls[POS]) {
-          ARTIFACTS["killtargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["killtargets"]: {
+              ...ARTIFACTS["killtargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -804,10 +867,7 @@ game.debug = function() {
     });
   };
   game.selectmove1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
-      madewalls: Object.assign({}, step.ARTIFACTS.madewalls)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmove: markpos,
@@ -816,9 +876,21 @@ game.debug = function() {
       let STARTPOS = MARKS["selectmove"];
       let POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS["selectmove"]] || {})["dir"] - 2 + 5]];
       if (POS) {
-        ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? "madetowers" : "madewalls")][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!!(UNITLAYERS.myunits[POS]) ? "madetowers" : "madewalls")]: {
+            ...ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? "madetowers" : "madewalls")],
+            [POS]: {}
+          }
+        }
       }
-      ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? "madetowers" : "madewalls")][STARTPOS] = {};
+      ARTIFACTS = {
+        ...ARTIFACTS,
+        [(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? "madetowers" : "madewalls")]: {
+          ...ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? "madetowers" : "madewalls")],
+          [STARTPOS]: {}
+        }
+      }
     }
     let newstepid = step.stepid + '-' + markpos;
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -914,7 +986,7 @@ game.debug = function() {
     });
   };
   game.move1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -964,12 +1036,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'move';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -1014,7 +1080,7 @@ game.debug = function() {
     return newstep;
   }
   game.kill1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -1050,12 +1116,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'kill';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -1111,12 +1171,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "towers": {},
@@ -1346,7 +1401,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -1421,7 +1482,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -1499,7 +1566,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -1561,7 +1634,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -1627,7 +1706,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["mymoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["mymoves"]: {
+                  ...ARTIFACTS["mymoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -1664,7 +1749,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -1715,7 +1806,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["mymoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["mymoves"]: {
+                  ...ARTIFACTS["mymoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -1752,7 +1849,13 @@ game.debug = function() {
             POS = walkedsquares[walkstepper];
             STEP++;
             if (((WALKLENGTH === 2) && (STEP === 2))) {
-              ARTIFACTS["oppmoves"][POS] = {};
+              ARTIFACTS = {
+                ...ARTIFACTS,
+                ["oppmoves"]: {
+                  ...ARTIFACTS["oppmoves"],
+                  [POS]: {}
+                }
+              }
             }
           }
         }
@@ -1770,10 +1873,7 @@ game.debug = function() {
     };
   };
   game.selecttower2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-      killtargets: Object.assign({}, step.ARTIFACTS.killtargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selecttower: markpos
@@ -1809,9 +1909,15 @@ game.debug = function() {
           POS = walkedsquares[walkstepper];
           STEP++;
           if (((WALKLENGTH === 2) && (STEP === 2))) {
-            ARTIFACTS["movetargets"][POS] = {
-              dir: DIR
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["movetargets"]: {
+                ...ARTIFACTS["movetargets"],
+                [POS]: {
+                  dir: DIR
+                }
+              }
+            }
           }
         }
       }
@@ -1822,7 +1928,13 @@ game.debug = function() {
       for (let dirnbr = 0; dirnbr < 8; dirnbr++) {
         let POS = startconnections[neighbourdirs[dirnbr]];
         if (POS && UNITLAYERS.oppwalls[POS]) {
-          ARTIFACTS["killtargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["killtargets"]: {
+              ...ARTIFACTS["killtargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -1906,10 +2018,7 @@ game.debug = function() {
     });
   };
   game.selectmove2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      madetowers: Object.assign({}, step.ARTIFACTS.madetowers),
-      madewalls: Object.assign({}, step.ARTIFACTS.madewalls)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmove: markpos,
@@ -1918,9 +2027,21 @@ game.debug = function() {
       let STARTPOS = MARKS["selectmove"];
       let POS = connections[STARTPOS][relativedirs[(ARTIFACTS.movetargets[MARKS["selectmove"]] || {})["dir"] - 2 + 5]];
       if (POS) {
-        ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? "madetowers" : "madewalls")][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!!(UNITLAYERS.myunits[POS]) ? "madetowers" : "madewalls")]: {
+            ...ARTIFACTS[(!!(UNITLAYERS.myunits[POS]) ? "madetowers" : "madewalls")],
+            [POS]: {}
+          }
+        }
       }
-      ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? "madetowers" : "madewalls")][STARTPOS] = {};
+      ARTIFACTS = {
+        ...ARTIFACTS,
+        [(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? "madetowers" : "madewalls")]: {
+          ...ARTIFACTS[(!!(UNITLAYERS.myunits[MARKS["selectmove"]]) ? "madetowers" : "madewalls")],
+          [STARTPOS]: {}
+        }
+      }
     }
     let newstepid = step.stepid + '-' + markpos;
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -2016,7 +2137,7 @@ game.debug = function() {
     });
   };
   game.move2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -2066,12 +2187,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'move';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -2116,7 +2231,7 @@ game.debug = function() {
     return newstep;
   }
   game.kill2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -2152,12 +2267,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
     let newstepid = step.stepid + '-' + 'kill';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -2213,12 +2322,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "madetowers": {},
-      "madewalls": {},
-      "killtargets": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "towers": {},

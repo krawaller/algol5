@@ -16,6 +16,13 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "movetargets": {},
+  "initialenemy": {},
+  "initialfriend": {},
+  "newenemy": {},
+  "newfriend": {}
+};
 game.commands = {
   "jostle": 1
 };
@@ -63,11 +70,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-      initialenemy: Object.assign({}, step.ARTIFACTS.initialenemy),
-      initialfriend: Object.assign({}, step.ARTIFACTS.initialfriend)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -78,7 +81,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 4; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS) {
-        ARTIFACTS[(!(UNITLAYERS.units[POS]) ? "movetargets" : (!!(UNITLAYERS.oppunits[POS]) ? "initialenemy" : "initialfriend"))][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!(UNITLAYERS.units[POS]) ? "movetargets" : (!!(UNITLAYERS.oppunits[POS]) ? "initialenemy" : "initialfriend"))]: {
+            ...ARTIFACTS[(!(UNITLAYERS.units[POS]) ? "movetargets" : (!!(UNITLAYERS.oppunits[POS]) ? "initialenemy" : "initialfriend"))],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -143,10 +152,7 @@ game.debug = function() {
     });
   };
   game.selectmovetarget1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      newenemy: Object.assign({}, step.ARTIFACTS.newenemy),
-      newfriend: Object.assign({}, step.ARTIFACTS.newfriend)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmovetarget: markpos,
@@ -158,7 +164,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 4; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && UNITLAYERS.units[POS]) {
-        ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? "newenemy" : "newfriend")][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!!(UNITLAYERS.oppunits[POS]) ? "newenemy" : "newfriend")]: {
+            ...ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? "newenemy" : "newfriend")],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -244,7 +256,7 @@ game.debug = function() {
     });
   };
   game.jostle1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -272,13 +284,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "initialenemy": {},
-      "initialfriend": {},
-      "newenemy": {},
-      "newfriend": {}
-    };
     let newstepid = step.stepid + '-' + 'jostle';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -306,13 +311,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "initialenemy": {},
-      "initialfriend": {},
-      "newenemy": {},
-      "newfriend": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "checkers": {},
@@ -364,11 +363,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-      initialenemy: Object.assign({}, step.ARTIFACTS.initialenemy),
-      initialfriend: Object.assign({}, step.ARTIFACTS.initialfriend)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -379,7 +374,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 4; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS) {
-        ARTIFACTS[(!(UNITLAYERS.units[POS]) ? "movetargets" : (!!(UNITLAYERS.oppunits[POS]) ? "initialenemy" : "initialfriend"))][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!(UNITLAYERS.units[POS]) ? "movetargets" : (!!(UNITLAYERS.oppunits[POS]) ? "initialenemy" : "initialfriend"))]: {
+            ...ARTIFACTS[(!(UNITLAYERS.units[POS]) ? "movetargets" : (!!(UNITLAYERS.oppunits[POS]) ? "initialenemy" : "initialfriend"))],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -444,10 +445,7 @@ game.debug = function() {
     });
   };
   game.selectmovetarget2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      newenemy: Object.assign({}, step.ARTIFACTS.newenemy),
-      newfriend: Object.assign({}, step.ARTIFACTS.newfriend)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmovetarget: markpos,
@@ -459,7 +457,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 4; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && UNITLAYERS.units[POS]) {
-        ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? "newenemy" : "newfriend")][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [(!!(UNITLAYERS.oppunits[POS]) ? "newenemy" : "newfriend")]: {
+            ...ARTIFACTS[(!!(UNITLAYERS.oppunits[POS]) ? "newenemy" : "newfriend")],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -545,7 +549,7 @@ game.debug = function() {
     });
   };
   game.jostle2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -573,13 +577,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "initialenemy": {},
-      "initialfriend": {},
-      "newenemy": {},
-      "newfriend": {}
-    };
     let newstepid = step.stepid + '-' + 'jostle';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -607,13 +604,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "initialenemy": {},
-      "initialfriend": {},
-      "newenemy": {},
-      "newfriend": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "checkers": {},

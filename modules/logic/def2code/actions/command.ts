@@ -27,7 +27,7 @@ export default function addCommandFunction(
 
   return `
     game.${cmndname}${player} = function(turn,step){
-      let ARTIFACTS = ${copyArtifactsForAction(def, cmndDef)};
+      let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITDATA = Object.assign({},step.UNITDATA);
       ${
@@ -50,7 +50,6 @@ export default function addCommandFunction(
       ${applyEffectInstructions(def, player, cmndname, cmndDef)}
       MARKS = {};
       ${calculateUnitLayers(def, player, false)}
-      ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
       ${applyGeneratorInstructions(def, player, cmndname, cmndDef)}
 
       let newstepid = step.stepid+'-'+'${cmndname}';

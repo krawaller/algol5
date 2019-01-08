@@ -16,6 +16,10 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "movetargets": {},
+  "winline": {}
+};
 game.commands = {
   "promote": 1,
   "move": 1
@@ -85,9 +89,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -98,7 +100,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 8; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && !UNITLAYERS.units[POS]) {
-        ARTIFACTS["movetargets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["movetargets"]: {
+            ...ARTIFACTS["movetargets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -213,7 +221,7 @@ game.debug = function() {
     });
   };
   game.promote1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -245,10 +253,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "winline": {}
-    };
     let newstepid = step.stepid + '-' + 'promote';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -330,9 +334,7 @@ game.debug = function() {
     return newstep;
   }
   game.move1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -364,10 +366,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "winline": {}
-    };
     let allowedsteps =
       (function() {
         let k, ret = {},
@@ -412,7 +410,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if (((WALKLENGTH === 4) && (TOTALCOUNT !== 4))) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -510,10 +514,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "winline": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "soldiers": {},
@@ -606,9 +607,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -619,7 +618,13 @@ game.debug = function() {
     for (let dirnbr = 0; dirnbr < 8; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && !UNITLAYERS.units[POS]) {
-        ARTIFACTS["movetargets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["movetargets"]: {
+            ...ARTIFACTS["movetargets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -734,7 +739,7 @@ game.debug = function() {
     });
   };
   game.promote2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -766,10 +771,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "winline": {}
-    };
     let newstepid = step.stepid + '-' + 'promote';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -851,9 +852,7 @@ game.debug = function() {
     return newstep;
   }
   game.move2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -885,10 +884,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "winline": {}
-    };
     let allowedsteps =
       (function() {
         let k, ret = {},
@@ -933,7 +928,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if (((WALKLENGTH === 4) && (TOTALCOUNT !== 4))) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -1031,10 +1032,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "winline": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "soldiers": {},

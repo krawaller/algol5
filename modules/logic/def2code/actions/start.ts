@@ -26,7 +26,7 @@ export default function addStartFunction(def: FullDef, player: 1 | 2) {
       };
 
       let MARKS = {}; 
-      let ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
+      let ARTIFACTS = emptyArtifactLayer;
       let UNITDATA = step.UNITDATA;
       ${usesTurnVars(def) ? "let TURNVARS = {}; " : ""}
       ${usesBattleVars(def) ? "let BATTLEVARS = step.BATTLEVARS; " : ""}

@@ -16,6 +16,9 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "line": {}
+};
 game.commands = {
   "deploy": 1,
   "promote": 1
@@ -135,9 +138,7 @@ game.debug = function() {
     });
   };
   game.deploy1 = function(turn, step) {
-    let ARTIFACTS = {
-      line: Object.assign({}, step.ARTIFACTS.line)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -175,9 +176,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "line": {}
-    };
     let walkstarts = UNITLAYERS.units;
     for (let STARTPOS in walkstarts) {
       let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
@@ -194,7 +192,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH > 2)) {
-            ARTIFACTS["line"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["line"]: {
+                ...ARTIFACTS["line"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -221,9 +225,7 @@ game.debug = function() {
     return newstep;
   }
   game.promote1 = function(turn, step) {
-    let ARTIFACTS = {
-      line: Object.assign({}, step.ARTIFACTS.line)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -259,9 +261,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "line": {}
-    };
     let walkstarts = UNITLAYERS.units;
     for (let STARTPOS in walkstarts) {
       let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
@@ -278,7 +277,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH > 2)) {
-            ARTIFACTS["line"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["line"]: {
+                ...ARTIFACTS["line"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -316,9 +321,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "line": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "bishops": {},
@@ -559,9 +562,7 @@ game.debug = function() {
     });
   };
   game.deploy2 = function(turn, step) {
-    let ARTIFACTS = {
-      line: Object.assign({}, step.ARTIFACTS.line)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -599,9 +600,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "line": {}
-    };
     let walkstarts = UNITLAYERS.units;
     for (let STARTPOS in walkstarts) {
       let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
@@ -618,7 +616,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH > 2)) {
-            ARTIFACTS["line"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["line"]: {
+                ...ARTIFACTS["line"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -645,9 +649,7 @@ game.debug = function() {
     return newstep;
   }
   game.promote2 = function(turn, step) {
-    let ARTIFACTS = {
-      line: Object.assign({}, step.ARTIFACTS.line)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -683,9 +685,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "line": {}
-    };
     let walkstarts = UNITLAYERS.units;
     for (let STARTPOS in walkstarts) {
       let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
@@ -702,7 +701,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH > 2)) {
-            ARTIFACTS["line"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["line"]: {
+                ...ARTIFACTS["line"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -740,9 +745,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "line": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "bishops": {},

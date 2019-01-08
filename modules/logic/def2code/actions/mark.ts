@@ -41,7 +41,7 @@ export default function addMarkFunction(
   const preludium = ifCodeContains(body + linking, {
     TURNVARS: "let TURNVARS = step.TURNVARS; ",
     BATTLEVARS: "let BATTLEVARS = step.BATTLEVARS; ",
-    ARTIFACTS: "let ARTIFACTS = " + copyArtifactsForAction(def, markDef) + "; ",
+    ARTIFACTS: "let ARTIFACTS = step.ARTIFACTS; ",
     UNITLAYERS: "let UNITLAYERS = step.UNITLAYERS; "
   });
   const instruction = expr.content(def.instructions[markname] || "");

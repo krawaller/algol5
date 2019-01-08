@@ -16,6 +16,10 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "marks": {},
+  "blocks": {}
+};
 game.commands = {};
 game.graphics = {
   "icons": {
@@ -82,10 +86,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = {
-      marks: Object.assign({}, step.ARTIFACTS.marks),
-      blocks: Object.assign({}, step.ARTIFACTS.blocks)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -115,10 +116,22 @@ game.debug = function() {
           let STOPREASON = "";
           let POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-            ARTIFACTS["marks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["marks"]: {
+                ...ARTIFACTS["marks"],
+                [POS]: {}
+              }
+            }
           }
           if (BLOCKS[POS] && allowedsteps[POS]) {
-            ARTIFACTS["blocks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["blocks"]: {
+                ...ARTIFACTS["blocks"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -148,10 +161,22 @@ game.debug = function() {
           let STOPREASON = "";
           let POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
-            ARTIFACTS["marks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["marks"]: {
+                ...ARTIFACTS["marks"],
+                [POS]: {}
+              }
+            }
           }
           if (BLOCKS[POS]) {
-            ARTIFACTS["blocks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["blocks"]: {
+                ...ARTIFACTS["blocks"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -181,10 +206,22 @@ game.debug = function() {
           let STOPREASON = "";
           let POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-            ARTIFACTS["marks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["marks"]: {
+                ...ARTIFACTS["marks"],
+                [POS]: {}
+              }
+            }
           }
           if (BLOCKS[POS] && allowedsteps[POS]) {
-            ARTIFACTS["blocks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["blocks"]: {
+                ...ARTIFACTS["blocks"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -213,7 +250,13 @@ game.debug = function() {
         for (let walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
           let POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
-            ARTIFACTS["marks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["marks"]: {
+                ...ARTIFACTS["marks"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -286,10 +329,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "marks": {},
-      "blocks": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "stepsfirsts": {},
@@ -358,10 +398,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = {
-      marks: Object.assign({}, step.ARTIFACTS.marks),
-      blocks: Object.assign({}, step.ARTIFACTS.blocks)
-    };
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -391,10 +428,22 @@ game.debug = function() {
           let STOPREASON = "";
           let POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-            ARTIFACTS["marks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["marks"]: {
+                ...ARTIFACTS["marks"],
+                [POS]: {}
+              }
+            }
           }
           if (BLOCKS[POS] && allowedsteps[POS]) {
-            ARTIFACTS["blocks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["blocks"]: {
+                ...ARTIFACTS["blocks"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -424,10 +473,22 @@ game.debug = function() {
           let STOPREASON = "";
           let POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : !allowedsteps[POS] ? "nomoresteps" : null))) {
-            ARTIFACTS["marks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["marks"]: {
+                ...ARTIFACTS["marks"],
+                [POS]: {}
+              }
+            }
           }
           if (BLOCKS[POS]) {
-            ARTIFACTS["blocks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["blocks"]: {
+                ...ARTIFACTS["blocks"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -457,10 +518,22 @@ game.debug = function() {
           let STOPREASON = "";
           let POS = STARTPOS;
           while (!(STOPREASON = (!(POS = connections[POS][allwalkerdirs[walkerdirnbr]]) ? "outofbounds" : !allowedsteps[POS] ? "nomoresteps" : BLOCKS[POS] ? "hitblock" : null))) {
-            ARTIFACTS["marks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["marks"]: {
+                ...ARTIFACTS["marks"],
+                [POS]: {}
+              }
+            }
           }
           if (BLOCKS[POS] && allowedsteps[POS]) {
-            ARTIFACTS["blocks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["blocks"]: {
+                ...ARTIFACTS["blocks"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -489,7 +562,13 @@ game.debug = function() {
         for (let walkerdirnbr = 0; walkerdirnbr < 2; walkerdirnbr++) {
           let POS = STARTPOS;
           while ((POS = connections[POS][allwalkerdirs[walkerdirnbr]]) && allowedsteps[POS] && !BLOCKS[POS]) {
-            ARTIFACTS["marks"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["marks"]: {
+                ...ARTIFACTS["marks"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -562,10 +641,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "marks": {},
-      "blocks": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "stepsfirsts": {},

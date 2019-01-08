@@ -16,6 +16,12 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "eattargets": {},
+  "movetargets": {},
+  "canmove": {},
+  "cracks": {}
+};
 game.commands = {
   "move": 1,
   "eat": 1
@@ -74,10 +80,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-      eattargets: Object.assign({}, step.ARTIFACTS.eattargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -109,9 +112,15 @@ game.debug = function() {
         while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
           LENGTH++;
           if (!UNITLAYERS.holes[POS]) {
-            ARTIFACTS["movetargets"][POS] = {
-              dir: DIR
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["movetargets"]: {
+                ...ARTIFACTS["movetargets"],
+                [POS]: {
+                  dir: DIR
+                }
+              }
+            }
           }
         }
       }
@@ -142,9 +151,7 @@ game.debug = function() {
     });
   };
   game.selectmovetarget1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      cracks: Object.assign({}, step.ARTIFACTS.cracks)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmovetarget: markpos,
@@ -161,11 +168,23 @@ game.debug = function() {
     let POS = STARTPOS;
     while (!(STOPREASON = (!(POS = connections[POS][relativedirs[5 - 2 + (ARTIFACTS.movetargets[MARKS["selectmovetarget"]] || {})["dir"]]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
       if (!UNITLAYERS.holes[POS]) {
-        ARTIFACTS["cracks"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["cracks"]: {
+            ...ARTIFACTS["cracks"],
+            [POS]: {}
+          }
+        }
       }
     }
     if (BLOCKS[POS]) {
-      ARTIFACTS["cracks"][POS] = {};
+      ARTIFACTS = {
+        ...ARTIFACTS,
+        ["cracks"]: {
+          ...ARTIFACTS["cracks"],
+          [POS]: {}
+        }
+      }
     }
     let newstepid = step.stepid + '-' + markpos;
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -226,9 +245,7 @@ game.debug = function() {
     });
   };
   game.move1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      canmove: Object.assign({}, step.ARTIFACTS.canmove)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -277,12 +294,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "eattargets": {},
-      "movetargets": {},
-      "canmove": {},
-      "cracks": {}
-    };
     let walkstarts = UNITLAYERS.seals;
     for (let STARTPOS in walkstarts) {
       let allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -309,7 +320,13 @@ game.debug = function() {
         }
         var TOTALCOUNT = CURRENTCOUNT;
         if ((TOTALCOUNT > 0)) {
-          ARTIFACTS["canmove"][STARTPOS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["canmove"]: {
+              ...ARTIFACTS["canmove"],
+              [STARTPOS]: {}
+            }
+          }
         }
       }
     }
@@ -351,9 +368,7 @@ game.debug = function() {
     return newstep;
   }
   game.eat1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      canmove: Object.assign({}, step.ARTIFACTS.canmove)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -388,12 +403,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "eattargets": {},
-      "movetargets": {},
-      "canmove": {},
-      "cracks": {}
-    };
     let walkstarts = UNITLAYERS.seals;
     for (let STARTPOS in walkstarts) {
       let allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -420,7 +429,13 @@ game.debug = function() {
         }
         var TOTALCOUNT = CURRENTCOUNT;
         if ((TOTALCOUNT > 0)) {
-          ARTIFACTS["canmove"][STARTPOS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["canmove"]: {
+              ...ARTIFACTS["canmove"],
+              [STARTPOS]: {}
+            }
+          }
         }
       }
     }
@@ -473,12 +488,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "eattargets": {},
-      "movetargets": {},
-      "canmove": {},
-      "cracks": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "seals": {},
@@ -543,10 +553,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets),
-      eattargets: Object.assign({}, step.ARTIFACTS.eattargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -578,9 +585,15 @@ game.debug = function() {
         while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
           LENGTH++;
           if (!UNITLAYERS.holes[POS]) {
-            ARTIFACTS["movetargets"][POS] = {
-              dir: DIR
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["movetargets"]: {
+                ...ARTIFACTS["movetargets"],
+                [POS]: {
+                  dir: DIR
+                }
+              }
+            }
           }
         }
       }
@@ -591,7 +604,13 @@ game.debug = function() {
       for (let dirnbr = 0; dirnbr < 8; dirnbr++) {
         let POS = startconnections[neighbourdirs[dirnbr]];
         if (POS && UNITLAYERS.seals[POS]) {
-          ARTIFACTS["eattargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["eattargets"]: {
+              ...ARTIFACTS["eattargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -626,9 +645,7 @@ game.debug = function() {
     });
   };
   game.selectmovetarget2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      cracks: Object.assign({}, step.ARTIFACTS.cracks)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectmovetarget: markpos,
@@ -645,11 +662,23 @@ game.debug = function() {
     let POS = STARTPOS;
     while (!(STOPREASON = (!(POS = connections[POS][relativedirs[5 - 2 + (ARTIFACTS.movetargets[MARKS["selectmovetarget"]] || {})["dir"]]]) ? "outofbounds" : BLOCKS[POS] ? "hitblock" : null))) {
       if (!UNITLAYERS.holes[POS]) {
-        ARTIFACTS["cracks"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["cracks"]: {
+            ...ARTIFACTS["cracks"],
+            [POS]: {}
+          }
+        }
       }
     }
     if (BLOCKS[POS]) {
-      ARTIFACTS["cracks"][POS] = {};
+      ARTIFACTS = {
+        ...ARTIFACTS,
+        ["cracks"]: {
+          ...ARTIFACTS["cracks"],
+          [POS]: {}
+        }
+      }
     }
     let newstepid = step.stepid + '-' + markpos;
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
@@ -710,9 +739,7 @@ game.debug = function() {
     });
   };
   game.move2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      canmove: Object.assign({}, step.ARTIFACTS.canmove)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -761,12 +788,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "eattargets": {},
-      "movetargets": {},
-      "canmove": {},
-      "cracks": {}
-    };
     let walkstarts = UNITLAYERS.seals;
     for (let STARTPOS in walkstarts) {
       let allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -793,7 +814,13 @@ game.debug = function() {
         }
         var TOTALCOUNT = CURRENTCOUNT;
         if ((TOTALCOUNT > 0)) {
-          ARTIFACTS["canmove"][STARTPOS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["canmove"]: {
+              ...ARTIFACTS["canmove"],
+              [STARTPOS]: {}
+            }
+          }
         }
       }
     }
@@ -835,9 +862,7 @@ game.debug = function() {
     return newstep;
   }
   game.eat2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      canmove: Object.assign({}, step.ARTIFACTS.canmove)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -872,12 +897,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "eattargets": {},
-      "movetargets": {},
-      "canmove": {},
-      "cracks": {}
-    };
     let walkstarts = UNITLAYERS.seals;
     for (let STARTPOS in walkstarts) {
       let allwalkerdirs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -904,7 +923,13 @@ game.debug = function() {
         }
         var TOTALCOUNT = CURRENTCOUNT;
         if ((TOTALCOUNT > 0)) {
-          ARTIFACTS["canmove"][STARTPOS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["canmove"]: {
+              ...ARTIFACTS["canmove"],
+              [STARTPOS]: {}
+            }
+          }
         }
       }
     }
@@ -957,12 +982,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "eattargets": {},
-      "movetargets": {},
-      "canmove": {},
-      "cracks": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "seals": {},

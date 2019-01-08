@@ -16,6 +16,11 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "movetargets": {},
+  "digtargets": {},
+  "winline": {}
+};
 game.commands = {
   "move": 1,
   "dig": 1
@@ -72,9 +77,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -86,7 +89,13 @@ game.debug = function() {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && (!!(UNITLAYERS.rooks[MARKS["selectunit"]]) ? !(UNITLAYERS.pawns[POS]) : (!!(UNITLAYERS.pawns[MARKS["selectunit"]]) ? !(UNITLAYERS.rooks[POS]) : true))) {
         if (UNITLAYERS.neutralunits[POS]) {
-          ARTIFACTS["movetargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["movetargets"]: {
+              ...ARTIFACTS["movetargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -237,9 +246,7 @@ game.debug = function() {
     })));
   };
   game.move1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      digtargets: Object.assign({}, step.ARTIFACTS.digtargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -302,18 +309,19 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "digtargets": {},
-      "winline": {}
-    };
     let STARTPOS = TURNVARS['movedto'];
     let neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
     let startconnections = connections[STARTPOS];
     for (let dirnbr = 0; dirnbr < 8; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && UNITLAYERS.neutralunits[POS]) {
-        ARTIFACTS["digtargets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["digtargets"]: {
+            ...ARTIFACTS["digtargets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + 'move';
@@ -342,9 +350,7 @@ game.debug = function() {
     };
   };
   game.dig1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -384,11 +390,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "digtargets": {},
-      "winline": {}
-    };
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
       let allowedsteps = (!!(UNITLAYERS.myrooks[STARTPOS]) ? UNITLAYERS.myrooks : (!!(UNITLAYERS.myknights[STARTPOS]) ? UNITLAYERS.myknights : UNITLAYERS.mypawns));
@@ -405,7 +406,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH > 2)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -443,11 +450,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "digtargets": {},
-      "winline": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let TURNVARS = {};
     let UNITLAYERS = {
@@ -510,9 +513,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      movetargets: Object.assign({}, step.ARTIFACTS.movetargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -524,7 +525,13 @@ game.debug = function() {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && (!!(UNITLAYERS.rooks[MARKS["selectunit"]]) ? !(UNITLAYERS.pawns[POS]) : (!!(UNITLAYERS.pawns[MARKS["selectunit"]]) ? !(UNITLAYERS.rooks[POS]) : true))) {
         if (UNITLAYERS.neutralunits[POS]) {
-          ARTIFACTS["movetargets"][POS] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["movetargets"]: {
+              ...ARTIFACTS["movetargets"],
+              [POS]: {}
+            }
+          }
         }
       }
     }
@@ -675,9 +682,7 @@ game.debug = function() {
     })));
   };
   game.move2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      digtargets: Object.assign({}, step.ARTIFACTS.digtargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -740,18 +745,19 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "digtargets": {},
-      "winline": {}
-    };
     let STARTPOS = TURNVARS['movedto'];
     let neighbourdirs = [1, 2, 3, 4, 5, 6, 7, 8];
     let startconnections = connections[STARTPOS];
     for (let dirnbr = 0; dirnbr < 8; dirnbr++) {
       let POS = startconnections[neighbourdirs[dirnbr]];
       if (POS && UNITLAYERS.neutralunits[POS]) {
-        ARTIFACTS["digtargets"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["digtargets"]: {
+            ...ARTIFACTS["digtargets"],
+            [POS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + 'move';
@@ -780,9 +786,7 @@ game.debug = function() {
     };
   };
   game.dig2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      winline: Object.assign({}, step.ARTIFACTS.winline)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let UNITLAYERS = step.UNITLAYERS;
@@ -822,11 +826,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "movetargets": {},
-      "digtargets": {},
-      "winline": {}
-    };
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
       let allowedsteps = (!!(UNITLAYERS.myrooks[STARTPOS]) ? UNITLAYERS.myrooks : (!!(UNITLAYERS.myknights[STARTPOS]) ? UNITLAYERS.myknights : UNITLAYERS.mypawns));
@@ -843,7 +842,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH > 2)) {
-            ARTIFACTS["winline"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["winline"]: {
+                ...ARTIFACTS["winline"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -881,11 +886,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "movetargets": {},
-      "digtargets": {},
-      "winline": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let TURNVARS = {};
     let UNITLAYERS = {

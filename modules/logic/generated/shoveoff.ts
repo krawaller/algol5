@@ -16,6 +16,22 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "targetedgepoints": {},
+  "squishsouth": {},
+  "squishwest": {},
+  "squishnorth": {},
+  "squisheast": {},
+  "pushsouth": {},
+  "pushwest": {},
+  "pushnorth": {},
+  "pusheast": {},
+  "spawnsouth": {},
+  "spawnwest": {},
+  "spawnnorth": {},
+  "spawneast": {},
+  "fourinarow": {}
+};
 game.commands = {
   "north": 1,
   "south": 1,
@@ -85,21 +101,7 @@ game.debug = function() {
   let player = 1;
   let otherplayer = 2;
   game.selectpushpoint1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      targetedgepoints: Object.assign({}, step.ARTIFACTS.targetedgepoints),
-      squishsouth: Object.assign({}, step.ARTIFACTS.squishsouth),
-      squishwest: Object.assign({}, step.ARTIFACTS.squishwest),
-      squishnorth: Object.assign({}, step.ARTIFACTS.squishnorth),
-      squisheast: Object.assign({}, step.ARTIFACTS.squisheast),
-      pushsouth: Object.assign({}, step.ARTIFACTS.pushsouth),
-      pushwest: Object.assign({}, step.ARTIFACTS.pushwest),
-      pushnorth: Object.assign({}, step.ARTIFACTS.pushnorth),
-      pusheast: Object.assign({}, step.ARTIFACTS.pusheast),
-      spawnsouth: Object.assign({}, step.ARTIFACTS.spawnsouth),
-      spawnwest: Object.assign({}, step.ARTIFACTS.spawnwest),
-      spawnnorth: Object.assign({}, step.ARTIFACTS.spawnnorth),
-      spawneast: Object.assign({}, step.ARTIFACTS.spawneast)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectpushpoint: markpos
@@ -116,9 +118,15 @@ game.debug = function() {
         var WALKLENGTH = walkedsquares.length;
         if (WALKLENGTH) {
           if ((WALKLENGTH === 3) && !UNITLAYERS.oppunits[walkedsquares[WALKLENGTH - 1]]) {
-            ARTIFACTS["targetedgepoints"][walkedsquares[WALKLENGTH - 1]] = {
-              dir: relativedirs[5 - 2 + DIR]
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["targetedgepoints"]: {
+                ...ARTIFACTS["targetedgepoints"],
+                [walkedsquares[WALKLENGTH - 1]]: {
+                  dir: relativedirs[5 - 2 + DIR]
+                }
+              }
+            }
           }
         }
       }
@@ -134,13 +142,31 @@ game.debug = function() {
           walkedsquares.push(POS);
           STEP++;
           if ((STEP !== 1)) {
-            ARTIFACTS[((DIR === 1) ? "pushsouth" : ((DIR === 3) ? "pushwest" : ((DIR === 5) ? "pushnorth" : "pusheast")))][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              [((DIR === 1) ? "pushsouth" : ((DIR === 3) ? "pushwest" : ((DIR === 5) ? "pushnorth" : "pusheast")))]: {
+                ...ARTIFACTS[((DIR === 1) ? "pushsouth" : ((DIR === 3) ? "pushwest" : ((DIR === 5) ? "pushnorth" : "pusheast")))],
+                [POS]: {}
+              }
+            }
           }
         }
         var WALKLENGTH = walkedsquares.length;
-        ARTIFACTS[((DIR === 1) ? "squishsouth" : ((DIR === 3) ? "squishwest" : ((DIR === 5) ? "squishnorth" : "squisheast")))][STARTPOS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [((DIR === 1) ? "squishsouth" : ((DIR === 3) ? "squishwest" : ((DIR === 5) ? "squishnorth" : "squisheast")))]: {
+            ...ARTIFACTS[((DIR === 1) ? "squishsouth" : ((DIR === 3) ? "squishwest" : ((DIR === 5) ? "squishnorth" : "squisheast")))],
+            [STARTPOS]: {}
+          }
+        }
         if (WALKLENGTH) {
-          ARTIFACTS[((DIR === 1) ? "spawnsouth" : ((DIR === 3) ? "spawnwest" : ((DIR === 5) ? "spawnnorth" : "spawneast")))][walkedsquares[WALKLENGTH - 1]] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            [((DIR === 1) ? "spawnsouth" : ((DIR === 3) ? "spawnwest" : ((DIR === 5) ? "spawnnorth" : "spawneast")))]: {
+              ...ARTIFACTS[((DIR === 1) ? "spawnsouth" : ((DIR === 3) ? "spawnwest" : ((DIR === 5) ? "spawnnorth" : "spawneast")))],
+              [walkedsquares[WALKLENGTH - 1]]: {}
+            }
+          }
         }
       }
     }
@@ -232,9 +258,7 @@ game.debug = function() {
     });
   };
   game.north1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -286,22 +310,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -318,7 +326,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH === 4)) {
-            ARTIFACTS["fourinarow"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["fourinarow"]: {
+                ...ARTIFACTS["fourinarow"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -345,9 +359,7 @@ game.debug = function() {
     return newstep;
   }
   game.south1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -399,22 +411,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -431,7 +427,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH === 4)) {
-            ARTIFACTS["fourinarow"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["fourinarow"]: {
+                ...ARTIFACTS["fourinarow"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -458,9 +460,7 @@ game.debug = function() {
     return newstep;
   }
   game.east1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -512,22 +512,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -544,7 +528,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH === 4)) {
-            ARTIFACTS["fourinarow"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["fourinarow"]: {
+                ...ARTIFACTS["fourinarow"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -571,9 +561,7 @@ game.debug = function() {
     return newstep;
   }
   game.west1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -625,22 +613,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -657,7 +629,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH === 4)) {
-            ARTIFACTS["fourinarow"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["fourinarow"]: {
+                ...ARTIFACTS["fourinarow"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -696,22 +674,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "soldiers": {},
@@ -787,21 +750,7 @@ game.debug = function() {
   let player = 2;
   let otherplayer = 1;
   game.selectpushpoint2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      targetedgepoints: Object.assign({}, step.ARTIFACTS.targetedgepoints),
-      squishsouth: Object.assign({}, step.ARTIFACTS.squishsouth),
-      squishwest: Object.assign({}, step.ARTIFACTS.squishwest),
-      squishnorth: Object.assign({}, step.ARTIFACTS.squishnorth),
-      squisheast: Object.assign({}, step.ARTIFACTS.squisheast),
-      pushsouth: Object.assign({}, step.ARTIFACTS.pushsouth),
-      pushwest: Object.assign({}, step.ARTIFACTS.pushwest),
-      pushnorth: Object.assign({}, step.ARTIFACTS.pushnorth),
-      pusheast: Object.assign({}, step.ARTIFACTS.pusheast),
-      spawnsouth: Object.assign({}, step.ARTIFACTS.spawnsouth),
-      spawnwest: Object.assign({}, step.ARTIFACTS.spawnwest),
-      spawnnorth: Object.assign({}, step.ARTIFACTS.spawnnorth),
-      spawneast: Object.assign({}, step.ARTIFACTS.spawneast)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectpushpoint: markpos
@@ -818,9 +767,15 @@ game.debug = function() {
         var WALKLENGTH = walkedsquares.length;
         if (WALKLENGTH) {
           if ((WALKLENGTH === 3) && !UNITLAYERS.oppunits[walkedsquares[WALKLENGTH - 1]]) {
-            ARTIFACTS["targetedgepoints"][walkedsquares[WALKLENGTH - 1]] = {
-              dir: relativedirs[5 - 2 + DIR]
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["targetedgepoints"]: {
+                ...ARTIFACTS["targetedgepoints"],
+                [walkedsquares[WALKLENGTH - 1]]: {
+                  dir: relativedirs[5 - 2 + DIR]
+                }
+              }
+            }
           }
         }
       }
@@ -836,13 +791,31 @@ game.debug = function() {
           walkedsquares.push(POS);
           STEP++;
           if ((STEP !== 1)) {
-            ARTIFACTS[((DIR === 1) ? "pushsouth" : ((DIR === 3) ? "pushwest" : ((DIR === 5) ? "pushnorth" : "pusheast")))][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              [((DIR === 1) ? "pushsouth" : ((DIR === 3) ? "pushwest" : ((DIR === 5) ? "pushnorth" : "pusheast")))]: {
+                ...ARTIFACTS[((DIR === 1) ? "pushsouth" : ((DIR === 3) ? "pushwest" : ((DIR === 5) ? "pushnorth" : "pusheast")))],
+                [POS]: {}
+              }
+            }
           }
         }
         var WALKLENGTH = walkedsquares.length;
-        ARTIFACTS[((DIR === 1) ? "squishsouth" : ((DIR === 3) ? "squishwest" : ((DIR === 5) ? "squishnorth" : "squisheast")))][STARTPOS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          [((DIR === 1) ? "squishsouth" : ((DIR === 3) ? "squishwest" : ((DIR === 5) ? "squishnorth" : "squisheast")))]: {
+            ...ARTIFACTS[((DIR === 1) ? "squishsouth" : ((DIR === 3) ? "squishwest" : ((DIR === 5) ? "squishnorth" : "squisheast")))],
+            [STARTPOS]: {}
+          }
+        }
         if (WALKLENGTH) {
-          ARTIFACTS[((DIR === 1) ? "spawnsouth" : ((DIR === 3) ? "spawnwest" : ((DIR === 5) ? "spawnnorth" : "spawneast")))][walkedsquares[WALKLENGTH - 1]] = {};
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            [((DIR === 1) ? "spawnsouth" : ((DIR === 3) ? "spawnwest" : ((DIR === 5) ? "spawnnorth" : "spawneast")))]: {
+              ...ARTIFACTS[((DIR === 1) ? "spawnsouth" : ((DIR === 3) ? "spawnwest" : ((DIR === 5) ? "spawnnorth" : "spawneast")))],
+              [walkedsquares[WALKLENGTH - 1]]: {}
+            }
+          }
         }
       }
     }
@@ -934,9 +907,7 @@ game.debug = function() {
     });
   };
   game.north2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -988,22 +959,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -1020,7 +975,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH === 4)) {
-            ARTIFACTS["fourinarow"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["fourinarow"]: {
+                ...ARTIFACTS["fourinarow"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -1047,9 +1008,7 @@ game.debug = function() {
     return newstep;
   }
   game.south2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -1101,22 +1060,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -1133,7 +1076,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH === 4)) {
-            ARTIFACTS["fourinarow"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["fourinarow"]: {
+                ...ARTIFACTS["fourinarow"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -1160,9 +1109,7 @@ game.debug = function() {
     return newstep;
   }
   game.east2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -1214,22 +1161,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -1246,7 +1177,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH === 4)) {
-            ARTIFACTS["fourinarow"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["fourinarow"]: {
+                ...ARTIFACTS["fourinarow"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -1273,9 +1210,7 @@ game.debug = function() {
     return newstep;
   }
   game.west2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      fourinarow: Object.assign({}, step.ARTIFACTS.fourinarow)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -1327,22 +1262,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
     let allowedsteps = UNITLAYERS.myunits;
     let walkstarts = UNITLAYERS.myunits;
     for (let STARTPOS in walkstarts) {
@@ -1359,7 +1278,13 @@ game.debug = function() {
         for (var walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
           POS = walkedsquares[walkstepper];
           if ((WALKLENGTH === 4)) {
-            ARTIFACTS["fourinarow"][POS] = {};
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["fourinarow"]: {
+                ...ARTIFACTS["fourinarow"],
+                [POS]: {}
+              }
+            }
           }
         }
       }
@@ -1398,22 +1323,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "targetedgepoints": {},
-      "squishsouth": {},
-      "squishwest": {},
-      "squishnorth": {},
-      "squisheast": {},
-      "pushsouth": {},
-      "pushwest": {},
-      "pushnorth": {},
-      "pusheast": {},
-      "spawnsouth": {},
-      "spawnwest": {},
-      "spawnnorth": {},
-      "spawneast": {},
-      "fourinarow": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "soldiers": {},

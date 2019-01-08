@@ -5,7 +5,8 @@ import {
   isTerrainNeutral,
   contains,
   usesTurnVars,
-  usesBattleVars
+  usesBattleVars,
+  blankArtifactLayers
 } from "./utils";
 
 // TODO - remove some shit from game.blah ?
@@ -17,6 +18,7 @@ export default function compileGameCode(def: FullDef) {
 import fullDef from '../../games/dist/games/${gameId}';
 import { relativedirs, reduce, pos2coords, coords2pos, boardPositions, offsetPos, posConnections, boardConnections, boardLayers, convertToEntities, deduceInitialUnitData, terrainLayers, mergeStrings, collapseLine } from '../../common';
       let game: any = {};
+      const emptyArtifactLayer = ${JSON.stringify(blankArtifactLayers(def))};
       game.commands = ${JSON.stringify(
         Object.keys(def.flow.commands).reduce((mem, c) => {
           mem[c] = 1;

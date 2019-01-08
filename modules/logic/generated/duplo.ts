@@ -16,6 +16,13 @@ import {
   collapseLine
 } from '../../common';
 let game: any = {};
+const emptyArtifactLayer = {
+  "spawndirs": {},
+  "growstarts": {},
+  "targets": {},
+  "potentialopptargets": {},
+  "spawns": {}
+};
 game.commands = {
   "deploy": 1,
   "expand": 1
@@ -111,12 +118,7 @@ game.debug = function() {
     }));
   };
   game.selectunit1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      spawndirs: Object.assign({}, step.ARTIFACTS.spawndirs),
-      growstarts: Object.assign({}, step.ARTIFACTS.growstarts),
-      targets: Object.assign({}, step.ARTIFACTS.targets),
-      potentialopptargets: Object.assign({}, step.ARTIFACTS.potentialopptargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -129,9 +131,15 @@ game.debug = function() {
         let POS = startconnections[DIR];
         if (POS) {
           if (!(UNITLAYERS.myunits[POS])) {
-            ARTIFACTS["spawndirs"][POS] = {
-              dir: DIR
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["spawndirs"]: {
+                ...ARTIFACTS["spawndirs"],
+                [POS]: {
+                  dir: DIR
+                }
+              }
+            }
           }
         }
       }
@@ -146,10 +154,16 @@ game.debug = function() {
           walkedsquares.push(POS);
         }
         var WALKLENGTH = walkedsquares.length;
-        ARTIFACTS["growstarts"][STARTPOS] = {
-          dir: relativedirs[5 - 2 + DIR],
-          strength: WALKLENGTH
-        };
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["growstarts"]: {
+            ...ARTIFACTS["growstarts"],
+            [STARTPOS]: {
+              dir: relativedirs[5 - 2 + DIR],
+              strength: WALKLENGTH
+            }
+          }
+        }
       }
     } {
       let allowedsteps =
@@ -178,16 +192,28 @@ game.debug = function() {
           LENGTH++;
           STEP++;
           if ((STEP === MAX)) {
-            ARTIFACTS["targets"][POS] = {
-              dir: relativedirs[5 - 2 + DIR]
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["targets"]: {
+                ...ARTIFACTS["targets"],
+                [POS]: {
+                  dir: relativedirs[5 - 2 + DIR]
+                }
+              }
+            }
           }
         }
         if (BLOCKS[POS]) {
-          ARTIFACTS["potentialopptargets"][POS] = {
-            dir: DIR,
-            strength: MAX
-          };
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["potentialopptargets"]: {
+              ...ARTIFACTS["potentialopptargets"],
+              [POS]: {
+                dir: DIR,
+                strength: MAX
+              }
+            }
+          }
         }
       }
     } {
@@ -204,9 +230,15 @@ game.debug = function() {
           LENGTH++;
         }
         if ((STOPREASON !== "reachedmax")) {
-          ARTIFACTS["targets"][STARTPOS] = {
-            dir: relativedirs[5 - 2 + DIR]
-          };
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["targets"]: {
+              ...ARTIFACTS["targets"],
+              [STARTPOS]: {
+                dir: relativedirs[5 - 2 + DIR]
+              }
+            }
+          }
         }
       }
     }
@@ -232,9 +264,7 @@ game.debug = function() {
     };
   };
   game.selecttarget1 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      spawns: Object.assign({}, step.ARTIFACTS.spawns)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selecttarget: markpos,
@@ -244,10 +274,22 @@ game.debug = function() {
       let STARTPOS = MARKS["selecttarget"];
       let POS = STARTPOS;
       while ((POS = connections[POS][(ARTIFACTS.targets[MARKS["selecttarget"]] || {})["dir"]]) && !BLOCKS[POS]) {
-        ARTIFACTS["spawns"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["spawns"]: {
+            ...ARTIFACTS["spawns"],
+            [POS]: {}
+          }
+        }
       }
       if (!(UNITLAYERS.units[STARTPOS])) {
-        ARTIFACTS["spawns"][STARTPOS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["spawns"]: {
+            ...ARTIFACTS["spawns"],
+            [STARTPOS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -294,7 +336,7 @@ game.debug = function() {
     });
   };
   game.deploy1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -324,13 +366,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "spawndirs": {},
-      "growstarts": {},
-      "targets": {},
-      "potentialopptargets": {},
-      "spawns": {}
-    };
     let newstepid = step.stepid + '-' + 'deploy';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -378,7 +413,7 @@ game.debug = function() {
     };
   };
   game.expand1 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -426,13 +461,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "spawndirs": {},
-      "growstarts": {},
-      "targets": {},
-      "potentialopptargets": {},
-      "spawns": {}
-    };
     let newstepid = step.stepid + '-' + 'expand';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -465,13 +493,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "spawndirs": {},
-      "growstarts": {},
-      "targets": {},
-      "potentialopptargets": {},
-      "spawns": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "soldiers": {},
@@ -595,12 +617,7 @@ game.debug = function() {
     }));
   };
   game.selectunit2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      spawndirs: Object.assign({}, step.ARTIFACTS.spawndirs),
-      growstarts: Object.assign({}, step.ARTIFACTS.growstarts),
-      targets: Object.assign({}, step.ARTIFACTS.targets),
-      potentialopptargets: Object.assign({}, step.ARTIFACTS.potentialopptargets)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selectunit: markpos
@@ -613,9 +630,15 @@ game.debug = function() {
         let POS = startconnections[DIR];
         if (POS) {
           if (!(UNITLAYERS.myunits[POS])) {
-            ARTIFACTS["spawndirs"][POS] = {
-              dir: DIR
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["spawndirs"]: {
+                ...ARTIFACTS["spawndirs"],
+                [POS]: {
+                  dir: DIR
+                }
+              }
+            }
           }
         }
       }
@@ -630,10 +653,16 @@ game.debug = function() {
           walkedsquares.push(POS);
         }
         var WALKLENGTH = walkedsquares.length;
-        ARTIFACTS["growstarts"][STARTPOS] = {
-          dir: relativedirs[5 - 2 + DIR],
-          strength: WALKLENGTH
-        };
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["growstarts"]: {
+            ...ARTIFACTS["growstarts"],
+            [STARTPOS]: {
+              dir: relativedirs[5 - 2 + DIR],
+              strength: WALKLENGTH
+            }
+          }
+        }
       }
     } {
       let allowedsteps =
@@ -662,16 +691,28 @@ game.debug = function() {
           LENGTH++;
           STEP++;
           if ((STEP === MAX)) {
-            ARTIFACTS["targets"][POS] = {
-              dir: relativedirs[5 - 2 + DIR]
-            };
+            ARTIFACTS = {
+              ...ARTIFACTS,
+              ["targets"]: {
+                ...ARTIFACTS["targets"],
+                [POS]: {
+                  dir: relativedirs[5 - 2 + DIR]
+                }
+              }
+            }
           }
         }
         if (BLOCKS[POS]) {
-          ARTIFACTS["potentialopptargets"][POS] = {
-            dir: DIR,
-            strength: MAX
-          };
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["potentialopptargets"]: {
+              ...ARTIFACTS["potentialopptargets"],
+              [POS]: {
+                dir: DIR,
+                strength: MAX
+              }
+            }
+          }
         }
       }
     } {
@@ -688,9 +729,15 @@ game.debug = function() {
           LENGTH++;
         }
         if ((STOPREASON !== "reachedmax")) {
-          ARTIFACTS["targets"][STARTPOS] = {
-            dir: relativedirs[5 - 2 + DIR]
-          };
+          ARTIFACTS = {
+            ...ARTIFACTS,
+            ["targets"]: {
+              ...ARTIFACTS["targets"],
+              [STARTPOS]: {
+                dir: relativedirs[5 - 2 + DIR]
+              }
+            }
+          }
         }
       }
     }
@@ -716,9 +763,7 @@ game.debug = function() {
     };
   };
   game.selecttarget2 = function(turn, step, markpos) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {
-      spawns: Object.assign({}, step.ARTIFACTS.spawns)
-    });
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     let MARKS = {
       selecttarget: markpos,
@@ -728,10 +773,22 @@ game.debug = function() {
       let STARTPOS = MARKS["selecttarget"];
       let POS = STARTPOS;
       while ((POS = connections[POS][(ARTIFACTS.targets[MARKS["selecttarget"]] || {})["dir"]]) && !BLOCKS[POS]) {
-        ARTIFACTS["spawns"][POS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["spawns"]: {
+            ...ARTIFACTS["spawns"],
+            [POS]: {}
+          }
+        }
       }
       if (!(UNITLAYERS.units[STARTPOS])) {
-        ARTIFACTS["spawns"][STARTPOS] = {};
+        ARTIFACTS = {
+          ...ARTIFACTS,
+          ["spawns"]: {
+            ...ARTIFACTS["spawns"],
+            [STARTPOS]: {}
+          }
+        }
       }
     }
     let newstepid = step.stepid + '-' + markpos;
@@ -778,7 +835,7 @@ game.debug = function() {
     });
   };
   game.deploy2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -808,13 +865,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "spawndirs": {},
-      "growstarts": {},
-      "targets": {},
-      "potentialopptargets": {},
-      "spawns": {}
-    };
     let newstepid = step.stepid + '-' + 'deploy';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -862,7 +912,7 @@ game.debug = function() {
     };
   };
   game.expand2 = function(turn, step) {
-    let ARTIFACTS = Object.assign({}, step.ARTIFACTS, {});
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITDATA = Object.assign({}, step.UNITDATA);
     let clones = step.clones;
@@ -910,13 +960,6 @@ game.debug = function() {
       let owner = ownernames[currentunit.owner]
       UNITLAYERS.units[unitpos] = UNITLAYERS[unitgroup][unitpos] = UNITLAYERS[owner + unitgroup][unitpos] = UNITLAYERS[owner + 'units'][unitpos] = currentunit;
     }
-    ARTIFACTS = {
-      "spawndirs": {},
-      "growstarts": {},
-      "targets": {},
-      "potentialopptargets": {},
-      "spawns": {}
-    };
     let newstepid = step.stepid + '-' + 'expand';
     let newstep = turn.steps[newstepid] = Object.assign({}, step, {
       ARTIFACTS: ARTIFACTS,
@@ -949,13 +992,7 @@ game.debug = function() {
       endMarks: {}
     };
     let MARKS = {};
-    let ARTIFACTS = {
-      "spawndirs": {},
-      "growstarts": {},
-      "targets": {},
-      "potentialopptargets": {},
-      "spawns": {}
-    };
+    let ARTIFACTS = emptyArtifactLayer;
     let UNITDATA = step.UNITDATA;
     let UNITLAYERS = {
       "soldiers": {},

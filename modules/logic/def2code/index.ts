@@ -13,8 +13,8 @@ import {
 export default function compileGameCode(def: FullDef) {
   def = preProcess(def);
   return `
-    function(){
-      var game = {};
+import { reduce, pos2coords, coords2pos, boardPositions, offsetPos, posConnections, boardConnections, boardLayers, convertToEntities, deduceInitialUnitData, terrainLayers, mergeStrings, collapseLine } from '../../common';
+      let game: any = {};
       game.commands = ${JSON.stringify(
         Object.keys(def.flow.commands).reduce((mem, c) => {
           mem[c] = 1;
@@ -25,29 +25,22 @@ export default function compileGameCode(def: FullDef) {
       game.board = ${JSON.stringify(def.board)};
       game.AI = ${JSON.stringify(Object.keys((def.AI && def.AI.brains) || {}))};
       game.id = "${def.meta.id}";
-      var boardDef = ${JSON.stringify(def.board)};
-      var connections = boardConnections(boardDef);
-      var BOARD = boardLayers(boardDef);
-      var relativedirs = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];
+      let boardDef = ${JSON.stringify(def.board)};
+      let connections = boardConnections(boardDef);
+      let BOARD = boardLayers(boardDef);
+      let relativedirs = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];
       ${
         isTerrainNeutral(def)
-          ? `var TERRAIN = terrainLayers(boardDef, 0${
+          ? `let TERRAIN = terrainLayers(boardDef, 0${
               def.AI && def.AI.terrain
                 ? `, ${JSON.stringify(def.AI.terrain)}`
                 : ""
             }); `
           : ""
       }
-
-      function reduce(coll,iterator,acc){
-        for(var key in coll){
-          acc = iterator(acc,coll[key],key);
-        }
-        return acc;
-      }
       game.newGame = function(){
-        var turnseed = { turn: 0 };
-        var stepseed = {
+        let turnseed = { turn: 0 };
+        let stepseed = {
           UNITDATA: deduceInitialUnitData(${JSON.stringify(def.setup || {})})
           ${usesTurnVars(def) ? ", TURNVARS: {}" : ""}
           ${usesBattleVars(def) ? ", BATTLEVARS: {}" : ""}
@@ -71,7 +64,6 @@ export default function compileGameCode(def: FullDef) {
       ${playerClosure(def, 1)}
       ${playerClosure(def, 2)}
 
-      return game;
-    }
+      export default game;
   `;
 }

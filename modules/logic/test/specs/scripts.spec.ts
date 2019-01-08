@@ -2,7 +2,7 @@
 This test executes scipted steps
 */
 
-import * as library from "../../dist/library.js";
+import library from "../../dist/library";
 import * as test from "tape";
 import { GameTestSuite } from "../../../types";
 import defs from "../../../games/dist/lib";

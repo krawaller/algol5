@@ -41,10 +41,10 @@ export default function draw(
     body = `
       ${
         !targetLayerPredefined
-          ? `var targetlayername=${expr.value(drawDef.tolayer)};`
+          ? `let targetlayername=${expr.value(drawDef.tolayer)};`
           : ""
       }
-      var artifact=${artifactLiteral};
+      let artifact=${artifactLiteral};
       ARTIFACTS[targetlayername][${posVar}]=artifact;
       ARTIFACTS[${prefix} + targetlayername][${posVar}]=artifact;
     `;

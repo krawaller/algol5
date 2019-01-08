@@ -29,7 +29,7 @@ export default function parseBool(
       let name = special.val(markname);
       return `
         Object.keys(turn.links[step.stepid]).filter(function(action){
-          var func = turn.links[step.stepid][action];
+          let func = turn.links[step.stepid][action];
           return func.substr(0,func.length-1) === ${name};
         }).length
       `;

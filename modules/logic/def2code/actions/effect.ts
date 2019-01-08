@@ -163,7 +163,7 @@ function executeEffect(
       `*/
       const [pos, propname, val, andThen] = args;
       return `
-        var unitid = (UNITLAYERS.units[${expr.position(pos)}] || {}).id;
+        let unitid = (UNITLAYERS.units[${expr.position(pos)}] || {}).id;
         if (unitid){
           UNITDATA[unitid]=Object.assign({},UNITDATA[unitid],{${expr.value(
             propname
@@ -229,7 +229,7 @@ function executeEffect(
       `,*/
       const [pos, group, owner, obj] = args;
       return `
-        var newunitid = 'spawn'+(clones++);
+        let newunitid = 'spawn'+(clones++);
         UNITDATA[newunitid] = {
           pos: ${expr.position(pos)},
           id: newunitid,
@@ -253,7 +253,7 @@ function executeEffect(
       `*/
       const [set, effect] = args;
       return `
-        for(var POS in ${expr.set(set)}){
+        for(let POS in ${expr.set(set)}){
           ${executeEffect(gameDef, player, action, effect)}
         }
       `;
@@ -277,8 +277,8 @@ function executeEffect(
       const setcode = expr.set(set);
       const obvious = setcode.substr(0, 10) === "UNITLAYERS";
       return `
-        var LOOPID;
-        for(var POS in ${setcode}){
+        let LOOPID;
+        for(let POS in ${setcode}){
           ${
             obvious
               ? "LOOPID=" + setcode + "[POS].id"
@@ -309,10 +309,10 @@ function executeEffect(
       `*/
       const [id, dir, dist] = args;
       return `
-        var pushid = ${expr.id(id)};
-        var pushdir = ${expr.value(dir)};
-        var dist = ${expr.value(dist)};
-        var newpos = UNITDATA[pushid].pos;
+        let pushid = ${expr.id(id)};
+        let pushdir = ${expr.value(dir)};
+        let dist = ${expr.value(dist)};
+        let newpos = UNITDATA[pushid].pos;
         while(dist && connections[newpos][pushdir]){
           newpos = connections[newpos][pushdir];
           dist--;
@@ -352,7 +352,7 @@ export default function applyEffectInstructions(
       player,
       action,
       ["all"].concat(actionDef.applyEffects),
-      effect => executeEffect(gameDef, player, action, effect)
+      effect => ` { ${ executeEffect(gameDef, player, action, effect) } } `
     );
   } else if (actionDef.applyEffect) {
     return obey(gameDef, player, action, actionDef.applyEffect, effect =>

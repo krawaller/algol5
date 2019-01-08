@@ -15,14 +15,14 @@ export default function executeNeighbours(
   // single start
   if (nghDef.start) {
     return `
-      var STARTPOS = ${parse.pos(nghDef.start)};
+      let STARTPOS = ${parse.pos(nghDef.start)};
       ${findAndDrawNeighboursFromStart(gameDef, player, action, nghDef)}
       ${draw(gameDef, player, action, nghDef.draw.start, "STARTPOS")}
     `;
     // many starts, must loop
   } else {
     return `
-      for(var STARTPOS in ${parse.set(nghDef.starts)}){
+      for(let STARTPOS in ${parse.set(nghDef.starts)}){
         ${findAndDrawNeighboursFromStart(gameDef, player, action, nghDef)}
         ${draw(gameDef, player, action, nghDef.draw.start, "STARTPOS")}
       }
@@ -48,16 +48,16 @@ function findAndDrawNeighboursFromStart(
     // many dirs, counting, no draw now
     return `
       ${findManyNeighbours(gameDef, player, action, nghDef)}
-      var NEIGHBOURCOUNT = foundneighbours.length;
+      let NEIGHBOURCOUNT = foundneighbours.length;
     `;
   } else if (nghDef.dirs && counting && nghDef.draw.neighbours) {
     // many dirs, counting, drawing neigh
     return `
       ${findManyNeighbours(gameDef, player, action, nghDef)}
-      var NEIGHBOURCOUNT = foundneighbours.length;
-      for(var neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){
+      let NEIGHBOURCOUNT = foundneighbours.length;
+      for(let neighbournbr=0; neighbournbr < NEIGHBOURCOUNT; neighbournbr++){
         POS=foundneighbours[neighbournbr];
-        ${dirMatters ? "var DIR=foundneighbourdirs[neighbournbr]; " : ""}
+        ${dirMatters ? "let DIR=foundneighbourdirs[neighbournbr]; " : ""}
         ${draw(gameDef, player, action, nghDef.draw.neighbours)}
       }
     `;
@@ -75,7 +75,7 @@ function findAndDrawNeighboursFromStart(
   } else {
     // one dir, sth in def needs to now which
     return `
-      var DIR=${parse.val(nghDef.dir)};
+      let DIR=${parse.val(nghDef.dir)};
       ${findAndDrawSingleNeighbour(gameDef, player, action, nghDef)}
     `;
   }
@@ -89,16 +89,17 @@ function findAndDrawSingleNeighbour(
   dirVar = "DIR"
 ) {
   const parse = makeParser(gameDef, player, action);
+  const drawCaresAboutCount = contains(nghDef.draw, ["neighbourcount"]);
   let conds = ["POS"];
   if (nghDef.condition) conds.push(parse.bool(nghDef.condition));
   if (nghDef.ifover) conds.push(parse.set(nghDef.ifover) + "[POS]");
   if (nghDef.unlessover)
     conds.push("!" + parse.set(nghDef.unlessover) + "[POS]");
-  const drawCaresAboutCount = contains(nghDef.draw, ["neighbourcount"]);
   return `
-    var POS=connections[STARTPOS][${dirVar}];
+    ${drawCaresAboutCount ? 'let NEIGHBOURCOUNT;' : ''}
+    let POS=connections[STARTPOS][${dirVar}];
     if (${conds.join(" && ")}){
-      ${drawCaresAboutCount ? "var NEIGHBOURCOUNT=1; " : ""}
+      ${drawCaresAboutCount ? "NEIGHBOURCOUNT=1; " : ""}
       ${draw(gameDef, player, action, nghDef.draw.neighbours)}
     }
   `;
@@ -119,13 +120,13 @@ function findManyNeighbours(
   const predictedNbrOfDirs = listlength(nghDef.dirs);
   let nbrOfDirs = predictedNbrOfDirs || "nbrofneighbourdirs";
   return `
-    var neighbourdirs = ${parse.list(nghDef.dirs)};
-    ${predictedNbrOfDirs ? "" : "var nbrofneighbourdirs=neighbourdirs.length; "}
-    ${countMatters ? "var foundneighbours = []; " : ""}
-    ${countMatters && dirMatters ? "var foundneighbourdirs=[]; " : ""}
-    var startconnections = connections[STARTPOS];
-    for(var dirnbr=0;dirnbr<${nbrOfDirs};dirnbr++){
-      ${dirMatters ? "var DIR=neighbourdirs[dirnbr]; " : ""}
+    let neighbourdirs = ${parse.list(nghDef.dirs)};
+    ${predictedNbrOfDirs ? "" : "let nbrofneighbourdirs=neighbourdirs.length; "}
+    ${countMatters ? "let foundneighbours = []; " : ""}
+    ${countMatters && dirMatters ? "let foundneighbourdirs=[]; " : ""}
+    let startconnections = connections[STARTPOS];
+    for(let dirnbr=0;dirnbr<${nbrOfDirs};dirnbr++){
+      ${dirMatters ? "let DIR=neighbourdirs[dirnbr]; " : ""}
       ${
         dirMatters
           ? findNeighbourInDir(
@@ -171,7 +172,7 @@ function findNeighbourInDir(
   if (nghDef.unlessover)
     conds.push("!" + parse.set(nghDef.unlessover) + "[POS]");
   return `
-    var POS=${startsVar}[${dirVar}];
+    let POS=${startsVar}[${dirVar}];
     if (${conds.join(" && ")}){
       ${countMatters ? "foundneighbours.push(POS); " : ""}
       ${countMatters && dirMatters ? "foundneighbourdirs.push(DIR); " : ""}

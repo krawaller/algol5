@@ -11,17 +11,17 @@ export default function playerClosure(def: FullDef, player: 1 | 2) {
       ${
         isTerrainNeutral(def)
           ? ""
-          : `var TERRAIN = terrainLayers(boardDef, ${player}${
+          : `let TERRAIN = terrainLayers(boardDef, ${player}${
               def.AI && def.AI.terrain
                 ? `, ${JSON.stringify(def.AI.terrain)}`
                 : ""
             }); `
       }
-      var ownernames = ${
+      let ownernames = ${
         player === 2 ? '["neutral","opp","my"]' : '["neutral","my","opp"]'
       };
-      var player = ${player};
-      var otherplayer = ${player === 1 ? 2 : 1};
+      let player = ${player};
+      let otherplayer = ${player === 1 ? 2 : 1};
       ${addAI(def, player)}
       ${Object.keys(def.flow.marks || {})
         .map(markname => addMarkFunc(def, markname, player))

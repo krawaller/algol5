@@ -34,8 +34,9 @@ export default function applyGenerators(
       player,
       action,
       ["all"].concat(actionDef.runGenerators),
-      generator =>
+      generator => `{ ${
         executeGenerator(gameDef, player, action, gameDef.generators[generator])
+      } }\n`
     );
   } else if (actionDef.runGenerator) {
     return obey(gameDef, player, action, actionDef.runGenerator, generator =>

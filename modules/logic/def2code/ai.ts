@@ -62,8 +62,8 @@ function calculateDetailedBrainScore(
 
 function addBrain(gameDef: FullDef, player: 1 | 2, brain: string) {
   const brainPrep = `
-    var UNITLAYERS = step.UNITLAYERS;
-    var ARTIFACTS = step.ARTIFACTS;
+    let UNITLAYERS = step.UNITLAYERS;
+    let ARTIFACTS = step.ARTIFACTS;
     ${(gameDef.AI.brains[brain].generators || [])
       .reduce((mem, genname) => {
         return mem.concat(
@@ -76,7 +76,7 @@ function addBrain(gameDef: FullDef, player: 1 | 2, brain: string) {
   const brainGenerators = (gameDef.AI.brains[brain].generators || []).reduce(
     (mem, genname) =>
       mem +
-      executeGenerator(gameDef, player, brain, gameDef.AI.generators[genname]),
+      ` { ${executeGenerator(gameDef, player, brain, gameDef.AI.generators[genname]) } } `,
     ""
   );
   return `
@@ -121,8 +121,8 @@ export default function addAI(gameDef: FullDef, player: 1 | 2) {
       return (
         str +
         `
-        var ${names[0]} = ${scoring(def[0])};
-        var ${names[1]} = ${scoring(plr2def)};
+        let ${names[0]} = ${scoring(def[0])};
+        let ${names[1]} = ${scoring(plr2def)};
       `
       );
     },

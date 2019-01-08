@@ -34,23 +34,23 @@ export default function addMarkFunction(
       "}";
   }
   const body = `
-    var MARKS = ${newMarkObject}; 
+    let MARKS = ${newMarkObject}; 
     ${applyGeneratorInstructions(def, player, markname, markDef)}
   `;
   const linking = applyLinkInstructions(def, player, markname, markDef, false);
   const preludium = ifCodeContains(body + linking, {
-    TURNVARS: "var TURNVARS = step.TURNVARS; ",
-    BATTLEVARS: "var BATTLEVARS = step.BATTLEVARS; ",
-    ARTIFACTS: "var ARTIFACTS = " + copyArtifactsForAction(def, markDef) + "; ",
-    UNITLAYERS: "var UNITLAYERS = step.UNITLAYERS; "
+    TURNVARS: "let TURNVARS = step.TURNVARS; ",
+    BATTLEVARS: "let BATTLEVARS = step.BATTLEVARS; ",
+    ARTIFACTS: "let ARTIFACTS = " + copyArtifactsForAction(def, markDef) + "; ",
+    UNITLAYERS: "let UNITLAYERS = step.UNITLAYERS; "
   });
   const instruction = expr.content(def.instructions[markname] || "");
   return `
       game.${markname}${player} = function(turn,step,markpos){
         ${preludium}
         ${body}
-        var newstepid = step.stepid+'-'+markpos;
-        var newstep = turn.steps[newstepid] = Object.assign({},step,{
+        let newstepid = step.stepid+'-'+markpos;
+        let newstep = turn.steps[newstepid] = Object.assign({},step,{
           ${
             markDef.runGenerator || markDef.runGenerators
               ? "ARTIFACTS: ARTIFACTS,"
@@ -67,10 +67,10 @@ export default function addMarkFunction(
       };
       game.${markname}${player}instruction = function(turn,step){
         ${ifCodeContains(instruction, {
-          MARKS: "var MARKS = step.MARKS; ",
-          ARTIFACTS: "var ARTIFACTS = step.ARTIFACTS; ",
-          UNITLAYERS: "var UNITLAYERS = step.UNITLAYERS; ",
-          UNITDATA: "var UNITDATA = step.UNITDATA; "
+          MARKS: "let MARKS = step.MARKS; ",
+          ARTIFACTS: "let ARTIFACTS = step.ARTIFACTS; ",
+          UNITLAYERS: "let UNITLAYERS = step.UNITLAYERS; ",
+          UNITDATA: "let UNITDATA = step.UNITDATA; "
         })}
         return ${instruction};
       };

@@ -18,12 +18,12 @@ export default function executeWalker(
   const intro = `
     ${
       needLevel(walkDef.steps, "start")
-        ? `var allowedsteps = ${parse.set(walkDef.steps)};`
+        ? `let allowedsteps = ${parse.set(walkDef.steps)};`
         : ""
     }
     ${
       needLevel(walkDef.blocks, "start")
-        ? `var BLOCKS = ${parse.set(walkDef.blocks)};`
+        ? `let BLOCKS = ${parse.set(walkDef.blocks)};`
         : ""
     }
   `;
@@ -31,8 +31,8 @@ export default function executeWalker(
     return (
       intro +
       `
-      var walkstarts = ${parse.set(walkDef.starts)};
-      for(var STARTPOS in walkstarts) {
+      let walkstarts = ${parse.set(walkDef.starts)};
+      for(let STARTPOS in walkstarts) {
         ${walkFromStart(gameDef, player, action, walkDef)}
       }
     `
@@ -41,7 +41,7 @@ export default function executeWalker(
     return (
       intro +
       `
-      var STARTPOS = ${parse.position(walkDef.start)};
+      let STARTPOS = ${parse.position(walkDef.start)};
       ${walkFromStart(gameDef, player, action, walkDef)}
     `
     );
@@ -59,12 +59,12 @@ function walkFromStart(
   const intro = `
     ${
       needLevel(walkDef.steps, "dir")
-        ? `var allowedsteps = ${parse.set(walkDef.steps)};`
+        ? `let allowedsteps = ${parse.set(walkDef.steps)};`
         : ""
     }
     ${
       needLevel(walkDef.blocks, "dir")
-        ? `var BLOCKS = ${parse.set(walkDef.blocks)};`
+        ? `let BLOCKS = ${parse.set(walkDef.blocks)};`
         : ""
     }
   `;
@@ -75,10 +75,10 @@ function walkFromStart(
     return (
       intro +
       `
-      var allwalkerdirs = ${parse.list(walkDef.dirs)};
-      ${!predictedNbrOfDirs ? "var nbrofwalkerdirs=allwalkerdirs.length; " : ""}
-      for(var walkerdirnbr=0; walkerdirnbr<${nbrOfDirs}; walkerdirnbr++){
-        ${dirMatters ? "var DIR = allwalkerdirs[walkerdirnbr]; " : ""}
+      let allwalkerdirs = ${parse.list(walkDef.dirs)};
+      ${!predictedNbrOfDirs ? "let nbrofwalkerdirs=allwalkerdirs.length; " : ""}
+      for(let walkerdirnbr=0; walkerdirnbr<${nbrOfDirs}; walkerdirnbr++){
+        ${dirMatters ? "let DIR = allwalkerdirs[walkerdirnbr]; " : ""}
         ${walkInDir(gameDef, player, action, walkDef, dirVar)}
       }
     `
@@ -88,7 +88,7 @@ function walkFromStart(
     return (
       intro +
       `
-      ${dirMatters ? `var DIR = ${parse.value(walkDef.dir)}; ` : ""}
+      ${dirMatters ? `let DIR = ${parse.value(walkDef.dir)}; ` : ""}
       ${walkInDir(gameDef, player, action, walkDef, dirVar)}
     `
     );
@@ -149,24 +149,24 @@ function walkInDir(
   return `
     ${
       needsWalkPath
-        ? "var walkedsquares = [];                                                    "
+        ? "let walkedsquares = [];                                                    "
         : ""
     }
     ${
       needsStopReason
-        ? 'var STOPREASON = "";                                                       '
+        ? 'let STOPREASON = "";                                                       '
         : ""
     }
     ${
       walkDef.max
-        ? `var MAX = ${parse.value(
+        ? `let MAX = ${parse.value(
             walkDef.max
           )};                                     `
         : ""
     }
     ${
       walkDef.startasstep
-        ? 'var POS = "faux";                                                          '
+        ? 'let POS = "faux";                                                          '
         : ""
     }
     ${
@@ -174,26 +174,26 @@ function walkInDir(
         ? "connections.faux[DIR]=STARTPOS;                                            "
         : ""
     }
-    ${!walkDef.startasstep ? "var POS = STARTPOS;" : ""}
+    ${!walkDef.startasstep ? "let POS = STARTPOS;" : ""}
     ${
       needLevel(walkDef.steps, "loop")
-        ? `var allowedsteps = ${parse.set(walkDef.steps)};`
+        ? `let allowedsteps = ${parse.set(walkDef.steps)};`
         : ""
     }
     ${
       needLevel(walkDef.blocks, "loop")
-        ? `var BLOCKS = ${parse.set(walkDef.blocks)};`
+        ? `let BLOCKS = ${parse.set(walkDef.blocks)};`
         : ""
     }
     ${
       walkDef.count
-        ? `var walkpositionstocount = ${parse.set(walkDef.count)};`
+        ? `let walkpositionstocount = ${parse.set(walkDef.count)};`
         : ""
     }
-    ${walkDef.count ? `var CURRENTCOUNT = 0;` : ""}
-    ${countSoFar ? `var countedwalkpositions = [];` : ""}
-    ${walkDef.max ? `var LENGTH = 0;` : ""}
-    ${drawStepsInLoop ? `var STEP = 0;` : ""}
+    ${walkDef.count ? `let CURRENTCOUNT = 0;` : ""}
+    ${countSoFar ? `let countedwalkpositions = [];` : ""}
+    ${walkDef.max ? `let LENGTH = 0;` : ""}
+    ${drawStepsInLoop ? `let STEP = 0;` : ""}
                                           while(${whileCondition}){
     ${needsWalkPath ? "  walkedsquares.push(POS);" : ""}
     ${

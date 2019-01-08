@@ -20,8 +20,8 @@ function addLink(
   } else if (gameDef && gameDef.flow.marks && gameDef.flow.marks[name]) {
     const markDef = gameDef.flow.marks[name];
     return `
-      var newlinks = turn.links${root ? ".root" : "[newstepid]"};
-      for(var linkpos in ${expr.set(markDef.from)}){
+      let newlinks = turn.links${root ? ".root" : "[newstepid]"};
+      for(let linkpos in ${expr.set(markDef.from)}){
           newlinks[linkpos] = '${name + player}';
       }
     `;
@@ -41,8 +41,8 @@ function addLink(
             gameDef.flow.endGame,
             (def, name) => `
       if (${expr.bool(def.condition)}) { 
-        var winner = ${expr.value(def.who || player)};
-        var result = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
+        let winner = ${expr.value(def.who || player)};
+        let result = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
         turn.links[newstepid][result] = '${name}';
         ${
           def.show
@@ -76,7 +76,7 @@ export default function applyLinkInstructions(
       player,
       action,
       ["all"].concat(actionDef.links),
-      link => addLink(gameDef, player, action, link, root)
+      link => ` { ${addLink(gameDef, player, action, link, root) } } `
     );
   } else {
     return obey(gameDef, player, action, actionDef.link, link =>

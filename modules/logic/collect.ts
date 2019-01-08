@@ -5,22 +5,37 @@ at `dist/library.js`. That file exports an object containing all games,
 which is imported from within the engine files.
 */
 
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
-let games = fs.readdirSync(__dirname+"/temp/").filter(f => f != '.DS_Store').map(gamename=>{
-  let code = fs.readFileSync(__dirname+"/temp/"+gamename)
-  console.log("Collecting",gamename)
-  return gamename.replace('.js','')+': '+code
-})
+const generated = path.join(__dirname, 'generated');
+const out = path.join(__dirname, 'dist');
 
-let envelope = fs.readFileSync(__dirname + "/envelope.js") + '';
+fs.removeSync(out);
+fs.ensureDirSync(out);
+fs.ensureDirSync(path.join(out, "games"));
 
-let file = `
-${envelope}
+const files = fs.readdirSync(generated).filter(f => f != '.DS_Store');
 
-module.exports = {
-  ${games.join(', ')}
-};
+files.forEach(f => {
+  const gameId = f.replace(/\.ts$/,'');
+  fs.writeFileSync(path.join(out, "games", f), `
+import ${gameId} from '../../generated/${gameId}';
+
+export default ${gameId};
+`);
+});
+
+const gameIds = files.map(f => f.replace(/\.ts$/,''));
+fs.writeFileSync(
+  path.join(out, "library.ts"),
+  `${gameIds
+    .map(gid => `import ${gid} from './games/${gid}';`)
+    .join("\n")}
+
+const lib = {
+${gameIds.map(gid => `  ${gid},\n`).join("")}};
+
+export default lib;
 `
-
-fs.writeFileSync(__dirname+'/dist/library.js',file);
+);

@@ -13,7 +13,7 @@ export default function executeFilter(
 ) {
   const parse = makeParse(gameDef, player, action);
   const toLayerDependsOnTarget = contains(filterDef.tolayer, "target");
-  const assignTargetLayerVar = `var filtertargetlayer = ${layerRef(
+  const assignTargetLayerVar = `let filtertargetlayer = ${layerRef(
     gameDef,
     player,
     action,
@@ -37,17 +37,17 @@ export default function executeFilter(
     )
     .join(" && ");
   return `
-    var filtersourcelayer = ${layerRef(
+    let filtersourcelayer = ${layerRef(
       gameDef,
       player,
       action,
       filterDef.layer
     )};
     ${!toLayerDependsOnTarget ? assignTargetLayerVar : ""}
-    for (var POS in filtersourcelayer){
+    for (let POS in filtersourcelayer){
       ${toLayerDependsOnTarget ? assignTargetLayerVar : ""}
       if (filtersourcelayer[POS]){
-        var filterobj = filtersourcelayer[POS];
+        let filterobj = filtersourcelayer[POS];
         if (${condition}){
           filtertargetlayer[POS] = filterobj;
         }

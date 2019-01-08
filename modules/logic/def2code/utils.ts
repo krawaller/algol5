@@ -21,7 +21,7 @@ export function deduceDynamicGroups(rules: any) {
       : isArray(rules) || isObject(rules)
       ? reduce(rules, (mem, def) => mem.concat(deduceDynamicGroups(def)), [])
       : []
-  ).sort();
+  ).filter(g => typeof g === 'string').sort();
 }
 
 export function blankUnitLayers(gameDef: FullDef) {

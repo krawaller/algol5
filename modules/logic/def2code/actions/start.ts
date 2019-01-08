@@ -16,23 +16,23 @@ export default function addStartFunction(def: FullDef, player: 1 | 2) {
   const startDef = def.flow.startTurn || {};
   const instruction = expr.content(def.instructions.startTurn || "");
   return `
-    game.start${player} = function(turn,step){
-      var turn = {
+    game.start${player} = function(lastTurn,step){
+      let turn: { [f:string]: any } = {
         steps: {},
         player: player,
-        turn: turn.turn+1,
+        turn: lastTurn.turn+1,
         links: {root:{}},
         endMarks: {}
       };
 
-      var MARKS = {}; 
-      var ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
-      var UNITDATA = step.UNITDATA;
-      ${usesTurnVars(def) ? "var TURNVARS = {}; " : ""}
-      ${usesBattleVars(def) ? "var BATTLEVARS = step.BATTLEVARS; " : ""}
+      let MARKS = {}; 
+      let ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
+      let UNITDATA = step.UNITDATA;
+      ${usesTurnVars(def) ? "let TURNVARS = {}; " : ""}
+      ${usesBattleVars(def) ? "let BATTLEVARS = step.BATTLEVARS; " : ""}
       ${calculateUnitLayers(def, player, true)}
       ${applyGenerators(def, player, "startturn", startDef)}
-      var newstep = turn.steps.root = {
+      let newstep = turn.steps.root = {
         ARTIFACTS: ARTIFACTS,
         UNITDATA: UNITDATA,
         UNITLAYERS: UNITLAYERS,
@@ -55,10 +55,10 @@ export default function addStartFunction(def: FullDef, player: 1 | 2) {
     }
     game.start${player}instruction = function(turn,step){
       ${ifCodeContains(instruction, {
-        MARKS: "var MARKS = step.MARKS; ",
-        ARTIFACTS: "var ARTIFACTS = step.ARTIFACTS; ",
-        UNITLAYERS: "var UNITLAYERS = step.UNITLAYERS; ",
-        UNITDATA: "var UNITDATA = step.UNITDATA; "
+        MARKS: "let MARKS = step.MARKS; ",
+        ARTIFACTS: "let ARTIFACTS = step.ARTIFACTS; ",
+        UNITLAYERS: "let UNITLAYERS = step.UNITLAYERS; ",
+        UNITDATA: "let UNITDATA = step.UNITDATA; "
       })}
       return ${instruction};
     };

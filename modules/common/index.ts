@@ -138,7 +138,7 @@ export function deduceInitialUnitData(setup) {
 Calculates all terrain layers and returns them. 
 This should be done per player if any terrain has owner.
 */
-export function terrainLayers(board, forplayer?, aiterrain?){
+export function terrainLayers(board, forplayer?, aiterrain?): any{
   var terrainDef = { ...board.terrain, ...aiterrain };
   if (!Object.keys(terrainDef).length){
     return {};
@@ -217,4 +217,11 @@ export function collapseLine(line){
     type: "line",
     content: parts
   };
+}
+
+export function reduce(coll, iterator, acc) {
+  for (var key in coll) {
+    acc = iterator(acc, coll[key], key);
+  }
+  return acc;
 }

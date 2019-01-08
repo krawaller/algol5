@@ -63,14 +63,14 @@ export function calculateUnitLayers(
   defineVariable: boolean
 ) {
   return `
-    ${defineVariable ? "var " : ""}UNITLAYERS = ${JSON.stringify(
+    ${defineVariable ? "let " : ""}UNITLAYERS = ${JSON.stringify(
     blankUnitLayers(gameDef)
   )};
-    for (var unitid in UNITDATA) {
-        var currentunit = UNITDATA[unitid]
-        var unitgroup = currentunit.group;
-        var unitpos = currentunit.pos;
-        var owner = ownernames[currentunit.owner]
+    for (let unitid in UNITDATA) {
+        let currentunit = UNITDATA[unitid]
+        let unitgroup = currentunit.group;
+        let unitpos = currentunit.pos;
+        let owner = ownernames[currentunit.owner]
         UNITLAYERS.units[unitpos]
             = UNITLAYERS[unitgroup][unitpos]
             = UNITLAYERS[owner + unitgroup][unitpos]

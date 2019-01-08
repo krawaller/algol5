@@ -25,7 +25,7 @@ export default function parseSet(
       const [pos] = details;
       return `
         (function(){
-            var ret = {};
+            let ret = {};
             ret[${parse.position(pos)}]=1;
             return ret;
         }())`;
@@ -41,7 +41,7 @@ export default function parseSet(
           .join(" ");
       return `
         (function(){
-            var k, ret={}, ${setdefs};
+            let k, ret={}, ${setdefs};
             ${copies}
             return ret;
         }())`;
@@ -57,8 +57,8 @@ export default function parseSet(
           .join(" && ");
       return `
         (function(){
-          var ret={}, ${setdefs};
-          for(var key in s0){
+          let ret={}, ${setdefs};
+          for(let key in s0){
             if (${test}){
               ret[key]=s0[key];
             }
@@ -77,8 +77,8 @@ export default function parseSet(
           .join(" && ");
       return `
         (function(){
-          var ret={}, ${setdefs};
-          for(var key in s0){
+          let ret={}, ${setdefs};
+          for(let key in s0){
             if (${test}){
               ret[key]=s0[key];
             }

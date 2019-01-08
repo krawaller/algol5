@@ -23,23 +23,23 @@ export default function addCommandFunction(
   const instruction = expr.content(def.instructions[cmndname] || "");
   return `
     game.${cmndname}${player} = function(turn,step){
-      var ARTIFACTS = ${copyArtifactsForAction(def, cmndDef)};
-      var MARKS = step.MARKS;
-      var UNITDATA = Object.assign({},step.UNITDATA);
+      let ARTIFACTS = ${copyArtifactsForAction(def, cmndDef)};
+      let MARKS = step.MARKS;
+      let UNITDATA = Object.assign({},step.UNITDATA);
       ${
         contains(cmndDef, "spawn") || contains(cmndDef, "spawnin")
-          ? "var clones = step.clones; "
+          ? "let clones = step.clones; "
           : ""
       }
-      var UNITLAYERS = step.UNITLAYERS;
+      let UNITLAYERS = step.UNITLAYERS;
       ${
         usesTurnVars(cmndDef)
-          ? "var TURNVARS = Object.assign({},step.TURNVARS); "
+          ? "let TURNVARS = Object.assign({},step.TURNVARS); "
           : ""
       }
       ${
         usesBattleVars(cmndDef)
-          ? "var BATTLEVARS = Object.assign({},step.BATTLEVARS); "
+          ? "let BATTLEVARS = Object.assign({},step.BATTLEVARS); "
           : ""
       }
 
@@ -49,8 +49,8 @@ export default function addCommandFunction(
       ARTIFACTS = ${JSON.stringify(blankArtifactLayers(def))};
       ${applyGeneratorInstructions(def, player, cmndname, cmndDef)}
 
-      var newstepid = step.stepid+'-'+'${cmndname}';
-      var newstep = turn.steps[newstepid] = Object.assign({},step,{
+      let newstepid = step.stepid+'-'+'${cmndname}';
+      let newstep = turn.steps[newstepid] = Object.assign({},step,{
         ARTIFACTS: ARTIFACTS,
         MARKS: MARKS,
         UNITDATA: UNITDATA,
@@ -74,10 +74,10 @@ export default function addCommandFunction(
     }
     game.${cmndname}${player}instruction = function(turn,step){
       ${ifCodeContains(instruction, {
-        MARKS: "var MARKS = step.MARKS; ",
-        ARTIFACTS: "var ARTIFACTS = step.ARTIFACTS; ",
-        UNITLAYERS: "var UNITLAYERS = step.UNITLAYERS; ",
-        UNITDATA: "var UNITDATA = step.UNITDATA; "
+        MARKS: "let MARKS = step.MARKS; ",
+        ARTIFACTS: "let ARTIFACTS = step.ARTIFACTS; ",
+        UNITLAYERS: "let UNITLAYERS = step.UNITLAYERS; ",
+        UNITDATA: "let UNITDATA = step.UNITDATA; "
       })}
       return ${instruction};
     };

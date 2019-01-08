@@ -12,20 +12,22 @@ in `collect.js`.
 import compileGameToCode from "./def2code/";
 
 import * as fs from "fs-extra";
+import * as path from 'path';
 
 import { js_beautify } from "js-beautify";
 
 import lib from "../games/dist/lib";
 
-fs.removeSync(__dirname + "/temp/");
+const out = path.join(__dirname + "/generated")
 
-fs.mkdirSync(__dirname + "/temp/");
+fs.removeSync(out);
+
+fs.mkdirSync(out);
 
 for (let gameId in lib) {
   let rules = lib[gameId];
   console.log("Building", gameId);
   let code = compileGameToCode(rules);
-  code = `(${code})()`;
   code = js_beautify(code, { indent_size: 2 }).replace(/\n{1,}/g, "\n");
-  fs.writeFileSync(__dirname + "/temp/" + gameId + ".js", code);
+  fs.writeFileSync(path.join(out, gameId + ".ts"), code);
 }

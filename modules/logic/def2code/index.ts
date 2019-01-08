@@ -11,9 +11,11 @@ import {
 // TODO - remove some shit from game.blah ?
 
 export default function compileGameCode(def: FullDef) {
+  const gameId = def.meta.id;
   def = preProcess(def);
   return `
-import { reduce, pos2coords, coords2pos, boardPositions, offsetPos, posConnections, boardConnections, boardLayers, convertToEntities, deduceInitialUnitData, terrainLayers, mergeStrings, collapseLine } from '../../common';
+import fullDef from '../../games/dist/games/${gameId}';
+import { relativedirs, reduce, pos2coords, coords2pos, boardPositions, offsetPos, posConnections, boardConnections, boardLayers, convertToEntities, deduceInitialUnitData, terrainLayers, mergeStrings, collapseLine } from '../../common';
       let game: any = {};
       game.commands = ${JSON.stringify(
         Object.keys(def.flow.commands).reduce((mem, c) => {
@@ -25,13 +27,11 @@ import { reduce, pos2coords, coords2pos, boardPositions, offsetPos, posConnectio
       game.board = ${JSON.stringify(def.board)};
       game.AI = ${JSON.stringify(Object.keys((def.AI && def.AI.brains) || {}))};
       game.id = "${def.meta.id}";
-      let boardDef = ${JSON.stringify(def.board)};
-      let connections = boardConnections(boardDef);
-      let BOARD = boardLayers(boardDef);
-      let relativedirs = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];
+      let connections = boardConnections(fullDef.board);
+      let BOARD = boardLayers(fullDef.board);
       ${
         isTerrainNeutral(def)
-          ? `let TERRAIN = terrainLayers(boardDef, 0${
+          ? `let TERRAIN = terrainLayers(fullDef.board, 0${
               def.AI && def.AI.terrain
                 ? `, ${JSON.stringify(def.AI.terrain)}`
                 : ""

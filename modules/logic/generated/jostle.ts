@@ -1,4 +1,6 @@
+import fullDef from '../../games/dist/games/jostle';
 import {
+  relativedirs,
   reduce,
   pos2coords,
   coords2pos,
@@ -30,15 +32,9 @@ game.board = {
 };
 game.AI = [];
 game.id = "jostle";
-let boardDef = {
-  "height": 10,
-  "width": 10,
-  "terrain": {}
-};
-let connections = boardConnections(boardDef);
-let BOARD = boardLayers(boardDef);
-let relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
-let TERRAIN = terrainLayers(boardDef, 0);
+let connections = boardConnections(fullDef.board);
+let BOARD = boardLayers(fullDef.board);
+let TERRAIN = terrainLayers(fullDef.board, 0);
 game.newGame = function() {
   let turnseed = {
     turn: 0
@@ -61,7 +57,8 @@ game.debug = function() {
     plr2: game.debug2()
   };
 };
-(function() {
+{
+  // Actions for player 1
   let ownernames = ["neutral", "my", "opp"];
   let player = 1;
   let otherplayer = 2;
@@ -366,8 +363,9 @@ game.debug = function() {
       TERRAIN: TERRAIN
     };
   }
-})();
-(function() {
+};
+{
+  // Actions for player 2
   let ownernames = ["neutral", "opp", "my"];
   let player = 2;
   let otherplayer = 1;
@@ -672,5 +670,5 @@ game.debug = function() {
       TERRAIN: TERRAIN
     };
   }
-})();
+};
 export default game;

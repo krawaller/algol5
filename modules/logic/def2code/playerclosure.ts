@@ -7,11 +7,13 @@ import addAI from "./ai";
 
 export default function playerClosure(def: FullDef, player: 1 | 2) {
   return `
-    (function(){
+    {
+      // Actions for player ${player}
+
       ${
         isTerrainNeutral(def)
           ? ""
-          : `let TERRAIN = terrainLayers(boardDef, ${player}${
+          : `let TERRAIN = terrainLayers(fullDef.board, ${player}${
               def.AI && def.AI.terrain
                 ? `, ${JSON.stringify(def.AI.terrain)}`
                 : ""
@@ -33,6 +35,6 @@ export default function playerClosure(def: FullDef, player: 1 | 2) {
       game.debug${player} = function(){
         return {TERRAIN:TERRAIN};
       }
-    })();
+    };
   `;
 }

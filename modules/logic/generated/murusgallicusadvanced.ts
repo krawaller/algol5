@@ -1,4 +1,6 @@
+import fullDef from '../../games/dist/games/murusgallicusadvanced';
 import {
+  relativedirs,
   reduce,
   pos2coords,
   coords2pos,
@@ -46,23 +48,8 @@ game.board = {
 };
 game.AI = [];
 game.id = "murusgallicusadvanced";
-let boardDef = {
-  "height": 7,
-  "width": 8,
-  "terrain": {
-    "homerow": {
-      "1": [
-        ["rect", "a1", "h1"]
-      ],
-      "2": [
-        ["rect", "a7", "h7"]
-      ]
-    }
-  }
-};
-let connections = boardConnections(boardDef);
-let BOARD = boardLayers(boardDef);
-let relativedirs = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
+let connections = boardConnections(fullDef.board);
+let BOARD = boardLayers(fullDef.board);
 game.newGame = function() {
   let turnseed = {
     turn: 0
@@ -91,8 +78,9 @@ game.debug = function() {
     plr2: game.debug2()
   };
 };
-(function() {
-  let TERRAIN = terrainLayers(boardDef, 1);
+{
+  // Actions for player 1
+  let TERRAIN = terrainLayers(fullDef.board, 1);
   let ownernames = ["neutral", "my", "opp"];
   let player = 1;
   let otherplayer = 2;
@@ -1141,9 +1129,10 @@ game.debug = function() {
       TERRAIN: TERRAIN
     };
   }
-})();
-(function() {
-  let TERRAIN = terrainLayers(boardDef, 2);
+};
+{
+  // Actions for player 2
+  let TERRAIN = terrainLayers(fullDef.board, 2);
   let ownernames = ["neutral", "opp", "my"];
   let player = 2;
   let otherplayer = 1;
@@ -2192,5 +2181,5 @@ game.debug = function() {
       TERRAIN: TERRAIN
     };
   }
-})();
+};
 export default game;

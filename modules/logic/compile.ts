@@ -14,7 +14,7 @@ import compileGameToCode from "./def2code/";
 import * as fs from "fs-extra";
 import * as path from 'path';
 
-import { js_beautify } from "js-beautify";
+import * as prettier from 'prettier';
 
 import lib from "../games/dist/lib";
 
@@ -28,6 +28,9 @@ for (let gameId in lib) {
   let rules = lib[gameId];
   console.log("Building", gameId);
   let code = compileGameToCode(rules);
-  code = js_beautify(code, { indent_size: 2 }).replace(/\n{1,}/g, "\n");
+  
+  code =  prettier.format(code, {
+    parser: "typescript"
+  });
   fs.writeFileSync(path.join(out, gameId + ".ts"), code);
 }

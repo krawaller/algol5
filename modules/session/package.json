@@ -17,7 +17,8 @@
     "bundle": "webpack",
     "bundleasync": "cd dist; workerwrap algol.js",
     "build": "npm run clean && npm run bundle && npm run bundleasync",
-    "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec"
+    "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec",
+    "perf": "ts-node perf"
   },
   "dependencies": {
     "classical-cipher": "0.0.3",

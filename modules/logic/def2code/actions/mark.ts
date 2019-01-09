@@ -50,7 +50,7 @@ export default function addMarkFunction(
         ${preludium}
         ${body}
         let newstepid = step.stepid+'-'+markpos;
-        let newstep = turn.steps[newstepid] = Object.assign({},step,{
+        let newstep = turn.steps[newstepid] = { ...step,
           ${
             markDef.runGenerator || markDef.runGenerators
               ? "ARTIFACTS: ARTIFACTS,"
@@ -60,7 +60,7 @@ export default function addMarkFunction(
           stepid: newstepid,
           path: step.path.concat(markpos),
           name: '${markname}'
-        });
+        };
         turn.links[newstepid] = {};
         ${linking}
         return newstep;

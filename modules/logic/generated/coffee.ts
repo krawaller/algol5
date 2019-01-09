@@ -108,13 +108,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectdrop"
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.uphill).length !== 0) {
@@ -193,7 +194,7 @@ game.debug = function() {
   game.uphill1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -284,7 +285,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "uphill";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -293,7 +295,7 @@ game.debug = function() {
       name: "uphill",
       path: step.path.concat("uphill"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.markers).length === 0) {
@@ -313,7 +315,7 @@ game.debug = function() {
   game.downhill1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -404,7 +406,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "downhill";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -413,7 +416,7 @@ game.debug = function() {
       name: "downhill",
       path: step.path.concat("downhill"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.markers).length === 0) {
@@ -433,7 +436,7 @@ game.debug = function() {
   game.horisontal1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -524,7 +527,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "horisontal";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -533,7 +537,7 @@ game.debug = function() {
       name: "horisontal",
       path: step.path.concat("horisontal"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.markers).length === 0) {
@@ -553,7 +557,7 @@ game.debug = function() {
   game.vertical1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -644,7 +648,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "vertical";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -653,7 +658,7 @@ game.debug = function() {
       name: "vertical",
       path: step.path.concat("vertical"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.markers).length === 0) {
@@ -800,13 +805,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectdrop"
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.uphill).length !== 0) {
@@ -885,7 +891,7 @@ game.debug = function() {
   game.uphill2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -976,7 +982,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "uphill";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -985,7 +992,7 @@ game.debug = function() {
       name: "uphill",
       path: step.path.concat("uphill"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.markers).length === 0) {
@@ -1005,7 +1012,7 @@ game.debug = function() {
   game.downhill2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1096,7 +1103,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "downhill";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1105,7 +1113,7 @@ game.debug = function() {
       name: "downhill",
       path: step.path.concat("downhill"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.markers).length === 0) {
@@ -1125,7 +1133,7 @@ game.debug = function() {
   game.horisontal2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1216,7 +1224,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "horisontal";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1225,7 +1234,7 @@ game.debug = function() {
       name: "horisontal",
       path: step.path.concat("horisontal"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.markers).length === 0) {
@@ -1245,7 +1254,7 @@ game.debug = function() {
   game.vertical2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1336,7 +1345,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "vertical";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1345,7 +1355,7 @@ game.debug = function() {
       name: "vertical",
       path: step.path.concat("vertical"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.markers).length === 0) {

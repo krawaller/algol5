@@ -89,13 +89,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
 
     let newlinks = turn.links[newstepid];
@@ -170,13 +171,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectmovetarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (
@@ -239,15 +241,16 @@ game.debug = function() {
   game.jostle1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
 
     let UNITLAYERS = step.UNITLAYERS;
 
     let unitid = (UNITLAYERS.units[MARKS["selectunit"]] || {}).id;
     if (unitid) {
-      UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+      UNITDATA[unitid] = {
+        ...UNITDATA[unitid],
         pos: MARKS["selectmovetarget"]
-      });
+      };
     }
 
     MARKS = {};
@@ -273,7 +276,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "jostle";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -281,7 +285,7 @@ game.debug = function() {
       stepid: newstepid,
       name: "jostle",
       path: step.path.concat("jostle")
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].endturn = "start" + otherplayer;
@@ -391,13 +395,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
 
     let newlinks = turn.links[newstepid];
@@ -472,13 +477,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectmovetarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (
@@ -541,15 +547,16 @@ game.debug = function() {
   game.jostle2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
 
     let UNITLAYERS = step.UNITLAYERS;
 
     let unitid = (UNITLAYERS.units[MARKS["selectunit"]] || {}).id;
     if (unitid) {
-      UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+      UNITDATA[unitid] = {
+        ...UNITDATA[unitid],
         pos: MARKS["selectmovetarget"]
-      });
+      };
     }
 
     MARKS = {};
@@ -575,7 +582,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "jostle";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -583,7 +591,7 @@ game.debug = function() {
       stepid: newstepid,
       name: "jostle",
       path: step.path.concat("jostle")
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].endturn = "start" + otherplayer;

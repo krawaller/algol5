@@ -60,12 +60,14 @@ game.debug = function() {
     let MARKS = Object.assign({}, step.MARKS, { selectdeploy: markpos });
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectdeploy"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].deploy = "deploy1";
@@ -253,13 +255,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
 
     let newlinks = turn.links[newstepid];
@@ -313,13 +316,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selecttarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].expand = "expand1";
@@ -348,7 +352,7 @@ game.debug = function() {
   game.deploy1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -383,7 +387,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "deploy";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -392,7 +397,7 @@ game.debug = function() {
       name: "deploy",
       path: step.path.concat("deploy"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.mysoldiers).length > 1) {
@@ -441,7 +446,7 @@ game.debug = function() {
   game.expand1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -494,7 +499,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "expand";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -503,7 +509,7 @@ game.debug = function() {
       name: "expand",
       path: step.path.concat("expand"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.units).length === 64) {
@@ -615,12 +621,14 @@ game.debug = function() {
     let MARKS = Object.assign({}, step.MARKS, { selectdeploy: markpos });
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectdeploy"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].deploy = "deploy2";
@@ -808,13 +816,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
 
     let newlinks = turn.links[newstepid];
@@ -868,13 +877,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selecttarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].expand = "expand2";
@@ -903,7 +913,7 @@ game.debug = function() {
   game.deploy2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -938,7 +948,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "deploy";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -947,7 +958,7 @@ game.debug = function() {
       name: "deploy",
       path: step.path.concat("deploy"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.mysoldiers).length > 1) {
@@ -996,7 +1007,7 @@ game.debug = function() {
   game.expand2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1049,7 +1060,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "expand";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1058,7 +1070,7 @@ game.debug = function() {
       name: "expand",
       path: step.path.concat("expand"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(UNITLAYERS.units).length === 64) {

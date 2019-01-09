@@ -147,9 +147,9 @@ function executeEffect(
       `,*/
       const [id, propname, val] = args;
       return `
-        UNITDATA[${expr.id(id)}]=Object.assign({},UNITDATA[${expr.id(id)}],{
+        UNITDATA[${expr.id(id)}]= { ...UNITDATA[${expr.id(id)}],
           ${expr.value(propname)}: ${expr.value(val)}
-        });
+        };
       `;
     }
     case "setat": {
@@ -165,9 +165,9 @@ function executeEffect(
       return `
         let unitid = (UNITLAYERS.units[${expr.position(pos)}] || {}).id;
         if (unitid){
-          UNITDATA[unitid]=Object.assign({},UNITDATA[unitid],{${expr.value(
+          UNITDATA[unitid]= {...UNITDATA[unitid],${expr.value(
             propname
-          )}:${expr.value(val)}});
+          )}:${expr.value(val)}};
           ${andThen ? executeEffect(gameDef, player, action, andThen) : ""}
         }
       `;
@@ -317,7 +317,7 @@ function executeEffect(
           newpos = connections[newpos][pushdir];
           dist--;
         }
-        UNITDATA[pushid]=Object.assign({},UNITDATA[pushid],{pos: newpos});
+        UNITDATA[pushid]={...UNITDATA[pushid],pos: newpos};
       `;
     }
     case "pushin": {

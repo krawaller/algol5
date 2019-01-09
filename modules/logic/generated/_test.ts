@@ -284,13 +284,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
 
     let newlinks = turn.links[newstepid];
@@ -320,12 +321,14 @@ game.debug = function() {
     let MARKS = { selectmark: markpos, selectunit: step.MARKS.selectunit };
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectmark"
-    }));
+    });
     turn.links[newstepid] = {};
     turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;
@@ -640,13 +643,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
 
     let newlinks = turn.links[newstepid];
@@ -676,12 +680,14 @@ game.debug = function() {
     let MARKS = { selectmark: markpos, selectunit: step.MARKS.selectunit };
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectmark"
-    }));
+    });
     turn.links[newstepid] = {};
     turn.links[newstepid].endturn = "start" + otherplayer;
     return newstep;

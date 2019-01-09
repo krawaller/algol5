@@ -73,13 +73,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
 
     let newlinks = turn.links[newstepid];
@@ -119,12 +120,14 @@ game.debug = function() {
     };
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectmovetarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].move = "move1";
@@ -157,15 +160,16 @@ game.debug = function() {
   game.move1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
 
     let UNITLAYERS = step.UNITLAYERS;
 
     let unitid = (UNITLAYERS.units[MARKS["selectunit"]] || {}).id;
     if (unitid) {
-      UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+      UNITDATA[unitid] = {
+        ...UNITDATA[unitid],
         pos: MARKS["selectmovetarget"]
-      });
+      };
     }
 
     MARKS = {};
@@ -232,7 +236,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "move";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -240,7 +245,7 @@ game.debug = function() {
       stepid: newstepid,
       name: "move",
       path: step.path.concat("move")
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
@@ -368,13 +373,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
 
     let newlinks = turn.links[newstepid];
@@ -414,12 +420,14 @@ game.debug = function() {
     };
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectmovetarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].move = "move2";
@@ -452,15 +460,16 @@ game.debug = function() {
   game.move2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
 
     let UNITLAYERS = step.UNITLAYERS;
 
     let unitid = (UNITLAYERS.units[MARKS["selectunit"]] || {}).id;
     if (unitid) {
-      UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+      UNITDATA[unitid] = {
+        ...UNITDATA[unitid],
         pos: MARKS["selectmovetarget"]
-      });
+      };
     }
 
     MARKS = {};
@@ -527,7 +536,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "move";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -535,7 +545,7 @@ game.debug = function() {
       stepid: newstepid,
       name: "move",
       path: step.path.concat("move")
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {

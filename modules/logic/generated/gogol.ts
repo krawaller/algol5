@@ -78,12 +78,14 @@ game.debug = function() {
     let MARKS = { selectkingdeploy: markpos };
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectkingdeploy"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].deploy = "deploy1";
@@ -217,13 +219,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
     {
       let newlinks = turn.links[newstepid];
@@ -377,12 +380,14 @@ game.debug = function() {
     };
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectmovetarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].move = "move1";
@@ -427,13 +432,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectjumptarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].jump = "jump1";
@@ -475,7 +481,7 @@ game.debug = function() {
   game.deploy1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -514,7 +520,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "deploy";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -523,7 +530,7 @@ game.debug = function() {
       name: "deploy",
       path: step.path.concat("deploy"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (
@@ -556,15 +563,16 @@ game.debug = function() {
   game.move1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
 
     let UNITLAYERS = step.UNITLAYERS;
 
     let unitid = (UNITLAYERS.units[MARKS["selectunit"]] || {}).id;
     if (unitid) {
-      UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+      UNITDATA[unitid] = {
+        ...UNITDATA[unitid],
         pos: MARKS["selectmovetarget"]
-      });
+      };
     }
 
     MARKS = {};
@@ -594,7 +602,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "move";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -602,7 +611,7 @@ game.debug = function() {
       stepid: newstepid,
       name: "move",
       path: step.path.concat("move")
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (
@@ -635,7 +644,7 @@ game.debug = function() {
   game.jump1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
 
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -647,9 +656,10 @@ game.debug = function() {
     {
       let unitid = (UNITLAYERS.units[MARKS["selectunit"]] || {}).id;
       if (unitid) {
-        UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+        UNITDATA[unitid] = {
+          ...UNITDATA[unitid],
           pos: MARKS["selectjumptarget"]
-        });
+        };
       }
     }
     MARKS = {};
@@ -679,7 +689,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "jump";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -687,7 +698,7 @@ game.debug = function() {
       stepid: newstepid,
       name: "jump",
       path: step.path.concat("jump")
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (
@@ -878,12 +889,14 @@ game.debug = function() {
     let MARKS = { selectkingdeploy: markpos };
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectkingdeploy"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].deploy = "deploy2";
@@ -1017,13 +1030,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectunit"
-    }));
+    });
     turn.links[newstepid] = {};
     {
       let newlinks = turn.links[newstepid];
@@ -1177,12 +1191,14 @@ game.debug = function() {
     };
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
+
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectmovetarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].move = "move2";
@@ -1227,13 +1243,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectjumptarget"
-    }));
+    });
     turn.links[newstepid] = {};
 
     turn.links[newstepid].jump = "jump2";
@@ -1275,7 +1292,7 @@ game.debug = function() {
   game.deploy2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1314,7 +1331,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "deploy";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1323,7 +1341,7 @@ game.debug = function() {
       name: "deploy",
       path: step.path.concat("deploy"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (
@@ -1356,15 +1374,16 @@ game.debug = function() {
   game.move2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
 
     let UNITLAYERS = step.UNITLAYERS;
 
     let unitid = (UNITLAYERS.units[MARKS["selectunit"]] || {}).id;
     if (unitid) {
-      UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+      UNITDATA[unitid] = {
+        ...UNITDATA[unitid],
         pos: MARKS["selectmovetarget"]
-      });
+      };
     }
 
     MARKS = {};
@@ -1394,7 +1413,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "move";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1402,7 +1422,7 @@ game.debug = function() {
       stepid: newstepid,
       name: "move",
       path: step.path.concat("move")
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (
@@ -1435,7 +1455,7 @@ game.debug = function() {
   game.jump2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
 
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1447,9 +1467,10 @@ game.debug = function() {
     {
       let unitid = (UNITLAYERS.units[MARKS["selectunit"]] || {}).id;
       if (unitid) {
-        UNITDATA[unitid] = Object.assign({}, UNITDATA[unitid], {
+        UNITDATA[unitid] = {
+          ...UNITDATA[unitid],
           pos: MARKS["selectjumptarget"]
-        });
+        };
       }
     }
     MARKS = {};
@@ -1479,7 +1500,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "jump";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1487,7 +1509,7 @@ game.debug = function() {
       stepid: newstepid,
       name: "jump",
       path: step.path.concat("jump")
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (

@@ -29,7 +29,7 @@ export default function addCommandFunction(
     game.${cmndname}${player} = function(turn,step){
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
-      let UNITDATA = Object.assign({},step.UNITDATA);
+      let UNITDATA = { ...step.UNITDATA };
       ${
         contains(cmndDef, "spawn") || contains(cmndDef, "spawnin")
           ? "let clones = step.clones; "
@@ -38,12 +38,12 @@ export default function addCommandFunction(
       let UNITLAYERS = step.UNITLAYERS;
       ${
         usesTurnVars(cmndDef)
-          ? "let TURNVARS = Object.assign({},step.TURNVARS); "
+          ? "let TURNVARS = {...step.TURNVARS }; "
           : ""
       }
       ${
         usesBattleVars(cmndDef)
-          ? "let BATTLEVARS = Object.assign({},step.BATTLEVARS); "
+          ? "let BATTLEVARS = {...step.BATTLEVARS }; "
           : ""
       }
 
@@ -53,7 +53,7 @@ export default function addCommandFunction(
       ${applyGeneratorInstructions(def, player, cmndname, cmndDef)}
 
       let newstepid = step.stepid+'-'+'${cmndname}';
-      let newstep = turn.steps[newstepid] = Object.assign({},step,{
+      let newstep = turn.steps[newstepid] = { ...step,
         ARTIFACTS: ARTIFACTS,
         MARKS: MARKS,
         UNITDATA: UNITDATA,
@@ -68,7 +68,7 @@ export default function addCommandFunction(
         }
         ${usesTurnVars(cmndDef) ? ",TURNVARS: TURNVARS " : ""}
         ${usesBattleVars(cmndDef) ? ",BATTLEVARS: BATTLEVARS " : ""}
-      });
+      };
       turn.links[newstepid] = {};
 
       ${applyLinkInstructions(def, player, cmndname, cmndDef, false)}

@@ -207,13 +207,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectpushpoint"
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
@@ -294,7 +295,7 @@ game.debug = function() {
   game.north1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -315,9 +316,7 @@ game.debug = function() {
             newpos = connections[newpos][pushdir];
             dist--;
           }
-          UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-            pos: newpos
-          });
+          UNITDATA[pushid] = { ...UNITDATA[pushid], pos: newpos };
           // TODO - check that it uses ['loopid'] ?
         }
       }
@@ -389,7 +388,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "north";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -398,7 +398,7 @@ game.debug = function() {
       name: "north",
       path: step.path.concat("north"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
@@ -416,7 +416,7 @@ game.debug = function() {
   game.south1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -437,9 +437,7 @@ game.debug = function() {
             newpos = connections[newpos][pushdir];
             dist--;
           }
-          UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-            pos: newpos
-          });
+          UNITDATA[pushid] = { ...UNITDATA[pushid], pos: newpos };
           // TODO - check that it uses ['loopid'] ?
         }
       }
@@ -511,7 +509,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "south";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -520,7 +519,7 @@ game.debug = function() {
       name: "south",
       path: step.path.concat("south"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
@@ -538,7 +537,7 @@ game.debug = function() {
   game.east1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -559,9 +558,7 @@ game.debug = function() {
             newpos = connections[newpos][pushdir];
             dist--;
           }
-          UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-            pos: newpos
-          });
+          UNITDATA[pushid] = { ...UNITDATA[pushid], pos: newpos };
           // TODO - check that it uses ['loopid'] ?
         }
       }
@@ -633,7 +630,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "east";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -642,7 +640,7 @@ game.debug = function() {
       name: "east",
       path: step.path.concat("east"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
@@ -660,7 +658,7 @@ game.debug = function() {
   game.west1 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -681,9 +679,7 @@ game.debug = function() {
             newpos = connections[newpos][pushdir];
             dist--;
           }
-          UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-            pos: newpos
-          });
+          UNITDATA[pushid] = { ...UNITDATA[pushid], pos: newpos };
           // TODO - check that it uses ['loopid'] ?
         }
       }
@@ -755,7 +751,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "west";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -764,7 +761,7 @@ game.debug = function() {
       name: "west",
       path: step.path.concat("west"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
@@ -999,13 +996,14 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + markpos;
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       stepid: newstepid,
       path: step.path.concat(markpos),
       name: "selectpushpoint"
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
@@ -1086,7 +1084,7 @@ game.debug = function() {
   game.north2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1107,9 +1105,7 @@ game.debug = function() {
             newpos = connections[newpos][pushdir];
             dist--;
           }
-          UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-            pos: newpos
-          });
+          UNITDATA[pushid] = { ...UNITDATA[pushid], pos: newpos };
           // TODO - check that it uses ['loopid'] ?
         }
       }
@@ -1181,7 +1177,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "north";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1190,7 +1187,7 @@ game.debug = function() {
       name: "north",
       path: step.path.concat("north"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
@@ -1208,7 +1205,7 @@ game.debug = function() {
   game.south2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1229,9 +1226,7 @@ game.debug = function() {
             newpos = connections[newpos][pushdir];
             dist--;
           }
-          UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-            pos: newpos
-          });
+          UNITDATA[pushid] = { ...UNITDATA[pushid], pos: newpos };
           // TODO - check that it uses ['loopid'] ?
         }
       }
@@ -1303,7 +1298,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "south";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1312,7 +1308,7 @@ game.debug = function() {
       name: "south",
       path: step.path.concat("south"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
@@ -1330,7 +1326,7 @@ game.debug = function() {
   game.east2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1351,9 +1347,7 @@ game.debug = function() {
             newpos = connections[newpos][pushdir];
             dist--;
           }
-          UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-            pos: newpos
-          });
+          UNITDATA[pushid] = { ...UNITDATA[pushid], pos: newpos };
           // TODO - check that it uses ['loopid'] ?
         }
       }
@@ -1425,7 +1419,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "east";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1434,7 +1429,7 @@ game.debug = function() {
       name: "east",
       path: step.path.concat("east"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
@@ -1452,7 +1447,7 @@ game.debug = function() {
   game.west2 = function(turn, step) {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-    let UNITDATA = Object.assign({}, step.UNITDATA);
+    let UNITDATA = { ...step.UNITDATA };
     let clones = step.clones;
     let UNITLAYERS = step.UNITLAYERS;
 
@@ -1473,9 +1468,7 @@ game.debug = function() {
             newpos = connections[newpos][pushdir];
             dist--;
           }
-          UNITDATA[pushid] = Object.assign({}, UNITDATA[pushid], {
-            pos: newpos
-          });
+          UNITDATA[pushid] = { ...UNITDATA[pushid], pos: newpos };
           // TODO - check that it uses ['loopid'] ?
         }
       }
@@ -1547,7 +1540,8 @@ game.debug = function() {
     }
 
     let newstepid = step.stepid + "-" + "west";
-    let newstep = (turn.steps[newstepid] = Object.assign({}, step, {
+    let newstep = (turn.steps[newstepid] = {
+      ...step,
       ARTIFACTS: ARTIFACTS,
       MARKS: MARKS,
       UNITDATA: UNITDATA,
@@ -1556,7 +1550,7 @@ game.debug = function() {
       name: "west",
       path: step.path.concat("west"),
       clones: clones
-    }));
+    });
     turn.links[newstepid] = {};
 
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {

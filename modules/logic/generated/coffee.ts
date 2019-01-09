@@ -52,7 +52,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({})
+    UNITDATA: deduceInitialUnitData(fullDef.setup)
       ,
     clones: 0
   };

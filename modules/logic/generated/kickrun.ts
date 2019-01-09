@@ -50,16 +50,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({
-      "runners": {
-        "1": ["a2", "b1"],
-        "2": ["d5", "e4"]
-      },
-      "sidekickers": {
-        "1": ["a1", "c1", "a3"],
-        "2": ["c5", "e5", "e3"]
-      }
-    })
+    UNITDATA: deduceInitialUnitData(fullDef.setup)
   };
   return game.start1(turnseed, stepseed);
 };

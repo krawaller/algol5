@@ -43,7 +43,7 @@ import { relativedirs, reduce, pos2coords, coords2pos, boardPositions, offsetPos
       game.newGame = function(){
         let turnseed = { turn: 0 };
         let stepseed = {
-          UNITDATA: deduceInitialUnitData(${JSON.stringify(def.setup || {})})
+          UNITDATA: deduceInitialUnitData(fullDef.setup)
           ${usesTurnVars(def) ? ", TURNVARS: {}" : ""}
           ${usesBattleVars(def) ? ", BATTLEVARS: {}" : ""}
           ${

@@ -58,16 +58,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({
-        "towers": {
-          "1": [
-            ["rect", "a1", "h1"]
-          ],
-          "2": [
-            ["rect", "a7", "h7"]
-          ]
-        }
-      })
+    UNITDATA: deduceInitialUnitData(fullDef.setup)
       ,
     clones: 0
   };

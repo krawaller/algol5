@@ -52,14 +52,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({
-        "seals": {
-          "1": ["b2", "b7"]
-        },
-        "bears": {
-          "2": ["g2", "g7"]
-        }
-      })
+    UNITDATA: deduceInitialUnitData(fullDef.setup)
       ,
     clones: 0
   };

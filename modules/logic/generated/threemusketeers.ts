@@ -46,16 +46,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({
-      "kings": {
-        "1": ["a1", "c3", "e5"]
-      },
-      "pawns": {
-        "2": [
-          ["holerect", "a1", "e5", ["a1", "c3", "e5"]]
-        ]
-      }
-    })
+    UNITDATA: deduceInitialUnitData(fullDef.setup)
   };
   return game.start1(turnseed, stepseed);
 };

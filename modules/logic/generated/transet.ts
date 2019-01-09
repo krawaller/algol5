@@ -58,20 +58,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({
-      "pinets": {
-        "1": ["a1", "e1"],
-        "2": ["a5", "e5"]
-      },
-      "piokers": {
-        "1": ["b1", "d1"],
-        "2": ["b5", "d5"]
-      },
-      "piases": {
-        "1": ["c1"],
-        "2": ["c5"]
-      }
-    })
+    UNITDATA: deduceInitialUnitData(fullDef.setup)
   };
   return game.start1(turnseed, stepseed);
 };

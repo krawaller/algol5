@@ -57,12 +57,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({
-      "notfrozens": {
-        "1": ["a4", "b4", "a3", "b3"],
-        "2": ["c2", "c1", "d2", "d1"]
-      }
-    })
+    UNITDATA: deduceInitialUnitData(fullDef.setup)
   };
   return game.start1(turnseed, stepseed);
 };

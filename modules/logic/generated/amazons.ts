@@ -45,12 +45,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({
-      "queens": {
-        "1": ["d10", "g10", "a7", "j7"],
-        "2": ["a4", "d1", "g1", "j4"]
-      }
-    }),
+    UNITDATA: deduceInitialUnitData(fullDef.setup),
     TURNVARS: {}
     ,
     clones: 0

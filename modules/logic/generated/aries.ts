@@ -51,16 +51,7 @@ game.newGame = function() {
     turn: 0
   };
   let stepseed = {
-    UNITDATA: deduceInitialUnitData({
-        "soldiers": {
-          "1": [
-            ["rect", "a1", "d4"]
-          ],
-          "2": [
-            ["rect", "e5", "h8"]
-          ]
-        }
-      })
+    UNITDATA: deduceInitialUnitData(fullDef.setup)
       ,
     BATTLEVARS: {}
   };

@@ -62,10 +62,6 @@ export default function parseBool(
       const [v1, v2] = args;
       return `(${parse.val(v1)} > ${parse.val(v2)})`;
     }
-    case "moreorequal": {
-      const [v1, v2] = args;
-      return `(${parse.val(v1)} >= ${parse.val(v2)})`;
-    }
     case "anyat": {
       const [set, pos] = args;
       return `!!(${parse.set(set)}[${parse.pos(pos)}])`;
@@ -119,13 +115,6 @@ export default function parseBool(
     case "valinlist": {
       const [val, list] = args;
       return `(${parse.list(list)}.indexOf(${parse.val(val)}) !== -1)`;
-    }
-    case "justinone": {
-      // TODO - support more than two sets? or rename to notinboth
-      const [pos, set1, set2] = args;
-      return `((TEMP=${parse.pos(pos)}) && !${parse.set(
-        set1
-      )}[TEMP] !== !${parse.set(set2)}[TEMP])`;
     }
     default:
       throw "Unknown bool! Boolshit! " + expression;

@@ -239,23 +239,15 @@ game.debug = function() {
                 let k,
                   ret = {},
                   s0 = UNITLAYERS.units,
-                  s1 = (function() {
-                    let k,
-                      ret = {},
-                      s0 = ARTIFACTS.nosoldiers,
-                      s1 = ARTIFACTS.jumptargets;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  })();
+                  s1 = ARTIFACTS.nosoldiers,
+                  s2 = ARTIFACTS.jumptargets;
                 for (k in s0) {
                   ret[k] = 1;
                 }
                 for (k in s1) {
+                  ret[k] = 1;
+                }
+                for (k in s2) {
                   ret[k] = 1;
                 }
                 return ret;
@@ -1050,23 +1042,15 @@ game.debug = function() {
                 let k,
                   ret = {},
                   s0 = UNITLAYERS.units,
-                  s1 = (function() {
-                    let k,
-                      ret = {},
-                      s0 = ARTIFACTS.nosoldiers,
-                      s1 = ARTIFACTS.jumptargets;
-                    for (k in s0) {
-                      ret[k] = 1;
-                    }
-                    for (k in s1) {
-                      ret[k] = 1;
-                    }
-                    return ret;
-                  })();
+                  s1 = ARTIFACTS.nosoldiers,
+                  s2 = ARTIFACTS.jumptargets;
                 for (k in s0) {
                   ret[k] = 1;
                 }
                 for (k in s1) {
+                  ret[k] = 1;
+                }
+                for (k in s2) {
                   ret[k] = 1;
                 }
                 return ret;

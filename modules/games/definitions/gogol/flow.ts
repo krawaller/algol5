@@ -17,7 +17,7 @@ const gogolFlow: Flow<GogolArtifactLayer, GogolCommand, GogolGenerator, GogolLay
       links: ["selectmovetarget", "selectjumptarget"]
     },
     selectmovetarget: {
-      from: ["ifelse", ["anyat", "mykings", "selectunit"], "kingwalk", ["subtract", "board", ["union", "units", ["union", "nosoldiers", "jumptargets"]]]],
+      from: ["ifelse", ["anyat", "mykings", "selectunit"], "kingwalk", ["subtract", "board", ["union", "units", "nosoldiers", "jumptargets"]]],
       link: "move"
     },
     selectjumptarget: {

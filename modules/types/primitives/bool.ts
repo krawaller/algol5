@@ -11,7 +11,8 @@ import {
   SIG_CmndRef,
   SIG_MarkRef,
   SIG_Val_Val,
-  SIG_Number_Number
+  SIG_Number_Number,
+  SIG_Vals
 } from "./_signatures";
 
 export type AlgolBool<
@@ -40,6 +41,7 @@ export type AlgolBool<
   | SIG_Number_Number<"morethan", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Bool<"not", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Val<"truthy" | "falsy", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_Vals<"valinlist", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Val_Val<
       "same" | "different",
       Layer,

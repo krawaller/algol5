@@ -113,8 +113,8 @@ export default function parseBool(
       return "false";
     }
     case "valinlist": {
-      const [val, list] = args;
-      return `(${parse.list(list)}.indexOf(${parse.val(val)}) !== -1)`;
+      const [val, ...list] = args;
+      return `([${list.map(v => parse.val(v)).join(', ')}].indexOf(${parse.val(val)}) !== -1)`;
     }
     default:
       throw "Unknown bool! Boolshit! " + expression;

@@ -41,7 +41,7 @@ const ariesGenerators: Generators<AriesArtifactLayer, AriesGenerator, AriesLayer
       },
       last: {
         condition: ["valinlist", ["stopreason"],
-          ["hitblock", "outofbounds"]
+          "hitblock", "outofbounds"
         ],
         tolayer: "squished"
       }

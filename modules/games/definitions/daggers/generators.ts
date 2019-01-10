@@ -19,7 +19,7 @@ const daggersGenerators: Generators<DaggersArtifactLayer, DaggersGenerator, Dagg
     dirs: [8, 1, 2, 4, 5, 6],
     blocks: "units",
     max: ["ifelse", ["valinlist", ["dir"],
-      [8, 1, 2]
+      8, 1, 2
     ], 1, 8],
     draw: {
       steps: {
@@ -28,7 +28,7 @@ const daggersGenerators: Generators<DaggersArtifactLayer, DaggersGenerator, Dagg
       block: {
         condition: ["and", ["noneat", "myunits", ["target"]],
           ["not", ["and", ["valinlist", ["dir"],
-              [1, 5]
+              1, 5
             ],
             ["anyat", "oppdaggers", ["target"]]
           ]]

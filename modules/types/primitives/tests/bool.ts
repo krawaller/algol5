@@ -27,5 +27,6 @@ const tests: TestBool[] = [
   ["and", ["isempty", "mylayer"], ["samepos", "mymark", ["onlyin", "mylayer"]]],
   ["or", ["isempty", "mylayer"], ["samepos", "mymark", ["onlyin", "mylayer"]]],
   ["truthy", 4],
-  ["falsy", ["value", 7]]
+  ["falsy", ["value", 7]],
+  ["valinlist", ["value", 8], ["value", 4], 3, ["value", 9]]
 ];

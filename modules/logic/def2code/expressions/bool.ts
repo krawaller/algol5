@@ -75,8 +75,8 @@ export default function parseBool(
       return `!(${parse.set(set)}[${parse.pos(pos)}])`;
     }
     case "overlaps": {
-      const [s1, s2] = args;
-      return parse.bool(["notempty", ["intersect", s1, s2]]);
+      const sets = args;
+      return parse.bool(["notempty", ["intersect", ...sets]]);
     }
     case "isempty": {
       const [set] = args;

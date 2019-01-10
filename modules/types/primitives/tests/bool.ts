@@ -12,6 +12,8 @@ type TestBool = AlgolBool<
 
 const tests: TestBool[] = [
   ["true"],
+  ["cmndavailable", "mycmnd"],
+  ["markavailable", "mymark"],
   ["higher", ["mark", "mymark"], ["onlyin", "mylayer"]],
   ["anyat", "mylayer", "mymark"],
   ["noneat", "mylayer", "mymark"],
@@ -19,6 +21,9 @@ const tests: TestBool[] = [
   ["isempty", "mylayer"],
   ["notempty", "mylayer"],
   ["samepos", "mymark", ["onlyin", "mylayer"]],
+  ["same", 4, ["value", 4]],
+  ["different", 4, ["value", 4]],
+  ["morethan", 4, ["value", 4]],
   ["and", ["isempty", "mylayer"], ["samepos", "mymark", ["onlyin", "mylayer"]]],
   ["or", ["isempty", "mylayer"], ["samepos", "mymark", ["onlyin", "mylayer"]]],
   ["truthy", 4],

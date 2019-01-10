@@ -7,7 +7,11 @@ import {
   SIG_Bool,
   SIG_Val,
   SIG_Bools,
-  SIG_NoArgs
+  SIG_NoArgs,
+  SIG_CmndRef,
+  SIG_MarkRef,
+  SIG_Val_Val,
+  SIG_Number_Number
 } from "./_signatures";
 
 export type AlgolBool<
@@ -33,8 +37,21 @@ export type AlgolBool<
   | SIG_Set<"isempty" | "notempty", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Sets<"overlaps", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Set_Pos<"anyat" | "noneat", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_Number_Number<"morethan", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Bool<"not", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Val<"truthy" | "falsy", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_Val_Val<
+      "same" | "different",
+      Layer,
+      Mrk,
+      Cmnd,
+      Turnp,
+      Turnv,
+      Btlp,
+      Btlv
+    >
+  | SIG_CmndRef<"cmndavailable", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_MarkRef<"markavailable", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_NoArgs<"true" | "false">
   | BoolIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | BoolPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;

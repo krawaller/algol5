@@ -38,6 +38,25 @@ export interface SIG_LayerRef<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   2?: never;
 }
 
+export interface SIG_CmndRef<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  extends Array<
+    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>
+  > {
+  0: CMND;
+  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
+  2?: never;
+}
+
+export interface SIG_Val_Val<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  extends Array<
+    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>
+  > {
+  0: CMND;
+  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
+  2: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
+  3?: never;
+}
+
 export interface SIG_Set_Pos<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends Array<
     | CMND

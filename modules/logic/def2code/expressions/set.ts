@@ -21,6 +21,10 @@ export default function parseSet(
       const [layerName] = details;
       return layerRef(gameDef, player, action, layerName);
     }
+    case "groupat": {
+      const [pos] = details;
+      return "UNITLAYERS[" + parse.value(["read","units",pos,"group"]) + "]";
+    }
     case "single": {
       const [pos] = details;
       return `

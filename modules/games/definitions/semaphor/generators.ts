@@ -6,7 +6,7 @@ const semaphorGenerators: Generators<SemaphorArtifactLayer, SemaphorGenerator, S
     type: "walker",
     dirs: [1, 2, 3, 4],
     starts: "units",
-    steps: ["unitlayer", ["read", "units", ["start"], "group"]],
+    steps: ["groupat", ["start"]],
     startasstep: true,
     draw: {
       steps: {

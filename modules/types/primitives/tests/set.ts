@@ -15,5 +15,6 @@ const tests: TestSet[] = [
   ["single", ["mark", ["playercase", "mymark", "mymark"]]],
   ["layer", "mylayer"],
   ["union", ["layer", "mylayer"], ["single", ["mark", "mymark"]]],
-  ["intersect", ["layer", "mylayer"], ["single", ["mark", "mymark"]]]
+  ["intersect", ["layer", "mylayer"], ["single", ["mark", "mymark"]]],
+  ["groupat", "mymark"]
 ];

@@ -57,10 +57,6 @@ export default function parseValue(
       const [val1, val2] = args;
       return `(${parse.val(val1)} - ${parse.val(val2)})`;
     }
-    case "ctxval": {
-      const [name] = args;
-      return `CONTEXT[${parse.val(name)}]`;
-    }
     case "dir": {
       return "DIR"; // TODO - was usefordir too, breaks?
     }

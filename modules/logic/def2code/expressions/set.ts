@@ -86,11 +86,6 @@ export default function parseSet(
           return ret;
         }())`;
     }
-    case "unitlayer": {
-      // TODO - anyone ever using this?
-      const [layerName] = details;
-      return "UNITLAYERS[" + parse.value(layerName) + "]";
-    }
     default:
       console.log("Unknown set", expression);
       throw "UNKNOWN SET DEF! " + expression;

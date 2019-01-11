@@ -12,6 +12,8 @@ type TestPos = AlgolPos<
 
 const tests: TestPos[] = [
   "mymark",
+  ["start"],
+  ["target"],
   ["mark", "mymark"],
   ["onlyin", ["layer", "mylayer"]],
   ["ifelse", ["true"], ["onlyin", ["layer", "mylayer"]], ["mark", "mymark"]],

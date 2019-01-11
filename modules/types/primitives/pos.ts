@@ -3,7 +3,8 @@ import {
   SIG_Set,
   SIG_MarkRef,
   SIG_TurnPos,
-  SIG_BattlePos
+  SIG_BattlePos,
+  SIG_NoArgs
 } from "./_signatures";
 
 export type AlgolPos<
@@ -16,6 +17,7 @@ export type AlgolPos<
   Btlv = string
 > =
   | Mrk
+  | SIG_NoArgs<"start" | "target">
   | SIG_Set<"onlyin", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_MarkRef<"mark", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_TurnPos<"turnpos", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>

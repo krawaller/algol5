@@ -27,7 +27,7 @@ export default function parseUniversal(
       const [alt1, alt2] = details;
       return me(player === 1 ? alt1 : alt2);
     }
-    case "actionor": {
+    case "ifactionelse": {
       const [name, then, otherwise] = details;
       return me(action === name ? then : otherwise);
     }

@@ -14,7 +14,8 @@ const tests: TestLink[] = [
   "mymark",
   "mycmnd",
   "endturn",
-  ["if", ["anyat","mylayer","mymark"], "mymark"],
-  ["ifelse", ["anyat","mylayer","mymark"], "mymark", "mycmnd"],
+  ["if", ["anyat", "mylayer", "mymark"], "mymark"],
+  ["ifelse", ["anyat", "mylayer", "mymark"], "mymark", "mycmnd"],
   ["playercase", "mymark", "mycmnd"],
+  ["ifactionelse", "mymark", "mymark", "mycmnd"]
 ];

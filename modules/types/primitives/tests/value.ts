@@ -7,12 +7,14 @@ type TestVal = AlgolVal<
   "myturnp",
   "myturnv",
   "mybattlep",
-  "mybattlev"
+  "mybattlev",
+  "FOO" | "BAR"
 >;
 
 const tests: TestVal[] = [
-  ["value", "foo"],
+  ["value", "FOO"],
   ["sizeof", "mylayer"],
-  ["playercase", "muuu", ["value", "huuu"]],
-  ["read", "mylayer", "mymark", "someProp"]
+  ["playercase", "FOO", ["value", "BAR"]],
+  ["read", "mylayer", "mymark", "someProp"],
+  ["ifactionelse", "mymark", "FOO", "BAR"]
 ];

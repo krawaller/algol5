@@ -1,4 +1,4 @@
-import { IfElse, PlayerCase } from "./_logical";
+import { IfElse, PlayerCase, IfActionElse } from "./_logical";
 import {
   SIG_Set,
   SIG_MarkRef,
@@ -23,7 +23,8 @@ export type AlgolPos<
   | SIG_TurnPos<"turnpos", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_BattlePos<"battlepos", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | PosIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | PosPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | PosPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | PosIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
 
 interface PosIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends IfElse<
@@ -39,6 +40,18 @@ interface PosIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
 
 interface PosPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends PlayerCase<
+    AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    Layer,
+    Mrk,
+    Cmnd,
+    Turnp,
+    Turnv,
+    Btlp,
+    Btlv
+  > {}
+
+interface PosIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  extends IfActionElse<
     AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
     Layer,
     Mrk,

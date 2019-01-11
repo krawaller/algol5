@@ -1,4 +1,4 @@
-import { IfElse, PlayerCase } from "./_logical";
+import { IfElse, PlayerCase, IfActionElse } from "./_logical";
 import {
   SIG_Set,
   SIG_NoArgs,
@@ -25,7 +25,8 @@ export type AlgolNumber<
   | SIG_Set_Val<"harvest", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Set<"sizeof", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | NumberIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | NumberPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | NumberPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | NumberIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
 
 interface NumberIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends IfElse<
@@ -40,6 +41,18 @@ interface NumberIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   > {}
 interface NumberPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends PlayerCase<
+    AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    Layer,
+    Mrk,
+    Cmnd,
+    Turnp,
+    Turnv,
+    Btlp,
+    Btlv
+  > {}
+
+interface NumberIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  extends IfActionElse<
     AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
     Layer,
     Mrk,

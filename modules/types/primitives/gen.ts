@@ -1,4 +1,4 @@
-import { IfElse, PlayerCase, If } from "./_logical";
+import { IfElse, PlayerCase, If, IfActionElse } from "./_logical";
 
 export type AlgolGen<
   Layer = string,
@@ -13,7 +13,8 @@ export type AlgolGen<
   | Gen
   | GenIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
   | GenIf<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
-  | GenPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>;
+  | GenPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
+  | GenIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>;
 
 interface GenIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
   extends IfElse<
@@ -41,6 +42,18 @@ interface GenIf<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
 
 interface GenPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
   extends PlayerCase<
+    AlgolGen<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>,
+    Layer,
+    Mrk,
+    Cmnd,
+    Turnp,
+    Turnv,
+    Btlp,
+    Btlv
+  > {}
+
+interface GenIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
+  extends IfActionElse<
     AlgolGen<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>,
     Layer,
     Mrk,

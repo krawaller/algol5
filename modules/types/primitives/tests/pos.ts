@@ -20,5 +20,6 @@ const tests: TestPos[] = [
   ["playercase", ["mark", "mymark"], ["onlyin", ["layer", "mylayer"]]],
   ["turnpos", "myturnp"],
   ["battlepos", "mybattlep"],
-  ["battlepos", ["value", "mybattlep"]]
+  ["battlepos", ["value", "mybattlep"]],
+  ["ifactionelse", "mycmnd", "mymark", ["onlyin", ["layer", "mylayer"]]]
 ];

@@ -1,4 +1,4 @@
-import { IfElse, PlayerCase } from "./_logical";
+import { IfElse, PlayerCase, IfActionElse } from "./_logical";
 import {
   SIG_Set,
   SIG_Sets,
@@ -56,7 +56,8 @@ export type AlgolBool<
   | SIG_MarkRef<"markavailable", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_NoArgs<"true" | "false">
   | BoolIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | BoolPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | BoolPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | BoolIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
 
 interface BoolIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends IfElse<
@@ -71,6 +72,18 @@ interface BoolIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   > {}
 interface BoolPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends PlayerCase<
+    AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    Layer,
+    Mrk,
+    Cmnd,
+    Turnp,
+    Turnv,
+    Btlp,
+    Btlv
+  > {}
+
+interface BoolIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  extends IfActionElse<
     AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
     Layer,
     Mrk,

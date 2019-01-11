@@ -1,4 +1,4 @@
-import { IfElse, PlayerCase } from "./_logical";
+import { IfElse, PlayerCase, IfActionElse } from "./_logical";
 import { SIG_Pos, SIG_LayerRef, SIG_Sets } from "./_signatures";
 
 export type AlgolSet<
@@ -12,7 +12,7 @@ export type AlgolSet<
 > =
   | Layer
   | SIG_LayerRef<"layer", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Pos<"single" | "groupat", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_Pos<"single" | "groupat", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Sets<
       "union" | "intersect" | "subtract",
       Layer,
@@ -24,7 +24,8 @@ export type AlgolSet<
       Btlv
     >
   | SetIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SetPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | SetPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SetIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
 
 interface SetIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends IfElse<
@@ -40,6 +41,18 @@ interface SetIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
 
 interface SetPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends PlayerCase<
+    AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    Layer,
+    Mrk,
+    Cmnd,
+    Turnp,
+    Turnv,
+    Btlp,
+    Btlv
+  > {}
+
+interface SetIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  extends IfActionElse<
     AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
     Layer,
     Mrk,

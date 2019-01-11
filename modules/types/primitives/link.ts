@@ -1,4 +1,4 @@
-import { IfElse, PlayerCase, If } from "./_logical";
+import { IfElse, PlayerCase, If, IfActionElse } from "./_logical";
 
 export type AlgolLink<
   Layer = string,
@@ -14,7 +14,8 @@ export type AlgolLink<
   | "endturn"
   | LinkIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | LinkIf<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | LinkPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | LinkPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | LinkIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
 
 interface LinkIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends IfElse<
@@ -42,6 +43,18 @@ interface LinkIf<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
 
 interface LinkPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends PlayerCase<
+    AlgolLink<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    Layer,
+    Mrk,
+    Cmnd,
+    Turnp,
+    Turnv,
+    Btlp,
+    Btlv
+  > {}
+
+interface LinkIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  extends IfActionElse<
     AlgolLink<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
     Layer,
     Mrk,

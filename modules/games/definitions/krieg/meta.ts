@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { KriegMeta } from './_types';
 
-const kriegMeta: Meta = {
+const kriegMeta: KriegMeta = {
   id: "krieg",
   name: "Krieg",
   source: "http://www.di.fc.ul.pt/~jpn/gv/krieg.htm",

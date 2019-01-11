@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { _testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit } from './_types';
+import { _testFlow } from './_types';
 
-const _testFlow: Flow<_testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit> = {
+const _testFlow: _testFlow = {
   startTurn: {
     link: "selectunit"
   },

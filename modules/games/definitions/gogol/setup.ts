@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { GogolUnit } from './_types';
+import { GogolSetup } from './_types';
 
-const gogolSetup: Setup<GogolUnit> = {
+const gogolSetup: GogolSetup = {
   soldiers: {
     "1": [
       ["rect", "a1", "h1"]

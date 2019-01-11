@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { AriesAI } from './_types';
 
-const ariesAI: AI = {};
+const ariesAI: AriesAI = {};
 
 export default ariesAI;

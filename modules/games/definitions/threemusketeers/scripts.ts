@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { ThreemusketeersScripts } from './_types';
 
-const threemusketeersTests: GameTestSuite = {
+const threemusketeersScripts: ThreemusketeersScripts = {
   basic: [{
     commands: [],
     include: ["a1", "c3", "e5"]
@@ -28,4 +28,4 @@ const threemusketeersTests: GameTestSuite = {
   }]
 };
 
-export default threemusketeersTests;
+export default threemusketeersScripts;

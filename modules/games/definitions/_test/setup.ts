@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { _testUnit } from './_types';
+import { _testSetup } from './_types';
 
-const _testSetup: Setup<_testUnit> = {
+const _testSetup: _testSetup = {
   stepsfirsts: {
     "1": ["a3"]
   },

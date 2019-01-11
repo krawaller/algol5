@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { ThreemusketeersPhase } from './_types';
+import { ThreemusketeersInstructions } from './_types';
 
-const threemusketeersInstructions: Instructions<ThreemusketeersPhase> = {
+const threemusketeersInstructions: ThreemusketeersInstructions = {
   startTurn: ["playercase", ["line", "Select which", "king", "to move"],
     ["line", "Select which", "pawn", "to move"]
   ],

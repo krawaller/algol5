@@ -1,11 +1,10 @@
 import { typeSignature } from "../../../../types";
 
 export default function templateFlow(gameId) {
-  const fsig = typeSignature("Flow", gameId);
-  return `import {Flow} from '../../../types';
-import { ${fsig} } from './_types';
+  const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
+  return `import { ${capId}Flow } from './_types';
 
-const ${gameId}Flow: Flow<${fsig}> = {
+const ${gameId}Flow: ${capId}Flow = {
   startTurn: {
 
   },

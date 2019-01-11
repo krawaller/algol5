@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type GowiththefloeTerrain = "water";
 export type GowiththefloeUnit = "seals" | "bears" | "holes";
@@ -11,3 +11,12 @@ export type GowiththefloeGenerator = "findeattargets" | "findmovetargets" | "fin
 export type GowiththefloeArtifactLayer = "eattargets" | "movetargets" | "canmove" | "cracks";
 export type GowiththefloeTerrainLayer = "water" | "nowater";
 export type GowiththefloeLayer = CommonLayer | GowiththefloeUnitLayer | GowiththefloeArtifactLayer | GowiththefloeTerrainLayer;
+export type GowiththefloeGenerators = Generators<GowiththefloeArtifactLayer, GowiththefloeGenerator, GowiththefloeLayer>;
+export type GowiththefloeFlow = Flow<GowiththefloeArtifactLayer, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeUnit>;
+export type GowiththefloeBoard = Board<GowiththefloeTerrain>;
+export type GowiththefloeAI = AI;
+export type GowiththefloeGraphics = Graphics<GowiththefloeTerrain, GowiththefloeUnit>;
+export type GowiththefloeInstructions = Instructions<GowiththefloePhase>;
+export type GowiththefloeMeta = Meta;
+export type GowiththefloeScripts = GameTestSuite;
+export type GowiththefloeSetup = Setup<GowiththefloeUnit>;

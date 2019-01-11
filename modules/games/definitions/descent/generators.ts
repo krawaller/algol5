@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { DescentArtifactLayer, DescentGenerator, DescentLayer } from './_types';
+import { DescentGenerators } from './_types';
 
-const descentGenerators: Generators<DescentArtifactLayer, DescentGenerator, DescentLayer> = {
+const descentGenerators: DescentGenerators = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",

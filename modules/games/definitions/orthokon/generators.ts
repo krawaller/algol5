@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { OrthokonArtifactLayer, OrthokonGenerator, OrthokonLayer } from './_types';
+import { OrthokonGenerators } from './_types';
 
-const orthokonGenerators: Generators<OrthokonArtifactLayer, OrthokonGenerator, OrthokonLayer> = {
+const orthokonGenerators: OrthokonGenerators = {
   findvictims: {
     type: "neighbour",
     start: "selectmovetarget",

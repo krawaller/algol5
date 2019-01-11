@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { JostleArtifactLayer, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleUnit } from './_types';
+import { JostleFlow } from './_types';
 
-const jostleFlow: Flow<JostleArtifactLayer, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleUnit> = {
+const jostleFlow: JostleFlow = {
   startTurn: {
     link: "selectunit"
   },

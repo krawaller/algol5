@@ -1,6 +1,6 @@
-import {AI} from '../../../types';
+import { AmazonsAI } from './_types';
 
-const amazonsAI: AI = {
+const amazonsAI: AmazonsAI = {
   generators: {
     findroads: {
       type: "neighbour",

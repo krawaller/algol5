@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeUnit } from './_types';
+import { CoffeeFlow } from './_types';
 
-const coffeeFlow: Flow<CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeUnit> = {
+const coffeeFlow: CoffeeFlow = {
   TODO: "use different unit type for placeholders? Reference oppnent plr properly",
   endTurn: {
     unless: {

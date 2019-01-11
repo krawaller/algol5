@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { CoffeeArtifactLayer, CoffeeGenerator, CoffeeLayer } from './_types';
+import { CoffeeGenerators } from './_types';
 
-const coffeeGenerators: Generators<CoffeeArtifactLayer, CoffeeGenerator, CoffeeLayer> = {
+const coffeeGenerators: CoffeeGenerators = {
   findgeneratees: {
     type: "walker",
     dirs: [1, 2, 3, 4, 5, 6, 7, 8],

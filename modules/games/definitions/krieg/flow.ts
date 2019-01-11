@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { KriegArtifactLayer, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegUnit } from './_types';
+import { KriegFlow } from './_types';
 
-const kriegFlow: Flow<KriegArtifactLayer, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegUnit> = {
+const kriegFlow: KriegFlow = {
   marks: {
     selectunit: {
       from: "mynotfrozens",

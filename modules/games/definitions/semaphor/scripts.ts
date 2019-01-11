@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { SemaphorScripts } from './_types';
 
-const semaphorTests: GameTestSuite = {
+const semaphorScripts: SemaphorScripts = {
   basic: [{
     commands: [],
     include: ["a1", "a2", "a3", "b1", "b2", "b3", "c1", "c2", "c3", "d1", "d2", "d3"]
@@ -25,4 +25,4 @@ const semaphorTests: GameTestSuite = {
   }]
 };
 
-export default semaphorTests;
+export default semaphorScripts;

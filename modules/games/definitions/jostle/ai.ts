@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { JostleAI } from './_types';
 
-const jostleAI: AI = {};
+const jostleAI: JostleAI = {};
 
 export default jostleAI;

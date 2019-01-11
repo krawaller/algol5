@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { AmazonsArtifactLayer, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsUnit } from './_types';
+import { AmazonsFlow } from './_types';
 
-const amazonsFlow: Flow<AmazonsArtifactLayer, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsUnit> = {
+const amazonsFlow: AmazonsFlow = {
   startTurn: {
     link: "selectunit"
   },

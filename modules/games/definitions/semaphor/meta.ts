@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { SemaphorMeta } from './_types';
 
-const semaphorMeta: Meta = {
+const semaphorMeta: SemaphorMeta = {
   id: "semaphor",
   name: "Semaphor",
   source: "http://www.di.fc.ul.pt/~jpn/gv/semaphor.htm",

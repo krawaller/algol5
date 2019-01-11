@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { DaggersAI } from './_types';
 
-const daggersAI: AI = {};
+const daggersAI: DaggersAI = {};
 
 export default daggersAI;

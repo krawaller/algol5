@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { UglyduckUnit } from './_types';
+import { UglyduckSetup } from './_types';
 
-const uglyduckSetup: Setup<UglyduckUnit> = {
+const uglyduckSetup: UglyduckSetup = {
   soldiers: {
     "1": [
       ["rect", "a1", "e1"]

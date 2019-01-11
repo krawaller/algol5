@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { SemaphorAI } from './_types';
 
-const semaphorAI: AI = {};
+const semaphorAI: SemaphorAI = {};
 
 export default semaphorAI;

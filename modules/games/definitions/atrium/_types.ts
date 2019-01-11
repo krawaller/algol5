@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type AtriumTerrain = never;
 export type AtriumUnit = "kings" | "queens";
@@ -11,3 +11,12 @@ export type AtriumGenerator = "findmovetargets" | "findwinlines";
 export type AtriumArtifactLayer = "movetargets" | "winline";
 export type AtriumTerrainLayer = never;
 export type AtriumLayer = CommonLayer | AtriumUnitLayer | AtriumArtifactLayer;
+export type AtriumGenerators = Generators<AtriumArtifactLayer, AtriumGenerator, AtriumLayer>;
+export type AtriumFlow = Flow<AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit>;
+export type AtriumBoard = Board<AtriumTerrain>;
+export type AtriumAI = AI;
+export type AtriumGraphics = Graphics<AtriumTerrain, AtriumUnit>;
+export type AtriumInstructions = Instructions<AtriumPhase>;
+export type AtriumMeta = Meta;
+export type AtriumScripts = GameTestSuite;
+export type AtriumSetup = Setup<AtriumUnit>;

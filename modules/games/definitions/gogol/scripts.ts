@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { GogolScripts } from './_types';
 
-const gogolTests: GameTestSuite = {
+const gogolScripts: GogolScripts = {
   basic: [{
     commands: [],
     include: ["a3", "a4", "a5", "a6", "a7", "b3", "b4", "b5", "b6", "b7", "c3", "c4", "c5", "c6", "c7", "d3", "d4", "d5", "d6", "d7", "e3", "e4", "e5", "e6", "e7", "f3", "f4", "f5", "f6", "f7", "g3", "g4", "g5", "g6", "g7", "h3", "h4", "h5", "h6", "h7"]
@@ -31,4 +31,4 @@ const gogolTests: GameTestSuite = {
   }]
 };
 
-export default gogolTests;
+export default gogolScripts;

@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { MurusgallicusUnit } from './_types';
+import { MurusgallicusSetup } from './_types';
 
-const murusgallicusSetup: Setup<MurusgallicusUnit> = {
+const murusgallicusSetup: MurusgallicusSetup = {
   towers: {
     "1": [
       ["rect", "a1", "h1"]

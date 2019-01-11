@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { JostleScripts } from './_types';
 
-const jostleTests: GameTestSuite = {
+const jostleScripts: JostleScripts = {
   basic: [{
     commands: [],
     include: ["c4", "c6", "c8", "d3", "d5", "e4", "e8", "f3", "f7", "g6", "g8", "h3", "h5", "h7"]
@@ -31,4 +31,4 @@ const jostleTests: GameTestSuite = {
   }]
 };
 
-export default jostleTests;
+export default jostleScripts;

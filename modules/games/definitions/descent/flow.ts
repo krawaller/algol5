@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { DescentArtifactLayer, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentUnit } from './_types';
+import { DescentFlow } from './_types';
 
-const descentFlow: Flow<DescentArtifactLayer, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentUnit> = {
+const descentFlow: DescentFlow = {
   endGame: {
     madeline: {
       condition: ["notempty", "winline"],

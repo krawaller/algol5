@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { GowiththefloeAI } from './_types';
 
-const gowiththefloeAI: AI = {};
+const gowiththefloeAI: GowiththefloeAI = {};
 
 export default gowiththefloeAI;

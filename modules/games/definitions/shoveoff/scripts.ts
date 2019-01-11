@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { ShoveoffScripts } from './_types';
 
-const shoveoffTests: GameTestSuite = {
+const shoveoffScripts: ShoveoffScripts = {
   basic: [{
     commands: [],
     include: ["a1", "a2", "a3", "a4", "b1", "b4", "c1", "c4", "d1", "d2", "d3", "d4"]
@@ -36,4 +36,4 @@ const shoveoffTests: GameTestSuite = {
   }]
 };
 
-export default shoveoffTests;
+export default shoveoffScripts;

@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type MurusgallicusadvancedTerrain = "homerow";
 export type MurusgallicusadvancedUnit = "towers" | "walls" | "catapults";
@@ -11,3 +11,12 @@ export type MurusgallicusadvancedGenerator = "findfiretargets" | "findmovetarget
 export type MurusgallicusadvancedArtifactLayer = "firetargets" | "movetargets" | "madecatapults" | "madetowers" | "madewalls" | "killtargets";
 export type MurusgallicusadvancedTerrainLayer = "homerow" | "nohomerow" | "myhomerow" | "opphomerow";
 export type MurusgallicusadvancedLayer = CommonLayer | MurusgallicusadvancedUnitLayer | MurusgallicusadvancedArtifactLayer | MurusgallicusadvancedTerrainLayer;
+export type MurusgallicusadvancedGenerators = Generators<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer>;
+export type MurusgallicusadvancedFlow = Flow<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedUnit>;
+export type MurusgallicusadvancedBoard = Board<MurusgallicusadvancedTerrain>;
+export type MurusgallicusadvancedAI = AI;
+export type MurusgallicusadvancedGraphics = Graphics<MurusgallicusadvancedTerrain, MurusgallicusadvancedUnit>;
+export type MurusgallicusadvancedInstructions = Instructions<MurusgallicusadvancedPhase>;
+export type MurusgallicusadvancedMeta = Meta;
+export type MurusgallicusadvancedScripts = GameTestSuite;
+export type MurusgallicusadvancedSetup = Setup<MurusgallicusadvancedUnit>;

@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { DescentAI } from './_types';
 
-const descentAI: AI = {};
+const descentAI: DescentAI = {};
 
 export default descentAI;

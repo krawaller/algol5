@@ -1,6 +1,5 @@
-import {Setup} from '../../../types';
-import { DuploUnit } from './_types';
+import { DuploSetup } from './_types';
 
-const duploSetup: Setup<DuploUnit> = {};
+const duploSetup: DuploSetup = {};
 
 export default duploSetup;

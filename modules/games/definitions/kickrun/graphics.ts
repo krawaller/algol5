@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { KickrunTerrain, KickrunUnit } from './_types';
+import { KickrunGraphics } from './_types';
 
-const kickrunGraphics: Graphics<KickrunTerrain, KickrunUnit> = {
+const kickrunGraphics: KickrunGraphics = {
   tiles: {
     corners: "playercolour"
   },

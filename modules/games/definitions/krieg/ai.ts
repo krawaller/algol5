@@ -1,6 +1,6 @@
-import {AI} from '../../../types';
+import { KriegAI } from './_types';
 
-const kriegAI: AI = {
+const kriegAI: KriegAI = {
   generators: {
     findmythreats: {
       type: "neighbour",

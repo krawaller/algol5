@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type ShoveoffTerrain = "southedge" | "northedge" | "westedge" | "eastedge" | "edge";
 export type ShoveoffUnit = "soldiers";
@@ -11,3 +11,12 @@ export type ShoveoffGenerator = "findaffected" | "findresults" | "findfourinarow
 export type ShoveoffArtifactLayer = "targetedgepoints" | "squishsouth" | "squishwest" | "squishnorth" | "squisheast" | "pushsouth" | "pushwest" | "pushnorth" | "pusheast" | "spawnsouth" | "spawnwest" | "spawnnorth" | "spawneast" | "fourinarow";
 export type ShoveoffTerrainLayer = "southedge" | "nosouthedge" | "northedge" | "nonorthedge" | "westedge" | "nowestedge" | "eastedge" | "noeastedge" | "edge" | "noedge";
 export type ShoveoffLayer = CommonLayer | ShoveoffUnitLayer | ShoveoffArtifactLayer | ShoveoffTerrainLayer;
+export type ShoveoffGenerators = Generators<ShoveoffArtifactLayer, ShoveoffGenerator, ShoveoffLayer>;
+export type ShoveoffFlow = Flow<ShoveoffArtifactLayer, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffUnit>;
+export type ShoveoffBoard = Board<ShoveoffTerrain>;
+export type ShoveoffAI = AI;
+export type ShoveoffGraphics = Graphics<ShoveoffTerrain, ShoveoffUnit>;
+export type ShoveoffInstructions = Instructions<ShoveoffPhase>;
+export type ShoveoffMeta = Meta;
+export type ShoveoffScripts = GameTestSuite;
+export type ShoveoffSetup = Setup<ShoveoffUnit>;

@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { MurusgallicusArtifactLayer, MurusgallicusGenerator, MurusgallicusLayer } from './_types';
+import { MurusgallicusGenerators } from './_types';
 
-const murusgallicusGenerators: Generators<MurusgallicusArtifactLayer, MurusgallicusGenerator, MurusgallicusLayer> = {
+const murusgallicusGenerators: MurusgallicusGenerators = {
   findmovetargets: {
     type: "walker",
     dirs: [1, 2, 3, 4, 5, 6, 7, 8],

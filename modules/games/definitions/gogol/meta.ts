@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { GogolMeta } from './_types';
 
-const gogolMeta: Meta = {
+const gogolMeta: GogolMeta = {
   id: "gogol",
   name: "Gogol",
   source: "http://www.di.fc.ul.pt/~jpn/gv/gogol.htm",

@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { SerauqsMeta } from './_types';
 
-const serauqsMeta: Meta = {
+const serauqsMeta: SerauqsMeta = {
   id: "serauqs",
   TODO: "maybe can move lines? ALSO, winline showing!",
   name: "Serauqs",

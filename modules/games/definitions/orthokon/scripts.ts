@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { OrthokonScripts } from './_types';
 
-const orthokonTests: GameTestSuite = {
+const orthokonScripts: OrthokonScripts = {
   basic: [{
     commands: [],
     include: ["a1", "b1", "c1", "d1"]
@@ -19,4 +19,4 @@ const orthokonTests: GameTestSuite = {
   }]
 };
 
-export default orthokonTests;
+export default orthokonScripts;

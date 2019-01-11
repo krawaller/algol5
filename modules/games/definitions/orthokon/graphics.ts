@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { OrthokonTerrain, OrthokonUnit } from './_types';
+import { OrthokonGraphics } from './_types';
 
-const orthokonGraphics: Graphics<OrthokonTerrain, OrthokonUnit> = {
+const orthokonGraphics: OrthokonGraphics = {
   icons: {
     soldiers: "pawn"
   },

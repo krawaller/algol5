@@ -12,5 +12,14 @@ export type ${capId}ArtifactLayer = any;
 export type ${capId}TerrainLayer = any;
 export type ${capId}Layer = any;
 export type ${capId}Generator = any;
+
+export type ${capId}Generators = any;
+export type ${capId}Flow = any;
+export type ${capId}AI = any;
+export type ${capId}Graphics = any;
+export type ${capId}Instructions = any;
+export type ${capId}Meta = any;
+export type ${capId}Scripts = any;
+export type ${capId}Setup = any;
 `;
 }

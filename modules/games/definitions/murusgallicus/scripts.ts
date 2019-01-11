@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { MurusgallicusScripts } from './_types';
 
-const murusgallicusTests: GameTestSuite = {
+const murusgallicusScripts: MurusgallicusScripts = {
   basic: [{
     commands: [],
     include: ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]
@@ -61,4 +61,4 @@ const murusgallicusTests: GameTestSuite = {
   }]
 };
 
-export default murusgallicusTests;
+export default murusgallicusScripts;

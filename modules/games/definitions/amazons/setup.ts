@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { AmazonsUnit } from './_types';
+import { AmazonsSetup } from './_types';
 
-const amazonsSetup: Setup<AmazonsUnit> = {
+const amazonsSetup: AmazonsSetup = {
   queens: {
     "1": ["d10", "g10", "a7", "j7"],
     "2": ["a4", "d1", "g1", "j4"]

@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { UglyduckArtifactLayer, UglyduckCommand, UglyduckGenerator, UglyduckLayer, UglyduckMark, UglyduckUnit } from './_types';
+import { UglyduckFlow } from './_types';
 
-const uglyduckFlow: Flow<UglyduckArtifactLayer, UglyduckCommand, UglyduckGenerator, UglyduckLayer, UglyduckMark, UglyduckUnit> = {
+const uglyduckFlow: UglyduckFlow = {
   startTurn: {
     link: "selectunit"
   },

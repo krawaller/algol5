@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { SerauqsPhase } from './_types';
+import { SerauqsInstructions } from './_types';
 
-const serauqsInstructions: Instructions<SerauqsPhase> = {
+const serauqsInstructions: SerauqsInstructions = {
   startTurn: ["ifelse", ["morethan", ["turn"], 2],
     ["line", "Select which", "pawn", "or", "king", "to", "move"],
     ["line", "Select which", "pawn", "to", "promote"]

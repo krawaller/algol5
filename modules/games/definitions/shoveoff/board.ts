@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { ShoveoffTerrain } from './_types';
+import { ShoveoffBoard } from './_types';
 
-const shoveoffBoard: Board<ShoveoffTerrain> = {
+const shoveoffBoard: ShoveoffBoard = {
   height: 4,
   width: 4,
   terrain: {

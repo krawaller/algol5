@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit } from './_types';
+import { ThreemusketeersFlow } from './_types';
 
-const threemusketeersFlow: Flow<ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit> = {
+const threemusketeersFlow: ThreemusketeersFlow = {
   startTurn: {
     link: "selectunit"
   },

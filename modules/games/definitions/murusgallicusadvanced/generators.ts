@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer } from './_types';
+import { MurusgallicusadvancedGenerators } from './_types';
 
-const murusgallicusadvancedGenerators: Generators<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer> = {
+const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {
     type: "walker",
     start: "selectcatapult",

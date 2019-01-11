@@ -1,5 +1,5 @@
-import {GameTestSuite} from '../../../types';
+import { UglyduckScripts } from './_types';
 
-const uglyduckTests: GameTestSuite = {};
+const uglyduckScripts: UglyduckScripts = {};
 
-export default uglyduckTests;
+export default uglyduckScripts;

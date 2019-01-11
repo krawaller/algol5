@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { KriegPhase } from './_types';
+import { KriegInstructions } from './_types';
 
-const kriegInstructions: Instructions<KriegPhase> = {
+const kriegInstructions: KriegInstructions = {
   startTurn: ["ifelse", ["morethan", ["turn"], 2],
     ["line", "Select a unit to move that your didn't move last turn"],
     ["line", "Select a unit to move"]

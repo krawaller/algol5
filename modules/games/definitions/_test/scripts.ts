@@ -1,5 +1,5 @@
-import {GameTestSuite} from '../../../types';
+import { _testScripts } from './_types';
 
-const _testTests: GameTestSuite = {};
+const _testScripts: _testScripts = {};
 
-export default _testTests;
+export default _testScripts;

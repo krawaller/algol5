@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { AmazonsScripts } from './_types';
 
-const amazonsTests: GameTestSuite = {
+const amazonsScripts: AmazonsScripts = {
   basic: [{
     commands: ["d10"],
     include: ["a10", "b10", "b8", "c10", "c9", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "e10", "e9", "f10", "f8", "g7", "h6", "i5"]
@@ -22,4 +22,4 @@ const amazonsTests: GameTestSuite = {
   }]
 };
 
-export default amazonsTests;
+export default amazonsScripts;

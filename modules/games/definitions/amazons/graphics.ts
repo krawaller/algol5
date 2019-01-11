@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { AmazonsTerrain, AmazonsUnit } from './_types';
+import { AmazonsGraphics } from './_types';
 
-const amazonsGraphics: Graphics<AmazonsTerrain, AmazonsUnit> = {
+const amazonsGraphics: AmazonsGraphics = {
   icons: {
     queens: "queen",
     fires: "pawn"

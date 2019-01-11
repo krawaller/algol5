@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { ThreemusketeersAI } from './_types';
 
-const threemusketeersAI: AI = {};
+const threemusketeersAI: ThreemusketeersAI = {};
 
 export default threemusketeersAI;

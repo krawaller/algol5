@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { GogolTerrain, GogolUnit } from './_types';
+import { GogolGraphics } from './_types';
 
-const gogolGraphics: Graphics<GogolTerrain, GogolUnit> = {
+const gogolGraphics: GogolGraphics = {
   tiles: {
     homerow: "playercolour"
   },

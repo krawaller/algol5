@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { SerauqsScripts } from './_types';
 
-const serauqsTests: GameTestSuite = {
+const serauqsScripts: SerauqsScripts = {
   basic: [{
     commands: [],
     include: ["a1", "b1", "c1", "d1"]
@@ -25,4 +25,4 @@ const serauqsTests: GameTestSuite = {
   }]
 };
 
-export default serauqsTests;
+export default serauqsScripts;

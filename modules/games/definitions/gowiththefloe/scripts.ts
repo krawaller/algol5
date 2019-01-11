@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { GowiththefloeScripts } from './_types';
 
-const gowiththefloeTests: GameTestSuite = {
+const gowiththefloeScripts: GowiththefloeScripts = {
   basic: [{
     commands: [],
     include: ["b2", "b7"]
@@ -70,4 +70,4 @@ const gowiththefloeTests: GameTestSuite = {
   }]
 };
 
-export default gowiththefloeTests;
+export default gowiththefloeScripts;

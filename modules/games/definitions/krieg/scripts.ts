@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { KriegScripts } from './_types';
 
-const kriegTests: GameTestSuite = {
+const kriegScripts: KriegScripts = {
   basic: [{
     commands: [],
     include: ["a3", "b3", "b4"]
@@ -57,4 +57,4 @@ const kriegTests: GameTestSuite = {
   }]
 };
 
-export default kriegTests;
+export default kriegScripts;

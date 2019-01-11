@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { ThreemusketeersTerrain, ThreemusketeersUnit } from './_types';
+import { ThreemusketeersGraphics } from './_types';
 
-const threemusketeersGraphics: Graphics<ThreemusketeersTerrain, ThreemusketeersUnit> = {
+const threemusketeersGraphics: ThreemusketeersGraphics = {
   icons: {
     pawns: "pawn",
     kings: "king"

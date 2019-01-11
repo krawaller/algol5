@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { ShoveoffArtifactLayer, ShoveoffGenerator, ShoveoffLayer } from './_types';
+import { ShoveoffGenerators } from './_types';
 
-const shoveoffGenerators: Generators<ShoveoffArtifactLayer, ShoveoffGenerator, ShoveoffLayer> = {
+const shoveoffGenerators: ShoveoffGenerators = {
   findaffected: {
     type: "walker",
     start: "selectpushpoint",

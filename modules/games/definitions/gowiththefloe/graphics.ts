@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { GowiththefloeTerrain, GowiththefloeUnit } from './_types';
+import { GowiththefloeGraphics } from './_types';
 
-const gowiththefloeGraphics: Graphics<GowiththefloeTerrain, GowiththefloeUnit> = {
+const gowiththefloeGraphics: GowiththefloeGraphics = {
   tiles: {
     water: "water"
   },

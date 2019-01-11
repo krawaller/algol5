@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type OrthokonTerrain = never;
 export type OrthokonUnit = "soldiers";
@@ -11,3 +11,12 @@ export type OrthokonGenerator = "findvictims" | "findmovetargets";
 export type OrthokonArtifactLayer = "victims" | "movetargets";
 export type OrthokonTerrainLayer = never;
 export type OrthokonLayer = CommonLayer | OrthokonUnitLayer | OrthokonArtifactLayer;
+export type OrthokonGenerators = Generators<OrthokonArtifactLayer, OrthokonGenerator, OrthokonLayer>;
+export type OrthokonFlow = Flow<OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit>;
+export type OrthokonBoard = Board<OrthokonTerrain>;
+export type OrthokonAI = AI;
+export type OrthokonGraphics = Graphics<OrthokonTerrain, OrthokonUnit>;
+export type OrthokonInstructions = Instructions<OrthokonPhase>;
+export type OrthokonMeta = Meta;
+export type OrthokonScripts = GameTestSuite;
+export type OrthokonSetup = Setup<OrthokonUnit>;

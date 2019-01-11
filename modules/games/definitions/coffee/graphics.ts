@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { CoffeeTerrain, CoffeeUnit } from './_types';
+import { CoffeeGraphics } from './_types';
 
-const coffeeGraphics: Graphics<CoffeeTerrain, CoffeeUnit> = {
+const coffeeGraphics: CoffeeGraphics = {
   icons: {
     soldiers: "pawn",
     markers: "pawn"

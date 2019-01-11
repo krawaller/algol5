@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { OrthokonMeta } from './_types';
 
-const orthokonMeta: Meta = {
+const orthokonMeta: OrthokonMeta = {
   id: "orthokon",
   name: "Orthokon",
   source: "http://www.di.fc.ul.pt/~jpn/gv/orthokon.htm",

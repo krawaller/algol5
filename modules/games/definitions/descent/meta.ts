@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { DescentMeta } from './_types';
 
-const descentMeta: Meta = {
+const descentMeta: DescentMeta = {
   id: "descent",
   name: "Descent",
   source: "https://www.boardgamegeek.com/boardgame/150586/descent",

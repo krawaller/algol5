@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { SemaphorTerrain, SemaphorUnit } from './_types';
+import { SemaphorGraphics } from './_types';
 
-const semaphorGraphics: Graphics<SemaphorTerrain, SemaphorUnit> = {
+const semaphorGraphics: SemaphorGraphics = {
   icons: {
     kings: "king",
     pawns: "pawn",

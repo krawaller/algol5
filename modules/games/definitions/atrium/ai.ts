@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { AtriumAI } from './_types';
 
-const atriumAI: AI = {};
+const atriumAI: AtriumAI = {};
 
 export default atriumAI;

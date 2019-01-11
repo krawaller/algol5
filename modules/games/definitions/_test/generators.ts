@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { _testArtifactLayer, _testGenerator, _testLayer } from './_types';
+import { _testGenerators } from './_types';
 
-const _testGenerators: Generators<_testArtifactLayer, _testGenerator, _testLayer> = {
+const _testGenerators: _testGenerators = {
   stepsfirst: {
     type: "walker",
     dirs: [1, 5],

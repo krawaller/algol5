@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { ShoveoffAI } from './_types';
 
-const shoveoffAI: AI = {};
+const shoveoffAI: ShoveoffAI = {};
 
 export default shoveoffAI;

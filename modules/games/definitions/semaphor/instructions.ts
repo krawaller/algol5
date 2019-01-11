@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { SemaphorPhase } from './_types';
+import { SemaphorInstructions } from './_types';
 
-const semaphorInstructions: Instructions<SemaphorPhase> = {
+const semaphorInstructions: SemaphorInstructions = {
   startTurn: ["line", "Select", ["orlist", [
       ["different", ["sizeof", "units"], 12], "an empty square to deploy to"
     ],

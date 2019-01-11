@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { _testPhase } from './_types';
+import { _testInstructions } from './_types';
 
-const _testInstructions: Instructions<_testPhase> = {
+const _testInstructions: _testInstructions = {
   startTurn: "foo",
   selectunit: "bar",
   selectmark: "baz"

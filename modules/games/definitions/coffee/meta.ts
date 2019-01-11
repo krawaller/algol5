@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { CoffeeMeta } from './_types';
 
-const coffeeMeta: Meta = {
+const coffeeMeta: CoffeeMeta = {
   id: "coffee",
   name: "Coffee",
   source: "https://www.boardgamegeek.com/filepage/64972/coffee-rules-nestorgames",

@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { _testTerrain, _testUnit } from './_types';
+import { _testGraphics } from './_types';
 
-const _testGraphics: Graphics<_testTerrain, _testUnit> = {
+const _testGraphics: _testGraphics = {
   icons: {
     stepsfirsts: "queen",
     blocksfirsts: "queen",

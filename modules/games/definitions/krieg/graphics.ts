@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { KriegTerrain, KriegUnit } from './_types';
+import { KriegGraphics } from './_types';
 
-const kriegGraphics: Graphics<KriegTerrain, KriegUnit> = {
+const kriegGraphics: KriegGraphics = {
   tiles: {
     corners: "playercolour",
     bases: "castle"

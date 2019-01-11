@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { AriesArtifactLayer, AriesGenerator, AriesLayer } from './_types';
+import { AriesGenerators } from './_types';
 
-const ariesGenerators: Generators<AriesArtifactLayer, AriesGenerator, AriesLayer> = {
+const ariesGenerators: AriesGenerators = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",
@@ -40,9 +39,7 @@ const ariesGenerators: Generators<AriesArtifactLayer, AriesGenerator, AriesLayer
         tolayer: "beingpushed"
       },
       last: {
-        condition: ["valinlist", ["stopreason"],
-          "hitblock", "outofbounds"
-        ],
+        condition: ["valinlist", ["stopreason"], "hitblock", "outofbounds"],
         tolayer: "squished"
       }
     }

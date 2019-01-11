@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { CoffeeAI } from './_types';
 
-const coffeeAI: AI = {};
+const coffeeAI: CoffeeAI = {};
 
 export default coffeeAI;

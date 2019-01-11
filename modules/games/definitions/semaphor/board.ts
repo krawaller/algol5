@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { SemaphorTerrain } from './_types';
+import { SemaphorBoard } from './_types';
 
-const semaphorBoard: Board<SemaphorTerrain> = {
+const semaphorBoard: SemaphorBoard = {
   width: 4,
   height: 3,
   terrain: {}

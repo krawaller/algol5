@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { TransetScripts } from './_types';
 
-const transetTests: GameTestSuite = {
+const transetScripts: TransetScripts = {
   basic: [{
     commands: [],
     include: ["a1", "b1", "c1", "d1", "e1"]
@@ -40,4 +40,4 @@ const transetTests: GameTestSuite = {
   }]
 };
 
-export default transetTests;
+export default transetScripts;

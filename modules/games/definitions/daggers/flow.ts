@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { DaggersArtifactLayer, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersUnit } from './_types';
+import { DaggersFlow } from './_types';
 
-const daggersFlow: Flow<DaggersArtifactLayer, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersUnit> = {
+const daggersFlow: DaggersFlow = {
   endGame: {
     infiltration: {
       condition: ["overlaps", "mycrowns", "oppbase"],

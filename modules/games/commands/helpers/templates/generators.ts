@@ -1,11 +1,8 @@
-import { typeSignature } from "../../../../types";
-
 export default function templateGenerators(gameId) {
-  const gensig = typeSignature("Generators", gameId);
-  return `import {Generators} from '../../../types';
-import { ${gensig} } from './_types';
+  const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
+  return `import { ${capId}Generators } from './_types';
 
-const ${gameId}Generators: Generators<${gensig}> = {
+const ${gameId}Generators: ${capId}Generators = {
 
 };
 

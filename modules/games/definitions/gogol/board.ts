@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { GogolTerrain } from './_types';
+import { GogolBoard } from './_types';
 
-const gogolBoard: Board<GogolTerrain> = {
+const gogolBoard: GogolBoard = {
   height: 8,
   width: 8,
   terrain: {

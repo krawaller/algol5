@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { UglyduckArtifactLayer, UglyduckGenerator, UglyduckLayer } from './_types';
+import { UglyduckGenerators } from './_types';
 
-const uglyduckGenerators: Generators<UglyduckArtifactLayer, UglyduckGenerator, UglyduckLayer> = {
+const uglyduckGenerators: UglyduckGenerators = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",

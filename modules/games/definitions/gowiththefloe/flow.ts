@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { GowiththefloeArtifactLayer, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeUnit } from './_types';
+import { GowiththefloeFlow } from './_types';
 
-const gowiththefloeFlow: Flow<GowiththefloeArtifactLayer, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeUnit> = {
+const gowiththefloeFlow: GowiththefloeFlow = {
   STATUS: "wip",
   startTurn: {
     link: "selectunit"

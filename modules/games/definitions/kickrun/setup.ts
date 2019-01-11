@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { KickrunUnit } from './_types';
+import { KickrunSetup } from './_types';
 
-const kickrunSetup: Setup<KickrunUnit> = {
+const kickrunSetup: KickrunSetup = {
   runners: {
     "1": ["a2", "b1"],
     "2": ["d5", "e4"]

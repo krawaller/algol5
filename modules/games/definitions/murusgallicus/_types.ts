@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type MurusgallicusTerrain = "homerow";
 export type MurusgallicusUnit = "towers" | "walls";
@@ -11,3 +11,12 @@ export type MurusgallicusGenerator = "findmovetargets" | "findmoveresults" | "fi
 export type MurusgallicusArtifactLayer = "movetargets" | "madetowers" | "madewalls" | "killtargets";
 export type MurusgallicusTerrainLayer = "homerow" | "nohomerow" | "myhomerow" | "opphomerow";
 export type MurusgallicusLayer = CommonLayer | MurusgallicusUnitLayer | MurusgallicusArtifactLayer | MurusgallicusTerrainLayer;
+export type MurusgallicusGenerators = Generators<MurusgallicusArtifactLayer, MurusgallicusGenerator, MurusgallicusLayer>;
+export type MurusgallicusFlow = Flow<MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit>;
+export type MurusgallicusBoard = Board<MurusgallicusTerrain>;
+export type MurusgallicusAI = AI;
+export type MurusgallicusGraphics = Graphics<MurusgallicusTerrain, MurusgallicusUnit>;
+export type MurusgallicusInstructions = Instructions<MurusgallicusPhase>;
+export type MurusgallicusMeta = Meta;
+export type MurusgallicusScripts = GameTestSuite;
+export type MurusgallicusSetup = Setup<MurusgallicusUnit>;

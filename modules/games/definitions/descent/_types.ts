@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type DescentTerrain = never;
 export type DescentUnit = "pawns" | "knights" | "rooks";
@@ -11,3 +11,12 @@ export type DescentGenerator = "findmovetargets" | "finddigtargets" | "findwinli
 export type DescentArtifactLayer = "movetargets" | "digtargets" | "winline";
 export type DescentTerrainLayer = never;
 export type DescentLayer = CommonLayer | DescentUnitLayer | DescentArtifactLayer;
+export type DescentGenerators = Generators<DescentArtifactLayer, DescentGenerator, DescentLayer>;
+export type DescentFlow = Flow<DescentArtifactLayer, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentUnit>;
+export type DescentBoard = Board<DescentTerrain>;
+export type DescentAI = AI;
+export type DescentGraphics = Graphics<DescentTerrain, DescentUnit>;
+export type DescentInstructions = Instructions<DescentPhase>;
+export type DescentMeta = Meta;
+export type DescentScripts = GameTestSuite;
+export type DescentSetup = Setup<DescentUnit>;

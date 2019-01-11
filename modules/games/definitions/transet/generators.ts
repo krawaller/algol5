@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { TransetArtifactLayer, TransetGenerator, TransetLayer } from './_types';
+import { TransetGenerators } from './_types';
 
-const transetGenerators: Generators<TransetArtifactLayer, TransetGenerator, TransetLayer> = {
+const transetGenerators: TransetGenerators = {
   "findswap2step": {
     type: "neighbour",
     start: "selectswapunit",

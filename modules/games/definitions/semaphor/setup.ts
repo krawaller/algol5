@@ -1,6 +1,5 @@
-import {Setup} from '../../../types';
-import { SemaphorUnit } from './_types';
+import { SemaphorSetup } from './_types';
 
-const semaphorSetup: Setup<SemaphorUnit> = {};
+const semaphorSetup: SemaphorSetup = {};
 
 export default semaphorSetup;

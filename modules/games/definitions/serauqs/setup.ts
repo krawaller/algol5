@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { SerauqsUnit } from './_types';
+import { SerauqsSetup } from './_types';
 
-const serauqsSetup: Setup<SerauqsUnit> = {
+const serauqsSetup: SerauqsSetup = {
   soldiers: {
     "1": [
       ["rect", "a1", "d1"]

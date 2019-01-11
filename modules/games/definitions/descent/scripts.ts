@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { DescentScripts } from './_types';
 
-const descentTests: GameTestSuite = {
+const descentScripts: DescentScripts = {
   basic: [{
     commands: [],
     include: ["a1", "c4", "d1"]
@@ -39,4 +39,4 @@ const descentTests: GameTestSuite = {
   }]
 };
 
-export default descentTests;
+export default descentScripts;

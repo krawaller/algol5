@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { AtriumArtifactLayer, AtriumGenerator, AtriumLayer } from './_types';
+import { AtriumGenerators } from './_types';
 
-const atriumGenerators: Generators<AtriumArtifactLayer, AtriumGenerator, AtriumLayer> = {
+const atriumGenerators: AtriumGenerators = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",

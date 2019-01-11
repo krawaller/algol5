@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type KickrunTerrain = "corners";
 export type KickrunUnit = "runners" | "sidekickers";
@@ -11,3 +11,12 @@ export type KickrunGenerator = "findmovetargets";
 export type KickrunArtifactLayer = "movetargets";
 export type KickrunTerrainLayer = "corners" | "nocorners" | "mycorners" | "oppcorners";
 export type KickrunLayer = CommonLayer | KickrunUnitLayer | KickrunArtifactLayer | KickrunTerrainLayer;
+export type KickrunGenerators = Generators<KickrunArtifactLayer, KickrunGenerator, KickrunLayer>;
+export type KickrunFlow = Flow<KickrunArtifactLayer, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunUnit>;
+export type KickrunBoard = Board<KickrunTerrain>;
+export type KickrunAI = AI;
+export type KickrunGraphics = Graphics<KickrunTerrain, KickrunUnit>;
+export type KickrunInstructions = Instructions<KickrunPhase>;
+export type KickrunMeta = Meta;
+export type KickrunScripts = GameTestSuite;
+export type KickrunSetup = Setup<KickrunUnit>;

@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { MurusgallicusadvancedTerrain } from './_types';
+import { MurusgallicusadvancedBoard } from './_types';
 
-const murusgallicusadvancedBoard: Board<MurusgallicusadvancedTerrain> = {
+const murusgallicusadvancedBoard: MurusgallicusadvancedBoard = {
   height: 7,
   width: 8,
   terrain: {

@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { TransetTerrain, TransetUnit } from './_types';
+import { TransetGraphics } from './_types';
 
-const transetGraphics: Graphics<TransetTerrain, TransetUnit> = {
+const transetGraphics: TransetGraphics = {
   icons: {
     pinets: "pawn",
     piokers: "bishop",

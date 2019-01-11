@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { DaggersMeta } from './_types';
 
-const daggersMeta: Meta = {
+const daggersMeta: DaggersMeta = {
   id: "daggers",
   name: "Daggers",
   about: {

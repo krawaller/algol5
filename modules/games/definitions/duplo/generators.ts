@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { DuploArtifactLayer, DuploGenerator, DuploLayer } from './_types';
+import { DuploGenerators } from './_types';
 
-const duploGenerators: Generators<DuploArtifactLayer, DuploGenerator, DuploLayer> = {
+const duploGenerators: DuploGenerators = {
   findspawndirs: {
     type: "neighbour",
     start: "selectunit",

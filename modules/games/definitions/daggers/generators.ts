@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { DaggersArtifactLayer, DaggersGenerator, DaggersLayer } from './_types';
+import { DaggersGenerators } from './_types';
 
-const daggersGenerators: Generators<DaggersArtifactLayer, DaggersGenerator, DaggersLayer> = {
+const daggersGenerators: DaggersGenerators = {
   findcrowntargets: {
     type: "neighbour",
     dirs: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -18,18 +17,14 @@ const daggersGenerators: Generators<DaggersArtifactLayer, DaggersGenerator, Dagg
     start: "selectunit",
     dirs: [8, 1, 2, 4, 5, 6],
     blocks: "units",
-    max: ["ifelse", ["valinlist", ["dir"],
-      8, 1, 2
-    ], 1, 8],
+    max: ["ifelse", ["valinlist", ["dir"], 8, 1, 2], 1, 8],
     draw: {
       steps: {
         tolayer: "movetarget"
       },
       block: {
         condition: ["and", ["noneat", "myunits", ["target"]],
-          ["not", ["and", ["valinlist", ["dir"],
-              1, 5
-            ],
+          ["not", ["and", ["valinlist", ["dir"], 1, 5],
             ["anyat", "oppdaggers", ["target"]]
           ]]
         ],

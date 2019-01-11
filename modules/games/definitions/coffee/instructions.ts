@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { CoffeePhase } from './_types';
+import { CoffeeInstructions } from './_types';
 
-const coffeeInstructions: Instructions<CoffeePhase> = {
+const coffeeInstructions: CoffeeInstructions = {
   startTurn: ["ifelse", ["isempty", "neutralunits"], "Select any square to place the first unit of the game", "Select which neutral unit to take over"],
   selectdrop: ["line", "Press", ["orlist", [
       ["notempty", "uphill"], "uphill"

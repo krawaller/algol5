@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { ShoveoffTerrain, ShoveoffUnit } from './_types';
+import { ShoveoffGraphics } from './_types';
 
-const shoveoffGraphics: Graphics<ShoveoffTerrain, ShoveoffUnit> = {
+const shoveoffGraphics: ShoveoffGraphics = {
   icons: {
     soldiers: "pawn"
   },

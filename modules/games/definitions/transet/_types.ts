@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type TransetTerrain = "base";
 export type TransetUnit = "pinets" | "piokers" | "piases";
@@ -11,3 +11,12 @@ export type TransetGenerator = "findswap2step" | "findswap1steps" | "findmovetar
 export type TransetArtifactLayer = "swap2step" | "swap1steps" | "movetargets";
 export type TransetTerrainLayer = "base" | "nobase" | "mybase" | "oppbase";
 export type TransetLayer = CommonLayer | TransetUnitLayer | TransetArtifactLayer | TransetTerrainLayer;
+export type TransetGenerators = Generators<TransetArtifactLayer, TransetGenerator, TransetLayer>;
+export type TransetFlow = Flow<TransetArtifactLayer, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetUnit>;
+export type TransetBoard = Board<TransetTerrain>;
+export type TransetAI = AI;
+export type TransetGraphics = Graphics<TransetTerrain, TransetUnit>;
+export type TransetInstructions = Instructions<TransetPhase>;
+export type TransetMeta = Meta;
+export type TransetScripts = GameTestSuite;
+export type TransetSetup = Setup<TransetUnit>;

@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { DaggersScripts } from './_types';
 
-const daggersTests: GameTestSuite = {
+const daggersScripts: DaggersScripts = {
   basic: [{
     commands: [],
     include: ["c7", "d7", "d8", "e7", "e8", "f7"]
@@ -28,4 +28,4 @@ const daggersTests: GameTestSuite = {
   }]
 };
 
-export default daggersTests;
+export default daggersScripts;

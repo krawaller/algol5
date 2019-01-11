@@ -1,6 +1,6 @@
-import {AI} from '../../../types';
+import { MurusgallicusAI } from './_types';
 
-const murusgallicusAI: AI = {
+const murusgallicusAI: MurusgallicusAI = {
   terrain: {
     threatrow: {
       "1": [

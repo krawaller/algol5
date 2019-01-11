@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type DaggersTerrain = "base";
 export type DaggersUnit = "daggers" | "crowns";
@@ -11,3 +11,12 @@ export type DaggersGenerator = "findcrowntargets" | "finddaggertargets";
 export type DaggersArtifactLayer = "movetarget";
 export type DaggersTerrainLayer = "base" | "nobase" | "mybase" | "oppbase";
 export type DaggersLayer = CommonLayer | DaggersUnitLayer | DaggersArtifactLayer | DaggersTerrainLayer;
+export type DaggersGenerators = Generators<DaggersArtifactLayer, DaggersGenerator, DaggersLayer>;
+export type DaggersFlow = Flow<DaggersArtifactLayer, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersUnit>;
+export type DaggersBoard = Board<DaggersTerrain>;
+export type DaggersAI = AI;
+export type DaggersGraphics = Graphics<DaggersTerrain, DaggersUnit>;
+export type DaggersInstructions = Instructions<DaggersPhase>;
+export type DaggersMeta = Meta;
+export type DaggersScripts = GameTestSuite;
+export type DaggersSetup = Setup<DaggersUnit>;

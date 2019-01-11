@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { GowiththefloeArtifactLayer, GowiththefloeGenerator, GowiththefloeLayer } from './_types';
+import { GowiththefloeGenerators } from './_types';
 
-const gowiththefloeGenerators: Generators<GowiththefloeArtifactLayer, GowiththefloeGenerator, GowiththefloeLayer> = {
+const gowiththefloeGenerators: GowiththefloeGenerators = {
   findeattargets: {
     type: "neighbour",
     start: "selectunit",

@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { MurusgallicusPhase } from './_types';
+import { MurusgallicusInstructions } from './_types';
 
-const murusgallicusInstructions: Instructions<MurusgallicusPhase> = {
+const murusgallicusInstructions: MurusgallicusInstructions = {
   startTurn: ["line", "Select a", "rook", "to act with"],
   selecttower: ["line", "Select", ["orlist", [
       ["notempty", "movetargets"], "a move target"

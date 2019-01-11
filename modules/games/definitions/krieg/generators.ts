@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { KriegArtifactLayer, KriegGenerator, KriegLayer } from './_types';
+import { KriegGenerators } from './_types';
 
-const kriegGenerators: Generators<KriegArtifactLayer, KriegGenerator, KriegLayer> = {
+const kriegGenerators: KriegGenerators = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",

@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { JostleMeta } from './_types';
 
-const jostleMeta: Meta = {
+const jostleMeta: JostleMeta = {
   id: "jostle",
   name: "Jostle",
   source: "http://www.marksteeregames.com/Jostle_Go_rules.pdf",

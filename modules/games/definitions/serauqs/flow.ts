@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { SerauqsArtifactLayer, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsUnit } from './_types';
+import { SerauqsFlow } from './_types';
 
-const serauqsFlow: Flow<SerauqsArtifactLayer, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsUnit> = {
+const serauqsFlow: SerauqsFlow = {
   endGame: {
     madeline: {
       condition: ["notempty", "winline"],

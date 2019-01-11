@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { SemaphorArtifactLayer, SemaphorGenerator, SemaphorLayer } from './_types';
+import { SemaphorGenerators } from './_types';
 
-const semaphorGenerators: Generators<SemaphorArtifactLayer, SemaphorGenerator, SemaphorLayer> = {
+const semaphorGenerators: SemaphorGenerators = {
   findlines: {
     type: "walker",
     dirs: [1, 2, 3, 4],

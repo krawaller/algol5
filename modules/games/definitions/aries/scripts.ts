@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { AriesScripts } from './_types';
 
-const ariesTests: GameTestSuite = {
+const ariesScripts: AriesScripts = {
   basic: [{
     commands: [],
     include: ["a4", "b4", "c4", "d1", "d2", "d3", "d4"]
@@ -26,4 +26,4 @@ const ariesTests: GameTestSuite = {
   }]
 };
 
-export default ariesTests;
+export default ariesScripts;

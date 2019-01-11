@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { ThreemusketeersArtifactLayer, ThreemusketeersGenerator, ThreemusketeersLayer } from './_types';
+import { ThreemusketeersGenerators } from './_types';
 
-const threemusketeersGenerators: Generators<ThreemusketeersArtifactLayer, ThreemusketeersGenerator, ThreemusketeersLayer> = {
+const threemusketeersGenerators: ThreemusketeersGenerators = {
   findstrandedmusketeers: {
     type: "neighbour",
     dirs: [1, 3, 5, 7],

@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { GogolArtifactLayer, GogolGenerator, GogolLayer } from './_types';
+import { GogolGenerators } from './_types';
 
-const gogolGenerators: Generators<GogolArtifactLayer, GogolGenerator, GogolLayer> = {
+const gogolGenerators: GogolGenerators = {
   findforbiddenkingspots: {
     type: "neighbour",
     starts: ["intersect", "edges", "mysoldiers"],

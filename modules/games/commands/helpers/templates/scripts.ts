@@ -1,12 +1,11 @@
-import { typeSignature } from "../../../../types";
-
 export default function templateScripts(gameId) {
-  return `import {GameTestSuite} from '../../../types';
+  const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
+  return `import { ${capId}Scripts } from './_types';
 
-const ${gameId}Tests: GameTestSuite = {
+const ${gameId}Scripts: ${capId}Scripts = {
 
 };
 
-export default ${gameId}Tests;
+export default ${gameId}Scripts;
 `;
 }

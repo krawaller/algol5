@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { GogolAI } from './_types';
 
-const gogolAI: AI = {};
+const gogolAI: GogolAI = {};
 
 export default gogolAI;

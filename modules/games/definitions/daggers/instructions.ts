@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { DaggersPhase } from './_types';
+import { DaggersInstructions } from './_types';
 
-const daggersInstructions: Instructions<DaggersPhase> = {
+const daggersInstructions: DaggersInstructions = {
   startTurn: ["line", "Select a", "bishop", "or", "king", "to move"],
   selectunit: ["line", "Select where to move the", "selectunit", ["unitnameat", "selectunit"]],
   selectmovetarget: ["line", "Press", "move", "to go", ["ifelse", ["higher", "selectmovetarget", "selectunit"], "uphill", ["if", ["higher", "selectunit", "selectmovetarget"], "downhill"]], "from", "selectunit", ["ifelse", ["anyat", "units", "selectmovetarget"],

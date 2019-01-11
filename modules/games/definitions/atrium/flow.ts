@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit } from './_types';
+import { AtriumFlow } from './_types';
 
-const atriumFlow: Flow<AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit> = {
+const atriumFlow: AtriumFlow = {
   endGame: {
     madewinline: {
       condition: ["notempty", "winline"],

@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { GogolArtifactLayer, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolUnit } from './_types';
+import { GogolFlow } from './_types';
 
-const gogolFlow: Flow<GogolArtifactLayer, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolUnit> = {
+const gogolFlow: GogolFlow = {
   startTurn: {
     runGenerators: ["findforbiddenkingspots", "findforbiddensoldierspots"],
     link: ["ifelse", ["morethan", ["turn"], 2], "selectunit", "selectkingdeploy"]

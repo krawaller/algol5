@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { JostleTerrain } from './_types';
+import { JostleBoard } from './_types';
 
-const jostleBoard: Board<JostleTerrain> = {
+const jostleBoard: JostleBoard = {
   height: 10,
   width: 10,
   terrain: {}

@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { UglyduckPhase } from './_types';
+import { UglyduckInstructions } from './_types';
 
-const uglyduckInstructions: Instructions<UglyduckPhase> = {
+const uglyduckInstructions: UglyduckInstructions = {
   startTurn: ["line", "Select", ["orlist", [
       ["notempty", "mysoldiers"],
       ["line", "a", "pawn", "to advance"]

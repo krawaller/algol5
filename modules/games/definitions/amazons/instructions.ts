@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { AmazonsPhase } from './_types';
+import { AmazonsInstructions } from './_types';
 
-const amazonsInstructions: Instructions<AmazonsPhase> = {
+const amazonsInstructions: AmazonsInstructions = {
   startTurn: ["Select a", "queen", "to move and fire with"],
   selectunit: ["Select where to move the", "selectunit", "queen"],
   selectmovetarget: ["Press", "move", "to go from", "selectunit", "to", "selectmovetarget"],

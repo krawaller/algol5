@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { ShoveoffUnit } from './_types';
+import { ShoveoffSetup } from './_types';
 
-const shoveoffSetup: Setup<ShoveoffUnit> = {
+const shoveoffSetup: ShoveoffSetup = {
   soldiers: {
     "0": [
       ["rect", "a1", "d4"]

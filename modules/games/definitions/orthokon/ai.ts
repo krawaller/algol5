@@ -1,6 +1,6 @@
-import {AI} from '../../../types';
+import { OrthokonAI } from './_types';
 
-const orthokonAI: AI = {
+const orthokonAI: OrthokonAI = {
   aspects: {
     headcount: ["sizeof", "myunits"]
   },

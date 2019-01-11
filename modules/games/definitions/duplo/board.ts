@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { DuploTerrain } from './_types';
+import { DuploBoard } from './_types';
 
-const duploBoard: Board<DuploTerrain> = {
+const duploBoard: DuploBoard = {
   height: 8,
   width: 8,
   terrain: {}

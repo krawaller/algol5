@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { AriesUnit } from './_types';
+import { AriesSetup } from './_types';
 
-const ariesSetup: Setup<AriesUnit> = {
+const ariesSetup: AriesSetup = {
   soldiers: {
     "1": [
       ["rect", "a1", "d4"]

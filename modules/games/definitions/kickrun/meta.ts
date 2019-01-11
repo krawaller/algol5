@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { KickrunMeta } from './_types';
 
-const kickrunMeta: Meta = {
+const kickrunMeta: KickrunMeta = {
   id: "kickrun",
   name: "Kick & run",
   source: "http://www.di.fc.ul.pt/~jpn/gv/kickrun.htm",

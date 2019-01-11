@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { KickrunArtifactLayer, KickrunGenerator, KickrunLayer } from './_types';
+import { KickrunGenerators } from './_types';
 
-const kickrunGenerators: Generators<KickrunArtifactLayer, KickrunGenerator, KickrunLayer> = {
+const kickrunGenerators: KickrunGenerators = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",

@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { ShoveoffMeta } from './_types';
 
-const shoveoffMeta: Meta = {
+const shoveoffMeta: ShoveoffMeta = {
   id: "shoveoff",
   name: "Shove off",
   source: "https://boardgamegeek.com/boardgame/20522/shove",

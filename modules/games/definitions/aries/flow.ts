@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { AriesArtifactLayer, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesUnit } from './_types';
+import { AriesFlow } from './_types';
 
-const ariesFlow: Flow<AriesArtifactLayer, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesUnit> = {
+const ariesFlow: AriesFlow = {
   startTurn: {
     link: "selectunit"
   },

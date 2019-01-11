@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { GowiththefloeTerrain } from './_types';
+import { GowiththefloeBoard } from './_types';
 
-const gowiththefloeBoard: Board<GowiththefloeTerrain> = {
+const gowiththefloeBoard: GowiththefloeBoard = {
   height: 8,
   width: 8,
   terrain: {

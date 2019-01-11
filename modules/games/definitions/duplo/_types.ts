@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type DuploTerrain = never;
 export type DuploUnit = "soldiers";
@@ -11,3 +11,12 @@ export type DuploGenerator = "findspawndirs" | "findgrowstarts" | "findexpandpoi
 export type DuploArtifactLayer = "spawndirs" | "growstarts" | "targets" | "potentialopptargets" | "spawns";
 export type DuploTerrainLayer = never;
 export type DuploLayer = CommonLayer | DuploUnitLayer | DuploArtifactLayer;
+export type DuploGenerators = Generators<DuploArtifactLayer, DuploGenerator, DuploLayer>;
+export type DuploFlow = Flow<DuploArtifactLayer, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploUnit>;
+export type DuploBoard = Board<DuploTerrain>;
+export type DuploAI = AI;
+export type DuploGraphics = Graphics<DuploTerrain, DuploUnit>;
+export type DuploInstructions = Instructions<DuploPhase>;
+export type DuploMeta = Meta;
+export type DuploScripts = GameTestSuite;
+export type DuploSetup = Setup<DuploUnit>;

@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { TransetMeta } from './_types';
 
-const transetMeta: Meta = {
+const transetMeta: TransetMeta = {
   id: "transet",
   name: "Transet",
   about: {

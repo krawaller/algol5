@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { AriesPhase } from './_types';
+import { AriesInstructions } from './_types';
 
-const ariesInstructions: Instructions<AriesPhase> = {
+const ariesInstructions: AriesInstructions = {
   startTurn: ["line", "Select a", "rook", "to move"],
   selectunit: ["line", "Select where to move your", "selectunit", "rook"],
   selectmovetarget: ["line", "Press", "move", "to move your", "selectunit", "rook", "to", "selectmovetarget", ["if", ["notempty", "squished"],

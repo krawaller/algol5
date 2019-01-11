@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { AmazonsArtifactLayer, AmazonsGenerator, AmazonsLayer } from './_types';
+import { AmazonsGenerators } from './_types';
 
-const amazonsGenerators: Generators<AmazonsArtifactLayer, AmazonsGenerator, AmazonsLayer> = {
+const amazonsGenerators: AmazonsGenerators = {
   findtargets: {
     type: "walker",
     dirs: [1, 2, 3, 4, 5, 6, 7, 8],

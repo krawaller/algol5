@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type CoffeeTerrain = never;
 export type CoffeeUnit = "soldiers" | "markers";
@@ -11,3 +11,12 @@ export type CoffeeGenerator = "findgeneratees" | "findwinlines";
 export type CoffeeArtifactLayer = "FOOBAR" | "vertical" | "uphill" | "horisontal" | "downhill" | "winline";
 export type CoffeeTerrainLayer = never;
 export type CoffeeLayer = CommonLayer | CoffeeUnitLayer | CoffeeArtifactLayer;
+export type CoffeeGenerators = Generators<CoffeeArtifactLayer, CoffeeGenerator, CoffeeLayer>;
+export type CoffeeFlow = Flow<CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeUnit>;
+export type CoffeeBoard = Board<CoffeeTerrain>;
+export type CoffeeAI = AI;
+export type CoffeeGraphics = Graphics<CoffeeTerrain, CoffeeUnit>;
+export type CoffeeInstructions = Instructions<CoffeePhase>;
+export type CoffeeMeta = Meta;
+export type CoffeeScripts = GameTestSuite;
+export type CoffeeSetup = Setup<CoffeeUnit>;

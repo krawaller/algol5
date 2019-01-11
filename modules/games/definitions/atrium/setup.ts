@@ -1,7 +1,6 @@
-import {Setup} from '../../../types';
-import { AtriumUnit } from './_types';
+import { AtriumSetup } from './_types';
 
-const atriumSetup: Setup<AtriumUnit> = {
+const atriumSetup: AtriumSetup = {
   kings: {
     "1": ["a2", "c5", "e2"],
     "2": ["b1", "b5", "e3"]

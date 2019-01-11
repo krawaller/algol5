@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { MurusgallicusadvancedTerrain, MurusgallicusadvancedUnit } from './_types';
+import { MurusgallicusadvancedGraphics } from './_types';
 
-const murusgallicusadvancedGraphics: Graphics<MurusgallicusadvancedTerrain, MurusgallicusadvancedUnit> = {
+const murusgallicusadvancedGraphics: MurusgallicusadvancedGraphics = {
   tiles: {
     homerow: "playercolour"
   },

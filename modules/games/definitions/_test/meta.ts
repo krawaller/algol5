@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { _testMeta } from './_types';
 
-const _testMeta: Meta = {
+const _testMeta: _testMeta = {
   id: "_test",
   name: "Test",
   tags: [],

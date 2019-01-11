@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { DescentTerrain, DescentUnit } from './_types';
+import { DescentGraphics } from './_types';
 
-const descentGraphics: Graphics<DescentTerrain, DescentUnit> = {
+const descentGraphics: DescentGraphics = {
   icons: {
     pawns: "pawn",
     knights: "knight",

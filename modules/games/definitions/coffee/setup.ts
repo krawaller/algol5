@@ -1,6 +1,5 @@
-import {Setup} from '../../../types';
-import { CoffeeUnit } from './_types';
+import { CoffeeSetup } from './_types';
 
-const coffeeSetup: Setup<CoffeeUnit> = {};
+const coffeeSetup: CoffeeSetup = {};
 
 export default coffeeSetup;

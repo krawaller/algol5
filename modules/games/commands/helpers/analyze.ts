@@ -3,7 +3,7 @@ import * as path from "path";
 
 import templateAnalysis from "./templates/analysis";
 
-import { FullDef } from "../../../types";
+import { FullDef, typeSignature } from "../../../types";
 import dateStamp from "./datestamp";
 
 const defFolder = path.join(__dirname, "../../definitions");
@@ -89,7 +89,7 @@ export default async function analyze(def: FullDef | string) {
     (l, n) => artifactLayers.indexOf(l) === n
   );
 
-  const analysis = `import { CommonLayer } from '../../../types';
+  const analysis = `import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type ${capId}Terrain = ${
     terrains.length ? terrains.map(t => `"${t}"`).join(" | ") : "never"
@@ -134,6 +134,21 @@ export type ${capId}Layer = CommonLayer${
   }${artifactLayers.length ? ` | ${capId}ArtifactLayer` : ""}${
     terrainLayers.length ? ` | ${capId}TerrainLayer` : ""
   };
+export type ${capId}Generators = Generators<${typeSignature(
+    "Generators",
+    gameId
+  )}>;
+export type ${capId}Flow = Flow<${typeSignature("Flow", gameId)}>;
+export type ${capId}Board = Board<${typeSignature("Board", gameId)}>;
+export type ${capId}AI = AI;
+export type ${capId}Graphics = Graphics<${typeSignature("Graphics", gameId)}>;
+export type ${capId}Instructions = Instructions<${typeSignature(
+    "Instructions",
+    gameId
+  )}>;
+export type ${capId}Meta = Meta;
+export type ${capId}Scripts = GameTestSuite;
+export type ${capId}Setup = Setup<${typeSignature("Setup", gameId)}>;
 `;
 
   await fs.writeFile(path.join(defPath, "_types.ts"), analysis);

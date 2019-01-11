@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { KickrunScripts } from './_types';
 
-const kickrunTests: GameTestSuite = {
+const kickrunScripts: KickrunScripts = {
   basic: [{
     commands: ["c1"],
     include: ["c2", "d1"]
@@ -25,4 +25,4 @@ const kickrunTests: GameTestSuite = {
   }]
 };
 
-export default kickrunTests;
+export default kickrunScripts;

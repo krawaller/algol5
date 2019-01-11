@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { DescentTerrain } from './_types';
+import { DescentBoard } from './_types';
 
-const descentBoard: Board<DescentTerrain> = {
+const descentBoard: DescentBoard = {
   height: 4,
   width: 4,
   terrain: {}

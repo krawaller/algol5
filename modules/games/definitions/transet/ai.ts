@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { TransetAI } from './_types';
 
-const transetAI: AI = {};
+const transetAI: TransetAI = {};
 
 export default transetAI;

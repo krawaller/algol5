@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { DuploTerrain, DuploUnit } from './_types';
+import { DuploGraphics } from './_types';
 
-const duploGraphics: Graphics<DuploTerrain, DuploUnit> = {
+const duploGraphics: DuploGraphics = {
   icons: {
     soldiers: "pawn"
   },

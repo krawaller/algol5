@@ -1,7 +1,6 @@
-import {Board} from '../../../types';
-import { OrthokonTerrain } from './_types';
+import { OrthokonBoard } from './_types';
 
-const orthokonBoard: Board<OrthokonTerrain> = {
+const orthokonBoard: OrthokonBoard = {
   height: 4,
   width: 4,
   terrain: {}

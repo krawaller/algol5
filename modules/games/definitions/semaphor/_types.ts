@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type SemaphorTerrain = never;
 export type SemaphorUnit = "kings" | "pawns" | "bishops";
@@ -11,3 +11,12 @@ export type SemaphorGenerator = "findlines";
 export type SemaphorArtifactLayer = "line";
 export type SemaphorTerrainLayer = never;
 export type SemaphorLayer = CommonLayer | SemaphorUnitLayer | SemaphorArtifactLayer;
+export type SemaphorGenerators = Generators<SemaphorArtifactLayer, SemaphorGenerator, SemaphorLayer>;
+export type SemaphorFlow = Flow<SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit>;
+export type SemaphorBoard = Board<SemaphorTerrain>;
+export type SemaphorAI = AI;
+export type SemaphorGraphics = Graphics<SemaphorTerrain, SemaphorUnit>;
+export type SemaphorInstructions = Instructions<SemaphorPhase>;
+export type SemaphorMeta = Meta;
+export type SemaphorScripts = GameTestSuite;
+export type SemaphorSetup = Setup<SemaphorUnit>;

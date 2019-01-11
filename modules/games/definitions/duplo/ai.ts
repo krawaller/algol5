@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { DuploAI } from './_types';
 
-const duploAI: AI = {};
+const duploAI: DuploAI = {};
 
 export default duploAI;

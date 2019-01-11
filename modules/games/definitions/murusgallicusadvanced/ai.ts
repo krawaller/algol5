@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { MurusgallicusadvancedAI } from './_types';
 
-const murusgallicusadvancedAI: AI = {};
+const murusgallicusadvancedAI: MurusgallicusadvancedAI = {};
 
 export default murusgallicusadvancedAI;

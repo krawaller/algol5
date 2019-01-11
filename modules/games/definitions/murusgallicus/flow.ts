@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit } from './_types';
+import { MurusgallicusFlow } from './_types';
 
-const murusgallicusFlow: Flow<MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit> = {
+const murusgallicusFlow: MurusgallicusFlow = {
   startTurn: {
     link: "selecttower"
   },

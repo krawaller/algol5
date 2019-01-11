@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { MurusgallicusMeta } from './_types';
 
-const murusgallicusMeta: Meta = {
+const murusgallicusMeta: MurusgallicusMeta = {
   id: "murusgallicus",
   name: "Murus Gallicus",
   source: "https://boardgamegeek.com/filepage/46316/murus-gallicus-detailed-rules",

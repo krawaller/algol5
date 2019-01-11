@@ -1,11 +1,8 @@
-import { typeSignature } from "../../../../types";
-
 export default function templateInstructions(gameId) {
-  const isig = typeSignature("Instructions", gameId);
-  return `import {Instructions} from '../../../types';
-import { ${isig} } from './_types';
+  const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
+  return `import { ${capId}Instructions } from './_types';
 
-const ${gameId}Instructions: Instructions<${isig}> = {
+const ${gameId}Instructions: ${capId}Instructions = {
 
 };
 

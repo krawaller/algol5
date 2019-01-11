@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit } from './_types';
+import { SemaphorFlow } from './_types';
 
-const semaphorFlow: Flow<SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit> = {
+const semaphorFlow: SemaphorFlow = {
   startTurn: {
     links: ["selectdeploytarget", "selectunit"]
   },

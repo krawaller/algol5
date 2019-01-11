@@ -1,11 +1,10 @@
 import { typeSignature } from "../../../../types";
 
 export default function templateSetup(gameId) {
-  const ssig = typeSignature("Setup", gameId);
-  return `import {Setup} from '../../../types';
-import { ${ssig} } from './_types';
+  const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
+  return `import { ${capId}Setup } from './_types';
 
-const ${gameId}Setup: Setup<${ssig}> = {
+const ${gameId}Setup: ${capId}Setup = {
 
 };
 

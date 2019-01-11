@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit } from './_types';
+import { OrthokonFlow } from './_types';
 
-const orthokonFlow: Flow<OrthokonArtifactLayer, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonUnit> = {
+const orthokonFlow: OrthokonFlow = {
   startTurn: {
     link: "selectunit"
   },

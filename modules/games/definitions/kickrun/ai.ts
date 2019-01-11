@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { KickrunAI } from './_types';
 
-const kickrunAI: AI = {};
+const kickrunAI: KickrunAI = {};
 
 export default kickrunAI;

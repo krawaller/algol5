@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { SerauqsArtifactLayer, SerauqsGenerator, SerauqsLayer } from './_types';
+import { SerauqsGenerators } from './_types';
 
-const serauqsGenerators: Generators<SerauqsArtifactLayer, SerauqsGenerator, SerauqsLayer> = {
+const serauqsGenerators: SerauqsGenerators = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",

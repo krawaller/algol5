@@ -1,7 +1,6 @@
-import {Instructions} from '../../../types';
-import { KickrunPhase } from './_types';
+import { KickrunInstructions } from './_types';
 
-const kickrunInstructions: Instructions<KickrunPhase> = {
+const kickrunInstructions: KickrunInstructions = {
   startTurn: "Select which unit to move",
   selectunit: ["ifelse", ["anyat", "runners", "selectunit"],
     ["line", "Select where to move your", "selectunit", "bishop"],

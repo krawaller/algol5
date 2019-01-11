@@ -1,7 +1,6 @@
-import {Generators} from '../../../types';
-import { JostleArtifactLayer, JostleGenerator, JostleLayer } from './_types';
+import { JostleGenerators } from './_types';
 
-const jostleGenerators: Generators<JostleArtifactLayer, JostleGenerator, JostleLayer> = {
+const jostleGenerators: JostleGenerators = {
   findinitial: {
     type: "neighbour",
     dirs: [1, 3, 5, 7],

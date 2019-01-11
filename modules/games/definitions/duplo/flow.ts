@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { DuploArtifactLayer, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploUnit } from './_types';
+import { DuploFlow } from './_types';
 
-const duploFlow: Flow<DuploArtifactLayer, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploUnit> = {
+const duploFlow: DuploFlow = {
   canalwaysend: {
     deploy: true
   },

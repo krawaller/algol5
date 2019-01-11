@@ -1,5 +1,5 @@
-import {AI} from '../../../types';
+import { UglyduckAI } from './_types';
 
-const uglyduckAI: AI = {};
+const uglyduckAI: UglyduckAI = {};
 
 export default uglyduckAI;

@@ -1,6 +1,6 @@
-import {Meta} from '../../../types';
+import { AmazonsMeta } from './_types';
 
-const amazonsMeta: Meta = {
+const amazonsMeta: AmazonsMeta = {
   id: "amazons",
   name: "Amazons",
   source: "http://www.chessvariants.org/other.dir/amazons.html",

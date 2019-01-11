@@ -1,11 +1,8 @@
-import { typeSignature } from "../../../../types";
-
 export default function templateGraphics(gameId) {
-  const gsig = typeSignature("Graphics", gameId);
-  return `import {Graphics} from '../../../types';
-import { ${gsig} } from './_types';
+  const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
+  return `import { ${capId}Graphics } from './_types';
 
-const ${gameId}Graphics: Graphics<${gsig}> = {
+const ${gameId}Graphics: ${capId}Graphics = {
   icons: {
 
   },

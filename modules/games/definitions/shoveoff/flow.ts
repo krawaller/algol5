@@ -1,7 +1,6 @@
-import {Flow} from '../../../types';
-import { ShoveoffArtifactLayer, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffUnit } from './_types';
+import { ShoveoffFlow } from './_types';
 
-const shoveoffFlow: Flow<ShoveoffArtifactLayer, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffUnit> = {
+const shoveoffFlow: ShoveoffFlow = {
   TODO: "findaffected SHOULD BE AN OFFSET",
   endGame: {
     madeline: {

@@ -1,6 +1,6 @@
-import {GameTestSuite} from '../../../types';
+import { AtriumScripts } from './_types';
 
-const atriumTests: GameTestSuite = {
+const atriumScripts: AtriumScripts = {
   basic: [{
     commands: [],
     include: ["a2", "a3", "c5", "d1", "d5", "e2"]
@@ -42,4 +42,4 @@ const atriumTests: GameTestSuite = {
   }]
 };
 
-export default atriumTests;
+export default atriumScripts;

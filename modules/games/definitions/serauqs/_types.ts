@@ -1,4 +1,4 @@
-import { CommonLayer } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
 
 export type SerauqsTerrain = "base" | "corners" | "middle";
 export type SerauqsUnit = "soldiers" | "wild";
@@ -11,3 +11,12 @@ export type SerauqsGenerator = "findmovetargets" | "findwinline";
 export type SerauqsArtifactLayer = "movetargets" | "winline";
 export type SerauqsTerrainLayer = "base" | "nobase" | "mybase" | "oppbase" | "corners" | "nocorners" | "middle" | "nomiddle";
 export type SerauqsLayer = CommonLayer | SerauqsUnitLayer | SerauqsArtifactLayer | SerauqsTerrainLayer;
+export type SerauqsGenerators = Generators<SerauqsArtifactLayer, SerauqsGenerator, SerauqsLayer>;
+export type SerauqsFlow = Flow<SerauqsArtifactLayer, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsUnit>;
+export type SerauqsBoard = Board<SerauqsTerrain>;
+export type SerauqsAI = AI;
+export type SerauqsGraphics = Graphics<SerauqsTerrain, SerauqsUnit>;
+export type SerauqsInstructions = Instructions<SerauqsPhase>;
+export type SerauqsMeta = Meta;
+export type SerauqsScripts = GameTestSuite;
+export type SerauqsSetup = Setup<SerauqsUnit>;

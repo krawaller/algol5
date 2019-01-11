@@ -1,7 +1,6 @@
-import {Graphics} from '../../../types';
-import { AtriumTerrain, AtriumUnit } from './_types';
+import { AtriumGraphics } from './_types';
 
-const atriumGraphics: Graphics<AtriumTerrain, AtriumUnit> = {
+const atriumGraphics: AtriumGraphics = {
   icons: {
     kings: "king",
     queens: "queen"

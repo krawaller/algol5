@@ -49,28 +49,28 @@ export interface SIG_CmndRef<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
 
 export interface SIG_Val_Val<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>
+    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>
   > {
   0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  2: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
+  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  2: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
   3?: never;
 }
 
 export interface SIG_Vals<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>
+    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>
   > {
   0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  2: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  3?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  4?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  5?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  6?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  7?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  8?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
-  9?: never
+  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  2: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  3?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  4?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  5?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  6?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  7?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  8?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  9?: never;
 }
 
 export interface SIG_Set_Pos<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>

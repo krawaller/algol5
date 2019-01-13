@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type OrthokonTerrain = never;
 export type OrthokonUnit = "soldiers";
@@ -25,3 +25,5 @@ export type OrthokonInstructions = Instructions<OrthokonPhase>;
 export type OrthokonMeta = Meta;
 export type OrthokonScripts = GameTestSuite;
 export type OrthokonSetup = Setup<OrthokonUnit>;
+
+export type OrthokonDefinition = FullDef<OrthokonLayer, OrthokonMark, OrthokonCommand, OrthokonTurnPos, OrthokonTurnVar, OrthokonBattlePos, OrthokonBattleVar, OrthokonArtifactLayer, OrthokonGenerator, OrthokonPhase, OrthokonTerrain, OrthokonUnit>;

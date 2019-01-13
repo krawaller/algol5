@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type UglyduckTerrain = "homerow";
 export type UglyduckUnit = "soldiers" | "kings";
@@ -25,3 +25,5 @@ export type UglyduckInstructions = Instructions<UglyduckPhase>;
 export type UglyduckMeta = Meta;
 export type UglyduckScripts = GameTestSuite;
 export type UglyduckSetup = Setup<UglyduckUnit>;
+
+export type UglyduckDefinition = FullDef<UglyduckLayer, UglyduckMark, UglyduckCommand, UglyduckTurnPos, UglyduckTurnVar, UglyduckBattlePos, UglyduckBattleVar, UglyduckArtifactLayer, UglyduckGenerator, UglyduckPhase, UglyduckTerrain, UglyduckUnit>;

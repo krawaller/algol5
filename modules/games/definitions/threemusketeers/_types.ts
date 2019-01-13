@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type ThreemusketeersTerrain = never;
 export type ThreemusketeersUnit = "pawns" | "kings";
@@ -25,3 +25,5 @@ export type ThreemusketeersInstructions = Instructions<ThreemusketeersPhase>;
 export type ThreemusketeersMeta = Meta;
 export type ThreemusketeersScripts = GameTestSuite;
 export type ThreemusketeersSetup = Setup<ThreemusketeersUnit>;
+
+export type ThreemusketeersDefinition = FullDef<ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersCommand, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersArtifactLayer, ThreemusketeersGenerator, ThreemusketeersPhase, ThreemusketeersTerrain, ThreemusketeersUnit>;

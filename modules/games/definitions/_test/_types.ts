@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type _testTerrain = "steps";
 export type _testUnit = "stepsfirsts" | "blocksfirsts" | "defaultfirsts" | "noblocks" | "pawns";
@@ -25,3 +25,5 @@ export type _testInstructions = Instructions<_testPhase>;
 export type _testMeta = Meta;
 export type _testScripts = GameTestSuite;
 export type _testSetup = Setup<_testUnit>;
+
+export type _testDefinition = FullDef<_testLayer, _testMark, _testCommand, _testTurnPos, _testTurnVar, _testBattlePos, _testBattleVar, _testArtifactLayer, _testGenerator, _testPhase, _testTerrain, _testUnit>;

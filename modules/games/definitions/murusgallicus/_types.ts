@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type MurusgallicusTerrain = "homerow";
 export type MurusgallicusUnit = "towers" | "walls";
@@ -25,3 +25,5 @@ export type MurusgallicusInstructions = Instructions<MurusgallicusPhase>;
 export type MurusgallicusMeta = Meta;
 export type MurusgallicusScripts = GameTestSuite;
 export type MurusgallicusSetup = Setup<MurusgallicusUnit>;
+
+export type MurusgallicusDefinition = FullDef<MurusgallicusLayer, MurusgallicusMark, MurusgallicusCommand, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusArtifactLayer, MurusgallicusGenerator, MurusgallicusPhase, MurusgallicusTerrain, MurusgallicusUnit>;

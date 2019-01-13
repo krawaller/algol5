@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type JostleTerrain = never;
 export type JostleUnit = "checkers";
@@ -25,3 +25,5 @@ export type JostleInstructions = Instructions<JostlePhase>;
 export type JostleMeta = Meta;
 export type JostleScripts = GameTestSuite;
 export type JostleSetup = Setup<JostleUnit>;
+
+export type JostleDefinition = FullDef<JostleLayer, JostleMark, JostleCommand, JostleTurnPos, JostleTurnVar, JostleBattlePos, JostleBattleVar, JostleArtifactLayer, JostleGenerator, JostlePhase, JostleTerrain, JostleUnit>;

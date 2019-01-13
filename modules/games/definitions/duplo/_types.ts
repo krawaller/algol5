@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type DuploTerrain = never;
 export type DuploUnit = "soldiers";
@@ -25,3 +25,5 @@ export type DuploInstructions = Instructions<DuploPhase>;
 export type DuploMeta = Meta;
 export type DuploScripts = GameTestSuite;
 export type DuploSetup = Setup<DuploUnit>;
+
+export type DuploDefinition = FullDef<DuploLayer, DuploMark, DuploCommand, DuploTurnPos, DuploTurnVar, DuploBattlePos, DuploBattleVar, DuploArtifactLayer, DuploGenerator, DuploPhase, DuploTerrain, DuploUnit>;

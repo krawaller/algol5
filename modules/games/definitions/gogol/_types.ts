@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type GogolTerrain = "homerow" | "edges";
 export type GogolUnit = "kings" | "soldiers";
@@ -25,3 +25,5 @@ export type GogolInstructions = Instructions<GogolPhase>;
 export type GogolMeta = Meta;
 export type GogolScripts = GameTestSuite;
 export type GogolSetup = Setup<GogolUnit>;
+
+export type GogolDefinition = FullDef<GogolLayer, GogolMark, GogolCommand, GogolTurnPos, GogolTurnVar, GogolBattlePos, GogolBattleVar, GogolArtifactLayer, GogolGenerator, GogolPhase, GogolTerrain, GogolUnit>;

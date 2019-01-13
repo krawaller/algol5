@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type SerauqsTerrain = "base" | "corners" | "middle";
 export type SerauqsUnit = "soldiers" | "wild";
@@ -25,3 +25,5 @@ export type SerauqsInstructions = Instructions<SerauqsPhase>;
 export type SerauqsMeta = Meta;
 export type SerauqsScripts = GameTestSuite;
 export type SerauqsSetup = Setup<SerauqsUnit>;
+
+export type SerauqsDefinition = FullDef<SerauqsLayer, SerauqsMark, SerauqsCommand, SerauqsTurnPos, SerauqsTurnVar, SerauqsBattlePos, SerauqsBattleVar, SerauqsArtifactLayer, SerauqsGenerator, SerauqsPhase, SerauqsTerrain, SerauqsUnit>;

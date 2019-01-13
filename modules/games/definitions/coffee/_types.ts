@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type CoffeeTerrain = never;
 export type CoffeeUnit = "soldiers" | "markers";
@@ -25,3 +25,5 @@ export type CoffeeInstructions = Instructions<CoffeePhase>;
 export type CoffeeMeta = Meta;
 export type CoffeeScripts = GameTestSuite;
 export type CoffeeSetup = Setup<CoffeeUnit>;
+
+export type CoffeeDefinition = FullDef<CoffeeLayer, CoffeeMark, CoffeeCommand, CoffeeTurnPos, CoffeeTurnVar, CoffeeBattlePos, CoffeeBattleVar, CoffeeArtifactLayer, CoffeeGenerator, CoffeePhase, CoffeeTerrain, CoffeeUnit>;

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type TransetTerrain = "base";
 export type TransetUnit = "pinets" | "piokers" | "piases";
@@ -25,3 +25,5 @@ export type TransetInstructions = Instructions<TransetPhase>;
 export type TransetMeta = Meta;
 export type TransetScripts = GameTestSuite;
 export type TransetSetup = Setup<TransetUnit>;
+
+export type TransetDefinition = FullDef<TransetLayer, TransetMark, TransetCommand, TransetTurnPos, TransetTurnVar, TransetBattlePos, TransetBattleVar, TransetArtifactLayer, TransetGenerator, TransetPhase, TransetTerrain, TransetUnit>;

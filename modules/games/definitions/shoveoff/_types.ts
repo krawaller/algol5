@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type ShoveoffTerrain = "southedge" | "northedge" | "westedge" | "eastedge" | "edge";
 export type ShoveoffUnit = "soldiers";
@@ -25,3 +25,5 @@ export type ShoveoffInstructions = Instructions<ShoveoffPhase>;
 export type ShoveoffMeta = Meta;
 export type ShoveoffScripts = GameTestSuite;
 export type ShoveoffSetup = Setup<ShoveoffUnit>;
+
+export type ShoveoffDefinition = FullDef<ShoveoffLayer, ShoveoffMark, ShoveoffCommand, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffArtifactLayer, ShoveoffGenerator, ShoveoffPhase, ShoveoffTerrain, ShoveoffUnit>;

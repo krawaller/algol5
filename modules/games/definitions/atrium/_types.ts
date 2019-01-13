@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type AtriumTerrain = never;
 export type AtriumUnit = "kings" | "queens";
@@ -25,3 +25,5 @@ export type AtriumInstructions = Instructions<AtriumPhase>;
 export type AtriumMeta = Meta;
 export type AtriumScripts = GameTestSuite;
 export type AtriumSetup = Setup<AtriumUnit>;
+
+export type AtriumDefinition = FullDef<AtriumLayer, AtriumMark, AtriumCommand, AtriumTurnPos, AtriumTurnVar, AtriumBattlePos, AtriumBattleVar, AtriumArtifactLayer, AtriumGenerator, AtriumPhase, AtriumTerrain, AtriumUnit>;

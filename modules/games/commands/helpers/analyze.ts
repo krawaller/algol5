@@ -89,7 +89,7 @@ export default async function analyze(def: FullDef | string) {
     (l, n) => artifactLayers.indexOf(l) === n
   );
 
-  const analysis = `import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+  const analysis = `import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type ${capId}Terrain = ${
     terrains.length ? terrains.map(t => `"${t}"`).join(" | ") : "never"
@@ -154,6 +154,8 @@ export type ${capId}Instructions = Instructions<${typeSignature(
 export type ${capId}Meta = Meta;
 export type ${capId}Scripts = GameTestSuite;
 export type ${capId}Setup = Setup<${typeSignature("Setup", gameId)}>;
+
+export type ${capId}Definition = FullDef<${typeSignature("FullDef", gameId)}>;
 `;
 
   await fs.writeFile(path.join(defPath, "_types.ts"), analysis);

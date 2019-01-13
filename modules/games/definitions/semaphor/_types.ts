@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type SemaphorTerrain = never;
 export type SemaphorUnit = "kings" | "pawns" | "bishops";
@@ -25,3 +25,5 @@ export type SemaphorInstructions = Instructions<SemaphorPhase>;
 export type SemaphorMeta = Meta;
 export type SemaphorScripts = GameTestSuite;
 export type SemaphorSetup = Setup<SemaphorUnit>;
+
+export type SemaphorDefinition = FullDef<SemaphorLayer, SemaphorMark, SemaphorCommand, SemaphorTurnPos, SemaphorTurnVar, SemaphorBattlePos, SemaphorBattleVar, SemaphorArtifactLayer, SemaphorGenerator, SemaphorPhase, SemaphorTerrain, SemaphorUnit>;

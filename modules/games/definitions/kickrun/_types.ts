@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type KickrunTerrain = "corners";
 export type KickrunUnit = "runners" | "sidekickers";
@@ -25,3 +25,5 @@ export type KickrunInstructions = Instructions<KickrunPhase>;
 export type KickrunMeta = Meta;
 export type KickrunScripts = GameTestSuite;
 export type KickrunSetup = Setup<KickrunUnit>;
+
+export type KickrunDefinition = FullDef<KickrunLayer, KickrunMark, KickrunCommand, KickrunTurnPos, KickrunTurnVar, KickrunBattlePos, KickrunBattleVar, KickrunArtifactLayer, KickrunGenerator, KickrunPhase, KickrunTerrain, KickrunUnit>;

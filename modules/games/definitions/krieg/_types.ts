@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type KriegTerrain = "southeast" | "northwest" | "corners" | "bases";
 export type KriegUnit = "notfrozens" | "frozens";
@@ -25,3 +25,5 @@ export type KriegInstructions = Instructions<KriegPhase>;
 export type KriegMeta = Meta;
 export type KriegScripts = GameTestSuite;
 export type KriegSetup = Setup<KriegUnit>;
+
+export type KriegDefinition = FullDef<KriegLayer, KriegMark, KriegCommand, KriegTurnPos, KriegTurnVar, KriegBattlePos, KriegBattleVar, KriegArtifactLayer, KriegGenerator, KriegPhase, KriegTerrain, KriegUnit>;

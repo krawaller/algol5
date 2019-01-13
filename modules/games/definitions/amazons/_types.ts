@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type AmazonsTerrain = never;
 export type AmazonsUnit = "queens" | "fires";
@@ -25,3 +25,5 @@ export type AmazonsInstructions = Instructions<AmazonsPhase>;
 export type AmazonsMeta = Meta;
 export type AmazonsScripts = GameTestSuite;
 export type AmazonsSetup = Setup<AmazonsUnit>;
+
+export type AmazonsDefinition = FullDef<AmazonsLayer, AmazonsMark, AmazonsCommand, AmazonsTurnPos, AmazonsTurnVar, AmazonsBattlePos, AmazonsBattleVar, AmazonsArtifactLayer, AmazonsGenerator, AmazonsPhase, AmazonsTerrain, AmazonsUnit>;

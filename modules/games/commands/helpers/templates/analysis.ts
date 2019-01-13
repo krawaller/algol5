@@ -25,5 +25,7 @@ export type ${capId}Instructions = any;
 export type ${capId}Meta = any;
 export type ${capId}Scripts = any;
 export type ${capId}Setup = any;
+
+export type ${capId}Definition = any;
 `;
 }

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite } from '../../../types';
+import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type AriesTerrain = "corner";
 export type AriesUnit = "soldiers";
@@ -25,3 +25,5 @@ export type AriesInstructions = Instructions<AriesPhase>;
 export type AriesMeta = Meta;
 export type AriesScripts = GameTestSuite;
 export type AriesSetup = Setup<AriesUnit>;
+
+export type AriesDefinition = FullDef<AriesLayer, AriesMark, AriesCommand, AriesTurnPos, AriesTurnVar, AriesBattlePos, AriesBattleVar, AriesArtifactLayer, AriesGenerator, AriesPhase, AriesTerrain, AriesUnit>;

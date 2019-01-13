@@ -6,8 +6,7 @@ export type FilterDef<
   TurnVar extends string = string,
   BattlePos extends string = string,
   BattleVar extends string = string,
-  ArtifactLayer extends string = string,
-  Generator extends string = string
+  ArtifactLayer extends string = string
 > = {
   type: "filter";
   layer: any;

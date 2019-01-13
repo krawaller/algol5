@@ -25,8 +25,7 @@ export type Generators<
     TurnVar,
     BattlePos,
     BattleVar,
-    ArtifactLayer,
-    Generator
+    ArtifactLayer
   >
 };
 
@@ -38,8 +37,7 @@ export type GeneratorDef<
   TurnVar extends string = string,
   BattlePos extends string = string,
   BattleVar extends string = string,
-  ArtifactLayer extends string = string,
-  Generator extends string = string
+  ArtifactLayer extends string = string
 > =
   | WalkerDef<
       Layer,
@@ -49,8 +47,7 @@ export type GeneratorDef<
       TurnVar,
       BattlePos,
       BattleVar,
-      ArtifactLayer,
-      Generator
+      ArtifactLayer
     >
   | NeighbourDef<
       Layer,
@@ -60,8 +57,7 @@ export type GeneratorDef<
       TurnVar,
       BattlePos,
       BattleVar,
-      ArtifactLayer,
-      Generator
+      ArtifactLayer
     >
   | FilterDef<
       Layer,
@@ -71,6 +67,5 @@ export type GeneratorDef<
       TurnVar,
       BattlePos,
       BattleVar,
-      ArtifactLayer,
-      Generator
+      ArtifactLayer
     >;

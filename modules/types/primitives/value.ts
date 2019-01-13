@@ -1,5 +1,5 @@
 import { IfElse, PlayerCase, IfActionElse } from "./_logical";
-import { SIG_Set_Pos_Val, SIG_Literal } from "./_signatures";
+import { SIG_Set_Pos_Val, SIG_Literal, SIG_NoArgs } from "./_signatures";
 import { AlgolNumber } from "./number";
 
 export type AlgolVal<
@@ -16,6 +16,7 @@ export type AlgolVal<
   | AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Set_Pos_Val<"read", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Literal<"value", T>
+  | SIG_NoArgs<"dir" | "stopreason">
   | ValIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>
   | ValPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>
   | ValIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>;

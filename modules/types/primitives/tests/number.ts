@@ -20,5 +20,10 @@ const tests: TestNumber[] = [
   ["sum", 3, ["value", 4], 17],
   ["prod", 3, ["value", 4], 8],
   ["minus", 3, ["value", 4]],
-  ["ifactionelse", "mymark", 3, 2]
+  ["ifactionelse", "mymark", 3, 2],
+  ["totalcount"],
+  ["neighbourcount"],
+  ["walklength"],
+  ["max"],
+  ["step"]
 ];

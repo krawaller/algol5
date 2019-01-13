@@ -4,7 +4,8 @@ import {
   SIG_MarkRef,
   SIG_TurnPos,
   SIG_BattlePos,
-  SIG_NoArgs
+  SIG_NoArgs,
+  SIG_Pos
 } from "./_signatures";
 
 export type AlgolPos<
@@ -22,6 +23,7 @@ export type AlgolPos<
   | SIG_MarkRef<"mark", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_TurnPos<"turnpos", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_BattlePos<"battlepos", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_Pos<"single", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | PosIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | PosPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | PosIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;

@@ -30,5 +30,6 @@ const tests: TestBool[] = [
   ["falsy", ["value", 7]],
   ["valinlist", ["value", 8], ["value", 4], 3, ["value", 9]],
   ["ifactionelse", "mymark", ["true"], ["false"]],
-  ["ifactionelse", "start", ["true"], ["false"]]
+  ["ifactionelse", "start", ["true"], ["false"]],
+  ["noneat", "myunits", ["target"]]
 ];

@@ -17,5 +17,7 @@ const tests: TestVal[] = [
   ["playercase", "FOO", ["value", "BAR"]],
   ["read", "mylayer", "mymark", "someProp"],
   ["ifactionelse", "mymark", "FOO", "BAR"],
-  ["ifelse", ["true"], ["ifelse", ["false"], "BAR", "FOO"], "BAR"]
+  ["ifelse", ["true"], ["ifelse", ["false"], "BAR", "FOO"], "BAR"],
+  ["dir"],
+  ["stopreason"]
 ];

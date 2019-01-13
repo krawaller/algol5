@@ -21,5 +21,7 @@ const tests: TestPos[] = [
   ["turnpos", "myturnp"],
   ["battlepos", "mybattlep"],
   ["battlepos", ["value", "mybattlep"]],
-  ["ifactionelse", "mycmnd", "mymark", ["onlyin", ["layer", "mylayer"]]]
+  ["ifactionelse", "mycmnd", "mymark", ["onlyin", ["layer", "mylayer"]]],
+  ["mark", ["playercase", "mymark", "mymark"]],
+  ["playercase", "mymark", "mymark"]
 ];

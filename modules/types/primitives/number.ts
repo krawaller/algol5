@@ -18,7 +18,16 @@ export type AlgolNumber<
   Btlv = string
 > =
   | number
-  | SIG_NoArgs<"player" | "otherplayer" | "turn">
+  | SIG_NoArgs<
+      | "player"
+      | "otherplayer"
+      | "turn"
+      | "totalcount"
+      | "neighbourcount"
+      | "walklength"
+      | "max"
+      | "step"
+    >
   | SIG_Literal<"value", number>
   | SIG_Number_Number<"minus", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
   | SIG_Numbers<"prod" | "sum", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>

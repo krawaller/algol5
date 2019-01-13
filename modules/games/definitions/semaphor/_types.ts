@@ -11,6 +11,11 @@ export type SemaphorGenerator = "findlines";
 export type SemaphorArtifactLayer = "line";
 export type SemaphorTerrainLayer = never;
 export type SemaphorLayer = CommonLayer | SemaphorUnitLayer | SemaphorArtifactLayer;
+export type SemaphorBattlePos = any;
+export type SemaphorBattleVar = any;
+export type SemaphorTurnPos = any;
+export type SemaphorTurnVar = any;
+ 
 export type SemaphorGenerators = Generators<SemaphorArtifactLayer, SemaphorGenerator, SemaphorLayer>;
 export type SemaphorFlow = Flow<SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit>;
 export type SemaphorBoard = Board<SemaphorTerrain>;

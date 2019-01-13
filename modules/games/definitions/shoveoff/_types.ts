@@ -11,6 +11,11 @@ export type ShoveoffGenerator = "findaffected" | "findresults" | "findfourinarow
 export type ShoveoffArtifactLayer = "targetedgepoints" | "squishsouth" | "squishwest" | "squishnorth" | "squisheast" | "pushsouth" | "pushwest" | "pushnorth" | "pusheast" | "spawnsouth" | "spawnwest" | "spawnnorth" | "spawneast" | "fourinarow";
 export type ShoveoffTerrainLayer = "southedge" | "nosouthedge" | "northedge" | "nonorthedge" | "westedge" | "nowestedge" | "eastedge" | "noeastedge" | "edge" | "noedge";
 export type ShoveoffLayer = CommonLayer | ShoveoffUnitLayer | ShoveoffArtifactLayer | ShoveoffTerrainLayer;
+export type ShoveoffBattlePos = any;
+export type ShoveoffBattleVar = any;
+export type ShoveoffTurnPos = any;
+export type ShoveoffTurnVar = any;
+ 
 export type ShoveoffGenerators = Generators<ShoveoffArtifactLayer, ShoveoffGenerator, ShoveoffLayer>;
 export type ShoveoffFlow = Flow<ShoveoffArtifactLayer, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffUnit>;
 export type ShoveoffBoard = Board<ShoveoffTerrain>;

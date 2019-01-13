@@ -11,6 +11,11 @@ export type CoffeeGenerator = "findgeneratees" | "findwinlines";
 export type CoffeeArtifactLayer = "FOOBAR" | "vertical" | "uphill" | "horisontal" | "downhill" | "winline";
 export type CoffeeTerrainLayer = never;
 export type CoffeeLayer = CommonLayer | CoffeeUnitLayer | CoffeeArtifactLayer;
+export type CoffeeBattlePos = any;
+export type CoffeeBattleVar = any;
+export type CoffeeTurnPos = any;
+export type CoffeeTurnVar = any;
+ 
 export type CoffeeGenerators = Generators<CoffeeArtifactLayer, CoffeeGenerator, CoffeeLayer>;
 export type CoffeeFlow = Flow<CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeUnit>;
 export type CoffeeBoard = Board<CoffeeTerrain>;

@@ -11,6 +11,11 @@ export type DescentGenerator = "findmovetargets" | "finddigtargets" | "findwinli
 export type DescentArtifactLayer = "movetargets" | "digtargets" | "winline";
 export type DescentTerrainLayer = never;
 export type DescentLayer = CommonLayer | DescentUnitLayer | DescentArtifactLayer;
+export type DescentBattlePos = any;
+export type DescentBattleVar = any;
+export type DescentTurnPos = any;
+export type DescentTurnVar = any;
+ 
 export type DescentGenerators = Generators<DescentArtifactLayer, DescentGenerator, DescentLayer>;
 export type DescentFlow = Flow<DescentArtifactLayer, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentUnit>;
 export type DescentBoard = Board<DescentTerrain>;

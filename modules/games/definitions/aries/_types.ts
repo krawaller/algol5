@@ -11,6 +11,11 @@ export type AriesGenerator = "findmovetargets" | "findpushresults";
 export type AriesArtifactLayer = "movetargets" | "beingpushed" | "squished";
 export type AriesTerrainLayer = "corner" | "nocorner" | "mycorner" | "oppcorner";
 export type AriesLayer = CommonLayer | AriesUnitLayer | AriesArtifactLayer | AriesTerrainLayer;
+export type AriesBattlePos = any;
+export type AriesBattleVar = any;
+export type AriesTurnPos = any;
+export type AriesTurnVar = any;
+ 
 export type AriesGenerators = Generators<AriesArtifactLayer, AriesGenerator, AriesLayer>;
 export type AriesFlow = Flow<AriesArtifactLayer, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesUnit>;
 export type AriesBoard = Board<AriesTerrain>;

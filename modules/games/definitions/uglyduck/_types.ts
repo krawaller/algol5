@@ -11,6 +11,11 @@ export type UglyduckGenerator = "findmovetargets";
 export type UglyduckArtifactLayer = "movetargets";
 export type UglyduckTerrainLayer = "homerow" | "nohomerow" | "myhomerow" | "opphomerow";
 export type UglyduckLayer = CommonLayer | UglyduckUnitLayer | UglyduckArtifactLayer | UglyduckTerrainLayer;
+export type UglyduckBattlePos = any;
+export type UglyduckBattleVar = any;
+export type UglyduckTurnPos = any;
+export type UglyduckTurnVar = any;
+ 
 export type UglyduckGenerators = Generators<UglyduckArtifactLayer, UglyduckGenerator, UglyduckLayer>;
 export type UglyduckFlow = Flow<UglyduckArtifactLayer, UglyduckCommand, UglyduckGenerator, UglyduckLayer, UglyduckMark, UglyduckUnit>;
 export type UglyduckBoard = Board<UglyduckTerrain>;

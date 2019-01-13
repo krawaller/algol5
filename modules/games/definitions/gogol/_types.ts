@@ -11,6 +11,11 @@ export type GogolGenerator = "findforbiddenkingspots" | "findforbiddensoldierspo
 export type GogolArtifactLayer = "nokings" | "nosoldiers" | "kingwalk" | "adjacentenemies" | "splashed" | "willdie" | "jumptargets";
 export type GogolTerrainLayer = "homerow" | "nohomerow" | "myhomerow" | "opphomerow" | "edges" | "noedges";
 export type GogolLayer = CommonLayer | GogolUnitLayer | GogolArtifactLayer | GogolTerrainLayer;
+export type GogolBattlePos = any;
+export type GogolBattleVar = any;
+export type GogolTurnPos = any;
+export type GogolTurnVar = any;
+ 
 export type GogolGenerators = Generators<GogolArtifactLayer, GogolGenerator, GogolLayer>;
 export type GogolFlow = Flow<GogolArtifactLayer, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolUnit>;
 export type GogolBoard = Board<GogolTerrain>;

@@ -12,6 +12,10 @@ export type ${capId}ArtifactLayer = any;
 export type ${capId}TerrainLayer = any;
 export type ${capId}Layer = any;
 export type ${capId}Generator = any;
+export type ${capId}BattlePos = any;
+export type ${capId}BattleVar = any;
+export type ${capId}TurnPos = any;
+export type ${capId}TurnVar = any;
 
 export type ${capId}Generators = any;
 export type ${capId}Flow = any;

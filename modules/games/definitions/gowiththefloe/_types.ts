@@ -11,6 +11,11 @@ export type GowiththefloeGenerator = "findeattargets" | "findmovetargets" | "fin
 export type GowiththefloeArtifactLayer = "eattargets" | "movetargets" | "canmove" | "cracks";
 export type GowiththefloeTerrainLayer = "water" | "nowater";
 export type GowiththefloeLayer = CommonLayer | GowiththefloeUnitLayer | GowiththefloeArtifactLayer | GowiththefloeTerrainLayer;
+export type GowiththefloeBattlePos = any;
+export type GowiththefloeBattleVar = any;
+export type GowiththefloeTurnPos = any;
+export type GowiththefloeTurnVar = any;
+ 
 export type GowiththefloeGenerators = Generators<GowiththefloeArtifactLayer, GowiththefloeGenerator, GowiththefloeLayer>;
 export type GowiththefloeFlow = Flow<GowiththefloeArtifactLayer, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeUnit>;
 export type GowiththefloeBoard = Board<GowiththefloeTerrain>;

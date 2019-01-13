@@ -11,6 +11,11 @@ export type KickrunGenerator = "findmovetargets";
 export type KickrunArtifactLayer = "movetargets";
 export type KickrunTerrainLayer = "corners" | "nocorners" | "mycorners" | "oppcorners";
 export type KickrunLayer = CommonLayer | KickrunUnitLayer | KickrunArtifactLayer | KickrunTerrainLayer;
+export type KickrunBattlePos = any;
+export type KickrunBattleVar = any;
+export type KickrunTurnPos = any;
+export type KickrunTurnVar = any;
+ 
 export type KickrunGenerators = Generators<KickrunArtifactLayer, KickrunGenerator, KickrunLayer>;
 export type KickrunFlow = Flow<KickrunArtifactLayer, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunUnit>;
 export type KickrunBoard = Board<KickrunTerrain>;

@@ -11,6 +11,11 @@ export type MurusgallicusGenerator = "findmovetargets" | "findmoveresults" | "fi
 export type MurusgallicusArtifactLayer = "movetargets" | "madetowers" | "madewalls" | "killtargets";
 export type MurusgallicusTerrainLayer = "homerow" | "nohomerow" | "myhomerow" | "opphomerow";
 export type MurusgallicusLayer = CommonLayer | MurusgallicusUnitLayer | MurusgallicusArtifactLayer | MurusgallicusTerrainLayer;
+export type MurusgallicusBattlePos = any;
+export type MurusgallicusBattleVar = any;
+export type MurusgallicusTurnPos = any;
+export type MurusgallicusTurnVar = any;
+ 
 export type MurusgallicusGenerators = Generators<MurusgallicusArtifactLayer, MurusgallicusGenerator, MurusgallicusLayer>;
 export type MurusgallicusFlow = Flow<MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit>;
 export type MurusgallicusBoard = Board<MurusgallicusTerrain>;

@@ -134,6 +134,11 @@ export type ${capId}Layer = CommonLayer${
   }${artifactLayers.length ? ` | ${capId}ArtifactLayer` : ""}${
     terrainLayers.length ? ` | ${capId}TerrainLayer` : ""
   };
+export type ${capId}BattlePos = any;
+export type ${capId}BattleVar = any;
+export type ${capId}TurnPos = any;
+export type ${capId}TurnVar = any;
+ 
 export type ${capId}Generators = Generators<${typeSignature(
     "Generators",
     gameId

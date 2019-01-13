@@ -11,6 +11,11 @@ export type AmazonsGenerator = "findtargets";
 export type AmazonsArtifactLayer = "targets";
 export type AmazonsTerrainLayer = never;
 export type AmazonsLayer = CommonLayer | AmazonsUnitLayer | AmazonsArtifactLayer;
+export type AmazonsBattlePos = any;
+export type AmazonsBattleVar = any;
+export type AmazonsTurnPos = any;
+export type AmazonsTurnVar = any;
+ 
 export type AmazonsGenerators = Generators<AmazonsArtifactLayer, AmazonsGenerator, AmazonsLayer>;
 export type AmazonsFlow = Flow<AmazonsArtifactLayer, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsUnit>;
 export type AmazonsBoard = Board<AmazonsTerrain>;

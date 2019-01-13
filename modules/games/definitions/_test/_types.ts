@@ -11,6 +11,11 @@ export type _testGenerator = "stepsfirst" | "blocksfirst" | "defaultfirst" | "no
 export type _testArtifactLayer = "marks" | "blocks";
 export type _testTerrainLayer = "steps" | "nosteps";
 export type _testLayer = CommonLayer | _testUnitLayer | _testArtifactLayer | _testTerrainLayer;
+export type _testBattlePos = any;
+export type _testBattleVar = any;
+export type _testTurnPos = any;
+export type _testTurnVar = any;
+ 
 export type _testGenerators = Generators<_testArtifactLayer, _testGenerator, _testLayer>;
 export type _testFlow = Flow<_testArtifactLayer, _testCommand, _testGenerator, _testLayer, _testMark, _testUnit>;
 export type _testBoard = Board<_testTerrain>;

@@ -11,6 +11,11 @@ export type DuploGenerator = "findspawndirs" | "findgrowstarts" | "findexpandpoi
 export type DuploArtifactLayer = "spawndirs" | "growstarts" | "targets" | "potentialopptargets" | "spawns";
 export type DuploTerrainLayer = never;
 export type DuploLayer = CommonLayer | DuploUnitLayer | DuploArtifactLayer;
+export type DuploBattlePos = any;
+export type DuploBattleVar = any;
+export type DuploTurnPos = any;
+export type DuploTurnVar = any;
+ 
 export type DuploGenerators = Generators<DuploArtifactLayer, DuploGenerator, DuploLayer>;
 export type DuploFlow = Flow<DuploArtifactLayer, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploUnit>;
 export type DuploBoard = Board<DuploTerrain>;

@@ -16,7 +16,7 @@ export type DescentBattleVar = any;
 export type DescentTurnPos = any;
 export type DescentTurnVar = any;
  
-export type DescentGenerators = Generators<DescentArtifactLayer, DescentGenerator, DescentLayer>;
+export type DescentGenerators = Generators<DescentLayer, DescentMark, DescentCommand, DescentTurnPos, DescentTurnVar, DescentBattlePos, DescentBattleVar, DescentArtifactLayer, DescentGenerator>;
 export type DescentFlow = Flow<DescentArtifactLayer, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentUnit>;
 export type DescentBoard = Board<DescentTerrain>;
 export type DescentAI = AI;

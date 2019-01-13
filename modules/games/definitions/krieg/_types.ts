@@ -16,7 +16,7 @@ export type KriegBattleVar = any;
 export type KriegTurnPos = any;
 export type KriegTurnVar = any;
  
-export type KriegGenerators = Generators<KriegArtifactLayer, KriegGenerator, KriegLayer>;
+export type KriegGenerators = Generators<KriegLayer, KriegMark, KriegCommand, KriegTurnPos, KriegTurnVar, KriegBattlePos, KriegBattleVar, KriegArtifactLayer, KriegGenerator>;
 export type KriegFlow = Flow<KriegArtifactLayer, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegUnit>;
 export type KriegBoard = Board<KriegTerrain>;
 export type KriegAI = AI;

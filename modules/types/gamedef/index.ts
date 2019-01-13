@@ -43,6 +43,7 @@ export type FullDef<
   scripts: GameTestSuite;
 };
 
+// TODO - ditch this, only used in legacy code
 export type Definition = {
   flow?: any;
   TODO?: string;

@@ -16,7 +16,7 @@ export type MurusgallicusBattleVar = any;
 export type MurusgallicusTurnPos = any;
 export type MurusgallicusTurnVar = any;
  
-export type MurusgallicusGenerators = Generators<MurusgallicusArtifactLayer, MurusgallicusGenerator, MurusgallicusLayer>;
+export type MurusgallicusGenerators = Generators<MurusgallicusLayer, MurusgallicusMark, MurusgallicusCommand, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusArtifactLayer, MurusgallicusGenerator>;
 export type MurusgallicusFlow = Flow<MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit>;
 export type MurusgallicusBoard = Board<MurusgallicusTerrain>;
 export type MurusgallicusAI = AI;

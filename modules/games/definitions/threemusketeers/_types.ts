@@ -16,7 +16,7 @@ export type ThreemusketeersBattleVar = any;
 export type ThreemusketeersTurnPos = any;
 export type ThreemusketeersTurnVar = any;
  
-export type ThreemusketeersGenerators = Generators<ThreemusketeersArtifactLayer, ThreemusketeersGenerator, ThreemusketeersLayer>;
+export type ThreemusketeersGenerators = Generators<ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersCommand, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersArtifactLayer, ThreemusketeersGenerator>;
 export type ThreemusketeersFlow = Flow<ThreemusketeersArtifactLayer, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersUnit>;
 export type ThreemusketeersBoard = Board<ThreemusketeersTerrain>;
 export type ThreemusketeersAI = AI;

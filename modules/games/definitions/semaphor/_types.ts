@@ -16,7 +16,7 @@ export type SemaphorBattleVar = any;
 export type SemaphorTurnPos = any;
 export type SemaphorTurnVar = any;
  
-export type SemaphorGenerators = Generators<SemaphorArtifactLayer, SemaphorGenerator, SemaphorLayer>;
+export type SemaphorGenerators = Generators<SemaphorLayer, SemaphorMark, SemaphorCommand, SemaphorTurnPos, SemaphorTurnVar, SemaphorBattlePos, SemaphorBattleVar, SemaphorArtifactLayer, SemaphorGenerator>;
 export type SemaphorFlow = Flow<SemaphorArtifactLayer, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorUnit>;
 export type SemaphorBoard = Board<SemaphorTerrain>;
 export type SemaphorAI = AI;

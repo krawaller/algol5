@@ -16,7 +16,7 @@ export type AmazonsBattleVar = any;
 export type AmazonsTurnPos = any;
 export type AmazonsTurnVar = any;
  
-export type AmazonsGenerators = Generators<AmazonsArtifactLayer, AmazonsGenerator, AmazonsLayer>;
+export type AmazonsGenerators = Generators<AmazonsLayer, AmazonsMark, AmazonsCommand, AmazonsTurnPos, AmazonsTurnVar, AmazonsBattlePos, AmazonsBattleVar, AmazonsArtifactLayer, AmazonsGenerator>;
 export type AmazonsFlow = Flow<AmazonsArtifactLayer, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsUnit>;
 export type AmazonsBoard = Board<AmazonsTerrain>;
 export type AmazonsAI = AI;

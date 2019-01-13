@@ -16,7 +16,7 @@ export type ShoveoffBattleVar = any;
 export type ShoveoffTurnPos = any;
 export type ShoveoffTurnVar = any;
  
-export type ShoveoffGenerators = Generators<ShoveoffArtifactLayer, ShoveoffGenerator, ShoveoffLayer>;
+export type ShoveoffGenerators = Generators<ShoveoffLayer, ShoveoffMark, ShoveoffCommand, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffArtifactLayer, ShoveoffGenerator>;
 export type ShoveoffFlow = Flow<ShoveoffArtifactLayer, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffUnit>;
 export type ShoveoffBoard = Board<ShoveoffTerrain>;
 export type ShoveoffAI = AI;

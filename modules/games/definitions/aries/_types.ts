@@ -16,7 +16,7 @@ export type AriesBattleVar = any;
 export type AriesTurnPos = any;
 export type AriesTurnVar = any;
  
-export type AriesGenerators = Generators<AriesArtifactLayer, AriesGenerator, AriesLayer>;
+export type AriesGenerators = Generators<AriesLayer, AriesMark, AriesCommand, AriesTurnPos, AriesTurnVar, AriesBattlePos, AriesBattleVar, AriesArtifactLayer, AriesGenerator>;
 export type AriesFlow = Flow<AriesArtifactLayer, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesUnit>;
 export type AriesBoard = Board<AriesTerrain>;
 export type AriesAI = AI;

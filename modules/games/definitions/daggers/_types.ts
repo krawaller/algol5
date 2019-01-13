@@ -16,7 +16,7 @@ export type DaggersBattleVar = any;
 export type DaggersTurnPos = any;
 export type DaggersTurnVar = any;
  
-export type DaggersGenerators = Generators<DaggersArtifactLayer, DaggersGenerator, DaggersLayer>;
+export type DaggersGenerators = Generators<DaggersLayer, DaggersMark, DaggersCommand, DaggersTurnPos, DaggersTurnVar, DaggersBattlePos, DaggersBattleVar, DaggersArtifactLayer, DaggersGenerator>;
 export type DaggersFlow = Flow<DaggersArtifactLayer, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersUnit>;
 export type DaggersBoard = Board<DaggersTerrain>;
 export type DaggersAI = AI;

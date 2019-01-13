@@ -52,7 +52,17 @@ export function typeSignature(type, gameId) {
     Instructions: ["Phase"],
     Board: ["Terrain"],
     Setup: ["Unit"],
-    Generators: ["ArtifactLayer", "Generator", "Layer"],
+    Generators: [
+      "Layer",
+      "Mark",
+      "Command",
+      "TurnPos",
+      "TurnVar",
+      "BattlePos",
+      "BattleVar",
+      "ArtifactLayer",
+      "Generator"
+    ],
     FullDef: [
       "Layer",
       "Mark",

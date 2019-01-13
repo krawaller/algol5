@@ -16,7 +16,7 @@ export type MurusgallicusadvancedBattleVar = any;
 export type MurusgallicusadvancedTurnPos = any;
 export type MurusgallicusadvancedTurnVar = any;
  
-export type MurusgallicusadvancedGenerators = Generators<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer>;
+export type MurusgallicusadvancedGenerators = Generators<MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedCommand, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedGenerator>;
 export type MurusgallicusadvancedFlow = Flow<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedUnit>;
 export type MurusgallicusadvancedBoard = Board<MurusgallicusadvancedTerrain>;
 export type MurusgallicusadvancedAI = AI;

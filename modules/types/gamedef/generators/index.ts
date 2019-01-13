@@ -16,12 +16,61 @@ export type Generators<
   BattleVar extends string = string,
   ArtifactLayer extends string = string,
   Generator extends string = string
-> = { [genname in Generator]: GeneratorDef<ArtifactLayer, Layer> };
+> = {
+  [genname in Generator]: GeneratorDef<
+    Layer,
+    Mark,
+    Command,
+    TurnPos,
+    TurnVar,
+    BattlePos,
+    BattleVar,
+    ArtifactLayer,
+    Generator
+  >
+};
 
 export type GeneratorDef<
+  Layer extends string = string,
+  Mark extends string = string,
+  Command extends string = string,
+  TurnPos extends string = string,
+  TurnVar extends string = string,
+  BattlePos extends string = string,
+  BattleVar extends string = string,
   ArtifactLayer extends string = string,
-  Layer extends string = string
+  Generator extends string = string
 > =
-  | WalkerDef<ArtifactLayer, Layer>
-  | NeighbourDef<ArtifactLayer, Layer>
-  | FilterDef<ArtifactLayer, Layer>;
+  | WalkerDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer,
+      Generator
+    >
+  | NeighbourDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer,
+      Generator
+    >
+  | FilterDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer,
+      Generator
+    >;

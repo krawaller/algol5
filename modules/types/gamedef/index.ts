@@ -39,7 +39,17 @@ export type FullDef<
   instructions: Instructions<Phase>;
   meta: Meta;
   flow: Flow<ArtifactLayer, Command, Generator, Layer, Mark, Unit>;
-  generators: Generators<ArtifactLayer, Generator, Layer>;
+  generators: Generators<
+    Layer,
+    Mark,
+    Command,
+    TurnPos,
+    TurnVar,
+    BattlePos,
+    BattleVar,
+    ArtifactLayer,
+    Generator
+  >;
   scripts: GameTestSuite;
 };
 

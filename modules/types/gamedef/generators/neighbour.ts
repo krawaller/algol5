@@ -19,7 +19,25 @@ export type NeighbourDef<
   ifover?: any;
   unlessover?: any;
   draw: {
-    start?: DrawDef<ArtifactLayer, Layer>;
-    neighbours?: DrawDef<ArtifactLayer, Layer>;
+    start?: DrawDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer
+    >;
+    neighbours?: DrawDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer
+    >;
   };
 };

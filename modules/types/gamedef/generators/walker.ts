@@ -22,11 +22,65 @@ export type WalkerDef<
   startasstep?: boolean;
   max?: any;
   draw: {
-    start?: DrawDef<ArtifactLayer, Layer>;
-    steps?: DrawDef<ArtifactLayer, Layer>;
-    block?: DrawDef<ArtifactLayer, Layer>;
-    last?: DrawDef<ArtifactLayer, Layer>;
-    all?: DrawDef<ArtifactLayer, Layer>;
-    count?: DrawDef<ArtifactLayer, Layer>;
+    start?: DrawDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer
+    >;
+    steps?: DrawDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer
+    >;
+    block?: DrawDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer
+    >;
+    last?: DrawDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer
+    >;
+    all?: DrawDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer
+    >;
+    count?: DrawDef<
+      Layer,
+      Mark,
+      Command,
+      TurnPos,
+      TurnVar,
+      BattlePos,
+      BattleVar,
+      ArtifactLayer
+    >;
   };
 };

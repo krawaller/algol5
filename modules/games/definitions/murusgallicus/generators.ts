@@ -1,4 +1,4 @@
-import { MurusgallicusGenerators } from './_types';
+import { MurusgallicusGenerators } from "./_types";
 
 const murusgallicusGenerators: MurusgallicusGenerators = {
   findmovetargets: {
@@ -9,9 +9,7 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
     max: 2,
     draw: {
       steps: {
-        condition: ["and", ["same", ["walklength"], 2],
-          ["same", ["step"], 2]
-        ],
+        condition: ["and", ["same", ["walklength"], 2], ["same", ["step"], 2]],
         tolayer: "movetargets",
         include: {
           dir: ["dir"]
@@ -25,10 +23,20 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
     start: "selectmove",
     draw: {
       start: {
-        tolayer: ["ifelse", ["anyat", "myunits", "selectmove"], "madetowers", "madewalls"]
+        tolayer: [
+          "ifelse",
+          ["anyat", "myunits", "selectmove"],
+          "madetowers",
+          "madewalls"
+        ]
       },
       neighbours: {
-        tolayer: ["ifelse", ["anyat", "myunits", ["target"]], "madetowers", "madewalls"]
+        tolayer: [
+          "ifelse",
+          ["anyat", "myunits", ["target"]],
+          "madetowers",
+          "madewalls"
+        ]
       }
     }
   },

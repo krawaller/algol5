@@ -1,3 +1,5 @@
+import { AlgolVal } from "../../";
+
 export type DrawDef<
   Layer extends string = string,
   Mark extends string = string,
@@ -8,7 +10,16 @@ export type DrawDef<
   BattleVar extends string = string,
   ArtifactLayer extends string = string
 > = {
-  tolayer: any;
+  tolayer: AlgolVal<
+    Layer,
+    Mark,
+    Command,
+    TurnPos,
+    TurnVar,
+    BattlePos,
+    BattleVar,
+    ArtifactLayer
+  >;
   include?: any;
   condition?: any;
   ifover?: any;

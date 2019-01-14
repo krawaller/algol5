@@ -1,4 +1,4 @@
-import { AlgolVal } from "../../";
+import { AlgolVal, AlgolBool, AlgolSet } from "../../";
 
 export type DrawDef<
   Layer extends string = string,
@@ -21,7 +21,31 @@ export type DrawDef<
     ArtifactLayer
   >;
   include?: any;
-  condition?: any;
-  ifover?: any;
-  unlessover?: any;
+  condition?: AlgolBool<
+    Layer,
+    Mark,
+    Command,
+    TurnPos,
+    TurnVar,
+    BattlePos,
+    BattleVar
+  >;
+  ifover?: AlgolSet<
+    Layer,
+    Mark,
+    Command,
+    TurnPos,
+    TurnVar,
+    BattlePos,
+    BattleVar
+  >;
+  unlessover?: AlgolSet<
+    Layer,
+    Mark,
+    Command,
+    TurnPos,
+    TurnVar,
+    BattlePos,
+    BattleVar
+  >;
 };

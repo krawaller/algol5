@@ -16,7 +16,7 @@ export type GogolBattleVar = any;
 export type GogolTurnPos = any;
 export type GogolTurnVar = any;
  
-export type GogolGenerators = Generators<GogolLayer, GogolMark, GogolCommand, GogolTurnPos, GogolTurnVar, GogolBattlePos, GogolBattleVar, GogolArtifactLayer, GogolGenerator>;
+export type GogolGenerators = Generators<GogolArtifactLayer, GogolBattlePos, GogolBattleVar, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolTurnPos, GogolTurnVar>;
 export type GogolFlow = Flow<GogolArtifactLayer, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolUnit>;
 export type GogolBoard = Board<GogolTerrain>;
 export type GogolAI = AI;
@@ -26,4 +26,4 @@ export type GogolMeta = Meta;
 export type GogolScripts = GameTestSuite;
 export type GogolSetup = Setup<GogolUnit>;
 
-export type GogolDefinition = FullDef<GogolLayer, GogolMark, GogolCommand, GogolTurnPos, GogolTurnVar, GogolBattlePos, GogolBattleVar, GogolArtifactLayer, GogolGenerator, GogolPhase, GogolTerrain, GogolUnit>;
+export type GogolDefinition = FullDef<GogolArtifactLayer, GogolBattlePos, GogolBattleVar, GogolCommand, GogolGenerator, GogolLayer, GogolMark, GogolPhase, GogolTerrain, GogolTurnPos, GogolTurnVar, GogolUnit>;

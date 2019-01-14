@@ -16,7 +16,7 @@ export type TransetBattleVar = any;
 export type TransetTurnPos = any;
 export type TransetTurnVar = any;
  
-export type TransetGenerators = Generators<TransetLayer, TransetMark, TransetCommand, TransetTurnPos, TransetTurnVar, TransetBattlePos, TransetBattleVar, TransetArtifactLayer, TransetGenerator>;
+export type TransetGenerators = Generators<TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar>;
 export type TransetFlow = Flow<TransetArtifactLayer, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetUnit>;
 export type TransetBoard = Board<TransetTerrain>;
 export type TransetAI = AI;
@@ -26,4 +26,4 @@ export type TransetMeta = Meta;
 export type TransetScripts = GameTestSuite;
 export type TransetSetup = Setup<TransetUnit>;
 
-export type TransetDefinition = FullDef<TransetLayer, TransetMark, TransetCommand, TransetTurnPos, TransetTurnVar, TransetBattlePos, TransetBattleVar, TransetArtifactLayer, TransetGenerator, TransetPhase, TransetTerrain, TransetUnit>;
+export type TransetDefinition = FullDef<TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetPhase, TransetTerrain, TransetTurnPos, TransetTurnVar, TransetUnit>;

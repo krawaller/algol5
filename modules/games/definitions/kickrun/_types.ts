@@ -16,7 +16,7 @@ export type KickrunBattleVar = any;
 export type KickrunTurnPos = any;
 export type KickrunTurnVar = any;
  
-export type KickrunGenerators = Generators<KickrunLayer, KickrunMark, KickrunCommand, KickrunTurnPos, KickrunTurnVar, KickrunBattlePos, KickrunBattleVar, KickrunArtifactLayer, KickrunGenerator>;
+export type KickrunGenerators = Generators<KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunTurnPos, KickrunTurnVar>;
 export type KickrunFlow = Flow<KickrunArtifactLayer, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunUnit>;
 export type KickrunBoard = Board<KickrunTerrain>;
 export type KickrunAI = AI;
@@ -26,4 +26,4 @@ export type KickrunMeta = Meta;
 export type KickrunScripts = GameTestSuite;
 export type KickrunSetup = Setup<KickrunUnit>;
 
-export type KickrunDefinition = FullDef<KickrunLayer, KickrunMark, KickrunCommand, KickrunTurnPos, KickrunTurnVar, KickrunBattlePos, KickrunBattleVar, KickrunArtifactLayer, KickrunGenerator, KickrunPhase, KickrunTerrain, KickrunUnit>;
+export type KickrunDefinition = FullDef<KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunPhase, KickrunTerrain, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;

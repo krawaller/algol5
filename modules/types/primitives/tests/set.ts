@@ -17,5 +17,6 @@ const tests: TestSet[] = [
   ["union", ["layer", "mylayer"], ["single", ["mark", "mymark"]]],
   ["intersect", ["layer", "mylayer"], ["single", ["mark", "mymark"]]],
   ["groupat", "mymark"],
-  ["ifactionelse", "mycmnd", ["groupat", "mymark"], "mylayer"]
+  ["ifactionelse", "mycmnd", ["groupat", "mymark"], "mylayer"],
+  ["ifelse", ["anyat", "mylayer", ["start"]], "mylayer", "mylayer"]
 ];

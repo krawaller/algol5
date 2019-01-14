@@ -16,7 +16,7 @@ export type KriegBattleVar = any;
 export type KriegTurnPos = any;
 export type KriegTurnVar = any;
  
-export type KriegGenerators = Generators<KriegLayer, KriegMark, KriegCommand, KriegTurnPos, KriegTurnVar, KriegBattlePos, KriegBattleVar, KriegArtifactLayer, KriegGenerator>;
+export type KriegGenerators = Generators<KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar>;
 export type KriegFlow = Flow<KriegArtifactLayer, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegUnit>;
 export type KriegBoard = Board<KriegTerrain>;
 export type KriegAI = AI;
@@ -26,4 +26,4 @@ export type KriegMeta = Meta;
 export type KriegScripts = GameTestSuite;
 export type KriegSetup = Setup<KriegUnit>;
 
-export type KriegDefinition = FullDef<KriegLayer, KriegMark, KriegCommand, KriegTurnPos, KriegTurnVar, KriegBattlePos, KriegBattleVar, KriegArtifactLayer, KriegGenerator, KriegPhase, KriegTerrain, KriegUnit>;
+export type KriegDefinition = FullDef<KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegPhase, KriegTerrain, KriegTurnPos, KriegTurnVar, KriegUnit>;

@@ -32,5 +32,7 @@ const tests: TestBool[] = [
   ["ifactionelse", "mymark", ["true"], ["false"]],
   ["ifactionelse", "start", ["true"], ["false"]],
   ["noneat", "mylayer", ["target"]],
-  ["same", ["walklength"], 3]
+  ["same", ["walklength"], 3],
+  ["valinlist", ["dir"], 8, 1, 2],
+  ["morethan", ["totalcount"], 0]
 ];

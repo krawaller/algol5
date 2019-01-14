@@ -16,7 +16,7 @@ export type GowiththefloeBattleVar = any;
 export type GowiththefloeTurnPos = any;
 export type GowiththefloeTurnVar = any;
  
-export type GowiththefloeGenerators = Generators<GowiththefloeLayer, GowiththefloeMark, GowiththefloeCommand, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeArtifactLayer, GowiththefloeGenerator>;
+export type GowiththefloeGenerators = Generators<GowiththefloeArtifactLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeTurnPos, GowiththefloeTurnVar>;
 export type GowiththefloeFlow = Flow<GowiththefloeArtifactLayer, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeUnit>;
 export type GowiththefloeBoard = Board<GowiththefloeTerrain>;
 export type GowiththefloeAI = AI;
@@ -26,4 +26,4 @@ export type GowiththefloeMeta = Meta;
 export type GowiththefloeScripts = GameTestSuite;
 export type GowiththefloeSetup = Setup<GowiththefloeUnit>;
 
-export type GowiththefloeDefinition = FullDef<GowiththefloeLayer, GowiththefloeMark, GowiththefloeCommand, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeArtifactLayer, GowiththefloeGenerator, GowiththefloePhase, GowiththefloeTerrain, GowiththefloeUnit>;
+export type GowiththefloeDefinition = FullDef<GowiththefloeArtifactLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloePhase, GowiththefloeTerrain, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;

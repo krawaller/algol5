@@ -16,7 +16,7 @@ export type JostleBattleVar = any;
 export type JostleTurnPos = any;
 export type JostleTurnVar = any;
  
-export type JostleGenerators = Generators<JostleLayer, JostleMark, JostleCommand, JostleTurnPos, JostleTurnVar, JostleBattlePos, JostleBattleVar, JostleArtifactLayer, JostleGenerator>;
+export type JostleGenerators = Generators<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
 export type JostleFlow = Flow<JostleArtifactLayer, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleUnit>;
 export type JostleBoard = Board<JostleTerrain>;
 export type JostleAI = AI;
@@ -26,4 +26,4 @@ export type JostleMeta = Meta;
 export type JostleScripts = GameTestSuite;
 export type JostleSetup = Setup<JostleUnit>;
 
-export type JostleDefinition = FullDef<JostleLayer, JostleMark, JostleCommand, JostleTurnPos, JostleTurnVar, JostleBattlePos, JostleBattleVar, JostleArtifactLayer, JostleGenerator, JostlePhase, JostleTerrain, JostleUnit>;
+export type JostleDefinition = FullDef<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostlePhase, JostleTerrain, JostleTurnPos, JostleTurnVar, JostleUnit>;

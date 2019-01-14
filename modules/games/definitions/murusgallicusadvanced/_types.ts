@@ -16,7 +16,7 @@ export type MurusgallicusadvancedBattleVar = any;
 export type MurusgallicusadvancedTurnPos = any;
 export type MurusgallicusadvancedTurnVar = any;
  
-export type MurusgallicusadvancedGenerators = Generators<MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedCommand, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedGenerator>;
+export type MurusgallicusadvancedGenerators = Generators<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar>;
 export type MurusgallicusadvancedFlow = Flow<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedUnit>;
 export type MurusgallicusadvancedBoard = Board<MurusgallicusadvancedTerrain>;
 export type MurusgallicusadvancedAI = AI;
@@ -26,4 +26,4 @@ export type MurusgallicusadvancedMeta = Meta;
 export type MurusgallicusadvancedScripts = GameTestSuite;
 export type MurusgallicusadvancedSetup = Setup<MurusgallicusadvancedUnit>;
 
-export type MurusgallicusadvancedDefinition = FullDef<MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedCommand, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedGenerator, MurusgallicusadvancedPhase, MurusgallicusadvancedTerrain, MurusgallicusadvancedUnit>;
+export type MurusgallicusadvancedDefinition = FullDef<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedPhase, MurusgallicusadvancedTerrain, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedUnit>;

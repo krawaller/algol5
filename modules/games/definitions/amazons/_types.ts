@@ -16,7 +16,7 @@ export type AmazonsBattleVar = any;
 export type AmazonsTurnPos = any;
 export type AmazonsTurnVar = any;
  
-export type AmazonsGenerators = Generators<AmazonsLayer, AmazonsMark, AmazonsCommand, AmazonsTurnPos, AmazonsTurnVar, AmazonsBattlePos, AmazonsBattleVar, AmazonsArtifactLayer, AmazonsGenerator>;
+export type AmazonsGenerators = Generators<AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar>;
 export type AmazonsFlow = Flow<AmazonsArtifactLayer, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsUnit>;
 export type AmazonsBoard = Board<AmazonsTerrain>;
 export type AmazonsAI = AI;
@@ -26,4 +26,4 @@ export type AmazonsMeta = Meta;
 export type AmazonsScripts = GameTestSuite;
 export type AmazonsSetup = Setup<AmazonsUnit>;
 
-export type AmazonsDefinition = FullDef<AmazonsLayer, AmazonsMark, AmazonsCommand, AmazonsTurnPos, AmazonsTurnVar, AmazonsBattlePos, AmazonsBattleVar, AmazonsArtifactLayer, AmazonsGenerator, AmazonsPhase, AmazonsTerrain, AmazonsUnit>;
+export type AmazonsDefinition = FullDef<AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsPhase, AmazonsTerrain, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;

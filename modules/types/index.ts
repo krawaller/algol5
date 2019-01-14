@@ -53,28 +53,28 @@ export function typeSignature(type, gameId) {
     Board: ["Terrain"],
     Setup: ["Unit"],
     Generators: [
-      "Layer",
-      "Mark",
-      "Command",
-      "TurnPos",
-      "TurnVar",
+      "ArtifactLayer",
       "BattlePos",
       "BattleVar",
-      "ArtifactLayer",
-      "Generator"
+      "Command",
+      "Generator",
+      "Layer",
+      "Mark",
+      "TurnPos",
+      "TurnVar"
     ],
     FullDef: [
-      "Layer",
-      "Mark",
-      "Command",
-      "TurnPos",
-      "TurnVar",
+      "ArtifactLayer",
       "BattlePos",
       "BattleVar",
-      "ArtifactLayer",
+      "Command",
       "Generator",
+      "Layer",
+      "Mark",
       "Phase",
       "Terrain",
+      "TurnPos",
+      "TurnVar",
       "Unit"
     ]
   }[type]

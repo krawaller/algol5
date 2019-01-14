@@ -16,7 +16,7 @@ export type CoffeeBattleVar = any;
 export type CoffeeTurnPos = any;
 export type CoffeeTurnVar = any;
  
-export type CoffeeGenerators = Generators<CoffeeLayer, CoffeeMark, CoffeeCommand, CoffeeTurnPos, CoffeeTurnVar, CoffeeBattlePos, CoffeeBattleVar, CoffeeArtifactLayer, CoffeeGenerator>;
+export type CoffeeGenerators = Generators<CoffeeArtifactLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeTurnPos, CoffeeTurnVar>;
 export type CoffeeFlow = Flow<CoffeeArtifactLayer, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeeUnit>;
 export type CoffeeBoard = Board<CoffeeTerrain>;
 export type CoffeeAI = AI;
@@ -26,4 +26,4 @@ export type CoffeeMeta = Meta;
 export type CoffeeScripts = GameTestSuite;
 export type CoffeeSetup = Setup<CoffeeUnit>;
 
-export type CoffeeDefinition = FullDef<CoffeeLayer, CoffeeMark, CoffeeCommand, CoffeeTurnPos, CoffeeTurnVar, CoffeeBattlePos, CoffeeBattleVar, CoffeeArtifactLayer, CoffeeGenerator, CoffeePhase, CoffeeTerrain, CoffeeUnit>;
+export type CoffeeDefinition = FullDef<CoffeeArtifactLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeeTerrain, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;

@@ -16,7 +16,7 @@ export type DaggersBattleVar = any;
 export type DaggersTurnPos = any;
 export type DaggersTurnVar = any;
  
-export type DaggersGenerators = Generators<DaggersLayer, DaggersMark, DaggersCommand, DaggersTurnPos, DaggersTurnVar, DaggersBattlePos, DaggersBattleVar, DaggersArtifactLayer, DaggersGenerator>;
+export type DaggersGenerators = Generators<DaggersArtifactLayer, DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersTurnPos, DaggersTurnVar>;
 export type DaggersFlow = Flow<DaggersArtifactLayer, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersUnit>;
 export type DaggersBoard = Board<DaggersTerrain>;
 export type DaggersAI = AI;
@@ -26,4 +26,4 @@ export type DaggersMeta = Meta;
 export type DaggersScripts = GameTestSuite;
 export type DaggersSetup = Setup<DaggersUnit>;
 
-export type DaggersDefinition = FullDef<DaggersLayer, DaggersMark, DaggersCommand, DaggersTurnPos, DaggersTurnVar, DaggersBattlePos, DaggersBattleVar, DaggersArtifactLayer, DaggersGenerator, DaggersPhase, DaggersTerrain, DaggersUnit>;
+export type DaggersDefinition = FullDef<DaggersArtifactLayer, DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGenerator, DaggersLayer, DaggersMark, DaggersPhase, DaggersTerrain, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;

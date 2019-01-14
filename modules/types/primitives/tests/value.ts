@@ -1,14 +1,14 @@
 import { AlgolVal } from "../value";
 
 type TestVal = AlgolVal<
-  "mylayer",
-  "mymark",
-  "mycmnd",
-  "myturnp",
-  "myturnv",
+  "FOO" | "BAR",
   "mybattlep",
   "mybattlev",
-  "FOO" | "BAR"
+  "mycmnd",
+  "mylayer",
+  "mymark",
+  "myturnp",
+  "myturnv"
 >;
 
 const tests: TestVal[] = [

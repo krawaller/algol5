@@ -8,58 +8,50 @@ import {
   SIG_Pos
 } from "./_signatures";
 
-export type AlgolPos<
-  Layer = string,
-  Mrk = string,
-  Cmnd = string,
-  Turnp = string,
-  Turnv = string,
-  Btlp = string,
-  Btlv = string
-> =
+export type AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | Mrk
   | SIG_NoArgs<"start" | "target">
-  | SIG_Set<"onlyin", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_MarkRef<"mark", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_TurnPos<"turnpos", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_BattlePos<"battlepos", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Pos<"single", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | PosIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | PosPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | PosIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | SIG_Set<"onlyin", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_MarkRef<"mark", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_TurnPos<"turnpos", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_BattlePos<"battlepos", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Pos<"single", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | PosIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | PosPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | PosIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 
-interface PosIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface PosIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfElse<
-    AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface PosPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface PosPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
-    AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface PosIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface PosIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfActionElse<
-    AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}

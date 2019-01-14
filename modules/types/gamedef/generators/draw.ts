@@ -1,51 +1,51 @@
 import { AlgolVal, AlgolBool, AlgolSet } from "../../";
 
 export type DrawDef<
-  Layer extends string = string,
-  Mark extends string = string,
-  Command extends string = string,
-  TurnPos extends string = string,
-  TurnVar extends string = string,
-  BattlePos extends string = string,
-  BattleVar extends string = string,
-  ArtifactLayer extends string = string
+  ArtifactLayer,
+  BattlePos,
+  BattleVar,
+  Command,
+  Layer,
+  Mark,
+  TurnPos,
+  TurnVar
 > = {
   tolayer: AlgolVal<
-    Layer,
-    Mark,
-    Command,
-    TurnPos,
-    TurnVar,
+    ArtifactLayer,
     BattlePos,
     BattleVar,
-    ArtifactLayer
+    Command,
+    Layer,
+    Mark,
+    TurnPos,
+    TurnVar
   >;
   include?: any;
   condition?: AlgolBool<
+    BattlePos,
+    BattleVar,
+    Command,
     Layer,
     Mark,
-    Command,
     TurnPos,
-    TurnVar,
-    BattlePos,
-    BattleVar
+    TurnVar
   >;
   ifover?: AlgolSet<
+    BattlePos,
+    BattleVar,
+    Command,
     Layer,
     Mark,
-    Command,
     TurnPos,
-    TurnVar,
-    BattlePos,
-    BattleVar
+    TurnVar
   >;
   unlessover?: AlgolSet<
+    BattlePos,
+    BattleVar,
+    Command,
     Layer,
     Mark,
-    Command,
     TurnPos,
-    TurnVar,
-    BattlePos,
-    BattleVar
+    TurnVar
   >;
 };

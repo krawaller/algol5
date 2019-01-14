@@ -1,14 +1,14 @@
 import { DrawDef } from "./draw";
 
 export type WalkerDef<
-  Layer extends string = string,
-  Mark extends string = string,
-  Command extends string = string,
-  TurnPos extends string = string,
-  TurnVar extends string = string,
-  BattlePos extends string = string,
-  BattleVar extends string = string,
-  ArtifactLayer extends string = string
+  ArtifactLayer,
+  BattlePos,
+  BattleVar,
+  Command,
+  Layer,
+  Mark,
+  TurnPos,
+  TurnVar
 > = {
   type: "walker";
   dir?: any;
@@ -23,64 +23,64 @@ export type WalkerDef<
   max?: any;
   draw: {
     start?: DrawDef<
-      Layer,
-      Mark,
-      Command,
-      TurnPos,
-      TurnVar,
+      ArtifactLayer,
       BattlePos,
       BattleVar,
-      ArtifactLayer
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
     >;
     steps?: DrawDef<
-      Layer,
-      Mark,
-      Command,
-      TurnPos,
-      TurnVar,
+      ArtifactLayer,
       BattlePos,
       BattleVar,
-      ArtifactLayer
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
     >;
     block?: DrawDef<
-      Layer,
-      Mark,
-      Command,
-      TurnPos,
-      TurnVar,
+      ArtifactLayer,
       BattlePos,
       BattleVar,
-      ArtifactLayer
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
     >;
     last?: DrawDef<
-      Layer,
-      Mark,
-      Command,
-      TurnPos,
-      TurnVar,
+      ArtifactLayer,
       BattlePos,
       BattleVar,
-      ArtifactLayer
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
     >;
     all?: DrawDef<
-      Layer,
-      Mark,
-      Command,
-      TurnPos,
-      TurnVar,
+      ArtifactLayer,
       BattlePos,
       BattleVar,
-      ArtifactLayer
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
     >;
     count?: DrawDef<
-      Layer,
-      Mark,
-      Command,
-      TurnPos,
-      TurnVar,
+      ArtifactLayer,
       BattlePos,
       BattleVar,
-      ArtifactLayer
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
     >;
   };
 };

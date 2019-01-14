@@ -1,64 +1,56 @@
 import { IfElse, PlayerCase, IfActionElse } from "./_logical";
 import { SIG_Pos, SIG_LayerRef, SIG_Sets } from "./_signatures";
 
-export type AlgolSet<
-  Layer = string,
-  Mrk = string,
-  Cmnd = string,
-  Turnp = string,
-  Turnv = string,
-  Btlp = string,
-  Btlv = string
-> =
+export type AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | Layer
-  | SIG_LayerRef<"layer", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Pos<"single" | "groupat", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_LayerRef<"layer", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Pos<"single" | "groupat", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | SIG_Sets<
       "union" | "intersect" | "subtract",
+      Btlp,
+      Btlv,
+      Cmnd,
       Layer,
       Mrk,
-      Cmnd,
       Turnp,
-      Turnv,
-      Btlp,
-      Btlv
+      Turnv
     >
-  | SetIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SetPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SetIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | SetIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SetPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SetIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 
-interface SetIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface SetIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfElse<
-    AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface SetPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface SetPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
-    AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface SetIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface SetIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfActionElse<
-    AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}

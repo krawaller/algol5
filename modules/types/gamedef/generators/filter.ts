@@ -1,12 +1,12 @@
 export type FilterDef<
-  Layer extends string = string,
-  Mark extends string = string,
-  Command extends string = string,
-  TurnPos extends string = string,
-  TurnVar extends string = string,
-  BattlePos extends string = string,
-  BattleVar extends string = string,
-  ArtifactLayer extends string = string
+  ArtifactLayer,
+  BattlePos,
+  BattleVar,
+  Command,
+  Layer,
+  Mark,
+  TurnPos,
+  TurnVar
 > = {
   type: "filter";
   layer: any;

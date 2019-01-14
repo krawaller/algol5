@@ -1,14 +1,14 @@
 import { DrawDef } from "./draw";
 
 export type NeighbourDef<
-  Layer extends string = string,
-  Mark extends string = string,
-  Command extends string = string,
-  TurnPos extends string = string,
-  TurnVar extends string = string,
-  BattlePos extends string = string,
-  BattleVar extends string = string,
-  ArtifactLayer extends string = string
+  ArtifactLayer,
+  BattlePos,
+  BattleVar,
+  Command,
+  Layer,
+  Mark,
+  TurnPos,
+  TurnVar
 > = {
   type: "neighbour";
   dir?: any;
@@ -20,24 +20,24 @@ export type NeighbourDef<
   unlessover?: any;
   draw: {
     start?: DrawDef<
-      Layer,
-      Mark,
-      Command,
-      TurnPos,
-      TurnVar,
+      ArtifactLayer,
       BattlePos,
       BattleVar,
-      ArtifactLayer
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
     >;
     neighbours?: DrawDef<
-      Layer,
-      Mark,
-      Command,
-      TurnPos,
-      TurnVar,
+      ArtifactLayer,
       BattlePos,
       BattleVar,
-      ArtifactLayer
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
     >;
   };
 };

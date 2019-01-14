@@ -1,66 +1,58 @@
 import { IfElse, PlayerCase, If, IfActionElse } from "./_logical";
 
-export type AlgolLink<
-  Layer = string,
-  Mrk = string,
-  Cmnd = string,
-  Turnp = string,
-  Turnv = string,
-  Btlp = string,
-  Btlv = string
-> =
+export type AlgolLink<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | Mrk
   | Cmnd
   | "endturn"
-  | LinkIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | LinkIf<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | LinkPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | LinkIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | LinkIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | LinkIf<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | LinkPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | LinkIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 
-interface LinkIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface LinkIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfElse<
-    AlgolLink<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolLink<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface LinkIf<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface LinkIf<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends If<
-    AlgolLink<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolLink<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface LinkPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface LinkPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
-    AlgolLink<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolLink<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface LinkIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface LinkIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfActionElse<
-    AlgolLink<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolLink<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}

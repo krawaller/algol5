@@ -4,262 +4,241 @@ import { AlgolVal } from "./value";
 import { AlgolBool } from "./bool";
 import { AlgolNumber } from "./number";
 
-export interface SIG_Set<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<CMND | AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>> {
-  0: CMND;
-  1: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export interface SIG_Set<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<_T | AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_Set_Set<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<CMND | AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>> {
-  0: CMND;
-  1: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export interface SIG_Set_Set<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<_T | AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   3?: never;
 }
 
-export interface SIG_Sets<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<CMND | AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>> {
-  0: CMND;
-  1: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  3?: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  4?: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export interface SIG_Sets<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<_T | AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  3?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  4?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   5?: never;
 }
 
-export interface SIG_LayerRef<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_LayerRef<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Layer>
+    _T | AlgolVal<Layer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Layer>;
+  0: _T;
+  1: AlgolVal<Layer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_CmndRef<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_CmndRef<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>
+    _T | AlgolVal<Cmnd, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Cmnd>;
+  0: _T;
+  1: AlgolVal<Cmnd, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_Val_Val<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_Val_Val<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>
+    _T | AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
-  2: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  0: _T;
+  1: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   3?: never;
 }
 
-export interface SIG_Vals<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_Vals<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>
+    _T | AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
-  2: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
-  3?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
-  4?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
-  5?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
-  6?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
-  7?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
-  8?: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, any>;
+  0: _T;
+  1: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  3?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  4?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  5?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  6?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  7?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  8?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   9?: never;
 }
 
-export interface SIG_Set_Pos<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_Set_Pos<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    | CMND
-    | AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-    | AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+    | _T
+    | AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+    | AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  0: _T;
+  1: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   3?: never;
 }
 
 export interface SIG_Set_Pos_Val<
-  CMND,
+  _T,
+  Btlp,
+  Btlv,
+  Cmnd,
   Layer,
   Mrk,
-  Cmnd,
   Turnp,
-  Turnv,
-  Btlp,
-  Btlv
+  Turnv
 >
   extends Array<
-    | CMND
-    | AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-    | AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-    | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+    | _T
+    | AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+    | AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+    | AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  3: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  0: _T;
+  1: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  3: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   4?: never;
 }
 
-export interface SIG_Pos<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<CMND | AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>> {
-  0: CMND;
-  1: AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export interface SIG_Pos<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<_T | AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_Pos_Pos<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<CMND | AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>> {
-  0: CMND;
-  1: AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolPos<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export interface SIG_Pos_Pos<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<_T | AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   3?: never;
 }
 
-export interface SIG_Bools<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<CMND | AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>> {
-  0: CMND;
-  1: AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  3?: AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  4?: AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export interface SIG_Bools<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<_T | AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  3?: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  4?: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   5?: never;
 }
 
-export interface SIG_Bool<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<CMND | AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>> {
-  0: CMND;
-  1: AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export interface SIG_Bool<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<_T | AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_Val<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>> {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2?: never;
-}
-
-export interface SIG_Set_Val<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_Val<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    | CMND
-    | AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-    | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+    _T | AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolSet<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  0: _T;
+  1: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2?: never;
+}
+
+export interface SIG_Set_Val<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<
+    | _T
+    | AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+    | AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  > {
+  0: _T;
+  1: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   3?: never;
 }
 
-export interface SIG_NoArgs<CMND> extends Array<CMND> {
-  0: CMND;
+export interface SIG_NoArgs<_T> extends Array<_T> {
+  0: _T;
   1?: never;
 }
 
-export interface SIG_Numbers<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  extends Array<
-    CMND | AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  > {
-  0: CMND;
-  1: AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  3?: AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  4?: AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export interface SIG_Numbers<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends Array<_T | AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  3?: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  4?: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   5?: never;
 }
 
 export interface SIG_Number_Number<
-  CMND,
+  _T,
+  Btlp,
+  Btlv,
+  Cmnd,
   Layer,
   Mrk,
-  Cmnd,
   Turnp,
-  Turnv,
-  Btlp,
-  Btlv
->
-  extends Array<
-    CMND | AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  > {
-  0: CMND;
-  1: AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  Turnv
+> extends Array<_T | AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>> {
+  0: _T;
+  1: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   3?: never;
 }
 
-export interface SIG_Literal<CMND, T> extends Array<CMND | T> {
-  0: CMND;
+export interface SIG_Literal<_T, T> extends Array<_T | T> {
+  0: _T;
   1: T;
   2?: never;
 }
 
-export interface SIG_MarkRef<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_MarkRef<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Mrk>
+    _T | AlgolVal<Mrk, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Mrk>;
+  0: _T;
+  1: AlgolVal<Mrk, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_TurnPos<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_TurnPos<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Turnp>
+    _T | AlgolVal<Turnp, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Turnp>;
+  0: _T;
+  1: AlgolVal<Turnp, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_TurnVal<CMND, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface SIG_TurnVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Turnv>
+    _T | AlgolVal<Turnv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Turnv>;
+  0: _T;
+  1: AlgolVal<Turnv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_BattlePos<
-  CMND,
-  Layer,
-  Mrk,
-  Cmnd,
-  Turnp,
-  Turnv,
-  Btlp,
-  Btlv
->
+export interface SIG_BattlePos<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Btlp>
+    _T | AlgolVal<Btlp, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Btlp>;
+  0: _T;
+  1: AlgolVal<Btlp, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }
 
-export interface SIG_BattleVal<
-  CMND,
-  Layer,
-  Mrk,
-  Cmnd,
-  Turnp,
-  Turnv,
-  Btlp,
-  Btlv
->
+export interface SIG_BattleVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    CMND | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Btlv>
+    _T | AlgolVal<Btlv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
-  0: CMND;
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Btlv>;
+  0: _T;
+  1: AlgolVal<Btlv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   2?: never;
 }

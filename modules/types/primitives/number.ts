@@ -8,15 +8,7 @@ import {
   SIG_Literal
 } from "./_signatures";
 
-export type AlgolNumber<
-  Layer = string,
-  Mrk = string,
-  Cmnd = string,
-  Turnp = string,
-  Turnv = string,
-  Btlp = string,
-  Btlv = string
-> =
+export type AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | number
   | SIG_NoArgs<
       | "player"
@@ -29,45 +21,45 @@ export type AlgolNumber<
       | "step"
     >
   | SIG_Literal<"value", number>
-  | SIG_Number_Number<"minus", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Numbers<"prod" | "sum", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Set_Val<"harvest", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Set<"sizeof", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | NumberIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | NumberPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | NumberIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | SIG_Number_Number<"minus", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Numbers<"prod" | "sum", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Set_Val<"harvest", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Set<"sizeof", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 
-interface NumberIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface NumberIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfElse<
-    AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
-interface NumberPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
-    AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface NumberIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface NumberIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfActionElse<
-    AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}

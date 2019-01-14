@@ -1,13 +1,13 @@
 import { AlgolSet } from "../set";
 
 type TestSet = AlgolSet<
+  "mybattlep",
+  "mybattlev",
+  "mycmnd",
   "mylayer",
   "mymark",
-  "mycmnd",
   "myturnp",
-  "myturnv",
-  "mybattlep",
-  "mybattlev"
+  "myturnv"
 >;
 
 const tests: TestSet[] = [

@@ -1,14 +1,14 @@
 import { AlgolGen } from "../gen";
 
 type TestGen = AlgolGen<
-  "mylayer",
-  "mymark",
-  "mycmnd",
-  "myturnp",
-  "myturnv",
   "mybattlep",
   "mybattlev",
-  "mygen"
+  "mycmnd",
+  "mygen",
+  "mylayer",
+  "mymark",
+  "myturnp",
+  "myturnv"
 >;
 
 const tests: TestGen[] = [

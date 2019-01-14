@@ -1,56 +1,56 @@
 import { AlgolBool } from "./bool";
 import { AlgolVal } from "./value";
 
-export type Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv> =
-  | T
-  | IfElse<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | PlayerCase<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | IfActionElse<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+export type Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
+  | _T
+  | IfElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | PlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | IfActionElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 
-export interface IfElse<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface IfElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
     | "ifelse"
-    | AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-    | Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+    | AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+    | Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
   0: "ifelse";
-  1: AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  3: Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  1: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  3: Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   4?: never;
 }
 
-export interface If<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface If<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
     | "if"
-    | AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-    | Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+    | AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+    | Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
   0: "if";
-  1: AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  1: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   4?: never;
 }
 
-export interface PlayerCase<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface PlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
-    "playercase" | Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+    "playercase" | Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
   0: "playercase";
-  1: Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  2: Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  1: Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   3?: never;
 }
 
-export interface IfActionElse<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export interface IfActionElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends Array<
     | "ifactionelse"
-    | Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-    | AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, "start" | Mrk | Cmnd>
+    | Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+    | AlgolVal<"start" | Mrk | Cmnd, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   > {
   0: "ifactionelse";
-  1: AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, "start" | Mrk | Cmnd>;
-  2: Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
-  3: Logical<T, Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  1: AlgolVal<"start" | Mrk | Cmnd, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  2: Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  3: Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   4?: never;
 }

@@ -2,56 +2,47 @@ import { IfElse, PlayerCase, IfActionElse } from "./_logical";
 import { SIG_Set_Pos_Val, SIG_Literal, SIG_NoArgs } from "./_signatures";
 import { AlgolNumber } from "./number";
 
-export type AlgolVal<
-  Layer = string,
-  Mrk = string,
-  Cmnd = string,
-  Turnp = string,
-  Turnv = string,
-  Btlp = string,
-  Btlv = string,
-  T = string | number
-> =
-  | T
-  | AlgolNumber<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Set_Pos_Val<"read", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Literal<"value", T>
+export type AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
+  | _T
+  | AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Set_Pos_Val<"read", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Literal<"value", _T>
   | SIG_NoArgs<"dir" | "stopreason">
-  | ValIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>
-  | ValPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>
-  | ValIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>;
+  | ValIfElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | ValPlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | ValIfActionElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 
-interface ValIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>
+interface ValIfElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfElse<
-    AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>,
+    AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
-interface ValPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>
+interface ValPlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
-    AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>,
+    AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface ValIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>
+interface ValIfActionElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfActionElse<
-    AlgolVal<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, T>,
+    AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}

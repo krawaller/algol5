@@ -1,13 +1,13 @@
 import { AlgolLink } from "../link";
 
 type TestLink = AlgolLink<
+  "mybattlep",
+  "mybattlev",
+  "mycmnd",
   "mylayer",
   "mymark",
-  "mycmnd",
   "myturnp",
-  "myturnv",
-  "mybattlep",
-  "mybattlev"
+  "myturnv"
 >;
 
 const tests: TestLink[] = [

@@ -15,81 +15,73 @@ import {
   SIG_Vals
 } from "./_signatures";
 
-export type AlgolBool<
-  Layer = string,
-  Mrk = string,
-  Cmnd = string,
-  Turnp = string,
-  Turnv = string,
-  Btlp = string,
-  Btlv = string
-> =
-  | SIG_Bools<"and" | "or", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+export type AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
+  | SIG_Bools<"and" | "or", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | SIG_Pos_Pos<
       "samepos" | "higher" | "further",
+      Btlp,
+      Btlv,
+      Cmnd,
       Layer,
       Mrk,
-      Cmnd,
       Turnp,
-      Turnv,
-      Btlp,
-      Btlv
+      Turnv
     >
-  | SIG_Set<"isempty" | "notempty", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Sets<"overlaps", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Set_Pos<"anyat" | "noneat", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Number_Number<"morethan", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Bool<"not", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Val<"truthy" | "falsy", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_Vals<"valinlist", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_Set<"isempty" | "notempty", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Sets<"overlaps", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Set_Pos<"anyat" | "noneat", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Number_Number<"morethan", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Bool<"not", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Val<"truthy" | "falsy", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_Vals<"valinlist", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | SIG_Val_Val<
       "same" | "different",
+      Btlp,
+      Btlv,
+      Cmnd,
       Layer,
       Mrk,
-      Cmnd,
       Turnp,
-      Turnv,
-      Btlp,
-      Btlv
+      Turnv
     >
-  | SIG_CmndRef<"cmndavailable", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | SIG_MarkRef<"markavailable", Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+  | SIG_CmndRef<"cmndavailable", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | SIG_MarkRef<"markavailable", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | SIG_NoArgs<"true" | "false">
-  | BoolIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | BoolPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
-  | BoolIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>;
+  | BoolIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | BoolPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | BoolIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 
-interface BoolIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface BoolIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfElse<
-    AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
-interface BoolPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface BoolPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
-    AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface BoolIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>
+interface BoolIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfActionElse<
-    AlgolBool<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv>,
+    AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}

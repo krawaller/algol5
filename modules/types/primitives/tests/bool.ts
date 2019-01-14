@@ -1,13 +1,13 @@
 import { AlgolBool } from "../bool";
 
 type TestBool = AlgolBool<
+  "mybattlep",
+  "mybattlev",
+  "mycmnd",
   "mylayer",
   "mymark",
-  "mycmnd",
   "myturnp",
-  "myturnv",
-  "mybattlep",
-  "mybattlev"
+  "myturnv"
 >;
 
 const tests: TestBool[] = [
@@ -31,5 +31,5 @@ const tests: TestBool[] = [
   ["valinlist", ["value", 8], ["value", 4], 3, ["value", 9]],
   ["ifactionelse", "mymark", ["true"], ["false"]],
   ["ifactionelse", "start", ["true"], ["false"]],
-  ["noneat", "myunits", ["target"]]
+  ["noneat", "mylayer", ["target"]]
 ];

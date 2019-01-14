@@ -1,65 +1,56 @@
 import { IfElse, PlayerCase, If, IfActionElse } from "./_logical";
 
-export type AlgolGen<
-  Layer = string,
-  Mrk = string,
-  Cmnd = string,
-  Turnp = string,
-  Turnv = string,
-  Btlp = string,
-  Btlv = string,
-  Gen = string
-> =
+export type AlgolGen<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv> =
   | Gen
-  | GenIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
-  | GenIf<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
-  | GenPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
-  | GenIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>;
+  | GenIfElse<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>
+  | GenIf<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>
+  | GenPlayerCase<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>
+  | GenIfActionElse<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>;
 
-interface GenIfElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
+interface GenIfElse<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>
   extends IfElse<
-    AlgolGen<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>,
+    AlgolGen<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface GenIf<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
+interface GenIf<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>
   extends If<
-    AlgolGen<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>,
+    AlgolGen<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface GenPlayerCase<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
+interface GenPlayerCase<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
-    AlgolGen<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>,
+    AlgolGen<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}
 
-interface GenIfActionElse<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>
+interface GenIfActionElse<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>
   extends IfActionElse<
-    AlgolGen<Layer, Mrk, Cmnd, Turnp, Turnv, Btlp, Btlv, Gen>,
+    AlgolGen<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
     Layer,
     Mrk,
-    Cmnd,
     Turnp,
-    Turnv,
-    Btlp,
-    Btlv
+    Turnv
   > {}

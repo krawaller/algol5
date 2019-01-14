@@ -1,13 +1,13 @@
 import { AlgolNumber } from "../number";
 
 type TestNumber = AlgolNumber<
+  "mybattlep",
+  "mybattlev",
+  "mycmnd",
   "mylayer",
   "mymark",
-  "mycmnd",
   "myturnp",
-  "myturnv",
-  "mybattlep",
-  "mybattlev"
+  "myturnv"
 >;
 
 const tests: TestNumber[] = [

@@ -1,13 +1,13 @@
 import { AlgolPos } from "../pos";
 
 type TestPos = AlgolPos<
+  "mybattlep",
+  "mybattlev",
+  "mycmnd",
   "mylayer",
   "mymark",
-  "mycmnd",
   "myturnp",
-  "myturnv",
-  "mybattlep",
-  "mybattlev"
+  "myturnv"
 >;
 
 const tests: TestPos[] = [

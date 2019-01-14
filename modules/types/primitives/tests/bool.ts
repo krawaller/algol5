@@ -34,5 +34,8 @@ const tests: TestBool[] = [
   ["noneat", "mylayer", ["target"]],
   ["same", ["walklength"], 3],
   ["valinlist", ["dir"], 8, 1, 2],
-  ["morethan", ["totalcount"], 0]
+  ["morethan", ["totalcount"], 0],
+  ["samepos", ["target"], ["battlepos", "mybattlep"]],
+  ["same", ["idat", "mymark"], ["battlevar", "mybattlev"]],
+  ["not", ["and",["true"],["false"]]]
 ];

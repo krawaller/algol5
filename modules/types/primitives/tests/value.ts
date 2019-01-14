@@ -19,5 +19,6 @@ const tests: TestVal[] = [
   ["ifactionelse", "mymark", "FOO", "BAR"],
   ["ifelse", ["true"], ["ifelse", ["false"], "BAR", "FOO"], "BAR"],
   ["dir"],
-  ["stopreason"]
+  ["stopreason"],
+  ["battlevar", "mybattlev"]
 ];

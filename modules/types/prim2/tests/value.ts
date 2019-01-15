@@ -18,11 +18,10 @@ const tests: TestVal[] = [
   { value: { value: "BAR" } },
   { ifelse: [["true"], "FOO", { value: "BAR" }] },
   {
-    if: [["true"], "BAR"]
-  },
-  {
     ifactionelse: ["mycmnd", "FOO", "BAR"]
   },
   { playercase: ["FOO", "BAR"] },
-  { read: ["mylayer", "mymark", "someProp"] }
+  { read: ["mylayer", "mymark", "someProp"] },
+  { battlevar: "mybattlev" },
+  { idat: "mymark" }
 ];

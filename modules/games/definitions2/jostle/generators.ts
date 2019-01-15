@@ -1,4 +1,4 @@
-import { JostleGenerators } from './_types';
+import { JostleGenerators } from "./_types";
 
 const jostleGenerators: JostleGenerators = {
   findinitial: {
@@ -7,7 +7,19 @@ const jostleGenerators: JostleGenerators = {
     start: "selectunit",
     draw: {
       neighbours: {
-        tolayer: ["ifelse", ["noneat", "units", ["target"]], "movetargets", ["ifelse", ["anyat", "oppunits", ["target"]], "initialenemy", "initialfriend"]]
+        tolayer: {
+          ifelse: [
+            { noneat: ["units", ["target"]] },
+            "movetargets",
+            {
+              ifelse: [
+                { anyat: ["oppunits", ["target"]] },
+                "initialenemy",
+                "initialfriend"
+              ]
+            }
+          ]
+        }
       }
     }
   },
@@ -18,7 +30,9 @@ const jostleGenerators: JostleGenerators = {
     ifover: "units",
     draw: {
       neighbours: {
-        tolayer: ["ifelse", ["anyat", "oppunits", ["target"]], "newenemy", "newfriend"]
+        tolayer: {
+          ifelse: [{ anyat: ["oppunits", ["target"]] }, "newenemy", "newfriend"]
+        }
       }
     }
   }

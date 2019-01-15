@@ -17,7 +17,7 @@ const daggersGenerators: DaggersGenerators = {
     start: "selectunit",
     dirs: [8, 1, 2, 4, 5, 6],
     blocks: "units",
-    max: ["ifelse", ["valinlist", ["dir"], 8, 1, 2], 1, 8],
+    max: { ifelse: [{ valinlist: [["dir"], 8, 1, 2] }, 1, 8] },
     draw: {
       steps: {
         tolayer: "movetarget"

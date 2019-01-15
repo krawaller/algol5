@@ -1,4 +1,4 @@
-import { ShoveoffGenerators } from './_types';
+import { ShoveoffGenerators } from "./_types";
 
 const shoveoffGenerators: ShoveoffGenerators = {
   findaffected: {
@@ -7,11 +7,11 @@ const shoveoffGenerators: ShoveoffGenerators = {
     dirs: [1, 3, 5, 7],
     draw: {
       last: {
-        condition: ["same", ["walklength"], 3],
+        condition: { same: [["walklength"], 3] },
         unlessover: "oppunits",
         tolayer: "targetedgepoints",
         include: {
-          dir: ["reldir", ["dir"], 5]
+          dir: { reldir: [["dir"], 5] }
         }
       }
     }
@@ -19,18 +19,56 @@ const shoveoffGenerators: ShoveoffGenerators = {
   findresults: {
     type: "walker",
     starts: "targetedgepoints",
-    dir: ["read", "targetedgepoints", ["start"], "dir"],
+    dir: { read: ["targetededgepoints", ["start"], "dir"] },
     startasstep: true,
     draw: {
       start: {
-        tolayer: ["ifelse", ["same", ["dir"], 1], "squishsouth", ["ifelse", ["same", ["dir"], 3], "squishwest", ["ifelse", ["same", ["dir"], 5], "squishnorth", "squisheast"]]]
+        tolayer: {
+          ifelse: [
+            { same: [["dir"], 1] },
+            "squishsouth",
+            {
+              ifelse: [
+                { same: [["dir"], 3] },
+                "squishwest",
+                {
+                  ifelse: [{ same: [["dir"], 5] }, "squishnorth", "squisheast"]
+                }
+              ]
+            }
+          ]
+        }
       },
       steps: {
-        condition: ["different", ["step"], 1],
-        tolayer: ["ifelse", ["same", ["dir"], 1], "pushsouth", ["ifelse", ["same", ["dir"], 3], "pushwest", ["ifelse", ["same", ["dir"], 5], "pushnorth", "pusheast"]]]
+        condition: { different: [["step"], 1] },
+        tolayer: {
+          ifelse: [
+            { same: [["dir"], 1] },
+            "pushsouth",
+            {
+              ifelse: [
+                { same: [["dir"], 3] },
+                "pushwest",
+                { ifelse: [{ same: [["dir"], 5] }, "pushnorth", "pusheast"] }
+              ]
+            }
+          ]
+        }
       },
       last: {
-        tolayer: ["ifelse", ["same", ["dir"], 1], "spawnsouth", ["ifelse", ["same", ["dir"], 3], "spawnwest", ["ifelse", ["same", ["dir"], 5], "spawnnorth", "spawneast"]]]
+        tolayer: {
+          ifelse: [
+            { same: [["dir"], 1] },
+            "spawnsouth",
+            {
+              ifelse: [
+                { same: [["dir"], 3] },
+                "spawnwest",
+                { ifelse: [{ same: [["dir"], 5] }, "spawnnorth", "spawneast"] }
+              ]
+            }
+          ]
+        }
       }
     }
   },
@@ -41,7 +79,7 @@ const shoveoffGenerators: ShoveoffGenerators = {
     startasstep: true,
     draw: {
       steps: {
-        condition: ["same", ["walklength"], 4],
+        condition: { same: [["walklength"], 4] },
         tolayer: "fourinarow"
       }
     }

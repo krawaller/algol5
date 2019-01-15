@@ -1,4 +1,4 @@
-import { AtriumGenerators } from './_types';
+import { AtriumGenerators } from "./_types";
 
 const atriumGenerators: AtriumGenerators = {
   findmovetargets: {
@@ -17,10 +17,12 @@ const atriumGenerators: AtriumGenerators = {
     starts: "myunits",
     startasstep: true,
     dirs: [1, 2, 3, 4, 5, 6, 7, 8],
-    steps: ["ifelse", ["anyat", "mykings", ["start"]], "mykings", "myqueens"],
+    steps: {
+      ifelse: [{ anyat: ["mykings", ["start"]] }, "mykings", "myqueens"]
+    },
     draw: {
       steps: {
-        condition: ["same", ["walklength"], 3],
+        condition: { same: [["walklength"], 3] },
         tolayer: "winline"
       }
     }

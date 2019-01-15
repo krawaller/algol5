@@ -1,4 +1,4 @@
-import { CoffeeGenerators } from './_types';
+import { CoffeeGenerators } from "./_types";
 
 const coffeeGenerators: CoffeeGenerators = {
   findgeneratees: {
@@ -8,9 +8,20 @@ const coffeeGenerators: CoffeeGenerators = {
     draw: {
       steps: {
         unlessover: "units",
-        tolayer: ["indexlist", ["dir"],
-          ["FOOBAR", "vertical", "uphill", "horisontal", "downhill", "vertical", "uphill", "horisontal", "downhill"]
-        ]
+        tolayer: {
+          indexlist: [
+            ["dir"],
+            "FOOBAR",
+            "vertical",
+            "uphill",
+            "horisontal",
+            "downhill",
+            "vertical",
+            "uphill",
+            "horisontal",
+            "downhill"
+          ]
+        }
       }
     }
   },
@@ -21,7 +32,7 @@ const coffeeGenerators: CoffeeGenerators = {
     startasstep: true,
     draw: {
       steps: {
-        condition: ["same", 4, ["walklength"]],
+        condition: { same: [4, ["walklength"]] },
         tolayer: "winline"
       }
     }

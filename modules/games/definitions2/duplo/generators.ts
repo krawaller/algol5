@@ -1,4 +1,4 @@
-import { DuploGenerators } from './_types';
+import { DuploGenerators } from "./_types";
 
 const duploGenerators: DuploGenerators = {
   findspawndirs: {
@@ -6,7 +6,7 @@ const duploGenerators: DuploGenerators = {
     start: "selectunit",
     draw: {
       neighbours: {
-        condition: ["noneat", "myunits", ["target"]],
+        condition: { noneat: ["myunits", ["target"]] },
         tolayer: "spawndirs",
         include: {
           dir: ["dir"]
@@ -18,12 +18,12 @@ const duploGenerators: DuploGenerators = {
     type: "walker",
     starts: "spawndirs",
     steps: "myunits",
-    dir: ["reldir", ["read", "spawndirs", ["start"], "dir"], 5],
+    dir: { reldir: [{ read: ["spawndirs", ["start"], "dir"] }, 5] },
     draw: {
       start: {
         tolayer: "growstarts",
         include: {
-          dir: ["reldir", ["dir"], 5],
+          dir: { reldir: [["dir"], 5] },
           strength: ["walklength"]
         }
       }
@@ -32,20 +32,18 @@ const duploGenerators: DuploGenerators = {
   findexpandpoints: {
     type: "walker",
     starts: "growstarts",
-    dir: ["read", "growstarts", ["start"], "dir"],
+    dir: { read: ["growstarts", ["start"], "dir"] },
     startasstep: true,
     blocks: "oppunits",
-    steps: ["subtract", "board", "units"],
+    steps: { subtract: ["board", "units"] },
     testblocksbeforesteps: true,
-    max: ["read", "growstarts", ["start"], "strength"],
+    max: { read: ["growstarts", ["start"], "strength"] },
     draw: {
       steps: {
-        condition: ["same", ["step"],
-          ["max"]
-        ],
+        condition: { same: [["step"], ["max"]] },
         tolayer: "targets",
         include: {
-          dir: ["reldir", ["dir"], 5]
+          dir: { reldir: [["dir"], 5] }
         }
       },
       block: {
@@ -60,16 +58,16 @@ const duploGenerators: DuploGenerators = {
   findoppstrengths: {
     type: "walker",
     starts: "potentialopptargets",
-    dir: ["read", "potentialopptargets", ["start"], "dir"],
-    max: ["read", "potentialopptargets", ["start"], "strength"],
+    dir: { read: ["potentialopptargets", ["start"], "dir"] },
+    max: { read: ["potentialopptargets", ["start"], ["strength"]] },
     startasstep: true,
     steps: "oppunits",
     draw: {
       start: {
         tolayer: "targets",
-        condition: ["different", ["stopreason"], "reachedmax"],
+        condition: { different: [["stopreason"], "reachedmax"] },
         include: {
-          dir: ["reldir", ["dir"], 5]
+          dir: { reldir: [["dir"], 5] }
         }
       }
     }
@@ -77,11 +75,11 @@ const duploGenerators: DuploGenerators = {
   findspawns: {
     type: "walker",
     start: "selecttarget",
-    dir: ["read", "targets", "selecttarget", "dir"],
+    dir: { read: ["targets", "selecttarget", "dir"] },
     blocks: "units",
     draw: {
       start: {
-        condition: ["noneat", "units", ["start"]],
+        condition: { noneat: ["units", ["start"]] },
         tolayer: "spawns"
       },
       steps: {

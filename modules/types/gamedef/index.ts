@@ -19,18 +19,18 @@ import { Flow, StartTurn, EndGameDef, CommandDef, MarkDef } from "./flow";
 import { GameTestSuite } from "./scripts";
 
 export type FullDef<
-  ArtifactLayer extends string,
-  BattlePos extends string,
-  BattleVar extends string,
-  Command extends string,
-  Generator extends string,
-  Layer extends string,
-  Mark extends string,
-  Phase extends string,
-  Terrain extends string,
-  TurnPos extends string,
-  TurnVar extends string,
-  Unit extends string
+  ArtifactLayer extends string = string,
+  BattlePos extends string = string,
+  BattleVar extends string = string,
+  Command extends string = string,
+  Generator extends string = string,
+  Layer extends string = string,
+  Mark extends string = string,
+  Phase extends string = string,
+  Terrain extends string = string,
+  TurnPos extends string = string,
+  TurnVar extends string = string,
+  Unit extends string = string
 > = {
   AI: AI;
   board: Board<Terrain>;

@@ -16,8 +16,10 @@ const tests: TestPos[] = [
   { layer: { value: "mylayer" } },
   { playercase: ["mylayer", { layer: "mylayer" }] },
   { groupat: "mymark" },
+  { groupat: ["start"] },
   { single: "mymark" },
   { union: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
   { subtract: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
-  { intersect: ["mylayer", { single: "mymark" }, { single: "mymark" }] }
+  { intersect: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
+  { ifactionelse: ["mycmnd", "mylayer", "mylayer"] }
 ];

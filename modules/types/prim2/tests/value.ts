@@ -24,5 +24,6 @@ const tests: TestVal[] = [
   { read: ["mylayer", "mymark", "someProp"] },
   { battlevar: "mybattlev" },
   { idat: "mymark" },
-  { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] }
+  { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] },
+  { indexlist: [["dir"], "FOO", 1, 2, 3, 4] }
 ];

@@ -42,6 +42,10 @@ const tests: TestBool[] = [
   { cmndavailable: "mycmnd" },
   { markavailable: { playercase: ["mymark", "mymark"] } },
   { same: ["FOO", "BAR"] },
+  { same: [["walklength"], 3] },
   { different: ["FOO", { read: ["mylayer", "mymark", "someProp"] }] },
-  { valinlist: ["FOO", 5, "BAR", { read: ["mylayer", "mymark", "someProp"] }] }
+  { valinlist: ["FOO", 5, "BAR", { read: ["mylayer", "mymark", "someProp"] }] },
+  { morethan: [3, 5] },
+  { truthy: "foo" },
+  { falsy: "foo" }
 ];

@@ -1,16 +1,19 @@
 import { IfElse, PlayerCase, IfActionElse } from "./_logical";
 import { SetPosVal, ValVal } from "./_signatures";
 import { AlgolPos } from "./pos";
+import { AlgolNumber } from "./number";
 
 export type AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | _T
   | ValValue<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ["dir"]
   | ["stopreason"]
+  | AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValRead<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValBattleVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValIdAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValRelDir<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | ValIndexList<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValIfElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValIfActionElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValPlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
@@ -33,6 +36,19 @@ interface ValIdAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
 
 interface ValRelDir<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   reldir: ValVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface ValIndexList<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  indexlist: AlgolVal<
+    string | number,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >[];
 }
 
 interface ValIfElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>

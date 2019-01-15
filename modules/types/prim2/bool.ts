@@ -1,5 +1,5 @@
 import { IfElse, IfActionElse, PlayerCase } from "./_logical";
-import { PosPos, SetSet, SetPos, ValVal } from "./_signatures";
+import { PosPos, SetSet, SetPos, ValVal, NumNum } from "./_signatures";
 import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
 
@@ -22,6 +22,9 @@ export type AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | BoolSame<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolDifferent<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolValInList<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | BoolMoreThan<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | BoolTruthy<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | BoolFalsy<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
@@ -83,6 +86,14 @@ interface BoolCmndAvailable<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   >;
 }
 
+interface BoolTruthy<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  truthy: AlgolVal<any, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface BoolFalsy<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  falsy: AlgolVal<any, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
 interface BoolMarkAvailable<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   markavailable: AlgolVal<Mrk, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 }
@@ -102,6 +113,10 @@ interface BoolDifferent<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
     Turnp,
     Turnv
   >;
+}
+
+interface BoolMoreThan<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  morethan: NumNum<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 }
 
 interface BoolValInList<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {

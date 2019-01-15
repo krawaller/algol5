@@ -1,5 +1,6 @@
 import { IfElse, IfActionElse, PlayerCase } from "./_logical";
 import { AlgolVal } from "./value";
+import { AlgolPos } from "./pos";
 
 export type AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | Layer
@@ -22,7 +23,7 @@ interface SetSingle<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
 }
 
 interface SetGroupAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
-  groupat: AlgolVal<Mrk, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  groupat: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 }
 
 interface SetUnion<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {

@@ -1,4 +1,4 @@
-import { IfElse, IfActionElse, If, PlayerCase } from "./_logical";
+import { IfElse, IfActionElse, PlayerCase } from "./_logical";
 import { PosPos, SetSet, SetPos, ValVal } from "./_signatures";
 import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
@@ -21,6 +21,7 @@ export type AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | BoolCmndAvailable<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolSame<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolDifferent<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | BoolValInList<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | BoolPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
@@ -101,6 +102,19 @@ interface BoolDifferent<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
     Turnp,
     Turnv
   >;
+}
+
+interface BoolValInList<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  valinlist: AlgolVal<
+    string | number,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >[];
 }
 
 interface BoolIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>

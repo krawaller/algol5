@@ -23,5 +23,6 @@ const tests: TestVal[] = [
   { playercase: ["FOO", "BAR"] },
   { read: ["mylayer", "mymark", "someProp"] },
   { battlevar: "mybattlev" },
-  { idat: "mymark" }
+  { idat: "mymark" },
+  { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] }
 ];

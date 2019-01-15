@@ -20,7 +20,18 @@ export type DrawDef<
     TurnPos,
     TurnVar
   >;
-  include?: any;
+  include?: {
+    [idx: string]: AlgolVal<
+      string | number,
+      BattlePos,
+      BattleVar,
+      Command,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
+    >;
+  };
   condition?: AlgolBool<
     BattlePos,
     BattleVar,

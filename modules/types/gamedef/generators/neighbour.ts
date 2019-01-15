@@ -1,43 +1,35 @@
 import { DrawDef } from "./draw";
+import { AlgolPos, AlgolSet, AlgolNumber, AlgolBool, AlgolVal } from "../../";
 
 export type NeighbourDef<
   ArtifactLayer,
-  BattlePos,
-  BattleVar,
-  Command,
+  Btlp,
+  Btlv,
+  Cmnd,
   Layer,
-  Mark,
-  TurnPos,
-  TurnVar
+  Mrk,
+  Turnp,
+  Turnv
 > = {
   type: "neighbour";
-  dir?: any;
+  dir?: AlgolVal<any, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   dirs?: any;
-  start?: any;
-  starts?: any;
-  condition?: any;
-  ifover?: any;
-  unlessover?: any;
+  start?: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  starts?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  condition?: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  ifover?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  unlessover?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   draw: {
-    start?: DrawDef<
-      ArtifactLayer,
-      BattlePos,
-      BattleVar,
-      Command,
-      Layer,
-      Mark,
-      TurnPos,
-      TurnVar
-    >;
+    start?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
     neighbours?: DrawDef<
       ArtifactLayer,
-      BattlePos,
-      BattleVar,
-      Command,
+      Btlp,
+      Btlv,
+      Cmnd,
       Layer,
-      Mark,
-      TurnPos,
-      TurnVar
+      Mrk,
+      Turnp,
+      Turnv
     >;
   };
 };

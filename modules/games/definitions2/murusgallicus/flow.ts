@@ -1,4 +1,4 @@
-import { MurusgallicusFlow } from './_types';
+import { MurusgallicusFlow } from "./_types";
 
 const murusgallicusFlow: MurusgallicusFlow = {
   startTurn: {
@@ -6,8 +6,8 @@ const murusgallicusFlow: MurusgallicusFlow = {
   },
   endGame: {
     infiltration: {
-      condition: ["overlaps", "myunits", "opphomerow"],
-      show: ["intersect", "myunits", "opphomerow"]
+      condition: { overlaps: ["myunits", "opphomerow"] },
+      show: { intersect: ["myunits", "opphomerow"] }
     }
   },
   marks: {
@@ -31,9 +31,19 @@ const murusgallicusFlow: MurusgallicusFlow = {
       applyEffects: [
         ["killat", "selecttower"],
         ["forposin", "madetowers", ["setat", ["target"], "group", "towers"]],
-        ["forposin", "madewalls", ["spawn", ["target"], "walls", ["player"], {
-          from: ["pos", "selecttower"]
-        }]]
+        [
+          "forposin",
+          "madewalls",
+          [
+            "spawn",
+            ["target"],
+            "walls",
+            ["player"],
+            {
+              from: ["pos", "selecttower"]
+            }
+          ]
+        ]
       ],
       link: "endturn"
     },

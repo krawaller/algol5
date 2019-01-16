@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedFlow } from './_types';
+import { MurusgallicusadvancedFlow } from "./_types";
 
 const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
   startTurn: {
@@ -6,8 +6,8 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
   },
   endGame: {
     infiltration: {
-      condition: ["overlaps", "myunits", "opphomerow"],
-      show: ["intersect", "myunits", "opphomerow"]
+      condition: { overlaps: ["myunits", "opphomerow"] },
+      show: { intersect: ["myunits", "opphomerow"] }
     }
   },
   marks: {
@@ -23,7 +23,10 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
     },
     selectkill: {
       from: "killtargets",
-      links: ["kill", ["if", ["anyat", "oppcatapults", "selectkill"], "sacrifice"]]
+      links: [
+        "kill",
+        ["if", ["anyat", "oppcatapults", "selectkill"], "sacrifice"]
+      ]
     },
     selectcatapult: {
       from: "mycatapults",
@@ -39,18 +42,34 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
     move: {
       applyEffects: [
         ["killat", "selecttower"],
-        ["forposin", "madecatapults", ["setat", ["target"], "group", "catapults"]],
+        [
+          "forposin",
+          "madecatapults",
+          ["setat", ["target"], "group", "catapults"]
+        ],
         ["forposin", "madetowers", ["setat", ["target"], "group", "towers"]],
-        ["forposin", "madewalls", ["spawn", ["target"], "walls", ["player"], {
-          from: ["pos", "selecttower"]
-        }]]
+        [
+          "forposin",
+          "madewalls",
+          [
+            "spawn",
+            ["target"],
+            "walls",
+            ["player"],
+            {
+              from: ["pos", "selecttower"]
+            }
+          ]
+        ]
       ],
       link: "endturn"
     },
     kill: {
       applyEffects: [
         ["setat", "selecttower", "group", "walls"],
-        ["ifelse", ["anyat", "oppcatapults", "selectkill"],
+        [
+          "ifelse",
+          ["anyat", "oppcatapults", "selectkill"],
           ["setat", "selectkill", "group", "towers"],
           ["killat", "selectkill"]
         ]
@@ -66,13 +85,33 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
     },
     fire: {
       applyEffects: [
-        ["ifelse", ["anyat", "oppwalls", "selectfire"],
+        [
+          "ifelse",
+          ["anyat", "oppwalls", "selectfire"],
           ["killat", "selectfire"],
-          ["ifelse", ["anyat", "oppunits", "selectfire"],
-            ["setat", "selectfire", "group", ["ifelse", ["anyat", "oppcatapults", "selectfire"], "towers", "walls"]],
-            ["spawn", "selectfire", "walls", ["player"], {
-              from: ["pos", "selectcatapult"]
-            }]
+          [
+            "ifelse",
+            ["anyat", "oppunits", "selectfire"],
+            [
+              "setat",
+              "selectfire",
+              "group",
+              [
+                "ifelse",
+                ["anyat", "oppcatapults", "selectfire"],
+                "towers",
+                "walls"
+              ]
+            ],
+            [
+              "spawn",
+              "selectfire",
+              "walls",
+              ["player"],
+              {
+                from: ["pos", "selectcatapult"]
+              }
+            ]
           ]
         ],
         ["setat", "selectcatapult", "group", "towers"]

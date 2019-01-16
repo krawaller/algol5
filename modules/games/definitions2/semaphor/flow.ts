@@ -1,4 +1,4 @@
-import { SemaphorFlow } from './_types';
+import { SemaphorFlow } from "./_types";
 
 const semaphorFlow: SemaphorFlow = {
   startTurn: {
@@ -6,7 +6,7 @@ const semaphorFlow: SemaphorFlow = {
   },
   endGame: {
     madeline: {
-      condition: ["notempty", "line"],
+      condition: { notempty: "line" },
       show: "line"
     }
   },
@@ -27,7 +27,12 @@ const semaphorFlow: SemaphorFlow = {
       link: "endturn"
     },
     promote: {
-      applyEffect: ["setat", "selectunit", "group", ["ifelse", ["anyat", "pawns", "selectunit"], "bishops", "kings"]],
+      applyEffect: [
+        "setat",
+        "selectunit",
+        "group",
+        ["ifelse", ["anyat", "pawns", "selectunit"], "bishops", "kings"]
+      ],
       runGenerator: "findlines",
       link: "endturn"
     }

@@ -1,9 +1,9 @@
-import { DescentFlow } from './_types';
+import { DescentFlow } from "./_types";
 
 const descentFlow: DescentFlow = {
   endGame: {
     madeline: {
-      condition: ["notempty", "winline"],
+      condition: { notempty: "winline" },
       show: "winline"
     }
   },
@@ -31,7 +31,11 @@ const descentFlow: DescentFlow = {
       applyEffects: [
         ["setturnpos", "movedto", "selectmovetarget"],
         ["setturnvar", "heightfrom", ["read", "units", "selectunit", "group"]],
-        ["setturnvar", "heightto", ["read", "units", "selectmovetarget", "group"]],
+        [
+          "setturnvar",
+          "heightto",
+          ["read", "units", "selectmovetarget", "group"]
+        ],
         ["setat", "selectunit", "group", ["turnvar", "heightto"]],
         ["killat", "selectmovetarget"],
         ["moveat", "selectunit", "selectmovetarget"],
@@ -40,9 +44,21 @@ const descentFlow: DescentFlow = {
       link: "selectdigtarget"
     },
     dig: {
-      applyEffect: ["ifelse", ["anyat", "pawns", "selectdigtarget"],
+      applyEffect: [
+        "ifelse",
+        ["anyat", "pawns", "selectdigtarget"],
         ["killat", "selectdigtarget"],
-        ["setat", "selectdigtarget", "group", ["ifelse", ["anyat", "knights", "selectdigtarget"], "pawns", "knights"]]
+        [
+          "setat",
+          "selectdigtarget",
+          "group",
+          [
+            "ifelse",
+            ["anyat", "knights", "selectdigtarget"],
+            "pawns",
+            "knights"
+          ]
+        ]
       ],
       runGenerator: "findwinlines",
       link: "endturn"

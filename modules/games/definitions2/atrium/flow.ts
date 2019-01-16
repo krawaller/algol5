@@ -1,9 +1,9 @@
-import { AtriumFlow } from './_types';
+import { AtriumFlow } from "./_types";
 
 const atriumFlow: AtriumFlow = {
   endGame: {
     madewinline: {
-      condition: ["notempty", "winline"],
+      condition: { notempty: "winline" },
       show: "winline"
     }
   },

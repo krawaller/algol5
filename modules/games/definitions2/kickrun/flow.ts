@@ -1,4 +1,4 @@
-import { KickrunFlow } from './_types';
+import { KickrunFlow } from "./_types";
 
 const kickrunFlow: KickrunFlow = {
   startTurn: {
@@ -23,8 +23,8 @@ const kickrunFlow: KickrunFlow = {
   },
   endGame: {
     infiltration: {
-      condition: ["overlaps", "myrunners", "oppcorners"],
-      show: ["intersect", "myrunners", "oppcorners"]
+      condition: { overlaps: ["myrunners", "oppcorners"] },
+      show: { intersect: ["myrunners", "oppcorners"] }
     }
   }
 };

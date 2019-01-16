@@ -1,7 +1,8 @@
-import { CoffeeFlow } from './_types';
+import { CoffeeFlow } from "./_types";
 
 const coffeeFlow: CoffeeFlow = {
-  TODO: "use different unit type for placeholders? Reference oppnent plr properly",
+  TODO:
+    "use different unit type for placeholders? Reference oppnent plr properly",
   endTurn: {
     unless: {
       nolegal: ["isempty", "markers"]
@@ -9,7 +10,7 @@ const coffeeFlow: CoffeeFlow = {
   },
   endGame: {
     madeline: {
-      condition: ["notempty", "winline"],
+      condition: { notempty: "winline" },
       show: "winline"
     }
   },

@@ -1,4 +1,4 @@
-import { GowiththefloeFlow } from './_types';
+import { GowiththefloeFlow } from "./_types";
 
 const gowiththefloeFlow: GowiththefloeFlow = {
   STATUS: "wip",
@@ -7,14 +7,12 @@ const gowiththefloeFlow: GowiththefloeFlow = {
   },
   endGame: {
     safeseal: {
-      condition: ["different", ["sizeof", "canmove"],
-        ["sizeof", "seals"]
-      ],
-      show: ["subtract", "seals", "canmove"],
+      condition: { different: [{ sizeof: "canmove" }, { sizeof: "seals" }] },
+      show: { subtract: ["seals", "canmove"] },
       who: 1
     },
     sealseaten: {
-      condition: ["isempty", "seals"],
+      condition: { isempty: "seals" },
       who: 2
     }
   },
@@ -44,10 +42,7 @@ const gowiththefloeFlow: GowiththefloeFlow = {
       link: "endturn"
     },
     eat: {
-      applyEffects: [
-        ["killat", "selectunit"],
-        ["killat", "selecteattarget"]
-      ],
+      applyEffects: [["killat", "selectunit"], ["killat", "selecteattarget"]],
       runGenerator: "findsealsmoves",
       link: "endturn"
     }

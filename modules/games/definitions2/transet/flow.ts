@@ -1,10 +1,10 @@
-import { TransetFlow } from './_types';
+import { TransetFlow } from "./_types";
 
 const transetFlow: TransetFlow = {
   endGame: {
     infiltration: {
-      condition: ["overlaps", "myunits", "oppbase"],
-      show: ["intersect", "myunits", "oppbase"]
+      condition: { overlaps: ["myunits", "oppbase"] },
+      show: { intersect: ["myunits", "oppbase"] }
     }
   },
   startTurn: {
@@ -18,9 +18,16 @@ const transetFlow: TransetFlow = {
     },
     selectmovetarget: {
       from: "movetargets",
-      link: ["ifelse", ["and", ["anyat", "units", "selectmovetarget"],
-        ["noneat", "oppbase", "selectmovetarget"]
-      ], "selectdeportdestination", "move"]
+      link: [
+        "ifelse",
+        [
+          "and",
+          ["anyat", "units", "selectmovetarget"],
+          ["noneat", "oppbase", "selectmovetarget"]
+        ],
+        "selectdeportdestination",
+        "move"
+      ]
     },
     selectdeportdestination: {
       from: ["subtract", "oppbase", "oppunits"],
@@ -31,7 +38,7 @@ const transetFlow: TransetFlow = {
       runGenerator: "findswap1steps",
       link: "selectswap1target"
     },
-    "selectswap1target": {
+    selectswap1target: {
       from: "swap1steps",
       runGenerator: "findswap2step",
       link: ["if", ["notempty", "swap2step"], "swap"]
@@ -40,8 +47,12 @@ const transetFlow: TransetFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["if", ["anyat", "units", "selectmovetarget"],
-          ["ifelse", ["anyat", "oppbase", "selectmovetarget"],
+        [
+          "if",
+          ["anyat", "units", "selectmovetarget"],
+          [
+            "ifelse",
+            ["anyat", "oppbase", "selectmovetarget"],
             ["killat", "selectmovetarget"],
             ["moveat", "selectmovetarget", "selectdeportdestination"]
           ]

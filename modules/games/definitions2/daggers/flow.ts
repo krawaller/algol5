@@ -1,13 +1,13 @@
-import { DaggersFlow } from './_types';
+import { DaggersFlow } from "./_types";
 
 const daggersFlow: DaggersFlow = {
   endGame: {
     infiltration: {
-      condition: ["overlaps", "mycrowns", "oppbase"],
-      show: ["intersect", "mycrowns", "oppbase"]
+      condition: { overlaps: ["mycrowns", "oppbase"] },
+      show: { intersect: ["mycrowns", "oppbase"] }
     },
     regicide: {
-      condition: ["same", ["sizeof", "oppcrowns"], 1]
+      condition: { same: [{ sizeof: "oppcrowns" }, 1] }
     }
   },
   startTurn: {
@@ -16,7 +16,12 @@ const daggersFlow: DaggersFlow = {
   marks: {
     selectunit: {
       from: "myunits",
-      runGenerator: ["ifelse", ["anyat", "mycrowns", "selectunit"], "findcrowntargets", "finddaggertargets"],
+      runGenerator: [
+        "ifelse",
+        ["anyat", "mycrowns", "selectunit"],
+        "findcrowntargets",
+        "finddaggertargets"
+      ],
       link: "selectmovetarget"
     },
     selectmovetarget: {
@@ -26,9 +31,7 @@ const daggersFlow: DaggersFlow = {
   },
   commands: {
     move: {
-      applyEffects: [
-        ["stompat", "selectunit", "selectmovetarget"]
-      ],
+      applyEffects: [["stompat", "selectunit", "selectmovetarget"]],
       link: "endturn"
     }
   }

@@ -24,9 +24,13 @@ const tests: TestVal[] = [
   { playercase: ["FOO", "BAR"] },
   { read: ["mylayer", "mymark", "someProp"] },
   { battlevar: "mybattlev" },
+  { turnvar: "myturnv" },
   { idat: "mymark" },
+  ["loopid"],
+  ["player"],
   { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] },
   { indexlist: [["dir"], "FOO", 1, 2, 3, "gnurp"] },
   { if: [["true"], "FOO"] },
-  { ifplayer: [1, "FOO"] }
+  { ifplayer: [1, "FOO"] },
+  { pos: "mymark" }
 ];

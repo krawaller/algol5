@@ -8,10 +8,13 @@ export type AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | ValValue<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ["dir"]
   | ["stopreason"]
+  | ["loopid"]
   | AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValRead<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValBattleVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | ValTurnVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValIdAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | ValPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValRelDir<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValIndexList<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValIfElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
@@ -32,8 +35,16 @@ interface ValBattleVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   battlevar: AlgolVal<Btlv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 }
 
+interface ValTurnVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  turnvar: AlgolVal<Turnv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
 interface ValIdAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   idat: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface ValPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  pos: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 }
 
 interface ValRelDir<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {

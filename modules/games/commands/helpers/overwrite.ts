@@ -4,6 +4,8 @@ import * as beautify from "js-beautify";
 import { FullDef } from "../../../types";
 import analyze from "./analyze";
 
+import { defPath } from "./_paths";
+
 function makeNice(obj = {}) {
   return beautify(JSON.stringify(obj).replace(/"([a-zA-Z]+)":/g, "$1:"), {
     indent_size: 2
@@ -13,10 +15,7 @@ function makeNice(obj = {}) {
 export default async function overwrite(gameId, def: FullDef) {
   await Promise.all(
     Object.keys(def).map(async aspect => {
-      const apath = path.join(
-        __dirname,
-        `../../definitions/${gameId}/${aspect}.ts`
-      );
+      const apath = path.join(defPath, `${gameId}/${aspect}.ts`);
       const f = await fs.readFile(apath);
       const newFile = f
         .toString()

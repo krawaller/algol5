@@ -1,12 +1,12 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 
-import templateAnalysis from "./templates/analysis";
+import fake from "./fake";
 
 import { FullDef, typeSignature } from "../../../types";
 import dateStamp from "./datestamp";
 
-const defFolder = path.join(__dirname, "../../definitions");
+import { defPath } from "./_paths";
 
 function ownify(u) {
   return [u, "my" + u, "neutral" + u, "opp" + u];
@@ -32,14 +32,11 @@ function possibles(def) {
 
 export default async function analyze(def: FullDef | string) {
   if (typeof def === "string") {
-    await fs.writeFile(
-      path.join(defFolder, def, "_types.ts"),
-      templateAnalysis(def)
-    );
-    def = require(path.join(defFolder, def)).default as FullDef;
+    await fake(def);
+    def = require(path.join(defPath, def)).default as FullDef;
   }
   const gameId = def.meta.id;
-  const defPath = path.join(defFolder, gameId);
+  const gameDefPath = path.join(defPath, gameId);
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   const { board, graphics, generators, flow } = def;
   const terrains = Object.keys(board.terrain || {});
@@ -158,7 +155,7 @@ export type ${capId}Setup = Setup<${typeSignature("Setup", gameId)}>;
 export type ${capId}Definition = FullDef<${typeSignature("FullDef", gameId)}>;
 `;
 
-  await fs.writeFile(path.join(defPath, "_types.ts"), analysis);
+  await fs.writeFile(path.join(gameDefPath, "_types.ts"), analysis);
   console.log("Analysed", gameId);
   dateStamp();
 }

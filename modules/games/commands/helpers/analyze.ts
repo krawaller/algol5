@@ -14,20 +14,24 @@ function ownify(u) {
 
 function possibles(def) {
   if (typeof def === "string") return [def];
-  switch (def[0]) {
-    case "ifplayer":
-      return possibles(def[2]);
-    case "playercase":
-      return possibles(def[1]).concat(possibles(def[2]));
-    case "if":
-      return possibles(def[2]);
-    case "ifelse":
-      return possibles(def[2]).concat(possibles(def[3]));
-    case "indexlist":
-      return possibles(def[2]);
-    default:
-      return def;
+  if (def.ifplayer) {
+    return def.ifplayer[1];
   }
+  if (def.playercase) {
+    return possibles(def.playercase[0]).concat(possibles(def.playercase[1]));
+  }
+  if (def.if) {
+    return def.if[1];
+  }
+  if (def.ifelse) {
+    return possibles(def.playercase[1]).concat(possibles(def.playercase[2]));
+  }
+  if (def.indexlist) {
+    const [indexer, ...values] = def.indexlist;
+    return values.reduce((mem, v) => mem.concat(possibles(v)), []);
+  }
+
+  return def;
 }
 
 export default async function analyze(def: FullDef | string) {
@@ -43,10 +47,11 @@ export default async function analyze(def: FullDef | string) {
   const units = Object.keys(graphics.icons);
   const marks = Object.keys(flow.marks);
   const commands = Object.keys(flow.commands);
-  const nonEndCommands = commands.filter(
-    c =>
-      possibles(flow.commands[c].link).filter(l => l !== "endturn").length > 0
-  );
+  // const nonEndCommands = commands.filter(
+  //   c =>
+  //     possibles(flow.commands[c].link).filter(l => l !== "endturn").length > 0
+  // );
+  const nonEndCommands = commands;
 
   const unitLayers = units.reduce((mem, u) => mem.concat(ownify(u)), []);
 

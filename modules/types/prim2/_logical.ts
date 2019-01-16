@@ -20,6 +20,13 @@ export interface If<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   ];
 }
 
+export interface IfPlayer<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  ifplayer: [
+    AlgolVal<1 | 2, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
 export interface PlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   playercase: [
     Logical<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,

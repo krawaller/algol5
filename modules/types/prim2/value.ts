@@ -1,4 +1,4 @@
-import { IfElse, PlayerCase, IfActionElse } from "./_logical";
+import { IfElse, PlayerCase, IfActionElse, If, IfPlayer } from "./_logical";
 import { SetPosVal, ValVal } from "./_signatures";
 import { AlgolPos } from "./pos";
 import { AlgolNumber } from "./number";
@@ -16,7 +16,9 @@ export type AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | ValIndexList<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValIfElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | ValIfActionElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
-  | ValPlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  | ValPlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | ValIf<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | ValIfPlayer<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
 
 interface ValValue<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   value: AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
@@ -77,6 +79,30 @@ interface ValIfActionElse<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
 
 interface ValPlayerCase<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
+    AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  > {}
+
+interface ValIf<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends If<
+    AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  > {}
+
+interface ValIfPlayer<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends IfPlayer<
     AlgolVal<_T, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,

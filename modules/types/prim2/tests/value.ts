@@ -15,6 +15,7 @@ const tests: TestVal[] = [
   "FOO",
   "BAR",
   { value: "FOO" },
+  { value: 5 },
   { value: { value: "BAR" } },
   { ifelse: [["true"], "FOO", { value: "BAR" }] },
   {
@@ -25,5 +26,7 @@ const tests: TestVal[] = [
   { battlevar: "mybattlev" },
   { idat: "mymark" },
   { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] },
-  { indexlist: [["dir"], "FOO", 1, 2, 3, 4] }
+  { indexlist: [["dir"], "FOO", 1, 2, 3, "gnurp"] },
+  { if: [["true"], "FOO"] },
+  { ifplayer: [1, "FOO"] }
 ];

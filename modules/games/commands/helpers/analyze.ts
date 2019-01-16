@@ -24,7 +24,7 @@ function possibles(def) {
     return def.if[1];
   }
   if (def.ifelse) {
-    return possibles(def.playercase[1]).concat(possibles(def.playercase[2]));
+    return possibles(def.ifelse[1]).concat(possibles(def.ifelse[2]));
   }
   if (def.indexlist) {
     const [indexer, ...values] = def.indexlist;

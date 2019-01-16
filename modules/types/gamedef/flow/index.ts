@@ -16,7 +16,8 @@ export type Flow<
   Layer extends string,
   Mrk extends string,
   Turnp extends string,
-  Turnv extends string
+  Turnv extends string,
+  Unit extends string
 > = {
   flow?: any;
   TODO?: string;
@@ -48,7 +49,8 @@ export type Flow<
       Layer,
       Mrk,
       Turnp,
-      Turnv
+      Turnv,
+      Unit
     >
   };
   marks: {

@@ -1,9 +1,29 @@
 import { AlgolVal } from "../../";
+import { AlgolEffect } from "../../";
 
-export type CommandDef<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv> = {
+export type CommandDef<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Gen,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+> = {
   nodeadends?: boolean;
-  applyEffects?: any;
-  applyEffect?: any;
+  applyEffects?: AlgolEffect<
+    Btlp,
+    Btlv,
+    Cmnd,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv,
+    Unit
+  >[];
+  applyEffect?: AlgolEffect<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv, Unit>;
   link?: AlgolVal<
     Cmnd | Mrk | "endturn",
     Btlp,

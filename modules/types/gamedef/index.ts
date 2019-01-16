@@ -15,7 +15,7 @@ import { AI } from "./ai";
 import { Setup } from "./setup";
 import { Instructions } from "./instructions";
 import { Meta } from "./meta";
-import { Flow, StartTurn, EndGameDef, CommandDef, MarkDef } from "./flow";
+import { Flow } from "./flow";
 import { GameTestSuite } from "./scripts";
 
 export type FullDef<
@@ -38,7 +38,16 @@ export type FullDef<
   graphics: Graphics<Terrain, Unit>;
   instructions: Instructions<Phase>;
   meta: Meta;
-  flow: Flow<BattlePos, BattleVar, Command, Layer, Mark, TurnPos, TurnVar>;
+  flow: Flow<
+    BattlePos,
+    BattleVar,
+    Command,
+    Generator,
+    Layer,
+    Mark,
+    TurnPos,
+    TurnVar
+  >;
   generators: Generators<
     ArtifactLayer,
     BattlePos,
@@ -62,7 +71,7 @@ export type Definition = {
   graphics: Graphics;
   board: Board;
   setup?: Setup;
-  startTurn?: StartTurn;
+  startTurn?: any;
   canalwaysend?: {
     [name: string]: true;
   };
@@ -74,10 +83,10 @@ export type Definition = {
   };
   AI?: AI;
   commands: {
-    [cmndname: string]: CommandDef;
+    [cmndname: string]: any;
   };
   marks: {
-    [markname: string]: MarkDef;
+    [markname: string]: any;
   };
   generators: {
     [genname: string]: any;

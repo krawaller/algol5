@@ -8,7 +8,7 @@ export type ShoveoffPhaseCommand = never;
 export type ShoveoffPhase = "startTurn" | ShoveoffMark;
 export type ShoveoffUnitLayer = "soldiers" | "mysoldiers" | "neutralsoldiers" | "oppsoldiers";
 export type ShoveoffGenerator = "findaffected" | "findresults" | "findfourinarow";
-export type ShoveoffArtifactLayer = "targetedgepoints" | "squishsouth" | "squishwest" | "squishnorth" | "squisheast" | "pushsouth" | "pushwest" | "pushnorth" | "pusheast" | "spawnsouth" | "spawnwest" | "spawnnorth" | "spawneast" | "fourinarow";
+export type ShoveoffArtifactLayer = "targetedgepoints" | "fourinarow";
 export type ShoveoffTerrainLayer = "southedge" | "nosouthedge" | "northedge" | "nonorthedge" | "westedge" | "nowestedge" | "eastedge" | "noeastedge" | "edge" | "noedge";
 export type ShoveoffLayer = CommonLayer | ShoveoffUnitLayer | ShoveoffArtifactLayer | ShoveoffTerrainLayer;
 export type ShoveoffBattlePos = any;
@@ -17,7 +17,7 @@ export type ShoveoffTurnPos = any;
 export type ShoveoffTurnVar = any;
  
 export type ShoveoffGenerators = Generators<ShoveoffArtifactLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar>;
-export type ShoveoffFlow = Flow<ShoveoffArtifactLayer, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffUnit>;
+export type ShoveoffFlow = Flow<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar>;
 export type ShoveoffBoard = Board<ShoveoffTerrain>;
 export type ShoveoffAI = AI;
 export type ShoveoffGraphics = Graphics<ShoveoffTerrain, ShoveoffUnit>;

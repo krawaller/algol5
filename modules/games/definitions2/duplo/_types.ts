@@ -17,7 +17,7 @@ export type DuploTurnPos = any;
 export type DuploTurnVar = any;
  
 export type DuploGenerators = Generators<DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
-export type DuploFlow = Flow<DuploArtifactLayer, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploUnit>;
+export type DuploFlow = Flow<DuploBattlePos, DuploBattleVar, DuploCommand, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
 export type DuploBoard = Board<DuploTerrain>;
 export type DuploAI = AI;
 export type DuploGraphics = Graphics<DuploTerrain, DuploUnit>;

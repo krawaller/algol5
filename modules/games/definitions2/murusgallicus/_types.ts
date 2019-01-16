@@ -8,7 +8,7 @@ export type MurusgallicusPhaseCommand = never;
 export type MurusgallicusPhase = "startTurn" | MurusgallicusMark;
 export type MurusgallicusUnitLayer = "towers" | "mytowers" | "neutraltowers" | "opptowers" | "walls" | "mywalls" | "neutralwalls" | "oppwalls";
 export type MurusgallicusGenerator = "findmovetargets" | "findmoveresults" | "findkilltargets";
-export type MurusgallicusArtifactLayer = "movetargets" | "madetowers" | "madewalls" | "killtargets";
+export type MurusgallicusArtifactLayer = "movetargets" | "killtargets";
 export type MurusgallicusTerrainLayer = "homerow" | "nohomerow" | "myhomerow" | "opphomerow";
 export type MurusgallicusLayer = CommonLayer | MurusgallicusUnitLayer | MurusgallicusArtifactLayer | MurusgallicusTerrainLayer;
 export type MurusgallicusBattlePos = any;
@@ -17,7 +17,7 @@ export type MurusgallicusTurnPos = any;
 export type MurusgallicusTurnVar = any;
  
 export type MurusgallicusGenerators = Generators<MurusgallicusArtifactLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
-export type MurusgallicusFlow = Flow<MurusgallicusArtifactLayer, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusUnit>;
+export type MurusgallicusFlow = Flow<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
 export type MurusgallicusBoard = Board<MurusgallicusTerrain>;
 export type MurusgallicusAI = AI;
 export type MurusgallicusGraphics = Graphics<MurusgallicusTerrain, MurusgallicusUnit>;

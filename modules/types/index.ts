@@ -47,7 +47,15 @@ export type CommonLayer =
 export function typeSignature(type, gameId) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return {
-    Flow: ["ArtifactLayer", "Command", "Generator", "Layer", "Mark", "Unit"],
+    Flow: [
+      "BattlePos",
+      "BattleVar",
+      "Command",
+      "Layer",
+      "Mark",
+      "TurnPos",
+      "TurnVar"
+    ],
     Graphics: ["Terrain", "Unit"],
     Instructions: ["Phase"],
     Board: ["Terrain"],

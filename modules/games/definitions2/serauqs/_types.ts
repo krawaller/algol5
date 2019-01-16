@@ -17,7 +17,7 @@ export type SerauqsTurnPos = any;
 export type SerauqsTurnVar = any;
  
 export type SerauqsGenerators = Generators<SerauqsArtifactLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar>;
-export type SerauqsFlow = Flow<SerauqsArtifactLayer, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsUnit>;
+export type SerauqsFlow = Flow<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar>;
 export type SerauqsBoard = Board<SerauqsTerrain>;
 export type SerauqsAI = AI;
 export type SerauqsGraphics = Graphics<SerauqsTerrain, SerauqsUnit>;

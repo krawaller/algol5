@@ -3,17 +3,22 @@ import { EndGameDef } from "./endGame";
 import { MarkDef } from "./mark";
 import { CommandDef } from "./command";
 export type StartTurn = StartTurn;
-export type EndGameDef = EndGameDef;
+export * from "./endGame";
+export * from "./startTurn";
+export * from "./mark";
+export * from "./command";
+
 export type MarkDef = MarkDef;
 export type CommandDef = CommandDef;
 
 export type Flow<
-  ArtifactLayer extends string = string,
-  Command extends string = string,
-  Generator extends string = string,
+  Btlp extends string = string,
+  Btlv extends string = string,
+  Cmnd extends string = string,
   Layer extends string = string,
-  Mark extends string = string,
-  Unit extends string = string
+  Mrk extends string = string,
+  Turnp extends string = string,
+  Turnv extends string = string
 > = {
   flow?: any;
   TODO?: string;
@@ -23,11 +28,19 @@ export type Flow<
     [name: string]: true;
   };
   endGame?: {
-    [endgamename: string]: EndGameDef;
+    [endgamename: string]: EndGameDef<
+      Btlp,
+      Btlv,
+      Cmnd,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
   };
   endTurn?: {
     unless: any;
   };
-  commands: { [cmndname in Command]: CommandDef };
-  marks: { [markname in Mark]: MarkDef };
+  commands: { [cmndname in Cmnd]: CommandDef };
+  marks: { [markname in Mrk]: MarkDef };
 };

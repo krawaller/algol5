@@ -38,7 +38,7 @@ export type FullDef<
   graphics: Graphics<Terrain, Unit>;
   instructions: Instructions<Phase>;
   meta: Meta;
-  flow: Flow<ArtifactLayer, Command, Generator, Layer, Mark, Unit>;
+  flow: Flow<BattlePos, BattleVar, Command, Layer, Mark, TurnPos, TurnVar>;
   generators: Generators<
     ArtifactLayer,
     BattlePos,
@@ -67,7 +67,7 @@ export type Definition = {
     [name: string]: true;
   };
   endGame?: {
-    [endgamename: string]: EndGameDef;
+    [endgamename: string]: any;
   };
   endTurn?: {
     unless: any;

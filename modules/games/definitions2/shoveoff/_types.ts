@@ -1,29 +1,26 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
-
-export type ShoveoffTerrain = "southedge" | "northedge" | "westedge" | "eastedge" | "edge";
-export type ShoveoffUnit = "soldiers";
-export type ShoveoffMark = "selectpushpoint";
-export type ShoveoffCommand = "north" | "south" | "east" | "west";
-export type ShoveoffPhaseCommand = never;
-export type ShoveoffPhase = "startTurn" | ShoveoffMark;
-export type ShoveoffUnitLayer = "soldiers" | "mysoldiers" | "neutralsoldiers" | "oppsoldiers";
-export type ShoveoffGenerator = "findaffected" | "findresults" | "findfourinarow";
-export type ShoveoffArtifactLayer = "targetedgepoints" | "fourinarow";
-export type ShoveoffTerrainLayer = "southedge" | "nosouthedge" | "northedge" | "nonorthedge" | "westedge" | "nowestedge" | "eastedge" | "noeastedge" | "edge" | "noedge";
-export type ShoveoffLayer = CommonLayer | ShoveoffUnitLayer | ShoveoffArtifactLayer | ShoveoffTerrainLayer;
+export type ShoveoffTerrain = any;
+export type ShoveoffUnit = any;
+export type ShoveoffMark = any;
+export type ShoveoffCommand = any;
+export type ShoveoffPhase = any;
+export type ShoveoffUnitLayer = any;
+export type ShoveoffArtifactLayer = any;
+export type ShoveoffTerrainLayer = any;
+export type ShoveoffLayer = any;
+export type ShoveoffGenerator = any;
 export type ShoveoffBattlePos = any;
 export type ShoveoffBattleVar = any;
 export type ShoveoffTurnPos = any;
 export type ShoveoffTurnVar = any;
- 
-export type ShoveoffGenerators = Generators<ShoveoffArtifactLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar>;
-export type ShoveoffFlow = Flow<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar>;
-export type ShoveoffBoard = Board<ShoveoffTerrain>;
-export type ShoveoffAI = AI;
-export type ShoveoffGraphics = Graphics<ShoveoffTerrain, ShoveoffUnit>;
-export type ShoveoffInstructions = Instructions<ShoveoffPhase>;
-export type ShoveoffMeta = Meta;
-export type ShoveoffScripts = GameTestSuite;
-export type ShoveoffSetup = Setup<ShoveoffUnit>;
 
-export type ShoveoffDefinition = FullDef<ShoveoffArtifactLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffLayer, ShoveoffMark, ShoveoffPhase, ShoveoffTerrain, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;
+export type ShoveoffGenerators = any;
+export type ShoveoffFlow = any;
+export type ShoveoffAI = any;
+export type ShoveoffGraphics = any;
+export type ShoveoffInstructions = any;
+export type ShoveoffMeta = any;
+export type ShoveoffScripts = any;
+export type ShoveoffSetup = any;
+export type ShoveoffBoard = any;
+
+export type ShoveoffDefinition = any;

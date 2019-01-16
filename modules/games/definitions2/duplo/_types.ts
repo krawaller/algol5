@@ -4,7 +4,7 @@ export type DuploTerrain = never;
 export type DuploUnit = "soldiers";
 export type DuploMark = "selectdeploy" | "selectunit" | "selecttarget";
 export type DuploCommand = "deploy" | "expand";
-export type DuploPhaseCommand = "deploy";
+export type DuploPhaseCommand = "deploy" | "expand";
 export type DuploPhase = "startTurn" | DuploMark | DuploPhaseCommand;
 export type DuploUnitLayer = "soldiers" | "mysoldiers" | "neutralsoldiers" | "oppsoldiers";
 export type DuploGenerator = "findspawndirs" | "findgrowstarts" | "findexpandpoints" | "findoppstrengths" | "findspawns";
@@ -17,7 +17,7 @@ export type DuploTurnPos = any;
 export type DuploTurnVar = any;
  
 export type DuploGenerators = Generators<DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
-export type DuploFlow = Flow<DuploBattlePos, DuploBattleVar, DuploCommand, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
+export type DuploFlow = Flow<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
 export type DuploBoard = Board<DuploTerrain>;
 export type DuploAI = AI;
 export type DuploGraphics = Graphics<DuploTerrain, DuploUnit>;

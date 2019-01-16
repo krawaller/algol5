@@ -16,12 +16,13 @@ const daggersFlow: DaggersFlow = {
   marks: {
     selectunit: {
       from: "myunits",
-      runGenerator: [
-        "ifelse",
-        ["anyat", "mycrowns", "selectunit"],
-        "findcrowntargets",
-        "finddaggertargets"
-      ],
+      runGenerator: {
+        ifelse: [
+          { anyat: ["mycrowns", "selectunit"] },
+          "findcrowntargets",
+          "finddaggertargets"
+        ]
+      },
       link: "selectmovetarget"
     },
     selectmovetarget: {

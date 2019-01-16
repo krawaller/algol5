@@ -12,7 +12,7 @@ const gogolFlow: GogolFlow = {
   },
   marks: {
     selectkingdeploy: {
-      from: ["subtract", "board", ["union", "units", "nokings"]],
+      from: { subtract: ["board", { union: ["units", "nokings"] }] },
       link: "deploy"
     },
     selectunit: {
@@ -25,12 +25,18 @@ const gogolFlow: GogolFlow = {
       links: ["selectmovetarget", "selectjumptarget"]
     },
     selectmovetarget: {
-      from: [
-        "ifelse",
-        ["anyat", "mykings", "selectunit"],
-        "kingwalk",
-        ["subtract", "board", ["union", "units", "nosoldiers", "jumptargets"]]
-      ],
+      from: {
+        ifelse: [
+          { anyat: ["mykings", "selectunit"] },
+          "kingwalk",
+          {
+            subtract: [
+              "board",
+              { union: ["units", "nosoldiers", "jumptargets"] }
+            ]
+          }
+        ]
+      },
       link: "move"
     },
     selectjumptarget: {

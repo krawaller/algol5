@@ -27,7 +27,7 @@ const duploFlow: DuploFlow = {
   },
   marks: {
     selectdeploy: {
-      from: ["subtract", "board", "units"],
+      from: { subtract: ["board", "units"] },
       link: "deploy"
     },
     selectunit: {
@@ -42,19 +42,20 @@ const duploFlow: DuploFlow = {
     },
     selecttarget: {
       from: "targets",
-      runGenerators: ["findspawns"],
+      runGenerator: "findspawns",
       link: "expand"
     }
   },
   commands: {
     deploy: {
       applyEffect: ["spawn", "selectdeploy", "soldiers"],
-      link: [
-        "ifelse",
-        ["morethan", ["sizeof", "mysoldiers"], 1],
-        "endturn",
-        "selectdeploy"
-      ]
+      link: {
+        ifelse: [
+          { morethan: [{ sizeof: "mysoldiers" }, 1] },
+          "endturn",
+          "selectdeploy"
+        ]
+      }
     },
     expand: {
       applyEffects: [

@@ -18,11 +18,9 @@ const ariesFlow: AriesFlow = {
     },
     selectmovetarget: {
       from: "movetargets",
-      runGenerator: [
-        "if",
-        ["anyat", "oppunits", "selectmovetarget"],
-        "findpushresults"
-      ],
+      runGenerator: {
+        if: [{ anyat: ["oppunits", "selectmovetarget"] }, "findpushresults"]
+      },
       link: "move"
     }
   },

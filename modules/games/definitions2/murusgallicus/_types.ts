@@ -1,29 +1,26 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
-
-export type MurusgallicusTerrain = "homerow";
-export type MurusgallicusUnit = "towers" | "walls";
-export type MurusgallicusMark = "selecttower" | "selectmove" | "selectkill";
-export type MurusgallicusCommand = "move" | "kill";
-export type MurusgallicusPhaseCommand = never;
-export type MurusgallicusPhase = "startTurn" | MurusgallicusMark;
-export type MurusgallicusUnitLayer = "towers" | "mytowers" | "neutraltowers" | "opptowers" | "walls" | "mywalls" | "neutralwalls" | "oppwalls";
-export type MurusgallicusGenerator = "findmovetargets" | "findmoveresults" | "findkilltargets";
-export type MurusgallicusArtifactLayer = "movetargets" | "killtargets";
-export type MurusgallicusTerrainLayer = "homerow" | "nohomerow" | "myhomerow" | "opphomerow";
-export type MurusgallicusLayer = CommonLayer | MurusgallicusUnitLayer | MurusgallicusArtifactLayer | MurusgallicusTerrainLayer;
+export type MurusgallicusTerrain = any;
+export type MurusgallicusUnit = any;
+export type MurusgallicusMark = any;
+export type MurusgallicusCommand = any;
+export type MurusgallicusPhase = any;
+export type MurusgallicusUnitLayer = any;
+export type MurusgallicusArtifactLayer = any;
+export type MurusgallicusTerrainLayer = any;
+export type MurusgallicusLayer = any;
+export type MurusgallicusGenerator = any;
 export type MurusgallicusBattlePos = any;
 export type MurusgallicusBattleVar = any;
 export type MurusgallicusTurnPos = any;
 export type MurusgallicusTurnVar = any;
- 
-export type MurusgallicusGenerators = Generators<MurusgallicusArtifactLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
-export type MurusgallicusFlow = Flow<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
-export type MurusgallicusBoard = Board<MurusgallicusTerrain>;
-export type MurusgallicusAI = AI;
-export type MurusgallicusGraphics = Graphics<MurusgallicusTerrain, MurusgallicusUnit>;
-export type MurusgallicusInstructions = Instructions<MurusgallicusPhase>;
-export type MurusgallicusMeta = Meta;
-export type MurusgallicusScripts = GameTestSuite;
-export type MurusgallicusSetup = Setup<MurusgallicusUnit>;
 
-export type MurusgallicusDefinition = FullDef<MurusgallicusArtifactLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPhase, MurusgallicusTerrain, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
+export type MurusgallicusGenerators = any;
+export type MurusgallicusFlow = any;
+export type MurusgallicusAI = any;
+export type MurusgallicusGraphics = any;
+export type MurusgallicusInstructions = any;
+export type MurusgallicusMeta = any;
+export type MurusgallicusScripts = any;
+export type MurusgallicusSetup = any;
+export type MurusgallicusBoard = any;
+
+export type MurusgallicusDefinition = any;

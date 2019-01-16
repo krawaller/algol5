@@ -17,7 +17,7 @@ export type _testTurnPos = any;
 export type _testTurnVar = any;
  
 export type _testGenerators = Generators<_testArtifactLayer, _testBattlePos, _testBattleVar, _testCommand, _testGenerator, _testLayer, _testMark, _testTurnPos, _testTurnVar>;
-export type _testFlow = Flow<_testBattlePos, _testBattleVar, _testCommand, _testLayer, _testMark, _testTurnPos, _testTurnVar>;
+export type _testFlow = Flow<_testBattlePos, _testBattleVar, _testCommand, _testGenerator, _testLayer, _testMark, _testTurnPos, _testTurnVar>;
 export type _testBoard = Board<_testTerrain>;
 export type _testAI = AI;
 export type _testGraphics = Graphics<_testTerrain, _testUnit>;

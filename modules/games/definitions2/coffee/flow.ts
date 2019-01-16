@@ -19,13 +19,13 @@ const coffeeFlow: CoffeeFlow = {
   },
   marks: {
     selectdrop: {
-      from: ["ifelse", ["isempty", "markers"], "board", "markers"],
+      from: { ifelse: [{ isempty: "markers" }, "board", "markers"] },
       runGenerator: "findgeneratees",
       links: [
-        ["if", ["notempty", "uphill"], "uphill"],
-        ["if", ["notempty", "downhill"], "downhill"],
-        ["if", ["notempty", "vertical"], "vertical"],
-        ["if", ["notempty", "horisontal"], "horisontal"]
+        { if: [{ notempty: "uphill" }, "uphill"] },
+        { if: [{ notempty: "downhill" }, "downhill"] },
+        { if: [{ notempty: "vertical" }, "vertical"] },
+        { if: [{ notempty: "horisontal" }, "horisontal"] }
       ]
     }
   },

@@ -4,7 +4,7 @@ export type AmazonsTerrain = never;
 export type AmazonsUnit = "queens" | "fires";
 export type AmazonsMark = "selectunit" | "selectmovetarget" | "selectfiretarget";
 export type AmazonsCommand = "move" | "fire";
-export type AmazonsPhaseCommand = "move";
+export type AmazonsPhaseCommand = "move" | "fire";
 export type AmazonsPhase = "startTurn" | AmazonsMark | AmazonsPhaseCommand;
 export type AmazonsUnitLayer = "queens" | "myqueens" | "neutralqueens" | "oppqueens" | "fires" | "myfires" | "neutralfires" | "oppfires";
 export type AmazonsGenerator = "findtargets";
@@ -17,7 +17,7 @@ export type AmazonsTurnPos = any;
 export type AmazonsTurnVar = any;
  
 export type AmazonsGenerators = Generators<AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar>;
-export type AmazonsFlow = Flow<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar>;
+export type AmazonsFlow = Flow<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar>;
 export type AmazonsBoard = Board<AmazonsTerrain>;
 export type AmazonsAI = AI;
 export type AmazonsGraphics = Graphics<AmazonsTerrain, AmazonsUnit>;

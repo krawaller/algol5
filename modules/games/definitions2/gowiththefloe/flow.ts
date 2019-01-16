@@ -19,8 +19,8 @@ const gowiththefloeFlow: GowiththefloeFlow = {
   marks: {
     selectunit: {
       from: "myunits",
-      runGenerators: ["findmovetargets", ["ifplayer", 2, "findeattargets"]],
-      links: ["selectmovetarget", ["ifplayer", 2, "selecteattarget"]]
+      runGenerators: ["findmovetargets", { ifplayer: [2, "findeattargets"] }],
+      links: ["selectmovetarget", { ifplayer: [2, "selecteattarget"] }]
     },
     selectmovetarget: {
       from: "movetargets",

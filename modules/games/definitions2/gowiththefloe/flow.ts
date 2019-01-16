@@ -35,14 +35,14 @@ const gowiththefloeFlow: GowiththefloeFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["moveat", "selectunit", "selectmovetarget"],
-        ["spawnin", "cracks", "holes", 0]
+        { moveat: ["selectunit", "selectmovetarget"] },
+        { spawnin: ["cracks", "holes", 0] }
       ],
       runGenerator: "findsealsmoves",
       link: "endturn"
     },
     eat: {
-      applyEffects: [["killat", "selectunit"], ["killat", "selecteattarget"]],
+      applyEffects: [{ killat: "selectunit" }, { killat: "selecteattarget" }],
       runGenerator: "findsealsmoves",
       link: "endturn"
     }

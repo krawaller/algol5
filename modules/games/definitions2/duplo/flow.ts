@@ -48,7 +48,7 @@ const duploFlow: DuploFlow = {
   },
   commands: {
     deploy: {
-      applyEffect: ["spawn", "selectdeploy", "soldiers"],
+      applyEffect: { spawn: ["selectdeploy", "soldiers"] },
       link: {
         ifelse: [
           { morethan: [{ sizeof: "mysoldiers" }, 1] },
@@ -59,36 +59,37 @@ const duploFlow: DuploFlow = {
     },
     expand: {
       applyEffects: [
-        [
-          "forposin",
-          "spawns",
-          [
-            "spawn",
-            ["target"],
-            "soldiers",
-            ["player"],
+        {
+          forposin: [
+            "spawns",
             {
-              from: ["pos", "selectunit"]
+              spawn: [
+                ["target"],
+                "soldiers",
+                ["player"],
+                { from: { pos: "selectunit" } }
+              ]
             }
           ]
-        ],
-        [
-          "if",
-          ["anyat", "units", "selecttarget"],
-          [
-            "multi",
-            ["killat", "selecttarget"],
-            [
-              "spawn",
-              "selecttarget",
-              "soldiers",
-              0,
-              {
-                from: ["pos", "selectunit"]
-              }
-            ]
+        },
+        {
+          if: [
+            { anyat: ["units", "selecttarget"] },
+            {
+              multi: [
+                { killat: "selecttarget" },
+                {
+                  spawn: [
+                    "selecttarget",
+                    "soldiers",
+                    0,
+                    { from: { pos: "selectunit" } }
+                  ]
+                }
+              ]
+            }
           ]
-        ]
+        }
       ],
       link: "endturn"
     }

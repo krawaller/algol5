@@ -29,28 +29,30 @@ const murusgallicusFlow: MurusgallicusFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["killat", "selecttower"],
-        ["forposin", "madetowers", ["setat", ["target"], "group", "towers"]],
-        [
-          "forposin",
-          "madewalls",
-          [
-            "spawn",
-            ["target"],
-            "walls",
-            ["player"],
+        { killat: "selecttower" },
+        {
+          forposin: ["madetowers", { setat: [["target"], "group", "towers"] }]
+        },
+        {
+          forposin: [
+            "madewalls",
             {
-              from: ["pos", "selecttower"]
+              spawn: [
+                ["target"],
+                "walls",
+                ["player"],
+                { from: { pos: "selecttower" } }
+              ]
             }
           ]
-        ]
+        }
       ],
       link: "endturn"
     },
     kill: {
       applyEffects: [
-        ["setat", "selecttower", "group", "walls"],
-        ["killat", "selectkill"]
+        { setat: ["selecttower", "group", "walls"] },
+        { killat: "selectkill" }
       ],
       link: "endturn"
     }

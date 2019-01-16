@@ -27,16 +27,17 @@ const ariesFlow: AriesFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["setbattlevar", "pusheeid", ["idat", "selectmovetarget"]],
-        ["setbattlepos", "pushsquare", "selectmovetarget"],
-        [
-          "pushin",
-          "beingpushed",
-          ["read", "movetargets", "selectmovetarget", "dir"],
-          1
-        ],
-        ["killin", "squished"],
-        ["moveat", "selectunit", "selectmovetarget"]
+        { setbattlevar: ["pusheeid", { idat: "selectmovetarget" }] },
+        { setbattlepos: ["pushsquare", "selectmovetarget"] },
+        {
+          pushin: [
+            "beingpushed",
+            { read: ["movetargets", "selectmovetarget", "dir"] },
+            1
+          ]
+        },
+        { killin: "squished" },
+        { moveat: ["selectunit", "selectmovetarget"] }
       ],
       link: "endturn"
     }

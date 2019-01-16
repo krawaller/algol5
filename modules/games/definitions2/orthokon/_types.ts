@@ -17,7 +17,7 @@ export type OrthokonTurnPos = any;
 export type OrthokonTurnVar = any;
  
 export type OrthokonGenerators = Generators<OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar>;
-export type OrthokonFlow = Flow<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar>;
+export type OrthokonFlow = Flow<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
 export type OrthokonBoard = Board<OrthokonTerrain>;
 export type OrthokonAI = AI;
 export type OrthokonGraphics = Graphics<OrthokonTerrain, OrthokonUnit>;

@@ -1,4 +1,4 @@
-import { JostleFlow } from './_types';
+import { JostleFlow } from "./_types";
 
 const jostleFlow: JostleFlow = {
   startTurn: {
@@ -13,18 +13,29 @@ const jostleFlow: JostleFlow = {
     selectmovetarget: {
       from: "movetargets",
       runGenerator: "findnew",
-      link: ["if", ["morethan", ["minus", ["sizeof", "newfriend"],
-          ["sum", 1, ["sizeof", "newenemy"]]
-        ],
-        ["minus", ["sizeof", "initialfriend"],
-          ["sizeof", "initialenemy"]
+      link: {
+        if: [
+          {
+            morethan: [
+              {
+                minus: [
+                  { sizeof: "newfriend" },
+                  { sum: [1, { sizeof: "newenemy" }] }
+                ]
+              },
+              {
+                minus: [{ sizeof: "initialfriend" }, { sizeof: "initialenemy" }]
+              }
+            ]
+          },
+          "jostle"
         ]
-      ], "jostle"]
+      }
     }
   },
   commands: {
     jostle: {
-      applyEffect: ["moveat", "selectunit", "selectmovetarget"],
+      applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       link: "endturn"
     }
   }

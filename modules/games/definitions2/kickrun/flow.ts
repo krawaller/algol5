@@ -17,7 +17,7 @@ const kickrunFlow: KickrunFlow = {
   },
   commands: {
     move: {
-      applyEffect: ["stompat", "selectunit", "selectmovetarget"],
+      applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
       link: "endturn"
     }
   },

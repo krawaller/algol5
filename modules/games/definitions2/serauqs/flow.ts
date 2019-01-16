@@ -38,7 +38,9 @@ const serauqsFlow: SerauqsFlow = {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      link: ["ifelse", ["morethan", 3, ["turn"]], "promote", "selectmovetarget"]
+      link: {
+        ifelse: [{ morethan: [3, ["turn"]] }, "promote", "selectmovetarget"]
+      }
     },
     selectmovetarget: {
       from: "movetargets",
@@ -47,11 +49,11 @@ const serauqsFlow: SerauqsFlow = {
   },
   commands: {
     promote: {
-      applyEffect: ["setat", "selectunit", "group", "wild"],
+      applyEffect: { setat: ["selectunit", "group", "wild"] },
       link: "endturn"
     },
     move: {
-      applyEffect: ["moveat", "selectunit", "selectmovetarget"],
+      applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       runGenerator: "findwinline",
       link: "endturn"
     }

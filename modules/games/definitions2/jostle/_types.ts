@@ -17,7 +17,7 @@ export type JostleTurnPos = any;
 export type JostleTurnVar = any;
  
 export type JostleGenerators = Generators<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
-export type JostleFlow = Flow<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
+export type JostleFlow = Flow<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar, JostleUnit>;
 export type JostleBoard = Board<JostleTerrain>;
 export type JostleAI = AI;
 export type JostleGraphics = Graphics<JostleTerrain, JostleUnit>;

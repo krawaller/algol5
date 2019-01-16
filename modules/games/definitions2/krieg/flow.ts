@@ -30,9 +30,11 @@ const kriegFlow: KriegFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["foridin", "myfrozens", ["setid", ["loopid"], "group", "notfrozens"]],
-        ["setat", "selectunit", "group", "frozens"],
-        ["moveat", "selectunit", "selectmove"]
+        {
+          foridin: ["myfrozens", { setid: [["loopid"], "group", "notfrozens"] }]
+        },
+        { setat: ["selectunit", "group", "frozens"] },
+        { moveat: ["selectunit", "selectmove"] }
       ],
       link: "endturn"
     }

@@ -32,7 +32,7 @@ const daggersFlow: DaggersFlow = {
   },
   commands: {
     move: {
-      applyEffects: [["stompat", "selectunit", "selectmovetarget"]],
+      applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
       link: "endturn"
     }
   }

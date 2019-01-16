@@ -23,7 +23,7 @@ const atriumFlow: AtriumFlow = {
   },
   commands: {
     move: {
-      applyEffect: ["moveat", "selectunit", "selectmovetarget"],
+      applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       runGenerator: "findwinlines",
       link: "endturn"
     }

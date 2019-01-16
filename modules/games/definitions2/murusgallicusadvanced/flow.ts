@@ -25,7 +25,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
       from: "killtargets",
       links: [
         "kill",
-        ["if", ["anyat", "oppcatapults", "selectkill"], "sacrifice"]
+        { if: [{ anyat: ["oppcatapults", "selectkill"] }, "sacrifice"] }
       ]
     },
     selectcatapult: {
@@ -41,80 +41,87 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["killat", "selecttower"],
-        [
-          "forposin",
-          "madecatapults",
-          ["setat", ["target"], "group", "catapults"]
-        ],
-        ["forposin", "madetowers", ["setat", ["target"], "group", "towers"]],
-        [
-          "forposin",
-          "madewalls",
-          [
-            "spawn",
-            ["target"],
-            "walls",
-            ["player"],
+        { killat: "selecttower" },
+        {
+          forposin: [
+            "madecatapults",
+            { setat: [["target"], "group", "catapults"] }
+          ]
+        },
+        {
+          forposin: ["madetowers", { setat: [["target"], "group", "towers"] }]
+        },
+        {
+          forposin: [
+            "madewalls",
             {
-              from: ["pos", "selecttower"]
+              spawn: [
+                ["target"],
+                "walls",
+                ["player"],
+                { from: { pos: "selecttower" } }
+              ]
             }
           ]
-        ]
+        }
       ],
       link: "endturn"
     },
     kill: {
       applyEffects: [
-        ["setat", "selecttower", "group", "walls"],
-        [
-          "ifelse",
-          ["anyat", "oppcatapults", "selectkill"],
-          ["setat", "selectkill", "group", "towers"],
-          ["killat", "selectkill"]
-        ]
+        { setat: ["selecttower", "group", "walls"] },
+        {
+          ifelse: [
+            { anyat: ["oppcatapults", "selectkill"] },
+            { setat: ["selectkill", "group", "towers"] },
+            { killat: "selectkill" }
+          ]
+        }
       ],
       link: "endturn"
     },
     sacrifice: {
       applyEffects: [
-        ["setat", "selectkill", "group", "walls"],
-        ["killat", "selecttower"]
+        { setat: ["selectkill", "group", "walls"] },
+        { killat: "selecttower" }
       ],
       link: "endturn"
     },
     fire: {
       applyEffects: [
-        [
-          "ifelse",
-          ["anyat", "oppwalls", "selectfire"],
-          ["killat", "selectfire"],
-          [
-            "ifelse",
-            ["anyat", "oppunits", "selectfire"],
-            [
-              "setat",
-              "selectfire",
-              "group",
-              [
-                "ifelse",
-                ["anyat", "oppcatapults", "selectfire"],
-                "towers",
-                "walls"
+        {
+          ifelse: [
+            { anyat: ["oppwalls", "selectfire"] },
+            { killat: "selectfire" },
+            {
+              ifelse: [
+                { anyat: ["oppunits", "selectfire"] },
+                {
+                  setat: [
+                    "selectfire",
+                    "group",
+                    {
+                      ifelse: [
+                        { anyat: ["oppcatapults", "selectfire"] },
+                        "towers",
+                        "walls"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  spawn: [
+                    "selectfire",
+                    "walls",
+                    ["player"],
+                    { from: { pos: "selectcatapult" } }
+                  ]
+                }
               ]
-            ],
-            [
-              "spawn",
-              "selectfire",
-              "walls",
-              ["player"],
-              {
-                from: ["pos", "selectcatapult"]
-              }
-            ]
+            }
           ]
-        ],
-        ["setat", "selectcatapult", "group", "towers"]
+        },
+        { setat: ["selectcatapult", "group", "towers"] }
       ],
       link: "endturn"
     }

@@ -47,17 +47,17 @@ const gogolFlow: GogolFlow = {
   },
   commands: {
     deploy: {
-      applyEffect: ["spawn", "selectkingdeploy", "kings"],
+      applyEffect: { spawn: ["selectkingdeploy", "kings"] },
       link: "endturn"
     },
     move: {
-      applyEffect: ["moveat", "selectunit", "selectmovetarget"],
+      applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       link: "endturn"
     },
     jump: {
       applyEffects: [
-        ["killat", ["onlyin", "splashed"]],
-        ["moveat", "selectunit", "selectjumptarget"]
+        { killat: { onlyin: "splashed" } },
+        { moveat: ["selectunit", "selectjumptarget"] }
       ],
       link: "endturn"
     }

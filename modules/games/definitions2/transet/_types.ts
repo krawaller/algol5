@@ -17,7 +17,7 @@ export type TransetTurnPos = any;
 export type TransetTurnVar = any;
  
 export type TransetGenerators = Generators<TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar>;
-export type TransetFlow = Flow<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar>;
+export type TransetFlow = Flow<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar, TransetUnit>;
 export type TransetBoard = Board<TransetTerrain>;
 export type TransetAI = AI;
 export type TransetGraphics = Graphics<TransetTerrain, TransetUnit>;

@@ -28,10 +28,10 @@ const threemusketeersFlow: ThreemusketeersFlow = {
   },
   commands: {
     move: {
-      applyEffect: ["stompat", "selectunit", "selectmovetarget"],
+      applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
       runGenerators: [
         "findmusketeerline",
-        ["ifplayer", 2, "findstrandedmusketeers"]
+        { ifplayer: [2, "findstrandedmusketeers"] }
       ],
       link: "endturn"
     }

@@ -24,12 +24,13 @@ const uglyduckFlow: UglyduckFlow = {
   commands: {
     move: {
       applyEffects: [
-        [
-          "if",
-          ["anyat", "opphomerow", "selectmovetarget"],
-          ["setat", "selectunit", "group", "kings"]
-        ],
-        ["stompat", "selectunit", "selectmovetarget"]
+        {
+          if: [
+            { anyat: ["opphomerow", "selectmovetarget"] },
+            { setat: ["selectunit", "group", "kings"] }
+          ]
+        },
+        { stompat: ["selectunit", "selectmovetarget"] }
       ],
       link: "endturn"
     }

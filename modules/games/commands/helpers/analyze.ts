@@ -47,11 +47,12 @@ export default async function analyze(def: FullDef | string) {
   const units = Object.keys(graphics.icons);
   const marks = Object.keys(flow.marks);
   const commands = Object.keys(flow.commands);
-  // const nonEndCommands = commands.filter(
-  //   c =>
-  //     possibles(flow.commands[c].link).filter(l => l !== "endturn").length > 0
-  // );
-  const nonEndCommands = commands;
+  const nonEndCommands = commands.filter(c => {
+    let cdef = flow.commands[c];
+    let defs = [].concat(cdef.link || []).concat(cdef.links || []);
+    let poss = defs.reduce((mem, d) => mem.concat(possibles(d)), []);
+    return poss.filter(l => l !== "endturn").length > 0;
+  });
 
   const unitLayers = units.reduce((mem, u) => mem.concat(ownify(u)), []);
 

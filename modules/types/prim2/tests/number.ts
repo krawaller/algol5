@@ -21,5 +21,7 @@ const tests: TestNumber[] = [
   { harvest: ["mylayer", { value: "someProp" }] },
   { sum: [3, 4, ["totalcount"]] },
   { prod: [3, 4, ["totalcount"]] },
-  { minus: [3, 4, ["totalcount"]] }
+  { minus: [3, 4, ["totalcount"]] },
+  { turnvar: "myturnv" },
+  { battlevar: "mybattlev" }
 ];

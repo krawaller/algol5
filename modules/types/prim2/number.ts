@@ -15,12 +15,22 @@ export type AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | ["step"]
   | NumberSizeOf<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberHarvest<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberTurnVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberBattleVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberSum<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberProd<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberMinus<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+
+interface NumberTurnVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  turnvar: AlgolVal<Turnv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface NumberBattleVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  battlevar: AlgolVal<Btlv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
 
 interface NumberSizeOf<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   sizeof: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;

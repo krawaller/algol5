@@ -3,6 +3,7 @@ import { DescentGenerators } from "./_types";
 const descentGenerators: DescentGenerators = {
   findmovetargets: {
     type: "neighbour",
+    dirs: ["rose"],
     start: "selectunit",
     condition: {
       ifelse: [
@@ -26,6 +27,7 @@ const descentGenerators: DescentGenerators = {
   },
   finddigtargets: {
     type: "neighbour",
+    dirs: ["rose"],
     start: { turnpos: "movedto" },
     ifover: "neutralunits",
     draw: {
@@ -36,6 +38,7 @@ const descentGenerators: DescentGenerators = {
   },
   findwinlines: {
     type: "walker",
+    dirs: ["rose"],
     starts: "myunits",
     startasstep: true,
     steps: {

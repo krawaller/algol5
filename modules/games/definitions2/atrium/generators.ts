@@ -4,7 +4,7 @@ const atriumGenerators: AtriumGenerators = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     unlessover: "units",
     draw: {
       neighbours: {
@@ -16,7 +16,7 @@ const atriumGenerators: AtriumGenerators = {
     type: "walker",
     starts: "myunits",
     startasstep: true,
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     steps: {
       ifelse: [{ anyat: ["mykings", ["start"]] }, "mykings", "myqueens"]
     },

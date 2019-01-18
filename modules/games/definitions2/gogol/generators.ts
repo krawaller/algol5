@@ -4,12 +4,9 @@ const gogolGenerators: GogolGenerators = {
   findforbiddenkingspots: {
     type: "neighbour",
     starts: { intersect: ["edges", "mysoldiers"] },
-    dirs: [
-      "ifelse",
-      ["anyat", "homerow", ["start"]],
-      ["list", [1, 3, 5, 7]],
-      ["list", [1, 5]]
-    ],
+    dirs: {
+      ifelse: [{ anyat: ["homerow", ["start"]] }, ["ortho"], { list: [1, 5] }]
+    },
     draw: {
       neighbours: {
         tolayer: "nokings"
@@ -18,7 +15,7 @@ const gogolGenerators: GogolGenerators = {
   },
   findforbiddensoldierspots: {
     type: "neighbour",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     starts: "mykings",
     condition: {
       or: [
@@ -40,7 +37,7 @@ const gogolGenerators: GogolGenerators = {
   findkingwalktargets: {
     type: "walker",
     starts: { union: ["mykings", { single: "selectunit" }] },
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     blocks: "units",
     draw: {
       steps: {
@@ -52,7 +49,7 @@ const gogolGenerators: GogolGenerators = {
   findadjacentenemies: {
     type: "neighbour",
     start: "selectunit",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     ifover: "oppunits",
     draw: {
       neighbours: {

@@ -3,7 +3,7 @@ import { DaggersGenerators } from "./_types";
 const daggersGenerators: DaggersGenerators = {
   findcrowntargets: {
     type: "neighbour",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     start: "selectunit",
     draw: {
       neighbours: {
@@ -15,7 +15,7 @@ const daggersGenerators: DaggersGenerators = {
   finddaggertargets: {
     type: "walker",
     start: "selectunit",
-    dirs: [8, 1, 2, 4, 5, 6],
+    dirs: { list: [8, 1, 2, 4, 5, 6] },
     blocks: "units",
     max: { ifelse: [{ valinlist: [["dir"], 8, 1, 2] }, 1, 8] },
     draw: {

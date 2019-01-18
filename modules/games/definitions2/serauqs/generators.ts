@@ -4,7 +4,7 @@ const serauqsGenerators: SerauqsGenerators = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     unlessover: "units",
     draw: {
       neighbours: {
@@ -15,7 +15,7 @@ const serauqsGenerators: SerauqsGenerators = {
   findwinline: {
     type: "walker",
     starts: { union: ["myunits", "oppwild"] },
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     steps: { union: ["myunits", "oppwild"] },
     count: "mybase",
     startasstep: true,

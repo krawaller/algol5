@@ -3,6 +3,7 @@ import { DuploGenerators } from "./_types";
 const duploGenerators: DuploGenerators = {
   findspawndirs: {
     type: "neighbour",
+    dirs: ["rose"],
     start: "selectunit",
     draw: {
       neighbours: {
@@ -59,7 +60,7 @@ const duploGenerators: DuploGenerators = {
     type: "walker",
     starts: "potentialopptargets",
     dir: { read: ["potentialopptargets", ["start"], "dir"] },
-    max: { read: ["potentialopptargets", ["start"], ["strength"]] },
+    max: { read: ["potentialopptargets", ["start"], "strength"] },
     startasstep: true,
     steps: "oppunits",
     draw: {

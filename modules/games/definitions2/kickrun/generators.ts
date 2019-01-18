@@ -4,11 +4,13 @@ const kickrunGenerators: KickrunGenerators = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",
-    dirs: [
-      "playercase",
-      ["ifelse", ["anyat", "myrunners", "selectunit"], [1, 2, 3], [8, 1, 3, 4]],
-      ["ifelse", ["anyat", "myrunners", "selectunit"], [5, 6, 7], [4, 5, 7, 8]]
-    ],
+    dirs: {
+      ifelse: [
+        { anyat: ["myrunners", "selectunit"] },
+        { playercase: [{ list: [1, 2, 3] }, { list: [5, 6, 7] }] },
+        { playercase: [{ list: [8, 1, 3, 4] }, { list: [4, 5, 7, 8] }] }
+      ]
+    },
     max: { ifelse: [{ anyat: ["myrunners", "selectunit"] }, 4, 1] },
     blocks: "units",
     draw: {

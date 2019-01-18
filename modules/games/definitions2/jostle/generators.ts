@@ -3,7 +3,7 @@ import { JostleGenerators } from "./_types";
 const jostleGenerators: JostleGenerators = {
   findinitial: {
     type: "neighbour",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     start: "selectunit",
     draw: {
       neighbours: {
@@ -25,7 +25,7 @@ const jostleGenerators: JostleGenerators = {
   },
   findnew: {
     type: "neighbour",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     start: "selectmovetarget",
     ifover: "units",
     draw: {

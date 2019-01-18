@@ -4,7 +4,7 @@ const ariesGenerators: AriesGenerators = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     blocks: "units",
     draw: {
       steps: {
@@ -30,7 +30,7 @@ const ariesGenerators: AriesGenerators = {
   findpushresults: {
     type: "walker",
     start: "selectmovetarget",
-    dir: ["reldir", 1, ["read", "movetargets", "selectmovetarget", "dir"]],
+    dir: { reldir: [1, { read: ["movetargets", "selectmovetarget", "dir"] }] },
     steps: "oppunits",
     blocks: "myunits",
     startasstep: true,

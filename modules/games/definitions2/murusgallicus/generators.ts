@@ -3,7 +3,7 @@ import { MurusgallicusGenerators } from "./_types";
 const murusgallicusGenerators: MurusgallicusGenerators = {
   findmovetargets: {
     type: "walker",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     blocks: { union: ["oppunits", "mytowers"] },
     start: "selecttower",
     max: 2,
@@ -21,7 +21,7 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
   },
   findmoveresults: {
     type: "neighbour",
-    dir: ["reldir", 5, ["read", "movetargets", "selectmove", "dir"]],
+    dir: { reldir: [5, { read: ["movetargets", "selectmove", "dir"] }] },
     start: "selectmove",
     draw: {
       start: {
@@ -47,7 +47,7 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
   findkilltargets: {
     type: "neighbour",
     start: "selecttower",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     ifover: "oppwalls",
     draw: {
       neighbours: {

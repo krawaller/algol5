@@ -4,7 +4,7 @@ const shoveoffGenerators: ShoveoffGenerators = {
   findaffected: {
     type: "walker",
     start: "selectpushpoint",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     draw: {
       last: {
         condition: { same: [["walklength"], 3] },
@@ -19,7 +19,7 @@ const shoveoffGenerators: ShoveoffGenerators = {
   findresults: {
     type: "walker",
     starts: "targetedgepoints",
-    dir: { read: ["targetededgepoints", ["start"], "dir"] },
+    dir: { read: ["targetedgepoints", ["start"], "dir"] },
     startasstep: true,
     draw: {
       start: {
@@ -74,6 +74,7 @@ const shoveoffGenerators: ShoveoffGenerators = {
   },
   findfourinarow: {
     type: "walker",
+    dirs: ["rose"],
     starts: "myunits",
     steps: "myunits",
     startasstep: true,

@@ -36,7 +36,17 @@ export type FullDef<
   board: Board<Terrain>;
   setup: Setup<Unit>;
   graphics: Graphics<Terrain, Unit>;
-  instructions: Instructions<Phase>;
+  instructions: Instructions<
+    BattlePos,
+    BattleVar,
+    Command,
+    Layer,
+    Mark,
+    Phase,
+    TurnPos,
+    TurnVar,
+    Unit
+  >;
   meta: Meta;
   flow: Flow<
     BattlePos,
@@ -46,7 +56,8 @@ export type FullDef<
     Layer,
     Mark,
     TurnPos,
-    TurnVar
+    TurnVar,
+    Unit
   >;
   generators: Generators<
     ArtifactLayer,

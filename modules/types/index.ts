@@ -1,5 +1,5 @@
 export * from "./explanation";
-export * from "./primitives";
+export * from "./prim2";
 export * from "./gamedef";
 export * from "./session";
 export * from "./generated";
@@ -51,13 +51,25 @@ export function typeSignature(type, gameId) {
       "BattlePos",
       "BattleVar",
       "Command",
+      "Generator",
       "Layer",
       "Mark",
       "TurnPos",
-      "TurnVar"
+      "TurnVar",
+      "Unit"
     ],
     Graphics: ["Terrain", "Unit"],
-    Instructions: ["Phase"],
+    Instructions: [
+      "BattlePos",
+      "BattleVar",
+      "Command",
+      "Layer",
+      "Mark",
+      "Phase",
+      "TurnPos",
+      "TurnVar",
+      "Unit"
+    ],
     Board: ["Terrain"],
     Setup: ["Unit"],
     Generators: [

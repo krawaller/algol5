@@ -1,5 +1,5 @@
 import { DrawDef } from "./draw";
-import { AlgolPos, AlgolSet, AlgolNumber, AlgolVal } from "../../";
+import { AlgolPos, AlgolSet, AlgolNumber, AlgolVal, AlgolDirs } from "../../";
 
 export type WalkerDef<
   ArtifactLayer,
@@ -12,8 +12,8 @@ export type WalkerDef<
   Turnv
 > = {
   type: "walker";
-  dir?: AlgolVal<any, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-  dirs?: any;
+  dir?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  dirs?: AlgolDirs<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   start?: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   starts?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   steps?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
@@ -21,7 +21,7 @@ export type WalkerDef<
   blocks?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   count?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   startasstep?: boolean;
-  max?: AlgolVal<any, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  max?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   draw: {
     start?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
     steps?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;

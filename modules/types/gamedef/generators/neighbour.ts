@@ -1,5 +1,12 @@
 import { DrawDef } from "./draw";
-import { AlgolPos, AlgolSet, AlgolNumber, AlgolBool, AlgolVal } from "../../";
+import {
+  AlgolPos,
+  AlgolSet,
+  AlgolNumber,
+  AlgolBool,
+  AlgolVal,
+  AlgolDirs
+} from "../../";
 
 export type NeighbourDef<
   ArtifactLayer,
@@ -12,8 +19,8 @@ export type NeighbourDef<
   Turnv
 > = {
   type: "neighbour";
-  dir?: AlgolVal<any, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-  dirs?: any;
+  dir?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  dirs?: AlgolDirs<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   start?: AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   starts?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   condition?: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;

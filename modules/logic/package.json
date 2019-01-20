@@ -11,9 +11,9 @@
   },
   "scripts": {
     "compile": "npx ts-node ./commands/compile $*",
+    "clean": "npx ts-node ./commands/clean",
     "collect": "ts-node ./collect.ts",
     "makemeta": "ts-node ./makemeta.ts",
-    "clean": "rm -rf dist; mkdir dist;",
     "build": "npm run clean && npm run compile && npm run collect && npm run makemeta",
     "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec"
   },

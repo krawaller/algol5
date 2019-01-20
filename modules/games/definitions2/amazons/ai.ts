@@ -1,15 +1,17 @@
-import { AmazonsAI } from './_types';
+import { AmazonsAI } from "./_types";
 
 const amazonsAI: AmazonsAI = {
   generators: {
     findroads: {
       type: "neighbour",
-      dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+      dirs: ["rose"],
       starts: "queens",
       unlessover: "units",
       draw: {
         start: {
-          tolayer: ["ifelse", ["anyat", "myunits", ["start"]], "myroads", "opproads"],
+          tolayer: {
+            ifelse: [{ anyat: ["myunits", ["start"]] }, "myroads", "opproads"]
+          },
           include: {
             count: ["neighbourcount"]
           }
@@ -18,21 +20,23 @@ const amazonsAI: AmazonsAI = {
     },
     findreach: {
       type: "walker",
-      dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+      dirs: ["rose"],
       starts: "queens",
       blocks: "units",
       draw: {
         steps: {
-          tolayer: ["ifelse", ["anyat", "myunits", ["start"]], "myreach", "oppreach"]
+          tolayer: {
+            ifelse: [{ anyat: ["myunits", ["start"]] }, "myreach", "oppreach"]
+          }
         }
       }
     }
   },
   aspects: {
-    myroads: ["harvest", "myroads", "count"],
-    mydomain: ["sizeof", "myreach"],
-    opproads: ["harvest", "opproads", "count"],
-    oppdomain: ["sizeof", "oppreach"]
+    myroads: { harvest: ["myroads", "count"] },
+    mydomain: { sizeof: "myreach" },
+    opproads: { harvest: ["opproads", "count"] },
+    oppdomain: { sizeof: "oppreach" }
   },
   brains: {
     Steve: {

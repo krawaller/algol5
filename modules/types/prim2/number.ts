@@ -2,6 +2,7 @@ import { IfElse, IfActionElse, PlayerCase } from "./_logical";
 import { SetVal } from "./_signatures";
 import { AlgolVal } from "./value";
 import { AlgolSet } from "./set";
+import { AlgolPos } from "./pos";
 
 export type AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | number
@@ -13,6 +14,8 @@ export type AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | ["walklength"]
   | ["max"]
   | ["step"]
+  | NumberGridAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberGridIn<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberSizeOf<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberHarvest<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberTurnVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
@@ -23,6 +26,20 @@ export type AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | NumberIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+
+interface NumberGridIn<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  gridin: [
+    AlgolVal<string, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
+interface NumberGridAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  gridat: [
+    AlgolVal<string, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  ];
+}
 
 interface NumberTurnVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
   turnvar: AlgolVal<Turnv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;

@@ -34,6 +34,45 @@ function possibles(def) {
   return def;
 }
 
+function getArtifactLayers(generators = {}) {
+  const generatorNames = Object.keys(generators);
+  let artifactLayers = [];
+
+  for (let g of generatorNames) {
+    const gen = generators[g];
+    const draws = gen.type === "filter" ? { filter: gen } : gen.draw;
+    for (let d of Object.keys(draws)) {
+      const draw = draws[d];
+      for (let l of possibles(draw.tolayer)) {
+        if (draw.include && draw.include.owner) {
+          artifactLayers = artifactLayers.concat(ownify(l));
+        } else {
+          artifactLayers = artifactLayers.concat(l);
+        }
+      }
+    }
+  }
+  return artifactLayers.filter((l, n) => artifactLayers.indexOf(l) === n);
+}
+
+function getTerrainLayers(terrains = {}) {
+  let terrainLayers = [];
+  const terrainNames = Object.keys(terrains);
+  for (let tname of terrainNames) {
+    const t = terrains[tname];
+    terrainLayers.push(tname);
+    terrainLayers.push("no" + tname);
+    if (!Array.isArray(t)) {
+      if (t[0]) terrainLayers.push("neutral" + tname);
+      if (t[1] || t[2]) {
+        terrainLayers.push("my" + tname);
+        terrainLayers.push("opp" + tname);
+      }
+    }
+  }
+  return terrainLayers;
+}
+
 export default async function analyze(def: FullDef | string) {
   if (typeof def === "string") {
     await fake(def);
@@ -56,41 +95,28 @@ export default async function analyze(def: FullDef | string) {
 
   const unitLayers = units.reduce((mem, u) => mem.concat(ownify(u)), []);
 
-  let terrainLayers = [];
-  for (let tname of terrains) {
-    const t = board.terrain[tname];
-    terrainLayers.push(tname);
-    terrainLayers.push("no" + tname);
-    if (!Array.isArray(t)) {
-      if (t[0]) terrainLayers.push("neutral" + tname);
-      if (t[1] || t[2]) {
-        terrainLayers.push("my" + tname);
-        terrainLayers.push("opp" + tname);
-      }
-    }
-  }
+  let terrainLayers = getTerrainLayers(def.board.terrain);
 
+  const artifactLayers = getArtifactLayers(def.generators);
   const generatorNames = Object.keys(generators);
-  let artifactLayers = [];
 
-  for (let g of generatorNames) {
-    const gen = generators[g];
-    const draws = gen.type === "filter" ? { filter: gen } : gen.draw;
-    for (let d of Object.keys(draws)) {
-      const draw = draws[d];
-      for (let l of possibles(draw.tolayer)) {
-        if (draw.include && draw.include.owner) {
-          artifactLayers = artifactLayers.concat(ownify(l));
-        } else {
-          artifactLayers = artifactLayers.concat(l);
-        }
-      }
-    }
-  }
+  const origAI = def.AI;
+  const AI: typeof origAI = {
+    brains: {},
+    generators: {},
+    aspects: {},
+    grids: {},
+    terrain: {},
+    ...def.AI
+  };
 
-  artifactLayers = artifactLayers.filter(
-    (l, n) => artifactLayers.indexOf(l) === n
-  );
+  const aiTerrainNames = Object.keys(AI.terrain);
+  const aiTerrainLayers = getTerrainLayers(AI.terrain);
+  const aiGenerators = Object.keys(AI.generators);
+  const aiAspects = Object.keys(AI.aspects);
+  const aiGrids = Object.keys(AI.grids);
+  const aiBrains = Object.keys(AI.brains);
+  const aiArtifactLayers = getArtifactLayers(AI.generators);
 
   const analysis = `import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
@@ -148,7 +174,7 @@ export type ${capId}Generators = Generators<${typeSignature(
   )}>;
 export type ${capId}Flow = Flow<${typeSignature("Flow", gameId)}>;
 export type ${capId}Board = Board<${typeSignature("Board", gameId)}>;
-export type ${capId}AI = AI;
+export type ${capId}AI = AI<${typeSignature("AI", gameId)}>;
 export type ${capId}Graphics = Graphics<${typeSignature("Graphics", gameId)}>;
 export type ${capId}Instructions = Instructions<${typeSignature(
     "Instructions",
@@ -159,6 +185,40 @@ export type ${capId}Scripts = GameTestSuite;
 export type ${capId}Setup = Setup<${typeSignature("Setup", gameId)}>;
 
 export type ${capId}Definition = FullDef<${typeSignature("FullDef", gameId)}>;
+
+export type ${capId}AiGenerator = ${
+    aiGenerators.length ? aiGenerators.map(t => `"${t}"`).join(" | ") : "never"
+  };
+
+export type ${capId}AiAspect = ${
+    aiAspects.length ? aiAspects.map(t => `"${t}"`).join(" | ") : "never"
+  };
+
+export type ${capId}AiGrid = ${
+    aiGrids.length ? aiGrids.map(t => `"${t}"`).join(" | ") : "never"
+  };
+
+export type ${capId}AiArtifactLayer = ${
+    aiArtifactLayers.length
+      ? aiArtifactLayers.map(t => `"${t}"`).join(" | ")
+      : "never"
+  };
+
+export type ${capId}AiBrain = ${
+    aiBrains.length ? aiBrains.map(t => `"${t}"`).join(" | ") : "never"
+  };
+
+export type ${capId}AiTerrainLayer = ${
+    aiTerrainLayers.length
+      ? aiTerrainLayers.map(t => `"${t}"`).join(" | ")
+      : "never"
+  };
+
+export type ${capId}AiTerrain = ${
+    aiTerrainNames.length
+      ? aiTerrainNames.map(t => `"${t}"`).join(" | ")
+      : "never"
+  };
 `;
 
   await fs.writeFile(path.join(gameDefPath, "_types.ts"), analysis);

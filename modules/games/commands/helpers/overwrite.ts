@@ -1,7 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as beautify from "js-beautify";
-import { FullDef } from "../../../types";
+import { FullDefAnon } from "../../../types";
 import analyze from "./analyze";
 
 import { defPath } from "./_paths";
@@ -12,7 +12,7 @@ function makeNice(obj = {}) {
   });
 }
 
-export default async function overwrite(gameId, def: FullDef) {
+export default async function overwrite(gameId, def: FullDefAnon) {
   await Promise.all(
     Object.keys(def).map(async aspect => {
       const apath = path.join(defPath, `${gameId}/${aspect}.ts`);

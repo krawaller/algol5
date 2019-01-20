@@ -3,7 +3,7 @@ import * as path from "path";
 
 import fake from "./fake";
 
-import { FullDef, typeSignature } from "../../../types";
+import { FullDefAnon, typeSignature } from "../../../types";
 import dateStamp from "./datestamp";
 
 import { defPath } from "./_paths";
@@ -73,10 +73,10 @@ function getTerrainLayers(terrains = {}) {
   return terrainLayers;
 }
 
-export default async function analyze(def: FullDef | string) {
+export default async function analyze(def: FullDefAnon | string) {
   if (typeof def === "string") {
     await fake(def);
-    def = require(path.join(defPath, def)).default as FullDef;
+    def = require(path.join(defPath, def)).default as FullDefAnon;
   }
   const gameId = def.meta.id;
   const gameDefPath = path.join(defPath, gameId);

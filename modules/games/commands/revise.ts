@@ -1,7 +1,7 @@
-import update from './helpers/update';
-import { FullDef } from '../../types';
+import update from "./helpers/update";
+import { FullDefAnon } from "../../types";
 
-function translator(def: FullDef): FullDef {
+function translator(def: FullDefAnon): FullDefAnon {
   return def;
   // // revise scripts
   // return {

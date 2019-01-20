@@ -1,15 +1,18 @@
+import { AlgolBool, AlgolVal } from "../../";
+
 export type FilterDef<
   ArtifactLayer,
-  BattlePos,
-  BattleVar,
-  Command,
+  Btlp,
+  Btlv,
+  Cmnd,
   Layer,
-  Mark,
-  TurnPos,
-  TurnVar
+  Mrk,
+  Turnp,
+  Turnv
 > = {
   type: "filter";
   layer: any;
-  tolayer: ArtifactLayer;
+  condition?: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  tolayer: AlgolVal<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   matching?: any;
 };

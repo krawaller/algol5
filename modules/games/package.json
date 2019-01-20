@@ -5,6 +5,7 @@
     "retemplateAll": "npx ts-node ./commands/retemplateAll",
     "stub": "npx ts-node ./commands/stub $*",
     "analyze": "npx ts-node ./commands/analyze $*",
+    "fake": "npx ts-node ./commands/fake $*",
     "watch": "npx ts-node ./commands/watch $*"
   },
   "devDependencies": {

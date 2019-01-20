@@ -1,36 +1,34 @@
-# Project
+# Types
 
--[X] Centralize types
--[ ] Clean up types
+- [x] Centralize types
+- [x] Clean up types
+- [ ] Pos types
+- [ ] Grid in values
 
 ## App TODO
 
--[ ] Show saved battles per game
--[ ] SquareInfo impl
--[ ] show board while loading
+- [ ] Show saved battles per game
+- [ ] SquareInfo impl
+- [ ] show board while loading
 
 ## Engine TODO
 
--[ ] Finish storing plr names/type in save
--[ ] Implement history
-    -[ ] add boiluntil
-    -[ ] add cmnd exclusion logic
-    -[ ] add unit tests
--[x] Make possibilities deal with turnvars (see bogus layers in descent)
--[x] New content data type, convert instructions
--[ ] SquareInfo func
--[ ] Offset! :D
-
+- [ ] Finish storing plr names/type in save
+- [x] Make possibilities deal with turnvars (see bogus layers in descent)
+- [x] New content data type, convert instructions
+- [ ] SquareInfo func
+- [ ] Offset! :D
+- [ ] Sites (single-pos terrains)
+- [x] Float
 
 ## Library TODO
 
--[x] Serauqs tests bug out, fix!
--[x] Prevent pushback in Aries
-
+- [x] Serauqs tests bug out, fix!
+- [x] Prevent pushback in Aries
 
 ## Graphics TODO
 
--[ ] Add playing pieces to pics/css
--[ ] Dimensions and positions to css
--[ ] SVGify
--[ ] Make nicer :P
+- [ ] Add playing pieces to pics/css
+- [ ] Dimensions and positions to css
+- [ ] SVGify
+- [ ] Make nicer :P

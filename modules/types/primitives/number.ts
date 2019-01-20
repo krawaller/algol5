@@ -1,33 +1,73 @@
-import { IfElse, PlayerCase, IfActionElse } from "./_logical";
-import {
-  SIG_Set,
-  SIG_NoArgs,
-  SIG_Set_Val,
-  SIG_Numbers,
-  SIG_Number_Number,
-  SIG_Literal
-} from "./_signatures";
+import { IfElse, IfActionElse, PlayerCase } from "./_logical";
+import { SetVal } from "./_signatures";
+import { AlgolVal } from "./value";
+import { AlgolSet } from "./set";
+import { AlgolPos } from "./pos";
 
 export type AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> =
   | number
-  | SIG_NoArgs<
-      | "player"
-      | "otherplayer"
-      | "turn"
-      | "totalcount"
-      | "neighbourcount"
-      | "walklength"
-      | "max"
-      | "step"
-    >
-  | SIG_Literal<"value", number>
-  | SIG_Number_Number<"minus", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
-  | SIG_Numbers<"prod" | "sum", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
-  | SIG_Set_Val<"harvest", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
-  | SIG_Set<"sizeof", Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | ["player"]
+  | ["otherplayer"]
+  | ["turn"]
+  | ["totalcount"]
+  | ["neighbourcount"]
+  | ["walklength"]
+  | ["max"]
+  | ["step"]
+  | NumberGridAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberGridIn<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberSizeOf<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberHarvest<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberTurnVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberBattleVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberSum<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberProd<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberMinus<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   | NumberIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
-  | NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
-  | NumberIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  | NumberIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  | NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+
+interface NumberGridIn<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  gridin: [
+    AlgolVal<string, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
+interface NumberGridAt<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  gridat: [
+    AlgolVal<string, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
+interface NumberTurnVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  turnvar: AlgolVal<Turnv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface NumberBattleVar<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  battlevar: AlgolVal<Btlv, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface NumberSizeOf<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  sizeof: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface NumberHarvest<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  harvest: SetVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface NumberSum<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  sum: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>[];
+}
+
+interface NumberProd<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  prod: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>[];
+}
+
+interface NumberMinus<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv> {
+  minus: AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>[];
+}
 
 interface NumberIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
   extends IfElse<
@@ -40,8 +80,9 @@ interface NumberIfElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
     Turnp,
     Turnv
   > {}
-interface NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
-  extends PlayerCase<
+
+interface NumberIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends IfActionElse<
     AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -52,8 +93,8 @@ interface NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
     Turnv
   > {}
 
-interface NumberIfActionElse<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
-  extends IfActionElse<
+interface NumberPlayerCase<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>
+  extends PlayerCase<
     AlgolNumber<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,

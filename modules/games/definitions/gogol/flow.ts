@@ -1,22 +1,42 @@
-import { GogolFlow } from './_types';
+import { GogolFlow } from "./_types";
 
 const gogolFlow: GogolFlow = {
   startTurn: {
     runGenerators: ["findforbiddenkingspots", "findforbiddensoldierspots"],
-    link: ["ifelse", ["morethan", ["turn"], 2], "selectunit", "selectkingdeploy"]
+    link: [
+      "ifelse",
+      ["morethan", ["turn"], 2],
+      "selectunit",
+      "selectkingdeploy"
+    ]
   },
   marks: {
     selectkingdeploy: {
-      from: ["subtract", "board", ["union", "units", "nokings"]],
+      from: { subtract: ["board", { union: ["units", "nokings"] }] },
       link: "deploy"
     },
     selectunit: {
       from: "myunits",
-      runGenerators: ["findkingwalktargets", "findadjacentenemies", "findjumptargets"],
+      runGenerators: [
+        "findkingwalktargets",
+        "findadjacentenemies",
+        "findjumptargets"
+      ],
       links: ["selectmovetarget", "selectjumptarget"]
     },
     selectmovetarget: {
-      from: ["ifelse", ["anyat", "mykings", "selectunit"], "kingwalk", ["subtract", "board", ["union", "units", "nosoldiers", "jumptargets"]]],
+      from: {
+        ifelse: [
+          { anyat: ["mykings", "selectunit"] },
+          "kingwalk",
+          {
+            subtract: [
+              "board",
+              { union: ["units", "nosoldiers", "jumptargets"] }
+            ]
+          }
+        ]
+      },
       link: "move"
     },
     selectjumptarget: {
@@ -27,29 +47,30 @@ const gogolFlow: GogolFlow = {
   },
   commands: {
     deploy: {
-      applyEffect: ["spawn", "selectkingdeploy", "kings"],
+      applyEffect: { spawn: ["selectkingdeploy", "kings"] },
       link: "endturn"
     },
     move: {
-      applyEffect: ["moveat", "selectunit", "selectmovetarget"],
+      applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       link: "endturn"
     },
     jump: {
       applyEffects: [
-        ["killat", ["onlyin", "splashed"]],
-        ["moveat", "selectunit", "selectjumptarget"]
+        { killat: { onlyin: "splashed" } },
+        { moveat: ["selectunit", "selectjumptarget"] }
       ],
       link: "endturn"
     }
   },
   endGame: {
     infiltration: {
-      condition: ["overlaps", "mykings", "opphomerow"]
+      condition: { overlaps: ["mykings", "opphomerow"] },
+      show: { intersect: ["mykings", "opphomerow"] }
     },
     kingkill: {
-      condition: ["and", ["morethan", ["turn"], 2],
-        ["isempty", "oppkings"]
-      ]
+      condition: {
+        and: [{ morethan: [["turn"], 2] }, { isempty: "oppkings" }]
+      }
     }
   }
 };

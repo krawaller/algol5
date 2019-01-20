@@ -1,4 +1,4 @@
-import { GowiththefloeFlow } from './_types';
+import { GowiththefloeFlow } from "./_types";
 
 const gowiththefloeFlow: GowiththefloeFlow = {
   STATUS: "wip",
@@ -7,22 +7,20 @@ const gowiththefloeFlow: GowiththefloeFlow = {
   },
   endGame: {
     safeseal: {
-      condition: ["different", ["sizeof", "canmove"],
-        ["sizeof", "seals"]
-      ],
-      show: ["subtract", "seals", "canmove"],
+      condition: { different: [{ sizeof: "canmove" }, { sizeof: "seals" }] },
+      show: { subtract: ["seals", "canmove"] },
       who: 1
     },
     sealseaten: {
-      condition: ["isempty", "seals"],
+      condition: { isempty: "seals" },
       who: 2
     }
   },
   marks: {
     selectunit: {
       from: "myunits",
-      runGenerators: ["findmovetargets", ["ifplayer", 2, "findeattargets"]],
-      links: ["selectmovetarget", ["ifplayer", 2, "selecteattarget"]]
+      runGenerators: ["findmovetargets", { ifplayer: [2, "findeattargets"] }],
+      links: ["selectmovetarget", { ifplayer: [2, "selecteattarget"] }]
     },
     selectmovetarget: {
       from: "movetargets",
@@ -37,17 +35,14 @@ const gowiththefloeFlow: GowiththefloeFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["moveat", "selectunit", "selectmovetarget"],
-        ["spawnin", "cracks", "holes", 0]
+        { moveat: ["selectunit", "selectmovetarget"] },
+        { spawnin: ["cracks", "holes", 0] }
       ],
       runGenerator: "findsealsmoves",
       link: "endturn"
     },
     eat: {
-      applyEffects: [
-        ["killat", "selectunit"],
-        ["killat", "selecteattarget"]
-      ],
+      applyEffects: [{ killat: "selectunit" }, { killat: "selecteattarget" }],
       runGenerator: "findsealsmoves",
       link: "endturn"
     }

@@ -1,13 +1,12 @@
-import { GogolGenerators } from './_types';
+import { GogolGenerators } from "./_types";
 
 const gogolGenerators: GogolGenerators = {
   findforbiddenkingspots: {
     type: "neighbour",
-    starts: ["intersect", "edges", "mysoldiers"],
-    dirs: ["ifelse", ["anyat", "homerow", ["start"]],
-      ["list", [1, 3, 5, 7]],
-      ["list", [1, 5]]
-    ],
+    starts: { intersect: ["edges", "mysoldiers"] },
+    dirs: {
+      ifelse: [{ anyat: ["homerow", ["start"]] }, ["ortho"], { list: [1, 5] }]
+    },
     draw: {
       neighbours: {
         tolayer: "nokings"
@@ -16,13 +15,19 @@ const gogolGenerators: GogolGenerators = {
   },
   findforbiddensoldierspots: {
     type: "neighbour",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     starts: "mykings",
-    condition: ["or", ["anyat", "homerow", ["target"]],
-      ["and", ["anyat", "edges", ["start"]],
-        ["anyat", "edges", ["target"]]
+    condition: {
+      or: [
+        { anyat: ["homerow", ["target"]] },
+        {
+          and: [
+            { anyat: ["edges", ["start"]] },
+            { anyat: ["edges", ["target"]] }
+          ]
+        }
       ]
-    ],
+    },
     draw: {
       neighbours: {
         tolayer: "nosoldiers"
@@ -31,8 +36,8 @@ const gogolGenerators: GogolGenerators = {
   },
   findkingwalktargets: {
     type: "walker",
-    starts: ["union", "mykings", "selectunit"],
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    starts: { union: ["mykings", { single: "selectunit" }] },
+    dirs: ["rose"],
     blocks: "units",
     draw: {
       steps: {
@@ -44,7 +49,7 @@ const gogolGenerators: GogolGenerators = {
   findadjacentenemies: {
     type: "neighbour",
     start: "selectunit",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     ifover: "oppunits",
     draw: {
       neighbours: {
@@ -66,11 +71,22 @@ const gogolGenerators: GogolGenerators = {
   findjumptargets: {
     type: "neighbour",
     starts: "adjacentenemies",
-    dir: ["reldir", 1, ["read", "adjacentenemies", ["start"], "dir"]],
-    unlessover: ["union", "units", ["ifelse", ["anyat", "mykings", "selectunit"], "nokings", "nosoldiers"]],
+    dir: { reldir: [1, { read: ["adjacentenemies", ["start"], ["dir"]] }] },
+    unlessover: {
+      union: [
+        "units",
+        {
+          ifelse: [
+            { anyat: ["mykings", "selectunit"] },
+            "nokings",
+            "nosoldiers"
+          ]
+        }
+      ]
+    },
     draw: {
       start: {
-        condition: ["truthy", ["neighbourcount"]],
+        condition: { truthy: ["neighbourcount"] },
         tolayer: "willdie",
         include: {
           dir: ["dir"]

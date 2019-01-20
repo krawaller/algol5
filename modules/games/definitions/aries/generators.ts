@@ -1,10 +1,10 @@
-import { AriesGenerators } from './_types';
+import { AriesGenerators } from "./_types";
 
 const ariesGenerators: AriesGenerators = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     blocks: "units",
     draw: {
       steps: {
@@ -12,13 +12,14 @@ const ariesGenerators: AriesGenerators = {
       },
       block: {
         ifover: "oppunits",
-        condition: ["not", ["and", ["samepos", ["target"],
-            ["battlepos", "pushsquare"]
-          ],
-          ["same", ["idat", "selectunit"],
-            ["battlevar", "pusheeid"]
-          ]
-        ]],
+        condition: {
+          not: {
+            and: [
+              { samepos: [["target"], { battlepos: "pushsquare" }] },
+              { same: [{ idat: "selectunit" }, { battlevar: "pusheeid" }] }
+            ]
+          }
+        },
         tolayer: "movetargets",
         include: {
           dir: ["dir"]
@@ -29,7 +30,7 @@ const ariesGenerators: AriesGenerators = {
   findpushresults: {
     type: "walker",
     start: "selectmovetarget",
-    dir: ["reldir", 1, ["read", "movetargets", "selectmovetarget", "dir"]],
+    dir: { reldir: [1, { read: ["movetargets", "selectmovetarget", "dir"] }] },
     steps: "oppunits",
     blocks: "myunits",
     startasstep: true,
@@ -39,7 +40,7 @@ const ariesGenerators: AriesGenerators = {
         tolayer: "beingpushed"
       },
       last: {
-        condition: ["valinlist", ["stopreason"], "hitblock", "outofbounds"],
+        condition: { valinlist: [["stopreason"], "hitblock", "outofbounds"] },
         tolayer: "squished"
       }
     }

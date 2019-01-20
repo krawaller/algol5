@@ -1,4 +1,4 @@
-import { ThreemusketeersFlow } from './_types';
+import { ThreemusketeersFlow } from "./_types";
 
 const threemusketeersFlow: ThreemusketeersFlow = {
   startTurn: {
@@ -6,12 +6,12 @@ const threemusketeersFlow: ThreemusketeersFlow = {
   },
   endGame: {
     musketeersinline: {
-      condition: ["notempty", "musketeerline"],
+      condition: { notempty: "musketeerline" },
       who: 2,
       show: "kings"
     },
     strandedmusketeers: {
-      condition: ["same", ["sizeof", "strandedmusketeers"], 3],
+      condition: { same: [{ sizeof: "strandedmusketeers" }, 3] },
       who: 1
     }
   },
@@ -28,8 +28,11 @@ const threemusketeersFlow: ThreemusketeersFlow = {
   },
   commands: {
     move: {
-      applyEffect: ["stompat", "selectunit", "selectmovetarget"],
-      runGenerators: ["findmusketeerline", ["ifplayer", 2, "findstrandedmusketeers"]],
+      applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
+      runGenerators: [
+        "findmusketeerline",
+        { ifplayer: [2, "findstrandedmusketeers"] }
+      ],
       link: "endturn"
     }
   }

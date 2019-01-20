@@ -1,10 +1,10 @@
-import { OrthokonGenerators } from './_types';
+import { OrthokonGenerators } from "./_types";
 
 const orthokonGenerators: OrthokonGenerators = {
   findvictims: {
     type: "neighbour",
     start: "selectmovetarget",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     ifover: "oppunits",
     draw: {
       neighbours: {
@@ -15,7 +15,7 @@ const orthokonGenerators: OrthokonGenerators = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     blocks: "units",
     draw: {
       last: {

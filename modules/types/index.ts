@@ -1,5 +1,5 @@
 export * from "./explanation";
-export * from "./prim2";
+export * from "./primitives";
 export * from "./gamedef";
 export * from "./session";
 export * from "./generated";

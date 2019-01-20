@@ -1,6 +1,6 @@
 import { AlgolSet } from "../set";
 
-type TestSet = AlgolSet<
+type TestPos = AlgolSet<
   "mybattlep",
   "mybattlev",
   "mycmnd",
@@ -10,13 +10,16 @@ type TestSet = AlgolSet<
   "myturnv"
 >;
 
-const tests: TestSet[] = [
+const tests: TestPos[] = [
   "mylayer",
-  ["single", ["mark", ["playercase", "mymark", "mymark"]]],
-  ["layer", "mylayer"],
-  ["union", ["layer", "mylayer"], ["single", ["mark", "mymark"]]],
-  ["intersect", ["layer", "mylayer"], ["single", ["mark", "mymark"]]],
-  ["groupat", "mymark"],
-  ["ifactionelse", "mycmnd", ["groupat", "mymark"], "mylayer"],
-  ["ifelse", ["anyat", "mylayer", ["start"]], "mylayer", "mylayer"]
+  { layer: "mylayer" },
+  { layer: { value: "mylayer" } },
+  { playercase: ["mylayer", { layer: "mylayer" }] },
+  { groupat: "mymark" },
+  { groupat: ["start"] },
+  { single: "mymark" },
+  { union: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
+  { subtract: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
+  { intersect: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
+  { ifactionelse: ["mycmnd", "mylayer", "mylayer"] }
 ];

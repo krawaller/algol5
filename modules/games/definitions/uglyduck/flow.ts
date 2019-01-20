@@ -1,4 +1,4 @@
-import { UglyduckFlow } from './_types';
+import { UglyduckFlow } from "./_types";
 
 const uglyduckFlow: UglyduckFlow = {
   startTurn: {
@@ -6,8 +6,8 @@ const uglyduckFlow: UglyduckFlow = {
   },
   endGame: {
     swanhome: {
-      condition: ["overlaps", "mykings", "myhomerow"],
-      show: ["intersect", "mykings", "myhomerow"]
+      condition: { overlaps: ["mykings", "homerow"] },
+      show: { intersect: ["mykings", "myhomerow"] }
     }
   },
   marks: {
@@ -24,10 +24,13 @@ const uglyduckFlow: UglyduckFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["if", ["anyat", "opphomerow", "selectmovetarget"],
-          ["setat", "selectunit", "group", "kings"]
-        ],
-        ["stompat", "selectunit", "selectmovetarget"]
+        {
+          if: [
+            { anyat: ["opphomerow", "selectmovetarget"] },
+            { setat: ["selectunit", "group", "kings"] }
+          ]
+        },
+        { stompat: ["selectunit", "selectmovetarget"] }
       ],
       link: "endturn"
     }

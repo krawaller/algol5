@@ -1,4 +1,4 @@
-import { KriegFlow } from './_types';
+import { KriegFlow } from "./_types";
 
 const kriegFlow: KriegFlow = {
   marks: {
@@ -17,20 +17,24 @@ const kriegFlow: KriegFlow = {
   },
   endGame: {
     cornerinfiltration: {
-      condition: ["overlaps", "oppcorners", "myunits"],
-      show: ["intersect", "oppcorners", "myunits"]
+      condition: { overlaps: ["oppcorners", "myunits"] },
+      show: { intersect: ["oppcorners", "myunits"] }
     },
     occupation: {
-      condition: ["same", ["sizeof", ["intersect", "oppbases", "myunits"]], 2],
-      show: ["intersect", "oppbases", "myunits"]
+      condition: {
+        same: [{ sizeof: { intersect: ["oppbases", "myunits"] } }, 2]
+      },
+      show: { intersect: ["oppbases", "myunits"] }
     }
   },
   commands: {
     move: {
       applyEffects: [
-        ["foridin", "myfrozens", ["setid", ["loopid"], "group", "notfrozens"]],
-        ["setat", "selectunit", "group", "frozens"],
-        ["moveat", "selectunit", "selectmove"]
+        {
+          foridin: ["myfrozens", { setid: [["loopid"], "group", "notfrozens"] }]
+        },
+        { setat: ["selectunit", "group", "frozens"] },
+        { moveat: ["selectunit", "selectmove"] }
       ],
       link: "endturn"
     }

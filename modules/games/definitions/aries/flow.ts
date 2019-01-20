@@ -1,4 +1,4 @@
-import { AriesFlow } from './_types';
+import { AriesFlow } from "./_types";
 
 const ariesFlow: AriesFlow = {
   startTurn: {
@@ -6,8 +6,8 @@ const ariesFlow: AriesFlow = {
   },
   endGame: {
     invade: {
-      condition: ["overlaps", "oppcorner", "myunits"],
-      show: ["intersect", "oppcorner", "myunits"]
+      condition: { overlaps: ["oppcorner", "myunits"] },
+      show: { intersect: ["oppcorner", "myunits"] }
     }
   },
   marks: {
@@ -18,18 +18,26 @@ const ariesFlow: AriesFlow = {
     },
     selectmovetarget: {
       from: "movetargets",
-      runGenerator: ["if", ["anyat", "oppunits", "selectmovetarget"], "findpushresults"],
+      runGenerator: {
+        if: [{ anyat: ["oppunits", "selectmovetarget"] }, "findpushresults"]
+      },
       link: "move"
     }
   },
   commands: {
     move: {
       applyEffects: [
-        ["setbattlevar", "pusheeid", ["idat", "selectmovetarget"]],
-        ["setbattlepos", "pushsquare", "selectmovetarget"],
-        ["pushin", "beingpushed", ["read", "movetargets", "selectmovetarget", "dir"], 1],
-        ["killin", "squished"],
-        ["moveat", "selectunit", "selectmovetarget"]
+        { setbattlevar: ["pusheeid", { idat: "selectmovetarget" }] },
+        { setbattlepos: ["pushsquare", "selectmovetarget"] },
+        {
+          pushin: [
+            "beingpushed",
+            { read: ["movetargets", "selectmovetarget", "dir"] },
+            1
+          ]
+        },
+        { killin: "squished" },
+        { moveat: ["selectunit", "selectmovetarget"] }
       ],
       link: "endturn"
     }

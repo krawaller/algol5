@@ -1,4 +1,4 @@
-import { OrthokonFlow } from './_types';
+import { OrthokonFlow } from "./_types";
 
 const orthokonFlow: OrthokonFlow = {
   startTurn: {
@@ -19,8 +19,8 @@ const orthokonFlow: OrthokonFlow = {
   commands: {
     move: {
       applyEffects: [
-        ["moveat", "selectunit", "selectmovetarget"],
-        ["setin", "victims", "owner", ["currentplayer"]]
+        { moveat: ["selectunit", "selectmovetarget"] },
+        { setin: ["victims", "owner", ["player"]] }
       ],
       link: "endturn"
     }

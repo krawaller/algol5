@@ -1,24 +1,38 @@
-import { JostleGenerators } from './_types';
+import { JostleGenerators } from "./_types";
 
 const jostleGenerators: JostleGenerators = {
   findinitial: {
     type: "neighbour",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     start: "selectunit",
     draw: {
       neighbours: {
-        tolayer: ["ifelse", ["noneat", "units", ["target"]], "movetargets", ["ifelse", ["anyat", "oppunits", ["target"]], "initialenemy", "initialfriend"]]
+        tolayer: {
+          ifelse: [
+            { noneat: ["units", ["target"]] },
+            "movetargets",
+            {
+              ifelse: [
+                { anyat: ["oppunits", ["target"]] },
+                "initialenemy",
+                "initialfriend"
+              ]
+            }
+          ]
+        }
       }
     }
   },
   findnew: {
     type: "neighbour",
-    dirs: [1, 3, 5, 7],
+    dirs: ["ortho"],
     start: "selectmovetarget",
     ifover: "units",
     draw: {
       neighbours: {
-        tolayer: ["ifelse", ["anyat", "oppunits", ["target"]], "newenemy", "newfriend"]
+        tolayer: {
+          ifelse: [{ anyat: ["oppunits", ["target"]] }, "newenemy", "newfriend"]
+        }
       }
     }
   }

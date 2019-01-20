@@ -14,14 +14,11 @@ const tests: TestPos[] = [
   "mymark",
   ["start"],
   ["target"],
-  ["mark", "mymark"],
-  ["onlyin", ["layer", "mylayer"]],
-  ["ifelse", ["true"], ["onlyin", ["layer", "mylayer"]], ["mark", "mymark"]],
-  ["playercase", ["mark", "mymark"], ["onlyin", ["layer", "mylayer"]]],
-  ["turnpos", "myturnp"],
-  ["battlepos", "mybattlep"],
-  ["battlepos", ["value", "mybattlep"]],
-  ["ifactionelse", "mycmnd", "mymark", ["onlyin", ["layer", "mylayer"]]],
-  ["mark", ["playercase", "mymark", "mymark"]],
-  ["playercase", "mymark", "mymark"]
+  { battlepos: "mybattlep" },
+  { turnpos: { value: "myturnp" } },
+  { mark: "mymark" },
+  { mark: { value: "mymark" } },
+  { playercase: ["mymark", { mark: "mymark" }] },
+  { ifactionelse: ["mycmnd", "mymark", { mark: "mymark" }] },
+  { onlyin: "mylayer" }
 ];

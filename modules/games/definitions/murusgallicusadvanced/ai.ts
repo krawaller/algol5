@@ -1,5 +1,11 @@
-import { MurusgallicusadvancedAI } from './_types';
+import { MurusgallicusadvancedAI } from "./_types";
 
-const murusgallicusadvancedAI: MurusgallicusadvancedAI = {};
+const murusgallicusadvancedAI: MurusgallicusadvancedAI = {
+  brains: {},
+  generators: {},
+  aspects: {},
+  grids: {},
+  terrain: {}
+};
 
 export default murusgallicusadvancedAI;

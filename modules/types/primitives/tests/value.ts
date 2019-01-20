@@ -12,13 +12,25 @@ type TestVal = AlgolVal<
 >;
 
 const tests: TestVal[] = [
-  ["value", "FOO"],
-  ["sizeof", "mylayer"],
-  ["playercase", "FOO", ["value", "BAR"]],
-  ["read", "mylayer", "mymark", "someProp"],
-  ["ifactionelse", "mymark", "FOO", "BAR"],
-  ["ifelse", ["true"], ["ifelse", ["false"], "BAR", "FOO"], "BAR"],
-  ["dir"],
-  ["stopreason"],
-  ["battlevar", "mybattlev"]
+  "FOO",
+  "BAR",
+  { value: "FOO" },
+  { value: 5 },
+  { value: { value: "BAR" } },
+  { ifelse: [["true"], "FOO", { value: "BAR" }] },
+  {
+    ifactionelse: ["mycmnd", "FOO", "BAR"]
+  },
+  { playercase: ["FOO", "BAR"] },
+  { read: ["mylayer", "mymark", "someProp"] },
+  { battlevar: "mybattlev" },
+  { turnvar: "myturnv" },
+  { idat: "mymark" },
+  ["loopid"],
+  ["player"],
+  { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] },
+  { indexlist: [["dir"], "FOO", 1, 2, 3, "gnurp"] },
+  { if: [["true"], "FOO"] },
+  { ifplayer: [1, "FOO"] },
+  { pos: "mymark" }
 ];

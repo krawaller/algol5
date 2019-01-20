@@ -1,33 +1,36 @@
-import { MurusgallicusadvancedGenerators } from './_types';
+import { MurusgallicusadvancedGenerators } from "./_types";
 
 const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {
     type: "walker",
     start: "selectcatapult",
-    dirs: ["playercase", [7, 8, 1, 2, 3],
-      [3, 4, 5, 6, 7]
-    ],
+    dirs: {
+      playercase: [{ list: [7, 8, 1, 2, 3] }, { list: [3, 4, 5, 6, 7] }]
+    },
     max: 3,
     draw: {
       steps: {
-        condition: ["and", ["morethan", ["step"], 1],
-          ["noneat", "myunits", ["target"]]
-        ],
+        condition: {
+          and: [
+            { morethan: [["step"], 1] },
+            { noneat: ["myunits", ["target"]] }
+          ]
+        },
         tolayer: "firetargets"
       }
     }
   },
   findmovetargets: {
     type: "walker",
-    blocks: ["union", "oppunits", "mycatapults"],
+    blocks: { union: ["oppunits", "mycatapults"] },
     start: "selecttower",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
+    dirs: ["rose"],
     max: 2,
     draw: {
       steps: {
-        condition: ["and", ["same", ["walklength"], 2],
-          ["same", ["step"], 2]
-        ],
+        condition: {
+          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }]
+        },
         tolayer: "movetargets",
         include: {
           dir: ["dir"]
@@ -37,26 +40,46 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   },
   findmoveresults: {
     type: "neighbour",
-    dir: ["reldir", 5, ["read", "movetargets", "selectmove", "dir"]],
+    dir: { reldir: [5, { read: ["movetargets", "selectmove", "dir"] }] },
     start: "selectmove",
     draw: {
       start: {
-        tolayer: ["ifelse", ["anyat", "myunits", "selectmove"],
-          ["ifelse", ["anyat", "mytowers", "selectmove"], "madecatapults", "madetowers"], "madewalls"
-        ]
+        tolayer: {
+          ifelse: [
+            { anyat: ["myunits", "selectmove"] },
+            {
+              ifelse: [
+                { anyat: ["mytowers", "selectmove"] },
+                "madecatapults",
+                "madetowers"
+              ]
+            },
+            "madewalls"
+          ]
+        }
       },
       neighbours: {
-        tolayer: ["ifelse", ["anyat", "myunits", ["target"]],
-          ["ifelse", ["anyat", "mytowers", ["target"]], "madecatapults", "madetowers"], "madewalls"
-        ]
+        tolayer: {
+          ifelse: [
+            { anyat: ["myunits", ["target"]] },
+            {
+              ifelse: [
+                { anyat: ["mytowers", ["target"]] },
+                "madecatapults",
+                "madetowers"
+              ]
+            },
+            "madewalls"
+          ]
+        }
       }
     }
   },
   findkilltargets: {
     type: "neighbour",
     start: "selecttower",
-    dirs: [1, 2, 3, 4, 5, 6, 7, 8],
-    ifover: ["union", "oppcatapults", "oppwalls"],
+    dirs: ["rose"],
+    ifover: { union: ["oppcatapults", "oppwalls"] },
     draw: {
       neighbours: {
         tolayer: "killtargets"

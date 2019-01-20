@@ -1,5 +1,11 @@
-import { SemaphorAI } from './_types';
+import { SemaphorAI } from "./_types";
 
-const semaphorAI: SemaphorAI = {};
+const semaphorAI: SemaphorAI = {
+  brains: {},
+  generators: {},
+  aspects: {},
+  grids: {},
+  terrain: {}
+};
 
 export default semaphorAI;

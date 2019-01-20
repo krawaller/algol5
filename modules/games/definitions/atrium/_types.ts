@@ -16,14 +16,30 @@ export type AtriumBattleVar = any;
 export type AtriumTurnPos = any;
 export type AtriumTurnVar = any;
  
-export type AtriumGenerators = Generators<AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar>;
-export type AtriumFlow = Flow<AtriumArtifactLayer, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumUnit>;
+export type AtriumGenerators = Generators<AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar>;
+export type AtriumFlow = Flow<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
 export type AtriumBoard = Board<AtriumTerrain>;
-export type AtriumAI = AI;
+export type AtriumAI = AI<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar>;
 export type AtriumGraphics = Graphics<AtriumTerrain, AtriumUnit>;
-export type AtriumInstructions = Instructions<AtriumPhase>;
+export type AtriumInstructions = Instructions<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
 export type AtriumMeta = Meta;
 export type AtriumScripts = GameTestSuite;
 export type AtriumSetup = Setup<AtriumUnit>;
 
-export type AtriumDefinition = FullDef<AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumLayer, AtriumMark, AtriumPhase, AtriumTerrain, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
+export type AtriumDefinition = FullDef<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTerrain, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
+
+export type AtriumGrid = never;
+
+export type AtriumAiGenerator = never;
+
+export type AtriumAiAspect = never;
+
+export type AtriumAiGrid = never;
+
+export type AtriumAiArtifactLayer = never;
+
+export type AtriumAiBrain = never;
+
+export type AtriumAiTerrainLayer = never;
+
+export type AtriumAiTerrain = never;

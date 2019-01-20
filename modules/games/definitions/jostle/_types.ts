@@ -16,14 +16,30 @@ export type JostleBattleVar = any;
 export type JostleTurnPos = any;
 export type JostleTurnVar = any;
  
-export type JostleGenerators = Generators<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
-export type JostleFlow = Flow<JostleArtifactLayer, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostleUnit>;
+export type JostleGenerators = Generators<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
+export type JostleFlow = Flow<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar, JostleUnit>;
 export type JostleBoard = Board<JostleTerrain>;
-export type JostleAI = AI;
+export type JostleAI = AI<JostleAiArtifactLayer, JostleAiAspect, JostleAiBrain, JostleAiGenerator, JostleAiGrid, JostleAiTerrain, JostleAiTerrainLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
 export type JostleGraphics = Graphics<JostleTerrain, JostleUnit>;
-export type JostleInstructions = Instructions<JostlePhase>;
+export type JostleInstructions = Instructions<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostlePhase, JostleTurnPos, JostleTurnVar, JostleUnit>;
 export type JostleMeta = Meta;
 export type JostleScripts = GameTestSuite;
 export type JostleSetup = Setup<JostleUnit>;
 
-export type JostleDefinition = FullDef<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleLayer, JostleMark, JostlePhase, JostleTerrain, JostleTurnPos, JostleTurnVar, JostleUnit>;
+export type JostleDefinition = FullDef<JostleAiArtifactLayer, JostleAiAspect, JostleAiBrain, JostleAiGenerator, JostleAiGrid, JostleAiTerrain, JostleAiTerrainLayer, JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostlePhase, JostleTerrain, JostleTurnPos, JostleTurnVar, JostleUnit>;
+
+export type JostleGrid = never;
+
+export type JostleAiGenerator = never;
+
+export type JostleAiAspect = never;
+
+export type JostleAiGrid = never;
+
+export type JostleAiArtifactLayer = never;
+
+export type JostleAiBrain = never;
+
+export type JostleAiTerrainLayer = never;
+
+export type JostleAiTerrain = never;

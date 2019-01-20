@@ -1,5 +1,11 @@
-import { GowiththefloeAI } from './_types';
+import { GowiththefloeAI } from "./_types";
 
-const gowiththefloeAI: GowiththefloeAI = {};
+const gowiththefloeAI: GowiththefloeAI = {
+  brains: {},
+  generators: {},
+  aspects: {},
+  grids: {},
+  terrain: {}
+};
 
 export default gowiththefloeAI;

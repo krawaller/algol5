@@ -1,5 +1,11 @@
-import { AriesAI } from './_types';
+import { AriesAI } from "./_types";
 
-const ariesAI: AriesAI = {};
+const ariesAI: AriesAI = {
+  brains: {},
+  generators: {},
+  aspects: {},
+  grids: {},
+  terrain: {}
+};
 
 export default ariesAI;

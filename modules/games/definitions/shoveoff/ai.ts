@@ -1,5 +1,11 @@
-import { ShoveoffAI } from './_types';
+import { ShoveoffAI } from "./_types";
 
-const shoveoffAI: ShoveoffAI = {};
+const shoveoffAI: ShoveoffAI = {
+  brains: {},
+  generators: {},
+  aspects: {},
+  grids: {},
+  terrain: {}
+};
 
 export default shoveoffAI;

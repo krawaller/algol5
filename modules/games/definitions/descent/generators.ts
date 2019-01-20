@@ -1,16 +1,23 @@
-import { DescentGenerators } from './_types';
+import { DescentGenerators } from "./_types";
 
 const descentGenerators: DescentGenerators = {
   findmovetargets: {
     type: "neighbour",
+    dirs: ["rose"],
     start: "selectunit",
-    condition: ["ifelse", ["anyat", "rooks", "selectunit"],
-      ["noneat", "pawns", ["target"]],
-      ["ifelse", ["anyat", "pawns", "selectunit"],
-        ["noneat", "rooks", ["target"]],
-        ["true"]
+    condition: {
+      ifelse: [
+        { anyat: ["rooks", "selectunit"] },
+        { noneat: ["pawns", ["target"]] },
+        {
+          ifelse: [
+            { anyat: ["pawns", "selectunit"] },
+            { noneat: ["rooks", ["target"]] },
+            ["true"]
+          ]
+        }
       ]
-    ],
+    },
     draw: {
       neighbours: {
         ifover: "neutralunits",
@@ -20,7 +27,8 @@ const descentGenerators: DescentGenerators = {
   },
   finddigtargets: {
     type: "neighbour",
-    start: ["turnpos", "movedto"],
+    dirs: ["rose"],
+    start: { turnpos: "movedto" },
     ifover: "neutralunits",
     draw: {
       neighbours: {
@@ -30,12 +38,21 @@ const descentGenerators: DescentGenerators = {
   },
   findwinlines: {
     type: "walker",
+    dirs: ["rose"],
     starts: "myunits",
     startasstep: true,
-    steps: ["ifelse", ["anyat", "myrooks", ["start"]], "myrooks", ["ifelse", ["anyat", "myknights", ["start"]], "myknights", "mypawns"]],
+    steps: {
+      ifelse: [
+        { anyat: ["myrooks", ["start"]] },
+        "myrooks",
+        {
+          ifelse: [{ anyat: ["myknights", ["start"]] }, "myknights", "mypawns"]
+        }
+      ]
+    },
     draw: {
       steps: {
-        condition: ["morethan", ["walklength"], 2],
+        condition: { morethan: [["walklength"], 2] },
         tolayer: "winline"
       }
     }

@@ -11,19 +11,17 @@ type TestNumber = AlgolNumber<
 >;
 
 const tests: TestNumber[] = [
+  1,
   ["player"],
   ["otherplayer"],
-  ["turn"],
-  ["value", 42],
-  ["sizeof", "mylayer"],
-  ["harvest", "mylayer", "propName"],
-  ["sum", 3, ["value", 4], 17],
-  ["prod", 3, ["value", 4], 8],
-  ["minus", 3, ["value", 4]],
-  ["ifactionelse", "mymark", 3, 2],
-  ["totalcount"],
-  ["neighbourcount"],
-  ["walklength"],
-  ["max"],
-  ["step"]
+  { ifelse: [["true"], 1, 2] },
+  { ifactionelse: ["mycmnd", 1, 2] },
+  { playercase: [5, ["step"]] },
+  { sizeof: "mylayer" },
+  { harvest: ["mylayer", { value: "someProp" }] },
+  { sum: [3, 4, ["totalcount"]] },
+  { prod: [3, 4, ["totalcount"]] },
+  { minus: [3, 4, ["totalcount"]] },
+  { turnvar: "myturnv" },
+  { battlevar: "mybattlev" }
 ];

@@ -12,30 +12,40 @@ type TestBool = AlgolBool<
 
 const tests: TestBool[] = [
   ["true"],
-  ["cmndavailable", "mycmnd"],
-  ["markavailable", "mymark"],
-  ["higher", ["mark", "mymark"], ["onlyin", "mylayer"]],
-  ["anyat", "mylayer", "mymark"],
-  ["noneat", "mylayer", "mymark"],
-  ["overlaps", "mylayer", ["union", "mylayer", "mylayer"], "mylayer"],
-  ["isempty", "mylayer"],
-  ["notempty", "mylayer"],
-  ["samepos", "mymark", ["onlyin", "mylayer"]],
-  ["same", 4, ["value", 4]],
-  ["different", 4, ["value", 4]],
-  ["morethan", 4, ["value", 4]],
-  ["and", ["isempty", "mylayer"], ["samepos", "mymark", ["onlyin", "mylayer"]]],
-  ["or", ["isempty", "mylayer"], ["samepos", "mymark", ["onlyin", "mylayer"]]],
-  ["truthy", 4],
-  ["falsy", ["value", 7]],
-  ["valinlist", ["value", 8], ["value", 4], 3, ["value", 9]],
-  ["ifactionelse", "mymark", ["true"], ["false"]],
-  ["ifactionelse", "start", ["true"], ["false"]],
-  ["noneat", "mylayer", ["target"]],
-  ["same", ["walklength"], 3],
-  ["valinlist", ["dir"], 8, 1, 2],
-  ["morethan", ["totalcount"], 0],
-  ["samepos", ["target"], ["battlepos", "mybattlep"]],
-  ["same", ["idat", "mymark"], ["battlevar", "mybattlev"]],
-  ["not", ["and",["true"],["false"]]]
+  { not: ["false"] },
+  { and: [["true"], { not: ["false"] }] },
+  { or: [["true"], { and: [["true"], { not: ["false"] }] }] },
+  {
+    ifelse: [
+      ["true"],
+      { not: ["false"] },
+      { and: [["true"], { not: ["false"] }] }
+    ]
+  },
+  {
+    ifactionelse: ["mycmnd", ["false"], ["true"]]
+  },
+  {
+    samepos: ["mymark", { onlyin: "mylayer" }]
+  },
+  {
+    higher: ["mymark", { onlyin: "mylayer" }]
+  },
+  {
+    further: ["mymark", { onlyin: "mylayer" }]
+  },
+  { overlaps: ["mylayer", { single: "mymark" }] },
+  { isempty: "mylayer" },
+  { notempty: { layer: "mylayer" } },
+  { anyat: ["mylayer", "mymark"] },
+  { noneat: ["mylayer", { mark: "mymark" }] },
+  { cmndavailable: "mycmnd" },
+  { markavailable: { playercase: ["mymark", "mymark"] } },
+  { same: ["FOO", "BAR"] },
+  { same: [["walklength"], 3] },
+  { different: ["FOO", { read: ["mylayer", "mymark", "someProp"] }] },
+  { valinlist: ["FOO", 5, "BAR", { read: ["mylayer", "mymark", "someProp"] }] },
+  { morethan: [3, 5] },
+  { truthy: "foo" },
+  { falsy: "foo" }
 ];

@@ -12,5 +12,15 @@ export type Instructions<
   Turnv extends string,
   Unit extends string
 > = {
-  [phase in Phase]: AlgolInstr<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv, Unit>
+  [phase in Phase]: AlgolInstr<
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv,
+    Unit
+  >
 };

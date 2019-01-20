@@ -4,6 +4,7 @@ type TestNumber = AlgolNumber<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygrid",
   "mylayer",
   "mymark",
   "myturnp",
@@ -23,5 +24,7 @@ const tests: TestNumber[] = [
   { prod: [3, 4, ["totalcount"]] },
   { minus: [3, 4, ["totalcount"]] },
   { turnvar: "myturnv" },
-  { battlevar: "mybattlev" }
+  { battlevar: "mybattlev" },
+  { gridat: ["mygrid", "mymark"] },
+  { gridin: ["mygrid", "mylayer"] }
 ];

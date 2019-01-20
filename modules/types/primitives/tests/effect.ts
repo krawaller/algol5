@@ -4,6 +4,7 @@ type TestEffect = AlgolEffect<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygrid",
   "mylayer",
   "mymark",
   "myturnp",

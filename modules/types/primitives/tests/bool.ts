@@ -4,6 +4,7 @@ type TestBool = AlgolBool<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygrid",
   "mylayer",
   "mymark",
   "myturnp",

@@ -4,6 +4,7 @@ type TestPos = AlgolSet<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygrid",
   "mylayer",
   "mymark",
   "myturnp",

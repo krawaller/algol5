@@ -5,6 +5,7 @@ type TestVal = AlgolVal<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygrid",
   "mylayer",
   "mymark",
   "myturnp",

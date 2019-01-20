@@ -32,6 +32,7 @@ export type Flow<
       Btlp,
       Btlv,
       Cmnd,
+      Grid,
       Layer,
       Mrk,
       Turnp,
@@ -47,6 +48,7 @@ export type Flow<
       Btlv,
       Cmnd,
       Gen,
+      Grid,
       Layer,
       Mrk,
       Turnp,
@@ -55,6 +57,16 @@ export type Flow<
     >
   };
   marks: {
-    [markname in Mrk]: MarkDef<Btlp, Btlv, Cmnd, Gen, Layer, Mrk, Turnp, Turnv>
+    [markname in Mrk]: MarkDef<
+      Btlp,
+      Btlv,
+      Cmnd,
+      Gen,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >
   };
 };

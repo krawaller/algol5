@@ -13,7 +13,17 @@ export type FilterDef<
 > = {
   type: "filter";
   layer: any;
-  condition?: AlgolBool<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-  tolayer: AlgolVal<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+  condition?: AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  tolayer: AlgolVal<
+    ArtifactLayer,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >;
   matching?: any;
 };

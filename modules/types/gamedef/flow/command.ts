@@ -6,6 +6,7 @@ export type CommandDef<
   Btlv,
   Cmnd,
   Gen,
+  Grid,
   Layer,
   Mrk,
   Turnp,
@@ -17,18 +18,30 @@ export type CommandDef<
     Btlp,
     Btlv,
     Cmnd,
+    Grid,
     Layer,
     Mrk,
     Turnp,
     Turnv,
     Unit
   >[];
-  applyEffect?: AlgolEffect<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv, Unit>;
+  applyEffect?: AlgolEffect<
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv,
+    Unit
+  >;
   link?: AlgolVal<
     Cmnd | Mrk | "endturn",
     Btlp,
     Btlv,
     Cmnd,
+    Grid,
     Layer,
     Mrk,
     Turnp,
@@ -39,11 +52,32 @@ export type CommandDef<
     Btlp,
     Btlv,
     Cmnd,
+    Grid,
     Layer,
     Mrk,
     Turnp,
     Turnv
   >[];
-  runGenerator?: AlgolVal<Gen, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-  runGenerators?: AlgolVal<Gen, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>[];
+  runGenerator?: AlgolVal<
+    Gen,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >;
+  runGenerators?: AlgolVal<
+    Gen,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >[];
 };

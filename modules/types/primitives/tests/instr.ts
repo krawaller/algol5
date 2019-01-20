@@ -4,6 +4,7 @@ type TestInstruction = AlgolInstr<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygrid",
   "mylayer",
   "mymark",
   "myturnp",

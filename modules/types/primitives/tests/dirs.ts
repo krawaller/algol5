@@ -4,6 +4,7 @@ type TestDirs = AlgolDirs<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygrid",
   "mylayer",
   "mymark",
   "myturnp",

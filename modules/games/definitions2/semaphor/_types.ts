@@ -19,11 +19,25 @@ export type SemaphorTurnVar = any;
 export type SemaphorGenerators = Generators<SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar>;
 export type SemaphorFlow = Flow<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
 export type SemaphorBoard = Board<SemaphorTerrain>;
-export type SemaphorAI = AI;
+export type SemaphorAI = AI<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar>;
 export type SemaphorGraphics = Graphics<SemaphorTerrain, SemaphorUnit>;
 export type SemaphorInstructions = Instructions<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
 export type SemaphorMeta = Meta;
 export type SemaphorScripts = GameTestSuite;
 export type SemaphorSetup = Setup<SemaphorUnit>;
 
-export type SemaphorDefinition = FullDef<SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTerrain, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
+export type SemaphorDefinition = FullDef<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTerrain, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
+
+export type SemaphorAiGenerator = never;
+
+export type SemaphorAiAspect = never;
+
+export type SemaphorAiGrid = never;
+
+export type SemaphorAiArtifactLayer = never;
+
+export type SemaphorAiBrain = never;
+
+export type SemaphorAiTerrainLayer = never;
+
+export type SemaphorAiTerrain = never;

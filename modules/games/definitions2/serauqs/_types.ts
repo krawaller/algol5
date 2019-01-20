@@ -19,11 +19,25 @@ export type SerauqsTurnVar = any;
 export type SerauqsGenerators = Generators<SerauqsArtifactLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar>;
 export type SerauqsFlow = Flow<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
 export type SerauqsBoard = Board<SerauqsTerrain>;
-export type SerauqsAI = AI;
+export type SerauqsAI = AI<SerauqsAiArtifactLayer, SerauqsAiAspect, SerauqsAiBrain, SerauqsAiGenerator, SerauqsAiGrid, SerauqsAiTerrain, SerauqsAiTerrainLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar>;
 export type SerauqsGraphics = Graphics<SerauqsTerrain, SerauqsUnit>;
 export type SerauqsInstructions = Instructions<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsLayer, SerauqsMark, SerauqsPhase, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
 export type SerauqsMeta = Meta;
 export type SerauqsScripts = GameTestSuite;
 export type SerauqsSetup = Setup<SerauqsUnit>;
 
-export type SerauqsDefinition = FullDef<SerauqsArtifactLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsPhase, SerauqsTerrain, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
+export type SerauqsDefinition = FullDef<SerauqsAiArtifactLayer, SerauqsAiAspect, SerauqsAiBrain, SerauqsAiGenerator, SerauqsAiGrid, SerauqsAiTerrain, SerauqsAiTerrainLayer, SerauqsArtifactLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsLayer, SerauqsMark, SerauqsPhase, SerauqsTerrain, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
+
+export type SerauqsAiGenerator = never;
+
+export type SerauqsAiAspect = never;
+
+export type SerauqsAiGrid = never;
+
+export type SerauqsAiArtifactLayer = never;
+
+export type SerauqsAiBrain = never;
+
+export type SerauqsAiTerrainLayer = never;
+
+export type SerauqsAiTerrain = never;

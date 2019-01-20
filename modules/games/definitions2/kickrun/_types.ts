@@ -19,11 +19,25 @@ export type KickrunTurnVar = any;
 export type KickrunGenerators = Generators<KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunTurnPos, KickrunTurnVar>;
 export type KickrunFlow = Flow<KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
 export type KickrunBoard = Board<KickrunTerrain>;
-export type KickrunAI = AI;
+export type KickrunAI = AI<KickrunAiArtifactLayer, KickrunAiAspect, KickrunAiBrain, KickrunAiGenerator, KickrunAiGrid, KickrunAiTerrain, KickrunAiTerrainLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunLayer, KickrunMark, KickrunTurnPos, KickrunTurnVar>;
 export type KickrunGraphics = Graphics<KickrunTerrain, KickrunUnit>;
 export type KickrunInstructions = Instructions<KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunLayer, KickrunMark, KickrunPhase, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
 export type KickrunMeta = Meta;
 export type KickrunScripts = GameTestSuite;
 export type KickrunSetup = Setup<KickrunUnit>;
 
-export type KickrunDefinition = FullDef<KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunPhase, KickrunTerrain, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
+export type KickrunDefinition = FullDef<KickrunAiArtifactLayer, KickrunAiAspect, KickrunAiBrain, KickrunAiGenerator, KickrunAiGrid, KickrunAiTerrain, KickrunAiTerrainLayer, KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunLayer, KickrunMark, KickrunPhase, KickrunTerrain, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
+
+export type KickrunAiGenerator = never;
+
+export type KickrunAiAspect = never;
+
+export type KickrunAiGrid = never;
+
+export type KickrunAiArtifactLayer = never;
+
+export type KickrunAiBrain = never;
+
+export type KickrunAiTerrainLayer = never;
+
+export type KickrunAiTerrain = never;

@@ -19,11 +19,25 @@ export type KriegTurnVar = any;
 export type KriegGenerators = Generators<KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar>;
 export type KriegFlow = Flow<KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar, KriegUnit>;
 export type KriegBoard = Board<KriegTerrain>;
-export type KriegAI = AI;
+export type KriegAI = AI<KriegAiArtifactLayer, KriegAiAspect, KriegAiBrain, KriegAiGenerator, KriegAiGrid, KriegAiTerrain, KriegAiTerrainLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar>;
 export type KriegGraphics = Graphics<KriegTerrain, KriegUnit>;
 export type KriegInstructions = Instructions<KriegBattlePos, KriegBattleVar, KriegCommand, KriegLayer, KriegMark, KriegPhase, KriegTurnPos, KriegTurnVar, KriegUnit>;
 export type KriegMeta = Meta;
 export type KriegScripts = GameTestSuite;
 export type KriegSetup = Setup<KriegUnit>;
 
-export type KriegDefinition = FullDef<KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegPhase, KriegTerrain, KriegTurnPos, KriegTurnVar, KriegUnit>;
+export type KriegDefinition = FullDef<KriegAiArtifactLayer, KriegAiAspect, KriegAiBrain, KriegAiGenerator, KriegAiGrid, KriegAiTerrain, KriegAiTerrainLayer, KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegLayer, KriegMark, KriegPhase, KriegTerrain, KriegTurnPos, KriegTurnVar, KriegUnit>;
+
+export type KriegAiGenerator = "findmythreats" | "findoppthreats";
+
+export type KriegAiAspect = "myfrozenguardedthreat" | "myfrozenfreethreat" | "mymoverguardedthreat" | "mymoverfreethreat" | "myfrozeninfiltrators" | "myfreeinfiltrators" | "oppfrozenguardedthreat" | "oppfrozenfreethreat" | "oppmoverguardedthreat" | "oppmoverfreethreat" | "oppfrozeninfiltrators" | "oppfreeinfiltrators";
+
+export type KriegAiGrid = never;
+
+export type KriegAiArtifactLayer = "ifelse" | "anyat" | "myfrozens" | "start" | "anyat,units,target" | "myfrozenguardedthreat" | "myfrozenfreethreat" | "anyat,units,target" | "mymoverguardedthreat" | "mymoverfreethreat" | "oppfrozens" | "start" | "anyat,units,target" | "oppfrozenguardedthreat" | "oppfrozenfreethreat" | "anyat,units,target" | "oppmoverguardedthreat" | "oppmoverfreethreat";
+
+export type KriegAiBrain = "Fred";
+
+export type KriegAiTerrainLayer = never;
+
+export type KriegAiTerrain = never;

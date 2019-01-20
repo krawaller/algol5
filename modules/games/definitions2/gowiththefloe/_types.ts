@@ -19,11 +19,25 @@ export type GowiththefloeTurnVar = any;
 export type GowiththefloeGenerators = Generators<GowiththefloeArtifactLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeTurnPos, GowiththefloeTurnVar>;
 export type GowiththefloeFlow = Flow<GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;
 export type GowiththefloeBoard = Board<GowiththefloeTerrain>;
-export type GowiththefloeAI = AI;
+export type GowiththefloeAI = AI<GowiththefloeAiArtifactLayer, GowiththefloeAiAspect, GowiththefloeAiBrain, GowiththefloeAiGenerator, GowiththefloeAiGrid, GowiththefloeAiTerrain, GowiththefloeAiTerrainLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeLayer, GowiththefloeMark, GowiththefloeTurnPos, GowiththefloeTurnVar>;
 export type GowiththefloeGraphics = Graphics<GowiththefloeTerrain, GowiththefloeUnit>;
 export type GowiththefloeInstructions = Instructions<GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeLayer, GowiththefloeMark, GowiththefloePhase, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;
 export type GowiththefloeMeta = Meta;
 export type GowiththefloeScripts = GameTestSuite;
 export type GowiththefloeSetup = Setup<GowiththefloeUnit>;
 
-export type GowiththefloeDefinition = FullDef<GowiththefloeArtifactLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloePhase, GowiththefloeTerrain, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;
+export type GowiththefloeDefinition = FullDef<GowiththefloeAiArtifactLayer, GowiththefloeAiAspect, GowiththefloeAiBrain, GowiththefloeAiGenerator, GowiththefloeAiGrid, GowiththefloeAiTerrain, GowiththefloeAiTerrainLayer, GowiththefloeArtifactLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeLayer, GowiththefloeMark, GowiththefloePhase, GowiththefloeTerrain, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;
+
+export type GowiththefloeAiGenerator = never;
+
+export type GowiththefloeAiAspect = never;
+
+export type GowiththefloeAiGrid = never;
+
+export type GowiththefloeAiArtifactLayer = never;
+
+export type GowiththefloeAiBrain = never;
+
+export type GowiththefloeAiTerrainLayer = never;
+
+export type GowiththefloeAiTerrain = never;

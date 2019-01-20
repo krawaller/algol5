@@ -19,11 +19,25 @@ export type DescentTurnVar = any;
 export type DescentGenerators = Generators<DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar>;
 export type DescentFlow = Flow<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar, DescentUnit>;
 export type DescentBoard = Board<DescentTerrain>;
-export type DescentAI = AI;
+export type DescentAI = AI<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar>;
 export type DescentGraphics = Graphics<DescentTerrain, DescentUnit>;
 export type DescentInstructions = Instructions<DescentBattlePos, DescentBattleVar, DescentCommand, DescentLayer, DescentMark, DescentPhase, DescentTurnPos, DescentTurnVar, DescentUnit>;
 export type DescentMeta = Meta;
 export type DescentScripts = GameTestSuite;
 export type DescentSetup = Setup<DescentUnit>;
 
-export type DescentDefinition = FullDef<DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentPhase, DescentTerrain, DescentTurnPos, DescentTurnVar, DescentUnit>;
+export type DescentDefinition = FullDef<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentPhase, DescentTerrain, DescentTurnPos, DescentTurnVar, DescentUnit>;
+
+export type DescentAiGenerator = never;
+
+export type DescentAiAspect = never;
+
+export type DescentAiGrid = never;
+
+export type DescentAiArtifactLayer = never;
+
+export type DescentAiBrain = never;
+
+export type DescentAiTerrainLayer = never;
+
+export type DescentAiTerrain = never;

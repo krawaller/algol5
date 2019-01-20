@@ -19,11 +19,25 @@ export type TransetTurnVar = any;
 export type TransetGenerators = Generators<TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar>;
 export type TransetFlow = Flow<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar, TransetUnit>;
 export type TransetBoard = Board<TransetTerrain>;
-export type TransetAI = AI;
+export type TransetAI = AI<TransetAiArtifactLayer, TransetAiAspect, TransetAiBrain, TransetAiGenerator, TransetAiGrid, TransetAiTerrain, TransetAiTerrainLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar>;
 export type TransetGraphics = Graphics<TransetTerrain, TransetUnit>;
 export type TransetInstructions = Instructions<TransetBattlePos, TransetBattleVar, TransetCommand, TransetLayer, TransetMark, TransetPhase, TransetTurnPos, TransetTurnVar, TransetUnit>;
 export type TransetMeta = Meta;
 export type TransetScripts = GameTestSuite;
 export type TransetSetup = Setup<TransetUnit>;
 
-export type TransetDefinition = FullDef<TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetPhase, TransetTerrain, TransetTurnPos, TransetTurnVar, TransetUnit>;
+export type TransetDefinition = FullDef<TransetAiArtifactLayer, TransetAiAspect, TransetAiBrain, TransetAiGenerator, TransetAiGrid, TransetAiTerrain, TransetAiTerrainLayer, TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetLayer, TransetMark, TransetPhase, TransetTerrain, TransetTurnPos, TransetTurnVar, TransetUnit>;
+
+export type TransetAiGenerator = never;
+
+export type TransetAiAspect = never;
+
+export type TransetAiGrid = never;
+
+export type TransetAiArtifactLayer = never;
+
+export type TransetAiBrain = never;
+
+export type TransetAiTerrainLayer = never;
+
+export type TransetAiTerrain = never;

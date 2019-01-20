@@ -6,6 +6,7 @@ export type WalkerDef<
   Btlp,
   Btlv,
   Cmnd,
+  Grid,
   Layer,
   Mrk,
   Turnp,
@@ -23,11 +24,71 @@ export type WalkerDef<
   startasstep?: boolean;
   max?: AlgolVal<string | number, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   draw: {
-    start?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-    steps?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-    block?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-    last?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-    all?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
-    count?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+    start?: DrawDef<
+      ArtifactLayer,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
+    steps?: DrawDef<
+      ArtifactLayer,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
+    block?: DrawDef<
+      ArtifactLayer,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
+    last?: DrawDef<
+      ArtifactLayer,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
+    all?: DrawDef<
+      ArtifactLayer,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
+    count?: DrawDef<
+      ArtifactLayer,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
   };
 };

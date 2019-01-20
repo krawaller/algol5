@@ -5,6 +5,7 @@ export type DrawDef<
   BattlePos,
   BattleVar,
   Command,
+  Grid,
   Layer,
   Mark,
   TurnPos,

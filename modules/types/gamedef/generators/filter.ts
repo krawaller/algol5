@@ -5,6 +5,7 @@ export type FilterDef<
   Btlp,
   Btlv,
   Cmnd,
+  Grid,
   Layer,
   Mrk,
   Turnp,

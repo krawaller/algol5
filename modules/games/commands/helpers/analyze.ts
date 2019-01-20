@@ -100,6 +100,8 @@ export default async function analyze(def: FullDef | string) {
   const artifactLayers = getArtifactLayers(def.generators);
   const generatorNames = Object.keys(generators);
 
+  const gridNames = Object.keys(def.grids || {});
+
   const origAI = def.AI;
   const AI: typeof origAI = {
     brains: {},
@@ -185,6 +187,10 @@ export type ${capId}Scripts = GameTestSuite;
 export type ${capId}Setup = Setup<${typeSignature("Setup", gameId)}>;
 
 export type ${capId}Definition = FullDef<${typeSignature("FullDef", gameId)}>;
+
+export type ${capId}Grid = ${
+    gridNames.length ? gridNames.map(t => `"${t}"`).join(" | ") : "never"
+  };
 
 export type ${capId}AiGenerator = ${
     aiGenerators.length ? aiGenerators.map(t => `"${t}"`).join(" | ") : "never"

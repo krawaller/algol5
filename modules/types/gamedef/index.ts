@@ -31,6 +31,7 @@ export type FullDef<
   BattleVar extends string = string,
   Command extends string = string,
   Generator extends string = string,
+  Grid extends string = string,
   Layer extends string = string,
   Mark extends string = string,
   Phase extends string = string,
@@ -50,6 +51,7 @@ export type FullDef<
     BattlePos,
     BattleVar,
     Command,
+    Grid,
     Layer,
     Mark,
     TurnPos,
@@ -58,10 +60,12 @@ export type FullDef<
   board: Board<Terrain>;
   setup: Setup<Unit>;
   graphics: Graphics<Terrain, Unit>;
+  grids?: { [g in Grid]: any };
   instructions: Instructions<
     BattlePos,
     BattleVar,
     Command,
+    Grid,
     Layer,
     Mark,
     Phase,
@@ -75,6 +79,7 @@ export type FullDef<
     BattleVar,
     Command,
     Generator,
+    Grid,
     Layer,
     Mark,
     TurnPos,
@@ -87,6 +92,7 @@ export type FullDef<
     BattleVar,
     Command,
     Generator,
+    Grid,
     Layer,
     Mark,
     TurnPos,

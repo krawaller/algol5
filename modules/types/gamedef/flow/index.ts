@@ -13,6 +13,7 @@ export type Flow<
   Btlv extends string,
   Cmnd extends string,
   Gen extends string,
+  Grid extends string,
   Layer extends string,
   Mrk extends string,
   Turnp extends string,

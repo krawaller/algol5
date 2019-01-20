@@ -13,6 +13,7 @@ export type NeighbourDef<
   Btlp,
   Btlv,
   Cmnd,
+  Grid,
   Layer,
   Mrk,
   Turnp,
@@ -27,12 +28,23 @@ export type NeighbourDef<
   ifover?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   unlessover?: AlgolSet<Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
   draw: {
-    start?: DrawDef<ArtifactLayer, Btlp, Btlv, Cmnd, Layer, Mrk, Turnp, Turnv>;
+    start?: DrawDef<
+      ArtifactLayer,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
     neighbours?: DrawDef<
       ArtifactLayer,
       Btlp,
       Btlv,
       Cmnd,
+      Grid,
       Layer,
       Mrk,
       Turnp,

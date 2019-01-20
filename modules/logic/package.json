@@ -10,7 +10,7 @@
     "typescript": "^2.5.2"
   },
   "scripts": {
-    "compile": "ts-node ./compile.ts",
+    "compile": "npx ts-node ./commands/compile $*",
     "collect": "ts-node ./collect.ts",
     "makemeta": "ts-node ./makemeta.ts",
     "clean": "rm -rf dist; mkdir dist;",

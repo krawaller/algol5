@@ -1,9 +1,9 @@
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import makeParser from "./";
 import * as isArray from "lodash/isArray";
 
 export default function parseValue(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   expression,

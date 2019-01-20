@@ -1,8 +1,8 @@
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import makeParser from "./";
 
 export default function parseBool(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   expression
@@ -114,7 +114,9 @@ export default function parseBool(
     }
     case "valinlist": {
       const [val, ...list] = args;
-      return `([${list.map(v => parse.val(v)).join(', ')}].indexOf(${parse.val(val)}) !== -1)`;
+      return `([${list.map(v => parse.val(v)).join(", ")}].indexOf(${parse.val(
+        val
+      )}) !== -1)`;
     }
     default:
       throw "Unknown bool! Boolshit! " + expression;

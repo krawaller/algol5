@@ -1,12 +1,12 @@
 import * as map from "lodash/map";
 
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import { contains } from "../utils";
 import makeParse from "../expressions";
 import { layerRef } from "../common";
 
 export default function executeFilter(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   filterDef: any

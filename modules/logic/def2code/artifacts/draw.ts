@@ -1,4 +1,4 @@
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import * as isNumber from "lodash/isNumber";
 import * as map from "lodash/map";
 import makeExpr from "../expressions";
@@ -6,7 +6,7 @@ import makeExpr from "../expressions";
 // TODO - targetLayerPredefined never ever used?
 
 export default function draw(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action,
   drawDef,
@@ -61,8 +61,16 @@ export default function draw(
     body = `
       ARTIFACTS = {
         ...ARTIFACTS,
-        [${targetLayerPredefined ? "targetlayername" : expr.value(drawDef.tolayer)}]: {
-          ...ARTIFACTS[${targetLayerPredefined ? "targetlayername" : expr.value(drawDef.tolayer)}],
+        [${
+          targetLayerPredefined
+            ? "targetlayername"
+            : expr.value(drawDef.tolayer)
+        }]: {
+          ...ARTIFACTS[${
+            targetLayerPredefined
+              ? "targetlayername"
+              : expr.value(drawDef.tolayer)
+          }],
           [${posVar}]: ${artifactLiteral}
         }
       }

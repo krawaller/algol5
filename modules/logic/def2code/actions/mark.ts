@@ -1,4 +1,4 @@
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 
 import makeExpr from "../expressions";
 import { ifCodeContains } from "../utils";
@@ -8,12 +8,12 @@ import applyLinkInstructions from "./link";
 import applyGeneratorInstructions from "../artifacts/generate";
 
 export default function addMarkFunction(
-  def: FullDef,
+  def: FullDefAnon,
   markname: string,
   player: 1 | 2
 ) {
   const expr = makeExpr(def, player, markname);
-  const markDef = def.flow.marks[markname];
+  const markDef: any = def.flow.marks[markname]; // TODO <---- deanyify!
   let newMarkObject = `Object.assign({},step.MARKS,{${markname}:markpos})`;
   if (markDef.flow !== "cyclic") {
     let marksToKeep = markDef.flow.reduce((mem, p) => {

@@ -6,7 +6,7 @@ import * as reduce from "lodash/reduce";
 import * as invert from "lodash/invert";
 import * as uniq from "lodash/uniq";
 
-import { FullDef } from "./types";
+import { FullDefAnon } from "./types";
 
 // only used in blankUnitLayers, but needs to be its own function since it is recursive
 export function deduceDynamicGroups(rules: any) {
@@ -21,10 +21,12 @@ export function deduceDynamicGroups(rules: any) {
       : isArray(rules) || isObject(rules)
       ? reduce(rules, (mem, def) => mem.concat(deduceDynamicGroups(def)), [])
       : []
-  ).filter(g => typeof g === 'string').sort();
+  )
+    .filter(g => typeof g === "string")
+    .sort();
 }
 
-export function blankUnitLayers(gameDef: FullDef) {
+export function blankUnitLayers(gameDef: FullDefAnon) {
   return reduce(
     Object.keys(gameDef.setup || {})
       .concat(deduceDynamicGroups(gameDef.flow.commands || {}))
@@ -40,7 +42,7 @@ export function blankUnitLayers(gameDef: FullDef) {
   );
 }
 
-export function isTerrainLayerRef(gameDef: FullDef, name) {
+export function isTerrainLayerRef(gameDef: FullDefAnon, name) {
   let names = Object.keys(getTerrain(gameDef));
   let variants = names.reduce((mem, n) => {
     ["my", "opp", "neutral", "no"].forEach(prefix => {
@@ -63,7 +65,7 @@ export function ifCodeContains(
   );
 }
 
-export function getTerrain(gameDef: FullDef) {
+export function getTerrain(gameDef: FullDefAnon) {
   return Object.assign(
     {},
     (gameDef && gameDef.board && gameDef.board.terrain) || {},
@@ -94,7 +96,7 @@ export function generatorLayers(gendef) {
   );
 }
 
-export function blankArtifactLayers(gameDef: FullDef) {
+export function blankArtifactLayers(gameDef: FullDefAnon) {
   return reduce(
     gameDef.generators,
     (mem, genDef, key) => {
@@ -104,7 +106,7 @@ export function blankArtifactLayers(gameDef: FullDef) {
   );
 }
 
-export function isTerrainNeutral(gameDef: FullDef) {
+export function isTerrainNeutral(gameDef: FullDefAnon) {
   return !Object.keys(getTerrain(gameDef)).filter(t => t[1] || t[2]).length;
 }
 
@@ -120,7 +122,7 @@ export function contains(haystack, needle): boolean {
   }
 }
 
-export function usesTurnVars(search: FullDef | any): boolean {
+export function usesTurnVars(search: FullDefAnon | any): boolean {
   return (
     contains(search, "turnvar") ||
     contains(search, "turnpos") ||
@@ -129,7 +131,7 @@ export function usesTurnVars(search: FullDef | any): boolean {
   );
 }
 
-export function usesBattleVars(search: FullDef | any): boolean {
+export function usesBattleVars(search: FullDefAnon | any): boolean {
   return (
     contains(search, "battlevar") ||
     contains(search, "battlepos") ||

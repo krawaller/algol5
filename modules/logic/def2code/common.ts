@@ -5,11 +5,11 @@ import {
   blankUnitLayers,
   isTerrainLayerRef
 } from "./utils";
-import { FullDef } from "./types";
+import { FullDefAnon } from "./types";
 import * as isArray from "lodash/isArray";
 import makeParser from "./expressions";
 
-export function copyArtifactsForAction(gameDef: FullDef, actionDef) {
+export function copyArtifactsForAction(gameDef: FullDefAnon, actionDef) {
   let actionlayers = Object.keys(
     (actionDef.runGenerators || [])
       .concat(actionDef.runGenerator ? [actionDef.runGenerator] : [])
@@ -36,7 +36,7 @@ export function copyArtifactsForAction(gameDef: FullDef, actionDef) {
 }
 
 export function layerRef(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   layername
@@ -58,7 +58,7 @@ export function layerRef(
 }
 
 export function calculateUnitLayers(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   defineVariable: boolean
 ) {

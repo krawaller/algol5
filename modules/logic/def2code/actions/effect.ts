@@ -1,6 +1,6 @@
 import * as map from "lodash/map";
 
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import obey from "../obey";
 import makeExpr from "../expressions";
 
@@ -26,7 +26,7 @@ setbattlevar and setbattlepos mutates BATTLEPOS
 */
 
 function executeEffect(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   effect: any
@@ -341,7 +341,7 @@ function executeEffect(
 }
 
 export default function applyEffectInstructions(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   actionDef: any
@@ -352,7 +352,7 @@ export default function applyEffectInstructions(
       player,
       action,
       ["all"].concat(actionDef.applyEffects),
-      effect => ` { ${ executeEffect(gameDef, player, action, effect) } } `
+      effect => ` { ${executeEffect(gameDef, player, action, effect)} } `
     );
   } else if (actionDef.applyEffect) {
     return obey(gameDef, player, action, actionDef.applyEffect, effect =>

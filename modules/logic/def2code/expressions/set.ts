@@ -1,12 +1,12 @@
 import * as isArray from "lodash/isArray";
 import * as tail from "lodash/tail";
 
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import { layerRef } from "../common";
 import makeParser from "./";
 
 export default function parseSet(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   expression
@@ -23,7 +23,7 @@ export default function parseSet(
     }
     case "groupat": {
       const [pos] = details;
-      return "UNITLAYERS[" + parse.value(["read","units",pos,"group"]) + "]";
+      return "UNITLAYERS[" + parse.value(["read", "units", pos, "group"]) + "]";
     }
     case "single": {
       const [pos] = details;

@@ -7,14 +7,14 @@ TODO
  - add AI list to metadata (or have it already there with desc?)
 */
 
-import { FullDef } from "./types";
+import { FullDefAnon } from "./types";
 import * as fs from "fs";
 import { possibilities } from "./utils";
 
 import * as mapValues from "lodash/mapValues";
 
 // Flow information right now used in logic building (flow_mark.js)
-function mapFlow(game: FullDef) {
+function mapFlow(game: FullDefAnon) {
   let actions = [
     { name: "start", def: game.flow.startTurn, type: "start", path: [] }
   ];
@@ -55,7 +55,7 @@ function augmentSingleGenerator(genDef) {
   return genDef;
 }
 
-function augmentGenerators(gameDef: FullDef) {
+function augmentGenerators(gameDef: FullDefAnon) {
   if (!gameDef.generators) {
     gameDef.generators = {};
   }
@@ -69,7 +69,7 @@ function augmentGenerators(gameDef: FullDef) {
   return gameDef;
 }
 
-export default function preProcess(def: FullDef) {
+export default function preProcess(def: FullDefAnon) {
   def = mapFlow(def);
   def = augmentGenerators(def);
   def.meta = def.meta || {};

@@ -1,9 +1,9 @@
 import makeParser from "./expressions";
 
-import { FullDef } from "./types";
+import { FullDefAnon } from "./types";
 
 export default function obey(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   instr: any,

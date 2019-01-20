@@ -1,4 +1,4 @@
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import applyLinkInstructions from "./link";
 import applyEffectInstructions from "./effect";
 import applyGeneratorInstructions from "../artifacts/generate";
@@ -15,7 +15,7 @@ import {
 import { copyArtifactsForAction, calculateUnitLayers } from "../common";
 
 export default function addCommandFunction(
-  def: FullDef,
+  def: FullDefAnon,
   player: 1 | 2,
   cmndname: string
 ) {
@@ -23,7 +23,11 @@ export default function addCommandFunction(
   const cmndDef = def.flow.commands[cmndname];
   const instruction = expr.content(def.instructions[cmndname] || "");
 
-  const deadEnd = (cmndDef.links || []).concat(cmndDef.link || []).reduce((list, l) => list.concat(possibilities(l)), []).filter(l => l !== 'endturn').length === 0;
+  const deadEnd =
+    (cmndDef.links || [])
+      .concat(cmndDef.link || [])
+      .reduce((list, l) => list.concat(possibilities(l)), [])
+      .filter(l => l !== "endturn").length === 0;
 
   return `
     game.${cmndname}${player} = function(turn,step){
@@ -36,11 +40,7 @@ export default function addCommandFunction(
           : ""
       }
       let UNITLAYERS = step.UNITLAYERS;
-      ${
-        usesTurnVars(cmndDef)
-          ? "let TURNVARS = {...step.TURNVARS }; "
-          : ""
-      }
+      ${usesTurnVars(cmndDef) ? "let TURNVARS = {...step.TURNVARS }; " : ""}
       ${
         usesBattleVars(cmndDef)
           ? "let BATTLEVARS = {...step.BATTLEVARS }; "
@@ -75,7 +75,10 @@ export default function addCommandFunction(
 
       return newstep;
     }
-    ${deadEnd ? '' : `
+    ${
+      deadEnd
+        ? ""
+        : `
     game.${cmndname}${player}instruction = function(turn,step){
       ${ifCodeContains(instruction, {
         MARKS: "let MARKS = step.MARKS; ",
@@ -85,6 +88,7 @@ export default function addCommandFunction(
       })}
       return ${instruction};
     };
-    `}
+    `
+    }
   `;
 }

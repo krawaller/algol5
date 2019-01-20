@@ -1,11 +1,11 @@
 import { isTerrainNeutral } from "./utils";
-import { FullDef } from "./types";
+import { FullDefAnon } from "./types";
 import addMarkFunc from "./actions/mark";
 import addCommandFunc from "./actions/command";
 import addStartFunc from "./actions/start";
 import addAI from "./ai";
 
-export default function playerClosure(def: FullDef, player: 1 | 2) {
+export default function playerClosure(def: FullDefAnon, player: 1 | 2) {
   return `
     {
       // Actions for player ${player}

@@ -1,4 +1,4 @@
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import makeParser from "../expressions";
 import { contains, listlength } from "../utils";
 import draw from "./draw";
@@ -6,7 +6,7 @@ import draw from "./draw";
 // TODO - not drawing counted?
 
 export default function executeNeighbours(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   nghDef: any
@@ -31,7 +31,7 @@ export default function executeNeighbours(
 }
 
 function findAndDrawNeighboursFromStart(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   nghDef: any
@@ -82,7 +82,7 @@ function findAndDrawNeighboursFromStart(
 }
 
 function findAndDrawSingleNeighbour(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   nghDef: any,
@@ -96,7 +96,7 @@ function findAndDrawSingleNeighbour(
   if (nghDef.unlessover)
     conds.push("!" + parse.set(nghDef.unlessover) + "[POS]");
   return `
-    ${drawCaresAboutCount ? 'let NEIGHBOURCOUNT;' : ''}
+    ${drawCaresAboutCount ? "let NEIGHBOURCOUNT;" : ""}
     let POS=connections[STARTPOS][${dirVar}];
     if (${conds.join(" && ")}){
       ${drawCaresAboutCount ? "NEIGHBOURCOUNT=1; " : ""}
@@ -106,7 +106,7 @@ function findAndDrawSingleNeighbour(
 }
 
 function findManyNeighbours(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   nghDef: any
@@ -156,7 +156,7 @@ function findManyNeighbours(
 }
 
 function findNeighbourInDir(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   nghDef,

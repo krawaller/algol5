@@ -1,11 +1,11 @@
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import executeFilter from "./filter";
 import executeNeighbours from "./neighbours";
 import executeWalker from "./walker";
 import obey from "../obey";
 
 export function executeGenerator(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   genDef: any
@@ -23,7 +23,7 @@ export function executeGenerator(
 }
 
 export default function applyGenerators(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   actionDef: any
@@ -34,9 +34,13 @@ export default function applyGenerators(
       player,
       action,
       ["all"].concat(actionDef.runGenerators),
-      generator => `{ ${
-        executeGenerator(gameDef, player, action, gameDef.generators[generator])
-      } }\n`
+      generator =>
+        `{ ${executeGenerator(
+          gameDef,
+          player,
+          action,
+          gameDef.generators[generator]
+        )} }\n`
     );
   } else if (actionDef.runGenerator) {
     return obey(gameDef, player, action, actionDef.runGenerator, generator =>

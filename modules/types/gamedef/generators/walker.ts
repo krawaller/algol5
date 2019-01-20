@@ -1,6 +1,18 @@
 import { DrawDef } from "./draw";
 import { AlgolPos, AlgolSet, AlgolNumber, AlgolVal, AlgolDirs } from "../../";
 
+export type WalkerDefAnon = WalkerDef<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
 export type WalkerDef<
   ArtifactLayer,
   Btlp,

@@ -1,5 +1,5 @@
 import playerClosure from "./playerclosure";
-import { FullDef } from "./types";
+import { FullDefAnon } from "./types";
 import preProcess from "./preprocess";
 import {
   isTerrainNeutral,
@@ -11,7 +11,7 @@ import {
 
 // TODO - remove some shit from game.blah ?
 
-export default function compileGameCode(def: FullDef) {
+export default function compileGameCode(def: FullDefAnon) {
   const gameId = def.meta.id;
   def = preProcess(def);
   return `

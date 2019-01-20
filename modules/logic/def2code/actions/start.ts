@@ -1,5 +1,5 @@
 import makeExpr from "../expressions";
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import {
   ifCodeContains,
   usesTurnVars,
@@ -11,7 +11,7 @@ import { calculateUnitLayers } from "../common";
 import applyLinkInstructions from "./link";
 import applyGenerators from "../artifacts/generate";
 
-export default function addStartFunction(def: FullDef, player: 1 | 2) {
+export default function addStartFunction(def: FullDefAnon, player: 1 | 2) {
   const expr = makeExpr(def, player, "start");
   const startDef = def.flow.startTurn || {};
   const instruction = expr.content(def.instructions.startTurn || "");

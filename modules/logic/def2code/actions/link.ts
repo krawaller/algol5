@@ -1,12 +1,12 @@
 import * as map from "lodash/map";
 
 import makeExpr from "../expressions";
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import obey from "../obey";
 import applyGenerators from "../artifacts/generate";
 
 function addLink(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   name: string,
@@ -64,7 +64,7 @@ function addLink(
 }
 
 export default function applyLinkInstructions(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   actionDef: any,
@@ -76,7 +76,7 @@ export default function applyLinkInstructions(
       player,
       action,
       ["all"].concat(actionDef.links),
-      link => ` { ${addLink(gameDef, player, action, link, root) } } `
+      link => ` { ${addLink(gameDef, player, action, link, root)} } `
     );
   } else {
     return obey(gameDef, player, action, actionDef.link, link =>

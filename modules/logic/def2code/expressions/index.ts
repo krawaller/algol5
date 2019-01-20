@@ -7,10 +7,10 @@ import value from "./value";
 import content from "./content";
 import universal from "./universal";
 
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 
 export default function makeParser(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   from?: string

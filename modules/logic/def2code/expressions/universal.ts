@@ -1,10 +1,10 @@
 import * as isArray from "lodash/isArray";
 
-import { FullDef } from "../types";
+import { FullDefAnon } from "../types";
 import makeParser from "./";
 
 export default function parseUniversal(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   parser,

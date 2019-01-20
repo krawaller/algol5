@@ -2,10 +2,14 @@ import * as reduce from "lodash/reduce";
 import makeParser from "./expressions";
 import { coords2pos, generatorLayers } from "./utils";
 
-import { FullDef } from "./types";
+import { FullDefAnon } from "./types";
 import { executeGenerator } from "./artifacts/generate";
 
-function calculateBrainScore(gameDef: FullDef, player: 1 | 2, brain: string) {
+function calculateBrainScore(
+  gameDef: FullDefAnon,
+  player: 1 | 2,
+  brain: string
+) {
   const parse = makeParser(gameDef, player, brain);
   let aspects = gameDef.AI.aspects;
   let plus = reduce(
@@ -29,7 +33,7 @@ function calculateBrainScore(gameDef: FullDef, player: 1 | 2, brain: string) {
 }
 
 function calculateDetailedBrainScore(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   brain: string
 ) {
@@ -60,7 +64,9 @@ function calculateDetailedBrainScore(
   return "{" + plus.concat(minus).join(", ") + "}";
 }
 
-function addBrain(gameDef: FullDef, player: 1 | 2, brain: string) {
+function addBrain(gameDef: FullDefAnon, player: 1 | 2, brain: string) {
+  return "";
+  /*
   const brainPrep = `
     let UNITLAYERS = step.UNITLAYERS;
     let ARTIFACTS = step.ARTIFACTS;
@@ -76,7 +82,12 @@ function addBrain(gameDef: FullDef, player: 1 | 2, brain: string) {
   const brainGenerators = (gameDef.AI.brains[brain].generators || []).reduce(
     (mem, genname) =>
       mem +
-      ` { ${executeGenerator(gameDef, player, brain, gameDef.AI.generators[genname]) } } `,
+      ` { ${executeGenerator(
+        gameDef,
+        player,
+        brain,
+        gameDef.AI.generators[genname]
+      )} } `,
     ""
   );
   return `
@@ -91,6 +102,7 @@ function addBrain(gameDef: FullDef, player: 1 | 2, brain: string) {
       return ${calculateDetailedBrainScore(gameDef, player, brain)};
     };
   `;
+  */
 }
 
 function scoring(scoreDef) {
@@ -109,9 +121,9 @@ function scoring(scoreDef) {
   );
 }
 
-export default function addAI(gameDef: FullDef, player: 1 | 2) {
+export default function addAI(gameDef: FullDefAnon, player: 1 | 2) {
   const scorings = reduce(
-    gameDef.AI && gameDef.AI.scorings,
+    gameDef.AI && gameDef.AI.grids,
     (str, def, name) => {
       let names =
         player === 1

@@ -1,4 +1,4 @@
-import { FullDef, GeneratorDef, WalkerDef } from "../types";
+import { FullDefAnon, GeneratorDef, WalkerDefAnon } from "../types";
 import { contains, listlength } from "../utils";
 import draw from "./draw";
 import makeParse from "../expressions";
@@ -9,7 +9,7 @@ def.draw.steps and def.draw.all doesn't contain walklength or totalcount
 */
 
 export default function executeWalker(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   walkDef
@@ -49,7 +49,7 @@ export default function executeWalker(
 }
 
 function walkFromStart(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   walkDef
@@ -97,7 +97,7 @@ function walkFromStart(
 
 // TODO - totalcount might not always be needed
 function walkInDir(
-  gameDef: FullDef,
+  gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   walkDef,
@@ -369,7 +369,7 @@ function needLevel(expr, when) {
 // assumes connections, DIR, LENGTH
 // and if used BLOCKS, allowedsteps, MAX
 function calcStopReason(
-  genDef: WalkerDef,
+  genDef: WalkerDefAnon,
   dirVar = "DIR",
   blocksVar = "BLOCKS"
 ) {
@@ -397,7 +397,7 @@ function calcStopReason(
 // and if used BLOCKS, allowedsteps, MAX
 
 function calcStopCondition(
-  genDef: WalkerDef,
+  genDef: WalkerDefAnon,
   dirVar = "DIR",
   blocksVar = "BLOCKS"
 ) {

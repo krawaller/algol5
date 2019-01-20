@@ -1,4 +1,4 @@
-import { _testFlow } from './_types';
+import { _testFlow } from "./_types";
 
 const _testFlow: _testFlow = {
   startTurn: {
@@ -11,7 +11,7 @@ const _testFlow: _testFlow = {
       link: "selectmark"
     },
     selectmark: {
-      from: ["union", "marks", "blocks"],
+      from: { union: ["marks", "blocks"] },
       link: "endturn"
     }
   },

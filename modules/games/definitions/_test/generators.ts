@@ -1,10 +1,12 @@
-import { _testGenerators } from './_types';
+import { _testGenerators } from "./_types";
 
 const _testGenerators: _testGenerators = {
   stepsfirst: {
     type: "walker",
-    dirs: [1, 5],
-    starts: ["intersect", "mystepsfirsts", ["single", ["mark", "selectunit"]]],
+    dirs: { list: [1, 5] },
+    starts: {
+      intersect: ["mystepsfirsts", { single: { mark: "selectunit" } }]
+    },
     steps: "steps",
     testblocksbeforesteps: false,
     blocks: "units",
@@ -19,8 +21,10 @@ const _testGenerators: _testGenerators = {
   },
   blocksfirst: {
     type: "walker",
-    dirs: [1, 5],
-    starts: ["intersect", "myblocksfirsts", ["single", ["mark", "selectunit"]]],
+    dirs: { list: [1, 5] },
+    starts: {
+      intersect: ["myblocksfirsts", { single: { mark: "selectunit" } }]
+    },
     steps: "steps",
     testblocksbeforesteps: true,
     blocks: "units",
@@ -35,8 +39,10 @@ const _testGenerators: _testGenerators = {
   },
   defaultfirst: {
     type: "walker",
-    dirs: [1, 5],
-    starts: ["intersect", "mydefaultfirsts", ["single", ["mark", "selectunit"]]],
+    dirs: { list: [1, 5] },
+    starts: {
+      intersect: ["mydefaultfirsts", { single: { mark: "selectunit" } }]
+    },
     steps: "steps",
     blocks: "units",
     draw: {
@@ -50,8 +56,8 @@ const _testGenerators: _testGenerators = {
   },
   noblock: {
     type: "walker",
-    dirs: [1, 5],
-    starts: ["intersect", "mynoblocks", ["single", ["mark", "selectunit"]]],
+    dirs: { list: [1, 5] },
+    starts: { intersect: ["mynoblocks", { single: { mark: "selectunit" } }] },
     steps: "steps",
     blocks: "units",
     draw: {

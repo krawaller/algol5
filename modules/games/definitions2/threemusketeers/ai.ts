@@ -1,5 +1,11 @@
-import { ThreemusketeersAI } from './_types';
+import { ThreemusketeersAI } from "./_types";
 
-const threemusketeersAI: ThreemusketeersAI = {};
+const threemusketeersAI: ThreemusketeersAI = {
+  brains: {},
+  generators: {},
+  aspects: {},
+  grids: {},
+  terrain: {}
+};
 
 export default threemusketeersAI;

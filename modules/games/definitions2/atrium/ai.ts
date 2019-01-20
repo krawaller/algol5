@@ -1,5 +1,11 @@
-import { AtriumAI } from './_types';
+import { AtriumAI } from "./_types";
 
-const atriumAI: AtriumAI = {};
+const atriumAI: AtriumAI = {
+  brains: {},
+  generators: {},
+  aspects: {},
+  grids: {},
+  terrain: {},
+};
 
 export default atriumAI;

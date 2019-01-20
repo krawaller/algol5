@@ -1,5 +1,11 @@
-import { DescentAI } from './_types';
+import { DescentAI } from "./_types";
 
-const descentAI: DescentAI = {};
+const descentAI: DescentAI = {
+  brains: {},
+  generators: {},
+  aspects: {},
+  grids: {},
+  terrain: {}
+};
 
 export default descentAI;

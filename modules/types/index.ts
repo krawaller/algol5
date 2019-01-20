@@ -47,6 +47,22 @@ export type CommonLayer =
 export function typeSignature(type, gameId) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return {
+    AI: [
+      "AiArtifactLayer",
+      "AiAspect",
+      "AiBrain",
+      "AiGenerator",
+      "AiGrid",
+      "AiTerrain",
+      "AiTerrainLayer",
+      "BattlePos",
+      "BattleVar",
+      "Command",
+      "Layer",
+      "Mark",
+      "TurnPos",
+      "TurnVar"
+    ],
     Flow: [
       "BattlePos",
       "BattleVar",
@@ -84,6 +100,13 @@ export function typeSignature(type, gameId) {
       "TurnVar"
     ],
     FullDef: [
+      "AiArtifactLayer",
+      "AiAspect",
+      "AiBrain",
+      "AiGenerator",
+      "AiGrid",
+      "AiTerrain",
+      "AiTerrainLayer",
       "ArtifactLayer",
       "BattlePos",
       "BattleVar",
@@ -101,3 +124,7 @@ export function typeSignature(type, gameId) {
     .map(t => capId + t)
     .join(", ");
 }
+
+// ---------------------
+
+export type Partial<T> = { [P in keyof T]?: T[P] };

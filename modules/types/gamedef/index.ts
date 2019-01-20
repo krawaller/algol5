@@ -19,6 +19,13 @@ import { Flow } from "./flow";
 import { GameTestSuite } from "./scripts";
 
 export type FullDef<
+  AiArtifactLayer extends string = string,
+  AiAspect extends string = string,
+  AiBrain extends string = string,
+  AiGenerator extends string = string,
+  AiGrid extends string = string,
+  AiTerrain extends string = string,
+  AiTerrainLayer extends string = string,
   ArtifactLayer extends string = string,
   BattlePos extends string = string,
   BattleVar extends string = string,
@@ -32,7 +39,22 @@ export type FullDef<
   TurnVar extends string = string,
   Unit extends string = string
 > = {
-  AI: AI;
+  AI: AI<
+    AiArtifactLayer,
+    AiAspect,
+    AiBrain,
+    AiGenerator,
+    AiGrid,
+    AiTerrain,
+    AiTerrainLayer,
+    BattlePos,
+    BattleVar,
+    Command,
+    Layer,
+    Mark,
+    TurnPos,
+    TurnVar
+  >;
   board: Board<Terrain>;
   setup: Setup<Unit>;
   graphics: Graphics<Terrain, Unit>;
@@ -92,7 +114,7 @@ export type Definition = {
   endTurn?: {
     unless: any;
   };
-  AI?: AI;
+  AI?: any;
   commands: {
     [cmndname: string]: any;
   };

@@ -16,17 +16,19 @@ export type DuploBattleVar = any;
 export type DuploTurnPos = any;
 export type DuploTurnVar = any;
  
-export type DuploGenerators = Generators<DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
-export type DuploFlow = Flow<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar, DuploUnit>;
+export type DuploGenerators = Generators<DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
+export type DuploFlow = Flow<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar, DuploUnit>;
 export type DuploBoard = Board<DuploTerrain>;
-export type DuploAI = AI<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
+export type DuploAI = AI<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
 export type DuploGraphics = Graphics<DuploTerrain, DuploUnit>;
-export type DuploInstructions = Instructions<DuploBattlePos, DuploBattleVar, DuploCommand, DuploLayer, DuploMark, DuploPhase, DuploTurnPos, DuploTurnVar, DuploUnit>;
+export type DuploInstructions = Instructions<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGrid, DuploLayer, DuploMark, DuploPhase, DuploTurnPos, DuploTurnVar, DuploUnit>;
 export type DuploMeta = Meta;
 export type DuploScripts = GameTestSuite;
 export type DuploSetup = Setup<DuploUnit>;
 
-export type DuploDefinition = FullDef<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploLayer, DuploMark, DuploPhase, DuploTerrain, DuploTurnPos, DuploTurnVar, DuploUnit>;
+export type DuploDefinition = FullDef<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploPhase, DuploTerrain, DuploTurnPos, DuploTurnVar, DuploUnit>;
+
+export type DuploGrid = never;
 
 export type DuploAiGenerator = never;
 

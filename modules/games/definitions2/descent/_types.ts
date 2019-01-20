@@ -16,17 +16,19 @@ export type DescentBattleVar = any;
 export type DescentTurnPos = any;
 export type DescentTurnVar = any;
  
-export type DescentGenerators = Generators<DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar>;
-export type DescentFlow = Flow<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar, DescentUnit>;
+export type DescentGenerators = Generators<DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentGrid, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar>;
+export type DescentFlow = Flow<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentGrid, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar, DescentUnit>;
 export type DescentBoard = Board<DescentTerrain>;
-export type DescentAI = AI<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar>;
+export type DescentAI = AI<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar>;
 export type DescentGraphics = Graphics<DescentTerrain, DescentUnit>;
-export type DescentInstructions = Instructions<DescentBattlePos, DescentBattleVar, DescentCommand, DescentLayer, DescentMark, DescentPhase, DescentTurnPos, DescentTurnVar, DescentUnit>;
+export type DescentInstructions = Instructions<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentTurnPos, DescentTurnVar, DescentUnit>;
 export type DescentMeta = Meta;
 export type DescentScripts = GameTestSuite;
 export type DescentSetup = Setup<DescentUnit>;
 
-export type DescentDefinition = FullDef<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentLayer, DescentMark, DescentPhase, DescentTerrain, DescentTurnPos, DescentTurnVar, DescentUnit>;
+export type DescentDefinition = FullDef<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentTerrain, DescentTurnPos, DescentTurnVar, DescentUnit>;
+
+export type DescentGrid = never;
 
 export type DescentAiGenerator = never;
 

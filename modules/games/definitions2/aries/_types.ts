@@ -16,17 +16,19 @@ export type AriesBattleVar = any;
 export type AriesTurnPos = any;
 export type AriesTurnVar = any;
  
-export type AriesGenerators = Generators<AriesArtifactLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar>;
-export type AriesFlow = Flow<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar, AriesUnit>;
+export type AriesGenerators = Generators<AriesArtifactLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesGrid, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar>;
+export type AriesFlow = Flow<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesGrid, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar, AriesUnit>;
 export type AriesBoard = Board<AriesTerrain>;
-export type AriesAI = AI<AriesAiArtifactLayer, AriesAiAspect, AriesAiBrain, AriesAiGenerator, AriesAiGrid, AriesAiTerrain, AriesAiTerrainLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar>;
+export type AriesAI = AI<AriesAiArtifactLayer, AriesAiAspect, AriesAiBrain, AriesAiGenerator, AriesAiGrid, AriesAiTerrain, AriesAiTerrainLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesGrid, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar>;
 export type AriesGraphics = Graphics<AriesTerrain, AriesUnit>;
-export type AriesInstructions = Instructions<AriesBattlePos, AriesBattleVar, AriesCommand, AriesLayer, AriesMark, AriesPhase, AriesTurnPos, AriesTurnVar, AriesUnit>;
+export type AriesInstructions = Instructions<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesTurnPos, AriesTurnVar, AriesUnit>;
 export type AriesMeta = Meta;
 export type AriesScripts = GameTestSuite;
 export type AriesSetup = Setup<AriesUnit>;
 
-export type AriesDefinition = FullDef<AriesAiArtifactLayer, AriesAiAspect, AriesAiBrain, AriesAiGenerator, AriesAiGrid, AriesAiTerrain, AriesAiTerrainLayer, AriesArtifactLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesLayer, AriesMark, AriesPhase, AriesTerrain, AriesTurnPos, AriesTurnVar, AriesUnit>;
+export type AriesDefinition = FullDef<AriesAiArtifactLayer, AriesAiAspect, AriesAiBrain, AriesAiGenerator, AriesAiGrid, AriesAiTerrain, AriesAiTerrainLayer, AriesArtifactLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesTerrain, AriesTurnPos, AriesTurnVar, AriesUnit>;
+
+export type AriesGrid = never;
 
 export type AriesAiGenerator = never;
 

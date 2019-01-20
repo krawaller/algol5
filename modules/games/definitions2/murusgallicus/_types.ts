@@ -16,17 +16,19 @@ export type MurusgallicusBattleVar = any;
 export type MurusgallicusTurnPos = any;
 export type MurusgallicusTurnVar = any;
  
-export type MurusgallicusGenerators = Generators<MurusgallicusArtifactLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
-export type MurusgallicusFlow = Flow<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
+export type MurusgallicusGenerators = Generators<MurusgallicusArtifactLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
+export type MurusgallicusFlow = Flow<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
 export type MurusgallicusBoard = Board<MurusgallicusTerrain>;
-export type MurusgallicusAI = AI<MurusgallicusAiArtifactLayer, MurusgallicusAiAspect, MurusgallicusAiBrain, MurusgallicusAiGenerator, MurusgallicusAiGrid, MurusgallicusAiTerrain, MurusgallicusAiTerrainLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
+export type MurusgallicusAI = AI<MurusgallicusAiArtifactLayer, MurusgallicusAiAspect, MurusgallicusAiBrain, MurusgallicusAiGenerator, MurusgallicusAiGrid, MurusgallicusAiTerrain, MurusgallicusAiTerrainLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
 export type MurusgallicusGraphics = Graphics<MurusgallicusTerrain, MurusgallicusUnit>;
-export type MurusgallicusInstructions = Instructions<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPhase, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
+export type MurusgallicusInstructions = Instructions<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPhase, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
 export type MurusgallicusMeta = Meta;
 export type MurusgallicusScripts = GameTestSuite;
 export type MurusgallicusSetup = Setup<MurusgallicusUnit>;
 
-export type MurusgallicusDefinition = FullDef<MurusgallicusAiArtifactLayer, MurusgallicusAiAspect, MurusgallicusAiBrain, MurusgallicusAiGenerator, MurusgallicusAiGrid, MurusgallicusAiTerrain, MurusgallicusAiTerrainLayer, MurusgallicusArtifactLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPhase, MurusgallicusTerrain, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
+export type MurusgallicusDefinition = FullDef<MurusgallicusAiArtifactLayer, MurusgallicusAiAspect, MurusgallicusAiBrain, MurusgallicusAiGenerator, MurusgallicusAiGrid, MurusgallicusAiTerrain, MurusgallicusAiTerrainLayer, MurusgallicusArtifactLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPhase, MurusgallicusTerrain, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
+
+export type MurusgallicusGrid = never;
 
 export type MurusgallicusAiGenerator = "findmymoves" | "findoppmoves" | "findoppthreats";
 

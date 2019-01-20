@@ -16,17 +16,19 @@ export type SemaphorBattleVar = any;
 export type SemaphorTurnPos = any;
 export type SemaphorTurnVar = any;
  
-export type SemaphorGenerators = Generators<SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar>;
-export type SemaphorFlow = Flow<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
+export type SemaphorGenerators = Generators<SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar>;
+export type SemaphorFlow = Flow<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
 export type SemaphorBoard = Board<SemaphorTerrain>;
-export type SemaphorAI = AI<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar>;
+export type SemaphorAI = AI<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar>;
 export type SemaphorGraphics = Graphics<SemaphorTerrain, SemaphorUnit>;
-export type SemaphorInstructions = Instructions<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
+export type SemaphorInstructions = Instructions<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
 export type SemaphorMeta = Meta;
 export type SemaphorScripts = GameTestSuite;
 export type SemaphorSetup = Setup<SemaphorUnit>;
 
-export type SemaphorDefinition = FullDef<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTerrain, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
+export type SemaphorDefinition = FullDef<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTerrain, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
+
+export type SemaphorGrid = never;
 
 export type SemaphorAiGenerator = never;
 

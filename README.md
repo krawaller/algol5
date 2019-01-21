@@ -3,7 +3,7 @@
 - [x] Centralize types
 - [x] Clean up types
 - [ ] Pos types
-- [ ] Grid in values
+- [x] Grid in values
 
 ## App TODO
 
@@ -25,6 +25,8 @@
 
 - [x] Serauqs tests bug out, fix!
 - [x] Prevent pushback in Aries
+- [ ] Examine Gowiththefloe, why says WIP?
+- [ ] Shoveoff should use offset
 
 ## Graphics TODO
 

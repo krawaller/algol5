@@ -3,12 +3,9 @@ import { GogolFlow } from "./_types";
 const gogolFlow: GogolFlow = {
   startTurn: {
     runGenerators: ["findforbiddenkingspots", "findforbiddensoldierspots"],
-    link: [
-      "ifelse",
-      ["morethan", ["turn"], 2],
-      "selectunit",
-      "selectkingdeploy"
-    ]
+    link: {
+      ifelse: [{ morethan: [["turn"], 2] }, "selectunit", "selectkingdeploy"]
+    }
   },
   marks: {
     selectkingdeploy: {

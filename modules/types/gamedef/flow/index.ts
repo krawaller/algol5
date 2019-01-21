@@ -23,7 +23,7 @@ export type Flow<
   flow?: any;
   TODO?: string;
   STATUS?: string;
-  startTurn?: StartTurn;
+  startTurn?: StartTurn<Btlp, Btlv, Cmnd, Gen, Grid, Layer, Mrk, Turnp, Turnv>;
   canalwaysend?: {
     [name: string]: true;
   };

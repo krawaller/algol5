@@ -23,7 +23,9 @@ const duploFlow: DuploFlow = {
     }
   },
   startTurn: {
-    link: ["ifelse", ["morethan", ["turn"], 2], "selectunit", "selectdeploy"]
+    link: {
+      ifelse: [{ morethan: [["turn"], 2] }, "selectunit", "selectdeploy"]
+    }
   },
   marks: {
     selectdeploy: {

@@ -15,7 +15,8 @@
     "collect": "ts-node ./collect.ts",
     "makemeta": "ts-node ./makemeta.ts",
     "build": "npm run clean && npm run compile && npm run collect && npm run makemeta",
-    "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec"
+    "test": "ts-node node_modules/tape/bin/tape test/**/*.spec.ts | node_modules/.bin/tap-spec",
+    "test2": "ts-node node_modules/tape/bin/tape newlogictests/*.spec.ts | node_modules/.bin/tap-spec"
   },
   "dependencies": {
     "eval": "^0.1.2",

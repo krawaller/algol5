@@ -3,6 +3,18 @@ import { SetPosVal, ValVal } from "./_signatures";
 import { AlgolPos } from "./pos";
 import { AlgolNumber } from "./number";
 
+export type AlgolValAnon = AlgolVal<
+  string | number,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
 export type AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | _T
   | ValValue<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

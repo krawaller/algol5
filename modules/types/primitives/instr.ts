@@ -5,6 +5,18 @@ import { AlgolVal } from "./value";
 import { AlgolPos } from "./pos";
 import { AlgolNumber } from "./number";
 
+export type AlgolInstrAnon = AlgolInstr<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
 export type AlgolInstr<
   Btlp,
   Btlv,

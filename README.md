@@ -4,6 +4,7 @@
 - [x] Clean up types
 - [ ] Pos types
 - [x] Grid in values
+- [ ] Board dimensions (incl grid) https://stackoverflow.com/questions/52489261/typescript-can-i-define-an-n-length-tuple-type
 
 ## App TODO
 

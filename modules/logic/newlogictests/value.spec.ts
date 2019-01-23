@@ -28,7 +28,9 @@ const tests: ParserTest<AlgolValAnon>[] = [
           {
             expr: { indexlist: [{ minus: [2, 1] }, "foo", { value: "bar" }] },
             res: "bar"
-          }
+          },
+          { expr: { ifelse: [["true"], { value: 1 }, 2] }, res: 1 },
+          { expr: { ifelse: [["false"], 1, { value: 2 }] }, res: 2 }
         ]
       },
       { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] },

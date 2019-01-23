@@ -8,7 +8,8 @@ import {
   AlgolValProdAnon,
   AlgolValTurnVarAnon,
   AlgolValBattleVarAnon,
-  AlgolValIndexListAnon
+  AlgolValIndexListAnon,
+  AlgolValIfElseAnon
 } from "../../../types";
 
 import makeParser from "./";
@@ -81,5 +82,13 @@ export default function parseVal(
       return parser.val(items[parsedIdx]);
     }
     return `[${items.map(parser.val).join(", ")}][${parsedIdx}]`;
+  }
+  if ((expr as AlgolValIfElseAnon).ifelse) {
+    const {
+      ifelse: [test, whenTruthy, whenFalsy]
+    } = expr as AlgolValIfElseAnon;
+    return `(${parser.bool(test)} ? ${parser.val(whenTruthy)} : ${parser.val(
+      whenFalsy
+    )})`;
   }
 }

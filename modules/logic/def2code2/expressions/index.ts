@@ -1,4 +1,9 @@
-import { FullDefAnon, AlgolValAnon } from "../../../types";
+import {
+  FullDefAnon,
+  AlgolValAnon,
+  AlgolValMinusAnon,
+  AlgolValValueAnon
+} from "../../../types";
 
 export default function makeParser(
   gameDef: FullDefAnon,
@@ -21,11 +26,13 @@ export default function makeParser(
         }
         return undefined;
       }
-      if ((expr as any).minus) {
-        return `(${(expr as any).minus.map(parsers.val).join(" - ")})`;
+      if ((expr as AlgolValMinusAnon).minus) {
+        const { minus: operands } = expr as AlgolValMinusAnon;
+        return `(${operands.map(parsers.val).join(" - ")})`;
       }
-      if ((expr as any).value) {
-        return parsers.val((expr as any).value);
+      if ((expr as AlgolValValueAnon).value) {
+        const { value: innerExpr } = expr as AlgolValValueAnon;
+        return parsers.val(innerExpr);
       }
     }
   };

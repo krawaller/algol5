@@ -3,13 +3,10 @@ import {
   AlgolValAnon,
   AlgolValMinusAnon,
   AlgolValValueAnon,
-  AlgolValPlayerCaseAnon,
-  AlgolValIfActionElseAnon,
   AlgolValProdAnon,
   AlgolValTurnVarAnon,
   AlgolValBattleVarAnon,
-  AlgolValIndexListAnon,
-  AlgolValIfElseAnon
+  AlgolValIndexListAnon
 } from "../../../types";
 
 import makeParser from "./";
@@ -49,18 +46,6 @@ export default function parseVal(
     const { value: innerExpr } = expr as AlgolValValueAnon;
     return parser.val(innerExpr);
   }
-  if ((expr as AlgolValPlayerCaseAnon).playercase) {
-    const {
-      playercase: [firstPlr, secondPlr]
-    } = expr as AlgolValPlayerCaseAnon;
-    return parser.val(player === 1 ? firstPlr : secondPlr);
-  }
-  if ((expr as AlgolValIfActionElseAnon).ifactionelse) {
-    const {
-      ifactionelse: [ifact, thenVal, elseVal]
-    } = expr as AlgolValIfActionElseAnon;
-    return parser.val(ifact === action ? thenVal : elseVal);
-  }
   if ((expr as AlgolValProdAnon).prod) {
     const { prod: factors } = expr as AlgolValProdAnon;
     return `(${factors.map(parser.val).join(" * ")})`;
@@ -82,13 +67,5 @@ export default function parseVal(
       return parser.val(items[parsedIdx]);
     }
     return `[${items.map(parser.val).join(", ")}][${parsedIdx}]`;
-  }
-  if ((expr as AlgolValIfElseAnon).ifelse) {
-    const {
-      ifelse: [test, whenTruthy, whenFalsy]
-    } = expr as AlgolValIfElseAnon;
-    return `(${parser.bool(test)} ? ${parser.val(whenTruthy)} : ${parser.val(
-      whenFalsy
-    )})`;
   }
 }

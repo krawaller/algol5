@@ -2,7 +2,13 @@ import {
   FullDefAnon,
   AlgolValAnon,
   AlgolValMinusAnon,
-  AlgolValValueAnon
+  AlgolValValueAnon,
+  AlgolValPlayerCaseAnon,
+  AlgolValIfActionElseAnon,
+  AlgolValProdAnon,
+  AlgolValTurnVarAnon,
+  AlgolValBattleVarAnon,
+  AlgolValIndexListAnon
 } from "../../../types";
 
 import makeParser from "./";
@@ -37,5 +43,39 @@ export default function parseVal(
   if ((expr as AlgolValValueAnon).value) {
     const { value: innerExpr } = expr as AlgolValValueAnon;
     return parser.val(innerExpr);
+  }
+  if ((expr as AlgolValPlayerCaseAnon).playercase) {
+    const {
+      playercase: [firstPlr, secondPlr]
+    } = expr as AlgolValPlayerCaseAnon;
+    return parser.val(player === 1 ? firstPlr : secondPlr);
+  }
+  if ((expr as AlgolValIfActionElseAnon).ifactionelse) {
+    const {
+      ifactionelse: [ifact, thenVal, elseVal]
+    } = expr as AlgolValIfActionElseAnon;
+    return parser.val(ifact === action ? thenVal : elseVal);
+  }
+  if ((expr as AlgolValProdAnon).prod) {
+    const { prod: factors } = expr as AlgolValProdAnon;
+    return `(${factors.map(parser.val).join(" * ")})`;
+  }
+  if ((expr as AlgolValTurnVarAnon).turnvar) {
+    const { turnvar: name } = expr as AlgolValTurnVarAnon;
+    return `TURNVARS[${parser.val(name)}]`;
+  }
+  if ((expr as AlgolValBattleVarAnon).battlevar) {
+    const { battlevar: name } = expr as AlgolValBattleVarAnon;
+    return `BATTLEVARS[${parser.val(name)}]`;
+  }
+  if ((expr as AlgolValIndexListAnon).indexlist) {
+    const {
+      indexlist: [idx, ...items]
+    } = expr as AlgolValIndexListAnon;
+    const parsedIdx = parser.val(idx);
+    if (typeof parsedIdx === "number") {
+      return parser.val(items[parsedIdx]);
+    }
+    return `[${items.map(parser.val).join(", ")}][${parsedIdx}]`;
   }
 }

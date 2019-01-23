@@ -16,10 +16,28 @@ const tests: ParserTest<AlgolValAnon>[] = [
           { expr: { value: { value: { value: 5 } } }, res: 5 },
           { expr: 7, res: 7 },
           { expr: { minus: [6, 3, { value: 2 }] }, res: 1 },
-          { expr: { playercase: [{ playercase: [777, 2] }, 666] }, res: 777 }
+          { expr: { playercase: [{ playercase: [777, 2] }, 666] }, res: 777 },
+          { expr: { ifactionelse: ["someaction", 1, 666] }, res: 1 },
+          {
+            expr: { ifactionelse: ["otheraction", 1, { value: 666 }] },
+            res: 666
+          },
+          { expr: { prod: [{ minus: [5, 3] }, 5, 3] }, res: 30 },
+          {
+            expr: { indexlist: [{ minus: [2, 1] }, "foo", { value: "bar" }] },
+            res: "bar"
+          }
         ]
       },
-      { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] }
+      { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] },
+      {
+        context: { TURNVARS: { foo: 666 } },
+        tests: [{ expr: { turnvar: { value: "foo" } }, res: 666 }]
+      },
+      {
+        context: { BATTLEVARS: { foo: 666 } },
+        tests: [{ expr: { battlevar: { value: "foo" } }, res: 666 }]
+      }
     ]
   }
 ];

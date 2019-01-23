@@ -41,6 +41,10 @@ const tests: ParserTest<AlgolValAnon>[] = [
       {
         context: { BATTLEVARS: { foo: 666 } },
         tests: [{ expr: { battlevar: { value: "foo" } }, res: 666 }]
+      },
+      {
+        context: { MARKS: { somemark: "wee" } },
+        tests: [{ expr: { sizeof: { single: "somemark" } }, res: 1 }]
       }
     ]
   },

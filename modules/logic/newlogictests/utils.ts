@@ -30,7 +30,7 @@ export function run<T>(parserTests: ParserTest<T>[], type, t) {
       tests.forEach(({ expr, res }) => {
         const code = parser(expr);
         const result = _eval(`module.exports = ${code};`, context);
-        t.equal(
+        t[typeof res === "object" ? "deepEqual" : "equal"](
           result,
           res,
           `Evaluated ${JSON.stringify(expr)} to ${JSON.stringify(res)}`

@@ -6,7 +6,8 @@ import {
   AlgolValProdAnon,
   AlgolValTurnVarAnon,
   AlgolValBattleVarAnon,
-  AlgolValIndexListAnon
+  AlgolValIndexListAnon,
+  AlgolValSizeOfAnon
 } from "../../../types";
 
 import makeParser from "./";
@@ -67,5 +68,9 @@ export default function parseVal(
       return parser.val(items[parsedIdx]);
     }
     return `[${items.map(parser.val).join(", ")}][${parsedIdx}]`;
+  }
+  if ((expr as AlgolValSizeOfAnon).sizeof) {
+    const { sizeof: set } = expr as AlgolValSizeOfAnon;
+    return `Object.keys(${parser.set(set)}).length`;
   }
 }

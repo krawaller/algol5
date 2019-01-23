@@ -32,6 +32,10 @@ export default function parseVal(
     switch (expr[0]) {
       case "dir":
         return "DIR";
+      case "player":
+        return player;
+      case "otherplayer":
+        return player === 1 ? 2 : 1;
       default:
         return undefined;
     }

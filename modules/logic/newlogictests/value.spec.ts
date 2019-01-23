@@ -13,6 +13,8 @@ const tests: ParserTest<AlgolValAnon>[] = [
         context: {},
         tests: [
           { expr: "foo", res: "foo" },
+          { expr: ["player"], res: 1 },
+          { expr: ["otherplayer"], res: 2 },
           { expr: { value: { value: { value: 5 } } }, res: 5 },
           { expr: 7, res: 7 },
           { expr: { minus: [6, 3, { value: 2 }] }, res: 1 },
@@ -37,6 +39,21 @@ const tests: ParserTest<AlgolValAnon>[] = [
       {
         context: { BATTLEVARS: { foo: 666 } },
         tests: [{ expr: { battlevar: { value: "foo" } }, res: 666 }]
+      }
+    ]
+  },
+  {
+    def: emptyFullDef,
+    player: 2,
+    action: "someaction",
+    contexts: [
+      {
+        context: {},
+        tests: [
+          { expr: ["player"], res: 2 },
+          { expr: ["otherplayer"], res: 1 },
+          { expr: { playercase: [666, { value: "yes" }] }, res: "yes" }
+        ]
       }
     ]
   }

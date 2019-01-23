@@ -1,6 +1,7 @@
-import { FullDefAnon, AlgolValAnon } from "../../../types";
+import { FullDefAnon, AlgolValAnon, AlgolBoolAnon } from "../../../types";
 
 import parseValue from "./value";
+import parseBool from "./bool";
 
 export default function makeParser(
   gameDef: FullDefAnon,
@@ -10,7 +11,9 @@ export default function makeParser(
 ) {
   const parsers = {
     val: (expr: AlgolValAnon): string | number =>
-      parseValue(gameDef, player, action, expr, from)
+      parseValue(gameDef, player, action, expr, from),
+    bool: (expr: AlgolBoolAnon): string | boolean =>
+      parseBool(gameDef, player, action, expr, from)
   };
   return parsers;
 }

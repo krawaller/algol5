@@ -97,11 +97,31 @@ interface AlgolBoolCmndAvailable<
 }
 
 interface AlgolBoolTruthy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
-  truthy: AlgolVal<any, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  truthy: AlgolVal<
+    string | number,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >;
 }
 
 interface AlgolBoolFalsy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
-  falsy: AlgolVal<any, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  falsy: AlgolVal<
+    string | number,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >;
 }
 
 interface AlgolBoolMarkAvailable<

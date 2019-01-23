@@ -193,3 +193,16 @@ interface BoolPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
     Turnp,
     Turnv
   > {}
+
+// ---------------------------
+
+export type AlgolBoolAnon = AlgolBool<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;

@@ -1,9 +1,6 @@
-import {
-  FullDefAnon,
-  AlgolValAnon,
-  AlgolValMinusAnon,
-  AlgolValValueAnon
-} from "../../../types";
+import { FullDefAnon, AlgolValAnon } from "../../../types";
+
+import parseValue from "./value";
 
 export default function makeParser(
   gameDef: FullDefAnon,
@@ -12,29 +9,8 @@ export default function makeParser(
   from?: string
 ) {
   const parsers = {
-    val: (expr: AlgolValAnon): string | number => {
-      if (typeof expr === "string") {
-        return `"${expr}"`;
-      }
-      if (typeof expr === "number") {
-        return expr;
-      }
-      if (Array.isArray(expr)) {
-        const cmnd = expr[0];
-        if (cmnd === "dir") {
-          return "DIR";
-        }
-        return undefined;
-      }
-      if ((expr as AlgolValMinusAnon).minus) {
-        const { minus: operands } = expr as AlgolValMinusAnon;
-        return `(${operands.map(parsers.val).join(" - ")})`;
-      }
-      if ((expr as AlgolValValueAnon).value) {
-        const { value: innerExpr } = expr as AlgolValValueAnon;
-        return parsers.val(innerExpr);
-      }
-    }
+    val: (expr: AlgolValAnon): string | number =>
+      parseValue(gameDef, player, action, expr, from)
   };
   return parsers;
 }

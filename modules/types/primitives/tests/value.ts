@@ -12,11 +12,22 @@ type TestVal = AlgolVal<
   "myturnv"
 >;
 
+type TestNumberVal = AlgolVal<
+  number,
+  "mybattlep",
+  "mybattlev",
+  "mycmnd",
+  "mygrid",
+  "mylayer",
+  "mymark",
+  "myturnp",
+  "myturnv"
+>;
+
 const tests: TestVal[] = [
   "FOO",
   "BAR",
   { value: "FOO" },
-  { value: 5 },
   { value: { value: "BAR" } },
   { ifelse: [["true"], "FOO", { value: "BAR" }] },
   {
@@ -28,10 +39,32 @@ const tests: TestVal[] = [
   { turnvar: "myturnv" },
   { idat: "mymark" },
   ["loopid"],
-  ["player"],
   { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] },
   { indexlist: [["dir"], "FOO", 1, 2, 3, "gnurp"] },
   { if: [["true"], "FOO"] },
   { ifplayer: [1, "FOO"] },
-  { pos: "mymark" }
+  { pos: "mymark" },
+  { sizeof: "mylayer" },
+  { harvest: ["mylayer", { value: "someProp" }] },
+  { turnvar: "myturnv" },
+  { battlevar: "mybattlev" },
+  { gridat: ["mygrid", "mymark"] },
+  { gridin: ["mygrid", "mylayer"] },
+  ["dir"]
+  // TODO - countsofar
+];
+
+const tests2: TestNumberVal[] = [
+  5,
+  ["player"],
+  ["max"],
+  ["neighbourcount"],
+  ["totalcount"],
+  ["walklength"],
+  ["turn"],
+  ["step"],
+  ["otherplayer"],
+  { sum: [3, 4, ["totalcount"]] },
+  { prod: [3, 4, ["totalcount"]] },
+  { minus: [3, 4, ["totalcount"]] }
 ];

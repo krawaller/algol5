@@ -1,7 +1,7 @@
 import { IfElse, PlayerCase, IfActionElse, If, IfPlayer } from "./_logical";
-import { SetPosVal, ValVal } from "./_signatures";
+import { SetPosVal, ValVal, SetVal } from "./_signatures";
 import { AlgolPos } from "./pos";
-import { AlgolNumber } from "./number";
+import { AlgolSet } from "./set";
 
 export type AlgolValAnon = AlgolVal<
   string | number,
@@ -21,7 +21,14 @@ export type AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | ["dir"]
   | ["stopreason"]
   | ["loopid"]
-  | AlgolNumber<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | ["player"]
+  | ["otherplayer"]
+  | ["turn"]
+  | ["totalcount"]
+  | ["neighbourcount"]
+  | ["walklength"]
+  | ["max"]
+  | ["step"]
   | ValRead<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | ValBattleVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | ValTurnVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
@@ -29,6 +36,13 @@ export type AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | ValPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | ValRelDir<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | ValIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | ValGridAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | ValGridIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | ValSizeOf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | ValHarvest<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | ValSum<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | ValProd<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | ValMinus<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | ValIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | ValIfActionElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | ValPlayerCase<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
@@ -85,6 +99,50 @@ interface ValIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
     Turnp,
     Turnv
   >[];
+}
+
+interface ValGridIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+  gridin: [
+    AlgolVal<Grid, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
+interface ValGridAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+  gridat: [
+    AlgolVal<Grid, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
+interface ValSizeOf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+  sizeof: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+}
+
+interface ValHarvest<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+  harvest: SetVal<
+    string | number,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >;
+}
+
+interface ValSum<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+  sum: AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+}
+
+interface ValProd<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+  prod: AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+}
+
+interface ValMinus<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+  minus: AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
 }
 
 interface ValIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

@@ -1,5 +1,5 @@
 import { DrawDef } from "./draw";
-import { AlgolPos, AlgolSet, AlgolNumber, AlgolVal, AlgolDirs } from "../../";
+import { AlgolPos, AlgolSet, AlgolVal, AlgolDirs } from "../../";
 
 export type WalkerDefAnon = WalkerDef<
   string,

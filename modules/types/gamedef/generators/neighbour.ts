@@ -1,12 +1,5 @@
 import { DrawDef } from "./draw";
-import {
-  AlgolPos,
-  AlgolSet,
-  AlgolNumber,
-  AlgolBool,
-  AlgolVal,
-  AlgolDirs
-} from "../../";
+import { AlgolPos, AlgolSet, AlgolBool, AlgolVal, AlgolDirs } from "../../";
 
 export type NeighbourDef<
   ArtifactLayer,

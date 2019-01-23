@@ -15,7 +15,7 @@ const tests: ParserTest<AlgolValAnon>[] = [
           { expr: "foo", res: "foo" },
           { expr: { value: { value: { value: 5 } } }, res: 5 },
           { expr: 7, res: 7 },
-          { expr: { minus: [6, 3, 2] }, res: 1 }
+          { expr: { minus: [6, 3, { value: 2 }] }, res: 1 }
         ]
       },
       { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] }

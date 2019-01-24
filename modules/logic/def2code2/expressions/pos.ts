@@ -1,4 +1,9 @@
-import { FullDefAnon, AlgolPosAnon, AlgolPosMarkAnon } from "../../../types";
+import {
+  FullDefAnon,
+  AlgolPosAnon,
+  AlgolPosMarkAnon,
+  AlgolPosOnlyInAnon
+} from "../../../types";
 
 import makeParser from "./";
 
@@ -16,6 +21,10 @@ export default function parsePos(
   }
   if (Array.isArray(expr)) {
     switch (expr[0]) {
+      case "start":
+        return "STARTPOS";
+      case "target":
+        return "POS";
       default:
         return undefined;
     }
@@ -23,5 +32,9 @@ export default function parsePos(
   if ((expr as AlgolPosMarkAnon).mark) {
     const { mark: name } = expr as AlgolPosMarkAnon;
     return `MARKS[${parser.val(name)}]`;
+  }
+  if ((expr as AlgolPosOnlyInAnon).onlyin) {
+    const { onlyin: set } = expr as AlgolPosOnlyInAnon;
+    return `Object.keys(${parser.set(set)})[0]`;
   }
 }

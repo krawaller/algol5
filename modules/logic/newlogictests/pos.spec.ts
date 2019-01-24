@@ -16,8 +16,17 @@ const tests: ParserTest<AlgolPosAnon>[] = [
           {
             expr: { mark: { playercase: ["myothermark", "mymark"] } },
             res: "q5"
-          }
+          },
+          { expr: { onlyin: { single: "mymark" } }, res: "h9" }
         ]
+      },
+      {
+        context: { POS: "i2" },
+        tests: [{ expr: ["target"], res: "i2" }]
+      },
+      {
+        context: { STARTPOS: "c4" },
+        tests: [{ expr: ["start"], res: "c4" }]
       }
     ]
   }

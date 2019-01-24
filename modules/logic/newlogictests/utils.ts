@@ -2,6 +2,9 @@ import { FullDefAnon } from "../../types";
 import makeParser from "../def2code2/expressions";
 import * as _eval from "eval";
 
+export const truthy = "TRUTHY";
+export const falsy = "FALSY";
+
 export type ParserTest<T> = {
   def: FullDefAnon;
   player: 1 | 2;
@@ -17,6 +20,7 @@ export type ContextTest<T> = {
 export type ExpressionTest<T> = {
   expr: T;
   res: any;
+  debug?: boolean;
 };
 
 export function run<T>(parserTests: ParserTest<T>[], type, t) {
@@ -27,14 +31,32 @@ export function run<T>(parserTests: ParserTest<T>[], type, t) {
         parserTest.player,
         parserTest.action
       )[type];
-      tests.forEach(({ expr, res }) => {
+      tests.forEach(({ expr, res, debug }) => {
         const code = parser(expr);
         const result = _eval(`module.exports = ${code};`, context);
+        const processedResult =
+          res === truthy || res === falsy ? !!result : result;
+        const processedComparator =
+          res === truthy ? true : res === falsy ? false : res;
         t[typeof res === "object" ? "deepEqual" : "equal"](
-          result,
-          res,
+          processedResult,
+          processedComparator,
           `Evaluated ${JSON.stringify(expr)} to ${JSON.stringify(res)}`
         );
+        if (debug) {
+          console.log(
+            "CODE",
+            code,
+            "exp",
+            res,
+            "pexp",
+            processedComparator,
+            "result",
+            result,
+            "presult",
+            processedResult
+          );
+        }
       });
     })
   );

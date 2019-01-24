@@ -1,5 +1,5 @@
 import { AlgolBoolAnon } from "../../types";
-import { emptyFullDef, run, ParserTest } from "./utils";
+import { emptyFullDef, run, ParserTest, truthy, falsy } from "./utils";
 
 import * as test from "tape";
 
@@ -71,7 +71,23 @@ const tests: ParserTest<AlgolBoolAnon>[] = [
           { expr: { samepos: ["firstmark", "firstmark"] }, res: true },
           { expr: { higher: ["firstmark", "secondmark"] }, res: true },
           { expr: { higher: ["firstmark", "firstmark"] }, res: false },
-          { expr: { higher: ["secondmark", "firstmark"] }, res: false }
+          { expr: { higher: ["secondmark", "firstmark"] }, res: false },
+          {
+            expr: { anyat: [{ single: "firstmark" }, "secondmark"] },
+            res: falsy
+          },
+          {
+            expr: { anyat: [{ single: "firstmark" }, "firstmark"] },
+            res: truthy
+          },
+          {
+            expr: { noneat: [{ single: "firstmark" }, "secondmark"] },
+            res: truthy
+          },
+          {
+            expr: { noneat: [{ single: "firstmark" }, "firstmark"] },
+            res: falsy
+          }
         ]
       },
       {

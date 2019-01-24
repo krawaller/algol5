@@ -10,7 +10,9 @@ import {
   AlgolBoolCmndAvailableAnon,
   AlgolBoolMarkAvailableAnon,
   AlgolBoolTruthyAnon,
-  AlgolBoolFalsyAnon
+  AlgolBoolFalsyAnon,
+  AlgolBoolAnyAtAnon,
+  AlgolBoolNoneAtAnon
 } from "../../../types";
 
 import { pos2coords } from "../../../common";
@@ -91,5 +93,17 @@ export default function parseVal(
   if ((expr as AlgolBoolFalsyAnon).falsy) {
     const { falsy: val } = expr as AlgolBoolFalsyAnon;
     return `!${parser.val(val)}`;
+  }
+  if ((expr as AlgolBoolAnyAtAnon).anyat) {
+    const {
+      anyat: [set, pos]
+    } = expr as AlgolBoolAnyAtAnon;
+    return `${parser.set(set)}[${parser.pos(pos)}]`;
+  }
+  if ((expr as AlgolBoolNoneAtAnon).noneat) {
+    const {
+      noneat: [set, pos]
+    } = expr as AlgolBoolNoneAtAnon;
+    return `!${parser.set(set)}[${parser.pos(pos)}]`;
   }
 }

@@ -1,4 +1,4 @@
-import { IfElse, IfActionElse, PlayerCase } from "./_logical";
+import { IfElse, IfActionElse, PlayerCase, IndexList } from "./_logical";
 import { AlgolVal } from "./value";
 import { AlgolPos } from "./pos";
 
@@ -12,7 +12,8 @@ export type AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolSetSubtract<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolSetPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolSetIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 
 interface AlgolSetLayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   layer: AlgolVal<Layer, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
@@ -75,6 +76,19 @@ interface AlgolSetIfActionElse<
 
 interface AlgolSetPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
+    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  > {}
+
+interface AlgolSetIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  extends IndexList<
     AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -180,6 +194,16 @@ export type AlgolSetIfActionElseAnon = AlgolSetIfActionElse<
   string
 >;
 export type AlgolSetPlayerCaseAnon = AlgolSetPlayerCase<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolSetIndexListAnon = AlgolSetIndexList<
   string,
   string,
   string,

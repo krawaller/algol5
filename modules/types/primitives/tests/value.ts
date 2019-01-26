@@ -40,7 +40,7 @@ const tests: TestVal[] = [
   { idat: "mymark" },
   ["loopid"],
   { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] },
-  { indexlist: [["dir"], "FOO", 1, 2, 3, "gnurp"] },
+  { indexlist: [["dir"], "FOO", "BAR", "FOO", { value: "FOO" }] },
   { if: [["true"], "FOO"] },
   { ifplayer: [1, "FOO"] },
   { pos: "mymark" },

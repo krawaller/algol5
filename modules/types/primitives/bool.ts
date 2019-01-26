@@ -1,4 +1,4 @@
-import { IfElse, IfActionElse, PlayerCase } from "./_logical";
+import { IfElse, IfActionElse, PlayerCase, IndexList } from "./_logical";
 import { PosPos, SetSet, SetPos, ValVal, NumNum } from "./_signatures";
 import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
@@ -27,7 +27,8 @@ export type AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolBoolFalsy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolBoolIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolBoolIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolBoolPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolBoolIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 
 interface AlgolBoolNot<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   not: AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
@@ -230,6 +231,19 @@ interface AlgolBoolIfActionElse<
 
 interface AlgolBoolPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   extends PlayerCase<
+    AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  > {}
+
+interface AlgolBoolIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  extends IndexList<
     AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -465,6 +479,16 @@ export type AlgolBoolIfActionElseAnon = AlgolBoolIfActionElse<
   string
 >;
 export type AlgolBoolPlayerCaseAnon = AlgolBoolPlayerCase<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolBoolIndexListAnon = AlgolBoolIndexList<
   string,
   string,
   string,

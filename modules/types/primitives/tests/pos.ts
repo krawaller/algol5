@@ -21,5 +21,6 @@ const tests: TestPos[] = [
   { mark: { value: "mymark" } },
   { playercase: ["mymark", { mark: "mymark" }] },
   { ifactionelse: ["mycmnd", "mymark", { mark: "mymark" }] },
-  { onlyin: "mylayer" }
+  { onlyin: "mylayer" },
+  { indexlist: [["dir"], "mymark", { mark: "mymark" }] }
 ];

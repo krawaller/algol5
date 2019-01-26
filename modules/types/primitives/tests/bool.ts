@@ -48,5 +48,6 @@ const tests: TestBool[] = [
   { valinlist: ["FOO", 5, "BAR", { read: ["mylayer", "mymark", "someProp"] }] },
   { morethan: [3, 5] },
   { truthy: "foo" },
-  { falsy: "foo" }
+  { falsy: "foo" },
+  { indexlist: [["dir"], ["false"], ["true"]] }
 ];

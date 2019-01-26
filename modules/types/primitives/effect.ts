@@ -1,4 +1,4 @@
-import { IfElse, IfActionElse, PlayerCase, If } from "./_logical";
+import { IfElse, IfActionElse, PlayerCase, If, IndexList } from "./_logical";
 import { PosPos, SetSet, SetPos, ValVal, NumNum } from "./_signatures";
 import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
@@ -35,7 +35,8 @@ export type AlgolEffect<
   | EffectIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | EffectIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | EffectIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | EffectPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
+  | EffectPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | EffectIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
 
 interface EffectMoveAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   moveat: PosPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
@@ -284,6 +285,29 @@ interface EffectPlayerCase<
   Unit
 >
   extends PlayerCase<
+    AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  > {}
+
+interface EffectIndexList<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+>
+  extends IndexList<
     AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,

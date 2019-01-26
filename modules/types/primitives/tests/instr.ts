@@ -19,5 +19,6 @@ const tests: TestInstruction[] = [
   { pos: "mymark" },
   { value: { minus: [{ battlevar: "mybattlev" }, 4] } },
   { nameat: "mymark" },
-  { pluralize: [{ sizeof: "mylayer" }, "foo", "foos"] }
+  { pluralize: [{ sizeof: "mylayer" }, "foo", "foos"] },
+  { indexlist: [["dir"], "gnurp", { nameat: "mymark" }] }
 ];

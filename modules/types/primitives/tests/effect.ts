@@ -46,5 +46,12 @@ const tests: TestEffect[] = [
   { setat: ["mymark", "someprop", { turnvar: "myturnv" }] },
   { setin: ["mylayer", "someprop", { turnvar: "myturnv" }] },
   { setid: [["loopid"], "group", "myunit"] },
-  { multi: [{ killat: "mymark" }, { stompat: ["mymark", "mymark"] }] }
+  { multi: [{ killat: "mymark" }, { stompat: ["mymark", "mymark"] }] },
+  {
+    indexlist: [
+      ["dir"],
+      { killat: "mymark" },
+      { stompat: ["mymark", "mymark"] }
+    ]
+  }
 ];

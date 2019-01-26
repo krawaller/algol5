@@ -17,5 +17,6 @@ const tests: TestDirs[] = [
   ["diag"],
   ["rose"],
   { playercase: [["ortho"], ["diag"]] },
-  { ifelse: [["true"], ["ortho"], ["diag"]] }
+  { ifelse: [["true"], ["ortho"], ["diag"]] },
+  { indexlist: [["dir"], ["ortho"], ["diag"], ["rose"]] }
 ];

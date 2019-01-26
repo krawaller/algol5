@@ -1,4 +1,11 @@
-import { IfElse, PlayerCase, IfActionElse, If, IfPlayer } from "./_logical";
+import {
+  IfElse,
+  PlayerCase,
+  IfActionElse,
+  If,
+  IfPlayer,
+  IndexList
+} from "./_logical";
 import { SetPosVal, ValVal, SetVal } from "./_signatures";
 import { AlgolPos } from "./pos";
 import { AlgolSet } from "./set";
@@ -23,7 +30,6 @@ export type AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolValIdAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValRelDir<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValGridAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValGridIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValSizeOf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
@@ -35,7 +41,8 @@ export type AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolValIfActionElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValPlayerCase<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValIfPlayer<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolValIfPlayer<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolValIndexList<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 
 interface AlgolValValue<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   value: AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
@@ -73,20 +80,6 @@ interface AlgolValRelDir<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
     Turnp,
     Turnv
   >;
-}
-
-interface AlgolValIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
-  indexlist: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >[];
 }
 
 interface AlgolValGridIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
@@ -228,6 +221,29 @@ interface AlgolValIfPlayer<
     Turnv
   > {}
 
+interface AlgolValIndexList<
+  _T,
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+>
+  extends IndexList<
+    AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  > {}
+
 // --------- Anon variants ----------
 
 export type AlgolValValueAnon = AlgolValValue<
@@ -305,16 +321,6 @@ export type AlgolValPosAnon = AlgolValPos<
   string
 >;
 export type AlgolValRelDirAnon = AlgolValRelDir<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValIndexListAnon = AlgolValIndexList<
   string,
   string,
   string,
@@ -442,6 +448,17 @@ export type AlgolValIfAnon<_T = string | number> = AlgolValIf<
 >;
 export type AlgolValIfPlayerAnon<_T = string | number> = AlgolValIfPlayer<
   _T,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolValIndexListAnon = AlgolValIndexList<
+  string | number,
   string,
   string,
   string,

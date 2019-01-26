@@ -1,9 +1,15 @@
-import { IfElse, IfActionElse, PlayerCase, IfPlayer, If } from "./_logical";
+import {
+  IfElse,
+  IfActionElse,
+  PlayerCase,
+  IfPlayer,
+  If,
+  IndexList
+} from "./_logical";
 import { PosPos, SetSet, SetPos, ValVal, NumNum } from "./_signatures";
 import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
 import { AlgolPos } from "./pos";
-import { AlgolNumber } from "./number";
 
 export type AlgolInstrAnon = AlgolInstr<
   string,
@@ -41,7 +47,8 @@ export type AlgolInstr<
   | InstrIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | InstrIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | InstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
+  | InstrPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | InstrIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
 
 interface InstrPluralize<
   Btlp,
@@ -55,7 +62,7 @@ interface InstrPluralize<
   Unit
 > {
   pluralize: [
-    AlgolNumber<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   ];
@@ -165,6 +172,29 @@ interface InstrPlayerCase<
   Unit
 >
   extends PlayerCase<
+    AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  > {}
+
+interface InstrIndexList<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+>
+  extends IndexList<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,

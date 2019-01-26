@@ -146,8 +146,8 @@ export interface AlgolLogicalIndexList<
 
 // --------------------
 
-export type AlgolLogicalAnon = AlgolLogical<
-  string | number,
+export type AlgolLogicalAnon<_T> = AlgolLogical<
+  _T,
   string,
   string,
   string,
@@ -158,8 +158,8 @@ export type AlgolLogicalAnon = AlgolLogical<
   string
 >;
 
-export type AlgolLogicalIfElseAnon = AlgolLogicalIfElse<
-  string | number,
+export type AlgolLogicalIfElseAnon<_T> = AlgolLogicalIfElse<
+  _T,
   string,
   string,
   string,
@@ -170,8 +170,8 @@ export type AlgolLogicalIfElseAnon = AlgolLogicalIfElse<
   string
 >;
 
-export type AlgolLogicalIfAnon = AlgolLogicalIf<
-  string | number,
+export type AlgolLogicalIfAnon<_T> = AlgolLogicalIf<
+  _T,
   string,
   string,
   string,
@@ -182,8 +182,8 @@ export type AlgolLogicalIfAnon = AlgolLogicalIf<
   string
 >;
 
-export type AlgolLogicalPlayerCaseAnon = AlgolLogicalPlayerCase<
-  string | number,
+export type AlgolLogicalPlayerCaseAnon<_T> = AlgolLogicalPlayerCase<
+  _T,
   string,
   string,
   string,
@@ -194,8 +194,8 @@ export type AlgolLogicalPlayerCaseAnon = AlgolLogicalPlayerCase<
   string
 >;
 
-export type AlgolLogicalIfPlayerAnon = AlgolLogicalIfPlayer<
-  string | number,
+export type AlgolLogicalIfPlayerAnon<_T> = AlgolLogicalIfPlayer<
+  _T,
   string,
   string,
   string,
@@ -206,8 +206,8 @@ export type AlgolLogicalIfPlayerAnon = AlgolLogicalIfPlayer<
   string
 >;
 
-export type AlgolLogicalIfActionElseAnon = AlgolLogicalIfActionElse<
-  string | number,
+export type AlgolLogicalIfActionElseAnon<_T> = AlgolLogicalIfActionElse<
+  _T,
   string,
   string,
   string,
@@ -218,8 +218,8 @@ export type AlgolLogicalIfActionElseAnon = AlgolLogicalIfActionElse<
   string
 >;
 
-export type AlgolLogicalIndexListAnon = AlgolLogicalIndexList<
-  string | number,
+export type AlgolLogicalIndexListAnon<_T> = AlgolLogicalIndexList<
+  _T,
   string,
   string,
   string,

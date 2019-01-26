@@ -1,13 +1,13 @@
 {
   "devDependencies": {
-    "@types/node": "^8.0.26",
-    "@types/tape": "^4.2.30",
+    "@types/node": "^10.12.18",
+    "@types/tape": "^4.2.33",
     "fs-extra": "^7.0.1",
-    "prettier": "^1.15.3",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.8.0",
-    "ts-node": "^3.3.0",
-    "typescript": "^2.5.2"
+    "prettier": "^1.16.1",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.2",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.2.4"
   },
   "scripts": {
     "compile": "npx ts-node ./commands/compile $*",

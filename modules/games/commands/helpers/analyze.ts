@@ -4,7 +4,7 @@ import * as path from "path";
 import fake from "./fake";
 
 import { FullDefAnon, typeSignature } from "../../../types";
-import { boardPositions } from "../../../common";
+import { boardPositions, terrainLayerNames } from "../../../common";
 import dateStamp from "./datestamp";
 
 import { defPath } from "./_paths";
@@ -56,24 +56,6 @@ function getArtifactLayers(generators = {}) {
   return artifactLayers.filter((l, n) => artifactLayers.indexOf(l) === n);
 }
 
-function getTerrainLayers(terrains = {}) {
-  let terrainLayers = [];
-  const terrainNames = Object.keys(terrains);
-  for (let tname of terrainNames) {
-    const t = terrains[tname];
-    terrainLayers.push(tname);
-    terrainLayers.push("no" + tname);
-    if (!Array.isArray(t)) {
-      if (t[0]) terrainLayers.push("neutral" + tname);
-      if (t[1] || t[2]) {
-        terrainLayers.push("my" + tname);
-        terrainLayers.push("opp" + tname);
-      }
-    }
-  }
-  return terrainLayers;
-}
-
 export default async function analyze(def: FullDefAnon | string) {
   if (typeof def === "string") {
     await fake(def);
@@ -96,7 +78,7 @@ export default async function analyze(def: FullDefAnon | string) {
 
   const unitLayers = units.reduce((mem, u) => mem.concat(ownify(u)), []);
 
-  let terrainLayers = getTerrainLayers(def.board.terrain);
+  let myTerrainLayerNames = terrainLayerNames(def.board); //getTerrainLayers(def.board.terrain);
 
   const artifactLayers = getArtifactLayers(def.generators);
   const generatorNames = Object.keys(generators);
@@ -114,7 +96,9 @@ export default async function analyze(def: FullDefAnon | string) {
   };
 
   const aiTerrainNames = Object.keys(AI.terrain);
-  const aiTerrainLayers = getTerrainLayers(AI.terrain);
+  const aiTerrainLayers = Object.keys(
+    terrainLayerNames({ ...def.board, terrain: AI.terrain })
+  );
   const aiGenerators = Object.keys(AI.generators);
   const aiAspects = Object.keys(AI.aspects);
   const aiGrids = Object.keys(AI.grids);
@@ -157,14 +141,14 @@ export type ${capId}ArtifactLayer = ${
       : "never"
   };
 export type ${capId}TerrainLayer = ${
-    terrainLayers.length
-      ? terrainLayers.map(t => `"${t}"`).join(" | ")
+    myTerrainLayerNames.length
+      ? myTerrainLayerNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
 export type ${capId}Layer = CommonLayer${
     unitLayers.length ? ` | ${capId}UnitLayer` : ""
   }${artifactLayers.length ? ` | ${capId}ArtifactLayer` : ""}${
-    terrainLayers.length ? ` | ${capId}TerrainLayer` : ""
+    myTerrainLayerNames.length ? ` | ${capId}TerrainLayer` : ""
   };
 export type ${capId}BattlePos = any;
 export type ${capId}BattleVar = any;

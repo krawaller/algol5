@@ -39,14 +39,16 @@ export function terrainLayers(board, forplayer?, aiterrain?): any {
   }, {});
   // add no-variants of layers and return
   return Object.keys(terrain).reduce(function(mem, name) {
-    var t = terrain[name];
-    var noname = "no" + name;
-    mem[noname] = {};
-    boardPositions(board).forEach(function(pos) {
-      if (!t[pos]) {
-        mem[noname][pos] = { pos: pos };
-      }
-    });
+    if (!name.match(/^my/) && !name.match(/^opp/)) {
+      var t = terrain[name];
+      var noname = "no" + name;
+      mem[noname] = {};
+      boardPositions(board).forEach(function(pos) {
+        if (!t[pos]) {
+          mem[noname][pos] = { pos: pos };
+        }
+      });
+    }
     return mem;
   }, terrain);
 }

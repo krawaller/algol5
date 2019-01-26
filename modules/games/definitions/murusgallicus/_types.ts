@@ -9,7 +9,7 @@ export type MurusgallicusPhase = "startTurn" | MurusgallicusMark;
 export type MurusgallicusUnitLayer = "towers" | "mytowers" | "neutraltowers" | "opptowers" | "walls" | "mywalls" | "neutralwalls" | "oppwalls";
 export type MurusgallicusGenerator = "findmovetargets" | "findmoveresults" | "findkilltargets";
 export type MurusgallicusArtifactLayer = "movetargets" | "madetowers" | "madewalls" | "killtargets";
-export type MurusgallicusTerrainLayer = "homerow" | "nohomerow" | "myhomerow" | "opphomerow";
+export type MurusgallicusTerrainLayer = "homerow" | "myhomerow" | "opphomerow" | "nohomerow";
 export type MurusgallicusLayer = CommonLayer | MurusgallicusUnitLayer | MurusgallicusArtifactLayer | MurusgallicusTerrainLayer;
 export type MurusgallicusBattlePos = any;
 export type MurusgallicusBattleVar = any;
@@ -40,7 +40,7 @@ export type MurusgallicusAiArtifactLayer = "mymoves" | "oppmoves" | "oppheavythr
 
 export type MurusgallicusAiBrain = "Steve" | "Joe" | "Clive";
 
-export type MurusgallicusAiTerrainLayer = "threatrow" | "nothreatrow" | "mythreatrow" | "oppthreatrow";
+export type MurusgallicusAiTerrainLayer = "0" | "1" | "2" | "3";
 
 export type MurusgallicusAiTerrain = "threatrow";
 

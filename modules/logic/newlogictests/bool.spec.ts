@@ -18,6 +18,10 @@ const tests: ParserTest<AlgolBoolAnon>[] = [
           { expr: { morethan: [{ value: 3 }, { value: 3 }] }, res: false },
           { expr: { morethan: [{ value: 3 }, { value: 2 }] }, res: true },
           {
+            expr: { indexlist: [{ minus: [2, 1] }, ["true"], ["false"]] },
+            res: false
+          },
+          {
             expr: {
               playercase: [{ playercase: [["true"], ["false"]] }, ["false"]]
             },

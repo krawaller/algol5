@@ -59,16 +59,6 @@ export default function parseVal(
     const { battlevar: name } = expr as AlgolValBattleVarAnon;
     return `BATTLEVARS[${parser.val(name)}]`;
   }
-  if ((expr as AlgolValIndexListAnon).indexlist) {
-    const {
-      indexlist: [idx, ...items]
-    } = expr as AlgolValIndexListAnon;
-    const parsedIdx = parser.val(idx);
-    if (typeof parsedIdx === "number") {
-      return parser.val(items[parsedIdx]);
-    }
-    return `[${items.map(parser.val).join(", ")}][${parsedIdx}]`;
-  }
   if ((expr as AlgolValSizeOfAnon).sizeof) {
     const { sizeof: set } = expr as AlgolValSizeOfAnon;
     return `Object.keys(${parser.set(set)}).length`;

@@ -27,5 +27,14 @@ export default function parseLogical(
     return me(player === 1 ? plr1 : plr2);
   }
 
+  if (expression.indexlist) {
+    const [idx, ...opts] = expression.indexlist;
+    const parsedIdx = parse.val(idx);
+    if (typeof parsedIdx === "number") {
+      return me(opts[idx]);
+    }
+    return `[${opts.map(me).join(", ")}][${parsedIdx}]`;
+  }
+
   return parser(gameDef, player, action, expression, from);
 }

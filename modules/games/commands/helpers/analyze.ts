@@ -4,6 +4,7 @@ import * as path from "path";
 import fake from "./fake";
 
 import { FullDefAnon, typeSignature } from "../../../types";
+import { boardPositions } from "../../../common";
 import dateStamp from "./datestamp";
 
 import { defPath } from "./_paths";
@@ -225,6 +226,8 @@ export type ${capId}AiTerrain = ${
       ? aiTerrainNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
+
+export type ${capId}Positions = ${JSON.stringify(boardPositions(def.board))};
 `;
 
   await fs.writeFile(path.join(gameDefPath, "_types.ts"), analysis);

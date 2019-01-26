@@ -1,11 +1,11 @@
 import {
-  IfElse,
-  PlayerCase,
-  IfActionElse,
-  If,
-  IfPlayer,
-  IndexList
-} from "./_logical";
+  AlgolLogicalIfElse,
+  AlgolLogicalPlayerCase,
+  AlgolLogicalIfActionElse,
+  AlgolLogicalIf,
+  AlgolLogicalIfPlayer,
+  AlgolLogicalIndexList
+} from "./logical";
 import { SetPosVal, ValVal, SetVal } from "./_signatures";
 import { AlgolPos } from "./pos";
 import { AlgolSet } from "./set";
@@ -127,7 +127,7 @@ interface AlgolValMinus<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
 }
 
 interface AlgolValIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends IfElse<
+  extends AlgolLogicalIfElse<
     AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -150,7 +150,7 @@ interface AlgolValIfActionElse<
   Turnp,
   Turnv
 >
-  extends IfActionElse<
+  extends AlgolLogicalIfActionElse<
     AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -173,7 +173,7 @@ interface AlgolValPlayerCase<
   Turnp,
   Turnv
 >
-  extends PlayerCase<
+  extends AlgolLogicalPlayerCase<
     AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -186,7 +186,7 @@ interface AlgolValPlayerCase<
   > {}
 
 interface AlgolValIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends If<
+  extends AlgolLogicalIf<
     AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -209,7 +209,7 @@ interface AlgolValIfPlayer<
   Turnp,
   Turnv
 >
-  extends IfPlayer<
+  extends AlgolLogicalIfPlayer<
     AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -232,7 +232,7 @@ interface AlgolValIndexList<
   Turnp,
   Turnv
 >
-  extends IndexList<
+  extends AlgolLogicalIndexList<
     AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,

@@ -1,4 +1,10 @@
-import { IfElse, IfActionElse, PlayerCase, If, IndexList } from "./_logical";
+import {
+  AlgolLogicalIfElse,
+  AlgolLogicalIfActionElse,
+  AlgolLogicalPlayerCase,
+  AlgolLogicalIf,
+  AlgolLogicalIndexList
+} from "./logical";
 import { AlgolVal } from "./value";
 
 export type AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
@@ -19,7 +25,7 @@ interface DirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
 }
 
 interface DirsIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends IfElse<
+  extends AlgolLogicalIfElse<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -32,7 +38,7 @@ interface DirsIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   > {}
 
 interface DirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends If<
+  extends AlgolLogicalIf<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -45,7 +51,7 @@ interface DirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   > {}
 
 interface DirsIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends IfActionElse<
+  extends AlgolLogicalIfActionElse<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -58,7 +64,7 @@ interface DirsIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   > {}
 
 interface DirsPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends PlayerCase<
+  extends AlgolLogicalPlayerCase<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -71,7 +77,7 @@ interface DirsPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   > {}
 
 interface DirsIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends IndexList<
+  extends AlgolLogicalIndexList<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,

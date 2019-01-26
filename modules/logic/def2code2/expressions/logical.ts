@@ -1,4 +1,11 @@
-import { FullDefAnon } from "../../../types";
+import {
+  FullDefAnon,
+  AlgolLogicalAnon,
+  AlgolLogicalIfElseAnon,
+  AlgolLogicalIfActionElseAnon,
+  AlgolLogicalPlayerCaseAnon,
+  AlgolLogicalIndexListAnon
+} from "../../../types";
 import makeParser from "./";
 
 export default function parseLogical(
@@ -6,35 +13,43 @@ export default function parseLogical(
   player: 1 | 2,
   action: string,
   parser,
-  expression,
+  expr: AlgolLogicalAnon,
   from
 ) {
   const parse = makeParser(gameDef, player, action, from);
   const me = expr => parseLogical(gameDef, player, action, parser, expr, from);
 
-  if (expression.ifelse) {
-    const [test, whenTruthy, whenFalsy] = expression.ifelse;
+  if ((expr as AlgolLogicalIfElseAnon).ifelse) {
+    const [
+      test,
+      whenTruthy,
+      whenFalsy
+    ] = (expr as AlgolLogicalIfElseAnon).ifelse;
     return `(${parse.bool(test)} ? ${me(whenTruthy)} : ${me(whenFalsy)})`;
   }
 
-  if (expression.ifactionelse) {
-    const [testAction, whenYes, whenNo] = expression.ifactionelse;
+  if ((expr as AlgolLogicalIfActionElseAnon).ifactionelse) {
+    const [
+      testAction,
+      whenYes,
+      whenNo
+    ] = (expr as AlgolLogicalIfActionElseAnon).ifactionelse;
     return me(testAction === action ? whenYes : whenNo);
   }
 
-  if (expression.playercase) {
-    const [plr1, plr2] = expression.playercase;
+  if ((expr as AlgolLogicalPlayerCaseAnon).playercase) {
+    const [plr1, plr2] = (expr as AlgolLogicalPlayerCaseAnon).playercase;
     return me(player === 1 ? plr1 : plr2);
   }
 
-  if (expression.indexlist) {
-    const [idx, ...opts] = expression.indexlist;
+  if ((expr as AlgolLogicalIndexListAnon).indexlist) {
+    const [idx, ...opts] = (expr as AlgolLogicalIndexListAnon).indexlist;
     const parsedIdx = parse.val(idx);
     if (typeof parsedIdx === "number") {
-      return me(opts[idx]);
+      return me(opts[parsedIdx]);
     }
     return `[${opts.map(me).join(", ")}][${parsedIdx}]`;
   }
 
-  return parser(gameDef, player, action, expression, from);
+  return parser(gameDef, player, action, expr, from);
 }

@@ -1,4 +1,9 @@
-import { IfElse, IfActionElse, PlayerCase, IndexList } from "./_logical";
+import {
+  AlgolLogicalIfElse,
+  AlgolLogicalIfActionElse,
+  AlgolLogicalPlayerCase,
+  AlgolLogicalIndexList
+} from "./logical";
 import { AlgolVal } from "./value";
 import { AlgolSet } from "./set";
 
@@ -32,7 +37,7 @@ interface AlgolPosOnlyIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
 }
 
 interface AlgolPosIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends IfElse<
+  extends AlgolLogicalIfElse<
     AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -54,7 +59,7 @@ interface AlgolPosIfActionElse<
   Turnp,
   Turnv
 >
-  extends IfActionElse<
+  extends AlgolLogicalIfActionElse<
     AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -67,7 +72,7 @@ interface AlgolPosIfActionElse<
   > {}
 
 interface AlgolPosPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends PlayerCase<
+  extends AlgolLogicalPlayerCase<
     AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -80,7 +85,7 @@ interface AlgolPosPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   > {}
 
 interface AlgolPosIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends IndexList<
+  extends AlgolLogicalIndexList<
     AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,

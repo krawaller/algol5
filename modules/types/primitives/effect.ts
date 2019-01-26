@@ -1,5 +1,11 @@
-import { IfElse, IfActionElse, PlayerCase, If, IndexList } from "./_logical";
-import { PosPos, SetSet, SetPos, ValVal, NumNum } from "./_signatures";
+import {
+  AlgolLogicalIfElse,
+  AlgolLogicalIfActionElse,
+  AlgolLogicalPlayerCase,
+  AlgolLogicalIf,
+  AlgolLogicalIndexList
+} from "./logical";
+import { PosPos, SetSet, SetPos, ValVal } from "./_signatures";
 import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
 import { AlgolPos } from "./pos";
@@ -225,7 +231,7 @@ interface EffectSpawnIn<
 }
 
 interface EffectIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  extends IfElse<
+  extends AlgolLogicalIfElse<
     AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -238,7 +244,7 @@ interface EffectIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   > {}
 
 interface EffectIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  extends If<
+  extends AlgolLogicalIf<
     AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -261,7 +267,7 @@ interface EffectIfActionElse<
   Turnv,
   Unit
 >
-  extends IfActionElse<
+  extends AlgolLogicalIfActionElse<
     AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -284,7 +290,7 @@ interface EffectPlayerCase<
   Turnv,
   Unit
 >
-  extends PlayerCase<
+  extends AlgolLogicalPlayerCase<
     AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -307,7 +313,7 @@ interface EffectIndexList<
   Turnv,
   Unit
 >
-  extends IndexList<
+  extends AlgolLogicalIndexList<
     AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,

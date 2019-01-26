@@ -1,5 +1,10 @@
-import { IfElse, IfActionElse, PlayerCase, IndexList } from "./_logical";
-import { PosPos, SetSet, SetPos, ValVal, NumNum } from "./_signatures";
+import {
+  AlgolLogicalIfElse,
+  AlgolLogicalIfActionElse,
+  AlgolLogicalPlayerCase,
+  AlgolLogicalIndexList
+} from "./logical";
+import { PosPos, SetSet, SetPos, ValVal } from "./_signatures";
 import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
 
@@ -177,7 +182,17 @@ interface AlgolBoolDifferent<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
 }
 
 interface AlgolBoolMoreThan<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
-  morethan: NumNum<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  morethan: ValVal<
+    string | number,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >;
 }
 
 interface AlgolBoolValInList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
@@ -195,7 +210,7 @@ interface AlgolBoolValInList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
 }
 
 interface AlgolBoolIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends IfElse<
+  extends AlgolLogicalIfElse<
     AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -217,7 +232,7 @@ interface AlgolBoolIfActionElse<
   Turnp,
   Turnv
 >
-  extends IfActionElse<
+  extends AlgolLogicalIfActionElse<
     AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -230,7 +245,7 @@ interface AlgolBoolIfActionElse<
   > {}
 
 interface AlgolBoolPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends PlayerCase<
+  extends AlgolLogicalPlayerCase<
     AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,
@@ -243,7 +258,7 @@ interface AlgolBoolPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   > {}
 
 interface AlgolBoolIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends IndexList<
+  extends AlgolLogicalIndexList<
     AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,

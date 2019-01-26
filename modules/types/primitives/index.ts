@@ -1,3 +1,4 @@
+export * from "./logical";
 export * from "./bool";
 export * from "./pos";
 export * from "./set";

@@ -1,12 +1,12 @@
 import {
-  IfElse,
-  IfActionElse,
-  PlayerCase,
-  IfPlayer,
-  If,
-  IndexList
-} from "./_logical";
-import { PosPos, SetSet, SetPos, ValVal, NumNum } from "./_signatures";
+  AlgolLogicalIfElse,
+  AlgolLogicalIfActionElse,
+  AlgolLogicalPlayerCase,
+  AlgolLogicalIfPlayer,
+  AlgolLogicalIf,
+  AlgolLogicalIndexList
+} from "./logical";
+import { PosPos, SetSet, SetPos, ValVal } from "./_signatures";
 import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
 import { AlgolPos } from "./pos";
@@ -99,7 +99,7 @@ interface InstrLine<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit> {
 }
 
 interface InstrIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  extends IfPlayer<
+  extends AlgolLogicalIfPlayer<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -112,7 +112,7 @@ interface InstrIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   > {}
 
 interface InstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  extends If<
+  extends AlgolLogicalIf<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -125,7 +125,7 @@ interface InstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   > {}
 
 interface InstrIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  extends IfElse<
+  extends AlgolLogicalIfElse<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -148,7 +148,7 @@ interface InstrIfActionElse<
   Turnv,
   Unit
 >
-  extends IfActionElse<
+  extends AlgolLogicalIfActionElse<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -171,7 +171,7 @@ interface InstrPlayerCase<
   Turnv,
   Unit
 >
-  extends PlayerCase<
+  extends AlgolLogicalPlayerCase<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,
@@ -194,7 +194,7 @@ interface InstrIndexList<
   Turnv,
   Unit
 >
-  extends IndexList<
+  extends AlgolLogicalIndexList<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,

@@ -1,4 +1,4 @@
-import { AlgolPos } from "../pos";
+import { AlgolPos } from "./";
 
 type TestPos = AlgolPos<
   "mybattlep",

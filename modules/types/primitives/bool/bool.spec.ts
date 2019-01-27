@@ -1,4 +1,4 @@
-import { AlgolBool } from "../bool";
+import { AlgolBool } from "../../";
 
 type TestBool = AlgolBool<
   "mybattlep",

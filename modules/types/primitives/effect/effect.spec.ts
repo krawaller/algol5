@@ -1,4 +1,4 @@
-import { AlgolEffect } from "../effect";
+import { AlgolEffect } from "./";
 
 type TestEffect = AlgolEffect<
   "mybattlep",

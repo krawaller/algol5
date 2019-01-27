@@ -1,5 +1,6 @@
+import { AlgolBool } from "./";
+
 import {
-  AlgolBool,
   AlgolBoolNot,
   AlgolBoolAnd,
   AlgolBoolOr,
@@ -19,7 +20,7 @@ import {
   AlgolBoolMoreThan,
   AlgolBoolTruthy,
   AlgolBoolFalsy
-} from "./";
+} from "./bool.interfaces";
 
 type s = string;
 

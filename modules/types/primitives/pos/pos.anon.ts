@@ -1,10 +1,11 @@
+import { AlgolPos } from "./";
+
 import {
-  AlgolPos,
   AlgolPosMark,
   AlgolPosOnlyIn,
   AlgolPosBattlePos,
   AlgolPosTurnPos
-} from "./";
+} from "./pos.interface";
 
 type s = string;
 

@@ -7,8 +7,6 @@ import {
   AlgolLogicalIndexList
 } from "../logical";
 
-// ---------------------------------- Logicals ----------------------------------
-
 export interface AlgolPosIfElse<
   Btlp,
   Btlv,

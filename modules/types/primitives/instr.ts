@@ -6,8 +6,6 @@ import {
   AlgolLogicalIf,
   AlgolLogicalIndexList
 } from "./logical";
-import { PosPos, SetSet, SetPos, ValVal } from "./_signatures";
-import { AlgolSet } from "./set";
 import { AlgolVal } from "./value";
 import { AlgolPos } from "./pos";
 
@@ -37,20 +35,30 @@ export type AlgolInstr<
   | string
   | Cmnd
   | Unit
-  | InstrVal<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | InstrPluralize<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | InstrNameAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | InstrLine<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrOrList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | InstrIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
+  | AlgolInstrVal<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolInstrPluralize<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolInstrNameAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolInstrLine<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrOrList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrIfActionElse<
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv,
+      Unit
+    >
+  | AlgolInstrIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
 
-interface InstrPluralize<
+interface AlgolInstrPluralize<
   Btlp,
   Btlv,
   Cmnd,
@@ -68,7 +76,7 @@ interface InstrPluralize<
   ];
 }
 
-interface InstrVal<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+interface AlgolInstrVal<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   value: AlgolVal<
     string | number,
     Btlp,
@@ -82,23 +90,55 @@ interface InstrVal<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   >;
 }
 
-interface InstrNameAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+interface AlgolInstrNameAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   nameat: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
-interface InstrPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+interface AlgolInstrPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   pos: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
-interface InstrOrList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit> {
+interface AlgolInstrOrList<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+> {
   orlist: AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
 }
 
-interface InstrLine<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit> {
+interface AlgolInstrLine<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+> {
   line: AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
 }
 
-interface InstrIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+// ---------------------------------- Logicals ----------------------------------
+
+interface AlgolInstrIfPlayer<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+>
   extends AlgolLogicalIfPlayer<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
@@ -111,7 +151,7 @@ interface InstrIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
     Turnv
   > {}
 
-interface InstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+interface AlgolInstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   extends AlgolLogicalIf<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
@@ -124,7 +164,17 @@ interface InstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
     Turnv
   > {}
 
-interface InstrIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+interface AlgolInstrIfElse<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+>
   extends AlgolLogicalIfElse<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
@@ -137,7 +187,7 @@ interface InstrIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
     Turnv
   > {}
 
-interface InstrIfActionElse<
+interface AlgolInstrIfActionElse<
   Btlp,
   Btlv,
   Cmnd,
@@ -160,7 +210,7 @@ interface InstrIfActionElse<
     Turnv
   > {}
 
-interface InstrPlayerCase<
+interface AlgolInstrPlayerCase<
   Btlp,
   Btlv,
   Cmnd,
@@ -183,7 +233,7 @@ interface InstrPlayerCase<
     Turnv
   > {}
 
-interface InstrIndexList<
+interface AlgolInstrIndexList<
   Btlp,
   Btlv,
   Cmnd,
@@ -205,3 +255,173 @@ interface InstrIndexList<
     Turnp,
     Turnv
   > {}
+
+// ---------------------------------- Anon versions ----------------------------------
+
+export type AlgolInstrValAnon = AlgolInstrVal<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrPluralizeAnon = AlgolInstrPluralize<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrPosAnon = AlgolInstrPos<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrNameAtAnon = AlgolInstrNameAt<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrLineAnon = AlgolInstrLine<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrOrListAnon = AlgolInstrOrList<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrIfElseAnon = AlgolInstrIfElse<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrIfActionElseAnon = AlgolInstrIfActionElse<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrIfPlayerAnon = AlgolInstrIfPlayer<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrIfAnon = AlgolInstrIf<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrPlayerCaseAnon = AlgolInstrPlayerCase<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolInstrIndexListAnon = AlgolInstrIndexList<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
+// ---------------------------------- Type Guards ----------------------------------
+
+export function isAlgolInstrVal(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrValAnon {
+  return !!(expr as AlgolInstrValAnon).value;
+}
+
+export function isAlgolInstrPluralize(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrPluralizeAnon {
+  return !!(expr as AlgolInstrPluralizeAnon).pluralize;
+}
+
+export function isAlgolInstrPos(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrPosAnon {
+  return !!(expr as AlgolInstrPosAnon).pos;
+}
+
+export function isAlgolInstrNameAt(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrNameAtAnon {
+  return !!(expr as AlgolInstrNameAtAnon).nameat;
+}
+
+export function isAlgolInstrLine(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrLineAnon {
+  return !!(expr as AlgolInstrLineAnon).line;
+}
+
+export function isAlgolInstrOrList(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrOrListAnon {
+  return !!(expr as AlgolInstrOrListAnon).orlist;
+}

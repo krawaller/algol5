@@ -11,20 +11,22 @@ export type AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | ["ortho"]
   | ["diag"]
   | ["rose"]
-  | DirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | DirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | DirsIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | DirsIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | DirsPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | DirsIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolDirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolDirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolDirsIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolDirsIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolDirsPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolDirsIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 
-interface DirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
+interface AlgolDirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   list: (
     | AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
     | AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>)[];
 }
 
-interface DirsIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+// ---------------------------------- Logicals ----------------------------------
+
+interface AlgolDirsIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   extends AlgolLogicalIfElse<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
@@ -37,7 +39,7 @@ interface DirsIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
     Turnv
   > {}
 
-interface DirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+interface AlgolDirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   extends AlgolLogicalIf<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
@@ -50,7 +52,16 @@ interface DirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
     Turnv
   > {}
 
-interface DirsIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+interface AlgolDirsIfActionElse<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+>
   extends AlgolLogicalIfActionElse<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
@@ -63,7 +74,7 @@ interface DirsIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
     Turnv
   > {}
 
-interface DirsPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+interface AlgolDirsPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   extends AlgolLogicalPlayerCase<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
@@ -76,7 +87,7 @@ interface DirsPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
     Turnv
   > {}
 
-interface DirsIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+interface AlgolDirsIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   extends AlgolLogicalIndexList<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
@@ -88,3 +99,84 @@ interface DirsIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
     Turnp,
     Turnv
   > {}
+
+// ---------------------------------- Anon versions ----------------------------------
+
+export type AlgolDirsAnon = AlgolDirs<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolDirsListAnon = AlgolDirsList<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolDirsIfAnon = AlgolDirsIf<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolDirsIfElseAnon = AlgolDirsIfElse<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolDirsIfActionElseAnon = AlgolDirsIfActionElse<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolDirsPlayerCaseAnon = AlgolDirsPlayerCase<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolDirsIndexListAnon = AlgolDirsIndexList<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
+// ---------------------------------- Type Guards ----------------------------------
+
+export function isAlgolDirsList(
+  expr: AlgolDirsAnon
+): expr is AlgolDirsListAnon {
+  return !!(expr as AlgolDirsListAnon).list;
+}

@@ -1,4 +1,4 @@
-import { AlgolSet } from "../set";
+import { AlgolSet } from "./";
 
 type TestPos = AlgolSet<
   "mybattlep",

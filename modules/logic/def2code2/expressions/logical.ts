@@ -21,22 +21,30 @@ export default function parseLogical<_T>(
   const me = expr => parseLogical(gameDef, player, action, parser, expr, from);
 
   if (isAlgolLogicalIfElse(expr)) {
-    const [test, whenTruthy, whenFalsy] = expr.ifelse;
+    const {
+      ifelse: [test, whenTruthy, whenFalsy]
+    } = expr;
     return `(${parse.bool(test)} ? ${me(whenTruthy)} : ${me(whenFalsy)})`;
   }
 
   if (isAlgolLogicalIfActionElse(expr)) {
-    const [testAction, whenYes, whenNo] = expr.ifactionelse;
+    const {
+      ifactionelse: [testAction, whenYes, whenNo]
+    } = expr;
     return me(testAction === action ? whenYes : whenNo);
   }
 
   if (isAlgolLogicalPlayerCase(expr)) {
-    const [plr1, plr2] = expr.playercase;
+    const {
+      playercase: [plr1, plr2]
+    } = expr;
     return me(player === 1 ? plr1 : plr2);
   }
 
   if (isAlgolLogicalIndexList(expr)) {
-    const [idx, ...opts] = expr.indexlist;
+    const {
+      indexlist: [idx, ...opts]
+    } = expr;
     const parsedIdx = parse.val(idx);
     if (typeof parsedIdx === "number") {
       return me(opts[parsedIdx]);
@@ -45,7 +53,9 @@ export default function parseLogical<_T>(
   }
 
   if (isAlgolLogicalIf(expr)) {
-    const [test, val] = expr.if;
+    const {
+      if: [test, val]
+    } = expr;
     return `(${parse.bool(test)} ? ${me(val)} : undefined)`;
   }
 

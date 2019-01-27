@@ -18,27 +18,37 @@ export function possibilities<_T>(expr: AlgolLogicalAnon<_T>): _T[] {
 
 function possibilitiesInner<_T>(expr: AlgolLogicalAnon<_T>): _T[] {
   if (isAlgolLogicalIfElse(expr)) {
-    const [test, whenTruthy, whenFalsy] = expr.ifelse;
+    const {
+      ifelse: [test, whenTruthy, whenFalsy]
+    } = expr;
     return possibilitiesInner(whenTruthy).concat(possibilitiesInner(whenFalsy));
   }
 
   if (isAlgolLogicalIfActionElse(expr)) {
-    const [testAction, whenYes, whenNo] = expr.ifactionelse;
+    const {
+      ifactionelse: [testAction, whenYes, whenNo]
+    } = expr;
     return possibilitiesInner(whenYes).concat(possibilitiesInner(whenNo));
   }
 
   if (isAlgolLogicalPlayerCase(expr)) {
-    const [plr1, plr2] = expr.playercase;
+    const {
+      playercase: [plr1, plr2]
+    } = expr;
     return possibilitiesInner(plr1).concat(possibilitiesInner(plr2));
   }
 
   if (isAlgolLogicalIndexList(expr)) {
-    const [idx, ...opts] = expr.indexlist;
+    const {
+      indexlist: [idx, ...opts]
+    } = expr;
     return opts.reduce((mem, o) => mem.concat(possibilitiesInner(o)), []);
   }
 
   if (isAlgolLogicalIf(expr)) {
-    const [test, opt] = expr.if;
+    const {
+      if: [test, opt]
+    } = expr;
     return [].concat(possibilitiesInner(opt));
   }
   return [expr as _T];

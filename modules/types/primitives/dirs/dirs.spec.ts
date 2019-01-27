@@ -1,4 +1,4 @@
-import { AlgolDirs } from "../dirs";
+import { AlgolDirs } from "./";
 
 type TestDirs = AlgolDirs<
   "mybattlep",

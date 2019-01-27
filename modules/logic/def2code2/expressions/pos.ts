@@ -1,8 +1,8 @@
 import {
   FullDefAnon,
   AlgolPosAnon,
-  AlgolPosMarkAnon,
-  AlgolPosOnlyInAnon
+  isAlgolPosMark,
+  isAlgolPosOnlyIn
 } from "../../../types";
 
 import makeParser from "./";
@@ -29,12 +29,12 @@ export default function parsePos(
         return undefined;
     }
   }
-  if ((expr as AlgolPosMarkAnon).mark) {
-    const { mark: name } = expr as AlgolPosMarkAnon;
+  if (isAlgolPosMark(expr)) {
+    const { mark: name } = expr;
     return `MARKS[${parser.val(name)}]`;
   }
-  if ((expr as AlgolPosOnlyInAnon).onlyin) {
-    const { onlyin: set } = expr as AlgolPosOnlyInAnon;
+  if (isAlgolPosOnlyIn(expr)) {
+    const { onlyin: set } = expr;
     return `Object.keys(${parser.set(set)})[0]`;
   }
 }

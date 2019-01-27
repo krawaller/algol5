@@ -36,6 +36,8 @@ interface AlgolPosOnlyIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
   onlyin: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
+// ---------------------------------- Logicals ----------------------------------
+
 interface AlgolPosIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   extends AlgolLogicalIfElse<
     AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
@@ -97,7 +99,7 @@ interface AlgolPosIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
     Turnv
   > {}
 
-// -------
+// ---------------------------------- Anon versions ----------------------------------
 
 export type AlgolPosAnon = AlgolPos<
   string,
@@ -190,3 +192,27 @@ export type AlgolPosIndexListAnon = AlgolPosIndexList<
   string,
   string
 >;
+
+// ---------------------------------- Type Guards ----------------------------------
+
+export function isAlgolPosMark(expr: AlgolPosAnon): expr is AlgolPosMarkAnon {
+  return !!(expr as AlgolPosMarkAnon).mark;
+}
+
+export function isAlgolPosOnlyIn(
+  expr: AlgolPosAnon
+): expr is AlgolPosOnlyInAnon {
+  return !!(expr as AlgolPosOnlyInAnon).onlyin;
+}
+
+export function isAlgolPosBattlePos(
+  expr: AlgolPosAnon
+): expr is AlgolPosBattlePosAnon {
+  return !!(expr as AlgolPosBattlePosAnon).battlepos;
+}
+
+export function isAlgolPosTurnPos(
+  expr: AlgolPosAnon
+): expr is AlgolPosTurnPosAnon {
+  return !!(expr as AlgolPosTurnPosAnon).turnpos;
+}

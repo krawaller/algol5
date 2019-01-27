@@ -1,4 +1,4 @@
-import { FullDefAnon, AlgolSetAnon, AlgolSetSingleAnon } from "../../../types";
+import { FullDefAnon, AlgolSetAnon, isAlgolSetSingle } from "../../../types";
 
 import makeParser from "./";
 
@@ -11,8 +11,8 @@ export default function parseSet(
 ) {
   const parser = makeParser(gameDef, player, action, "set");
 
-  if ((expr as AlgolSetSingleAnon).single) {
-    const { single: pos } = expr as AlgolSetSingleAnon;
+  if (isAlgolSetSingle(expr)) {
+    const { single: pos } = expr;
     return `{[${parser.pos(pos)}]: 1}`;
   }
 }

@@ -1,4 +1,4 @@
-import { AlgolVal } from "../value";
+import { AlgolVal } from "./";
 
 type TestVal = AlgolVal<
   "FOO" | "BAR",

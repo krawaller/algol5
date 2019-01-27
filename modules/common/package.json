@@ -8,5 +8,6 @@
   },
   "scripts": {
     "test": "ts-node node_modules/tape/bin/tape **/*.spec.ts | node_modules/.bin/tap-spec"
-  }
+  },
+  "dependencies": {}
 }

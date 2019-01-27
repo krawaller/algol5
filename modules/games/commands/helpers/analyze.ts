@@ -4,35 +4,17 @@ import * as path from "path";
 import fake from "./fake";
 
 import { FullDefAnon, typeSignature } from "../../../types";
-import { boardPositions, terrainLayerNames } from "../../../common";
+import {
+  boardPositions,
+  terrainLayerNames,
+  possibilities
+} from "../../../common";
 import dateStamp from "./datestamp";
 
 import { defPath } from "./_paths";
 
 function ownify(u) {
   return [u, "my" + u, "neutral" + u, "opp" + u];
-}
-
-function possibles(def) {
-  if (typeof def === "string") return [def];
-  if (def.ifplayer) {
-    return def.ifplayer[1];
-  }
-  if (def.playercase) {
-    return possibles(def.playercase[0]).concat(possibles(def.playercase[1]));
-  }
-  if (def.if) {
-    return def.if[1];
-  }
-  if (def.ifelse) {
-    return possibles(def.ifelse[1]).concat(possibles(def.ifelse[2]));
-  }
-  if (def.indexlist) {
-    const [indexer, ...values] = def.indexlist;
-    return values.reduce((mem, v) => mem.concat(possibles(v)), []);
-  }
-
-  return def;
 }
 
 function getArtifactLayers(generators = {}) {
@@ -44,7 +26,7 @@ function getArtifactLayers(generators = {}) {
     const draws = gen.type === "filter" ? { filter: gen } : gen.draw;
     for (let d of Object.keys(draws)) {
       const draw = draws[d];
-      for (let l of possibles(draw.tolayer)) {
+      for (let l of possibilities(draw.tolayer)) {
         if (draw.include && draw.include.owner) {
           artifactLayers = artifactLayers.concat(ownify(l));
         } else {
@@ -72,7 +54,7 @@ export default async function analyze(def: FullDefAnon | string) {
   const nonEndCommands = commands.filter(c => {
     let cdef = flow.commands[c];
     let defs = [].concat(cdef.link || []).concat(cdef.links || []);
-    let poss = defs.reduce((mem, d) => mem.concat(possibles(d)), []);
+    let poss = defs.reduce((mem, d) => mem.concat(possibilities(d)), []);
     return poss.filter(l => l !== "endturn").length > 0;
   });
 

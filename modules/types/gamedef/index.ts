@@ -79,6 +79,8 @@ export type FullDef<
     AiTerrainLayer,
     BattlePos,
     BattleVar,
+    BoardHeight,
+    BoardWidth,
     Command,
     Grid,
     Layer,

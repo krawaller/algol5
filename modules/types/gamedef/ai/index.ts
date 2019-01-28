@@ -12,6 +12,8 @@ export type AI<
   AiTerrainLayer extends string,
   Btlp extends string,
   Btlv extends string,
+  BoardHeight extends number,
+  BoardWidth extends number,
   Cmnd extends string,
   Grid extends string,
   Layer extends string,

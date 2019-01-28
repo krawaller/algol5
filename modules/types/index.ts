@@ -57,6 +57,8 @@ export function typeSignature(type, gameId) {
       "AiTerrainLayer",
       "BattlePos",
       "BattleVar",
+      "BoardHeight",
+      "BoardWidth",
       "Command",
       "Grid",
       "Layer",

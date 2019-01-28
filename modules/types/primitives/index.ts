@@ -4,5 +4,6 @@ export * from "./pos";
 export * from "./set";
 export * from "./value";
 export * from "./effect";
+export * from "./entity";
 export * from "./instr";
 export * from "./dirs";

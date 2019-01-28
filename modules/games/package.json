@@ -14,8 +14,8 @@
     "@types/node": "^10.12.18",
     "fs-extra": "^7.0.1",
     "js-beautify": "^1.8.9",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.2",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.2.4",
     "watchr": "^4.1.0"
   }
 }

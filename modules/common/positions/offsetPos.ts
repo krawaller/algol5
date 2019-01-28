@@ -1,7 +1,7 @@
 import { pos2coords, coords2pos } from "../";
 
 export function offsetPos(pos, dir, forward, right, board) {
-  var forwardmods = [
+  const forwardmods = [
     [0, 1],
     [1, 1],
     [1, 0],
@@ -11,7 +11,7 @@ export function offsetPos(pos, dir, forward, right, board) {
     [-1, 0],
     [-1, 1]
   ]; // x,y
-  var rightmods = [
+  const rightmods = [
     [1, 0],
     [1, -1],
     [0, -1],
@@ -21,11 +21,11 @@ export function offsetPos(pos, dir, forward, right, board) {
     [0, 1],
     [1, 1]
   ];
-  var n = dir - 1;
-  var coords = pos2coords(pos);
-  var newx = coords.x + forwardmods[n][0] * forward + rightmods[n][0] * right;
-  var newy = coords.y + forwardmods[n][1] * forward + rightmods[n][1] * right;
-  var withinbounds =
+  const n = dir - 1;
+  const coords = pos2coords(pos);
+  const newx = coords.x + forwardmods[n][0] * forward + rightmods[n][0] * right;
+  const newy = coords.y + forwardmods[n][1] * forward + rightmods[n][1] * right;
+  const withinbounds =
     newx > 0 && newx <= board.width && newy > 0 && newy <= board.height;
   return withinbounds && coords2pos({ x: newx, y: newy });
 }

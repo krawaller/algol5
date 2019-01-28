@@ -1,9 +1,7 @@
 import { terrainLayers } from "../";
-import { Board } from "../../types";
+import { BoardAnon } from "../../types";
 
-export function terrainLayerNames(
-  board: Board<number, number, string, string, string> // TODO - Anon type
-) {
+export function terrainLayerNames(board: BoardAnon) {
   return Object.keys({
     ...terrainLayers(board, 1),
     ...terrainLayers(board, 2)

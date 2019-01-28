@@ -1,10 +1,11 @@
+import { BoardAnon } from "../../types";
 import { convertToEntities, boardPositions } from "../";
 
 /*
 Calculates all terrain layers and returns them. 
 This should be done per player if any terrain has owner.
 */
-export function terrainLayers(board, forplayer?, aiterrain?): any {
+export function terrainLayers(board: BoardAnon, forplayer?, aiterrain?): any {
   var terrainDef = { ...board.terrain, ...aiterrain };
   if (!Object.keys(terrainDef).length) {
     return {};

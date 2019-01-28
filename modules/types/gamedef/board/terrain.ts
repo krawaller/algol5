@@ -7,3 +7,5 @@ export type TerrainDef<Position extends string> =
       2: AlgolEntity<Position>[];
     }>
   | AlgolEntity<Position>[];
+
+export type TerrainDefAnon = TerrainDef<string>;

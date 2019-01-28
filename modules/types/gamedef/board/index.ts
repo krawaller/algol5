@@ -13,6 +13,8 @@ export type Board<
 > = {
   height: BoardHeight;
   width: BoardWidth;
-  terrain: { [terrain in Terrain]: TerrainDef<Position> };
+  terrain?: { [terrain in Terrain]: TerrainDef<Position> };
   grids?: { [name in Grid]: AlgolGrid<BoardHeight, BoardWidth> };
 };
+
+export type BoardAnon = Board<number, number, string, string, string>;

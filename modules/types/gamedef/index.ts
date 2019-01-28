@@ -79,6 +79,7 @@ export type FullDef<
     Grid,
     Layer,
     Mark,
+    Position,
     TurnPos,
     TurnVar
   >;

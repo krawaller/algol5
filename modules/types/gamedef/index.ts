@@ -82,7 +82,7 @@ export type FullDef<
     TurnPos,
     TurnVar
   >;
-  board: Board<Terrain>;
+  board: Board<Position, Terrain>;
   setup: Setup<Position, Unit>;
   graphics: Graphics<Terrain, Unit>;
   grids?: { [g in Grid]: any };
@@ -133,7 +133,7 @@ export type Definition = {
   STATUS?: string;
   meta: Meta;
   graphics: Graphics;
-  board: Board;
+  board: any;
   setup?: any;
   startTurn?: any;
   canalwaysend?: {

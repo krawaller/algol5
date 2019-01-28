@@ -18,7 +18,7 @@ export type UglyduckTurnVar = any;
  
 export type UglyduckGenerators = Generators<UglyduckArtifactLayer, UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGenerator, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckTurnPos, UglyduckTurnVar>;
 export type UglyduckFlow = Flow<UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGenerator, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckTurnPos, UglyduckTurnVar, UglyduckUnit>;
-export type UglyduckBoard = Board<UglyduckTerrain>;
+export type UglyduckBoard = Board<UglyduckPosition, UglyduckTerrain>;
 export type UglyduckAI = AI<UglyduckAiArtifactLayer, UglyduckAiAspect, UglyduckAiBrain, UglyduckAiGenerator, UglyduckAiGrid, UglyduckAiTerrain, UglyduckAiTerrainLayer, UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckTurnPos, UglyduckTurnVar>;
 export type UglyduckGraphics = Graphics<UglyduckTerrain, UglyduckUnit>;
 export type UglyduckInstructions = Instructions<UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckPhase, UglyduckTurnPos, UglyduckTurnVar, UglyduckUnit>;

@@ -89,7 +89,7 @@ export function typeSignature(type, gameId) {
       "TurnVar",
       "Unit"
     ],
-    Board: ["Terrain"],
+    Board: ["Position", "Terrain"],
     Setup: ["Position", "Unit"],
     Generators: [
       "ArtifactLayer",

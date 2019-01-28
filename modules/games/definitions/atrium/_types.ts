@@ -18,7 +18,7 @@ export type AtriumTurnVar = any;
  
 export type AtriumGenerators = Generators<AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar>;
 export type AtriumFlow = Flow<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
-export type AtriumBoard = Board<AtriumTerrain>;
+export type AtriumBoard = Board<AtriumPosition, AtriumTerrain>;
 export type AtriumAI = AI<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar>;
 export type AtriumGraphics = Graphics<AtriumTerrain, AtriumUnit>;
 export type AtriumInstructions = Instructions<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;

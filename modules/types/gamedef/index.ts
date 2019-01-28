@@ -29,6 +29,8 @@ export type FullDefAnon = FullDef<
   string,
   string,
   string,
+  number,
+  number,
   string,
   string,
   string,
@@ -53,6 +55,8 @@ export type FullDef<
   ArtifactLayer extends string,
   BattlePos extends string,
   BattleVar extends string,
+  BoardHeight extends number,
+  BoardWidth extends number,
   Command extends string,
   Generator extends string,
   Grid extends string,
@@ -83,7 +87,7 @@ export type FullDef<
     TurnPos,
     TurnVar
   >;
-  board: Board<Position, Terrain>;
+  board: Board<BoardHeight, BoardWidth, Position, Terrain>;
   setup: Setup<Position, Unit>;
   graphics: Graphics<Terrain, Unit>;
   grids?: { [g in Grid]: any };

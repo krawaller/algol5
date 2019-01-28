@@ -89,6 +89,9 @@ export default async function analyze(def: FullDefAnon | string) {
 
   const analysis = `import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type ${capId}BoardHeight = ${def.board.height};
+export type ${capId}BoardWidth = ${def.board.width};
+
 export type ${capId}Terrain = ${
     terrains.length ? terrains.map(t => `"${t}"`).join(" | ") : "never"
   };

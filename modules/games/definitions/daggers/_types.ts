@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type DaggersBoardHeight = 8;
+export type DaggersBoardWidth = 8;
+
 export type DaggersTerrain = "base";
 export type DaggersUnit = "daggers" | "crowns";
 export type DaggersMark = "selectunit" | "selectmovetarget";
@@ -18,7 +21,7 @@ export type DaggersTurnVar = any;
  
 export type DaggersGenerators = Generators<DaggersArtifactLayer, DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGenerator, DaggersGrid, DaggersLayer, DaggersMark, DaggersTurnPos, DaggersTurnVar>;
 export type DaggersFlow = Flow<DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGenerator, DaggersGrid, DaggersLayer, DaggersMark, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
-export type DaggersBoard = Board<DaggersPosition, DaggersTerrain>;
+export type DaggersBoard = Board<DaggersBoardHeight, DaggersBoardWidth, DaggersPosition, DaggersTerrain>;
 export type DaggersAI = AI<DaggersAiArtifactLayer, DaggersAiAspect, DaggersAiBrain, DaggersAiGenerator, DaggersAiGrid, DaggersAiTerrain, DaggersAiTerrainLayer, DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGrid, DaggersLayer, DaggersMark, DaggersPosition, DaggersTurnPos, DaggersTurnVar>;
 export type DaggersGraphics = Graphics<DaggersTerrain, DaggersUnit>;
 export type DaggersInstructions = Instructions<DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGrid, DaggersLayer, DaggersMark, DaggersPhase, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
@@ -26,7 +29,7 @@ export type DaggersMeta = Meta;
 export type DaggersScripts = GameTestSuite;
 export type DaggersSetup = Setup<DaggersPosition, DaggersUnit>;
 
-export type DaggersDefinition = FullDef<DaggersAiArtifactLayer, DaggersAiAspect, DaggersAiBrain, DaggersAiGenerator, DaggersAiGrid, DaggersAiTerrain, DaggersAiTerrainLayer, DaggersArtifactLayer, DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGenerator, DaggersGrid, DaggersLayer, DaggersMark, DaggersPhase, DaggersPosition, DaggersTerrain, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
+export type DaggersDefinition = FullDef<DaggersAiArtifactLayer, DaggersAiAspect, DaggersAiBrain, DaggersAiGenerator, DaggersAiGrid, DaggersAiTerrain, DaggersAiTerrainLayer, DaggersArtifactLayer, DaggersBattlePos, DaggersBattleVar, DaggersBoardHeight, DaggersBoardWidth, DaggersCommand, DaggersGenerator, DaggersGrid, DaggersLayer, DaggersMark, DaggersPhase, DaggersPosition, DaggersTerrain, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
 
 export type DaggersGrid = never;
 

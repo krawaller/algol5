@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type _testBoardHeight = 10;
+export type _testBoardWidth = 10;
+
 export type _testTerrain = "steps";
 export type _testUnit = "stepsfirsts" | "blocksfirsts" | "defaultfirsts" | "noblocks" | "pawns";
 export type _testMark = "selectunit" | "selectmark";
@@ -18,7 +21,7 @@ export type _testTurnVar = any;
  
 export type _testGenerators = Generators<_testArtifactLayer, _testBattlePos, _testBattleVar, _testCommand, _testGenerator, _testGrid, _testLayer, _testMark, _testTurnPos, _testTurnVar>;
 export type _testFlow = Flow<_testBattlePos, _testBattleVar, _testCommand, _testGenerator, _testGrid, _testLayer, _testMark, _testTurnPos, _testTurnVar, _testUnit>;
-export type _testBoard = Board<_testPosition, _testTerrain>;
+export type _testBoard = Board<_testBoardHeight, _testBoardWidth, _testPosition, _testTerrain>;
 export type _testAI = AI<_testAiArtifactLayer, _testAiAspect, _testAiBrain, _testAiGenerator, _testAiGrid, _testAiTerrain, _testAiTerrainLayer, _testBattlePos, _testBattleVar, _testCommand, _testGrid, _testLayer, _testMark, _testPosition, _testTurnPos, _testTurnVar>;
 export type _testGraphics = Graphics<_testTerrain, _testUnit>;
 export type _testInstructions = Instructions<_testBattlePos, _testBattleVar, _testCommand, _testGrid, _testLayer, _testMark, _testPhase, _testTurnPos, _testTurnVar, _testUnit>;
@@ -26,7 +29,7 @@ export type _testMeta = Meta;
 export type _testScripts = GameTestSuite;
 export type _testSetup = Setup<_testPosition, _testUnit>;
 
-export type _testDefinition = FullDef<_testAiArtifactLayer, _testAiAspect, _testAiBrain, _testAiGenerator, _testAiGrid, _testAiTerrain, _testAiTerrainLayer, _testArtifactLayer, _testBattlePos, _testBattleVar, _testCommand, _testGenerator, _testGrid, _testLayer, _testMark, _testPhase, _testPosition, _testTerrain, _testTurnPos, _testTurnVar, _testUnit>;
+export type _testDefinition = FullDef<_testAiArtifactLayer, _testAiAspect, _testAiBrain, _testAiGenerator, _testAiGrid, _testAiTerrain, _testAiTerrainLayer, _testArtifactLayer, _testBattlePos, _testBattleVar, _testBoardHeight, _testBoardWidth, _testCommand, _testGenerator, _testGrid, _testLayer, _testMark, _testPhase, _testPosition, _testTerrain, _testTurnPos, _testTurnVar, _testUnit>;
 
 export type _testGrid = never;
 

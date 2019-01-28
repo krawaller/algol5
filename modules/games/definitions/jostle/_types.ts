@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type JostleBoardHeight = 10;
+export type JostleBoardWidth = 10;
+
 export type JostleTerrain = never;
 export type JostleUnit = "checkers";
 export type JostleMark = "selectunit" | "selectmovetarget";
@@ -18,7 +21,7 @@ export type JostleTurnVar = any;
  
 export type JostleGenerators = Generators<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
 export type JostleFlow = Flow<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar, JostleUnit>;
-export type JostleBoard = Board<JostlePosition, JostleTerrain>;
+export type JostleBoard = Board<JostleBoardHeight, JostleBoardWidth, JostlePosition, JostleTerrain>;
 export type JostleAI = AI<JostleAiArtifactLayer, JostleAiAspect, JostleAiBrain, JostleAiGenerator, JostleAiGrid, JostleAiTerrain, JostleAiTerrainLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostlePosition, JostleTurnPos, JostleTurnVar>;
 export type JostleGraphics = Graphics<JostleTerrain, JostleUnit>;
 export type JostleInstructions = Instructions<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostlePhase, JostleTurnPos, JostleTurnVar, JostleUnit>;
@@ -26,7 +29,7 @@ export type JostleMeta = Meta;
 export type JostleScripts = GameTestSuite;
 export type JostleSetup = Setup<JostlePosition, JostleUnit>;
 
-export type JostleDefinition = FullDef<JostleAiArtifactLayer, JostleAiAspect, JostleAiBrain, JostleAiGenerator, JostleAiGrid, JostleAiTerrain, JostleAiTerrainLayer, JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostlePhase, JostlePosition, JostleTerrain, JostleTurnPos, JostleTurnVar, JostleUnit>;
+export type JostleDefinition = FullDef<JostleAiArtifactLayer, JostleAiAspect, JostleAiBrain, JostleAiGenerator, JostleAiGrid, JostleAiTerrain, JostleAiTerrainLayer, JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleBoardHeight, JostleBoardWidth, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostlePhase, JostlePosition, JostleTerrain, JostleTurnPos, JostleTurnVar, JostleUnit>;
 
 export type JostleGrid = never;
 

@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type TransetBoardHeight = 5;
+export type TransetBoardWidth = 5;
+
 export type TransetTerrain = "base";
 export type TransetUnit = "pinets" | "piokers" | "piases";
 export type TransetMark = "selectunit" | "selectmovetarget" | "selectdeportdestination" | "selectswapunit" | "selectswap1target";
@@ -18,7 +21,7 @@ export type TransetTurnVar = any;
  
 export type TransetGenerators = Generators<TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetGrid, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar>;
 export type TransetFlow = Flow<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetGrid, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar, TransetUnit>;
-export type TransetBoard = Board<TransetPosition, TransetTerrain>;
+export type TransetBoard = Board<TransetBoardHeight, TransetBoardWidth, TransetPosition, TransetTerrain>;
 export type TransetAI = AI<TransetAiArtifactLayer, TransetAiAspect, TransetAiBrain, TransetAiGenerator, TransetAiGrid, TransetAiTerrain, TransetAiTerrainLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGrid, TransetLayer, TransetMark, TransetPosition, TransetTurnPos, TransetTurnVar>;
 export type TransetGraphics = Graphics<TransetTerrain, TransetUnit>;
 export type TransetInstructions = Instructions<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGrid, TransetLayer, TransetMark, TransetPhase, TransetTurnPos, TransetTurnVar, TransetUnit>;
@@ -26,7 +29,7 @@ export type TransetMeta = Meta;
 export type TransetScripts = GameTestSuite;
 export type TransetSetup = Setup<TransetPosition, TransetUnit>;
 
-export type TransetDefinition = FullDef<TransetAiArtifactLayer, TransetAiAspect, TransetAiBrain, TransetAiGenerator, TransetAiGrid, TransetAiTerrain, TransetAiTerrainLayer, TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetGrid, TransetLayer, TransetMark, TransetPhase, TransetPosition, TransetTerrain, TransetTurnPos, TransetTurnVar, TransetUnit>;
+export type TransetDefinition = FullDef<TransetAiArtifactLayer, TransetAiAspect, TransetAiBrain, TransetAiGenerator, TransetAiGrid, TransetAiTerrain, TransetAiTerrainLayer, TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetBoardHeight, TransetBoardWidth, TransetCommand, TransetGenerator, TransetGrid, TransetLayer, TransetMark, TransetPhase, TransetPosition, TransetTerrain, TransetTurnPos, TransetTurnVar, TransetUnit>;
 
 export type TransetGrid = never;
 

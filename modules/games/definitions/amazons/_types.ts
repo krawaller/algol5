@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type AmazonsBoardHeight = 10;
+export type AmazonsBoardWidth = 10;
+
 export type AmazonsTerrain = never;
 export type AmazonsUnit = "queens" | "fires";
 export type AmazonsMark = "selectunit" | "selectmovetarget" | "selectfiretarget";
@@ -18,7 +21,7 @@ export type AmazonsTurnVar = any;
  
 export type AmazonsGenerators = Generators<AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar>;
 export type AmazonsFlow = Flow<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;
-export type AmazonsBoard = Board<AmazonsPosition, AmazonsTerrain>;
+export type AmazonsBoard = Board<AmazonsBoardHeight, AmazonsBoardWidth, AmazonsPosition, AmazonsTerrain>;
 export type AmazonsAI = AI<AmazonsAiArtifactLayer, AmazonsAiAspect, AmazonsAiBrain, AmazonsAiGenerator, AmazonsAiGrid, AmazonsAiTerrain, AmazonsAiTerrainLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPosition, AmazonsTurnPos, AmazonsTurnVar>;
 export type AmazonsGraphics = Graphics<AmazonsTerrain, AmazonsUnit>;
 export type AmazonsInstructions = Instructions<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPhase, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;
@@ -26,7 +29,7 @@ export type AmazonsMeta = Meta;
 export type AmazonsScripts = GameTestSuite;
 export type AmazonsSetup = Setup<AmazonsPosition, AmazonsUnit>;
 
-export type AmazonsDefinition = FullDef<AmazonsAiArtifactLayer, AmazonsAiAspect, AmazonsAiBrain, AmazonsAiGenerator, AmazonsAiGrid, AmazonsAiTerrain, AmazonsAiTerrainLayer, AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPhase, AmazonsPosition, AmazonsTerrain, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;
+export type AmazonsDefinition = FullDef<AmazonsAiArtifactLayer, AmazonsAiAspect, AmazonsAiBrain, AmazonsAiGenerator, AmazonsAiGrid, AmazonsAiTerrain, AmazonsAiTerrainLayer, AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsBoardHeight, AmazonsBoardWidth, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPhase, AmazonsPosition, AmazonsTerrain, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;
 
 export type AmazonsGrid = never;
 

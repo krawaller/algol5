@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type KickrunBoardHeight = 5;
+export type KickrunBoardWidth = 5;
+
 export type KickrunTerrain = "corners";
 export type KickrunUnit = "runners" | "sidekickers";
 export type KickrunMark = "selectunit" | "selectmovetarget";
@@ -18,7 +21,7 @@ export type KickrunTurnVar = any;
  
 export type KickrunGenerators = Generators<KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunGrid, KickrunLayer, KickrunMark, KickrunTurnPos, KickrunTurnVar>;
 export type KickrunFlow = Flow<KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunGrid, KickrunLayer, KickrunMark, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
-export type KickrunBoard = Board<KickrunPosition, KickrunTerrain>;
+export type KickrunBoard = Board<KickrunBoardHeight, KickrunBoardWidth, KickrunPosition, KickrunTerrain>;
 export type KickrunAI = AI<KickrunAiArtifactLayer, KickrunAiAspect, KickrunAiBrain, KickrunAiGenerator, KickrunAiGrid, KickrunAiTerrain, KickrunAiTerrainLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGrid, KickrunLayer, KickrunMark, KickrunPosition, KickrunTurnPos, KickrunTurnVar>;
 export type KickrunGraphics = Graphics<KickrunTerrain, KickrunUnit>;
 export type KickrunInstructions = Instructions<KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGrid, KickrunLayer, KickrunMark, KickrunPhase, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
@@ -26,7 +29,7 @@ export type KickrunMeta = Meta;
 export type KickrunScripts = GameTestSuite;
 export type KickrunSetup = Setup<KickrunPosition, KickrunUnit>;
 
-export type KickrunDefinition = FullDef<KickrunAiArtifactLayer, KickrunAiAspect, KickrunAiBrain, KickrunAiGenerator, KickrunAiGrid, KickrunAiTerrain, KickrunAiTerrainLayer, KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunGrid, KickrunLayer, KickrunMark, KickrunPhase, KickrunPosition, KickrunTerrain, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
+export type KickrunDefinition = FullDef<KickrunAiArtifactLayer, KickrunAiAspect, KickrunAiBrain, KickrunAiGenerator, KickrunAiGrid, KickrunAiTerrain, KickrunAiTerrainLayer, KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunBoardHeight, KickrunBoardWidth, KickrunCommand, KickrunGenerator, KickrunGrid, KickrunLayer, KickrunMark, KickrunPhase, KickrunPosition, KickrunTerrain, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
 
 export type KickrunGrid = never;
 

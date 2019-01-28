@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type AtriumBoardHeight = 5;
+export type AtriumBoardWidth = 5;
+
 export type AtriumTerrain = never;
 export type AtriumUnit = "kings" | "queens";
 export type AtriumMark = "selectunit" | "selectmovetarget";
@@ -18,7 +21,7 @@ export type AtriumTurnVar = any;
  
 export type AtriumGenerators = Generators<AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar>;
 export type AtriumFlow = Flow<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
-export type AtriumBoard = Board<AtriumPosition, AtriumTerrain>;
+export type AtriumBoard = Board<AtriumBoardHeight, AtriumBoardWidth, AtriumPosition, AtriumTerrain>;
 export type AtriumAI = AI<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPosition, AtriumTurnPos, AtriumTurnVar>;
 export type AtriumGraphics = Graphics<AtriumTerrain, AtriumUnit>;
 export type AtriumInstructions = Instructions<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
@@ -26,7 +29,7 @@ export type AtriumMeta = Meta;
 export type AtriumScripts = GameTestSuite;
 export type AtriumSetup = Setup<AtriumPosition, AtriumUnit>;
 
-export type AtriumDefinition = FullDef<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumPosition, AtriumTerrain, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
+export type AtriumDefinition = FullDef<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumBoardHeight, AtriumBoardWidth, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumPosition, AtriumTerrain, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
 
 export type AtriumGrid = never;
 

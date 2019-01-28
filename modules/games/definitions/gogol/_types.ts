@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type GogolBoardHeight = 8;
+export type GogolBoardWidth = 8;
+
 export type GogolTerrain = "homerow" | "edges";
 export type GogolUnit = "kings" | "soldiers";
 export type GogolMark = "selectkingdeploy" | "selectunit" | "selectmovetarget" | "selectjumptarget";
@@ -18,7 +21,7 @@ export type GogolTurnVar = any;
  
 export type GogolGenerators = Generators<GogolArtifactLayer, GogolBattlePos, GogolBattleVar, GogolCommand, GogolGenerator, GogolGrid, GogolLayer, GogolMark, GogolTurnPos, GogolTurnVar>;
 export type GogolFlow = Flow<GogolBattlePos, GogolBattleVar, GogolCommand, GogolGenerator, GogolGrid, GogolLayer, GogolMark, GogolTurnPos, GogolTurnVar, GogolUnit>;
-export type GogolBoard = Board<GogolPosition, GogolTerrain>;
+export type GogolBoard = Board<GogolBoardHeight, GogolBoardWidth, GogolPosition, GogolTerrain>;
 export type GogolAI = AI<GogolAiArtifactLayer, GogolAiAspect, GogolAiBrain, GogolAiGenerator, GogolAiGrid, GogolAiTerrain, GogolAiTerrainLayer, GogolBattlePos, GogolBattleVar, GogolCommand, GogolGrid, GogolLayer, GogolMark, GogolPosition, GogolTurnPos, GogolTurnVar>;
 export type GogolGraphics = Graphics<GogolTerrain, GogolUnit>;
 export type GogolInstructions = Instructions<GogolBattlePos, GogolBattleVar, GogolCommand, GogolGrid, GogolLayer, GogolMark, GogolPhase, GogolTurnPos, GogolTurnVar, GogolUnit>;
@@ -26,7 +29,7 @@ export type GogolMeta = Meta;
 export type GogolScripts = GameTestSuite;
 export type GogolSetup = Setup<GogolPosition, GogolUnit>;
 
-export type GogolDefinition = FullDef<GogolAiArtifactLayer, GogolAiAspect, GogolAiBrain, GogolAiGenerator, GogolAiGrid, GogolAiTerrain, GogolAiTerrainLayer, GogolArtifactLayer, GogolBattlePos, GogolBattleVar, GogolCommand, GogolGenerator, GogolGrid, GogolLayer, GogolMark, GogolPhase, GogolPosition, GogolTerrain, GogolTurnPos, GogolTurnVar, GogolUnit>;
+export type GogolDefinition = FullDef<GogolAiArtifactLayer, GogolAiAspect, GogolAiBrain, GogolAiGenerator, GogolAiGrid, GogolAiTerrain, GogolAiTerrainLayer, GogolArtifactLayer, GogolBattlePos, GogolBattleVar, GogolBoardHeight, GogolBoardWidth, GogolCommand, GogolGenerator, GogolGrid, GogolLayer, GogolMark, GogolPhase, GogolPosition, GogolTerrain, GogolTurnPos, GogolTurnVar, GogolUnit>;
 
 export type GogolGrid = never;
 

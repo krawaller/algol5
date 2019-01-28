@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type CoffeeBoardHeight = 5;
+export type CoffeeBoardWidth = 5;
+
 export type CoffeeTerrain = never;
 export type CoffeeUnit = "soldiers" | "markers";
 export type CoffeeMark = "selectdrop";
@@ -18,7 +21,7 @@ export type CoffeeTurnVar = any;
  
 export type CoffeeGenerators = Generators<CoffeeArtifactLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeeTurnPos, CoffeeTurnVar>;
 export type CoffeeFlow = Flow<CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
-export type CoffeeBoard = Board<CoffeePosition, CoffeeTerrain>;
+export type CoffeeBoard = Board<CoffeeBoardHeight, CoffeeBoardWidth, CoffeePosition, CoffeeTerrain>;
 export type CoffeeAI = AI<CoffeeAiArtifactLayer, CoffeeAiAspect, CoffeeAiBrain, CoffeeAiGenerator, CoffeeAiGrid, CoffeeAiTerrain, CoffeeAiTerrainLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePosition, CoffeeTurnPos, CoffeeTurnVar>;
 export type CoffeeGraphics = Graphics<CoffeeTerrain, CoffeeUnit>;
 export type CoffeeInstructions = Instructions<CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
@@ -26,7 +29,7 @@ export type CoffeeMeta = Meta;
 export type CoffeeScripts = GameTestSuite;
 export type CoffeeSetup = Setup<CoffeePosition, CoffeeUnit>;
 
-export type CoffeeDefinition = FullDef<CoffeeAiArtifactLayer, CoffeeAiAspect, CoffeeAiBrain, CoffeeAiGenerator, CoffeeAiGrid, CoffeeAiTerrain, CoffeeAiTerrainLayer, CoffeeArtifactLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeePosition, CoffeeTerrain, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
+export type CoffeeDefinition = FullDef<CoffeeAiArtifactLayer, CoffeeAiAspect, CoffeeAiBrain, CoffeeAiGenerator, CoffeeAiGrid, CoffeeAiTerrain, CoffeeAiTerrainLayer, CoffeeArtifactLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeBoardHeight, CoffeeBoardWidth, CoffeeCommand, CoffeeGenerator, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeePosition, CoffeeTerrain, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
 
 export type CoffeeGrid = never;
 

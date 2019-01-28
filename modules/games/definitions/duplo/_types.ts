@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type DuploBoardHeight = 8;
+export type DuploBoardWidth = 8;
+
 export type DuploTerrain = never;
 export type DuploUnit = "soldiers";
 export type DuploMark = "selectdeploy" | "selectunit" | "selecttarget";
@@ -18,7 +21,7 @@ export type DuploTurnVar = any;
  
 export type DuploGenerators = Generators<DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
 export type DuploFlow = Flow<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar, DuploUnit>;
-export type DuploBoard = Board<DuploPosition, DuploTerrain>;
+export type DuploBoard = Board<DuploBoardHeight, DuploBoardWidth, DuploPosition, DuploTerrain>;
 export type DuploAI = AI<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGrid, DuploLayer, DuploMark, DuploPosition, DuploTurnPos, DuploTurnVar>;
 export type DuploGraphics = Graphics<DuploTerrain, DuploUnit>;
 export type DuploInstructions = Instructions<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGrid, DuploLayer, DuploMark, DuploPhase, DuploTurnPos, DuploTurnVar, DuploUnit>;
@@ -26,7 +29,7 @@ export type DuploMeta = Meta;
 export type DuploScripts = GameTestSuite;
 export type DuploSetup = Setup<DuploPosition, DuploUnit>;
 
-export type DuploDefinition = FullDef<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploPhase, DuploPosition, DuploTerrain, DuploTurnPos, DuploTurnVar, DuploUnit>;
+export type DuploDefinition = FullDef<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploBoardHeight, DuploBoardWidth, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploPhase, DuploPosition, DuploTerrain, DuploTurnPos, DuploTurnVar, DuploUnit>;
 
 export type DuploGrid = never;
 

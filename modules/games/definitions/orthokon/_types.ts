@@ -1,5 +1,8 @@
 import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
+export type OrthokonBoardHeight = 4;
+export type OrthokonBoardWidth = 4;
+
 export type OrthokonTerrain = never;
 export type OrthokonUnit = "soldiers";
 export type OrthokonMark = "selectunit" | "selectmovetarget";
@@ -18,7 +21,7 @@ export type OrthokonTurnVar = any;
  
 export type OrthokonGenerators = Generators<OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar>;
 export type OrthokonFlow = Flow<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
-export type OrthokonBoard = Board<OrthokonPosition, OrthokonTerrain>;
+export type OrthokonBoard = Board<OrthokonBoardHeight, OrthokonBoardWidth, OrthokonPosition, OrthokonTerrain>;
 export type OrthokonAI = AI<OrthokonAiArtifactLayer, OrthokonAiAspect, OrthokonAiBrain, OrthokonAiGenerator, OrthokonAiGrid, OrthokonAiTerrain, OrthokonAiTerrainLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPosition, OrthokonTurnPos, OrthokonTurnVar>;
 export type OrthokonGraphics = Graphics<OrthokonTerrain, OrthokonUnit>;
 export type OrthokonInstructions = Instructions<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
@@ -26,7 +29,7 @@ export type OrthokonMeta = Meta;
 export type OrthokonScripts = GameTestSuite;
 export type OrthokonSetup = Setup<OrthokonPosition, OrthokonUnit>;
 
-export type OrthokonDefinition = FullDef<OrthokonAiArtifactLayer, OrthokonAiAspect, OrthokonAiBrain, OrthokonAiGenerator, OrthokonAiGrid, OrthokonAiTerrain, OrthokonAiTerrainLayer, OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonPosition, OrthokonTerrain, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
+export type OrthokonDefinition = FullDef<OrthokonAiArtifactLayer, OrthokonAiAspect, OrthokonAiBrain, OrthokonAiGenerator, OrthokonAiGrid, OrthokonAiTerrain, OrthokonAiTerrainLayer, OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonBoardHeight, OrthokonBoardWidth, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonPosition, OrthokonTerrain, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
 
 export type OrthokonGrid = never;
 

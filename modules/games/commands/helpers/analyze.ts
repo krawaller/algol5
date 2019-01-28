@@ -193,7 +193,7 @@ export type ${capId}AiTerrain = ${
       : "never"
   };
 
-export type ${capId}Positions = ${JSON.stringify(boardPositions(def.board))};
+export type ${capId}Position = ${JSON.stringify(boardPositions(def.board))};
 `;
 
   await fs.writeFile(path.join(gameDefPath, "_types.ts"), analysis);

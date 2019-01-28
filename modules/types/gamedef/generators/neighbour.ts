@@ -1,5 +1,22 @@
+import { GeneratorDefAnon } from "./";
 import { DrawDef } from "./draw";
 import { AlgolPos, AlgolSet, AlgolBool, AlgolVal, AlgolDirs } from "../../";
+
+export type NeighbourDefAnon = NeighbourDef<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
+export function isNeighbourDef(gen: GeneratorDefAnon) {
+  return (gen as NeighbourDefAnon).type === "neighbour";
+}
 
 export type NeighbourDef<
   ArtifactLayer,

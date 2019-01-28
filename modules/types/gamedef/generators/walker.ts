@@ -1,3 +1,4 @@
+import { GeneratorDefAnon } from "./";
 import { DrawDef } from "./draw";
 import { AlgolPos, AlgolSet, AlgolVal, AlgolDirs } from "../../";
 
@@ -12,6 +13,10 @@ export type WalkerDefAnon = WalkerDef<
   string,
   string
 >;
+
+export function isWalkerDef(gen: GeneratorDefAnon) {
+  return (gen as WalkerDefAnon).type === "walker";
+}
 
 export type WalkerDef<
   ArtifactLayer,

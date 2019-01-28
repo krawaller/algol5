@@ -5,6 +5,7 @@ import { FilterDef } from "./filter";
 export * from "./walker";
 export * from "./neighbour";
 export * from "./filter";
+export * from "./draw";
 
 export type Generators<
   ArtifactLayer,
@@ -30,6 +31,18 @@ export type Generators<
     TurnVar
   >
 };
+
+export type GeneratorDefAnon = GeneratorDef<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
 
 export type GeneratorDef<
   ArtifactLayer,

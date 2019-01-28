@@ -1,4 +1,4 @@
-import { AmazonsSetup } from './_types';
+import { AmazonsSetup } from "./_types";
 
 const amazonsSetup: AmazonsSetup = {
   queens: {

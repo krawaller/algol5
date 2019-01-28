@@ -1,4 +1,4 @@
-import { DaggersSetup } from './_types';
+import { DaggersSetup } from "./_types";
 
 const daggersSetup: DaggersSetup = {
   crowns: {
@@ -6,10 +6,8 @@ const daggersSetup: DaggersSetup = {
     "2": ["c1", "f1"]
   },
   daggers: {
-    "1": [
-      ["rect", "c7", "f7"]
-    ],
-    "2": ["c3", "f3", ["rect", "b2", "g2"]]
+    "1": [{ rect: ["c7", "f7"] }],
+    "2": ["c3", "f3", { rect: ["b2", "g2"] }]
   }
 };
 

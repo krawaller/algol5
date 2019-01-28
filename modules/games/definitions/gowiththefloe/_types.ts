@@ -21,7 +21,7 @@ export type GowiththefloeTurnVar = any;
  
 export type GowiththefloeGenerators = Generators<GowiththefloeArtifactLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloeTurnPos, GowiththefloeTurnVar>;
 export type GowiththefloeFlow = Flow<GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;
-export type GowiththefloeBoard = Board<GowiththefloeBoardHeight, GowiththefloeBoardWidth, GowiththefloePosition, GowiththefloeTerrain>;
+export type GowiththefloeBoard = Board<GowiththefloeBoardHeight, GowiththefloeBoardWidth, GowiththefloeGrid, GowiththefloePosition, GowiththefloeTerrain>;
 export type GowiththefloeAI = AI<GowiththefloeAiArtifactLayer, GowiththefloeAiAspect, GowiththefloeAiBrain, GowiththefloeAiGenerator, GowiththefloeAiGrid, GowiththefloeAiTerrain, GowiththefloeAiTerrainLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeBoardHeight, GowiththefloeBoardWidth, GowiththefloeCommand, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloePosition, GowiththefloeTurnPos, GowiththefloeTurnVar>;
 export type GowiththefloeGraphics = Graphics<GowiththefloeTerrain, GowiththefloeUnit>;
 export type GowiththefloeInstructions = Instructions<GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloePhase, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;

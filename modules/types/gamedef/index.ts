@@ -89,7 +89,7 @@ export type FullDef<
     TurnPos,
     TurnVar
   >;
-  board: Board<BoardHeight, BoardWidth, Position, Terrain>;
+  board: Board<BoardHeight, BoardWidth, Grid, Position, Terrain>;
   setup: Setup<Position, Unit>;
   graphics: Graphics<Terrain, Unit>;
   grids?: { [g in Grid]: any };

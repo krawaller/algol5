@@ -21,7 +21,7 @@ export type AmazonsTurnVar = any;
  
 export type AmazonsGenerators = Generators<AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar>;
 export type AmazonsFlow = Flow<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;
-export type AmazonsBoard = Board<AmazonsBoardHeight, AmazonsBoardWidth, AmazonsPosition, AmazonsTerrain>;
+export type AmazonsBoard = Board<AmazonsBoardHeight, AmazonsBoardWidth, AmazonsGrid, AmazonsPosition, AmazonsTerrain>;
 export type AmazonsAI = AI<AmazonsAiArtifactLayer, AmazonsAiAspect, AmazonsAiBrain, AmazonsAiGenerator, AmazonsAiGrid, AmazonsAiTerrain, AmazonsAiTerrainLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsBoardHeight, AmazonsBoardWidth, AmazonsCommand, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPosition, AmazonsTurnPos, AmazonsTurnVar>;
 export type AmazonsGraphics = Graphics<AmazonsTerrain, AmazonsUnit>;
 export type AmazonsInstructions = Instructions<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPhase, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;

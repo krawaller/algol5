@@ -1,4 +1,4 @@
-import { AlgolVal, Generators, TerrainDef } from "../../";
+import { AlgolVal, Generators, TerrainDef, AlgolGrid } from "../../";
 
 import { Brain } from "./brain";
 
@@ -23,7 +23,7 @@ export type AI<
   Turnv extends string
 > = {
   terrain?: { [t in AiTerrain]: TerrainDef<Position> };
-  grids?: { [s in AiGrid]: any };
+  grids?: { [s in AiGrid]: AlgolGrid<BoardHeight, BoardWidth> };
   generators?: Generators<
     AiArtifactLayer,
     Btlp,

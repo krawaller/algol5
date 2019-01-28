@@ -24,9 +24,9 @@ export type SemaphorGraphics = Graphics<SemaphorTerrain, SemaphorUnit>;
 export type SemaphorInstructions = Instructions<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
 export type SemaphorMeta = Meta;
 export type SemaphorScripts = GameTestSuite;
-export type SemaphorSetup = Setup<SemaphorUnit>;
+export type SemaphorSetup = Setup<SemaphorPosition, SemaphorUnit>;
 
-export type SemaphorDefinition = FullDef<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTerrain, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
+export type SemaphorDefinition = FullDef<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorPosition, SemaphorTerrain, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
 
 export type SemaphorGrid = never;
 
@@ -44,4 +44,4 @@ export type SemaphorAiTerrainLayer = never;
 
 export type SemaphorAiTerrain = never;
 
-export type SemaphorPosition = ["a1","a2","a3","b1","b2","b3","c1","c2","c3","d1","d2","d3"];
+export type SemaphorPosition = "a1" | "a2" | "a3" | "b1" | "b2" | "b3" | "c1" | "c2" | "c3" | "d1" | "d2" | "d3";

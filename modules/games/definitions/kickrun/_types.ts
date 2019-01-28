@@ -24,9 +24,9 @@ export type KickrunGraphics = Graphics<KickrunTerrain, KickrunUnit>;
 export type KickrunInstructions = Instructions<KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGrid, KickrunLayer, KickrunMark, KickrunPhase, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
 export type KickrunMeta = Meta;
 export type KickrunScripts = GameTestSuite;
-export type KickrunSetup = Setup<KickrunUnit>;
+export type KickrunSetup = Setup<KickrunPosition, KickrunUnit>;
 
-export type KickrunDefinition = FullDef<KickrunAiArtifactLayer, KickrunAiAspect, KickrunAiBrain, KickrunAiGenerator, KickrunAiGrid, KickrunAiTerrain, KickrunAiTerrainLayer, KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunGrid, KickrunLayer, KickrunMark, KickrunPhase, KickrunTerrain, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
+export type KickrunDefinition = FullDef<KickrunAiArtifactLayer, KickrunAiAspect, KickrunAiBrain, KickrunAiGenerator, KickrunAiGrid, KickrunAiTerrain, KickrunAiTerrainLayer, KickrunArtifactLayer, KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGenerator, KickrunGrid, KickrunLayer, KickrunMark, KickrunPhase, KickrunPosition, KickrunTerrain, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
 
 export type KickrunGrid = never;
 
@@ -44,4 +44,4 @@ export type KickrunAiTerrainLayer = never;
 
 export type KickrunAiTerrain = never;
 
-export type KickrunPosition = ["a1","a2","a3","a4","a5","b1","b2","b3","b4","b5","c1","c2","c3","c4","c5","d1","d2","d3","d4","d5","e1","e2","e3","e4","e5"];
+export type KickrunPosition = "a1" | "a2" | "a3" | "a4" | "a5" | "b1" | "b2" | "b3" | "b4" | "b5" | "c1" | "c2" | "c3" | "c4" | "c5" | "d1" | "d2" | "d3" | "d4" | "d5" | "e1" | "e2" | "e3" | "e4" | "e5";

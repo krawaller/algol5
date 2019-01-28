@@ -24,9 +24,9 @@ export type CoffeeGraphics = Graphics<CoffeeTerrain, CoffeeUnit>;
 export type CoffeeInstructions = Instructions<CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
 export type CoffeeMeta = Meta;
 export type CoffeeScripts = GameTestSuite;
-export type CoffeeSetup = Setup<CoffeeUnit>;
+export type CoffeeSetup = Setup<CoffeePosition, CoffeeUnit>;
 
-export type CoffeeDefinition = FullDef<CoffeeAiArtifactLayer, CoffeeAiAspect, CoffeeAiBrain, CoffeeAiGenerator, CoffeeAiGrid, CoffeeAiTerrain, CoffeeAiTerrainLayer, CoffeeArtifactLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeeTerrain, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
+export type CoffeeDefinition = FullDef<CoffeeAiArtifactLayer, CoffeeAiAspect, CoffeeAiBrain, CoffeeAiGenerator, CoffeeAiGrid, CoffeeAiTerrain, CoffeeAiTerrainLayer, CoffeeArtifactLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeePosition, CoffeeTerrain, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
 
 export type CoffeeGrid = never;
 
@@ -44,4 +44,4 @@ export type CoffeeAiTerrainLayer = never;
 
 export type CoffeeAiTerrain = never;
 
-export type CoffeePosition = ["a1","a2","a3","a4","a5","b1","b2","b3","b4","b5","c1","c2","c3","c4","c5","d1","d2","d3","d4","d5","e1","e2","e3","e4","e5"];
+export type CoffeePosition = "a1" | "a2" | "a3" | "a4" | "a5" | "b1" | "b2" | "b3" | "b4" | "b5" | "c1" | "c2" | "c3" | "c4" | "c5" | "d1" | "d2" | "d3" | "d4" | "d5" | "e1" | "e2" | "e3" | "e4" | "e5";

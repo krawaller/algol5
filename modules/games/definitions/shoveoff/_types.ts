@@ -24,9 +24,9 @@ export type ShoveoffGraphics = Graphics<ShoveoffTerrain, ShoveoffUnit>;
 export type ShoveoffInstructions = Instructions<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffPhase, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;
 export type ShoveoffMeta = Meta;
 export type ShoveoffScripts = GameTestSuite;
-export type ShoveoffSetup = Setup<ShoveoffUnit>;
+export type ShoveoffSetup = Setup<ShoveoffPosition, ShoveoffUnit>;
 
-export type ShoveoffDefinition = FullDef<ShoveoffAiArtifactLayer, ShoveoffAiAspect, ShoveoffAiBrain, ShoveoffAiGenerator, ShoveoffAiGrid, ShoveoffAiTerrain, ShoveoffAiTerrainLayer, ShoveoffArtifactLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffPhase, ShoveoffTerrain, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;
+export type ShoveoffDefinition = FullDef<ShoveoffAiArtifactLayer, ShoveoffAiAspect, ShoveoffAiBrain, ShoveoffAiGenerator, ShoveoffAiGrid, ShoveoffAiTerrain, ShoveoffAiTerrainLayer, ShoveoffArtifactLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffPhase, ShoveoffPosition, ShoveoffTerrain, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;
 
 export type ShoveoffGrid = never;
 
@@ -44,4 +44,4 @@ export type ShoveoffAiTerrainLayer = never;
 
 export type ShoveoffAiTerrain = never;
 
-export type ShoveoffPosition = ["a1","a2","a3","a4","b1","b2","b3","b4","c1","c2","c3","c4","d1","d2","d3","d4"];
+export type ShoveoffPosition = "a1" | "a2" | "a3" | "a4" | "b1" | "b2" | "b3" | "b4" | "c1" | "c2" | "c3" | "c4" | "d1" | "d2" | "d3" | "d4";

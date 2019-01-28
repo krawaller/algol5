@@ -38,6 +38,7 @@ export type FullDefAnon = FullDef<
   string,
   string,
   string,
+  string,
   string
 >;
 
@@ -58,6 +59,7 @@ export type FullDef<
   Layer extends string,
   Mark extends string,
   Phase extends string,
+  Position extends string,
   Terrain extends string,
   TurnPos extends string,
   TurnVar extends string,
@@ -81,7 +83,7 @@ export type FullDef<
     TurnVar
   >;
   board: Board<Terrain>;
-  setup: Setup<Unit>;
+  setup: Setup<Position, Unit>;
   graphics: Graphics<Terrain, Unit>;
   grids?: { [g in Grid]: any };
   instructions: Instructions<
@@ -132,7 +134,7 @@ export type Definition = {
   meta: Meta;
   graphics: Graphics;
   board: Board;
-  setup?: Setup;
+  setup?: any;
   startTurn?: any;
   canalwaysend?: {
     [name: string]: true;

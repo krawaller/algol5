@@ -24,9 +24,9 @@ export type DescentGraphics = Graphics<DescentTerrain, DescentUnit>;
 export type DescentInstructions = Instructions<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentTurnPos, DescentTurnVar, DescentUnit>;
 export type DescentMeta = Meta;
 export type DescentScripts = GameTestSuite;
-export type DescentSetup = Setup<DescentUnit>;
+export type DescentSetup = Setup<DescentPosition, DescentUnit>;
 
-export type DescentDefinition = FullDef<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentTerrain, DescentTurnPos, DescentTurnVar, DescentUnit>;
+export type DescentDefinition = FullDef<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentPosition, DescentTerrain, DescentTurnPos, DescentTurnVar, DescentUnit>;
 
 export type DescentGrid = never;
 
@@ -44,4 +44,4 @@ export type DescentAiTerrainLayer = never;
 
 export type DescentAiTerrain = never;
 
-export type DescentPosition = ["a1","a2","a3","a4","b1","b2","b3","b4","c1","c2","c3","c4","d1","d2","d3","d4"];
+export type DescentPosition = "a1" | "a2" | "a3" | "a4" | "b1" | "b2" | "b3" | "b4" | "c1" | "c2" | "c3" | "c4" | "d1" | "d2" | "d3" | "d4";

@@ -24,9 +24,9 @@ export type OrthokonGraphics = Graphics<OrthokonTerrain, OrthokonUnit>;
 export type OrthokonInstructions = Instructions<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
 export type OrthokonMeta = Meta;
 export type OrthokonScripts = GameTestSuite;
-export type OrthokonSetup = Setup<OrthokonUnit>;
+export type OrthokonSetup = Setup<OrthokonPosition, OrthokonUnit>;
 
-export type OrthokonDefinition = FullDef<OrthokonAiArtifactLayer, OrthokonAiAspect, OrthokonAiBrain, OrthokonAiGenerator, OrthokonAiGrid, OrthokonAiTerrain, OrthokonAiTerrainLayer, OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonTerrain, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
+export type OrthokonDefinition = FullDef<OrthokonAiArtifactLayer, OrthokonAiAspect, OrthokonAiBrain, OrthokonAiGenerator, OrthokonAiGrid, OrthokonAiTerrain, OrthokonAiTerrainLayer, OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonPosition, OrthokonTerrain, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
 
 export type OrthokonGrid = never;
 
@@ -44,4 +44,4 @@ export type OrthokonAiTerrainLayer = never;
 
 export type OrthokonAiTerrain = never;
 
-export type OrthokonPosition = ["a1","a2","a3","a4","b1","b2","b3","b4","c1","c2","c3","c4","d1","d2","d3","d4"];
+export type OrthokonPosition = "a1" | "a2" | "a3" | "a4" | "b1" | "b2" | "b3" | "b4" | "c1" | "c2" | "c3" | "c4" | "d1" | "d2" | "d3" | "d4";

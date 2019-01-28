@@ -24,9 +24,9 @@ export type AtriumGraphics = Graphics<AtriumTerrain, AtriumUnit>;
 export type AtriumInstructions = Instructions<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
 export type AtriumMeta = Meta;
 export type AtriumScripts = GameTestSuite;
-export type AtriumSetup = Setup<AtriumUnit>;
+export type AtriumSetup = Setup<AtriumPosition, AtriumUnit>;
 
-export type AtriumDefinition = FullDef<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTerrain, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
+export type AtriumDefinition = FullDef<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumPosition, AtriumTerrain, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
 
 export type AtriumGrid = never;
 
@@ -44,4 +44,4 @@ export type AtriumAiTerrainLayer = never;
 
 export type AtriumAiTerrain = never;
 
-export type AtriumPosition = ["a1","a2","a3","a4","a5","b1","b2","b3","b4","b5","c1","c2","c3","c4","c5","d1","d2","d3","d4","d5","e1","e2","e3","e4","e5"];
+export type AtriumPosition = "a1" | "a2" | "a3" | "a4" | "a5" | "b1" | "b2" | "b3" | "b4" | "b5" | "c1" | "c2" | "c3" | "c4" | "c5" | "d1" | "d2" | "d3" | "d4" | "d5" | "e1" | "e2" | "e3" | "e4" | "e5";

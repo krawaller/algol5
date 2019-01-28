@@ -24,9 +24,9 @@ export type AriesGraphics = Graphics<AriesTerrain, AriesUnit>;
 export type AriesInstructions = Instructions<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesTurnPos, AriesTurnVar, AriesUnit>;
 export type AriesMeta = Meta;
 export type AriesScripts = GameTestSuite;
-export type AriesSetup = Setup<AriesUnit>;
+export type AriesSetup = Setup<AriesPosition, AriesUnit>;
 
-export type AriesDefinition = FullDef<AriesAiArtifactLayer, AriesAiAspect, AriesAiBrain, AriesAiGenerator, AriesAiGrid, AriesAiTerrain, AriesAiTerrainLayer, AriesArtifactLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesTerrain, AriesTurnPos, AriesTurnVar, AriesUnit>;
+export type AriesDefinition = FullDef<AriesAiArtifactLayer, AriesAiAspect, AriesAiBrain, AriesAiGenerator, AriesAiGrid, AriesAiTerrain, AriesAiTerrainLayer, AriesArtifactLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesPosition, AriesTerrain, AriesTurnPos, AriesTurnVar, AriesUnit>;
 
 export type AriesGrid = never;
 
@@ -44,4 +44,4 @@ export type AriesAiTerrainLayer = never;
 
 export type AriesAiTerrain = never;
 
-export type AriesPosition = ["a1","a2","a3","a4","a5","a6","a7","a8","b1","b2","b3","b4","b5","b6","b7","b8","c1","c2","c3","c4","c5","c6","c7","c8","d1","d2","d3","d4","d5","d6","d7","d8","e1","e2","e3","e4","e5","e6","e7","e8","f1","f2","f3","f4","f5","f6","f7","f8","g1","g2","g3","g4","g5","g6","g7","g8","h1","h2","h3","h4","h5","h6","h7","h8"];
+export type AriesPosition = "a1" | "a2" | "a3" | "a4" | "a5" | "a6" | "a7" | "a8" | "b1" | "b2" | "b3" | "b4" | "b5" | "b6" | "b7" | "b8" | "c1" | "c2" | "c3" | "c4" | "c5" | "c6" | "c7" | "c8" | "d1" | "d2" | "d3" | "d4" | "d5" | "d6" | "d7" | "d8" | "e1" | "e2" | "e3" | "e4" | "e5" | "e6" | "e7" | "e8" | "f1" | "f2" | "f3" | "f4" | "f5" | "f6" | "f7" | "f8" | "g1" | "g2" | "g3" | "g4" | "g5" | "g6" | "g7" | "g8" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7" | "h8";

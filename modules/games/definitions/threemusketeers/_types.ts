@@ -24,9 +24,9 @@ export type ThreemusketeersGraphics = Graphics<ThreemusketeersTerrain, Threemusk
 export type ThreemusketeersInstructions = Instructions<ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersPhase, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersUnit>;
 export type ThreemusketeersMeta = Meta;
 export type ThreemusketeersScripts = GameTestSuite;
-export type ThreemusketeersSetup = Setup<ThreemusketeersUnit>;
+export type ThreemusketeersSetup = Setup<ThreemusketeersPosition, ThreemusketeersUnit>;
 
-export type ThreemusketeersDefinition = FullDef<ThreemusketeersAiArtifactLayer, ThreemusketeersAiAspect, ThreemusketeersAiBrain, ThreemusketeersAiGenerator, ThreemusketeersAiGrid, ThreemusketeersAiTerrain, ThreemusketeersAiTerrainLayer, ThreemusketeersArtifactLayer, ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersPhase, ThreemusketeersTerrain, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersUnit>;
+export type ThreemusketeersDefinition = FullDef<ThreemusketeersAiArtifactLayer, ThreemusketeersAiAspect, ThreemusketeersAiBrain, ThreemusketeersAiGenerator, ThreemusketeersAiGrid, ThreemusketeersAiTerrain, ThreemusketeersAiTerrainLayer, ThreemusketeersArtifactLayer, ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersPhase, ThreemusketeersPosition, ThreemusketeersTerrain, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersUnit>;
 
 export type ThreemusketeersGrid = never;
 
@@ -44,4 +44,4 @@ export type ThreemusketeersAiTerrainLayer = never;
 
 export type ThreemusketeersAiTerrain = never;
 
-export type ThreemusketeersPosition = ["a1","a2","a3","a4","a5","b1","b2","b3","b4","b5","c1","c2","c3","c4","c5","d1","d2","d3","d4","d5","e1","e2","e3","e4","e5"];
+export type ThreemusketeersPosition = "a1" | "a2" | "a3" | "a4" | "a5" | "b1" | "b2" | "b3" | "b4" | "b5" | "c1" | "c2" | "c3" | "c4" | "c5" | "d1" | "d2" | "d3" | "d4" | "d5" | "e1" | "e2" | "e3" | "e4" | "e5";

@@ -24,9 +24,9 @@ export type TransetGraphics = Graphics<TransetTerrain, TransetUnit>;
 export type TransetInstructions = Instructions<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGrid, TransetLayer, TransetMark, TransetPhase, TransetTurnPos, TransetTurnVar, TransetUnit>;
 export type TransetMeta = Meta;
 export type TransetScripts = GameTestSuite;
-export type TransetSetup = Setup<TransetUnit>;
+export type TransetSetup = Setup<TransetPosition, TransetUnit>;
 
-export type TransetDefinition = FullDef<TransetAiArtifactLayer, TransetAiAspect, TransetAiBrain, TransetAiGenerator, TransetAiGrid, TransetAiTerrain, TransetAiTerrainLayer, TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetGrid, TransetLayer, TransetMark, TransetPhase, TransetTerrain, TransetTurnPos, TransetTurnVar, TransetUnit>;
+export type TransetDefinition = FullDef<TransetAiArtifactLayer, TransetAiAspect, TransetAiBrain, TransetAiGenerator, TransetAiGrid, TransetAiTerrain, TransetAiTerrainLayer, TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetGrid, TransetLayer, TransetMark, TransetPhase, TransetPosition, TransetTerrain, TransetTurnPos, TransetTurnVar, TransetUnit>;
 
 export type TransetGrid = never;
 
@@ -44,4 +44,4 @@ export type TransetAiTerrainLayer = never;
 
 export type TransetAiTerrain = never;
 
-export type TransetPosition = ["a1","a2","a3","a4","a5","b1","b2","b3","b4","b5","c1","c2","c3","c4","c5","d1","d2","d3","d4","d5","e1","e2","e3","e4","e5"];
+export type TransetPosition = "a1" | "a2" | "a3" | "a4" | "a5" | "b1" | "b2" | "b3" | "b4" | "b5" | "c1" | "c2" | "c3" | "c4" | "c5" | "d1" | "d2" | "d3" | "d4" | "d5" | "e1" | "e2" | "e3" | "e4" | "e5";

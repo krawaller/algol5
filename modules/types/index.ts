@@ -90,7 +90,7 @@ export function typeSignature(type, gameId) {
       "Unit"
     ],
     Board: ["Terrain"],
-    Setup: ["Unit"],
+    Setup: ["Position", "Unit"],
     Generators: [
       "ArtifactLayer",
       "BattlePos",
@@ -120,6 +120,7 @@ export function typeSignature(type, gameId) {
       "Layer",
       "Mark",
       "Phase",
+      "Position",
       "Terrain",
       "TurnPos",
       "TurnVar",

@@ -24,9 +24,9 @@ export type KriegGraphics = Graphics<KriegTerrain, KriegUnit>;
 export type KriegInstructions = Instructions<KriegBattlePos, KriegBattleVar, KriegCommand, KriegGrid, KriegLayer, KriegMark, KriegPhase, KriegTurnPos, KriegTurnVar, KriegUnit>;
 export type KriegMeta = Meta;
 export type KriegScripts = GameTestSuite;
-export type KriegSetup = Setup<KriegUnit>;
+export type KriegSetup = Setup<KriegPosition, KriegUnit>;
 
-export type KriegDefinition = FullDef<KriegAiArtifactLayer, KriegAiAspect, KriegAiBrain, KriegAiGenerator, KriegAiGrid, KriegAiTerrain, KriegAiTerrainLayer, KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegGrid, KriegLayer, KriegMark, KriegPhase, KriegTerrain, KriegTurnPos, KriegTurnVar, KriegUnit>;
+export type KriegDefinition = FullDef<KriegAiArtifactLayer, KriegAiAspect, KriegAiBrain, KriegAiGenerator, KriegAiGrid, KriegAiTerrain, KriegAiTerrainLayer, KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegGrid, KriegLayer, KriegMark, KriegPhase, KriegPosition, KriegTerrain, KriegTurnPos, KriegTurnVar, KriegUnit>;
 
 export type KriegGrid = never;
 
@@ -44,4 +44,4 @@ export type KriegAiTerrainLayer = never;
 
 export type KriegAiTerrain = never;
 
-export type KriegPosition = ["a1","a2","a3","a4","b1","b2","b3","b4","c1","c2","c3","c4","d1","d2","d3","d4"];
+export type KriegPosition = "a1" | "a2" | "a3" | "a4" | "b1" | "b2" | "b3" | "b4" | "c1" | "c2" | "c3" | "c4" | "d1" | "d2" | "d3" | "d4";

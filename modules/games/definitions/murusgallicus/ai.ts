@@ -3,8 +3,8 @@ import { MurusgallicusAI } from "./_types";
 const murusgallicusAI: MurusgallicusAI = {
   terrain: {
     threatrow: {
-      "1": [["rect", "a3", "h3"]],
-      "2": [["rect", "a5", "h5"]]
+      "1": [{ rect: ["a3", "h3"] }],
+      "2": [{ rect: ["a5", "h5"] }]
     }
   },
   grids: {

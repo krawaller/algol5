@@ -14,7 +14,7 @@ export type WalkerDefAnon = WalkerDef<
   string
 >;
 
-export function isWalkerDef(gen: GeneratorDefAnon) {
+export function isWalkerDef(gen: GeneratorDefAnon): gen is WalkerDefAnon {
   return (gen as WalkerDefAnon).type === "walker";
 }
 

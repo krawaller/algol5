@@ -14,7 +14,7 @@ export type NeighbourDefAnon = NeighbourDef<
   string
 >;
 
-export function isNeighbourDef(gen: GeneratorDefAnon) {
+export function isNeighbourDef(gen: GeneratorDefAnon): gen is NeighbourDefAnon {
   return (gen as NeighbourDefAnon).type === "neighbour";
 }
 

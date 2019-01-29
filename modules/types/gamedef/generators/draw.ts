@@ -1,5 +1,17 @@
 import { AlgolVal, AlgolBool, AlgolSet } from "../../";
 
+export type DrawDefAnon = DrawDef<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
 export type DrawDef<
   ArtifactLayer,
   BattlePos,

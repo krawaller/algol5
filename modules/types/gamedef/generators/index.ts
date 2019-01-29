@@ -32,18 +32,6 @@ export type Generators<
   >
 };
 
-export type GeneratorDefAnon = GeneratorDef<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-
 export type GeneratorDef<
   ArtifactLayer,
   BattlePos,
@@ -88,3 +76,30 @@ export type GeneratorDef<
       TurnPos,
       TurnVar
     >;
+
+// ----------------------- Anon variants
+
+export type GeneratorsAnon = Generators<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
+export type GeneratorDefAnon = GeneratorDef<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;

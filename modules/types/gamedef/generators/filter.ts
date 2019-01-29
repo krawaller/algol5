@@ -13,7 +13,7 @@ export type FilterDefAnon = FilterDef<
   string
 >;
 
-export function isFilterDef(gen: GeneratorDefAnon) {
+export function isFilterDef(gen: GeneratorDefAnon): gen is FilterDefAnon {
   return (gen as FilterDefAnon).type === "filter";
 }
 

@@ -1,5 +1,6 @@
+import { emptyFullDef } from "../../common";
 import { AlgolBoolAnon } from "../../types";
-import { emptyFullDef, run, ParserTest, truthy, falsy } from "./utils";
+import { run, ParserTest, truthy, falsy } from "./utils";
 
 import * as test from "tape";
 

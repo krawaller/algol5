@@ -61,31 +61,3 @@ export function run<T>(parserTests: ParserTest<T>[], type, t) {
     })
   );
 }
-
-export const emptyFullDef: FullDefAnon = {
-  generators: {},
-  AI: {
-    aspects: {},
-    brains: {},
-    generators: {},
-    grids: {},
-    terrain: {}
-  },
-  board: {
-    height: 5,
-    width: 5,
-    terrain: {}
-  },
-  instructions: {},
-  flow: {
-    commands: {},
-    marks: {}
-  },
-  graphics: {
-    icons: {},
-    tiles: {}
-  },
-  meta: {},
-  scripts: {},
-  setup: {}
-};

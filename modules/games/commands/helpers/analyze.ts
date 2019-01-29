@@ -7,7 +7,8 @@ import { FullDefAnon, typeSignature } from "../../../types";
 import {
   boardPositions,
   terrainLayerNames,
-  possibilities
+  possibilities,
+  artifactLayers
 } from "../../../common";
 import dateStamp from "./datestamp";
 
@@ -15,27 +16,6 @@ import { defPath } from "./_paths";
 
 function ownify(u) {
   return [u, "my" + u, "neutral" + u, "opp" + u];
-}
-
-function getArtifactLayers(generators = {}) {
-  const generatorNames = Object.keys(generators);
-  let artifactLayers = [];
-
-  for (let g of generatorNames) {
-    const gen = generators[g];
-    const draws = gen.type === "filter" ? { filter: gen } : gen.draw;
-    for (let d of Object.keys(draws)) {
-      const draw = draws[d];
-      for (let l of possibilities(draw.tolayer)) {
-        if (draw.include && draw.include.owner) {
-          artifactLayers = artifactLayers.concat(ownify(l));
-        } else {
-          artifactLayers = artifactLayers.concat(l);
-        }
-      }
-    }
-  }
-  return artifactLayers.filter((l, n) => artifactLayers.indexOf(l) === n);
 }
 
 export default async function analyze(def: FullDefAnon | string) {
@@ -60,9 +40,9 @@ export default async function analyze(def: FullDefAnon | string) {
 
   const unitLayers = units.reduce((mem, u) => mem.concat(ownify(u)), []);
 
-  let myTerrainLayerNames = terrainLayerNames(def.board); //getTerrainLayers(def.board.terrain);
+  let myTerrainLayerNames = terrainLayerNames(def.board);
 
-  const artifactLayers = getArtifactLayers(def.generators);
+  const artifactLayerNames = Object.keys(artifactLayers(def.generators));
   const generatorNames = Object.keys(generators);
 
   const gridNames = Object.keys(def.grids || {});
@@ -85,7 +65,7 @@ export default async function analyze(def: FullDefAnon | string) {
   const aiAspects = Object.keys(AI.aspects);
   const aiGrids = Object.keys(AI.grids);
   const aiBrains = Object.keys(AI.brains);
-  const aiArtifactLayers = getArtifactLayers(AI.generators);
+  const aiArtifactLayerNames = Object.keys(artifactLayers(AI.generators));
 
   const analysis = `import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
@@ -121,8 +101,8 @@ export type ${capId}Generator = ${
       : "never"
   };
 export type ${capId}ArtifactLayer = ${
-    artifactLayers.length
-      ? artifactLayers.map(t => `"${t}"`).join(" | ")
+    artifactLayerNames.length
+      ? artifactLayerNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
 export type ${capId}TerrainLayer = ${
@@ -132,7 +112,7 @@ export type ${capId}TerrainLayer = ${
   };
 export type ${capId}Layer = CommonLayer${
     unitLayers.length ? ` | ${capId}UnitLayer` : ""
-  }${artifactLayers.length ? ` | ${capId}ArtifactLayer` : ""}${
+  }${artifactLayerNames.length ? ` | ${capId}ArtifactLayer` : ""}${
     myTerrainLayerNames.length ? ` | ${capId}TerrainLayer` : ""
   };
 export type ${capId}BattlePos = any;
@@ -175,8 +155,8 @@ export type ${capId}AiGrid = ${
   };
 
 export type ${capId}AiArtifactLayer = ${
-    aiArtifactLayers.length
-      ? aiArtifactLayers.map(t => `"${t}"`).join(" | ")
+    aiArtifactLayerNames.length
+      ? aiArtifactLayerNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
 

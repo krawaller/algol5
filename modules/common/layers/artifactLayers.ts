@@ -1,10 +1,10 @@
-import { FullDefAnon, isFilterDef, DrawDefAnon } from "../../types";
+import { isFilterDef, DrawDefAnon, GeneratorsAnon } from "../../types";
 import { possibilities } from "../";
 
-export function artifactLayers(def: FullDefAnon) {
+export function artifactLayers(generators: GeneratorsAnon = {}) {
   let names = [];
-  Object.keys(def.generators || {}).forEach(genName => {
-    const genDef = def.generators[genName];
+  Object.keys(generators).forEach(genName => {
+    const genDef = generators[genName];
     if (isFilterDef(genDef)) {
       names = names.concat(possibilities(genDef.tolayer));
     } else {

@@ -1,9 +1,9 @@
 import * as test from "tape";
-import { FullDefAnon } from "../../types";
-import { artifactLayers, emptyFullDef } from "../";
+import { GeneratorsAnon } from "../../types";
+import { artifactLayers } from "../";
 
 type ArtifactLayerTest = {
-  def: Partial<FullDefAnon>;
+  generators: GeneratorsAnon;
   expected: {
     [artifactLayerName: string]: {};
   };
@@ -11,12 +11,10 @@ type ArtifactLayerTest = {
 
 const artifactLayerTests: ArtifactLayerTest[] = [
   {
-    def: {
-      generators: {
-        walk: {
-          type: "walker",
-          draw: { steps: { tolayer: { playercase: ["w1", "w2"] } } }
-        }
+    generators: {
+      walk: {
+        type: "walker",
+        draw: { steps: { tolayer: { playercase: ["w1", "w2"] } } }
       }
     },
     expected: {
@@ -25,13 +23,11 @@ const artifactLayerTests: ArtifactLayerTest[] = [
     }
   },
   {
-    def: {
-      generators: {
-        filt: {
-          type: "filter",
-          layer: "whatev",
-          tolayer: { ifelse: [["true"], "f1", "f2"] }
-        }
+    generators: {
+      filt: {
+        type: "filter",
+        layer: "whatev",
+        tolayer: { ifelse: [["true"], "f1", "f2"] }
       }
     },
     expected: {
@@ -40,14 +36,12 @@ const artifactLayerTests: ArtifactLayerTest[] = [
     }
   },
   {
-    def: {
-      generators: {
-        nei: {
-          type: "neighbour",
-          draw: {
-            start: { tolayer: "n1", include: { foo: "bar" } },
-            neighbours: { tolayer: "n2", include: { owner: 1 } }
-          }
+    generators: {
+      nei: {
+        type: "neighbour",
+        draw: {
+          start: { tolayer: "n1", include: { foo: "bar" } },
+          neighbours: { tolayer: "n2", include: { owner: 1 } }
         }
       }
     },
@@ -62,11 +56,11 @@ const artifactLayerTests: ArtifactLayerTest[] = [
 ];
 
 test("artifactLayers", t => {
-  artifactLayerTests.forEach(({ def, expected }) =>
+  artifactLayerTests.forEach(({ generators, expected }) =>
     t.deepEqual(
-      artifactLayers({ ...emptyFullDef, ...def }),
+      artifactLayers(generators),
       expected,
-      `Correctly calculates artifactLayers for ${JSON.stringify(def)}`
+      `Correctly calculates artifactLayers for ${JSON.stringify(generators)}`
     )
   );
   t.end();

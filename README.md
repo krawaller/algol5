@@ -35,3 +35,11 @@
 - [ ] Dimensions and positions to css
 - [ ] SVGify
 - [ ] Make nicer :P
+
+---
+
+## Next up
+
+- [x] unit test terrainLayers
+- [ ] artifact layers
+- [ ] terrain prop in board layers (or not)

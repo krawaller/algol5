@@ -6,29 +6,29 @@ Calculates all terrain layers and returns them.
 This should be done per player if any terrain has owner.
 */
 export function terrainLayers(board: BoardAnon, forplayer?, aiterrain?): any {
-  var terrainDef = { ...board.terrain, ...aiterrain };
+  let terrainDef = { ...board.terrain, ...aiterrain };
   if (!Object.keys(terrainDef).length) {
     return {};
   }
-  var terrain = Object.keys(terrainDef).reduce(function(mem, name) {
-    var def = terrainDef[name];
+  let terrain = Object.keys(terrainDef).reduce((mem, name) => {
+    let def = terrainDef[name];
     mem[name] = {};
     if (Array.isArray(def)) {
       // no ownership, we got array of entityddefs directly
       def.forEach(function(entityDef) {
-        processEntity(entityDef).forEach(function(e) {
+        processEntity(entityDef).forEach(e => {
           mem[name][e.pos] = e;
         });
       });
     } else {
       // per-player object
-      for (var o in def) {
+      for (let o in def) {
         let owner = parseInt(o);
-        def[owner].forEach(function(entityDef) {
-          processEntity(entityDef).forEach(function(e) {
+        def[owner].forEach(entityDef => {
+          processEntity(entityDef).forEach(e => {
             e.owner = owner;
             mem[name][e.pos] = e;
-            var prefix =
+            let prefix =
               owner === 0 ? "neutral" : owner === forplayer ? "my" : "opp";
             mem[prefix + name] = mem[prefix + name] || {};
             mem[prefix + name][e.pos] = e;
@@ -38,15 +38,15 @@ export function terrainLayers(board: BoardAnon, forplayer?, aiterrain?): any {
     }
     return mem;
   }, {});
-  // add no-variants of layers and return
-  return Object.keys(terrain).reduce(function(mem, name) {
+  // add no-letiants of layers and return
+  return Object.keys(terrain).reduce((mem, name) => {
     if (!name.match(/^my/) && !name.match(/^opp/)) {
-      var t = terrain[name];
-      var noname = "no" + name;
+      let t = terrain[name];
+      let noname = "no" + name;
       mem[noname] = {};
-      boardPositions(board).forEach(function(pos) {
+      boardPositions(board).forEach(pos => {
         if (!t[pos]) {
-          mem[noname][pos] = { pos: pos };
+          mem[noname][pos] = processEntity(pos)[0];
         }
       });
     }

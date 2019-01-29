@@ -1,1 +1,1 @@
-export * from "./convertToEntities";
+export * from "./processEntity";

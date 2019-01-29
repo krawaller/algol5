@@ -1,5 +1,5 @@
 import { BoardAnon } from "../../types";
-import { convertToEntities, boardPositions } from "../";
+import { processEntity, boardPositions } from "../";
 
 /*
 Calculates all terrain layers and returns them. 
@@ -16,7 +16,7 @@ export function terrainLayers(board: BoardAnon, forplayer?, aiterrain?): any {
     if (Array.isArray(def)) {
       // no ownership, we got array of entityddefs directly
       def.forEach(function(entityDef) {
-        convertToEntities(entityDef).forEach(function(e) {
+        processEntity(entityDef).forEach(function(e) {
           mem[name][e.pos] = e;
         });
       });
@@ -25,7 +25,7 @@ export function terrainLayers(board: BoardAnon, forplayer?, aiterrain?): any {
       for (var o in def) {
         let owner = parseInt(o);
         def[owner].forEach(function(entityDef) {
-          convertToEntities(entityDef).forEach(function(e) {
+          processEntity(entityDef).forEach(function(e) {
             e.owner = owner;
             mem[name][e.pos] = e;
             var prefix =

@@ -5,7 +5,7 @@ export interface AlgolEntitySites<Position extends string> {
 }
 
 export interface AlgolEntityDataSites<Position extends string> {
-  datasites: [Data, Position, ...Position[]];
+  datasites: [Data, ...Position[]];
 }
 
 export interface AlgolEntityRect<Position extends string> {
@@ -17,9 +17,9 @@ export interface AlgolEntityDataRect<Position extends string> {
 }
 
 export interface AlgolEntityHoleRect<Position extends string> {
-  holerect: [Position, Position, Position, ...Position[]];
+  holerect: [Position, Position, ...Position[]];
 }
 
 export interface AlgolEntityDataHoleRect<Position extends string> {
-  dataholerect: [Data, Position, Position, Position, ...Position[]];
+  dataholerect: [Data, Position, Position, ...Position[]];
 }

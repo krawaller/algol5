@@ -8,15 +8,12 @@ import {
   boardPositions,
   terrainLayerNames,
   possibilities,
-  artifactLayers
+  artifactLayers,
+  unitLayers
 } from "../../../common";
 import dateStamp from "./datestamp";
 
 import { defPath } from "./_paths";
-
-function ownify(u) {
-  return [u, "my" + u, "neutral" + u, "opp" + u];
-}
 
 export default async function analyze(def: FullDefAnon | string) {
   if (typeof def === "string") {
@@ -38,12 +35,10 @@ export default async function analyze(def: FullDefAnon | string) {
     return poss.filter(l => l !== "endturn").length > 0;
   });
 
-  const unitLayers = units.reduce((mem, u) => mem.concat(ownify(u)), []);
-
-  let myTerrainLayerNames = terrainLayerNames(def.board);
-
-  const artifactLayerNames = Object.keys(artifactLayers(def.generators));
-  const generatorNames = Object.keys(generators);
+  const myUnitLayerNames = Object.keys(unitLayers(def));
+  const myTerrainLayerNames = terrainLayerNames(def.board);
+  const myArtifactLayerNames = Object.keys(artifactLayers(def.generators));
+  const myGeneratorNames = Object.keys(generators);
 
   const gridNames = Object.keys(def.grids || {});
 
@@ -93,16 +88,18 @@ export type ${capId}Phase = "startTurn" | ${capId}Mark${
     nonEndCommands.length ? ` | ${capId}PhaseCommand` : ""
   };
 export type ${capId}UnitLayer = ${
-    unitLayers.length ? unitLayers.map(t => `"${t}"`).join(" | ") : "never"
+    myUnitLayerNames.length
+      ? myUnitLayerNames.map(t => `"${t}"`).join(" | ")
+      : "never"
   };
 export type ${capId}Generator = ${
-    generatorNames.length
-      ? generatorNames.map(t => `"${t}"`).join(" | ")
+    myGeneratorNames.length
+      ? myGeneratorNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
 export type ${capId}ArtifactLayer = ${
-    artifactLayerNames.length
-      ? artifactLayerNames.map(t => `"${t}"`).join(" | ")
+    myArtifactLayerNames.length
+      ? myArtifactLayerNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
 export type ${capId}TerrainLayer = ${
@@ -111,8 +108,8 @@ export type ${capId}TerrainLayer = ${
       : "never"
   };
 export type ${capId}Layer = CommonLayer${
-    unitLayers.length ? ` | ${capId}UnitLayer` : ""
-  }${artifactLayerNames.length ? ` | ${capId}ArtifactLayer` : ""}${
+    myUnitLayerNames.length ? ` | ${capId}UnitLayer` : ""
+  }${myArtifactLayerNames.length ? ` | ${capId}ArtifactLayer` : ""}${
     myTerrainLayerNames.length ? ` | ${capId}TerrainLayer` : ""
   };
 export type ${capId}BattlePos = any;

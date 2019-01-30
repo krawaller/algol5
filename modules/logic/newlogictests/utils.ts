@@ -33,7 +33,14 @@ export function run<T>(parserTests: ParserTest<T>[], type, t) {
       )[type];
       tests.forEach(({ expr, res, debug }) => {
         const code = parser(expr);
-        const result = _eval(`module.exports = ${code};`, context);
+        let error, result;
+        try {
+          result = _eval(`module.exports = ${code};`, context);
+        } catch (e) {
+          console.log("KABOOM", code);
+          throw e;
+        }
+
         const processedResult =
           res === truthy || res === falsy ? !!result : result;
         const processedComparator =

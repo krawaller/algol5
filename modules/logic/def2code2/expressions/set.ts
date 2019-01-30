@@ -2,7 +2,10 @@ import {
   FullDefAnon,
   AlgolSetAnon,
   isAlgolSetSingle,
-  isAlgolSetLayer
+  isAlgolSetLayer,
+  isAlgolSetUnion,
+  isAlgolSetSubtract,
+  isAlgolSetIntersect
 } from "../../../types";
 import { artifactLayers, terrainLayers, unitLayers } from "../../../common";
 
@@ -43,5 +46,44 @@ export default function parseSet(
   if (isAlgolSetSingle(expr)) {
     const { single: pos } = expr;
     return `{[${parser.pos(pos)}]: 1}`;
+  }
+
+  if (isAlgolSetUnion(expr)) {
+    const { union: sets } = expr;
+    return `{${sets.map(s => `...${parser.set(s)}`).join(", ")}}`;
+  }
+
+  if (isAlgolSetSubtract(expr)) {
+    const {
+      subtract: [target, ...remove]
+    } = expr;
+    // array of all keys in target object
+    const targetKeys = `Object.keys(${parser.set(target)})`;
+    // func that returns true if given key isn't in any of the remove objs
+    const keyTester = `k => ${remove
+      .map(r => `!(${parser.set(r)}).hasOwnProperty(k)`)
+      .join(" && ")}`;
+    // arr of the keys we want to keep
+    const validKeys = `${targetKeys}.filter(${keyTester})`;
+    // turn valid keys back into a set object
+    return `${validKeys}.reduce((m, k) => ({...m, [k]: {}}), {})`;
+  }
+
+  if (isAlgolSetIntersect(expr)) {
+    const {
+      intersect: [first, ...rest]
+    } = expr;
+    // build an array of all keys, including duplicates
+    const keysArr = `Object.keys(${parser.set(first)})${rest
+      .map(r => `.concat(Object.keys(${parser.set(r)}))`)
+      .join("")}`;
+    // reduce keys to an object with count per key
+    const countObj = `${keysArr}.reduce((mem, k) => ({...mem, [k]: (mem[k] || 0) + 1}), {})`;
+    // func that returns true if value of entry equals number of total sets
+    const entryTester = `([key,n]) => n === ${rest.length + 1}`;
+    // transform keys to object entries and keep only those with sufficient count
+    const validEntries = `Object.entries(${countObj}).filter(${entryTester})`;
+    // Turn those valid entries into an object again!
+    return `${validEntries}.reduce((mem, [key]) => ({...mem, [key]: {}}), {})`;
   }
 }

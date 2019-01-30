@@ -21,7 +21,8 @@ const tests: ParserTest<AlgolSetAnon>[] = [
         tests: [
           { expr: "board", res: { b: "oard" } },
           { expr: "light", res: { l: "ight" } },
-          { expr: "dark", res: { d: "ark" } }
+          { expr: "dark", res: { d: "ark" } },
+          { expr: { layer: "dark" }, res: { d: "ark" } }
         ]
       },
       {

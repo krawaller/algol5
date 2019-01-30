@@ -1,4 +1,9 @@
-import { FullDefAnon, AlgolSetAnon, isAlgolSetSingle } from "../../../types";
+import {
+  FullDefAnon,
+  AlgolSetAnon,
+  isAlgolSetSingle,
+  isAlgolSetLayer
+} from "../../../types";
 import { artifactLayers, terrainLayers } from "../../../common";
 
 import makeParser from "./";
@@ -13,15 +18,23 @@ export default function parseSet(
   const parser = makeParser(gameDef, player, action, "set");
 
   if (typeof expr === "string") {
-    if (artifactLayers(gameDef.generators)[expr]) {
-      return `ARTIFACTS.${expr}`;
+    const name = expr.replace(/^"|"$/g, ""); // since might be value processed
+
+    if (artifactLayers(gameDef.generators)[name]) {
+      return `ARTIFACTS.${name}`;
     }
-    if (terrainLayers(gameDef.board, 1)[expr]) {
-      return `TERRAIN.${expr}`;
+    if (terrainLayers(gameDef.board, 1)[name]) {
+      return `TERRAIN.${name}`;
     }
-    if (expr === "board" || expr === "light" || expr === "dark") {
-      return `BOARD.${expr}`;
+    if (name === "board" || name === "light" || name === "dark") {
+      return `BOARD.${name}`;
     }
+    throw new Error(`Unknown layer reference: ${name}`);
+  }
+
+  if (isAlgolSetLayer(expr)) {
+    const { layer: name } = expr;
+    return parser.set(parser.val(name) as string);
   }
 
   if (isAlgolSetSingle(expr)) {

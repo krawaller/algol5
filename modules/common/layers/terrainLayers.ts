@@ -38,7 +38,7 @@ export function terrainLayers(board: BoardAnon, forplayer?, aiterrain?): any {
     }
     return mem;
   }, {});
-  // add no-letiants of layers and return
+  // add no-variants of layers and return
   return Object.keys(terrain).reduce((mem, name) => {
     if (!name.match(/^my/) && !name.match(/^opp/)) {
       let t = terrain[name];

@@ -68,6 +68,30 @@ const tests: ParserTest<AlgolSetAnon>[] = [
         tests: [{ expr: "myboo", res: { a1: { boo: 1 } } }]
       }
     ]
+  },
+  {
+    def: {
+      ...emptyFullDef,
+      graphics: {
+        ...emptyFullDef.graphics,
+        icons: {
+          gnurps: {}
+        }
+      }
+    },
+    player: 1,
+    action: "someaction",
+    contexts: [
+      {
+        context: { UNITLAYERS: { mygnurps: { myg: "nurps" } } },
+        tests: [
+          {
+            expr: "mygnurps",
+            res: { myg: "nurps" }
+          }
+        ]
+      }
+    ]
   }
 ];
 

@@ -4,7 +4,7 @@ import {
   isAlgolSetSingle,
   isAlgolSetLayer
 } from "../../../types";
-import { artifactLayers, terrainLayers } from "../../../common";
+import { artifactLayers, terrainLayers, unitLayers } from "../../../common";
 
 import makeParser from "./";
 
@@ -25,6 +25,9 @@ export default function parseSet(
     }
     if (terrainLayers(gameDef.board, 1)[name]) {
       return `TERRAIN.${name}`;
+    }
+    if (unitLayers(gameDef)[name]) {
+      return `UNITLAYERS.${name}`;
     }
     if (name === "board" || name === "light" || name === "dark") {
       return `BOARD.${name}`;

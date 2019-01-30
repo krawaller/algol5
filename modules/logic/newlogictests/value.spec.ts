@@ -48,6 +48,37 @@ const tests: ParserTest<AlgolValAnon>[] = [
       {
         context: { MARKS: { somemark: "wee" } },
         tests: [{ expr: { sizeof: { single: "somemark" } }, res: 1 }]
+      },
+      {
+        context: {
+          MARKS: { mymark: "a1" },
+          UNITLAYERS: { units: { a1: { id: 666 } } }
+        },
+        tests: [{ expr: { idat: "mymark" }, res: 666 }]
+      },
+      {
+        context: {
+          WALKLENGTH: 1,
+          DIR: 2,
+          STOPREASON: "tripped",
+          TOTALCOUNT: 3,
+          NEIGHBOURCOUNT: 4,
+          MAX: 5,
+          STEP: 6,
+          LOOPID: 7,
+          turn: { turn: 8 }
+        },
+        tests: [
+          { expr: ["walklength"], res: 1 },
+          { expr: ["dir"], res: 2 },
+          { expr: ["stopreason"], res: "tripped" },
+          { expr: ["totalcount"], res: 3 },
+          { expr: ["neighbourcount"], res: 4 },
+          { expr: ["max"], res: 5 },
+          { expr: ["step"], res: 6 },
+          { expr: ["loopid"], res: 7 },
+          { expr: ["turn"], res: 8 }
+        ]
       }
     ]
   },
@@ -62,6 +93,37 @@ const tests: ParserTest<AlgolValAnon>[] = [
           { expr: ["player"], res: 2 },
           { expr: ["otherplayer"], res: 1 },
           { expr: { playercase: [666, { value: "yes" }] }, res: "yes" }
+        ]
+      }
+    ]
+  },
+  {
+    def: {
+      ...emptyFullDef,
+      board: {
+        ...emptyFullDef.board,
+        terrain: {
+          flurp: []
+        }
+      }
+    },
+    player: 1,
+    action: "someaction",
+    contexts: [
+      {
+        context: {
+          TERRAIN: { flurp: { a1: { foo: "bar" } } },
+          MARKS: { there: "a1" }
+        },
+        tests: [{ expr: { read: ["flurp", "there", "foo"] }, res: "bar" }]
+      },
+      {
+        context: {
+          TERRAIN: { flurp: { a1: { wee: 5 }, b2: { wee: 2 } } }
+        },
+        tests: [
+          { expr: { harvest: ["flurp", { value: "wee" }] }, res: 7 },
+          { expr: { sizeof: "flurp" }, res: 2 }
         ]
       }
     ]

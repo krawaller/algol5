@@ -6,7 +6,10 @@ import {
   isAlgolValProd,
   isAlgolValTurnVar,
   isAlgolValBattleVar,
-  isAlgolValSizeOf
+  isAlgolValSizeOf,
+  isAlgolValRead,
+  isAlgolValIdAt,
+  isAlgolValHarvest
 } from "../../../types";
 
 import makeParser from "./";
@@ -34,6 +37,22 @@ export default function parseVal(
         return player;
       case "otherplayer":
         return player === 1 ? 2 : 1;
+      case "walklength":
+        return "WALKLENGTH";
+      case "stopreason":
+        return "STOPREASON";
+      case "totalcount":
+        return "TOTALCOUNT";
+      case "neighbourcount":
+        return "NEIGHBOURCOUNT";
+      case "max":
+        return "MAX";
+      case "step":
+        return "STEP";
+      case "loopid":
+        return "LOOPID";
+      case "turn":
+        return "turn.turn";
       default:
         return undefined;
     }
@@ -61,5 +80,25 @@ export default function parseVal(
   if (isAlgolValSizeOf(expr)) {
     const { sizeof: set } = expr;
     return `Object.keys(${parser.set(set)}).length`;
+  }
+  if (isAlgolValRead(expr)) {
+    const {
+      read: [layer, pos, prop]
+    } = expr;
+    return `(${parser.set(layer)}[${parser.pos(pos)}]||{})[${parser.val(
+      prop
+    )}]`;
+  }
+  if (isAlgolValIdAt(expr)) {
+    const { idat: pos } = expr;
+    return parser.val({ read: ["units", pos, "id"] });
+  }
+  if (isAlgolValHarvest(expr)) {
+    const {
+      harvest: [set, prop]
+    } = expr;
+    return `Object.entries(${parser.set(
+      set
+    )}).reduce((mem, [pos,obj]) => mem + obj[${parser.val(prop)}], 0)`;
   }
 }

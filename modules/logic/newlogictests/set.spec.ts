@@ -112,6 +112,16 @@ const tests: ParserTest<AlgolSetAnon>[] = [
             res: { myg: "nurps" }
           }
         ]
+      },
+      {
+        context: {
+          UNITLAYERS: {
+            gnurps: { a1: {}, b2: {} },
+            units: { a1: { group: "gnurps" } }
+          },
+          MARKS: { mymark: "a1" }
+        },
+        tests: [{ expr: { groupat: "mymark" }, res: { a1: {}, b2: {} } }]
       }
     ]
   }

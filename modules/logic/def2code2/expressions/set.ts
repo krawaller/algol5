@@ -5,7 +5,8 @@ import {
   isAlgolSetLayer,
   isAlgolSetUnion,
   isAlgolSetSubtract,
-  isAlgolSetIntersect
+  isAlgolSetIntersect,
+  isAlgolSetGroupAt
 } from "../../../types";
 import { artifactLayers, terrainLayers, unitLayers } from "../../../common";
 
@@ -86,4 +87,11 @@ export default function parseSet(
     // Turn those valid entries into an object again!
     return `${validEntries}.reduce((mem, [key]) => ({...mem, [key]: {}}), {})`;
   }
+
+  if (isAlgolSetGroupAt(expr)) {
+    const { groupat: pos } = expr;
+    return `UNITLAYERS[${parser.val({ read: ["units", pos, "group"] })}]`;
+  }
+
+  throw new Error(`Unknown set definition: ${JSON.stringify(expr)}`);
 }

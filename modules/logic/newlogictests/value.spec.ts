@@ -48,7 +48,10 @@ const tests: ParserTest<AlgolValAnon>[] = [
       },
       {
         context: { MARKS: { somemark: "wee" } },
-        tests: [{ expr: { sizeof: { single: "somemark" } }, res: 1 }]
+        tests: [
+          { expr: { sizeof: { single: "somemark" } }, res: 1 },
+          { expr: { pos: "somemark" }, res: "wee" }
+        ]
       },
       {
         context: {
@@ -79,6 +82,25 @@ const tests: ParserTest<AlgolValAnon>[] = [
           { expr: ["step"], res: 6 },
           { expr: ["loopid"], res: 7 },
           { expr: ["turn"], res: 8 }
+        ]
+      },
+      {
+        context: {
+          GRIDS: { meep: { a1: 3, c2: 5 } },
+          MARKS: { mymark: "a1", othermark: "c2" }
+        },
+        tests: [
+          { expr: { gridat: ["meep", "mymark"] }, res: 3 },
+          { expr: { gridat: [{ value: "meep" }, "othermark"] }, res: 5 },
+          {
+            expr: {
+              gridin: [
+                "meep",
+                { union: [{ single: "mymark" }, { single: "othermark" }] }
+              ]
+            },
+            res: 8
+          }
         ]
       }
     ]

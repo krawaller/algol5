@@ -10,11 +10,13 @@ import {
   isAlgolValRead,
   isAlgolValIdAt,
   isAlgolValHarvest,
-  isAlgolValSum
+  isAlgolValSum,
+  isAlgolValPos,
+  isAlgolValGridAt,
+  isAlgolValGridIn
 } from "../../../types";
 
 import makeParser from "./";
-import { parse } from "url";
 
 export default function parseVal(
   gameDef: FullDefAnon,
@@ -106,5 +108,23 @@ export default function parseVal(
   if (isAlgolValSum(expr)) {
     const { sum: terms } = expr;
     return `(${terms.map(t => parser.val(t)).join(" + ")})`;
+  }
+  if (isAlgolValPos(expr)) {
+    const { pos: pos } = expr;
+    return parser.pos(pos);
+  }
+  if (isAlgolValGridAt(expr)) {
+    const {
+      gridat: [gridname, pos]
+    } = expr;
+    return `GRIDS[${parser.val(gridname)}][${parser.pos(pos)}]`;
+  }
+  if (isAlgolValGridIn(expr)) {
+    const {
+      gridin: [gridname, set]
+    } = expr;
+    return `Object.keys(${parser.set(
+      set
+    )}).reduce((mem,pos) => mem + GRIDS[${parser.val(gridname)}][pos], 0)`;
   }
 }

@@ -82,7 +82,11 @@ export interface AlgolBoolOverlaps<
   Turnp,
   Turnv
 > {
-  overlaps: SetSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  overlaps: [
+    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    ...AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[]
+  ];
 }
 
 export interface AlgolBoolIsEmpty<

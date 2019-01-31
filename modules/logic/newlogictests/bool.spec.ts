@@ -69,7 +69,7 @@ const tests: ParserTest<AlgolBoolAnon>[] = [
       {
         context: {
           MARKS: { firstmark: "b2", secondmark: "a1" },
-          BOARD: { board: { a1: { x: 1, y: 1 }, b2: { x: 2, y: 2 } } }
+          BOARD: { board: { a1: { x: 1, y: 1 }, b2: { x: 2, y: 2 } }, dark: {} }
         },
         tests: [
           { expr: { samepos: ["firstmark", "secondmark"] }, res: false },
@@ -92,7 +92,11 @@ const tests: ParserTest<AlgolBoolAnon>[] = [
           {
             expr: { noneat: [{ single: "firstmark" }, "firstmark"] },
             res: falsy
-          }
+          },
+          { expr: { isempty: "board" }, res: falsy },
+          { expr: { notempty: "board" }, res: truthy },
+          { expr: { isempty: "dark" }, res: truthy },
+          { expr: { notempty: "dark" }, res: falsy }
         ]
       },
       {
@@ -104,6 +108,45 @@ const tests: ParserTest<AlgolBoolAnon>[] = [
           { expr: { cmndavailable: "otheraction" }, res: false },
           { expr: { markavailable: "somemark" }, res: true },
           { expr: { markavailable: "othermark" }, res: false }
+        ]
+      }
+    ]
+  },
+  {
+    def: {
+      ...emptyFullDef,
+      generators: {
+        mywalker: {
+          type: "walker",
+          draw: {
+            start: {
+              tolayer: {
+                ifelse: [
+                  ["true"],
+                  { playercase: ["art1", "art2"] },
+                  { playercase: ["art3", "art4"] }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    player: 1,
+    action: "someaction",
+    contexts: [
+      {
+        context: {
+          ARTIFACTS: {
+            art1: { b1: {} },
+            art2: { b1: {}, b2: {} },
+            art3: { b1: {}, b2: {}, b3: {} },
+            art4: { b2: {} }
+          }
+        },
+        tests: [
+          { expr: { overlaps: ["art1", "art2", "art3", "art4"] }, res: false },
+          { expr: { overlaps: ["art1", "art2", "art3"] }, res: true }
         ]
       }
     ]

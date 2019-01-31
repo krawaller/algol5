@@ -33,7 +33,8 @@ const tests: ParserTest<AlgolValAnon>[] = [
           { expr: { ifelse: [["true"], { value: 1 }, 2] }, res: 1 },
           { expr: { ifelse: [["false"], 1, { value: 2 }] }, res: 2 },
           { expr: { if: [["true"], "foo"] }, res: "foo" },
-          { expr: { if: [["false"], "foo"] }, res: undefined }
+          { expr: { if: [["false"], "foo"] }, res: undefined },
+          { expr: { sum: [1, 2, { value: 4 }] }, res: 7 }
         ]
       },
       { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] },

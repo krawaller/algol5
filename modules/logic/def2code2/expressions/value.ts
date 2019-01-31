@@ -9,10 +9,12 @@ import {
   isAlgolValSizeOf,
   isAlgolValRead,
   isAlgolValIdAt,
-  isAlgolValHarvest
+  isAlgolValHarvest,
+  isAlgolValSum
 } from "../../../types";
 
 import makeParser from "./";
+import { parse } from "url";
 
 export default function parseVal(
   gameDef: FullDefAnon,
@@ -100,5 +102,9 @@ export default function parseVal(
     return `Object.entries(${parser.set(
       set
     )}).reduce((mem, [pos,obj]) => mem + obj[${parser.val(prop)}], 0)`;
+  }
+  if (isAlgolValSum(expr)) {
+    const { sum: terms } = expr;
+    return `(${terms.map(t => parser.val(t)).join(" + ")})`;
   }
 }

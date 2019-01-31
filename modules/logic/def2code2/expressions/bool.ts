@@ -15,7 +15,11 @@ import {
   isAlgolBoolFalsy,
   isAlgolBoolAnyAt,
   isAlgolBoolNoneAt,
-  isAlgolBoolOverlaps
+  isAlgolBoolOverlaps,
+  isAlgolBoolValInList,
+  isAlgolBoolAnd,
+  isAlgolBoolOr,
+  isAlgolBoolNot
 } from "../../../types";
 
 import makeParser from "./";
@@ -118,5 +122,25 @@ export default function parseVal(
   if (isAlgolBoolOverlaps(expr)) {
     const { overlaps: sets } = expr;
     return parser.bool({ notempty: { intersect: sets } });
+  }
+  if (isAlgolBoolValInList(expr)) {
+    const {
+      valinlist: [val, ...list]
+    } = expr;
+    return `[${list.map(v => parser.val(v)).join(", ")}].indexOf(${parser.val(
+      val
+    )}) !== -1`;
+  }
+  if (isAlgolBoolAnd(expr)) {
+    const { and: conds } = expr;
+    return `(${conds.map(c => parser.bool(c)).join(" && ")})`;
+  }
+  if (isAlgolBoolOr(expr)) {
+    const { or: conds } = expr;
+    return `(${conds.map(c => parser.bool(c)).join(" || ")})`;
+  }
+  if (isAlgolBoolNot(expr)) {
+    const { not: cond } = expr;
+    return `!${parser.bool(cond)}`;
   }
 }

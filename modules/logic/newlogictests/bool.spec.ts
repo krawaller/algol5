@@ -63,7 +63,15 @@ const tests: ParserTest<AlgolBoolAnon>[] = [
           { expr: { truthy: { value: 0 } }, res: false },
           { expr: { truthy: { value: 1 } }, res: true },
           { expr: { falsy: { value: 0 } }, res: true },
-          { expr: { falsy: { value: 1 } }, res: false }
+          { expr: { falsy: { value: 1 } }, res: false },
+          { expr: { valinlist: [2, 1, 3] }, res: false },
+          { expr: { valinlist: [2, 1, 2] }, res: true },
+          { expr: { and: [["true"], ["true"], ["true"]] }, res: true },
+          { expr: { and: [["true"], ["true"], ["false"]] }, res: false },
+          { expr: { or: [["false"], ["false"], ["false"]] }, res: false },
+          { expr: { or: [["false"], ["false"], ["true"]] }, res: true },
+          { expr: { not: ["true"] }, res: false },
+          { expr: { not: ["false"] }, res: true }
         ]
       },
       {

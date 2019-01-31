@@ -13,7 +13,8 @@ import {
   isAlgolValSum,
   isAlgolValPos,
   isAlgolValGridAt,
-  isAlgolValGridIn
+  isAlgolValGridIn,
+  isAlgolValRelDir
 } from "../../../types";
 
 import makeParser from "./";
@@ -126,5 +127,11 @@ export default function parseVal(
     return `Object.keys(${parser.set(
       set
     )}).reduce((mem,pos) => mem + GRIDS[${parser.val(gridname)}][pos], 0)`;
+  }
+  if (isAlgolValRelDir(expr)) {
+    const {
+      reldir: [dir, rel]
+    } = expr;
+    return `relativedirs[${parser.val(rel)} - 2 + ${parser.val(dir)}]`;
   }
 }

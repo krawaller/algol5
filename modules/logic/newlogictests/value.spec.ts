@@ -1,4 +1,4 @@
-import { emptyFullDef } from "../../common";
+import { emptyFullDef, relativedirs } from "../../common";
 import { AlgolValAnon } from "../../types";
 import { run, ParserTest } from "./utils";
 
@@ -101,6 +101,15 @@ const tests: ParserTest<AlgolValAnon>[] = [
             },
             res: 8
           }
+        ]
+      },
+      {
+        context: {
+          relativedirs: relativedirs
+        },
+        tests: [
+          { expr: { reldir: [1, 3] }, res: 3 },
+          { expr: { reldir: [2, 1] }, res: 2 }
         ]
       }
     ]

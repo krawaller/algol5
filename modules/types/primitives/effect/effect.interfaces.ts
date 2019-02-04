@@ -5,6 +5,19 @@ import { AlgolSet } from "../set";
 import { AlgolVal } from "../value";
 import { AlgolPos } from "../pos";
 
+export interface AlgolEffectKillId<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  killid: AlgolVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+}
+
 export interface AlgolEffectMoveAt<
   Btlp,
   Btlv,

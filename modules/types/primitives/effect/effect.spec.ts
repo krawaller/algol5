@@ -38,6 +38,7 @@ const tests: TestEffect[] = [
   { setbattlevar: [{ playercase: ["mybattlev", "mybattlev"] }, 666] },
   { pushin: ["mylayer", 666, 7] },
   { killin: "mylayer" },
+  { killid: { value: "someid" } },
   { moveat: ["mymark", { onlyin: "mylayer" }] },
   { forposin: ["mylayer", { killin: "mylayer" }] },
   { foridin: ["mylayer", { setid: [["loopid"], "group", "myunit"] }] },

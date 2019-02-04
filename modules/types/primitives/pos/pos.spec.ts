@@ -14,6 +14,7 @@ type TestPos = AlgolPos<
 const tests: TestPos[] = [
   "mymark",
   ["start"],
+  ["looppos"],
   ["target"],
   { battlepos: "mybattlep" },
   { turnpos: { value: "myturnp" } },

@@ -38,6 +38,10 @@ const tests: ParserTest<AlgolPosAnon>[] = [
       {
         context: { BATTLEVARS: { thispos: "b6" } },
         tests: [{ expr: { battlepos: "thispos" }, res: "b6" }]
+      },
+      {
+        context: { LOOPPOS: "a1" },
+        tests: [{ expr: ["looppos"], res: "a1" }]
       }
     ]
   }

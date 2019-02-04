@@ -1,6 +1,6 @@
 import { emptyFullDef, relativedirs } from "../../common";
 import { AlgolValAnon } from "../../types";
-import { run, ParserTest } from "./utils";
+import { run, ParserTest, parserTester } from "./utils";
 
 import * as test from "tape";
 
@@ -163,6 +163,6 @@ const tests: ParserTest<AlgolValAnon>[] = [
 ];
 
 test("new expression - values", t => {
-  run(tests, "val", t);
+  run(tests, parserTester("val"), t);
   t.end();
 });

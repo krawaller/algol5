@@ -1,6 +1,6 @@
 import { emptyFullDef } from "../../common";
 import { AlgolBoolAnon } from "../../types";
-import { run, ParserTest, truthy, falsy } from "./utils";
+import { run, ParserTest, truthy, falsy, parserTester } from "./utils";
 
 import * as test from "tape";
 
@@ -162,6 +162,6 @@ const tests: ParserTest<AlgolBoolAnon>[] = [
 ];
 
 test("new expression - booleans", t => {
-  run(tests, "bool", t);
+  run(tests, parserTester("bool"), t);
   t.end();
 });

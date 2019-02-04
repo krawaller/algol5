@@ -1,6 +1,6 @@
 import { emptyFullDef } from "../../common";
 import { AlgolPosAnon } from "../../types";
-import { run, ParserTest } from "./utils";
+import { run, ParserTest, parserTester } from "./utils";
 
 import * as test from "tape";
 
@@ -44,6 +44,6 @@ const tests: ParserTest<AlgolPosAnon>[] = [
 ];
 
 test("new expression - position", t => {
-  run(tests, "pos", t);
+  run(tests, parserTester("pos"), t);
   t.end();
 });

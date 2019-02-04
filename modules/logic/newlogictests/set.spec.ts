@@ -1,6 +1,6 @@
 import { emptyFullDef } from "../../common";
 import { AlgolSetAnon } from "../../types";
-import { run, ParserTest } from "./utils";
+import { run, ParserTest, parserTester } from "./utils";
 
 import * as test from "tape";
 
@@ -128,6 +128,6 @@ const tests: ParserTest<AlgolSetAnon>[] = [
 ];
 
 test("new expression - set", t => {
-  run(tests, "set", t);
+  run(tests, parserTester("set"), t);
   t.end();
 });

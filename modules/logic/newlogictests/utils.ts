@@ -23,16 +23,30 @@ export type ExpressionTest<T> = {
   debug?: boolean;
 };
 
-export function run<T>(parserTests: ParserTest<T>[], type, t) {
+export const parserTester = <T>(type: "set" | "bool" | "val" | "pos") => (
+  def: FullDefAnon,
+  player: 1 | 2,
+  action: string,
+  input: T
+) => {
+  const parser: any = makeParser(def, player, action)[type];
+  return parser(input);
+};
+
+export function run<T>(
+  parserTests: ParserTest<T>[],
+  func: (def: FullDefAnon, player: 1 | 2, action: string, input: T) => string,
+  t
+) {
   parserTests.forEach(parserTest =>
     parserTest.contexts.forEach(({ context, tests }) => {
-      const parser = makeParser(
-        parserTest.def,
-        parserTest.player,
-        parserTest.action
-      )[type];
       tests.forEach(({ expr, res, debug }) => {
-        const code = parser(expr);
+        const code = func(
+          parserTest.def,
+          parserTest.player,
+          parserTest.action,
+          expr
+        );
         let error, result;
         try {
           result = _eval(`module.exports = ${code};`, context);

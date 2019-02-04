@@ -13,8 +13,8 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
     contexts: [
       {
         context: {
-          UNITDATA: { foo: "iwillsurvive", kill: "me" },
-          UNITLAYERS: { units: { a1: { id: "kill" } } },
+          UNITDATA: { foo: "iwillsurvive", killme: "please" },
+          UNITLAYERS: { units: { a1: { id: "killme" } } },
           MARKS: { mymark: "a1" }
         },
         tests: [
@@ -22,6 +22,16 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
             expr: { killat: "mymark" },
             sample: "UNITDATA",
             res: { foo: "iwillsurvive" }
+          },
+          {
+            expr: { killid: "killme" },
+            sample: "UNITDATA.killme",
+            res: falsy
+          },
+          {
+            expr: { killid: { value: "killme" } },
+            sample: "UNITDATA.killme",
+            res: falsy
           }
         ]
       }

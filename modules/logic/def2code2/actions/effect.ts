@@ -1,9 +1,10 @@
 import {
   AlgolEffectAnon,
   FullDefAnon,
-  isAlgolEffectKillAt
+  isAlgolEffectKillAt,
+  isAlgolEffectKillId
 } from "../../../types";
-import makeParser from "../../def2code/expressions";
+import makeParser from "../../def2code2/expressions";
 
 export function executeEffect(
   gameDef: FullDefAnon,
@@ -11,10 +12,14 @@ export function executeEffect(
   action: string,
   effect: AlgolEffectAnon
 ): string {
-  const parser = makeParser(gameDef, player, action);
+  const parser = makeParser(gameDef, player, action, "effect");
   if (isAlgolEffectKillAt(effect)) {
     const { killat: pos } = effect;
     return `delete UNITDATA[(UNITLAYERS.units[${parser.pos(pos)}] || {}).id];`;
+  }
+  if (isAlgolEffectKillId(effect)) {
+    const { killid: id } = effect;
+    return `delete UNITDATA[${parser.val(id)}]`;
   }
   return "";
 }

@@ -5,6 +5,7 @@ import {
   AlgolEffectForPosIn,
   AlgolEffectKillAt,
   AlgolEffectKillIn,
+  AlgolEffectKillId,
   AlgolEffectMoveAt,
   AlgolEffectMulti,
   AlgolEffectPushIn,
@@ -103,6 +104,16 @@ export type AlgolEffectPushInAnon = AlgolEffectPushIn<
   string
 >;
 export type AlgolEffectKillInAnon = AlgolEffectKillIn<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolEffectKillIdAnon = AlgolEffectKillId<
   string,
   string,
   string,

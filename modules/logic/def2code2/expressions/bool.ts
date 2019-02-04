@@ -31,7 +31,7 @@ export default function parseVal(
   expr: AlgolBoolAnon,
   from?: string
 ) {
-  const parser = makeParser(gameDef, player, action, "value");
+  const parser = makeParser(gameDef, player, action, "bool");
 
   if (Array.isArray(expr)) {
     switch (expr[0]) {

@@ -4,6 +4,7 @@ import {
   AlgolEffectForPosInAnon,
   AlgolEffectKillAtAnon,
   AlgolEffectKillInAnon,
+  AlgolEffectKillIdAnon,
   AlgolEffectMoveAtAnon,
   AlgolEffectMultiAnon,
   AlgolEffectPushInAnon,
@@ -67,6 +68,11 @@ export function isAlgolEffectKillIn(
   return !!(expr as AlgolEffectKillInAnon).killin;
 }
 
+export function isAlgolEffectKillId(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectKillIdAnon {
+  return !!(expr as AlgolEffectKillIdAnon).killid;
+}
 export function isAlgolEffectKillAt(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectKillAtAnon {

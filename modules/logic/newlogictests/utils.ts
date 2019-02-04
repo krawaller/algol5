@@ -54,7 +54,7 @@ export function run<T>(
             sample
               ? `${code}; module.exports = ${sample};`
               : `module.exports = ${code};`,
-            context
+            JSON.parse(JSON.stringify(context))
           );
         } catch (e) {
           console.log("KABOOM", code);

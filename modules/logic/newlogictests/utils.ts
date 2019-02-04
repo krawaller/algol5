@@ -19,6 +19,7 @@ export type ContextTest<T> = {
 
 export type ExpressionTest<T> = {
   expr: T;
+  sample?: string;
   res: any;
   debug?: boolean;
 };
@@ -40,7 +41,7 @@ export function run<T>(
 ) {
   parserTests.forEach(parserTest =>
     parserTest.contexts.forEach(({ context, tests }) => {
-      tests.forEach(({ expr, res, debug }) => {
+      tests.forEach(({ expr, res, sample, debug }) => {
         const code = func(
           parserTest.def,
           parserTest.player,
@@ -49,7 +50,12 @@ export function run<T>(
         );
         let error, result;
         try {
-          result = _eval(`module.exports = ${code};`, context);
+          result = _eval(
+            sample
+              ? `${code}; module.exports = ${sample};`
+              : `module.exports = ${code};`,
+            context
+          );
         } catch (e) {
           console.log("KABOOM", code);
           throw e;
@@ -62,7 +68,11 @@ export function run<T>(
         t[typeof res === "object" ? "deepEqual" : "equal"](
           processedResult,
           processedComparator,
-          `Evaluated ${JSON.stringify(expr)} to ${JSON.stringify(res)}`
+          sample
+            ? `Ran ${JSON.stringify(expr)} and evaluated ${JSON.stringify(
+                sample
+              )} to ${JSON.stringify(res)}`
+            : `Evaluated ${JSON.stringify(expr)} to ${JSON.stringify(res)}`
         );
         if (debug) {
           console.log(

@@ -43,7 +43,7 @@ export type MurusgallicusAiArtifactLayer = "mymoves" | "oppmoves" | "oppheavythr
 
 export type MurusgallicusAiBrain = "Steve" | "Joe" | "Clive";
 
-export type MurusgallicusAiTerrainLayer = "0" | "1" | "2" | "3";
+export type MurusgallicusAiTerrainLayer = "threatrow" | "mythreatrow" | "oppthreatrow" | "nothreatrow";
 
 export type MurusgallicusAiTerrain = "threatrow";
 

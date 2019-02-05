@@ -53,9 +53,10 @@ export default async function analyze(def: FullDefAnon | string) {
   };
 
   const aiTerrainNames = Object.keys(AI.terrain);
-  const aiTerrainLayers = Object.keys(
-    terrainLayerNames({ ...def.board, terrain: AI.terrain })
-  );
+  const aiTerrainLayers = terrainLayerNames({
+    ...def.board,
+    terrain: AI.terrain
+  });
   const aiGenerators = Object.keys(AI.generators);
   const aiAspects = Object.keys(AI.aspects);
   const aiGrids = Object.keys(AI.grids);

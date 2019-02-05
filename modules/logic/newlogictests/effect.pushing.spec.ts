@@ -56,7 +56,7 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
   }
 ];
 
-test("effects - meta", t => {
+test("effects - pushing", t => {
   run(tests, executeEffect, t);
   t.end();
 });

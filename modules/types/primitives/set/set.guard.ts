@@ -4,6 +4,7 @@ import {
   AlgolSetIntersectAnon,
   AlgolSetLayerAnon,
   AlgolSetSingleAnon,
+  AlgolSetSinglesAnon,
   AlgolSetSubtractAnon,
   AlgolSetUnionAnon
 } from "./set.anon";
@@ -16,6 +17,12 @@ export function isAlgolSetSingle(
   expr: AlgolSetAnon
 ): expr is AlgolSetSingleAnon {
   return !!(expr as AlgolSetSingleAnon).single;
+}
+
+export function isAlgolSetSingles(
+  expr: AlgolSetAnon
+): expr is AlgolSetSinglesAnon {
+  return !!(expr as AlgolSetSinglesAnon).singles;
 }
 
 export function isAlgolSetGroupAt(

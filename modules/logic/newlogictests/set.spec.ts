@@ -33,6 +33,15 @@ const tests: ParserTest<AlgolSetAnon>[] = [
             res: { h9: 1 }
           }
         ]
+      },
+      {
+        context: { MARKS: { mymark: "a1", othermark: "a2" } },
+        tests: [
+          {
+            expr: { singles: ["mymark", "othermark"] },
+            res: { a1: {}, a2: {} }
+          }
+        ]
       }
     ]
   },

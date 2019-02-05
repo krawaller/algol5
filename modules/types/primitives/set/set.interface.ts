@@ -28,6 +28,19 @@ export interface AlgolSetSingle<
   single: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
+export interface AlgolSetSingles<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  singles: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+}
+
 export interface AlgolSetGroupAt<
   Btlp,
   Btlv,

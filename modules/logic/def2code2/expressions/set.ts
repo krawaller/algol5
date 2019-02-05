@@ -6,7 +6,8 @@ import {
   isAlgolSetUnion,
   isAlgolSetSubtract,
   isAlgolSetIntersect,
-  isAlgolSetGroupAt
+  isAlgolSetGroupAt,
+  isAlgolSetSingles
 } from "../../../types";
 import { artifactLayers, terrainLayers, unitLayers } from "../../../common";
 
@@ -47,6 +48,11 @@ export default function parseSet(
   if (isAlgolSetSingle(expr)) {
     const { single: pos } = expr;
     return `{[${parser.pos(pos)}]: 1}`;
+  }
+
+  if (isAlgolSetSingles(expr)) {
+    const { singles: positions } = expr;
+    return `{${positions.map(p => `[${parser.pos(p)}]: {}`).join(", ")}}`;
   }
 
   if (isAlgolSetUnion(expr)) {

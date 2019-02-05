@@ -20,6 +20,7 @@ const tests: TestPos[] = [
   { groupat: ["start"] },
   { single: "mymark" },
   { single: { onlyin: "mylayer" } },
+  { singles: ["mymark", { onlyin: "mylayer" }] },
   { union: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
   { subtract: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
   { intersect: ["mylayer", { single: "mymark" }, { single: "mymark" }] },

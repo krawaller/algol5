@@ -61,5 +61,8 @@ const tests: TestEffect[] = [
   },
   { morphat: ["mymark", { value: "newgroup" }] },
   { morphin: ["mylayer", { value: "newgroup" }] },
-  { morphid: [{ value: "someid" }, { value: "newgroup" }] }
+  { morphid: [{ value: "someid" }, { value: "newgroup" }] },
+  { adoptat: ["mymark", { value: 0 }] },
+  { adoptin: ["mylayer", { value: ["player"] }] },
+  { adoptid: [{ value: "someid" }, { value: ["otherplayer"] }] }
 ];

@@ -23,7 +23,10 @@ import {
   AlgolEffectStompIdAnon,
   AlgolEffectMorphAtAnon,
   AlgolEffectMorphIdAnon,
-  AlgolEffectMorphInAnon
+  AlgolEffectMorphInAnon,
+  AlgolEffectAdoptAtAnon,
+  AlgolEffectAdoptIdAnon,
+  AlgolEffectAdoptInAnon
 } from "./effect.anon";
 
 export function isAlgolEffectMoveAt(
@@ -167,4 +170,22 @@ export function isAlgolEffectMorphIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectMorphInAnon {
   return (expr as AlgolEffectMorphInAnon).morphin !== undefined;
+}
+
+export function isAlgolEffectAdoptAt(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectAdoptAtAnon {
+  return (expr as AlgolEffectAdoptAtAnon).adoptat !== undefined;
+}
+
+export function isAlgolEffectAdoptId(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectAdoptIdAnon {
+  return (expr as AlgolEffectAdoptIdAnon).adoptid !== undefined;
+}
+
+export function isAlgolEffectAdoptIn(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectAdoptInAnon {
+  return (expr as AlgolEffectAdoptInAnon).adoptin !== undefined;
 }

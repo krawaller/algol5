@@ -26,7 +26,10 @@ import {
   isAlgolEffectPushAt,
   isAlgolEffectMorphAt,
   isAlgolEffectMorphIn,
-  isAlgolEffectMorphId
+  isAlgolEffectMorphId,
+  isAlgolEffectAdoptAt,
+  isAlgolEffectAdoptIn,
+  isAlgolEffectAdoptId
 } from "../../../types";
 import makeParser from "../../def2code2/expressions";
 
@@ -232,6 +235,24 @@ export function executeEffect(
       morphin: [set, group]
     } = effect;
     return me({ forposin: [set, { morphat: [["looppos"], group] }] });
+  }
+  if (isAlgolEffectAdoptAt(effect)) {
+    const {
+      adoptat: [pos, owner]
+    } = effect;
+    return me({ setat: [pos, "owner", owner] });
+  }
+  if (isAlgolEffectAdoptId(effect)) {
+    const {
+      adoptid: [id, owner]
+    } = effect;
+    return me({ setid: [id, "owner", owner] });
+  }
+  if (isAlgolEffectAdoptIn(effect)) {
+    const {
+      adoptin: [set, owner]
+    } = effect;
+    return me({ forposin: [set, { adoptat: [["looppos"], owner] }] });
   }
   return "";
 }

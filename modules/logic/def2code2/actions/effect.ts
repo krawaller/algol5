@@ -15,7 +15,11 @@ import {
   isAlgolEffectStompAt,
   isAlgolEffectStompId,
   isAlgolEffectSpawn,
-  isAlgolEffectSpawnIn
+  isAlgolEffectSpawnIn,
+  isAlgolEffectSetTurnVar,
+  isAlgolEffectSetTurnPos,
+  isAlgolEffectSetBattleVar,
+  isAlgolEffectSetBattlePos
 } from "../../../types";
 import makeParser from "../../def2code2/expressions";
 
@@ -146,6 +150,30 @@ export function executeEffect(
     return me({
       forposin: [set, { spawn: [["looppos"], group, owner, props] }]
     });
+  }
+  if (isAlgolEffectSetTurnVar(effect)) {
+    const {
+      setturnvar: [name, val]
+    } = effect;
+    return `TURNVARS[${parser.val(name)}] = ${parser.val(val)};`;
+  }
+  if (isAlgolEffectSetTurnPos(effect)) {
+    const {
+      setturnpos: [name, pos]
+    } = effect;
+    return `TURNVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
+  }
+  if (isAlgolEffectSetBattleVar(effect)) {
+    const {
+      setbattlevar: [name, val]
+    } = effect;
+    return `BATTLEVARS[${parser.val(name)}] = ${parser.val(val)};`;
+  }
+  if (isAlgolEffectSetBattlePos(effect)) {
+    const {
+      setbattlepos: [name, pos]
+    } = effect;
+    return `BATTLEVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
   }
   return "";
 }

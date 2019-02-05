@@ -14,7 +14,8 @@ import {
   isAlgolEffectMoveId,
   isAlgolEffectStompAt,
   isAlgolEffectStompId,
-  isAlgolEffectSpawn
+  isAlgolEffectSpawn,
+  isAlgolEffectSpawnIn
 } from "../../../types";
 import makeParser from "../../def2code2/expressions";
 
@@ -127,7 +128,7 @@ export function executeEffect(
           pos: ${parser.pos(pos)},
           id: newunitid,
           group: ${parser.val(group)},
-          owner: ${owner !== undefined ? parser.val(owner) : "player"}
+          owner: ${parser.val(owner || ["player"])}
           ${
             props
               ? `, ${Object.keys(props)
@@ -137,6 +138,14 @@ export function executeEffect(
           }
         }; 
       }`;
+  }
+  if (isAlgolEffectSpawnIn(effect)) {
+    const {
+      spawnin: [set, group, owner, props]
+    } = effect;
+    return me({
+      forposin: [set, { spawn: [["looppos"], group, owner, props] }]
+    });
   }
   return "";
 }

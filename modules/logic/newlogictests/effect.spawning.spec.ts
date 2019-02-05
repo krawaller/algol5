@@ -7,44 +7,47 @@ import * as test from "tape";
 
 const tests: ParserTest<AlgolEffectAnon>[] = [
   {
-    def: {
-      ...emptyFullDef,
-      board: {
-        ...emptyFullDef.board,
-        terrain: {
-          unit1terrain: ["a1"]
-        }
-      }
-    },
+    def: emptyFullDef,
     player: 1,
     action: "someaction",
     contexts: [
       {
         context: {
-          UNITDATA: {
-            unit1: { id: "unit1", pos: "a1" },
-            unit2: { id: "unit2", pos: "b2" }
-          },
-          UNITLAYERS: {
-            units: { a1: { id: "unit1" }, b2: { id: "unit2" } }
-          },
-          MARKS: { unit1mark: "a1", othermark: "c3", unit2mark: "b2" },
-          TERRAIN: { unit1terrain: { a1: {} } },
+          UNITDATA: { unit1: { id: "unit1" } },
+          MARKS: { othermark: "c3", anothermark: "d4" },
           clones: 2
         },
         tests: [
           {
             expr: {
-              spawn: ["othermark", "flerps", 1, { baz: { value: "bin" } }]
+              spawn: [
+                "othermark",
+                "flerps",
+                ["otherplayer"],
+                { baz: { value: "bin" } }
+              ]
             },
             sample: "UNITDATA.clone3",
             res: {
               id: "clone3",
               group: "flerps",
-              owner: 1,
+              owner: 2,
               baz: "bin",
               pos: "c3"
-            }
+            },
+            desc: "Spawning creates clone with correct characteristics"
+          },
+          {
+            expr: { spawn: ["othermark", "gnurps"] },
+            sample: "UNITDATA.clone3.owner",
+            res: 1,
+            desc: "Spawning defaults owner to current player if none provided"
+          },
+          {
+            expr: { spawn: ["othermark", "gnurps"] },
+            sample: "UNITDATA.unit1",
+            res: { id: "unit1" },
+            desc: "Spawning doesn't affect already existing units"
           },
           {
             expr: {
@@ -53,6 +56,49 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
             sample: "clones",
             res: 3,
             desc: "spawning increases the clones counter"
+          },
+          {
+            expr: {
+              spawnin: [{ singles: ["othermark", "anothermark"] }, "flurps"]
+            },
+            sample: "UNITDATA.clone3",
+            res: { id: "clone3", group: "flurps", owner: 1, pos: "c3" },
+            desc: "multispawn created correct first unit"
+          },
+          {
+            expr: {
+              spawnin: [{ singles: ["othermark", "anothermark"] }, "flurps"]
+            },
+            sample: "UNITDATA.clone4",
+            res: { id: "clone4", group: "flurps", owner: 1, pos: "d4" },
+            desc: "multispawn created correct second unit"
+          },
+          {
+            expr: {
+              spawnin: [{ singles: ["othermark", "anothermark"] }, "flurps"]
+            },
+            sample: "clones",
+            res: 4,
+            desc: "multispawn increased counter by total number of spawns"
+          },
+          {
+            expr: {
+              spawnin: [
+                { singles: ["othermark", "anothermark"] },
+                "flurps",
+                ["otherplayer"],
+                { foo: { value: "bar" } }
+              ]
+            },
+            sample: "UNITDATA.clone4",
+            res: {
+              id: "clone4",
+              group: "flurps",
+              owner: 2,
+              pos: "d4",
+              foo: "bar"
+            },
+            desc: "multispawn supports passing owner and props"
           }
         ]
       }

@@ -50,7 +50,7 @@ const duploFlow: DuploFlow = {
   },
   commands: {
     deploy: {
-      applyEffect: { spawn: ["selectdeploy", "soldiers"] },
+      applyEffect: { spawnat: ["selectdeploy", "soldiers"] },
       link: {
         ifelse: [
           { morethan: [{ sizeof: "mysoldiers" }, 1] },
@@ -76,7 +76,7 @@ const duploFlow: DuploFlow = {
               multi: [
                 { killat: "selecttarget" },
                 {
-                  spawn: [
+                  spawnat: [
                     "selecttarget",
                     "soldiers",
                     0,

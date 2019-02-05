@@ -33,7 +33,7 @@ const coffeeFlow: CoffeeFlow = {
     uphill: {
       applyEffects: [
         { killin: "markers" },
-        { spawn: ["selectdrop", "soldiers"] },
+        { spawnat: ["selectdrop", "soldiers"] },
         { spawnin: ["uphill", "markers", 0] }
       ],
       runGenerator: "findwinlines",
@@ -42,7 +42,7 @@ const coffeeFlow: CoffeeFlow = {
     downhill: {
       applyEffects: [
         { killin: "markers" },
-        { spawn: ["selectdrop", "soldiers"] },
+        { spawnat: ["selectdrop", "soldiers"] },
         { spawnin: ["downhill", "markers", 0] }
       ],
       runGenerator: "findwinlines",
@@ -51,7 +51,7 @@ const coffeeFlow: CoffeeFlow = {
     horisontal: {
       applyEffects: [
         { killin: "markers" },
-        { spawn: ["selectdrop", "soldiers"] },
+        { spawnat: ["selectdrop", "soldiers"] },
         { spawnin: ["horisontal", "markers", 0] }
       ],
       runGenerator: "findwinlines",
@@ -60,7 +60,7 @@ const coffeeFlow: CoffeeFlow = {
     vertical: {
       applyEffects: [
         { killin: "markers" },
-        { spawn: ["selectdrop", "soldiers"] },
+        { spawnat: ["selectdrop", "soldiers"] },
         { spawnin: ["vertical", "markers", 0] }
       ],
       runGenerator: "findwinlines",

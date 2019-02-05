@@ -29,7 +29,7 @@ const shoveoffFlow: ShoveoffFlow = {
         { killat: { onlyin: "squishnorth" } },
         { pushin: ["pushnorth", 1, 1] },
         {
-          spawn: [
+          spawnat: [
             { onlyin: "spawnnorth" },
             "soldiers",
             {
@@ -46,7 +46,7 @@ const shoveoffFlow: ShoveoffFlow = {
         { killat: { onlyin: "squishsouth" } },
         { pushin: ["pushsouth", 1, 1] },
         {
-          spawn: [
+          spawnat: [
             { onlyin: "spawnsouth" },
             "soldiers",
             {
@@ -63,7 +63,7 @@ const shoveoffFlow: ShoveoffFlow = {
         { killat: { onlyin: "squisheast" } },
         { pushin: ["pusheast", 1, 1] },
         {
-          spawn: [
+          spawnat: [
             { onlyin: "spawneast" },
             "soldiers",
             {
@@ -80,7 +80,7 @@ const shoveoffFlow: ShoveoffFlow = {
         { killat: { onlyin: "squishwest" } },
         { pushin: ["pushwest", 1, 1] },
         {
-          spawn: [
+          spawnat: [
             { onlyin: "spawnwest" },
             "soldiers",
             {

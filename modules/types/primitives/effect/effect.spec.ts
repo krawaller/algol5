@@ -15,10 +15,10 @@ type TestEffect = AlgolEffect<
 const tests: TestEffect[] = [
   { moveat: ["mymark", { onlyin: "mylayer" }] },
   { setturnpos: ["myturnp", "mymark"] },
-  { spawn: ["mymark", "myunit"] },
-  { spawn: ["mymark", "myunit", 1] },
+  { spawnat: ["mymark", "myunit"] },
+  { spawnat: ["mymark", "myunit", 1] },
   {
-    spawn: [
+    spawnat: [
       "mymark",
       "myunit",
       2,

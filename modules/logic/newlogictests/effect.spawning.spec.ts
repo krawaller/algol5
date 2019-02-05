@@ -20,7 +20,7 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
         tests: [
           {
             expr: {
-              spawn: [
+              spawnat: [
                 "othermark",
                 "flerps",
                 ["otherplayer"],
@@ -38,20 +38,20 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
             desc: "Spawning creates clone with correct characteristics"
           },
           {
-            expr: { spawn: ["othermark", "gnurps"] },
+            expr: { spawnat: ["othermark", "gnurps"] },
             sample: "UNITDATA.clone3.owner",
             res: 1,
             desc: "Spawning defaults owner to current player if none provided"
           },
           {
-            expr: { spawn: ["othermark", "gnurps"] },
+            expr: { spawnat: ["othermark", "gnurps"] },
             sample: "UNITDATA.unit1",
             res: { id: "unit1" },
             desc: "Spawning doesn't affect already existing units"
           },
           {
             expr: {
-              spawn: ["othermark", "flerps", 1, { baz: { value: "bin" } }]
+              spawnat: ["othermark", "flerps", 1, { baz: { value: "bin" } }]
             },
             sample: "clones",
             res: 3,

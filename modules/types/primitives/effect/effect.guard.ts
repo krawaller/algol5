@@ -17,7 +17,7 @@ import {
   AlgolEffectSetInAnon,
   AlgolEffectSetTurnPosAnon,
   AlgolEffectSetTurnVarAnon,
-  AlgolEffectSpawnAnon,
+  AlgolEffectSpawnAtAnon,
   AlgolEffectSpawnInAnon,
   AlgolEffectStompAtAnon,
   AlgolEffectStompIdAnon,
@@ -124,10 +124,10 @@ export function isAlgolEffectSetId(
   return (expr as AlgolEffectSetIdAnon).setid !== undefined;
 }
 
-export function isAlgolEffectSpawn(
+export function isAlgolEffectSpawnAt(
   expr: AlgolEffectAnon
-): expr is AlgolEffectSpawnAnon {
-  return (expr as AlgolEffectSpawnAnon).spawn !== undefined;
+): expr is AlgolEffectSpawnAtAnon {
+  return (expr as AlgolEffectSpawnAtAnon).spawnat !== undefined;
 }
 
 export function isAlgolEffectSpawnIn(

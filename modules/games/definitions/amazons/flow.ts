@@ -31,7 +31,7 @@ const amazonsFlow: AmazonsFlow = {
     },
     fire: {
       applyEffect: {
-        spawn: [
+        spawnat: [
           "selectfiretarget",
           "fires",
           0,

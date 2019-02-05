@@ -97,7 +97,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
                   ]
                 },
                 {
-                  spawn: [
+                  spawnat: [
                     "selectfire",
                     "walls",
                     ["player"],

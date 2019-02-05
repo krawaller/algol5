@@ -29,7 +29,7 @@ import {
   AlgolEffectSetIn,
   AlgolEffectSetTurnPos,
   AlgolEffectSetTurnVar,
-  AlgolEffectSpawn,
+  AlgolEffectSpawnAt,
   AlgolEffectSpawnIn,
   AlgolEffectStompAt,
   AlgolEffectStompId,
@@ -74,7 +74,7 @@ export type AlgolEffect<
   | AlgolEffectAdoptAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectAdoptIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectAdoptId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSpawn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolEffectSpawnAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectSpawnIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectForPosIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectForIdIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>

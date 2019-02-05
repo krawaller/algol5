@@ -44,7 +44,7 @@ const gogolFlow: GogolFlow = {
   },
   commands: {
     deploy: {
-      applyEffect: { spawn: ["selectkingdeploy", "kings"] },
+      applyEffect: { spawnat: ["selectkingdeploy", "kings"] },
       link: "endturn"
     },
     move: {

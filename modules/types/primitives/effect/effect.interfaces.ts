@@ -293,7 +293,7 @@ export interface AlgolEffectMulti<
   multi: AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
 }
 
-export interface AlgolEffectSpawn<
+export interface AlgolEffectSpawnAt<
   Btlp,
   Btlv,
   Cmnd,
@@ -304,7 +304,7 @@ export interface AlgolEffectSpawn<
   Turnv,
   Unit
 > {
-  spawn:
+  spawnat:
     | [
         AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
         AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

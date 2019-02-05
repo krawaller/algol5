@@ -22,7 +22,7 @@ const semaphorFlow: SemaphorFlow = {
   },
   commands: {
     deploy: {
-      applyEffect: { spawn: ["selectdeploytarget", "pawns", 0] },
+      applyEffect: { spawnat: ["selectdeploytarget", "pawns", 0] },
       runGenerator: "findlines",
       link: "endturn"
     },

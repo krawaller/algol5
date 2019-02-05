@@ -42,7 +42,7 @@ const descentFlow: DescentFlow = {
         { morphat: ["selectunit", { turnvar: "heightto" }] },
         { killat: "selectmovetarget" },
         { moveat: ["selectunit", "selectmovetarget"] },
-        { spawn: ["selectunit", { turnvar: "heightfrom" }, 0] }
+        { spawnat: ["selectunit", { turnvar: "heightfrom" }, 0] }
       ],
       link: "selectdigtarget"
     },

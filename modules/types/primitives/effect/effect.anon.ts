@@ -18,7 +18,7 @@ import {
   AlgolEffectSetIn,
   AlgolEffectSetTurnPos,
   AlgolEffectSetTurnVar,
-  AlgolEffectSpawn,
+  AlgolEffectSpawnAt,
   AlgolEffectSpawnIn,
   AlgolEffectStompAt,
   AlgolEffectStompId,
@@ -202,7 +202,7 @@ export type AlgolEffectSetIdAnon = AlgolEffectSetId<
   string,
   string
 >;
-export type AlgolEffectSpawnAnon = AlgolEffectSpawn<
+export type AlgolEffectSpawnAtAnon = AlgolEffectSpawnAt<
   string,
   string,
   string,

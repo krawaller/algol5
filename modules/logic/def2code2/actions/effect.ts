@@ -16,7 +16,7 @@ import {
   isAlgolEffectMoveId,
   isAlgolEffectStompAt,
   isAlgolEffectStompId,
-  isAlgolEffectSpawn,
+  isAlgolEffectSpawnAt,
   isAlgolEffectSpawnIn,
   isAlgolEffectSetTurnVar,
   isAlgolEffectSetTurnPos,
@@ -121,9 +121,9 @@ export function executeEffect(
       };
     `;
   }
-  if (isAlgolEffectSpawn(effect)) {
+  if (isAlgolEffectSpawnAt(effect)) {
     const {
-      spawn: [pos, group, owner, props]
+      spawnat: [pos, group, owner, props]
     } = effect;
     return `{
         let newunitid = 'clone'+(++clones);
@@ -209,7 +209,7 @@ export function executeEffect(
       spawnin: [set, group, owner, props]
     } = effect;
     return me({
-      forposin: [set, { spawn: [["looppos"], group, owner, props] }]
+      forposin: [set, { spawnat: [["looppos"], group, owner, props] }]
     });
   }
   if (isAlgolEffectPushIn(effect)) {

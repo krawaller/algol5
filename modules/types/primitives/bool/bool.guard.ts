@@ -22,109 +22,109 @@ import {
 } from "./bool.anon";
 
 export function isAlgolBoolNot(expr: AlgolBoolAnon): expr is AlgolBoolNotAnon {
-  return !!(expr as AlgolBoolNotAnon).not;
+  return (expr as AlgolBoolNotAnon).not !== undefined;
 }
 
 export function isAlgolBoolAnd(expr: AlgolBoolAnon): expr is AlgolBoolAndAnon {
-  return !!(expr as AlgolBoolAndAnon).and;
+  return (expr as AlgolBoolAndAnon).and !== undefined;
 }
 
 export function isAlgolBoolOr(expr: AlgolBoolAnon): expr is AlgolBoolOrAnon {
-  return !!(expr as AlgolBoolOrAnon).or;
+  return (expr as AlgolBoolOrAnon).or !== undefined;
 }
 
 export function isAlgolBoolSamePos(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolSamePosAnon {
-  return !!(expr as AlgolBoolSamePosAnon).samepos;
+  return (expr as AlgolBoolSamePosAnon).samepos !== undefined;
 }
 
 export function isAlgolBoolHigher(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolHigherAnon {
-  return !!(expr as AlgolBoolHigherAnon).higher;
+  return (expr as AlgolBoolHigherAnon).higher !== undefined;
 }
 
 export function isAlgolBoolFurther(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolFurtherAnon {
-  return !!(expr as AlgolBoolFurtherAnon).further;
+  return (expr as AlgolBoolFurtherAnon).further !== undefined;
 }
 
 export function isAlgolBoolOverlaps(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolOverlapsAnon {
-  return !!(expr as AlgolBoolOverlapsAnon).overlaps;
+  return (expr as AlgolBoolOverlapsAnon).overlaps !== undefined;
 }
 
 export function isAlgolBoolIsEmpty(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolIsEmptyAnon {
-  return !!(expr as AlgolBoolIsEmptyAnon).isempty;
+  return (expr as AlgolBoolIsEmptyAnon).isempty !== undefined;
 }
 
 export function isAlgolBoolNotEmpty(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolNotEmptyAnon {
-  return !!(expr as AlgolBoolNotEmptyAnon).notempty;
+  return (expr as AlgolBoolNotEmptyAnon).notempty !== undefined;
 }
 
 export function isAlgolBoolAnyAt(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolAnyAtAnon {
-  return !!(expr as AlgolBoolAnyAtAnon).anyat;
+  return (expr as AlgolBoolAnyAtAnon).anyat !== undefined;
 }
 
 export function isAlgolBoolNoneAt(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolNoneAtAnon {
-  return !!(expr as AlgolBoolNoneAtAnon).noneat;
+  return (expr as AlgolBoolNoneAtAnon).noneat !== undefined;
 }
 
 export function isAlgolBoolMarkAvailable(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolMarkAvailableAnon {
-  return !!(expr as AlgolBoolMarkAvailableAnon).markavailable;
+  return (expr as AlgolBoolMarkAvailableAnon).markavailable !== undefined;
 }
 
 export function isAlgolBoolCmndAvailable(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolCmndAvailableAnon {
-  return !!(expr as AlgolBoolCmndAvailableAnon).cmndavailable;
+  return (expr as AlgolBoolCmndAvailableAnon).cmndavailable !== undefined;
 }
 
 export function isAlgolBoolSame(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolSameAnon {
-  return !!(expr as AlgolBoolSameAnon).same;
+  return (expr as AlgolBoolSameAnon).same !== undefined;
 }
 
 export function isAlgolBoolDifferent(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolDifferentAnon {
-  return !!(expr as AlgolBoolDifferentAnon).different;
+  return (expr as AlgolBoolDifferentAnon).different !== undefined;
 }
 
 export function isAlgolBoolValInList(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolValInListAnon {
-  return !!(expr as AlgolBoolValInListAnon).valinlist;
+  return (expr as AlgolBoolValInListAnon).valinlist !== undefined;
 }
 
 export function isAlgolBoolMoreThan(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolMoreThanAnon {
-  return !!(expr as AlgolBoolMoreThanAnon).morethan;
+  return (expr as AlgolBoolMoreThanAnon).morethan !== undefined;
 }
 
 export function isAlgolBoolTruthy(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolTruthyAnon {
-  return !!(expr as AlgolBoolTruthyAnon).truthy;
+  return (expr as AlgolBoolTruthyAnon).truthy !== undefined;
 }
 
 export function isAlgolBoolFalsy(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolFalsyAnon {
-  return !!(expr as AlgolBoolFalsyAnon).falsy;
+  return (expr as AlgolBoolFalsyAnon).falsy !== undefined;
 }

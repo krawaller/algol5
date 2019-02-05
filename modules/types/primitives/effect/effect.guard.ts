@@ -29,142 +29,142 @@ import {
 export function isAlgolEffectMoveAt(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectMoveAtAnon {
-  return !!(expr as AlgolEffectMoveAtAnon).moveat;
+  return (expr as AlgolEffectMoveAtAnon).moveat !== undefined;
 }
 
 export function isAlgolEffectMoveId(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectMoveIdAnon {
-  return !!(expr as AlgolEffectMoveIdAnon).moveid;
+  return (expr as AlgolEffectMoveIdAnon).moveid !== undefined;
 }
 
 export function isAlgolEffectStompAt(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectStompAtAnon {
-  return !!(expr as AlgolEffectStompAtAnon).stompat;
+  return (expr as AlgolEffectStompAtAnon).stompat !== undefined;
 }
 
 export function isAlgolEffectStompId(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectStompIdAnon {
-  return !!(expr as AlgolEffectStompIdAnon).stompid;
+  return (expr as AlgolEffectStompIdAnon).stompid !== undefined;
 }
 
 export function isAlgolEffectSetTurnPos(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetTurnPosAnon {
-  return !!(expr as AlgolEffectSetTurnPosAnon).setturnpos;
+  return (expr as AlgolEffectSetTurnPosAnon).setturnpos !== undefined;
 }
 
 export function isAlgolEffectSetBattlePos(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetBattlePosAnon {
-  return !!(expr as AlgolEffectSetBattlePosAnon).setbattlepos;
+  return (expr as AlgolEffectSetBattlePosAnon).setbattlepos !== undefined;
 }
 
 export function isAlgolEffectSetTurnVar(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetTurnVarAnon {
-  return !!(expr as AlgolEffectSetTurnVarAnon).setturnvar;
+  return (expr as AlgolEffectSetTurnVarAnon).setturnvar !== undefined;
 }
 
 export function isAlgolEffectSetBattleVar(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetBattleVarAnon {
-  return !!(expr as AlgolEffectSetBattleVarAnon).setbattlevar;
+  return (expr as AlgolEffectSetBattleVarAnon).setbattlevar !== undefined;
 }
 
 export function isAlgolEffectPushAt(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectPushAtAnon {
-  return !!(expr as AlgolEffectPushAtAnon).pushat;
+  return (expr as AlgolEffectPushAtAnon).pushat !== undefined;
 }
 
 export function isAlgolEffectPushIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectPushInAnon {
-  return !!(expr as AlgolEffectPushInAnon).pushin;
+  return (expr as AlgolEffectPushInAnon).pushin !== undefined;
 }
 
 export function isAlgolEffectKillIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectKillInAnon {
-  return !!(expr as AlgolEffectKillInAnon).killin;
+  return (expr as AlgolEffectKillInAnon).killin !== undefined;
 }
 
 export function isAlgolEffectKillId(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectKillIdAnon {
-  return !!(expr as AlgolEffectKillIdAnon).killid;
+  return (expr as AlgolEffectKillIdAnon).killid !== undefined;
 }
 export function isAlgolEffectKillAt(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectKillAtAnon {
-  return !!(expr as AlgolEffectKillAtAnon).killat;
+  return (expr as AlgolEffectKillAtAnon).killat !== undefined;
 }
 
 export function isAlgolEffectSetAt(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetAtAnon {
-  return !!(expr as AlgolEffectSetAtAnon).setat;
+  return (expr as AlgolEffectSetAtAnon).setat !== undefined;
 }
 
 export function isAlgolEffectSetIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetInAnon {
-  return !!(expr as AlgolEffectSetInAnon).setin;
+  return (expr as AlgolEffectSetInAnon).setin !== undefined;
 }
 
 export function isAlgolEffectSetId(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetIdAnon {
-  return !!(expr as AlgolEffectSetIdAnon).setid;
+  return (expr as AlgolEffectSetIdAnon).setid !== undefined;
 }
 
 export function isAlgolEffectSpawn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSpawnAnon {
-  return !!(expr as AlgolEffectSpawnAnon).spawn;
+  return (expr as AlgolEffectSpawnAnon).spawn !== undefined;
 }
 
 export function isAlgolEffectSpawnIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSpawnInAnon {
-  return !!(expr as AlgolEffectSpawnInAnon).spawnin;
+  return (expr as AlgolEffectSpawnInAnon).spawnin !== undefined;
 }
 
 export function isAlgolEffectForPosIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectForPosInAnon {
-  return !!(expr as AlgolEffectForPosInAnon).forposin;
+  return (expr as AlgolEffectForPosInAnon).forposin !== undefined;
 }
 
 export function isAlgolEffectForIdIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectForIdInAnon {
-  return !!(expr as AlgolEffectForIdInAnon).foridin;
+  return (expr as AlgolEffectForIdInAnon).foridin !== undefined;
 }
 
 export function isAlgolEffectMulti(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectMultiAnon {
-  return !!(expr as AlgolEffectMultiAnon).multi;
+  return (expr as AlgolEffectMultiAnon).multi !== undefined;
 }
 
 export function isAlgolEffectMorphAt(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectMorphAtAnon {
-  return !!(expr as AlgolEffectMorphAtAnon).morphat;
+  return (expr as AlgolEffectMorphAtAnon).morphat !== undefined;
 }
 
 export function isAlgolEffectMorphId(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectMorphIdAnon {
-  return !!(expr as AlgolEffectMorphIdAnon).morphid;
+  return (expr as AlgolEffectMorphIdAnon).morphid !== undefined;
 }
 
 export function isAlgolEffectMorphIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectMorphInAnon {
-  return !!(expr as AlgolEffectMorphInAnon).morphin;
+  return (expr as AlgolEffectMorphInAnon).morphin !== undefined;
 }

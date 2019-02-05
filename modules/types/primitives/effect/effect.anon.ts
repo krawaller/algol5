@@ -10,6 +10,7 @@ import {
   AlgolEffectMoveId,
   AlgolEffectMulti,
   AlgolEffectPushIn,
+  AlgolEffectPushAt,
   AlgolEffectSetAt,
   AlgolEffectSetBattlePos,
   AlgolEffectSetBattleVar,
@@ -106,6 +107,16 @@ export type AlgolEffectSetTurnVarAnon = AlgolEffectSetTurnVar<
   string
 >;
 export type AlgolEffectSetBattleVarAnon = AlgolEffectSetBattleVar<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolEffectPushAtAnon = AlgolEffectPushAt<
   string,
   string,
   string,

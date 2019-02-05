@@ -1,3 +1,5 @@
+import { offsetPos } from "../../../common";
+
 import {
   AlgolEffectAnon,
   FullDefAnon,
@@ -19,7 +21,9 @@ import {
   isAlgolEffectSetTurnVar,
   isAlgolEffectSetTurnPos,
   isAlgolEffectSetBattleVar,
-  isAlgolEffectSetBattlePos
+  isAlgolEffectSetBattlePos,
+  isAlgolEffectPushIn,
+  isAlgolEffectPushAt
 } from "../../../types";
 import makeParser from "../../def2code2/expressions";
 
@@ -174,6 +178,32 @@ export function executeEffect(
       setbattlepos: [name, pos]
     } = effect;
     return `BATTLEVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
+  }
+  if (isAlgolEffectPushAt(effect)) {
+    const {
+      pushat: [pos, dir, dist]
+    } = effect;
+    const newPos = `offsetPos(${parser.pos(pos)}, ${parser.val(
+      dir
+    )}, ${parser.val(dist)}, 0, gameDef.board)`;
+    return `{
+      let unitid = (UNITLAYERS.units[${parser.pos(pos)}] || {}).id;
+      if (unitid){
+        UNITDATA[unitid]= {
+          ...UNITDATA[unitid],
+          pos: ${newPos}
+        };
+      }
+    }
+  `;
+
+    return me({ setat: [pos, "pos", newPos] });
+  }
+  if (isAlgolEffectPushIn(effect)) {
+    const {
+      pushin: [set, dir, dist]
+    } = effect;
+    return me({ forposin: [set, { pushat: [["looppos"], dir, dist] }] });
   }
   return "";
 }

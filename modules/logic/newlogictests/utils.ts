@@ -50,12 +50,18 @@ export function run<T>(
           expr
         );
         let error, result;
+        const pre = `const {offsetPos} = require('../../common');`;
         try {
           result = _eval(
-            sample
-              ? `${code}; module.exports = ${sample};`
-              : `module.exports = ${code};`,
-            JSON.parse(JSON.stringify(context))
+            pre +
+              (sample
+                ? `${code}; module.exports = ${sample};`
+                : `module.exports = ${code};`),
+            {
+              gameDef: parserTest.def,
+              ...JSON.parse(JSON.stringify(context))
+            },
+            true
           );
         } catch (e) {
           console.log("KABOOM", code);

@@ -134,6 +134,23 @@ export interface AlgolEffectSetBattleVar<
   ];
 }
 
+export interface AlgolEffectPushAt<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  pushat: [
+    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
 export interface AlgolEffectPushIn<
   Btlp,
   Btlv,

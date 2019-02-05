@@ -21,6 +21,7 @@ import {
   AlgolEffectMoveId,
   AlgolEffectMulti,
   AlgolEffectPushIn,
+  AlgolEffectPushAt,
   AlgolEffectSetAt,
   AlgolEffectSetBattlePos,
   AlgolEffectSetBattleVar,
@@ -54,6 +55,7 @@ export type AlgolEffect<
   | AlgolEffectSetTurnVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectSetBattleVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectPushIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolEffectPushAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectKillIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectKillAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectKillId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

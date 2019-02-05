@@ -9,6 +9,7 @@ import {
   AlgolEffectMoveIdAnon,
   AlgolEffectMultiAnon,
   AlgolEffectPushInAnon,
+  AlgolEffectPushAtAnon,
   AlgolEffectSetAtAnon,
   AlgolEffectSetBattlePosAnon,
   AlgolEffectSetBattleVarAnon,
@@ -68,6 +69,12 @@ export function isAlgolEffectSetBattleVar(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSetBattleVarAnon {
   return !!(expr as AlgolEffectSetBattleVarAnon).setbattlevar;
+}
+
+export function isAlgolEffectPushAt(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectPushAtAnon {
+  return !!(expr as AlgolEffectPushAtAnon).pushat;
 }
 
 export function isAlgolEffectPushIn(

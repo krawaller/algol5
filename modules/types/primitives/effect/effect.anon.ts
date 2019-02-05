@@ -21,7 +21,10 @@ import {
   AlgolEffectSpawn,
   AlgolEffectSpawnIn,
   AlgolEffectStompAt,
-  AlgolEffectStompId
+  AlgolEffectStompId,
+  AlgolEffectMorphAt,
+  AlgolEffectMorphId,
+  AlgolEffectMorphIn
 } from "./effect.interfaces";
 
 export type AlgolEffectAnon = AlgolEffect<
@@ -242,6 +245,36 @@ export type AlgolEffectForIdInAnon = AlgolEffectForIdIn<
 >;
 export type AlgolEffectMultiAnon = AlgolEffectMulti<
   string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolEffectMorphAtAnon = AlgolEffectMorphAt<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolEffectMorphInAnon = AlgolEffectMorphIn<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolEffectMorphIdAnon = AlgolEffectMorphId<
   string,
   string,
   string,

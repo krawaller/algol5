@@ -32,7 +32,10 @@ import {
   AlgolEffectSpawn,
   AlgolEffectSpawnIn,
   AlgolEffectStompAt,
-  AlgolEffectStompId
+  AlgolEffectStompId,
+  AlgolEffectMorphAt,
+  AlgolEffectMorphId,
+  AlgolEffectMorphIn
 } from "./effect.interfaces";
 
 export type AlgolEffect<
@@ -62,6 +65,9 @@ export type AlgolEffect<
   | AlgolEffectSetAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectSetIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectSetId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolEffectMorphAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolEffectMorphIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolEffectMorphId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectSpawn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectSpawnIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectForPosIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>

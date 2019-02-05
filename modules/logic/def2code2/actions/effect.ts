@@ -23,7 +23,10 @@ import {
   isAlgolEffectSetBattleVar,
   isAlgolEffectSetBattlePos,
   isAlgolEffectPushIn,
-  isAlgolEffectPushAt
+  isAlgolEffectPushAt,
+  isAlgolEffectMorphAt,
+  isAlgolEffectMorphIn,
+  isAlgolEffectMorphId
 } from "../../../types";
 import makeParser from "../../def2code2/expressions";
 
@@ -36,6 +39,9 @@ export function executeEffect(
   const parser = makeParser(gameDef, player, action, "effect");
   const me = (efct: AlgolEffectAnon) =>
     executeEffect(gameDef, player, action, efct);
+
+  // -------------------------- Primitive effects --------------------------
+
   if (isAlgolEffectKillAt(effect)) {
     const { killat: pos } = effect;
     return `delete UNITDATA[(UNITLAYERS.units[${parser.pos(pos)}] || {}).id];`;
@@ -44,19 +50,35 @@ export function executeEffect(
     const { killid: id } = effect;
     return `delete UNITDATA[${parser.val(id)}];`;
   }
-  if (isAlgolEffectKillIn(effect)) {
-    const { killin: set } = effect;
-    return me({ forposin: [set, { killat: ["looppos"] }] });
+  if (isAlgolEffectSetTurnVar(effect)) {
+    const {
+      setturnvar: [name, val]
+    } = effect;
+    return `TURNVARS[${parser.val(name)}] = ${parser.val(val)};`;
+  }
+  if (isAlgolEffectSetTurnPos(effect)) {
+    const {
+      setturnpos: [name, pos]
+    } = effect;
+    return `TURNVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
+  }
+  if (isAlgolEffectSetBattleVar(effect)) {
+    const {
+      setbattlevar: [name, val]
+    } = effect;
+    return `BATTLEVARS[${parser.val(name)}] = ${parser.val(val)};`;
+  }
+  if (isAlgolEffectSetBattlePos(effect)) {
+    const {
+      setbattlepos: [name, pos]
+    } = effect;
+    return `BATTLEVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
   }
   if (isAlgolEffectForPosIn(effect)) {
     const {
       forposin: [set, repeatEffect]
     } = effect;
     return `for(let LOOPPOS in ${parser.set(set)}) { ${me(repeatEffect)} }`;
-  }
-  if (isAlgolEffectMulti(effect)) {
-    const { multi: effects } = effect;
-    return effects.map(me).join(" ");
   }
   if (isAlgolEffectForIdIn(effect)) {
     const {
@@ -96,6 +118,58 @@ export function executeEffect(
       };
     `;
   }
+  if (isAlgolEffectSpawn(effect)) {
+    const {
+      spawn: [pos, group, owner, props]
+    } = effect;
+    return `{
+        let newunitid = 'clone'+(++clones);
+        UNITDATA[newunitid] = {
+          pos: ${parser.pos(pos)},
+          id: newunitid,
+          group: ${parser.val(group)},
+          owner: ${parser.val(owner || ["player"])}
+          ${
+            props
+              ? `, ${Object.keys(props)
+                  .map(key => `${key}: ${parser.val(props[key])}`)
+                  .join(", ")}`
+              : ""
+          }
+        }; 
+      }`;
+  }
+  if (isAlgolEffectPushAt(effect)) {
+    const {
+      pushat: [pos, dir, dist]
+    } = effect;
+    const newPos = `offsetPos(${parser.pos(pos)}, ${parser.val(
+      dir
+    )}, ${parser.val(dist)}, 0, gameDef.board)`;
+    return `{
+      let unitid = (UNITLAYERS.units[${parser.pos(pos)}] || {}).id;
+      if (unitid){
+        UNITDATA[unitid]= {
+          ...UNITDATA[unitid],
+          pos: ${newPos}
+        };
+      }
+    }
+  `;
+  }
+
+  // -------------------------- Composite effects --------------------------
+
+  if (isAlgolEffectKillIn(effect)) {
+    const { killin: set } = effect;
+    return me({ forposin: [set, { killat: ["looppos"] }] });
+  }
+
+  if (isAlgolEffectMulti(effect)) {
+    const { multi: effects } = effect;
+    return effects.map(me).join(" ");
+  }
+
   if (isAlgolEffectSetIn(effect)) {
     const {
       setin: [set, prop, val]
@@ -126,27 +200,7 @@ export function executeEffect(
     } = effect;
     return me({ multi: [{ killat: to }, { moveid: [id, to] }] });
   }
-  if (isAlgolEffectSpawn(effect)) {
-    const {
-      spawn: [pos, group, owner, props]
-    } = effect;
-    return `{
-        let newunitid = 'clone'+(++clones);
-        UNITDATA[newunitid] = {
-          pos: ${parser.pos(pos)},
-          id: newunitid,
-          group: ${parser.val(group)},
-          owner: ${parser.val(owner || ["player"])}
-          ${
-            props
-              ? `, ${Object.keys(props)
-                  .map(key => `${key}: ${parser.val(props[key])}`)
-                  .join(", ")}`
-              : ""
-          }
-        }; 
-      }`;
-  }
+
   if (isAlgolEffectSpawnIn(effect)) {
     const {
       spawnin: [set, group, owner, props]
@@ -155,55 +209,29 @@ export function executeEffect(
       forposin: [set, { spawn: [["looppos"], group, owner, props] }]
     });
   }
-  if (isAlgolEffectSetTurnVar(effect)) {
-    const {
-      setturnvar: [name, val]
-    } = effect;
-    return `TURNVARS[${parser.val(name)}] = ${parser.val(val)};`;
-  }
-  if (isAlgolEffectSetTurnPos(effect)) {
-    const {
-      setturnpos: [name, pos]
-    } = effect;
-    return `TURNVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
-  }
-  if (isAlgolEffectSetBattleVar(effect)) {
-    const {
-      setbattlevar: [name, val]
-    } = effect;
-    return `BATTLEVARS[${parser.val(name)}] = ${parser.val(val)};`;
-  }
-  if (isAlgolEffectSetBattlePos(effect)) {
-    const {
-      setbattlepos: [name, pos]
-    } = effect;
-    return `BATTLEVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
-  }
-  if (isAlgolEffectPushAt(effect)) {
-    const {
-      pushat: [pos, dir, dist]
-    } = effect;
-    const newPos = `offsetPos(${parser.pos(pos)}, ${parser.val(
-      dir
-    )}, ${parser.val(dist)}, 0, gameDef.board)`;
-    return `{
-      let unitid = (UNITLAYERS.units[${parser.pos(pos)}] || {}).id;
-      if (unitid){
-        UNITDATA[unitid]= {
-          ...UNITDATA[unitid],
-          pos: ${newPos}
-        };
-      }
-    }
-  `;
-
-    return me({ setat: [pos, "pos", newPos] });
-  }
   if (isAlgolEffectPushIn(effect)) {
     const {
       pushin: [set, dir, dist]
     } = effect;
     return me({ forposin: [set, { pushat: [["looppos"], dir, dist] }] });
+  }
+  if (isAlgolEffectMorphAt(effect)) {
+    const {
+      morphat: [pos, group]
+    } = effect;
+    return me({ setat: [pos, "group", group] });
+  }
+  if (isAlgolEffectMorphId(effect)) {
+    const {
+      morphid: [id, group]
+    } = effect;
+    return me({ setid: [id, "group", group] });
+  }
+  if (isAlgolEffectMorphIn(effect)) {
+    const {
+      morphin: [set, group]
+    } = effect;
+    return me({ forposin: [set, { morphat: [["looppos"], group] }] });
   }
   return "";
 }

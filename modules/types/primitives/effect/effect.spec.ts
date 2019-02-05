@@ -58,5 +58,8 @@ const tests: TestEffect[] = [
       { killat: "mymark" },
       { stompat: ["mymark", "mymark"] }
     ]
-  }
+  },
+  { morphat: ["mymark", { value: "newgroup" }] },
+  { morphin: ["mylayer", { value: "newgroup" }] },
+  { morphid: [{ value: "someid" }, { value: "newgroup" }] }
 ];

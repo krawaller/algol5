@@ -1,6 +1,6 @@
 import { AlgolEffect } from "./";
 
-import { PosPos, ValPos } from "../_signatures";
+import { PosPos, ValPos, PosVal, SetVal, ValVal } from "../_signatures";
 import { AlgolSet } from "../set";
 import { AlgolVal } from "../value";
 import { AlgolPos } from "../pos";
@@ -373,4 +373,43 @@ export interface AlgolEffectSpawnIn<
           >;
         }
       ];
+}
+
+export interface AlgolEffectMorphAt<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  morphat: PosVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+}
+
+export interface AlgolEffectMorphIn<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  morphin: SetVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+}
+
+export interface AlgolEffectMorphId<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  morphid: ValVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }

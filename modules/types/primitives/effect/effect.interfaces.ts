@@ -383,9 +383,10 @@ export interface AlgolEffectMorphAt<
   Layer,
   Mrk,
   Turnp,
-  Turnv
+  Turnv,
+  Unit
 > {
-  morphat: PosVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  morphat: PosVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
 export interface AlgolEffectMorphIn<
@@ -396,9 +397,10 @@ export interface AlgolEffectMorphIn<
   Layer,
   Mrk,
   Turnp,
-  Turnv
+  Turnv,
+  Unit
 > {
-  morphin: SetVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  morphin: SetVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
 export interface AlgolEffectMorphId<
@@ -409,9 +411,13 @@ export interface AlgolEffectMorphId<
   Layer,
   Mrk,
   Turnp,
-  Turnv
+  Turnv,
+  Unit
 > {
-  morphid: ValVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  morphid: [
+    AlgolVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  ];
 }
 
 export interface AlgolEffectAdoptAt<

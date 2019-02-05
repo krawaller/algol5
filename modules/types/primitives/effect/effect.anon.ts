@@ -265,6 +265,7 @@ export type AlgolEffectMorphAtAnon = AlgolEffectMorphAt<
   string,
   string,
   string,
+  string,
   string
 >;
 export type AlgolEffectMorphInAnon = AlgolEffectMorphIn<
@@ -275,9 +276,11 @@ export type AlgolEffectMorphInAnon = AlgolEffectMorphIn<
   string,
   string,
   string,
+  string,
   string
 >;
 export type AlgolEffectMorphIdAnon = AlgolEffectMorphId<
+  string,
   string,
   string,
   string,

@@ -59,9 +59,9 @@ const tests: TestEffect[] = [
       { stompat: ["mymark", "mymark"] }
     ]
   },
-  { morphat: ["mymark", { value: "newgroup" }] },
-  { morphin: ["mylayer", { value: "newgroup" }] },
-  { morphid: [{ value: "someid" }, { value: "newgroup" }] },
+  { morphat: ["mymark", { value: "myunit" }] },
+  { morphin: ["mylayer", { value: "myunit" }] },
+  { morphid: [{ value: "someid" }, { value: "myunit" }] },
   { adoptat: ["mymark", { value: 0 }] },
   { adoptin: ["mylayer", { value: ["player"] }] },
   { adoptid: [{ value: "someid" }, { value: ["otherplayer"] }] }

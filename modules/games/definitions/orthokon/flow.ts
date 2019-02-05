@@ -20,7 +20,7 @@ const orthokonFlow: OrthokonFlow = {
     move: {
       applyEffects: [
         { moveat: ["selectunit", "selectmovetarget"] },
-        { setin: ["victims", "owner", ["player"]] }
+        { adoptin: ["victims", ["player"]] }
       ],
       link: "endturn"
     }

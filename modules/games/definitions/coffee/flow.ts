@@ -32,36 +32,36 @@ const coffeeFlow: CoffeeFlow = {
   commands: {
     uphill: {
       applyEffects: [
-        { forposin: ["markers", { killat: ["target"] }] },
+        { killin: "markers" },
         { spawn: ["selectdrop", "soldiers"] },
-        { forposin: ["uphill", { spawn: [["target"], "markers", 0] }] }
+        { spawnin: ["uphill", "markers", 0] }
       ],
       runGenerator: "findwinlines",
       link: "endturn"
     },
     downhill: {
       applyEffects: [
-        { forposin: ["markers", { killat: ["target"] }] },
+        { killin: "markers" },
         { spawn: ["selectdrop", "soldiers"] },
-        { forposin: ["downhill", { spawn: [["target"], "markers", 0] }] }
+        { spawnin: ["downhill", "markers", 0] }
       ],
       runGenerator: "findwinlines",
       link: "endturn"
     },
     horisontal: {
       applyEffects: [
-        { forposin: ["markers", { killat: ["target"] }] },
+        { killin: "markers" },
         { spawn: ["selectdrop", "soldiers"] },
-        { forposin: ["horisontal", { spawn: [["target"], "markers", 0] }] }
+        { spawnin: ["horisontal", "markers", 0] }
       ],
       runGenerator: "findwinlines",
       link: "endturn"
     },
     vertical: {
       applyEffects: [
-        { forposin: ["markers", { killat: ["target"] }] },
+        { killin: "markers" },
         { spawn: ["selectdrop", "soldiers"] },
-        { forposin: ["vertical", { spawn: [["target"], "markers", 0] }] }
+        { spawnin: ["vertical", "markers", 0] }
       ],
       runGenerator: "findwinlines",
       link: "endturn"

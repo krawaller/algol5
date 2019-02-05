@@ -39,7 +39,7 @@ const descentFlow: DescentFlow = {
             { read: ["units", "selectmovetarget", "group"] }
           ]
         },
-        { setat: ["selectunit", "group", { turnvar: "heightto" }] },
+        { morphat: ["selectunit", { turnvar: "heightto" }] },
         { killat: "selectmovetarget" },
         { moveat: ["selectunit", "selectmovetarget"] },
         { spawn: ["selectunit", { turnvar: "heightfrom" }, 0] }
@@ -52,9 +52,8 @@ const descentFlow: DescentFlow = {
           { anyat: ["pawns", "selectdigtarget"] },
           { killat: "selectdigtarget" },
           {
-            setat: [
+            morphat: [
               "selectdigtarget",
-              "group",
               {
                 ifelse: [
                   { anyat: ["knights", "selectdigtarget"] },

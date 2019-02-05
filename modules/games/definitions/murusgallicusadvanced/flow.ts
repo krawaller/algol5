@@ -42,26 +42,14 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
     move: {
       applyEffects: [
         { killat: "selecttower" },
+        { morphin: ["madecatapults", "catapults"] },
+        { morphin: ["madetowers", "towers"] },
         {
-          forposin: [
-            "madecatapults",
-            { setat: [["target"], "group", "catapults"] }
-          ]
-        },
-        {
-          forposin: ["madetowers", { setat: [["target"], "group", "towers"] }]
-        },
-        {
-          forposin: [
+          spawnin: [
             "madewalls",
-            {
-              spawn: [
-                ["target"],
-                "walls",
-                ["player"],
-                { from: { pos: "selecttower" } }
-              ]
-            }
+            "walls",
+            ["player"],
+            { from: { pos: "selecttower" } }
           ]
         }
       ],
@@ -69,11 +57,11 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
     },
     kill: {
       applyEffects: [
-        { setat: ["selecttower", "group", "walls"] },
+        { morphat: ["selecttower", "walls"] },
         {
           ifelse: [
             { anyat: ["oppcatapults", "selectkill"] },
-            { setat: ["selectkill", "group", "towers"] },
+            { morphat: ["selectkill", "towers"] },
             { killat: "selectkill" }
           ]
         }
@@ -82,7 +70,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
     },
     sacrifice: {
       applyEffects: [
-        { setat: ["selectkill", "group", "walls"] },
+        { morphat: ["selectkill", "walls"] },
         { killat: "selecttower" }
       ],
       link: "endturn"
@@ -97,9 +85,8 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
               ifelse: [
                 { anyat: ["oppunits", "selectfire"] },
                 {
-                  setat: [
+                  morphat: [
                     "selectfire",
-                    "group",
                     {
                       ifelse: [
                         { anyat: ["oppcatapults", "selectfire"] },
@@ -121,7 +108,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
             }
           ]
         },
-        { setat: ["selectcatapult", "group", "towers"] }
+        { morphat: ["selectcatapult", "towers"] }
       ],
       link: "endturn"
     }

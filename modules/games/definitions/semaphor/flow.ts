@@ -28,9 +28,8 @@ const semaphorFlow: SemaphorFlow = {
     },
     promote: {
       applyEffect: {
-        setat: [
+        morphat: [
           "selectunit",
-          "group",
           { ifelse: [{ anyat: ["pawns", "selectunit"] }, "bishops", "kings"] }
         ]
       },

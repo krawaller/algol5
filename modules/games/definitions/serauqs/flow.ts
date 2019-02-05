@@ -49,7 +49,7 @@ const serauqsFlow: SerauqsFlow = {
   },
   commands: {
     promote: {
-      applyEffect: { setat: ["selectunit", "group", "wild"] },
+      applyEffect: { morphat: ["selectunit", "wild"] },
       link: "endturn"
     },
     move: {

@@ -27,7 +27,7 @@ const uglyduckFlow: UglyduckFlow = {
         {
           if: [
             { anyat: ["opphomerow", "selectmovetarget"] },
-            { setat: ["selectunit", "group", "kings"] }
+            { morphat: ["selectunit", "kings"] }
           ]
         },
         { stompat: ["selectunit", "selectmovetarget"] }

@@ -62,16 +62,11 @@ const duploFlow: DuploFlow = {
     expand: {
       applyEffects: [
         {
-          forposin: [
+          spawnin: [
             "spawns",
-            {
-              spawn: [
-                ["target"],
-                "soldiers",
-                ["player"],
-                { from: { pos: "selectunit" } }
-              ]
-            }
+            "soldiers",
+            ["player"],
+            { from: { pos: "selectunit" } }
           ]
         },
         {

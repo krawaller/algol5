@@ -30,20 +30,13 @@ const murusgallicusFlow: MurusgallicusFlow = {
     move: {
       applyEffects: [
         { killat: "selecttower" },
+        { morphin: ["madetowers", "towers"] },
         {
-          forposin: ["madetowers", { setat: [["target"], "group", "towers"] }]
-        },
-        {
-          forposin: [
+          spawnin: [
             "madewalls",
-            {
-              spawn: [
-                ["target"],
-                "walls",
-                ["player"],
-                { from: { pos: "selecttower" } }
-              ]
-            }
+            "walls",
+            ["player"],
+            { from: { pos: "selecttower" } }
           ]
         }
       ],
@@ -51,7 +44,7 @@ const murusgallicusFlow: MurusgallicusFlow = {
     },
     kill: {
       applyEffects: [
-        { setat: ["selecttower", "group", "walls"] },
+        { morphat: ["selecttower", "walls"] },
         { killat: "selectkill" }
       ],
       link: "endturn"

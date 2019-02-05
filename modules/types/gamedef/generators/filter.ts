@@ -1,5 +1,5 @@
 import { GeneratorDefAnon } from "./";
-import { AlgolBool, AlgolVal } from "../../";
+import { AlgolBool, AlgolVal, AlgolSet } from "../../";
 
 export type FilterDefAnon = FilterDef<
   string,
@@ -29,7 +29,7 @@ export type FilterDef<
   Turnv
 > = {
   type: "filter";
-  layer: any;
+  layer: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
   condition?: AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
   tolayer: AlgolVal<
     ArtifactLayer,

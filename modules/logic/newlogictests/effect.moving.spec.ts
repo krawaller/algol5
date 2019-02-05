@@ -7,15 +7,7 @@ import * as test from "tape";
 
 const tests: ParserTest<AlgolEffectAnon>[] = [
   {
-    def: {
-      ...emptyFullDef,
-      board: {
-        ...emptyFullDef.board,
-        terrain: {
-          unit1terrain: ["a1"]
-        }
-      }
-    },
+    def: emptyFullDef,
     player: 1,
     action: "someaction",
     contexts: [

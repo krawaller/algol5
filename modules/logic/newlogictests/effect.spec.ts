@@ -12,7 +12,7 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
       board: {
         ...emptyFullDef.board,
         terrain: {
-          swamp: ["a1"]
+          unit1terrain: ["a1"]
         }
       }
     },
@@ -22,50 +22,50 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
       {
         context: {
           UNITDATA: {
-            foo: { survivor: true, pos: "b2" },
-            killme: { pos: "a1" }
+            unit1: { id: "unit1", pos: "a1" },
+            unit2: { id: "unit2", pos: "b2" }
           },
           UNITLAYERS: {
-            units: { a1: { id: "killme" }, b2: { id: "foo" } }
+            units: { a1: { id: "unit1" }, b2: { id: "unit2" } }
           },
-          MARKS: { mymark: "a1", othermark: "c3", thirdmark: "b2" },
-          TERRAIN: { swamp: { a1: {} } },
+          MARKS: { unit1mark: "a1", othermark: "c3", unit2mark: "b2" },
+          TERRAIN: { unit1terrain: { a1: {} } },
           clones: 2
         },
         tests: [
           {
-            expr: { killat: "mymark" },
-            sample: "UNITDATA",
-            res: { foo: { survivor: true, pos: "b2" } }
-          },
-          {
-            expr: { killid: "killme" },
-            sample: "UNITDATA.killme",
-            res: falsy
-          },
-          {
-            expr: { killid: { value: "killme" } },
-            sample: "UNITDATA.killme",
-            res: falsy
-          },
-          {
-            expr: { forposin: ["swamp", { killat: ["looppos"] }] },
-            sample: "!UNITDATA.killme && UNITDATA.foo",
+            expr: { killat: "unit1mark" },
+            sample: "UNITDATA.unit2 && !UNITDATA.unit1",
             res: truthy
           },
           {
-            expr: { multi: [{ killid: "foo" }, { killid: "killme" }] },
-            sample: "UNITDATA.killme || UNITDATA.foo",
+            expr: { killid: "unit1" },
+            sample: "UNITDATA.unit1",
             res: falsy
           },
           {
-            expr: { killin: "swamp" },
-            sample: "!UNITDATA.killme && UNITDATA.foo",
+            expr: { killid: { value: "unit1" } },
+            sample: "UNITDATA.unit1",
+            res: falsy
+          },
+          {
+            expr: { forposin: ["unit1terrain", { killat: ["looppos"] }] },
+            sample: "!UNITDATA.unit1 && UNITDATA.unit2",
             res: truthy
           },
           {
-            expr: { foridin: ["swamp", { killid: ["loopid"] }] },
-            sample: "!UNITDATA.killme && UNITDATA.foo",
+            expr: { multi: [{ killid: "unit2" }, { killid: "unit1" }] },
+            sample: "UNITDATA.unit1 || UNITDATA.unit2",
+            res: falsy
+          },
+          {
+            expr: { killin: "unit1terrain" },
+            sample: "!UNITDATA.unit1 && UNITDATA.unit2",
+            res: truthy
+          },
+          {
+            expr: { foridin: ["unit1terrain", { killid: ["loopid"] }] },
+            sample: "!UNITDATA.unit1 && UNITDATA.unit2",
             res: truthy
           },
           {
@@ -74,38 +74,38 @@ const tests: ParserTest<AlgolEffectAnon>[] = [
             res: {}
           },
           {
-            expr: { setat: ["mymark", { value: "prop" }, { value: "wee" }] },
-            sample: "UNITDATA.killme.prop",
+            expr: { setat: ["unit1mark", { value: "prop" }, { value: "wee" }] },
+            sample: "UNITDATA.unit1.prop",
             res: "wee"
           },
           {
-            expr: { setin: ["swamp", "prop", "wee"] },
-            sample: "UNITDATA.killme.prop",
+            expr: { setin: ["unit1terrain", "prop", "wee"] },
+            sample: "UNITDATA.unit1.prop",
             res: "wee"
           },
           {
-            expr: { setid: ["foo", "prop", "wee"] },
-            sample: "UNITDATA.foo.prop",
+            expr: { setid: ["unit2", "prop", "wee"] },
+            sample: "UNITDATA.unit2.prop",
             res: "wee"
           },
           {
-            expr: { moveat: ["mymark", "othermark"] },
-            sample: "UNITDATA.killme.pos",
+            expr: { moveat: ["unit1mark", "othermark"] },
+            sample: "UNITDATA.unit1.pos",
             res: "c3"
           },
           {
-            expr: { moveid: [{ value: "killme" }, "othermark"] },
-            sample: "UNITDATA.killme.pos",
+            expr: { moveid: [{ value: "unit1" }, "othermark"] },
+            sample: "UNITDATA.unit1.pos",
             res: "c3"
           },
           {
-            expr: { stompat: ["mymark", "thirdmark"] },
-            sample: "UNITDATA.killme.pos === 'b2' && !UNITDATA.foo",
+            expr: { stompat: ["unit1mark", "unit2mark"] },
+            sample: "UNITDATA.unit1.pos === 'b2' && !UNITDATA.unit2",
             res: truthy
           },
           {
-            expr: { stompid: [{ value: "killme" }, "thirdmark"] },
-            sample: "UNITDATA.killme.pos === 'b2' && !UNITDATA.foo",
+            expr: { stompid: [{ value: "unit1" }, "unit2mark"] },
+            sample: "UNITDATA.unit1.pos === 'b2' && !UNITDATA.unit2",
             res: truthy
           },
           {

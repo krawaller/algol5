@@ -44,6 +44,7 @@ const tests: TestEffect[] = [
   { foridin: ["mylayer", { setid: [["loopid"], "group", "myunit"] }] },
   { killat: "mymark" },
   { stompat: ["mymark", "mymark"] },
+  { stompid: [{ value: "someid" }, "mymark"] },
   { setat: ["mymark", "someprop", { turnvar: "myturnv" }] },
   { setin: ["mylayer", "someprop", { turnvar: "myturnv" }] },
   { setid: [["loopid"], "group", "myunit"] },

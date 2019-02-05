@@ -6,6 +6,7 @@ import {
   AlgolEffectKillInAnon,
   AlgolEffectKillIdAnon,
   AlgolEffectMoveAtAnon,
+  AlgolEffectMoveIdAnon,
   AlgolEffectMultiAnon,
   AlgolEffectPushInAnon,
   AlgolEffectSetAtAnon,
@@ -17,7 +18,8 @@ import {
   AlgolEffectSetTurnVarAnon,
   AlgolEffectSpawnAnon,
   AlgolEffectSpawnInAnon,
-  AlgolEffectStompAtAnon
+  AlgolEffectStompAtAnon,
+  AlgolEffectStompIdAnon
 } from "./effect.anon";
 
 export function isAlgolEffectMoveAt(
@@ -26,10 +28,22 @@ export function isAlgolEffectMoveAt(
   return !!(expr as AlgolEffectMoveAtAnon).moveat;
 }
 
+export function isAlgolEffectMoveId(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectMoveIdAnon {
+  return !!(expr as AlgolEffectMoveIdAnon).moveid;
+}
+
 export function isAlgolEffectStompAt(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectStompAtAnon {
   return !!(expr as AlgolEffectStompAtAnon).stompat;
+}
+
+export function isAlgolEffectStompId(
+  expr: AlgolEffectAnon
+): expr is AlgolEffectStompIdAnon {
+  return !!(expr as AlgolEffectStompIdAnon).stompid;
 }
 
 export function isAlgolEffectSetTurnPos(

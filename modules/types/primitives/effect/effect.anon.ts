@@ -7,6 +7,7 @@ import {
   AlgolEffectKillIn,
   AlgolEffectKillId,
   AlgolEffectMoveAt,
+  AlgolEffectMoveId,
   AlgolEffectMulti,
   AlgolEffectPushIn,
   AlgolEffectSetAt,
@@ -18,7 +19,8 @@ import {
   AlgolEffectSetTurnVar,
   AlgolEffectSpawn,
   AlgolEffectSpawnIn,
-  AlgolEffectStompAt
+  AlgolEffectStompAt,
+  AlgolEffectStompId
 } from "./effect.interfaces";
 
 export type AlgolEffectAnon = AlgolEffect<
@@ -43,7 +45,27 @@ export type AlgolEffectMoveAtAnon = AlgolEffectMoveAt<
   string,
   string
 >;
+export type AlgolEffectMoveIdAnon = AlgolEffectMoveId<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
 export type AlgolEffectStompAtAnon = AlgolEffectStompAt<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolEffectStompIdAnon = AlgolEffectStompId<
   string,
   string,
   string,

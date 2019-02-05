@@ -22,6 +22,7 @@ export type ExpressionTest<T> = {
   sample?: string;
   res: any;
   debug?: boolean;
+  desc?: string;
 };
 
 export const parserTester = <T>(type: "set" | "bool" | "val" | "pos") => (
@@ -41,7 +42,7 @@ export function run<T>(
 ) {
   parserTests.forEach(parserTest =>
     parserTest.contexts.forEach(({ context, tests }) => {
-      tests.forEach(({ expr, res, sample, debug }) => {
+      tests.forEach(({ expr, res, sample, debug, desc }) => {
         const code = func(
           parserTest.def,
           parserTest.player,
@@ -68,7 +69,9 @@ export function run<T>(
         t[typeof res === "object" ? "deepEqual" : "equal"](
           processedResult,
           processedComparator,
-          sample
+          desc
+            ? desc
+            : sample
             ? `Ran ${JSON.stringify(expr)} and evaluated ${JSON.stringify(
                 sample
               )} to ${JSON.stringify(res)}`

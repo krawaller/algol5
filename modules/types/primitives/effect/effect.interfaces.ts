@@ -1,6 +1,6 @@
 import { AlgolEffect } from "./";
 
-import { PosPos } from "../_signatures";
+import { PosPos, ValPos } from "../_signatures";
 import { AlgolSet } from "../set";
 import { AlgolVal } from "../value";
 import { AlgolPos } from "../pos";
@@ -31,6 +31,19 @@ export interface AlgolEffectMoveAt<
   moveat: PosPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
+export interface AlgolEffectMoveId<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  moveid: ValPos<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+}
+
 export interface AlgolEffectStompAt<
   Btlp,
   Btlv,
@@ -42,6 +55,19 @@ export interface AlgolEffectStompAt<
   Turnv
 > {
   stompat: PosPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+}
+
+export interface AlgolEffectStompId<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  stompid: ValPos<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
 export interface AlgolEffectSetTurnPos<

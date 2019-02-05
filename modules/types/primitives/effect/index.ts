@@ -18,6 +18,7 @@ import {
   AlgolEffectKillIn,
   AlgolEffectKillId,
   AlgolEffectMoveAt,
+  AlgolEffectMoveId,
   AlgolEffectMulti,
   AlgolEffectPushIn,
   AlgolEffectSetAt,
@@ -29,7 +30,8 @@ import {
   AlgolEffectSetTurnVar,
   AlgolEffectSpawn,
   AlgolEffectSpawnIn,
-  AlgolEffectStompAt
+  AlgolEffectStompAt,
+  AlgolEffectStompId
 } from "./effect.interfaces";
 
 export type AlgolEffect<
@@ -44,7 +46,9 @@ export type AlgolEffect<
   Unit
 > =
   | AlgolEffectMoveAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolEffectMoveId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectStompAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolEffectStompId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectSetTurnPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectSetBattlePos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolEffectSetTurnVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

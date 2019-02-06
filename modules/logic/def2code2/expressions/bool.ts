@@ -40,7 +40,7 @@ export default function parseVal(
       case "false":
         return false;
       default:
-        return undefined;
+        throw new Error("Unknown bool singleton: " + expr);
     }
   }
   if (isAlgolBoolMoreThan(expr)) {

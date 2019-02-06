@@ -59,7 +59,7 @@ export default function parseVal(
       case "turn":
         return "turn.turn";
       default:
-        return undefined;
+        throw new Error("Unknown value singleton: " + expr);
     }
   }
   if (isAlgolValMinus(expr)) {

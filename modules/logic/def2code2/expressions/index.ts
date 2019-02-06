@@ -3,7 +3,8 @@ import {
   AlgolValAnon,
   AlgolBoolAnon,
   AlgolPosAnon,
-  AlgolSetAnon
+  AlgolSetAnon,
+  AlgolDirsAnon
 } from "../../../types";
 
 import parseValue from "./value";
@@ -11,6 +12,7 @@ import parseBool from "./bool";
 import parseLogical from "./logical";
 import parsePos from "./pos";
 import parseSet from "./set";
+import parseDirs from "./dirs";
 
 export default function makeParser(
   gameDef: FullDefAnon,
@@ -26,7 +28,9 @@ export default function makeParser(
     pos: (expr: AlgolPosAnon): string | number =>
       parseLogical(gameDef, player, action, parsePos, expr, from),
     set: (expr: AlgolSetAnon): string | number =>
-      parseLogical(gameDef, player, action, parseSet, expr, from)
+      parseLogical(gameDef, player, action, parseSet, expr, from),
+    dirs: (expr: AlgolDirsAnon): string | number =>
+      parseLogical(gameDef, player, action, parseDirs, expr, from)
   };
   return parsers;
 }

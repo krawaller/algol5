@@ -25,12 +25,9 @@ export type ExpressionTest<T> = {
   desc?: string;
 };
 
-export const parserTester = <T>(type: "set" | "bool" | "val" | "pos") => (
-  def: FullDefAnon,
-  player: 1 | 2,
-  action: string,
-  input: T
-) => {
+export const parserTester = <T>(
+  type: "set" | "bool" | "val" | "pos" | "dirs"
+) => (def: FullDefAnon, player: 1 | 2, action: string, input: T) => {
   const parser: any = makeParser(def, player, action)[type];
   return parser(input);
 };

@@ -47,7 +47,12 @@ export function run<T>(
           expr
         );
         let error, result;
-        const pre = `const {offsetPos} = require('../../common');`;
+        const pre = `
+          const {offsetPos, boardConnections} = require('../../common');
+          const connections = boardConnections(${JSON.stringify(
+            parserTest.def.board
+          )});
+        `;
         try {
           result = _eval(
             pre +

@@ -40,6 +40,15 @@ export default function parseSet(
     throw new Error(`Unknown layer reference: ${name}`);
   }
 
+  if (Array.isArray(expr)) {
+    switch (expr[0]) {
+      case "empty":
+        return "{}";
+      default:
+        throw new Error(`Unknown set singleton: ${JSON.stringify(expr)}`);
+    }
+  }
+
   if (isAlgolSetLayer(expr)) {
     const { layer: name } = expr;
     return parser.set(parser.val(name) as string);

@@ -21,6 +21,7 @@ import {
 
 export type AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | Layer
+  | ["empty"]
   | AlgolSetLayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetSingle<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetSingles<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

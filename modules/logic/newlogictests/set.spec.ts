@@ -11,6 +11,10 @@ const tests: ParserTest<AlgolSetAnon>[] = [
     action: "someaction",
     contexts: [
       {
+        context: {},
+        tests: [{ expr: ["empty"], res: {} }]
+      },
+      {
         context: {
           BOARD: {
             board: { b: "oard" },

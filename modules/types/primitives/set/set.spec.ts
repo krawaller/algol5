@@ -13,6 +13,7 @@ type TestPos = AlgolSet<
 
 const tests: TestPos[] = [
   "mylayer",
+  ["empty"],
   { layer: "mylayer" },
   { layer: { value: "mylayer" } },
   { playercase: ["mylayer", { layer: "mylayer" }] },

@@ -93,8 +93,7 @@ function walkInDir(
   walkDef: WalkerDefAnon,
   dirVar
 ) {
-  const parse = makeParser(gameDef, player, action);
-  const O = { rules: gameDef, player, action, usefordir: dirVar };
+  const parser = makeParser(gameDef, player, action);
   const drawDuringWhile =
     !contains([walkDef.draw.steps, walkDef.draw.all], ["totalcount"]) &&
     !contains([walkDef.draw.steps, walkDef.draw.all], ["walklength"]);
@@ -111,222 +110,145 @@ function walkInDir(
     walkDef.draw.counted ||
     contains(walkDef.draw, ["walklength"]);
   const needsWalkPath = !drawDuringWhile || needsWalkLength;
-  const blockNeedsStep = contains(walkDef.draw.block, ["step"]);
+
+  const countSoFar = walkDef.count && contains(walkDef.draw, ["countsofar"]);
+
+  let ret = ``;
+
+  if (needsWalkPath) ret += `let walkedsquares = []; `;
+
+  if (needsStopReason) ret += `let STOPREASON = ""; `;
+
+  if (walkDef.max) {
+    ret += `let MAX = ${parser.val(walkDef.max)};`;
+  }
+
+  if (walkDef.startasstep) {
+    ret += `
+    let POS = "faux"
+    connections.faux[DIR]=STARTPOS;
+    `;
+  } else {
+    ret += `let POS = STARTPOS; `;
+  }
+
+  if (needLevel(walkDef.blocks, "loop")) {
+    ret += `let allowedsteps = ${parser.set(walkDef.steps)}; `;
+    ret += `let BLOCKS = ${parser.set(walkDef.blocks)}; `;
+  }
+
+  if (walkDef.count) {
+    ret += `let walkpositionstocount = ${parser.set(walkDef.count)}; `;
+    ret += `let CURRENTCOUNT = 0; `;
+  }
+  if (countSoFar) ret += `let countedwalkpositions = []; `;
+  if (walkDef.max) ret += `let LENGTH = 0;`;
+  if (drawStepsInLoop) ret += `let STEP = 0; `;
+
   const whileCondition = needsStopReason
     ? `!(STOPREASON=${calcStopReason(walkDef, dirVar)})`
     : calcStopCondition(walkDef, dirVar);
-  const countSoFar = walkDef.count && contains(walkDef.draw, ["countsofar"]);
-  const drawBlockCond = ["BLOCKS[POS]"]
-    .concat(
-      walkDef.steps && !walkDef.testblocksbeforesteps ? "allowedsteps[POS]" : []
-    )
-    .join(" && ");
-  const shouldDrawStart = walkDef.draw.start || walkDef.draw.all;
-  const startNeedsPosVar = contains(
-    [walkDef.draw.start, walkDef.draw.all],
-    ["target"]
-  );
+  ret += `while(${whileCondition}){`; // OPENING LOOP
+
+  if (needsWalkPath) ret += `walkedsquares.push(POS); `;
+
+  if (countSoFar)
+    ret += `countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0)); `;
+
+  if (walkDef.count && !countSoFar)
+    ret += `CURRENTCOUNT+=(walkpositionstocount[POS]?1:0); `;
+
+  if (walkDef.max) ret += `LENGTH++;`;
+
+  if (drawDuringWhile) {
+    if (drawStepsInLoop) ret += "STEP++; ";
+    if (walkDef.count && countSoFar)
+      ret += "CURRENTCOUNT = countedwalkpositions[walkstepper];";
+    ret += draw(gameDef, player, action, walkDef.draw.steps);
+    ret += draw(gameDef, player, action, walkDef.draw.all);
+    if (walkDef.draw.counted) {
+      ret += `if (walkpositionstocount[POS]){`;
+      ret += draw(gameDef, player, action, walkDef.draw.counted);
+      ret += `}`;
+    }
+  }
+
+  ret += "}"; // CLOSING LOOP OMG!
+
+  if (needsWalkLength) ret += "var WALKLENGTH = walkedsquares.length; ";
+  if (walkDef.count) ret += "var TOTALCOUNT = CURRENTCOUNT; ";
+
+  if (walkDef.draw.block) {
+    if (contains(walkDef.draw.block, ["step"]))
+      ret += "var STEP = WALKLENGTH + 1; ";
+    const drawBlockCond = ["BLOCKS[POS]"]
+      .concat(
+        walkDef.steps && !walkDef.testblocksbeforesteps
+          ? "allowedsteps[POS]"
+          : []
+      )
+      .join(" && ");
+    ret += `if (${drawBlockCond}){`;
+    ret += draw(gameDef, player, action, walkDef.draw.block);
+    ret += draw(gameDef, player, action, walkDef.draw.all);
+    ret += `}`;
+  }
+
+  if (walkDef.draw.start || walkDef.draw.all) {
+    const startNeedsPosVar = contains(
+      [walkDef.draw.start, walkDef.draw.all],
+      ["target"]
+    );
+    ret += `POS = STARTPOS; `;
+    ret += draw(
+      gameDef,
+      player,
+      action,
+      walkDef.draw.start,
+      startNeedsPosVar ? "POS" : "STARTPOS"
+    );
+    ret += draw(
+      gameDef,
+      player,
+      action,
+      walkDef.draw.all,
+      startNeedsPosVar ? "POS" : "STARTPOS"
+    );
+  }
+
   const drawWalkAfterLoop =
     (!drawDuringWhile && walkDef.draw.steps) ||
     walkDef.draw.all ||
     walkDef.draw.counted;
-  const needStepsAfterLoop =
-    drawWalkAfterLoop &&
-    contains(
+  if (drawWalkAfterLoop) {
+    const needStepsAfterLoop = contains(
       [walkDef.draw.steps, walkDef.draw.all, walkDef.draw.counted],
       ["step"]
     );
-  const lastNeedsStep = contains(walkDef.draw.last, ["step"]);
-  const lastNeedsPos = contains(walkDef.draw.last, ["target"]);
-  let ret = `
-    ${
-      needsWalkPath
-        ? "let walkedsquares = [];                                                    "
-        : ""
+    if (needStepsAfterLoop) ret += `var STEP = 0; `;
+    ret += `for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){`;
+    ret += `POS=walkedsquares[walkstepper]; `;
+    if (needStepsAfterLoop) ret += `STEP++; `;
+    if (countSoFar) ret += `CURRENTCOUNT = countedwalkpositions[walkstepper];`;
+    ret += draw(gameDef, player, action, walkDef.draw.steps);
+    ret += draw(gameDef, player, action, walkDef.draw.all);
+    if (walkDef.draw.counted) {
+      ret += `if (walkpositionstocount[POS]){`;
+      ret += draw(gameDef, player, action, walkDef.draw.counted);
+      ret += `}`;
     }
-    ${
-      needsStopReason
-        ? 'let STOPREASON = "";                                                       '
-        : ""
-    }
-    ${
-      walkDef.max
-        ? `let MAX = ${parse.val(
-            walkDef.max
-          )};                                     `
-        : ""
-    }
-    ${
-      walkDef.startasstep
-        ? 'let POS = "faux";                                                          '
-        : ""
-    }
-    ${
-      walkDef.startasstep
-        ? "connections.faux[DIR]=STARTPOS;                                            "
-        : ""
-    }
-    ${!walkDef.startasstep ? "let POS = STARTPOS;" : ""}
-    ${
-      needLevel(walkDef.steps, "loop")
-        ? `let allowedsteps = ${parse.set(walkDef.steps)};`
-        : ""
-    }
-    ${
-      needLevel(walkDef.blocks, "loop")
-        ? `let BLOCKS = ${parse.set(walkDef.blocks)};`
-        : ""
-    }
-    ${
-      walkDef.count
-        ? `let walkpositionstocount = ${parse.set(walkDef.count)};`
-        : ""
-    }
-    ${walkDef.count ? `let CURRENTCOUNT = 0;` : ""}
-    ${countSoFar ? `let countedwalkpositions = [];` : ""}
-    ${walkDef.max ? `let LENGTH = 0;` : ""}
-    ${drawStepsInLoop ? `let STEP = 0;` : ""}
-                                          while(${whileCondition}){
-    ${needsWalkPath ? "  walkedsquares.push(POS);" : ""}
-    ${
-      countSoFar
-        ? "  countedwalkpositions.push(CURRENTCOUNT+=(walkpositionstocount[POS]?1:0));"
-        : ""
-    }
-    ${
-      walkDef.count && !countSoFar
-        ? "  CURRENTCOUNT+=(walkpositionstocount[POS]?1:0); "
-        : ""
-    }
-    ${walkDef.max ? `  LENGTH++;` : ""}
-    ${
-      drawDuringWhile
-        ? `
-        ${drawStepsInLoop ? "  STEP++;" : ""}
-        ${
-          walkDef.count && countSoFar
-            ? "  CURRENTCOUNT = countedwalkpositions[walkstepper];"
-            : ""
-        }
-                                            ${draw(
-                                              gameDef,
-                                              player,
-                                              action,
-                                              walkDef.draw.steps
-                                            )}
-                                            ${draw(
-                                              gameDef,
-                                              player,
-                                              action,
-                                              walkDef.draw.all
-                                            )}
-        ${
-          walkDef.draw.counted
-            ? `  if (walkpositionstocount[POS]){
-                                              ${draw(
-                                                gameDef,
-                                                player,
-                                                action,
-                                                walkDef.draw.counted
-                                              )}
-                                            }`
-            : ""
-        }
-    `
-        : ""
-    }
-                                          }
-    ${needsWalkLength ? "var WALKLENGTH = walkedsquares.length; " : ""}
-    ${walkDef.count ? "var TOTALCOUNT = CURRENTCOUNT; " : ""}
-    ${blockNeedsStep ? "var STEP = WALKLENGTH + 1; " : ""}
-    ${
-      walkDef.draw.block
-        ? `if (${drawBlockCond}){
-                                            ${draw(
-                                              gameDef,
-                                              player,
-                                              action,
-                                              walkDef.draw.block
-                                            )}
-                                            ${draw(
-                                              gameDef,
-                                              player,
-                                              action,
-                                              walkDef.draw.all
-                                            )}
-                                          }
-    `
-        : ""
-    }
-    ${
-      shouldDrawStart
-        ? `
-       ${startNeedsPosVar ? "POS = STARTPOS;" : ""}
-                                          ${draw(
-                                            gameDef,
-                                            player,
-                                            action,
-                                            walkDef.draw.start,
-                                            startNeedsPosVar
-                                              ? "POS"
-                                              : "STARTPOS"
-                                          )}
-                                          ${draw(
-                                            gameDef,
-                                            player,
-                                            action,
-                                            walkDef.draw.all,
-                                            startNeedsPosVar
-                                              ? "POS"
-                                              : "STARTPOS"
-                                          )}
-    `
-        : ""
-    }
-    ${
-      drawWalkAfterLoop
-        ? `
-      ${needStepsAfterLoop ? "var STEP = 0; " : ""}
-                                          for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){
-                                            POS=walkedsquares[walkstepper];
-      ${needStepsAfterLoop ? "  STEP++;" : ""}
-      ${countSoFar ? "  CURRENTCOUNT = countedwalkpositions[walkstepper];" : ""}
-                                            ${draw(
-                                              gameDef,
-                                              player,
-                                              action,
-                                              walkDef.draw.steps
-                                            )}
-                                            ${draw(
-                                              gameDef,
-                                              player,
-                                              action,
-                                              walkDef.draw.all
-                                            )}
-      ${
-        walkDef.draw.counted
-          ? `
-                                            if (walkpositionstocount[POS]){
-                                              ${draw(
-                                                gameDef,
-                                                player,
-                                                action,
-                                                walkDef.draw.counted
-                                              )}
-                                            }
-      `
-          : ""
-      }
-                                          }
-    `
-        : ""
-    }`;
+    ret += "}";
+  }
+
   if (walkDef.draw.counted) {
     ret += "if (walkpositionstocount[POS]){";
     ret += draw(gameDef, player, action, walkDef.draw.counted);
     ret += "}";
   }
+
   if (walkDef.draw.last) {
+    const lastNeedsPos = contains(walkDef.draw.last, ["target"]);
+    const lastNeedsStep = contains(walkDef.draw.last, ["step"]);
     ret += "if (WALKLENGTH) {";
     if (lastNeedsStep) ret += "STEP = WALKLENGTH;";
     if (lastNeedsPos) ret += "POS = walkedsquares[WALKLENGTH-1];";

@@ -30,8 +30,7 @@ export default function executeWalker(
   if (walkDef.starts) {
     return `{
         ${intro}
-        let walkstarts = ${parser.set(walkDef.starts)};
-        for(let STARTPOS in walkstarts) {
+        for(let STARTPOS in ${parser.set(walkDef.starts)}) {
           ${walkFromStart(gameDef, player, action, walkDef)}
         }
       }
@@ -66,15 +65,11 @@ function walkFromStart(
     }
   `;
   if (walkDef.dirs) {
-    let dirVar = dirMatters ? "DIR" : "allwalkerdirs[walkerdirnbr]";
     return (
       intro +
       `
-      let allwalkerdirs = ${parse.dirs(walkDef.dirs)};
-      let nbrofwalkerdirs=allwalkerdirs.length;
-      for(let walkerdirnbr=0; walkerdirnbr<nbrofwalkerdirs; walkerdirnbr++){
-        ${dirMatters ? "let DIR = allwalkerdirs[walkerdirnbr]; " : ""}
-        ${walkInDir(gameDef, player, action, walkDef, dirVar)}
+      for(let DIR of ${parse.dirs(walkDef.dirs)}){
+        ${walkInDir(gameDef, player, action, walkDef, "DIR")}
       }
     `
     );
@@ -143,7 +138,7 @@ function walkInDir(
     );
   const lastNeedsStep = contains(walkDef.draw.last, ["step"]);
   const lastNeedsPos = contains(walkDef.draw.last, ["target"]);
-  return `
+  let ret = `
     ${
       needsWalkPath
         ? "let walkedsquares = [];                                                    "
@@ -325,27 +320,27 @@ function walkInDir(
                                           }
     `
         : ""
-    }
-    ${
-      walkDef.draw.last
-        ? `
-                                          if (WALKLENGTH){
-      ${lastNeedsStep ? "  STEP = WALKLENGTH;" : ""}
-      ${lastNeedsPos ? "  POS = walkedsquares[WALKLENGTH-1];" : ""}
-                                            ${draw(
-                                              gameDef,
-                                              player,
-                                              action,
-                                              walkDef.draw.last,
-                                              lastNeedsPos
-                                                ? "POS"
-                                                : "walkedsquares[WALKLENGTH-1]"
-                                            )}
-                                          }
-    `
-        : ""
-    }
-  `;
+    }`;
+  if (walkDef.draw.counted) {
+    ret += "if (walkpositionstocount[POS]){";
+    ret += draw(gameDef, player, action, walkDef.draw.counted);
+    ret += "}";
+  }
+  if (walkDef.draw.last) {
+    ret += "if (WALKLENGTH) {";
+    if (lastNeedsStep) ret += "STEP = WALKLENGTH;";
+    if (lastNeedsPos) ret += "POS = walkedsquares[WALKLENGTH-1];";
+    ret += draw(
+      gameDef,
+      player,
+      action,
+      walkDef.draw.last,
+      lastNeedsPos ? "POS" : "walkedsquares[WALKLENGTH-1]"
+    );
+    ret += "}";
+  }
+
+  return ret;
 }
 
 // when do we need it? :D

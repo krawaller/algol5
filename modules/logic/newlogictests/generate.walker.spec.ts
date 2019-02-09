@@ -168,6 +168,37 @@ const tests: ParserTest<WalkerDefAnon>[] = [
             sample: "ARTIFACTS.flarps",
             res: { a3: {}, d4: {} },
             desc: "It draws blocks"
+          },
+          {
+            expr: {
+              type: "walker",
+              dir: 1,
+              start: "marka1",
+              count: { singles: ["marka2", "marka4"] },
+              draw: {
+                start: { tolayer: "flarps", include: { total: ["totalcount"] } }
+              }
+            },
+            sample: "ARTIFACTS.flarps",
+            res: { a1: { total: 2 } },
+            desc: "It can count a given set"
+          },
+          {
+            expr: {
+              type: "walker",
+              dir: 1,
+              start: "marka1",
+              count: { singles: ["marka2", "marka4"] },
+              draw: {
+                counted: {
+                  tolayer: "flarps",
+                  include: { total: ["totalcount"] }
+                }
+              }
+            },
+            sample: "ARTIFACTS.flarps",
+            res: { a2: { total: 2 }, a4: { total: 2 } },
+            desc: "It can draw the counted steps"
           }
         ]
       }

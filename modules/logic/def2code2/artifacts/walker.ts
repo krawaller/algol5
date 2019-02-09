@@ -12,7 +12,7 @@ export default function executeWalker(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  walkDef
+  walkDef: WalkerDefAnon
 ) {
   const parser = makeParser(gameDef, player, action);
   const intro = `
@@ -28,23 +28,20 @@ export default function executeWalker(
     }
   `;
   if (walkDef.starts) {
-    return (
-      intro +
-      `
-      let walkstarts = ${parser.set(walkDef.starts)};
-      for(let STARTPOS in walkstarts) {
-        ${walkFromStart(gameDef, player, action, walkDef)}
+    return `{
+        ${intro}
+        let walkstarts = ${parser.set(walkDef.starts)};
+        for(let STARTPOS in walkstarts) {
+          ${walkFromStart(gameDef, player, action, walkDef)}
+        }
       }
-    `
-    );
+    `;
   } else {
-    return (
-      intro +
-      `
+    return `{
+      ${intro}
       let STARTPOS = ${parser.pos(walkDef.start)};
       ${walkFromStart(gameDef, player, action, walkDef)}
-    `
-    );
+    }`;
   }
 }
 
@@ -52,7 +49,7 @@ function walkFromStart(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  walkDef
+  walkDef: WalkerDefAnon
 ) {
   const parse = makeParser(gameDef, player, action);
   const dirMatters = contains(walkDef.draw, ["dir"]) || walkDef.startasstep; // because startasstep accesses faux with DIR
@@ -98,7 +95,7 @@ function walkInDir(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  walkDef,
+  walkDef: WalkerDefAnon,
   dirVar
 ) {
   const parse = makeParser(gameDef, player, action);
@@ -115,7 +112,9 @@ function walkInDir(
   const needsStopReason =
     walkDef.draw.block || contains(walkDef, ["stopreason"]); // TODO - drawblock? :P
   const needsWalkLength =
-    walkDef.draw.last || contains(walkDef.draw, ["walklength"]);
+    walkDef.draw.last ||
+    walkDef.draw.counted ||
+    contains(walkDef.draw, ["walklength"]);
   const needsWalkPath = !drawDuringWhile || needsWalkLength;
   const blockNeedsStep = contains(walkDef.draw.block, ["step"]);
   const whileCondition = needsStopReason

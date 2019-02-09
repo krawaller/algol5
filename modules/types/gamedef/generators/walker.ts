@@ -116,7 +116,7 @@ export type WalkerDef<
       Turnp,
       Turnv
     >;
-    count?: DrawDef<
+    counted?: DrawDef<
       ArtifactLayer,
       Btlp,
       Btlv,

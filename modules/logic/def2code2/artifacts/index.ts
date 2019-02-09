@@ -1,5 +1,11 @@
-import { FullDefAnon, isNeighbourDef, GeneratorDefAnon } from "../../../types";
+import {
+  FullDefAnon,
+  isNeighbourDef,
+  isWalkerDef,
+  GeneratorDefAnon
+} from "../../../types";
 import executeNeighbours from "./neighbours";
+import executeWalker from "./walker";
 
 export function executeGenerator(
   gameDef: FullDefAnon,
@@ -10,5 +16,8 @@ export function executeGenerator(
   if (isNeighbourDef(genDef)) {
     return executeNeighbours(gameDef, player, action, genDef);
   }
-  throw "Unknown generator def: " + genDef;
+  if (isWalkerDef(genDef)) {
+    return executeWalker(gameDef, player, action, genDef);
+  }
+  throw "Unknown generator def: " + JSON.stringify(genDef);
 }

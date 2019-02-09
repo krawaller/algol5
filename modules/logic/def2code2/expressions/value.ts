@@ -58,6 +58,8 @@ export default function parseVal(
         return "LOOPID";
       case "turn":
         return "turn.turn";
+      case "countsofar":
+        return "CURRENTCOUNT";
       default:
         throw new Error("Unknown value singleton: " + expr);
     }

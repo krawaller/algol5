@@ -36,6 +36,7 @@ export type AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | ["player"]
   | ["otherplayer"]
   | ["turn"]
+  | ["countsofar"]
   | ["totalcount"]
   | ["neighbourcount"]
   | ["walklength"]

@@ -70,7 +70,8 @@ const tests: ParserTest<AlgolValAnon>[] = [
           MAX: 5,
           STEP: 6,
           LOOPID: 7,
-          turn: { turn: 8 }
+          turn: { turn: 8 },
+          CURRENTCOUNT: 9
         },
         tests: [
           { expr: ["walklength"], res: 1 },
@@ -81,7 +82,8 @@ const tests: ParserTest<AlgolValAnon>[] = [
           { expr: ["max"], res: 5 },
           { expr: ["step"], res: 6 },
           { expr: ["loopid"], res: 7 },
-          { expr: ["turn"], res: 8 }
+          { expr: ["turn"], res: 8 },
+          { expr: ["countsofar"], res: 9 }
         ]
       },
       {

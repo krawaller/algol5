@@ -50,8 +50,8 @@ const tests: TestVal[] = [
   { battlevar: "mybattlev" },
   { gridat: ["mygrid", "mymark"] },
   { gridin: ["mygrid", "mylayer"] },
-  ["dir"]
-  // TODO - countsofar
+  ["dir"],
+  ["countsofar"]
 ];
 
 const tests2: TestNumberVal[] = [

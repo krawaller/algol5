@@ -3,7 +3,8 @@ import { AlgolValAnon } from "../../types";
 import { runSuite, TestSuite, truthy, falsy, parserTester } from "./utils";
 
 export const testSuite: TestSuite<AlgolValAnon> = {
-  title: "primitive - value",
+  title: "Primitive - Value",
+  func: parserTester("val"),
   defs: [
     {
       def: emptyFullDef,
@@ -165,4 +166,4 @@ export const testSuite: TestSuite<AlgolValAnon> = {
   ]
 };
 
-runSuite(testSuite, parserTester("val"));
+runSuite(testSuite);

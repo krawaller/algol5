@@ -4,7 +4,8 @@ import { WalkerDefAnon } from "../../types";
 import { runSuite, TestSuite } from "./utils";
 
 export const testSuite: TestSuite<WalkerDefAnon> = {
-  title: "artifacts - walker",
+  title: "Artifacts - Walker",
+  func: executeGenerator,
   defs: [
     {
       def: {
@@ -258,4 +259,4 @@ export const testSuite: TestSuite<WalkerDefAnon> = {
   ]
 };
 
-runSuite(testSuite, executeGenerator);
+runSuite(testSuite);

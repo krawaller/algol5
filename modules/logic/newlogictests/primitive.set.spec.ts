@@ -3,7 +3,8 @@ import { AlgolSetAnon } from "../../types";
 import { runSuite, TestSuite, parserTester } from "./utils";
 
 export const testSuite: TestSuite<AlgolSetAnon> = {
-  title: "primitive - tests",
+  title: "Primitive - Set",
+  func: parserTester("set"),
   defs: [
     {
       def: emptyFullDef,
@@ -141,4 +142,4 @@ export const testSuite: TestSuite<AlgolSetAnon> = {
   ]
 };
 
-runSuite(testSuite, parserTester("set"));
+runSuite(testSuite);

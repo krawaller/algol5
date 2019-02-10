@@ -4,7 +4,8 @@ import { AlgolEffectAnon } from "../../types";
 import { runSuite, TestSuite, truthy, falsy } from "./utils";
 
 export const testSuite: TestSuite<AlgolEffectAnon> = {
-  title: "effect - pushing",
+  title: "Effect - Pushing",
+  func: executeEffect,
   defs: [
     {
       def: {
@@ -57,4 +58,4 @@ export const testSuite: TestSuite<AlgolEffectAnon> = {
   ]
 };
 
-runSuite(testSuite, executeEffect);
+runSuite(testSuite);

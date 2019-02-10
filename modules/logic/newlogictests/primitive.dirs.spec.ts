@@ -3,7 +3,8 @@ import { AlgolDirsAnon } from "../../types";
 import { runSuite, TestSuite, truthy, falsy, parserTester } from "./utils";
 
 export const testSuite: TestSuite<AlgolDirsAnon> = {
-  title: "primitive - dirs",
+  title: "Primitive - Dirs",
+  func: parserTester("dirs"),
   defs: [
     {
       def: emptyFullDef,
@@ -24,4 +25,4 @@ export const testSuite: TestSuite<AlgolDirsAnon> = {
   ]
 };
 
-runSuite(testSuite, parserTester("dirs"));
+runSuite(testSuite);

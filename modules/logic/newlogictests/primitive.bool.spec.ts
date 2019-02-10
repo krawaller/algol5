@@ -3,7 +3,8 @@ import { AlgolBoolAnon } from "../../types";
 import { runSuite, TestSuite, truthy, falsy, parserTester } from "./utils";
 
 export const testSuite: TestSuite<AlgolBoolAnon> = {
-  title: "primitive - bool",
+  title: "Primitive - Bool",
+  func: parserTester("bool"),
   defs: [
     {
       def: emptyFullDef,
@@ -168,4 +169,4 @@ export const testSuite: TestSuite<AlgolBoolAnon> = {
   ]
 };
 
-runSuite(testSuite, parserTester("bool"));
+runSuite(testSuite);

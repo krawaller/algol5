@@ -9,6 +9,7 @@ export const falsy = "FALSY";
 
 export type TestSuite<T> = {
   title: string;
+  func: (def: FullDefAnon, player: 1 | 2, action: string, input: T) => string;
   defs: ParserTest<T>[];
 };
 
@@ -39,16 +40,16 @@ export const parserTester = <T>(
   return parser(input);
 };
 
-export function runSuite<T>(
-  suite: TestSuite<T>,
-  func: (def: FullDefAnon, player: 1 | 2, action: string, input: T) => string
-) {
+import { printSuite } from "./utils.printsuite";
+
+export function runSuite<T>(suite: TestSuite<T>) {
   test(suite.title, t => {
     suite.defs.forEach(tests => {
-      runParserTest(tests, func, t);
+      runParserTest(tests, suite.func, t);
     });
     t.end();
   });
+  printSuite(suite);
 }
 
 export function runParserTest<T>(

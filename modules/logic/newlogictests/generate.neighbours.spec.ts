@@ -4,7 +4,8 @@ import { NeighbourDefAnon } from "../../types";
 import { runSuite, TestSuite } from "./utils";
 
 export const testSuite: TestSuite<NeighbourDefAnon> = {
-  title: "artifacts - neighbours",
+  title: "Artifacts - Neighbours",
+  func: executeGenerator,
   defs: [
     {
       def: {
@@ -74,4 +75,4 @@ export const testSuite: TestSuite<NeighbourDefAnon> = {
   ]
 };
 
-runSuite(testSuite, executeGenerator);
+runSuite(testSuite);

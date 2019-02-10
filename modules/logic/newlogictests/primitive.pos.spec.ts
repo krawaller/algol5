@@ -3,7 +3,8 @@ import { AlgolPosAnon } from "../../types";
 import { runSuite, TestSuite, parserTester } from "./utils";
 
 export const testSuite: TestSuite<AlgolPosAnon> = {
-  title: "primitive - pos",
+  title: "Primitive - Pos",
+  func: parserTester("pos"),
   defs: [
     {
       def: emptyFullDef,
@@ -48,4 +49,4 @@ export const testSuite: TestSuite<AlgolPosAnon> = {
   ]
 };
 
-runSuite(testSuite, parserTester("pos"));
+runSuite(testSuite);

@@ -5,15 +5,15 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import * as prettier from "prettier";
 
-function format(input, isExpression?) {
+function format(input, isExpression) {
   if (isExpression) {
     return prettier
-      .format("let e = " + JSON.stringify(input), {
+      .format("let e = " + input, {
         parser: "typescript"
       })
       .slice(8, -2);
   } else {
-    return prettier.format(JSON.stringify(input), {
+    return prettier.format(input, {
       parser: "typescript"
     });
   }
@@ -40,7 +40,7 @@ This suite contains ${
       ret += `This signature uses the following game definition:
 
 \`\`\`typescript
-${format(def.def, true)}
+${format(JSON.stringify(def.def), true)}
 \`\`\`\n\n`;
     }
 
@@ -61,7 +61,7 @@ ${format(def.def, true)}
         ret += `This context contains:
 
 \`\`\`typescript
-${format(ctx.context, true)}
+${format(JSON.stringify(ctx.context), true)}
 \`\`\`\n\n`;
       }
 
@@ -72,28 +72,43 @@ ${format(ctx.context, true)}
 
       ctx.tests.forEach((test, nTest) => {
         ret += `#### Test ${nSig + 1}-${nCtx + 1}-${nTest + 1}\n\n`;
-        if (!test.sample) {
-          ret += `The following Algol expression...
+        const expressionCode = format(JSON.stringify(test.expr), true);
+        const codeEqualsRes =
+          expressionCode === format(JSON.stringify(test.res), true);
+        ret += `The following Algol expression...
 
 \`\`\`typescript
-${format(test.expr, true)}
+${expressionCode}
 \`\`\`
 
 ...becomes this code:
 
 \`\`\`typescript
-${suite.func(def.def, def.player, def.action, test.expr)}
-\`\`\`
+${format(suite.func(def.def, def.player, def.action, test.expr), !test.sample)}
+\`\`\`\n\n`;
 
-...which evaluates to...
+        if (test.sample) {
+          ret += `If we run that in the context and check the value of...
 
 \`\`\`typescript
-${format(test.res, true)}
+${format(test.sample, true)}
+\`\`\`
+
+...then that evaluates to:
+
+\`\`\`typescript
+${format(JSON.stringify(test.res), true)}
+\`\`\`\n\n`;
+        } else if (!codeEqualsRes) {
+          ret += `That evaluates to...
+
+\`\`\`typescript
+${format(JSON.stringify(test.res), true)}
 \`\`\`\n\n`;
         }
       });
     });
 
-    fs.writeFile(path.join(out, `${suite.title}.md`), ret);
+    fs.writeFile(path.join(out, `${suite.title.toLowerCase()}.md`), ret);
   });
 }

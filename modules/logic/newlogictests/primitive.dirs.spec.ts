@@ -2,7 +2,7 @@ import { emptyFullDef } from "../../common";
 import { AlgolDirsAnon } from "../../types";
 import { runSuite, TestSuite, truthy, falsy, parserTester } from "./utils";
 
-const testSuite: TestSuite<AlgolDirsAnon> = {
+export const testSuite: TestSuite<AlgolDirsAnon> = {
   title: "primitive - dirs",
   defs: [
     {

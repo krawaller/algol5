@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../common";
 import { AlgolEffectAnon } from "../../types";
 import { runSuite, TestSuite, truthy, falsy } from "./utils";
 
-const testSuite: TestSuite<AlgolEffectAnon> = {
+export const testSuite: TestSuite<AlgolEffectAnon> = {
   title: "effect - morphing",
   defs: [
     {

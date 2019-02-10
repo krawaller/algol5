@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../common";
 import { WalkerDefAnon } from "../../types";
 import { runSuite, TestSuite } from "./utils";
 
-const testSuite: TestSuite<WalkerDefAnon> = {
+export const testSuite: TestSuite<WalkerDefAnon> = {
   title: "artifacts - walker",
   defs: [
     {

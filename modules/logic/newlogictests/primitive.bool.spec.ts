@@ -2,7 +2,7 @@ import { emptyFullDef } from "../../common";
 import { AlgolBoolAnon } from "../../types";
 import { runSuite, TestSuite, truthy, falsy, parserTester } from "./utils";
 
-const testSuite: TestSuite<AlgolBoolAnon> = {
+export const testSuite: TestSuite<AlgolBoolAnon> = {
   title: "primitive - bool",
   defs: [
     {

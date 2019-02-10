@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../common";
 import { NeighbourDefAnon } from "../../types";
 import { runSuite, TestSuite } from "./utils";
 
-const testSuite: TestSuite<NeighbourDefAnon> = {
+export const testSuite: TestSuite<NeighbourDefAnon> = {
   title: "artifacts - neighbours",
   defs: [
     {

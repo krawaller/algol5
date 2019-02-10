@@ -2,7 +2,7 @@ import { emptyFullDef } from "../../common";
 import { AlgolSetAnon } from "../../types";
 import { runSuite, TestSuite, parserTester } from "./utils";
 
-const testSuite: TestSuite<AlgolSetAnon> = {
+export const testSuite: TestSuite<AlgolSetAnon> = {
   title: "primitive - tests",
   defs: [
     {

@@ -1,89 +1,87 @@
 import { executeEffect } from "../def2code2/actions/effect";
 import { emptyFullDef } from "../../common";
 import { AlgolEffectAnon } from "../../types";
-import { run, ParserTest, truthy, falsy } from "./utils";
+import { runSuite, TestSuite, truthy, falsy } from "./utils";
 
-import * as test from "tape";
-
-const tests: ParserTest<AlgolEffectAnon>[] = [
-  {
-    def: emptyFullDef,
-    player: 1,
-    action: "someaction",
-    contexts: [
-      {
-        context: {
-          TURNVARS: { previous: 666 },
-          MARKS: { mymark: "a1" }
-        },
-        tests: [
-          {
-            expr: { setturnvar: ["newturnvar", 5] },
-            sample: "TURNVARS.newturnvar",
-            res: 5,
-            desc: "We can set a new turnvar"
+const testSuite: TestSuite<AlgolEffectAnon> = {
+  title: "effect - meta",
+  defs: [
+    {
+      def: emptyFullDef,
+      player: 1,
+      action: "someaction",
+      contexts: [
+        {
+          context: {
+            TURNVARS: { previous: 666 },
+            MARKS: { mymark: "a1" }
           },
-          {
-            expr: { setturnvar: [{ value: "newturnvar" }, { sum: [3, 2] }] },
-            sample: "TURNVARS.newturnvar",
-            res: 5,
-            desc: "Setturnvar supports value expressions for name and value"
-          },
-          {
-            expr: { setturnvar: [{ value: "newturnvar" }, { sum: [3, 2] }] },
-            sample: "TURNVARS.previous",
-            res: 666,
-            desc: "Existing turnvar isn't affected when we set a new one"
-          },
-          {
-            expr: { setturnpos: ["newturnpos", "mymark"] },
-            sample: "TURNVARS.newturnpos",
-            res: "a1",
-            desc: "We can set a new turnpos"
-          }
-        ]
-      },
-      {
-        context: {
-          BATTLEVARS: { previous: 666 },
-          MARKS: { mymark: "a1" }
-        },
-        tests: [
-          {
-            expr: { setbattlevar: ["newbattlevar", 5] },
-            sample: "BATTLEVARS.newbattlevar",
-            res: 5,
-            desc: "We can set a new battlevar"
-          },
-          {
-            expr: {
-              setbattlevar: [{ value: "newbattlevar" }, { sum: [3, 2] }]
+          tests: [
+            {
+              expr: { setturnvar: ["newturnvar", 5] },
+              sample: "TURNVARS.newturnvar",
+              res: 5,
+              desc: "We can set a new turnvar"
             },
-            sample: "BATTLEVARS.newbattlevar",
-            res: 5,
-            desc: "Setbattlevar supports value expressions for name and value"
-          },
-          {
-            expr: {
-              setbattlevar: [{ value: "newbattlevar" }, { sum: [3, 2] }]
+            {
+              expr: { setturnvar: [{ value: "newturnvar" }, { sum: [3, 2] }] },
+              sample: "TURNVARS.newturnvar",
+              res: 5,
+              desc: "Setturnvar supports value expressions for name and value"
             },
-            sample: "BATTLEVARS.previous",
-            res: 666,
-            desc: "Existing battlevar isn't affected when we set a new one"
+            {
+              expr: { setturnvar: [{ value: "newturnvar" }, { sum: [3, 2] }] },
+              sample: "TURNVARS.previous",
+              res: 666,
+              desc: "Existing turnvar isn't affected when we set a new one"
+            },
+            {
+              expr: { setturnpos: ["newturnpos", "mymark"] },
+              sample: "TURNVARS.newturnpos",
+              res: "a1",
+              desc: "We can set a new turnpos"
+            }
+          ]
+        },
+        {
+          context: {
+            BATTLEVARS: { previous: 666 },
+            MARKS: { mymark: "a1" }
           },
-          {
-            expr: { setbattlepos: ["newbattlepos", "mymark"] },
-            sample: "BATTLEVARS.newbattlepos",
-            res: "a1",
-            desc: "We can set a new battlepos"
-          }
-        ]
-      }
-    ]
-  }
-];
+          tests: [
+            {
+              expr: { setbattlevar: ["newbattlevar", 5] },
+              sample: "BATTLEVARS.newbattlevar",
+              res: 5,
+              desc: "We can set a new battlevar"
+            },
+            {
+              expr: {
+                setbattlevar: [{ value: "newbattlevar" }, { sum: [3, 2] }]
+              },
+              sample: "BATTLEVARS.newbattlevar",
+              res: 5,
+              desc: "Setbattlevar supports value expressions for name and value"
+            },
+            {
+              expr: {
+                setbattlevar: [{ value: "newbattlevar" }, { sum: [3, 2] }]
+              },
+              sample: "BATTLEVARS.previous",
+              res: 666,
+              desc: "Existing battlevar isn't affected when we set a new one"
+            },
+            {
+              expr: { setbattlepos: ["newbattlepos", "mymark"] },
+              sample: "BATTLEVARS.newbattlepos",
+              res: "a1",
+              desc: "We can set a new battlepos"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
 
-test("effects - meta", t => {
-  run(tests, executeEffect, t);
-  t.end();
-});
+runSuite(testSuite, executeEffect);

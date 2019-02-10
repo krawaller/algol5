@@ -114,37 +114,18 @@ function findManyNeighbours(
   );
   const countMatters = contains(nghDef.draw, ["neighbourcount"]);
   return `
-    let neighbourdirs = ${parser.dirs(nghDef.dirs)};
-    let nbrofneighbourdirs=neighbourdirs.length;
     ${countMatters ? "let foundneighbours = []; " : ""}
     ${countMatters && dirMatters ? "let foundneighbourdirs=[]; " : ""}
     let startconnections = connections[STARTPOS];
-    for(let dirnbr=0;dirnbr<nbrofneighbourdirs;dirnbr++){
-      ${dirMatters ? "let DIR=neighbourdirs[dirnbr]; " : ""}
-      ${
-        dirMatters
-          ? findNeighbourInDir(
-              gameDef,
-              player,
-              action,
-              nghDef,
-              "DIR",
-              "startconnections"
-            )
-          : ""
-      }
-      ${
-        !dirMatters
-          ? findNeighbourInDir(
-              gameDef,
-              player,
-              action,
-              nghDef,
-              "neighbourdirs[dirnbr]",
-              "startconnections"
-            )
-          : ""
-      }
+    for(let DIR of ${parser.dirs(nghDef.dirs)}){
+      ${findNeighbourInDir(
+        gameDef,
+        player,
+        action,
+        nghDef,
+        "DIR",
+        "startconnections"
+      )}
     }
   `;
 }

@@ -1,7 +1,6 @@
-import { executeEffect } from "../def2code/actions/effect";
-import { emptyFullDef } from "../../common";
-import { AlgolEffectAnon } from "../../types";
-import { runSuite, TestSuite, truthy, falsy } from "./utils";
+import { executeEffect } from "./";
+import { emptyFullDef, truthy, falsy } from "../../../common";
+import { AlgolEffectAnon, TestSuite } from "../../../types";
 
 export const testSuite: TestSuite<AlgolEffectAnon> = {
   title: "Effect - Killing",
@@ -50,5 +49,3 @@ export const testSuite: TestSuite<AlgolEffectAnon> = {
     }
   ]
 };
-
-runSuite(testSuite);

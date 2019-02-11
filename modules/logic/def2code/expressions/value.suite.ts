@@ -1,6 +1,6 @@
-import { emptyFullDef, relativedirs } from "../../common";
-import { AlgolValAnon } from "../../types";
-import { runSuite, TestSuite, truthy, falsy, parserTester } from "./utils";
+import { emptyFullDef, truthy, falsy, relativedirs } from "../../../common";
+import { AlgolValAnon, TestSuite } from "../../../types";
+import { parserTester } from "./";
 
 export const testSuite: TestSuite<AlgolValAnon> = {
   title: "Primitive - Value",
@@ -165,5 +165,3 @@ export const testSuite: TestSuite<AlgolValAnon> = {
     }
   ]
 };
-
-runSuite(testSuite);

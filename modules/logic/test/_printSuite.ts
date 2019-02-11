@@ -1,4 +1,4 @@
-import { TestSuite } from "./utils";
+import { TestSuite } from "../../types";
 import { emptyFullDef } from "../../common";
 
 import * as fs from "fs-extra";
@@ -19,7 +19,7 @@ function format(input, isExpression) {
   }
 }
 
-const out = path.join(__dirname, "book");
+const out = path.join(__dirname, "../book");
 
 export async function printSuite(suite: TestSuite<any>) {
   await fs.ensureDir(out);

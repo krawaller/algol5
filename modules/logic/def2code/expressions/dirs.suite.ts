@@ -1,6 +1,6 @@
-import { emptyFullDef } from "../../common";
-import { AlgolDirsAnon } from "../../types";
-import { runSuite, TestSuite, truthy, falsy, parserTester } from "./utils";
+import { emptyFullDef, truthy, falsy } from "../../../common";
+import { AlgolDirsAnon, TestSuite } from "../../../types";
+import { parserTester } from "./";
 
 export const testSuite: TestSuite<AlgolDirsAnon> = {
   title: "Primitive - Dirs",
@@ -24,5 +24,3 @@ export const testSuite: TestSuite<AlgolDirsAnon> = {
     }
   ]
 };
-
-runSuite(testSuite);

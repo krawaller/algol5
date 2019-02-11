@@ -14,6 +14,13 @@ import parsePos from "./pos";
 import parseSet from "./set";
 import parseDirs from "./dirs";
 
+export const parserTester = <T>(
+  type: "set" | "bool" | "val" | "pos" | "dirs"
+) => (def: FullDefAnon, player: 1 | 2, action: string, input: T) => {
+  const parser: any = makeParser(def, player, action)[type];
+  return parser(input);
+};
+
 export default function makeParser(
   gameDef: FullDefAnon,
   player: 1 | 2,

@@ -1,7 +1,6 @@
-import { executeGenerator } from "../def2code/artifacts";
-import { emptyFullDef } from "../../common";
-import { WalkerDefAnon } from "../../types";
-import { runSuite, TestSuite } from "./utils";
+import { executeGenerator } from "./";
+import { emptyFullDef, truthy, falsy } from "../../../common";
+import { WalkerDefAnon, TestSuite } from "../../../types";
 
 export const testSuite: TestSuite<WalkerDefAnon> = {
   title: "Artifacts - Walker",
@@ -258,5 +257,3 @@ export const testSuite: TestSuite<WalkerDefAnon> = {
     }
   ]
 };
-
-runSuite(testSuite);

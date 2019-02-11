@@ -3,6 +3,7 @@ export * from "./primitives";
 export * from "./gamedef";
 export * from "./session";
 export * from "./generated";
+export * from "./suite";
 
 export type SaveData = {
   gameId: string;

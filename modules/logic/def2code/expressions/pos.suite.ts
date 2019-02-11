@@ -1,6 +1,6 @@
-import { emptyFullDef } from "../../common";
-import { AlgolPosAnon } from "../../types";
-import { runSuite, TestSuite, parserTester } from "./utils";
+import { emptyFullDef, truthy, falsy } from "../../../common";
+import { AlgolPosAnon, TestSuite } from "../../../types";
+import { parserTester } from "./";
 
 export const testSuite: TestSuite<AlgolPosAnon> = {
   title: "Primitive - Pos",
@@ -48,5 +48,3 @@ export const testSuite: TestSuite<AlgolPosAnon> = {
     }
   ]
 };
-
-runSuite(testSuite);

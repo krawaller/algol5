@@ -1,58 +1,41 @@
-import { FullDefAnon } from "../../types";
-import makeParser from "../def2code/expressions";
-import * as _eval from "eval";
+import { FullDefAnon, TestSuite, ParserTest } from "../../types";
+import { truthy, falsy } from "../../common";
+import { getSuites } from "./_testUtils";
+import { printSuite } from "./_printSuite";
 
+import * as _eval from "eval";
 import * as test from "tape";
 
-export const truthy = "TRUTHY";
-export const falsy = "FALSY";
+getSuites().then(suiteFiles => {
+  suiteFiles.forEach(f => {
+    try {
+      const { testSuite } = require(f);
+      try {
+        runSuite(testSuite);
+        printSuite(testSuite);
+      } catch (e) {
+        console.log("Failed to run spec from", f, e);
+        throw e;
+      }
+    } catch (e) {
+      console.log("Failed to get spec from", f, e);
+      throw e;
+    }
+  });
+});
 
-export type TestSuite<T> = {
-  title: string;
-  func: (def: FullDefAnon, player: 1 | 2, action: string, input: T) => string;
-  defs: ParserTest<T>[];
-};
+// --------------------------------------------------------
 
-export type ParserTest<T> = {
-  def: FullDefAnon;
-  player: 1 | 2;
-  action: string;
-  contexts: ContextTest<T>[];
-};
-
-export type ContextTest<T> = {
-  context: { [idx: string]: any };
-  tests: ExpressionTest<T>[];
-};
-
-export type ExpressionTest<T> = {
-  expr: T;
-  sample?: string;
-  res: any;
-  debug?: boolean;
-  desc?: string;
-};
-
-export const parserTester = <T>(
-  type: "set" | "bool" | "val" | "pos" | "dirs"
-) => (def: FullDefAnon, player: 1 | 2, action: string, input: T) => {
-  const parser: any = makeParser(def, player, action)[type];
-  return parser(input);
-};
-
-import { printSuite } from "./utils.printsuite";
-
-export function runSuite<T>(suite: TestSuite<T>) {
+function runSuite<T>(suite: TestSuite<T>) {
   test(suite.title, t => {
     suite.defs.forEach(tests => {
       runParserTest(tests, suite.func, t);
     });
     t.end();
   });
-  printSuite(suite);
 }
 
-export function runParserTest<T>(
+function runParserTest<T>(
   parserTest: ParserTest<T>,
   func: (def: FullDefAnon, player: 1 | 2, action: string, input: T) => string,
   t

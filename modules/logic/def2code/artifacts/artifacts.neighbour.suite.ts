@@ -1,7 +1,6 @@
-import { executeGenerator } from "../def2code/artifacts";
-import { emptyFullDef } from "../../common";
-import { NeighbourDefAnon } from "../../types";
-import { runSuite, TestSuite } from "./utils";
+import { executeGenerator } from "./";
+import { emptyFullDef, truthy, falsy } from "../../../common";
+import { NeighbourDefAnon, TestSuite } from "../../../types";
 
 export const testSuite: TestSuite<NeighbourDefAnon> = {
   title: "Artifacts - Neighbours",
@@ -74,5 +73,3 @@ export const testSuite: TestSuite<NeighbourDefAnon> = {
     }
   ]
 };
-
-runSuite(testSuite);

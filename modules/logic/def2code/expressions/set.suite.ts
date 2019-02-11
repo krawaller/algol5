@@ -1,6 +1,6 @@
-import { emptyFullDef } from "../../common";
-import { AlgolSetAnon } from "../../types";
-import { runSuite, TestSuite, parserTester } from "./utils";
+import { emptyFullDef, truthy, falsy } from "../../../common";
+import { AlgolSetAnon, TestSuite } from "../../../types";
+import { parserTester } from "./";
 
 export const testSuite: TestSuite<AlgolSetAnon> = {
   title: "Primitive - Set",
@@ -141,5 +141,3 @@ export const testSuite: TestSuite<AlgolSetAnon> = {
     }
   ]
 };
-
-runSuite(testSuite);

@@ -2,10 +2,10 @@
 This test executes scipted steps
 */
 
-import library from "../../dist/library";
+import library from "../dist/library";
 import * as test from "tape";
-import { GameTestSuite } from "../../../types";
-import defs from "../../../games/dist/lib";
+import { GameTestSuite } from "../../types";
+import defs from "../../games/dist/lib";
 
 const gameIds = Object.keys(library);
 
@@ -18,7 +18,7 @@ gameIds.forEach(gameId => {
         const lines = suite[testCaseName];
         let turn = game.newGame();
         let at = "root";
-        lines.forEach(({commands, include = [], exclude = []}, i) => {
+        lines.forEach(({ commands, include = [], exclude = [] }, i) => {
           t.doesNotThrow(() => {
             commands.forEach(cmnd => {
               let func = turn.links[at][cmnd];
@@ -31,7 +31,11 @@ gameIds.forEach(gameId => {
               } else {
                 let step = game[func](turn, turn.steps[at], cmnd);
                 at = step.stepid;
-                if (!{endturn:1,win:1}[Object.keys(turn.links[at]).toString()]) {
+                if (
+                  !{ endturn: 1, win: 1 }[
+                    Object.keys(turn.links[at]).toString()
+                  ]
+                ) {
                   game[func + "instruction"](turn, step);
                 }
               }
@@ -40,11 +44,7 @@ gameIds.forEach(gameId => {
           const links = turn.links[at];
           if (include.length) {
             const missingOpts = include.filter(o => !links[o]);
-            t.deepEqual(
-              missingOpts,
-              [],
-              "UI included " + include.join(",")
-            );
+            t.deepEqual(missingOpts, [], "UI included " + include.join(","));
           }
           if (exclude.length) {
             const unwantedOpts = Object.keys(links).filter(

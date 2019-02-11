@@ -51,7 +51,7 @@ function walkFromStart(
   walkDef: WalkerDefAnon
 ) {
   const parse = makeParser(gameDef, player, action);
-  const dirMatters = contains(walkDef.draw, ["dir"]) || walkDef.startasstep; // because startasstep accesses faux with DIR
+  const dirMatters = contains(walkDef.draw, ["dir"]);
   const intro = `
     ${
       needLevel(walkDef.steps, "dir")
@@ -85,7 +85,6 @@ function walkFromStart(
   }
 }
 
-// TODO - totalcount might not always be needed
 function walkInDir(
   gameDef: FullDefAnon,
   player: 1 | 2,
@@ -95,16 +94,11 @@ function walkInDir(
 ) {
   const parser = makeParser(gameDef, player, action);
   const drawDuringWhile =
-    !contains([walkDef.draw.steps, walkDef.draw.all], ["totalcount"]) &&
-    !contains([walkDef.draw.steps, walkDef.draw.all], ["walklength"]);
-  const drawStepsInLoop =
-    drawDuringWhile &&
-    contains(
+    !contains(
       [walkDef.draw.steps, walkDef.draw.all, walkDef.draw.counted],
-      ["step"]
-    );
-  const needsStopReason =
-    walkDef.draw.block || contains(walkDef, ["stopreason"]); // TODO - drawblock? :P
+      ["totalcount"]
+    ) && !contains([walkDef.draw.steps, walkDef.draw.all], ["walklength"]);
+  const needsStopReason = contains(walkDef, ["stopreason"]);
   const needsWalkLength =
     walkDef.draw.last ||
     walkDef.draw.counted ||
@@ -126,7 +120,7 @@ function walkInDir(
   if (walkDef.startasstep) {
     ret += `
     let POS = "faux"
-    connections.faux[DIR]=STARTPOS;
+    connections.faux[${dirVar}]=STARTPOS;
     `;
   } else {
     ret += `let POS = STARTPOS; `;
@@ -143,12 +137,20 @@ function walkInDir(
   }
   if (countSoFar) ret += `let countedwalkpositions = []; `;
   if (walkDef.max) ret += `let LENGTH = 0;`;
-  if (drawStepsInLoop) ret += `let STEP = 0; `;
+
+  const needStepVarInLoop =
+    drawDuringWhile &&
+    contains(
+      [walkDef.draw.steps, walkDef.draw.all, walkDef.draw.counted],
+      ["step"]
+    );
+
+  if (needStepVarInLoop) ret += `let STEP = 0; `;
 
   const whileCondition = needsStopReason
     ? `!(STOPREASON=${calcStopReason(walkDef, dirVar)})`
     : calcStopCondition(walkDef, dirVar);
-  ret += `while(${whileCondition}){`; // OPENING LOOP
+  ret += `while(${whileCondition}){`; // ---- OPENING WHILE LOOP
 
   if (needsWalkPath) ret += `walkedsquares.push(POS); `;
 
@@ -161,9 +163,7 @@ function walkInDir(
   if (walkDef.max) ret += `LENGTH++;`;
 
   if (drawDuringWhile) {
-    if (drawStepsInLoop) ret += "STEP++; ";
-    if (walkDef.count && countSoFar)
-      ret += "CURRENTCOUNT = countedwalkpositions[walkstepper];";
+    if (needStepVarInLoop) ret += "STEP++; ";
     ret += draw(gameDef, player, action, walkDef.draw.steps);
     ret += draw(gameDef, player, action, walkDef.draw.all);
     if (walkDef.draw.counted) {
@@ -173,14 +173,14 @@ function walkInDir(
     }
   }
 
-  ret += "}"; // CLOSING LOOP OMG!
+  ret += "}"; // CLOSING WHILE LOOP
 
-  if (needsWalkLength) ret += "var WALKLENGTH = walkedsquares.length; ";
-  if (walkDef.count) ret += "var TOTALCOUNT = CURRENTCOUNT; ";
+  if (needsWalkLength) ret += "let WALKLENGTH = walkedsquares.length; ";
+  if (walkDef.count) ret += "let TOTALCOUNT = CURRENTCOUNT; ";
 
   if (walkDef.draw.block) {
     if (contains(walkDef.draw.block, ["step"]))
-      ret += "var STEP = WALKLENGTH + 1; ";
+      ret += "let STEP = WALKLENGTH + 1; ";
     const drawBlockCond = ["BLOCKS[POS]"]
       .concat(
         walkDef.steps && !walkDef.testblocksbeforesteps
@@ -225,8 +225,8 @@ function walkInDir(
       [walkDef.draw.steps, walkDef.draw.all, walkDef.draw.counted],
       ["step"]
     );
-    if (needStepsAfterLoop) ret += `var STEP = 0; `;
-    ret += `for(var walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){`;
+    if (needStepsAfterLoop) ret += `let STEP = 0; `;
+    ret += `for(let walkstepper=0;walkstepper<WALKLENGTH;walkstepper++){`;
     ret += `POS=walkedsquares[walkstepper]; `;
     if (needStepsAfterLoop) ret += `STEP++; `;
     if (countSoFar) ret += `CURRENTCOUNT = countedwalkpositions[walkstepper];`;

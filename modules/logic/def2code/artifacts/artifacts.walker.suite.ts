@@ -227,30 +227,30 @@ export const testSuite: TestSuite<WalkerDefAnon> = {
               sample: "ARTIFACTS.flarps",
               res: { a4: { n: 2 } },
               desc: "It can handle last and totalcount"
+            },
+            {
+              expr: {
+                type: "walker",
+                dir: 1,
+                start: "marka1",
+                startasstep: true,
+                count: { singles: ["marka2", "marka4"] },
+                draw: {
+                  steps: {
+                    tolayer: "flarps",
+                    include: { now: ["countsofar"] }
+                  }
+                }
+              },
+              sample: "ARTIFACTS.flarps",
+              res: {
+                a1: { now: 0 },
+                a2: { now: 1 },
+                a3: { now: 1 },
+                a4: { now: 2 }
+              },
+              desc: "It can tell you current count"
             }
-            // {
-            //   expr: {
-            //     type: "walker",
-            //     dir: 1,
-            //     start: "marka1",
-            //     startasstep: true,
-            //     count: { singles: ["marka2", "marka4"] },
-            //     draw: {
-            //       steps: {
-            //         tolayer: "flarps",
-            //         include: { now: ["countsofar"] }
-            //       }
-            //     }
-            //   },
-            //   sample: "ARTIFACTS.flarps",
-            //   res: {
-            //     a1: { now: 0 },
-            //     a2: { now: 1 },
-            //     a3: { now: 1 },
-            //     a4: { now: 2 }
-            //   },
-            //   desc: "It can tell you current count"
-            // }
           ]
         }
       ]

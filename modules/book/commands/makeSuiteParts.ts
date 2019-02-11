@@ -91,9 +91,6 @@ ${format(JSON.stringify(ctx.context), true)}
         );
         const codeEqualsRes =
           resultingCode === format(JSON.stringify(test.res), true);
-        if (expressionCode === `["diag"]`) {
-          console.log("WTF", test.res);
-        }
         const truthyFalsy = test.res === truthy || test.res === falsy;
         ret += `The following Algol expression...
 

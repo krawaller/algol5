@@ -1,13 +1,13 @@
 import suites from "../../logic/dist/suites";
 
 import { TestSuite } from "../../types";
-import { emptyFullDef } from "../../common";
+import { emptyFullDef, truthy, falsy } from "../../common";
 
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as prettier from "prettier";
 
-const out = path.join(__dirname, "../parts");
+const out = path.join(__dirname, "../parts/suites");
 
 fs.ensureDir(out).then(async () => {
   await Promise.all(
@@ -85,8 +85,16 @@ ${format(JSON.stringify(ctx.context), true)}
       ctx.tests.forEach((test, nTest) => {
         ret += `#### Test ${nSig + 1}-${nCtx + 1}-${nTest + 1}\n\n`;
         const expressionCode = format(JSON.stringify(test.expr), true);
+        const resultingCode = format(
+          suite.func(def.def, def.player, def.action, test.expr),
+          !test.sample
+        );
         const codeEqualsRes =
-          expressionCode === format(JSON.stringify(test.res), true);
+          resultingCode === format(JSON.stringify(test.res), true);
+        if (expressionCode === `["diag"]`) {
+          console.log("WTF", test.res);
+        }
+        const truthyFalsy = test.res === truthy || test.res === falsy;
         ret += `The following Algol expression...
 
 \`\`\`typescript
@@ -96,23 +104,34 @@ ${expressionCode}
 ...becomes this code:
 
 \`\`\`typescript
-${format(suite.func(def.def, def.player, def.action, test.expr), !test.sample)}
+${resultingCode}
 \`\`\`\n\n`;
+        if (test.sample && truthyFalsy) {
+          ret += `After executing that code in the current context, the following expression is ${
+            test.res === truthy ? "truthy" : "falsy"
+          }:
 
-        if (test.sample) {
-          ret += `If we run that in the context and check the value of...
+\`\`\`typescript
+${format(test.sample, true)}
+\`\`\`\n\n`;
+        } else if (test.sample) {
+          ret += `If we run that in the current context, then this expression...
 
 \`\`\`typescript
 ${format(test.sample, true)}
 \`\`\`
 
-...then that evaluates to:
+...would evaluate to:
 
 \`\`\`typescript
 ${format(JSON.stringify(test.res), true)}
 \`\`\`\n\n`;
+        } else if (!codeEqualsRes && truthyFalsy) {
+          ret += `When evaluated in the current context, that expression is ${
+            test.res === truthy ? "truthy" : "falsy"
+          }.\n\n`;
         } else if (!codeEqualsRes) {
-          ret += `That evaluates to...
+          ret += `In the current context that evaluates to...
 
 \`\`\`typescript
 ${format(JSON.stringify(test.res), true)}

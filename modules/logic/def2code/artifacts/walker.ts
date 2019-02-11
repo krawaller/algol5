@@ -31,15 +31,26 @@ export default function executeWalker(
     return `{
         ${intro}
         for(let STARTPOS in ${parser.set(walkDef.starts)}) {
-          ${walkFromStart(gameDef, player, action, walkDef)}
+          ${walkFromStart(gameDef, player, action, walkDef, {
+            startVar: "STARTPOS"
+          })}
         }
       }
     `;
-  } else {
+  } else if (walkDef.draw.start) {
     return `{
       ${intro}
       let STARTPOS = ${parser.pos(walkDef.start)};
-      ${walkFromStart(gameDef, player, action, walkDef)}
+      ${walkFromStart(gameDef, player, action, walkDef, {
+        startVar: "STARTPOS"
+      })}
+    }`;
+  } else {
+    return `{
+      ${intro}
+      ${walkFromStart(gameDef, player, action, walkDef, {
+        startVar: parser.pos(walkDef.start) as string
+      })}
     }`;
   }
 }
@@ -48,7 +59,8 @@ function walkFromStart(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  walkDef: WalkerDefAnon
+  walkDef: WalkerDefAnon,
+  { startVar }: { startVar: string }
 ) {
   const parse = makeParser(gameDef, player, action);
   const dirMatters = contains(walkDef.draw, ["dir"]);
@@ -69,7 +81,10 @@ function walkFromStart(
       intro +
       `
       for(let DIR of ${parse.dirs(walkDef.dirs)}){
-        ${walkInDir(gameDef, player, action, walkDef, "DIR")}
+        ${walkInDir(gameDef, player, action, walkDef, {
+          dirVar: "DIR",
+          startVar
+        })}
       }
     `
     );
@@ -79,7 +94,7 @@ function walkFromStart(
       intro +
       `
       ${dirMatters ? `let DIR = ${parse.val(walkDef.dir)}; ` : ""}
-      ${walkInDir(gameDef, player, action, walkDef, dirVar)}
+      ${walkInDir(gameDef, player, action, walkDef, { dirVar, startVar })}
     `
     );
   }
@@ -90,7 +105,7 @@ function walkInDir(
   player: 1 | 2,
   action: string,
   walkDef: WalkerDefAnon,
-  dirVar
+  { dirVar, startVar }: { dirVar: string | number; startVar: string }
 ) {
   const parser = makeParser(gameDef, player, action);
   const drawDuringWhile =
@@ -120,10 +135,10 @@ function walkInDir(
   if (walkDef.startasstep) {
     ret += `
     let POS = "faux"
-    connections.faux[${dirVar}]=STARTPOS;
+    connections.faux[${dirVar}]=${startVar};
     `;
   } else {
-    ret += `let POS = STARTPOS; `;
+    ret += `let POS = ${startVar}; `;
   }
 
   if (needLevel(walkDef.blocks, "loop")) {
@@ -195,25 +210,9 @@ function walkInDir(
   }
 
   if (walkDef.draw.start || walkDef.draw.all) {
-    const startNeedsPosVar = contains(
-      [walkDef.draw.start, walkDef.draw.all],
-      ["target"]
-    );
-    ret += `POS = STARTPOS; `;
-    ret += draw(
-      gameDef,
-      player,
-      action,
-      walkDef.draw.start,
-      startNeedsPosVar ? "POS" : "STARTPOS"
-    );
-    ret += draw(
-      gameDef,
-      player,
-      action,
-      walkDef.draw.all,
-      startNeedsPosVar ? "POS" : "STARTPOS"
-    );
+    ret += `POS = ${startVar}; `;
+    ret += draw(gameDef, player, action, walkDef.draw.start, "POS");
+    ret += draw(gameDef, player, action, walkDef.draw.all, "POS");
   }
 
   const drawWalkAfterLoop =
@@ -284,7 +283,7 @@ function needLevel(expr, when) {
 // and if used BLOCKS, allowedsteps, MAX
 function calcStopReason(
   genDef: WalkerDefAnon,
-  dirVar = "DIR",
+  dirVar: string | number = "DIR",
   blocksVar = "BLOCKS"
 ) {
   let ret = "";
@@ -312,7 +311,7 @@ function calcStopReason(
 
 function calcStopCondition(
   genDef: WalkerDefAnon,
-  dirVar = "DIR",
+  dirVar: string | number = "DIR",
   blocksVar = "BLOCKS"
 ) {
   let conds = [];

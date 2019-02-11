@@ -1,7 +1,6 @@
 import { FullDefAnon, TestSuite, ParserTest } from "../../types";
 import { truthy, falsy } from "../../common";
 import { getSuites } from "./_testUtils";
-import { printSuite } from "./_printSuite";
 
 import * as _eval from "eval";
 import * as test from "tape";
@@ -12,7 +11,6 @@ getSuites().then(suiteFiles => {
       const { testSuite } = require(f);
       try {
         runSuite(testSuite);
-        printSuite(testSuite);
       } catch (e) {
         console.log("Failed to run spec from", f, e);
         throw e;

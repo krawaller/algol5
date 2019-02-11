@@ -50,11 +50,16 @@ export default function draw(
       };
     `;
   } else {
+    const name = parser.val(drawDef.tolayer) as string;
+    const obviousName = name.match(/".*"$/);
+    const layerIdx = obviousName
+      ? `.${name.replace(/^"|"$/g, "")}`
+      : `[${name}]`;
     body = `
       ARTIFACTS = {
         ...ARTIFACTS,
         ${parser.val(drawDef.tolayer)}: {
-          ...ARTIFACTS[${parser.val(drawDef.tolayer)}],
+          ...ARTIFACTS${layerIdx},
           [${posVar}]: ${artifactLiteral}
         }
       }

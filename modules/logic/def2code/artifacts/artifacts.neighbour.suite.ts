@@ -66,6 +66,16 @@ export const testSuite: TestSuite<NeighbourDefAnon> = {
               },
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, b2: {} }
+            },
+            {
+              expr: {
+                type: "neighbour",
+                dirs: { list: [1, 3] },
+                starts: { singles: ["mymark", "myothermark"] },
+                draw: { neighbours: { tolayer: "flarps" } }
+              },
+              sample: "ARTIFACTS.flarps",
+              res: { a2: {}, b1: {}, b2: {}, c1: {} }
             }
           ]
         }

@@ -1,41 +1,49 @@
-import { FullDefAnon } from "../../../types";
-import makeParser from "../expressions";
+import { FullDefAnon } from "../types";
+import * as isNumber from "lodash/isNumber";
+import * as map from "lodash/map";
+import makeExpr from "../expressions";
+
+// TODO - targetLayerPredefined never ever used?
 
 export default function draw(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action,
   drawDef,
-  posVar = "POS"
+  posVar = "POS",
+  targetLayerPredefined?: boolean
 ) {
   if (!drawDef) return "";
-  const parser = makeParser(gameDef, player, action);
+  const expr = makeExpr(gameDef, player, action);
   let conds = [];
-  if (drawDef.condition) conds.push(parser.bool(drawDef.condition));
+  if (drawDef.condition) conds.push(expr.bool(drawDef.condition));
   if (drawDef.unlessover)
-    conds.push(`!${parser.set(drawDef.unlessover)}[${posVar}]`);
-  if (drawDef.ifover) conds.push(`${parser.set(drawDef.ifover)}[${posVar}]`);
-  const entries = Object.keys(drawDef.include || {}).map(
-    key => `${key}: ${parser.val(drawDef.include[key])}`
-  );
-  const artifactLiteral = `{ ${entries.join(", ")} }`;
-
+    conds.push(`!${expr.set(drawDef.unlessover)}[${posVar}]`);
+  if (drawDef.ifover) conds.push(`${expr.set(drawDef.ifover)}[${posVar}]`);
+  let artifactLiteral = `{${map(
+    drawDef.include,
+    (valdef, key) => `${key}: ${expr.value(valdef)}`
+  ).join(", ")}}`;
   let body;
   if (drawDef.include && drawDef.include.owner) {
     // if artifact has owner it must be added to more than one layer
     let prefix,
-      owner = parser.val(drawDef.include.owner);
+      owner = expr.value(drawDef.include.owner);
     if (owner === 0) {
       prefix = '"neutral"';
     } else if (owner === player) {
       prefix = '"my"';
-    } else if (typeof owner === "number") {
+    } else if (isNumber(owner)) {
       prefix = '"opp"';
     } else {
       prefix = "ownernames[artifact.owner]";
     }
     body = `
-      let targetlayername=${parser.val(drawDef.tolayer)};
+      ${
+        !targetLayerPredefined
+          ? `let targetlayername=${expr.value(drawDef.tolayer)};`
+          : ""
+      }
       let artifact=${artifactLiteral};
       ARTIFACTS = {
         ...ARTIFACTS,
@@ -53,8 +61,16 @@ export default function draw(
     body = `
       ARTIFACTS = {
         ...ARTIFACTS,
-        ${parser.val(drawDef.tolayer)}: {
-          ...ARTIFACTS[${parser.val(drawDef.tolayer)}],
+        [${
+          targetLayerPredefined
+            ? "targetlayername"
+            : expr.value(drawDef.tolayer)
+        }]: {
+          ...ARTIFACTS[${
+            targetLayerPredefined
+              ? "targetlayername"
+              : expr.value(drawDef.tolayer)
+          }],
           [${posVar}]: ${artifactLiteral}
         }
       }

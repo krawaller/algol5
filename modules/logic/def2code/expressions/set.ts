@@ -1,97 +1,112 @@
-import * as isArray from "lodash/isArray";
-import * as tail from "lodash/tail";
+import {
+  FullDefAnon,
+  AlgolSetAnon,
+  isAlgolSetSingle,
+  isAlgolSetLayer,
+  isAlgolSetUnion,
+  isAlgolSetSubtract,
+  isAlgolSetIntersect,
+  isAlgolSetGroupAt,
+  isAlgolSetSingles
+} from "../../../types";
+import { artifactLayers, terrainLayers, unitLayers } from "../../../common";
 
-import { FullDefAnon } from "../types";
-import { layerRef } from "../common";
 import makeParser from "./";
 
 export default function parseSet(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  expression
+  expr: AlgolSetAnon,
+  from?: string
 ) {
-  const parse = makeParser(gameDef, player, action, "set");
-  if (!isArray(expression)) {
-    return layerRef(gameDef, player, action, expression);
+  const parser = makeParser(gameDef, player, action, "set");
+
+  if (typeof expr === "string") {
+    const name = expr.replace(/^"|"$/g, ""); // since might be value processed
+
+    if (artifactLayers(gameDef.generators)[name]) {
+      return `ARTIFACTS.${name}`;
+    }
+    if (terrainLayers(gameDef.board, 1)[name]) {
+      return `TERRAIN.${name}`;
+    }
+    if (unitLayers(gameDef)[name]) {
+      return `UNITLAYERS.${name}`;
+    }
+    if (name === "board" || name === "light" || name === "dark") {
+      return `BOARD.${name}`;
+    }
+    throw new Error(`Unknown layer reference: ${name}`);
   }
-  const [type, ...details] = expression;
-  switch (type) {
-    case "layer": {
-      const [layerName] = details;
-      return layerRef(gameDef, player, action, layerName);
+
+  if (Array.isArray(expr)) {
+    switch (expr[0]) {
+      case "empty":
+        return "{}";
+      default:
+        throw new Error(`Unknown set singleton: ${JSON.stringify(expr)}`);
     }
-    case "groupat": {
-      const [pos] = details;
-      return "UNITLAYERS[" + parse.value(["read", "units", pos, "group"]) + "]";
-    }
-    case "single": {
-      const [pos] = details;
-      return `
-        (function(){
-            let ret = {};
-            ret[${parse.position(pos)}]=1;
-            return ret;
-        }())`;
-    }
-    case "union": {
-      const sets = details;
-      let ret = "",
-        setdefs = sets
-          .map((def, n) => "s" + n + " = " + parse.set(def))
-          .join(", "),
-        copies = sets
-          .map((def, n) => "for(k in s" + n + "){ret[k]=1;}")
-          .join(" ");
-      return `
-        (function(){
-            let k, ret={}, ${setdefs};
-            ${copies}
-            return ret;
-        }())`;
-    }
-    case "intersect": {
-      const sets = details;
-      let ret = "",
-        setdefs = sets
-          .map((def, n) => "s" + n + " = " + parse.set(def))
-          .join(", "),
-        test = tail(sets)
-          .map((def, n) => "s" + (n + 1) + "[key]")
-          .join(" && ");
-      return `
-        (function(){
-          let ret={}, ${setdefs};
-          for(let key in s0){
-            if (${test}){
-              ret[key]=s0[key];
-            }
-          }
-          return ret;
-        }())`;
-    }
-    case "subtract": {
-      const sets = details;
-      let ret = "",
-        setdefs = sets
-          .map((def, n) => "s" + n + " = " + parse.set(def))
-          .join(", "),
-        test = tail(sets)
-          .map((def, n) => "!s" + (n + 1) + "[key]")
-          .join(" && ");
-      return `
-        (function(){
-          let ret={}, ${setdefs};
-          for(let key in s0){
-            if (${test}){
-              ret[key]=s0[key];
-            }
-          }
-          return ret;
-        }())`;
-    }
-    default:
-      console.log("Unknown set", expression);
-      throw "UNKNOWN SET DEF! " + expression;
   }
+
+  if (isAlgolSetLayer(expr)) {
+    const { layer: name } = expr;
+    return parser.set(parser.val(name) as string);
+  }
+
+  if (isAlgolSetSingle(expr)) {
+    const { single: pos } = expr;
+    return `{[${parser.pos(pos)}]: 1}`;
+  }
+
+  if (isAlgolSetSingles(expr)) {
+    const { singles: positions } = expr;
+    return `{${positions.map(p => `[${parser.pos(p)}]: {}`).join(", ")}}`;
+  }
+
+  if (isAlgolSetUnion(expr)) {
+    const { union: sets } = expr;
+    return `{${sets.map(s => `...${parser.set(s)}`).join(", ")}}`;
+  }
+
+  if (isAlgolSetSubtract(expr)) {
+    const {
+      subtract: [target, ...remove]
+    } = expr;
+    // array of all keys in target object
+    const targetKeys = `Object.keys(${parser.set(target)})`;
+    // func that returns true if given key isn't in any of the remove objs
+    const keyTester = `k => ${remove
+      .map(r => `!(${parser.set(r)}).hasOwnProperty(k)`)
+      .join(" && ")}`;
+    // arr of the keys we want to keep
+    const validKeys = `${targetKeys}.filter(${keyTester})`;
+    // turn valid keys back into a set object
+    return `${validKeys}.reduce((m, k) => ({...m, [k]: {}}), {})`;
+  }
+
+  if (isAlgolSetIntersect(expr)) {
+    const {
+      intersect: [first, ...rest]
+    } = expr;
+    // build an array of all keys, including duplicates
+    const keysArr = `Object.keys(${parser.set(first)})${rest
+      .map(r => `.concat(Object.keys(${parser.set(r)}))`)
+      .join("")}`;
+    // reduce keys to an object with count per key
+    const countObj = `${keysArr}.reduce((mem, k) => ({...mem, [k]: (mem[k] || 0) + 1}), {})`;
+    // func that returns true if value of entry equals number of total sets
+    const entryTester = `([key,n]) => n === ${rest.length + 1}`;
+    // transform keys to object entries and keep only those with sufficient count
+    const validEntries = `Object.entries(${countObj}).filter(${entryTester})`;
+    // Turn those valid entries into an object again!
+    return `${validEntries}.reduce((mem, [key]) => ({...mem, [key]: {}}), {})`;
+  }
+
+  if (isAlgolSetGroupAt(expr)) {
+    const { groupat: pos } = expr;
+    return `UNITLAYERS[${parser.val({ read: ["units", pos, "group"] })}]`;
+  }
+
+  throw new Error(`Unknown set definition: ${JSON.stringify(expr)}`);
 }

@@ -1,5 +1,5 @@
 import { FullDefAnon } from "../../types";
-import makeParser from "../def2code2/expressions";
+import makeParser from "../def2code/expressions";
 import * as _eval from "eval";
 
 import * as test from "tape";

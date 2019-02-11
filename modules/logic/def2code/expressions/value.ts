@@ -1,149 +1,139 @@
-import { FullDefAnon } from "../types";
-import makeParser from "./";
-import * as isArray from "lodash/isArray";
+import {
+  FullDefAnon,
+  AlgolValAnon,
+  isAlgolValMinus,
+  isAlgolValValue,
+  isAlgolValProd,
+  isAlgolValTurnVar,
+  isAlgolValBattleVar,
+  isAlgolValSizeOf,
+  isAlgolValRead,
+  isAlgolValIdAt,
+  isAlgolValHarvest,
+  isAlgolValSum,
+  isAlgolValPos,
+  isAlgolValGridAt,
+  isAlgolValGridIn,
+  isAlgolValRelDir
+} from "../../../types";
 
-export default function parseValue(
+import makeParser from "./";
+
+export default function parseVal(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  expression,
-  from
+  expr: AlgolValAnon,
+  from?: string
 ) {
-  const parse = makeParser(gameDef, player, action, "value");
-  if (!isArray(expression)) {
-    return parse.val(["value", expression]);
+  const parser = makeParser(gameDef, player, action, "value");
+
+  if (typeof expr === "string") {
+    return `"${expr}"`;
   }
-  const [type, ...args] = expression;
-  switch (type) {
-    case "indexlist": {
-      const [index, list] = args;
-      return `${parse.list(list)}[${parse.val(index)}]`;
+  if (typeof expr === "number") {
+    return expr;
+  }
+  if (Array.isArray(expr)) {
+    switch (expr[0]) {
+      case "dir":
+        return "DIR";
+      case "player":
+        return player;
+      case "otherplayer":
+        return player === 1 ? 2 : 1;
+      case "walklength":
+        return "WALKLENGTH";
+      case "stopreason":
+        return "STOPREASON";
+      case "totalcount":
+        return "TOTALCOUNT";
+      case "neighbourcount":
+        return "NEIGHBOURCOUNT";
+      case "max":
+        return "MAX";
+      case "step":
+        return "STEP";
+      case "loopid":
+        return "LOOPID";
+      case "turn":
+        return "turn.turn";
+      case "countsofar":
+        return "CURRENTCOUNT";
+      default:
+        throw new Error("Unknown value singleton: " + expr);
     }
-    case "pos": {
-      const [pos] = args;
-      return parse.pos(pos);
-    }
-    case "reldir": {
-      const [dir, rel] = args;
-      return `relativedirs[${parse.val(rel)} - 2 + ${parse.val(dir)}]`;
-    }
-    case "value": {
-      const [val] = args;
-      return typeof val === "string" ? `"${val}"` : val;
-    }
-    case "val": {
-      const [val] = args;
-      return typeof val === "string" ? `"${val}"` : val;
-    }
-    case "player": {
-      return player;
-    }
-    case "currentplayer": {
-      return player;
-    }
-    case "otherplayer": {
-      return player === 1 ? 2 : 1;
-    }
-    case "sum": {
-      return `(${args.map(v => parse.val(v)).join(" + ")})`;
-    }
-    case "concat": {
-      return `(${args.map(v => `(${parse.val(v)}+'')`).join(" + ")})`;
-    }
-    case "prod": {
-      return `(${args.map(v => parse.val(v)).join(" * ")})`;
-    }
-    case "minus": {
-      const [val1, val2] = args;
-      return `(${parse.val(val1)} - ${parse.val(val2)})`;
-    }
-    case "dir": {
-      return "DIR"; // TODO - was usefordir too, breaks?
-    }
-    case "max": {
-      return "MAX";
-    }
-    case "stopreason": {
-      return "STOPREASON";
-    }
-    case "countsofar": {
-      return "CURRENTCOUNT";
-    }
-    case "totalcount": {
-      return "TOTALCOUNT";
-    }
-    case "walklength": {
-      return "WALKLENGTH";
-    }
-    case "neighbourcount": {
-      return "NEIGHBOURCOUNT";
-    }
-    case "step": {
-      return "STEP";
-    }
-    case "idat": {
-      const [pos] = args;
-      return parse.val(["read", "units", pos, "id"]);
-    }
-    case "read": {
-      const [layer, pos, prop] = args;
-      return layer === "board" // no need for failsafe
-        ? `${parse.set(layer)}[${parse.pos(pos)}][${parse.val(prop)}]`
-        : `(${parse.set(layer)}[${parse.pos(pos)}]||{})[${parse.val(prop)}]`;
-    }
-    case "sizeof": {
-      const [set] = args;
-      return `Object.keys(${parse.set(set)}).length`;
-    }
-    case "harvest": {
-      const [set, prop] = args;
-      return `reduce(${parse.set(set)},function(mem,obj){
-          return mem+obj[${parse.val(prop)}];
-        },0)
-      `;
-    }
-    case "score": {
-      // TODO - real reduce, or do object.keys above too? also, parse score name?
-      const [set, score] = args;
-      return `Object.keys(${parse.set(set)}).reduce(function(mem,pos){
-          return mem + (${score}[pos]||0);
-        },0)
-      `;
-    }
-    case "turn": {
-      return "turn.turn";
-    }
-    case "turnvar": {
-      const [name] = args;
-      return `TURNVARS[${parse.value(name)}]`;
-    }
-    case "turnval": {
-      const [name] = args;
-      return `TURNVARS[${parse.value(name)}]`;
-    }
-    case "battlevar": {
-      const [name] = args;
-      return `BATTLEVARS[${parse.value(name)}]`;
-    }
-    case "battleval": {
-      const [name] = args;
-      return `BATTLEVARS[${parse.value(name)}]`;
-    }
-    default: {
-      try {
-        if (from === "id") throw "No, coming from id, dont try that";
-        const ret = parse.id(expression);
-        return ret;
-      } catch (e) {
-        try {
-          if (from === "position")
-            throw "No, coming from position, dont try that";
-          const ret = parse.pos(expression);
-          return ret;
-        } catch (e) {
-          throw "Unknown value def: " + expression;
-        }
-      }
-    }
+  }
+  if (isAlgolValMinus(expr)) {
+    const { minus: operands } = expr;
+    return `(${operands.map(parser.val).join(" - ")})`;
+  }
+  if (isAlgolValValue(expr)) {
+    const { value: innerExpr } = expr;
+    return parser.val(innerExpr);
+  }
+  if (isAlgolValProd(expr)) {
+    const { prod: factors } = expr;
+    return `(${factors.map(parser.val).join(" * ")})`;
+  }
+  if (isAlgolValTurnVar(expr)) {
+    const { turnvar: name } = expr;
+    return `TURNVARS[${parser.val(name)}]`;
+  }
+  if (isAlgolValBattleVar(expr)) {
+    const { battlevar: name } = expr;
+    return `BATTLEVARS[${parser.val(name)}]`;
+  }
+  if (isAlgolValSizeOf(expr)) {
+    const { sizeof: set } = expr;
+    return `Object.keys(${parser.set(set)}).length`;
+  }
+  if (isAlgolValRead(expr)) {
+    const {
+      read: [layer, pos, prop]
+    } = expr;
+    return `(${parser.set(layer)}[${parser.pos(pos)}]||{})[${parser.val(
+      prop
+    )}]`;
+  }
+  if (isAlgolValIdAt(expr)) {
+    const { idat: pos } = expr;
+    return parser.val({ read: ["units", pos, "id"] });
+  }
+  if (isAlgolValHarvest(expr)) {
+    const {
+      harvest: [set, prop]
+    } = expr;
+    return `Object.entries(${parser.set(
+      set
+    )}).reduce((mem, [pos,obj]) => mem + obj[${parser.val(prop)}], 0)`;
+  }
+  if (isAlgolValSum(expr)) {
+    const { sum: terms } = expr;
+    return `(${terms.map(t => parser.val(t)).join(" + ")})`;
+  }
+  if (isAlgolValPos(expr)) {
+    const { pos: pos } = expr;
+    return parser.pos(pos);
+  }
+  if (isAlgolValGridAt(expr)) {
+    const {
+      gridat: [gridname, pos]
+    } = expr;
+    return `GRIDS[${parser.val(gridname)}][${parser.pos(pos)}]`;
+  }
+  if (isAlgolValGridIn(expr)) {
+    const {
+      gridin: [gridname, set]
+    } = expr;
+    return `Object.keys(${parser.set(
+      set
+    )}).reduce((mem,pos) => mem + GRIDS[${parser.val(gridname)}][pos], 0)`;
+  }
+  if (isAlgolValRelDir(expr)) {
+    const {
+      reldir: [dir, rel]
+    } = expr;
+    return `relativedirs[${parser.val(rel)} - 2 + ${parser.val(dir)}]`;
   }
 }

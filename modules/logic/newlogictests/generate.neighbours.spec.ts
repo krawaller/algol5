@@ -1,4 +1,4 @@
-import { executeGenerator } from "../def2code2/artifacts";
+import { executeGenerator } from "../def2code/artifacts";
 import { emptyFullDef } from "../../common";
 import { NeighbourDefAnon } from "../../types";
 import { runSuite, TestSuite } from "./utils";

@@ -1,13 +1,18 @@
-import bool from "./bool";
-import id from "./id";
-import list from "./list";
-import position from "./position";
-import set from "./set";
-import value from "./value";
-import content from "./content";
-import universal from "./universal";
+import {
+  FullDefAnon,
+  AlgolValAnon,
+  AlgolBoolAnon,
+  AlgolPosAnon,
+  AlgolSetAnon,
+  AlgolDirsAnon
+} from "../../../types";
 
-import { FullDefAnon } from "../types";
+import parseValue from "./value";
+import parseBool from "./bool";
+import parseLogical from "./logical";
+import parsePos from "./pos";
+import parseSet from "./set";
+import parseDirs from "./dirs";
 
 export default function makeParser(
   gameDef: FullDefAnon,
@@ -15,15 +20,17 @@ export default function makeParser(
   action: string,
   from?: string
 ) {
-  return {
-    bool: expr => universal(gameDef, player, action, bool, expr, from),
-    id: expr => universal(gameDef, player, action, id, expr, from),
-    list: expr => universal(gameDef, player, action, list, expr, from),
-    position: expr => universal(gameDef, player, action, position, expr, from),
-    pos: expr => universal(gameDef, player, action, position, expr, from),
-    set: expr => universal(gameDef, player, action, set, expr, from),
-    value: expr => universal(gameDef, player, action, value, expr, from),
-    val: expr => universal(gameDef, player, action, value, expr, from),
-    content: expr => universal(gameDef, player, action, content, expr, from)
+  const parsers = {
+    val: (expr: AlgolValAnon): string | number =>
+      parseLogical(gameDef, player, action, parseValue, expr, from),
+    bool: (expr: AlgolBoolAnon): string | number =>
+      parseLogical(gameDef, player, action, parseBool, expr, from),
+    pos: (expr: AlgolPosAnon): string | number =>
+      parseLogical(gameDef, player, action, parsePos, expr, from),
+    set: (expr: AlgolSetAnon): string | number =>
+      parseLogical(gameDef, player, action, parseSet, expr, from),
+    dirs: (expr: AlgolDirsAnon): string | number =>
+      parseLogical(gameDef, player, action, parseDirs, expr, from)
   };
+  return parsers;
 }

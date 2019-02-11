@@ -1,4 +1,4 @@
-import { executeEffect } from "../def2code2/actions/effect";
+import { executeEffect } from "../def2code/actions/effect";
 import { emptyFullDef } from "../../common";
 import { AlgolEffectAnon } from "../../types";
 import { runSuite, TestSuite, truthy, falsy } from "./utils";

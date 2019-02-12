@@ -1,5 +1,5 @@
 import { FullDefAnon, TestSuite, ParserTest } from "../../types";
-import { truthy, falsy } from "../../common";
+import { truthy, falsy, relativeDirs } from "../../common";
 import { getSuites } from "./_testUtils";
 
 import * as _eval from "eval";
@@ -52,6 +52,7 @@ function runParserTest<T>(
           const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
           const diagDirs = [2, 4, 6, 8];
           const orthoDirs = [1, 3, 5, 7];
+          const relativeDirs = ${JSON.stringify(relativeDirs)};
           const connections = boardConnections(${JSON.stringify(
             parserTest.def.board
           )});

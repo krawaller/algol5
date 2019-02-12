@@ -1,4 +1,4 @@
-import { emptyFullDef, truthy, falsy, relativedirs } from "../../../common";
+import { emptyFullDef } from "../../../common";
 import { AlgolValAnon, TestSuite } from "../../../types";
 import { parserTester } from "./";
 
@@ -35,7 +35,9 @@ export const testSuite: TestSuite<AlgolValAnon> = {
             { expr: { ifelse: [["false"], 1, { value: 2 }] }, res: 2 },
             { expr: { if: [["true"], "foo"] }, res: "foo" },
             { expr: { if: [["false"], "foo"] }, res: undefined },
-            { expr: { sum: [1, 2, { value: 4 }] }, res: 7 }
+            { expr: { sum: [1, 2, { value: 4 }] }, res: 7 },
+            { expr: { reldir: [1, 3] }, res: 3 },
+            { expr: { reldir: [2, 1] }, res: 2 }
           ]
         },
         { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] },
@@ -104,15 +106,6 @@ export const testSuite: TestSuite<AlgolValAnon> = {
               },
               res: 8
             }
-          ]
-        },
-        {
-          context: {
-            relativedirs: relativedirs
-          },
-          tests: [
-            { expr: { reldir: [1, 3] }, res: 3 },
-            { expr: { reldir: [2, 1] }, res: 2 }
           ]
         }
       ]

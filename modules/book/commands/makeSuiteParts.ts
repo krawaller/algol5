@@ -131,11 +131,21 @@ ${format(JSON.stringify(test.res), true)}
             test.res === truthy ? "truthy" : "falsy"
           }.\n\n`;
         } else if (!codeEqualsRes) {
-          ret += `In the current context that evaluates to...
+          if (typeof test.res === "number") {
+            ret += `In the current context that evaluates to \`${
+              test.res
+            }\`.\n\n`;
+          } else if (typeof test.res === "string") {
+            ret += `In the current context that evaluates to \`"${
+              test.res
+            }"\`.\n\n`;
+          } else {
+            ret += `In the current context that evaluates to...
 
 \`\`\`typescript
 ${format(JSON.stringify(test.res), true)}
 \`\`\`\n\n`;
+          }
         }
       });
     });

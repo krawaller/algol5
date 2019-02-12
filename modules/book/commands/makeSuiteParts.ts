@@ -92,6 +92,9 @@ ${format(JSON.stringify(ctx.context), true)}
         const codeEqualsRes =
           resultingCode === format(JSON.stringify(test.res), true);
         const truthyFalsy = test.res === truthy || test.res === falsy;
+        if (test.desc) {
+          ret += `This test demonstrates that: ${test.desc}\n\n`;
+        }
         ret += `The following Algol expression...
 
 \`\`\`typescript

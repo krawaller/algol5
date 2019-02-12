@@ -20,20 +20,6 @@ fs.ensureDir(out).then(async () => {
   console.log("All suite parts written");
 });
 
-function format(input, isExpression) {
-  if (isExpression) {
-    return prettier
-      .format("let e = " + input, {
-        parser: "typescript"
-      })
-      .slice(8, -2);
-  } else {
-    return prettier.format(input, {
-      parser: "typescript"
-    });
-  }
-}
-
 export function printSuite(suite: TestSuite<any>) {
   const nbrDefs = suite.defs.length;
   let ret = `
@@ -119,36 +105,45 @@ ${format(test.sample, true)}
 
 \`\`\`typescript
 ${format(test.sample, true)}
-\`\`\`
-
-...would evaluate to:
-
-\`\`\`typescript
-${format(JSON.stringify(test.res), true)}
 \`\`\`\n\n`;
+          ret += showEval("...would evaluate to", test.res);
         } else if (!codeEqualsRes && truthyFalsy) {
           ret += `When evaluated in the current context, that expression is ${
             test.res === truthy ? "truthy" : "falsy"
           }.\n\n`;
         } else if (!codeEqualsRes) {
-          if (typeof test.res === "number") {
-            ret += `In the current context that evaluates to \`${
-              test.res
-            }\`.\n\n`;
-          } else if (typeof test.res === "string") {
-            ret += `In the current context that evaluates to \`"${
-              test.res
-            }"\`.\n\n`;
-          } else {
-            ret += `In the current context that evaluates to...
-
-\`\`\`typescript
-${format(JSON.stringify(test.res), true)}
-\`\`\`\n\n`;
-          }
+          ret += showEval("In the current context that evaluates to", test.res);
         }
       });
     });
   });
   return ret;
+}
+
+function format(input, isExpression) {
+  if (isExpression) {
+    return prettier
+      .format("let e = " + input, {
+        parser: "typescript"
+      })
+      .slice(8, -2);
+  } else {
+    return prettier.format(input, {
+      parser: "typescript"
+    });
+  }
+}
+
+function showEval(sentence, res) {
+  if (typeof res === "number") {
+    return `${sentence} \`${res}\`.\n\n`;
+  } else if (typeof res === "string") {
+    return `${sentence} \`"${res}"\`.\n\n`;
+  } else {
+    return `${sentence}...
+
+\`\`\`typescript
+${format(JSON.stringify(res), true)}
+\`\`\`\n\n`;
+  }
 }

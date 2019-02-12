@@ -49,6 +49,9 @@ function runParserTest<T>(
       let result;
       const pre = `
           const {offsetPos, boardConnections} = require('../../common');
+          const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
+          const diagDirs = [2, 4, 6, 8];
+          const orthoDirs = [1, 3, 5, 7];
           const connections = boardConnections(${JSON.stringify(
             parserTest.def.board
           )});

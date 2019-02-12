@@ -1,6 +1,6 @@
 import { executeEffect } from "./";
-import { emptyFullDef, truthy, falsy } from "../../../common";
-import { AlgolEffectAnon, TestSuite } from "../../../types";
+import { emptyFullDef, truthy, falsy } from "../../../../common";
+import { AlgolEffectAnon, TestSuite } from "../../../../types";
 
 export const testSuite: TestSuite<AlgolEffectAnon> = {
   title: "Effect - Morphing",

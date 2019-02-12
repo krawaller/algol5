@@ -1,4 +1,4 @@
-import { offsetPos } from "../../../common";
+import { offsetPos } from "../../../../common";
 
 import {
   AlgolEffectAnon,
@@ -30,8 +30,8 @@ import {
   isAlgolEffectAdoptAt,
   isAlgolEffectAdoptIn,
   isAlgolEffectAdoptId
-} from "../../../types";
-import makeParser from "../../def2code/expressions";
+} from "../../../../types";
+import makeParser from "../../expressions";
 
 export function executeEffect(
   gameDef: FullDefAnon,

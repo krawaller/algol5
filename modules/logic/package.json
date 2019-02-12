@@ -22,7 +22,6 @@
     "test": "ts-node node_modules/tape/bin/tape test/*.spec.ts | node_modules/.bin/tap-spec"
   },
   "dependencies": {
-    "eval": "^0.1.2",
-    "lodash": "4.17.4"
+    "eval": "^0.1.2"
   }
 }

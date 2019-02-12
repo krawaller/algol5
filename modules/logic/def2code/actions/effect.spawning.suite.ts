@@ -27,9 +27,9 @@ export const testSuite: TestSuite<AlgolEffectAnon> = {
                   { baz: { value: "bin" } }
                 ]
               },
-              sample: "UNITDATA.clone3",
+              sample: "UNITDATA.spawn1",
               res: {
-                id: "clone3",
+                id: "spawn1",
                 group: "flerps",
                 owner: 2,
                 baz: "bin",
@@ -39,7 +39,7 @@ export const testSuite: TestSuite<AlgolEffectAnon> = {
             },
             {
               expr: { spawnat: ["othermark", "gnurps"] },
-              sample: "UNITDATA.clone3.owner",
+              sample: "UNITDATA.spawn1.owner",
               res: 1,
               desc: "Spawning defaults owner to current player if none provided"
             },
@@ -53,32 +53,32 @@ export const testSuite: TestSuite<AlgolEffectAnon> = {
               expr: {
                 spawnat: ["othermark", "flerps", 1, { baz: { value: "bin" } }]
               },
-              sample: "clones",
-              res: 3,
-              desc: "spawning increases the clones counter"
+              sample: "nextSpawnId",
+              res: 2,
+              desc: "spawning increases the nextSpawnId counter"
             },
             {
               expr: {
                 spawnin: [{ singles: ["othermark", "anothermark"] }, "flurps"]
               },
-              sample: "UNITDATA.clone3",
-              res: { id: "clone3", group: "flurps", owner: 1, pos: "c3" },
+              sample: "UNITDATA.spawn1",
+              res: { id: "spawn1", group: "flurps", owner: 1, pos: "c3" },
               desc: "multispawn created correct first unit"
             },
             {
               expr: {
                 spawnin: [{ singles: ["othermark", "anothermark"] }, "flurps"]
               },
-              sample: "UNITDATA.clone4",
-              res: { id: "clone4", group: "flurps", owner: 1, pos: "d4" },
+              sample: "UNITDATA.spawn2",
+              res: { id: "spawn2", group: "flurps", owner: 1, pos: "d4" },
               desc: "multispawn created correct second unit"
             },
             {
               expr: {
                 spawnin: [{ singles: ["othermark", "anothermark"] }, "flurps"]
               },
-              sample: "clones",
-              res: 4,
+              sample: "nextSpawnId",
+              res: 3,
               desc: "multispawn increased counter by total number of spawns"
             },
             {
@@ -90,9 +90,9 @@ export const testSuite: TestSuite<AlgolEffectAnon> = {
                   { foo: { value: "bar" } }
                 ]
               },
-              sample: "UNITDATA.clone4",
+              sample: "UNITDATA.spawn2",
               res: {
-                id: "clone4",
+                id: "spawn2",
                 group: "flurps",
                 owner: 2,
                 pos: "d4",

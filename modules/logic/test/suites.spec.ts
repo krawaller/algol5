@@ -53,6 +53,7 @@ function runParserTest<T>(
           const diagDirs = [2, 4, 6, 8];
           const orthoDirs = [1, 3, 5, 7];
           const relativeDirs = ${JSON.stringify(relativeDirs)};
+          let nextSpawnId = 1;
           const connections = boardConnections(${JSON.stringify(
             parserTest.def.board
           )});

@@ -126,7 +126,7 @@ export function executeEffect(
       spawnat: [pos, group, owner, props]
     } = effect;
     return `{
-        let newunitid = 'clone'+(++clones);
+        let newunitid = 'spawn'+(nextSpawnId++);
         UNITDATA[newunitid] = {
           pos: ${parser.pos(pos)},
           id: newunitid,

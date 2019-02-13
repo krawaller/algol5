@@ -8,7 +8,7 @@ export function executeLink(
   name: string
 ): string {
   const parser = makeParser(gameDef, player, action);
-  const stepLinkLookup = action === "start" ? ".root" : "[newstepid]";
+  const stepLinkLookup = action === "start" ? ".root" : "[newStepId]";
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     return `
       turn.links${stepLinkLookup}.${name} = '${name + player}';
@@ -16,9 +16,9 @@ export function executeLink(
   } else if (gameDef && gameDef.flow.marks && gameDef.flow.marks[name]) {
     const markDef = gameDef.flow.marks[name];
     return `
-      let newlinks = turn.links${stepLinkLookup};
+      let ${name}Links = turn.links${stepLinkLookup};
       for(let linkpos in ${parser.set(markDef.from)}){
-          newlinks[linkpos] = '${name + player}';
+        ${name}Links[linkpos] = '${name + player}';
       }
     `;
   } else if (name === "endturn") {
@@ -28,18 +28,18 @@ export function executeLink(
       if (${parser.bool(def.condition)}) { 
         let winner = ${parser.val(def.who || player)};
         let result = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
-        turn.links[newstepid][result] = '${name}';
+        turn.links[newStepId][result] = '${name}';
         ${
           def.show
             ? `
-        turn.endMarks[newstepid] = turn.endMarks[newstepid] || {};
-        turn.endMarks[newstepid].${name} = ${parser.set(def.show)};
+        turn.endMarks[newStepId] = turn.endMarks[newStepId] || {};
+        turn.endMarks[newStepId].${name} = ${parser.set(def.show)};
         `
             : ""
         }
       }`
       )
-      .concat('{ turn.links[newstepid].endturn = "start"+otherplayer; }')
+      .concat('{ turn.links[newStepId].endturn = "start"+otherplayer; }')
       .join(" else ");
   } else {
     throw "Unknown link: " + name;

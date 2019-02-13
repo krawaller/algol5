@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../../../common";
 import { TestSuite } from "../../../../types";
 
 export const testSuite: TestSuite<string> = {
-  title: "Link - Mark",
+  title: "Link - Command",
   func: executeLink,
   defs: [
     {
@@ -11,10 +11,8 @@ export const testSuite: TestSuite<string> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
-          marks: {
-            somemark: {
-              from: "units"
-            }
+          commands: {
+            mycmnd: {}
           }
         }
       },
@@ -23,18 +21,17 @@ export const testSuite: TestSuite<string> = {
       contexts: [
         {
           context: {
-            UNITLAYERS: { units: { a1: {}, b2: {} } },
             turn: {
-              links: { root: { c3: "othermark1" } },
+              links: { root: { b3: "somemark" } },
               other: { foo: "bar" }
             }
           },
           tests: [
             {
-              expr: "somemark",
+              expr: "mycmnd",
               sample: "turn.links.root",
-              res: { a1: "somemark1", b2: "somemark1", c3: "othermark1" },
-              desc: "we can link to a mark from start"
+              res: { mycmnd: "mycmnd1", b3: "somemark" },
+              desc: "we can link to a cmnd from start"
             }
           ]
         }
@@ -45,10 +42,8 @@ export const testSuite: TestSuite<string> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
-          marks: {
-            somemark: {
-              from: "units"
-            }
+          commands: {
+            mycmnd: {}
           }
         }
       },
@@ -57,18 +52,18 @@ export const testSuite: TestSuite<string> = {
       contexts: [
         {
           context: {
-            UNITLAYERS: { units: { a1: {}, b2: {} } },
             turn: {
-              links: { foo: { c3: "othermark2" } }
+              links: { foo: { b3: "somemark" } },
+              other: { foo: "bar" }
             },
             newStepId: "foo"
           },
           tests: [
             {
-              expr: "somemark",
+              expr: "mycmnd",
               sample: "turn.links.foo",
-              res: { a1: "somemark2", b2: "somemark2", c3: "othermark2" },
-              desc: "we can link to a mark from non-start"
+              res: { mycmnd: "mycmnd2", b3: "somemark" },
+              desc: "we can link to a cmnd from non-start"
             }
           ]
         }

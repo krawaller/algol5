@@ -39,7 +39,7 @@ This suite uses the \`${funcName}\` function. It contains ${
       ret += `This signature uses the following game definition:
 
 \`\`\`typescript
-${format(JSON.stringify(def.def), true)}
+${format(defDiff(def.def, emptyFullDef), true)}
 \`\`\`\n\n`;
     }
 
@@ -147,4 +147,25 @@ function showEval(sentence, res) {
 ${format(JSON.stringify(res), true)}
 \`\`\`\n\n`;
   }
+}
+
+const indent = n => "".padStart(n * 2, " ");
+
+function defDiff(obj, compTo = {}, path = "emptyFullDef", lvl = 0) {
+  if (typeof obj !== "object") return obj;
+  let ret = "";
+  ret += `{\n`;
+  const objKeys = Object.keys(obj);
+  const diffKeys = objKeys.filter(key => obj[key] !== compTo[key]);
+  if (diffKeys.length !== objKeys.length)
+    ret += `${indent(lvl + 1)}...${path},\n`;
+  ret += diffKeys
+    .map(
+      key =>
+        `${indent(lvl + 1)}${key}: ` +
+        defDiff(obj[key], compTo[key], `${path}.${key}`, lvl + 1)
+    )
+    .join(",\n");
+  ret += `${indent(lvl)}}`;
+  return ret;
 }

@@ -1,6 +1,6 @@
 import * as test from "tape";
 import { FullDefAnon } from "../../types";
-import { unitLayers, emptyFullDef } from "../";
+import { emptyUnitLayers, emptyFullDef } from "..";
 
 type UnitLayerTest = {
   def: FullDefAnon;
@@ -43,7 +43,7 @@ const unitLayerTests: UnitLayerTest[] = [
 test("unitLayers", t => {
   unitLayerTests.forEach(({ def, expected }) =>
     t.deepEqual(
-      unitLayers(def),
+      emptyUnitLayers(def),
       expected,
       `Correctly calculates unit layers for ${JSON.stringify(
         def.graphics.icons

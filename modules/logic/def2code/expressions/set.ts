@@ -9,7 +9,11 @@ import {
   isAlgolSetGroupAt,
   isAlgolSetSingles
 } from "../../../types";
-import { artifactLayers, terrainLayers, unitLayers } from "../../../common";
+import {
+  artifactLayers,
+  terrainLayers,
+  emptyUnitLayers
+} from "../../../common";
 
 import makeParser from "./";
 
@@ -31,7 +35,7 @@ export default function parseSet(
     if (terrainLayers(gameDef.board, 1)[name]) {
       return `TERRAIN.${name}`;
     }
-    if (unitLayers(gameDef)[name]) {
+    if (emptyUnitLayers(gameDef)[name]) {
       return `UNITLAYERS.${name}`;
     }
     if (name === "board" || name === "light" || name === "dark") {

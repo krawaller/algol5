@@ -39,7 +39,7 @@ export function executeLink(
         }
       }`
       )
-      .concat('{ turn.links[newStepId].endturn = "start"+otherplayer; }')
+      .concat(`{ turn.links[newStepId].endturn = "start${player === 1 ? 2 : 1}"; }`)
       .join(" else ");
   } else {
     throw "Unknown link: " + name;

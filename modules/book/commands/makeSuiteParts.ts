@@ -22,10 +22,11 @@ fs.ensureDir(out).then(async () => {
 
 export function printSuite(suite: TestSuite<any>) {
   const nbrDefs = suite.defs.length;
+  const funcName = suite.func.funcName || suite.func.name;
   let ret = `
 # ${suite.title}
 
-This suite contains ${
+This suite uses the \`${funcName}\` function. It contains ${
     nbrDefs > 1 ? `${nbrDefs} signatures` : "a single signature"
   }:\n\n`;
 
@@ -81,13 +82,13 @@ ${format(JSON.stringify(ctx.context), true)}
         if (test.desc) {
           ret += `This test demonstrates that: ${test.desc}\n\n`;
         }
-        ret += `The following Algol expression...
+        ret += `When running \`${funcName}\` with the following input...
 
 \`\`\`typescript
 ${expressionCode}
 \`\`\`
 
-...becomes this code:
+...we get this code:
 
 \`\`\`typescript
 ${resultingCode}

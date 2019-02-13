@@ -16,9 +16,13 @@ import parseDirs from "./dirs";
 
 export const parserTester = <T>(
   type: "set" | "bool" | "val" | "pos" | "dirs"
-) => (def: FullDefAnon, player: 1 | 2, action: string, input: T) => {
-  const parser: any = makeParser(def, player, action)[type];
-  return parser(input);
+) => {
+  const ret = (def: FullDefAnon, player: 1 | 2, action: string, input: T) => {
+    const parser: any = makeParser(def, player, action)[type];
+    return parser(input);
+  };
+  ret.funcName = "parse" + type[0].toUpperCase() + type.slice(1);
+  return ret;
 };
 
 export default function makeParser(

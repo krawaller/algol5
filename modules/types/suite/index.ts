@@ -2,7 +2,10 @@ import { FullDefAnon } from "../";
 
 export type TestSuite<T> = {
   title: string;
-  func: (def: FullDefAnon, player: 1 | 2, action: string, input: T) => string;
+  func: {
+    (def: FullDefAnon, player: 1 | 2, action: string, input: T): string;
+    funcName?: string;
+  };
   defs: ParserTest<T>[];
 };
 

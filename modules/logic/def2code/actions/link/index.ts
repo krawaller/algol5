@@ -26,7 +26,7 @@ export function executeLink(
       .map(
         ([name, def]) => `
       if (${parser.bool(def.condition)}) { 
-        let winner = ${parser.val(def.who || player)};
+        let winner = ${parser.val(def.who === undefined ? player : def.who)};
         let result = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
         turn.links[newStepId][result] = '${name}';
         ${
@@ -39,7 +39,9 @@ export function executeLink(
         }
       }`
       )
-      .concat(`{ turn.links[newStepId].endturn = "start${player === 1 ? 2 : 1}"; }`)
+      .concat(
+        `{ turn.links[newStepId].endturn = "start${player === 1 ? 2 : 1}"; }`
+      )
       .join(" else ");
   } else {
     throw "Unknown link: " + name;

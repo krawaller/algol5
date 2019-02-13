@@ -156,7 +156,7 @@ function defDiff(obj, compTo = {}, path = "emptyFullDef", lvl = 0) {
   let ret = "";
   ret += `{\n`;
   const objKeys = Object.keys(obj);
-  const diffKeys = objKeys.filter(key => obj[key] !== compTo[key]);
+  const diffKeys = objKeys.filter(key => typeof obj[key] !== 'object' || obj[key] !== compTo[key]);
   if (diffKeys.length !== objKeys.length)
     ret += `${indent(lvl + 1)}...${path},\n`;
   ret += diffKeys

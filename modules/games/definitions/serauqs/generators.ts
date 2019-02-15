@@ -1,4 +1,4 @@
-import { SerauqsGenerators } from "./_types";
+import { SerauqsGenerators } from './_types';
 
 const serauqsGenerators: SerauqsGenerators = {
   findmovetargets: {
@@ -6,11 +6,7 @@ const serauqsGenerators: SerauqsGenerators = {
     start: "selectunit",
     dirs: ["rose"],
     unlessover: "units",
-    draw: {
-      neighbours: {
-        tolayer: "movetargets"
-      }
-    }
+    draw: { neighbours: { tolayer: "movetargets" } }
   },
   findwinline: {
     type: "walker",

@@ -2,10 +2,7 @@ import { MurusgallicusAI } from "./_types";
 
 const murusgallicusAI: MurusgallicusAI = {
   terrain: {
-    threatrow: {
-      "1": [{ rect: ["a3", "h3"] }],
-      "2": [{ rect: ["a5", "h5"] }]
-    }
+    threatrow: { "1": [{ rect: ["a3", "h3"] }], "2": [{ rect: ["a5", "h5"] }] }
   },
   grids: {
     basic1: [
@@ -84,38 +81,18 @@ const murusgallicusAI: MurusgallicusAI = {
   brains: {
     Steve: {
       generators: ["findoppmoves", "findoppthreats"],
-      plus: {
-        mytowercount: 2,
-        mywallpos: 1,
-        mytowerpos: 2
-      },
-      minus: {
-        oppwinmoves: 10000,
-        opplightthreats: 20,
-        oppheavythreats: 500
-      }
+      plus: { mytowercount: 2, mywallpos: 1, mytowerpos: 2 },
+      minus: { oppwinmoves: 10000, opplightthreats: 20, oppheavythreats: 500 }
     },
     Joe: {
       generators: ["findoppmoves"],
-      plus: {
-        mytowercount: 2,
-        mywallpos: 1,
-        mytowerpos: 2
-      },
-      minus: {
-        oppwinmoves: 100
-      }
+      plus: { mytowercount: 2, mywallpos: 1, mytowerpos: 2 },
+      minus: { oppwinmoves: 100 }
     },
     Clive: {
       generators: ["findmymoves", "findoppmoves"],
-      plus: {
-        mymoves: 1,
-        mytowerpos: 3,
-        mywallpos: 1
-      },
-      minus: {
-        oppmoves: 1
-      }
+      plus: { mymoves: 1, mytowerpos: 3, mywallpos: 1 },
+      minus: { oppmoves: 1 }
     }
   }
 };

@@ -1,4 +1,4 @@
-import { ShoveoffGenerators } from "./_types";
+import { ShoveoffGenerators } from './_types';
 
 const shoveoffGenerators: ShoveoffGenerators = {
   findaffected: {
@@ -10,9 +10,7 @@ const shoveoffGenerators: ShoveoffGenerators = {
         condition: { same: [["walklength"], 3] },
         unlessover: "oppunits",
         tolayer: "targetedgepoints",
-        include: {
-          dir: { reldir: [["dir"], 5] }
-        }
+        include: { dir: { reldir: [["dir"], 5] } }
       }
     }
   },
@@ -79,10 +77,7 @@ const shoveoffGenerators: ShoveoffGenerators = {
     steps: "myunits",
     startasstep: true,
     draw: {
-      steps: {
-        condition: { same: [["walklength"], 4] },
-        tolayer: "fourinarow"
-      }
+      steps: { condition: { same: [["walklength"], 4] }, tolayer: "fourinarow" }
     }
   }
 };

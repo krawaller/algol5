@@ -1,4 +1,4 @@
-import { JostleInstructions } from "./_types";
+import { JostleInstructions } from './_types';
 
 const jostleInstructions: JostleInstructions = {
   startTurn: "Select which unit to jostle!",

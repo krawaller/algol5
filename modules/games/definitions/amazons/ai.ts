@@ -12,9 +12,7 @@ const amazonsAI: AmazonsAI = {
           tolayer: {
             ifelse: [{ anyat: ["myunits", ["start"]] }, "myroads", "opproads"]
           },
-          include: {
-            count: ["neighbourcount"]
-          }
+          include: { count: ["neighbourcount"] }
         }
       }
     },
@@ -41,14 +39,8 @@ const amazonsAI: AmazonsAI = {
   brains: {
     Steve: {
       generators: ["findroads", "findreach"],
-      plus: {
-        myroads: 1,
-        mydomain: 1
-      },
-      minus: {
-        opproads: 1,
-        oppdomain: 1
-      }
+      plus: { myroads: 1, mydomain: 1 },
+      minus: { opproads: 1, oppdomain: 1 }
     }
   }
 };

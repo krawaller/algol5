@@ -1,9 +1,7 @@
-import { JostleFlow } from "./_types";
+import { JostleFlow } from './_types';
 
 const jostleFlow: JostleFlow = {
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "mycheckers",

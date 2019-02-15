@@ -1,4 +1,4 @@
-import { MurusgallicusInstructions } from "./_types";
+import { MurusgallicusInstructions } from './_types';
 
 const murusgallicusInstructions: MurusgallicusInstructions = {
   startTurn: { line: ["Select a", "rook", "to act with"] },

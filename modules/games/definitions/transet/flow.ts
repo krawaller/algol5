@@ -1,4 +1,4 @@
-import { TransetFlow } from "./_types";
+import { TransetFlow } from './_types';
 
 const transetFlow: TransetFlow = {
   endGame: {
@@ -7,9 +7,7 @@ const transetFlow: TransetFlow = {
       show: { intersect: ["myunits", "oppbase"] }
     }
   },
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",

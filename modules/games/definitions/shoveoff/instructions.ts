@@ -1,4 +1,4 @@
-import { ShoveoffInstructions } from "./_types";
+import { ShoveoffInstructions } from './_types';
 
 const shoveoffInstructions: ShoveoffInstructions = {
   startTurn: {

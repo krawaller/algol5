@@ -1,22 +1,13 @@
-import { CoffeeFlow } from "./_types";
+import { CoffeeFlow } from './_types';
 
 const coffeeFlow: CoffeeFlow = {
   TODO:
     "use different unit type for placeholders? Reference oppnent plr properly",
-  endTurn: {
-    unless: {
-      nolegal: ["isempty", "markers"]
-    }
-  },
+  endTurn: { unless: { nolegal: ["isempty", "markers"] } },
   endGame: {
-    madeline: {
-      condition: { notempty: "winline" },
-      show: "winline"
-    }
+    madeline: { condition: { notempty: "winline" }, show: "winline" }
   },
-  startTurn: {
-    link: "selectdrop"
-  },
+  startTurn: { link: "selectdrop" },
   marks: {
     selectdrop: {
       from: { ifelse: [{ isempty: "markers" }, "board", "markers"] },

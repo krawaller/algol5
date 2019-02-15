@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedInstructions } from "./_types";
+import { MurusgallicusadvancedInstructions } from './_types';
 
 const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
   startTurn: {

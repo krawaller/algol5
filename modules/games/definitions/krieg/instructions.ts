@@ -1,4 +1,4 @@
-import { KriegInstructions } from "./_types";
+import { KriegInstructions } from './_types';
 
 const kriegInstructions: KriegInstructions = {
   startTurn: {

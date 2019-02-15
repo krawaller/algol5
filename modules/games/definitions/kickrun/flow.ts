@@ -1,19 +1,14 @@
-import { KickrunFlow } from "./_types";
+import { KickrunFlow } from './_types';
 
 const kickrunFlow: KickrunFlow = {
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
       link: "selectmovetarget"
     },
-    selectmovetarget: {
-      from: "movetargets",
-      link: "move"
-    }
+    selectmovetarget: { from: "movetargets", link: "move" }
   },
   commands: {
     move: {

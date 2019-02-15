@@ -1,4 +1,4 @@
-import { SerauqsInstructions } from "./_types";
+import { SerauqsInstructions } from './_types';
 
 const serauqsInstructions: SerauqsInstructions = {
   startTurn: {

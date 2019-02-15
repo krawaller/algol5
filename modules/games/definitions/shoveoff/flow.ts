@@ -1,16 +1,11 @@
-import { ShoveoffFlow } from "./_types";
+import { ShoveoffFlow } from './_types';
 
 const shoveoffFlow: ShoveoffFlow = {
   TODO: "findaffected SHOULD BE AN OFFSET",
   endGame: {
-    madeline: {
-      condition: { notempty: "fourinarow" },
-      show: "fourinarow"
-    }
+    madeline: { condition: { notempty: "fourinarow" }, show: "fourinarow" }
   },
-  startTurn: {
-    link: "selectpushpoint"
-  },
+  startTurn: { link: "selectpushpoint" },
   marks: {
     selectpushpoint: {
       from: "edge",

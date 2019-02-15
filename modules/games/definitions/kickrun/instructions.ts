@@ -1,4 +1,4 @@
-import { KickrunInstructions } from "./_types";
+import { KickrunInstructions } from './_types';
 
 const kickrunInstructions: KickrunInstructions = {
   startTurn: "Select which unit to move",

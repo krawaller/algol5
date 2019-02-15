@@ -1,4 +1,4 @@
-import { AmazonsGenerators } from "./_types";
+import { AmazonsGenerators } from './_types';
 
 const amazonsGenerators: AmazonsGenerators = {
   findtargets: {
@@ -8,11 +8,7 @@ const amazonsGenerators: AmazonsGenerators = {
       ifactionelse: ["selectunit", "selectunit", { turnpos: "movedto" }]
     },
     blocks: "units",
-    draw: {
-      steps: {
-        tolayer: "targets"
-      }
-    }
+    draw: { steps: { tolayer: "targets" } }
   }
 };
 

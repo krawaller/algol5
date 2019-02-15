@@ -1,29 +1,18 @@
-import { DescentFlow } from "./_types";
+import { DescentFlow } from './_types';
 
 const descentFlow: DescentFlow = {
   endGame: {
-    madeline: {
-      condition: { notempty: "winline" },
-      show: "winline"
-    }
+    madeline: { condition: { notempty: "winline" }, show: "winline" }
   },
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
       link: "selectmovetarget"
     },
-    selectmovetarget: {
-      from: "movetargets",
-      link: "move"
-    },
-    selectdigtarget: {
-      from: "digtargets",
-      link: "dig"
-    }
+    selectmovetarget: { from: "movetargets", link: "move" },
+    selectdigtarget: { from: "digtargets", link: "dig" }
   },
   commands: {
     move: {

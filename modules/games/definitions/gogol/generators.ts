@@ -1,4 +1,4 @@
-import { GogolGenerators } from "./_types";
+import { GogolGenerators } from './_types';
 
 const gogolGenerators: GogolGenerators = {
   findforbiddenkingspots: {
@@ -7,11 +7,7 @@ const gogolGenerators: GogolGenerators = {
     dirs: {
       ifelse: [{ anyat: ["homerow", ["start"]] }, ["ortho"], { list: [1, 5] }]
     },
-    draw: {
-      neighbours: {
-        tolayer: "nokings"
-      }
-    }
+    draw: { neighbours: { tolayer: "nokings" } }
   },
   findforbiddensoldierspots: {
     type: "neighbour",
@@ -28,23 +24,14 @@ const gogolGenerators: GogolGenerators = {
         }
       ]
     },
-    draw: {
-      neighbours: {
-        tolayer: "nosoldiers"
-      }
-    }
+    draw: { neighbours: { tolayer: "nosoldiers" } }
   },
   findkingwalktargets: {
     type: "walker",
     starts: { union: ["mykings", { single: "selectunit" }] },
     dirs: ["rose"],
     blocks: "units",
-    draw: {
-      steps: {
-        unlessover: "nokings",
-        tolayer: "kingwalk"
-      }
-    }
+    draw: { steps: { unlessover: "nokings", tolayer: "kingwalk" } }
   },
   findadjacentenemies: {
     type: "neighbour",
@@ -52,12 +39,7 @@ const gogolGenerators: GogolGenerators = {
     dirs: ["rose"],
     ifover: "oppunits",
     draw: {
-      neighbours: {
-        tolayer: "adjacentenemies",
-        include: {
-          dir: ["dir"]
-        }
-      }
+      neighbours: { tolayer: "adjacentenemies", include: { dir: ["dir"] } }
     }
   },
   findsplashed: {
@@ -88,16 +70,9 @@ const gogolGenerators: GogolGenerators = {
       start: {
         condition: { truthy: ["neighbourcount"] },
         tolayer: "willdie",
-        include: {
-          dir: ["dir"]
-        }
+        include: { dir: ["dir"] }
       },
-      neighbours: {
-        tolayer: "jumptargets",
-        include: {
-          dir: ["dir"]
-        }
-      }
+      neighbours: { tolayer: "jumptargets", include: { dir: ["dir"] } }
     }
   }
 };

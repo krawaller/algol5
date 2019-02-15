@@ -1,4 +1,4 @@
-import { GogolFlow } from "./_types";
+import { GogolFlow } from './_types';
 
 const gogolFlow: GogolFlow = {
   startTurn: {
@@ -65,9 +65,7 @@ const gogolFlow: GogolFlow = {
       show: { intersect: ["mykings", "opphomerow"] }
     },
     kingkill: {
-      condition: {
-        and: [{ morethan: [["turn"], 2] }, { isempty: "oppkings" }]
-      }
+      condition: { and: [{ morethan: [["turn"], 2] }, { isempty: "oppkings" }] }
     }
   }
 };

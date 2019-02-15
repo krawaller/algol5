@@ -1,4 +1,4 @@
-import { KickrunGenerators } from "./_types";
+import { KickrunGenerators } from './_types';
 
 const kickrunGenerators: KickrunGenerators = {
   findmovetargets: {

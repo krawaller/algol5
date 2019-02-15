@@ -1,9 +1,7 @@
-import { MurusgallicusadvancedFlow } from "./_types";
+import { MurusgallicusadvancedFlow } from './_types';
 
 const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
-  startTurn: {
-    links: ["selecttower", "selectcatapult"]
-  },
+  startTurn: { links: ["selecttower", "selectcatapult"] },
   endGame: {
     infiltration: {
       condition: { overlaps: ["myunits", "opphomerow"] },
@@ -33,10 +31,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
       runGenerator: "findfiretargets",
       link: "selectfire"
     },
-    selectfire: {
-      from: "firetargets",
-      link: "fire"
-    }
+    selectfire: { from: "firetargets", link: "fire" }
   },
   commands: {
     move: {

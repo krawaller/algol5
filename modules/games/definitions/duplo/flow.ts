@@ -1,9 +1,7 @@
-import { DuploFlow } from "./_types";
+import { DuploFlow } from './_types';
 
 const duploFlow: DuploFlow = {
-  canalwaysend: {
-    deploy: true
-  },
+  canalwaysend: { deploy: true },
   endGame: {
     boardfull: {
       condition: { same: [{ sizeof: "units" }, 64] },
@@ -28,10 +26,7 @@ const duploFlow: DuploFlow = {
     }
   },
   marks: {
-    selectdeploy: {
-      from: { subtract: ["board", "units"] },
-      link: "deploy"
-    },
+    selectdeploy: { from: { subtract: ["board", "units"] }, link: "deploy" },
     selectunit: {
       from: "myunits",
       runGenerators: [

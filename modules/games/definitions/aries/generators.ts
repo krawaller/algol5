@@ -1,4 +1,4 @@
-import { AriesGenerators } from "./_types";
+import { AriesGenerators } from './_types';
 
 const ariesGenerators: AriesGenerators = {
   findmovetargets: {
@@ -7,9 +7,7 @@ const ariesGenerators: AriesGenerators = {
     dirs: ["ortho"],
     blocks: "units",
     draw: {
-      steps: {
-        tolayer: "movetargets"
-      },
+      steps: { tolayer: "movetargets" },
       block: {
         ifover: "oppunits",
         condition: {
@@ -21,9 +19,7 @@ const ariesGenerators: AriesGenerators = {
           }
         },
         tolayer: "movetargets",
-        include: {
-          dir: ["dir"]
-        }
+        include: { dir: ["dir"] }
       }
     }
   },
@@ -36,9 +32,7 @@ const ariesGenerators: AriesGenerators = {
     startasstep: true,
     testblocksbeforesteps: true,
     draw: {
-      steps: {
-        tolayer: "beingpushed"
-      },
+      steps: { tolayer: "beingpushed" },
       last: {
         condition: { valinlist: [["stopreason"], "hitblock", "outofbounds"] },
         tolayer: "squished"

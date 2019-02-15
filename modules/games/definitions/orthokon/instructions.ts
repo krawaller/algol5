@@ -1,4 +1,4 @@
-import { OrthokonInstructions } from "./_types";
+import { OrthokonInstructions } from './_types';
 
 const orthokonInstructions: OrthokonInstructions = {
   startTurn: { line: ["Select which", "pawn", "to move"] },

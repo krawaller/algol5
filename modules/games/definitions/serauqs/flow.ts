@@ -1,11 +1,8 @@
-import { SerauqsFlow } from "./_types";
+import { SerauqsFlow } from './_types';
 
 const serauqsFlow: SerauqsFlow = {
   endGame: {
-    madeline: {
-      condition: { notempty: "winline" },
-      show: "winline"
-    },
+    madeline: { condition: { notempty: "winline" }, show: "winline" },
     madex: {
       condition: {
         morethan: [
@@ -31,9 +28,7 @@ const serauqsFlow: SerauqsFlow = {
       show: "middle"
     }
   },
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",
@@ -42,10 +37,7 @@ const serauqsFlow: SerauqsFlow = {
         ifelse: [{ morethan: [3, ["turn"]] }, "promote", "selectmovetarget"]
       }
     },
-    selectmovetarget: {
-      from: "movetargets",
-      link: "move"
-    }
+    selectmovetarget: { from: "movetargets", link: "move" }
   },
   commands: {
     promote: {

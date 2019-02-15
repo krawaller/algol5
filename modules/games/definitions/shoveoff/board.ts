@@ -1,4 +1,4 @@
-import { ShoveoffBoard } from "./_types";
+import { ShoveoffBoard } from './_types';
 
 const shoveoffBoard: ShoveoffBoard = {
   height: 4,

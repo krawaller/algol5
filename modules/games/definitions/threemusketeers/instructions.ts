@@ -1,4 +1,4 @@
-import { ThreemusketeersInstructions } from "./_types";
+import { ThreemusketeersInstructions } from './_types';
 
 const threemusketeersInstructions: ThreemusketeersInstructions = {
   startTurn: {

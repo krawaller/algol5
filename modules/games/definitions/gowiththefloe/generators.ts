@@ -1,4 +1,4 @@
-import { GowiththefloeGenerators } from "./_types";
+import { GowiththefloeGenerators } from './_types';
 
 const gowiththefloeGenerators: GowiththefloeGenerators = {
   findeattargets: {
@@ -6,11 +6,7 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
     dirs: ["rose"],
     start: "selectunit",
     ifover: "seals",
-    draw: {
-      neighbours: {
-        tolayer: "eattargets"
-      }
-    }
+    draw: { neighbours: { tolayer: "eattargets" } }
   },
   findmovetargets: {
     type: "walker",
@@ -22,9 +18,7 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
       steps: {
         unlessover: "holes",
         tolayer: "movetargets",
-        include: {
-          dir: ["dir"]
-        }
+        include: { dir: ["dir"] }
       }
     }
   },
@@ -47,13 +41,8 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
     dir: { reldir: [{ read: ["movetargets", "selectmovetarget", "dir"] }, 5] },
     blocks: { single: "selectunit" },
     draw: {
-      steps: {
-        unlessover: "holes",
-        tolayer: "cracks"
-      },
-      block: {
-        tolayer: "cracks"
-      }
+      steps: { unlessover: "holes", tolayer: "cracks" },
+      block: { tolayer: "cracks" }
     }
   }
 };

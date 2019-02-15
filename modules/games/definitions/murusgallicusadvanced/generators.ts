@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedGenerators } from "./_types";
+import { MurusgallicusadvancedGenerators } from './_types';
 
 const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {
@@ -32,9 +32,7 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
           and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }]
         },
         tolayer: "movetargets",
-        include: {
-          dir: ["dir"]
-        }
+        include: { dir: ["dir"] }
       }
     }
   },
@@ -80,11 +78,7 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
     start: "selecttower",
     dirs: ["rose"],
     ifover: { union: ["oppcatapults", "oppwalls"] },
-    draw: {
-      neighbours: {
-        tolayer: "killtargets"
-      }
-    }
+    draw: { neighbours: { tolayer: "killtargets" } }
   }
 };
 

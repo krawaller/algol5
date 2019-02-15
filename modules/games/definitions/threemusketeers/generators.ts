@@ -1,4 +1,4 @@
-import { ThreemusketeersGenerators } from "./_types";
+import { ThreemusketeersGenerators } from './_types';
 
 const threemusketeersGenerators: ThreemusketeersGenerators = {
   findstrandedmusketeers: {
@@ -35,11 +35,7 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
         { noneat: ["units", ["target"]] }
       ]
     },
-    draw: {
-      neighbours: {
-        tolayer: "movetargets"
-      }
-    }
+    draw: { neighbours: { tolayer: "movetargets" } }
   }
 };
 

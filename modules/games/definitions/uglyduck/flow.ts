@@ -1,9 +1,7 @@
-import { UglyduckFlow } from "./_types";
+import { UglyduckFlow } from './_types';
 
 const uglyduckFlow: UglyduckFlow = {
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   endGame: {
     swanhome: {
       condition: { overlaps: ["mykings", "homerow"] },
@@ -16,10 +14,7 @@ const uglyduckFlow: UglyduckFlow = {
       runGenerator: "findmovetargets",
       link: "selectmovetarget"
     },
-    selectmovetarget: {
-      from: "movetargets",
-      link: "move"
-    }
+    selectmovetarget: { from: "movetargets", link: "move" }
   },
   commands: {
     move: {

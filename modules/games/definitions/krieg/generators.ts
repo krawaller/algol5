@@ -1,4 +1,4 @@
-import { KriegGenerators } from "./_types";
+import { KriegGenerators } from './_types';
 
 const kriegGenerators: KriegGenerators = {
   findmovetargets: {
@@ -18,11 +18,7 @@ const kriegGenerators: KriegGenerators = {
         }
       ]
     },
-    draw: {
-      neighbours: {
-        tolayer: "movetargets"
-      }
-    }
+    draw: { neighbours: { tolayer: "movetargets" } }
   }
 };
 

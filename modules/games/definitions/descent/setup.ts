@@ -1,4 +1,4 @@
-import { DescentSetup } from "./_types";
+import { DescentSetup } from './_types';
 
 const descentSetup: DescentSetup = {
   rooks: {

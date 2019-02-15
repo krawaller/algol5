@@ -1,4 +1,4 @@
-import { KriegFlow } from "./_types";
+import { KriegFlow } from './_types';
 
 const kriegFlow: KriegFlow = {
   marks: {
@@ -7,14 +7,9 @@ const kriegFlow: KriegFlow = {
       runGenerator: "findmovetargets",
       link: "selectmove"
     },
-    selectmove: {
-      from: "movetargets",
-      link: "move"
-    }
+    selectmove: { from: "movetargets", link: "move" }
   },
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   endGame: {
     cornerinfiltration: {
       condition: { overlaps: ["oppcorners", "myunits"] },

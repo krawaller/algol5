@@ -1,4 +1,4 @@
-import { DaggersGenerators } from "./_types";
+import { DaggersGenerators } from './_types';
 
 const daggersGenerators: DaggersGenerators = {
   findcrowntargets: {
@@ -19,9 +19,7 @@ const daggersGenerators: DaggersGenerators = {
     blocks: "units",
     max: { ifelse: [{ valinlist: [["dir"], 8, 1, 2] }, 1, 8] },
     draw: {
-      steps: {
-        tolayer: "movetarget"
-      },
+      steps: { tolayer: "movetarget" },
       block: {
         condition: {
           and: [

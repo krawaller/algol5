@@ -1,4 +1,4 @@
-import { GogolInstructions } from "./_types";
+import { GogolInstructions } from './_types';
 
 const gogolInstructions: GogolInstructions = {
   startTurn: {

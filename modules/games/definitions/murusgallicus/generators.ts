@@ -1,4 +1,4 @@
-import { MurusgallicusGenerators } from "./_types";
+import { MurusgallicusGenerators } from './_types';
 
 const murusgallicusGenerators: MurusgallicusGenerators = {
   findmovetargets: {
@@ -13,9 +13,7 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
           and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }]
         },
         tolayer: "movetargets",
-        include: {
-          dir: ["dir"]
-        }
+        include: { dir: ["dir"] }
       }
     }
   },
@@ -49,11 +47,7 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
     start: "selecttower",
     dirs: ["rose"],
     ifover: "oppwalls",
-    draw: {
-      neighbours: {
-        tolayer: "killtargets"
-      }
-    }
+    draw: { neighbours: { tolayer: "killtargets" } }
   }
 };
 

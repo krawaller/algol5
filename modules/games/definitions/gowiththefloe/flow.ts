@@ -1,20 +1,15 @@
-import { GowiththefloeFlow } from "./_types";
+import { GowiththefloeFlow } from './_types';
 
 const gowiththefloeFlow: GowiththefloeFlow = {
   STATUS: "wip",
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   endGame: {
     safeseal: {
       condition: { different: [{ sizeof: "canmove" }, { sizeof: "seals" }] },
       show: { subtract: ["seals", "canmove"] },
       who: 1
     },
-    sealseaten: {
-      condition: { isempty: "seals" },
-      who: 2
-    }
+    sealseaten: { condition: { isempty: "seals" }, who: 2 }
   },
   marks: {
     selectunit: {
@@ -27,10 +22,7 @@ const gowiththefloeFlow: GowiththefloeFlow = {
       runGenerator: "findcracks",
       link: "move"
     },
-    selecteattarget: {
-      from: "eattargets",
-      link: "eat"
-    }
+    selecteattarget: { from: "eattargets", link: "eat" }
   },
   commands: {
     move: {

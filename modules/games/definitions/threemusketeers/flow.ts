@@ -1,9 +1,7 @@
-import { ThreemusketeersFlow } from "./_types";
+import { ThreemusketeersFlow } from './_types';
 
 const threemusketeersFlow: ThreemusketeersFlow = {
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   endGame: {
     musketeersinline: {
       condition: { notempty: "musketeerline" },
@@ -21,10 +19,7 @@ const threemusketeersFlow: ThreemusketeersFlow = {
       runGenerator: "findmovetargets",
       link: "selectmovetarget"
     },
-    selectmovetarget: {
-      from: "movetargets",
-      link: "move"
-    }
+    selectmovetarget: { from: "movetargets", link: "move" }
   },
   commands: {
     move: {

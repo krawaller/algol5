@@ -1,25 +1,17 @@
-import { AtriumFlow } from "./_types";
+import { AtriumFlow } from './_types';
 
 const atriumFlow: AtriumFlow = {
   endGame: {
-    madewinline: {
-      condition: { notempty: "winline" },
-      show: "winline"
-    }
+    madewinline: { condition: { notempty: "winline" }, show: "winline" }
   },
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
       link: "selectmovetarget"
     },
-    selectmovetarget: {
-      from: "movetargets",
-      link: "move"
-    }
+    selectmovetarget: { from: "movetargets", link: "move" }
   },
   commands: {
     move: {

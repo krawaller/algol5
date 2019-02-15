@@ -1,4 +1,4 @@
-import { JostleGenerators } from "./_types";
+import { JostleGenerators } from './_types';
 
 const jostleGenerators: JostleGenerators = {
   findinitial: {

@@ -1,9 +1,7 @@
-import { MurusgallicusFlow } from "./_types";
+import { MurusgallicusFlow } from './_types';
 
 const murusgallicusFlow: MurusgallicusFlow = {
-  startTurn: {
-    link: "selecttower"
-  },
+  startTurn: { link: "selecttower" },
   endGame: {
     infiltration: {
       condition: { overlaps: ["myunits", "opphomerow"] },
@@ -21,10 +19,7 @@ const murusgallicusFlow: MurusgallicusFlow = {
       runGenerators: ["findmoveresults"],
       link: "move"
     },
-    selectkill: {
-      from: "killtargets",
-      link: "kill"
-    }
+    selectkill: { from: "killtargets", link: "kill" }
   },
   commands: {
     move: {

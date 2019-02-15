@@ -7,11 +7,10 @@ const amazonsMeta: AmazonsMeta = {
   author: "Walter Zamkauskas",
   year: 1988,
   about: {
-    tagline: "Make sure your opponent is trapped first as you burn the board together",
+    tagline:
+      "Make sure your opponent is trapped first as you burn the board together",
     tags: ["deploy", "starve"],
-    links: {
-      "Nestor Games": "http://nestorgames.com/#amazons_detail"
-    }
+    links: { "Nestor Games": "http://nestorgames.com/#amazons_detail" }
   }
 };
 

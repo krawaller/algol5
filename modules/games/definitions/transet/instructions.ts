@@ -1,4 +1,4 @@
-import { TransetInstructions } from "./_types";
+import { TransetInstructions } from './_types';
 
 const transetInstructions: TransetInstructions = {
   startTurn: { line: ["Select a unit to", "move"] },

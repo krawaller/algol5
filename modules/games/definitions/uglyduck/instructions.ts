@@ -1,4 +1,4 @@
-import { UglyduckInstructions } from "./_types";
+import { UglyduckInstructions } from './_types';
 
 const uglyduckInstructions: UglyduckInstructions = {
   startTurn: {

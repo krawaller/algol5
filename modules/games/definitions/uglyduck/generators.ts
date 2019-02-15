@@ -1,4 +1,4 @@
-import { UglyduckGenerators } from "./_types";
+import { UglyduckGenerators } from './_types';
 
 const uglyduckGenerators: UglyduckGenerators = {
   findmovetargets: {
@@ -18,11 +18,7 @@ const uglyduckGenerators: UglyduckGenerators = {
         { noneat: ["myunits", ["target"]] }
       ]
     },
-    draw: {
-      neighbours: {
-        tolayer: "movetargets"
-      }
-    }
+    draw: { neighbours: { tolayer: "movetargets" } }
   }
 };
 

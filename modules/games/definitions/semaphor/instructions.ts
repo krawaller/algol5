@@ -1,4 +1,4 @@
-import { SemaphorInstructions } from "./_types";
+import { SemaphorInstructions } from './_types';
 
 const semaphorInstructions: SemaphorInstructions = {
   startTurn: {

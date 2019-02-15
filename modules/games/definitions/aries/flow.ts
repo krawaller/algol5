@@ -1,9 +1,7 @@
-import { AriesFlow } from "./_types";
+import { AriesFlow } from './_types';
 
 const ariesFlow: AriesFlow = {
-  startTurn: {
-    link: "selectunit"
-  },
+  startTurn: { link: "selectunit" },
   endGame: {
     invade: {
       condition: { overlaps: ["oppcorner", "myunits"] },

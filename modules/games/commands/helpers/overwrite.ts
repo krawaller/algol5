@@ -1,15 +1,18 @@
 import * as fs from "fs-extra";
 import * as path from "path";
-import * as beautify from "js-beautify";
+import * as prettier from "prettier";
 import { FullDefAnon } from "../../../types";
 import analyze from "./analyze";
 
 import { defPath } from "./_paths";
 
 function makeNice(obj = {}) {
-  return beautify(JSON.stringify(obj).replace(/"([a-zA-Z]+)":/g, "$1:"), {
-    indent_size: 2
-  });
+  // return beautify(JSON.stringify(obj).replace(/"([a-zA-Z]+)":/g, "$1:"), {
+  //   indent_size: 2
+  // });
+  return prettier
+    .format("let x = " + JSON.stringify(obj), { parser: "typescript" })
+    .slice(8, -2);
 }
 
 export default async function overwrite(gameId, def: FullDefAnon) {

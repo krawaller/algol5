@@ -9,5 +9,7 @@
   "scripts": {
     "test": "ts-node node_modules/tape/bin/tape **/*.spec.ts | node_modules/.bin/tap-spec"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash.isequal": "^4.5.0"
+  }
 }

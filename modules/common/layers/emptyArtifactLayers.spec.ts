@@ -1,15 +1,15 @@
 import * as test from "tape";
 import { GeneratorsAnon } from "../../types";
-import { artifactLayers } from "../";
+import { emptyArtifactLayers } from "..";
 
-type ArtifactLayerTest = {
+type EmptyArtifactLayerTest = {
   generators: GeneratorsAnon;
   expected: {
     [artifactLayerName: string]: {};
   };
 };
 
-const artifactLayerTests: ArtifactLayerTest[] = [
+const emptyArtifactLayerTests: EmptyArtifactLayerTest[] = [
   {
     generators: {
       walk: {
@@ -56,9 +56,9 @@ const artifactLayerTests: ArtifactLayerTest[] = [
 ];
 
 test("artifactLayers", t => {
-  artifactLayerTests.forEach(({ generators, expected }) =>
+  emptyArtifactLayerTests.forEach(({ generators, expected }) =>
     t.deepEqual(
-      artifactLayers(generators),
+      emptyArtifactLayers(generators),
       expected,
       `Correctly calculates artifactLayers for ${JSON.stringify(generators)}`
     )

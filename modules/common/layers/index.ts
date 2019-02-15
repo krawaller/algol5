@@ -1,4 +1,4 @@
-export * from "./artifactLayers";
+export * from "./emptyArtifactLayers";
 export * from "./boardLayers";
 export * from "./terrainLayers";
 export * from "./terrainLayerNames";

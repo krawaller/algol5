@@ -10,7 +10,7 @@ import {
   isAlgolSetSingles
 } from "../../../types";
 import {
-  artifactLayers,
+  emptyArtifactLayers,
   terrainLayers,
   emptyUnitLayers
 } from "../../../common";
@@ -29,7 +29,7 @@ export default function parseSet(
   if (typeof expr === "string") {
     const name = expr.replace(/^"|"$/g, ""); // since might be value processed
 
-    if (artifactLayers(gameDef.generators)[name]) {
+    if (emptyArtifactLayers(gameDef.generators)[name]) {
       return `ARTIFACTS.${name}`;
     }
     if (terrainLayers(gameDef.board, 1)[name]) {

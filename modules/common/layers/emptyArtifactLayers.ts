@@ -1,7 +1,7 @@
 import { isFilterDef, DrawDefAnon, GeneratorsAnon } from "../../types";
-import { possibilities } from "../";
+import { possibilities } from "..";
 
-export function artifactLayers(generators: GeneratorsAnon = {}) {
+export function emptyArtifactLayers(generators: GeneratorsAnon = {}) {
   let names = [];
   Object.keys(generators).forEach(genName => {
     const genDef = generators[genName];

@@ -6,7 +6,8 @@
     "stub": "npx ts-node ./commands/stub $*",
     "analyze": "npx ts-node ./commands/analyze $*",
     "fake": "npx ts-node ./commands/fake $*",
-    "watch": "npx ts-node ./commands/watch $*"
+    "watch": "npx ts-node ./commands/watch $*",
+    "validate": "npx ts-node ./commands/validate $*"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.4",
@@ -17,5 +18,8 @@
     "ts-node": "^8.0.2",
     "typescript": "^3.2.4",
     "watchr": "^4.1.0"
+  },
+  "dependencies": {
+    "lodash.isequal": "^4.5.0"
   }
 }

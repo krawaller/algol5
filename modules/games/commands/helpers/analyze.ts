@@ -8,8 +8,8 @@ import {
   boardPositions,
   terrainLayerNames,
   possibilities,
-  artifactLayers,
-  unitLayers
+  emptyArtifactLayers,
+  emptyUnitLayers
 } from "../../../common";
 import dateStamp from "./datestamp";
 
@@ -35,9 +35,9 @@ export default async function analyze(def: FullDefAnon | string) {
     return poss.filter(l => l !== "endturn").length > 0;
   });
 
-  const myUnitLayerNames = Object.keys(unitLayers(def));
+  const myUnitLayerNames = Object.keys(emptyUnitLayers(def));
   const myTerrainLayerNames = terrainLayerNames(def.board);
-  const myArtifactLayerNames = Object.keys(artifactLayers(def.generators));
+  const myArtifactLayerNames = Object.keys(emptyArtifactLayers(def.generators));
   const myGeneratorNames = Object.keys(generators);
 
   const gridNames = Object.keys(def.grids || {});
@@ -61,7 +61,7 @@ export default async function analyze(def: FullDefAnon | string) {
   const aiAspects = Object.keys(AI.aspects);
   const aiGrids = Object.keys(AI.grids);
   const aiBrains = Object.keys(AI.brains);
-  const aiArtifactLayerNames = Object.keys(artifactLayers(AI.generators));
+  const aiArtifactLayerNames = Object.keys(emptyArtifactLayers(AI.generators));
 
   const analysis = `import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 

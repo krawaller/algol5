@@ -1,9 +1,9 @@
 import { FullDefAnon } from "../";
 
-export type TestSuite<T> = {
+export type AlgolWriterSuite<T = any> = {
   title: string;
   func: {
-    (def: FullDefAnon, player: 1 | 2, action: string, input: T): string;
+    (def: FullDefAnon, player: 1 | 2, action: string, input?: T): string;
     funcName?: string;
   };
   defs: ParserTest<T>[];
@@ -22,7 +22,7 @@ export type ContextTest<T> = {
 };
 
 export type ExpressionTest<T> = {
-  expr: T;
+  expr?: T;
   sample?: string;
   res: any;
   debug?: boolean;

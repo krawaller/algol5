@@ -1,8 +1,8 @@
 import { executeGenerator } from "./";
 import { emptyFullDef, truthy, falsy } from "../../../common";
-import { WalkerDefAnon, TestSuite } from "../../../types";
+import { WalkerDefAnon, AlgolWriterSuite } from "../../../types";
 
-export const testSuite: TestSuite<WalkerDefAnon> = {
+export const testSuite: AlgolWriterSuite<WalkerDefAnon> = {
   title: "Artifacts - Walker",
   func: executeGenerator,
   defs: [

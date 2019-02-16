@@ -1,8 +1,8 @@
 import { emptyFullDef, truthy, falsy } from "../../../common";
-import { AlgolBoolAnon, TestSuite } from "../../../types";
+import { AlgolBoolAnon, AlgolWriterSuite } from "../../../types";
 import { parserTester } from "./";
 
-export const testSuite: TestSuite<AlgolBoolAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolBoolAnon> = {
   title: "Primitive - Bool",
   func: parserTester("bool"),
   defs: [

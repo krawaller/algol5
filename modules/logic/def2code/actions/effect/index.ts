@@ -1,3 +1,5 @@
+export * from "./updateUnitLayers";
+
 import {
   AlgolEffectAnon,
   FullDefAnon,

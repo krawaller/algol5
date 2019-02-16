@@ -1,4 +1,4 @@
-import { FullDefAnon, TestSuite, ParserTest } from "../../types";
+import { FullDefAnon, AlgolWriterSuite, ParserTest } from "../../types";
 import { truthy, falsy, relativeDirs } from "../../common";
 import { getSuites } from "./_testUtils";
 
@@ -24,7 +24,7 @@ getSuites().then(suiteFiles => {
 
 // --------------------------------------------------------
 
-function runSuite<T>(suite: TestSuite<T>) {
+function runSuite<T>(suite: AlgolWriterSuite<T>) {
   test(suite.title, t => {
     suite.defs.forEach(tests => {
       runParserTest(tests, suite.func, t);
@@ -53,6 +53,11 @@ function runParserTest<T>(
           const diagDirs = [2, 4, 6, 8];
           const orthoDirs = [1, 3, 5, 7];
           const relativeDirs = ${JSON.stringify(relativeDirs)};
+          const ownerNames = ${JSON.stringify(
+            parserTest.player === 1
+              ? ["neutral", "my", "opp"]
+              : ["neutral", "opp", "my"]
+          )};
           let nextSpawnId = 1;
           const connections = boardConnections(${JSON.stringify(
             parserTest.def.board

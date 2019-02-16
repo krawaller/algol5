@@ -1,8 +1,8 @@
 import { emptyFullDef } from "../../../common";
-import { AlgolValAnon, TestSuite } from "../../../types";
+import { AlgolValAnon, AlgolWriterSuite } from "../../../types";
 import { parserTester } from "./";
 
-export const testSuite: TestSuite<AlgolValAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolValAnon> = {
   title: "Primitive - Value",
   func: parserTester("val"),
   defs: [

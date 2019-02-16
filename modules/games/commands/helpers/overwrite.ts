@@ -7,9 +7,6 @@ import analyze from "./analyze";
 import { defPath } from "./_paths";
 
 function makeNice(obj = {}) {
-  // return beautify(JSON.stringify(obj).replace(/"([a-zA-Z]+)":/g, "$1:"), {
-  //   indent_size: 2
-  // });
   return prettier
     .format("let x = " + JSON.stringify(obj), { parser: "typescript" })
     .slice(8, -2);

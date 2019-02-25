@@ -4,8 +4,6 @@ import {
   AlgolLogicalIfElse,
   AlgolLogicalPlayerCase,
   AlgolLogicalIfActionElse,
-  AlgolLogicalIf,
-  AlgolLogicalIfPlayer,
   AlgolLogicalIndexList
 } from "../logical";
 
@@ -67,52 +65,6 @@ export interface AlgolValPlayerCase<
   Turnv
 >
   extends AlgolLogicalPlayerCase<
-    AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  > {}
-
-export interface AlgolValIf<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
->
-  extends AlgolLogicalIf<
-    AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  > {}
-
-export interface AlgolValIfPlayer<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
->
-  extends AlgolLogicalIfPlayer<
     AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,

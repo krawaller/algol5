@@ -33,8 +33,6 @@ export const testSuite: AlgolWriterSuite<AlgolValAnon> = {
             },
             { expr: { ifelse: [["true"], { value: 1 }, 2] }, res: 1 },
             { expr: { ifelse: [["false"], 1, { value: 2 }] }, res: 2 },
-            { expr: { if: [["true"], "foo"] }, res: "foo" },
-            { expr: { if: [["false"], "foo"] }, res: undefined },
             { expr: { sum: [1, 2, { value: 4 }] }, res: 7 },
             { expr: { reldir: [1, 3] }, res: 3 },
             { expr: { reldir: [2, 1] }, res: 2 }

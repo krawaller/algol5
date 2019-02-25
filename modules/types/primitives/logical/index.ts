@@ -8,7 +8,8 @@ import {
   AlgolLogicalIfElse,
   AlgolLogicalIfPlayer,
   AlgolLogicalIndexList,
-  AlgolLogicalPlayerCase
+  AlgolLogicalPlayerCase,
+  AlgolLogicalMulti
 } from "./logical.interfaces";
 
 export type AlgolLogical<
@@ -38,4 +39,5 @@ export type AlgolLogical<
       Turnp,
       Turnv
     >
-  | AlgolLogicalIndexList<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolLogicalIndexList<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolLogicalMulti<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

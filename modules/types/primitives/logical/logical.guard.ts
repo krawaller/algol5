@@ -5,7 +5,8 @@ import {
   AlgolLogicalIfElseAnon,
   AlgolLogicalIfPlayerAnon,
   AlgolLogicalIndexListAnon,
-  AlgolLogicalPlayerCaseAnon
+  AlgolLogicalPlayerCaseAnon,
+  AlgolLogicalMultiAnon
 } from "./logical.anon";
 
 export function isAlgolLogicalIfElse<_T>(
@@ -42,4 +43,10 @@ export function isAlgolLogicalIndexList<_T>(
   expr: AlgolLogicalAnon<_T>
 ): expr is AlgolLogicalIndexListAnon<_T> {
   return (expr as AlgolLogicalIndexListAnon<_T>).indexlist !== undefined;
+}
+
+export function isAlgolLogicalMulti<_T>(
+  expr: AlgolLogicalAnon<_T>
+): expr is AlgolLogicalMultiAnon<_T> {
+  return (expr as AlgolLogicalMultiAnon<_T>).multi !== undefined;
 }

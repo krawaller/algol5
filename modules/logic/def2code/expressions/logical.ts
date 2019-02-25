@@ -5,7 +5,8 @@ import {
   isAlgolLogicalIfActionElse,
   isAlgolLogicalIndexList,
   isAlgolLogicalPlayerCase,
-  isAlgolLogicalIf
+  isAlgolLogicalIf,
+  isAlgolLogicalMulti
 } from "../../../types";
 import makeParser from "./";
 
@@ -57,6 +58,11 @@ export default function parseLogical<_T>(
       if: [test, val]
     } = expr;
     return `(${parse.bool(test)} ? ${me(val)} : undefined)`;
+  }
+
+  if (isAlgolLogicalMulti(expr)) {
+    const { multi: children } = expr;
+    return children.map(me).join(" ");
   }
 
   return parser(gameDef, player, action, expr, from);

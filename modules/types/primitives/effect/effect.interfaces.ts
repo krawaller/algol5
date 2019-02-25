@@ -279,20 +279,6 @@ export interface AlgolEffectForIdIn<
   ];
 }
 
-export interface AlgolEffectMulti<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  multi: AlgolEffect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
-}
-
 export interface AlgolEffectSpawnAt<
   Btlp,
   Btlv,

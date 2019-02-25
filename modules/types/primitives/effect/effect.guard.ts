@@ -7,7 +7,6 @@ import {
   AlgolEffectKillIdAnon,
   AlgolEffectMoveAtAnon,
   AlgolEffectMoveIdAnon,
-  AlgolEffectMultiAnon,
   AlgolEffectPushInAnon,
   AlgolEffectPushAtAnon,
   AlgolEffectSetAtAnon,
@@ -146,12 +145,6 @@ export function isAlgolEffectForIdIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectForIdInAnon {
   return (expr as AlgolEffectForIdInAnon).foridin !== undefined;
-}
-
-export function isAlgolEffectMulti(
-  expr: AlgolEffectAnon
-): expr is AlgolEffectMultiAnon {
-  return (expr as AlgolEffectMultiAnon).multi !== undefined;
 }
 
 export function isAlgolEffectMorphAt(

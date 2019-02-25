@@ -116,3 +116,17 @@ export interface AlgolLogicalIndexList<
     ...AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[]
   ];
 }
+
+export interface AlgolLogicalMulti<
+  _T,
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  multi: AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+}

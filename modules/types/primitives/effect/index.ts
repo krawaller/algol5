@@ -8,7 +8,8 @@ import {
   AlgolEffectIfActionElse,
   AlgolEffectIfElse,
   AlgolEffectIndexList,
-  AlgolEffectPlayerCase
+  AlgolEffectPlayerCase,
+  AlgolEffectMulti
 } from "./effect.logical";
 
 import {
@@ -19,7 +20,6 @@ import {
   AlgolEffectKillId,
   AlgolEffectMoveAt,
   AlgolEffectMoveId,
-  AlgolEffectMulti,
   AlgolEffectPushIn,
   AlgolEffectPushAt,
   AlgolEffectSetAt,

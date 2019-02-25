@@ -6,7 +6,6 @@ import {
   isAlgolEffectKillAt,
   isAlgolEffectKillId,
   isAlgolEffectForPosIn,
-  isAlgolEffectMulti,
   isAlgolEffectKillIn,
   isAlgolEffectForIdIn,
   isAlgolEffectSetAt,
@@ -32,8 +31,25 @@ import {
   isAlgolEffectAdoptId
 } from "../../../../types";
 import makeParser from "../../expressions";
+import parseLogical from "../../expressions/logical";
 
 export function executeEffect(
+  gameDef: FullDefAnon,
+  player: 1 | 2,
+  action: string,
+  effect: AlgolEffectAnon
+): string {
+  return parseLogical(
+    gameDef,
+    player,
+    action,
+    executeEffectInner,
+    effect,
+    "effect"
+  );
+}
+
+function executeEffectInner(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
@@ -168,11 +184,6 @@ export function executeEffect(
     return me({ forposin: [set, { killat: ["looppos"] }] });
   }
 
-  if (isAlgolEffectMulti(effect)) {
-    const { multi: effects } = effect;
-    return effects.map(me).join(" ");
-  }
-
   if (isAlgolEffectSetIn(effect)) {
     const {
       setin: [set, prop, val]
@@ -254,5 +265,6 @@ export function executeEffect(
     } = effect;
     return me({ forposin: [set, { adoptat: [["looppos"], owner] }] });
   }
+
   return "";
 }

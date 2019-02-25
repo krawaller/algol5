@@ -8,7 +8,6 @@ import {
   AlgolEffectKillId,
   AlgolEffectMoveAt,
   AlgolEffectMoveId,
-  AlgolEffectMulti,
   AlgolEffectPushIn,
   AlgolEffectPushAt,
   AlgolEffectSetAt,
@@ -236,17 +235,6 @@ export type AlgolEffectForPosInAnon = AlgolEffectForPosIn<
   string
 >;
 export type AlgolEffectForIdInAnon = AlgolEffectForIdIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectMultiAnon = AlgolEffectMulti<
   string,
   string,
   string,

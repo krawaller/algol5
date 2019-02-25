@@ -25,6 +25,13 @@ export default function parseLogical<_T>(
     const {
       ifelse: [test, whenTruthy, whenFalsy]
     } = expr;
+    // As statement
+    if (from === "effect") {
+      return `if (${parse.bool(test)}) { ${me(whenTruthy)} } else { ${me(
+        whenFalsy
+      )} }`;
+    }
+    // As expression
     return `(${parse.bool(test)} ? ${me(whenTruthy)} : ${me(whenFalsy)})`;
   }
 

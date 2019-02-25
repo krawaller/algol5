@@ -1,6 +1,10 @@
 import { FullDefAnon } from "../../../types";
 import makeParser from "../expressions";
 
+/*
+Use by generators to mutate ARTIFACTS.
+*/
+
 export default function draw(
   gameDef: FullDefAnon,
   player: 1 | 2,

@@ -43,3 +43,23 @@
 - [x] unit test terrainLayers
 - [ ] artifact layers
 - [ ] terrain prop in board layers (or not)
+
+
+---
+
+## Get up and running
+
+- [ ] Envelope before
+- [ ] Envelope after
+- [ ] Add mark
+- [ ] Obey method
+  - [ ] Execute command
+  - [ ]
+
+
+### LATER
+
+- [ ] Improve draw performance
+  - [ ] Make artifacts copier method
+  - [ ] Employ copier method where applicable
+  - [ ] Refactor draw to mutate directly

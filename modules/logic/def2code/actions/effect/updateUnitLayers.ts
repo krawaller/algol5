@@ -1,6 +1,11 @@
 import { FullDefAnon } from "../../../../types";
 import { emptyUnitLayers } from "../../../../common";
 
+/*
+Mutates `UNITLAYERS` given the current values in `UNITDATA`.
+Should be run after unit-affecting effects have been executed.
+*/
+
 export function updateUnitLayers(
   gameDef: FullDefAnon,
   player: 1 | 2,

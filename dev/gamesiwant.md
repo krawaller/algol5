@@ -10,3 +10,4 @@ from worldofabstractgames
 [ ] Essentia - https://www.boardgamegeek.com/boardgame/67542/essentia
 [ ] FlipFlop (and 2 more) - http://www.nestorgames.com/rulebooks/FLIPFLOP_EN.pdf
 [ ] Go with the Floe - http://www.nestorgames.com/#gowiththefloe_detail 
+[ ] Chameleon - https://www.kickstarter.com/projects/2039314666/chameleon-a-modern-version-of-chess

@@ -64,6 +64,11 @@ export default function parseLogical<_T>(
     const {
       if: [test, val]
     } = expr;
+    // As statement
+    if (from === "effect") {
+      return `if (${parse.bool(test)}) { ${me(val)} }`;
+    }
+    // As expression
     return `(${parse.bool(test)} ? ${me(val)} : undefined)`;
   }
 

@@ -33,6 +33,20 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
               },
               sample: "!UNITDATA.unit1 && UNITDATA.unit2",
               res: truthy
+            },
+            {
+              expr: {
+                if: [["true"], { killat: "unit1mark" }]
+              },
+              sample: "UNITDATA.unit1",
+              res: falsy
+            },
+            {
+              expr: {
+                if: [["false"], { killat: "unit1mark" }]
+              },
+              sample: "UNITDATA.unit1",
+              res: truthy
             }
           ]
         }

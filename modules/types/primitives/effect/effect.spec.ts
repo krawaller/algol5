@@ -65,5 +65,6 @@ const tests: TestEffect[] = [
   { adoptat: ["mymark", { value: 0 }] },
   { adoptin: ["mylayer", { value: ["player"] }] },
   { adoptid: [{ value: "someid" }, { value: ["otherplayer"] }] },
-  { ifelse: [["true"], { killat: "mymark" }, { killat: "mymark" }] }
+  { ifelse: [["true"], { killat: "mymark" }, { killat: "mymark" }] },
+  { if: [["true"], { killat: "mymark" }] }
 ];

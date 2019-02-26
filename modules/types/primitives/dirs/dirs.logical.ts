@@ -4,7 +4,6 @@ import {
   AlgolLogicalIfElse,
   AlgolLogicalIfActionElse,
   AlgolLogicalPlayerCase,
-  AlgolLogicalIf,
   AlgolLogicalIndexList
 } from "../logical";
 
@@ -19,19 +18,6 @@ export interface AlgolDirsIfElse<
   Turnv
 >
   extends AlgolLogicalIfElse<
-    AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  > {}
-
-export interface AlgolDirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  extends AlgolLogicalIf<
     AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     Btlp,
     Btlv,

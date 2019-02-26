@@ -4,7 +4,6 @@ export * from "./dirs.logical";
 export * from "./dirs.guard";
 
 import {
-  AlgolDirsIf,
   AlgolDirsIfActionElse,
   AlgolDirsIfElse,
   AlgolDirsIndexList,
@@ -18,7 +17,6 @@ export type AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | ["diag"]
   | ["rose"]
   | AlgolDirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolDirsIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolDirsIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolDirsIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolDirsPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

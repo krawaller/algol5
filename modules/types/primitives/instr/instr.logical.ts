@@ -5,6 +5,7 @@ import {
   AlgolLogicalIfActionElse,
   AlgolLogicalPlayerCase,
   AlgolLogicalIfPlayer,
+  AlgolLogicalIfAction,
   AlgolLogicalIf,
   AlgolLogicalIndexList
 } from "../logical";
@@ -21,6 +22,29 @@ export interface AlgolInstrIfPlayer<
   Unit
 >
   extends AlgolLogicalIfPlayer<
+    AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  > {}
+
+export interface AlgolInstrIfAction<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+>
+  extends AlgolLogicalIfAction<
     AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
     Btlp,
     Btlv,

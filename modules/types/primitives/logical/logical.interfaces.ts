@@ -55,6 +55,33 @@ export interface AlgolLogicalIfPlayer<
   ];
 }
 
+export interface AlgolLogicalIfAction<
+  _T,
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  ifaction: [
+    AlgolVal<
+      "start" | Mrk | Cmnd,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >,
+    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
 export interface AlgolLogicalPlayerCase<
   _T,
   Btlp,

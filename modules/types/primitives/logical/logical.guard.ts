@@ -4,6 +4,7 @@ import {
   AlgolLogicalIfAnon,
   AlgolLogicalIfElseAnon,
   AlgolLogicalIfPlayerAnon,
+  AlgolLogicalIfActionAnon,
   AlgolLogicalIndexListAnon,
   AlgolLogicalPlayerCaseAnon,
   AlgolLogicalMultiAnon
@@ -25,6 +26,12 @@ export function isAlgolLogicalIfPlayer<_T>(
   expr: AlgolLogicalAnon<_T>
 ): expr is AlgolLogicalIfPlayerAnon<_T> {
   return (expr as AlgolLogicalIfPlayerAnon<_T>).ifplayer !== undefined;
+}
+
+export function isAlgolLogicalIfAction<_T>(
+  expr: AlgolLogicalAnon<_T>
+): expr is AlgolLogicalIfActionAnon<_T> {
+  return (expr as AlgolLogicalIfActionAnon<_T>).ifaction !== undefined;
 }
 
 export function isAlgolLogicalPlayerCase<_T>(

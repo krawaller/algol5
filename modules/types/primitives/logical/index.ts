@@ -7,6 +7,7 @@ import {
   AlgolLogicalIfActionElse,
   AlgolLogicalIfElse,
   AlgolLogicalIfPlayer,
+  AlgolLogicalIfAction,
   AlgolLogicalIndexList,
   AlgolLogicalPlayerCase,
   AlgolLogicalMulti
@@ -27,6 +28,7 @@ export type AlgolLogical<
   | AlgolLogicalIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolLogicalIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolLogicalIfPlayer<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolLogicalIfAction<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolLogicalPlayerCase<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolLogicalIfActionElse<
       _T,

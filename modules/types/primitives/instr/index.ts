@@ -18,7 +18,8 @@ import {
   AlgolInstrIfElse,
   AlgolInstrIfPlayer,
   AlgolInstrIndexList,
-  AlgolInstrPlayerCase
+  AlgolInstrPlayerCase,
+  AlgolInstrIfAction
 } from "./instr.logical";
 
 export type AlgolInstr<
@@ -54,6 +55,7 @@ export type AlgolInstr<
       Unit
     >
   | AlgolInstrIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrIfAction<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolInstrIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolInstrPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolInstrIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;

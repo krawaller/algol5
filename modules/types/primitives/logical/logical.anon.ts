@@ -5,6 +5,7 @@ import {
   AlgolLogicalIfActionElse,
   AlgolLogicalIfElse,
   AlgolLogicalIfPlayer,
+  AlgolLogicalIfAction,
   AlgolLogicalIndexList,
   AlgolLogicalPlayerCase,
   AlgolLogicalMulti
@@ -59,6 +60,18 @@ export type AlgolLogicalPlayerCaseAnon<_T> = AlgolLogicalPlayerCase<
 >;
 
 export type AlgolLogicalIfPlayerAnon<_T> = AlgolLogicalIfPlayer<
+  _T,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
+export type AlgolLogicalIfActionAnon<_T> = AlgolLogicalIfAction<
   _T,
   string,
   string,

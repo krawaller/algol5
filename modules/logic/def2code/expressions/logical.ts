@@ -7,6 +7,7 @@ import {
   isAlgolLogicalPlayerCase,
   isAlgolLogicalIf,
   isAlgolLogicalIfPlayer,
+  isAlgolLogicalIfAction,
   isAlgolLogicalMulti
 } from "../../../types";
 import makeParser from "./";
@@ -83,6 +84,18 @@ export default function parseLogical<_T>(
     }
     // As expression
     return forPlayer === player ? me(val) : "undefined";
+  }
+
+  if (isAlgolLogicalIfAction(expr)) {
+    const {
+      ifaction: [forAction, val]
+    } = expr;
+    // As statement
+    if (from === "effect") {
+      return forAction === action ? me(val) : "";
+    }
+    // As expression
+    return forAction === action ? me(val) : "undefined";
   }
 
   if (isAlgolLogicalMulti(expr)) {

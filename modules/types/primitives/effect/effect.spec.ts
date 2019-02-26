@@ -67,5 +67,6 @@ const tests: TestEffect[] = [
   { adoptid: [{ value: "someid" }, { value: ["otherplayer"] }] },
   { ifelse: [["true"], { killat: "mymark" }, { killat: "mymark" }] },
   { if: [["true"], { killat: "mymark" }] },
-  { ifplayer: [1, { killat: "mymark" }] }
+  { ifplayer: [1, { killat: "mymark" }] },
+  { ifaction: ["mycmnd", { killat: "mymark" }] }
 ];

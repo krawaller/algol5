@@ -61,6 +61,20 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
               },
               sample: "UNITDATA.unit1",
               res: truthy
+            },
+            {
+              expr: {
+                ifaction: ["someaction", { killat: "unit1mark" }]
+              },
+              sample: "UNITDATA.unit1",
+              res: falsy
+            },
+            {
+              expr: {
+                ifaction: ["otheraction", { killat: "unit1mark" }]
+              },
+              sample: "UNITDATA.unit1",
+              res: truthy
             }
           ]
         }

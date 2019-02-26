@@ -6,6 +6,7 @@ export * from "./effect.guard";
 import {
   AlgolEffectIf,
   AlgolEffectIfPlayer,
+  AlgolEffectIfAction,
   AlgolEffectIfActionElse,
   AlgolEffectIfElse,
   AlgolEffectIndexList,
@@ -82,6 +83,7 @@ export type AlgolEffect<
   | AlgolEffectMulti<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectIf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectIfPlayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolEffectIfAction<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolEffectIfActionElse<
       Btlp,

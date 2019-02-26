@@ -1,4 +1,4 @@
-import { AlgolVal, AlgolSet } from "../../";
+import { AlgolVal, AlgolSet, AlgolGenRef } from "../../";
 
 export type MarkDef<Btlp, Btlv, Cmnd, Gen, Grid, Layer, Mrk, Turnp, Turnv> = {
   nodeadends?: boolean;
@@ -25,22 +25,22 @@ export type MarkDef<Btlp, Btlv, Cmnd, Gen, Grid, Layer, Mrk, Turnp, Turnv> = {
     Turnp,
     Turnv
   >[];
-  runGenerator?: AlgolVal<
-    Gen,
+  runGenerator?: AlgolGenRef<
     Btlp,
     Btlv,
     Cmnd,
+    Gen,
     Grid,
     Layer,
     Mrk,
     Turnp,
     Turnv
   >;
-  runGenerators?: AlgolVal<
-    Gen,
+  runGenerators?: AlgolGenRef<
     Btlp,
     Btlv,
     Cmnd,
+    Gen,
     Grid,
     Layer,
     Mrk,

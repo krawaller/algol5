@@ -1,4 +1,4 @@
-import { AlgolVal } from "../../";
+import { AlgolVal, AlgolGenRef } from "../../";
 import { AlgolEffect } from "../../";
 
 export type CommandDef<
@@ -58,22 +58,22 @@ export type CommandDef<
     Turnp,
     Turnv
   >[];
-  runGenerator?: AlgolVal<
-    Gen,
+  runGenerator?: AlgolGenRef<
     Btlp,
     Btlv,
     Cmnd,
+    Gen,
     Grid,
     Layer,
     Mrk,
     Turnp,
     Turnv
   >;
-  runGenerators?: AlgolVal<
-    Gen,
+  runGenerators?: AlgolGenRef<
     Btlp,
     Btlv,
     Cmnd,
+    Gen,
     Grid,
     Layer,
     Mrk,

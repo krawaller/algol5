@@ -7,3 +7,4 @@ export * from "./effect";
 export * from "./entity";
 export * from "./instr";
 export * from "./dirs";
+export * from "./genref";

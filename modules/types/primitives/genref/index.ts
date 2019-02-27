@@ -1,3 +1,6 @@
+export * from "./genref.anon";
+export * from "./genref.logical";
+
 import {
   AlgolGenRefIf,
   AlgolGenRefIfPlayer,

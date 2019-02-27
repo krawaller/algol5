@@ -1,8 +1,8 @@
 import { executeGenerator } from "./";
 import { emptyFullDef, truthy, falsy } from "../../../common";
-import { NeighbourDefAnon, AlgolWriterSuite } from "../../../types";
+import { AlgolGenRefAnon, AlgolWriterSuite } from "../../../types";
 
-export const testSuite: AlgolWriterSuite<NeighbourDefAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
   title: "Artifacts - Neighbours",
   func: executeGenerator,
   defs: [
@@ -13,6 +13,52 @@ export const testSuite: AlgolWriterSuite<NeighbourDefAnon> = {
           ...emptyFullDef.board,
           height: 3,
           width: 3
+        },
+        generators: {
+          singleDirAndStartDrawNeighbours: {
+            type: "neighbour",
+            dir: 1,
+            start: "mymark",
+            draw: { neighbours: { tolayer: "flarps" } }
+          },
+          singleDirAndStartDrawNeighboursAndStart: {
+            type: "neighbour",
+            dir: 1,
+            start: "mymark",
+            draw: {
+              neighbours: { tolayer: "flarps" },
+              start: { tolayer: "blarps" }
+            }
+          },
+          singleStartOrthoDrawNeighbours: {
+            type: "neighbour",
+            dirs: ["ortho"],
+            start: "mymark",
+            draw: { neighbours: { tolayer: "flarps" } }
+          },
+          multiStartsDrawNeighbours: {
+            type: "neighbour",
+            dir: 1,
+            starts: { singles: ["mymark", "myothermark"] },
+            draw: { neighbours: { tolayer: "flarps" } }
+          },
+          multiStartMultiDirDrawNeighbours: {
+            type: "neighbour",
+            dirs: { list: [1, 3] },
+            starts: { singles: ["mymark", "myothermark"] },
+            draw: { neighbours: { tolayer: "flarps" } }
+          },
+          singleStartMultiDirInclNeighCount: {
+            type: "neighbour",
+            dirs: ["rose"],
+            start: "mymark",
+            draw: {
+              start: {
+                tolayer: "flarps",
+                include: { n: ["neighbourcount"] }
+              }
+            }
+          }
         }
       },
       player: 1,
@@ -25,70 +71,32 @@ export const testSuite: AlgolWriterSuite<NeighbourDefAnon> = {
           },
           tests: [
             {
-              expr: {
-                type: "neighbour",
-                dir: 1,
-                start: "mymark",
-                draw: { neighbours: { tolayer: "flarps" } }
-              },
+              expr: "singleDirAndStartDrawNeighbours",
               sample: "ARTIFACTS.flarps",
               res: { a2: {} }
             },
             {
-              expr: {
-                type: "neighbour",
-                dir: 1,
-                start: "mymark",
-                draw: {
-                  neighbours: { tolayer: "flarps" },
-                  start: { tolayer: "blarps" }
-                }
-              },
+              expr: "singleDirAndStartDrawNeighboursAndStart",
               sample: "ARTIFACTS",
               res: { flarps: { a2: {} }, blarps: { a1: {} } }
             },
             {
-              expr: {
-                type: "neighbour",
-                dirs: ["ortho"],
-                start: "mymark",
-                draw: { neighbours: { tolayer: "flarps" } }
-              },
+              expr: "singleStartOrthoDrawNeighbours",
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, b1: {} }
             },
             {
-              expr: {
-                type: "neighbour",
-                dir: 1,
-                starts: { singles: ["mymark", "myothermark"] },
-                draw: { neighbours: { tolayer: "flarps" } }
-              },
+              expr: "multiStartsDrawNeighbours",
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, b2: {} }
             },
             {
-              expr: {
-                type: "neighbour",
-                dirs: { list: [1, 3] },
-                starts: { singles: ["mymark", "myothermark"] },
-                draw: { neighbours: { tolayer: "flarps" } }
-              },
+              expr: "multiStartMultiDirDrawNeighbours",
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, b1: {}, b2: {}, c1: {} }
             },
             {
-              expr: {
-                type: "neighbour",
-                dirs: ["rose"],
-                start: "mymark",
-                draw: {
-                  start: {
-                    tolayer: "flarps",
-                    include: { n: ["neighbourcount"] }
-                  }
-                }
-              },
+              expr: "singleStartMultiDirInclNeighCount",
               sample: "ARTIFACTS.flarps",
               res: { a1: { n: 3 } },
               desc: "We can access neighbour count in start draw"

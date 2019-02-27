@@ -1,3 +1,5 @@
+export * from "./expression.anon";
+
 import {
   AlgolLogicalIfActionElse,
   AlgolLogicalIfElse,

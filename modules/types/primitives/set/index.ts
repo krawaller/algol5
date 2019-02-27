@@ -12,14 +12,30 @@ import {
   AlgolSetUnion
 } from "./set.interface";
 
-import {
-  AlgolSetIfActionElse,
-  AlgolSetIfElse,
-  AlgolSetIndexList,
-  AlgolSetPlayerCase
-} from "./set.logical";
+import { AlgolExpression } from "../../";
 
-export type AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
+export type AlgolSet<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> = AlgolExpression<
+  AlgolSetInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+>;
+
+type AlgolSetInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | Layer
   | ["empty"]
   | AlgolSetLayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
@@ -28,8 +44,4 @@ export type AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolSetGroupAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetUnion<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetIntersect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetSubtract<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolSetSubtract<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

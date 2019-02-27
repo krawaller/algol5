@@ -1,4 +1,5 @@
 export * from "./logical";
+export * from "./expression";
 export * from "./bool";
 export * from "./pos";
 export * from "./set";

@@ -1,6 +1,5 @@
 export * from "./bool.anon";
 export * from "./bool.interfaces";
-export * from "./bool.logical";
 export * from "./bool.guard";
 
 import {
@@ -25,14 +24,30 @@ import {
   AlgolBoolValInList
 } from "./bool.interfaces";
 
-import {
-  AlgolBoolIfElse,
-  AlgolBoolIfActionElse,
-  AlgolBoolPlayerCase,
-  AlgolBoolIndexList
-} from "./bool.logical";
+import { AlgolExpression } from "../../";
 
-export type AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
+export type AlgolBool<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> = AlgolExpression<
+  AlgolBoolInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+>;
+
+type AlgolBoolInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | ["true"]
   | ["false"]
   | AlgolBoolNot<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
@@ -53,8 +68,4 @@ export type AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolBoolValInList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolBoolMoreThan<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolBoolTruthy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolFalsy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolIfElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolIfActionElse<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolPlayerCase<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolIndexList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolBoolFalsy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

@@ -41,8 +41,6 @@ const tests: TestVal[] = [
   ["loopid"],
   { reldir: [1, { read: ["mylayer", "mymark", "someProp"] }] },
   { indexlist: [["dir"], "FOO", "BAR", "FOO", { value: "FOO" }] },
-  { if: [["true"], "FOO"] },
-  { ifplayer: [1, "FOO"] },
   { pos: "mymark" },
   { sizeof: "mylayer" },
   { harvest: ["mylayer", { value: "someProp" }] },

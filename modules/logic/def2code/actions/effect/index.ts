@@ -2,6 +2,7 @@ export * from "./updateUnitLayers";
 
 import {
   AlgolEffectAnon,
+  AlgolEffectInnerAnon,
   FullDefAnon,
   isAlgolEffectKillAt,
   isAlgolEffectKillId,
@@ -53,7 +54,7 @@ function executeEffectInner(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  effect: AlgolEffectAnon
+  effect: AlgolEffectInnerAnon
 ): string {
   const parser = makeParser(gameDef, player, action, "effect");
   const me = (efct: AlgolEffectAnon) =>

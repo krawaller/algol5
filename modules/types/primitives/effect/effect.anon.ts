@@ -1,4 +1,4 @@
-import { AlgolEffect } from "./";
+import { AlgolEffect, AlgolEffectInner } from "./";
 
 import {
   AlgolEffectForIdIn,
@@ -30,6 +30,18 @@ import {
 } from "./effect.interfaces";
 
 export type AlgolEffectAnon = AlgolEffect<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
+export type AlgolEffectInnerAnon = AlgolEffectInner<
   string,
   string,
   string,

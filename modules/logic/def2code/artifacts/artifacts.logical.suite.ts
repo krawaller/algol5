@@ -1,10 +1,10 @@
-import { executeGenerator } from "./";
+import { executeOrder } from "../executors";
 import { emptyFullDef } from "../../../common";
-import { AlgolGenRefAnon, AlgolWriterSuite } from "../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Artifacts - Neighbours",
-  func: executeGenerator,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -33,13 +33,13 @@ export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
           },
           tests: [
             {
-              expr: { ifplayer: [1, "simpleOrthoReacher"] },
+              expr: { generators: [{ ifplayer: [1, "simpleOrthoReacher"] }] },
               sample: "ARTIFACTS.neighbours",
               res: { a2: {}, b1: {}, b3: {}, c2: {} },
               desc: "Generator is run if if is truthy"
             },
             {
-              expr: { ifplayer: [2, "simpleOrthoReacher"] },
+              expr: { generators: [{ ifplayer: [2, "simpleOrthoReacher"] }] },
               sample: "ARTIFACTS.neighbours",
               res: {},
               desc: "Generator is not run if if is falsy"

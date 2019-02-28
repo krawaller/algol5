@@ -1,10 +1,10 @@
-import { executeGenerator } from ".";
-import { emptyFullDef, truthy, falsy } from "../../../common";
-import { AlgolGenRefAnon, AlgolWriterSuite } from "../../../types";
+import { executeOrder } from "../executors";
+import { emptyFullDef } from "../../../common";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Artifacts - Walker - Count",
-  func: executeGenerator,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -80,25 +80,25 @@ export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
           },
           tests: [
             {
-              expr: "totalCount",
+              expr: { generators: ["totalCount"] },
               sample: "ARTIFACTS.flarps",
               res: { a1: { total: 2 } },
               desc: "It can count a given set"
             },
             {
-              expr: "drawCount",
+              expr: { generators: ["drawCount"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: { total: 2 }, a4: { total: 2 } },
               desc: "It can draw the counted steps"
             },
             {
-              expr: "totalAndLast",
+              expr: { generators: ["totalAndLast"] },
               sample: "ARTIFACTS.flarps",
               res: { a4: { n: 2 } },
               desc: "It can handle last and totalcount"
             },
             {
-              expr: "countSoFar",
+              expr: { generators: ["countSoFar"] },
               sample: "ARTIFACTS.flarps",
               res: {
                 a1: { now: 0 },

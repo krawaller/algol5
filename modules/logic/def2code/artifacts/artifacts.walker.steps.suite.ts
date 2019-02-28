@@ -1,10 +1,10 @@
-import { executeGenerator } from ".";
-import { emptyFullDef, truthy, falsy } from "../../../common";
-import { AlgolGenRefAnon, AlgolWriterSuite } from "../../../types";
+import { executeOrder } from "../executors";
+import { emptyFullDef } from "../../../common";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Artifacts - Walker - Steps",
-  func: executeGenerator,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -94,38 +94,38 @@ export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
           },
           tests: [
             {
-              expr: "withSteps",
+              expr: { generators: ["withSteps"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, a3: {} },
               desc: "It doesnt mark beyond given steps"
             },
             {
-              expr: "startAsStep",
+              expr: { generators: ["startAsStep"] },
               sample: "ARTIFACTS.flarps",
               res: { a1: {}, a2: {}, a3: {} },
               desc: "It can be told to include start in steps"
             },
             {
-              expr: "startAsStepWithCount",
+              expr: { generators: ["startAsStepWithCount"] },
               sample: "ARTIFACTS.flarps",
               res: { a1: { n: 1 }, a2: { n: 2 }, a3: { n: 3 } },
               desc: "Stepcount is adjusted when including start in steps"
             },
             {
-              expr: "startAsStepNoSteps",
+              expr: { generators: ["startAsStepNoSteps"] },
               sample: "ARTIFACTS.flarps",
               res: undefined,
               desc:
                 "If include start as step and no step at start, it draws nothing"
             },
             {
-              expr: "stepsBeforeBlocks",
+              expr: { generators: ["stepsBeforeBlocks"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, a1: { because: "nomoresteps" } },
               desc: "It checks steps before blocks by default"
             },
             {
-              expr: "blocksBeforeSteps",
+              expr: { generators: ["blocksBeforeSteps"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, a1: { because: "hitblock" } },
               desc: "It can be told to check blocks before steps"

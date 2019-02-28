@@ -1,10 +1,10 @@
-import { executeGenerator } from ".";
-import { emptyFullDef, truthy, falsy } from "../../../common";
-import { AlgolGenRefAnon, AlgolWriterSuite } from "../../../types";
+import { executeOrder } from "../executors";
+import { emptyFullDef } from "../../../common";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Artifacts - Walker - Basics",
-  func: executeGenerator,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -67,31 +67,31 @@ export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
           },
           tests: [
             {
-              expr: "singleStartDirDrawSteps",
+              expr: { generators: ["singleStartDirDrawSteps"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, a3: {}, a4: {} },
               desc: "A simple walker walks to end"
             },
             {
-              expr: "singleStartDirInclStepNumber",
+              expr: { generators: ["singleStartDirInclStepNumber"] },
               sample: "ARTIFACTS.flarps",
               res: { c1: { n: 1 }, d1: { n: 2 } },
               desc: "It can number the steps"
             },
             {
-              expr: "singleStartDirInclLength",
+              expr: { generators: ["singleStartDirInclLength"] },
               sample: "ARTIFACTS.flarps",
               res: { a1: { l: 3 } },
               desc: "It can tell total length"
             },
             {
-              expr: "drawLast",
+              expr: { generators: ["drawLast"] },
               sample: "ARTIFACTS.flarps",
               res: { a4: {} },
               desc: "It can draw last"
             },
             {
-              expr: "drawBlocks",
+              expr: { generators: ["drawBlocks"] },
               sample: "ARTIFACTS.flarps",
               res: { a3: {}, d4: {} },
               desc: "It draws blocks"

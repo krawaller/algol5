@@ -1,10 +1,10 @@
-import { executeGenerator } from "./";
-import { emptyFullDef, truthy, falsy } from "../../../common";
-import { AlgolGenRefAnon, AlgolWriterSuite } from "../../../types";
+import { executeOrder } from "../executors";
+import { emptyFullDef } from "../../../common";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Artifacts - Neighbours",
-  func: executeGenerator,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -71,32 +71,32 @@ export const testSuite: AlgolWriterSuite<AlgolGenRefAnon> = {
           },
           tests: [
             {
-              expr: "singleDirAndStartDrawNeighbours",
+              expr: { generators: ["singleDirAndStartDrawNeighbours"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: {} }
             },
             {
-              expr: "singleDirAndStartDrawNeighboursAndStart",
+              expr: { generators: ["singleDirAndStartDrawNeighboursAndStart"] },
               sample: "ARTIFACTS",
               res: { flarps: { a2: {} }, blarps: { a1: {} } }
             },
             {
-              expr: "singleStartOrthoDrawNeighbours",
+              expr: { generators: ["singleStartOrthoDrawNeighbours"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, b1: {} }
             },
             {
-              expr: "multiStartsDrawNeighbours",
+              expr: { generators: ["multiStartsDrawNeighbours"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, b2: {} }
             },
             {
-              expr: "multiStartMultiDirDrawNeighbours",
+              expr: { generators: ["multiStartMultiDirDrawNeighbours"] },
               sample: "ARTIFACTS.flarps",
               res: { a2: {}, b1: {}, b2: {}, c1: {} }
             },
             {
-              expr: "singleStartMultiDirInclNeighCount",
+              expr: { generators: ["singleStartMultiDirInclNeighCount"] },
               sample: "ARTIFACTS.flarps",
               res: { a1: { n: 3 } },
               desc: "We can access neighbour count in start draw"

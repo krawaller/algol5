@@ -1,10 +1,10 @@
-import { updateUnitLayers } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef } from "../../../../common";
-import { AlgolWriterSuite } from "../../../../types";
+import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<boolean> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - UpdateUnitLayers",
-  func: updateUnitLayers,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -29,7 +29,7 @@ export const testSuite: AlgolWriterSuite<boolean> = {
           },
           tests: [
             {
-              expr: true,
+              expr: ["unitLayers"],
               sample: "UNITLAYERS",
               res: {
                 units: {

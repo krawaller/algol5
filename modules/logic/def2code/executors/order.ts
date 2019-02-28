@@ -12,6 +12,7 @@ import { executeStatement } from "./";
 import { executeLink } from "../actions/link";
 import { executeEffect } from "../actions/effect";
 import { executeGenerator } from "../artifacts";
+import { updateUnitLayers } from "../actions/effect";
 
 export function executeOrder(
   gameDef: FullDefAnon,
@@ -35,6 +36,12 @@ function executeOrderInner(
   action: string,
   order: AlgolOrderInnerAnon
 ): string {
+  if (Array.isArray(order)) {
+    switch (order[0]) {
+      case "unitLayers":
+        return updateUnitLayers(gameDef, player, action, true); // TODO - fix
+    }
+  }
   if (isAlgolOrderLinks(order)) {
     return executeLink(gameDef, player, action, { multi: order.links });
   }

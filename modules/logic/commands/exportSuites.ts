@@ -12,15 +12,15 @@ getSuites().then(async suites => {
     s.replace(moduleRoot, "..").replace(/\.ts$/, "")
   );
 
-  let file = `import {TestSuite} from '../../types';\n\n`;
+  let file = `import { AlgolWriterSuite } from "../../types";\n\n`;
 
   file += paths
-    .map((p, n) => `import {testSuite as testSuite${n + 1}} from '${p}';`)
+    .map((p, n) => `import { testSuite as testSuite${n + 1} } from "${p}";`)
     .join("\n");
 
   file += `
 
-const suites: TestSuite<any>[] = [
+const suites: AlgolWriterSuite<any>[] = [
   ${paths.map((p, n) => `testSuite${n + 1}`).join(",\n  ")}
 ];
 

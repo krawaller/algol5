@@ -9,10 +9,11 @@ import {
 
 import parseValue from "./value";
 import parseBool from "./bool";
-import parseLogical from "./logical";
 import parsePos from "./pos";
 import parseSet from "./set";
 import parseDirs from "./dirs";
+
+import { executeExpression } from "../executors";
 
 export const parserTester = <T>(
   type: "set" | "bool" | "val" | "pos" | "dirs"
@@ -33,15 +34,15 @@ export default function makeParser(
 ) {
   const parsers = {
     val: (expr: AlgolValAnon): string | number =>
-      parseLogical(gameDef, player, action, parseValue, expr, from),
+      executeExpression(gameDef, player, action, parseValue, expr, from),
     bool: (expr: AlgolBoolAnon): string | number =>
-      parseLogical(gameDef, player, action, parseBool, expr, from),
+      executeExpression(gameDef, player, action, parseBool, expr, from),
     pos: (expr: AlgolPosAnon): string | number =>
-      parseLogical(gameDef, player, action, parsePos, expr, from),
+      executeExpression(gameDef, player, action, parsePos, expr, from),
     set: (expr: AlgolSetAnon): string | number =>
-      parseLogical(gameDef, player, action, parseSet, expr, from),
+      executeExpression(gameDef, player, action, parseSet, expr, from),
     dirs: (expr: AlgolDirsAnon): string | number =>
-      parseLogical(gameDef, player, action, parseDirs, expr, from)
+      executeExpression(gameDef, player, action, parseDirs, expr, from)
   };
   return parsers;
 }

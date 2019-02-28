@@ -1,6 +1,6 @@
 import {
   FullDefAnon,
-  AlgolLogicalAnon,
+  AlgolStatementAnon,
   isAlgolLogicalIfElse,
   isAlgolLogicalIfActionElse,
   isAlgolLogicalIndexList,
@@ -10,31 +10,28 @@ import {
   isAlgolLogicalIfAction,
   isAlgolLogicalMulti
 } from "../../../types";
-import makeParser from "./";
+import makeParser from "../expressions";
 
-export default function parseLogical<_T>(
+export function executeStatement<_T>(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
   parser,
-  expr: AlgolLogicalAnon<_T>,
+  expr: AlgolStatementAnon<_T>,
   from
 ) {
   const parse = makeParser(gameDef, player, action, from);
-  const me = expr => parseLogical(gameDef, player, action, parser, expr, from);
+  const me = expr =>
+    executeStatement(gameDef, player, action, parser, expr, from);
 
   if (isAlgolLogicalIfElse(expr)) {
     const {
       ifelse: [test, whenTruthy, whenFalsy]
     } = expr;
-    // As statement
-    if (from === "effect") {
-      return `if (${parse.bool(test)}) { ${me(whenTruthy)} } else { ${me(
-        whenFalsy
-      )} }`;
-    }
-    // As expression
-    return `(${parse.bool(test)} ? ${me(whenTruthy)} : ${me(whenFalsy)})`;
+
+    return `if (${parse.bool(test)}) { ${me(whenTruthy)} } else { ${me(
+      whenFalsy
+    )} }`;
   }
 
   if (isAlgolLogicalIfActionElse(expr)) {
@@ -66,42 +63,26 @@ export default function parseLogical<_T>(
     const {
       if: [test, val]
     } = expr;
-    // As statement
-    if (from === "effect") {
-      return `if (${parse.bool(test)}) { ${me(val)} }`;
-    }
-    // As expression
-    return `(${parse.bool(test)} ? ${me(val)} : undefined)`;
+    return `if (${parse.bool(test)}) { ${me(val)} }`;
   }
 
   if (isAlgolLogicalIfPlayer(expr)) {
     const {
       ifplayer: [forPlayer, val]
     } = expr;
-    // As statement
-    if (from === "effect") {
-      return forPlayer === player ? me(val) : "";
-    }
-    // As expression
-    return forPlayer === player ? me(val) : "undefined";
+    return forPlayer === player ? me(val) : "";
   }
 
   if (isAlgolLogicalIfAction(expr)) {
     const {
       ifaction: [forAction, val]
     } = expr;
-    // As statement
-    if (from === "effect") {
-      return forAction === action ? me(val) : "";
-    }
-    // As expression
-    return forAction === action ? me(val) : "undefined";
+    return forAction === action ? me(val) : "";
   }
 
   if (isAlgolLogicalMulti(expr)) {
     const { multi: children } = expr;
     return children.map(me).join(" ");
   }
-
   return parser(gameDef, player, action, expr, from);
 }

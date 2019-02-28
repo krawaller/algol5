@@ -31,7 +31,7 @@ import {
   isAlgolEffectAdoptId
 } from "../../../../types";
 import makeParser from "../../expressions";
-import parseLogical from "../../expressions/logical";
+import { executeStatement } from "../../executors";
 
 export function executeEffect(
   gameDef: FullDefAnon,
@@ -39,7 +39,7 @@ export function executeEffect(
   action: string,
   effect: AlgolEffectAnon
 ): string {
-  return parseLogical(
+  return executeStatement(
     gameDef,
     player,
     action,

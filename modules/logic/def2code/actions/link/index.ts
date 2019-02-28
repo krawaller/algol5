@@ -1,11 +1,33 @@
 import makeParser from "../../expressions";
-import { FullDefAnon } from "../../../../types";
+import {
+  FullDefAnon,
+  AlgolLinkAnon,
+  AlgolLinkInnerAnon
+} from "../../../../types";
+
+import { executeStatement } from "../../executors";
 
 export function executeLink(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  name: string
+  link: AlgolLinkAnon
+): string {
+  return executeStatement(
+    gameDef,
+    player,
+    action,
+    executeLinkInner,
+    link,
+    "link"
+  );
+}
+
+function executeLinkInner(
+  gameDef: FullDefAnon,
+  player: 1 | 2,
+  action: string,
+  name: AlgolLinkInnerAnon
 ): string {
   const parser = makeParser(gameDef, player, action);
   const stepLinkLookup = action === "start" ? ".root" : "[newStepId]";

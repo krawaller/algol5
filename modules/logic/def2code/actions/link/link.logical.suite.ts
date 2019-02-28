@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../../../common";
 import { AlgolWriterSuite, AlgolLinkAnon } from "../../../../types";
 
 export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
-  title: "Link - Command",
+  title: "Link - Logical",
   func: executeLink,
   defs: [
     {
@@ -28,10 +28,16 @@ export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
           },
           tests: [
             {
-              expr: "mycmnd",
+              expr: { ifplayer: [1, "mycmnd"] },
               sample: "turn.links.root",
               res: { mycmnd: "mycmnd1", b3: "somemark" },
-              desc: "we can link to a cmnd from start"
+              desc: "link is performed if if is truthy"
+            },
+            {
+              expr: { ifplayer: [2, "mycmnd"] },
+              sample: "turn.links.root",
+              res: { b3: "somemark" },
+              desc: "link is not performed if if is falsy"
             }
           ]
         }

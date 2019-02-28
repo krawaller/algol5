@@ -1,8 +1,8 @@
 import { executeLink } from "./";
 import { emptyFullDef } from "../../../../common";
-import { AlgolWriterSuite } from "../../../../types";
+import { AlgolWriterSuite, AlgolLinkAnon } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<string> = {
+export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
   title: "Link - EndTurn",
   func: executeLink,
   defs: [

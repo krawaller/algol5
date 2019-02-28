@@ -24,7 +24,7 @@ export type AlgolGenRef<
   Turnv
 >;
 
-type AlgolGenRefInner<
+export type AlgolGenRefInner<
   Btlp,
   Btlv,
   Cmnd,

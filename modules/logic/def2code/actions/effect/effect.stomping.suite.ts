@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Stomping",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: emptyFullDef,
@@ -24,12 +24,14 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           },
           tests: [
             {
-              expr: { stompat: ["unit1mark", "unit2mark"] },
+              expr: { effects: [{ stompat: ["unit1mark", "unit2mark"] }] },
               sample: "UNITDATA.unit1.pos === 'b2' && !UNITDATA.unit2",
               res: truthy
             },
             {
-              expr: { stompid: [{ value: "unit1" }, "unit2mark"] },
+              expr: {
+                effects: [{ stompid: [{ value: "unit1" }, "unit2mark"] }]
+              },
               sample: "UNITDATA.unit1.pos === 'b2' && !UNITDATA.unit2",
               res: truthy
             }

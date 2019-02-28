@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Moving",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: emptyFullDef,
@@ -23,12 +23,14 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           },
           tests: [
             {
-              expr: { moveat: ["unit1mark", "othermark"] },
+              expr: { effects: [{ moveat: ["unit1mark", "othermark"] }] },
               sample: "UNITDATA.unit1.pos",
               res: "c3"
             },
             {
-              expr: { moveid: [{ value: "unit1" }, "othermark"] },
+              expr: {
+                effects: [{ moveid: [{ value: "unit1" }, "othermark"] }]
+              },
               sample: "UNITDATA.unit1.pos",
               res: "c3"
             }

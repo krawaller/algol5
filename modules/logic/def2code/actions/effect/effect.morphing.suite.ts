@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Morphing",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: emptyFullDef,
@@ -24,17 +24,21 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           },
           tests: [
             {
-              expr: { morphat: ["unit1mark", { value: "berps" }] },
+              expr: {
+                effects: [{ morphat: ["unit1mark", { value: "berps" }] }]
+              },
               sample: "UNITDATA.unit1.group",
               res: "berps"
             },
             {
-              expr: { morphid: [{ value: "unit2" }, { value: "berps" }] },
+              expr: {
+                effects: [{ morphid: [{ value: "unit2" }, { value: "berps" }] }]
+              },
               sample: "UNITDATA.unit2.group",
               res: "berps"
             },
             {
-              expr: { morphin: ["units", "berps"] },
+              expr: { effects: [{ morphin: ["units", "berps"] }] },
               sample:
                 "UNITDATA.unit1.group === 'berps' && UNITDATA.unit2.group === 'berps'",
               res: truthy

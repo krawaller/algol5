@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Killing",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: emptyFullDef,
@@ -24,22 +24,22 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           },
           tests: [
             {
-              expr: { killat: "unit1mark" },
+              expr: { effects: [{ killat: "unit1mark" }] },
               sample: "UNITDATA.unit2 && !UNITDATA.unit1",
               res: truthy
             },
             {
-              expr: { killid: "unit1" },
+              expr: { effects: [{ killid: "unit1" }] },
               sample: "UNITDATA.unit1",
               res: falsy
             },
             {
-              expr: { killid: { value: "unit1" } },
+              expr: { effects: [{ killid: { value: "unit1" } }] },
               sample: "UNITDATA.unit1",
               res: falsy
             },
             {
-              expr: { killin: { single: "unit1mark" } },
+              expr: { effects: [{ killin: { single: "unit1mark" } }] },
               sample: "!UNITDATA.unit1 && UNITDATA.unit2",
               res: truthy
             }

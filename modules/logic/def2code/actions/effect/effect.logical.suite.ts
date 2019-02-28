@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Logical",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: emptyFullDef,
@@ -25,10 +25,14 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           tests: [
             {
               expr: {
-                ifelse: [
-                  ["true"],
-                  { killat: "unit1mark" },
-                  { killat: "unit2mark" }
+                effects: [
+                  {
+                    ifelse: [
+                      ["true"],
+                      { killat: "unit1mark" },
+                      { killat: "unit2mark" }
+                    ]
+                  }
                 ]
               },
               sample: "!UNITDATA.unit1 && UNITDATA.unit2",
@@ -36,42 +40,66 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
             },
             {
               expr: {
-                if: [["true"], { killat: "unit1mark" }]
+                effects: [
+                  {
+                    if: [["true"], { killat: "unit1mark" }]
+                  }
+                ]
               },
               sample: "UNITDATA.unit1",
               res: falsy
             },
             {
               expr: {
-                if: [["false"], { killat: "unit1mark" }]
+                effects: [
+                  {
+                    if: [["false"], { killat: "unit1mark" }]
+                  }
+                ]
               },
               sample: "UNITDATA.unit1",
               res: truthy
             },
             {
               expr: {
-                ifplayer: [1, { killat: "unit1mark" }]
+                effects: [
+                  {
+                    ifplayer: [1, { killat: "unit1mark" }]
+                  }
+                ]
               },
               sample: "UNITDATA.unit1",
               res: falsy
             },
             {
               expr: {
-                ifplayer: [2, { killat: "unit1mark" }]
+                effects: [
+                  {
+                    ifplayer: [2, { killat: "unit1mark" }]
+                  }
+                ]
               },
               sample: "UNITDATA.unit1",
               res: truthy
             },
             {
               expr: {
-                ifaction: ["someaction", { killat: "unit1mark" }]
+                effects: [
+                  {
+                    ifaction: ["someaction", { killat: "unit1mark" }]
+                  }
+                ]
               },
               sample: "UNITDATA.unit1",
               res: falsy
             },
             {
               expr: {
-                ifaction: ["otheraction", { killat: "unit1mark" }]
+                effects: [
+                  {
+                    ifaction: ["otheraction", { killat: "unit1mark" }]
+                  }
+                ]
               },
               sample: "UNITDATA.unit1",
               res: truthy

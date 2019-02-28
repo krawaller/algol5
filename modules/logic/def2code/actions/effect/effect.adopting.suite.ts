@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Adopting",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: emptyFullDef,
@@ -24,19 +24,23 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           },
           tests: [
             {
-              expr: { adoptat: ["unit1mark", { value: 0 }] },
+              expr: { effects: [{ adoptat: ["unit1mark", { value: 0 }] }] },
               sample: "UNITDATA.unit1.owner",
               res: 0
             },
             {
               expr: {
-                adoptid: [{ value: "unit2" }, { value: ["otherplayer"] }]
+                effects: [
+                  {
+                    adoptid: [{ value: "unit2" }, { value: ["otherplayer"] }]
+                  }
+                ]
               },
               sample: "UNITDATA.unit2.owner",
               res: 2
             },
             {
-              expr: { adoptin: ["units", 0] },
+              expr: { effects: [{ adoptin: ["units", 0] }] },
               sample:
                 "UNITDATA.unit1.owner === 0 && UNITDATA.unit2.owner === 0",
               res: truthy

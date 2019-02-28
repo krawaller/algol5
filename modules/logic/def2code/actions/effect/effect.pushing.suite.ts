@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Pushing",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -36,13 +36,13 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           },
           tests: [
             {
-              expr: { pushat: ["unit1mark", 2, 3] },
+              expr: { effects: [{ pushat: ["unit1mark", 2, 3] }] },
               sample: "UNITDATA.unit1.pos",
-              res: "d4", // 3 steps northeast (2) of a1
+              res: "d4", // 3 steps northeast (dir 2) of a1
               desc: "We can push a single unit"
             },
             {
-              expr: { pushin: ["units", 3, 2] },
+              expr: { effects: [{ pushin: ["units", 3, 2] }] },
               sample: "UNITDATA",
               res: {
                 unit1: { pos: "c1", id: "unit1" },

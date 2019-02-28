@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Util",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: emptyFullDef,
@@ -25,25 +25,37 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           tests: [
             {
               expr: {
-                forposin: [{ single: "unit1mark" }, { killat: ["looppos"] }]
+                effects: [
+                  {
+                    forposin: [{ single: "unit1mark" }, { killat: ["looppos"] }]
+                  }
+                ]
               },
               sample: "!UNITDATA.unit1 && UNITDATA.unit2",
               res: truthy
             },
             {
-              expr: { multi: [{ killid: "unit2" }, { killid: "unit1" }] },
+              expr: {
+                effects: [{ multi: [{ killid: "unit2" }, { killid: "unit1" }] }]
+              },
               sample: "UNITDATA.unit1 || UNITDATA.unit2",
               res: falsy
             },
             {
               expr: {
-                foridin: [{ single: "unit1mark" }, { killid: ["loopid"] }]
+                effects: [
+                  {
+                    foridin: [{ single: "unit1mark" }, { killid: ["loopid"] }]
+                  }
+                ]
               },
               sample: "!UNITDATA.unit1 && UNITDATA.unit2",
               res: truthy
             },
             {
-              expr: { foridin: ["units", { killid: ["loopid"] }] },
+              expr: {
+                effects: [{ foridin: ["units", { killid: ["loopid"] }] }]
+              },
               sample: "UNITDATA",
               res: {}
             }

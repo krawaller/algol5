@@ -2,12 +2,14 @@ import {
   FullDefAnon,
   AlgolOrderAnon,
   AlgolOrderInnerAnon,
-  isAlgolOrderLinks
+  isAlgolOrderLinks,
+  isAlgolOrderDoEffects
 } from "../../../types";
 
 import { executeStatement } from "./";
 
 import { executeLink } from "../actions/link";
+import { executeEffect } from "../actions/effect";
 
 export function executeOrder(
   gameDef: FullDefAnon,
@@ -33,6 +35,9 @@ function executeOrderInner(
 ): string {
   if (isAlgolOrderLinks(order)) {
     return executeLink(gameDef, player, action, { multi: order.links });
+  }
+  if (isAlgolOrderDoEffects(order)) {
+    return executeEffect(gameDef, player, action, { multi: order.effects });
   }
   throw new Error("Unknown order: " + JSON.stringify(order));
 }

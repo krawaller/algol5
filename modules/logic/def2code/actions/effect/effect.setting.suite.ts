@@ -1,10 +1,10 @@
-import { executeEffect } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolEffectAnon, AlgolWriterSuite } from "../../../../types";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Setting",
-  func: executeEffect,
+  func: executeOrder,
   defs: [
     {
       def: emptyFullDef,
@@ -25,18 +25,24 @@ export const testSuite: AlgolWriterSuite<AlgolEffectAnon> = {
           tests: [
             {
               expr: {
-                setat: ["unit1mark", { value: "prop" }, { value: "wee" }]
+                effects: [
+                  {
+                    setat: ["unit1mark", { value: "prop" }, { value: "wee" }]
+                  }
+                ]
               },
               sample: "UNITDATA.unit1.prop",
               res: "wee"
             },
             {
-              expr: { setin: [{ single: "unit1mark" }, "prop", "wee"] },
+              expr: {
+                effects: [{ setin: [{ single: "unit1mark" }, "prop", "wee"] }]
+              },
               sample: "UNITDATA.unit1.prop",
               res: "wee"
             },
             {
-              expr: { setid: ["unit2", "prop", "wee"] },
+              expr: { effects: [{ setid: ["unit2", "prop", "wee"] }] },
               sample: "UNITDATA.unit2.prop",
               res: "wee"
             }

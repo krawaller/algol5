@@ -1,4 +1,4 @@
-import { AlgolGenRef, AlgolEffect } from "../../";
+import { AlgolGenRef, AlgolEffect, AlgolLink } from "../../";
 
 export interface AlgolOrderRunGenerators<
   Btlp,
@@ -48,4 +48,19 @@ export interface AlgolOrderDoEffects<
     Turnv,
     Unit
   >[];
+}
+
+export interface AlgolOrderLinks<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Gen,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+> {
+  links: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
 }

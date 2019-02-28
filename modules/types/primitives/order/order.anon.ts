@@ -2,7 +2,8 @@ import { AlgolOrder, AlgolOrderInner } from "./";
 
 import {
   AlgolOrderRunGenerators,
-  AlgolOrderDoEffects
+  AlgolOrderDoEffects,
+  AlgolOrderLinks
 } from "./order.interfaces";
 
 export type AlgolOrderAnon = AlgolOrder<
@@ -45,6 +46,19 @@ export type AlgolOrderRunGeneratorsAnon = AlgolOrderRunGenerators<
 >;
 
 export type AlgolOrderDoEffectsAnon = AlgolOrderDoEffects<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
+export type AlgolOrderLinksAnon = AlgolOrderLinks<
   string,
   string,
   string,

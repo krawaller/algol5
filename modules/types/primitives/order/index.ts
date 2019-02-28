@@ -4,7 +4,8 @@ export * from "./order.guard";
 
 import {
   AlgolOrderRunGenerators,
-  AlgolOrderDoEffects
+  AlgolOrderDoEffects,
+  AlgolOrderLinks
 } from "./order.interfaces";
 
 import { AlgolStatement } from "../../";
@@ -58,6 +59,18 @@ export type AlgolOrderInner<
       Unit
     >
   | AlgolOrderDoEffects<
+      Btlp,
+      Btlv,
+      Cmnd,
+      Gen,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv,
+      Unit
+    >
+  | AlgolOrderLinks<
       Btlp,
       Btlv,
       Cmnd,

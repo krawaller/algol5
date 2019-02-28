@@ -3,16 +3,35 @@ import {
   isNeighbourDef,
   isWalkerDef,
   GeneratorDefAnon,
-  AlgolGenRefAnon
+  AlgolGenRefAnon,
+  AlgolGenRefInnerAnon
 } from "../../../types";
 import executeNeighbours from "./neighbours";
 import executeWalker from "./walker";
+
+import { executeStatement } from "../executors";
 
 export function executeGenerator(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  genRef: AlgolGenRefAnon
+  link: AlgolGenRefAnon
+): string {
+  return executeStatement(
+    gameDef,
+    player,
+    action,
+    executeGeneratorInner,
+    link,
+    "link"
+  );
+}
+
+function executeGeneratorInner(
+  gameDef: FullDefAnon,
+  player: 1 | 2,
+  action: string,
+  genRef: AlgolGenRefInnerAnon
 ) {
   const genDef: GeneratorDefAnon = gameDef.generators[genRef as string];
   if (isNeighbourDef(genDef)) {

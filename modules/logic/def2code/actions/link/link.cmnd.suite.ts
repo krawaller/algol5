@@ -1,10 +1,10 @@
-import { executeLink } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef } from "../../../../common";
-import { AlgolWriterSuite, AlgolLinkAnon } from "../../../../types";
+import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Link - Command",
-  func: executeLink,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -28,7 +28,7 @@ export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
           },
           tests: [
             {
-              expr: "mycmnd",
+              expr: { links: ["mycmnd"] },
               sample: "turn.links.root",
               res: { mycmnd: "mycmnd1", b3: "somemark" },
               desc: "we can link to a cmnd from start"
@@ -60,7 +60,7 @@ export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
           },
           tests: [
             {
-              expr: "mycmnd",
+              expr: { links: ["mycmnd"] },
               sample: "turn.links.foo",
               res: { mycmnd: "mycmnd2", b3: "somemark" },
               desc: "we can link to a cmnd from non-start"

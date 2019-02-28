@@ -1,10 +1,10 @@
-import { executeLink } from "./";
+import { executeOrder } from "../../executors";
 import { emptyFullDef } from "../../../../common";
-import { AlgolWriterSuite, AlgolLinkAnon } from "../../../../types";
+import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
+export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Link - EndTurn",
-  func: executeLink,
+  func: executeOrder,
   defs: [
     {
       def: {
@@ -39,7 +39,7 @@ export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
           },
           tests: [
             {
-              expr: "endturn",
+              expr: { links: ["endturn"] },
               sample: "turn.links.foo",
               res: { endturn: "start2", otherlink: "someaction" },
               desc: "we can link to endturn, passing over to next plr"
@@ -55,13 +55,13 @@ export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
           },
           tests: [
             {
-              expr: "endturn",
+              expr: { links: ["endturn"] },
               sample: "turn.links.foo",
               res: { win: "conquer", otherlink: "someaction" },
               desc: "we can link to winning the game"
             },
             {
-              expr: "endturn",
+              expr: { links: ["endturn"] },
               sample: "turn.endMarks.foo",
               res: { conquer: { a1: {}, a2: {} } },
               desc: "winning move can highlight set"
@@ -77,7 +77,7 @@ export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
           },
           tests: [
             {
-              expr: "endturn",
+              expr: { links: ["endturn"] },
               sample: "turn.links.foo",
               res: { lose: "surrender", otherlink: "someaction" },
               desc: "we can link to losing endturn"
@@ -93,7 +93,7 @@ export const testSuite: AlgolWriterSuite<AlgolLinkAnon> = {
           },
           tests: [
             {
-              expr: "endturn",
+              expr: { links: ["endturn"] },
               sample: "turn.links.foo",
               res: { draw: "neither", otherlink: "someaction" },
               desc: "we can link to draw endturn"

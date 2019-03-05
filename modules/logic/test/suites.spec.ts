@@ -24,7 +24,7 @@ getSuites().then(suiteFiles => {
 
 // --------------------------------------------------------
 
-function runSuite<T>(suite: AlgolWriterSuite<T>) {
+function runSuite<T, U>(suite: AlgolWriterSuite<T, U>) {
   test(suite.title, t => {
     suite.defs.forEach(tests => {
       runParserTest(tests, suite.func, t);
@@ -33,8 +33,8 @@ function runSuite<T>(suite: AlgolWriterSuite<T>) {
   });
 }
 
-function runParserTest<T>(
-  parserTest: ParserTest<T>,
+function runParserTest<T, U>(
+  parserTest: ParserTest<T, U>,
   func: (def: FullDefAnon, player: 1 | 2, action: string, input: T) => string,
   t
 ) {
@@ -48,7 +48,7 @@ function runParserTest<T>(
       );
       let result;
       const pre = `
-          const {offsetPos, boardConnections} = require('../../common');
+          const {offsetPos, boardConnections} = require('../common');
           const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
           const diagDirs = [2, 4, 6, 8];
           const orthoDirs = [1, 3, 5, 7];
@@ -69,6 +69,7 @@ function runParserTest<T>(
             (sample
               ? `${code}; module.exports = ${sample};`
               : `module.exports = ${code};`),
+          "somefile.js",
           {
             gameDef: parserTest.def,
             ...JSON.parse(JSON.stringify(context))
@@ -81,9 +82,15 @@ function runParserTest<T>(
       }
 
       const processedResult =
-        res === truthy || res === falsy ? !!result : result;
+        (res as unknown) === truthy || (res as unknown) === falsy
+          ? !!result
+          : result;
       const processedComparator =
-        res === truthy ? true : res === falsy ? false : res;
+        (res as unknown) === truthy
+          ? true
+          : (res as unknown) === falsy
+          ? false
+          : res;
       t[typeof res === "object" ? "deepEqual" : "equal"](
         processedResult,
         processedComparator,

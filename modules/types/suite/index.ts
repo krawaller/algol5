@@ -1,30 +1,30 @@
 import { FullDefAnon } from "../";
 
-export type AlgolWriterSuite<T = any> = {
+export type AlgolWriterSuite<T = any, U = any> = {
   title: string;
   func: {
     (def: FullDefAnon, player: 1 | 2, action: string, input?: T): string;
     funcName?: string;
   };
-  defs: ParserTest<T>[];
+  defs: ParserTest<T, U>[];
 };
 
-export type ParserTest<T> = {
+export type ParserTest<T, U> = {
   def: FullDefAnon;
   player: 1 | 2;
   action: string;
-  contexts: ContextTest<T>[];
+  contexts: ContextTest<T, U>[];
 };
 
-export type ContextTest<T> = {
+export type ContextTest<T, U> = {
   context: { [idx: string]: any };
-  tests: ExpressionTest<T>[];
+  tests: ExpressionTest<T, U>[];
 };
 
-export type ExpressionTest<T> = {
+export type ExpressionTest<T, U> = {
   expr?: T;
   sample?: string;
-  res: any;
+  res: U;
   debug?: boolean;
   desc?: string;
 };

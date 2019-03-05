@@ -5,6 +5,8 @@ import { getSuites } from "./_testUtils";
 import * as _eval from "eval";
 import * as test from "tape";
 
+import * as path from "path";
+
 getSuites().then(suiteFiles => {
   suiteFiles.forEach(f => {
     try {
@@ -48,7 +50,14 @@ function runParserTest<T, U>(
       );
       let result;
       const pre = `
-          const {offsetPos, boardConnections} = require('../common');
+          const {offsetPos, boardConnections} = require('${path.join(
+            __dirname,
+            "../../common"
+          )}');
+          const {collapseContent} = require('${path.join(
+            __dirname,
+            "../def2code/executors"
+          )}');
           const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
           const diagDirs = [2, 4, 6, 8];
           const orthoDirs = [1, 3, 5, 7];

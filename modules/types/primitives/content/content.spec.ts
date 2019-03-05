@@ -11,5 +11,6 @@ const tests: TestContent[] = [
   { unit: ["kings", 2] },
   { unitpos: ["kings", 1, "b2"] },
   { command: "jump" },
-  { text: "enter passion play" }
+  { text: "enter passion play" },
+  { line: [{ text: "dont go to" }, { pos: "a1" }] }
 ];

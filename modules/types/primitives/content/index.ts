@@ -7,7 +7,8 @@ import {
   AlgolContentPos,
   AlgolContentUnitPos,
   AlgolContentUnit,
-  AlgolContentText
+  AlgolContentText,
+  AlgolContentLine
 } from "./content.interfaces";
 
 export type AlgolContent<Cmnd, Pos, Unit> =
@@ -15,4 +16,5 @@ export type AlgolContent<Cmnd, Pos, Unit> =
   | AlgolContentPos<Pos>
   | AlgolContentUnit<Unit>
   | AlgolContentUnitPos<Pos, Unit>
-  | AlgolContentText;
+  | AlgolContentText
+  | AlgolContentLine<Cmnd, Pos, Unit>;

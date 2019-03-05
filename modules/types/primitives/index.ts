@@ -9,6 +9,7 @@ export * from "./value";
 export * from "./effect";
 export * from "./entity";
 export * from "./instr";
+export * from "./content";
 export * from "./dirs";
 export * from "./genref";
 export * from "./link";

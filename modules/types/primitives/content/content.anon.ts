@@ -4,7 +4,8 @@ import {
   AlgolContentCmnd,
   AlgolContentPos,
   AlgolContentUnitPos,
-  AlgolContentUnit
+  AlgolContentUnit,
+  AlgolContentLine
 } from "./content.interfaces";
 
 type s = string;
@@ -15,3 +16,4 @@ export type AlgolContentCmndAnon = AlgolContentCmnd<s>;
 export type AlgolContentPosAnon = AlgolContentPos<s>;
 export type AlgolContentUnitPosAnon = AlgolContentUnitPos<s, s>;
 export type AlgolContentUnitAnon = AlgolContentUnit<s>;
+export type AlgolContentLineAnon = AlgolContentLine<s, s, s>;

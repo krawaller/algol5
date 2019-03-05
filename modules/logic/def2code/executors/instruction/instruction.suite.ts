@@ -62,10 +62,43 @@ export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
             },
             {
               expr: {
-                line: ["beware of ", "eating poo ", { line: ["with a spoon"] }]
+                line: ["beware of", "eating poo", { line: ["with a spoon"] }]
               },
               res: { text: "beware of eating poo with a spoon" },
               desc: "a line is collapsed correctly"
+            },
+            {
+              expr: {
+                orlist: [
+                  "gnork",
+                  { if: [["false"], "plork"] },
+                  { if: [["true"], "spork"] },
+                  "flork"
+                ]
+              },
+              res: { text: "gnork, spork or flork" },
+              desc: "it handles orlist including removing falsy items"
+            },
+            {
+              expr: {
+                line: [
+                  "beware of going to",
+                  "selectfoo",
+                  ", go to",
+                  "selectfoo",
+                  "instead"
+                ]
+              },
+              res: {
+                line: [
+                  { text: "beware of going to " },
+                  { pos: "d3" },
+                  { text: ", go to " },
+                  { pos: "d3" },
+                  { text: " instead" }
+                ]
+              },
+              desc: "it inserts space after text followed by non-text"
             }
           ]
         }

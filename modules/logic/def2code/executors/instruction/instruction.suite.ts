@@ -54,6 +54,18 @@ export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
               res: { pos: "d3" },
               desc:
                 "a string corresponding to a mark becomes the pos in that mark"
+            },
+            {
+              expr: { line: ["beware of going to ", "selectfoo"] },
+              res: { line: [{ text: "beware of going to " }, { pos: "d3" }] },
+              desc: "a line has inidividual items processed"
+            },
+            {
+              expr: {
+                line: ["beware of ", "eating poo ", { line: ["with a spoon"] }]
+              },
+              res: { text: "beware of eating poo with a spoon" },
+              desc: "a line is collapsed correctly"
             }
           ]
         }

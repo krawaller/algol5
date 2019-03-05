@@ -1,7 +1,10 @@
+export * from "./instruction.helpers";
+
 import {
   FullDefAnon,
   AlgolInstrAnon,
-  AlgolInstrInnerAnon
+  AlgolInstrInnerAnon,
+  isAlgolInstrLine
 } from "../../../../types";
 
 import { executeExpression } from "../";
@@ -36,6 +39,12 @@ function executeInstructionInner(
       return `{ pos: MARKS.${instr} }`;
     }
     return `{ text: "${instr}" }`;
+  }
+  if (isAlgolInstrLine(instr)) {
+    return `collapseContent({ line: [ ${instr.line
+      .map(i => executeInstruction(gameDef, player, action, i))
+      .filter(i => !!i)
+      .join(", ")} ] })`;
   }
   throw new Error("Unknown instruction: " + JSON.stringify(instr));
   return "";

@@ -35,7 +35,17 @@ export type AlgolInstr<
   Turnv
 >;
 
-type AlgolInstrInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit> =
+export type AlgolInstrInner<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+> =
   | string
   | Cmnd
   | Unit

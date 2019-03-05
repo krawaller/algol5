@@ -1,4 +1,4 @@
-import { AlgolInstr } from "./";
+import { AlgolInstr, AlgolInstrInner } from "./";
 
 import {
   AlgolInstrLine,
@@ -12,6 +12,7 @@ import {
 type s = string;
 
 export type AlgolInstrAnon = AlgolInstr<s, s, s, s, s, s, s, s, s>;
+export type AlgolInstrInnerAnon = AlgolInstrInner<s, s, s, s, s, s, s, s, s>;
 
 export type AlgolInstrValAnon = AlgolInstrVal<s, s, s, s, s, s, s, s>;
 export type AlgolInstrPluralizeAnon = AlgolInstrPluralize<

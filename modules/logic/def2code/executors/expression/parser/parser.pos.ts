@@ -5,9 +5,9 @@ import {
   isAlgolPosOnlyIn,
   isAlgolPosBattlePos,
   isAlgolPosTurnPos
-} from "../../../types";
+} from "../../../../../types";
 
-import makeParser from "./";
+import { makeParser } from "./";
 
 export default function parsePos(
   gameDef: FullDefAnon,

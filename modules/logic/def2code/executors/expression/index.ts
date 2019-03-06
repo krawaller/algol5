@@ -8,8 +8,11 @@ import {
   isAlgolLogicalIf,
   isAlgolLogicalIfPlayer,
   isAlgolLogicalIfAction
-} from "../../../types";
-import makeParser from "../expressions";
+} from "../../../../types";
+
+import { makeParser } from "./parser";
+
+export * from "./parser";
 
 export function executeExpression<_T>(
   gameDef: FullDefAnon,

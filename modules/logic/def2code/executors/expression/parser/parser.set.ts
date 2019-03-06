@@ -8,14 +8,14 @@ import {
   isAlgolSetIntersect,
   isAlgolSetGroupAt,
   isAlgolSetSingles
-} from "../../../types";
+} from "../../../../../types";
 import {
   emptyArtifactLayers,
   terrainLayers,
   emptyUnitLayers
-} from "../../../common";
+} from "../../../../../common";
 
-import makeParser from "./";
+import { makeParser } from "./";
 
 export default function parseSet(
   gameDef: FullDefAnon,

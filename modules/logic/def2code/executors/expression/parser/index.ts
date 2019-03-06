@@ -5,28 +5,17 @@ import {
   AlgolPosAnon,
   AlgolSetAnon,
   AlgolDirsAnon
-} from "../../../types";
+} from "../../../../../types";
 
-import parseValue from "./value";
-import parseBool from "./bool";
-import parsePos from "./pos";
-import parseSet from "./set";
-import parseDirs from "./dirs";
+import parseValue from "./parser.value";
+import parseBool from "./parser.bool";
+import parsePos from "./parser.pos";
+import parseSet from "./parser.set";
+import parseDirs from "./parser.dirs";
 
-import { executeExpression } from "../executors";
+import { executeExpression } from "../";
 
-export const parserTester = <T>(
-  type: "set" | "bool" | "val" | "pos" | "dirs"
-) => {
-  const ret = (def: FullDefAnon, player: 1 | 2, action: string, input: T) => {
-    const parser: any = makeParser(def, player, action)[type];
-    return parser(input);
-  };
-  ret.funcName = "parse" + type[0].toUpperCase() + type.slice(1);
-  return ret;
-};
-
-export default function makeParser(
+export function makeParser(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
@@ -46,3 +35,14 @@ export default function makeParser(
   };
   return parsers;
 }
+
+export const parserTester = <T>(
+  type: "set" | "bool" | "val" | "pos" | "dirs"
+) => {
+  const ret = (def: FullDefAnon, player: 1 | 2, action: string, input: T) => {
+    const parser: any = makeParser(def, player, action)[type];
+    return parser(input);
+  };
+  ret.funcName = "parse" + type[0].toUpperCase() + type.slice(1);
+  return ret;
+};

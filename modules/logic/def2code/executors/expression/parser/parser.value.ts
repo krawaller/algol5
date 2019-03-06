@@ -15,9 +15,9 @@ import {
   isAlgolValGridAt,
   isAlgolValGridIn,
   isAlgolValRelDir
-} from "../../../types";
+} from "../../../../../types";
 
-import makeParser from "./";
+import { makeParser } from "./";
 
 export default function parseVal(
   gameDef: FullDefAnon,

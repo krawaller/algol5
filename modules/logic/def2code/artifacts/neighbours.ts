@@ -1,5 +1,5 @@
 import { FullDefAnon, NeighbourDefAnon } from "../../../types";
-import makeParser from "../expressions";
+import { makeParser } from "../executors";
 import { contains } from "../utils";
 import draw from "./draw";
 

@@ -1,6 +1,10 @@
-import { FullDefAnon, AlgolDirsAnon, isAlgolDirsList } from "../../../types";
+import {
+  FullDefAnon,
+  AlgolDirsAnon,
+  isAlgolDirsList
+} from "../../../../../types";
 
-import makeParser from "./";
+import { makeParser } from "./";
 
 export default function parseDirs(
   gameDef: FullDefAnon,

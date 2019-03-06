@@ -1,11 +1,10 @@
-import makeParser from "../../expressions";
 import {
   FullDefAnon,
   AlgolLinkAnon,
   AlgolLinkInnerAnon
 } from "../../../../types";
 
-import { executeStatement } from "../../executors";
+import { executeStatement, makeParser } from "../../executors";
 
 export function executeLink(
   gameDef: FullDefAnon,

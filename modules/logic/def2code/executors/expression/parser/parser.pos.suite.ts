@@ -1,6 +1,6 @@
-import { emptyFullDef, truthy, falsy } from "../../../common";
-import { AlgolPosAnon, AlgolWriterSuite } from "../../../types";
-import { parserTester } from "./";
+import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import { AlgolPosAnon, AlgolWriterSuite } from "../../../../../types";
+import { parserTester } from ".";
 
 export const testSuite: AlgolWriterSuite<AlgolPosAnon> = {
   title: "Primitive - Pos",

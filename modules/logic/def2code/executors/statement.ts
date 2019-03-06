@@ -10,7 +10,7 @@ import {
   isAlgolLogicalIfAction,
   isAlgolLogicalMulti
 } from "../../../types";
-import makeParser from "../expressions";
+import { makeParser } from "./expression";
 
 export function executeStatement<_T>(
   gameDef: FullDefAnon,

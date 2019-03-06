@@ -1,5 +1,5 @@
 import { FullDefAnon } from "../../../types";
-import makeParser from "../expressions";
+import { makeParser } from "../executors";
 
 /*
 Use by generators to mutate ARTIFACTS.

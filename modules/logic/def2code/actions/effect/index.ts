@@ -31,8 +31,8 @@ import {
   isAlgolEffectAdoptIn,
   isAlgolEffectAdoptId
 } from "../../../../types";
-import makeParser from "../../expressions";
-import { executeStatement } from "../../executors";
+
+import { executeStatement, makeParser } from "../../executors";
 
 export function executeEffect(
   gameDef: FullDefAnon,

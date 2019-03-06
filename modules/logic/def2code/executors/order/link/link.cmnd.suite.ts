@@ -1,6 +1,6 @@
-import { executeOrder } from "../../executors";
-import { emptyFullDef } from "../../../../common";
-import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../types";
+import { executeOrder } from "../../../executors";
+import { emptyFullDef } from "../../../../../common";
+import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../../types";
 
 export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Link - Command",

@@ -1,5 +1,3 @@
-export * from "./updateUnitLayers";
-
 import {
   AlgolEffectAnon,
   AlgolEffectInnerAnon,
@@ -30,9 +28,9 @@ import {
   isAlgolEffectAdoptAt,
   isAlgolEffectAdoptIn,
   isAlgolEffectAdoptId
-} from "../../../../types";
+} from "../../../../../types";
 
-import { executeStatement, makeParser } from "../../executors";
+import { executeStatement, makeParser } from "../../../executors";
 
 export function executeEffect(
   gameDef: FullDefAnon,

@@ -1,6 +1,6 @@
-import { executeOrder } from "../../executors";
-import { emptyFullDef, truthy, falsy } from "../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../types";
+import { executeOrder } from "../../../executors";
+import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
 
 export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
   title: "Effect - Moving",

@@ -5,14 +5,14 @@ import {
   isAlgolOrderLinks,
   isAlgolOrderDoEffects,
   isAlgolOrderRunGenerators
-} from "../../../types";
+} from "../../../../types";
 
-import { executeStatement } from "./";
+import { executeStatement } from "../";
 
-import { executeLink } from "../actions/link";
-import { executeEffect } from "../actions/effect";
-import { executeGenerator } from "../artifacts";
-import { updateUnitLayers } from "../actions/effect";
+import { executeGenerator } from "../../artifacts";
+import { executeLink } from "./link";
+import { executeEffect } from "./effect";
+import { updateUnitLayers } from "./updateUnitLayers";
 
 export function executeOrder(
   gameDef: FullDefAnon,

@@ -2,9 +2,9 @@ import {
   FullDefAnon,
   AlgolLinkAnon,
   AlgolLinkInnerAnon
-} from "../../../../types";
+} from "../../../../../types";
 
-import { executeStatement, makeParser } from "../../executors";
+import { executeStatement, makeParser } from "../../../executors";
 
 export function executeLink(
   gameDef: FullDefAnon,

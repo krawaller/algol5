@@ -1,5 +1,5 @@
-import { FullDefAnon } from "../../../../types";
-import { emptyUnitLayers } from "../../../../common";
+import { FullDefAnon } from "../../../../../types";
+import { emptyUnitLayers } from "../../../../../common";
 
 /*
 Mutates `UNITLAYERS` given the current values in `UNITDATA`.

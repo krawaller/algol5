@@ -5,11 +5,11 @@ import {
   GeneratorDefAnon,
   AlgolGenRefAnon,
   AlgolGenRefInnerAnon
-} from "../../../types";
-import executeNeighbours from "./neighbours";
-import executeWalker from "./walker";
+} from "../../../../../types";
+import executeNeighbours from "./generate.neighbours";
+import executeWalker from "./generate.walker";
 
-import { executeStatement } from "../executors";
+import { executeStatement } from "../../../executors";
 
 export function executeGenerator(
   gameDef: FullDefAnon,

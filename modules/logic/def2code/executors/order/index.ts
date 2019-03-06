@@ -9,7 +9,7 @@ import {
 
 import { executeStatement } from "../";
 
-import { executeGenerator } from "../../artifacts";
+import { executeGenerator } from "./generate";
 import { executeLink } from "./link";
 import { executeEffect } from "./effect";
 import { updateUnitLayers } from "./updateUnitLayers";

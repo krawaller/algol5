@@ -1,7 +1,7 @@
-import { FullDefAnon, NeighbourDefAnon } from "../../../types";
-import { makeParser } from "../executors";
-import { contains } from "../utils";
-import draw from "./draw";
+import { FullDefAnon, NeighbourDefAnon } from "../../../../../types";
+import { makeParser } from "../../../executors";
+import { contains } from "../../../utils";
+import draw from "./generate.draw";
 
 // TODO - not drawing counted?
 

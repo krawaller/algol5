@@ -7,22 +7,24 @@ import * as test from "tape";
 
 import * as path from "path";
 
-getSuites().then(suiteFiles => {
-  suiteFiles.forEach(f => {
-    try {
-      const { testSuite } = require(f);
+getSuites()
+  .then(suiteFiles => {
+    suiteFiles.forEach(f => {
       try {
-        runSuite(testSuite);
+        const { testSuite } = require(f);
+        try {
+          runSuite(testSuite);
+        } catch (e) {
+          console.log("Failed to run spec from", f, e);
+          throw e;
+        }
       } catch (e) {
-        console.log("Failed to run spec from", f, e);
+        console.log("Failed to get spec from", f, e);
         throw e;
       }
-    } catch (e) {
-      console.log("Failed to get spec from", f, e);
-      throw e;
-    }
-  });
-});
+    });
+  })
+  .catch(e => console.log("Crash while looking for suite files!", e));
 
 // --------------------------------------------------------
 

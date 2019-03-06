@@ -1,7 +1,7 @@
-import { FullDefAnon, WalkerDefAnon } from "../../../types";
-import { contains } from "../utils";
-import draw from "./draw";
-import { makeParser } from "../executors";
+import { FullDefAnon, WalkerDefAnon } from "../../../../../types";
+import { contains } from "../../../utils";
+import draw from "./generate.draw";
+import { makeParser } from "../../../executors";
 
 /*
 draw directly in whileloop if:

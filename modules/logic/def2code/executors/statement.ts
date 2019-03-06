@@ -16,73 +16,79 @@ export function executeStatement<_T>(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  parser,
-  expr: AlgolStatementAnon<_T>,
+  finalParser: (
+    gameDef: FullDefAnon,
+    player: 1 | 2,
+    action: string,
+    statement: AlgolStatementAnon<_T>,
+    from?: string
+  ) => string,
+  statement: AlgolStatementAnon<_T>,
   from
 ) {
-  const parse = makeParser(gameDef, player, action, from);
+  const exprParser = makeParser(gameDef, player, action, from);
   const me = expr =>
-    executeStatement(gameDef, player, action, parser, expr, from);
+    executeStatement(gameDef, player, action, finalParser, expr, from);
 
-  if (isAlgolLogicalIfElse(expr)) {
+  if (isAlgolLogicalIfElse(statement)) {
     const {
       ifelse: [test, whenTruthy, whenFalsy]
-    } = expr;
+    } = statement;
 
-    return `if (${parse.bool(test)}) { ${me(whenTruthy)} } else { ${me(
+    return `if (${exprParser.bool(test)}) { ${me(whenTruthy)} } else { ${me(
       whenFalsy
     )} }`;
   }
 
-  if (isAlgolLogicalIfActionElse(expr)) {
+  if (isAlgolLogicalIfActionElse(statement)) {
     const {
       ifactionelse: [testAction, whenYes, whenNo]
-    } = expr;
+    } = statement;
     return me(testAction === action ? whenYes : whenNo);
   }
 
-  if (isAlgolLogicalPlayerCase(expr)) {
+  if (isAlgolLogicalPlayerCase(statement)) {
     const {
       playercase: [plr1, plr2]
-    } = expr;
+    } = statement;
     return me(player === 1 ? plr1 : plr2);
   }
 
-  if (isAlgolLogicalIndexList(expr)) {
+  if (isAlgolLogicalIndexList(statement)) {
     const {
       indexlist: [idx, ...opts]
-    } = expr;
-    const parsedIdx = parse.val(idx);
+    } = statement;
+    const parsedIdx = exprParser.val(idx);
     if (typeof parsedIdx === "number") {
       return me(opts[parsedIdx]);
     }
     return `[${opts.map(me).join(", ")}][${parsedIdx}]`;
   }
 
-  if (isAlgolLogicalIf(expr)) {
+  if (isAlgolLogicalIf(statement)) {
     const {
       if: [test, val]
-    } = expr;
-    return `if (${parse.bool(test)}) { ${me(val)} }`;
+    } = statement;
+    return `if (${exprParser.bool(test)}) { ${me(val)} }`;
   }
 
-  if (isAlgolLogicalIfPlayer(expr)) {
+  if (isAlgolLogicalIfPlayer(statement)) {
     const {
       ifplayer: [forPlayer, val]
-    } = expr;
+    } = statement;
     return forPlayer === player ? me(val) : "";
   }
 
-  if (isAlgolLogicalIfAction(expr)) {
+  if (isAlgolLogicalIfAction(statement)) {
     const {
       ifaction: [forAction, val]
-    } = expr;
+    } = statement;
     return forAction === action ? me(val) : "";
   }
 
-  if (isAlgolLogicalMulti(expr)) {
-    const { multi: children } = expr;
+  if (isAlgolLogicalMulti(statement)) {
+    const { multi: children } = statement;
     return children.map(me).join(" ");
   }
-  return parser(gameDef, player, action, expr, from);
+  return finalParser(gameDef, player, action, statement, from);
 }

@@ -99,6 +99,13 @@ export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
                 ]
               },
               desc: "it inserts space after text followed by non-text"
+            },
+            {
+              expr: {
+                line: ["oh my", 5, { value: "poops" }]
+              },
+              res: { text: "oh my 5 poops" },
+              desc: "it handles numbers and values"
             }
           ]
         }

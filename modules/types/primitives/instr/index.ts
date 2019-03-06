@@ -47,6 +47,7 @@ export type AlgolInstrInner<
   Unit
 > =
   | string
+  | number
   | Cmnd
   | Unit
   | AlgolInstrVal<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

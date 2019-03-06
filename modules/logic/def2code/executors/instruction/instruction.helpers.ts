@@ -34,8 +34,8 @@ export function collapseContent(
           isAlgolContentText(items[n + 1])
       )) !== -1
     ) {
-      const firstText = (items[idx] as AlgolContentText).text;
-      const secondText = (items[idx + 1] as AlgolContentText).text;
+      const firstText = (items[idx] as AlgolContentText).text + "";
+      const secondText = (items[idx + 1] as AlgolContentText).text + "";
       const between =
         firstText[firstText.length - 1] === " " ||
         (secondText[0] || ".").match(noSpacesBefore)

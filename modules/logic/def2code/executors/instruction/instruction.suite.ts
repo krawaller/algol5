@@ -16,7 +16,7 @@ export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
         graphics: {
           ...emptyFullDef.graphics,
           icons: {
-            gnorks: "rooks"
+            gnorks: "rook"
           }
         },
         flow: {
@@ -36,7 +36,8 @@ export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
       contexts: [
         {
           context: {
-            MARKS: { selectfoo: "d3" }
+            MARKS: { selectfoo: "d3" },
+            UNITLAYERS: { units: { d3: { owner: 2, group: "gnorks" } } }
           },
           tests: [
             {
@@ -106,6 +107,24 @@ export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
               },
               res: { text: "oh my 5 poops" },
               desc: "it handles numbers and values"
+            },
+            {
+              expr: {
+                line: [
+                  { pluralize: [{ value: 2 }, "poop", "poops"] },
+                  "and",
+                  { pluralize: [1, "gnork", "gnorks"] }
+                ]
+              },
+              res: { text: "2 poops and 1 gnork" },
+              desc: "handles pluralize"
+            },
+            {
+              expr: {
+                nameat: "selectfoo"
+              },
+              res: { unitpos: ["rook", 2, "d3"] },
+              desc: "handles nameat"
             }
           ]
         }

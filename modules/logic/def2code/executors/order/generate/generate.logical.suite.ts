@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
 
 export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
-  title: "Artifacts - Neighbours",
+  title: "Artifacts - Logical",
   func: executeOrder,
   defs: [
     {

@@ -111,7 +111,7 @@ export const testSuite: AlgolWriterSuite<AlgolSetAnon> = {
         graphics: {
           ...emptyFullDef.graphics,
           icons: {
-            gnurps: {}
+            gnurps: "rook"
           }
         }
       },

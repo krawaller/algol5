@@ -12,8 +12,8 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
         graphics: {
           ...emptyFullDef.graphics,
           icons: {
-            gnurps: "pawns",
-            flurps: "bishops"
+            gnurps: "pawn",
+            flurps: "bishop"
           }
         }
       },

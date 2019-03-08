@@ -6,10 +6,17 @@ export type Graphics<
   tiles: Partial<{ [terrain in Terrain]: any }>;
 };
 
-export type AlgolIcon =
-  | "rook"
-  | "queen"
-  | "king"
-  | "bishop"
-  | "pawn"
-  | "knight";
+const algolIcons = {
+  rook: 1,
+  queen: 1,
+  king: 1,
+  bishop: 1,
+  pawn: 1,
+  knight: 1
+};
+
+export function isAlgolIcon(str: string): str is AlgolIcon {
+  return !!algolIcons[str];
+}
+
+export type AlgolIcon = keyof typeof algolIcons;

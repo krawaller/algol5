@@ -8,7 +8,8 @@ import {
   isAlgolInstrOrList,
   isAlgolInstrVal,
   isAlgolInstrPluralize,
-  isAlgolInstrUnitAt
+  isAlgolInstrUnitAt,
+  isAlgolIcon
 } from "../../../../types";
 
 import { executeExpression, makeParser } from "../";
@@ -51,6 +52,9 @@ function executeInstructionInner(
     }
     if (gameDef.flow.marks[instr]) {
       return `{ pos: MARKS.${instr} }`;
+    }
+    if (isAlgolIcon(instr)) {
+      return `{ unittype: "${instr}" }`;
     }
     return `{ text: "${instr}" }`;
   }

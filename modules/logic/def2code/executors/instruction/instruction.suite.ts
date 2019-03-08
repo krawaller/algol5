@@ -125,6 +125,11 @@ export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
               },
               res: { unit: ["rook", 2, "d3"] },
               desc: "handles nameat"
+            },
+            {
+              expr: "queen",
+              res: { unittype: "queen" },
+              desc: "handles icons as string"
             }
           ]
         }

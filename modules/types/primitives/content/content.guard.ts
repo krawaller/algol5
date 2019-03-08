@@ -3,11 +3,10 @@ import {
   AlgolContentCmndAnon,
   AlgolContentPosAnon,
   AlgolContentUnitAnon,
-  AlgolContentUnitPosAnon,
   AlgolContentLineAnon
 } from "./content.anon";
 
-import { AlgolContentText, AlgolContentLine } from "./content.interfaces";
+import { AlgolContentText, AlgolContentUnitType } from "./content.interfaces";
 
 export function isAlgolContentCmnd(
   expr: AlgolContentAnon
@@ -27,10 +26,10 @@ export function isAlgolContentUnit(
   return (expr as AlgolContentUnitAnon).unit !== undefined;
 }
 
-export function isAlgolContentUnitPos(
+export function isAlgolContentUnitType(
   expr: AlgolContentAnon
-): expr is AlgolContentUnitPosAnon {
-  return (expr as AlgolContentUnitPosAnon).unitpos !== undefined;
+): expr is AlgolContentUnitType {
+  return (expr as AlgolContentUnitType).unittype !== undefined;
 }
 
 export function isAlgolContentText(

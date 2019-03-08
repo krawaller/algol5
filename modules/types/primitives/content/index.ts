@@ -5,16 +5,16 @@ export * from "./content.guard";
 import {
   AlgolContentCmnd,
   AlgolContentPos,
-  AlgolContentUnitPos,
+  AlgolContentUnitType,
   AlgolContentUnit,
   AlgolContentText,
   AlgolContentLine
 } from "./content.interfaces";
 
-export type AlgolContent<Cmnd, Pos, Unit> =
+export type AlgolContent<Cmnd, Pos> =
   | AlgolContentCmnd<Cmnd>
   | AlgolContentPos<Pos>
-  | AlgolContentUnit<Unit>
-  | AlgolContentUnitPos<Pos, Unit>
+  | AlgolContentUnit<Pos>
+  | AlgolContentUnitType
   | AlgolContentText
-  | AlgolContentLine<Cmnd, Pos, Unit>;
+  | AlgolContentLine<Cmnd, Pos>;

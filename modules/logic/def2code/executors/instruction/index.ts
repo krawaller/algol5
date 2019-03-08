@@ -86,7 +86,7 @@ function executeInstructionInner(
   if (isAlgolInstrUnitAt(instr)) {
     // name: game.graphics.icons[${parse.val(["read", "units", pos, "group"])}]
     return `{
-      unitpos: [
+      unit: [
         ${JSON.stringify(gameDef.graphics.icons)}[${exprParser.val({
       read: ["units", instr.unitat, "group"]
     })}],

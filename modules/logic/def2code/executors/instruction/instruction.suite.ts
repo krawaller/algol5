@@ -121,7 +121,7 @@ export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
             },
             {
               expr: {
-                nameat: "selectfoo"
+                unitat: "selectfoo"
               },
               res: { unitpos: ["rook", 2, "d3"] },
               desc: "handles nameat"

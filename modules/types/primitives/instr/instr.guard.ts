@@ -1,7 +1,7 @@
 import {
   AlgolInstrAnon,
   AlgolInstrLineAnon,
-  AlgolInstrNameAtAnon,
+  AlgolInstrUnitAtAnon,
   AlgolInstrOrListAnon,
   AlgolInstrPluralizeAnon,
   AlgolInstrPosAnon,
@@ -26,10 +26,10 @@ export function isAlgolInstrPos(
   return (expr as AlgolInstrPosAnon).pos !== undefined;
 }
 
-export function isAlgolInstrNameAt(
+export function isAlgolInstrUnitAt(
   expr: AlgolInstrAnon
-): expr is AlgolInstrNameAtAnon {
-  return (expr as AlgolInstrNameAtAnon).nameat !== undefined;
+): expr is AlgolInstrUnitAtAnon {
+  return (expr as AlgolInstrUnitAtAnon).unitat !== undefined;
 }
 
 export function isAlgolInstrLine(

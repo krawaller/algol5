@@ -16,7 +16,7 @@ const transetInstructions: TransetInstructions = {
                   "move",
                   "the",
                   "selectunit",
-                  { nameat: "selectunit" },
+                  { unitat: "selectunit" },
                   "to"
                 ]
               }
@@ -29,7 +29,7 @@ const transetInstructions: TransetInstructions = {
                 line: [
                   "another unit to swap the",
                   "selectunit",
-                  { nameat: "selectunit" },
+                  { unitat: "selectunit" },
                   "with"
                 ]
               }
@@ -50,7 +50,7 @@ const transetInstructions: TransetInstructions = {
       {
         line: [
           "Select where the enemy",
-          { nameat: "selectmovetarget" },
+          { unitat: "selectmovetarget" },
           "at",
           "selectmovetarget",
           "should end up"

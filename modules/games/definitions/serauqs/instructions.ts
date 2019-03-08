@@ -16,7 +16,7 @@ const serauqsInstructions: SerauqsInstructions = {
           "Select where to",
           "move",
           "the",
-          { nameat: "selectunit" },
+          { unitat: "selectunit" },
           {
             if: [
               { anyat: ["wild", "selectunit"] },

@@ -2,7 +2,7 @@ import { AlgolInstr, AlgolInstrInner } from "./";
 
 import {
   AlgolInstrLine,
-  AlgolInstrNameAt,
+  AlgolInstrUnitAt,
   AlgolInstrOrList,
   AlgolInstrPluralize,
   AlgolInstrPos,
@@ -27,6 +27,6 @@ export type AlgolInstrPluralizeAnon = AlgolInstrPluralize<
   s
 >;
 export type AlgolInstrPosAnon = AlgolInstrPos<s, s, s, s, s, s, s, s>;
-export type AlgolInstrNameAtAnon = AlgolInstrNameAt<s, s, s, s, s, s, s, s>;
+export type AlgolInstrUnitAtAnon = AlgolInstrUnitAt<s, s, s, s, s, s, s, s>;
 export type AlgolInstrLineAnon = AlgolInstrLine<s, s, s, s, s, s, s, s, s>;
 export type AlgolInstrOrListAnon = AlgolInstrOrList<s, s, s, s, s, s, s, s, s>;

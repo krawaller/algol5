@@ -8,7 +8,7 @@ import {
   isAlgolInstrOrList,
   isAlgolInstrVal,
   isAlgolInstrPluralize,
-  isAlgolInstrNameAt
+  isAlgolInstrUnitAt
 } from "../../../../types";
 
 import { executeExpression, makeParser } from "../";
@@ -83,15 +83,15 @@ function executeInstructionInner(
       ${exprParser.val(val)} === 1 ? ${me(sing)} : ${me(plur)}
     ] })`;
   }
-  if (isAlgolInstrNameAt(instr)) {
+  if (isAlgolInstrUnitAt(instr)) {
     // name: game.graphics.icons[${parse.val(["read", "units", pos, "group"])}]
     return `{
       unitpos: [
         ${JSON.stringify(gameDef.graphics.icons)}[${exprParser.val({
-      read: ["units", instr.nameat, "group"]
+      read: ["units", instr.unitat, "group"]
     })}],
-        ${exprParser.val({ read: ["units", instr.nameat, "owner"] })},
-        ${exprParser.pos(instr.nameat)}
+        ${exprParser.val({ read: ["units", instr.unitat, "owner"] })},
+        ${exprParser.pos(instr.unitat)}
       ]
     }`;
   }

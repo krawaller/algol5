@@ -56,7 +56,7 @@ const gogolInstructions: GogolInstructions = {
       "to",
       "selectjumptarget",
       "and kill the",
-      { nameat: { onlyin: "splashed" } },
+      { unitat: { onlyin: "splashed" } },
       "at",
       { pos: { onlyin: "splashed" } }
     ]

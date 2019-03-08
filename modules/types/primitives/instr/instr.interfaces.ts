@@ -44,7 +44,7 @@ export interface AlgolInstrVal<
   >;
 }
 
-export interface AlgolInstrNameAt<
+export interface AlgolInstrUnitAt<
   Btlp,
   Btlv,
   Cmnd,
@@ -54,7 +54,7 @@ export interface AlgolInstrNameAt<
   Turnp,
   Turnv
 > {
-  nameat: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  unitat: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
 export interface AlgolInstrPos<

@@ -18,8 +18,8 @@ const tests: TestInstruction[] = [
   { orlist: ["wee", { if: [["true"], "bar"] }] },
   { pos: "mymark" },
   { value: { minus: [{ battlevar: "mybattlev" }, 4] } },
-  { nameat: "mymark" },
+  { unitat: "mymark" },
   { pluralize: [{ sizeof: "mylayer" }, "foo", "foos"] },
-  { indexlist: [["dir"], "gnurp", { nameat: "mymark" }] },
+  { indexlist: [["dir"], "gnurp", { unitat: "mymark" }] },
   { ifaction: ["mycmnd", { line: ["hello"] }] }
 ];

@@ -101,7 +101,7 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
               {
                 line: [
                   ", reducing the enemy",
-                  { nameat: "selectfire" },
+                  { unitat: "selectfire" },
                   "at",
                   "selectfire",
                   "to a",

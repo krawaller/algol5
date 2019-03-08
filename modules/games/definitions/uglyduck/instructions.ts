@@ -62,7 +62,7 @@ const uglyduckInstructions: UglyduckInstructions = {
       {
         if: [
           { anyat: ["oppunits", "selectmovetarget"] },
-          { line: [", killing the enemy", { nameat: "selectmovetarget" }] }
+          { line: [", killing the enemy", { unitat: "selectmovetarget" }] }
         ]
       }
     ]

@@ -1,10 +1,10 @@
-import { getSuites } from "../test/_testUtils";
+import { findSuites } from "../test/findSuites";
 import * as fs from "fs-extra";
 import * as path from "path";
 
 const out = path.join(__dirname, "../dist");
 
-getSuites().then(async suites => {
+findSuites().then(async suites => {
   await fs.ensureDir(out);
 
   const moduleRoot = path.join(__dirname, "..");

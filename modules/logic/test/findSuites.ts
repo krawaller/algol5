@@ -1,10 +1,11 @@
+import * as path from "path";
+
 import {
   FileMatcher,
   FindOptions,
   AttributeType,
   PredicateOperator
 } from "file-matcher";
-import * as path from "path";
 
 const options: FindOptions = {
   path: path.join(__dirname, "../def2code"),
@@ -14,8 +15,8 @@ const options: FindOptions = {
 
 const matcher = new FileMatcher();
 
-export async function getSuites() {
-  let suiteFiles;
+export async function findSuites() {
+  let suiteFiles: string[];
   try {
     suiteFiles = await matcher.find(options);
   } catch (e) {

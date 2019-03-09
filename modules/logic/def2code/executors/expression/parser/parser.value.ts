@@ -134,6 +134,6 @@ export default function parseVal(
     const {
       reldir: [dir, rel]
     } = expr;
-    return `relativeDirs[${parser.val(rel)} - 2 + ${parser.val(dir)}]`;
+    return `relativeDirs[${parser.val(dir)}][${parser.val(rel)}]`;
   }
 }

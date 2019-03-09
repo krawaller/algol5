@@ -44,7 +44,7 @@ function runParserTest<T, U>(
           ""
         ) +
         `
-          const {offsetPos, boardConnections, relativeDirs} = require('${path.join(
+          const {offsetPos, boardConnections, makeRelativeDirs} = require('${path.join(
             __dirname,
             "../../common"
           )}');
@@ -53,6 +53,7 @@ function runParserTest<T, U>(
             "../def2code/executors"
           )}');
           const connections = boardConnections(gameDef.board);
+          const relativeDirs = makeRelativeDirs(gameDef.board);
         `;
       try {
         eval(

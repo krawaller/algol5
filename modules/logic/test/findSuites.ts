@@ -1,24 +1,19 @@
 import * as path from "path";
 
-import {
-  FileMatcher,
-  FindOptions,
-  AttributeType,
-  PredicateOperator
-} from "file-matcher";
-
-const options: FindOptions = {
-  path: path.join(__dirname, "../def2code"),
-  recursiveSearch: true,
-  fileFilter: { fileNamePattern: "**/*.suite.ts" }
-};
-
-const matcher = new FileMatcher();
+import * as glob from "glob";
 
 export async function findSuites() {
-  let suiteFiles: string[];
+  let suiteFiles: string[] = [];
   try {
-    suiteFiles = await matcher.find(options);
+    suiteFiles = await new Promise((resolve, reject) => {
+      glob(
+        "**/*.suite.ts",
+        {
+          root: path.join(__dirname, "../def2code")
+        },
+        (err, res) => (err ? reject(err) : resolve(res))
+      );
+    });
   } catch (e) {
     console.log("Suite search failed!", e);
     throw e;

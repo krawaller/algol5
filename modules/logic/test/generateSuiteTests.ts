@@ -5,9 +5,15 @@ import { findSuites } from "./findSuites";
 const out = path.join(__dirname, "generatedTests");
 
 async function setup() {
+  console.log(" -------- Generating test files for suites --------");
   await fs.remove(out);
   await fs.mkdir(out);
-  const suites = await findSuites();
+  let suites;
+  try {
+    suites = await findSuites();
+  } catch (e) {
+    throw e;
+  }
   await Promise.all(
     suites.map(async p => {
       const name = p.split("/")[p.split("/").length - 1].replace(/\.ts$/, "");
@@ -23,7 +29,7 @@ runSuite(testSuite);
       console.log("Generating test file for", name);
     })
   );
-  console.log(" ------- All set up! --------");
+  console.log(` ------- ${suites.length} files set up! --------`);
 }
 
 setup();

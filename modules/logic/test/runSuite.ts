@@ -1,94 +1,96 @@
 import * as path from "path";
 
-import { FullDefAnon, AlgolWriterSuite, ParserTest } from "../../types";
+import { AlgolSuite, isAlgolExpressionTest } from "../../types";
 import { truthy, falsy } from "../../common";
 
-export function runSuite<T, U>(suite: AlgolWriterSuite<T, U>) {
-  console.log("running", suite.title);
+export function runSuite<T, U>(suite: AlgolSuite) {
   test(suite.title, () => {
-    suite.defs.forEach(tests => {
-      runParserTest(tests, suite.func);
-    });
-  });
-}
-
-function runParserTest<T, U>(
-  parserTest: ParserTest<T, U>,
-  func: (def: FullDefAnon, player: 1 | 2, action: string, input: T) => string
-) {
-  parserTest.contexts.forEach(({ context, tests }) => {
-    tests.forEach(({ expr, res, sample, debug, desc }) => {
-      const code = func(
-        parserTest.def,
-        parserTest.player,
-        parserTest.action,
-        expr
-      );
-      let result;
-      const fullContext = {
-        nextSpawnId: 1,
-        roseDirs: [1, 2, 3, 4, 5, 6, 7, 8],
-        orthoDirs: [1, 3, 5, 7],
-        diagDirs: [2, 4, 6, 8],
-        ownerNames:
-          parserTest.player === 1
-            ? ["neutral", "my", "opp"]
-            : ["neutral", "opp", "my"],
-        gameDef: parserTest.def,
-        ...context
-      };
-      const pre =
-        Object.keys(fullContext).reduce(
-          (mem, key) =>
-            mem + `let ${key} = ${JSON.stringify(fullContext[key])}; `,
-          ""
-        ) +
-        `
-          const {offsetPos, boardConnections, makeRelativeDirs} = require('${path.join(
-            __dirname,
-            "../../common"
-          )}');
-          const {collapseContent} = require('${path.join(
-            __dirname,
-            "../def2code/executors"
-          )}');
-          const connections = boardConnections(gameDef.board);
-          const relativeDirs = makeRelativeDirs(gameDef.board);
-        `;
-      try {
-        eval(
-          pre + (sample ? `${code}; result = ${sample};` : `result = ${code};`)
-        );
-      } catch (e) {
-        console.log("KABOOM", code);
-        throw e;
+    for (const { def, player, action, contexts } of suite.defs) {
+      for (const { context, tests } of contexts) {
+        for (const suiteTest of tests) {
+          const code = suite.func(def, player, action, suiteTest.expr);
+          let results = [];
+          const fullContext = {
+            nextSpawnId: 1,
+            roseDirs: [1, 2, 3, 4, 5, 6, 7, 8],
+            orthoDirs: [1, 3, 5, 7],
+            diagDirs: [2, 4, 6, 8],
+            ownerNames:
+              player === 1
+                ? ["neutral", "my", "opp"]
+                : ["neutral", "opp", "my"],
+            gameDef: def,
+            ...context
+          };
+          const pre =
+            Object.keys(fullContext).reduce(
+              (mem, key) =>
+                mem + `let ${key} = ${JSON.stringify(fullContext[key])}; `,
+              ""
+            ) +
+            `
+              const {offsetPos, boardConnections, makeRelativeDirs} = require('${path.join(
+                __dirname,
+                "../../common"
+              )}');
+              const {collapseContent} = require('${path.join(
+                __dirname,
+                "../def2code/executors"
+              )}');
+              const connections = boardConnections(gameDef.board);
+              const relativeDirs = makeRelativeDirs(gameDef.board);
+            `;
+          let body = isAlgolExpressionTest(suiteTest)
+            ? `results[0] = ${code}`
+            : `${code}; ` +
+              suiteTest.asserts
+                .map((assert, n) => `results[${n}] = ${assert.sample};`)
+                .join("; ");
+          try {
+            eval(pre + " " + body);
+          } catch (e) {
+            console.log("KABOOM", code);
+            throw e;
+          }
+          type check = { res: any; desc?: string; debug?: boolean };
+          const checks: check[] = isAlgolExpressionTest(suiteTest)
+            ? [
+                {
+                  res: suiteTest.res,
+                  desc: suiteTest.desc,
+                  debug: suiteTest.debug
+                }
+              ]
+            : suiteTest.asserts;
+          checks.forEach(({ res, desc, debug }, n) => {
+            const processedResult =
+              (res as unknown) === truthy || (res as unknown) === falsy
+                ? !!results[n]
+                : results[n];
+            const processedComparator =
+              (res as unknown) === truthy
+                ? true
+                : (res as unknown) === falsy
+                ? false
+                : res;
+            expect(processedResult).toEqual(processedComparator);
+            if (debug) {
+              console.log(
+                "CODE",
+                code,
+                "exp",
+                res,
+                "pexp",
+                processedComparator,
+                "result",
+                results[n],
+                "presult",
+                processedResult
+              );
+            }
+          });
+        }
       }
-
-      const processedResult =
-        (res as unknown) === truthy || (res as unknown) === falsy
-          ? !!result
-          : result;
-      const processedComparator =
-        (res as unknown) === truthy
-          ? true
-          : (res as unknown) === falsy
-          ? false
-          : res;
-      expect(processedResult).toEqual(processedComparator);
-      if (debug) {
-        console.log(
-          "CODE",
-          code,
-          "exp",
-          res,
-          "pexp",
-          processedComparator,
-          "result",
-          result,
-          "presult",
-          processedResult
-        );
-      }
-    });
+    }
   });
 }

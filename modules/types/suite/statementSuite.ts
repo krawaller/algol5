@@ -24,3 +24,7 @@ export function isAlgolStatementSuite(
     undefined
   );
 }
+
+export function isAlgolStatementTest(tst: any): tst is AlgolStatementTest {
+  return (tst as AlgolStatementTest).asserts !== undefined;
+}

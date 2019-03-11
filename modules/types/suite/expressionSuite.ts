@@ -20,3 +20,7 @@ export function isAlgolExpressionSuite(
     undefined
   );
 }
+
+export function isAlgolExpressionTest(tst: any): tst is AlgolExpressionTest {
+  return (tst as AlgolExpressionTest).res !== undefined;
+}

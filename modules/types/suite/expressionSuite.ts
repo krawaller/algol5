@@ -1,29 +1,22 @@
-import { FullDefAnon } from "..";
+import { AlgolSuite, AlgolSuiteFrame } from "../";
 
-export type AlgolExpressionSuite<T = any, U = any> = {
-  title: string;
-  func: {
-    (def: FullDefAnon, player: 1 | 2, action: string, input?: T): string;
-    funcName?: string;
-  };
-  defs: ExpressionParserTest<T, U>[];
-};
-
-export type ExpressionParserTest<T, U> = {
-  def: FullDefAnon;
-  player: 1 | 2;
-  action: string;
-  contexts: ExpressionContextTest<T, U>[];
-};
-
-export type ExpressionContextTest<T, U> = {
-  context: { [idx: string]: any };
-  tests: ExpressionTest<T, U>[];
-};
-
-export type ExpressionTest<T, U> = {
-  expr: T;
-  res: U;
+export type AlgolExpressionTest<Input = any, Output = any> = {
+  expr: Input;
+  res: Output;
   debug?: boolean;
   desc?: string;
 };
+
+export type AlgolExpressionSuite<I = any, O = any> = AlgolSuiteFrame<
+  I,
+  AlgolExpressionTest<I, O>
+>;
+
+export function isAlgolExpressionSuite(
+  suite: AlgolSuite
+): suite is AlgolExpressionSuite {
+  return (
+    (suite.defs[0].contexts[0].tests[0] as AlgolExpressionTest).res !==
+    undefined
+  );
+}

@@ -1,35 +1,26 @@
-import { FullDefAnon } from "..";
+import { AlgolSuite, AlgolSuiteFrame } from "..";
 
-export type AlgolStatementSuite<T = any> = {
-  title: string;
-  func: {
-    (def: FullDefAnon, player: 1 | 2, action: string, input?: T): string;
-    funcName?: string;
-  };
-  defs: StatementParserTest<T>[];
-};
-
-export type StatementParserTest<T> = {
-  def: FullDefAnon;
-  player: 1 | 2;
-  action: string;
-  contexts: StatementContextTest<T>[];
-};
-
-export type StatementContextTest<T> = {
-  context: { [idx: string]: any };
-  tests: StatementTest<T>[];
-};
-
-export type StatementTest<T> = {
-  expr: T;
-  asserts: StatementAssertion<T>[];
+export type AlgolStatementTest<Input = any> = {
+  expr: Input;
   desc?: string;
+  asserts: {
+    sample: string;
+    res: any;
+    debug?: boolean;
+    desc?: string;
+  }[];
 };
 
-export type StatementAssertion<T> = {
-  sample: string;
-  res: any;
-  debug?: boolean;
-  desc?: string;
-};
+export type AlgolStatementSuite<I = any> = AlgolSuiteFrame<
+  I,
+  AlgolStatementTest<I>
+>;
+
+export function isAlgolStatementSuite(
+  suite: AlgolSuite
+): suite is AlgolStatementSuite {
+  return (
+    (suite.defs[0].contexts[0].tests[0] as AlgolStatementTest).asserts !==
+    undefined
+  );
+}

@@ -1,15 +1,7 @@
 export * from "./expressionSuite";
 export * from "./statementSuite";
+export * from "./suiteFrame";
 
-import { AlgolExpressionSuite, AlgolStatementSuite, ExpressionTest } from "../";
+import { AlgolStatementSuite, AlgolExpressionSuite } from "../";
 
 export type AlgolSuite = AlgolExpressionSuite | AlgolStatementSuite;
-
-function isAlgolExpressionSuite(
-  suite: AlgolSuite
-): suite is AlgolExpressionSuite {
-  return (
-    (suite.defs[0].contexts[0].tests[0] as ExpressionTest<any, any>).res !==
-    undefined
-  );
-}

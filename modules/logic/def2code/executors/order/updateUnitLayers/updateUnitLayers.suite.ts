@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../../types";
 
 export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
-  title: "Effect - UpdateUnitLayers",
+  title: "Order - UpdateUnitLayers",
   func: executeOrder,
   defs: [
     {

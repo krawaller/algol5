@@ -13,6 +13,7 @@ import { executeGenerator } from "./generate";
 import { executeLink } from "./link";
 import { executeEffect } from "./effect";
 import { updateUnitLayers } from "./updateUnitLayers";
+import { addMark } from "./addMark";
 
 export function executeOrder(
   gameDef: FullDefAnon,
@@ -40,6 +41,8 @@ function executeOrderInner(
     switch (order[0]) {
       case "unitLayers":
         return updateUnitLayers(gameDef, player, action, true); // TODO - fix
+      case "addMark":
+        return addMark(gameDef, player, action);
     }
   }
   if (isAlgolOrderLinks(order)) {

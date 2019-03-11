@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Artifacts - Walker - Basics",
   func: executeOrder,
   defs: [
@@ -68,33 +68,53 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { generators: ["singleStartDirDrawSteps"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: {}, a3: {}, a4: {} },
-              desc: "A simple walker walks to end"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: {}, a3: {}, a4: {} },
+                  desc: "A simple walker walks to end"
+                }
+              ]
             },
             {
               expr: { generators: ["singleStartDirInclStepNumber"] },
-              sample: "ARTIFACTS.flarps",
-              res: { c1: { n: 1 }, d1: { n: 2 } },
-              desc: "It can number the steps"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { c1: { n: 1 }, d1: { n: 2 } },
+                  desc: "It can number the steps"
+                }
+              ]
             },
             {
               expr: { generators: ["singleStartDirInclLength"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a1: { l: 3 } },
-              desc: "It can tell total length"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a1: { l: 3 } },
+                  desc: "It can tell total length"
+                }
+              ]
             },
             {
               expr: { generators: ["drawLast"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a4: {} },
-              desc: "It can draw last"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a4: {} },
+                  desc: "It can draw last"
+                }
+              ]
             },
             {
               expr: { generators: ["drawBlocks"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a3: {}, d4: {} },
-              desc: "It draws blocks"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a3: {}, d4: {} },
+                  desc: "It draws blocks"
+                }
+              ]
             }
           ]
         }

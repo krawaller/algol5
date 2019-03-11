@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../../types";
+import { AlgolStatementSuite, AlgolOrderAnon } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Link - EndTurn",
   func: executeOrder,
   defs: [
@@ -40,9 +40,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { links: ["endturn"] },
-              sample: "turn.links.foo",
-              res: { endturn: "start2", otherlink: "someaction" },
-              desc: "we can link to endturn, passing over to next plr"
+              asserts: [
+                {
+                  sample: "turn.links.foo",
+                  res: { endturn: "start2", otherlink: "someaction" },
+                  desc: "we can link to endturn, passing over to next plr"
+                }
+              ]
             }
           ]
         },
@@ -56,15 +60,23 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { links: ["endturn"] },
-              sample: "turn.links.foo",
-              res: { win: "conquer", otherlink: "someaction" },
-              desc: "we can link to winning the game"
+              asserts: [
+                {
+                  sample: "turn.links.foo",
+                  res: { win: "conquer", otherlink: "someaction" },
+                  desc: "we can link to winning the game"
+                }
+              ]
             },
             {
               expr: { links: ["endturn"] },
-              sample: "turn.endMarks.foo",
-              res: { conquer: { a1: {}, a2: {} } },
-              desc: "winning move can highlight set"
+              asserts: [
+                {
+                  sample: "turn.endMarks.foo",
+                  res: { conquer: { a1: {}, a2: {} } },
+                  desc: "winning move can highlight set"
+                }
+              ]
             }
           ]
         },
@@ -78,9 +90,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { links: ["endturn"] },
-              sample: "turn.links.foo",
-              res: { lose: "surrender", otherlink: "someaction" },
-              desc: "we can link to losing endturn"
+              asserts: [
+                {
+                  sample: "turn.links.foo",
+                  res: { lose: "surrender", otherlink: "someaction" },
+                  desc: "we can link to losing endturn"
+                }
+              ]
             }
           ]
         },
@@ -94,9 +110,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { links: ["endturn"] },
-              sample: "turn.links.foo",
-              res: { draw: "neither", otherlink: "someaction" },
-              desc: "we can link to draw endturn"
+              asserts: [
+                {
+                  sample: "turn.links.foo",
+                  res: { draw: "neither", otherlink: "someaction" },
+                  desc: "we can link to draw endturn"
+                }
+              ]
             }
           ]
         }

@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Effect - Util",
   func: executeOrder,
   defs: [
@@ -31,15 +31,31 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "!UNITDATA.unit1 && UNITDATA.unit2",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                },
+                {
+                  sample: "UNITDATA.unit2",
+                  res: truthy
+                }
+              ]
             },
             {
               expr: {
                 effects: [{ multi: [{ killid: "unit2" }, { killid: "unit1" }] }]
               },
-              sample: "UNITDATA.unit1 || UNITDATA.unit2",
-              res: falsy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                },
+                {
+                  sample: "UNITDATA.unit2",
+                  res: falsy
+                }
+              ]
             },
             {
               expr: {
@@ -49,15 +65,27 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "!UNITDATA.unit1 && UNITDATA.unit2",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                },
+                {
+                  sample: "UNITDATA.unit2",
+                  res: truthy
+                }
+              ]
             },
             {
               expr: {
                 effects: [{ foridin: ["units", { killid: ["loopid"] }] }]
               },
-              sample: "UNITDATA",
-              res: {}
+              asserts: [
+                {
+                  sample: "UNITDATA",
+                  res: {}
+                }
+              ]
             }
           ]
         }

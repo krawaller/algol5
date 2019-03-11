@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../../types";
+import { AlgolStatementSuite, AlgolOrderAnon } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Order - UpdateUnitLayers",
   func: executeOrder,
   defs: [
@@ -29,12 +29,16 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: ["addMark"],
-              sample: "MARKS",
-              res: {
-                oldermark: "a1",
-                somemark: "b2"
-              },
-              desc: "correctly adds new mark"
+              asserts: [
+                {
+                  sample: "MARKS",
+                  res: {
+                    oldermark: "a1",
+                    somemark: "b2"
+                  },
+                  desc: "correctly adds new mark"
+                }
+              ]
             }
           ]
         }

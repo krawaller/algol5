@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Effect - Spawning",
   func: executeOrder,
   defs: [
@@ -30,27 +30,40 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.spawn1",
-              res: {
-                id: "spawn1",
-                group: "flerps",
-                owner: 2,
-                baz: "bin",
-                pos: "c3"
-              },
-              desc: "Spawning creates clone with correct characteristics"
+              asserts: [
+                {
+                  sample: "UNITDATA.spawn1",
+                  res: {
+                    id: "spawn1",
+                    group: "flerps",
+                    owner: 2,
+                    baz: "bin",
+                    pos: "c3"
+                  },
+                  desc: "Spawning creates clone with correct characteristics"
+                }
+              ]
             },
             {
               expr: { effects: [{ spawnat: ["othermark", "gnurps"] }] },
-              sample: "UNITDATA.spawn1.owner",
-              res: 1,
-              desc: "Spawning defaults owner to current player if none provided"
+              asserts: [
+                {
+                  sample: "UNITDATA.spawn1.owner",
+                  res: 1,
+                  desc:
+                    "Spawning defaults owner to current player if none provided"
+                }
+              ]
             },
             {
               expr: { effects: [{ spawnat: ["othermark", "gnurps"] }] },
-              sample: "UNITDATA.unit1",
-              res: { id: "unit1" },
-              desc: "Spawning doesn't affect already existing units"
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: { id: "unit1" },
+                  desc: "Spawning doesn't affect already existing units"
+                }
+              ]
             },
             {
               expr: {
@@ -65,9 +78,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "nextSpawnId",
-              res: 2,
-              desc: "spawning increases the nextSpawnId counter"
+              asserts: [
+                {
+                  sample: "nextSpawnId",
+                  res: 2,
+                  desc: "spawning increases the nextSpawnId counter"
+                }
+              ]
             },
             {
               expr: {
@@ -80,9 +97,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.spawn1",
-              res: { id: "spawn1", group: "flurps", owner: 1, pos: "c3" },
-              desc: "multispawn created correct first unit"
+              asserts: [
+                {
+                  sample: "UNITDATA.spawn1",
+                  res: { id: "spawn1", group: "flurps", owner: 1, pos: "c3" },
+                  desc: "multispawn created correct first unit"
+                }
+              ]
             },
             {
               expr: {
@@ -95,9 +116,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.spawn2",
-              res: { id: "spawn2", group: "flurps", owner: 1, pos: "d4" },
-              desc: "multispawn created correct second unit"
+              asserts: [
+                {
+                  sample: "UNITDATA.spawn2",
+                  res: { id: "spawn2", group: "flurps", owner: 1, pos: "d4" },
+                  desc: "multispawn created correct second unit"
+                }
+              ]
             },
             {
               expr: {
@@ -110,9 +135,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "nextSpawnId",
-              res: 3,
-              desc: "multispawn increased counter by total number of spawns"
+              asserts: [
+                {
+                  sample: "nextSpawnId",
+                  res: 3,
+                  desc: "multispawn increased counter by total number of spawns"
+                }
+              ]
             },
             {
               expr: {
@@ -127,15 +156,19 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.spawn2",
-              res: {
-                id: "spawn2",
-                group: "flurps",
-                owner: 2,
-                pos: "d4",
-                foo: "bar"
-              },
-              desc: "multispawn supports passing owner and props"
+              asserts: [
+                {
+                  sample: "UNITDATA.spawn2",
+                  res: {
+                    id: "spawn2",
+                    group: "flurps",
+                    owner: 2,
+                    pos: "d4",
+                    foo: "bar"
+                  },
+                  desc: "multispawn supports passing owner and props"
+                }
+              ]
             }
           ]
         }

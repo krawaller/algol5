@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Effect - Killing",
   func: executeOrder,
   defs: [
@@ -25,23 +25,47 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { effects: [{ killat: "unit1mark" }] },
-              sample: "UNITDATA.unit2 && !UNITDATA.unit1",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit2",
+                  res: truthy
+                },
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                }
+              ]
             },
             {
               expr: { effects: [{ killid: "unit1" }] },
-              sample: "UNITDATA.unit1",
-              res: falsy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                }
+              ]
             },
             {
               expr: { effects: [{ killid: { value: "unit1" } }] },
-              sample: "UNITDATA.unit1",
-              res: falsy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                }
+              ]
             },
             {
               expr: { effects: [{ killin: { single: "unit1mark" } }] },
-              sample: "!UNITDATA.unit1 && UNITDATA.unit2",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                },
+                {
+                  sample: "UNITDATA.unit2",
+                  res: truthy
+                }
+              ]
             }
           ]
         }

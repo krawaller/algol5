@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Effect - Logical",
   func: executeOrder,
   defs: [
@@ -35,8 +35,16 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "!UNITDATA.unit1 && UNITDATA.unit2",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit2",
+                  res: truthy
+                },
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                }
+              ]
             },
             {
               expr: {
@@ -46,8 +54,12 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.unit1",
-              res: falsy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                }
+              ]
             },
             {
               expr: {
@@ -57,8 +69,12 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.unit1",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: truthy
+                }
+              ]
             },
             {
               expr: {
@@ -68,8 +84,12 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.unit1",
-              res: falsy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                }
+              ]
             },
             {
               expr: {
@@ -79,8 +99,12 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.unit1",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: truthy
+                }
+              ]
             },
             {
               expr: {
@@ -90,8 +114,12 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.unit1",
-              res: falsy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: falsy
+                }
+              ]
             },
             {
               expr: {
@@ -101,8 +129,12 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.unit1",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1",
+                  res: truthy
+                }
+              ]
             }
           ]
         }

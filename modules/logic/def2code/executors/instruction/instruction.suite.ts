@@ -2,11 +2,14 @@ import { executeInstruction } from "..";
 import { emptyFullDef } from "../../../../common";
 import {
   AlgolInstrAnon,
-  AlgolWriterSuite,
+  AlgolExpressionSuite,
   AlgolContentAnon
 } from "../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolInstrAnon, AlgolContentAnon> = {
+export const testSuite: AlgolExpressionSuite<
+  AlgolInstrAnon,
+  AlgolContentAnon
+> = {
   title: "Instruction",
   func: executeInstruction,
   defs: [

@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Artifacts - Logical",
   func: executeOrder,
   defs: [
@@ -34,15 +34,23 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { generators: [{ ifplayer: [1, "simpleOrthoReacher"] }] },
-              sample: "ARTIFACTS.neighbours",
-              res: { a2: {}, b1: {}, b3: {}, c2: {} },
-              desc: "Generator is run if if is truthy"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.neighbours",
+                  res: { a2: {}, b1: {}, b3: {}, c2: {} },
+                  desc: "Generator is run if if is truthy"
+                }
+              ]
             },
             {
               expr: { generators: [{ ifplayer: [2, "simpleOrthoReacher"] }] },
-              sample: "ARTIFACTS.neighbours",
-              res: {},
-              desc: "Generator is not run if if is falsy"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.neighbours",
+                  res: {},
+                  desc: "Generator is not run if if is falsy"
+                }
+              ]
             }
           ]
         }

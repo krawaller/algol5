@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Artifacts - Neighbours",
   func: executeOrder,
   defs: [
@@ -72,34 +72,58 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { generators: ["singleDirAndStartDrawNeighbours"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: {} }
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: {} }
+                }
+              ]
             },
             {
               expr: { generators: ["singleDirAndStartDrawNeighboursAndStart"] },
-              sample: "ARTIFACTS",
-              res: { flarps: { a2: {} }, blarps: { a1: {} } }
+              asserts: [
+                {
+                  sample: "ARTIFACTS",
+                  res: { flarps: { a2: {} }, blarps: { a1: {} } }
+                }
+              ]
             },
             {
               expr: { generators: ["singleStartOrthoDrawNeighbours"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: {}, b1: {} }
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: {}, b1: {} }
+                }
+              ]
             },
             {
               expr: { generators: ["multiStartsDrawNeighbours"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: {}, b2: {} }
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: {}, b2: {} }
+                }
+              ]
             },
             {
               expr: { generators: ["multiStartMultiDirDrawNeighbours"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: {}, b1: {}, b2: {}, c1: {} }
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: {}, b1: {}, b2: {}, c1: {} }
+                }
+              ]
             },
             {
               expr: { generators: ["singleStartMultiDirInclNeighCount"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a1: { n: 3 } },
-              desc: "We can access neighbour count in start draw"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a1: { n: 3 } },
+                  desc: "We can access neighbour count in start draw"
+                }
+              ]
             }
           ]
         }

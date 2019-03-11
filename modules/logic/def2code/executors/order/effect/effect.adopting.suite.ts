@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Effect - Adopting",
   func: executeOrder,
   defs: [
@@ -25,8 +25,12 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { effects: [{ adoptat: ["unit1mark", { value: 0 }] }] },
-              sample: "UNITDATA.unit1.owner",
-              res: 0
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1.owner",
+                  res: 0
+                }
+              ]
             },
             {
               expr: {
@@ -36,14 +40,25 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.unit2.owner",
-              res: 2
+              asserts: [
+                {
+                  sample: "UNITDATA.unit2.owner",
+                  res: 2
+                }
+              ]
             },
             {
               expr: { effects: [{ adoptin: ["units", 0] }] },
-              sample:
-                "UNITDATA.unit1.owner === 0 && UNITDATA.unit2.owner === 0",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1.owner",
+                  res: 0
+                },
+                {
+                  sample: "UNITDATA.unit2.owner",
+                  res: 0
+                }
+              ]
             }
           ]
         }

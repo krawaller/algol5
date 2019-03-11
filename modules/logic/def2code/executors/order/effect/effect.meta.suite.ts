@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Effect - Meta",
   func: executeOrder,
   defs: [
@@ -19,9 +19,18 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { effects: [{ setturnvar: ["newturnvar", 5] }] },
-              sample: "TURNVARS.newturnvar",
-              res: 5,
-              desc: "We can set a new turnvar"
+              asserts: [
+                {
+                  sample: "TURNVARS.newturnvar",
+                  res: 5,
+                  desc: "We can set a new turnvar"
+                },
+                {
+                  sample: "TURNVARS.previous",
+                  res: 666,
+                  desc: "Existing turnvar isn't affected when we set a new one"
+                }
+              ]
             },
             {
               expr: {
@@ -29,25 +38,24 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   { setturnvar: [{ value: "newturnvar" }, { sum: [3, 2] }] }
                 ]
               },
-              sample: "TURNVARS.newturnvar",
-              res: 5,
-              desc: "Setturnvar supports value expressions for name and value"
-            },
-            {
-              expr: {
-                effects: [
-                  { setturnvar: [{ value: "newturnvar" }, { sum: [3, 2] }] }
-                ]
-              },
-              sample: "TURNVARS.previous",
-              res: 666,
-              desc: "Existing turnvar isn't affected when we set a new one"
+              asserts: [
+                {
+                  sample: "TURNVARS.newturnvar",
+                  res: 5,
+                  desc:
+                    "Setturnvar supports value expressions for name and value"
+                }
+              ]
             },
             {
               expr: { effects: [{ setturnpos: ["newturnpos", "mymark"] }] },
-              sample: "TURNVARS.newturnpos",
-              res: "a1",
-              desc: "We can set a new turnpos"
+              asserts: [
+                {
+                  sample: "TURNVARS.newturnpos",
+                  res: "a1",
+                  desc: "We can set a new turnpos"
+                }
+              ]
             }
           ]
         },
@@ -59,9 +67,19 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { effects: [{ setbattlevar: ["newbattlevar", 5] }] },
-              sample: "BATTLEVARS.newbattlevar",
-              res: 5,
-              desc: "We can set a new battlevar"
+              asserts: [
+                {
+                  sample: "BATTLEVARS.newbattlevar",
+                  res: 5,
+                  desc: "We can set a new battlevar"
+                },
+                {
+                  sample: "BATTLEVARS.previous",
+                  res: 666,
+                  desc:
+                    "Existing battlevar isn't affected when we set a new one"
+                }
+              ]
             },
             {
               expr: {
@@ -71,27 +89,24 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "BATTLEVARS.newbattlevar",
-              res: 5,
-              desc: "Setbattlevar supports value expressions for name and value"
-            },
-            {
-              expr: {
-                effects: [
-                  {
-                    setbattlevar: [{ value: "newbattlevar" }, { sum: [3, 2] }]
-                  }
-                ]
-              },
-              sample: "BATTLEVARS.previous",
-              res: 666,
-              desc: "Existing battlevar isn't affected when we set a new one"
+              asserts: [
+                {
+                  sample: "BATTLEVARS.newbattlevar",
+                  res: 5,
+                  desc:
+                    "Setbattlevar supports value expressions for name and value"
+                }
+              ]
             },
             {
               expr: { effects: [{ setbattlepos: ["newbattlepos", "mymark"] }] },
-              sample: "BATTLEVARS.newbattlepos",
-              res: "a1",
-              desc: "We can set a new battlepos"
+              asserts: [
+                {
+                  sample: "BATTLEVARS.newbattlepos",
+                  res: "a1",
+                  desc: "We can set a new battlepos"
+                }
+              ]
             }
           ]
         }

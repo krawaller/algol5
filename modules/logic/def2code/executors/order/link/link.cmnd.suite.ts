@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolWriterSuite, AlgolOrderAnon } from "../../../../../types";
+import { AlgolStatementSuite, AlgolOrderAnon } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Link - Command",
   func: executeOrder,
   defs: [
@@ -29,9 +29,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { links: ["mycmnd"] },
-              sample: "turn.links.root",
-              res: { mycmnd: "mycmnd1", b3: "somemark" },
-              desc: "we can link to a cmnd from start"
+              asserts: [
+                {
+                  sample: "turn.links.root",
+                  res: { mycmnd: "mycmnd1", b3: "somemark" },
+                  desc: "we can link to a cmnd from start"
+                }
+              ]
             }
           ]
         }
@@ -61,9 +65,13 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { links: ["mycmnd"] },
-              sample: "turn.links.foo",
-              res: { mycmnd: "mycmnd2", b3: "somemark" },
-              desc: "we can link to a cmnd from non-start"
+              asserts: [
+                {
+                  sample: "turn.links.foo",
+                  res: { mycmnd: "mycmnd2", b3: "somemark" },
+                  desc: "we can link to a cmnd from non-start"
+                }
+              ]
             }
           ]
         }

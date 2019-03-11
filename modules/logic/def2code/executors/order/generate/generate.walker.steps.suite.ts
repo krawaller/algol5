@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Artifacts - Walker - Steps",
   func: executeOrder,
   defs: [
@@ -95,40 +95,64 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { generators: ["withSteps"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: {}, a3: {} },
-              desc: "It doesnt mark beyond given steps"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: {}, a3: {} },
+                  desc: "It doesnt mark beyond given steps"
+                }
+              ]
             },
             {
               expr: { generators: ["startAsStep"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a1: {}, a2: {}, a3: {} },
-              desc: "It can be told to include start in steps"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a1: {}, a2: {}, a3: {} },
+                  desc: "It can be told to include start in steps"
+                }
+              ]
             },
             {
               expr: { generators: ["startAsStepWithCount"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a1: { n: 1 }, a2: { n: 2 }, a3: { n: 3 } },
-              desc: "Stepcount is adjusted when including start in steps"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a1: { n: 1 }, a2: { n: 2 }, a3: { n: 3 } },
+                  desc: "Stepcount is adjusted when including start in steps"
+                }
+              ]
             },
             {
               expr: { generators: ["startAsStepNoSteps"] },
-              sample: "ARTIFACTS.flarps",
-              res: undefined,
-              desc:
-                "If include start as step and no step at start, it draws nothing"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: undefined,
+                  desc:
+                    "If include start as step and no step at start, it draws nothing"
+                }
+              ]
             },
             {
               expr: { generators: ["stepsBeforeBlocks"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: {}, a1: { because: "nomoresteps" } },
-              desc: "It checks steps before blocks by default"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: {}, a1: { because: "nomoresteps" } },
+                  desc: "It checks steps before blocks by default"
+                }
+              ]
             },
             {
               expr: { generators: ["blocksBeforeSteps"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: {}, a1: { because: "hitblock" } },
-              desc: "It can be told to check blocks before steps"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: {}, a1: { because: "hitblock" } },
+                  desc: "It can be told to check blocks before steps"
+                }
+              ]
             }
           ]
         }

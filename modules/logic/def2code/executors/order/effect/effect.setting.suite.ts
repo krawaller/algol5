@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Effect - Setting",
   func: executeOrder,
   defs: [
@@ -31,20 +31,32 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
                   }
                 ]
               },
-              sample: "UNITDATA.unit1.prop",
-              res: "wee"
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1.prop",
+                  res: "wee"
+                }
+              ]
             },
             {
               expr: {
                 effects: [{ setin: [{ single: "unit1mark" }, "prop", "wee"] }]
               },
-              sample: "UNITDATA.unit1.prop",
-              res: "wee"
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1.prop",
+                  res: "wee"
+                }
+              ]
             },
             {
               expr: { effects: [{ setid: ["unit2", "prop", "wee"] }] },
-              sample: "UNITDATA.unit2.prop",
-              res: "wee"
+              asserts: [
+                {
+                  sample: "UNITDATA.unit2.prop",
+                  res: "wee"
+                }
+              ]
             }
           ]
         }

@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Artifacts - Walker - Count",
   func: executeOrder,
   defs: [
@@ -81,32 +81,48 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
           tests: [
             {
               expr: { generators: ["totalCount"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a1: { total: 2 } },
-              desc: "It can count a given set"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a1: { total: 2 } },
+                  desc: "It can count a given set"
+                }
+              ]
             },
             {
               expr: { generators: ["drawCount"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a2: { total: 2 }, a4: { total: 2 } },
-              desc: "It can draw the counted steps"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a2: { total: 2 }, a4: { total: 2 } },
+                  desc: "It can draw the counted steps"
+                }
+              ]
             },
             {
               expr: { generators: ["totalAndLast"] },
-              sample: "ARTIFACTS.flarps",
-              res: { a4: { n: 2 } },
-              desc: "It can handle last and totalcount"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: { a4: { n: 2 } },
+                  desc: "It can handle last and totalcount"
+                }
+              ]
             },
             {
               expr: { generators: ["countSoFar"] },
-              sample: "ARTIFACTS.flarps",
-              res: {
-                a1: { now: 0 },
-                a2: { now: 1 },
-                a3: { now: 1 },
-                a4: { now: 2 }
-              },
-              desc: "It can tell you current count"
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flarps",
+                  res: {
+                    a1: { now: 0 },
+                    a2: { now: 1 },
+                    a3: { now: 1 },
+                    a4: { now: 2 }
+                  },
+                  desc: "It can tell you current count"
+                }
+              ]
             }
           ]
         }

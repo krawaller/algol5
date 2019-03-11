@@ -1,8 +1,8 @@
 import { executeOrder } from "../../../executors";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
-import { AlgolOrderAnon, AlgolWriterSuite } from "../../../../../types";
+import { AlgolOrderAnon, AlgolStatementSuite } from "../../../../../types";
 
-export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
+export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   title: "Effect - Morphing",
   func: executeOrder,
   defs: [
@@ -27,21 +27,36 @@ export const testSuite: AlgolWriterSuite<AlgolOrderAnon> = {
               expr: {
                 effects: [{ morphat: ["unit1mark", { value: "berps" }] }]
               },
-              sample: "UNITDATA.unit1.group",
-              res: "berps"
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1.group",
+                  res: "berps"
+                }
+              ]
             },
             {
               expr: {
                 effects: [{ morphid: [{ value: "unit2" }, { value: "berps" }] }]
               },
-              sample: "UNITDATA.unit2.group",
-              res: "berps"
+              asserts: [
+                {
+                  sample: "UNITDATA.unit2.group",
+                  res: "berps"
+                }
+              ]
             },
             {
               expr: { effects: [{ morphin: ["units", "berps"] }] },
-              sample:
-                "UNITDATA.unit1.group === 'berps' && UNITDATA.unit2.group === 'berps'",
-              res: truthy
+              asserts: [
+                {
+                  sample: "UNITDATA.unit1.group",
+                  res: "berps"
+                },
+                {
+                  sample: "UNITDATA.unit2.group",
+                  res: "berps"
+                }
+              ]
             }
           ]
         }

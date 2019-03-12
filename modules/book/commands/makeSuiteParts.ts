@@ -10,14 +10,16 @@ import * as prettier from "prettier";
 const out = path.join(__dirname, "../parts/suites");
 
 fs.ensureDir(out).then(async () => {
+  console.log(" --------- Printing", suites.length, "suites");
   await Promise.all(
-    suites.map(suite => {
+    suites.map(async suite => {
       const content = printSuite(suite);
       const filePath = path.join(out, `${suite.title.toLowerCase()}.md`);
-      return fs.writeFile(filePath, content);
+      await fs.writeFile(filePath, content);
+      console.log("Printed", suite.title);
     })
   );
-  console.log("All suite parts written");
+  console.log(" -------- All suite parts written");
 });
 
 export function printSuite(suite: AlgolSuite) {
@@ -32,7 +34,7 @@ This suite uses the \`${funcName}\` function. It contains ${
 
   for (const nSig in suite.defs) {
     const def = suite.defs[nSig];
-    ret += `## Signature ${nSig + 1}\n\n`;
+    ret += `## Signature ${+nSig + 1}\n\n`;
 
     if (def.def === emptyFullDef) {
       ret += `This signature uses the **empty game definition**. `;
@@ -55,7 +57,7 @@ ${format(defDiff(def.def, emptyFullDef), true)}
 
     for (const nCtx in def.contexts) {
       const ctx = def.contexts[nCtx];
-      ret += `### Context ${nSig + 1}-${nCtx + 1}\n\n`;
+      ret += `### Context ${+nSig + 1}-${+nCtx + 1}\n\n`;
       if (JSON.stringify(ctx.context) === "{}") {
         ret += "This context is **empty**.\n\n";
       } else {
@@ -75,8 +77,8 @@ ${format(JSON.stringify(ctx.context), true)}
         const suiteTest = ctx.tests[nTest];
         const isExpression = isAlgolExpressionTest(suiteTest);
 
-        ret += `#### Input ${nSig + 1}-${nCtx + 1}-${nTest + 1}\n\n`;
-        const inputCode = format(JSON.stringify(suiteTest.expr), isExpression);
+        ret += `#### Input ${+nSig + 1}-${+nCtx + 1}-${+nTest + 1}\n\n`;
+        const inputCode = format(JSON.stringify(suiteTest.expr), true);
         const resultingCode = format(
           suite.func(def.def, def.player, def.action, suiteTest.expr),
           isExpression
@@ -88,61 +90,65 @@ ${format(JSON.stringify(ctx.context), true)}
 
 \`\`\`typescript
 ${inputCode}
-\`\`\`
+\`\`\`\n\n`;
 
-...we get this code:
+        if (resultingCode) {
+          ret += `...we get this code:
 
 \`\`\`typescript
 ${resultingCode}
 \`\`\`\n\n`;
 
-        if (isAlgolExpressionTest(suiteTest)) {
-          const codeEqualsRes =
-            resultingCode === format(JSON.stringify(suiteTest.res), true);
-          const truthyFalsy =
-            suiteTest.res === truthy || suiteTest.res === falsy;
-
-          if (!codeEqualsRes && truthyFalsy) {
-            ret += `When evaluated in the current context, that expression is ${
-              suiteTest.res === truthy ? "truthy" : "falsy"
-            }.\n\n`;
-          } else if (!codeEqualsRes) {
-            ret += showEval(
-              "In the current context that evaluates to",
-              suiteTest.res
-            );
-          }
-        } else {
-          for (const nAssert in suiteTest.asserts) {
-            const assert = suiteTest.asserts[nAssert];
-
+          if (isAlgolExpressionTest(suiteTest)) {
             const codeEqualsRes =
-              resultingCode === format(JSON.stringify(assert.res), true);
-            const truthyFalsy = assert.res === truthy || assert.res === falsy;
+              resultingCode === format(JSON.stringify(suiteTest.res), true);
+            const truthyFalsy =
+              suiteTest.res === truthy || suiteTest.res === falsy;
 
-            if (assert.sample && truthyFalsy) {
-              const lead = nAssert
-                ? "Also,"
-                : "After executing that code in the current context,";
-              ret += `${lead} the following expression is ${
-                assert.res === truthy ? "truthy" : "falsy"
-              }:
-    
-    \`\`\`typescript
-    ${format(assert.sample, true)}
-    \`\`\`\n\n`;
-            } else {
-              const lead = nAssert
-                ? "Also,"
-                : "If we run that in the current context, then";
-              ret += `${lead} this expression...
-    
-    \`\`\`typescript
-    ${format(assert.sample, true)}
-    \`\`\`\n\n`;
-              ret += showEval("...would evaluate to", assert.res);
+            if (!codeEqualsRes && truthyFalsy) {
+              ret += `When evaluated in the current context, that expression is ${
+                suiteTest.res === truthy ? "truthy" : "falsy"
+              }.\n\n`;
+            } else if (!codeEqualsRes) {
+              ret += showEval(
+                "In the current context that evaluates to",
+                suiteTest.res
+              );
+            }
+          } else {
+            for (const nAssert in suiteTest.asserts) {
+              const assert = suiteTest.asserts[nAssert];
+
+              const codeEqualsRes =
+                resultingCode === format(JSON.stringify(assert.res), true);
+              const truthyFalsy = assert.res === truthy || assert.res === falsy;
+
+              if (assert.sample && truthyFalsy) {
+                const lead = +nAssert
+                  ? "Also,"
+                  : "After executing that code in the current context,";
+                ret += `${lead} the following expression is ${
+                  assert.res === truthy ? "truthy" : "falsy"
+                }:
+
+\`\`\`typescript
+${format(assert.sample, true)}
+\`\`\`\n\n`;
+              } else {
+                const lead = +nAssert
+                  ? "Also,"
+                  : "If we run that in the current context, then";
+                ret += `${lead} this expression...
+
+\`\`\`typescript
+${format(assert.sample, true)}
+\`\`\`\n\n`;
+                ret += showEval("...would evaluate to", assert.res);
+              }
             }
           }
+        } else {
+          ret += `...we get no code output at all! This is a noop.\n\n`;
         }
       }
     }
@@ -151,16 +157,21 @@ ${resultingCode}
 }
 
 function format(input, isExpression) {
-  if (isExpression) {
-    return prettier
-      .format("let e = " + input, {
+  try {
+    if (isExpression) {
+      return prettier
+        .format("let e = " + input, {
+          parser: "typescript"
+        })
+        .slice(8, -2);
+    } else {
+      return prettier.format(input, {
         parser: "typescript"
-      })
-      .slice(8, -2);
-  } else {
-    return prettier.format(input, {
-      parser: "typescript"
-    });
+      });
+    }
+  } catch (e) {
+    console.log("BOOM", input, isExpression);
+    throw e;
   }
 }
 

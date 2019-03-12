@@ -13,7 +13,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           ...emptyFullDef.flow,
           marks: {
             somemark: {
-              from: ""
+              from: "units"
             }
           }
         }

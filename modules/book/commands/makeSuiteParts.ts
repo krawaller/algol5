@@ -1,6 +1,6 @@
 import suites from "../../logic/dist/suites";
 
-import { TestSuite } from "../../types";
+import { AlgolSuite, isAlgolExpressionTest } from "../../types";
 import { emptyFullDef, truthy, falsy } from "../../common";
 
 import * as fs from "fs-extra";
@@ -20,7 +20,7 @@ fs.ensureDir(out).then(async () => {
   console.log("All suite parts written");
 });
 
-export function printSuite(suite: TestSuite<any>) {
+export function printSuite(suite: AlgolSuite) {
   const nbrDefs = suite.defs.length;
   const funcName = suite.func.funcName || suite.func.name;
   let ret = `
@@ -30,7 +30,8 @@ This suite uses the \`${funcName}\` function. It contains ${
     nbrDefs > 1 ? `${nbrDefs} signatures` : "a single signature"
   }:\n\n`;
 
-  suite.defs.forEach((def, nSig) => {
+  for (const nSig in suite.defs) {
+    const def = suite.defs[nSig];
     ret += `## Signature ${nSig + 1}\n\n`;
 
     if (def.def === emptyFullDef) {
@@ -52,7 +53,8 @@ ${format(defDiff(def.def, emptyFullDef), true)}
       nbrOfCtx > 1 ? `${nbrOfCtx} contexts` : "a single context"
     }:\n\n`;
 
-    def.contexts.forEach((ctx, nCtx) => {
+    for (const nCtx in def.contexts) {
+      const ctx = def.contexts[nCtx];
       ret += `### Context ${nSig + 1}-${nCtx + 1}\n\n`;
       if (JSON.stringify(ctx.context) === "{}") {
         ret += "This context is **empty**.\n\n";
@@ -66,26 +68,26 @@ ${format(JSON.stringify(ctx.context), true)}
 
       const nbrOfTests = ctx.tests.length;
       ret += `For this context we have ${
-        nbrOfTests > 1 ? `${nbrOfTests} tests` : "a single test"
+        nbrOfTests > 1 ? `${nbrOfTests} inputs` : "a single input"
       }:\n\n`;
 
-      ctx.tests.forEach((test, nTest) => {
-        ret += `#### Test ${nSig + 1}-${nCtx + 1}-${nTest + 1}\n\n`;
-        const expressionCode = format(JSON.stringify(test.expr), true);
+      for (const nTest in ctx.tests) {
+        const suiteTest = ctx.tests[nTest];
+        const isExpression = isAlgolExpressionTest(suiteTest);
+
+        ret += `#### Input ${nSig + 1}-${nCtx + 1}-${nTest + 1}\n\n`;
+        const inputCode = format(JSON.stringify(suiteTest.expr), isExpression);
         const resultingCode = format(
-          suite.func(def.def, def.player, def.action, test.expr),
-          !test.sample
+          suite.func(def.def, def.player, def.action, suiteTest.expr),
+          isExpression
         );
-        const codeEqualsRes =
-          resultingCode === format(JSON.stringify(test.res), true);
-        const truthyFalsy = test.res === truthy || test.res === falsy;
-        if (test.desc) {
-          ret += `This test demonstrates that: ${test.desc}\n\n`;
+        if (suiteTest.desc) {
+          ret += `This test demonstrates that: ${suiteTest.desc}\n\n`;
         }
         ret += `When running \`${funcName}\` with the following input...
 
 \`\`\`typescript
-${expressionCode}
+${inputCode}
 \`\`\`
 
 ...we get this code:
@@ -93,31 +95,58 @@ ${expressionCode}
 \`\`\`typescript
 ${resultingCode}
 \`\`\`\n\n`;
-        if (test.sample && truthyFalsy) {
-          ret += `After executing that code in the current context, the following expression is ${
-            test.res === truthy ? "truthy" : "falsy"
-          }:
 
-\`\`\`typescript
-${format(test.sample, true)}
-\`\`\`\n\n`;
-        } else if (test.sample) {
-          ret += `If we run that in the current context, then this expression...
+        if (isAlgolExpressionTest(suiteTest)) {
+          const codeEqualsRes =
+            resultingCode === format(JSON.stringify(suiteTest.res), true);
+          const truthyFalsy =
+            suiteTest.res === truthy || suiteTest.res === falsy;
 
-\`\`\`typescript
-${format(test.sample, true)}
-\`\`\`\n\n`;
-          ret += showEval("...would evaluate to", test.res);
-        } else if (!codeEqualsRes && truthyFalsy) {
-          ret += `When evaluated in the current context, that expression is ${
-            test.res === truthy ? "truthy" : "falsy"
-          }.\n\n`;
-        } else if (!codeEqualsRes) {
-          ret += showEval("In the current context that evaluates to", test.res);
+          if (!codeEqualsRes && truthyFalsy) {
+            ret += `When evaluated in the current context, that expression is ${
+              suiteTest.res === truthy ? "truthy" : "falsy"
+            }.\n\n`;
+          } else if (!codeEqualsRes) {
+            ret += showEval(
+              "In the current context that evaluates to",
+              suiteTest.res
+            );
+          }
+        } else {
+          for (const nAssert in suiteTest.asserts) {
+            const assert = suiteTest.asserts[nAssert];
+
+            const codeEqualsRes =
+              resultingCode === format(JSON.stringify(assert.res), true);
+            const truthyFalsy = assert.res === truthy || assert.res === falsy;
+
+            if (assert.sample && truthyFalsy) {
+              const lead = nAssert
+                ? "Also,"
+                : "After executing that code in the current context,";
+              ret += `${lead} the following expression is ${
+                assert.res === truthy ? "truthy" : "falsy"
+              }:
+    
+    \`\`\`typescript
+    ${format(assert.sample, true)}
+    \`\`\`\n\n`;
+            } else {
+              const lead = nAssert
+                ? "Also,"
+                : "If we run that in the current context, then";
+              ret += `${lead} this expression...
+    
+    \`\`\`typescript
+    ${format(assert.sample, true)}
+    \`\`\`\n\n`;
+              ret += showEval("...would evaluate to", assert.res);
+            }
+          }
         }
-      });
-    });
-  });
+      }
+    }
+  }
   return ret;
 }
 
@@ -156,7 +185,9 @@ function defDiff(obj, compTo = {}, path = "emptyFullDef", lvl = 0) {
   let ret = "";
   ret += `{\n`;
   const objKeys = Object.keys(obj);
-  const diffKeys = objKeys.filter(key => typeof obj[key] !== 'object' || obj[key] !== compTo[key]);
+  const diffKeys = objKeys.filter(
+    key => typeof obj[key] !== "object" || obj[key] !== compTo[key]
+  );
   if (diffKeys.length !== objKeys.length)
     ret += `${indent(lvl + 1)}...${path},\n`;
   ret += diffKeys

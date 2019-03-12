@@ -7,21 +7,21 @@ const out = path.join(__dirname, "../dist");
 findSuites().then(async suites => {
   await fs.ensureDir(out);
 
-  const moduleRoot = path.join(__dirname, "..");
-  const paths = suites.map(s =>
-    s.replace(moduleRoot, "..").replace(/\.ts$/, "")
-  );
+  let file = `import { AlgolSuite } from "../../types";\n\n`;
 
-  let file = `import { AlgolWriterSuite } from "../../types";\n\n`;
-
-  file += paths
-    .map((p, n) => `import { testSuite as testSuite${n + 1} } from "${p}";`)
+  file += suites
+    .map(
+      (p, n) =>
+        `import { testSuite as testSuite${n + 1} } from "${path
+          .relative(out, p)
+          .replace(/\.ts$/, "")}";`
+    )
     .join("\n");
 
   file += `
 
-const suites: AlgolWriterSuite<any>[] = [
-  ${paths.map((p, n) => `testSuite${n + 1}`).join(",\n  ")}
+const suites: AlgolSuite[] = [
+  ${suites.map((p, n) => `testSuite${n + 1}`).join(",\n  ")}
 ];
 
 export default suites;

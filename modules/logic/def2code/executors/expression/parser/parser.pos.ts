@@ -7,7 +7,7 @@ import {
   isAlgolPosTurnPos
 } from "../../../../../types";
 
-import { makeParser } from "./";
+import { makeParser } from "../";
 
 export default function parsePos(
   gameDef: FullDefAnon,

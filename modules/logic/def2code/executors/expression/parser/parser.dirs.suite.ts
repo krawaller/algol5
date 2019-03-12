@@ -1,6 +1,6 @@
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
 import { AlgolDirsAnon, AlgolExpressionSuite } from "../../../../../types";
-import { parserTester } from ".";
+import { parserTester } from "../";
 
 export const testSuite: AlgolExpressionSuite<AlgolDirsAnon, number[]> = {
   title: "Primitive - Dirs",

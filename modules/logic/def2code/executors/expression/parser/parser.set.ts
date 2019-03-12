@@ -15,7 +15,7 @@ import {
   emptyUnitLayers
 } from "../../../../../common";
 
-import { makeParser } from "./";
+import { makeParser } from "../";
 
 export default function parseSet(
   gameDef: FullDefAnon,

@@ -1,7 +1,7 @@
 import { Layer } from "../";
 
 export type Step = {
-  stepid: string;
+  stepId: string;
   name?: string; // name of command or mark
   path: Action[];
   ARTIFACTS: {

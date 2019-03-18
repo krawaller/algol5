@@ -1,3 +1,1 @@
-export type AlgolSection =
-  | 'markInit'
-  | 'orders';
+export type AlgolSection = "markInit" | "markEnd" | "orders";

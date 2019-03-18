@@ -20,6 +20,28 @@ export function executeSection(
         ARTIFACTS: "let ARTIFACTS = step.ARTIFACTS; ",
         UNITLAYERS: "let UNITLAYERS = step.UNITLAYERS; "
       });
+
+      ret += `let newStepId = step.stepId + '-' + newMarkPos; `;
+      ret += `turn.links[newStepId] = {};`;
+
+      return ret;
+    }
+    case "markEnd": {
+      const def = gameDef.flow.marks[action];
+      const gens = []
+        .concat(def.runGenerator || [])
+        .concat(def.runGenerators || []);
+
+      let ret = "";
+
+      ret += `turn.steps[newStepId] = {
+        ...step,
+        MARKS,
+        stepId: newStepId,
+        path: step.path.concat(newStepId),
+        ${gens.length ? "ARTIFACTS, " : ""}
+        name: "${action}"
+      }`;
       return ret;
     }
     case "orders": {

@@ -4,4 +4,5 @@ export * from './section.interface';
 import { AlgolSectionOrders } from './section.interface';
 
 export type AlgolSection =
+  | ['mark-init']
   | AlgolSectionOrders;

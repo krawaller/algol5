@@ -1,5 +1,5 @@
 import { AlgolSection, AlgolOrderAnon, FullDefAnon } from "../../../../types";
-
+import { ifCodeContains } from "./sectionUtils";
 import { executeOrder } from "../";
 
 export function executeSection(
@@ -13,6 +13,13 @@ export function executeSection(
       let ret = "";
       // TODO - save previous marks instead of iterating whole marks object
       ret += `let MARKS = { ...step.MARKS, ${action}: newMarkPos };`;
+
+      ret += ifCodeContains(executeSection(gameDef, player, action, "orders"), {
+        TURNVARS: "let TURNVARS = step.TURNVARS; ",
+        BATTLEVARS: "let BATTLEVARS = step.BATTLEVARS; ",
+        ARTIFACTS: "let ARTIFACTS = step.ARTIFACTS; ",
+        UNITLAYERS: "let UNITLAYERS = step.UNITLAYERS; "
+      });
       return ret;
     }
     case "orders": {

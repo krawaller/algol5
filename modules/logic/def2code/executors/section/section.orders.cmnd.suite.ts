@@ -54,7 +54,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "UNITLAYERS.units",
                   res: {
                     c3: { pos: "c3", foo: "bar", owner: 2, group: "gnurps" }
-                  }
+                  },
+                  desc: "the unit layers were updated"
                 }
               ]
             }

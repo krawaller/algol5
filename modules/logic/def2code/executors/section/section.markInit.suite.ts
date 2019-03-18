@@ -1,4 +1,4 @@
-import { executeSection } from "../../executors";
+import { executeSection } from "..";
 import { emptyFullDef } from "../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../types";
 

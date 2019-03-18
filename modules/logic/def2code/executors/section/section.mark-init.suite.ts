@@ -18,7 +18,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           },
           tests: [
             {
-              expr: ['mark-init'],
+              expr: 'markInit',
               asserts: [
                 {
                   sample: "MARKS",

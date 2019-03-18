@@ -39,7 +39,7 @@ function executeOrderInner(
   if (Array.isArray(order)) {
     switch (order[0]) {
       case "unitLayers":
-        return updateUnitLayers(gameDef, player, action, true); // TODO - fix
+        return updateUnitLayers(gameDef, player, action, false);
     }
   }
   if (isAlgolOrderLinks(order)) {

@@ -25,7 +25,8 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             UNITDATA: {
               unit1: { id: "unit1", pos: "a1", group: "gnurps", owner: 1 },
               unit2: { id: "unit2", pos: "b2", group: "flurps", owner: 2 }
-            }
+            },
+            UNITLAYERS: { willbe: "overwritten" }
           },
           tests: [
             {

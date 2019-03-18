@@ -46,7 +46,6 @@ export type AlgolOrderInner<
   Unit
 > =
   | ["unitLayers"]
-  | ["addMark"]
   | AlgolOrderRunGenerators<
       Btlp,
       Btlv,

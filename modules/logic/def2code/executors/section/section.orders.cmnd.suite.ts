@@ -1,0 +1,66 @@
+import { executeSection } from "..";
+import { emptyFullDef } from "../../../../common";
+import { AlgolStatementSuite, AlgolSection } from "../../../../types";
+
+export const testSuite: AlgolStatementSuite<AlgolSection> = {
+  title: "Section - Orders",
+  func: executeSection,
+  defs: [
+    {
+      def: {
+        ...emptyFullDef,
+        graphics: {
+          ...emptyFullDef.graphics,
+          icons: {
+            gnurps: "bishop"
+          }
+        },
+        flow: {
+          ...emptyFullDef.flow,
+          commands: {
+            someCmnd: {
+              applyEffect: { killid: "unit1" },
+              link: "endturn"
+            }
+          }
+        }
+      },
+      player: 1,
+      action: "someCmnd",
+      contexts: [
+        {
+          context: {
+            newStepId: "foo",
+            UNITDATA: {
+              unit1: { pos: "a2", group: "gnurps", owner: 1 },
+              unit2: { pos: "c3", group: "gnurps", foo: "bar", owner: 2 }
+            },
+            UNITLAYERS: { units: {} },
+            turn: { links: { foo: {} } }
+          },
+          tests: [
+            {
+              expr: "orders",
+              asserts: [
+                {
+                  sample: "turn.links.foo",
+                  res: { endturn: "start2" }
+                },
+                {
+                  sample: "UNITDATA.unit1",
+                  res: undefined
+                },
+                {
+                  sample: "UNITLAYERS.units",
+                  res: {
+                    c3: { pos: "c3", foo: "bar", owner: 2, group: "gnurps" }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};

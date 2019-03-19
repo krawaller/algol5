@@ -73,7 +73,6 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                 : (res as unknown) === falsy
                 ? false
                 : res;
-            expect(processedResult).toEqual(processedComparator);
             if (debug) {
               console.log(
                 "CODE",
@@ -88,6 +87,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                 processedResult
               );
             }
+            expect(processedResult).toEqual(processedComparator);
           });
         }
       }

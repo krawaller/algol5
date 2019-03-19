@@ -18,8 +18,8 @@ const unitLayerTests: UnitLayerTest[] = [
       graphics: {
         ...emptyFullDef.graphics,
         icons: {
-          muppets: "kings",
-          huppets: "pawns"
+          muppets: "king",
+          huppets: "pawn"
         }
       }
     },

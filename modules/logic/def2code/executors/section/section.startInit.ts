@@ -1,7 +1,5 @@
 import { FullDefAnon } from "../../../../types";
 import { emptyUnitLayers } from "../../../../common";
-import { ifCodeContains } from "./sectionUtils";
-import { executeSection } from "./";
 
 export function executeStartInit(
   gameDef: FullDefAnon,
@@ -28,6 +26,17 @@ export function executeStartInit(
       .join(",\n")}
   };
   `;
+
+  ret += `const ARTIFACTS = emptyArtifactLayers;`;
+
+  ret += `
+  const turn = {
+    turn: lastTurn.turn + 1,
+    links: { root: {} },
+    steps: {},
+    player: ${player},
+    endMarks: {}
+  };`;
 
   return ret;
 }

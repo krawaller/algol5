@@ -26,6 +26,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            emptyArtifactLayers: { empty: "layers" },
+            lastTurn: { turn: 4 },
             step: {
               UNITLAYERS: {
                 units: "willstayunits",
@@ -56,6 +58,20 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     gnurps: "willstaygnurps",
                     oppgnurps: "shouldbecomeoppgnurps",
                     mygnurps: "shouldbecomemygnurps"
+                  }
+                },
+                {
+                  sample: "ARTIFACTS",
+                  res: { empty: "layers" }
+                },
+                {
+                  sample: "turn",
+                  res: {
+                    turn: 5,
+                    player: 1,
+                    endMarks: {},
+                    links: { root: {} },
+                    steps: {}
                   }
                 }
               ]

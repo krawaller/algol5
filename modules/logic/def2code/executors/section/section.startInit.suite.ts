@@ -73,6 +73,69 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     links: { root: {} },
                     steps: {}
                   }
+                },
+                {
+                  sample: "typeof TURNVARS",
+                  res: "undefined",
+                  desc: "we didn't define turnvars since we didn't need them"
+                },
+                {
+                  sample: "typeof BATTLEVARS",
+                  res: "undefined",
+                  desc: "we didn't define battlevars since we didn't need them"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      def: {
+        ...emptyFullDef,
+        flow: {
+          ...emptyFullDef.flow,
+          startTurn: {
+            link: {
+              if: [
+                { same: [{ battlevar: "gnurp" }, { turnvar: "flurp" }] },
+                "somemark"
+              ]
+            }
+          }
+        },
+        graphics: {
+          ...emptyFullDef.graphics,
+          icons: {
+            flurps: "bishop",
+            gnurps: "king"
+          }
+        }
+      },
+      player: 1,
+      action: "somemark",
+      contexts: [
+        {
+          context: {
+            emptyArtifactLayers: {},
+            lastTurn: { turn: 0 },
+            step: {
+              UNITLAYERS: {},
+              TURNVARS: "oldTurnVars",
+              BATTLEVARS: "oldBattleVars"
+            }
+          },
+          tests: [
+            {
+              expr: "startInit",
+              asserts: [
+                {
+                  sample: "TURNVARS",
+                  res: "oldTurnVars"
+                },
+                {
+                  sample: "BATTLEVARS",
+                  res: "oldBattleVars"
                 }
               ]
             }

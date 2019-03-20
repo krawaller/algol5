@@ -1,5 +1,6 @@
 import { FullDefAnon } from "../../../../types";
 import { emptyUnitLayers } from "../../../../common";
+import { usesBattleVars, usesTurnVars } from "./sectionUtils";
 
 export function executeStartInit(
   gameDef: FullDefAnon,
@@ -28,6 +29,14 @@ export function executeStartInit(
   `;
 
   ret += `const ARTIFACTS = emptyArtifactLayers;`;
+
+  if (usesBattleVars(gameDef)) {
+    ret += `const BATTLEVARS = step.BATTLEVARS; `;
+  }
+
+  if (usesTurnVars(gameDef)) {
+    ret += `const TURNVARS = step.TURNVARS; `;
+  }
 
   ret += `
   const turn = {

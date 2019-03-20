@@ -12,7 +12,7 @@ export function executeStartInit(
 
   ret += `
   const oldUnitLayers = step.UNITLAYERS;
-  const UNITLAYERS = {
+  let UNITLAYERS = {
     ${unitLayerNames
       .map(
         name =>
@@ -28,14 +28,14 @@ export function executeStartInit(
   };
   `;
 
-  ret += `const ARTIFACTS = emptyArtifactLayers;`;
+  ret += `let ARTIFACTS = emptyArtifactLayers;`;
 
   if (usesBattleVars(gameDef)) {
-    ret += `const BATTLEVARS = step.BATTLEVARS; `;
+    ret += `let BATTLEVARS = step.BATTLEVARS; `;
   }
 
   if (usesTurnVars(gameDef)) {
-    ret += `const TURNVARS = step.TURNVARS; `;
+    ret += `let TURNVARS = step.TURNVARS; `;
   }
 
   ret += `

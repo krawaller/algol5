@@ -1,44 +1,24 @@
-import { AlgolVal } from "../../";
+import { AlgolVal, AlgolLink, AlgolGenRef } from "../../";
 
 export type StartTurn<Btlp, Btlv, Cmnd, Gen, Grid, Layer, Mrk, Turnp, Turnv> = {
-  link?: AlgolVal<
-    Cmnd | Mrk | "endturn",
+  link?: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  links?: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+  runGenerator?: AlgolGenRef<
     Btlp,
     Btlv,
     Cmnd,
+    Gen,
     Grid,
     Layer,
     Mrk,
     Turnp,
     Turnv
   >;
-  links?: AlgolVal<
-    Cmnd | Mrk | "endturn",
+  runGenerators?: AlgolGenRef<
     Btlp,
     Btlv,
     Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >[];
-  runGenerator?: AlgolVal<
     Gen,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
-  runGenerators?: AlgolVal<
-    Gen,
-    Btlp,
-    Btlv,
-    Cmnd,
     Grid,
     Layer,
     Mrk,

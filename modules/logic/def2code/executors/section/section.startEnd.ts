@@ -15,6 +15,7 @@ export function executeStartEnd(
     UNITLAYERS,
     UNITDATA,
     MARKS,
+    LINKS,
     name: "start",
     path: [],
     ${usesTurnVars(gameDef) ? "TURNVARS, " : ""}

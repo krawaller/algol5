@@ -70,8 +70,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: {
                     turn: 5,
                     player: 1,
-                    endMarks: {},
-                    links: { root: {} },
                     steps: {}
                   }
                 },
@@ -98,6 +96,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "MARKS",
                   res: {},
                   desc: "initialise marks to empty object"
+                },
+                {
+                  sample: "LINKS",
+                  res: {
+                    commands: {},
+                    marks: {}
+                  },
+                  desc: "initialise LINKS to correct empty object"
                 }
               ]
             }

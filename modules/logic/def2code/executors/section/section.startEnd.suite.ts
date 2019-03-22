@@ -32,7 +32,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ARTIFACTS: "localArtifacts",
             UNITDATA: "localUnitData",
             UNITLAYERS: "localUnitLayers",
-            MARKS: "localMarks"
+            MARKS: "localMarks",
+            LINKS: "localLinks"
           },
           tests: [
             {
@@ -58,6 +59,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "turn.steps.root.MARKS",
                   res: "localMarks"
+                },
+                {
+                  sample: "turn.steps.root.LINKS",
+                  res: "localLinks"
                 },
                 {
                   sample: "turn.steps.root.name",
@@ -114,6 +119,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             UNITDATA: "localUnitData",
             UNITLAYERS: "localUnitLayers",
             MARKS: "localMarks",
+            LINKS: "localLinks",
             TURNVARS: "localTurnVars",
             BATTLEVARS: "localBattleVars",
             NEXTSPAWNID: "localNextSpawnId",

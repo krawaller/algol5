@@ -33,6 +33,12 @@ export function executeStartInit(
   // Marks are reset for each new turn
   ret += `let MARKS = {}; `;
 
+  // Links are reset per step
+  ret += `let LINKS = {
+    commands: {},
+    marks: {}
+  };`;
+
   // We carry over the UnitData. No need to copy it here.
   ret += `let UNITDATA = step.UNITDATA; `;
 
@@ -56,15 +62,12 @@ export function executeStartInit(
   }
 
   // We create the new turn skeleton, bumping the turn count
-  // The turn has to be created here since linking mutates turn.
-  // TODO - make linking mutate local variable instead!
+  // The turn has to be created here since expression might read turn.turn
   ret += `
   const turn = {
     turn: lastTurn.turn + 1,
-    links: { root: {} },
     steps: {},
     player: ${player},
-    endMarks: {}
   };`;
 
   return ret;

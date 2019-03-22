@@ -116,12 +116,23 @@ export const testSuite: AlgolExpressionSuite<
         },
         {
           context: {
-            step: { available: { someaction: 1, somemark: 1 } }
+            LINKS: {
+              commands: { someaction: "foo" },
+              marks: {
+                somemark: {
+                  pos: ["a1"]
+                },
+                emptymark: {
+                  pos: []
+                }
+              }
+            }
           },
           tests: [
             { expr: { cmndavailable: "someaction" }, res: true },
             { expr: { cmndavailable: "otheraction" }, res: false },
             { expr: { markavailable: "somemark" }, res: true },
+            { expr: { markavailable: "emptymark" }, res: false },
             { expr: { markavailable: "othermark" }, res: false }
           ]
         }

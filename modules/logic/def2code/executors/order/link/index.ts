@@ -31,10 +31,12 @@ function executeLinkInner(
   const parser = makeParser(gameDef, player, action);
   const stepLinkLookup = action === "start" ? ".root" : "[newStepId]";
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
+    // ------------- Linking to a command
     return `
       turn.links${stepLinkLookup}.${name} = '${name + player}';
     `;
   } else if (gameDef && gameDef.flow.marks && gameDef.flow.marks[name]) {
+    // ------------- Linking to a mark
     const markDef = gameDef.flow.marks[name];
     return `
       let ${name}Links = turn.links${stepLinkLookup};
@@ -43,6 +45,7 @@ function executeLinkInner(
       }
     `;
   } else if (name === "endturn") {
+    // ------------- Linking to next turn, have to check win conditions
     return Object.entries(gameDef.flow.endGame || {})
       .map(
         ([name, def]) => `

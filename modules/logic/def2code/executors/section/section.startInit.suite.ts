@@ -89,6 +89,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "UNITDATA",
                   res: "oldUnitData",
                   desc: "old data was saved into local var"
+                },
+                {
+                  sample: "MARKS",
+                  res: {},
+                  desc: "initialise marks to empty object"
                 }
               ]
             }

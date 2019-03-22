@@ -28,6 +28,8 @@ export function executeStartInit(
   };
   `;
 
+  ret += `let MARKS = {}; `;
+
   ret += `let UNITDATA = step.UNITDATA; `;
 
   ret += `let ARTIFACTS = emptyArtifactLayers; `; // <--- TODO smarter ARTIFACTS copying to allow mutation in draw

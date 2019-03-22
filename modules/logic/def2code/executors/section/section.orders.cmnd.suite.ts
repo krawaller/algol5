@@ -36,14 +36,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               unit2: { pos: "c3", group: "gnurps", foo: "bar", owner: 2 }
             },
             UNITLAYERS: { units: {} },
-            turn: { links: { foo: {} } }
+            LINKS: {}
           },
           tests: [
             {
               expr: "orders",
               asserts: [
                 {
-                  sample: "turn.links.foo",
+                  sample: "LINKS",
                   res: { endturn: "start2" }
                 },
                 {

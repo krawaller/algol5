@@ -33,7 +33,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             TURNVARS: {},
-            turn: { links: { foo: { otherlink: "someaction" } } },
+            LINKS: {},
             newStepId: "foo",
             MARKS: {}
           },
@@ -42,8 +42,8 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["endturn"] },
               asserts: [
                 {
-                  sample: "turn.links.foo",
-                  res: { endturn: "start2", otherlink: "someaction" },
+                  sample: "LINKS.endturn",
+                  res: "start2",
                   desc: "we can link to endturn, passing over to next plr"
                 }
               ]
@@ -53,7 +53,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             TURNVARS: { won: "yes" },
-            turn: { links: { foo: { otherlink: "someaction" } }, endMarks: {} },
+            LINKS: {
+              endMarks: {}
+            },
             newStepId: "foo",
             MARKS: { marka1: "a1", marka2: "a2" }
           },
@@ -62,19 +64,17 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["endturn"] },
               asserts: [
                 {
-                  sample: "turn.links.foo",
-                  res: { win: "conquer", otherlink: "someaction" },
+                  sample: "LINKS.endturn",
+                  res: "win",
                   desc: "we can link to winning the game"
-                }
-              ]
-            },
-            {
-              expr: { links: ["endturn"] },
-              asserts: [
+                },
                 {
-                  sample: "turn.endMarks.foo",
-                  res: { conquer: { a1: {}, a2: {} } },
-                  desc: "winning move can highlight set"
+                  sample: "LINKS.endedBy",
+                  res: "conquer"
+                },
+                {
+                  sample: "LINKS.endMarks",
+                  res: ["a1", "a2"]
                 }
               ]
             }
@@ -83,7 +83,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             TURNVARS: { lost: "yes" },
-            turn: { links: { foo: { otherlink: "someaction" } }, endMarks: {} },
+            LINKS: {},
             newStepId: "foo",
             MARKS: {}
           },
@@ -92,9 +92,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["endturn"] },
               asserts: [
                 {
-                  sample: "turn.links.foo",
-                  res: { lose: "surrender", otherlink: "someaction" },
+                  sample: "LINKS.endturn",
+                  res: "lose",
                   desc: "we can link to losing endturn"
+                },
+                {
+                  sample: "LINKS.endedBy",
+                  res: "surrender"
                 }
               ]
             }
@@ -103,7 +107,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             TURNVARS: { draw: "yes" },
-            turn: { links: { foo: { otherlink: "someaction" } }, endMarks: {} },
+            LINKS: {},
             newStepId: "foo",
             MARKS: {}
           },
@@ -112,9 +116,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["endturn"] },
               asserts: [
                 {
-                  sample: "turn.links.foo",
-                  res: { draw: "neither", otherlink: "someaction" },
+                  sample: "LINKS.endturn",
+                  res: "draw",
                   desc: "we can link to draw endturn"
+                },
+                {
+                  sample: "LINKS.endedBy",
+                  res: "neither"
                 }
               ]
             }

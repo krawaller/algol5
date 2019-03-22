@@ -29,20 +29,19 @@ function executeLinkInner(
   name: AlgolLinkInnerAnon
 ): string {
   const parser = makeParser(gameDef, player, action);
-  const stepLinkLookup = action === "start" ? ".root" : "[newStepId]";
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     // ------------- Linking to a command
     return `
-      turn.links${stepLinkLookup}.${name} = '${name + player}';
+      LINKS.commands.${name} = '${name + player}';
     `;
   } else if (gameDef && gameDef.flow.marks && gameDef.flow.marks[name]) {
     // ------------- Linking to a mark
     const markDef = gameDef.flow.marks[name];
     return `
-      let ${name}Links = turn.links${stepLinkLookup};
-      for(let linkpos in ${parser.set(markDef.from)}){
-        ${name}Links[linkpos] = '${name + player}';
-      }
+      LINKS.marks.${name} = {
+        func: '${name + player}',
+        pos: Object.keys(${parser.set(markDef.from)})
+      };
     `;
   } else if (name === "endturn") {
     // ------------- Linking to next turn, have to check win conditions
@@ -51,21 +50,16 @@ function executeLinkInner(
         ([name, def]) => `
       if (${parser.bool(def.condition)}) { 
         let winner = ${parser.val(def.who === undefined ? player : def.who)};
-        let result = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
-        turn.links[newStepId][result] = '${name}';
+        LINKS.endturn = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
+        LINKS.endedBy = '${name}';
         ${
           def.show
-            ? `
-        turn.endMarks[newStepId] = turn.endMarks[newStepId] || {};
-        turn.endMarks[newStepId].${name} = ${parser.set(def.show)};
-        `
+            ? `LINKS.endMarks = Object.keys(${parser.set(def.show)});`
             : ""
         }
       }`
       )
-      .concat(
-        `{ turn.links[newStepId].endturn = "start${player === 1 ? 2 : 1}"; }`
-      )
+      .concat(`{ LINKS.endturn = "start${player === 1 ? 2 : 1}"; }`)
       .join(" else ");
   } else {
     throw "Unknown link: " + name;

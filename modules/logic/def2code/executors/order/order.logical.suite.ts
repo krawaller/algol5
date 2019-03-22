@@ -15,14 +15,19 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           context: {
             newStepId: "foo",
             UNITDATA: { unit1: {} },
-            turn: { links: { foo: {} } }
+            LINKS: {}
           },
           tests: [
             {
-              expr: { multi: [ { effects: [{ killid: 'unit1' }] }, { links: ["endturn"] } ] },
+              expr: {
+                multi: [
+                  { effects: [{ killid: "unit1" }] },
+                  { links: ["endturn"] }
+                ]
+              },
               asserts: [
                 {
-                  sample: "turn.links.foo",
+                  sample: "LINKS",
                   res: { endturn: "start2" }
                 },
                 {
@@ -32,7 +37,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               ]
             },
             {
-              expr: {   if: [["false"], { effects: [{ killid: 'unit1' }]}] },
+              expr: { if: [["false"], { effects: [{ killid: "unit1" }] }] },
               asserts: [
                 {
                   sample: "UNITDATA.unit1",

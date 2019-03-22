@@ -21,18 +21,15 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
       contexts: [
         {
           context: {
-            turn: {
-              links: { root: { b3: "somemark" } },
-              other: { foo: "bar" }
-            }
+            LINKS: { commands: { foo: "bar" } }
           },
           tests: [
             {
               expr: { links: ["mycmnd"] },
               asserts: [
                 {
-                  sample: "turn.links.root",
-                  res: { mycmnd: "mycmnd1", b3: "somemark" },
+                  sample: "LINKS.commands",
+                  res: { mycmnd: "mycmnd1", foo: "bar" },
                   desc: "we can link to a cmnd from start"
                 }
               ]
@@ -56,10 +53,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
       contexts: [
         {
           context: {
-            turn: {
-              links: { foo: { b3: "somemark" } },
-              other: { foo: "bar" }
-            },
+            LINKS: { commands: { foo: "bar" } },
             newStepId: "foo"
           },
           tests: [
@@ -67,9 +61,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["mycmnd"] },
               asserts: [
                 {
-                  sample: "turn.links.foo",
-                  res: { mycmnd: "mycmnd2", b3: "somemark" },
-                  desc: "we can link to a cmnd from non-start"
+                  sample: "LINKS.commands",
+                  res: { mycmnd: "mycmnd2", foo: "bar" },
+                  desc: "we can link to a cmnd from non-start (and as 2nd plr)"
                 }
               ]
             }

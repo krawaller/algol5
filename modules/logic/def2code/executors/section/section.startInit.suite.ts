@@ -141,7 +141,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             lastTurn: { turn: 0 },
             step: {
               UNITLAYERS: {},
-              TURNVARS: "oldTurnVars",
               BATTLEVARS: "oldBattleVars",
               NEXTSPAWNID: "oldNextSpawnId"
             }
@@ -152,7 +151,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "TURNVARS",
-                  res: "oldTurnVars"
+                  res: {},
+                  desc:
+                    "Since this is start, turnvars are set to an empty object"
                 },
                 {
                   sample: "BATTLEVARS",

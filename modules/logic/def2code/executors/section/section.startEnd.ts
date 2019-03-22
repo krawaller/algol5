@@ -8,6 +8,7 @@ export function executeStartEnd(
 ): string {
   let ret = "";
 
+  // The turn var was created in startInit. now we add a new step to it.
   ret += `
   turn.steps.root = {
     ARTIFACTS,

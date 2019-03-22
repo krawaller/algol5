@@ -14,11 +14,12 @@ export function executeMarkInit(
   ret += ifCodeContains(executeSection(gameDef, player, action, "orders"), {
     TURNVARS: "let TURNVARS = step.TURNVARS; ",
     BATTLEVARS: "let BATTLEVARS = step.BATTLEVARS; ",
-    ARTIFACTS: "let ARTIFACTS = step.ARTIFACTS; ",
+    ARTIFACTS: "let ARTIFACTS = step.ARTIFACTS; ", // <--- TODO smarter ARTIFACTS copying to allow mutation in draw
     UNITLAYERS: "let UNITLAYERS = step.UNITLAYERS; "
   });
 
   ret += `let newStepId = step.stepId + '-' + newMarkPos; `;
+
   ret += `turn.links[newStepId] = {};`;
 
   return ret;

@@ -39,7 +39,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 gnurps: "willstaygnurps",
                 mygnurps: "shouldbecomeoppgnurps",
                 oppgnurps: "shouldbecomemygnurps"
-              }
+              },
+              UNITDATA: "oldUnitData"
             }
           },
           tests: [
@@ -83,6 +84,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "typeof BATTLEVARS",
                   res: "undefined",
                   desc: "we didn't define battlevars since we didn't need them"
+                },
+                {
+                  sample: "UNITDATA",
+                  res: "oldUnitData",
+                  desc: "old data was saved into local var"
                 }
               ]
             }

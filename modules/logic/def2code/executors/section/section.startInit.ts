@@ -28,7 +28,9 @@ export function executeStartInit(
   };
   `;
 
-  ret += `let ARTIFACTS = emptyArtifactLayers;`;
+  ret += `let UNITDATA = step.UNITDATA; `;
+
+  ret += `let ARTIFACTS = emptyArtifactLayers; `; // <--- TODO smarter ARTIFACTS copying to allow mutation in draw
 
   if (usesBattleVars(gameDef)) {
     ret += `let BATTLEVARS = step.BATTLEVARS; `;

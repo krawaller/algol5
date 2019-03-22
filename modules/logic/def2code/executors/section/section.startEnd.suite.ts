@@ -74,6 +74,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "turn.steps.root.BATTLEVARS",
                   res: falsy
+                },
+                {
+                  sample: "turn.steps.root.NEXTSPAWNID",
+                  res: falsy
                 }
               ]
             }
@@ -93,6 +97,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 "somemark"
               ]
             }
+          },
+          commands: {
+            somecmnd: {
+              applyEffect: { spawnat: ["somemark", "gnurps"] }
+            }
           }
         }
       },
@@ -107,6 +116,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             MARKS: "localMarks",
             TURNVARS: "localTurnVars",
             BATTLEVARS: "localBattleVars",
+            NEXTSPAWNID: "localNextSpawnId",
             turn: {
               steps: {}
             }
@@ -122,6 +132,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "turn.steps.root.BATTLEVARS",
                   res: "localBattleVars"
+                },
+                {
+                  sample: "turn.steps.root.NEXTSPAWNID",
+                  res: "localNextSpawnId"
                 }
               ]
             }

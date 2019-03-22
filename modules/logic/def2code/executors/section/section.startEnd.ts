@@ -1,5 +1,5 @@
 import { FullDefAnon } from "../../../../types";
-import { usesBattleVars, usesTurnVars } from "./sectionUtils";
+import { usesBattleVars, usesTurnVars, usesSpawn } from "./sectionUtils";
 
 export function executeStartEnd(
   gameDef: FullDefAnon,
@@ -18,6 +18,7 @@ export function executeStartEnd(
     path: [],
     ${usesTurnVars(gameDef) ? "TURNVARS, " : ""}
     ${usesBattleVars(gameDef) ? "BATTLEVARS, " : ""}
+    ${usesSpawn(gameDef) ? "NEXTSPAWNID, " : ""}
   };
   `;
 

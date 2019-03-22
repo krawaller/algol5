@@ -86,6 +86,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   desc: "we didn't define battlevars since we didn't need them"
                 },
                 {
+                  sample: "typeof NEXTSPAWNID",
+                  res: "undefined"
+                },
+                {
                   sample: "UNITDATA",
                   res: "oldUnitData",
                   desc: "old data was saved into local var"
@@ -113,6 +117,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 "somemark"
               ]
             }
+          },
+          commands: {
+            somecmnd: {
+              applyEffect: { spawnat: ["somemark", "gnurps"] }
+            }
           }
         },
         graphics: {
@@ -133,7 +142,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             step: {
               UNITLAYERS: {},
               TURNVARS: "oldTurnVars",
-              BATTLEVARS: "oldBattleVars"
+              BATTLEVARS: "oldBattleVars",
+              NEXTSPAWNID: "oldNextSpawnId"
             }
           },
           tests: [
@@ -147,6 +157,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "BATTLEVARS",
                   res: "oldBattleVars"
+                },
+                {
+                  sample: "NEXTSPAWNID",
+                  res: "oldNextSpawnId"
                 }
               ]
             }

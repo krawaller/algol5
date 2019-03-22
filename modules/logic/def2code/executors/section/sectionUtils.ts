@@ -7,7 +7,9 @@ import {
   isAlgolPosTurnPos,
   isAlgolPosBattlePos,
   isAlgolEffectSetBattlePos,
-  isAlgolEffectSetBattleVar
+  isAlgolEffectSetBattleVar,
+  isAlgolEffectSpawnAt,
+  isAlgolEffectSpawnIn
 } from "../../../../types";
 import { contains } from "../../../../common";
 
@@ -40,5 +42,12 @@ export function usesBattleVars(search: FullDefAnon | any): boolean {
       isAlgolEffectSetBattleVar(d) ||
       isAlgolPosBattlePos(d) ||
       isAlgolValBattleVar(d)
+  );
+}
+
+export function usesSpawn(search: FullDefAnon | any): boolean {
+  return contains(
+    search,
+    d => isAlgolEffectSpawnAt(d) || isAlgolEffectSpawnIn(d)
   );
 }

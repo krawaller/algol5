@@ -141,7 +141,7 @@ function executeEffectInner(
       spawnat: [pos, group, owner, props]
     } = effect;
     return `{
-        let newunitid = 'spawn'+(nextSpawnId++);
+        let newunitid = 'spawn'+(NEXTSPAWNID++);
         UNITDATA[newunitid] = {
           pos: ${parser.pos(pos)},
           id: newunitid,

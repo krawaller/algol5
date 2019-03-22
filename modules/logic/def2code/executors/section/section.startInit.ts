@@ -1,6 +1,6 @@
 import { FullDefAnon } from "../../../../types";
 import { emptyUnitLayers } from "../../../../common";
-import { usesBattleVars, usesTurnVars } from "./sectionUtils";
+import { usesBattleVars, usesTurnVars, usesSpawn } from "./sectionUtils";
 
 export function executeStartInit(
   gameDef: FullDefAnon,
@@ -40,6 +40,10 @@ export function executeStartInit(
 
   if (usesTurnVars(gameDef)) {
     ret += `let TURNVARS = step.TURNVARS; `;
+  }
+
+  if (usesSpawn(gameDef)) {
+    ret += `let NEXTSPAWNID = step.NEXTSPAWNID; `;
   }
 
   ret += `

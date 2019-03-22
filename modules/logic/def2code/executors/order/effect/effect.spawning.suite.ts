@@ -14,7 +14,8 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             UNITDATA: { unit1: { id: "unit1" } },
-            MARKS: { othermark: "c3", anothermark: "d4" }
+            MARKS: { othermark: "c3", anothermark: "d4" },
+            NEXTSPAWNID: 1
           },
           tests: [
             {
@@ -80,9 +81,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               },
               asserts: [
                 {
-                  sample: "nextSpawnId",
+                  sample: "NEXTSPAWNID",
                   res: 2,
-                  desc: "spawning increases the nextSpawnId counter"
+                  desc: "spawning increases the NEXTSPAWNID counter"
                 }
               ]
             },
@@ -137,7 +138,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               },
               asserts: [
                 {
-                  sample: "nextSpawnId",
+                  sample: "NEXTSPAWNID",
                   res: 3,
                   desc: "multispawn increased counter by total number of spawns"
                 }

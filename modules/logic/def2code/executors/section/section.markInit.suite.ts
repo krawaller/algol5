@@ -47,6 +47,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: { oldermark: "a1", somemark: "b2" }
                 },
                 {
+                  sample: "LINKS",
+                  res: {
+                    commands: {},
+                    marks: {}
+                  },
+                  desc: "we reset links for the new step"
+                },
+                {
                   sample: "typeof TURNVARS",
                   res: "undefined",
                   desc: "We didn't defined TURNVARS since we didn't need it"

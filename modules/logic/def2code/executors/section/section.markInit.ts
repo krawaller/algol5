@@ -11,6 +11,9 @@ export function executeMarkInit(
   // TODO - save previous marks instead of iterating whole marks object
   ret += `let MARKS = { ...step.MARKS, ${action}: newMarkPos };`;
 
+  // Always init a new LINKS object for each step
+  ret += `let LINKS = { commands: {}, marks: {} }; `;
+
   ret += ifCodeContains(executeSection(gameDef, player, action, "orders"), {
     TURNVARS: "let TURNVARS = step.TURNVARS; ",
     BATTLEVARS: "let BATTLEVARS = step.BATTLEVARS; ",

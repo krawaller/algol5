@@ -30,7 +30,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               flurp: "gnurp"
             },
             turn: { steps: {}, links: { foo: "bar" } },
-            MARKS: { updated: "marks" }
+            MARKS: { updated: "marks" },
+            LINKS: "newLinks"
           },
           tests: [
             {
@@ -45,7 +46,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     name: "somemark",
                     MARKS: {
                       updated: "marks"
-                    }
+                    },
+                    LINKS: "newLinks"
                   }
                 }
               ]
@@ -93,7 +95,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             turn: { steps: {}, links: {} },
             MARKS: {},
             newMarkPos: "b2",
-            ARTIFACTS: { updated: "artifacts" }
+            ARTIFACTS: { updated: "artifacts" },
+            LINKS: "newLinks"
           },
           tests: [
             {

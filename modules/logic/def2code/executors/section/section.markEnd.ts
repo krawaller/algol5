@@ -15,6 +15,7 @@ export function executeMarkEnd(
   ret += `turn.steps[newStepId] = {
         ...step,
         MARKS,
+        LINKS,
         stepId: newStepId,
         path: step.path.concat(newStepId),
         ${gens.length ? "ARTIFACTS, " : ""}

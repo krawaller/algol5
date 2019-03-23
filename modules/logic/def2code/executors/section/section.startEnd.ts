@@ -1,17 +1,20 @@
 import { FullDefAnon } from "../../../../types";
-import { usesBattleVars, usesTurnVars, usesSpawn } from "./sectionUtils";
+import {
+  usesBattleVars,
+  usesTurnVars,
+  usesSpawn,
+  usesTurnNumber
+} from "./sectionUtils";
 
 export function executeStartEnd(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string
 ): string {
-  let ret = "";
+  const startDef = gameDef.flow.startTurn;
 
-  // TODO - handle TURN
-
-  // Now we return what will be the new step
-  ret += `
+  // Here we just need to return the new step
+  return `
   return {
     ARTIFACTS,
     UNITLAYERS,
@@ -20,11 +23,10 @@ export function executeStartEnd(
     LINKS,
     name: "start",
     path: [],
+    ${usesTurnNumber(startDef) ? "TURN, " : "TURN: step.TURN + 1,"}
     ${usesTurnVars(gameDef) ? "TURNVARS, " : ""}
     ${usesBattleVars(gameDef) ? "BATTLEVARS, " : ""}
     ${usesSpawn(gameDef) ? "NEXTSPAWNID, " : ""}
   };
   `;
-
-  return ret;
 }

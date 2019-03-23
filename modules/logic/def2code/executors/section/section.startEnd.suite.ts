@@ -26,9 +26,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
-            turn: {
-              steps: {}
-            },
+            step: { TURN: 7 },
             ARTIFACTS: "localArtifacts",
             UNITDATA: "localUnitData",
             UNITLAYERS: "localUnitLayers",
@@ -83,6 +81,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.NEXTSPAWNID",
                   res: falsy
+                },
+                {
+                  sample: "returnVal.TURN",
+                  res: 8
                 }
               ]
             }
@@ -98,7 +100,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           startTurn: {
             link: {
               if: [
-                { same: [{ battlevar: "gnurp" }, { turnvar: "flurp" }] },
+                {
+                  same: [
+                    { battlevar: "gnurp" },
+                    { minus: [{ turnvar: "flurp" }, ["turn"]] }
+                  ]
+                },
                 "somemark"
               ]
             }
@@ -123,9 +130,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             TURNVARS: "localTurnVars",
             BATTLEVARS: "localBattleVars",
             NEXTSPAWNID: "localNextSpawnId",
-            turn: {
-              steps: {}
-            }
+            TURN: "localTurnNumber"
           },
           tests: [
             {
@@ -142,6 +147,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.NEXTSPAWNID",
                   res: "localNextSpawnId"
+                },
+                {
+                  sample: "returnVal.TURN",
+                  res: "localTurnNumber"
                 }
               ]
             }

@@ -51,3 +51,10 @@ export function usesSpawn(search: FullDefAnon | any): boolean {
     d => isAlgolEffectSpawnAt(d) || isAlgolEffectSpawnIn(d)
   );
 }
+
+export function usesTurnNumber(search: FullDefAnon | any): boolean {
+  return contains(
+    search,
+    d => Array.isArray(d) && d.length === 1 && d[0] === "turn"
+  );
+}

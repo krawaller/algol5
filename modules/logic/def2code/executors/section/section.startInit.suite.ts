@@ -27,7 +27,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             emptyArtifactLayers: { empty: "layers" },
-            lastTurn: { turn: 4 },
             step: {
               UNITLAYERS: {
                 units: "willstayunits",
@@ -66,14 +65,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: { empty: "layers" }
                 },
                 {
-                  sample: "turn",
-                  res: {
-                    turn: 5,
-                    player: 1,
-                    steps: {}
-                  }
-                },
-                {
                   sample: "typeof TURNVARS",
                   res: "undefined",
                   desc: "we didn't define turnvars since we didn't need them"
@@ -82,6 +73,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "typeof BATTLEVARS",
                   res: "undefined",
                   desc: "we didn't define battlevars since we didn't need them"
+                },
+                {
+                  sample: "typeof TURN",
+                  res: "undefined",
+                  desc: "we didn't define turn since we didn't need them"
                 },
                 {
                   sample: "typeof NEXTSPAWNID",
@@ -116,6 +112,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
+          endGame: {
+            fnurp: {
+              condition: { same: [5, ["turn"]] }
+            }
+          },
           startTurn: {
             link: {
               if: [
@@ -144,11 +145,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             emptyArtifactLayers: {},
-            lastTurn: { turn: 0 },
             step: {
               UNITLAYERS: {},
               BATTLEVARS: "oldBattleVars",
-              NEXTSPAWNID: "oldNextSpawnId"
+              NEXTSPAWNID: "oldNextSpawnId",
+              TURN: 7
             }
           },
           tests: [
@@ -168,6 +169,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "NEXTSPAWNID",
                   res: "oldNextSpawnId"
+                },
+                {
+                  sample: "TURN",
+                  res: 8,
+                  desc: "turn from last step was bumped once"
                 }
               ]
             }

@@ -1,6 +1,11 @@
 import { FullDefAnon } from "../../../../types";
 import { emptyUnitLayers } from "../../../../common";
-import { usesBattleVars, usesTurnVars, usesSpawn } from "./sectionUtils";
+import {
+  usesBattleVars,
+  usesTurnVars,
+  usesSpawn,
+  usesTurnNumber
+} from "./sectionUtils";
 
 export function executeStartInit(
   gameDef: FullDefAnon,
@@ -61,14 +66,11 @@ export function executeStartInit(
     ret += `let NEXTSPAWNID = step.NEXTSPAWNID; `;
   }
 
-  // We create the new turn skeleton, bumping the turn count
-  // The turn has to be created here since expression might read turn.turn
-  ret += `
-  const turn = {
-    turn: lastTurn.turn + 1,
-    steps: {},
-    player: ${player},
-  };`;
+  // We create local bumped turnvar here only if used inside startTurn,
+  // otherwise we'll bump it in startEnd
+  if (usesTurnNumber(gameDef)) {
+    ret += `let TURN = step.TURN + 1; `;
+  }
 
   return ret;
 }

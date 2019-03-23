@@ -57,7 +57,7 @@ export default function parseVal(
       case "loopid":
         return "LOOPID";
       case "turn":
-        return "turn.turn";
+        return "TURN";
       case "countsofar":
         return "CURRENTCOUNT";
       default:

@@ -71,7 +71,7 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
             MAX: 5,
             STEP: 6,
             LOOPID: 7,
-            turn: { turn: 8 },
+            TURN: 8,
             CURRENTCOUNT: 9
           },
           tests: [

@@ -40,48 +40,48 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "startEnd",
               asserts: [
                 {
-                  sample: "turn.steps.root",
+                  sample: "returnVal",
                   res: truthy,
                   desc: "A new step was saved as root"
                 },
                 {
-                  sample: "turn.steps.root.ARTIFACTS",
+                  sample: "returnVal.ARTIFACTS",
                   res: "localArtifacts"
                 },
                 {
-                  sample: "turn.steps.root.UNITLAYERS",
+                  sample: "returnVal.UNITLAYERS",
                   res: "localUnitLayers"
                 },
                 {
-                  sample: "turn.steps.root.UNITDATA",
+                  sample: "returnVal.UNITDATA",
                   res: "localUnitData"
                 },
                 {
-                  sample: "turn.steps.root.MARKS",
+                  sample: "returnVal.MARKS",
                   res: "localMarks"
                 },
                 {
-                  sample: "turn.steps.root.LINKS",
+                  sample: "returnVal.LINKS",
                   res: "localLinks"
                 },
                 {
-                  sample: "turn.steps.root.name",
+                  sample: "returnVal.name",
                   res: "start"
                 },
                 {
-                  sample: "turn.steps.root.path",
+                  sample: "returnVal.path",
                   res: []
                 },
                 {
-                  sample: "turn.steps.root.TURNVARS",
+                  sample: "returnVal.TURNVARS",
                   res: falsy
                 },
                 {
-                  sample: "turn.steps.root.BATTLEVARS",
+                  sample: "returnVal.BATTLEVARS",
                   res: falsy
                 },
                 {
-                  sample: "turn.steps.root.NEXTSPAWNID",
+                  sample: "returnVal.NEXTSPAWNID",
                   res: falsy
                 }
               ]
@@ -132,15 +132,15 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "startEnd",
               asserts: [
                 {
-                  sample: "turn.steps.root.TURNVARS",
+                  sample: "returnVal.TURNVARS",
                   res: "localTurnVars"
                 },
                 {
-                  sample: "turn.steps.root.BATTLEVARS",
+                  sample: "returnVal.BATTLEVARS",
                   res: "localBattleVars"
                 },
                 {
-                  sample: "turn.steps.root.NEXTSPAWNID",
+                  sample: "returnVal.NEXTSPAWNID",
                   res: "localNextSpawnId"
                 }
               ]

@@ -41,7 +41,10 @@ export function runSuite<T, U>(suite: AlgolSuite) {
             `;
           let body = isAlgolExpressionTest(suiteTest)
             ? `results[0] = ${code}`
-            : `${code}; ` +
+            : `${code.replace(
+                /return *([^;]*;\W*)$/,
+                "const returnVal = $1"
+              )}; ` +
               suiteTest.asserts
                 .map((assert, n) => `results[${n}] = ${assert.sample};`)
                 .join("; ");

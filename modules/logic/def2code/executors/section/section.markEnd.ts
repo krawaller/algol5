@@ -10,16 +10,13 @@ export function executeMarkEnd(
     .concat(def.runGenerator || [])
     .concat(def.runGenerators || []);
 
-  let ret = "";
-
-  ret += `turn.steps[newStepId] = {
-        ...step,
-        MARKS,
-        LINKS,
-        stepId: newStepId,
-        path: step.path.concat(newStepId),
-        ${gens.length ? "ARTIFACTS, " : ""}
-        name: "${action}"
-      }`;
-  return ret;
+  return `
+    return {
+      ...step,
+      MARKS,
+      LINKS,
+      path: step.path.concat(newMarkPos),
+      ${gens.length ? "ARTIFACTS, " : ""}
+      name: "${action}"
+    };`;
 }

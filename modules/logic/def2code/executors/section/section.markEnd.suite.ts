@@ -23,26 +23,23 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
-            newStepId: "newId",
             step: {
-              stepId: "foo",
               path: ["before"],
               flurp: "gnurp"
             },
-            turn: { steps: {}, links: { foo: "bar" } },
             MARKS: { updated: "marks" },
-            LINKS: "newLinks"
+            LINKS: "newLinks",
+            newMarkPos: "c3"
           },
           tests: [
             {
               expr: "markEnd",
               asserts: [
                 {
-                  sample: "turn.steps[newStepId]",
+                  sample: "returnVal",
                   res: {
                     flurp: "gnurp",
-                    stepId: "newId",
-                    path: ["before", "newId"],
+                    path: ["before", "c3"],
                     name: "somemark",
                     MARKS: {
                       updated: "marks"
@@ -87,12 +84,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
-            newStepId: "newId",
             step: {
               stepId: "foo",
               path: []
             },
-            turn: { steps: {}, links: {} },
             MARKS: {},
             newMarkPos: "b2",
             ARTIFACTS: { updated: "artifacts" },
@@ -103,7 +98,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markEnd",
               asserts: [
                 {
-                  sample: "turn.steps[newStepId].ARTIFACTS",
+                  sample: "returnVal.ARTIFACTS",
                   res: { updated: "artifacts" },
                   desc: "we save the new artifacts"
                 }

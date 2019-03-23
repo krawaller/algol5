@@ -44,7 +44,8 @@ export function executeStartInit(
     marks: {}
   };`;
 
-  // We carry over the UnitData. No need to copy it here.
+  // We carry over the UnitData. No need to copy it here
+  // since startTurn doesn't do effects.
   ret += `let UNITDATA = step.UNITDATA; `;
 
   // We reset the artifact layers for the new turn.

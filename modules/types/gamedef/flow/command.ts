@@ -1,4 +1,4 @@
-import { AlgolVal, AlgolGenRef } from "../../";
+import { AlgolVal, AlgolGenRef, AlgolLink } from "../../";
 import { AlgolEffect } from "../../";
 
 export type CommandDef<
@@ -36,28 +36,8 @@ export type CommandDef<
     Turnv,
     Unit
   >;
-  link?: AlgolVal<
-    Cmnd | Mrk | "endturn",
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
-  links?: AlgolVal<
-    Cmnd | Mrk | "endturn",
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >[];
+  link?: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  links?: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
   runGenerator?: AlgolGenRef<
     Btlp,
     Btlv,

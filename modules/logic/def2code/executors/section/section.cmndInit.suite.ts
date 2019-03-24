@@ -12,10 +12,59 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         flow: {
           ...emptyFullDef.flow,
           commands: {
+            somecmnd: {}
+          }
+        }
+      },
+      player: 1,
+      action: "somecmnd",
+      contexts: [
+        {
+          context: {
+            step: {}
+          },
+          tests: [
+            {
+              expr: "cmndInit",
+              asserts: [
+                {
+                  sample: "typeof TURNVARS",
+                  res: "undefined",
+                  desc:
+                    "turnvars are not available locally because we're not using them"
+                },
+                {
+                  sample: "typeof BATTLEVARS",
+                  res: "undefined",
+                  desc:
+                    "battlevars are not available locally because we're not using them"
+                },
+                {
+                  sample: "typeof NEXTSPAWNID",
+                  res: "undefined",
+                  desc: "we aren't spawning so we don't import spawn id counter"
+                },
+                {
+                  sample: "typeof NEXTSPAWNID",
+                  res: "undefined",
+                  desc: "we aren't spawning so we don't import spawn id counter"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      def: {
+        ...emptyFullDef,
+        flow: {
+          ...emptyFullDef.flow,
+          commands: {
             somecmnd: {
               applyEffects: [
                 { setbattlevar: ["mybvar", 666] },
-                { setturnvar: ["mytvar", 777] }
+                { setturnvar: ["mytvar", ["turn"]] }
               ]
             }
           }
@@ -28,7 +77,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             step: {
               TURNVARS: { foo: "bar" },
-              BATTLEVARS: { baz: "bin" }
+              BATTLEVARS: { baz: "bin" },
+              TURN: "oldTurnNumber"
             }
           },
           tests: [
@@ -55,6 +105,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: false,
                   desc:
                     "since we'll be mutating battlevars we copied the object"
+                },
+                {
+                  sample: "TURN",
+                  res: "oldTurnNumber",
+                  desc: "we're using turn number so we made local ref"
                 }
               ]
             }
@@ -121,53 +176,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "NEXTSPAWNID",
                   res: "oldSpawnId"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      def: {
-        ...emptyFullDef,
-        flow: {
-          ...emptyFullDef.flow,
-          commands: {
-            somecmnd: {}
-          }
-        }
-      },
-      player: 1,
-      action: "somecmnd",
-      contexts: [
-        {
-          context: {
-            step: {
-              TURNVARS: { foo: "bar" },
-              BATTLEVARS: { baz: "bin" }
-            }
-          },
-          tests: [
-            {
-              expr: "cmndInit",
-              asserts: [
-                {
-                  sample: "typeof TURNVARS",
-                  res: "undefined",
-                  desc:
-                    "turnvars are not available locally because we're not using them"
-                },
-                {
-                  sample: "typeof BATTLEVARS",
-                  res: "undefined",
-                  desc:
-                    "battlevars are not available locally because we're not using them"
-                },
-                {
-                  sample: "typeof NEXTSPAWNID",
-                  res: "undefined",
-                  desc: "we aren't spawning so we don't import spawn id counter"
                 }
               ]
             }

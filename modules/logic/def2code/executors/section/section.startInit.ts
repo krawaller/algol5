@@ -1,8 +1,8 @@
 import { FullDefAnon } from "../../../../types";
 import { emptyUnitLayers } from "../../../../common";
 import {
-  usesBattleVars,
-  usesTurnVars,
+  readsBattleVars,
+  readsTurnVars,
   usesSpawn,
   usesTurnNumber
 } from "./sectionUtils";
@@ -53,12 +53,12 @@ export function executeStartInit(
   ret += `let ARTIFACTS = emptyArtifactLayers; `;
 
   // We carry over BattleVars if game uses them
-  if (usesBattleVars(gameDef)) {
+  if (readsBattleVars(gameDef)) {
     ret += `let BATTLEVARS = step.BATTLEVARS; `;
   }
 
   // We reset TurnVars if game uses them
-  if (usesTurnVars(gameDef)) {
+  if (readsTurnVars(gameDef)) {
     ret += `let TURNVARS = {}; `;
   }
 

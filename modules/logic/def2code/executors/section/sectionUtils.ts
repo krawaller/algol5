@@ -23,25 +23,28 @@ export function ifCodeContains(
   );
 }
 
-export function usesTurnVars(search: FullDefAnon | any): boolean {
+export function mutatesTurnVars(search): boolean {
   return contains(
     search,
-    d =>
-      isAlgolEffectSetTurnPos(d) ||
-      isAlgolEffectSetTurnVar(d) ||
-      isAlgolPosTurnPos(d) ||
-      isAlgolValTurnVar(d)
+    d => isAlgolEffectSetTurnPos(d) || isAlgolEffectSetTurnVar(d)
   );
 }
 
-export function usesBattleVars(search: FullDefAnon | any): boolean {
+export function readsTurnVars(search: FullDefAnon | any): boolean {
+  return contains(search, d => isAlgolPosTurnPos(d) || isAlgolValTurnVar(d));
+}
+
+export function mutatesBattleVars(search): boolean {
   return contains(
     search,
-    d =>
-      isAlgolEffectSetBattlePos(d) ||
-      isAlgolEffectSetBattleVar(d) ||
-      isAlgolPosBattlePos(d) ||
-      isAlgolValBattleVar(d)
+    d => isAlgolEffectSetBattlePos(d) || isAlgolEffectSetBattleVar(d)
+  );
+}
+
+export function readsBattleVars(search: FullDefAnon | any): boolean {
+  return (
+    mutatesBattleVars(search) ||
+    contains(search, d => isAlgolPosBattlePos(d) || isAlgolValBattleVar(d))
   );
 }
 

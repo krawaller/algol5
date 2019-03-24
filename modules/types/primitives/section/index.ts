@@ -3,4 +3,5 @@ export type AlgolSection =
   | "markEnd"
   | "orders"
   | "startInit"
-  | "startEnd";
+  | "startEnd"
+  | "cmndInit";

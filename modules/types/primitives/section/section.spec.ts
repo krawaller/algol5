@@ -1,3 +1,10 @@
 import { AlgolSection } from "./";
 
-const testSections: AlgolSection[] = ["startInit", "markInit", "orders"];
+const testSections: AlgolSection[] = [
+  "startInit",
+  "startEnd",
+  "markInit",
+  "markEnd",
+  "cmndInit",
+  "orders"
+];

@@ -69,10 +69,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.flow,
           commands: {
             somecmnd: {
-              link: {
+              applyEffect: {
                 if: [
-                  { same: [{ turnvar: "gnu" }, { battlevar: "flu" }] },
-                  "endturn"
+                  { same: [{ turnvar: "gnu" }, 777] },
+                  { spawnat: [{ battlepos: "foo" }, "someunit"] }
                 ]
               }
             }
@@ -86,7 +86,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             step: {
               TURNVARS: { foo: "bar" },
-              BATTLEVARS: { baz: "bin" }
+              BATTLEVARS: { baz: "bin" },
+              NEXTSPAWNID: "oldSpawnId"
             }
           },
           tests: [
@@ -116,6 +117,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: true,
                   desc:
                     "since we'll NOT be mutating battlevars we didnt copy the object"
+                },
+                {
+                  sample: "NEXTSPAWNID",
+                  res: "oldSpawnId"
                 }
               ]
             }
@@ -158,6 +163,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: "undefined",
                   desc:
                     "battlevars are not available locally because we're not using them"
+                },
+                {
+                  sample: "typeof NEXTSPAWNID",
+                  res: "undefined",
+                  desc: "we aren't spawning so we don't import spawn id counter"
                 }
               ]
             }

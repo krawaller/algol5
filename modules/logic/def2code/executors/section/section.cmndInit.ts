@@ -4,7 +4,8 @@ import {
   mutatesBattleVars,
   mutatesTurnVars,
   readsTurnVars,
-  readsBattleVars
+  readsBattleVars,
+  usesSpawn
 } from "./sectionUtils";
 import { executeSection } from "./";
 
@@ -31,6 +32,10 @@ export function executeCmndInit(
     `;
   } else if (readsBattleVars(def)) {
     ret += `let BATTLEVARS = step.BATTLEVARS; `;
+  }
+
+  if (usesSpawn(def)) {
+    ret += `let NEXTSPAWNID = step.NEXTSPAWNID; `;
   }
 
   return ret;

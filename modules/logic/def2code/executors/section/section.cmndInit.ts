@@ -1,5 +1,11 @@
 import { FullDefAnon } from "../../../../types";
-import { ifCodeContains } from "./sectionUtils";
+import {
+  ifCodeContains,
+  mutatesBattleVars,
+  mutatesTurnVars,
+  readsTurnVars,
+  readsBattleVars
+} from "./sectionUtils";
 import { executeSection } from "./";
 
 export function executeCmndInit(
@@ -7,7 +13,25 @@ export function executeCmndInit(
   player: 1 | 2,
   action: string
 ): string {
+  const def = gameDef.flow.commands[action];
+
   let ret = "";
+
+  if (mutatesTurnVars(def)) {
+    ret += `
+    let TURNVARS = { ...step.TURNVARS };
+    `;
+  } else if (readsTurnVars(def)) {
+    ret += `let TURNVARS = step.TURNVARS; `;
+  }
+
+  if (mutatesBattleVars(def)) {
+    ret += `
+    let BATTLEVARS = { ...step.BATTLEVARS };
+    `;
+  } else if (readsBattleVars(def)) {
+    ret += `let BATTLEVARS = step.BATTLEVARS; `;
+  }
 
   return ret;
 }

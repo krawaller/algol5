@@ -77,7 +77,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           marks: {
             neatmark: {
               from: "units",
-              runGenerator: "simplereach"
+              runGenerator: { if: [{ morethan: [3, ["turn"]] }, "simplereach"] }
             }
           }
         },
@@ -105,7 +105,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               TURNVARS: { turn: "varsobj" },
               BATTLEVARS: { battle: "varsobj" },
               ARTIFACTS: { arti: "facts" },
-              UNITLAYERS: { unit: "layers" }
+              UNITLAYERS: { unit: "layers" },
+              TURN: "oldTurnCount"
             },
             newMarkPos: "b2"
           },
@@ -128,6 +129,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "UNITLAYERS",
                   res: { unit: "layers" }
+                },
+                {
+                  sample: "TURN",
+                  res: "oldTurnCount"
                 }
               ]
             }

@@ -22,9 +22,17 @@ export function runSuite<T, U>(suite: AlgolSuite) {
             ...context
           };
           const pre =
+            `
+            const references = {
+              ${Object.keys(fullContext).reduce(
+                (mem, key) =>
+                  mem + `${key}: ${JSON.stringify(fullContext[key])}, `,
+                ""
+              )}
+            };
+            ` +
             Object.keys(fullContext).reduce(
-              (mem, key) =>
-                mem + `let ${key} = ${JSON.stringify(fullContext[key])}; `,
+              (mem, key) => mem + `let ${key} = references.${key}; `,
               ""
             ) +
             `

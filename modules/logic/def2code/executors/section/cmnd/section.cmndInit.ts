@@ -1,4 +1,4 @@
-import { FullDefAnon } from "../../../../types";
+import { FullDefAnon } from "../../../../../types";
 import {
   ifCodeContains,
   mutatesBattleVars,
@@ -7,8 +7,8 @@ import {
   readsBattleVars,
   usesSpawn,
   usesTurnNumber
-} from "./sectionUtils";
-import { executeSection } from "./";
+} from "../sectionUtils";
+import { executeSection } from "..";
 
 export function executeCmndInit(
   gameDef: FullDefAnon,

@@ -1,4 +1,4 @@
-import { FullDefAnon } from "../../../../types";
+import { FullDefAnon } from "../../../../../types";
 
 export function executeMarkEnd(
   gameDef: FullDefAnon,

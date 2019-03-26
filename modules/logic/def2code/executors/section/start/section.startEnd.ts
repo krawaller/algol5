@@ -1,10 +1,10 @@
-import { FullDefAnon } from "../../../../types";
+import { FullDefAnon } from "../../../../../types";
 import {
   readsBattleVars,
   readsTurnVars,
   usesSpawn,
   usesTurnNumber
-} from "./sectionUtils";
+} from "../sectionUtils";
 
 export function executeStartEnd(
   gameDef: FullDefAnon,

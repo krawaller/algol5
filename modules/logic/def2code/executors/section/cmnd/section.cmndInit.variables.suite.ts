@@ -1,9 +1,9 @@
 import { executeSection } from "..";
-import { emptyFullDef } from "../../../../common";
-import { AlgolStatementSuite, AlgolSection } from "../../../../types";
+import { emptyFullDef } from "../../../../../common";
+import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Cmnd - Init",
+  title: "Section - Cmnd - Init - Variables",
   func: executeSection,
   defs: [
     {
@@ -38,16 +38,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: "undefined",
                   desc:
                     "battlevars are not available locally because we're not using them"
-                },
-                {
-                  sample: "typeof NEXTSPAWNID",
-                  res: "undefined",
-                  desc: "we aren't spawning so we don't import spawn id counter"
-                },
-                {
-                  sample: "typeof NEXTSPAWNID",
-                  res: "undefined",
-                  desc: "we aren't spawning so we don't import spawn id counter"
                 }
               ]
             }
@@ -77,8 +67,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             step: {
               TURNVARS: { foo: "bar" },
-              BATTLEVARS: { baz: "bin" },
-              TURN: "oldTurnNumber"
+              BATTLEVARS: { baz: "bin" }
             }
           },
           tests: [
@@ -105,11 +94,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: false,
                   desc:
                     "since we'll be mutating battlevars we copied the object"
-                },
-                {
-                  sample: "TURN",
-                  res: "oldTurnNumber",
-                  desc: "we're using turn number so we made local ref"
                 }
               ]
             }
@@ -124,10 +108,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.flow,
           commands: {
             somecmnd: {
-              applyEffect: {
+              link: {
                 if: [
-                  { same: [{ turnvar: "gnu" }, 777] },
-                  { spawnat: [{ battlepos: "foo" }, "someunit"] }
+                  { same: [{ turnvar: "x" }, { battlevar: "y" }] },
+                  "somemark"
                 ]
               }
             }
@@ -141,8 +125,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             step: {
               TURNVARS: { foo: "bar" },
-              BATTLEVARS: { baz: "bin" },
-              NEXTSPAWNID: "oldSpawnId"
+              BATTLEVARS: { baz: "bin" }
             }
           },
           tests: [
@@ -172,10 +155,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: true,
                   desc:
                     "since we'll NOT be mutating battlevars we didnt copy the object"
-                },
-                {
-                  sample: "NEXTSPAWNID",
-                  res: "oldSpawnId"
                 }
               ]
             }

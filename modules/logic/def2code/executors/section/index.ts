@@ -1,9 +1,7 @@
 import { AlgolSection, FullDefAnon } from "../../../../types";
-import { executeMarkEnd } from "./section.markEnd";
-import { executeMarkInit } from "./section.markInit";
-import { executeStartInit } from "./section.startInit";
-import { executeStartEnd } from "./section.startEnd";
-import { executeCmndInit } from "./section.cmndInit";
+import { executeMarkEnd, executeMarkInit } from "./mark";
+import { executeStartInit, executeStartEnd } from "./start";
+import { executeCmndInit } from "./cmnd";
 import { executeOrderSection } from "./section.orders";
 
 export function executeSection(

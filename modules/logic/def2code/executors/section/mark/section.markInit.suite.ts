@@ -1,6 +1,6 @@
 import { executeSection } from "..";
-import { emptyFullDef } from "../../../../common";
-import { AlgolStatementSuite, AlgolSection } from "../../../../types";
+import { emptyFullDef } from "../../../../../common";
+import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Mark - Init",

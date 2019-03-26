@@ -1,6 +1,6 @@
-import { FullDefAnon } from "../../../../types";
-import { ifCodeContains, usesTurnNumber } from "./sectionUtils";
-import { executeSection } from "./";
+import { FullDefAnon } from "../../../../../types";
+import { ifCodeContains, usesTurnNumber } from "../sectionUtils";
+import { executeSection } from "../";
 
 export function executeMarkInit(
   gameDef: FullDefAnon,

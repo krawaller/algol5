@@ -1,11 +1,11 @@
-import { FullDefAnon } from "../../../../types";
-import { emptyUnitLayers } from "../../../../common";
+import { FullDefAnon } from "../../../../../types";
+import { emptyUnitLayers } from "../../../../../common";
 import {
   readsBattleVars,
   readsTurnVars,
   usesSpawn,
   usesTurnNumber
-} from "./sectionUtils";
+} from "../sectionUtils";
 
 export function executeStartInit(
   gameDef: FullDefAnon,
@@ -62,7 +62,6 @@ export function executeStartInit(
     ret += `let TURNVARS = {}; `;
   }
 
-  // We carry over NextSpawnId if game uses spawning
   if (usesSpawn(gameDef)) {
     ret += `let NEXTSPAWNID = step.NEXTSPAWNID; `;
   }

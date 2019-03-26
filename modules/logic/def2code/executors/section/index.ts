@@ -1,7 +1,7 @@
 import { AlgolSection, FullDefAnon } from "../../../../types";
 import { executeMarkEnd, executeMarkInit } from "./mark";
 import { executeStartInit, executeStartEnd } from "./start";
-import { executeCmndInit } from "./cmnd";
+import { executeCmndInit, executeCmndEnd } from "./cmnd";
 import { executeOrderSection } from "./section.orders";
 
 export function executeSection(
@@ -23,6 +23,8 @@ export function executeSection(
       return executeStartEnd(gameDef, player, action);
     case "cmndInit":
       return executeCmndInit(gameDef, player, action);
+    case "cmndEnd":
+      return executeCmndEnd(gameDef, player, action);
     default:
       throw new Error("Unknown section: " + JSON.stringify(section));
   }

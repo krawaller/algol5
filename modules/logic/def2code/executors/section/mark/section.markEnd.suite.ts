@@ -24,8 +24,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             step: {
-              path: ["before"],
-              flurp: "gnurp"
+              path: ["before"]
             },
             MARKS: { updated: "marks" },
             LINKS: "newLinks",
@@ -38,7 +37,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal",
                   res: {
-                    flurp: "gnurp",
                     path: ["before", "c3"],
                     name: "somemark",
                     MARKS: {

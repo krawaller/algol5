@@ -2,6 +2,10 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultCmndEndContext = {
+  LINKS: {}
+};
+
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Cmnd - End - Spawn",
   func: executeSection,
@@ -13,6 +17,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndEndContext,
             step: {
               NEXTSPAWNID: "bogusSpawnId"
             }
@@ -52,6 +57,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndEndContext,
             step: {
               NEXTSPAWNID: "oldSpawnId"
             }
@@ -88,6 +94,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndEndContext,
             step: {},
             NEXTSPAWNID: "mutatedSpawnId"
           },

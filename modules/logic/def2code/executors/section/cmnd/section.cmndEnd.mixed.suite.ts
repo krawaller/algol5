@@ -2,8 +2,13 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultCmndEndContext = {
+  LINKS: {},
+  step: {}
+};
+
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Cmnd - End - Spawn",
+  title: "Section - Cmnd - End - Mixed",
   func: executeSection,
   defs: [
     {
@@ -13,6 +18,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndEndContext,
+            LINKS: "localLinks",
             step: {
               TURN: "oldTurn"
             }
@@ -25,6 +32,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.TURN",
                   res: "oldTurn",
                   desc: "command doesnt reference TURN so we pass old along"
+                },
+                {
+                  sample: "returnVal.LINKS",
+                  res: "localLinks",
+                  desc: "we always mutate LINKS, so always pass it along"
                 }
               ]
             }
@@ -49,6 +61,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndEndContext,
             TURN: "localTurnVar"
           },
           tests: [

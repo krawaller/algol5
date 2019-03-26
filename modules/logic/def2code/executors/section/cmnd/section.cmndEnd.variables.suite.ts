@@ -2,6 +2,11 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultCmndEndContext = {
+  step: {},
+  LINKS: {}
+};
+
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Cmnd - End - Variables",
   func: executeSection,
@@ -13,6 +18,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndEndContext,
             step: {
               TURNVAR: "bogusTurnVar",
               BATTLEVAR: "bogusBattleVar"
@@ -58,6 +64,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndEndContext,
             step: {
               TURNVARS: "oldTurnVars",
               BATTLEVARS: "oldBattleVars"
@@ -102,7 +109,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
-            step: {},
+            ...defaultCmndEndContext,
             TURNVARS: "referencedTurnVars",
             BATTLEVARS: "mutatedBattleVars"
           },

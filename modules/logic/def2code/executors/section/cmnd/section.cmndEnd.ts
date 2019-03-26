@@ -14,6 +14,7 @@ export function executeCmndEnd(
   const cmndDef = gameDef.flow.commands[action];
 
   return `return {
+    LINKS,
     ${usesTurnNumber(cmndDef) ? "TURN" : "TURN: step.TURN"},
     ${
       referencesTurnVars(gameDef)

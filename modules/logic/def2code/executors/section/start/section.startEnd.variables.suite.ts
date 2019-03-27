@@ -25,7 +25,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartEndContext,
             step: {
               path: [],
-              TURNVAR: "bogusTurnVar",
               BATTLEVAR: "bogusBattleVar"
             }
           },
@@ -36,7 +35,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.TURNVAR",
                   res: undefined,
-                  desc: "Game doesnt use TURNVAR so we dont pass it on"
+                  desc: "Game doesnt use TURNVAR so we dont init it"
                 },
                 {
                   sample: "returnVal.BATTLEVAR",
@@ -74,7 +73,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartEndContext,
             step: {
               path: [],
-              TURNVARS: "oldTurnVars",
               BATTLEVARS: "oldBattleVars"
             }
           },
@@ -84,8 +82,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "returnVal.TURNVARS",
-                  res: "oldTurnVars",
-                  desc: "no local turnvars, we just pass on from the old step"
+                  res: {},
+                  desc:
+                    "no local turnvars, but game uses it so we init to empty object here"
                 },
                 {
                   sample: "returnVal.BATTLEVARS",
@@ -129,7 +128,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.TURNVARS",
                   res: "localTurnVars",
-                  desc: "we have local reference so we keep it"
+                  desc:
+                    "we have local reference to new empty object so we keep it"
                 },
                 {
                   sample: "returnVal.BATTLEVARS",

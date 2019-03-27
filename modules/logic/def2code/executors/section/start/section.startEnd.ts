@@ -29,7 +29,7 @@ export function executeStartEnd(
       referencesTurnVars(gameDef)
         ? referencesTurnVars(startDef)
           ? "TURNVARS, "
-          : "TURNVARS: step.TURNVARS, "
+          : "TURNVARS: {}, "
         : ""
     }
     ${

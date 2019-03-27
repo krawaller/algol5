@@ -18,7 +18,6 @@ export function executeStartEnd(
   const usesUnitLayers = referencesUnitLayers(gameDef, startDef);
   const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));
 
-  // Here we just need to return the new step
   return `
   ${!usesUnitLayers ? "const oldUnitLayers = step.UNITLAYERS; " : ""}
   return {

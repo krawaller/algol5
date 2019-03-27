@@ -4,7 +4,6 @@ import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultCmndEndContext = {
   LINKS: {},
-  MARKS: {},
   step: { path: [] }
 };
 
@@ -21,7 +20,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultCmndEndContext,
             LINKS: "localLinks",
-            MARKS: "localMarks",
             step: {
               TURN: "oldTurn",
               path: ["prevStep"]
@@ -43,8 +41,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 },
                 {
                   sample: "returnVal.MARKS",
-                  res: "localMarks",
-                  desc: "we always reset MARKS so pass that along"
+                  res: {},
+                  desc: "marks are reset after cmnd"
                 },
                 {
                   sample: "returnVal.path",
@@ -64,7 +62,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.flow,
           commands: {
             somecmnd: {
-              link: { if: [{ same: [["turn"], 666] }, "endturn"] }
+              link: {
+                if: [{ same: [["turn"], 666] }, "endturn"]
+              }
             }
           }
         }

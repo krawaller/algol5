@@ -15,7 +15,7 @@ export function executeCmndEnd(
 
   return `return {
     LINKS,
-    MARKS,
+    MARKS: {},
     path: step.path.concat("${action}"),
     ${usesTurnNumber(cmndDef) ? "TURN" : "TURN: step.TURN"},
     ${

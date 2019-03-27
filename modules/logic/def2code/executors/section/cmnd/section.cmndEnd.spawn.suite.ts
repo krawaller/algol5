@@ -4,7 +4,6 @@ import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultCmndEndContext = {
   LINKS: {},
-  MARKS: {},
   step: { path: [] }
 };
 

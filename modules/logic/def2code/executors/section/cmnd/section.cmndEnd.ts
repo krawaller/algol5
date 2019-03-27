@@ -15,6 +15,8 @@ export function executeCmndEnd(
 
   return `return {
     LINKS,
+    MARKS,
+    path: step.path.concat("${action}"),
     ${usesTurnNumber(cmndDef) ? "TURN" : "TURN: step.TURN"},
     ${
       referencesTurnVars(gameDef)

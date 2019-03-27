@@ -3,7 +3,8 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultCmndEndContext = {
-  step: {},
+  step: { path: [] },
+  MARKS: {},
   LINKS: {}
 };
 
@@ -20,6 +21,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultCmndEndContext,
             step: {
+              path: [],
               TURNVAR: "bogusTurnVar",
               BATTLEVAR: "bogusBattleVar"
             }
@@ -66,6 +68,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultCmndEndContext,
             step: {
+              path: [],
               TURNVARS: "oldTurnVars",
               BATTLEVARS: "oldBattleVars"
             }

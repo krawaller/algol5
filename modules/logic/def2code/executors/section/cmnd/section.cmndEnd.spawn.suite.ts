@@ -3,7 +3,9 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultCmndEndContext = {
-  LINKS: {}
+  LINKS: {},
+  MARKS: {},
+  step: { path: [] }
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -19,7 +21,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultCmndEndContext,
             step: {
-              NEXTSPAWNID: "bogusSpawnId"
+              NEXTSPAWNID: "bogusSpawnId",
+              path: []
             }
           },
           tests: [
@@ -59,7 +62,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultCmndEndContext,
             step: {
-              NEXTSPAWNID: "oldSpawnId"
+              NEXTSPAWNID: "oldSpawnId",
+              path: []
             }
           },
           tests: [
@@ -95,7 +99,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultCmndEndContext,
-            step: {},
             NEXTSPAWNID: "mutatedSpawnId"
           },
           tests: [

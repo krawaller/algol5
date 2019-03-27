@@ -4,7 +4,8 @@ import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultCmndEndContext = {
   LINKS: {},
-  step: {}
+  MARKS: {},
+  step: { path: [] }
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -20,8 +21,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultCmndEndContext,
             LINKS: "localLinks",
+            MARKS: "localMarks",
             step: {
-              TURN: "oldTurn"
+              TURN: "oldTurn",
+              path: ["prevStep"]
             }
           },
           tests: [
@@ -37,6 +40,16 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.LINKS",
                   res: "localLinks",
                   desc: "we always mutate LINKS, so always pass it along"
+                },
+                {
+                  sample: "returnVal.MARKS",
+                  res: "localMarks",
+                  desc: "we always reset MARKS so pass that along"
+                },
+                {
+                  sample: "returnVal.path",
+                  res: ["prevStep", "somecmnd"],
+                  desc: "it adds command name to path"
                 }
               ]
             }

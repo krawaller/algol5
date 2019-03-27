@@ -3,7 +3,6 @@ import { emptyUnitLayers } from "../../../../../common";
 import {
   readsBattleVars,
   readsTurnVars,
-  usesSpawn,
   usesTurnNumber,
   referencesUnitLayers
 } from "../sectionUtils";
@@ -65,10 +64,6 @@ let UNITLAYERS = {
   // We reset TurnVars here if referenced locally, otherwise handle in startEnd
   if (readsTurnVars(startDef)) {
     ret += `let TURNVARS = {}; `;
-  }
-
-  if (usesSpawn(gameDef)) {
-    ret += `let NEXTSPAWNID = step.NEXTSPAWNID; `;
   }
 
   // We create local bumped turnvar here only if used inside startTurn,

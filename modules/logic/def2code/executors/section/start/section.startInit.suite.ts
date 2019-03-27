@@ -34,10 +34,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     "we didn't define turn since we didn't need them locally"
                 },
                 {
-                  sample: "typeof NEXTSPAWNID",
-                  res: "undefined"
-                },
-                {
                   sample: "UNITDATA",
                   res: "oldUnitData",
                   desc: "old data was saved into local var"
@@ -93,7 +89,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             emptyArtifactLayers: {},
             step: {
               UNITLAYERS: {},
-              NEXTSPAWNID: "oldNextSpawnId",
               TURN: 7
             }
           },
@@ -101,10 +96,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             {
               expr: "startInit",
               asserts: [
-                {
-                  sample: "NEXTSPAWNID",
-                  res: "oldNextSpawnId"
-                },
                 {
                   sample: "TURN",
                   res: 8,

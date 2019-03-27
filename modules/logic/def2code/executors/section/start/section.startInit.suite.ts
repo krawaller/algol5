@@ -7,20 +7,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
   func: executeSection,
   defs: [
     {
-      def: {
-        ...emptyFullDef,
-        flow: {
-          ...emptyFullDef.flow,
-          startTurn: {}
-        },
-        graphics: {
-          ...emptyFullDef.graphics,
-          icons: {
-            flurps: "bishop",
-            gnurps: "king"
-          }
-        }
-      },
+      def: emptyFullDef,
       player: 1,
       action: "somemark",
       contexts: [
@@ -28,38 +15,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             emptyArtifactLayers: { empty: "layers" },
             step: {
-              UNITLAYERS: {
-                units: "willstayunits",
-                myunits: "shouldbecomeoppunits",
-                oppunits: "shouldbecomemyunits",
-                flurps: "willstayflurps",
-                myflurps: "shouldbecomeoppflurps",
-                oppflurps: "shouldbecomemyflurps",
-                gnurps: "willstaygnurps",
-                mygnurps: "shouldbecomeoppgnurps",
-                oppgnurps: "shouldbecomemygnurps"
-              },
-              UNITDATA: "oldUnitData"
+              UNITDATA: "oldUnitData",
+              UNITLAYERS: {}
             }
           },
           tests: [
             {
               expr: "startInit",
               asserts: [
-                {
-                  sample: "UNITLAYERS",
-                  res: {
-                    units: "willstayunits",
-                    oppunits: "shouldbecomeoppunits",
-                    myunits: "shouldbecomemyunits",
-                    flurps: "willstayflurps",
-                    oppflurps: "shouldbecomeoppflurps",
-                    myflurps: "shouldbecomemyflurps",
-                    gnurps: "willstaygnurps",
-                    oppgnurps: "shouldbecomeoppgnurps",
-                    mygnurps: "shouldbecomemygnurps"
-                  }
-                },
                 {
                   sample: "ARTIFACTS",
                   res: { empty: "layers" }
@@ -105,14 +68,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           endGame: {
             fnurp: {
               condition: { same: [5, ["turn"]] }
-            }
-          },
-          startTurn: {
-            link: {
-              if: [
-                { same: [{ battlevar: "gnurp" }, { turnvar: "flurp" }] },
-                "somemark"
-              ]
             }
           },
           commands: {

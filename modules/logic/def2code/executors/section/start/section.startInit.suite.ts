@@ -30,7 +30,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "typeof TURN",
                   res: "undefined",
-                  desc: "we didn't define turn since we didn't need them"
+                  desc:
+                    "we didn't define turn since we didn't need them locally"
                 },
                 {
                   sample: "typeof NEXTSPAWNID",
@@ -65,9 +66,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
-          endGame: {
-            fnurp: {
-              condition: { same: [5, ["turn"]] }
+          startTurn: {
+            link: {
+              if: [{ same: [5, ["turn"]] }, "selectunit"]
             }
           },
           commands: {

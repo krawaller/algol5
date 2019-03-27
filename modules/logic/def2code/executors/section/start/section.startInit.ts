@@ -70,7 +70,7 @@ export function executeStartInit(
 
   // We create local bumped turnvar here only if used inside startTurn,
   // otherwise we'll bump it in startEnd
-  if (usesTurnNumber(gameDef)) {
+  if (usesTurnNumber(startDef)) {
     ret += `let TURN = step.TURN + 1; `;
   }
 

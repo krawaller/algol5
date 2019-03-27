@@ -1,7 +1,7 @@
 import { FullDefAnon } from "../../../../../types";
 import {
-  readsBattleVars,
-  readsTurnVars,
+  referencesBattleVars,
+  referencesTurnVars,
   usesSpawn,
   usesTurnNumber
 } from "../sectionUtils";
@@ -25,8 +25,20 @@ export function executeStartEnd(
     path: [],
     ${usesTurnNumber(startDef) ? "TURN, " : "TURN: step.TURN + 1,"}
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: step.NEXTSPAWNID, " : ""}
-    ${readsTurnVars(gameDef) ? "TURNVARS, " : ""}
-    ${readsBattleVars(gameDef) ? "BATTLEVARS, " : ""}
+    ${
+      referencesTurnVars(gameDef)
+        ? referencesTurnVars(startDef)
+          ? "TURNVARS, "
+          : "TURNVARS: step.TURNVARS, "
+        : ""
+    }
+    ${
+      referencesBattleVars(gameDef)
+        ? referencesBattleVars(startDef)
+          ? "BATTLEVARS, "
+          : "BATTLEVARS: step.BATTLEVARS, "
+        : ""
+    }
   };
   `;
 }

@@ -71,14 +71,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: []
                 },
                 {
-                  sample: "returnVal.TURNVARS",
-                  res: falsy
-                },
-                {
-                  sample: "returnVal.BATTLEVARS",
-                  res: falsy
-                },
-                {
                   sample: "returnVal.NEXTSPAWNID",
                   res: falsy
                 },
@@ -98,17 +90,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         flow: {
           ...emptyFullDef.flow,
           startTurn: {
-            link: {
-              if: [
-                {
-                  same: [
-                    { battlevar: "gnurp" },
-                    { minus: [{ turnvar: "flurp" }, ["turn"]] }
-                  ]
-                },
-                "somemark"
-              ]
-            }
+            link: { if: [{ same: [["turn"], 1] }, "endturn"] }
           },
           commands: {
             somecmnd: {
@@ -127,8 +109,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             UNITLAYERS: "localUnitLayers",
             MARKS: "localMarks",
             LINKS: "localLinks",
-            TURNVARS: "localTurnVars",
-            BATTLEVARS: "localBattleVars",
             TURN: "localTurnNumber",
             step: {
               NEXTSPAWNID: "oldNextSpawnId"
@@ -138,14 +118,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             {
               expr: "startEnd",
               asserts: [
-                {
-                  sample: "returnVal.TURNVARS",
-                  res: "localTurnVars"
-                },
-                {
-                  sample: "returnVal.BATTLEVARS",
-                  res: "localBattleVars"
-                },
                 {
                   sample: "returnVal.TURN",
                   res: "localTurnNumber"

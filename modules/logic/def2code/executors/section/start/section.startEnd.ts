@@ -24,9 +24,9 @@ export function executeStartEnd(
     name: "start",
     path: [],
     ${usesTurnNumber(startDef) ? "TURN, " : "TURN: step.TURN + 1,"}
+    ${usesSpawn(gameDef) ? "NEXTSPAWNID: step.NEXTSPAWNID, " : ""}
     ${readsTurnVars(gameDef) ? "TURNVARS, " : ""}
     ${readsBattleVars(gameDef) ? "BATTLEVARS, " : ""}
-    ${usesSpawn(gameDef) ? "NEXTSPAWNID, " : ""}
   };
   `;
 }

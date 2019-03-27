@@ -129,8 +129,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             LINKS: "localLinks",
             TURNVARS: "localTurnVars",
             BATTLEVARS: "localBattleVars",
-            NEXTSPAWNID: "localNextSpawnId",
-            TURN: "localTurnNumber"
+            TURN: "localTurnNumber",
+            step: {
+              NEXTSPAWNID: "oldNextSpawnId"
+            }
           },
           tests: [
             {
@@ -145,12 +147,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: "localBattleVars"
                 },
                 {
-                  sample: "returnVal.NEXTSPAWNID",
-                  res: "localNextSpawnId"
-                },
-                {
                   sample: "returnVal.TURN",
                   res: "localTurnNumber"
+                },
+                {
+                  sample: "returnVal.NEXTSPAWNID",
+                  res: "oldNextSpawnId"
                 }
               ]
             }

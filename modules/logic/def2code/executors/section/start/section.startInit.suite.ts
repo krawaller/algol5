@@ -65,16 +65,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: { empty: "layers" }
                 },
                 {
-                  sample: "typeof TURNVARS",
-                  res: "undefined",
-                  desc: "we didn't define turnvars since we didn't need them"
-                },
-                {
-                  sample: "typeof BATTLEVARS",
-                  res: "undefined",
-                  desc: "we didn't define battlevars since we didn't need them"
-                },
-                {
                   sample: "typeof TURN",
                   res: "undefined",
                   desc: "we didn't define turn since we didn't need them"
@@ -147,7 +137,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             emptyArtifactLayers: {},
             step: {
               UNITLAYERS: {},
-              BATTLEVARS: "oldBattleVars",
               NEXTSPAWNID: "oldNextSpawnId",
               TURN: 7
             }
@@ -156,16 +145,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             {
               expr: "startInit",
               asserts: [
-                {
-                  sample: "TURNVARS",
-                  res: {},
-                  desc:
-                    "Since this is start, turnvars are set to an empty object"
-                },
-                {
-                  sample: "BATTLEVARS",
-                  res: "oldBattleVars"
-                },
                 {
                   sample: "NEXTSPAWNID",
                   res: "oldNextSpawnId"

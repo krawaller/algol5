@@ -13,6 +13,8 @@ export function executeStartInit(
   action: string
 ): string {
   let ret = "";
+  const startDef = gameDef.flow.startTurn;
+
   const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));
 
   // Instead of recalculating the unitlayers now that we switched players,
@@ -52,13 +54,13 @@ export function executeStartInit(
   // TODO: smarter ARTIFACTS copying to allow mutation in draw
   ret += `let ARTIFACTS = emptyArtifactLayers; `;
 
-  // We carry over BattleVars if game uses them
-  if (readsBattleVars(gameDef)) {
+  // We localise battleVars here if referenced, otherwise handle in startEnd
+  if (readsBattleVars(startDef)) {
     ret += `let BATTLEVARS = step.BATTLEVARS; `;
   }
 
-  // We reset TurnVars if game uses them
-  if (readsTurnVars(gameDef)) {
+  // We reset TurnVars here if referenced locally, otherwise handle in startEnd
+  if (readsTurnVars(startDef)) {
     ret += `let TURNVARS = {}; `;
   }
 

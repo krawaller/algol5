@@ -1,9 +1,11 @@
 import { FullDefAnon } from "../../../../../types";
+import { emptyUnitLayers } from "../../../../../common";
 import {
   referencesBattleVars,
   referencesTurnVars,
   usesSpawn,
-  usesTurnNumber
+  usesTurnNumber,
+  referencesUnitLayers
 } from "../sectionUtils";
 
 export function executeStartEnd(
@@ -12,12 +14,32 @@ export function executeStartEnd(
   action: string
 ): string {
   const startDef = gameDef.flow.startTurn;
+  const usesUnitLayers = referencesUnitLayers(gameDef, startDef);
+  const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));
 
   // Here we just need to return the new step
   return `
+  ${!usesUnitLayers ? "const oldUnitLayers = step.UNITLAYERS; " : ""}
   return {
+    ${
+      !usesUnitLayers
+        ? `UNITLAYERS: { 
+        ${unitLayerNames
+          .map(
+            name =>
+              name +
+              ": oldUnitLayers." +
+              (name.match(/^my/)
+                ? "opp" + name.slice(2)
+                : name.match(/^opp/)
+                ? "my" + name.slice(3)
+                : name)
+          )
+          .join(",\n")}
+       },`
+        : "UNITLAYERS,"
+    }
     ARTIFACTS,
-    UNITLAYERS,
     UNITDATA,
     MARKS,
     LINKS,

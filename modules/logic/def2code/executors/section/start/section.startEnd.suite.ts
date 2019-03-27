@@ -2,6 +2,15 @@ import { executeSection } from "..";
 import { emptyFullDef, truthy, falsy } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultStartEndContext = {
+  MARKS: {},
+  LINKS: {},
+  ARTIFACTS: {},
+  UNITLAYERS: {},
+  UNITDATA: {},
+  step: { path: [], UNITLAYERS: {} }
+};
+
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Start - End",
   func: executeSection,
@@ -26,10 +35,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
-            step: { TURN: 7 },
+            ...defaultStartEndContext,
+            step: {
+              ...defaultStartEndContext.step,
+              TURN: 7
+            },
             ARTIFACTS: "localArtifacts",
             UNITDATA: "localUnitData",
-            UNITLAYERS: "localUnitLayers",
             MARKS: "localMarks",
             LINKS: "localLinks"
           },
@@ -45,10 +57,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.ARTIFACTS",
                   res: "localArtifacts"
-                },
-                {
-                  sample: "returnVal.UNITLAYERS",
-                  res: "localUnitLayers"
                 },
                 {
                   sample: "returnVal.UNITDATA",
@@ -104,13 +112,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultStartEndContext,
             ARTIFACTS: "localArtifacts",
             UNITDATA: "localUnitData",
-            UNITLAYERS: "localUnitLayers",
             MARKS: "localMarks",
             LINKS: "localLinks",
             TURN: "localTurnNumber",
             step: {
+              ...defaultStartEndContext.step,
               NEXTSPAWNID: "oldNextSpawnId"
             }
           },

@@ -4,7 +4,8 @@ import {
   readsBattleVars,
   readsTurnVars,
   usesSpawn,
-  usesTurnNumber
+  usesTurnNumber,
+  referencesUnitLayers
 } from "../sectionUtils";
 
 export function executeStartInit(
@@ -15,27 +16,29 @@ export function executeStartInit(
   let ret = "";
   const startDef = gameDef.flow.startTurn;
 
-  const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));
-
-  // Instead of recalculating the unitlayers now that we switched players,
-  // we simply swap places between "myXXX" and "oppXXX"!
-  ret += `
-  const oldUnitLayers = step.UNITLAYERS;
-  let UNITLAYERS = {
-    ${unitLayerNames
-      .map(
-        name =>
-          name +
-          ": oldUnitLayers." +
-          (name.match(/^my/)
-            ? "opp" + name.slice(2)
-            : name.match(/^opp/)
-            ? "my" + name.slice(3)
-            : name)
-      )
-      .join(",\n")}
-  };
-  `;
+  // if we don't reference unit layers locally we defer to startEnd
+  if (referencesUnitLayers(gameDef, startDef)) {
+    const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));
+    // Instead of recalculating the unitlayers now that we switched players,
+    // we simply swap places between "myXXX" and "oppXXX"!
+    ret += `
+const oldUnitLayers = step.UNITLAYERS;
+let UNITLAYERS = {
+  ${unitLayerNames
+    .map(
+      name =>
+        name +
+        ": oldUnitLayers." +
+        (name.match(/^my/)
+          ? "opp" + name.slice(2)
+          : name.match(/^opp/)
+          ? "my" + name.slice(3)
+          : name)
+    )
+    .join(",\n")}
+};
+`;
+  }
 
   // Marks are reset for each new turn
   ret += `let MARKS = {}; `;

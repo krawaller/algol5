@@ -2,26 +2,22 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
-const defaultStartInitContext = {
-  emptyArtifactLayers: {},
-  step: {
-    UNITLAYERS: {}
-  }
+const defaultStartEndContext = {
+  MARKS: {},
+  LINKS: {},
+  ARTIFACTS: {},
+  UNITLAYERS: {},
+  UNITDATA: {},
+  step: { path: [], UNITLAYERS: {} }
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Start - Init - UnitLayers",
+  title: "Section - Start - End - UnitLayers",
   func: executeSection,
   defs: [
     {
       def: {
         ...emptyFullDef,
-        flow: {
-          ...emptyFullDef.flow,
-          startTurn: {
-            link: { if: [{ anyat: ["units", "somemark"] }, "selectmoop"] }
-          }
-        },
         graphics: {
           ...emptyFullDef.graphics,
           icons: {
@@ -35,8 +31,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
-            ...defaultStartInitContext,
+            ...defaultStartEndContext,
             step: {
+              ...defaultStartEndContext.step,
               UNITLAYERS: {
                 units: "willstayunits",
                 myunits: "shouldbecomeoppunits",
@@ -52,10 +49,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           },
           tests: [
             {
-              expr: "startInit",
+              expr: "startEnd",
               asserts: [
                 {
-                  sample: "UNITLAYERS",
+                  sample: "returnVal.UNITLAYERS",
                   res: {
                     units: "willstayunits",
                     oppunits: "shouldbecomeoppunits",
@@ -66,7 +63,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     gnurps: "willstaygnurps",
                     oppgnurps: "shouldbecomeoppgnurps",
                     mygnurps: "shouldbecomemygnurps"
-                  }
+                  },
+                  desc:
+                    "since we're not using them locally startInit hasn't set them, so we must"
                 }
               ]
             }
@@ -75,20 +74,32 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       ]
     },
     {
-      def: emptyFullDef,
+      def: {
+        ...emptyFullDef,
+        flow: {
+          ...emptyFullDef.flow,
+          startTurn: {
+            link: { if: [{ anyat: ["units", "somemark"] }, "selectmoop"] }
+          }
+        }
+      },
       player: 1,
       action: "start",
       contexts: [
         {
-          context: defaultStartInitContext,
+          context: {
+            ...defaultStartEndContext,
+            UNITLAYERS: "localUnitLayers"
+          },
           tests: [
             {
-              expr: "startInit",
+              expr: "startEnd",
               asserts: [
                 {
-                  sample: "typeof UNITLAYERS",
-                  res: "undefined",
-                  desc: "no reference locally, so we defer to startEnd"
+                  sample: "returnVal.UNITLAYERS",
+                  res: "localUnitLayers",
+                  desc:
+                    "We're using layers locally so they've been initialised by startInit already"
                 }
               ]
             }

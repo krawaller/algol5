@@ -11,7 +11,7 @@ import {
   isAlgolEffectSpawnAt,
   isAlgolEffectSpawnIn
 } from "../../../../types";
-import { contains } from "../../../../common";
+import { contains, emptyUnitLayers } from "../../../../common";
 
 export function ifCodeContains(
   code: string,
@@ -68,4 +68,12 @@ export function usesTurnNumber(search: FullDefAnon | any): boolean {
     search,
     d => Array.isArray(d) && d.length === 1 && d[0] === "turn"
   );
+}
+
+export function referencesUnitLayers(
+  gameDef: FullDefAnon,
+  haystack: any
+): boolean {
+  const unitLayers = emptyUnitLayers(gameDef);
+  return contains(haystack, d => !!unitLayers[d]);
 }

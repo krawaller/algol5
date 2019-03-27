@@ -8,7 +8,7 @@ const defaultStartEndContext = {
   ARTIFACTS: {},
   UNITLAYERS: {},
   UNITDATA: {},
-  step: { path: [] }
+  step: { path: [], UNITLAYERS: {} }
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -24,6 +24,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultStartEndContext,
             step: {
+              ...defaultStartEndContext.step,
               path: [],
               BATTLEVAR: "bogusBattleVar"
             }
@@ -72,6 +73,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultStartEndContext,
             step: {
+              ...defaultStartEndContext.step,
               path: [],
               BATTLEVARS: "oldBattleVars"
             }

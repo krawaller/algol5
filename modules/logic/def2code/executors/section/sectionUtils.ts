@@ -77,3 +77,8 @@ export function referencesUnitLayers(
   const unitLayers = emptyUnitLayers(gameDef);
   return contains(haystack, d => !!unitLayers[d]);
 }
+
+// TODO - prevent false positives from linkings
+export function referencesMarks(gameDef: FullDefAnon, haystack: any): boolean {
+  return contains(haystack, d => !!gameDef.flow.marks[d]);
+}

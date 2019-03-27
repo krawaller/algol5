@@ -5,7 +5,8 @@ import {
   referencesTurnVars,
   usesSpawn,
   usesTurnNumber,
-  referencesUnitLayers
+  referencesUnitLayers,
+  referencesMarks
 } from "../sectionUtils";
 
 export function executeStartEnd(
@@ -41,7 +42,7 @@ export function executeStartEnd(
     }
     ARTIFACTS,
     UNITDATA,
-    MARKS,
+    ${referencesMarks(gameDef, startDef) ? "MARKS," : "MARKS: {},"}
     LINKS,
     name: "start",
     path: [],

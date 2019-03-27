@@ -39,9 +39,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   desc: "old data was saved into local var"
                 },
                 {
-                  sample: "MARKS",
-                  res: {},
-                  desc: "initialise marks to empty object"
+                  sample: "typeof MARKS",
+                  res: "undefined",
+                  desc: "no local reference to MARKS so we defer to startEnd"
                 },
                 {
                   sample: "LINKS",
@@ -62,9 +62,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
+          marks: {
+            mymark: { from: "units" }
+          },
           startTurn: {
             link: {
-              if: [{ same: [5, ["turn"]] }, "selectunit"]
+              if: [
+                {
+                  and: [{ anyat: ["units", "mymark"] }, { same: [1, ["turn"]] }]
+                },
+                "endturn"
+              ]
             }
           },
           commands: {
@@ -100,6 +108,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "TURN",
                   res: 8,
                   desc: "turn from last step was bumped once"
+                },
+                {
+                  sample: "MARKS",
+                  res: {},
+                  desc: "we initiated MARK to empty obj"
                 }
               ]
             }

@@ -3,7 +3,6 @@ import { emptyFullDef, truthy, falsy } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultStartEndContext = {
-  MARKS: {},
   LINKS: {},
   ARTIFACTS: {},
   UNITLAYERS: {},
@@ -16,20 +15,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
   func: executeSection,
   defs: [
     {
-      def: {
-        ...emptyFullDef,
-        flow: {
-          ...emptyFullDef.flow,
-          startTurn: {}
-        },
-        graphics: {
-          ...emptyFullDef.graphics,
-          icons: {
-            flurps: "bishop",
-            gnurps: "king"
-          }
-        }
-      },
+      def: emptyFullDef,
       player: 1,
       action: "somemark",
       contexts: [
@@ -42,18 +28,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             },
             ARTIFACTS: "localArtifacts",
             UNITDATA: "localUnitData",
-            MARKS: "localMarks",
             LINKS: "localLinks"
           },
           tests: [
             {
               expr: "startEnd",
               asserts: [
-                {
-                  sample: "returnVal",
-                  res: truthy,
-                  desc: "A new step was saved as root"
-                },
                 {
                   sample: "returnVal.ARTIFACTS",
                   res: "localArtifacts"
@@ -64,7 +44,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 },
                 {
                   sample: "returnVal.MARKS",
-                  res: "localMarks"
+                  res: {},
+                  desc:
+                    "we didnt reference MARKS locally so have to initiate the empty obj here"
                 },
                 {
                   sample: "returnVal.LINKS",
@@ -97,8 +79,18 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
+          marks: {
+            mymark: { from: "units" }
+          },
           startTurn: {
-            link: { if: [{ same: [["turn"], 1] }, "endturn"] }
+            link: {
+              if: [
+                {
+                  and: [{ anyat: ["units", "mymark"] }, { same: [1, ["turn"]] }]
+                },
+                "endturn"
+              ]
+            }
           },
           commands: {
             somecmnd: {
@@ -134,6 +126,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.NEXTSPAWNID",
                   res: "oldNextSpawnId"
+                },
+                {
+                  sample: "returnVal.MARKS",
+                  res: "localMarks",
+                  desc:
+                    "since we referenced MARKS locally they're already initialized by startInit"
                 }
               ]
             }

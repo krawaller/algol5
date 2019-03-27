@@ -4,7 +4,8 @@ import {
   readsBattleVars,
   readsTurnVars,
   usesTurnNumber,
-  referencesUnitLayers
+  referencesUnitLayers,
+  referencesMarks
 } from "../sectionUtils";
 
 export function executeStartInit(
@@ -39,8 +40,11 @@ let UNITLAYERS = {
 `;
   }
 
-  // Marks are reset for each new turn
-  ret += `let MARKS = {}; `;
+  // Marks are reset for each new turn, here or at startEnd
+  // TODO - this will give false positives when linking to a mark
+  if (referencesMarks(gameDef, startDef)) {
+    ret += `let MARKS = {}; `;
+  }
 
   // Links are reset per step
   ret += `let LINKS = {

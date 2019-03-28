@@ -1,12 +1,7 @@
-import { StartTurn } from "./startTurn";
+import { AlgolStartTurnDef, AlgolCommandDef, AlgolMarkDef } from "./actions";
 import { EndGameDef } from "./endGame";
-import { MarkDef } from "./mark";
-import { CommandDef } from "./command";
 
-export * from "./endGame";
-export * from "./startTurn";
-export * from "./mark";
-export * from "./command";
+export * from "./actions";
 
 export type Flow<
   Btlp extends string,
@@ -23,7 +18,17 @@ export type Flow<
   flow?: any;
   TODO?: string;
   STATUS?: string;
-  startTurn?: StartTurn<Btlp, Btlv, Cmnd, Gen, Grid, Layer, Mrk, Turnp, Turnv>;
+  startTurn?: AlgolStartTurnDef<
+    Btlp,
+    Btlv,
+    Cmnd,
+    Gen,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >;
   canalwaysend?: {
     [name: string]: true;
   };
@@ -43,7 +48,7 @@ export type Flow<
     unless: any;
   };
   commands: {
-    [cmndname in Cmnd]: CommandDef<
+    [cmndname in Cmnd]: AlgolCommandDef<
       Btlp,
       Btlv,
       Cmnd,
@@ -57,7 +62,7 @@ export type Flow<
     >
   };
   marks: {
-    [markname in Mrk]: MarkDef<
+    [markname in Mrk]: AlgolMarkDef<
       Btlp,
       Btlv,
       Cmnd,

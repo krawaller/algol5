@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Orders",
+  title: "Section - Orders - Command",
   func: executeSection,
   defs: [
     {

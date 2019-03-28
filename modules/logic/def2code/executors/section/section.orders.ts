@@ -1,4 +1,8 @@
-import { AlgolOrderAnon, FullDefAnon } from "../../../../types";
+import {
+  AlgolOrderAnon,
+  FullDefAnon,
+  AlgolEffectActionDefAnon
+} from "../../../../types";
 import { executeOrder } from "../";
 
 export function executeOrderSection(
@@ -6,7 +10,7 @@ export function executeOrderSection(
   player: 1 | 2,
   action: string
 ): string {
-  const def =
+  const def: AlgolEffectActionDefAnon =
     gameDef.flow.commands[action] ||
     gameDef.flow.marks[action] ||
     gameDef.flow[action];

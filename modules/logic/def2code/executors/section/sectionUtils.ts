@@ -13,6 +13,8 @@ import {
 } from "../../../../types";
 import { contains, emptyUnitLayers } from "../../../../common";
 
+import { executeOrderSection } from "./section.orders";
+
 export function ifCodeContains(
   code: string,
   lines: { [needle: string]: string }
@@ -81,4 +83,21 @@ export function referencesUnitLayers(
 // TODO - prevent false positives from linkings
 export function referencesMarks(gameDef: FullDefAnon, haystack: any): boolean {
   return contains(haystack, d => !!gameDef.flow.marks[d]);
+}
+
+export function orderAnalysis(
+  gameDef: FullDefAnon,
+  player: 1 | 2,
+  action: string
+) {
+  const code = executeOrderSection(gameDef, player, action);
+  return {
+    marks: !!code.match(/MARKS/),
+    turnVars: !!code.match(/TURNVARS/),
+    battleVars: !!code.match(/BATTLEVARS/),
+    artifacts: !!code.match(/ARTIFACTS/),
+    unitLayers: !!code.match(/UNITLAYERS/),
+    unitData: !!code.match(/UNITDATA/),
+    turn: !!code.match(/TURN[^A-Z]/)
+  };
 }

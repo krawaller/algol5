@@ -2,12 +2,18 @@ export * from "./startTurn";
 export * from "./mark";
 export * from "./command";
 
-import { AlgolStartTurnDef } from "./startTurn";
-import { AlgolMarkDef } from "./mark";
-import { AlgolCommandDef } from "./command";
+import { AlgolEffectActionDef } from "./action";
 
 type s = string;
-export type AlgolActionDefAnon =
-  | AlgolMarkDef<s, s, s, s, s, s, s, s, s>
-  | AlgolStartTurnDef<s, s, s, s, s, s, s, s, s>
-  | AlgolCommandDef<s, s, s, s, s, s, s, s, s, s>;
+export type AlgolEffectActionDefAnon = AlgolEffectActionDef<
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s
+>;

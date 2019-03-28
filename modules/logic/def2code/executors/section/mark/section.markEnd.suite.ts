@@ -26,8 +26,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             step: {
               path: ["before"]
             },
-            MARKS: { updated: "marks" },
-            LINKS: "newLinks",
+            MARKS: "localMarks",
+            LINKS: "localLinks",
             newMarkPos: "c3"
           },
           tests: [
@@ -35,15 +35,24 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markEnd",
               asserts: [
                 {
-                  sample: "returnVal",
-                  res: {
-                    path: ["before", "c3"],
-                    name: "somemark",
-                    MARKS: {
-                      updated: "marks"
-                    },
-                    LINKS: "newLinks"
-                  }
+                  sample: "returnVal.path",
+                  res: ["before", "c3"],
+                  desc: "we added the new mark position to path"
+                },
+                {
+                  sample: "returnVal.name",
+                  res: "somemark",
+                  desc: "the mark name is used as step name"
+                },
+                {
+                  sample: "returnVal.MARKS",
+                  res: "localMarks",
+                  desc: "we always mutate marks initially, so pass it on here" // TODO - could still be handled at end!
+                },
+                {
+                  sample: "returnVal.LINKS",
+                  res: "localLinks",
+                  desc: "always mutate links so pass them on here"
                 }
               ]
             }

@@ -8,15 +8,15 @@ const defaultMarkInitContext = {
 };
 
 const defaultMarkEndContext = {
-  UNITLAYERS: {},
   MARKS: {},
   LINKS: {},
+  UNITLAYERS: {},
   step: { path: [] },
   newMarkPos: "a1"
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Mark - Marks",
+  title: "Section - Mark - Artifacts",
   func: executeSection,
   defs: [
     {
@@ -41,9 +41,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markInit",
               asserts: [
                 {
-                  sample: "typeof MARKS",
+                  sample: "typeof ARTIFACTS",
                   res: "undefined",
-                  desc: "no local reference, so we defer to markEnd"
+                  desc: "Not using locally, so don't import"
                 }
               ]
             }
@@ -52,12 +52,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultMarkEndContext,
-            newMarkPos: "c2",
             step: {
               ...defaultMarkEndContext.step,
-              MARKS: {
-                olderMark: "foo"
-              }
+              ARTIFACTS: "oldArtifacts"
             }
           },
           tests: [
@@ -65,12 +62,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markEnd",
               asserts: [
                 {
-                  sample: "returnVal.MARKS",
-                  res: {
-                    somemark: "c2",
-                    olderMark: "foo"
-                  },
-                  desc: "New mark was added to new step"
+                  sample: "returnVal.ARTIFACTS",
+                  res: "oldArtifacts",
+                  desc: "We didnt use it locally, so pass on old"
                 }
               ]
             }
@@ -84,12 +78,21 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         flow: {
           ...emptyFullDef.flow,
           marks: {
-            anothermark: {
-              from: "units"
-            },
             somemark: {
               from: "units",
-              link: { if: [{ anyat: ["units", "anothermark"] }, "endturn"] }
+              runGenerator: "simplereach"
+            }
+          }
+        },
+        generators: {
+          simplereach: {
+            type: "neighbour",
+            dir: 1,
+            starts: "units",
+            draw: {
+              neighbours: {
+                tolayer: "flurps"
+              }
             }
           }
         }
@@ -99,48 +102,18 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
-            ...defaultMarkInitContext,
-            step: {
-              ...defaultMarkInitContext.step,
-              MARKS: { anothermark: "a1" }
-            },
-            newMarkPos: "d2"
-          },
-          tests: [
-            {
-              expr: "markInit",
-              asserts: [
-                {
-                  sample: "MARKS",
-                  res: {
-                    somemark: "d2",
-                    anothermark: "a1"
-                  },
-                  desc: "The new mark added to local variable"
-                },
-                {
-                  sample: "references.step.MARKS === MARKS",
-                  res: false,
-                  desc: "we didn't mutate the previous MARKS object"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          context: {
             ...defaultMarkEndContext,
-            MARKS: "localMarks"
+            ARTIFACTS: "localArtifacts"
           },
           tests: [
+            // TODO - markInit artifact handling!
             {
               expr: "markEnd",
               asserts: [
                 {
-                  sample: "returnVal.MARKS",
-                  res: "localMarks",
-                  desc:
-                    "We used marks locally so they were inited by markInit. Pass that on"
+                  sample: "returnVal.ARTIFACTS",
+                  res: "localArtifacts",
+                  desc: "we pass on the updated artifacts"
                 }
               ]
             }

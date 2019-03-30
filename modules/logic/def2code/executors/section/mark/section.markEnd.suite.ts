@@ -2,6 +2,14 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultMarkEndContext = {
+  MARKS: {},
+  LINKS: {},
+  UNITLAYERS: {},
+  step: { path: [] },
+  newMarkPos: "a1"
+};
+
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Mark - End",
   func: executeSection,
@@ -23,6 +31,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultMarkEndContext,
             step: {
               path: ["before"]
             },
@@ -46,61 +55,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.LINKS",
                   res: "localLinks",
-                  desc: "always mutate links so pass them on here"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      def: {
-        ...emptyFullDef,
-        flow: {
-          ...emptyFullDef.flow,
-          marks: {
-            neatmark: {
-              from: "units",
-              runGenerator: "simplereach"
-            }
-          }
-        },
-        generators: {
-          simplereach: {
-            type: "neighbour",
-            dir: 1,
-            starts: "units",
-            draw: {
-              neighbours: {
-                tolayer: "flurps"
-              }
-            }
-          }
-        }
-      },
-      player: 2,
-      action: "neatmark",
-      contexts: [
-        {
-          context: {
-            step: {
-              stepId: "foo",
-              path: []
-            },
-            MARKS: {},
-            newMarkPos: "b2",
-            ARTIFACTS: { updated: "artifacts" },
-            LINKS: "newLinks"
-          },
-          tests: [
-            {
-              expr: "markEnd",
-              asserts: [
-                {
-                  sample: "returnVal.ARTIFACTS",
-                  res: { updated: "artifacts" },
-                  desc: "we save the new artifacts"
+                  desc: "we always mutate links so pass them on here"
                 }
               ]
             }

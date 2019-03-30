@@ -17,10 +17,18 @@ export function executeMarkEnd(
 
   const usage = orderUsage(gameDef, player, action);
 
-  // TODO - NEXTSPAWNID, ARTIFACTS smarter, UNITLAYERS, UNITDATA
+  // TODO - NEXTSPAWNID
+  // TODO - smarter ARTIFACTS
 
   return `
     return {
+      LINKS,
+      path: step.path.concat(newMarkPos),
+      name: "${action}",
+      ${usage.ARTIFACTS ? "ARTIFACTS, " : "ARTIFACTS: step.ARTIFACTS, "}
+      ${usage.UNITLAYERS ? "UNITLAYERS, " : "UNITLAYERS: step.UNITLAYERS, "}
+      ${usage.UNITDATA ? "UNITDATA, " : "UNITDATA: step.UNITDATA, "}
+      ${usage.TURN ? "TURN, " : "TURN: step.TURN, "}
       ${
         usage.MARKS
           ? "MARKS, "
@@ -40,9 +48,5 @@ export function executeMarkEnd(
             : "BATTLEVARS: step.BATTLEVARS, "
           : ""
       }
-      LINKS,
-      path: step.path.concat(newMarkPos),
-    ${gens.length ? "ARTIFACTS, " : "" /* TODO -- smarter! */}
-      name: "${action}"
     };`;
 }

@@ -71,6 +71,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     olderMark: "foo"
                   },
                   desc: "New mark was added to new step"
+                },
+                {
+                  sample: "returnVal.MARKS === references.step.MARKS",
+                  res: false,
+                  desc: "We didn't mutate old marks"
                 }
               ]
             }

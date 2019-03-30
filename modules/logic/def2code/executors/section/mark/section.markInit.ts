@@ -13,8 +13,6 @@ export function executeMarkInit(
   let ret = "";
   const usage = orderUsage(gameDef, player, action);
 
-  // TODO - UNITDATA
-
   if (usage.ARTIFACTS) {
     const gameLayers = gameArtifactLayers(gameDef, player, action);
     const actionLayers = actionArtifactLayers(gameDef, player, action);
@@ -51,6 +49,10 @@ export function executeMarkInit(
 
   if (usage.TURN) {
     ret += `let TURN = step.TURN; `;
+  }
+
+  if (usage.UNITDATA) {
+    ret += `let UNITDATA = step.UNITDATA; `;
   }
 
   return ret;

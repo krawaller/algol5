@@ -2,7 +2,8 @@ import { FullDefAnon } from "../../../../../types";
 import {
   referencesBattleVars,
   referencesTurnVars,
-  orderUsage
+  orderUsage,
+  usesSpawn
 } from "../sectionUtils";
 
 export function executeMarkEnd(
@@ -10,15 +11,7 @@ export function executeMarkEnd(
   player: 1 | 2,
   action: string
 ): string {
-  const markDef = gameDef.flow.marks[action];
-  const gens = []
-    .concat(markDef.runGenerator || [])
-    .concat(markDef.runGenerators || []);
-
   const usage = orderUsage(gameDef, player, action);
-
-  // TODO - NEXTSPAWNID
-  // TODO - smarter ARTIFACTS
 
   return `
     return {
@@ -48,5 +41,6 @@ export function executeMarkEnd(
             : "BATTLEVARS: step.BATTLEVARS, "
           : ""
       }
+      ${usesSpawn(gameDef) ? "NEXTSPAWNID: step.NEXTSPAWNID, " : ""}
     };`;
 }

@@ -7,6 +7,8 @@ const defaultStartEndContext = {
   ARTIFACTS: {},
   UNITLAYERS: {},
   UNITDATA: {},
+  MARKS: {},
+  TURN: {},
   step: { path: [], UNITLAYERS: {} }
 };
 
@@ -43,12 +45,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: "localUnitData"
                 },
                 {
-                  sample: "returnVal.MARKS",
-                  res: {},
-                  desc:
-                    "we didnt reference MARKS locally so have to initiate the empty obj here"
-                },
-                {
                   sample: "returnVal.LINKS",
                   res: "localLinks"
                 },
@@ -63,10 +59,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.NEXTSPAWNID",
                   res: falsy
-                },
-                {
-                  sample: "returnVal.TURN",
-                  res: 8
                 }
               ]
             }
@@ -105,11 +97,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultStartEndContext,
-            ARTIFACTS: "localArtifacts",
-            UNITDATA: "localUnitData",
-            MARKS: "localMarks",
-            LINKS: "localLinks",
-            TURN: "localTurnNumber",
             step: {
               ...defaultStartEndContext.step,
               NEXTSPAWNID: "oldNextSpawnId"
@@ -120,18 +107,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "startEnd",
               asserts: [
                 {
-                  sample: "returnVal.TURN",
-                  res: "localTurnNumber"
-                },
-                {
                   sample: "returnVal.NEXTSPAWNID",
                   res: "oldNextSpawnId"
-                },
-                {
-                  sample: "returnVal.MARKS",
-                  res: "localMarks",
-                  desc:
-                    "since we referenced MARKS locally they're already initialized by startInit"
                 }
               ]
             }

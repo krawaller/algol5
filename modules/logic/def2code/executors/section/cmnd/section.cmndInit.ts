@@ -1,5 +1,9 @@
 import { FullDefAnon } from "../../../../../types";
 import { orderUsage } from "../sectionUtils";
+import {
+  actionArtifactLayers,
+  gameArtifactLayers
+} from "../../../../../common";
 
 export function executeCmndInit(
   gameDef: FullDefAnon,
@@ -8,11 +12,26 @@ export function executeCmndInit(
 ): string {
   const def = gameDef.flow.commands[action];
 
-  // TODO - ARTIFACTS, UNITLAYERS, UNITDATA
+  // TODO - UNITLAYERS, UNITDATA
 
   let ret = "";
 
   const usage = orderUsage(gameDef, player, action);
+
+  if (usage.ARTIFACTS) {
+    const gameLayers = gameArtifactLayers(gameDef, player, action);
+    const actionLayers = actionArtifactLayers(gameDef, player, action);
+
+    ret += `let ARTIFACTS = {
+      ${gameLayers
+        .map(name =>
+          actionLayers.includes(name)
+            ? `${name}: { ...step.ARTIFACTS.${name} }`
+            : `${name}: step.ARTIFACTS.${name}`
+        )
+        .join(", ")}
+    }; `;
+  }
 
   if (usage.TURNVARS === "mutates") {
     ret += `

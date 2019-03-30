@@ -1,5 +1,5 @@
 import { executeSection } from "..";
-import { emptyFullDef, truthy, falsy } from "../../../../../common";
+import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultStartEndContext = {
@@ -55,60 +55,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.path",
                   res: []
-                },
-                {
-                  sample: "returnVal.NEXTSPAWNID",
-                  res: falsy
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      def: {
-        ...emptyFullDef,
-        flow: {
-          ...emptyFullDef.flow,
-          marks: {
-            mymark: { from: "units" }
-          },
-          startTurn: {
-            link: {
-              if: [
-                {
-                  and: [{ anyat: ["units", "mymark"] }, { same: [1, ["turn"]] }]
-                },
-                "endturn"
-              ]
-            }
-          },
-          commands: {
-            somecmnd: {
-              applyEffect: { spawnat: ["somemark", "gnurps"] }
-            }
-          }
-        }
-      },
-      action: "start",
-      player: 2,
-      contexts: [
-        {
-          context: {
-            ...defaultStartEndContext,
-            step: {
-              ...defaultStartEndContext.step,
-              NEXTSPAWNID: "oldNextSpawnId"
-            }
-          },
-          tests: [
-            {
-              expr: "startEnd",
-              asserts: [
-                {
-                  sample: "returnVal.NEXTSPAWNID",
-                  res: "oldNextSpawnId"
                 }
               ]
             }

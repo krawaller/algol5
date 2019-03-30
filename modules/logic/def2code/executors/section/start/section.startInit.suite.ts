@@ -15,7 +15,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             emptyArtifactLayers: { empty: "layers" },
             step: {
-              UNITDATA: "oldUnitData",
               UNITLAYERS: {}
             }
           },
@@ -26,11 +25,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "ARTIFACTS",
                   res: { empty: "layers" }
-                },
-                {
-                  sample: "UNITDATA",
-                  res: "oldUnitData",
-                  desc: "old data was saved into local var"
                 },
                 {
                   sample: "LINKS",

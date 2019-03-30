@@ -2,6 +2,13 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultStartInitContext = {
+  emptyArtifactLayers: {},
+  step: {
+    UNITLAYERS: {}
+  }
+};
+
 const defaultStartEndContext = {
   MARKS: {},
   LINKS: {},
@@ -12,7 +19,7 @@ const defaultStartEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Start - End - Variables",
+  title: "Section - Start - Variables",
   func: executeSection,
   defs: [
     {
@@ -21,11 +28,32 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "start",
       contexts: [
         {
+          context: defaultStartInitContext,
+          tests: [
+            {
+              expr: "startInit",
+              asserts: [
+                {
+                  sample: "typeof TURNVARS",
+                  res: "undefined",
+                  desc:
+                    "we didn't define turnvars since we didn't use them locally"
+                },
+                {
+                  sample: "typeof BATTLEVARS",
+                  res: "undefined",
+                  desc:
+                    "we didn't define battlevars since we didn't use them locally"
+                }
+              ]
+            }
+          ]
+        },
+        {
           context: {
             ...defaultStartEndContext,
             step: {
               ...defaultStartEndContext.step,
-              path: [],
               BATTLEVAR: "bogusBattleVar"
             }
           },
@@ -117,6 +145,34 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       player: 1,
       action: "start",
       contexts: [
+        {
+          context: {
+            ...defaultStartInitContext,
+            step: {
+              ...defaultStartInitContext.step,
+              BATTLEVARS: "oldBattleVars",
+              TURNVARS: "bogusTurnVars"
+            }
+          },
+          tests: [
+            {
+              expr: "startInit",
+              asserts: [
+                {
+                  sample: "TURNVARS",
+                  res: {},
+                  desc:
+                    "We're using TURNVARS locally, so initiate to empty object here"
+                },
+                {
+                  sample: "BATTLEVARS",
+                  res: "oldBattleVars",
+                  desc: "we're using BATTLEVARS locally, so reference them here"
+                }
+              ]
+            }
+          ]
+        },
         {
           context: {
             ...defaultStartEndContext,

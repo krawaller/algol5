@@ -22,6 +22,11 @@ export function executeMarkEnd(
   return `
     return {
       ${
+        usage.MARKS
+          ? "MARKS, "
+          : `MARKS: { ...step.MARKS, ${action}: newMarkPos }, `
+      }
+      ${
         referencesTurnVars(gameDef)
           ? usage.TURNVARS
             ? "TURNVARS, "
@@ -35,7 +40,6 @@ export function executeMarkEnd(
             : "BATTLEVARS: step.BATTLEVARS, "
           : ""
       }
-      MARKS,
       LINKS,
       path: step.path.concat(newMarkPos),
     ${gens.length ? "ARTIFACTS, " : "" /* TODO -- smarter! */}

@@ -9,13 +9,15 @@ export function executeMarkInit(
   // TODO - UNITDATA
 
   let ret = "";
-  // TODO - save previous marks instead of iterating whole marks object
-  ret += `let MARKS = { ...step.MARKS, ${action}: newMarkPos };`;
 
   // Always init a new LINKS object for each step
   ret += `let LINKS = { commands: {}, marks: {} }; `;
 
   const usage = orderUsage(gameDef, player, action);
+
+  if (usage.MARKS) {
+    ret += `let MARKS = { ...step.MARKS, ${action}: newMarkPos };`;
+  }
 
   if (usage.TURNVARS) {
     ret += "let TURNVARS = step.TURNVARS; ";

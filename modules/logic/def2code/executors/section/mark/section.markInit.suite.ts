@@ -23,7 +23,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
-            step: { MARKS: { oldermark: "a1" }, stepId: "foo" },
+            step: {},
             turn: { links: { foo: "bar" } },
             newMarkPos: "b2"
           },
@@ -31,10 +31,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             {
               expr: "markInit",
               asserts: [
-                {
-                  sample: "MARKS",
-                  res: { oldermark: "a1", somemark: "b2" }
-                },
                 {
                   sample: "LINKS",
                   res: {

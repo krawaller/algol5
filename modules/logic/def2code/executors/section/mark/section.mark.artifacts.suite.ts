@@ -65,6 +65,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.ARTIFACTS",
                   res: "oldArtifacts",
                   desc: "We didnt use it locally, so pass on old"
+                },
+                {
+                  sample: "returnVal.ARTIFACTS === references.step.ARTIFACTS",
+                  res: true,
+                  desc: "Just reuse same reference since we're not mutating"
                 }
               ]
             }
@@ -91,9 +96,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             starts: "units",
             draw: {
               neighbours: {
-                tolayer: "flurps"
+                tolayer: "flurps",
+                include: {
+                  owner: ["player"]
+                }
               }
             }
+          },
+          anothergen: {
+            type: "filter",
+            layer: "flurps",
+            tolayer: "gnurps"
           }
         }
       },
@@ -102,11 +115,65 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultMarkInitContext,
+            step: {
+              ...defaultMarkInitContext.step,
+              ARTIFACTS: {
+                flurps: { existing: "flurp" },
+                myflurps: { existing: "myflurp" },
+                oppflurps: { existing: "oppflurp" },
+                neutralflurps: { existing: "neutralflurp" },
+                gnurps: { existing: "gnurp" }
+              }
+            }
+          },
+          tests: [
+            {
+              expr: "markInit",
+              asserts: [
+                {
+                  sample: "ARTIFACTS.flurps",
+                  res: { existing: "flurp" },
+                  desc: "we have old flurps"
+                },
+                {
+                  sample:
+                    "ARTIFACTS.flurps === references.step.ARTIFACTS.flurps",
+                  res: false,
+                  desc: "we have new reference to allow mutation"
+                },
+                {
+                  sample: "ARTIFACTS.myflurps",
+                  res: { existing: "myflurp" },
+                  desc: "we have old myflurps"
+                },
+                {
+                  sample:
+                    "ARTIFACTS.myflurps === references.step.ARTIFACTS.myflurps",
+                  res: false,
+                  desc: "we have new reference to allow mutation"
+                },
+                {
+                  sample: "ARTIFACTS.gnurps",
+                  res: { existing: "gnurp" },
+                  desc: "we have old gnurps"
+                },
+                {
+                  sample:
+                    "ARTIFACTS.gnurps === references.step.ARTIFACTS.gnurps",
+                  res: true,
+                  desc: "we keep old reference since we won't mutate"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          context: {
             ...defaultMarkEndContext,
             ARTIFACTS: "localArtifacts"
           },
           tests: [
-            // TODO - markInit artifact handling!
             {
               expr: "markEnd",
               asserts: [

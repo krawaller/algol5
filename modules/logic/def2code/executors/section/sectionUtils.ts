@@ -11,19 +11,9 @@ import {
   isAlgolEffectSpawnAt,
   isAlgolEffectSpawnIn
 } from "../../../../types";
-import { contains, emptyUnitLayers } from "../../../../common";
+import { contains } from "../../../../common";
 
 import { executeOrderSection } from "./section.orders";
-
-export function ifCodeContains(
-  code: string,
-  lines: { [needle: string]: string }
-) {
-  return Object.keys(lines).reduce(
-    (mem, needle) => (code.match(needle) ? mem + " " + lines[needle] : mem),
-    ""
-  );
-}
 
 export function mutatesTurnVars(search): boolean {
   return contains(
@@ -65,39 +55,59 @@ export function usesSpawn(search: FullDefAnon | any): boolean {
   );
 }
 
-export function usesTurnNumber(search: FullDefAnon | any): boolean {
-  return contains(
-    search,
-    d => Array.isArray(d) && d.length === 1 && d[0] === "turn"
-  );
-}
+type Deed = "mutates" | "reads";
 
-export function referencesUnitLayers(
-  gameDef: FullDefAnon,
-  haystack: any
-): boolean {
-  const unitLayers = emptyUnitLayers(gameDef);
-  return contains(haystack, d => !!unitLayers[d]);
-}
-
-// TODO - prevent false positives from linkings
-export function referencesMarks(gameDef: FullDefAnon, haystack: any): boolean {
-  return contains(haystack, d => !!gameDef.flow.marks[d]);
-}
-
-export function orderAnalysis(
+export function orderUsage(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
-) {
+  action: string,
+  vars: string[] = [
+    "MARKS",
+    "TURNVARS",
+    "BATTLEVARS",
+    "UNITDATA",
+    "UNITLAYERS",
+    "ARTIFACTS",
+    "TURN",
+    "NEXTSPAWNID"
+  ]
+): { [v: string]: Deed } {
   const code = executeOrderSection(gameDef, player, action);
-  return {
-    marks: !!code.match(/MARKS/),
-    turnVars: !!code.match(/TURNVARS/),
-    battleVars: !!code.match(/BATTLEVARS/),
-    artifacts: !!code.match(/ARTIFACTS/),
-    unitLayers: !!code.match(/UNITLAYERS/),
-    unitData: !!code.match(/UNITDATA/),
-    turn: !!code.match(/TURN[^A-Z]/)
-  };
+
+  return vars.reduce(
+    (mem, v) => {
+      if (!code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^A-Za-z_$0-9]`))) {
+        return mem;
+      } else if (
+        code.match(
+          new RegExp(
+            `delete\\s${v}(\\.[A-Za-z_$0-9]+|\\[["'][A-Za-z_$0-9]+["']\\])+`
+          )
+        )
+      ) {
+        return {
+          ...mem,
+          [v]: "mutates" as Deed
+        };
+      } else if (
+        code.match(
+          new RegExp(
+            `(^|[^A-Za-z_$0-9])${v}(\\.[A-Za-z_$0-9]+|\\[["'][A-Za-z_$0-9]+["']\\])*\\s=[^=]`
+          )
+        )
+      ) {
+        return {
+          ...mem,
+          [v]: "mutates" as Deed
+        };
+      } else {
+        return {
+          ...mem,
+          [v]: "reads" as Deed
+        };
+      }
+      return mem;
+    },
+    {} as { [v: string]: Deed }
+  );
 }

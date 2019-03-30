@@ -102,10 +102,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             step: {
               MARKS: {},
-              TURNVARS: { turn: "varsobj" },
-              BATTLEVARS: { battle: "varsobj" },
-              ARTIFACTS: { arti: "facts" },
-              UNITLAYERS: { unit: "layers" },
+              TURNVARS: "oldTurnVars",
+              BATTLEVARS: "oldBattleVars",
+              ARTIFACTS: "oldArtifacts",
+              UNITLAYERS: "oldUnitLayers",
               TURN: "oldTurnCount"
             },
             newMarkPos: "b2"
@@ -116,19 +116,19 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "TURNVARS",
-                  res: { turn: "varsobj" }
+                  res: "oldTurnVars"
                 },
                 {
                   sample: "BATTLEVARS",
-                  res: { battle: "varsobj" }
+                  res: "oldBattleVars"
                 },
                 {
                   sample: "ARTIFACTS",
-                  res: { arti: "facts" }
+                  res: "oldArtifacts"
                 },
                 {
                   sample: "UNITLAYERS",
-                  res: { unit: "layers" }
+                  res: "oldUnitLayers"
                 },
                 {
                   sample: "TURN",

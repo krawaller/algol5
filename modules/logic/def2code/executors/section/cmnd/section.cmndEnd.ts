@@ -3,7 +3,7 @@ import {
   referencesBattleVars,
   referencesTurnVars,
   usesSpawn,
-  usesTurnNumber
+  orderUsage
 } from "../sectionUtils";
 
 export function executeCmndEnd(
@@ -13,28 +13,32 @@ export function executeCmndEnd(
 ): string {
   const cmndDef = gameDef.flow.commands[action];
 
+  // TODO - handle ARTIFACTS, UNITLAYERS, UNITDATA
+
+  const usage = orderUsage(gameDef, player, action);
+
   return `return {
     LINKS,
     MARKS: {},
     path: step.path.concat("${action}"),
-    ${usesTurnNumber(cmndDef) ? "TURN" : "TURN: step.TURN"},
+    ${usage.TURN ? "TURN" : "TURN: step.TURN"},
     ${
       referencesTurnVars(gameDef)
-        ? referencesTurnVars(cmndDef)
+        ? usage.TURNVARS
           ? "TURNVARS, "
           : "TURNVARS: step.TURNVARS, "
         : ""
     }
     ${
       referencesBattleVars(gameDef)
-        ? referencesBattleVars(cmndDef)
+        ? usage.BATTLEVARS
           ? "BATTLEVARS, "
           : "BATTLEVARS: step.BATTLEVARS, "
         : ""
     }
     ${
       usesSpawn(gameDef)
-        ? usesSpawn(cmndDef)
+        ? usage.NEXTSPAWNID
           ? "NEXTSPAWNID, "
           : "NEXTSPAWNID: step.NEXTSPAWNID, "
         : ""

@@ -19,7 +19,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         flow: {
           ...emptyFullDef.flow,
           startTurn: {
-            link: { if: [{ anyat: ["units", "somemark"] }, "selectmoop"] }
+            link: { if: [{ anyat: ["units", "somemark"] }, "endturn"] }
           }
         },
         graphics: {

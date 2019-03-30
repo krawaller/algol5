@@ -79,7 +79,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             starts: "units",
             draw: {
               neighbours: {
-                condition: { same: [{ turnvar: "poo" }, { battlevar: "moo" }] },
                 tolayer: "flurps"
               }
             }

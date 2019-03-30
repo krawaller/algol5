@@ -23,7 +23,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               link: {
                 if: [
                   { same: [{ battlevar: "gnurp" }, { turnvar: "flurp" }] },
-                  "somemark"
+                  "endturn"
                 ]
               }
             }
@@ -31,7 +31,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         }
       },
       player: 1,
-      action: "somemark",
+      action: "startTurn",
       contexts: [
         {
           context: defaultStartInitContext,
@@ -66,14 +66,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             link: {
               if: [
                 { same: [{ battlevar: "gnurp" }, { turnvar: "flurp" }] },
-                "somemark"
+                "endturn"
               ]
             }
           }
         }
       },
       player: 1,
-      action: "somemark",
+      action: "start",
       contexts: [
         {
           context: {

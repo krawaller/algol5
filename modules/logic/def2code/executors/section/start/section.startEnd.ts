@@ -4,9 +4,7 @@ import {
   referencesBattleVars,
   referencesTurnVars,
   usesSpawn,
-  usesTurnNumber,
-  referencesUnitLayers,
-  referencesMarks
+  orderUsage
 } from "../sectionUtils";
 
 export function executeStartEnd(
@@ -15,14 +13,17 @@ export function executeStartEnd(
   action: string
 ): string {
   const startDef = gameDef.flow.startTurn;
-  const usesUnitLayers = referencesUnitLayers(gameDef, startDef);
   const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));
 
+  const usage = orderUsage(gameDef, player, action);
+
+  // TODO - deferral of UNITDATA
+
   return `
-  ${!usesUnitLayers ? "const oldUnitLayers = step.UNITLAYERS; " : ""}
+  ${!usage.UNITLAYERS ? "const oldUnitLayers = step.UNITLAYERS; " : ""}
   return {
     ${
-      !usesUnitLayers
+      !usage.UNITLAYERS
         ? `UNITLAYERS: { 
         ${unitLayerNames
           .map(
@@ -41,22 +42,22 @@ export function executeStartEnd(
     }
     ARTIFACTS,
     UNITDATA,
-    ${referencesMarks(gameDef, startDef) ? "MARKS," : "MARKS: {},"}
+    ${usage.MARKS ? "MARKS," : "MARKS: {},"}
     LINKS,
     name: "start",
     path: [],
-    ${usesTurnNumber(startDef) ? "TURN, " : "TURN: step.TURN + 1,"}
+    ${usage.TURN ? "TURN, " : "TURN: step.TURN + 1,"}
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: step.NEXTSPAWNID, " : ""}
     ${
       referencesTurnVars(gameDef)
-        ? referencesTurnVars(startDef)
+        ? usage.TURNVARS
           ? "TURNVARS, "
           : "TURNVARS: {}, "
         : ""
     }
     ${
       referencesBattleVars(gameDef)
-        ? referencesBattleVars(startDef)
+        ? usage.BATTLEVARS
           ? "BATTLEVARS, "
           : "BATTLEVARS: step.BATTLEVARS, "
         : ""

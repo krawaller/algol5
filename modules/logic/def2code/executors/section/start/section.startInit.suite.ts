@@ -9,7 +9,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
     {
       def: emptyFullDef,
       player: 1,
-      action: "somemark",
+      action: "start",
       contexts: [
         {
           context: {
@@ -90,7 +90,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         }
       },
       player: 1,
-      action: "somemark",
+      action: "start",
       contexts: [
         {
           context: {

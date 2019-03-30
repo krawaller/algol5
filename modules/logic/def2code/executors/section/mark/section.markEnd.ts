@@ -1,5 +1,9 @@
 import { FullDefAnon } from "../../../../../types";
-import { referencesBattleVars, referencesTurnVars } from "../sectionUtils";
+import {
+  referencesBattleVars,
+  referencesTurnVars,
+  orderUsage
+} from "../sectionUtils";
 
 export function executeMarkEnd(
   gameDef: FullDefAnon,
@@ -10,18 +14,23 @@ export function executeMarkEnd(
   const gens = []
     .concat(markDef.runGenerator || [])
     .concat(markDef.runGenerators || []);
+
+  const usage = orderUsage(gameDef, player, action);
+
+  // TODO - NEXTSPAWNID, ARTIFACTS smarter, UNITLAYERS, UNITDATA
+
   return `
     return {
       ${
         referencesTurnVars(gameDef)
-          ? referencesTurnVars(markDef)
+          ? usage.TURNVARS
             ? "TURNVARS, "
             : "TURNVARS: step.TURNVARS, "
           : ""
       }
       ${
         referencesBattleVars(gameDef)
-          ? referencesBattleVars(markDef)
+          ? usage.BATTLEVARS
             ? "BATTLEVARS, "
             : "BATTLEVARS: step.BATTLEVARS, "
           : ""
@@ -29,7 +38,7 @@ export function executeMarkEnd(
       MARKS,
       LINKS,
       path: step.path.concat(newMarkPos),
-      ${gens.length ? "ARTIFACTS, " : ""}
+    ${gens.length ? "ARTIFACTS, " : "" /* TODO -- smarter! */}
       name: "${action}"
     };`;
 }

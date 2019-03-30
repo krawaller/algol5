@@ -1,14 +1,5 @@
 import { FullDefAnon } from "../../../../../types";
-import {
-  ifCodeContains,
-  mutatesBattleVars,
-  mutatesTurnVars,
-  readsTurnVars,
-  readsBattleVars,
-  usesSpawn,
-  usesTurnNumber
-} from "../sectionUtils";
-import { executeSection } from "..";
+import { orderUsage } from "../sectionUtils";
 
 export function executeCmndInit(
   gameDef: FullDefAnon,
@@ -17,29 +8,33 @@ export function executeCmndInit(
 ): string {
   const def = gameDef.flow.commands[action];
 
+  // TODO - ARTIFACTS, UNITLAYERS, UNITDATA
+
   let ret = "";
 
-  if (mutatesTurnVars(def)) {
+  const usage = orderUsage(gameDef, player, action);
+
+  if (usage.TURNVARS === "mutates") {
     ret += `
     let TURNVARS = { ...step.TURNVARS };
     `;
-  } else if (readsTurnVars(def)) {
+  } else if (usage.TURNVARS === "reads") {
     ret += `let TURNVARS = step.TURNVARS; `;
   }
 
-  if (mutatesBattleVars(def)) {
+  if (usage.BATTLEVARS === "mutates") {
     ret += `
     let BATTLEVARS = { ...step.BATTLEVARS };
     `;
-  } else if (readsBattleVars(def)) {
+  } else if (usage.BATTLEVARS === "reads") {
     ret += `let BATTLEVARS = step.BATTLEVARS; `;
   }
 
-  if (usesSpawn(def)) {
+  if (usage.NEXTSPAWNID) {
     ret += `let NEXTSPAWNID = step.NEXTSPAWNID; `;
   }
 
-  if (usesTurnNumber(def)) {
+  if (usage.TURN) {
     ret += `let TURN = step.TURN; `;
   }
 

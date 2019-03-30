@@ -13,7 +13,8 @@ export function executeOrderSection(
   const def: AlgolEffectActionDefAnon =
     gameDef.flow.commands[action] ||
     gameDef.flow.marks[action] ||
-    gameDef.flow[action];
+    (action === "start" && gameDef.flow.startTurn) ||
+    {}; // To allow tests to reference non-existing things
   const effects = []
     .concat(def.applyEffects || [])
     .concat(def.applyEffect || []);

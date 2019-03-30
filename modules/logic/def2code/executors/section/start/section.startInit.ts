@@ -1,5 +1,9 @@
 import { FullDefAnon } from "../../../../../types";
-import { emptyUnitLayers } from "../../../../../common";
+import {
+  emptyUnitLayers,
+  gameArtifactLayers,
+  actionArtifactLayers
+} from "../../../../../common";
 import { orderUsage } from "../sectionUtils";
 
 export function executeStartInit(
@@ -11,6 +15,21 @@ export function executeStartInit(
   const startDef = gameDef.flow.startTurn;
 
   const usage = orderUsage(gameDef, player, action);
+
+  if (usage.ARTIFACTS) {
+    const gameLayers = gameArtifactLayers(gameDef, player, action);
+    const actionLayers = actionArtifactLayers(gameDef, player, action);
+
+    ret += `let ARTIFACTS = {
+      ${gameLayers
+        .map(name =>
+          actionLayers.includes(name)
+            ? `${name}: { ...step.ARTIFACTS.${name} }`
+            : `${name}: step.ARTIFACTS.${name}`
+        )
+        .join(", ")}
+    }; `;
+  }
 
   // if we don't reference unit layers locally we defer to startEnd
   if (usage.UNITLAYERS) {
@@ -51,10 +70,6 @@ let UNITLAYERS = {
   // since startTurn doesn't do effects.
   // TODO - defer to startEnd if no usage!
   ret += `let UNITDATA = step.UNITDATA; `;
-
-  // We reset the artifact layers for the new turn.
-  // TODO: smarter ARTIFACTS copying to allow mutation in draw
-  ret += `let ARTIFACTS = emptyArtifactLayers; `;
 
   // We localise battleVars here if referenced, otherwise handle in startEnd
   if (usage.BATTLEVARS) {

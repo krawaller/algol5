@@ -40,7 +40,7 @@ export function executeStartEnd(
        },`
         : "UNITLAYERS,"
     }
-    ARTIFACTS,
+    ${usage.ARTIFACTS ? "ARTIFACTS, " : "ARTIFACTS: emptyArtifactLayers, "}
     UNITDATA,
     ${usage.MARKS ? "MARKS," : "MARKS: {},"}
     LINKS,

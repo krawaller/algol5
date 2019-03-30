@@ -10,6 +10,7 @@ const defaultStartInitContext = {
 };
 
 const defaultStartEndContext = {
+  emptyArtifactLayers: {},
   MARKS: {},
   LINKS: {},
   ARTIFACTS: {},

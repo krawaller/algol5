@@ -3,6 +3,7 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultStartEndContext = {
+  emptyArtifactLayers: {},
   LINKS: {},
   ARTIFACTS: {},
   UNITLAYERS: {},
@@ -28,7 +29,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               ...defaultStartEndContext.step,
               TURN: 7
             },
-            ARTIFACTS: "localArtifacts",
             UNITDATA: "localUnitData",
             LINKS: "localLinks"
           },
@@ -36,10 +36,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             {
               expr: "startEnd",
               asserts: [
-                {
-                  sample: "returnVal.ARTIFACTS",
-                  res: "localArtifacts"
-                },
                 {
                   sample: "returnVal.UNITDATA",
                   res: "localUnitData"

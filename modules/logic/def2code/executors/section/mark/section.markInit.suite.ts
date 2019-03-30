@@ -44,16 +44,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   desc: "we reset links for the new step"
                 },
                 {
-                  sample: "typeof TURNVARS",
-                  res: "undefined",
-                  desc: "We didn't defined TURNVARS since we didn't need it"
-                },
-                {
-                  sample: "typeof BATTLEVARS",
-                  res: "undefined",
-                  desc: "We didn't defined BATTLEVARS since we didn't need it"
-                },
-                {
                   sample: "typeof ARTIFACTS",
                   res: "undefined",
                   desc: "We didn't defined ARTIFACTS since we didn't need it"
@@ -88,7 +78,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             starts: "units",
             draw: {
               neighbours: {
-                condition: { same: [{ turnvar: "poo" }, { battlevar: "moo" }] },
                 tolayer: "flurps"
               }
             }
@@ -114,14 +103,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             {
               expr: "markInit",
               asserts: [
-                {
-                  sample: "TURNVARS",
-                  res: "oldTurnVars"
-                },
-                {
-                  sample: "BATTLEVARS",
-                  res: "oldBattleVars"
-                },
                 {
                   sample: "ARTIFACTS",
                   res: "oldArtifacts"

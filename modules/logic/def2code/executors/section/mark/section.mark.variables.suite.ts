@@ -2,6 +2,11 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultMarkInitContext = {
+  newMarkPos: "",
+  step: {}
+};
+
 const defaultMarkEndContext = {
   MARKS: {},
   LINKS: {},
@@ -10,7 +15,7 @@ const defaultMarkEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Mark - End - Variables",
+  title: "Section - Mark - Variables",
   func: executeSection,
   defs: [
     {
@@ -27,6 +32,26 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "somemark",
       contexts: [
         {
+          context: defaultMarkInitContext,
+          tests: [
+            {
+              expr: "markInit",
+              asserts: [
+                {
+                  sample: "typeof TURNVARS",
+                  res: "undefined",
+                  desc: "We don't use TURNVARS so we dont init"
+                },
+                {
+                  sample: "typeof BATTLEVARS",
+                  res: "undefined",
+                  desc: "We don't use use BATTLEVARS so we dont pass it on"
+                }
+              ]
+            }
+          ]
+        },
+        {
           context: {
             ...defaultMarkEndContext,
             step: {
@@ -40,14 +65,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markEnd",
               asserts: [
                 {
-                  sample: "returnVal.TURNVAR",
+                  sample: "returnVal.TURNVARS",
                   res: undefined,
-                  desc: "Game doesnt use TURNVAR so we dont pass it on"
+                  desc: "Game doesnt use TURNVARS so we dont pass it on"
                 },
                 {
-                  sample: "returnVal.BATTLEVAR",
+                  sample: "returnVal.BATTLEVARS",
                   res: undefined,
-                  desc: "Game doesnt use BATTLEVAR so we dont pass it on"
+                  desc: "Game doesnt use BATTLEVARS so we dont pass it on"
                 }
               ]
             }
@@ -77,6 +102,28 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       player: 1,
       action: "somemark",
       contexts: [
+        {
+          context: defaultMarkInitContext,
+          tests: [
+            {
+              expr: "markInit",
+              asserts: [
+                {
+                  sample: "typeof TURNVARS",
+                  res: "undefined",
+                  desc:
+                    "We don't use TURNVAR so we dont init (but they're used elsewhere in the game)"
+                },
+                {
+                  sample: "typeof BATTLEVARS",
+                  res: "undefined",
+                  desc:
+                    "We don't use BATTLEVAR so we dont init (but they're used elsewhere in the game)"
+                }
+              ]
+            }
+          ]
+        },
         {
           context: {
             ...defaultMarkEndContext,
@@ -127,6 +174,32 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       player: 1,
       action: "somemark",
       contexts: [
+        {
+          context: {
+            ...defaultMarkInitContext,
+            step: {
+              TURNVARS: "oldTurnVars",
+              BATTLEVARS: "oldBattleVars"
+            }
+          },
+          tests: [
+            {
+              expr: "markInit",
+              asserts: [
+                {
+                  sample: "TURNVARS",
+                  res: "oldTurnVars",
+                  desc: "TURNVARS are used locally so we import them"
+                },
+                {
+                  sample: "BATTLEVARS",
+                  res: "oldBattleVars",
+                  desc: "BATTLEVARS are used locally so we import them"
+                }
+              ]
+            }
+          ]
+        },
         {
           context: {
             ...defaultMarkEndContext,

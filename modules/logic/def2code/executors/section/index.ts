@@ -2,6 +2,7 @@ import { AlgolSection, FullDefAnon } from "../../../../types";
 import { executeMarkEnd, executeMarkInit } from "./mark";
 import { executeStartInit, executeStartEnd } from "./start";
 import { executeCmndInit, executeCmndEnd } from "./cmnd";
+import { executeNewBattle } from "./battle";
 import { executeOrderSection } from "./section.orders";
 
 export function executeSection(
@@ -11,6 +12,8 @@ export function executeSection(
   section: AlgolSection
 ): string {
   switch (section) {
+    case "newBattle":
+      return executeNewBattle(gameDef, player, action);
     case "markInit":
       return executeMarkInit(gameDef, player, action);
     case "markEnd":

@@ -3,7 +3,7 @@ import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Battle - Spawn",
+  title: "Section - Battle - Variables",
   func: executeSection,
   defs: [
     {
@@ -19,9 +19,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "newBattle",
               asserts: [
                 {
-                  sample: "returnVal.NEXTSPAWNID",
+                  sample: "returnVal.BATTLEVARS",
                   res: undefined,
-                  desc: "game isn't using spawn so we don't seed id"
+                  desc: "game isn't using battlevars so we don't seed id"
                 }
               ]
             }
@@ -36,7 +36,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.flow,
           commands: {
             gnurp: {
-              applyEffect: { spawnat: ["somemark", "someunit"] }
+              applyEffect: { setbattlevar: ["somevar", 666] }
             }
           }
         }
@@ -52,9 +52,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "newBattle",
               asserts: [
                 {
-                  sample: "returnVal.NEXTSPAWNID",
-                  res: 1,
-                  desc: "game uses spawning so we seed id"
+                  sample: "returnVal.BATTLEVARS",
+                  res: {},
+                  desc: "game uses battlevars so we seed it to empty obj"
                 }
               ]
             }

@@ -10,7 +10,9 @@ export type AlgolSuiteFrame<Input, Test> = {
     def: FullDefAnon;
     player: 1 | 2;
     action: string;
+    skip?: boolean;
     contexts: {
+      skip?: boolean;
       context: { [idx: string]: any };
       tests: Test[];
     }[];

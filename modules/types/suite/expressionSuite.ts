@@ -5,6 +5,7 @@ export type AlgolExpressionTest<Input = any, Output = any> = {
   res: Output;
   debug?: boolean;
   desc?: string;
+  skip?: boolean;
 };
 
 export type AlgolExpressionSuite<I = any, O = any> = AlgolSuiteFrame<

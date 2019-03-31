@@ -3,11 +3,13 @@ import { AlgolSuite, AlgolSuiteFrame } from "..";
 export type AlgolStatementTest<Input = any> = {
   expr: Input;
   desc?: string;
+  skip?: boolean;
   asserts: {
     sample: string;
     res: any;
     debug?: boolean;
     desc?: string;
+    skip?: boolean;
   }[];
 };
 

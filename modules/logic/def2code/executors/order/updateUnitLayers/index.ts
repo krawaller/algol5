@@ -17,14 +17,13 @@ export function updateUnitLayers(
     emptyUnitLayers(gameDef)
   )};
   for (let unitid in UNITDATA) {
-      let currentunit = UNITDATA[unitid]
-      let unitgroup = currentunit.group;
-      let unitpos = currentunit.pos;
-      let owner = ownerNames[currentunit.owner]
-      UNITLAYERS.units[unitpos]
-          = UNITLAYERS[unitgroup][unitpos]
-          = UNITLAYERS[owner + unitgroup][unitpos]
-          = UNITLAYERS[owner +'units'][unitpos]
+      const currentunit = UNITDATA[unitid]
+      const { group, pos, owner } = currentunit;
+      const ownerPrefix = ownerNames[owner]
+      UNITLAYERS.units[pos]
+          = UNITLAYERS[group][pos]
+          = UNITLAYERS[ownerPrefix + group][pos]
+          = UNITLAYERS[ownerPrefix +'units'][pos]
           = currentunit;
   }
 `;

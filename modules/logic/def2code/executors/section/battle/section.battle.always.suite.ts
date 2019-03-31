@@ -31,7 +31,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "battle",
       contexts: [
         {
-          context: {},
+          context: {
+            ownerNames: ["neutral", "opp", "my"] // to simulate 2plr
+          },
           envelope:
             "let game = { start1: a => ({...a, sentToStart1: true }) };",
           tests: [
@@ -109,27 +111,27 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         y: 2
                       }
                     },
-                    myunits: {
-                      a1: {
-                        id: "unit1",
-                        group: "flurps",
-                        owner: 1,
-                        pos: "a1",
-                        x: 1,
-                        y: 1
-                      }
-                    },
-                    myflurps: {
-                      a1: {
-                        id: "unit1",
-                        group: "flurps",
-                        owner: 1,
-                        pos: "a1",
-                        x: 1,
-                        y: 1
-                      }
-                    },
                     oppunits: {
+                      a1: {
+                        id: "unit1",
+                        group: "flurps",
+                        owner: 1,
+                        pos: "a1",
+                        x: 1,
+                        y: 1
+                      }
+                    },
+                    oppflurps: {
+                      a1: {
+                        id: "unit1",
+                        group: "flurps",
+                        owner: 1,
+                        pos: "a1",
+                        x: 1,
+                        y: 1
+                      }
+                    },
+                    myunits: {
                       b2: {
                         id: "unit2",
                         group: "flurps",
@@ -139,7 +141,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         y: 2
                       }
                     },
-                    oppflurps: {
+                    myflurps: {
                       b2: {
                         id: "unit2",
                         group: "flurps",

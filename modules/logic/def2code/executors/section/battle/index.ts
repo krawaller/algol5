@@ -1,7 +1,8 @@
 import { FullDefAnon } from "../../../../../types";
 import { updateUnitLayers } from "../../order/updateUnitLayers";
+import { usesSpawn } from "../sectionUtils";
 
-// TODO - battlevars and nextspawnid
+// TODO - battlevars
 
 export function executeNewBattle(
   gameDef: FullDefAnon,
@@ -12,6 +13,7 @@ export function executeNewBattle(
   let UNITDATA = deduceInitialUnitData(gameDef.setup);
   ${updateUnitLayers(gameDef, 2, "newBattle", true)}
   return game.start1({
+    ${usesSpawn(gameDef) ? "NEXTSPAWNID: 1," : ""}
     turn: 0,
     UNITDATA,
     UNITLAYERS

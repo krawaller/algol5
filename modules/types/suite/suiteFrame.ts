@@ -13,6 +13,7 @@ export type AlgolSuiteFrame<Input, Test> = {
     skip?: boolean;
     contexts: {
       skip?: boolean;
+      envelope?: string;
       context: { [idx: string]: any };
       tests: Test[];
     }[];

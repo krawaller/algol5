@@ -7,7 +7,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
   test(suite.title, () => {
     for (const { def, player, action, contexts, skip } of suite.defs) {
       if (!skip) {
-        for (const { context, tests, skip } of contexts) {
+        for (const { context, tests, skip, envelope } of contexts) {
           if (!skip) {
             for (const suiteTest of tests) {
               let results = [];
@@ -39,7 +39,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                     ""
                   ) +
                   `
-                    const {offsetPos, boardConnections, makeRelativeDirs} = require('${path.join(
+                    const {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData} = require('${path.join(
                       __dirname,
                       "../../common"
                     )}');
@@ -49,7 +49,8 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                     )}');
                     const connections = boardConnections(gameDef.board);
                     const relativeDirs = makeRelativeDirs(gameDef.board);
-                  `;
+                  ` +
+                  (envelope || "");
                 let body = isAlgolExpressionTest(suiteTest)
                   ? `results[0] = ${code}`
                   : `${code.replace(
@@ -62,7 +63,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                 try {
                   eval(pre + " " + body);
                 } catch (e) {
-                  console.log("KABOOM", code);
+                  console.log("KABOOM", body);
                   throw e;
                 }
                 type check = {

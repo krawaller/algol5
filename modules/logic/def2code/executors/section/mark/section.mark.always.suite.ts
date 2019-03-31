@@ -2,6 +2,11 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultMarkInitContext = {
+  newMarkPos: "",
+  step: {}
+};
+
 const defaultMarkEndContext = {
   MARKS: {},
   LINKS: {},
@@ -11,7 +16,7 @@ const defaultMarkEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Mark - End",
+  title: "Section - Mark - Always",
   func: executeSection,
   defs: [
     {
@@ -30,9 +35,29 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "somemark",
       contexts: [
         {
+          context: defaultMarkInitContext,
+          tests: [
+            {
+              expr: "markInit",
+              asserts: [
+                {
+                  sample: "LINKS",
+                  res: {
+                    commands: {},
+                    marks: {}
+                  },
+                  desc: "we always reset links for the new step"
+                }
+              ]
+            }
+          ]
+        },
+        {
           context: {
             ...defaultMarkEndContext,
             step: {
+              ...defaultMarkEndContext.step,
+              UNITDATA: "oldUnitData",
               path: ["before"]
             },
             LINKS: "localLinks",
@@ -56,6 +81,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.LINKS",
                   res: "localLinks",
                   desc: "we always mutate links so pass them on here"
+                },
+                {
+                  sample: "returnVal.UNITDATA",
+                  res: "oldUnitData",
+                  desc:
+                    "we never reference UNITDATA in marks, just pass it along"
                 }
               ]
             }

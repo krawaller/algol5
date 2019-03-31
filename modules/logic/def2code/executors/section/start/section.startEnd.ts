@@ -17,11 +17,13 @@ export function executeStartEnd(
 
   const usage = orderUsage(gameDef, player, action);
 
-  // TODO - deferral of UNITDATA
-
   return `
   ${!usage.UNITLAYERS ? "const oldUnitLayers = step.UNITLAYERS; " : ""}
   return {
+    UNITDATA: step.UNITDATA,
+    LINKS,
+    name: "start",
+    path: [],
     ${
       !usage.UNITLAYERS
         ? `UNITLAYERS: { 
@@ -41,11 +43,7 @@ export function executeStartEnd(
         : "UNITLAYERS,"
     }
     ${usage.ARTIFACTS ? "ARTIFACTS, " : "ARTIFACTS: emptyArtifactLayers, "}
-    UNITDATA,
     ${usage.MARKS ? "MARKS," : "MARKS: {},"}
-    LINKS,
-    name: "start",
-    path: [],
     ${usage.TURN ? "TURN, " : "TURN: step.TURN + 1,"}
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: step.NEXTSPAWNID, " : ""}
     ${

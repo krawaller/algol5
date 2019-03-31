@@ -2,6 +2,13 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultStartInitContext = {
+  emptyArtifactLayers: {},
+  step: {
+    UNITLAYERS: {}
+  }
+};
+
 const defaultStartEndContext = {
   emptyArtifactLayers: {},
   LINKS: {},
@@ -14,7 +21,7 @@ const defaultStartEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Start - End",
+  title: "Section - Start - Always",
   func: executeSection,
   defs: [
     {
@@ -23,13 +30,32 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "start",
       contexts: [
         {
+          context: defaultStartInitContext,
+          tests: [
+            {
+              expr: "startInit",
+              asserts: [
+                {
+                  sample: "LINKS",
+                  res: {
+                    commands: {},
+                    marks: {}
+                  },
+                  desc: "initialise LINKS to correct empty object"
+                }
+              ]
+            }
+          ]
+        },
+        {
           context: {
             ...defaultStartEndContext,
             step: {
               ...defaultStartEndContext.step,
-              TURN: 7
+              TURN: 7,
+              UNITDATA: "oldUnitData",
+              path: ["bogusPrevStep"]
             },
-            UNITDATA: "localUnitData",
             LINKS: "localLinks"
           },
           tests: [
@@ -38,11 +64,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "returnVal.UNITDATA",
-                  res: "localUnitData"
+                  res: "oldUnitData",
+                  desc:
+                    "We never deal with UNITDATA in start, so just pass old along"
                 },
                 {
                   sample: "returnVal.LINKS",
-                  res: "localLinks"
+                  res: "localLinks",
+                  desc: "We always have new local links, so pass that along"
                 },
                 {
                   sample: "returnVal.name",
@@ -50,7 +79,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 },
                 {
                   sample: "returnVal.path",
-                  res: []
+                  res: [],
+                  desc: "new turn always get empty path"
                 }
               ]
             }

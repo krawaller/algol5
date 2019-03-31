@@ -2,6 +2,10 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultCmndInitContext = {
+  step: {}
+};
+
 const defaultCmndEndContext = {
   LINKS: {},
   UNITDATA: {},
@@ -9,7 +13,7 @@ const defaultCmndEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Cmnd - End - Mixed",
+  title: "Section - Cmnd - Always",
   func: executeSection,
   defs: [
     {
@@ -17,6 +21,24 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       player: 1,
       action: "somecmnd",
       contexts: [
+        {
+          context: defaultCmndInitContext,
+          tests: [
+            {
+              expr: "cmndInit",
+              asserts: [
+                {
+                  sample: "LINKS",
+                  res: {
+                    commands: {},
+                    marks: {}
+                  },
+                  desc: "we always reset links for the new step"
+                }
+              ]
+            }
+          ]
+        },
         {
           context: {
             ...defaultCmndEndContext,

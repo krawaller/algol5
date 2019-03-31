@@ -8,13 +8,13 @@ const defaultCmndInitContext = {
 
 const defaultCmndEndContext = {
   LINKS: {},
-  UNITDATA: {},
   UNITLAYERS: {},
+  UNITDATA: {},
   step: { path: [] }
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Cmnd - UnitData",
+  title: "Section - Cmnd - UnitLayers",
   func: executeSection,
   defs: [
     {
@@ -31,15 +31,22 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "somecmnd",
       contexts: [
         {
-          context: defaultCmndInitContext,
+          context: {
+            ...defaultCmndInitContext,
+            step: {
+              ...defaultCmndInitContext.step,
+              UNITLAYERS: "bogusUnitLayers"
+            }
+          },
           tests: [
             {
               expr: "cmndInit",
               asserts: [
                 {
-                  sample: "typeof UNITDATA",
+                  sample: "typeof UNITLAYERS",
                   res: "undefined",
-                  desc: "we aren't referencing UNITDATA so we don't localize it"
+                  desc:
+                    "we aren't referencing UNITLAYERS so we don't localize it"
                 }
               ]
             }
@@ -48,10 +55,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultCmndEndContext,
-            UNITDATA: "bogusUnitData",
+            UNITLAYERS: "bogusUnitLayers",
             step: {
               ...defaultCmndEndContext.step,
-              UNITDATA: "oldUnitData"
+              UNITLAYERS: "oldUnitLayers"
             }
           },
           tests: [
@@ -59,9 +66,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "cmndEnd",
               asserts: [
                 {
-                  sample: "returnVal.UNITDATA",
-                  res: "oldUnitData",
-                  desc: "command doesnt reference UNITDATA so we pass old along"
+                  sample: "returnVal.UNITLAYERS",
+                  res: "oldUnitLayers",
+                  desc:
+                    "command doesnt reference UNITLAYERS so we pass old along"
                 }
               ]
             }
@@ -91,7 +99,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultCmndInitContext,
             step: {
               ...defaultCmndInitContext.step,
-              UNITDATA: { existing: "unitData" }
+              UNITLAYERS: { existing: "unitLayers" }
             }
           },
           tests: [
@@ -99,14 +107,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "cmndInit",
               asserts: [
                 {
-                  sample: "UNITDATA",
-                  res: { existing: "unitData" },
-                  desc: "we're referencing UNITDATA so we import it"
+                  sample: "UNITLAYERS",
+                  res: { existing: "unitLayers" },
+                  desc: "we're referencing UNITLAYERS so we import it"
                 },
                 {
-                  sample: "UNITDATA === references.step.UNITDATA",
-                  res: false,
-                  desc: "we're gonna mutate it so we make a copy"
+                  sample: "UNITLAYERS === references.step.UNITLAYERS",
+                  res: true,
+                  desc: "we're gonna totally replace, so import reference"
                 }
               ]
             }
@@ -115,17 +123,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultCmndEndContext,
-            UNITDATA: "localUnitData"
+            UNITLAYERS: "localUnitLayers"
           },
           tests: [
             {
               expr: "cmndEnd",
               asserts: [
                 {
-                  sample: "returnVal.UNITDATA",
-                  res: "localUnitData",
+                  sample: "returnVal.UNITLAYERS",
+                  res: "localUnitLayers",
                   desc:
-                    "we have local UNITDATA reference, so just pass that along"
+                    "we have local UNITLAYERS reference, so just pass that along"
                 }
               ]
             }

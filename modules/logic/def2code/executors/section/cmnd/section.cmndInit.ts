@@ -12,8 +12,6 @@ export function executeCmndInit(
 ): string {
   const def = gameDef.flow.commands[action];
 
-  // TODO - UNITLAYERS
-
   let ret = "";
 
   const usage = orderUsage(gameDef, player, action);
@@ -31,6 +29,10 @@ export function executeCmndInit(
         )
         .join(", ")}
     }; `;
+  }
+
+  if (usage.UNITLAYERS) {
+    ret += "let UNITLAYERS = step.UNITLAYERS; ";
   }
 
   if (usage.TURNVARS === "mutates") {

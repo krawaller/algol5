@@ -34,11 +34,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   desc: "we always mutate LINKS, so always pass it along"
                 },
                 {
-                  sample: "returnVal.MARKS",
-                  res: {},
-                  desc: "marks are reset after cmnd"
-                },
-                {
                   sample: "returnVal.path",
                   res: ["prevStep", "somecmnd"],
                   desc: "it adds command name to path"

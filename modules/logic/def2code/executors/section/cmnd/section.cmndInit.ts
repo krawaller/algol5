@@ -57,5 +57,9 @@ export function executeCmndInit(
     ret += `let TURN = step.TURN; `;
   }
 
+  if (usage.MARKS) {
+    ret += `let MARKS = step.MARKS; `;
+  }
+
   return ret;
 }

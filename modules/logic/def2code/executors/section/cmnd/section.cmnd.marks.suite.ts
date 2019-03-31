@@ -2,49 +2,43 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
-const defaultStartInitContext = {
-  emptyArtifactLayers: {},
-  step: {
-    UNITLAYERS: {}
-  }
+const defaultCmndInitContext = {
+  step: {}
 };
 
-const defaultStartEndContext = {
-  emptyArtifactLayers: {},
+const defaultCmndEndContext = {
   MARKS: {},
   LINKS: {},
-  ARTIFACTS: {},
   UNITLAYERS: {},
-  UNITDATA: {},
-  step: { path: [], UNITLAYERS: {} }
+  step: { path: [] }
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Start - Marks",
+  title: "Section - Cmnd - Marks",
   func: executeSection,
   defs: [
     {
       def: emptyFullDef,
       player: 1,
-      action: "start",
+      action: "somecmnd",
       contexts: [
         {
           context: {
-            ...defaultStartInitContext,
+            ...defaultCmndInitContext,
             step: {
-              ...defaultStartInitContext.step,
+              ...defaultCmndInitContext.step,
               MARKS: "bogusMarks"
             }
           },
           tests: [
             {
-              expr: "startInit",
+              expr: "cmndInit",
               asserts: [
                 {
                   sample: "typeof MARKS",
                   res: "undefined",
                   desc:
-                    "we didn't define marks since we didn't need them locally"
+                    "we didn't import marks since we didn't need them locally"
                 }
               ]
             }
@@ -52,22 +46,22 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         },
         {
           context: {
-            ...defaultStartEndContext,
+            ...defaultCmndEndContext,
             MARKS: "bogusMarks",
             step: {
-              ...defaultStartEndContext.step,
+              ...defaultCmndEndContext.step,
               MARKS: "bogusMarks"
             }
           },
           tests: [
             {
-              expr: "startEnd",
+              expr: "cmndEnd",
               asserts: [
                 {
                   sample: "returnVal.MARKS",
                   res: {},
                   desc:
-                    "we didnt reference MARKS locally so have to initiate the empty obj here"
+                    "we didnt reference MARKS locally so reset to empty obj here"
                 }
               ]
             }
@@ -80,35 +74,32 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
-          marks: {
-            mymark: { from: "units" }
-          },
-          startTurn: {
-            link: {
-              if: [{ anyat: ["units", "mymark"] }, "endturn"]
+          commands: {
+            somecmnd: {
+              link: { if: [{ anyat: ["units", "somemark"] }, "endturn"] }
             }
           }
         }
       },
       player: 1,
-      action: "start",
+      action: "somecmnd",
       contexts: [
         {
           context: {
-            ...defaultStartInitContext,
+            ...defaultCmndInitContext,
             step: {
-              ...defaultStartInitContext.step,
-              MARKS: "bogusMarks"
+              ...defaultCmndInitContext.step,
+              MARKS: "oldMarks"
             }
           },
           tests: [
             {
-              expr: "startInit",
+              expr: "cmndInit",
               asserts: [
                 {
                   sample: "MARKS",
-                  res: {},
-                  desc: "Local use so initiate empty MARKS here"
+                  res: "oldMarks",
+                  desc: "Local use so import old MARKS here"
                 }
               ]
             }
@@ -116,18 +107,18 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         },
         {
           context: {
-            ...defaultStartEndContext,
-            MARKS: "localMarks"
+            ...defaultCmndEndContext,
+            MARKS: "bogusLocalMarks"
           },
           tests: [
             {
-              expr: "startEnd",
+              expr: "cmndEnd",
               asserts: [
                 {
                   sample: "returnVal.MARKS",
-                  res: "localMarks",
+                  res: {},
                   desc:
-                    "since we referenced MARKS locally they're already initialized by startInit"
+                    "ignore marks imported by cmndInit, we always pass on empty obj"
                 }
               ]
             }

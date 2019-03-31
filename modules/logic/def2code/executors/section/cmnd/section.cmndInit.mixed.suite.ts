@@ -2,6 +2,10 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultCmndInitContext = {
+  step: {}
+};
+
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
   title: "Section - Cmnd - Init - Mixed",
   func: executeSection,
@@ -20,18 +24,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "somecmnd",
       contexts: [
         {
-          context: {
-            step: {}
-          },
+          context: defaultCmndInitContext,
           tests: [
             {
               expr: "cmndInit",
               asserts: [
-                {
-                  sample: "typeof NEXTSPAWNID",
-                  res: "undefined",
-                  desc: "we aren't spawning so we don't import spawn id counter"
-                },
                 {
                   sample: "typeof TURN",
                   res: "undefined",
@@ -51,10 +48,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           commands: {
             somecmnd: {
               applyEffect: {
-                if: [
-                  { same: [["turn"], 777] },
-                  { spawnat: [{ battlepos: "foo" }, "someunit"] }
-                ]
+                if: [{ same: [["turn"], 777] }, { killat: "somemark" }]
               }
             }
           }
@@ -65,8 +59,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndInitContext,
             step: {
-              NEXTSPAWNID: "oldSpawnId",
+              ...defaultCmndInitContext.step,
               TURN: "oldTurn"
             }
           },
@@ -74,11 +69,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             {
               expr: "cmndInit",
               asserts: [
-                {
-                  sample: "NEXTSPAWNID",
-                  res: "oldSpawnId",
-                  desc: "we're spawning so we import the ID"
-                },
                 {
                   sample: "TURN",
                   res: "oldTurn",

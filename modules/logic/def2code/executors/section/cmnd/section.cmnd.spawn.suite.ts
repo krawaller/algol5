@@ -2,13 +2,17 @@ import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
 import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
+const defaultCmndInitContext = {
+  step: {}
+};
+
 const defaultCmndEndContext = {
   LINKS: {},
   step: { path: [] }
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Cmnd - End - Spawn",
+  title: "Section - Cmnd - Spawn",
   func: executeSection,
   defs: [
     {
@@ -18,10 +22,31 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndInitContext,
+            step: {
+              ...defaultCmndInitContext.step,
+              NEXTSPAWNID: "bogusSpawnId"
+            }
+          },
+          tests: [
+            {
+              expr: "cmndInit",
+              asserts: [
+                {
+                  sample: "typeof NEXTSPAWNID",
+                  res: "undefined",
+                  desc: "we aren't spawning so we don't import spawn id counter"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          context: {
             ...defaultCmndEndContext,
             step: {
-              NEXTSPAWNID: "bogusSpawnId",
-              path: []
+              ...defaultCmndEndContext.step,
+              NEXTSPAWNID: "bogusSpawnId"
             }
           },
           tests: [
@@ -59,10 +84,32 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {
+            ...defaultCmndInitContext,
+            step: {
+              ...defaultCmndInitContext.step,
+              NEXTSPAWNID: "bogusSpawnId"
+            }
+          },
+          tests: [
+            {
+              expr: "cmndInit",
+              asserts: [
+                {
+                  sample: "typeof NEXTSPAWNID",
+                  res: "undefined",
+                  desc:
+                    "we only spawn elsewhere in game, no need to import counter here"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          context: {
             ...defaultCmndEndContext,
             step: {
-              NEXTSPAWNID: "oldSpawnId",
-              path: []
+              ...defaultCmndEndContext.step,
+              NEXTSPAWNID: "oldSpawnId"
             }
           },
           tests: [
@@ -95,6 +142,27 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       player: 1,
       action: "somecmnd",
       contexts: [
+        {
+          context: {
+            ...defaultCmndInitContext,
+            step: {
+              ...defaultCmndInitContext.step,
+              NEXTSPAWNID: "oldSpawnId"
+            }
+          },
+          tests: [
+            {
+              expr: "cmndInit",
+              asserts: [
+                {
+                  sample: "NEXTSPAWNID",
+                  res: "oldSpawnId",
+                  desc: "we're spawning so we import the ID"
+                }
+              ]
+            }
+          ]
+        },
         {
           context: {
             ...defaultCmndEndContext,

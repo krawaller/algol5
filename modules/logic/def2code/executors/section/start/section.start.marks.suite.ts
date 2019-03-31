@@ -20,7 +20,7 @@ const defaultStartEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Start - Start or end stuff",
+  title: "Section - Start - Turn",
   func: executeSection,
   defs: [
     {
@@ -39,11 +39,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: "undefined",
                   desc:
                     "we didn't define turn since we didn't need them locally"
-                },
-                {
-                  sample: "typeof MARKS",
-                  res: "undefined",
-                  desc: "no local reference to MARKS so we defer to startEnd"
                 }
               ]
             }
@@ -54,7 +49,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartEndContext,
             step: {
               ...defaultStartEndContext.step,
-              TURN: 7,
               MARKS: "bogusMarks"
             }
           },
@@ -67,11 +61,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: {},
                   desc:
                     "we didnt reference MARKS locally so have to initiate the empty obj here"
-                },
-                {
-                  sample: "returnVal.TURN",
-                  res: 8,
-                  desc: "no local TURN use so bump it here"
                 }
               ]
             }
@@ -89,12 +78,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           },
           startTurn: {
             link: {
-              if: [
-                {
-                  and: [{ anyat: ["units", "mymark"] }, { same: [1, ["turn"]] }]
-                },
-                "endturn"
-              ]
+              if: [{ anyat: ["units", "mymark"] }, "endturn"]
             }
           }
         }
@@ -107,19 +91,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartInitContext,
             step: {
               ...defaultStartInitContext.step,
-              MARKS: "bogusMarks",
-              TURN: 7
+              MARKS: "bogusMarks"
             }
           },
           tests: [
             {
               expr: "startInit",
               asserts: [
-                {
-                  sample: "TURN",
-                  res: 8,
-                  desc: "Local turn use so bump it here"
-                },
                 {
                   sample: "MARKS",
                   res: {},
@@ -132,18 +110,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultStartEndContext,
-            MARKS: "localMarks",
-            TURN: "localTurnNumber"
+            MARKS: "localMarks"
           },
           tests: [
             {
               expr: "startEnd",
               asserts: [
-                {
-                  sample: "returnVal.TURN",
-                  res: "localTurnNumber",
-                  desc: "used locally so inited by startInit, pass it on"
-                },
                 {
                   sample: "returnVal.MARKS",
                   res: "localMarks",

@@ -6,8 +6,13 @@ const defaultCmndInitContext = {
   step: {}
 };
 
+const defaultCmndEndContext = {
+  LINKS: {},
+  step: { path: [] }
+};
+
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Cmnd - Init - Mixed",
+  title: "Section - Cmnd - Turn",
   func: executeSection,
   defs: [
     {
@@ -33,6 +38,28 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "typeof TURN",
                   res: "undefined",
                   desc: "we aren't referencing TURN so we don't localize it"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          context: {
+            ...defaultCmndEndContext,
+            TURN: "bogusTurn",
+            step: {
+              ...defaultCmndEndContext.step,
+              TURN: "oldTurn"
+            }
+          },
+          tests: [
+            {
+              expr: "cmndEnd",
+              asserts: [
+                {
+                  sample: "returnVal.TURN",
+                  res: "oldTurn",
+                  desc: "command doesnt reference TURN so we pass old along"
                 }
               ]
             }
@@ -73,6 +100,24 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "TURN",
                   res: "oldTurn",
                   desc: "we're referencing TURN so we import it"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          context: {
+            ...defaultCmndEndContext,
+            TURN: "localTurn"
+          },
+          tests: [
+            {
+              expr: "cmndEnd",
+              asserts: [
+                {
+                  sample: "returnVal.TURN",
+                  res: "localTurn",
+                  desc: "we have local TURN reference, so just pass that along"
                 }
               ]
             }

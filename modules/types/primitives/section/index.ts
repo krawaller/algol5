@@ -1,4 +1,5 @@
 export type AlgolSection =
+  | "player"
   | "newBattle"
   | "markInit"
   | "markEnd"

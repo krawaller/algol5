@@ -29,7 +29,7 @@ export function terrainLayers(board: BoardAnon, forplayer?, aiterrain?): any {
             e.owner = owner;
             mem[name][e.pos] = e;
             let prefix =
-              owner === 0 ? "neutral" : owner === forplayer ? "my" : "opp";
+              owner == 0 ? "neutral" : owner == forplayer ? "my" : "opp";
             mem[prefix + name] = mem[prefix + name] || {};
             mem[prefix + name][e.pos] = e;
           });

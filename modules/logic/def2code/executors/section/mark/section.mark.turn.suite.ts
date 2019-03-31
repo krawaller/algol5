@@ -15,7 +15,7 @@ const defaultMarkEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Mark - Start Or End definitions",
+  title: "Section - Mark - Turn",
   func: executeSection,
   defs: [
     {
@@ -40,12 +40,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markInit",
               asserts: [
                 {
-                  sample: "typeof UNITLAYERS",
-                  res: "undefined",
-                  desc:
-                    "We didn't defined UNITLAYERS since we don't use it locally"
-                },
-                {
                   sample: "typeof TURN",
                   res: "undefined",
                   desc: "We didn't defined TURN since we don't use it locally"
@@ -59,7 +53,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultMarkEndContext,
             step: {
               ...defaultMarkEndContext.step,
-              UNITLAYERS: "oldUnitLayers",
               TURN: "oldTurn"
             }
           },
@@ -68,14 +61,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markEnd",
               asserts: [
                 {
-                  sample: "returnVal.UNITLAYERS",
-                  res: "oldUnitLayers",
-                  desc: "not using locally so pass it on at end"
-                },
-                {
                   sample: "returnVal.TURN",
                   res: "oldTurn",
-                  desc: "not using locally so pass it on at end"
+                  desc: "not using locally so pass old turn on at end"
                 }
               ]
             }
@@ -89,44 +77,21 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         flow: {
           ...emptyFullDef.flow,
           marks: {
-            neatmark: {
+            somemark: {
               from: "units",
-              runGenerator: {
-                if: [
-                  {
-                    morethan: [
-                      { read: ["units", "somemark", "gnurp"] },
-                      ["turn"]
-                    ]
-                  },
-                  "simplereach"
-                ]
-              }
-            }
-          }
-        },
-        generators: {
-          simplereach: {
-            type: "neighbour",
-            dir: 1,
-            starts: "units",
-            draw: {
-              neighbours: {
-                tolayer: "flurps"
-              }
+              link: { if: [{ same: [["turn"], 1] }, "endturn"] }
             }
           }
         }
       },
       player: 2,
-      action: "neatmark",
+      action: "somemark",
       contexts: [
         {
           context: {
             ...defaultMarkInitContext,
             step: {
               ...defaultMarkInitContext.step,
-              UNITLAYERS: "oldUnitLayers",
               TURN: "oldTurnCount"
             }
           },
@@ -135,12 +100,27 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markInit",
               asserts: [
                 {
-                  sample: "UNITLAYERS",
-                  res: "oldUnitLayers"
-                },
+                  sample: "TURN",
+                  res: "oldTurnCount",
+                  desc: "referencing turn locally so import it here at init"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          context: {
+            ...defaultMarkEndContext,
+            TURN: "localTurn"
+          },
+          tests: [
+            {
+              expr: "markEnd",
+              asserts: [
                 {
                   sample: "TURN",
-                  res: "oldTurnCount"
+                  res: "localTurn",
+                  desc: "sent on local turn reference"
                 }
               ]
             }

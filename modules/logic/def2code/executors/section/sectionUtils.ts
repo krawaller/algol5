@@ -78,23 +78,13 @@ export function orderUsage(
     (mem, v) => {
       if (!code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^A-Za-z_$0-9]`))) {
         return mem;
-      } else if (
-        code.match(
-          new RegExp(
-            `delete\\s${v}(\\.[A-Za-z_$0-9]+|\\[["'][A-Za-z_$0-9]+["']\\])+`
-          )
-        )
-      ) {
+      } else if (code.match(new RegExp(`delete\\s${v}[^A-Za-z_$0-9]`))) {
         return {
           ...mem,
           [v]: "mutates" as Deed
         };
       } else if (
-        code.match(
-          new RegExp(
-            `(^|[^A-Za-z_$0-9])${v}(\\.[A-Za-z_$0-9]+|\\[["'][A-Za-z_$0-9]+["']\\])*\\s=[^=]`
-          )
-        )
+        code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^;\\)=]*\\s*=[^=]`))
       ) {
         return {
           ...mem,

@@ -9,6 +9,7 @@ const defaultCmndInitContext = {
 const defaultCmndEndContext = {
   MARKS: {},
   LINKS: {},
+  UNITDATA: {},
   step: { path: [] }
 };
 

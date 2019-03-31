@@ -13,7 +13,7 @@ export function executeCmndEnd(
 ): string {
   const cmndDef = gameDef.flow.commands[action];
 
-  // TODO - handle UNITLAYERS, UNITDATA
+  // TODO - handle UNITLAYERS
 
   const usage = orderUsage(gameDef, player, action);
 
@@ -22,7 +22,8 @@ export function executeCmndEnd(
     path: step.path.concat("${action}"),
     MARKS: {},
     ${usage.ARTIFACTS ? "ARTIFACTS, " : "ARTIFACTS: step.ARTIFACTS, "}
-    ${usage.TURN ? "TURN" : "TURN: step.TURN"},
+    ${usage.TURN ? "TURN, " : "TURN: step.TURN, "}
+    ${usage.UNITDATA ? "UNITDATA, " : "UNITDATA: step.UNITDATA, "}
     ${
       referencesTurnVars(gameDef)
         ? usage.TURNVARS

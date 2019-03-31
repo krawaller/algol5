@@ -12,7 +12,7 @@ export function executeCmndInit(
 ): string {
   const def = gameDef.flow.commands[action];
 
-  // TODO - UNITLAYERS, UNITDATA
+  // TODO - UNITLAYERS
 
   let ret = "";
 
@@ -47,6 +47,14 @@ export function executeCmndInit(
     `;
   } else if (usage.BATTLEVARS === "reads") {
     ret += `let BATTLEVARS = step.BATTLEVARS; `;
+  }
+
+  if (usage.UNITDATA === "mutates") {
+    ret += `
+    let UNITDATA = { ...step.UNITDATA };
+    `;
+  } else if (usage.UNITDATA === "reads") {
+    ret += `let UNITDATA = step.UNITDATA; `;
   }
 
   if (usage.NEXTSPAWNID) {

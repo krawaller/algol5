@@ -13,7 +13,7 @@ const defaultCmndEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Cmnd - Turn",
+  title: "Section - Cmnd - UnitData",
   func: executeSection,
   defs: [
     {
@@ -36,9 +36,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "cmndInit",
               asserts: [
                 {
-                  sample: "typeof TURN",
+                  sample: "typeof UNITDATA",
                   res: "undefined",
-                  desc: "we aren't referencing TURN so we don't localize it"
+                  desc: "we aren't referencing UNITDATA so we don't localize it"
                 }
               ]
             }
@@ -47,10 +47,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultCmndEndContext,
-            TURN: "bogusTurn",
+            UNITDATA: "bogusUnitData",
             step: {
               ...defaultCmndEndContext.step,
-              TURN: "oldTurn"
+              UNITDATA: "oldUnitData"
             }
           },
           tests: [
@@ -58,9 +58,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "cmndEnd",
               asserts: [
                 {
-                  sample: "returnVal.TURN",
-                  res: "oldTurn",
-                  desc: "command doesnt reference TURN so we pass old along"
+                  sample: "returnVal.UNITDATA",
+                  res: "oldUnitData",
+                  desc: "command doesnt reference UNITDATA so we pass old along"
                 }
               ]
             }
@@ -76,7 +76,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           commands: {
             somecmnd: {
               applyEffect: {
-                if: [{ same: [["turn"], 777] }, { killat: "somemark" }]
+                killat: "somemark"
               }
             }
           }
@@ -90,7 +90,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultCmndInitContext,
             step: {
               ...defaultCmndInitContext.step,
-              TURN: "oldTurn"
+              UNITDATA: { existing: "unitData" }
             }
           },
           tests: [
@@ -98,9 +98,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "cmndInit",
               asserts: [
                 {
-                  sample: "TURN",
-                  res: "oldTurn",
-                  desc: "we're referencing TURN so we import it"
+                  sample: "UNITDATA",
+                  res: { existing: "unitData" },
+                  desc: "we're referencing UNITDATA so we import it"
+                },
+                {
+                  sample: "UNITDATA === references.step.UNITDATA",
+                  res: false,
+                  desc: "we're gonna mutate it so we make a copy"
                 }
               ]
             }
@@ -109,16 +114,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultCmndEndContext,
-            TURN: "localTurn"
+            UNITDATA: "localUnitData"
           },
           tests: [
             {
               expr: "cmndEnd",
               asserts: [
                 {
-                  sample: "returnVal.TURN",
-                  res: "localTurn",
-                  desc: "we have local TURN reference, so just pass that along"
+                  sample: "returnVal.UNITDATA",
+                  res: "localUnitData",
+                  desc:
+                    "we have local UNITDATA reference, so just pass that along"
                 }
               ]
             }

@@ -10,6 +10,7 @@ const defaultCmndEndContext = {
   MARKS: {},
   LINKS: {},
   UNITLAYERS: {},
+  UNITDATA: {},
   step: { path: [] }
 };
 

@@ -13,18 +13,20 @@ export function runSuite<T, U>(suite: AlgolSuite) {
               let results = [];
               if (!suiteTest.skip) {
                 const code = suite.func(def, player, action, suiteTest.expr);
-                const fullContext = {
-                  roseDirs: [1, 2, 3, 4, 5, 6, 7, 8],
-                  orthoDirs: [1, 3, 5, 7],
-                  diagDirs: [2, 4, 6, 8],
-                  ownerNames:
-                    player === 1
-                      ? ["neutral", "my", "opp"]
-                      : ["neutral", "opp", "my"],
-                  gameDef: def,
-                  ...context
-                };
-                const pre =
+                const fullContext = suiteTest.naked
+                  ? {}
+                  : {
+                      roseDirs: [1, 2, 3, 4, 5, 6, 7, 8],
+                      orthoDirs: [1, 3, 5, 7],
+                      diagDirs: [2, 4, 6, 8],
+                      ownerNames:
+                        player === 1
+                          ? ["neutral", "my", "opp"]
+                          : ["neutral", "opp", "my"],
+                      gameDef: def,
+                      ...context
+                    };
+                let pre =
                   `
                   const references = {
                     ${Object.keys(fullContext).reduce(
@@ -37,8 +39,10 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                   Object.keys(fullContext).reduce(
                     (mem, key) => mem + `let ${key} = references.${key}; `,
                     ""
-                  ) +
-                  `
+                  );
+                pre += suiteTest.naked
+                  ? ""
+                  : `
                     const {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData} = require('${path.join(
                       __dirname,
                       "../../common"
@@ -49,8 +53,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                     )}');
                     const connections = boardConnections(gameDef.board);
                     const relativeDirs = makeRelativeDirs(gameDef.board);
-                  ` +
-                  (envelope || "");
+                  ` + (envelope || "");
                 let body = isAlgolExpressionTest(suiteTest)
                   ? `results[0] = ${code}`
                   : `${code.replace(
@@ -63,7 +66,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                 try {
                   eval(pre + " " + body);
                 } catch (e) {
-                  console.log("KABOOM", body);
+                  console.log("KABOOM", pre + " " + body);
                   throw e;
                 }
                 type check = {

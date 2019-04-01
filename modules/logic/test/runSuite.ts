@@ -29,19 +29,17 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                 const action =
                   suiteTest.action || ctxAction || defAction || "action";
                 const code = suite.func(def, player, action, suiteTest.expr);
-                const fullContext = suiteTest.naked
-                  ? {}
-                  : {
-                      roseDirs: [1, 2, 3, 4, 5, 6, 7, 8],
-                      orthoDirs: [1, 3, 5, 7],
-                      diagDirs: [2, 4, 6, 8],
-                      ownerNames:
-                        player === 1
-                          ? ["neutral", "my", "opp"]
-                          : ["neutral", "opp", "my"],
-                      gameDef: def,
-                      ...context
-                    };
+                const fullContext = {
+                  roseDirs: [1, 2, 3, 4, 5, 6, 7, 8],
+                  orthoDirs: [1, 3, 5, 7],
+                  diagDirs: [2, 4, 6, 8],
+                  ownerNames:
+                    player === 1
+                      ? ["neutral", "my", "opp"]
+                      : ["neutral", "opp", "my"],
+                  gameDef: def,
+                  ...context
+                };
                 let pre =
                   `
                   const references = {
@@ -56,9 +54,8 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                     (mem, key) => mem + `let ${key} = references.${key}; `,
                     ""
                   );
-                pre += suiteTest.naked
-                  ? ""
-                  : `
+                pre +=
+                  `
                     const {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData} = require('${path.join(
                       __dirname,
                       "../../common"
@@ -80,7 +77,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                       .map((assert, n) => `results[${n}] = ${assert.sample};`)
                       .join("; ");
                 try {
-                  eval(pre + " " + body);
+                  eval(`${pre} { ${body} }`);
                 } catch (e) {
                   console.log("KABOOM", pre + " " + body);
                   throw e;

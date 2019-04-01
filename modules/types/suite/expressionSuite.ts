@@ -4,7 +4,6 @@ export type AlgolExpressionTest<Input = any, Output = any> = {
   expr: Input;
   res: Output;
   debug?: boolean;
-  naked?: boolean;
   desc?: string;
   skip?: boolean;
   player?: 1 | 2;

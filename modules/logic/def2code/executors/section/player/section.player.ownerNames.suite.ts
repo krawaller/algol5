@@ -14,7 +14,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           tests: [
             {
               expr: "player",
-              naked: true,
               player: 1,
               asserts: [
                 {
@@ -26,7 +25,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             },
             {
               expr: "player",
-              naked: true,
               player: 2,
               asserts: [
                 {

@@ -7,6 +7,8 @@ export type AlgolExpressionTest<Input = any, Output = any> = {
   naked?: boolean;
   desc?: string;
   skip?: boolean;
+  player?: 1 | 2;
+  action?: string;
 };
 
 export type AlgolExpressionSuite<I = any, O = any> = AlgolSuiteFrame<

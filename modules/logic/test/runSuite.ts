@@ -5,13 +5,29 @@ import { truthy, falsy } from "../../common";
 
 export function runSuite<T, U>(suite: AlgolSuite) {
   test(suite.title, () => {
-    for (const { def, player, action, contexts, skip } of suite.defs) {
+    for (const {
+      def,
+      player: defPlayer,
+      action: defAction,
+      contexts,
+      skip
+    } of suite.defs) {
       if (!skip) {
-        for (const { context, tests, skip, envelope } of contexts) {
+        for (const {
+          context,
+          tests,
+          skip,
+          envelope,
+          player: ctxPlayer,
+          action: ctxAction
+        } of contexts) {
           if (!skip) {
             for (const suiteTest of tests) {
               let results = [];
               if (!suiteTest.skip) {
+                const player = suiteTest.player || ctxPlayer || defPlayer || 1;
+                const action =
+                  suiteTest.action || ctxAction || defAction || "action";
                 const code = suite.func(def, player, action, suiteTest.expr);
                 const fullContext = suiteTest.naked
                   ? {}

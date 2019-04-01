@@ -5,6 +5,8 @@ export type AlgolStatementTest<Input = any> = {
   desc?: string;
   skip?: boolean;
   naked?: boolean;
+  player?: 1 | 2;
+  action?: string;
   asserts: {
     sample: string;
     res: any;

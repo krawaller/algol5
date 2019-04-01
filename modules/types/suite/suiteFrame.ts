@@ -8,13 +8,15 @@ export type AlgolSuiteFrame<Input, Test> = {
   };
   defs: {
     def: FullDefAnon;
-    player: 1 | 2;
-    action: string;
+    player?: 1 | 2;
+    action?: string;
     skip?: boolean;
     contexts: {
       skip?: boolean;
       envelope?: string;
       context: { [idx: string]: any };
+      player?: 1 | 2;
+      action?: string;
       tests: Test[];
     }[];
   }[];

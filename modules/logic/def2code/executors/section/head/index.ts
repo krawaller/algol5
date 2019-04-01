@@ -1,7 +1,7 @@
 import { FullDefAnon } from "../../../../../types";
 import { isTerrainNeutral, terrainLayers } from "../../../../../common";
 
-// TODO - connections, relativeDirs. decide on boardLayers func
+// TODO - relativeDirs. decide on boardLayers func
 
 export function executeHead(
   gameDef: FullDefAnon,
@@ -14,6 +14,9 @@ export function executeHead(
     const BOARD = boardLayers({ height: ${gameDef.board.height}, width: ${
     gameDef.board.width
   } });
+    const connections = boardConnections({ height: ${
+      gameDef.board.height
+    }, width: ${gameDef.board.width} });
   `;
 
   if (isTerrainNeutral(gameDef)) {

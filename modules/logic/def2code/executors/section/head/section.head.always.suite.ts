@@ -52,6 +52,18 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                       b1: { pos: "b1", x: 2, y: 1, colour: "light" }
                     }
                   }
+                },
+                {
+                  sample: "connections",
+                  res: {
+                    a1: {
+                      3: "b1"
+                    },
+                    b1: {
+                      7: "a1"
+                    },
+                    faux: {}
+                  }
                 }
               ]
             }

@@ -29,15 +29,20 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                 const action =
                   suiteTest.action || ctxAction || defAction || "action";
                 const code = suite.func(def, player, action, suiteTest.expr);
+                const extraContext = suiteTest.naked
+                  ? {}
+                  : {
+                      roseDirs: [1, 2, 3, 4, 5, 6, 7, 8],
+                      orthoDirs: [1, 3, 5, 7],
+                      diagDirs: [2, 4, 6, 8],
+                      ownerNames:
+                        player === 1
+                          ? ["neutral", "my", "opp"]
+                          : ["neutral", "opp", "my"],
+                      gameDef: def
+                    };
                 const fullContext = {
-                  roseDirs: [1, 2, 3, 4, 5, 6, 7, 8],
-                  orthoDirs: [1, 3, 5, 7],
-                  diagDirs: [2, 4, 6, 8],
-                  ownerNames:
-                    player === 1
-                      ? ["neutral", "my", "opp"]
-                      : ["neutral", "opp", "my"],
-                  gameDef: def,
+                  ...extraContext,
                   ...context
                 };
                 let pre =
@@ -54,19 +59,24 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                     (mem, key) => mem + `let ${key} = references.${key}; `,
                     ""
                   );
-                pre +=
-                  `
-                    const {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData} = require('${path.join(
+                pre += `
+                    const {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers} = require('${path.join(
                       __dirname,
                       "../../common"
                     )}');
                     const {collapseContent} = require('${path.join(
                       __dirname,
                       "../def2code/executors"
-                    )}');
-                    const connections = boardConnections(gameDef.board);
-                    const relativeDirs = makeRelativeDirs(gameDef.board);
-                  ` + (envelope || "");
+                    )}');`;
+
+                if (!suiteTest.naked) {
+                  pre += `
+                  const connections = boardConnections(gameDef.board);
+                  const relativeDirs = makeRelativeDirs(gameDef.board);
+                  `;
+                }
+
+                pre += envelope || "";
                 let body = isAlgolExpressionTest(suiteTest)
                   ? `results[0] = ${code}`
                   : `${code.replace(

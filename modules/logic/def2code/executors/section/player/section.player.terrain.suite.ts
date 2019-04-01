@@ -16,8 +16,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           }
         }
       },
-      player: 1,
-      action: "player",
       contexts: [
         {
           context: {},
@@ -52,14 +50,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           }
         }
       },
-      player: 1,
-      action: "player",
       contexts: [
         {
           context: {},
           tests: [
             {
               expr: "player",
+              player: 1,
               naked: true,
               asserts: [
                 {
@@ -81,6 +78,33 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     }
                   },
                   desc: "Terrain is NOT neutral, so defined here"
+                }
+              ]
+            },
+            {
+              expr: "player",
+              player: 2,
+              naked: true,
+              asserts: [
+                {
+                  sample: "TERRAIN",
+                  res: {
+                    flurp: {
+                      a1: { owner: 1, pos: "a1", x: 1, y: 1 },
+                      b2: { owner: 2, pos: "b2", x: 2, y: 2 }
+                    },
+                    oppflurp: {
+                      a1: { owner: 1, pos: "a1", x: 1, y: 1 }
+                    },
+                    myflurp: {
+                      b2: { owner: 2, pos: "b2", x: 2, y: 2 }
+                    },
+                    noflurp: {
+                      a2: { pos: "a2", x: 1, y: 2 },
+                      b1: { pos: "b1", x: 2, y: 1 }
+                    }
+                  },
+                  desc: "flipped terrain for plr2"
                 }
               ]
             }

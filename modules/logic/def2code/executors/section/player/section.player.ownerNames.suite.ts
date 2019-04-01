@@ -8,8 +8,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
   defs: [
     {
       def: emptyFullDef,
-      player: 1,
-      action: "player",
       contexts: [
         {
           context: {},
@@ -17,29 +15,19 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             {
               expr: "player",
               naked: true,
+              player: 1,
               asserts: [
                 {
                   sample: "ownerNames",
                   res: ["neutral", "my", "opp"],
-                  desc: "owner prefixes set up for plr1"
+                  desc: "owner prefixes are set up for plr1"
                 }
               ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      def: emptyFullDef,
-      player: 2,
-      action: "player",
-      contexts: [
-        {
-          context: {},
-          tests: [
+            },
             {
               expr: "player",
               naked: true,
+              player: 2,
               asserts: [
                 {
                   sample: "ownerNames",

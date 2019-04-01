@@ -1,6 +1,8 @@
 import { FullDefAnon } from "../../../../../types";
 import { isTerrainNeutral, terrainLayers } from "../../../../../common";
 
+// TODO - connections, relativeDirs. decide on boardLayers func
+
 export function executeHead(
   gameDef: FullDefAnon,
   player: 1 | 2,
@@ -13,6 +15,10 @@ export function executeHead(
     gameDef.board.width
   } });
   `;
+
+  if (isTerrainNeutral(gameDef)) {
+    ret += `const TERRAIN = ${JSON.stringify(terrainLayers(gameDef.board))}; `;
+  }
 
   ret += `
     const roseDirs = [1,2,3,4,5,6,7,8];

@@ -1,4 +1,5 @@
 import { FullDefAnon } from "../../../../../types";
+import { deduceInitialUnitData } from "../../../../../common";
 import { updateUnitLayers } from "../../order/updateUnitLayers";
 import { usesSpawn, referencesBattleVars } from "../sectionUtils";
 
@@ -8,7 +9,7 @@ export function executeNewBattle(
   action: string
 ): string {
   return `
-  let UNITDATA = deduceInitialUnitData(gameDef.setup);
+  let UNITDATA = ${JSON.stringify(deduceInitialUnitData(gameDef.setup))};
   ${updateUnitLayers(gameDef, 2, "newBattle", true)}
   return game.start1({
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: 1," : ""}

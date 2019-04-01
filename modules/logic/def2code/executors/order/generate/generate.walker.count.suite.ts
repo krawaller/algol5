@@ -76,7 +76,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               markb1: "b1",
               markd4: "d4"
             },
-            ARTIFACTS: {}
+            ARTIFACTS: { flarps: {} }
           },
           tests: [
             {

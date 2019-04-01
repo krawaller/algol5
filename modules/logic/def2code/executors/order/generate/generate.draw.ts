@@ -41,17 +41,7 @@ export default function draw(
     body = `
       let targetlayername=${parser.val(drawDef.tolayer)};
       let artifact=${artifactLiteral};
-      ARTIFACTS = {
-        ...ARTIFACTS,
-        [targetlayername]: {
-          ...ARTIFACTS[targetlayername],
-          [${posVar}]: artifact
-        },
-        [${prefix} + targetlayername]: {
-          ...ARTIFACTS[${prefix} + targetlayername],
-          [${posVar}]: artifact
-        }
-      };
+      ARTIFACTS[targetlayername][${posVar}] = ARTIFACTS[${prefix} + targetlayername] = artifact;
     `;
   } else {
     const name = parser.val(drawDef.tolayer) as string;
@@ -60,13 +50,7 @@ export default function draw(
       ? `.${name.replace(/^"|"$/g, "")}`
       : `[${name}]`;
     body = `
-      ARTIFACTS = {
-        ...ARTIFACTS,
-        ${parser.val(drawDef.tolayer)}: {
-          ...ARTIFACTS${layerIdx},
-          [${posVar}]: ${artifactLiteral}
-        }
-      }
+      ARTIFACTS${layerIdx}[${posVar}] = ${artifactLiteral};
     `;
   }
   if (conds.length) {

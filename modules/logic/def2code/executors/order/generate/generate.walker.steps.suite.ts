@@ -90,7 +90,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               markb1: "b1",
               markd4: "d4"
             },
-            ARTIFACTS: {}
+            ARTIFACTS: { flarps: {} }
           },
           tests: [
             {
@@ -128,7 +128,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "ARTIFACTS.flarps",
-                  res: undefined,
+                  res: {},
                   desc:
                     "If include start as step and no step at start, it draws nothing"
                 }

@@ -4,6 +4,7 @@ import { executeStartInit, executeStartEnd } from "./start";
 import { executeCmndInit, executeCmndEnd } from "./cmnd";
 import { executeNewBattle } from "./battle";
 import { executePlayer } from "./player";
+import { executeHead } from "./head";
 import { executeOrderSection } from "./section.orders";
 
 export function executeSection(
@@ -31,6 +32,8 @@ export function executeSection(
       return executeCmndEnd(gameDef, player, action);
     case "player":
       return executePlayer(gameDef, player, action);
+    case "head":
+      return executeHead(gameDef, player, action);
     default:
       throw new Error("Unknown section: " + JSON.stringify(section));
   }

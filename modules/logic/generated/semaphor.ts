@@ -101,7 +101,7 @@ type Links = {
         pos: MARKS.selectdeploytarget,
         id: newunitid,
         group: "pawns",
-        owner: 1
+        owner: 0
       };
     }
     UNITLAYERS = {
@@ -403,7 +403,7 @@ type Links = {
         pos: MARKS.selectdeploytarget,
         id: newunitid,
         group: "pawns",
-        owner: 2
+        owner: 0
       };
     }
     UNITLAYERS = {

@@ -161,7 +161,7 @@ type Links = {
         pos: MARKS.selectfiretarget,
         id: newunitid,
         group: "fires",
-        owner: 1,
+        owner: 0,
         from: TURNVARS["movedto"]
       };
     }
@@ -459,7 +459,7 @@ type Links = {
         pos: MARKS.selectfiretarget,
         id: newunitid,
         group: "fires",
-        owner: 2,
+        owner: 0,
         from: TURNVARS["movedto"]
       };
     }

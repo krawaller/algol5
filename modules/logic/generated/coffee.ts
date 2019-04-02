@@ -115,7 +115,7 @@ type Links = {
           pos: LOOPPOS,
           id: newunitid,
           group: "markers",
-          owner: 1
+          owner: 0
         };
       }
     }
@@ -216,7 +216,7 @@ type Links = {
           pos: LOOPPOS,
           id: newunitid,
           group: "markers",
-          owner: 1
+          owner: 0
         };
       }
     }
@@ -317,7 +317,7 @@ type Links = {
           pos: LOOPPOS,
           id: newunitid,
           group: "markers",
-          owner: 1
+          owner: 0
         };
       }
     }
@@ -418,7 +418,7 @@ type Links = {
           pos: LOOPPOS,
           id: newunitid,
           group: "markers",
-          owner: 1
+          owner: 0
         };
       }
     }
@@ -658,7 +658,7 @@ type Links = {
           pos: LOOPPOS,
           id: newunitid,
           group: "markers",
-          owner: 2
+          owner: 0
         };
       }
     }
@@ -759,7 +759,7 @@ type Links = {
           pos: LOOPPOS,
           id: newunitid,
           group: "markers",
-          owner: 2
+          owner: 0
         };
       }
     }
@@ -860,7 +860,7 @@ type Links = {
           pos: LOOPPOS,
           id: newunitid,
           group: "markers",
-          owner: 2
+          owner: 0
         };
       }
     }
@@ -961,7 +961,7 @@ type Links = {
           pos: LOOPPOS,
           id: newunitid,
           group: "markers",
-          owner: 2
+          owner: 0
         };
       }
     }

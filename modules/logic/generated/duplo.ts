@@ -187,7 +187,7 @@ type Links = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "soldiers",
-          owner: 1,
+          owner: 0,
           from: MARKS.selectunit
         };
       }
@@ -599,7 +599,7 @@ type Links = {
           pos: MARKS.selecttarget,
           id: newunitid,
           group: "soldiers",
-          owner: 2,
+          owner: 0,
           from: MARKS.selectunit
         };
       }

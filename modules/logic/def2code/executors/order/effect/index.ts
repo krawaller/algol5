@@ -146,7 +146,7 @@ function executeEffectInner(
           pos: ${parser.pos(pos)},
           id: newunitid,
           group: ${parser.val(group)},
-          owner: ${parser.val(owner || ["player"])}
+          owner: ${parser.val(owner !== undefined ? owner : player)}
           ${
             props
               ? `, ${Object.keys(props)

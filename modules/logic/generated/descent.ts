@@ -127,7 +127,7 @@ type Links = {
         pos: MARKS.selectunit,
         id: newunitid,
         group: TURNVARS["heightfrom"],
-        owner: 1
+        owner: 0
       };
     }
     UNITLAYERS = {
@@ -511,7 +511,7 @@ type Links = {
         pos: MARKS.selectunit,
         id: newunitid,
         group: TURNVARS["heightfrom"],
-        owner: 2
+        owner: 0
       };
     }
     UNITLAYERS = {

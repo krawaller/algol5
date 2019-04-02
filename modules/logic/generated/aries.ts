@@ -1,10 +1,10 @@
-const {
+import {
   offsetPos,
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers
-} = require("/Users/davidwaller/gitreps/algol5/modules/common");
+} from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
 
@@ -167,7 +167,7 @@ type Links = {
               (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {})["dir"],
               1,
               0,
-              gameDef.board
+              { height: 8, width: 8 }
             )
           };
         }
@@ -778,7 +778,7 @@ type Links = {
               (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {})["dir"],
               1,
               0,
-              gameDef.board
+              { height: 8, width: 8 }
             )
           };
         }

@@ -4,10 +4,10 @@ import { executeSection } from "./executors/section";
 import { FullDefAnon } from "../../types";
 
 export function compileGameToCode(gameDef: FullDefAnon) {
-  let ret = `const {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers} = require('${path.join(
+  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers} from '${path.join(
     __dirname,
     "../../common"
-  )}');
+  )}';
   `;
 
   ret += executeSection(gameDef, 1, "head", "head");

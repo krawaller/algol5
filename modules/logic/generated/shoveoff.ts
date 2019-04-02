@@ -1,10 +1,10 @@
-const {
+import {
   offsetPos,
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers
-} = require("/Users/davidwaller/gitreps/algol5/modules/common");
+} from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 4, width: 4 });
 
@@ -215,7 +215,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, gameDef.board)
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -319,7 +319,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, gameDef.board)
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -423,7 +423,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, gameDef.board)
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -527,7 +527,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, gameDef.board)
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -938,7 +938,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, gameDef.board)
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -1042,7 +1042,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, gameDef.board)
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -1146,7 +1146,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, gameDef.board)
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -1250,7 +1250,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, gameDef.board)
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }

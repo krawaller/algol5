@@ -1,10 +1,10 @@
-const {
+import {
   offsetPos,
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers
-} = require("/Users/davidwaller/gitreps/algol5/modules/common");
+} from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 3, width: 4 });
 

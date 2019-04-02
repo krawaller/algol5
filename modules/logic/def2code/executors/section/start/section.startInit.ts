@@ -68,8 +68,9 @@ let UNITLAYERS = {
 
   // We carry over the UnitData. No need to copy it here
   // since startTurn doesn't do effects.
-  // TODO - defer to startEnd if no usage!
-  ret += `let UNITDATA = step.UNITDATA; `;
+  if (usage.UNITDATA) {
+    ret += `let UNITDATA = step.UNITDATA; `;
+  }
 
   // We localise battleVars here if referenced, otherwise handle in startEnd
   if (usage.BATTLEVARS) {

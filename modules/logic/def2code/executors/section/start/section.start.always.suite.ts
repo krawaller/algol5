@@ -30,7 +30,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "start",
       contexts: [
         {
-          context: defaultStartInitContext,
+          context: {
+            ...defaultStartInitContext,
+            step: {
+              ...defaultStartInitContext,
+              UNITDATA: "bogusOldUnitData"
+            }
+          },
           tests: [
             {
               expr: "startInit",
@@ -42,6 +48,16 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     marks: {}
                   },
                   desc: "initialise LINKS to correct empty object"
+                }
+              ]
+            },
+            {
+              expr: "startInit",
+              asserts: [
+                {
+                  sample: "typeof UNITDATA",
+                  res: "undefined",
+                  desc: "never deal with unitdata here, so don't init it"
                 }
               ]
             }

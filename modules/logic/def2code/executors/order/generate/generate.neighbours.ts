@@ -13,7 +13,7 @@ export default function executeNeighbours(
 ) {
   const parser = makeParser(gameDef, player, action);
   // single start, no drawing of start
-  if (nghDef.start && !nghDef.draw.start) {
+  if (nghDef.start && !nghDef.draw.start && !contains(nghDef, ["start"])) {
     return `{ ${findAndDrawNeighboursFromStart(
       gameDef,
       player,

@@ -23,5 +23,7 @@ export function actionArtifactLayers(
     []
   );
 
-  return artifactLayers;
+  return artifactLayers.filter(
+    (name, n, list) => list.slice(n + 1).indexOf(name) === -1
+  );
 }

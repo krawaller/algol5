@@ -13,5 +13,7 @@ export function gameArtifactLayers(
     names = names.concat(generatorLayers(genDef));
   });
 
-  return names;
+  return names.filter(
+    (name, n, list) => list.slice(n + 1).indexOf(name) === -1
+  );
 }

@@ -2,7 +2,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { findSuites } from "./findSuites";
 
-const out = path.join(__dirname, "generatedTests");
+const out = path.join(__dirname, "generatedSuiteTests");
 
 async function setup() {
   console.log(" -------- Generating test files for suites --------");

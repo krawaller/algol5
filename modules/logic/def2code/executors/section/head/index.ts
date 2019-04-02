@@ -1,5 +1,9 @@
 import { FullDefAnon } from "../../../../../types";
-import { isTerrainNeutral, terrainLayers } from "../../../../../common";
+import {
+  isTerrainNeutral,
+  terrainLayers,
+  emptyArtifactLayers
+} from "../../../../../common";
 
 // TODO - decide on boardLayers func
 
@@ -14,6 +18,12 @@ export function executeHead(
     const BOARD = boardLayers({ height: ${gameDef.board.height}, width: ${
     gameDef.board.width
   } });
+  `;
+
+  ret += `
+    const emptyArtifactLayers = ${JSON.stringify(
+      emptyArtifactLayers(gameDef.generators)
+    )};
   `;
 
   ret += `

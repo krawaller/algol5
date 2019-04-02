@@ -46,7 +46,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   desc: "we pass result of calling game.start1"
                 },
                 {
-                  sample: "returnVal.turn",
+                  sample: "returnVal.TURN",
                   res: 0,
                   desc: "seed with turn 0 since start1 will add +1"
                 },

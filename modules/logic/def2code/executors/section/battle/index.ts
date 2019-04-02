@@ -14,7 +14,7 @@ export function executeNewBattle(
   return game.start1({
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: 1," : ""}
     ${referencesBattleVars(gameDef) ? "BATTLEVARS: {}, " : ""}
-    turn: 0,
+    TURN: 0,
     UNITDATA,
     UNITLAYERS
   });`;

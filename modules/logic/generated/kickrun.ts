@@ -392,7 +392,7 @@ type Links = {
     }
 
     return game.start1({
-      turn: 0,
+      TURN: 0,
       UNITDATA,
       UNITLAYERS
     });

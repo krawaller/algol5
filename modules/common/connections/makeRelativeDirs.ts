@@ -1,7 +1,5 @@
-import { BoardAnon } from "../../types";
-
 // TODO - also work for offsets!
-export function makeRelativeDirs(board: BoardAnon) {
+export function makeRelativeDirs(offsets: string[] = []) {
   return [1, 2, 3, 4, 5, 6, 7, 8].reduce(
     (mem, dir) => ({
       ...mem,

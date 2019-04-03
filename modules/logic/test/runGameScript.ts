@@ -24,8 +24,15 @@ export function runGameScript(
             if (lines.length) {
               throw new Error("Game end but lines remaining");
             }
+            if (["start1", "start2"].includes(step.LINKS.endturn)) {
+              throw new Error("Expected game to end but it didnt");
+            }
             if (step.LINKS.endturn !== action) {
-              throw new Error("Game ended with unexpected winner");
+              throw new Error(
+                `Game ended with unexpected winner: ${action} vs ${
+                  step.LINKS.endturn
+                }`
+              );
             }
           } else {
             if (action === "endturn") {

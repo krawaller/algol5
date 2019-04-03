@@ -319,7 +319,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -423,7 +423,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -527,7 +527,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -1042,7 +1042,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -1146,7 +1146,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -1250,7 +1250,7 @@ type Links = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
           };
         }
       }

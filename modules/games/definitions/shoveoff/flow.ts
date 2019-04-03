@@ -1,4 +1,4 @@
-import { ShoveoffFlow } from './_types';
+import { ShoveoffFlow } from "./_types";
 
 const shoveoffFlow: ShoveoffFlow = {
   TODO: "findaffected SHOULD BE AN OFFSET",
@@ -39,7 +39,7 @@ const shoveoffFlow: ShoveoffFlow = {
     south: {
       applyEffects: [
         { killat: { onlyin: "squishsouth" } },
-        { pushin: ["pushsouth", 1, 1] },
+        { pushin: ["pushsouth", 5, 1] },
         {
           spawnat: [
             { onlyin: "spawnsouth" },
@@ -56,7 +56,7 @@ const shoveoffFlow: ShoveoffFlow = {
     east: {
       applyEffects: [
         { killat: { onlyin: "squisheast" } },
-        { pushin: ["pusheast", 1, 1] },
+        { pushin: ["pusheast", 3, 1] },
         {
           spawnat: [
             { onlyin: "spawneast" },
@@ -73,7 +73,7 @@ const shoveoffFlow: ShoveoffFlow = {
     west: {
       applyEffects: [
         { killat: { onlyin: "squishwest" } },
-        { pushin: ["pushwest", 1, 1] },
+        { pushin: ["pushwest", 7, 1] },
         {
           spawnat: [
             { onlyin: "spawnwest" },

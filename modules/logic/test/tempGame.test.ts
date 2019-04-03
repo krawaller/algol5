@@ -80,9 +80,10 @@ import serauqsDef from "../../games/dist/games/serauqs";
 runGameScript("serauqs", serauqsGame, serauqsDef.scripts);
 runGameRandomly("serauqs", serauqsGame);
 
-// import shoveoffGame from "../generated/shoveoff";
-// import shoveoffDef from "../../games/dist/games/shoveoff";
-// runGameScript("shoveoff", shoveoffGame, shoveoffDef.scripts, true);
+import shoveoffGame from "../generated/shoveoff";
+import shoveoffDef from "../../games/dist/games/shoveoff";
+runGameScript("shoveoff", shoveoffGame, shoveoffDef.scripts);
+runGameRandomly("shoveoff", shoveoffGame);
 
 import transetGame from "../generated/transet";
 import transetDef from "../../games/dist/games/transet";

@@ -1,5 +1,5 @@
 import { GeneratorDefAnon } from "./";
-import { AlgolBool, AlgolVal, AlgolSet } from "../../";
+import { AlgolBool, AlgolVal, AlgolSet, AlgolMatcher } from "../../";
 
 export type FilterDefAnon = FilterDef<
   string,
@@ -42,5 +42,16 @@ export type FilterDef<
     Turnp,
     Turnv
   >;
-  matching?: any;
+  matching?: {
+    [prop: string]: AlgolMatcher<
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
+  };
 };

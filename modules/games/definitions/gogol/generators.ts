@@ -1,4 +1,4 @@
-import { GogolGenerators } from './_types';
+import { GogolGenerators } from "./_types";
 
 const gogolGenerators: GogolGenerators = {
   findforbiddenkingspots: {
@@ -46,7 +46,7 @@ const gogolGenerators: GogolGenerators = {
     type: "filter",
     layer: "willdie",
     matching: {
-      dir: ["is", ["read", "jumptargets", "selectjumptarget", "dir"]]
+      dir: { is: { read: ["jumptargets", "selectjumptarget", "dir"] } }
     },
     tolayer: "splashed"
   },

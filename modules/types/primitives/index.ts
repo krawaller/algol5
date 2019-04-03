@@ -14,3 +14,4 @@ export * from "./content";
 export * from "./dirs";
 export * from "./genref";
 export * from "./link";
+export * from "./matcher";

@@ -95,13 +95,9 @@ type Links = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    TURNVARS["movedto"] = MARKS.selectmovetarget;
-    TURNVARS["heightfrom"] = (UNITLAYERS.units[MARKS.selectunit] || {})[
-      "group"
-    ];
-    TURNVARS["heightto"] = (UNITLAYERS.units[MARKS.selectmovetarget] || {})[
-      "group"
-    ];
+    TURNVARS.movedto = MARKS.selectmovetarget;
+    TURNVARS.heightfrom = (UNITLAYERS.units[MARKS.selectunit] || {}).group;
+    TURNVARS.heightto = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group;
     {
       let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
       if (unitid) {
@@ -479,13 +475,9 @@ type Links = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    TURNVARS["movedto"] = MARKS.selectmovetarget;
-    TURNVARS["heightfrom"] = (UNITLAYERS.units[MARKS.selectunit] || {})[
-      "group"
-    ];
-    TURNVARS["heightto"] = (UNITLAYERS.units[MARKS.selectmovetarget] || {})[
-      "group"
-    ];
+    TURNVARS.movedto = MARKS.selectmovetarget;
+    TURNVARS.heightfrom = (UNITLAYERS.units[MARKS.selectunit] || {}).group;
+    TURNVARS.heightto = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group;
     {
       let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
       if (unitid) {

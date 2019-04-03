@@ -132,8 +132,7 @@ type Links = {
     }
     {
       for (let STARTPOS in UNITLAYERS.units) {
-        let allowedsteps =
-          UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
+        let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {}).group];
 
         for (let DIR of [1, 2, 3, 4]) {
           let walkedsquares = [];
@@ -219,8 +218,7 @@ type Links = {
     }
     {
       for (let STARTPOS in UNITLAYERS.units) {
-        let allowedsteps =
-          UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
+        let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {}).group];
 
         for (let DIR of [1, 2, 3, 4]) {
           let walkedsquares = [];
@@ -434,8 +432,7 @@ type Links = {
     }
     {
       for (let STARTPOS in UNITLAYERS.units) {
-        let allowedsteps =
-          UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
+        let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {}).group];
 
         for (let DIR of [1, 2, 3, 4]) {
           let walkedsquares = [];
@@ -521,8 +518,7 @@ type Links = {
     }
     {
       for (let STARTPOS in UNITLAYERS.units) {
-        let allowedsteps =
-          UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {})["group"]];
+        let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {}).group];
 
         for (let DIR of [1, 2, 3, 4]) {
           let walkedsquares = [];

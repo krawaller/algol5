@@ -458,7 +458,7 @@ type Links = {
       let POS =
         connections[MARKS.selectswapunit][
           relativeDirs[5][
-            (ARTIFACTS.swap1steps[MARKS.selectswap1target] || {})["dir"]
+            (ARTIFACTS.swap1steps[MARKS.selectswap1target] || {}).dir
           ]
         ];
       if (
@@ -945,7 +945,7 @@ type Links = {
       let POS =
         connections[MARKS.selectswapunit][
           relativeDirs[5][
-            (ARTIFACTS.swap1steps[MARKS.selectswap1target] || {})["dir"]
+            (ARTIFACTS.swap1steps[MARKS.selectswap1target] || {}).dir
           ]
         ];
       if (

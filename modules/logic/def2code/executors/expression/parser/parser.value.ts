@@ -92,9 +92,15 @@ export default function parseVal(
     const {
       read: [layer, pos, prop]
     } = expr;
-    return `(${parser.set(layer)}[${parser.pos(pos)}]||{})[${parser.val(
-      prop
-    )}]`;
+    const parsedPos = parser.pos(pos) + "";
+    const parsedProp = parser.val(prop) + "";
+    const posLookup = parsedPos.match(/^["']/)
+      ? `.${parsedPos.replace(/(^["']|["']$)/g, "")}`
+      : `[${parsedPos}]`;
+    const propLookup = parsedProp.match(/^["']/)
+      ? `.${parsedProp.replace(/(^["']|["']$)/g, "")}`
+      : `[${parsedProp}]`;
+    return `(${parser.set(layer)}${posLookup}||{})${propLookup}`;
   }
   if (isAlgolValIdAt(expr)) {
     const { idat: pos } = expr;

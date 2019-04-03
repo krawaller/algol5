@@ -97,7 +97,7 @@ type Links = {
         };
       }
     }
-    TURNVARS["movedto"] = MARKS.selectmovetarget;
+    TURNVARS.movedto = MARKS.selectmovetarget;
     UNITLAYERS = {
       units: {},
       myunits: {},
@@ -124,7 +124,7 @@ type Links = {
       let BLOCKS = UNITLAYERS.units;
 
       for (let DIR of roseDirs) {
-        let POS = TURNVARS["movedto"];
+        let POS = MARKS.selectmovetarget;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
           ARTIFACTS.targets[POS] = {};
         }
@@ -395,7 +395,7 @@ type Links = {
         };
       }
     }
-    TURNVARS["movedto"] = MARKS.selectmovetarget;
+    TURNVARS.movedto = MARKS.selectmovetarget;
     UNITLAYERS = {
       units: {},
       myunits: {},
@@ -422,7 +422,7 @@ type Links = {
       let BLOCKS = UNITLAYERS.units;
 
       for (let DIR of roseDirs) {
-        let POS = TURNVARS["movedto"];
+        let POS = MARKS.selectmovetarget;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
           ARTIFACTS.targets[POS] = {};
         }

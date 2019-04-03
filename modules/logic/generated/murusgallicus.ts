@@ -410,9 +410,7 @@ type Links = {
 
       let POS =
         connections[STARTPOS][
-          relativeDirs[5][
-            (ARTIFACTS.movetargets[MARKS.selectmove] || {})["dir"]
-          ]
+          relativeDirs[5][(ARTIFACTS.movetargets[MARKS.selectmove] || {}).dir]
         ];
       if (POS) {
         ARTIFACTS[UNITLAYERS.myunits[POS] ? "madetowers" : "madewalls"][
@@ -926,9 +924,7 @@ type Links = {
 
       let POS =
         connections[STARTPOS][
-          relativeDirs[5][
-            (ARTIFACTS.movetargets[MARKS.selectmove] || {})["dir"]
-          ]
+          relativeDirs[5][(ARTIFACTS.movetargets[MARKS.selectmove] || {}).dir]
         ];
       if (POS) {
         ARTIFACTS[UNITLAYERS.myunits[POS] ? "madetowers" : "madewalls"][

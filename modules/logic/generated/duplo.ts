@@ -281,7 +281,7 @@ type Links = {
       let allowedsteps = UNITLAYERS.myunits;
 
       for (let STARTPOS in ARTIFACTS.spawndirs) {
-        let DIR = relativeDirs[(ARTIFACTS.spawndirs[STARTPOS] || {})["dir"]][5];
+        let DIR = relativeDirs[(ARTIFACTS.spawndirs[STARTPOS] || {}).dir][5];
         let walkedsquares = [];
         let POS = STARTPOS;
         while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
@@ -302,8 +302,8 @@ type Links = {
       let BLOCKS = UNITLAYERS.oppunits;
 
       for (let STARTPOS in ARTIFACTS.growstarts) {
-        let DIR = (ARTIFACTS.growstarts[STARTPOS] || {})["dir"];
-        let MAX = (ARTIFACTS.growstarts[STARTPOS] || {})["strength"];
+        let DIR = (ARTIFACTS.growstarts[STARTPOS] || {}).dir;
+        let MAX = (ARTIFACTS.growstarts[STARTPOS] || {}).strength;
         let POS = "faux";
         connections.faux[DIR] = STARTPOS;
         let LENGTH = 0;
@@ -329,9 +329,9 @@ type Links = {
       let allowedsteps = UNITLAYERS.oppunits;
 
       for (let STARTPOS in ARTIFACTS.potentialopptargets) {
-        let DIR = (ARTIFACTS.potentialopptargets[STARTPOS] || {})["dir"];
+        let DIR = (ARTIFACTS.potentialopptargets[STARTPOS] || {}).dir;
         let STOPREASON = "";
-        let MAX = (ARTIFACTS.potentialopptargets[STARTPOS] || {})["strength"];
+        let MAX = (ARTIFACTS.potentialopptargets[STARTPOS] || {}).strength;
         let POS = "faux";
         connections.faux[DIR] = STARTPOS;
         let LENGTH = 0;
@@ -392,7 +392,7 @@ type Links = {
       while (
         (POS =
           connections[POS][
-            (ARTIFACTS.targets[MARKS.selecttarget] || {})["dir"]
+            (ARTIFACTS.targets[MARKS.selecttarget] || {}).dir
           ]) &&
         !BLOCKS[POS]
       ) {
@@ -693,7 +693,7 @@ type Links = {
       let allowedsteps = UNITLAYERS.myunits;
 
       for (let STARTPOS in ARTIFACTS.spawndirs) {
-        let DIR = relativeDirs[(ARTIFACTS.spawndirs[STARTPOS] || {})["dir"]][5];
+        let DIR = relativeDirs[(ARTIFACTS.spawndirs[STARTPOS] || {}).dir][5];
         let walkedsquares = [];
         let POS = STARTPOS;
         while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
@@ -714,8 +714,8 @@ type Links = {
       let BLOCKS = UNITLAYERS.oppunits;
 
       for (let STARTPOS in ARTIFACTS.growstarts) {
-        let DIR = (ARTIFACTS.growstarts[STARTPOS] || {})["dir"];
-        let MAX = (ARTIFACTS.growstarts[STARTPOS] || {})["strength"];
+        let DIR = (ARTIFACTS.growstarts[STARTPOS] || {}).dir;
+        let MAX = (ARTIFACTS.growstarts[STARTPOS] || {}).strength;
         let POS = "faux";
         connections.faux[DIR] = STARTPOS;
         let LENGTH = 0;
@@ -741,9 +741,9 @@ type Links = {
       let allowedsteps = UNITLAYERS.oppunits;
 
       for (let STARTPOS in ARTIFACTS.potentialopptargets) {
-        let DIR = (ARTIFACTS.potentialopptargets[STARTPOS] || {})["dir"];
+        let DIR = (ARTIFACTS.potentialopptargets[STARTPOS] || {}).dir;
         let STOPREASON = "";
-        let MAX = (ARTIFACTS.potentialopptargets[STARTPOS] || {})["strength"];
+        let MAX = (ARTIFACTS.potentialopptargets[STARTPOS] || {}).strength;
         let POS = "faux";
         connections.faux[DIR] = STARTPOS;
         let LENGTH = 0;
@@ -804,7 +804,7 @@ type Links = {
       while (
         (POS =
           connections[POS][
-            (ARTIFACTS.targets[MARKS.selecttarget] || {})["dir"]
+            (ARTIFACTS.targets[MARKS.selecttarget] || {}).dir
           ]) &&
         !BLOCKS[POS]
       ) {

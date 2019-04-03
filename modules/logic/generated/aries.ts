@@ -152,10 +152,8 @@ type Links = {
 
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    BATTLEVARS["pusheeid"] = (UNITLAYERS.units[MARKS.selectmovetarget] || {})[
-      "id"
-    ];
-    BATTLEVARS["pushsquare"] = MARKS.selectmovetarget;
+    BATTLEVARS.pusheeid = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).id;
+    BATTLEVARS.pushsquare = MARKS.selectmovetarget;
     for (let LOOPPOS in ARTIFACTS.beingpushed) {
       {
         let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -164,7 +162,7 @@ type Links = {
             ...UNITDATA[unitid],
             pos: offsetPos(
               LOOPPOS,
-              (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {})["dir"],
+              (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
               1,
               0,
               { height: 8, width: 8 }
@@ -265,7 +263,7 @@ type Links = {
           if (
             !(
               POS === BATTLEVARS["pushsquare"] &&
-              (UNITLAYERS.units[MARKS.selectunit] || {})["id"] ===
+              (UNITLAYERS.units[MARKS.selectunit] || {}).id ===
                 BATTLEVARS["pusheeid"]
             ) &&
             UNITLAYERS.oppunits[POS]
@@ -312,14 +310,14 @@ type Links = {
         let POS = "faux";
         connections.faux[
           relativeDirs[1][
-            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {})["dir"]
+            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
           ]
         ] = MARKS.selectmovetarget;
         while (
           !(STOPREASON = !(POS =
             connections[POS][
               relativeDirs[1][
-                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {})["dir"]
+                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
               ]
             ])
             ? "outofbounds"
@@ -763,10 +761,8 @@ type Links = {
 
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    BATTLEVARS["pusheeid"] = (UNITLAYERS.units[MARKS.selectmovetarget] || {})[
-      "id"
-    ];
-    BATTLEVARS["pushsquare"] = MARKS.selectmovetarget;
+    BATTLEVARS.pusheeid = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).id;
+    BATTLEVARS.pushsquare = MARKS.selectmovetarget;
     for (let LOOPPOS in ARTIFACTS.beingpushed) {
       {
         let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
@@ -775,7 +771,7 @@ type Links = {
             ...UNITDATA[unitid],
             pos: offsetPos(
               LOOPPOS,
-              (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {})["dir"],
+              (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
               1,
               0,
               { height: 8, width: 8 }
@@ -876,7 +872,7 @@ type Links = {
           if (
             !(
               POS === BATTLEVARS["pushsquare"] &&
-              (UNITLAYERS.units[MARKS.selectunit] || {})["id"] ===
+              (UNITLAYERS.units[MARKS.selectunit] || {}).id ===
                 BATTLEVARS["pusheeid"]
             ) &&
             UNITLAYERS.oppunits[POS]
@@ -923,14 +919,14 @@ type Links = {
         let POS = "faux";
         connections.faux[
           relativeDirs[1][
-            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {})["dir"]
+            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
           ]
         ] = MARKS.selectmovetarget;
         while (
           !(STOPREASON = !(POS =
             connections[POS][
               relativeDirs[1][
-                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {})["dir"]
+                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
               ]
             ])
             ? "outofbounds"

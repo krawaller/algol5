@@ -72,25 +72,45 @@ function executeEffectInner(
     const {
       setturnvar: [name, val]
     } = effect;
-    return `TURNVARS[${parser.val(name)}] = ${parser.val(val)};`;
+    const parsedName = parser.val(name) + "";
+    return `TURNVARS${
+      parsedName.match(/^["']/)
+        ? `.${parsedName.replace(/(^["']|["']$)/g, "")}`
+        : `[${parsedName}]`
+    } = ${parser.val(val)};`;
   }
   if (isAlgolEffectSetTurnPos(effect)) {
     const {
       setturnpos: [name, pos]
     } = effect;
-    return `TURNVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
+    const parsedName = parser.val(name) + "";
+    return `TURNVARS${
+      parsedName.match(/^["']/)
+        ? `.${parsedName.replace(/(^["']|["']$)/g, "")}`
+        : `[${parsedName}]`
+    } = ${parser.pos(pos)};`;
   }
   if (isAlgolEffectSetBattleVar(effect)) {
     const {
       setbattlevar: [name, val]
     } = effect;
-    return `BATTLEVARS[${parser.val(name)}] = ${parser.val(val)};`;
+    const parsedName = parser.val(name) + "";
+    return `BATTLEVARS${
+      parsedName.match(/^["']/)
+        ? `.${parsedName.replace(/(^["']|["']$)/g, "")}`
+        : `[${parsedName}]`
+    } = ${parser.val(val)};`;
   }
   if (isAlgolEffectSetBattlePos(effect)) {
     const {
       setbattlepos: [name, pos]
     } = effect;
-    return `BATTLEVARS[${parser.val(name)}] = ${parser.pos(pos)};`;
+    const parsedName = parser.val(name) + "";
+    return `BATTLEVARS${
+      parsedName.match(/^["']/)
+        ? `.${parsedName.replace(/(^["']|["']$)/g, "")}`
+        : `[${parsedName}]`
+    } = ${parser.pos(pos)};`;
   }
   if (isAlgolEffectForPosIn(effect)) {
     const {

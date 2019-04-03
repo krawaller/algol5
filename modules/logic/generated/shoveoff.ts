@@ -643,7 +643,7 @@ type Links = {
     }
     {
       for (let STARTPOS in ARTIFACTS.targetedgepoints) {
-        let DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {})["dir"];
+        let DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {}).dir;
         let walkedsquares = [];
         let POS = "faux";
         connections.faux[DIR] = STARTPOS;
@@ -1366,7 +1366,7 @@ type Links = {
     }
     {
       for (let STARTPOS in ARTIFACTS.targetedgepoints) {
-        let DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {})["dir"];
+        let DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {}).dir;
         let walkedsquares = [];
         let POS = "faux";
         connections.faux[DIR] = STARTPOS;

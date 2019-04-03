@@ -66,7 +66,7 @@ runGameScript("serauqs", serauqsGame, serauqsDef.scripts);
 
 // import shoveoffGame from "../generated/shoveoff";
 // import shoveoffDef from "../../games/dist/games/shoveoff";
-// runGameScript("shoveoff", shoveoffGame, shoveoffDef.scripts);
+// runGameScript("shoveoff", shoveoffGame, shoveoffDef.scripts, true);
 
 import transetGame from "../generated/transet";
 import transetDef from "../../games/dist/games/transet";

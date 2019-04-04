@@ -744,6 +744,7 @@ type Links = {
 
     return game.start1({
       BATTLEVARS: {},
+
       TURN: 0,
       UNITDATA,
       UNITLAYERS

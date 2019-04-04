@@ -4,7 +4,8 @@ import {
   isAlgolLogicalPlayerCase,
   isAlgolLogicalIndexList,
   isAlgolLogicalIf,
-  isAlgolLogicalIfElse
+  isAlgolLogicalIfElse,
+  isAlgolLogicalIfPlayer
 } from "../../types";
 
 export function possibilities<_T>(expr: AlgolLogicalAnon<_T>): _T[] {
@@ -48,6 +49,13 @@ function possibilitiesInner<_T>(expr: AlgolLogicalAnon<_T>): _T[] {
   if (isAlgolLogicalIf(expr)) {
     const {
       if: [test, opt]
+    } = expr;
+    return [].concat(possibilitiesInner(opt));
+  }
+
+  if (isAlgolLogicalIfPlayer(expr)) {
+    const {
+      ifplayer: [plr, opt]
     } = expr;
     return [].concat(possibilitiesInner(opt));
   }

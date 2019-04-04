@@ -2,12 +2,14 @@ import {
   FullDefAnon,
   isNeighbourDef,
   isWalkerDef,
+  isAlgolFilterDef,
   GeneratorDefAnon,
   AlgolGenRefAnon,
   AlgolGenRefInnerAnon
 } from "../../../../../types";
 import executeNeighbours from "./generate.neighbours";
 import executeWalker from "./generate.walker";
+import executeFilter from "./generate.filter";
 
 import { executeStatement } from "../../../executors";
 
@@ -39,6 +41,9 @@ function executeGeneratorInner(
   }
   if (isWalkerDef(genDef)) {
     return executeWalker(gameDef, player, action, genDef);
+  }
+  if (isAlgolFilterDef(genDef)) {
+    return executeFilter(gameDef, player, action, genDef);
   }
   throw "Unknown generator def: " + JSON.stringify(genDef);
 }

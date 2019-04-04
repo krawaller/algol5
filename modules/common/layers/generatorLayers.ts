@@ -1,8 +1,8 @@
-import { isFilterDef, DrawDefAnon } from "../../types";
+import { isAlgolFilterDef, DrawDefAnon } from "../../types";
 import { possibilities } from "..";
 
 export function generatorLayers(genDef) {
-  if (isFilterDef(genDef)) {
+  if (isAlgolFilterDef(genDef)) {
     return possibilities(genDef.tolayer);
   } else {
     let names = [];

@@ -1,6 +1,6 @@
 import { WalkerDef } from "./walker";
 import { NeighbourDef } from "./neighbour";
-import { FilterDef } from "./filter";
+import { AlgolFilterDef } from "./filter";
 
 export * from "./walker";
 export * from "./neighbour";
@@ -65,7 +65,7 @@ export type GeneratorDef<
       TurnPos,
       TurnVar
     >
-  | FilterDef<
+  | AlgolFilterDef<
       ArtifactLayer,
       BattlePos,
       BattleVar,

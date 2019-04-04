@@ -1,7 +1,7 @@
 import { GeneratorDefAnon } from "./";
 import { AlgolBool, AlgolVal, AlgolSet, AlgolMatcher } from "../../";
 
-export type FilterDefAnon = FilterDef<
+export type AlgolFilterDefAnon = AlgolFilterDef<
   string,
   string,
   string,
@@ -13,11 +13,13 @@ export type FilterDefAnon = FilterDef<
   string
 >;
 
-export function isFilterDef(gen: GeneratorDefAnon): gen is FilterDefAnon {
-  return (gen as FilterDefAnon).type === "filter";
+export function isAlgolFilterDef(
+  gen: GeneratorDefAnon
+): gen is AlgolFilterDefAnon {
+  return (gen as AlgolFilterDefAnon).type === "filter";
 }
 
-export type FilterDef<
+export type AlgolFilterDef<
   ArtifactLayer,
   Btlp,
   Btlv,

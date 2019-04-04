@@ -53,7 +53,7 @@ const gogolGenerators: GogolGenerators = {
   findjumptargets: {
     type: "neighbour",
     starts: "adjacentenemies",
-    dir: { reldir: [1, { read: ["adjacentenemies", ["start"], ["dir"]] }] },
+    dir: { reldir: [1, { read: ["adjacentenemies", ["start"], "dir"] }] },
     unlessover: {
       union: [
         "units",

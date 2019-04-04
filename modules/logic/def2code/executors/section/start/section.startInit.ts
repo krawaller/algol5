@@ -12,23 +12,21 @@ export function executeStartInit(
   action: string
 ): string {
   let ret = "";
-  const startDef = gameDef.flow.startTurn;
+  const startDef = gameDef.flow.startTurn || {};
+  const startGens = actionArtifactLayers(gameDef, player, "start");
 
   const usage = orderUsage(gameDef, player, action);
 
   if (usage.ARTIFACTS) {
     const gameLayers = gameArtifactLayers(gameDef, player, action);
-    const actionLayers = actionArtifactLayers(gameDef, player, action);
 
-    ret += `let ARTIFACTS = {
-      ${gameLayers
-        .map(name =>
-          actionLayers.includes(name)
-            ? `${name}: { ...step.ARTIFACTS.${name} }`
-            : `${name}: step.ARTIFACTS.${name}`
-        )
-        .join(", ")}
-    }; `;
+    if (actionArtifactLayers.length) {
+      ret += `let ARTIFACTS = {
+        ${gameLayers.map(name => `${name}: {}`).join(", ")}
+      }; `;
+    } else {
+      ret += `let ARTIFACTS = emptyArtifactLayers`;
+    }
   }
 
   // if we don't reference unit layers locally we defer to startEnd

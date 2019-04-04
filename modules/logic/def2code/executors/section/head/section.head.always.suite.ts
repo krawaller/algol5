@@ -13,22 +13,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.board,
           height: 1,
           width: 2
-        },
-        generators: {
-          foo: {
-            type: "neighbour",
-            draw: {
-              start: {
-                tolayer: "gnurps"
-              },
-              neighbours: {
-                tolayer: "flurps",
-                include: {
-                  owner: 1
-                }
-              }
-            }
-          }
         }
       },
       contexts: [
@@ -92,16 +76,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     6: 7,
                     7: 8,
                     8: 1
-                  }
-                },
-                {
-                  sample: "emptyArtifactLayers",
-                  res: {
-                    gnurps: {},
-                    flurps: {},
-                    myflurps: {},
-                    oppflurps: {},
-                    neutralflurps: {}
                   }
                 }
               ]

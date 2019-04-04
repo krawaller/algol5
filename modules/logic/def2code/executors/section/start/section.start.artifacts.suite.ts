@@ -98,6 +98,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultStartInitContext,
+            emptyArtifactLayers: { dontUse: "me" },
             step: {
               ...defaultStartInitContext.step,
               ARTIFACTS: {
@@ -114,37 +115,20 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "startInit",
               asserts: [
                 {
-                  sample: "ARTIFACTS.flurps",
-                  res: { existing: "flurp" },
-                  desc: "we have old flurps"
+                  sample: "ARTIFACTS",
+                  res: {
+                    flurps: {},
+                    myflurps: {},
+                    oppflurps: {},
+                    neutralflurps: {},
+                    gnurps: {}
+                  },
+                  desc: "we get new layer"
                 },
                 {
-                  sample:
-                    "ARTIFACTS.flurps === references.step.ARTIFACTS.flurps",
+                  sample: "emptyArtifactLayers === ARTIFACTS",
                   res: false,
-                  desc: "we have new reference to allow mutation"
-                },
-                {
-                  sample: "ARTIFACTS.myflurps",
-                  res: { existing: "myflurp" },
-                  desc: "we have old myflurps"
-                },
-                {
-                  sample:
-                    "ARTIFACTS.myflurps === references.step.ARTIFACTS.myflurps",
-                  res: false,
-                  desc: "we have new reference to allow mutation"
-                },
-                {
-                  sample: "ARTIFACTS.gnurps",
-                  res: { existing: "gnurp" },
-                  desc: "we have old gnurps"
-                },
-                {
-                  sample:
-                    "ARTIFACTS.gnurps === references.step.ARTIFACTS.gnurps",
-                  res: true,
-                  desc: "we keep old reference since we won't mutate"
+                  desc: "we created brand new one to be mutated"
                 }
               ]
             }

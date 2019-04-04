@@ -20,11 +20,17 @@ export function executeHead(
   } });
   `;
 
-  ret += `
+  const startDef = gameDef.flow.startTurn || {};
+  const startGens = (startDef.runGenerators || []).concat(
+    startDef.runGenerator || []
+  );
+  if (!startGens.length) {
+    ret += `
     const emptyArtifactLayers = ${JSON.stringify(
       emptyArtifactLayers(gameDef.generators)
     )};
   `;
+  }
 
   ret += `
     const connections = boardConnections({ height: ${

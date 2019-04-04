@@ -36,10 +36,10 @@ import duploDef from "../../games/dist/games/duplo";
 runGameScript("duplo", duploGame, duploDef.scripts);
 runGameRandomly("duplo", duploGame);
 
-// import gogolGame from "../generated/gogol";
-// import gogolDef from "../../games/dist/games/gogol";
-// runGameScript("gogol", gogolGame, gogolDef.scripts);
-// runGameRandomly("gogol", gogolGame);
+import gogolGame from "../generated/gogol";
+import gogolDef from "../../games/dist/games/gogol";
+runGameScript("gogol", gogolGame, gogolDef.scripts);
+runGameRandomly("gogol", gogolGame);
 
 import gowiththefloeGame from "../generated/gowiththefloe";
 import gowiththefloeDef from "../../games/dist/games/gowiththefloe";

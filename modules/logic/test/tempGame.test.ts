@@ -36,6 +36,16 @@ import duploDef from "../../games/dist/games/duplo";
 runGameScript("duplo", duploGame, duploDef.scripts);
 runGameRandomly("duplo", duploGame);
 
+// import gogolGame from "../generated/gogol";
+// import gogolDef from "../../games/dist/games/gogol";
+// runGameScript("gogol", gogolGame, gogolDef.scripts);
+// runGameRandomly("gogol", gogolGame);
+
+import gowiththefloeGame from "../generated/gowiththefloe";
+import gowiththefloeDef from "../../games/dist/games/gowiththefloe";
+runGameScript("gowiththefloe", gowiththefloeGame, gowiththefloeDef.scripts);
+runGameRandomly("gowiththefloe", gowiththefloeGame);
+
 import jostleGame from "../generated/jostle";
 import jostleDef from "../../games/dist/games/jostle";
 runGameScript("jostle", jostleGame, jostleDef.scripts);
@@ -84,6 +94,15 @@ import shoveoffGame from "../generated/shoveoff";
 import shoveoffDef from "../../games/dist/games/shoveoff";
 runGameScript("shoveoff", shoveoffGame, shoveoffDef.scripts);
 runGameRandomly("shoveoff", shoveoffGame);
+
+import threemusketeersGame from "../generated/threemusketeers";
+import threemusketeersDef from "../../games/dist/games/threemusketeers";
+runGameScript(
+  "threemusketeers",
+  threemusketeersGame,
+  threemusketeersDef.scripts
+);
+runGameRandomly("threemusketeers", threemusketeersGame);
 
 import transetGame from "../generated/transet";
 import transetDef from "../../games/dist/games/transet";

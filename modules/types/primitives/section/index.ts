@@ -8,4 +8,5 @@ export type AlgolSection =
   | "startInit"
   | "startEnd"
   | "cmndInit"
-  | "cmndEnd";
+  | "cmndEnd"
+  | "instruction";

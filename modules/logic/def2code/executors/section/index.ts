@@ -6,6 +6,7 @@ import { executeNewBattle } from "./battle";
 import { executePlayer } from "./player";
 import { executeHead } from "./head";
 import { executeOrderSection } from "./section.orders";
+import { executeInstructionSection } from "./instruction";
 
 export function executeSection(
   gameDef: FullDefAnon,
@@ -34,6 +35,8 @@ export function executeSection(
       return executePlayer(gameDef, player, action);
     case "head":
       return executeHead(gameDef, player, action);
+    case "instruction":
+      return executeInstructionSection(gameDef, player, action);
     default:
       throw new Error("Unknown section: " + JSON.stringify(section));
   }

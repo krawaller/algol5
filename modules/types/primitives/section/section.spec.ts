@@ -8,5 +8,6 @@ const testSections: AlgolSection[] = [
   "cmndInit",
   "orders",
   "player",
-  "head"
+  "head",
+  "instruction"
 ];

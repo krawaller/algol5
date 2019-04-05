@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 5, width: 5 });
@@ -102,6 +103,9 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    return { text: "Select which unit to move" };
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -223,6 +227,21 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move your" },
+        { pos: MARKS.selectunit },
+        UNITLAYERS.runners[MARKS.selectunit]
+          ? { unittype: "bishop" }
+          : { unittype: "pawn" }
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -238,6 +257,39 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to" },
+        UNITLAYERS.runners[MARKS.selectunit]
+          ? collapseContent({
+              line: [
+                { text: "slide your bishop from" },
+                { pos: MARKS.selectunit },
+                { text: "to" },
+                { pos: MARKS.selectmovetarget }
+              ]
+            })
+          : collapseContent({
+              line: [
+                { text: "move your pawn from" },
+                { pos: MARKS.selectunit },
+                { text: "to" },
+                { pos: MARKS.selectmovetarget },
+                UNITLAYERS.units[MARKS.selectmovetarget]
+                  ? { text: "and capture the enemy there" }
+                  : undefined
+              ]
+            })
+      ]
+    });
   };
 }
 {
@@ -311,6 +363,9 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    return { text: "Select which unit to move" };
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -517,6 +572,21 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move your" },
+        { pos: MARKS.selectunit },
+        UNITLAYERS.runners[MARKS.selectunit]
+          ? { unittype: "bishop" }
+          : { unittype: "pawn" }
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -532,6 +602,39 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to" },
+        UNITLAYERS.runners[MARKS.selectunit]
+          ? collapseContent({
+              line: [
+                { text: "slide your bishop from" },
+                { pos: MARKS.selectunit },
+                { text: "to" },
+                { pos: MARKS.selectmovetarget }
+              ]
+            })
+          : collapseContent({
+              line: [
+                { text: "move your pawn from" },
+                { pos: MARKS.selectunit },
+                { text: "to" },
+                { pos: MARKS.selectmovetarget },
+                UNITLAYERS.units[MARKS.selectmovetarget]
+                  ? { text: "and capture the enemy there" }
+                  : undefined
+              ]
+            })
+      ]
+    });
   };
 }
 export default game;

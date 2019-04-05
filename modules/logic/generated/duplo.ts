@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
@@ -84,6 +85,13 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.start1instruction = step => {
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? { text: "Select unit to expand from" }
+      : { text: "Select where to deploy the first of your two initial units" };
+  };
   game.deploy1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let UNITLAYERS = step.UNITLAYERS;
@@ -153,6 +161,13 @@ type Links = {
 
       NEXTSPAWNID
     };
+  };
+  game.deploy1instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return Object.keys(UNITLAYERS.myunits).length === 1
+      ? { text: "Now select where to deploy your second and last initial unit" }
+      : undefined;
   };
   game.expand1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -254,6 +269,24 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectdeploy1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "deploy" },
+        { text: "to place your" },
+        Object.keys(UNITLAYERS.myunits).length === 1
+          ? { text: "second" }
+          : { text: "first" },
+        { text: "unit at" },
+        { pos: MARKS.selectdeploy }
+      ]
+    });
   };
   game.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -372,6 +405,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit1instruction = step => {
+    return { text: "Now select which square to expand to" };
+  };
   game.selecttarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
@@ -417,6 +453,25 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selecttarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "expand" },
+        { text: "to expand from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selecttarget },
+        UNITLAYERS.units[MARKS.selecttarget]
+          ? { text: "and neutralise the enemy there" }
+          : undefined
+      ]
+    });
   };
 }
 {
@@ -465,6 +520,13 @@ type Links = {
       TURN,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start2instruction = step => {
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? { text: "Select unit to expand from" }
+      : { text: "Select where to deploy the first of your two initial units" };
   };
   game.newBattle = () => {
     let UNITDATA = {};
@@ -566,6 +628,13 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.deploy2instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return Object.keys(UNITLAYERS.myunits).length === 1
+      ? { text: "Now select where to deploy your second and last initial unit" }
+      : undefined;
+  };
   game.expand2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -666,6 +735,24 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectdeploy2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "deploy" },
+        { text: "to place your" },
+        Object.keys(UNITLAYERS.myunits).length === 1
+          ? { text: "second" }
+          : { text: "first" },
+        { text: "unit at" },
+        { pos: MARKS.selectdeploy }
+      ]
+    });
   };
   game.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -784,6 +871,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit2instruction = step => {
+    return { text: "Now select which square to expand to" };
+  };
   game.selecttarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
@@ -829,6 +919,25 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selecttarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "expand" },
+        { text: "to expand from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selecttarget },
+        UNITLAYERS.units[MARKS.selecttarget]
+          ? { text: "and neutralise the enemy there" }
+          : undefined
+      ]
+    });
   };
 }
 export default game;

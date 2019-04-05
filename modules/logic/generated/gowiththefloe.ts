@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
@@ -154,6 +155,9 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start1instruction = step => {
+    return { text: "Select a unit to move" };
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -407,6 +411,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit1instruction = step => {
+    return { text: "Select where to move" };
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       eattargets: step.ARTIFACTS.eattargets,
@@ -453,6 +460,11 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectmovetarget1instruction = step => {
+    return collapseContent({
+      line: [{ text: "Press" }, { command: "move" }, { text: "to go here" }]
+    });
+  };
   game.selecteattarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -470,6 +482,11 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selecteattarget1instruction = step => {
+    return collapseContent({
+      line: [{ text: "Press" }, { command: "eat" }, { text: "to, well, eat" }]
+    });
   };
 }
 {
@@ -515,6 +532,9 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start2instruction = step => {
+    return { text: "Select a unit to move" };
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -825,6 +845,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit2instruction = step => {
+    return { text: "Select where to move" };
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       eattargets: step.ARTIFACTS.eattargets,
@@ -871,6 +894,11 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectmovetarget2instruction = step => {
+    return collapseContent({
+      line: [{ text: "Press" }, { command: "move" }, { text: "to go here" }]
+    });
+  };
   game.selecteattarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -888,6 +916,11 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selecteattarget2instruction = step => {
+    return collapseContent({
+      line: [{ text: "Press" }, { command: "eat" }, { text: "to, well, eat" }]
+    });
   };
 }
 export default game;

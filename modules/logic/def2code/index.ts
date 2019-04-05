@@ -4,7 +4,7 @@ import { executeSection } from "./executors/section";
 import { FullDefAnon } from "../../types";
 
 export function compileGameToCode(gameDef: FullDefAnon) {
-  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers} from '${path.join(
+  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, collapseContent} from '${path.join(
     __dirname,
     "../../common"
   )}';
@@ -44,6 +44,10 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       ${executeSection(gameDef, player, "start", "startEnd")}
     }; `;
 
+    ret += `game.start${player}instruction = step => {
+      ${executeSection(gameDef, player, "start", "instruction")}
+    }; `;
+
     if (player === 2) {
       ret += `game.newBattle = () => {
         ${executeSection(gameDef, player, "start", "newBattle")}
@@ -56,6 +60,12 @@ export function compileGameToCode(gameDef: FullDefAnon) {
         ${executeSection(gameDef, player, cmndName, "orders")}
         ${executeSection(gameDef, player, cmndName, "cmndEnd")}
       }; `;
+
+      if (gameDef.instructions[cmndName]) {
+        ret += `game.${cmndName + player}instruction = step => {
+          ${executeSection(gameDef, player, cmndName, "instruction")}
+        }; `;
+      }
     });
 
     Object.keys(gameDef.flow.marks).forEach(markName => {
@@ -63,6 +73,10 @@ export function compileGameToCode(gameDef: FullDefAnon) {
         ${executeSection(gameDef, player, markName, "markInit")}
         ${executeSection(gameDef, player, markName, "orders")}
         ${executeSection(gameDef, player, markName, "markEnd")}
+      }; `;
+
+      ret += `game.${markName + player}instruction = step => {
+        ${executeSection(gameDef, player, markName, "instruction")}
       }; `;
     });
 

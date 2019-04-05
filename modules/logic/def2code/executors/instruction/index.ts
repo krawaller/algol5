@@ -7,6 +7,7 @@ import {
   isAlgolInstrVal,
   isAlgolInstrPluralize,
   isAlgolInstrUnitAt,
+  isAlgolInstrPos,
   isAlgolIcon
 } from "../../../../types";
 
@@ -96,6 +97,9 @@ function executeInstructionInner(
         ${exprParser.pos(instr.unitat)}
       ]
     }`;
+  }
+  if (isAlgolInstrPos(instr)) {
+    return `{ pos: ${exprParser.pos(instr.pos)} }`;
   }
   throw new Error("Unknown instruction: " + JSON.stringify(instr));
   return "";

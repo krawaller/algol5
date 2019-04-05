@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 4, width: 4 });
@@ -154,6 +155,17 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? collapseContent({
+          line: [
+            { text: "Select a unit to move that you didn't move last turn" }
+          ]
+        })
+      : collapseContent({ line: [{ text: "Select a unit to move" }] });
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -310,6 +322,9 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    return { text: "Select an empty square to move to" };
+  };
   game.selectmove1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -325,6 +340,29 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmove: newMarkPos }
     };
+  };
+  game.selectmove1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        TERRAIN.oppbases[MARKS.selectmove] &&
+        !TERRAIN.oppbases[MARKS.selectunit]
+          ? collapseContent({
+              line: [
+                { text: "into the opponent base at" },
+                { pos: MARKS.selectmove }
+              ]
+            })
+          : collapseContent({
+              line: [{ text: "to" }, { pos: MARKS.selectmove }]
+            })
+      ]
+    });
   };
 }
 {
@@ -453,6 +491,17 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? collapseContent({
+          line: [
+            { text: "Select a unit to move that you didn't move last turn" }
+          ]
+        })
+      : collapseContent({ line: [{ text: "Select a unit to move" }] });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -706,6 +755,9 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    return { text: "Select an empty square to move to" };
+  };
   game.selectmove2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -721,6 +773,29 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmove: newMarkPos }
     };
+  };
+  game.selectmove2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        TERRAIN.oppbases[MARKS.selectmove] &&
+        !TERRAIN.oppbases[MARKS.selectunit]
+          ? collapseContent({
+              line: [
+                { text: "into the opponent base at" },
+                { pos: MARKS.selectmove }
+              ]
+            })
+          : collapseContent({
+              line: [{ text: "to" }, { pos: MARKS.selectmove }]
+            })
+      ]
+    });
   };
 }
 export default game;

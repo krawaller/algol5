@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 5, width: 5 });
@@ -74,6 +75,15 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select which" },
+        { unittype: "king" },
+        { text: "to move" }
+      ]
+    });
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -192,6 +202,20 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select a" },
+        { unittype: "pawn" },
+        { text: "adjacent to the" },
+        { pos: MARKS.selectunit },
+        { unittype: "king" },
+        { text: "to attack" }
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -207,6 +231,22 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to make your" },
+        { pos: MARKS.selectunit },
+        { unittype: "king" },
+        { text: "attack the" },
+        { pos: MARKS.selectmovetarget },
+        { unittype: "pawn" }
+      ]
+    });
   };
 }
 {
@@ -247,6 +287,15 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select which" },
+        { unittype: "pawn" },
+        { text: "to move" }
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -441,6 +490,18 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select an empty space adjacent to the" },
+        { pos: MARKS.selectunit },
+        { unittype: "pawn" },
+        { text: "to move to" }
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -456,6 +517,20 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
   };
 }
 export default game;

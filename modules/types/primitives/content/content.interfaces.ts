@@ -17,7 +17,7 @@ export interface AlgolContentCmnd<Cmnd> {
 }
 
 export interface AlgolContentText {
-  text: string;
+  text: string | number;
 }
 
 export interface AlgolContentLine<Cmnd, Pos> {

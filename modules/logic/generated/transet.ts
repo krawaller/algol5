@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 5, width: 5 });
@@ -131,6 +132,11 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    return collapseContent({
+      line: [{ text: "Select a unit to" }, { command: "move" }]
+    });
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -364,6 +370,74 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    let LINKS: Links = step.LINKS;
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.movetargets).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "a square to" },
+                    { command: "move" },
+                    { text: "the" },
+                    { pos: MARKS.selectunit },
+                    {
+                      unit: [
+                        { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                          (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                        ],
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                        MARKS.selectunit
+                      ]
+                    },
+                    { text: "to" }
+                  ]
+                })
+              : undefined,
+            !!(
+              LINKS.marks["selectswapunit"] &&
+              LINKS.marks["selectswapunit"].pos.length
+            )
+              ? collapseContent({
+                  line: [
+                    { text: "another unit to swap the" },
+                    { pos: MARKS.selectunit },
+                    {
+                      unit: [
+                        { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                          (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                        ],
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                        MARKS.selectunit
+                      ]
+                    },
+                    { text: "with" }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
     let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
@@ -395,6 +469,41 @@ type Links = {
       MARKS
     };
   };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return UNITLAYERS.units[MARKS.selectmovetarget] &&
+      !TERRAIN.oppbase[MARKS.selectmovetarget]
+      ? collapseContent({
+          line: [
+            { text: "Select where the enemy" },
+            {
+              unit: [
+                { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                  (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner,
+                MARKS.selectmovetarget
+              ]
+            },
+            { text: "at" },
+            { pos: MARKS.selectmovetarget },
+            { text: "should end up" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "move" },
+            { text: "to go from" },
+            { pos: MARKS.selectunit },
+            { text: "to" },
+            { pos: MARKS.selectmovetarget }
+          ]
+        });
+  };
   game.selectdeportdestination1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -410,6 +519,22 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectdeportdestination: newMarkPos }
     };
+  };
+  game.selectdeportdestination1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget },
+        { text: "and deport the enemy to" },
+        { pos: MARKS.selectdeportdestination }
+      ]
+    });
   };
   game.selectswapunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -444,6 +569,19 @@ type Links = {
       TURN: step.TURN,
       MARKS
     };
+  };
+  game.selectswapunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select a neighbouring square for" },
+        { pos: MARKS.selectunit },
+        { text: "to step to. The" },
+        { pos: MARKS.selectswapunit },
+        { text: "unit will step in the opposite direction" }
+      ]
+    });
   };
   game.selectswap1target1 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -482,6 +620,25 @@ type Links = {
       TURN: step.TURN,
       MARKS
     };
+  };
+  game.selectswap1target1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "swap" },
+        { text: "to step" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectswap1target },
+        { text: "and step" },
+        { pos: MARKS.selectswapunit },
+        { text: "in the other direction to" },
+        { pos: Object.keys(ARTIFACTS.swap2step)[0] }
+      ]
+    });
   };
 }
 {
@@ -571,6 +728,11 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    return collapseContent({
+      line: [{ text: "Select a unit to" }, { command: "move" }]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -851,6 +1013,74 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    let LINKS: Links = step.LINKS;
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.movetargets).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "a square to" },
+                    { command: "move" },
+                    { text: "the" },
+                    { pos: MARKS.selectunit },
+                    {
+                      unit: [
+                        { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                          (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                        ],
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                        MARKS.selectunit
+                      ]
+                    },
+                    { text: "to" }
+                  ]
+                })
+              : undefined,
+            !!(
+              LINKS.marks["selectswapunit"] &&
+              LINKS.marks["selectswapunit"].pos.length
+            )
+              ? collapseContent({
+                  line: [
+                    { text: "another unit to swap the" },
+                    { pos: MARKS.selectunit },
+                    {
+                      unit: [
+                        { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                          (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                        ],
+                        (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                        MARKS.selectunit
+                      ]
+                    },
+                    { text: "with" }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
     let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
@@ -882,6 +1112,41 @@ type Links = {
       MARKS
     };
   };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return UNITLAYERS.units[MARKS.selectmovetarget] &&
+      !TERRAIN.oppbase[MARKS.selectmovetarget]
+      ? collapseContent({
+          line: [
+            { text: "Select where the enemy" },
+            {
+              unit: [
+                { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                  (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner,
+                MARKS.selectmovetarget
+              ]
+            },
+            { text: "at" },
+            { pos: MARKS.selectmovetarget },
+            { text: "should end up" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "move" },
+            { text: "to go from" },
+            { pos: MARKS.selectunit },
+            { text: "to" },
+            { pos: MARKS.selectmovetarget }
+          ]
+        });
+  };
   game.selectdeportdestination2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -897,6 +1162,22 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectdeportdestination: newMarkPos }
     };
+  };
+  game.selectdeportdestination2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget },
+        { text: "and deport the enemy to" },
+        { pos: MARKS.selectdeportdestination }
+      ]
+    });
   };
   game.selectswapunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -931,6 +1212,19 @@ type Links = {
       TURN: step.TURN,
       MARKS
     };
+  };
+  game.selectswapunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select a neighbouring square for" },
+        { pos: MARKS.selectunit },
+        { text: "to step to. The" },
+        { pos: MARKS.selectswapunit },
+        { text: "unit will step in the opposite direction" }
+      ]
+    });
   };
   game.selectswap1target2 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -969,6 +1263,25 @@ type Links = {
       TURN: step.TURN,
       MARKS
     };
+  };
+  game.selectswap1target2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "swap" },
+        { text: "to step" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectswap1target },
+        { text: "and step" },
+        { pos: MARKS.selectswapunit },
+        { text: "in the other direction to" },
+        { pos: Object.keys(ARTIFACTS.swap2step)[0] }
+      ]
+    });
   };
 }
 export default game;

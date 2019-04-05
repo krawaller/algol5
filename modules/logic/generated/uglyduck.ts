@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 5, width: 5 });
@@ -114,6 +115,47 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(UNITLAYERS.mysoldiers).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "a" },
+                    { unittype: "pawn" },
+                    { text: "to advance" }
+                  ]
+                })
+              : undefined,
+            Object.keys(UNITLAYERS.mykings).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "a" },
+                    { unittype: "king" },
+                    { text: "to retreat" }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
+      ]
+    });
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -240,6 +282,27 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return UNITLAYERS.mykings[MARKS.selectunit]
+      ? collapseContent({
+          line: [
+            { text: "Select a square closer to home to move your" },
+            { unittype: "king" },
+            { text: "to" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Select a square closer to the enemy lines to move your" },
+            { unittype: "pawn" },
+            { text: "to" }
+          ]
+        });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -255,6 +318,58 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to" },
+        UNITLAYERS.mykings[MARKS.selectunit]
+          ? collapseContent({
+              line: [{ text: "retreat your" }, { unittype: "king" }]
+            })
+          : collapseContent({
+              line: [{ text: "advance your" }, { unittype: "pawn" }]
+            }),
+        { text: "from" },
+        { pos: MARKS.selectunit },
+        TERRAIN.opphomerow[MARKS.selectmovetarget]
+          ? collapseContent({
+              line: [
+                { text: "into the opponent base at" },
+                { pos: MARKS.selectmovetarget }
+              ]
+            })
+          : TERRAIN.myhomerow[MARKS.selectmovetarget]
+          ? collapseContent({
+              line: [{ text: "back home to" }, { pos: MARKS.selectmovetarget }]
+            })
+          : collapseContent({
+              line: [{ text: "to" }, { pos: MARKS.selectmovetarget }]
+            }),
+        UNITLAYERS.oppunits[MARKS.selectmovetarget]
+          ? collapseContent({
+              line: [
+                { text: ", killing the enemy" },
+                {
+                  unit: [
+                    { soldiers: "pawn", kings: "king" }[
+                      (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner,
+                    MARKS.selectmovetarget
+                  ]
+                }
+              ]
+            })
+          : undefined
+      ]
+    });
   };
 }
 {
@@ -340,6 +455,47 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(UNITLAYERS.mysoldiers).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "a" },
+                    { unittype: "pawn" },
+                    { text: "to advance" }
+                  ]
+                })
+              : undefined,
+            Object.keys(UNITLAYERS.mykings).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "a" },
+                    { unittype: "king" },
+                    { text: "to retreat" }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -579,6 +735,27 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return UNITLAYERS.mykings[MARKS.selectunit]
+      ? collapseContent({
+          line: [
+            { text: "Select a square closer to home to move your" },
+            { unittype: "king" },
+            { text: "to" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Select a square closer to the enemy lines to move your" },
+            { unittype: "pawn" },
+            { text: "to" }
+          ]
+        });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -594,6 +771,58 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to" },
+        UNITLAYERS.mykings[MARKS.selectunit]
+          ? collapseContent({
+              line: [{ text: "retreat your" }, { unittype: "king" }]
+            })
+          : collapseContent({
+              line: [{ text: "advance your" }, { unittype: "pawn" }]
+            }),
+        { text: "from" },
+        { pos: MARKS.selectunit },
+        TERRAIN.opphomerow[MARKS.selectmovetarget]
+          ? collapseContent({
+              line: [
+                { text: "into the opponent base at" },
+                { pos: MARKS.selectmovetarget }
+              ]
+            })
+          : TERRAIN.myhomerow[MARKS.selectmovetarget]
+          ? collapseContent({
+              line: [{ text: "back home to" }, { pos: MARKS.selectmovetarget }]
+            })
+          : collapseContent({
+              line: [{ text: "to" }, { pos: MARKS.selectmovetarget }]
+            }),
+        UNITLAYERS.oppunits[MARKS.selectmovetarget]
+          ? collapseContent({
+              line: [
+                { text: ", killing the enemy" },
+                {
+                  unit: [
+                    { soldiers: "pawn", kings: "king" }[
+                      (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner,
+                    MARKS.selectmovetarget
+                  ]
+                }
+              ]
+            })
+          : undefined
+      ]
+    });
   };
 }
 export default game;

@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 10, width: 10 });
@@ -72,6 +73,9 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    return { text: "Select which unit to jostle!" };
   };
   game.jostle1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -161,6 +165,39 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+
+    return collapseContent({
+      line: [
+        { text: "This unit neighbours" },
+        collapseContent({
+          line: [
+            { text: Object.keys(ARTIFACTS.initialfriend).length },
+            Object.keys(ARTIFACTS.initialfriend).length === 1
+              ? { text: "friend" }
+              : { text: "friends" }
+          ]
+        }),
+        { text: "and" },
+        collapseContent({
+          line: [
+            { text: Object.keys(ARTIFACTS.initialenemy).length },
+            Object.keys(ARTIFACTS.initialenemy).length === 1
+              ? { text: "enemy" }
+              : { text: "enemies" }
+          ]
+        }),
+        { text: "making the square worth" },
+        {
+          text:
+            Object.keys(ARTIFACTS.initialfriend).length -
+            Object.keys(ARTIFACTS.initialenemy).length
+        },
+        { text: ". Select a higher value square to jostle to" }
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
@@ -203,6 +240,48 @@ type Links = {
       MARKS
     };
   };
+  game.selectmovetarget1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "From" },
+        { pos: MARKS.selectmovetarget },
+        { text: "you would neighbour" },
+        collapseContent({
+          line: [
+            { text: Object.keys(ARTIFACTS.newfriend).length - 1 },
+            Object.keys(ARTIFACTS.newfriend).length - 1 === 1
+              ? { text: "friend" }
+              : { text: "friends" }
+          ]
+        }),
+        { text: "and" },
+        collapseContent({
+          line: [
+            { text: Object.keys(ARTIFACTS.newenemy).length },
+            Object.keys(ARTIFACTS.newenemy).length === 1
+              ? { text: "enemy" }
+              : { text: "enemies" }
+          ]
+        }),
+        { text: "making the square worth" },
+        {
+          text:
+            Object.keys(ARTIFACTS.newfriend).length -
+            1 -
+            Object.keys(ARTIFACTS.newenemy).length
+        },
+        { text: ". Press" },
+        { command: "jostle" },
+        { text: "to move from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
+  };
 }
 {
   const ownerNames = ["neutral", "opp", "my"];
@@ -238,6 +317,9 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    return { text: "Select which unit to jostle!" };
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -612,6 +694,39 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+
+    return collapseContent({
+      line: [
+        { text: "This unit neighbours" },
+        collapseContent({
+          line: [
+            { text: Object.keys(ARTIFACTS.initialfriend).length },
+            Object.keys(ARTIFACTS.initialfriend).length === 1
+              ? { text: "friend" }
+              : { text: "friends" }
+          ]
+        }),
+        { text: "and" },
+        collapseContent({
+          line: [
+            { text: Object.keys(ARTIFACTS.initialenemy).length },
+            Object.keys(ARTIFACTS.initialenemy).length === 1
+              ? { text: "enemy" }
+              : { text: "enemies" }
+          ]
+        }),
+        { text: "making the square worth" },
+        {
+          text:
+            Object.keys(ARTIFACTS.initialfriend).length -
+            Object.keys(ARTIFACTS.initialenemy).length
+        },
+        { text: ". Select a higher value square to jostle to" }
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
@@ -653,6 +768,48 @@ type Links = {
       TURN: step.TURN,
       MARKS
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "From" },
+        { pos: MARKS.selectmovetarget },
+        { text: "you would neighbour" },
+        collapseContent({
+          line: [
+            { text: Object.keys(ARTIFACTS.newfriend).length - 1 },
+            Object.keys(ARTIFACTS.newfriend).length - 1 === 1
+              ? { text: "friend" }
+              : { text: "friends" }
+          ]
+        }),
+        { text: "and" },
+        collapseContent({
+          line: [
+            { text: Object.keys(ARTIFACTS.newenemy).length },
+            Object.keys(ARTIFACTS.newenemy).length === 1
+              ? { text: "enemy" }
+              : { text: "enemies" }
+          ]
+        }),
+        { text: "making the square worth" },
+        {
+          text:
+            Object.keys(ARTIFACTS.newfriend).length -
+            1 -
+            Object.keys(ARTIFACTS.newenemy).length
+        },
+        { text: ". Press" },
+        { command: "jostle" },
+        { text: "to move from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
   };
 }
 export default game;

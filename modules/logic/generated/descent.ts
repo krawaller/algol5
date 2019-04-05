@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 4, width: 4 });
@@ -81,6 +82,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID,
       TURNVARS: {}
     };
+  };
+  game.start1instruction = step => {
+    return { text: "Select a unit to move and dig with" };
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -178,6 +182,9 @@ type Links = {
 
       NEXTSPAWNID
     };
+  };
+  game.move1instruction = step => {
+    return { text: "Now select an empty neighbouring square to dig" };
   };
   game.dig1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -323,6 +330,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit1instruction = step => {
+    return { text: "Select where to move this unit" };
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -342,6 +352,30 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to" },
+        (UNITLAYERS.units[MARKS.selectunit] || {}).group ===
+        (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+          ? { text: "walk" }
+          : UNITLAYERS.rooks[MARKS.selectunit] ||
+            UNITLAYERS.pawns[MARKS.selectmovetarget]
+          ? { text: "descend" }
+          : { text: "climb" },
+        { text: "from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
+  };
   game.selectdigtarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -360,6 +394,40 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectdigtarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return UNITLAYERS.rooks[MARKS.selectdigtarget]
+      ? collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "dig" },
+            { text: "to lower" },
+            { pos: MARKS.selectdigtarget },
+            { text: "from level 3 to level 2" }
+          ]
+        })
+      : UNITLAYERS.knights[MARKS.selectdigtarget]
+      ? collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "dig" },
+            { text: "to lower" },
+            { pos: MARKS.selectdigtarget },
+            { text: "from level 2 to level 1" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "dig" },
+            { text: "to destroy" },
+            { pos: MARKS.selectdigtarget }
+          ]
+        });
   };
 }
 {
@@ -406,6 +474,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID,
       TURNVARS: {}
     };
+  };
+  game.start2instruction = step => {
+    return { text: "Select a unit to move and dig with" };
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -559,6 +630,9 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.move2instruction = step => {
+    return { text: "Now select an empty neighbouring square to dig" };
+  };
   game.dig2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -703,6 +777,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit2instruction = step => {
+    return { text: "Select where to move this unit" };
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -722,6 +799,30 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to" },
+        (UNITLAYERS.units[MARKS.selectunit] || {}).group ===
+        (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+          ? { text: "walk" }
+          : UNITLAYERS.rooks[MARKS.selectunit] ||
+            UNITLAYERS.pawns[MARKS.selectmovetarget]
+          ? { text: "descend" }
+          : { text: "climb" },
+        { text: "from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
+  };
   game.selectdigtarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -740,6 +841,40 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectdigtarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return UNITLAYERS.rooks[MARKS.selectdigtarget]
+      ? collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "dig" },
+            { text: "to lower" },
+            { pos: MARKS.selectdigtarget },
+            { text: "from level 3 to level 2" }
+          ]
+        })
+      : UNITLAYERS.knights[MARKS.selectdigtarget]
+      ? collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "dig" },
+            { text: "to lower" },
+            { pos: MARKS.selectdigtarget },
+            { text: "from level 2 to level 1" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "dig" },
+            { text: "to destroy" },
+            { pos: MARKS.selectdigtarget }
+          ]
+        });
   };
 }
 export default game;

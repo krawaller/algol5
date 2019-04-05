@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 5, width: 5 });
@@ -81,6 +82,13 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start1instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return Object.keys(UNITLAYERS.neutralunits).length === 0
+      ? { text: "Select any square to place the first unit of the game" }
+      : { text: "Select which neutral unit to take over" };
   };
   game.uphill1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -546,6 +554,42 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectdrop1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.uphill).length !== 0
+              ? { command: "uphill" }
+              : undefined,
+            Object.keys(ARTIFACTS.downhill).length !== 0
+              ? { command: "downhill" }
+              : undefined,
+            Object.keys(ARTIFACTS.vertical).length !== 0
+              ? { command: "vertical" }
+              : undefined,
+            Object.keys(ARTIFACTS.horisontal).length !== 0
+              ? { command: "horisontal" }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to give your opponent placing options in that direction" }
+      ]
+    });
+  };
 }
 {
   const ownerNames = ["neutral", "opp", "my"];
@@ -590,6 +634,13 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start2instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return Object.keys(UNITLAYERS.neutralunits).length === 0
+      ? { text: "Select any square to place the first unit of the game" }
+      : { text: "Select which neutral unit to take over" };
   };
   game.newBattle = () => {
     let UNITDATA = {};
@@ -1088,6 +1139,42 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectdrop2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.uphill).length !== 0
+              ? { command: "uphill" }
+              : undefined,
+            Object.keys(ARTIFACTS.downhill).length !== 0
+              ? { command: "downhill" }
+              : undefined,
+            Object.keys(ARTIFACTS.vertical).length !== 0
+              ? { command: "vertical" }
+              : undefined,
+            Object.keys(ARTIFACTS.horisontal).length !== 0
+              ? { command: "horisontal" }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to give your opponent placing options in that direction" }
+      ]
+    });
   };
 }
 export default game;

@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 3, width: 4 });
@@ -85,6 +86,61 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start1instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(UNITLAYERS.units).length !== 12
+              ? { text: "an empty square to deploy to" }
+              : undefined,
+            Object.keys({ ...UNITLAYERS.bishops, ...UNITLAYERS.pawns })
+              .length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "a" },
+                    collapseContent({
+                      line: [
+                        Object.keys(UNITLAYERS.pawns).length !== 0
+                          ? { unittype: "pawn" }
+                          : undefined,
+                        Object.keys(UNITLAYERS.bishops).length !== 0
+                          ? { unittype: "bishop" }
+                          : undefined
+                      ]
+                        .filter(i => !!i)
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " or " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    }),
+                    { text: "to promote" }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
+      ]
+    });
   };
   game.deploy1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -276,6 +332,18 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectdeploytarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "deploy" },
+        { text: "to place a pawn at" },
+        { pos: MARKS.selectdeploytarget }
+      ]
+    });
+  };
   game.selectunit1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -293,6 +361,22 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "promote" },
+        { text: "to turn the" },
+        UNITLAYERS.pawns[MARKS.selectunit]
+          ? { text: "pawn into a bishop" }
+          : { text: "bishop into a king" }
+      ]
+    });
   };
 }
 {
@@ -347,6 +431,61 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start2instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(UNITLAYERS.units).length !== 12
+              ? { text: "an empty square to deploy to" }
+              : undefined,
+            Object.keys({ ...UNITLAYERS.bishops, ...UNITLAYERS.pawns })
+              .length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "a" },
+                    collapseContent({
+                      line: [
+                        Object.keys(UNITLAYERS.pawns).length !== 0
+                          ? { unittype: "pawn" }
+                          : undefined,
+                        Object.keys(UNITLAYERS.bishops).length !== 0
+                          ? { unittype: "bishop" }
+                          : undefined
+                      ]
+                        .filter(i => !!i)
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " or " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    }),
+                    { text: "to promote" }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {};
@@ -576,6 +715,18 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectdeploytarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "deploy" },
+        { text: "to place a pawn at" },
+        { pos: MARKS.selectdeploytarget }
+      ]
+    });
+  };
   game.selectunit2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -593,6 +744,22 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "promote" },
+        { text: "to turn the" },
+        UNITLAYERS.pawns[MARKS.selectunit]
+          ? { text: "pawn into a bishop" }
+          : { text: "bishop into a king" }
+      ]
+    });
   };
 }
 export default game;

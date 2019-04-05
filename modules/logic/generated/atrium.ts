@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 5, width: 5 });
@@ -70,6 +71,17 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select a" },
+        { unittype: "king" },
+        { text: "or" },
+        { unittype: "queen" },
+        { text: "to move" }
+      ]
+    });
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -187,6 +199,28 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select an orthogonal empty neighbour to move the" },
+        { pos: MARKS.selectunit },
+        {
+          unit: [
+            { kings: "king", queens: "queen" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to" }
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -202,6 +236,31 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to walk the" },
+        { pos: MARKS.selectunit },
+        {
+          unit: [
+            { kings: "king", queens: "queen" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
   };
 }
 {
@@ -242,6 +301,17 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select a" },
+        { unittype: "king" },
+        { text: "or" },
+        { unittype: "queen" },
+        { text: "to move" }
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -418,6 +488,28 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select an orthogonal empty neighbour to move the" },
+        { pos: MARKS.selectunit },
+        {
+          unit: [
+            { kings: "king", queens: "queen" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to" }
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -433,6 +525,31 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to walk the" },
+        { pos: MARKS.selectunit },
+        {
+          unit: [
+            { kings: "king", queens: "queen" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
   };
 }
 export default game;

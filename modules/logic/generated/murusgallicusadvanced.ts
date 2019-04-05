@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 7, width: 8 });
@@ -174,6 +175,36 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start1instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select a" },
+        collapseContent({
+          line: [
+            Object.keys(UNITLAYERS.mytowers).length !== 0
+              ? { unittype: "rook" }
+              : undefined,
+            Object.keys(UNITLAYERS.mycatapults).length !== 0
+              ? { unittype: "queen" }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to act with" }
+      ]
+    });
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -640,6 +671,45 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selecttower1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.movetargets).length !== 0
+              ? { text: "a move target" }
+              : undefined,
+            Object.keys(ARTIFACTS.killtargets).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "an enemy" },
+                    { unittype: "pawn" },
+                    { text: "to kill" }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "for the" },
+        { pos: MARKS.selecttower },
+        { unittype: "rook" }
+      ]
+    });
+  };
   game.selectmove1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       firetargets: step.ARTIFACTS.firetargets,
@@ -692,6 +762,21 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectmove1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to overturn your" },
+        { pos: MARKS.selecttower },
+        { unittype: "rook" },
+        { text: "towards" },
+        { pos: MARKS.selectmove }
+      ]
+    });
+  };
   game.selectkill1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
     let MARKS = { ...step.MARKS, selectkill: newMarkPos };
@@ -714,6 +799,49 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectkill1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "kill" },
+        { text: "to make a section of the" },
+        { pos: MARKS.selecttower },
+        { unittype: "rook" },
+        UNITLAYERS.walls[MARKS.selectkill]
+          ? collapseContent({
+              line: [
+                { text: "crush the enemy" },
+                { unittype: "pawn" },
+                { text: "at" },
+                { pos: MARKS.selectkill }
+              ]
+            })
+          : collapseContent({
+              line: [
+                { text: "reduce the enemy" },
+                { unittype: "queen" },
+                { text: "at" },
+                { pos: MARKS.selectkill },
+                { text: "to a" },
+                { unittype: "rook" },
+                { text: ", or" },
+                { command: "sacrifice" },
+                { text: "your" },
+                { unittype: "rook" },
+                { text: "entirely to turn the" },
+                { unittype: "queen" },
+                { text: "to a" },
+                { unittype: "pawn" },
+                { text: "!" }
+              ]
+            })
+      ]
+    });
   };
   game.selectcatapult1 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -760,6 +888,17 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectcatapult1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to fire the top section of your" },
+        { pos: MARKS.selectcatapult },
+        { unittype: "queen" }
+      ]
+    });
+  };
   game.selectfire1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -777,6 +916,60 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectfire1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "fire" },
+        { text: "to shoot a section of the" },
+        { pos: MARKS.selectcatapult },
+        { unittype: "queen" },
+        UNITLAYERS.walls[MARKS.selectfire]
+          ? collapseContent({
+              line: [
+                { text: "and destroy the enemy" },
+                { unittype: "pawn" },
+                { text: "at" },
+                { pos: MARKS.selectfire }
+              ]
+            })
+          : UNITLAYERS.units[MARKS.selectfire]
+          ? collapseContent({
+              line: [
+                { text: ", reducing the enemy" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectfire] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectfire] || {}).owner,
+                    MARKS.selectfire
+                  ]
+                },
+                { text: "at" },
+                { pos: MARKS.selectfire },
+                { text: "to a" },
+                UNITLAYERS.catapults[MARKS.selectfire]
+                  ? { unittype: "rook" }
+                  : { unittype: "pawn" }
+              ]
+            })
+          : collapseContent({
+              line: [
+                { text: "at" },
+                { pos: MARKS.selectfire },
+                { text: ", gaining a" },
+                { unittype: "pawn" },
+                { text: "there" }
+              ]
+            })
+      ]
+    });
   };
 }
 {
@@ -909,6 +1102,36 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start2instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select a" },
+        collapseContent({
+          line: [
+            Object.keys(UNITLAYERS.mytowers).length !== 0
+              ? { unittype: "rook" }
+              : undefined,
+            Object.keys(UNITLAYERS.mycatapults).length !== 0
+              ? { unittype: "queen" }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to act with" }
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -1472,6 +1695,45 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selecttower2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.movetargets).length !== 0
+              ? { text: "a move target" }
+              : undefined,
+            Object.keys(ARTIFACTS.killtargets).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "an enemy" },
+                    { unittype: "pawn" },
+                    { text: "to kill" }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "for the" },
+        { pos: MARKS.selecttower },
+        { unittype: "rook" }
+      ]
+    });
+  };
   game.selectmove2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       firetargets: step.ARTIFACTS.firetargets,
@@ -1524,6 +1786,21 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectmove2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to overturn your" },
+        { pos: MARKS.selecttower },
+        { unittype: "rook" },
+        { text: "towards" },
+        { pos: MARKS.selectmove }
+      ]
+    });
+  };
   game.selectkill2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
     let MARKS = { ...step.MARKS, selectkill: newMarkPos };
@@ -1546,6 +1823,49 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectkill2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "kill" },
+        { text: "to make a section of the" },
+        { pos: MARKS.selecttower },
+        { unittype: "rook" },
+        UNITLAYERS.walls[MARKS.selectkill]
+          ? collapseContent({
+              line: [
+                { text: "crush the enemy" },
+                { unittype: "pawn" },
+                { text: "at" },
+                { pos: MARKS.selectkill }
+              ]
+            })
+          : collapseContent({
+              line: [
+                { text: "reduce the enemy" },
+                { unittype: "queen" },
+                { text: "at" },
+                { pos: MARKS.selectkill },
+                { text: "to a" },
+                { unittype: "rook" },
+                { text: ", or" },
+                { command: "sacrifice" },
+                { text: "your" },
+                { unittype: "rook" },
+                { text: "entirely to turn the" },
+                { unittype: "queen" },
+                { text: "to a" },
+                { unittype: "pawn" },
+                { text: "!" }
+              ]
+            })
+      ]
+    });
   };
   game.selectcatapult2 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -1592,6 +1912,17 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectcatapult2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to fire the top section of your" },
+        { pos: MARKS.selectcatapult },
+        { unittype: "queen" }
+      ]
+    });
+  };
   game.selectfire2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -1609,6 +1940,60 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectfire2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "fire" },
+        { text: "to shoot a section of the" },
+        { pos: MARKS.selectcatapult },
+        { unittype: "queen" },
+        UNITLAYERS.walls[MARKS.selectfire]
+          ? collapseContent({
+              line: [
+                { text: "and destroy the enemy" },
+                { unittype: "pawn" },
+                { text: "at" },
+                { pos: MARKS.selectfire }
+              ]
+            })
+          : UNITLAYERS.units[MARKS.selectfire]
+          ? collapseContent({
+              line: [
+                { text: ", reducing the enemy" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectfire] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectfire] || {}).owner,
+                    MARKS.selectfire
+                  ]
+                },
+                { text: "at" },
+                { pos: MARKS.selectfire },
+                { text: "to a" },
+                UNITLAYERS.catapults[MARKS.selectfire]
+                  ? { unittype: "rook" }
+                  : { unittype: "pawn" }
+              ]
+            })
+          : collapseContent({
+              line: [
+                { text: "at" },
+                { pos: MARKS.selectfire },
+                { text: ", gaining a" },
+                { unittype: "pawn" },
+                { text: "there" }
+              ]
+            })
+      ]
+    });
   };
 }
 export default game;

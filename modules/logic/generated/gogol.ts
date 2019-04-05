@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
@@ -290,6 +291,15 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.start1instruction = step => {
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? { text: "Select a unit to move" }
+      : collapseContent({
+          line: [{ text: "Select where to deploy your" }, { unittype: "king" }]
+        });
+  };
   game.deploy1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let UNITLAYERS = step.UNITLAYERS;
@@ -563,6 +573,15 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectkingdeploy1instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "deploy" },
+        { text: "to place your king here" }
+      ]
+    });
+  };
   game.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       nokings: step.ARTIFACTS.nokings,
@@ -663,6 +682,70 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return UNITLAYERS.kings[MARKS.selectunit]
+      ? collapseContent({
+          line: [
+            { text: "Select where to" },
+            collapseContent({
+              line: [
+                Object.keys(ARTIFACTS.kingwalk).length !== 0
+                  ? { text: "move" }
+                  : undefined,
+                Object.keys(ARTIFACTS.jumptargets).length !== 0
+                  ? { text: "jump" }
+                  : undefined
+              ]
+                .filter(i => !!i)
+                .reduce((mem, i, n, list) => {
+                  mem.push(i);
+                  if (n === list.length - 2) {
+                    mem.push({ text: " or " });
+                  } else if (n < list.length - 2) {
+                    mem.push({ text: ", " });
+                  }
+                  return mem;
+                }, [])
+            }),
+            { text: "your" },
+            { unittype: "king" },
+            Object.keys(
+              Object.entries(
+                Object.keys(ARTIFACTS.nokings)
+                  .concat(
+                    Object.keys({
+                      ...ARTIFACTS.kingwalk,
+                      ...ARTIFACTS.jumptargets
+                    })
+                  )
+                  .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              )
+                .filter(([key, n]) => n === 2)
+                .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+            ).length !== 0
+              ? { text: "without making a forbidden configuration" }
+              : undefined
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Select where to move" },
+            Object.keys(ARTIFACTS.jumptargets).length !== 0
+              ? { text: "or jump" }
+              : undefined,
+            { text: "your" },
+            { unittype: "pawn" },
+            Object.keys(ARTIFACTS.nosoldiers).length !== 0
+              ? { text: "without making a forbidden configuration" }
+              : undefined
+          ]
+        });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -680,6 +763,20 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
   };
   game.selectjumptarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -720,6 +817,35 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectjumptarget1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "jump" },
+        { text: "to jump from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectjumptarget },
+        { text: "and kill the" },
+        {
+          unit: [
+            { kings: "king", soldiers: "pawn" }[
+              (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).group
+            ],
+            (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).owner,
+            Object.keys(ARTIFACTS.splashed)[0]
+          ]
+        },
+        { text: "at" },
+        { pos: Object.keys(ARTIFACTS.splashed)[0] }
+      ]
+    });
   };
 }
 {
@@ -972,6 +1098,15 @@ type Links = {
       TURN,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start2instruction = step => {
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? { text: "Select a unit to move" }
+      : collapseContent({
+          line: [{ text: "Select where to deploy your" }, { unittype: "king" }]
+        });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -1409,6 +1544,15 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectkingdeploy2instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "deploy" },
+        { text: "to place your king here" }
+      ]
+    });
+  };
   game.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       nokings: step.ARTIFACTS.nokings,
@@ -1509,6 +1653,70 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return UNITLAYERS.kings[MARKS.selectunit]
+      ? collapseContent({
+          line: [
+            { text: "Select where to" },
+            collapseContent({
+              line: [
+                Object.keys(ARTIFACTS.kingwalk).length !== 0
+                  ? { text: "move" }
+                  : undefined,
+                Object.keys(ARTIFACTS.jumptargets).length !== 0
+                  ? { text: "jump" }
+                  : undefined
+              ]
+                .filter(i => !!i)
+                .reduce((mem, i, n, list) => {
+                  mem.push(i);
+                  if (n === list.length - 2) {
+                    mem.push({ text: " or " });
+                  } else if (n < list.length - 2) {
+                    mem.push({ text: ", " });
+                  }
+                  return mem;
+                }, [])
+            }),
+            { text: "your" },
+            { unittype: "king" },
+            Object.keys(
+              Object.entries(
+                Object.keys(ARTIFACTS.nokings)
+                  .concat(
+                    Object.keys({
+                      ...ARTIFACTS.kingwalk,
+                      ...ARTIFACTS.jumptargets
+                    })
+                  )
+                  .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+              )
+                .filter(([key, n]) => n === 2)
+                .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+            ).length !== 0
+              ? { text: "without making a forbidden configuration" }
+              : undefined
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Select where to move" },
+            Object.keys(ARTIFACTS.jumptargets).length !== 0
+              ? { text: "or jump" }
+              : undefined,
+            { text: "your" },
+            { unittype: "pawn" },
+            Object.keys(ARTIFACTS.nosoldiers).length !== 0
+              ? { text: "without making a forbidden configuration" }
+              : undefined
+          ]
+        });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -1526,6 +1734,20 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
   };
   game.selectjumptarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
@@ -1566,6 +1788,35 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectjumptarget2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "jump" },
+        { text: "to jump from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectjumptarget },
+        { text: "and kill the" },
+        {
+          unit: [
+            { kings: "king", soldiers: "pawn" }[
+              (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).group
+            ],
+            (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).owner,
+            Object.keys(ARTIFACTS.splashed)[0]
+          ]
+        },
+        { text: "at" },
+        { pos: Object.keys(ARTIFACTS.splashed)[0] }
+      ]
+    });
   };
 }
 export default game;

@@ -9,10 +9,8 @@ import {
 const noSpacesBefore = /[,!\.? ]/;
 
 // included in parcel
-export function collapseContent(
-  content: AlgolContentAnon
-): AlgolContentAnon | "undefined" {
-  if (content === undefined) return "undefined";
+export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
+  if (content === undefined) return undefined;
   if (isAlgolContentLine(content)) {
     let items = content.line;
     let idx;

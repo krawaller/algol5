@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
@@ -139,6 +140,11 @@ type Links = {
 
       BATTLEVARS: step.BATTLEVARS
     };
+  };
+  game.start1instruction = step => {
+    return collapseContent({
+      line: [{ text: "Select a" }, { unittype: "rook" }, { text: "to move" }]
+    });
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -291,6 +297,17 @@ type Links = {
       BATTLEVARS
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move your" },
+        { pos: MARKS.selectunit },
+        { unittype: "rook" }
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
@@ -352,6 +369,30 @@ type Links = {
 
       BATTLEVARS: step.BATTLEVARS
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to move your" },
+        { pos: MARKS.selectunit },
+        { unittype: "rook" },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget },
+        Object.keys(ARTIFACTS.squished).length !== 0
+          ? collapseContent({
+              line: [
+                { text: "and squash the enemy at" },
+                { pos: Object.keys(ARTIFACTS.squished)[0] }
+              ]
+            })
+          : undefined
+      ]
+    });
   };
 }
 {
@@ -462,6 +503,11 @@ type Links = {
 
       BATTLEVARS: step.BATTLEVARS
     };
+  };
+  game.start2instruction = step => {
+    return collapseContent({
+      line: [{ text: "Select a" }, { unittype: "rook" }, { text: "to move" }]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -900,6 +946,17 @@ type Links = {
       BATTLEVARS
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move your" },
+        { pos: MARKS.selectunit },
+        { unittype: "rook" }
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
@@ -961,6 +1018,30 @@ type Links = {
 
       BATTLEVARS: step.BATTLEVARS
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to move your" },
+        { pos: MARKS.selectunit },
+        { unittype: "rook" },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget },
+        Object.keys(ARTIFACTS.squished).length !== 0
+          ? collapseContent({
+              line: [
+                { text: "and squash the enemy at" },
+                { pos: Object.keys(ARTIFACTS.squished)[0] }
+              ]
+            })
+          : undefined
+      ]
+    });
   };
 }
 export default game;

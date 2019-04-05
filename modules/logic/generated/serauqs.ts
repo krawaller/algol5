@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 4, width: 4 });
@@ -144,6 +145,29 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? collapseContent({
+          line: [
+            { text: "Select which" },
+            { unittype: "pawn" },
+            { text: "or" },
+            { unittype: "king" },
+            { text: "to" },
+            { command: "move" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Select which" },
+            { unittype: "pawn" },
+            { text: "to" },
+            { command: "promote" }
+          ]
+        });
   };
   game.promote1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -396,6 +420,44 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? collapseContent({
+          line: [
+            { text: "Select where to" },
+            { command: "move" },
+            { text: "the" },
+            {
+              unit: [
+                { soldiers: "pawn", wild: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                MARKS.selectunit
+              ]
+            },
+            UNITLAYERS.wild[MARKS.selectunit]
+              ? { text: "(remeber that it matches for your opponent too!)" }
+              : undefined
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "promote" },
+            { text: "to turn this" },
+            { unittype: "pawn" },
+            { text: "to a" },
+            { unittype: "king" },
+            { text: ", making it match for your opponent too" }
+          ]
+        });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -411,6 +473,20 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
   };
 }
 {
@@ -525,6 +601,29 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? collapseContent({
+          line: [
+            { text: "Select which" },
+            { unittype: "pawn" },
+            { text: "or" },
+            { unittype: "king" },
+            { text: "to" },
+            { command: "move" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Select which" },
+            { unittype: "pawn" },
+            { text: "to" },
+            { command: "promote" }
+          ]
+        });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -867,6 +966,44 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+    let TURN = step.TURN;
+
+    return TURN > 2
+      ? collapseContent({
+          line: [
+            { text: "Select where to" },
+            { command: "move" },
+            { text: "the" },
+            {
+              unit: [
+                { soldiers: "pawn", wild: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                MARKS.selectunit
+              ]
+            },
+            UNITLAYERS.wild[MARKS.selectunit]
+              ? { text: "(remeber that it matches for your opponent too!)" }
+              : undefined
+          ]
+        })
+      : collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "promote" },
+            { text: "to turn this" },
+            { unittype: "pawn" },
+            { text: "to a" },
+            { unittype: "king" },
+            { text: ", making it match for your opponent too" }
+          ]
+        });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -882,6 +1019,20 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
   };
 }
 export default game;

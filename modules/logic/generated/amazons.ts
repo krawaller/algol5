@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 10, width: 10 });
@@ -78,6 +79,16 @@ type Links = {
       TURNVARS: {}
     };
   };
+  game.start1instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        { text: "a" },
+        { unittype: "queen" },
+        { text: "to move and fire with" }
+      ]
+    });
+  };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -147,6 +158,9 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.move1instruction = step => {
+    return { text: "Now select where to fire at" };
   };
   game.fire1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -239,6 +253,17 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move the" },
+        { pos: MARKS.selectunit },
+        { unittype: "queen" }
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -258,6 +283,20 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
+  };
   game.selectfiretarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -276,6 +315,18 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectfiretarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "fire" },
+        { text: "to destroy the square at" },
+        { pos: MARKS.selectfiretarget }
+      ]
+    });
   };
 }
 {
@@ -318,6 +369,16 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID,
       TURNVARS: {}
     };
+  };
+  game.start2instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select" },
+        { text: "a" },
+        { unittype: "queen" },
+        { text: "to move and fire with" }
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -446,6 +507,9 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.move2instruction = step => {
+    return { text: "Now select where to fire at" };
+  };
   game.fire2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let UNITLAYERS = step.UNITLAYERS;
@@ -537,6 +601,17 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move the" },
+        { pos: MARKS.selectunit },
+        { unittype: "queen" }
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -556,6 +631,20 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go from" },
+        { pos: MARKS.selectunit },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
+      ]
+    });
+  };
   game.selectfiretarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -574,6 +663,18 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectfiretarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "fire" },
+        { text: "to destroy the square at" },
+        { pos: MARKS.selectfiretarget }
+      ]
+    });
   };
 }
 export default game;

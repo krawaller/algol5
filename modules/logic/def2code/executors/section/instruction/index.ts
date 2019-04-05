@@ -7,7 +7,9 @@ export function executeInstructionSection(
   player: 1 | 2,
   action: string
 ): string {
-  const instrDef = gameDef.instructions[action];
+  const instrDef =
+    gameDef.instructions[action === "start" ? "startTurn" : action];
+
   const code = executeInstruction(gameDef, player, action, instrDef);
   const usage = codeUsage(code);
 
@@ -22,7 +24,7 @@ export function executeInstructionSection(
     ${usage.UNITLAYERS ? "let UNITLAYERS = step.UNITLAYERS; " : ""}
     ${usage.TURN ? "let TURN = step.TURN; " : ""}
     ${usage.LINKS ? "let LINKS = step.LINKS; " : ""}
-    return collapseContent(${code});
+    return ${code};
   `;
 
   return ret;

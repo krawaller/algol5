@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 4, width: 4 });
@@ -66,6 +67,15 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start1instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select which" },
+        { unittype: "pawn" },
+        { text: "to move" }
+      ]
+    });
   };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -166,6 +176,17 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move the" },
+        { pos: MARKS.selectunit },
+        { unittype: "pawn" }
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       victims: { ...step.ARTIFACTS.victims },
@@ -195,6 +216,41 @@ type Links = {
       TURN: step.TURN,
       MARKS
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to move the" },
+        { pos: MARKS.selectunit },
+        { unittype: "pawn" },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget },
+        Object.keys(ARTIFACTS.victims).length !== 0
+          ? collapseContent({
+              line: [
+                { text: "and take over" },
+                collapseContent({
+                  line: [
+                    { text: Object.keys(ARTIFACTS.victims).length },
+                    Object.keys(ARTIFACTS.victims).length === 1
+                      ? collapseContent({
+                          line: [{ text: "enemy" }, { unittype: "pawn" }]
+                        })
+                      : collapseContent({
+                          line: [{ text: "enemy" }, { text: "pawns" }]
+                        })
+                  ]
+                })
+              ]
+            })
+          : undefined
+      ]
+    });
   };
 }
 {
@@ -231,6 +287,15 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select which" },
+        { unittype: "pawn" },
+        { text: "to move" }
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -417,6 +482,17 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move the" },
+        { pos: MARKS.selectunit },
+        { unittype: "pawn" }
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       victims: { ...step.ARTIFACTS.victims },
@@ -446,6 +522,41 @@ type Links = {
       TURN: step.TURN,
       MARKS
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to move the" },
+        { pos: MARKS.selectunit },
+        { unittype: "pawn" },
+        { text: "to" },
+        { pos: MARKS.selectmovetarget },
+        Object.keys(ARTIFACTS.victims).length !== 0
+          ? collapseContent({
+              line: [
+                { text: "and take over" },
+                collapseContent({
+                  line: [
+                    { text: Object.keys(ARTIFACTS.victims).length },
+                    Object.keys(ARTIFACTS.victims).length === 1
+                      ? collapseContent({
+                          line: [{ text: "enemy" }, { unittype: "pawn" }]
+                        })
+                      : collapseContent({
+                          line: [{ text: "enemy" }, { text: "pawns" }]
+                        })
+                  ]
+                })
+              ]
+            })
+          : undefined
+      ]
+    });
   };
 }
 export default game;

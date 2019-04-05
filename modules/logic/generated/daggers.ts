@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
@@ -160,6 +161,17 @@ type Links = {
       TURN: step.TURN + 1
     };
   };
+  game.start1instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select a" },
+        { unittype: "bishop" },
+        { text: "or" },
+        { unittype: "king" },
+        { text: "to move" }
+      ]
+    });
+  };
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let UNITLAYERS = step.UNITLAYERS;
@@ -301,6 +313,27 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move the" },
+        { pos: MARKS.selectunit },
+        {
+          unit: [
+            { daggers: "bishop", crowns: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            MARKS.selectunit
+          ]
+        }
+      ]
+    });
+  };
   game.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -316,6 +349,46 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget1instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go" },
+        BOARD.board[MARKS.selectmovetarget].y > BOARD.board[MARKS.selectunit].y
+          ? { text: "uphill" }
+          : BOARD.board[MARKS.selectunit].y >
+            BOARD.board[MARKS.selectmovetarget].y
+          ? { text: "downhill" }
+          : undefined,
+        { text: "from" },
+        { pos: MARKS.selectunit },
+        UNITLAYERS.units[MARKS.selectmovetarget]
+          ? collapseContent({
+              line: [
+                { text: "and kill the enemy" },
+                {
+                  unit: [
+                    { daggers: "bishop", crowns: "king" }[
+                      (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner,
+                    MARKS.selectmovetarget
+                  ]
+                },
+                { pos: MARKS.selectmovetarget }
+              ]
+            })
+          : collapseContent({
+              line: [{ text: "to" }, { pos: MARKS.selectmovetarget }]
+            })
+      ]
+    });
   };
 }
 {
@@ -446,6 +519,17 @@ type Links = {
       MARKS: {},
       TURN: step.TURN + 1
     };
+  };
+  game.start2instruction = step => {
+    return collapseContent({
+      line: [
+        { text: "Select a" },
+        { unittype: "bishop" },
+        { text: "or" },
+        { unittype: "king" },
+        { text: "to move" }
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -686,6 +770,27 @@ type Links = {
       MARKS
     };
   };
+  game.selectunit2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to move the" },
+        { pos: MARKS.selectunit },
+        {
+          unit: [
+            { daggers: "bishop", crowns: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            MARKS.selectunit
+          ]
+        }
+      ]
+    });
+  };
   game.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -701,6 +806,46 @@ type Links = {
       TURN: step.TURN,
       MARKS: { ...step.MARKS, selectmovetarget: newMarkPos }
     };
+  };
+  game.selectmovetarget2instruction = step => {
+    let MARKS = step.MARKS;
+
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "move" },
+        { text: "to go" },
+        BOARD.board[MARKS.selectmovetarget].y > BOARD.board[MARKS.selectunit].y
+          ? { text: "uphill" }
+          : BOARD.board[MARKS.selectunit].y >
+            BOARD.board[MARKS.selectmovetarget].y
+          ? { text: "downhill" }
+          : undefined,
+        { text: "from" },
+        { pos: MARKS.selectunit },
+        UNITLAYERS.units[MARKS.selectmovetarget]
+          ? collapseContent({
+              line: [
+                { text: "and kill the enemy" },
+                {
+                  unit: [
+                    { daggers: "bishop", crowns: "king" }[
+                      (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner,
+                    MARKS.selectmovetarget
+                  ]
+                },
+                { pos: MARKS.selectmovetarget }
+              ]
+            })
+          : collapseContent({
+              line: [{ text: "to" }, { pos: MARKS.selectmovetarget }]
+            })
+      ]
+    });
   };
 }
 export default game;

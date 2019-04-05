@@ -17,4 +17,5 @@ export type AlgolContent<Cmnd, Pos> =
   | AlgolContentUnit<Pos>
   | AlgolContentUnitType
   | AlgolContentText
-  | AlgolContentLine<Cmnd, Pos>;
+  | AlgolContentLine<Cmnd, Pos>
+  | undefined;

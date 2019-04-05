@@ -3,7 +3,8 @@ import {
   boardConnections,
   makeRelativeDirs,
   deduceInitialUnitData,
-  boardLayers
+  boardLayers,
+  collapseContent
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 4, width: 4 });
@@ -184,6 +185,26 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start1instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to shove in" },
+        Object.keys(UNITLAYERS.myunits).length === 7
+          ? { text: "your last off-board unit" }
+          : Object.keys(UNITLAYERS.myunits).length === 8
+          ? { text: "a neutral unit" }
+          : collapseContent({
+              line: [
+                { text: "one of your" },
+                { text: 8 - Object.keys(UNITLAYERS.myunits).length },
+                { text: "remaining off-board units" }
+              ]
+            })
+      ]
+    });
   };
   game.north1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -713,6 +734,46 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.selectpushpoint1instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.spawnsouth).length !== 0
+              ? { command: "south" }
+              : undefined,
+            Object.keys(ARTIFACTS.spawnnorth).length !== 0
+              ? { command: "north" }
+              : undefined,
+            Object.keys(ARTIFACTS.spawnwest).length !== 0
+              ? { command: "west" }
+              : undefined,
+            Object.keys(ARTIFACTS.spawneast).length !== 0
+              ? { command: "east" }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        {
+          text: "to shove in that direction and make room for the new unit at"
+        },
+        { pos: MARKS.selectpushpoint }
+      ]
+    });
+  };
 }
 {
   const ownerNames = ["neutral", "opp", "my"];
@@ -748,6 +809,26 @@ type Links = {
       TURN: step.TURN + 1,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.start2instruction = step => {
+    let UNITLAYERS = step.UNITLAYERS;
+
+    return collapseContent({
+      line: [
+        { text: "Select where to shove in" },
+        Object.keys(UNITLAYERS.myunits).length === 7
+          ? { text: "your last off-board unit" }
+          : Object.keys(UNITLAYERS.myunits).length === 8
+          ? { text: "a neutral unit" }
+          : collapseContent({
+              line: [
+                { text: "one of your" },
+                { text: 8 - Object.keys(UNITLAYERS.myunits).length },
+                { text: "remaining off-board units" }
+              ]
+            })
+      ]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = {
@@ -1435,6 +1516,46 @@ type Links = {
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
+  };
+  game.selectpushpoint2instruction = step => {
+    let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.spawnsouth).length !== 0
+              ? { command: "south" }
+              : undefined,
+            Object.keys(ARTIFACTS.spawnnorth).length !== 0
+              ? { command: "north" }
+              : undefined,
+            Object.keys(ARTIFACTS.spawnwest).length !== 0
+              ? { command: "west" }
+              : undefined,
+            Object.keys(ARTIFACTS.spawneast).length !== 0
+              ? { command: "east" }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        {
+          text: "to shove in that direction and make room for the new unit at"
+        },
+        { pos: MARKS.selectpushpoint }
+      ]
+    });
   };
 }
 export default game;

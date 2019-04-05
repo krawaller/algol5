@@ -56,24 +56,30 @@ export function usesSpawn(search: FullDefAnon | any): boolean {
 }
 
 type Deed = "mutates" | "reads";
+type Vars =
+  | "MARKS"
+  | "TURNVARS"
+  | "BATTLEVARS"
+  | "UNITDATA"
+  | "UNITLAYERS"
+  | "ARTIFACTS"
+  | "TURN"
+  | "NEXTSPAWNID"
+  | "LINKS";
 
-export function orderUsage(
-  gameDef: FullDefAnon,
-  player: 1 | 2,
-  action: string,
-  vars: string[] = [
-    "MARKS",
-    "TURNVARS",
-    "BATTLEVARS",
-    "UNITDATA",
-    "UNITLAYERS",
-    "ARTIFACTS",
-    "TURN",
-    "NEXTSPAWNID"
-  ]
-): { [v: string]: Deed } {
-  const code = executeOrderSection(gameDef, player, action);
+const vars: Vars[] = [
+  "MARKS",
+  "TURNVARS",
+  "BATTLEVARS",
+  "UNITDATA",
+  "UNITLAYERS",
+  "ARTIFACTS",
+  "TURN",
+  "NEXTSPAWNID",
+  "LINKS"
+];
 
+export function codeUsage(code): { [v in Vars]: Deed } {
   return vars.reduce(
     (mem, v) => {
       if (!code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^A-Za-z_$0-9]`))) {
@@ -98,6 +104,16 @@ export function orderUsage(
       }
       return mem;
     },
-    {} as { [v: string]: Deed }
+    {} as { [v in Vars]: Deed }
   );
+}
+
+export function orderUsage(
+  gameDef: FullDefAnon,
+  player: 1 | 2,
+  action: string
+): { [v: string]: Deed } {
+  const code = executeOrderSection(gameDef, player, action);
+
+  return codeUsage(code);
 }

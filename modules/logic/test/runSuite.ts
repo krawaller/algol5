@@ -60,13 +60,9 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                     ""
                   );
                 pre += `
-                    const {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers} = require('${path.join(
+                    const {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, collapseContent} = require('${path.join(
                       __dirname,
                       "../../common"
-                    )}');
-                    const {collapseContent} = require('${path.join(
-                      __dirname,
-                      "../def2code/executors"
                     )}');`;
 
                 if (!suiteTest.naked) {

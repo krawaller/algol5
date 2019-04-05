@@ -1,2 +1,1 @@
-export * from "./collapseLine";
-export * from "./mergeStrings";
+export * from "./collapseContent";

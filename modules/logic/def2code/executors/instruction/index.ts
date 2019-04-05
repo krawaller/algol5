@@ -1,5 +1,3 @@
-export * from "./instruction.helpers";
-
 import {
   FullDefAnon,
   AlgolInstrAnon,

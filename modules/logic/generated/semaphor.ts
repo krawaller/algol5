@@ -4,7 +4,8 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
-  collapseContent
+  collapseContent,
+  defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 3, width: 4 });
@@ -228,6 +229,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.deploy1instruction = () => defaultInstruction(1);
   game.promote1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -314,6 +316,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.promote1instruction = () => defaultInstruction(1);
   game.selectdeploytarget1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -611,6 +614,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.deploy2instruction = () => defaultInstruction(2);
   game.promote2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -697,6 +701,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.promote2instruction = () => defaultInstruction(2);
   game.selectdeploytarget2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 

@@ -4,7 +4,8 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
-  collapseContent
+  collapseContent,
+  defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
@@ -167,7 +168,7 @@ type Links = {
 
     return Object.keys(UNITLAYERS.myunits).length === 1
       ? { text: "Now select where to deploy your second and last initial unit" }
-      : undefined;
+      : defaultInstruction(1);
   };
   game.expand1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -252,6 +253,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.expand1instruction = () => defaultInstruction(1);
   game.selectdeploy1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -633,7 +635,7 @@ type Links = {
 
     return Object.keys(UNITLAYERS.myunits).length === 1
       ? { text: "Now select where to deploy your second and last initial unit" }
-      : undefined;
+      : defaultInstruction(2);
   };
   game.expand2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
@@ -718,6 +720,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.expand2instruction = () => defaultInstruction(2);
   game.selectdeploy2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 

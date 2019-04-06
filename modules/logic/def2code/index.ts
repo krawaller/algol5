@@ -4,7 +4,7 @@ import { executeSection } from "./executors/section";
 import { FullDefAnon } from "../../types";
 
 export function compileGameToCode(gameDef: FullDefAnon) {
-  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, collapseContent} from '${path.join(
+  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, collapseContent, defaultInstruction} from '${path.join(
     __dirname,
     "../../common"
   )}';
@@ -65,6 +65,9 @@ export function compileGameToCode(gameDef: FullDefAnon) {
         ret += `game.${cmndName + player}instruction = step => {
           ${executeSection(gameDef, player, cmndName, "instruction")}
         }; `;
+      } else {
+        ret += `game.${cmndName +
+          player}instruction = () => defaultInstruction(${player}); `;
       }
     });
 

@@ -4,7 +4,8 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
-  collapseContent
+  collapseContent,
+  defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 4, width: 4 });
@@ -310,6 +311,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.north1instruction = () => defaultInstruction(1);
   game.south1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -414,6 +416,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.south1instruction = () => defaultInstruction(1);
   game.east1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -518,6 +521,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.east1instruction = () => defaultInstruction(1);
   game.west1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -622,6 +626,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.west1instruction = () => defaultInstruction(1);
   game.selectpushpoint1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       targetedgepoints: { ...step.ARTIFACTS.targetedgepoints },
@@ -1093,6 +1098,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.north2instruction = () => defaultInstruction(2);
   game.south2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -1197,6 +1203,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.south2instruction = () => defaultInstruction(2);
   game.east2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -1301,6 +1308,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.east2instruction = () => defaultInstruction(2);
   game.west2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -1405,6 +1413,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.west2instruction = () => defaultInstruction(2);
   game.selectpushpoint2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       targetedgepoints: { ...step.ARTIFACTS.targetedgepoints },

@@ -4,7 +4,8 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
-  collapseContent
+  collapseContent,
+  defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
@@ -247,6 +248,7 @@ type Links = {
       BATTLEVARS
     };
   };
+  game.move1instruction = () => defaultInstruction(1);
   game.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: { ...step.ARTIFACTS.movetargets },
@@ -896,6 +898,7 @@ type Links = {
       BATTLEVARS
     };
   };
+  game.move2instruction = () => defaultInstruction(2);
   game.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: { ...step.ARTIFACTS.movetargets },

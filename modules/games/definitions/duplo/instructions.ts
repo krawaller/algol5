@@ -1,4 +1,4 @@
-import { DuploInstructions } from './_types';
+import { DuploInstructions } from "./_types";
 
 const duploInstructions: DuploInstructions = {
   startTurn: {
@@ -19,9 +19,10 @@ const duploInstructions: DuploInstructions = {
     ]
   },
   deploy: {
-    if: [
+    ifelse: [
       { same: [{ sizeof: "myunits" }, 1] },
-      "Now select where to deploy your second and last initial unit"
+      "Now select where to deploy your second and last initial unit",
+      ["defaultEndTurnInstruction"]
     ]
   },
   selectunit: "Now select which square to expand to",

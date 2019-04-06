@@ -12,7 +12,7 @@ const noSpacesBefore = /[,!\.? ]/;
 export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
   if (content === undefined) return undefined;
   if (isAlgolContentLine(content)) {
-    let items = content.line;
+    let items = content.line.filter(i => !!i);
     let idx;
 
     // flatten all lines into a single line

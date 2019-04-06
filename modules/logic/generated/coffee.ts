@@ -4,7 +4,8 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
-  collapseContent
+  collapseContent,
+  defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 5, width: 5 });
@@ -191,6 +192,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.uphill1instruction = () => defaultInstruction(1);
   game.downhill1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -292,6 +294,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.downhill1instruction = () => defaultInstruction(1);
   game.horisontal1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -393,6 +396,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.horisontal1instruction = () => defaultInstruction(1);
   game.vertical1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -494,6 +498,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.vertical1instruction = () => defaultInstruction(1);
   game.selectdrop1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       FOOBAR: { ...step.ARTIFACTS.FOOBAR },
@@ -777,6 +782,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.uphill2instruction = () => defaultInstruction(2);
   game.downhill2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -878,6 +884,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.downhill2instruction = () => defaultInstruction(2);
   game.horisontal2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -979,6 +986,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.horisontal2instruction = () => defaultInstruction(2);
   game.vertical2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -1080,6 +1088,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.vertical2instruction = () => defaultInstruction(2);
   game.selectdrop2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       FOOBAR: { ...step.ARTIFACTS.FOOBAR },

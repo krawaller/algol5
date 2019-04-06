@@ -1,4 +1,10 @@
-import { GameTestSuite, AlgolStep } from "../../types";
+import {
+  GameTestSuite,
+  AlgolStep,
+  AlgolStepLinks,
+  isAlgolInstrLine
+} from "../../types";
+import { getContentText } from "../../common";
 
 export function runGameScript(
   id: string,
@@ -11,6 +17,7 @@ export function runGameScript(
       const lines = scripts[scriptName];
       let step: any = game.newBattle();
       let n = 0;
+      let lastFunc = "start1";
       while (lines.length) {
         n++;
         const line = lines.shift();
@@ -51,19 +58,26 @@ export function runGameScript(
             } else {
               if (debug)
                 console.log("N", n, "ACTION", action, "FUNCTION", func);
+              const instr = game[lastFunc + "instruction"](step);
+              const text = getContentText(instr);
+              if (getMarkActions(step.LINKS).includes(action)) {
+                expect(text.toLowerCase()).toMatch("select");
+              } else if (step.LINKS.commands[action]) {
+                expect(instr.line).toContainEqual({ command: action });
+              } else if (
+                action === "endturn" ||
+                action === step.LINKS.endturn
+              ) {
+                expect(instr.line).toContainEqual({ command: "endturn" });
+              }
+
               step = game[func](step, action);
+              lastFunc = func;
             }
           }
         }
         if (debug) console.log("Checking", n, "turn", step.TURN);
-        const availableActions = Object.keys(step.LINKS.commands)
-          .concat(
-            Object.keys(step.LINKS.marks).reduce(
-              (mem, markName) => mem.concat(step.LINKS.marks[markName].pos),
-              []
-            )
-          )
-          .concat(step.LINKS.endturn || []);
+        const availableActions = getAvailableActions(step.LINKS);
         if (line.include) {
           for (const inc of line.include) {
             expect(availableActions).toContain(inc);
@@ -77,4 +91,17 @@ export function runGameScript(
       }
     });
   }
+}
+
+function getMarkActions(links: AlgolStepLinks) {
+  return Object.keys(links.marks).reduce(
+    (mem, markName) => mem.concat(links.marks[markName].pos),
+    []
+  );
+}
+
+function getAvailableActions(links: AlgolStepLinks) {
+  return Object.keys(links.commands)
+    .concat(getMarkActions(links))
+    .concat(links.endturn || []);
 }

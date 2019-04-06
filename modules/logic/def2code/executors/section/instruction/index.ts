@@ -10,6 +10,12 @@ export function executeInstructionSection(
   const instrDef =
     gameDef.instructions[action === "start" ? "startTurn" : action];
 
+  if (!instrDef) {
+    throw new Error(
+      `Action "${action}" in ${gameDef.meta.id} has no instruction`
+    );
+  }
+
   const code = executeInstruction(gameDef, player, action, instrDef);
   const usage = codeUsage(code);
 

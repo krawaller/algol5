@@ -4,7 +4,8 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
-  collapseContent
+  collapseContent,
+  defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 8, width: 8 });
@@ -381,6 +382,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.deploy1instruction = () => defaultInstruction(1);
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let UNITLAYERS = step.UNITLAYERS;
@@ -462,6 +464,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.move1instruction = () => defaultInstruction(1);
   game.jump1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -555,6 +558,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.jump1instruction = () => defaultInstruction(1);
   game.selectkingdeploy1 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 
@@ -1352,6 +1356,7 @@ type Links = {
       NEXTSPAWNID
     };
   };
+  game.deploy2instruction = () => defaultInstruction(2);
   game.move2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1433,6 +1438,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.move2instruction = () => defaultInstruction(2);
   game.jump2 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
@@ -1526,6 +1532,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
+  game.jump2instruction = () => defaultInstruction(2);
   game.selectkingdeploy2 = (step, newMarkPos) => {
     let LINKS: Links = { commands: {}, marks: {} };
 

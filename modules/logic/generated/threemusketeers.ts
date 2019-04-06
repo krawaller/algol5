@@ -4,7 +4,8 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
-  collapseContent
+  collapseContent,
+  defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
 
 const BOARD = boardLayers({ height: 5, width: 5 });
@@ -168,6 +169,7 @@ type Links = {
       UNITLAYERS
     };
   };
+  game.move1instruction = () => defaultInstruction(1);
   game.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       strandedmusketeers: step.ARTIFACTS.strandedmusketeers,
@@ -456,6 +458,7 @@ type Links = {
       UNITLAYERS
     };
   };
+  game.move2instruction = () => defaultInstruction(2);
   game.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       strandedmusketeers: step.ARTIFACTS.strandedmusketeers,

@@ -18,4 +18,5 @@ export type AlgolContent<Cmnd, Pos> =
   | AlgolContentUnitType
   | AlgolContentText
   | AlgolContentLine<Cmnd, Pos>
-  | undefined;
+  | undefined
+  | ["defaultEndTurnInstruction"];

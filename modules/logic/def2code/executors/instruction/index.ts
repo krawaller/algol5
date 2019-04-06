@@ -57,6 +57,12 @@ function executeInstructionInner(
     }
     return `{ text: "${instr}" }`;
   }
+  if (Array.isArray(instr)) {
+    switch (instr[0]) {
+      case "defaultEndTurnInstruction":
+        return `defaultInstruction(${player})`;
+    }
+  }
   if (isAlgolInstrLine(instr)) {
     return `collapseContent({ line: [ ${instr.line
       .map(me)

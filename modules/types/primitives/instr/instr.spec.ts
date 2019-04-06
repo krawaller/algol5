@@ -21,5 +21,6 @@ const tests: TestInstruction[] = [
   { unitat: "mymark" },
   { pluralize: [{ sizeof: "mylayer" }, "foo", "foos"] },
   { indexlist: [["dir"], "gnurp", { unitat: "mymark" }] },
-  { ifaction: ["mycmnd", { line: ["hello"] }] }
+  { ifaction: ["mycmnd", { line: ["hello"] }] },
+  ["defaultEndTurnInstruction"]
 ];

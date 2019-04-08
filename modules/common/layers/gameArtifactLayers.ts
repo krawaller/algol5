@@ -10,7 +10,7 @@ export function gameArtifactLayers(
 
   Object.keys(gameDef.generators).forEach(genName => {
     const genDef = gameDef.generators[genName];
-    names = names.concat(generatorLayers(genDef));
+    names = names.concat(generatorLayers(genDef, 0, "any"));
   });
 
   return names.filter(

@@ -5,6 +5,8 @@ import { AlgolLogicalAnon } from "../../types";
 type PossTest<_T> = {
   expr: AlgolLogicalAnon<_T>;
   poss: AlgolLogicalAnon<_T>[];
+  player?: 0 | 1 | 2;
+  action?: string;
 };
 
 const possTests: PossTest<
@@ -21,8 +23,28 @@ const possTests: PossTest<
     poss: ["BAR", "BIN"]
   },
   {
+    expr: { ifactionelse: ["someaction", "BAR", "BIN"] },
+    action: "someaction",
+    poss: ["BAR"]
+  },
+  {
+    expr: { ifactionelse: ["someaction", "BAR", "BIN"] },
+    action: "anotheraction",
+    poss: ["BIN"]
+  },
+  {
     expr: { playercase: ["FOO", "BAZ"] },
     poss: ["FOO", "BAZ"]
+  },
+  {
+    expr: { playercase: ["FOO", "BAZ"] },
+    player: 1,
+    poss: ["FOO"]
+  },
+  {
+    expr: { playercase: ["FOO", "BAZ"] },
+    player: 2,
+    poss: ["BAZ"]
   },
   {
     expr: { indexlist: [2, "BAR", "BAZ", { playercase: ["BAR", "BIN"] }] },
@@ -35,13 +57,37 @@ const possTests: PossTest<
   {
     expr: { if: [["false"], { ifelse: [["true"], "FOO", "BIN"] }] },
     poss: ["FOO", "BIN"]
+  },
+  {
+    expr: { ifplayer: [1, "FOO"] },
+    player: 1,
+    poss: ["FOO"]
+  },
+  {
+    expr: { ifplayer: [1, "FOO"] },
+    player: 2,
+    poss: []
+  },
+  {
+    expr: { ifaction: ["someaction", "FOO"] },
+    poss: ["FOO"]
+  },
+  {
+    expr: { ifaction: ["someaction", "FOO"] },
+    action: "someaction",
+    poss: ["FOO"]
+  },
+  {
+    expr: { ifaction: ["someaction", "FOO"] },
+    action: "anotheraction",
+    poss: []
   }
 ];
 
 test("possibilities", t => {
-  possTests.forEach(({ expr, poss }) => {
+  possTests.forEach(({ expr, poss, player = 0, action = "any" }) => {
     t.deepEqual(
-      possibilities(expr),
+      possibilities(expr, player as 0 | 1 | 2, action),
       poss,
       `Saw that ${JSON.stringify(expr)} can be ${JSON.stringify(poss)}`
     );

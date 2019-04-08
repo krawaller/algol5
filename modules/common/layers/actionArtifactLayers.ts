@@ -15,11 +15,14 @@ export function actionArtifactLayers(
 
   const possibleGenerators = (def.runGenerators || [])
     .concat(def.runGenerator || [])
-    .reduce((mem, genName) => mem.concat(possibilities(genName)), []);
+    .reduce(
+      (mem, genName) => mem.concat(possibilities(genName, player, action)),
+      []
+    );
 
   const artifactLayers = possibleGenerators.reduce(
     (mem, genName: string) =>
-      mem.concat(generatorLayers(gameDef.generators[genName])),
+      mem.concat(generatorLayers(gameDef.generators[genName], player, action)),
     []
   );
 

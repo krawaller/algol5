@@ -369,7 +369,7 @@ type Links = {
   game.eat1instruction = () => defaultInstruction(1);
   game.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      eattargets: { ...step.ARTIFACTS.eattargets },
+      eattargets: step.ARTIFACTS.eattargets,
       movetargets: { ...step.ARTIFACTS.movetargets },
       canmove: step.ARTIFACTS.canmove,
       cracks: step.ARTIFACTS.cracks

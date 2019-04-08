@@ -5,7 +5,7 @@ export function emptyArtifactLayers(generators: GeneratorsAnon = {}) {
   let names = [];
   Object.keys(generators).forEach(genName => {
     const genDef = generators[genName];
-    names = names.concat(generatorLayers(genDef));
+    names = names.concat(generatorLayers(genDef, 0, "any"));
   });
   return names.reduce((mem, n) => ({ ...mem, [n]: {} }), {});
 }

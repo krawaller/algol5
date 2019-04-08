@@ -89,7 +89,7 @@ type Links = {
   game.move1 = step => {
     let LINKS: Links = { commands: {}, marks: {} };
     let ARTIFACTS = {
-      strandedmusketeers: { ...step.ARTIFACTS.strandedmusketeers },
+      strandedmusketeers: step.ARTIFACTS.strandedmusketeers,
       musketeerline: { ...step.ARTIFACTS.musketeerline },
       movetargets: step.ARTIFACTS.movetargets
     };

@@ -22,29 +22,7 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "infiltration" | "starvation";
-  commands: {
-    move?: "move1" | "move2";
-    swap?: "swap1" | "swap2";
-  };
-  marks: {
-    selectunit?: { func: "selectunit1" | "selectunit2"; pos: string[] };
-    selectmovetarget?: {
-      func: "selectmovetarget1" | "selectmovetarget2";
-      pos: string[];
-    };
-    selectdeportdestination?: {
-      func: "selectdeportdestination1" | "selectdeportdestination2";
-      pos: string[];
-    };
-    selectswapunit?: {
-      func: "selectswapunit1" | "selectswapunit2";
-      pos: string[];
-    };
-    selectswap1target?: {
-      func: "selectswap1target1" | "selectswap1target2";
-      pos: string[];
-    };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
@@ -114,14 +92,12 @@ type Links = {
       neutralpiases: oldUnitLayers.neutralpiases
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectunit = {
-      func: "selectunit1",
-      pos: Object.keys(UNITLAYERS.myunits)
-    };
+    for (const pos of Object.keys(UNITLAYERS.myunits)) {
+      LINKS.actions[pos] = "selectunit1";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -138,7 +114,7 @@ type Links = {
     });
   };
   game.move1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -231,7 +207,7 @@ type Links = {
   };
   game.move1instruction = () => defaultInstruction(1);
   game.swap1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       swap2step: step.ARTIFACTS.swap2step,
       swap1steps: step.ARTIFACTS.swap1steps,
@@ -328,7 +304,7 @@ type Links = {
       swap1steps: step.ARTIFACTS.swap1steps,
       movetargets: { ...step.ARTIFACTS.movetargets }
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -344,19 +320,17 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmovetarget = {
-      func: "selectmovetarget1",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmovetarget1";
+    }
 
-    LINKS.marks.selectswapunit = {
-      func: "selectswapunit1",
-      pos: Object.keys(
-        Object.keys(UNITLAYERS.myunits)
-          .filter(k => !{ [MARKS.selectunit]: 1 }.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
-      )
-    };
+    for (const pos of Object.keys(
+      Object.keys(UNITLAYERS.myunits)
+        .filter(k => !{ [MARKS.selectunit]: 1 }.hasOwnProperty(k))
+        .reduce((m, k) => ({ ...m, [k]: {} }), {})
+    )) {
+      LINKS.actions[pos] = "selectswapunit1";
+    }
 
     return {
       LINKS,
@@ -399,9 +373,8 @@ type Links = {
                   ]
                 })
               : undefined,
-            !!(
-              LINKS.marks["selectswapunit"] &&
-              LINKS.marks["selectswapunit"].pos.length
+            !!Object.keys(LINKS.actions).find(
+              a => LINKS.actions[a] === "selectswapunit" + 1
             )
               ? collapseContent({
                   line: [
@@ -436,23 +409,22 @@ type Links = {
     });
   };
   game.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     if (
       UNITLAYERS.units[MARKS.selectmovetarget] &&
       !TERRAIN.oppbase[MARKS.selectmovetarget]
     ) {
-      LINKS.marks.selectdeportdestination = {
-        func: "selectdeportdestination1",
-        pos: Object.keys(
-          Object.keys(TERRAIN.oppbase)
-            .filter(k => !UNITLAYERS.oppunits.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {})
-        )
-      };
+      for (const pos of Object.keys(
+        Object.keys(TERRAIN.oppbase)
+          .filter(k => !UNITLAYERS.oppunits.hasOwnProperty(k))
+          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+      )) {
+        LINKS.actions[pos] = "selectdeportdestination1";
+      }
     } else {
-      LINKS.commands.move = "move1";
+      LINKS.actions.move = "move1";
     }
 
     return {
@@ -500,9 +472,9 @@ type Links = {
         });
   };
   game.selectdeportdestination1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.move = "move1";
+    LINKS.actions.move = "move1";
 
     return {
       LINKS,
@@ -535,7 +507,7 @@ type Links = {
       swap1steps: { ...step.ARTIFACTS.swap1steps },
       movetargets: step.ARTIFACTS.movetargets
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectswapunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -547,10 +519,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectswap1target = {
-      func: "selectswap1target1",
-      pos: Object.keys(ARTIFACTS.swap1steps)
-    };
+    for (const pos of Object.keys(ARTIFACTS.swap1steps)) {
+      LINKS.actions[pos] = "selectswap1target1";
+    }
 
     return {
       LINKS,
@@ -580,7 +551,7 @@ type Links = {
       swap1steps: step.ARTIFACTS.swap1steps,
       movetargets: step.ARTIFACTS.movetargets
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectswap1target: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -598,7 +569,7 @@ type Links = {
       }
     }
     if (Object.keys(ARTIFACTS.swap2step).length !== 0) {
-      LINKS.commands.swap = "swap1";
+      LINKS.actions.swap = "swap1";
     }
 
     return {
@@ -698,14 +669,12 @@ type Links = {
       neutralpiases: oldUnitLayers.neutralpiases
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectunit = {
-      func: "selectunit2",
-      pos: Object.keys(UNITLAYERS.myunits)
-    };
+    for (const pos of Object.keys(UNITLAYERS.myunits)) {
+      LINKS.actions[pos] = "selectunit2";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -769,7 +738,7 @@ type Links = {
     });
   };
   game.move2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -862,7 +831,7 @@ type Links = {
   };
   game.move2instruction = () => defaultInstruction(2);
   game.swap2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       swap2step: step.ARTIFACTS.swap2step,
       swap1steps: step.ARTIFACTS.swap1steps,
@@ -959,7 +928,7 @@ type Links = {
       swap1steps: step.ARTIFACTS.swap1steps,
       movetargets: { ...step.ARTIFACTS.movetargets }
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -975,19 +944,17 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmovetarget = {
-      func: "selectmovetarget2",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmovetarget2";
+    }
 
-    LINKS.marks.selectswapunit = {
-      func: "selectswapunit2",
-      pos: Object.keys(
-        Object.keys(UNITLAYERS.myunits)
-          .filter(k => !{ [MARKS.selectunit]: 1 }.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
-      )
-    };
+    for (const pos of Object.keys(
+      Object.keys(UNITLAYERS.myunits)
+        .filter(k => !{ [MARKS.selectunit]: 1 }.hasOwnProperty(k))
+        .reduce((m, k) => ({ ...m, [k]: {} }), {})
+    )) {
+      LINKS.actions[pos] = "selectswapunit2";
+    }
 
     return {
       LINKS,
@@ -1030,9 +997,8 @@ type Links = {
                   ]
                 })
               : undefined,
-            !!(
-              LINKS.marks["selectswapunit"] &&
-              LINKS.marks["selectswapunit"].pos.length
+            !!Object.keys(LINKS.actions).find(
+              a => LINKS.actions[a] === "selectswapunit" + 2
             )
               ? collapseContent({
                   line: [
@@ -1067,23 +1033,22 @@ type Links = {
     });
   };
   game.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     if (
       UNITLAYERS.units[MARKS.selectmovetarget] &&
       !TERRAIN.oppbase[MARKS.selectmovetarget]
     ) {
-      LINKS.marks.selectdeportdestination = {
-        func: "selectdeportdestination2",
-        pos: Object.keys(
-          Object.keys(TERRAIN.oppbase)
-            .filter(k => !UNITLAYERS.oppunits.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {})
-        )
-      };
+      for (const pos of Object.keys(
+        Object.keys(TERRAIN.oppbase)
+          .filter(k => !UNITLAYERS.oppunits.hasOwnProperty(k))
+          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+      )) {
+        LINKS.actions[pos] = "selectdeportdestination2";
+      }
     } else {
-      LINKS.commands.move = "move2";
+      LINKS.actions.move = "move2";
     }
 
     return {
@@ -1131,9 +1096,9 @@ type Links = {
         });
   };
   game.selectdeportdestination2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.move = "move2";
+    LINKS.actions.move = "move2";
 
     return {
       LINKS,
@@ -1166,7 +1131,7 @@ type Links = {
       swap1steps: { ...step.ARTIFACTS.swap1steps },
       movetargets: step.ARTIFACTS.movetargets
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectswapunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -1178,10 +1143,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectswap1target = {
-      func: "selectswap1target2",
-      pos: Object.keys(ARTIFACTS.swap1steps)
-    };
+    for (const pos of Object.keys(ARTIFACTS.swap1steps)) {
+      LINKS.actions[pos] = "selectswap1target2";
+    }
 
     return {
       LINKS,
@@ -1211,7 +1175,7 @@ type Links = {
       swap1steps: step.ARTIFACTS.swap1steps,
       movetargets: step.ARTIFACTS.movetargets
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectswap1target: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -1229,7 +1193,7 @@ type Links = {
       }
     }
     if (Object.keys(ARTIFACTS.swap2step).length !== 0) {
-      LINKS.commands.swap = "swap2";
+      LINKS.actions.swap = "swap2";
     }
 
     return {

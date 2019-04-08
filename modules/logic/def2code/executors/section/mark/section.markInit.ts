@@ -29,7 +29,7 @@ export function executeMarkInit(
   }
 
   // Always init a new LINKS object for each step
-  ret += `let LINKS = { commands: {}, marks: {} }; `;
+  ret += `let LINKS = { actions: {} }; `;
 
   if (usage.MARKS) {
     ret += `let MARKS = { ...step.MARKS, ${action}: newMarkPos };`;

@@ -29,15 +29,7 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "boardfull" | "starvation";
-  commands: {
-    deploy?: "deploy1" | "deploy2";
-    expand?: "expand1" | "expand2";
-  };
-  marks: {
-    selectdeploy?: { func: "selectdeploy1" | "selectdeploy2"; pos: string[] };
-    selectunit?: { func: "selectunit1" | "selectunit2"; pos: string[] };
-    selecttarget?: { func: "selecttarget1" | "selecttarget2"; pos: string[] };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
@@ -54,24 +46,21 @@ type Links = {
       neutralsoldiers: oldUnitLayers.neutralsoldiers
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
     let TURN = step.TURN + 1;
     if (TURN > 2) {
-      LINKS.marks.selectunit = {
-        func: "selectunit1",
-        pos: Object.keys(UNITLAYERS.myunits)
-      };
+      for (const pos of Object.keys(UNITLAYERS.myunits)) {
+        LINKS.actions[pos] = "selectunit1";
+      }
     } else {
-      LINKS.marks.selectdeploy = {
-        func: "selectdeploy1",
-        pos: Object.keys(
-          Object.keys(BOARD.board)
-            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {})
-        )
-      };
+      for (const pos of Object.keys(
+        Object.keys(BOARD.board)
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+      )) {
+        LINKS.actions[pos] = "selectdeploy1";
+      }
     }
 
     return {
@@ -92,7 +81,7 @@ type Links = {
       : { text: "Select where to deploy the first of your two initial units" };
   };
   game.deploy1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -140,14 +129,13 @@ type Links = {
         LINKS.endturn = "start2";
       }
     } else {
-      LINKS.marks.selectdeploy = {
-        func: "selectdeploy1",
-        pos: Object.keys(
-          Object.keys(BOARD.board)
-            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {})
-        )
-      };
+      for (const pos of Object.keys(
+        Object.keys(BOARD.board)
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+      )) {
+        LINKS.actions[pos] = "selectdeploy1";
+      }
     }
     return {
       LINKS,
@@ -168,7 +156,7 @@ type Links = {
       : defaultInstruction(1);
   };
   game.expand1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -251,9 +239,9 @@ type Links = {
   };
   game.expand1instruction = () => defaultInstruction(1);
   game.selectdeploy1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.deploy = "deploy1";
+    LINKS.actions.deploy = "deploy1";
 
     return {
       LINKS,
@@ -292,7 +280,7 @@ type Links = {
       targets: { ...step.ARTIFACTS.targets },
       spawns: step.ARTIFACTS.spawns
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -383,10 +371,9 @@ type Links = {
       }
     }
 
-    LINKS.marks.selecttarget = {
-      func: "selecttarget1",
-      pos: Object.keys(ARTIFACTS.targets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.targets)) {
+      LINKS.actions[pos] = "selecttarget1";
+    }
 
     return {
       LINKS,
@@ -410,7 +397,7 @@ type Links = {
       targets: step.ARTIFACTS.targets,
       spawns: { ...step.ARTIFACTS.spawns }
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selecttarget: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -433,7 +420,7 @@ type Links = {
         ARTIFACTS.spawns[POS] = {};
       }
     }
-    LINKS.commands.expand = "expand1";
+    LINKS.actions.expand = "expand1";
 
     return {
       LINKS,
@@ -481,24 +468,21 @@ type Links = {
       neutralsoldiers: oldUnitLayers.neutralsoldiers
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
     let TURN = step.TURN + 1;
     if (TURN > 2) {
-      LINKS.marks.selectunit = {
-        func: "selectunit2",
-        pos: Object.keys(UNITLAYERS.myunits)
-      };
+      for (const pos of Object.keys(UNITLAYERS.myunits)) {
+        LINKS.actions[pos] = "selectunit2";
+      }
     } else {
-      LINKS.marks.selectdeploy = {
-        func: "selectdeploy2",
-        pos: Object.keys(
-          Object.keys(BOARD.board)
-            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {})
-        )
-      };
+      for (const pos of Object.keys(
+        Object.keys(BOARD.board)
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+      )) {
+        LINKS.actions[pos] = "selectdeploy2";
+      }
     }
 
     return {
@@ -549,7 +533,7 @@ type Links = {
     });
   };
   game.deploy2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -597,14 +581,13 @@ type Links = {
         LINKS.endturn = "start1";
       }
     } else {
-      LINKS.marks.selectdeploy = {
-        func: "selectdeploy2",
-        pos: Object.keys(
-          Object.keys(BOARD.board)
-            .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {})
-        )
-      };
+      for (const pos of Object.keys(
+        Object.keys(BOARD.board)
+          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+      )) {
+        LINKS.actions[pos] = "selectdeploy2";
+      }
     }
     return {
       LINKS,
@@ -625,7 +608,7 @@ type Links = {
       : defaultInstruction(2);
   };
   game.expand2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -708,9 +691,9 @@ type Links = {
   };
   game.expand2instruction = () => defaultInstruction(2);
   game.selectdeploy2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.deploy = "deploy2";
+    LINKS.actions.deploy = "deploy2";
 
     return {
       LINKS,
@@ -749,7 +732,7 @@ type Links = {
       targets: { ...step.ARTIFACTS.targets },
       spawns: step.ARTIFACTS.spawns
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -840,10 +823,9 @@ type Links = {
       }
     }
 
-    LINKS.marks.selecttarget = {
-      func: "selecttarget2",
-      pos: Object.keys(ARTIFACTS.targets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.targets)) {
+      LINKS.actions[pos] = "selecttarget2";
+    }
 
     return {
       LINKS,
@@ -867,7 +849,7 @@ type Links = {
       targets: step.ARTIFACTS.targets,
       spawns: { ...step.ARTIFACTS.spawns }
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selecttarget: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -890,7 +872,7 @@ type Links = {
         ARTIFACTS.spawns[POS] = {};
       }
     }
-    LINKS.commands.expand = "expand2";
+    LINKS.actions.expand = "expand2";
 
     return {
       LINKS,

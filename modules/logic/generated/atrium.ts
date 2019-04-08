@@ -23,16 +23,7 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "madewinline" | "starvation";
-  commands: {
-    move?: "move1" | "move2";
-  };
-  marks: {
-    selectunit?: { func: "selectunit1" | "selectunit2"; pos: string[] };
-    selectmovetarget?: {
-      func: "selectmovetarget1" | "selectmovetarget2";
-      pos: string[];
-    };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
@@ -53,14 +44,12 @@ type Links = {
       neutralqueens: oldUnitLayers.neutralqueens
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectunit = {
-      func: "selectunit1",
-      pos: Object.keys(UNITLAYERS.myunits)
-    };
+    for (const pos of Object.keys(UNITLAYERS.myunits)) {
+      LINKS.actions[pos] = "selectunit1";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -83,7 +72,7 @@ type Links = {
     });
   };
   game.move1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: { ...step.ARTIFACTS.winline }
@@ -170,7 +159,7 @@ type Links = {
       movetargets: { ...step.ARTIFACTS.movetargets },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -182,10 +171,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmovetarget = {
-      func: "selectmovetarget1",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmovetarget1";
+    }
 
     return {
       LINKS,
@@ -219,9 +207,9 @@ type Links = {
     });
   };
   game.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.move = "move1";
+    LINKS.actions.move = "move1";
 
     return {
       LINKS,
@@ -277,14 +265,12 @@ type Links = {
       neutralqueens: oldUnitLayers.neutralqueens
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectunit = {
-      func: "selectunit2",
-      pos: Object.keys(UNITLAYERS.myunits)
-    };
+    for (const pos of Object.keys(UNITLAYERS.myunits)) {
+      LINKS.actions[pos] = "selectunit2";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -366,7 +352,7 @@ type Links = {
     });
   };
   game.move2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: { ...step.ARTIFACTS.winline }
@@ -453,7 +439,7 @@ type Links = {
       movetargets: { ...step.ARTIFACTS.movetargets },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -465,10 +451,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmovetarget = {
-      func: "selectmovetarget2",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmovetarget2";
+    }
 
     return {
       LINKS,
@@ -502,9 +487,9 @@ type Links = {
     });
   };
   game.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.move = "move2";
+    LINKS.actions.move = "move2";
 
     return {
       LINKS,

@@ -23,21 +23,7 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "madeline" | "starvation";
-  commands: {
-    move?: "move1" | "move2";
-    dig?: "dig1" | "dig2";
-  };
-  marks: {
-    selectunit?: { func: "selectunit1" | "selectunit2"; pos: string[] };
-    selectmovetarget?: {
-      func: "selectmovetarget1" | "selectmovetarget2";
-      pos: string[];
-    };
-    selectdigtarget?: {
-      func: "selectdigtarget1" | "selectdigtarget2";
-      pos: string[];
-    };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
@@ -62,14 +48,12 @@ type Links = {
       neutralrooks: oldUnitLayers.neutralrooks
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectunit = {
-      func: "selectunit1",
-      pos: Object.keys(UNITLAYERS.myunits)
-    };
+    for (const pos of Object.keys(UNITLAYERS.myunits)) {
+      LINKS.actions[pos] = "selectunit1";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -86,7 +70,7 @@ type Links = {
     return { text: "Select a unit to move and dig with" };
   };
   game.move1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: { ...step.ARTIFACTS.digtargets },
@@ -164,10 +148,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectdigtarget = {
-      func: "selectdigtarget1",
-      pos: Object.keys(ARTIFACTS.digtargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.digtargets)) {
+      LINKS.actions[pos] = "selectdigtarget1";
+    }
 
     return {
       LINKS,
@@ -185,7 +168,7 @@ type Links = {
     return { text: "Now select an empty neighbouring square to dig" };
   };
   game.dig1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: step.ARTIFACTS.digtargets,
@@ -288,7 +271,7 @@ type Links = {
       digtargets: step.ARTIFACTS.digtargets,
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -309,10 +292,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmovetarget = {
-      func: "selectmovetarget1",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmovetarget1";
+    }
 
     return {
       LINKS,
@@ -330,9 +312,9 @@ type Links = {
     return { text: "Select where to move this unit" };
   };
   game.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.move = "move1";
+    LINKS.actions.move = "move1";
 
     return {
       LINKS,
@@ -371,9 +353,9 @@ type Links = {
     });
   };
   game.selectdigtarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.dig = "dig1";
+    LINKS.actions.dig = "dig1";
 
     return {
       LINKS,
@@ -445,14 +427,12 @@ type Links = {
       neutralrooks: oldUnitLayers.neutralrooks
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectunit = {
-      func: "selectunit2",
-      pos: Object.keys(UNITLAYERS.myunits)
-    };
+    for (const pos of Object.keys(UNITLAYERS.myunits)) {
+      LINKS.actions[pos] = "selectunit2";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -524,7 +504,7 @@ type Links = {
     });
   };
   game.move2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: { ...step.ARTIFACTS.digtargets },
@@ -602,10 +582,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectdigtarget = {
-      func: "selectdigtarget2",
-      pos: Object.keys(ARTIFACTS.digtargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.digtargets)) {
+      LINKS.actions[pos] = "selectdigtarget2";
+    }
 
     return {
       LINKS,
@@ -623,7 +602,7 @@ type Links = {
     return { text: "Now select an empty neighbouring square to dig" };
   };
   game.dig2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: step.ARTIFACTS.digtargets,
@@ -726,7 +705,7 @@ type Links = {
       digtargets: step.ARTIFACTS.digtargets,
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -747,10 +726,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmovetarget = {
-      func: "selectmovetarget2",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmovetarget2";
+    }
 
     return {
       LINKS,
@@ -768,9 +746,9 @@ type Links = {
     return { text: "Select where to move this unit" };
   };
   game.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.move = "move2";
+    LINKS.actions.move = "move2";
 
     return {
       LINKS,
@@ -809,9 +787,9 @@ type Links = {
     });
   };
   game.selectdigtarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.dig = "dig2";
+    LINKS.actions.dig = "dig2";
 
     return {
       LINKS,

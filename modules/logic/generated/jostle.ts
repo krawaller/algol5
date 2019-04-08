@@ -29,16 +29,7 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "starvation";
-  commands: {
-    jostle?: "jostle1" | "jostle2";
-  };
-  marks: {
-    selectunit?: { func: "selectunit1" | "selectunit2"; pos: string[] };
-    selectmovetarget?: {
-      func: "selectmovetarget1" | "selectmovetarget2";
-      pos: string[];
-    };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
@@ -55,14 +46,12 @@ type Links = {
       neutralcheckers: oldUnitLayers.neutralcheckers
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectunit = {
-      func: "selectunit1",
-      pos: Object.keys(UNITLAYERS.mycheckers)
-    };
+    for (const pos of Object.keys(UNITLAYERS.mycheckers)) {
+      LINKS.actions[pos] = "selectunit1";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -77,7 +66,7 @@ type Links = {
     return { text: "Select which unit to jostle!" };
   };
   game.jostle1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -130,7 +119,7 @@ type Links = {
       newenemy: step.ARTIFACTS.newenemy,
       newfriend: step.ARTIFACTS.newfriend
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -148,10 +137,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmovetarget = {
-      func: "selectmovetarget1",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmovetarget1";
+    }
 
     return {
       LINKS,
@@ -203,7 +191,7 @@ type Links = {
       newenemy: { ...step.ARTIFACTS.newenemy },
       newfriend: { ...step.ARTIFACTS.newfriend }
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -223,7 +211,7 @@ type Links = {
       Object.keys(ARTIFACTS.initialfriend).length -
         Object.keys(ARTIFACTS.initialenemy).length
     ) {
-      LINKS.commands.jostle = "jostle1";
+      LINKS.actions.jostle = "jostle1";
     }
 
     return {
@@ -293,14 +281,12 @@ type Links = {
       neutralcheckers: oldUnitLayers.neutralcheckers
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectunit = {
-      func: "selectunit2",
-      pos: Object.keys(UNITLAYERS.mycheckers)
-    };
+    for (const pos of Object.keys(UNITLAYERS.mycheckers)) {
+      LINKS.actions[pos] = "selectunit2";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -600,7 +586,7 @@ type Links = {
     });
   };
   game.jostle2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -653,7 +639,7 @@ type Links = {
       newenemy: step.ARTIFACTS.newenemy,
       newfriend: step.ARTIFACTS.newfriend
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectunit: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -671,10 +657,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmovetarget = {
-      func: "selectmovetarget2",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmovetarget2";
+    }
 
     return {
       LINKS,
@@ -726,7 +711,7 @@ type Links = {
       newenemy: { ...step.ARTIFACTS.newenemy },
       newfriend: { ...step.ARTIFACTS.newfriend }
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -746,7 +731,7 @@ type Links = {
       Object.keys(ARTIFACTS.initialfriend).length -
         Object.keys(ARTIFACTS.initialenemy).length
     ) {
-      LINKS.commands.jostle = "jostle2";
+      LINKS.actions.jostle = "jostle2";
     }
 
     return {

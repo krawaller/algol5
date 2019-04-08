@@ -29,22 +29,7 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "infiltration" | "starvation";
-  commands: {
-    move?: "move1" | "move2";
-    kill?: "kill1" | "kill2";
-    sacrifice?: "sacrifice1" | "sacrifice2";
-    fire?: "fire1" | "fire2";
-  };
-  marks: {
-    selecttower?: { func: "selecttower1" | "selecttower2"; pos: string[] };
-    selectmove?: { func: "selectmove1" | "selectmove2"; pos: string[] };
-    selectkill?: { func: "selectkill1" | "selectkill2"; pos: string[] };
-    selectcatapult?: {
-      func: "selectcatapult1" | "selectcatapult2";
-      pos: string[];
-    };
-    selectfire?: { func: "selectfire1" | "selectfire2"; pos: string[] };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
@@ -151,19 +136,16 @@ type Links = {
       neutralcatapults: oldUnitLayers.neutralcatapults
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selecttower = {
-      func: "selecttower1",
-      pos: Object.keys(UNITLAYERS.mytowers)
-    };
+    for (const pos of Object.keys(UNITLAYERS.mytowers)) {
+      LINKS.actions[pos] = "selecttower1";
+    }
 
-    LINKS.marks.selectcatapult = {
-      func: "selectcatapult1",
-      pos: Object.keys(UNITLAYERS.mycatapults)
-    };
+    for (const pos of Object.keys(UNITLAYERS.mycatapults)) {
+      LINKS.actions[pos] = "selectcatapult1";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -206,7 +188,7 @@ type Links = {
     });
   };
   game.move1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       firetargets: step.ARTIFACTS.firetargets,
       movetargets: step.ARTIFACTS.movetargets,
@@ -320,7 +302,7 @@ type Links = {
   };
   game.move1instruction = () => defaultInstruction(1);
   game.kill1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -412,7 +394,7 @@ type Links = {
   };
   game.kill1instruction = () => defaultInstruction(1);
   game.sacrifice1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -492,7 +474,7 @@ type Links = {
   };
   game.sacrifice1instruction = () => defaultInstruction(1);
   game.fire1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -609,7 +591,7 @@ type Links = {
       madewalls: step.ARTIFACTS.madewalls,
       killtargets: { ...step.ARTIFACTS.killtargets }
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selecttower: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -647,15 +629,13 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmove = {
-      func: "selectmove1",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmove1";
+    }
 
-    LINKS.marks.selectkill = {
-      func: "selectkill1",
-      pos: Object.keys(ARTIFACTS.killtargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.killtargets)) {
+      LINKS.actions[pos] = "selectkill1";
+    }
 
     return {
       LINKS,
@@ -716,7 +696,7 @@ type Links = {
       madewalls: { ...step.ARTIFACTS.madewalls },
       killtargets: step.ARTIFACTS.killtargets
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectmove: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -744,7 +724,7 @@ type Links = {
           : "madewalls"
       ][STARTPOS] = {};
     }
-    LINKS.commands.move = "move1";
+    LINKS.actions.move = "move1";
 
     return {
       LINKS,
@@ -773,13 +753,13 @@ type Links = {
     });
   };
   game.selectkill1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectkill: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
 
-    LINKS.commands.kill = "kill1";
+    LINKS.actions.kill = "kill1";
     if (UNITLAYERS.oppcatapults[MARKS.selectkill]) {
-      LINKS.commands.sacrifice = "sacrifice1";
+      LINKS.actions.sacrifice = "sacrifice1";
     }
 
     return {
@@ -845,7 +825,7 @@ type Links = {
       madewalls: step.ARTIFACTS.madewalls,
       killtargets: step.ARTIFACTS.killtargets
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectcatapult: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -863,10 +843,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectfire = {
-      func: "selectfire1",
-      pos: Object.keys(ARTIFACTS.firetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.firetargets)) {
+      LINKS.actions[pos] = "selectfire1";
+    }
 
     return {
       LINKS,
@@ -891,9 +870,9 @@ type Links = {
     });
   };
   game.selectfire1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.fire = "fire1";
+    LINKS.actions.fire = "fire1";
 
     return {
       LINKS,
@@ -1066,19 +1045,16 @@ type Links = {
       neutralcatapults: oldUnitLayers.neutralcatapults
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selecttower = {
-      func: "selecttower2",
-      pos: Object.keys(UNITLAYERS.mytowers)
-    };
+    for (const pos of Object.keys(UNITLAYERS.mytowers)) {
+      LINKS.actions[pos] = "selecttower2";
+    }
 
-    LINKS.marks.selectcatapult = {
-      func: "selectcatapult2",
-      pos: Object.keys(UNITLAYERS.mycatapults)
-    };
+    for (const pos of Object.keys(UNITLAYERS.mycatapults)) {
+      LINKS.actions[pos] = "selectcatapult2";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -1218,7 +1194,7 @@ type Links = {
     });
   };
   game.move2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       firetargets: step.ARTIFACTS.firetargets,
       movetargets: step.ARTIFACTS.movetargets,
@@ -1332,7 +1308,7 @@ type Links = {
   };
   game.move2instruction = () => defaultInstruction(2);
   game.kill2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -1424,7 +1400,7 @@ type Links = {
   };
   game.kill2instruction = () => defaultInstruction(2);
   game.sacrifice2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -1504,7 +1480,7 @@ type Links = {
   };
   game.sacrifice2instruction = () => defaultInstruction(2);
   game.fire2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -1621,7 +1597,7 @@ type Links = {
       madewalls: step.ARTIFACTS.madewalls,
       killtargets: { ...step.ARTIFACTS.killtargets }
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selecttower: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -1659,15 +1635,13 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectmove = {
-      func: "selectmove2",
-      pos: Object.keys(ARTIFACTS.movetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+      LINKS.actions[pos] = "selectmove2";
+    }
 
-    LINKS.marks.selectkill = {
-      func: "selectkill2",
-      pos: Object.keys(ARTIFACTS.killtargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.killtargets)) {
+      LINKS.actions[pos] = "selectkill2";
+    }
 
     return {
       LINKS,
@@ -1728,7 +1702,7 @@ type Links = {
       madewalls: { ...step.ARTIFACTS.madewalls },
       killtargets: step.ARTIFACTS.killtargets
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectmove: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -1756,7 +1730,7 @@ type Links = {
           : "madewalls"
       ][STARTPOS] = {};
     }
-    LINKS.commands.move = "move2";
+    LINKS.actions.move = "move2";
 
     return {
       LINKS,
@@ -1785,13 +1759,13 @@ type Links = {
     });
   };
   game.selectkill2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectkill: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
 
-    LINKS.commands.kill = "kill2";
+    LINKS.actions.kill = "kill2";
     if (UNITLAYERS.oppcatapults[MARKS.selectkill]) {
-      LINKS.commands.sacrifice = "sacrifice2";
+      LINKS.actions.sacrifice = "sacrifice2";
     }
 
     return {
@@ -1857,7 +1831,7 @@ type Links = {
       madewalls: step.ARTIFACTS.madewalls,
       killtargets: step.ARTIFACTS.killtargets
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectcatapult: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -1875,10 +1849,9 @@ type Links = {
         }
       }
     }
-    LINKS.marks.selectfire = {
-      func: "selectfire2",
-      pos: Object.keys(ARTIFACTS.firetargets)
-    };
+    for (const pos of Object.keys(ARTIFACTS.firetargets)) {
+      LINKS.actions[pos] = "selectfire2";
+    }
 
     return {
       LINKS,
@@ -1903,9 +1876,9 @@ type Links = {
     });
   };
   game.selectfire2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.fire = "fire2";
+    LINKS.actions.fire = "fire2";
 
     return {
       LINKS,

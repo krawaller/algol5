@@ -19,24 +19,7 @@ export function runGameRandomly(id: string, game: any, max: number = 1000) {
 }
 
 function getActionObj(links: AlgolStepLinks) {
-  let actions: { [id: string]: string } = Object.keys(links.commands).reduce(
-    (mem, cmndName) => ({
-      ...mem,
-      [cmndName]: links.commands[cmndName]
-    }),
-    {}
-  );
-
-  actions = Object.keys(links.marks).reduce(
-    (mem, markName) => ({
-      ...mem,
-      ...links.marks[markName].pos.reduce(
-        (m, p) => ({ ...m, [p]: links.marks[markName].func }),
-        {}
-      )
-    }),
-    actions
-  );
+  let actions = { ...links.actions };
 
   if (links.endturn) {
     actions.endturn = links.endturn;

@@ -44,14 +44,8 @@ export function runGameScript(
           } else {
             if (action === "endturn") {
               func = step.LINKS.endturn;
-            } else if (step.LINKS.commands[action]) {
-              func = step.LINKS.commands[action];
             } else {
-              for (const markName in step.LINKS.marks) {
-                if (step.LINKS.marks[markName].pos.includes(action)) {
-                  func = step.LINKS.marks[markName].func;
-                }
-              }
+              func = step.LINKS.actions[action];
             }
             if (!func) {
               throw new Error("Don't know what to do now! :/");
@@ -60,15 +54,15 @@ export function runGameScript(
                 console.log("N", n, "ACTION", action, "FUNCTION", func);
               const instr = game[lastFunc + "instruction"](step);
               const text = getContentText(instr);
-              if (getMarkActions(step.LINKS).includes(action)) {
+              if (action.match(/^[a-z]{1,2}[0-9]{1,2}$/)) {
                 expect(text.toLowerCase()).toMatch("select");
-              } else if (step.LINKS.commands[action]) {
-                expect(instr.line).toContainEqual({ command: action });
               } else if (
                 action === "endturn" ||
                 action === step.LINKS.endturn
               ) {
                 expect(instr.line).toContainEqual({ command: "endturn" });
+              } else {
+                expect(instr.line).toContainEqual({ command: action });
               }
 
               step = game[func](step, action);
@@ -93,15 +87,6 @@ export function runGameScript(
   }
 }
 
-function getMarkActions(links: AlgolStepLinks) {
-  return Object.keys(links.marks).reduce(
-    (mem, markName) => mem.concat(links.marks[markName].pos),
-    []
-  );
-}
-
 function getAvailableActions(links: AlgolStepLinks) {
-  return Object.keys(links.commands)
-    .concat(getMarkActions(links))
-    .concat(links.endturn || []);
+  return Object.keys(links.actions).concat(links.endturn || []);
 }

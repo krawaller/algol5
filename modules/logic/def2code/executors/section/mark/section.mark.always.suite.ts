@@ -43,8 +43,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "LINKS",
                   res: {
-                    commands: {},
-                    marks: {}
+                    actions: {}
                   },
                   desc: "we always reset links for the new step"
                 }

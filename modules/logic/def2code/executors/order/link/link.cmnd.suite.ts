@@ -21,14 +21,14 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
       contexts: [
         {
           context: {
-            LINKS: { commands: { foo: "bar" } }
+            LINKS: { actions: { foo: "bar" } }
           },
           tests: [
             {
               expr: { links: ["mycmnd"] },
               asserts: [
                 {
-                  sample: "LINKS.commands",
+                  sample: "LINKS.actions",
                   res: { mycmnd: "mycmnd1", foo: "bar" },
                   desc: "we can link to a cmnd from start"
                 }
@@ -53,15 +53,14 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
       contexts: [
         {
           context: {
-            LINKS: { commands: { foo: "bar" } },
-            newStepId: "foo"
+            LINKS: { actions: { foo: "bar" } }
           },
           tests: [
             {
               expr: { links: ["mycmnd"] },
               asserts: [
                 {
-                  sample: "LINKS.commands",
+                  sample: "LINKS.actions",
                   res: { mycmnd: "mycmnd2", foo: "bar" },
                   desc: "we can link to a cmnd from non-start (and as 2nd plr)"
                 }

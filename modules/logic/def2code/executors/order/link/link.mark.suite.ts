@@ -24,20 +24,18 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             UNITLAYERS: { units: { a1: {}, b2: {} } },
-            LINKS: { marks: { othermark: "foo" } }
+            LINKS: { actions: { gnork: "bork" } }
           },
           tests: [
             {
               expr: { links: ["somemark"] },
               asserts: [
                 {
-                  sample: "LINKS.marks",
+                  sample: "LINKS.actions",
                   res: {
-                    othermark: "foo",
-                    somemark: {
-                      func: "somemark1",
-                      pos: ["a1", "b2"]
-                    }
+                    gnork: "bork",
+                    a1: "somemark1",
+                    b2: "somemark1"
                   },
                   desc: "we can link to a mark from start"
                 }
@@ -65,7 +63,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             UNITLAYERS: { units: { a1: {}, b2: {} } },
-            LINKS: { marks: {} },
+            LINKS: { actions: {} },
             newStepId: "foo"
           },
           tests: [
@@ -73,10 +71,10 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["somemark"] },
               asserts: [
                 {
-                  sample: "LINKS.marks.somemark",
+                  sample: "LINKS.actions",
                   res: {
-                    func: "somemark2",
-                    pos: ["a1", "b2"]
+                    a1: "somemark2",
+                    b2: "somemark2"
                   },
                   desc: "we can link to a mark from non-start"
                 }

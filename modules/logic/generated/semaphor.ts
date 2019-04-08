@@ -23,17 +23,7 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "madeline" | "starvation";
-  commands: {
-    deploy?: "deploy1" | "deploy2";
-    promote?: "promote1" | "promote2";
-  };
-  marks: {
-    selectdeploytarget?: {
-      func: "selectdeploytarget1" | "selectdeploytarget2";
-      pos: string[];
-    };
-    selectunit?: { func: "selectunit1" | "selectunit2"; pos: string[] };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
@@ -58,23 +48,23 @@ type Links = {
       neutralbishops: oldUnitLayers.neutralbishops
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectdeploytarget = {
-      func: "selectdeploytarget1",
-      pos: Object.keys(
-        Object.keys(BOARD.board)
-          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
-      )
-    };
+    for (const pos of Object.keys(
+      Object.keys(BOARD.board)
+        .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+        .reduce((m, k) => ({ ...m, [k]: {} }), {})
+    )) {
+      LINKS.actions[pos] = "selectdeploytarget1";
+    }
 
-    LINKS.marks.selectunit = {
-      func: "selectunit1",
-      pos: Object.keys({ ...UNITLAYERS.pawns, ...UNITLAYERS.bishops })
-    };
+    for (const pos of Object.keys({
+      ...UNITLAYERS.pawns,
+      ...UNITLAYERS.bishops
+    })) {
+      LINKS.actions[pos] = "selectunit1";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -142,7 +132,7 @@ type Links = {
     });
   };
   game.deploy1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       line: { ...step.ARTIFACTS.line }
     };
@@ -228,7 +218,7 @@ type Links = {
   };
   game.deploy1instruction = () => defaultInstruction(1);
   game.promote1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       line: { ...step.ARTIFACTS.line }
     };
@@ -314,9 +304,9 @@ type Links = {
   };
   game.promote1instruction = () => defaultInstruction(1);
   game.selectdeploytarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.deploy = "deploy1";
+    LINKS.actions.deploy = "deploy1";
 
     return {
       LINKS,
@@ -342,9 +332,9 @@ type Links = {
     });
   };
   game.selectunit1 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.promote = "promote1";
+    LINKS.actions.promote = "promote1";
 
     return {
       LINKS,
@@ -397,23 +387,23 @@ type Links = {
       neutralbishops: oldUnitLayers.neutralbishops
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectdeploytarget = {
-      func: "selectdeploytarget2",
-      pos: Object.keys(
-        Object.keys(BOARD.board)
-          .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
-      )
-    };
+    for (const pos of Object.keys(
+      Object.keys(BOARD.board)
+        .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
+        .reduce((m, k) => ({ ...m, [k]: {} }), {})
+    )) {
+      LINKS.actions[pos] = "selectdeploytarget2";
+    }
 
-    LINKS.marks.selectunit = {
-      func: "selectunit2",
-      pos: Object.keys({ ...UNITLAYERS.pawns, ...UNITLAYERS.bishops })
-    };
+    for (const pos of Object.keys({
+      ...UNITLAYERS.pawns,
+      ...UNITLAYERS.bishops
+    })) {
+      LINKS.actions[pos] = "selectunit2";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -519,7 +509,7 @@ type Links = {
     });
   };
   game.deploy2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       line: { ...step.ARTIFACTS.line }
     };
@@ -605,7 +595,7 @@ type Links = {
   };
   game.deploy2instruction = () => defaultInstruction(2);
   game.promote2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       line: { ...step.ARTIFACTS.line }
     };
@@ -691,9 +681,9 @@ type Links = {
   };
   game.promote2instruction = () => defaultInstruction(2);
   game.selectdeploytarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.deploy = "deploy2";
+    LINKS.actions.deploy = "deploy2";
 
     return {
       LINKS,
@@ -719,9 +709,9 @@ type Links = {
     });
   };
   game.selectunit2 = (step, newMarkPos) => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
 
-    LINKS.commands.promote = "promote2";
+    LINKS.actions.promote = "promote2";
 
     return {
       LINKS,

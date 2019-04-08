@@ -60,8 +60,7 @@ let UNITLAYERS = {
 
   // Links are reset per step
   ret += `let LINKS = {
-    commands: {},
-    marks: {}
+    actions: {}
   };`;
 
   // We carry over the UnitData. No need to copy it here

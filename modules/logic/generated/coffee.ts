@@ -30,15 +30,7 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "madeline" | "starvation";
-  commands: {
-    uphill?: "uphill1" | "uphill2";
-    downhill?: "downhill1" | "downhill2";
-    horisontal?: "horisontal1" | "horisontal2";
-    vertical?: "vertical1" | "vertical2";
-  };
-  marks: {
-    selectdrop?: { func: "selectdrop1" | "selectdrop2"; pos: string[] };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
@@ -59,18 +51,16 @@ type Links = {
       neutralmarkers: oldUnitLayers.neutralmarkers
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectdrop = {
-      func: "selectdrop1",
-      pos: Object.keys(
-        Object.keys(UNITLAYERS.markers).length === 0
-          ? BOARD.board
-          : UNITLAYERS.markers
-      )
-    };
+    for (const pos of Object.keys(
+      Object.keys(UNITLAYERS.markers).length === 0
+        ? BOARD.board
+        : UNITLAYERS.markers
+    )) {
+      LINKS.actions[pos] = "selectdrop1";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -90,7 +80,7 @@ type Links = {
       : { text: "Select which neutral unit to take over" };
   };
   game.uphill1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -191,7 +181,7 @@ type Links = {
   };
   game.uphill1instruction = () => defaultInstruction(1);
   game.downhill1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -292,7 +282,7 @@ type Links = {
   };
   game.downhill1instruction = () => defaultInstruction(1);
   game.horisontal1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -393,7 +383,7 @@ type Links = {
   };
   game.horisontal1instruction = () => defaultInstruction(1);
   game.vertical1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -502,7 +492,7 @@ type Links = {
       downhill: { ...step.ARTIFACTS.downhill },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectdrop: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -528,16 +518,16 @@ type Links = {
       }
     }
     if (Object.keys(ARTIFACTS.uphill).length !== 0) {
-      LINKS.commands.uphill = "uphill1";
+      LINKS.actions.uphill = "uphill1";
     }
     if (Object.keys(ARTIFACTS.downhill).length !== 0) {
-      LINKS.commands.downhill = "downhill1";
+      LINKS.actions.downhill = "downhill1";
     }
     if (Object.keys(ARTIFACTS.vertical).length !== 0) {
-      LINKS.commands.vertical = "vertical1";
+      LINKS.actions.vertical = "vertical1";
     }
     if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
-      LINKS.commands.horisontal = "horisontal1";
+      LINKS.actions.horisontal = "horisontal1";
     }
 
     return {
@@ -607,18 +597,16 @@ type Links = {
       neutralmarkers: oldUnitLayers.neutralmarkers
     };
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectdrop = {
-      func: "selectdrop2",
-      pos: Object.keys(
-        Object.keys(UNITLAYERS.markers).length === 0
-          ? BOARD.board
-          : UNITLAYERS.markers
-      )
-    };
+    for (const pos of Object.keys(
+      Object.keys(UNITLAYERS.markers).length === 0
+        ? BOARD.board
+        : UNITLAYERS.markers
+    )) {
+      LINKS.actions[pos] = "selectdrop2";
+    }
 
     return {
       UNITDATA: step.UNITDATA,
@@ -672,7 +660,7 @@ type Links = {
     });
   };
   game.uphill2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -773,7 +761,7 @@ type Links = {
   };
   game.uphill2instruction = () => defaultInstruction(2);
   game.downhill2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -874,7 +862,7 @@ type Links = {
   };
   game.downhill2instruction = () => defaultInstruction(2);
   game.horisontal2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -975,7 +963,7 @@ type Links = {
   };
   game.horisontal2instruction = () => defaultInstruction(2);
   game.vertical2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -1084,7 +1072,7 @@ type Links = {
       downhill: { ...step.ARTIFACTS.downhill },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectdrop: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -1110,16 +1098,16 @@ type Links = {
       }
     }
     if (Object.keys(ARTIFACTS.uphill).length !== 0) {
-      LINKS.commands.uphill = "uphill2";
+      LINKS.actions.uphill = "uphill2";
     }
     if (Object.keys(ARTIFACTS.downhill).length !== 0) {
-      LINKS.commands.downhill = "downhill2";
+      LINKS.actions.downhill = "downhill2";
     }
     if (Object.keys(ARTIFACTS.vertical).length !== 0) {
-      LINKS.commands.vertical = "vertical2";
+      LINKS.actions.vertical = "vertical2";
     }
     if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
-      LINKS.commands.horisontal = "horisontal2";
+      LINKS.actions.horisontal = "horisontal2";
     }
 
     return {

@@ -21,16 +21,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       .concat("starvation")
       .map(n => `'${n}'`)
       .join(" | ")};
-    commands: {
-      ${Object.keys(gameDef.flow.commands)
-        .map(n => `${n}?: '${n}1' | '${n}2'`)
-        .join(";\n")}
-    };
-    marks: {
-      ${Object.keys(gameDef.flow.marks)
-        .map(n => `${n}?: { func: '${n}1' | '${n}2', pos: string[] }`)
-        .join(";\n")}
-    };
+    actions: { [idx: string]: string };
   };\n`;
 
   [1, 2].forEach((player: 1 | 2) => {

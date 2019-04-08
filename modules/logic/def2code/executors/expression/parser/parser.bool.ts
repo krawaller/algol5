@@ -85,13 +85,12 @@ export default function parseVal(
   }
   if (isAlgolBoolCmndAvailable(expr)) {
     const { cmndavailable: act } = expr;
-    return `!!LINKS.commands[${parser.val(act)}]`;
+    return `!!LINKS.actions[${parser.val(act)}]`;
   }
   if (isAlgolBoolMarkAvailable(expr)) {
     const { markavailable: act } = expr;
-    return `!!(LINKS.marks[${parser.val(act)}] && LINKS.marks[${parser.val(
-      act
-    )}].pos.length)`;
+    const mark = parser.val(act);
+    return `!!Object.keys(LINKS.actions).find(a => LINKS.actions[a] === ${mark} + ${player})`;
   }
   if (isAlgolBoolTruthy(expr)) {
     const { truthy: val } = expr;

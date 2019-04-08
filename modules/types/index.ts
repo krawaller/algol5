@@ -5,21 +5,11 @@ export * from "./session";
 export * from "./generated";
 export * from "./suite";
 
-export type AlgolStepLinks<
-  Command extends string = string,
-  GameEnd extends string = string,
-  Mark extends string = string
-> = {
+export type AlgolStepLinks<GameEnd extends string = string> = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "starvation" | GameEnd;
-  commands: { [T in Command]: string };
-  marks: {
-    [M in Mark]: {
-      func: string;
-      pos: string[];
-    }
-  };
+  actions: { [idx: string]: string };
 };
 
 export type AlgolStep<
@@ -27,7 +17,7 @@ export type AlgolStep<
   GameEnd extends string = string,
   Mark extends string = string
 > = {
-  LINKS: AlgolStepLinks<Command, GameEnd, Mark>;
+  LINKS: AlgolStepLinks<GameEnd>;
 };
 
 export type SaveData = {

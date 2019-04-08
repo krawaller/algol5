@@ -139,31 +139,18 @@ type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
   endedBy?: "madeline" | "starvation";
-  commands: {
-    north?: "north1" | "north2";
-    south?: "south1" | "south2";
-    east?: "east1" | "east2";
-    west?: "west1" | "west2";
-  };
-  marks: {
-    selectpushpoint?: {
-      func: "selectpushpoint1" | "selectpushpoint2";
-      pos: string[];
-    };
-  };
+  actions: { [idx: string]: string };
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
   game.start1 = step => {
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectpushpoint = {
-      func: "selectpushpoint1",
-      pos: Object.keys(TERRAIN.edge)
-    };
+    for (const pos of Object.keys(TERRAIN.edge)) {
+      LINKS.actions[pos] = "selectpushpoint1";
+    }
 
     const oldUnitLayers = step.UNITLAYERS;
     return {
@@ -206,7 +193,7 @@ type Links = {
     });
   };
   game.north1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -310,7 +297,7 @@ type Links = {
   };
   game.north1instruction = () => defaultInstruction(1);
   game.south1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -414,7 +401,7 @@ type Links = {
   };
   game.south1instruction = () => defaultInstruction(1);
   game.east1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -518,7 +505,7 @@ type Links = {
   };
   game.east1instruction = () => defaultInstruction(1);
   game.west1 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -638,7 +625,7 @@ type Links = {
       spawneast: { ...step.ARTIFACTS.spawneast },
       fourinarow: step.ARTIFACTS.fourinarow
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectpushpoint: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -708,16 +695,16 @@ type Links = {
       }
     }
     if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
-      LINKS.commands.south = "south1";
+      LINKS.actions.south = "south1";
     }
     if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
-      LINKS.commands.north = "north1";
+      LINKS.actions.north = "north1";
     }
     if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
-      LINKS.commands.west = "west1";
+      LINKS.actions.west = "west1";
     }
     if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
-      LINKS.commands.east = "east1";
+      LINKS.actions.east = "east1";
     }
 
     return {
@@ -776,14 +763,12 @@ type Links = {
   const ownerNames = ["neutral", "opp", "my"];
   game.start2 = step => {
     let LINKS: Links = {
-      commands: {},
-      marks: {}
+      actions: {}
     };
 
-    LINKS.marks.selectpushpoint = {
-      func: "selectpushpoint2",
-      pos: Object.keys(TERRAIN.edge)
-    };
+    for (const pos of Object.keys(TERRAIN.edge)) {
+      LINKS.actions[pos] = "selectpushpoint2";
+    }
 
     const oldUnitLayers = step.UNITLAYERS;
     return {
@@ -985,7 +970,7 @@ type Links = {
     });
   };
   game.north2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -1089,7 +1074,7 @@ type Links = {
   };
   game.north2instruction = () => defaultInstruction(2);
   game.south2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -1193,7 +1178,7 @@ type Links = {
   };
   game.south2instruction = () => defaultInstruction(2);
   game.east2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -1297,7 +1282,7 @@ type Links = {
   };
   game.east2instruction = () => defaultInstruction(2);
   game.west2 = step => {
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -1417,7 +1402,7 @@ type Links = {
       spawneast: { ...step.ARTIFACTS.spawneast },
       fourinarow: step.ARTIFACTS.fourinarow
     };
-    let LINKS: Links = { commands: {}, marks: {} };
+    let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectpushpoint: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
     {
@@ -1487,16 +1472,16 @@ type Links = {
       }
     }
     if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
-      LINKS.commands.south = "south2";
+      LINKS.actions.south = "south2";
     }
     if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
-      LINKS.commands.north = "north2";
+      LINKS.actions.north = "north2";
     }
     if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
-      LINKS.commands.west = "west2";
+      LINKS.actions.west = "west2";
     }
     if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
-      LINKS.commands.east = "east2";
+      LINKS.actions.east = "east2";
     }
 
     return {

@@ -32,17 +32,16 @@ function executeLinkInner(
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     // ------------- Linking to a command
     return `
-      LINKS.commands.${name} = '${name + player}';
+      LINKS.actions.${name} = '${name + player}';
     `;
   } else if (gameDef && gameDef.flow.marks && gameDef.flow.marks[name]) {
     // ------------- Linking to a mark
     const markDef = gameDef.flow.marks[name];
     return `
-      LINKS.marks.${name} = {
-        func: '${name + player}',
-        pos: Object.keys(${parser.set(markDef.from)})
-      };
-    `;
+    for(const pos of Object.keys(${parser.set(markDef.from)})) {
+      LINKS.actions[pos] = '${name + player}';
+    }
+`;
   } else if (name === "endturn") {
     // ------------- Linking to next turn, have to check win conditions
     return Object.entries(gameDef.flow.endGame || {})

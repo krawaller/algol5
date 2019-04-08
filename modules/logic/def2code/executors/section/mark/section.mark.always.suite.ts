@@ -68,16 +68,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               expr: "markEnd",
               asserts: [
                 {
-                  sample: "returnVal.path",
-                  res: ["before", "c3"],
-                  desc: "we added the new mark position to path"
-                },
-                {
-                  sample: "returnVal.name",
-                  res: "somemark",
-                  desc: "the mark name is used as step name"
-                },
-                {
                   sample: "returnVal.LINKS",
                   res: "localLinks",
                   desc: "we always mutate links so pass them on here"

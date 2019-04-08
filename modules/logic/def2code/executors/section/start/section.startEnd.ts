@@ -22,8 +22,6 @@ export function executeStartEnd(
   return {
     UNITDATA: step.UNITDATA,
     LINKS,
-    name: "start",
-    path: [],
     ${
       !usage.UNITLAYERS
         ? `UNITLAYERS: { 

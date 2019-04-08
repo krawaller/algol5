@@ -16,8 +16,6 @@ export function executeMarkEnd(
   return `
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "${action}",
       ${usage.ARTIFACTS ? "ARTIFACTS, " : "ARTIFACTS: step.ARTIFACTS, "}
       ${usage.UNITLAYERS ? "UNITLAYERS, " : "UNITLAYERS: step.UNITLAYERS, "}
       ${usage.UNITDATA ? "UNITDATA, " : "UNITDATA: step.UNITDATA, "}

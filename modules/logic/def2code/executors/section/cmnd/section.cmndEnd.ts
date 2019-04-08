@@ -17,7 +17,6 @@ export function executeCmndEnd(
 
   return `return {
     LINKS,
-    path: step.path.concat("${action}"),
     MARKS: {},
     ${usage.ARTIFACTS ? "ARTIFACTS, " : "ARTIFACTS: step.ARTIFACTS, "}
     ${usage.TURN ? "TURN, " : "TURN: step.TURN, "}

@@ -109,8 +109,6 @@ type Links = {
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
-      name: "start",
-      path: [],
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
@@ -236,7 +234,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("move"),
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
@@ -275,8 +272,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectunit",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -312,8 +307,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectmovetarget",
       ARTIFACTS: step.ARTIFACTS,
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -450,8 +443,6 @@ type Links = {
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
-      name: "start",
-      path: [],
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
@@ -690,7 +681,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("move"),
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
@@ -729,8 +719,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectunit",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -766,8 +754,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectmovetarget",
       ARTIFACTS: step.ARTIFACTS,
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,

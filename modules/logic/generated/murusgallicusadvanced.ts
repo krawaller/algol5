@@ -168,8 +168,6 @@ type Links = {
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
-      name: "start",
-      path: [],
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
@@ -311,7 +309,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("move"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -404,7 +401,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("kill"),
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
@@ -485,7 +481,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("sacrifice"),
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
@@ -595,7 +590,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("fire"),
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
@@ -665,8 +659,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selecttower",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -756,8 +748,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectmove",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -794,8 +784,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectkill",
       ARTIFACTS: step.ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -882,8 +870,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectcatapult",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -911,8 +897,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectfire",
       ARTIFACTS: step.ARTIFACTS,
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -1099,8 +1083,6 @@ type Links = {
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
-      name: "start",
-      path: [],
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
@@ -1339,7 +1321,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("move"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -1432,7 +1413,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("kill"),
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
@@ -1513,7 +1493,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("sacrifice"),
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
@@ -1623,7 +1602,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("fire"),
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
@@ -1693,8 +1671,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selecttower",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -1784,8 +1760,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectmove",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -1822,8 +1796,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectkill",
       ARTIFACTS: step.ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -1910,8 +1882,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectcatapult",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -1939,8 +1909,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectfire",
       ARTIFACTS: step.ARTIFACTS,
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,

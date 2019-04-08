@@ -75,8 +75,6 @@ type Links = {
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
-      name: "start",
-      path: [],
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
@@ -182,7 +180,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("uphill"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -284,7 +281,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("downhill"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -386,7 +382,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("horisontal"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -488,7 +483,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("vertical"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -548,8 +542,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectdrop",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -631,8 +623,6 @@ type Links = {
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
-      name: "start",
-      path: [],
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
@@ -772,7 +762,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("uphill"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -874,7 +863,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("downhill"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -976,7 +964,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("horisontal"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -1078,7 +1065,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("vertical"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -1138,8 +1124,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectdrop",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,

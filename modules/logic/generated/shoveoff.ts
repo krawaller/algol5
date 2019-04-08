@@ -169,8 +169,6 @@ type Links = {
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
-      name: "start",
-      path: [],
       UNITLAYERS: {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
@@ -301,7 +299,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("north"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -406,7 +403,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("south"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -511,7 +507,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("east"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -616,7 +611,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("west"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -728,8 +722,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectpushpoint",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,
@@ -797,8 +789,6 @@ type Links = {
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
-      name: "start",
-      path: [],
       UNITLAYERS: {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
@@ -1088,7 +1078,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("north"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -1193,7 +1182,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("south"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -1298,7 +1286,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("east"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -1403,7 +1390,6 @@ type Links = {
     }
     return {
       LINKS,
-      path: step.path.concat("west"),
       MARKS: {},
       ARTIFACTS,
       TURN: step.TURN,
@@ -1515,8 +1501,6 @@ type Links = {
 
     return {
       LINKS,
-      path: step.path.concat(newMarkPos),
-      name: "selectpushpoint",
       ARTIFACTS,
       UNITLAYERS,
       UNITDATA: step.UNITDATA,

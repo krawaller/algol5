@@ -88,15 +88,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.LINKS",
                   res: "localLinks",
                   desc: "We always have new local links, so pass that along"
-                },
-                {
-                  sample: "returnVal.name",
-                  res: "start"
-                },
-                {
-                  sample: "returnVal.path",
-                  res: [],
-                  desc: "new turn always get empty path"
                 }
               ]
             }

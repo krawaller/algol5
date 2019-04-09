@@ -134,7 +134,7 @@ const TERRAIN = {
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = {};
+let game: any = { action: {}, instruction: {} };
 type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
@@ -143,7 +143,7 @@ type Links = {
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
-  game.start1 = step => {
+  game.action.start1 = step => {
     let LINKS: Links = {
       actions: {}
     };
@@ -172,7 +172,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.start1instruction = step => {
+  game.instruction.start1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
 
     return collapseContent({
@@ -192,7 +192,7 @@ type Links = {
       ]
     });
   };
-  game.north1 = step => {
+  game.action.north1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
@@ -295,8 +295,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.north1instruction = () => defaultInstruction(1);
-  game.south1 = step => {
+  game.instruction.north1 = () => defaultInstruction(1);
+  game.action.south1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
@@ -399,8 +399,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.south1instruction = () => defaultInstruction(1);
-  game.east1 = step => {
+  game.instruction.south1 = () => defaultInstruction(1);
+  game.action.east1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
@@ -503,8 +503,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.east1instruction = () => defaultInstruction(1);
-  game.west1 = step => {
+  game.instruction.east1 = () => defaultInstruction(1);
+  game.action.west1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
@@ -607,8 +607,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.west1instruction = () => defaultInstruction(1);
-  game.selectpushpoint1 = (step, newMarkPos) => {
+  game.instruction.west1 = () => defaultInstruction(1);
+  game.action.selectpushpoint1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       targetedgepoints: { ...step.ARTIFACTS.targetedgepoints },
       squishsouth: { ...step.ARTIFACTS.squishsouth },
@@ -718,7 +718,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectpushpoint1instruction = step => {
+  game.instruction.selectpushpoint1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
 
@@ -761,7 +761,7 @@ type Links = {
 }
 {
   const ownerNames = ["neutral", "opp", "my"];
-  game.start2 = step => {
+  game.action.start2 = step => {
     let LINKS: Links = {
       actions: {}
     };
@@ -790,7 +790,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.start2instruction = step => {
+  game.instruction.start2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
 
     return collapseContent({
@@ -961,7 +961,7 @@ type Links = {
       ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
     }
 
-    return game.start1({
+    return game.action.start1({
       NEXTSPAWNID: 1,
 
       TURN: 0,
@@ -969,7 +969,7 @@ type Links = {
       UNITLAYERS
     });
   };
-  game.north2 = step => {
+  game.action.north2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
@@ -1072,8 +1072,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.north2instruction = () => defaultInstruction(2);
-  game.south2 = step => {
+  game.instruction.north2 = () => defaultInstruction(2);
+  game.action.south2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
@@ -1176,8 +1176,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.south2instruction = () => defaultInstruction(2);
-  game.east2 = step => {
+  game.instruction.south2 = () => defaultInstruction(2);
+  game.action.east2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
@@ -1280,8 +1280,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.east2instruction = () => defaultInstruction(2);
-  game.west2 = step => {
+  game.instruction.east2 = () => defaultInstruction(2);
+  game.action.west2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
@@ -1384,8 +1384,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.west2instruction = () => defaultInstruction(2);
-  game.selectpushpoint2 = (step, newMarkPos) => {
+  game.instruction.west2 = () => defaultInstruction(2);
+  game.action.selectpushpoint2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       targetedgepoints: { ...step.ARTIFACTS.targetedgepoints },
       squishsouth: { ...step.ARTIFACTS.squishsouth },
@@ -1495,7 +1495,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectpushpoint2instruction = step => {
+  game.instruction.selectpushpoint2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
 

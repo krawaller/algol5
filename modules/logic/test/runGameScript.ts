@@ -1,21 +1,23 @@
 import {
   GameTestSuite,
+  AlgolGame,
   AlgolStep,
   AlgolStepLinks,
-  isAlgolInstrLine
+  isAlgolInstrLine,
+  AlgolContentLineAnon
 } from "../../types";
 import { getContentText } from "../../common";
 
 export function runGameScript(
   id: string,
-  game: any,
+  game: AlgolGame,
   scripts: GameTestSuite,
   debug?: boolean
 ) {
   for (const scriptName in scripts) {
     test(`Game - ${id} - ${scriptName}`, () => {
       const lines = scripts[scriptName];
-      let step: any = game.newBattle();
+      let step: AlgolStep = game.newBattle();
       let n = 0;
       let lastFunc = "start1";
       while (lines.length) {
@@ -52,7 +54,7 @@ export function runGameScript(
             } else {
               if (debug)
                 console.log("N", n, "ACTION", action, "FUNCTION", func);
-              const instr = game[lastFunc + "instruction"](step);
+              const instr = game.instruction[lastFunc](step);
               const text = getContentText(instr);
               if (action.match(/^[a-z]{1,2}[0-9]{1,2}$/)) {
                 expect(text.toLowerCase()).toMatch("select");
@@ -60,12 +62,16 @@ export function runGameScript(
                 action === "endturn" ||
                 action === step.LINKS.endturn
               ) {
-                expect(instr.line).toContainEqual({ command: "endturn" });
+                expect((instr as AlgolContentLineAnon).line).toContainEqual({
+                  command: "endturn"
+                });
               } else {
-                expect(instr.line).toContainEqual({ command: action });
+                expect((instr as AlgolContentLineAnon).line).toContainEqual({
+                  command: action
+                });
               }
 
-              step = game[func](step, action);
+              step = game.action[func](step, action);
               lastFunc = func;
             }
           }

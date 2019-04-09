@@ -1,16 +1,20 @@
-import { AlgolStepLinks } from "../../types";
+import { AlgolStep, AlgolStepLinks, AlgolGame } from "../../types";
 
-export function runGameRandomly(id: string, game: any, max: number = 1000) {
+export function runGameRandomly(
+  id: string,
+  game: AlgolGame,
+  max: number = 1000
+) {
   test(`Game - ${id} - random play, max ${max} moves`, () => {
     let remaining = max;
-    let step: { LINKS: AlgolStepLinks } = game.newBattle();
+    let step: AlgolStep = game.newBattle();
     let actionObj = getActionObj(step.LINKS);
     let actions = Object.keys(actionObj);
 
     while (remaining && actions.length && !step.LINKS.endedBy) {
       remaining--;
       const action = actions[Math.floor(Math.random() * actions.length)];
-      step = game[actionObj[action]](step, action);
+      step = game.action[actionObj[action]](step, action);
       actionObj = getActionObj(step.LINKS);
       actions = Object.keys(actionObj);
     }

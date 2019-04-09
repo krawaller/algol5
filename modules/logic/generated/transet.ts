@@ -17,7 +17,7 @@ const relativeDirs = makeRelativeDirs();
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = {};
+let game: any = { action: {}, instruction: {} };
 type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
@@ -71,7 +71,7 @@ type Links = {
       e4: { pos: "e4", x: 5, y: 4 }
     }
   };
-  game.start1 = step => {
+  game.action.start1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -108,12 +108,12 @@ type Links = {
       TURN: step.TURN + 1
     };
   };
-  game.start1instruction = step => {
+  game.instruction.start1 = step => {
     return collapseContent({
       line: [{ text: "Select a unit to" }, { command: "move" }]
     });
   };
-  game.move1 = step => {
+  game.action.move1 = step => {
     let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -205,8 +205,8 @@ type Links = {
       UNITLAYERS
     };
   };
-  game.move1instruction = () => defaultInstruction(1);
-  game.swap1 = step => {
+  game.instruction.move1 = () => defaultInstruction(1);
+  game.action.swap1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       swap2step: step.ARTIFACTS.swap2step,
@@ -297,8 +297,8 @@ type Links = {
       UNITLAYERS
     };
   };
-  game.swap1instruction = () => defaultInstruction(1);
-  game.selectunit1 = (step, newMarkPos) => {
+  game.instruction.swap1 = () => defaultInstruction(1);
+  game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       swap2step: step.ARTIFACTS.swap2step,
       swap1steps: step.ARTIFACTS.swap1steps,
@@ -341,7 +341,7 @@ type Links = {
       MARKS
     };
   };
-  game.selectunit1instruction = step => {
+  game.instruction.selectunit1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
 
@@ -408,7 +408,7 @@ type Links = {
       ]
     });
   };
-  game.selectmovetarget1 = (step, newMarkPos) => {
+  game.action.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
@@ -436,7 +436,7 @@ type Links = {
       MARKS
     };
   };
-  game.selectmovetarget1instruction = step => {
+  game.instruction.selectmovetarget1 = step => {
     let MARKS = step.MARKS;
 
     let UNITLAYERS = step.UNITLAYERS;
@@ -471,7 +471,7 @@ type Links = {
           ]
         });
   };
-  game.selectdeportdestination1 = (step, newMarkPos) => {
+  game.action.selectdeportdestination1 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
 
     LINKS.actions.move = "move1";
@@ -485,7 +485,7 @@ type Links = {
       MARKS: { ...step.MARKS, selectdeportdestination: newMarkPos }
     };
   };
-  game.selectdeportdestination1instruction = step => {
+  game.instruction.selectdeportdestination1 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -501,7 +501,7 @@ type Links = {
       ]
     });
   };
-  game.selectswapunit1 = (step, newMarkPos) => {
+  game.action.selectswapunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       swap2step: step.ARTIFACTS.swap2step,
       swap1steps: { ...step.ARTIFACTS.swap1steps },
@@ -532,7 +532,7 @@ type Links = {
       MARKS
     };
   };
-  game.selectswapunit1instruction = step => {
+  game.instruction.selectswapunit1 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -545,7 +545,7 @@ type Links = {
       ]
     });
   };
-  game.selectswap1target1 = (step, newMarkPos) => {
+  game.action.selectswap1target1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       swap2step: { ...step.ARTIFACTS.swap2step },
       swap1steps: step.ARTIFACTS.swap1steps,
@@ -581,7 +581,7 @@ type Links = {
       MARKS
     };
   };
-  game.selectswap1target1instruction = step => {
+  game.instruction.selectswap1target1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
 
@@ -648,7 +648,7 @@ type Links = {
       e4: { pos: "e4", x: 5, y: 4 }
     }
   };
-  game.start2 = step => {
+  game.action.start2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -685,7 +685,7 @@ type Links = {
       TURN: step.TURN + 1
     };
   };
-  game.start2instruction = step => {
+  game.instruction.start2 = step => {
     return collapseContent({
       line: [{ text: "Select a unit to" }, { command: "move" }]
     });
@@ -731,13 +731,13 @@ type Links = {
       ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
     }
 
-    return game.start1({
+    return game.action.start1({
       TURN: 0,
       UNITDATA,
       UNITLAYERS
     });
   };
-  game.move2 = step => {
+  game.action.move2 = step => {
     let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -829,8 +829,8 @@ type Links = {
       UNITLAYERS
     };
   };
-  game.move2instruction = () => defaultInstruction(2);
-  game.swap2 = step => {
+  game.instruction.move2 = () => defaultInstruction(2);
+  game.action.swap2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       swap2step: step.ARTIFACTS.swap2step,
@@ -921,8 +921,8 @@ type Links = {
       UNITLAYERS
     };
   };
-  game.swap2instruction = () => defaultInstruction(2);
-  game.selectunit2 = (step, newMarkPos) => {
+  game.instruction.swap2 = () => defaultInstruction(2);
+  game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       swap2step: step.ARTIFACTS.swap2step,
       swap1steps: step.ARTIFACTS.swap1steps,
@@ -965,7 +965,7 @@ type Links = {
       MARKS
     };
   };
-  game.selectunit2instruction = step => {
+  game.instruction.selectunit2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
 
@@ -1032,7 +1032,7 @@ type Links = {
       ]
     });
   };
-  game.selectmovetarget2 = (step, newMarkPos) => {
+  game.action.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
     let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1060,7 +1060,7 @@ type Links = {
       MARKS
     };
   };
-  game.selectmovetarget2instruction = step => {
+  game.instruction.selectmovetarget2 = step => {
     let MARKS = step.MARKS;
 
     let UNITLAYERS = step.UNITLAYERS;
@@ -1095,7 +1095,7 @@ type Links = {
           ]
         });
   };
-  game.selectdeportdestination2 = (step, newMarkPos) => {
+  game.action.selectdeportdestination2 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
 
     LINKS.actions.move = "move2";
@@ -1109,7 +1109,7 @@ type Links = {
       MARKS: { ...step.MARKS, selectdeportdestination: newMarkPos }
     };
   };
-  game.selectdeportdestination2instruction = step => {
+  game.instruction.selectdeportdestination2 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -1125,7 +1125,7 @@ type Links = {
       ]
     });
   };
-  game.selectswapunit2 = (step, newMarkPos) => {
+  game.action.selectswapunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       swap2step: step.ARTIFACTS.swap2step,
       swap1steps: { ...step.ARTIFACTS.swap1steps },
@@ -1156,7 +1156,7 @@ type Links = {
       MARKS
     };
   };
-  game.selectswapunit2instruction = step => {
+  game.instruction.selectswapunit2 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -1169,7 +1169,7 @@ type Links = {
       ]
     });
   };
-  game.selectswap1target2 = (step, newMarkPos) => {
+  game.action.selectswap1target2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       swap2step: { ...step.ARTIFACTS.swap2step },
       swap1steps: step.ARTIFACTS.swap1steps,
@@ -1205,7 +1205,7 @@ type Links = {
       MARKS
     };
   };
-  game.selectswap1target2instruction = step => {
+  game.instruction.selectswap1target2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
 

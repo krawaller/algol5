@@ -24,7 +24,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = {};
+let game: any = { action: {}, instruction: {} };
 type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
@@ -33,7 +33,7 @@ type Links = {
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
-  game.start1 = step => {
+  game.action.start1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -73,14 +73,14 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.start1instruction = step => {
+  game.instruction.start1 = step => {
     let TURN = step.TURN;
 
     return TURN > 2
       ? { text: "Select unit to expand from" }
       : { text: "Select where to deploy the first of your two initial units" };
   };
-  game.deploy1 = step => {
+  game.action.deploy1 = step => {
     let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -148,14 +148,14 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.deploy1instruction = step => {
+  game.instruction.deploy1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
 
     return Object.keys(UNITLAYERS.myunits).length === 1
       ? { text: "Now select where to deploy your second and last initial unit" }
       : defaultInstruction(1);
   };
-  game.expand1 = step => {
+  game.action.expand1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
@@ -237,8 +237,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.expand1instruction = () => defaultInstruction(1);
-  game.selectdeploy1 = (step, newMarkPos) => {
+  game.instruction.expand1 = () => defaultInstruction(1);
+  game.action.selectdeploy1 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
 
     LINKS.actions.deploy = "deploy1";
@@ -254,7 +254,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectdeploy1instruction = step => {
+  game.instruction.selectdeploy1 = step => {
     let MARKS = step.MARKS;
 
     let UNITLAYERS = step.UNITLAYERS;
@@ -272,7 +272,7 @@ type Links = {
       ]
     });
   };
-  game.selectunit1 = (step, newMarkPos) => {
+  game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       spawndirs: { ...step.ARTIFACTS.spawndirs },
       growstarts: { ...step.ARTIFACTS.growstarts },
@@ -386,10 +386,10 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectunit1instruction = step => {
+  game.instruction.selectunit1 = step => {
     return { text: "Now select which square to expand to" };
   };
-  game.selecttarget1 = (step, newMarkPos) => {
+  game.action.selecttarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -433,7 +433,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selecttarget1instruction = step => {
+  game.instruction.selecttarget1 = step => {
     let MARKS = step.MARKS;
 
     let UNITLAYERS = step.UNITLAYERS;
@@ -455,7 +455,7 @@ type Links = {
 }
 {
   const ownerNames = ["neutral", "opp", "my"];
-  game.start2 = step => {
+  game.action.start2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -495,7 +495,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.start2instruction = step => {
+  game.instruction.start2 = step => {
     let TURN = step.TURN;
 
     return TURN > 2
@@ -524,7 +524,7 @@ type Links = {
       ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
     }
 
-    return game.start1({
+    return game.action.start1({
       NEXTSPAWNID: 1,
 
       TURN: 0,
@@ -532,7 +532,7 @@ type Links = {
       UNITLAYERS
     });
   };
-  game.deploy2 = step => {
+  game.action.deploy2 = step => {
     let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -600,14 +600,14 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.deploy2instruction = step => {
+  game.instruction.deploy2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
 
     return Object.keys(UNITLAYERS.myunits).length === 1
       ? { text: "Now select where to deploy your second and last initial unit" }
       : defaultInstruction(2);
   };
-  game.expand2 = step => {
+  game.action.expand2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
@@ -689,8 +689,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.expand2instruction = () => defaultInstruction(2);
-  game.selectdeploy2 = (step, newMarkPos) => {
+  game.instruction.expand2 = () => defaultInstruction(2);
+  game.action.selectdeploy2 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
 
     LINKS.actions.deploy = "deploy2";
@@ -706,7 +706,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectdeploy2instruction = step => {
+  game.instruction.selectdeploy2 = step => {
     let MARKS = step.MARKS;
 
     let UNITLAYERS = step.UNITLAYERS;
@@ -724,7 +724,7 @@ type Links = {
       ]
     });
   };
-  game.selectunit2 = (step, newMarkPos) => {
+  game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       spawndirs: { ...step.ARTIFACTS.spawndirs },
       growstarts: { ...step.ARTIFACTS.growstarts },
@@ -838,10 +838,10 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectunit2instruction = step => {
+  game.instruction.selectunit2 = step => {
     return { text: "Now select which square to expand to" };
   };
-  game.selecttarget2 = (step, newMarkPos) => {
+  game.action.selecttarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -885,7 +885,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selecttarget2instruction = step => {
+  game.instruction.selecttarget2 = step => {
     let MARKS = step.MARKS;
 
     let UNITLAYERS = step.UNITLAYERS;

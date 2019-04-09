@@ -12,7 +12,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
   ret += executeSection(gameDef, 1, "head", "head");
 
-  ret += `let game: any = {}; `;
+  ret += `let game: any = {action: {}, instruction: {} }; `;
 
   ret += `type Links = {
     endturn?: 'win' | 'lose' | 'draw' | 'start1' | 'start2';
@@ -29,13 +29,13 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
     ret += executeSection(gameDef, player, "player", "player");
 
-    ret += `game.start${player} = step => {
+    ret += `game.action.start${player} = step => {
       ${executeSection(gameDef, player, "start", "startInit")}
       ${executeSection(gameDef, player, "start", "orders")}
       ${executeSection(gameDef, player, "start", "startEnd")}
     }; `;
 
-    ret += `game.start${player}instruction = step => {
+    ret += `game.instruction.start${player} = step => {
       ${executeSection(gameDef, player, "start", "instruction")}
     }; `;
 
@@ -46,30 +46,30 @@ export function compileGameToCode(gameDef: FullDefAnon) {
     }
 
     Object.keys(gameDef.flow.commands).forEach(cmndName => {
-      ret += `game.${cmndName + player} = step => {
+      ret += `game.action.${cmndName + player} = step => {
         ${executeSection(gameDef, player, cmndName, "cmndInit")}
         ${executeSection(gameDef, player, cmndName, "orders")}
         ${executeSection(gameDef, player, cmndName, "cmndEnd")}
       }; `;
 
       if (gameDef.instructions[cmndName]) {
-        ret += `game.${cmndName + player}instruction = step => {
+        ret += `game.instruction.${cmndName + player} = step => {
           ${executeSection(gameDef, player, cmndName, "instruction")}
         }; `;
       } else {
-        ret += `game.${cmndName +
-          player}instruction = () => defaultInstruction(${player}); `;
+        ret += `game.instruction.${cmndName +
+          player} = () => defaultInstruction(${player}); `;
       }
     });
 
     Object.keys(gameDef.flow.marks).forEach(markName => {
-      ret += `game.${markName + player} = (step, newMarkPos) => {
+      ret += `game.action.${markName + player} = (step, newMarkPos) => {
         ${executeSection(gameDef, player, markName, "markInit")}
         ${executeSection(gameDef, player, markName, "orders")}
         ${executeSection(gameDef, player, markName, "markEnd")}
       }; `;
 
-      ret += `game.${markName + player}instruction = step => {
+      ret += `game.instruction.${markName + player} = step => {
         ${executeSection(gameDef, player, markName, "instruction")}
       }; `;
     });

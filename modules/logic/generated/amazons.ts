@@ -18,7 +18,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = {};
+let game: any = { action: {}, instruction: {} };
 type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
@@ -27,7 +27,7 @@ type Links = {
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
-  game.start1 = step => {
+  game.action.start1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -62,7 +62,7 @@ type Links = {
       TURNVARS: {}
     };
   };
-  game.start1instruction = step => {
+  game.instruction.start1 = step => {
     return collapseContent({
       line: [
         { text: "Select" },
@@ -72,7 +72,7 @@ type Links = {
       ]
     });
   };
-  game.move1 = step => {
+  game.action.move1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targets: { ...step.ARTIFACTS.targets }
@@ -140,10 +140,10 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.move1instruction = step => {
+  game.instruction.move1 = step => {
     return { text: "Now select where to fire at" };
   };
-  game.fire1 = step => {
+  game.action.fire1 = step => {
     let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let TURNVARS = step.TURNVARS;
@@ -197,8 +197,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.fire1instruction = () => defaultInstruction(1);
-  game.selectunit1 = (step, newMarkPos) => {
+  game.instruction.fire1 = () => defaultInstruction(1);
+  game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       targets: { ...step.ARTIFACTS.targets }
     };
@@ -231,7 +231,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectunit1instruction = step => {
+  game.instruction.selectunit1 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -242,7 +242,7 @@ type Links = {
       ]
     });
   };
-  game.selectmovetarget1 = (step, newMarkPos) => {
+  game.action.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
 
     LINKS.actions.move = "move1";
@@ -259,7 +259,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectmovetarget1instruction = step => {
+  game.instruction.selectmovetarget1 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -273,7 +273,7 @@ type Links = {
       ]
     });
   };
-  game.selectfiretarget1 = (step, newMarkPos) => {
+  game.action.selectfiretarget1 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
 
     LINKS.actions.fire = "fire1";
@@ -290,7 +290,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectfiretarget1instruction = step => {
+  game.instruction.selectfiretarget1 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -305,7 +305,7 @@ type Links = {
 }
 {
   const ownerNames = ["neutral", "opp", "my"];
-  game.start2 = step => {
+  game.action.start2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -340,7 +340,7 @@ type Links = {
       TURNVARS: {}
     };
   };
-  game.start2instruction = step => {
+  game.instruction.start2 = step => {
     return collapseContent({
       line: [
         { text: "Select" },
@@ -399,7 +399,7 @@ type Links = {
       ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
     }
 
-    return game.start1({
+    return game.action.start1({
       NEXTSPAWNID: 1,
 
       TURN: 0,
@@ -407,7 +407,7 @@ type Links = {
       UNITLAYERS
     });
   };
-  game.move2 = step => {
+  game.action.move2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       targets: { ...step.ARTIFACTS.targets }
@@ -475,10 +475,10 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.move2instruction = step => {
+  game.instruction.move2 = step => {
     return { text: "Now select where to fire at" };
   };
-  game.fire2 = step => {
+  game.action.fire2 = step => {
     let LINKS: Links = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let TURNVARS = step.TURNVARS;
@@ -532,8 +532,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.fire2instruction = () => defaultInstruction(2);
-  game.selectunit2 = (step, newMarkPos) => {
+  game.instruction.fire2 = () => defaultInstruction(2);
+  game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       targets: { ...step.ARTIFACTS.targets }
     };
@@ -566,7 +566,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectunit2instruction = step => {
+  game.instruction.selectunit2 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -577,7 +577,7 @@ type Links = {
       ]
     });
   };
-  game.selectmovetarget2 = (step, newMarkPos) => {
+  game.action.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
 
     LINKS.actions.move = "move2";
@@ -594,7 +594,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectmovetarget2instruction = step => {
+  game.instruction.selectmovetarget2 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({
@@ -608,7 +608,7 @@ type Links = {
       ]
     });
   };
-  game.selectfiretarget2 = (step, newMarkPos) => {
+  game.action.selectfiretarget2 = (step, newMarkPos) => {
     let LINKS: Links = { actions: {} };
 
     LINKS.actions.fire = "fire2";
@@ -625,7 +625,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectfiretarget2instruction = step => {
+  game.instruction.selectfiretarget2 = step => {
     let MARKS = step.MARKS;
 
     return collapseContent({

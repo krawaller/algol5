@@ -25,7 +25,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = {};
+let game: any = { action: {}, instruction: {} };
 type Links = {
   endturn?: "win" | "lose" | "draw" | "start1" | "start2";
   endMarks?: string[];
@@ -34,7 +34,7 @@ type Links = {
 };
 {
   const ownerNames = ["neutral", "my", "opp"];
-  game.start1 = step => {
+  game.action.start1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -72,14 +72,14 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.start1instruction = step => {
+  game.instruction.start1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
 
     return Object.keys(UNITLAYERS.neutralunits).length === 0
       ? { text: "Select any square to place the first unit of the game" }
       : { text: "Select which neutral unit to take over" };
   };
-  game.uphill1 = step => {
+  game.action.uphill1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
@@ -179,8 +179,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.uphill1instruction = () => defaultInstruction(1);
-  game.downhill1 = step => {
+  game.instruction.uphill1 = () => defaultInstruction(1);
+  game.action.downhill1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
@@ -280,8 +280,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.downhill1instruction = () => defaultInstruction(1);
-  game.horisontal1 = step => {
+  game.instruction.downhill1 = () => defaultInstruction(1);
+  game.action.horisontal1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
@@ -381,8 +381,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.horisontal1instruction = () => defaultInstruction(1);
-  game.vertical1 = step => {
+  game.instruction.horisontal1 = () => defaultInstruction(1);
+  game.action.vertical1 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
@@ -482,8 +482,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.vertical1instruction = () => defaultInstruction(1);
-  game.selectdrop1 = (step, newMarkPos) => {
+  game.instruction.vertical1 = () => defaultInstruction(1);
+  game.action.selectdrop1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       FOOBAR: { ...step.ARTIFACTS.FOOBAR },
       vertical: { ...step.ARTIFACTS.vertical },
@@ -541,7 +541,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectdrop1instruction = step => {
+  game.instruction.selectdrop1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
 
     return collapseContent({
@@ -580,7 +580,7 @@ type Links = {
 }
 {
   const ownerNames = ["neutral", "opp", "my"];
-  game.start2 = step => {
+  game.action.start2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -618,7 +618,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.start2instruction = step => {
+  game.instruction.start2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
 
     return Object.keys(UNITLAYERS.neutralunits).length === 0
@@ -651,7 +651,7 @@ type Links = {
       ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
     }
 
-    return game.start1({
+    return game.action.start1({
       NEXTSPAWNID: 1,
 
       TURN: 0,
@@ -659,7 +659,7 @@ type Links = {
       UNITLAYERS
     });
   };
-  game.uphill2 = step => {
+  game.action.uphill2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
@@ -759,8 +759,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.uphill2instruction = () => defaultInstruction(2);
-  game.downhill2 = step => {
+  game.instruction.uphill2 = () => defaultInstruction(2);
+  game.action.downhill2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
@@ -860,8 +860,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.downhill2instruction = () => defaultInstruction(2);
-  game.horisontal2 = step => {
+  game.instruction.downhill2 = () => defaultInstruction(2);
+  game.action.horisontal2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
@@ -961,8 +961,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.horisontal2instruction = () => defaultInstruction(2);
-  game.vertical2 = step => {
+  game.instruction.horisontal2 = () => defaultInstruction(2);
+  game.action.vertical2 = step => {
     let LINKS: Links = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
@@ -1062,8 +1062,8 @@ type Links = {
       NEXTSPAWNID
     };
   };
-  game.vertical2instruction = () => defaultInstruction(2);
-  game.selectdrop2 = (step, newMarkPos) => {
+  game.instruction.vertical2 = () => defaultInstruction(2);
+  game.action.selectdrop2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       FOOBAR: { ...step.ARTIFACTS.FOOBAR },
       vertical: { ...step.ARTIFACTS.vertical },
@@ -1121,7 +1121,7 @@ type Links = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.selectdrop2instruction = step => {
+  game.instruction.selectdrop2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
 
     return collapseContent({

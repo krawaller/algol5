@@ -1,15 +1,17 @@
 import { Layer } from "../";
 
-export type Step = {
-  stepId: string;
-  name?: string; // name of command or mark
-  path: Action[];
-  ARTIFACTS: {
-    [layername: string]: Layer;
-  };
-  UNITLAYERS: {
-    [layername: string]: Layer;
-  };
+export type AlgolStepLinks = {
+  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
+  endMarks?: string[];
+  endedBy?: string;
+  actions: { [idx: string]: string };
+};
+
+export type AlgolStep = {
+  TURN: number;
+  LINKS: AlgolStepLinks;
+  ARTIFACTS: { [layername: string]: Layer };
+  UNITLAYERS: { [layername: string]: Layer };
   UNITDATA: {
     [unitid: string]: {
       pos: string;
@@ -18,18 +20,8 @@ export type Step = {
       owner: number;
     };
   };
-  MARKS: {
-    [funcname: string]: Position;
-  };
-  TURNVARS?: {
-    [varname: string]: any;
-  };
-  BATTLEVARS?: {
-    [varname: string]: any;
-  };
-  clones?: any; // whaaat?
+  MARKS: { [funcname: string]: string };
+  TURNVARS?: { [varname: string]: any };
+  BATTLEVARS?: { [varname: string]: any };
+  NEXTSPAWNID?: number;
 };
-
-type Position = string;
-type Command = string;
-type Action = Position | Command;

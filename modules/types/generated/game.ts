@@ -1,17 +1,11 @@
-export type Game = {
-  commands: any;
-  id: string;
-  graphics: {
-    icons: any;
-    tiles: any;
+import { AlgolStep, AlgolContentAnon } from "../";
+
+export type AlgolGame = {
+  newBattle: () => AlgolStep;
+  action: {
+    [funcName: string]: (step: AlgolStep, action?: string) => AlgolStep;
   };
-  board: {
-    terrain: any;
-    height: number;
-    width: number;
+  instruction: {
+    [funcName: string]: (step: AlgolStep) => AlgolContentAnon;
   };
-  canalwaysend?: {
-    [funcname: string]: true;
-  };
-  debug: () => Object;
 };

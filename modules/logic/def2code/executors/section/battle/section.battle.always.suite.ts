@@ -35,7 +35,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ownerNames: ["neutral", "opp", "my"] // to simulate 2plr
           },
           envelope:
-            "let game = { start1: a => ({...a, sentToStart1: true }) };",
+            "let game = { action: { start1: a => ({...a, sentToStart1: true }) } };",
           tests: [
             {
               expr: "newBattle",
@@ -43,7 +43,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.sentToStart1",
                   res: true,
-                  desc: "we pass result of calling game.start1"
+                  desc: "we pass result of calling game.action.start1"
                 },
                 {
                   sample: "returnVal.TURN",

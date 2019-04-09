@@ -1,5 +1,5 @@
 import { executeOrder } from "../../../executors";
-import { emptyFullDef } from "../../../../../common";
+import { emptyFullDef, falsy } from "../../../../../common";
 import { AlgolStatementSuite, AlgolOrderAnon } from "../../../../../types";
 
 export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
@@ -64,7 +64,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["endturn"] },
               asserts: [
                 {
-                  sample: "LINKS.endturn",
+                  sample: "LINKS.endGame",
                   res: "win",
                   desc: "we can link to winning the game"
                 },
@@ -75,6 +75,11 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "LINKS.endMarks",
                   res: ["a1", "a2"]
+                },
+                {
+                  sample: "LINKS.endturn",
+                  res: falsy,
+                  desc: "we don't set endturn when game ends"
                 }
               ]
             }
@@ -92,13 +97,17 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["endturn"] },
               asserts: [
                 {
-                  sample: "LINKS.endturn",
+                  sample: "LINKS.endGame",
                   res: "lose",
                   desc: "we can link to losing endturn"
                 },
                 {
                   sample: "LINKS.endedBy",
                   res: "surrender"
+                },
+                {
+                  sample: "LINKS.endturn",
+                  res: falsy
                 }
               ]
             }
@@ -116,13 +125,17 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["endturn"] },
               asserts: [
                 {
-                  sample: "LINKS.endturn",
+                  sample: "LINKS.endGame",
                   res: "draw",
                   desc: "we can link to draw endturn"
                 },
                 {
                   sample: "LINKS.endedBy",
                   res: "neither"
+                },
+                {
+                  sample: "LINKS.endturn",
+                  res: falsy
                 }
               ]
             }

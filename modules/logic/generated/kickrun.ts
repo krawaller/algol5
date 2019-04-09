@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 5, width: 5 });
 
 const emptyArtifactLayers = { movetargets: {} };
@@ -17,13 +20,7 @@ const relativeDirs = makeRelativeDirs();
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "infiltration" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
@@ -75,7 +72,7 @@ type Links = {
       oppsidekickers: oldUnitLayers.mysidekickers,
       neutralsidekickers: oldUnitLayers.neutralsidekickers
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -96,7 +93,7 @@ type Links = {
     return { text: "Select which unit to move" };
   };
   game.action.move1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -146,7 +143,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -174,8 +171,11 @@ type Links = {
     let ARTIFACTS = {
       movetargets: { ...step.ARTIFACTS.movetargets }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = UNITLAYERS.units;
@@ -228,7 +228,7 @@ type Links = {
     });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move1";
 
@@ -326,7 +326,7 @@ type Links = {
       oppsidekickers: oldUnitLayers.mysidekickers,
       neutralsidekickers: oldUnitLayers.neutralsidekickers
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -432,7 +432,7 @@ type Links = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -482,7 +482,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -510,8 +510,11 @@ type Links = {
     let ARTIFACTS = {
       movetargets: { ...step.ARTIFACTS.movetargets }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = UNITLAYERS.units;
@@ -564,7 +567,7 @@ type Links = {
     });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move2";
 
@@ -611,4 +614,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

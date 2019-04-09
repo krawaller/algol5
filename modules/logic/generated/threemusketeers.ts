@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 5, width: 5 });
 
 const emptyArtifactLayers = {
@@ -22,13 +25,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "musketeersinline" | "strandedmusketeers" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
@@ -47,7 +44,7 @@ type Links = {
       oppkings: oldUnitLayers.mykings,
       neutralkings: oldUnitLayers.neutralkings
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -74,7 +71,7 @@ type Links = {
     });
   };
   game.action.move1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       strandedmusketeers: step.ARTIFACTS.strandedmusketeers,
       musketeerline: { ...step.ARTIFACTS.musketeerline },
@@ -136,12 +133,12 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "musketeersinline";
       LINKS.endMarks = Object.keys(UNITLAYERS.kings);
     } else if (Object.keys(ARTIFACTS.strandedmusketeers).length === 3) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "strandedmusketeers";
     } else {
       LINKS.endturn = "start2";
@@ -162,8 +159,11 @@ type Links = {
       musketeerline: step.ARTIFACTS.musketeerline,
       movetargets: { ...step.ARTIFACTS.movetargets }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let startconnections = connections[MARKS.selectunit];
@@ -202,7 +202,7 @@ type Links = {
     });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move1";
 
@@ -250,7 +250,7 @@ type Links = {
       oppkings: oldUnitLayers.mykings,
       neutralkings: oldUnitLayers.neutralkings
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -335,7 +335,7 @@ type Links = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       strandedmusketeers: { ...step.ARTIFACTS.strandedmusketeers },
       musketeerline: { ...step.ARTIFACTS.musketeerline },
@@ -415,12 +415,12 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "musketeersinline";
       LINKS.endMarks = Object.keys(UNITLAYERS.kings);
     } else if (Object.keys(ARTIFACTS.strandedmusketeers).length === 3) {
       let winner = 1;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "strandedmusketeers";
     } else {
       LINKS.endturn = "start1";
@@ -441,8 +441,11 @@ type Links = {
       musketeerline: step.ARTIFACTS.musketeerline,
       movetargets: { ...step.ARTIFACTS.movetargets }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let startconnections = connections[MARKS.selectunit];
@@ -479,7 +482,7 @@ type Links = {
     });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move2";
 
@@ -507,4 +510,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

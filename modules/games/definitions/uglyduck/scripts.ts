@@ -1,5 +1,7 @@
-import { UglyduckScripts } from './_types';
+import { UglyduckScripts } from "./_types";
 
-const uglyduckScripts: UglyduckScripts = {};
+const uglyduckScripts: UglyduckScripts = {
+  basic: []
+};
 
 export default uglyduckScripts;

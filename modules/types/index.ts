@@ -31,7 +31,7 @@ export type PositionList = {
 export type FunctionName = string;
 
 export type Layer = {
-  [posname: string]: Object; // object with whatever props u want
+  [posname: string]: { [prop: string]: string | number }; // object with whatever props u want
 };
 
 // ------------------------ FROM NEW ------------------------

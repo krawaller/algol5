@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 5, width: 5 });
 
 const emptyArtifactLayers = { movetargets: {}, winline: {} };
@@ -18,13 +21,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "madewinline" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
@@ -43,7 +40,7 @@ type Links = {
       oppqueens: oldUnitLayers.myqueens,
       neutralqueens: oldUnitLayers.neutralqueens
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -72,7 +69,7 @@ type Links = {
     });
   };
   game.action.move1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: { ...step.ARTIFACTS.winline }
@@ -138,7 +135,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madewinline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -159,8 +156,11 @@ type Links = {
       movetargets: { ...step.ARTIFACTS.movetargets },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let startconnections = connections[MARKS.selectunit];
@@ -198,7 +198,7 @@ type Links = {
             { kings: "king", queens: "queen" }[
               (UNITLAYERS.units[MARKS.selectunit] || {}).group
             ],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
         },
@@ -207,7 +207,7 @@ type Links = {
     });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move1";
 
@@ -236,7 +236,7 @@ type Links = {
             { kings: "king", queens: "queen" }[
               (UNITLAYERS.units[MARKS.selectunit] || {}).group
             ],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
         },
@@ -264,7 +264,7 @@ type Links = {
       oppqueens: oldUnitLayers.myqueens,
       neutralqueens: oldUnitLayers.neutralqueens
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -352,7 +352,7 @@ type Links = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: { ...step.ARTIFACTS.winline }
@@ -418,7 +418,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madewinline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -439,8 +439,11 @@ type Links = {
       movetargets: { ...step.ARTIFACTS.movetargets },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let startconnections = connections[MARKS.selectunit];
@@ -478,7 +481,7 @@ type Links = {
             { kings: "king", queens: "queen" }[
               (UNITLAYERS.units[MARKS.selectunit] || {}).group
             ],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
         },
@@ -487,7 +490,7 @@ type Links = {
     });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move2";
 
@@ -516,7 +519,7 @@ type Links = {
             { kings: "king", queens: "queen" }[
               (UNITLAYERS.units[MARKS.selectunit] || {}).group
             ],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
         },
@@ -526,4 +529,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

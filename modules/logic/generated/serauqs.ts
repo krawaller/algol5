@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 4, width: 4 });
 
 const emptyArtifactLayers = { movetargets: {}, winline: {} };
@@ -17,13 +20,7 @@ const relativeDirs = makeRelativeDirs();
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "madeline" | "madex" | "tookcenter" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
@@ -116,7 +113,7 @@ type Links = {
       oppwild: oldUnitLayers.mywild,
       neutralwild: oldUnitLayers.neutralwild
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -157,7 +154,7 @@ type Links = {
         });
   };
   game.action.promote1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: step.ARTIFACTS.winline
@@ -200,7 +197,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else if (
@@ -217,7 +214,7 @@ type Links = {
       ).length > 3
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
     } else if (
@@ -234,7 +231,7 @@ type Links = {
       ).length > 3
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "tookcenter";
       LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else {
@@ -251,7 +248,7 @@ type Links = {
   };
   game.instruction.promote1 = () => defaultInstruction(1);
   game.action.move1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: { ...step.ARTIFACTS.winline }
@@ -319,7 +316,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else if (
@@ -336,7 +333,7 @@ type Links = {
       ).length > 3
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
     } else if (
@@ -353,7 +350,7 @@ type Links = {
       ).length > 3
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "tookcenter";
       LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else {
@@ -374,8 +371,11 @@ type Links = {
       movetargets: { ...step.ARTIFACTS.movetargets },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     let TURN = step.TURN;
     {
@@ -421,7 +421,7 @@ type Links = {
                 { soldiers: "pawn", wild: "king" }[
                   (UNITLAYERS.units[MARKS.selectunit] || {}).group
                 ],
-                (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
                 MARKS.selectunit
               ]
             },
@@ -443,7 +443,7 @@ type Links = {
         });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move1";
 
@@ -563,7 +563,7 @@ type Links = {
       oppwild: oldUnitLayers.mywild,
       neutralwild: oldUnitLayers.neutralwild
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -694,7 +694,7 @@ type Links = {
     });
   };
   game.action.promote2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: step.ARTIFACTS.winline
@@ -737,7 +737,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else if (
@@ -754,7 +754,7 @@ type Links = {
       ).length > 3
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
     } else if (
@@ -771,7 +771,7 @@ type Links = {
       ).length > 3
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "tookcenter";
       LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else {
@@ -788,7 +788,7 @@ type Links = {
   };
   game.instruction.promote2 = () => defaultInstruction(2);
   game.action.move2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: { ...step.ARTIFACTS.winline }
@@ -856,7 +856,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else if (
@@ -873,7 +873,7 @@ type Links = {
       ).length > 3
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
     } else if (
@@ -890,7 +890,7 @@ type Links = {
       ).length > 3
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "tookcenter";
       LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else {
@@ -911,8 +911,11 @@ type Links = {
       movetargets: { ...step.ARTIFACTS.movetargets },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     let TURN = step.TURN;
     {
@@ -958,7 +961,7 @@ type Links = {
                 { soldiers: "pawn", wild: "king" }[
                   (UNITLAYERS.units[MARKS.selectunit] || {}).group
                 ],
-                (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
                 MARKS.selectunit
               ]
             },
@@ -980,7 +983,7 @@ type Links = {
         });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move2";
 
@@ -1008,4 +1011,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

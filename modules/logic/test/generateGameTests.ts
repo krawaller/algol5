@@ -18,13 +18,11 @@ async function setup() {
         path.join(out, name + ".test.ts"),
         `
 import { runGameScript } from "../runGameScript";
-import { runGameRandomly } from "../runGameRandomly";
 
 import ${name}Game from "../../generated/${name}";
 import ${name}Def from "../../../games/dist/games/${name}";
 
 runGameScript("${name}", ${name}Game, ${name}Def.scripts);
-runGameRandomly("${name}", ${name}Game);
 `
       );
       console.log("Generating test file for", name);

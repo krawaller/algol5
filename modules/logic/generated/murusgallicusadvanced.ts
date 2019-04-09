@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 7, width: 8 });
 
 const emptyArtifactLayers = {
@@ -24,13 +27,7 @@ const relativeDirs = makeRelativeDirs();
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "infiltration" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
@@ -135,7 +132,7 @@ type Links = {
       oppcatapults: oldUnitLayers.mycatapults,
       neutralcatapults: oldUnitLayers.neutralcatapults
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -188,7 +185,7 @@ type Links = {
     });
   };
   game.action.move1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       firetargets: step.ARTIFACTS.firetargets,
       movetargets: step.ARTIFACTS.movetargets,
@@ -275,7 +272,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -302,7 +299,7 @@ type Links = {
   };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.kill1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -367,7 +364,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -394,7 +391,7 @@ type Links = {
   };
   game.instruction.kill1 = () => defaultInstruction(1);
   game.action.sacrifice1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -447,7 +444,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -474,7 +471,7 @@ type Links = {
   };
   game.instruction.sacrifice1 = () => defaultInstruction(1);
   game.action.fire1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -556,7 +553,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -591,8 +588,11 @@ type Links = {
       madewalls: step.ARTIFACTS.madewalls,
       killtargets: { ...step.ARTIFACTS.killtargets }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selecttower: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selecttower: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = { ...UNITLAYERS.oppunits, ...UNITLAYERS.mycatapults };
@@ -696,8 +696,11 @@ type Links = {
       madewalls: { ...step.ARTIFACTS.madewalls },
       killtargets: step.ARTIFACTS.killtargets
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectmove: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectmove: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let STARTPOS = MARKS.selectmove;
@@ -753,8 +756,11 @@ type Links = {
     });
   };
   game.action.selectkill1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectkill: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectkill: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
 
     LINKS.actions.kill = "kill1";
@@ -825,8 +831,11 @@ type Links = {
       madewalls: step.ARTIFACTS.madewalls,
       killtargets: step.ARTIFACTS.killtargets
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectcatapult: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectcatapult: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       for (let DIR of [7, 8, 1, 2, 3]) {
@@ -870,7 +879,7 @@ type Links = {
     });
   };
   game.action.selectfire1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.fire = "fire1";
 
@@ -915,7 +924,10 @@ type Links = {
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
                       (UNITLAYERS.units[MARKS.selectfire] || {}).group
                     ],
-                    (UNITLAYERS.units[MARKS.selectfire] || {}).owner,
+                    (UNITLAYERS.units[MARKS.selectfire] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
                     MARKS.selectfire
                   ]
                 },
@@ -1044,7 +1056,7 @@ type Links = {
       oppcatapults: oldUnitLayers.mycatapults,
       neutralcatapults: oldUnitLayers.neutralcatapults
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -1194,7 +1206,7 @@ type Links = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       firetargets: step.ARTIFACTS.firetargets,
       movetargets: step.ARTIFACTS.movetargets,
@@ -1281,7 +1293,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -1308,7 +1320,7 @@ type Links = {
   };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.kill2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -1373,7 +1385,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -1400,7 +1412,7 @@ type Links = {
   };
   game.instruction.kill2 = () => defaultInstruction(2);
   game.action.sacrifice2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -1453,7 +1465,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -1480,7 +1492,7 @@ type Links = {
   };
   game.instruction.sacrifice2 = () => defaultInstruction(2);
   game.action.fire2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -1562,7 +1574,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -1597,8 +1609,11 @@ type Links = {
       madewalls: step.ARTIFACTS.madewalls,
       killtargets: { ...step.ARTIFACTS.killtargets }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selecttower: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selecttower: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = { ...UNITLAYERS.oppunits, ...UNITLAYERS.mycatapults };
@@ -1702,8 +1717,11 @@ type Links = {
       madewalls: { ...step.ARTIFACTS.madewalls },
       killtargets: step.ARTIFACTS.killtargets
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectmove: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectmove: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let STARTPOS = MARKS.selectmove;
@@ -1759,8 +1777,11 @@ type Links = {
     });
   };
   game.action.selectkill2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectkill: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectkill: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
 
     LINKS.actions.kill = "kill2";
@@ -1831,8 +1852,11 @@ type Links = {
       madewalls: step.ARTIFACTS.madewalls,
       killtargets: step.ARTIFACTS.killtargets
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectcatapult: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectcatapult: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       for (let DIR of [3, 4, 5, 6, 7]) {
@@ -1876,7 +1900,7 @@ type Links = {
     });
   };
   game.action.selectfire2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.fire = "fire2";
 
@@ -1921,7 +1945,10 @@ type Links = {
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
                       (UNITLAYERS.units[MARKS.selectfire] || {}).group
                     ],
-                    (UNITLAYERS.units[MARKS.selectfire] || {}).owner,
+                    (UNITLAYERS.units[MARKS.selectfire] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
                     MARKS.selectfire
                   ]
                 },
@@ -1946,4 +1973,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

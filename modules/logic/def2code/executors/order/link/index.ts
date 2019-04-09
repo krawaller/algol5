@@ -49,7 +49,7 @@ function executeLinkInner(
         ([name, def]) => `
       if (${parser.bool(def.condition)}) { 
         let winner = ${parser.val(def.who === undefined ? player : def.who)};
-        LINKS.endturn = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
+        LINKS.endGame = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
         LINKS.endedBy = '${name}';
         ${
           def.show

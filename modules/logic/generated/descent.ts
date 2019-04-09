@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 4, width: 4 });
 
 const emptyArtifactLayers = { movetargets: {}, digtargets: {}, winline: {} };
@@ -18,13 +21,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "madeline" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
@@ -47,7 +44,7 @@ type Links = {
       opprooks: oldUnitLayers.myrooks,
       neutralrooks: oldUnitLayers.neutralrooks
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -70,7 +67,7 @@ type Links = {
     return { text: "Select a unit to move and dig with" };
   };
   game.action.move1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: { ...step.ARTIFACTS.digtargets },
@@ -168,7 +165,7 @@ type Links = {
     return { text: "Now select an empty neighbouring square to dig" };
   };
   game.action.dig1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: step.ARTIFACTS.digtargets,
@@ -246,7 +243,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -271,8 +268,11 @@ type Links = {
       digtargets: step.ARTIFACTS.digtargets,
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let startconnections = connections[MARKS.selectunit];
@@ -312,7 +312,7 @@ type Links = {
     return { text: "Select where to move this unit" };
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move1";
 
@@ -353,7 +353,7 @@ type Links = {
     });
   };
   game.action.selectdigtarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.dig = "dig1";
 
@@ -426,7 +426,7 @@ type Links = {
       opprooks: oldUnitLayers.myrooks,
       neutralrooks: oldUnitLayers.neutralrooks
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -504,7 +504,7 @@ type Links = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: { ...step.ARTIFACTS.digtargets },
@@ -602,7 +602,7 @@ type Links = {
     return { text: "Now select an empty neighbouring square to dig" };
   };
   game.action.dig2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: step.ARTIFACTS.digtargets,
@@ -680,7 +680,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -705,8 +705,11 @@ type Links = {
       digtargets: step.ARTIFACTS.digtargets,
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let startconnections = connections[MARKS.selectunit];
@@ -746,7 +749,7 @@ type Links = {
     return { text: "Select where to move this unit" };
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move2";
 
@@ -787,7 +790,7 @@ type Links = {
     });
   };
   game.action.selectdigtarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.dig = "dig2";
 
@@ -838,4 +841,4 @@ type Links = {
         });
   };
 }
-export default game;
+export default game as AlgolGame;

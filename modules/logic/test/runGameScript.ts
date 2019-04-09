@@ -28,7 +28,7 @@ export function runGameScript(
           if (
             ["win", "lose", "draw"].includes(action) ||
             (action === "endturn" &&
-              ["win", "lose", "draw"].includes(step.LINKS.endturn))
+              ["win", "lose", "draw"].includes(step.LINKS.endGame))
           ) {
             if (lines.length) {
               throw new Error("Game end but lines remaining");
@@ -36,7 +36,7 @@ export function runGameScript(
             if (["start1", "start2"].includes(step.LINKS.endturn)) {
               throw new Error("Expected game to end but it didnt");
             }
-            if (step.LINKS.endturn !== action) {
+            if (step.LINKS.endGame !== action) {
               throw new Error(
                 `Game ended with unexpected winner: ${action} vs ${
                   step.LINKS.endturn
@@ -94,5 +94,7 @@ export function runGameScript(
 }
 
 function getAvailableActions(links: AlgolStepLinks) {
-  return Object.keys(links.actions).concat(links.endturn || []);
+  return Object.keys(links.actions)
+    .concat(links.endturn || [])
+    .concat(links.endGame || []);
 }

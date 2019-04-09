@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 8, width: 8 });
 
 const connections = boardConnections({ height: 8, width: 8 });
@@ -15,13 +18,7 @@ const relativeDirs = makeRelativeDirs();
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "infiltration" | "kingkill" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
@@ -207,7 +204,7 @@ type Links = {
       oppsoldiers: oldUnitLayers.mysoldiers,
       neutralsoldiers: oldUnitLayers.neutralsoldiers
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
     let TURN = step.TURN + 1;
@@ -278,7 +275,7 @@ type Links = {
         });
   };
   game.action.deploy1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -328,7 +325,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -341,7 +338,7 @@ type Links = {
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
     } else {
       LINKS.endturn = "start2";
@@ -359,7 +356,7 @@ type Links = {
   };
   game.instruction.deploy1 = () => defaultInstruction(1);
   game.action.move1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let TURN = step.TURN;
@@ -409,7 +406,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -422,7 +419,7 @@ type Links = {
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
     } else {
       LINKS.endturn = "start2";
@@ -440,7 +437,7 @@ type Links = {
   };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.jump1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       nokings: step.ARTIFACTS.nokings,
       nosoldiers: step.ARTIFACTS.nosoldiers,
@@ -502,7 +499,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -515,7 +512,7 @@ type Links = {
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
     } else {
       LINKS.endturn = "start2";
@@ -533,7 +530,7 @@ type Links = {
   };
   game.instruction.jump1 = () => defaultInstruction(1);
   game.action.selectkingdeploy1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.deploy = "deploy1";
 
@@ -567,8 +564,11 @@ type Links = {
       willdie: { ...step.ARTIFACTS.willdie },
       jumptargets: { ...step.ARTIFACTS.jumptargets }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = UNITLAYERS.units;
@@ -718,7 +718,7 @@ type Links = {
         });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move1";
 
@@ -757,8 +757,11 @@ type Links = {
       willdie: step.ARTIFACTS.willdie,
       jumptargets: step.ARTIFACTS.jumptargets
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectjumptarget: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectjumptarget: newMarkPos
+    };
 
     let filtersourcelayer = ARTIFACTS.willdie;
     let filtertargetlayer = ARTIFACTS.splashed;
@@ -805,7 +808,8 @@ type Links = {
             { kings: "king", soldiers: "pawn" }[
               (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).group
             ],
-            (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).owner,
+            (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {})
+              .owner as 0 | 1 | 2,
             Object.keys(ARTIFACTS.splashed)[0]
           ]
         },
@@ -1000,7 +1004,7 @@ type Links = {
       oppsoldiers: oldUnitLayers.mysoldiers,
       neutralsoldiers: oldUnitLayers.neutralsoldiers
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
     let TURN = step.TURN + 1;
@@ -1234,7 +1238,7 @@ type Links = {
     });
   };
   game.action.deploy2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -1284,7 +1288,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -1297,7 +1301,7 @@ type Links = {
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
     } else {
       LINKS.endturn = "start1";
@@ -1315,7 +1319,7 @@ type Links = {
   };
   game.instruction.deploy2 = () => defaultInstruction(2);
   game.action.move2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let TURN = step.TURN;
@@ -1365,7 +1369,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -1378,7 +1382,7 @@ type Links = {
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
     } else {
       LINKS.endturn = "start1";
@@ -1396,7 +1400,7 @@ type Links = {
   };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.jump2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       nokings: step.ARTIFACTS.nokings,
       nosoldiers: step.ARTIFACTS.nosoldiers,
@@ -1458,7 +1462,7 @@ type Links = {
       ).length !== 0
     ) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -1471,7 +1475,7 @@ type Links = {
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
     } else {
       LINKS.endturn = "start1";
@@ -1489,7 +1493,7 @@ type Links = {
   };
   game.instruction.jump2 = () => defaultInstruction(2);
   game.action.selectkingdeploy2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.deploy = "deploy2";
 
@@ -1523,8 +1527,11 @@ type Links = {
       willdie: { ...step.ARTIFACTS.willdie },
       jumptargets: { ...step.ARTIFACTS.jumptargets }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = UNITLAYERS.units;
@@ -1674,7 +1681,7 @@ type Links = {
         });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.move = "move2";
 
@@ -1713,8 +1720,11 @@ type Links = {
       willdie: step.ARTIFACTS.willdie,
       jumptargets: step.ARTIFACTS.jumptargets
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectjumptarget: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectjumptarget: newMarkPos
+    };
 
     let filtersourcelayer = ARTIFACTS.willdie;
     let filtertargetlayer = ARTIFACTS.splashed;
@@ -1761,7 +1771,8 @@ type Links = {
             { kings: "king", soldiers: "pawn" }[
               (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).group
             ],
-            (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).owner,
+            (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {})
+              .owner as 0 | 1 | 2,
             Object.keys(ARTIFACTS.splashed)[0]
           ]
         },
@@ -1771,4 +1782,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

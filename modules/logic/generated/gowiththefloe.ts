@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 8, width: 8 });
 
 const emptyArtifactLayers = {
@@ -92,13 +95,7 @@ const TERRAIN = {
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "safeseal" | "sealseaten" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
@@ -121,7 +118,7 @@ type Links = {
       oppholes: oldUnitLayers.myholes,
       neutralholes: oldUnitLayers.neutralholes
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -143,7 +140,7 @@ type Links = {
     return { text: "Select a unit to move" };
   };
   game.action.move1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
@@ -228,7 +225,7 @@ type Links = {
       Object.keys(UNITLAYERS.seals).length
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "safeseal";
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
@@ -237,7 +234,7 @@ type Links = {
       );
     } else if (Object.keys(UNITLAYERS.seals).length === 0) {
       let winner = 2;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "sealseaten";
     } else {
       LINKS.endturn = "start2";
@@ -255,7 +252,7 @@ type Links = {
   };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.eat1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
@@ -321,7 +318,7 @@ type Links = {
       Object.keys(UNITLAYERS.seals).length
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "safeseal";
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
@@ -330,7 +327,7 @@ type Links = {
       );
     } else if (Object.keys(UNITLAYERS.seals).length === 0) {
       let winner = 2;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "sealseaten";
     } else {
       LINKS.endturn = "start2";
@@ -354,8 +351,11 @@ type Links = {
       canmove: step.ARTIFACTS.canmove,
       cracks: step.ARTIFACTS.cracks
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = {
@@ -401,8 +401,11 @@ type Links = {
       canmove: step.ARTIFACTS.canmove,
       cracks: { ...step.ARTIFACTS.cracks }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectmovetarget: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = { [MARKS.selectunit]: 1 };
@@ -444,7 +447,7 @@ type Links = {
     });
   };
   game.action.selecteattarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.eat = "eat1";
 
@@ -487,7 +490,7 @@ type Links = {
       oppholes: oldUnitLayers.myholes,
       neutralholes: oldUnitLayers.neutralholes
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -552,7 +555,7 @@ type Links = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
@@ -637,7 +640,7 @@ type Links = {
       Object.keys(UNITLAYERS.seals).length
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "safeseal";
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
@@ -646,7 +649,7 @@ type Links = {
       );
     } else if (Object.keys(UNITLAYERS.seals).length === 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "sealseaten";
     } else {
       LINKS.endturn = "start1";
@@ -664,7 +667,7 @@ type Links = {
   };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.eat2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
@@ -730,7 +733,7 @@ type Links = {
       Object.keys(UNITLAYERS.seals).length
     ) {
       let winner = 1;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "safeseal";
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
@@ -739,7 +742,7 @@ type Links = {
       );
     } else if (Object.keys(UNITLAYERS.seals).length === 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "sealseaten";
     } else {
       LINKS.endturn = "start1";
@@ -763,8 +766,11 @@ type Links = {
       canmove: step.ARTIFACTS.canmove,
       cracks: step.ARTIFACTS.cracks
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = {
@@ -823,8 +829,11 @@ type Links = {
       canmove: step.ARTIFACTS.canmove,
       cracks: { ...step.ARTIFACTS.cracks }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectmovetarget: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectmovetarget: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = { [MARKS.selectunit]: 1 };
@@ -866,7 +875,7 @@ type Links = {
     });
   };
   game.action.selecteattarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.eat = "eat2";
 
@@ -887,4 +896,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

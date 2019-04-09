@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 5, width: 5 });
 
 const emptyArtifactLayers = {
@@ -25,13 +28,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "madeline" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
@@ -50,7 +47,7 @@ type Links = {
       oppmarkers: oldUnitLayers.mymarkers,
       neutralmarkers: oldUnitLayers.neutralmarkers
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -80,7 +77,7 @@ type Links = {
       : { text: "Select which neutral unit to take over" };
   };
   game.action.uphill1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -162,7 +159,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -181,7 +178,7 @@ type Links = {
   };
   game.instruction.uphill1 = () => defaultInstruction(1);
   game.action.downhill1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -263,7 +260,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -282,7 +279,7 @@ type Links = {
   };
   game.instruction.downhill1 = () => defaultInstruction(1);
   game.action.horisontal1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -364,7 +361,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -383,7 +380,7 @@ type Links = {
   };
   game.instruction.horisontal1 = () => defaultInstruction(1);
   game.action.vertical1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -465,7 +462,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -492,8 +489,11 @@ type Links = {
       downhill: { ...step.ARTIFACTS.downhill },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectdrop: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectdrop: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       for (let DIR of roseDirs) {
@@ -596,7 +596,7 @@ type Links = {
       oppmarkers: oldUnitLayers.mymarkers,
       neutralmarkers: oldUnitLayers.neutralmarkers
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -660,7 +660,7 @@ type Links = {
     });
   };
   game.action.uphill2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -742,7 +742,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -761,7 +761,7 @@ type Links = {
   };
   game.instruction.uphill2 = () => defaultInstruction(2);
   game.action.downhill2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -843,7 +843,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -862,7 +862,7 @@ type Links = {
   };
   game.instruction.downhill2 = () => defaultInstruction(2);
   game.action.horisontal2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -944,7 +944,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -963,7 +963,7 @@ type Links = {
   };
   game.instruction.horisontal2 = () => defaultInstruction(2);
   game.action.vertical2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -1045,7 +1045,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -1072,8 +1072,11 @@ type Links = {
       downhill: { ...step.ARTIFACTS.downhill },
       winline: step.ARTIFACTS.winline
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectdrop: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectdrop: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       for (let DIR of roseDirs) {
@@ -1158,4 +1161,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

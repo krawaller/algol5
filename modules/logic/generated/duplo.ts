@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 8, width: 8 });
 
 const emptyArtifactLayers = {
@@ -24,13 +27,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "boardfull" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
@@ -45,7 +42,7 @@ type Links = {
       oppsoldiers: oldUnitLayers.mysoldiers,
       neutralsoldiers: oldUnitLayers.neutralsoldiers
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
     let TURN = step.TURN + 1;
@@ -81,7 +78,7 @@ type Links = {
       : { text: "Select where to deploy the first of your two initial units" };
   };
   game.action.deploy1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -123,7 +120,7 @@ type Links = {
               Object.keys(UNITLAYERS.myunits).length
             ? 2
             : 0;
-        LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+        LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
         LINKS.endedBy = "boardfull";
       } else {
         LINKS.endturn = "start2";
@@ -156,7 +153,7 @@ type Links = {
       : defaultInstruction(1);
   };
   game.action.expand1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -221,7 +218,7 @@ type Links = {
             Object.keys(UNITLAYERS.myunits).length
           ? 2
           : 0;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "boardfull";
     } else {
       LINKS.endturn = "start2";
@@ -239,7 +236,7 @@ type Links = {
   };
   game.instruction.expand1 = () => defaultInstruction(1);
   game.action.selectdeploy1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.deploy = "deploy1";
 
@@ -280,8 +277,11 @@ type Links = {
       targets: { ...step.ARTIFACTS.targets },
       spawns: step.ARTIFACTS.spawns
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let startconnections = connections[MARKS.selectunit];
@@ -397,8 +397,11 @@ type Links = {
       targets: step.ARTIFACTS.targets,
       spawns: { ...step.ARTIFACTS.spawns }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selecttarget: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selecttarget: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = UNITLAYERS.units;
@@ -467,7 +470,7 @@ type Links = {
       oppsoldiers: oldUnitLayers.mysoldiers,
       neutralsoldiers: oldUnitLayers.neutralsoldiers
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
     let TURN = step.TURN + 1;
@@ -533,7 +536,7 @@ type Links = {
     });
   };
   game.action.deploy2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -575,7 +578,7 @@ type Links = {
               Object.keys(UNITLAYERS.myunits).length
             ? 1
             : 0;
-        LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+        LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
         LINKS.endedBy = "boardfull";
       } else {
         LINKS.endturn = "start1";
@@ -608,7 +611,7 @@ type Links = {
       : defaultInstruction(2);
   };
   game.action.expand2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -673,7 +676,7 @@ type Links = {
             Object.keys(UNITLAYERS.myunits).length
           ? 1
           : 0;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "boardfull";
     } else {
       LINKS.endturn = "start1";
@@ -691,7 +694,7 @@ type Links = {
   };
   game.instruction.expand2 = () => defaultInstruction(2);
   game.action.selectdeploy2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.deploy = "deploy2";
 
@@ -732,8 +735,11 @@ type Links = {
       targets: { ...step.ARTIFACTS.targets },
       spawns: step.ARTIFACTS.spawns
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selectunit: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selectunit: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let startconnections = connections[MARKS.selectunit];
@@ -849,8 +855,11 @@ type Links = {
       targets: step.ARTIFACTS.targets,
       spawns: { ...step.ARTIFACTS.spawns }
     };
-    let LINKS: Links = { actions: {} };
-    let MARKS = { ...step.MARKS, selecttarget: newMarkPos };
+    let LINKS: AlgolStepLinks = { actions: {} };
+    let MARKS: { [idx: string]: string } = {
+      ...step.MARKS,
+      selecttarget: newMarkPos
+    };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = UNITLAYERS.units;
@@ -905,4 +914,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

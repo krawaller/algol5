@@ -7,7 +7,10 @@ import {
   collapseContent,
   defaultInstruction
 } from "/Users/davidwaller/gitreps/algol5/modules/common";
-
+import {
+  AlgolStepLinks,
+  AlgolGame
+} from "/Users/davidwaller/gitreps/algol5/modules/types";
 const BOARD = boardLayers({ height: 3, width: 4 });
 
 const emptyArtifactLayers = { line: {} };
@@ -18,13 +21,7 @@ const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: any = { action: {}, instruction: {} };
-type Links = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
-  endMarks?: string[];
-  endedBy?: "madeline" | "starvation";
-  actions: { [idx: string]: string };
-};
+let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
@@ -47,7 +44,7 @@ type Links = {
       oppbishops: oldUnitLayers.mybishops,
       neutralbishops: oldUnitLayers.neutralbishops
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -132,7 +129,7 @@ type Links = {
     });
   };
   game.action.deploy1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       line: { ...step.ARTIFACTS.line }
     };
@@ -199,7 +196,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.line).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
@@ -218,7 +215,7 @@ type Links = {
   };
   game.instruction.deploy1 = () => defaultInstruction(1);
   game.action.promote1 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       line: { ...step.ARTIFACTS.line }
     };
@@ -285,7 +282,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.line).length !== 0) {
       let winner = 1;
-      LINKS.endturn = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
@@ -304,7 +301,7 @@ type Links = {
   };
   game.instruction.promote1 = () => defaultInstruction(1);
   game.action.selectdeploytarget1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.deploy = "deploy1";
 
@@ -332,7 +329,7 @@ type Links = {
     });
   };
   game.action.selectunit1 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.promote = "promote1";
 
@@ -386,7 +383,7 @@ type Links = {
       oppbishops: oldUnitLayers.mybishops,
       neutralbishops: oldUnitLayers.neutralbishops
     };
-    let LINKS: Links = {
+    let LINKS: AlgolStepLinks = {
       actions: {}
     };
 
@@ -509,7 +506,7 @@ type Links = {
     });
   };
   game.action.deploy2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       line: { ...step.ARTIFACTS.line }
     };
@@ -576,7 +573,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.line).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
@@ -595,7 +592,7 @@ type Links = {
   };
   game.instruction.deploy2 = () => defaultInstruction(2);
   game.action.promote2 = step => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       line: { ...step.ARTIFACTS.line }
     };
@@ -662,7 +659,7 @@ type Links = {
 
     if (Object.keys(ARTIFACTS.line).length !== 0) {
       let winner = 2;
-      LINKS.endturn = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
@@ -681,7 +678,7 @@ type Links = {
   };
   game.instruction.promote2 = () => defaultInstruction(2);
   game.action.selectdeploytarget2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.deploy = "deploy2";
 
@@ -709,7 +706,7 @@ type Links = {
     });
   };
   game.action.selectunit2 = (step, newMarkPos) => {
-    let LINKS: Links = { actions: {} };
+    let LINKS: AlgolStepLinks = { actions: {} };
 
     LINKS.actions.promote = "promote2";
 
@@ -741,4 +738,4 @@ type Links = {
     });
   };
 }
-export default game;
+export default game as AlgolGame;

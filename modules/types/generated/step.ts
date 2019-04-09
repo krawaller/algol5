@@ -1,7 +1,8 @@
 import { Layer } from "../";
 
 export type AlgolStepLinks = {
-  endturn?: "win" | "lose" | "draw" | "start1" | "start2";
+  endturn?: "start1" | "start2";
+  endGame?: "win" | "lose" | "draw";
   endMarks?: string[];
   endedBy?: string;
   actions: { [idx: string]: string };
@@ -18,6 +19,7 @@ export type AlgolStep = {
       id: string;
       group: string;
       owner: number;
+      from?: string;
     };
   };
   MARKS: { [funcname: string]: string };

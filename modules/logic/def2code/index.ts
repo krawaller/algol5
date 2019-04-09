@@ -10,32 +10,27 @@ export function compileGameToCode(gameDef: FullDefAnon) {
   )}';
   `;
 
+  ret += `import {AlgolStepLinks, AlgolGame} from '${path.join(
+    __dirname,
+    "../../types"
+  )}'`;
+
   ret += executeSection(gameDef, 1, "head", "head");
 
-  ret += `let game: any = {action: {}, instruction: {} }; `;
-
-  ret += `type Links = {
-    endturn?: 'win' | 'lose' | 'draw' | 'start1' | 'start2';
-    endMarks?: string[];
-    endedBy?: ${Object.keys(gameDef.flow.endGame || {})
-      .concat("starvation")
-      .map(n => `'${n}'`)
-      .join(" | ")};
-    actions: { [idx: string]: string };
-  };\n`;
+  ret += `let game: Partial<AlgolGame> = {action: {}, instruction: {} }; `;
 
   [1, 2].forEach((player: 1 | 2) => {
     ret += `{ `;
 
     ret += executeSection(gameDef, player, "player", "player");
 
-    ret += `game.action.start${player} = step => {
+    ret += `game.action.start${player} = (step) => {
       ${executeSection(gameDef, player, "start", "startInit")}
       ${executeSection(gameDef, player, "start", "orders")}
       ${executeSection(gameDef, player, "start", "startEnd")}
     }; `;
 
-    ret += `game.instruction.start${player} = step => {
+    ret += `game.instruction.start${player} = (step) => {
       ${executeSection(gameDef, player, "start", "instruction")}
     }; `;
 
@@ -46,14 +41,14 @@ export function compileGameToCode(gameDef: FullDefAnon) {
     }
 
     Object.keys(gameDef.flow.commands).forEach(cmndName => {
-      ret += `game.action.${cmndName + player} = step => {
+      ret += `game.action.${cmndName + player} = (step) => {
         ${executeSection(gameDef, player, cmndName, "cmndInit")}
         ${executeSection(gameDef, player, cmndName, "orders")}
         ${executeSection(gameDef, player, cmndName, "cmndEnd")}
       }; `;
 
       if (gameDef.instructions[cmndName]) {
-        ret += `game.instruction.${cmndName + player} = step => {
+        ret += `game.instruction.${cmndName + player} = (step) => {
           ${executeSection(gameDef, player, cmndName, "instruction")}
         }; `;
       } else {
@@ -69,7 +64,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
         ${executeSection(gameDef, player, markName, "markEnd")}
       }; `;
 
-      ret += `game.instruction.${markName + player} = step => {
+      ret += `game.instruction.${markName + player} = (step) => {
         ${executeSection(gameDef, player, markName, "instruction")}
       }; `;
     });
@@ -77,9 +72,13 @@ export function compileGameToCode(gameDef: FullDefAnon) {
     ret += ` } `;
   });
 
-  ret += "export default game; ";
+  ret += "export default game as AlgolGame; ";
 
-  ret = ret.replace(/(let |const )LINKS =/g, "$1LINKS: Links =");
+  ret = ret
+    .replace(/(let |const )LINKS =/g, "$1LINKS: AlgolStepLinks =")
+    .replace(/\.owner([^a-z])/g, ".owner as 0 | 1 | 2$1")
+    .replace(/ offsetPos\(/g, " <string>offsetPos(")
+    .replace(/let MARKS = \{ .../g, "let MARKS: {[idx:string]: string} = {...");
 
   return prettier.format(ret, { parser: "typescript" });
 }

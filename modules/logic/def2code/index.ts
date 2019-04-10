@@ -44,7 +44,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
     }
 
     Object.keys(gameDef.flow.commands)
-      .filter(c => analysis[player].uses[c])
+      .filter(c => analysis[player][c])
       .forEach(cmndName => {
         ret += `game.action.${cmndName + player} = (step) => {
         ${executeSection(gameDef, player, cmndName, "cmndInit")}
@@ -63,7 +63,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       });
 
     Object.keys(gameDef.flow.marks)
-      .filter(m => analysis[player].uses[m])
+      .filter(m => analysis[player][m])
       .forEach(markName => {
         ret += `game.action.${markName + player} = (step, newMarkPos) => {
         ${executeSection(gameDef, player, markName, "markInit")}

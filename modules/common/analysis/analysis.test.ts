@@ -1,5 +1,6 @@
 import { analyseGame } from "./";
 import goWithTheFloe from "../../games/definitions/gowiththefloe";
+import amazons from "../../games/definitions/amazons";
 
 const want = {
   uses: {
@@ -11,17 +12,30 @@ const want = {
 describe("the analyseGame function", () => {
   it("shows action usage per player", () => {
     const result = analyseGame(goWithTheFloe);
-    expect(result[1].uses).toEqual({
-      selectunit: true,
-      selectmovetarget: true,
-      move: true
-    });
-    expect(result[2].uses).toEqual({
-      selectunit: true,
-      selectmovetarget: true,
-      selecteattarget: true,
-      move: true,
-      eat: true
-    });
+    expect(Object.keys(result[1])).toEqual([
+      "startTurn",
+      "selectunit",
+      "selectmovetarget",
+      "move"
+    ]);
+    expect(Object.keys(result[2])).toEqual([
+      "startTurn",
+      "selectunit",
+      "selectmovetarget",
+      "selecteattarget",
+      "move",
+      "eat"
+    ]);
   });
+
+  // it("maps marks per action", () => {
+  //   const result = analyseGame(amazons);
+  //   const { actions } = result[1];
+
+  //   expect(actions.selectunit.priorMarks).toEqual([]);
+  //   expect(actions.selectmovetarget.priorMarks).toEqual(["selectunit"]);
+  //   expect(actions.move.priorMarks).toEqual(["selectunit", "selectmovetarget"]);
+  //   expect(actions.selectfiretarget.priorMarks).toEqual([]);
+  //   expect(actions.fire.priorMarks).toEqual(["selectfiretarget"]);
+  // });
 });

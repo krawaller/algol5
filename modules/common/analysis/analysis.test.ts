@@ -28,14 +28,19 @@ describe("the analyseGame function", () => {
     ]);
   });
 
-  // it("maps marks per action", () => {
-  //   const result = analyseGame(amazons);
-  //   const { actions } = result[1];
+  it("maps marks per action", () => {
+    const result = analyseGame(amazons);
+    const actions = result[1];
 
-  //   expect(actions.selectunit.priorMarks).toEqual([]);
-  //   expect(actions.selectmovetarget.priorMarks).toEqual(["selectunit"]);
-  //   expect(actions.move.priorMarks).toEqual(["selectunit", "selectmovetarget"]);
-  //   expect(actions.selectfiretarget.priorMarks).toEqual([]);
-  //   expect(actions.fire.priorMarks).toEqual(["selectfiretarget"]);
-  // });
+    expect(actions.selectunit.priorMarks).toEqual([]);
+    expect(actions.selectunit.addsMark).toEqual("selectunit");
+    expect(actions.selectmovetarget.priorMarks).toEqual(["selectunit"]);
+    expect(actions.selectmovetarget.addsMark).toEqual("selectmovetarget");
+    expect(actions.move.priorMarks).toEqual(["selectunit", "selectmovetarget"]);
+    expect(actions.move.isCmnd).toBe(true);
+    expect(actions.selectfiretarget.priorMarks).toEqual([]);
+    expect(actions.selectfiretarget.addsMark).toEqual("selectfiretarget");
+    expect(actions.fire.priorMarks).toEqual(["selectfiretarget"]);
+    expect(actions.fire.isCmnd).toBe(true);
+  });
 });

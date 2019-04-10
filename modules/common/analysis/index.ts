@@ -10,10 +10,29 @@ export function analyseGame(gameDef: FullDefAnon) {
       const [action, from] = toCheck.shift();
       const links = actionLinks(gameDef, plr as 1 | 2, action);
       if (!plrAnalysis[action]) {
-        plrAnalysis[action] = { priorMarks: [], from: [] };
+        plrAnalysis[action] = { priorMarks: [], from: [], links: [] };
       }
-      plrAnalysis[action].links = links;
-      plrAnalysis[action].from.push(from); // TODO - uniq
+      if (gameDef.flow.marks[action]) plrAnalysis[action].addsMark = action;
+      if (gameDef.flow.commands[action]) plrAnalysis[action].isCmnd = true;
+
+      // TODO - uniq
+      plrAnalysis[action].links = plrAnalysis[action].links.concat(links);
+      if (action !== "startTurn") {
+        plrAnalysis[action].from.push(from);
+        plrAnalysis[action].priorMarks = plrAnalysis[action].from.reduce(
+          (mem, l) => {
+            const prev = plrAnalysis[l];
+            return [
+              ...mem,
+              ...(prev.isCmnd
+                ? []
+                : prev.priorMarks.concat(prev.addsMark || []))
+            ];
+          },
+          plrAnalysis[action].priorMarks
+        );
+      }
+
       // TODO - marks
       for (const link of links) {
         if (link !== "endturn" && !plrAnalysis[link]) {

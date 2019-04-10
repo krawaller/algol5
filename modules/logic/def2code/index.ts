@@ -2,8 +2,11 @@ import * as path from "path";
 import * as prettier from "prettier";
 import { executeSection } from "./executors/section";
 import { FullDefAnon } from "../../types";
+import { analyseGame } from "../../common";
 
 export function compileGameToCode(gameDef: FullDefAnon) {
+  const analysis = analyseGame(gameDef);
+
   let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, collapseContent, defaultInstruction} from '${path.join(
     __dirname,
     "../../common"
@@ -40,34 +43,38 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       }; `;
     }
 
-    Object.keys(gameDef.flow.commands).forEach(cmndName => {
-      ret += `game.action.${cmndName + player} = (step) => {
+    Object.keys(gameDef.flow.commands)
+      .filter(c => analysis[player].uses[c])
+      .forEach(cmndName => {
+        ret += `game.action.${cmndName + player} = (step) => {
         ${executeSection(gameDef, player, cmndName, "cmndInit")}
         ${executeSection(gameDef, player, cmndName, "orders")}
         ${executeSection(gameDef, player, cmndName, "cmndEnd")}
       }; `;
 
-      if (gameDef.instructions[cmndName]) {
-        ret += `game.instruction.${cmndName + player} = (step) => {
+        if (gameDef.instructions[cmndName]) {
+          ret += `game.instruction.${cmndName + player} = (step) => {
           ${executeSection(gameDef, player, cmndName, "instruction")}
         }; `;
-      } else {
-        ret += `game.instruction.${cmndName +
-          player} = () => defaultInstruction(${player}); `;
-      }
-    });
+        } else {
+          ret += `game.instruction.${cmndName +
+            player} = () => defaultInstruction(${player}); `;
+        }
+      });
 
-    Object.keys(gameDef.flow.marks).forEach(markName => {
-      ret += `game.action.${markName + player} = (step, newMarkPos) => {
+    Object.keys(gameDef.flow.marks)
+      .filter(m => analysis[player].uses[m])
+      .forEach(markName => {
+        ret += `game.action.${markName + player} = (step, newMarkPos) => {
         ${executeSection(gameDef, player, markName, "markInit")}
         ${executeSection(gameDef, player, markName, "orders")}
         ${executeSection(gameDef, player, markName, "markEnd")}
       }; `;
 
-      ret += `game.instruction.${markName + player} = (step) => {
+        ret += `game.instruction.${markName + player} = (step) => {
         ${executeSection(gameDef, player, markName, "instruction")}
       }; `;
-    });
+      });
 
     ret += ` } `;
   });

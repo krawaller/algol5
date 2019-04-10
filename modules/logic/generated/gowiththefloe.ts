@@ -251,99 +251,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     };
   };
   game.instruction.move1 = () => defaultInstruction(1);
-  game.action.eat1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    let ARTIFACTS = {
-      eattargets: step.ARTIFACTS.eattargets,
-      movetargets: step.ARTIFACTS.movetargets,
-      canmove: { ...step.ARTIFACTS.canmove },
-      cracks: step.ARTIFACTS.cracks
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let MARKS = step.MARKS;
-    delete UNITDATA[(UNITLAYERS.units[MARKS.selectunit] || {}).id];
-    delete UNITDATA[(UNITLAYERS.units[MARKS.selecteattarget] || {}).id];
-    UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      neutralunits: {},
-      seals: {},
-      myseals: {},
-      oppseals: {},
-      neutralseals: {},
-      bears: {},
-      mybears: {},
-      oppbears: {},
-      neutralbears: {},
-      holes: {},
-      myholes: {},
-      oppholes: {},
-      neutralholes: {}
-    };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
-    }
-    {
-      for (let STARTPOS in UNITLAYERS.seals) {
-        for (let DIR of roseDirs) {
-          let MAX = 2;
-          let POS = STARTPOS;
-          let walkpositionstocount = Object.keys(TERRAIN.nowater)
-            .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {});
-          let CURRENTCOUNT = 0;
-          let LENGTH = 0;
-          while (LENGTH < MAX && (POS = connections[POS][DIR])) {
-            CURRENTCOUNT += walkpositionstocount[POS] ? 1 : 0;
-            LENGTH++;
-          }
-          let TOTALCOUNT = CURRENTCOUNT;
-          POS = STARTPOS;
-          if (TOTALCOUNT > 0) {
-            ARTIFACTS.canmove[POS] = {};
-          }
-        }
-      }
-    }
-
-    if (
-      Object.keys(ARTIFACTS.canmove).length !==
-      Object.keys(UNITLAYERS.seals).length
-    ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "safeseal";
-      LINKS.endMarks = Object.keys(
-        Object.keys(UNITLAYERS.seals)
-          .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
-      );
-    } else if (Object.keys(UNITLAYERS.seals).length === 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "sealseaten";
-    } else {
-      LINKS.endturn = "start2";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-
-      NEXTSPAWNID: step.NEXTSPAWNID
-    };
-  };
-  game.instruction.eat1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       eattargets: step.ARTIFACTS.eattargets,
@@ -444,27 +351,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.selectmovetarget1 = step => {
     return collapseContent({
       line: [{ text: "Press" }, { command: "move" }, { text: "to go here" }]
-    });
-  };
-  game.action.selecteattarget1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-
-    LINKS.actions.eat = "eat1";
-
-    return {
-      LINKS,
-      ARTIFACTS: step.ARTIFACTS,
-      UNITLAYERS: step.UNITLAYERS,
-      UNITDATA: step.UNITDATA,
-      TURN: step.TURN,
-      MARKS: { ...step.MARKS, selecteattarget: newMarkPos },
-
-      NEXTSPAWNID: step.NEXTSPAWNID
-    };
-  };
-  game.instruction.selecteattarget1 = step => {
-    return collapseContent({
-      line: [{ text: "Press" }, { command: "eat" }, { text: "to, well, eat" }]
     });
   };
 }

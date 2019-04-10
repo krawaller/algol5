@@ -5,7 +5,6 @@ export function analyseGame(gameDef: FullDefAnon) {
   const ret = {};
   for (const plr of [1, 2]) {
     const plrAnalysis = { uses: {} };
-    ret[plr] = plrAnalysis;
     let toCheck = ["startTurn"];
     while (toCheck.length) {
       const action = toCheck.shift();
@@ -17,6 +16,7 @@ export function analyseGame(gameDef: FullDefAnon) {
         }
       }
     }
+    ret[plr] = plrAnalysis;
   }
   return ret;
 }

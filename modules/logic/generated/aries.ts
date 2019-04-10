@@ -241,8 +241,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       squished: step.ARTIFACTS.squished
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectunit: newMarkPos
     };
     let BATTLEVARS = step.BATTLEVARS;
@@ -302,8 +301,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       squished: { ...step.ARTIFACTS.squished }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -889,8 +888,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       squished: step.ARTIFACTS.squished
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectunit: newMarkPos
     };
     let BATTLEVARS = step.BATTLEVARS;
@@ -950,8 +948,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       squished: { ...step.ARTIFACTS.squished }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;

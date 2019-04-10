@@ -2,7 +2,8 @@ import { FullDefAnon } from "../../../../../types";
 import { orderUsage } from "../sectionUtils";
 import {
   actionArtifactLayers,
-  gameArtifactLayers
+  gameArtifactLayers,
+  analyseGame
 } from "../../../../../common";
 
 export function executeMarkInit(
@@ -12,6 +13,7 @@ export function executeMarkInit(
 ): string {
   let ret = "";
   const usage = orderUsage(gameDef, player, action);
+  const analysis = analyseGame(gameDef);
 
   if (usage.ARTIFACTS) {
     const gameLayers = gameArtifactLayers(gameDef, player, action);
@@ -32,7 +34,15 @@ export function executeMarkInit(
   ret += `let LINKS = { actions: {} }; `;
 
   if (usage.MARKS) {
-    ret += `let MARKS = { ...step.MARKS, ${action}: newMarkPos };`;
+    if (!analysis[player][action]) {
+      console.log("OMG OMG", action, analysis[player]);
+    }
+    ret += `let MARKS = {
+      ${analysis[player][action].priorMarks
+        .map(m => `${m}: step.MARKS.${m}, `)
+        .join("")}
+      ${action}: newMarkPos
+    };`;
   }
 
   if (usage.TURNVARS) {

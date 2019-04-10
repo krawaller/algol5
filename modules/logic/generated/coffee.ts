@@ -490,8 +490,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       winline: step.ARTIFACTS.winline
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectdrop: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1073,8 +1072,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       winline: step.ARTIFACTS.winline
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectdrop: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;

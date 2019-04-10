@@ -200,8 +200,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       targets: { ...step.ARTIFACTS.targets }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectunit: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -253,7 +252,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectmovetarget: newMarkPos },
+      MARKS: {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: newMarkPos
+      },
       TURNVARS: step.TURNVARS,
 
       NEXTSPAWNID: step.NEXTSPAWNID
@@ -284,7 +286,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectfiretarget: newMarkPos },
+      MARKS: { selectfiretarget: newMarkPos },
       TURNVARS: step.TURNVARS,
 
       NEXTSPAWNID: step.NEXTSPAWNID
@@ -538,8 +540,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       targets: { ...step.ARTIFACTS.targets }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectunit: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -591,7 +592,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectmovetarget: newMarkPos },
+      MARKS: {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: newMarkPos
+      },
       TURNVARS: step.TURNVARS,
 
       NEXTSPAWNID: step.NEXTSPAWNID
@@ -622,7 +626,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectfiretarget: newMarkPos },
+      MARKS: { selectfiretarget: newMarkPos },
       TURNVARS: step.TURNVARS,
 
       NEXTSPAWNID: step.NEXTSPAWNID

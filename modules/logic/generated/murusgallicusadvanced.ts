@@ -589,8 +589,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: { ...step.ARTIFACTS.killtargets }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selecttower: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -697,8 +696,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: step.ARTIFACTS.killtargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selecttower: step.MARKS.selecttower,
       selectmove: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -757,8 +756,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectkill1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selecttower: step.MARKS.selecttower,
       selectkill: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -832,8 +831,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: step.ARTIFACTS.killtargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectcatapult: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -889,7 +887,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectfire: newMarkPos },
+      MARKS: {
+        selectcatapult: step.MARKS.selectcatapult,
+        selectfire: newMarkPos
+      },
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
@@ -1610,8 +1611,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: { ...step.ARTIFACTS.killtargets }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selecttower: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1718,8 +1718,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: step.ARTIFACTS.killtargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selecttower: step.MARKS.selecttower,
       selectmove: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1778,8 +1778,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectkill2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selecttower: step.MARKS.selecttower,
       selectkill: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1853,8 +1853,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: step.ARTIFACTS.killtargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectcatapult: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1910,7 +1909,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectfire: newMarkPos },
+      MARKS: {
+        selectcatapult: step.MARKS.selectcatapult,
+        selectfire: newMarkPos
+      },
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };

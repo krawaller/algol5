@@ -24,6 +24,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
+          startTurn: { link: "somemark" },
           marks: {
             somemark: {
               from: "units"
@@ -82,6 +83,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
+          startTurn: { link: "somemark" },
           marks: {
             somemark: {
               from: "units",

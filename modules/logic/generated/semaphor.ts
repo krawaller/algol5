@@ -311,7 +311,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectdeploytarget: newMarkPos },
+      MARKS: { selectdeploytarget: newMarkPos },
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
@@ -339,7 +339,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectunit: newMarkPos },
+      MARKS: { selectunit: newMarkPos },
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
@@ -688,7 +688,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectdeploytarget: newMarkPos },
+      MARKS: { selectdeploytarget: newMarkPos },
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
@@ -716,7 +716,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectunit: newMarkPos },
+      MARKS: { selectunit: newMarkPos },
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };

@@ -24,6 +24,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
+          startTurn: { link: "somemark" },
           marks: {
             somemark: {
               from: "units"
@@ -67,8 +68,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.MARKS",
                   res: {
-                    somemark: "c2",
-                    olderMark: "foo"
+                    somemark: "c2"
                   },
                   desc: "New mark was added to new step"
                 },
@@ -88,6 +88,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
+          startTurn: { link: "somemark" },
           marks: {
             anothermark: {
               from: "units"
@@ -118,8 +119,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "MARKS",
                   res: {
-                    somemark: "d2",
-                    anothermark: "a1"
+                    somemark: "d2"
                   },
                   desc: "The new mark added to local variable"
                 },

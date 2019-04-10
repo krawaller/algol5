@@ -334,8 +334,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: { ...step.ARTIFACTS.killtargets }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selecttower: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -437,8 +436,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: step.ARTIFACTS.killtargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selecttower: step.MARKS.selecttower,
       selectmove: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -498,7 +497,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectkill: newMarkPos },
+      MARKS: { selecttower: step.MARKS.selecttower, selectkill: newMarkPos },
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };
@@ -922,8 +921,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: { ...step.ARTIFACTS.killtargets }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selecttower: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1025,8 +1023,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       killtargets: step.ARTIFACTS.killtargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selecttower: step.MARKS.selecttower,
       selectmove: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1086,7 +1084,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectkill: newMarkPos },
+      MARKS: { selecttower: step.MARKS.selecttower, selectkill: newMarkPos },
 
       NEXTSPAWNID: step.NEXTSPAWNID
     };

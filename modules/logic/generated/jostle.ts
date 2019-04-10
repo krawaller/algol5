@@ -117,8 +117,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       newfriend: step.ARTIFACTS.newfriend
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectunit: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -192,8 +191,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       newfriend: { ...step.ARTIFACTS.newfriend }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -643,8 +642,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       newfriend: step.ARTIFACTS.newfriend
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectunit: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -718,8 +716,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       newfriend: { ...step.ARTIFACTS.newfriend }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;

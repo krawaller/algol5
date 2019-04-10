@@ -302,8 +302,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       movetargets: { ...step.ARTIFACTS.movetargets }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectunit: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -416,8 +415,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -494,7 +493,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectdeportdestination: newMarkPos }
+      MARKS: {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: step.MARKS.selectmovetarget,
+        selectdeportdestination: newMarkPos
+      }
     };
   };
   game.instruction.selectdeportdestination1 = step => {
@@ -520,8 +523,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       movetargets: step.ARTIFACTS.movetargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
       selectswapunit: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -567,8 +570,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       movetargets: step.ARTIFACTS.movetargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
+      selectswapunit: step.MARKS.selectswapunit,
       selectswap1target: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -947,8 +951,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       movetargets: { ...step.ARTIFACTS.movetargets }
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectunit: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1061,8 +1064,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1139,7 +1142,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { ...step.MARKS, selectdeportdestination: newMarkPos }
+      MARKS: {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: step.MARKS.selectmovetarget,
+        selectdeportdestination: newMarkPos
+      }
     };
   };
   game.instruction.selectdeportdestination2 = step => {
@@ -1165,8 +1172,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       movetargets: step.ARTIFACTS.movetargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
       selectswapunit: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1212,8 +1219,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       movetargets: step.ARTIFACTS.movetargets
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
+      selectunit: step.MARKS.selectunit,
+      selectswapunit: step.MARKS.selectswapunit,
       selectswap1target: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;

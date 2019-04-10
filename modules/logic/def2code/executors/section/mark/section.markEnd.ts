@@ -1,4 +1,5 @@
 import { FullDefAnon } from "../../../../../types";
+import { analyseGame } from "../../../../../common";
 import {
   referencesBattleVars,
   referencesTurnVars,
@@ -12,6 +13,7 @@ export function executeMarkEnd(
   action: string
 ): string {
   const usage = orderUsage(gameDef, player, action);
+  const analysis = analyseGame(gameDef);
 
   return `
     return {
@@ -23,7 +25,9 @@ export function executeMarkEnd(
       ${
         usage.MARKS
           ? "MARKS, "
-          : `MARKS: { ...step.MARKS, ${action}: newMarkPos }, `
+          : `MARKS: { ${analysis[player][action].priorMarks
+              .map(m => `${m}: step.MARKS.${m}, `)
+              .join("")} ${action}: newMarkPos }, `
       }
       ${
         referencesTurnVars(gameDef)

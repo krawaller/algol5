@@ -623,8 +623,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       fourinarow: step.ARTIFACTS.fourinarow
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectpushpoint: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -1403,8 +1402,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       fourinarow: step.ARTIFACTS.fourinarow
     };
     let LINKS: AlgolStepLinks = { actions: {} };
-    let MARKS: { [idx: string]: string } = {
-      ...step.MARKS,
+    let MARKS = {
       selectpushpoint: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;

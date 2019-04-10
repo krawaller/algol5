@@ -1,6 +1,5 @@
-import * as test from "tape";
 import { SetupAnon } from "../../types";
-import { deduceInitialUnitData } from "../";
+import { deduceInitialUnitData } from "..";
 
 type unitDataTest = {
   setup: SetupAnon;
@@ -49,13 +48,7 @@ const unitLayerTests: unitDataTest[] = [
   }
 ];
 
-test("deduceInitialUnitData", t => {
+test("deduceInitialUnitData", () =>
   unitLayerTests.forEach(({ setup, expected }) =>
-    t.deepEqual(
-      deduceInitialUnitData(setup),
-      expected,
-      `Correctly calculates data for for ${JSON.stringify(setup)}`
-    )
-  );
-  t.end();
-});
+    expect(deduceInitialUnitData(setup)).toEqual(expected)
+  ));

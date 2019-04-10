@@ -1,6 +1,5 @@
-import * as test from "tape";
 import { BoardAnon } from "../../types";
-import { terrainLayers } from "../";
+import { terrainLayers } from "..";
 
 type TerrainTest = {
   board: BoardAnon;
@@ -52,13 +51,8 @@ const terrainTests: TerrainTest[] = [
   }
 ];
 
-test("terrainLayers", t => {
+test("terrainLayers", () => {
   terrainTests.forEach(({ board, forPlayer, expected }) =>
-    t.deepEqual(
-      terrainLayers(board, forPlayer),
-      expected,
-      `Correctly calculates terrain for ${JSON.stringify(board.terrain)}`
-    )
+    expect(terrainLayers(board, forPlayer)).toEqual(expected)
   );
-  t.end();
 });

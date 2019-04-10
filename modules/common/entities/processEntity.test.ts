@@ -1,5 +1,4 @@
-import * as test from "tape";
-import { processEntity, ProcessedEntity } from "../";
+import { processEntity, ProcessedEntity } from "..";
 import { AlgolEntityAnon } from "../../types";
 
 type EntityTest = {
@@ -62,13 +61,8 @@ const processEntityTests: EntityTest[] = [
   }
 ];
 
-test("processEntity", t => {
+test("processEntity", () => {
   processEntityTests.forEach(({ entity, expected }) =>
-    t.deepEqual(
-      processEntity(entity),
-      expected,
-      `Processed ${JSON.stringify(entity)} to ${JSON.stringify(expected)}`
-    )
+    expect(processEntity(entity)).toEqual(expected)
   );
-  t.end();
 });

@@ -1,7 +1,6 @@
-import * as test from "tape";
-import { boardLayers } from "../";
+import { boardLayers } from "..";
 
-test("boardLayers", t => {
+test("boardLayers", () => {
   const board = { height: 2, width: 3 };
   const result = boardLayers(board);
   const expected = {
@@ -24,10 +23,5 @@ test("boardLayers", t => {
       b2: { x: 2, y: 2, colour: "dark", pos: "b2" }
     }
   };
-  t.deepEqual(
-    result,
-    expected,
-    `Correctly calculates layers for ${JSON.stringify(board)}`
-  );
-  t.end();
+  expect(result).toEqual(expected);
 });

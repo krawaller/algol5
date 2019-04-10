@@ -1,4 +1,3 @@
-import * as test from "tape";
 import { FullDefAnon } from "../../types";
 import { emptyUnitLayers, emptyFullDef } from "..";
 
@@ -40,15 +39,7 @@ const unitLayerTests: UnitLayerTest[] = [
   }
 ];
 
-test("unitLayers", t => {
+test("unitLayers", () =>
   unitLayerTests.forEach(({ def, expected }) =>
-    t.deepEqual(
-      emptyUnitLayers(def),
-      expected,
-      `Correctly calculates unit layers for ${JSON.stringify(
-        def.graphics.icons
-      )}`
-    )
-  );
-  t.end();
-});
+    expect(emptyUnitLayers(def)).toEqual(expected)
+  ));

@@ -1,5 +1,4 @@
-import * as test from "tape";
-import { contains } from "../";
+import { contains } from "..";
 
 type ContainsTest = {
   haystack: any;
@@ -23,15 +22,7 @@ const containsTests: ContainsTest[] = [
   }
 ];
 
-test("contains", t => {
-  containsTests.forEach(({ haystack, needle, found }) => {
-    t.equal(
-      contains(haystack, needle),
-      found,
-      `${JSON.stringify(haystack)} contains ${JSON.stringify(
-        needle
-      )} is ${JSON.stringify(found)}`
-    );
-  });
-  t.end();
-});
+test("contains", () =>
+  containsTests.forEach(({ haystack, needle, found }) =>
+    expect(contains(haystack, needle)).toEqual(found)
+  ));

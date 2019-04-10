@@ -1,13 +1,15 @@
 {
   "devDependencies": {
-    "@types/tape": "^4.2.33",
-    "tap-spec": "^5.0.0",
-    "tape": "^4.9.2",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.2",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
     "ts-node": "^8.0.1",
     "typescript": "^3.2.4"
   },
   "scripts": {
-    "test": "ts-node node_modules/tape/bin/tape **/*.spec.ts | node_modules/.bin/tap-spec"
+    "test": "jest",
+    "testOLD": "ts-node node_modules/tape/bin/tape **/*.spec.ts | node_modules/.bin/tap-spec"
   },
   "dependencies": {
     "lodash.isequal": "^4.5.0"

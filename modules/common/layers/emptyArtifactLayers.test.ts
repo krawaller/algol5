@@ -1,4 +1,3 @@
-import * as test from "tape";
 import { GeneratorsAnon } from "../../types";
 import { emptyArtifactLayers } from "..";
 
@@ -55,13 +54,8 @@ const emptyArtifactLayerTests: EmptyArtifactLayerTest[] = [
   }
 ];
 
-test("artifactLayers", t => {
+test("artifactLayers", () => {
   emptyArtifactLayerTests.forEach(({ generators, expected }) =>
-    t.deepEqual(
-      emptyArtifactLayers(generators),
-      expected,
-      `Correctly calculates artifactLayers for ${JSON.stringify(generators)}`
-    )
+    expect(emptyArtifactLayers(generators)).toEqual(expected)
   );
-  t.end();
 });

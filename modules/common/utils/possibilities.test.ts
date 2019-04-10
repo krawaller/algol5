@@ -1,5 +1,4 @@
-import * as test from "tape";
-import { possibilities } from "../";
+import { possibilities } from "..";
 import { AlgolLogicalAnon } from "../../types";
 
 type PossTest<_T> = {
@@ -84,13 +83,7 @@ const possTests: PossTest<
   }
 ];
 
-test("possibilities", t => {
-  possTests.forEach(({ expr, poss, player = 0, action = "any" }) => {
-    t.deepEqual(
-      possibilities(expr, player as 0 | 1 | 2, action),
-      poss,
-      `Saw that ${JSON.stringify(expr)} can be ${JSON.stringify(poss)}`
-    );
-  });
-  t.end();
-});
+test("possibilities", () =>
+  possTests.forEach(({ expr, poss, player = 0, action = "any" }) =>
+    expect(possibilities(expr, player as 0 | 1 | 2, action)).toEqual(poss)
+  ));

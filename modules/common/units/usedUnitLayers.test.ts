@@ -1,6 +1,8 @@
 import { FullDefAnon } from "../../types";
 import { usedUnitLayers, emptyFullDef } from "..";
 
+import aries from "../../games/definitions/aries";
+
 type UnitLayerTest = {
   def: FullDefAnon;
   expected: string[];
@@ -21,8 +23,8 @@ const muppetsHuppetsDef: FullDefAnon = {
 const unitLayerTests: UnitLayerTest[] = [
   {
     def: muppetsHuppetsDef,
-    expected: [],
-    desc: "When nothing is referenced, we get nothing!"
+    expected: ["units"],
+    desc: "When nothing is referenced, we still get units."
   },
   {
     def: {
@@ -38,7 +40,7 @@ const unitLayerTests: UnitLayerTest[] = [
         }
       }
     },
-    expected: ["huppets", "neutralmuppets"]
+    expected: ["huppets", "neutralmuppets", "units"]
   },
   {
     def: {
@@ -54,12 +56,16 @@ const unitLayerTests: UnitLayerTest[] = [
         }
       }
     },
-    expected: ["huppets", "mymuppets", "oppmuppets"],
+    expected: ["huppets", "mymuppets", "oppmuppets", "units"],
     desc: "must always include my-opp combinations"
+  },
+  {
+    def: aries,
+    expected: ["units", "myunits", "oppunits"]
   }
 ];
 
 test("usedUnitLayers", () =>
   unitLayerTests.forEach(({ def, expected }) =>
-    expect(usedUnitLayers(def).sort()).toEqual(expected)
+    expect(usedUnitLayers(def).sort()).toEqual(expected.sort())
   ));

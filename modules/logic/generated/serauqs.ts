@@ -22,6 +22,14 @@ const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
 let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
+  const groupLayers = {
+    soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]],
+    wild: [
+      ["units", "wild"],
+      ["units", "myunits", "wild", "mywild"],
+      ["units", "oppunits", "wild", "oppwild"]
+    ]
+  };
   const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
     base: {
@@ -103,15 +111,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      neutralunits: oldUnitLayers.neutralunits,
-      soldiers: oldUnitLayers.soldiers,
-      mysoldiers: oldUnitLayers.oppsoldiers,
-      oppsoldiers: oldUnitLayers.mysoldiers,
-      neutralsoldiers: oldUnitLayers.neutralsoldiers,
       wild: oldUnitLayers.wild,
       mywild: oldUnitLayers.oppwild,
-      oppwild: oldUnitLayers.mywild,
-      neutralwild: oldUnitLayers.neutralwild
+      oppwild: oldUnitLayers.mywild
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -176,23 +178,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
-      soldiers: {},
-      mysoldiers: {},
-      oppsoldiers: {},
-      neutralsoldiers: {},
       wild: {},
       mywild: {},
-      oppwild: {},
-      neutralwild: {}
+      oppwild: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
@@ -270,23 +265,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
-      soldiers: {},
-      mysoldiers: {},
-      oppsoldiers: {},
-      neutralsoldiers: {},
       wild: {},
       mywild: {},
-      oppwild: {},
-      neutralwild: {}
+      oppwild: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
     {
       let allowedsteps = { ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild };
@@ -471,6 +459,14 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
 }
 {
+  const groupLayers = {
+    soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]],
+    wild: [
+      ["units", "wild"],
+      ["units", "oppunits", "wild", "oppwild"],
+      ["units", "myunits", "wild", "mywild"]
+    ]
+  };
   const ownerNames = ["neutral", "opp", "my"];
   const TERRAIN = {
     base: {
@@ -552,15 +548,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      neutralunits: oldUnitLayers.neutralunits,
-      soldiers: oldUnitLayers.soldiers,
-      mysoldiers: oldUnitLayers.oppsoldiers,
-      oppsoldiers: oldUnitLayers.mysoldiers,
-      neutralsoldiers: oldUnitLayers.neutralsoldiers,
       wild: oldUnitLayers.wild,
       mywild: oldUnitLayers.oppwild,
-      oppwild: oldUnitLayers.mywild,
-      neutralwild: oldUnitLayers.neutralwild
+      oppwild: oldUnitLayers.mywild
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -667,23 +657,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
-      soldiers: {},
-      mysoldiers: {},
-      oppsoldiers: {},
-      neutralsoldiers: {},
       wild: {},
       mywild: {},
-      oppwild: {},
-      neutralwild: {}
+      oppwild: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     return game.action.start1({
@@ -715,23 +698,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
-      soldiers: {},
-      mysoldiers: {},
-      oppsoldiers: {},
-      neutralsoldiers: {},
       wild: {},
       mywild: {},
-      oppwild: {},
-      neutralwild: {}
+      oppwild: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
@@ -809,23 +785,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
-      soldiers: {},
-      mysoldiers: {},
-      oppsoldiers: {},
-      neutralsoldiers: {},
       wild: {},
       mywild: {},
-      oppwild: {},
-      neutralwild: {}
+      oppwild: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
     {
       let allowedsteps = { ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild };

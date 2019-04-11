@@ -25,15 +25,25 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             1: ["a1"],
             2: ["b2"]
           }
+        },
+        flow: {
+          ...emptyFullDef.flow,
+          endGame: {
+            gnork: {
+              condition: {
+                isempty: {
+                  union: ["myflurps"]
+                }
+              }
+            }
+          }
         }
       },
-      player: 1,
+      player: 2,
       action: "battle",
       contexts: [
         {
-          context: {
-            ownerNames: ["neutral", "opp", "my"] // to simulate 2plr
-          },
+          context: {},
           envelope:
             "let game = { action: { start1: a => ({...a, sentToStart1: true }) } };",
           tests: [
@@ -93,34 +103,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         y: 2
                       }
                     },
-                    flurps: {
-                      a1: {
-                        id: "unit1",
-                        group: "flurps",
-                        owner: 1,
-                        pos: "a1",
-                        x: 1,
-                        y: 1
-                      },
-                      b2: {
-                        id: "unit2",
-                        group: "flurps",
-                        owner: 2,
-                        pos: "b2",
-                        x: 2,
-                        y: 2
-                      }
-                    },
-                    oppunits: {
-                      a1: {
-                        id: "unit1",
-                        group: "flurps",
-                        owner: 1,
-                        pos: "a1",
-                        x: 1,
-                        y: 1
-                      }
-                    },
                     oppflurps: {
                       a1: {
                         id: "unit1",
@@ -129,16 +111,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         pos: "a1",
                         x: 1,
                         y: 1
-                      }
-                    },
-                    myunits: {
-                      b2: {
-                        id: "unit2",
-                        group: "flurps",
-                        owner: 2,
-                        pos: "b2",
-                        x: 2,
-                        y: 2
                       }
                     },
                     myflurps: {
@@ -150,9 +122,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         x: 2,
                         y: 2
                       }
-                    },
-                    neutralunits: {},
-                    neutralflurps: {}
+                    }
                   },
                   desc: "we send plr2 layers since start1 will switch"
                 }

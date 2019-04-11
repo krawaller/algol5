@@ -116,6 +116,14 @@ export const testSuite: AlgolExpressionSuite<
           icons: {
             gnurps: "rook"
           }
+        },
+        flow: {
+          ...emptyFullDef.flow,
+          endGame: {
+            something: {
+              condition: { isempty: { union: ["mygnurps"] } }
+            }
+          }
         }
       },
       player: 1,

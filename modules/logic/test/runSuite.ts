@@ -1,7 +1,7 @@
 import * as path from "path";
 
 import { AlgolSuite, isAlgolExpressionTest } from "../../types";
-import { truthy, falsy } from "../../common";
+import { truthy, falsy, groupLayersForPlayer } from "../../common";
 
 export function runSuite<T, U>(suite: AlgolSuite) {
   test(suite.title, () => {
@@ -70,6 +70,9 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                   const connections = boardConnections(gameDef.board);
                   const relativeDirs = makeRelativeDirs(gameDef.board);
                   `;
+                  pre += `const groupLayers = ${JSON.stringify(
+                    groupLayersForPlayer(def, player)
+                  )}; `;
                 }
 
                 pre += envelope || "";

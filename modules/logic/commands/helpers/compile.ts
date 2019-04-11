@@ -9,9 +9,14 @@ const out = path.join(__dirname, "../../generated");
 
 export default async function compile(gameId) {
   const rules = lib[gameId];
-  const code = compileGameToCode(rules);
+  try {
+    const code = compileGameToCode(rules);
 
-  await fs.ensureDir(out);
-  await fs.writeFile(path.join(out, gameId + ".ts"), code);
-  console.log(`Compiled ${gameId}`);
+    await fs.ensureDir(out);
+    await fs.writeFile(path.join(out, gameId + ".ts"), code);
+    console.log(`Compiled ${gameId}`);
+  } catch (e) {
+    console.log("Error while compiling", gameId);
+    throw e;
+  }
 }

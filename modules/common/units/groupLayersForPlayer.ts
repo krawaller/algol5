@@ -6,8 +6,6 @@ import { usedUnitLayers } from "./";
 */
 type GroupLayersForPlayerResult = { [group: string]: string[][] };
 
-// ['units', 'myunits', 'oppunits', 'neutralunits', group, `my${group}`, `opp${group}`, `neutral${group}`],
-
 export function groupLayersForPlayer(
   def: FullDefAnon,
   player: 1 | 2

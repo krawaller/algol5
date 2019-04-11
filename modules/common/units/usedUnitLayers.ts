@@ -5,13 +5,15 @@ export function usedUnitLayers(def: FullDefAnon): string[] {
   return ["units"]
     .concat(Object.keys(def.graphics.icons))
     .reduce((mem, u) => mem.concat([u, `my${u}`, `opp${u}`, `neutral${u}`]), [])
-    .filter(layer =>
-      contains(
-        def,
-        n =>
-          n === layer ||
-          n === layer.replace(/^my/, "opp") ||
-          n === layer.replace(/^opp/, "my")
-      )
+    .filter(
+      layer =>
+        layer === "units" ||
+        contains(
+          def,
+          n =>
+            n === layer ||
+            n === layer.replace(/^my/, "opp") ||
+            n === layer.replace(/^opp/, "my")
+        )
     );
 }

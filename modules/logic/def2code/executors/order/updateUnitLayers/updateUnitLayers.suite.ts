@@ -15,6 +15,18 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             gnurps: "pawn",
             flurps: "bishop"
           }
+        },
+        flow: {
+          ...emptyFullDef.flow,
+          endGame: {
+            gnork: {
+              condition: {
+                isempty: {
+                  union: ["myunits", "mygnurps", "flurps", "neutralflurps"]
+                }
+              }
+            }
+          }
         }
       },
       player: 1,
@@ -45,20 +57,11 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                     oppunits: {
                       b2: { id: "unit2", pos: "b2", group: "flurps", owner: 2 }
                     },
-                    neutralunits: {},
-                    gnurps: {
-                      a1: { id: "unit1", pos: "a1", group: "gnurps", owner: 1 }
-                    },
                     mygnurps: {
                       a1: { id: "unit1", pos: "a1", group: "gnurps", owner: 1 }
                     },
                     oppgnurps: {},
-                    neutralgnurps: {},
                     flurps: {
-                      b2: { id: "unit2", pos: "b2", group: "flurps", owner: 2 }
-                    },
-                    myflurps: {},
-                    oppflurps: {
                       b2: { id: "unit2", pos: "b2", group: "flurps", owner: 2 }
                     },
                     neutralflurps: {}

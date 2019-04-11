@@ -22,6 +22,19 @@ const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
 let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
+  const groupLayers = {
+    pinets: [
+      ["units", "pinets"],
+      ["units", "myunits", "pinets"],
+      ["units", "oppunits", "pinets"]
+    ],
+    piokers: [
+      ["units", "piokers"],
+      ["units", "myunits", "piokers"],
+      ["units", "oppunits", "piokers"]
+    ],
+    piases: [["units"], ["units", "myunits"], ["units", "oppunits"]]
+  };
   const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
     base: {
@@ -74,19 +87,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      neutralunits: oldUnitLayers.neutralunits,
       pinets: oldUnitLayers.pinets,
-      mypinets: oldUnitLayers.opppinets,
-      opppinets: oldUnitLayers.mypinets,
-      neutralpinets: oldUnitLayers.neutralpinets,
-      piokers: oldUnitLayers.piokers,
-      mypiokers: oldUnitLayers.opppiokers,
-      opppiokers: oldUnitLayers.mypiokers,
-      neutralpiokers: oldUnitLayers.neutralpiokers,
-      piases: oldUnitLayers.piases,
-      mypiases: oldUnitLayers.opppiases,
-      opppiases: oldUnitLayers.mypiases,
-      neutralpiases: oldUnitLayers.neutralpiases
+      piokers: oldUnitLayers.piokers
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -144,27 +146,15 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       pinets: {},
-      mypinets: {},
-      opppinets: {},
-      neutralpinets: {},
-      piokers: {},
-      mypiokers: {},
-      opppiokers: {},
-      neutralpiokers: {},
-      piases: {},
-      mypiases: {},
-      opppiases: {},
-      neutralpiases: {}
+      piokers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     if (
@@ -236,27 +226,15 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       pinets: {},
-      mypinets: {},
-      opppinets: {},
-      neutralpinets: {},
-      piokers: {},
-      mypiokers: {},
-      opppiokers: {},
-      neutralpiokers: {},
-      piases: {},
-      mypiases: {},
-      opppiases: {},
-      neutralpiases: {}
+      piokers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     if (
@@ -624,6 +602,19 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
 }
 {
+  const groupLayers = {
+    pinets: [
+      ["units", "pinets"],
+      ["units", "oppunits", "pinets"],
+      ["units", "myunits", "pinets"]
+    ],
+    piokers: [
+      ["units", "piokers"],
+      ["units", "oppunits", "piokers"],
+      ["units", "myunits", "piokers"]
+    ],
+    piases: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+  };
   const ownerNames = ["neutral", "opp", "my"];
   const TERRAIN = {
     base: {
@@ -676,19 +667,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      neutralunits: oldUnitLayers.neutralunits,
       pinets: oldUnitLayers.pinets,
-      mypinets: oldUnitLayers.opppinets,
-      opppinets: oldUnitLayers.mypinets,
-      neutralpinets: oldUnitLayers.neutralpinets,
-      piokers: oldUnitLayers.piokers,
-      mypiokers: oldUnitLayers.opppiokers,
-      opppiokers: oldUnitLayers.mypiokers,
-      neutralpiokers: oldUnitLayers.neutralpiokers,
-      piases: oldUnitLayers.piases,
-      mypiases: oldUnitLayers.opppiases,
-      opppiases: oldUnitLayers.mypiases,
-      neutralpiases: oldUnitLayers.neutralpiases
+      piokers: oldUnitLayers.piokers
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -730,27 +710,15 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       pinets: {},
-      mypinets: {},
-      opppinets: {},
-      neutralpinets: {},
-      piokers: {},
-      mypiokers: {},
-      opppiokers: {},
-      neutralpiokers: {},
-      piases: {},
-      mypiases: {},
-      opppiases: {},
-      neutralpiases: {}
+      piokers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     return game.action.start1({
@@ -793,27 +761,15 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       pinets: {},
-      mypinets: {},
-      opppinets: {},
-      neutralpinets: {},
-      piokers: {},
-      mypiokers: {},
-      opppiokers: {},
-      neutralpiokers: {},
-      piases: {},
-      mypiases: {},
-      opppiases: {},
-      neutralpiases: {}
+      piokers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     if (
@@ -885,27 +841,15 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       pinets: {},
-      mypinets: {},
-      opppinets: {},
-      neutralpinets: {},
-      piokers: {},
-      mypiokers: {},
-      opppiokers: {},
-      neutralpiokers: {},
-      piases: {},
-      mypiases: {},
-      opppiases: {},
-      neutralpiases: {}
+      piokers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     if (

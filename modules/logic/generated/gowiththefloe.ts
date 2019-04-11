@@ -97,6 +97,23 @@ const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
 let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
+  const groupLayers = {
+    seals: [
+      ["units", "seals"],
+      ["units", "myunits", "seals"],
+      ["units", "oppunits", "seals"]
+    ],
+    bears: [
+      ["units", "bears"],
+      ["units", "myunits", "bears"],
+      ["units", "oppunits", "bears"]
+    ],
+    holes: [
+      ["units", "holes"],
+      ["units", "myunits", "holes"],
+      ["units", "oppunits", "holes"]
+    ]
+  };
   const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
@@ -104,19 +121,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      neutralunits: oldUnitLayers.neutralunits,
       seals: oldUnitLayers.seals,
-      myseals: oldUnitLayers.oppseals,
-      oppseals: oldUnitLayers.myseals,
-      neutralseals: oldUnitLayers.neutralseals,
       bears: oldUnitLayers.bears,
-      mybears: oldUnitLayers.oppbears,
-      oppbears: oldUnitLayers.mybears,
-      neutralbears: oldUnitLayers.neutralbears,
-      holes: oldUnitLayers.holes,
-      myholes: oldUnitLayers.oppholes,
-      oppholes: oldUnitLayers.myholes,
-      neutralholes: oldUnitLayers.neutralholes
+      holes: oldUnitLayers.holes
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -175,27 +182,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       seals: {},
-      myseals: {},
-      oppseals: {},
-      neutralseals: {},
       bears: {},
-      mybears: {},
-      oppbears: {},
-      neutralbears: {},
-      holes: {},
-      myholes: {},
-      oppholes: {},
-      neutralholes: {}
+      holes: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
     {
       for (let STARTPOS in UNITLAYERS.seals) {
@@ -354,6 +350,23 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
 }
 {
+  const groupLayers = {
+    seals: [
+      ["units", "seals"],
+      ["units", "oppunits", "seals"],
+      ["units", "myunits", "seals"]
+    ],
+    bears: [
+      ["units", "bears"],
+      ["units", "oppunits", "bears"],
+      ["units", "myunits", "bears"]
+    ],
+    holes: [
+      ["units", "holes"],
+      ["units", "oppunits", "holes"],
+      ["units", "myunits", "holes"]
+    ]
+  };
   const ownerNames = ["neutral", "opp", "my"];
   game.action.start2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
@@ -361,19 +374,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      neutralunits: oldUnitLayers.neutralunits,
       seals: oldUnitLayers.seals,
-      myseals: oldUnitLayers.oppseals,
-      oppseals: oldUnitLayers.myseals,
-      neutralseals: oldUnitLayers.neutralseals,
       bears: oldUnitLayers.bears,
-      mybears: oldUnitLayers.oppbears,
-      oppbears: oldUnitLayers.mybears,
-      neutralbears: oldUnitLayers.neutralbears,
-      holes: oldUnitLayers.holes,
-      myholes: oldUnitLayers.oppholes,
-      oppholes: oldUnitLayers.myholes,
-      neutralholes: oldUnitLayers.neutralholes
+      holes: oldUnitLayers.holes
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -408,27 +411,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       seals: {},
-      myseals: {},
-      oppseals: {},
-      neutralseals: {},
       bears: {},
-      mybears: {},
-      oppbears: {},
-      neutralbears: {},
-      holes: {},
-      myholes: {},
-      oppholes: {},
-      neutralholes: {}
+      holes: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     return game.action.start1({
@@ -475,27 +467,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       seals: {},
-      myseals: {},
-      oppseals: {},
-      neutralseals: {},
       bears: {},
-      mybears: {},
-      oppbears: {},
-      neutralbears: {},
-      holes: {},
-      myholes: {},
-      oppholes: {},
-      neutralholes: {}
+      holes: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
     {
       for (let STARTPOS in UNITLAYERS.seals) {
@@ -568,27 +549,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       seals: {},
-      myseals: {},
-      oppseals: {},
-      neutralseals: {},
       bears: {},
-      mybears: {},
-      oppbears: {},
-      neutralbears: {},
-      holes: {},
-      myholes: {},
-      oppholes: {},
-      neutralholes: {}
+      holes: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
     {
       for (let STARTPOS in UNITLAYERS.seals) {

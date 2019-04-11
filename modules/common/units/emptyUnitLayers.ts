@@ -1,12 +1,10 @@
 import { FullDefAnon } from "../../types";
+import { usedUnitLayers } from ".";
 
 /*
 Calculates empty unit layers for a game def.
-Will use def.graphics.icons for the source of truth as to what unit types exists.
+Will use def.graphics.icons for the source of truth as to what unit types exists
 */
 export function emptyUnitLayers(def: FullDefAnon) {
-  return ["units"]
-    .concat(Object.keys(def.graphics.icons))
-    .reduce((mem, t) => mem.concat([t, `my${t}`, `opp${t}`, `neutral${t}`]), [])
-    .reduce((mem, l) => ({ ...mem, [l]: {} }), {});
+  return usedUnitLayers(def).reduce((mem, l) => ({ ...mem, [l]: {} }), {});
 }

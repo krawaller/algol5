@@ -1,5 +1,9 @@
 import { FullDefAnon } from "../../../../../types";
-import { isTerrainNeutral, terrainLayers } from "../../../../../common";
+import {
+  isTerrainNeutral,
+  terrainLayers,
+  groupLayersForPlayer
+} from "../../../../../common";
 
 export function executePlayer(
   gameDef: FullDefAnon,
@@ -8,9 +12,9 @@ export function executePlayer(
 ): string {
   let ret = "";
 
-  ret += `const ownerNames = ["neutral", ${
-    player === 1 ? '"my", "opp"' : '"opp", "my"'
-  }]; `;
+  ret += `const groupLayers = ${JSON.stringify(
+    groupLayersForPlayer(gameDef, player)
+  )}; `;
 
   if (!isTerrainNeutral(gameDef)) {
     ret += `const TERRAIN = ${JSON.stringify(

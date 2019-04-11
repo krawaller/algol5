@@ -19,12 +19,9 @@ export function updateUnitLayers(
   for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid]
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner]
-      UNITLAYERS.units[pos]
-          = UNITLAYERS[group][pos]
-          = UNITLAYERS[ownerPrefix + group][pos]
-          = UNITLAYERS[ownerPrefix +'units'][pos]
-          = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
   }
 `;
 }

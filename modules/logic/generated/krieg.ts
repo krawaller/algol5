@@ -22,6 +22,18 @@ const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
 let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
+  const groupLayers = {
+    notfrozens: [
+      ["units", "notfrozens"],
+      ["units", "myunits", "notfrozens", "mynotfrozens"],
+      ["units", "oppunits", "notfrozens", "oppnotfrozens"]
+    ],
+    frozens: [
+      ["units", "frozens"],
+      ["units", "myunits", "frozens", "myfrozens"],
+      ["units", "oppunits", "frozens", "oppfrozens"]
+    ]
+  };
   const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
     southeast: { a4: { pos: "a4", x: 1, y: 4 }, c2: { pos: "c2", x: 3, y: 2 } },
@@ -117,15 +129,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      neutralunits: oldUnitLayers.neutralunits,
       notfrozens: oldUnitLayers.notfrozens,
       mynotfrozens: oldUnitLayers.oppnotfrozens,
       oppnotfrozens: oldUnitLayers.mynotfrozens,
-      neutralnotfrozens: oldUnitLayers.neutralnotfrozens,
       frozens: oldUnitLayers.frozens,
       myfrozens: oldUnitLayers.oppfrozens,
-      oppfrozens: oldUnitLayers.myfrozens,
-      neutralfrozens: oldUnitLayers.neutralfrozens
+      oppfrozens: oldUnitLayers.myfrozens
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -194,23 +203,19 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       notfrozens: {},
       mynotfrozens: {},
       oppnotfrozens: {},
-      neutralnotfrozens: {},
       frozens: {},
       myfrozens: {},
-      oppfrozens: {},
-      neutralfrozens: {}
+      oppfrozens: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     if (
@@ -351,6 +356,18 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
 }
 {
+  const groupLayers = {
+    notfrozens: [
+      ["units", "notfrozens"],
+      ["units", "oppunits", "notfrozens", "oppnotfrozens"],
+      ["units", "myunits", "notfrozens", "mynotfrozens"]
+    ],
+    frozens: [
+      ["units", "frozens"],
+      ["units", "oppunits", "frozens", "oppfrozens"],
+      ["units", "myunits", "frozens", "myfrozens"]
+    ]
+  };
   const ownerNames = ["neutral", "opp", "my"];
   const TERRAIN = {
     southeast: { a4: { pos: "a4", x: 1, y: 4 }, c2: { pos: "c2", x: 3, y: 2 } },
@@ -446,15 +463,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      neutralunits: oldUnitLayers.neutralunits,
       notfrozens: oldUnitLayers.notfrozens,
       mynotfrozens: oldUnitLayers.oppnotfrozens,
       oppnotfrozens: oldUnitLayers.mynotfrozens,
-      neutralnotfrozens: oldUnitLayers.neutralnotfrozens,
       frozens: oldUnitLayers.frozens,
       myfrozens: oldUnitLayers.oppfrozens,
-      oppfrozens: oldUnitLayers.myfrozens,
-      neutralfrozens: oldUnitLayers.neutralfrozens
+      oppfrozens: oldUnitLayers.myfrozens
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -556,23 +570,19 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       notfrozens: {},
       mynotfrozens: {},
       oppnotfrozens: {},
-      neutralnotfrozens: {},
       frozens: {},
       myfrozens: {},
-      oppfrozens: {},
-      neutralfrozens: {}
+      oppfrozens: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     return game.action.start1({
@@ -620,23 +630,19 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       notfrozens: {},
       mynotfrozens: {},
       oppnotfrozens: {},
-      neutralnotfrozens: {},
       frozens: {},
       myfrozens: {},
-      oppfrozens: {},
-      neutralfrozens: {}
+      oppfrozens: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      const ownerPrefix = ownerNames[owner];
-      UNITLAYERS.units[pos] = UNITLAYERS[group][pos] = UNITLAYERS[
-        ownerPrefix + group
-      ][pos] = UNITLAYERS[ownerPrefix + "units"][pos] = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
     }
 
     if (

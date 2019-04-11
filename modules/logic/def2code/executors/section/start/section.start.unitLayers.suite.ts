@@ -20,7 +20,7 @@ const defaultStartEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Start - Init - UnitLayers",
+  title: "Section - Start - UnitLayers",
   func: executeSection,
   defs: [
     {
@@ -28,6 +28,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         flow: {
           ...emptyFullDef.flow,
+          endGame: {
+            something: {
+              condition: {
+                isempty: { union: ["units", "myunits", "myflurps"] }
+              }
+            }
+          },
           startTurn: {
             link: { if: [{ anyat: ["myunits", "somemark"] }, "endturn"] }
           }
@@ -51,12 +58,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 units: "willstayunits",
                 myunits: "shouldbecomeoppunits",
                 oppunits: "shouldbecomemyunits",
-                flurps: "willstayflurps",
                 myflurps: "shouldbecomeoppflurps",
-                oppflurps: "shouldbecomemyflurps",
-                gnurps: "willstaygnurps",
-                mygnurps: "shouldbecomeoppgnurps",
-                oppgnurps: "shouldbecomemygnurps"
+                oppflurps: "shouldbecomemyflurps"
               }
             }
           },
@@ -70,12 +73,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     units: "willstayunits",
                     oppunits: "shouldbecomeoppunits",
                     myunits: "shouldbecomemyunits",
-                    flurps: "willstayflurps",
                     oppflurps: "shouldbecomeoppflurps",
-                    myflurps: "shouldbecomemyflurps",
-                    gnurps: "willstaygnurps",
-                    oppgnurps: "shouldbecomeoppgnurps",
-                    mygnurps: "shouldbecomemygnurps"
+                    myflurps: "shouldbecomemyflurps"
                   },
                   desc: "Local use, so import and switch old layers here"
                 }
@@ -113,6 +112,16 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             flurps: "bishop",
             gnurps: "king"
           }
+        },
+        flow: {
+          ...emptyFullDef.flow,
+          endGame: {
+            something: {
+              condition: {
+                isempty: { union: ["units", "myunits", "mygnurps", "flurps"] }
+              }
+            }
+          }
         }
       },
       player: 1,
@@ -143,9 +152,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 myunits: "shouldbecomeoppunits",
                 oppunits: "shouldbecomemyunits",
                 flurps: "willstayflurps",
-                myflurps: "shouldbecomeoppflurps",
-                oppflurps: "shouldbecomemyflurps",
-                gnurps: "willstaygnurps",
                 mygnurps: "shouldbecomeoppgnurps",
                 oppgnurps: "shouldbecomemygnurps"
               }
@@ -162,9 +168,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     oppunits: "shouldbecomeoppunits",
                     myunits: "shouldbecomemyunits",
                     flurps: "willstayflurps",
-                    oppflurps: "shouldbecomeoppflurps",
-                    myflurps: "shouldbecomemyflurps",
-                    gnurps: "willstaygnurps",
                     oppgnurps: "shouldbecomeoppgnurps",
                     mygnurps: "shouldbecomemygnurps"
                   },

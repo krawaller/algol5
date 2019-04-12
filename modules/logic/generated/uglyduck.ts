@@ -29,9 +29,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "oppsoldiers"]
     ],
     kings: [
-      ["units", "kings"],
-      ["units", "myunits", "kings", "mykings"],
-      ["units", "oppunits", "kings", "oppkings"]
+      ["units"],
+      ["units", "myunits", "mykings"],
+      ["units", "oppunits", "oppkings"]
     ]
   };
   const TERRAIN = {
@@ -87,7 +87,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       oppunits: oldUnitLayers.myunits,
       mysoldiers: oldUnitLayers.oppsoldiers,
       oppsoldiers: oldUnitLayers.mysoldiers,
-      kings: oldUnitLayers.kings,
       mykings: oldUnitLayers.oppkings,
       oppkings: oldUnitLayers.mykings
     };
@@ -182,7 +181,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       oppunits: {},
       mysoldiers: {},
       oppsoldiers: {},
-      kings: {},
       mykings: {},
       oppkings: {}
     };
@@ -367,9 +365,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "mysoldiers"]
     ],
     kings: [
-      ["units", "kings"],
-      ["units", "oppunits", "kings", "oppkings"],
-      ["units", "myunits", "kings", "mykings"]
+      ["units"],
+      ["units", "oppunits", "oppkings"],
+      ["units", "myunits", "mykings"]
     ]
   };
   const TERRAIN = {
@@ -425,7 +423,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       oppunits: oldUnitLayers.myunits,
       mysoldiers: oldUnitLayers.oppsoldiers,
       oppsoldiers: oldUnitLayers.mysoldiers,
-      kings: oldUnitLayers.kings,
       mykings: oldUnitLayers.oppkings,
       oppkings: oldUnitLayers.mykings
     };
@@ -577,7 +574,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       oppunits: {},
       mysoldiers: {},
       oppsoldiers: {},
-      kings: {},
       mykings: {},
       oppkings: {}
     };
@@ -628,7 +624,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       oppunits: {},
       mysoldiers: {},
       oppsoldiers: {},
-      kings: {},
       mykings: {},
       oppkings: {}
     };

@@ -8,12 +8,16 @@ export function usedUnitLayers(def: FullDefAnon): string[] {
     .filter(
       layer =>
         layer === "units" ||
-        contains(
-          def,
-          n =>
+        contains(def, (n, path) => {
+          const nIsOk =
             n === layer ||
             n === layer.replace(/^my/, "opp") ||
-            n === layer.replace(/^opp/, "my")
-        )
+            n === layer.replace(/^opp/, "my");
+          const [grandmom, mom] = path.slice(-2);
+          const isSpawnRef = mom == 1 && grandmom === "spawnat";
+          const isMorphRef =
+            mom == 1 && ["morphat", "morphin"].includes(grandmom);
+          return nIsOk && !isSpawnRef && !isMorphRef;
+        })
     );
 }

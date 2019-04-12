@@ -24,14 +24,14 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const groupLayers = {
     notfrozens: [
-      ["units", "notfrozens"],
-      ["units", "myunits", "notfrozens", "mynotfrozens"],
-      ["units", "oppunits", "notfrozens", "oppnotfrozens"]
+      ["units"],
+      ["units", "myunits", "mynotfrozens"],
+      ["units", "oppunits", "oppnotfrozens"]
     ],
     frozens: [
-      ["units", "frozens"],
-      ["units", "myunits", "frozens", "myfrozens"],
-      ["units", "oppunits", "frozens", "oppfrozens"]
+      ["units"],
+      ["units", "myunits", "myfrozens"],
+      ["units", "oppunits", "oppfrozens"]
     ]
   };
   const TERRAIN = {
@@ -128,10 +128,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      notfrozens: oldUnitLayers.notfrozens,
       mynotfrozens: oldUnitLayers.oppnotfrozens,
       oppnotfrozens: oldUnitLayers.mynotfrozens,
-      frozens: oldUnitLayers.frozens,
       myfrozens: oldUnitLayers.oppfrozens,
       oppfrozens: oldUnitLayers.myfrozens
     };
@@ -202,10 +200,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      notfrozens: {},
       mynotfrozens: {},
       oppnotfrozens: {},
-      frozens: {},
       myfrozens: {},
       oppfrozens: {}
     };
@@ -357,14 +353,14 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const groupLayers = {
     notfrozens: [
-      ["units", "notfrozens"],
-      ["units", "oppunits", "notfrozens", "oppnotfrozens"],
-      ["units", "myunits", "notfrozens", "mynotfrozens"]
+      ["units"],
+      ["units", "oppunits", "oppnotfrozens"],
+      ["units", "myunits", "mynotfrozens"]
     ],
     frozens: [
-      ["units", "frozens"],
-      ["units", "oppunits", "frozens", "oppfrozens"],
-      ["units", "myunits", "frozens", "myfrozens"]
+      ["units"],
+      ["units", "oppunits", "oppfrozens"],
+      ["units", "myunits", "myfrozens"]
     ]
   };
   const TERRAIN = {
@@ -461,10 +457,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      notfrozens: oldUnitLayers.notfrozens,
       mynotfrozens: oldUnitLayers.oppnotfrozens,
       oppnotfrozens: oldUnitLayers.mynotfrozens,
-      frozens: oldUnitLayers.frozens,
       myfrozens: oldUnitLayers.oppfrozens,
       oppfrozens: oldUnitLayers.myfrozens
     };
@@ -568,10 +562,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      notfrozens: {},
       mynotfrozens: {},
       oppnotfrozens: {},
-      frozens: {},
       myfrozens: {},
       oppfrozens: {}
     };
@@ -628,10 +620,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: {},
       myunits: {},
       oppunits: {},
-      notfrozens: {},
       mynotfrozens: {},
       oppnotfrozens: {},
-      frozens: {},
       myfrozens: {},
       oppfrozens: {}
     };

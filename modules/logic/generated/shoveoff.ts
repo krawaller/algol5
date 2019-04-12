@@ -140,11 +140,7 @@ const diagDirs = [2, 4, 6, 8];
 let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 {
   const groupLayers = {
-    soldiers: [
-      ["units", "soldiers"],
-      ["units", "myunits", "soldiers"],
-      ["units", "oppunits", "soldiers"]
-    ]
+    soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
   };
   game.action.start1 = step => {
     let LINKS: AlgolStepLinks = {
@@ -162,8 +158,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
-        oppunits: oldUnitLayers.myunits,
-        soldiers: oldUnitLayers.soldiers
+        oppunits: oldUnitLayers.myunits
       },
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
@@ -235,7 +230,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -329,7 +324,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -423,7 +418,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -517,7 +512,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -722,11 +717,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
 }
 {
   const groupLayers = {
-    soldiers: [
-      ["units", "soldiers"],
-      ["units", "oppunits", "soldiers"],
-      ["units", "myunits", "soldiers"]
-    ]
+    soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
   };
   game.action.start2 = step => {
     let LINKS: AlgolStepLinks = {
@@ -744,8 +735,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITLAYERS: {
         units: oldUnitLayers.units,
         myunits: oldUnitLayers.oppunits,
-        oppunits: oldUnitLayers.myunits,
-        soldiers: oldUnitLayers.soldiers
+        oppunits: oldUnitLayers.myunits
       },
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
@@ -905,7 +895,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     };
 
-    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -966,7 +956,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -1060,7 +1050,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -1154,7 +1144,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -1248,7 +1238,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;

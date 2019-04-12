@@ -29,11 +29,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "queens"],
       ["units", "oppunits", "queens"]
     ],
-    fires: [
-      ["units", "fires"],
-      ["units", "myunits", "fires"],
-      ["units", "oppunits", "fires"]
-    ]
+    fires: [["units"], ["units", "myunits"], ["units", "oppunits"]]
   };
   game.action.start1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
@@ -41,8 +37,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      queens: oldUnitLayers.queens,
-      fires: oldUnitLayers.fires
+      queens: oldUnitLayers.queens
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -93,13 +88,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
     TURNVARS.movedto = MARKS.selectmovetarget;
-    UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      queens: {},
-      fires: {}
-    };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -153,13 +142,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         from: TURNVARS["movedto"]
       };
     }
-    UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      queens: {},
-      fires: {}
-    };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -300,11 +283,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "queens"],
       ["units", "myunits", "queens"]
     ],
-    fires: [
-      ["units", "fires"],
-      ["units", "oppunits", "fires"],
-      ["units", "myunits", "fires"]
-    ]
+    fires: [["units"], ["units", "oppunits"], ["units", "myunits"]]
   };
   game.action.start2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
@@ -312,8 +291,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      queens: oldUnitLayers.queens,
-      fires: oldUnitLayers.fires
+      queens: oldUnitLayers.queens
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -370,13 +348,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       unit8: { pos: "j4", x: 10, y: 4, id: "unit8", group: "queens", owner: 2 }
     };
 
-    let UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      queens: {},
-      fires: {}
-    };
+    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -413,13 +385,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
     TURNVARS.movedto = MARKS.selectmovetarget;
-    UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      queens: {},
-      fires: {}
-    };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -473,13 +439,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         from: TURNVARS["movedto"]
       };
     }
-    UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      queens: {},
-      fires: {}
-    };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;

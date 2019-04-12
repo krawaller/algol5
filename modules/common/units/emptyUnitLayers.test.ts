@@ -20,21 +20,28 @@ const unitLayerTests: UnitLayerTest[] = [
           muppets: "king",
           huppets: "pawn"
         }
+      },
+      flow: {
+        ...emptyFullDef.flow,
+        endGame: {
+          gnurp: {
+            condition: {
+              isempty: {
+                union: ["myhuppets", "oppunits", "neutralmuppets", "muppets"]
+              }
+            }
+          }
+        }
       }
     },
     expected: {
       units: {},
       myunits: {},
       oppunits: {},
-      neutralunits: {},
       muppets: {},
-      mymuppets: {},
-      oppmuppets: {},
       neutralmuppets: {},
-      huppets: {},
       myhuppets: {},
-      opphuppets: {},
-      neutralhuppets: {}
+      opphuppets: {}
     }
   }
 ];

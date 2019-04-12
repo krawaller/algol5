@@ -24,10 +24,10 @@ const unitLayerTests: UnitLayerTest[] = [
     def: muppetsHuppetsDef,
     player: 1,
     expected: {
-      muppets: [[], [], []],
-      huppets: [[], [], []]
+      muppets: [["units"], ["units"], ["units"]],
+      huppets: [["units"], ["units"], ["units"]]
     },
-    desc: "When nothing is referenced, we get nothing!"
+    desc: "When nothing is referenced, we only get 'units'"
   },
   {
     def: {
@@ -37,11 +37,7 @@ const unitLayerTests: UnitLayerTest[] = [
         endGame: {
           gnurp: {
             condition: {
-              or: [
-                { isempty: "units" },
-                { isempty: "myhuppets" },
-                { isempty: "neutralmuppets" }
-              ]
+              or: [{ isempty: "myhuppets" }, { isempty: "neutralmuppets" }]
             }
           }
         }
@@ -62,7 +58,6 @@ const unitLayerTests: UnitLayerTest[] = [
           gnurp: {
             condition: {
               or: [
-                { isempty: "units" },
                 { isempty: "myhuppets" },
                 { isempty: "neutralmuppets" },
                 { isempty: "muppets" }

@@ -2,14 +2,7 @@ import { analyseGame } from "./";
 import goWithTheFloe from "../../games/definitions/gowiththefloe";
 import amazons from "../../games/definitions/amazons";
 
-const want = {
-  uses: {
-    selectunit: true,
-    move: true
-  }
-};
-
-describe("the analyseGame function", () => {
+describe("the analyseGame function (test with gowiththefloe)", () => {
   it("shows action usage per player", () => {
     const result = analyseGame(goWithTheFloe);
     expect(Object.keys(result[1])).toEqual([
@@ -28,7 +21,7 @@ describe("the analyseGame function", () => {
     ]);
   });
 
-  it("maps marks per action", () => {
+  it("maps marks per action (test with amazons)", () => {
     const result = analyseGame(amazons);
     const actions = result[1];
 
@@ -63,5 +56,43 @@ describe("the analyseGame function", () => {
     expect(result[1].selectmovetarget.generators).toEqual(["findcracks"]);
     expect(result[1].move.generators).toEqual(["findsealsmoves"]);
     expect(result[2].eat.generators).toEqual(["findsealsmoves"]);
+  });
+
+  it("maps added artifacts per action (test with gowiththefloe)", () => {
+    const result = analyseGame(goWithTheFloe);
+    expect(result[1].startTurn.addedArtifacts).toEqual([]);
+    expect(result[1].selectunit.addedArtifacts).toEqual(["movetargets"]);
+    expect(result[2].selectunit.addedArtifacts).toEqual([
+      "movetargets",
+      "eattargets"
+    ]);
+    expect(result[1].selectmovetarget.addedArtifacts).toEqual(["cracks"]);
+    expect(result[1].move.addedArtifacts).toEqual(["canmove"]);
+    expect(result[2].eat.addedArtifacts).toEqual(["canmove"]);
+  });
+
+  it("maps previous artifacts per action (test with gowiththefloe)", () => {
+    const result = analyseGame(goWithTheFloe);
+    expect(result[1].startTurn.priorArtifacts).toEqual([]);
+    expect(result[1].selectunit.priorArtifacts).toEqual([]);
+    expect(result[1].selectmovetarget.priorArtifacts).toEqual(["movetargets"]);
+    expect(result[1].move.priorArtifacts).toEqual(["movetargets", "cracks"]);
+
+    expect(result[2].startTurn.priorArtifacts).toEqual([]);
+    expect(result[2].selectunit.priorArtifacts).toEqual([]);
+    expect(result[2].selectmovetarget.priorArtifacts).toEqual([
+      "movetargets",
+      "eattargets"
+    ]);
+    expect(result[2].move.priorArtifacts).toEqual([
+      "movetargets",
+      "eattargets",
+      "cracks"
+    ]);
+    expect(result[2].selecteattarget.priorArtifacts).toEqual([
+      "movetargets",
+      "eattargets"
+    ]);
+    expect(result[2].eat.priorArtifacts).toEqual(["movetargets", "eattargets"]);
   });
 });

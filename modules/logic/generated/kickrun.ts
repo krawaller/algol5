@@ -30,7 +30,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     ],
     sidekickers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
   };
-  const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
     corners: {
       a1: { pos: "a1", x: 1, y: 1, owner: 1 },
@@ -278,7 +277,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     ],
     sidekickers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
   };
-  const ownerNames = ["neutral", "opp", "my"];
   const TERRAIN = {
     corners: {
       a1: { pos: "a1", x: 1, y: 1, owner: 1 },

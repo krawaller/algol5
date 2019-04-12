@@ -40,7 +40,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "rooks", "opprooks"]
     ]
   };
-  const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
@@ -430,7 +429,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "rooks", "myrooks"]
     ]
   };
-  const ownerNames = ["neutral", "opp", "my"];
   game.action.start2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {

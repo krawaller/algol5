@@ -25,7 +25,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   const groupLayers = {
     soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
   };
-  const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
     corner: {
       a1: { pos: "a1", x: 1, y: 1, owner: 1 },
@@ -374,7 +373,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   const groupLayers = {
     soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
   };
-  const ownerNames = ["neutral", "opp", "my"];
   const TERRAIN = {
     corner: {
       a1: { pos: "a1", x: 1, y: 1, owner: 1 },

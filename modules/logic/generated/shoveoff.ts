@@ -146,7 +146,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "soldiers"]
     ]
   };
-  const ownerNames = ["neutral", "my", "opp"];
   game.action.start1 = step => {
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -729,7 +728,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "soldiers"]
     ]
   };
-  const ownerNames = ["neutral", "opp", "my"];
   game.action.start2 = step => {
     let LINKS: AlgolStepLinks = {
       actions: {}

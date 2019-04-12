@@ -30,7 +30,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "wild", "oppwild"]
     ]
   };
-  const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
     base: {
       a1: { pos: "a1", x: 1, y: 1, owner: 1 },
@@ -467,7 +466,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "wild", "mywild"]
     ]
   };
-  const ownerNames = ["neutral", "opp", "my"];
   const TERRAIN = {
     base: {
       a1: { pos: "a1", x: 1, y: 1, owner: 1 },

@@ -34,7 +34,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "frozens", "oppfrozens"]
     ]
   };
-  const ownerNames = ["neutral", "my", "opp"];
   const TERRAIN = {
     southeast: { a4: { pos: "a4", x: 1, y: 4 }, c2: { pos: "c2", x: 3, y: 2 } },
     northwest: { b3: { pos: "b3", x: 2, y: 3 }, d1: { pos: "d1", x: 4, y: 1 } },
@@ -368,7 +367,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "frozens", "myfrozens"]
     ]
   };
-  const ownerNames = ["neutral", "opp", "my"];
   const TERRAIN = {
     southeast: { a4: { pos: "a4", x: 1, y: 4 }, c2: { pos: "c2", x: 3, y: 2 } },
     northwest: { b3: { pos: "b3", x: 2, y: 3 }, d1: { pos: "d1", x: 4, y: 1 } },

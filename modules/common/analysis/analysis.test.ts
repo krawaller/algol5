@@ -43,4 +43,25 @@ describe("the analyseGame function", () => {
     expect(actions.fire.priorMarks).toEqual(["selectfiretarget"]);
     expect(actions.fire.isCmnd).toBe(true);
   });
+
+  it("maps used generators per action (test with amazons)", () => {
+    const result = analyseGame(amazons);
+    const actions = result[1];
+    expect(actions.startTurn.generators).toEqual([]);
+    expect(actions.selectunit.generators).toEqual(["findtargets"]);
+    expect(actions.move.generators).toEqual(["findtargets"]);
+  });
+
+  it("maps used generators per action (test with gowiththefloe)", () => {
+    const result = analyseGame(goWithTheFloe);
+    expect(result[1].startTurn.generators).toEqual([]);
+    expect(result[1].selectunit.generators).toEqual(["findmovetargets"]);
+    expect(result[2].selectunit.generators).toEqual([
+      "findmovetargets",
+      "findeattargets"
+    ]);
+    expect(result[1].selectmovetarget.generators).toEqual(["findcracks"]);
+    expect(result[1].move.generators).toEqual(["findsealsmoves"]);
+    expect(result[2].eat.generators).toEqual(["findsealsmoves"]);
+  });
 });

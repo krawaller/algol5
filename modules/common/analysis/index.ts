@@ -1,5 +1,5 @@
 import { AlgolEffectActionDefAnon, FullDefAnon } from "../../types";
-import { actionLinks } from "../";
+import { actionLinks, actionGenerators } from "../";
 
 export function analyseGame(gameDef: FullDefAnon) {
   const ret = {};
@@ -10,10 +10,21 @@ export function analyseGame(gameDef: FullDefAnon) {
       const [action, from] = toCheck.shift();
       const links = actionLinks(gameDef, plr as 1 | 2, action);
       if (!plrAnalysis[action]) {
-        plrAnalysis[action] = { priorMarks: [], from: [], links: [] };
+        plrAnalysis[action] = {
+          priorMarks: [],
+          from: [],
+          links: [],
+          generators: []
+        };
       }
       if (gameDef.flow.marks[action]) plrAnalysis[action].addsMark = action;
       if (gameDef.flow.commands[action]) plrAnalysis[action].isCmnd = true;
+
+      plrAnalysis[action].generators = actionGenerators(
+        gameDef,
+        plr as 1 | 2,
+        action
+      );
 
       // TODO - uniq
       plrAnalysis[action].links = plrAnalysis[action].links.concat(links);
@@ -33,7 +44,6 @@ export function analyseGame(gameDef: FullDefAnon) {
         );
       }
 
-      // TODO - marks
       for (const link of links) {
         if (link !== "endturn" && !plrAnalysis[link]) {
           toCheck.push([link, action]);

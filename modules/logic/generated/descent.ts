@@ -84,8 +84,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      digtargets: { ...step.ARTIFACTS.digtargets },
-      winline: step.ARTIFACTS.winline
+      digtargets: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let TURNVARS = { ...step.TURNVARS };
@@ -179,7 +178,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: step.ARTIFACTS.digtargets,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -270,9 +269,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.dig1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      digtargets: step.ARTIFACTS.digtargets,
-      winline: step.ARTIFACTS.winline
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -524,8 +521,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      digtargets: { ...step.ARTIFACTS.digtargets },
-      winline: step.ARTIFACTS.winline
+      digtargets: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let TURNVARS = { ...step.TURNVARS };
@@ -619,7 +615,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       digtargets: step.ARTIFACTS.digtargets,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -710,9 +706,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.dig2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      digtargets: step.ARTIFACTS.digtargets,
-      winline: step.ARTIFACTS.winline
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

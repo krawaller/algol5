@@ -110,11 +110,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.jostle1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      initialenemy: { ...step.ARTIFACTS.initialenemy },
-      initialfriend: { ...step.ARTIFACTS.initialfriend },
-      newenemy: step.ARTIFACTS.newenemy,
-      newfriend: step.ARTIFACTS.newfriend
+      movetargets: {},
+      initialenemy: {},
+      initialfriend: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -187,8 +185,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       movetargets: step.ARTIFACTS.movetargets,
       initialenemy: step.ARTIFACTS.initialenemy,
       initialfriend: step.ARTIFACTS.initialfriend,
-      newenemy: { ...step.ARTIFACTS.newenemy },
-      newfriend: { ...step.ARTIFACTS.newfriend }
+      newenemy: {},
+      newfriend: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -630,11 +628,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.jostle2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      initialenemy: { ...step.ARTIFACTS.initialenemy },
-      initialfriend: { ...step.ARTIFACTS.initialfriend },
-      newenemy: step.ARTIFACTS.newenemy,
-      newfriend: step.ARTIFACTS.newfriend
+      movetargets: {},
+      initialenemy: {},
+      initialfriend: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -707,8 +703,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       movetargets: step.ARTIFACTS.movetargets,
       initialenemy: step.ARTIFACTS.initialenemy,
       initialfriend: step.ARTIFACTS.initialfriend,
-      newenemy: { ...step.ARTIFACTS.newenemy },
-      newfriend: { ...step.ARTIFACTS.newfriend }
+      newenemy: {},
+      newfriend: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

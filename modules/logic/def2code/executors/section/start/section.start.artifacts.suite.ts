@@ -120,8 +120,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                     flurps: {},
                     myflurps: {},
                     oppflurps: {},
-                    neutralflurps: {},
-                    gnurps: {}
+                    neutralflurps: {}
                   },
                   desc: "we get new layer"
                 },

@@ -159,8 +159,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
-      potentialopptargets: step.ARTIFACTS.potentialopptargets,
       targets: step.ARTIFACTS.targets,
+      potentialopptargets: step.ARTIFACTS.potentialopptargets,
       spawns: step.ARTIFACTS.spawns
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -270,11 +270,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      spawndirs: { ...step.ARTIFACTS.spawndirs },
-      growstarts: { ...step.ARTIFACTS.growstarts },
-      potentialopptargets: { ...step.ARTIFACTS.potentialopptargets },
-      targets: { ...step.ARTIFACTS.targets },
-      spawns: step.ARTIFACTS.spawns
+      spawndirs: {},
+      growstarts: {},
+      targets: {},
+      potentialopptargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -391,9 +390,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
-      potentialopptargets: step.ARTIFACTS.potentialopptargets,
       targets: step.ARTIFACTS.targets,
-      spawns: { ...step.ARTIFACTS.spawns }
+      potentialopptargets: step.ARTIFACTS.potentialopptargets,
+      spawns: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -611,8 +610,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
-      potentialopptargets: step.ARTIFACTS.potentialopptargets,
       targets: step.ARTIFACTS.targets,
+      potentialopptargets: step.ARTIFACTS.potentialopptargets,
       spawns: step.ARTIFACTS.spawns
     };
     let UNITLAYERS = step.UNITLAYERS;
@@ -722,11 +721,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      spawndirs: { ...step.ARTIFACTS.spawndirs },
-      growstarts: { ...step.ARTIFACTS.growstarts },
-      potentialopptargets: { ...step.ARTIFACTS.potentialopptargets },
-      targets: { ...step.ARTIFACTS.targets },
-      spawns: step.ARTIFACTS.spawns
+      spawndirs: {},
+      growstarts: {},
+      targets: {},
+      potentialopptargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -843,9 +841,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
-      potentialopptargets: step.ARTIFACTS.potentialopptargets,
       targets: step.ARTIFACTS.targets,
-      spawns: { ...step.ARTIFACTS.spawns }
+      potentialopptargets: step.ARTIFACTS.potentialopptargets,
+      spawns: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

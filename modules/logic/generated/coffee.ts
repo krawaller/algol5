@@ -89,7 +89,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       uphill: step.ARTIFACTS.uphill,
       horisontal: step.ARTIFACTS.horisontal,
       downhill: step.ARTIFACTS.downhill,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -182,7 +182,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       uphill: step.ARTIFACTS.uphill,
       horisontal: step.ARTIFACTS.horisontal,
       downhill: step.ARTIFACTS.downhill,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -275,7 +275,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       uphill: step.ARTIFACTS.uphill,
       horisontal: step.ARTIFACTS.horisontal,
       downhill: step.ARTIFACTS.downhill,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -368,7 +368,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       uphill: step.ARTIFACTS.uphill,
       horisontal: step.ARTIFACTS.horisontal,
       downhill: step.ARTIFACTS.downhill,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -455,12 +455,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.vertical1 = () => defaultInstruction(1);
   game.action.selectdrop1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      FOOBAR: { ...step.ARTIFACTS.FOOBAR },
-      vertical: { ...step.ARTIFACTS.vertical },
-      uphill: { ...step.ARTIFACTS.uphill },
-      horisontal: { ...step.ARTIFACTS.horisontal },
-      downhill: { ...step.ARTIFACTS.downhill },
-      winline: step.ARTIFACTS.winline
+      FOOBAR: {},
+      vertical: {},
+      uphill: {},
+      horisontal: {},
+      downhill: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -635,7 +634,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       uphill: step.ARTIFACTS.uphill,
       horisontal: step.ARTIFACTS.horisontal,
       downhill: step.ARTIFACTS.downhill,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -728,7 +727,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       uphill: step.ARTIFACTS.uphill,
       horisontal: step.ARTIFACTS.horisontal,
       downhill: step.ARTIFACTS.downhill,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -821,7 +820,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       uphill: step.ARTIFACTS.uphill,
       horisontal: step.ARTIFACTS.horisontal,
       downhill: step.ARTIFACTS.downhill,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -914,7 +913,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       uphill: step.ARTIFACTS.uphill,
       horisontal: step.ARTIFACTS.horisontal,
       downhill: step.ARTIFACTS.downhill,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1001,12 +1000,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.vertical2 = () => defaultInstruction(2);
   game.action.selectdrop2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      FOOBAR: { ...step.ARTIFACTS.FOOBAR },
-      vertical: { ...step.ARTIFACTS.vertical },
-      uphill: { ...step.ARTIFACTS.uphill },
-      horisontal: { ...step.ARTIFACTS.horisontal },
-      downhill: { ...step.ARTIFACTS.downhill },
-      winline: step.ARTIFACTS.winline
+      FOOBAR: {},
+      vertical: {},
+      uphill: {},
+      horisontal: {},
+      downhill: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

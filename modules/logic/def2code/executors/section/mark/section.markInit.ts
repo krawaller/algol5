@@ -1,10 +1,6 @@
 import { FullDefAnon } from "../../../../../types";
 import { orderUsage } from "../sectionUtils";
-import {
-  actionArtifactLayers,
-  gameArtifactLayers,
-  analyseGame
-} from "../../../../../common";
+import { analyseGame } from "../../../../../common";
 
 export function executeMarkInit(
   gameDef: FullDefAnon,
@@ -13,34 +9,33 @@ export function executeMarkInit(
 ): string {
   let ret = "";
   const usage = orderUsage(gameDef, player, action);
-  const analysis = analyseGame(gameDef);
+  const analysis = analyseGame(gameDef)[player][action];
 
   if (usage.ARTIFACTS) {
-    const gameLayers = gameArtifactLayers(gameDef, player, action);
-    const actionLayers = actionArtifactLayers(gameDef, player, action);
-
     ret += `let ARTIFACTS = {
-      ${gameLayers
-        .map(name =>
-          actionLayers.includes(name)
-            ? `${name}: { ...step.ARTIFACTS.${name} }`
-            : `${name}: step.ARTIFACTS.${name}`
-        )
-        .join(", ")}
-    }; `;
+        ${analysis.priorArtifacts
+          .filter(n => analysis.addedArtifacts.includes(n))
+          .map(name => `${name}: { ...step.ARTIFACTS.${name} }`)
+          .concat(
+            analysis.priorArtifacts
+              .filter(n => !analysis.addedArtifacts.includes(n))
+              .map(name => `${name}: step.ARTIFACTS.${name}`)
+          )
+          .concat(
+            analysis.addedArtifacts
+              .filter(n => !analysis.priorArtifacts.includes(n))
+              .map(name => `${name}: {}`)
+          )
+          .join(", ")}
+      }; `;
   }
 
   // Always init a new LINKS object for each step
   ret += `let LINKS = { actions: {} }; `;
 
   if (usage.MARKS) {
-    if (!analysis[player][action]) {
-      console.log("OMG OMG", action, analysis[player]);
-    }
     ret += `let MARKS = {
-      ${analysis[player][action].priorMarks
-        .map(m => `${m}: step.MARKS.${m}, `)
-        .join("")}
+      ${analysis.priorMarks.map(m => `${m}: step.MARKS.${m}, `).join("")}
       ${action}: newMarkPos
     };`;
   }

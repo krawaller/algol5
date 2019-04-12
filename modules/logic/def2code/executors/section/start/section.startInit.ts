@@ -1,9 +1,5 @@
 import { FullDefAnon } from "../../../../../types";
-import {
-  emptyUnitLayers,
-  gameArtifactLayers,
-  actionArtifactLayers
-} from "../../../../../common";
+import { emptyUnitLayers, analyseGame } from "../../../../../common";
 import { orderUsage } from "../sectionUtils";
 
 export function executeStartInit(
@@ -12,17 +8,27 @@ export function executeStartInit(
   action: string
 ): string {
   let ret = "";
-  const startDef = gameDef.flow.startTurn || {};
-  const startGens = actionArtifactLayers(gameDef, player, "start");
-
   const usage = orderUsage(gameDef, player, action);
 
-  if (usage.ARTIFACTS) {
-    const gameLayers = gameArtifactLayers(gameDef, player, action);
+  const analysis = analyseGame(gameDef)[player].startTurn;
 
-    if (actionArtifactLayers.length) {
+  if (usage.ARTIFACTS) {
+    if (analysis.addedArtifacts.length) {
       ret += `let ARTIFACTS = {
-        ${gameLayers.map(name => `${name}: {}`).join(", ")}
+        ${analysis.priorArtifacts
+          .filter(n => analysis.addedArtifacts.includes(n))
+          .map(name => `${name}: { ...step.ARTIFACTS.${name} }`)
+          .concat(
+            analysis.priorArtifacts
+              .filter(n => !analysis.addedArtifacts.includes(n))
+              .map(name => `${name}: step.ARTIFACTS.${name}`)
+          )
+          .concat(
+            analysis.addedArtifacts
+              .filter(n => !analysis.priorArtifacts.includes(n))
+              .map(name => `${name}: {}`)
+          )
+          .join(", ")}
       }; `;
     } else {
       ret += `let ARTIFACTS = emptyArtifactLayers`;

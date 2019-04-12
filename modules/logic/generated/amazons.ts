@@ -169,7 +169,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.fire1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      targets: { ...step.ARTIFACTS.targets }
+      targets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -466,7 +466,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.fire2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      targets: { ...step.ARTIFACTS.targets }
+      targets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

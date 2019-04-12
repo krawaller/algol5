@@ -78,9 +78,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      strandedmusketeers: step.ARTIFACTS.strandedmusketeers,
-      musketeerline: { ...step.ARTIFACTS.musketeerline },
-      movetargets: step.ARTIFACTS.movetargets
+      movetargets: step.ARTIFACTS.movetargets,
+      musketeerline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -127,10 +126,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "musketeersinline";
       LINKS.endMarks = Object.keys(UNITLAYERS.kings);
-    } else if (Object.keys(ARTIFACTS.strandedmusketeers).length === 3) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "strandedmusketeers";
     } else {
       LINKS.endturn = "start2";
     }
@@ -146,9 +141,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      strandedmusketeers: step.ARTIFACTS.strandedmusketeers,
-      musketeerline: step.ARTIFACTS.musketeerline,
-      movetargets: { ...step.ARTIFACTS.movetargets }
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -323,9 +316,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.move2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      strandedmusketeers: { ...step.ARTIFACTS.strandedmusketeers },
-      musketeerline: { ...step.ARTIFACTS.musketeerline },
-      movetargets: step.ARTIFACTS.movetargets
+      movetargets: step.ARTIFACTS.movetargets,
+      musketeerline: {},
+      strandedmusketeers: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -385,12 +378,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
 
-    if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "musketeersinline";
-      LINKS.endMarks = Object.keys(UNITLAYERS.kings);
-    } else if (Object.keys(ARTIFACTS.strandedmusketeers).length === 3) {
+    if (Object.keys(ARTIFACTS.strandedmusketeers).length === 3) {
       let winner = 1;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "strandedmusketeers";
@@ -409,9 +397,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      strandedmusketeers: step.ARTIFACTS.strandedmusketeers,
-      musketeerline: step.ARTIFACTS.musketeerline,
-      movetargets: { ...step.ARTIFACTS.movetargets }
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

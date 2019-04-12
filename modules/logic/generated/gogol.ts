@@ -194,12 +194,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.start1 = step => {
     let ARTIFACTS = {
       nokings: {},
-      nosoldiers: {},
-      kingwalk: {},
-      adjacentenemies: {},
-      splashed: {},
-      willdie: {},
-      jumptargets: {}
+      nosoldiers: {}
     };
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
@@ -441,9 +436,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       nosoldiers: step.ARTIFACTS.nosoldiers,
       kingwalk: step.ARTIFACTS.kingwalk,
       adjacentenemies: step.ARTIFACTS.adjacentenemies,
-      splashed: step.ARTIFACTS.splashed,
       willdie: step.ARTIFACTS.willdie,
-      jumptargets: step.ARTIFACTS.jumptargets
+      jumptargets: step.ARTIFACTS.jumptargets,
+      splashed: step.ARTIFACTS.splashed
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -551,11 +546,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let ARTIFACTS = {
       nokings: step.ARTIFACTS.nokings,
       nosoldiers: step.ARTIFACTS.nosoldiers,
-      kingwalk: { ...step.ARTIFACTS.kingwalk },
-      adjacentenemies: { ...step.ARTIFACTS.adjacentenemies },
-      splashed: step.ARTIFACTS.splashed,
-      willdie: { ...step.ARTIFACTS.willdie },
-      jumptargets: { ...step.ARTIFACTS.jumptargets }
+      kingwalk: {},
+      adjacentenemies: {},
+      willdie: {},
+      jumptargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -748,9 +742,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       nosoldiers: step.ARTIFACTS.nosoldiers,
       kingwalk: step.ARTIFACTS.kingwalk,
       adjacentenemies: step.ARTIFACTS.adjacentenemies,
-      splashed: { ...step.ARTIFACTS.splashed },
       willdie: step.ARTIFACTS.willdie,
-      jumptargets: step.ARTIFACTS.jumptargets
+      jumptargets: step.ARTIFACTS.jumptargets,
+      splashed: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -988,12 +982,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.start2 = step => {
     let ARTIFACTS = {
       nokings: {},
-      nosoldiers: {},
-      kingwalk: {},
-      adjacentenemies: {},
-      splashed: {},
-      willdie: {},
-      jumptargets: {}
+      nosoldiers: {}
     };
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
@@ -1393,9 +1382,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       nosoldiers: step.ARTIFACTS.nosoldiers,
       kingwalk: step.ARTIFACTS.kingwalk,
       adjacentenemies: step.ARTIFACTS.adjacentenemies,
-      splashed: step.ARTIFACTS.splashed,
       willdie: step.ARTIFACTS.willdie,
-      jumptargets: step.ARTIFACTS.jumptargets
+      jumptargets: step.ARTIFACTS.jumptargets,
+      splashed: step.ARTIFACTS.splashed
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1503,11 +1492,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let ARTIFACTS = {
       nokings: step.ARTIFACTS.nokings,
       nosoldiers: step.ARTIFACTS.nosoldiers,
-      kingwalk: { ...step.ARTIFACTS.kingwalk },
-      adjacentenemies: { ...step.ARTIFACTS.adjacentenemies },
-      splashed: step.ARTIFACTS.splashed,
-      willdie: { ...step.ARTIFACTS.willdie },
-      jumptargets: { ...step.ARTIFACTS.jumptargets }
+      kingwalk: {},
+      adjacentenemies: {},
+      willdie: {},
+      jumptargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -1700,9 +1688,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       nosoldiers: step.ARTIFACTS.nosoldiers,
       kingwalk: step.ARTIFACTS.kingwalk,
       adjacentenemies: step.ARTIFACTS.adjacentenemies,
-      splashed: { ...step.ARTIFACTS.splashed },
       willdie: step.ARTIFACTS.willdie,
-      jumptargets: step.ARTIFACTS.jumptargets
+      jumptargets: step.ARTIFACTS.jumptargets,
+      splashed: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

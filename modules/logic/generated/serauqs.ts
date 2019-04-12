@@ -157,10 +157,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.promote1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
-    let ARTIFACTS = {
-      movetargets: step.ARTIFACTS.movetargets,
-      winline: step.ARTIFACTS.winline
-    };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -189,53 +185,13 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.corners)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "madex";
-      LINKS.endMarks = Object.keys(TERRAIN.corners);
-    } else if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.middle)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "tookcenter";
-      LINKS.endMarks = Object.keys(TERRAIN.middle);
-    } else {
+    {
       LINKS.endturn = "start2";
     }
     return {
       LINKS,
       MARKS: {},
-      ARTIFACTS,
+      ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS
@@ -246,7 +202,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -356,8 +312,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      winline: step.ARTIFACTS.winline
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -676,10 +631,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.promote2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
-    let ARTIFACTS = {
-      movetargets: step.ARTIFACTS.movetargets,
-      winline: step.ARTIFACTS.winline
-    };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -708,53 +659,13 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.corners)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "madex";
-      LINKS.endMarks = Object.keys(TERRAIN.corners);
-    } else if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.middle)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "tookcenter";
-      LINKS.endMarks = Object.keys(TERRAIN.middle);
-    } else {
+    {
       LINKS.endturn = "start1";
     }
     return {
       LINKS,
       MARKS: {},
-      ARTIFACTS,
+      ARTIFACTS: step.ARTIFACTS,
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS
@@ -765,7 +676,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      winline: { ...step.ARTIFACTS.winline }
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -875,8 +786,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      winline: step.ARTIFACTS.winline
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

@@ -1,9 +1,6 @@
 import { FullDefAnon } from "../../../../../types";
 import { orderUsage } from "../sectionUtils";
-import {
-  actionArtifactLayers,
-  gameArtifactLayers
-} from "../../../../../common";
+import { analyseGame } from "../../../../../common";
 
 export function executeCmndInit(
   gameDef: FullDefAnon,
@@ -19,21 +16,26 @@ export function executeCmndInit(
 
   const usage = orderUsage(gameDef, player, action);
 
+  const analysis = analyseGame(gameDef)[player][action];
+
   if (usage.ARTIFACTS) {
-    const gameLayers = gameArtifactLayers(gameDef, player, action);
-    const actionLayers = actionArtifactLayers(gameDef, player, action);
-
     ret += `let ARTIFACTS = {
-      ${gameLayers
-        .map(name =>
-          actionLayers.includes(name)
-            ? `${name}: { ...step.ARTIFACTS.${name} }`
-            : `${name}: step.ARTIFACTS.${name}`
-        )
-        .join(", ")}
-    }; `;
+        ${analysis.priorArtifacts
+          .filter(n => analysis.addedArtifacts.includes(n))
+          .map(name => `${name}: { ...step.ARTIFACTS.${name} }`)
+          .concat(
+            analysis.priorArtifacts
+              .filter(n => !analysis.addedArtifacts.includes(n))
+              .map(name => `${name}: step.ARTIFACTS.${name}`)
+          )
+          .concat(
+            analysis.addedArtifacts
+              .filter(n => !analysis.priorArtifacts.includes(n))
+              .map(name => `${name}: {}`)
+          )
+          .join(", ")}
+      }; `;
   }
-
   if (usage.UNITLAYERS) {
     ret += "let UNITLAYERS = step.UNITLAYERS; ";
   }

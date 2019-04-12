@@ -149,10 +149,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
-      canmove: { ...step.ARTIFACTS.canmove },
-      cracks: step.ARTIFACTS.cracks
+      cracks: step.ARTIFACTS.cracks,
+      canmove: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -249,10 +248,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      eattargets: step.ARTIFACTS.eattargets,
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      canmove: step.ARTIFACTS.canmove,
-      cracks: step.ARTIFACTS.cracks
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -298,10 +294,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
-      canmove: step.ARTIFACTS.canmove,
-      cracks: { ...step.ARTIFACTS.cracks }
+      cracks: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -433,10 +427,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.move2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
-      canmove: { ...step.ARTIFACTS.canmove },
-      cracks: step.ARTIFACTS.cracks
+      eattargets: step.ARTIFACTS.eattargets,
+      cracks: step.ARTIFACTS.cracks,
+      canmove: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -534,10 +528,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.eat2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
-      canmove: { ...step.ARTIFACTS.canmove },
-      cracks: step.ARTIFACTS.cracks
+      eattargets: step.ARTIFACTS.eattargets,
+      canmove: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -615,10 +608,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.eat2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      eattargets: { ...step.ARTIFACTS.eattargets },
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      canmove: step.ARTIFACTS.canmove,
-      cracks: step.ARTIFACTS.cracks
+      movetargets: {},
+      eattargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -677,10 +668,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      eattargets: step.ARTIFACTS.eattargets,
       movetargets: step.ARTIFACTS.movetargets,
-      canmove: step.ARTIFACTS.canmove,
-      cracks: { ...step.ARTIFACTS.cracks }
+      eattargets: step.ARTIFACTS.eattargets,
+      cracks: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

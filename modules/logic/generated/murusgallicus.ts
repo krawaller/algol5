@@ -166,9 +166,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
+      killtargets: step.ARTIFACTS.killtargets,
       madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: step.ARTIFACTS.killtargets
+      madewalls: step.ARTIFACTS.madewalls
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -329,10 +329,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.kill1 = () => defaultInstruction(1);
   game.action.selecttower1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: { ...step.ARTIFACTS.killtargets }
+      movetargets: {},
+      killtargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -432,9 +430,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.selectmove1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      madetowers: { ...step.ARTIFACTS.madetowers },
-      madewalls: { ...step.ARTIFACTS.madewalls },
-      killtargets: step.ARTIFACTS.killtargets
+      killtargets: step.ARTIFACTS.killtargets,
+      madetowers: {},
+      madewalls: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -749,9 +747,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
+      killtargets: step.ARTIFACTS.killtargets,
       madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: step.ARTIFACTS.killtargets
+      madewalls: step.ARTIFACTS.madewalls
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -912,10 +910,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.kill2 = () => defaultInstruction(2);
   game.action.selecttower2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: { ...step.ARTIFACTS.killtargets }
+      movetargets: {},
+      killtargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -1015,9 +1011,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.selectmove2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      madetowers: { ...step.ARTIFACTS.madetowers },
-      madewalls: { ...step.ARTIFACTS.madewalls },
-      killtargets: step.ARTIFACTS.killtargets
+      killtargets: step.ARTIFACTS.killtargets,
+      madetowers: {},
+      madewalls: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

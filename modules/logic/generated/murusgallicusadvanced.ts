@@ -200,12 +200,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      firetargets: step.ARTIFACTS.firetargets,
       movetargets: step.ARTIFACTS.movetargets,
+      killtargets: step.ARTIFACTS.killtargets,
       madecatapults: step.ARTIFACTS.madecatapults,
       madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: step.ARTIFACTS.killtargets
+      madewalls: step.ARTIFACTS.madewalls
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -574,12 +573,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.fire1 = () => defaultInstruction(1);
   game.action.selecttower1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      firetargets: step.ARTIFACTS.firetargets,
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      madecatapults: step.ARTIFACTS.madecatapults,
-      madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: { ...step.ARTIFACTS.killtargets }
+      movetargets: {},
+      killtargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -681,12 +676,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmove1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      firetargets: step.ARTIFACTS.firetargets,
       movetargets: step.ARTIFACTS.movetargets,
-      madecatapults: { ...step.ARTIFACTS.madecatapults },
-      madetowers: { ...step.ARTIFACTS.madetowers },
-      madewalls: { ...step.ARTIFACTS.madewalls },
-      killtargets: step.ARTIFACTS.killtargets
+      killtargets: step.ARTIFACTS.killtargets,
+      madecatapults: {},
+      madetowers: {},
+      madewalls: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -816,12 +810,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectcatapult1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      firetargets: { ...step.ARTIFACTS.firetargets },
-      movetargets: step.ARTIFACTS.movetargets,
-      madecatapults: step.ARTIFACTS.madecatapults,
-      madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: step.ARTIFACTS.killtargets
+      firetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -1209,12 +1198,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.move2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      firetargets: step.ARTIFACTS.firetargets,
       movetargets: step.ARTIFACTS.movetargets,
+      killtargets: step.ARTIFACTS.killtargets,
       madecatapults: step.ARTIFACTS.madecatapults,
       madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: step.ARTIFACTS.killtargets
+      madewalls: step.ARTIFACTS.madewalls
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1583,12 +1571,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.fire2 = () => defaultInstruction(2);
   game.action.selecttower2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      firetargets: step.ARTIFACTS.firetargets,
-      movetargets: { ...step.ARTIFACTS.movetargets },
-      madecatapults: step.ARTIFACTS.madecatapults,
-      madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: { ...step.ARTIFACTS.killtargets }
+      movetargets: {},
+      killtargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -1690,12 +1674,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmove2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      firetargets: step.ARTIFACTS.firetargets,
       movetargets: step.ARTIFACTS.movetargets,
-      madecatapults: { ...step.ARTIFACTS.madecatapults },
-      madetowers: { ...step.ARTIFACTS.madetowers },
-      madewalls: { ...step.ARTIFACTS.madewalls },
-      killtargets: step.ARTIFACTS.killtargets
+      killtargets: step.ARTIFACTS.killtargets,
+      madecatapults: {},
+      madetowers: {},
+      madewalls: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -1825,12 +1808,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectcatapult2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      firetargets: { ...step.ARTIFACTS.firetargets },
-      movetargets: step.ARTIFACTS.movetargets,
-      madecatapults: step.ARTIFACTS.madecatapults,
-      madetowers: step.ARTIFACTS.madetowers,
-      madewalls: step.ARTIFACTS.madewalls,
-      killtargets: step.ARTIFACTS.killtargets
+      firetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

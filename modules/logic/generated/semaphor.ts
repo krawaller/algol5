@@ -124,7 +124,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.deploy1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      line: { ...step.ARTIFACTS.line }
+      line: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -192,7 +192,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.promote1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      line: { ...step.ARTIFACTS.line }
+      line: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -439,7 +439,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.deploy2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      line: { ...step.ARTIFACTS.line }
+      line: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -507,7 +507,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.promote2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      line: { ...step.ARTIFACTS.line }
+      line: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };

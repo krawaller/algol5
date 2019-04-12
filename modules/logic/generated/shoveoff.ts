@@ -203,7 +203,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       spawnwest: step.ARTIFACTS.spawnwest,
       spawnnorth: step.ARTIFACTS.spawnnorth,
       spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: { ...step.ARTIFACTS.fourinarow }
+      fourinarow: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -297,7 +297,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       spawnwest: step.ARTIFACTS.spawnwest,
       spawnnorth: step.ARTIFACTS.spawnnorth,
       spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: { ...step.ARTIFACTS.fourinarow }
+      fourinarow: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -391,7 +391,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       spawnwest: step.ARTIFACTS.spawnwest,
       spawnnorth: step.ARTIFACTS.spawnnorth,
       spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: { ...step.ARTIFACTS.fourinarow }
+      fourinarow: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -485,7 +485,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       spawnwest: step.ARTIFACTS.spawnwest,
       spawnnorth: step.ARTIFACTS.spawnnorth,
       spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: { ...step.ARTIFACTS.fourinarow }
+      fourinarow: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -565,20 +565,19 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.west1 = () => defaultInstruction(1);
   game.action.selectpushpoint1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      targetedgepoints: { ...step.ARTIFACTS.targetedgepoints },
-      squishsouth: { ...step.ARTIFACTS.squishsouth },
-      squishwest: { ...step.ARTIFACTS.squishwest },
-      squishnorth: { ...step.ARTIFACTS.squishnorth },
-      squisheast: { ...step.ARTIFACTS.squisheast },
-      pushsouth: { ...step.ARTIFACTS.pushsouth },
-      pushwest: { ...step.ARTIFACTS.pushwest },
-      pushnorth: { ...step.ARTIFACTS.pushnorth },
-      pusheast: { ...step.ARTIFACTS.pusheast },
-      spawnsouth: { ...step.ARTIFACTS.spawnsouth },
-      spawnwest: { ...step.ARTIFACTS.spawnwest },
-      spawnnorth: { ...step.ARTIFACTS.spawnnorth },
-      spawneast: { ...step.ARTIFACTS.spawneast },
-      fourinarow: step.ARTIFACTS.fourinarow
+      targetedgepoints: {},
+      squishsouth: {},
+      squishwest: {},
+      squishnorth: {},
+      squisheast: {},
+      pushsouth: {},
+      pushwest: {},
+      pushnorth: {},
+      pusheast: {},
+      spawnsouth: {},
+      spawnwest: {},
+      spawnnorth: {},
+      spawneast: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -929,7 +928,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       spawnwest: step.ARTIFACTS.spawnwest,
       spawnnorth: step.ARTIFACTS.spawnnorth,
       spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: { ...step.ARTIFACTS.fourinarow }
+      fourinarow: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1023,7 +1022,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       spawnwest: step.ARTIFACTS.spawnwest,
       spawnnorth: step.ARTIFACTS.spawnnorth,
       spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: { ...step.ARTIFACTS.fourinarow }
+      fourinarow: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1117,7 +1116,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       spawnwest: step.ARTIFACTS.spawnwest,
       spawnnorth: step.ARTIFACTS.spawnnorth,
       spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: { ...step.ARTIFACTS.fourinarow }
+      fourinarow: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1211,7 +1210,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       spawnwest: step.ARTIFACTS.spawnwest,
       spawnnorth: step.ARTIFACTS.spawnnorth,
       spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: { ...step.ARTIFACTS.fourinarow }
+      fourinarow: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1291,20 +1290,19 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.west2 = () => defaultInstruction(2);
   game.action.selectpushpoint2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      targetedgepoints: { ...step.ARTIFACTS.targetedgepoints },
-      squishsouth: { ...step.ARTIFACTS.squishsouth },
-      squishwest: { ...step.ARTIFACTS.squishwest },
-      squishnorth: { ...step.ARTIFACTS.squishnorth },
-      squisheast: { ...step.ARTIFACTS.squisheast },
-      pushsouth: { ...step.ARTIFACTS.pushsouth },
-      pushwest: { ...step.ARTIFACTS.pushwest },
-      pushnorth: { ...step.ARTIFACTS.pushnorth },
-      pusheast: { ...step.ARTIFACTS.pusheast },
-      spawnsouth: { ...step.ARTIFACTS.spawnsouth },
-      spawnwest: { ...step.ARTIFACTS.spawnwest },
-      spawnnorth: { ...step.ARTIFACTS.spawnnorth },
-      spawneast: { ...step.ARTIFACTS.spawneast },
-      fourinarow: step.ARTIFACTS.fourinarow
+      targetedgepoints: {},
+      squishsouth: {},
+      squishwest: {},
+      squishnorth: {},
+      squisheast: {},
+      pushsouth: {},
+      pushwest: {},
+      pushnorth: {},
+      pusheast: {},
+      spawnsouth: {},
+      spawnwest: {},
+      spawnnorth: {},
+      spawneast: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

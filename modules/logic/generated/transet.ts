@@ -196,9 +196,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.swap1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      swap2step: step.ARTIFACTS.swap2step,
+      movetargets: step.ARTIFACTS.movetargets,
       swap1steps: step.ARTIFACTS.swap1steps,
-      movetargets: step.ARTIFACTS.movetargets
+      swap2step: step.ARTIFACTS.swap2step
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -275,9 +275,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.swap1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      swap2step: step.ARTIFACTS.swap2step,
-      swap1steps: step.ARTIFACTS.swap1steps,
-      movetargets: { ...step.ARTIFACTS.movetargets }
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -496,9 +494,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectswapunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      swap2step: step.ARTIFACTS.swap2step,
-      swap1steps: { ...step.ARTIFACTS.swap1steps },
-      movetargets: step.ARTIFACTS.movetargets
+      movetargets: step.ARTIFACTS.movetargets,
+      swap1steps: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -543,9 +540,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectswap1target1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      swap2step: { ...step.ARTIFACTS.swap2step },
+      movetargets: step.ARTIFACTS.movetargets,
       swap1steps: step.ARTIFACTS.swap1steps,
-      movetargets: step.ARTIFACTS.movetargets
+      swap2step: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -810,9 +807,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.swap2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      swap2step: step.ARTIFACTS.swap2step,
+      movetargets: step.ARTIFACTS.movetargets,
       swap1steps: step.ARTIFACTS.swap1steps,
-      movetargets: step.ARTIFACTS.movetargets
+      swap2step: step.ARTIFACTS.swap2step
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -889,9 +886,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.swap2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      swap2step: step.ARTIFACTS.swap2step,
-      swap1steps: step.ARTIFACTS.swap1steps,
-      movetargets: { ...step.ARTIFACTS.movetargets }
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -1110,9 +1105,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectswapunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      swap2step: step.ARTIFACTS.swap2step,
-      swap1steps: { ...step.ARTIFACTS.swap1steps },
-      movetargets: step.ARTIFACTS.movetargets
+      movetargets: step.ARTIFACTS.movetargets,
+      swap1steps: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -1157,9 +1151,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectswap1target2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      swap2step: { ...step.ARTIFACTS.swap2step },
+      movetargets: step.ARTIFACTS.movetargets,
       swap1steps: step.ARTIFACTS.swap1steps,
-      movetargets: step.ARTIFACTS.movetargets
+      swap2step: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

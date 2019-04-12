@@ -63,8 +63,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      victims: step.ARTIFACTS.victims,
-      movetargets: step.ARTIFACTS.movetargets
+      movetargets: step.ARTIFACTS.movetargets,
+      victims: step.ARTIFACTS.victims
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -112,8 +112,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      victims: step.ARTIFACTS.victims,
-      movetargets: { ...step.ARTIFACTS.movetargets }
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -161,8 +160,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      victims: { ...step.ARTIFACTS.victims },
-      movetargets: step.ARTIFACTS.movetargets
+      movetargets: step.ARTIFACTS.movetargets,
+      victims: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -342,8 +341,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.action.move2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
-      victims: step.ARTIFACTS.victims,
-      movetargets: step.ARTIFACTS.movetargets
+      movetargets: step.ARTIFACTS.movetargets,
+      victims: step.ARTIFACTS.victims
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -391,8 +390,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      victims: step.ARTIFACTS.victims,
-      movetargets: { ...step.ARTIFACTS.movetargets }
+      movetargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -440,8 +438,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      victims: { ...step.ARTIFACTS.victims },
-      movetargets: step.ARTIFACTS.movetargets
+      movetargets: step.ARTIFACTS.movetargets,
+      victims: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {

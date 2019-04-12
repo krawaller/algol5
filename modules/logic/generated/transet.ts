@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
 
 const emptyArtifactLayers = { swap2step: {}, swap1steps: {}, movetargets: {} };
@@ -164,7 +165,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 1;
@@ -177,7 +178,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start2";
@@ -244,7 +245,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 1;
@@ -257,7 +258,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start2";
@@ -292,7 +293,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         : [8, 1, 2]) {
         let POS = startconnections[DIR];
         if (POS && !UNITLAYERS.myunits[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
     }
@@ -303,7 +304,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(
       Object.keys(UNITLAYERS.myunits)
         .filter(k => !{ [MARKS.selectunit]: 1 }.hasOwnProperty(k))
-        .reduce((m, k) => ({ ...m, [k]: {} }), {})
+        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
     )) {
       LINKS.actions[pos] = "selectswapunit1";
     }
@@ -404,7 +405,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (const pos of Object.keys(
         Object.keys(TERRAIN.oppbase)
           .filter(k => !UNITLAYERS.oppunits.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
         LINKS.actions[pos] = "selectdeportdestination1";
       }
@@ -564,7 +565,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         POS &&
         !{ ...UNITLAYERS.units, ...{ [MARKS.selectswap1target]: 1 } }[POS]
       ) {
-        ARTIFACTS.swap2step[POS] = {};
+        ARTIFACTS.swap2step[POS] = emptyObj;
       }
     }
     if (Object.keys(ARTIFACTS.swap2step).length !== 0) {
@@ -778,7 +779,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 2;
@@ -791,7 +792,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start1";
@@ -858,7 +859,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 2;
@@ -871,7 +872,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start1";
@@ -906,7 +907,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         : [4, 5, 6]) {
         let POS = startconnections[DIR];
         if (POS && !UNITLAYERS.myunits[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
     }
@@ -917,7 +918,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(
       Object.keys(UNITLAYERS.myunits)
         .filter(k => !{ [MARKS.selectunit]: 1 }.hasOwnProperty(k))
-        .reduce((m, k) => ({ ...m, [k]: {} }), {})
+        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
     )) {
       LINKS.actions[pos] = "selectswapunit2";
     }
@@ -1018,7 +1019,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (const pos of Object.keys(
         Object.keys(TERRAIN.oppbase)
           .filter(k => !UNITLAYERS.oppunits.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
         LINKS.actions[pos] = "selectdeportdestination2";
       }
@@ -1178,7 +1179,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         POS &&
         !{ ...UNITLAYERS.units, ...{ [MARKS.selectswap1target]: 1 } }[POS]
       ) {
-        ARTIFACTS.swap2step[POS] = {};
+        ARTIFACTS.swap2step[POS] = emptyObj;
       }
     }
     if (Object.keys(ARTIFACTS.swap2step).length !== 0) {

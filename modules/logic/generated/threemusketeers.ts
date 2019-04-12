@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
 
 const emptyArtifactLayers = {
@@ -115,7 +116,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let TOTALCOUNT = CURRENTCOUNT;
           POS = STARTPOS;
           if (2 === TOTALCOUNT) {
-            ARTIFACTS.musketeerline[POS] = {};
+            ARTIFACTS.musketeerline[POS] = emptyObj;
           }
         }
       }
@@ -159,7 +160,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of orthoDirs) {
         let POS = startconnections[DIR];
         if (POS && UNITLAYERS.oppunits[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
     }
@@ -360,7 +361,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let TOTALCOUNT = CURRENTCOUNT;
           POS = STARTPOS;
           if (2 === TOTALCOUNT) {
-            ARTIFACTS.musketeerline[POS] = {};
+            ARTIFACTS.musketeerline[POS] = emptyObj;
           }
         }
       }
@@ -380,7 +381,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       let NEIGHBOURCOUNT = foundneighbours.length;
 
       if (!NEIGHBOURCOUNT) {
-        ARTIFACTS.strandedmusketeers[STARTPOS] = {};
+        ARTIFACTS.strandedmusketeers[STARTPOS] = emptyObj;
       }
     }
 
@@ -422,7 +423,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of orthoDirs) {
         let POS = startconnections[DIR];
         if (POS && !UNITLAYERS.units[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
     }

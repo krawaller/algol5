@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
 
 const emptyArtifactLayers = { movetargets: {}, winline: {} };
@@ -126,7 +127,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 3) {
-              ARTIFACTS.winline[POS] = {};
+              ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
@@ -166,7 +167,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of orthoDirs) {
         let POS = startconnections[DIR];
         if (POS && !UNITLAYERS.units[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
     }
@@ -402,7 +403,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 3) {
-              ARTIFACTS.winline[POS] = {};
+              ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
@@ -442,7 +443,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of orthoDirs) {
         let POS = startconnections[DIR];
         if (POS && !UNITLAYERS.units[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
     }

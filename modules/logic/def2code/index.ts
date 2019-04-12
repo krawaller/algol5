@@ -16,7 +16,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
   ret += `import {AlgolStepLinks, AlgolGame} from '${path.join(
     __dirname,
     "../../types"
-  )}'`;
+  )}'; `;
 
   ret += executeSection(gameDef, 1, "head", "head");
 

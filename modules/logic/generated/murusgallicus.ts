@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 7, width: 8 });
 
 const emptyArtifactLayers = {
@@ -224,7 +225,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 1;
@@ -237,7 +238,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start2";
@@ -296,7 +297,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 1;
@@ -309,7 +310,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start2";
@@ -366,7 +367,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS && UNITLAYERS.oppwalls[POS]) {
-          ARTIFACTS.killtargets[POS] = {};
+          ARTIFACTS.killtargets[POS] = emptyObj;
         }
       }
     }
@@ -451,12 +452,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       if (POS) {
         ARTIFACTS[UNITLAYERS.myunits[POS] ? "madetowers" : "madewalls"][
           POS
-        ] = {};
+        ] = emptyObj;
       }
 
       ARTIFACTS[
         UNITLAYERS.myunits[MARKS.selectmove] ? "madetowers" : "madewalls"
-      ][STARTPOS] = {};
+      ][STARTPOS] = emptyObj;
     }
     LINKS.actions.move = "move1";
 
@@ -807,7 +808,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 2;
@@ -820,7 +821,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start1";
@@ -879,7 +880,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 2;
@@ -892,7 +893,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start1";
@@ -949,7 +950,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS && UNITLAYERS.oppwalls[POS]) {
-          ARTIFACTS.killtargets[POS] = {};
+          ARTIFACTS.killtargets[POS] = emptyObj;
         }
       }
     }
@@ -1034,12 +1035,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       if (POS) {
         ARTIFACTS[UNITLAYERS.myunits[POS] ? "madetowers" : "madewalls"][
           POS
-        ] = {};
+        ] = emptyObj;
       }
 
       ARTIFACTS[
         UNITLAYERS.myunits[MARKS.selectmove] ? "madetowers" : "madewalls"
-      ][STARTPOS] = {};
+      ][STARTPOS] = emptyObj;
     }
     LINKS.actions.move = "move2";
 

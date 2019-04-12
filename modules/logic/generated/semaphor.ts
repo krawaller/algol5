@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 3, width: 4 });
 
 const emptyArtifactLayers = { line: {} };
@@ -43,7 +44,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(
       Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-        .reduce((m, k) => ({ ...m, [k]: {} }), {})
+        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
     )) {
       LINKS.actions[pos] = "selectdeploytarget1";
     }
@@ -161,7 +162,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH > 2) {
-              ARTIFACTS.line[POS] = {};
+              ARTIFACTS.line[POS] = emptyObj;
             }
           }
         }
@@ -229,7 +230,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH > 2) {
-              ARTIFACTS.line[POS] = {};
+              ARTIFACTS.line[POS] = emptyObj;
             }
           }
         }
@@ -338,7 +339,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(
       Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-        .reduce((m, k) => ({ ...m, [k]: {} }), {})
+        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
     )) {
       LINKS.actions[pos] = "selectdeploytarget2";
     }
@@ -476,7 +477,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH > 2) {
-              ARTIFACTS.line[POS] = {};
+              ARTIFACTS.line[POS] = emptyObj;
             }
           }
         }
@@ -544,7 +545,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH > 2) {
-              ARTIFACTS.line[POS] = {};
+              ARTIFACTS.line[POS] = emptyObj;
             }
           }
         }

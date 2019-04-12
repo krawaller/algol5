@@ -12,7 +12,9 @@ export function executeHead(
   player: 1 | 2,
   action: string
 ): string {
-  let ret = "";
+  let ret = "\n";
+
+  ret += `const emptyObj = {}; `;
 
   ret += `
     const BOARD = boardLayers({ height: ${gameDef.board.height}, width: ${

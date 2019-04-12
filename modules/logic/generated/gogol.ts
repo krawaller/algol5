@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
 
 const connections = boardConnections({ height: 8, width: 8 });
@@ -222,12 +223,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
     )
       .filter(([key, n]) => n === 2)
-      .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})) {
+      .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})) {
       let startconnections = connections[STARTPOS];
       for (let DIR of TERRAIN.homerow[STARTPOS] ? orthoDirs : [1, 5]) {
         let POS = startconnections[DIR];
         if (POS) {
-          ARTIFACTS.nokings[POS] = {};
+          ARTIFACTS.nokings[POS] = emptyObj;
         }
       }
     }
@@ -241,7 +242,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           (TERRAIN.homerow[POS] ||
             (TERRAIN.edges[STARTPOS] && TERRAIN.edges[POS]))
         ) {
-          ARTIFACTS.nosoldiers[POS] = {};
+          ARTIFACTS.nosoldiers[POS] = emptyObj;
         }
       }
     }
@@ -256,7 +257,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             k =>
               !{ ...UNITLAYERS.units, ...ARTIFACTS.nokings }.hasOwnProperty(k)
           )
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
         LINKS.actions[pos] = "selectkingdeploy1";
       }
@@ -323,7 +324,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 1;
@@ -336,7 +337,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
@@ -399,7 +400,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 1;
@@ -412,7 +413,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
@@ -487,7 +488,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 1;
@@ -500,7 +501,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
@@ -572,7 +573,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let POS = STARTPOS;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             if (!ARTIFACTS.nokings[POS]) {
-              ARTIFACTS.kingwalk[POS] = {};
+              ARTIFACTS.kingwalk[POS] = emptyObj;
             }
           }
         }
@@ -624,7 +625,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
                   ...ARTIFACTS.jumptargets
                 }.hasOwnProperty(k)
             )
-            .reduce((m, k) => ({ ...m, [k]: {} }), {})
+            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
     )) {
       LINKS.actions[pos] = "selectmovetarget1";
     }
@@ -688,7 +689,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
                   .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
               )
                 .filter(([key, n]) => n === 2)
-                .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+                .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
             ).length !== 0
               ? { text: "without making a forbidden configuration" }
               : undefined
@@ -1016,12 +1017,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
     )
       .filter(([key, n]) => n === 2)
-      .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})) {
+      .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})) {
       let startconnections = connections[STARTPOS];
       for (let DIR of TERRAIN.homerow[STARTPOS] ? orthoDirs : [1, 5]) {
         let POS = startconnections[DIR];
         if (POS) {
-          ARTIFACTS.nokings[POS] = {};
+          ARTIFACTS.nokings[POS] = emptyObj;
         }
       }
     }
@@ -1035,7 +1036,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           (TERRAIN.homerow[POS] ||
             (TERRAIN.edges[STARTPOS] && TERRAIN.edges[POS]))
         ) {
-          ARTIFACTS.nosoldiers[POS] = {};
+          ARTIFACTS.nosoldiers[POS] = emptyObj;
         }
       }
     }
@@ -1050,7 +1051,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             k =>
               !{ ...UNITLAYERS.units, ...ARTIFACTS.nokings }.hasOwnProperty(k)
           )
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
         LINKS.actions[pos] = "selectkingdeploy2";
       }
@@ -1275,7 +1276,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 2;
@@ -1288,7 +1289,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
@@ -1351,7 +1352,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 2;
@@ -1364,7 +1365,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
@@ -1439,7 +1440,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 2;
@@ -1452,7 +1453,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
@@ -1524,7 +1525,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let POS = STARTPOS;
           while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
             if (!ARTIFACTS.nokings[POS]) {
-              ARTIFACTS.kingwalk[POS] = {};
+              ARTIFACTS.kingwalk[POS] = emptyObj;
             }
           }
         }
@@ -1576,7 +1577,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
                   ...ARTIFACTS.jumptargets
                 }.hasOwnProperty(k)
             )
-            .reduce((m, k) => ({ ...m, [k]: {} }), {})
+            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
     )) {
       LINKS.actions[pos] = "selectmovetarget2";
     }
@@ -1640,7 +1641,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
                   .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
               )
                 .filter(([key, n]) => n === 2)
-                .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+                .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
             ).length !== 0
               ? { text: "without making a forbidden configuration" }
               : undefined

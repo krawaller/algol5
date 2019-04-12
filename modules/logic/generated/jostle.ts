@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 10, width: 10 });
 
 const emptyArtifactLayers = {
@@ -131,7 +132,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
               : UNITLAYERS.oppunits[POS]
               ? "initialenemy"
               : "initialfriend"
-          ][POS] = {};
+          ][POS] = emptyObj;
         }
       }
     }
@@ -202,7 +203,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         if (POS && UNITLAYERS.units[POS]) {
           ARTIFACTS[UNITLAYERS.oppunits[POS] ? "newenemy" : "newfriend"][
             POS
-          ] = {};
+          ] = emptyObj;
         }
       }
     }
@@ -651,7 +652,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
               : UNITLAYERS.oppunits[POS]
               ? "initialenemy"
               : "initialfriend"
-          ][POS] = {};
+          ][POS] = emptyObj;
         }
       }
     }
@@ -722,7 +723,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         if (POS && UNITLAYERS.units[POS]) {
           ARTIFACTS[UNITLAYERS.oppunits[POS] ? "newenemy" : "newfriend"][
             POS
-          ] = {};
+          ] = emptyObj;
         }
       }
     }

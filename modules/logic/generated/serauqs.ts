@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 4, width: 4 });
 
 const emptyArtifactLayers = { movetargets: {}, winline: {} };
@@ -204,7 +205,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
       let winner = 1;
@@ -221,7 +222,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
       let winner = 1;
@@ -294,7 +295,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4 && TOTALCOUNT !== 4) {
-              ARTIFACTS.winline[POS] = {};
+              ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
@@ -316,7 +317,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
       let winner = 1;
@@ -333,7 +334,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
       let winner = 1;
@@ -369,7 +370,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS && !UNITLAYERS.units[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
     }
@@ -723,7 +724,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
       let winner = 2;
@@ -740,7 +741,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
       let winner = 2;
@@ -813,7 +814,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4 && TOTALCOUNT !== 4) {
-              ARTIFACTS.winline[POS] = {};
+              ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
@@ -835,7 +836,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
       let winner = 2;
@@ -852,7 +853,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
       let winner = 2;
@@ -888,7 +889,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS && !UNITLAYERS.units[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
     }

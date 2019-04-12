@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
 
 const emptyArtifactLayers = {
@@ -58,7 +59,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
         LINKS.actions[pos] = "selectdeploy1";
       }
@@ -130,7 +131,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
         LINKS.actions[pos] = "selectdeploy1";
       }
@@ -312,7 +313,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     {
       let allowedsteps = Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-        .reduce((m, k) => ({ ...m, [k]: {} }), {});
+        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
       let BLOCKS = UNITLAYERS.oppunits;
 
       for (let STARTPOS in ARTIFACTS.growstarts) {
@@ -413,11 +414,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           ]) &&
         !BLOCKS[POS]
       ) {
-        ARTIFACTS.spawns[POS] = {};
+        ARTIFACTS.spawns[POS] = emptyObj;
       }
       POS = STARTPOS;
       if (!UNITLAYERS.units[STARTPOS]) {
-        ARTIFACTS.spawns[POS] = {};
+        ARTIFACTS.spawns[POS] = emptyObj;
       }
     }
     LINKS.actions.expand = "expand1";
@@ -483,7 +484,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
         LINKS.actions[pos] = "selectdeploy2";
       }
@@ -582,7 +583,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
         LINKS.actions[pos] = "selectdeploy2";
       }
@@ -764,7 +765,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     {
       let allowedsteps = Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
-        .reduce((m, k) => ({ ...m, [k]: {} }), {});
+        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
       let BLOCKS = UNITLAYERS.oppunits;
 
       for (let STARTPOS in ARTIFACTS.growstarts) {
@@ -865,11 +866,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           ]) &&
         !BLOCKS[POS]
       ) {
-        ARTIFACTS.spawns[POS] = {};
+        ARTIFACTS.spawns[POS] = emptyObj;
       }
       POS = STARTPOS;
       if (!UNITLAYERS.units[STARTPOS]) {
-        ARTIFACTS.spawns[POS] = {};
+        ARTIFACTS.spawns[POS] = emptyObj;
       }
     }
     LINKS.actions.expand = "expand2";

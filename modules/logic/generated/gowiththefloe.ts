@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
 
 const emptyArtifactLayers = {
@@ -199,7 +200,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let POS = STARTPOS;
           let walkpositionstocount = Object.keys(TERRAIN.nowater)
             .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {});
+            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
           let CURRENTCOUNT = 0;
           let LENGTH = 0;
           while (LENGTH < MAX && (POS = connections[POS][DIR])) {
@@ -209,7 +210,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let TOTALCOUNT = CURRENTCOUNT;
           POS = STARTPOS;
           if (TOTALCOUNT > 0) {
-            ARTIFACTS.canmove[POS] = {};
+            ARTIFACTS.canmove[POS] = emptyObj;
           }
         }
       }
@@ -225,7 +226,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
           .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       );
     } else if (Object.keys(UNITLAYERS.seals).length === 0) {
       let winner = 2;
@@ -322,11 +323,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         !BLOCKS[POS]
       ) {
         if (!UNITLAYERS.holes[POS]) {
-          ARTIFACTS.cracks[POS] = {};
+          ARTIFACTS.cracks[POS] = emptyObj;
         }
       }
       if (BLOCKS[POS]) {
-        ARTIFACTS.cracks[POS] = {};
+        ARTIFACTS.cracks[POS] = emptyObj;
       }
     }
     LINKS.actions.move = "move1";
@@ -483,7 +484,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let POS = STARTPOS;
           let walkpositionstocount = Object.keys(TERRAIN.nowater)
             .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {});
+            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
           let CURRENTCOUNT = 0;
           let LENGTH = 0;
           while (LENGTH < MAX && (POS = connections[POS][DIR])) {
@@ -493,7 +494,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let TOTALCOUNT = CURRENTCOUNT;
           POS = STARTPOS;
           if (TOTALCOUNT > 0) {
-            ARTIFACTS.canmove[POS] = {};
+            ARTIFACTS.canmove[POS] = emptyObj;
           }
         }
       }
@@ -509,7 +510,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
           .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       );
     } else if (Object.keys(UNITLAYERS.seals).length === 0) {
       let winner = 2;
@@ -565,7 +566,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let POS = STARTPOS;
           let walkpositionstocount = Object.keys(TERRAIN.nowater)
             .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
-            .reduce((m, k) => ({ ...m, [k]: {} }), {});
+            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
           let CURRENTCOUNT = 0;
           let LENGTH = 0;
           while (LENGTH < MAX && (POS = connections[POS][DIR])) {
@@ -575,7 +576,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           let TOTALCOUNT = CURRENTCOUNT;
           POS = STARTPOS;
           if (TOTALCOUNT > 0) {
-            ARTIFACTS.canmove[POS] = {};
+            ARTIFACTS.canmove[POS] = emptyObj;
           }
         }
       }
@@ -591,7 +592,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
           .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
-          .reduce((m, k) => ({ ...m, [k]: {} }), {})
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       );
     } else if (Object.keys(UNITLAYERS.seals).length === 0) {
       let winner = 2;
@@ -648,7 +649,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS && UNITLAYERS.seals[POS]) {
-          ARTIFACTS.eattargets[POS] = {};
+          ARTIFACTS.eattargets[POS] = emptyObj;
         }
       }
     }
@@ -701,11 +702,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         !BLOCKS[POS]
       ) {
         if (!UNITLAYERS.holes[POS]) {
-          ARTIFACTS.cracks[POS] = {};
+          ARTIFACTS.cracks[POS] = emptyObj;
         }
       }
       if (BLOCKS[POS]) {
-        ARTIFACTS.cracks[POS] = {};
+        ARTIFACTS.cracks[POS] = emptyObj;
       }
     }
     LINKS.actions.move = "move2";

@@ -22,7 +22,9 @@ export default function draw(
   const entries = Object.keys(drawDef.include || {}).map(
     key => `${key}: ${parser.val(drawDef.include[key])}`
   );
-  const artifactLiteral = `{ ${entries.join(", ")} }`;
+  const artifactLiteral = entries.length
+    ? `{ ${entries.join(", ")} }`
+    : "emptyObj";
 
   let body;
   if (drawDef.include && drawDef.include.owner) {

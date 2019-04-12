@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 4, width: 4 });
 
 const emptyArtifactLayers = {
@@ -253,7 +254,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = {};
+              ARTIFACTS.fourinarow[POS] = emptyObj;
             }
           }
         }
@@ -347,7 +348,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = {};
+              ARTIFACTS.fourinarow[POS] = emptyObj;
             }
           }
         }
@@ -441,7 +442,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = {};
+              ARTIFACTS.fourinarow[POS] = emptyObj;
             }
           }
         }
@@ -535,7 +536,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = {};
+              ARTIFACTS.fourinarow[POS] = emptyObj;
             }
           }
         }
@@ -623,7 +624,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
                 : DIR === 5
                 ? "pushnorth"
                 : "pusheast"
-            ][POS] = {};
+            ][POS] = emptyObj;
           }
         }
         let WALKLENGTH = walkedsquares.length;
@@ -636,7 +637,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             : DIR === 5
             ? "squishnorth"
             : "squisheast"
-        ][POS] = {};
+        ][POS] = emptyObj;
         if (WALKLENGTH) {
           ARTIFACTS[
             DIR === 1
@@ -646,7 +647,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
               : DIR === 5
               ? "spawnnorth"
               : "spawneast"
-          ][walkedsquares[WALKLENGTH - 1]] = {};
+          ][walkedsquares[WALKLENGTH - 1]] = emptyObj;
         }
       }
     }
@@ -979,7 +980,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = {};
+              ARTIFACTS.fourinarow[POS] = emptyObj;
             }
           }
         }
@@ -1073,7 +1074,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = {};
+              ARTIFACTS.fourinarow[POS] = emptyObj;
             }
           }
         }
@@ -1167,7 +1168,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = {};
+              ARTIFACTS.fourinarow[POS] = emptyObj;
             }
           }
         }
@@ -1261,7 +1262,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = {};
+              ARTIFACTS.fourinarow[POS] = emptyObj;
             }
           }
         }
@@ -1349,7 +1350,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
                 : DIR === 5
                 ? "pushnorth"
                 : "pusheast"
-            ][POS] = {};
+            ][POS] = emptyObj;
           }
         }
         let WALKLENGTH = walkedsquares.length;
@@ -1362,7 +1363,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             : DIR === 5
             ? "squishnorth"
             : "squisheast"
-        ][POS] = {};
+        ][POS] = emptyObj;
         if (WALKLENGTH) {
           ARTIFACTS[
             DIR === 1
@@ -1372,7 +1373,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
               : DIR === 5
               ? "spawnnorth"
               : "spawneast"
-          ][walkedsquares[WALKLENGTH - 1]] = {};
+          ][walkedsquares[WALKLENGTH - 1]] = emptyObj;
         }
       }
     }

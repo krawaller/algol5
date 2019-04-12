@@ -47,7 +47,7 @@ export default function parseSet(
   if (Array.isArray(expr)) {
     switch (expr[0]) {
       case "empty":
-        return "{}";
+        return "emptyObj";
       default:
         throw new Error(`Unknown set singleton: ${JSON.stringify(expr)}`);
     }
@@ -65,7 +65,7 @@ export default function parseSet(
 
   if (isAlgolSetSingles(expr)) {
     const { singles: positions } = expr;
-    return `{${positions.map(p => `[${parser.pos(p)}]: {}`).join(", ")}}`;
+    return `{${positions.map(p => `[${parser.pos(p)}]: emptyObj`).join(", ")}}`;
   }
 
   if (isAlgolSetUnion(expr)) {
@@ -86,7 +86,7 @@ export default function parseSet(
     // arr of the keys we want to keep
     const validKeys = `${targetKeys}.filter(${keyTester})`;
     // turn valid keys back into a set object
-    return `${validKeys}.reduce((m, k) => ({...m, [k]: {}}), {})`;
+    return `${validKeys}.reduce((m, k) => ({...m, [k]: emptyObj}), {})`;
   }
 
   if (isAlgolSetIntersect(expr)) {
@@ -104,7 +104,7 @@ export default function parseSet(
     // transform keys to object entries and keep only those with sufficient count
     const validEntries = `Object.entries(${countObj}).filter(${entryTester})`;
     // Turn those valid entries into an object again!
-    return `${validEntries}.reduce((mem, [key]) => ({...mem, [key]: {}}), {})`;
+    return `${validEntries}.reduce((mem, [key]) => ({...mem, [key]: emptyObj}), {})`;
   }
 
   if (isAlgolSetGroupAt(expr)) {

@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 10, width: 10 });
 
 const emptyArtifactLayers = { targets: {} };
@@ -102,7 +103,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = MARKS.selectmovetarget;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-          ARTIFACTS.targets[POS] = {};
+          ARTIFACTS.targets[POS] = emptyObj;
         }
       }
     }
@@ -181,7 +182,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = MARKS.selectunit;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-          ARTIFACTS.targets[POS] = {};
+          ARTIFACTS.targets[POS] = emptyObj;
         }
       }
     }
@@ -399,7 +400,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = MARKS.selectmovetarget;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-          ARTIFACTS.targets[POS] = {};
+          ARTIFACTS.targets[POS] = emptyObj;
         }
       }
     }
@@ -478,7 +479,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = MARKS.selectunit;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-          ARTIFACTS.targets[POS] = {};
+          ARTIFACTS.targets[POS] = emptyObj;
         }
       }
     }

@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 4, width: 4 });
 
 const emptyArtifactLayers = { movetargets: {}, digtargets: {}, winline: {} };
@@ -150,7 +151,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS && UNITLAYERS.neutralunits[POS]) {
-          ARTIFACTS.digtargets[POS] = {};
+          ARTIFACTS.digtargets[POS] = emptyObj;
         }
       }
     }
@@ -239,7 +240,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH > 2) {
-              ARTIFACTS.winline[POS] = {};
+              ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
@@ -291,7 +292,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             : true)
         ) {
           if (UNITLAYERS.neutralunits[POS]) {
-            ARTIFACTS.movetargets[POS] = {};
+            ARTIFACTS.movetargets[POS] = emptyObj;
           }
         }
       }
@@ -590,7 +591,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS && UNITLAYERS.neutralunits[POS]) {
-          ARTIFACTS.digtargets[POS] = {};
+          ARTIFACTS.digtargets[POS] = emptyObj;
         }
       }
     }
@@ -679,7 +680,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
             if (WALKLENGTH > 2) {
-              ARTIFACTS.winline[POS] = {};
+              ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
@@ -731,7 +732,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             : true)
         ) {
           if (UNITLAYERS.neutralunits[POS]) {
-            ARTIFACTS.movetargets[POS] = {};
+            ARTIFACTS.movetargets[POS] = emptyObj;
           }
         }
       }

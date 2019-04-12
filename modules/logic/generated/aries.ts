@@ -11,6 +11,7 @@ import {
   AlgolStepLinks,
   AlgolGame
 } from "/Users/davidwaller/gitreps/algol5/modules/types";
+const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
 
 const emptyArtifactLayers = { movetargets: {}, beingpushed: {}, squished: {} };
@@ -191,7 +192,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 1;
@@ -204,7 +205,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start2";
@@ -239,7 +240,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of orthoDirs) {
         let POS = MARKS.selectunit;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
         if (BLOCKS[POS]) {
           if (
@@ -321,12 +322,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             : null)
         ) {
           walkedsquares.push(POS);
-          ARTIFACTS.beingpushed[POS] = {};
+          ARTIFACTS.beingpushed[POS] = emptyObj;
         }
         let WALKLENGTH = walkedsquares.length;
         if (WALKLENGTH) {
           if (["hitblock", "outofbounds"].indexOf(STOPREASON) !== -1) {
-            ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = {};
+            ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = emptyObj;
           }
         }
       }
@@ -815,7 +816,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
       let winner = 2;
@@ -828,7 +829,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: {} }), {})
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
       LINKS.endturn = "start1";
@@ -863,7 +864,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       for (let DIR of orthoDirs) {
         let POS = MARKS.selectunit;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
-          ARTIFACTS.movetargets[POS] = {};
+          ARTIFACTS.movetargets[POS] = emptyObj;
         }
         if (BLOCKS[POS]) {
           if (
@@ -945,12 +946,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
             : null)
         ) {
           walkedsquares.push(POS);
-          ARTIFACTS.beingpushed[POS] = {};
+          ARTIFACTS.beingpushed[POS] = emptyObj;
         }
         let WALKLENGTH = walkedsquares.length;
         if (WALKLENGTH) {
           if (["hitblock", "outofbounds"].indexOf(STOPREASON) !== -1) {
-            ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = {};
+            ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = emptyObj;
           }
         }
       }

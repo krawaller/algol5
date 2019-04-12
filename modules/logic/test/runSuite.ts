@@ -69,6 +69,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                   pre += `
                   const connections = boardConnections(gameDef.board);
                   const relativeDirs = makeRelativeDirs(gameDef.board);
+                  const emptyObj = {};
                   `;
                   pre += `const groupLayers = ${JSON.stringify(
                     groupLayersForPlayer(def, player)

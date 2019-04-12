@@ -72,4 +72,5 @@ export type AlgolEffectActionDef<
     Turnv,
     Unit
   >;
+  noEndGame?: boolean;
 };

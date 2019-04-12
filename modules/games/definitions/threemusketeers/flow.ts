@@ -1,4 +1,4 @@
-import { ThreemusketeersFlow } from './_types';
+import { ThreemusketeersFlow } from "./_types";
 
 const threemusketeersFlow: ThreemusketeersFlow = {
   startTurn: { link: "selectunit" },
@@ -6,11 +6,13 @@ const threemusketeersFlow: ThreemusketeersFlow = {
     musketeersinline: {
       condition: { notempty: "musketeerline" },
       who: 2,
-      show: "kings"
+      show: "kings",
+      ifPlayer: 1
     },
     strandedmusketeers: {
       condition: { same: [{ sizeof: "strandedmusketeers" }, 3] },
-      who: 1
+      who: 1,
+      ifPlayer: 2
     }
   },
   marks: {

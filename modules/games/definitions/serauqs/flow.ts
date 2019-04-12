@@ -1,8 +1,11 @@
-import { SerauqsFlow } from './_types';
+import { SerauqsFlow } from "./_types";
 
 const serauqsFlow: SerauqsFlow = {
   endGame: {
-    madeline: { condition: { notempty: "winline" }, show: "winline" },
+    madeline: {
+      condition: { notempty: "winline" },
+      show: "winline"
+    },
     madex: {
       condition: {
         morethan: [
@@ -42,7 +45,8 @@ const serauqsFlow: SerauqsFlow = {
   commands: {
     promote: {
       applyEffect: { morphat: ["selectunit", "wild"] },
-      link: "endturn"
+      link: "endturn",
+      noEndGame: true
     },
     move: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },

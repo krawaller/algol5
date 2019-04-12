@@ -1,7 +1,8 @@
 import {
   FullDefAnon,
   AlgolLinkAnon,
-  AlgolLinkInnerAnon
+  AlgolLinkInnerAnon,
+  AlgolEffectActionDefAnon
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";
@@ -28,6 +29,11 @@ function executeLinkInner(
   action: string,
   name: AlgolLinkInnerAnon
 ): string {
+  const actionDef: AlgolEffectActionDefAnon =
+    gameDef.flow.commands[action] ||
+    gameDef.flow.marks[action] ||
+    (action === "start" && gameDef.flow.startTurn) ||
+    {}; // To allow tests to reference non-existing things
   const parser = makeParser(gameDef, player, action);
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     // ------------- Linking to a command
@@ -45,6 +51,12 @@ function executeLinkInner(
   } else if (name === "endturn") {
     // ------------- Linking to next turn, have to check win conditions
     return Object.entries(gameDef.flow.endGame || {})
+      .filter(
+        ([name, def]) =>
+          def.unlessAction !== action &&
+          !actionDef.noEndGame &&
+          (!def.ifPlayer || def.ifPlayer === player)
+      )
       .map(
         ([name, def]) => `
       if (${parser.bool(def.condition)}) { 

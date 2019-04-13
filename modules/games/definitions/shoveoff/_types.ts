@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type ShoveoffBoardHeight = 4;
 export type ShoveoffBoardWidth = 4;
@@ -9,7 +9,7 @@ export type ShoveoffMark = "selectpushpoint";
 export type ShoveoffCommand = "north" | "south" | "east" | "west";
 export type ShoveoffPhaseCommand = never;
 export type ShoveoffPhase = "startTurn" | ShoveoffMark;
-export type ShoveoffUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "soldiers" | "mysoldiers" | "oppsoldiers" | "neutralsoldiers";
+export type ShoveoffUnitLayer = "units" | "myunits" | "oppunits";
 export type ShoveoffGenerator = "findaffected" | "findresults" | "findfourinarow";
 export type ShoveoffArtifactLayer = "targetedgepoints" | "squishsouth" | "squishwest" | "squishnorth" | "squisheast" | "pushsouth" | "pushwest" | "pushnorth" | "pusheast" | "spawnsouth" | "spawnwest" | "spawnnorth" | "spawneast" | "fourinarow";
 export type ShoveoffTerrainLayer = "southedge" | "northedge" | "westedge" | "eastedge" | "edge" | "nosouthedge" | "nonorthedge" | "nowestedge" | "noeastedge" | "noedge";
@@ -21,7 +21,7 @@ export type ShoveoffTurnVar = any;
  
 export type ShoveoffGenerators = Generators<ShoveoffArtifactLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar>;
 export type ShoveoffFlow = Flow<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;
-export type ShoveoffBoard = Board<ShoveoffBoardHeight, ShoveoffBoardWidth, ShoveoffGrid, ShoveoffPosition, ShoveoffTerrain>;
+export type ShoveoffBoard = AlgolBoard<ShoveoffBoardHeight, ShoveoffBoardWidth, ShoveoffGrid, ShoveoffPosition, ShoveoffTerrain>;
 export type ShoveoffAI = AI<ShoveoffAiArtifactLayer, ShoveoffAiAspect, ShoveoffAiBrain, ShoveoffAiGenerator, ShoveoffAiGrid, ShoveoffAiTerrain, ShoveoffAiTerrainLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffBoardHeight, ShoveoffBoardWidth, ShoveoffCommand, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffPosition, ShoveoffTurnPos, ShoveoffTurnVar>;
 export type ShoveoffGraphics = Graphics<ShoveoffTerrain, ShoveoffUnit>;
 export type ShoveoffInstructions = Instructions<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffPhase, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;

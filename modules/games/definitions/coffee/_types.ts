@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type CoffeeBoardHeight = 5;
 export type CoffeeBoardWidth = 5;
@@ -9,7 +9,7 @@ export type CoffeeMark = "selectdrop";
 export type CoffeeCommand = "uphill" | "downhill" | "horisontal" | "vertical";
 export type CoffeePhaseCommand = never;
 export type CoffeePhase = "startTurn" | CoffeeMark;
-export type CoffeeUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "soldiers" | "mysoldiers" | "oppsoldiers" | "neutralsoldiers" | "markers" | "mymarkers" | "oppmarkers" | "neutralmarkers";
+export type CoffeeUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "markers";
 export type CoffeeGenerator = "findgeneratees" | "findwinlines";
 export type CoffeeArtifactLayer = "FOOBAR" | "vertical" | "uphill" | "horisontal" | "downhill" | "winline";
 export type CoffeeTerrainLayer = never;
@@ -21,7 +21,7 @@ export type CoffeeTurnVar = any;
  
 export type CoffeeGenerators = Generators<CoffeeArtifactLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeeTurnPos, CoffeeTurnVar>;
 export type CoffeeFlow = Flow<CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGenerator, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
-export type CoffeeBoard = Board<CoffeeBoardHeight, CoffeeBoardWidth, CoffeeGrid, CoffeePosition, CoffeeTerrain>;
+export type CoffeeBoard = AlgolBoard<CoffeeBoardHeight, CoffeeBoardWidth, CoffeeGrid, CoffeePosition, CoffeeTerrain>;
 export type CoffeeAI = AI<CoffeeAiArtifactLayer, CoffeeAiAspect, CoffeeAiBrain, CoffeeAiGenerator, CoffeeAiGrid, CoffeeAiTerrain, CoffeeAiTerrainLayer, CoffeeBattlePos, CoffeeBattleVar, CoffeeBoardHeight, CoffeeBoardWidth, CoffeeCommand, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePosition, CoffeeTurnPos, CoffeeTurnVar>;
 export type CoffeeGraphics = Graphics<CoffeeTerrain, CoffeeUnit>;
 export type CoffeeInstructions = Instructions<CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;

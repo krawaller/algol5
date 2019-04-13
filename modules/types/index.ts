@@ -93,7 +93,7 @@ export function typeSignature(type, gameId) {
       "TurnVar",
       "Unit"
     ],
-    Board: ["BoardHeight", "BoardWidth", "Grid", "Position", "Terrain"],
+    AlgolBoard: ["BoardHeight", "BoardWidth", "Grid", "Position", "Terrain"],
     Setup: ["Position", "Unit"],
     Generators: [
       "ArtifactLayer",

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type DescentBoardHeight = 4;
 export type DescentBoardWidth = 4;
@@ -9,7 +9,7 @@ export type DescentMark = "selectunit" | "selectmovetarget" | "selectdigtarget";
 export type DescentCommand = "move" | "dig";
 export type DescentPhaseCommand = "move";
 export type DescentPhase = "startTurn" | DescentMark | DescentPhaseCommand;
-export type DescentUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "pawns" | "mypawns" | "opppawns" | "neutralpawns" | "knights" | "myknights" | "oppknights" | "neutralknights" | "rooks" | "myrooks" | "opprooks" | "neutralrooks";
+export type DescentUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "pawns" | "mypawns" | "opppawns" | "knights" | "myknights" | "oppknights" | "rooks" | "myrooks" | "opprooks";
 export type DescentGenerator = "findmovetargets" | "finddigtargets" | "findwinlines";
 export type DescentArtifactLayer = "movetargets" | "digtargets" | "winline";
 export type DescentTerrainLayer = never;
@@ -21,7 +21,7 @@ export type DescentTurnVar = any;
  
 export type DescentGenerators = Generators<DescentArtifactLayer, DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentGrid, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar>;
 export type DescentFlow = Flow<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGenerator, DescentGrid, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar, DescentUnit>;
-export type DescentBoard = Board<DescentBoardHeight, DescentBoardWidth, DescentGrid, DescentPosition, DescentTerrain>;
+export type DescentBoard = AlgolBoard<DescentBoardHeight, DescentBoardWidth, DescentGrid, DescentPosition, DescentTerrain>;
 export type DescentAI = AI<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentBattlePos, DescentBattleVar, DescentBoardHeight, DescentBoardWidth, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentPosition, DescentTurnPos, DescentTurnVar>;
 export type DescentGraphics = Graphics<DescentTerrain, DescentUnit>;
 export type DescentInstructions = Instructions<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentTurnPos, DescentTurnVar, DescentUnit>;

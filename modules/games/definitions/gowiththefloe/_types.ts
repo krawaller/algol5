@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type GowiththefloeBoardHeight = 8;
 export type GowiththefloeBoardWidth = 8;
@@ -9,7 +9,7 @@ export type GowiththefloeMark = "selectunit" | "selectmovetarget" | "selecteatta
 export type GowiththefloeCommand = "move" | "eat";
 export type GowiththefloePhaseCommand = never;
 export type GowiththefloePhase = "startTurn" | GowiththefloeMark;
-export type GowiththefloeUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "seals" | "myseals" | "oppseals" | "neutralseals" | "bears" | "mybears" | "oppbears" | "neutralbears" | "holes" | "myholes" | "oppholes" | "neutralholes";
+export type GowiththefloeUnitLayer = "units" | "myunits" | "oppunits" | "seals" | "bears" | "holes";
 export type GowiththefloeGenerator = "findeattargets" | "findmovetargets" | "findsealsmoves" | "findcracks";
 export type GowiththefloeArtifactLayer = "eattargets" | "movetargets" | "canmove" | "cracks";
 export type GowiththefloeTerrainLayer = "water" | "nowater";
@@ -21,7 +21,7 @@ export type GowiththefloeTurnVar = any;
  
 export type GowiththefloeGenerators = Generators<GowiththefloeArtifactLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloeTurnPos, GowiththefloeTurnVar>;
 export type GowiththefloeFlow = Flow<GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGenerator, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;
-export type GowiththefloeBoard = Board<GowiththefloeBoardHeight, GowiththefloeBoardWidth, GowiththefloeGrid, GowiththefloePosition, GowiththefloeTerrain>;
+export type GowiththefloeBoard = AlgolBoard<GowiththefloeBoardHeight, GowiththefloeBoardWidth, GowiththefloeGrid, GowiththefloePosition, GowiththefloeTerrain>;
 export type GowiththefloeAI = AI<GowiththefloeAiArtifactLayer, GowiththefloeAiAspect, GowiththefloeAiBrain, GowiththefloeAiGenerator, GowiththefloeAiGrid, GowiththefloeAiTerrain, GowiththefloeAiTerrainLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeBoardHeight, GowiththefloeBoardWidth, GowiththefloeCommand, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloePosition, GowiththefloeTurnPos, GowiththefloeTurnVar>;
 export type GowiththefloeGraphics = Graphics<GowiththefloeTerrain, GowiththefloeUnit>;
 export type GowiththefloeInstructions = Instructions<GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloePhase, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;

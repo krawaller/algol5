@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type ThreemusketeersBoardHeight = 5;
 export type ThreemusketeersBoardWidth = 5;
@@ -9,7 +9,7 @@ export type ThreemusketeersMark = "selectunit" | "selectmovetarget";
 export type ThreemusketeersCommand = "move";
 export type ThreemusketeersPhaseCommand = never;
 export type ThreemusketeersPhase = "startTurn" | ThreemusketeersMark;
-export type ThreemusketeersUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "pawns" | "mypawns" | "opppawns" | "neutralpawns" | "kings" | "mykings" | "oppkings" | "neutralkings";
+export type ThreemusketeersUnitLayer = "units" | "myunits" | "oppunits" | "pawns" | "kings";
 export type ThreemusketeersGenerator = "findstrandedmusketeers" | "findmusketeerline" | "findmovetargets";
 export type ThreemusketeersArtifactLayer = "strandedmusketeers" | "musketeerline" | "movetargets";
 export type ThreemusketeersTerrainLayer = never;
@@ -21,7 +21,7 @@ export type ThreemusketeersTurnVar = any;
  
 export type ThreemusketeersGenerators = Generators<ThreemusketeersArtifactLayer, ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersTurnPos, ThreemusketeersTurnVar>;
 export type ThreemusketeersFlow = Flow<ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersUnit>;
-export type ThreemusketeersBoard = Board<ThreemusketeersBoardHeight, ThreemusketeersBoardWidth, ThreemusketeersGrid, ThreemusketeersPosition, ThreemusketeersTerrain>;
+export type ThreemusketeersBoard = AlgolBoard<ThreemusketeersBoardHeight, ThreemusketeersBoardWidth, ThreemusketeersGrid, ThreemusketeersPosition, ThreemusketeersTerrain>;
 export type ThreemusketeersAI = AI<ThreemusketeersAiArtifactLayer, ThreemusketeersAiAspect, ThreemusketeersAiBrain, ThreemusketeersAiGenerator, ThreemusketeersAiGrid, ThreemusketeersAiTerrain, ThreemusketeersAiTerrainLayer, ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersBoardHeight, ThreemusketeersBoardWidth, ThreemusketeersCommand, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersPosition, ThreemusketeersTurnPos, ThreemusketeersTurnVar>;
 export type ThreemusketeersGraphics = Graphics<ThreemusketeersTerrain, ThreemusketeersUnit>;
 export type ThreemusketeersInstructions = Instructions<ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersPhase, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersUnit>;

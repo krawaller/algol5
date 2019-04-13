@@ -10,7 +10,7 @@ export * from "./graphics";
 
 import { Generators } from "./generators";
 import { Graphics } from "./graphics";
-import { Board } from "./board";
+import { AlgolBoard } from "./board";
 import { AI } from "./ai";
 import { Setup } from "./setup";
 import { Instructions } from "./instructions";
@@ -89,7 +89,7 @@ export type FullDef<
     TurnPos,
     TurnVar
   >;
-  board: Board<BoardHeight, BoardWidth, Grid, Position, Terrain>;
+  board: AlgolBoard<BoardHeight, BoardWidth, Grid, Position, Terrain>;
   setup: Setup<Position, Unit>;
   graphics: Graphics<Terrain, Unit>;
   grids?: { [g in Grid]: any };

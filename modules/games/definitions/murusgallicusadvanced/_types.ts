@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type MurusgallicusadvancedBoardHeight = 7;
 export type MurusgallicusadvancedBoardWidth = 8;
@@ -9,7 +9,7 @@ export type MurusgallicusadvancedMark = "selecttower" | "selectmove" | "selectki
 export type MurusgallicusadvancedCommand = "move" | "kill" | "sacrifice" | "fire";
 export type MurusgallicusadvancedPhaseCommand = never;
 export type MurusgallicusadvancedPhase = "startTurn" | MurusgallicusadvancedMark;
-export type MurusgallicusadvancedUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "towers" | "mytowers" | "opptowers" | "neutraltowers" | "walls" | "mywalls" | "oppwalls" | "neutralwalls" | "catapults" | "mycatapults" | "oppcatapults" | "neutralcatapults";
+export type MurusgallicusadvancedUnitLayer = "units" | "myunits" | "oppunits" | "towers" | "mytowers" | "opptowers" | "walls" | "mywalls" | "oppwalls" | "catapults" | "mycatapults" | "oppcatapults";
 export type MurusgallicusadvancedGenerator = "findfiretargets" | "findmovetargets" | "findmoveresults" | "findkilltargets";
 export type MurusgallicusadvancedArtifactLayer = "firetargets" | "movetargets" | "madecatapults" | "madetowers" | "madewalls" | "killtargets";
 export type MurusgallicusadvancedTerrainLayer = "homerow" | "myhomerow" | "opphomerow" | "nohomerow";
@@ -21,7 +21,7 @@ export type MurusgallicusadvancedTurnVar = any;
  
 export type MurusgallicusadvancedGenerators = Generators<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar>;
 export type MurusgallicusadvancedFlow = Flow<MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedUnit>;
-export type MurusgallicusadvancedBoard = Board<MurusgallicusadvancedBoardHeight, MurusgallicusadvancedBoardWidth, MurusgallicusadvancedGrid, MurusgallicusadvancedPosition, MurusgallicusadvancedTerrain>;
+export type MurusgallicusadvancedBoard = AlgolBoard<MurusgallicusadvancedBoardHeight, MurusgallicusadvancedBoardWidth, MurusgallicusadvancedGrid, MurusgallicusadvancedPosition, MurusgallicusadvancedTerrain>;
 export type MurusgallicusadvancedAI = AI<MurusgallicusadvancedAiArtifactLayer, MurusgallicusadvancedAiAspect, MurusgallicusadvancedAiBrain, MurusgallicusadvancedAiGenerator, MurusgallicusadvancedAiGrid, MurusgallicusadvancedAiTerrain, MurusgallicusadvancedAiTerrainLayer, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedBoardHeight, MurusgallicusadvancedBoardWidth, MurusgallicusadvancedCommand, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedPosition, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar>;
 export type MurusgallicusadvancedGraphics = Graphics<MurusgallicusadvancedTerrain, MurusgallicusadvancedUnit>;
 export type MurusgallicusadvancedInstructions = Instructions<MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedPhase, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedUnit>;

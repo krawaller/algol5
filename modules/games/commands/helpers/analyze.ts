@@ -63,7 +63,7 @@ export default async function analyze(def: FullDefAnon | string) {
   const aiBrains = Object.keys(AI.brains);
   const aiArtifactLayerNames = Object.keys(emptyArtifactLayers(AI.generators));
 
-  const analysis = `import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+  const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type ${capId}BoardHeight = ${def.board.height};
 export type ${capId}BoardWidth = ${def.board.width};
@@ -123,7 +123,7 @@ export type ${capId}Generators = Generators<${typeSignature(
     gameId
   )}>;
 export type ${capId}Flow = Flow<${typeSignature("Flow", gameId)}>;
-export type ${capId}Board = Board<${typeSignature("Board", gameId)}>;
+export type ${capId}Board = AlgolBoard<${typeSignature("AlgolBoard", gameId)}>;
 export type ${capId}AI = AI<${typeSignature("AI", gameId)}>;
 export type ${capId}Graphics = Graphics<${typeSignature("Graphics", gameId)}>;
 export type ${capId}Instructions = Instructions<${typeSignature(

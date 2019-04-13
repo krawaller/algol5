@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type AriesBoardHeight = 8;
 export type AriesBoardWidth = 8;
@@ -9,7 +9,7 @@ export type AriesMark = "selectunit" | "selectmovetarget";
 export type AriesCommand = "move";
 export type AriesPhaseCommand = never;
 export type AriesPhase = "startTurn" | AriesMark;
-export type AriesUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "soldiers" | "mysoldiers" | "oppsoldiers" | "neutralsoldiers";
+export type AriesUnitLayer = "units" | "myunits" | "oppunits";
 export type AriesGenerator = "findmovetargets" | "findpushresults";
 export type AriesArtifactLayer = "movetargets" | "beingpushed" | "squished";
 export type AriesTerrainLayer = "corner" | "mycorner" | "oppcorner" | "nocorner";
@@ -21,7 +21,7 @@ export type AriesTurnVar = any;
  
 export type AriesGenerators = Generators<AriesArtifactLayer, AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesGrid, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar>;
 export type AriesFlow = Flow<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGenerator, AriesGrid, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar, AriesUnit>;
-export type AriesBoard = Board<AriesBoardHeight, AriesBoardWidth, AriesGrid, AriesPosition, AriesTerrain>;
+export type AriesBoard = AlgolBoard<AriesBoardHeight, AriesBoardWidth, AriesGrid, AriesPosition, AriesTerrain>;
 export type AriesAI = AI<AriesAiArtifactLayer, AriesAiAspect, AriesAiBrain, AriesAiGenerator, AriesAiGrid, AriesAiTerrain, AriesAiTerrainLayer, AriesBattlePos, AriesBattleVar, AriesBoardHeight, AriesBoardWidth, AriesCommand, AriesGrid, AriesLayer, AriesMark, AriesPosition, AriesTurnPos, AriesTurnVar>;
 export type AriesGraphics = Graphics<AriesTerrain, AriesUnit>;
 export type AriesInstructions = Instructions<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesTurnPos, AriesTurnVar, AriesUnit>;

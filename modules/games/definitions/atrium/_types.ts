@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type AtriumBoardHeight = 5;
 export type AtriumBoardWidth = 5;
@@ -9,7 +9,7 @@ export type AtriumMark = "selectunit" | "selectmovetarget";
 export type AtriumCommand = "move";
 export type AtriumPhaseCommand = never;
 export type AtriumPhase = "startTurn" | AtriumMark;
-export type AtriumUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "kings" | "mykings" | "oppkings" | "neutralkings" | "queens" | "myqueens" | "oppqueens" | "neutralqueens";
+export type AtriumUnitLayer = "units" | "myunits" | "oppunits" | "mykings" | "oppkings" | "myqueens" | "oppqueens";
 export type AtriumGenerator = "findmovetargets" | "findwinlines";
 export type AtriumArtifactLayer = "movetargets" | "winline";
 export type AtriumTerrainLayer = never;
@@ -21,7 +21,7 @@ export type AtriumTurnVar = any;
  
 export type AtriumGenerators = Generators<AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar>;
 export type AtriumFlow = Flow<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
-export type AtriumBoard = Board<AtriumBoardHeight, AtriumBoardWidth, AtriumGrid, AtriumPosition, AtriumTerrain>;
+export type AtriumBoard = AlgolBoard<AtriumBoardHeight, AtriumBoardWidth, AtriumGrid, AtriumPosition, AtriumTerrain>;
 export type AtriumAI = AI<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumBattlePos, AtriumBattleVar, AtriumBoardHeight, AtriumBoardWidth, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPosition, AtriumTurnPos, AtriumTurnVar>;
 export type AtriumGraphics = Graphics<AtriumTerrain, AtriumUnit>;
 export type AtriumInstructions = Instructions<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type DuploBoardHeight = 8;
 export type DuploBoardWidth = 8;
@@ -9,7 +9,7 @@ export type DuploMark = "selectdeploy" | "selectunit" | "selecttarget";
 export type DuploCommand = "deploy" | "expand";
 export type DuploPhaseCommand = "deploy";
 export type DuploPhase = "startTurn" | DuploMark | DuploPhaseCommand;
-export type DuploUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "soldiers" | "mysoldiers" | "oppsoldiers" | "neutralsoldiers";
+export type DuploUnitLayer = "units" | "myunits" | "oppunits" | "soldiers" | "mysoldiers" | "oppsoldiers";
 export type DuploGenerator = "findspawndirs" | "findgrowstarts" | "findexpandpoints" | "findoppstrengths" | "findspawns";
 export type DuploArtifactLayer = "spawndirs" | "growstarts" | "targets" | "potentialopptargets" | "spawns";
 export type DuploTerrainLayer = never;
@@ -21,7 +21,7 @@ export type DuploTurnVar = any;
  
 export type DuploGenerators = Generators<DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
 export type DuploFlow = Flow<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar, DuploUnit>;
-export type DuploBoard = Board<DuploBoardHeight, DuploBoardWidth, DuploGrid, DuploPosition, DuploTerrain>;
+export type DuploBoard = AlgolBoard<DuploBoardHeight, DuploBoardWidth, DuploGrid, DuploPosition, DuploTerrain>;
 export type DuploAI = AI<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploBattlePos, DuploBattleVar, DuploBoardHeight, DuploBoardWidth, DuploCommand, DuploGrid, DuploLayer, DuploMark, DuploPosition, DuploTurnPos, DuploTurnVar>;
 export type DuploGraphics = Graphics<DuploTerrain, DuploUnit>;
 export type DuploInstructions = Instructions<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGrid, DuploLayer, DuploMark, DuploPhase, DuploTurnPos, DuploTurnVar, DuploUnit>;

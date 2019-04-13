@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type MurusgallicusBoardHeight = 7;
 export type MurusgallicusBoardWidth = 8;
@@ -9,7 +9,7 @@ export type MurusgallicusMark = "selecttower" | "selectmove" | "selectkill";
 export type MurusgallicusCommand = "move" | "kill";
 export type MurusgallicusPhaseCommand = never;
 export type MurusgallicusPhase = "startTurn" | MurusgallicusMark;
-export type MurusgallicusUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "towers" | "mytowers" | "opptowers" | "neutraltowers" | "walls" | "mywalls" | "oppwalls" | "neutralwalls";
+export type MurusgallicusUnitLayer = "units" | "myunits" | "oppunits" | "towers" | "mytowers" | "opptowers" | "walls" | "mywalls" | "oppwalls";
 export type MurusgallicusGenerator = "findmovetargets" | "findmoveresults" | "findkilltargets";
 export type MurusgallicusArtifactLayer = "movetargets" | "madetowers" | "madewalls" | "killtargets";
 export type MurusgallicusTerrainLayer = "homerow" | "myhomerow" | "opphomerow" | "nohomerow";
@@ -21,7 +21,7 @@ export type MurusgallicusTurnVar = any;
  
 export type MurusgallicusGenerators = Generators<MurusgallicusArtifactLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar>;
 export type MurusgallicusFlow = Flow<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGenerator, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
-export type MurusgallicusBoard = Board<MurusgallicusBoardHeight, MurusgallicusBoardWidth, MurusgallicusGrid, MurusgallicusPosition, MurusgallicusTerrain>;
+export type MurusgallicusBoard = AlgolBoard<MurusgallicusBoardHeight, MurusgallicusBoardWidth, MurusgallicusGrid, MurusgallicusPosition, MurusgallicusTerrain>;
 export type MurusgallicusAI = AI<MurusgallicusAiArtifactLayer, MurusgallicusAiAspect, MurusgallicusAiBrain, MurusgallicusAiGenerator, MurusgallicusAiGrid, MurusgallicusAiTerrain, MurusgallicusAiTerrainLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusBoardHeight, MurusgallicusBoardWidth, MurusgallicusCommand, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPosition, MurusgallicusTurnPos, MurusgallicusTurnVar>;
 export type MurusgallicusGraphics = Graphics<MurusgallicusTerrain, MurusgallicusUnit>;
 export type MurusgallicusInstructions = Instructions<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPhase, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;

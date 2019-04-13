@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type SemaphorBoardHeight = 3;
 export type SemaphorBoardWidth = 4;
@@ -9,7 +9,7 @@ export type SemaphorMark = "selectdeploytarget" | "selectunit";
 export type SemaphorCommand = "deploy" | "promote";
 export type SemaphorPhaseCommand = never;
 export type SemaphorPhase = "startTurn" | SemaphorMark;
-export type SemaphorUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "kings" | "mykings" | "oppkings" | "neutralkings" | "pawns" | "mypawns" | "opppawns" | "neutralpawns" | "bishops" | "mybishops" | "oppbishops" | "neutralbishops";
+export type SemaphorUnitLayer = "units" | "kings" | "pawns" | "bishops";
 export type SemaphorGenerator = "findlines";
 export type SemaphorArtifactLayer = "line";
 export type SemaphorTerrainLayer = never;
@@ -21,7 +21,7 @@ export type SemaphorTurnVar = any;
  
 export type SemaphorGenerators = Generators<SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar>;
 export type SemaphorFlow = Flow<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
-export type SemaphorBoard = Board<SemaphorBoardHeight, SemaphorBoardWidth, SemaphorGrid, SemaphorPosition, SemaphorTerrain>;
+export type SemaphorBoard = AlgolBoard<SemaphorBoardHeight, SemaphorBoardWidth, SemaphorGrid, SemaphorPosition, SemaphorTerrain>;
 export type SemaphorAI = AI<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorBoardHeight, SemaphorBoardWidth, SemaphorCommand, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPosition, SemaphorTurnPos, SemaphorTurnVar>;
 export type SemaphorGraphics = Graphics<SemaphorTerrain, SemaphorUnit>;
 export type SemaphorInstructions = Instructions<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;

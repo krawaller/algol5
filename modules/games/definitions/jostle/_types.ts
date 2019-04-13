@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type JostleBoardHeight = 10;
 export type JostleBoardWidth = 10;
@@ -9,7 +9,7 @@ export type JostleMark = "selectunit" | "selectmovetarget";
 export type JostleCommand = "jostle";
 export type JostlePhaseCommand = never;
 export type JostlePhase = "startTurn" | JostleMark;
-export type JostleUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "checkers" | "mycheckers" | "oppcheckers" | "neutralcheckers";
+export type JostleUnitLayer = "units" | "myunits" | "oppunits" | "mycheckers" | "oppcheckers";
 export type JostleGenerator = "findinitial" | "findnew";
 export type JostleArtifactLayer = "movetargets" | "initialenemy" | "initialfriend" | "newenemy" | "newfriend";
 export type JostleTerrainLayer = never;
@@ -21,7 +21,7 @@ export type JostleTurnVar = any;
  
 export type JostleGenerators = Generators<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
 export type JostleFlow = Flow<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar, JostleUnit>;
-export type JostleBoard = Board<JostleBoardHeight, JostleBoardWidth, JostleGrid, JostlePosition, JostleTerrain>;
+export type JostleBoard = AlgolBoard<JostleBoardHeight, JostleBoardWidth, JostleGrid, JostlePosition, JostleTerrain>;
 export type JostleAI = AI<JostleAiArtifactLayer, JostleAiAspect, JostleAiBrain, JostleAiGenerator, JostleAiGrid, JostleAiTerrain, JostleAiTerrainLayer, JostleBattlePos, JostleBattleVar, JostleBoardHeight, JostleBoardWidth, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostlePosition, JostleTurnPos, JostleTurnVar>;
 export type JostleGraphics = Graphics<JostleTerrain, JostleUnit>;
 export type JostleInstructions = Instructions<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostlePhase, JostleTurnPos, JostleTurnVar, JostleUnit>;

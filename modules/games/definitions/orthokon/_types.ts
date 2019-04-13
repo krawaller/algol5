@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type OrthokonBoardHeight = 4;
 export type OrthokonBoardWidth = 4;
@@ -9,7 +9,7 @@ export type OrthokonMark = "selectunit" | "selectmovetarget";
 export type OrthokonCommand = "move";
 export type OrthokonPhaseCommand = never;
 export type OrthokonPhase = "startTurn" | OrthokonMark;
-export type OrthokonUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "soldiers" | "mysoldiers" | "oppsoldiers" | "neutralsoldiers";
+export type OrthokonUnitLayer = "units" | "myunits" | "oppunits";
 export type OrthokonGenerator = "findvictims" | "findmovetargets";
 export type OrthokonArtifactLayer = "victims" | "movetargets";
 export type OrthokonTerrainLayer = never;
@@ -21,7 +21,7 @@ export type OrthokonTurnVar = any;
  
 export type OrthokonGenerators = Generators<OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar>;
 export type OrthokonFlow = Flow<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
-export type OrthokonBoard = Board<OrthokonBoardHeight, OrthokonBoardWidth, OrthokonGrid, OrthokonPosition, OrthokonTerrain>;
+export type OrthokonBoard = AlgolBoard<OrthokonBoardHeight, OrthokonBoardWidth, OrthokonGrid, OrthokonPosition, OrthokonTerrain>;
 export type OrthokonAI = AI<OrthokonAiArtifactLayer, OrthokonAiAspect, OrthokonAiBrain, OrthokonAiGenerator, OrthokonAiGrid, OrthokonAiTerrain, OrthokonAiTerrainLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonBoardHeight, OrthokonBoardWidth, OrthokonCommand, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPosition, OrthokonTurnPos, OrthokonTurnVar>;
 export type OrthokonGraphics = Graphics<OrthokonTerrain, OrthokonUnit>;
 export type OrthokonInstructions = Instructions<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;

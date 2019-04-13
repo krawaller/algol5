@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type SerauqsBoardHeight = 4;
 export type SerauqsBoardWidth = 4;
@@ -9,7 +9,7 @@ export type SerauqsMark = "selectunit" | "selectmovetarget";
 export type SerauqsCommand = "promote" | "move";
 export type SerauqsPhaseCommand = never;
 export type SerauqsPhase = "startTurn" | SerauqsMark;
-export type SerauqsUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "soldiers" | "mysoldiers" | "oppsoldiers" | "neutralsoldiers" | "wild" | "mywild" | "oppwild" | "neutralwild";
+export type SerauqsUnitLayer = "units" | "myunits" | "oppunits" | "wild" | "mywild" | "oppwild";
 export type SerauqsGenerator = "findmovetargets" | "findwinline";
 export type SerauqsArtifactLayer = "movetargets" | "winline";
 export type SerauqsTerrainLayer = "base" | "mybase" | "oppbase" | "corners" | "middle" | "nobase" | "nocorners" | "nomiddle";
@@ -21,7 +21,7 @@ export type SerauqsTurnVar = any;
  
 export type SerauqsGenerators = Generators<SerauqsArtifactLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar>;
 export type SerauqsFlow = Flow<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
-export type SerauqsBoard = Board<SerauqsBoardHeight, SerauqsBoardWidth, SerauqsGrid, SerauqsPosition, SerauqsTerrain>;
+export type SerauqsBoard = AlgolBoard<SerauqsBoardHeight, SerauqsBoardWidth, SerauqsGrid, SerauqsPosition, SerauqsTerrain>;
 export type SerauqsAI = AI<SerauqsAiArtifactLayer, SerauqsAiAspect, SerauqsAiBrain, SerauqsAiGenerator, SerauqsAiGrid, SerauqsAiTerrain, SerauqsAiTerrainLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsBoardHeight, SerauqsBoardWidth, SerauqsCommand, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsPosition, SerauqsTurnPos, SerauqsTurnVar>;
 export type SerauqsGraphics = Graphics<SerauqsTerrain, SerauqsUnit>;
 export type SerauqsInstructions = Instructions<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsPhase, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;

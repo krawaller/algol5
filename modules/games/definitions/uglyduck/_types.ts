@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type UglyduckBoardHeight = 5;
 export type UglyduckBoardWidth = 5;
@@ -9,7 +9,7 @@ export type UglyduckMark = "selectunit" | "selectmovetarget";
 export type UglyduckCommand = "move";
 export type UglyduckPhaseCommand = never;
 export type UglyduckPhase = "startTurn" | UglyduckMark;
-export type UglyduckUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "soldiers" | "mysoldiers" | "oppsoldiers" | "neutralsoldiers" | "kings" | "mykings" | "oppkings" | "neutralkings";
+export type UglyduckUnitLayer = "units" | "myunits" | "oppunits" | "mysoldiers" | "oppsoldiers" | "mykings" | "oppkings";
 export type UglyduckGenerator = "findmovetargets";
 export type UglyduckArtifactLayer = "movetargets";
 export type UglyduckTerrainLayer = "homerow" | "myhomerow" | "opphomerow" | "nohomerow";
@@ -21,7 +21,7 @@ export type UglyduckTurnVar = any;
  
 export type UglyduckGenerators = Generators<UglyduckArtifactLayer, UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGenerator, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckTurnPos, UglyduckTurnVar>;
 export type UglyduckFlow = Flow<UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGenerator, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckTurnPos, UglyduckTurnVar, UglyduckUnit>;
-export type UglyduckBoard = Board<UglyduckBoardHeight, UglyduckBoardWidth, UglyduckGrid, UglyduckPosition, UglyduckTerrain>;
+export type UglyduckBoard = AlgolBoard<UglyduckBoardHeight, UglyduckBoardWidth, UglyduckGrid, UglyduckPosition, UglyduckTerrain>;
 export type UglyduckAI = AI<UglyduckAiArtifactLayer, UglyduckAiAspect, UglyduckAiBrain, UglyduckAiGenerator, UglyduckAiGrid, UglyduckAiTerrain, UglyduckAiTerrainLayer, UglyduckBattlePos, UglyduckBattleVar, UglyduckBoardHeight, UglyduckBoardWidth, UglyduckCommand, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckPosition, UglyduckTurnPos, UglyduckTurnVar>;
 export type UglyduckGraphics = Graphics<UglyduckTerrain, UglyduckUnit>;
 export type UglyduckInstructions = Instructions<UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckPhase, UglyduckTurnPos, UglyduckTurnVar, UglyduckUnit>;

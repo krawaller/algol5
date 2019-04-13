@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, Board, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type KriegBoardHeight = 4;
 export type KriegBoardWidth = 4;
@@ -9,7 +9,7 @@ export type KriegMark = "selectunit" | "selectmove";
 export type KriegCommand = "move";
 export type KriegPhaseCommand = never;
 export type KriegPhase = "startTurn" | KriegMark;
-export type KriegUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "notfrozens" | "mynotfrozens" | "oppnotfrozens" | "neutralnotfrozens" | "frozens" | "myfrozens" | "oppfrozens" | "neutralfrozens";
+export type KriegUnitLayer = "units" | "myunits" | "oppunits" | "mynotfrozens" | "oppnotfrozens" | "myfrozens" | "oppfrozens";
 export type KriegGenerator = "findmovetargets";
 export type KriegArtifactLayer = "movetargets";
 export type KriegTerrainLayer = "southeast" | "northwest" | "corners" | "mycorners" | "oppcorners" | "bases" | "mybases" | "oppbases" | "nosoutheast" | "nonorthwest" | "nocorners" | "nobases";
@@ -21,7 +21,7 @@ export type KriegTurnVar = any;
  
 export type KriegGenerators = Generators<KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegGrid, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar>;
 export type KriegFlow = Flow<KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegGrid, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar, KriegUnit>;
-export type KriegBoard = Board<KriegBoardHeight, KriegBoardWidth, KriegGrid, KriegPosition, KriegTerrain>;
+export type KriegBoard = AlgolBoard<KriegBoardHeight, KriegBoardWidth, KriegGrid, KriegPosition, KriegTerrain>;
 export type KriegAI = AI<KriegAiArtifactLayer, KriegAiAspect, KriegAiBrain, KriegAiGenerator, KriegAiGrid, KriegAiTerrain, KriegAiTerrainLayer, KriegBattlePos, KriegBattleVar, KriegBoardHeight, KriegBoardWidth, KriegCommand, KriegGrid, KriegLayer, KriegMark, KriegPosition, KriegTurnPos, KriegTurnVar>;
 export type KriegGraphics = Graphics<KriegTerrain, KriegUnit>;
 export type KriegInstructions = Instructions<KriegBattlePos, KriegBattleVar, KriegCommand, KriegGrid, KriegLayer, KriegMark, KriegPhase, KriegTurnPos, KriegTurnVar, KriegUnit>;

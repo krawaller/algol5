@@ -10,7 +10,7 @@ export function posConnections(pos, board) {
     return (board.offsets || []).reduce(function(innermem, [forward, right]) {
       var newpos = offsetPos(pos, dir, forward, right, board);
       if (newpos) {
-        innermem["o" + dir + "_" + forward + "_" + right] = newpos;
+        innermem[dir + "_" + forward + "_" + right] = newpos;
       }
       return innermem;
     }, mem);

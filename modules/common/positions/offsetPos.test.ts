@@ -1,7 +1,7 @@
 import { offsetPos } from "..";
-import { BoardAnon } from "../../types";
+import { AlgolBoardAnon } from "../../types";
 
-const testBoard: BoardAnon = { height: 3, width: 4 };
+const testBoard: AlgolBoardAnon = { height: 3, width: 4 };
 
 type OffsetTest = {
   pos: string;

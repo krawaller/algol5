@@ -1,5 +1,6 @@
 export * from "./terrain";
 export * from "./grid";
+export * from "./offset";
 
 import { TerrainDef } from "./terrain";
 import { AlgolGrid } from "./grid";
@@ -20,4 +21,4 @@ export type AlgolBoard<
   grids?: { [name in Grid]: AlgolGrid<BoardHeight, BoardWidth> };
 };
 
-export type BoardAnon = AlgolBoard<number, number, string, string, string>;
+export type AlgolBoardAnon = AlgolBoard<number, number, string, string, string>;

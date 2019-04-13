@@ -1,8 +1,8 @@
-import { BoardAnon } from "../../types";
+import { AlgolBoardAnon } from "../../types";
 import { terrainLayers } from "..";
 
 type TerrainTest = {
-  board: BoardAnon;
+  board: AlgolBoardAnon;
   expected: {
     [terrainName: string]: {
       [pos: string]: {

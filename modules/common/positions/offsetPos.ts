@@ -1,4 +1,4 @@
-import { BoardAnon } from "../../types";
+import { AlgolBoardAnon } from "../../types";
 import { pos2coords, coords2pos } from "../";
 
 export function offsetPos(
@@ -6,7 +6,7 @@ export function offsetPos(
   dir,
   forward,
   right,
-  board: BoardAnon
+  board: AlgolBoardAnon
 ): string | false {
   const forwardmods = [
     [0, 1],

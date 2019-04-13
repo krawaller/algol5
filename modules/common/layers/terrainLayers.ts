@@ -1,11 +1,15 @@
-import { BoardAnon } from "../../types";
+import { AlgolBoardAnon } from "../../types";
 import { processEntity, boardPositions } from "../";
 
 /*
 Calculates all terrain layers and returns them. 
 This should be done per player if any terrain has owner.
 */
-export function terrainLayers(board: BoardAnon, forplayer?, aiterrain?): any {
+export function terrainLayers(
+  board: AlgolBoardAnon,
+  forplayer?,
+  aiterrain?
+): any {
   let terrainDef = { ...board.terrain, ...aiterrain };
   if (!Object.keys(terrainDef).length) {
     return {};

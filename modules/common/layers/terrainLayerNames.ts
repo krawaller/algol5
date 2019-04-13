@@ -1,7 +1,7 @@
 import { terrainLayers } from "../";
-import { BoardAnon } from "../../types";
+import { AlgolBoardAnon } from "../../types";
 
-export function terrainLayerNames(board: BoardAnon) {
+export function terrainLayerNames(board: AlgolBoardAnon) {
   return Object.keys({
     ...terrainLayers(board, 1),
     ...terrainLayers(board, 2)

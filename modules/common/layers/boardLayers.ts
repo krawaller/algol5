@@ -1,10 +1,10 @@
-import { BoardAnon } from "../../types";
+import { AlgolBoardAnon } from "../../types";
 import { boardPositions, pos2coords } from "../";
 
 /*
 Calculates the three BOARD layers (board,light,dark) and returns them.
 */
-export function boardLayers(board: BoardAnon) {
+export function boardLayers(board: AlgolBoardAnon) {
   return boardPositions(board).reduce(
     function(mem, pos) {
       var coords = pos2coords(pos);

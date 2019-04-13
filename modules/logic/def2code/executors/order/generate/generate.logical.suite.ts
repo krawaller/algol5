@@ -17,7 +17,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         generators: {
           simpleOrthoReacher: {
             type: "neighbour",
-            dirs: ["ortho"],
+            dirs: "ortho",
             start: "markb2",
             draw: { neighbours: { tolayer: "neighbours" } }
           }

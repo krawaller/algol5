@@ -43,7 +43,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           },
           drawBlocks: {
             type: "walker",
-            dirs: ["rose"],
+            dirs: "rose",
             start: "marka1",
             blocks: { singles: ["marka3", "marka4", "markd4"] },
             draw: { block: { tolayer: "flarps" } }

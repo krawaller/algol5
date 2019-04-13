@@ -4,7 +4,7 @@ const amazonsAI: AmazonsAI = {
   generators: {
     findroads: {
       type: "neighbour",
-      dirs: ["rose"],
+      dirs: "rose",
       starts: "queens",
       unlessover: "units",
       draw: {
@@ -18,7 +18,7 @@ const amazonsAI: AmazonsAI = {
     },
     findreach: {
       type: "walker",
-      dirs: ["rose"],
+      dirs: "rose",
       starts: "queens",
       blocks: "units",
       draw: {

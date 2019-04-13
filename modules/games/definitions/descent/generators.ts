@@ -1,9 +1,9 @@
-import { DescentGenerators } from './_types';
+import { DescentGenerators } from "./_types";
 
 const descentGenerators: DescentGenerators = {
   findmovetargets: {
     type: "neighbour",
-    dirs: ["rose"],
+    dirs: "rose",
     start: "selectunit",
     condition: {
       ifelse: [
@@ -22,14 +22,14 @@ const descentGenerators: DescentGenerators = {
   },
   finddigtargets: {
     type: "neighbour",
-    dirs: ["rose"],
+    dirs: "rose",
     start: { turnpos: "movedto" },
     ifover: "neutralunits",
     draw: { neighbours: { tolayer: "digtargets" } }
   },
   findwinlines: {
     type: "walker",
-    dirs: ["rose"],
+    dirs: "rose",
     starts: "myunits",
     startasstep: true,
     steps: {

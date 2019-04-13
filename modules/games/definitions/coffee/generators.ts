@@ -1,9 +1,9 @@
-import { CoffeeGenerators } from './_types';
+import { CoffeeGenerators } from "./_types";
 
 const coffeeGenerators: CoffeeGenerators = {
   findgeneratees: {
     type: "walker",
-    dirs: ["rose"],
+    dirs: "rose",
     start: "selectdrop",
     draw: {
       steps: {
@@ -27,7 +27,7 @@ const coffeeGenerators: CoffeeGenerators = {
   },
   findwinlines: {
     type: "walker",
-    dirs: ["rose"],
+    dirs: "rose",
     starts: "myunits",
     steps: "myunits",
     startasstep: true,

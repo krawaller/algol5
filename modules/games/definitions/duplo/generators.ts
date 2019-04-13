@@ -1,9 +1,9 @@
-import { DuploGenerators } from './_types';
+import { DuploGenerators } from "./_types";
 
 const duploGenerators: DuploGenerators = {
   findspawndirs: {
     type: "neighbour",
-    dirs: ["rose"],
+    dirs: "rose",
     start: "selectunit",
     draw: {
       neighbours: {

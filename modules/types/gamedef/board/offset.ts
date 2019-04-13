@@ -1,3 +1,5 @@
+import { AlgolDirsInner } from "../../";
+
 type Modifier =
   | -9
   | -8
@@ -21,10 +23,9 @@ type Modifier =
 type OffsetForward = Modifier;
 type OffsetRight = Modifier;
 type BasicDir = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-type Dirs = BasicDir[] | "ortho" | "diag" | "rose";
 
 export type AlgolOffsetBasic = [BasicDir[], OffsetForward, OffsetRight];
 export type AlgolOffset =
   | AlgolOffsetBasic
-  | [Dirs, OffsetForward, OffsetRight]
+  | [AlgolDirsInner, OffsetForward, OffsetRight]
   | "knight";

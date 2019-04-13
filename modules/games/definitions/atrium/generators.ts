@@ -1,10 +1,10 @@
-import { AtriumGenerators } from './_types';
+import { AtriumGenerators } from "./_types";
 
 const atriumGenerators: AtriumGenerators = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",
-    dirs: ["ortho"],
+    dirs: "ortho",
     unlessover: "units",
     draw: { neighbours: { tolayer: "movetargets" } }
   },
@@ -12,7 +12,7 @@ const atriumGenerators: AtriumGenerators = {
     type: "walker",
     starts: "myunits",
     startasstep: true,
-    dirs: ["rose"],
+    dirs: "rose",
     steps: {
       ifelse: [{ anyat: ["mykings", ["start"]] }, "mykings", "myqueens"]
     },

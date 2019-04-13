@@ -1,16 +1,16 @@
-import { GowiththefloeGenerators } from './_types';
+import { GowiththefloeGenerators } from "./_types";
 
 const gowiththefloeGenerators: GowiththefloeGenerators = {
   findeattargets: {
     type: "neighbour",
-    dirs: ["rose"],
+    dirs: "rose",
     start: "selectunit",
     ifover: "seals",
     draw: { neighbours: { tolayer: "eattargets" } }
   },
   findmovetargets: {
     type: "walker",
-    dirs: ["rose"],
+    dirs: "rose",
     start: "selectunit",
     max: 2,
     blocks: { union: ["seals", "bears", "water"] },
@@ -24,7 +24,7 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
   },
   findsealsmoves: {
     type: "walker",
-    dirs: ["rose"],
+    dirs: "rose",
     starts: "seals",
     max: 2,
     count: { subtract: ["nowater", "holes"] },

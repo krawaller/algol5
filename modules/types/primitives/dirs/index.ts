@@ -1,8 +1,4 @@
 export * from "./dirs.anon";
-export * from "./dirs.interfaces";
-export * from "./dirs.guard";
-
-import { AlgolDirsList } from "./dirs.interfaces";
 
 import { AlgolExpression } from "../../";
 
@@ -16,7 +12,7 @@ export type AlgolDirs<
   Turnp,
   Turnv
 > = AlgolExpression<
-  AlgolDirsInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+  AlgolDirsInner,
   Btlp,
   Btlv,
   Cmnd,
@@ -27,8 +23,8 @@ export type AlgolDirs<
   Turnv
 >;
 
-type AlgolDirsInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
-  | ["ortho"]
-  | ["diag"]
-  | ["rose"]
-  | AlgolDirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export type AlgolDirsInner =
+  | "ortho"
+  | "diag"
+  | "rose"
+  | (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8)[];

@@ -32,7 +32,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           },
           singleStartOrthoDrawNeighbours: {
             type: "neighbour",
-            dirs: ["ortho"],
+            dirs: "ortho",
             start: "mymark",
             draw: { neighbours: { tolayer: "flarps" } }
           },
@@ -44,13 +44,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           },
           multiStartMultiDirDrawNeighbours: {
             type: "neighbour",
-            dirs: { list: [1, 3] },
+            dirs: [1, 3],
             starts: { singles: ["mymark", "myothermark"] },
             draw: { neighbours: { tolayer: "flarps" } }
           },
           singleStartMultiDirInclNeighCount: {
             type: "neighbour",
-            dirs: ["rose"],
+            dirs: "rose",
             start: "mymark",
             draw: {
               start: {

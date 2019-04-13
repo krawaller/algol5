@@ -3,7 +3,7 @@ import { AmazonsGenerators } from "./_types";
 const amazonsGenerators: AmazonsGenerators = {
   findtargets: {
     type: "walker",
-    dirs: ["rose"],
+    dirs: "rose",
     start: {
       ifactionelse: ["selectunit", "selectunit", "selectmovetarget"]
     },

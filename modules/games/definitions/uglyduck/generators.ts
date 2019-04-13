@@ -1,4 +1,4 @@
-import { UglyduckGenerators } from './_types';
+import { UglyduckGenerators } from "./_types";
 
 const uglyduckGenerators: UglyduckGenerators = {
   findmovetargets: {
@@ -7,8 +7,8 @@ const uglyduckGenerators: UglyduckGenerators = {
     dirs: {
       ifelse: [
         { anyat: ["mykings", "selectunit"] },
-        { playercase: [{ list: [4, 5, 6] }, { list: [8, 1, 2] }] },
-        { playercase: [{ list: [8, 1, 2] }, { list: [4, 5, 6] }] }
+        { playercase: [[4, 5, 6], [8, 1, 2]] },
+        { playercase: [[8, 1, 2], [4, 5, 6]] }
       ]
     },
     condition: {

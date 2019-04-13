@@ -27,7 +27,7 @@ const murusgallicusAI: MurusgallicusAI = {
   generators: {
     findmymoves: {
       type: "walker",
-      dirs: ["rose"],
+      dirs: "rose",
       blocks: { union: ["towers", "oppwalls"] },
       starts: "mytowers",
       max: 2,
@@ -42,7 +42,7 @@ const murusgallicusAI: MurusgallicusAI = {
     },
     findoppmoves: {
       type: "walker",
-      dirs: ["rose"],
+      dirs: "rose",
       blocks: { union: ["towers", "mywalls"] },
       starts: "opptowers",
       max: 2,

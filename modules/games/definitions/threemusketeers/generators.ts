@@ -1,9 +1,9 @@
-import { ThreemusketeersGenerators } from './_types';
+import { ThreemusketeersGenerators } from "./_types";
 
 const threemusketeersGenerators: ThreemusketeersGenerators = {
   findstrandedmusketeers: {
     type: "neighbour",
-    dirs: ["ortho"],
+    dirs: "ortho",
     starts: "kings",
     ifover: "pawns",
     draw: {
@@ -15,7 +15,7 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
   },
   findmusketeerline: {
     type: "walker",
-    dirs: ["ortho"],
+    dirs: "ortho",
     starts: "kings",
     count: "kings",
     draw: {
@@ -27,7 +27,7 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
   },
   findmovetargets: {
     type: "neighbour",
-    dirs: ["ortho"],
+    dirs: "ortho",
     start: "selectunit",
     condition: {
       playercase: [

@@ -1,10 +1,10 @@
-import { ShoveoffGenerators } from './_types';
+import { ShoveoffGenerators } from "./_types";
 
 const shoveoffGenerators: ShoveoffGenerators = {
   findaffected: {
     type: "walker",
     start: "selectpushpoint",
-    dirs: ["ortho"],
+    dirs: "ortho",
     draw: {
       last: {
         condition: { same: [["walklength"], 3] },
@@ -72,7 +72,7 @@ const shoveoffGenerators: ShoveoffGenerators = {
   },
   findfourinarow: {
     type: "walker",
-    dirs: ["rose"],
+    dirs: "rose",
     starts: "myunits",
     steps: "myunits",
     startasstep: true,

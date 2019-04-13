@@ -8,18 +8,10 @@ const kriegAI: KriegAI = {
       dirs: {
         playercase: [
           {
-            ifelse: [
-              { anyat: ["oppbases", ["start"]] },
-              { list: [4] },
-              { list: [3, 5] }
-            ]
+            ifelse: [{ anyat: ["oppbases", ["start"]] }, [4], [3, 5]]
           },
           {
-            ifelse: [
-              { anyat: ["oppbases", ["start"]] },
-              { list: [8] },
-              { list: [7, 1] }
-            ]
+            ifelse: [{ anyat: ["oppbases", ["start"]] }, [8], [7, 1]]
           }
         ]
       },
@@ -54,18 +46,10 @@ const kriegAI: KriegAI = {
       dirs: {
         playercase: [
           {
-            ifelse: [
-              { anyat: ["mybases", ["start"]] },
-              { list: [8] },
-              { list: [7, 1] }
-            ]
+            ifelse: [{ anyat: ["mybases", ["start"]] }, [8], [7, 1]]
           },
           {
-            ifelse: [
-              { anyat: ["mybases", ["start"]] },
-              { list: [4] },
-              { list: [3, 5] }
-            ]
+            ifelse: [{ anyat: ["mybases", ["start"]] }, [4], [3, 5]]
           }
         ]
       },

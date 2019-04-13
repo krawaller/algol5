@@ -1,8 +1,4 @@
-import {
-  FullDefAnon,
-  AlgolDirsAnon,
-  isAlgolDirsList
-} from "../../../../../types";
+import { FullDefAnon, AlgolDirsAnon } from "../../../../../types";
 
 import { makeParser } from "../";
 
@@ -13,10 +9,8 @@ export default function parseDirs(
   expr: AlgolDirsAnon,
   from?: string
 ) {
-  const parser = makeParser(gameDef, player, action, "dirs");
-
-  if (Array.isArray(expr)) {
-    switch (expr[0]) {
+  if (typeof expr === "string") {
+    switch (expr) {
       case "diag":
         return "diagDirs";
       case "ortho":
@@ -24,11 +18,11 @@ export default function parseDirs(
       case "rose":
         return "roseDirs";
       default:
-        throw new Error("Unknown dirs singleton: " + expr);
+        throw new Error("Unknown dirs singleton: " + JSON.stringify(expr));
     }
   }
-  if (isAlgolDirsList(expr)) {
-    const { list: list } = expr;
-    return `[ ${list.join(", ")} ]`;
+  if (Array.isArray(expr)) {
+    return `[ ${expr.join(", ")} ]`;
   }
+  throw new Error("Unknown dirs expression: " + JSON.stringify(expr));
 }

@@ -1,4 +1,4 @@
-import { TransetGenerators } from './_types';
+import { TransetGenerators } from "./_types";
 
 const transetGenerators: TransetGenerators = {
   findswap2step: {
@@ -11,7 +11,7 @@ const transetGenerators: TransetGenerators = {
   findswap1steps: {
     type: "neighbour",
     start: "selectunit",
-    dirs: ["ortho"],
+    dirs: "ortho",
     unlessover: "units",
     draw: { neighbours: { tolayer: "swap1steps", include: { dir: ["dir"] } } }
   },
@@ -23,26 +23,18 @@ const transetGenerators: TransetGenerators = {
         {
           ifelse: [
             { anyat: ["pinets", "selectunit"] },
-            { list: [1] },
+            [1],
             {
-              ifelse: [
-                { anyat: ["piokers", "selectunit"] },
-                { list: [8, 2] },
-                { list: [8, 1, 2] }
-              ]
+              ifelse: [{ anyat: ["piokers", "selectunit"] }, [8, 2], [8, 1, 2]]
             }
           ]
         },
         {
           ifelse: [
             { anyat: ["pinets", "selectunit"] },
-            { list: [5] },
+            [5],
             {
-              ifelse: [
-                { anyat: ["piokers", "selectunit"] },
-                { list: [4, 6] },
-                { list: [4, 5, 6] }
-              ]
+              ifelse: [{ anyat: ["piokers", "selectunit"] }, [4, 6], [4, 5, 6]]
             }
           ]
         }

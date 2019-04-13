@@ -1,11 +1,11 @@
-import { MurusgallicusadvancedGenerators } from './_types';
+import { MurusgallicusadvancedGenerators } from "./_types";
 
 const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {
     type: "walker",
     start: "selectcatapult",
     dirs: {
-      playercase: [{ list: [7, 8, 1, 2, 3] }, { list: [3, 4, 5, 6, 7] }]
+      playercase: [[7, 8, 1, 2, 3], [3, 4, 5, 6, 7]]
     },
     max: 3,
     draw: {
@@ -24,7 +24,7 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
     type: "walker",
     blocks: { union: ["oppunits", "mycatapults"] },
     start: "selecttower",
-    dirs: ["rose"],
+    dirs: "rose",
     max: 2,
     draw: {
       steps: {
@@ -76,7 +76,7 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findkilltargets: {
     type: "neighbour",
     start: "selecttower",
-    dirs: ["rose"],
+    dirs: "rose",
     ifover: { union: ["oppcatapults", "oppwalls"] },
     draw: { neighbours: { tolayer: "killtargets" } }
   }

@@ -1,4 +1,4 @@
-import { KriegGenerators } from './_types';
+import { KriegGenerators } from "./_types";
 
 const kriegGenerators: KriegGenerators = {
   findmovetargets: {
@@ -8,12 +8,12 @@ const kriegGenerators: KriegGenerators = {
     dirs: {
       ifelse: [
         { anyat: ["southeast", ["start"]] },
-        { list: [1, 3, 4, 5, 7] },
+        [1, 3, 4, 5, 7],
         {
           ifelse: [
             { anyat: ["northwest", ["start"]] },
-            { list: [1, 3, 5, 7, 8] },
-            ["ortho"]
+            [1, 3, 5, 7, 8],
+            "ortho"
           ]
         }
       ]

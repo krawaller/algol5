@@ -1,10 +1,10 @@
-import { AriesGenerators } from './_types';
+import { AriesGenerators } from "./_types";
 
 const ariesGenerators: AriesGenerators = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",
-    dirs: ["ortho"],
+    dirs: "ortho",
     blocks: "units",
     draw: {
       steps: { tolayer: "movetargets" },

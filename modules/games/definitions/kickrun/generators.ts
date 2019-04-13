@@ -1,4 +1,4 @@
-import { KickrunGenerators } from './_types';
+import { KickrunGenerators } from "./_types";
 
 const kickrunGenerators: KickrunGenerators = {
   findmovetargets: {
@@ -7,8 +7,8 @@ const kickrunGenerators: KickrunGenerators = {
     dirs: {
       ifelse: [
         { anyat: ["myrunners", "selectunit"] },
-        { playercase: [{ list: [1, 2, 3] }, { list: [5, 6, 7] }] },
-        { playercase: [{ list: [8, 1, 3, 4] }, { list: [4, 5, 7, 8] }] }
+        { playercase: [[1, 2, 3], [5, 6, 7]] },
+        { playercase: [[8, 1, 3, 4], [4, 5, 7, 8]] }
       ]
     },
     max: { ifelse: [{ anyat: ["myrunners", "selectunit"] }, 4, 1] },

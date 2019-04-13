@@ -22,4 +22,9 @@ type OffsetForward = Modifier;
 type OffsetRight = Modifier;
 type BasicDir = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 type Dirs = BasicDir[] | "ortho" | "diag" | "rose";
-export type AlgolOffset = [Dirs, OffsetForward, OffsetRight] | "knight";
+
+export type AlgolOffsetBasic = [BasicDir[], OffsetForward, OffsetRight];
+export type AlgolOffset =
+  | AlgolOffsetBasic
+  | [Dirs, OffsetForward, OffsetRight]
+  | "knight";

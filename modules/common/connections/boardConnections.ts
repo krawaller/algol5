@@ -1,4 +1,5 @@
-import { boardPositions, posConnections } from "../";
+import { boardPositions } from "../";
+import { posConnections } from "./posConnections";
 import { AlgolBoardAnon } from "../../types";
 
 /*

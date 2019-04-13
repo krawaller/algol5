@@ -1,5 +1,11 @@
-// TODO - also work for offsets!
-export function makeRelativeDirs(offsets: string[] = []) {
+import { AlgolOffset } from "../../types";
+import { parseOffset } from "./parseOffset";
+
+export function makeRelativeDirs(offsets: AlgolOffset[] = []) {
+  offsets = offsets.reduce(
+    (mem, offset) => mem.concat(parseOffset(offset)),
+    []
+  );
   return [1, 2, 3, 4, 5, 6, 7, 8].reduce(
     (mem, dir) => ({
       ...mem,

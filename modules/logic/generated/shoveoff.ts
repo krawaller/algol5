@@ -143,7 +143,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   const groupLayers = {
     soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
   };
-  game.action.start1 = step => {
+  game.action.startTurn1 = step => {
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
@@ -167,7 +167,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.instruction.start1 = step => {
+  game.instruction.startTurn1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
 
     return collapseContent({
@@ -267,7 +267,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
-      LINKS.endTurn = "start2";
+      LINKS.endTurn = "startTurn2";
     }
     return {
       LINKS,
@@ -361,7 +361,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
-      LINKS.endTurn = "start2";
+      LINKS.endTurn = "startTurn2";
     }
     return {
       LINKS,
@@ -455,7 +455,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
-      LINKS.endTurn = "start2";
+      LINKS.endTurn = "startTurn2";
     }
     return {
       LINKS,
@@ -549,7 +549,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
-      LINKS.endTurn = "start2";
+      LINKS.endTurn = "startTurn2";
     }
     return {
       LINKS,
@@ -719,7 +719,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   const groupLayers = {
     soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
   };
-  game.action.start2 = step => {
+  game.action.startTurn2 = step => {
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
@@ -743,7 +743,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.instruction.start2 = step => {
+  game.instruction.startTurn2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
 
     return collapseContent({
@@ -904,7 +904,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
 
-    return game.action.start1({
+    return game.action.startTurn1({
       NEXTSPAWNID: 1,
 
       TURN: 0,
@@ -992,7 +992,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
-      LINKS.endTurn = "start1";
+      LINKS.endTurn = "startTurn1";
     }
     return {
       LINKS,
@@ -1086,7 +1086,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
-      LINKS.endTurn = "start1";
+      LINKS.endTurn = "startTurn1";
     }
     return {
       LINKS,
@@ -1180,7 +1180,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
-      LINKS.endTurn = "start1";
+      LINKS.endTurn = "startTurn1";
     }
     return {
       LINKS,
@@ -1274,7 +1274,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
-      LINKS.endTurn = "start1";
+      LINKS.endTurn = "startTurn1";
     }
     return {
       LINKS,

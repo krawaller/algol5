@@ -13,8 +13,8 @@ const def: FullDefAnon = {
 };
 
 const tests: [string, 1 | 2, string[]][] = [
-  ["start", 1, ["foo"]],
-  ["start", 2, ["bar"]]
+  ["startTurn", 1, ["foo"]],
+  ["startTurn", 2, ["bar"]]
 ];
 
 test("actionLinks", () =>

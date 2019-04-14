@@ -1,7 +1,7 @@
 import { Layer } from "../";
 
 export type AlgolStepLinks = {
-  endTurn?: "start1" | "start2";
+  endTurn?: "startTurn1" | "startTurn2";
   endGame?: "win" | "lose" | "draw";
   endMarks?: string[];
   endedBy?: string;

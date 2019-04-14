@@ -17,7 +17,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         }
       },
       player: 1,
-      action: "start",
+      action: "startTurn",
       contexts: [
         {
           context: {

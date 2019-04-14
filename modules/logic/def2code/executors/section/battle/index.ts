@@ -11,7 +11,7 @@ export function executeNewBattle(
   return `
   let UNITDATA = ${JSON.stringify(deduceInitialUnitData(gameDef.setup))};
   ${updateUnitLayers(gameDef, 2, "newBattle", true)}
-  return game.action.start1({
+  return game.action.startTurn1({
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: 1," : ""}
     ${referencesBattleVars(gameDef) ? "BATTLEVARS: {}, " : ""}
     TURN: 0,

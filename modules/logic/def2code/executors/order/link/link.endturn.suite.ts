@@ -43,7 +43,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "LINKS.endTurn",
-                  res: "start2",
+                  res: "startTurn2",
                   desc: "we can link to endTurn, passing over to next plr"
                 }
               ]

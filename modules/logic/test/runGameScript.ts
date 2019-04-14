@@ -19,7 +19,7 @@ export function runGameScript(
       const lines = scripts[scriptName];
       let step: AlgolStep = game.newBattle();
       let n = 0;
-      let lastFunc = "start1";
+      let lastFunc = "startTurn1";
       while (lines.length) {
         n++;
         const line = lines.shift();
@@ -33,7 +33,7 @@ export function runGameScript(
             if (lines.length) {
               throw new Error("Game end but lines remaining");
             }
-            if (["start1", "start2"].includes(step.LINKS.endTurn)) {
+            if (["startTurn1", "startTurn2"].includes(step.LINKS.endTurn)) {
               throw new Error("Expected game to end but it didnt");
             }
             if (step.LINKS.endGame !== action) {

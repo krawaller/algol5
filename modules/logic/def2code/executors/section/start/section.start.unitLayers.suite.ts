@@ -48,7 +48,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         }
       },
       player: 1,
-      action: "start",
+      action: "startTurn",
       contexts: [
         {
           context: {
@@ -125,7 +125,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         }
       },
       player: 1,
-      action: "start",
+      action: "startTurn",
       contexts: [
         {
           context: defaultStartInitContext,

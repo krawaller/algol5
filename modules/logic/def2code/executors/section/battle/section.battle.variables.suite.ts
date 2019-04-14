@@ -13,7 +13,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {},
-          envelope: "let game = { action: { start1: a => a } };",
+          envelope: "let game = { action: { startTurn1: a => a } };",
           tests: [
             {
               expr: "newBattle",
@@ -46,7 +46,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       contexts: [
         {
           context: {},
-          envelope: "let game = { action: { start1: a => a } };",
+          envelope: "let game = { action: { startTurn1: a => a } };",
           tests: [
             {
               expr: "newBattle",

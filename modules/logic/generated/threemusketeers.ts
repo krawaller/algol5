@@ -40,7 +40,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "kings"]
     ]
   };
-  game.action.start1 = step => {
+  game.action.startTurn1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -66,7 +66,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN + 1
     };
   };
-  game.instruction.start1 = step => {
+  game.instruction.startTurn1 = step => {
     return collapseContent({
       line: [
         { text: "Select which" },
@@ -127,7 +127,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "musketeersinline";
       LINKS.endMarks = Object.keys(UNITLAYERS.kings);
     } else {
-      LINKS.endTurn = "start2";
+      LINKS.endTurn = "startTurn2";
     }
     return {
       LINKS,
@@ -228,7 +228,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "kings"]
     ]
   };
-  game.action.start2 = step => {
+  game.action.startTurn2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -254,7 +254,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN + 1
     };
   };
-  game.instruction.start2 = step => {
+  game.instruction.startTurn2 = step => {
     return collapseContent({
       line: [
         { text: "Select which" },
@@ -307,7 +307,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
 
-    return game.action.start1({
+    return game.action.startTurn1({
       TURN: 0,
       UNITDATA,
       UNITLAYERS
@@ -383,7 +383,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "strandedmusketeers";
     } else {
-      LINKS.endTurn = "start1";
+      LINKS.endTurn = "startTurn1";
     }
     return {
       LINKS,

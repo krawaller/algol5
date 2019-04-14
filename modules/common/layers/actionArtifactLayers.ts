@@ -10,7 +10,7 @@ export function actionArtifactLayers(
   const def: AlgolEffectActionDefAnon =
     gameDef.flow.commands[action] ||
     gameDef.flow.marks[action] ||
-    (action === "start" && gameDef.flow.startTurn) ||
+    (action === "startTurn" && gameDef.flow.startTurn) ||
     {}; // To allow tests to reference non-existing things
 
   const possibleGenerators = (def.runGenerators || [])

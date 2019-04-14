@@ -27,19 +27,19 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
     ret += executeSection(gameDef, player, "player", "player");
 
-    ret += `game.action.start${player} = (step) => {
-      ${executeSection(gameDef, player, "start", "startInit")}
-      ${executeSection(gameDef, player, "start", "orders")}
-      ${executeSection(gameDef, player, "start", "startEnd")}
+    ret += `game.action.startTurn${player} = (step) => {
+      ${executeSection(gameDef, player, "startTurn", "startInit")}
+      ${executeSection(gameDef, player, "startTurn", "orders")}
+      ${executeSection(gameDef, player, "startTurn", "startEnd")}
     }; `;
 
-    ret += `game.instruction.start${player} = (step) => {
-      ${executeSection(gameDef, player, "start", "instruction")}
+    ret += `game.instruction.startTurn${player} = (step) => {
+      ${executeSection(gameDef, player, "startTurn", "instruction")}
     }; `;
 
     if (player === 2) {
       ret += `game.newBattle = () => {
-        ${executeSection(gameDef, player, "start", "newBattle")}
+        ${executeSection(gameDef, player, "startTurn", "newBattle")}
       }; `;
     }
 

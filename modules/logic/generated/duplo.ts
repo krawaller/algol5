@@ -37,7 +37,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "soldiers", "oppsoldiers"]
     ]
   };
-  game.action.start1 = step => {
+  game.action.startTurn1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -75,7 +75,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.instruction.start1 = step => {
+  game.instruction.startTurn1 = step => {
     let TURN = step.TURN;
 
     return TURN > 2
@@ -125,7 +125,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
         LINKS.endedBy = "boardfull";
       } else {
-        LINKS.endTurn = "start2";
+        LINKS.endTurn = "startTurn2";
       }
     } else {
       for (const pos of Object.keys(
@@ -220,7 +220,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "boardfull";
     } else {
-      LINKS.endTurn = "start2";
+      LINKS.endTurn = "startTurn2";
     }
     return {
       LINKS,
@@ -461,7 +461,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "soldiers", "mysoldiers"]
     ]
   };
-  game.action.start2 = step => {
+  game.action.startTurn2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -499,7 +499,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.instruction.start2 = step => {
+  game.instruction.startTurn2 = step => {
     let TURN = step.TURN;
 
     return TURN > 2
@@ -525,7 +525,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
 
-    return game.action.start1({
+    return game.action.startTurn1({
       NEXTSPAWNID: 1,
 
       TURN: 0,
@@ -576,7 +576,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
         LINKS.endedBy = "boardfull";
       } else {
-        LINKS.endTurn = "start1";
+        LINKS.endTurn = "startTurn1";
       }
     } else {
       for (const pos of Object.keys(
@@ -671,7 +671,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "boardfull";
     } else {
-      LINKS.endTurn = "start1";
+      LINKS.endTurn = "startTurn1";
     }
     return {
       LINKS,

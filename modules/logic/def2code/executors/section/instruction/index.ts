@@ -7,8 +7,7 @@ export function executeInstructionSection(
   player: 1 | 2,
   action: string
 ): string {
-  const instrDef =
-    gameDef.instructions[action === "start" ? "startTurn" : action];
+  const instrDef = gameDef.instructions[action];
 
   if (!instrDef) {
     throw new Error(

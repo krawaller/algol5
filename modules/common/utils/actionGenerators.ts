@@ -9,8 +9,7 @@ export function actionGenerators(
   const def: AlgolEffectActionDefAnon =
     gameDef.flow.commands[action] ||
     gameDef.flow.marks[action] ||
-    ((action === "start" || action === "startTurn") &&
-      gameDef.flow.startTurn) ||
+    (action === "startTurn" && gameDef.flow.startTurn) ||
     {}; // To allow tests to reference non-existing things
 
   return (def.runGenerators || [])

@@ -45,7 +45,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {},
           envelope:
-            "let game = { action: { start1: a => ({...a, sentToStart1: true }) } };",
+            "let game = { action: { startTurn1: a => ({...a, sentToStart1: true }) } };",
           tests: [
             {
               expr: "newBattle",
@@ -53,12 +53,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.sentToStart1",
                   res: true,
-                  desc: "we pass result of calling game.action.start1"
+                  desc: "we pass result of calling game.action.startTurn1"
                 },
                 {
                   sample: "returnVal.TURN",
                   res: 0,
-                  desc: "seed with turn 0 since start1 will add +1"
+                  desc: "seed with turn 0 since startTurn1 will add +1"
                 },
                 {
                   sample: "returnVal.UNITDATA",
@@ -124,7 +124,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                       }
                     }
                   },
-                  desc: "we send plr2 layers since start1 will switch"
+                  desc: "we send plr2 layers since startTurn1 will switch"
                 }
               ]
             }

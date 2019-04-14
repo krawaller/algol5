@@ -81,7 +81,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       e4: { pos: "e4", x: 5, y: 4 }
     }
   };
-  game.action.start1 = step => {
+  game.action.startTurn1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -107,7 +107,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN + 1
     };
   };
-  game.instruction.start1 = step => {
+  game.instruction.startTurn1 = step => {
     return collapseContent({
       line: [{ text: "Select a unit to" }, { command: "move" }]
     });
@@ -181,7 +181,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
-      LINKS.endTurn = "start2";
+      LINKS.endTurn = "startTurn2";
     }
     return {
       LINKS,
@@ -261,7 +261,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
-      LINKS.endTurn = "start2";
+      LINKS.endTurn = "startTurn2";
     }
     return {
       LINKS,
@@ -657,7 +657,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       e4: { pos: "e4", x: 5, y: 4 }
     }
   };
-  game.action.start2 = step => {
+  game.action.startTurn2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -683,7 +683,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN + 1
     };
   };
-  game.instruction.start2 = step => {
+  game.instruction.startTurn2 = step => {
     return collapseContent({
       line: [{ text: "Select a unit to" }, { command: "move" }]
     });
@@ -717,7 +717,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
 
-    return game.action.start1({
+    return game.action.startTurn1({
       TURN: 0,
       UNITDATA,
       UNITLAYERS
@@ -792,7 +792,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
-      LINKS.endTurn = "start1";
+      LINKS.endTurn = "startTurn1";
     }
     return {
       LINKS,
@@ -872,7 +872,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
-      LINKS.endTurn = "start1";
+      LINKS.endTurn = "startTurn1";
     }
     return {
       LINKS,

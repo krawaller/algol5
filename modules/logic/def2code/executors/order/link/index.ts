@@ -32,7 +32,7 @@ function executeLinkInner(
   const actionDef: AlgolEffectActionDefAnon =
     gameDef.flow.commands[action] ||
     gameDef.flow.marks[action] ||
-    (action === "start" && gameDef.flow.startTurn) ||
+    (action === "startTurn" && gameDef.flow.startTurn) ||
     {}; // To allow tests to reference non-existing things
   const parser = makeParser(gameDef, player, action);
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
@@ -70,7 +70,7 @@ function executeLinkInner(
         }
       }`
       )
-      .concat(`{ LINKS.endTurn = "start${player === 1 ? 2 : 1}"; }`)
+      .concat(`{ LINKS.endTurn = "startTurn${player === 1 ? 2 : 1}"; }`)
       .join(" else ");
   } else {
     throw "Unknown link: " + name;

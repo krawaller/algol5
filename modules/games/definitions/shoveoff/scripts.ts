@@ -1,4 +1,4 @@
-import { ShoveoffScripts } from './_types';
+import { ShoveoffScripts } from "./_types";
 
 const shoveoffScripts: ShoveoffScripts = {
   basic: [
@@ -21,7 +21,7 @@ const shoveoffScripts: ShoveoffScripts = {
     },
     { commands: ["c1"], include: ["north"] },
     {
-      commands: ["north", "endturn"],
+      commands: ["north", "endTurn"],
       include: [
         "a1",
         "a2",
@@ -38,7 +38,7 @@ const shoveoffScripts: ShoveoffScripts = {
     },
     { commands: ["d1"], include: ["north", "west"] },
     {
-      commands: ["west", "endturn"],
+      commands: ["west", "endTurn"],
       include: [
         "a1",
         "a2",
@@ -56,7 +56,7 @@ const shoveoffScripts: ShoveoffScripts = {
     },
     { commands: ["d4"], include: ["west"] },
     {
-      commands: ["west", "endturn"],
+      commands: ["west", "endTurn"],
       include: [
         "a1",
         "a2",
@@ -72,7 +72,7 @@ const shoveoffScripts: ShoveoffScripts = {
       ]
     },
     {
-      commands: ["b1", "north", "endturn"],
+      commands: ["b1", "north", "endTurn"],
       include: [
         "a1",
         "a2",
@@ -88,7 +88,7 @@ const shoveoffScripts: ShoveoffScripts = {
       ]
     },
     {
-      commands: ["c4", "south", "endturn"],
+      commands: ["c4", "south", "endTurn"],
       include: [
         "a1",
         "a2",
@@ -104,7 +104,7 @@ const shoveoffScripts: ShoveoffScripts = {
       ]
     },
     {
-      commands: ["c4", "south", "endturn"],
+      commands: ["c4", "south", "endTurn"],
       include: ["a1", "a2", "a3", "a4", "b1", "c4", "d1", "d2", "d3", "d4"]
     },
     { commands: ["a1", "north", "win"] }

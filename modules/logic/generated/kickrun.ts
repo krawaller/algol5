@@ -150,7 +150,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
-      LINKS.endturn = "start2";
+      LINKS.endTurn = "start2";
     }
     return {
       LINKS,
@@ -475,7 +475,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
     } else {
-      LINKS.endturn = "start1";
+      LINKS.endTurn = "start1";
     }
     return {
       LINKS,

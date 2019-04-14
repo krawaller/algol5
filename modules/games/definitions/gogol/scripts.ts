@@ -1,4 +1,4 @@
-import { GogolScripts } from './_types';
+import { GogolScripts } from "./_types";
 
 const gogolScripts: GogolScripts = {
   basic: [
@@ -48,7 +48,7 @@ const gogolScripts: GogolScripts = {
       ]
     },
     {
-      commands: ["g4", "deploy", "endturn"],
+      commands: ["g4", "deploy", "endTurn"],
       include: [
         "a2",
         "a3",
@@ -92,7 +92,7 @@ const gogolScripts: GogolScripts = {
       ]
     },
     {
-      commands: ["f4", "deploy", "endturn"],
+      commands: ["f4", "deploy", "endTurn"],
       include: ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "g4", "h1"]
     },
     {
@@ -113,7 +113,7 @@ const gogolScripts: GogolScripts = {
       ]
     },
     {
-      commands: ["d7", "move", "endturn"],
+      commands: ["d7", "move", "endTurn"],
       include: ["a8", "b8", "c8", "d8", "e8", "f4", "f8", "g8", "h8"]
     },
     {
@@ -168,7 +168,7 @@ const gogolScripts: GogolScripts = {
       ]
     },
     {
-      commands: ["d6", "move", "endturn"],
+      commands: ["d6", "move", "endTurn"],
       include: ["a1", "b1", "c1", "d1", "d7", "e1", "f1", "g1", "h1"]
     },
     {
@@ -193,7 +193,7 @@ const gogolScripts: GogolScripts = {
       ]
     },
     {
-      commands: ["d5", "jump", "endturn"],
+      commands: ["d5", "jump", "endTurn"],
       include: ["a8", "b8", "c8", "d8", "f4", "f8", "g8", "h8"]
     }
   ]

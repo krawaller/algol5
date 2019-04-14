@@ -77,7 +77,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           },
           startTurn: {
             link: {
-              if: [{ same: [1, ["turn"]] }, "endturn"]
+              if: [{ same: [1, ["turn"]] }, "endTurn"]
             }
           }
         }

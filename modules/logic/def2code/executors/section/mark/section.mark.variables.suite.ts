@@ -94,7 +94,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               link: {
                 if: [
                   { same: [{ turnvar: "foo" }, { battlevar: "bar" }] },
-                  "endturn"
+                  "endTurn"
                 ]
               }
             }
@@ -167,7 +167,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               link: {
                 if: [
                   { same: [{ turnvar: "foo" }, { battlevar: "bar" }] },
-                  "endturn"
+                  "endTurn"
                 ]
               }
             }

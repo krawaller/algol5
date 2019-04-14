@@ -4,31 +4,47 @@
     "id": "castle",
     "name": "Castle",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/castle.htm",
-    "tags": ["infiltrate","terrain","capture"]
+    "tags": ["infiltrate", "terrain", "capture"]
   },
   "board": {
     "width": 19,
     "height": 19,
     "terrain": {
       "walls": [
-        ["rect","c2","c8"],["rect","f1","f6"],["rect","h2","h6"],["rect","l2","l6"],
-        ["rect","n1","n6"],["rect","q2","q8"],["rect","c8","i8"],["rect","k8","p8"],
-        ["rect","i6","k6"],"i2","k2",
-        ["rect","c12","c18"],["rect","f14","f19"],["rect","h14","h18"],["rect","l14","l18"],
-        ["rect","n14","n19"],["rect","q12","q18"],["rect","c12","i12"],["rect","k12","p12"],
-        ["rect","i14","k14"],"i18","k18"
+        ["rect", "c2", "c8"],
+        ["rect", "f1", "f6"],
+        ["rect", "h2", "h6"],
+        ["rect", "l2", "l6"],
+        ["rect", "n1", "n6"],
+        ["rect", "q2", "q8"],
+        ["rect", "c8", "i8"],
+        ["rect", "k8", "p8"],
+        ["rect", "i6", "k6"],
+        "i2",
+        "k2",
+        ["rect", "c12", "c18"],
+        ["rect", "f14", "f19"],
+        ["rect", "h14", "h18"],
+        ["rect", "l14", "l18"],
+        ["rect", "n14", "n19"],
+        ["rect", "q12", "q18"],
+        ["rect", "c12", "i12"],
+        ["rect", "k12", "p12"],
+        ["rect", "i14", "k14"],
+        "i18",
+        "k18"
       ],
-      "thrones": {"1":["j4"],"2":["j16"]}
+      "thrones": { "1": ["j4"], "2": ["j16"] }
     }
   },
   "graphics": {
-    "tiles": {"walls":"castle","thrones":"playercolour"},
-    "icons": {"soldiers":"rooks"}
+    "tiles": { "walls": "castle", "thrones": "playercolour" },
+    "icons": { "soldiers": "rooks" }
   },
   "setup": {
     "soldiers": {
       "1": ["f1", "n1", "h2", "l2", "h6", "l6", "c8", "q8"],
-      "2": ["f19","n19","h18","l18","h14","l14","c12","q12"]
+      "2": ["f19", "n19", "h18", "l18", "h14", "l14", "c12", "q12"]
     }
   },
   "startTurn": {
@@ -37,7 +53,7 @@
   "marks": {
     "selectunit": {
       "from": "myunits",
-      "runGenerators": ["findhops","findslides"],
+      "runGenerators": ["findhops", "findslides"],
       "link": "selectmovetarget"
     },
     "selectmovetarget": {
@@ -47,22 +63,23 @@
   },
   "commands": {
     "move": {
-      "applyEffect": ["stompat","selectunit","selectmovetarget"],
-      "link": "endturn"
+      "applyEffect": ["stompat", "selectunit", "selectmovetarget"],
+      "link": "endTurn"
     }
   },
   "endGame": {
-    "infiltration": { "condition": ["overlaps","myunits","oppthrones"] },
-    "genocide": { "condition": ["isempty","oppunits"] }
+    "infiltration": { "condition": ["overlaps", "myunits", "oppthrones"] },
+    "genocide": { "condition": ["isempty", "oppunits"] }
   },
   "generators": {
     "findhops": {
       "type": "neighbour",
       "start": "selectunit",
-      "dirs": [1,3,5,7],
-      "condition": ["or",
-        ["and", ["anyat","walls",["start"]],["noneat","walls",["target"]] ],
-        ["and", ["noneat","walls",["start"]],["anyat","walls",["target"]] ]
+      "dirs": [1, 3, 5, 7],
+      "condition": [
+        "or",
+        ["and", ["anyat", "walls", ["start"]], ["noneat", "walls", ["target"]]],
+        ["and", ["noneat", "walls", ["start"]], ["anyat", "walls", ["target"]]]
       ],
       "draw": {
         "neighbours": {
@@ -73,9 +90,14 @@
     },
     "findslides": {
       "type": "walker",
-      "dirs": [1,3,5,7],
+      "dirs": [1, 3, 5, 7],
       "start": "selectunit",
-      "steps": ["ifelse",["anyat","walls",["start"]],"walls",["subtract","nowalls","mythrones"]],
+      "steps": [
+        "ifelse",
+        ["anyat", "walls", ["start"]],
+        "walls",
+        ["subtract", "nowalls", "mythrones"]
+      ],
       "blocks": "units",
       "testblocksbeforesteps": false,
       "draw": {

@@ -32,7 +32,7 @@ export default async function analyze(def: FullDefAnon | string) {
     let cdef = flow.commands[c];
     let defs = [].concat(cdef.link || []).concat(cdef.links || []);
     let poss = defs.reduce((mem, d) => mem.concat(possibilities(d)), []);
-    return poss.filter(l => l !== "endturn").length > 0;
+    return poss.filter(l => l !== "endTurn").length > 0;
   });
 
   const myUnitLayerNames = Object.keys(emptyUnitLayers(def));

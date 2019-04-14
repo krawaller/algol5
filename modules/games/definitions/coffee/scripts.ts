@@ -1,4 +1,4 @@
-import { CoffeeScripts } from './_types';
+import { CoffeeScripts } from "./_types";
 
 const coffeeScripts: CoffeeScripts = {
   basic: [
@@ -36,10 +36,10 @@ const coffeeScripts: CoffeeScripts = {
       commands: ["c3"],
       include: ["downhill", "horisontal", "uphill", "vertical"]
     },
-    { commands: ["downhill", "endturn"], include: ["a5", "b4", "d2", "e1"] },
+    { commands: ["downhill", "endTurn"], include: ["a5", "b4", "d2", "e1"] },
     { commands: ["b4"], include: ["horisontal", "uphill", "vertical"] },
-    { commands: ["uphill", "endturn"], include: ["a3", "c5"] },
-    { commands: ["c5", "vertical", "endturn"], include: ["c1", "c2", "c4"] },
+    { commands: ["uphill", "endTurn"], include: ["a3", "c5"] },
+    { commands: ["c5", "vertical", "endTurn"], include: ["c1", "c2", "c4"] },
     { commands: ["c2"], include: ["downhill", "horisontal", "uphill"] }
   ]
 };

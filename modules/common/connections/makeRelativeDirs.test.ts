@@ -10,8 +10,8 @@ type RelativeDirTest = {
 
 const relativeDirTests: RelativeDirTest[] = [
   { dir: 2, rel: 2, expected: 3 },
-  { dir: 1, rel: 4, expected: 4 },
-  { dir: "d1f2r0", rel: 2, expected: "df2r0" }
+  { dir: 1, rel: 4, expected: 4 }
+  //{ dir: "d1f2r0", rel: 2, expected: "df2r0" }
 ];
 
 test("relativeDirs", () => {

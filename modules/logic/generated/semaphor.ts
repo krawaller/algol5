@@ -175,7 +175,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
-      LINKS.endturn = "start2";
+      LINKS.endTurn = "start2";
     }
     return {
       LINKS,
@@ -243,7 +243,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
-      LINKS.endturn = "start2";
+      LINKS.endTurn = "start2";
     }
     return {
       LINKS,
@@ -490,7 +490,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
-      LINKS.endturn = "start1";
+      LINKS.endTurn = "start1";
     }
     return {
       LINKS,
@@ -558,7 +558,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
-      LINKS.endturn = "start1";
+      LINKS.endTurn = "start1";
     }
     return {
       LINKS,

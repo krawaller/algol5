@@ -8,19 +8,21 @@
     "author": "Walter Joris",
     "year": 2002
   },
-  "graphics": {"icons":{"soldiers":"pawns"}},
-  "board": {"height":6,"width":6},
+  "graphics": { "icons": { "soldiers": "pawns" } },
+  "board": { "height": 6, "width": 6 },
   "startTurn": {
     "link": "selecttarget"
   },
   "endGame": {
     "filledboard": {
-      "condition": ["same",["sizeof","units"],36],
-      "who": ["ifelse",
-        ["same",["sizeof","myunits"],["sizeof","oppunits"]],
+      "condition": ["same", ["sizeof", "units"], 36],
+      "who": [
+        "ifelse",
+        ["same", ["sizeof", "myunits"], ["sizeof", "oppunits"]],
         0,
-        ["ifelse",
-          ["morethan",["sizeof","myunits"],["sizeof","oppunits"]],
+        [
+          "ifelse",
+          ["morethan", ["sizeof", "myunits"], ["sizeof", "oppunits"]],
           ["currentplayer"],
           ["otherplayer"]
         ]
@@ -29,41 +31,45 @@
   },
   "marks": {
     "selecttarget": {
-      "from": ["subtract","board","units"],
-      "runGenerators": ["findtouchedfoes","findcustodianvictims","findintrusionvictims"],
+      "from": ["subtract", "board", "units"],
+      "runGenerators": [
+        "findtouchedfoes",
+        "findcustodianvictims",
+        "findintrusionvictims"
+      ],
       "link": "drop"
     }
   },
   "commands": {
     "drop": {
       "applyEffects": [
-        ["foridin","victims",["setid",["loopid"],"owner",0]],
-        ["spawn","selecttarget","soldiers"]
+        ["foridin", "victims", ["setid", ["loopid"], "owner", 0]],
+        ["spawn", "selecttarget", "soldiers"]
       ],
-      "link": "endturn"
+      "link": "endTurn"
     }
   },
   "generators": {
     "findtouchedfoes": {
       "type": "neighbour",
       "start": "selecttarget",
-      "dirs": [1,2,3,4,5,6,7,8],
+      "dirs": [1, 2, 3, 4, 5, 6, 7, 8],
       "ifover": "oppunits",
       "draw": {
         "target": {
           "tolayer": "touchedfoes",
-          "include": {"dir":["dir"]}
+          "include": { "dir": ["dir"] }
         }
       }
     },
     "findcustodianvictims": {
       "type": "neighbour",
       "starts": "touchedfoes",
-      "dir": ["read","touchedfoes",["start"],"dir"],
+      "dir": ["read", "touchedfoes", ["start"], "dir"],
       "count": "myunits",
       "draw": {
         "start": {
-          "condition": ["truthy",["totalcount"]],
+          "condition": ["truthy", ["totalcount"]],
           "tolayer": "victims"
         }
       }
@@ -71,8 +77,8 @@
     "findintrusionvictims": {
       "type": "offset",
       "starts": "touchedfoes",
-      "dir": ["reldir",5,["read","touchedfoes",["start"],"dir"]],
-      "offsets": [[2,0]],
+      "dir": ["reldir", 5, ["read", "touchedfoes", ["start"], "dir"]],
+      "offsets": [[2, 0]],
       "ifover": "oppunits",
       "draw": {
         "target": {

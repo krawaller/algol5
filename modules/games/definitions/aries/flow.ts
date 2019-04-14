@@ -1,4 +1,4 @@
-import { AriesFlow } from './_types';
+import { AriesFlow } from "./_types";
 
 const ariesFlow: AriesFlow = {
   startTurn: { link: "selectunit" },
@@ -37,7 +37,7 @@ const ariesFlow: AriesFlow = {
         { killin: "squished" },
         { moveat: ["selectunit", "selectmovetarget"] }
       ],
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

@@ -3,7 +3,7 @@
   "meta": {
     "name": "Trimok",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/trimok.htm",
-    "tags": ["differentunits","terrain","eradicate"],
+    "tags": ["differentunits", "terrain", "eradicate"],
     "author": ["A. Ollikainen", "J. Ollikainen", "T. Saarinen"],
     "year": 1996,
     "rules": [
@@ -16,34 +16,68 @@
     ]
   },
   "graphics": {
-    "icons": {"rocks":"rooks","papers":"knights","scissors":"bishops"},
-    "tiles": {"edge":"grass"}
+    "icons": { "rocks": "rooks", "papers": "knights", "scissors": "bishops" },
+    "tiles": { "edge": "grass" }
   },
   "board": {
-    "height": 6, "width": 6
+    "height": 6,
+    "width": 6
   },
   "terrain": {
-    "edge": {"1":[["rect","a1","f1"]],"2":[["rect","a6","f6"]]}
+    "edge": { "1": [["rect", "a1", "f1"]], "2": [["rect", "a6", "f6"]] }
   },
   "setup": {
-    "scissors": { "1": ["a1","a2","d1","d2"], "2": ["a5","a6","d5","d6"] },
-    "papers": { "1": ["b1","b2","e1","e2"], "2": ["b5","b6","e5","e6"] },
-    "rocks": { "1": ["c1","c2","f1","f2"], "2": ["c5","c6","f5","f6"] }
+    "scissors": {
+      "1": ["a1", "a2", "d1", "d2"],
+      "2": ["a5", "a6", "d5", "d6"]
+    },
+    "papers": { "1": ["b1", "b2", "e1", "e2"], "2": ["b5", "b6", "e5", "e6"] },
+    "rocks": { "1": ["c1", "c2", "f1", "f2"], "2": ["c5", "c6", "f5", "f6"] }
   },
   "startTurn": { "link": "selectunit" },
-  "afterStep": { "link": "endturn" },
+  "afterStep": { "link": "endTurn" },
   "marks": {
     "selectunit": {
       "from": "myunits",
-      "runGenerators": ["findmovetargets","findreturntargets"],
-      "links": ["selectmovetarget","selectreturntarget"]
+      "runGenerators": ["findmovetargets", "findreturntargets"],
+      "links": ["selectmovetarget", "selectreturntarget"]
     },
     "selectreturntarget": {
       "from": "returntargets",
       "link": [
-        ["if",["or",[["anyat","scissors","selectunit"],["morethan",4,["positionsin","myscissors"]]]],"returnscissor"],
-        ["if",["or",[["anyat","rocks","selectunit"],["morethan",4,["positionsin","myrocks"]]]],"returnrock"],
-        ["if",["or",[["anyat","papers","selectunit"],["morethan",4,["positionsin","mypapers"]]]],"returnpaper"]
+        [
+          "if",
+          [
+            "or",
+            [
+              ["anyat", "scissors", "selectunit"],
+              ["morethan", 4, ["positionsin", "myscissors"]]
+            ]
+          ],
+          "returnscissor"
+        ],
+        [
+          "if",
+          [
+            "or",
+            [
+              ["anyat", "rocks", "selectunit"],
+              ["morethan", 4, ["positionsin", "myrocks"]]
+            ]
+          ],
+          "returnrock"
+        ],
+        [
+          "if",
+          [
+            "or",
+            [
+              ["anyat", "papers", "selectunit"],
+              ["morethan", 4, ["positionsin", "mypapers"]]
+            ]
+          ],
+          "returnpaper"
+        ]
       ]
     },
     "selectmovetarget": {
@@ -53,32 +87,35 @@
   },
   "commands": {
     "move": {
-      "applyEffects": [["kill","selectmovetarget"],["moveat","selectunit","selectmovetarget"]]
+      "applyEffects": [
+        ["kill", "selectmovetarget"],
+        ["moveat", "selectunit", "selectmovetarget"]
+      ]
     },
     "returnscissor": {
       "applyEffects": [
-        ["setat","selectunit","group","scissors"],
-        ["moveat","selectunit","selectreturntarget"]
+        ["setat", "selectunit", "group", "scissors"],
+        ["moveat", "selectunit", "selectreturntarget"]
       ]
     },
     "returnrock": {
       "applyEffects": [
-        ["setat","selectunit","group","rocks"],
-        ["moveat","selectunit","selectreturntarget"]
+        ["setat", "selectunit", "group", "rocks"],
+        ["moveat", "selectunit", "selectreturntarget"]
       ]
     },
     "returnpaper": {
       "applyEffects": [
-        ["setat","selectunit","group","papers"],
-        ["moveat","selectunit","selectreturntarget"]
+        ["setat", "selectunit", "group", "papers"],
+        ["moveat", "selectunit", "selectreturntarget"]
       ]
     }
   },
   "generators": {
     "findreturntargets": {
       "type": "offset",
-      "starts": ["intersect","selectunit","oppedge"],
-      "offsets": [[5,-1],[5,0],[5,1],[-5,-1],[-5,0],[-5,1]],
+      "starts": ["intersect", "selectunit", "oppedge"],
+      "offsets": [[5, -1], [5, 0], [5, 1], [-5, -1], [-5, 0], [-5, 1]],
       "unlessover": "units",
       "draw": {
         "target": {
@@ -89,12 +126,25 @@
     "findmovetargets": {
       "type": "neighbour",
       "starts": "selectunit",
-      "condition": ["or",[
-        ["noneat","units",["contextpos","target"]],
-        ["anyat",["case",["lookup","units","selectunit","group"],
-          [["rocks","oppscissors"],["papers","opprocks"],["scissors","opppapers"]]
-        ],["contextpos","target"]]
-      ]],
+      "condition": [
+        "or",
+        [
+          ["noneat", "units", ["contextpos", "target"]],
+          [
+            "anyat",
+            [
+              "case",
+              ["lookup", "units", "selectunit", "group"],
+              [
+                ["rocks", "oppscissors"],
+                ["papers", "opprocks"],
+                ["scissors", "opppapers"]
+              ]
+            ],
+            ["contextpos", "target"]
+          ]
+        ]
+      ],
       "draw": {
         "target": {
           "tolayer": "movetargets"

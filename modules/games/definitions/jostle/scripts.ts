@@ -1,4 +1,4 @@
-import { JostleScripts } from './_types';
+import { JostleScripts } from "./_types";
 
 const jostleScripts: JostleScripts = {
   basic: [
@@ -23,7 +23,7 @@ const jostleScripts: JostleScripts = {
     },
     { commands: ["h3"], include: ["h2", "i3"] },
     {
-      commands: ["h2", "jostle", "endturn"],
+      commands: ["h2", "jostle", "endTurn"],
       include: [
         "c3",
         "c5",
@@ -43,7 +43,7 @@ const jostleScripts: JostleScripts = {
     },
     { commands: ["g5"], include: ["f5"] },
     {
-      commands: ["f5", "jostle", "endturn"],
+      commands: ["f5", "jostle", "endTurn"],
       include: [
         "c4",
         "c6",
@@ -62,7 +62,7 @@ const jostleScripts: JostleScripts = {
       ]
     },
     {
-      commands: ["c6", "b6", "jostle", "endturn"],
+      commands: ["c6", "b6", "jostle", "endTurn"],
       include: [
         "c3",
         "c5",
@@ -79,7 +79,7 @@ const jostleScripts: JostleScripts = {
       ]
     },
     {
-      commands: ["e7", "e6", "jostle", "endturn"],
+      commands: ["e7", "e6", "jostle", "endTurn"],
       include: [
         "c4",
         "c8",
@@ -99,7 +99,7 @@ const jostleScripts: JostleScripts = {
     },
     { commands: ["h5"], include: ["g5", "i5"] },
     {
-      commands: ["i5", "jostle", "endturn"],
+      commands: ["i5", "jostle", "endTurn"],
       include: [
         "c3",
         "c5",

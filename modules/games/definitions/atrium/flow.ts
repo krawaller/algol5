@@ -1,4 +1,4 @@
-import { AtriumFlow } from './_types';
+import { AtriumFlow } from "./_types";
 
 const atriumFlow: AtriumFlow = {
   endGame: {
@@ -17,7 +17,7 @@ const atriumFlow: AtriumFlow = {
     move: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       runGenerator: "findwinlines",
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

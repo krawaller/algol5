@@ -1,4 +1,4 @@
-import { DescentFlow } from './_types';
+import { DescentFlow } from "./_types";
 
 const descentFlow: DescentFlow = {
   endGame: {
@@ -55,7 +55,7 @@ const descentFlow: DescentFlow = {
         ]
       },
       runGenerator: "findwinlines",
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

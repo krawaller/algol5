@@ -29,7 +29,7 @@ const amazonsFlow: AmazonsFlow = {
           { from: { pos: { turnpos: "movedto" } } }
         ]
       },
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

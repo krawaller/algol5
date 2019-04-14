@@ -45,13 +45,13 @@ const serauqsFlow: SerauqsFlow = {
   commands: {
     promote: {
       applyEffect: { morphat: ["selectunit", "wild"] },
-      link: "endturn",
+      link: "endTurn",
       noEndGame: true
     },
     move: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       runGenerator: "findwinline",
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

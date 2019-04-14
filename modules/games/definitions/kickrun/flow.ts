@@ -1,4 +1,4 @@
-import { KickrunFlow } from './_types';
+import { KickrunFlow } from "./_types";
 
 const kickrunFlow: KickrunFlow = {
   startTurn: { link: "selectunit" },
@@ -13,7 +13,7 @@ const kickrunFlow: KickrunFlow = {
   commands: {
     move: {
       applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
-      link: "endturn"
+      link: "endTurn"
     }
   },
   endGame: {

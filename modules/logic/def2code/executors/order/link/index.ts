@@ -48,7 +48,7 @@ function executeLinkInner(
       LINKS.actions[pos] = '${name + player}';
     }
 `;
-  } else if (name === "endturn") {
+  } else if (name === "endTurn") {
     // ------------- Linking to next turn, have to check win conditions
     return Object.entries(gameDef.flow.endGame || {})
       .filter(
@@ -70,7 +70,7 @@ function executeLinkInner(
         }
       }`
       )
-      .concat(`{ LINKS.endturn = "start${player === 1 ? 2 : 1}"; }`)
+      .concat(`{ LINKS.endTurn = "start${player === 1 ? 2 : 1}"; }`)
       .join(" else ");
   } else {
     throw "Unknown link: " + name;

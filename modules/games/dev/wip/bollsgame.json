@@ -4,23 +4,28 @@
     "id": "bollsgame",
     "name": "Boll's game",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/bollsgame.htm",
-    "tags": ["commonunits","changeowners","eradicate"]
+    "tags": ["commonunits", "changeowners", "eradicate"]
   },
   "graphics": {
-    "icons": {"soldiers":"rooks"}
+    "icons": { "soldiers": "rooks" }
   },
   "board": { "height": 5, "width": 5 },
-  "setup": { "soldiers": {"1": [["rect","a5","e5"]], "2":[["rect","a1","e1"]]}},
+  "setup": {
+    "soldiers": { "1": [["rect", "a5", "e5"]], "2": [["rect", "a1", "e1"]] }
+  },
   "startTurn": {
     "link": "selectunit"
   },
   "endGame": {
-    "selferadicate": { "condition": ["isempty","myunits"], "who": ["nextplayer"] },
-    "opperadicate": { "condition": ["isempty","oppunits"] }
+    "selferadicate": {
+      "condition": ["isempty", "myunits"],
+      "who": ["nextplayer"]
+    },
+    "opperadicate": { "condition": ["isempty", "oppunits"] }
   },
   "marks": {
     "selectunit": {
-      "from": ["union","mysoldiers","neutralsoldiers"],
+      "from": ["union", "mysoldiers", "neutralsoldiers"],
       "runGenerator": "findmovetargets",
       "link": "selectmovetarget"
     },
@@ -33,48 +38,96 @@
   "commands": {
     "move": {
       "applyEffects": [
-        ["moveat","selectunit","selectmovetarget"],
-        ["if",
-          ["and",["anyat","myunits","selectunit"],["isempty","adjacentneutrals"],["notempty","adjacentopps"]],
-          ["setin",
-            ["union","adjacentopps","adjacentfriends",["single","selectunit"]],
+        ["moveat", "selectunit", "selectmovetarget"],
+        [
+          "if",
+          [
+            "and",
+            ["anyat", "myunits", "selectunit"],
+            ["isempty", "adjacentneutrals"],
+            ["notempty", "adjacentopps"]
+          ],
+          [
+            "setin",
+            [
+              "union",
+              "adjacentopps",
+              "adjacentfriends",
+              ["single", "selectunit"]
+            ],
             "owner",
             0
           ]
         ],
-        ["if",
-          ["and",["anyat","myunits","selectunit"],["isempty","adjacentopps"],["notempty","adjacentneutrals"]],
-          ["setin",
-            ["union","adjacentneutrals","adjacentfriends",["single","selectunit"]],
+        [
+          "if",
+          [
+            "and",
+            ["anyat", "myunits", "selectunit"],
+            ["isempty", "adjacentopps"],
+            ["notempty", "adjacentneutrals"]
+          ],
+          [
+            "setin",
+            [
+              "union",
+              "adjacentneutrals",
+              "adjacentfriends",
+              ["single", "selectunit"]
+            ],
             "owner",
-            ["playercase",2,1]
+            ["playercase", 2, 1]
           ]
         ],
-        ["if",
-          ["and",["anyat","neutralunits","selectunit"],["isempty","adjacentfriends"],["notempty","adjacentopps"]],
-          ["setin",
-            ["union","adjacentopps","adjacentneutrals",["single","selectunit"]],
+        [
+          "if",
+          [
+            "and",
+            ["anyat", "neutralunits", "selectunit"],
+            ["isempty", "adjacentfriends"],
+            ["notempty", "adjacentopps"]
+          ],
+          [
+            "setin",
+            [
+              "union",
+              "adjacentopps",
+              "adjacentneutrals",
+              ["single", "selectunit"]
+            ],
             "owner",
-            ["playercase",1,2]
+            ["playercase", 1, 2]
           ]
         ],
-        ["if",
-          ["and",["anyat","neutralunits","selectunit"],["isempty","adjacentopps"],["notempty","adjacentfriends"]],
-          ["setin",
-            ["union","adjacentneutrals","adjacentfriends",["single","selectunit"]],
+        [
+          "if",
+          [
+            "and",
+            ["anyat", "neutralunits", "selectunit"],
+            ["isempty", "adjacentopps"],
+            ["notempty", "adjacentfriends"]
+          ],
+          [
+            "setin",
+            [
+              "union",
+              "adjacentneutrals",
+              "adjacentfriends",
+              ["single", "selectunit"]
+            ],
             "owner",
-            ["playercase",2,1]
+            ["playercase", 2, 1]
           ]
         ]
       ],
-      "link": "endturn"
+      "link": "endTurn"
     }
   },
   "generators": {
     "findmovetargets": {
       "type": "walker",
       "start": "selectunit",
-      "dirs": [1,3,5,7],
+      "dirs": [1, 3, 5, 7],
       "blocks": "units",
       "draw": {
         "steps": {
@@ -85,15 +138,17 @@
     "findadjacents": {
       "type": "neighbour",
       "start": "selectmovetarget",
-      "dirs": [1,3,5,7],
-      "condition": ["different",["start"],["pos","selectunit"]],
+      "dirs": [1, 3, 5, 7],
+      "condition": ["different", ["start"], ["pos", "selectunit"]],
       "draw": {
         "neighbours": {
-          "tolayer": ["ifelse",
-            ["anyat","oppunits",["target"]],
+          "tolayer": [
+            "ifelse",
+            ["anyat", "oppunits", ["target"]],
             "adjacentopps",
-            ["ifelse",
-              ["anyat","myunits",["target"]],
+            [
+              "ifelse",
+              ["anyat", "myunits", ["target"]],
               "adjacentfriends",
               "adjacentneutrals"
             ]

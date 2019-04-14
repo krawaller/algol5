@@ -30,7 +30,7 @@ const threemusketeersFlow: ThreemusketeersFlow = {
         "findmusketeerline",
         { ifplayer: [2, "findstrandedmusketeers"] }
       ],
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

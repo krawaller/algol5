@@ -1,4 +1,4 @@
-import { SemaphorScripts } from './_types';
+import { SemaphorScripts } from "./_types";
 
 const semaphorScripts: SemaphorScripts = {
   basic: [
@@ -21,7 +21,7 @@ const semaphorScripts: SemaphorScripts = {
     },
     { commands: ["c2"], include: ["deploy"] },
     {
-      commands: ["deploy", "endturn"],
+      commands: ["deploy", "endTurn"],
       include: [
         "a1",
         "a2",
@@ -39,7 +39,7 @@ const semaphorScripts: SemaphorScripts = {
     },
     { commands: ["c2"], include: ["promote"] },
     {
-      commands: ["promote", "endturn", "c2", "promote", "endturn"],
+      commands: ["promote", "endTurn", "c2", "promote", "endTurn"],
       include: [
         "a1",
         "a2",
@@ -58,13 +58,13 @@ const semaphorScripts: SemaphorScripts = {
       commands: [
         "b2",
         "deploy",
-        "endturn",
+        "endTurn",
         "b2",
         "promote",
-        "endturn",
+        "endTurn",
         "b2",
         "promote",
-        "endturn"
+        "endTurn"
       ],
       include: ["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"]
     },
@@ -72,10 +72,10 @@ const semaphorScripts: SemaphorScripts = {
       commands: [
         "a2",
         "deploy",
-        "endturn",
+        "endTurn",
         "a2",
         "promote",
-        "endturn",
+        "endTurn",
         "a2",
         "promote"
       ],

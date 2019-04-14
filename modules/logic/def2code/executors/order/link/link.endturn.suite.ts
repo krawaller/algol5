@@ -39,12 +39,12 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           },
           tests: [
             {
-              expr: { links: ["endturn"] },
+              expr: { links: ["endTurn"] },
               asserts: [
                 {
-                  sample: "LINKS.endturn",
+                  sample: "LINKS.endTurn",
                   res: "start2",
-                  desc: "we can link to endturn, passing over to next plr"
+                  desc: "we can link to endTurn, passing over to next plr"
                 }
               ]
             }
@@ -61,7 +61,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           },
           tests: [
             {
-              expr: { links: ["endturn"] },
+              expr: { links: ["endTurn"] },
               asserts: [
                 {
                   sample: "LINKS.endGame",
@@ -77,9 +77,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   res: ["a1", "a2"]
                 },
                 {
-                  sample: "LINKS.endturn",
+                  sample: "LINKS.endTurn",
                   res: falsy,
-                  desc: "we don't set endturn when game ends"
+                  desc: "we don't set endTurn when game ends"
                 }
               ]
             }
@@ -94,19 +94,19 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           },
           tests: [
             {
-              expr: { links: ["endturn"] },
+              expr: { links: ["endTurn"] },
               asserts: [
                 {
                   sample: "LINKS.endGame",
                   res: "lose",
-                  desc: "we can link to losing endturn"
+                  desc: "we can link to losing endTurn"
                 },
                 {
                   sample: "LINKS.endedBy",
                   res: "surrender"
                 },
                 {
-                  sample: "LINKS.endturn",
+                  sample: "LINKS.endTurn",
                   res: falsy
                 }
               ]
@@ -122,19 +122,19 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           },
           tests: [
             {
-              expr: { links: ["endturn"] },
+              expr: { links: ["endTurn"] },
               asserts: [
                 {
                   sample: "LINKS.endGame",
                   res: "draw",
-                  desc: "we can link to draw endturn"
+                  desc: "we can link to draw endTurn"
                 },
                 {
                   sample: "LINKS.endedBy",
                   res: "neither"
                 },
                 {
-                  sample: "LINKS.endturn",
+                  sample: "LINKS.endTurn",
                   res: falsy
                 }
               ]

@@ -1,4 +1,4 @@
-import { MurusgallicusFlow } from './_types';
+import { MurusgallicusFlow } from "./_types";
 
 const murusgallicusFlow: MurusgallicusFlow = {
   startTurn: { link: "selecttower" },
@@ -35,14 +35,14 @@ const murusgallicusFlow: MurusgallicusFlow = {
           ]
         }
       ],
-      link: "endturn"
+      link: "endTurn"
     },
     kill: {
       applyEffects: [
         { morphat: ["selecttower", "walls"] },
         { killat: "selectkill" }
       ],
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

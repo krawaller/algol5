@@ -4,29 +4,35 @@
     "id": "royalcarpet",
     "name": "Royal carpet",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/royalcarpet.htm",
-    "tags": ["infiltrate","deploy","differentunits","jump"]
+    "tags": ["infiltrate", "deploy", "differentunits", "jump"]
   },
   "graphics": {
-    "tiles": {"base":"playercolour"}, "icons": {"kings":"kings","towers":"rooks","soldiers":"pawns"}
+    "tiles": { "base": "playercolour" },
+    "icons": { "kings": "kings", "towers": "rooks", "soldiers": "pawns" }
   },
   "board": {
-    "height":10,"width":8,
+    "height": 10,
+    "width": 8,
     "terrain": {
-      "base": {"1":[["rect","a1","h1"]],"2":[["rect","a10","h10"]]}
-    },
+      "base": { "1": [["rect", "a1", "h1"]], "2": [["rect", "a10", "h10"]] }
+    }
   },
   "setup": {
-    "kings": {"1":["a2","c2","f2","h2"], "2": ["a9","c9","f9","h9"] }
+    "kings": { "1": ["a2", "c2", "f2", "h2"], "2": ["a9", "c9", "f9", "h9"] }
   },
   "startTurn": {
-    "links": ["selectking","selectsoldier",["if",["morethan",4,["sizeof","mysoldiers"]],"selectdeploytarget"]]
+    "links": [
+      "selectking",
+      "selectsoldier",
+      ["if", ["morethan", 4, ["sizeof", "mysoldiers"]], "selectdeploytarget"]
+    ]
   },
   "endGame": {
-    "doublejump": {"condition":["same",2,["sizeof","mytowers"]]}
+    "doublejump": { "condition": ["same", 2, ["sizeof", "mytowers"]] }
   },
   "marks": {
     "selectdeploytarget": {
-      "from": ["subtract","nobase","units"],
+      "from": ["subtract", "nobase", "units"],
       "link": "deploy"
     },
     "selectking": {
@@ -51,32 +57,57 @@
   },
   "commands": {
     "deploy": {
-      "applyEffect": ["spawn","selectdeploytarget","soldiers"],
-      "link": "endturn"
+      "applyEffect": ["spawn", "selectdeploytarget", "soldiers"],
+      "link": "endTurn"
     },
     "move": {
-      "applyEffect": ["moveat","selectsoldier","selectmovetarget"],
-      "link": "endturn"
+      "applyEffect": ["moveat", "selectsoldier", "selectmovetarget"],
+      "link": "endTurn"
     },
     "jump": {
       "applyEffects": [
-        ["killat",["onlyin","splashed"]],
-        ["if",
-          ["overlaps",["single","selectjumptarget"],"oppbase"],
-          ["setunitdata",["idofunitat",["firstposin",["firstposin",["union",["contextpos","jumpspot"],"selectking"]]]],"group","towers"]
+        ["killat", ["onlyin", "splashed"]],
+        [
+          "if",
+          ["overlaps", ["single", "selectjumptarget"], "oppbase"],
+          [
+            "setunitdata",
+            [
+              "idofunitat",
+              [
+                "firstposin",
+                [
+                  "firstposin",
+                  ["union", ["contextpos", "jumpspot"], "selectking"]
+                ]
+              ]
+            ],
+            "group",
+            "towers"
+          ]
         ],
-        ["move",["firstposin",["union",["contextpos","jumpspot"],"selectking"]],"selectjumptarget"],
-        ["setcontextval","jumpspot",["markpos","selectjumptarget"]]
+        [
+          "move",
+          ["firstposin", ["union", ["contextpos", "jumpspot"], "selectking"]],
+          "selectjumptarget"
+        ],
+        ["setcontextval", "jumpspot", ["markpos", "selectjumptarget"]]
       ],
       "runGenerators": ["findjumptargets"],
-      "allow": [["ifelse",["isempty","jumptargets"],"endturn","selectjumptarget"]]
+      "allow": [
+        ["ifelse", ["isempty", "jumptargets"], "endTurn", "selectjumptarget"]
+      ]
     }
   },
   "generators": {
     "findmovetargets": {
       "type": "nextto",
       "starts": "selectsoldier",
-      "condition": ["noneat",["union","base","units"],["contextpos","target"]],
+      "condition": [
+        "noneat",
+        ["union", "base", "units"],
+        ["contextpos", "target"]
+      ],
       "draw": {
         "target": {
           "tolayer": "movetargets"
@@ -85,23 +116,27 @@
     },
     "findjumptargets": {
       "type": "walker",
-      "starts": ["union","selectking",["contextpos","jumpspot"]],
+      "starts": ["union", "selectking", ["contextpos", "jumpspot"]],
       "steps": "myunits",
-      "blocks": ["subtract","board","units"],
+      "blocks": ["subtract", "board", "units"],
       "prioritizeblocksoversteps": true,
       "max": 2,
       "draw": {
         "block": {
-          "condition": ["same",["contextval","linelength"],1],
+          "condition": ["same", ["contextval", "linelength"], 1],
           "tolayer": "jumptargets",
-          "include": {"dir":["contextval","dir"]}
+          "include": { "dir": ["contextval", "dir"] }
         }
       }
     },
     "findsplashed": {
       "type": "nextto",
       "starts": "selectjumptarget",
-      "dirs": ["relativedir",5,["lookup","jumptargets","selectjumptarget","dir"]],
+      "dirs": [
+        "relativedir",
+        5,
+        ["lookup", "jumptargets", "selectjumptarget", "dir"]
+      ],
       "draw": {
         "target": {
           "tolayer": "splashed"

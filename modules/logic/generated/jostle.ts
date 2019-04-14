@@ -96,7 +96,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
     {
-      LINKS.endturn = "start2";
+      LINKS.endTurn = "start2";
     }
     return {
       LINKS,
@@ -614,7 +614,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       }
     }
     {
-      LINKS.endturn = "start1";
+      LINKS.endTurn = "start1";
     }
     return {
       LINKS,

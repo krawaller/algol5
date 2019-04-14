@@ -76,7 +76,7 @@ export function analyseGame(gameDef: FullDefAnon) {
       }
 
       for (const link of links) {
-        if (link !== "endturn" && !plrAnalysis[link]) {
+        if (link !== "endTurn" && !plrAnalysis[link]) {
           toCheck.push([link, action]);
         }
       }

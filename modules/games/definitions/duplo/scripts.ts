@@ -1,4 +1,4 @@
-import { DuploScripts } from './_types';
+import { DuploScripts } from "./_types";
 
 const duploScripts: DuploScripts = {
   basic: [
@@ -140,7 +140,7 @@ const duploScripts: DuploScripts = {
       ]
     },
     {
-      commands: ["d4", "deploy", "endturn"],
+      commands: ["d4", "deploy", "endTurn"],
       include: [
         "a1",
         "a2",
@@ -207,32 +207,32 @@ const duploScripts: DuploScripts = {
       ]
     },
     {
-      commands: ["f6", "deploy", "g7", "deploy", "endturn"],
+      commands: ["f6", "deploy", "g7", "deploy", "endTurn"],
       include: ["c3", "d4"]
     },
     { commands: ["d4"], include: ["c4", "c5", "d3", "d5", "e3", "e4"] },
-    { commands: ["d5", "expand", "endturn"], include: ["f6", "g7"] },
+    { commands: ["d5", "expand", "endTurn"], include: ["f6", "g7"] },
     { commands: ["f6"], include: ["e6", "e7", "f5", "f7", "g5", "g6"] },
-    { commands: ["e6", "expand", "endturn"], include: ["c3", "d4", "d5"] },
+    { commands: ["e6", "expand", "endTurn"], include: ["c3", "d4", "d5"] },
     { commands: ["d5"], include: ["c4", "c5", "c6", "d7", "e4", "e5"] },
-    { commands: ["d7", "expand", "endturn"], include: ["e6", "f6", "g7"] },
+    { commands: ["d7", "expand", "endTurn"], include: ["e6", "f6", "g7"] },
     { commands: ["e6"], include: ["d6", "e5", "e7", "f5", "f7"] },
     {
-      commands: ["d6", "expand", "endturn"],
+      commands: ["d6", "expand", "endTurn"],
       include: ["c3", "d4", "d5", "d7"]
     },
     { commands: ["c3"], include: ["a1", "b3", "b4", "c2", "c4", "d2", "d3"] },
-    { commands: ["a1", "expand", "endturn"], include: ["e6", "f6", "g7"] },
+    { commands: ["a1", "expand", "endTurn"], include: ["e6", "f6", "g7"] },
     { commands: ["g7"], include: ["f7", "f8", "g6", "g8", "h6", "h7"] },
     {
-      commands: ["f7", "expand", "endturn"],
+      commands: ["f7", "expand", "endTurn"],
       include: ["a1", "b2", "c3", "d4", "d5", "d7"]
     },
     { commands: ["d4"], include: ["c4", "c5", "d2", "e3", "e4", "f6"] },
-    { commands: ["f6", "expand", "endturn"], include: ["e6", "f7", "g7"] },
+    { commands: ["f6", "expand", "endTurn"], include: ["e6", "f7", "g7"] },
     { commands: ["e6"], include: ["d5", "e7", "f5"] },
     {
-      commands: ["d5", "expand", "endturn"],
+      commands: ["d5", "expand", "endTurn"],
       include: ["a1", "b2", "c3", "d4", "d7", "e5"]
     }
   ]

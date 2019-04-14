@@ -25,8 +25,8 @@ export function runGameRandomly(
 function getActionObj(links: AlgolStepLinks) {
   let actions = { ...links.actions };
 
-  if (links.endturn) {
-    actions.endturn = links.endturn;
+  if (links.endTurn) {
+    actions.endTurn = links.endTurn;
   }
 
   return actions;

@@ -1,4 +1,4 @@
-import { SemaphorFlow } from './_types';
+import { SemaphorFlow } from "./_types";
 
 const semaphorFlow: SemaphorFlow = {
   startTurn: { links: ["selectdeploytarget", "selectunit"] },
@@ -14,7 +14,7 @@ const semaphorFlow: SemaphorFlow = {
     deploy: {
       applyEffect: { spawnat: ["selectdeploytarget", "pawns", 0] },
       runGenerator: "findlines",
-      link: "endturn"
+      link: "endTurn"
     },
     promote: {
       applyEffect: {
@@ -24,7 +24,7 @@ const semaphorFlow: SemaphorFlow = {
         ]
       },
       runGenerator: "findlines",
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

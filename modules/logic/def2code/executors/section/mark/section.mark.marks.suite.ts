@@ -95,7 +95,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             },
             somemark: {
               from: "units",
-              link: { if: [{ anyat: ["units", "anothermark"] }, "endturn"] }
+              link: { if: [{ anyat: ["units", "anothermark"] }, "endTurn"] }
             }
           }
         }

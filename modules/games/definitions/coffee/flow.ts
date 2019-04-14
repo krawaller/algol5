@@ -1,4 +1,4 @@
-import { CoffeeFlow } from './_types';
+import { CoffeeFlow } from "./_types";
 
 const coffeeFlow: CoffeeFlow = {
   TODO:
@@ -28,7 +28,7 @@ const coffeeFlow: CoffeeFlow = {
         { spawnin: ["uphill", "markers", 0] }
       ],
       runGenerator: "findwinlines",
-      link: "endturn"
+      link: "endTurn"
     },
     downhill: {
       applyEffects: [
@@ -37,7 +37,7 @@ const coffeeFlow: CoffeeFlow = {
         { spawnin: ["downhill", "markers", 0] }
       ],
       runGenerator: "findwinlines",
-      link: "endturn"
+      link: "endTurn"
     },
     horisontal: {
       applyEffects: [
@@ -46,7 +46,7 @@ const coffeeFlow: CoffeeFlow = {
         { spawnin: ["horisontal", "markers", 0] }
       ],
       runGenerator: "findwinlines",
-      link: "endturn"
+      link: "endTurn"
     },
     vertical: {
       applyEffects: [
@@ -55,7 +55,7 @@ const coffeeFlow: CoffeeFlow = {
         { spawnin: ["vertical", "markers", 0] }
       ],
       runGenerator: "findwinlines",
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

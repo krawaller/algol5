@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedFlow } from './_types';
+import { MurusgallicusadvancedFlow } from "./_types";
 
 const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
   startTurn: { links: ["selecttower", "selectcatapult"] },
@@ -48,7 +48,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
           ]
         }
       ],
-      link: "endturn"
+      link: "endTurn"
     },
     kill: {
       applyEffects: [
@@ -61,14 +61,14 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
           ]
         }
       ],
-      link: "endturn"
+      link: "endTurn"
     },
     sacrifice: {
       applyEffects: [
         { morphat: ["selectkill", "walls"] },
         { killat: "selecttower" }
       ],
-      link: "endturn"
+      link: "endTurn"
     },
     fire: {
       applyEffects: [
@@ -105,7 +105,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
         },
         { morphat: ["selectcatapult", "towers"] }
       ],
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

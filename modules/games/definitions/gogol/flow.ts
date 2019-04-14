@@ -1,4 +1,4 @@
-import { GogolFlow } from './_types';
+import { GogolFlow } from "./_types";
 
 const gogolFlow: GogolFlow = {
   startTurn: {
@@ -45,18 +45,18 @@ const gogolFlow: GogolFlow = {
   commands: {
     deploy: {
       applyEffect: { spawnat: ["selectkingdeploy", "kings"] },
-      link: "endturn"
+      link: "endTurn"
     },
     move: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
-      link: "endturn"
+      link: "endTurn"
     },
     jump: {
       applyEffects: [
         { killat: { onlyin: "splashed" } },
         { moveat: ["selectunit", "selectjumptarget"] }
       ],
-      link: "endturn"
+      link: "endTurn"
     }
   },
   endGame: {

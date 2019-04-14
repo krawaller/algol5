@@ -152,7 +152,7 @@ export interface AlgolBoolCmndAvailable<
   Turnv
 > {
   cmndavailable: AlgolVal<
-    Cmnd | "endturn",
+    Cmnd | "endTurn",
     Btlp,
     Btlv,
     Cmnd,

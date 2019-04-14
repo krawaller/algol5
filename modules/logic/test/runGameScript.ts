@@ -27,25 +27,25 @@ export function runGameScript(
           let func;
           if (
             ["win", "lose", "draw"].includes(action) ||
-            (action === "endturn" &&
+            (action === "endTurn" &&
               ["win", "lose", "draw"].includes(step.LINKS.endGame))
           ) {
             if (lines.length) {
               throw new Error("Game end but lines remaining");
             }
-            if (["start1", "start2"].includes(step.LINKS.endturn)) {
+            if (["start1", "start2"].includes(step.LINKS.endTurn)) {
               throw new Error("Expected game to end but it didnt");
             }
             if (step.LINKS.endGame !== action) {
               throw new Error(
                 `Game ended with unexpected winner: ${action} vs ${
-                  step.LINKS.endturn
+                  step.LINKS.endTurn
                 }`
               );
             }
           } else {
-            if (action === "endturn") {
-              func = step.LINKS.endturn;
+            if (action === "endTurn") {
+              func = step.LINKS.endTurn;
             } else {
               func = step.LINKS.actions[action];
             }
@@ -59,11 +59,11 @@ export function runGameScript(
               if (action.match(/^[a-z]{1,2}[0-9]{1,2}$/)) {
                 expect(text.toLowerCase()).toMatch("select");
               } else if (
-                action === "endturn" ||
-                action === step.LINKS.endturn
+                action === "endTurn" ||
+                action === step.LINKS.endTurn
               ) {
                 expect((instr as AlgolContentLineAnon).line).toContainEqual({
-                  command: "endturn"
+                  command: "endTurn"
                 });
               } else {
                 expect((instr as AlgolContentLineAnon).line).toContainEqual({
@@ -95,6 +95,6 @@ export function runGameScript(
 
 function getAvailableActions(links: AlgolStepLinks) {
   return Object.keys(links.actions)
-    .concat(links.endturn || [])
+    .concat(links.endTurn || [])
     .concat(links.endGame || []);
 }

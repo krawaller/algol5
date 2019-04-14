@@ -1,4 +1,4 @@
-import { AmazonsScripts } from './_types';
+import { AmazonsScripts } from "./_types";
 
 const amazonsScripts: AmazonsScripts = {
   basic: [
@@ -61,7 +61,7 @@ const amazonsScripts: AmazonsScripts = {
       ]
     },
     {
-      commands: ["g4", "fire", "endturn", "g1"],
+      commands: ["g4", "fire", "endTurn", "g1"],
       include: [
         "e1",
         "e3",
@@ -107,7 +107,7 @@ const amazonsScripts: AmazonsScripts = {
       ]
     },
     {
-      commands: ["f4", "fire", "endturn", "d4"],
+      commands: ["f4", "fire", "endTurn", "d4"],
       include: [
         "a1",
         "b2",

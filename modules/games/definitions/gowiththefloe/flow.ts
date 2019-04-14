@@ -1,4 +1,4 @@
-import { GowiththefloeFlow } from './_types';
+import { GowiththefloeFlow } from "./_types";
 
 const gowiththefloeFlow: GowiththefloeFlow = {
   STATUS: "wip",
@@ -31,12 +31,12 @@ const gowiththefloeFlow: GowiththefloeFlow = {
         { spawnin: ["cracks", "holes", 0] }
       ],
       runGenerator: "findsealsmoves",
-      link: "endturn"
+      link: "endTurn"
     },
     eat: {
       applyEffects: [{ killat: "selectunit" }, { killat: "selecteattarget" }],
       runGenerator: "findsealsmoves",
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

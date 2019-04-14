@@ -3,48 +3,96 @@
   "meta": {
     "name": "Court",
     "source": "http://www.di.fc.ul.pt/~jpn/gv/court.htm",
-    "tags": ["promote","differentunits","capture"]
+    "tags": ["promote", "differentunits", "capture"]
   },
   "graphics": {
-    "icons": {"knights":"knights","pawns":"pawns","bishops":"bishops","rooks":"rooks"}
+    "icons": {
+      "knights": "knights",
+      "pawns": "pawns",
+      "bishops": "bishops",
+      "rooks": "rooks"
+    }
   },
   "board": {
-    "height": 8, "width": 8
+    "height": 8,
+    "width": 8
   },
   "setup": {
-    "pawns": {"1":[["rect","b6","g7",5]],"2":[["rect","b2","g3",1]]}
+    "pawns": { "1": [["rect", "b6", "g7", 5]], "2": [["rect", "b2", "g3", 1]] }
   },
   "playervars": {
-    "clerics": [2,2],
-    "nobles": [2,2],
-    "bankers": [2,2]
+    "clerics": [2, 2],
+    "nobles": [2, 2],
+    "bankers": [2, 2]
   },
   "startturn": {
     "allow": ["selectunit"]
   },
   "afterstep": {
-    "allow": ["endturn"]
+    "allow": ["endTurn"]
   },
-  "endturn": {
+  "endTurn": {
     "endgame": {
-      "noenemypeasants": {"condition":["isempty","opppawns"]},
-      "noownpeasants": {"condition":["isempty","mypawns"],"who":["contextval","nextplayer"]}
+      "noenemypeasants": { "condition": ["isempty", "opppawns"] },
+      "noownpeasants": {
+        "condition": ["isempty", "mypawns"],
+        "who": ["contextval", "nextplayer"]
+      }
     }
   },
   "marks": {
     "selectunit": {
       "from": "myunits",
       "runGenerators": [
-        ["if",["anyat","myknights","selectunit"],"findknighttargets"],
-        ["if",["anyat","mypawns","selectunit"],"findpawntargets"],
-        ["if",["anyat","mybishops","selectunit"],"findlinetargets"],
-        ["if",["anyat","myrooks","selectunit"],"findlinetargets"]
+        ["if", ["anyat", "myknights", "selectunit"], "findknighttargets"],
+        ["if", ["anyat", "mypawns", "selectunit"], "findpawntargets"],
+        ["if", ["anyat", "mybishops", "selectunit"], "findlinetargets"],
+        ["if", ["anyat", "myrooks", "selectunit"], "findlinetargets"]
       ],
       "allow": [
         "selectmovetarget",
-        ["if",["and",[["anyat","mypawns","selectunit"],["truthy",["playervar","nobles",["contextval","currentplayer"]]]]],"makenoble"],
-        ["if",["and",[["anyat","mypawns","selectunit"],["truthy",["playervar","clerics",["contextval","currentplayer"]]]]],"makecleric"],
-        ["if",["and",[["anyat","mypawns","selectunit"],["truthy",["playervar","bankers",["contextval","currentplayer"]]]]],"makebanker"]
+        [
+          "if",
+          [
+            "and",
+            [
+              ["anyat", "mypawns", "selectunit"],
+              [
+                "truthy",
+                ["playervar", "nobles", ["contextval", "currentplayer"]]
+              ]
+            ]
+          ],
+          "makenoble"
+        ],
+        [
+          "if",
+          [
+            "and",
+            [
+              ["anyat", "mypawns", "selectunit"],
+              [
+                "truthy",
+                ["playervar", "clerics", ["contextval", "currentplayer"]]
+              ]
+            ]
+          ],
+          "makecleric"
+        ],
+        [
+          "if",
+          [
+            "and",
+            [
+              ["anyat", "mypawns", "selectunit"],
+              [
+                "truthy",
+                ["playervar", "bankers", ["contextval", "currentplayer"]]
+              ]
+            ]
+          ],
+          "makebanker"
+        ]
       ]
     },
     "selectmovetarget": {
@@ -55,28 +103,36 @@
   "commands": {
     "move": {
       "applyEffects": [
-        ["if",["anyat","oppknights","selectmovetarget"],["addtoplayervar","nobles",["contextval","currentplayer"],1]],
-        ["if",["anyat","oppbishops","selectmovetarget"],["addtoplayervar","clerics",["contextval","currentplayer"],1]],
-        ["forallin","selectmovetarget",["killunit",["loopid"]]],
-        ["move","selectunit","selectmovetarget"]
+        [
+          "if",
+          ["anyat", "oppknights", "selectmovetarget"],
+          ["addtoplayervar", "nobles", ["contextval", "currentplayer"], 1]
+        ],
+        [
+          "if",
+          ["anyat", "oppbishops", "selectmovetarget"],
+          ["addtoplayervar", "clerics", ["contextval", "currentplayer"], 1]
+        ],
+        ["forallin", "selectmovetarget", ["killunit", ["loopid"]]],
+        ["move", "selectunit", "selectmovetarget"]
       ]
     },
     "makenoble": {
       "applyEffects": [
-        ["setunitdata",["idofunitat","selectunit"],"group","knights"],
-        ["addtoplayervar","nobles",["contextval","currentplayer"],-1]
+        ["setunitdata", ["idofunitat", "selectunit"], "group", "knights"],
+        ["addtoplayervar", "nobles", ["contextval", "currentplayer"], -1]
       ]
     },
     "makecleric": {
       "applyEffects": [
-        ["setunitdata",["idofunitat","selectunit"],"group","bishops"],
-        ["addtoplayervar","clerics",["contextval","currentplayer"],-1]
+        ["setunitdata", ["idofunitat", "selectunit"], "group", "bishops"],
+        ["addtoplayervar", "clerics", ["contextval", "currentplayer"], -1]
       ]
     },
     "makebanker": {
       "applyEffects": [
-        ["setunitdata",["idofunitat","selectunit"],"group","rooks"],
-        ["addtoplayervar","bankers",["contextval","currentplayer"],-1]
+        ["setunitdata", ["idofunitat", "selectunit"], "group", "rooks"],
+        ["addtoplayervar", "bankers", ["contextval", "currentplayer"], -1]
       ]
     }
   },
@@ -84,12 +140,17 @@
     "findlinetargets": {
       "type": "walker",
       "starts": "selectunit",
-      "dirs": ["ifelse",["anyat","mybishops","selectunit"],["dirs",[2,4,6,8]],["dirs",[1,3,5,7]]],
+      "dirs": [
+        "ifelse",
+        ["anyat", "mybishops", "selectunit"],
+        ["dirs", [2, 4, 6, 8]],
+        ["dirs", [1, 3, 5, 7]]
+      ],
       "blocks": "units",
       "draw": {
         "steps": { "tolayer": "movetargets" },
         "block": {
-          "condition": ["noneat","myunits",["contextpos","target"]],
+          "condition": ["noneat", "myunits", ["contextpos", "target"]],
           "tolayer": "movetargets"
         }
       }
@@ -97,25 +158,38 @@
     "findpawntargets": {
       "type": "nextto",
       "starts": "selectunit",
-      "dirs": ["relativedirs",["dirs",[8,1,2]],["lookup","units","selectunit","dir"]],
-      "condition": ["or",[
-        ["and",[
-          ["valinlist",["contextval","dir"],[1,5]],
-          ["noneat","units",["contextpos","target"]]
-        ]],
-        ["and",[
-          ["not",["valinlist",["contextval","dir"],[1,5]]],
-          ["anyat","oppunits",["contextpos","target"]]
-        ]]
-      ]],
-      "draw": { "target": {"tolayer":"movetargets"} }
+      "dirs": [
+        "relativedirs",
+        ["dirs", [8, 1, 2]],
+        ["lookup", "units", "selectunit", "dir"]
+      ],
+      "condition": [
+        "or",
+        [
+          [
+            "and",
+            [
+              ["valinlist", ["contextval", "dir"], [1, 5]],
+              ["noneat", "units", ["contextpos", "target"]]
+            ]
+          ],
+          [
+            "and",
+            [
+              ["not", ["valinlist", ["contextval", "dir"], [1, 5]]],
+              ["anyat", "oppunits", ["contextpos", "target"]]
+            ]
+          ]
+        ]
+      ],
+      "draw": { "target": { "tolayer": "movetargets" } }
     },
     "findknighttargets": {
       "type": "offset",
       "starts": "selectunit",
-      "offsets": [[2,1],[2,-1]],
-      "dirs": ["dirs",[1,3,5,7]],
-      "condition": ["noneat","myunits",["contextpos","target"]],
+      "offsets": [[2, 1], [2, -1]],
+      "dirs": ["dirs", [1, 3, 5, 7]],
+      "condition": ["noneat", "myunits", ["contextpos", "target"]],
       "draw": {
         "target": {
           "tolayer": "movetargets"

@@ -34,7 +34,7 @@ const shoveoffFlow: ShoveoffFlow = {
         }
       ],
       runGenerator: "findfourinarow",
-      link: "endturn"
+      link: "endTurn"
     },
     south: {
       applyEffects: [
@@ -51,7 +51,7 @@ const shoveoffFlow: ShoveoffFlow = {
         }
       ],
       runGenerator: "findfourinarow",
-      link: "endturn"
+      link: "endTurn"
     },
     east: {
       applyEffects: [
@@ -68,7 +68,7 @@ const shoveoffFlow: ShoveoffFlow = {
         }
       ],
       runGenerator: "findfourinarow",
-      link: "endturn"
+      link: "endTurn"
     },
     west: {
       applyEffects: [
@@ -85,7 +85,7 @@ const shoveoffFlow: ShoveoffFlow = {
         }
       ],
       runGenerator: "findfourinarow",
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

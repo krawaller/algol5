@@ -1,4 +1,4 @@
-import { JostleFlow } from './_types';
+import { JostleFlow } from "./_types";
 
 const jostleFlow: JostleFlow = {
   startTurn: { link: "selectunit" },
@@ -34,7 +34,7 @@ const jostleFlow: JostleFlow = {
   commands: {
     jostle: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

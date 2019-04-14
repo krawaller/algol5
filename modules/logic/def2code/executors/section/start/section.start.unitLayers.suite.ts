@@ -36,7 +36,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             }
           },
           startTurn: {
-            link: { if: [{ anyat: ["myunits", "somemark"] }, "endturn"] }
+            link: { if: [{ anyat: ["myunits", "somemark"] }, "endTurn"] }
           }
         },
         graphics: {

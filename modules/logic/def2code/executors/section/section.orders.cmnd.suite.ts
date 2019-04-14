@@ -20,7 +20,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           commands: {
             someCmnd: {
               applyEffect: { killid: "unit1" },
-              link: "endturn"
+              link: "endTurn"
             }
           }
         }
@@ -44,7 +44,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "LINKS",
-                  res: { endturn: "start2" }
+                  res: { endTurn: "start2" }
                 },
                 {
                   sample: "UNITDATA.unit1",

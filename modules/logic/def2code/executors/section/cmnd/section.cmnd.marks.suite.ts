@@ -77,7 +77,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.flow,
           commands: {
             somecmnd: {
-              link: { if: [{ anyat: ["units", "somemark"] }, "endturn"] }
+              link: { if: [{ anyat: ["units", "somemark"] }, "endTurn"] }
             }
           }
         }

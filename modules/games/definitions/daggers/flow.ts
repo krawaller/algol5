@@ -1,4 +1,4 @@
-import { DaggersFlow } from './_types';
+import { DaggersFlow } from "./_types";
 
 const daggersFlow: DaggersFlow = {
   endGame: {
@@ -26,7 +26,7 @@ const daggersFlow: DaggersFlow = {
   commands: {
     move: {
       applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

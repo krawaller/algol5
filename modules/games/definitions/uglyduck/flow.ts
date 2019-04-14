@@ -1,4 +1,4 @@
-import { UglyduckFlow } from './_types';
+import { UglyduckFlow } from "./_types";
 
 const uglyduckFlow: UglyduckFlow = {
   startTurn: { link: "selectunit" },
@@ -27,7 +27,7 @@ const uglyduckFlow: UglyduckFlow = {
         },
         { stompat: ["selectunit", "selectmovetarget"] }
       ],
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

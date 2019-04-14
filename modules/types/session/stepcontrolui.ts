@@ -6,7 +6,7 @@ export type StepControlUI = {
   commands: {
     [cmndname: string]: string;
   };
-  submit: "endturn" | "win" | "draw" | "lose" | null;
+  submit: "endTurn" | "win" | "draw" | "lose" | null;
   undo: string | null;
   turnStart: boolean;
   deadEnds: {

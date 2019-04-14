@@ -227,7 +227,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "regicide";
     } else {
-      LINKS.endturn = "start2";
+      LINKS.endTurn = "start2";
     }
     return {
       LINKS,
@@ -677,7 +677,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "regicide";
     } else {
-      LINKS.endturn = "start1";
+      LINKS.endTurn = "start1";
     }
     return {
       LINKS,

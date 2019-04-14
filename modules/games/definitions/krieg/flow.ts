@@ -1,4 +1,4 @@
-import { KriegFlow } from './_types';
+import { KriegFlow } from "./_types";
 
 const kriegFlow: KriegFlow = {
   marks: {
@@ -29,7 +29,7 @@ const kriegFlow: KriegFlow = {
         { morphat: ["selectunit", "frozens"] },
         { moveat: ["selectunit", "selectmove"] }
       ],
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

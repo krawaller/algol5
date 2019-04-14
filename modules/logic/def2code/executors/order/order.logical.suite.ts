@@ -22,13 +22,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: {
                 multi: [
                   { effects: [{ killid: "unit1" }] },
-                  { links: ["endturn"] }
+                  { links: ["endTurn"] }
                 ]
               },
               asserts: [
                 {
                   sample: "LINKS",
-                  res: { endturn: "start2" }
+                  res: { endTurn: "start2" }
                 },
                 {
                   sample: "UNITDATA.unit1",

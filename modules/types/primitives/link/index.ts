@@ -26,4 +26,4 @@ export type AlgolLink<
 export type AlgolLinkInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | Cmnd
   | Mrk
-  | "endturn";
+  | "endTurn";

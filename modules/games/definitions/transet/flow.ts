@@ -1,4 +1,4 @@
-import { TransetFlow } from './_types';
+import { TransetFlow } from "./_types";
 
 const transetFlow: TransetFlow = {
   endGame: {
@@ -61,14 +61,14 @@ const transetFlow: TransetFlow = {
         },
         { moveat: ["selectunit", "selectmovetarget"] }
       ],
-      link: "endturn"
+      link: "endTurn"
     },
     swap: {
       applyEffects: [
         { moveat: ["selectunit", "selectswap1target"] },
         { moveat: ["selectswapunit", { onlyin: "swap2step" }] }
       ],
-      link: "endturn"
+      link: "endTurn"
     }
   }
 };

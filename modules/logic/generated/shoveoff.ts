@@ -32,7 +32,7 @@ const emptyArtifactLayers = {
 };
 
 const connections = boardConnections({ height: 4, width: 4 });
-const relativeDirs = makeRelativeDirs();
+const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = {
   southedge: {
     a1: { pos: "a1", x: 1, y: 1 },

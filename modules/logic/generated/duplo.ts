@@ -23,7 +23,7 @@ const emptyArtifactLayers = {
 };
 
 const connections = boardConnections({ height: 8, width: 8 });
-const relativeDirs = makeRelativeDirs();
+const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = {};
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];

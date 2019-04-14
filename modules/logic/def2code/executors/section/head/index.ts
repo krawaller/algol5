@@ -40,7 +40,9 @@ export function executeHead(
     }, width: ${gameDef.board.width} });
   `;
 
-  ret += `const relativeDirs = makeRelativeDirs(); `;
+  let offsets = gameDef.board.offsets || [];
+  if (gameDef.board.offset) offsets.push(gameDef.board.offset);
+  ret += `const relativeDirs = makeRelativeDirs(${JSON.stringify(offsets)}); `;
 
   if (isTerrainNeutral(gameDef)) {
     ret += `const TERRAIN = ${JSON.stringify(terrainLayers(gameDef.board))}; `;

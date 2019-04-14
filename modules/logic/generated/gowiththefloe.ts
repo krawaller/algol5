@@ -22,7 +22,7 @@ const emptyArtifactLayers = {
 };
 
 const connections = boardConnections({ height: 8, width: 8 });
-const relativeDirs = makeRelativeDirs();
+const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = {
   water: {
     a1: { pos: "a1", x: 1, y: 1 },

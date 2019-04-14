@@ -38,6 +38,8 @@ export default function parseVal(
     switch (expr[0]) {
       case "dir":
         return "DIR";
+      case "offsetdir":
+        return "+DIR[1]"; // 'because offset is "d1f2r3", so dir is index 1, always just 1 char
       case "player":
         return player;
       case "otherplayer":

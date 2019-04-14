@@ -40,6 +40,10 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
         },
         { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] },
         {
+          context: { DIR: "d4f2r-1" },
+          tests: [{ expr: ["offsetdir"], res: 4 }]
+        },
+        {
           context: { TURNVARS: { foo: 666 } },
           tests: [{ expr: { turnvar: { value: "foo" } }, res: 666 }]
         },

@@ -46,6 +46,7 @@ export type AlgolVal<
 type AlgolValInner<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | _T
   | ["dir"]
+  | ["offsetdir"]
   | ["stopreason"]
   | ["loopid"]
   | ["player"]

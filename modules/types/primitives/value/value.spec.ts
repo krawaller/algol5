@@ -49,6 +49,7 @@ const tests: TestVal[] = [
   { gridat: ["mygrid", "mymark"] },
   { gridin: ["mygrid", "mylayer"] },
   ["dir"],
+  ["offsetdir"],
   ["countsofar"]
 ];
 

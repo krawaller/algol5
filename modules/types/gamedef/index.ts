@@ -14,7 +14,7 @@ import { AlgolBoard } from "./board";
 import { AI } from "./ai";
 import { Setup } from "./setup";
 import { Instructions } from "./instructions";
-import { Meta } from "./meta";
+import { AlgolMeta } from "./meta";
 import { Flow } from "./flow";
 import { GameTestSuite } from "./scripts";
 
@@ -105,7 +105,7 @@ export type FullDef<
     TurnVar,
     Unit
   >;
-  meta: Meta;
+  meta: AlgolMeta<Command, Mark>;
   flow: Flow<
     BattlePos,
     BattleVar,
@@ -138,7 +138,7 @@ export type Definition = {
   flow?: any;
   TODO?: string;
   STATUS?: string;
-  meta: Meta;
+  meta: any;
   graphics: Graphics;
   board: any;
   setup?: any;

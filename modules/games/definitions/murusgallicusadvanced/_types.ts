@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type MurusgallicusadvancedBoardHeight = 7;
 export type MurusgallicusadvancedBoardWidth = 8;
@@ -25,7 +25,7 @@ export type MurusgallicusadvancedBoard = AlgolBoard<MurusgallicusadvancedBoardHe
 export type MurusgallicusadvancedAI = AI<MurusgallicusadvancedAiArtifactLayer, MurusgallicusadvancedAiAspect, MurusgallicusadvancedAiBrain, MurusgallicusadvancedAiGenerator, MurusgallicusadvancedAiGrid, MurusgallicusadvancedAiTerrain, MurusgallicusadvancedAiTerrainLayer, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedBoardHeight, MurusgallicusadvancedBoardWidth, MurusgallicusadvancedCommand, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedPosition, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar>;
 export type MurusgallicusadvancedGraphics = Graphics<MurusgallicusadvancedTerrain, MurusgallicusadvancedUnit>;
 export type MurusgallicusadvancedInstructions = Instructions<MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedPhase, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedUnit>;
-export type MurusgallicusadvancedMeta = Meta;
+export type MurusgallicusadvancedMeta = AlgolMeta<MurusgallicusadvancedCommand, MurusgallicusadvancedMark>;
 export type MurusgallicusadvancedScripts = GameTestSuite;
 export type MurusgallicusadvancedSetup = Setup<MurusgallicusadvancedPosition, MurusgallicusadvancedUnit>;
 

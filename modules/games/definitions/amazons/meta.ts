@@ -1,4 +1,4 @@
-import { AmazonsMeta } from './_types';
+import { AmazonsMeta } from "./_types";
 
 const amazonsMeta: AmazonsMeta = {
   id: "amazons",

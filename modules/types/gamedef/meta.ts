@@ -1,9 +1,7 @@
-export type Meta = {
+export type AlgolMeta<Command extends string, Mark extends string> = {
   rules?: RuleDescription;
   performance: {
-    canAlwaysEnd: {
-      [actionName: string]: boolean;
-    };
+    canAlwaysEnd: Partial<{ [actionName in Command | Mark]: boolean }>;
   };
   [otherMeta: string]: any;
 };

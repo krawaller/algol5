@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type MurusgallicusBoardHeight = 7;
 export type MurusgallicusBoardWidth = 8;
@@ -25,7 +25,7 @@ export type MurusgallicusBoard = AlgolBoard<MurusgallicusBoardHeight, Murusgalli
 export type MurusgallicusAI = AI<MurusgallicusAiArtifactLayer, MurusgallicusAiAspect, MurusgallicusAiBrain, MurusgallicusAiGenerator, MurusgallicusAiGrid, MurusgallicusAiTerrain, MurusgallicusAiTerrainLayer, MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusBoardHeight, MurusgallicusBoardWidth, MurusgallicusCommand, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPosition, MurusgallicusTurnPos, MurusgallicusTurnVar>;
 export type MurusgallicusGraphics = Graphics<MurusgallicusTerrain, MurusgallicusUnit>;
 export type MurusgallicusInstructions = Instructions<MurusgallicusBattlePos, MurusgallicusBattleVar, MurusgallicusCommand, MurusgallicusGrid, MurusgallicusLayer, MurusgallicusMark, MurusgallicusPhase, MurusgallicusTurnPos, MurusgallicusTurnVar, MurusgallicusUnit>;
-export type MurusgallicusMeta = Meta;
+export type MurusgallicusMeta = AlgolMeta<MurusgallicusCommand, MurusgallicusMark>;
 export type MurusgallicusScripts = GameTestSuite;
 export type MurusgallicusSetup = Setup<MurusgallicusPosition, MurusgallicusUnit>;
 

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type GowiththefloeBoardHeight = 8;
 export type GowiththefloeBoardWidth = 8;
@@ -25,7 +25,7 @@ export type GowiththefloeBoard = AlgolBoard<GowiththefloeBoardHeight, Gowiththef
 export type GowiththefloeAI = AI<GowiththefloeAiArtifactLayer, GowiththefloeAiAspect, GowiththefloeAiBrain, GowiththefloeAiGenerator, GowiththefloeAiGrid, GowiththefloeAiTerrain, GowiththefloeAiTerrainLayer, GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeBoardHeight, GowiththefloeBoardWidth, GowiththefloeCommand, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloePosition, GowiththefloeTurnPos, GowiththefloeTurnVar>;
 export type GowiththefloeGraphics = Graphics<GowiththefloeTerrain, GowiththefloeUnit>;
 export type GowiththefloeInstructions = Instructions<GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloePhase, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;
-export type GowiththefloeMeta = Meta;
+export type GowiththefloeMeta = AlgolMeta<GowiththefloeCommand, GowiththefloeMark>;
 export type GowiththefloeScripts = GameTestSuite;
 export type GowiththefloeSetup = Setup<GowiththefloePosition, GowiththefloeUnit>;
 

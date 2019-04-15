@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type DuploBoardHeight = 8;
 export type DuploBoardWidth = 8;
@@ -25,7 +25,7 @@ export type DuploBoard = AlgolBoard<DuploBoardHeight, DuploBoardWidth, DuploGrid
 export type DuploAI = AI<DuploAiArtifactLayer, DuploAiAspect, DuploAiBrain, DuploAiGenerator, DuploAiGrid, DuploAiTerrain, DuploAiTerrainLayer, DuploBattlePos, DuploBattleVar, DuploBoardHeight, DuploBoardWidth, DuploCommand, DuploGrid, DuploLayer, DuploMark, DuploPosition, DuploTurnPos, DuploTurnVar>;
 export type DuploGraphics = Graphics<DuploTerrain, DuploUnit>;
 export type DuploInstructions = Instructions<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGrid, DuploLayer, DuploMark, DuploPhase, DuploTurnPos, DuploTurnVar, DuploUnit>;
-export type DuploMeta = Meta;
+export type DuploMeta = AlgolMeta<DuploCommand, DuploMark>;
 export type DuploScripts = GameTestSuite;
 export type DuploSetup = Setup<DuploPosition, DuploUnit>;
 

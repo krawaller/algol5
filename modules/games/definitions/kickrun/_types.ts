@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type KickrunBoardHeight = 5;
 export type KickrunBoardWidth = 5;
@@ -25,7 +25,7 @@ export type KickrunBoard = AlgolBoard<KickrunBoardHeight, KickrunBoardWidth, Kic
 export type KickrunAI = AI<KickrunAiArtifactLayer, KickrunAiAspect, KickrunAiBrain, KickrunAiGenerator, KickrunAiGrid, KickrunAiTerrain, KickrunAiTerrainLayer, KickrunBattlePos, KickrunBattleVar, KickrunBoardHeight, KickrunBoardWidth, KickrunCommand, KickrunGrid, KickrunLayer, KickrunMark, KickrunPosition, KickrunTurnPos, KickrunTurnVar>;
 export type KickrunGraphics = Graphics<KickrunTerrain, KickrunUnit>;
 export type KickrunInstructions = Instructions<KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGrid, KickrunLayer, KickrunMark, KickrunPhase, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
-export type KickrunMeta = Meta;
+export type KickrunMeta = AlgolMeta<KickrunCommand, KickrunMark>;
 export type KickrunScripts = GameTestSuite;
 export type KickrunSetup = Setup<KickrunPosition, KickrunUnit>;
 

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type ShoveoffBoardHeight = 4;
 export type ShoveoffBoardWidth = 4;
@@ -25,7 +25,7 @@ export type ShoveoffBoard = AlgolBoard<ShoveoffBoardHeight, ShoveoffBoardWidth, 
 export type ShoveoffAI = AI<ShoveoffAiArtifactLayer, ShoveoffAiAspect, ShoveoffAiBrain, ShoveoffAiGenerator, ShoveoffAiGrid, ShoveoffAiTerrain, ShoveoffAiTerrainLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffBoardHeight, ShoveoffBoardWidth, ShoveoffCommand, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffPosition, ShoveoffTurnPos, ShoveoffTurnVar>;
 export type ShoveoffGraphics = Graphics<ShoveoffTerrain, ShoveoffUnit>;
 export type ShoveoffInstructions = Instructions<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffPhase, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;
-export type ShoveoffMeta = Meta;
+export type ShoveoffMeta = AlgolMeta<ShoveoffCommand, ShoveoffMark>;
 export type ShoveoffScripts = GameTestSuite;
 export type ShoveoffSetup = Setup<ShoveoffPosition, ShoveoffUnit>;
 

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type DescentBoardHeight = 4;
 export type DescentBoardWidth = 4;
@@ -25,7 +25,7 @@ export type DescentBoard = AlgolBoard<DescentBoardHeight, DescentBoardWidth, Des
 export type DescentAI = AI<DescentAiArtifactLayer, DescentAiAspect, DescentAiBrain, DescentAiGenerator, DescentAiGrid, DescentAiTerrain, DescentAiTerrainLayer, DescentBattlePos, DescentBattleVar, DescentBoardHeight, DescentBoardWidth, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentPosition, DescentTurnPos, DescentTurnVar>;
 export type DescentGraphics = Graphics<DescentTerrain, DescentUnit>;
 export type DescentInstructions = Instructions<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentTurnPos, DescentTurnVar, DescentUnit>;
-export type DescentMeta = Meta;
+export type DescentMeta = AlgolMeta<DescentCommand, DescentMark>;
 export type DescentScripts = GameTestSuite;
 export type DescentSetup = Setup<DescentPosition, DescentUnit>;
 

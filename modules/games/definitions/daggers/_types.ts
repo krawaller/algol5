@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type DaggersBoardHeight = 8;
 export type DaggersBoardWidth = 8;
@@ -25,7 +25,7 @@ export type DaggersBoard = AlgolBoard<DaggersBoardHeight, DaggersBoardWidth, Dag
 export type DaggersAI = AI<DaggersAiArtifactLayer, DaggersAiAspect, DaggersAiBrain, DaggersAiGenerator, DaggersAiGrid, DaggersAiTerrain, DaggersAiTerrainLayer, DaggersBattlePos, DaggersBattleVar, DaggersBoardHeight, DaggersBoardWidth, DaggersCommand, DaggersGrid, DaggersLayer, DaggersMark, DaggersPosition, DaggersTurnPos, DaggersTurnVar>;
 export type DaggersGraphics = Graphics<DaggersTerrain, DaggersUnit>;
 export type DaggersInstructions = Instructions<DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGrid, DaggersLayer, DaggersMark, DaggersPhase, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
-export type DaggersMeta = Meta;
+export type DaggersMeta = AlgolMeta<DaggersCommand, DaggersMark>;
 export type DaggersScripts = GameTestSuite;
 export type DaggersSetup = Setup<DaggersPosition, DaggersUnit>;
 

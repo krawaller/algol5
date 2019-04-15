@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, Meta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
 
 export type ThreemusketeersBoardHeight = 5;
 export type ThreemusketeersBoardWidth = 5;
@@ -25,7 +25,7 @@ export type ThreemusketeersBoard = AlgolBoard<ThreemusketeersBoardHeight, Threem
 export type ThreemusketeersAI = AI<ThreemusketeersAiArtifactLayer, ThreemusketeersAiAspect, ThreemusketeersAiBrain, ThreemusketeersAiGenerator, ThreemusketeersAiGrid, ThreemusketeersAiTerrain, ThreemusketeersAiTerrainLayer, ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersBoardHeight, ThreemusketeersBoardWidth, ThreemusketeersCommand, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersPosition, ThreemusketeersTurnPos, ThreemusketeersTurnVar>;
 export type ThreemusketeersGraphics = Graphics<ThreemusketeersTerrain, ThreemusketeersUnit>;
 export type ThreemusketeersInstructions = Instructions<ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersPhase, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersUnit>;
-export type ThreemusketeersMeta = Meta;
+export type ThreemusketeersMeta = AlgolMeta<ThreemusketeersCommand, ThreemusketeersMark>;
 export type ThreemusketeersScripts = GameTestSuite;
 export type ThreemusketeersSetup = Setup<ThreemusketeersPosition, ThreemusketeersUnit>;
 

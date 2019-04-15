@@ -1,32 +1,35 @@
 import { AlgolTurn } from "../../../types";
 
-export type AlgolSession = {
+export type AlgolBattle = {
   turn: AlgolTurn;
+  turnNumber: number;
   player: 1 | 2;
-  state: AlgolSessionState;
+  state: AlgolBattleState;
   history: AlgolHistoryEntry[];
 };
 
-type AlgolSessionState = {
+type AlgolBattleState = {
   gameEndedBy?: string;
   winner?: 0 | 1 | 2;
   currentStepId: string;
-  path: string[];
+  entries: AlgolHistoryEntry[];
   undos: AlgolUndoEntry[];
   markStamps: {
-    [pos: string]: AlgolSessionState;
+    [pos: string]: AlgolBattleState;
   };
 };
 
 type AlgolUndoEntry = {
-  state: AlgolSessionState;
+  state: AlgolBattleState;
   command: string;
 };
 
 type AlgolHistoryEntry = {
-  board: AlgolBoardState;
   player: 0 | 1 | 2;
-  description: string;
+  moves: {
+    board: AlgolBoardState;
+    description: string;
+  }[];
 };
 
 type AlgolBoardState = {
@@ -37,6 +40,14 @@ type AlgolBoardState = {
       coords: Coords;
       spawnCoords?: Coords;
     };
+  };
+};
+
+export type Position = {
+  name: string;
+  coords: {
+    x: number;
+    y: number;
   };
 };
 

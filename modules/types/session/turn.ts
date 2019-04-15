@@ -1,4 +1,4 @@
-import { AlgolStep } from "./";
+import { AlgolStep } from "../";
 
 type StepId = string;
 
@@ -14,5 +14,3 @@ export type AlgolTurn = {
   };
   nextTurns: { [stepId: string]: AlgolTurn };
 };
-
-// TODO - move this to session! :D

@@ -12,6 +12,5 @@ export type AlgolTurn = {
     draw: StepId[];
   };
   currentStepId: StepId;
-  currentPath: string[];
   nextTurns: { [stepId: string]: AlgolTurn };
 };

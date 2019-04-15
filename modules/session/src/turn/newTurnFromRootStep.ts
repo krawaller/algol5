@@ -6,7 +6,6 @@ export function newTurnFromRootStep(rootStep: AlgolStep): AlgolTurn {
     nextTurns: {},
     viableStepIds: {},
     gameEnds: { win: [], lose: [], draw: [] },
-    currentStepId: "root",
-    currentPath: []
+    currentStepId: "root"
   };
 }

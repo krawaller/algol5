@@ -2,10 +2,7 @@ import { SerauqsFlow } from "./_types";
 
 const serauqsFlow: SerauqsFlow = {
   endGame: {
-    madeline: {
-      condition: { notempty: "winline" },
-      show: "winline"
-    },
+    madeline: { condition: { notempty: "winline" }, show: "winline" },
     madex: {
       condition: {
         morethan: [

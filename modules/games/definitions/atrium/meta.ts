@@ -7,7 +7,8 @@ const atriumMeta: AtriumMeta = {
   tags: ["formation", "nocapture"],
   author: "Guy Jeandel",
   year: 2004,
-  tagline: "Be the first to form a line with one of your three unit types"
+  tagline: "Be the first to form a line with one of your three unit types",
+  performance: { canAlwaysEnd: {} }
 };
 
 export default atriumMeta;

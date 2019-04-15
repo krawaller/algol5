@@ -5,7 +5,8 @@ const kriegMeta: KriegMeta = {
   name: "Krieg",
   source: "http://www.di.fc.ul.pt/~jpn/gv/krieg.htm",
   tags: ["infiltrate", "multiplegoals"],
-  tagline: "Outmanouver your opponent to gain access to his corner"
+  tagline: "Outmanouver your opponent to gain access to his corner",
+  performance: { canAlwaysEnd: {} }
 };
 
 export default kriegMeta;

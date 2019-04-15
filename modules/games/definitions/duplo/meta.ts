@@ -7,7 +7,8 @@ const duploMeta: DuploMeta = {
   author: "Walter Joris",
   year: 2002,
   tags: [],
-  tagline: "A fierce battle of extending lines"
+  tagline: "A fierce battle of extending lines",
+  performance: { canAlwaysEnd: {} }
 };
 
 export default duploMeta;

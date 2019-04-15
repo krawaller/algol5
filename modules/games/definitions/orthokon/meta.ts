@@ -7,7 +7,8 @@ const orthokonMeta: OrthokonMeta = {
   tags: ["changeowner", "stalemate"],
   author: "L. Lynn Smith",
   year: 2001,
-  tagline: "Take over your opponent's army before he steals yours"
+  tagline: "Take over your opponent's army before he steals yours",
+  performance: { canAlwaysEnd: {} }
 };
 
 export default orthokonMeta;

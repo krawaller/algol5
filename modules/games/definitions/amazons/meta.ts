@@ -11,7 +11,8 @@ const amazonsMeta: AmazonsMeta = {
       "Make sure your opponent is trapped first as you burn the board together",
     tags: ["deploy", "starve"],
     links: { "Nestor Games": "http://nestorgames.com/#amazons_detail" }
-  }
+  },
+  performance: { canAlwaysEnd: {} }
 };
 
 export default amazonsMeta;

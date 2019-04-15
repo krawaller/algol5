@@ -4,9 +4,7 @@ const gogolGenerators: GogolGenerators = {
   findforbiddenkingspots: {
     type: "neighbour",
     starts: { intersect: ["edges", "mysoldiers"] },
-    dirs: {
-      ifelse: [{ anyat: ["homerow", ["start"]] }, "ortho", [1, 5]]
-    },
+    dirs: { ifelse: [{ anyat: ["homerow", ["start"]] }, "ortho", [1, 5]] },
     draw: { neighbours: { tolayer: "nokings" } }
   },
   findforbiddensoldierspots: {

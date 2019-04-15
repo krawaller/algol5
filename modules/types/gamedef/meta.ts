@@ -1,5 +1,10 @@
 export type Meta = {
   rules?: RuleDescription;
+  performance: {
+    canAlwaysEnd: {
+      [actionName: string]: boolean;
+    };
+  };
   [otherMeta: string]: any;
 };
 

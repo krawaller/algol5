@@ -4,9 +4,7 @@ const amazonsGenerators: AmazonsGenerators = {
   findtargets: {
     type: "walker",
     dirs: "rose",
-    start: {
-      ifactionelse: ["selectunit", "selectunit", "selectmovetarget"]
-    },
+    start: { ifactionelse: ["selectunit", "selectunit", "selectmovetarget"] },
     blocks: "units",
     draw: { steps: { tolayer: "targets" } }
   }

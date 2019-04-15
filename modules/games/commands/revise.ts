@@ -2,7 +2,13 @@ import update from "./helpers/update";
 import { FullDefAnon } from "../../types";
 
 function translator(def: FullDefAnon): FullDefAnon {
-  return def;
+  return {
+    ...def,
+    meta: {
+      ...def.meta,
+      performance: { canAlwaysEnd: {} }
+    }
+  };
   // // revise scripts
   // return {
   //   ...def,

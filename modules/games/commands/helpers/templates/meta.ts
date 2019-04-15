@@ -4,6 +4,7 @@ export default function templateMeta(gameId) {
 
 const ${gameId}Meta: ${capId}Meta = {
   id: "${gameId}",
+  performance: { canAlwaysEnd: {} },
   name: "",
   tags: [],
   tagline: "",

@@ -23,7 +23,11 @@ export const emptyFullDef: FullDefAnon = {
     icons: {},
     tiles: {}
   },
-  meta: {},
+  meta: {
+    performance: {
+      canAlwaysEnd: {}
+    }
+  },
   scripts: {},
   setup: {}
 };

@@ -4,9 +4,7 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {
     type: "walker",
     start: "selectcatapult",
-    dirs: {
-      playercase: [[7, 8, 1, 2, 3], [3, 4, 5, 6, 7]]
-    },
+    dirs: { playercase: [[7, 8, 1, 2, 3], [3, 4, 5, 6, 7]] },
     max: 3,
     draw: {
       steps: {

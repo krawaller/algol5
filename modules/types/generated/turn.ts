@@ -1,34 +1,17 @@
-import { Layer, Step, FunctionName } from "../";
+import { AlgolStep } from "./";
 
-export type Turn = {
-  ends: {
-    win: string[];
-    lose: string[];
-    draw: string[];
+type StepId = string;
+
+export type AlgolTurn = {
+  steps: { [stepId: string]: AlgolStep };
+  canEnd?: boolean;
+  viableStepIds: { [stepId: string]: true };
+  gameEnds: {
+    win: StepId[];
+    lose: StepId[];
+    draw: StepId[];
   };
-  deadEnds: {
-    [stepid: string]: {
-      [action: string]: true;
-    };
-  };
-  steps: {
-    [stepid: string]: Step;
-  };
-  next: {
-    [stepid: string]: Turn;
-  };
-  player: 1 | 2;
-  turn: number;
-  links: {
-    [stepid: string]: {
-      [action: string]: FunctionName;
-    };
-  };
-  endMarks: {
-    [stepid: string]: {
-      [action: string]: Layer;
-    };
-  };
-  canend?: boolean;
-  blockedby?: string;
+  currentStepId: StepId;
+  currentPath: string[];
+  nextTurns: { [stepId: string]: AlgolTurn };
 };

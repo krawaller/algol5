@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "workerwrapper": "github:krawaller/workerwrapper"
   },

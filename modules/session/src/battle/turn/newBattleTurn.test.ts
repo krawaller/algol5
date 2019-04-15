@@ -1,5 +1,5 @@
 import { newBattleTurn } from ".";
-import aries from "../../../logic/generated/aries";
+import aries from "../../../../logic/generated/aries";
 
 test("turn/newBattleTurn", () => {
   const res = newBattleTurn(aries);

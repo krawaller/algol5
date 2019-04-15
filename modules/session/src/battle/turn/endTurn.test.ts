@@ -1,5 +1,5 @@
 import { newBattleTurn, endTurn } from ".";
-import aries from "../../../logic/generated/aries";
+import aries from "../../../../logic/generated/aries";
 
 test("turn/endTurn regular", () => {
   let turn = newBattleTurn(aries);

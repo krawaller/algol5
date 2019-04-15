@@ -1,4 +1,4 @@
-import { AlgolTurn } from "../../../types";
+import { AlgolTurn } from "../";
 
 export type AlgolBattle = {
   turn: AlgolTurn;
@@ -33,35 +33,14 @@ type AlgolHistoryEntry = {
 };
 
 type AlgolBoardState = {
-  marks: PositionList;
+  marks: AlgolPosition[];
   units: {
     [id: string]: {
       icon: string;
-      coords: Coords;
-      spawnCoords?: Coords;
+      coords: AlgolPosition;
+      spawnCoords?: AlgolPosition;
     };
   };
 };
 
-export type Position = {
-  name: string;
-  coords: {
-    x: number;
-    y: number;
-  };
-};
-
-export type Coords = {
-  x: number;
-  y: number;
-};
-
-export type Player = {
-  type: string;
-  name: string;
-};
-
-export type PositionList = {
-  pos: string;
-  coords: Coords;
-}[];
+export type AlgolPosition = string;

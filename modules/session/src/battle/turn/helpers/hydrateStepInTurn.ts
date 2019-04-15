@@ -1,4 +1,4 @@
-import { AlgolTurn, AlgolGame } from "../../../../types";
+import { AlgolTurn, AlgolGame } from "../../../../../types";
 import { tryToReachTurnEnd, newTurnFromRootStep } from ".";
 
 // remove dead links in the step!

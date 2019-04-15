@@ -10,7 +10,7 @@ const defaultMarkInitContext = {
 const defaultMarkEndContext = {
   MARKS: {},
   LINKS: {},
-  step: { path: [] },
+  step: {},
   newMarkPos: "a1"
 };
 
@@ -56,7 +56,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultMarkEndContext,
             step: {
-              path: [],
               TURNVAR: "bogusTurnVar",
               BATTLEVAR: "bogusBattleVar"
             }
@@ -130,7 +129,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             ...defaultMarkEndContext,
             step: {
-              path: [],
               TURNVARS: "oldTurnVars",
               BATTLEVARS: "oldBattleVars"
             }

@@ -9,7 +9,7 @@ const defaultCmndInitContext = {
 const defaultCmndEndContext = {
   LINKS: {},
   UNITDATA: {},
-  step: { path: [] }
+  step: {}
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
@@ -41,10 +41,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         {
           context: {
             ...defaultCmndEndContext,
-            LINKS: "localLinks",
-            step: {
-              path: ["prevStep"]
-            }
+            LINKS: "localLinks"
           },
           tests: [
             {

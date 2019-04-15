@@ -10,7 +10,7 @@ const defaultCmndEndContext = {
   LINKS: {},
   UNITLAYERS: {},
   UNITDATA: {},
-  step: { path: [] }
+  step: {}
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {

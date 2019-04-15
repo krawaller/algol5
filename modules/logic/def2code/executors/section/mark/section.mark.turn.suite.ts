@@ -10,7 +10,7 @@ const defaultMarkInitContext = {
 const defaultMarkEndContext = {
   MARKS: {},
   LINKS: {},
-  step: { path: [] },
+  step: {},
   newMarkPos: "a1"
 };
 

@@ -11,7 +11,7 @@ const defaultMarkEndContext = {
   UNITLAYERS: {},
   MARKS: {},
   LINKS: {},
-  step: { path: [] },
+  step: {},
   newMarkPos: "a1"
 };
 

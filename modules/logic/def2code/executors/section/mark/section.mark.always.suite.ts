@@ -11,7 +11,7 @@ const defaultMarkEndContext = {
   MARKS: {},
   LINKS: {},
   UNITLAYERS: {},
-  step: { path: [] },
+  step: {},
   newMarkPos: "a1"
 };
 
@@ -57,8 +57,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultMarkEndContext,
             step: {
               ...defaultMarkEndContext.step,
-              UNITDATA: "oldUnitData",
-              path: ["before"]
+              UNITDATA: "oldUnitData"
             },
             LINKS: "localLinks",
             newMarkPos: "c3"

@@ -1,7 +1,8 @@
 import { makeTurnAction, newBattleTurn, endTurn } from ".";
 import aries from "../../../logic/generated/aries";
+import semaphor from "../../../logic/generated/semaphor";
 
-test("turn/makeTurnAction", () => {
+test("turn/endTurn regular", () => {
   let turn = newBattleTurn(aries);
   const actions = ["d4", "g4", "move"];
   actions.forEach(action => (turn = makeTurnAction(aries, turn, action)));
@@ -17,3 +18,45 @@ test("turn/makeTurnAction", () => {
     "h5"
   ]);
 });
+
+test("turn/endTurn win", () => {
+  let turn = newBattleTurn(semaphor);
+  semaphorWin.forEach(
+    action =>
+      (turn =
+        action === "endTurn"
+          ? endTurn(semaphor, turn)
+          : makeTurnAction(semaphor, turn, action))
+  );
+  expect(turn.gameOver).toBe(true);
+});
+
+const semaphorWin = [
+  "c2",
+  "deploy",
+  "endTurn",
+  "c2",
+  "promote",
+  "endTurn",
+  "c2",
+  "promote",
+  "endTurn",
+  "b2",
+  "deploy",
+  "endTurn",
+  "b2",
+  "promote",
+  "endTurn",
+  "b2",
+  "promote",
+  "endTurn",
+  "a2",
+  "deploy",
+  "endTurn",
+  "a2",
+  "promote",
+  "endTurn",
+  "a2",
+  "promote",
+  "endTurn"
+];

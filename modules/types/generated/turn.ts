@@ -5,6 +5,7 @@ type StepId = string;
 export type AlgolTurn = {
   steps: { [stepId: string]: AlgolStep };
   canEnd?: boolean;
+  gameOver?: boolean;
   viableStepIds: { [stepId: string]: true };
   gameEnds: {
     win: StepId[];

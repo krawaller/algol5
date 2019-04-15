@@ -12,7 +12,7 @@ const amazonsMeta: AmazonsMeta = {
     tags: ["deploy", "starve"],
     links: { "Nestor Games": "http://nestorgames.com/#amazons_detail" }
   },
-  performance: { canAlwaysEnd: {} }
+  performance: { canAlwaysEnd: { selectmovetarget: true } }
 };
 
 export default amazonsMeta;

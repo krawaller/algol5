@@ -230,7 +230,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       },
       TURNVARS: step.TURNVARS,
 
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget1 = step => {
@@ -527,7 +528,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       },
       TURNVARS: step.TURNVARS,
 
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget2 = step => {

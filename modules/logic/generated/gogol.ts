@@ -719,7 +719,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         selectmovetarget: newMarkPos
       },
 
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget1 = step => {
@@ -1665,7 +1666,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         selectmovetarget: newMarkPos
       },
 
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget2 = step => {

@@ -7,7 +7,7 @@ export function tryToReachTurnEnd(game: AlgolGame, turn: AlgolTurn): AlgolTurn {
     const stepId = stepIdsToCheck.shift();
     const step = turnSteps[stepId];
     const links = step.LINKS;
-    if (links.endTurn || links.endGame) {
+    if (links.endTurn || links.endGame || step.canAlwaysEnd) {
       turn.canEnd = true;
     } else {
       const actionLinks = links.actions;

@@ -43,5 +43,9 @@ export function executeCmndEnd(
           : "NEXTSPAWNID: step.NEXTSPAWNID, "
         : ""
     }
-  };`;
+    ${
+      gameDef.meta.performance.canAlwaysEnd[action]
+        ? "canAlwaysEnd: true, "
+        : ""
+    }   };`;
 }

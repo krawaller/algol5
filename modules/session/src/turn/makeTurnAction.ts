@@ -1,5 +1,9 @@
 import { AlgolGame, AlgolTurn } from "../../../types";
 
+/*
+Execute a command or add a mark. Will update turn.currentStepId,
+and add the new step if not already there
+*/
 export function makeTurnAction(
   game: AlgolGame,
   turn: AlgolTurn,
@@ -12,6 +16,8 @@ export function makeTurnAction(
     const func = currentStep.LINKS.actions[action];
     steps[newStepId] = game.action[func](currentStep, action);
   }
-  turn.currentStepId = newStepId;
-  return turn;
+  return {
+    ...turn,
+    currentStepId: newStepId
+  };
 }

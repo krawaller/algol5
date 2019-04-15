@@ -1,5 +1,10 @@
-import { AlgolGame, AlgolTurn } from "../../../types";
+import { AlgolGame, AlgolTurn } from "../../../../types";
 
+/*
+Used in hydrateStepInTurn
+Will loop through all steps (adding them if needed)
+and set turn.canEnd to true if applicable
+*/
 export function tryToReachTurnEnd(game: AlgolGame, turn: AlgolTurn): AlgolTurn {
   const turnSteps = turn.steps;
   const stepIdsToCheck = ["root"];

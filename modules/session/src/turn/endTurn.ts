@@ -1,7 +1,10 @@
 import { AlgolGame, AlgolTurn } from "../../../types";
-import { newTurnFromRootStep } from "./newTurnFromRootStep";
-import { hydrateTurn } from "./hydrateTurn";
+import { newTurnFromRootStep, hydrateTurn } from "./helpers/.";
 
+/*
+Execute an endTurn "command" for the turn.
+Will either end the game, or switch over to the next player
+*/
 export function endTurn(game: AlgolGame, turn: AlgolTurn) {
   const currentStep = turn.steps[turn.currentStepId];
   if (currentStep.LINKS.endGame) {

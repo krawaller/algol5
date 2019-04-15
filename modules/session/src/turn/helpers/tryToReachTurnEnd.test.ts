@@ -1,5 +1,5 @@
 import { newTurnFromRootStep, tryToReachTurnEnd } from ".";
-import aries from "../../../logic/generated/aries";
+import aries from "../../../../logic/generated/aries";
 
 test("tryToReachTurnEnd", () => {
   const rootStep = aries.newBattle();

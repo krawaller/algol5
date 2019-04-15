@@ -1,7 +1,9 @@
 import { AlgolGame, AlgolTurn } from "../../../types";
-import { newTurnFromRootStep } from "./newTurnFromRootStep";
-import { hydrateTurn } from "./hydrateTurn";
+import { newTurnFromRootStep, hydrateTurn } from "./helpers";
 
+/*
+The beginning of a new battle!
+*/
 export function newBattleTurn(game: AlgolGame): AlgolTurn {
   const rootStep = game.newBattle();
   const firstTurn = newTurnFromRootStep(rootStep);

@@ -12,6 +12,7 @@ export type AlgolTurn = {
     lose: StepId[];
     draw: StepId[];
   };
-  currentStepId: StepId;
   nextTurns: { [stepId: string]: AlgolTurn };
 };
+
+// TODO - move this to session! :D

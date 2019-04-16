@@ -1,18 +1,19 @@
 import { AlgolBattle, AlgolGame } from "../../../types";
 
-import { newBattleTurn } from "./turn";
+import { firstTurn } from "./turn";
 
-function newBattle(game: AlgolGame): AlgolBattle {
+export function newBattle(game: AlgolGame): AlgolBattle {
   return {
-    turn: newBattleTurn(game),
+    turn: firstTurn(game),
     turnNumber: 1,
     player: 1,
-    history: [],
+    history: [], // TODO <--- add 0 here!
     state: {
       currentStepId: "root",
       entries: [],
       markStamps: {},
-      undos: []
+      undos: [],
+      marks: []
     }
   };
 }

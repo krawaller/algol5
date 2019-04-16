@@ -1,2 +1,2 @@
-export * from "./newBattleTurn";
+export * from "./firstTurn";
 export * from "./endTurn";

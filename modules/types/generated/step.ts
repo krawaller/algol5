@@ -14,17 +14,19 @@ export type AlgolStep = {
   ARTIFACTS: { [layername: string]: Layer };
   UNITLAYERS: { [layername: string]: Layer };
   UNITDATA: {
-    [unitid: string]: {
-      pos: string;
-      id: string;
-      group: string;
-      owner: number;
-      from?: string;
-    };
+    [unitid: string]: AlgolUnitState;
   };
   MARKS: { [funcname: string]: string };
   TURNVARS?: { [varname: string]: any };
   BATTLEVARS?: { [varname: string]: any };
   NEXTSPAWNID?: number;
   canAlwaysEnd?: boolean;
+};
+
+export type AlgolUnitState = {
+  pos: string;
+  id: string;
+  group: string;
+  owner: number;
+  from?: string;
 };

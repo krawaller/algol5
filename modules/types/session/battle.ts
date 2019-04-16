@@ -1,19 +1,20 @@
-import { AlgolTurn } from "../";
+import { AlgolTurn, AlgolUnitState } from "../";
 
 export type AlgolBattle = {
   turn: AlgolTurn;
   turnNumber: number;
   player: 1 | 2;
   state: AlgolBattleState;
-  history: AlgolHistoryEntry[];
+  history: AlgolHistoryTurn[];
 };
 
 type AlgolBattleState = {
   gameEndedBy?: string;
   winner?: 0 | 1 | 2;
   currentStepId: string;
-  entries: AlgolHistoryEntry[];
+  entries: AlgolHistoryMove[];
   undos: AlgolUndoEntry[];
+  marks: string[];
   markStamps: {
     [pos: string]: AlgolBattleState;
   };
@@ -24,22 +25,21 @@ type AlgolUndoEntry = {
   command: string;
 };
 
-type AlgolHistoryEntry = {
+type AlgolHistoryTurn = {
   player: 0 | 1 | 2;
-  moves: {
-    board: AlgolBoardState;
-    description: string;
-  }[];
+  moves: AlgolHistoryMove[];
 };
 
-type AlgolBoardState = {
+type AlgolHistoryMove = {
+  board: AlgolBoardState;
+  description: string;
+  highlights?: AlgolPosition[];
+};
+
+export type AlgolBoardState = {
   marks: AlgolPosition[];
   units: {
-    [id: string]: {
-      icon: string;
-      coords: AlgolPosition;
-      spawnCoords?: AlgolPosition;
-    };
+    [id: string]: AlgolUnitState;
   };
 };
 

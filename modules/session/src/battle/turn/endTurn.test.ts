@@ -1,8 +1,8 @@
-import { newBattleTurn, endTurn } from ".";
+import { firstTurn, endTurn } from ".";
 import aries from "../../../../logic/generated/aries";
 
 test("turn/endTurn regular", () => {
-  let turn = newBattleTurn(aries);
+  let turn = firstTurn(aries);
   turn = endTurn(aries, turn, "root-d4-e4-move");
   expect(Object.keys(turn.steps.root.LINKS.actions).sort()).toEqual([
     "e5",

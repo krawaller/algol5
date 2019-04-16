@@ -2,7 +2,7 @@ import { AlgolGame, AlgolTurn } from "../../../../types";
 import { newTurnFromRootStep, hydrateTurn } from "./helpers/.";
 
 /*
-Next players turn from the given step
+Next players turn from the given stepId
 */
 export function endTurn(game: AlgolGame, turn: AlgolTurn, fromStepId: string) {
   const fromStep = turn.steps[fromStepId];

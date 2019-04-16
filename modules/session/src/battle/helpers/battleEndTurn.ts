@@ -1,25 +1,15 @@
 import { AlgolGame, AlgolBattle } from "../../../../types";
 import { endTurn } from "../turn";
+import { battleEndGame } from "./battleEndGame";
 
 export function battleEndTurn(
   game: AlgolGame,
   battle: AlgolBattle
 ): AlgolBattle {
   const currentStep = battle.turn.steps[battle.state.currentStepId];
-  if (currentStep.LINKS.endGame) {
-    return {
-      ...battle,
-      state: {
-        ...battle.state, // TODO: win entry!
-        gameEndedBy: currentStep.LINKS.endedBy,
-        winner: {
-          win: battle.player,
-          lose: battle.player === 1 ? 2 : 1,
-          draw: 0
-        }[currentStep.LINKS.endGame] as 0 | 1 | 2
-      }
-    };
-  }
+
+  if (currentStep.LINKS.endGame) return battleEndGame(battle);
+
   const nextTurn = endTurn(game, battle.turn, battle.state.currentStepId);
   return {
     turnNumber: battle.turnNumber + 1,

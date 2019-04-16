@@ -1,4 +1,4 @@
-import { AlgolBattle } from "../../../../types";
+import { AlgolBattle, AlgolBoardState } from "../../../../types";
 
 export function battleEndGame(battle: AlgolBattle): AlgolBattle {
   const currentStep = battle.turn.steps[battle.state.currentStepId];
@@ -7,8 +7,14 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
     lose: battle.player === 1 ? 2 : 1,
     draw: 0
   }[currentStep.LINKS.endGame] as 0 | 1 | 2;
+  const finalBoard: AlgolBoardState = {
+    marks: currentStep.LINKS.endMarks,
+    units: currentStep.UNITDATA
+  };
   return {
     ...battle,
+    gameEndedBy: currentStep.LINKS.endedBy,
+    winner,
     history: battle.history
       .concat({
         player: battle.player,
@@ -18,22 +24,16 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
         player: 0,
         moves: [
           {
-            board: battle.history
-              .slice(-1)
-              .pop()
-              .moves.slice(-1)
-              .pop().board,
+            board: finalBoard,
             description: `Ended by ${currentStep.LINKS.endedBy}, ${
               winner ? `Player ${winner} wins` : "draw"
-            }`,
-            highlights: currentStep.LINKS.endMarks
+            }`
           }
         ]
       }),
     state: {
       ...battle.state,
-      gameEndedBy: currentStep.LINKS.endedBy,
-      winner
+      board: finalBoard
     }
   };
 }

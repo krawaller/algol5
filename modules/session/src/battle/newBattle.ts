@@ -4,6 +4,10 @@ import { firstTurn } from "./turn";
 
 export function newBattle(game: AlgolGame): AlgolBattle {
   const turn = firstTurn(game);
+  const firstBoard = {
+    marks: [],
+    units: turn.steps.root.UNITDATA
+  };
   return {
     turn,
     turnNumber: 1,
@@ -14,10 +18,7 @@ export function newBattle(game: AlgolGame): AlgolBattle {
         moves: [
           {
             description: "start",
-            board: {
-              marks: [],
-              units: turn.steps.root.UNITDATA
-            }
+            board: firstBoard
           }
         ]
       }
@@ -27,7 +28,7 @@ export function newBattle(game: AlgolGame): AlgolBattle {
       entries: [],
       markStamps: {},
       undos: [],
-      marks: []
+      board: firstBoard
     }
   };
 }

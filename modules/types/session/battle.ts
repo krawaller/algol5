@@ -6,15 +6,15 @@ export type AlgolBattle = {
   player: 1 | 2;
   state: AlgolBattleState;
   history: AlgolHistoryTurn[];
+  gameEndedBy?: string;
+  winner?: 0 | 1 | 2;
 };
 
 type AlgolBattleState = {
-  gameEndedBy?: string;
-  winner?: 0 | 1 | 2;
   currentStepId: string;
   entries: AlgolHistoryMove[];
   undos: AlgolUndoEntry[];
-  marks: string[];
+  board: AlgolBoardState;
   markStamps: {
     [pos: string]: AlgolBattleState;
   };
@@ -33,7 +33,6 @@ type AlgolHistoryTurn = {
 type AlgolHistoryMove = {
   board: AlgolBoardState;
   description: string;
-  highlights?: AlgolPosition[];
 };
 
 export type AlgolBoardState = {

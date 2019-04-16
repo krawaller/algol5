@@ -23,8 +23,11 @@ export function battleEndTurn(
       currentStepId: "root",
       entries: [],
       markStamps: {},
-      marks: [],
-      undos: []
+      undos: [],
+      board: {
+        marks: [],
+        units: nextTurn.steps.root.UNITDATA
+      }
     }
   };
 }

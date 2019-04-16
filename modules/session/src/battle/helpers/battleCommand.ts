@@ -17,15 +17,18 @@ export function battleCommand(
         command
       }),
       entries: oldState.entries.concat({
-        description: oldState.marks.length
-          ? `${command}(${oldState.marks.join(", ")})`
+        description: oldState.board.marks.length
+          ? `${command}(${oldState.board.marks.join(", ")})`
           : command,
         board: {
-          marks: oldState.marks,
+          marks: oldState.board.marks,
           units: newStep.UNITDATA
         }
       }),
-      marks: [],
+      board: {
+        marks: [],
+        units: newStep.UNITDATA
+      },
       markStamps: {}
     }
   };

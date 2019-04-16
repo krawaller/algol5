@@ -13,7 +13,10 @@ export function battleMark(battle: AlgolBattle, pos: string): AlgolBattle {
     state: {
       ...oldState,
       currentStepId: `${oldState.currentStepId}-${pos}`,
-      marks: oldState.marks.concat(pos),
+      board: {
+        marks: oldState.board.marks.concat(pos),
+        units: oldState.board.units
+      },
       markStamps: {
         ...oldState.markStamps,
         [pos]: oldState

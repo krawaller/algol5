@@ -15,6 +15,7 @@
   },
   "scripts": {
     "exportSuites": "ts-node ./commands/exportSuites",
+    "exportCompiledGames": "ts-node ./commands/exportCompiledGames",
     "compile": "npx ts-node ./commands/compile $*",
     "clean": "npx ts-node ./commands/clean",
     "collect": "ts-node ./collect.ts",

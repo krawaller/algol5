@@ -37,7 +37,7 @@ export function getSessionUI(session: AlgolSession): AlgolSessionUI {
     endTurn: !!currentStep.LINKS.endTurn,
     potentialMarks,
     commands,
-    undo: battle.state.undo.command,
+    undo: battle.state.undo && battle.state.undo.command,
     instruction: getInstructionForBattle(game, battle)
   };
 }

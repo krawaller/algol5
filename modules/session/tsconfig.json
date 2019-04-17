@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "lib": ["es2018", "es5"],
-    "types": ["node", "jest"]
+    "types": ["node", "jest", "fs-extra"]
   },
   "exclude": ["node_modules"]
 }

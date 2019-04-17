@@ -1,13 +1,16 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "generateGameTests": "ts-node ./test/generateGameTests"
   },
   "dependencies": {
     "workerwrapper": "github:krawaller/workerwrapper"
   },
   "devDependencies": {
+    "@types/fs-extra": "^5.0.5",
     "@types/jest": "^24.0.11",
     "@types/node": "^11.13.2",
+    "fs-extra": "^7.0.1",
     "jest": "^24.7.1",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.0.3",

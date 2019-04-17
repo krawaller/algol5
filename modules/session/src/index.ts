@@ -7,7 +7,7 @@ const sessions: { [idx: string]: AlgolSession } = {};
 let nextSession = 1;
 
 export const API = {
-  newSession(gameId) {
+  newSession(gameId: keyof typeof games) {
     const battle = newBattle(games[gameId]);
     const sessionId = nextSession++;
     const session: AlgolSession = {

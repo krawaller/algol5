@@ -1,6 +1,5 @@
 import * as fs from "fs-extra";
 import * as path from "path";
-import { findSuites } from "./findSuites";
 
 const out = path.join(__dirname, "generatedGameTests");
 const source = path.join(__dirname, "../generated");

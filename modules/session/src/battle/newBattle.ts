@@ -27,7 +27,7 @@ export function newBattle(game: AlgolGame): AlgolBattle {
       currentStepId: "root",
       entries: [],
       markStamps: {},
-      undos: [],
+      undo: null,
       board: firstBoard
     }
   };

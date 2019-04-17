@@ -23,7 +23,7 @@ export function battleEndTurn(
       currentStepId: "root",
       entries: [],
       markStamps: {},
-      undos: [],
+      undo: null,
       board: {
         marks: [],
         units: nextTurn.steps.root.UNITDATA

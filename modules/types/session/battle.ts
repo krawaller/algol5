@@ -13,16 +13,14 @@ export type AlgolBattle = {
 type AlgolBattleState = {
   currentStepId: string;
   entries: AlgolHistoryMove[];
-  undos: AlgolUndoEntry[];
+  undo: null | {
+    state: AlgolBattleState;
+    command: string;
+  };
   board: AlgolBoardState;
   markStamps: {
     [pos: string]: AlgolBattleState;
   };
-};
-
-type AlgolUndoEntry = {
-  state: AlgolBattleState;
-  command: string;
 };
 
 type AlgolHistoryTurn = {

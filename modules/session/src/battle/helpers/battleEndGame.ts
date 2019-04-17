@@ -33,6 +33,7 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
       }),
     state: {
       ...battle.state,
+      undo: null,
       board: finalBoard
     }
   };

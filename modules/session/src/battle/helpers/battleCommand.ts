@@ -12,10 +12,10 @@ export function battleCommand(
     state: {
       ...oldState,
       currentStepId: newStepId,
-      undos: oldState.undos.concat({
+      undo: {
         state: oldState,
         command
-      }),
+      },
       entries: oldState.entries.concat({
         description: oldState.board.marks.length
           ? `${command}(${oldState.board.marks.join(", ")})`

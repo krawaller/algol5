@@ -11,7 +11,6 @@ export function runGameScripts(gameDef: FullDefAnon) {
         .slice(0, 5);
       let ui = API.newSession(gameId);
       for (const action of seq) {
-        console.log(action);
         ui = API.makeSessionAction(
           ui.sessionId,
           action === "win" ? "endTurn" : action

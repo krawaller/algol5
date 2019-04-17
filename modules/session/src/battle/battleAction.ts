@@ -7,6 +7,8 @@ import {
   battleCommand
 } from "./helpers";
 
+const identifyMark = /^[a-z][0-9]+$/;
+
 export function battleAction(
   game: AlgolGame,
   battle: AlgolBattle,
@@ -14,6 +16,6 @@ export function battleAction(
 ): AlgolBattle {
   if (action === "endturn") return battleEndTurn(game, battle);
   if (action === "undo") return battleUndo(battle);
-  if (action.match(/^[a-z][0-9]+$/)) return battleMark(battle, action);
+  if (action.match(identifyMark)) return battleMark(battle, action);
   return battleCommand(battle, action);
 }

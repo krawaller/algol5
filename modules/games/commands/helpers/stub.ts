@@ -7,6 +7,7 @@ import templateBoard from "./templates/board";
 import templateGraphics from "./templates/graphics";
 import templateInstructions from "./templates/instructions";
 import templateMeta from "./templates/meta";
+import templatePerformance from "./templates/performance";
 import templateFlow from "./templates/flow";
 import templateGenerators from "./templates/generators";
 import templateScripts from "./templates/scripts";
@@ -26,6 +27,7 @@ export default async function stub(gameId) {
     template(gameId, templateGraphics, "graphics"),
     template(gameId, templateInstructions, "instructions"),
     template(gameId, templateMeta, "meta"),
+    template(gameId, templatePerformance, "performance"),
     template(gameId, templateScripts, "scripts"),
     template(gameId, templateSetup, "setup"),
     template(gameId, templateIndex, "index")

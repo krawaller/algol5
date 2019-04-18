@@ -5,6 +5,7 @@ import { FullDefAnon } from "../../../types";
 import analyze from "./analyze";
 
 import { defPath } from "./_paths";
+import { emptyFullDef } from "../../../common";
 
 function makeNice(obj = {}) {
   return prettier
@@ -14,7 +15,7 @@ function makeNice(obj = {}) {
 
 export default async function overwrite(gameId, def: FullDefAnon) {
   await Promise.all(
-    Object.keys(def).map(async aspect => {
+    Object.keys(emptyFullDef).map(async aspect => {
       const apath = path.join(defPath, `${gameId}/${aspect}.ts`);
       const f = await fs.readFile(apath);
       const newFile = f

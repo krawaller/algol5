@@ -10,6 +10,7 @@ import ${gameId}Setup from './setup';
 import ${gameId}Graphics from './graphics';
 import ${gameId}Instruction from './instructions';
 import ${gameId}Meta from './meta';
+import ${gameId}Performance from './performance';
 import ${gameId}Flow from './flow';
 import ${gameId}Scripts from './scripts';
 import ${gameId}Generators from './generators';
@@ -22,6 +23,7 @@ const ${gameId}Definition: ${capId}Definition = {
   instructions: ${gameId}Instruction,
   generators: ${gameId}Generators,
   meta: ${gameId}Meta,
+  performance: ${gameId}Performance,
   flow: ${gameId}Flow,
   scripts: ${gameId}Scripts,
 };

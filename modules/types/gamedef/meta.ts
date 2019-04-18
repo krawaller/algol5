@@ -1,8 +1,5 @@
 export type AlgolMeta<Command extends string, Mark extends string> = {
   rules?: RuleDescription;
-  performance: {
-    canAlwaysEnd: Partial<{ [actionName in Command | Mark]: boolean }>;
-  };
   [otherMeta: string]: any;
 };
 

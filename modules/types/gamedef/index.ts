@@ -7,6 +7,7 @@ export * from "./instructions";
 export * from "./meta";
 export * from "./setup";
 export * from "./graphics";
+export * from "./performance";
 
 import { Generators } from "./generators";
 import { Graphics } from "./graphics";
@@ -17,6 +18,7 @@ import { Instructions } from "./instructions";
 import { AlgolMeta } from "./meta";
 import { Flow } from "./flow";
 import { GameTestSuite } from "./scripts";
+import { AlgolPerformance } from "./performance";
 
 export type FullDefAnon = FullDef<
   string,
@@ -131,6 +133,7 @@ export type FullDef<
     TurnVar
   >;
   scripts: GameTestSuite;
+  performance: AlgolPerformance<Command, Mark>;
 };
 
 // TODO - ditch this, only used in legacy code

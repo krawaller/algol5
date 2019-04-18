@@ -1,6 +1,6 @@
 // This will only exist momentarily before the first analysis is done or while an analysis is being updated
 
-export default function templateAI(gameId) {
+export default function templateAnalysis(gameId) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return `export type ${capId}Terrain = any;
 export type ${capId}Unit = any;
@@ -24,6 +24,7 @@ export type ${capId}AI = any;
 export type ${capId}Graphics = any;
 export type ${capId}Instructions = any;
 export type ${capId}Meta = any;
+export type ${capId}Performance = any;
 export type ${capId}Scripts = any;
 export type ${capId}Setup = any;
 export type ${capId}Board = any;

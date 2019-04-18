@@ -8,6 +8,7 @@ import ariesSetup from './setup';
 import ariesGraphics from './graphics';
 import ariesInstruction from './instructions';
 import ariesMeta from './meta';
+import ariesPerformance from './performance';
 import ariesFlow from './flow';
 import ariesScripts from './scripts';
 import ariesGenerators from './generators';
@@ -20,6 +21,7 @@ const ariesDefinition: AriesDefinition = {
   instructions: ariesInstruction,
   generators: ariesGenerators,
   meta: ariesMeta,
+  performance: ariesPerformance,
   flow: ariesFlow,
   scripts: ariesScripts,
 };

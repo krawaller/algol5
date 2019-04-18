@@ -1,4 +1,4 @@
-import { TransetScripts } from "./_types";
+import { TransetScripts } from './_types';
 
 const transetScripts: TransetScripts = {
   basic: [

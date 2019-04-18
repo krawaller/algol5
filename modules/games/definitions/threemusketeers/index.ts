@@ -8,6 +8,7 @@ import threemusketeersSetup from './setup';
 import threemusketeersGraphics from './graphics';
 import threemusketeersInstruction from './instructions';
 import threemusketeersMeta from './meta';
+import threemusketeersPerformance from './performance';
 import threemusketeersFlow from './flow';
 import threemusketeersScripts from './scripts';
 import threemusketeersGenerators from './generators';
@@ -20,6 +21,7 @@ const threemusketeersDefinition: ThreemusketeersDefinition = {
   instructions: threemusketeersInstruction,
   generators: threemusketeersGenerators,
   meta: threemusketeersMeta,
+  performance: threemusketeersPerformance,
   flow: threemusketeersFlow,
   scripts: threemusketeersScripts,
 };

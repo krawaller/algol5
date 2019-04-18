@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type CoffeeBoardHeight = 5;
 export type CoffeeBoardWidth = 5;
@@ -26,6 +26,7 @@ export type CoffeeAI = AI<CoffeeAiArtifactLayer, CoffeeAiAspect, CoffeeAiBrain, 
 export type CoffeeGraphics = Graphics<CoffeeTerrain, CoffeeUnit>;
 export type CoffeeInstructions = Instructions<CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
 export type CoffeeMeta = AlgolMeta<CoffeeCommand, CoffeeMark>;
+export type CoffeePerformance = AlgolPerformance<CoffeeCommand, CoffeeMark>;
 export type CoffeeScripts = GameTestSuite;
 export type CoffeeSetup = Setup<CoffeePosition, CoffeeUnit>;
 

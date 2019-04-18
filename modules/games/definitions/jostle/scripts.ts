@@ -1,4 +1,4 @@
-import { JostleScripts } from "./_types";
+import { JostleScripts } from './_types';
 
 const jostleScripts: JostleScripts = {
   basic: [

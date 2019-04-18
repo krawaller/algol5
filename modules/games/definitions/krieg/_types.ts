@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type KriegBoardHeight = 4;
 export type KriegBoardWidth = 4;
@@ -26,6 +26,7 @@ export type KriegAI = AI<KriegAiArtifactLayer, KriegAiAspect, KriegAiBrain, Krie
 export type KriegGraphics = Graphics<KriegTerrain, KriegUnit>;
 export type KriegInstructions = Instructions<KriegBattlePos, KriegBattleVar, KriegCommand, KriegGrid, KriegLayer, KriegMark, KriegPhase, KriegTurnPos, KriegTurnVar, KriegUnit>;
 export type KriegMeta = AlgolMeta<KriegCommand, KriegMark>;
+export type KriegPerformance = AlgolPerformance<KriegCommand, KriegMark>;
 export type KriegScripts = GameTestSuite;
 export type KriegSetup = Setup<KriegPosition, KriegUnit>;
 

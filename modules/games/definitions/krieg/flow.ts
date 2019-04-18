@@ -1,4 +1,4 @@
-import { KriegFlow } from "./_types";
+import { KriegFlow } from './_types';
 
 const kriegFlow: KriegFlow = {
   marks: {

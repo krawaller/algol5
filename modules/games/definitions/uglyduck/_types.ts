@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type UglyduckBoardHeight = 5;
 export type UglyduckBoardWidth = 5;
@@ -26,6 +26,7 @@ export type UglyduckAI = AI<UglyduckAiArtifactLayer, UglyduckAiAspect, UglyduckA
 export type UglyduckGraphics = Graphics<UglyduckTerrain, UglyduckUnit>;
 export type UglyduckInstructions = Instructions<UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckPhase, UglyduckTurnPos, UglyduckTurnVar, UglyduckUnit>;
 export type UglyduckMeta = AlgolMeta<UglyduckCommand, UglyduckMark>;
+export type UglyduckPerformance = AlgolPerformance<UglyduckCommand, UglyduckMark>;
 export type UglyduckScripts = GameTestSuite;
 export type UglyduckSetup = Setup<UglyduckPosition, UglyduckUnit>;
 

@@ -8,6 +8,7 @@ import kickrunSetup from './setup';
 import kickrunGraphics from './graphics';
 import kickrunInstruction from './instructions';
 import kickrunMeta from './meta';
+import kickrunPerformance from './performance';
 import kickrunFlow from './flow';
 import kickrunScripts from './scripts';
 import kickrunGenerators from './generators';
@@ -20,6 +21,7 @@ const kickrunDefinition: KickrunDefinition = {
   instructions: kickrunInstruction,
   generators: kickrunGenerators,
   meta: kickrunMeta,
+  performance: kickrunPerformance,
   flow: kickrunFlow,
   scripts: kickrunScripts,
 };

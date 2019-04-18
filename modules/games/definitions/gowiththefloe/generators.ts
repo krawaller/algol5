@@ -1,4 +1,4 @@
-import { GowiththefloeGenerators } from "./_types";
+import { GowiththefloeGenerators } from './_types';
 
 const gowiththefloeGenerators: GowiththefloeGenerators = {
   findeattargets: {

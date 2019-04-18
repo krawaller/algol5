@@ -1,4 +1,4 @@
-import { DescentGenerators } from "./_types";
+import { DescentGenerators } from './_types';
 
 const descentGenerators: DescentGenerators = {
   findmovetargets: {

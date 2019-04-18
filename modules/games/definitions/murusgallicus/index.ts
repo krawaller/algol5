@@ -8,6 +8,7 @@ import murusgallicusSetup from './setup';
 import murusgallicusGraphics from './graphics';
 import murusgallicusInstruction from './instructions';
 import murusgallicusMeta from './meta';
+import murusgallicusPerformance from './performance';
 import murusgallicusFlow from './flow';
 import murusgallicusScripts from './scripts';
 import murusgallicusGenerators from './generators';
@@ -20,6 +21,7 @@ const murusgallicusDefinition: MurusgallicusDefinition = {
   instructions: murusgallicusInstruction,
   generators: murusgallicusGenerators,
   meta: murusgallicusMeta,
+  performance: murusgallicusPerformance,
   flow: murusgallicusFlow,
   scripts: murusgallicusScripts,
 };

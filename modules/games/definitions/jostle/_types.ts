@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type JostleBoardHeight = 10;
 export type JostleBoardWidth = 10;
@@ -26,6 +26,7 @@ export type JostleAI = AI<JostleAiArtifactLayer, JostleAiAspect, JostleAiBrain, 
 export type JostleGraphics = Graphics<JostleTerrain, JostleUnit>;
 export type JostleInstructions = Instructions<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostlePhase, JostleTurnPos, JostleTurnVar, JostleUnit>;
 export type JostleMeta = AlgolMeta<JostleCommand, JostleMark>;
+export type JostlePerformance = AlgolPerformance<JostleCommand, JostleMark>;
 export type JostleScripts = GameTestSuite;
 export type JostleSetup = Setup<JostlePosition, JostleUnit>;
 

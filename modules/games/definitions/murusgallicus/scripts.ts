@@ -1,4 +1,4 @@
-import { MurusgallicusScripts } from "./_types";
+import { MurusgallicusScripts } from './_types';
 
 const murusgallicusScripts: MurusgallicusScripts = {
   basic: [

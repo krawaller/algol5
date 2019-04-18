@@ -8,6 +8,7 @@ import descentSetup from './setup';
 import descentGraphics from './graphics';
 import descentInstruction from './instructions';
 import descentMeta from './meta';
+import descentPerformance from './performance';
 import descentFlow from './flow';
 import descentScripts from './scripts';
 import descentGenerators from './generators';
@@ -20,6 +21,7 @@ const descentDefinition: DescentDefinition = {
   instructions: descentInstruction,
   generators: descentGenerators,
   meta: descentMeta,
+  performance: descentPerformance,
   flow: descentFlow,
   scripts: descentScripts,
 };

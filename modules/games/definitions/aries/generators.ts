@@ -1,4 +1,4 @@
-import { AriesGenerators } from "./_types";
+import { AriesGenerators } from './_types';
 
 const ariesGenerators: AriesGenerators = {
   findmovetargets: {

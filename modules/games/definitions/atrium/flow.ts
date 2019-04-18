@@ -1,4 +1,4 @@
-import { AtriumFlow } from "./_types";
+import { AtriumFlow } from './_types';
 
 const atriumFlow: AtriumFlow = {
   endGame: {

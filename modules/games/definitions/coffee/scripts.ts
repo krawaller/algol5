@@ -1,4 +1,4 @@
-import { CoffeeScripts } from "./_types";
+import { CoffeeScripts } from './_types';
 
 const coffeeScripts: CoffeeScripts = {
   basic: [

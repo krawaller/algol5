@@ -8,6 +8,7 @@ import semaphorSetup from './setup';
 import semaphorGraphics from './graphics';
 import semaphorInstruction from './instructions';
 import semaphorMeta from './meta';
+import semaphorPerformance from './performance';
 import semaphorFlow from './flow';
 import semaphorScripts from './scripts';
 import semaphorGenerators from './generators';
@@ -20,6 +21,7 @@ const semaphorDefinition: SemaphorDefinition = {
   instructions: semaphorInstruction,
   generators: semaphorGenerators,
   meta: semaphorMeta,
+  performance: semaphorPerformance,
   flow: semaphorFlow,
   scripts: semaphorScripts,
 };

@@ -1,4 +1,4 @@
-import { KickrunScripts } from "./_types";
+import { KickrunScripts } from './_types';
 
 const kickrunScripts: KickrunScripts = {
   basic: [

@@ -1,4 +1,4 @@
-import { AtriumScripts } from "./_types";
+import { AtriumScripts } from './_types';
 
 const atriumScripts: AtriumScripts = {
   basic: [

@@ -1,4 +1,4 @@
-import { ThreemusketeersGenerators } from "./_types";
+import { ThreemusketeersGenerators } from './_types';
 
 const threemusketeersGenerators: ThreemusketeersGenerators = {
   findstrandedmusketeers: {

@@ -1,4 +1,4 @@
-import { DescentScripts } from "./_types";
+import { DescentScripts } from './_types';
 
 const descentScripts: DescentScripts = {
   basic: [

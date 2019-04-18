@@ -8,6 +8,7 @@ import uglyduckSetup from './setup';
 import uglyduckGraphics from './graphics';
 import uglyduckInstruction from './instructions';
 import uglyduckMeta from './meta';
+import uglyduckPerformance from './performance';
 import uglyduckFlow from './flow';
 import uglyduckScripts from './scripts';
 import uglyduckGenerators from './generators';
@@ -20,6 +21,7 @@ const uglyduckDefinition: UglyduckDefinition = {
   instructions: uglyduckInstruction,
   generators: uglyduckGenerators,
   meta: uglyduckMeta,
+  performance: uglyduckPerformance,
   flow: uglyduckFlow,
   scripts: uglyduckScripts,
 };

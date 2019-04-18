@@ -1,4 +1,4 @@
-import { JostleFlow } from "./_types";
+import { JostleFlow } from './_types';
 
 const jostleFlow: JostleFlow = {
   startTurn: { link: "selectunit" },

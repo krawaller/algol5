@@ -1,4 +1,4 @@
-import { GogolMeta } from "./_types";
+import { GogolMeta } from './_types';
 
 const gogolMeta: GogolMeta = {
   id: "gogol",
@@ -12,8 +12,7 @@ const gogolMeta: GogolMeta = {
     "differentunits",
     "jump"
   ],
-  tagline: "Use your units that can move anywhere to hunt down the enemy king",
-  performance: { canAlwaysEnd: { selectmovetarget: true } }
+  tagline: "Use your units that can move anywhere to hunt down the enemy king"
 };
 
 export default gogolMeta;

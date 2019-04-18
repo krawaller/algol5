@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type TransetBoardHeight = 5;
 export type TransetBoardWidth = 5;
@@ -26,6 +26,7 @@ export type TransetAI = AI<TransetAiArtifactLayer, TransetAiAspect, TransetAiBra
 export type TransetGraphics = Graphics<TransetTerrain, TransetUnit>;
 export type TransetInstructions = Instructions<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGrid, TransetLayer, TransetMark, TransetPhase, TransetTurnPos, TransetTurnVar, TransetUnit>;
 export type TransetMeta = AlgolMeta<TransetCommand, TransetMark>;
+export type TransetPerformance = AlgolPerformance<TransetCommand, TransetMark>;
 export type TransetScripts = GameTestSuite;
 export type TransetSetup = Setup<TransetPosition, TransetUnit>;
 

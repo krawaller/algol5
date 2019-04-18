@@ -8,6 +8,7 @@ import shoveoffSetup from './setup';
 import shoveoffGraphics from './graphics';
 import shoveoffInstruction from './instructions';
 import shoveoffMeta from './meta';
+import shoveoffPerformance from './performance';
 import shoveoffFlow from './flow';
 import shoveoffScripts from './scripts';
 import shoveoffGenerators from './generators';
@@ -20,6 +21,7 @@ const shoveoffDefinition: ShoveoffDefinition = {
   instructions: shoveoffInstruction,
   generators: shoveoffGenerators,
   meta: shoveoffMeta,
+  performance: shoveoffPerformance,
   flow: shoveoffFlow,
   scripts: shoveoffScripts,
 };

@@ -1,4 +1,4 @@
-import { MurusgallicusFlow } from "./_types";
+import { MurusgallicusFlow } from './_types';
 
 const murusgallicusFlow: MurusgallicusFlow = {
   startTurn: { link: "selecttower" },

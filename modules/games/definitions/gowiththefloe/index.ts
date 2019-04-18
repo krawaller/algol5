@@ -8,6 +8,7 @@ import gowiththefloeSetup from './setup';
 import gowiththefloeGraphics from './graphics';
 import gowiththefloeInstruction from './instructions';
 import gowiththefloeMeta from './meta';
+import gowiththefloePerformance from './performance';
 import gowiththefloeFlow from './flow';
 import gowiththefloeScripts from './scripts';
 import gowiththefloeGenerators from './generators';
@@ -20,6 +21,7 @@ const gowiththefloeDefinition: GowiththefloeDefinition = {
   instructions: gowiththefloeInstruction,
   generators: gowiththefloeGenerators,
   meta: gowiththefloeMeta,
+  performance: gowiththefloePerformance,
   flow: gowiththefloeFlow,
   scripts: gowiththefloeScripts,
 };

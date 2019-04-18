@@ -8,6 +8,7 @@ import coffeeSetup from './setup';
 import coffeeGraphics from './graphics';
 import coffeeInstruction from './instructions';
 import coffeeMeta from './meta';
+import coffeePerformance from './performance';
 import coffeeFlow from './flow';
 import coffeeScripts from './scripts';
 import coffeeGenerators from './generators';
@@ -20,6 +21,7 @@ const coffeeDefinition: CoffeeDefinition = {
   instructions: coffeeInstruction,
   generators: coffeeGenerators,
   meta: coffeeMeta,
+  performance: coffeePerformance,
   flow: coffeeFlow,
   scripts: coffeeScripts,
 };

@@ -8,6 +8,7 @@ import jostleSetup from './setup';
 import jostleGraphics from './graphics';
 import jostleInstruction from './instructions';
 import jostleMeta from './meta';
+import jostlePerformance from './performance';
 import jostleFlow from './flow';
 import jostleScripts from './scripts';
 import jostleGenerators from './generators';
@@ -20,6 +21,7 @@ const jostleDefinition: JostleDefinition = {
   instructions: jostleInstruction,
   generators: jostleGenerators,
   meta: jostleMeta,
+  performance: jostlePerformance,
   flow: jostleFlow,
   scripts: jostleScripts,
 };

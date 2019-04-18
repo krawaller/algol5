@@ -1,4 +1,4 @@
-import { AriesScripts } from "./_types";
+import { AriesScripts } from './_types';
 
 const ariesScripts: AriesScripts = {
   basic: [

@@ -1,4 +1,4 @@
-import { SerauqsGenerators } from "./_types";
+import { SerauqsGenerators } from './_types';
 
 const serauqsGenerators: SerauqsGenerators = {
   findmovetargets: {

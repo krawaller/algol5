@@ -8,6 +8,7 @@ import gogolSetup from './setup';
 import gogolGraphics from './graphics';
 import gogolInstruction from './instructions';
 import gogolMeta from './meta';
+import gogolPerformance from './performance';
 import gogolFlow from './flow';
 import gogolScripts from './scripts';
 import gogolGenerators from './generators';
@@ -20,6 +21,7 @@ const gogolDefinition: GogolDefinition = {
   instructions: gogolInstruction,
   generators: gogolGenerators,
   meta: gogolMeta,
+  performance: gogolPerformance,
   flow: gogolFlow,
   scripts: gogolScripts,
 };

@@ -1,4 +1,4 @@
-import { ThreemusketeersFlow } from "./_types";
+import { ThreemusketeersFlow } from './_types';
 
 const threemusketeersFlow: ThreemusketeersFlow = {
   startTurn: { link: "selectunit" },

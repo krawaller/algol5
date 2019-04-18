@@ -1,4 +1,4 @@
-import { DescentFlow } from "./_types";
+import { DescentFlow } from './_types';
 
 const descentFlow: DescentFlow = {
   endGame: {

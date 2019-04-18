@@ -1,4 +1,4 @@
-import { GogolGenerators } from "./_types";
+import { GogolGenerators } from './_types';
 
 const gogolGenerators: GogolGenerators = {
   findforbiddenkingspots: {

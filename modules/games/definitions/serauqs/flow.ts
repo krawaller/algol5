@@ -1,4 +1,4 @@
-import { SerauqsFlow } from "./_types";
+import { SerauqsFlow } from './_types';
 
 const serauqsFlow: SerauqsFlow = {
   endGame: {

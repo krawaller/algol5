@@ -1,4 +1,4 @@
-import { OrthokonFlow } from "./_types";
+import { OrthokonFlow } from './_types';
 
 const orthokonFlow: OrthokonFlow = {
   startTurn: { link: "selectunit" },

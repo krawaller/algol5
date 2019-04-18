@@ -1,4 +1,4 @@
-import { OrthokonGenerators } from "./_types";
+import { OrthokonGenerators } from './_types';
 
 const orthokonGenerators: OrthokonGenerators = {
   findvictims: {

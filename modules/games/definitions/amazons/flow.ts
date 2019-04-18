@@ -1,4 +1,4 @@
-import { AmazonsFlow } from "./_types";
+import { AmazonsFlow } from './_types';
 
 const amazonsFlow: AmazonsFlow = {
   startTurn: { link: "selectunit" },

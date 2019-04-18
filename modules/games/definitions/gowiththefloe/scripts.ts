@@ -1,4 +1,4 @@
-import { GowiththefloeScripts } from "./_types";
+import { GowiththefloeScripts } from './_types';
 
 const gowiththefloeScripts: GowiththefloeScripts = {
   basic: [

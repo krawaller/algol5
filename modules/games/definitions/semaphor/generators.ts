@@ -1,4 +1,4 @@
-import { SemaphorGenerators } from "./_types";
+import { SemaphorGenerators } from './_types';
 
 const semaphorGenerators: SemaphorGenerators = {
   findlines: {

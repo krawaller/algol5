@@ -8,6 +8,7 @@ import orthokonSetup from './setup';
 import orthokonGraphics from './graphics';
 import orthokonInstruction from './instructions';
 import orthokonMeta from './meta';
+import orthokonPerformance from './performance';
 import orthokonFlow from './flow';
 import orthokonScripts from './scripts';
 import orthokonGenerators from './generators';
@@ -20,6 +21,7 @@ const orthokonDefinition: OrthokonDefinition = {
   instructions: orthokonInstruction,
   generators: orthokonGenerators,
   meta: orthokonMeta,
+  performance: orthokonPerformance,
   flow: orthokonFlow,
   scripts: orthokonScripts,
 };

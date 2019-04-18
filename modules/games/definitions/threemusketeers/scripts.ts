@@ -1,4 +1,4 @@
-import { ThreemusketeersScripts } from "./_types";
+import { ThreemusketeersScripts } from './_types';
 
 const threemusketeersScripts: ThreemusketeersScripts = {
   basic: [

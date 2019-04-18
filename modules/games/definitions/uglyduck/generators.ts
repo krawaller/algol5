@@ -1,4 +1,4 @@
-import { UglyduckGenerators } from "./_types";
+import { UglyduckGenerators } from './_types';
 
 const uglyduckGenerators: UglyduckGenerators = {
   findmovetargets: {

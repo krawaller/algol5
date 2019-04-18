@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type GogolBoardHeight = 8;
 export type GogolBoardWidth = 8;
@@ -26,6 +26,7 @@ export type GogolAI = AI<GogolAiArtifactLayer, GogolAiAspect, GogolAiBrain, Gogo
 export type GogolGraphics = Graphics<GogolTerrain, GogolUnit>;
 export type GogolInstructions = Instructions<GogolBattlePos, GogolBattleVar, GogolCommand, GogolGrid, GogolLayer, GogolMark, GogolPhase, GogolTurnPos, GogolTurnVar, GogolUnit>;
 export type GogolMeta = AlgolMeta<GogolCommand, GogolMark>;
+export type GogolPerformance = AlgolPerformance<GogolCommand, GogolMark>;
 export type GogolScripts = GameTestSuite;
 export type GogolSetup = Setup<GogolPosition, GogolUnit>;
 

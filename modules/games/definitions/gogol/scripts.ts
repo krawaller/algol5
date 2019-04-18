@@ -1,4 +1,4 @@
-import { GogolScripts } from "./_types";
+import { GogolScripts } from './_types';
 
 const gogolScripts: GogolScripts = {
   basic: [

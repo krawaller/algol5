@@ -1,4 +1,4 @@
-import { GogolFlow } from "./_types";
+import { GogolFlow } from './_types';
 
 const gogolFlow: GogolFlow = {
   startTurn: {

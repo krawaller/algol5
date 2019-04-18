@@ -1,4 +1,4 @@
-import { ShoveoffScripts } from "./_types";
+import { ShoveoffScripts } from './_types';
 
 const shoveoffScripts: ShoveoffScripts = {
   basic: [

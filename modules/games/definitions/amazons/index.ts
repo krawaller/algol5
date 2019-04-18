@@ -8,6 +8,7 @@ import amazonsSetup from './setup';
 import amazonsGraphics from './graphics';
 import amazonsInstruction from './instructions';
 import amazonsMeta from './meta';
+import amazonsPerformance from './performance';
 import amazonsFlow from './flow';
 import amazonsScripts from './scripts';
 import amazonsGenerators from './generators';
@@ -20,6 +21,7 @@ const amazonsDefinition: AmazonsDefinition = {
   instructions: amazonsInstruction,
   generators: amazonsGenerators,
   meta: amazonsMeta,
+  performance: amazonsPerformance,
   flow: amazonsFlow,
   scripts: amazonsScripts,
 };

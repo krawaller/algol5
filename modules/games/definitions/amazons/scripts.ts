@@ -1,4 +1,4 @@
-import { AmazonsScripts } from "./_types";
+import { AmazonsScripts } from './_types';
 
 const amazonsScripts: AmazonsScripts = {
   basic: [

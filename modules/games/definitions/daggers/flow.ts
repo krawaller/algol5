@@ -1,4 +1,4 @@
-import { DaggersFlow } from "./_types";
+import { DaggersFlow } from './_types';
 
 const daggersFlow: DaggersFlow = {
   endGame: {

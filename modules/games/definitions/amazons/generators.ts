@@ -1,4 +1,4 @@
-import { AmazonsGenerators } from "./_types";
+import { AmazonsGenerators } from './_types';
 
 const amazonsGenerators: AmazonsGenerators = {
   findtargets: {

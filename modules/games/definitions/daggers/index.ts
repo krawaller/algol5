@@ -8,6 +8,7 @@ import daggersSetup from './setup';
 import daggersGraphics from './graphics';
 import daggersInstruction from './instructions';
 import daggersMeta from './meta';
+import daggersPerformance from './performance';
 import daggersFlow from './flow';
 import daggersScripts from './scripts';
 import daggersGenerators from './generators';
@@ -20,6 +21,7 @@ const daggersDefinition: DaggersDefinition = {
   instructions: daggersInstruction,
   generators: daggersGenerators,
   meta: daggersMeta,
+  performance: daggersPerformance,
   flow: daggersFlow,
   scripts: daggersScripts,
 };

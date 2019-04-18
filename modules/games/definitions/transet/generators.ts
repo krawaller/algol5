@@ -1,4 +1,4 @@
-import { TransetGenerators } from "./_types";
+import { TransetGenerators } from './_types';
 
 const transetGenerators: TransetGenerators = {
   findswap2step: {

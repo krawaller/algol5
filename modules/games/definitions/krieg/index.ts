@@ -8,6 +8,7 @@ import kriegSetup from './setup';
 import kriegGraphics from './graphics';
 import kriegInstruction from './instructions';
 import kriegMeta from './meta';
+import kriegPerformance from './performance';
 import kriegFlow from './flow';
 import kriegScripts from './scripts';
 import kriegGenerators from './generators';
@@ -20,6 +21,7 @@ const kriegDefinition: KriegDefinition = {
   instructions: kriegInstruction,
   generators: kriegGenerators,
   meta: kriegMeta,
+  performance: kriegPerformance,
   flow: kriegFlow,
   scripts: kriegScripts,
 };

@@ -1,4 +1,4 @@
-import { OrthokonScripts } from "./_types";
+import { OrthokonScripts } from './_types';
 
 const orthokonScripts: OrthokonScripts = {
   basic: [

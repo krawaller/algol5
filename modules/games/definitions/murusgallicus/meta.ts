@@ -8,8 +8,7 @@ const murusgallicusMeta: MurusgallicusMeta = {
   tags: ["differentunits", "infiltrate"],
   author: "Phillip L. Leduc",
   tagline:
-    "Topple your towers in a battle of wits where the forces stay balanced throughout the game",
-  performance: { canAlwaysEnd: {} }
+    "Topple your towers in a battle of wits where the forces stay balanced throughout the game"
 };
 
 export default murusgallicusMeta;

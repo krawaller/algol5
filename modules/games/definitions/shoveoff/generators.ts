@@ -1,4 +1,4 @@
-import { ShoveoffGenerators } from "./_types";
+import { ShoveoffGenerators } from './_types';
 
 const shoveoffGenerators: ShoveoffGenerators = {
   findaffected: {

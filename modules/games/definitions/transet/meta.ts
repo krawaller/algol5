@@ -78,8 +78,7 @@ const transetMeta: TransetMeta = {
         ]
       }
     }
-  },
-  performance: { canAlwaysEnd: {} }
+  }
 };
 
 export default transetMeta;

@@ -1,4 +1,4 @@
-import { KriegGenerators } from "./_types";
+import { KriegGenerators } from './_types';
 
 const kriegGenerators: KriegGenerators = {
   findmovetargets: {

@@ -8,6 +8,7 @@ import atriumSetup from './setup';
 import atriumGraphics from './graphics';
 import atriumInstruction from './instructions';
 import atriumMeta from './meta';
+import atriumPerformance from './performance';
 import atriumFlow from './flow';
 import atriumScripts from './scripts';
 import atriumGenerators from './generators';
@@ -20,6 +21,7 @@ const atriumDefinition: AtriumDefinition = {
   instructions: atriumInstruction,
   generators: atriumGenerators,
   meta: atriumMeta,
+  performance: atriumPerformance,
   flow: atriumFlow,
   scripts: atriumScripts,
 };

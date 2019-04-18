@@ -1,4 +1,4 @@
-import { SemaphorFlow } from "./_types";
+import { SemaphorFlow } from './_types';
 
 const semaphorFlow: SemaphorFlow = {
   startTurn: { links: ["selectdeploytarget", "selectunit"] },

@@ -1,4 +1,4 @@
-import { GowiththefloeFlow } from "./_types";
+import { GowiththefloeFlow } from './_types';
 
 const gowiththefloeFlow: GowiththefloeFlow = {
   STATUS: "wip",

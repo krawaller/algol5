@@ -8,6 +8,7 @@ import transetSetup from './setup';
 import transetGraphics from './graphics';
 import transetInstruction from './instructions';
 import transetMeta from './meta';
+import transetPerformance from './performance';
 import transetFlow from './flow';
 import transetScripts from './scripts';
 import transetGenerators from './generators';
@@ -20,6 +21,7 @@ const transetDefinition: TransetDefinition = {
   instructions: transetInstruction,
   generators: transetGenerators,
   meta: transetMeta,
+  performance: transetPerformance,
   flow: transetFlow,
   scripts: transetScripts,
 };

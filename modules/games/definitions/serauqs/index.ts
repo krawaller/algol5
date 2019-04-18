@@ -8,6 +8,7 @@ import serauqsSetup from './setup';
 import serauqsGraphics from './graphics';
 import serauqsInstruction from './instructions';
 import serauqsMeta from './meta';
+import serauqsPerformance from './performance';
 import serauqsFlow from './flow';
 import serauqsScripts from './scripts';
 import serauqsGenerators from './generators';
@@ -20,6 +21,7 @@ const serauqsDefinition: SerauqsDefinition = {
   instructions: serauqsInstruction,
   generators: serauqsGenerators,
   meta: serauqsMeta,
+  performance: serauqsPerformance,
   flow: serauqsFlow,
   scripts: serauqsScripts,
 };

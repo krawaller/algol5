@@ -1,4 +1,4 @@
-import { CoffeeGenerators } from "./_types";
+import { CoffeeGenerators } from './_types';
 
 const coffeeGenerators: CoffeeGenerators = {
   findgeneratees: {

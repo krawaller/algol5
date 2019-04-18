@@ -1,4 +1,4 @@
-import { KriegScripts } from "./_types";
+import { KriegScripts } from './_types';
 
 const kriegScripts: KriegScripts = {
   basic: [

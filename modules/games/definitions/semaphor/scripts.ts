@@ -1,4 +1,4 @@
-import { SemaphorScripts } from "./_types";
+import { SemaphorScripts } from './_types';
 
 const semaphorScripts: SemaphorScripts = {
   basic: [

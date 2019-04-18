@@ -1,4 +1,4 @@
-import { AtriumGenerators } from "./_types";
+import { AtriumGenerators } from './_types';
 
 const atriumGenerators: AtriumGenerators = {
   findmovetargets: {

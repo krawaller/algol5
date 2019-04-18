@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type AmazonsBoardHeight = 10;
 export type AmazonsBoardWidth = 10;
@@ -26,6 +26,7 @@ export type AmazonsAI = AI<AmazonsAiArtifactLayer, AmazonsAiAspect, AmazonsAiBra
 export type AmazonsGraphics = Graphics<AmazonsTerrain, AmazonsUnit>;
 export type AmazonsInstructions = Instructions<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPhase, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;
 export type AmazonsMeta = AlgolMeta<AmazonsCommand, AmazonsMark>;
+export type AmazonsPerformance = AlgolPerformance<AmazonsCommand, AmazonsMark>;
 export type AmazonsScripts = GameTestSuite;
 export type AmazonsSetup = Setup<AmazonsPosition, AmazonsUnit>;
 

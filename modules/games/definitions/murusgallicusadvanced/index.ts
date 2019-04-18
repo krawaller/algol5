@@ -8,6 +8,7 @@ import murusgallicusadvancedSetup from './setup';
 import murusgallicusadvancedGraphics from './graphics';
 import murusgallicusadvancedInstruction from './instructions';
 import murusgallicusadvancedMeta from './meta';
+import murusgallicusadvancedPerformance from './performance';
 import murusgallicusadvancedFlow from './flow';
 import murusgallicusadvancedScripts from './scripts';
 import murusgallicusadvancedGenerators from './generators';
@@ -20,6 +21,7 @@ const murusgallicusadvancedDefinition: MurusgallicusadvancedDefinition = {
   instructions: murusgallicusadvancedInstruction,
   generators: murusgallicusadvancedGenerators,
   meta: murusgallicusadvancedMeta,
+  performance: murusgallicusadvancedPerformance,
   flow: murusgallicusadvancedFlow,
   scripts: murusgallicusadvancedScripts,
 };

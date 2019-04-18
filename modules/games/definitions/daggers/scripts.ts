@@ -1,4 +1,4 @@
-import { DaggersScripts } from "./_types";
+import { DaggersScripts } from './_types';
 
 const daggersScripts: DaggersScripts = {
   basic: [

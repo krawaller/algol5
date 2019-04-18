@@ -1,4 +1,4 @@
-import { SerauqsScripts } from "./_types";
+import { SerauqsScripts } from './_types';
 
 const serauqsScripts: SerauqsScripts = {
   basic: [

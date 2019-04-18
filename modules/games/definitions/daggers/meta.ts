@@ -91,8 +91,7 @@ const daggersMeta: DaggersMeta = {
         ]
       }
     }
-  },
-  performance: { canAlwaysEnd: {} }
+  }
 };
 
 export default daggersMeta;

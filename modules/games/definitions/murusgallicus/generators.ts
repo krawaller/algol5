@@ -1,4 +1,4 @@
-import { MurusgallicusGenerators } from "./_types";
+import { MurusgallicusGenerators } from './_types';
 
 const murusgallicusGenerators: MurusgallicusGenerators = {
   findmovetargets: {

@@ -1,4 +1,4 @@
-import { DaggersGenerators } from "./_types";
+import { DaggersGenerators } from './_types';
 
 const daggersGenerators: DaggersGenerators = {
   findcrowntargets: {

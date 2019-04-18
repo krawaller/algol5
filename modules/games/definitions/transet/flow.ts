@@ -1,4 +1,4 @@
-import { TransetFlow } from "./_types";
+import { TransetFlow } from './_types';
 
 const transetFlow: TransetFlow = {
   endGame: {

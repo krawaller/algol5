@@ -44,8 +44,6 @@ export function executeCmndEnd(
         : ""
     }
     ${
-      gameDef.meta.performance.canAlwaysEnd[action]
-        ? "canAlwaysEnd: true, "
-        : ""
+      gameDef.performance.canAlwaysEnd[action] ? "canAlwaysEnd: true, " : ""
     }   };`;
 }

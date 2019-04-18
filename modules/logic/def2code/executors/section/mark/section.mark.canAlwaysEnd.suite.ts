@@ -50,12 +50,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
     {
       def: {
         ...emptyFullDef,
-        meta: {
-          ...emptyFullDef.meta,
-          performance: {
-            canAlwaysEnd: {
-              somemark: true
-            }
+        performance: {
+          canAlwaysEnd: {
+            somemark: true
           }
         },
         flow: {

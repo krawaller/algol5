@@ -45,8 +45,6 @@ export function executeMarkEnd(
       }
       ${usesSpawn(gameDef) ? "NEXTSPAWNID: step.NEXTSPAWNID, " : ""}
       ${
-        gameDef.meta.performance.canAlwaysEnd[action]
-          ? "canAlwaysEnd: true, "
-          : ""
+        gameDef.performance.canAlwaysEnd[action] ? "canAlwaysEnd: true, " : ""
       }     };`;
 }

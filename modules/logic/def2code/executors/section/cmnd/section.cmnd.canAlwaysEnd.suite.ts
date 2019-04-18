@@ -37,12 +37,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
     {
       def: {
         ...emptyFullDef,
-        meta: {
-          ...emptyFullDef.meta,
-          performance: {
-            canAlwaysEnd: {
-              somecmnd: true
-            }
+        performance: {
+          canAlwaysEnd: {
+            somecmnd: true
           }
         }
       },

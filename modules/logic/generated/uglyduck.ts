@@ -4,6 +4,7 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
+  terrainLayers,
   collapseContent,
   defaultInstruction
 } from "../../common";
@@ -32,51 +33,14 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "oppkings"]
     ]
   };
-  const TERRAIN = {
-    homerow: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      e1: { pos: "e1", x: 5, y: 1, owner: 1 },
-      a5: { pos: "a5", x: 1, y: 5, owner: 2 },
-      b5: { pos: "b5", x: 2, y: 5, owner: 2 },
-      c5: { pos: "c5", x: 3, y: 5, owner: 2 },
-      d5: { pos: "d5", x: 4, y: 5, owner: 2 },
-      e5: { pos: "e5", x: 5, y: 5, owner: 2 }
+  const TERRAIN = terrainLayers(
+    5,
+    5,
+    {
+      homerow: { "1": [{ rect: ["a1", "e1"] }], "2": [{ rect: ["a5", "e5"] }] }
     },
-    myhomerow: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      e1: { pos: "e1", x: 5, y: 1, owner: 1 }
-    },
-    opphomerow: {
-      a5: { pos: "a5", x: 1, y: 5, owner: 2 },
-      b5: { pos: "b5", x: 2, y: 5, owner: 2 },
-      c5: { pos: "c5", x: 3, y: 5, owner: 2 },
-      d5: { pos: "d5", x: 4, y: 5, owner: 2 },
-      e5: { pos: "e5", x: 5, y: 5, owner: 2 }
-    },
-    nohomerow: {
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      a4: { pos: "a4", x: 1, y: 4 },
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      b4: { pos: "b4", x: 2, y: 4 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 },
-      c4: { pos: "c4", x: 3, y: 4 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 },
-      d4: { pos: "d4", x: 4, y: 4 },
-      e2: { pos: "e2", x: 5, y: 2 },
-      e3: { pos: "e3", x: 5, y: 3 },
-      e4: { pos: "e4", x: 5, y: 4 }
-    }
-  };
+    1
+  );
   game.action.startTurn1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
@@ -368,51 +332,14 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "mykings"]
     ]
   };
-  const TERRAIN = {
-    homerow: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      e1: { pos: "e1", x: 5, y: 1, owner: 1 },
-      a5: { pos: "a5", x: 1, y: 5, owner: 2 },
-      b5: { pos: "b5", x: 2, y: 5, owner: 2 },
-      c5: { pos: "c5", x: 3, y: 5, owner: 2 },
-      d5: { pos: "d5", x: 4, y: 5, owner: 2 },
-      e5: { pos: "e5", x: 5, y: 5, owner: 2 }
+  const TERRAIN = terrainLayers(
+    5,
+    5,
+    {
+      homerow: { "1": [{ rect: ["a1", "e1"] }], "2": [{ rect: ["a5", "e5"] }] }
     },
-    opphomerow: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      e1: { pos: "e1", x: 5, y: 1, owner: 1 }
-    },
-    myhomerow: {
-      a5: { pos: "a5", x: 1, y: 5, owner: 2 },
-      b5: { pos: "b5", x: 2, y: 5, owner: 2 },
-      c5: { pos: "c5", x: 3, y: 5, owner: 2 },
-      d5: { pos: "d5", x: 4, y: 5, owner: 2 },
-      e5: { pos: "e5", x: 5, y: 5, owner: 2 }
-    },
-    nohomerow: {
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      a4: { pos: "a4", x: 1, y: 4 },
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      b4: { pos: "b4", x: 2, y: 4 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 },
-      c4: { pos: "c4", x: 3, y: 4 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 },
-      d4: { pos: "d4", x: 4, y: 4 },
-      e2: { pos: "e2", x: 5, y: 2 },
-      e3: { pos: "e3", x: 5, y: 3 },
-      e4: { pos: "e4", x: 5, y: 4 }
-    }
-  };
+    2
+  );
   game.action.startTurn2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {

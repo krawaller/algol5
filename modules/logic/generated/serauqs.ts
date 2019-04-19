@@ -4,6 +4,7 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
+  terrainLayers,
   collapseContent,
   defaultInstruction
 } from "../../common";
@@ -28,80 +29,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "wild", "oppwild"]
     ]
   };
-  const TERRAIN = {
-    base: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      a4: { pos: "a4", x: 1, y: 4, owner: 2 },
-      b4: { pos: "b4", x: 2, y: 4, owner: 2 },
-      c4: { pos: "c4", x: 3, y: 4, owner: 2 },
-      d4: { pos: "d4", x: 4, y: 4, owner: 2 }
+  const TERRAIN = terrainLayers(
+    4,
+    4,
+    {
+      base: { "1": [{ rect: ["a1", "d1"] }], "2": [{ rect: ["a4", "d4"] }] },
+      corners: ["a1", "a4", "d1", "d4"],
+      middle: [{ rect: ["b2", "c3"] }]
     },
-    mybase: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 }
-    },
-    oppbase: {
-      a4: { pos: "a4", x: 1, y: 4, owner: 2 },
-      b4: { pos: "b4", x: 2, y: 4, owner: 2 },
-      c4: { pos: "c4", x: 3, y: 4, owner: 2 },
-      d4: { pos: "d4", x: 4, y: 4, owner: 2 }
-    },
-    corners: {
-      a1: { pos: "a1", x: 1, y: 1 },
-      a4: { pos: "a4", x: 1, y: 4 },
-      d1: { pos: "d1", x: 4, y: 1 },
-      d4: { pos: "d4", x: 4, y: 4 }
-    },
-    middle: {
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 }
-    },
-    nobase: {
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 }
-    },
-    nocorners: {
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      b1: { pos: "b1", x: 2, y: 1 },
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      b4: { pos: "b4", x: 2, y: 4 },
-      c1: { pos: "c1", x: 3, y: 1 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 },
-      c4: { pos: "c4", x: 3, y: 4 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 }
-    },
-    nomiddle: {
-      a1: { pos: "a1", x: 1, y: 1 },
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      a4: { pos: "a4", x: 1, y: 4 },
-      b1: { pos: "b1", x: 2, y: 1 },
-      b4: { pos: "b4", x: 2, y: 4 },
-      c1: { pos: "c1", x: 3, y: 1 },
-      c4: { pos: "c4", x: 3, y: 4 },
-      d1: { pos: "d1", x: 4, y: 1 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 },
-      d4: { pos: "d4", x: 4, y: 4 }
-    }
-  };
+    1
+  );
   game.action.startTurn1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
@@ -419,80 +356,16 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "wild", "mywild"]
     ]
   };
-  const TERRAIN = {
-    base: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      a4: { pos: "a4", x: 1, y: 4, owner: 2 },
-      b4: { pos: "b4", x: 2, y: 4, owner: 2 },
-      c4: { pos: "c4", x: 3, y: 4, owner: 2 },
-      d4: { pos: "d4", x: 4, y: 4, owner: 2 }
+  const TERRAIN = terrainLayers(
+    4,
+    4,
+    {
+      base: { "1": [{ rect: ["a1", "d1"] }], "2": [{ rect: ["a4", "d4"] }] },
+      corners: ["a1", "a4", "d1", "d4"],
+      middle: [{ rect: ["b2", "c3"] }]
     },
-    oppbase: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 }
-    },
-    mybase: {
-      a4: { pos: "a4", x: 1, y: 4, owner: 2 },
-      b4: { pos: "b4", x: 2, y: 4, owner: 2 },
-      c4: { pos: "c4", x: 3, y: 4, owner: 2 },
-      d4: { pos: "d4", x: 4, y: 4, owner: 2 }
-    },
-    corners: {
-      a1: { pos: "a1", x: 1, y: 1 },
-      a4: { pos: "a4", x: 1, y: 4 },
-      d1: { pos: "d1", x: 4, y: 1 },
-      d4: { pos: "d4", x: 4, y: 4 }
-    },
-    middle: {
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 }
-    },
-    nobase: {
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 }
-    },
-    nocorners: {
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      b1: { pos: "b1", x: 2, y: 1 },
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      b4: { pos: "b4", x: 2, y: 4 },
-      c1: { pos: "c1", x: 3, y: 1 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 },
-      c4: { pos: "c4", x: 3, y: 4 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 }
-    },
-    nomiddle: {
-      a1: { pos: "a1", x: 1, y: 1 },
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      a4: { pos: "a4", x: 1, y: 4 },
-      b1: { pos: "b1", x: 2, y: 1 },
-      b4: { pos: "b4", x: 2, y: 4 },
-      c1: { pos: "c1", x: 3, y: 1 },
-      c4: { pos: "c4", x: 3, y: 4 },
-      d1: { pos: "d1", x: 4, y: 1 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 },
-      d4: { pos: "d4", x: 4, y: 4 }
-    }
-  };
+    2
+  );
   game.action.startTurn2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {

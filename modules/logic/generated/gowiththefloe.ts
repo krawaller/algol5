@@ -4,6 +4,7 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
+  terrainLayers,
   collapseContent,
   defaultInstruction
 } from "../../common";
@@ -20,76 +21,22 @@ const emptyArtifactLayers = {
 
 const connections = boardConnections({ height: 8, width: 8 });
 const relativeDirs = makeRelativeDirs([]);
-const TERRAIN = {
-  water: {
-    a1: { pos: "a1", x: 1, y: 1 },
-    a2: { pos: "a2", x: 1, y: 2 },
-    a7: { pos: "a7", x: 1, y: 7 },
-    a8: { pos: "a8", x: 1, y: 8 },
-    b1: { pos: "b1", x: 2, y: 1 },
-    b8: { pos: "b8", x: 2, y: 8 },
-    g1: { pos: "g1", x: 7, y: 1 },
-    g8: { pos: "g8", x: 7, y: 8 },
-    h1: { pos: "h1", x: 8, y: 1 },
-    h2: { pos: "h2", x: 8, y: 2 },
-    h7: { pos: "h7", x: 8, y: 7 },
-    h8: { pos: "h8", x: 8, y: 8 }
-  },
-  nowater: {
-    a3: { pos: "a3", x: 1, y: 3 },
-    a4: { pos: "a4", x: 1, y: 4 },
-    a5: { pos: "a5", x: 1, y: 5 },
-    a6: { pos: "a6", x: 1, y: 6 },
-    b2: { pos: "b2", x: 2, y: 2 },
-    b3: { pos: "b3", x: 2, y: 3 },
-    b4: { pos: "b4", x: 2, y: 4 },
-    b5: { pos: "b5", x: 2, y: 5 },
-    b6: { pos: "b6", x: 2, y: 6 },
-    b7: { pos: "b7", x: 2, y: 7 },
-    c1: { pos: "c1", x: 3, y: 1 },
-    c2: { pos: "c2", x: 3, y: 2 },
-    c3: { pos: "c3", x: 3, y: 3 },
-    c4: { pos: "c4", x: 3, y: 4 },
-    c5: { pos: "c5", x: 3, y: 5 },
-    c6: { pos: "c6", x: 3, y: 6 },
-    c7: { pos: "c7", x: 3, y: 7 },
-    c8: { pos: "c8", x: 3, y: 8 },
-    d1: { pos: "d1", x: 4, y: 1 },
-    d2: { pos: "d2", x: 4, y: 2 },
-    d3: { pos: "d3", x: 4, y: 3 },
-    d4: { pos: "d4", x: 4, y: 4 },
-    d5: { pos: "d5", x: 4, y: 5 },
-    d6: { pos: "d6", x: 4, y: 6 },
-    d7: { pos: "d7", x: 4, y: 7 },
-    d8: { pos: "d8", x: 4, y: 8 },
-    e1: { pos: "e1", x: 5, y: 1 },
-    e2: { pos: "e2", x: 5, y: 2 },
-    e3: { pos: "e3", x: 5, y: 3 },
-    e4: { pos: "e4", x: 5, y: 4 },
-    e5: { pos: "e5", x: 5, y: 5 },
-    e6: { pos: "e6", x: 5, y: 6 },
-    e7: { pos: "e7", x: 5, y: 7 },
-    e8: { pos: "e8", x: 5, y: 8 },
-    f1: { pos: "f1", x: 6, y: 1 },
-    f2: { pos: "f2", x: 6, y: 2 },
-    f3: { pos: "f3", x: 6, y: 3 },
-    f4: { pos: "f4", x: 6, y: 4 },
-    f5: { pos: "f5", x: 6, y: 5 },
-    f6: { pos: "f6", x: 6, y: 6 },
-    f7: { pos: "f7", x: 6, y: 7 },
-    f8: { pos: "f8", x: 6, y: 8 },
-    g2: { pos: "g2", x: 7, y: 2 },
-    g3: { pos: "g3", x: 7, y: 3 },
-    g4: { pos: "g4", x: 7, y: 4 },
-    g5: { pos: "g5", x: 7, y: 5 },
-    g6: { pos: "g6", x: 7, y: 6 },
-    g7: { pos: "g7", x: 7, y: 7 },
-    h3: { pos: "h3", x: 8, y: 3 },
-    h4: { pos: "h4", x: 8, y: 4 },
-    h5: { pos: "h5", x: 8, y: 5 },
-    h6: { pos: "h6", x: 8, y: 6 }
-  }
-};
+const TERRAIN = terrainLayers(8, 8, {
+  water: [
+    "a1",
+    "a2",
+    "a7",
+    "a8",
+    "b1",
+    "b8",
+    "g1",
+    "g8",
+    "h1",
+    "h2",
+    "h7",
+    "h8"
+  ]
+});
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];

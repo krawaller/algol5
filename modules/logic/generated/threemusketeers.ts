@@ -4,6 +4,7 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
+  terrainLayers,
   collapseContent,
   defaultInstruction
 } from "../../common";
@@ -19,7 +20,7 @@ const emptyArtifactLayers = {
 
 const connections = boardConnections({ height: 5, width: 5 });
 const relativeDirs = makeRelativeDirs([]);
-const TERRAIN = {};
+const TERRAIN = terrainLayers(5, 5, {});
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];

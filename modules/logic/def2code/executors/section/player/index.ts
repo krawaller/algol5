@@ -17,9 +17,12 @@ export function executePlayer(
   )}; `;
 
   if (!isTerrainNeutral(gameDef)) {
-    ret += `const TERRAIN = ${JSON.stringify(
-      terrainLayers(gameDef.board, player)
-    )}; `;
+    ret += `const TERRAIN = terrainLayers(${gameDef.board.height}, ${
+      gameDef.board.width
+    }, ${JSON.stringify({
+      ...gameDef.board.terrain,
+      ...gameDef.AI.terrain
+    })}, ${player}); `;
   }
 
   return ret;

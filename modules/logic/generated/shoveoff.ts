@@ -4,6 +4,7 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
+  terrainLayers,
   collapseContent,
   defaultInstruction
 } from "../../common";
@@ -30,108 +31,13 @@ const emptyArtifactLayers = {
 
 const connections = boardConnections({ height: 4, width: 4 });
 const relativeDirs = makeRelativeDirs([]);
-const TERRAIN = {
-  southedge: {
-    a1: { pos: "a1", x: 1, y: 1 },
-    b1: { pos: "b1", x: 2, y: 1 },
-    c1: { pos: "c1", x: 3, y: 1 },
-    d1: { pos: "d1", x: 4, y: 1 }
-  },
-  northedge: {
-    a4: { pos: "a4", x: 1, y: 4 },
-    b4: { pos: "b4", x: 2, y: 4 },
-    c4: { pos: "c4", x: 3, y: 4 },
-    d4: { pos: "d4", x: 4, y: 4 }
-  },
-  westedge: {
-    a1: { pos: "a1", x: 1, y: 1 },
-    a2: { pos: "a2", x: 1, y: 2 },
-    a3: { pos: "a3", x: 1, y: 3 },
-    a4: { pos: "a4", x: 1, y: 4 }
-  },
-  eastedge: {
-    d1: { pos: "d1", x: 4, y: 1 },
-    d2: { pos: "d2", x: 4, y: 2 },
-    d3: { pos: "d3", x: 4, y: 3 },
-    d4: { pos: "d4", x: 4, y: 4 }
-  },
-  edge: {
-    a1: { pos: "a1", x: 1, y: 1 },
-    a2: { pos: "a2", x: 1, y: 2 },
-    a3: { pos: "a3", x: 1, y: 3 },
-    a4: { pos: "a4", x: 1, y: 4 },
-    b1: { pos: "b1", x: 2, y: 1 },
-    b4: { pos: "b4", x: 2, y: 4 },
-    c1: { pos: "c1", x: 3, y: 1 },
-    c4: { pos: "c4", x: 3, y: 4 },
-    d1: { pos: "d1", x: 4, y: 1 },
-    d2: { pos: "d2", x: 4, y: 2 },
-    d3: { pos: "d3", x: 4, y: 3 },
-    d4: { pos: "d4", x: 4, y: 4 }
-  },
-  nosouthedge: {
-    a2: { pos: "a2", x: 1, y: 2 },
-    a3: { pos: "a3", x: 1, y: 3 },
-    a4: { pos: "a4", x: 1, y: 4 },
-    b2: { pos: "b2", x: 2, y: 2 },
-    b3: { pos: "b3", x: 2, y: 3 },
-    b4: { pos: "b4", x: 2, y: 4 },
-    c2: { pos: "c2", x: 3, y: 2 },
-    c3: { pos: "c3", x: 3, y: 3 },
-    c4: { pos: "c4", x: 3, y: 4 },
-    d2: { pos: "d2", x: 4, y: 2 },
-    d3: { pos: "d3", x: 4, y: 3 },
-    d4: { pos: "d4", x: 4, y: 4 }
-  },
-  nonorthedge: {
-    a1: { pos: "a1", x: 1, y: 1 },
-    a2: { pos: "a2", x: 1, y: 2 },
-    a3: { pos: "a3", x: 1, y: 3 },
-    b1: { pos: "b1", x: 2, y: 1 },
-    b2: { pos: "b2", x: 2, y: 2 },
-    b3: { pos: "b3", x: 2, y: 3 },
-    c1: { pos: "c1", x: 3, y: 1 },
-    c2: { pos: "c2", x: 3, y: 2 },
-    c3: { pos: "c3", x: 3, y: 3 },
-    d1: { pos: "d1", x: 4, y: 1 },
-    d2: { pos: "d2", x: 4, y: 2 },
-    d3: { pos: "d3", x: 4, y: 3 }
-  },
-  nowestedge: {
-    b1: { pos: "b1", x: 2, y: 1 },
-    b2: { pos: "b2", x: 2, y: 2 },
-    b3: { pos: "b3", x: 2, y: 3 },
-    b4: { pos: "b4", x: 2, y: 4 },
-    c1: { pos: "c1", x: 3, y: 1 },
-    c2: { pos: "c2", x: 3, y: 2 },
-    c3: { pos: "c3", x: 3, y: 3 },
-    c4: { pos: "c4", x: 3, y: 4 },
-    d1: { pos: "d1", x: 4, y: 1 },
-    d2: { pos: "d2", x: 4, y: 2 },
-    d3: { pos: "d3", x: 4, y: 3 },
-    d4: { pos: "d4", x: 4, y: 4 }
-  },
-  noeastedge: {
-    a1: { pos: "a1", x: 1, y: 1 },
-    a2: { pos: "a2", x: 1, y: 2 },
-    a3: { pos: "a3", x: 1, y: 3 },
-    a4: { pos: "a4", x: 1, y: 4 },
-    b1: { pos: "b1", x: 2, y: 1 },
-    b2: { pos: "b2", x: 2, y: 2 },
-    b3: { pos: "b3", x: 2, y: 3 },
-    b4: { pos: "b4", x: 2, y: 4 },
-    c1: { pos: "c1", x: 3, y: 1 },
-    c2: { pos: "c2", x: 3, y: 2 },
-    c3: { pos: "c3", x: 3, y: 3 },
-    c4: { pos: "c4", x: 3, y: 4 }
-  },
-  noedge: {
-    b2: { pos: "b2", x: 2, y: 2 },
-    b3: { pos: "b3", x: 2, y: 3 },
-    c2: { pos: "c2", x: 3, y: 2 },
-    c3: { pos: "c3", x: 3, y: 3 }
-  }
-};
+const TERRAIN = terrainLayers(4, 4, {
+  southedge: [{ rect: ["a1", "d1"] }],
+  northedge: [{ rect: ["a4", "d4"] }],
+  westedge: [{ rect: ["a1", "a4"] }],
+  eastedge: [{ rect: ["d1", "d4"] }],
+  edge: [{ holerect: ["a1", "d4", "b2", "b3", "c2", "c3"] }]
+});
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];

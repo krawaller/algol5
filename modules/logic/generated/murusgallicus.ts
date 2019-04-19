@@ -4,6 +4,7 @@ import {
   makeRelativeDirs,
   deduceInitialUnitData,
   boardLayers,
+  terrainLayers,
   collapseContent,
   defaultInstruction
 } from "../../common";
@@ -37,88 +38,18 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "oppunits", "walls", "oppwalls"]
     ]
   };
-  const TERRAIN = {
-    homerow: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      e1: { pos: "e1", x: 5, y: 1, owner: 1 },
-      f1: { pos: "f1", x: 6, y: 1, owner: 1 },
-      g1: { pos: "g1", x: 7, y: 1, owner: 1 },
-      h1: { pos: "h1", x: 8, y: 1, owner: 1 },
-      a7: { pos: "a7", x: 1, y: 7, owner: 2 },
-      b7: { pos: "b7", x: 2, y: 7, owner: 2 },
-      c7: { pos: "c7", x: 3, y: 7, owner: 2 },
-      d7: { pos: "d7", x: 4, y: 7, owner: 2 },
-      e7: { pos: "e7", x: 5, y: 7, owner: 2 },
-      f7: { pos: "f7", x: 6, y: 7, owner: 2 },
-      g7: { pos: "g7", x: 7, y: 7, owner: 2 },
-      h7: { pos: "h7", x: 8, y: 7, owner: 2 }
+  const TERRAIN = terrainLayers(
+    7,
+    8,
+    {
+      homerow: { "1": [{ rect: ["a1", "h1"] }], "2": [{ rect: ["a7", "h7"] }] },
+      threatrow: {
+        "1": [{ rect: ["a3", "h3"] }],
+        "2": [{ rect: ["a5", "h5"] }]
+      }
     },
-    myhomerow: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      e1: { pos: "e1", x: 5, y: 1, owner: 1 },
-      f1: { pos: "f1", x: 6, y: 1, owner: 1 },
-      g1: { pos: "g1", x: 7, y: 1, owner: 1 },
-      h1: { pos: "h1", x: 8, y: 1, owner: 1 }
-    },
-    opphomerow: {
-      a7: { pos: "a7", x: 1, y: 7, owner: 2 },
-      b7: { pos: "b7", x: 2, y: 7, owner: 2 },
-      c7: { pos: "c7", x: 3, y: 7, owner: 2 },
-      d7: { pos: "d7", x: 4, y: 7, owner: 2 },
-      e7: { pos: "e7", x: 5, y: 7, owner: 2 },
-      f7: { pos: "f7", x: 6, y: 7, owner: 2 },
-      g7: { pos: "g7", x: 7, y: 7, owner: 2 },
-      h7: { pos: "h7", x: 8, y: 7, owner: 2 }
-    },
-    nohomerow: {
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      a4: { pos: "a4", x: 1, y: 4 },
-      a5: { pos: "a5", x: 1, y: 5 },
-      a6: { pos: "a6", x: 1, y: 6 },
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      b4: { pos: "b4", x: 2, y: 4 },
-      b5: { pos: "b5", x: 2, y: 5 },
-      b6: { pos: "b6", x: 2, y: 6 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 },
-      c4: { pos: "c4", x: 3, y: 4 },
-      c5: { pos: "c5", x: 3, y: 5 },
-      c6: { pos: "c6", x: 3, y: 6 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 },
-      d4: { pos: "d4", x: 4, y: 4 },
-      d5: { pos: "d5", x: 4, y: 5 },
-      d6: { pos: "d6", x: 4, y: 6 },
-      e2: { pos: "e2", x: 5, y: 2 },
-      e3: { pos: "e3", x: 5, y: 3 },
-      e4: { pos: "e4", x: 5, y: 4 },
-      e5: { pos: "e5", x: 5, y: 5 },
-      e6: { pos: "e6", x: 5, y: 6 },
-      f2: { pos: "f2", x: 6, y: 2 },
-      f3: { pos: "f3", x: 6, y: 3 },
-      f4: { pos: "f4", x: 6, y: 4 },
-      f5: { pos: "f5", x: 6, y: 5 },
-      f6: { pos: "f6", x: 6, y: 6 },
-      g2: { pos: "g2", x: 7, y: 2 },
-      g3: { pos: "g3", x: 7, y: 3 },
-      g4: { pos: "g4", x: 7, y: 4 },
-      g5: { pos: "g5", x: 7, y: 5 },
-      g6: { pos: "g6", x: 7, y: 6 },
-      h2: { pos: "h2", x: 8, y: 2 },
-      h3: { pos: "h3", x: 8, y: 3 },
-      h4: { pos: "h4", x: 8, y: 4 },
-      h5: { pos: "h5", x: 8, y: 5 },
-      h6: { pos: "h6", x: 8, y: 6 }
-    }
-  };
+    1
+  );
   game.action.startTurn1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
@@ -529,88 +460,18 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       ["units", "myunits", "walls", "mywalls"]
     ]
   };
-  const TERRAIN = {
-    homerow: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      e1: { pos: "e1", x: 5, y: 1, owner: 1 },
-      f1: { pos: "f1", x: 6, y: 1, owner: 1 },
-      g1: { pos: "g1", x: 7, y: 1, owner: 1 },
-      h1: { pos: "h1", x: 8, y: 1, owner: 1 },
-      a7: { pos: "a7", x: 1, y: 7, owner: 2 },
-      b7: { pos: "b7", x: 2, y: 7, owner: 2 },
-      c7: { pos: "c7", x: 3, y: 7, owner: 2 },
-      d7: { pos: "d7", x: 4, y: 7, owner: 2 },
-      e7: { pos: "e7", x: 5, y: 7, owner: 2 },
-      f7: { pos: "f7", x: 6, y: 7, owner: 2 },
-      g7: { pos: "g7", x: 7, y: 7, owner: 2 },
-      h7: { pos: "h7", x: 8, y: 7, owner: 2 }
+  const TERRAIN = terrainLayers(
+    7,
+    8,
+    {
+      homerow: { "1": [{ rect: ["a1", "h1"] }], "2": [{ rect: ["a7", "h7"] }] },
+      threatrow: {
+        "1": [{ rect: ["a3", "h3"] }],
+        "2": [{ rect: ["a5", "h5"] }]
+      }
     },
-    opphomerow: {
-      a1: { pos: "a1", x: 1, y: 1, owner: 1 },
-      b1: { pos: "b1", x: 2, y: 1, owner: 1 },
-      c1: { pos: "c1", x: 3, y: 1, owner: 1 },
-      d1: { pos: "d1", x: 4, y: 1, owner: 1 },
-      e1: { pos: "e1", x: 5, y: 1, owner: 1 },
-      f1: { pos: "f1", x: 6, y: 1, owner: 1 },
-      g1: { pos: "g1", x: 7, y: 1, owner: 1 },
-      h1: { pos: "h1", x: 8, y: 1, owner: 1 }
-    },
-    myhomerow: {
-      a7: { pos: "a7", x: 1, y: 7, owner: 2 },
-      b7: { pos: "b7", x: 2, y: 7, owner: 2 },
-      c7: { pos: "c7", x: 3, y: 7, owner: 2 },
-      d7: { pos: "d7", x: 4, y: 7, owner: 2 },
-      e7: { pos: "e7", x: 5, y: 7, owner: 2 },
-      f7: { pos: "f7", x: 6, y: 7, owner: 2 },
-      g7: { pos: "g7", x: 7, y: 7, owner: 2 },
-      h7: { pos: "h7", x: 8, y: 7, owner: 2 }
-    },
-    nohomerow: {
-      a2: { pos: "a2", x: 1, y: 2 },
-      a3: { pos: "a3", x: 1, y: 3 },
-      a4: { pos: "a4", x: 1, y: 4 },
-      a5: { pos: "a5", x: 1, y: 5 },
-      a6: { pos: "a6", x: 1, y: 6 },
-      b2: { pos: "b2", x: 2, y: 2 },
-      b3: { pos: "b3", x: 2, y: 3 },
-      b4: { pos: "b4", x: 2, y: 4 },
-      b5: { pos: "b5", x: 2, y: 5 },
-      b6: { pos: "b6", x: 2, y: 6 },
-      c2: { pos: "c2", x: 3, y: 2 },
-      c3: { pos: "c3", x: 3, y: 3 },
-      c4: { pos: "c4", x: 3, y: 4 },
-      c5: { pos: "c5", x: 3, y: 5 },
-      c6: { pos: "c6", x: 3, y: 6 },
-      d2: { pos: "d2", x: 4, y: 2 },
-      d3: { pos: "d3", x: 4, y: 3 },
-      d4: { pos: "d4", x: 4, y: 4 },
-      d5: { pos: "d5", x: 4, y: 5 },
-      d6: { pos: "d6", x: 4, y: 6 },
-      e2: { pos: "e2", x: 5, y: 2 },
-      e3: { pos: "e3", x: 5, y: 3 },
-      e4: { pos: "e4", x: 5, y: 4 },
-      e5: { pos: "e5", x: 5, y: 5 },
-      e6: { pos: "e6", x: 5, y: 6 },
-      f2: { pos: "f2", x: 6, y: 2 },
-      f3: { pos: "f3", x: 6, y: 3 },
-      f4: { pos: "f4", x: 6, y: 4 },
-      f5: { pos: "f5", x: 6, y: 5 },
-      f6: { pos: "f6", x: 6, y: 6 },
-      g2: { pos: "g2", x: 7, y: 2 },
-      g3: { pos: "g3", x: 7, y: 3 },
-      g4: { pos: "g4", x: 7, y: 4 },
-      g5: { pos: "g5", x: 7, y: 5 },
-      g6: { pos: "g6", x: 7, y: 6 },
-      h2: { pos: "h2", x: 8, y: 2 },
-      h3: { pos: "h3", x: 8, y: 3 },
-      h4: { pos: "h4", x: 8, y: 4 },
-      h5: { pos: "h5", x: 8, y: 5 },
-      h6: { pos: "h6", x: 8, y: 6 }
-    }
-  };
+    2
+  );
   game.action.startTurn2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {

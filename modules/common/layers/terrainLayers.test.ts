@@ -53,6 +53,8 @@ const terrainTests: TerrainTest[] = [
 
 test("terrainLayers", () => {
   terrainTests.forEach(({ board, forPlayer, expected }) =>
-    expect(terrainLayers(board, forPlayer)).toEqual(expected)
+    expect(
+      terrainLayers(board.height, board.width, board.terrain, forPlayer)
+    ).toEqual(expected)
   );
 });

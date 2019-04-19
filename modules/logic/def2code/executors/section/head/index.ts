@@ -1,9 +1,5 @@
 import { FullDefAnon } from "../../../../../types";
-import {
-  isTerrainNeutral,
-  terrainLayers,
-  emptyArtifactLayers
-} from "../../../../../common";
+import { isTerrainNeutral, emptyArtifactLayers } from "../../../../../common";
 
 // TODO - decide on boardLayers func
 
@@ -45,7 +41,12 @@ export function executeHead(
   ret += `const relativeDirs = makeRelativeDirs(${JSON.stringify(offsets)}); `;
 
   if (isTerrainNeutral(gameDef)) {
-    ret += `const TERRAIN = ${JSON.stringify(terrainLayers(gameDef.board))}; `;
+    ret += `const TERRAIN = terrainLayers(${gameDef.board.height}, ${
+      gameDef.board.width
+    }, ${JSON.stringify({
+      ...gameDef.board.terrain,
+      ...gameDef.AI.terrain
+    })}); `;
   }
 
   ret += `

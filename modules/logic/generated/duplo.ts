@@ -506,30 +506,18 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       : { text: "Select where to deploy the first of your two initial units" };
   };
   game.newBattle = () => {
-    let UNITDATA = {};
-
-    let UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      soldiers: {},
-      mysoldiers: {},
-      oppsoldiers: {}
-    };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
-
       TURN: 0,
-      UNITDATA,
-      UNITLAYERS
+      UNITDATA: {},
+      UNITLAYERS: {
+        units: {},
+        myunits: {},
+        oppunits: {},
+        soldiers: {},
+        mysoldiers: {},
+        oppsoldiers: {}
+      }
     });
   };
   game.action.deploy2 = step => {

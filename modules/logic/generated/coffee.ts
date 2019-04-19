@@ -599,29 +599,17 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       : { text: "Select which neutral unit to take over" };
   };
   game.newBattle = () => {
-    let UNITDATA = {};
-
-    let UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      neutralunits: {},
-      markers: {}
-    };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
-
       TURN: 0,
-      UNITDATA,
-      UNITLAYERS
+      UNITDATA: {},
+      UNITLAYERS: {
+        units: {},
+        myunits: {},
+        oppunits: {},
+        neutralunits: {},
+        markers: {}
+      }
     });
   };
   game.action.uphill2 = step => {

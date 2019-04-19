@@ -415,23 +415,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     });
   };
   game.newBattle = () => {
-    let UNITDATA = {};
-
-    let UNITLAYERS = { units: {}, kings: {}, pawns: {}, bishops: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
-
       TURN: 0,
-      UNITDATA,
-      UNITLAYERS
+      UNITDATA: {},
+      UNITLAYERS: { units: {}, kings: {}, pawns: {}, bishops: {} }
     });
   };
   game.action.deploy2 = step => {

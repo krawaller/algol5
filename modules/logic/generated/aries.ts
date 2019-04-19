@@ -609,7 +609,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-
     return game.action.startTurn1({
       BATTLEVARS: {},
       TURN: 0,

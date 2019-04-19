@@ -1,6 +1,6 @@
 import {
-  AlgolSession,
-  AlgolSessionUI,
+  AlgolBattleSession,
+  AlgolBattleUI,
   AlgolGame,
   AlgolBattle
 } from "../../../types";
@@ -8,7 +8,7 @@ import games from "../../../logic/dist";
 
 const identifyMark = /^[a-z][0-9]+$/;
 
-export function getSessionUI(session: AlgolSession): AlgolSessionUI {
+export function getBattleUI(session: AlgolBattleSession): AlgolBattleUI {
   const { gameId, sessionId, battle } = session;
   const game = games[gameId];
   const currentStep = battle.turn.steps[battle.state.currentStepId];

@@ -1,5 +1,5 @@
 import { AlgolTurn, AlgolGame } from "../../../../../types";
-import { tryToReachTurnEnd, newTurnFromRootStep } from ".";
+import { tryToReachTurnEnd, newTurnFromRootStep } from "../helpers";
 
 // removes dead links in this step
 export function hydrateStepInTurn(

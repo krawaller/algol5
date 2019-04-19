@@ -1,6 +1,6 @@
 import { AlgolBoardState, AlgolPosition, AlgolContentAnon } from "../";
 
-export type AlgolSessionUI = {
+export type AlgolBattleUI = {
   gameId: string;
   sessionId: number;
   board: AlgolBoardState;

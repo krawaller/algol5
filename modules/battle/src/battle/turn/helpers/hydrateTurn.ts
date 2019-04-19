@@ -1,5 +1,5 @@
 import { AlgolTurn, AlgolGame } from "../../../../../types";
-import { hydrateStepInTurn } from ".";
+import { hydrateStepInTurn } from "../helpers";
 
 /*
 Used in .endTurn and .newBattleTurn

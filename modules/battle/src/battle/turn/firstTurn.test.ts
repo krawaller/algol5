@@ -1,4 +1,4 @@
-import { firstTurn } from ".";
+import { firstTurn } from "../turn";
 import aries from "../../../../logic/generated/aries";
 
 test("turn/firstTurn", () => {

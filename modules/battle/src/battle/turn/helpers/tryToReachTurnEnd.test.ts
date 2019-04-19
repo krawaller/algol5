@@ -1,4 +1,4 @@
-import { newTurnFromRootStep, tryToReachTurnEnd } from ".";
+import { newTurnFromRootStep, tryToReachTurnEnd } from "../helpers";
 import aries from "../../../../../logic/generated/aries";
 
 test("tryToReachTurnEnd", () => {

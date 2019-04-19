@@ -1,5 +1,5 @@
 import { AlgolGame, AlgolTurn } from "../../../../types";
-import { newTurnFromRootStep, hydrateTurn } from "./helpers/.";
+import { newTurnFromRootStep, hydrateTurn } from "./helpers";
 
 /*
 Next players turn from the given stepId

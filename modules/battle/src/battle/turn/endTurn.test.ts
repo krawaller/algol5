@@ -1,4 +1,4 @@
-import { firstTurn, endTurn } from ".";
+import { firstTurn, endTurn } from "../turn";
 import aries from "../../../../logic/generated/aries";
 
 test("turn/endTurn regular", () => {

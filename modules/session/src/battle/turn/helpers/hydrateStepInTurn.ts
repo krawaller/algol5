@@ -1,13 +1,14 @@
 import { AlgolTurn, AlgolGame } from "../../../../../types";
 import { tryToReachTurnEnd, newTurnFromRootStep } from ".";
 
-// remove dead links in the step!
+// removes dead links in this step
 export function hydrateStepInTurn(
   game: AlgolGame,
   turn: AlgolTurn,
   stepId: string
 ): AlgolTurn {
   const step = turn.steps[stepId];
+  if (step.massiveTree) return turn; // TODO - mark somehow? also check .canAlwaysEnd?
   const stepLinks = step.LINKS;
   if (stepLinks.endGame) {
     turn.canEnd = true;

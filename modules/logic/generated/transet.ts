@@ -6,11 +6,8 @@ import {
   boardLayers,
   collapseContent,
   defaultInstruction
-} from "/Users/davidwaller/gitreps/algol5/modules/common";
-import {
-  AlgolStepLinks,
-  AlgolGame
-} from "/Users/davidwaller/gitreps/algol5/modules/types";
+} from "../../common";
+import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
 

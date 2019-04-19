@@ -7,16 +7,10 @@ import { analyseGame } from "../../common";
 export function compileGameToCode(gameDef: FullDefAnon) {
   const analysis = analyseGame(gameDef);
 
-  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, collapseContent, defaultInstruction} from '${path.join(
-    __dirname,
-    "../../common"
-  )}';
+  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, collapseContent, defaultInstruction} from '../../common';
   `;
 
-  ret += `import {AlgolStepLinks, AlgolGame} from '${path.join(
-    __dirname,
-    "../../types"
-  )}'; `;
+  ret += `import {AlgolStepLinks, AlgolGame} from '../../types'; `;
 
   ret += executeSection(gameDef, 1, "head", "head");
 

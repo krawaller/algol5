@@ -16,6 +16,6 @@ export function battleAction(
 ): AlgolBattle {
   if (action === "endTurn") return battleEndTurn(game, battle);
   if (action === "undo") return battleUndo(battle);
-  if (action.match(identifyMark)) return battleMark(battle, action);
-  return battleCommand(battle, action);
+  if (action.match(identifyMark)) return battleMark(game, battle, action);
+  return battleCommand(game, battle, action);
 }

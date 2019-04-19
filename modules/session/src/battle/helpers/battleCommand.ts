@@ -1,12 +1,20 @@
-import { AlgolBattle } from "../../../../types";
+import { AlgolBattle, AlgolGame } from "../../../../types";
 
 export function battleCommand(
+  game: AlgolGame,
   battle: AlgolBattle,
   command: string
 ): AlgolBattle {
-  const oldState = battle.state;
-  const newStepId = `${oldState.currentStepId}-${command}`;
-  const newStep = battle.turn.steps[newStepId];
+  const {
+    turn: { steps },
+    state: oldState
+  } = battle;
+  const oldStepId = oldState.currentStepId;
+  const oldStep = steps[oldStepId];
+  const newStepId = `${oldStepId}-${command}`;
+  const newStep =
+    steps[newStepId] ||
+    (steps[newStepId] = game.action[oldStep.LINKS[command]](oldStep));
   return {
     ...battle,
     state: {

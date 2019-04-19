@@ -1,4 +1,4 @@
-import { DuploMeta } from "./_types";
+import { DuploMeta } from './_types';
 
 const duploMeta: DuploMeta = {
   id: "duplo",

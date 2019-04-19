@@ -14,7 +14,7 @@ export function battleCommand(
   const newStepId = `${oldStepId}-${command}`;
   const newStep =
     steps[newStepId] ||
-    (steps[newStepId] = game.action[oldStep.LINKS[command]](oldStep));
+    (steps[newStepId] = game.action[oldStep.LINKS.actions[command]](oldStep));
   return {
     ...battle,
     state: {

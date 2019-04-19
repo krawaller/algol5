@@ -1,4 +1,4 @@
-import { DuploFlow } from "./_types";
+import { DuploFlow } from './_types';
 
 const duploFlow: DuploFlow = {
   canalwaysend: { deploy: true },

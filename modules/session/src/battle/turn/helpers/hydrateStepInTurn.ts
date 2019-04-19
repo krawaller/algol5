@@ -8,7 +8,10 @@ export function hydrateStepInTurn(
   stepId: string
 ): AlgolTurn {
   const step = turn.steps[stepId];
-  if (step.massiveTree) return turn; // TODO - mark somehow? also check .canAlwaysEnd?
+  if (step.massiveTree) {
+    turn.viableStepIds[stepId] = true;
+    return turn; // TODO - mark somehow? also check .canAlwaysEnd?
+  }
   const stepLinks = step.LINKS;
   if (stepLinks.endGame) {
     turn.canEnd = true;

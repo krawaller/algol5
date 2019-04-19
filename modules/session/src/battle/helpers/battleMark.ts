@@ -21,7 +21,7 @@ export function battleMark(
   const newStepId = `${oldStepId}-${pos}`;
   if (!steps[newStepId]) {
     const oldStep = steps[oldStepId];
-    steps[newStepId] = game.action[oldStep.LINKS[pos]](oldStep);
+    steps[newStepId] = game.action[oldStep.LINKS.actions[pos]](oldStep);
   }
   return {
     ...battle,

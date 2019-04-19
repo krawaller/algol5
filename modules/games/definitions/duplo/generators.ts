@@ -1,4 +1,4 @@
-import { DuploGenerators } from "./_types";
+import { DuploGenerators } from './_types';
 
 const duploGenerators: DuploGenerators = {
   findspawndirs: {

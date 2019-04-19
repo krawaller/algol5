@@ -1,4 +1,4 @@
-import { DuploScripts } from "./_types";
+import { DuploScripts } from './_types';
 
 const duploScripts: DuploScripts = {
   basic: [

@@ -11,9 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 10, width: 10 });
-
 const emptyArtifactLayers = { targets: {} };
-
 const connections = boardConnections({ height: 10, width: 10 });
 const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = terrainLayers(10, 10, {});
@@ -41,11 +39,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
       LINKS.actions[pos] = "selectunit1";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -74,7 +70,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     };
     let UNITLAYERS = step.UNITLAYERS;
     let TURNVARS = { ...step.TURNVARS };
-
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
     {
@@ -97,7 +92,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let BLOCKS = UNITLAYERS.units;
-
       for (let DIR of roseDirs) {
         let POS = MARKS.selectmovetarget;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
@@ -108,7 +102,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(ARTIFACTS.targets)) {
       LINKS.actions[pos] = "selectfiretarget1";
     }
-
     return {
       LINKS,
       MARKS: {},
@@ -117,7 +110,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA,
       UNITLAYERS,
       TURNVARS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
@@ -160,7 +152,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA,
       UNITLAYERS,
       TURNVARS,
-
       NEXTSPAWNID
     };
   };
@@ -176,7 +167,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = UNITLAYERS.units;
-
       for (let DIR of roseDirs) {
         let POS = MARKS.selectunit;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
@@ -187,7 +177,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(ARTIFACTS.targets)) {
       LINKS.actions[pos] = "selectmovetarget1";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -196,13 +185,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       MARKS,
       TURNVARS: step.TURNVARS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectunit1 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Select where to move the" },
@@ -213,9 +200,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.move = "move1";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -227,14 +212,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         selectmovetarget: newMarkPos
       },
       TURNVARS: step.TURNVARS,
-
       NEXTSPAWNID: step.NEXTSPAWNID,
       canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget1 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Press" },
@@ -248,9 +231,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectfiretarget1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.fire = "fire1";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -259,13 +240,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       MARKS: { selectfiretarget: newMarkPos },
       TURNVARS: step.TURNVARS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectfiretarget1 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Press" },
@@ -296,11 +275,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
       LINKS.actions[pos] = "selectunit2";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -326,7 +303,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let UNITDATA = deduceInitialUnitData({
       queens: { "1": ["d10", "g10", "a7", "j7"], "2": ["a4", "d1", "g1", "j4"] }
     });
-
     let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -349,7 +325,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     };
     let UNITLAYERS = step.UNITLAYERS;
     let TURNVARS = { ...step.TURNVARS };
-
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
     {
@@ -372,7 +347,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let BLOCKS = UNITLAYERS.units;
-
       for (let DIR of roseDirs) {
         let POS = MARKS.selectmovetarget;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
@@ -383,7 +357,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(ARTIFACTS.targets)) {
       LINKS.actions[pos] = "selectfiretarget2";
     }
-
     return {
       LINKS,
       MARKS: {},
@@ -392,7 +365,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA,
       UNITLAYERS,
       TURNVARS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
@@ -435,7 +407,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA,
       UNITLAYERS,
       TURNVARS,
-
       NEXTSPAWNID
     };
   };
@@ -451,7 +422,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = UNITLAYERS.units;
-
       for (let DIR of roseDirs) {
         let POS = MARKS.selectunit;
         while ((POS = connections[POS][DIR]) && !BLOCKS[POS]) {
@@ -462,7 +432,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(ARTIFACTS.targets)) {
       LINKS.actions[pos] = "selectmovetarget2";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -471,13 +440,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       MARKS,
       TURNVARS: step.TURNVARS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectunit2 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Select where to move the" },
@@ -488,9 +455,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.move = "move2";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -502,14 +467,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         selectmovetarget: newMarkPos
       },
       TURNVARS: step.TURNVARS,
-
       NEXTSPAWNID: step.NEXTSPAWNID,
       canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget2 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Press" },
@@ -523,9 +486,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectfiretarget2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.fire = "fire2";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -534,13 +495,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       MARKS: { selectfiretarget: newMarkPos },
       TURNVARS: step.TURNVARS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectfiretarget2 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Press" },

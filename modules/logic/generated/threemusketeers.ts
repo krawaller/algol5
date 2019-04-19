@@ -11,13 +11,11 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
-
 const emptyArtifactLayers = {
   strandedmusketeers: {},
   musketeerline: {},
   movetargets: {}
 };
-
 const connections = boardConnections({ height: 5, width: 5 });
 const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = terrainLayers(5, 5, {});
@@ -50,11 +48,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
       LINKS.actions[pos] = "selectunit1";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -92,7 +88,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         };
       }
     }
-
     UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, pawns: {}, kings: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -118,7 +113,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
       let winner = 2;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
@@ -158,7 +152,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
       LINKS.actions[pos] = "selectmovetarget1";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -170,7 +163,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.selectunit1 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Select a" },
@@ -184,9 +176,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.move = "move1";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -198,7 +188,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.selectmovetarget1 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Press" },
@@ -238,11 +227,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
       LINKS.actions[pos] = "selectunit2";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -266,7 +253,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       kings: { "1": ["a1", "c3", "e5"] },
       pawns: { "2": [{ holerect: ["a1", "e5", "a1", "c3", "e5"] }] }
     });
-
     let UNITLAYERS = {
       units: {},
       myunits: {},
@@ -307,7 +293,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         };
       }
     }
-
     UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, pawns: {}, kings: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -333,10 +318,8 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     for (let STARTPOS in UNITLAYERS.kings) {
       let foundneighbours = [];
-
       let startconnections = connections[STARTPOS];
       for (let DIR of orthoDirs) {
         let POS = startconnections[DIR];
@@ -344,14 +327,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
           foundneighbours.push(POS);
         }
       }
-
       let NEIGHBOURCOUNT = foundneighbours.length;
-
       if (!NEIGHBOURCOUNT) {
         ARTIFACTS.strandedmusketeers[STARTPOS] = emptyObj;
       }
     }
-
     if (Object.keys(ARTIFACTS.strandedmusketeers).length === 3) {
       let winner = 1;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
@@ -390,7 +370,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
       LINKS.actions[pos] = "selectmovetarget2";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -402,7 +381,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.selectunit2 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Select an empty space adjacent to the" },
@@ -414,9 +392,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.move = "move2";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -428,7 +404,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.selectmovetarget2 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Press" },

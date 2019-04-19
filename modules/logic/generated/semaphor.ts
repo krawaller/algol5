@@ -11,9 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 3, width: 4 });
-
 const emptyArtifactLayers = { line: {} };
-
 const connections = boardConnections({ height: 3, width: 4 });
 const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = terrainLayers(3, 4, {});
@@ -38,7 +36,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(
       Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
@@ -46,14 +43,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     )) {
       LINKS.actions[pos] = "selectdeploytarget1";
     }
-
     for (const pos of Object.keys({
       ...UNITLAYERS.pawns,
       ...UNITLAYERS.bishops
     })) {
       LINKS.actions[pos] = "selectunit1";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -66,7 +61,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.startTurn1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
-
     return collapseContent({
       line: [
         { text: "Select" },
@@ -148,7 +142,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     {
       for (let STARTPOS in UNITLAYERS.units) {
         let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {}).group];
-
         for (let DIR of [1, 2, 3, 4]) {
           let walkedsquares = [];
           let POS = "faux";
@@ -166,7 +159,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.line).length !== 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
@@ -182,7 +174,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -204,7 +195,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         };
       }
     }
-
     UNITLAYERS = { units: {}, kings: {}, pawns: {}, bishops: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -216,7 +206,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     {
       for (let STARTPOS in UNITLAYERS.units) {
         let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {}).group];
-
         for (let DIR of [1, 2, 3, 4]) {
           let walkedsquares = [];
           let POS = "faux";
@@ -234,7 +223,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.line).length !== 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
@@ -250,16 +238,13 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.promote1 = () => defaultInstruction(1);
   game.action.selectdeploytarget1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.deploy = "deploy1";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -267,13 +252,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS: { selectdeploytarget: newMarkPos },
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectdeploytarget1 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Press" },
@@ -285,9 +268,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectunit1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.promote = "promote1";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -295,15 +276,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS: { selectunit: newMarkPos },
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectunit1 = step => {
     let MARKS = step.MARKS;
-
     let UNITLAYERS = step.UNITLAYERS;
-
     return collapseContent({
       line: [
         { text: "Press" },
@@ -333,7 +311,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(
       Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
@@ -341,14 +318,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     )) {
       LINKS.actions[pos] = "selectdeploytarget2";
     }
-
     for (const pos of Object.keys({
       ...UNITLAYERS.pawns,
       ...UNITLAYERS.bishops
     })) {
       LINKS.actions[pos] = "selectunit2";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -361,7 +336,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.startTurn2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
-
     return collapseContent({
       line: [
         { text: "Select" },
@@ -451,7 +425,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     {
       for (let STARTPOS in UNITLAYERS.units) {
         let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {}).group];
-
         for (let DIR of [1, 2, 3, 4]) {
           let walkedsquares = [];
           let POS = "faux";
@@ -469,7 +442,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.line).length !== 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
@@ -485,7 +457,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -507,7 +478,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         };
       }
     }
-
     UNITLAYERS = { units: {}, kings: {}, pawns: {}, bishops: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -519,7 +489,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     {
       for (let STARTPOS in UNITLAYERS.units) {
         let allowedsteps = UNITLAYERS[(UNITLAYERS.units[STARTPOS] || {}).group];
-
         for (let DIR of [1, 2, 3, 4]) {
           let walkedsquares = [];
           let POS = "faux";
@@ -537,7 +506,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.line).length !== 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
@@ -553,16 +521,13 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.promote2 = () => defaultInstruction(2);
   game.action.selectdeploytarget2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.deploy = "deploy2";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -570,13 +535,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS: { selectdeploytarget: newMarkPos },
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectdeploytarget2 = step => {
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "Press" },
@@ -588,9 +551,7 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.action.selectunit2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
-
     LINKS.actions.promote = "promote2";
-
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -598,15 +559,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS: { selectunit: newMarkPos },
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectunit2 = step => {
     let MARKS = step.MARKS;
-
     let UNITLAYERS = step.UNITLAYERS;
-
     return collapseContent({
       line: [
         { text: "Press" },

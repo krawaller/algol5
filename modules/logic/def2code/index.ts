@@ -79,7 +79,8 @@ export function compileGameToCode(gameDef: FullDefAnon) {
     .replace(/(let |const )LINKS =/g, "$1LINKS: AlgolStepLinks =")
     .replace(/\.owner([^a-z])/g, ".owner as 0 | 1 | 2$1")
     .replace(/ offsetPos\(/g, " <string>offsetPos(")
-    .replace(/let MARKS = \{ .../g, "let MARKS: {[idx:string]: string} = {...");
+    .replace(/let MARKS = \{ .../g, "let MARKS: {[idx:string]: string} = {...")
+    .replace(/[\n\r]( *[\n\r])*/g, "\n");
 
   return prettier.format(ret, { parser: "typescript" });
 }

@@ -11,7 +11,6 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
-
 const emptyArtifactLayers = {
   FOOBAR: {},
   vertical: {},
@@ -20,7 +19,6 @@ const emptyArtifactLayers = {
   downhill: {},
   winline: {}
 };
-
 const connections = boardConnections({ height: 5, width: 5 });
 const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = terrainLayers(5, 5, {});
@@ -53,7 +51,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(
       Object.keys(UNITLAYERS.markers).length === 0
         ? BOARD.board
@@ -61,7 +58,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     )) {
       LINKS.actions[pos] = "selectdrop1";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -74,7 +70,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.startTurn1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
-
     return Object.keys(UNITLAYERS.neutralunits).length === 0
       ? { text: "Select any square to place the first unit of the game" }
       : { text: "Select which neutral unit to take over" };
@@ -132,7 +127,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let allowedsteps = UNITLAYERS.myunits;
-
       for (let STARTPOS in UNITLAYERS.myunits) {
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -151,7 +145,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
@@ -167,7 +160,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -225,7 +217,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let allowedsteps = UNITLAYERS.myunits;
-
       for (let STARTPOS in UNITLAYERS.myunits) {
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -244,7 +235,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
@@ -260,7 +250,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -318,7 +307,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let allowedsteps = UNITLAYERS.myunits;
-
       for (let STARTPOS in UNITLAYERS.myunits) {
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -337,7 +325,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
@@ -353,7 +340,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -411,7 +397,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let allowedsteps = UNITLAYERS.myunits;
-
       for (let STARTPOS in UNITLAYERS.myunits) {
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -430,7 +415,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
@@ -446,7 +430,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -498,7 +481,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
       LINKS.actions.horisontal = "horisontal1";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -506,13 +488,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectdrop1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
-
     return collapseContent({
       line: [
         { text: "Press" },
@@ -572,7 +552,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(
       Object.keys(UNITLAYERS.markers).length === 0
         ? BOARD.board
@@ -580,7 +559,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     )) {
       LINKS.actions[pos] = "selectdrop2";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -593,7 +571,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.startTurn2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
-
     return Object.keys(UNITLAYERS.neutralunits).length === 0
       ? { text: "Select any square to place the first unit of the game" }
       : { text: "Select which neutral unit to take over" };
@@ -665,7 +642,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let allowedsteps = UNITLAYERS.myunits;
-
       for (let STARTPOS in UNITLAYERS.myunits) {
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -684,7 +660,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
@@ -700,7 +675,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -758,7 +732,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let allowedsteps = UNITLAYERS.myunits;
-
       for (let STARTPOS in UNITLAYERS.myunits) {
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -777,7 +750,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
@@ -793,7 +765,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -851,7 +822,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let allowedsteps = UNITLAYERS.myunits;
-
       for (let STARTPOS in UNITLAYERS.myunits) {
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -870,7 +840,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
@@ -886,7 +855,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -944,7 +912,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     }
     {
       let allowedsteps = UNITLAYERS.myunits;
-
       for (let STARTPOS in UNITLAYERS.myunits) {
         for (let DIR of roseDirs) {
           let walkedsquares = [];
@@ -963,7 +930,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         }
       }
     }
-
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
@@ -979,7 +945,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-
       NEXTSPAWNID
     };
   };
@@ -1031,7 +996,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
       LINKS.actions.horisontal = "horisontal2";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -1039,13 +1003,11 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.selectdrop2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
-
     return collapseContent({
       line: [
         { text: "Press" },

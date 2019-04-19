@@ -11,7 +11,6 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 10, width: 10 });
-
 const emptyArtifactLayers = {
   movetargets: {},
   initialenemy: {},
@@ -19,7 +18,6 @@ const emptyArtifactLayers = {
   newenemy: {},
   newfriend: {}
 };
-
 const connections = boardConnections({ height: 10, width: 10 });
 const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = terrainLayers(10, 10, {});
@@ -47,11 +45,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(UNITLAYERS.mycheckers)) {
       LINKS.actions[pos] = "selectunit1";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -78,7 +74,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         };
       }
     }
-
     UNITLAYERS = {
       units: {},
       myunits: {},
@@ -135,7 +130,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
       LINKS.actions[pos] = "selectmovetarget1";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -147,7 +141,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.selectunit1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
-
     return collapseContent({
       line: [
         { text: "This unit neighbours" },
@@ -211,7 +204,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     ) {
       LINKS.actions.jostle = "jostle1";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -224,7 +216,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.selectmovetarget1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "From" },
@@ -284,11 +275,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-
     for (const pos of Object.keys(UNITLAYERS.mycheckers)) {
       LINKS.actions[pos] = "selectunit2";
     }
-
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
@@ -342,7 +331,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         ]
       }
     });
-
     let UNITLAYERS = {
       units: {},
       myunits: {},
@@ -377,7 +365,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
         };
       }
     }
-
     UNITLAYERS = {
       units: {},
       myunits: {},
@@ -434,7 +421,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
       LINKS.actions[pos] = "selectmovetarget2";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -446,7 +432,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   };
   game.instruction.selectunit2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
-
     return collapseContent({
       line: [
         { text: "This unit neighbours" },
@@ -510,7 +495,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     ) {
       LINKS.actions.jostle = "jostle2";
     }
-
     return {
       LINKS,
       ARTIFACTS,
@@ -523,7 +507,6 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
   game.instruction.selectmovetarget2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
-
     return collapseContent({
       line: [
         { text: "From" },

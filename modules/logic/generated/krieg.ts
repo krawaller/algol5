@@ -336,72 +336,12 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
       : collapseContent({ line: [{ text: "Select a unit to move" }] });
   };
   game.newBattle = () => {
-    let UNITDATA = {
-      unit1: {
-        pos: "a4",
-        x: 1,
-        y: 4,
-        id: "unit1",
-        group: "notfrozens",
-        owner: 1
-      },
-      unit2: {
-        pos: "b4",
-        x: 2,
-        y: 4,
-        id: "unit2",
-        group: "notfrozens",
-        owner: 1
-      },
-      unit3: {
-        pos: "a3",
-        x: 1,
-        y: 3,
-        id: "unit3",
-        group: "notfrozens",
-        owner: 1
-      },
-      unit4: {
-        pos: "b3",
-        x: 2,
-        y: 3,
-        id: "unit4",
-        group: "notfrozens",
-        owner: 1
-      },
-      unit5: {
-        pos: "c2",
-        x: 3,
-        y: 2,
-        id: "unit5",
-        group: "notfrozens",
-        owner: 2
-      },
-      unit6: {
-        pos: "c1",
-        x: 3,
-        y: 1,
-        id: "unit6",
-        group: "notfrozens",
-        owner: 2
-      },
-      unit7: {
-        pos: "d2",
-        x: 4,
-        y: 2,
-        id: "unit7",
-        group: "notfrozens",
-        owner: 2
-      },
-      unit8: {
-        pos: "d1",
-        x: 4,
-        y: 1,
-        id: "unit8",
-        group: "notfrozens",
-        owner: 2
+    let UNITDATA = deduceInitialUnitData({
+      notfrozens: {
+        "1": ["a4", "b4", "a3", "b3"],
+        "2": ["c2", "c1", "d2", "d1"]
       }
-    };
+    });
 
     let UNITLAYERS = {
       units: {},

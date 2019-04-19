@@ -353,73 +353,13 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     });
   };
   game.newBattle = () => {
-    let UNITDATA = {
-      unit1: { pos: "d8", x: 4, y: 8, id: "unit1", group: "crowns", owner: 1 },
-      unit2: { pos: "e8", x: 5, y: 8, id: "unit2", group: "crowns", owner: 1 },
-      unit3: { pos: "c1", x: 3, y: 1, id: "unit3", group: "crowns", owner: 2 },
-      unit4: { pos: "f1", x: 6, y: 1, id: "unit4", group: "crowns", owner: 2 },
-      unit5: { pos: "c7", x: 3, y: 7, id: "unit5", group: "daggers", owner: 1 },
-      unit6: { pos: "d7", x: 4, y: 7, id: "unit6", group: "daggers", owner: 1 },
-      unit7: { pos: "e7", x: 5, y: 7, id: "unit7", group: "daggers", owner: 1 },
-      unit8: { pos: "f7", x: 6, y: 7, id: "unit8", group: "daggers", owner: 1 },
-      unit9: { pos: "c3", x: 3, y: 3, id: "unit9", group: "daggers", owner: 2 },
-      unit10: {
-        pos: "f3",
-        x: 6,
-        y: 3,
-        id: "unit10",
-        group: "daggers",
-        owner: 2
-      },
-      unit11: {
-        pos: "b2",
-        x: 2,
-        y: 2,
-        id: "unit11",
-        group: "daggers",
-        owner: 2
-      },
-      unit12: {
-        pos: "c2",
-        x: 3,
-        y: 2,
-        id: "unit12",
-        group: "daggers",
-        owner: 2
-      },
-      unit13: {
-        pos: "d2",
-        x: 4,
-        y: 2,
-        id: "unit13",
-        group: "daggers",
-        owner: 2
-      },
-      unit14: {
-        pos: "e2",
-        x: 5,
-        y: 2,
-        id: "unit14",
-        group: "daggers",
-        owner: 2
-      },
-      unit15: {
-        pos: "f2",
-        x: 6,
-        y: 2,
-        id: "unit15",
-        group: "daggers",
-        owner: 2
-      },
-      unit16: {
-        pos: "g2",
-        x: 7,
-        y: 2,
-        id: "unit16",
-        group: "daggers",
-        owner: 2
+    let UNITDATA = deduceInitialUnitData({
+      crowns: { "1": ["d8", "e8"], "2": ["c1", "f1"] },
+      daggers: {
+        "1": [{ rect: ["c7", "f7"] }],
+        "2": ["c3", "f3", { rect: ["b2", "g2"] }]
       }
-    };
+    });
 
     let UNITLAYERS = {
       units: {},

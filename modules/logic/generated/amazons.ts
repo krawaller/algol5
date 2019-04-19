@@ -323,30 +323,9 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     });
   };
   game.newBattle = () => {
-    let UNITDATA = {
-      unit1: {
-        pos: "d10",
-        x: 4,
-        y: 10,
-        id: "unit1",
-        group: "queens",
-        owner: 1
-      },
-      unit2: {
-        pos: "g10",
-        x: 7,
-        y: 10,
-        id: "unit2",
-        group: "queens",
-        owner: 1
-      },
-      unit3: { pos: "a7", x: 1, y: 7, id: "unit3", group: "queens", owner: 1 },
-      unit4: { pos: "j7", x: 10, y: 7, id: "unit4", group: "queens", owner: 1 },
-      unit5: { pos: "a4", x: 1, y: 4, id: "unit5", group: "queens", owner: 2 },
-      unit6: { pos: "d1", x: 4, y: 1, id: "unit6", group: "queens", owner: 2 },
-      unit7: { pos: "g1", x: 7, y: 1, id: "unit7", group: "queens", owner: 2 },
-      unit8: { pos: "j4", x: 10, y: 4, id: "unit8", group: "queens", owner: 2 }
-    };
+    let UNITDATA = deduceInitialUnitData({
+      queens: { "1": ["d10", "g10", "a7", "j7"], "2": ["a4", "d1", "g1", "j4"] }
+    });
 
     let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
     for (let unitid in UNITDATA) {

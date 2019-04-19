@@ -296,34 +296,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     });
   };
   game.newBattle = () => {
-    let UNITDATA = {
-      unit1: { pos: "a2", x: 1, y: 2, id: "unit1", group: "kings", owner: 1 },
-      unit2: { pos: "c5", x: 3, y: 5, id: "unit2", group: "kings", owner: 1 },
-      unit3: { pos: "e2", x: 5, y: 2, id: "unit3", group: "kings", owner: 1 },
-      unit4: { pos: "b1", x: 2, y: 1, id: "unit4", group: "kings", owner: 2 },
-      unit5: { pos: "b5", x: 2, y: 5, id: "unit5", group: "kings", owner: 2 },
-      unit6: { pos: "e3", x: 5, y: 3, id: "unit6", group: "kings", owner: 2 },
-      unit7: { pos: "a3", x: 1, y: 3, id: "unit7", group: "queens", owner: 1 },
-      unit8: { pos: "d5", x: 4, y: 5, id: "unit8", group: "queens", owner: 1 },
-      unit9: { pos: "d1", x: 4, y: 1, id: "unit9", group: "queens", owner: 1 },
-      unit10: {
-        pos: "a4",
-        x: 1,
-        y: 4,
-        id: "unit10",
-        group: "queens",
-        owner: 2
-      },
-      unit11: {
-        pos: "c1",
-        x: 3,
-        y: 1,
-        id: "unit11",
-        group: "queens",
-        owner: 2
-      },
-      unit12: { pos: "e4", x: 5, y: 4, id: "unit12", group: "queens", owner: 2 }
-    };
+    let UNITDATA = deduceInitialUnitData({
+      kings: { "1": ["a2", "c5", "e2"], "2": ["b1", "b5", "e3"] },
+      queens: { "1": ["a3", "d5", "d1"], "2": ["a4", "c1", "e4"] }
+    });
 
     let UNITLAYERS = {
       units: {},

@@ -262,33 +262,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     });
   };
   game.newBattle = () => {
-    let UNITDATA = {
-      unit1: { pos: "a1", x: 1, y: 1, id: "unit1", group: "kings", owner: 1 },
-      unit2: { pos: "c3", x: 3, y: 3, id: "unit2", group: "kings", owner: 1 },
-      unit3: { pos: "e5", x: 5, y: 5, id: "unit3", group: "kings", owner: 1 },
-      unit4: { pos: "a2", x: 1, y: 2, id: "unit4", group: "pawns", owner: 2 },
-      unit5: { pos: "a3", x: 1, y: 3, id: "unit5", group: "pawns", owner: 2 },
-      unit6: { pos: "a4", x: 1, y: 4, id: "unit6", group: "pawns", owner: 2 },
-      unit7: { pos: "a5", x: 1, y: 5, id: "unit7", group: "pawns", owner: 2 },
-      unit8: { pos: "b1", x: 2, y: 1, id: "unit8", group: "pawns", owner: 2 },
-      unit9: { pos: "b2", x: 2, y: 2, id: "unit9", group: "pawns", owner: 2 },
-      unit10: { pos: "b3", x: 2, y: 3, id: "unit10", group: "pawns", owner: 2 },
-      unit11: { pos: "b4", x: 2, y: 4, id: "unit11", group: "pawns", owner: 2 },
-      unit12: { pos: "b5", x: 2, y: 5, id: "unit12", group: "pawns", owner: 2 },
-      unit13: { pos: "c1", x: 3, y: 1, id: "unit13", group: "pawns", owner: 2 },
-      unit14: { pos: "c2", x: 3, y: 2, id: "unit14", group: "pawns", owner: 2 },
-      unit15: { pos: "c4", x: 3, y: 4, id: "unit15", group: "pawns", owner: 2 },
-      unit16: { pos: "c5", x: 3, y: 5, id: "unit16", group: "pawns", owner: 2 },
-      unit17: { pos: "d1", x: 4, y: 1, id: "unit17", group: "pawns", owner: 2 },
-      unit18: { pos: "d2", x: 4, y: 2, id: "unit18", group: "pawns", owner: 2 },
-      unit19: { pos: "d3", x: 4, y: 3, id: "unit19", group: "pawns", owner: 2 },
-      unit20: { pos: "d4", x: 4, y: 4, id: "unit20", group: "pawns", owner: 2 },
-      unit21: { pos: "d5", x: 4, y: 5, id: "unit21", group: "pawns", owner: 2 },
-      unit22: { pos: "e1", x: 5, y: 1, id: "unit22", group: "pawns", owner: 2 },
-      unit23: { pos: "e2", x: 5, y: 2, id: "unit23", group: "pawns", owner: 2 },
-      unit24: { pos: "e3", x: 5, y: 3, id: "unit24", group: "pawns", owner: 2 },
-      unit25: { pos: "e4", x: 5, y: 4, id: "unit25", group: "pawns", owner: 2 }
-    };
+    let UNITDATA = deduceInitialUnitData({
+      kings: { "1": ["a1", "c3", "e5"] },
+      pawns: { "2": [{ holerect: ["a1", "e5", "a1", "c3", "e5"] }] }
+    });
 
     let UNITLAYERS = {
       units: {},

@@ -302,264 +302,46 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     return { text: "Select which unit to jostle!" };
   };
   game.newBattle = () => {
-    let UNITDATA = {
-      unit1: {
-        pos: "c4",
-        x: 3,
-        y: 4,
-        id: "unit1",
-        group: "checkers",
-        owner: 1
-      },
-      unit2: {
-        pos: "c6",
-        x: 3,
-        y: 6,
-        id: "unit2",
-        group: "checkers",
-        owner: 1
-      },
-      unit3: {
-        pos: "c8",
-        x: 3,
-        y: 8,
-        id: "unit3",
-        group: "checkers",
-        owner: 1
-      },
-      unit4: {
-        pos: "d3",
-        x: 4,
-        y: 3,
-        id: "unit4",
-        group: "checkers",
-        owner: 1
-      },
-      unit5: {
-        pos: "d5",
-        x: 4,
-        y: 5,
-        id: "unit5",
-        group: "checkers",
-        owner: 1
-      },
-      unit6: {
-        pos: "d7",
-        x: 4,
-        y: 7,
-        id: "unit6",
-        group: "checkers",
-        owner: 1
-      },
-      unit7: {
-        pos: "e4",
-        x: 5,
-        y: 4,
-        id: "unit7",
-        group: "checkers",
-        owner: 1
-      },
-      unit8: {
-        pos: "e8",
-        x: 5,
-        y: 8,
-        id: "unit8",
-        group: "checkers",
-        owner: 1
-      },
-      unit9: {
-        pos: "f3",
-        x: 6,
-        y: 3,
-        id: "unit9",
-        group: "checkers",
-        owner: 1
-      },
-      unit10: {
-        pos: "f7",
-        x: 6,
-        y: 7,
-        id: "unit10",
-        group: "checkers",
-        owner: 1
-      },
-      unit11: {
-        pos: "g4",
-        x: 7,
-        y: 4,
-        id: "unit11",
-        group: "checkers",
-        owner: 1
-      },
-      unit12: {
-        pos: "g6",
-        x: 7,
-        y: 6,
-        id: "unit12",
-        group: "checkers",
-        owner: 1
-      },
-      unit13: {
-        pos: "g8",
-        x: 7,
-        y: 8,
-        id: "unit13",
-        group: "checkers",
-        owner: 1
-      },
-      unit14: {
-        pos: "h3",
-        x: 8,
-        y: 3,
-        id: "unit14",
-        group: "checkers",
-        owner: 1
-      },
-      unit15: {
-        pos: "h5",
-        x: 8,
-        y: 5,
-        id: "unit15",
-        group: "checkers",
-        owner: 1
-      },
-      unit16: {
-        pos: "h7",
-        x: 8,
-        y: 7,
-        id: "unit16",
-        group: "checkers",
-        owner: 1
-      },
-      unit17: {
-        pos: "c3",
-        x: 3,
-        y: 3,
-        id: "unit17",
-        group: "checkers",
-        owner: 2
-      },
-      unit18: {
-        pos: "c5",
-        x: 3,
-        y: 5,
-        id: "unit18",
-        group: "checkers",
-        owner: 2
-      },
-      unit19: {
-        pos: "c7",
-        x: 3,
-        y: 7,
-        id: "unit19",
-        group: "checkers",
-        owner: 2
-      },
-      unit20: {
-        pos: "d4",
-        x: 4,
-        y: 4,
-        id: "unit20",
-        group: "checkers",
-        owner: 2
-      },
-      unit21: {
-        pos: "d6",
-        x: 4,
-        y: 6,
-        id: "unit21",
-        group: "checkers",
-        owner: 2
-      },
-      unit22: {
-        pos: "d8",
-        x: 4,
-        y: 8,
-        id: "unit22",
-        group: "checkers",
-        owner: 2
-      },
-      unit23: {
-        pos: "e3",
-        x: 5,
-        y: 3,
-        id: "unit23",
-        group: "checkers",
-        owner: 2
-      },
-      unit24: {
-        pos: "e7",
-        x: 5,
-        y: 7,
-        id: "unit24",
-        group: "checkers",
-        owner: 2
-      },
-      unit25: {
-        pos: "f4",
-        x: 6,
-        y: 4,
-        id: "unit25",
-        group: "checkers",
-        owner: 2
-      },
-      unit26: {
-        pos: "f8",
-        x: 6,
-        y: 8,
-        id: "unit26",
-        group: "checkers",
-        owner: 2
-      },
-      unit27: {
-        pos: "g3",
-        x: 7,
-        y: 3,
-        id: "unit27",
-        group: "checkers",
-        owner: 2
-      },
-      unit28: {
-        pos: "g5",
-        x: 7,
-        y: 5,
-        id: "unit28",
-        group: "checkers",
-        owner: 2
-      },
-      unit29: {
-        pos: "g7",
-        x: 7,
-        y: 7,
-        id: "unit29",
-        group: "checkers",
-        owner: 2
-      },
-      unit30: {
-        pos: "h4",
-        x: 8,
-        y: 4,
-        id: "unit30",
-        group: "checkers",
-        owner: 2
-      },
-      unit31: {
-        pos: "h6",
-        x: 8,
-        y: 6,
-        id: "unit31",
-        group: "checkers",
-        owner: 2
-      },
-      unit32: {
-        pos: "h8",
-        x: 8,
-        y: 8,
-        id: "unit32",
-        group: "checkers",
-        owner: 2
+    let UNITDATA = deduceInitialUnitData({
+      checkers: {
+        "1": [
+          "c4",
+          "c6",
+          "c8",
+          "d3",
+          "d5",
+          "d7",
+          "e4",
+          "e8",
+          "f3",
+          "f7",
+          "g4",
+          "g6",
+          "g8",
+          "h3",
+          "h5",
+          "h7"
+        ],
+        "2": [
+          "c3",
+          "c5",
+          "c7",
+          "d4",
+          "d6",
+          "d8",
+          "e3",
+          "e7",
+          "f4",
+          "f8",
+          "g3",
+          "g5",
+          "g7",
+          "h4",
+          "h6",
+          "h8"
+        ]
       }
-    };
+    });
 
     let UNITLAYERS = {
       units: {},

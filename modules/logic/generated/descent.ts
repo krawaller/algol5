@@ -465,24 +465,13 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     return { text: "Select a unit to move and dig with" };
   };
   game.newBattle = () => {
-    let UNITDATA = {
-      unit1: { pos: "a2", x: 1, y: 2, id: "unit1", group: "rooks", owner: 0 },
-      unit2: { pos: "a3", x: 1, y: 3, id: "unit2", group: "rooks", owner: 0 },
-      unit3: { pos: "b2", x: 2, y: 2, id: "unit3", group: "rooks", owner: 0 },
-      unit4: { pos: "b3", x: 2, y: 3, id: "unit4", group: "rooks", owner: 0 },
-      unit5: { pos: "c2", x: 3, y: 2, id: "unit5", group: "rooks", owner: 0 },
-      unit6: { pos: "c3", x: 3, y: 3, id: "unit6", group: "rooks", owner: 0 },
-      unit7: { pos: "d2", x: 4, y: 2, id: "unit7", group: "rooks", owner: 0 },
-      unit8: { pos: "d3", x: 4, y: 3, id: "unit8", group: "rooks", owner: 0 },
-      unit9: { pos: "b4", x: 2, y: 4, id: "unit9", group: "rooks", owner: 0 },
-      unit10: { pos: "c1", x: 3, y: 1, id: "unit10", group: "rooks", owner: 0 },
-      unit11: { pos: "a1", x: 1, y: 1, id: "unit11", group: "rooks", owner: 1 },
-      unit12: { pos: "c4", x: 3, y: 4, id: "unit12", group: "rooks", owner: 1 },
-      unit13: { pos: "d1", x: 4, y: 1, id: "unit13", group: "rooks", owner: 1 },
-      unit14: { pos: "a4", x: 1, y: 4, id: "unit14", group: "rooks", owner: 2 },
-      unit15: { pos: "b1", x: 2, y: 1, id: "unit15", group: "rooks", owner: 2 },
-      unit16: { pos: "d4", x: 4, y: 4, id: "unit16", group: "rooks", owner: 2 }
-    };
+    let UNITDATA = deduceInitialUnitData({
+      rooks: {
+        "0": [{ rect: ["a2", "d3"] }, "b4", "c1"],
+        "1": ["a1", "c4", "d1"],
+        "2": ["a4", "b1", "d4"]
+      }
+    });
 
     let UNITLAYERS = {
       units: {},

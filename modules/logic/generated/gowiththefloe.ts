@@ -337,12 +337,10 @@ let game: Partial<AlgolGame> = { action: {}, instruction: {} };
     return { text: "Select a unit to move" };
   };
   game.newBattle = () => {
-    let UNITDATA = {
-      unit1: { pos: "b2", x: 2, y: 2, id: "unit1", group: "seals", owner: 1 },
-      unit2: { pos: "b7", x: 2, y: 7, id: "unit2", group: "seals", owner: 1 },
-      unit3: { pos: "g2", x: 7, y: 2, id: "unit3", group: "bears", owner: 2 },
-      unit4: { pos: "g7", x: 7, y: 7, id: "unit4", group: "bears", owner: 2 }
-    };
+    let UNITDATA = deduceInitialUnitData({
+      seals: { "1": ["b2", "b7"] },
+      bears: { "2": ["g2", "g7"] }
+    });
 
     let UNITLAYERS = {
       units: {},

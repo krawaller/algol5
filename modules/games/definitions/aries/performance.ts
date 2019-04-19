@@ -1,5 +1,5 @@
 import { AriesPerformance } from './_types';
 
-const ariesPerformance: AriesPerformance = { canAlwaysEnd: {} };
+const ariesPerformance: AriesPerformance = { canAlwaysEnd: {}, massiveTree: {} };
 
 export default ariesPerformance;

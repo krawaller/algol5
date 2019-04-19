@@ -25,7 +25,8 @@ export const emptyFullDef: FullDefAnon = {
   },
   meta: {},
   performance: {
-    canAlwaysEnd: {}
+    canAlwaysEnd: {},
+    massiveTree: {}
   },
   scripts: {},
   setup: {}

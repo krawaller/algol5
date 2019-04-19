@@ -20,7 +20,9 @@ export type AlgolStep = {
   TURNVARS?: { [varname: string]: any };
   BATTLEVARS?: { [varname: string]: any };
   NEXTSPAWNID?: number;
+  // performance-related stuff
   canAlwaysEnd?: boolean;
+  massiveTree?: boolean;
 };
 
 export type AlgolUnitState = {

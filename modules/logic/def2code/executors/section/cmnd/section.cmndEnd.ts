@@ -43,7 +43,7 @@ export function executeCmndEnd(
           : "NEXTSPAWNID: step.NEXTSPAWNID, "
         : ""
     }
-    ${
-      gameDef.performance.canAlwaysEnd[action] ? "canAlwaysEnd: true, " : ""
-    }   };`;
+    ${gameDef.performance.canAlwaysEnd[action] ? "canAlwaysEnd: true, " : ""}${
+    gameDef.performance.massiveTree[action] ? "massiveTree: true, " : ""
+  }   };`;
 }

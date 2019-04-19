@@ -9,7 +9,7 @@ const defaultCmndEndContext = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Cmnd - canAlwaysEnd",
+  title: "Section - Cmnd - Performance",
   func: executeSection,
   defs: [
     {
@@ -27,6 +27,11 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "returnVal.canAlwaysEnd",
                   res: falsy,
                   desc: "by default we don't mark steps as canAlwaysEnd"
+                },
+                {
+                  sample: "returnVal.massiveTree",
+                  res: falsy,
+                  desc: "by default we don't mark steps as massiveTree"
                 }
               ]
             }
@@ -39,6 +44,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         ...emptyFullDef,
         performance: {
           canAlwaysEnd: {
+            somecmnd: true
+          },
+          massiveTree: {
             somecmnd: true
           }
         }
@@ -57,6 +65,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   res: true,
                   desc:
                     "new step is marked as canAlwaysEnd since action is marked as such in performance"
+                },
+                {
+                  sample: "returnVal.massiveTree",
+                  res: true,
+                  desc:
+                    "new step is marked as massiveTree since action is marked as such in performance"
                 }
               ]
             }

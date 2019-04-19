@@ -7,7 +7,8 @@ function translator(def: FullDefAnon): FullDefAnon {
     ...def,
     meta: otherMeta,
     performance: {
-      canAlwaysEnd: performance.canAlwaysEnd || {}
+      ...def.performance,
+      massiveTree: {}
     }
   };
   // // revise scripts

@@ -9,9 +9,9 @@ export function runGameScripts(gameDef: FullDefAnon) {
       const seq = gameDef.scripts[scriptName]
         .reduce((mem, line) => mem.concat(line.commands), [])
         .slice(0, 5);
-      let ui = API.newSession(gameId);
+      let ui = API.newBattle(gameId);
       for (const action of seq) {
-        ui = API.makeSessionAction(
+        ui = API.makeBattleAction(
           ui.sessionId,
           action === "win" ? "endTurn" : action
         );

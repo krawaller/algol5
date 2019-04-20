@@ -9,7 +9,7 @@ import games from "../../../logic/dist";
 const identifyMark = /^[a-z][0-9]+$/;
 
 export function getBattleUI(session: AlgolBattleSession): AlgolBattleUI {
-  const { gameId, sessionId, battle } = session;
+  const { gameId, battleId: sessionId, battle } = session;
   const game = games[gameId];
   const currentStep = battle.turn.steps[battle.state.currentStepId];
   const { potentialMarks, commands } = Object.keys(

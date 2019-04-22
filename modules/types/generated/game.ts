@@ -1,6 +1,7 @@
 import { AlgolStep, AlgolContentAnon } from "../";
 
 export type AlgolGame = {
+  gameId: string;
   newBattle: () => AlgolStep;
   action: {
     [funcName: string]: (

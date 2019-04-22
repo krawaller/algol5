@@ -14,7 +14,9 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
   ret += executeSection(gameDef, 1, "head", "head");
 
-  ret += `let game: Partial<AlgolGame> = {action: {}, instruction: {} }; `;
+  ret += `let game: Partial<AlgolGame> = { gameId: '${
+    gameDef.meta.id
+  }', action: {}, instruction: {} }; `;
 
   [1, 2].forEach((player: 1 | 2) => {
     ret += `{ `;

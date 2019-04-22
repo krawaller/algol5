@@ -40,7 +40,7 @@ fs.writeFileSync(
 const lib = {
 ${gameIds.map(gid => `  ${gid},\n`).join("")}};
 
-export default lib;
+export default lib as typeof lib & { [name: string]: FullDefAnon };
 `
 );
 

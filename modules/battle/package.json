@@ -1,6 +1,7 @@
 {
   "scripts": {
     "test": "jest",
+    "makeDemo": "ts-node ./commands/makeDemo",
     "generateGameTests": "ts-node ./test/generateGameTests"
   },
   "dependencies": {

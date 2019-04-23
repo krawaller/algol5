@@ -2,7 +2,6 @@ import { AlgolBoardState, AlgolPosition, AlgolContentAnon } from "../";
 
 export type AlgolBattleUI = {
   gameId: string;
-  sessionId: number;
   board: AlgolBoardState;
   potentialMarks: AlgolPosition[];
   endTurn: boolean;

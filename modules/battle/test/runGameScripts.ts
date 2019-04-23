@@ -1,22 +1,20 @@
-import { API } from "../src";
-import { FullDefAnon } from "../../types";
+import { GameTestSuite, AlgolGameAPI } from "../../types";
 
-export function runGameScripts(gameDef: FullDefAnon) {
-  const gameId = gameDef.meta.id;
-
-  for (const scriptName in gameDef.scripts) {
+export function runGameScripts(
+  gameId: string,
+  api: AlgolGameAPI,
+  scripts: GameTestSuite
+) {
+  for (const scriptName in scripts) {
     test(`Running ${gameId} ${scriptName}`, () => {
-      const seq = gameDef.scripts[scriptName]
+      const seq = scripts[scriptName]
         .reduce((mem, line) => mem.concat(line.commands), [])
         .slice(0, 5);
-      let ui = API.newBattle(gameId);
+      let { initialUI: ui, performAction } = api.newBattle();
       for (const action of seq) {
-        ui = API.makeBattleAction(
-          ui.sessionId,
-          action === "win" ? "endTurn" : action
-        );
+        ui = performAction(action === "win" ? "endTurn" : action);
       }
-      expect(gameId).toBe(gameId);
+      expect(gameId).toBe(gameId); // TODO - more checks?
     });
   }
 }

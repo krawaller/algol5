@@ -24,5 +24,17 @@ export default games;
 `
   );
 
-  console.log("Exported games");
+  await fs.ensureDir(path.join(out, "indiv"));
+  await Promise.all(
+    names.map(async name =>
+      fs.writeFile(
+        path.join(out, "indiv", name + ".ts"),
+        `import ${name} from '../../generated/${name}';
+export default ${name};
+`
+      )
+    )
+  );
+
+  console.log("Exported all games!");
 })();

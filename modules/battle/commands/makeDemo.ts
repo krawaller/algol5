@@ -1,6 +1,5 @@
 import { makeDemo } from "./helpers/makeDemo";
-import { GameId } from "../src";
-import names from "./helpers/_names";
+import names, { GameId } from "./helpers/_names";
 
 const gameId = <GameId>process.argv[2];
 

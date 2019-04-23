@@ -17,12 +17,9 @@ async function setup() {
         `
 import { runGameScripts } from "../runGameScripts";
 import ${name}Def from "../../../games/dist/games/${name}";
-import ${name} from "../../../logic/dist/indiv/${name}";
-import { makeGameAPI } from "../../src";
+import ${name}API from "../../dist/apis/${name}";
 
-const api = makeGameAPI(${name});
-
-runGameScripts("${name}", api, ${name}Def.scripts);
+runGameScripts("${name}", ${name}API, ${name}Def.scripts);
 `
       );
       console.log("Generating test file for", name);

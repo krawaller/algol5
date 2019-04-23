@@ -3,7 +3,8 @@
     "test": "jest",
     "megaBundle": "node ./commands/megaBundle",
     "makeDemo": "ts-node ./commands/makeDemo",
-    "generateGameTests": "ts-node ./test/generateGameTests"
+    "generateGameTests": "ts-node ./test/generateGameTests",
+    "exportGameAPIs": "ts-node ./commands/exportGameAPIs"
   },
   "dependencies": {
     "workerwrapper": "github:krawaller/workerwrapper"

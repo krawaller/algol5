@@ -1,1 +1,1 @@
-export * from "./makeSVGboard";
+export * from "./makeSVG";

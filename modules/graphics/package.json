@@ -1,14 +1,17 @@
 {
   "scripts": {
-    "clean": "rm -rf dist; mkdir dist; mkdir dist/boards",
+    "clean": "rm -rf dist; mkdir dist;",
     "copypieces": "cp -r pieces-svg dist/pieces",
-    "build": "npm run clean && npm run copypieces && ts-node makeboards"
+    "build": "npm run clean && npm run copypieces && ts-node makeboards",
+    "makeSVGboards": "ts-node ./commands/makeSVGboards"
   },
   "dependencies": {
     "canvas": "^2.4.1"
   },
   "devDependencies": {
+    "@types/fs-extra": "^5.0.5",
     "@types/node": "^10.12.18",
+    "fs-extra": "^7.0.1",
     "ts-node": "^8.1.0",
     "typescript": "^3.4.4"
   }

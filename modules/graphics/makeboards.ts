@@ -3,15 +3,20 @@ Build script that will loop over all game definitions in the `defs` folder,
 and create individual background images for that game into `/boards`.
 */
 
-import * as fs from "fs";
+import * as fs from "fs-extra";
 import { Canvas, Image } from "canvas";
 
 import lib from "../games/dist/lib"; // must have run npm run export in the Games dir first!
 import { colnumber2name, coords2pos, terrainLayers } from "../common";
+import { FullDefAnon } from "../types";
 
 let BOARD_PARTS_PATH = __dirname + "/boardparts";
 let OUTPUT_PATH = __dirname + "/dist";
-let OUTPUT_BOARD_PIC_PATH = OUTPUT_PATH + "/boards";
+let OUTPUT_BOARD_PIC_PATH = OUTPUT_PATH + "/boardPics";
+
+fs.ensureDir(OUTPUT_PATH);
+fs.ensureDir(OUTPUT_PATH + "/pieces");
+fs.ensureDir(OUTPUT_BOARD_PIC_PATH);
 
 let pics = {
   castle: fs.readFileSync(BOARD_PARTS_PATH + "/castle.png"),
@@ -34,10 +39,11 @@ const TILE = 200,
   EDGE = 75;
 
 let dataURIusages = {};
+let boardInfos = {};
 
-function draw(game, to) {
+function draw(game: FullDefAnon, to) {
   let board = game.board,
-    layers = terrainLayers(board),
+    layers = terrainLayers(board.height, board.width, board.terrain),
     tilemap = game.graphics.tiles,
     tiletypes = Object.keys(game.graphics.tiles || {}),
     height = board.height * TILE + EDGE * 2,
@@ -138,6 +144,11 @@ function draw(game, to) {
   let dataURI = canvas.toDataURL("image/png");
   dataURIusages[dataURI] = dataURIusages[dataURI] || [];
   dataURIusages[dataURI].push(game.meta.id);
+  boardInfos[game.meta.id] = {
+    height: game.board.height,
+    width: game.board.width,
+    URI: dataURI
+  };
 }
 
 Object.keys(lib).forEach(function(gameId) {
@@ -150,7 +161,7 @@ let CSSfile = Object.keys(dataURIusages).reduce(function(mem, uri) {
   mem +=
     gamelist
       .map(function(id) {
-        return "." + id;
+        return "." + id + "Board";
       })
       .join(", ") +
     " { background-image: url(" +
@@ -160,3 +171,12 @@ let CSSfile = Object.keys(dataURIusages).reduce(function(mem, uri) {
 }, "");
 
 fs.writeFileSync(OUTPUT_PATH + "/boards.css", CSSfile);
+
+fs.ensureDir(OUTPUT_PATH + "/boardInfos");
+
+for (const gameId in boardInfos) {
+  fs.writeFileSync(
+    OUTPUT_PATH + "/boardInfos/" + gameId + ".json",
+    JSON.stringify(boardInfos, null, 2)
+  );
+}

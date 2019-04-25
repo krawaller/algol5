@@ -18,12 +18,13 @@ const side = 50;
 const edge = 25;
 
 const tileColors = {
-  empty: "white",
+  empty: "bisque",
   castle: "grey",
   grass: "green",
   water: "lightblue",
   player1base: "red",
-  player2base: "blue"
+  player2base: "blue",
+  edge: "saddlebrown"
 };
 
 const boardOut = path.join(__dirname, "../../dist/svgBoards");
@@ -35,18 +36,40 @@ export async function makeSVG(gameId: string) {
   const layers = terrainLayers(height, width, terrain);
   const tilemap = def.graphics.tiles;
 
-  let ret = `  <rect x="0" y="0" width="${side * width +
+  let ret = "";
+
+  // edge background
+  ret += `  <rect x="0" y="0" width="${side * width +
     edge * 2}" height="${side * height + edge * 2}" fill="${
+    tileColors.edge
+  }" stroke="none" />\n`;
+
+  // empty background!
+  ret += `  <rect x="${edge}" y="${edge}" width="${side *
+    width}" height="${side * height}" fill="${
     tileColors.empty
   }" stroke="none" />\n`;
 
   for (let row = 1; row <= height; row++) {
+    let drawY = edge + (height - row) * side;
+    ret += `  <text x="${edge / 2}" y="${drawY +
+      (3 * edge) /
+        2}" fill="white" text-anchor="middle" dy="-.4em">${row}</text>\n`;
+    ret += `  <text x="${width * side + (3 * edge) / 2}" y="${drawY +
+      (3 * edge) /
+        2}" fill="white" text-anchor="middle" dy="-.4em">${row}</text>\n`;
     for (let col = 1; col <= width; col++) {
-      let tile = tileAtPos(layers, tilemap, coords2pos({ x: col, y: row }));
-
-      let isDark = !((col + (row % 2)) % 2);
-      let drawY = edge + (height - row) * side;
       let drawX = edge + (col - 1) * side;
+      if (row === 1) {
+        const colName = coords2pos({ x: col, y: 1 })[0];
+        ret += `  <text x="${drawX + side / 2}" y="${edge /
+          2}" fill="white" text-anchor="middle" dy="+.2em">${colName}</text>\n`;
+        ret += `  <text x="${drawX + side / 2}" y="${side * height +
+          (3 * edge) /
+            2}" fill="white" text-anchor="middle" dy="+.2em">${colName}</text>\n`;
+      }
+      let tile = tileAtPos(layers, tilemap, coords2pos({ x: col, y: row }));
+      let isDark = !((col + (row % 2)) % 2);
       // doing this as a switch so it'll be easier to add feature-specific details
       switch (tile) {
         case "castle":

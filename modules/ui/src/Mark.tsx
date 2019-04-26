@@ -1,8 +1,11 @@
 import React, { useCallback } from "react";
 
 type MarkProps = {
+  /** Whether or not the mark is potential (or selected) */
   potential: boolean;
+  /** The position of the mark (will be passed to callback) */
   pos: string;
+  /** Callback to use when user clicks mark */
   callback: (pos: string) => void;
 };
 

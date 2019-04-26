@@ -5,6 +5,23 @@ export * from "./session";
 export * from "./generated";
 export * from "./suite";
 
+export type AlgolIcon =
+  | "bishop"
+  | "king"
+  | "pawn"
+  | "queen"
+  | "knight"
+  | "rook";
+
+export const icons: AlgolIcon[] = [
+  "knight",
+  "pawn",
+  "rook",
+  "king",
+  "queen",
+  "bishop"
+];
+
 export type SaveData = {
   gameId: string;
   turnNumber: number;

@@ -34,9 +34,10 @@ export * from '../../definitions/${gid}/index';
 
 fs.writeFileSync(
   path.join(out, "lib.ts"),
-  `${gameIds
-    .map(gid => `import ${gid} from '../definitions/${gid}/index';`)
-    .join("\n")}
+  `import { FullDefAnon } from '../../types';
+${gameIds
+  .map(gid => `import ${gid} from '../definitions/${gid}/index';`)
+  .join("\n")}
 
 const lib = {
 ${gameIds.map(gid => `  ${gid},\n`).join("")}};

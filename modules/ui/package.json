@@ -8,6 +8,7 @@
     "@storybook/addon-info": "^5.0.10",
     "@storybook/addon-knobs": "^5.0.10",
     "@storybook/react": "^5.0.10",
+    "@types/storybook__addon-knobs": "^5.0.0",
     "@types/storybook__react": "^4.0.1",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.5",

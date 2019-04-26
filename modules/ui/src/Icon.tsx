@@ -1,8 +1,9 @@
 import * as React from "react";
+import { AlgolIcon } from "../../types";
 
 type IconProps = {
   /** Which type of piece it is */
-  icon: "bishop" | "king" | "pawn" | "queen" | "knight" | "rook";
+  icon: AlgolIcon;
   /** Which player controls the piece */
   owner: 0 | 1 | 2;
 };

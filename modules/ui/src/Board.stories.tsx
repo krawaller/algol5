@@ -4,28 +4,28 @@ import { select } from "@storybook/addon-knobs";
 
 import { Board } from "./Board";
 import { GameId, list } from "../../games/dist/list";
-import { AlgolBoardState } from "../../types";
+import { AlgolUnitState } from "../../types";
 
 storiesOf("Board", module)
   .add("Game board gallery", () => {
     const gameId = select("Game", list, list[0]) as GameId;
-    const emptyState: AlgolBoardState = {
-      marks: [],
-      potentialMarks: [],
-      units: {}
-    };
     return (
       <div>
         <p>Board for {gameId}:</p>
-        <Board gameId={gameId} state={emptyState} callback={() => {}} />
+        <Board
+          gameId={gameId}
+          marks={[]}
+          potentialMarks={[]}
+          units={{}}
+          callback={() => {}}
+        />
       </div>
     );
   })
   .add("With content", () => {
-    const boardState: AlgolBoardState = {
-      marks: ["b3"],
-      potentialMarks: ["b4", "a4", "c4"],
-      units: {
+    const marks = ["b3"],
+      potentialMarks = ["b4", "a4", "c4"],
+      units: { [id: string]: AlgolUnitState } = {
         unit1: {
           id: "unit1",
           pos: "b3",
@@ -38,12 +38,14 @@ storiesOf("Board", module)
           group: "pawn",
           owner: 2
         }
-      }
-    };
+      };
+
     return (
       <Board
         gameId="murusgallicus"
-        state={boardState}
+        marks={marks}
+        potentialMarks={potentialMarks}
+        units={units}
         callback={pos => console.log("CLICKED", pos)}
       />
     );

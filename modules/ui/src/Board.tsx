@@ -1,6 +1,6 @@
 import * as React from "react";
 import { GameId } from "../../games/dist/list";
-import { AlgolBoardState } from "../../types";
+import { AlgolUnitState, AlgolPosition } from "../../types";
 
 import { Piece } from "./Piece";
 
@@ -9,13 +9,17 @@ import { Mark } from "./Mark";
 
 type BoardProps = {
   gameId: GameId;
-  state: AlgolBoardState;
+  units: { [id: string]: AlgolUnitState };
+  marks: AlgolPosition[];
+  potentialMarks: AlgolPosition[];
   callback: (pos: string) => void;
 };
 
 export const Board: React.FunctionComponent<BoardProps> = ({
   gameId,
-  state: { marks, potentialMarks, units },
+  marks,
+  potentialMarks,
+  units,
   callback
 }) => {
   const { dataURI, height, width } = dataURIs[gameId];

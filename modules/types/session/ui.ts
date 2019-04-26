@@ -6,6 +6,7 @@ export type AlgolBattleUI = {
   endTurn: boolean;
   undo: string | null;
   commands: string[];
+  potentialMarks: AlgolPosition[];
   instruction: AlgolContentAnon;
   turnNumber: number;
   player: 0 | 1 | 2;

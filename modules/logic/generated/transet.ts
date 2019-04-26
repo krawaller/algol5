@@ -67,9 +67,7 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn1 = step => {
-    return collapseContent({
-      line: [{ text: "Select a unit to" }, { command: "move" }]
-    });
+    return collapseContent({ line: [{ text: "Select a unit to move" }] });
   };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -584,9 +582,7 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn2 = step => {
-    return collapseContent({
-      line: [{ text: "Select a unit to" }, { command: "move" }]
-    });
+    return collapseContent({ line: [{ text: "Select a unit to move" }] });
   };
   game.newBattle = () => {
     let UNITDATA = deduceInitialUnitData({

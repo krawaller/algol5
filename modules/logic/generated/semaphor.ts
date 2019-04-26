@@ -81,10 +81,10 @@ let game: Partial<AlgolGame> = {
                     collapseContent({
                       line: [
                         Object.keys(UNITLAYERS.pawns).length !== 0
-                          ? { unittype: "pawn" }
+                          ? { unittype: ["pawn", 1] }
                           : undefined,
                         Object.keys(UNITLAYERS.bishops).length !== 0
-                          ? { unittype: "bishop" }
+                          ? { unittype: ["bishop", 1] }
                           : undefined
                       ]
                         .filter(i => !!i)
@@ -356,10 +356,10 @@ let game: Partial<AlgolGame> = {
                     collapseContent({
                       line: [
                         Object.keys(UNITLAYERS.pawns).length !== 0
-                          ? { unittype: "pawn" }
+                          ? { unittype: ["pawn", 2] }
                           : undefined,
                         Object.keys(UNITLAYERS.bishops).length !== 0
-                          ? { unittype: "bishop" }
+                          ? { unittype: ["bishop", 2] }
                           : undefined
                       ]
                         .filter(i => !!i)

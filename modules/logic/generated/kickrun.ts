@@ -181,8 +181,8 @@ let game: Partial<AlgolGame> = {
         { text: "Select where to move your" },
         { pos: MARKS.selectunit },
         UNITLAYERS.runners[MARKS.selectunit]
-          ? { unittype: "bishop" }
-          : { unittype: "pawn" }
+          ? { unittype: ["bishop", 1] }
+          : { unittype: ["pawn", 1] }
       ]
     });
   };
@@ -415,8 +415,8 @@ let game: Partial<AlgolGame> = {
         { text: "Select where to move your" },
         { pos: MARKS.selectunit },
         UNITLAYERS.runners[MARKS.selectunit]
-          ? { unittype: "bishop" }
-          : { unittype: "pawn" }
+          ? { unittype: ["bishop", 2] }
+          : { unittype: ["pawn", 2] }
       ]
     });
   };

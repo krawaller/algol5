@@ -4,7 +4,7 @@ type TestContent = AlgolContent<"jump" | "shoot", "a1" | "b2" | "c3">;
 
 const tests: TestContent[] = [
   { pos: "a1" },
-  { unittype: "king" },
+  { unittype: ["king", 2] },
   { unit: ["king", 1, "b2"] },
   { command: "jump" },
   { text: "enter passion play" },

@@ -53,7 +53,7 @@ function executeInstructionInner(
       return `{ pos: MARKS.${instr} }`;
     }
     if (isAlgolIcon(instr)) {
-      return `{ unittype: "${instr}" }`;
+      return `{ unittype: ["${instr}", ${player}] }`;
     }
     return `{ text: "${instr}" }`;
   }

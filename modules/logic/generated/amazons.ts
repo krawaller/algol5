@@ -62,7 +62,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select" },
         { text: "a" },
-        { unittype: "queen" },
+        { unittype: ["queen", 1] },
         { text: "to move and fire with" }
       ]
     });
@@ -198,7 +198,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select where to move the" },
         { pos: MARKS.selectunit },
-        { unittype: "queen" }
+        { unittype: ["queen", 1] }
       ]
     });
   };
@@ -298,7 +298,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select" },
         { text: "a" },
-        { unittype: "queen" },
+        { unittype: ["queen", 2] },
         { text: "to move and fire with" }
       ]
     });
@@ -453,7 +453,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select where to move the" },
         { pos: MARKS.selectunit },
-        { unittype: "queen" }
+        { unittype: ["queen", 2] }
       ]
     });
   };

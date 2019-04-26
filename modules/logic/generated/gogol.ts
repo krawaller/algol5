@@ -123,7 +123,10 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     return TURN > 2
       ? { text: "Select a unit to move" }
       : collapseContent({
-          line: [{ text: "Select where to deploy your" }, { unittype: "king" }]
+          line: [
+            { text: "Select where to deploy your" },
+            { unittype: ["king", 1] }
+          ]
         });
   };
   game.action.deploy1 = step => {
@@ -498,7 +501,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
                 }, [])
             }),
             { text: "your" },
-            { unittype: "king" },
+            { unittype: ["king", 1] },
             Object.keys(
               Object.entries(
                 Object.keys(ARTIFACTS.nokings)
@@ -524,7 +527,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
               ? { text: "or jump" }
               : undefined,
             { text: "your" },
-            { unittype: "pawn" },
+            { unittype: ["pawn", 1] },
             Object.keys(ARTIFACTS.nosoldiers).length !== 0
               ? { text: "without making a forbidden configuration" }
               : undefined
@@ -733,7 +736,10 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     return TURN > 2
       ? { text: "Select a unit to move" }
       : collapseContent({
-          line: [{ text: "Select where to deploy your" }, { unittype: "king" }]
+          line: [
+            { text: "Select where to deploy your" },
+            { unittype: ["king", 2] }
+          ]
         });
   };
   game.newBattle = () => {
@@ -1136,7 +1142,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
                 }, [])
             }),
             { text: "your" },
-            { unittype: "king" },
+            { unittype: ["king", 2] },
             Object.keys(
               Object.entries(
                 Object.keys(ARTIFACTS.nokings)
@@ -1162,7 +1168,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
               ? { text: "or jump" }
               : undefined,
             { text: "your" },
-            { unittype: "pawn" },
+            { unittype: ["pawn", 2] },
             Object.keys(ARTIFACTS.nosoldiers).length !== 0
               ? { text: "without making a forbidden configuration" }
               : undefined

@@ -68,7 +68,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select which" },
-        { unittype: "king" },
+        { unittype: ["king", 1] },
         { text: "to move" }
       ]
     });
@@ -170,10 +170,10 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select a" },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 1] },
         { text: "adjacent to the" },
         { pos: MARKS.selectunit },
-        { unittype: "king" },
+        { unittype: ["king", 1] },
         { text: "to attack" }
       ]
     });
@@ -198,10 +198,10 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to make your" },
         { pos: MARKS.selectunit },
-        { unittype: "king" },
+        { unittype: ["king", 1] },
         { text: "attack the" },
         { pos: MARKS.selectmovetarget },
-        { unittype: "pawn" }
+        { unittype: ["pawn", 1] }
       ]
     });
   };
@@ -247,7 +247,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select which" },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 2] },
         { text: "to move" }
       ]
     });
@@ -389,7 +389,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select an empty space adjacent to the" },
         { pos: MARKS.selectunit },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 2] },
         { text: "to move to" }
       ]
     });

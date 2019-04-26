@@ -1,4 +1,4 @@
-import { Layer, AlgolIcon } from "../";
+import { Layer } from "../";
 
 export type AlgolStepLinks = {
   endTurn?: "startTurn1" | "startTurn2";
@@ -28,7 +28,7 @@ export type AlgolStep = {
 export type AlgolUnitState = {
   pos: string;
   id: string;
-  group: AlgolIcon;
+  group: string;
   owner: 0 | 1 | 2;
   from?: string;
 };

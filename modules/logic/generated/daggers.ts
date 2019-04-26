@@ -72,9 +72,9 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select a" },
-        { unittype: "bishop" },
+        { unittype: ["bishop", 1] },
         { text: "or" },
-        { unittype: "king" },
+        { unittype: ["king", 1] },
         { text: "to move" }
       ]
     });
@@ -333,9 +333,9 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select a" },
-        { unittype: "bishop" },
+        { unittype: ["bishop", 2] },
         { text: "or" },
-        { unittype: "king" },
+        { unittype: ["king", 2] },
         { text: "to move" }
       ]
     });

@@ -53,7 +53,11 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
   };
   game.instruction.startTurn1 = step => {
     return collapseContent({
-      line: [{ text: "Select a" }, { unittype: "rook" }, { text: "to move" }]
+      line: [
+        { text: "Select a" },
+        { unittype: ["rook", 1] },
+        { text: "to move" }
+      ]
     });
   };
   game.action.move1 = step => {
@@ -195,7 +199,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       line: [
         { text: "Select where to move your" },
         { pos: MARKS.selectunit },
-        { unittype: "rook" }
+        { unittype: ["rook", 1] }
       ]
     });
   };
@@ -268,7 +272,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         { command: "move" },
         { text: "to move your" },
         { pos: MARKS.selectunit },
-        { unittype: "rook" },
+        { unittype: ["rook", 1] },
         { text: "to" },
         { pos: MARKS.selectmovetarget },
         Object.keys(ARTIFACTS.squished).length !== 0
@@ -318,7 +322,11 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
   };
   game.instruction.startTurn2 = step => {
     return collapseContent({
-      line: [{ text: "Select a" }, { unittype: "rook" }, { text: "to move" }]
+      line: [
+        { text: "Select a" },
+        { unittype: ["rook", 2] },
+        { text: "to move" }
+      ]
     });
   };
   game.newBattle = () => {
@@ -479,7 +487,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       line: [
         { text: "Select where to move your" },
         { pos: MARKS.selectunit },
-        { unittype: "rook" }
+        { unittype: ["rook", 2] }
       ]
     });
   };
@@ -552,7 +560,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         { command: "move" },
         { text: "to move your" },
         { pos: MARKS.selectunit },
-        { unittype: "rook" },
+        { unittype: ["rook", 2] },
         { text: "to" },
         { pos: MARKS.selectmovetarget },
         Object.keys(ARTIFACTS.squished).length !== 0

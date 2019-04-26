@@ -98,10 +98,10 @@ let game: Partial<AlgolGame> = {
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.mytowers).length !== 0
-              ? { unittype: "rook" }
+              ? { unittype: ["rook", 1] }
               : undefined,
             Object.keys(UNITLAYERS.mycatapults).length !== 0
-              ? { unittype: "queen" }
+              ? { unittype: ["queen", 1] }
               : undefined
           ]
             .filter(i => !!i)
@@ -559,7 +559,7 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "an enemy" },
-                    { unittype: "pawn" },
+                    { unittype: ["pawn", 1] },
                     { text: "to kill" }
                   ]
                 })
@@ -578,7 +578,7 @@ let game: Partial<AlgolGame> = {
         }),
         { text: "for the" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" }
+        { unittype: ["rook", 1] }
       ]
     });
   };
@@ -638,7 +638,7 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to overturn your" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" },
+        { unittype: ["rook", 1] },
         { text: "towards" },
         { pos: MARKS.selectmove }
       ]
@@ -674,12 +674,12 @@ let game: Partial<AlgolGame> = {
         { command: "kill" },
         { text: "to make a section of the" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" },
+        { unittype: ["rook", 1] },
         UNITLAYERS.walls[MARKS.selectkill]
           ? collapseContent({
               line: [
                 { text: "crush the enemy" },
-                { unittype: "pawn" },
+                { unittype: ["pawn", 1] },
                 { text: "at" },
                 { pos: MARKS.selectkill }
               ]
@@ -687,19 +687,19 @@ let game: Partial<AlgolGame> = {
           : collapseContent({
               line: [
                 { text: "reduce the enemy" },
-                { unittype: "queen" },
+                { unittype: ["queen", 1] },
                 { text: "at" },
                 { pos: MARKS.selectkill },
                 { text: "to a" },
-                { unittype: "rook" },
+                { unittype: ["rook", 1] },
                 { text: ", or" },
                 { command: "sacrifice" },
                 { text: "your" },
-                { unittype: "rook" },
+                { unittype: ["rook", 1] },
                 { text: "entirely to turn the" },
-                { unittype: "queen" },
+                { unittype: ["queen", 1] },
                 { text: "to a" },
-                { unittype: "pawn" },
+                { unittype: ["pawn", 1] },
                 { text: "!" }
               ]
             })
@@ -749,7 +749,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select where to fire the top section of your" },
         { pos: MARKS.selectcatapult },
-        { unittype: "queen" }
+        { unittype: ["queen", 1] }
       ]
     });
   };
@@ -778,12 +778,12 @@ let game: Partial<AlgolGame> = {
         { command: "fire" },
         { text: "to shoot a section of the" },
         { pos: MARKS.selectcatapult },
-        { unittype: "queen" },
+        { unittype: ["queen", 1] },
         UNITLAYERS.walls[MARKS.selectfire]
           ? collapseContent({
               line: [
                 { text: "and destroy the enemy" },
-                { unittype: "pawn" },
+                { unittype: ["pawn", 1] },
                 { text: "at" },
                 { pos: MARKS.selectfire }
               ]
@@ -808,8 +808,8 @@ let game: Partial<AlgolGame> = {
                 { pos: MARKS.selectfire },
                 { text: "to a" },
                 UNITLAYERS.catapults[MARKS.selectfire]
-                  ? { unittype: "rook" }
-                  : { unittype: "pawn" }
+                  ? { unittype: ["rook", 1] }
+                  : { unittype: ["pawn", 1] }
               ]
             })
           : collapseContent({
@@ -817,7 +817,7 @@ let game: Partial<AlgolGame> = {
                 { text: "at" },
                 { pos: MARKS.selectfire },
                 { text: ", gaining a" },
-                { unittype: "pawn" },
+                { unittype: ["pawn", 1] },
                 { text: "there" }
               ]
             })
@@ -894,10 +894,10 @@ let game: Partial<AlgolGame> = {
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.mytowers).length !== 0
-              ? { unittype: "rook" }
+              ? { unittype: ["rook", 2] }
               : undefined,
             Object.keys(UNITLAYERS.mycatapults).length !== 0
-              ? { unittype: "queen" }
+              ? { unittype: ["queen", 2] }
               : undefined
           ]
             .filter(i => !!i)
@@ -1387,7 +1387,7 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "an enemy" },
-                    { unittype: "pawn" },
+                    { unittype: ["pawn", 2] },
                     { text: "to kill" }
                   ]
                 })
@@ -1406,7 +1406,7 @@ let game: Partial<AlgolGame> = {
         }),
         { text: "for the" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" }
+        { unittype: ["rook", 2] }
       ]
     });
   };
@@ -1466,7 +1466,7 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to overturn your" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" },
+        { unittype: ["rook", 2] },
         { text: "towards" },
         { pos: MARKS.selectmove }
       ]
@@ -1502,12 +1502,12 @@ let game: Partial<AlgolGame> = {
         { command: "kill" },
         { text: "to make a section of the" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" },
+        { unittype: ["rook", 2] },
         UNITLAYERS.walls[MARKS.selectkill]
           ? collapseContent({
               line: [
                 { text: "crush the enemy" },
-                { unittype: "pawn" },
+                { unittype: ["pawn", 2] },
                 { text: "at" },
                 { pos: MARKS.selectkill }
               ]
@@ -1515,19 +1515,19 @@ let game: Partial<AlgolGame> = {
           : collapseContent({
               line: [
                 { text: "reduce the enemy" },
-                { unittype: "queen" },
+                { unittype: ["queen", 2] },
                 { text: "at" },
                 { pos: MARKS.selectkill },
                 { text: "to a" },
-                { unittype: "rook" },
+                { unittype: ["rook", 2] },
                 { text: ", or" },
                 { command: "sacrifice" },
                 { text: "your" },
-                { unittype: "rook" },
+                { unittype: ["rook", 2] },
                 { text: "entirely to turn the" },
-                { unittype: "queen" },
+                { unittype: ["queen", 2] },
                 { text: "to a" },
-                { unittype: "pawn" },
+                { unittype: ["pawn", 2] },
                 { text: "!" }
               ]
             })
@@ -1577,7 +1577,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select where to fire the top section of your" },
         { pos: MARKS.selectcatapult },
-        { unittype: "queen" }
+        { unittype: ["queen", 2] }
       ]
     });
   };
@@ -1606,12 +1606,12 @@ let game: Partial<AlgolGame> = {
         { command: "fire" },
         { text: "to shoot a section of the" },
         { pos: MARKS.selectcatapult },
-        { unittype: "queen" },
+        { unittype: ["queen", 2] },
         UNITLAYERS.walls[MARKS.selectfire]
           ? collapseContent({
               line: [
                 { text: "and destroy the enemy" },
-                { unittype: "pawn" },
+                { unittype: ["pawn", 2] },
                 { text: "at" },
                 { pos: MARKS.selectfire }
               ]
@@ -1636,8 +1636,8 @@ let game: Partial<AlgolGame> = {
                 { pos: MARKS.selectfire },
                 { text: "to a" },
                 UNITLAYERS.catapults[MARKS.selectfire]
-                  ? { unittype: "rook" }
-                  : { unittype: "pawn" }
+                  ? { unittype: ["rook", 2] }
+                  : { unittype: ["pawn", 2] }
               ]
             })
           : collapseContent({
@@ -1645,7 +1645,7 @@ let game: Partial<AlgolGame> = {
                 { text: "at" },
                 { pos: MARKS.selectfire },
                 { text: ", gaining a" },
-                { unittype: "pawn" },
+                { unittype: ["pawn", 2] },
                 { text: "there" }
               ]
             })

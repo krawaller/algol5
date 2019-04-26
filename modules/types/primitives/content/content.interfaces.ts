@@ -9,7 +9,7 @@ export interface AlgolContentUnit<Pos> {
 }
 
 export interface AlgolContentUnitType {
-  unittype: AlgolIcon;
+  unittype: [AlgolIcon, 0 | 1 | 2];
 }
 
 export interface AlgolContentCmnd<Cmnd> {

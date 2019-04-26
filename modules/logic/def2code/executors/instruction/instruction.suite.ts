@@ -131,8 +131,8 @@ export const testSuite: AlgolExpressionSuite<
             },
             {
               expr: "queen",
-              res: { unittype: "queen" },
-              desc: "handles icons as string"
+              res: { unittype: ["queen", 1] },
+              desc: "handles icons as string, adding plr"
             }
           ]
         }

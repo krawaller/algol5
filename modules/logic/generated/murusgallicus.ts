@@ -85,7 +85,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select a" },
-        { unittype: "rook" },
+        { unittype: ["rook", 1] },
         { text: "to act with" }
       ]
     });
@@ -323,7 +323,7 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "an enemy" },
-                    { unittype: "pawn" },
+                    { unittype: ["pawn", 1] },
                     { text: "to kill" }
                   ]
                 })
@@ -342,7 +342,7 @@ let game: Partial<AlgolGame> = {
         }),
         { text: "for the" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" }
+        { unittype: ["rook", 1] }
       ]
     });
   };
@@ -393,7 +393,7 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to overturn your" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" },
+        { unittype: ["rook", 1] },
         { text: "towards" },
         { pos: MARKS.selectmove }
       ]
@@ -420,9 +420,9 @@ let game: Partial<AlgolGame> = {
         { command: "kill" },
         { text: "to make a section of the" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" },
+        { unittype: ["rook", 1] },
         { text: "crush the enemy" },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 1] },
         { text: "at" },
         { pos: MARKS.selectkill }
       ]
@@ -487,7 +487,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select a" },
-        { unittype: "rook" },
+        { unittype: ["rook", 2] },
         { text: "to act with" }
       ]
     });
@@ -754,7 +754,7 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "an enemy" },
-                    { unittype: "pawn" },
+                    { unittype: ["pawn", 2] },
                     { text: "to kill" }
                   ]
                 })
@@ -773,7 +773,7 @@ let game: Partial<AlgolGame> = {
         }),
         { text: "for the" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" }
+        { unittype: ["rook", 2] }
       ]
     });
   };
@@ -824,7 +824,7 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to overturn your" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" },
+        { unittype: ["rook", 2] },
         { text: "towards" },
         { pos: MARKS.selectmove }
       ]
@@ -851,9 +851,9 @@ let game: Partial<AlgolGame> = {
         { command: "kill" },
         { text: "to make a section of the" },
         { pos: MARKS.selecttower },
-        { unittype: "rook" },
+        { unittype: ["rook", 2] },
         { text: "crush the enemy" },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 2] },
         { text: "at" },
         { pos: MARKS.selectkill }
       ]

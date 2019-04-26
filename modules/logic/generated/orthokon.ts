@@ -53,7 +53,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select which" },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 1] },
         { text: "to move" }
       ]
     });
@@ -149,7 +149,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select where to move the" },
         { pos: MARKS.selectunit },
-        { unittype: "pawn" }
+        { unittype: ["pawn", 1] }
       ]
     });
   };
@@ -192,7 +192,7 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to move the" },
         { pos: MARKS.selectunit },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 1] },
         { text: "to" },
         { pos: MARKS.selectmovetarget },
         Object.keys(ARTIFACTS.victims).length !== 0
@@ -204,7 +204,7 @@ let game: Partial<AlgolGame> = {
                     { text: Object.keys(ARTIFACTS.victims).length },
                     Object.keys(ARTIFACTS.victims).length === 1
                       ? collapseContent({
-                          line: [{ text: "enemy" }, { unittype: "pawn" }]
+                          line: [{ text: "enemy" }, { unittype: ["pawn", 1] }]
                         })
                       : collapseContent({
                           line: [{ text: "enemy" }, { text: "pawns" }]
@@ -248,7 +248,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { text: "Select which" },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 2] },
         { text: "to move" }
       ]
     });
@@ -362,7 +362,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Select where to move the" },
         { pos: MARKS.selectunit },
-        { unittype: "pawn" }
+        { unittype: ["pawn", 2] }
       ]
     });
   };
@@ -405,7 +405,7 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to move the" },
         { pos: MARKS.selectunit },
-        { unittype: "pawn" },
+        { unittype: ["pawn", 2] },
         { text: "to" },
         { pos: MARKS.selectmovetarget },
         Object.keys(ARTIFACTS.victims).length !== 0
@@ -417,7 +417,7 @@ let game: Partial<AlgolGame> = {
                     { text: Object.keys(ARTIFACTS.victims).length },
                     Object.keys(ARTIFACTS.victims).length === 1
                       ? collapseContent({
-                          line: [{ text: "enemy" }, { unittype: "pawn" }]
+                          line: [{ text: "enemy" }, { unittype: ["pawn", 2] }]
                         })
                       : collapseContent({
                           line: [{ text: "enemy" }, { text: "pawns" }]

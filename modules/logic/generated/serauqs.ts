@@ -72,19 +72,17 @@ let game: Partial<AlgolGame> = {
       ? collapseContent({
           line: [
             { text: "Select which" },
-            { unittype: "pawn" },
+            { unittype: ["pawn", 1] },
             { text: "or" },
-            { unittype: "king" },
-            { text: "to" },
-            { command: "move" }
+            { unittype: ["king", 1] },
+            { text: "to move" }
           ]
         })
       : collapseContent({
           line: [
             { text: "Select which" },
-            { unittype: "pawn" },
-            { text: "to" },
-            { command: "promote" }
+            { unittype: ["pawn", 1] },
+            { text: "to promote" }
           ]
         });
   };
@@ -303,9 +301,9 @@ let game: Partial<AlgolGame> = {
             { text: "Press" },
             { command: "promote" },
             { text: "to turn this" },
-            { unittype: "pawn" },
+            { unittype: ["pawn", 1] },
             { text: "to a" },
-            { unittype: "king" },
+            { unittype: ["king", 1] },
             { text: ", making it match for your opponent too" }
           ]
         });
@@ -386,19 +384,17 @@ let game: Partial<AlgolGame> = {
       ? collapseContent({
           line: [
             { text: "Select which" },
-            { unittype: "pawn" },
+            { unittype: ["pawn", 2] },
             { text: "or" },
-            { unittype: "king" },
-            { text: "to" },
-            { command: "move" }
+            { unittype: ["king", 2] },
+            { text: "to move" }
           ]
         })
       : collapseContent({
           line: [
             { text: "Select which" },
-            { unittype: "pawn" },
-            { text: "to" },
-            { command: "promote" }
+            { unittype: ["pawn", 2] },
+            { text: "to promote" }
           ]
         });
   };
@@ -642,9 +638,9 @@ let game: Partial<AlgolGame> = {
             { text: "Press" },
             { command: "promote" },
             { text: "to turn this" },
-            { unittype: "pawn" },
+            { unittype: ["pawn", 2] },
             { text: "to a" },
-            { unittype: "king" },
+            { unittype: ["king", 2] },
             { text: ", making it match for your opponent too" }
           ]
         });

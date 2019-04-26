@@ -1,6 +1,11 @@
 import React, { useCallback, useState } from "react";
+import { positionStyles } from "./helpers";
 
 type MarkProps = {
+  /** Height of board */
+  height: number;
+  /** Width of board */
+  width: number;
   /** Whether or not the mark is potential (or selected) */
   potential: boolean;
   /** The position of the mark (will be passed to callback) */
@@ -15,7 +20,9 @@ type MarkProps = {
 export const Mark: React.FunctionComponent<MarkProps> = ({
   potential,
   pos,
-  callback
+  callback,
+  height,
+  width
 }) => {
   const [hover, setHover] = useState(false);
   const handleClick = useCallback(() => callback(pos), [pos]);
@@ -51,8 +58,7 @@ export const Mark: React.FunctionComponent<MarkProps> = ({
       onMouseOver={handleEnter}
       onMouseOut={handleLeave}
       style={{
-        height: "100%",
-        width: "100%",
+        ...positionStyles({ height, width, pos }),
         cursor: "pointer",
         background: `url("data:image/svg+xml;utf8,${svg}")`
       }}

@@ -12,7 +12,8 @@ const gameIds = fs.readdirSync(defs).filter(gid => gid !== ".DS_Store");
 
 fs.writeFileSync(
   path.join(out, "list.ts"),
-  `const list = [${gameIds.map(gid => `"${gid}"`).join(", ")}];
+  `export const list = [${gameIds.map(gid => `"${gid}"`).join(", ")}];
+export type GameId = ${gameIds.map(gid => `"${gid}"`).join(" | ")};
 export default list;
 `
 );

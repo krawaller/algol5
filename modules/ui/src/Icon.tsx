@@ -36,10 +36,9 @@ export const Icon: React.FunctionComponent<IconProps> = ({
               attributeName="transform"
               attributeType="XML"
               type="rotate"
-              values="0 150 300; -10 150 300; 10 150 300; 0 150 300"
+              values="0 150 300; -10 150 300; 0 150 300; 10 150 300; 0 150 300"
               dur="1s"
               repeatCount="indefinite"
-              calcMode="ease"
             />
           )}
           <path

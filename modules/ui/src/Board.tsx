@@ -9,17 +9,14 @@ type BoardProps = {
   state: AlgolBoardState;
 };
 
-const minSide = 30;
-
 export const Board: React.FunctionComponent<BoardProps> = ({ gameId }) => {
   const { dataURI, height, width } = dataURIs[gameId];
   return (
     <div
       style={{
         background: `url("${dataURI}")`,
-        minHeight: minSide * (height + 1),
-        minWidth: minSide * (width + 1),
-        display: "inline-block"
+        // hack to maintain aspect ratio of board
+        paddingTop: `${((height + 1) / (width + 1)) * 100}%`
       }}
     />
   );

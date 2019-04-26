@@ -14,7 +14,7 @@ storiesOf("Board", module).add("Game board gallery", () => {
     units: {}
   };
   return (
-    <div style={{ width: "400px" }}>
+    <div>
       <p>Board for {gameId}:</p>
       <Board gameId={gameId} state={emptyState} />
     </div>

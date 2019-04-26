@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 type MarkProps = {
   /** Whether or not the mark is potential (or selected) */
@@ -17,34 +17,39 @@ export const Mark: React.FunctionComponent<MarkProps> = ({
   pos,
   callback
 }) => {
+  const [hover, setHover] = useState(false);
+  const handleClick = useCallback(() => callback(pos), [pos]);
+  const handleEnter = useCallback(() => setHover(true), []);
+  const handleLeave = useCallback(() => setHover(false), []);
   const svg = `
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'>
-    <circle cx='25' cy='25' r='21' stroke-width='6' stroke='white' fill='none' stroke-opacity='${
-      potential ? 0.5 : 1
-    }'>
-    ${
-      potential
-        ? `
-    <animate
-    attributeType='XML'
-    attributeName='r'
-    values='21;20;16;15;16;20;21'
-    dur='0.8s'
-    begin='0s'
-    repeatCount='indefinite'/>
-    `
-        : ""
-    }
-    </circle>
+    <g stroke-opacity='${potential ? (hover ? 0.8 : 0.5) : hover ? 1 : 0.85}'>
+      <circle cx='25' cy='25' r='21' stroke-width='6' stroke='white' fill='none'>
+      ${
+        potential
+          ? `
+      <animate
+      attributeType='XML'
+      attributeName='r'
+      values='21;20;16;15;16;20;21'
+      dur='0.8s'
+      begin='0s'
+      repeatCount='indefinite'/>
+      `
+          : ""
+      }
+      </circle>
+    </g>
   </svg>
   `
     .replace(/\n/g, "")
     .replace(/ +/g, " ")
     .replace(/> </g, "><");
-  const clickHandler = useCallback(() => callback(pos), [pos]);
   return (
     <div
-      onClick={clickHandler}
+      onClick={handleClick}
+      onMouseOver={handleEnter}
+      onMouseOut={handleLeave}
       style={{
         height: "100%",
         width: "100%",

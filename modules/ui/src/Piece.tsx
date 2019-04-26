@@ -16,6 +16,8 @@ type PieceProps = {
   height: number;
   /** The width of current board */
   width: number;
+  /** Whether there is a mark on the same position */
+  selected?: boolean;
 };
 
 /**
@@ -26,7 +28,8 @@ export const Piece: React.FunctionComponent<PieceProps> = ({
   group,
   height,
   width,
-  pos
+  pos,
+  selected
 }) => {
   return (
     <div
@@ -37,7 +40,7 @@ export const Piece: React.FunctionComponent<PieceProps> = ({
         pointerEvents: "none"
       }}
     >
-      <Icon icon={group} owner={owner} />
+      <Icon icon={group} owner={owner} wiggle={selected} />
     </div>
   );
 };

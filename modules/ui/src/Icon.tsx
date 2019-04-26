@@ -6,12 +6,18 @@ type IconProps = {
   icon: AlgolIcon;
   /** Which player controls the piece */
   owner: 0 | 1 | 2;
+  /** Whether the icon should wiggle */
+  wiggle?: boolean;
 };
 
 /**
  * A component to show a playing piece icon. Used by the Piece component.
  */
-export const Icon: React.FunctionComponent<IconProps> = ({ owner, icon }) => {
+export const Icon: React.FunctionComponent<IconProps> = ({
+  owner,
+  icon,
+  wiggle
+}) => {
   return (
     <div
       style={{
@@ -24,20 +30,33 @@ export const Icon: React.FunctionComponent<IconProps> = ({ owner, icon }) => {
         width="100%"
         height="100%"
       >
-        <path
-          d={solids[icon]}
-          style={{
-            fill: fills[owner],
-            transition: "fill 0.3s ease, stroke 0.3s ease"
-          }}
-        />
-        <path
-          d={hollows[icon]}
-          style={{
-            fill: strokes[owner],
-            transition: "fill 0.3s ease, stroke 0.3s ease"
-          }}
-        />
+        <g>
+          {wiggle && (
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="rotate"
+              values="0 150 300; -10 150 300; 10 150 300; 0 150 300"
+              dur="1s"
+              repeatCount="indefinite"
+              calcMode="ease"
+            />
+          )}
+          <path
+            d={solids[icon]}
+            style={{
+              fill: fills[owner],
+              transition: "fill 0.3s ease, stroke 0.3s ease"
+            }}
+          />
+          <path
+            d={hollows[icon]}
+            style={{
+              fill: strokes[owner],
+              transition: "fill 0.3s ease, stroke 0.3s ease"
+            }}
+          />
+        </g>
       </svg>
     </div>
   );

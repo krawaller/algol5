@@ -49,7 +49,13 @@ export const Board: React.FunctionComponent<BoardProps> = ({
             />
           ))}
         {Object.keys(units).map(id => (
-          <Piece key={id} {...units[id]} height={height} width={width} />
+          <Piece
+            key={id}
+            {...units[id]}
+            height={height}
+            width={width}
+            selected={marks.indexOf(units[id].pos) !== -1}
+          />
         ))}
       </div>
     </div>

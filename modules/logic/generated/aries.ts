@@ -54,7 +54,8 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
   game.instruction.startTurn1 = step => {
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         { unittype: ["rook", 1] },
         { text: "to move" }
       ]
@@ -197,7 +198,8 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select where to move your" },
+        { select: "Select" },
+        { text: "where to move your" },
         { pos: MARKS.selectunit },
         { unittype: ["rook", 1] }
       ]
@@ -323,7 +325,8 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
   game.instruction.startTurn2 = step => {
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         { unittype: ["rook", 2] },
         { text: "to move" }
       ]
@@ -485,7 +488,8 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select where to move your" },
+        { select: "Select" },
+        { text: "where to move your" },
         { pos: MARKS.selectunit },
         { unittype: ["rook", 2] }
       ]

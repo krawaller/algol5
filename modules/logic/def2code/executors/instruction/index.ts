@@ -55,6 +55,13 @@ function executeInstructionInner(
     if (isAlgolIcon(instr)) {
       return `{ unittype: ["${instr}", ${player}] }`;
     }
+    if (gameDef.graphics.icons[instr]) {
+      return `{ unittype: ["${gameDef.graphics.icons[instr]}", ${player}] }`;
+    }
+    if (instr.toLowerCase() === "select") {
+      // TODO - language dependency?
+      return `{ select: "${instr}" }`;
+    }
     return `{ text: "${instr}" }`;
   }
   if (Array.isArray(instr)) {

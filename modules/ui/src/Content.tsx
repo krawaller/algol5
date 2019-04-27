@@ -6,7 +6,8 @@ import {
   isAlgolContentCmnd,
   isAlgolContentUnitType,
   isAlgolContentPos,
-  isAlgolContentUnit
+  isAlgolContentUnit,
+  isAlgolContentSelect
 } from "../../types";
 
 import { Icon } from "./Icon";
@@ -27,7 +28,13 @@ export const Content: React.FunctionComponent<ContentProps> = ({
 }) => {
   if (isAlgolContentLine(content)) {
     return (
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          whiteSpace: "pre-wrap"
+        }}
+      >
         {content.line.map((c, n) => (
           <Content key={n} content={c} callback={callback} />
         ))}
@@ -36,6 +43,9 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   }
   if (isAlgolContentText(content)) {
     return content.text;
+  }
+  if (isAlgolContentSelect(content)) {
+    return <span className="selectInstruction">{content.select}</span>;
   }
   if (isAlgolContentCmnd(content)) {
     return (

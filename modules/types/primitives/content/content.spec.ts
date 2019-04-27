@@ -9,5 +9,6 @@ const tests: TestContent[] = [
   { command: "jump" },
   { text: "enter passion play" },
   { line: [{ text: "dont go to" }, { pos: "a1" }] },
+  { select: "Select" },
   ["defaultEndTurnInstruction"]
 ];

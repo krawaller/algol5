@@ -67,7 +67,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn1 = step => {
-    return collapseContent({ line: [{ text: "Select a unit to move" }] });
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "a unit to move" }]
+    });
   };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -274,7 +276,7 @@ let game: Partial<AlgolGame> = {
     let LINKS: AlgolStepLinks = step.LINKS;
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         collapseContent({
           line: [
             Object.keys(ARTIFACTS.movetargets).length !== 0
@@ -375,7 +377,8 @@ let game: Partial<AlgolGame> = {
       !TERRAIN.oppbase[MARKS.selectmovetarget]
       ? collapseContent({
           line: [
-            { text: "Select where the enemy" },
+            { select: "Select" },
+            { text: "where the enemy" },
             {
               unit: [
                 { pinets: "pawn", piokers: "bishop", piases: "king" }[
@@ -471,7 +474,8 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select a neighbouring square for" },
+        { select: "Select" },
+        { text: "a neighbouring square for" },
         { pos: MARKS.selectunit },
         { text: "to step to. The" },
         { pos: MARKS.selectswapunit },
@@ -582,7 +586,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn2 = step => {
-    return collapseContent({ line: [{ text: "Select a unit to move" }] });
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "a unit to move" }]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = deduceInitialUnitData({
@@ -815,7 +821,7 @@ let game: Partial<AlgolGame> = {
     let LINKS: AlgolStepLinks = step.LINKS;
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         collapseContent({
           line: [
             Object.keys(ARTIFACTS.movetargets).length !== 0
@@ -916,7 +922,8 @@ let game: Partial<AlgolGame> = {
       !TERRAIN.oppbase[MARKS.selectmovetarget]
       ? collapseContent({
           line: [
-            { text: "Select where the enemy" },
+            { select: "Select" },
+            { text: "where the enemy" },
             {
               unit: [
                 { pinets: "pawn", piokers: "bishop", piases: "king" }[
@@ -1012,7 +1019,8 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select a neighbouring square for" },
+        { select: "Select" },
+        { text: "a neighbouring square for" },
         { pos: MARKS.selectunit },
         { text: "to step to. The" },
         { pos: MARKS.selectswapunit },

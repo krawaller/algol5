@@ -1,9 +1,14 @@
-import { DaggersInstructions } from './_types';
+import { DaggersInstructions } from "./_types";
 
 const daggersInstructions: DaggersInstructions = {
-  startTurn: { line: ["Select a", "bishop", "or", "king", "to move"] },
+  startTurn: { line: ["Select", "a", "bishop", "or", "king", "to move"] },
   selectunit: {
-    line: ["Select where to move the", "selectunit", { unitat: "selectunit" }]
+    line: [
+      "Select",
+      "where to move the",
+      "selectunit",
+      { unitat: "selectunit" }
+    ]
   },
   selectmovetarget: {
     line: [

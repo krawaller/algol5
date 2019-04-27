@@ -5,7 +5,8 @@ import {
   isAlgolContentCmnd,
   isAlgolContentUnitType,
   isAlgolContentUnit,
-  isAlgolContentLine
+  isAlgolContentLine,
+  isAlgolContentSelect
 } from "../../types";
 
 export function getContentText(content: AlgolContentAnon) {
@@ -27,5 +28,8 @@ export function getContentText(content: AlgolContentAnon) {
   }
   if (isAlgolContentLine(content)) {
     return content.line.reduce((mem, c) => mem + getContentText(c), "");
+  }
+  if (isAlgolContentSelect(content)) {
+    return content.select;
   }
 }

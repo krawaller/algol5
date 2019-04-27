@@ -65,7 +65,8 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn1 = step => {
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         { unittype: ["king", 1] },
         { text: "or" },
         { unittype: ["queen", 1] },
@@ -182,7 +183,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select an orthogonal empty neighbour to move the" },
+        { select: "Select" },
+        { text: "an orthogonal empty neighbour to move the" },
         { pos: MARKS.selectunit },
         {
           unit: [
@@ -275,7 +277,8 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn2 = step => {
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         { unittype: ["king", 2] },
         { text: "or" },
         { unittype: ["queen", 2] },
@@ -419,7 +422,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select an orthogonal empty neighbour to move the" },
+        { select: "Select" },
+        { text: "an orthogonal empty neighbour to move the" },
         { pos: MARKS.selectunit },
         {
           unit: [

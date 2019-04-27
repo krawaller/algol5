@@ -1,14 +1,14 @@
-import { KriegInstructions } from './_types';
+import { KriegInstructions } from "./_types";
 
 const kriegInstructions: KriegInstructions = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 2] },
-      { line: ["Select a unit to move that you didn't move last turn"] },
-      { line: ["Select a unit to move"] }
+      { line: ["Select", "a unit to move that you didn't move last turn"] },
+      { line: ["Select", "a unit to move"] }
     ]
   },
-  selectunit: "Select an empty square to move to",
+  selectunit: { line: ["Select", "an empty square to move to"] },
   selectmove: {
     line: [
       "Press",

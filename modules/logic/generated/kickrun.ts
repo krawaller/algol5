@@ -63,7 +63,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn1 = step => {
-    return { text: "Select which unit to move" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "which unit to move" }]
+    });
   };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -178,7 +180,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select where to move your" },
+        { select: "Select" },
+        { text: "where to move your" },
         { pos: MARKS.selectunit },
         UNITLAYERS.runners[MARKS.selectunit]
           ? { unittype: ["bishop", 1] }
@@ -271,7 +274,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn2 = step => {
-    return { text: "Select which unit to move" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "which unit to move" }]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = deduceInitialUnitData({
@@ -412,7 +417,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select where to move your" },
+        { select: "Select" },
+        { text: "where to move your" },
         { pos: MARKS.selectunit },
         UNITLAYERS.runners[MARKS.selectunit]
           ? { unittype: ["bishop", 2] }

@@ -74,7 +74,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select where to shove in" },
+        { select: "Select" },
+        { text: "where to shove in" },
         Object.keys(UNITLAYERS.myunits).length === 7
           ? { text: "your last off-board unit" }
           : Object.keys(UNITLAYERS.myunits).length === 8
@@ -632,7 +633,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select where to shove in" },
+        { select: "Select" },
+        { text: "where to shove in" },
         Object.keys(UNITLAYERS.myunits).length === 7
           ? { text: "your last off-board unit" }
           : Object.keys(UNITLAYERS.myunits).length === 8

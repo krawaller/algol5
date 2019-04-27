@@ -73,8 +73,15 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
   game.instruction.startTurn1 = step => {
     let TURN = step.TURN;
     return TURN > 2
-      ? { text: "Select unit to expand from" }
-      : { text: "Select where to deploy the first of your two initial units" };
+      ? collapseContent({
+          line: [{ select: "Select" }, { text: "unit to expand from" }]
+        })
+      : collapseContent({
+          line: [
+            { select: "Select" },
+            { text: "where to deploy the first of your two initial units" }
+          ]
+        });
   };
   game.action.deploy1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -143,7 +150,13 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
   game.instruction.deploy1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
     return Object.keys(UNITLAYERS.myunits).length === 1
-      ? { text: "Now select where to deploy your second and last initial unit" }
+      ? collapseContent({
+          line: [
+            { text: "Now" },
+            { select: "select" },
+            { text: "where to deploy your second and last initial unit" }
+          ]
+        })
       : defaultInstruction(1);
   };
   game.action.expand1 = step => {
@@ -475,8 +488,15 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
   game.instruction.startTurn2 = step => {
     let TURN = step.TURN;
     return TURN > 2
-      ? { text: "Select unit to expand from" }
-      : { text: "Select where to deploy the first of your two initial units" };
+      ? collapseContent({
+          line: [{ select: "Select" }, { text: "unit to expand from" }]
+        })
+      : collapseContent({
+          line: [
+            { select: "Select" },
+            { text: "where to deploy the first of your two initial units" }
+          ]
+        });
   };
   game.newBattle = () => {
     return game.action.startTurn1({
@@ -560,7 +580,13 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
   game.instruction.deploy2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
     return Object.keys(UNITLAYERS.myunits).length === 1
-      ? { text: "Now select where to deploy your second and last initial unit" }
+      ? collapseContent({
+          line: [
+            { text: "Now" },
+            { select: "select" },
+            { text: "where to deploy your second and last initial unit" }
+          ]
+        })
       : defaultInstruction(2);
   };
   game.action.expand2 = step => {

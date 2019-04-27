@@ -71,7 +71,8 @@ let game: Partial<AlgolGame> = {
     return TURN > 2
       ? collapseContent({
           line: [
-            { text: "Select which" },
+            { select: "Select" },
+            { text: "which" },
             { unittype: ["pawn", 1] },
             { text: "or" },
             { unittype: ["king", 1] },
@@ -80,7 +81,8 @@ let game: Partial<AlgolGame> = {
         })
       : collapseContent({
           line: [
-            { text: "Select which" },
+            { select: "Select" },
+            { text: "which" },
             { unittype: ["pawn", 1] },
             { text: "to promote" }
           ]
@@ -279,7 +281,8 @@ let game: Partial<AlgolGame> = {
     return TURN > 2
       ? collapseContent({
           line: [
-            { text: "Select where to" },
+            { select: "Select" },
+            { text: "where to" },
             { command: "move" },
             { text: "the" },
             {
@@ -383,7 +386,8 @@ let game: Partial<AlgolGame> = {
     return TURN > 2
       ? collapseContent({
           line: [
-            { text: "Select which" },
+            { select: "Select" },
+            { text: "which" },
             { unittype: ["pawn", 2] },
             { text: "or" },
             { unittype: ["king", 2] },
@@ -392,7 +396,8 @@ let game: Partial<AlgolGame> = {
         })
       : collapseContent({
           line: [
-            { text: "Select which" },
+            { select: "Select" },
+            { text: "which" },
             { unittype: ["pawn", 2] },
             { text: "to promote" }
           ]
@@ -616,7 +621,8 @@ let game: Partial<AlgolGame> = {
     return TURN > 2
       ? collapseContent({
           line: [
-            { text: "Select where to" },
+            { select: "Select" },
+            { text: "where to" },
             { command: "move" },
             { text: "the" },
             {

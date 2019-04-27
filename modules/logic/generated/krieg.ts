@@ -73,10 +73,13 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     return TURN > 2
       ? collapseContent({
           line: [
-            { text: "Select a unit to move that you didn't move last turn" }
+            { select: "Select" },
+            { text: "a unit to move that you didn't move last turn" }
           ]
         })
-      : collapseContent({ line: [{ text: "Select a unit to move" }] });
+      : collapseContent({
+          line: [{ select: "Select" }, { text: "a unit to move" }]
+        });
   };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -223,7 +226,9 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     };
   };
   game.instruction.selectunit1 = step => {
-    return { text: "Select an empty square to move to" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "an empty square to move to" }]
+    });
   };
   game.action.selectmove1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -315,10 +320,13 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     return TURN > 2
       ? collapseContent({
           line: [
-            { text: "Select a unit to move that you didn't move last turn" }
+            { select: "Select" },
+            { text: "a unit to move that you didn't move last turn" }
           ]
         })
-      : collapseContent({ line: [{ text: "Select a unit to move" }] });
+      : collapseContent({
+          line: [{ select: "Select" }, { text: "a unit to move" }]
+        });
   };
   game.newBattle = () => {
     let UNITDATA = deduceInitialUnitData({
@@ -494,7 +502,9 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     };
   };
   game.instruction.selectunit2 = step => {
-    return { text: "Select an empty square to move to" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "an empty square to move to" }]
+    });
   };
   game.action.selectmove2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };

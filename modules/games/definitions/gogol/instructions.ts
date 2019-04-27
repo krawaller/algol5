@@ -1,11 +1,11 @@
-import { GogolInstructions } from './_types';
+import { GogolInstructions } from "./_types";
 
 const gogolInstructions: GogolInstructions = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 2] },
-      "Select a unit to move",
-      { line: ["Select where to deploy your", "king"] }
+      { line: ["Select", "a unit to move"] },
+      { line: ["Select", "where to deploy your", "king"] }
     ]
   },
   selectkingdeploy: { line: ["Press", "deploy", "to place your king here"] },
@@ -14,7 +14,8 @@ const gogolInstructions: GogolInstructions = {
       { anyat: ["kings", "selectunit"] },
       {
         line: [
-          "Select where to",
+          "Select",
+          "where to",
           {
             orlist: [
               { if: [{ notempty: "kingwalk" }, { value: "move" }] },
@@ -33,7 +34,8 @@ const gogolInstructions: GogolInstructions = {
       },
       {
         line: [
-          "Select where to move",
+          "Select",
+          "where to move",
           { if: [{ notempty: "jumptargets" }, "or jump"] },
           "your",
           "pawn",

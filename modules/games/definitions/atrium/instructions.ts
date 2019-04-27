@@ -1,10 +1,11 @@
-import { AtriumInstructions } from './_types';
+import { AtriumInstructions } from "./_types";
 
 const atriumInstructions: AtriumInstructions = {
-  startTurn: { line: ["Select a", "king", "or", "queen", "to move"] },
+  startTurn: { line: ["Select", "a", "king", "or", "queen", "to move"] },
   selectunit: {
     line: [
-      "Select an orthogonal empty neighbour to move the",
+      "Select",
+      "an orthogonal empty neighbour to move the",
       "selectunit",
       { unitat: "selectunit" },
       "to"

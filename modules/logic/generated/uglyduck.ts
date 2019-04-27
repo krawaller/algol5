@@ -25,9 +25,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units"],
-      ["units", "myunits", "mysoldiers"],
-      ["units", "oppunits", "oppsoldiers"]
+      ["units", "soldiers"],
+      ["units", "myunits", "soldiers", "mysoldiers"],
+      ["units", "oppunits", "soldiers", "oppsoldiers"]
     ],
     kings: [
       ["units"],
@@ -49,6 +49,7 @@ let game: Partial<AlgolGame> = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
+      soldiers: oldUnitLayers.soldiers,
       mysoldiers: oldUnitLayers.oppsoldiers,
       oppsoldiers: oldUnitLayers.mysoldiers,
       mykings: oldUnitLayers.oppkings,
@@ -73,7 +74,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.mysoldiers).length !== 0
@@ -139,6 +140,7 @@ let game: Partial<AlgolGame> = {
       units: {},
       myunits: {},
       oppunits: {},
+      soldiers: {},
       mysoldiers: {},
       oppsoldiers: {},
       mykings: {},
@@ -230,14 +232,16 @@ let game: Partial<AlgolGame> = {
     return UNITLAYERS.mykings[MARKS.selectunit]
       ? collapseContent({
           line: [
-            { text: "Select a square closer to home to move your" },
+            { select: "Select" },
+            { text: "a square closer to home to move your" },
             { unittype: ["king", 1] },
             { text: "to" }
           ]
         })
       : collapseContent({
           line: [
-            { text: "Select a square closer to the enemy lines to move your" },
+            { select: "Select" },
+            { text: "a square closer to the enemy lines to move your" },
             { unittype: ["pawn", 1] },
             { text: "to" }
           ]
@@ -312,9 +316,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units"],
-      ["units", "oppunits", "oppsoldiers"],
-      ["units", "myunits", "mysoldiers"]
+      ["units", "soldiers"],
+      ["units", "oppunits", "soldiers", "oppsoldiers"],
+      ["units", "myunits", "soldiers", "mysoldiers"]
     ],
     kings: [
       ["units"],
@@ -336,6 +340,7 @@ let game: Partial<AlgolGame> = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
+      soldiers: oldUnitLayers.soldiers,
       mysoldiers: oldUnitLayers.oppsoldiers,
       oppsoldiers: oldUnitLayers.mysoldiers,
       mykings: oldUnitLayers.oppkings,
@@ -360,7 +365,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.mysoldiers).length !== 0
@@ -404,6 +409,7 @@ let game: Partial<AlgolGame> = {
       units: {},
       myunits: {},
       oppunits: {},
+      soldiers: {},
       mysoldiers: {},
       oppsoldiers: {},
       mykings: {},
@@ -452,6 +458,7 @@ let game: Partial<AlgolGame> = {
       units: {},
       myunits: {},
       oppunits: {},
+      soldiers: {},
       mysoldiers: {},
       oppsoldiers: {},
       mykings: {},
@@ -543,14 +550,16 @@ let game: Partial<AlgolGame> = {
     return UNITLAYERS.mykings[MARKS.selectunit]
       ? collapseContent({
           line: [
-            { text: "Select a square closer to home to move your" },
+            { select: "Select" },
+            { text: "a square closer to home to move your" },
             { unittype: ["king", 2] },
             { text: "to" }
           ]
         })
       : collapseContent({
           line: [
-            { text: "Select a square closer to the enemy lines to move your" },
+            { select: "Select" },
+            { text: "a square closer to the enemy lines to move your" },
             { unittype: ["pawn", 2] },
             { text: "to" }
           ]

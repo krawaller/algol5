@@ -23,3 +23,7 @@ export interface AlgolContentText {
 export interface AlgolContentLine<Cmnd, Pos> {
   line: AlgolContent<Cmnd, Pos>[];
 }
+
+export interface AlgolContentSelect {
+  select: string;
+}

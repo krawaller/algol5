@@ -1,9 +1,10 @@
-import { ShoveoffInstructions } from './_types';
+import { ShoveoffInstructions } from "./_types";
 
 const shoveoffInstructions: ShoveoffInstructions = {
   startTurn: {
     line: [
-      "Select where to shove in",
+      "Select",
+      "where to shove in",
       {
         ifelse: [
           { same: [{ sizeof: "myunits" }, 7] },

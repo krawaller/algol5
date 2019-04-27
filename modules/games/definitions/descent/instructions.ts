@@ -1,8 +1,8 @@
-import { DescentInstructions } from './_types';
+import { DescentInstructions } from "./_types";
 
 const descentInstructions: DescentInstructions = {
-  startTurn: "Select a unit to move and dig with",
-  selectunit: "Select where to move this unit",
+  startTurn: { line: ["Select", "a unit to move and dig with"] },
+  selectunit: { line: ["Select", "where to move this unit"] },
   selectmovetarget: {
     line: [
       "Press",
@@ -37,7 +37,7 @@ const descentInstructions: DescentInstructions = {
       "selectmovetarget"
     ]
   },
-  move: "Now select an empty neighbouring square to dig",
+  move: { line: ["Now", "select", "an empty neighbouring square to dig"] },
   selectdigtarget: {
     ifelse: [
       { anyat: ["rooks", "selectdigtarget"] },

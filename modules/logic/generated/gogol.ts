@@ -121,10 +121,13 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
   game.instruction.startTurn1 = step => {
     let TURN = step.TURN;
     return TURN > 2
-      ? { text: "Select a unit to move" }
+      ? collapseContent({
+          line: [{ select: "Select" }, { text: "a unit to move" }]
+        })
       : collapseContent({
           line: [
-            { text: "Select where to deploy your" },
+            { select: "Select" },
+            { text: "where to deploy your" },
             { unittype: ["king", 1] }
           ]
         });
@@ -479,7 +482,8 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     return UNITLAYERS.kings[MARKS.selectunit]
       ? collapseContent({
           line: [
-            { text: "Select where to" },
+            { select: "Select" },
+            { text: "where to" },
             collapseContent({
               line: [
                 Object.keys(ARTIFACTS.kingwalk).length !== 0
@@ -522,7 +526,8 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         })
       : collapseContent({
           line: [
-            { text: "Select where to move" },
+            { select: "Select" },
+            { text: "where to move" },
             Object.keys(ARTIFACTS.jumptargets).length !== 0
               ? { text: "or jump" }
               : undefined,
@@ -734,10 +739,13 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
   game.instruction.startTurn2 = step => {
     let TURN = step.TURN;
     return TURN > 2
-      ? { text: "Select a unit to move" }
+      ? collapseContent({
+          line: [{ select: "Select" }, { text: "a unit to move" }]
+        })
       : collapseContent({
           line: [
-            { text: "Select where to deploy your" },
+            { select: "Select" },
+            { text: "where to deploy your" },
             { unittype: ["king", 2] }
           ]
         });
@@ -1120,7 +1128,8 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     return UNITLAYERS.kings[MARKS.selectunit]
       ? collapseContent({
           line: [
-            { text: "Select where to" },
+            { select: "Select" },
+            { text: "where to" },
             collapseContent({
               line: [
                 Object.keys(ARTIFACTS.kingwalk).length !== 0
@@ -1163,7 +1172,8 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         })
       : collapseContent({
           line: [
-            { text: "Select where to move" },
+            { select: "Select" },
+            { text: "where to move" },
             Object.keys(ARTIFACTS.jumptargets).length !== 0
               ? { text: "or jump" }
               : undefined,

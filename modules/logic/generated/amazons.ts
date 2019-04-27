@@ -60,7 +60,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn1 = step => {
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         { text: "a" },
         { unittype: ["queen", 1] },
         { text: "to move and fire with" }
@@ -196,7 +196,8 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select where to move the" },
+        { select: "Select" },
+        { text: "where to move the" },
         { pos: MARKS.selectunit },
         { unittype: ["queen", 1] }
       ]
@@ -296,7 +297,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn2 = step => {
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         { text: "a" },
         { unittype: ["queen", 2] },
         { text: "to move and fire with" }
@@ -451,7 +452,8 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select where to move the" },
+        { select: "Select" },
+        { text: "where to move the" },
         { pos: MARKS.selectunit },
         { unittype: ["queen", 2] }
       ]

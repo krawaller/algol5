@@ -8,7 +8,8 @@ import {
   AlgolContentUnitType,
   AlgolContentUnit,
   AlgolContentText,
-  AlgolContentLine
+  AlgolContentLine,
+  AlgolContentSelect
 } from "./content.interfaces";
 
 export type AlgolContent<Cmnd, Pos> =
@@ -18,5 +19,6 @@ export type AlgolContent<Cmnd, Pos> =
   | AlgolContentUnitType
   | AlgolContentText
   | AlgolContentLine<Cmnd, Pos>
+  | AlgolContentSelect
   | undefined
   | ["defaultEndTurnInstruction"];

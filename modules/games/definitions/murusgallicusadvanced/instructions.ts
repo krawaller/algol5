@@ -1,9 +1,10 @@
-import { MurusgallicusadvancedInstructions } from './_types';
+import { MurusgallicusadvancedInstructions } from "./_types";
 
 const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
   startTurn: {
     line: [
-      "Select a",
+      "Select",
+      "a",
       {
         orlist: [
           { if: [{ notempty: "mytowers" }, "rook"] },
@@ -79,7 +80,8 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
   },
   selectcatapult: {
     line: [
-      "Select where to fire the top section of your",
+      "Select",
+      "where to fire the top section of your",
       "selectcatapult",
       "queen"
     ]

@@ -1,17 +1,18 @@
-import { ThreemusketeersInstructions } from './_types';
+import { ThreemusketeersInstructions } from "./_types";
 
 const threemusketeersInstructions: ThreemusketeersInstructions = {
   startTurn: {
     playercase: [
-      { line: ["Select which", "king", "to move"] },
-      { line: ["Select which", "pawn", "to move"] }
+      { line: ["Select", "which", "king", "to move"] },
+      { line: ["Select", "which", "pawn", "to move"] }
     ]
   },
   selectunit: {
     playercase: [
       {
         line: [
-          "Select a",
+          "Select",
+          "a",
           "pawn",
           "adjacent to the",
           "selectunit",
@@ -21,7 +22,8 @@ const threemusketeersInstructions: ThreemusketeersInstructions = {
       },
       {
         line: [
-          "Select an empty space adjacent to the",
+          "Select",
+          "an empty space adjacent to the",
           "selectunit",
           "pawn",
           "to move to"

@@ -4,8 +4,8 @@ const serauqsInstructions: SerauqsInstructions = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 2] },
-      { line: ["Select which", "pawn", "or", "king", "to move"] },
-      { line: ["Select which", "pawn", "to promote"] }
+      { line: ["Select", "which", "pawn", "or", "king", "to move"] },
+      { line: ["Select", "which", "pawn", "to promote"] }
     ]
   },
   selectunit: {
@@ -13,7 +13,8 @@ const serauqsInstructions: SerauqsInstructions = {
       { morethan: [["turn"], 2] },
       {
         line: [
-          "Select where to",
+          "Select",
+          "where to",
           "move",
           "the",
           { unitat: "selectunit" },

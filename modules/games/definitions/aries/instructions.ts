@@ -1,8 +1,8 @@
-import { AriesInstructions } from './_types';
+import { AriesInstructions } from "./_types";
 
 const ariesInstructions: AriesInstructions = {
-  startTurn: { line: ["Select a", "rook", "to move"] },
-  selectunit: { line: ["Select where to move your", "selectunit", "rook"] },
+  startTurn: { line: ["Select", "a", "rook", "to move"] },
+  selectunit: { line: ["Select", "where to move your", "selectunit", "rook"] },
   selectmovetarget: {
     line: [
       "Press",

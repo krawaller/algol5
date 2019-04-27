@@ -1,7 +1,7 @@
 import { TransetInstructions } from "./_types";
 
 const transetInstructions: TransetInstructions = {
-  startTurn: { line: ["Select a unit to move"] },
+  startTurn: { line: ["Select", "a unit to move"] },
   selectunit: {
     line: [
       "Select",
@@ -49,7 +49,8 @@ const transetInstructions: TransetInstructions = {
       },
       {
         line: [
-          "Select where the enemy",
+          "Select",
+          "where the enemy",
           { unitat: "selectmovetarget" },
           "at",
           "selectmovetarget",
@@ -82,7 +83,8 @@ const transetInstructions: TransetInstructions = {
   },
   selectswapunit: {
     line: [
-      "Select a neighbouring square for",
+      "Select",
+      "a neighbouring square for",
       "selectunit",
       "to step to. The",
       "selectswapunit",

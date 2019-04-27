@@ -75,8 +75,18 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
     return Object.keys(UNITLAYERS.neutralunits).length === 0
-      ? { text: "Select any square to place the first unit of the game" }
-      : { text: "Select which neutral unit to take over" };
+      ? collapseContent({
+          line: [
+            { select: "Select" },
+            { text: "any square to place the first unit of the game" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { select: "Select" },
+            { text: "which neutral unit to take over" }
+          ]
+        });
   };
   game.action.uphill1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -576,8 +586,18 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
     return Object.keys(UNITLAYERS.neutralunits).length === 0
-      ? { text: "Select any square to place the first unit of the game" }
-      : { text: "Select which neutral unit to take over" };
+      ? collapseContent({
+          line: [
+            { select: "Select" },
+            { text: "any square to place the first unit of the game" }
+          ]
+        })
+      : collapseContent({
+          line: [
+            { select: "Select" },
+            { text: "which neutral unit to take over" }
+          ]
+        });
   };
   game.newBattle = () => {
     return game.action.startTurn1({

@@ -6,7 +6,11 @@ import {
   AlgolContentLineAnon
 } from "./content.anon";
 
-import { AlgolContentText, AlgolContentUnitType } from "./content.interfaces";
+import {
+  AlgolContentText,
+  AlgolContentUnitType,
+  AlgolContentSelect
+} from "./content.interfaces";
 
 export function isAlgolContentCmnd(
   expr: AlgolContentAnon
@@ -42,4 +46,10 @@ export function isAlgolContentLine(
   expr: AlgolContentAnon
 ): expr is AlgolContentLineAnon {
   return (expr as AlgolContentLineAnon).line !== undefined;
+}
+
+export function isAlgolContentSelect(
+  expr: AlgolContentAnon
+): expr is AlgolContentSelect {
+  return (expr as AlgolContentSelect).select !== undefined;
 }

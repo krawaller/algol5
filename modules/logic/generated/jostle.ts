@@ -62,7 +62,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn1 = step => {
-    return { text: "Select which unit to jostle!" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "which unit to jostle!" }]
+    });
   };
   game.action.jostle1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -171,7 +173,9 @@ let game: Partial<AlgolGame> = {
             Object.keys(ARTIFACTS.initialfriend).length -
             Object.keys(ARTIFACTS.initialenemy).length
         },
-        { text: ". Select a higher value square to jostle to" }
+        { text: "." },
+        { select: "Select" },
+        { text: "a higher value square to jostle to" }
       ]
     });
   };
@@ -292,7 +296,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn2 = step => {
-    return { text: "Select which unit to jostle!" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "which unit to jostle!" }]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = deduceInitialUnitData({
@@ -462,7 +468,9 @@ let game: Partial<AlgolGame> = {
             Object.keys(ARTIFACTS.initialfriend).length -
             Object.keys(ARTIFACTS.initialenemy).length
         },
-        { text: ". Select a higher value square to jostle to" }
+        { text: "." },
+        { select: "Select" },
+        { text: "a higher value square to jostle to" }
       ]
     });
   };

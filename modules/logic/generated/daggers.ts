@@ -71,7 +71,8 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn1 = step => {
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         { unittype: ["bishop", 1] },
         { text: "or" },
         { unittype: ["king", 1] },
@@ -215,7 +216,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select where to move the" },
+        { select: "Select" },
+        { text: "where to move the" },
         { pos: MARKS.selectunit },
         {
           unit: [
@@ -332,7 +334,8 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn2 = step => {
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         { unittype: ["bishop", 2] },
         { text: "or" },
         { unittype: ["king", 2] },
@@ -507,7 +510,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select where to move the" },
+        { select: "Select" },
+        { text: "where to move the" },
         { pos: MARKS.selectunit },
         {
           unit: [

@@ -1,8 +1,8 @@
-import { AmazonsInstructions } from './_types';
+import { AmazonsInstructions } from "./_types";
 
 const amazonsInstructions: AmazonsInstructions = {
   startTurn: { line: ["Select", "a", "queen", "to move and fire with"] },
-  selectunit: { line: ["Select where to move the", "selectunit", "queen"] },
+  selectunit: { line: ["Select", "where to move the", "selectunit", "queen"] },
   selectmovetarget: {
     line: [
       "Press",

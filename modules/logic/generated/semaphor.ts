@@ -67,7 +67,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.units).length !== 12
@@ -342,7 +342,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.units).length !== 12

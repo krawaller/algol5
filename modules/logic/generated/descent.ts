@@ -76,7 +76,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn1 = step => {
-    return { text: "Select a unit to move and dig with" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "a unit to move and dig with" }]
+    });
   };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -166,7 +168,13 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.move1 = step => {
-    return { text: "Now select an empty neighbouring square to dig" };
+    return collapseContent({
+      line: [
+        { text: "Now" },
+        { select: "select" },
+        { text: "an empty neighbouring square to dig" }
+      ]
+    });
   };
   game.action.dig1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -301,7 +309,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.selectunit1 = step => {
-    return { text: "Select where to move this unit" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "where to move this unit" }]
+    });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -442,7 +452,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn2 = step => {
-    return { text: "Select a unit to move and dig with" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "a unit to move and dig with" }]
+    });
   };
   game.newBattle = () => {
     let UNITDATA = deduceInitialUnitData({
@@ -569,7 +581,13 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.move2 = step => {
-    return { text: "Now select an empty neighbouring square to dig" };
+    return collapseContent({
+      line: [
+        { text: "Now" },
+        { select: "select" },
+        { text: "an empty neighbouring square to dig" }
+      ]
+    });
   };
   game.action.dig2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
@@ -704,7 +722,9 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.selectunit2 = step => {
-    return { text: "Select where to move this unit" };
+    return collapseContent({
+      line: [{ select: "Select" }, { text: "where to move this unit" }]
+    });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };

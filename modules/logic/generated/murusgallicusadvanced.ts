@@ -94,7 +94,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.mytowers).length !== 0
@@ -549,7 +550,7 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         collapseContent({
           line: [
             Object.keys(ARTIFACTS.movetargets).length !== 0
@@ -747,7 +748,8 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select where to fire the top section of your" },
+        { select: "Select" },
+        { text: "where to fire the top section of your" },
         { pos: MARKS.selectcatapult },
         { unittype: ["queen", 1] }
       ]
@@ -890,7 +892,8 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.mytowers).length !== 0
@@ -1377,7 +1380,7 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select" },
+        { select: "Select" },
         collapseContent({
           line: [
             Object.keys(ARTIFACTS.movetargets).length !== 0
@@ -1575,7 +1578,8 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select where to fire the top section of your" },
+        { select: "Select" },
+        { text: "where to fire the top section of your" },
         { pos: MARKS.selectcatapult },
         { unittype: ["queen", 2] }
       ]

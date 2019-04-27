@@ -1,7 +1,7 @@
-import { JostleInstructions } from './_types';
+import { JostleInstructions } from "./_types";
 
 const jostleInstructions: JostleInstructions = {
-  startTurn: "Select which unit to jostle!",
+  startTurn: { line: ["Select", "which unit to jostle!"] },
   selectunit: {
     line: [
       "This unit neighbours",
@@ -14,7 +14,9 @@ const jostleInstructions: JostleInstructions = {
           minus: [{ sizeof: "initialfriend" }, { sizeof: "initialenemy" }]
         }
       },
-      ". Select a higher value square to jostle to"
+      ".",
+      "Select",
+      "a higher value square to jostle to"
     ]
   },
   selectmovetarget: {

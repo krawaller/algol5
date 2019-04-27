@@ -1,8 +1,8 @@
-import { OrthokonInstructions } from './_types';
+import { OrthokonInstructions } from "./_types";
 
 const orthokonInstructions: OrthokonInstructions = {
-  startTurn: { line: ["Select which", "pawn", "to move"] },
-  selectunit: { line: ["Select where to move the", "selectunit", "pawn"] },
+  startTurn: { line: ["Select", "which", "pawn", "to move"] },
+  selectunit: { line: ["Select", "where to move the", "selectunit", "pawn"] },
   selectmovetarget: {
     line: [
       "Press",

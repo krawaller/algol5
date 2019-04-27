@@ -67,7 +67,8 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn1 = step => {
     return collapseContent({
       line: [
-        { text: "Select which" },
+        { select: "Select" },
+        { text: "which" },
         { unittype: ["king", 1] },
         { text: "to move" }
       ]
@@ -169,7 +170,8 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select a" },
+        { select: "Select" },
+        { text: "a" },
         { unittype: ["pawn", 1] },
         { text: "adjacent to the" },
         { pos: MARKS.selectunit },
@@ -246,7 +248,8 @@ let game: Partial<AlgolGame> = {
   game.instruction.startTurn2 = step => {
     return collapseContent({
       line: [
-        { text: "Select which" },
+        { select: "Select" },
+        { text: "which" },
         { unittype: ["pawn", 2] },
         { text: "to move" }
       ]
@@ -387,7 +390,8 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     return collapseContent({
       line: [
-        { text: "Select an empty space adjacent to the" },
+        { select: "Select" },
+        { text: "an empty space adjacent to the" },
         { pos: MARKS.selectunit },
         { unittype: ["pawn", 2] },
         { text: "to move to" }

@@ -1,10 +1,11 @@
-import { KickrunInstructions } from './_types';
+import { KickrunInstructions } from "./_types";
 
 const kickrunInstructions: KickrunInstructions = {
-  startTurn: "Select which unit to move",
+  startTurn: { line: ["Select", "which unit to move"] },
   selectunit: {
     line: [
-      "Select where to move your",
+      "Select",
+      "where to move your",
       "selectunit",
       { ifelse: [{ anyat: ["runners", "selectunit"] }, "bishop", "pawn"] }
     ]

@@ -7,6 +7,7 @@ import {
   isAlgolInstrVal,
   isAlgolInstrPluralize,
   isAlgolInstrUnitAt,
+  isAlgolInstrUnitType,
   isAlgolInstrPos,
   isAlgolIcon
 } from "../../../../types";
@@ -113,6 +114,10 @@ function executeInstructionInner(
   }
   if (isAlgolInstrPos(instr)) {
     return `{ pos: ${exprParser.pos(instr.pos)} }`;
+  }
+  if (isAlgolInstrUnitType(instr)) {
+    const [group, owner] = instr.unittype;
+    return `{ unittype: ["${gameDef.graphics.icons[group]}", ${owner}] }`;
   }
   throw new Error("Unknown instruction: " + JSON.stringify(instr));
   return "";

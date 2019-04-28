@@ -97,3 +97,7 @@ export interface AlgolInstrLine<
 > {
   line: AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
 }
+
+export interface AlgolInstrUnitType<Unit> {
+  unittype: [Unit, 0 | 1 | 2];
+}

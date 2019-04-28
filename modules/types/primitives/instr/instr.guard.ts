@@ -5,7 +5,8 @@ import {
   AlgolInstrOrListAnon,
   AlgolInstrPluralizeAnon,
   AlgolInstrPosAnon,
-  AlgolInstrValAnon
+  AlgolInstrValAnon,
+  AlgolInstrUnitTypeAnon
 } from "./instr.anon";
 
 export function isAlgolInstrVal(
@@ -42,4 +43,10 @@ export function isAlgolInstrOrList(
   expr: AlgolInstrAnon
 ): expr is AlgolInstrOrListAnon {
   return (expr as AlgolInstrOrListAnon).orlist !== undefined;
+}
+
+export function isAlgolInstrUnitType(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrUnitTypeAnon {
+  return (expr as AlgolInstrUnitTypeAnon).unittype !== undefined;
 }

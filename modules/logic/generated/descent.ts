@@ -76,8 +76,35 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn1 = step => {
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
-      line: [{ select: "Select" }, { text: "a unit to move and dig with" }]
+      line: [
+        { select: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(UNITLAYERS.mypawns).length !== 0
+              ? { unittype: ["pawn", 1] }
+              : undefined,
+            Object.keys(UNITLAYERS.myknights).length !== 0
+              ? { unittype: ["knight", 1] }
+              : undefined,
+            Object.keys(UNITLAYERS.myrooks).length !== 0
+              ? { unittype: ["rook", 1] }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to move and dig with" }
+      ]
     });
   };
   game.action.move1 = step => {
@@ -172,7 +199,25 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Now" },
         { select: "select" },
-        { text: "an empty neighbouring square to dig" }
+        { text: "a neighbouring" },
+        collapseContent({
+          line: [
+            { unittype: ["rook", 0] },
+            { unittype: ["knight", 0] },
+            { unittype: ["pawn", 0] }
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to dig" }
       ]
     });
   };
@@ -309,8 +354,44 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.selectunit1 = step => {
+    let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
-      line: [{ select: "Select" }, { text: "where to move this unit" }]
+      line: [
+        { select: "Select" },
+        collapseContent({
+          line: [
+            !UNITLAYERS.mypawns[MARKS.selectunit]
+              ? { unittype: ["rook", 0] }
+              : undefined,
+            { unittype: ["knight", 0] },
+            !UNITLAYERS.myrooks[MARKS.selectunit]
+              ? { unittype: ["pawn", 0] }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to move" },
+        {
+          unit: [
+            { pawns: "pawn", knights: "knight", rooks: "rook" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to" }
+      ]
     });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
@@ -337,7 +418,16 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { pawns: "pawn", knights: "knight", rooks: "rook" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         (UNITLAYERS.units[MARKS.selectunit] || {}).group ===
         (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
           ? { text: "walk" }
@@ -345,8 +435,6 @@ let game: Partial<AlgolGame> = {
             UNITLAYERS.pawns[MARKS.selectmovetarget]
           ? { text: "descend" }
           : { text: "climb" },
-        { text: "from" },
-        { pos: MARKS.selectunit },
         { text: "to" },
         { pos: MARKS.selectmovetarget }
       ]
@@ -374,9 +462,21 @@ let game: Partial<AlgolGame> = {
           line: [
             { text: "Press" },
             { command: "dig" },
-            { text: "to lower" },
-            { pos: MARKS.selectdigtarget },
-            { text: "from level 3 to level 2" }
+            { text: "to turn" },
+            {
+              unit: [
+                { pawns: "pawn", knights: "knight", rooks: "rook" }[
+                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner as
+                  | 0
+                  | 1
+                  | 2,
+                MARKS.selectdigtarget
+              ]
+            },
+            { text: "to" },
+            { unittype: ["knight", 0] }
           ]
         })
       : UNITLAYERS.knights[MARKS.selectdigtarget]
@@ -384,9 +484,21 @@ let game: Partial<AlgolGame> = {
           line: [
             { text: "Press" },
             { command: "dig" },
-            { text: "to lower" },
-            { pos: MARKS.selectdigtarget },
-            { text: "from level 2 to level 1" }
+            { text: "to turn" },
+            {
+              unit: [
+                { pawns: "pawn", knights: "knight", rooks: "rook" }[
+                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner as
+                  | 0
+                  | 1
+                  | 2,
+                MARKS.selectdigtarget
+              ]
+            },
+            { text: "to" },
+            { unittype: ["pawn", 0] }
           ]
         })
       : collapseContent({
@@ -394,7 +506,18 @@ let game: Partial<AlgolGame> = {
             { text: "Press" },
             { command: "dig" },
             { text: "to destroy" },
-            { pos: MARKS.selectdigtarget }
+            {
+              unit: [
+                { pawns: "pawn", knights: "knight", rooks: "rook" }[
+                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner as
+                  | 0
+                  | 1
+                  | 2,
+                MARKS.selectdigtarget
+              ]
+            }
           ]
         });
   };
@@ -452,8 +575,35 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn2 = step => {
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
-      line: [{ select: "Select" }, { text: "a unit to move and dig with" }]
+      line: [
+        { select: "Select" },
+        collapseContent({
+          line: [
+            Object.keys(UNITLAYERS.mypawns).length !== 0
+              ? { unittype: ["pawn", 2] }
+              : undefined,
+            Object.keys(UNITLAYERS.myknights).length !== 0
+              ? { unittype: ["knight", 2] }
+              : undefined,
+            Object.keys(UNITLAYERS.myrooks).length !== 0
+              ? { unittype: ["rook", 2] }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to move and dig with" }
+      ]
     });
   };
   game.newBattle = () => {
@@ -585,7 +735,25 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Now" },
         { select: "select" },
-        { text: "an empty neighbouring square to dig" }
+        { text: "a neighbouring" },
+        collapseContent({
+          line: [
+            { unittype: ["rook", 0] },
+            { unittype: ["knight", 0] },
+            { unittype: ["pawn", 0] }
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to dig" }
       ]
     });
   };
@@ -722,8 +890,44 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.selectunit2 = step => {
+    let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
-      line: [{ select: "Select" }, { text: "where to move this unit" }]
+      line: [
+        { select: "Select" },
+        collapseContent({
+          line: [
+            !UNITLAYERS.mypawns[MARKS.selectunit]
+              ? { unittype: ["rook", 0] }
+              : undefined,
+            { unittype: ["knight", 0] },
+            !UNITLAYERS.myrooks[MARKS.selectunit]
+              ? { unittype: ["pawn", 0] }
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " or " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        }),
+        { text: "to move" },
+        {
+          unit: [
+            { pawns: "pawn", knights: "knight", rooks: "rook" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to" }
+      ]
     });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
@@ -750,7 +954,16 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { pawns: "pawn", knights: "knight", rooks: "rook" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         (UNITLAYERS.units[MARKS.selectunit] || {}).group ===
         (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
           ? { text: "walk" }
@@ -758,8 +971,6 @@ let game: Partial<AlgolGame> = {
             UNITLAYERS.pawns[MARKS.selectmovetarget]
           ? { text: "descend" }
           : { text: "climb" },
-        { text: "from" },
-        { pos: MARKS.selectunit },
         { text: "to" },
         { pos: MARKS.selectmovetarget }
       ]
@@ -787,9 +998,21 @@ let game: Partial<AlgolGame> = {
           line: [
             { text: "Press" },
             { command: "dig" },
-            { text: "to lower" },
-            { pos: MARKS.selectdigtarget },
-            { text: "from level 3 to level 2" }
+            { text: "to turn" },
+            {
+              unit: [
+                { pawns: "pawn", knights: "knight", rooks: "rook" }[
+                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner as
+                  | 0
+                  | 1
+                  | 2,
+                MARKS.selectdigtarget
+              ]
+            },
+            { text: "to" },
+            { unittype: ["knight", 0] }
           ]
         })
       : UNITLAYERS.knights[MARKS.selectdigtarget]
@@ -797,9 +1020,21 @@ let game: Partial<AlgolGame> = {
           line: [
             { text: "Press" },
             { command: "dig" },
-            { text: "to lower" },
-            { pos: MARKS.selectdigtarget },
-            { text: "from level 2 to level 1" }
+            { text: "to turn" },
+            {
+              unit: [
+                { pawns: "pawn", knights: "knight", rooks: "rook" }[
+                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner as
+                  | 0
+                  | 1
+                  | 2,
+                MARKS.selectdigtarget
+              ]
+            },
+            { text: "to" },
+            { unittype: ["pawn", 0] }
           ]
         })
       : collapseContent({
@@ -807,7 +1042,18 @@ let game: Partial<AlgolGame> = {
             { text: "Press" },
             { command: "dig" },
             { text: "to destroy" },
-            { pos: MARKS.selectdigtarget }
+            {
+              unit: [
+                { pawns: "pawn", knights: "knight", rooks: "rook" }[
+                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner as
+                  | 0
+                  | 1
+                  | 2,
+                MARKS.selectdigtarget
+              ]
+            }
           ]
         });
   };

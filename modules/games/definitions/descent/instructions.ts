@@ -1,13 +1,50 @@
 import { DescentInstructions } from "./_types";
 
 const descentInstructions: DescentInstructions = {
-  startTurn: { line: ["Select", "a unit to move and dig with"] },
-  selectunit: { line: ["Select", "where to move this unit"] },
+  startTurn: {
+    line: [
+      "Select",
+      {
+        orlist: [
+          { if: [{ notempty: "mypawns" }, "pawns"] },
+          { if: [{ notempty: "myknights" }, "knights"] },
+          { if: [{ notempty: "myrooks" }, "rooks"] }
+        ]
+      },
+      "to move and dig with"
+    ]
+  },
+  selectunit: {
+    line: [
+      "Select",
+      {
+        orlist: [
+          {
+            if: [
+              { noneat: ["mypawns", "selectunit"] },
+              { unittype: ["rooks", 0] }
+            ]
+          },
+          { unittype: ["knights", 0] },
+          {
+            if: [
+              { noneat: ["myrooks", "selectunit"] },
+              { unittype: ["pawns", 0] }
+            ]
+          }
+        ]
+      },
+      "to move",
+      { unitat: "selectunit" },
+      "to"
+    ]
+  },
   selectmovetarget: {
     line: [
       "Press",
       "move",
-      "to",
+      "to make",
+      { unitat: "selectunit" },
       {
         ifelse: [
           {
@@ -31,13 +68,25 @@ const descentInstructions: DescentInstructions = {
           }
         ]
       },
-      "from",
-      "selectunit",
       "to",
       "selectmovetarget"
     ]
   },
-  move: { line: ["Now", "select", "an empty neighbouring square to dig"] },
+  move: {
+    line: [
+      "Now",
+      "select",
+      "a neighbouring",
+      {
+        orlist: [
+          { unittype: ["rooks", 0] },
+          { unittype: ["knights", 0] },
+          { unittype: ["pawns", 0] }
+        ]
+      },
+      "to dig"
+    ]
+  },
   selectdigtarget: {
     ifelse: [
       { anyat: ["rooks", "selectdigtarget"] },
@@ -45,9 +94,10 @@ const descentInstructions: DescentInstructions = {
         line: [
           "Press",
           "dig",
-          "to lower",
-          "selectdigtarget",
-          "from level 3 to level 2"
+          "to turn",
+          { unitat: "selectdigtarget" },
+          "to",
+          { unittype: ["knights", 0] }
         ]
       },
       {
@@ -57,12 +107,15 @@ const descentInstructions: DescentInstructions = {
             line: [
               "Press",
               "dig",
-              "to lower",
-              "selectdigtarget",
-              "from level 2 to level 1"
+              "to turn",
+              { unitat: "selectdigtarget" },
+              "to",
+              { unittype: ["pawns", 0] }
             ]
           },
-          { line: ["Press", "dig", "to destroy", "selectdigtarget"] }
+          {
+            line: ["Press", "dig", "to destroy", { unitat: "selectdigtarget" }]
+          }
         ]
       }
     ]

@@ -7,7 +7,8 @@ import {
   isAlgolContentUnitType,
   isAlgolContentPos,
   isAlgolContentUnit,
-  isAlgolContentSelect
+  isAlgolContentSelect,
+  isAlgolContentPlayer
 } from "../../types";
 
 import { Icon } from "./Icon";
@@ -73,6 +74,13 @@ export const Content: React.FunctionComponent<ContentProps> = ({
       <Content callback={callback} content={{ pos }} />,
       <Content callback={callback} content={{ unittype: [icon, owner] }} />
     ];
+  }
+  if (isAlgolContentPlayer(content)) {
+    const { player } = content;
+    if (player === 1) {
+      return <span style={{ fontWeight: "bold", color: "red" }}>Player 1</span>;
+    }
+    return <span style={{ fontWeight: "bold", color: "blue" }}>Player 2</span>;
   }
   return null;
 };

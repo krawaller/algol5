@@ -9,7 +9,8 @@ import {
 import {
   AlgolContentText,
   AlgolContentUnitType,
-  AlgolContentSelect
+  AlgolContentSelect,
+  AlgolContentPlayer
 } from "./content.interfaces";
 
 export function isAlgolContentCmnd(
@@ -52,4 +53,10 @@ export function isAlgolContentSelect(
   expr: AlgolContentAnon
 ): expr is AlgolContentSelect {
   return (expr as AlgolContentSelect).select !== undefined;
+}
+
+export function isAlgolContentPlayer(
+  expr: AlgolContentAnon
+): expr is AlgolContentPlayer {
+  return (expr as AlgolContentPlayer).player !== undefined;
 }

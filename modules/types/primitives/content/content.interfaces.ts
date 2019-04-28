@@ -27,3 +27,7 @@ export interface AlgolContentLine<Cmnd, Pos> {
 export interface AlgolContentSelect {
   select: string;
 }
+
+export interface AlgolContentPlayer {
+  player: 1 | 2;
+}

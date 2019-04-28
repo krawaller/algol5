@@ -11,7 +11,7 @@ storiesOf("Tester", module).add("Test games", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   return (
     <Wrapper>
-      <Tester api={APIs[gameId]} />
+      <Tester key={gameId} api={APIs[gameId]} />
     </Wrapper>
   );
 });

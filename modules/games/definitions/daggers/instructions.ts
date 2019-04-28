@@ -1,38 +1,55 @@
 import { DaggersInstructions } from "./_types";
 
 const daggersInstructions: DaggersInstructions = {
-  startTurn: { line: ["Select", "a", "bishop", "or", "king", "to move"] },
+  startTurn: { line: ["Select", "a", "daggers", "or", "crowns", "to move"] },
   selectunit: {
     line: [
       "Select",
-      "where to move the",
-      "selectunit",
-      { unitat: "selectunit" }
+      {
+        ifelse: [
+          { anyat: ["mycrowns", "selectunit"] },
+          {
+            line: ["an empty neighbour to move", { unitat: "selectunit" }, "to"]
+          },
+          { line: ["where to slide", { unitat: "selectunit" }] }
+        ]
+      }
     ]
   },
   selectmovetarget: {
     line: [
       "Press",
       "move",
-      "to go",
+      "to make",
+      { unitat: "selectunit" },
       {
         ifelse: [
-          { higher: ["selectmovetarget", "selectunit"] },
-          "uphill",
-          { if: [{ higher: ["selectunit", "selectmovetarget"] }, "downhill"] }
+          { anyat: ["mycrowns", "selectunit"] },
+          "go",
+          {
+            line: [
+              "slide",
+              {
+                ifelse: [
+                  { higher: ["selectmovetarget", "selectunit"] },
+                  "uphill",
+                  {
+                    if: [
+                      { higher: ["selectunit", "selectmovetarget"] },
+                      "downhill"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
         ]
       },
-      "from",
-      "selectunit",
       {
         ifelse: [
           { anyat: ["units", "selectmovetarget"] },
           {
-            line: [
-              "and kill the enemy",
-              { unitat: "selectmovetarget" },
-              "selectmovetarget"
-            ]
+            line: ["and kill", { unitat: "selectmovetarget" }]
           },
           { line: ["to", "selectmovetarget"] }
         ]

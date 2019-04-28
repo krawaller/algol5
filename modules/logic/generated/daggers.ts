@@ -217,17 +217,42 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move the" },
-        { pos: MARKS.selectunit },
-        {
-          unit: [
-            { daggers: "bishop", crowns: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
-            MARKS.selectunit
-          ]
-        }
+        UNITLAYERS.mycrowns[MARKS.selectunit]
+          ? collapseContent({
+              line: [
+                { text: "an empty neighbour to move" },
+                {
+                  unit: [
+                    { daggers: "bishop", crowns: "king" }[
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectunit
+                  ]
+                },
+                { text: "to" }
+              ]
+            })
+          : collapseContent({
+              line: [
+                { text: "where to slide" },
+                {
+                  unit: [
+                    { daggers: "bishop", crowns: "king" }[
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectunit
+                  ]
+                }
+              ]
+            })
       ]
     });
   };
@@ -250,19 +275,34 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go" },
-        BOARD.board[MARKS.selectmovetarget].y > BOARD.board[MARKS.selectunit].y
-          ? { text: "uphill" }
-          : BOARD.board[MARKS.selectunit].y >
-            BOARD.board[MARKS.selectmovetarget].y
-          ? { text: "downhill" }
-          : undefined,
-        { text: "from" },
-        { pos: MARKS.selectunit },
+        { text: "to make" },
+        {
+          unit: [
+            { daggers: "bishop", crowns: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        UNITLAYERS.mycrowns[MARKS.selectunit]
+          ? { text: "go" }
+          : collapseContent({
+              line: [
+                { text: "slide" },
+                BOARD.board[MARKS.selectmovetarget].y >
+                BOARD.board[MARKS.selectunit].y
+                  ? { text: "uphill" }
+                  : BOARD.board[MARKS.selectunit].y >
+                    BOARD.board[MARKS.selectmovetarget].y
+                  ? { text: "downhill" }
+                  : undefined
+              ]
+            }),
         UNITLAYERS.units[MARKS.selectmovetarget]
           ? collapseContent({
               line: [
-                { text: "and kill the enemy" },
+                { text: "and kill" },
                 {
                   unit: [
                     { daggers: "bishop", crowns: "king" }[
@@ -274,8 +314,7 @@ let game: Partial<AlgolGame> = {
                       | 2,
                     MARKS.selectmovetarget
                   ]
-                },
-                { pos: MARKS.selectmovetarget }
+                }
               ]
             })
           : collapseContent({
@@ -511,17 +550,42 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move the" },
-        { pos: MARKS.selectunit },
-        {
-          unit: [
-            { daggers: "bishop", crowns: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
-            MARKS.selectunit
-          ]
-        }
+        UNITLAYERS.mycrowns[MARKS.selectunit]
+          ? collapseContent({
+              line: [
+                { text: "an empty neighbour to move" },
+                {
+                  unit: [
+                    { daggers: "bishop", crowns: "king" }[
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectunit
+                  ]
+                },
+                { text: "to" }
+              ]
+            })
+          : collapseContent({
+              line: [
+                { text: "where to slide" },
+                {
+                  unit: [
+                    { daggers: "bishop", crowns: "king" }[
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectunit
+                  ]
+                }
+              ]
+            })
       ]
     });
   };
@@ -544,19 +608,34 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go" },
-        BOARD.board[MARKS.selectmovetarget].y > BOARD.board[MARKS.selectunit].y
-          ? { text: "uphill" }
-          : BOARD.board[MARKS.selectunit].y >
-            BOARD.board[MARKS.selectmovetarget].y
-          ? { text: "downhill" }
-          : undefined,
-        { text: "from" },
-        { pos: MARKS.selectunit },
+        { text: "to make" },
+        {
+          unit: [
+            { daggers: "bishop", crowns: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        UNITLAYERS.mycrowns[MARKS.selectunit]
+          ? { text: "go" }
+          : collapseContent({
+              line: [
+                { text: "slide" },
+                BOARD.board[MARKS.selectmovetarget].y >
+                BOARD.board[MARKS.selectunit].y
+                  ? { text: "uphill" }
+                  : BOARD.board[MARKS.selectunit].y >
+                    BOARD.board[MARKS.selectmovetarget].y
+                  ? { text: "downhill" }
+                  : undefined
+              ]
+            }),
         UNITLAYERS.units[MARKS.selectmovetarget]
           ? collapseContent({
               line: [
-                { text: "and kill the enemy" },
+                { text: "and kill" },
                 {
                   unit: [
                     { daggers: "bishop", crowns: "king" }[
@@ -568,8 +647,7 @@ let game: Partial<AlgolGame> = {
                       | 2,
                     MARKS.selectmovetarget
                   ]
-                },
-                { pos: MARKS.selectmovetarget }
+                }
               ]
             })
           : collapseContent({

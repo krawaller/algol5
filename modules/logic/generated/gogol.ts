@@ -122,7 +122,13 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     let TURN = step.TURN;
     return TURN > 2
       ? collapseContent({
-          line: [{ select: "Select" }, { text: "a unit to move" }]
+          line: [
+            { select: "Select" },
+            { unittype: ["king", 1] },
+            { text: "or" },
+            { unittype: ["pawn", 1] },
+            { text: "to move" }
+          ]
         })
       : collapseContent({
           line: [
@@ -378,11 +384,15 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     };
   };
   game.instruction.selectkingdeploy1 = step => {
+    let MARKS = step.MARKS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "deploy" },
-        { text: "to place your king here" }
+        { text: "to place your" },
+        { unittype: ["king", 1] },
+        { text: "at" },
+        { pos: MARKS.selectkingdeploy }
       ]
     });
   };
@@ -558,12 +568,22 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
   };
   game.instruction.selectmovetarget1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
+        { text: "to make" },
+        {
+          unit: [
+            { kings: "king", soldiers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go" },
         { text: "to" },
         { pos: MARKS.selectmovetarget }
       ]
@@ -614,11 +634,19 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
       line: [
         { text: "Press" },
         { command: "jump" },
-        { text: "to jump from" },
-        { pos: MARKS.selectunit },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { kings: "king", soldiers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "jump to" },
         { pos: MARKS.selectjumptarget },
-        { text: "and kill the" },
+        { text: "and kill" },
         {
           unit: [
             { kings: "king", soldiers: "pawn" }[
@@ -628,9 +656,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
               .owner as 0 | 1 | 2,
             Object.keys(ARTIFACTS.splashed)[0]
           ]
-        },
-        { text: "at" },
-        { pos: Object.keys(ARTIFACTS.splashed)[0] }
+        }
       ]
     });
   };
@@ -740,7 +766,13 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     let TURN = step.TURN;
     return TURN > 2
       ? collapseContent({
-          line: [{ select: "Select" }, { text: "a unit to move" }]
+          line: [
+            { select: "Select" },
+            { unittype: ["king", 2] },
+            { text: "or" },
+            { unittype: ["pawn", 2] },
+            { text: "to move" }
+          ]
         })
       : collapseContent({
           line: [
@@ -1024,11 +1056,15 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     };
   };
   game.instruction.selectkingdeploy2 = step => {
+    let MARKS = step.MARKS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "deploy" },
-        { text: "to place your king here" }
+        { text: "to place your" },
+        { unittype: ["king", 2] },
+        { text: "at" },
+        { pos: MARKS.selectkingdeploy }
       ]
     });
   };
@@ -1204,12 +1240,22 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
   };
   game.instruction.selectmovetarget2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
+        { text: "to make" },
+        {
+          unit: [
+            { kings: "king", soldiers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go" },
         { text: "to" },
         { pos: MARKS.selectmovetarget }
       ]
@@ -1260,11 +1306,19 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
       line: [
         { text: "Press" },
         { command: "jump" },
-        { text: "to jump from" },
-        { pos: MARKS.selectunit },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { kings: "king", soldiers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "jump to" },
         { pos: MARKS.selectjumptarget },
-        { text: "and kill the" },
+        { text: "and kill" },
         {
           unit: [
             { kings: "king", soldiers: "pawn" }[
@@ -1274,9 +1328,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
               .owner as 0 | 1 | 2,
             Object.keys(ARTIFACTS.splashed)[0]
           ]
-        },
-        { text: "at" },
-        { pos: Object.keys(ARTIFACTS.splashed)[0] }
+        }
       ]
     });
   };

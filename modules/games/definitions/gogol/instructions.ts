@@ -4,11 +4,20 @@ const gogolInstructions: GogolInstructions = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 2] },
-      { line: ["Select", "a unit to move"] },
-      { line: ["Select", "where to deploy your", "king"] }
+      { line: ["Select", "kings", "or", "soldiers", "to move"] },
+      { line: ["Select", "where to deploy your", "kings"] }
     ]
   },
-  selectkingdeploy: { line: ["Press", "deploy", "to place your king here"] },
+  selectkingdeploy: {
+    line: [
+      "Press",
+      "deploy",
+      "to place your",
+      "kings",
+      "at",
+      "selectkingdeploy"
+    ]
+  },
   selectunit: {
     ifelse: [
       { anyat: ["kings", "selectunit"] },
@@ -23,10 +32,12 @@ const gogolInstructions: GogolInstructions = {
             ]
           },
           "your",
-          "king",
+          "kings",
           {
             if: [
-              { overlaps: ["nokings", { union: ["kingwalk", "jumptargets"] }] },
+              {
+                overlaps: ["nokings", { union: ["kingwalk", "jumptargets"] }]
+              },
               "without making a forbidden configuration"
             ]
           }
@@ -53,22 +64,21 @@ const gogolInstructions: GogolInstructions = {
     line: [
       "Press",
       "jump",
-      "to jump from",
-      "selectunit",
-      "to",
+      "to make",
+      { unitat: "selectunit" },
+      "jump to",
       "selectjumptarget",
-      "and kill the",
-      { unitat: { onlyin: "splashed" } },
-      "at",
-      { pos: { onlyin: "splashed" } }
+      "and kill",
+      { unitat: { onlyin: "splashed" } }
     ]
   },
   selectmovetarget: {
     line: [
       "Press",
       "move",
-      "to go from",
-      "selectunit",
+      "to make",
+      { unitat: "selectunit" },
+      "go",
       "to",
       "selectmovetarget"
     ]

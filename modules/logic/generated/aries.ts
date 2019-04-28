@@ -20,7 +20,11 @@ const diagDirs = [2, 4, 6, 8];
 let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
 {
   const groupLayers = {
-    soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
+    soldiers: [
+      ["units", "soldiers"],
+      ["units", "myunits", "soldiers"],
+      ["units", "oppunits", "soldiers"]
+    ]
   };
   const TERRAIN = terrainLayers(
     8,
@@ -33,7 +37,8 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let UNITLAYERS = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
-      oppunits: oldUnitLayers.myunits
+      oppunits: oldUnitLayers.myunits,
+      soldiers: oldUnitLayers.soldiers
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -55,7 +60,6 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "a" },
         { unittype: ["rook", 1] },
         { text: "to move" }
       ]
@@ -105,7 +109,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         };
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -196,12 +200,20 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
   };
   game.instruction.selectunit1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move your" },
-        { pos: MARKS.selectunit },
-        { unittype: ["rook", 1] }
+        { text: "where to move" },
+        {
+          unit: [
+            { soldiers: "rook" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        }
       ]
     });
   };
@@ -268,20 +280,40 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
   game.instruction.selectmovetarget1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to move your" },
-        { pos: MARKS.selectunit },
-        { unittype: ["rook", 1] },
+        { text: "to move" },
+        {
+          unit: [
+            { soldiers: "rook" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         { text: "to" },
         { pos: MARKS.selectmovetarget },
         Object.keys(ARTIFACTS.squished).length !== 0
           ? collapseContent({
               line: [
-                { text: "and squash the enemy at" },
-                { pos: Object.keys(ARTIFACTS.squished)[0] }
+                { text: "and squash" },
+                {
+                  unit: [
+                    { soldiers: "rook" }[
+                      (
+                        UNITLAYERS.units[Object.keys(ARTIFACTS.squished)[0]] ||
+                        {}
+                      ).group
+                    ],
+                    (UNITLAYERS.units[Object.keys(ARTIFACTS.squished)[0]] || {})
+                      .owner as 0 | 1 | 2,
+                    Object.keys(ARTIFACTS.squished)[0]
+                  ]
+                }
               ]
             })
           : undefined
@@ -291,7 +323,11 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
 }
 {
   const groupLayers = {
-    soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+    soldiers: [
+      ["units", "soldiers"],
+      ["units", "oppunits", "soldiers"],
+      ["units", "myunits", "soldiers"]
+    ]
   };
   const TERRAIN = terrainLayers(
     8,
@@ -304,7 +340,8 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let UNITLAYERS = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
-      oppunits: oldUnitLayers.myunits
+      oppunits: oldUnitLayers.myunits,
+      soldiers: oldUnitLayers.soldiers
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -326,7 +363,6 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "a" },
         { unittype: ["rook", 2] },
         { text: "to move" }
       ]
@@ -336,7 +372,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let UNITDATA = deduceInitialUnitData({
       soldiers: { "1": [{ rect: ["a1", "d4"] }], "2": [{ rect: ["e5", "h8"] }] }
     });
-    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -395,7 +431,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         };
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -486,12 +522,20 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
   };
   game.instruction.selectunit2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move your" },
-        { pos: MARKS.selectunit },
-        { unittype: ["rook", 2] }
+        { text: "where to move" },
+        {
+          unit: [
+            { soldiers: "rook" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        }
       ]
     });
   };
@@ -558,20 +602,40 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
   game.instruction.selectmovetarget2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to move your" },
-        { pos: MARKS.selectunit },
-        { unittype: ["rook", 2] },
+        { text: "to move" },
+        {
+          unit: [
+            { soldiers: "rook" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         { text: "to" },
         { pos: MARKS.selectmovetarget },
         Object.keys(ARTIFACTS.squished).length !== 0
           ? collapseContent({
               line: [
-                { text: "and squash the enemy at" },
-                { pos: Object.keys(ARTIFACTS.squished)[0] }
+                { text: "and squash" },
+                {
+                  unit: [
+                    { soldiers: "rook" }[
+                      (
+                        UNITLAYERS.units[Object.keys(ARTIFACTS.squished)[0]] ||
+                        {}
+                      ).group
+                    ],
+                    (UNITLAYERS.units[Object.keys(ARTIFACTS.squished)[0]] || {})
+                      .owner as 0 | 1 | 2,
+                    Object.keys(ARTIFACTS.squished)[0]
+                  ]
+                }
               ]
             })
           : undefined

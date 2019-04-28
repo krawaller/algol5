@@ -1,4 +1,6 @@
-export function defaultInstruction(plr) {
+import { AlgolContentAnon } from "../../types";
+
+export function defaultInstruction(plr): AlgolContentAnon {
   return {
     line: [
       { text: "Press " },

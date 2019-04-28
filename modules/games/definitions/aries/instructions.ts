@@ -1,21 +1,20 @@
 import { AriesInstructions } from "./_types";
 
 const ariesInstructions: AriesInstructions = {
-  startTurn: { line: ["Select", "a", "rook", "to move"] },
-  selectunit: { line: ["Select", "where to move your", "selectunit", "rook"] },
+  startTurn: { line: ["Select", "soldiers", "to move"] },
+  selectunit: { line: ["Select", "where to move", { unitat: "selectunit" }] },
   selectmovetarget: {
     line: [
       "Press",
       "move",
-      "to move your",
-      "selectunit",
-      "rook",
+      "to move",
+      { unitat: "selectunit" },
       "to",
       "selectmovetarget",
       {
         if: [
           { notempty: "squished" },
-          { line: ["and squash the enemy at", { pos: { onlyin: "squished" } }] }
+          { line: ["and squash", { unitat: { onlyin: "squished" } }] }
         ]
       }
     ]

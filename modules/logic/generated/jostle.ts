@@ -63,7 +63,12 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.startTurn1 = step => {
     return collapseContent({
-      line: [{ select: "Select" }, { text: "which unit to jostle!" }]
+      line: [
+        { select: "Select" },
+        { text: "which" },
+        { unittype: ["pawn", 1] },
+        { text: "to jostle" }
+      ]
     });
   };
   game.action.jostle1 = step => {
@@ -147,9 +152,20 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectunit1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "This unit neighbours" },
+        {
+          unit: [
+            { checkers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "neighbours" },
         collapseContent({
           line: [
             { text: Object.keys(ARTIFACTS.initialfriend).length },
@@ -224,6 +240,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.selectmovetarget1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "From" },
@@ -255,8 +272,16 @@ let game: Partial<AlgolGame> = {
         },
         { text: ". Press" },
         { command: "jostle" },
-        { text: "to move from" },
-        { pos: MARKS.selectunit },
+        { text: "to move" },
+        {
+          unit: [
+            { checkers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         { text: "to" },
         { pos: MARKS.selectmovetarget }
       ]
@@ -297,7 +322,12 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.startTurn2 = step => {
     return collapseContent({
-      line: [{ select: "Select" }, { text: "which unit to jostle!" }]
+      line: [
+        { select: "Select" },
+        { text: "which" },
+        { unittype: ["pawn", 2] },
+        { text: "to jostle" }
+      ]
     });
   };
   game.newBattle = () => {
@@ -442,9 +472,20 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectunit2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
+    let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "This unit neighbours" },
+        {
+          unit: [
+            { checkers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "neighbours" },
         collapseContent({
           line: [
             { text: Object.keys(ARTIFACTS.initialfriend).length },
@@ -519,6 +560,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.selectmovetarget2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "From" },
@@ -550,8 +592,16 @@ let game: Partial<AlgolGame> = {
         },
         { text: ". Press" },
         { command: "jostle" },
-        { text: "to move from" },
-        { pos: MARKS.selectunit },
+        { text: "to move" },
+        {
+          unit: [
+            { checkers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         { text: "to" },
         { pos: MARKS.selectmovetarget }
       ]

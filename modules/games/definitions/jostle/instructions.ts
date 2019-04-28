@@ -1,10 +1,11 @@
 import { JostleInstructions } from "./_types";
 
 const jostleInstructions: JostleInstructions = {
-  startTurn: { line: ["Select", "which unit to jostle!"] },
+  startTurn: { line: ["Select", "which", "checkers", "to jostle"] },
   selectunit: {
     line: [
-      "This unit neighbours",
+      { unitat: "selectunit" },
+      "neighbours",
       { pluralize: [{ sizeof: "initialfriend" }, "friend", "friends"] },
       "and",
       { pluralize: [{ sizeof: "initialenemy" }, "enemy", "enemies"] },
@@ -44,8 +45,8 @@ const jostleInstructions: JostleInstructions = {
       },
       ". Press",
       "jostle",
-      "to move from",
-      "selectunit",
+      "to move",
+      { unitat: "selectunit" },
       "to",
       "selectmovetarget"
     ]

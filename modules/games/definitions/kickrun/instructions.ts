@@ -1,14 +1,9 @@
 import { KickrunInstructions } from "./_types";
 
 const kickrunInstructions: KickrunInstructions = {
-  startTurn: { line: ["Select", "which unit to move"] },
+  startTurn: { line: ["Select", "runners", "or", "sidekickers", "to move"] },
   selectunit: {
-    line: [
-      "Select",
-      "where to move your",
-      "selectunit",
-      { ifelse: [{ anyat: ["runners", "selectunit"] }, "bishop", "pawn"] }
-    ]
+    line: ["Select", "where to move", { unitat: "selectunit" }]
   },
   selectmovetarget: {
     line: [
@@ -19,23 +14,18 @@ const kickrunInstructions: KickrunInstructions = {
         ifelse: [
           { anyat: ["runners", "selectunit"] },
           {
-            line: [
-              "slide your bishop from",
-              "selectunit",
-              "to",
-              "selectmovetarget"
-            ]
+            line: ["slide", { unitat: "selectunit" }, "to", "selectmovetarget"]
           },
           {
             line: [
-              "move your pawn from",
-              "selectunit",
+              { text: "move" },
+              { unitat: "selectunit" },
               "to",
-              "selectmovetarget",
               {
-                if: [
+                ifelse: [
                   { anyat: ["units", "selectmovetarget"] },
-                  "and capture the enemy there"
+                  { line: ["capture", { unitat: "selectmovetarget" }] },
+                  "selectmovetarget"
                 ]
               }
             ]

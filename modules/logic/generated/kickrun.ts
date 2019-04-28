@@ -64,7 +64,13 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.startTurn1 = step => {
     return collapseContent({
-      line: [{ select: "Select" }, { text: "which unit to move" }]
+      line: [
+        { select: "Select" },
+        { unittype: ["bishop", 1] },
+        { text: "or" },
+        { unittype: ["pawn", 1] },
+        { text: "to move" }
+      ]
     });
   };
   game.action.move1 = step => {
@@ -181,11 +187,16 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move your" },
-        { pos: MARKS.selectunit },
-        UNITLAYERS.runners[MARKS.selectunit]
-          ? { unittype: ["bishop", 1] }
-          : { unittype: ["pawn", 1] }
+        { text: "where to move" },
+        {
+          unit: [
+            { runners: "bishop", sidekickers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        }
       ]
     });
   };
@@ -212,21 +223,57 @@ let game: Partial<AlgolGame> = {
         UNITLAYERS.runners[MARKS.selectunit]
           ? collapseContent({
               line: [
-                { text: "slide your bishop from" },
-                { pos: MARKS.selectunit },
+                { text: "slide" },
+                {
+                  unit: [
+                    { runners: "bishop", sidekickers: "pawn" }[
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectunit
+                  ]
+                },
                 { text: "to" },
                 { pos: MARKS.selectmovetarget }
               ]
             })
           : collapseContent({
               line: [
-                { text: "move your pawn from" },
-                { pos: MARKS.selectunit },
+                { text: ["move"] },
+                {
+                  unit: [
+                    { runners: "bishop", sidekickers: "pawn" }[
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectunit
+                  ]
+                },
                 { text: "to" },
-                { pos: MARKS.selectmovetarget },
                 UNITLAYERS.units[MARKS.selectmovetarget]
-                  ? { text: "and capture the enemy there" }
-                  : undefined
+                  ? collapseContent({
+                      line: [
+                        { text: "capture" },
+                        {
+                          unit: [
+                            { runners: "bishop", sidekickers: "pawn" }[
+                              (UNITLAYERS.units[MARKS.selectmovetarget] || {})
+                                .group
+                            ],
+                            (UNITLAYERS.units[MARKS.selectmovetarget] || {})
+                              .owner as 0 | 1 | 2,
+                            MARKS.selectmovetarget
+                          ]
+                        }
+                      ]
+                    })
+                  : { pos: MARKS.selectmovetarget }
               ]
             })
       ]
@@ -275,7 +322,13 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.startTurn2 = step => {
     return collapseContent({
-      line: [{ select: "Select" }, { text: "which unit to move" }]
+      line: [
+        { select: "Select" },
+        { unittype: ["bishop", 2] },
+        { text: "or" },
+        { unittype: ["pawn", 2] },
+        { text: "to move" }
+      ]
     });
   };
   game.newBattle = () => {
@@ -418,11 +471,16 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move your" },
-        { pos: MARKS.selectunit },
-        UNITLAYERS.runners[MARKS.selectunit]
-          ? { unittype: ["bishop", 2] }
-          : { unittype: ["pawn", 2] }
+        { text: "where to move" },
+        {
+          unit: [
+            { runners: "bishop", sidekickers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        }
       ]
     });
   };
@@ -449,21 +507,57 @@ let game: Partial<AlgolGame> = {
         UNITLAYERS.runners[MARKS.selectunit]
           ? collapseContent({
               line: [
-                { text: "slide your bishop from" },
-                { pos: MARKS.selectunit },
+                { text: "slide" },
+                {
+                  unit: [
+                    { runners: "bishop", sidekickers: "pawn" }[
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectunit
+                  ]
+                },
                 { text: "to" },
                 { pos: MARKS.selectmovetarget }
               ]
             })
           : collapseContent({
               line: [
-                { text: "move your pawn from" },
-                { pos: MARKS.selectunit },
+                { text: ["move"] },
+                {
+                  unit: [
+                    { runners: "bishop", sidekickers: "pawn" }[
+                      (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectunit
+                  ]
+                },
                 { text: "to" },
-                { pos: MARKS.selectmovetarget },
                 UNITLAYERS.units[MARKS.selectmovetarget]
-                  ? { text: "and capture the enemy there" }
-                  : undefined
+                  ? collapseContent({
+                      line: [
+                        { text: "capture" },
+                        {
+                          unit: [
+                            { runners: "bishop", sidekickers: "pawn" }[
+                              (UNITLAYERS.units[MARKS.selectmovetarget] || {})
+                                .group
+                            ],
+                            (UNITLAYERS.units[MARKS.selectmovetarget] || {})
+                              .owner as 0 | 1 | 2,
+                            MARKS.selectmovetarget
+                          ]
+                        }
+                      ]
+                    })
+                  : { pos: MARKS.selectmovetarget }
               ]
             })
       ]

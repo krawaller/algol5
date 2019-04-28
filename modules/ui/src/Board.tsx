@@ -1,6 +1,6 @@
 import * as React from "react";
 import { GameId } from "../../games/dist/list";
-import { AlgolUnitState, AlgolPosition } from "../../types";
+import { AlgolUnitState, AlgolPosition, AlgolIcon } from "../../types";
 
 import { Piece } from "./Piece";
 
@@ -51,7 +51,10 @@ export const Board: React.FunctionComponent<BoardProps> = ({
         {Object.keys(units).map(id => (
           <Piece
             key={id}
-            {...units[id]}
+            from={units[id].from}
+            icon={units[id].icon as AlgolIcon}
+            owner={units[id].owner}
+            pos={units[id].pos}
             height={height}
             width={width}
             selected={marks.indexOf(units[id].pos) !== -1}

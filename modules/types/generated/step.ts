@@ -29,6 +29,7 @@ export type AlgolUnitState = {
   pos: string;
   id: string;
   group: string;
+  icon?: string;
   owner: 0 | 1 | 2;
   from?: string;
 };

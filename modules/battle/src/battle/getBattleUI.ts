@@ -1,6 +1,7 @@
 import { getBattleInstruction } from "./helpers/getBattleInstruction";
 
 import { AlgolBattleUI, AlgolGame, AlgolBattle } from "../../../types";
+import dataURIs from "../../../graphics/dist/svgDataURIs";
 
 const identifyMark = /^[a-z][0-9]+$/;
 
@@ -29,7 +30,20 @@ export function getBattleUI(
     winner: battle.winner,
     turnNumber: battle.turnNumber,
     gameId: game.gameId,
-    board: battle.state.board,
+    board: {
+      ...battle.state.board,
+      units: Object.keys(battle.state.board.units).reduce(
+        (mem, id) => ({
+          ...mem,
+          [id]: {
+            ...battle.state.board.units[id],
+            icon:
+              dataURIs[game.gameId].icons[battle.state.board.units[id].group]
+          }
+        }),
+        {}
+      )
+    },
     endTurn: !!currentStep.LINKS.endTurn,
     potentialMarks,
     commands,

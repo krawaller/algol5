@@ -120,6 +120,7 @@ ${ret}
     JSON.stringify({
       height,
       width,
+      icons: def.graphics.icons,
       dataURI: svgToMiniDataURI(ret)
     })
   );

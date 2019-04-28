@@ -9,7 +9,7 @@ type PieceProps = {
   /** The name of the current position */
   pos: string;
   /** Which type of piece it is */
-  group: AlgolIcon;
+  icon: AlgolIcon;
   /** Which player controls the piece */
   owner: 0 | 1 | 2;
   /** The height of current board */
@@ -25,7 +25,7 @@ type PieceProps = {
  */
 export const Piece: React.FunctionComponent<PieceProps> = ({
   owner,
-  group,
+  icon,
   height,
   width,
   pos,
@@ -40,7 +40,7 @@ export const Piece: React.FunctionComponent<PieceProps> = ({
         pointerEvents: "none"
       }}
     >
-      <Icon icon={group} owner={owner} wiggle={selected} />
+      <Icon icon={icon} owner={owner} wiggle={selected} />
     </div>
   );
 };

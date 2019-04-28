@@ -178,7 +178,10 @@ export type ${capId}AiTerrain = ${
       : "never"
   };
 
-export type ${capId}Position = ${boardPositions(def.board)
+export type ${capId}Position = ${boardPositions(
+    def.board.height,
+    def.board.width
+  )
     .map(t => `"${t}"`)
     .join(" | ")};
 `;

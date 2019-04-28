@@ -1,23 +1,20 @@
-import { AmazonsFlow } from './_types';
+import { AmazonsFlow } from "./_types";
 
 const amazonsFlow: AmazonsFlow = {
   startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",
-      runGenerator: "findtargets",
+      runGenerator: "findmovetargets",
       link: "selectmovetarget"
     },
-    selectmovetarget: { from: "targets", link: "move" },
-    selectfiretarget: { from: "targets", link: "fire" }
+    selectmovetarget: { from: "movetargets", link: "move" },
+    selectfiretarget: { from: "firetargets", link: "fire" }
   },
   commands: {
     move: {
-      applyEffects: [
-        { moveat: ["selectunit", "selectmovetarget"] },
-        { setturnpos: ["movedto", "selectmovetarget"] }
-      ],
-      runGenerator: "findtargets",
+      applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
+      runGenerator: "findfiretargets",
       link: "selectfiretarget"
     },
     fire: {
@@ -26,7 +23,7 @@ const amazonsFlow: AmazonsFlow = {
           "selectfiretarget",
           "fires",
           0,
-          { from: { pos: { turnpos: "movedto" } } }
+          { from: { pos: { onlyin: "firedfrom" } } }
         ]
       },
       link: "endTurn"

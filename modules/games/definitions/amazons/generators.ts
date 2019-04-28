@@ -1,12 +1,22 @@
-import { AmazonsGenerators } from './_types';
+import { AmazonsGenerators } from "./_types";
 
 const amazonsGenerators: AmazonsGenerators = {
-  findtargets: {
+  findmovetargets: {
     type: "walker",
     dirs: "rose",
-    start: { ifactionelse: ["selectunit", "selectunit", "selectmovetarget"] },
+    start: "selectunit",
     blocks: "units",
-    draw: { steps: { tolayer: "targets" } }
+    draw: { steps: { tolayer: "movetargets" } }
+  },
+  findfiretargets: {
+    type: "walker",
+    dirs: "rose",
+    start: "selectmovetarget",
+    blocks: "units",
+    draw: {
+      start: { tolayer: "firedfrom" },
+      steps: { tolayer: "firetargets" }
+    }
   }
 };
 

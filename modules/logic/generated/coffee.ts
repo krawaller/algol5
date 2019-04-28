@@ -33,9 +33,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units", "neutralunits"],
-      ["units", "myunits"],
-      ["units", "oppunits"]
+      ["units", "neutralunits", "soldiers"],
+      ["units", "myunits", "soldiers"],
+      ["units", "oppunits", "soldiers"]
     ],
     markers: [
       ["units", "neutralunits", "markers"],
@@ -50,6 +50,7 @@ let game: Partial<AlgolGame> = {
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
       neutralunits: oldUnitLayers.neutralunits,
+      soldiers: oldUnitLayers.soldiers,
       markers: oldUnitLayers.markers
     };
     let LINKS: AlgolStepLinks = {
@@ -78,13 +79,17 @@ let game: Partial<AlgolGame> = {
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "any square to place the first unit of the game" }
+            { text: "any square to place the first" },
+            { unittype: ["pawn", 1] },
+            { text: "of the game" }
           ]
         })
       : collapseContent({
           line: [
             { select: "Select" },
-            { text: "which neutral unit to take over" }
+            { unittype: ["pawn", 0] },
+            { text: "to turn into" },
+            { unittype: ["pawn", 1] }
           ]
         });
   };
@@ -130,6 +135,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
+      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -220,6 +226,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
+      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -310,6 +317,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
+      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -400,6 +408,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
+      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -544,9 +553,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units", "neutralunits"],
-      ["units", "oppunits"],
-      ["units", "myunits"]
+      ["units", "neutralunits", "soldiers"],
+      ["units", "oppunits", "soldiers"],
+      ["units", "myunits", "soldiers"]
     ],
     markers: [
       ["units", "neutralunits", "markers"],
@@ -561,6 +570,7 @@ let game: Partial<AlgolGame> = {
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
       neutralunits: oldUnitLayers.neutralunits,
+      soldiers: oldUnitLayers.soldiers,
       markers: oldUnitLayers.markers
     };
     let LINKS: AlgolStepLinks = {
@@ -589,13 +599,17 @@ let game: Partial<AlgolGame> = {
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "any square to place the first unit of the game" }
+            { text: "any square to place the first" },
+            { unittype: ["pawn", 2] },
+            { text: "of the game" }
           ]
         })
       : collapseContent({
           line: [
             { select: "Select" },
-            { text: "which neutral unit to take over" }
+            { unittype: ["pawn", 0] },
+            { text: "to turn into" },
+            { unittype: ["pawn", 2] }
           ]
         });
   };
@@ -609,6 +623,7 @@ let game: Partial<AlgolGame> = {
         myunits: {},
         oppunits: {},
         neutralunits: {},
+        soldiers: {},
         markers: {}
       }
     });
@@ -655,6 +670,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
+      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -745,6 +761,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
+      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -835,6 +852,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
+      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -925,6 +943,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
+      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {

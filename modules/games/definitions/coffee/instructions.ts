@@ -4,8 +4,22 @@ const coffeeInstructions: CoffeeInstructions = {
   startTurn: {
     ifelse: [
       { isempty: "neutralunits" },
-      { line: ["Select", "any square to place the first unit of the game"] },
-      { line: ["Select", "which neutral unit to take over"] }
+      {
+        line: [
+          "Select",
+          "any square to place the first",
+          "soldiers",
+          "of the game"
+        ]
+      },
+      {
+        line: [
+          "Select",
+          { unittype: ["markers", 0] },
+          "to turn into",
+          "soldiers"
+        ]
+      }
     ]
   },
   selectdrop: {

@@ -8,6 +8,7 @@ import {
   AlgolInstrValAnon,
   AlgolInstrUnitTypeAnon
 } from "./instr.anon";
+import { AlgolInstrText } from "./instr.interfaces";
 
 export function isAlgolInstrVal(
   expr: AlgolInstrAnon
@@ -49,4 +50,8 @@ export function isAlgolInstrUnitType(
   expr: AlgolInstrAnon
 ): expr is AlgolInstrUnitTypeAnon {
   return (expr as AlgolInstrUnitTypeAnon).unittype !== undefined;
+}
+
+export function isAlgolInstrText(expr: AlgolInstrAnon): expr is AlgolInstrText {
+  return (expr as AlgolInstrText).text !== undefined;
 }

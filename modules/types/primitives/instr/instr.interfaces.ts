@@ -101,3 +101,7 @@ export interface AlgolInstrLine<
 export interface AlgolInstrUnitType<Unit> {
   unittype: [Unit, 0 | 1 | 2];
 }
+
+export interface AlgolInstrText {
+  text: string;
+}

@@ -59,5 +59,5 @@ export type AlgolInstrInner<
   | AlgolInstrUnitAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolInstrLine<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolInstrOrList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolInstrUnitType<Unit>
+  | AlgolInstrUnitType<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolInstrText;

@@ -118,7 +118,9 @@ function executeInstructionInner(
   }
   if (isAlgolInstrUnitType(instr)) {
     const [group, owner] = instr.unittype;
-    return `{ unittype: ["${gameDef.graphics.icons[group]}", ${owner}] }`;
+    return `{ unittype: ["${gameDef.graphics.icons[group]}", ${exprParser.val(
+      owner
+    )}] }`;
   }
   if (isAlgolInstrText(instr)) {
     const { text } = instr;

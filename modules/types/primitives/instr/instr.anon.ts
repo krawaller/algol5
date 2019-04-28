@@ -31,4 +31,14 @@ export type AlgolInstrPosAnon = AlgolInstrPos<s, s, s, s, s, s, s, s>;
 export type AlgolInstrUnitAtAnon = AlgolInstrUnitAt<s, s, s, s, s, s, s, s>;
 export type AlgolInstrLineAnon = AlgolInstrLine<s, s, s, s, s, s, s, s, s>;
 export type AlgolInstrOrListAnon = AlgolInstrOrList<s, s, s, s, s, s, s, s, s>;
-export type AlgolInstrUnitTypeAnon = AlgolInstrUnitType<s>;
+export type AlgolInstrUnitTypeAnon = AlgolInstrUnitType<
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s
+>;

@@ -5,8 +5,7 @@ const atriumInstructions: AtriumInstructions = {
   selectunit: {
     line: [
       "Select",
-      "an orthogonal empty neighbour to move the",
-      "selectunit",
+      "orthogonal empty neighbour to move",
       { unitat: "selectunit" },
       "to"
     ]
@@ -15,8 +14,7 @@ const atriumInstructions: AtriumInstructions = {
     line: [
       "Press",
       "move",
-      "to walk the",
-      "selectunit",
+      "to walk",
       { unitat: "selectunit" },
       "to",
       "selectmovetarget"

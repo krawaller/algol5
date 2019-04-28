@@ -184,8 +184,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "an orthogonal empty neighbour to move the" },
-        { pos: MARKS.selectunit },
+        { text: "orthogonal empty neighbour to move" },
         {
           unit: [
             { kings: "king", queens: "queen" }[
@@ -218,8 +217,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to walk the" },
-        { pos: MARKS.selectunit },
+        { text: "to walk" },
         {
           unit: [
             { kings: "king", queens: "queen" }[
@@ -423,8 +421,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "an orthogonal empty neighbour to move the" },
-        { pos: MARKS.selectunit },
+        { text: "orthogonal empty neighbour to move" },
         {
           unit: [
             { kings: "king", queens: "queen" }[
@@ -457,8 +454,7 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to walk the" },
-        { pos: MARKS.selectunit },
+        { text: "to walk" },
         {
           unit: [
             { kings: "king", queens: "queen" }[

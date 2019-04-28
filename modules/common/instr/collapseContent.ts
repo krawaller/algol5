@@ -3,7 +3,8 @@ import {
   isAlgolContentLine,
   isAlgolContentText,
   AlgolContentLineAnon,
-  AlgolContentText
+  AlgolContentText,
+  isAlgolContentSelect
 } from "../../types";
 
 const noSpacesBefore = /[,!\.? ]/;
@@ -55,6 +56,15 @@ export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
               (n < items.length - 1 ? " " : "")
             ).replace(/  /, " ")
           }
+        : i
+    );
+
+    // insert space at end of `select` if not followed by text
+    items = items.map((i, n) =>
+      isAlgolContentSelect(i) &&
+      n < items.length - 1 &&
+      !isAlgolContentText(items[n + 1])
+        ? { select: i.select + " " }
         : i
     );
 

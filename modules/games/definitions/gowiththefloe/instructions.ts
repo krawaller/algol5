@@ -1,10 +1,43 @@
 import { GowiththefloeInstructions } from "./_types";
 
 const gowiththefloeInstructions: GowiththefloeInstructions = {
-  startTurn: { line: ["Select", "a unit to move"] },
-  selectunit: { line: ["Select", "where to move"] },
-  selectmovetarget: { line: ["Press", "move", "to go here"] },
-  selecteattarget: { line: ["Press", "eat", "to, well, eat"] }
+  startTurn: {
+    line: ["Select", { playercase: ["seals", "bears"] }, "to move"]
+  },
+  selectunit: {
+    line: [
+      "Select",
+      "where to move",
+      { unitat: "selectunit" },
+      {
+        ifplayer: [
+          2,
+          { line: ["or a neighbouring", { unittype: ["seals", 1] }, "to eat"] }
+        ]
+      }
+    ]
+  },
+  selectmovetarget: {
+    line: [
+      "Press",
+      "move",
+      "to move the",
+      { unitat: "selectunit" },
+      "to",
+      "selectmovetarget"
+    ]
+  },
+  selecteattarget: {
+    line: [
+      "Press",
+      "eat",
+      "to make",
+      { unitat: "selectunit" },
+      "consume",
+      { unitat: "selecteattarget" },
+      ", removing both units from the battle"
+    ]
+  }
 };
 
 export default gowiththefloeInstructions;

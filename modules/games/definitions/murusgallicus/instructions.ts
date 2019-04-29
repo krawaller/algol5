@@ -1,7 +1,7 @@
 import { MurusgallicusInstructions } from "./_types";
 
 const murusgallicusInstructions: MurusgallicusInstructions = {
-  startTurn: { line: ["Select", "a", "rook", "to act with"] },
+  startTurn: { line: ["Select", "towers", "to act with"] },
   selecttower: {
     line: [
       "Select",
@@ -11,38 +11,62 @@ const murusgallicusInstructions: MurusgallicusInstructions = {
           {
             if: [
               { notempty: "killtargets" },
-              { line: ["an enemy", "pawn", "to kill"] }
+              {
+                line: [
+                  "a",
+                  { unittype: ["walls", { playercase: [2, 1] }] },
+                  "to kill"
+                ]
+              }
             ]
           }
         ]
       },
-      "for the",
-      "selecttower",
-      "rook"
+      "for",
+      { unitat: "selecttower" }
     ]
   },
   selectmove: {
     line: [
       "Press",
       "move",
-      "to overturn your",
-      "selecttower",
-      "rook",
-      "towards",
-      "selectmove"
+      "to overturn",
+      { unitat: "selecttower" },
+      {
+        andlist: [
+          {
+            if: [
+              { notempty: "madewalls" },
+              { line: ["creating", "walls", "at", { poslist: "madewalls" }] }
+            ]
+          },
+          {
+            if: [
+              { notempty: "madetowers" },
+              {
+                line: [
+                  "turning",
+                  "walls",
+                  "to",
+                  "towers",
+                  "at",
+                  { poslist: "madetowers" }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ]
   },
   selectkill: {
     line: [
       "Press",
       "kill",
-      "to make a section of the",
-      "selecttower",
-      "rook",
-      "crush the enemy",
-      "pawn",
-      "at",
-      "selectkill"
+      "to make a section of",
+      { unitat: "selecttower" },
+      "crush",
+      { unitat: "selectkill" }
     ]
   }
 };

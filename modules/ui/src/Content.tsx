@@ -31,9 +31,10 @@ export const Content: React.FunctionComponent<ContentProps> = ({
     return (
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          whiteSpace: "pre-wrap"
+          lineHeight: "2em"
+          // display: "flex",
+          // alignItems: "center",
+          // whiteSpace: "pre-wrap"
         }}
       >
         {content.line.map((c, n) => (
@@ -65,7 +66,17 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   }
   if (isAlgolContentPos(content)) {
     const { pos } = content;
-    return pos; // TODO - nice styling? meh, very rarely used, i think
+    return (
+      <span
+        style={{
+          backgroundColor: "#EEE",
+          padding: "3px",
+          border: "1px solid black"
+        }}
+      >
+        {pos}
+      </span>
+    );
   }
   if (isAlgolContentUnit(content)) {
     const [icon, owner, pos] = content.unit;

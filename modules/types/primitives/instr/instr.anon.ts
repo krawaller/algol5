@@ -9,7 +9,9 @@ import {
   AlgolInstrPos,
   AlgolInstrVal,
   AlgolInstrUnitType,
-  AlgolInstrPosList
+  AlgolInstrPosList,
+  AlgolInstrUnitList,
+  AlgolInstrUnitTypeSet
 } from "./instr.interfaces";
 
 type s = string;
@@ -57,3 +59,15 @@ export type AlgolInstrUnitTypeAnon = AlgolInstrUnitType<
 >;
 
 export type AlgolInstrPosListAnon = AlgolInstrPosList<s, s, s, s, s, s, s, s>;
+export type AlgolInstrUnitListAnon = AlgolInstrUnitList<s, s, s, s, s, s, s, s>;
+export type AlgolInstrUnitTypeSetAnon = AlgolInstrUnitTypeSet<
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s
+>;

@@ -20,6 +20,12 @@ type ContentProps = {
   callback: (action: string) => void;
 };
 
+const posStyles = {
+  backgroundColor: "#EEE",
+  padding: "3px",
+  border: "1px solid black"
+};
+
 /**
  * Displays some AlgolContent
  */
@@ -66,25 +72,16 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   }
   if (isAlgolContentPos(content)) {
     const { pos } = content;
-    return (
-      <span
-        style={{
-          backgroundColor: "#EEE",
-          padding: "3px",
-          border: "1px solid black"
-        }}
-      >
-        {pos}
-      </span>
-    );
+    return <span style={posStyles}>{pos}</span>;
   }
   if (isAlgolContentUnit(content)) {
     const [icon, owner, pos] = content.unit;
-    return [
-      "the ",
-      <Content callback={callback} content={{ pos }} />,
-      <Content callback={callback} content={{ unittype: [icon, owner] }} />
-    ];
+    return (
+      <span style={posStyles}>
+        {pos}{" "}
+        <Content callback={callback} content={{ unittype: [icon, owner] }} />
+      </span>
+    );
   }
   if (isAlgolContentPlayer(content)) {
     const { player } = content;

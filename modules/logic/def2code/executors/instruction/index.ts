@@ -12,7 +12,9 @@ import {
   isAlgolIcon,
   isAlgolInstrText,
   isAlgolInstrPosList,
-  isAlgolInstrAndList
+  isAlgolInstrAndList,
+  isAlgolInstrUnitList,
+  isAlgolInstrUnitTypeSet
 } from "../../../../types";
 
 import { executeExpression, makeParser } from "../";
@@ -145,6 +147,37 @@ function executeInstructionInner(
     const { poslist } = instr;
     const set = exprParser.set(poslist);
     return `collapseContent({ line: Object.keys(${set}).map(p => ({ pos: p })).reduce((mem, i, n, list) => {
+      mem.push(i);
+      if (n === list.length - 2){
+        mem.push({text: " and "});
+      } else if (n < list.length - 2){
+        mem.push({text: ", " });
+      }
+      return mem;
+    }, []) })`;
+  }
+  if (isAlgolInstrUnitList(instr)) {
+    const { unitlist } = instr;
+    const set = exprParser.set(unitlist);
+    return `collapseContent({ line: Object.keys(${set}).filter(p => UNITLAYERS.units[p]).map(p => ({ unit: [${JSON.stringify(
+      gameDef.graphics.icons
+    )}[UNITLAYERS.units[p].group], UNITLAYERS.units[p].owner, p] })).reduce((mem, i, n, list) => {
+      mem.push(i);
+      if (n === list.length - 2){
+        mem.push({text: " and "});
+      } else if (n < list.length - 2){
+        mem.push({text: ", " });
+      }
+      return mem;
+    }, []) })`;
+  }
+  if (isAlgolInstrUnitTypeSet(instr)) {
+    const [groupRaw, ownerRaw, setRaw] = instr.unittypeset;
+    const group = exprParser.val(groupRaw);
+    const icon = `${JSON.stringify(gameDef.graphics.icons)}[${group}]`;
+    const set = exprParser.set(setRaw);
+    const owner = exprParser.val(ownerRaw);
+    return `collapseContent({ line: Object.keys(${set}).map(p => ({ unit: [${icon}, ${owner}, p] })).reduce((mem, i, n, list) => {
       mem.push(i);
       if (n === list.length - 2){
         mem.push({text: " and "});

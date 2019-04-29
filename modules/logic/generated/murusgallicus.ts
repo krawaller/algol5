@@ -411,17 +411,22 @@ let game: Partial<AlgolGame> = {
             MARKS.selecttower
           ]
         },
+        { text: "," },
         collapseContent({
           line: [
             Object.keys(ARTIFACTS.madewalls).length !== 0
               ? collapseContent({
                   line: [
                     { text: "creating" },
-                    { unittype: ["pawn", 1] },
-                    { text: "at" },
                     collapseContent({
                       line: Object.keys(ARTIFACTS.madewalls)
-                        .map(p => ({ pos: p }))
+                        .map(p => ({
+                          unit: [
+                            { towers: "rook", walls: "pawn" }["walls"],
+                            1,
+                            p
+                          ]
+                        }))
                         .reduce((mem, i, n, list) => {
                           mem.push(i);
                           if (n === list.length - 2) {
@@ -439,13 +444,18 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "turning" },
-                    { unittype: ["pawn", 1] },
-                    { text: "to" },
-                    { unittype: ["rook", 1] },
-                    { text: "at" },
                     collapseContent({
                       line: Object.keys(ARTIFACTS.madetowers)
-                        .map(p => ({ pos: p }))
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            { towers: "rook", walls: "pawn" }[
+                              UNITLAYERS.units[p].group
+                            ],
+                            UNITLAYERS.units[p].owner as 0 | 1 | 2,
+                            p
+                          ]
+                        }))
                         .reduce((mem, i, n, list) => {
                           mem.push(i);
                           if (n === list.length - 2) {
@@ -455,7 +465,9 @@ let game: Partial<AlgolGame> = {
                           }
                           return mem;
                         }, [])
-                    })
+                    }),
+                    { text: "into" },
+                    { unittype: ["rook", 1] }
                   ]
                 })
               : undefined
@@ -931,17 +943,22 @@ let game: Partial<AlgolGame> = {
             MARKS.selecttower
           ]
         },
+        { text: "," },
         collapseContent({
           line: [
             Object.keys(ARTIFACTS.madewalls).length !== 0
               ? collapseContent({
                   line: [
                     { text: "creating" },
-                    { unittype: ["pawn", 2] },
-                    { text: "at" },
                     collapseContent({
                       line: Object.keys(ARTIFACTS.madewalls)
-                        .map(p => ({ pos: p }))
+                        .map(p => ({
+                          unit: [
+                            { towers: "rook", walls: "pawn" }["walls"],
+                            2,
+                            p
+                          ]
+                        }))
                         .reduce((mem, i, n, list) => {
                           mem.push(i);
                           if (n === list.length - 2) {
@@ -959,13 +976,18 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "turning" },
-                    { unittype: ["pawn", 2] },
-                    { text: "to" },
-                    { unittype: ["rook", 2] },
-                    { text: "at" },
                     collapseContent({
                       line: Object.keys(ARTIFACTS.madetowers)
-                        .map(p => ({ pos: p }))
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            { towers: "rook", walls: "pawn" }[
+                              UNITLAYERS.units[p].group
+                            ],
+                            UNITLAYERS.units[p].owner as 0 | 1 | 2,
+                            p
+                          ]
+                        }))
                         .reduce((mem, i, n, list) => {
                           mem.push(i);
                           if (n === list.length - 2) {
@@ -975,7 +997,9 @@ let game: Partial<AlgolGame> = {
                           }
                           return mem;
                         }, [])
-                    })
+                    }),
+                    { text: "into" },
+                    { unittype: ["rook", 2] }
                   ]
                 })
               : undefined

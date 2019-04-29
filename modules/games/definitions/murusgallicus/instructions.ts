@@ -32,26 +32,25 @@ const murusgallicusInstructions: MurusgallicusInstructions = {
       "move",
       "to overturn",
       { unitat: "selecttower" },
+      ",",
       {
         andlist: [
           {
             if: [
               { notempty: "madewalls" },
-              { line: ["creating", "walls", "at", { poslist: "madewalls" }] }
+              {
+                line: [
+                  "creating",
+                  { unittypeset: ["walls", ["player"], "madewalls"] }
+                ]
+              }
             ]
           },
           {
             if: [
               { notempty: "madetowers" },
               {
-                line: [
-                  "turning",
-                  "walls",
-                  "to",
-                  "towers",
-                  "at",
-                  { poslist: "madetowers" }
-                ]
+                line: ["turning", { unitlist: "madetowers" }, "into", "towers"]
               }
             ]
           }

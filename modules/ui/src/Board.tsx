@@ -57,7 +57,13 @@ export const Board: React.FunctionComponent<BoardProps> = ({
             pos={units[id].pos}
             height={height}
             width={width}
-            selected={marks.indexOf(units[id].pos) !== -1}
+            mode={
+              marks.indexOf(units[id].pos) !== -1
+                ? "selected"
+                : potentialMarks.indexOf(units[id].pos) !== -1
+                ? "available"
+                : "normal"
+            }
           />
         ))}
       </div>

@@ -6,8 +6,8 @@ type IconProps = {
   icon: AlgolIcon;
   /** Which player controls the piece */
   owner: 0 | 1 | 2;
-  /** Whether the icon should wiggle */
-  wiggle?: boolean;
+  /** Current state of the icon (decides animation) */
+  mode?: "normal" | "available" | "selected";
 };
 
 /**
@@ -16,7 +16,7 @@ type IconProps = {
 export const Icon: React.FunctionComponent<IconProps> = ({
   owner,
   icon,
-  wiggle
+  mode = "normal"
 }) => {
   return (
     <div
@@ -29,9 +29,16 @@ export const Icon: React.FunctionComponent<IconProps> = ({
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
+        style={{
+          transition: "transform 0.3s ease",
+          ...(mode === "available" && {
+            transform: "scale(1.3, 1.3)",
+            transformOrigin: "50% 50%"
+          })
+        }}
       >
         <g>
-          {wiggle && (
+          {mode === "selected" && (
             <animateTransform
               attributeName="transform"
               attributeType="XML"

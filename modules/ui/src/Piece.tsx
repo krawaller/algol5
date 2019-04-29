@@ -16,8 +16,8 @@ type PieceProps = {
   height: number;
   /** The width of current board */
   width: number;
-  /** Whether there is a mark on the same position */
-  selected?: boolean;
+  /** Current state of the piece (decides animation) */
+  mode?: "normal" | "available" | "selected";
 };
 
 /**
@@ -29,7 +29,7 @@ export const Piece: React.FunctionComponent<PieceProps> = ({
   height,
   width,
   pos,
-  selected
+  mode
 }) => {
   return (
     <div
@@ -40,7 +40,7 @@ export const Piece: React.FunctionComponent<PieceProps> = ({
         pointerEvents: "none"
       }}
     >
-      <Icon icon={icon} owner={owner} wiggle={selected} />
+      <Icon icon={icon} owner={owner} mode={mode} />
     </div>
   );
 };

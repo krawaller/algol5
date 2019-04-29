@@ -29,13 +29,15 @@ storiesOf("Board", module)
         unit1: {
           id: "unit1",
           pos: "b3",
-          group: "knight",
+          icon: "knight",
+          group: "whatev",
           owner: 1
         },
         unit2: {
           id: "unit2",
-          pos: "d6",
-          group: "pawn",
+          pos: "c4",
+          group: "whatev",
+          icon: "pawn",
           owner: 2
         }
       };

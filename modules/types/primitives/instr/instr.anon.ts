@@ -4,10 +4,12 @@ import {
   AlgolInstrLine,
   AlgolInstrUnitAt,
   AlgolInstrOrList,
+  AlgolInstrAndList,
   AlgolInstrPluralize,
   AlgolInstrPos,
   AlgolInstrVal,
-  AlgolInstrUnitType
+  AlgolInstrUnitType,
+  AlgolInstrPosList
 } from "./instr.interfaces";
 
 type s = string;
@@ -31,6 +33,17 @@ export type AlgolInstrPosAnon = AlgolInstrPos<s, s, s, s, s, s, s, s>;
 export type AlgolInstrUnitAtAnon = AlgolInstrUnitAt<s, s, s, s, s, s, s, s>;
 export type AlgolInstrLineAnon = AlgolInstrLine<s, s, s, s, s, s, s, s, s>;
 export type AlgolInstrOrListAnon = AlgolInstrOrList<s, s, s, s, s, s, s, s, s>;
+export type AlgolInstrAndListAnon = AlgolInstrAndList<
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s
+>;
 export type AlgolInstrUnitTypeAnon = AlgolInstrUnitType<
   s,
   s,
@@ -42,3 +55,5 @@ export type AlgolInstrUnitTypeAnon = AlgolInstrUnitType<
   s,
   s
 >;
+
+export type AlgolInstrPosListAnon = AlgolInstrPosList<s, s, s, s, s, s, s, s>;

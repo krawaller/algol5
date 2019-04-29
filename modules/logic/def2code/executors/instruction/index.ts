@@ -10,7 +10,9 @@ import {
   isAlgolInstrUnitType,
   isAlgolInstrPos,
   isAlgolIcon,
-  isAlgolInstrText
+  isAlgolInstrText,
+  isAlgolInstrPosList,
+  isAlgolInstrAndList
 } from "../../../../types";
 
 import { executeExpression, makeParser } from "../";
@@ -91,6 +93,19 @@ function executeInstructionInner(
       return mem;
     }, []) })`;
   }
+  if (isAlgolInstrAndList(instr)) {
+    return `collapseContent({ line: [ ${instr.andlist.map(
+      me
+    )} ].filter(i => !!i).reduce((mem, i, n, list) => {
+      mem.push(i);
+      if (n === list.length - 2){
+        mem.push({text: " and "});
+      } else if (n < list.length - 2){
+        mem.push({text: ", " });
+      }
+      return mem;
+    }, []) })`;
+  }
   if (isAlgolInstrVal(instr)) {
     return `{ text: ${exprParser.val(instr.value)} }`;
   }
@@ -125,6 +140,19 @@ function executeInstructionInner(
   if (isAlgolInstrText(instr)) {
     const { text } = instr;
     return `{ text: ["${text}"] }`;
+  }
+  if (isAlgolInstrPosList(instr)) {
+    const { poslist } = instr;
+    const set = exprParser.set(poslist);
+    return `collapseContent({ line: Object.keys(${set}).map(p => ({ pos: p })).reduce((mem, i, n, list) => {
+      mem.push(i);
+      if (n === list.length - 2){
+        mem.push({text: " and "});
+      } else if (n < list.length - 2){
+        mem.push({text: ", " });
+      }
+      return mem;
+    }, []) })`;
   }
   throw new Error("Unknown instruction: " + JSON.stringify(instr));
   return "";

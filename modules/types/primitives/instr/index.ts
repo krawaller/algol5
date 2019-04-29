@@ -6,11 +6,13 @@ import {
   AlgolInstrLine,
   AlgolInstrUnitAt,
   AlgolInstrOrList,
+  AlgolInstrAndList,
   AlgolInstrPluralize,
   AlgolInstrPos,
   AlgolInstrVal,
   AlgolInstrUnitType,
-  AlgolInstrText
+  AlgolInstrText,
+  AlgolInstrPosList
 } from "./instr.interfaces";
 
 import { AlgolIfableExpression } from "../../";
@@ -59,5 +61,7 @@ export type AlgolInstrInner<
   | AlgolInstrUnitAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolInstrLine<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolInstrOrList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrAndList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolInstrUnitType<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolInstrPosList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolInstrText;

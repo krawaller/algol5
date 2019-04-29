@@ -3,10 +3,12 @@ import {
   AlgolInstrLineAnon,
   AlgolInstrUnitAtAnon,
   AlgolInstrOrListAnon,
+  AlgolInstrAndListAnon,
   AlgolInstrPluralizeAnon,
   AlgolInstrPosAnon,
   AlgolInstrValAnon,
-  AlgolInstrUnitTypeAnon
+  AlgolInstrUnitTypeAnon,
+  AlgolInstrPosListAnon
 } from "./instr.anon";
 import { AlgolInstrText } from "./instr.interfaces";
 
@@ -46,6 +48,12 @@ export function isAlgolInstrOrList(
   return (expr as AlgolInstrOrListAnon).orlist !== undefined;
 }
 
+export function isAlgolInstrAndList(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrAndListAnon {
+  return (expr as AlgolInstrAndListAnon).andlist !== undefined;
+}
+
 export function isAlgolInstrUnitType(
   expr: AlgolInstrAnon
 ): expr is AlgolInstrUnitTypeAnon {
@@ -54,4 +62,10 @@ export function isAlgolInstrUnitType(
 
 export function isAlgolInstrText(expr: AlgolInstrAnon): expr is AlgolInstrText {
   return (expr as AlgolInstrText).text !== undefined;
+}
+
+export function isAlgolInstrPosList(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrPosListAnon {
+  return (expr as AlgolInstrPosListAnon).poslist !== undefined;
 }

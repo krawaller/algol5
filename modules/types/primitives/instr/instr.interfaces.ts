@@ -2,6 +2,7 @@ import { AlgolInstr } from "./";
 
 import { AlgolVal } from "../value";
 import { AlgolPos } from "../pos";
+import { AlgolSet } from "../set";
 
 export interface AlgolInstrPluralize<
   Btlp,
@@ -84,6 +85,20 @@ export interface AlgolInstrOrList<
   orlist: AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
 }
 
+export interface AlgolInstrAndList<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv,
+  Unit
+> {
+  andlist: AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
+}
+
 export interface AlgolInstrLine<
   Btlp,
   Btlv,
@@ -117,4 +132,17 @@ export interface AlgolInstrUnitType<
 
 export interface AlgolInstrText {
   text: string;
+}
+
+export interface AlgolInstrPosList<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  poslist: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }

@@ -196,12 +196,20 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectunit1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move the" },
-        { pos: MARKS.selectunit },
-        { unittype: ["queen", 1] }
+        { text: "where to move" },
+        {
+          unit: [
+            { queens: "queen", fires: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        }
       ]
     });
   };
@@ -224,13 +232,22 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectmovetarget1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { queens: "queen", fires: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go to" },
         { pos: MARKS.selectmovetarget }
       ]
     });
@@ -254,8 +271,22 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "fire" },
-        { text: "to destroy the square at" },
-        { pos: MARKS.selectfiretarget }
+        { text: "to spawn" },
+        collapseContent({
+          line: Object.keys({ [MARKS.selectfiretarget]: 1 })
+            .map(p => ({
+              unit: [{ queens: "queen", fires: "pawn" }["fires"], 0, p]
+            }))
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " and " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
       ]
     });
   };
@@ -452,12 +483,20 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectunit2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move the" },
-        { pos: MARKS.selectunit },
-        { unittype: ["queen", 2] }
+        { text: "where to move" },
+        {
+          unit: [
+            { queens: "queen", fires: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        }
       ]
     });
   };
@@ -480,13 +519,22 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectmovetarget2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { queens: "queen", fires: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go to" },
         { pos: MARKS.selectmovetarget }
       ]
     });
@@ -510,8 +558,22 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "fire" },
-        { text: "to destroy the square at" },
-        { pos: MARKS.selectfiretarget }
+        { text: "to spawn" },
+        collapseContent({
+          line: Object.keys({ [MARKS.selectfiretarget]: 1 })
+            .map(p => ({
+              unit: [{ queens: "queen", fires: "pawn" }["fires"], 0, p]
+            }))
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " and " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
       ]
     });
   };

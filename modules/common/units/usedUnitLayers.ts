@@ -18,7 +18,11 @@ export function usedUnitLayers(def: FullDefAnon): string[] {
           const isMorphRef =
             mom == 1 && ["morphat", "morphin"].includes(grandmom);
           const isLineRef = !isNaN(+mom) && grandmom === "line";
-          return nIsOk && !isSpawnRef && !isMorphRef && !isLineRef;
+          const isUnitTypeRef =
+            +mom === 0 && ["unittypeset", "unittype"].includes(grandmom);
+          return (
+            nIsOk && !isSpawnRef && !isMorphRef && !isLineRef && !isUnitTypeRef
+          );
         })
     );
 }

@@ -1,31 +1,21 @@
 import { OrthokonInstructions } from "./_types";
 
 const orthokonInstructions: OrthokonInstructions = {
-  startTurn: { line: ["Select", "which", "pawn", "to move"] },
-  selectunit: { line: ["Select", "where to move the", "selectunit", "pawn"] },
+  startTurn: { line: ["Select", "which", "soldiers", "to move"] },
+  selectunit: { line: ["Select", "where to move", { unitat: "selectunit" }] },
   selectmovetarget: {
     line: [
       "Press",
       "move",
-      "to move the",
-      "selectunit",
-      "pawn",
-      "to",
+      "to make",
+      { unitat: "selectunit" },
+      "go to",
       "selectmovetarget",
       {
         if: [
           { notempty: "victims" },
           {
-            line: [
-              "and take over",
-              {
-                pluralize: [
-                  { sizeof: "victims" },
-                  { line: ["enemy", "pawn"] },
-                  { line: ["enemy", "pawns"] }
-                ]
-              }
-            ]
+            line: ["and turn", { unitlist: "victims" }, "into", "soldiers"]
           }
         ]
       }

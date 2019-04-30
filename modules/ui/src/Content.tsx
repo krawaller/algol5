@@ -23,7 +23,8 @@ type ContentProps = {
 const posStyles = {
   backgroundColor: "#EEE",
   padding: "3px",
-  border: "1px solid black"
+  border: "1px solid black",
+  whiteSpace: "nowrap"
 };
 
 /**

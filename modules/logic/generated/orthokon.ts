@@ -146,12 +146,20 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectunit1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move the" },
-        { pos: MARKS.selectunit },
-        { unittype: ["pawn", 1] }
+        { text: "where to move" },
+        {
+          unit: [
+            { soldiers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        }
       ]
     });
   };
@@ -188,31 +196,49 @@ let game: Partial<AlgolGame> = {
   game.instruction.selectmovetarget1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to move the" },
-        { pos: MARKS.selectunit },
-        { unittype: ["pawn", 1] },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { soldiers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go to" },
         { pos: MARKS.selectmovetarget },
         Object.keys(ARTIFACTS.victims).length !== 0
           ? collapseContent({
               line: [
-                { text: "and take over" },
+                { text: "and turn" },
                 collapseContent({
-                  line: [
-                    { text: Object.keys(ARTIFACTS.victims).length },
-                    Object.keys(ARTIFACTS.victims).length === 1
-                      ? collapseContent({
-                          line: [{ text: "enemy" }, { unittype: ["pawn", 1] }]
-                        })
-                      : collapseContent({
-                          line: [{ text: "enemy" }, { text: "pawns" }]
-                        })
-                  ]
-                })
+                  line: Object.keys(ARTIFACTS.victims)
+                    .filter(p => UNITLAYERS.units[p])
+                    .map(p => ({
+                      unit: [
+                        { soldiers: "pawn" }[UNITLAYERS.units[p].group],
+                        UNITLAYERS.units[p].owner as 0 | 1 | 2,
+                        p
+                      ]
+                    }))
+                    .reduce((mem, i, n, list) => {
+                      mem.push(i);
+                      if (n === list.length - 2) {
+                        mem.push({ text: " and " });
+                      } else if (n < list.length - 2) {
+                        mem.push({ text: ", " });
+                      }
+                      return mem;
+                    }, [])
+                }),
+                { text: "into" },
+                { unittype: ["pawn", 1] }
               ]
             })
           : undefined
@@ -361,12 +387,20 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectunit2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to move the" },
-        { pos: MARKS.selectunit },
-        { unittype: ["pawn", 2] }
+        { text: "where to move" },
+        {
+          unit: [
+            { soldiers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        }
       ]
     });
   };
@@ -403,31 +437,49 @@ let game: Partial<AlgolGame> = {
   game.instruction.selectmovetarget2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to move the" },
-        { pos: MARKS.selectunit },
-        { unittype: ["pawn", 2] },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { soldiers: "pawn" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go to" },
         { pos: MARKS.selectmovetarget },
         Object.keys(ARTIFACTS.victims).length !== 0
           ? collapseContent({
               line: [
-                { text: "and take over" },
+                { text: "and turn" },
                 collapseContent({
-                  line: [
-                    { text: Object.keys(ARTIFACTS.victims).length },
-                    Object.keys(ARTIFACTS.victims).length === 1
-                      ? collapseContent({
-                          line: [{ text: "enemy" }, { unittype: ["pawn", 2] }]
-                        })
-                      : collapseContent({
-                          line: [{ text: "enemy" }, { text: "pawns" }]
-                        })
-                  ]
-                })
+                  line: Object.keys(ARTIFACTS.victims)
+                    .filter(p => UNITLAYERS.units[p])
+                    .map(p => ({
+                      unit: [
+                        { soldiers: "pawn" }[UNITLAYERS.units[p].group],
+                        UNITLAYERS.units[p].owner as 0 | 1 | 2,
+                        p
+                      ]
+                    }))
+                    .reduce((mem, i, n, list) => {
+                      mem.push(i);
+                      if (n === list.length - 2) {
+                        mem.push({ text: " and " });
+                      } else if (n < list.length - 2) {
+                        mem.push({ text: ", " });
+                      }
+                      return mem;
+                    }, [])
+                }),
+                { text: "into" },
+                { unittype: ["pawn", 2] }
               ]
             })
           : undefined

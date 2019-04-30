@@ -71,7 +71,9 @@ let game: Partial<AlgolGame> = {
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.units).length !== 12
-              ? { text: "an empty square to deploy to" }
+              ? collapseContent({
+                  line: [{ text: "empty square to deploy to" }]
+                })
               : undefined,
             Object.keys({ ...UNITLAYERS.bishops, ...UNITLAYERS.pawns })
               .length !== 0
@@ -81,10 +83,10 @@ let game: Partial<AlgolGame> = {
                     collapseContent({
                       line: [
                         Object.keys(UNITLAYERS.pawns).length !== 0
-                          ? { unittype: ["pawn", 1] }
+                          ? { unittype: ["pawn", 0] }
                           : undefined,
                         Object.keys(UNITLAYERS.bishops).length !== 0
-                          ? { unittype: ["bishop", 1] }
+                          ? { unittype: ["bishop", 0] }
                           : undefined
                       ]
                         .filter(i => !!i)
@@ -265,8 +267,14 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "deploy" },
-        { text: "to place a pawn at" },
-        { pos: MARKS.selectdeploytarget }
+        { text: "to spawn" },
+        {
+          unit: [
+            { kings: "king", pawns: "pawn", bishops: "bishop" }["pawns"],
+            0,
+            MARKS.selectdeploytarget
+          ]
+        }
       ]
     });
   };
@@ -290,10 +298,20 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "promote" },
-        { text: "to turn the" },
+        { text: "to turn" },
+        {
+          unit: [
+            { kings: "king", pawns: "pawn", bishops: "bishop" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "into" },
         UNITLAYERS.pawns[MARKS.selectunit]
-          ? { text: "pawn into a bishop" }
-          : { text: "bishop into a king" }
+          ? { unittype: ["bishop", 0] }
+          : { unittype: ["king", 0] }
       ]
     });
   };
@@ -346,7 +364,9 @@ let game: Partial<AlgolGame> = {
         collapseContent({
           line: [
             Object.keys(UNITLAYERS.units).length !== 12
-              ? { text: "an empty square to deploy to" }
+              ? collapseContent({
+                  line: [{ text: "empty square to deploy to" }]
+                })
               : undefined,
             Object.keys({ ...UNITLAYERS.bishops, ...UNITLAYERS.pawns })
               .length !== 0
@@ -356,10 +376,10 @@ let game: Partial<AlgolGame> = {
                     collapseContent({
                       line: [
                         Object.keys(UNITLAYERS.pawns).length !== 0
-                          ? { unittype: ["pawn", 2] }
+                          ? { unittype: ["pawn", 0] }
                           : undefined,
                         Object.keys(UNITLAYERS.bishops).length !== 0
-                          ? { unittype: ["bishop", 2] }
+                          ? { unittype: ["bishop", 0] }
                           : undefined
                       ]
                         .filter(i => !!i)
@@ -548,8 +568,14 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "deploy" },
-        { text: "to place a pawn at" },
-        { pos: MARKS.selectdeploytarget }
+        { text: "to spawn" },
+        {
+          unit: [
+            { kings: "king", pawns: "pawn", bishops: "bishop" }["pawns"],
+            0,
+            MARKS.selectdeploytarget
+          ]
+        }
       ]
     });
   };
@@ -573,10 +599,20 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "promote" },
-        { text: "to turn the" },
+        { text: "to turn" },
+        {
+          unit: [
+            { kings: "king", pawns: "pawn", bishops: "bishop" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "into" },
         UNITLAYERS.pawns[MARKS.selectunit]
-          ? { text: "pawn into a bishop" }
-          : { text: "bishop into a king" }
+          ? { unittype: ["bishop", 0] }
+          : { unittype: ["king", 0] }
       ]
     });
   };

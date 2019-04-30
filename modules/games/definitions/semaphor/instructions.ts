@@ -1,4 +1,4 @@
-import { SemaphorInstructions } from './_types';
+import { SemaphorInstructions } from "./_types";
 
 const semaphorInstructions: SemaphorInstructions = {
   startTurn: {
@@ -9,7 +9,7 @@ const semaphorInstructions: SemaphorInstructions = {
           {
             if: [
               { different: [{ sizeof: "units" }, 12] },
-              "an empty square to deploy to"
+              { line: ["empty square to deploy to"] }
             ]
           },
           {
@@ -18,12 +18,9 @@ const semaphorInstructions: SemaphorInstructions = {
               {
                 line: [
                   "a",
-                  {
-                    orlist: [
-                      { if: [{ notempty: "pawns" }, "pawn"] },
-                      { if: [{ notempty: "bishops" }, "bishop"] }
-                    ]
-                  },
+                  { unittype: ["pawns", 0] },
+                  "or",
+                  { unittype: ["bishops", 0] },
                   "to promote"
                 ]
               }
@@ -34,18 +31,25 @@ const semaphorInstructions: SemaphorInstructions = {
     ]
   },
   selectdeploytarget: {
-    line: ["Press", "deploy", "to place a pawn at", "selectdeploytarget"]
+    line: [
+      "Press",
+      "deploy",
+      "to spawn",
+      { unittypepos: ["pawns", 0, "selectdeploytarget"] }
+    ]
   },
   selectunit: {
     line: [
       "Press",
       "promote",
-      "to turn the",
+      "to turn",
+      { unitat: "selectunit" },
+      "into",
       {
         ifelse: [
           { anyat: ["pawns", "selectunit"] },
-          "pawn into a bishop",
-          "bishop into a king"
+          { unittype: ["bishops", 0] },
+          { unittype: ["kings", 0] }
         ]
       }
     ]

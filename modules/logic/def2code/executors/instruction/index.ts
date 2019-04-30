@@ -14,7 +14,8 @@ import {
   isAlgolInstrPosList,
   isAlgolInstrAndList,
   isAlgolInstrUnitList,
-  isAlgolInstrUnitTypeSet
+  isAlgolInstrUnitTypeSet,
+  isAlgolInstrUnitTypePos
 } from "../../../../types";
 
 import { executeExpression, makeParser } from "../";
@@ -129,6 +130,14 @@ function executeInstructionInner(
         ${exprParser.pos(instr.unitat)}
       ]
     }`;
+  }
+  if (isAlgolInstrUnitTypePos(instr)) {
+    const [groupRaw, ownerRaw, posRaw] = instr.unittypepos;
+    const group = exprParser.val(groupRaw);
+    const icon = `${JSON.stringify(gameDef.graphics.icons)}[${group}]`;
+    const owner = exprParser.val(ownerRaw);
+    const pos = exprParser.pos(posRaw);
+    return `{unit: [${icon}, ${owner}, ${pos}]}`;
   }
   if (isAlgolInstrPos(instr)) {
     return `{ pos: ${exprParser.pos(instr.pos)} }`;

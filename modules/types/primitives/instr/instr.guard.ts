@@ -10,7 +10,8 @@ import {
   AlgolInstrUnitTypeAnon,
   AlgolInstrPosListAnon,
   AlgolInstrUnitListAnon,
-  AlgolInstrUnitTypeSetAnon
+  AlgolInstrUnitTypeSetAnon,
+  AlgolInstrUnitTypePosAnon
 } from "./instr.anon";
 import { AlgolInstrText } from "./instr.interfaces";
 
@@ -82,4 +83,10 @@ export function isAlgolInstrUnitTypeSet(
   expr: AlgolInstrAnon
 ): expr is AlgolInstrUnitTypeSetAnon {
   return (expr as AlgolInstrUnitTypeSetAnon).unittypeset !== undefined;
+}
+
+export function isAlgolInstrUnitTypePos(
+  expr: AlgolInstrAnon
+): expr is AlgolInstrUnitTypePosAnon {
+  return (expr as AlgolInstrUnitTypePosAnon).unittypepos !== undefined;
 }

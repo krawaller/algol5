@@ -23,6 +23,13 @@ export const Board: React.FunctionComponent<BoardProps> = ({
   callback
 }) => {
   const { dataURI, height, width } = dataURIs[gameId];
+  const unitsByPos = Object.keys(units).reduce(
+    (mem, id) => ({
+      ...mem,
+      [units[id].pos]: units[id]
+    }),
+    {}
+  );
   return (
     <div
       style={{
@@ -46,6 +53,7 @@ export const Board: React.FunctionComponent<BoardProps> = ({
               potential={!selected}
               height={height}
               width={width}
+              piece={!!unitsByPos[pos]}
             />
           ))}
         {Object.keys(units).map(id => (

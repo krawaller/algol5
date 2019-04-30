@@ -1,5 +1,65 @@
 import * as React from "react";
 import { AlgolIcon } from "../../types";
+import classnames from "classnames";
+
+import { glitz } from "./helpers";
+
+const iconBasic = glitz.injectStyle({
+  position: "relative",
+  transformOrigin: "50% 50%"
+});
+
+const available = glitz.injectStyle({
+  animationDuration: "0.8s",
+  animationTimingFunction: "ease",
+  animationIterationCount: "infinite",
+  animation: {
+    name: {
+      "0%": {
+        transform: "scale(1, 1)"
+      },
+      "25%": {
+        transform: "scale(0.9, 0.9)"
+      },
+      "50%": {
+        transform: "scale(1, 1)"
+      },
+      "75%": {
+        transform: "scale(1.1, 1.1)"
+      },
+      "100%": {
+        transform: "scale(1, 1)"
+      }
+    }
+  }
+});
+
+const selected = glitz.injectStyle({
+  animationDuration: "1s",
+  animationTimingFunction: "ease",
+  animationIterationCount: "infinite",
+  animation: {
+    name: {
+      "0%": {
+        transform: "rotate(0deg)"
+      },
+      "25%": {
+        transform: "rotate(-10deg)"
+      },
+      "50%": {
+        transform: "rotate(0deg)"
+      },
+      "75%": {
+        transform: "rotate(10deg)"
+      },
+      "100%": {
+        transform: "rotate(0deg)"
+      }
+    }
+  }
+});
+
+//const { icon, normal, available, selected } = require("./Icon.css");
 
 type IconProps = {
   /** Which type of piece it is */
@@ -20,34 +80,19 @@ export const Icon: React.FunctionComponent<IconProps> = ({
 }) => {
   return (
     <div
-      style={{
-        position: "relative"
-      }}
+      className={classnames(iconBasic, {
+        // [normal]: mode === "normal",
+        [available]: mode === "available",
+        [selected]: mode === "selected"
+      })}
     >
       <svg
         viewBox="0 150 300 300"
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
         height="100%"
-        style={{
-          transition: "transform 0.3s ease",
-          ...(mode === "available" && {
-            transform: "scale(1.3, 1.3)",
-            transformOrigin: "50% 50%"
-          })
-        }}
       >
         <g>
-          {mode === "selected" && (
-            <animateTransform
-              attributeName="transform"
-              attributeType="XML"
-              type="rotate"
-              values="0 150 300; -10 150 300; 0 150 300; 10 150 300; 0 150 300"
-              dur="1s"
-              repeatCount="indefinite"
-            />
-          )}
           <path
             d={solids[icon]}
             style={{

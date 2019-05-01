@@ -8,16 +8,16 @@ const shoveoffInstructions: ShoveoffInstructions = {
       {
         ifelse: [
           { same: [{ sizeof: "myunits" }, 7] },
-          "your last off-board unit",
+          { line: ["your last off-board", "soldiers"] },
           {
             ifelse: [
               { same: [{ sizeof: "myunits" }, 8] },
-              "a neutral unit",
+              { line: ["a", { unittype: ["soldiers", 0] }] },
               {
                 line: [
                   "one of your",
                   { value: { minus: [8, { sizeof: "myunits" }] } },
-                  "remaining off-board units"
+                  { line: ["remaining off-board", "soldiers"] }
                 ]
               }
             ]

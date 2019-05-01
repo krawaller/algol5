@@ -77,14 +77,23 @@ let game: Partial<AlgolGame> = {
         { select: "Select" },
         { text: "where to shove in" },
         Object.keys(UNITLAYERS.myunits).length === 7
-          ? { text: "your last off-board unit" }
+          ? collapseContent({
+              line: [{ text: "your last off-board" }, { unittype: ["pawn", 1] }]
+            })
           : Object.keys(UNITLAYERS.myunits).length === 8
-          ? { text: "a neutral unit" }
+          ? collapseContent({
+              line: [{ text: "a" }, { unittype: ["pawn", 0] }]
+            })
           : collapseContent({
               line: [
                 { text: "one of your" },
                 { text: 8 - Object.keys(UNITLAYERS.myunits).length },
-                { text: "remaining off-board units" }
+                collapseContent({
+                  line: [
+                    { text: "remaining off-board" },
+                    { unittype: ["pawn", 1] }
+                  ]
+                })
               ]
             })
       ]
@@ -636,14 +645,23 @@ let game: Partial<AlgolGame> = {
         { select: "Select" },
         { text: "where to shove in" },
         Object.keys(UNITLAYERS.myunits).length === 7
-          ? { text: "your last off-board unit" }
+          ? collapseContent({
+              line: [{ text: "your last off-board" }, { unittype: ["pawn", 2] }]
+            })
           : Object.keys(UNITLAYERS.myunits).length === 8
-          ? { text: "a neutral unit" }
+          ? collapseContent({
+              line: [{ text: "a" }, { unittype: ["pawn", 0] }]
+            })
           : collapseContent({
               line: [
                 { text: "one of your" },
                 { text: 8 - Object.keys(UNITLAYERS.myunits).length },
-                { text: "remaining off-board units" }
+                collapseContent({
+                  line: [
+                    { text: "remaining off-board" },
+                    { unittype: ["pawn", 2] }
+                  ]
+                })
               ]
             })
       ]

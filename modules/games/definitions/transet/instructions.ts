@@ -1,7 +1,9 @@
 import { TransetInstructions } from "./_types";
 
 const transetInstructions: TransetInstructions = {
-  startTurn: { line: ["Select", "a unit to move"] },
+  startTurn: {
+    line: ["Select", "pinets", ",", "piokers", "or", "piases", "to move"]
+  },
   selectunit: {
     line: [
       "Select",
@@ -11,14 +13,7 @@ const transetInstructions: TransetInstructions = {
             if: [
               { notempty: "movetargets" },
               {
-                line: [
-                  "a square to",
-                  "move",
-                  "the",
-                  "selectunit",
-                  { unitat: "selectunit" },
-                  "to"
-                ]
+                line: ["where to move", { unitat: "selectunit" }]
               }
             ]
           },
@@ -26,12 +21,7 @@ const transetInstructions: TransetInstructions = {
             if: [
               { markavailable: "selectswapunit" },
               {
-                line: [
-                  "another unit to swap the",
-                  "selectunit",
-                  { unitat: "selectunit" },
-                  "with"
-                ]
+                line: ["another unit to swap", { unitat: "selectunit" }, "with"]
               }
             ]
           }
@@ -50,10 +40,8 @@ const transetInstructions: TransetInstructions = {
       {
         line: [
           "Select",
-          "where the enemy",
+          "where",
           { unitat: "selectmovetarget" },
-          "at",
-          "selectmovetarget",
           "should end up"
         ]
       },
@@ -61,9 +49,9 @@ const transetInstructions: TransetInstructions = {
         line: [
           "Press",
           "move",
-          "to go from",
-          "selectunit",
-          "to",
+          "to make",
+          { unitat: "selectunit" },
+          "go to",
           "selectmovetarget"
         ]
       }
@@ -73,11 +61,13 @@ const transetInstructions: TransetInstructions = {
     line: [
       "Press",
       "move",
-      "to go from",
-      "selectunit",
-      "to",
+      "to make",
+      { unitat: "selectunit" },
+      "go to",
       "selectmovetarget",
-      "and deport the enemy to",
+      "and deport",
+      { unitat: "selectmovetarget" },
+      "to",
       "selectdeportdestination"
     ]
   },
@@ -85,10 +75,10 @@ const transetInstructions: TransetInstructions = {
     line: [
       "Select",
       "a neighbouring square for",
-      "selectunit",
-      "to step to. The",
-      "selectswapunit",
-      "unit will step in the opposite direction"
+      { unitat: "selectunit" },
+      "to step to.",
+      { unitat: "selectswapunit" },
+      "will step in the opposite direction"
     ]
   },
   selectswap1target: {
@@ -96,12 +86,12 @@ const transetInstructions: TransetInstructions = {
       "Press",
       "swap",
       "to step",
-      "selectunit",
+      { unitat: "selectunit" },
       "to",
       "selectswap1target",
-      "and step",
-      "selectswapunit",
-      "in the other direction to",
+      "and",
+      { unitat: "selectswapunit" },
+      "to",
       { pos: { onlyin: "swap2step" } }
     ]
   }

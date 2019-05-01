@@ -68,7 +68,15 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.startTurn1 = step => {
     return collapseContent({
-      line: [{ select: "Select" }, { text: "a unit to move" }]
+      line: [
+        { select: "Select" },
+        { unittype: ["pawn", 1] },
+        { text: "," },
+        { unittype: ["bishop", 1] },
+        { text: "or" },
+        { unittype: ["king", 1] },
+        { text: "to move" }
+      ]
     });
   };
   game.action.move1 = step => {
@@ -282,10 +290,7 @@ let game: Partial<AlgolGame> = {
             Object.keys(ARTIFACTS.movetargets).length !== 0
               ? collapseContent({
                   line: [
-                    { text: "a square to" },
-                    { command: "move" },
-                    { text: "the" },
-                    { pos: MARKS.selectunit },
+                    { text: "where to move" },
                     {
                       unit: [
                         { pinets: "pawn", piokers: "bishop", piases: "king" }[
@@ -297,8 +302,7 @@ let game: Partial<AlgolGame> = {
                           | 2,
                         MARKS.selectunit
                       ]
-                    },
-                    { text: "to" }
+                    }
                   ]
                 })
               : undefined,
@@ -307,8 +311,7 @@ let game: Partial<AlgolGame> = {
             )
               ? collapseContent({
                   line: [
-                    { text: "another unit to swap the" },
-                    { pos: MARKS.selectunit },
+                    { text: "another unit to swap" },
                     {
                       unit: [
                         { pinets: "pawn", piokers: "bishop", piases: "king" }[
@@ -378,7 +381,7 @@ let game: Partial<AlgolGame> = {
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "where the enemy" },
+            { text: "where" },
             {
               unit: [
                 { pinets: "pawn", piokers: "bishop", piases: "king" }[
@@ -391,8 +394,6 @@ let game: Partial<AlgolGame> = {
                 MARKS.selectmovetarget
               ]
             },
-            { text: "at" },
-            { pos: MARKS.selectmovetarget },
             { text: "should end up" }
           ]
         })
@@ -400,9 +401,17 @@ let game: Partial<AlgolGame> = {
           line: [
             { text: "Press" },
             { command: "move" },
-            { text: "to go from" },
-            { pos: MARKS.selectunit },
-            { text: "to" },
+            { text: "to make" },
+            {
+              unit: [
+                { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+                MARKS.selectunit
+              ]
+            },
+            { text: "go to" },
             { pos: MARKS.selectmovetarget }
           ]
         });
@@ -425,15 +434,34 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectdeportdestination1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go to" },
         { pos: MARKS.selectmovetarget },
-        { text: "and deport the enemy to" },
+        { text: "and deport" },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as 0 | 1 | 2,
+            MARKS.selectmovetarget
+          ]
+        },
+        { text: "to" },
         { pos: MARKS.selectdeportdestination }
       ]
     });
@@ -472,14 +500,31 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectswapunit1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
         { text: "a neighbouring square for" },
-        { pos: MARKS.selectunit },
-        { text: "to step to. The" },
-        { pos: MARKS.selectswapunit },
-        { text: "unit will step in the opposite direction" }
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to step to." },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectswapunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectswapunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectswapunit
+          ]
+        },
+        { text: "will step in the opposite direction" }
       ]
     });
   };
@@ -525,17 +570,34 @@ let game: Partial<AlgolGame> = {
   game.instruction.selectswap1target1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "swap" },
         { text: "to step" },
-        { pos: MARKS.selectunit },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         { text: "to" },
         { pos: MARKS.selectswap1target },
-        { text: "and step" },
-        { pos: MARKS.selectswapunit },
-        { text: "in the other direction to" },
+        { text: "and" },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectswapunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectswapunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectswapunit
+          ]
+        },
+        { text: "to" },
         { pos: Object.keys(ARTIFACTS.swap2step)[0] }
       ]
     });
@@ -587,7 +649,15 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.startTurn2 = step => {
     return collapseContent({
-      line: [{ select: "Select" }, { text: "a unit to move" }]
+      line: [
+        { select: "Select" },
+        { unittype: ["pawn", 2] },
+        { text: "," },
+        { unittype: ["bishop", 2] },
+        { text: "or" },
+        { unittype: ["king", 2] },
+        { text: "to move" }
+      ]
     });
   };
   game.newBattle = () => {
@@ -827,10 +897,7 @@ let game: Partial<AlgolGame> = {
             Object.keys(ARTIFACTS.movetargets).length !== 0
               ? collapseContent({
                   line: [
-                    { text: "a square to" },
-                    { command: "move" },
-                    { text: "the" },
-                    { pos: MARKS.selectunit },
+                    { text: "where to move" },
                     {
                       unit: [
                         { pinets: "pawn", piokers: "bishop", piases: "king" }[
@@ -842,8 +909,7 @@ let game: Partial<AlgolGame> = {
                           | 2,
                         MARKS.selectunit
                       ]
-                    },
-                    { text: "to" }
+                    }
                   ]
                 })
               : undefined,
@@ -852,8 +918,7 @@ let game: Partial<AlgolGame> = {
             )
               ? collapseContent({
                   line: [
-                    { text: "another unit to swap the" },
-                    { pos: MARKS.selectunit },
+                    { text: "another unit to swap" },
                     {
                       unit: [
                         { pinets: "pawn", piokers: "bishop", piases: "king" }[
@@ -923,7 +988,7 @@ let game: Partial<AlgolGame> = {
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "where the enemy" },
+            { text: "where" },
             {
               unit: [
                 { pinets: "pawn", piokers: "bishop", piases: "king" }[
@@ -936,8 +1001,6 @@ let game: Partial<AlgolGame> = {
                 MARKS.selectmovetarget
               ]
             },
-            { text: "at" },
-            { pos: MARKS.selectmovetarget },
             { text: "should end up" }
           ]
         })
@@ -945,9 +1008,17 @@ let game: Partial<AlgolGame> = {
           line: [
             { text: "Press" },
             { command: "move" },
-            { text: "to go from" },
-            { pos: MARKS.selectunit },
-            { text: "to" },
+            { text: "to make" },
+            {
+              unit: [
+                { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+                MARKS.selectunit
+              ]
+            },
+            { text: "go to" },
             { pos: MARKS.selectmovetarget }
           ]
         });
@@ -970,15 +1041,34 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectdeportdestination2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go to" },
         { pos: MARKS.selectmovetarget },
-        { text: "and deport the enemy to" },
+        { text: "and deport" },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as 0 | 1 | 2,
+            MARKS.selectmovetarget
+          ]
+        },
+        { text: "to" },
         { pos: MARKS.selectdeportdestination }
       ]
     });
@@ -1017,14 +1107,31 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectswapunit2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
         { text: "a neighbouring square for" },
-        { pos: MARKS.selectunit },
-        { text: "to step to. The" },
-        { pos: MARKS.selectswapunit },
-        { text: "unit will step in the opposite direction" }
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to step to." },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectswapunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectswapunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectswapunit
+          ]
+        },
+        { text: "will step in the opposite direction" }
       ]
     });
   };
@@ -1070,17 +1177,34 @@ let game: Partial<AlgolGame> = {
   game.instruction.selectswap1target2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "swap" },
         { text: "to step" },
-        { pos: MARKS.selectunit },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         { text: "to" },
         { pos: MARKS.selectswap1target },
-        { text: "and step" },
-        { pos: MARKS.selectswapunit },
-        { text: "in the other direction to" },
+        { text: "and" },
+        {
+          unit: [
+            { pinets: "pawn", piokers: "bishop", piases: "king" }[
+              (UNITLAYERS.units[MARKS.selectswapunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectswapunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectswapunit
+          ]
+        },
+        { text: "to" },
         { pos: Object.keys(ARTIFACTS.swap2step)[0] }
       ]
     });

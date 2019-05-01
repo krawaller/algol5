@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import classnames from "classnames";
 import { positionStyles, glitz } from "./helpers";
 
@@ -19,27 +19,26 @@ const potentialCSS = glitz.injectStyle({
   }
 });
 
+const scaleDiff = 0.2;
 const pulsateCSS = glitz.injectStyle({
-  animationDuration: "0.8s",
-  animationTimingFunction: "ease",
+  animationDuration: "0.85s",
+  animationTimingFunction: "linear",
   animationIterationCount: "infinite",
-  animation: {
-    name: {
-      "0%": {
-        transform: "scale(1, 1)"
-      },
-      "25%": {
-        transform: "scale(0.9, 0.9)"
-      },
-      "50%": {
-        transform: "scale(1, 1)"
-      },
-      "75%": {
-        transform: "scale(1.1, 1.1)"
-      },
-      "100%": {
-        transform: "scale(1, 1)"
-      }
+  animationName: {
+    "0%": {
+      transform: "scale(1, 1)"
+    },
+    "25%": {
+      transform: `scale(${1 - scaleDiff}, ${1 - scaleDiff})`
+    },
+    "50%": {
+      transform: "scale(1, 1)"
+    },
+    "75%": {
+      transform: `scale(${1 + scaleDiff}, ${1 + scaleDiff})`
+    },
+    "100%": {
+      transform: "scale(1, 1)"
     }
   }
 });

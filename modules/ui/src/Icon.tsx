@@ -9,52 +9,50 @@ const iconBasic = glitz.injectStyle({
   transformOrigin: "50% 50%"
 });
 
+const scaleDiff = 0.2;
 const available = glitz.injectStyle({
-  animationDuration: "0.8s",
-  animationTimingFunction: "ease",
+  animationDuration: "0.85s",
+  animationTimingFunction: "linear",
   animationIterationCount: "infinite",
-  animation: {
-    name: {
-      "0%": {
-        transform: "scale(1, 1)"
-      },
-      "25%": {
-        transform: "scale(0.9, 0.9)"
-      },
-      "50%": {
-        transform: "scale(1, 1)"
-      },
-      "75%": {
-        transform: "scale(1.1, 1.1)"
-      },
-      "100%": {
-        transform: "scale(1, 1)"
-      }
+  animationName: {
+    "0%": {
+      transform: "scale(1, 1)"
+    },
+    "25%": {
+      transform: `scale(${1 - scaleDiff}, ${1 - scaleDiff})`
+    },
+    "50%": {
+      transform: "scale(1, 1)"
+    },
+    "75%": {
+      transform: `scale(${1 + scaleDiff}, ${1 + scaleDiff})`
+    },
+    "100%": {
+      transform: "scale(1, 1)"
     }
   }
 });
 
+const rotateDiff = 15;
 const selected = glitz.injectStyle({
   animationDuration: "1s",
-  animationTimingFunction: "ease",
+  animationTimingFunction: "linear",
   animationIterationCount: "infinite",
-  animation: {
-    name: {
-      "0%": {
-        transform: "rotate(0deg)"
-      },
-      "25%": {
-        transform: "rotate(-10deg)"
-      },
-      "50%": {
-        transform: "rotate(0deg)"
-      },
-      "75%": {
-        transform: "rotate(10deg)"
-      },
-      "100%": {
-        transform: "rotate(0deg)"
-      }
+  animationName: {
+    "0%": {
+      transform: "rotate(0deg)"
+    },
+    "25%": {
+      transform: `rotate(-${rotateDiff}deg)`
+    },
+    "50%": {
+      transform: "rotate(0deg)"
+    },
+    "75%": {
+      transform: `rotate(${rotateDiff}deg)`
+    },
+    "100%": {
+      transform: "rotate(0deg)"
     }
   }
 });
@@ -81,7 +79,6 @@ export const Icon: React.FunctionComponent<IconProps> = ({
   return (
     <div
       className={classnames(iconBasic, {
-        // [normal]: mode === "normal",
         [available]: mode === "available",
         [selected]: mode === "selected"
       })}

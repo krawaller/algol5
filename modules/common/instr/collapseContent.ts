@@ -59,14 +59,20 @@ export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
         : i
     );
 
-    // insert space at end of `select` if not followed by text
-    items = items.map((i, n) =>
-      isAlgolContentSelect(i) &&
-      n < items.length - 1 &&
-      !isAlgolContentText(items[n + 1])
-        ? { select: i.select + " " }
-        : i
-    );
+    // insert space between adjacent non-texts
+    console.log(items);
+    while (
+      (idx = items.findIndex(
+        (i, n) =>
+          n > 0 &&
+          items[n - 1] &&
+          !isAlgolContentText(i) &&
+          !isAlgolContentText(items[n - 1])
+      )) !== -1
+    ) {
+      let val = items[idx];
+      items.splice(idx, 1, { text: " " } as AlgolContentText, val);
+    }
 
     return items.length > 1 ? { line: items } : items[0];
   }

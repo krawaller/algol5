@@ -22,7 +22,7 @@ export function getBattleUI(
         commands: isMark ? mem.commands : mem.commands.concat(action)
       };
     },
-    { potentialMarks: [], commands: [] }
+    { potentialMarks: [] as string[], commands: [] as string[] }
   );
 
   return {

@@ -60,7 +60,6 @@ export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
     );
 
     // insert space between adjacent non-texts
-    console.log(items);
     while (
       (idx = items.findIndex(
         (i, n) =>

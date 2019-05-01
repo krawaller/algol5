@@ -4,17 +4,28 @@ const kriegInstructions: KriegInstructions = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 2] },
-      { line: ["Select", "a unit to move that you didn't move last turn"] },
-      { line: ["Select", "a unit to move"] }
+      {
+        line: [
+          "Select",
+          "notfrozens",
+          "to move (except",
+          { unitat: { onlyin: "myfrozens" } },
+          "who moved last turn)"
+        ]
+      },
+      { line: ["Select", "notfrozens", "to move"] }
     ]
   },
-  selectunit: { line: ["Select", "an empty square to move to"] },
+  selectunit: {
+    line: ["Select", "an empty square to move", { unitat: "selectunit" }, "to"]
+  },
   selectmove: {
     line: [
       "Press",
       "move",
-      "to go from",
-      "selectunit",
+      "to make",
+      { unitat: "selectunit" },
+      "go",
       {
         ifelse: [
           {

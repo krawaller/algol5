@@ -69,16 +69,34 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     };
   };
   game.instruction.startTurn1 = step => {
+    let UNITLAYERS = step.UNITLAYERS;
     let TURN = step.TURN;
     return TURN > 2
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "a unit to move that you didn't move last turn" }
+            { unittype: ["knight", 1] },
+            { text: "to move (except" },
+            {
+              unit: [
+                { notfrozens: "knight", frozens: "knight" }[
+                  (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
+                    .group
+                ],
+                (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
+                  .owner as 0 | 1 | 2,
+                Object.keys(UNITLAYERS.myfrozens)[0]
+              ]
+            },
+            { text: "who moved last turn)" }
           ]
         })
       : collapseContent({
-          line: [{ select: "Select" }, { text: "a unit to move" }]
+          line: [
+            { select: "Select" },
+            { unittype: ["knight", 1] },
+            { text: "to move" }
+          ]
         });
   };
   game.action.move1 = step => {
@@ -226,8 +244,23 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     };
   };
   game.instruction.selectunit1 = step => {
+    let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
-      line: [{ select: "Select" }, { text: "an empty square to move to" }]
+      line: [
+        { select: "Select" },
+        { text: "an empty square to move" },
+        {
+          unit: [
+            { notfrozens: "knight", frozens: "knight" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to" }
+      ]
     });
   };
   game.action.selectmove1 = (step, newMarkPos) => {
@@ -244,12 +277,22 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
   };
   game.instruction.selectmove1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
+        { text: "to make" },
+        {
+          unit: [
+            { notfrozens: "knight", frozens: "knight" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go" },
         TERRAIN.oppbases[MARKS.selectmove] &&
         !TERRAIN.oppbases[MARKS.selectunit]
           ? collapseContent({
@@ -316,16 +359,34 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     };
   };
   game.instruction.startTurn2 = step => {
+    let UNITLAYERS = step.UNITLAYERS;
     let TURN = step.TURN;
     return TURN > 2
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "a unit to move that you didn't move last turn" }
+            { unittype: ["knight", 2] },
+            { text: "to move (except" },
+            {
+              unit: [
+                { notfrozens: "knight", frozens: "knight" }[
+                  (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
+                    .group
+                ],
+                (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
+                  .owner as 0 | 1 | 2,
+                Object.keys(UNITLAYERS.myfrozens)[0]
+              ]
+            },
+            { text: "who moved last turn)" }
           ]
         })
       : collapseContent({
-          line: [{ select: "Select" }, { text: "a unit to move" }]
+          line: [
+            { select: "Select" },
+            { unittype: ["knight", 2] },
+            { text: "to move" }
+          ]
         });
   };
   game.newBattle = () => {
@@ -502,8 +563,23 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     };
   };
   game.instruction.selectunit2 = step => {
+    let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
-      line: [{ select: "Select" }, { text: "an empty square to move to" }]
+      line: [
+        { select: "Select" },
+        { text: "an empty square to move" },
+        {
+          unit: [
+            { notfrozens: "knight", frozens: "knight" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "to" }
+      ]
     });
   };
   game.action.selectmove2 = (step, newMarkPos) => {
@@ -520,12 +596,22 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
   };
   game.instruction.selectmove2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
+        { text: "to make" },
+        {
+          unit: [
+            { notfrozens: "knight", frozens: "knight" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go" },
         TERRAIN.oppbases[MARKS.selectmove] &&
         !TERRAIN.oppbases[MARKS.selectunit]
           ? collapseContent({

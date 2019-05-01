@@ -25,9 +25,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units", "soldiers"],
-      ["units", "myunits", "soldiers", "mysoldiers"],
-      ["units", "oppunits", "soldiers", "oppsoldiers"]
+      ["units"],
+      ["units", "myunits", "mysoldiers"],
+      ["units", "oppunits", "oppsoldiers"]
     ],
     kings: [
       ["units"],
@@ -49,7 +49,6 @@ let game: Partial<AlgolGame> = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      soldiers: oldUnitLayers.soldiers,
       mysoldiers: oldUnitLayers.oppsoldiers,
       oppsoldiers: oldUnitLayers.mysoldiers,
       mykings: oldUnitLayers.oppkings,
@@ -79,20 +78,12 @@ let game: Partial<AlgolGame> = {
           line: [
             Object.keys(UNITLAYERS.mysoldiers).length !== 0
               ? collapseContent({
-                  line: [
-                    { text: "a" },
-                    { unittype: ["pawn", 1] },
-                    { text: "to advance" }
-                  ]
+                  line: [{ unittype: ["pawn", 1] }, { text: "to advance" }]
                 })
               : undefined,
             Object.keys(UNITLAYERS.mykings).length !== 0
               ? collapseContent({
-                  line: [
-                    { text: "a" },
-                    { unittype: ["king", 1] },
-                    { text: "to retreat" }
-                  ]
+                  line: [{ unittype: ["king", 1] }, { text: "to retreat" }]
                 })
               : undefined
           ]
@@ -140,7 +131,6 @@ let game: Partial<AlgolGame> = {
       units: {},
       myunits: {},
       oppunits: {},
-      soldiers: {},
       mysoldiers: {},
       oppsoldiers: {},
       mykings: {},
@@ -233,16 +223,32 @@ let game: Partial<AlgolGame> = {
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "a square closer to home to move your" },
-            { unittype: ["king", 1] },
+            { text: "a square closer to home to move" },
+            {
+              unit: [
+                { soldiers: "pawn", kings: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+                MARKS.selectunit
+              ]
+            },
             { text: "to" }
           ]
         })
       : collapseContent({
           line: [
             { select: "Select" },
-            { text: "a square closer to the enemy lines to move your" },
-            { unittype: ["pawn", 1] },
+            { text: "a square closer to the enemy base to move" },
+            {
+              unit: [
+                { soldiers: "pawn", kings: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+                MARKS.selectunit
+              ]
+            },
             { text: "to" }
           ]
         });
@@ -268,14 +274,17 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to" },
         UNITLAYERS.mykings[MARKS.selectunit]
-          ? collapseContent({
-              line: [{ text: "retreat your" }, { unittype: ["king", 1] }]
-            })
-          : collapseContent({
-              line: [{ text: "advance your" }, { unittype: ["pawn", 1] }]
-            }),
-        { text: "from" },
-        { pos: MARKS.selectunit },
+          ? { text: "retreat" }
+          : { text: "advance" },
+        {
+          unit: [
+            { soldiers: "pawn", kings: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         TERRAIN.opphomerow[MARKS.selectmovetarget]
           ? collapseContent({
               line: [
@@ -293,7 +302,7 @@ let game: Partial<AlgolGame> = {
         UNITLAYERS.oppunits[MARKS.selectmovetarget]
           ? collapseContent({
               line: [
-                { text: ", killing the enemy" },
+                { text: ", killing" },
                 {
                   unit: [
                     { soldiers: "pawn", kings: "king" }[
@@ -316,9 +325,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units", "soldiers"],
-      ["units", "oppunits", "soldiers", "oppsoldiers"],
-      ["units", "myunits", "soldiers", "mysoldiers"]
+      ["units"],
+      ["units", "oppunits", "oppsoldiers"],
+      ["units", "myunits", "mysoldiers"]
     ],
     kings: [
       ["units"],
@@ -340,7 +349,6 @@ let game: Partial<AlgolGame> = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      soldiers: oldUnitLayers.soldiers,
       mysoldiers: oldUnitLayers.oppsoldiers,
       oppsoldiers: oldUnitLayers.mysoldiers,
       mykings: oldUnitLayers.oppkings,
@@ -370,20 +378,12 @@ let game: Partial<AlgolGame> = {
           line: [
             Object.keys(UNITLAYERS.mysoldiers).length !== 0
               ? collapseContent({
-                  line: [
-                    { text: "a" },
-                    { unittype: ["pawn", 2] },
-                    { text: "to advance" }
-                  ]
+                  line: [{ unittype: ["pawn", 2] }, { text: "to advance" }]
                 })
               : undefined,
             Object.keys(UNITLAYERS.mykings).length !== 0
               ? collapseContent({
-                  line: [
-                    { text: "a" },
-                    { unittype: ["king", 2] },
-                    { text: "to retreat" }
-                  ]
+                  line: [{ unittype: ["king", 2] }, { text: "to retreat" }]
                 })
               : undefined
           ]
@@ -409,7 +409,6 @@ let game: Partial<AlgolGame> = {
       units: {},
       myunits: {},
       oppunits: {},
-      soldiers: {},
       mysoldiers: {},
       oppsoldiers: {},
       mykings: {},
@@ -458,7 +457,6 @@ let game: Partial<AlgolGame> = {
       units: {},
       myunits: {},
       oppunits: {},
-      soldiers: {},
       mysoldiers: {},
       oppsoldiers: {},
       mykings: {},
@@ -551,16 +549,32 @@ let game: Partial<AlgolGame> = {
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "a square closer to home to move your" },
-            { unittype: ["king", 2] },
+            { text: "a square closer to home to move" },
+            {
+              unit: [
+                { soldiers: "pawn", kings: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+                MARKS.selectunit
+              ]
+            },
             { text: "to" }
           ]
         })
       : collapseContent({
           line: [
             { select: "Select" },
-            { text: "a square closer to the enemy lines to move your" },
-            { unittype: ["pawn", 2] },
+            { text: "a square closer to the enemy base to move" },
+            {
+              unit: [
+                { soldiers: "pawn", kings: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+                MARKS.selectunit
+              ]
+            },
             { text: "to" }
           ]
         });
@@ -586,14 +600,17 @@ let game: Partial<AlgolGame> = {
         { command: "move" },
         { text: "to" },
         UNITLAYERS.mykings[MARKS.selectunit]
-          ? collapseContent({
-              line: [{ text: "retreat your" }, { unittype: ["king", 2] }]
-            })
-          : collapseContent({
-              line: [{ text: "advance your" }, { unittype: ["pawn", 2] }]
-            }),
-        { text: "from" },
-        { pos: MARKS.selectunit },
+          ? { text: "retreat" }
+          : { text: "advance" },
+        {
+          unit: [
+            { soldiers: "pawn", kings: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
         TERRAIN.opphomerow[MARKS.selectmovetarget]
           ? collapseContent({
               line: [
@@ -611,7 +628,7 @@ let game: Partial<AlgolGame> = {
         UNITLAYERS.oppunits[MARKS.selectmovetarget]
           ? collapseContent({
               line: [
-                { text: ", killing the enemy" },
+                { text: ", killing" },
                 {
                   unit: [
                     { soldiers: "pawn", kings: "king" }[

@@ -9,11 +9,11 @@ const uglyduckInstructions: UglyduckInstructions = {
           {
             if: [
               { notempty: "mysoldiers" },
-              { line: ["a", "soldiers", "to advance"] }
+              { line: ["soldiers", "to advance"] }
             ]
           },
           {
-            if: [{ notempty: "mykings" }, { line: ["a", "king", "to retreat"] }]
+            if: [{ notempty: "mykings" }, { line: ["kings", "to retreat"] }]
           }
         ]
       }
@@ -23,13 +23,18 @@ const uglyduckInstructions: UglyduckInstructions = {
     ifelse: [
       { anyat: ["mykings", "selectunit"] },
       {
-        line: ["Select", "a square closer to home to move your", "king", "to"]
+        line: [
+          "Select",
+          "a square closer to home to move",
+          { unitat: "selectunit" },
+          "to"
+        ]
       },
       {
         line: [
           "Select",
-          "a square closer to the enemy lines to move your",
-          "pawn",
+          "a square closer to the enemy base to move",
+          { unitat: "selectunit" },
           "to"
         ]
       }
@@ -41,14 +46,9 @@ const uglyduckInstructions: UglyduckInstructions = {
       "move",
       "to",
       {
-        ifelse: [
-          { anyat: ["mykings", "selectunit"] },
-          { line: ["retreat your", "king"] },
-          { line: ["advance your", "pawn"] }
-        ]
+        ifelse: [{ anyat: ["mykings", "selectunit"] }, "retreat", "advance"]
       },
-      "from",
-      "selectunit",
+      { unitat: "selectunit" },
       {
         ifelse: [
           { anyat: ["opphomerow", "selectmovetarget"] },
@@ -65,7 +65,7 @@ const uglyduckInstructions: UglyduckInstructions = {
       {
         if: [
           { anyat: ["oppunits", "selectmovetarget"] },
-          { line: [", killing the enemy", { unitat: "selectmovetarget" }] }
+          { line: [", killing", { unitat: "selectmovetarget" }] }
         ]
       }
     ]

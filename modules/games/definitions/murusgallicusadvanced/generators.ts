@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedGenerators } from './_types';
+import { MurusgallicusadvancedGenerators } from "./_types";
 
 const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {
@@ -71,12 +71,12 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
       }
     }
   },
-  findkilltargets: {
+  findcrushtargets: {
     type: "neighbour",
     start: "selecttower",
     dirs: "rose",
     ifover: { union: ["oppcatapults", "oppwalls"] },
-    draw: { neighbours: { tolayer: "killtargets" } }
+    draw: { neighbours: { tolayer: "crushtargets" } }
   }
 };
 

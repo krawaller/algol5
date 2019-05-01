@@ -10,12 +10,12 @@ const murusgallicusInstructions: MurusgallicusInstructions = {
           { if: [{ notempty: "movetargets" }, "a move target"] },
           {
             if: [
-              { notempty: "killtargets" },
+              { notempty: "crushtargets" },
               {
                 line: [
                   "a",
                   { unittype: ["walls", { playercase: [2, 1] }] },
-                  "to kill"
+                  "to crush"
                 ]
               }
             ]
@@ -58,14 +58,16 @@ const murusgallicusInstructions: MurusgallicusInstructions = {
       }
     ]
   },
-  selectkill: {
+  selectcrush: {
     line: [
       "Press",
-      "kill",
-      "to make a section of",
-      { unitat: "selecttower" },
       "crush",
-      { unitat: "selectkill" }
+      "to turn",
+      { unitat: "selecttower" },
+      "into a",
+      "walls",
+      "and destroy",
+      { unitat: "selectcrush" }
     ]
   }
 };

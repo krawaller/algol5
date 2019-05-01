@@ -5,13 +5,13 @@ export type MurusgallicusadvancedBoardWidth = 8;
 
 export type MurusgallicusadvancedTerrain = "homerow";
 export type MurusgallicusadvancedUnit = "towers" | "walls" | "catapults";
-export type MurusgallicusadvancedMark = "selecttower" | "selectmove" | "selectkill" | "selectcatapult" | "selectfire";
-export type MurusgallicusadvancedCommand = "move" | "kill" | "sacrifice" | "fire";
+export type MurusgallicusadvancedMark = "selecttower" | "selectmove" | "selectcrush" | "selectcatapult" | "selectfire";
+export type MurusgallicusadvancedCommand = "move" | "crush" | "sacrifice" | "fire";
 export type MurusgallicusadvancedPhaseCommand = never;
 export type MurusgallicusadvancedPhase = "startTurn" | MurusgallicusadvancedMark;
 export type MurusgallicusadvancedUnitLayer = "units" | "myunits" | "oppunits" | "towers" | "mytowers" | "opptowers" | "walls" | "mywalls" | "oppwalls" | "catapults" | "mycatapults" | "oppcatapults";
-export type MurusgallicusadvancedGenerator = "findfiretargets" | "findmovetargets" | "findmoveresults" | "findkilltargets";
-export type MurusgallicusadvancedArtifactLayer = "firetargets" | "movetargets" | "madecatapults" | "madetowers" | "madewalls" | "killtargets";
+export type MurusgallicusadvancedGenerator = "findfiretargets" | "findmovetargets" | "findmoveresults" | "findcrushtargets";
+export type MurusgallicusadvancedArtifactLayer = "firetargets" | "movetargets" | "madecatapults" | "madetowers" | "madewalls" | "crushtargets";
 export type MurusgallicusadvancedTerrainLayer = "homerow" | "myhomerow" | "opphomerow" | "nohomerow";
 export type MurusgallicusadvancedLayer = CommonLayer | MurusgallicusadvancedUnitLayer | MurusgallicusadvancedArtifactLayer | MurusgallicusadvancedTerrainLayer;
 export type MurusgallicusadvancedBattlePos = any;

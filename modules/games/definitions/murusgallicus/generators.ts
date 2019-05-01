@@ -1,4 +1,4 @@
-import { MurusgallicusGenerators } from './_types';
+import { MurusgallicusGenerators } from "./_types";
 
 const murusgallicusGenerators: MurusgallicusGenerators = {
   findmovetargets: {
@@ -42,12 +42,12 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
       }
     }
   },
-  findkilltargets: {
+  findcrushtargets: {
     type: "neighbour",
     start: "selecttower",
     dirs: "rose",
     ifover: "oppwalls",
-    draw: { neighbours: { tolayer: "killtargets" } }
+    draw: { neighbours: { tolayer: "crushtargets" } }
   }
 };
 

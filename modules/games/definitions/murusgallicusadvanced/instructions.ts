@@ -12,12 +12,14 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
           { if: [{ notempty: "movetargets" }, "a move target"] },
           {
             if: [
-              { notempty: "killtargets" },
+              { notempty: "crushtargets" },
               {
                 line: [
                   "a",
                   { unittype: ["walls", { playercase: [2, 1] }] },
-                  "to kill"
+                  "or",
+                  { unittype: ["catapults", { playercase: [2, 1] }] },
+                  "to crush"
                 ]
               }
             ]
@@ -73,10 +75,10 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
       }
     ]
   },
-  selectkill: {
+  selectcrush: {
     line: [
       "Press",
-      "kill",
+      "crush",
       "to turn",
       { unitat: "selecttower" },
       "to a",
@@ -84,19 +86,19 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
       "and",
       {
         ifelse: [
-          { anyat: ["walls", "selectkill"] },
-          { line: ["destroy", { unitat: "selectkill" }] },
+          { anyat: ["walls", "selectcrush"] },
+          { line: ["destroy", { unitat: "selectcrush" }] },
           {
             line: [
               "reduce",
-              { unitat: "selectkill" },
+              { unitat: "selectcrush" },
               "to a",
               { unittype: ["towers", { playercase: [2, 1] }] },
               ", or",
               "sacrifice",
               { unitat: "selecttower" },
               "entirely to reduce",
-              { unitat: "selectkill" },
+              { unitat: "selectcrush" },
               "to a",
               { unittype: ["walls", { playercase: [2, 1] }] },
               "!"

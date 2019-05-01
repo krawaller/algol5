@@ -1,4 +1,4 @@
-import { MurusgallicusFlow } from './_types';
+import { MurusgallicusFlow } from "./_types";
 
 const murusgallicusFlow: MurusgallicusFlow = {
   startTurn: { link: "selecttower" },
@@ -11,15 +11,15 @@ const murusgallicusFlow: MurusgallicusFlow = {
   marks: {
     selecttower: {
       from: "mytowers",
-      runGenerators: ["findmovetargets", "findkilltargets"],
-      links: ["selectmove", "selectkill"]
+      runGenerators: ["findmovetargets", "findcrushtargets"],
+      links: ["selectmove", "selectcrush"]
     },
     selectmove: {
       from: "movetargets",
       runGenerators: ["findmoveresults"],
       link: "move"
     },
-    selectkill: { from: "killtargets", link: "kill" }
+    selectcrush: { from: "crushtargets", link: "crush" }
   },
   commands: {
     move: {
@@ -37,10 +37,10 @@ const murusgallicusFlow: MurusgallicusFlow = {
       ],
       link: "endTurn"
     },
-    kill: {
+    crush: {
       applyEffects: [
         { morphat: ["selecttower", "walls"] },
-        { killat: "selectkill" }
+        { killat: "selectcrush" }
       ],
       link: "endTurn"
     }

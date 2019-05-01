@@ -17,7 +17,7 @@ const emptyArtifactLayers = {
   madecatapults: {},
   madetowers: {},
   madewalls: {},
-  killtargets: {}
+  crushtargets: {}
 };
 const connections = boardConnections({ height: 7, width: 8 });
 const relativeDirs = makeRelativeDirs([]);
@@ -105,7 +105,7 @@ let game: Partial<AlgolGame> = {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      killtargets: step.ARTIFACTS.killtargets,
+      crushtargets: step.ARTIFACTS.crushtargets,
       madecatapults: step.ARTIFACTS.madecatapults,
       madetowers: step.ARTIFACTS.madetowers,
       madewalls: step.ARTIFACTS.madewalls
@@ -207,7 +207,7 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.move1 = () => defaultInstruction(1);
-  game.action.kill1 = step => {
+  game.action.crush1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -221,9 +221,9 @@ let game: Partial<AlgolGame> = {
         };
       }
     }
-    if (UNITLAYERS.oppcatapults[MARKS.selectkill]) {
+    if (UNITLAYERS.oppcatapults[MARKS.selectcrush]) {
       {
-        let unitid = (UNITLAYERS.units[MARKS.selectkill] || {}).id;
+        let unitid = (UNITLAYERS.units[MARKS.selectcrush] || {}).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
@@ -232,7 +232,7 @@ let game: Partial<AlgolGame> = {
         }
       }
     } else {
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectkill] || {}).id];
+      delete UNITDATA[(UNITLAYERS.units[MARKS.selectcrush] || {}).id];
     }
     UNITLAYERS = {
       units: {},
@@ -291,14 +291,14 @@ let game: Partial<AlgolGame> = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.instruction.kill1 = () => defaultInstruction(1);
+  game.instruction.crush1 = () => defaultInstruction(1);
   game.action.sacrifice1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
     {
-      let unitid = (UNITLAYERS.units[MARKS.selectkill] || {}).id;
+      let unitid = (UNITLAYERS.units[MARKS.selectcrush] || {}).id;
       if (unitid) {
         UNITDATA[unitid] = {
           ...UNITDATA[unitid],
@@ -469,7 +469,7 @@ let game: Partial<AlgolGame> = {
   game.action.selecttower1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: {},
-      killtargets: {}
+      crushtargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -506,15 +506,15 @@ let game: Partial<AlgolGame> = {
           POS &&
           { ...UNITLAYERS.oppcatapults, ...UNITLAYERS.oppwalls }[POS]
         ) {
-          ARTIFACTS.killtargets[POS] = emptyObj;
+          ARTIFACTS.crushtargets[POS] = emptyObj;
         }
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
       LINKS.actions[pos] = "selectmove1";
     }
-    for (const pos of Object.keys(ARTIFACTS.killtargets)) {
-      LINKS.actions[pos] = "selectkill1";
+    for (const pos of Object.keys(ARTIFACTS.crushtargets)) {
+      LINKS.actions[pos] = "selectcrush1";
     }
     return {
       LINKS,
@@ -538,12 +538,14 @@ let game: Partial<AlgolGame> = {
             Object.keys(ARTIFACTS.movetargets).length !== 0
               ? { text: "a move target" }
               : undefined,
-            Object.keys(ARTIFACTS.killtargets).length !== 0
+            Object.keys(ARTIFACTS.crushtargets).length !== 0
               ? collapseContent({
                   line: [
                     { text: "a" },
                     { unittype: ["pawn", 2] },
-                    { text: "to kill" }
+                    { text: "or" },
+                    { unittype: ["queen", 2] },
+                    { text: "to crush" }
                   ]
                 })
               : undefined
@@ -575,7 +577,7 @@ let game: Partial<AlgolGame> = {
   game.action.selectmove1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      killtargets: step.ARTIFACTS.killtargets,
+      crushtargets: step.ARTIFACTS.crushtargets,
       madecatapults: {},
       madetowers: {},
       madewalls: {}
@@ -752,15 +754,15 @@ let game: Partial<AlgolGame> = {
       ]
     });
   };
-  game.action.selectkill1 = (step, newMarkPos) => {
+  game.action.selectcrush1 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
       selecttower: step.MARKS.selecttower,
-      selectkill: newMarkPos
+      selectcrush: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
-    LINKS.actions.kill = "kill1";
-    if (UNITLAYERS.oppcatapults[MARKS.selectkill]) {
+    LINKS.actions.crush = "crush1";
+    if (UNITLAYERS.oppcatapults[MARKS.selectcrush]) {
       LINKS.actions.sacrifice = "sacrifice1";
     }
     return {
@@ -773,13 +775,13 @@ let game: Partial<AlgolGame> = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.instruction.selectkill1 = step => {
+  game.instruction.selectcrush1 = step => {
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
-        { command: "kill" },
+        { command: "crush" },
         { text: "to turn" },
         {
           unit: [
@@ -793,20 +795,20 @@ let game: Partial<AlgolGame> = {
         { text: "to a" },
         { unittype: ["pawn", 1] },
         { text: "and" },
-        UNITLAYERS.walls[MARKS.selectkill]
+        UNITLAYERS.walls[MARKS.selectcrush]
           ? collapseContent({
               line: [
                 { text: "destroy" },
                 {
                   unit: [
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
-                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                      (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
-                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                    (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
                       | 0
                       | 1
                       | 2,
-                    MARKS.selectkill
+                    MARKS.selectcrush
                   ]
                 }
               ]
@@ -817,13 +819,13 @@ let game: Partial<AlgolGame> = {
                 {
                   unit: [
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
-                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                      (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
-                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                    (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
                       | 0
                       | 1
                       | 2,
-                    MARKS.selectkill
+                    MARKS.selectcrush
                   ]
                 },
                 { text: "to a" },
@@ -846,13 +848,13 @@ let game: Partial<AlgolGame> = {
                 {
                   unit: [
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
-                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                      (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
-                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                    (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
                       | 0
                       | 1
                       | 2,
-                    MARKS.selectkill
+                    MARKS.selectcrush
                   ]
                 },
                 { text: "to a" },
@@ -1120,7 +1122,7 @@ let game: Partial<AlgolGame> = {
     let LINKS: AlgolStepLinks = { actions: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      killtargets: step.ARTIFACTS.killtargets,
+      crushtargets: step.ARTIFACTS.crushtargets,
       madecatapults: step.ARTIFACTS.madecatapults,
       madetowers: step.ARTIFACTS.madetowers,
       madewalls: step.ARTIFACTS.madewalls
@@ -1222,7 +1224,7 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.move2 = () => defaultInstruction(2);
-  game.action.kill2 = step => {
+  game.action.crush2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1236,9 +1238,9 @@ let game: Partial<AlgolGame> = {
         };
       }
     }
-    if (UNITLAYERS.oppcatapults[MARKS.selectkill]) {
+    if (UNITLAYERS.oppcatapults[MARKS.selectcrush]) {
       {
-        let unitid = (UNITLAYERS.units[MARKS.selectkill] || {}).id;
+        let unitid = (UNITLAYERS.units[MARKS.selectcrush] || {}).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
@@ -1247,7 +1249,7 @@ let game: Partial<AlgolGame> = {
         }
       }
     } else {
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectkill] || {}).id];
+      delete UNITDATA[(UNITLAYERS.units[MARKS.selectcrush] || {}).id];
     }
     UNITLAYERS = {
       units: {},
@@ -1306,14 +1308,14 @@ let game: Partial<AlgolGame> = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.instruction.kill2 = () => defaultInstruction(2);
+  game.instruction.crush2 = () => defaultInstruction(2);
   game.action.sacrifice2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
     {
-      let unitid = (UNITLAYERS.units[MARKS.selectkill] || {}).id;
+      let unitid = (UNITLAYERS.units[MARKS.selectcrush] || {}).id;
       if (unitid) {
         UNITDATA[unitid] = {
           ...UNITDATA[unitid],
@@ -1484,7 +1486,7 @@ let game: Partial<AlgolGame> = {
   game.action.selecttower2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: {},
-      killtargets: {}
+      crushtargets: {}
     };
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
@@ -1521,15 +1523,15 @@ let game: Partial<AlgolGame> = {
           POS &&
           { ...UNITLAYERS.oppcatapults, ...UNITLAYERS.oppwalls }[POS]
         ) {
-          ARTIFACTS.killtargets[POS] = emptyObj;
+          ARTIFACTS.crushtargets[POS] = emptyObj;
         }
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
       LINKS.actions[pos] = "selectmove2";
     }
-    for (const pos of Object.keys(ARTIFACTS.killtargets)) {
-      LINKS.actions[pos] = "selectkill2";
+    for (const pos of Object.keys(ARTIFACTS.crushtargets)) {
+      LINKS.actions[pos] = "selectcrush2";
     }
     return {
       LINKS,
@@ -1553,12 +1555,14 @@ let game: Partial<AlgolGame> = {
             Object.keys(ARTIFACTS.movetargets).length !== 0
               ? { text: "a move target" }
               : undefined,
-            Object.keys(ARTIFACTS.killtargets).length !== 0
+            Object.keys(ARTIFACTS.crushtargets).length !== 0
               ? collapseContent({
                   line: [
                     { text: "a" },
                     { unittype: ["pawn", 1] },
-                    { text: "to kill" }
+                    { text: "or" },
+                    { unittype: ["queen", 1] },
+                    { text: "to crush" }
                   ]
                 })
               : undefined
@@ -1590,7 +1594,7 @@ let game: Partial<AlgolGame> = {
   game.action.selectmove2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      killtargets: step.ARTIFACTS.killtargets,
+      crushtargets: step.ARTIFACTS.crushtargets,
       madecatapults: {},
       madetowers: {},
       madewalls: {}
@@ -1767,15 +1771,15 @@ let game: Partial<AlgolGame> = {
       ]
     });
   };
-  game.action.selectkill2 = (step, newMarkPos) => {
+  game.action.selectcrush2 = (step, newMarkPos) => {
     let LINKS: AlgolStepLinks = { actions: {} };
     let MARKS = {
       selecttower: step.MARKS.selecttower,
-      selectkill: newMarkPos
+      selectcrush: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
-    LINKS.actions.kill = "kill2";
-    if (UNITLAYERS.oppcatapults[MARKS.selectkill]) {
+    LINKS.actions.crush = "crush2";
+    if (UNITLAYERS.oppcatapults[MARKS.selectcrush]) {
       LINKS.actions.sacrifice = "sacrifice2";
     }
     return {
@@ -1788,13 +1792,13 @@ let game: Partial<AlgolGame> = {
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
-  game.instruction.selectkill2 = step => {
+  game.instruction.selectcrush2 = step => {
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
-        { command: "kill" },
+        { command: "crush" },
         { text: "to turn" },
         {
           unit: [
@@ -1808,20 +1812,20 @@ let game: Partial<AlgolGame> = {
         { text: "to a" },
         { unittype: ["pawn", 2] },
         { text: "and" },
-        UNITLAYERS.walls[MARKS.selectkill]
+        UNITLAYERS.walls[MARKS.selectcrush]
           ? collapseContent({
               line: [
                 { text: "destroy" },
                 {
                   unit: [
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
-                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                      (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
-                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                    (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
                       | 0
                       | 1
                       | 2,
-                    MARKS.selectkill
+                    MARKS.selectcrush
                   ]
                 }
               ]
@@ -1832,13 +1836,13 @@ let game: Partial<AlgolGame> = {
                 {
                   unit: [
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
-                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                      (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
-                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                    (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
                       | 0
                       | 1
                       | 2,
-                    MARKS.selectkill
+                    MARKS.selectcrush
                   ]
                 },
                 { text: "to a" },
@@ -1861,13 +1865,13 @@ let game: Partial<AlgolGame> = {
                 {
                   unit: [
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
-                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                      (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
-                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                    (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
                       | 0
                       | 1
                       | 2,
-                    MARKS.selectkill
+                    MARKS.selectcrush
                   ]
                 },
                 { text: "to a" },

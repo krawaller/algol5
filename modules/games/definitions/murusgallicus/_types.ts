@@ -5,13 +5,13 @@ export type MurusgallicusBoardWidth = 8;
 
 export type MurusgallicusTerrain = "homerow";
 export type MurusgallicusUnit = "towers" | "walls";
-export type MurusgallicusMark = "selecttower" | "selectmove" | "selectkill";
-export type MurusgallicusCommand = "move" | "kill";
+export type MurusgallicusMark = "selecttower" | "selectmove" | "selectcrush";
+export type MurusgallicusCommand = "move" | "crush";
 export type MurusgallicusPhaseCommand = never;
 export type MurusgallicusPhase = "startTurn" | MurusgallicusMark;
 export type MurusgallicusUnitLayer = "units" | "myunits" | "oppunits" | "towers" | "mytowers" | "opptowers" | "walls" | "mywalls" | "oppwalls";
-export type MurusgallicusGenerator = "findmovetargets" | "findmoveresults" | "findkilltargets";
-export type MurusgallicusArtifactLayer = "movetargets" | "madetowers" | "madewalls" | "killtargets";
+export type MurusgallicusGenerator = "findmovetargets" | "findmoveresults" | "findcrushtargets";
+export type MurusgallicusArtifactLayer = "movetargets" | "madetowers" | "madewalls" | "crushtargets";
 export type MurusgallicusTerrainLayer = "homerow" | "myhomerow" | "opphomerow" | "nohomerow";
 export type MurusgallicusLayer = CommonLayer | MurusgallicusUnitLayer | MurusgallicusArtifactLayer | MurusgallicusTerrainLayer;
 export type MurusgallicusBattlePos = any;

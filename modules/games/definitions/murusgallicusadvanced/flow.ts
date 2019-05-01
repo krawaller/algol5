@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedFlow } from './_types';
+import { MurusgallicusadvancedFlow } from "./_types";
 
 const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
   startTurn: { links: ["selecttower", "selectcatapult"] },
@@ -11,19 +11,19 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
   marks: {
     selecttower: {
       from: "mytowers",
-      runGenerators: ["findmovetargets", "findkilltargets"],
-      links: ["selectmove", "selectkill"]
+      runGenerators: ["findmovetargets", "findcrushtargets"],
+      links: ["selectmove", "selectcrush"]
     },
     selectmove: {
       from: "movetargets",
       runGenerator: "findmoveresults",
       link: "move"
     },
-    selectkill: {
-      from: "killtargets",
+    selectcrush: {
+      from: "crushtargets",
       links: [
-        "kill",
-        { if: [{ anyat: ["oppcatapults", "selectkill"] }, "sacrifice"] }
+        "crush",
+        { if: [{ anyat: ["oppcatapults", "selectcrush"] }, "sacrifice"] }
       ]
     },
     selectcatapult: {
@@ -50,14 +50,14 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
       ],
       link: "endTurn"
     },
-    kill: {
+    crush: {
       applyEffects: [
         { morphat: ["selecttower", "walls"] },
         {
           ifelse: [
-            { anyat: ["oppcatapults", "selectkill"] },
-            { morphat: ["selectkill", "towers"] },
-            { killat: "selectkill" }
+            { anyat: ["oppcatapults", "selectcrush"] },
+            { morphat: ["selectcrush", "towers"] },
+            { killat: "selectcrush" }
           ]
         }
       ],
@@ -65,7 +65,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
     },
     sacrifice: {
       applyEffects: [
-        { morphat: ["selectkill", "walls"] },
+        { morphat: ["selectcrush", "walls"] },
         { killat: "selecttower" }
       ],
       link: "endTurn"

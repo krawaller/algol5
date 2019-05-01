@@ -91,31 +91,12 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn1 = step => {
-    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "a" },
-        collapseContent({
-          line: [
-            Object.keys(UNITLAYERS.mytowers).length !== 0
-              ? { unittype: ["rook", 1] }
-              : undefined,
-            Object.keys(UNITLAYERS.mycatapults).length !== 0
-              ? { unittype: ["queen", 1] }
-              : undefined
-          ]
-            .filter(i => !!i)
-            .reduce((mem, i, n, list) => {
-              mem.push(i);
-              if (n === list.length - 2) {
-                mem.push({ text: " or " });
-              } else if (n < list.length - 2) {
-                mem.push({ text: ", " });
-              }
-              return mem;
-            }, [])
-        }),
+        { unittype: ["rook", 1] },
+        { text: "or" },
+        { unittype: ["queen", 1] },
         { text: "to act with" }
       ]
     });
@@ -548,6 +529,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.selecttower1 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
@@ -559,8 +541,8 @@ let game: Partial<AlgolGame> = {
             Object.keys(ARTIFACTS.killtargets).length !== 0
               ? collapseContent({
                   line: [
-                    { text: "an enemy" },
-                    { unittype: ["pawn", 1] },
+                    { text: "a" },
+                    { unittype: ["pawn", 2] },
                     { text: "to kill" }
                   ]
                 })
@@ -577,9 +559,16 @@ let game: Partial<AlgolGame> = {
               return mem;
             }, [])
         }),
-        { text: "for the" },
-        { pos: MARKS.selecttower },
-        { unittype: ["rook", 1] }
+        { text: "for" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selecttower] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
+            MARKS.selecttower
+          ]
+        }
       ]
     });
   };
@@ -632,16 +621,134 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.selectmove1 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to overturn your" },
-        { pos: MARKS.selecttower },
-        { unittype: ["rook", 1] },
-        { text: "towards" },
-        { pos: MARKS.selectmove }
+        { text: "to overturn" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selecttower] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
+            MARKS.selecttower
+          ]
+        },
+        { text: "," },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.madewalls).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "creating" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.madewalls)
+                        .map(p => ({
+                          unit: [
+                            {
+                              towers: "rook",
+                              walls: "pawn",
+                              catapults: "queen"
+                            }["walls"],
+                            1,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    })
+                  ]
+                })
+              : undefined,
+            Object.keys(ARTIFACTS.madetowers).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "turning" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.madetowers)
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            {
+                              towers: "rook",
+                              walls: "pawn",
+                              catapults: "queen"
+                            }[UNITLAYERS.units[p].group],
+                            UNITLAYERS.units[p].owner as 0 | 1 | 2,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    }),
+                    { text: "into" },
+                    { unittype: ["rook", 1] }
+                  ]
+                })
+              : undefined,
+            Object.keys(ARTIFACTS.madecatapults).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "turning" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.madecatapults)
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            {
+                              towers: "rook",
+                              walls: "pawn",
+                              catapults: "queen"
+                            }[UNITLAYERS.units[p].group],
+                            UNITLAYERS.units[p].owner as 0 | 1 | 2,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    }),
+                    { text: "into" },
+                    { unittype: ["queen", 1] }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " and " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
       ]
     });
   };
@@ -673,34 +780,83 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "kill" },
-        { text: "to make a section of the" },
-        { pos: MARKS.selecttower },
-        { unittype: ["rook", 1] },
+        { text: "to turn" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selecttower] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
+            MARKS.selecttower
+          ]
+        },
+        { text: "to a" },
+        { unittype: ["pawn", 1] },
+        { text: "and" },
         UNITLAYERS.walls[MARKS.selectkill]
           ? collapseContent({
               line: [
-                { text: "crush the enemy" },
-                { unittype: ["pawn", 1] },
-                { text: "at" },
-                { pos: MARKS.selectkill }
+                { text: "destroy" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectkill
+                  ]
+                }
               ]
             })
           : collapseContent({
               line: [
-                { text: "reduce the enemy" },
-                { unittype: ["queen", 1] },
-                { text: "at" },
-                { pos: MARKS.selectkill },
+                { text: "reduce" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectkill
+                  ]
+                },
                 { text: "to a" },
-                { unittype: ["rook", 1] },
+                { unittype: ["rook", 2] },
                 { text: ", or" },
                 { command: "sacrifice" },
-                { text: "your" },
-                { unittype: ["rook", 1] },
-                { text: "entirely to turn the" },
-                { unittype: ["queen", 1] },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selecttower] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selecttower] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selecttower
+                  ]
+                },
+                { text: "entirely to reduce" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectkill
+                  ]
+                },
                 { text: "to a" },
-                { unittype: ["pawn", 1] },
+                { unittype: ["pawn", 2] },
                 { text: "!" }
               ]
             })
@@ -746,12 +902,20 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectcatapult1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to fire the top section of your" },
-        { pos: MARKS.selectcatapult },
-        { unittype: ["queen", 1] }
+        { text: "where to fire the top section of" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selectcatapult] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectcatapult] || {}).owner as 0 | 1 | 2,
+            MARKS.selectcatapult
+          ]
+        }
       ]
     });
   };
@@ -778,22 +942,40 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "fire" },
-        { text: "to shoot a section of the" },
-        { pos: MARKS.selectcatapult },
-        { unittype: ["queen", 1] },
+        { text: "to turn" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selectcatapult] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectcatapult] || {}).owner as 0 | 1 | 2,
+            MARKS.selectcatapult
+          ]
+        },
+        { text: "into a" },
+        { unittype: ["rook", 1] },
         UNITLAYERS.walls[MARKS.selectfire]
           ? collapseContent({
               line: [
-                { text: "and destroy the enemy" },
-                { unittype: ["pawn", 1] },
-                { text: "at" },
-                { pos: MARKS.selectfire }
+                { text: "and destroy" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectfire] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectfire] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectfire
+                  ]
+                }
               ]
             })
           : UNITLAYERS.units[MARKS.selectfire]
           ? collapseContent({
               line: [
-                { text: ", reducing the enemy" },
+                { text: "and reduce" },
                 {
                   unit: [
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
@@ -806,21 +988,24 @@ let game: Partial<AlgolGame> = {
                     MARKS.selectfire
                   ]
                 },
-                { text: "at" },
-                { pos: MARKS.selectfire },
                 { text: "to a" },
                 UNITLAYERS.catapults[MARKS.selectfire]
-                  ? { unittype: ["rook", 1] }
-                  : { unittype: ["pawn", 1] }
+                  ? { unittype: ["rook", 2] }
+                  : { unittype: ["pawn", 2] }
               ]
             })
           : collapseContent({
               line: [
-                { text: "at" },
-                { pos: MARKS.selectfire },
-                { text: ", gaining a" },
-                { unittype: ["pawn", 1] },
-                { text: "there" }
+                { text: "and spawn" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      "walls"
+                    ],
+                    1,
+                    MARKS.selectfire
+                  ]
+                }
               ]
             })
       ]
@@ -889,31 +1074,12 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.startTurn2 = step => {
-    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "a" },
-        collapseContent({
-          line: [
-            Object.keys(UNITLAYERS.mytowers).length !== 0
-              ? { unittype: ["rook", 2] }
-              : undefined,
-            Object.keys(UNITLAYERS.mycatapults).length !== 0
-              ? { unittype: ["queen", 2] }
-              : undefined
-          ]
-            .filter(i => !!i)
-            .reduce((mem, i, n, list) => {
-              mem.push(i);
-              if (n === list.length - 2) {
-                mem.push({ text: " or " });
-              } else if (n < list.length - 2) {
-                mem.push({ text: ", " });
-              }
-              return mem;
-            }, [])
-        }),
+        { unittype: ["rook", 2] },
+        { text: "or" },
+        { unittype: ["queen", 2] },
         { text: "to act with" }
       ]
     });
@@ -1378,6 +1544,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.selecttower2 = step => {
     let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
@@ -1389,8 +1556,8 @@ let game: Partial<AlgolGame> = {
             Object.keys(ARTIFACTS.killtargets).length !== 0
               ? collapseContent({
                   line: [
-                    { text: "an enemy" },
-                    { unittype: ["pawn", 2] },
+                    { text: "a" },
+                    { unittype: ["pawn", 1] },
                     { text: "to kill" }
                   ]
                 })
@@ -1407,9 +1574,16 @@ let game: Partial<AlgolGame> = {
               return mem;
             }, [])
         }),
-        { text: "for the" },
-        { pos: MARKS.selecttower },
-        { unittype: ["rook", 2] }
+        { text: "for" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selecttower] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
+            MARKS.selecttower
+          ]
+        }
       ]
     });
   };
@@ -1462,16 +1636,134 @@ let game: Partial<AlgolGame> = {
     };
   };
   game.instruction.selectmove2 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to overturn your" },
-        { pos: MARKS.selecttower },
-        { unittype: ["rook", 2] },
-        { text: "towards" },
-        { pos: MARKS.selectmove }
+        { text: "to overturn" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selecttower] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
+            MARKS.selecttower
+          ]
+        },
+        { text: "," },
+        collapseContent({
+          line: [
+            Object.keys(ARTIFACTS.madewalls).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "creating" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.madewalls)
+                        .map(p => ({
+                          unit: [
+                            {
+                              towers: "rook",
+                              walls: "pawn",
+                              catapults: "queen"
+                            }["walls"],
+                            2,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    })
+                  ]
+                })
+              : undefined,
+            Object.keys(ARTIFACTS.madetowers).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "turning" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.madetowers)
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            {
+                              towers: "rook",
+                              walls: "pawn",
+                              catapults: "queen"
+                            }[UNITLAYERS.units[p].group],
+                            UNITLAYERS.units[p].owner as 0 | 1 | 2,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    }),
+                    { text: "into" },
+                    { unittype: ["rook", 2] }
+                  ]
+                })
+              : undefined,
+            Object.keys(ARTIFACTS.madecatapults).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "turning" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.madecatapults)
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            {
+                              towers: "rook",
+                              walls: "pawn",
+                              catapults: "queen"
+                            }[UNITLAYERS.units[p].group],
+                            UNITLAYERS.units[p].owner as 0 | 1 | 2,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    }),
+                    { text: "into" },
+                    { unittype: ["queen", 2] }
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " and " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
       ]
     });
   };
@@ -1503,34 +1795,83 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "kill" },
-        { text: "to make a section of the" },
-        { pos: MARKS.selecttower },
-        { unittype: ["rook", 2] },
+        { text: "to turn" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selecttower] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
+            MARKS.selecttower
+          ]
+        },
+        { text: "to a" },
+        { unittype: ["pawn", 2] },
+        { text: "and" },
         UNITLAYERS.walls[MARKS.selectkill]
           ? collapseContent({
               line: [
-                { text: "crush the enemy" },
-                { unittype: ["pawn", 2] },
-                { text: "at" },
-                { pos: MARKS.selectkill }
+                { text: "destroy" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectkill
+                  ]
+                }
               ]
             })
           : collapseContent({
               line: [
-                { text: "reduce the enemy" },
-                { unittype: ["queen", 2] },
-                { text: "at" },
-                { pos: MARKS.selectkill },
+                { text: "reduce" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectkill
+                  ]
+                },
                 { text: "to a" },
-                { unittype: ["rook", 2] },
+                { unittype: ["rook", 1] },
                 { text: ", or" },
                 { command: "sacrifice" },
-                { text: "your" },
-                { unittype: ["rook", 2] },
-                { text: "entirely to turn the" },
-                { unittype: ["queen", 2] },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selecttower] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selecttower] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selecttower
+                  ]
+                },
+                { text: "entirely to reduce" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectkill] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectkill] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectkill
+                  ]
+                },
                 { text: "to a" },
-                { unittype: ["pawn", 2] },
+                { unittype: ["pawn", 1] },
                 { text: "!" }
               ]
             })
@@ -1576,12 +1917,20 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectcatapult2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "where to fire the top section of your" },
-        { pos: MARKS.selectcatapult },
-        { unittype: ["queen", 2] }
+        { text: "where to fire the top section of" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selectcatapult] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectcatapult] || {}).owner as 0 | 1 | 2,
+            MARKS.selectcatapult
+          ]
+        }
       ]
     });
   };
@@ -1608,22 +1957,40 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "fire" },
-        { text: "to shoot a section of the" },
-        { pos: MARKS.selectcatapult },
-        { unittype: ["queen", 2] },
+        { text: "to turn" },
+        {
+          unit: [
+            { towers: "rook", walls: "pawn", catapults: "queen" }[
+              (UNITLAYERS.units[MARKS.selectcatapult] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectcatapult] || {}).owner as 0 | 1 | 2,
+            MARKS.selectcatapult
+          ]
+        },
+        { text: "into a" },
+        { unittype: ["rook", 2] },
         UNITLAYERS.walls[MARKS.selectfire]
           ? collapseContent({
               line: [
-                { text: "and destroy the enemy" },
-                { unittype: ["pawn", 2] },
-                { text: "at" },
-                { pos: MARKS.selectfire }
+                { text: "and destroy" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      (UNITLAYERS.units[MARKS.selectfire] || {}).group
+                    ],
+                    (UNITLAYERS.units[MARKS.selectfire] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    MARKS.selectfire
+                  ]
+                }
               ]
             })
           : UNITLAYERS.units[MARKS.selectfire]
           ? collapseContent({
               line: [
-                { text: ", reducing the enemy" },
+                { text: "and reduce" },
                 {
                   unit: [
                     { towers: "rook", walls: "pawn", catapults: "queen" }[
@@ -1636,21 +2003,24 @@ let game: Partial<AlgolGame> = {
                     MARKS.selectfire
                   ]
                 },
-                { text: "at" },
-                { pos: MARKS.selectfire },
                 { text: "to a" },
                 UNITLAYERS.catapults[MARKS.selectfire]
-                  ? { unittype: ["rook", 2] }
-                  : { unittype: ["pawn", 2] }
+                  ? { unittype: ["rook", 1] }
+                  : { unittype: ["pawn", 1] }
               ]
             })
           : collapseContent({
               line: [
-                { text: "at" },
-                { pos: MARKS.selectfire },
-                { text: ", gaining a" },
-                { unittype: ["pawn", 2] },
-                { text: "there" }
+                { text: "and spawn" },
+                {
+                  unit: [
+                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                      "walls"
+                    ],
+                    2,
+                    MARKS.selectfire
+                  ]
+                }
               ]
             })
       ]

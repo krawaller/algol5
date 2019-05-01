@@ -2,17 +2,7 @@ import { MurusgallicusadvancedInstructions } from "./_types";
 
 const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
   startTurn: {
-    line: [
-      "Select",
-      "a",
-      {
-        orlist: [
-          { if: [{ notempty: "mytowers" }, "rook"] },
-          { if: [{ notempty: "mycatapults" }, "queen"] }
-        ]
-      },
-      "to act with"
-    ]
+    line: ["Select", "towers", "or", "catapults", "to act with"]
   },
   selecttower: {
     line: [
@@ -23,54 +13,92 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
           {
             if: [
               { notempty: "killtargets" },
-              { line: ["an enemy", "pawn", "to kill"] }
+              {
+                line: [
+                  "a",
+                  { unittype: ["walls", { playercase: [2, 1] }] },
+                  "to kill"
+                ]
+              }
             ]
           }
         ]
       },
-      "for the",
-      "selecttower",
-      "rook"
+      "for",
+      { unitat: "selecttower" }
     ]
   },
   selectmove: {
     line: [
       "Press",
       "move",
-      "to overturn your",
-      "selecttower",
-      "rook",
-      "towards",
-      "selectmove"
+      "to overturn",
+      { unitat: "selecttower" },
+      ",",
+      {
+        andlist: [
+          {
+            if: [
+              { notempty: "madewalls" },
+              {
+                line: [
+                  "creating",
+                  { unittypeset: ["walls", ["player"], "madewalls"] }
+                ]
+              }
+            ]
+          },
+          {
+            if: [
+              { notempty: "madetowers" },
+              {
+                line: ["turning", { unitlist: "madetowers" }, "into", "towers"]
+              }
+            ]
+          },
+          {
+            if: [
+              { notempty: "madecatapults" },
+              {
+                line: [
+                  "turning",
+                  { unitlist: "madecatapults" },
+                  "into",
+                  "catapults"
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ]
   },
   selectkill: {
     line: [
       "Press",
       "kill",
-      "to make a section of the",
-      "selecttower",
-      "rook",
+      "to turn",
+      { unitat: "selecttower" },
+      "to a",
+      "walls",
+      "and",
       {
         ifelse: [
           { anyat: ["walls", "selectkill"] },
-          { line: ["crush the enemy", "pawn", "at", "selectkill"] },
+          { line: ["destroy", { unitat: "selectkill" }] },
           {
             line: [
-              "reduce the enemy",
-              "queen",
-              "at",
-              "selectkill",
+              "reduce",
+              { unitat: "selectkill" },
               "to a",
-              "rook",
+              { unittype: ["towers", { playercase: [2, 1] }] },
               ", or",
               "sacrifice",
-              "your",
-              "rook",
-              "entirely to turn the",
-              "queen",
+              { unitat: "selecttower" },
+              "entirely to reduce",
+              { unitat: "selectkill" },
               "to a",
-              "pawn",
+              { unittype: ["walls", { playercase: [2, 1] }] },
               "!"
             ]
           }
@@ -81,42 +109,45 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
   selectcatapult: {
     line: [
       "Select",
-      "where to fire the top section of your",
-      "selectcatapult",
-      "queen"
+      "where to fire the top section of",
+      { unitat: "selectcatapult" }
     ]
   },
   selectfire: {
     line: [
       "Press",
       "fire",
-      "to shoot a section of the",
-      "selectcatapult",
-      "queen",
+      "to turn",
+      { unitat: "selectcatapult" },
+      "into a",
+      "towers",
       {
         ifelse: [
           { anyat: ["walls", "selectfire"] },
-          { line: ["and destroy the enemy", "pawn", "at", "selectfire"] },
+          { line: ["and destroy", { unitat: "selectfire" }] },
           {
             ifelse: [
               { anyat: ["units", "selectfire"] },
               {
                 line: [
-                  ", reducing the enemy",
+                  "and reduce",
                   { unitat: "selectfire" },
-                  "at",
-                  "selectfire",
                   "to a",
                   {
                     ifelse: [
                       { anyat: ["catapults", "selectfire"] },
-                      "rook",
-                      "pawn"
+                      { unittype: ["towers", { playercase: [2, 1] }] },
+                      { unittype: ["walls", { playercase: [2, 1] }] }
                     ]
                   }
                 ]
               },
-              { line: ["at", "selectfire", ", gaining a", "pawn", "there"] }
+              {
+                line: [
+                  "and spawn",
+                  { unittypepos: ["walls", ["player"], "selectfire"] }
+                ]
+              }
             ]
           }
         ]

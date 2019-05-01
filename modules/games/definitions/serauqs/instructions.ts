@@ -4,8 +4,8 @@ const serauqsInstructions: SerauqsInstructions = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 2] },
-      { line: ["Select", "which", "pawn", "or", "king", "to move"] },
-      { line: ["Select", "which", "pawn", "to promote"] }
+      { line: ["Select", "which", "soldiers", "or", "wild", "to move"] },
+      { line: ["Select", "which", "soldiers", "to promote to", "wild"] }
     ]
   },
   selectunit: {
@@ -16,12 +16,11 @@ const serauqsInstructions: SerauqsInstructions = {
           "Select",
           "where to",
           "move",
-          "the",
           { unitat: "selectunit" },
           {
             if: [
               { anyat: ["wild", "selectunit"] },
-              "(remeber that it matches for your opponent too!)"
+              "(remember that it matches for your opponent too!)"
             ]
           }
         ]
@@ -30,10 +29,10 @@ const serauqsInstructions: SerauqsInstructions = {
         line: [
           "Press",
           "promote",
-          "to turn this",
-          "pawn",
-          "to a",
-          "king",
+          "to turn",
+          { unitat: "selectunit" },
+          "into",
+          "wild",
           ", making it match for your opponent too"
         ]
       }
@@ -43,9 +42,9 @@ const serauqsInstructions: SerauqsInstructions = {
     line: [
       "Press",
       "move",
-      "to go from",
-      "selectunit",
-      "to",
+      "to make",
+      { unitat: "selectunit" },
+      "go to",
       "selectmovetarget"
     ]
   }

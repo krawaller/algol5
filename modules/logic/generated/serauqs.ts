@@ -84,7 +84,8 @@ let game: Partial<AlgolGame> = {
             { select: "Select" },
             { text: "which" },
             { unittype: ["pawn", 1] },
-            { text: "to promote" }
+            { text: "to promote to" },
+            { unittype: ["king", 1] }
           ]
         });
   };
@@ -284,7 +285,6 @@ let game: Partial<AlgolGame> = {
             { select: "Select" },
             { text: "where to" },
             { command: "move" },
-            { text: "the" },
             {
               unit: [
                 { soldiers: "pawn", wild: "king" }[
@@ -303,9 +303,17 @@ let game: Partial<AlgolGame> = {
           line: [
             { text: "Press" },
             { command: "promote" },
-            { text: "to turn this" },
-            { unittype: ["pawn", 1] },
-            { text: "to a" },
+            { text: "to turn" },
+            {
+              unit: [
+                { soldiers: "pawn", wild: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+                MARKS.selectunit
+              ]
+            },
+            { text: "into" },
             { unittype: ["king", 1] },
             { text: ", making it match for your opponent too" }
           ]
@@ -325,13 +333,22 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectmovetarget1 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { soldiers: "pawn", wild: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go to" },
         { pos: MARKS.selectmovetarget }
       ]
     });
@@ -399,7 +416,8 @@ let game: Partial<AlgolGame> = {
             { select: "Select" },
             { text: "which" },
             { unittype: ["pawn", 2] },
-            { text: "to promote" }
+            { text: "to promote to" },
+            { unittype: ["king", 2] }
           ]
         });
   };
@@ -624,7 +642,6 @@ let game: Partial<AlgolGame> = {
             { select: "Select" },
             { text: "where to" },
             { command: "move" },
-            { text: "the" },
             {
               unit: [
                 { soldiers: "pawn", wild: "king" }[
@@ -643,9 +660,17 @@ let game: Partial<AlgolGame> = {
           line: [
             { text: "Press" },
             { command: "promote" },
-            { text: "to turn this" },
-            { unittype: ["pawn", 2] },
-            { text: "to a" },
+            { text: "to turn" },
+            {
+              unit: [
+                { soldiers: "pawn", wild: "king" }[
+                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+                MARKS.selectunit
+              ]
+            },
+            { text: "into" },
             { unittype: ["king", 2] },
             { text: ", making it match for your opponent too" }
           ]
@@ -665,13 +690,22 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.selectmovetarget2 = step => {
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to go from" },
-        { pos: MARKS.selectunit },
-        { text: "to" },
+        { text: "to make" },
+        {
+          unit: [
+            { soldiers: "pawn", wild: "king" }[
+              (UNITLAYERS.units[MARKS.selectunit] || {}).group
+            ],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            MARKS.selectunit
+          ]
+        },
+        { text: "go to" },
         { pos: MARKS.selectmovetarget }
       ]
     });

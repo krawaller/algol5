@@ -20,27 +20,46 @@ type PieceProps = {
   mode?: "normal" | "available" | "selected";
 };
 
+type PieceState = {
+  pos: string;
+};
+
 /**
  * A component to show a playing piece icon. Used by the Piece component.
  */
-export const Piece: React.FunctionComponent<PieceProps> = ({
-  owner,
-  icon,
-  height,
-  width,
-  pos,
-  mode
-}) => {
-  return (
-    <div
-      style={{
-        ...positionStyles({ height, width, pos }),
-        transition: "left 0.3s ease, bottom 0.3s ease",
-        userSelect: "none",
-        pointerEvents: "none"
-      }}
-    >
-      <Icon icon={icon} owner={owner} mode={mode} />
-    </div>
-  );
-};
+export class Piece extends React.Component<PieceProps, PieceState> {
+  constructor(props: PieceProps) {
+    super(props);
+    this.state = {
+      pos: props.from || props.pos
+    };
+  }
+  componentDidMount() {
+    if (this.props.from) {
+      setTimeout(() => {
+        this.setState({ pos: this.props.pos });
+      }, 10);
+    }
+  }
+  componentDidUpdate(prevProps: PieceProps) {
+    if (this.props.pos !== prevProps.pos) {
+      this.setState({ pos: this.props.pos });
+    }
+  }
+  render() {
+    const { owner, icon, height, width, mode } = this.props;
+    const { pos } = this.state;
+    return (
+      <div
+        style={{
+          ...positionStyles({ height, width, pos }),
+          transition: "left 0.3s ease, bottom 0.3s ease",
+          userSelect: "none",
+          pointerEvents: "none"
+        }}
+      >
+        <Icon icon={icon} owner={owner} mode={mode} />
+      </div>
+    );
+  }
+}

@@ -53,6 +53,13 @@ export class Tester extends Component<TesterProps, TesterState> {
           potentialMarks={ui.potentialMarks}
         />
         <Content content={ui.instruction} callback={this.handleAct} />
+        {ui.undo && (
+          <div>
+            <button onClick={() => this.handleAct("undo")}>
+              Undo {ui.undo}
+            </button>
+          </div>
+        )}
       </React.Fragment>
     );
   }

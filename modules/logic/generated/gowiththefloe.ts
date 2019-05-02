@@ -292,7 +292,8 @@ let game: Partial<AlgolGame> = {
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget1 = step => {
@@ -695,7 +696,8 @@ let game: Partial<AlgolGame> = {
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget2 = step => {
@@ -730,7 +732,8 @@ let game: Partial<AlgolGame> = {
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS: { selectunit: step.MARKS.selectunit, selecteattarget: newMarkPos },
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selecteattarget2 = step => {

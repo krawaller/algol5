@@ -5,12 +5,18 @@ import { tryToReachTurnEnd, newTurnFromRootStep } from "../helpers";
 export function hydrateStepInTurn(
   game: AlgolGame,
   turn: AlgolTurn,
-  stepId: string
+  stepId: string,
+  full?: boolean
 ): AlgolTurn {
   const step = turn.steps[stepId];
   if (step.massiveTree) {
     turn.viableStepIds[stepId] = true;
     return turn; // TODO - mark somehow? also check .canAlwaysEnd?
+  }
+  if (step.canAlwaysEnd && !full) {
+    turn.canEnd = true;
+    turn.viableStepIds[stepId] = true;
+    return turn;
   }
   const stepLinks = step.LINKS;
   if (stepLinks.endGame) {
@@ -42,7 +48,7 @@ export function hydrateStepInTurn(
       const func = stepLinks.actions[action];
       turn.steps[nextStepId] = game.action[func](step, action);
     }
-    turn = hydrateStepInTurn(game, turn, nextStepId);
+    turn = hydrateStepInTurn(game, turn, nextStepId, full);
     if (turn.viableStepIds[nextStepId]) {
       turn.canEnd = true;
       turn.viableStepIds[stepId] = true;

@@ -2,10 +2,15 @@ import * as React from "react";
 import { GameId } from "../../games/dist/list";
 import { AlgolUnitState, AlgolPosition, AlgolIcon } from "../../types";
 
+import { TransitionGroup } from "react-transition-group";
+
 import { Piece } from "./Piece";
 
 import dataURIs from "../../graphics/dist/svgDataURIs";
 import { Mark } from "./Mark";
+import Transition, {
+  TransitionStatus
+} from "react-transition-group/Transition";
 
 type BoardProps = {
   gameId: GameId;
@@ -56,24 +61,35 @@ export const Board: React.FunctionComponent<BoardProps> = ({
               piece={!!unitsByPos[pos]}
             />
           ))}
-        {Object.keys(units).map(id => (
-          <Piece
-            key={id}
-            from={units[id].from}
-            icon={units[id].icon as AlgolIcon}
-            owner={units[id].owner}
-            pos={units[id].pos}
-            height={height}
-            width={width}
-            mode={
-              marks.indexOf(units[id].pos) !== -1
-                ? "selected"
-                : potentialMarks.indexOf(units[id].pos) !== -1
-                ? "available"
-                : "normal"
-            }
-          />
-        ))}
+
+        <TransitionGroup>
+          {Object.keys(units).map(id => (
+            <Transition
+              key={id}
+              timeout={{ enter: 10, exit: 4000 }}
+              appear={true}
+            >
+              {(transition: TransitionStatus) => (
+                <Piece
+                  transition={transition}
+                  from={units[id].from}
+                  icon={units[id].icon as AlgolIcon}
+                  owner={units[id].owner}
+                  pos={units[id].pos}
+                  height={height}
+                  width={width}
+                  mode={
+                    marks.indexOf(units[id].pos) !== -1
+                      ? "selected"
+                      : potentialMarks.indexOf(units[id].pos) !== -1
+                      ? "available"
+                      : "normal"
+                  }
+                />
+              )}
+            </Transition>
+          ))}
+        </TransitionGroup>
       </div>
     </div>
   );

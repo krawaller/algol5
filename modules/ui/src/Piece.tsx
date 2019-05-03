@@ -1,7 +1,8 @@
-import * as React from "react";
+import React, { CSSProperties, FunctionComponent } from "react";
 import { Icon } from "./Icon";
 import { AlgolIcon } from "../../types";
 import { positionStyles } from "./helpers";
+import { TransitionStatus } from "react-transition-group/Transition";
 
 type PieceProps = {
   /** The name of position we should animate from */
@@ -16,50 +17,64 @@ type PieceProps = {
   height: number;
   /** The width of current board */
   width: number;
-  /** Current state of the piece (decides animation) */
+  /** Current UI state of the piece (decides animation) */
   mode?: "normal" | "available" | "selected";
+  /** Current Transition state of the piece (enter/exit anim) */
+  transition: TransitionStatus;
 };
 
-type PieceState = {
-  pos: string;
+function lifecycleStyles(
+  status: TransitionStatus,
+  hasFrom: boolean
+): CSSProperties {
+  if (status === "entering" && !hasFrom) {
+    return {
+      opacity: 0,
+      transform: "scale(0.1, 0.1)"
+    };
+  }
+  if (status === "exiting") {
+    return {
+      opacity: 0,
+      transform: "scale(2, 2)"
+    };
+  }
+  return {};
+}
+
+function transitions(status: TransitionStatus) {
+  const transitions = ["left 0.3s ease", "bottom 0.3s ease"];
+  if (status !== "entering") {
+    transitions.push("opacity 0.4s ease");
+    transitions.push("transform 0.4s ease");
+  }
+  return transitions.join(", ");
+}
+
+const pieceStyles: CSSProperties = {
+  userSelect: "none",
+  pointerEvents: "none"
 };
 
 /**
  * A component to show a playing piece icon. Used by the Piece component.
  */
-export class Piece extends React.Component<PieceProps, PieceState> {
-  constructor(props: PieceProps) {
-    super(props);
-    this.state = {
-      pos: props.from || props.pos
-    };
-  }
-  componentDidMount() {
-    if (this.props.from) {
-      setTimeout(() => {
-        this.setState({ pos: this.props.pos });
-      }, 10);
-    }
-  }
-  componentDidUpdate(prevProps: PieceProps) {
-    if (this.props.pos !== prevProps.pos) {
-      this.setState({ pos: this.props.pos });
-    }
-  }
-  render() {
-    const { owner, icon, height, width, mode } = this.props;
-    const { pos } = this.state;
-    return (
-      <div
-        style={{
-          ...positionStyles({ height, width, pos }),
-          transition: "left 0.3s ease, bottom 0.3s ease",
-          userSelect: "none",
-          pointerEvents: "none"
-        }}
-      >
-        <Icon icon={icon} owner={owner} mode={mode} />
-      </div>
-    );
-  }
-}
+export const Piece: FunctionComponent<PieceProps> = props => {
+  const { owner, icon, height, width, mode, pos, from, transition } = props;
+  return (
+    <div
+      style={{
+        ...positionStyles({
+          height,
+          width,
+          pos: transition === "entering" ? from || pos : pos
+        }),
+        ...lifecycleStyles(transition, !!from),
+        ...pieceStyles,
+        transition: transitions(transition)
+      }}
+    >
+      <Icon icon={icon} owner={owner} mode={mode} />
+    </div>
+  );
+};

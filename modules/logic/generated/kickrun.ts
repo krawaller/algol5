@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
+const iconMapping = { runners: "bishop", sidekickers: "pawn" };
 const emptyArtifactLayers = { movetargets: {} };
 const connections = boardConnections({ height: 5, width: 5 });
 const relativeDirs = makeRelativeDirs([]);
@@ -190,9 +191,7 @@ let game: Partial<AlgolGame> = {
         { text: "where to move" },
         {
           unit: [
-            { runners: "bishop", sidekickers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -226,7 +225,7 @@ let game: Partial<AlgolGame> = {
                 { text: "slide" },
                 {
                   unit: [
-                    { runners: "bishop", sidekickers: "pawn" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectunit] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -245,7 +244,7 @@ let game: Partial<AlgolGame> = {
                 { text: ["move"] },
                 {
                   unit: [
-                    { runners: "bishop", sidekickers: "pawn" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectunit] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -262,7 +261,7 @@ let game: Partial<AlgolGame> = {
                         { text: "capture" },
                         {
                           unit: [
-                            { runners: "bishop", sidekickers: "pawn" }[
+                            iconMapping[
                               (UNITLAYERS.units[MARKS.selectmovetarget] || {})
                                 .group
                             ],
@@ -474,9 +473,7 @@ let game: Partial<AlgolGame> = {
         { text: "where to move" },
         {
           unit: [
-            { runners: "bishop", sidekickers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -510,7 +507,7 @@ let game: Partial<AlgolGame> = {
                 { text: "slide" },
                 {
                   unit: [
-                    { runners: "bishop", sidekickers: "pawn" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectunit] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -529,7 +526,7 @@ let game: Partial<AlgolGame> = {
                 { text: ["move"] },
                 {
                   unit: [
-                    { runners: "bishop", sidekickers: "pawn" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectunit] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -546,7 +543,7 @@ let game: Partial<AlgolGame> = {
                         { text: "capture" },
                         {
                           unit: [
-                            { runners: "bishop", sidekickers: "pawn" }[
+                            iconMapping[
                               (UNITLAYERS.units[MARKS.selectmovetarget] || {})
                                 .group
                             ],

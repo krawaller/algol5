@@ -18,6 +18,8 @@ export function executeHead(
   } });
   `;
 
+  ret += `const iconMapping = ${JSON.stringify(gameDef.graphics.icons)};\n`;
+
   const startDef = gameDef.flow.startTurn || {};
   const startGens = (startDef.runGenerators || []).concat(
     startDef.runGenerator || []

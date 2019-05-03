@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
+const iconMapping = { soldiers: "pawn", markers: "pawn" };
 const emptyArtifactLayers = {
   FOOBAR: {},
   vertical: {},
@@ -33,9 +34,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units", "neutralunits", "soldiers"],
-      ["units", "myunits", "soldiers"],
-      ["units", "oppunits", "soldiers"]
+      ["units", "neutralunits"],
+      ["units", "myunits"],
+      ["units", "oppunits"]
     ],
     markers: [
       ["units", "neutralunits", "markers"],
@@ -50,7 +51,6 @@ let game: Partial<AlgolGame> = {
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
       neutralunits: oldUnitLayers.neutralunits,
-      soldiers: oldUnitLayers.soldiers,
       markers: oldUnitLayers.markers
     };
     let LINKS: AlgolStepLinks = {
@@ -87,7 +87,7 @@ let game: Partial<AlgolGame> = {
       : collapseContent({
           line: [
             { select: "Select" },
-            { unittype: ["pawn", 0] },
+            { unittype: [iconMapping["markers"], 0] },
             { text: "to turn into" },
             { unittype: ["pawn", 1] }
           ]
@@ -135,7 +135,6 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -226,7 +225,6 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -317,7 +315,6 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -408,7 +405,6 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -553,9 +549,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units", "neutralunits", "soldiers"],
-      ["units", "oppunits", "soldiers"],
-      ["units", "myunits", "soldiers"]
+      ["units", "neutralunits"],
+      ["units", "oppunits"],
+      ["units", "myunits"]
     ],
     markers: [
       ["units", "neutralunits", "markers"],
@@ -570,7 +566,6 @@ let game: Partial<AlgolGame> = {
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
       neutralunits: oldUnitLayers.neutralunits,
-      soldiers: oldUnitLayers.soldiers,
       markers: oldUnitLayers.markers
     };
     let LINKS: AlgolStepLinks = {
@@ -607,7 +602,7 @@ let game: Partial<AlgolGame> = {
       : collapseContent({
           line: [
             { select: "Select" },
-            { unittype: ["pawn", 0] },
+            { unittype: [iconMapping["markers"], 0] },
             { text: "to turn into" },
             { unittype: ["pawn", 2] }
           ]
@@ -623,7 +618,6 @@ let game: Partial<AlgolGame> = {
         myunits: {},
         oppunits: {},
         neutralunits: {},
-        soldiers: {},
         markers: {}
       }
     });
@@ -670,7 +664,6 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -761,7 +754,6 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -852,7 +844,6 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {
@@ -943,7 +934,6 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      soldiers: {},
       markers: {}
     };
     for (let unitid in UNITDATA) {

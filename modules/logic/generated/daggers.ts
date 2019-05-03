@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
+const iconMapping = { daggers: "bishop", crowns: "king" };
 const emptyArtifactLayers = { movetarget: {} };
 const connections = boardConnections({ height: 8, width: 8 });
 const relativeDirs = makeRelativeDirs([]);
@@ -223,7 +224,7 @@ let game: Partial<AlgolGame> = {
                 { text: "an empty neighbour to move" },
                 {
                   unit: [
-                    { daggers: "bishop", crowns: "king" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectunit] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -241,7 +242,7 @@ let game: Partial<AlgolGame> = {
                 { text: "where to slide" },
                 {
                   unit: [
-                    { daggers: "bishop", crowns: "king" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectunit] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -278,9 +279,7 @@ let game: Partial<AlgolGame> = {
         { text: "to make" },
         {
           unit: [
-            { daggers: "bishop", crowns: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -305,7 +304,7 @@ let game: Partial<AlgolGame> = {
                 { text: "and kill" },
                 {
                   unit: [
-                    { daggers: "bishop", crowns: "king" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as
@@ -556,7 +555,7 @@ let game: Partial<AlgolGame> = {
                 { text: "an empty neighbour to move" },
                 {
                   unit: [
-                    { daggers: "bishop", crowns: "king" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectunit] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -574,7 +573,7 @@ let game: Partial<AlgolGame> = {
                 { text: "where to slide" },
                 {
                   unit: [
-                    { daggers: "bishop", crowns: "king" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectunit] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -611,9 +610,7 @@ let game: Partial<AlgolGame> = {
         { text: "to make" },
         {
           unit: [
-            { daggers: "bishop", crowns: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -638,7 +635,7 @@ let game: Partial<AlgolGame> = {
                 { text: "and kill" },
                 {
                   unit: [
-                    { daggers: "bishop", crowns: "king" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as

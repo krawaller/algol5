@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
+const iconMapping = { soldiers: "pawn" };
 const emptyArtifactLayers = {
   spawndirs: {},
   growstarts: {},

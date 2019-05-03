@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
+const iconMapping = { kings: "king", queens: "queen" };
 const emptyArtifactLayers = { movetargets: {}, winline: {} };
 const connections = boardConnections({ height: 5, width: 5 });
 const relativeDirs = makeRelativeDirs([]);
@@ -187,9 +188,7 @@ let game: Partial<AlgolGame> = {
         { text: "orthogonal empty neighbour to move" },
         {
           unit: [
-            { kings: "king", queens: "queen" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -220,9 +219,7 @@ let game: Partial<AlgolGame> = {
         { text: "to walk" },
         {
           unit: [
-            { kings: "king", queens: "queen" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -424,9 +421,7 @@ let game: Partial<AlgolGame> = {
         { text: "orthogonal empty neighbour to move" },
         {
           unit: [
-            { kings: "king", queens: "queen" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -457,9 +452,7 @@ let game: Partial<AlgolGame> = {
         { text: "to walk" },
         {
           unit: [
-            { kings: "king", queens: "queen" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]

@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
+const iconMapping = { kings: "king", soldiers: "pawn" };
 const connections = boardConnections({ height: 8, width: 8 });
 const relativeDirs = makeRelativeDirs([]);
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -391,13 +392,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "Press" },
         { command: "deploy" },
         { text: "to spawn" },
-        {
-          unit: [
-            { kings: "king", soldiers: "pawn" }["kings"],
-            1,
-            MARKS.selectkingdeploy
-          ]
-        }
+        { unit: [iconMapping["kings"], 1, MARKS.selectkingdeploy] }
       ]
     });
   };
@@ -581,9 +576,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "to make" },
         {
           unit: [
-            { kings: "king", soldiers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -643,9 +636,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "to make" },
         {
           unit: [
-            { kings: "king", soldiers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -655,7 +646,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "and kill" },
         {
           unit: [
-            { kings: "king", soldiers: "pawn" }[
+            iconMapping[
               (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).group
             ],
             (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {})
@@ -1069,13 +1060,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "Press" },
         { command: "deploy" },
         { text: "to spawn" },
-        {
-          unit: [
-            { kings: "king", soldiers: "pawn" }["kings"],
-            2,
-            MARKS.selectkingdeploy
-          ]
-        }
+        { unit: [iconMapping["kings"], 2, MARKS.selectkingdeploy] }
       ]
     });
   };
@@ -1259,9 +1244,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "to make" },
         {
           unit: [
-            { kings: "king", soldiers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -1321,9 +1304,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "to make" },
         {
           unit: [
-            { kings: "king", soldiers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -1333,7 +1314,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "and kill" },
         {
           unit: [
-            { kings: "king", soldiers: "pawn" }[
+            iconMapping[
               (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {}).group
             ],
             (UNITLAYERS.units[Object.keys(ARTIFACTS.splashed)[0]] || {})

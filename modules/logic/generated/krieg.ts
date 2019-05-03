@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 4, width: 4 });
+const iconMapping = { notfrozens: "knight", frozens: "knight" };
 const emptyArtifactLayers = { movetargets: {} };
 const connections = boardConnections({ height: 4, width: 4 });
 const relativeDirs = makeRelativeDirs([]);
@@ -79,7 +80,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
             { text: "to move (except" },
             {
               unit: [
-                { notfrozens: "knight", frozens: "knight" }[
+                iconMapping[
                   (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
                     .group
                 ],
@@ -252,9 +253,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
         { text: "an empty square to move" },
         {
           unit: [
-            { notfrozens: "knight", frozens: "knight" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -285,9 +284,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
         { text: "to make" },
         {
           unit: [
-            { notfrozens: "knight", frozens: "knight" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -369,7 +366,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
             { text: "to move (except" },
             {
               unit: [
-                { notfrozens: "knight", frozens: "knight" }[
+                iconMapping[
                   (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
                     .group
                 ],
@@ -571,9 +568,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
         { text: "an empty square to move" },
         {
           unit: [
-            { notfrozens: "knight", frozens: "knight" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -604,9 +599,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
         { text: "to make" },
         {
           unit: [
-            { notfrozens: "knight", frozens: "knight" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]

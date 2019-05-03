@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 10, width: 10 });
+const iconMapping = { queens: "queen", fires: "pawn" };
 const emptyArtifactLayers = { movetargets: {}, firedfrom: {}, firetargets: {} };
 const connections = boardConnections({ height: 10, width: 10 });
 const relativeDirs = makeRelativeDirs([]);
@@ -203,9 +204,7 @@ let game: Partial<AlgolGame> = {
         { text: "where to move" },
         {
           unit: [
-            { queens: "queen", fires: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -240,9 +239,7 @@ let game: Partial<AlgolGame> = {
         { text: "to make" },
         {
           unit: [
-            { queens: "queen", fires: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -274,9 +271,7 @@ let game: Partial<AlgolGame> = {
         { text: "to spawn" },
         collapseContent({
           line: Object.keys({ [MARKS.selectfiretarget]: 1 })
-            .map(p => ({
-              unit: [{ queens: "queen", fires: "pawn" }["fires"], 0, p]
-            }))
+            .map(p => ({ unit: [iconMapping["fires"], 0, p] }))
             .reduce((mem, i, n, list) => {
               mem.push(i);
               if (n === list.length - 2) {
@@ -490,9 +485,7 @@ let game: Partial<AlgolGame> = {
         { text: "where to move" },
         {
           unit: [
-            { queens: "queen", fires: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -527,9 +520,7 @@ let game: Partial<AlgolGame> = {
         { text: "to make" },
         {
           unit: [
-            { queens: "queen", fires: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -561,9 +552,7 @@ let game: Partial<AlgolGame> = {
         { text: "to spawn" },
         collapseContent({
           line: Object.keys({ [MARKS.selectfiretarget]: 1 })
-            .map(p => ({
-              unit: [{ queens: "queen", fires: "pawn" }["fires"], 0, p]
-            }))
+            .map(p => ({ unit: [iconMapping["fires"], 0, p] }))
             .reduce((mem, i, n, list) => {
               mem.push(i);
               if (n === list.length - 2) {

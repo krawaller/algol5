@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
+const iconMapping = { soldiers: "rook" };
 const emptyArtifactLayers = { movetargets: {}, beingpushed: {}, squished: {} };
 const connections = boardConnections({ height: 8, width: 8 });
 const relativeDirs = makeRelativeDirs([]);
@@ -20,11 +21,7 @@ const diagDirs = [2, 4, 6, 8];
 let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
 {
   const groupLayers = {
-    soldiers: [
-      ["units", "soldiers"],
-      ["units", "myunits", "soldiers"],
-      ["units", "oppunits", "soldiers"]
-    ]
+    soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
   };
   const TERRAIN = terrainLayers(
     8,
@@ -37,8 +34,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let UNITLAYERS = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
-      oppunits: oldUnitLayers.myunits,
-      soldiers: oldUnitLayers.soldiers
+      oppunits: oldUnitLayers.myunits
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -109,7 +105,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         };
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -207,9 +203,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         { text: "where to move" },
         {
           unit: [
-            { soldiers: "rook" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -288,9 +282,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         { text: "to move" },
         {
           unit: [
-            { soldiers: "rook" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -303,7 +295,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
                 { text: "and squash" },
                 {
                   unit: [
-                    { soldiers: "rook" }[
+                    iconMapping[
                       (
                         UNITLAYERS.units[Object.keys(ARTIFACTS.squished)[0]] ||
                         {}
@@ -323,11 +315,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
 }
 {
   const groupLayers = {
-    soldiers: [
-      ["units", "soldiers"],
-      ["units", "oppunits", "soldiers"],
-      ["units", "myunits", "soldiers"]
-    ]
+    soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
   };
   const TERRAIN = terrainLayers(
     8,
@@ -340,8 +328,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let UNITLAYERS = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
-      oppunits: oldUnitLayers.myunits,
-      soldiers: oldUnitLayers.soldiers
+      oppunits: oldUnitLayers.myunits
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
@@ -372,7 +359,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let UNITDATA = deduceInitialUnitData({
       soldiers: { "1": [{ rect: ["a1", "d4"] }], "2": [{ rect: ["e5", "h8"] }] }
     });
-    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -431,7 +418,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         };
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, soldiers: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -529,9 +516,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         { text: "where to move" },
         {
           unit: [
-            { soldiers: "rook" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -610,9 +595,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         { text: "to move" },
         {
           unit: [
-            { soldiers: "rook" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -625,7 +608,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
                 { text: "and squash" },
                 {
                   unit: [
-                    { soldiers: "rook" }[
+                    iconMapping[
                       (
                         UNITLAYERS.units[Object.keys(ARTIFACTS.squished)[0]] ||
                         {}

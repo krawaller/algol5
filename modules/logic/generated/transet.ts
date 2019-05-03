@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
+const iconMapping = { pinets: "pawn", piokers: "bishop", piases: "king" };
 const emptyArtifactLayers = { swap2step: {}, swap1steps: {}, movetargets: {} };
 const connections = boardConnections({ height: 5, width: 5 });
 const relativeDirs = makeRelativeDirs([]);
@@ -293,7 +294,7 @@ let game: Partial<AlgolGame> = {
                     { text: "where to move" },
                     {
                       unit: [
-                        { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                        iconMapping[
                           (UNITLAYERS.units[MARKS.selectunit] || {}).group
                         ],
                         (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -314,7 +315,7 @@ let game: Partial<AlgolGame> = {
                     { text: "another unit to swap" },
                     {
                       unit: [
-                        { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                        iconMapping[
                           (UNITLAYERS.units[MARKS.selectunit] || {}).group
                         ],
                         (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -384,7 +385,7 @@ let game: Partial<AlgolGame> = {
             { text: "where" },
             {
               unit: [
-                { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                iconMapping[
                   (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
                 ],
                 (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as
@@ -404,9 +405,7 @@ let game: Partial<AlgolGame> = {
             { text: "to make" },
             {
               unit: [
-                { pinets: "pawn", piokers: "bishop", piases: "king" }[
-                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
-                ],
+                iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
                 (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
                 MARKS.selectunit
               ]
@@ -442,9 +441,7 @@ let game: Partial<AlgolGame> = {
         { text: "to make" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -454,9 +451,7 @@ let game: Partial<AlgolGame> = {
         { text: "and deport" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).group],
             (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as 0 | 1 | 2,
             MARKS.selectmovetarget
           ]
@@ -507,9 +502,7 @@ let game: Partial<AlgolGame> = {
         { text: "a neighbouring square for" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -517,9 +510,7 @@ let game: Partial<AlgolGame> = {
         { text: "to step to." },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectswapunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectswapunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectswapunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectswapunit
           ]
@@ -578,9 +569,7 @@ let game: Partial<AlgolGame> = {
         { text: "to step" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -590,9 +579,7 @@ let game: Partial<AlgolGame> = {
         { text: "and" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectswapunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectswapunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectswapunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectswapunit
           ]
@@ -900,7 +887,7 @@ let game: Partial<AlgolGame> = {
                     { text: "where to move" },
                     {
                       unit: [
-                        { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                        iconMapping[
                           (UNITLAYERS.units[MARKS.selectunit] || {}).group
                         ],
                         (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -921,7 +908,7 @@ let game: Partial<AlgolGame> = {
                     { text: "another unit to swap" },
                     {
                       unit: [
-                        { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                        iconMapping[
                           (UNITLAYERS.units[MARKS.selectunit] || {}).group
                         ],
                         (UNITLAYERS.units[MARKS.selectunit] || {}).owner as
@@ -991,7 +978,7 @@ let game: Partial<AlgolGame> = {
             { text: "where" },
             {
               unit: [
-                { pinets: "pawn", piokers: "bishop", piases: "king" }[
+                iconMapping[
                   (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
                 ],
                 (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as
@@ -1011,9 +998,7 @@ let game: Partial<AlgolGame> = {
             { text: "to make" },
             {
               unit: [
-                { pinets: "pawn", piokers: "bishop", piases: "king" }[
-                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
-                ],
+                iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
                 (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
                 MARKS.selectunit
               ]
@@ -1049,9 +1034,7 @@ let game: Partial<AlgolGame> = {
         { text: "to make" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -1061,9 +1044,7 @@ let game: Partial<AlgolGame> = {
         { text: "and deport" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).group],
             (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as 0 | 1 | 2,
             MARKS.selectmovetarget
           ]
@@ -1114,9 +1095,7 @@ let game: Partial<AlgolGame> = {
         { text: "a neighbouring square for" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -1124,9 +1103,7 @@ let game: Partial<AlgolGame> = {
         { text: "to step to." },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectswapunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectswapunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectswapunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectswapunit
           ]
@@ -1185,9 +1162,7 @@ let game: Partial<AlgolGame> = {
         { text: "to step" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -1197,9 +1172,7 @@ let game: Partial<AlgolGame> = {
         { text: "and" },
         {
           unit: [
-            { pinets: "pawn", piokers: "bishop", piases: "king" }[
-              (UNITLAYERS.units[MARKS.selectswapunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectswapunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectswapunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectswapunit
           ]

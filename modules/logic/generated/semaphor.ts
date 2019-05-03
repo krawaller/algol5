@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 3, width: 4 });
+const iconMapping = { kings: "king", pawns: "pawn", bishops: "bishop" };
 const emptyArtifactLayers = { line: {} };
 const connections = boardConnections({ height: 3, width: 4 });
 const relativeDirs = makeRelativeDirs([]);
@@ -80,26 +81,9 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    collapseContent({
-                      line: [
-                        Object.keys(UNITLAYERS.pawns).length !== 0
-                          ? { unittype: ["pawn", 0] }
-                          : undefined,
-                        Object.keys(UNITLAYERS.bishops).length !== 0
-                          ? { unittype: ["bishop", 0] }
-                          : undefined
-                      ]
-                        .filter(i => !!i)
-                        .reduce((mem, i, n, list) => {
-                          mem.push(i);
-                          if (n === list.length - 2) {
-                            mem.push({ text: " or " });
-                          } else if (n < list.length - 2) {
-                            mem.push({ text: ", " });
-                          }
-                          return mem;
-                        }, [])
-                    }),
+                    { unittype: [iconMapping["pawns"], 0] },
+                    { text: "or" },
+                    { unittype: [iconMapping["bishops"], 0] },
                     { text: "to promote" }
                   ]
                 })
@@ -268,13 +252,7 @@ let game: Partial<AlgolGame> = {
         { text: "Press" },
         { command: "deploy" },
         { text: "to spawn" },
-        {
-          unit: [
-            { kings: "king", pawns: "pawn", bishops: "bishop" }["pawns"],
-            0,
-            MARKS.selectdeploytarget
-          ]
-        }
+        { unit: [iconMapping["pawns"], 0, MARKS.selectdeploytarget] }
       ]
     });
   };
@@ -301,17 +279,15 @@ let game: Partial<AlgolGame> = {
         { text: "to turn" },
         {
           unit: [
-            { kings: "king", pawns: "pawn", bishops: "bishop" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
         },
         { text: "into" },
         UNITLAYERS.pawns[MARKS.selectunit]
-          ? { unittype: ["bishop", 0] }
-          : { unittype: ["king", 0] }
+          ? { unittype: [iconMapping["bishops"], 0] }
+          : { unittype: [iconMapping["kings"], 0] }
       ]
     });
   };
@@ -373,26 +349,9 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    collapseContent({
-                      line: [
-                        Object.keys(UNITLAYERS.pawns).length !== 0
-                          ? { unittype: ["pawn", 0] }
-                          : undefined,
-                        Object.keys(UNITLAYERS.bishops).length !== 0
-                          ? { unittype: ["bishop", 0] }
-                          : undefined
-                      ]
-                        .filter(i => !!i)
-                        .reduce((mem, i, n, list) => {
-                          mem.push(i);
-                          if (n === list.length - 2) {
-                            mem.push({ text: " or " });
-                          } else if (n < list.length - 2) {
-                            mem.push({ text: ", " });
-                          }
-                          return mem;
-                        }, [])
-                    }),
+                    { unittype: [iconMapping["pawns"], 0] },
+                    { text: "or" },
+                    { unittype: [iconMapping["bishops"], 0] },
                     { text: "to promote" }
                   ]
                 })
@@ -569,13 +528,7 @@ let game: Partial<AlgolGame> = {
         { text: "Press" },
         { command: "deploy" },
         { text: "to spawn" },
-        {
-          unit: [
-            { kings: "king", pawns: "pawn", bishops: "bishop" }["pawns"],
-            0,
-            MARKS.selectdeploytarget
-          ]
-        }
+        { unit: [iconMapping["pawns"], 0, MARKS.selectdeploytarget] }
       ]
     });
   };
@@ -602,17 +555,15 @@ let game: Partial<AlgolGame> = {
         { text: "to turn" },
         {
           unit: [
-            { kings: "king", pawns: "pawn", bishops: "bishop" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
         },
         { text: "into" },
         UNITLAYERS.pawns[MARKS.selectunit]
-          ? { unittype: ["bishop", 0] }
-          : { unittype: ["king", 0] }
+          ? { unittype: [iconMapping["bishops"], 0] }
+          : { unittype: [iconMapping["kings"], 0] }
       ]
     });
   };

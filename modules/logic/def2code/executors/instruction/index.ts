@@ -120,12 +120,9 @@ function executeInstructionInner(
     ] })`;
   }
   if (isAlgolInstrUnitAt(instr)) {
-    // name: game.graphics.icons[${parse.val(["read", "units", pos, "group"])}]
+    const group = exprParser.val({ read: ["units", instr.unitat, "group"] });
     return `{
-      unit: [
-        ${JSON.stringify(gameDef.graphics.icons)}[${exprParser.val({
-      read: ["units", instr.unitat, "group"]
-    })}],
+      unit: [iconMapping[${group}],
         ${exprParser.val({ read: ["units", instr.unitat, "owner"] })},
         ${exprParser.pos(instr.unitat)}
       ]
@@ -134,19 +131,18 @@ function executeInstructionInner(
   if (isAlgolInstrUnitTypePos(instr)) {
     const [groupRaw, ownerRaw, posRaw] = instr.unittypepos;
     const group = exprParser.val(groupRaw);
-    const icon = `${JSON.stringify(gameDef.graphics.icons)}[${group}]`;
     const owner = exprParser.val(ownerRaw);
     const pos = exprParser.pos(posRaw);
-    return `{unit: [${icon}, ${owner}, ${pos}]}`;
+    return `{unit: [iconMapping[${group}], ${owner}, ${pos}]}`;
   }
   if (isAlgolInstrPos(instr)) {
     return `{ pos: ${exprParser.pos(instr.pos)} }`;
   }
   if (isAlgolInstrUnitType(instr)) {
-    const [group, owner] = instr.unittype;
-    return `{ unittype: ["${gameDef.graphics.icons[group]}", ${exprParser.val(
-      owner
-    )}] }`;
+    const [groupRaw, ownerRaw] = instr.unittype;
+    const owner = exprParser.val(ownerRaw);
+    const group = exprParser.val(groupRaw);
+    return `{ unittype: [iconMapping[${group}], ${owner}] }`;
   }
   if (isAlgolInstrText(instr)) {
     const { text } = instr;
@@ -168,9 +164,7 @@ function executeInstructionInner(
   if (isAlgolInstrUnitList(instr)) {
     const { unitlist } = instr;
     const set = exprParser.set(unitlist);
-    return `collapseContent({ line: Object.keys(${set}).filter(p => UNITLAYERS.units[p]).map(p => ({ unit: [${JSON.stringify(
-      gameDef.graphics.icons
-    )}[UNITLAYERS.units[p].group], UNITLAYERS.units[p].owner, p] })).reduce((mem, i, n, list) => {
+    return `collapseContent({ line: Object.keys(${set}).filter(p => UNITLAYERS.units[p]).map(p => ({ unit: [iconMapping[UNITLAYERS.units[p].group], UNITLAYERS.units[p].owner, p] })).reduce((mem, i, n, list) => {
       mem.push(i);
       if (n === list.length - 2){
         mem.push({text: " and "});
@@ -183,7 +177,7 @@ function executeInstructionInner(
   if (isAlgolInstrUnitTypeSet(instr)) {
     const [groupRaw, ownerRaw, setRaw] = instr.unittypeset;
     const group = exprParser.val(groupRaw);
-    const icon = `${JSON.stringify(gameDef.graphics.icons)}[${group}]`;
+    const icon = `iconMapping[${group}]`;
     const set = exprParser.set(setRaw);
     const owner = exprParser.val(ownerRaw);
     return `collapseContent({ line: Object.keys(${set}).map(p => ({ unit: [${icon}, ${owner}, p] })).reduce((mem, i, n, list) => {

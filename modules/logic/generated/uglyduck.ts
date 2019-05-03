@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
+const iconMapping = { soldiers: "pawn", kings: "king" };
 const emptyArtifactLayers = { movetargets: {} };
 const connections = boardConnections({ height: 5, width: 5 });
 const relativeDirs = makeRelativeDirs([]);
@@ -226,9 +227,7 @@ let game: Partial<AlgolGame> = {
             { text: "a square closer to home to move" },
             {
               unit: [
-                { soldiers: "pawn", kings: "king" }[
-                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
-                ],
+                iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
                 (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
                 MARKS.selectunit
               ]
@@ -242,9 +241,7 @@ let game: Partial<AlgolGame> = {
             { text: "a square closer to the enemy base to move" },
             {
               unit: [
-                { soldiers: "pawn", kings: "king" }[
-                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
-                ],
+                iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
                 (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
                 MARKS.selectunit
               ]
@@ -278,9 +275,7 @@ let game: Partial<AlgolGame> = {
           : { text: "advance" },
         {
           unit: [
-            { soldiers: "pawn", kings: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -305,7 +300,7 @@ let game: Partial<AlgolGame> = {
                 { text: ", killing" },
                 {
                   unit: [
-                    { soldiers: "pawn", kings: "king" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as
@@ -552,9 +547,7 @@ let game: Partial<AlgolGame> = {
             { text: "a square closer to home to move" },
             {
               unit: [
-                { soldiers: "pawn", kings: "king" }[
-                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
-                ],
+                iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
                 (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
                 MARKS.selectunit
               ]
@@ -568,9 +561,7 @@ let game: Partial<AlgolGame> = {
             { text: "a square closer to the enemy base to move" },
             {
               unit: [
-                { soldiers: "pawn", kings: "king" }[
-                  (UNITLAYERS.units[MARKS.selectunit] || {}).group
-                ],
+                iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
                 (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
                 MARKS.selectunit
               ]
@@ -604,9 +595,7 @@ let game: Partial<AlgolGame> = {
           : { text: "advance" },
         {
           unit: [
-            { soldiers: "pawn", kings: "king" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -631,7 +620,7 @@ let game: Partial<AlgolGame> = {
                 { text: ", killing" },
                 {
                   unit: [
-                    { soldiers: "pawn", kings: "king" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as

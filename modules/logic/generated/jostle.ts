@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 10, width: 10 });
+const iconMapping = { checkers: "pawn" };
 const emptyArtifactLayers = {
   movetargets: {},
   initialenemy: {},
@@ -158,9 +159,7 @@ let game: Partial<AlgolGame> = {
       line: [
         {
           unit: [
-            { checkers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -275,9 +274,7 @@ let game: Partial<AlgolGame> = {
         { text: "to move" },
         {
           unit: [
-            { checkers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -478,9 +475,7 @@ let game: Partial<AlgolGame> = {
       line: [
         {
           unit: [
-            { checkers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -595,9 +590,7 @@ let game: Partial<AlgolGame> = {
         { text: "to move" },
         {
           unit: [
-            { checkers: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]

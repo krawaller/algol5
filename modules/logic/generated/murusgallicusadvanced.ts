@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 7, width: 8 });
+const iconMapping = { towers: "rook", walls: "pawn", catapults: "queen" };
 const emptyArtifactLayers = {
   firetargets: {},
   movetargets: {},
@@ -542,9 +543,9 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    { unittype: ["pawn", 2] },
+                    { unittype: [iconMapping["walls"], 2] },
                     { text: "or" },
-                    { unittype: ["queen", 2] },
+                    { unittype: [iconMapping["catapults"], 2] },
                     { text: "to crush" }
                   ]
                 })
@@ -564,9 +565,7 @@ let game: Partial<AlgolGame> = {
         { text: "for" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selecttower] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selecttower] || {}).group],
             (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
             MARKS.selecttower
           ]
@@ -633,9 +632,7 @@ let game: Partial<AlgolGame> = {
         { text: "to overturn" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selecttower] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selecttower] || {}).group],
             (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
             MARKS.selecttower
           ]
@@ -649,17 +646,7 @@ let game: Partial<AlgolGame> = {
                     { text: "creating" },
                     collapseContent({
                       line: Object.keys(ARTIFACTS.madewalls)
-                        .map(p => ({
-                          unit: [
-                            {
-                              towers: "rook",
-                              walls: "pawn",
-                              catapults: "queen"
-                            }["walls"],
-                            1,
-                            p
-                          ]
-                        }))
+                        .map(p => ({ unit: [iconMapping["walls"], 1, p] }))
                         .reduce((mem, i, n, list) => {
                           mem.push(i);
                           if (n === list.length - 2) {
@@ -682,11 +669,7 @@ let game: Partial<AlgolGame> = {
                         .filter(p => UNITLAYERS.units[p])
                         .map(p => ({
                           unit: [
-                            {
-                              towers: "rook",
-                              walls: "pawn",
-                              catapults: "queen"
-                            }[UNITLAYERS.units[p].group],
+                            iconMapping[UNITLAYERS.units[p].group],
                             UNITLAYERS.units[p].owner as 0 | 1 | 2,
                             p
                           ]
@@ -715,11 +698,7 @@ let game: Partial<AlgolGame> = {
                         .filter(p => UNITLAYERS.units[p])
                         .map(p => ({
                           unit: [
-                            {
-                              towers: "rook",
-                              walls: "pawn",
-                              catapults: "queen"
-                            }[UNITLAYERS.units[p].group],
+                            iconMapping[UNITLAYERS.units[p].group],
                             UNITLAYERS.units[p].owner as 0 | 1 | 2,
                             p
                           ]
@@ -785,9 +764,7 @@ let game: Partial<AlgolGame> = {
         { text: "to turn" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selecttower] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selecttower] || {}).group],
             (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
             MARKS.selecttower
           ]
@@ -801,7 +778,7 @@ let game: Partial<AlgolGame> = {
                 { text: "destroy" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
@@ -818,7 +795,7 @@ let game: Partial<AlgolGame> = {
                 { text: "reduce" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
@@ -829,12 +806,12 @@ let game: Partial<AlgolGame> = {
                   ]
                 },
                 { text: "to a" },
-                { unittype: ["rook", 2] },
+                { unittype: [iconMapping["towers"], 2] },
                 { text: ", or" },
                 { command: "sacrifice" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selecttower] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selecttower] || {}).owner as
@@ -847,7 +824,7 @@ let game: Partial<AlgolGame> = {
                 { text: "entirely to reduce" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
@@ -858,7 +835,7 @@ let game: Partial<AlgolGame> = {
                   ]
                 },
                 { text: "to a" },
-                { unittype: ["pawn", 2] },
+                { unittype: [iconMapping["walls"], 2] },
                 { text: "!" }
               ]
             })
@@ -911,9 +888,7 @@ let game: Partial<AlgolGame> = {
         { text: "where to fire the top section of" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selectcatapult] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectcatapult] || {}).group],
             (UNITLAYERS.units[MARKS.selectcatapult] || {}).owner as 0 | 1 | 2,
             MARKS.selectcatapult
           ]
@@ -947,9 +922,7 @@ let game: Partial<AlgolGame> = {
         { text: "to turn" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selectcatapult] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectcatapult] || {}).group],
             (UNITLAYERS.units[MARKS.selectcatapult] || {}).owner as 0 | 1 | 2,
             MARKS.selectcatapult
           ]
@@ -962,7 +935,7 @@ let game: Partial<AlgolGame> = {
                 { text: "and destroy" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectfire] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectfire] || {}).owner as
@@ -980,7 +953,7 @@ let game: Partial<AlgolGame> = {
                 { text: "and reduce" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectfire] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectfire] || {}).owner as
@@ -992,22 +965,14 @@ let game: Partial<AlgolGame> = {
                 },
                 { text: "to a" },
                 UNITLAYERS.catapults[MARKS.selectfire]
-                  ? { unittype: ["rook", 2] }
-                  : { unittype: ["pawn", 2] }
+                  ? { unittype: [iconMapping["towers"], 2] }
+                  : { unittype: [iconMapping["walls"], 2] }
               ]
             })
           : collapseContent({
               line: [
                 { text: "and spawn" },
-                {
-                  unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
-                      "walls"
-                    ],
-                    1,
-                    MARKS.selectfire
-                  ]
-                }
+                { unit: [iconMapping["walls"], 1, MARKS.selectfire] }
               ]
             })
       ]
@@ -1559,9 +1524,9 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    { unittype: ["pawn", 1] },
+                    { unittype: [iconMapping["walls"], 1] },
                     { text: "or" },
-                    { unittype: ["queen", 1] },
+                    { unittype: [iconMapping["catapults"], 1] },
                     { text: "to crush" }
                   ]
                 })
@@ -1581,9 +1546,7 @@ let game: Partial<AlgolGame> = {
         { text: "for" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selecttower] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selecttower] || {}).group],
             (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
             MARKS.selecttower
           ]
@@ -1650,9 +1613,7 @@ let game: Partial<AlgolGame> = {
         { text: "to overturn" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selecttower] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selecttower] || {}).group],
             (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
             MARKS.selecttower
           ]
@@ -1666,17 +1627,7 @@ let game: Partial<AlgolGame> = {
                     { text: "creating" },
                     collapseContent({
                       line: Object.keys(ARTIFACTS.madewalls)
-                        .map(p => ({
-                          unit: [
-                            {
-                              towers: "rook",
-                              walls: "pawn",
-                              catapults: "queen"
-                            }["walls"],
-                            2,
-                            p
-                          ]
-                        }))
+                        .map(p => ({ unit: [iconMapping["walls"], 2, p] }))
                         .reduce((mem, i, n, list) => {
                           mem.push(i);
                           if (n === list.length - 2) {
@@ -1699,11 +1650,7 @@ let game: Partial<AlgolGame> = {
                         .filter(p => UNITLAYERS.units[p])
                         .map(p => ({
                           unit: [
-                            {
-                              towers: "rook",
-                              walls: "pawn",
-                              catapults: "queen"
-                            }[UNITLAYERS.units[p].group],
+                            iconMapping[UNITLAYERS.units[p].group],
                             UNITLAYERS.units[p].owner as 0 | 1 | 2,
                             p
                           ]
@@ -1732,11 +1679,7 @@ let game: Partial<AlgolGame> = {
                         .filter(p => UNITLAYERS.units[p])
                         .map(p => ({
                           unit: [
-                            {
-                              towers: "rook",
-                              walls: "pawn",
-                              catapults: "queen"
-                            }[UNITLAYERS.units[p].group],
+                            iconMapping[UNITLAYERS.units[p].group],
                             UNITLAYERS.units[p].owner as 0 | 1 | 2,
                             p
                           ]
@@ -1802,9 +1745,7 @@ let game: Partial<AlgolGame> = {
         { text: "to turn" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selecttower] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selecttower] || {}).group],
             (UNITLAYERS.units[MARKS.selecttower] || {}).owner as 0 | 1 | 2,
             MARKS.selecttower
           ]
@@ -1818,7 +1759,7 @@ let game: Partial<AlgolGame> = {
                 { text: "destroy" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
@@ -1835,7 +1776,7 @@ let game: Partial<AlgolGame> = {
                 { text: "reduce" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
@@ -1846,12 +1787,12 @@ let game: Partial<AlgolGame> = {
                   ]
                 },
                 { text: "to a" },
-                { unittype: ["rook", 1] },
+                { unittype: [iconMapping["towers"], 1] },
                 { text: ", or" },
                 { command: "sacrifice" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selecttower] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selecttower] || {}).owner as
@@ -1864,7 +1805,7 @@ let game: Partial<AlgolGame> = {
                 { text: "entirely to reduce" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectcrush] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectcrush] || {}).owner as
@@ -1875,7 +1816,7 @@ let game: Partial<AlgolGame> = {
                   ]
                 },
                 { text: "to a" },
-                { unittype: ["pawn", 1] },
+                { unittype: [iconMapping["walls"], 1] },
                 { text: "!" }
               ]
             })
@@ -1928,9 +1869,7 @@ let game: Partial<AlgolGame> = {
         { text: "where to fire the top section of" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selectcatapult] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectcatapult] || {}).group],
             (UNITLAYERS.units[MARKS.selectcatapult] || {}).owner as 0 | 1 | 2,
             MARKS.selectcatapult
           ]
@@ -1964,9 +1903,7 @@ let game: Partial<AlgolGame> = {
         { text: "to turn" },
         {
           unit: [
-            { towers: "rook", walls: "pawn", catapults: "queen" }[
-              (UNITLAYERS.units[MARKS.selectcatapult] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectcatapult] || {}).group],
             (UNITLAYERS.units[MARKS.selectcatapult] || {}).owner as 0 | 1 | 2,
             MARKS.selectcatapult
           ]
@@ -1979,7 +1916,7 @@ let game: Partial<AlgolGame> = {
                 { text: "and destroy" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectfire] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectfire] || {}).owner as
@@ -1997,7 +1934,7 @@ let game: Partial<AlgolGame> = {
                 { text: "and reduce" },
                 {
                   unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
+                    iconMapping[
                       (UNITLAYERS.units[MARKS.selectfire] || {}).group
                     ],
                     (UNITLAYERS.units[MARKS.selectfire] || {}).owner as
@@ -2009,22 +1946,14 @@ let game: Partial<AlgolGame> = {
                 },
                 { text: "to a" },
                 UNITLAYERS.catapults[MARKS.selectfire]
-                  ? { unittype: ["rook", 1] }
-                  : { unittype: ["pawn", 1] }
+                  ? { unittype: [iconMapping["towers"], 1] }
+                  : { unittype: [iconMapping["walls"], 1] }
               ]
             })
           : collapseContent({
               line: [
                 { text: "and spawn" },
-                {
-                  unit: [
-                    { towers: "rook", walls: "pawn", catapults: "queen" }[
-                      "walls"
-                    ],
-                    2,
-                    MARKS.selectfire
-                  ]
-                }
+                { unit: [iconMapping["walls"], 2, MARKS.selectfire] }
               ]
             })
       ]

@@ -11,6 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
+const iconMapping = { seals: "king", bears: "queen", holes: "pawn" };
 const emptyArtifactLayers = {
   eattargets: {},
   movetargets: {},
@@ -243,9 +244,7 @@ let game: Partial<AlgolGame> = {
         { text: "where to move" },
         {
           unit: [
-            { seals: "king", bears: "queen", holes: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -306,9 +305,7 @@ let game: Partial<AlgolGame> = {
         { text: "to move the" },
         {
           unit: [
-            { seals: "king", bears: "queen", holes: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -639,9 +636,7 @@ let game: Partial<AlgolGame> = {
         { text: "where to move" },
         {
           unit: [
-            { seals: "king", bears: "queen", holes: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -649,7 +644,7 @@ let game: Partial<AlgolGame> = {
         collapseContent({
           line: [
             { text: "or a neighbouring" },
-            { unittype: ["king", 1] },
+            { unittype: [iconMapping["seals"], 1] },
             { text: "to eat" }
           ]
         })
@@ -710,9 +705,7 @@ let game: Partial<AlgolGame> = {
         { text: "to move the" },
         {
           unit: [
-            { seals: "king", bears: "queen", holes: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -746,9 +739,7 @@ let game: Partial<AlgolGame> = {
         { text: "to make" },
         {
           unit: [
-            { seals: "king", bears: "queen", holes: "pawn" }[
-              (UNITLAYERS.units[MARKS.selectunit] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
@@ -756,9 +747,7 @@ let game: Partial<AlgolGame> = {
         { text: "consume" },
         {
           unit: [
-            { seals: "king", bears: "queen", holes: "pawn" }[
-              (UNITLAYERS.units[MARKS.selecteattarget] || {}).group
-            ],
+            iconMapping[(UNITLAYERS.units[MARKS.selecteattarget] || {}).group],
             (UNITLAYERS.units[MARKS.selecteattarget] || {}).owner as 0 | 1 | 2,
             MARKS.selecteattarget
           ]

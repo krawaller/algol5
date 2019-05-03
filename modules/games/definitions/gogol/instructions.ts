@@ -12,10 +12,8 @@ const gogolInstructions: GogolInstructions = {
     line: [
       "Press",
       "deploy",
-      "to place your",
-      "kings",
-      "at",
-      "selectkingdeploy"
+      "to spawn",
+      { unittypepos: ["kings", ["player"], "selectkingdeploy"] }
     ]
   },
   selectunit: {

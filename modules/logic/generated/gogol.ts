@@ -380,7 +380,8 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS: { selectkingdeploy: newMarkPos },
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectkingdeploy1 = step => {
@@ -389,10 +390,14 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
       line: [
         { text: "Press" },
         { command: "deploy" },
-        { text: "to place your" },
-        { unittype: ["king", 1] },
-        { text: "at" },
-        { pos: MARKS.selectkingdeploy }
+        { text: "to spawn" },
+        {
+          unit: [
+            { kings: "king", soldiers: "pawn" }["kings"],
+            1,
+            MARKS.selectkingdeploy
+          ]
+        }
       ]
     });
   };
@@ -623,7 +628,8 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectjumptarget1 = step => {
@@ -1052,7 +1058,8 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS: { selectkingdeploy: newMarkPos },
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectkingdeploy2 = step => {
@@ -1061,10 +1068,14 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
       line: [
         { text: "Press" },
         { command: "deploy" },
-        { text: "to place your" },
-        { unittype: ["king", 2] },
-        { text: "at" },
-        { pos: MARKS.selectkingdeploy }
+        { text: "to spawn" },
+        {
+          unit: [
+            { kings: "king", soldiers: "pawn" }["kings"],
+            2,
+            MARKS.selectkingdeploy
+          ]
+        }
       ]
     });
   };
@@ -1295,7 +1306,8 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectjumptarget2 = step => {

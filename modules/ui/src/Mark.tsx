@@ -19,7 +19,7 @@ const potentialCSS = glitz.injectStyle({
   }
 });
 
-const scaleDiff = 0.2;
+const scaleDiff = 0.3;
 const pulsateCSS = glitz.injectStyle({
   animationDuration: "0.85s",
   animationTimingFunction: "linear",
@@ -28,14 +28,8 @@ const pulsateCSS = glitz.injectStyle({
     "0%": {
       transform: "scale(1, 1)"
     },
-    "25%": {
-      transform: `scale(${1 - scaleDiff}, ${1 - scaleDiff})`
-    },
     "50%": {
-      transform: "scale(1, 1)"
-    },
-    "75%": {
-      transform: `scale(${1 + scaleDiff}, ${1 + scaleDiff})`
+      transform: `scale(${1 - scaleDiff}, ${1 - scaleDiff})`
     },
     "100%": {
       transform: "scale(1, 1)"

@@ -78,6 +78,7 @@ export const Icon: React.FunctionComponent<IconProps> = ({
 }) => {
   return (
     <div
+      key={icon}
       className={classnames(iconBasic, {
         [available]: mode === "available",
         [selected]: mode === "selected"
@@ -91,17 +92,19 @@ export const Icon: React.FunctionComponent<IconProps> = ({
       >
         <g>
           <path
+            key={icon + "_solid"}
             d={solids[icon]}
             style={{
               fill: fills[owner],
-              transition: "fill 0.3s ease, stroke 0.3s ease"
+              transition: "fill 0.6s ease, stroke 0.6s ease"
             }}
           />
           <path
+            key={icon + "_hollow"}
             d={hollows[icon]}
             style={{
               fill: strokes[owner],
-              transition: "fill 0.3s ease, stroke 0.3s ease"
+              transition: "fill 0.6s ease, stroke 0.6s ease"
             }}
           />
         </g>

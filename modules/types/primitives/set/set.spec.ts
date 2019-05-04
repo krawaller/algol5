@@ -26,5 +26,6 @@ const tests: TestPos[] = [
   { subtract: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
   { intersect: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
   { ifactionelse: ["mycmnd", "mylayer", "mylayer"] },
-  { indexlist: [["dir"], "mylayer", { layer: "mylayer" }] }
+  { indexlist: [["dir"], "mylayer", { layer: "mylayer" }] },
+  { exceptpos: ["mylayer", "mymark"] }
 ];

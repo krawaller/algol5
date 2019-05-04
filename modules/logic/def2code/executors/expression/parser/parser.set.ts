@@ -7,7 +7,8 @@ import {
   isAlgolSetSubtract,
   isAlgolSetIntersect,
   isAlgolSetGroupAt,
-  isAlgolSetSingles
+  isAlgolSetSingles,
+  isAlgolSetExceptPos
 } from "../../../../../types";
 import {
   emptyArtifactLayers,
@@ -120,6 +121,20 @@ export default function parseSet(
   if (isAlgolSetGroupAt(expr)) {
     const { groupat: pos } = expr;
     return `UNITLAYERS[${parser.val({ read: ["units", pos, "group"] })}]`;
+  }
+
+  if (isAlgolSetExceptPos(expr)) {
+    const {
+      exceptpos: [set, pos]
+    } = expr;
+    // array of all keys in target object
+    const targetKeys = `Object.keys(${parser.set(set)})`;
+    // single position we want to exclude
+    const exceptPos = parser.pos(pos);
+    // arr of the keys we want to keep
+    const validKeys = `${targetKeys}.filter(k => k !== ${exceptPos})`;
+    // turn valid keys back into a set object
+    return `${validKeys}.reduce((m, k) => ({...m, [k]: emptyObj}), {})`;
   }
 
   throw new Error(`Unknown set definition: ${JSON.stringify(expr)}`);

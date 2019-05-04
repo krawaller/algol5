@@ -6,7 +6,8 @@ import {
   AlgolSetSingleAnon,
   AlgolSetSinglesAnon,
   AlgolSetSubtractAnon,
-  AlgolSetUnionAnon
+  AlgolSetUnionAnon,
+  AlgolSetExceptPosAnon
 } from "./set.anon";
 
 export function isAlgolSetLayer(expr: AlgolSetAnon): expr is AlgolSetLayerAnon {
@@ -45,4 +46,10 @@ export function isAlgolSetSubtract(
   expr: AlgolSetAnon
 ): expr is AlgolSetSubtractAnon {
   return (expr as AlgolSetSubtractAnon).subtract !== undefined;
+}
+
+export function isAlgolSetExceptPos(
+  expr: AlgolSetAnon
+): expr is AlgolSetExceptPosAnon {
+  return (expr as AlgolSetExceptPosAnon).exceptpos !== undefined;
 }

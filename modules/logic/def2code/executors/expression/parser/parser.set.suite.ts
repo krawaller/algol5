@@ -121,7 +121,7 @@ export const testSuite: AlgolExpressionSuite<
           ...emptyFullDef.flow,
           endGame: {
             something: {
-              condition: { isempty: { union: ["mygnurps"] } }
+              condition: { isempty: { union: ["mygnurps", "gnurps"] } }
             }
           }
         }
@@ -146,7 +146,13 @@ export const testSuite: AlgolExpressionSuite<
             },
             MARKS: { mymark: "a1" }
           },
-          tests: [{ expr: { groupat: "mymark" }, res: { a1: {}, b2: {} } }]
+          tests: [
+            { expr: { groupat: "mymark" }, res: { a1: {}, b2: {} } },
+            {
+              expr: { exceptpos: ["gnurps", "mymark"] },
+              res: { b2: {} }
+            }
+          ]
         }
       ]
     }

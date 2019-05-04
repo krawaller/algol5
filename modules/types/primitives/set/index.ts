@@ -9,7 +9,8 @@ import {
   AlgolSetSingle,
   AlgolSetSingles,
   AlgolSetSubtract,
-  AlgolSetUnion
+  AlgolSetUnion,
+  AlgolSetExceptPos
 } from "./set.interface";
 
 import { AlgolExpression } from "../../";
@@ -44,4 +45,5 @@ type AlgolSetInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolSetGroupAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetUnion<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetIntersect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetSubtract<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolSetSubtract<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolSetExceptPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

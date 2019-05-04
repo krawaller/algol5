@@ -7,7 +7,8 @@ import {
   AlgolSetSingle,
   AlgolSetSingles,
   AlgolSetSubtract,
-  AlgolSetUnion
+  AlgolSetUnion,
+  AlgolSetExceptPos
 } from "./set.interface";
 
 type s = string;
@@ -20,3 +21,4 @@ export type AlgolSetGroupAtAnon = AlgolSetGroupAt<s, s, s, s, s, s, s, s>;
 export type AlgolSetUnionAnon = AlgolSetUnion<s, s, s, s, s, s, s, s>;
 export type AlgolSetIntersectAnon = AlgolSetIntersect<s, s, s, s, s, s, s, s>;
 export type AlgolSetSubtractAnon = AlgolSetSubtract<s, s, s, s, s, s, s, s>;
+export type AlgolSetExceptPosAnon = AlgolSetExceptPos<s, s, s, s, s, s, s, s>;

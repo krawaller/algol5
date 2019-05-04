@@ -4,12 +4,12 @@ export type CoffeeBoardHeight = 5;
 export type CoffeeBoardWidth = 5;
 
 export type CoffeeTerrain = never;
-export type CoffeeUnit = "soldiers" | "markers";
+export type CoffeeUnit = "soldiers";
 export type CoffeeMark = "selectdrop";
 export type CoffeeCommand = "uphill" | "downhill" | "horisontal" | "vertical";
 export type CoffeePhaseCommand = never;
 export type CoffeePhase = "startTurn" | CoffeeMark;
-export type CoffeeUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "markers";
+export type CoffeeUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "soldiers";
 export type CoffeeGenerator = "findgeneratees" | "findwinlines";
 export type CoffeeArtifactLayer = "FOOBAR" | "vertical" | "uphill" | "horisontal" | "downhill" | "winline";
 export type CoffeeTerrainLayer = never;

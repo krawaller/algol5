@@ -15,7 +15,7 @@ const coffeeInstructions: CoffeeInstructions = {
       {
         line: [
           "Select",
-          { unittype: ["markers", 0] },
+          { unittype: ["soldiers", 0] },
           "to turn into",
           "soldiers"
         ]

@@ -1,4 +1,4 @@
-import { CoffeeFlow } from './_types';
+import { CoffeeFlow } from "./_types";
 
 const coffeeFlow: CoffeeFlow = {
   TODO:
@@ -10,7 +10,7 @@ const coffeeFlow: CoffeeFlow = {
   startTurn: { link: "selectdrop" },
   marks: {
     selectdrop: {
-      from: { ifelse: [{ isempty: "markers" }, "board", "markers"] },
+      from: { ifelse: [{ isempty: "neutralunits" }, "board", "neutralunits"] },
       runGenerator: "findgeneratees",
       links: [
         { if: [{ notempty: "uphill" }, "uphill"] },
@@ -23,36 +23,60 @@ const coffeeFlow: CoffeeFlow = {
   commands: {
     uphill: {
       applyEffects: [
-        { killin: "markers" },
-        { spawnat: ["selectdrop", "soldiers"] },
-        { spawnin: ["uphill", "markers", 0] }
+        { killin: { exceptpos: ["neutralunits", "selectdrop"] } },
+        {
+          ifelse: [
+            { noneat: ["units", "selectdrop"] },
+            { spawnat: ["selectdrop", "soldiers", ["player"]] },
+            { adoptat: ["selectdrop", ["player"]] }
+          ]
+        },
+        { spawnin: ["uphill", "soldiers", 0] }
       ],
       runGenerator: "findwinlines",
       link: "endTurn"
     },
     downhill: {
       applyEffects: [
-        { killin: "markers" },
-        { spawnat: ["selectdrop", "soldiers"] },
-        { spawnin: ["downhill", "markers", 0] }
+        { killin: { exceptpos: ["neutralunits", "selectdrop"] } },
+        {
+          ifelse: [
+            { noneat: ["units", "selectdrop"] },
+            { spawnat: ["selectdrop", "soldiers", ["player"]] },
+            { adoptat: ["selectdrop", ["player"]] }
+          ]
+        },
+        { spawnin: ["downhill", "soldiers", 0] }
       ],
       runGenerator: "findwinlines",
       link: "endTurn"
     },
     horisontal: {
       applyEffects: [
-        { killin: "markers" },
-        { spawnat: ["selectdrop", "soldiers"] },
-        { spawnin: ["horisontal", "markers", 0] }
+        { killin: { exceptpos: ["neutralunits", "selectdrop"] } },
+        {
+          ifelse: [
+            { noneat: ["units", "selectdrop"] },
+            { spawnat: ["selectdrop", "soldiers", ["player"]] },
+            { adoptat: ["selectdrop", ["player"]] }
+          ]
+        },
+        { spawnin: ["horisontal", "soldiers", 0] }
       ],
       runGenerator: "findwinlines",
       link: "endTurn"
     },
     vertical: {
       applyEffects: [
-        { killin: "markers" },
-        { spawnat: ["selectdrop", "soldiers"] },
-        { spawnin: ["vertical", "markers", 0] }
+        { killin: { exceptpos: ["neutralunits", "selectdrop"] } },
+        {
+          ifelse: [
+            { noneat: ["units", "selectdrop"] },
+            { spawnat: ["selectdrop", "soldiers", ["player"]] },
+            { adoptat: ["selectdrop", ["player"]] }
+          ]
+        },
+        { spawnin: ["vertical", "soldiers", 0] }
       ],
       runGenerator: "findwinlines",
       link: "endTurn"

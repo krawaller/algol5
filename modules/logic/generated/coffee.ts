@@ -11,7 +11,7 @@ import {
 import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
-const iconMapping = { soldiers: "pawn", markers: "pawn" };
+const iconMapping = { soldiers: "pawn" };
 const emptyArtifactLayers = {
   FOOBAR: {},
   vertical: {},
@@ -34,14 +34,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units", "neutralunits"],
-      ["units", "myunits"],
-      ["units", "oppunits"]
-    ],
-    markers: [
-      ["units", "neutralunits", "markers"],
-      ["units", "myunits", "markers"],
-      ["units", "oppunits", "markers"]
+      ["units", "neutralunits", "soldiers"],
+      ["units", "myunits", "soldiers"],
+      ["units", "oppunits", "soldiers"]
     ]
   };
   game.action.startTurn1 = step => {
@@ -51,15 +46,15 @@ let game: Partial<AlgolGame> = {
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
       neutralunits: oldUnitLayers.neutralunits,
-      markers: oldUnitLayers.markers
+      soldiers: oldUnitLayers.soldiers
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
     for (const pos of Object.keys(
-      Object.keys(UNITLAYERS.markers).length === 0
+      Object.keys(UNITLAYERS.neutralunits).length === 0
         ? BOARD.board
-        : UNITLAYERS.markers
+        : UNITLAYERS.neutralunits
     )) {
       LINKS.actions[pos] = "selectdrop1";
     }
@@ -87,7 +82,7 @@ let game: Partial<AlgolGame> = {
       : collapseContent({
           line: [
             { select: "Select" },
-            { unittype: [iconMapping["markers"], 0] },
+            { unittype: [iconMapping["soldiers"], 0] },
             { text: "to turn into" },
             { unittype: ["pawn", 1] }
           ]
@@ -107,17 +102,31 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.markers) {
+    for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
+      .filter(k => k !== MARKS.selectdrop)
+      .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: MARKS.selectdrop,
-        id: newunitid,
-        group: "soldiers",
-        owner: 1
-      };
+    if (!UNITLAYERS.units[MARKS.selectdrop]) {
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdrop,
+          id: newunitid,
+          group: "soldiers",
+          owner: 1
+        };
+      }
+    } else {
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectdrop] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            owner: 1
+          };
+        }
+      }
     }
     for (let LOOPPOS in ARTIFACTS.uphill) {
       {
@@ -125,7 +134,7 @@ let game: Partial<AlgolGame> = {
         UNITDATA[newunitid] = {
           pos: LOOPPOS,
           id: newunitid,
-          group: "markers",
+          group: "soldiers",
           owner: 0
         };
       }
@@ -135,7 +144,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      markers: {}
+      soldiers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -197,17 +206,31 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.markers) {
+    for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
+      .filter(k => k !== MARKS.selectdrop)
+      .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: MARKS.selectdrop,
-        id: newunitid,
-        group: "soldiers",
-        owner: 1
-      };
+    if (!UNITLAYERS.units[MARKS.selectdrop]) {
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdrop,
+          id: newunitid,
+          group: "soldiers",
+          owner: 1
+        };
+      }
+    } else {
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectdrop] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            owner: 1
+          };
+        }
+      }
     }
     for (let LOOPPOS in ARTIFACTS.downhill) {
       {
@@ -215,7 +238,7 @@ let game: Partial<AlgolGame> = {
         UNITDATA[newunitid] = {
           pos: LOOPPOS,
           id: newunitid,
-          group: "markers",
+          group: "soldiers",
           owner: 0
         };
       }
@@ -225,7 +248,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      markers: {}
+      soldiers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -287,17 +310,31 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.markers) {
+    for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
+      .filter(k => k !== MARKS.selectdrop)
+      .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: MARKS.selectdrop,
-        id: newunitid,
-        group: "soldiers",
-        owner: 1
-      };
+    if (!UNITLAYERS.units[MARKS.selectdrop]) {
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdrop,
+          id: newunitid,
+          group: "soldiers",
+          owner: 1
+        };
+      }
+    } else {
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectdrop] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            owner: 1
+          };
+        }
+      }
     }
     for (let LOOPPOS in ARTIFACTS.horisontal) {
       {
@@ -305,7 +342,7 @@ let game: Partial<AlgolGame> = {
         UNITDATA[newunitid] = {
           pos: LOOPPOS,
           id: newunitid,
-          group: "markers",
+          group: "soldiers",
           owner: 0
         };
       }
@@ -315,7 +352,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      markers: {}
+      soldiers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -377,17 +414,31 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.markers) {
+    for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
+      .filter(k => k !== MARKS.selectdrop)
+      .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: MARKS.selectdrop,
-        id: newunitid,
-        group: "soldiers",
-        owner: 1
-      };
+    if (!UNITLAYERS.units[MARKS.selectdrop]) {
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdrop,
+          id: newunitid,
+          group: "soldiers",
+          owner: 1
+        };
+      }
+    } else {
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectdrop] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            owner: 1
+          };
+        }
+      }
     }
     for (let LOOPPOS in ARTIFACTS.vertical) {
       {
@@ -395,7 +446,7 @@ let game: Partial<AlgolGame> = {
         UNITDATA[newunitid] = {
           pos: LOOPPOS,
           id: newunitid,
-          group: "markers",
+          group: "soldiers",
           owner: 0
         };
       }
@@ -405,7 +456,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      markers: {}
+      soldiers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -549,14 +600,9 @@ let game: Partial<AlgolGame> = {
 {
   const groupLayers = {
     soldiers: [
-      ["units", "neutralunits"],
-      ["units", "oppunits"],
-      ["units", "myunits"]
-    ],
-    markers: [
-      ["units", "neutralunits", "markers"],
-      ["units", "oppunits", "markers"],
-      ["units", "myunits", "markers"]
+      ["units", "neutralunits", "soldiers"],
+      ["units", "oppunits", "soldiers"],
+      ["units", "myunits", "soldiers"]
     ]
   };
   game.action.startTurn2 = step => {
@@ -566,15 +612,15 @@ let game: Partial<AlgolGame> = {
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
       neutralunits: oldUnitLayers.neutralunits,
-      markers: oldUnitLayers.markers
+      soldiers: oldUnitLayers.soldiers
     };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
     for (const pos of Object.keys(
-      Object.keys(UNITLAYERS.markers).length === 0
+      Object.keys(UNITLAYERS.neutralunits).length === 0
         ? BOARD.board
-        : UNITLAYERS.markers
+        : UNITLAYERS.neutralunits
     )) {
       LINKS.actions[pos] = "selectdrop2";
     }
@@ -602,7 +648,7 @@ let game: Partial<AlgolGame> = {
       : collapseContent({
           line: [
             { select: "Select" },
-            { unittype: [iconMapping["markers"], 0] },
+            { unittype: [iconMapping["soldiers"], 0] },
             { text: "to turn into" },
             { unittype: ["pawn", 2] }
           ]
@@ -618,7 +664,7 @@ let game: Partial<AlgolGame> = {
         myunits: {},
         oppunits: {},
         neutralunits: {},
-        markers: {}
+        soldiers: {}
       }
     });
   };
@@ -636,17 +682,31 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.markers) {
+    for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
+      .filter(k => k !== MARKS.selectdrop)
+      .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: MARKS.selectdrop,
-        id: newunitid,
-        group: "soldiers",
-        owner: 2
-      };
+    if (!UNITLAYERS.units[MARKS.selectdrop]) {
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdrop,
+          id: newunitid,
+          group: "soldiers",
+          owner: 2
+        };
+      }
+    } else {
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectdrop] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            owner: 2
+          };
+        }
+      }
     }
     for (let LOOPPOS in ARTIFACTS.uphill) {
       {
@@ -654,7 +714,7 @@ let game: Partial<AlgolGame> = {
         UNITDATA[newunitid] = {
           pos: LOOPPOS,
           id: newunitid,
-          group: "markers",
+          group: "soldiers",
           owner: 0
         };
       }
@@ -664,7 +724,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      markers: {}
+      soldiers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -726,17 +786,31 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.markers) {
+    for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
+      .filter(k => k !== MARKS.selectdrop)
+      .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: MARKS.selectdrop,
-        id: newunitid,
-        group: "soldiers",
-        owner: 2
-      };
+    if (!UNITLAYERS.units[MARKS.selectdrop]) {
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdrop,
+          id: newunitid,
+          group: "soldiers",
+          owner: 2
+        };
+      }
+    } else {
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectdrop] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            owner: 2
+          };
+        }
+      }
     }
     for (let LOOPPOS in ARTIFACTS.downhill) {
       {
@@ -744,7 +818,7 @@ let game: Partial<AlgolGame> = {
         UNITDATA[newunitid] = {
           pos: LOOPPOS,
           id: newunitid,
-          group: "markers",
+          group: "soldiers",
           owner: 0
         };
       }
@@ -754,7 +828,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      markers: {}
+      soldiers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -816,17 +890,31 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.markers) {
+    for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
+      .filter(k => k !== MARKS.selectdrop)
+      .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: MARKS.selectdrop,
-        id: newunitid,
-        group: "soldiers",
-        owner: 2
-      };
+    if (!UNITLAYERS.units[MARKS.selectdrop]) {
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdrop,
+          id: newunitid,
+          group: "soldiers",
+          owner: 2
+        };
+      }
+    } else {
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectdrop] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            owner: 2
+          };
+        }
+      }
     }
     for (let LOOPPOS in ARTIFACTS.horisontal) {
       {
@@ -834,7 +922,7 @@ let game: Partial<AlgolGame> = {
         UNITDATA[newunitid] = {
           pos: LOOPPOS,
           id: newunitid,
-          group: "markers",
+          group: "soldiers",
           owner: 0
         };
       }
@@ -844,7 +932,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      markers: {}
+      soldiers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -906,17 +994,31 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.markers) {
+    for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
+      .filter(k => k !== MARKS.selectdrop)
+      .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: MARKS.selectdrop,
-        id: newunitid,
-        group: "soldiers",
-        owner: 2
-      };
+    if (!UNITLAYERS.units[MARKS.selectdrop]) {
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: MARKS.selectdrop,
+          id: newunitid,
+          group: "soldiers",
+          owner: 2
+        };
+      }
+    } else {
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectdrop] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            owner: 2
+          };
+        }
+      }
     }
     for (let LOOPPOS in ARTIFACTS.vertical) {
       {
@@ -924,7 +1026,7 @@ let game: Partial<AlgolGame> = {
         UNITDATA[newunitid] = {
           pos: LOOPPOS,
           id: newunitid,
-          group: "markers",
+          group: "soldiers",
           owner: 0
         };
       }
@@ -934,7 +1036,7 @@ let game: Partial<AlgolGame> = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      markers: {}
+      soldiers: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];

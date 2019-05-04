@@ -2,7 +2,8 @@ import * as fs from "fs-extra";
 import * as path from "path";
 
 import templateAI from "./templates/ai";
-import templateAnalysis from "./templates/ai";
+import templateAnalysis from "./templates/analysis";
+import templateAnim from "./templates/anim";
 import templateBoard from "./templates/board";
 import templateGraphics from "./templates/graphics";
 import templateInstructions from "./templates/instructions";
@@ -20,6 +21,7 @@ export default async function stub(gameId) {
   await fs.ensureDir(path.join(defPath, gameId));
   await Promise.all([
     template(gameId, templateAI, "ai"),
+    template(gameId, templateAnim, "anim"),
     template(gameId, templateAnalysis, "_types"),
     template(gameId, templateBoard, "board"),
     template(gameId, templateFlow, "flow"),

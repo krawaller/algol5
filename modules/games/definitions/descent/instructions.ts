@@ -1,4 +1,4 @@
-import { DescentInstructions } from "./_types";
+import { DescentInstructions } from './_types';
 
 const descentInstructions: DescentInstructions = {
   startTurn: {

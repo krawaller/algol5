@@ -1,4 +1,4 @@
-import { GowiththefloeInstructions } from "./_types";
+import { GowiththefloeInstructions } from './_types';
 
 const gowiththefloeInstructions: GowiththefloeInstructions = {
   startTurn: {

@@ -1,4 +1,4 @@
-import { OrthokonInstructions } from "./_types";
+import { OrthokonInstructions } from './_types';
 
 const orthokonInstructions: OrthokonInstructions = {
   startTurn: { line: ["Select", "which", "soldiers", "to move"] },
@@ -14,9 +14,7 @@ const orthokonInstructions: OrthokonInstructions = {
       {
         if: [
           { notempty: "victims" },
-          {
-            line: ["and turn", { unitlist: "victims" }, "into", "soldiers"]
-          }
+          { line: ["and turn", { unitlist: "victims" }, "into", "soldiers"] }
         ]
       }
     ]

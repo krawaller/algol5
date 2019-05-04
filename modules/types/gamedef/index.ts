@@ -8,6 +8,7 @@ export * from "./meta";
 export * from "./setup";
 export * from "./graphics";
 export * from "./performance";
+export * from "./anim";
 
 import { Generators } from "./generators";
 import { Graphics } from "./graphics";
@@ -19,6 +20,7 @@ import { AlgolMeta } from "./meta";
 import { Flow } from "./flow";
 import { GameTestSuite } from "./scripts";
 import { AlgolPerformance } from "./performance";
+import { AlgolAnim } from "./anim";
 
 export type FullDefAnon = FullDef<
   string,
@@ -90,6 +92,18 @@ export type FullDef<
     Position,
     TurnPos,
     TurnVar
+  >;
+  anim?: AlgolAnim<
+    BattlePos,
+    BattleVar,
+    Command,
+    Grid,
+    Layer,
+    Mark,
+    Phase,
+    TurnPos,
+    TurnVar,
+    Unit
   >;
   board: AlgolBoard<BoardHeight, BoardWidth, Grid, Position, Terrain>;
   setup: Setup<Position, Unit>;

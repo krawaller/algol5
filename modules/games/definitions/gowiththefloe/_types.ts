@@ -1,7 +1,9 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type GowiththefloeBoardHeight = 8;
 export type GowiththefloeBoardWidth = 8;
+
+export type GowiththefloeAnim = AlgolAnim<GowiththefloeBattlePos, GowiththefloeBattleVar, GowiththefloeCommand, GowiththefloeGrid, GowiththefloeLayer, GowiththefloeMark, GowiththefloePhase, GowiththefloeTurnPos, GowiththefloeTurnVar, GowiththefloeUnit>;
 
 export type GowiththefloeTerrain = "water";
 export type GowiththefloeUnit = "seals" | "bears" | "holes";

@@ -1,0 +1,12 @@
+export type AlgolAnim<
+  Btlp extends string,
+  Btlv extends string,
+  Cmnd extends string,
+  Grid extends string,
+  Layer extends string,
+  Mrk extends string,
+  Phase extends string,
+  Turnp extends string,
+  Turnv extends string,
+  Unit extends string
+> = {};

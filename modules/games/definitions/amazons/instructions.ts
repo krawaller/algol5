@@ -1,4 +1,4 @@
-import { AmazonsInstructions } from "./_types";
+import { AmazonsInstructions } from './_types';
 
 const amazonsInstructions: AmazonsInstructions = {
   startTurn: { line: ["Select", "queen", "to move and fire with"] },

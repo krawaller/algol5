@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedGenerators } from "./_types";
+import { MurusgallicusadvancedGenerators } from './_types';
 
 const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {

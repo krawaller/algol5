@@ -63,10 +63,12 @@ export default async function analyze(def: FullDefAnon | string) {
   const aiBrains = Object.keys(AI.brains);
   const aiArtifactLayerNames = Object.keys(emptyArtifactLayers(AI.generators));
 
-  const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+  const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type ${capId}BoardHeight = ${def.board.height};
 export type ${capId}BoardWidth = ${def.board.width};
+
+export type ${capId}Anim = AlgolAnim<${typeSignature("AlgolAnim", gameId)}>;
 
 export type ${capId}Terrain = ${
     terrains.length ? terrains.map(t => `"${t}"`).join(" | ") : "never"

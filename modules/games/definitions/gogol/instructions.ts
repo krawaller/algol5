@@ -1,4 +1,4 @@
-import { GogolInstructions } from "./_types";
+import { GogolInstructions } from './_types';
 
 const gogolInstructions: GogolInstructions = {
   startTurn: {
@@ -33,9 +33,7 @@ const gogolInstructions: GogolInstructions = {
           "kings",
           {
             if: [
-              {
-                overlaps: ["nokings", { union: ["kingwalk", "jumptargets"] }]
-              },
+              { overlaps: ["nokings", { union: ["kingwalk", "jumptargets"] }] },
               "without making a forbidden configuration"
             ]
           }

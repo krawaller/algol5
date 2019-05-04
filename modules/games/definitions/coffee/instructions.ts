@@ -1,4 +1,4 @@
-import { CoffeeInstructions } from "./_types";
+import { CoffeeInstructions } from './_types';
 
 const coffeeInstructions: CoffeeInstructions = {
   startTurn: {

@@ -1,4 +1,4 @@
-import { GowiththefloePerformance } from "./_types";
+import { GowiththefloePerformance } from './_types';
 
 const gowiththefloePerformance: GowiththefloePerformance = {
   canAlwaysEnd: { selectmovetarget: true, selecteattarget: true },

@@ -85,6 +85,18 @@ export function typeSignature(type, gameId) {
       "TurnPos",
       "TurnVar"
     ],
+    AlgolAnim: [
+      "BattlePos",
+      "BattleVar",
+      "Command",
+      "Grid",
+      "Layer",
+      "Mark",
+      "Phase",
+      "TurnPos",
+      "TurnVar",
+      "Unit"
+    ],
     Flow: [
       "BattlePos",
       "BattleVar",

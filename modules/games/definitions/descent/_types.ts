@@ -1,7 +1,9 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type DescentBoardHeight = 4;
 export type DescentBoardWidth = 4;
+
+export type DescentAnim = AlgolAnim<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentTurnPos, DescentTurnVar, DescentUnit>;
 
 export type DescentTerrain = never;
 export type DescentUnit = "pawns" | "knights" | "rooks";
@@ -9,7 +11,7 @@ export type DescentMark = "selectunit" | "selectmovetarget" | "selectdigtarget";
 export type DescentCommand = "move" | "dig";
 export type DescentPhaseCommand = "move";
 export type DescentPhase = "startTurn" | DescentMark | DescentPhaseCommand;
-export type DescentUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "pawns" | "mypawns" | "opppawns" | "neutralpawns" | "knights" | "myknights" | "oppknights" | "neutralknights" | "rooks" | "myrooks" | "opprooks" | "neutralrooks";
+export type DescentUnitLayer = "units" | "myunits" | "oppunits" | "neutralunits" | "pawns" | "mypawns" | "opppawns" | "knights" | "myknights" | "oppknights" | "rooks" | "myrooks" | "opprooks";
 export type DescentGenerator = "findmovetargets" | "finddigtargets" | "findwinlines";
 export type DescentArtifactLayer = "movetargets" | "digtargets" | "winline";
 export type DescentTerrainLayer = never;

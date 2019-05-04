@@ -1,9 +1,7 @@
-import { MurusgallicusadvancedInstructions } from "./_types";
+import { MurusgallicusadvancedInstructions } from './_types';
 
 const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
-  startTurn: {
-    line: ["Select", "towers", "or", "catapults", "to act with"]
-  },
+  startTurn: { line: ["Select", "towers", "or", "catapults", "to act with"] },
   selecttower: {
     line: [
       "Select",

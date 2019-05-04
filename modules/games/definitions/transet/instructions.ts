@@ -1,4 +1,4 @@
-import { TransetInstructions } from "./_types";
+import { TransetInstructions } from './_types';
 
 const transetInstructions: TransetInstructions = {
   startTurn: {
@@ -12,9 +12,7 @@ const transetInstructions: TransetInstructions = {
           {
             if: [
               { notempty: "movetargets" },
-              {
-                line: ["where to move", { unitat: "selectunit" }]
-              }
+              { line: ["where to move", { unitat: "selectunit" }] }
             ]
           },
           {

@@ -1,4 +1,4 @@
-import { GogolPerformance } from "./_types";
+import { GogolPerformance } from './_types';
 
 const gogolPerformance: GogolPerformance = {
   canAlwaysEnd: {

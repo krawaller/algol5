@@ -1,10 +1,8 @@
-import { KickrunInstructions } from "./_types";
+import { KickrunInstructions } from './_types';
 
 const kickrunInstructions: KickrunInstructions = {
   startTurn: { line: ["Select", "runners", "or", "sidekickers", "to move"] },
-  selectunit: {
-    line: ["Select", "where to move", { unitat: "selectunit" }]
-  },
+  selectunit: { line: ["Select", "where to move", { unitat: "selectunit" }] },
   selectmovetarget: {
     line: [
       "Press",

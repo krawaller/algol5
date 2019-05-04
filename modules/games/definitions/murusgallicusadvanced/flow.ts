@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedFlow } from "./_types";
+import { MurusgallicusadvancedFlow } from './_types';
 
 const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
   startTurn: { links: ["selecttower", "selectcatapult"] },

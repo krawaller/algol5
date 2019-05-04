@@ -1,4 +1,4 @@
-import { GowiththefloeGraphics } from "./_types";
+import { GowiththefloeGraphics } from './_types';
 
 const gowiththefloeGraphics: GowiththefloeGraphics = {
   tiles: { water: "water" },

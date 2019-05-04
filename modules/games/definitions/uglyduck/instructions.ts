@@ -1,4 +1,4 @@
-import { UglyduckInstructions } from "./_types";
+import { UglyduckInstructions } from './_types';
 
 const uglyduckInstructions: UglyduckInstructions = {
   startTurn: {
@@ -12,9 +12,7 @@ const uglyduckInstructions: UglyduckInstructions = {
               { line: ["soldiers", "to advance"] }
             ]
           },
-          {
-            if: [{ notempty: "mykings" }, { line: ["kings", "to retreat"] }]
-          }
+          { if: [{ notempty: "mykings" }, { line: ["kings", "to retreat"] }] }
         ]
       }
     ]
@@ -45,9 +43,7 @@ const uglyduckInstructions: UglyduckInstructions = {
       "Press",
       "move",
       "to",
-      {
-        ifelse: [{ anyat: ["mykings", "selectunit"] }, "retreat", "advance"]
-      },
+      { ifelse: [{ anyat: ["mykings", "selectunit"] }, "retreat", "advance"] },
       { unitat: "selectunit" },
       {
         ifelse: [

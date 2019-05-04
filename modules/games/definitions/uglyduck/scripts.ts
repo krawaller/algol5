@@ -1,4 +1,4 @@
-import { UglyduckScripts } from "./_types";
+import { UglyduckScripts } from './_types';
 
 const uglyduckScripts: UglyduckScripts = {
   basic: [

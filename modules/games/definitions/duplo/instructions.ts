@@ -1,4 +1,4 @@
-import { DuploInstructions } from "./_types";
+import { DuploInstructions } from './_types';
 
 const duploInstructions: DuploInstructions = {
   startTurn: {

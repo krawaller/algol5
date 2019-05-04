@@ -1,4 +1,4 @@
-import { DaggersInstructions } from "./_types";
+import { DaggersInstructions } from './_types';
 
 const daggersInstructions: DaggersInstructions = {
   startTurn: { line: ["Select", "a", "daggers", "or", "crowns", "to move"] },
@@ -48,9 +48,7 @@ const daggersInstructions: DaggersInstructions = {
       {
         ifelse: [
           { anyat: ["units", "selectmovetarget"] },
-          {
-            line: ["and kill", { unitat: "selectmovetarget" }]
-          },
+          { line: ["and kill", { unitat: "selectmovetarget" }] },
           { line: ["to", "selectmovetarget"] }
         ]
       }

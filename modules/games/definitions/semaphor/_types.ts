@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type SemaphorBoardHeight = 3;
 export type SemaphorBoardWidth = 4;
 
-export type SemaphorAnim = AlgolAnim<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
+export type SemaphorAnim = AlgolAnim<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
 
 export type SemaphorTerrain = never;
 export type SemaphorUnit = "kings" | "pawns" | "bishops";

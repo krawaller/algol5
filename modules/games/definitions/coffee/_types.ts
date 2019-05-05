@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type CoffeeBoardHeight = 5;
 export type CoffeeBoardWidth = 5;
 
-export type CoffeeAnim = AlgolAnim<CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeePhase, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
+export type CoffeeAnim = AlgolAnim<CoffeeBattlePos, CoffeeBattleVar, CoffeeCommand, CoffeeGrid, CoffeeLayer, CoffeeMark, CoffeeTurnPos, CoffeeTurnVar, CoffeeUnit>;
 
 export type CoffeeTerrain = never;
 export type CoffeeUnit = "soldiers";

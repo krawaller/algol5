@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type DaggersBoardHeight = 8;
 export type DaggersBoardWidth = 8;
 
-export type DaggersAnim = AlgolAnim<DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGrid, DaggersLayer, DaggersMark, DaggersPhase, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
+export type DaggersAnim = AlgolAnim<DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGrid, DaggersLayer, DaggersMark, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
 
 export type DaggersTerrain = "base";
 export type DaggersUnit = "daggers" | "crowns";

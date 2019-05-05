@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type JostleBoardHeight = 10;
 export type JostleBoardWidth = 10;
 
-export type JostleAnim = AlgolAnim<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostlePhase, JostleTurnPos, JostleTurnVar, JostleUnit>;
+export type JostleAnim = AlgolAnim<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar, JostleUnit>;
 
 export type JostleTerrain = never;
 export type JostleUnit = "checkers";

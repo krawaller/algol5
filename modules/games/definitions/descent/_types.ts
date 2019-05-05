@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type DescentBoardHeight = 4;
 export type DescentBoardWidth = 4;
 
-export type DescentAnim = AlgolAnim<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentPhase, DescentTurnPos, DescentTurnVar, DescentUnit>;
+export type DescentAnim = AlgolAnim<DescentBattlePos, DescentBattleVar, DescentCommand, DescentGrid, DescentLayer, DescentMark, DescentTurnPos, DescentTurnVar, DescentUnit>;
 
 export type DescentTerrain = never;
 export type DescentUnit = "pawns" | "knights" | "rooks";

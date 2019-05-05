@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type KriegBoardHeight = 4;
 export type KriegBoardWidth = 4;
 
-export type KriegAnim = AlgolAnim<KriegBattlePos, KriegBattleVar, KriegCommand, KriegGrid, KriegLayer, KriegMark, KriegPhase, KriegTurnPos, KriegTurnVar, KriegUnit>;
+export type KriegAnim = AlgolAnim<KriegBattlePos, KriegBattleVar, KriegCommand, KriegGrid, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar, KriegUnit>;
 
 export type KriegTerrain = "southeast" | "northwest" | "corners" | "bases";
 export type KriegUnit = "notfrozens" | "frozens";

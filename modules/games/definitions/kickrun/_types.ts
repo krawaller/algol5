@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type KickrunBoardHeight = 5;
 export type KickrunBoardWidth = 5;
 
-export type KickrunAnim = AlgolAnim<KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGrid, KickrunLayer, KickrunMark, KickrunPhase, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
+export type KickrunAnim = AlgolAnim<KickrunBattlePos, KickrunBattleVar, KickrunCommand, KickrunGrid, KickrunLayer, KickrunMark, KickrunTurnPos, KickrunTurnVar, KickrunUnit>;
 
 export type KickrunTerrain = "corners";
 export type KickrunUnit = "runners" | "sidekickers";

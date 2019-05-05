@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type TransetBoardHeight = 5;
 export type TransetBoardWidth = 5;
 
-export type TransetAnim = AlgolAnim<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGrid, TransetLayer, TransetMark, TransetPhase, TransetTurnPos, TransetTurnVar, TransetUnit>;
+export type TransetAnim = AlgolAnim<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGrid, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar, TransetUnit>;
 
 export type TransetTerrain = "base";
 export type TransetUnit = "pinets" | "piokers" | "piases";

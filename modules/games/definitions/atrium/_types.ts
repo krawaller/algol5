@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type AtriumBoardHeight = 5;
 export type AtriumBoardWidth = 5;
 
-export type AtriumAnim = AlgolAnim<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
+export type AtriumAnim = AlgolAnim<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
 
 export type AtriumTerrain = never;
 export type AtriumUnit = "kings" | "queens";

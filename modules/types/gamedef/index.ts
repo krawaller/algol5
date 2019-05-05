@@ -100,7 +100,6 @@ export type FullDef<
     Grid,
     Layer,
     Mark,
-    Phase,
     TurnPos,
     TurnVar,
     Unit

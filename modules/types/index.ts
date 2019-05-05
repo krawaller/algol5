@@ -92,7 +92,6 @@ export function typeSignature(type, gameId) {
       "Grid",
       "Layer",
       "Mark",
-      "Phase",
       "TurnPos",
       "TurnVar",
       "Unit"

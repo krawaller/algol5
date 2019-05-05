@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type AriesBoardHeight = 8;
 export type AriesBoardWidth = 8;
 
-export type AriesAnim = AlgolAnim<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesTurnPos, AriesTurnVar, AriesUnit>;
+export type AriesAnim = AlgolAnim<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGrid, AriesLayer, AriesMark, AriesTurnPos, AriesTurnVar, AriesUnit>;
 
 export type AriesTerrain = "corner";
 export type AriesUnit = "soldiers";

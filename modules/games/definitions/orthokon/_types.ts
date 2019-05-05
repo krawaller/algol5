@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type OrthokonBoardHeight = 4;
 export type OrthokonBoardWidth = 4;
 
-export type OrthokonAnim = AlgolAnim<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
+export type OrthokonAnim = AlgolAnim<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
 
 export type OrthokonTerrain = never;
 export type OrthokonUnit = "soldiers";

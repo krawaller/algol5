@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type GogolBoardHeight = 8;
 export type GogolBoardWidth = 8;
 
-export type GogolAnim = AlgolAnim<GogolBattlePos, GogolBattleVar, GogolCommand, GogolGrid, GogolLayer, GogolMark, GogolPhase, GogolTurnPos, GogolTurnVar, GogolUnit>;
+export type GogolAnim = AlgolAnim<GogolBattlePos, GogolBattleVar, GogolCommand, GogolGrid, GogolLayer, GogolMark, GogolTurnPos, GogolTurnVar, GogolUnit>;
 
 export type GogolTerrain = "homerow" | "edges";
 export type GogolUnit = "kings" | "soldiers";

@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type UglyduckBoardHeight = 5;
 export type UglyduckBoardWidth = 5;
 
-export type UglyduckAnim = AlgolAnim<UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckPhase, UglyduckTurnPos, UglyduckTurnVar, UglyduckUnit>;
+export type UglyduckAnim = AlgolAnim<UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckTurnPos, UglyduckTurnVar, UglyduckUnit>;
 
 export type UglyduckTerrain = "homerow";
 export type UglyduckUnit = "soldiers" | "kings";

@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type SerauqsBoardHeight = 4;
 export type SerauqsBoardWidth = 4;
 
-export type SerauqsAnim = AlgolAnim<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsPhase, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
+export type SerauqsAnim = AlgolAnim<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
 
 export type SerauqsTerrain = "base" | "corners" | "middle";
 export type SerauqsUnit = "soldiers" | "wild";

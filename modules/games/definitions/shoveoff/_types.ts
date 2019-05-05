@@ -3,7 +3,7 @@ import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Ins
 export type ShoveoffBoardHeight = 4;
 export type ShoveoffBoardWidth = 4;
 
-export type ShoveoffAnim = AlgolAnim<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffPhase, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;
+export type ShoveoffAnim = AlgolAnim<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;
 
 export type ShoveoffTerrain = "southedge" | "northedge" | "westedge" | "eastedge" | "edge";
 export type ShoveoffUnit = "soldiers";

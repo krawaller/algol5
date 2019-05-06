@@ -1,9 +1,9 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type DaggersBoardHeight = 8;
 export type DaggersBoardWidth = 8;
 
-export type DaggersAnim = AlgolAnim<DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGrid, DaggersLayer, DaggersMark, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
+export type DaggersAnim = AlgolAnimCollection<DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGrid, DaggersLayer, DaggersMark, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;
 
 export type DaggersTerrain = "base";
 export type DaggersUnit = "daggers" | "crowns";

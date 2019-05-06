@@ -1,9 +1,9 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnim, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type SerauqsBoardHeight = 4;
 export type SerauqsBoardWidth = 4;
 
-export type SerauqsAnim = AlgolAnim<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
+export type SerauqsAnim = AlgolAnimCollection<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
 
 export type SerauqsTerrain = "base" | "corners" | "middle";
 export type SerauqsUnit = "soldiers" | "wild";

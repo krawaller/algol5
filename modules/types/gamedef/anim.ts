@@ -1,6 +1,6 @@
-import { AlgolPos } from "../";
+import { AlgolAnim } from "../";
 
-export type AlgolAnim<
+export type AlgolAnimCollection<
   Btlp extends string,
   Btlv extends string,
   Cmnd extends string,
@@ -12,7 +12,7 @@ export type AlgolAnim<
   Unit extends string
 > = Partial<
   {
-    [cmnd in Cmnd]: AlgolAnimCmnd<
+    [cmnd in Cmnd]: AlgolAnim<
       Btlp,
       Btlv,
       Cmnd,
@@ -22,28 +22,6 @@ export type AlgolAnim<
       Turnp,
       Turnv,
       Unit
-    >
+    >[]
   }
 >;
-
-export type AlgolAnimCmnd<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string,
-  Unit extends string
-> = Partial<{
-  enterFrom: Partial<
-    {
-      [p in IsAString<
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-      >]: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-    }
-  >;
-}>;
-
-type IsAString<T> = string;

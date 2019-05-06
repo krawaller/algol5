@@ -15,3 +15,4 @@ export * from "./dirs";
 export * from "./genref";
 export * from "./link";
 export * from "./matcher";
+export * from "./anim";

@@ -20,7 +20,7 @@ import { AlgolMeta } from "./meta";
 import { Flow } from "./flow";
 import { GameTestSuite } from "./scripts";
 import { AlgolPerformance } from "./performance";
-import { AlgolAnim } from "./anim";
+import { AlgolAnimCollection } from "./anim";
 
 export type FullDefAnon = FullDef<
   string,
@@ -93,7 +93,7 @@ export type FullDef<
     TurnPos,
     TurnVar
   >;
-  anim?: AlgolAnim<
+  anim?: AlgolAnimCollection<
     BattlePos,
     BattleVar,
     Command,

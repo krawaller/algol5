@@ -21,6 +21,7 @@ export type ${capId}TurnVar = any;
 export type ${capId}Generators = any;
 export type ${capId}Flow = any;
 export type ${capId}AI = any;
+export type ${capId}Anim = any;
 export type ${capId}Graphics = any;
 export type ${capId}Instructions = any;
 export type ${capId}Meta = any;

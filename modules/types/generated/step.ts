@@ -20,6 +20,7 @@ export type AlgolStep = {
   TURNVARS?: { [varname: string]: any };
   BATTLEVARS?: { [varname: string]: any };
   NEXTSPAWNID?: number;
+  anim?: AlgolAnimCompiled;
   // performance-related stuff
   canAlwaysEnd?: boolean;
   massiveTree?: boolean;
@@ -31,5 +32,15 @@ export type AlgolUnitState = {
   group: string;
   icon?: string;
   owner: 0 | 1 | 2;
-  from?: string;
+  from?: string; // TODO <--- kill
+};
+
+export type AlgolAnimCompiled = {
+  enterFrom: {
+    [from: string]: string;
+  };
+  exitTo: {
+    [from: string]: string;
+  };
+  ghosts: [string, string, string][];
 };

@@ -5,6 +5,8 @@ import {
 } from "./anim.interfaces";
 
 export * from "./anim.interfaces";
+export * from "./anim.anon";
+export * from "./anim.guard";
 
 export type AlgolAnim<
   Btlp extends string,

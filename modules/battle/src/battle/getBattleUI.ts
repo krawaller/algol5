@@ -48,6 +48,7 @@ export function getBattleUI(
     potentialMarks,
     commands,
     undo: battle.state.undo && battle.state.undo.command,
-    instruction: getBattleInstruction(game, battle)
+    instruction: getBattleInstruction(game, battle),
+    anim: currentStep.anim || { enterFrom: {}, exitTo: {}, ghosts: [] }
   };
 }

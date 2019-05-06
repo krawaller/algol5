@@ -9,6 +9,7 @@ export const emptyFullDef: FullDefAnon = {
     grids: {},
     terrain: {}
   },
+  anim: {},
   board: {
     height: 5,
     width: 5,

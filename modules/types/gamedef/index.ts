@@ -93,7 +93,7 @@ export type FullDef<
     TurnPos,
     TurnVar
   >;
-  anim?: AlgolAnimCollection<
+  anim: AlgolAnimCollection<
     BattlePos,
     BattleVar,
     Command,

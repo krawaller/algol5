@@ -1,7 +1,5 @@
 import { TransetAnim } from './_types';
 
-const transetAnim: TransetAnim = {
-
-};
+const transetAnim: TransetAnim = {};
 
 export default transetAnim;

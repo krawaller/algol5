@@ -1,7 +1,5 @@
 import { GowiththefloeAnim } from './_types';
 
-const gowiththefloeAnim: GowiththefloeAnim = {
-
-};
+const gowiththefloeAnim: GowiththefloeAnim = {};
 
 export default gowiththefloeAnim;

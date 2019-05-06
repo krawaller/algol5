@@ -1,7 +1,5 @@
 import { AriesAnim } from './_types';
 
-const ariesAnim: AriesAnim = {
-
-};
+const ariesAnim: AriesAnim = {};
 
 export default ariesAnim;

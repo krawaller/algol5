@@ -1,7 +1,5 @@
 import { KickrunAnim } from './_types';
 
-const kickrunAnim: KickrunAnim = {
-
-};
+const kickrunAnim: KickrunAnim = {};
 
 export default kickrunAnim;

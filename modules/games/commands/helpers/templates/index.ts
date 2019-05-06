@@ -5,6 +5,7 @@ export default function templateIndex(gameId) {
 import { ${capId}Definition } from './_types';
 
 import ${gameId}AI from './ai';
+import ${gameId}Anim from './anim';
 import ${gameId}Board from './board';
 import ${gameId}Setup from './setup';
 import ${gameId}Graphics from './graphics';
@@ -17,6 +18,7 @@ import ${gameId}Generators from './generators';
 
 const ${gameId}Definition: ${capId}Definition = {
   AI: ${gameId}AI,
+  anim: ${gameId}Anim,
   board: ${gameId}Board,
   setup: ${gameId}Setup,
   graphics: ${gameId}Graphics,

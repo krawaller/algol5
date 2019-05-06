@@ -1,7 +1,5 @@
 import { MurusgallicusAnim } from './_types';
 
-const murusgallicusAnim: MurusgallicusAnim = {
-
-};
+const murusgallicusAnim: MurusgallicusAnim = {};
 
 export default murusgallicusAnim;

@@ -1,7 +1,5 @@
 import { DaggersAnim } from './_types';
 
-const daggersAnim: DaggersAnim = {
-
-};
+const daggersAnim: DaggersAnim = {};
 
 export default daggersAnim;

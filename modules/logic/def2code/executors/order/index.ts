@@ -4,11 +4,13 @@ import {
   AlgolOrderInnerAnon,
   isAlgolOrderLinks,
   isAlgolOrderDoEffects,
-  isAlgolOrderRunGenerators
+  isAlgolOrderRunGenerators,
+  isAlgolOrderAnims
 } from "../../../../types";
 
 import { executeStatement } from "../";
 
+import { executeAnim } from "./anim";
 import { executeGenerator } from "./generate";
 import { executeLink } from "./link";
 import { executeEffect } from "./effect";
@@ -51,6 +53,11 @@ function executeOrderInner(
   if (isAlgolOrderRunGenerators(order)) {
     return executeGenerator(gameDef, player, action, {
       multi: order.generators
+    });
+  }
+  if (isAlgolOrderAnims(order)) {
+    return executeAnim(gameDef, player, action, {
+      multi: order.anims
     });
   }
   throw new Error("Unknown order: " + JSON.stringify(order));

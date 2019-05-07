@@ -3,11 +3,12 @@ import {
   AlgolAnimExitTo,
   AlgolAnimGhost
 } from "./anim.interfaces";
-import { AlgolAnim } from "./";
+import { AlgolAnim, AlgolAnimInner } from "./";
 
 type s = string;
 
 export type AlgolAnimAnon = AlgolAnim<s, s, s, s, s, s, s, s, s>;
+export type AlgolAnimInnerAnon = AlgolAnimInner<s, s, s, s, s, s, s, s, s>;
 
 export type AlgolAnimEnterFromAnon = AlgolAnimEnterFrom<s, s, s, s, s, s, s, s>;
 export type AlgolAnimExitToAnon = AlgolAnimExitTo<s, s, s, s, s, s, s, s>;

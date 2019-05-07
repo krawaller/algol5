@@ -1,6 +1,11 @@
 import * as React from "react";
 import { GameId } from "../../games/dist/list";
-import { AlgolUnitState, AlgolPosition, AlgolIcon } from "../../types";
+import {
+  AlgolUnitState,
+  AlgolPosition,
+  AlgolIcon,
+  AlgolAnimCompiled
+} from "../../types";
 
 import { TransitionGroup } from "react-transition-group";
 
@@ -18,6 +23,7 @@ type BoardProps = {
   marks: AlgolPosition[];
   potentialMarks: AlgolPosition[];
   callback: (pos: string) => void;
+  anim?: AlgolAnimCompiled;
 };
 
 export const Board: React.FunctionComponent<BoardProps> = ({
@@ -25,7 +31,8 @@ export const Board: React.FunctionComponent<BoardProps> = ({
   marks,
   potentialMarks,
   units,
-  callback
+  callback,
+  anim = { enterFrom: {}, exitTo: {}, ghosts: [] }
 }) => {
   const { dataURI, height, width } = dataURIs[gameId];
   const unitsByPos = Object.keys(units).reduce(
@@ -66,16 +73,26 @@ export const Board: React.FunctionComponent<BoardProps> = ({
           {Object.keys(units).map(id => (
             <Transition
               key={id}
-              timeout={{ enter: 10, exit: 4000 }}
+              timeout={{ enter: 40, exit: 4000 }}
               appear={true}
             >
               {(transition: TransitionStatus) => (
                 <Piece
+                  animating={
+                    anim.enterFrom[units[id].pos]
+                      ? "from"
+                      : anim.exitTo[units[id].pos]
+                      ? "to"
+                      : undefined
+                  }
                   transition={transition}
-                  from={units[id].from}
                   icon={units[id].icon as AlgolIcon}
                   owner={units[id].owner}
-                  pos={units[id].pos}
+                  pos={
+                    (transition === "entering" &&
+                      anim.enterFrom[units[id].pos]) ||
+                    units[id].pos
+                  }
                   height={height}
                   width={width}
                   mode={

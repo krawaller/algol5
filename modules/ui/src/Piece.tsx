@@ -5,8 +5,8 @@ import { positionStyles } from "./helpers";
 import { TransitionStatus } from "react-transition-group/Transition";
 
 type PieceProps = {
-  /** The name of position we should animate from */
-  from?: string;
+  /** tells if we are being animated */
+  animating?: "from" | "to" | "ghost";
   /** The name of the current position */
   pos: string;
   /** Which type of piece it is */
@@ -25,9 +25,9 @@ type PieceProps = {
 
 function lifecycleStyles(
   status: TransitionStatus,
-  hasFrom: boolean
+  animating?: "from" | "to" | "ghost"
 ): CSSProperties {
-  if (status === "entering" && !hasFrom) {
+  if (status === "entering" && animating !== "from") {
     return {
       opacity: 0,
       transform: "scale(0.1, 0.1)"
@@ -60,16 +60,25 @@ const pieceStyles: CSSProperties = {
  * A component to show a playing piece icon. Used by the Piece component.
  */
 export const Piece: FunctionComponent<PieceProps> = props => {
-  const { owner, icon, height, width, mode, pos, from, transition } = props;
+  const {
+    owner,
+    icon,
+    height,
+    width,
+    mode,
+    pos,
+    animating,
+    transition
+  } = props;
   return (
     <div
       style={{
         ...positionStyles({
           height,
           width,
-          pos: transition === "entering" ? from || pos : pos
+          pos
         }),
-        ...lifecycleStyles(transition, !!from),
+        ...lifecycleStyles(transition, animating),
         ...pieceStyles,
         transition: transitions(transition)
       }}

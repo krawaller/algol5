@@ -22,7 +22,8 @@ const emptyBattleUI: AlgolBattleUI = {
   commands: [],
   potentialMarks: [],
   instruction: { line: [] },
-  turnNumber: 0
+  turnNumber: 0,
+  anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
 };
 
 export class Tester extends Component<TesterProps, TesterState> {
@@ -43,6 +44,7 @@ export class Tester extends Component<TesterProps, TesterState> {
   render() {
     const { ui } = this.state;
     if (ui.gameId === "anon") return null;
+    console.log(ui);
     return (
       <React.Fragment>
         <Board
@@ -51,6 +53,7 @@ export class Tester extends Component<TesterProps, TesterState> {
           units={ui.board.units}
           marks={ui.board.marks}
           potentialMarks={ui.potentialMarks}
+          anim={ui.anim}
         />
         <Content content={ui.instruction} callback={this.handleAct} />
         {ui.undo && (

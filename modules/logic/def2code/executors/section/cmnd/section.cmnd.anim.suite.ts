@@ -28,7 +28,25 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "somecmnd",
       contexts: [
         {
-          context: defaultCmndEndContext,
+          context: defaultCmndInitContext,
+          tests: [
+            {
+              expr: "cmndInit",
+              asserts: [
+                {
+                  sample: "typeof anim",
+                  res: "undefined",
+                  desc: "no anim object was initiated"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          context: {
+            ...defaultCmndEndContext,
+            anim: "bogusanim"
+          },
           tests: [
             {
               expr: "cmndEnd",
@@ -36,7 +54,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.anim",
                   res: undefined,
-                  desc: "normally we don't make an anim object"
+                  desc: "no anim object was passed on"
                 }
               ]
             }
@@ -55,12 +73,28 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "somecmnd",
       contexts: [
         {
+          context: defaultCmndInitContext,
+          tests: [
+            {
+              expr: "cmndInit",
+              asserts: [
+                {
+                  sample: "anim",
+                  res: {
+                    enterFrom: {},
+                    exitTo: {},
+                    ghosts: []
+                  } as AlgolAnimCompiled,
+                  desc: "an anim obj was initiated"
+                }
+              ]
+            }
+          ]
+        },
+        {
           context: {
             ...defaultCmndEndContext,
-            MARKS: {
-              mark1: "a1",
-              mark2: "b2"
-            }
+            anim: { my: "anims" }
           },
           tests: [
             {
@@ -68,12 +102,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "returnVal.anim",
-                  res: {
-                    enterFrom: { a1: "b2" },
-                    exitTo: {},
-                    ghosts: []
-                  } as AlgolAnimCompiled,
-                  desc: "we get correct animation"
+                  res: { my: "anims" }
+                },
+                {
+                  sample: "returnVal.anim === references.anim",
+                  res: true,
+                  desc: "we passed on the anim obj"
                 }
               ]
             }

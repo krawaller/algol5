@@ -18,6 +18,10 @@ export function executeCmndInit(
 
   const analysis = analyseGame(gameDef)[player][action];
 
+  if (!!gameDef.anim[action]) {
+    ret += `let anim = { enterFrom: {}, exitTo: {}, ghosts: [] }; `;
+  }
+
   if (usage.ARTIFACTS) {
     ret += `let ARTIFACTS = {
         ${analysis.priorArtifacts

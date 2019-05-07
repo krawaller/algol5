@@ -32,7 +32,7 @@ function executeAnimInner(
   const parser = makeParser(gameDef, player, action);
   if (isAlgolAnimEnterFrom(anim)) {
     const [from, to] = anim.enterfrom;
-    return `anim.enterFrom[${parser.pos(from)}] = ${parser.pos(to)}; `;
+    return `anim.enterFrom[${parser.pos(to)}] = ${parser.pos(from)}; `;
   }
   throw new Error("Unknown Anim: " + JSON.stringify(anim));
 }

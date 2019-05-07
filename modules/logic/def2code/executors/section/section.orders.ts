@@ -1,7 +1,8 @@
 import {
   AlgolOrderAnon,
   FullDefAnon,
-  AlgolEffectActionDefAnon
+  AlgolEffectActionDefAnon,
+  AlgolAnimAnon
 } from "../../../../types";
 import { executeOrder } from "../";
 
@@ -33,6 +34,10 @@ export function executeOrderSection(
   }
   if (links.length) {
     orders.push({ links });
+  }
+  const anims: AlgolAnimAnon[] = gameDef.anim[action] || [];
+  if (anims.length) {
+    orders.push({ anims });
   }
 
   return executeOrder(gameDef, player, action, {

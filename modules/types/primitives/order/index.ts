@@ -5,22 +5,23 @@ export * from "./order.guard";
 import {
   AlgolOrderRunGenerators,
   AlgolOrderDoEffects,
-  AlgolOrderLinks
+  AlgolOrderLinks,
+  AlgolOrderAnims
 } from "./order.interfaces";
 
 import { AlgolStatement } from "../../";
 
 export type AlgolOrder<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Gen,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
+  Btlp extends string,
+  Btlv extends string,
+  Cmnd extends string,
+  Gen extends string,
+  Grid extends string,
+  Layer extends string,
+  Mrk extends string,
+  Turnp extends string,
+  Turnv extends string,
+  Unit extends string
 > = AlgolStatement<
   AlgolOrderInner<Btlp, Btlv, Cmnd, Gen, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
   Btlp,
@@ -34,16 +35,16 @@ export type AlgolOrder<
 >;
 
 export type AlgolOrderInner<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Gen,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
+  Btlp extends string,
+  Btlv extends string,
+  Cmnd extends string,
+  Gen extends string,
+  Grid extends string,
+  Layer extends string,
+  Mrk extends string,
+  Turnp extends string,
+  Turnv extends string,
+  Unit extends string
 > =
   | ["unitLayers"]
   | AlgolOrderRunGenerators<
@@ -70,7 +71,8 @@ export type AlgolOrderInner<
       Turnv,
       Unit
     >
-  | AlgolOrderLinks<
+  | AlgolOrderLinks<Btlp, Btlv, Cmnd, Gen, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolOrderAnims<
       Btlp,
       Btlv,
       Cmnd,

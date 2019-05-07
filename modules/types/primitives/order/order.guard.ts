@@ -2,7 +2,8 @@ import {
   AlgolOrderAnon,
   AlgolOrderRunGeneratorsAnon,
   AlgolOrderDoEffectsAnon,
-  AlgolOrderLinksAnon
+  AlgolOrderLinksAnon,
+  AlgolOrderAnimsAnon
 } from "./order.anon";
 
 export function isAlgolOrderRunGenerators(
@@ -21,4 +22,10 @@ export function isAlgolOrderLinks(
   expr: AlgolOrderAnon
 ): expr is AlgolOrderLinksAnon {
   return (expr as AlgolOrderLinksAnon).links !== undefined;
+}
+
+export function isAlgolOrderAnims(
+  expr: AlgolOrderAnon
+): expr is AlgolOrderAnimsAnon {
+  return (expr as AlgolOrderAnimsAnon).anims !== undefined;
 }

@@ -3,70 +3,42 @@ import { AlgolOrder, AlgolOrderInner } from "./";
 import {
   AlgolOrderRunGenerators,
   AlgolOrderDoEffects,
-  AlgolOrderLinks
+  AlgolOrderLinks,
+  AlgolOrderAnims
 } from "./order.interfaces";
 
-export type AlgolOrderAnon = AlgolOrder<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+type s = string;
 
-export type AlgolOrderInnerAnon = AlgolOrderInner<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolOrderAnon = AlgolOrder<s, s, s, s, s, s, s, s, s, s>;
+
+export type AlgolOrderInnerAnon = AlgolOrderInner<s, s, s, s, s, s, s, s, s, s>;
 
 export type AlgolOrderRunGeneratorsAnon = AlgolOrderRunGenerators<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s
 >;
 
 export type AlgolOrderDoEffectsAnon = AlgolOrderDoEffects<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s
 >;
 
-export type AlgolOrderLinksAnon = AlgolOrderLinks<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolOrderLinksAnon = AlgolOrderLinks<s, s, s, s, s, s, s, s, s, s>;
+
+export type AlgolOrderAnimsAnon = AlgolOrderAnims<s, s, s, s, s, s, s, s, s, s>;

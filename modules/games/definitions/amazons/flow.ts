@@ -1,4 +1,4 @@
-import { AmazonsFlow } from './_types';
+import { AmazonsFlow } from "./_types";
 
 const amazonsFlow: AmazonsFlow = {
   startTurn: { link: "selectunit" },
@@ -19,12 +19,7 @@ const amazonsFlow: AmazonsFlow = {
     },
     fire: {
       applyEffect: {
-        spawnat: [
-          "selectfiretarget",
-          "fires",
-          0,
-          { from: { pos: { onlyin: "firedfrom" } } }
-        ]
+        spawnat: ["selectfiretarget", "fires", 0]
       },
       link: "endTurn"
     }

@@ -123,6 +123,7 @@ let game: Partial<AlgolGame> = {
   };
   game.action.fire1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       firedfrom: step.ARTIFACTS.firedfrom,
@@ -138,8 +139,7 @@ let game: Partial<AlgolGame> = {
         pos: MARKS.selectfiretarget,
         id: newunitid,
         group: "fires",
-        owner: 0,
-        from: Object.keys(ARTIFACTS.firedfrom)[0]
+        owner: 0
       };
     }
     UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
@@ -153,6 +153,9 @@ let game: Partial<AlgolGame> = {
     {
       LINKS.endTurn = "startTurn2";
     }
+    anim.enterFrom[MARKS.selectfiretarget] = Object.keys(
+      ARTIFACTS.firedfrom
+    )[0];
     return {
       LINKS,
       MARKS: {},
@@ -160,7 +163,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.fire1 = () => defaultInstruction(1);
@@ -404,6 +408,7 @@ let game: Partial<AlgolGame> = {
   };
   game.action.fire2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       firedfrom: step.ARTIFACTS.firedfrom,
@@ -419,8 +424,7 @@ let game: Partial<AlgolGame> = {
         pos: MARKS.selectfiretarget,
         id: newunitid,
         group: "fires",
-        owner: 0,
-        from: Object.keys(ARTIFACTS.firedfrom)[0]
+        owner: 0
       };
     }
     UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
@@ -434,6 +438,9 @@ let game: Partial<AlgolGame> = {
     {
       LINKS.endTurn = "startTurn1";
     }
+    anim.enterFrom[MARKS.selectfiretarget] = Object.keys(
+      ARTIFACTS.firedfrom
+    )[0];
     return {
       LINKS,
       MARKS: {},
@@ -441,7 +448,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.fire2 = () => defaultInstruction(2);

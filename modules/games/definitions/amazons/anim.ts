@@ -1,5 +1,7 @@
-import { AmazonsAnim } from './_types';
+import { AmazonsAnim } from "./_types";
 
-const amazonsAnim: AmazonsAnim = {};
+const amazonsAnim: AmazonsAnim = {
+  fire: [{ enterfrom: [{ onlyin: "firedfrom" }, "selectfiretarget"] }]
+};
 
 export default amazonsAnim;

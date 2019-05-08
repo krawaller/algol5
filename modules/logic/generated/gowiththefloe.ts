@@ -497,6 +497,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.eat2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       eattargets: step.ARTIFACTS.eattargets,
@@ -563,6 +564,7 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
+    anim.exitTo[MARKS.selectunit] = MARKS.selecteattarget;
     return {
       LINKS,
       MARKS: {},
@@ -570,7 +572,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.eat2 = () => defaultInstruction(2);

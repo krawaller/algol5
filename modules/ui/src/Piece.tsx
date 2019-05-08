@@ -83,7 +83,7 @@ export const Piece: FunctionComponent<PieceProps> = props => {
         transition: transitions(transition)
       }}
     >
-      <Icon icon={icon} owner={owner} mode={mode} />
+      <Icon icon={icon} owner={owner} mode={animating ? "normal" : mode} />
     </div>
   );
 };

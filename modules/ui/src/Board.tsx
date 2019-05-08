@@ -77,48 +77,49 @@ export const Board: React.FunctionComponent<BoardProps> = ({
               }) /* to ensure exiting comps get fresh anim */
           }
         >
-          {Object.keys(units).map(id => (
-            <Transition
-              key={id}
-              timeout={{ enter: 40, exit: 500 }}
-              appear={true}
-            >
-              {(
-                transition: TransitionStatus,
-                { anim }: { anim: AlgolAnimCompiled }
-              ) => {
-                const { icon, owner, pos } = units[id];
-                const posToShow =
-                  (transition === "entering" && anim.enterFrom[pos]) ||
-                  (transition === "exiting" && anim.exitTo[pos]) ||
-                  pos;
-                return (
-                  <Piece
-                    animating={
-                      anim.enterFrom[pos]
-                        ? "from"
-                        : anim.exitTo[pos]
-                        ? "to"
-                        : undefined
-                    }
-                    transition={transition}
-                    icon={icon as AlgolIcon}
-                    owner={owner}
-                    pos={posToShow}
-                    height={height}
-                    width={width}
-                    mode={
-                      marks.indexOf(pos) !== -1
-                        ? "selected"
-                        : potentialMarks.indexOf(pos) !== -1
-                        ? "available"
-                        : "normal"
-                    }
-                  />
-                );
-              }}
-            </Transition>
-          ))}
+          {Object.keys(units)
+            .map(id => units[id])
+            .map(({ icon, owner, pos, id }) => (
+              <Transition
+                key={id}
+                timeout={{ enter: 40, exit: 500 }}
+                appear={true}
+              >
+                {(
+                  transition: TransitionStatus,
+                  { anim }: { anim: AlgolAnimCompiled }
+                ) => {
+                  const posToShow =
+                    (transition === "entering" && anim.enterFrom[pos]) ||
+                    (transition === "exiting" && anim.exitTo[pos]) ||
+                    pos;
+                  return (
+                    <Piece
+                      animating={
+                        anim.enterFrom[pos]
+                          ? "from"
+                          : anim.exitTo[pos]
+                          ? "to"
+                          : undefined
+                      }
+                      transition={transition}
+                      icon={icon as AlgolIcon}
+                      owner={owner}
+                      pos={posToShow}
+                      height={height}
+                      width={width}
+                      mode={
+                        marks.indexOf(pos) !== -1
+                          ? "selected"
+                          : potentialMarks.indexOf(pos) !== -1
+                          ? "available"
+                          : "normal"
+                      }
+                    />
+                  );
+                }}
+              </Transition>
+            ))}
         </TransitionGroup>
       </div>
     </div>

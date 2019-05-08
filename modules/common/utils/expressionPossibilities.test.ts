@@ -1,4 +1,4 @@
-import { possibilities } from "..";
+import { expressionPossibilities } from "..";
 import { AlgolLogicalAnon } from "../../types";
 
 type PossTest<_T> = {
@@ -85,5 +85,7 @@ const possTests: PossTest<
 
 test("possibilities", () =>
   possTests.forEach(({ expr, poss, player = 0, action = "any" }) =>
-    expect(possibilities(expr, player as 0 | 1 | 2, action)).toEqual(poss)
+    expect(expressionPossibilities(expr, player as 0 | 1 | 2, action)).toEqual(
+      poss
+    )
   ));

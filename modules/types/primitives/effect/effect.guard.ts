@@ -1,7 +1,5 @@
 import {
   AlgolEffectAnon,
-  AlgolEffectForIdInAnon,
-  AlgolEffectForPosInAnon,
   AlgolEffectKillAtAnon,
   AlgolEffectKillInAnon,
   AlgolEffectKillIdAnon,
@@ -133,18 +131,6 @@ export function isAlgolEffectSpawnIn(
   expr: AlgolEffectAnon
 ): expr is AlgolEffectSpawnInAnon {
   return (expr as AlgolEffectSpawnInAnon).spawnin !== undefined;
-}
-
-export function isAlgolEffectForPosIn(
-  expr: AlgolEffectAnon
-): expr is AlgolEffectForPosInAnon {
-  return (expr as AlgolEffectForPosInAnon).forposin !== undefined;
-}
-
-export function isAlgolEffectForIdIn(
-  expr: AlgolEffectAnon
-): expr is AlgolEffectForIdInAnon {
-  return (expr as AlgolEffectForIdInAnon).foridin !== undefined;
 }
 
 export function isAlgolEffectMorphAt(

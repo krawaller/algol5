@@ -7,8 +7,7 @@ import {
   AlgolLogicalIfPlayer,
   AlgolLogicalIfAction,
   AlgolLogicalIndexList,
-  AlgolLogicalPlayerCase,
-  AlgolLogicalMulti
+  AlgolLogicalPlayerCase
 } from "./logical.interfaces";
 
 export type AlgolLogicalAnon<_T> = AlgolLogical<
@@ -96,18 +95,6 @@ export type AlgolLogicalIfActionElseAnon<_T> = AlgolLogicalIfActionElse<
 >;
 
 export type AlgolLogicalIndexListAnon<_T> = AlgolLogicalIndexList<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-
-export type AlgolLogicalMultiAnon<_T> = AlgolLogicalMulti<
   _T,
   string,
   string,

@@ -4,9 +4,7 @@ import {
   FullDefAnon,
   isAlgolEffectKillAt,
   isAlgolEffectKillId,
-  isAlgolEffectForPosIn,
   isAlgolEffectKillIn,
-  isAlgolEffectForIdIn,
   isAlgolEffectSetAt,
   isAlgolEffectSetIn,
   isAlgolEffectSetId,
@@ -111,25 +109,6 @@ function executeEffectInner(
         ? `.${parsedName.replace(/(^["']|["']$)/g, "")}`
         : `[${parsedName}]`
     } = ${parser.pos(pos)};`;
-  }
-  if (isAlgolEffectForPosIn(effect)) {
-    const {
-      forposin: [set, repeatEffect]
-    } = effect;
-    return `for(let LOOPPOS in ${parser.set(set)}) { ${me(repeatEffect)} }`;
-  }
-  if (isAlgolEffectForIdIn(effect)) {
-    const {
-      foridin: [set, repeatEffect]
-    } = effect;
-    const setcode = parser.set(set);
-    const safe = (setcode as string).substr(0, 10) === "UNITLAYERS";
-    const loopInner = safe
-      ? `let LOOPID = ${setcode}[LOOPPOS].id; ${me(repeatEffect)}`
-      : `let LOOPID = (UNITLAYERS.units[LOOPPOS]||{}).id; if (LOOPID) { ${me(
-          repeatEffect
-        )} }`;
-    return `for(let LOOPPOS in ${setcode}) { ${loopInner} }`;
   }
   if (isAlgolEffectSetAt(effect)) {
     const {

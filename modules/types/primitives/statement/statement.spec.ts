@@ -14,6 +14,5 @@ type TestStatement = AlgolStatement<
 
 const tests: TestStatement[] = [
   "GNURP",
-  { if: [{ anyat: ["mylayer", "mymark"] }, "GNURP"] },
-  { indexlist: [["dir"], "GNURP", { ifaction: ["mycmnd", "FNURP"] }] }
+  { if: [{ anyat: ["mylayer", "mymark"] }, "GNURP"] }
 ];

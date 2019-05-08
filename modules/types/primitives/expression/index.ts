@@ -1,4 +1,5 @@
 export * from "./expression.anon";
+export * from "./expression.guard";
 
 import {
   AlgolLogicalIfActionElse,

@@ -1,9 +1,5 @@
 import { FullDefAnon } from "../../../../../types";
-import {
-  isTerrainNeutral,
-  terrainLayers,
-  groupLayersForPlayer
-} from "../../../../../common";
+import { isTerrainNeutral, groupLayersForPlayer } from "../../../../../common";
 
 export function executePlayer(
   gameDef: FullDefAnon,

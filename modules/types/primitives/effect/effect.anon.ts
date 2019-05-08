@@ -1,8 +1,6 @@
 import { AlgolEffect, AlgolEffectInner } from "./";
 
 import {
-  AlgolEffectForIdIn,
-  AlgolEffectForPosIn,
   AlgolEffectKillAt,
   AlgolEffectKillIn,
   AlgolEffectKillId,
@@ -225,28 +223,6 @@ export type AlgolEffectSpawnAtAnon = AlgolEffectSpawnAt<
   string
 >;
 export type AlgolEffectSpawnInAnon = AlgolEffectSpawnIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectForPosInAnon = AlgolEffectForPosIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectForIdInAnon = AlgolEffectForIdIn<
   string,
   string,
   string,

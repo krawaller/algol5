@@ -1,15 +1,17 @@
 export * from "./statement.anon";
+export * from "./statement.guard";
 
 import {
-  AlgolLogicalIfActionElse,
-  AlgolLogicalIfElse,
-  AlgolLogicalIndexList,
-  AlgolLogicalPlayerCase,
-  AlgolLogicalIf,
-  AlgolLogicalIfPlayer,
-  AlgolLogicalIfAction,
-  AlgolLogicalMulti
-} from "../../";
+  AlgolStatementForIdIn,
+  AlgolStatementForPosIn,
+  AlgolStatementMulti,
+  AlgolStatementIfActionElse,
+  AlgolStatementIfElse,
+  AlgolStatementPlayerCase,
+  AlgolStatementIf,
+  AlgolStatementIfPlayer,
+  AlgolStatementIfAction
+} from "./statement.interfaces";
 
 export type AlgolStatement<
   _T,
@@ -23,9 +25,8 @@ export type AlgolStatement<
   Turnv
 > =
   | _T
-  | AlgolLogicalIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalPlayerCase<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalIfActionElse<
+  | AlgolStatementIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolStatementPlayerCase<
       _T,
       Btlp,
       Btlv,
@@ -36,8 +37,20 @@ export type AlgolStatement<
       Turnp,
       Turnv
     >
-  | AlgolLogicalIndexList<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalIfAction<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalIfPlayer<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalMulti<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolStatementIfActionElse<
+      _T,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >
+  | AlgolStatementIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolStatementIfAction<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolStatementIfPlayer<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolStatementForIdIn<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolStatementForPosIn<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolStatementMulti<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

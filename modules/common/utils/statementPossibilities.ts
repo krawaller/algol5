@@ -1,16 +1,15 @@
 import {
-  AlgolLogicalAnon,
-  isAlgolLogicalIfActionElse,
-  isAlgolLogicalPlayerCase,
-  isAlgolLogicalIndexList,
-  isAlgolLogicalIf,
-  isAlgolLogicalIfElse,
-  isAlgolLogicalIfPlayer,
-  isAlgolLogicalIfAction
+  AlgolStatementAnon,
+  isAlgolStatementIfActionElse,
+  isAlgolStatementPlayerCase,
+  isAlgolStatementIf,
+  isAlgolStatementIfElse,
+  isAlgolStatementIfPlayer,
+  isAlgolStatementIfAction
 } from "../../types";
 
-export function possibilities<_T>(
-  expr: AlgolLogicalAnon<_T>,
+export function statementPossibilities<_T>(
+  expr: AlgolStatementAnon<_T>,
   player: 0 | 1 | 2 = 0,
   action: string = "any"
 ): _T[] {
@@ -23,11 +22,11 @@ export function possibilities<_T>(
 }
 
 function possibilitiesInner<_T>(
-  expr: AlgolLogicalAnon<_T>,
+  expr: AlgolStatementAnon<_T>,
   player: 0 | 1 | 2,
   action: string
 ): _T[] {
-  if (isAlgolLogicalIfElse(expr)) {
+  if (isAlgolStatementIfElse(expr)) {
     const {
       ifelse: [test, whenTruthy, whenFalsy]
     } = expr;
@@ -36,7 +35,7 @@ function possibilitiesInner<_T>(
     );
   }
 
-  if (isAlgolLogicalIfActionElse(expr)) {
+  if (isAlgolStatementIfActionElse(expr)) {
     const {
       ifactionelse: [testAction, whenYes, whenNo]
     } = expr;
@@ -48,7 +47,7 @@ function possibilitiesInner<_T>(
     return poss;
   }
 
-  if (isAlgolLogicalPlayerCase(expr)) {
+  if (isAlgolStatementPlayerCase(expr)) {
     const {
       playercase: [plr1, plr2]
     } = expr;
@@ -60,24 +59,14 @@ function possibilitiesInner<_T>(
     return poss;
   }
 
-  if (isAlgolLogicalIndexList(expr)) {
-    const {
-      indexlist: [idx, ...opts]
-    } = expr;
-    return opts.reduce(
-      (mem, o) => mem.concat(possibilitiesInner(o, player, action)),
-      []
-    );
-  }
-
-  if (isAlgolLogicalIf(expr)) {
+  if (isAlgolStatementIf(expr)) {
     const {
       if: [test, opt]
     } = expr;
     return [].concat(possibilitiesInner(opt, player, action));
   }
 
-  if (isAlgolLogicalIfPlayer(expr)) {
+  if (isAlgolStatementIfPlayer(expr)) {
     const {
       ifplayer: [plr, opt]
     } = expr;
@@ -86,7 +75,7 @@ function possibilitiesInner<_T>(
       : [];
   }
 
-  if (isAlgolLogicalIfAction(expr)) {
+  if (isAlgolStatementIfAction(expr)) {
     const {
       ifaction: [testAction, opt]
     } = expr;

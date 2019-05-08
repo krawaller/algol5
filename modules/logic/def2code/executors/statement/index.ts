@@ -1,16 +1,17 @@
 import {
   FullDefAnon,
   AlgolStatementAnon,
-  isAlgolLogicalIfElse,
-  isAlgolLogicalIfActionElse,
-  isAlgolLogicalIndexList,
-  isAlgolLogicalPlayerCase,
-  isAlgolLogicalIf,
-  isAlgolLogicalIfPlayer,
-  isAlgolLogicalIfAction,
-  isAlgolLogicalMulti
-} from "../../../types";
-import { makeParser } from "./expression";
+  isAlgolStatementIfElse,
+  isAlgolStatementIfActionElse,
+  isAlgolStatementPlayerCase,
+  isAlgolStatementIf,
+  isAlgolStatementIfPlayer,
+  isAlgolStatementIfAction,
+  isAlgolStatementMulti,
+  isAlgolStatementForPosIn,
+  isAlgolStatementForIdIn
+} from "../../../../types";
+import { makeParser } from "../expression";
 
 export function executeStatement<_T>(
   gameDef: FullDefAnon,
@@ -30,7 +31,7 @@ export function executeStatement<_T>(
   const me = expr =>
     executeStatement(gameDef, player, action, finalParser, expr, from);
 
-  if (isAlgolLogicalIfElse(statement)) {
+  if (isAlgolStatementIfElse(statement)) {
     const {
       ifelse: [test, whenTruthy, whenFalsy]
     } = statement;
@@ -40,55 +41,67 @@ export function executeStatement<_T>(
     )} }`;
   }
 
-  if (isAlgolLogicalIfActionElse(statement)) {
+  if (isAlgolStatementIfActionElse(statement)) {
     const {
       ifactionelse: [testAction, whenYes, whenNo]
     } = statement;
     return me(testAction === action ? whenYes : whenNo);
   }
 
-  if (isAlgolLogicalPlayerCase(statement)) {
+  if (isAlgolStatementPlayerCase(statement)) {
     const {
       playercase: [plr1, plr2]
     } = statement;
     return me(player === 1 ? plr1 : plr2);
   }
 
-  if (isAlgolLogicalIndexList(statement)) {
-    const {
-      indexlist: [idx, ...opts]
-    } = statement;
-    const parsedIdx = exprParser.val(idx);
-    if (typeof parsedIdx === "number") {
-      return me(opts[parsedIdx]);
-    }
-    return `[${opts.map(me).join(", ")}][${parsedIdx}]`;
-  }
-
-  if (isAlgolLogicalIf(statement)) {
+  if (isAlgolStatementIf(statement)) {
     const {
       if: [test, val]
     } = statement;
     return `if (${exprParser.bool(test)}) { ${me(val)} }`;
   }
 
-  if (isAlgolLogicalIfPlayer(statement)) {
+  if (isAlgolStatementIfPlayer(statement)) {
     const {
       ifplayer: [forPlayer, val]
     } = statement;
     return forPlayer === player ? me(val) : "";
   }
 
-  if (isAlgolLogicalIfAction(statement)) {
+  if (isAlgolStatementIfAction(statement)) {
     const {
       ifaction: [forAction, val]
     } = statement;
     return forAction === action ? me(val) : "";
   }
 
-  if (isAlgolLogicalMulti(statement)) {
+  if (isAlgolStatementMulti(statement)) {
     const { multi: children } = statement;
     return children.map(me).join(" ");
   }
+
+  if (isAlgolStatementForPosIn(statement)) {
+    const {
+      forposin: [set, repeatStatement]
+    } = statement;
+    return `for(let LOOPPOS in ${exprParser.set(set)}) { ${me(
+      repeatStatement
+    )} }`;
+  }
+  if (isAlgolStatementForIdIn(statement)) {
+    const {
+      foridin: [set, repeatEffect]
+    } = statement;
+    const setcode = exprParser.set(set);
+    const safe = (setcode as string).substr(0, 10) === "UNITLAYERS";
+    const loopInner = safe
+      ? `let LOOPID = ${setcode}[LOOPPOS].id; ${me(repeatEffect)}`
+      : `let LOOPID = (UNITLAYERS.units[LOOPPOS]||{}).id; if (LOOPID) { ${me(
+          repeatEffect
+        )} }`;
+    return `for(let LOOPPOS in ${setcode}) { ${loopInner} }`;
+  }
+
   return finalParser(gameDef, player, action, statement, from);
 }

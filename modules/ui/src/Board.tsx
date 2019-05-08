@@ -80,7 +80,7 @@ export const Board: React.FunctionComponent<BoardProps> = ({
           {Object.keys(units).map(id => (
             <Transition
               key={id}
-              timeout={{ enter: 40, exit: 4000 }}
+              timeout={{ enter: 40, exit: 500 }}
               appear={true}
             >
               {(

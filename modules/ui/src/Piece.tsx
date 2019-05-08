@@ -36,7 +36,7 @@ function lifecycleStyles(
   if (status === "exiting") {
     return {
       opacity: 0,
-      transform: "scale(2, 2)"
+      ...(animating !== "to" && { transform: "scale(2, 2)" })
     };
   }
   return {};

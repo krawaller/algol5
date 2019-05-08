@@ -210,6 +210,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.crush1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -282,6 +283,12 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn2";
     }
+    anim.ghosts.push([
+      MARKS.selecttower,
+      MARKS.selectcrush,
+      iconMapping["walls"],
+      1
+    ]);
     return {
       LINKS,
       MARKS: {},
@@ -289,12 +296,14 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.crush1 = () => defaultInstruction(1);
   game.action.sacrifice1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -355,6 +364,7 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn2";
     }
+    anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
     return {
       LINKS,
       MARKS: {},
@@ -362,7 +372,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.sacrifice1 = () => defaultInstruction(1);
@@ -1191,6 +1202,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.crush2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -1263,6 +1275,12 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
+    anim.ghosts.push([
+      MARKS.selecttower,
+      MARKS.selectcrush,
+      iconMapping["walls"],
+      2
+    ]);
     return {
       LINKS,
       MARKS: {},
@@ -1270,12 +1288,14 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.crush2 = () => defaultInstruction(2);
   game.action.sacrifice2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -1336,6 +1356,7 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
+    anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
     return {
       LINKS,
       MARKS: {},
@@ -1343,7 +1364,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.sacrifice2 = () => defaultInstruction(2);

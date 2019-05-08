@@ -69,41 +69,54 @@ export const Board: React.FunctionComponent<BoardProps> = ({
             />
           ))}
 
-        <TransitionGroup>
+        <TransitionGroup
+          childFactory={
+            child =>
+              React.cloneElement(child, {
+                anim
+              }) /* to ensure exiting comps get fresh anim */
+          }
+        >
           {Object.keys(units).map(id => (
             <Transition
               key={id}
               timeout={{ enter: 40, exit: 4000 }}
               appear={true}
             >
-              {(transition: TransitionStatus) => (
-                <Piece
-                  animating={
-                    anim.enterFrom[units[id].pos]
-                      ? "from"
-                      : anim.exitTo[units[id].pos]
-                      ? "to"
-                      : undefined
-                  }
-                  transition={transition}
-                  icon={units[id].icon as AlgolIcon}
-                  owner={units[id].owner}
-                  pos={
-                    (transition === "entering" &&
-                      anim.enterFrom[units[id].pos]) ||
-                    units[id].pos
-                  }
-                  height={height}
-                  width={width}
-                  mode={
-                    marks.indexOf(units[id].pos) !== -1
-                      ? "selected"
-                      : potentialMarks.indexOf(units[id].pos) !== -1
-                      ? "available"
-                      : "normal"
-                  }
-                />
-              )}
+              {(
+                transition: TransitionStatus,
+                { anim }: { anim: AlgolAnimCompiled }
+              ) => {
+                const { icon, owner, pos } = units[id];
+                const posToShow =
+                  (transition === "entering" && anim.enterFrom[pos]) ||
+                  (transition === "exiting" && anim.exitTo[pos]) ||
+                  pos;
+                return (
+                  <Piece
+                    animating={
+                      anim.enterFrom[pos]
+                        ? "from"
+                        : anim.exitTo[pos]
+                        ? "to"
+                        : undefined
+                    }
+                    transition={transition}
+                    icon={icon as AlgolIcon}
+                    owner={owner}
+                    pos={posToShow}
+                    height={height}
+                    width={width}
+                    mode={
+                      marks.indexOf(pos) !== -1
+                        ? "selected"
+                        : potentialMarks.indexOf(pos) !== -1
+                        ? "available"
+                        : "normal"
+                    }
+                  />
+                );
+              }}
             </Transition>
           ))}
         </TransitionGroup>

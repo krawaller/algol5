@@ -3,7 +3,8 @@ import {
   AlgolAnimAnon,
   AlgolAnimInnerAnon,
   isAlgolAnimEnterFrom,
-  isAlgolAnimExitTo
+  isAlgolAnimExitTo,
+  isAlgolAnimGhost
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";
@@ -38,6 +39,12 @@ function executeAnimInner(
   if (isAlgolAnimExitTo(anim)) {
     const [where, to] = anim.exitto;
     return `anim.exitTo[${parser.pos(where)}] = ${parser.pos(to)}; `;
+  }
+  if (isAlgolAnimGhost(anim)) {
+    const [from, to, icon, owner] = anim.ghost;
+    return `anim.ghosts.push([${parser.pos(from)}, ${parser.pos(
+      to
+    )}, iconMapping[${parser.val(icon)}], ${parser.val(owner)}])`;
   }
   throw new Error("Unknown Anim: " + JSON.stringify(anim));
 }

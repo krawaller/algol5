@@ -14,7 +14,8 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             MARKS: { mark1: "a1", mark2: "b2" },
-            anim: { enterFrom: {}, exitTo: {} }
+            anim: { enterFrom: {}, exitTo: {}, ghosts: [] },
+            iconMapping: { gnurps: "pawn" }
           },
           tests: [
             {
@@ -34,6 +35,17 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   sample: "anim.exitTo",
                   res: { a1: "b2" },
                   desc: "we can make exitTo anims"
+                }
+              ]
+            },
+            {
+              expr: {
+                anims: [{ ghost: ["mark1", "mark2", "gnurps", ["player"]] }]
+              },
+              asserts: [
+                {
+                  sample: "anim.ghosts",
+                  res: [["a1", "b2", "pawn", 1]]
                 }
               ]
             }

@@ -33,7 +33,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "anim.enterFrom",
-                  res: { b2: "a1" },
+                  res: { a1: "b2" },
                   desc: "we can make enterFrom anims"
                 }
               ]

@@ -2,7 +2,8 @@ import {
   FullDefAnon,
   AlgolAnimAnon,
   AlgolAnimInnerAnon,
-  isAlgolAnimEnterFrom
+  isAlgolAnimEnterFrom,
+  isAlgolAnimExitTo
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";
@@ -33,6 +34,10 @@ function executeAnimInner(
   if (isAlgolAnimEnterFrom(anim)) {
     const [where, from] = anim.enterfrom;
     return `anim.enterFrom[${parser.pos(where)}] = ${parser.pos(from)}; `;
+  }
+  if (isAlgolAnimExitTo(anim)) {
+    const [where, to] = anim.exitto;
+    return `anim.exitTo[${parser.pos(where)}] = ${parser.pos(to)}; `;
   }
   throw new Error("Unknown Anim: " + JSON.stringify(anim));
 }

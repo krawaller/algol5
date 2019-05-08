@@ -7,25 +7,14 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   func: executeOrder,
   defs: [
     {
-      def: {
-        ...emptyFullDef,
-        flow: {
-          ...emptyFullDef.flow,
-          commands: {
-            mycmnd: {}
-          }
-        },
-        anim: {
-          mycmnd: [{ enterfrom: ["mark1", "mark2"] }]
-        }
-      },
+      def: emptyFullDef,
       player: 1,
-      action: "startTurn",
+      action: "mycmnd",
       contexts: [
         {
           context: {
             MARKS: { mark1: "a1", mark2: "b2" },
-            anim: { enterFrom: {} }
+            anim: { enterFrom: {}, exitTo: {} }
           },
           tests: [
             {
@@ -35,6 +24,16 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   sample: "anim.enterFrom",
                   res: { a1: "b2" },
                   desc: "we can make enterFrom anims"
+                }
+              ]
+            },
+            {
+              expr: { anims: [{ exitto: ["mark1", "mark2"] }] },
+              asserts: [
+                {
+                  sample: "anim.exitTo",
+                  res: { a1: "b2" },
+                  desc: "we can make exitTo anims"
                 }
               ]
             }

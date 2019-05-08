@@ -2,9 +2,9 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { select } from "@storybook/addon-knobs";
 
-import { Board } from "./Board";
-import { GameId, list } from "../../games/dist/list";
-import { AlgolUnitState } from "../../types";
+import { Board } from ".";
+import { GameId, list } from "../../../games/dist/list";
+import { AlgolUnitState } from "../../../types";
 
 storiesOf("Board", module)
   .add("Game board gallery", () => {

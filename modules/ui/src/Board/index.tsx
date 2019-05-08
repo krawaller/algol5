@@ -1,18 +1,18 @@
 import * as React from "react";
-import { GameId } from "../../games/dist/list";
+import { GameId } from "../../../games/dist/list";
 import {
   AlgolUnitState,
   AlgolPosition,
   AlgolIcon,
   AlgolAnimCompiled
-} from "../../types";
+} from "../../../types";
 
 import { TransitionGroup } from "react-transition-group";
 
-import { Piece } from "./Piece";
+import { Piece } from "../Piece";
 
-import dataURIs from "../../graphics/dist/svgDataURIs";
-import { Mark } from "./Mark";
+import dataURIs from "../../../graphics/dist/svgDataURIs";
+import { Mark } from "../Mark";
 import Transition, {
   TransitionStatus
 } from "react-transition-group/Transition";

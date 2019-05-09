@@ -83,7 +83,7 @@ let game: Partial<AlgolGame> = {
             })
           : Object.keys(UNITLAYERS.myunits).length === 8
           ? collapseContent({
-              line: [{ text: "a" }, { unittype: [iconMapping["soldiers"], 0] }]
+              line: [{ text: "a" }, { unittype: ["pawn", 0] }]
             })
           : collapseContent({
               line: [
@@ -651,7 +651,7 @@ let game: Partial<AlgolGame> = {
             })
           : Object.keys(UNITLAYERS.myunits).length === 8
           ? collapseContent({
-              line: [{ text: "a" }, { unittype: [iconMapping["soldiers"], 0] }]
+              line: [{ text: "a" }, { unittype: ["pawn", 0] }]
             })
           : collapseContent({
               line: [

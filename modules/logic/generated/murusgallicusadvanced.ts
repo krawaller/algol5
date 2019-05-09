@@ -562,9 +562,9 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    { unittype: [iconMapping["walls"], 2] },
+                    { unittype: ["pawn", 2] },
                     { text: "or" },
-                    { unittype: [iconMapping["catapults"], 2] },
+                    { unittype: ["queen", 2] },
                     { text: "to crush" }
                   ]
                 })
@@ -825,7 +825,7 @@ let game: Partial<AlgolGame> = {
                   ]
                 },
                 { text: "to a" },
-                { unittype: [iconMapping["towers"], 2] },
+                { unittype: ["rook", 2] },
                 { text: ", or" },
                 { command: "sacrifice" },
                 {
@@ -854,7 +854,7 @@ let game: Partial<AlgolGame> = {
                   ]
                 },
                 { text: "to a" },
-                { unittype: [iconMapping["walls"], 2] },
+                { unittype: ["pawn", 2] },
                 { text: "!" }
               ]
             })
@@ -984,14 +984,14 @@ let game: Partial<AlgolGame> = {
                 },
                 { text: "to a" },
                 UNITLAYERS.catapults[MARKS.selectfire]
-                  ? { unittype: [iconMapping["towers"], 2] }
-                  : { unittype: [iconMapping["walls"], 2] }
+                  ? { unittype: ["rook", 2] }
+                  : { unittype: ["pawn", 2] }
               ]
             })
           : collapseContent({
               line: [
                 { text: "and spawn" },
-                { unit: [iconMapping["walls"], 1, MARKS.selectfire] }
+                { unit: ["pawn", 1, MARKS.selectfire] }
               ]
             })
       ]
@@ -1562,9 +1562,9 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    { unittype: [iconMapping["walls"], 1] },
+                    { unittype: ["pawn", 1] },
                     { text: "or" },
-                    { unittype: [iconMapping["catapults"], 1] },
+                    { unittype: ["queen", 1] },
                     { text: "to crush" }
                   ]
                 })
@@ -1825,7 +1825,7 @@ let game: Partial<AlgolGame> = {
                   ]
                 },
                 { text: "to a" },
-                { unittype: [iconMapping["towers"], 1] },
+                { unittype: ["rook", 1] },
                 { text: ", or" },
                 { command: "sacrifice" },
                 {
@@ -1854,7 +1854,7 @@ let game: Partial<AlgolGame> = {
                   ]
                 },
                 { text: "to a" },
-                { unittype: [iconMapping["walls"], 1] },
+                { unittype: ["pawn", 1] },
                 { text: "!" }
               ]
             })
@@ -1984,14 +1984,14 @@ let game: Partial<AlgolGame> = {
                 },
                 { text: "to a" },
                 UNITLAYERS.catapults[MARKS.selectfire]
-                  ? { unittype: [iconMapping["towers"], 1] }
-                  : { unittype: [iconMapping["walls"], 1] }
+                  ? { unittype: ["rook", 1] }
+                  : { unittype: ["pawn", 1] }
               ]
             })
           : collapseContent({
               line: [
                 { text: "and spawn" },
-                { unit: [iconMapping["walls"], 2, MARKS.selectfire] }
+                { unit: ["pawn", 2, MARKS.selectfire] }
               ]
             })
       ]

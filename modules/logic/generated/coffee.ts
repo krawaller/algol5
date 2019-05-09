@@ -82,7 +82,7 @@ let game: Partial<AlgolGame> = {
       : collapseContent({
           line: [
             { select: "Select" },
-            { unittype: [iconMapping["soldiers"], 0] },
+            { unittype: ["pawn", 0] },
             { text: "to turn into" },
             { unittype: ["pawn", 1] }
           ]
@@ -648,7 +648,7 @@ let game: Partial<AlgolGame> = {
       : collapseContent({
           line: [
             { select: "Select" },
-            { unittype: [iconMapping["soldiers"], 0] },
+            { unittype: ["pawn", 0] },
             { text: "to turn into" },
             { unittype: ["pawn", 2] }
           ]

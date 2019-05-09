@@ -203,9 +203,9 @@ let game: Partial<AlgolGame> = {
         { text: "a neighbouring" },
         collapseContent({
           line: [
-            { unittype: [iconMapping["rooks"], 0] },
-            { unittype: [iconMapping["knights"], 0] },
-            { unittype: [iconMapping["pawns"], 0] }
+            { unittype: ["rook", 0] },
+            { unittype: ["knight", 0] },
+            { unittype: ["pawn", 0] }
           ]
             .filter(i => !!i)
             .reduce((mem, i, n, list) => {
@@ -363,11 +363,11 @@ let game: Partial<AlgolGame> = {
         collapseContent({
           line: [
             !UNITLAYERS.mypawns[MARKS.selectunit]
-              ? { unittype: [iconMapping["rooks"], 0] }
+              ? { unittype: ["rook", 0] }
               : undefined,
-            { unittype: [iconMapping["knights"], 0] },
+            { unittype: ["knight", 0] },
             !UNITLAYERS.myrooks[MARKS.selectunit]
-              ? { unittype: [iconMapping["pawns"], 0] }
+              ? { unittype: ["pawn", 0] }
               : undefined
           ]
             .filter(i => !!i)
@@ -473,7 +473,7 @@ let game: Partial<AlgolGame> = {
               ]
             },
             { text: "to" },
-            { unittype: [iconMapping["knights"], 0] }
+            { unittype: ["knight", 0] }
           ]
         })
       : UNITLAYERS.knights[MARKS.selectdigtarget]
@@ -495,7 +495,7 @@ let game: Partial<AlgolGame> = {
               ]
             },
             { text: "to" },
-            { unittype: [iconMapping["pawns"], 0] }
+            { unittype: ["pawn", 0] }
           ]
         })
       : collapseContent({
@@ -735,9 +735,9 @@ let game: Partial<AlgolGame> = {
         { text: "a neighbouring" },
         collapseContent({
           line: [
-            { unittype: [iconMapping["rooks"], 0] },
-            { unittype: [iconMapping["knights"], 0] },
-            { unittype: [iconMapping["pawns"], 0] }
+            { unittype: ["rook", 0] },
+            { unittype: ["knight", 0] },
+            { unittype: ["pawn", 0] }
           ]
             .filter(i => !!i)
             .reduce((mem, i, n, list) => {
@@ -895,11 +895,11 @@ let game: Partial<AlgolGame> = {
         collapseContent({
           line: [
             !UNITLAYERS.mypawns[MARKS.selectunit]
-              ? { unittype: [iconMapping["rooks"], 0] }
+              ? { unittype: ["rook", 0] }
               : undefined,
-            { unittype: [iconMapping["knights"], 0] },
+            { unittype: ["knight", 0] },
             !UNITLAYERS.myrooks[MARKS.selectunit]
-              ? { unittype: [iconMapping["pawns"], 0] }
+              ? { unittype: ["pawn", 0] }
               : undefined
           ]
             .filter(i => !!i)
@@ -1005,7 +1005,7 @@ let game: Partial<AlgolGame> = {
               ]
             },
             { text: "to" },
-            { unittype: [iconMapping["knights"], 0] }
+            { unittype: ["knight", 0] }
           ]
         })
       : UNITLAYERS.knights[MARKS.selectdigtarget]
@@ -1027,7 +1027,7 @@ let game: Partial<AlgolGame> = {
               ]
             },
             { text: "to" },
-            { unittype: [iconMapping["pawns"], 0] }
+            { unittype: ["pawn", 0] }
           ]
         })
       : collapseContent({

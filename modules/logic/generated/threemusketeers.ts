@@ -173,7 +173,7 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { unittype: [iconMapping["pawns"], 2] },
+        { unittype: ["pawn", 2] },
         { text: "adjacent to" },
         {
           unit: [

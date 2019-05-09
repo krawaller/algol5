@@ -81,9 +81,9 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    { unittype: [iconMapping["pawns"], 0] },
+                    { unittype: ["pawn", 0] },
                     { text: "or" },
-                    { unittype: [iconMapping["bishops"], 0] },
+                    { unittype: ["bishop", 0] },
                     { text: "to promote" }
                   ]
                 })
@@ -252,7 +252,7 @@ let game: Partial<AlgolGame> = {
         { text: "Press" },
         { command: "deploy" },
         { text: "to spawn" },
-        { unit: [iconMapping["pawns"], 0, MARKS.selectdeploytarget] }
+        { unit: ["pawn", 0, MARKS.selectdeploytarget] }
       ]
     });
   };
@@ -286,8 +286,8 @@ let game: Partial<AlgolGame> = {
         },
         { text: "into" },
         UNITLAYERS.pawns[MARKS.selectunit]
-          ? { unittype: [iconMapping["bishops"], 0] }
-          : { unittype: [iconMapping["kings"], 0] }
+          ? { unittype: ["bishop", 0] }
+          : { unittype: ["king", 0] }
       ]
     });
   };
@@ -349,9 +349,9 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    { unittype: [iconMapping["pawns"], 0] },
+                    { unittype: ["pawn", 0] },
                     { text: "or" },
-                    { unittype: [iconMapping["bishops"], 0] },
+                    { unittype: ["bishop", 0] },
                     { text: "to promote" }
                   ]
                 })
@@ -528,7 +528,7 @@ let game: Partial<AlgolGame> = {
         { text: "Press" },
         { command: "deploy" },
         { text: "to spawn" },
-        { unit: [iconMapping["pawns"], 0, MARKS.selectdeploytarget] }
+        { unit: ["pawn", 0, MARKS.selectdeploytarget] }
       ]
     });
   };
@@ -562,8 +562,8 @@ let game: Partial<AlgolGame> = {
         },
         { text: "into" },
         UNITLAYERS.pawns[MARKS.selectunit]
-          ? { unittype: [iconMapping["bishops"], 0] }
-          : { unittype: [iconMapping["kings"], 0] }
+          ? { unittype: ["bishop", 0] }
+          : { unittype: ["king", 0] }
       ]
     });
   };

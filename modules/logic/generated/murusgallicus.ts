@@ -329,7 +329,7 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    { unittype: [iconMapping["walls"], 2] },
+                    { unittype: ["pawn", 2] },
                     { text: "to crush" }
                   ]
                 })
@@ -851,7 +851,7 @@ let game: Partial<AlgolGame> = {
               ? collapseContent({
                   line: [
                     { text: "a" },
-                    { unittype: [iconMapping["walls"], 1] },
+                    { unittype: ["pawn", 1] },
                     { text: "to crush" }
                   ]
                 })

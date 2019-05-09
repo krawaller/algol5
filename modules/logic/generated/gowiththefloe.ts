@@ -647,7 +647,7 @@ let game: Partial<AlgolGame> = {
         collapseContent({
           line: [
             { text: "or a neighbouring" },
-            { unittype: [iconMapping["seals"], 1] },
+            { unittype: ["king", 1] },
             { text: "to eat" }
           ]
         })

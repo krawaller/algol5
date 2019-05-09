@@ -392,7 +392,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "Press" },
         { command: "deploy" },
         { text: "to spawn" },
-        { unit: [iconMapping["kings"], 1, MARKS.selectkingdeploy] }
+        { unit: ["king", 1, MARKS.selectkingdeploy] }
       ]
     });
   };
@@ -1060,7 +1060,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         { text: "Press" },
         { command: "deploy" },
         { text: "to spawn" },
-        { unit: [iconMapping["kings"], 2, MARKS.selectkingdeploy] }
+        { unit: ["king", 2, MARKS.selectkingdeploy] }
       ]
     });
   };

@@ -3,19 +3,12 @@ import { GameId } from "../../../games/dist/list";
 import {
   AlgolUnitState,
   AlgolPosition,
-  AlgolIcon,
   AlgolAnimCompiled
 } from "../../../types";
 
-import { TransitionGroup } from "react-transition-group";
-
-import { Piece } from "../Piece";
-
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 import { BoardMarks } from "./BoardMarks";
-import Transition, {
-  TransitionStatus
-} from "react-transition-group/Transition";
+import { BoardUnits } from "./BoardUnits";
 
 type BoardProps = {
   gameId: GameId;
@@ -56,58 +49,14 @@ export const Board: React.FunctionComponent<BoardProps> = ({
           units={units}
         />
 
-        <TransitionGroup
-          childFactory={
-            child =>
-              React.cloneElement(child, {
-                anim
-              }) /* to ensure exiting comps get fresh anim */
-          }
-        >
-          {Object.keys(units)
-            .map(id => units[id])
-            .map(({ icon, owner, pos, id }) => (
-              <Transition
-                key={id}
-                timeout={{ enter: 40, exit: 500 }}
-                appear={true}
-              >
-                {(
-                  transition: TransitionStatus,
-                  { anim }: { anim: AlgolAnimCompiled }
-                ) => {
-                  const posToShow =
-                    (transition === "entering" && anim.enterFrom[pos]) ||
-                    (transition === "exiting" && anim.exitTo[pos]) ||
-                    pos;
-                  return (
-                    <Piece
-                      animating={
-                        anim.enterFrom[pos]
-                          ? "from"
-                          : anim.exitTo[pos]
-                          ? "to"
-                          : undefined
-                      }
-                      transition={transition}
-                      icon={icon as AlgolIcon}
-                      owner={owner}
-                      pos={posToShow}
-                      height={height}
-                      width={width}
-                      mode={
-                        marks.indexOf(pos) !== -1
-                          ? "selected"
-                          : potentialMarks.indexOf(pos) !== -1
-                          ? "available"
-                          : "normal"
-                      }
-                    />
-                  );
-                }}
-              </Transition>
-            ))}
-        </TransitionGroup>
+        <BoardUnits
+          width={width}
+          height={height}
+          marks={marks}
+          potentialMarks={potentialMarks}
+          units={units}
+          anim={anim}
+        />
       </div>
     </div>
   );

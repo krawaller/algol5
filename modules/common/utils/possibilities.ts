@@ -6,15 +6,19 @@ import {
   isAlgolLogicalIf,
   isAlgolLogicalIfElse,
   isAlgolLogicalIfPlayer,
-  isAlgolLogicalIfAction
+  isAlgolLogicalIfAction,
+  AlgolStatementAnon,
+  isAlgolStatementForIdIn,
+  isAlgolStatementForPosIn,
+  isAlgolStatementMulti
 } from "../../types";
 
-export function expressionPossibilities<_T>(
-  expr: AlgolIfableExpressionAnon<_T>,
+export function possibilities<_T>(
+  input: AlgolIfableExpressionAnon<_T> | AlgolStatementAnon<_T>,
   player: 0 | 1 | 2 = 0,
   action: string = "any"
 ): _T[] {
-  const listWithDuplicates = possibilitiesInner(expr, player, action);
+  const listWithDuplicates = possibilitiesInner(input, player, action);
   const possAsKeys = listWithDuplicates.reduce(
     (mem, poss) => ({ ...mem, [JSON.stringify(poss)]: 1 }),
     {}
@@ -23,10 +27,11 @@ export function expressionPossibilities<_T>(
 }
 
 function possibilitiesInner<_T>(
-  expr: AlgolIfableExpressionAnon<_T>,
+  input: AlgolIfableExpressionAnon<_T> | AlgolStatementAnon<_T>,
   player: 0 | 1 | 2,
   action: string
 ): _T[] {
+  const expr = input as AlgolIfableExpressionAnon<_T>;
   if (isAlgolLogicalIfElse(expr)) {
     const {
       ifelse: [test, whenTruthy, whenFalsy]
@@ -95,5 +100,31 @@ function possibilitiesInner<_T>(
       : [];
   }
 
-  return [expr as _T];
+  // statement possibilities
+
+  const statement = input as AlgolStatementAnon<_T>;
+
+  if (isAlgolStatementForIdIn(statement)) {
+    const {
+      foridin: [set, repeatStatement]
+    } = statement;
+    return possibilitiesInner(repeatStatement, player, action);
+  }
+
+  if (isAlgolStatementForPosIn(statement)) {
+    const {
+      forposin: [set, repeatStatement]
+    } = statement;
+    return possibilitiesInner(repeatStatement, player, action);
+  }
+
+  if (isAlgolStatementMulti(statement)) {
+    const { multi: children } = statement;
+    return children.reduce(
+      (mem, child) => mem.concat(possibilitiesInner(child, player, action)),
+      []
+    );
+  }
+
+  return [input as _T];
 }

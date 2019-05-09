@@ -1,5 +1,5 @@
 import { AlgolEffectActionDefAnon, FullDefAnon } from "../../types";
-import { expressionPossibilities } from "..";
+import { possibilities } from "..";
 
 export function actionLinks(
   gameDef: FullDefAnon,
@@ -15,8 +15,7 @@ export function actionLinks(
   return (def.links || [])
     .concat(def.link || [])
     .reduce(
-      (mem, linkName) =>
-        mem.concat(expressionPossibilities(linkName, player, action)),
+      (mem, linkName) => mem.concat(possibilities(linkName, player, action)),
       []
     );
 }

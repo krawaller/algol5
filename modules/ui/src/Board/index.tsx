@@ -12,7 +12,7 @@ import { TransitionGroup } from "react-transition-group";
 import { Piece } from "../Piece";
 
 import dataURIs from "../../../graphics/dist/svgDataURIs";
-import { Mark } from "../Mark";
+import { BoardMarks } from "./BoardMarks";
 import Transition, {
   TransitionStatus
 } from "react-transition-group/Transition";
@@ -35,13 +35,6 @@ export const Board: React.FunctionComponent<BoardProps> = ({
   anim = { enterFrom: {}, exitTo: {}, ghosts: [] }
 }) => {
   const { dataURI, height, width } = dataURIs[gameId];
-  const unitsByPos = Object.keys(units).reduce(
-    (mem, id) => ({
-      ...mem,
-      [units[id].pos]: units[id]
-    }),
-    {}
-  );
   return (
     <div
       style={{
@@ -54,20 +47,14 @@ export const Board: React.FunctionComponent<BoardProps> = ({
       <div
         style={{ position: "absolute", top: 0, width: "100%", height: "100%" }}
       >
-        {marks
-          .map(pos => [pos, true])
-          .concat(potentialMarks.map(pos => [pos, false]))
-          .map(([pos, selected]: [string, boolean]) => (
-            <Mark
-              key={pos}
-              callback={callback}
-              pos={pos}
-              potential={!selected}
-              height={height}
-              width={width}
-              piece={!!unitsByPos[pos]}
-            />
-          ))}
+        <BoardMarks
+          callback={callback}
+          width={width}
+          height={height}
+          marks={marks}
+          potentialMarks={potentialMarks}
+          units={units}
+        />
 
         <TransitionGroup
           childFactory={

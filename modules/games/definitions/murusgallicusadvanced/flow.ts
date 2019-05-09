@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedFlow } from './_types';
+import { MurusgallicusadvancedFlow } from "./_types";
 
 const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
   startTurn: { links: ["selecttower", "selectcatapult"] },
@@ -40,12 +40,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
         { morphin: ["madecatapults", "catapults"] },
         { morphin: ["madetowers", "towers"] },
         {
-          spawnin: [
-            "madewalls",
-            "walls",
-            ["player"],
-            { from: { pos: "selecttower" } }
-          ]
+          spawnin: ["madewalls", "walls", ["player"]]
         }
       ],
       link: "endTurn"
@@ -92,12 +87,7 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
                   ]
                 },
                 {
-                  spawnat: [
-                    "selectfire",
-                    "walls",
-                    ["player"],
-                    { from: { pos: "selectcatapult" } }
-                  ]
+                  spawnat: ["selectfire", "walls", ["player"]]
                 }
               ]
             }

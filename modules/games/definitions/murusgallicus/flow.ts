@@ -1,4 +1,4 @@
-import { MurusgallicusFlow } from './_types';
+import { MurusgallicusFlow } from "./_types";
 
 const murusgallicusFlow: MurusgallicusFlow = {
   startTurn: { link: "selecttower" },
@@ -27,12 +27,7 @@ const murusgallicusFlow: MurusgallicusFlow = {
         { killat: "selecttower" },
         { morphin: ["madetowers", "towers"] },
         {
-          spawnin: [
-            "madewalls",
-            "walls",
-            ["player"],
-            { from: { pos: "selecttower" } }
-          ]
+          spawnin: ["madewalls", "walls", ["player"]]
         }
       ],
       link: "endTurn"

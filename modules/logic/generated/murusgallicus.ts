@@ -93,6 +93,7 @@ let game: Partial<AlgolGame> = {
   };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       crushtargets: step.ARTIFACTS.crushtargets,
@@ -122,8 +123,7 @@ let game: Partial<AlgolGame> = {
           pos: LOOPPOS,
           id: newunitid,
           group: "walls",
-          owner: 1,
-          from: MARKS.selecttower
+          owner: 1
         };
       }
     }
@@ -171,6 +171,9 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn2";
     }
+    for (let LOOPPOS in ARTIFACTS.madewalls) {
+      anim.enterFrom[LOOPPOS] = MARKS.selecttower;
+    }
     return {
       LINKS,
       MARKS: {},
@@ -178,7 +181,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.move1 = () => defaultInstruction(1);
@@ -611,6 +615,7 @@ let game: Partial<AlgolGame> = {
   };
   game.action.move2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       crushtargets: step.ARTIFACTS.crushtargets,
@@ -640,8 +645,7 @@ let game: Partial<AlgolGame> = {
           pos: LOOPPOS,
           id: newunitid,
           group: "walls",
-          owner: 2,
-          from: MARKS.selecttower
+          owner: 2
         };
       }
     }
@@ -689,6 +693,9 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
+    for (let LOOPPOS in ARTIFACTS.madewalls) {
+      anim.enterFrom[LOOPPOS] = MARKS.selecttower;
+    }
     return {
       LINKS,
       MARKS: {},
@@ -696,7 +703,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.move2 = () => defaultInstruction(2);

@@ -104,6 +104,7 @@ let game: Partial<AlgolGame> = {
   };
   game.action.move1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       crushtargets: step.ARTIFACTS.crushtargets,
@@ -145,8 +146,7 @@ let game: Partial<AlgolGame> = {
           pos: LOOPPOS,
           id: newunitid,
           group: "walls",
-          owner: 1,
-          from: MARKS.selecttower
+          owner: 1
         };
       }
     }
@@ -197,6 +197,9 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn2";
     }
+    for (let LOOPPOS in ARTIFACTS.madewalls) {
+      anim.enterFrom[LOOPPOS] = MARKS.selecttower;
+    }
     return {
       LINKS,
       MARKS: {},
@@ -204,7 +207,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.move1 = () => defaultInstruction(1);
@@ -379,6 +383,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.sacrifice1 = () => defaultInstruction(1);
   game.action.fire1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -405,8 +410,7 @@ let game: Partial<AlgolGame> = {
             pos: MARKS.selectfire,
             id: newunitid,
             group: "walls",
-            owner: 1,
-            from: MARKS.selectcatapult
+            owner: 1
           };
         }
       }
@@ -467,6 +471,9 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn2";
     }
+    if (!UNITLAYERS.oppunits[MARKS.selectcatapult]) {
+      anim.enterFrom[MARKS.selectfire] = MARKS.selectcatapult;
+    }
     return {
       LINKS,
       MARKS: {},
@@ -474,7 +481,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.fire1 = () => defaultInstruction(1);
@@ -1096,6 +1104,7 @@ let game: Partial<AlgolGame> = {
   };
   game.action.move2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       crushtargets: step.ARTIFACTS.crushtargets,
@@ -1137,8 +1146,7 @@ let game: Partial<AlgolGame> = {
           pos: LOOPPOS,
           id: newunitid,
           group: "walls",
-          owner: 2,
-          from: MARKS.selecttower
+          owner: 2
         };
       }
     }
@@ -1189,6 +1197,9 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
+    for (let LOOPPOS in ARTIFACTS.madewalls) {
+      anim.enterFrom[LOOPPOS] = MARKS.selecttower;
+    }
     return {
       LINKS,
       MARKS: {},
@@ -1196,7 +1207,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.move2 = () => defaultInstruction(2);
@@ -1371,6 +1383,7 @@ let game: Partial<AlgolGame> = {
   game.instruction.sacrifice2 = () => defaultInstruction(2);
   game.action.fire2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -1397,8 +1410,7 @@ let game: Partial<AlgolGame> = {
             pos: MARKS.selectfire,
             id: newunitid,
             group: "walls",
-            owner: 2,
-            from: MARKS.selectcatapult
+            owner: 2
           };
         }
       }
@@ -1459,6 +1471,9 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
+    if (!UNITLAYERS.oppunits[MARKS.selectcatapult]) {
+      anim.enterFrom[MARKS.selectfire] = MARKS.selectcatapult;
+    }
     return {
       LINKS,
       MARKS: {},
@@ -1466,7 +1481,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.fire2 = () => defaultInstruction(2);

@@ -1,5 +1,9 @@
-import { MurusgallicusAnim } from './_types';
+import { MurusgallicusAnim } from "./_types";
 
-const murusgallicusAnim: MurusgallicusAnim = {};
+const murusgallicusAnim: MurusgallicusAnim = {
+  move: [
+    { forposin: ["madewalls", { enterfrom: [["looppos"], "selecttower"] }] }
+  ]
+};
 
 export default murusgallicusAnim;

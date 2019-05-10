@@ -116,6 +116,15 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.madewalls) {
+      anim.enterFrom[LOOPPOS] = MARKS.selecttower;
+    }
+    for (let LOOPPOS in ARTIFACTS.madetowers) {
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 1]);
+    }
+    for (let LOOPPOS in ARTIFACTS.madecatapults) {
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 1]);
+    }
     delete UNITDATA[(UNITLAYERS.units[MARKS.selecttower] || {}).id];
     for (let LOOPPOS in ARTIFACTS.madecatapults) {
       {
@@ -197,15 +206,6 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn2";
     }
-    for (let LOOPPOS in ARTIFACTS.madewalls) {
-      anim.enterFrom[LOOPPOS] = MARKS.selecttower;
-    }
-    for (let LOOPPOS in ARTIFACTS.madetowers) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 1]);
-    }
-    for (let LOOPPOS in ARTIFACTS.madecatapults) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 1]);
-    }
     return {
       LINKS,
       MARKS: {},
@@ -224,6 +224,12 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    anim.ghosts.push([
+      MARKS.selecttower,
+      MARKS.selectcrush,
+      iconMapping["walls"],
+      1
+    ]);
     {
       let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
       if (unitid) {
@@ -293,12 +299,6 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn2";
     }
-    anim.ghosts.push([
-      MARKS.selecttower,
-      MARKS.selectcrush,
-      iconMapping["walls"],
-      1
-    ]);
     return {
       LINKS,
       MARKS: {},
@@ -317,6 +317,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
     {
       let unitid = (UNITLAYERS.units[MARKS.selectcrush] || {}).id;
       if (unitid) {
@@ -374,7 +375,6 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn2";
     }
-    anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
     return {
       LINKS,
       MARKS: {},
@@ -394,6 +394,16 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    if (!UNITLAYERS.oppunits[MARKS.selectfire]) {
+      anim.enterFrom[MARKS.selectfire] = MARKS.selectcatapult;
+    } else {
+      anim.ghosts.push([
+        MARKS.selectcatapult,
+        MARKS.selectfire,
+        iconMapping["walls"],
+        1
+      ]);
+    }
     if (UNITLAYERS.oppwalls[MARKS.selectfire]) {
       delete UNITDATA[(UNITLAYERS.units[MARKS.selectfire] || {}).id];
     } else {
@@ -476,9 +486,6 @@ let game: Partial<AlgolGame> = {
       );
     } else {
       LINKS.endTurn = "startTurn2";
-    }
-    if (!UNITLAYERS.oppunits[MARKS.selectcatapult]) {
-      anim.enterFrom[MARKS.selectfire] = MARKS.selectcatapult;
     }
     return {
       LINKS,
@@ -1122,6 +1129,15 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.madewalls) {
+      anim.enterFrom[LOOPPOS] = MARKS.selecttower;
+    }
+    for (let LOOPPOS in ARTIFACTS.madetowers) {
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 2]);
+    }
+    for (let LOOPPOS in ARTIFACTS.madecatapults) {
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 2]);
+    }
     delete UNITDATA[(UNITLAYERS.units[MARKS.selecttower] || {}).id];
     for (let LOOPPOS in ARTIFACTS.madecatapults) {
       {
@@ -1203,15 +1219,6 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
-    for (let LOOPPOS in ARTIFACTS.madewalls) {
-      anim.enterFrom[LOOPPOS] = MARKS.selecttower;
-    }
-    for (let LOOPPOS in ARTIFACTS.madetowers) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 2]);
-    }
-    for (let LOOPPOS in ARTIFACTS.madecatapults) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 2]);
-    }
     return {
       LINKS,
       MARKS: {},
@@ -1230,6 +1237,12 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    anim.ghosts.push([
+      MARKS.selecttower,
+      MARKS.selectcrush,
+      iconMapping["walls"],
+      2
+    ]);
     {
       let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
       if (unitid) {
@@ -1299,12 +1312,6 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
-    anim.ghosts.push([
-      MARKS.selecttower,
-      MARKS.selectcrush,
-      iconMapping["walls"],
-      2
-    ]);
     return {
       LINKS,
       MARKS: {},
@@ -1323,6 +1330,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
     {
       let unitid = (UNITLAYERS.units[MARKS.selectcrush] || {}).id;
       if (unitid) {
@@ -1380,7 +1388,6 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
-    anim.exitTo[MARKS.selecttower] = MARKS.selectcrush;
     return {
       LINKS,
       MARKS: {},
@@ -1400,6 +1407,16 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    if (!UNITLAYERS.oppunits[MARKS.selectfire]) {
+      anim.enterFrom[MARKS.selectfire] = MARKS.selectcatapult;
+    } else {
+      anim.ghosts.push([
+        MARKS.selectcatapult,
+        MARKS.selectfire,
+        iconMapping["walls"],
+        2
+      ]);
+    }
     if (UNITLAYERS.oppwalls[MARKS.selectfire]) {
       delete UNITDATA[(UNITLAYERS.units[MARKS.selectfire] || {}).id];
     } else {
@@ -1482,9 +1499,6 @@ let game: Partial<AlgolGame> = {
       );
     } else {
       LINKS.endTurn = "startTurn1";
-    }
-    if (!UNITLAYERS.oppunits[MARKS.selectcatapult]) {
-      anim.enterFrom[MARKS.selectfire] = MARKS.selectcatapult;
     }
     return {
       LINKS,

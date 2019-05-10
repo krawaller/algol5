@@ -25,6 +25,11 @@ export function executeOrderSection(
     .concat(def.runGenerator || []);
 
   const orders: AlgolOrderAnon[] = [];
+  const anims: AlgolAnimAnon[] = gameDef.anim[action] || [];
+  if (anims.length) {
+    orders.push({ anims });
+  }
+
   if (effects.length) {
     orders.push({ effects });
     orders.push(["unitLayers"]);
@@ -34,10 +39,6 @@ export function executeOrderSection(
   }
   if (links.length) {
     orders.push({ links });
-  }
-  const anims: AlgolAnimAnon[] = gameDef.anim[action] || [];
-  if (anims.length) {
-    orders.push({ anims });
   }
 
   return executeOrder(gameDef, player, action, {

@@ -506,6 +506,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    anim.exitTo[MARKS.selectunit] = MARKS.selecteattarget;
     delete UNITDATA[(UNITLAYERS.units[MARKS.selectunit] || {}).id];
     delete UNITDATA[(UNITLAYERS.units[MARKS.selecteattarget] || {}).id];
     UNITLAYERS = {
@@ -564,7 +565,6 @@ let game: Partial<AlgolGame> = {
     } else {
       LINKS.endTurn = "startTurn1";
     }
-    anim.exitTo[MARKS.selectunit] = MARKS.selecteattarget;
     return {
       LINKS,
       MARKS: {},

@@ -20,9 +20,10 @@ const murusgallicusadvancedAnim: MurusgallicusadvancedAnim = {
   ],
   fire: [
     {
-      if: [
-        { noneat: ["oppunits", "selectcatapult"] },
-        { enterfrom: ["selectfire", "selectcatapult"] }
+      ifelse: [
+        { noneat: ["oppunits", "selectfire"] },
+        { enterfrom: ["selectfire", "selectcatapult"] },
+        { ghost: ["selectcatapult", "selectfire", "walls", ["player"]] }
       ]
     }
   ]

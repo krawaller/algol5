@@ -44,7 +44,7 @@ function executeAnimInner(
     const [from, to, icon, owner] = anim.ghost;
     return `anim.ghosts.push([${parser.pos(from)}, ${parser.pos(
       to
-    )}, iconMapping[${parser.val(icon)}], ${parser.val(owner)}])`;
+    )}, iconMapping[${parser.val(icon)}], ${parser.val(owner)}]); `;
   }
   throw new Error("Unknown Anim: " + JSON.stringify(anim));
 }

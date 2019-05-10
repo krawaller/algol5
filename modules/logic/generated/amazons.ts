@@ -133,6 +133,9 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    anim.enterFrom[MARKS.selectfiretarget] = Object.keys(
+      ARTIFACTS.firedfrom
+    )[0];
     {
       let newunitid = "spawn" + NEXTSPAWNID++;
       UNITDATA[newunitid] = {
@@ -153,9 +156,6 @@ let game: Partial<AlgolGame> = {
     {
       LINKS.endTurn = "startTurn2";
     }
-    anim.enterFrom[MARKS.selectfiretarget] = Object.keys(
-      ARTIFACTS.firedfrom
-    )[0];
     return {
       LINKS,
       MARKS: {},
@@ -418,6 +418,9 @@ let game: Partial<AlgolGame> = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    anim.enterFrom[MARKS.selectfiretarget] = Object.keys(
+      ARTIFACTS.firedfrom
+    )[0];
     {
       let newunitid = "spawn" + NEXTSPAWNID++;
       UNITDATA[newunitid] = {
@@ -438,9 +441,6 @@ let game: Partial<AlgolGame> = {
     {
       LINKS.endTurn = "startTurn1";
     }
-    anim.enterFrom[MARKS.selectfiretarget] = Object.keys(
-      ARTIFACTS.firedfrom
-    )[0];
     return {
       LINKS,
       MARKS: {},

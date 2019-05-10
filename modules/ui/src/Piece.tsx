@@ -27,7 +27,7 @@ function lifecycleStyles(
   status: TransitionStatus,
   animating?: "from" | "to" | "ghost"
 ): CSSProperties {
-  if (status === "entering" && animating !== "from") {
+  if (status === "entering" && animating !== "from" && animating !== "ghost") {
     return {
       opacity: 0,
       transform: "scale(0.1, 0.1)"
@@ -36,7 +36,14 @@ function lifecycleStyles(
   if (status === "exiting") {
     return {
       opacity: 0,
-      ...(animating !== "to" && { transform: "scale(2, 2)" })
+      ...(animating !== "to" &&
+        animating !== "ghost" && {
+          transform: "scale(2, 2)"
+        }),
+      ...(animating === "ghost" && {
+        transitionDelay: "150ms",
+        transitionDuration: "100ms"
+      })
     };
   }
   return {};

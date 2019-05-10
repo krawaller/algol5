@@ -42,5 +42,5 @@ export type AlgolAnimCompiled = {
   exitTo: {
     [from: string]: string;
   };
-  ghosts: [string, string, string][];
+  ghosts: [string, string, string, 0 | 1 | 2][];
 };

@@ -7,6 +7,8 @@ import {
   isAlgolAnimGhost
 } from "../../../../../types";
 
+import { iconRef } from "../../../utils";
+
 import { executeStatement, makeParser } from "../../../executors";
 
 export function executeAnim(
@@ -42,9 +44,10 @@ function executeAnimInner(
   }
   if (isAlgolAnimGhost(anim)) {
     const [from, to, icon, owner] = anim.ghost;
-    return `anim.ghosts.push([${parser.pos(from)}, ${parser.pos(
-      to
-    )}, iconMapping[${parser.val(icon)}], ${parser.val(owner)}]); `;
+    return `anim.ghosts.push([${parser.pos(from)}, ${parser.pos(to)}, ${iconRef(
+      parser.val(icon),
+      gameDef.graphics.icons
+    )}, ${parser.val(owner)}]); `;
   }
   throw new Error("Unknown Anim: " + JSON.stringify(anim));
 }

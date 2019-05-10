@@ -18,6 +18,8 @@ import {
   isAlgolInstrUnitTypePos
 } from "../../../../types";
 
+import { iconRef } from "../../utils";
+
 import { executeExpression, makeParser } from "../";
 
 export function executeInstruction(
@@ -45,13 +47,6 @@ function executeInstructionInner(
   const exprParser = makeParser(gameDef, player, action);
   const me = (i: AlgolInstrAnon) =>
     executeInstruction(gameDef, player, action, i);
-
-  function iconRef(group) {
-    const stripped = group.replace(/["']/g, "");
-    return gameDef.graphics.icons[stripped]
-      ? `"${gameDef.graphics.icons[stripped]}"`
-      : `iconMapping[${group}]`;
-  }
 
   if (!instr) {
     return "undefined";
@@ -129,7 +124,7 @@ function executeInstructionInner(
   if (isAlgolInstrUnitAt(instr)) {
     const group = exprParser.val({ read: ["units", instr.unitat, "group"] });
     return `{
-      unit: [${iconRef(group)},
+      unit: [${iconRef(group, gameDef.graphics.icons)},
         ${exprParser.val({ read: ["units", instr.unitat, "owner"] })},
         ${exprParser.pos(instr.unitat)}
       ]
@@ -140,7 +135,10 @@ function executeInstructionInner(
     const group = exprParser.val(groupRaw);
     const owner = exprParser.val(ownerRaw);
     const pos = exprParser.pos(posRaw);
-    return `{unit: [${iconRef(group)}, ${owner}, ${pos}]}`;
+    return `{unit: [${iconRef(
+      group,
+      gameDef.graphics.icons
+    )}, ${owner}, ${pos}]}`;
   }
   if (isAlgolInstrPos(instr)) {
     return `{ pos: ${exprParser.pos(instr.pos)} }`;
@@ -149,7 +147,10 @@ function executeInstructionInner(
     const [groupRaw, ownerRaw] = instr.unittype;
     const owner = exprParser.val(ownerRaw);
     const group = exprParser.val(groupRaw);
-    return `{ unittype: [${iconRef(group)}, ${owner}] }`;
+    return `{ unittype: [${iconRef(
+      group,
+      gameDef.graphics.icons
+    )}, ${owner}] }`;
   }
   if (isAlgolInstrText(instr)) {
     const { text } = instr;

@@ -25,7 +25,7 @@ const posStyles = {
   padding: "3px",
   border: "1px solid black",
   whiteSpace: "nowrap"
-};
+} as const;
 
 /**
  * Displays some AlgolContent

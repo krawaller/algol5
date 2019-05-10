@@ -12,3 +12,8 @@ export function contains(haystack, needle): boolean {
     return false;
   }
 }
+
+export function iconRef(group, icons) {
+  const stripped = group.replace(/["']/g, "");
+  return icons[stripped] ? `"${icons[stripped]}"` : `iconMapping[${group}]`;
+}

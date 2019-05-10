@@ -23,10 +23,8 @@ export class BoardGhosts extends React.Component<BoardGhostsProps> {
     if (ghosts.length) {
       if (this.shownGhosts !== ghosts) {
         this.shownGhosts = ghosts;
-        console.log("Rendering ghosts!");
         setTimeout(() => this.forceUpdate(), 40);
       } else {
-        console.log("Rerendered again after ghosts to kill them off");
         this.shownGhosts = [];
       }
     }

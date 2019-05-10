@@ -120,10 +120,10 @@ let game: Partial<AlgolGame> = {
       anim.enterFrom[LOOPPOS] = MARKS.selecttower;
     }
     for (let LOOPPOS in ARTIFACTS.madetowers) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 1]);
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 1]);
     }
     for (let LOOPPOS in ARTIFACTS.madecatapults) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 1]);
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 1]);
     }
     delete UNITDATA[(UNITLAYERS.units[MARKS.selecttower] || {}).id];
     for (let LOOPPOS in ARTIFACTS.madecatapults) {
@@ -224,12 +224,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    anim.ghosts.push([
-      MARKS.selecttower,
-      MARKS.selectcrush,
-      iconMapping["walls"],
-      1
-    ]);
+    anim.ghosts.push([MARKS.selecttower, MARKS.selectcrush, "pawn", 1]);
     {
       let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
       if (unitid) {
@@ -397,12 +392,7 @@ let game: Partial<AlgolGame> = {
     if (!UNITLAYERS.oppunits[MARKS.selectfire]) {
       anim.enterFrom[MARKS.selectfire] = MARKS.selectcatapult;
     } else {
-      anim.ghosts.push([
-        MARKS.selectcatapult,
-        MARKS.selectfire,
-        iconMapping["walls"],
-        1
-      ]);
+      anim.ghosts.push([MARKS.selectcatapult, MARKS.selectfire, "pawn", 1]);
     }
     if (UNITLAYERS.oppwalls[MARKS.selectfire]) {
       delete UNITDATA[(UNITLAYERS.units[MARKS.selectfire] || {}).id];
@@ -1133,10 +1123,10 @@ let game: Partial<AlgolGame> = {
       anim.enterFrom[LOOPPOS] = MARKS.selecttower;
     }
     for (let LOOPPOS in ARTIFACTS.madetowers) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 2]);
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 2]);
     }
     for (let LOOPPOS in ARTIFACTS.madecatapults) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 2]);
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 2]);
     }
     delete UNITDATA[(UNITLAYERS.units[MARKS.selecttower] || {}).id];
     for (let LOOPPOS in ARTIFACTS.madecatapults) {
@@ -1237,12 +1227,7 @@ let game: Partial<AlgolGame> = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    anim.ghosts.push([
-      MARKS.selecttower,
-      MARKS.selectcrush,
-      iconMapping["walls"],
-      2
-    ]);
+    anim.ghosts.push([MARKS.selecttower, MARKS.selectcrush, "pawn", 2]);
     {
       let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
       if (unitid) {
@@ -1410,12 +1395,7 @@ let game: Partial<AlgolGame> = {
     if (!UNITLAYERS.oppunits[MARKS.selectfire]) {
       anim.enterFrom[MARKS.selectfire] = MARKS.selectcatapult;
     } else {
-      anim.ghosts.push([
-        MARKS.selectcatapult,
-        MARKS.selectfire,
-        iconMapping["walls"],
-        2
-      ]);
+      anim.ghosts.push([MARKS.selectcatapult, MARKS.selectfire, "pawn", 2]);
     }
     if (UNITLAYERS.oppwalls[MARKS.selectfire]) {
       delete UNITDATA[(UNITLAYERS.units[MARKS.selectfire] || {}).id];

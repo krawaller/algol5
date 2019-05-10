@@ -108,7 +108,7 @@ let game: Partial<AlgolGame> = {
       anim.enterFrom[LOOPPOS] = MARKS.selecttower;
     }
     for (let LOOPPOS in ARTIFACTS.madetowers) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 1]);
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 1]);
     }
     delete UNITDATA[(UNITLAYERS.units[MARKS.selecttower] || {}).id];
     for (let LOOPPOS in ARTIFACTS.madetowers) {
@@ -633,7 +633,7 @@ let game: Partial<AlgolGame> = {
       anim.enterFrom[LOOPPOS] = MARKS.selecttower;
     }
     for (let LOOPPOS in ARTIFACTS.madetowers) {
-      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 2]);
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, "pawn", 2]);
     }
     delete UNITDATA[(UNITLAYERS.units[MARKS.selecttower] || {}).id];
     for (let LOOPPOS in ARTIFACTS.madetowers) {

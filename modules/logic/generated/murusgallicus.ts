@@ -174,6 +174,9 @@ let game: Partial<AlgolGame> = {
     for (let LOOPPOS in ARTIFACTS.madewalls) {
       anim.enterFrom[LOOPPOS] = MARKS.selecttower;
     }
+    for (let LOOPPOS in ARTIFACTS.madetowers) {
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 1]);
+    }
     return {
       LINKS,
       MARKS: {},
@@ -695,6 +698,9 @@ let game: Partial<AlgolGame> = {
     }
     for (let LOOPPOS in ARTIFACTS.madewalls) {
       anim.enterFrom[LOOPPOS] = MARKS.selecttower;
+    }
+    for (let LOOPPOS in ARTIFACTS.madetowers) {
+      anim.ghosts.push([MARKS.selecttower, LOOPPOS, iconMapping["walls"], 2]);
     }
     return {
       LINKS,

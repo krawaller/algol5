@@ -9,6 +9,7 @@ import {
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 import { BoardMarks } from "./BoardMarks";
 import { BoardUnits } from "./BoardUnits";
+import { BoardGhosts } from "./BoardGhosts";
 
 type BoardProps = {
   gameId: GameId;
@@ -57,6 +58,8 @@ export const Board: React.FunctionComponent<BoardProps> = ({
           units={units}
           anim={anim}
         />
+
+        <BoardGhosts width={width} height={height} ghosts={anim.ghosts} />
       </div>
     </div>
   );

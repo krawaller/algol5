@@ -21,6 +21,8 @@ type PieceProps = {
   mode?: "normal" | "available" | "selected";
   /** Current Transition state of the piece (enter/exit anim) */
   transition: TransitionStatus;
+  /** Whether this position was the target of exitTo/ghost projectile */
+  targetted?: boolean;
 };
 
 function lifecycleStyles(
@@ -75,7 +77,8 @@ export const Piece: FunctionComponent<PieceProps> = props => {
     mode,
     pos,
     animating,
-    transition
+    transition,
+    targetted
   } = props;
   return (
     <div

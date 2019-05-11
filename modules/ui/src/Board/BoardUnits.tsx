@@ -50,7 +50,11 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
       {Object.keys(units)
         .map(id => units[id])
         .map(({ icon, owner, pos, id }) => (
-          <Transition key={id} timeout={{ enter: 40, exit: 500 }} appear={true}>
+          <Transition
+            key={id + icon}
+            timeout={{ enter: 40, exit: 500 + (targets[pos] ? 0 : 0) }}
+            appear={true}
+          >
             {(
               transition: TransitionStatus,
               { anim }: { anim: AlgolAnimCompiled }

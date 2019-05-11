@@ -27,12 +27,17 @@ type PieceProps = {
 
 function lifecycleStyles(
   status: TransitionStatus,
-  animating?: "from" | "to" | "ghost"
+  animating?: "from" | "to" | "ghost",
+  targetted?: boolean
 ): CSSProperties {
   if (status === "entering" && animating !== "from" && animating !== "ghost") {
     return {
       opacity: 0,
-      transform: "scale(0.1, 0.1)"
+      transform: "scale(0.1, 0.1)",
+      ...(targetted &&
+        {
+          //transitionDelay: "300ms"
+        })
     };
   }
   if (status === "exiting") {
@@ -45,7 +50,11 @@ function lifecycleStyles(
       ...(animating === "ghost" && {
         transitionDelay: "150ms",
         transitionDuration: "100ms"
-      })
+      }),
+      ...(targetted &&
+        {
+          //transitionDelay: "300ms"
+        })
     };
   }
   return {};
@@ -88,7 +97,7 @@ export const Piece: FunctionComponent<PieceProps> = props => {
           width,
           pos
         }),
-        ...lifecycleStyles(transition, animating),
+        ...lifecycleStyles(transition, animating, targetted),
         ...pieceStyles,
         transition: transitions(transition)
       }}

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type AmazonsBoardHeight = 10;
 export type AmazonsBoardWidth = 10;
@@ -29,7 +29,7 @@ export type AmazonsGraphics = Graphics<AmazonsTerrain, AmazonsUnit>;
 export type AmazonsInstructions = Instructions<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPhase, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;
 export type AmazonsMeta = AlgolMeta<AmazonsCommand, AmazonsMark>;
 export type AmazonsPerformance = AlgolPerformance<AmazonsCommand, AmazonsMark>;
-export type AmazonsScripts = GameTestSuite;
+export type AmazonsScripts = AlgolGameTestSuite<AmazonsCommand, AmazonsPosition>;
 export type AmazonsSetup = Setup<AmazonsPosition, AmazonsUnit>;
 
 export type AmazonsDefinition = FullDef<AmazonsAiArtifactLayer, AmazonsAiAspect, AmazonsAiBrain, AmazonsAiGenerator, AmazonsAiGrid, AmazonsAiTerrain, AmazonsAiTerrainLayer, AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsBoardHeight, AmazonsBoardWidth, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsPhase, AmazonsPosition, AmazonsTerrain, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type SemaphorBoardHeight = 3;
 export type SemaphorBoardWidth = 4;
@@ -29,7 +29,7 @@ export type SemaphorGraphics = Graphics<SemaphorTerrain, SemaphorUnit>;
 export type SemaphorInstructions = Instructions<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;
 export type SemaphorMeta = AlgolMeta<SemaphorCommand, SemaphorMark>;
 export type SemaphorPerformance = AlgolPerformance<SemaphorCommand, SemaphorMark>;
-export type SemaphorScripts = GameTestSuite;
+export type SemaphorScripts = AlgolGameTestSuite<SemaphorCommand, SemaphorPosition>;
 export type SemaphorSetup = Setup<SemaphorPosition, SemaphorUnit>;
 
 export type SemaphorDefinition = FullDef<SemaphorAiArtifactLayer, SemaphorAiAspect, SemaphorAiBrain, SemaphorAiGenerator, SemaphorAiGrid, SemaphorAiTerrain, SemaphorAiTerrainLayer, SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorBoardHeight, SemaphorBoardWidth, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorPhase, SemaphorPosition, SemaphorTerrain, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;

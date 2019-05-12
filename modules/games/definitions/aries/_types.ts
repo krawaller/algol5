@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type AriesBoardHeight = 8;
 export type AriesBoardWidth = 8;
@@ -29,7 +29,7 @@ export type AriesGraphics = Graphics<AriesTerrain, AriesUnit>;
 export type AriesInstructions = Instructions<AriesBattlePos, AriesBattleVar, AriesCommand, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesTurnPos, AriesTurnVar, AriesUnit>;
 export type AriesMeta = AlgolMeta<AriesCommand, AriesMark>;
 export type AriesPerformance = AlgolPerformance<AriesCommand, AriesMark>;
-export type AriesScripts = GameTestSuite;
+export type AriesScripts = AlgolGameTestSuite<AriesCommand, AriesPosition>;
 export type AriesSetup = Setup<AriesPosition, AriesUnit>;
 
 export type AriesDefinition = FullDef<AriesAiArtifactLayer, AriesAiAspect, AriesAiBrain, AriesAiGenerator, AriesAiGrid, AriesAiTerrain, AriesAiTerrainLayer, AriesArtifactLayer, AriesBattlePos, AriesBattleVar, AriesBoardHeight, AriesBoardWidth, AriesCommand, AriesGenerator, AriesGrid, AriesLayer, AriesMark, AriesPhase, AriesPosition, AriesTerrain, AriesTurnPos, AriesTurnVar, AriesUnit>;

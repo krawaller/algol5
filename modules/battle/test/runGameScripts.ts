@@ -1,9 +1,9 @@
-import { GameTestSuite, AlgolGameAPI } from "../../types";
+import { AlgolGameTestSuite, AlgolGameAPI } from "../../types";
 
 export function runGameScripts(
   gameId: string,
   api: AlgolGameAPI,
-  scripts: GameTestSuite
+  scripts: AlgolGameTestSuite<string, string>
 ) {
   for (const scriptName in scripts) {
     test(`Running ${gameId} ${scriptName}`, () => {

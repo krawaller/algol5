@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type MurusgallicusadvancedBoardHeight = 7;
 export type MurusgallicusadvancedBoardWidth = 8;
@@ -29,7 +29,7 @@ export type MurusgallicusadvancedGraphics = Graphics<MurusgallicusadvancedTerrai
 export type MurusgallicusadvancedInstructions = Instructions<MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedPhase, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedUnit>;
 export type MurusgallicusadvancedMeta = AlgolMeta<MurusgallicusadvancedCommand, MurusgallicusadvancedMark>;
 export type MurusgallicusadvancedPerformance = AlgolPerformance<MurusgallicusadvancedCommand, MurusgallicusadvancedMark>;
-export type MurusgallicusadvancedScripts = GameTestSuite;
+export type MurusgallicusadvancedScripts = AlgolGameTestSuite<MurusgallicusadvancedCommand, MurusgallicusadvancedPosition>;
 export type MurusgallicusadvancedSetup = Setup<MurusgallicusadvancedPosition, MurusgallicusadvancedUnit>;
 
 export type MurusgallicusadvancedDefinition = FullDef<MurusgallicusadvancedAiArtifactLayer, MurusgallicusadvancedAiAspect, MurusgallicusadvancedAiBrain, MurusgallicusadvancedAiGenerator, MurusgallicusadvancedAiGrid, MurusgallicusadvancedAiTerrain, MurusgallicusadvancedAiTerrainLayer, MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedBoardHeight, MurusgallicusadvancedBoardWidth, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedPhase, MurusgallicusadvancedPosition, MurusgallicusadvancedTerrain, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedUnit>;

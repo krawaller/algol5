@@ -29,6 +29,7 @@ export type ${capId}Performance = any;
 export type ${capId}Scripts = any;
 export type ${capId}Setup = any;
 export type ${capId}Board = any;
+export type ${capId}Position = any;
 
 export type ${capId}Definition = any;
 `;

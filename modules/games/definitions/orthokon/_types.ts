@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type OrthokonBoardHeight = 4;
 export type OrthokonBoardWidth = 4;
@@ -29,7 +29,7 @@ export type OrthokonGraphics = Graphics<OrthokonTerrain, OrthokonUnit>;
 export type OrthokonInstructions = Instructions<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;
 export type OrthokonMeta = AlgolMeta<OrthokonCommand, OrthokonMark>;
 export type OrthokonPerformance = AlgolPerformance<OrthokonCommand, OrthokonMark>;
-export type OrthokonScripts = GameTestSuite;
+export type OrthokonScripts = AlgolGameTestSuite<OrthokonCommand, OrthokonPosition>;
 export type OrthokonSetup = Setup<OrthokonPosition, OrthokonUnit>;
 
 export type OrthokonDefinition = FullDef<OrthokonAiArtifactLayer, OrthokonAiAspect, OrthokonAiBrain, OrthokonAiGenerator, OrthokonAiGrid, OrthokonAiTerrain, OrthokonAiTerrainLayer, OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonBoardHeight, OrthokonBoardWidth, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonPhase, OrthokonPosition, OrthokonTerrain, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;

@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type SerauqsBoardHeight = 4;
 export type SerauqsBoardWidth = 4;
@@ -29,7 +29,7 @@ export type SerauqsGraphics = Graphics<SerauqsTerrain, SerauqsUnit>;
 export type SerauqsInstructions = Instructions<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsPhase, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;
 export type SerauqsMeta = AlgolMeta<SerauqsCommand, SerauqsMark>;
 export type SerauqsPerformance = AlgolPerformance<SerauqsCommand, SerauqsMark>;
-export type SerauqsScripts = GameTestSuite;
+export type SerauqsScripts = AlgolGameTestSuite<SerauqsCommand, SerauqsPosition>;
 export type SerauqsSetup = Setup<SerauqsPosition, SerauqsUnit>;
 
 export type SerauqsDefinition = FullDef<SerauqsAiArtifactLayer, SerauqsAiAspect, SerauqsAiBrain, SerauqsAiGenerator, SerauqsAiGrid, SerauqsAiTerrain, SerauqsAiTerrainLayer, SerauqsArtifactLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsBoardHeight, SerauqsBoardWidth, SerauqsCommand, SerauqsGenerator, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsPhase, SerauqsPosition, SerauqsTerrain, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;

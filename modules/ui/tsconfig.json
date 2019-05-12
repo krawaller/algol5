@@ -8,6 +8,8 @@
     "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "rootDir": "src",
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,

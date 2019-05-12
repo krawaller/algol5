@@ -18,7 +18,7 @@ import { Setup } from "./setup";
 import { Instructions } from "./instructions";
 import { AlgolMeta } from "./meta";
 import { Flow } from "./flow";
-import { GameTestSuite } from "./scripts";
+import { AlgolGameTestSuite } from "./scripts";
 import { AlgolPerformance } from "./performance";
 import { AlgolAnimCollection } from "./anim";
 
@@ -145,7 +145,7 @@ export type FullDef<
     TurnPos,
     TurnVar
   >;
-  scripts: GameTestSuite;
+  scripts: AlgolGameTestSuite<Command, Position>;
   performance: AlgolPerformance<Command, Mark>;
 };
 

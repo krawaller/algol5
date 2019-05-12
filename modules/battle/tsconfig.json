@@ -4,6 +4,7 @@
     "sourceMap": true,
     "allowJs": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "module": "commonjs",
     "lib": ["es2018", "es5"],
     "types": ["node", "jest", "fs-extra"]

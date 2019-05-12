@@ -1,8 +1,8 @@
 import {
   FullDefAnon,
-  isAlgolEffectForIdIn,
-  AlgolEffectAnon,
-  isAlgolEffectForPosIn,
+  isAlgolStatementForIdIn,
+  AlgolStatementAnon,
+  isAlgolStatementForPosIn,
   isAlgolLogicalIf
 } from "../../../types";
 import * as isEqual from "lodash.isequal";
@@ -18,13 +18,13 @@ function validatePart(part: any, path = [], anc = []): Problem[] {
   const problems: Problem[] = [];
   if (
     isEqual(part, ["loopid"]) &&
-    !anc.find(p => isAlgolEffectForIdIn(p as AlgolEffectAnon))
+    !anc.find(p => isAlgolStatementForIdIn(p as AlgolStatementAnon<any>))
   ) {
     problems.push({ path, error: `Don't use loopid outside foridin!` });
   }
   if (
     isEqual(part, ["looppos"]) &&
-    !anc.find(p => isAlgolEffectForPosIn(p as AlgolEffectAnon))
+    !anc.find(p => isAlgolStatementForPosIn(p as AlgolStatementAnon<any>))
   ) {
     problems.push({ path, error: `Don't use looppos outside forposin!` });
   }

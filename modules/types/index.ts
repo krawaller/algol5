@@ -124,6 +124,7 @@ export function typeSignature(type, gameId) {
     AlgolBoard: ["BoardHeight", "BoardWidth", "Grid", "Position", "Terrain"],
     AlgolMeta: ["Command", "Mark"],
     AlgolPerformance: ["Command", "Mark"],
+    AlgolGameTestSuite: ["Command", "Position"],
     Setup: ["Position", "Unit"],
     Generators: [
       "ArtifactLayer",

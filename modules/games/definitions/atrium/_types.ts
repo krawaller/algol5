@@ -1,4 +1,4 @@
-import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, GameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
 export type AtriumBoardHeight = 5;
 export type AtriumBoardWidth = 5;
@@ -29,7 +29,7 @@ export type AtriumGraphics = Graphics<AtriumTerrain, AtriumUnit>;
 export type AtriumInstructions = Instructions<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;
 export type AtriumMeta = AlgolMeta<AtriumCommand, AtriumMark>;
 export type AtriumPerformance = AlgolPerformance<AtriumCommand, AtriumMark>;
-export type AtriumScripts = GameTestSuite;
+export type AtriumScripts = AlgolGameTestSuite<AtriumCommand, AtriumPosition>;
 export type AtriumSetup = Setup<AtriumPosition, AtriumUnit>;
 
 export type AtriumDefinition = FullDef<AtriumAiArtifactLayer, AtriumAiAspect, AtriumAiBrain, AtriumAiGenerator, AtriumAiGrid, AtriumAiTerrain, AtriumAiTerrainLayer, AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumBoardHeight, AtriumBoardWidth, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumPhase, AtriumPosition, AtriumTerrain, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;

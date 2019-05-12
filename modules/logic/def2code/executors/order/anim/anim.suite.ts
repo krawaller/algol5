@@ -7,15 +7,20 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
   func: executeOrder,
   defs: [
     {
-      def: emptyFullDef,
+      def: {
+        ...emptyFullDef,
+        graphics: {
+          ...emptyFullDef.graphics,
+          icons: { gnurps: "pawn" }
+        }
+      },
       player: 1,
       action: "mycmnd",
       contexts: [
         {
           context: {
             MARKS: { mark1: "a1", mark2: "b2" },
-            anim: { enterFrom: {}, exitTo: {}, ghosts: [] },
-            iconMapping: { gnurps: "pawn" }
+            anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
           },
           tests: [
             {

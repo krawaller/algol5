@@ -74,6 +74,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                   pre += `const groupLayers = ${JSON.stringify(
                     groupLayersForPlayer(def, player)
                   )}; `;
+                  pre += `const iconMapping = gameDef.graphics.icons; `;
                 }
 
                 pre += envelope || "";

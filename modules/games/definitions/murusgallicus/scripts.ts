@@ -1,4 +1,4 @@
-import { MurusgallicusScripts } from './_types';
+import { MurusgallicusScripts } from "./_types";
 
 const murusgallicusScripts: MurusgallicusScripts = {
   basic: [
@@ -48,7 +48,7 @@ const murusgallicusScripts: MurusgallicusScripts = {
     },
     { commands: ["e6"], include: ["c4", "c6", "e5", "g4", "g6"] },
     {
-      commands: ["e5", "kill", "endTurn"],
+      commands: ["e5", "crush", "endTurn"],
       include: ["c2", "d3", "e1", "f1", "g1", "h1"]
     }
   ]

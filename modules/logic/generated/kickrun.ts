@@ -241,7 +241,7 @@ let game: Partial<AlgolGame> = {
             })
           : collapseContent({
               line: [
-                { text: ["move"] },
+                { text: "move" },
                 {
                   unit: [
                     iconMapping[
@@ -523,7 +523,7 @@ let game: Partial<AlgolGame> = {
             })
           : collapseContent({
               line: [
-                { text: ["move"] },
+                { text: "move" },
                 {
                   unit: [
                     iconMapping[

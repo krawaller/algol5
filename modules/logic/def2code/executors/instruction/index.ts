@@ -154,7 +154,7 @@ function executeInstructionInner(
   }
   if (isAlgolInstrText(instr)) {
     const { text } = instr;
-    return `{ text: ["${text}"] }`;
+    return `{ text: "${text}" }`;
   }
   if (isAlgolInstrPosList(instr)) {
     const { poslist } = instr;

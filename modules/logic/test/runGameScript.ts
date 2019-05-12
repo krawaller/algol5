@@ -50,7 +50,10 @@ export function runGameScript(
               func = step.LINKS.actions[action];
             }
             if (!func) {
-              throw new Error("Don't know what to do now! :/");
+              console.log("OH NO", step.LINKS);
+              throw new Error(
+                "Failed to find function! " + JSON.stringify({ action, func })
+              );
             } else {
               if (debug)
                 console.log("N", n, "ACTION", action, "FUNCTION", func);

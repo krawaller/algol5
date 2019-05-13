@@ -43,14 +43,29 @@ export async function makeDemo(gameId: GameId) {
         anim.exitTo = newAnim.exitTo;
       }
       if (Object.keys(anim).length) {
-        anims[patches.length] = anim;
+        anims[patches.length - 1] = anim;
       }
     }
     ui = newUI;
   }
   await fs.ensureDir(out);
-  const fileContent = `const ${gameId}Demo = {
-  initial: ${JSON.stringify(initialUI.board.units)},
+
+  const fixedInitialUnits = Object.keys(initialUI.board.units).reduce(
+    (mem, id) => ({
+      ...mem,
+      [id]: Object.keys(initialUI.board.units[id])
+        .filter(key => !["x", "y"].includes(key))
+        .reduce(
+          (m, key) => ({ ...m, [key]: initialUI.board.units[id][key] }),
+          {}
+        )
+    }),
+    {}
+  );
+
+  const fileContent = `import { AlgolDemo } from "../../../types";
+export const ${gameId}Demo: AlgolDemo = {
+  initial: ${JSON.stringify(fixedInitialUnits)},
   patches: ${JSON.stringify(patches)},
   anims: ${JSON.stringify(anims)}
 };

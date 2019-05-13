@@ -1,4 +1,4 @@
-export type ScriptLine<Command, Position> = {
+export type AlgolScriptLine<Command, Position> = {
   commands: (Command | Position | "endTurn" | "win")[];
   include?: (Command | Position | "endTurn" | "win")[];
   exclude?: (Command | Position | "endTurn" | "win")[];
@@ -6,8 +6,8 @@ export type ScriptLine<Command, Position> = {
 export type Test<Command, Position> = [
   string,
   string,
-  ScriptLine<Command, Position>[]
+  AlgolScriptLine<Command, Position>[]
 ];
 export type AlgolGameTestSuite<Command, Position> = {
-  [desc: string]: ScriptLine<Command, Position>[];
+  [desc: string]: AlgolScriptLine<Command, Position>[];
 };

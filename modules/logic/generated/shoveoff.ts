@@ -635,7 +635,7 @@ let game: Partial<AlgolGame> = {
       },
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
-      TURN: step.TURN + 1,
+      TURN: step.TURN,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };

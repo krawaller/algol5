@@ -69,7 +69,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.startTurn1 = step => {
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [
             { select: "Select" },
@@ -260,12 +260,12 @@ let game: Partial<AlgolGame> = {
         }
       }
     }
-    if (3 > TURN) {
-      LINKS.actions.promote = "promote1";
-    } else {
+    if (TURN > 1) {
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
         LINKS.actions[pos] = "selectmovetarget1";
       }
+    } else {
+      LINKS.actions.promote = "promote1";
     }
     return {
       LINKS,
@@ -280,7 +280,7 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [
             { select: "Select" },
@@ -390,12 +390,12 @@ let game: Partial<AlgolGame> = {
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
-      TURN: step.TURN + 1
+      TURN: step.TURN
     };
   };
   game.instruction.startTurn2 = step => {
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [
             { select: "Select" },
@@ -611,12 +611,12 @@ let game: Partial<AlgolGame> = {
         }
       }
     }
-    if (3 > TURN) {
-      LINKS.actions.promote = "promote2";
-    } else {
+    if (TURN > 1) {
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
         LINKS.actions[pos] = "selectmovetarget2";
       }
+    } else {
+      LINKS.actions.promote = "promote2";
     }
     return {
       LINKS,
@@ -631,7 +631,7 @@ let game: Partial<AlgolGame> = {
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [
             { select: "Select" },

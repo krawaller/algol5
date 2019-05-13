@@ -1,10 +1,10 @@
-import { GogolFlow } from './_types';
+import { GogolFlow } from "./_types";
 
 const gogolFlow: GogolFlow = {
   startTurn: {
     runGenerators: ["findforbiddenkingspots", "findforbiddensoldierspots"],
     link: {
-      ifelse: [{ morethan: [["turn"], 2] }, "selectunit", "selectkingdeploy"]
+      ifelse: [{ morethan: [["turn"], 1] }, "selectunit", "selectkingdeploy"]
     }
   },
   marks: {
@@ -65,7 +65,7 @@ const gogolFlow: GogolFlow = {
       show: { intersect: ["mykings", "opphomerow"] }
     },
     kingkill: {
-      condition: { and: [{ morethan: [["turn"], 2] }, { isempty: "oppkings" }] }
+      condition: { and: [{ morethan: [["turn"], 1] }, { isempty: "oppkings" }] }
     }
   }
 };

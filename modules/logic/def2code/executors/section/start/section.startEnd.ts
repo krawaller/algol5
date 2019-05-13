@@ -42,7 +42,13 @@ export function executeStartEnd(
     }
     ${usage.ARTIFACTS ? "ARTIFACTS, " : "ARTIFACTS: emptyArtifactLayers, "}
     ${usage.MARKS ? "MARKS," : "MARKS: {},"}
-    ${usage.TURN ? "TURN, " : "TURN: step.TURN + 1,"}
+    ${
+      usage.TURN
+        ? "TURN, "
+        : player === 1
+        ? "TURN: step.TURN + 1,"
+        : "TURN: step.TURN,"
+    }
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: step.NEXTSPAWNID, " : ""}
     ${
       referencesTurnVars(gameDef)

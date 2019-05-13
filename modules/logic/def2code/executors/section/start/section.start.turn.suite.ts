@@ -49,17 +49,29 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             ...defaultStartEndContext,
             step: {
               ...defaultStartEndContext.step,
-              TURN: 7
+              TURN: 17
             }
           },
           tests: [
             {
               expr: "startEnd",
+              player: 1,
               asserts: [
                 {
                   sample: "returnVal.TURN",
-                  res: 8,
+                  res: 18,
                   desc: "no local TURN use so bump it here at startEnd"
+                }
+              ]
+            },
+            {
+              expr: "startEnd",
+              player: 2,
+              asserts: [
+                {
+                  sample: "returnVal.TURN",
+                  res: 17,
+                  desc: "don't bump TURN since we are 2nd player"
                 }
               ]
             }
@@ -96,11 +108,24 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           tests: [
             {
               expr: "startInit",
+              player: 1,
               asserts: [
                 {
                   sample: "TURN",
                   res: 8,
                   desc: "Local turn use so bump it here"
+                }
+              ]
+            },
+            {
+              expr: "startInit",
+              player: 2,
+              asserts: [
+                {
+                  sample: "TURN",
+                  res: 7,
+                  desc:
+                    "Local turn use so imported but not bumped since 2nd player"
                 }
               ]
             }

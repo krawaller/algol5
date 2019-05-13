@@ -266,7 +266,7 @@ let game: Partial<AlgolGame> = {
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
-      TURN: step.TURN + 1
+      TURN: step.TURN
     };
   };
   game.instruction.startTurn2 = step => {

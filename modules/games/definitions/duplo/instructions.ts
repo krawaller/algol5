@@ -1,9 +1,9 @@
-import { DuploInstructions } from './_types';
+import { DuploInstructions } from "./_types";
 
 const duploInstructions: DuploInstructions = {
   startTurn: {
     ifelse: [
-      { morethan: [["turn"], 2] },
+      { morethan: [["turn"], 1] },
       { line: ["Select", "unit to expand from"] },
       {
         line: ["Select", "where to deploy the first of your two initial units"]

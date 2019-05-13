@@ -342,7 +342,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
-      TURN: step.TURN + 1,
+      TURN: step.TURN,
       BATTLEVARS: step.BATTLEVARS
     };
   };

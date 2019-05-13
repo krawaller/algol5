@@ -1,4 +1,4 @@
-import { SerauqsFlow } from './_types';
+import { SerauqsFlow } from "./_types";
 
 const serauqsFlow: SerauqsFlow = {
   endGame: {
@@ -34,7 +34,7 @@ const serauqsFlow: SerauqsFlow = {
       from: "myunits",
       runGenerator: "findmovetargets",
       link: {
-        ifelse: [{ morethan: [3, ["turn"]] }, "promote", "selectmovetarget"]
+        ifelse: [{ morethan: [["turn"], 1] }, "selectmovetarget", "promote"]
       }
     },
     selectmovetarget: { from: "movetargets", link: "move" }

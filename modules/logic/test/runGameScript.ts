@@ -1,5 +1,5 @@
 import {
-  GameTestSuite,
+  AlgolGameTestSuite,
   AlgolGame,
   AlgolStep,
   AlgolStepLinks,
@@ -11,7 +11,7 @@ import { getContentText } from "../../common";
 export function runGameScript(
   id: string,
   game: AlgolGame,
-  scripts: GameTestSuite,
+  scripts: AlgolGameTestSuite<string, string>,
   debug?: boolean
 ) {
   for (const scriptName in scripts) {

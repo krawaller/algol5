@@ -72,7 +72,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
   game.instruction.startTurn1 = step => {
     let UNITLAYERS = step.UNITLAYERS;
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [
             { select: "Select" },
@@ -352,13 +352,13 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
-      TURN: step.TURN + 1
+      TURN: step.TURN
     };
   };
   game.instruction.startTurn2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [
             { select: "Select" },

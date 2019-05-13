@@ -85,10 +85,14 @@ let UNITLAYERS = {
     ret += `let TURNVARS = {}; `;
   }
 
-  // We create local bumped turnvar here only if used inside startTurn,
+  // We create local turnvar here only if used inside startTurn (and bump if plr 1),
   // otherwise we'll bump it in startEnd
   if (usage.TURN) {
-    ret += `let TURN = step.TURN + 1; `;
+    if (player === 2) {
+      ret += `let TURN = step.TURN; `;
+    } else {
+      ret += `let TURN = step.TURN + 1; `;
+    }
   }
 
   return ret;

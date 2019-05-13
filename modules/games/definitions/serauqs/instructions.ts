@@ -1,16 +1,16 @@
-import { SerauqsInstructions } from './_types';
+import { SerauqsInstructions } from "./_types";
 
 const serauqsInstructions: SerauqsInstructions = {
   startTurn: {
     ifelse: [
-      { morethan: [["turn"], 2] },
+      { morethan: [["turn"], 1] },
       { line: ["Select", "which", "soldiers", "or", "wild", "to move"] },
       { line: ["Select", "which", "soldiers", "to promote to", "wild"] }
     ]
   },
   selectunit: {
     ifelse: [
-      { morethan: [["turn"], 2] },
+      { morethan: [["turn"], 1] },
       {
         line: [
           "Select",

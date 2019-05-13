@@ -1,9 +1,9 @@
-import { KriegInstructions } from './_types';
+import { KriegInstructions } from "./_types";
 
 const kriegInstructions: KriegInstructions = {
   startTurn: {
     ifelse: [
-      { morethan: [["turn"], 2] },
+      { morethan: [["turn"], 1] },
       {
         line: [
           "Select",

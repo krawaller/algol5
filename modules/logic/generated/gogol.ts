@@ -93,7 +93,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         }
       }
     }
-    if (TURN > 2) {
+    if (TURN > 1) {
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.actions[pos] = "selectunit1";
       }
@@ -121,7 +121,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
   };
   game.instruction.startTurn1 = step => {
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [
             { select: "Select" },
@@ -195,7 +195,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
@@ -268,7 +268,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
@@ -353,7 +353,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
@@ -704,7 +704,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-    let TURN = step.TURN + 1;
+    let TURN = step.TURN;
     for (let STARTPOS in Object.entries(
       Object.keys(TERRAIN.edges)
         .concat(Object.keys(UNITLAYERS.mysoldiers))
@@ -733,7 +733,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
         }
       }
     }
-    if (TURN > 2) {
+    if (TURN > 1) {
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.actions[pos] = "selectunit2";
       }
@@ -761,7 +761,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
   };
   game.instruction.startTurn2 = step => {
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [
             { select: "Select" },
@@ -863,7 +863,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
@@ -936,7 +936,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";
@@ -1021,7 +1021,7 @@ let game: Partial<AlgolGame> = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 2 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "kingkill";

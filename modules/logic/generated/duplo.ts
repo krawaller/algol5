@@ -48,7 +48,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       actions: {}
     };
     let TURN = step.TURN + 1;
-    if (TURN > 2) {
+    if (TURN > 1) {
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.actions[pos] = "selectunit1";
       }
@@ -73,7 +73,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
   };
   game.instruction.startTurn1 = step => {
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [{ select: "Select" }, { text: "unit to expand from" }]
         })
@@ -462,8 +462,8 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
     let LINKS: AlgolStepLinks = {
       actions: {}
     };
-    let TURN = step.TURN + 1;
-    if (TURN > 2) {
+    let TURN = step.TURN;
+    if (TURN > 1) {
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
         LINKS.actions[pos] = "selectunit2";
       }
@@ -488,7 +488,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
   };
   game.instruction.startTurn2 = step => {
     let TURN = step.TURN;
-    return TURN > 2
+    return TURN > 1
       ? collapseContent({
           line: [{ select: "Select" }, { text: "unit to expand from" }]
         })

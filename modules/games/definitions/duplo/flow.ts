@@ -1,4 +1,4 @@
-import { DuploFlow } from './_types';
+import { DuploFlow } from "./_types";
 
 const duploFlow: DuploFlow = {
   canalwaysend: { deploy: true },
@@ -22,7 +22,7 @@ const duploFlow: DuploFlow = {
   },
   startTurn: {
     link: {
-      ifelse: [{ morethan: [["turn"], 2] }, "selectunit", "selectdeploy"]
+      ifelse: [{ morethan: [["turn"], 1] }, "selectunit", "selectdeploy"]
     }
   },
   marks: {

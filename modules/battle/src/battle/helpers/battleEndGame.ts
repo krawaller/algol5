@@ -9,7 +9,8 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
   }[currentStep.LINKS.endGame] as 0 | 1 | 2;
   const finalBoard: AlgolBoardState = {
     marks: currentStep.LINKS.endMarks,
-    units: currentStep.UNITDATA
+    units: currentStep.UNITDATA,
+    anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
   };
   return {
     ...battle,

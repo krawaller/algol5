@@ -30,7 +30,8 @@ export function battleMark(
       currentStepId: newStepId,
       board: {
         marks: oldState.board.marks.concat(pos),
-        units: oldState.board.units
+        units: oldState.board.units,
+        anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
       },
       markStamps: {
         ...oldState.markStamps,

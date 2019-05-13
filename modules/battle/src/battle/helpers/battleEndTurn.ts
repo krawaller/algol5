@@ -26,7 +26,8 @@ export function battleEndTurn(
       undo: null,
       board: {
         marks: [],
-        units: nextTurn.steps.root.UNITDATA
+        units: nextTurn.steps.root.UNITDATA,
+        anim: nextTurn.steps.root.anim
       }
     }
   };

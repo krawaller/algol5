@@ -12,9 +12,7 @@ const gameId = process.argv[2];
     await fs.writeFile(
       path.join(__dirname, "../dist/svgDataURIs.ts"),
       `import {GameId} from "../../games/dist/list";\n` +
-        list
-          .map(id => `import * as ${id} from './svgDataURIs/${id}.json'\n`)
-          .join("") +
+        list.map(id => `import ${id} from './svgDataURIs/${id}'\n`).join("") +
         `const data: { [key in GameId]: { height: number, width: number, dataURI: string } } = { ${list.join(
           ", "
         )} };\nexport default data;\n`

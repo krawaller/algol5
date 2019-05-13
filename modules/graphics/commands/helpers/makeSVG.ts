@@ -116,13 +116,14 @@ ${ret}
   await fs.writeFile(path.join(boardOut, gameId + ".svg"), ret);
   await fs.ensureDir(jsonOut);
   await fs.writeFile(
-    path.join(jsonOut, gameId + ".json"),
-    JSON.stringify({
-      height,
-      width,
-      icons: def.graphics.icons,
-      dataURI: svgToMiniDataURI(ret)
-    })
+    path.join(jsonOut, gameId + ".ts"),
+    "export default " +
+      JSON.stringify({
+        height,
+        width,
+        icons: def.graphics.icons,
+        dataURI: svgToMiniDataURI(ret)
+      })
   );
   console.log("Generated SVG board and JSON for", gameId);
 }

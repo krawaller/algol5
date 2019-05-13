@@ -30,12 +30,14 @@ export function battleCommand(
           : command,
         board: {
           marks: oldState.board.marks,
-          units: newStep.UNITDATA
+          units: newStep.UNITDATA,
+          anim: oldStep.anim
         }
       }),
       board: {
         marks: [],
-        units: newStep.UNITDATA
+        units: newStep.UNITDATA,
+        anim: newStep.anim
       },
       markStamps: {}
     }

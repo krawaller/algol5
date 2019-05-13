@@ -42,13 +42,13 @@ export function getBattleUI(
           }
         }),
         {}
-      )
+      ),
+      anim: currentStep.anim
     },
     endTurn: !!currentStep.LINKS.endTurn,
     potentialMarks,
     commands,
     undo: battle.state.undo && battle.state.undo.command,
-    instruction: getBattleInstruction(game, battle),
-    anim: currentStep.anim || { enterFrom: {}, exitTo: {}, ghosts: [] }
+    instruction: getBattleInstruction(game, battle)
   };
 }

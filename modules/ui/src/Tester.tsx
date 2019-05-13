@@ -14,7 +14,11 @@ type TesterState = {
 };
 
 const emptyBattleUI: AlgolBattleUI = {
-  board: { units: {}, marks: [] },
+  board: {
+    units: {},
+    marks: [],
+    anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
+  },
   gameId: "anon",
   endTurn: false,
   undo: null,
@@ -22,8 +26,7 @@ const emptyBattleUI: AlgolBattleUI = {
   commands: [],
   potentialMarks: [],
   instruction: { line: [] },
-  turnNumber: 0,
-  anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
+  turnNumber: 0
 };
 
 export class Tester extends Component<TesterProps, TesterState> {
@@ -53,7 +56,7 @@ export class Tester extends Component<TesterProps, TesterState> {
           units={ui.board.units}
           marks={ui.board.marks}
           potentialMarks={ui.potentialMarks}
-          anim={ui.anim}
+          anim={ui.board.anim}
         />
         <Content content={ui.instruction} callback={this.handleAct} />
         {ui.undo && (

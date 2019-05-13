@@ -1,9 +1,11 @@
-import React, { useLayoutEffect, useState, Component } from "react";
+import React, { Component } from "react";
 import { AlgolGameAPI, AlgolBattleUI } from "../../types";
 import { GameId } from "../../games/dist/list";
 
 import { Content } from "./Content";
 import { Board } from "./Board";
+
+import dataURIs from "../../graphics/dist/svgDataURIs";
 
 type TesterProps = {
   api: AlgolGameAPI;
@@ -52,7 +54,7 @@ export class Tester extends Component<TesterProps, TesterState> {
       <React.Fragment>
         <Board
           callback={this.handleAct}
-          gameId={ui.gameId as GameId}
+          board={dataURIs[ui.gameId]}
           units={ui.board.units}
           marks={ui.board.marks}
           potentialMarks={ui.potentialMarks}

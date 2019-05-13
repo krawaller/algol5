@@ -5,6 +5,7 @@ import { select } from "@storybook/addon-knobs";
 import { Board } from ".";
 import { GameId, list } from "../../../games/dist/list";
 import { AlgolUnitState } from "../../../types";
+import dataURIs from "../../../graphics/dist/svgDataURIs";
 
 storiesOf("Board", module)
   .add("Game board gallery", () => {
@@ -13,7 +14,7 @@ storiesOf("Board", module)
       <div>
         <p>Board for {gameId}:</p>
         <Board
-          gameId={gameId}
+          board={dataURIs[gameId]}
           marks={[]}
           potentialMarks={[]}
           units={{}}
@@ -44,7 +45,7 @@ storiesOf("Board", module)
 
     return (
       <Board
-        gameId="murusgallicus"
+        board={dataURIs.murusgallicus}
         marks={marks}
         potentialMarks={potentialMarks}
         units={units}

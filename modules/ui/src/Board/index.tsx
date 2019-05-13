@@ -1,18 +1,17 @@
 import * as React from "react";
-import { GameId } from "../../../games/dist/list";
+
 import {
   AlgolUnitState,
   AlgolPosition,
   AlgolAnimCompiled
 } from "../../../types";
 
-import dataURIs from "../../../graphics/dist/svgDataURIs";
 import { BoardMarks } from "./BoardMarks";
 import { BoardUnits } from "./BoardUnits";
 import { BoardGhosts } from "./BoardGhosts";
 
 type BoardProps = {
-  gameId: GameId;
+  board: { height: number; width: number; dataURI: string };
   units: { [id: string]: AlgolUnitState };
   marks: AlgolPosition[];
   potentialMarks: AlgolPosition[];
@@ -21,14 +20,14 @@ type BoardProps = {
 };
 
 export const Board: React.FunctionComponent<BoardProps> = ({
-  gameId,
+  board,
   marks,
   potentialMarks,
   units,
   callback,
   anim = { enterFrom: {}, exitTo: {}, ghosts: [] }
 }) => {
-  const { dataURI, height, width } = dataURIs[gameId];
+  const { dataURI, height, width } = board;
   return (
     <div
       style={{

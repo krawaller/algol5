@@ -1,13 +1,10 @@
 {
   "scripts": {
+    "robot": "npm run makeSVG",
     "clean": "rm -rf dist; mkdir dist;",
-    "copypieces": "cp -r pieces-svg dist/pieces",
-    "build": "npm run clean && npm run copypieces && ts-node makeboards",
     "makeSVG": "ts-node ./commands/makeSVG"
   },
-  "dependencies": {
-    "canvas": "^2.4.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/fs-extra": "^5.0.5",
     "@types/node": "^10.12.18",

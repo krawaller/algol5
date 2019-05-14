@@ -8,8 +8,7 @@
     "typescript": "^3.2.4"
   },
   "scripts": {
-    "test": "jest",
-    "testOLD": "ts-node node_modules/tape/bin/tape **/*.spec.ts | node_modules/.bin/tap-spec"
+    "test": "jest"
   },
   "dependencies": {
     "lodash.isequal": "^4.5.0"

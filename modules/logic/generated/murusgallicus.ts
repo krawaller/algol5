@@ -191,9 +191,11 @@ let game: Partial<AlgolGame> = {
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.crush1 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    anim.ghosts.push([MARKS.selecttower, MARKS.selectcrush, "pawn", 1]);
     {
       let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
       if (unitid) {
@@ -255,7 +257,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.crush1 = () => defaultInstruction(1);
@@ -716,9 +719,11 @@ let game: Partial<AlgolGame> = {
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.crush2 = step => {
     let LINKS: AlgolStepLinks = { actions: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    anim.ghosts.push([MARKS.selecttower, MARKS.selectcrush, "pawn", 2]);
     {
       let unitid = (UNITLAYERS.units[MARKS.selecttower] || {}).id;
       if (unitid) {
@@ -780,7 +785,8 @@ let game: Partial<AlgolGame> = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.crush2 = () => defaultInstruction(2);

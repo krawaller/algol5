@@ -9,7 +9,8 @@ const murusgallicusAnim: MurusgallicusAnim = {
         { ghost: ["selecttower", ["looppos"], "walls", ["player"]] }
       ]
     }
-  ]
+  ],
+  crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }]
 };
 
 export default murusgallicusAnim;

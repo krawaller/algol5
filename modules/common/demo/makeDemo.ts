@@ -10,17 +10,24 @@ export function makeDemo(
   API: AlgolGameAPI,
   script: AlgolScriptLine<string, string>[]
 ): AlgolDemo {
-  const commands = script.reduce((mem, line) => mem.concat(line.commands), []);
-
+  const commands = script.reduce(
+    (mem, line) => mem.concat(line.commands),
+    [] as string[]
+  );
   const { initialUI, performAction } = API.newBattle();
   let ui = initialUI;
-  let patches = [];
+  let patches: AlgolDemo["patches"] = [];
   const anims = {};
   while (commands.length) {
-    const action = commands.shift();
+    const action = (commands.shift() as unknown) as string;
     const newUI = performAction(action === "win" ? "endTurn" : action);
-    if (action !== "endTurn" && action !== "win" && action.length > 2) {
-      patches.push(jdp.diff(ui.board.units, newUI.board.units));
+
+    const diff = jdp.diff(
+      ui.board.units,
+      newUI.board.units
+    ) as AlgolDemo["patches"];
+    if (diff) {
+      patches.push(diff);
       const newAnim = newUI.board.anim || {
           enterFrom: {},
           exitTo: {},

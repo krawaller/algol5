@@ -15,7 +15,7 @@ const gameId = <GameId>process.argv[2];
       `${names
         .map(id => `import { ${id}Demo } from './demos/${id}';\n`)
         .join("")}
-export default { ${names.map(n => `${n}: ${n}Demo`).join(", ")} };`
+  export default { ${names.map(n => `${n}: ${n}Demo`).join(", ")} };`
     );
   } else if (names.indexOf(gameId) === -1) {
     console.log(`Game "${gameId}" doesn't exists!`);

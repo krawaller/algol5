@@ -6,6 +6,7 @@ export * from "./connections";
 export * from "./entities";
 export * from "./utils";
 export * from "./units";
+export * from "./demo";
 
 export const truthy = "TRUTHY";
 export const falsy = "FALSY";

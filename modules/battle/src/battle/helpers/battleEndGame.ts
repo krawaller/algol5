@@ -6,9 +6,9 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
     win: battle.player,
     lose: battle.player === 1 ? 2 : 1,
     draw: 0
-  }[currentStep.LINKS.endGame] as 0 | 1 | 2;
+  }[currentStep.LINKS.endGame as "win" | "lose" | "draw"] as 0 | 1 | 2;
   const finalBoard: AlgolBoardState = {
-    marks: currentStep.LINKS.endMarks,
+    marks: currentStep.LINKS.endMarks || [],
     units: currentStep.UNITDATA,
     anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
   };

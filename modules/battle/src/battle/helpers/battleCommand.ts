@@ -1,4 +1,6 @@
-import { AlgolBattle, AlgolGame } from "../../../../types";
+import { AlgolBattle, AlgolGame, AlgolAnimCompiled } from "../../../../types";
+
+const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
 
 export function battleCommand(
   game: AlgolGame,
@@ -31,13 +33,13 @@ export function battleCommand(
         board: {
           marks: oldState.board.marks,
           units: newStep.UNITDATA,
-          anim: oldStep.anim
+          anim: oldStep.anim || emptyAnim
         }
       }),
       board: {
         marks: [],
         units: newStep.UNITDATA,
-        anim: newStep.anim
+        anim: newStep.anim || emptyAnim
       },
       markStamps: {}
     }

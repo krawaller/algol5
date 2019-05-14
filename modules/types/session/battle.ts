@@ -11,13 +11,15 @@ export type AlgolBattle = {
   winner?: 0 | 1 | 2;
 };
 
+export type AlgolUndo = {
+  state: AlgolBattleState;
+  command: string;
+};
+
 type AlgolBattleState = {
   currentStepId: string;
   entries: AlgolHistoryMove[];
-  undo: null | {
-    state: AlgolBattleState;
-    command: string;
-  };
+  undo: null | AlgolUndo;
   board: AlgolBoardState;
   markStamps: {
     [pos: string]: AlgolBattleState;

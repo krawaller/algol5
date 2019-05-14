@@ -1,6 +1,8 @@
-import { AlgolGame, AlgolBattle } from "../../../../types";
+import { AlgolGame, AlgolBattle, AlgolAnimCompiled } from "../../../../types";
 import { endTurn } from "../turn";
 import { battleEndGame } from "./battleEndGame";
+
+const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
 
 export function battleEndTurn(
   game: AlgolGame,
@@ -27,7 +29,7 @@ export function battleEndTurn(
       board: {
         marks: [],
         units: nextTurn.steps.root.UNITDATA,
-        anim: nextTurn.steps.root.anim
+        anim: nextTurn.steps.root.anim || emptyAnim
       }
     }
   };

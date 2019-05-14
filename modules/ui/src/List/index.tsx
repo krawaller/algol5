@@ -54,7 +54,7 @@ export const List: React.FunctionComponent<ListProps> = ({ callback }) => {
   return (
     <ul style={styles.ul}>
       {list.map(gameId => (
-        <li style={styles.li}>
+        <li style={styles.li} key={gameId}>
           <div
             style={{
               ...styles.boardBox,

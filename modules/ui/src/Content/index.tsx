@@ -9,9 +9,9 @@ import {
   isAlgolContentUnit,
   isAlgolContentSelect,
   isAlgolContentPlayer
-} from "../../types";
+} from "../../../types";
 
-import { Icon } from "./Icon";
+import { Icon } from "../Icon";
 
 type ContentProps = {
   /** The content to show */
@@ -51,7 +51,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
     );
   }
   if (isAlgolContentText(content)) {
-    return content.text;
+    return <span>content.text</span>;
   }
   if (isAlgolContentSelect(content)) {
     return <span className="selectInstruction">{content.select}</span>;

@@ -2,8 +2,8 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { select } from "@storybook/addon-knobs";
 
-import { Icon } from "./Icon";
-import { AlgolIcon, icons } from "../../types";
+import { Icon } from ".";
+import { AlgolIcon, icons } from "../../../types";
 
 storiesOf("Icon", module).add("basic usage", () => (
   <div style={{ width: "100px", height: "100px" }}>

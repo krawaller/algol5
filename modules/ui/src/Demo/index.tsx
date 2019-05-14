@@ -4,11 +4,11 @@ import {
   AlgolDemo,
   AlgolAnimCompiled,
   AlgolArmy
-} from "../../types";
+} from "../../../types";
 
-import { Board } from "./Board";
+import { Board } from "../Board";
 
-import { playDemo } from "../../common";
+import { playDemo } from "../../../common";
 
 type DemoProps = {
   demo: AlgolDemo;
@@ -22,13 +22,13 @@ type DemoState = {
 };
 
 export class Demo extends React.Component<DemoProps, DemoState> {
-  stop: AlgolDemoControl["stop"];
+  stopDemo: AlgolDemoControl["stop"];
   constructor(props: DemoProps) {
     super(props);
     const { stop, initial } = playDemo(props.demo, cur => {
       this.setState({ units: cur.army, anim: cur.anim });
     });
-    this.stop = stop;
+    this.stopDemo = stop;
     this.state = {
       marks: [],
       potentialMarks: [],
@@ -37,7 +37,7 @@ export class Demo extends React.Component<DemoProps, DemoState> {
     };
   }
   componentWillUnmount() {
-    this.stop();
+    this.stopDemo();
   }
   handleBoardClick = () => {};
   render() {

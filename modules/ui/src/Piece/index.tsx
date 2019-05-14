@@ -1,7 +1,7 @@
 import React, { CSSProperties, FunctionComponent } from "react";
-import { Icon } from "./Icon";
-import { AlgolIcon } from "../../types";
-import { positionStyles } from "./helpers";
+import { Icon } from "../Icon";
+import { AlgolIcon } from "../../../types";
+import { positionStyles } from "../_helpers";
 import { TransitionStatus } from "react-transition-group/Transition";
 
 type PieceProps = {

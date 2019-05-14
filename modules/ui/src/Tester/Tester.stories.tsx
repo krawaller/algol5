@@ -2,10 +2,10 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { select } from "@storybook/addon-knobs";
 
-import { Tester } from "./Tester";
-import { GameId, list } from "../../games/dist/list";
+import { Tester } from ".";
+import { GameId, list } from "../../../games/dist/list";
 
-import APIs from "../../battle/dist/allAPIs";
+import APIs from "../../../battle/dist/allAPIs";
 
 storiesOf("Tester", module).add("Test games", () => {
   const gameId = select("Game", list, list[0]) as GameId;
@@ -16,4 +16,6 @@ storiesOf("Tester", module).add("Test games", () => {
   );
 });
 
-const Wrapper = props => <div>{props.children}</div>;
+const Wrapper: React.FunctionComponent<{}> = props => (
+  <div>{props.children}</div>
+);

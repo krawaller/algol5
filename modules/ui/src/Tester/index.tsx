@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { AlgolGameAPI, AlgolBattleUI } from "../../types";
-import { GameId } from "../../games/dist/list";
+import { AlgolGameAPI, AlgolBattleUI } from "../../../types";
+import { GameId } from "../../../games/dist/list";
 
-import { Content } from "./Content";
-import { Board } from "./Board";
+import { Content } from "../Content";
+import { Board } from "../Board";
 
-import dataURIs from "../../graphics/dist/svgDataURIs";
+import dataURIs from "../../../graphics/dist/svgDataURIs";
 
 type TesterProps = {
   api: AlgolGameAPI;

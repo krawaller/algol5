@@ -1,8 +1,8 @@
 import * as React from "react";
-import { AlgolIcon } from "../../types";
+import { AlgolIcon } from "../../../types";
 import classnames from "classnames";
 
-import { glitz } from "./helpers";
+import { glitz } from "../_helpers";
 
 const iconBasic = glitz.injectStyle({
   position: "relative",

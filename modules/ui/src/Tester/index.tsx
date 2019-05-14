@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { AlgolGameAPI, AlgolBattleUI } from "../../../types";
-import { GameId } from "../../../games/dist/list";
 
-import { Content } from "../Content";
 import { Board } from "../Board";
+import { BattleUI } from "../BattleUI";
 
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 
@@ -60,47 +59,8 @@ export class Tester extends Component<TesterProps, TesterState> {
           potentialMarks={ui.potentialMarks}
           anim={ui.board.anim}
         />
-        <Content content={ui.instruction} callback={this.handleAct} />
-        {ui.undo && (
-          <div>
-            <button onClick={() => this.handleAct("undo")}>
-              Undo {ui.undo}
-            </button>
-          </div>
-        )}
+        <BattleUI callback={this.handleAct} ui={ui} />
       </React.Fragment>
     );
   }
 }
-/*
-export const Tester: React.FunctionComponent<TesterProps> = ({ api }) => {
-  const [UI, setUI] = useState(emptyBattleUI);
-  let act: (str: string) => void = () => {
-    console.log("initial act :/");
-  };
-  useLayoutEffect(() => {
-    const { initialUI, performAction } = api.newBattle();
-    act = cmnd => {
-      console.log("CMND", cmnd);
-      const newUI = performAction(cmnd);
-      setUI(newUI);
-    };
-    setUI(initialUI);
-    console.log("LAYOUTEFFECT DONE");
-  }, [api]);
-  if (UI.gameId === "anon") return null;
-  console.log("OMG", UI);
-  return (
-    <React.Fragment>
-      <Board
-        callback={act}
-        gameId={UI.gameId as GameId}
-        units={UI.board.units}
-        marks={UI.board.marks}
-        potentialMarks={UI.potentialMarks}
-      />
-      <Content content={UI.instruction} callback={act} />
-    </React.Fragment>
-  );
-};
-*/

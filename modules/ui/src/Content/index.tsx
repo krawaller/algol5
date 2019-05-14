@@ -51,7 +51,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
     );
   }
   if (isAlgolContentText(content)) {
-    return <span>content.text</span>;
+    return <span>{content.text}</span>;
   }
   if (isAlgolContentSelect(content)) {
     return <span className="selectInstruction">{content.select}</span>;

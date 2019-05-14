@@ -14,31 +14,13 @@ type TesterState = {
   ui: AlgolBattleUI;
 };
 
-const emptyBattleUI: AlgolBattleUI = {
-  board: {
-    units: {},
-    marks: [],
-    anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
-  },
-  gameId: "anon",
-  endTurn: false,
-  undo: null,
-  player: 0,
-  commands: [],
-  potentialMarks: [],
-  instruction: { line: [] },
-  turnNumber: 0
-};
-
 export class Tester extends Component<TesterProps, TesterState> {
-  state = {
-    ui: emptyBattleUI
-  };
   act: (a: any) => AlgolBattleUI;
-  componentDidMount() {
+  constructor(props: TesterProps) {
+    super(props);
     const { initialUI, performAction } = this.props.api.newBattle();
     this.act = performAction;
-    this.setState({ ui: initialUI });
+    this.state = { ui: initialUI };
   }
   handleAct = (action: string) => {
     this.setState({

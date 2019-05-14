@@ -1,14 +1,12 @@
-import { TransetMeta } from './_types';
+import { TransetMeta } from "./_types";
 
 const transetMeta: TransetMeta = {
   id: "transet",
   name: "Transet",
-  about: {
-    links: ["http://sagme.blogspot.se/2013/05/transet.html"],
-    tags: ["infiltration", "differentunits"],
-    tagline:
-      "Catch your opponent off guard through swapping your units as you seek access to his base"
-  },
+  links: ["http://sagme.blogspot.se/2013/05/transet.html"],
+  tags: ["infiltration", "differentunits"],
+  tagline:
+    "Catch your opponent off guard through swapping your units as you seek access to her base",
   rules: {
     flow: [
       "line",

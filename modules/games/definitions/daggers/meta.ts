@@ -1,23 +1,21 @@
-import { DaggersMeta } from './_types';
+import { DaggersMeta } from "./_types";
 
 const daggersMeta: DaggersMeta = {
   id: "daggers",
   name: "Daggers",
-  about: {
-    tags: [
-      "differentunits",
-      "asymmetric",
-      "multiplegoals",
-      "infiltrate",
-      "killking",
-      "capture"
-    ],
-    tagline:
-      "Will the superior position at the top of the hill beat overwhelming numbers?",
-    links: {
-      "World of Abstract Games": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
-      "Board game geek": "https://boardgamegeek.com/boardgame/186029/daggers"
-    }
+  tags: [
+    "differentunits",
+    "asymmetric",
+    "multiplegoals",
+    "infiltrate",
+    "killking",
+    "capture"
+  ],
+  tagline:
+    "Will the superior position at the top of the hill beat overwhelming numbers?",
+  links: {
+    "World of Abstract Games": "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
+    "Board game geek": "https://boardgamegeek.com/boardgame/186029/daggers"
   },
   rules: {
     flow: ["line", "Players take turn to", "move", "a single unit"],

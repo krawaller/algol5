@@ -43,7 +43,7 @@ export async function makeDemo(gameId: GameId) {
         anim.exitTo = newAnim.exitTo;
       }
       if (Object.keys(anim).length) {
-        anims[patches.length - 1] = anim;
+        anims[patches.length] = anim;
       }
     }
     ui = newUI;

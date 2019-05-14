@@ -1,4 +1,4 @@
-import { AlgolUnitState, AlgolAnimCompiled } from "../";
+import { AlgolArmy, AlgolAnimCompiled } from "../";
 
 interface Delta {
   // from jsondiffpatch
@@ -7,7 +7,12 @@ interface Delta {
 }
 
 export type AlgolDemo = {
-  initial: { [unitId: string]: AlgolUnitState };
+  initial: AlgolArmy;
   patches: Delta[];
+  anims: { [patchNum: string]: Partial<AlgolAnimCompiled> };
+};
+
+export type AlgolHydratedDemo = {
+  positions: AlgolArmy[];
   anims: { [patchNum: string]: Partial<AlgolAnimCompiled> };
 };

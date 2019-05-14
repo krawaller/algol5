@@ -13,9 +13,7 @@ export type AlgolStep = {
   LINKS: AlgolStepLinks;
   ARTIFACTS: { [layername: string]: Layer };
   UNITLAYERS: { [layername: string]: Layer };
-  UNITDATA: {
-    [unitid: string]: AlgolUnitState;
-  };
+  UNITDATA: AlgolArmy;
   MARKS: { [funcname: string]: string };
   TURNVARS?: { [varname: string]: any };
   BATTLEVARS?: { [varname: string]: any };
@@ -25,6 +23,8 @@ export type AlgolStep = {
   canAlwaysEnd?: boolean;
   massiveTree?: boolean;
 };
+
+export type AlgolArmy = { [unitid: string]: AlgolUnitState };
 
 export type AlgolUnitState = {
   pos: string;

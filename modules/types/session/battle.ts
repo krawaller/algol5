@@ -1,4 +1,4 @@
-import { AlgolTurn, AlgolUnitState } from "../";
+import { AlgolTurn, AlgolArmy } from "../";
 import { AlgolAnimCompiled } from "../generated";
 
 export type AlgolBattle = {
@@ -36,9 +36,7 @@ type AlgolHistoryMove = {
 
 export type AlgolBoardState = {
   marks: AlgolPosition[];
-  units: {
-    [id: string]: AlgolUnitState;
-  };
+  units: AlgolArmy;
   anim: AlgolAnimCompiled;
 };
 

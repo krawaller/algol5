@@ -6,7 +6,7 @@ export type AlgolBattle = {
   turnNumber: number;
   player: 1 | 2;
   state: AlgolBattleState;
-  history: AlgolHistoryTurn[];
+  history: AlgolHistoryMove[];
   gameEndedBy?: string;
   winner?: 0 | 1 | 2;
 };
@@ -26,14 +26,11 @@ type AlgolBattleState = {
   };
 };
 
-type AlgolHistoryTurn = {
-  player: 0 | 1 | 2;
-  moves: AlgolHistoryMove[];
-};
-
 type AlgolHistoryMove = {
-  board: AlgolBoardState;
+  player: 0 | 1 | 2;
+  turn: number;
   description: string;
+  board: AlgolBoardState;
 };
 
 export type AlgolBoardState = {

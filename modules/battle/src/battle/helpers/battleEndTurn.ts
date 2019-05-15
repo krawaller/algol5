@@ -17,10 +17,7 @@ export function battleEndTurn(
     turnNumber: nextTurn.steps.root.TURN,
     player: battle.player === 1 ? 2 : 1,
     turn: nextTurn,
-    history: battle.history.concat({
-      player: battle.player,
-      moves: battle.state.entries
-    }),
+    history: battle.history.concat(battle.state.entries),
     state: {
       currentStepId: "root",
       entries: [],

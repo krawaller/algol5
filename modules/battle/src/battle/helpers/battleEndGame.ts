@@ -16,22 +16,14 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
     ...battle,
     gameEndedBy: currentStep.LINKS.endedBy,
     winner,
-    history: battle.history
-      .concat({
-        player: battle.player,
-        moves: battle.state.entries
-      })
-      .concat({
-        player: 0,
-        moves: [
-          {
-            board: finalBoard,
-            description: `Ended by ${currentStep.LINKS.endedBy}, ${
-              winner ? `Player ${winner} wins` : "draw"
-            }`
-          }
-        ]
-      }),
+    history: battle.history.concat(battle.state.entries).concat({
+      turn: currentStep.TURN,
+      player: 0,
+      board: finalBoard,
+      description: `Ended by ${currentStep.LINKS.endedBy}, ${
+        winner ? `Player ${winner} wins` : "draw"
+      }`
+    }),
     state: {
       ...battle.state,
       undo: null,

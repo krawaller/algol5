@@ -10,6 +10,9 @@ export function makeGameAPI(game: AlgolGame): AlgolGameAPI {
         performAction(action) {
           battle = battleAction(game, battle, action);
           return getBattleUI(game, battle);
+        },
+        history() {
+          return battle.history;
         }
       };
     }

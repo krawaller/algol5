@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { AlgolBattleUI } from "../../../types";
 
-import { Content } from "../Content";
+import { BattleUIHeadline } from "./BattleUIHeadline";
+import { BattleUIControls } from "./BattleUIControls";
 
 type BattleUIProps = {
   ui: AlgolBattleUI;
@@ -13,11 +14,7 @@ export const BattleUI: FunctionComponent<BattleUIProps> = ({
   callback
 }) => (
   <React.Fragment>
-    <Content content={ui.instruction} callback={callback} />
-    {ui.undo && (
-      <div>
-        <button onClick={() => callback("undo")}>Undo {ui.undo}</button>
-      </div>
-    )}
+    <BattleUIHeadline ui={ui} callback={callback} />
+    <BattleUIControls ui={ui} callback={callback} />
   </React.Fragment>
 );

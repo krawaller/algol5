@@ -14,7 +14,7 @@ export function battleEndTurn(
 
   const nextTurn = endTurn(game, battle.turn, battle.state.currentStepId);
   return {
-    turnNumber: battle.turnNumber + 1,
+    turnNumber: nextTurn.steps.root.TURN,
     player: battle.player === 1 ? 2 : 1,
     turn: nextTurn,
     history: battle.history.concat({

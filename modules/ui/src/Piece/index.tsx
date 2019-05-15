@@ -1,8 +1,10 @@
-import React, { CSSProperties, FunctionComponent } from "react";
+import React, { FunctionComponent } from "react";
 import { Icon } from "../Icon";
 import { AlgolIcon } from "../../../types";
 import { positionStyles } from "../_helpers";
 import { TransitionStatus } from "react-transition-group/Transition";
+
+import { lifecycleStyles, pieceStyles, transitions } from "./Piece.styles";
 
 type PieceProps = {
   /** tells if we are being animated */
@@ -23,55 +25,6 @@ type PieceProps = {
   transition: TransitionStatus;
   /** Whether this position was the target of exitTo/ghost projectile */
   targetted?: boolean;
-};
-
-function lifecycleStyles(
-  status: TransitionStatus,
-  animating?: "from" | "to" | "ghost",
-  targetted?: boolean
-): CSSProperties {
-  if (status === "entering" && animating !== "from" && animating !== "ghost") {
-    return {
-      opacity: 0,
-      transform: "scale(0.1, 0.1)",
-      ...(targetted &&
-        {
-          //transitionDelay: "300ms"
-        })
-    };
-  }
-  if (status === "exiting") {
-    return {
-      opacity: 0,
-      ...(animating !== "to" &&
-        animating !== "ghost" && {
-          transform: "scale(2, 2)"
-        }),
-      ...(animating === "ghost" && {
-        transitionDelay: "150ms",
-        transitionDuration: "100ms"
-      }),
-      ...(targetted &&
-        {
-          //transitionDelay: "300ms"
-        })
-    };
-  }
-  return {};
-}
-
-function transitions(status: TransitionStatus) {
-  const transitions = ["left 0.3s ease", "bottom 0.3s ease"];
-  if (status !== "entering") {
-    transitions.push("opacity 0.4s ease");
-    transitions.push("transform 0.4s ease");
-  }
-  return transitions.join(", ");
-}
-
-const pieceStyles: CSSProperties = {
-  userSelect: "none",
-  pointerEvents: "none"
 };
 
 /**

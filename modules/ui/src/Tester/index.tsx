@@ -29,8 +29,6 @@ export class Tester extends Component<TesterProps, TesterState> {
   };
   render() {
     const { ui } = this.state;
-    if (ui.gameId === "anon") return null;
-    console.log(ui);
     return (
       <React.Fragment>
         <Board

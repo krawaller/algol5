@@ -16,12 +16,9 @@ export function newBattle(game: AlgolGame): AlgolBattle {
     history: [
       {
         player: 0,
-        moves: [
-          {
-            description: "start",
-            board: firstBoard
-          }
-        ]
+        turn: 0,
+        description: { line: [{ text: "Let the battle begin!" }] },
+        board: firstBoard
       }
     ],
     state: {

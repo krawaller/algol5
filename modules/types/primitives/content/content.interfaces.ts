@@ -31,3 +31,7 @@ export interface AlgolContentSelect {
 export interface AlgolContentPlayer {
   player: 1 | 2;
 }
+
+export interface AlgolContentBold {
+  bold: string;
+}

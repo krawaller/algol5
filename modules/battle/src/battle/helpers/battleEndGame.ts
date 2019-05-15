@@ -1,4 +1,8 @@
-import { AlgolBattle, AlgolBoardState } from "../../../../types";
+import {
+  AlgolBattle,
+  AlgolBoardState,
+  AlgolContentAnon
+} from "../../../../types";
 
 export function battleEndGame(battle: AlgolBattle): AlgolBattle {
   const currentStep = battle.turn.steps[battle.state.currentStepId];
@@ -12,6 +16,17 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
     units: currentStep.UNITDATA,
     anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
   };
+  const description: AlgolContentAnon = {
+    line: ([
+      { text: "Ended by" },
+      { bold: currentStep.LINKS.endedBy as string }
+    ] as AlgolContentAnon[]).concat(
+      winner
+        ? [{ text: ", " }, { player: winner as 1 | 2 }, { text: " wins!" }]
+        : [{ text: " in a draw!" }]
+    )
+  };
+
   return {
     ...battle,
     gameEndedBy: currentStep.LINKS.endedBy,
@@ -20,9 +35,7 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
       turn: currentStep.TURN,
       player: 0,
       board: finalBoard,
-      description: `Ended by ${currentStep.LINKS.endedBy}, ${
-        winner ? `Player ${winner} wins` : "draw"
-      }`
+      description
     }),
     state: {
       ...battle.state,

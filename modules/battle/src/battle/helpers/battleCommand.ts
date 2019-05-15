@@ -29,9 +29,17 @@ export function battleCommand(
       entries: oldState.entries.concat({
         player: battle.player,
         turn: newStep.TURN,
-        description: oldState.board.marks.length
-          ? `${command}(${oldState.board.marks.join(", ")})`
-          : command,
+        description: {
+          line: [
+            { player: battle.player },
+            { text: " played " },
+            {
+              bold: oldState.board.marks.length
+                ? `${command}(${oldState.board.marks.join(", ")})`
+                : command
+            }
+          ]
+        },
         board: {
           marks: oldState.board.marks,
           units: newStep.UNITDATA,

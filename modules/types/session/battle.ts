@@ -1,4 +1,4 @@
-import { AlgolTurn, AlgolArmy } from "../";
+import { AlgolTurn, AlgolArmy, AlgolContentAnon } from "../";
 import { AlgolAnimCompiled } from "../generated";
 
 export type AlgolBattle = {
@@ -29,7 +29,7 @@ type AlgolBattleState = {
 type AlgolHistoryMove = {
   player: 0 | 1 | 2;
   turn: number;
-  description: string;
+  description: AlgolContentAnon;
   board: AlgolBoardState;
 };
 

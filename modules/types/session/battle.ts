@@ -34,6 +34,7 @@ type AlgolHistoryMove = {
 };
 
 export type AlgolBoardState = {
+  potentialMarks: AlgolPosition[];
   marks: AlgolPosition[];
   units: AlgolArmy;
   anim: AlgolAnimCompiled;

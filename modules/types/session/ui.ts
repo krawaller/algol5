@@ -1,4 +1,4 @@
-import { AlgolBoardState, AlgolPosition, AlgolContentAnon } from "../";
+import { AlgolBoardState, AlgolContentAnon } from "../";
 
 export type AlgolBattleUI = {
   gameId: string;
@@ -6,7 +6,6 @@ export type AlgolBattleUI = {
   endTurn: boolean;
   undo: string | null;
   commands: string[];
-  potentialMarks: AlgolPosition[];
   instruction: AlgolContentAnon;
   turnNumber: number;
   player: 0 | 1 | 2;

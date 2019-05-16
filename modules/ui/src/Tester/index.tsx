@@ -36,7 +36,7 @@ export class Tester extends Component<TesterProps, TesterState> {
           board={dataURIs[ui.gameId]}
           units={ui.board.units}
           marks={ui.board.marks}
-          potentialMarks={ui.potentialMarks}
+          potentialMarks={ui.board.potentialMarks}
           anim={ui.board.anim}
         />
         <BattleUI callback={this.handleAct} ui={ui} />

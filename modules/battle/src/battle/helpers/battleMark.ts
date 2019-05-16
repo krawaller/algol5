@@ -1,4 +1,8 @@
-import { AlgolBattle, AlgolGame } from "../../../../types";
+import { AlgolBattle, AlgolGame, AlgolAnimCompiled } from "../../../../types";
+
+const identifyMark = /^[a-z][0-9]+$/;
+
+const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
 
 export function battleMark(
   game: AlgolGame,
@@ -31,7 +35,10 @@ export function battleMark(
       board: {
         marks: oldState.board.marks.concat(pos),
         units: oldState.board.units,
-        anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
+        anim: emptyAnim,
+        potentialMarks: Object.keys(steps[newStepId].LINKS.actions).filter(
+          action => action.match(identifyMark)
+        )
       },
       markStamps: {
         ...oldState.markStamps,

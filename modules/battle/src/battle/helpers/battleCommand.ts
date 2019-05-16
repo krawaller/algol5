@@ -2,6 +2,8 @@ import { AlgolBattle, AlgolGame, AlgolAnimCompiled } from "../../../../types";
 
 const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
 
+const identifyMark = /^[a-z][0-9]+$/;
+
 export function battleCommand(
   game: AlgolGame,
   battle: AlgolBattle,
@@ -43,13 +45,17 @@ export function battleCommand(
         board: {
           marks: oldState.board.marks,
           units: newStep.UNITDATA,
-          anim: oldStep.anim || emptyAnim
+          anim: oldStep.anim || emptyAnim,
+          potentialMarks: []
         }
       }),
       board: {
         marks: [],
         units: newStep.UNITDATA,
-        anim: newStep.anim || emptyAnim
+        anim: newStep.anim || emptyAnim,
+        potentialMarks: Object.keys(newStep.LINKS.actions).filter(action =>
+          action.match(identifyMark)
+        )
       },
       markStamps: {}
     }

@@ -1,7 +1,14 @@
 import { getBattleInstruction } from "./helpers/getBattleInstruction";
 
-import { AlgolBattleUI, AlgolGame, AlgolBattle } from "../../../types";
+import {
+  AlgolBattleUI,
+  AlgolGame,
+  AlgolBattle,
+  AlgolAnimCompiled
+} from "../../../types";
 import dataURIs from "../../../graphics/dist/svgDataURIs";
+
+const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
 
 const identifyMark = /^[a-z][0-9]+$/;
 
@@ -10,21 +17,9 @@ export function getBattleUI(
   battle: AlgolBattle
 ): AlgolBattleUI {
   const currentStep = battle.turn.steps[battle.state.currentStepId];
-  const { potentialMarks, commands } = Object.keys(
-    currentStep.LINKS.actions
-  ).reduce(
-    (mem, action) => {
-      const isMark = action.match(identifyMark);
-      return {
-        potentialMarks: isMark
-          ? mem.potentialMarks.concat(action)
-          : mem.potentialMarks,
-        commands: isMark ? mem.commands : mem.commands.concat(action)
-      };
-    },
-    { potentialMarks: [] as string[], commands: [] as string[] }
+  const commands = Object.keys(currentStep.LINKS.actions).filter(
+    action => !action.match(identifyMark)
   );
-
   return {
     player: battle.player,
     winner: battle.winner,
@@ -43,10 +38,9 @@ export function getBattleUI(
         }),
         {}
       ),
-      anim: currentStep.anim
+      anim: currentStep.anim || emptyAnim
     },
     endTurn: !!currentStep.LINKS.endTurn,
-    potentialMarks,
     commands,
     undo: battle.state.undo && battle.state.undo.command,
     instruction: getBattleInstruction(game, battle)

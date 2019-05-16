@@ -4,6 +4,8 @@ import { battleEndGame } from "./battleEndGame";
 
 const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
 
+const identifyMark = /^[a-z][0-9]+$/;
+
 export function battleEndTurn(
   game: AlgolGame,
   battle: AlgolBattle
@@ -26,7 +28,10 @@ export function battleEndTurn(
       board: {
         marks: [],
         units: nextTurn.steps.root.UNITDATA,
-        anim: nextTurn.steps.root.anim || emptyAnim
+        anim: nextTurn.steps.root.anim || emptyAnim,
+        potentialMarks: Object.keys(nextTurn.steps.root.LINKS.actions).filter(
+          action => action.match(identifyMark)
+        )
       }
     }
   };

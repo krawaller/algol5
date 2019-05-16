@@ -9,6 +9,6 @@ export function endTurn(game: AlgolGame, turn: AlgolTurn, fromStepId: string) {
   if (turn.nextTurns[fromStepId]) {
     return hydrateTurn(game, turn.nextTurns[fromStepId]);
   }
-  const newTurnStep = game.action[fromStep.LINKS.endTurn](fromStep);
+  const newTurnStep = game.action[fromStep.LINKS.endTurn as string](fromStep);
   return hydrateTurn(game, newTurnFromRootStep(newTurnStep));
 }

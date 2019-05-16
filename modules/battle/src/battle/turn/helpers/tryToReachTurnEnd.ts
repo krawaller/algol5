@@ -9,7 +9,7 @@ export function tryToReachTurnEnd(game: AlgolGame, turn: AlgolTurn): AlgolTurn {
   const turnSteps = turn.steps;
   const stepIdsToCheck = ["root"];
   while (!turn.canEnd && stepIdsToCheck.length) {
-    const stepId = stepIdsToCheck.shift();
+    const stepId = stepIdsToCheck.shift() as string;
     const step = turnSteps[stepId];
     const links = step.LINKS;
     if (links.endTurn || links.endGame || step.canAlwaysEnd) {
@@ -18,7 +18,7 @@ export function tryToReachTurnEnd(game: AlgolGame, turn: AlgolTurn): AlgolTurn {
       const actionLinks = links.actions;
       const actionsToCheck = Object.keys(actionLinks);
       while (!turn.canEnd && actionsToCheck.length) {
-        const action = actionsToCheck.shift();
+        const action = actionsToCheck.shift() as string;
         const func = actionLinks[action];
         const newStepId = stepId + "-" + action;
         if (!turnSteps[newStepId]) {

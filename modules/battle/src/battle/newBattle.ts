@@ -1,4 +1,13 @@
-import { AlgolBattle, AlgolGame, AlgolBoardState } from "../../../types";
+import {
+  AlgolBattle,
+  AlgolGame,
+  AlgolBoardState,
+  AlgolAnimCompiled
+} from "../../../types";
+
+const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
+
+const identifyMark = /^[a-z][0-9]+$/;
 
 import { firstTurn } from "./turn";
 
@@ -7,7 +16,10 @@ export function newBattle(game: AlgolGame): AlgolBattle {
   const firstBoard: AlgolBoardState = {
     marks: [],
     units: turn.steps.root.UNITDATA,
-    anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
+    anim: emptyAnim,
+    potentialMarks: Object.keys(turn.steps.root.LINKS.actions).filter(action =>
+      action.match(identifyMark)
+    )
   };
   return {
     turn,

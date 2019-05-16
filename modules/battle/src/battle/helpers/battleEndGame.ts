@@ -14,7 +14,8 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
   const finalBoard: AlgolBoardState = {
     marks: currentStep.LINKS.endMarks || [],
     units: currentStep.UNITDATA,
-    anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
+    anim: { enterFrom: {}, exitTo: {}, ghosts: [] },
+    potentialMarks: []
   };
   const description: AlgolContentAnon = {
     line: ([

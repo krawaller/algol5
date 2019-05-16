@@ -42,7 +42,7 @@ export function hydrateStepInTurn(
   }
   const actionsToCheck = Object.keys(stepLinks.actions);
   while (actionsToCheck.length) {
-    const action = actionsToCheck.shift();
+    const action = actionsToCheck.shift() as string;
     const nextStepId = stepId + "-" + action;
     if (!turn.steps[nextStepId]) {
       const func = stepLinks.actions[action];

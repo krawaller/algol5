@@ -44,7 +44,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "LINKS",
                   res: {
-                    actions: {}
+                    marks: {},
+                    commands: {}
                   },
                   desc: "initialise LINKS to correct empty object"
                 }

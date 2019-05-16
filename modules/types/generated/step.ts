@@ -5,7 +5,8 @@ export type AlgolStepLinks = {
   endGame?: "win" | "lose" | "draw";
   endMarks?: string[];
   endedBy?: string;
-  actions: { [idx: string]: string };
+  commands: { [idx: string]: string };
+  marks: { [idx: string]: string };
 };
 
 export type AlgolStep = {

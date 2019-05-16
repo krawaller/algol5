@@ -24,14 +24,14 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             UNITLAYERS: { units: { a1: {}, b2: {} } },
-            LINKS: { actions: { gnork: "bork" } }
+            LINKS: { marks: { gnork: "bork" } }
           },
           tests: [
             {
               expr: { links: ["somemark"] },
               asserts: [
                 {
-                  sample: "LINKS.actions",
+                  sample: "LINKS.marks",
                   res: {
                     gnork: "bork",
                     a1: "somemark1",
@@ -63,7 +63,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             UNITLAYERS: { units: { a1: {}, b2: {} } },
-            LINKS: { actions: {} },
+            LINKS: { marks: {} },
             newStepId: "foo"
           },
           tests: [
@@ -71,7 +71,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: ["somemark"] },
               asserts: [
                 {
-                  sample: "LINKS.actions",
+                  sample: "LINKS.marks",
                   res: {
                     a1: "somemark2",
                     b2: "somemark2"

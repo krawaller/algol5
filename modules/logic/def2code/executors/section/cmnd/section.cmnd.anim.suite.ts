@@ -1,12 +1,6 @@
 import { executeSection } from "..";
-import { emptyFullDef } from "../../../../../common";
-import {
-  AlgolStatementSuite,
-  AlgolSection,
-  AlgolAnimCompiled,
-  AlgolAnimAnon,
-  isAlgolAnimEnterFrom
-} from "../../../../../types";
+import { emptyFullDef, emptyAnim } from "../../../../../common";
+import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
 
 const defaultCmndInitContext = {
   step: {}
@@ -80,11 +74,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "anim",
-                  res: {
-                    enterFrom: {},
-                    exitTo: {},
-                    ghosts: []
-                  } as AlgolAnimCompiled,
+                  res: emptyAnim,
                   desc: "an anim obj was initiated"
                 }
               ]

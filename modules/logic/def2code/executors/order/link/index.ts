@@ -38,14 +38,14 @@ function executeLinkInner(
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     // ------------- Linking to a command
     return `
-      LINKS.actions.${name} = '${name + player}';
+      LINKS.commands.${name} = '${name + player}';
     `;
   } else if (gameDef && gameDef.flow.marks && gameDef.flow.marks[name]) {
     // ------------- Linking to a mark
     const markDef = gameDef.flow.marks[name];
     return `
     for(const pos of Object.keys(${parser.set(markDef.from)})) {
-      LINKS.actions[pos] = '${name + player}';
+      LINKS.marks[pos] = '${name + player}';
     }
 `;
   } else if (name === "endTurn") {

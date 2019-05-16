@@ -1,6 +1,6 @@
 import { FullDefAnon } from "../../../../../types";
 import { orderUsage } from "../sectionUtils";
-import { analyseGame } from "../../../../../common";
+import { analyseGame, emptyAnim } from "../../../../../common";
 
 export function executeCmndInit(
   gameDef: FullDefAnon,
@@ -12,14 +12,14 @@ export function executeCmndInit(
   let ret = "";
 
   // Always init a new LINKS object for each step
-  ret += `let LINKS = { actions: {} }; `;
+  ret += `let LINKS = { marks: {}, commands: {} }; `;
 
   const usage = orderUsage(gameDef, player, action);
 
   const analysis = analyseGame(gameDef)[player][action];
 
   if (!!gameDef.anim[action]) {
-    ret += `let anim = { enterFrom: {}, exitTo: {}, ghosts: [] }; `;
+    ret += `let anim = ${JSON.stringify(emptyAnim)}; `;
   }
 
   if (usage.ARTIFACTS) {

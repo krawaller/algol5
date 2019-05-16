@@ -1,5 +1,5 @@
 import { FullDefAnon } from "../../../../../types";
-import { deduceInitialUnitData, emptyUnitLayers } from "../../../../../common";
+import { emptyUnitLayers } from "../../../../../common";
 import { updateUnitLayers } from "../../order/updateUnitLayers";
 import { usesSpawn, referencesBattleVars } from "../sectionUtils";
 

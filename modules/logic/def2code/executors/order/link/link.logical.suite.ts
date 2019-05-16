@@ -21,14 +21,14 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
       contexts: [
         {
           context: {
-            LINKS: { actions: { othercmnd: "foo" } }
+            LINKS: { commands: { othercmnd: "foo" } }
           },
           tests: [
             {
               expr: { links: [{ ifplayer: [1, "mycmnd"] }] },
               asserts: [
                 {
-                  sample: "LINKS.actions",
+                  sample: "LINKS.commands",
                   res: { mycmnd: "mycmnd1", othercmnd: "foo" },
                   desc: "link is performed if if is truthy"
                 }
@@ -38,7 +38,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               expr: { links: [{ ifplayer: [2, "mycmnd"] }] },
               asserts: [
                 {
-                  sample: "LINKS.actions",
+                  sample: "LINKS.commands",
                   res: { othercmnd: "foo" },
                   desc: "link is not performed if if is falsy"
                 }

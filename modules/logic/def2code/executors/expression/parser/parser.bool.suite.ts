@@ -117,8 +117,10 @@ export const testSuite: AlgolExpressionSuite<
         {
           context: {
             LINKS: {
-              actions: {
-                somecmnd: "somecmnd1",
+              commands: {
+                somecmnd: "somecmnd1"
+              },
+              marks: {
                 a2: "somemark1"
               }
             }

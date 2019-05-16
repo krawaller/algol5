@@ -1,44 +1,19 @@
-import { FullDefAnon, isAlgolAnimEnterFrom } from "../../../../../types";
+import { FullDefAnon } from "../../../../../types";
 import {
   referencesBattleVars,
   referencesTurnVars,
   usesSpawn,
   orderUsage
 } from "../sectionUtils";
-import { makeParser } from "../../expression";
 
 export function executeCmndEnd(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string
 ): string {
-  const cmndDef = gameDef.flow.commands[action];
-
   const usage = orderUsage(gameDef, player, action);
 
   const hasAnim = !!gameDef.anim[action];
-  //if (animDef) {
-  // const exprParser = makeParser(gameDef, player, action);
-  // const ghosts = [];
-  // const enterFrom = {};
-  // const exitTo = {};
-  // for (const anim of animDef) {
-  //   if (isAlgolAnimEnterFrom(anim)) {
-  //     const [from, to] = anim.enterfrom;
-  //     enterFrom[exprParser.pos(from)] = exprParser.pos(to);
-  //   }
-  //   // TODO - exitTo and ghosts as well!
-  // }
-  // animObj = `{
-  //   enterFrom: {
-  //     ${Object.keys(enterFrom)
-  //       .map(k => `[${k}]: ${enterFrom[k]}`)
-  //       .join(", ")}
-  //   },
-  //   exitTo: {},
-  //   ghosts: []
-  // }`;
-  //}
 
   return `return {
     LINKS,

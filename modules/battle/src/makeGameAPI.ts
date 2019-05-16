@@ -7,8 +7,8 @@ export function makeGameAPI(game: AlgolGame): AlgolGameAPI {
       let battle = newBattle(game);
       return {
         initialUI: getBattleUI(game, battle),
-        performAction(action) {
-          battle = battleAction(game, battle, action);
+        performAction(action, arg) {
+          battle = battleAction(game, battle, action, arg);
           return getBattleUI(game, battle);
         },
         history() {

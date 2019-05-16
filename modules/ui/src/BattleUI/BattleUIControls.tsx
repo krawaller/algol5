@@ -5,7 +5,10 @@ import { Content } from "../Content";
 
 type BattleUIControlsProps = {
   ui: AlgolBattleUI;
-  callback: (action: string) => void;
+  callback: (
+    action: "endTurn" | "undo" | "mark" | "command",
+    arg?: string
+  ) => void;
 };
 
 export const BattleUIControls: FunctionComponent<BattleUIControlsProps> = ({

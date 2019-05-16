@@ -1,14 +1,13 @@
 import {
   AlgolDemo,
   AlgolHydratedDemo,
-  AlgolAnimCompiled,
   AlgolDemoCallback,
   AlgolDemoControl
 } from "../../types";
 
-import { inflateDemo } from "./inflateDemo";
+import { emptyAnim } from "../../common";
 
-const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
+import { inflateDemo } from "./inflateDemo";
 
 export function playDemo(
   demo: AlgolDemo,

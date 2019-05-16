@@ -5,6 +5,7 @@ import {
   AlgolPosition,
   AlgolAnimCompiled
 } from "../../../types";
+import { emptyAnim } from "../../../common";
 
 import { BoardMarks } from "./BoardMarks";
 import { BoardUnits } from "./BoardUnits";
@@ -25,7 +26,7 @@ export const Board: React.FunctionComponent<BoardProps> = ({
   potentialMarks,
   units,
   callback,
-  anim = { enterFrom: {}, exitTo: {}, ghosts: [] }
+  anim = emptyAnim
 }) => {
   const { dataURI, height, width } = board;
   return (

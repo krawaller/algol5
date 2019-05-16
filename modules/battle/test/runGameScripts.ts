@@ -1,5 +1,7 @@
 import { AlgolGameTestSuite, AlgolGameAPI } from "../../types";
 
+const identifyMark = /^[a-z][0-9]+$/;
+
 export function runGameScripts(
   gameId: string,
   api: AlgolGameAPI,
@@ -12,7 +14,12 @@ export function runGameScripts(
         .slice(0, 5);
       let { initialUI: ui, performAction } = api.newBattle();
       for (const action of seq) {
-        ui = performAction(action === "win" ? "endTurn" : action);
+        ui =
+          action === "win" || action === "endturn"
+            ? performAction("endTurn")
+            : identifyMark.test(action)
+            ? performAction("mark", action)
+            : performAction("command", action);
       }
       expect(gameId).toBe(gameId); // TODO - more checks?
     });

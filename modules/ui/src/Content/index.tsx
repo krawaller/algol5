@@ -8,7 +8,9 @@ import {
   isAlgolContentPos,
   isAlgolContentUnit,
   isAlgolContentSelect,
-  isAlgolContentPlayer
+  isAlgolContentPlayer,
+  isAlgolContentEndTurn,
+  isAlgolContentBold
 } from "../../../types";
 
 import { Icon } from "../Icon";
@@ -17,7 +19,7 @@ type ContentProps = {
   /** The content to show */
   content: AlgolContentAnon;
   /** The callback to use for button clicks */
-  callback: (action: string) => void;
+  callback: (action: "command" | "endTurn", arg?: string) => void;
 };
 
 const posStyles = {
@@ -58,10 +60,18 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   }
   if (isAlgolContentCmnd(content)) {
     return (
-      <button onClick={() => callback(content.command)}>
+      <button onClick={() => callback("command", content.command)}>
         {content.command}
       </button>
     );
+  }
+  if (isAlgolContentEndTurn(content)) {
+    return (
+      <button onClick={() => callback("endTurn")}>{content.endTurn}</button>
+    );
+  }
+  if (isAlgolContentBold(content)) {
+    return <strong>{content.bold}</strong>;
   }
   if (isAlgolContentUnitType(content)) {
     const [icon, owner] = content.unittype;

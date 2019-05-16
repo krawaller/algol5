@@ -7,15 +7,15 @@ import {
   battleCommand
 } from "./helpers";
 
-const identifyMark = /^[a-z][0-9]+$/;
-
 export function battleAction(
   game: AlgolGame,
   battle: AlgolBattle,
-  action: string
+  action: "endTurn" | "undo" | "mark" | "command",
+  arg?: string
 ): AlgolBattle {
   if (action === "endTurn") return battleEndTurn(game, battle);
   if (action === "undo") return battleUndo(battle);
-  if (action.match(identifyMark)) return battleMark(game, battle, action);
-  return battleCommand(game, battle, action);
+  if (action === "mark") return battleMark(game, battle, arg);
+  if (action === "command") return battleCommand(game, battle, arg);
+  throw new Error(`Unknown battle input: ${action} ${arg || ""}`);
 }

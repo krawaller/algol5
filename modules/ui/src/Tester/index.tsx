@@ -15,24 +15,28 @@ type TesterState = {
 };
 
 export class Tester extends Component<TesterProps, TesterState> {
-  act: (a: any) => AlgolBattleUI;
+  act: ReturnType<AlgolGameAPI["newBattle"]>["performAction"];
   constructor(props: TesterProps) {
     super(props);
     const { initialUI, performAction } = this.props.api.newBattle();
     this.act = performAction;
     this.state = { ui: initialUI };
   }
-  handleAct = (action: string) => {
+  handleAct = (
+    action: "mark" | "command" | "endTurn" | "undo",
+    arg: string
+  ) => {
     this.setState({
-      ui: this.act(action)
+      ui: this.act(action, arg)
     });
   };
   render() {
     const { ui } = this.state;
+    console.log(ui);
     return (
       <React.Fragment>
         <Board
-          callback={this.handleAct}
+          callback={pos => this.handleAct("mark", pos)}
           board={dataURIs[ui.gameId]}
           units={ui.board.units}
           marks={ui.board.marks}

@@ -6,11 +6,13 @@ import {
 } from "../../types";
 import * as jdp from "jsondiffpatch";
 
+const identifyMark = /^[a-z][0-9]+$/;
+
 export function makeDemo(
   API: AlgolGameAPI,
   script: AlgolScriptLine<string, string>[]
 ): AlgolDemo {
-  const commands = script.reduce(
+  const actions = script.reduce(
     (mem, line) => mem.concat(line.commands),
     [] as string[]
   );
@@ -18,9 +20,14 @@ export function makeDemo(
   let ui = initialUI;
   let patches: AlgolDemo["patches"] = [];
   const anims = {};
-  while (commands.length) {
-    const action = (commands.shift() as unknown) as string;
-    const newUI = performAction(action === "win" ? "endTurn" : action);
+  while (actions.length) {
+    const action = (actions.shift() as unknown) as string;
+    const newUI =
+      action === "win" || action === "endturn"
+        ? performAction("endTurn")
+        : identifyMark.test(action)
+        ? performAction("mark", action)
+        : performAction("command", action);
 
     const diff = jdp.diff(
       ui.board.units,
@@ -28,7 +35,7 @@ export function makeDemo(
     ) as AlgolDemo["patches"];
     if (diff) {
       patches.push(diff);
-      const newAnim = newUI.board.anim || {
+      const newAnim: AlgolAnimCompiled = newUI.board.anim || {
           enterFrom: {},
           exitTo: {},
           ghosts: []

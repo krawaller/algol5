@@ -1,14 +1,9 @@
 import { getBattleInstruction } from "./helpers/getBattleInstruction";
 
-import {
-  AlgolBattleUI,
-  AlgolGame,
-  AlgolBattle,
-  AlgolAnimCompiled
-} from "../../../types";
+import { AlgolBattleUI, AlgolGame, AlgolBattle } from "../../../types";
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 
-const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
+import { emptyAnim } from "../../../common";
 
 const identifyMark = /^[a-z][0-9]+$/;
 

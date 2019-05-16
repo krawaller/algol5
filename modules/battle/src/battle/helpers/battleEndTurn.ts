@@ -1,8 +1,8 @@
-import { AlgolGame, AlgolBattle, AlgolAnimCompiled } from "../../../../types";
+import { AlgolGame, AlgolBattle } from "../../../../types";
 import { endTurn } from "../turn";
 import { battleEndGame } from "./battleEndGame";
 
-const emptyAnim: AlgolAnimCompiled = { enterFrom: {}, exitTo: {}, ghosts: [] };
+import { emptyAnim } from "../../../../common";
 
 const identifyMark = /^[a-z][0-9]+$/;
 

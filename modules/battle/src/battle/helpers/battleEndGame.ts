@@ -4,6 +4,8 @@ import {
   AlgolContentAnon
 } from "../../../../types";
 
+import { emptyAnim } from "../../../../common";
+
 export function battleEndGame(battle: AlgolBattle): AlgolBattle {
   const currentStep = battle.turn.steps[battle.state.currentStepId];
   const winner = {
@@ -14,7 +16,7 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
   const finalBoard: AlgolBoardState = {
     marks: currentStep.LINKS.endMarks || [],
     units: currentStep.UNITDATA,
-    anim: { enterFrom: {}, exitTo: {}, ghosts: [] },
+    anim: emptyAnim,
     potentialMarks: []
   };
   const description: AlgolContentAnon = {

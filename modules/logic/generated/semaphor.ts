@@ -39,20 +39,21 @@ let game: Partial<AlgolGame> = {
       bishops: oldUnitLayers.bishops
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(
       Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
         .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
     )) {
-      LINKS.actions[pos] = "selectdeploytarget1";
+      LINKS.marks[pos] = "selectdeploytarget1";
     }
     for (const pos of Object.keys({
       ...UNITLAYERS.pawns,
       ...UNITLAYERS.bishops
     })) {
-      LINKS.actions[pos] = "selectunit1";
+      LINKS.marks[pos] = "selectunit1";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -104,7 +105,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.deploy1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       line: {}
     };
@@ -169,7 +170,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.deploy1 = () => defaultInstruction(1);
   game.action.promote1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       line: {}
     };
@@ -233,8 +234,8 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.promote1 = () => defaultInstruction(1);
   game.action.selectdeploytarget1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.deploy = "deploy1";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.deploy = "deploy1";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -257,8 +258,8 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectunit1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.promote = "promote1";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.promote = "promote1";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -307,20 +308,21 @@ let game: Partial<AlgolGame> = {
       bishops: oldUnitLayers.bishops
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(
       Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
         .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
     )) {
-      LINKS.actions[pos] = "selectdeploytarget2";
+      LINKS.marks[pos] = "selectdeploytarget2";
     }
     for (const pos of Object.keys({
       ...UNITLAYERS.pawns,
       ...UNITLAYERS.bishops
     })) {
-      LINKS.actions[pos] = "selectunit2";
+      LINKS.marks[pos] = "selectunit2";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -380,7 +382,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.deploy2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       line: {}
     };
@@ -445,7 +447,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.deploy2 = () => defaultInstruction(2);
   game.action.promote2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       line: {}
     };
@@ -509,8 +511,8 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.promote2 = () => defaultInstruction(2);
   game.action.selectdeploytarget2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.deploy = "deploy2";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.deploy = "deploy2";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -533,8 +535,8 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectunit2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.promote = "promote2";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.promote = "promote2";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,

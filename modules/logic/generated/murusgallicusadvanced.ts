@@ -73,13 +73,14 @@ let game: Partial<AlgolGame> = {
       oppcatapults: oldUnitLayers.mycatapults
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(UNITLAYERS.mytowers)) {
-      LINKS.actions[pos] = "selecttower1";
+      LINKS.marks[pos] = "selecttower1";
     }
     for (const pos of Object.keys(UNITLAYERS.mycatapults)) {
-      LINKS.actions[pos] = "selectcatapult1";
+      LINKS.marks[pos] = "selectcatapult1";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -103,7 +104,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.move1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
@@ -219,7 +220,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.crush1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -307,7 +308,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.crush1 = () => defaultInstruction(1);
   game.action.sacrifice1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -383,7 +384,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.sacrifice1 = () => defaultInstruction(1);
   game.action.fire1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -494,7 +495,7 @@ let game: Partial<AlgolGame> = {
       movetargets: {},
       crushtargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selecttower: newMarkPos
     };
@@ -534,10 +535,10 @@ let game: Partial<AlgolGame> = {
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.actions[pos] = "selectmove1";
+      LINKS.marks[pos] = "selectmove1";
     }
     for (const pos of Object.keys(ARTIFACTS.crushtargets)) {
-      LINKS.actions[pos] = "selectcrush1";
+      LINKS.marks[pos] = "selectcrush1";
     }
     return {
       LINKS,
@@ -603,7 +604,7 @@ let game: Partial<AlgolGame> = {
       madetowers: {},
       madewalls: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selecttower: step.MARKS.selecttower,
       selectmove: newMarkPos
@@ -632,7 +633,7 @@ let game: Partial<AlgolGame> = {
           : "madewalls"
       ][STARTPOS] = emptyObj;
     }
-    LINKS.actions.move = "move1";
+    LINKS.commands.move = "move1";
     return {
       LINKS,
       ARTIFACTS,
@@ -756,15 +757,15 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectcrush1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selecttower: step.MARKS.selecttower,
       selectcrush: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
-    LINKS.actions.crush = "crush1";
+    LINKS.commands.crush = "crush1";
     if (UNITLAYERS.oppcatapults[MARKS.selectcrush]) {
-      LINKS.actions.sacrifice = "sacrifice1";
+      LINKS.commands.sacrifice = "sacrifice1";
     }
     return {
       LINKS,
@@ -868,7 +869,7 @@ let game: Partial<AlgolGame> = {
     let ARTIFACTS = {
       firetargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectcatapult: newMarkPos
     };
@@ -889,7 +890,7 @@ let game: Partial<AlgolGame> = {
       }
     }
     for (const pos of Object.keys(ARTIFACTS.firetargets)) {
-      LINKS.actions[pos] = "selectfire1";
+      LINKS.marks[pos] = "selectfire1";
     }
     return {
       LINKS,
@@ -919,8 +920,8 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectfire1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.fire = "fire1";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.fire = "fire1";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -1044,13 +1045,14 @@ let game: Partial<AlgolGame> = {
       oppcatapults: oldUnitLayers.mycatapults
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(UNITLAYERS.mytowers)) {
-      LINKS.actions[pos] = "selecttower2";
+      LINKS.marks[pos] = "selecttower2";
     }
     for (const pos of Object.keys(UNITLAYERS.mycatapults)) {
-      LINKS.actions[pos] = "selectcatapult2";
+      LINKS.marks[pos] = "selectcatapult2";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -1106,7 +1108,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
@@ -1222,7 +1224,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.crush2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1310,7 +1312,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.crush2 = () => defaultInstruction(2);
   game.action.sacrifice2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1386,7 +1388,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.sacrifice2 = () => defaultInstruction(2);
   game.action.fire2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -1497,7 +1499,7 @@ let game: Partial<AlgolGame> = {
       movetargets: {},
       crushtargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selecttower: newMarkPos
     };
@@ -1537,10 +1539,10 @@ let game: Partial<AlgolGame> = {
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.actions[pos] = "selectmove2";
+      LINKS.marks[pos] = "selectmove2";
     }
     for (const pos of Object.keys(ARTIFACTS.crushtargets)) {
-      LINKS.actions[pos] = "selectcrush2";
+      LINKS.marks[pos] = "selectcrush2";
     }
     return {
       LINKS,
@@ -1606,7 +1608,7 @@ let game: Partial<AlgolGame> = {
       madetowers: {},
       madewalls: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selecttower: step.MARKS.selecttower,
       selectmove: newMarkPos
@@ -1635,7 +1637,7 @@ let game: Partial<AlgolGame> = {
           : "madewalls"
       ][STARTPOS] = emptyObj;
     }
-    LINKS.actions.move = "move2";
+    LINKS.commands.move = "move2";
     return {
       LINKS,
       ARTIFACTS,
@@ -1759,15 +1761,15 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectcrush2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selecttower: step.MARKS.selecttower,
       selectcrush: newMarkPos
     };
     let UNITLAYERS = step.UNITLAYERS;
-    LINKS.actions.crush = "crush2";
+    LINKS.commands.crush = "crush2";
     if (UNITLAYERS.oppcatapults[MARKS.selectcrush]) {
-      LINKS.actions.sacrifice = "sacrifice2";
+      LINKS.commands.sacrifice = "sacrifice2";
     }
     return {
       LINKS,
@@ -1871,7 +1873,7 @@ let game: Partial<AlgolGame> = {
     let ARTIFACTS = {
       firetargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectcatapult: newMarkPos
     };
@@ -1892,7 +1894,7 @@ let game: Partial<AlgolGame> = {
       }
     }
     for (const pos of Object.keys(ARTIFACTS.firetargets)) {
-      LINKS.actions[pos] = "selectfire2";
+      LINKS.marks[pos] = "selectfire2";
     }
     return {
       LINKS,
@@ -1922,8 +1924,8 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectfire2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.fire = "fire2";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.fire = "fire2";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,

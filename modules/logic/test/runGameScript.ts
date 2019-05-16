@@ -47,7 +47,7 @@ export function runGameScript(
             if (action === "endTurn") {
               func = step.LINKS.endTurn;
             } else {
-              func = step.LINKS.actions[action];
+              func = step.LINKS.marks[action] || step.LINKS.commands[action];
             }
             if (!func) {
               console.log("OH NO", step.LINKS);
@@ -97,7 +97,8 @@ export function runGameScript(
 }
 
 function getAvailableActions(links: AlgolStepLinks) {
-  return Object.keys(links.actions)
+  return Object.keys(links.marks)
+    .concat(Object.keys(links.commands))
     .concat(links.endTurn || [])
     .concat(links.endGame || []);
 }

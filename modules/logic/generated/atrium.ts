@@ -49,10 +49,11 @@ let game: Partial<AlgolGame> = {
       oppqueens: oldUnitLayers.myqueens
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
-      LINKS.actions[pos] = "selectunit1";
+      LINKS.marks[pos] = "selectunit1";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -76,7 +77,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.move1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: {}
@@ -153,7 +154,7 @@ let game: Partial<AlgolGame> = {
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -168,7 +169,7 @@ let game: Partial<AlgolGame> = {
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.actions[pos] = "selectmovetarget1";
+      LINKS.marks[pos] = "selectmovetarget1";
     }
     return {
       LINKS,
@@ -198,8 +199,8 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.move = "move1";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.move = "move1";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -255,10 +256,11 @@ let game: Partial<AlgolGame> = {
       oppqueens: oldUnitLayers.myqueens
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
-      LINKS.actions[pos] = "selectunit2";
+      LINKS.marks[pos] = "selectunit2";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -309,7 +311,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       winline: {}
@@ -386,7 +388,7 @@ let game: Partial<AlgolGame> = {
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -401,7 +403,7 @@ let game: Partial<AlgolGame> = {
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.actions[pos] = "selectmovetarget2";
+      LINKS.marks[pos] = "selectmovetarget2";
     }
     return {
       LINKS,
@@ -431,8 +433,8 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.move = "move2";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.move = "move2";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,

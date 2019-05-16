@@ -37,10 +37,11 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       oppunits: oldUnitLayers.myunits
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
-      LINKS.actions[pos] = "selectunit1";
+      LINKS.marks[pos] = "selectunit1";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -62,7 +63,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     });
   };
   game.action.move1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       beingpushed: step.ARTIFACTS.beingpushed,
@@ -154,7 +155,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -182,7 +183,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.actions[pos] = "selectmovetarget1";
+      LINKS.marks[pos] = "selectmovetarget1";
     }
     return {
       LINKS,
@@ -217,7 +218,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       beingpushed: {},
       squished: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
@@ -260,7 +261,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         }
       }
     }
-    LINKS.actions.move = "move1";
+    LINKS.commands.move = "move1";
     return {
       LINKS,
       ARTIFACTS,
@@ -331,10 +332,11 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       oppunits: oldUnitLayers.myunits
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
-      LINKS.actions[pos] = "selectunit2";
+      LINKS.marks[pos] = "selectunit2";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -375,7 +377,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     });
   };
   game.action.move2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       beingpushed: step.ARTIFACTS.beingpushed,
@@ -467,7 +469,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -495,7 +497,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.actions[pos] = "selectmovetarget2";
+      LINKS.marks[pos] = "selectmovetarget2";
     }
     return {
       LINKS,
@@ -530,7 +532,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       beingpushed: {},
       squished: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
@@ -573,7 +575,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         }
       }
     }
-    LINKS.actions.move = "move2";
+    LINKS.commands.move = "move2";
     return {
       LINKS,
       ARTIFACTS,

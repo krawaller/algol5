@@ -55,10 +55,11 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
       oppfrozens: oldUnitLayers.myfrozens
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(UNITLAYERS.mynotfrozens)) {
-      LINKS.actions[pos] = "selectunit1";
+      LINKS.marks[pos] = "selectunit1";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -101,7 +102,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
         });
   };
   game.action.move1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -213,7 +214,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -233,7 +234,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.actions[pos] = "selectmove1";
+      LINKS.marks[pos] = "selectmove1";
     }
     return {
       LINKS,
@@ -263,8 +264,8 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     });
   };
   game.action.selectmove1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.move = "move1";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.move = "move1";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,
@@ -341,10 +342,11 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
       oppfrozens: oldUnitLayers.myfrozens
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(UNITLAYERS.mynotfrozens)) {
-      LINKS.actions[pos] = "selectunit2";
+      LINKS.marks[pos] = "selectunit2";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -416,7 +418,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     });
   };
   game.action.move2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -528,7 +530,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -548,7 +550,7 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.actions[pos] = "selectmove2";
+      LINKS.marks[pos] = "selectmove2";
     }
     return {
       LINKS,
@@ -578,8 +580,8 @@ let game: Partial<AlgolGame> = { gameId: "krieg", action: {}, instruction: {} };
     });
   };
   game.action.selectmove2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { actions: {} };
-    LINKS.actions.move = "move2";
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    LINKS.commands.move = "move2";
     return {
       LINKS,
       ARTIFACTS: step.ARTIFACTS,

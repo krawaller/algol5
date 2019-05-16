@@ -49,14 +49,15 @@ let game: Partial<AlgolGame> = {
       soldiers: oldUnitLayers.soldiers
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(
       Object.keys(UNITLAYERS.neutralunits).length === 0
         ? BOARD.board
         : UNITLAYERS.neutralunits
     )) {
-      LINKS.actions[pos] = "selectdrop1";
+      LINKS.marks[pos] = "selectdrop1";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -89,7 +90,7 @@ let game: Partial<AlgolGame> = {
         });
   };
   game.action.uphill1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -193,7 +194,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.uphill1 = () => defaultInstruction(1);
   game.action.downhill1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -297,7 +298,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.downhill1 = () => defaultInstruction(1);
   game.action.horisontal1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -401,7 +402,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.horisontal1 = () => defaultInstruction(1);
   game.action.vertical1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -512,7 +513,7 @@ let game: Partial<AlgolGame> = {
       horisontal: {},
       downhill: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectdrop: newMarkPos
     };
@@ -540,16 +541,16 @@ let game: Partial<AlgolGame> = {
       }
     }
     if (Object.keys(ARTIFACTS.uphill).length !== 0) {
-      LINKS.actions.uphill = "uphill1";
+      LINKS.commands.uphill = "uphill1";
     }
     if (Object.keys(ARTIFACTS.downhill).length !== 0) {
-      LINKS.actions.downhill = "downhill1";
+      LINKS.commands.downhill = "downhill1";
     }
     if (Object.keys(ARTIFACTS.vertical).length !== 0) {
-      LINKS.actions.vertical = "vertical1";
+      LINKS.commands.vertical = "vertical1";
     }
     if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
-      LINKS.actions.horisontal = "horisontal1";
+      LINKS.commands.horisontal = "horisontal1";
     }
     return {
       LINKS,
@@ -615,14 +616,15 @@ let game: Partial<AlgolGame> = {
       soldiers: oldUnitLayers.soldiers
     };
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(
       Object.keys(UNITLAYERS.neutralunits).length === 0
         ? BOARD.board
         : UNITLAYERS.neutralunits
     )) {
-      LINKS.actions[pos] = "selectdrop2";
+      LINKS.marks[pos] = "selectdrop2";
     }
     return {
       UNITDATA: step.UNITDATA,
@@ -669,7 +671,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.uphill2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -773,7 +775,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.uphill2 = () => defaultInstruction(2);
   game.action.downhill2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -877,7 +879,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.downhill2 = () => defaultInstruction(2);
   game.action.horisontal2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -981,7 +983,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.horisontal2 = () => defaultInstruction(2);
   game.action.vertical2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -1092,7 +1094,7 @@ let game: Partial<AlgolGame> = {
       horisontal: {},
       downhill: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectdrop: newMarkPos
     };
@@ -1120,16 +1122,16 @@ let game: Partial<AlgolGame> = {
       }
     }
     if (Object.keys(ARTIFACTS.uphill).length !== 0) {
-      LINKS.actions.uphill = "uphill2";
+      LINKS.commands.uphill = "uphill2";
     }
     if (Object.keys(ARTIFACTS.downhill).length !== 0) {
-      LINKS.actions.downhill = "downhill2";
+      LINKS.commands.downhill = "downhill2";
     }
     if (Object.keys(ARTIFACTS.vertical).length !== 0) {
-      LINKS.actions.vertical = "vertical2";
+      LINKS.commands.vertical = "vertical2";
     }
     if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
-      LINKS.actions.horisontal = "horisontal2";
+      LINKS.commands.horisontal = "horisontal2";
     }
     return {
       LINKS,

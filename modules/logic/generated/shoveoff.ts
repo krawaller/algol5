@@ -51,10 +51,11 @@ let game: Partial<AlgolGame> = {
   };
   game.action.startTurn1 = step => {
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(TERRAIN.edge)) {
-      LINKS.actions[pos] = "selectpushpoint1";
+      LINKS.marks[pos] = "selectpushpoint1";
     }
     const oldUnitLayers = step.UNITLAYERS;
     return {
@@ -101,7 +102,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.north1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -192,7 +193,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.north1 = () => defaultInstruction(1);
   game.action.south1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -283,7 +284,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.south1 = () => defaultInstruction(1);
   game.action.east1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -374,7 +375,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.east1 = () => defaultInstruction(1);
   game.action.west1 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -480,7 +481,7 @@ let game: Partial<AlgolGame> = {
       spawnnorth: {},
       spawneast: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectpushpoint: newMarkPos
     };
@@ -552,16 +553,16 @@ let game: Partial<AlgolGame> = {
       }
     }
     if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
-      LINKS.actions.south = "south1";
+      LINKS.commands.south = "south1";
     }
     if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
-      LINKS.actions.north = "north1";
+      LINKS.commands.north = "north1";
     }
     if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
-      LINKS.actions.west = "west1";
+      LINKS.commands.west = "west1";
     }
     if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
-      LINKS.actions.east = "east1";
+      LINKS.commands.east = "east1";
     }
     return {
       LINKS,
@@ -619,10 +620,11 @@ let game: Partial<AlgolGame> = {
   };
   game.action.startTurn2 = step => {
     let LINKS: AlgolStepLinks = {
-      actions: {}
+      marks: {},
+      commands: {}
     };
     for (const pos of Object.keys(TERRAIN.edge)) {
-      LINKS.actions[pos] = "selectpushpoint2";
+      LINKS.marks[pos] = "selectpushpoint2";
     }
     const oldUnitLayers = step.UNITLAYERS;
     return {
@@ -688,7 +690,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.north2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -779,7 +781,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.north2 = () => defaultInstruction(2);
   game.action.south2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -870,7 +872,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.south2 = () => defaultInstruction(2);
   game.action.east2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -961,7 +963,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.east2 = () => defaultInstruction(2);
   game.action.west2 = step => {
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -1067,7 +1069,7 @@ let game: Partial<AlgolGame> = {
       spawnnorth: {},
       spawneast: {}
     };
-    let LINKS: AlgolStepLinks = { actions: {} };
+    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
     let MARKS = {
       selectpushpoint: newMarkPos
     };
@@ -1139,16 +1141,16 @@ let game: Partial<AlgolGame> = {
       }
     }
     if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
-      LINKS.actions.south = "south2";
+      LINKS.commands.south = "south2";
     }
     if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
-      LINKS.actions.north = "north2";
+      LINKS.commands.north = "north2";
     }
     if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
-      LINKS.actions.west = "west2";
+      LINKS.commands.west = "west2";
     }
     if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
-      LINKS.actions.east = "east2";
+      LINKS.commands.east = "east2";
     }
     return {
       LINKS,

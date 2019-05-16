@@ -5,16 +5,12 @@ import dataURIs from "../../../graphics/dist/svgDataURIs";
 
 import { emptyAnim } from "../../../common";
 
-const identifyMark = /^[a-z][0-9]+$/;
-
 export function getBattleUI(
   game: AlgolGame,
   battle: AlgolBattle
 ): AlgolBattleUI {
   const currentStep = battle.turn.steps[battle.state.currentStepId];
-  const commands = Object.keys(currentStep.LINKS.actions).filter(
-    action => !action.match(identifyMark)
-  );
+  const commands = Object.keys(currentStep.LINKS.commands);
   return {
     player: battle.player,
     winner: battle.winner,

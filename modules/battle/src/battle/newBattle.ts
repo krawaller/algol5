@@ -2,8 +2,6 @@ import { AlgolBattle, AlgolGame, AlgolBoardState } from "../../../types";
 
 import { emptyAnim } from "../../../common";
 
-const identifyMark = /^[a-z][0-9]+$/;
-
 import { firstTurn } from "./turn";
 
 export function newBattle(game: AlgolGame): AlgolBattle {
@@ -12,9 +10,7 @@ export function newBattle(game: AlgolGame): AlgolBattle {
     marks: [],
     units: turn.steps.root.UNITDATA,
     anim: emptyAnim,
-    potentialMarks: Object.keys(turn.steps.root.LINKS.actions).filter(action =>
-      action.match(identifyMark)
-    )
+    potentialMarks: Object.keys(turn.steps.root.LINKS.marks)
   };
   return {
     turn,
@@ -25,7 +21,10 @@ export function newBattle(game: AlgolGame): AlgolBattle {
         player: 0,
         turn: 0,
         description: { line: [{ text: "Let the battle begin!" }] },
-        board: firstBoard
+        board: {
+          ...firstBoard,
+          potentialMarks: []
+        }
       }
     ],
     state: {

@@ -40,12 +40,14 @@ export function hydrateStepInTurn(
       turn.gameEnds.win.push(stepId);
     }
   }
-  const actionsToCheck = Object.keys(stepLinks.actions);
+  const actionsToCheck = Object.keys(stepLinks.marks).concat(
+    Object.keys(stepLinks.commands)
+  );
   while (actionsToCheck.length) {
     const action = actionsToCheck.shift() as string;
     const nextStepId = stepId + "-" + action;
     if (!turn.steps[nextStepId]) {
-      const func = stepLinks.actions[action];
+      const func = stepLinks.marks[action] || stepLinks.commands[action];
       turn.steps[nextStepId] = game.action[func](step, action);
     }
     turn = hydrateStepInTurn(game, turn, nextStepId, full);
@@ -53,7 +55,8 @@ export function hydrateStepInTurn(
       turn.canEnd = true;
       turn.viableStepIds[stepId] = true;
     } else {
-      delete stepLinks.actions[action];
+      delete stepLinks.marks[action];
+      delete stepLinks.commands[action];
       delete turn.steps[nextStepId];
     }
   }

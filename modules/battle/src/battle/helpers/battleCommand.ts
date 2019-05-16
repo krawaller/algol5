@@ -1,8 +1,6 @@
 import { AlgolBattle, AlgolGame } from "../../../../types";
 import { emptyAnim } from "../../../../common";
 
-const identifyMark = /^[a-z][0-9]+$/;
-
 export function battleCommand(
   game: AlgolGame,
   battle: AlgolBattle,
@@ -17,7 +15,7 @@ export function battleCommand(
   const newStepId = `${oldStepId}-${command}`;
   const newStep =
     steps[newStepId] ||
-    (steps[newStepId] = game.action[oldStep.LINKS.actions[command]](oldStep));
+    (steps[newStepId] = game.action[oldStep.LINKS.commands[command]](oldStep));
   return {
     ...battle,
     state: {
@@ -52,9 +50,7 @@ export function battleCommand(
         marks: [],
         units: newStep.UNITDATA,
         anim: newStep.anim || emptyAnim,
-        potentialMarks: Object.keys(newStep.LINKS.actions).filter(action =>
-          action.match(identifyMark)
-        )
+        potentialMarks: Object.keys(newStep.LINKS.marks)
       },
       markStamps: {}
     }

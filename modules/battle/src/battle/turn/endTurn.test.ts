@@ -4,16 +4,16 @@ import aries from "../../../../logic/generated/aries";
 test("turn/endTurn regular", () => {
   let turn = firstTurn(aries);
   turn = endTurn(aries, turn, "root-d4-e4-move");
-  expect(Object.keys(turn.steps.root.LINKS.actions).sort()).toEqual([
-    "e5",
-    "e6",
-    "e7",
-    "e8",
-    "f5",
-    "g5",
-    "h5"
-  ]);
-  expect(Object.keys(turn.steps["root-e5"].LINKS.actions).sort()).toEqual([
+  expect(
+    Object.keys(turn.steps.root.LINKS.marks)
+      .concat(Object.keys(turn.steps.root.LINKS.commands))
+      .sort()
+  ).toEqual(["e5", "e6", "e7", "e8", "f5", "g5", "h5"]);
+  expect(
+    Object.keys(turn.steps["root-e5"].LINKS.marks)
+      .concat(Object.keys(turn.steps["root-e5"].LINKS.commands))
+      .sort()
+  ).toEqual([
     "a5",
     "b5",
     "c5",

@@ -55,6 +55,9 @@ function executeInstructionInner(
     return `{ text: ${instr} }`;
   }
   if (typeof instr === "string") {
+    if (instr === "endTurn") {
+      return `{ endTurn: "end turn" }`;
+    }
     if (gameDef.flow.commands[instr]) {
       return `{ command: "${instr}" }`;
     }

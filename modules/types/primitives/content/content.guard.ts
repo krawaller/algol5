@@ -10,7 +10,9 @@ import {
   AlgolContentText,
   AlgolContentUnitType,
   AlgolContentSelect,
-  AlgolContentPlayer
+  AlgolContentPlayer,
+  AlgolContentEndTurn,
+  AlgolContentBold
 } from "./content.interfaces";
 
 export function isAlgolContentCmnd(
@@ -59,4 +61,16 @@ export function isAlgolContentPlayer(
   expr: AlgolContentAnon
 ): expr is AlgolContentPlayer {
   return (expr as AlgolContentPlayer).player !== undefined;
+}
+
+export function isAlgolContentEndTurn(
+  expr: AlgolContentAnon
+): expr is AlgolContentEndTurn {
+  return (expr as AlgolContentEndTurn).endTurn !== undefined;
+}
+
+export function isAlgolContentBold(
+  expr: AlgolContentAnon
+): expr is AlgolContentBold {
+  return (expr as AlgolContentBold).bold !== undefined;
 }

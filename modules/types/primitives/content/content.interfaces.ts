@@ -16,6 +16,10 @@ export interface AlgolContentCmnd<Cmnd> {
   command: Cmnd;
 }
 
+export interface AlgolContentEndTurn {
+  endTurn: string;
+}
+
 export interface AlgolContentText {
   text: string | number;
 }

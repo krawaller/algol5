@@ -23,7 +23,7 @@ export function makeDemo(
   while (actions.length) {
     const action = (actions.shift() as unknown) as string;
     const newUI =
-      action === "win" || action === "endturn"
+      action === "win" || action === "endTurn"
         ? performAction("endTurn")
         : identifyMark.test(action)
         ? performAction("mark", action)

@@ -4,7 +4,7 @@ export function defaultInstruction(plr): AlgolContentAnon {
   return {
     line: [
       { text: "Press " },
-      { endTurn: "endTurn" },
+      { endTurn: "end turn" },
       {
         text: ` to submit your moves and hand over to `
       },

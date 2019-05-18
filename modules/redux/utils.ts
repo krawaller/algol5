@@ -1,8 +1,10 @@
-import { ReducingAction, Reducer } from "./types";
+import { ReducingAction, DraftReducer, Reducer } from "./types";
+import { produce } from "immer";
 
 type payloadActionCreator<T, P, S> = (
   payload: P
 ) => { type: T; payload: P; reducer: Reducer<S, P> };
+
 type nakedActionCreator<T, S> = () => {
   type: T;
   payload: undefined;
@@ -13,12 +15,13 @@ export const makeCreatorAndGuard = <
   A extends ReducingAction<string, any, object>
 >(
   type: A["type"],
-  reducer: Reducer<ReturnType<A["reducer"]>, A["payload"]>
+  reducer: DraftReducer<ReturnType<A["reducer"]>, A["payload"]>
 ) => {
   const creator = ((payload: A["payload"]) => ({
     type,
     payload,
-    reducer
+    reducer: (state, payload) =>
+      produce(state, draft => reducer(draft, payload))
   })) as A["payload"] extends undefined | never
     ? nakedActionCreator<A["type"], ReturnType<A["reducer"]>> // make sure TS doesn't force us to pass undefined as param when action takes no payload
     : payloadActionCreator<A["type"], A["payload"], ReturnType<A["reducer"]>>;

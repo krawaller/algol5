@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "lib": ["es2015", "es2018"],
+    "types": ["jest"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  }
+}

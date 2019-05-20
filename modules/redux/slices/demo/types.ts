@@ -6,7 +6,7 @@ export enum DemoActionName {
   INIT_DEMO = "DEMO::INIT_DEMO"
 }
 
-export type DemoAction<Type extends DemoActionName, Payload> = ReducingAction<
+export type DemoAction<Type, Payload> = ReducingAction<
   Type,
   Payload,
   WithAlgolDemoState

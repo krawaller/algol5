@@ -3,7 +3,6 @@ import {
   DraftReducer,
   ReducingActionType,
   ReducingActionPayload,
-  ReducingActionState,
   ReducingActionCreator,
   ReducingPayloadActionTest,
   ReducingActionTest
@@ -16,18 +15,16 @@ export const makeCreatorAndGuard = <
   type: ReducingActionType<A>,
   reducer: DraftReducer<A>
 ) => {
-  const creator = function(payload: ReducingActionPayload<A>) {
+  const creator = function(payload) {
     return {
       type,
       payload,
-      reducer: (
-        state: ReducingActionState<A>,
-        payload: ReducingActionPayload<A>
-      ) => produce(state, draft => reducer(draft, payload))
+      reducer: (state, payload: ReducingActionPayload<A>) =>
+        produce(state, draft => reducer(draft, payload))
     };
-  };
-  // @ts-ignore
-  creator.actionName = type;
+  } as ReducingActionCreator<A>;
+
+  creator.actionType = type;
   const guard = (action: ReducingAction<string, any, object>): action is A =>
     action.type === type;
   return <const>[creator, guard];
@@ -37,8 +34,7 @@ export const testCreator = <A extends ReducingAction<string, any, object>>(
   creator: ReducingActionCreator<A>,
   tests: ReducingActionTest<A>[]
 ) => {
-  // @ts-ignore
-  const name = creator.actionName;
+  const name = creator.actionType;
   describe(`The ${name} creator`, () => {
     for (const t of tests) {
       test(t.description, () => {

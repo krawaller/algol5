@@ -15,23 +15,29 @@ export type ReducingActionCreator<
   ? NakedActionCreator<A>
   : PayloadActionCreator<A>;
 
-export type PayloadActionCreator<
+export interface PayloadActionCreator<
   A extends ReducingAction<string, any, object>
-> = (
-  payload: ReducingActionPayload<A>
-) => {
-  type: ReducingActionType<A>;
-  payload: ReducingActionPayload<A>;
-  reducer: Reducer<ReducingActionState<A>, ReducingActionPayload<A>>;
-};
+> extends WithActionType<A["type"]> {
+  (payload: ReducingActionPayload<A>): {
+    type: ReducingActionType<A>;
+    payload: ReducingActionPayload<A>;
+    reducer: Reducer<ReducingActionState<A>, ReducingActionPayload<A>>;
+  };
+}
 
-export type NakedActionCreator<
+export interface NakedActionCreator<
   A extends ReducingAction<string, undefined, object>
-> = () => {
-  type: ReducingActionType<A>;
-  payload: undefined;
-  reducer: Reducer<ReducingActionState<A>, undefined>;
-};
+> extends WithActionType<A["type"]> {
+  (): {
+    type: ReducingActionType<A>;
+    payload: undefined;
+    reducer: Reducer<ReducingActionState<A>, undefined>;
+  };
+}
+
+interface WithActionType<T = string> {
+  actionType: T;
+}
 
 export interface ReducingAction<Type, Payload, State> {
   type: Type;

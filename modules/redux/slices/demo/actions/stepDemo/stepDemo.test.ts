@@ -6,9 +6,6 @@ import { GameId } from "../../../../../games/dist/list";
 testCreator(stepDemo, [
   {
     description: "Stepping goes to next frame",
-    payload: {
-      gameId: "amazons" as GameId
-    },
     previous: {
       demo: {
         demos: {
@@ -21,6 +18,9 @@ testCreator(stepDemo, [
           }
         }
       }
+    },
+    payload: {
+      gameId: "amazons" as GameId
     },
     expected: {
       demo: {
@@ -38,9 +38,6 @@ testCreator(stepDemo, [
   },
   {
     description: "Stepping off the last frame loops around",
-    payload: {
-      gameId: "amazons" as GameId
-    },
     previous: {
       demo: {
         demos: {
@@ -53,6 +50,9 @@ testCreator(stepDemo, [
           }
         }
       }
+    },
+    payload: {
+      gameId: "amazons" as GameId
     },
     expected: {
       demo: {
@@ -70,9 +70,6 @@ testCreator(stepDemo, [
   },
   {
     description: "If demo isn't playing nothing happens",
-    payload: {
-      gameId: "amazons" as GameId
-    },
     previous: {
       demo: {
         demos: {
@@ -85,6 +82,9 @@ testCreator(stepDemo, [
           }
         }
       }
+    },
+    payload: {
+      gameId: "amazons" as GameId
     },
     expected: {
       demo: {

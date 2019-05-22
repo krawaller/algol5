@@ -13,11 +13,11 @@ testCreator(initDemo, [
   {
     description:
       "Initiating from nothing creates new uninflated entry with playing",
+    previous: { demo: { demos: {} } },
     payload: {
       gameId: "amazons" as GameId,
       demo: dummyDemoDef
     },
-    previous: { demo: { demos: {} } },
     expected: {
       demo: {
         demos: {
@@ -34,10 +34,6 @@ testCreator(initDemo, [
   },
   {
     description: "If already inflated we just set frame to 0",
-    payload: {
-      demo: dummyDemoDef,
-      gameId: "amazons" as GameId
-    },
     previous: {
       demo: {
         demos: {
@@ -49,6 +45,10 @@ testCreator(initDemo, [
           }
         }
       }
+    },
+    payload: {
+      demo: dummyDemoDef,
+      gameId: "amazons" as GameId
     },
     expected: {
       demo: {

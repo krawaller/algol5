@@ -11,7 +11,8 @@ const dummyDemoDef: AlgolDemo = {
 
 testCreator(initDemo, [
   {
-    description: "Initiating from nothing creates new uninflated entry",
+    description:
+      "Initiating from nothing creates new uninflated entry with playing",
     payload: {
       gameId: "amazons" as GameId,
       demo: dummyDemoDef
@@ -24,7 +25,8 @@ testCreator(initDemo, [
             positions: [dummyDemoDef.initial],
             anims: dummyDemoDef.anims,
             frame: 0,
-            inflated: false
+            inflated: false,
+            playing: true
           }
         }
       }
@@ -55,7 +57,8 @@ testCreator(initDemo, [
             positions: [dummyDemoDef.initial, dummyDemoDef.initial],
             anims: {},
             frame: 0,
-            inflated: true
+            inflated: true,
+            playing: true
           }
         }
       }

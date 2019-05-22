@@ -18,9 +18,10 @@ export type AlgolDemoState = {
 
 type AlgolGameDemoState = {
   positions: AlgolArmy[];
-  inflated: boolean;
   frame: number;
   anims: { [patchNum: string]: Partial<AlgolAnimCompiled> };
+  playing?: boolean;
+  inflated?: boolean;
 };
 
 export interface WithAlgolDemoState {

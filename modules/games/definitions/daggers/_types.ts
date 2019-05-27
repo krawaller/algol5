@@ -16,10 +16,10 @@ export type DaggersGenerator = "findcrowntargets" | "finddaggertargets";
 export type DaggersArtifactLayer = "movetarget";
 export type DaggersTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
 export type DaggersLayer = CommonLayer | DaggersUnitLayer | DaggersArtifactLayer | DaggersTerrainLayer;
-export type DaggersBattlePos = any;
-export type DaggersBattleVar = any;
-export type DaggersTurnPos = any;
-export type DaggersTurnVar = any;
+export type DaggersBattlePos = never;
+export type DaggersBattleVar = never;
+export type DaggersTurnPos = never;
+export type DaggersTurnVar = never;
  
 export type DaggersGenerators = Generators<DaggersArtifactLayer, DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGenerator, DaggersGrid, DaggersLayer, DaggersMark, DaggersTurnPos, DaggersTurnVar>;
 export type DaggersFlow = Flow<DaggersBattlePos, DaggersBattleVar, DaggersCommand, DaggersGenerator, DaggersGrid, DaggersLayer, DaggersMark, DaggersTurnPos, DaggersTurnVar, DaggersUnit>;

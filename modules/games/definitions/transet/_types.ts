@@ -16,10 +16,10 @@ export type TransetGenerator = "findswap2step" | "findswap1steps" | "findmovetar
 export type TransetArtifactLayer = "swap2step" | "swap1steps" | "movetargets";
 export type TransetTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
 export type TransetLayer = CommonLayer | TransetUnitLayer | TransetArtifactLayer | TransetTerrainLayer;
-export type TransetBattlePos = any;
-export type TransetBattleVar = any;
-export type TransetTurnPos = any;
-export type TransetTurnVar = any;
+export type TransetBattlePos = never;
+export type TransetBattleVar = never;
+export type TransetTurnPos = never;
+export type TransetTurnVar = never;
  
 export type TransetGenerators = Generators<TransetArtifactLayer, TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetGrid, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar>;
 export type TransetFlow = Flow<TransetBattlePos, TransetBattleVar, TransetCommand, TransetGenerator, TransetGrid, TransetLayer, TransetMark, TransetTurnPos, TransetTurnVar, TransetUnit>;

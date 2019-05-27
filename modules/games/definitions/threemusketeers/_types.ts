@@ -16,10 +16,10 @@ export type ThreemusketeersGenerator = "findstrandedmusketeers" | "findmusketeer
 export type ThreemusketeersArtifactLayer = "strandedmusketeers" | "musketeerline" | "movetargets";
 export type ThreemusketeersTerrainLayer = never;
 export type ThreemusketeersLayer = CommonLayer | ThreemusketeersUnitLayer | ThreemusketeersArtifactLayer;
-export type ThreemusketeersBattlePos = any;
-export type ThreemusketeersBattleVar = any;
-export type ThreemusketeersTurnPos = any;
-export type ThreemusketeersTurnVar = any;
+export type ThreemusketeersBattlePos = never;
+export type ThreemusketeersBattleVar = never;
+export type ThreemusketeersTurnPos = never;
+export type ThreemusketeersTurnVar = never;
  
 export type ThreemusketeersGenerators = Generators<ThreemusketeersArtifactLayer, ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersTurnPos, ThreemusketeersTurnVar>;
 export type ThreemusketeersFlow = Flow<ThreemusketeersBattlePos, ThreemusketeersBattleVar, ThreemusketeersCommand, ThreemusketeersGenerator, ThreemusketeersGrid, ThreemusketeersLayer, ThreemusketeersMark, ThreemusketeersTurnPos, ThreemusketeersTurnVar, ThreemusketeersUnit>;

@@ -16,10 +16,10 @@ export type AmazonsGenerator = "findmovetargets" | "findfiretargets";
 export type AmazonsArtifactLayer = "movetargets" | "firedfrom" | "firetargets";
 export type AmazonsTerrainLayer = never;
 export type AmazonsLayer = CommonLayer | AmazonsUnitLayer | AmazonsArtifactLayer;
-export type AmazonsBattlePos = any;
-export type AmazonsBattleVar = any;
-export type AmazonsTurnPos = any;
-export type AmazonsTurnVar = any;
+export type AmazonsBattlePos = never;
+export type AmazonsBattleVar = never;
+export type AmazonsTurnPos = never;
+export type AmazonsTurnVar = never;
  
 export type AmazonsGenerators = Generators<AmazonsArtifactLayer, AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar>;
 export type AmazonsFlow = Flow<AmazonsBattlePos, AmazonsBattleVar, AmazonsCommand, AmazonsGenerator, AmazonsGrid, AmazonsLayer, AmazonsMark, AmazonsTurnPos, AmazonsTurnVar, AmazonsUnit>;

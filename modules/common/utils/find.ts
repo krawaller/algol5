@@ -14,7 +14,7 @@ function findInner(haystack, needle, path): Find[] {
       ? needle(haystack, path)
       : isEqual(needle, haystack)
   ) {
-    return [{ value: needle, path }];
+    return [{ value: haystack, path }];
   } else if (typeof haystack === "object") {
     return Object.keys(haystack).reduce(
       (mem, key) =>

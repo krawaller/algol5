@@ -16,10 +16,10 @@ export type MurusgallicusadvancedGenerator = "findfiretargets" | "findmovetarget
 export type MurusgallicusadvancedArtifactLayer = "firetargets" | "movetargets" | "madecatapults" | "madetowers" | "madewalls" | "crushtargets";
 export type MurusgallicusadvancedTerrainLayer = "homerow" | "myhomerow" | "opphomerow" | "nohomerow";
 export type MurusgallicusadvancedLayer = CommonLayer | MurusgallicusadvancedUnitLayer | MurusgallicusadvancedArtifactLayer | MurusgallicusadvancedTerrainLayer;
-export type MurusgallicusadvancedBattlePos = any;
-export type MurusgallicusadvancedBattleVar = any;
-export type MurusgallicusadvancedTurnPos = any;
-export type MurusgallicusadvancedTurnVar = any;
+export type MurusgallicusadvancedBattlePos = never;
+export type MurusgallicusadvancedBattleVar = never;
+export type MurusgallicusadvancedTurnPos = never;
+export type MurusgallicusadvancedTurnVar = never;
  
 export type MurusgallicusadvancedGenerators = Generators<MurusgallicusadvancedArtifactLayer, MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar>;
 export type MurusgallicusadvancedFlow = Flow<MurusgallicusadvancedBattlePos, MurusgallicusadvancedBattleVar, MurusgallicusadvancedCommand, MurusgallicusadvancedGenerator, MurusgallicusadvancedGrid, MurusgallicusadvancedLayer, MurusgallicusadvancedMark, MurusgallicusadvancedTurnPos, MurusgallicusadvancedTurnVar, MurusgallicusadvancedUnit>;

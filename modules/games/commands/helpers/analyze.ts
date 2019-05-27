@@ -3,13 +3,21 @@ import * as path from "path";
 
 import fake from "./fake";
 
-import { FullDefAnon, typeSignature } from "../../../types";
+import {
+  FullDefAnon,
+  typeSignature,
+  isAlgolPosTurnPos,
+  isAlgolPosBattlePos,
+  isAlgolValBattleVar,
+  isAlgolValTurnVar
+} from "../../../types";
 import {
   boardPositions,
   terrainLayerNames,
   possibilities,
   emptyArtifactLayers,
-  emptyUnitLayers
+  emptyUnitLayers,
+  find
 } from "../../../common";
 import dateStamp from "./datestamp";
 
@@ -62,6 +70,39 @@ export default async function analyze(def: FullDefAnon | string) {
   const aiGrids = Object.keys(AI.grids);
   const aiBrains = Object.keys(AI.brains);
   const aiArtifactLayerNames = Object.keys(emptyArtifactLayers(AI.generators));
+
+  const turnpos = Array.from(
+    new Set(
+      find(def, isAlgolPosTurnPos).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.turnpos)),
+        []
+      )
+    )
+  );
+  const battlepos = Array.from(
+    new Set(
+      find(def, isAlgolPosBattlePos).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.battlepos)),
+        []
+      )
+    )
+  );
+  const turnvar = Array.from(
+    new Set(
+      find(def, isAlgolValTurnVar).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.turnvar)),
+        []
+      )
+    )
+  );
+  const battlevar = Array.from(
+    new Set(
+      find(def, isAlgolValBattleVar).reduce(
+        (mem, find) => mem.concat(possibilities(find.value.battlevar)),
+        []
+      )
+    )
+  );
 
   const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
@@ -118,10 +159,18 @@ export type ${capId}Layer = CommonLayer${
   }${myArtifactLayerNames.length ? ` | ${capId}ArtifactLayer` : ""}${
     myTerrainLayerNames.length ? ` | ${capId}TerrainLayer` : ""
   };
-export type ${capId}BattlePos = any;
-export type ${capId}BattleVar = any;
-export type ${capId}TurnPos = any;
-export type ${capId}TurnVar = any;
+export type ${capId}BattlePos = ${
+    battlepos.length ? battlepos.map(t => `"${t}"`).join(" | ") : "never"
+  };
+export type ${capId}BattleVar = ${
+    battlevar.length ? battlevar.map(t => `"${t}"`).join(" | ") : "never"
+  };
+export type ${capId}TurnPos = ${
+    turnpos.length ? turnpos.map(t => `"${t}"`).join(" | ") : "never"
+  };
+export type ${capId}TurnVar = ${
+    turnvar.length ? turnvar.map(t => `"${t}"`).join(" | ") : "never"
+  };
  
 export type ${capId}Generators = Generators<${typeSignature(
     "Generators",

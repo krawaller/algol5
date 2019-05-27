@@ -16,10 +16,10 @@ export type SemaphorGenerator = "findlines";
 export type SemaphorArtifactLayer = "line";
 export type SemaphorTerrainLayer = never;
 export type SemaphorLayer = CommonLayer | SemaphorUnitLayer | SemaphorArtifactLayer;
-export type SemaphorBattlePos = any;
-export type SemaphorBattleVar = any;
-export type SemaphorTurnPos = any;
-export type SemaphorTurnVar = any;
+export type SemaphorBattlePos = never;
+export type SemaphorBattleVar = never;
+export type SemaphorTurnPos = never;
+export type SemaphorTurnVar = never;
  
 export type SemaphorGenerators = Generators<SemaphorArtifactLayer, SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar>;
 export type SemaphorFlow = Flow<SemaphorBattlePos, SemaphorBattleVar, SemaphorCommand, SemaphorGenerator, SemaphorGrid, SemaphorLayer, SemaphorMark, SemaphorTurnPos, SemaphorTurnVar, SemaphorUnit>;

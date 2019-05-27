@@ -16,10 +16,10 @@ export type DuploGenerator = "findspawndirs" | "findgrowstarts" | "findexpandpoi
 export type DuploArtifactLayer = "spawndirs" | "growstarts" | "targets" | "potentialopptargets" | "spawns";
 export type DuploTerrainLayer = never;
 export type DuploLayer = CommonLayer | DuploUnitLayer | DuploArtifactLayer;
-export type DuploBattlePos = any;
-export type DuploBattleVar = any;
-export type DuploTurnPos = any;
-export type DuploTurnVar = any;
+export type DuploBattlePos = never;
+export type DuploBattleVar = never;
+export type DuploTurnPos = never;
+export type DuploTurnVar = never;
  
 export type DuploGenerators = Generators<DuploArtifactLayer, DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar>;
 export type DuploFlow = Flow<DuploBattlePos, DuploBattleVar, DuploCommand, DuploGenerator, DuploGrid, DuploLayer, DuploMark, DuploTurnPos, DuploTurnVar, DuploUnit>;

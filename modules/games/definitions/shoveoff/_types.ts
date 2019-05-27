@@ -16,10 +16,10 @@ export type ShoveoffGenerator = "findaffected" | "findresults" | "findfourinarow
 export type ShoveoffArtifactLayer = "targetedgepoints" | "squishsouth" | "squishwest" | "squishnorth" | "squisheast" | "pushsouth" | "pushwest" | "pushnorth" | "pusheast" | "spawnsouth" | "spawnwest" | "spawnnorth" | "spawneast" | "fourinarow";
 export type ShoveoffTerrainLayer = "southedge" | "northedge" | "westedge" | "eastedge" | "edge" | "nosouthedge" | "nonorthedge" | "nowestedge" | "noeastedge" | "noedge";
 export type ShoveoffLayer = CommonLayer | ShoveoffUnitLayer | ShoveoffArtifactLayer | ShoveoffTerrainLayer;
-export type ShoveoffBattlePos = any;
-export type ShoveoffBattleVar = any;
-export type ShoveoffTurnPos = any;
-export type ShoveoffTurnVar = any;
+export type ShoveoffBattlePos = never;
+export type ShoveoffBattleVar = never;
+export type ShoveoffTurnPos = never;
+export type ShoveoffTurnVar = never;
  
 export type ShoveoffGenerators = Generators<ShoveoffArtifactLayer, ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar>;
 export type ShoveoffFlow = Flow<ShoveoffBattlePos, ShoveoffBattleVar, ShoveoffCommand, ShoveoffGenerator, ShoveoffGrid, ShoveoffLayer, ShoveoffMark, ShoveoffTurnPos, ShoveoffTurnVar, ShoveoffUnit>;

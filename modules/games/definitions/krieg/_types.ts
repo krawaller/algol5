@@ -16,10 +16,10 @@ export type KriegGenerator = "findmovetargets";
 export type KriegArtifactLayer = "movetargets";
 export type KriegTerrainLayer = "southeast" | "northwest" | "corners" | "mycorners" | "oppcorners" | "bases" | "mybases" | "oppbases" | "nosoutheast" | "nonorthwest" | "nocorners" | "nobases";
 export type KriegLayer = CommonLayer | KriegUnitLayer | KriegArtifactLayer | KriegTerrainLayer;
-export type KriegBattlePos = any;
-export type KriegBattleVar = any;
-export type KriegTurnPos = any;
-export type KriegTurnVar = any;
+export type KriegBattlePos = never;
+export type KriegBattleVar = never;
+export type KriegTurnPos = never;
+export type KriegTurnVar = never;
  
 export type KriegGenerators = Generators<KriegArtifactLayer, KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegGrid, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar>;
 export type KriegFlow = Flow<KriegBattlePos, KriegBattleVar, KriegCommand, KriegGenerator, KriegGrid, KriegLayer, KriegMark, KriegTurnPos, KriegTurnVar, KriegUnit>;

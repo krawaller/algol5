@@ -16,10 +16,10 @@ export type JostleGenerator = "findinitial" | "findnew";
 export type JostleArtifactLayer = "movetargets" | "initialenemy" | "initialfriend" | "newenemy" | "newfriend";
 export type JostleTerrainLayer = never;
 export type JostleLayer = CommonLayer | JostleUnitLayer | JostleArtifactLayer;
-export type JostleBattlePos = any;
-export type JostleBattleVar = any;
-export type JostleTurnPos = any;
-export type JostleTurnVar = any;
+export type JostleBattlePos = never;
+export type JostleBattleVar = never;
+export type JostleTurnPos = never;
+export type JostleTurnVar = never;
  
 export type JostleGenerators = Generators<JostleArtifactLayer, JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar>;
 export type JostleFlow = Flow<JostleBattlePos, JostleBattleVar, JostleCommand, JostleGenerator, JostleGrid, JostleLayer, JostleMark, JostleTurnPos, JostleTurnVar, JostleUnit>;

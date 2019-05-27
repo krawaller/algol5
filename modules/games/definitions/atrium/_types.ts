@@ -16,10 +16,10 @@ export type AtriumGenerator = "findmovetargets" | "findwinlines";
 export type AtriumArtifactLayer = "movetargets" | "winline";
 export type AtriumTerrainLayer = never;
 export type AtriumLayer = CommonLayer | AtriumUnitLayer | AtriumArtifactLayer;
-export type AtriumBattlePos = any;
-export type AtriumBattleVar = any;
-export type AtriumTurnPos = any;
-export type AtriumTurnVar = any;
+export type AtriumBattlePos = never;
+export type AtriumBattleVar = never;
+export type AtriumTurnPos = never;
+export type AtriumTurnVar = never;
  
 export type AtriumGenerators = Generators<AtriumArtifactLayer, AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar>;
 export type AtriumFlow = Flow<AtriumBattlePos, AtriumBattleVar, AtriumCommand, AtriumGenerator, AtriumGrid, AtriumLayer, AtriumMark, AtriumTurnPos, AtriumTurnVar, AtriumUnit>;

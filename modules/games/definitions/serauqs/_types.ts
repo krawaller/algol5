@@ -16,10 +16,10 @@ export type SerauqsGenerator = "findmovetargets" | "findwinline";
 export type SerauqsArtifactLayer = "movetargets" | "winline";
 export type SerauqsTerrainLayer = "base" | "mybase" | "oppbase" | "corners" | "middle" | "nobase" | "nocorners" | "nomiddle";
 export type SerauqsLayer = CommonLayer | SerauqsUnitLayer | SerauqsArtifactLayer | SerauqsTerrainLayer;
-export type SerauqsBattlePos = any;
-export type SerauqsBattleVar = any;
-export type SerauqsTurnPos = any;
-export type SerauqsTurnVar = any;
+export type SerauqsBattlePos = never;
+export type SerauqsBattleVar = never;
+export type SerauqsTurnPos = never;
+export type SerauqsTurnVar = never;
  
 export type SerauqsGenerators = Generators<SerauqsArtifactLayer, SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar>;
 export type SerauqsFlow = Flow<SerauqsBattlePos, SerauqsBattleVar, SerauqsCommand, SerauqsGenerator, SerauqsGrid, SerauqsLayer, SerauqsMark, SerauqsTurnPos, SerauqsTurnVar, SerauqsUnit>;

@@ -16,10 +16,10 @@ export type UglyduckGenerator = "findmovetargets";
 export type UglyduckArtifactLayer = "movetargets";
 export type UglyduckTerrainLayer = "homerow" | "myhomerow" | "opphomerow" | "nohomerow";
 export type UglyduckLayer = CommonLayer | UglyduckUnitLayer | UglyduckArtifactLayer | UglyduckTerrainLayer;
-export type UglyduckBattlePos = any;
-export type UglyduckBattleVar = any;
-export type UglyduckTurnPos = any;
-export type UglyduckTurnVar = any;
+export type UglyduckBattlePos = never;
+export type UglyduckBattleVar = never;
+export type UglyduckTurnPos = never;
+export type UglyduckTurnVar = never;
  
 export type UglyduckGenerators = Generators<UglyduckArtifactLayer, UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGenerator, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckTurnPos, UglyduckTurnVar>;
 export type UglyduckFlow = Flow<UglyduckBattlePos, UglyduckBattleVar, UglyduckCommand, UglyduckGenerator, UglyduckGrid, UglyduckLayer, UglyduckMark, UglyduckTurnPos, UglyduckTurnVar, UglyduckUnit>;

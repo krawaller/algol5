@@ -16,10 +16,10 @@ export type OrthokonGenerator = "findvictims" | "findmovetargets";
 export type OrthokonArtifactLayer = "victims" | "movetargets";
 export type OrthokonTerrainLayer = never;
 export type OrthokonLayer = CommonLayer | OrthokonUnitLayer | OrthokonArtifactLayer;
-export type OrthokonBattlePos = any;
-export type OrthokonBattleVar = any;
-export type OrthokonTurnPos = any;
-export type OrthokonTurnVar = any;
+export type OrthokonBattlePos = never;
+export type OrthokonBattleVar = never;
+export type OrthokonTurnPos = never;
+export type OrthokonTurnVar = never;
  
 export type OrthokonGenerators = Generators<OrthokonArtifactLayer, OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar>;
 export type OrthokonFlow = Flow<OrthokonBattlePos, OrthokonBattleVar, OrthokonCommand, OrthokonGenerator, OrthokonGrid, OrthokonLayer, OrthokonMark, OrthokonTurnPos, OrthokonTurnVar, OrthokonUnit>;

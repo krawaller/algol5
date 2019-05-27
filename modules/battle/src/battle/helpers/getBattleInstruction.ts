@@ -1,12 +1,33 @@
-import { AlgolGame, AlgolBattle } from "../../../../types";
+import { AlgolGame, AlgolBattle, AlgolContent } from "../../../../types";
 
-// TODO - special if battle is over?
-
-export function getBattleInstruction(game: AlgolGame, battle: AlgolBattle) {
+export function getBattleInstruction(
+  game: AlgolGame,
+  battle: AlgolBattle
+): AlgolContent<string, string> {
   const { currentStepId } = battle.state;
   const currentStep = battle.turn.steps[currentStepId];
   if (currentStepId === "root") {
     return game.instruction["startTurn" + battle.player](currentStep);
+  }
+  if (battle.gameEndedBy) {
+    if (battle.winner === 0) {
+      return {
+        line: [
+          { text: "Game ended in a draw through " },
+          { bold: battle.gameEndedBy },
+          { text: "!" }
+        ]
+      };
+    } else {
+      return {
+        line: [
+          { player: 1 },
+          { text: " won through " },
+          { bold: battle.gameEndedBy },
+          { text: "!" }
+        ]
+      };
+    }
   }
   const actions = currentStepId.split("-");
   const lastAction = actions.slice(-1).pop() as string;

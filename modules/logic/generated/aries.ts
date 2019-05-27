@@ -196,6 +196,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     };
   };
   game.instruction.selectunit1 = step => {
+    let BATTLEVARS = step.BATTLEVARS;
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
@@ -208,7 +209,27 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
-        }
+        },
+        (UNITLAYERS.units[MARKS.selectunit] || {}).id === BATTLEVARS["pusheeid"]
+          ? collapseContent({
+              line: [
+                { text: "(but you can't push back at" },
+                {
+                  unit: [
+                    iconMapping[
+                      (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).group
+                    ],
+                    (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    BATTLEVARS["pushsquare"]
+                  ]
+                },
+                { text: "this turn)" }
+              ]
+            })
+          : undefined
       ]
     });
   };
@@ -510,6 +531,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     };
   };
   game.instruction.selectunit2 = step => {
+    let BATTLEVARS = step.BATTLEVARS;
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
@@ -522,7 +544,27 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
             (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
             MARKS.selectunit
           ]
-        }
+        },
+        (UNITLAYERS.units[MARKS.selectunit] || {}).id === BATTLEVARS["pusheeid"]
+          ? collapseContent({
+              line: [
+                { text: "(but you can't push back at" },
+                {
+                  unit: [
+                    iconMapping[
+                      (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).group
+                    ],
+                    (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).owner as
+                      | 0
+                      | 1
+                      | 2,
+                    BATTLEVARS["pushsquare"]
+                  ]
+                },
+                { text: "this turn)" }
+              ]
+            })
+          : undefined
       ]
     });
   };

@@ -1,8 +1,26 @@
-import { AriesInstructions } from './_types';
+import { AriesInstructions } from "./_types";
 
 const ariesInstructions: AriesInstructions = {
   startTurn: { line: ["Select", "soldiers", "to move"] },
-  selectunit: { line: ["Select", "where to move", { unitat: "selectunit" }] },
+  selectunit: {
+    line: [
+      "Select",
+      "where to move",
+      { unitat: "selectunit" },
+      {
+        if: [
+          { same: [{ idat: "selectunit" }, { battlevar: "pusheeid" }] },
+          {
+            line: [
+              "(but you can't push back at",
+              { unitat: { battlepos: "pushsquare" } },
+              "this turn)"
+            ]
+          }
+        ]
+      }
+    ]
+  },
   selectmovetarget: {
     line: [
       "Press",

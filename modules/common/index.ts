@@ -11,7 +11,7 @@ export * from "./demo";
 export const truthy = "TRUTHY";
 export const falsy = "FALSY";
 
-import { AlgolAnimCompiled } from "../types";
+import { AlgolAnimCompiled } from "algol-types";
 export const emptyAnim: AlgolAnimCompiled = {
   enterFrom: {},
   exitTo: {},

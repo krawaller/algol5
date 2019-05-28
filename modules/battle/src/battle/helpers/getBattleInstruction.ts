@@ -1,4 +1,4 @@
-import { AlgolGame, AlgolBattle, AlgolContent } from "../../../../types";
+import { AlgolGame, AlgolBattle, AlgolContent } from "algol-types";
 
 export function getBattleInstruction(
   game: AlgolGame,

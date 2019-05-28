@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { select } from "@storybook/addon-knobs";
 
 import { Icon } from ".";
-import { AlgolIcon, icons } from "../../../types";
+import { AlgolIcon, icons } from "algol-types";
 
 storiesOf("Icon", module).add("basic usage", () => (
   <div style={{ width: "100px", height: "100px" }}>

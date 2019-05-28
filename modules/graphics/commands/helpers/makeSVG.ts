@@ -1,5 +1,5 @@
 import lib from "../../../games/dist/lib";
-import { colnumber2name, coords2pos, terrainLayers } from "../../../common";
+import { coords2pos, terrainLayers } from "algol-common";
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as svgToMiniDataURI from "mini-svg-data-uri";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AlgolGameAPI, AlgolBattleUI } from "../../../types";
+import { AlgolGameAPI, AlgolBattleUI } from "algol-types";
 
 import { Board } from "../Board";
 import { BattleUI } from "../BattleUI";

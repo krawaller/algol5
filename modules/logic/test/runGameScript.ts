@@ -3,10 +3,9 @@ import {
   AlgolGame,
   AlgolStep,
   AlgolStepLinks,
-  isAlgolInstrLine,
   AlgolContentLineAnon
-} from "../../types";
-import { getContentText } from "../../common";
+} from "algol-types";
+import { getContentText } from "algol-common";
 
 export function runGameScript(
   id: string,

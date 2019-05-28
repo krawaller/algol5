@@ -1,4 +1,4 @@
-import { FullDefAnon } from "../../types";
+import { FullDefAnon } from "algol-types";
 import { generatorLayers } from "./generatorLayers";
 
 export function gameArtifactLayers(

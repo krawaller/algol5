@@ -1,4 +1,6 @@
 {
+  "name": "algol-games",
+  "main": "dist",
   "scripts": {
     "export": "npx ts-node ./commands/export",
     "revise": "npx ts-node ./commands/revise",

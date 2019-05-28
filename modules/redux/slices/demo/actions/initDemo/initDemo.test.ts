@@ -1,5 +1,5 @@
 import { initDemo } from "./";
-import { AlgolDemo } from "../../../../../types";
+import { AlgolDemo } from "algol-types";
 import { testCreator } from "../../../../utils";
 import { GameId } from "../../../../../games/dist/list";
 

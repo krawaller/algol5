@@ -1,4 +1,4 @@
-import { AlgolTurn, AlgolStep } from "../../../../../types";
+import { AlgolTurn, AlgolStep } from "algol-types";
 
 /*
 Used in endTurn, hydrateStepInTurn and newBattleTurn

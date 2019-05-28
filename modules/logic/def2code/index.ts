@@ -1,16 +1,16 @@
 import * as path from "path";
 import * as prettier from "prettier";
 import { executeSection } from "./executors/section";
-import { FullDefAnon } from "../../types";
-import { analyseGame } from "../../common";
+import { FullDefAnon } from "algol-types";
+import { analyseGame } from "algol-common";
 
 export function compileGameToCode(gameDef: FullDefAnon) {
   const analysis = analyseGame(gameDef);
 
-  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, terrainLayers, collapseContent, defaultInstruction} from '../../common';
+  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, terrainLayers, collapseContent, defaultInstruction} from 'algol-common';
   `;
 
-  ret += `import {AlgolStepLinks, AlgolGame} from '../../types'; `;
+  ret += `import {AlgolStepLinks, AlgolGame} from 'algol-types'; `;
 
   ret += executeSection(gameDef, 1, "head", "head");
 

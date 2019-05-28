@@ -1,11 +1,11 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import * as prettier from "prettier";
-import { FullDefAnon } from "../../../types";
+import { FullDefAnon } from "algol-types";
 import analyze from "./analyze";
 
 import { defPath } from "./_paths";
-import { emptyFullDef } from "../../../common";
+import { emptyFullDef } from "algol-common";
 
 function makeNice(obj = {}) {
   return prettier

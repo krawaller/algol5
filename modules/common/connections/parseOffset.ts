@@ -1,4 +1,4 @@
-import { AlgolOffsetBasic, AlgolOffset } from "../../types";
+import { AlgolOffsetBasic, AlgolOffset } from "algol-types";
 
 export function parseOffset(offset: AlgolOffset): AlgolOffsetBasic[] {
   if (Array.isArray(offset)) {

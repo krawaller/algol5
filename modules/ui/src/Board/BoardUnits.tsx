@@ -5,7 +5,7 @@ import {
   AlgolPosition,
   AlgolIcon,
   AlgolAnimCompiled
-} from "../../../types";
+} from "algol-types";
 
 import { TransitionGroup } from "react-transition-group";
 

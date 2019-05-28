@@ -1,4 +1,4 @@
-import { FullDefAnon } from "../../types";
+import { FullDefAnon } from "algol-types";
 import { usedUnitLayers, emptyFullDef } from "..";
 
 import aries from "../../games/definitions/aries";

@@ -3,9 +3,8 @@ import {
   isAlgolContentLine,
   isAlgolContentText,
   AlgolContentLineAnon,
-  AlgolContentText,
-  isAlgolContentSelect
-} from "../../types";
+  AlgolContentText
+} from "algol-types";
 
 const noSpacesBefore = /[,!\.? ]/;
 

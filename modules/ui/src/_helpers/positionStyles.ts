@@ -1,4 +1,4 @@
-import { pos2coords } from "../../../common";
+import { pos2coords } from "algol-common";
 import { CSSProperties } from "react";
 
 type PositionStylesOpts = {

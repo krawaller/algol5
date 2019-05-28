@@ -1,4 +1,4 @@
-import { AlgolBattle, AlgolUndo } from "../../../../types";
+import { AlgolBattle, AlgolUndo } from "algol-types";
 
 export function battleUndo(battle: AlgolBattle): AlgolBattle {
   return {

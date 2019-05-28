@@ -4,11 +4,11 @@ import {
   AlgolDemo,
   AlgolAnimCompiled,
   AlgolArmy
-} from "../../../types";
+} from "algol-types";
 
 import { Board } from "../Board";
 
-import { playDemo } from "../../../common";
+import { playDemo } from "algol-common";
 
 type DemoProps = {
   demo: AlgolDemo;

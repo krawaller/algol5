@@ -1,4 +1,4 @@
-import { AlgolContentAnon } from "../../types";
+import { AlgolContentAnon } from "algol-types";
 
 export function defaultInstruction(plr): AlgolContentAnon {
   return {

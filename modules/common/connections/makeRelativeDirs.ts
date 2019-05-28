@@ -1,4 +1,4 @@
-import { AlgolOffset } from "../../types";
+import { AlgolOffset } from "algol-types";
 import { parseOffset } from "./parseOffset";
 
 export function makeRelativeDirs(offsets: AlgolOffset[] = []) {

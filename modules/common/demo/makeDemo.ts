@@ -3,7 +3,7 @@ import {
   AlgolScriptLine,
   AlgolDemo,
   AlgolAnimCompiled
-} from "../../types";
+} from "algol-types";
 import * as jdp from "jsondiffpatch";
 
 const identifyMark = /^[a-z][0-9]+$/;

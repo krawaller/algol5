@@ -11,7 +11,7 @@ import {
   isAlgolStatementForIdIn,
   isAlgolStatementForPosIn,
   isAlgolStatementMulti
-} from "../../types";
+} from "algol-types";
 
 export function possibilities<_T>(
   input: AlgolIfableExpressionAnon<_T> | AlgolStatementAnon<_T>,

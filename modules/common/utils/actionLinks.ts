@@ -1,4 +1,4 @@
-import { AlgolEffectActionDefAnon, FullDefAnon } from "../../types";
+import { AlgolEffectActionDefAnon, FullDefAnon } from "algol-types";
 import { possibilities } from "..";
 
 export function actionLinks(

@@ -1,5 +1,5 @@
 import { GameId } from "../../../games/dist/list";
-import { AlgolArmy, AlgolAnimCompiled } from "../../../types";
+import { AlgolArmy, AlgolAnimCompiled } from "algol-types";
 import { ReducingAction } from "../../types";
 
 export enum DemoActionName {

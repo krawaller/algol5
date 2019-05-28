@@ -1,4 +1,4 @@
-import { GeneratorsAnon } from "../../types";
+import { GeneratorsAnon } from "algol-types";
 import { generatorLayers } from "./generatorLayers";
 
 export function emptyArtifactLayers(generators: GeneratorsAnon = {}) {

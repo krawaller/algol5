@@ -1,5 +1,5 @@
 import { terrainLayers } from "../";
-import { AlgolBoardAnon } from "../../types";
+import { AlgolBoardAnon } from "algol-types";
 
 // TODO - pass full gameDef so that we can mix in AI too!
 export function terrainLayerNames(board: AlgolBoardAnon) {

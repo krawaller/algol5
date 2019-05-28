@@ -3,7 +3,7 @@ import { GameId, list } from "../../../games/dist/list";
 import meta from "../../../games/dist/meta";
 import demos from "../../../battle/dist/allDemos";
 import boards from "../../../graphics/dist/svgDataURIs";
-import {} from "../../../types";
+import {} from "algol-types";
 
 import { Demo } from "../Demo";
 

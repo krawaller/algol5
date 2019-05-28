@@ -1,4 +1,4 @@
-import { AlgolBoardAnon } from "../../types";
+import { AlgolBoardAnon } from "algol-types";
 import { boardPositions, pos2coords } from "../";
 
 /*

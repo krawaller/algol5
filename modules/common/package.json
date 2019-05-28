@@ -1,4 +1,6 @@
 {
+  "name": "algol-common",
+  "main": ".",
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "@types/node": "^11.13.2",

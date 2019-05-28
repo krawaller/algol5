@@ -1,4 +1,4 @@
-import { AlgolEffectActionDefAnon, FullDefAnon } from "../../types";
+import { FullDefAnon } from "algol-types";
 import { actionLinks, actionGenerators, generatorLayers } from "../";
 
 export function analyseGame(gameDef: FullDefAnon) {

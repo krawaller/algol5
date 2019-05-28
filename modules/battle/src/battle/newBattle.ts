@@ -1,6 +1,6 @@
-import { AlgolBattle, AlgolGame, AlgolBoardState } from "../../../types";
+import { AlgolBattle, AlgolGame, AlgolBoardState } from "algol-types";
 
-import { emptyAnim } from "../../../common";
+import { emptyAnim } from "algol-common";
 
 import { firstTurn } from "./turn";
 

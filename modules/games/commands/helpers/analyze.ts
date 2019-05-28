@@ -10,7 +10,7 @@ import {
   isAlgolPosBattlePos,
   isAlgolValBattleVar,
   isAlgolValTurnVar
-} from "../../../types";
+} from "algol-types";
 import {
   boardPositions,
   terrainLayerNames,
@@ -18,7 +18,7 @@ import {
   emptyArtifactLayers,
   emptyUnitLayers,
   find
-} from "../../../common";
+} from "algol-common";
 import dateStamp from "./datestamp";
 
 import { defPath } from "./_paths";
@@ -104,7 +104,7 @@ export default async function analyze(def: FullDefAnon | string) {
     )
   );
 
-  const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+  const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, Setup, AlgolGameTestSuite, FullDef, AlgolPerformance } from 'algol-types';
 
 export type ${capId}BoardHeight = ${def.board.height};
 export type ${capId}BoardWidth = ${def.board.width};

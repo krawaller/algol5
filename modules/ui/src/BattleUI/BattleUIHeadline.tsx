@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { AlgolBattleUI } from "../../../types";
+import { AlgolBattleUI } from "algol-types";
 
 import { Content } from "../Content";
 

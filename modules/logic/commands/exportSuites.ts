@@ -7,7 +7,7 @@ const out = path.join(__dirname, "../dist");
 findSuites().then(async suites => {
   await fs.ensureDir(out);
 
-  let file = `import { AlgolSuite } from "../../types";\n\n`;
+  let file = `import { AlgolSuite } from "algol-types";\n\n`;
 
   file += suites
     .map(

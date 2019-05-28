@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AlgolIcon } from "../../../types";
+import { AlgolIcon } from "algol-types";
 import classnames from "classnames";
 
 import { hollows, solids } from "./Icon.shapes";

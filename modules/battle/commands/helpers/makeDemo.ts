@@ -2,11 +2,11 @@ import { makeGameAPI } from "../../src";
 import gameDefs from "../../../games/dist/lib";
 import { GameId } from "../../../games/dist/list";
 import games from "../../../logic/dist";
-import { AlgolScriptLine } from "../../../types";
+import { AlgolScriptLine } from "algol-types";
 import * as fs from "fs-extra";
 import * as path from "path";
 
-import { makeDemo as demoMaker } from "../../../common";
+import { makeDemo as demoMaker } from "algol-common";
 
 const out = path.join(__dirname, "../../dist/demos");
 
@@ -20,7 +20,7 @@ export async function makeDemo(gameId: GameId) {
 
   await fs.ensureDir(out);
 
-  const fileContent = `import { AlgolDemo } from "../../../types";
+  const fileContent = `import { AlgolDemo } from "algol-types";
   export const ${gameId}Demo: AlgolDemo = {
     initial: ${JSON.stringify(initial)},
     patches: ${JSON.stringify(patches)},

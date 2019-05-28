@@ -1,4 +1,4 @@
-import { isAlgolFilterDef, DrawDefAnon } from "../../types";
+import { isAlgolFilterDef, DrawDefAnon } from "algol-types";
 import { possibilities } from "..";
 
 export function generatorLayers(genDef, player, action) {

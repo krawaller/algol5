@@ -1,4 +1,4 @@
-import { AlgolBattle, AlgolGame } from "../../../types";
+import { AlgolBattle, AlgolGame } from "algol-types";
 
 import {
   battleEndTurn,
@@ -15,7 +15,7 @@ export function battleAction(
 ): AlgolBattle {
   if (action === "endTurn") return battleEndTurn(game, battle);
   if (action === "undo") return battleUndo(battle);
-  if (action === "mark") return battleMark(game, battle, arg);
-  if (action === "command") return battleCommand(game, battle, arg);
+  if (action === "mark") return battleMark(game, battle, arg as string);
+  if (action === "command") return battleCommand(game, battle, arg as string);
   throw new Error(`Unknown battle input: ${action} ${arg || ""}`);
 }

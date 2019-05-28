@@ -1,4 +1,4 @@
-import { AlgolBoardAnon } from "../../types";
+import { AlgolBoardAnon } from "algol-types";
 import { terrainLayers } from "..";
 
 type TerrainTest = {

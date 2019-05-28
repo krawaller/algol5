@@ -1,4 +1,4 @@
-import { TerrainDefAnon } from "../../types";
+import { TerrainDefAnon } from "algol-types";
 import { processEntity, boardPositions } from "../";
 
 /*

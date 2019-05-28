@@ -1,4 +1,3 @@
-import { AlgolBoardAnon } from "../../types";
 import { coords2pos } from "../";
 
 export function boardPositions(height: number, width: number) {

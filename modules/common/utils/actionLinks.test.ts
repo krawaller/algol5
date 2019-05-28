@@ -1,5 +1,5 @@
 import { emptyFullDef } from "../";
-import { FullDefAnon } from "../../types";
+import { FullDefAnon } from "algol-types";
 import { actionLinks } from "./";
 
 const def: FullDefAnon = {

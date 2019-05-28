@@ -1,9 +1,9 @@
 import { getBattleInstruction } from "./helpers/getBattleInstruction";
 
-import { AlgolBattleUI, AlgolGame, AlgolBattle } from "../../../types";
+import { AlgolBattleUI, AlgolGame, AlgolBattle } from "algol-types";
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 
-import { emptyAnim } from "../../../common";
+import { emptyAnim } from "algol-common";
 
 export function getBattleUI(
   game: AlgolGame,

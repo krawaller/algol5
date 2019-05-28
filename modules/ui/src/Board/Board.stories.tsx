@@ -4,7 +4,7 @@ import { select } from "@storybook/addon-knobs";
 
 import { Board } from ".";
 import { GameId, list } from "../../../games/dist/list";
-import { AlgolUnitState } from "../../../types";
+import { AlgolUnitState } from "algol-types";
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 
 storiesOf("Board", module)

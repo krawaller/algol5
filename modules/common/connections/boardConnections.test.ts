@@ -1,5 +1,5 @@
 import { boardConnections } from "./";
-import { AlgolBoard, AlgolOffset } from "../../types";
+import { AlgolOffset } from "algol-types";
 
 describe("common/boardConnections", () => {
   test("can do basic positions", () => {

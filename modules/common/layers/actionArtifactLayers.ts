@@ -1,4 +1,4 @@
-import { AlgolEffectActionDefAnon, FullDefAnon } from "../../types";
+import { AlgolEffectActionDefAnon, FullDefAnon } from "algol-types";
 import { generatorLayers } from "./generatorLayers";
 import { possibilities } from "..";
 

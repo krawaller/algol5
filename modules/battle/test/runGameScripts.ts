@@ -1,4 +1,4 @@
-import { AlgolGameTestSuite, AlgolGameAPI } from "../../types";
+import { AlgolGameTestSuite, AlgolGameAPI } from "algol-types";
 
 const identifyMark = /^[a-z][0-9]+$/;
 

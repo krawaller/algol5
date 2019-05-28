@@ -1,6 +1,6 @@
 import { offsetPos } from "../";
 import { parseOffset } from "./parseOffset";
-import { AlgolBoardAnon, AlgolOffsetBasic } from "../../types";
+import { AlgolBoardAnon, AlgolOffsetBasic } from "algol-types";
 
 export function posConnections(pos, board: AlgolBoardAnon) {
   const ret = {};

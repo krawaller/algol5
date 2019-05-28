@@ -1,5 +1,5 @@
 import { offsetPos } from "..";
-import { AlgolBoardAnon } from "../../types";
+import { AlgolBoardAnon } from "algol-types";
 
 const testBoard: AlgolBoardAnon = { height: 3, width: 4 };
 

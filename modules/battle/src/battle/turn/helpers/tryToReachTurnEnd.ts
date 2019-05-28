@@ -1,4 +1,4 @@
-import { AlgolGame, AlgolTurn } from "../../../../../types";
+import { AlgolGame, AlgolTurn } from "algol-types";
 
 /*
 Used in hydrateStepInTurn

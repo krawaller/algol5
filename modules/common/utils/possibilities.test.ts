@@ -1,5 +1,5 @@
 import { possibilities } from "..";
-import { AlgolLogicalAnon } from "../../types";
+import { AlgolLogicalAnon } from "algol-types";
 
 type PossTest<_T> = {
   expr: AlgolLogicalAnon<_T>;

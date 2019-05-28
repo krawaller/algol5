@@ -1,5 +1,5 @@
 import { makeRelativeDirs } from "./";
-import { AlgolOffset } from "../../types";
+import { AlgolOffset } from "algol-types";
 
 type RelativeDirTest = {
   dir: number | string;

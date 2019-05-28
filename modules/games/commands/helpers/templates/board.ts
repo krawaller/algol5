@@ -1,5 +1,3 @@
-import { typeSignature } from "../../../../types";
-
 export default function templateBoard(gameId) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return `import { ${capId}Board } from './_types';

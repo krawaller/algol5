@@ -1,4 +1,4 @@
-import { FullDefAnon } from "../../types";
+import { FullDefAnon } from "algol-types";
 
 // TODO - AI terrain too
 export function isTerrainNeutral(gameDef: FullDefAnon) {

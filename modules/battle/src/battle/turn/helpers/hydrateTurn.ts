@@ -1,4 +1,4 @@
-import { AlgolTurn, AlgolGame } from "../../../../../types";
+import { AlgolTurn, AlgolGame } from "algol-types";
 import { hydrateStepInTurn } from "../helpers";
 
 /*

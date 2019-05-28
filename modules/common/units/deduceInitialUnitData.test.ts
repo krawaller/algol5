@@ -1,4 +1,4 @@
-import { SetupAnon } from "../../types";
+import { SetupAnon } from "algol-types";
 import { deduceInitialUnitData } from "..";
 
 type unitDataTest = {

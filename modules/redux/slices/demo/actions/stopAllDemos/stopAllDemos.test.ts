@@ -1,6 +1,5 @@
 import { stopAllDemos } from "./";
 import { testCreator } from "../../../../utils";
-import { GameId } from "../../../../../games/dist/list";
 
 testCreator(stopAllDemos, [
   {

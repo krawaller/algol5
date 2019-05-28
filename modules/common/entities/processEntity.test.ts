@@ -1,5 +1,5 @@
 import { processEntity, ProcessedEntity } from "..";
-import { AlgolEntityAnon } from "../../types";
+import { AlgolEntityAnon } from "algol-types";
 
 type EntityTest = {
   entity: AlgolEntityAnon;

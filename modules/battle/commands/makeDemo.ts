@@ -2,7 +2,7 @@ import { makeDemo } from "./helpers/makeDemo";
 import names, { GameId } from "./helpers/_names";
 import * as fs from "fs-extra";
 import * as path from "path";
-const gameId = <GameId>process.argv[2];
+const gameId = <string>process.argv[2];
 
 (async () => {
   if (!gameId) {
@@ -20,6 +20,8 @@ const gameId = <GameId>process.argv[2];
   } else if (names.indexOf(gameId) === -1) {
     console.log(`Game "${gameId}" doesn't exists!`);
   } else {
-    makeDemo(gameId).catch(e => console.log("Compilation failed", e));
+    makeDemo((gameId as unknown) as GameId).catch(e =>
+      console.log("Compilation failed", e)
+    );
   }
 })();

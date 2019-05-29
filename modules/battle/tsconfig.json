@@ -1,13 +1,3 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "sourceMap": true,
-    "allowJs": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "module": "commonjs",
-    "lib": ["es2018", "es5"],
-    "types": ["node", "jest", "fs-extra"]
-  },
-  "exclude": ["node_modules"]
+  "extends": "../../tsconfig.json"
 }

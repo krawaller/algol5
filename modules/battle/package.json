@@ -1,24 +1,16 @@
 {
   "scripts": {
-    "test": "jest",
+    "test": "cd ../..; npx jest modules/battle",
     "megaBundle": "node ./commands/megaBundle",
-    "makeDemo": "ts-node ./commands/makeDemo",
-    "generateGameTests": "ts-node ./test/generateGameTests",
-    "exportGameAPIs": "ts-node ./commands/exportGameAPIs"
+    "makeDemo": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/battle/commands/makeDemo",
+    "generateGameTests": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/battle/test/generateGameTests",
+    "exportGameAPIs": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/battle/commands/exportGameAPIs"
   },
   "dependencies": {
     "workerwrapper": "github:krawaller/workerwrapper"
   },
   "devDependencies": {
-    "@types/fs-extra": "^5.0.5",
-    "@types/jest": "^24.0.11",
-    "@types/node": "^11.13.2",
-    "fs-extra": "^7.0.1",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
-    "ts-node": "^8.0.3",
-    "typescript": "^3.4.2",
     "webpack": "^4.30.0"
   }
 }

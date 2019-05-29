@@ -1,6 +1,7 @@
 export * from "./dirs.anon";
 
 import { AlgolExpression } from "../../";
+import { BasicDir } from "../../gamedef";
 
 export type AlgolDirs<
   Btlp,
@@ -23,8 +24,4 @@ export type AlgolDirs<
   Turnv
 >;
 
-export type AlgolDirsInner =
-  | "ortho"
-  | "diag"
-  | "rose"
-  | (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8)[];
+export type AlgolDirsInner = "ortho" | "diag" | "rose" | BasicDir[];

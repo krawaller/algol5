@@ -1,4 +1,9 @@
-import { AlgolOffsetBasic, AlgolOffset } from "../../types";
+import {
+  AlgolOffsetBasic,
+  AlgolOffset,
+  AlgolDirsInner,
+  BasicDir
+} from "../../types";
 
 export function parseOffset(offset: AlgolOffset): AlgolOffsetBasic[] {
   if (Array.isArray(offset)) {
@@ -11,7 +16,7 @@ export function parseOffset(offset: AlgolOffset): AlgolOffsetBasic[] {
   throw new Error(`Unknown offset def: ${JSON.stringify(offset)}`);
 }
 
-function parseDirs(dirs) {
+function parseDirs(dirs: AlgolDirsInner): BasicDir[] {
   if (Array.isArray(dirs)) return dirs;
   if (dirs === "ortho") return [1, 3, 5, 7];
   if (dirs === "diag") return [2, 4, 6, 8];

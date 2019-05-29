@@ -2,10 +2,10 @@ import { AlgolBoardAnon } from "../../types";
 import { pos2coords, coords2pos } from "../";
 
 export function offsetPos(
-  pos,
-  dir,
-  forward,
-  right,
+  pos: string,
+  dir: number,
+  forward: number,
+  right: number,
   board: AlgolBoardAnon
 ): string | false {
   const forwardmods = [

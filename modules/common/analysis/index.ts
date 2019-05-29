@@ -1,13 +1,26 @@
 import { FullDefAnon } from "../../types";
 import { actionLinks, actionGenerators, generatorLayers } from "../";
 
+type ActionAnalysis = {
+  priorMarks: string[];
+  from: string[];
+  links: string[];
+  generators: string[];
+  addedArtifacts: string[];
+  priorArtifacts: string[];
+  isCmnd?: boolean;
+  addsMark?: string;
+};
+
 export function analyseGame(gameDef: FullDefAnon) {
-  const ret = {};
+  const ret: { [plr: string]: { [action: string]: ActionAnalysis } } = {};
   for (const plr of [1, 2]) {
-    const plrAnalysis = {};
-    let toCheck = [["startTurn"]];
+    const plrAnalysis = {} as { [action: string]: ActionAnalysis };
+    let toCheck: ([string] | [string, string])[] = [["startTurn"]];
     while (toCheck.length) {
-      const [action, from] = toCheck.shift();
+      const [action, from] = (toCheck.shift() as unknown) as (
+        | [string]
+        | [string, string]);
       const links = actionLinks(gameDef, plr as 1 | 2, action);
       if (!plrAnalysis[action]) {
         plrAnalysis[action] = {
@@ -39,7 +52,7 @@ export function analyseGame(gameDef: FullDefAnon) {
                   action
                 )
               ),
-            []
+            [] as string[]
           )
         )
       );
@@ -47,7 +60,7 @@ export function analyseGame(gameDef: FullDefAnon) {
       // TODO - uniq
       plrAnalysis[action].links = plrAnalysis[action].links.concat(links);
       if (action !== "startTurn") {
-        plrAnalysis[action].from.push(from);
+        plrAnalysis[action].from.push(from as string);
         plrAnalysis[action].priorMarks = plrAnalysis[action].from.reduce(
           (mem, l) => {
             const prev = plrAnalysis[l];

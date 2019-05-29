@@ -17,6 +17,6 @@ export function makeRelativeDirs(offsets: AlgolOffset[] = []) {
         {}
       )
     }),
-    {}
+    {} as { [n: string]: { [n: string]: number } }
   );
 }

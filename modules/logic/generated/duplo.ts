@@ -7,8 +7,8 @@ import {
   terrainLayers,
   collapseContent,
   defaultInstruction
-} from "algol-common";
-import { AlgolStepLinks, AlgolGame } from "algol-types";
+} from "../../common";
+import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
 const iconMapping = { soldiers: "pawn" };

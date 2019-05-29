@@ -1,8 +1,0 @@
-{
-  "compilerOptions": {
-    "lib": ["es2015", "es2018"],
-    "types": ["node", "fs-extra", "prettier"],
-    "resolveJsonModule": true,
-    "esModuleInterop": true
-  }
-}

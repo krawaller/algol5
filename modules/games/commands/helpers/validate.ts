@@ -5,7 +5,7 @@ import {
   isAlgolStatementForPosIn,
   isAlgolLogicalIf
 } from "algol-types";
-import * as isEqual from "lodash.isequal";
+import isEqual from "lodash.isequal";
 
 export default function validateDef(def: FullDefAnon) {
   const { meta: skipMeta, scripts: skipScripts, ...rest } = def;

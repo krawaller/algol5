@@ -2,27 +2,17 @@
   "name": "algol-games",
   "main": "dist",
   "scripts": {
-    "export": "npx ts-node ./commands/export",
-    "revise": "npx ts-node ./commands/revise",
-    "retemplateAll": "npx ts-node ./commands/retemplateAll",
-    "stub": "npx ts-node ./commands/stub $*",
-    "analyze": "npx ts-node ./commands/analyze $*",
-    "fake": "npx ts-node ./commands/fake $*",
-    "watch": "npx ts-node ./commands/watch $*",
-    "validate": "npx ts-node ./commands/validate $*",
-    "test": "ts-node node_modules/tape/bin/tape test/*.spec.ts | node_modules/.bin/tap-spec"
+    "export": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/export",
+    "revise": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/revise",
+    "retemplateAll": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/retemplateAll",
+    "stub": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/stub",
+    "analyze": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/analyze.ts",
+    "fake": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/fake",
+    "watch": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/watch",
+    "validate": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/validate",
+    "test": "cd ../..; npx jest modules/games/test"
   },
   "devDependencies": {
-    "@types/fs-extra": "^5.0.4",
-    "@types/node": "^10.12.18",
-    "@types/prettier": "^1.16.1",
-    "@types/tape": "^4.2.33",
-    "fs-extra": "^7.0.1",
-    "prettier": "^1.16.4",
-    "tap-spec": "^5.0.0",
-    "tape": "^4.10.1",
-    "ts-node": "^8.0.2",
-    "typescript": "^3.2.4",
     "watchr": "^4.1.0"
   },
   "dependencies": {

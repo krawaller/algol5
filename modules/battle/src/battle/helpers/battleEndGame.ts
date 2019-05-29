@@ -1,6 +1,10 @@
-import { AlgolBattle, AlgolBoardState, AlgolContentAnon } from "algol-types";
+import {
+  AlgolBattle,
+  AlgolBoardState,
+  AlgolContentAnon
+} from "../../../../types";
 
-import { emptyAnim } from "algol-common";
+import { emptyAnim } from "../../../../common";
 
 export function battleEndGame(battle: AlgolBattle): AlgolBattle {
   const currentStep = battle.turn.steps[battle.state.currentStepId];

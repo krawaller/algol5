@@ -1,4 +1,4 @@
-import { GeneratorsAnon } from "algol-types";
+import { GeneratorsAnon } from "../../types";
 import { emptyArtifactLayers } from "..";
 
 type EmptyArtifactLayerTest = {

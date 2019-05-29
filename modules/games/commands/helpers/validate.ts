@@ -4,7 +4,7 @@ import {
   AlgolStatementAnon,
   isAlgolStatementForPosIn,
   isAlgolLogicalIf
-} from "algol-types";
+} from "../../../types";
 import isEqual from "lodash.isequal";
 
 export default function validateDef(def: FullDefAnon) {

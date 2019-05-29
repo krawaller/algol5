@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Icon } from "../Icon";
-import { AlgolIcon } from "algol-types";
+import { AlgolIcon } from "../../../types";
 import { positionStyles } from "../_helpers";
 import { TransitionStatus } from "react-transition-group/Transition";
 

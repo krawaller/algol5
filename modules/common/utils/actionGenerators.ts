@@ -1,4 +1,4 @@
-import { AlgolEffectActionDefAnon, FullDefAnon } from "algol-types";
+import { AlgolEffectActionDefAnon, FullDefAnon } from "../../types";
 import { possibilities } from "..";
 
 export function actionGenerators(
@@ -16,6 +16,6 @@ export function actionGenerators(
     .concat(def.runGenerator || [])
     .reduce(
       (mem, genName) => mem.concat(possibilities(genName, player, action)),
-      []
+      [] as string[]
     );
 }

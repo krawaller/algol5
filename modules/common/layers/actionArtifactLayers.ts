@@ -1,4 +1,4 @@
-import { AlgolEffectActionDefAnon, FullDefAnon } from "algol-types";
+import { AlgolEffectActionDefAnon, FullDefAnon } from "../../types";
 import { generatorLayers } from "./generatorLayers";
 import { possibilities } from "..";
 
@@ -17,13 +17,13 @@ export function actionArtifactLayers(
     .concat(def.runGenerator || [])
     .reduce(
       (mem, genName) => mem.concat(possibilities(genName, player, action)),
-      []
+      [] as string[]
     );
 
   const artifactLayers = possibleGenerators.reduce(
     (mem, genName: string) =>
       mem.concat(generatorLayers(gameDef.generators[genName], player, action)),
-    []
+    [] as string[]
   );
 
   return artifactLayers.filter(

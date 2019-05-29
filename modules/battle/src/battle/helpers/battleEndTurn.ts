@@ -1,8 +1,8 @@
-import { AlgolGame, AlgolBattle } from "algol-types";
+import { AlgolGame, AlgolBattle } from "../../../../types";
 import { endTurn } from "../turn";
 import { battleEndGame } from "./battleEndGame";
 
-import { emptyAnim } from "algol-common";
+import { emptyAnim } from "../../../../common";
 
 export function battleEndTurn(
   game: AlgolGame,

@@ -1,7 +1,7 @@
 import { GameId } from "../../../../../games/dist/list";
 import { DemoAction } from "../../types";
 import { makeCreatorAndGuard } from "../../../../utils";
-import { AlgolArmy } from "algol-types";
+import { AlgolArmy } from "../../../../../types";
 
 export type InflateDemoPayload = { gameId: GameId; positions: AlgolArmy[] };
 

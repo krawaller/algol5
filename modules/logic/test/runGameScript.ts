@@ -3,9 +3,10 @@ import {
   AlgolGame,
   AlgolStep,
   AlgolStepLinks,
-  AlgolContentLineAnon
-} from "algol-types";
-import { getContentText } from "algol-common";
+  AlgolContentLineAnon,
+  AlgolScriptLine
+} from "../../types";
+import { getContentText } from "../../common";
 
 export function runGameScript(
   id: string,
@@ -21,7 +22,7 @@ export function runGameScript(
       let lastFunc = "startTurn1";
       while (lines.length) {
         n++;
-        const line = lines.shift();
+        const line = lines.shift() as AlgolScriptLine<string, string>;
         for (const action of line.commands) {
           let func;
           if (

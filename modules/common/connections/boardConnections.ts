@@ -1,6 +1,6 @@
 import { boardPositions } from "../";
 import { posConnections } from "./posConnections";
-import { AlgolBoardAnon } from "algol-types";
+import { AlgolBoardAnon } from "../../types";
 
 /*
 Calculates the connections object

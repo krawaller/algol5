@@ -1,4 +1,4 @@
-import { FullDefAnon } from "algol-types";
+import { FullDefAnon } from "../../types";
 
 export const emptyFullDef: FullDefAnon = {
   generators: {},

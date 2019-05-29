@@ -11,7 +11,7 @@ import {
   isAlgolContentPlayer,
   isAlgolContentEndTurn,
   isAlgolContentBold
-} from "algol-types";
+} from "../../../types";
 
 import { Icon } from "../Icon";
 

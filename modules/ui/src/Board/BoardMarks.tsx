@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Mark } from "../Mark";
-import { AlgolUnitState, AlgolPosition } from "algol-types";
+import { AlgolUnitState, AlgolPosition } from "../../../types";
 
 type BoardMarksProps = {
   units: { [id: string]: AlgolUnitState };

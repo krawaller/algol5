@@ -1,6 +1,6 @@
 import { offsetPos } from "../";
 import { parseOffset } from "./parseOffset";
-import { AlgolBoardAnon, AlgolOffsetBasic } from "algol-types";
+import { AlgolBoardAnon, AlgolOffsetBasic, AlgolOffset } from "../../types";
 
 export function posConnections(pos, board: AlgolBoardAnon) {
   const ret = {};
@@ -16,7 +16,7 @@ export function posConnections(pos, board: AlgolBoardAnon) {
   if (board.offset) offsets.push(board.offset);
   offsets = offsets.reduce(
     (mem, offset) => mem.concat(parseOffset(offset)),
-    []
+    [] as AlgolOffset[]
   );
 
   offsets.forEach((offset: AlgolOffsetBasic) => {

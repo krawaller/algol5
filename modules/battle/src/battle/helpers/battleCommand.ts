@@ -1,5 +1,5 @@
-import { AlgolBattle, AlgolGame } from "algol-types";
-import { emptyAnim } from "algol-common";
+import { AlgolBattle, AlgolGame } from "../../../../types";
+import { emptyAnim } from "../../../../common";
 
 export function battleCommand(
   game: AlgolGame,

@@ -1,4 +1,4 @@
-import { FullDefAnon } from "algol-types";
+import { FullDefAnon } from "../../types";
 import { generatorLayers } from "./generatorLayers";
 
 export function gameArtifactLayers(
@@ -6,7 +6,7 @@ export function gameArtifactLayers(
   player: 1 | 2,
   action: string
 ) {
-  let names = [];
+  let names = [] as string[];
 
   Object.keys(gameDef.generators).forEach(genName => {
     const genDef = gameDef.generators[genName];

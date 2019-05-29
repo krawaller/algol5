@@ -1,7 +1,11 @@
 import * as React from "react";
 
-import { AlgolUnitState, AlgolPosition, AlgolAnimCompiled } from "algol-types";
-import { emptyAnim } from "algol-common";
+import {
+  AlgolUnitState,
+  AlgolPosition,
+  AlgolAnimCompiled
+} from "../../../types";
+import { emptyAnim } from "../../../common";
 
 import { BoardMarks } from "./BoardMarks";
 import { BoardUnits } from "./BoardUnits";

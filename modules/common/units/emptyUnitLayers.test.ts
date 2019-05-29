@@ -1,4 +1,4 @@
-import { FullDefAnon } from "algol-types";
+import { FullDefAnon } from "../../types";
 import { emptyUnitLayers, emptyFullDef } from "..";
 
 type UnitLayerTest = {

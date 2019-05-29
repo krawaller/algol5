@@ -1,6 +1,6 @@
 import * as jdp from "jsondiffpatch";
 
-import { AlgolDemo, AlgolArmy, AlgolHydratedDemo } from "algol-types";
+import { AlgolDemo, AlgolArmy, AlgolHydratedDemo } from "../../types";
 
 export function inflateDemo(demo: AlgolDemo): AlgolHydratedDemo {
   const positions: AlgolArmy[] = [demo.initial];

@@ -7,7 +7,7 @@ import lib from "../../../games/dist/lib";
 
 const out = path.join(__dirname, "../../generated");
 
-export default async function compile(gameId) {
+export default async function compile(gameId: keyof typeof lib) {
   const rules = lib[gameId];
   try {
     const code = compileGameToCode(rules);

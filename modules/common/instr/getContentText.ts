@@ -7,7 +7,7 @@ import {
   isAlgolContentUnit,
   isAlgolContentLine,
   isAlgolContentSelect
-} from "algol-types";
+} from "../../types";
 
 export function getContentText(content: AlgolContentAnon) {
   if (isAlgolContentText(content)) {

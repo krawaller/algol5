@@ -1,4 +1,4 @@
-import { FullDefAnon } from "algol-types";
+import { FullDefAnon } from "../../../types";
 import overwrite from "./overwrite";
 
 import lib from "../../dist/lib";

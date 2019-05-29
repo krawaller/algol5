@@ -1,4 +1,4 @@
-import { AlgolBattle, AlgolGame } from "algol-types";
+import { AlgolBattle, AlgolGame } from "../../../types";
 
 import {
   battleEndTurn,

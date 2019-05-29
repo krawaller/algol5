@@ -1,4 +1,4 @@
-import { AlgolGame, AlgolGameAPI } from "algol-types";
+import { AlgolGame, AlgolGameAPI } from "../../types";
 import { newBattle, battleAction, getBattleUI } from "./battle";
 
 export function makeGameAPI(game: AlgolGame): AlgolGameAPI {

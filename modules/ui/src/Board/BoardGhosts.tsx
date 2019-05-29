@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { AlgolIcon, AlgolAnimCompiled } from "algol-types";
+import { AlgolIcon, AlgolAnimCompiled } from "../../../types";
 
 import { Piece } from "../Piece";
 

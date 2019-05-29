@@ -1,4 +1,4 @@
-import { AlgolBoardAnon } from "algol-types";
+import { AlgolBoardAnon } from "../../types";
 import { pos2coords, coords2pos } from "../";
 
 export function offsetPos(

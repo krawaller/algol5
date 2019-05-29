@@ -1,4 +1,4 @@
-import { AlgolStep, AlgolStepLinks, AlgolGame } from "algol-types";
+import { AlgolStep, AlgolStepLinks, AlgolGame } from "../../types";
 
 export function runGameRandomly(
   id: string,

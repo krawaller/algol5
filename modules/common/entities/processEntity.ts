@@ -7,7 +7,7 @@ import {
   isAlgolEntityHoleRect,
   isAlgolEntityRect,
   isAlgolEntitySites
-} from "algol-types";
+} from "../../types";
 
 export type ProcessedEntity = {
   pos: string;

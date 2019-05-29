@@ -1,4 +1,4 @@
-import { FullDefAnon } from "algol-types";
+import { FullDefAnon } from "../../types";
 import { contains } from "../";
 
 export function usedUnitLayers(def: FullDefAnon): string[] {

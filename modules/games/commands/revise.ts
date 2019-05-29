@@ -1,5 +1,5 @@
 import update from "./helpers/update";
-import { FullDefAnon } from "algol-types";
+import { FullDefAnon } from "../../types";
 
 function translator(def: FullDefAnon): FullDefAnon {
   const { performance = {}, ...otherMeta } = def.meta;

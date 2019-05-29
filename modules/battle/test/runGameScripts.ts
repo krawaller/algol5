@@ -1,4 +1,4 @@
-import { AlgolGameTestSuite, AlgolGameAPI } from "algol-types";
+import { AlgolGameTestSuite, AlgolGameAPI } from "../../types";
 
 const identifyMark = /^[a-z][0-9]+$/;
 
@@ -10,7 +10,7 @@ export function runGameScripts(
   for (const scriptName in scripts) {
     test(`Running ${gameId} ${scriptName}`, () => {
       const seq = scripts[scriptName]
-        .reduce((mem, line) => mem.concat(line.commands), [])
+        .reduce((mem, line) => mem.concat(line.commands), [] as string[])
         .slice(0, 5);
       let { initialUI: ui, performAction } = api.newBattle();
       for (const action of seq) {

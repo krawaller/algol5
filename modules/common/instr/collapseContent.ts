@@ -4,7 +4,7 @@ import {
   isAlgolContentText,
   AlgolContentLineAnon,
   AlgolContentText
-} from "algol-types";
+} from "../../types";
 
 const noSpacesBefore = /[,!\.? ]/;
 

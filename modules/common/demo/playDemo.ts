@@ -3,7 +3,7 @@ import {
   AlgolHydratedDemo,
   AlgolDemoCallback,
   AlgolDemoControl
-} from "algol-types";
+} from "../../types";
 
 import { emptyAnim } from "../../common";
 

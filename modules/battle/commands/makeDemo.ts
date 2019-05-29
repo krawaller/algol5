@@ -2,7 +2,7 @@ import { makeDemo } from "./helpers/makeDemo";
 import names, { GameId } from "./helpers/_names";
 import * as fs from "fs-extra";
 import * as path from "path";
-const gameId = <string>process.argv[2];
+const gameId = ((<string>process.argv[2]) as unknown) as GameId;
 
 (async () => {
   if (!gameId) {

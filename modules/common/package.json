@@ -1,16 +1,9 @@
 {
   "name": "algol-common",
   "main": ".",
-  "devDependencies": {
-    "@types/jest": "^24.0.13",
-    "@types/node": "^11.13.2",
-    "jest": "^24.7.1",
-    "ts-jest": "^24.0.2",
-    "ts-node": "^8.1.0",
-    "typescript": "^3.4.5"
-  },
+  "devDependencies": {},
   "scripts": {
-    "test": "jest"
+    "test": "cd ../..; npx jest modules/common"
   },
   "dependencies": {
     "jsondiffpatch": "^0.3.11",

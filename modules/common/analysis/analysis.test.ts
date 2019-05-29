@@ -41,8 +41,8 @@ describe("the analyseGame function (test with gowiththefloe)", () => {
     const result = analyseGame(amazons);
     const actions = result[1];
     expect(actions.startTurn.generators).toEqual([]);
-    expect(actions.selectunit.generators).toEqual(["findtargets"]);
-    expect(actions.move.generators).toEqual(["findtargets"]);
+    expect(actions.selectunit.generators).toEqual(["findmovetargets"]);
+    expect(actions.move.generators).toEqual(["findfiretargets"]);
   });
 
   it("maps used generators per action (test with gowiththefloe)", () => {

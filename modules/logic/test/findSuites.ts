@@ -1,6 +1,6 @@
 import * as path from "path";
 
-import * as glob from "glob";
+import glob from "glob";
 
 export async function findSuites() {
   let suiteFiles: string[] = [];

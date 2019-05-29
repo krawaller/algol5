@@ -65,7 +65,7 @@ export function runGameScript(
                 action === step.LINKS.endTurn
               ) {
                 expect((instr as AlgolContentLineAnon).line).toContainEqual({
-                  command: "endTurn"
+                  endTurn: "end turn"
                 });
               } else {
                 expect((instr as AlgolContentLineAnon).line).toContainEqual({

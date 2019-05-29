@@ -1,6 +1,5 @@
 {
   "name": "algol-common",
-  "main": ".",
   "devDependencies": {},
   "scripts": {
     "test": "cd ../..; npx jest modules/common"

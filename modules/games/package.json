@@ -1,6 +1,5 @@
 {
   "name": "algol-games",
-  "main": "dist",
   "scripts": {
     "export": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/export",
     "revise": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/revise",

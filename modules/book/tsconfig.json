@@ -1,12 +1,3 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "sourceMap": true,
-    "allowJs": true,
-    "moduleResolution": "node",
-    "module": "commonjs",
-    "lib": ["es2015", "es5"],
-    "types": ["node", "fs-extra", "prettier"]
-  },
-  "exclude": ["node_modules"]
+  "extends": "../../tsconfig.json"
 }

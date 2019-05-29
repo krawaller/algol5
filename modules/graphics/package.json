@@ -2,15 +2,10 @@
   "scripts": {
     "robot": "npm run makeSVG",
     "clean": "rm -rf dist; mkdir dist;",
-    "makeSVG": "ts-node ./commands/makeSVG"
+    "makeSVG": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/makeSVG"
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/fs-extra": "^5.0.5",
-    "@types/node": "^10.12.18",
-    "fs-extra": "^7.0.1",
-    "mini-svg-data-uri": "^1.0.3",
-    "ts-node": "^8.1.0",
-    "typescript": "^3.4.4"
+    "mini-svg-data-uri": "^1.0.3"
   }
 }

@@ -1,7 +1,3 @@
 {
-  "compilerOptions": {
-    "types": ["node"],
-    "lib": ["es2018"],
-    "resolveJsonModule": true
-  }
+  "extends": "../../tsconfig.json"
 }

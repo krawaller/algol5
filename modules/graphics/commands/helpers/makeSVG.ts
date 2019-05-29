@@ -2,7 +2,7 @@ import lib from "../../../games/dist/lib";
 import { coords2pos, terrainLayers } from "algol-common";
 import * as fs from "fs-extra";
 import * as path from "path";
-import * as svgToMiniDataURI from "mini-svg-data-uri";
+import svgToMiniDataURI from "mini-svg-data-uri";
 
 function tileAtPos(layers, tilemap, pos) {
   return Object.keys(tilemap).reduce(function(mem, name) {

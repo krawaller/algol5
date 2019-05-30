@@ -2,6 +2,7 @@
   "name": "algol-common",
   "devDependencies": {},
   "scripts": {
+    "robot": "npm install",
     "test:unit": "cd ../..; npx jest modules/common",
     "test:ts": "cd ../..; npx tsc --noEmit modules/common/**/*.ts"
   },

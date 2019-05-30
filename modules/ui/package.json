@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "robot": "npm install; npm run build-storybook",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o dist"
   },

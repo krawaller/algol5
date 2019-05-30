@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm run makeSVG",
+    "robot": "npm install; npm run makeSVG",
     "clean": "rm -rf dist; mkdir dist;",
     "makeSVG": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/makeSVG"
   },

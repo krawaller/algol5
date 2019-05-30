@@ -5,16 +5,16 @@ const uglyduckFlow: UglyduckFlow = {
   endGame: {
     swanhome: {
       condition: { overlaps: ["mykings", "homerow"] },
-      show: { intersect: ["mykings", "myhomerow"] }
-    }
+      show: { intersect: ["mykings", "myhomerow"] },
+    },
   },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      link: "selectmovetarget"
+      link: "selectmovetarget",
     },
-    selectmovetarget: { from: "movetargets", link: "move" }
+    selectmovetarget: { from: "movetargets", link: "move" },
   },
   commands: {
     move: {
@@ -22,14 +22,14 @@ const uglyduckFlow: UglyduckFlow = {
         {
           if: [
             { anyat: ["opphomerow", "selectmovetarget"] },
-            { morphat: ["selectunit", "kings"] }
-          ]
+            { morphat: ["selectunit", "kings"] },
+          ],
         },
-        { stompat: ["selectunit", "selectmovetarget"] }
+        { stompat: ["selectunit", "selectmovetarget"] },
       ],
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default uglyduckFlow;

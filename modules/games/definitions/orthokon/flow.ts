@@ -6,23 +6,23 @@ const orthokonFlow: OrthokonFlow = {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      link: "selectmovetarget"
+      link: "selectmovetarget",
     },
     selectmovetarget: {
       from: "movetargets",
       runGenerator: "findvictims",
-      link: "move"
-    }
+      link: "move",
+    },
   },
   commands: {
     move: {
       applyEffects: [
         { moveat: ["selectunit", "selectmovetarget"] },
-        { adoptin: ["victims", ["player"]] }
+        { adoptin: ["victims", ["player"]] },
       ],
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default orthokonFlow;

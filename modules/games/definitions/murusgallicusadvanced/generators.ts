@@ -11,12 +11,12 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
         condition: {
           and: [
             { morethan: [["step"], 1] },
-            { noneat: ["myunits", ["target"]] }
-          ]
+            { noneat: ["myunits", ["target"]] },
+          ],
         },
-        tolayer: "firetargets"
-      }
-    }
+        tolayer: "firetargets",
+      },
+    },
   },
   findmovetargets: {
     type: "walker",
@@ -27,12 +27,12 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
     draw: {
       steps: {
         condition: {
-          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }]
+          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }],
         },
         tolayer: "movetargets",
-        include: { dir: ["dir"] }
-      }
-    }
+        include: { dir: ["dir"] },
+      },
+    },
   },
   findmoveresults: {
     type: "neighbour",
@@ -47,12 +47,12 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
               ifelse: [
                 { anyat: ["mytowers", "selectmove"] },
                 "madecatapults",
-                "madetowers"
-              ]
+                "madetowers",
+              ],
             },
-            "madewalls"
-          ]
-        }
+            "madewalls",
+          ],
+        },
       },
       neighbours: {
         tolayer: {
@@ -62,22 +62,22 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
               ifelse: [
                 { anyat: ["mytowers", ["target"]] },
                 "madecatapults",
-                "madetowers"
-              ]
+                "madetowers",
+              ],
             },
-            "madewalls"
-          ]
-        }
-      }
-    }
+            "madewalls",
+          ],
+        },
+      },
+    },
   },
   findcrushtargets: {
     type: "neighbour",
     start: "selecttower",
     dirs: "rose",
     ifover: { union: ["oppcatapults", "oppwalls"] },
-    draw: { neighbours: { tolayer: "crushtargets" } }
-  }
+    draw: { neighbours: { tolayer: "crushtargets" } },
+  },
 };
 
 export default murusgallicusadvancedGenerators;

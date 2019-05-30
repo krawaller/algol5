@@ -1,4 +1,4 @@
-import { KriegInstructions } from "./_types";
+import { KriegInstructions } from './_types';
 
 const kriegInstructions: KriegInstructions = {
   startTurn: {
@@ -10,14 +10,14 @@ const kriegInstructions: KriegInstructions = {
           "notfrozens",
           "to move (except",
           { unitat: { onlyin: "myfrozens" } },
-          "who moved last turn)"
-        ]
+          "who moved last turn)",
+        ],
       },
-      { line: ["Select", "notfrozens", "to move"] }
-    ]
+      { line: ["Select", "notfrozens", "to move"] },
+    ],
   },
   selectunit: {
-    line: ["Select", "an empty square to move", { unitat: "selectunit" }, "to"]
+    line: ["Select", "an empty square to move", { unitat: "selectunit" }, "to"],
   },
   selectmove: {
     line: [
@@ -31,15 +31,15 @@ const kriegInstructions: KriegInstructions = {
           {
             and: [
               { anyat: ["oppbases", "selectmove"] },
-              { noneat: ["oppbases", "selectunit"] }
-            ]
+              { noneat: ["oppbases", "selectunit"] },
+            ],
           },
           { line: ["into the opponent base at", "selectmove"] },
-          { line: ["to", "selectmove"] }
-        ]
-      }
-    ]
-  }
+          { line: ["to", "selectmove"] },
+        ],
+      },
+    ],
+  },
 };
 
 export default kriegInstructions;

@@ -8,9 +8,9 @@ const semaphorGenerators: SemaphorGenerators = {
     steps: { groupat: ["start"] },
     startasstep: true,
     draw: {
-      steps: { condition: { morethan: [["walklength"], 2] }, tolayer: "line" }
-    }
-  }
+      steps: { condition: { morethan: [["walklength"], 2] }, tolayer: "line" },
+    },
+  },
 };
 
 export default semaphorGenerators;

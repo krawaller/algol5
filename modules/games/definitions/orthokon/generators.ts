@@ -6,15 +6,15 @@ const orthokonGenerators: OrthokonGenerators = {
     start: "selectmovetarget",
     dirs: "ortho",
     ifover: "oppunits",
-    draw: { neighbours: { tolayer: "victims" } }
+    draw: { neighbours: { tolayer: "victims" } },
   },
   findmovetargets: {
     type: "walker",
     start: "selectunit",
     dirs: "rose",
     blocks: "units",
-    draw: { last: { tolayer: "movetargets" } }
-  }
+    draw: { last: { tolayer: "movetargets" } },
+  },
 };
 
 export default orthokonGenerators;

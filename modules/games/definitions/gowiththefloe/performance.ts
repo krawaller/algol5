@@ -2,7 +2,7 @@ import { GowiththefloePerformance } from './_types';
 
 const gowiththefloePerformance: GowiththefloePerformance = {
   canAlwaysEnd: { selectmovetarget: true, selecteattarget: true },
-  massiveTree: {}
+  massiveTree: {},
 };
 
 export default gowiththefloePerformance;

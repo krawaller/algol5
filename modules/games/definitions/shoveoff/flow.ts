@@ -3,7 +3,7 @@ import { ShoveoffFlow } from './_types';
 const shoveoffFlow: ShoveoffFlow = {
   TODO: "findaffected SHOULD BE AN OFFSET",
   endGame: {
-    madeline: { condition: { notempty: "fourinarow" }, show: "fourinarow" }
+    madeline: { condition: { notempty: "fourinarow" }, show: "fourinarow" },
   },
   startTurn: { link: "selectpushpoint" },
   marks: {
@@ -14,9 +14,9 @@ const shoveoffFlow: ShoveoffFlow = {
         { if: [{ notempty: "spawnsouth" }, "south"] },
         { if: [{ notempty: "spawnnorth" }, "north"] },
         { if: [{ notempty: "spawnwest" }, "west"] },
-        { if: [{ notempty: "spawneast" }, "east"] }
-      ]
-    }
+        { if: [{ notempty: "spawneast" }, "east"] },
+      ],
+    },
   },
   commands: {
     north: {
@@ -28,13 +28,13 @@ const shoveoffFlow: ShoveoffFlow = {
             { onlyin: "spawnnorth" },
             "soldiers",
             {
-              ifelse: [{ morethan: [8, { sizeof: "myunits" }] }, ["player"], 0]
-            }
-          ]
-        }
+              ifelse: [{ morethan: [8, { sizeof: "myunits" }] }, ["player"], 0],
+            },
+          ],
+        },
       ],
       runGenerator: "findfourinarow",
-      link: "endTurn"
+      link: "endTurn",
     },
     south: {
       applyEffects: [
@@ -45,13 +45,13 @@ const shoveoffFlow: ShoveoffFlow = {
             { onlyin: "spawnsouth" },
             "soldiers",
             {
-              ifelse: [{ morethan: [8, { sizeof: "myunits" }] }, ["player"], 0]
-            }
-          ]
-        }
+              ifelse: [{ morethan: [8, { sizeof: "myunits" }] }, ["player"], 0],
+            },
+          ],
+        },
       ],
       runGenerator: "findfourinarow",
-      link: "endTurn"
+      link: "endTurn",
     },
     east: {
       applyEffects: [
@@ -62,13 +62,13 @@ const shoveoffFlow: ShoveoffFlow = {
             { onlyin: "spawneast" },
             "soldiers",
             {
-              ifelse: [{ morethan: [8, { sizeof: "myunits" }] }, ["player"], 0]
-            }
-          ]
-        }
+              ifelse: [{ morethan: [8, { sizeof: "myunits" }] }, ["player"], 0],
+            },
+          ],
+        },
       ],
       runGenerator: "findfourinarow",
-      link: "endTurn"
+      link: "endTurn",
     },
     west: {
       applyEffects: [
@@ -79,15 +79,15 @@ const shoveoffFlow: ShoveoffFlow = {
             { onlyin: "spawnwest" },
             "soldiers",
             {
-              ifelse: [{ morethan: [8, { sizeof: "myunits" }] }, ["player"], 0]
-            }
-          ]
-        }
+              ifelse: [{ morethan: [8, { sizeof: "myunits" }] }, ["player"], 0],
+            },
+          ],
+        },
       ],
       runGenerator: "findfourinarow",
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default shoveoffFlow;

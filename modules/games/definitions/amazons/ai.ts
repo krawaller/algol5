@@ -10,11 +10,11 @@ const amazonsAI: AmazonsAI = {
       draw: {
         start: {
           tolayer: {
-            ifelse: [{ anyat: ["myunits", ["start"]] }, "myroads", "opproads"]
+            ifelse: [{ anyat: ["myunits", ["start"]] }, "myroads", "opproads"],
           },
-          include: { count: ["neighbourcount"] }
-        }
-      }
+          include: { count: ["neighbourcount"] },
+        },
+      },
     },
     findreach: {
       type: "walker",
@@ -24,25 +24,25 @@ const amazonsAI: AmazonsAI = {
       draw: {
         steps: {
           tolayer: {
-            ifelse: [{ anyat: ["myunits", ["start"]] }, "myreach", "oppreach"]
-          }
-        }
-      }
-    }
+            ifelse: [{ anyat: ["myunits", ["start"]] }, "myreach", "oppreach"],
+          },
+        },
+      },
+    },
   },
   aspects: {
     myroads: { harvest: ["myroads", "count"] },
     mydomain: { sizeof: "myreach" },
     opproads: { harvest: ["opproads", "count"] },
-    oppdomain: { sizeof: "oppreach" }
+    oppdomain: { sizeof: "oppreach" },
   },
   brains: {
     Steve: {
       generators: ["findroads", "findreach"],
       plus: { myroads: 1, mydomain: 1 },
-      minus: { opproads: 1, oppdomain: 1 }
-    }
-  }
+      minus: { opproads: 1, oppdomain: 1 },
+    },
+  },
 };
 
 export default amazonsAI;

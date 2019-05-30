@@ -10,12 +10,12 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
     draw: {
       steps: {
         condition: {
-          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }]
+          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }],
         },
         tolayer: "movetargets",
-        include: { dir: ["dir"] }
-      }
-    }
+        include: { dir: ["dir"] },
+      },
+    },
   },
   findmoveresults: {
     type: "neighbour",
@@ -27,28 +27,28 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
           ifelse: [
             { anyat: ["myunits", "selectmove"] },
             "madetowers",
-            "madewalls"
-          ]
-        }
+            "madewalls",
+          ],
+        },
       },
       neighbours: {
         tolayer: {
           ifelse: [
             { anyat: ["myunits", ["target"]] },
             "madetowers",
-            "madewalls"
-          ]
-        }
-      }
-    }
+            "madewalls",
+          ],
+        },
+      },
+    },
   },
   findcrushtargets: {
     type: "neighbour",
     start: "selecttower",
     dirs: "rose",
     ifover: "oppwalls",
-    draw: { neighbours: { tolayer: "crushtargets" } }
-  }
+    draw: { neighbours: { tolayer: "crushtargets" } },
+  },
 };
 
 export default murusgallicusGenerators;

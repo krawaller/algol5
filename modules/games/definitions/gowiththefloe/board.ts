@@ -16,9 +16,9 @@ const gowiththefloeBoard: GowiththefloeBoard = {
       "h1",
       "h2",
       "h7",
-      "h8"
-    ]
-  }
+      "h8",
+    ],
+  },
 };
 
 export default gowiththefloeBoard;

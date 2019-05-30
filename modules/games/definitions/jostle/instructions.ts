@@ -12,13 +12,13 @@ const jostleInstructions: JostleInstructions = {
       "making the square worth",
       {
         value: {
-          minus: [{ sizeof: "initialfriend" }, { sizeof: "initialenemy" }]
-        }
+          minus: [{ sizeof: "initialfriend" }, { sizeof: "initialenemy" }],
+        },
       },
       ".",
       "Select",
-      "a higher value square to jostle to"
-    ]
+      "a higher value square to jostle to",
+    ],
   },
   selectmovetarget: {
     line: [
@@ -29,8 +29,8 @@ const jostleInstructions: JostleInstructions = {
         pluralize: [
           { minus: [{ sizeof: "newfriend" }, 1] },
           "friend",
-          "friends"
-        ]
+          "friends",
+        ],
       },
       "and",
       { pluralize: [{ sizeof: "newenemy" }, "enemy", "enemies"] },
@@ -39,18 +39,18 @@ const jostleInstructions: JostleInstructions = {
         value: {
           minus: [
             { minus: [{ sizeof: "newfriend" }, 1] },
-            { sizeof: "newenemy" }
-          ]
-        }
+            { sizeof: "newenemy" },
+          ],
+        },
       },
       ". Press",
       "jostle",
       "to move",
       { unitat: "selectunit" },
       "to",
-      "selectmovetarget"
-    ]
-  }
+      "selectmovetarget",
+    ],
+  },
 };
 
 export default jostleInstructions;

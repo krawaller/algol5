@@ -5,7 +5,7 @@ const uglyduckMeta: UglyduckMeta = {
   id: "uglyduck",
   source: "http://www.di.fc.ul.pt/~jpn/gv/uglyduck.htm",
   tags: ["capture", "differentunits"],
-  tagline: "Be the first to bring your ugly duck home as a swan!"
+  tagline: "Be the first to bring your ugly duck home as a swan!",
 };
 
 export default uglyduckMeta;

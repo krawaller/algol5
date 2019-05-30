@@ -24,8 +24,8 @@ const amazonsScripts: AmazonsScripts = {
         "f8",
         "g7",
         "h6",
-        "i5"
-      ]
+        "i5",
+      ],
     },
     {
       commands: ["d4", "move"],
@@ -57,8 +57,8 @@ const amazonsScripts: AmazonsScripts = {
         "h8",
         "i4",
         "i9",
-        "j10"
-      ]
+        "j10",
+      ],
     },
     {
       commands: ["g4", "fire", "endTurn", "g1"],
@@ -73,8 +73,8 @@ const amazonsScripts: AmazonsScripts = {
         "h2",
         "i1",
         "i3",
-        "j1"
-      ]
+        "j1",
+      ],
     },
     {
       commands: ["f2", "move"],
@@ -103,8 +103,8 @@ const amazonsScripts: AmazonsScripts = {
         "i2",
         "i5",
         "j2",
-        "j6"
-      ]
+        "j6",
+      ],
     },
     {
       commands: ["f4", "fire", "endTurn", "d4"],
@@ -131,8 +131,8 @@ const amazonsScripts: AmazonsScripts = {
         "g7",
         "h8",
         "i9",
-        "j10"
-      ]
+        "j10",
+      ],
     },
     {
       commands: ["d7", "move"],
@@ -160,10 +160,10 @@ const amazonsScripts: AmazonsScripts = {
         "f9",
         "g7",
         "h7",
-        "i7"
-      ]
-    }
-  ]
+        "i7",
+      ],
+    },
+  ],
 };
 
 export default amazonsScripts;

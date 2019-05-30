@@ -6,15 +6,18 @@ const amazonsGenerators: AmazonsGenerators = {
     dirs: "rose",
     start: "selectunit",
     blocks: "units",
-    draw: { steps: { tolayer: "movetargets" } }
+    draw: { steps: { tolayer: "movetargets" } },
   },
   findfiretargets: {
     type: "walker",
     dirs: "rose",
     start: "selectmovetarget",
     blocks: "units",
-    draw: { start: { tolayer: "firedfrom" }, steps: { tolayer: "firetargets" } }
-  }
+    draw: {
+      start: { tolayer: "firedfrom" },
+      steps: { tolayer: "firetargets" },
+    },
+  },
 };
 
 export default amazonsGenerators;

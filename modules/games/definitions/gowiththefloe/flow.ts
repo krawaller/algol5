@@ -7,38 +7,38 @@ const gowiththefloeFlow: GowiththefloeFlow = {
     safeseal: {
       condition: { different: [{ sizeof: "canmove" }, { sizeof: "seals" }] },
       show: { subtract: ["seals", "canmove"] },
-      who: 1
+      who: 1,
     },
-    sealseaten: { condition: { isempty: "seals" }, who: 2 }
+    sealseaten: { condition: { isempty: "seals" }, who: 2 },
   },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerators: ["findmovetargets", { ifplayer: [2, "findeattargets"] }],
-      links: ["selectmovetarget", { ifplayer: [2, "selecteattarget"] }]
+      links: ["selectmovetarget", { ifplayer: [2, "selecteattarget"] }],
     },
     selectmovetarget: {
       from: "movetargets",
       runGenerator: "findcracks",
-      link: "move"
+      link: "move",
     },
-    selecteattarget: { from: "eattargets", link: "eat" }
+    selecteattarget: { from: "eattargets", link: "eat" },
   },
   commands: {
     move: {
       applyEffects: [
         { moveat: ["selectunit", "selectmovetarget"] },
-        { spawnin: ["cracks", "holes", 0] }
+        { spawnin: ["cracks", "holes", 0] },
       ],
       runGenerator: "findsealsmoves",
-      link: "endTurn"
+      link: "endTurn",
     },
     eat: {
       applyEffects: [{ killat: "selectunit" }, { killat: "selecteattarget" }],
       runGenerator: "findsealsmoves",
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default gowiththefloeFlow;

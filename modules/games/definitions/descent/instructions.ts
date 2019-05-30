@@ -8,11 +8,11 @@ const descentInstructions: DescentInstructions = {
         orlist: [
           { if: [{ notempty: "mypawns" }, "pawns"] },
           { if: [{ notempty: "myknights" }, "knights"] },
-          { if: [{ notempty: "myrooks" }, "rooks"] }
-        ]
+          { if: [{ notempty: "myrooks" }, "rooks"] },
+        ],
       },
-      "to move and dig with"
-    ]
+      "to move and dig with",
+    ],
   },
   selectunit: {
     line: [
@@ -22,22 +22,22 @@ const descentInstructions: DescentInstructions = {
           {
             if: [
               { noneat: ["mypawns", "selectunit"] },
-              { unittype: ["rooks", 0] }
-            ]
+              { unittype: ["rooks", 0] },
+            ],
           },
           { unittype: ["knights", 0] },
           {
             if: [
               { noneat: ["myrooks", "selectunit"] },
-              { unittype: ["pawns", 0] }
-            ]
-          }
-        ]
+              { unittype: ["pawns", 0] },
+            ],
+          },
+        ],
       },
       "to move",
       { unitat: "selectunit" },
-      "to"
-    ]
+      "to",
+    ],
   },
   selectmovetarget: {
     line: [
@@ -50,8 +50,8 @@ const descentInstructions: DescentInstructions = {
           {
             same: [
               { read: ["units", "selectunit", "group"] },
-              { read: ["units", "selectmovetarget", "group"] }
-            ]
+              { read: ["units", "selectmovetarget", "group"] },
+            ],
           },
           "walk",
           {
@@ -59,18 +59,18 @@ const descentInstructions: DescentInstructions = {
               {
                 or: [
                   { anyat: ["rooks", "selectunit"] },
-                  { anyat: ["pawns", "selectmovetarget"] }
-                ]
+                  { anyat: ["pawns", "selectmovetarget"] },
+                ],
               },
               "descend",
-              "climb"
-            ]
-          }
-        ]
+              "climb",
+            ],
+          },
+        ],
       },
       "to",
-      "selectmovetarget"
-    ]
+      "selectmovetarget",
+    ],
   },
   move: {
     line: [
@@ -81,11 +81,11 @@ const descentInstructions: DescentInstructions = {
         orlist: [
           { unittype: ["rooks", 0] },
           { unittype: ["knights", 0] },
-          { unittype: ["pawns", 0] }
-        ]
+          { unittype: ["pawns", 0] },
+        ],
       },
-      "to dig"
-    ]
+      "to dig",
+    ],
   },
   selectdigtarget: {
     ifelse: [
@@ -97,8 +97,8 @@ const descentInstructions: DescentInstructions = {
           "to turn",
           { unitat: "selectdigtarget" },
           "to",
-          { unittype: ["knights", 0] }
-        ]
+          { unittype: ["knights", 0] },
+        ],
       },
       {
         ifelse: [
@@ -110,16 +110,16 @@ const descentInstructions: DescentInstructions = {
               "to turn",
               { unitat: "selectdigtarget" },
               "to",
-              { unittype: ["pawns", 0] }
-            ]
+              { unittype: ["pawns", 0] },
+            ],
           },
           {
-            line: ["Press", "dig", "to destroy", { unitat: "selectdigtarget" }]
-          }
-        ]
-      }
-    ]
-  }
+            line: ["Press", "dig", "to destroy", { unitat: "selectdigtarget" }],
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export default descentInstructions;

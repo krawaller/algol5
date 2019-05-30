@@ -17,16 +17,16 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
                   { unittype: ["walls", { playercase: [2, 1] }] },
                   "or",
                   { unittype: ["catapults", { playercase: [2, 1] }] },
-                  "to crush"
-                ]
-              }
-            ]
-          }
-        ]
+                  "to crush",
+                ],
+              },
+            ],
+          },
+        ],
       },
       "for",
-      { unitat: "selecttower" }
-    ]
+      { unitat: "selecttower" },
+    ],
   },
   selectmove: {
     line: [
@@ -43,18 +43,18 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
               {
                 line: [
                   "creating",
-                  { unittypeset: ["walls", ["player"], "madewalls"] }
-                ]
-              }
-            ]
+                  { unittypeset: ["walls", ["player"], "madewalls"] },
+                ],
+              },
+            ],
           },
           {
             if: [
               { notempty: "madetowers" },
               {
-                line: ["turning", { unitlist: "madetowers" }, "into", "towers"]
-              }
-            ]
+                line: ["turning", { unitlist: "madetowers" }, "into", "towers"],
+              },
+            ],
           },
           {
             if: [
@@ -64,14 +64,14 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
                   "turning",
                   { unitlist: "madecatapults" },
                   "into",
-                  "catapults"
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                  "catapults",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   selectcrush: {
     line: [
@@ -99,19 +99,19 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
               { unitat: "selectcrush" },
               "to a",
               { unittype: ["walls", { playercase: [2, 1] }] },
-              "!"
-            ]
-          }
-        ]
-      }
-    ]
+              "!",
+            ],
+          },
+        ],
+      },
+    ],
   },
   selectcatapult: {
     line: [
       "Select",
       "where to fire the top section of",
-      { unitat: "selectcatapult" }
-    ]
+      { unitat: "selectcatapult" },
+    ],
   },
   selectfire: {
     line: [
@@ -137,23 +137,23 @@ const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
                     ifelse: [
                       { anyat: ["catapults", "selectfire"] },
                       { unittype: ["towers", { playercase: [2, 1] }] },
-                      { unittype: ["walls", { playercase: [2, 1] }] }
-                    ]
-                  }
-                ]
+                      { unittype: ["walls", { playercase: [2, 1] }] },
+                    ],
+                  },
+                ],
               },
               {
                 line: [
                   "and spawn",
-                  { unittypepos: ["walls", ["player"], "selectfire"] }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                  { unittypepos: ["walls", ["player"], "selectfire"] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export default murusgallicusadvancedInstructions;

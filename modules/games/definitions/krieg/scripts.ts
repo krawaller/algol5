@@ -19,8 +19,8 @@ const kriegScripts: KriegScripts = {
     { commands: ["b3", "move", "endTurn"], include: ["a3", "b4", "c2"] },
     { commands: ["c2"], include: ["b2", "d1"] },
     { commands: ["d1", "move"], include: ["win"] },
-    { commands: ["win"] }
-  ]
+    { commands: ["win"] },
+  ],
 };
 
 export default kriegScripts;

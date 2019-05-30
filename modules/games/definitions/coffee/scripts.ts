@@ -29,19 +29,19 @@ const coffeeScripts: CoffeeScripts = {
         "e2",
         "e3",
         "e4",
-        "e5"
-      ]
+        "e5",
+      ],
     },
     {
       commands: ["c3"],
-      include: ["downhill", "horisontal", "uphill", "vertical"]
+      include: ["downhill", "horisontal", "uphill", "vertical"],
     },
     { commands: ["downhill", "endTurn"], include: ["a5", "b4", "d2", "e1"] },
     { commands: ["b4"], include: ["horisontal", "uphill", "vertical"] },
     { commands: ["uphill", "endTurn"], include: ["a3", "c5"] },
     { commands: ["c5", "vertical", "endTurn"], include: ["c1", "c2", "c4"] },
-    { commands: ["c2"], include: ["downhill", "horisontal", "uphill"] }
-  ]
+    { commands: ["c2"], include: ["downhill", "horisontal", "uphill"] },
+  ],
 };
 
 export default coffeeScripts;

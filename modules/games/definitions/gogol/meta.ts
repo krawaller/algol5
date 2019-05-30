@@ -10,9 +10,9 @@ const gogolMeta: GogolMeta = {
     "kingkill",
     "multiplegoals",
     "differentunits",
-    "jump"
+    "jump",
   ],
-  tagline: "Use your units that can move anywhere to hunt down the enemy king"
+  tagline: "Use your units that can move anywhere to hunt down the enemy king",
 };
 
 export default gogolMeta;

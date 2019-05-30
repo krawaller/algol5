@@ -68,8 +68,8 @@ const duploScripts: DuploScripts = {
         "h5",
         "h6",
         "h7",
-        "h8"
-      ]
+        "h8",
+      ],
     },
     {
       commands: ["c3", "deploy"],
@@ -136,8 +136,8 @@ const duploScripts: DuploScripts = {
         "h5",
         "h6",
         "h7",
-        "h8"
-      ]
+        "h8",
+      ],
     },
     {
       commands: ["d4", "deploy", "endTurn"],
@@ -203,12 +203,12 @@ const duploScripts: DuploScripts = {
         "h5",
         "h6",
         "h7",
-        "h8"
-      ]
+        "h8",
+      ],
     },
     {
       commands: ["f6", "deploy", "g7", "deploy", "endTurn"],
-      include: ["c3", "d4"]
+      include: ["c3", "d4"],
     },
     { commands: ["d4"], include: ["c4", "c5", "d3", "d5", "e3", "e4"] },
     { commands: ["d5", "expand", "endTurn"], include: ["f6", "g7"] },
@@ -219,23 +219,23 @@ const duploScripts: DuploScripts = {
     { commands: ["e6"], include: ["d6", "e5", "e7", "f5", "f7"] },
     {
       commands: ["d6", "expand", "endTurn"],
-      include: ["c3", "d4", "d5", "d7"]
+      include: ["c3", "d4", "d5", "d7"],
     },
     { commands: ["c3"], include: ["a1", "b3", "b4", "c2", "c4", "d2", "d3"] },
     { commands: ["a1", "expand", "endTurn"], include: ["e6", "f6", "g7"] },
     { commands: ["g7"], include: ["f7", "f8", "g6", "g8", "h6", "h7"] },
     {
       commands: ["f7", "expand", "endTurn"],
-      include: ["a1", "b2", "c3", "d4", "d5", "d7"]
+      include: ["a1", "b2", "c3", "d4", "d5", "d7"],
     },
     { commands: ["d4"], include: ["c4", "c5", "d2", "e3", "e4", "f6"] },
     { commands: ["f6", "expand", "endTurn"], include: ["e6", "f7", "g7"] },
     { commands: ["e6"], include: ["d5", "e7", "f5"] },
     {
       commands: ["d5", "expand", "endTurn"],
-      include: ["a1", "b2", "c3", "d4", "d7", "e5"]
-    }
-  ]
+      include: ["a1", "b2", "c3", "d4", "d7", "e5"],
+    },
+  ],
 };
 
 export default duploScripts;

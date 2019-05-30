@@ -1,4 +1,4 @@
-import { UglyduckInstructions } from './_types';
+import { UglyduckInstructions } from "./_types";
 
 const uglyduckInstructions: UglyduckInstructions = {
   startTurn: {
@@ -9,13 +9,13 @@ const uglyduckInstructions: UglyduckInstructions = {
           {
             if: [
               { notempty: "mysoldiers" },
-              { line: ["soldiers", "to advance"] }
-            ]
+              { line: ["soldiers", "to advance"] },
+            ],
           },
-          { if: [{ notempty: "mykings" }, { line: ["kings", "to retreat"] }] }
-        ]
-      }
-    ]
+          { if: [{ notempty: "mykings" }, { line: ["kings", "to retreat"] }] },
+        ],
+      },
+    ],
   },
   selectunit: {
     ifelse: [
@@ -25,18 +25,18 @@ const uglyduckInstructions: UglyduckInstructions = {
           "Select",
           "a square closer to home to move",
           { unitat: "selectunit" },
-          "to"
-        ]
+          "to",
+        ],
       },
       {
         line: [
           "Select",
           "a square closer to the enemy base to move",
           { unitat: "selectunit" },
-          "to"
-        ]
-      }
-    ]
+          "to",
+        ],
+      },
+    ],
   },
   selectmovetarget: {
     line: [
@@ -53,19 +53,19 @@ const uglyduckInstructions: UglyduckInstructions = {
             ifelse: [
               { anyat: ["myhomerow", "selectmovetarget"] },
               { line: ["back home to", "selectmovetarget"] },
-              { line: ["to", "selectmovetarget"] }
-            ]
-          }
-        ]
+              { line: ["to", "selectmovetarget"] },
+            ],
+          },
+        ],
       },
       {
         if: [
           { anyat: ["oppunits", "selectmovetarget"] },
-          { line: [", killing", { unitat: "selectmovetarget" }] }
-        ]
-      }
-    ]
-  }
+          { line: [", killing", { unitat: "selectmovetarget" }] },
+        ],
+      },
+    ],
+  },
 };
 
 export default uglyduckInstructions;

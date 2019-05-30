@@ -1,4 +1,4 @@
-import { AriesInstructions } from "./_types";
+import { AriesInstructions } from './_types';
 
 const ariesInstructions: AriesInstructions = {
   startTurn: { line: ["Select", "soldiers", "to move"] },
@@ -14,12 +14,12 @@ const ariesInstructions: AriesInstructions = {
             line: [
               "(but you can't push back at",
               { unitat: { battlepos: "pushsquare" } },
-              "this turn)"
-            ]
-          }
-        ]
-      }
-    ]
+              "this turn)",
+            ],
+          },
+        ],
+      },
+    ],
   },
   selectmovetarget: {
     line: [
@@ -32,11 +32,11 @@ const ariesInstructions: AriesInstructions = {
       {
         if: [
           { notempty: "squished" },
-          { line: ["and squash", { unitat: { onlyin: "squished" } }] }
-        ]
-      }
-    ]
-  }
+          { line: ["and squash", { unitat: { onlyin: "squished" } }] },
+        ],
+      },
+    ],
+  },
 };
 
 export default ariesInstructions;

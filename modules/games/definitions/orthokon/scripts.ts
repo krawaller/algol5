@@ -7,10 +7,10 @@ const orthokonScripts: OrthokonScripts = {
     { commands: ["c3", "move", "endTurn"], include: ["a4", "b4", "d4"] },
     {
       commands: ["d4", "d2", "move", "endTurn"],
-      include: ["b1", "c1", "c3", "c4"]
+      include: ["b1", "c1", "c3", "c4"],
     },
-    { commands: ["b1"], include: ["a1", "a2", "b3", "d3"] }
-  ]
+    { commands: ["b1"], include: ["a1", "a2", "b3", "d3"] },
+  ],
 };
 
 export default orthokonScripts;

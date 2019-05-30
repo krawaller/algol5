@@ -1,9 +1,11 @@
-import { UglyduckScripts, UglyduckPosition, UglyduckCommand } from "./_types";
+import { UglyduckScripts } from './_types';
 
 const uglyduckScripts: UglyduckScripts = {
   basic: [
-    { commands: ["b1", "b2", "move", "endTurn", "d5", "d4", "move", "endTurn"] }
-  ]
+    {
+      commands: ["b1", "b2", "move", "endTurn", "d5", "d4", "move", "endTurn"],
+    },
+  ],
 };
 
 export default uglyduckScripts;

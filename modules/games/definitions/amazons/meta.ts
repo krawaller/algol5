@@ -1,4 +1,4 @@
-import { AmazonsMeta } from "./_types";
+import { AmazonsMeta } from './_types';
 
 const amazonsMeta: AmazonsMeta = {
   id: "amazons",
@@ -9,7 +9,7 @@ const amazonsMeta: AmazonsMeta = {
   tagline:
     "Make sure your opponent is trapped first as you burn the board together",
   tags: ["deploy", "starve"],
-  links: { "Nestor Games": "http://nestorgames.com/#amazons_detail" }
+  links: { "Nestor Games": "http://nestorgames.com/#amazons_detail" },
 };
 
 export default amazonsMeta;

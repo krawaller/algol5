@@ -6,7 +6,7 @@ const jostleFlow: JostleFlow = {
     selectunit: {
       from: "mycheckers",
       runGenerator: "findinitial",
-      link: "selectmovetarget"
+      link: "selectmovetarget",
     },
     selectmovetarget: {
       from: "movetargets",
@@ -18,25 +18,28 @@ const jostleFlow: JostleFlow = {
               {
                 minus: [
                   { sizeof: "newfriend" },
-                  { sum: [1, { sizeof: "newenemy" }] }
-                ]
+                  { sum: [1, { sizeof: "newenemy" }] },
+                ],
               },
               {
-                minus: [{ sizeof: "initialfriend" }, { sizeof: "initialenemy" }]
-              }
-            ]
+                minus: [
+                  { sizeof: "initialfriend" },
+                  { sizeof: "initialenemy" },
+                ],
+              },
+            ],
           },
-          "jostle"
-        ]
-      }
-    }
+          "jostle",
+        ],
+      },
+    },
   },
   commands: {
     jostle: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default jostleFlow;

@@ -15,16 +15,16 @@ const murusgallicusInstructions: MurusgallicusInstructions = {
                 line: [
                   "a",
                   { unittype: ["walls", { playercase: [2, 1] }] },
-                  "to crush"
-                ]
-              }
-            ]
-          }
-        ]
+                  "to crush",
+                ],
+              },
+            ],
+          },
+        ],
       },
       "for",
-      { unitat: "selecttower" }
-    ]
+      { unitat: "selecttower" },
+    ],
   },
   selectmove: {
     line: [
@@ -41,22 +41,22 @@ const murusgallicusInstructions: MurusgallicusInstructions = {
               {
                 line: [
                   "creating",
-                  { unittypeset: ["walls", ["player"], "madewalls"] }
-                ]
-              }
-            ]
+                  { unittypeset: ["walls", ["player"], "madewalls"] },
+                ],
+              },
+            ],
           },
           {
             if: [
               { notempty: "madetowers" },
               {
-                line: ["turning", { unitlist: "madetowers" }, "into", "towers"]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                line: ["turning", { unitlist: "madetowers" }, "into", "towers"],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   selectcrush: {
     line: [
@@ -67,9 +67,9 @@ const murusgallicusInstructions: MurusgallicusInstructions = {
       "into a",
       "walls",
       "and destroy",
-      { unitat: "selectcrush" }
-    ]
-  }
+      { unitat: "selectcrush" },
+    ],
+  },
 };
 
 export default murusgallicusInstructions;

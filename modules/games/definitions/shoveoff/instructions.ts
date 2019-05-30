@@ -17,14 +17,14 @@ const shoveoffInstructions: ShoveoffInstructions = {
                 line: [
                   "one of your",
                   { value: { minus: [8, { sizeof: "myunits" }] } },
-                  { line: ["remaining off-board", "soldiers"] }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                  { line: ["remaining off-board", "soldiers"] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   selectpushpoint: {
     line: [
@@ -34,13 +34,13 @@ const shoveoffInstructions: ShoveoffInstructions = {
           { if: [{ notempty: "spawnsouth" }, "south"] },
           { if: [{ notempty: "spawnnorth" }, "north"] },
           { if: [{ notempty: "spawnwest" }, "west"] },
-          { if: [{ notempty: "spawneast" }, "east"] }
-        ]
+          { if: [{ notempty: "spawneast" }, "east"] },
+        ],
       },
       "to shove in that direction and make room for the new unit at",
-      "selectpushpoint"
-    ]
-  }
+      "selectpushpoint",
+    ],
+  },
 };
 
 export default shoveoffInstructions;

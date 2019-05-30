@@ -4,9 +4,9 @@ const daggersFlow: DaggersFlow = {
   endGame: {
     infiltration: {
       condition: { overlaps: ["mycrowns", "oppbase"] },
-      show: { intersect: ["mycrowns", "oppbase"] }
+      show: { intersect: ["mycrowns", "oppbase"] },
     },
-    regicide: { condition: { same: [{ sizeof: "oppcrowns" }, 1] } }
+    regicide: { condition: { same: [{ sizeof: "oppcrowns" }, 1] } },
   },
   startTurn: { link: "selectunit" },
   marks: {
@@ -16,19 +16,19 @@ const daggersFlow: DaggersFlow = {
         ifelse: [
           { anyat: ["mycrowns", "selectunit"] },
           "findcrowntargets",
-          "finddaggertargets"
-        ]
+          "finddaggertargets",
+        ],
       },
-      link: "selectmovetarget"
+      link: "selectmovetarget",
     },
-    selectmovetarget: { from: "movetarget", link: "move" }
+    selectmovetarget: { from: "movetarget", link: "move" },
   },
   commands: {
     move: {
       applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default daggersFlow;

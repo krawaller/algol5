@@ -18,8 +18,8 @@ const jostleScripts: JostleScripts = {
         "g8",
         "h3",
         "h5",
-        "h7"
-      ]
+        "h7",
+      ],
     },
     { commands: ["h3"], include: ["h2", "i3"] },
     {
@@ -38,8 +38,8 @@ const jostleScripts: JostleScripts = {
         "g5",
         "h4",
         "h6",
-        "h8"
-      ]
+        "h8",
+      ],
     },
     { commands: ["g5"], include: ["f5"] },
     {
@@ -58,8 +58,8 @@ const jostleScripts: JostleScripts = {
         "g6",
         "g8",
         "h5",
-        "h7"
-      ]
+        "h7",
+      ],
     },
     {
       commands: ["c6", "b6", "jostle", "endTurn"],
@@ -75,8 +75,8 @@ const jostleScripts: JostleScripts = {
         "g3",
         "h4",
         "h6",
-        "h8"
-      ]
+        "h8",
+      ],
     },
     {
       commands: ["e7", "e6", "jostle", "endTurn"],
@@ -94,8 +94,8 @@ const jostleScripts: JostleScripts = {
         "g6",
         "g8",
         "h5",
-        "h7"
-      ]
+        "h7",
+      ],
     },
     { commands: ["h5"], include: ["g5", "i5"] },
     {
@@ -111,10 +111,10 @@ const jostleScripts: JostleScripts = {
         "g3",
         "h4",
         "h6",
-        "h8"
-      ]
-    }
-  ]
+        "h8",
+      ],
+    },
+  ],
 };
 
 export default jostleScripts;

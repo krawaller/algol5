@@ -6,7 +6,7 @@ const atriumGenerators: AtriumGenerators = {
     start: "selectunit",
     dirs: "ortho",
     unlessover: "units",
-    draw: { neighbours: { tolayer: "movetargets" } }
+    draw: { neighbours: { tolayer: "movetargets" } },
   },
   findwinlines: {
     type: "walker",
@@ -14,12 +14,12 @@ const atriumGenerators: AtriumGenerators = {
     startasstep: true,
     dirs: "rose",
     steps: {
-      ifelse: [{ anyat: ["mykings", ["start"]] }, "mykings", "myqueens"]
+      ifelse: [{ anyat: ["mykings", ["start"]] }, "mykings", "myqueens"],
     },
     draw: {
-      steps: { condition: { same: [["walklength"], 3] }, tolayer: "winline" }
-    }
-  }
+      steps: { condition: { same: [["walklength"], 3] }, tolayer: "winline" },
+    },
+  },
 };
 
 export default atriumGenerators;

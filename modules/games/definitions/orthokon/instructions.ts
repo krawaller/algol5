@@ -14,11 +14,11 @@ const orthokonInstructions: OrthokonInstructions = {
       {
         if: [
           { notempty: "victims" },
-          { line: ["and turn", { unitlist: "victims" }, "into", "soldiers"] }
-        ]
-      }
-    ]
-  }
+          { line: ["and turn", { unitlist: "victims" }, "into", "soldiers"] },
+        ],
+      },
+    ],
+  },
 };
 
 export default orthokonInstructions;

@@ -1,19 +1,24 @@
 import * as fs from "fs-extra";
 import * as path from "path";
-import * as prettier from "prettier";
+import prettier, { Options } from "prettier";
 import { FullDefAnon } from "../../../types";
 import analyze from "./analyze";
+
+import * as prettierOpts from "../../../../prettier.config";
 
 import { defPath } from "./_paths";
 import { emptyFullDef } from "../../../common";
 
 function makeNice(obj = {}) {
   return prettier
-    .format("let x = " + JSON.stringify(obj), { parser: "typescript" })
+    .format("let x = " + JSON.stringify(obj), {
+      ...(prettierOpts as Options),
+      parser: "typescript",
+    })
     .slice(8, -2);
 }
 
-export default async function overwrite(gameId, def: FullDefAnon) {
+export default async function overwrite(gameId: string, def: FullDefAnon) {
   await Promise.all(
     Object.keys(emptyFullDef).map(async aspect => {
       const apath = path.join(defPath, `${gameId}/${aspect}.ts`);

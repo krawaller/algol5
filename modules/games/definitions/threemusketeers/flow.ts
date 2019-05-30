@@ -7,32 +7,32 @@ const threemusketeersFlow: ThreemusketeersFlow = {
       condition: { notempty: "musketeerline" },
       who: 2,
       show: "kings",
-      ifPlayer: 1
+      ifPlayer: 1,
     },
     strandedmusketeers: {
       condition: { same: [{ sizeof: "strandedmusketeers" }, 3] },
       who: 1,
-      ifPlayer: 2
-    }
+      ifPlayer: 2,
+    },
   },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      link: "selectmovetarget"
+      link: "selectmovetarget",
     },
-    selectmovetarget: { from: "movetargets", link: "move" }
+    selectmovetarget: { from: "movetargets", link: "move" },
   },
   commands: {
     move: {
       applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
       runGenerators: [
         "findmusketeerline",
-        { ifplayer: [2, "findstrandedmusketeers"] }
+        { ifplayer: [2, "findstrandedmusketeers"] },
       ],
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default threemusketeersFlow;

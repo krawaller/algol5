@@ -4,15 +4,15 @@ const transetFlow: TransetFlow = {
   endGame: {
     infiltration: {
       condition: { overlaps: ["myunits", "oppbase"] },
-      show: { intersect: ["myunits", "oppbase"] }
-    }
+      show: { intersect: ["myunits", "oppbase"] },
+    },
   },
   startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      links: ["selectmovetarget", "selectswapunit"]
+      links: ["selectmovetarget", "selectswapunit"],
     },
     selectmovetarget: {
       from: "movetargets",
@@ -21,28 +21,28 @@ const transetFlow: TransetFlow = {
           {
             and: [
               { anyat: ["units", "selectmovetarget"] },
-              { noneat: ["oppbase", "selectmovetarget"] }
-            ]
+              { noneat: ["oppbase", "selectmovetarget"] },
+            ],
           },
           "selectdeportdestination",
-          "move"
-        ]
-      }
+          "move",
+        ],
+      },
     },
     selectdeportdestination: {
       from: { subtract: ["oppbase", "oppunits"] },
-      link: "move"
+      link: "move",
     },
     selectswapunit: {
       from: { subtract: ["myunits", { single: "selectunit" }] },
       runGenerator: "findswap1steps",
-      link: "selectswap1target"
+      link: "selectswap1target",
     },
     selectswap1target: {
       from: "swap1steps",
       runGenerator: "findswap2step",
-      link: { if: [{ notempty: "swap2step" }, "swap"] }
-    }
+      link: { if: [{ notempty: "swap2step" }, "swap"] },
+    },
   },
   commands: {
     move: {
@@ -54,23 +54,23 @@ const transetFlow: TransetFlow = {
               ifelse: [
                 { anyat: ["oppbase", "selectmovetarget"] },
                 { killat: "selectmovetarget" },
-                { moveat: ["selectmovetarget", "selectdeportdestination"] }
-              ]
-            }
-          ]
+                { moveat: ["selectmovetarget", "selectdeportdestination"] },
+              ],
+            },
+          ],
         },
-        { moveat: ["selectunit", "selectmovetarget"] }
+        { moveat: ["selectunit", "selectmovetarget"] },
       ],
-      link: "endTurn"
+      link: "endTurn",
     },
     swap: {
       applyEffects: [
         { moveat: ["selectunit", "selectswap1target"] },
-        { moveat: ["selectswapunit", { onlyin: "swap2step" }] }
+        { moveat: ["selectswapunit", { onlyin: "swap2step" }] },
       ],
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default transetFlow;

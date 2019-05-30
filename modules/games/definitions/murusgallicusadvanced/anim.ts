@@ -1,4 +1,4 @@
-import { MurusgallicusadvancedAnim } from "./_types";
+import { MurusgallicusadvancedAnim } from './_types';
 
 const murusgallicusadvancedAnim: MurusgallicusadvancedAnim = {
   sacrifice: [{ exitto: ["selecttower", "selectcrush"] }],
@@ -8,25 +8,25 @@ const murusgallicusadvancedAnim: MurusgallicusadvancedAnim = {
     {
       forposin: [
         "madetowers",
-        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] }
-      ]
+        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] },
+      ],
     },
     {
       forposin: [
         "madecatapults",
-        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] }
-      ]
-    }
+        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] },
+      ],
+    },
   ],
   fire: [
     {
       ifelse: [
         { noneat: ["oppunits", "selectfire"] },
         { enterfrom: ["selectfire", "selectcatapult"] },
-        { ghost: ["selectcatapult", "selectfire", "walls", ["player"]] }
-      ]
-    }
-  ]
+        { ghost: ["selectcatapult", "selectfire", "walls", ["player"]] },
+      ],
+    },
+  ],
 };
 
 export default murusgallicusadvancedAnim;

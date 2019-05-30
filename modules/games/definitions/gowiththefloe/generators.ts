@@ -6,7 +6,7 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
     dirs: "rose",
     start: "selectunit",
     ifover: "seals",
-    draw: { neighbours: { tolayer: "eattargets" } }
+    draw: { neighbours: { tolayer: "eattargets" } },
   },
   findmovetargets: {
     type: "walker",
@@ -18,9 +18,9 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
       steps: {
         unlessover: "holes",
         tolayer: "movetargets",
-        include: { dir: ["dir"] }
-      }
-    }
+        include: { dir: ["dir"] },
+      },
+    },
   },
   findsealsmoves: {
     type: "walker",
@@ -31,9 +31,9 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
     draw: {
       start: {
         condition: { morethan: [["totalcount"], 0] },
-        tolayer: "canmove"
-      }
-    }
+        tolayer: "canmove",
+      },
+    },
   },
   findcracks: {
     type: "walker",
@@ -42,9 +42,9 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
     blocks: { single: "selectunit" },
     draw: {
       steps: { unlessover: "holes", tolayer: "cracks" },
-      block: { tolayer: "cracks" }
-    }
-  }
+      block: { tolayer: "cracks" },
+    },
+  },
 };
 
 export default gowiththefloeGenerators;

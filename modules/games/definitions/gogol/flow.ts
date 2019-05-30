@@ -1,25 +1,25 @@
-import { GogolFlow } from "./_types";
+import { GogolFlow } from './_types';
 
 const gogolFlow: GogolFlow = {
   startTurn: {
     runGenerators: ["findforbiddenkingspots", "findforbiddensoldierspots"],
     link: {
-      ifelse: [{ morethan: [["turn"], 1] }, "selectunit", "selectkingdeploy"]
-    }
+      ifelse: [{ morethan: [["turn"], 1] }, "selectunit", "selectkingdeploy"],
+    },
   },
   marks: {
     selectkingdeploy: {
       from: { subtract: ["board", { union: ["units", "nokings"] }] },
-      link: "deploy"
+      link: "deploy",
     },
     selectunit: {
       from: "myunits",
       runGenerators: [
         "findkingwalktargets",
         "findadjacentenemies",
-        "findjumptargets"
+        "findjumptargets",
       ],
-      links: ["selectmovetarget", "selectjumptarget"]
+      links: ["selectmovetarget", "selectjumptarget"],
     },
     selectmovetarget: {
       from: {
@@ -29,45 +29,47 @@ const gogolFlow: GogolFlow = {
           {
             subtract: [
               "board",
-              { union: ["units", "nosoldiers", "jumptargets"] }
-            ]
-          }
-        ]
+              { union: ["units", "nosoldiers", "jumptargets"] },
+            ],
+          },
+        ],
       },
-      link: "move"
+      link: "move",
     },
     selectjumptarget: {
       from: "jumptargets",
       runGenerator: "findsplashed",
-      link: "jump"
-    }
+      link: "jump",
+    },
   },
   commands: {
     deploy: {
       applyEffect: { spawnat: ["selectkingdeploy", "kings"] },
-      link: "endTurn"
+      link: "endTurn",
     },
     move: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
-      link: "endTurn"
+      link: "endTurn",
     },
     jump: {
       applyEffects: [
         { killat: { onlyin: "splashed" } },
-        { moveat: ["selectunit", "selectjumptarget"] }
+        { moveat: ["selectunit", "selectjumptarget"] },
       ],
-      link: "endTurn"
-    }
+      link: "endTurn",
+    },
   },
   endGame: {
     infiltration: {
       condition: { overlaps: ["mykings", "opphomerow"] },
-      show: { intersect: ["mykings", "opphomerow"] }
+      show: { intersect: ["mykings", "opphomerow"] },
     },
     kingkill: {
-      condition: { and: [{ morethan: [["turn"], 1] }, { isempty: "oppkings" }] }
-    }
-  }
+      condition: {
+        and: [{ morethan: [["turn"], 1] }, { isempty: "oppkings" }],
+      },
+    },
+  },
 };
 
 export default gogolFlow;

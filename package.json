@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "postinstall": "link-module-alias"
+    "postinstall": "link-module-alias",
+    "test:unit": "jest .test.ts",
+    "test:ts": "tsc --noEmit"
   },
   "_moduleAliases": {
     "algol-types": "./modules/types",

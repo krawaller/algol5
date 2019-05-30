@@ -24,10 +24,10 @@ export class Tester extends Component<TesterProps, TesterState> {
   }
   handleAct = (
     action: "mark" | "command" | "endTurn" | "undo",
-    arg: string
+    arg: string | undefined
   ) => {
     this.setState({
-      ui: this.act(action, arg)
+      ui: this.act(action, arg),
     });
   };
   render() {
@@ -37,7 +37,7 @@ export class Tester extends Component<TesterProps, TesterState> {
       <React.Fragment>
         <Board
           callback={pos => this.handleAct("mark", pos)}
-          board={dataURIs[ui.gameId]}
+          board={dataURIs[ui.gameId as keyof typeof dataURIs]}
           units={ui.board.units}
           marks={ui.board.marks}
           potentialMarks={ui.board.potentialMarks}

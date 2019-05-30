@@ -2,7 +2,8 @@
   "name": "algol-common",
   "devDependencies": {},
   "scripts": {
-    "test": "cd ../..; npx jest modules/common"
+    "test:unit": "cd ../..; npx jest modules/common",
+    "test:ts": "cd ../..; npx tsc --noEmit modules/common/**/*.ts"
   },
   "dependencies": {
     "jsondiffpatch": "^0.3.11",

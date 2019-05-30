@@ -2,7 +2,8 @@
   "scripts": {
     "postinstall": "link-module-alias",
     "test:unit": "jest .test.ts",
-    "test:ts": "tsc --noEmit"
+    "test:ts": "tsc --noEmit",
+    "robot": "cd modules/games; npm run robot; cd ../graphics; npm run robot; cd ../logic; npm run robot; cd ../battle; npm run robot;"
   },
   "_moduleAliases": {
     "algol-types": "./modules/types",

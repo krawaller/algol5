@@ -1,7 +1,7 @@
 {
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -c .storybook -o dist"
   },
   "devDependencies": {
     "@glitz/core": "^2.0.6",

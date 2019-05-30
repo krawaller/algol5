@@ -4,7 +4,7 @@
     "glob": "^7.1.3"
   },
   "scripts": {
-    "robot": "npm run compile",
+    "robot": "npm run compile; npm run exportCompiledGames",
     "exportSuites": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/commands/exportSuites",
     "exportCompiledGames": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/commands/exportCompiledGames",
     "compile": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/commands/compile",

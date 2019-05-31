@@ -5,12 +5,13 @@ import {
   ReducingActionPayload,
   ReducingActionCreator,
   ReducingPayloadActionTest,
-  ReducingActionTest
+  ReducingActionTest,
+  AppState,
 } from "./types";
 import { produce } from "immer";
 
 export const makeCreatorAndGuard = <
-  A extends ReducingAction<string, any, object>
+  A extends ReducingAction<string, any, AppState>
 >(
   type: ReducingActionType<A>,
   reducer: DraftReducer<A>
@@ -20,17 +21,17 @@ export const makeCreatorAndGuard = <
       type,
       payload,
       reducer: (state, payload: ReducingActionPayload<A>) =>
-        produce(state, draft => reducer(draft, payload))
+        produce(state, draft => reducer(draft, payload)),
     };
   } as ReducingActionCreator<A>;
 
   creator.actionType = type;
-  const guard = (action: ReducingAction<string, any, object>): action is A =>
-    action.type === type;
+  const guard = (action: ReducingAction<string, any, AppState>): action is A =>
+    action.type === (type as string);
   return <const>[creator, guard];
 };
 
-export const testCreator = <A extends ReducingAction<string, any, object>>(
+export const testCreator = <A extends ReducingAction<string, any, AppState>>(
   creator: ReducingActionCreator<A>,
   tests: ReducingActionTest<A>[]
 ) => {

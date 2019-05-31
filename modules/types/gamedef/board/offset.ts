@@ -1,4 +1,4 @@
-import { AlgolDirsInner } from "../../";
+import { AlgolDirsInnerAnon } from "../../";
 
 type Modifier =
   | -9
@@ -27,5 +27,5 @@ export type BasicDir = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 export type AlgolOffsetBasic = [BasicDir[], OffsetForward, OffsetRight];
 export type AlgolOffset =
   | AlgolOffsetBasic
-  | [AlgolDirsInner, OffsetForward, OffsetRight]
+  | [AlgolDirsInnerAnon, OffsetForward, OffsetRight]
   | "knight";

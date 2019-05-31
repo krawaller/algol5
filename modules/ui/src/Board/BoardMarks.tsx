@@ -17,19 +17,19 @@ export const BoardMarks: React.FunctionComponent<BoardMarksProps> = ({
   units,
   callback,
   height,
-  width
+  width,
 }) => {
   const unitsByPos = Object.keys(units).reduce(
     (mem, id) => ({
       ...mem,
-      [units[id].pos]: units[id]
+      [units[id].pos]: units[id],
     }),
-    {}
+    {} as { [pos: string]: AlgolUnitState }
   );
   return (
     <React.Fragment>
       {marks
-        .map(pos => [pos, true])
+        .map(pos => [pos, true] as [string, boolean])
         .concat(potentialMarks.map(pos => [pos, false]))
         .map(([pos, selected]: [string, boolean]) => (
           <Mark

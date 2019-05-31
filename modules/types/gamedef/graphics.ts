@@ -12,11 +12,11 @@ const algolIcons = {
   king: 1,
   bishop: 1,
   pawn: 1,
-  knight: 1
+  knight: 1,
 };
 
 export function isAlgolIcon(str: string): str is AlgolIcon {
-  return !!algolIcons[str];
+  return !!algolIcons[str as keyof typeof algolIcons];
 }
 
 export type AlgolIcon = keyof typeof algolIcons;

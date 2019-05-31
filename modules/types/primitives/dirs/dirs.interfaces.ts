@@ -1,7 +1,5 @@
 import { AlgolDirs } from "./";
 
-import { AlgolVal } from "../value";
-
 export interface AlgolDirsList<
   Btlp,
   Btlv,
@@ -12,7 +10,5 @@ export interface AlgolDirsList<
   Turnp,
   Turnv
 > {
-  list: (
-    | AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-    | AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>)[];
+  list: AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
 }

@@ -22,8 +22,8 @@ const tests: TestEffect[] = [
       "mymark",
       "myunit",
       2,
-      { foo: { read: ["mylayer", "mymark", "someProp"] } }
-    ]
+      { foo: { read: ["mylayer", "mymark", "someProp"] } },
+    ],
   },
   { spawnin: ["mylayer", "myunit"] },
   { spawnin: ["mylayer", "myunit", 1] },
@@ -32,8 +32,8 @@ const tests: TestEffect[] = [
       "mylayer",
       "myunit",
       2,
-      { foo: { read: ["mylayer", "mymark", "someProp"] } }
-    ]
+      { foo: { read: ["mylayer", "mymark", "someProp"] } },
+    ],
   },
   { setbattlevar: [{ playercase: ["mybattlev", "mybattlev"] }, 666] },
   { pushin: ["mylayer", { value: 3 }, { value: 2 }] },
@@ -52,13 +52,6 @@ const tests: TestEffect[] = [
   { setin: ["mylayer", "someprop", { turnvar: "myturnv" }] },
   { setid: [["loopid"], "group", "myunit"] },
   { multi: [{ killat: "mymark" }, { stompat: ["mymark", "mymark"] }] },
-  {
-    indexlist: [
-      ["dir"],
-      { killat: "mymark" },
-      { stompat: ["mymark", "mymark"] }
-    ]
-  },
   { morphat: ["mymark", { value: "myunit" }] },
   { morphin: ["mylayer", { value: "myunit" }] },
   { morphid: [{ value: "someid" }, { value: "myunit" }] },
@@ -68,5 +61,5 @@ const tests: TestEffect[] = [
   { ifelse: [["true"], { killat: "mymark" }, { killat: "mymark" }] },
   { if: [["true"], { killat: "mymark" }] },
   { ifplayer: [1, { killat: "mymark" }] },
-  { ifaction: ["mycmnd", { killat: "mymark" }] }
+  { ifaction: ["mycmnd", { killat: "mymark" }] },
 ];

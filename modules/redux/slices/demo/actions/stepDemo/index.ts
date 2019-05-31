@@ -9,9 +9,9 @@ export const [stepDemo, isStepDemoAction] = makeCreatorAndGuard<StepDemoAction>(
   "DEMO::STEP_DEMO",
   (draft, { gameId }) => {
     let demo = draft.demo.demos[gameId];
-    if (demo.playing) {
-      demo.frame++;
-      demo.frame %= demo.positions.length;
+    if (demo!.playing) {
+      demo!.frame++;
+      demo!.frame %= demo!.positions.length;
     }
   }
 );

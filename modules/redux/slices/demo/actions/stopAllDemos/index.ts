@@ -7,6 +7,6 @@ export const [stopAllDemos, isStopAllDemosAction] = makeCreatorAndGuard<
   StopAllDemosAction
 >("DEMO::STOP_ALL_DEMOS", draft => {
   for (const gameId in draft.demo.demos) {
-    draft.demo.demos[gameId as GameId].playing = false;
+    draft.demo.demos[gameId as GameId]!.playing = false;
   }
 });

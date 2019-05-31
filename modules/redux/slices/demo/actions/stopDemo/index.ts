@@ -8,6 +8,6 @@ export type StopDemoAction = DemoAction<"DEMO::STOP_DEMO", StopDemoPayload>;
 export const [stopDemo, isStopDemoAction] = makeCreatorAndGuard<StopDemoAction>(
   "DEMO::STOP_DEMO",
   (draft, { gameId }) => {
-    draft.demo.demos[gameId].playing = false;
+    draft.demo.demos[gameId]!.playing = false;
   }
 );

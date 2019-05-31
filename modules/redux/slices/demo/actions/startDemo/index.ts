@@ -8,5 +8,5 @@ export type StartDemoAction = DemoAction<"DEMO::START_DEMO", StartDemoPayload>;
 export const [startDemo, isStartDemoAction] = makeCreatorAndGuard<
   StartDemoAction
 >("DEMO::START_DEMO", (draft, { gameId }) => {
-  draft.demo.demos[gameId].playing = true;
+  draft.demo.demos[gameId]!.playing = true;
 });

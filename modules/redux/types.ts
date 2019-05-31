@@ -48,17 +48,13 @@ export interface ReducingAction<Type extends string, Payload, State> {
   reducer: Reducer<State, Payload>;
 }
 
-export type ReducingActionType<T> = T extends ReducingAction<
-  infer T,
-  any,
-  object
->
+export type ReducingActionType<T> = T extends ReducingAction<infer T, any, any>
   ? T
   : never;
 export type ReducingActionPayload<P> = P extends ReducingAction<
   string,
   infer P,
-  object
+  any
 >
   ? P
   : never;

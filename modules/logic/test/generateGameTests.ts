@@ -12,13 +12,15 @@ async function setup() {
 
   await Promise.all(
     games.map(async g => {
-      const name = g.split("/")[g.split("/").length - 1].replace(/\.ts$/, "");
+      const name = g
+        .split("/")
+        [g.split("/").length - 1].replace(/\.[tj]s$/, "");
       await fs.writeFile(
         path.join(out, name + ".test.ts"),
         `
 import { runGameScript } from "../runGameScript";
 
-import ${name}Game from "../../generated/${name}";
+import ${name}Game from "../../dist/indiv/${name}";
 import ${name}Def from "../../../games/dist/games/${name}";
 
 runGameScript("${name}", ${name}Game, ${name}Def.scripts);

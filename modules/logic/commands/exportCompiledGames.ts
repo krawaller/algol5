@@ -9,7 +9,7 @@ const games = path.join(__dirname, "../generated");
   await fs.mkdir(out);
   const names = (await fs.readdir(games))
     .filter(g => g !== ".DS_Store")
-    .map(fileName => fileName.replace(/\.ts/, ""));
+    .map(fileName => fileName.replace(/\.[tj]s/, ""));
 
   await fs.writeFile(
     path.join(out, "index.ts"),
@@ -30,8 +30,9 @@ export default games;
       fs.writeFile(
         path.join(out, "indiv", name + ".ts"),
         `import ${name} from '../../generated/${name}';
-import { AlgolGame } from '../../../types';
-export default ${name} as AlgolGame;
+import { AlgolGame } from '../../../types'
+const game = ${name} as unknown as AlgolGame;
+export default game;
 `
       )
     )

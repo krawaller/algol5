@@ -8,37 +8,28 @@ import {
   collapseContent,
   defaultInstruction
 } from "../../common";
-import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
-const iconMapping = { pawns: "pawn", kings: "king" };
-const emptyArtifactLayers = {
-  strandedmusketeers: {},
-  musketeerline: {},
-  movetargets: {}
-};
+const iconMapping = { kings: "king", queens: "queen" };
+const emptyArtifactLayers = { movetargets: {}, winline: {} };
 const connections = boardConnections({ height: 5, width: 5 });
 const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = terrainLayers(5, 5, {});
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: Partial<AlgolGame> = {
-  gameId: "threemusketeers",
-  action: {},
-  instruction: {}
-};
+let game = { gameId: "atrium", action: {}, instruction: {} };
 {
   const groupLayers = {
-    pawns: [
-      ["units", "pawns"],
-      ["units", "myunits", "pawns"],
-      ["units", "oppunits", "pawns"]
-    ],
     kings: [
-      ["units", "kings"],
-      ["units", "myunits", "kings"],
-      ["units", "oppunits", "kings"]
+      ["units"],
+      ["units", "myunits", "mykings"],
+      ["units", "oppunits", "oppkings"]
+    ],
+    queens: [
+      ["units"],
+      ["units", "myunits", "myqueens"],
+      ["units", "oppunits", "oppqueens"]
     ]
   };
   game.action.startTurn1 = step => {
@@ -47,10 +38,12 @@ let game: Partial<AlgolGame> = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      pawns: oldUnitLayers.pawns,
-      kings: oldUnitLayers.kings
+      mykings: oldUnitLayers.oppkings,
+      oppkings: oldUnitLayers.mykings,
+      myqueens: oldUnitLayers.oppqueens,
+      oppqueens: oldUnitLayers.myqueens
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -70,22 +63,23 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "which" },
+        { text: "a" },
         { unittype: ["king", 1] },
+        { text: "or" },
+        { unittype: ["queen", 1] },
         { text: "to move" }
       ]
     });
   };
   game.action.move1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      musketeerline: {}
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    delete UNITDATA[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).id];
     {
       let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
       if (unitid) {
@@ -95,7 +89,15 @@ let game: Partial<AlgolGame> = {
         };
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, pawns: {}, kings: {} };
+    UNITLAYERS = {
+      units: {},
+      myunits: {},
+      oppunits: {},
+      mykings: {},
+      oppkings: {},
+      myqueens: {},
+      oppqueens: {}
+    };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -104,27 +106,32 @@ let game: Partial<AlgolGame> = {
       }
     }
     {
-      for (let STARTPOS in UNITLAYERS.kings) {
-        for (let DIR of orthoDirs) {
-          let POS = STARTPOS;
-          let walkpositionstocount = UNITLAYERS.kings;
-          let CURRENTCOUNT = 0;
-          while ((POS = connections[POS][DIR])) {
-            CURRENTCOUNT += walkpositionstocount[POS] ? 1 : 0;
+      for (let STARTPOS in UNITLAYERS.myunits) {
+        let allowedsteps = UNITLAYERS.mykings[STARTPOS]
+          ? UNITLAYERS.mykings
+          : UNITLAYERS.myqueens;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = "faux";
+          connections.faux[DIR] = STARTPOS;
+          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+            walkedsquares.push(POS);
           }
-          let TOTALCOUNT = CURRENTCOUNT;
-          POS = STARTPOS;
-          if (2 === TOTALCOUNT) {
-            ARTIFACTS.musketeerline[POS] = emptyObj;
+          let WALKLENGTH = walkedsquares.length;
+          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            if (WALKLENGTH === 3) {
+              ARTIFACTS.winline[POS] = emptyObj;
+            }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
-      let winner = 2;
+    if (Object.keys(ARTIFACTS.winline).length !== 0) {
+      let winner = 1;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "musketeersinline";
-      LINKS.endMarks = Object.keys(UNITLAYERS.kings);
+      LINKS.endedBy = "madewinline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -142,7 +149,7 @@ let game: Partial<AlgolGame> = {
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -151,7 +158,7 @@ let game: Partial<AlgolGame> = {
       let startconnections = connections[MARKS.selectunit];
       for (let DIR of orthoDirs) {
         let POS = startconnections[DIR];
-        if (POS && UNITLAYERS.oppunits[POS]) {
+        if (POS && !UNITLAYERS.units[POS]) {
           ARTIFACTS.movetargets[POS] = emptyObj;
         }
       }
@@ -174,21 +181,20 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { unittype: ["pawn", 2] },
-        { text: "adjacent to" },
+        { text: "orthogonal empty neighbour to move" },
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
-        { text: "to attack" }
+        { text: "to" }
       ]
     });
   };
   game.action.selectmovetarget1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.move = "move1";
     return {
       LINKS,
@@ -206,37 +212,31 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to make" },
+        { text: "to walk" },
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
-        { text: "attack" },
-        {
-          unit: [
-            iconMapping[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).group],
-            (UNITLAYERS.units[MARKS.selectmovetarget] || {}).owner as 0 | 1 | 2,
-            MARKS.selectmovetarget
-          ]
-        }
+        { text: "to" },
+        { pos: MARKS.selectmovetarget }
       ]
     });
   };
 }
 {
   const groupLayers = {
-    pawns: [
-      ["units", "pawns"],
-      ["units", "oppunits", "pawns"],
-      ["units", "myunits", "pawns"]
-    ],
     kings: [
-      ["units", "kings"],
-      ["units", "oppunits", "kings"],
-      ["units", "myunits", "kings"]
+      ["units"],
+      ["units", "oppunits", "oppkings"],
+      ["units", "myunits", "mykings"]
+    ],
+    queens: [
+      ["units"],
+      ["units", "oppunits", "oppqueens"],
+      ["units", "myunits", "myqueens"]
     ]
   };
   game.action.startTurn2 = step => {
@@ -245,10 +245,12 @@ let game: Partial<AlgolGame> = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      pawns: oldUnitLayers.pawns,
-      kings: oldUnitLayers.kings
+      mykings: oldUnitLayers.oppkings,
+      oppkings: oldUnitLayers.mykings,
+      myqueens: oldUnitLayers.oppqueens,
+      oppqueens: oldUnitLayers.myqueens
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -268,23 +270,27 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "which" },
-        { unittype: ["pawn", 2] },
+        { text: "a" },
+        { unittype: ["king", 2] },
+        { text: "or" },
+        { unittype: ["queen", 2] },
         { text: "to move" }
       ]
     });
   };
   game.newBattle = () => {
     let UNITDATA = deduceInitialUnitData({
-      kings: { "1": ["a1", "c3", "e5"] },
-      pawns: { "2": [{ holerect: ["a1", "e5", "a1", "c3", "e5"] }] }
+      kings: { "1": ["a2", "c5", "e2"], "2": ["b1", "b5", "e3"] },
+      queens: { "1": ["a3", "d5", "d1"], "2": ["a4", "c1", "e4"] }
     });
     let UNITLAYERS = {
       units: {},
       myunits: {},
       oppunits: {},
-      pawns: {},
-      kings: {}
+      mykings: {},
+      oppkings: {},
+      myqueens: {},
+      oppqueens: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -300,16 +306,14 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
-      musketeerline: {},
-      strandedmusketeers: {}
+      winline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    delete UNITDATA[(UNITLAYERS.units[MARKS.selectmovetarget] || {}).id];
     {
       let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
       if (unitid) {
@@ -319,7 +323,15 @@ let game: Partial<AlgolGame> = {
         };
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, pawns: {}, kings: {} };
+    UNITLAYERS = {
+      units: {},
+      myunits: {},
+      oppunits: {},
+      mykings: {},
+      oppkings: {},
+      myqueens: {},
+      oppqueens: {}
+    };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -328,40 +340,32 @@ let game: Partial<AlgolGame> = {
       }
     }
     {
-      for (let STARTPOS in UNITLAYERS.kings) {
-        for (let DIR of orthoDirs) {
-          let POS = STARTPOS;
-          let walkpositionstocount = UNITLAYERS.kings;
-          let CURRENTCOUNT = 0;
-          while ((POS = connections[POS][DIR])) {
-            CURRENTCOUNT += walkpositionstocount[POS] ? 1 : 0;
+      for (let STARTPOS in UNITLAYERS.myunits) {
+        let allowedsteps = UNITLAYERS.mykings[STARTPOS]
+          ? UNITLAYERS.mykings
+          : UNITLAYERS.myqueens;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = "faux";
+          connections.faux[DIR] = STARTPOS;
+          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+            walkedsquares.push(POS);
           }
-          let TOTALCOUNT = CURRENTCOUNT;
-          POS = STARTPOS;
-          if (2 === TOTALCOUNT) {
-            ARTIFACTS.musketeerline[POS] = emptyObj;
+          let WALKLENGTH = walkedsquares.length;
+          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            if (WALKLENGTH === 3) {
+              ARTIFACTS.winline[POS] = emptyObj;
+            }
           }
         }
       }
     }
-    for (let STARTPOS in UNITLAYERS.kings) {
-      let foundneighbours = [];
-      let startconnections = connections[STARTPOS];
-      for (let DIR of orthoDirs) {
-        let POS = startconnections[DIR];
-        if (POS && UNITLAYERS.pawns[POS]) {
-          foundneighbours.push(POS);
-        }
-      }
-      let NEIGHBOURCOUNT = foundneighbours.length;
-      if (!NEIGHBOURCOUNT) {
-        ARTIFACTS.strandedmusketeers[STARTPOS] = emptyObj;
-      }
-    }
-    if (Object.keys(ARTIFACTS.strandedmusketeers).length === 3) {
-      let winner = 1;
+    if (Object.keys(ARTIFACTS.winline).length !== 0) {
+      let winner = 2;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "strandedmusketeers";
+      LINKS.endedBy = "madewinline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -379,7 +383,7 @@ let game: Partial<AlgolGame> = {
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -411,20 +415,20 @@ let game: Partial<AlgolGame> = {
     return collapseContent({
       line: [
         { select: "Select" },
-        { text: "an empty space adjacent to" },
+        { text: "orthogonal empty neighbour to move" },
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
-        { text: "to move to" }
+        { text: "to" }
       ]
     });
   };
   game.action.selectmovetarget2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.move = "move2";
     return {
       LINKS,
@@ -442,18 +446,18 @@ let game: Partial<AlgolGame> = {
       line: [
         { text: "Press" },
         { command: "move" },
-        { text: "to make" },
+        { text: "to walk" },
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
-        { text: "go to" },
+        { text: "to" },
         { pos: MARKS.selectmovetarget }
       ]
     });
   };
 }
-export default game as AlgolGame;
+export default game;

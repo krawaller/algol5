@@ -8,7 +8,6 @@ import {
   collapseContent,
   defaultInstruction
 } from "../../common";
-import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 4, width: 4 });
 const iconMapping = { soldiers: "pawn" };
@@ -40,17 +39,13 @@ const TERRAIN = terrainLayers(4, 4, {
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: Partial<AlgolGame> = {
-  gameId: "shoveoff",
-  action: {},
-  instruction: {}
-};
+let game = { gameId: "shoveoff", action: {}, instruction: {} };
 {
   const groupLayers = {
     soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
   };
   game.action.startTurn1 = step => {
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -102,7 +97,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.north1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -131,7 +126,7 @@ let game: Partial<AlgolGame> = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -193,7 +188,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.north1 = () => defaultInstruction(1);
   game.action.south1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -222,7 +217,7 @@ let game: Partial<AlgolGame> = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -284,7 +279,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.south1 = () => defaultInstruction(1);
   game.action.east1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -313,7 +308,7 @@ let game: Partial<AlgolGame> = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -375,7 +370,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.east1 = () => defaultInstruction(1);
   game.action.west1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -404,7 +399,7 @@ let game: Partial<AlgolGame> = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -481,7 +476,7 @@ let game: Partial<AlgolGame> = {
       spawnnorth: {},
       spawneast: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectpushpoint: newMarkPos
     };
@@ -619,7 +614,7 @@ let game: Partial<AlgolGame> = {
     soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
   };
   game.action.startTurn2 = step => {
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -690,7 +685,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.north2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -719,7 +714,7 @@ let game: Partial<AlgolGame> = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -781,7 +776,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.north2 = () => defaultInstruction(2);
   game.action.south2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -810,7 +805,7 @@ let game: Partial<AlgolGame> = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -872,7 +867,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.south2 = () => defaultInstruction(2);
   game.action.east2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -901,7 +896,7 @@ let game: Partial<AlgolGame> = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -963,7 +958,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.east2 = () => defaultInstruction(2);
   game.action.west2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -992,7 +987,7 @@ let game: Partial<AlgolGame> = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
           };
         }
       }
@@ -1069,7 +1064,7 @@ let game: Partial<AlgolGame> = {
       spawnnorth: {},
       spawneast: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectpushpoint: newMarkPos
     };
@@ -1202,4 +1197,4 @@ let game: Partial<AlgolGame> = {
     });
   };
 }
-export default game as AlgolGame;
+export default game;

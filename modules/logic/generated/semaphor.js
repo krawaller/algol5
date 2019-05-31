@@ -8,7 +8,6 @@ import {
   collapseContent,
   defaultInstruction
 } from "../../common";
-import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 3, width: 4 });
 const iconMapping = { kings: "king", pawns: "pawn", bishops: "bishop" };
@@ -19,11 +18,7 @@ const TERRAIN = terrainLayers(3, 4, {});
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: Partial<AlgolGame> = {
-  gameId: "semaphor",
-  action: {},
-  instruction: {}
-};
+let game = { gameId: "semaphor", action: {}, instruction: {} };
 {
   const groupLayers = {
     kings: [["units", "kings"], ["units", "kings"], ["units", "kings"]],
@@ -38,7 +33,7 @@ let game: Partial<AlgolGame> = {
       pawns: oldUnitLayers.pawns,
       bishops: oldUnitLayers.bishops
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -105,7 +100,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.deploy1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       line: {}
     };
@@ -170,7 +165,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.deploy1 = () => defaultInstruction(1);
   game.action.promote1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       line: {}
     };
@@ -234,7 +229,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.promote1 = () => defaultInstruction(1);
   game.action.selectdeploytarget1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.deploy = "deploy1";
     return {
       LINKS,
@@ -258,7 +253,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectunit1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.promote = "promote1";
     return {
       LINKS,
@@ -281,7 +276,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -307,7 +302,7 @@ let game: Partial<AlgolGame> = {
       pawns: oldUnitLayers.pawns,
       bishops: oldUnitLayers.bishops
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -382,7 +377,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.deploy2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       line: {}
     };
@@ -447,7 +442,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.deploy2 = () => defaultInstruction(2);
   game.action.promote2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       line: {}
     };
@@ -511,7 +506,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.promote2 = () => defaultInstruction(2);
   game.action.selectdeploytarget2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.deploy = "deploy2";
     return {
       LINKS,
@@ -535,7 +530,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selectunit2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.promote = "promote2";
     return {
       LINKS,
@@ -558,7 +553,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -570,4 +565,4 @@ let game: Partial<AlgolGame> = {
     });
   };
 }
-export default game as AlgolGame;
+export default game;

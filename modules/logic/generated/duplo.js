@@ -8,7 +8,6 @@ import {
   collapseContent,
   defaultInstruction
 } from "../../common";
-import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
 const iconMapping = { soldiers: "pawn" };
@@ -25,7 +24,7 @@ const TERRAIN = terrainLayers(8, 8, {});
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
+let game = { gameId: "duplo", action: {}, instruction: {} };
 {
   const groupLayers = {
     soldiers: [
@@ -44,7 +43,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       mysoldiers: oldUnitLayers.oppsoldiers,
       oppsoldiers: oldUnitLayers.mysoldiers
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -86,7 +85,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
         });
   };
   game.action.deploy1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -162,7 +161,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       : defaultInstruction(1);
   };
   game.action.expand1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -240,7 +239,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
   };
   game.instruction.expand1 = () => defaultInstruction(1);
   game.action.selectdeploy1 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.deploy = "deploy1";
     return {
       LINKS,
@@ -276,7 +275,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       targets: {},
       potentialopptargets: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -389,7 +388,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       potentialopptargets: step.ARTIFACTS.potentialopptargets,
       spawns: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selecttarget: newMarkPos
@@ -460,7 +459,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       mysoldiers: oldUnitLayers.oppsoldiers,
       oppsoldiers: oldUnitLayers.mysoldiers
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -517,7 +516,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
     });
   };
   game.action.deploy2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
@@ -593,7 +592,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       : defaultInstruction(2);
   };
   game.action.expand2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -671,7 +670,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
   };
   game.instruction.expand2 = () => defaultInstruction(2);
   game.action.selectdeploy2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.deploy = "deploy2";
     return {
       LINKS,
@@ -707,7 +706,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       targets: {},
       potentialopptargets: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -820,7 +819,7 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
       potentialopptargets: step.ARTIFACTS.potentialopptargets,
       spawns: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selecttarget: newMarkPos
@@ -873,4 +872,4 @@ let game: Partial<AlgolGame> = { gameId: "duplo", action: {}, instruction: {} };
     });
   };
 }
-export default game as AlgolGame;
+export default game;

@@ -8,7 +8,6 @@ import {
   collapseContent,
   defaultInstruction
 } from "../../common";
-import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
 const iconMapping = { soldiers: "rook" };
@@ -18,7 +17,7 @@ const relativeDirs = makeRelativeDirs([]);
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
+let game = { gameId: "aries", action: {}, instruction: {} };
 {
   const groupLayers = {
     soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
@@ -36,7 +35,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -63,7 +62,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     });
   };
   game.action.move1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       beingpushed: step.ARTIFACTS.beingpushed,
@@ -81,14 +80,12 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>(
-              offsetPos(
-                LOOPPOS,
-                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
-                1,
-                0,
-                { height: 8, width: 8 }
-              )
+            pos: offsetPos(
+              LOOPPOS,
+              (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
+              1,
+              0,
+              { height: 8, width: 8 }
             )
           };
         }
@@ -155,7 +152,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -206,7 +203,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -219,10 +216,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
                     iconMapping[
                       (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).group
                     ],
-                    (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).owner as
-                      | 0
-                      | 1
-                      | 2,
+                    (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).owner,
                     BATTLEVARS["pushsquare"]
                   ]
                 },
@@ -239,7 +233,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       beingpushed: {},
       squished: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
@@ -305,7 +299,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -324,7 +318,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
                       ).group
                     ],
                     (UNITLAYERS.units[Object.keys(ARTIFACTS.squished)[0]] || {})
-                      .owner as 0 | 1 | 2,
+                      .owner,
                     Object.keys(ARTIFACTS.squished)[0]
                   ]
                 }
@@ -352,7 +346,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -398,7 +392,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     });
   };
   game.action.move2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       beingpushed: step.ARTIFACTS.beingpushed,
@@ -416,14 +410,12 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: <string>(
-              offsetPos(
-                LOOPPOS,
-                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
-                1,
-                0,
-                { height: 8, width: 8 }
-              )
+            pos: offsetPos(
+              LOOPPOS,
+              (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
+              1,
+              0,
+              { height: 8, width: 8 }
             )
           };
         }
@@ -490,7 +482,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -541,7 +533,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -554,10 +546,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
                     iconMapping[
                       (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).group
                     ],
-                    (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).owner as
-                      | 0
-                      | 1
-                      | 2,
+                    (UNITLAYERS.units[BATTLEVARS["pushsquare"]] || {}).owner,
                     BATTLEVARS["pushsquare"]
                   ]
                 },
@@ -574,7 +563,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
       beingpushed: {},
       squished: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
@@ -640,7 +629,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -659,7 +648,7 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
                       ).group
                     ],
                     (UNITLAYERS.units[Object.keys(ARTIFACTS.squished)[0]] || {})
-                      .owner as 0 | 1 | 2,
+                      .owner,
                     Object.keys(ARTIFACTS.squished)[0]
                   ]
                 }
@@ -670,4 +659,4 @@ let game: Partial<AlgolGame> = { gameId: "aries", action: {}, instruction: {} };
     });
   };
 }
-export default game as AlgolGame;
+export default game;

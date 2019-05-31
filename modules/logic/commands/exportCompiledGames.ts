@@ -30,7 +30,8 @@ export default games;
       fs.writeFile(
         path.join(out, "indiv", name + ".ts"),
         `import ${name} from '../../generated/${name}';
-export default ${name};
+import { AlgolGame } from '../../../types';
+export default ${name} as AlgolGame;
 `
       )
     )

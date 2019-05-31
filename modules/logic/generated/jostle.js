@@ -8,7 +8,6 @@ import {
   collapseContent,
   defaultInstruction
 } from "../../common";
-import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 10, width: 10 });
 const iconMapping = { checkers: "pawn" };
@@ -25,11 +24,7 @@ const TERRAIN = terrainLayers(10, 10, {});
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: Partial<AlgolGame> = {
-  gameId: "jostle",
-  action: {},
-  instruction: {}
-};
+let game = { gameId: "jostle", action: {}, instruction: {} };
 {
   const groupLayers = {
     checkers: [
@@ -47,7 +42,7 @@ let game: Partial<AlgolGame> = {
       mycheckers: oldUnitLayers.oppcheckers,
       oppcheckers: oldUnitLayers.mycheckers
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -74,7 +69,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.jostle1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -120,7 +115,7 @@ let game: Partial<AlgolGame> = {
       initialenemy: {},
       initialfriend: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -161,7 +156,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -203,7 +198,7 @@ let game: Partial<AlgolGame> = {
       newenemy: {},
       newfriend: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
@@ -276,7 +271,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -303,7 +298,7 @@ let game: Partial<AlgolGame> = {
       mycheckers: oldUnitLayers.oppcheckers,
       oppcheckers: oldUnitLayers.mycheckers
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -391,7 +386,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.jostle2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
@@ -437,7 +432,7 @@ let game: Partial<AlgolGame> = {
       initialenemy: {},
       initialfriend: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -478,7 +473,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -520,7 +515,7 @@ let game: Partial<AlgolGame> = {
       newenemy: {},
       newfriend: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
@@ -593,7 +588,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -603,4 +598,4 @@ let game: Partial<AlgolGame> = {
     });
   };
 }
-export default game as AlgolGame;
+export default game;

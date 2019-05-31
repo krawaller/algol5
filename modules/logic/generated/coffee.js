@@ -8,7 +8,6 @@ import {
   collapseContent,
   defaultInstruction
 } from "../../common";
-import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
 const iconMapping = { soldiers: "pawn" };
@@ -26,11 +25,7 @@ const TERRAIN = terrainLayers(5, 5, {});
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: Partial<AlgolGame> = {
-  gameId: "coffee",
-  action: {},
-  instruction: {}
-};
+let game = { gameId: "coffee", action: {}, instruction: {} };
 {
   const groupLayers = {
     soldiers: [
@@ -48,7 +43,7 @@ let game: Partial<AlgolGame> = {
       neutralunits: oldUnitLayers.neutralunits,
       soldiers: oldUnitLayers.soldiers
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -90,7 +85,7 @@ let game: Partial<AlgolGame> = {
         });
   };
   game.action.uphill1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -194,7 +189,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.uphill1 = () => defaultInstruction(1);
   game.action.downhill1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -298,7 +293,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.downhill1 = () => defaultInstruction(1);
   game.action.horisontal1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -402,7 +397,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.horisontal1 = () => defaultInstruction(1);
   game.action.vertical1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -513,7 +508,7 @@ let game: Partial<AlgolGame> = {
       horisontal: {},
       downhill: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectdrop: newMarkPos
     };
@@ -615,7 +610,7 @@ let game: Partial<AlgolGame> = {
       neutralunits: oldUnitLayers.neutralunits,
       soldiers: oldUnitLayers.soldiers
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -671,7 +666,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.uphill2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -775,7 +770,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.uphill2 = () => defaultInstruction(2);
   game.action.downhill2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -879,7 +874,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.downhill2 = () => defaultInstruction(2);
   game.action.horisontal2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -983,7 +978,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.horisontal2 = () => defaultInstruction(2);
   game.action.vertical2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -1094,7 +1089,7 @@ let game: Partial<AlgolGame> = {
       horisontal: {},
       downhill: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectdrop: newMarkPos
     };
@@ -1179,4 +1174,4 @@ let game: Partial<AlgolGame> = {
     });
   };
 }
-export default game as AlgolGame;
+export default game;

@@ -13,7 +13,7 @@ export default async function compile(gameId: keyof typeof lib) {
     const code = compileGameToCode(rules);
 
     await fs.ensureDir(out);
-    await fs.writeFile(path.join(out, gameId + ".ts"), code);
+    await fs.writeFile(path.join(out, gameId + ".js"), code);
     console.log(`Compiled ${gameId}`);
   } catch (e) {
     console.log("Error while compiling", gameId);

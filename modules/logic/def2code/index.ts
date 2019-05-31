@@ -10,15 +10,13 @@ export function compileGameToCode(gameDef: FullDefAnon) {
   let ret = `import {offsetPos, boardConnections, makeRelativeDirs, deduceInitialUnitData, boardLayers, terrainLayers, collapseContent, defaultInstruction} from '../../common';
   `;
 
-  ret += `import {AlgolStepLinks, AlgolGame} from '../../types'; `;
-
   ret += executeSection(gameDef, 1, "head", "head");
 
-  ret += `let game: Partial<AlgolGame> = { gameId: '${
+  ret += `let game = { gameId: '${
     gameDef.meta.id
   }', action: {}, instruction: {} }; `;
 
-  [1, 2].forEach((player: 1 | 2) => {
+  ([1, 2] as const).forEach(player => {
     ret += `{ `;
 
     ret += executeSection(gameDef, player, "player", "player");
@@ -75,13 +73,13 @@ export function compileGameToCode(gameDef: FullDefAnon) {
     ret += ` } `;
   });
 
-  ret += "export default game as AlgolGame; ";
+  ret += "export default game; ";
 
   ret = ret
-    .replace(/(let |const )LINKS =/g, "$1LINKS: AlgolStepLinks =")
-    .replace(/\.owner([^a-z])/g, ".owner as 0 | 1 | 2$1")
-    .replace(/ offsetPos\(/g, " <string>offsetPos(")
-    .replace(/let MARKS = \{ .../g, "let MARKS: {[idx:string]: string} = {...")
+    // .replace(/(let |const )LINKS =/g, "$1LINKS: AlgolStepLinks =")
+    // .replace(/\.owner([^a-z])/g, ".owner as 0 | 1 | 2$1")
+    // .replace(/ offsetPos\(/g, " <string>offsetPos(")
+    // .replace(/let MARKS = \{ .../g, "let MARKS: {[idx:string]: string} = {...")
     .replace(/[\n\r]( *[\n\r])*/g, "\n");
 
   return prettier.format(ret, { parser: "typescript" });

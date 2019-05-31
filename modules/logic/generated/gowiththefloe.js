@@ -8,7 +8,6 @@ import {
   collapseContent,
   defaultInstruction
 } from "../../common";
-import { AlgolStepLinks, AlgolGame } from "../../types";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 8, width: 8 });
 const iconMapping = { seals: "king", bears: "queen", holes: "pawn" };
@@ -39,11 +38,7 @@ const TERRAIN = terrainLayers(8, 8, {
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
 const orthoDirs = [1, 3, 5, 7];
 const diagDirs = [2, 4, 6, 8];
-let game: Partial<AlgolGame> = {
-  gameId: "gowiththefloe",
-  action: {},
-  instruction: {}
-};
+let game = { gameId: "gowiththefloe", action: {}, instruction: {} };
 {
   const groupLayers = {
     seals: [
@@ -72,7 +67,7 @@ let game: Partial<AlgolGame> = {
       bears: oldUnitLayers.bears,
       holes: oldUnitLayers.holes
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -99,7 +94,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.move1 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       cracks: step.ARTIFACTS.cracks,
@@ -200,7 +195,7 @@ let game: Partial<AlgolGame> = {
     let ARTIFACTS = {
       movetargets: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -246,7 +241,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         }
@@ -258,7 +253,7 @@ let game: Partial<AlgolGame> = {
       movetargets: step.ARTIFACTS.movetargets,
       cracks: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
@@ -307,7 +302,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -345,7 +340,7 @@ let game: Partial<AlgolGame> = {
       bears: oldUnitLayers.bears,
       holes: oldUnitLayers.holes
     };
-    let LINKS: AlgolStepLinks = {
+    let LINKS = {
       marks: {},
       commands: {}
     };
@@ -399,7 +394,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.move2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       eattargets: step.ARTIFACTS.eattargets,
@@ -498,7 +493,7 @@ let game: Partial<AlgolGame> = {
   };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.eat2 = step => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
@@ -584,7 +579,7 @@ let game: Partial<AlgolGame> = {
       movetargets: {},
       eattargets: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: newMarkPos
     };
@@ -642,7 +637,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -662,7 +657,7 @@ let game: Partial<AlgolGame> = {
       eattargets: step.ARTIFACTS.eattargets,
       cracks: {}
     };
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     let MARKS = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
@@ -711,7 +706,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -721,7 +716,7 @@ let game: Partial<AlgolGame> = {
     });
   };
   game.action.selecteattarget2 = (step, newMarkPos) => {
-    let LINKS: AlgolStepLinks = { marks: {}, commands: {} };
+    let LINKS = { marks: {}, commands: {} };
     LINKS.commands.eat = "eat2";
     return {
       LINKS,
@@ -745,7 +740,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
             MARKS.selectunit
           ]
         },
@@ -753,7 +748,7 @@ let game: Partial<AlgolGame> = {
         {
           unit: [
             iconMapping[(UNITLAYERS.units[MARKS.selecteattarget] || {}).group],
-            (UNITLAYERS.units[MARKS.selecteattarget] || {}).owner as 0 | 1 | 2,
+            (UNITLAYERS.units[MARKS.selecteattarget] || {}).owner,
             MARKS.selecteattarget
           ]
         },
@@ -762,4 +757,4 @@ let game: Partial<AlgolGame> = {
     });
   };
 }
-export default game as AlgolGame;
+export default game;

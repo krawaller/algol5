@@ -4,9 +4,11 @@ import {
   AlgolStep,
   AlgolStepLinks,
   AlgolContentLineAnon,
-  AlgolScriptLine
+  AlgolScriptLine,
 } from "../../types";
 import { getContentText } from "../../common";
+
+const endGames = ["win", "lose", "draw"];
 
 export function runGameScript(
   id: string,
@@ -26,14 +28,17 @@ export function runGameScript(
         for (const action of line.commands) {
           let func;
           if (
-            ["win", "lose", "draw"].includes(action) ||
+            endGames.includes(action) ||
             (action === "endTurn" &&
-              ["win", "lose", "draw"].includes(step.LINKS.endGame))
+              endGames.includes(step.LINKS.endGame as string))
           ) {
             if (lines.length) {
               throw new Error("Game end but lines remaining");
             }
-            if (["startTurn1", "startTurn2"].includes(step.LINKS.endTurn)) {
+            if (
+              ["startTurn1", "startTurn2"].includes(step.LINKS
+                .endTurn as string)
+            ) {
               throw new Error("Expected game to end but it didnt");
             }
             if (step.LINKS.endGame !== action) {
@@ -66,11 +71,11 @@ export function runGameScript(
                 action === step.LINKS.endTurn
               ) {
                 expect((instr as AlgolContentLineAnon).line).toContainEqual({
-                  endTurn: "end turn"
+                  endTurn: "end turn",
                 });
               } else {
                 expect((instr as AlgolContentLineAnon).line).toContainEqual({
-                  command: action
+                  command: action,
                 });
               }
 

@@ -10,7 +10,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
       player: defPlayer,
       action: defAction,
       contexts,
-      skip
+      skip,
     } of suite.defs) {
       if (!skip) {
         for (const {
@@ -19,11 +19,11 @@ export function runSuite<T, U>(suite: AlgolSuite) {
           skip,
           envelope,
           player: ctxPlayer,
-          action: ctxAction
+          action: ctxAction,
         } of contexts) {
           if (!skip) {
             for (const suiteTest of tests) {
-              let results = [];
+              let results: any[] = [];
               if (!suiteTest.skip) {
                 const player = suiteTest.player || ctxPlayer || defPlayer || 1;
                 const action =
@@ -39,18 +39,21 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                         player === 1
                           ? ["neutral", "my", "opp"]
                           : ["neutral", "opp", "my"],
-                      gameDef: def
+                      gameDef: def,
                     };
                 const fullContext = {
                   ...extraContext,
-                  ...context
+                  ...context,
                 };
                 let pre =
                   `
                   const references = {
                     ${Object.keys(fullContext).reduce(
                       (mem, key) =>
-                        mem + `${key}: ${JSON.stringify(fullContext[key])}, `,
+                        mem +
+                        `${key}: ${JSON.stringify(
+                          fullContext[key as keyof typeof fullContext]
+                        )}, `,
                       ""
                     )}
                   };
@@ -104,8 +107,8 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                       {
                         res: suiteTest.res,
                         desc: suiteTest.desc,
-                        debug: suiteTest.debug
-                      }
+                        debug: suiteTest.debug,
+                      },
                     ]
                   : suiteTest.asserts;
                 checks.forEach(({ res, desc, debug, skip }, n) => {

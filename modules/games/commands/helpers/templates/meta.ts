@@ -1,4 +1,4 @@
-export default function templateMeta(gameId) {
+export default function templateMeta(gameId: string) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return `import { ${capId}Meta } from './_types';
 

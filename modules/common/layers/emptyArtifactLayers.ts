@@ -1,7 +1,9 @@
-import { GeneratorsAnon } from "../../types";
+import { GeneratorsAnon, LayerCollection } from "../../types";
 import { generatorLayers } from "./generatorLayers";
 
-export function emptyArtifactLayers(generators: GeneratorsAnon = {}) {
+export function emptyArtifactLayers(
+  generators: GeneratorsAnon = {}
+): LayerCollection {
   let names = [] as string[];
   Object.keys(generators).forEach(genName => {
     const genDef = generators[genName];

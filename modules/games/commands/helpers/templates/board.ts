@@ -1,4 +1,4 @@
-export default function templateBoard(gameId) {
+export default function templateBoard(gameId: string) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return `import { ${capId}Board } from './_types';
 

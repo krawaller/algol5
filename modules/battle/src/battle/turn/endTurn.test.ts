@@ -1,5 +1,5 @@
 import { firstTurn, endTurn } from "../turn";
-import aries from "../../../../logic/generated/aries";
+import aries from "../../../../logic/dist/indiv/aries";
 
 test("turn/endTurn regular", () => {
   let turn = firstTurn(aries);
@@ -18,6 +18,6 @@ test("turn/endTurn regular", () => {
     "b5",
     "c5",
     "d5",
-    "e4" // but no more since plr1 moved to e4
+    "e4", // but no more since plr1 moved to e4
   ]);
 });

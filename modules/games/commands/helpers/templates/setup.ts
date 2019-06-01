@@ -1,4 +1,4 @@
-export default function templateSetup(gameId) {
+export default function templateSetup(gameId: string) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return `import { ${capId}Setup } from './_types';
 

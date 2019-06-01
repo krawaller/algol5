@@ -1,4 +1,4 @@
-export default function templateAI(gameId) {
+export default function templateAI(gameId: string) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return `import { ${capId}AI } from "./_types";
 

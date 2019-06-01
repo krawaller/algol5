@@ -1,5 +1,5 @@
 import { firstTurn } from "../turn";
-import aries from "../../../../logic/generated/aries";
+import aries from "../../../../logic/dist/indiv/aries";
 
 test("turn/firstTurn", () => {
   const res = firstTurn(aries);

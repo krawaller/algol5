@@ -1,4 +1,4 @@
-export default function templateGraphics(gameId) {
+export default function templateGraphics(gameId: string) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return `import { ${capId}Graphics } from './_types';
 

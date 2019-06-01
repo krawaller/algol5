@@ -1,3 +1,17 @@
+import { AlgolIfableExpression } from "./";
+
+export type AlgolIfableExpressionAnon<_T> = AlgolIfableExpression<
+  _T,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+
 import {
   AlgolIfableExpressionIf,
   AlgolIfableExpressionIfAction,

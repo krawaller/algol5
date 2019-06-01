@@ -1,13 +1,13 @@
 import {
   FullDefAnon,
   AlgolIfableExpressionAnon,
-  isAlgolLogicalIfElse,
-  isAlgolLogicalIfActionElse,
-  isAlgolLogicalIndexList,
-  isAlgolLogicalPlayerCase,
-  isAlgolLogicalIf,
-  isAlgolLogicalIfPlayer,
-  isAlgolLogicalIfAction,
+  isAlgolExpressionIfElse,
+  isAlgolExpressionIfActionElse,
+  isAlgolExpressionIndexList,
+  isAlgolExpressionPlayerCase,
+  isAlgolExpressionIf,
+  isAlgolExpressionIfPlayer,
+  isAlgolExpressionIfAction,
   AlgolValAnon,
   AlgolBoolAnon,
   AlgolPosAnon,
@@ -34,28 +34,28 @@ export function executeExpression<_T>(
   const me = (expr: AlgolExpressionAnon<_T>) =>
     executeExpression(gameDef, player, action, parser, expr, from);
 
-  if (isAlgolLogicalIfElse(expr)) {
+  if (isAlgolExpressionIfElse(expr)) {
     const {
       ifelse: [test, whenTruthy, whenFalsy],
     } = expr;
     return `(${parse.bool(test)} ? ${me(whenTruthy)} : ${me(whenFalsy)})`;
   }
 
-  if (isAlgolLogicalIfActionElse(expr)) {
+  if (isAlgolExpressionIfActionElse(expr)) {
     const {
       ifactionelse: [testAction, whenYes, whenNo],
     } = expr;
     return me(testAction === action ? whenYes : whenNo);
   }
 
-  if (isAlgolLogicalPlayerCase(expr)) {
+  if (isAlgolExpressionPlayerCase(expr)) {
     const {
       playercase: [plr1, plr2],
     } = expr;
     return me(player === 1 ? plr1 : plr2);
   }
 
-  if (isAlgolLogicalIndexList(expr)) {
+  if (isAlgolExpressionIndexList(expr)) {
     const {
       indexlist: [idx, ...opts],
     } = expr;
@@ -66,21 +66,21 @@ export function executeExpression<_T>(
     return `[${opts.map(me).join(", ")}][${parsedIdx}]`;
   }
 
-  if (isAlgolLogicalIf(expr)) {
+  if (isAlgolExpressionIf(expr)) {
     const {
       if: [test, val],
     } = expr;
     return `(${parse.bool(test)} ? ${me(val)} : undefined)`;
   }
 
-  if (isAlgolLogicalIfPlayer(expr)) {
+  if (isAlgolExpressionIfPlayer(expr)) {
     const {
       ifplayer: [forPlayer, val],
     } = expr;
     return forPlayer === player ? me(val) : "undefined";
   }
 
-  if (isAlgolLogicalIfAction(expr)) {
+  if (isAlgolExpressionIfAction(expr)) {
     const {
       ifaction: [forAction, val],
     } = expr;

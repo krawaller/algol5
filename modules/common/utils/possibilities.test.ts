@@ -1,9 +1,9 @@
 import { possibilities } from "..";
-import { AlgolLogicalAnon } from "../../types";
+import { AlgolIfableExpressionAnon } from "../../types";
 
 type PossTest<_T> = {
-  expr: AlgolLogicalAnon<_T>;
-  poss: AlgolLogicalAnon<_T>[];
+  expr: AlgolIfableExpressionAnon<_T>;
+  poss: AlgolIfableExpressionAnon<_T>[];
   player?: 0 | 1 | 2;
   action?: string;
 };
@@ -15,72 +15,72 @@ const possTests: PossTest<
   { expr: { o: 1 }, poss: [{ o: 1 }] },
   {
     expr: { ifelse: [["true"], "FOO", { ifelse: [["false"], "BAR", "BAZ"] }] },
-    poss: ["FOO", "BAR", "BAZ"]
+    poss: ["FOO", "BAR", "BAZ"],
   },
   {
     expr: { ifactionelse: ["someaction", "BAR", "BIN"] },
-    poss: ["BAR", "BIN"]
+    poss: ["BAR", "BIN"],
   },
   {
     expr: { ifactionelse: ["someaction", "BAR", "BIN"] },
     action: "someaction",
-    poss: ["BAR"]
+    poss: ["BAR"],
   },
   {
     expr: { ifactionelse: ["someaction", "BAR", "BIN"] },
     action: "anotheraction",
-    poss: ["BIN"]
+    poss: ["BIN"],
   },
   {
     expr: { playercase: ["FOO", "BAZ"] },
-    poss: ["FOO", "BAZ"]
+    poss: ["FOO", "BAZ"],
   },
   {
     expr: { playercase: ["FOO", "BAZ"] },
     player: 1,
-    poss: ["FOO"]
+    poss: ["FOO"],
   },
   {
     expr: { playercase: ["FOO", "BAZ"] },
     player: 2,
-    poss: ["BAZ"]
+    poss: ["BAZ"],
   },
   {
     expr: { indexlist: [2, "BAR", "BAZ", { playercase: ["BAR", "BIN"] }] },
-    poss: ["BAR", "BAZ", "BIN"]
+    poss: ["BAR", "BAZ", "BIN"],
   },
   {
     expr: { indexlist: [2, { o: 1 }, { playercase: [{ o: 1 }, { o: 2 }] }] },
-    poss: [{ o: 1 }, { o: 2 }]
+    poss: [{ o: 1 }, { o: 2 }],
   },
   {
     expr: { if: [["false"], { ifelse: [["true"], "FOO", "BIN"] }] },
-    poss: ["FOO", "BIN"]
+    poss: ["FOO", "BIN"],
   },
   {
     expr: { ifplayer: [1, "FOO"] },
     player: 1,
-    poss: ["FOO"]
+    poss: ["FOO"],
   },
   {
     expr: { ifplayer: [1, "FOO"] },
     player: 2,
-    poss: []
+    poss: [],
   },
   {
     expr: { ifaction: ["someaction", "FOO"] },
-    poss: ["FOO"]
+    poss: ["FOO"],
   },
   {
     expr: { ifaction: ["someaction", "FOO"] },
     action: "someaction",
-    poss: ["FOO"]
+    poss: ["FOO"],
   },
   {
     expr: { ifaction: ["someaction", "FOO"] },
     action: "anotheraction",
-    poss: []
-  }
+    poss: [],
+  },
 ];
 
 test("possibilities", () =>

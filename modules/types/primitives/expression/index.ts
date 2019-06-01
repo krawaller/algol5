@@ -2,14 +2,14 @@ export * from "./expression.anon";
 export * from "./expression.guard";
 
 import {
-  AlgolLogicalIfActionElse,
-  AlgolLogicalIfElse,
-  AlgolLogicalIndexList,
-  AlgolLogicalPlayerCase,
-  AlgolLogicalIf,
-  AlgolLogicalIfPlayer,
-  AlgolLogicalIfAction
-} from "../../";
+  AlgolExpressionIfActionElse,
+  AlgolExpressionIfElse,
+  AlgolExpressionIndexList,
+  AlgolExpressionPlayerCase,
+  AlgolExpressionIf,
+  AlgolExpressionIfPlayer,
+  AlgolExpressionIfAction,
+} from "./expression.interfaces";
 
 export type AlgolExpression<
   _T,
@@ -23,9 +23,8 @@ export type AlgolExpression<
   Turnv
 > =
   | _T
-  | AlgolLogicalIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalPlayerCase<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalIfActionElse<
+  | AlgolExpressionIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolExpressionPlayerCase<
       _T,
       Btlp,
       Btlv,
@@ -36,7 +35,28 @@ export type AlgolExpression<
       Turnp,
       Turnv
     >
-  | AlgolLogicalIndexList<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolExpressionIfActionElse<
+      _T,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >
+  | AlgolExpressionIndexList<
+      _T,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;
 
 export type AlgolIfableExpression<
   _T,
@@ -50,6 +70,26 @@ export type AlgolIfableExpression<
   Turnv
 > =
   | AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalIfAction<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolLogicalIfPlayer<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolExpressionIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolExpressionIfAction<
+      _T,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >
+  | AlgolExpressionIfPlayer<
+      _T,
+      Btlp,
+      Btlv,
+      Cmnd,
+      Grid,
+      Layer,
+      Mrk,
+      Turnp,
+      Turnv
+    >;

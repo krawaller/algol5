@@ -1,6 +1,5 @@
 export * from "./order";
 export * from "./section";
-export * from "./logical";
 export * from "./expression";
 export * from "./statement";
 export * from "./bool";

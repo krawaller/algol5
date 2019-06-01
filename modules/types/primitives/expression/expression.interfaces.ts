@@ -1,9 +1,9 @@
-import { AlgolLogical } from "./";
+import { AlgolExpression } from "./";
 
 import { AlgolBool } from "../bool";
 import { AlgolVal } from "../value";
 
-export interface AlgolLogicalIfElse<
+export interface AlgolExpressionIfElse<
   _T,
   Btlp,
   Btlv,
@@ -16,12 +16,12 @@ export interface AlgolLogicalIfElse<
 > {
   ifelse: [
     AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   ];
 }
 
-export interface AlgolLogicalIf<
+export interface AlgolExpressionIf<
   _T,
   Btlp,
   Btlv,
@@ -34,11 +34,11 @@ export interface AlgolLogicalIf<
 > {
   if: [
     AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   ];
 }
 
-export interface AlgolLogicalIfPlayer<
+export interface AlgolExpressionIfPlayer<
   _T,
   Btlp,
   Btlv,
@@ -51,11 +51,11 @@ export interface AlgolLogicalIfPlayer<
 > {
   ifplayer: [
     AlgolVal<1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   ];
 }
 
-export interface AlgolLogicalIfAction<
+export interface AlgolExpressionIfAction<
   _T,
   Btlp,
   Btlv,
@@ -78,11 +78,11 @@ export interface AlgolLogicalIfAction<
       Turnp,
       Turnv
     >,
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   ];
 }
 
-export interface AlgolLogicalPlayerCase<
+export interface AlgolExpressionPlayerCase<
   _T,
   Btlp,
   Btlv,
@@ -94,12 +94,12 @@ export interface AlgolLogicalPlayerCase<
   Turnv
 > {
   playercase: [
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   ];
 }
 
-export interface AlgolLogicalIfActionElse<
+export interface AlgolExpressionIfActionElse<
   _T,
   Btlp,
   Btlv,
@@ -122,12 +122,12 @@ export interface AlgolLogicalIfActionElse<
       Turnp,
       Turnv
     >,
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   ];
 }
 
-export interface AlgolLogicalIndexList<
+export interface AlgolExpressionIndexList<
   _T,
   Btlp,
   Btlv,
@@ -140,6 +140,6 @@ export interface AlgolLogicalIndexList<
 > {
   indexlist: [
     AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    ...AlgolLogical<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[]
+    ...AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[]
   ];
 }

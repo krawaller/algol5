@@ -3,7 +3,7 @@ import {
   isAlgolStatementForIdIn,
   AlgolStatementAnon,
   isAlgolStatementForPosIn,
-  isAlgolLogicalIf
+  isAlgolStatementIf,
 } from "../../../types";
 import isEqual from "lodash.isequal";
 
@@ -29,19 +29,19 @@ function validatePart(part: any, path = [], anc = []): Problem[] {
     problems.push({ path, error: `Don't use looppos outside forposin!` });
   }
   if (
-    isAlgolLogicalIf(part) &&
+    isAlgolStatementIf(part) &&
     [
       "runGenerator",
       "runGenerators",
       "applyEffect",
       "applyEffects",
       "link",
-      "links"
+      "links",
     ].indexOf(path[path.length - 1]) === -1
   ) {
     problems.push({
       path,
-      error: `Only use logical if when listing generators, effects or links`
+      error: `Only use logical if when listing generators, effects or links`,
     });
   }
   if (typeof part === "object") {

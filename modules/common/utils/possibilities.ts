@@ -1,16 +1,16 @@
 import {
   AlgolIfableExpressionAnon,
-  isAlgolLogicalIfActionElse,
-  isAlgolLogicalPlayerCase,
-  isAlgolLogicalIndexList,
-  isAlgolLogicalIf,
-  isAlgolLogicalIfElse,
-  isAlgolLogicalIfPlayer,
-  isAlgolLogicalIfAction,
+  isAlgolExpressionIfActionElse,
+  isAlgolExpressionPlayerCase,
+  isAlgolExpressionIndexList,
+  isAlgolIfableExpressionIf,
+  isAlgolExpressionIfElse,
+  isAlgolIfableExpressionIfPlayer,
+  isAlgolIfableExpressionIfAction,
   AlgolStatementAnon,
   isAlgolStatementForIdIn,
   isAlgolStatementForPosIn,
-  isAlgolStatementMulti
+  isAlgolStatementMulti,
 } from "../../types";
 
 export function possibilities<_T>(
@@ -32,18 +32,18 @@ function possibilitiesInner<_T>(
   action: string
 ): _T[] {
   const expr = input as AlgolIfableExpressionAnon<_T>;
-  if (isAlgolLogicalIfElse(expr)) {
+  if (isAlgolExpressionIfElse(expr)) {
     const {
-      ifelse: [test, whenTruthy, whenFalsy]
+      ifelse: [test, whenTruthy, whenFalsy],
     } = expr;
     return possibilitiesInner(whenTruthy, player, action).concat(
       possibilitiesInner(whenFalsy, player, action)
     );
   }
 
-  if (isAlgolLogicalIfActionElse(expr)) {
+  if (isAlgolExpressionIfActionElse(expr)) {
     const {
-      ifactionelse: [testAction, whenYes, whenNo]
+      ifactionelse: [testAction, whenYes, whenNo],
     } = expr;
     let poss = [];
     if (action === "any" || action === testAction)
@@ -53,9 +53,9 @@ function possibilitiesInner<_T>(
     return poss;
   }
 
-  if (isAlgolLogicalPlayerCase(expr)) {
+  if (isAlgolExpressionPlayerCase(expr)) {
     const {
-      playercase: [plr1, plr2]
+      playercase: [plr1, plr2],
     } = expr;
     let poss = [];
     if (player !== 2)
@@ -65,9 +65,9 @@ function possibilitiesInner<_T>(
     return poss;
   }
 
-  if (isAlgolLogicalIndexList(expr)) {
+  if (isAlgolExpressionIndexList(expr)) {
     const {
-      indexlist: [idx, ...opts]
+      indexlist: [idx, ...opts],
     } = expr;
     return opts.reduce(
       (mem, o) => mem.concat(possibilitiesInner(o, player, action)),
@@ -75,25 +75,25 @@ function possibilitiesInner<_T>(
     );
   }
 
-  if (isAlgolLogicalIf(expr)) {
+  if (isAlgolIfableExpressionIf(expr)) {
     const {
-      if: [test, opt]
+      if: [test, opt],
     } = expr;
     return [].concat(possibilitiesInner(opt, player, action));
   }
 
-  if (isAlgolLogicalIfPlayer(expr)) {
+  if (isAlgolIfableExpressionIfPlayer(expr)) {
     const {
-      ifplayer: [plr, opt]
+      ifplayer: [plr, opt],
     } = expr;
     return player === plr
       ? [].concat(possibilitiesInner(opt, player, action))
       : [];
   }
 
-  if (isAlgolLogicalIfAction(expr)) {
+  if (isAlgolIfableExpressionIfAction(expr)) {
     const {
-      ifaction: [testAction, opt]
+      ifaction: [testAction, opt],
     } = expr;
     return action === testAction || action === "any"
       ? [].concat(possibilitiesInner(opt, player, action))
@@ -106,14 +106,14 @@ function possibilitiesInner<_T>(
 
   if (isAlgolStatementForIdIn(statement)) {
     const {
-      foridin: [set, repeatStatement]
+      foridin: [set, repeatStatement],
     } = statement;
     return possibilitiesInner(repeatStatement, player, action);
   }
 
   if (isAlgolStatementForPosIn(statement)) {
     const {
-      forposin: [set, repeatStatement]
+      forposin: [set, repeatStatement],
     } = statement;
     return possibilitiesInner(repeatStatement, player, action);
   }

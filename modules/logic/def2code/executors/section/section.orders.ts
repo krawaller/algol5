@@ -2,7 +2,10 @@ import {
   AlgolOrderAnon,
   FullDefAnon,
   AlgolEffectActionDefAnon,
-  AlgolAnimAnon
+  AlgolEffectAnon,
+  AlgolLinkAnon,
+  AlgolAnimAnon,
+  AlgolGenRefAnon,
 } from "../../../../types";
 import { executeOrder } from "../";
 
@@ -16,13 +19,18 @@ export function executeOrderSection(
     gameDef.flow.marks[action] ||
     (action === "startTurn" && gameDef.flow.startTurn) ||
     {}; // To allow tests to reference non-existing things
-  const effects = []
-    .concat(def.applyEffects || [])
-    .concat(def.applyEffect || []);
-  const links = [].concat(def.links || []).concat(def.link || []);
-  const generators = []
-    .concat(def.runGenerators || [])
-    .concat(def.runGenerator || []);
+
+  const effects: AlgolEffectAnon[] = [];
+  if (def.applyEffects) effects.push(...def.applyEffects);
+  if (def.applyEffect) effects.push(def.applyEffect);
+
+  const links: AlgolLinkAnon[] = [];
+  if (def.links) links.push(...def.links);
+  if (def.link) links.push(def.link);
+
+  const generators: AlgolGenRefAnon[] = [];
+  if (def.runGenerators) generators.push(...def.runGenerators);
+  if (def.runGenerator) generators.push(def.runGenerator);
 
   const orders: AlgolOrderAnon[] = [];
   const anims: AlgolAnimAnon[] = gameDef.anim[action] || [];
@@ -42,6 +50,6 @@ export function executeOrderSection(
   }
 
   return executeOrder(gameDef, player, action, {
-    multi: orders
+    multi: orders,
   });
 }

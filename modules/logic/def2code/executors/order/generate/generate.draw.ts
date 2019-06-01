@@ -1,4 +1,4 @@
-import { FullDefAnon } from "../../../../../types";
+import { FullDefAnon, DrawDefAnon } from "../../../../../types";
 import { makeParser } from "../../../executors";
 
 /*
@@ -8,8 +8,8 @@ Use by generators to mutate ARTIFACTS.
 export default function draw(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action,
-  drawDef,
+  action: string,
+  drawDef: DrawDefAnon | undefined,
   posVar = "POS"
 ) {
   if (!drawDef) return "";
@@ -20,7 +20,7 @@ export default function draw(
     conds.push(`!${parser.set(drawDef.unlessover)}[${posVar}]`);
   if (drawDef.ifover) conds.push(`${parser.set(drawDef.ifover)}[${posVar}]`);
   const entries = Object.keys(drawDef.include || {}).map(
-    key => `${key}: ${parser.val(drawDef.include[key])}`
+    key => `${key}: ${parser.val(drawDef.include![key])}`
   );
   const artifactLiteral = entries.length
     ? `{ ${entries.join(", ")} }`

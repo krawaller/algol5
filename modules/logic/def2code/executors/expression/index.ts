@@ -12,45 +12,52 @@ import {
   AlgolBoolAnon,
   AlgolPosAnon,
   AlgolSetAnon,
-  AlgolDirsAnon
+  AlgolDirsAnon,
+  AlgolExpressionAnon,
 } from "../../../../types";
 
 export function executeExpression<_T>(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  parser,
+  parser: (
+    gameDef: FullDefAnon,
+    player: 1 | 2,
+    action: string,
+    expression: _T,
+    from?: string
+  ) => string,
   expr: AlgolIfableExpressionAnon<_T>,
-  from
-) {
+  from?: string
+): string {
   const parse = makeParser(gameDef, player, action, from);
-  const me = expr =>
+  const me = (expr: AlgolExpressionAnon<_T>) =>
     executeExpression(gameDef, player, action, parser, expr, from);
 
   if (isAlgolLogicalIfElse(expr)) {
     const {
-      ifelse: [test, whenTruthy, whenFalsy]
+      ifelse: [test, whenTruthy, whenFalsy],
     } = expr;
     return `(${parse.bool(test)} ? ${me(whenTruthy)} : ${me(whenFalsy)})`;
   }
 
   if (isAlgolLogicalIfActionElse(expr)) {
     const {
-      ifactionelse: [testAction, whenYes, whenNo]
+      ifactionelse: [testAction, whenYes, whenNo],
     } = expr;
     return me(testAction === action ? whenYes : whenNo);
   }
 
   if (isAlgolLogicalPlayerCase(expr)) {
     const {
-      playercase: [plr1, plr2]
+      playercase: [plr1, plr2],
     } = expr;
     return me(player === 1 ? plr1 : plr2);
   }
 
   if (isAlgolLogicalIndexList(expr)) {
     const {
-      indexlist: [idx, ...opts]
+      indexlist: [idx, ...opts],
     } = expr;
     const parsedIdx = parse.val(idx);
     if (typeof parsedIdx === "number") {
@@ -61,21 +68,21 @@ export function executeExpression<_T>(
 
   if (isAlgolLogicalIf(expr)) {
     const {
-      if: [test, val]
+      if: [test, val],
     } = expr;
     return `(${parse.bool(test)} ? ${me(val)} : undefined)`;
   }
 
   if (isAlgolLogicalIfPlayer(expr)) {
     const {
-      ifplayer: [forPlayer, val]
+      ifplayer: [forPlayer, val],
     } = expr;
     return forPlayer === player ? me(val) : "undefined";
   }
 
   if (isAlgolLogicalIfAction(expr)) {
     const {
-      ifaction: [forAction, val]
+      ifaction: [forAction, val],
     } = expr;
     return forAction === action ? me(val) : "undefined";
   }
@@ -107,7 +114,7 @@ export function makeParser(
     set: (expr: AlgolSetAnon): string | number =>
       executeExpression(gameDef, player, action, parseSet, expr, from),
     dirs: (expr: AlgolDirsAnon): string | number =>
-      executeExpression(gameDef, player, action, parseDirs, expr, from)
+      executeExpression(gameDef, player, action, parseDirs, expr, from),
   };
   return parsers;
 }

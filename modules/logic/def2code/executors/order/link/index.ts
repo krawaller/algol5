@@ -2,7 +2,8 @@ import {
   FullDefAnon,
   AlgolLinkAnon,
   AlgolLinkInnerAnon,
-  AlgolEffectActionDefAnon
+  AlgolEffectActionDefAnon,
+  AlgolStatementAnon,
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";

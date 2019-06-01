@@ -20,23 +20,23 @@ export default function executeNeighbours(
       action,
       nghDef,
       {
-        startVar: parser.pos(nghDef.start) as string
+        startVar: parser.pos(nghDef.start) as string,
       }
     )} }`;
   } else if (nghDef.start) {
     return `{
       let STARTPOS = ${parser.pos(nghDef.start)};
       ${findAndDrawNeighboursFromStart(gameDef, player, action, nghDef, {
-        startVar: "STARTPOS"
+        startVar: "STARTPOS",
       })}
       ${draw(gameDef, player, action, nghDef.draw.start, "STARTPOS")}
     }`;
     // many starts, must loop
   } else {
     return `
-      for(let STARTPOS in ${parser.set(nghDef.starts)}){
+      for(let STARTPOS in ${parser.set(nghDef.starts!)}){
         ${findAndDrawNeighboursFromStart(gameDef, player, action, nghDef, {
-          startVar: "STARTPOS"
+          startVar: "STARTPOS",
         })}
         ${draw(gameDef, player, action, nghDef.draw.start, "STARTPOS")}
       }
@@ -81,16 +81,16 @@ function findAndDrawNeighboursFromStart(
     return `
       ${findAndDrawSingleNeighbour(gameDef, player, action, nghDef, {
         dirVar: parser.val(nghDef.dir),
-        startVar
+        startVar,
       })}
     `;
   } else {
     // one dir, sth in def needs to now which
     return `
-      let DIR=${parser.val(nghDef.dir)};
+      let DIR=${parser.val(nghDef.dir!)};
       ${findAndDrawSingleNeighbour(gameDef, player, action, nghDef, {
         dirVar: "DIR",
-        startVar
+        startVar,
       })}
     `;
   }
@@ -137,10 +137,10 @@ function findManyNeighbours(
     ${countMatters ? "let foundneighbours = []; " : ""}
     ${countMatters && dirMatters ? "let foundneighbourdirs=[]; " : ""}
     let startconnections = connections[${startVar}];
-    for(let DIR of ${parser.dirs(nghDef.dirs)}){
+    for(let DIR of ${parser.dirs(nghDef.dirs!)}){
       ${findNeighbourInDir(gameDef, player, action, nghDef, {
         dirVar: "DIR",
-        connVar: "startconnections"
+        connVar: "startconnections",
       })}
     }
   `;

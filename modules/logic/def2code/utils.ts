@@ -1,4 +1,4 @@
-export function contains(haystack, needle): boolean {
+export function contains(haystack: any, needle: any): boolean {
   if (!haystack) {
     return false;
   } else if (JSON.stringify(needle) === JSON.stringify(haystack)) {
@@ -13,7 +13,7 @@ export function contains(haystack, needle): boolean {
   }
 }
 
-export function iconRef(group, icons) {
+export function iconRef(group: string, icons: { [idx: string]: string }) {
   const stripped = group.replace(/["']/g, "");
   return icons[stripped] ? `"${icons[stripped]}"` : `iconMapping[${group}]`;
 }

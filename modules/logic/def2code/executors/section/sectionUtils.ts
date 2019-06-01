@@ -9,49 +9,55 @@ import {
   isAlgolEffectSetBattlePos,
   isAlgolEffectSetBattleVar,
   isAlgolEffectSpawnAt,
-  isAlgolEffectSpawnIn
+  isAlgolEffectSpawnIn,
 } from "../../../../types";
 import { contains } from "../../../../common";
 
 import { executeOrderSection } from "./section.orders";
 
-export function mutatesTurnVars(search): boolean {
+export function mutatesTurnVars(search: any): boolean {
   return contains(
     search,
-    d => isAlgolEffectSetTurnPos(d) || isAlgolEffectSetTurnVar(d)
+    (d: any) => isAlgolEffectSetTurnPos(d) || isAlgolEffectSetTurnVar(d)
   );
 }
 
 export function readsTurnVars(search: FullDefAnon | any): boolean {
-  return contains(search, d => isAlgolPosTurnPos(d) || isAlgolValTurnVar(d));
+  return contains(
+    search,
+    (d: any) => isAlgolPosTurnPos(d) || isAlgolValTurnVar(d)
+  );
 }
 
-export function referencesTurnVars(search): boolean {
+export function referencesTurnVars(search: any): boolean {
   return readsTurnVars(search) || mutatesTurnVars(search);
 }
 
-export function mutatesBattleVars(search): boolean {
+export function mutatesBattleVars(search: any): boolean {
   return contains(
     search,
-    d => isAlgolEffectSetBattlePos(d) || isAlgolEffectSetBattleVar(d)
+    (d: any) => isAlgolEffectSetBattlePos(d) || isAlgolEffectSetBattleVar(d)
   );
 }
 
 export function readsBattleVars(search: FullDefAnon | any): boolean {
   return (
     mutatesBattleVars(search) ||
-    contains(search, d => isAlgolPosBattlePos(d) || isAlgolValBattleVar(d))
+    contains(
+      search,
+      (d: any) => isAlgolPosBattlePos(d) || isAlgolValBattleVar(d)
+    )
   );
 }
 
-export function referencesBattleVars(search): boolean {
+export function referencesBattleVars(search: any): boolean {
   return readsBattleVars(search) || mutatesBattleVars(search);
 }
 
 export function usesSpawn(search: FullDefAnon | any): boolean {
   return contains(
     search,
-    d => isAlgolEffectSpawnAt(d) || isAlgolEffectSpawnIn(d)
+    (d: any) => isAlgolEffectSpawnAt(d) || isAlgolEffectSpawnIn(d)
   );
 }
 
@@ -76,10 +82,10 @@ const vars: Vars[] = [
   "ARTIFACTS",
   "TURN",
   "NEXTSPAWNID",
-  "LINKS"
+  "LINKS",
 ];
 
-export function codeUsage(code): { [v in Vars]: Deed } {
+export function codeUsage(code: string): { [v in Vars]: Deed } {
   return vars.reduce(
     (mem, v) => {
       if (!code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^A-Za-z_$0-9]`))) {
@@ -87,19 +93,19 @@ export function codeUsage(code): { [v in Vars]: Deed } {
       } else if (code.match(new RegExp(`delete\\s${v}[^A-Za-z_$0-9]`))) {
         return {
           ...mem,
-          [v]: "mutates" as Deed
+          [v]: "mutates" as Deed,
         };
       } else if (
         code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^;\\)=]*\\s*=[^=]`))
       ) {
         return {
           ...mem,
-          [v]: "mutates" as Deed
+          [v]: "mutates" as Deed,
         };
       } else {
         return {
           ...mem,
-          [v]: "reads" as Deed
+          [v]: "reads" as Deed,
         };
       }
       return mem;

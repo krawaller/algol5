@@ -3,7 +3,7 @@ import {
   AlgolFilterDefAnon,
   isAlgolMatcherIs,
   isAlgolMatcherIsnt,
-  AlgolSetAnon
+  AlgolSetAnon,
 } from "../../../../../types";
 import { contains } from "../../../utils";
 import { makeParser } from "../../../executors";
@@ -26,7 +26,7 @@ export default function executeFilter(
     .concat(
       Object.keys(filterDef.matching || {}).reduce(
         (mem, propName) => {
-          const matcher = filterDef.matching[propName];
+          const matcher = filterDef.matching![propName];
           if (isAlgolMatcherIs(matcher)) {
             return mem.concat(
               `filterObj.${propName} === ${parser.val(matcher.is)}`

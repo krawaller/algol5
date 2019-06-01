@@ -9,7 +9,7 @@ import {
   isAlgolStatementIfAction,
   isAlgolStatementMulti,
   isAlgolStatementForPosIn,
-  isAlgolStatementForIdIn
+  isAlgolStatementForIdIn,
 } from "../../../../types";
 import { makeParser } from "../expression";
 
@@ -21,19 +21,19 @@ export function executeStatement<_T>(
     gameDef: FullDefAnon,
     player: 1 | 2,
     action: string,
-    statement: AlgolStatementAnon<_T>,
+    statement: _T,
     from?: string
   ) => string,
   statement: AlgolStatementAnon<_T>,
-  from
-) {
+  from?: string
+): string {
   const exprParser = makeParser(gameDef, player, action, from);
-  const me = expr =>
+  const me = (expr: AlgolStatementAnon<_T>) =>
     executeStatement(gameDef, player, action, finalParser, expr, from);
 
   if (isAlgolStatementIfElse(statement)) {
     const {
-      ifelse: [test, whenTruthy, whenFalsy]
+      ifelse: [test, whenTruthy, whenFalsy],
     } = statement;
 
     return `if (${exprParser.bool(test)}) { ${me(whenTruthy)} } else { ${me(
@@ -43,35 +43,35 @@ export function executeStatement<_T>(
 
   if (isAlgolStatementIfActionElse(statement)) {
     const {
-      ifactionelse: [testAction, whenYes, whenNo]
+      ifactionelse: [testAction, whenYes, whenNo],
     } = statement;
     return me(testAction === action ? whenYes : whenNo);
   }
 
   if (isAlgolStatementPlayerCase(statement)) {
     const {
-      playercase: [plr1, plr2]
+      playercase: [plr1, plr2],
     } = statement;
     return me(player === 1 ? plr1 : plr2);
   }
 
   if (isAlgolStatementIf(statement)) {
     const {
-      if: [test, val]
+      if: [test, val],
     } = statement;
     return `if (${exprParser.bool(test)}) { ${me(val)} }`;
   }
 
   if (isAlgolStatementIfPlayer(statement)) {
     const {
-      ifplayer: [forPlayer, val]
+      ifplayer: [forPlayer, val],
     } = statement;
     return forPlayer === player ? me(val) : "";
   }
 
   if (isAlgolStatementIfAction(statement)) {
     const {
-      ifaction: [forAction, val]
+      ifaction: [forAction, val],
     } = statement;
     return forAction === action ? me(val) : "";
   }
@@ -83,7 +83,7 @@ export function executeStatement<_T>(
 
   if (isAlgolStatementForPosIn(statement)) {
     const {
-      forposin: [set, repeatStatement]
+      forposin: [set, repeatStatement],
     } = statement;
     return `for(let LOOPPOS in ${exprParser.set(set)}) { ${me(
       repeatStatement
@@ -91,7 +91,7 @@ export function executeStatement<_T>(
   }
   if (isAlgolStatementForIdIn(statement)) {
     const {
-      foridin: [set, repeatEffect]
+      foridin: [set, repeatEffect],
     } = statement;
     const setcode = exprParser.set(set);
     const safe = (setcode as string).substr(0, 10) === "UNITLAYERS";

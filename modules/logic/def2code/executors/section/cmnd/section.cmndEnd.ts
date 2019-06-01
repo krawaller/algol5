@@ -3,7 +3,7 @@ import {
   referencesBattleVars,
   referencesTurnVars,
   usesSpawn,
-  orderUsage
+  orderUsage,
 } from "../sectionUtils";
 
 export function executeCmndEnd(
@@ -44,6 +44,6 @@ export function executeCmndEnd(
         : ""
     }
     ${gameDef.performance.canAlwaysEnd[action] ? "canAlwaysEnd: true, " : ""}${
-    gameDef.performance.massiveTree[action] ? "massiveTree: true, " : ""
+    gameDef.performance.massiveTree![action] ? "massiveTree: true, " : ""
   } ${hasAnim ? `anim` : ""}   };`;
 }

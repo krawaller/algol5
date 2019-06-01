@@ -25,7 +25,8 @@ import {
   isAlgolEffectMorphId,
   isAlgolEffectAdoptAt,
   isAlgolEffectAdoptIn,
-  isAlgolEffectAdoptId
+  isAlgolEffectAdoptId,
+  AlgolEffectSpawnAtAnon,
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";
@@ -68,7 +69,7 @@ function executeEffectInner(
   }
   if (isAlgolEffectSetTurnVar(effect)) {
     const {
-      setturnvar: [name, val]
+      setturnvar: [name, val],
     } = effect;
     const parsedName = parser.val(name) + "";
     return `TURNVARS${
@@ -79,7 +80,7 @@ function executeEffectInner(
   }
   if (isAlgolEffectSetTurnPos(effect)) {
     const {
-      setturnpos: [name, pos]
+      setturnpos: [name, pos],
     } = effect;
     const parsedName = parser.val(name) + "";
     return `TURNVARS${
@@ -90,7 +91,7 @@ function executeEffectInner(
   }
   if (isAlgolEffectSetBattleVar(effect)) {
     const {
-      setbattlevar: [name, val]
+      setbattlevar: [name, val],
     } = effect;
     const parsedName = parser.val(name) + "";
     return `BATTLEVARS${
@@ -101,7 +102,7 @@ function executeEffectInner(
   }
   if (isAlgolEffectSetBattlePos(effect)) {
     const {
-      setbattlepos: [name, pos]
+      setbattlepos: [name, pos],
     } = effect;
     const parsedName = parser.val(name) + "";
     return `BATTLEVARS${
@@ -112,7 +113,7 @@ function executeEffectInner(
   }
   if (isAlgolEffectSetAt(effect)) {
     const {
-      setat: [pos, prop, val]
+      setat: [pos, prop, val],
     } = effect;
     return `{
       let unitid = (UNITLAYERS.units[${parser.pos(pos)}] || {}).id;
@@ -127,7 +128,7 @@ function executeEffectInner(
   }
   if (isAlgolEffectSetId(effect)) {
     const {
-      setid: [id, prop, val]
+      setid: [id, prop, val],
     } = effect;
     return `
       UNITDATA[${parser.val(id)}]= { ...UNITDATA[${parser.val(id)}],
@@ -137,7 +138,7 @@ function executeEffectInner(
   }
   if (isAlgolEffectSpawnAt(effect)) {
     const {
-      spawnat: [pos, group, owner, props]
+      spawnat: [pos, group, owner, props],
     } = effect;
     return `{
         let newunitid = 'spawn'+(NEXTSPAWNID++);
@@ -158,7 +159,7 @@ function executeEffectInner(
   }
   if (isAlgolEffectPushAt(effect)) {
     const {
-      pushat: [pos, dir, dist]
+      pushat: [pos, dir, dist],
     } = effect;
     const newPos = `offsetPos(${parser.pos(pos)}, ${parser.val(
       dir
@@ -186,82 +187,88 @@ function executeEffectInner(
 
   if (isAlgolEffectSetIn(effect)) {
     const {
-      setin: [set, prop, val]
+      setin: [set, prop, val],
     } = effect;
     return me({ forposin: [set, { setat: [["looppos"], prop, val] }] });
   }
   if (isAlgolEffectMoveAt(effect)) {
     const {
-      moveat: [from, to]
+      moveat: [from, to],
     } = effect;
     return me({ setat: [from, "pos", { pos: to }] });
   }
   if (isAlgolEffectMoveId(effect)) {
     const {
-      moveid: [id, to]
+      moveid: [id, to],
     } = effect;
     return me({ setid: [id, "pos", { pos: to }] });
   }
   if (isAlgolEffectStompAt(effect)) {
     const {
-      stompat: [from, to]
+      stompat: [from, to],
     } = effect;
     return me({ multi: [{ killat: to }, { moveat: [from, to] }] });
   }
   if (isAlgolEffectStompId(effect)) {
     const {
-      stompid: [id, to]
+      stompid: [id, to],
     } = effect;
     return me({ multi: [{ killat: to }, { moveid: [id, to] }] });
   }
 
   if (isAlgolEffectSpawnIn(effect)) {
     const {
-      spawnin: [set, group, owner, props]
+      spawnin: [set, group],
     } = effect;
     return me({
-      forposin: [set, { spawnat: [["looppos"], group, owner, props] }]
+      forposin: [
+        set,
+        {
+          // spawnin[2] is owner, spawnin[3] is props, both can be undefined
+          spawnat: [["looppos"], group, effect.spawnin[2]!, effect.spawnin[3]!],
+        },
+      ],
     });
   }
   if (isAlgolEffectPushIn(effect)) {
     const {
-      pushin: [set, dir, dist]
+      pushin: [set, dir, dist],
     } = effect;
     return me({ forposin: [set, { pushat: [["looppos"], dir, dist] }] });
   }
   if (isAlgolEffectMorphAt(effect)) {
     const {
-      morphat: [pos, group]
+      morphat: [pos, group],
     } = effect;
     return me({ setat: [pos, "group", group] });
   }
   if (isAlgolEffectMorphId(effect)) {
     const {
-      morphid: [id, group]
+      morphid: [id, group],
     } = effect;
     return me({ setid: [id, "group", group] });
   }
   if (isAlgolEffectMorphIn(effect)) {
     const {
-      morphin: [set, group]
+      morphin: [set, group],
     } = effect;
     return me({ forposin: [set, { morphat: [["looppos"], group] }] });
   }
   if (isAlgolEffectAdoptAt(effect)) {
     const {
-      adoptat: [pos, owner]
+      adoptat: [pos, owner],
     } = effect;
     return me({ setat: [pos, "owner", owner] });
   }
   if (isAlgolEffectAdoptId(effect)) {
     const {
-      adoptid: [id, owner]
+      adoptid: [id, owner],
     } = effect;
     return me({ setid: [id, "owner", owner] });
   }
   if (isAlgolEffectAdoptIn(effect)) {
     const {
-      adoptin: [set, owner]
+      adoptin: [set, owner],
     } = effect;
     return me({ forposin: [set, { adoptat: [["looppos"], owner] }] });
   }

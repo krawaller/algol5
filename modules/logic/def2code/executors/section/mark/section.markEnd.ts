@@ -4,7 +4,7 @@ import {
   referencesBattleVars,
   referencesTurnVars,
   orderUsage,
-  usesSpawn
+  usesSpawn,
 } from "../sectionUtils";
 
 export function executeMarkEnd(
@@ -47,6 +47,6 @@ export function executeMarkEnd(
       ${
         gameDef.performance.canAlwaysEnd[action] ? "canAlwaysEnd: true, " : ""
       }${
-    gameDef.performance.massiveTree[action] ? "massiveTree: true, " : ""
+    gameDef.performance.massiveTree![action] ? "massiveTree: true, " : ""
   }     };`;
 }

@@ -10,5 +10,5 @@ export interface AlgolDirsList<
   Turnp,
   Turnv
 > {
-  list: AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+  dirslist: AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
 }

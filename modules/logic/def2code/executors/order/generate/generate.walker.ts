@@ -17,12 +17,12 @@ export default function executeWalker(
   const parser = makeParser(gameDef, player, action);
   const intro = `
     ${
-      needLevel(walkDef.steps, "start")
+      walkDef.steps && needLevel(walkDef.steps, "start")
         ? `let allowedsteps = ${parser.set(walkDef.steps)};`
         : ""
     }
     ${
-      needLevel(walkDef.blocks, "start")
+      walkDef.blocks && needLevel(walkDef.blocks, "start")
         ? `let BLOCKS = ${parser.set(walkDef.blocks)};`
         : ""
     }
@@ -32,7 +32,7 @@ export default function executeWalker(
         ${intro}
         for(let STARTPOS in ${parser.set(walkDef.starts)}) {
           ${walkFromStart(gameDef, player, action, walkDef, {
-            startVar: "STARTPOS"
+            startVar: "STARTPOS",
           })}
         }
       }
@@ -40,16 +40,16 @@ export default function executeWalker(
   } else if (walkDef.draw.start) {
     return `{
       ${intro}
-      let STARTPOS = ${parser.pos(walkDef.start)};
+      let STARTPOS = ${parser.pos(walkDef.start!)};
       ${walkFromStart(gameDef, player, action, walkDef, {
-        startVar: "STARTPOS"
+        startVar: "STARTPOS",
       })}
     }`;
   } else {
     return `{
       ${intro}
       ${walkFromStart(gameDef, player, action, walkDef, {
-        startVar: parser.pos(walkDef.start) as string
+        startVar: parser.pos(walkDef.start!) as string,
       })}
     }`;
   }
@@ -66,12 +66,12 @@ function walkFromStart(
   const dirMatters = contains(walkDef.draw, ["dir"]);
   const intro = `
     ${
-      needLevel(walkDef.steps, "dir")
+      walkDef.steps && needLevel(walkDef.steps, "dir")
         ? `let allowedsteps = ${parse.set(walkDef.steps)};`
         : ""
     }
     ${
-      needLevel(walkDef.blocks, "dir")
+      walkDef.blocks && needLevel(walkDef.blocks, "dir")
         ? `let BLOCKS = ${parse.set(walkDef.blocks)};`
         : ""
     }
@@ -83,17 +83,17 @@ function walkFromStart(
       for(let DIR of ${parse.dirs(walkDef.dirs)}){
         ${walkInDir(gameDef, player, action, walkDef, {
           dirVar: "DIR",
-          startVar
+          startVar,
         })}
       }
     `
     );
   } else {
-    let dirVar = dirMatters ? "DIR" : parse.val(walkDef.dir);
+    let dirVar = dirMatters ? "DIR" : parse.val(walkDef.dir!);
     return (
       intro +
       `
-      ${dirMatters ? `let DIR = ${parse.val(walkDef.dir)}; ` : ""}
+      ${dirMatters ? `let DIR = ${parse.val(walkDef.dir!)}; ` : ""}
       ${walkInDir(gameDef, player, action, walkDef, { dirVar, startVar })}
     `
     );
@@ -142,8 +142,8 @@ function walkInDir(
   }
 
   if (needLevel(walkDef.blocks, "loop")) {
-    ret += `let allowedsteps = ${parser.set(walkDef.steps)}; `;
-    ret += `let BLOCKS = ${parser.set(walkDef.blocks)}; `;
+    ret += `let allowedsteps = ${parser.set(walkDef.steps!)}; `; // TODO <--- really always have steps here?
+    ret += `let BLOCKS = ${parser.set(walkDef.blocks!)}; `;
   }
 
   if (walkDef.count) {
@@ -265,7 +265,7 @@ function walkInDir(
 }
 
 // when do we need it? :D
-function needLevel(expr, when) {
+function needLevel(expr: any, when: "loop" | "dir" | "start") {
   return (
     (contains(expr, ["dir"])
       ? "loop"

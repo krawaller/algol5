@@ -45,7 +45,7 @@ function possibilitiesInner<_T>(
     const {
       ifactionelse: [testAction, whenYes, whenNo],
     } = expr;
-    let poss = [];
+    let poss: any[] = [];
     if (action === "any" || action === testAction)
       poss = poss.concat(possibilitiesInner(whenYes, player, action));
     if (action === "any" || action !== testAction)
@@ -57,7 +57,7 @@ function possibilitiesInner<_T>(
     const {
       playercase: [plr1, plr2],
     } = expr;
-    let poss = [];
+    let poss: any[] = [];
     if (player !== 2)
       poss = poss.concat(possibilitiesInner(plr1, player, action));
     if (player !== 1)
@@ -71,7 +71,7 @@ function possibilitiesInner<_T>(
     } = expr;
     return opts.reduce(
       (mem, o) => mem.concat(possibilitiesInner(o, player, action)),
-      []
+      [] as any[]
     );
   }
 
@@ -79,7 +79,7 @@ function possibilitiesInner<_T>(
     const {
       if: [test, opt],
     } = expr;
-    return [].concat(possibilitiesInner(opt, player, action));
+    return ([] as any[]).concat(possibilitiesInner(opt, player, action));
   }
 
   if (isAlgolIfableExpressionIfPlayer(expr)) {
@@ -87,7 +87,7 @@ function possibilitiesInner<_T>(
       ifplayer: [plr, opt],
     } = expr;
     return player === plr
-      ? [].concat(possibilitiesInner(opt, player, action))
+      ? ([] as any[]).concat(possibilitiesInner(opt, player, action))
       : [];
   }
 
@@ -96,7 +96,7 @@ function possibilitiesInner<_T>(
       ifaction: [testAction, opt],
     } = expr;
     return action === testAction || action === "any"
-      ? [].concat(possibilitiesInner(opt, player, action))
+      ? ([] as any[]).concat(possibilitiesInner(opt, player, action))
       : [];
   }
 
@@ -122,7 +122,7 @@ function possibilitiesInner<_T>(
     const { multi: children } = statement;
     return children.reduce(
       (mem, child) => mem.concat(possibilitiesInner(child, player, action)),
-      []
+      [] as any[]
     );
   }
 

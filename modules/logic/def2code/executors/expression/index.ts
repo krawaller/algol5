@@ -5,9 +5,9 @@ import {
   isAlgolExpressionIfActionElse,
   isAlgolExpressionIndexList,
   isAlgolExpressionPlayerCase,
-  isAlgolExpressionIf,
-  isAlgolExpressionIfPlayer,
-  isAlgolExpressionIfAction,
+  isAlgolIfableExpressionIf,
+  isAlgolIfableExpressionIfPlayer,
+  isAlgolIfableExpressionIfAction,
   AlgolValAnon,
   AlgolBoolAnon,
   AlgolPosAnon,
@@ -66,21 +66,21 @@ export function executeExpression<_T>(
     return `[${opts.map(me).join(", ")}][${parsedIdx}]`;
   }
 
-  if (isAlgolExpressionIf(expr)) {
+  if (isAlgolIfableExpressionIf(expr)) {
     const {
       if: [test, val],
     } = expr;
     return `(${parse.bool(test)} ? ${me(val)} : undefined)`;
   }
 
-  if (isAlgolExpressionIfPlayer(expr)) {
+  if (isAlgolIfableExpressionIfPlayer(expr)) {
     const {
       ifplayer: [forPlayer, val],
     } = expr;
     return forPlayer === player ? me(val) : "undefined";
   }
 
-  if (isAlgolExpressionIfAction(expr)) {
+  if (isAlgolIfableExpressionIfAction(expr)) {
     const {
       ifaction: [forAction, val],
     } = expr;

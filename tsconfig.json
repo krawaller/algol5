@@ -9,7 +9,7 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "jsx": "react",
-    "types": ["node", "jest", "fs-extra", "prettier"]
+    "types": ["node", "jest", "fs-extra", "prettier", "lodash.isequal"]
   },
   "include": ["modules"]
 }

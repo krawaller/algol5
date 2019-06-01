@@ -15,3 +15,4 @@ export * from "./genref";
 export * from "./link";
 export * from "./matcher";
 export * from "./anim";
+export * from "./ifableexpression";

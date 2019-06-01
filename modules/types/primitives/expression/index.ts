@@ -1,14 +1,12 @@
 export * from "./expression.anon";
 export * from "./expression.guard";
+export * from "./expression.interfaces";
 
 import {
   AlgolExpressionIfActionElse,
   AlgolExpressionIfElse,
   AlgolExpressionIndexList,
   AlgolExpressionPlayerCase,
-  AlgolExpressionIf,
-  AlgolExpressionIfPlayer,
-  AlgolExpressionIfAction,
 } from "./expression.interfaces";
 
 export type AlgolExpression<
@@ -47,42 +45,6 @@ export type AlgolExpression<
       Turnv
     >
   | AlgolExpressionIndexList<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
-
-export type AlgolIfableExpression<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> =
-  | AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolExpressionIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolExpressionIfAction<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolExpressionIfPlayer<
       _T,
       Btlp,
       Btlv,

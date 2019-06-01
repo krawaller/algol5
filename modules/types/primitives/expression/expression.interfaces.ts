@@ -21,67 +21,6 @@ export interface AlgolExpressionIfElse<
   ];
 }
 
-export interface AlgolExpressionIf<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  if: [
-    AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
-}
-
-export interface AlgolExpressionIfPlayer<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  ifplayer: [
-    AlgolVal<1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
-}
-
-export interface AlgolExpressionIfAction<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  ifaction: [
-    AlgolVal<
-      "start" | Mrk | Cmnd,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >,
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
-}
-
 export interface AlgolExpressionPlayerCase<
   _T,
   Btlp,

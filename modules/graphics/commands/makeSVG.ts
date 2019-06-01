@@ -1,9 +1,9 @@
 import { makeSVG } from "./helpers";
-import list from "../../games/dist/list";
+import list, { GameId } from "../../games/dist/list";
 import * as fs from "fs-extra";
 import * as path from "path";
 
-const gameId = process.argv[2];
+const gameId = (process.argv[2] as unknown) as GameId;
 
 (async () => {
   if (!gameId) {

@@ -1,14 +1,21 @@
 import lib from "../../../games/dist/lib";
 import { coords2pos, terrainLayers } from "../../../common";
+import { Layer, FullDefAnon } from "../../../types";
 import * as fs from "fs-extra";
 import * as path from "path";
 import svgToMiniDataURI from "mini-svg-data-uri";
 
-function tileAtPos(layers, tilemap, pos) {
+function tileAtPos(
+  layers: { [name: string]: Layer },
+  tilemap: FullDefAnon["graphics"]["tiles"],
+  pos: string
+) {
   return Object.keys(tilemap).reduce(function(mem, name) {
     return layers[name][pos]
       ? tilemap[name] === "playercolour"
-        ? { 1: "player1base", 2: "player2base" }[layers[name][pos].owner]
+        ? { 1: "player1base", 2: "player2base" }[
+            layers[name][pos].owner as 1 | 2
+          ]
         : tilemap[name]
       : mem;
   }, "empty");
@@ -24,7 +31,7 @@ const tileColors = {
   water: "lightblue",
   player1base: "red",
   player2base: "blue",
-  edge: "saddlebrown"
+  edge: "saddlebrown",
 };
 
 const boardOut = path.join(__dirname, "../../dist/svgBoards");
@@ -33,7 +40,7 @@ const jsonOut = path.join(__dirname, "../../dist/svgDataURIs");
 export async function makeSVG(gameId: string) {
   const def = lib[gameId];
   const { height, width, terrain } = def.board;
-  const layers = terrainLayers(height, width, terrain);
+  const layers = terrainLayers(height, width, terrain!);
   const tilemap = def.graphics.tiles;
 
   let ret = "";
@@ -122,7 +129,7 @@ ${ret}
         height,
         width,
         icons: def.graphics.icons,
-        dataURI: svgToMiniDataURI(ret)
+        dataURI: svgToMiniDataURI(ret),
       })
   );
   console.log("Generated SVG board and JSON for", gameId);

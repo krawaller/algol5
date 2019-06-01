@@ -9,7 +9,8 @@ import {
   isAlgolPosTurnPos,
   isAlgolPosBattlePos,
   isAlgolValBattleVar,
-  isAlgolValTurnVar
+  isAlgolValTurnVar,
+  AlgolLinkAnon,
 } from "../../../types";
 import {
   boardPositions,
@@ -17,7 +18,7 @@ import {
   possibilities,
   emptyArtifactLayers,
   emptyUnitLayers,
-  find
+  find,
 } from "../../../common";
 import dateStamp from "./datestamp";
 
@@ -38,8 +39,13 @@ export default async function analyze(def: FullDefAnon | string) {
   const commands = Object.keys(flow.commands);
   const nonEndCommands = commands.filter(c => {
     let cdef = flow.commands[c];
-    let defs = [].concat(cdef.link || []).concat(cdef.links || []);
-    let poss = defs.reduce((mem, d) => mem.concat(possibilities(d)), []);
+    let defs: AlgolLinkAnon[] = [];
+    if (cdef.link) defs.push(cdef.link);
+    if (cdef.links) defs.push(...cdef.links);
+    let poss: string[] = defs.reduce(
+      (mem, d) => mem.concat(possibilities(d)),
+      [] as string[]
+    );
     return poss.filter(l => l !== "endTurn").length > 0;
   });
 
@@ -57,17 +63,17 @@ export default async function analyze(def: FullDefAnon | string) {
     aspects: {},
     grids: {},
     terrain: {},
-    ...def.AI
+    ...def.AI,
   };
 
-  const aiTerrainNames = Object.keys(AI.terrain);
+  const aiTerrainNames = Object.keys(AI.terrain || {});
   const aiTerrainLayers = terrainLayerNames({
     ...def.board,
-    terrain: AI.terrain
+    terrain: AI.terrain,
   });
-  const aiGenerators = Object.keys(AI.generators);
+  const aiGenerators = Object.keys(AI.generators || {});
   const aiAspects = Object.keys(AI.aspects);
-  const aiGrids = Object.keys(AI.grids);
+  const aiGrids = Object.keys(AI.grids || {});
   const aiBrains = Object.keys(AI.brains);
   const aiArtifactLayerNames = Object.keys(emptyArtifactLayers(AI.generators));
 
@@ -75,7 +81,7 @@ export default async function analyze(def: FullDefAnon | string) {
     new Set(
       find(def, isAlgolPosTurnPos).reduce(
         (mem, find) => mem.concat(possibilities(find.value.turnpos)),
-        []
+        [] as string[]
       )
     )
   );
@@ -83,7 +89,7 @@ export default async function analyze(def: FullDefAnon | string) {
     new Set(
       find(def, isAlgolPosBattlePos).reduce(
         (mem, find) => mem.concat(possibilities(find.value.battlepos)),
-        []
+        [] as string[]
       )
     )
   );
@@ -91,7 +97,7 @@ export default async function analyze(def: FullDefAnon | string) {
     new Set(
       find(def, isAlgolValTurnVar).reduce(
         (mem, find) => mem.concat(possibilities(find.value.turnvar)),
-        []
+        [] as string[]
       )
     )
   );
@@ -99,7 +105,7 @@ export default async function analyze(def: FullDefAnon | string) {
     new Set(
       find(def, isAlgolValBattleVar).reduce(
         (mem, find) => mem.concat(possibilities(find.value.battlevar)),
-        []
+        [] as string[]
       )
     )
   );

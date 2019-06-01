@@ -2,11 +2,11 @@ import isEqual from "lodash.isequal";
 
 export type Find = { value: any; path: (string | number)[] };
 
-export function find(haystack, needle) {
+export function find(haystack: any, needle: any) {
   return findInner(haystack, needle, []);
 }
 
-function findInner(haystack, needle, path): Find[] {
+function findInner(haystack: any, needle: any, path: string[]): Find[] {
   if (!haystack) {
     return [];
   } else if (
@@ -19,7 +19,7 @@ function findInner(haystack, needle, path): Find[] {
     return Object.keys(haystack).reduce(
       (mem, key) =>
         mem.concat(findInner(haystack[key], needle, path.concat(key))),
-      []
+      [] as Find[]
     );
   } else {
     return [];

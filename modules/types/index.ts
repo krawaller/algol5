@@ -51,6 +51,10 @@ export type Layer = {
   [posname: string]: { [prop: string]: string | number }; // object with whatever props u want
 };
 
+export type LayerCollection = {
+  [idx: string]: Layer;
+};
+
 // ------------------------ FROM NEW ------------------------
 
 export type CommonLayer =

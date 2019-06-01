@@ -11,6 +11,6 @@ export function boardConnections(board: AlgolBoardAnon) {
       mem[pos] = posConnections(pos, board);
       return mem;
     },
-    { faux: {} }
+    { faux: {} } as { [idx: string]: { [dir: string]: string } }
   );
 }

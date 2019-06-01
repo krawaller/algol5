@@ -6,7 +6,7 @@ import {
   isAlgolEntityDataSites,
   isAlgolEntityHoleRect,
   isAlgolEntityRect,
-  isAlgolEntitySites
+  isAlgolEntitySites,
 } from "../../types";
 
 export type ProcessedEntity = {
@@ -21,8 +21,8 @@ export function processEntity(entity: AlgolEntityAnon): ProcessedEntity[] {
     return [
       {
         pos: entity,
-        ...pos2coords(entity)
-      }
+        ...pos2coords(entity),
+      },
     ];
   }
   if (isAlgolEntitySites(entity)) {
@@ -30,16 +30,16 @@ export function processEntity(entity: AlgolEntityAnon): ProcessedEntity[] {
   }
   if (isAlgolEntityDataSites(entity)) {
     const {
-      datasites: [blueprint, ...positions]
+      datasites: [blueprint, ...positions],
     } = entity;
     return positions.reduce(
       (mem, p) =>
         mem.concat({
           pos: p,
           ...pos2coords(p),
-          ...blueprint
+          ...blueprint,
         }),
-      []
+      [] as ProcessedEntity[]
     );
   }
   if (isAlgolEntityRect(entity)) {
@@ -47,29 +47,29 @@ export function processEntity(entity: AlgolEntityAnon): ProcessedEntity[] {
   }
   if (isAlgolEntityRect(entity)) {
     const {
-      rect: [bottomleftPos, toprightPos]
+      rect: [bottomleftPos, toprightPos],
     } = entity;
     return processEntity({ dataholerect: [{}, bottomleftPos, toprightPos] });
   }
   if (isAlgolEntityHoleRect(entity)) {
     const {
-      holerect: [bottomleftPos, toprightPos, ...holes]
+      holerect: [bottomleftPos, toprightPos, ...holes],
     } = entity;
     return processEntity({
-      dataholerect: [{}, bottomleftPos, toprightPos, ...holes]
+      dataholerect: [{}, bottomleftPos, toprightPos, ...holes],
     });
   }
   if (isAlgolEntityDataRect(entity)) {
     const {
-      datarect: [blueprint, bottomleftPos, toprightPos]
+      datarect: [blueprint, bottomleftPos, toprightPos],
     } = entity;
     return processEntity({
-      dataholerect: [blueprint, bottomleftPos, toprightPos]
+      dataholerect: [blueprint, bottomleftPos, toprightPos],
     });
   }
   if (isAlgolEntityDataHoleRect(entity)) {
     const {
-      dataholerect: [blueprint, bottomleftPos, toprightPos, ...holes]
+      dataholerect: [blueprint, bottomleftPos, toprightPos, ...holes],
     } = entity;
     let positions = [];
     const bottomleft = pos2coords(bottomleftPos);

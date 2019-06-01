@@ -1,4 +1,4 @@
-import { AlgolBoardAnon } from "../../types";
+import { AlgolBoardAnon, LayerCollection } from "../../types";
 import { boardPositions, pos2coords } from "../";
 
 /*
@@ -13,10 +13,10 @@ export function boardLayers(board: AlgolBoardAnon) {
         colour: colour,
         x: coords.x,
         y: coords.y,
-        pos: pos
+        pos: pos,
       };
       return mem;
     },
-    { board: {}, light: {}, dark: {} }
+    { board: {}, light: {}, dark: {} } as LayerCollection
   );
 }

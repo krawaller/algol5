@@ -17,7 +17,7 @@ import templateIndex from "./templates/index";
 
 import { defPath } from "./_paths";
 
-export default async function stub(gameId) {
+export default async function stub(gameId: string) {
   await fs.ensureDir(path.join(defPath, gameId));
   await Promise.all([
     template(gameId, templateAI, "ai"),
@@ -32,12 +32,16 @@ export default async function stub(gameId) {
     template(gameId, templatePerformance, "performance"),
     template(gameId, templateScripts, "scripts"),
     template(gameId, templateSetup, "setup"),
-    template(gameId, templateIndex, "index")
+    template(gameId, templateIndex, "index"),
   ]);
   return console.log("Stubbed", gameId);
 }
 
-function template(gameId, template, name) {
+function template(
+  gameId: string,
+  template: (gameId: string) => string,
+  name: string
+) {
   return fs.writeFile(
     path.join(defPath, gameId, name + ".ts"),
     template(gameId)

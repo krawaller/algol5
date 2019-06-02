@@ -14,7 +14,11 @@ export default function validateDef(def: FullDefAnon) {
 
 type Problem = { path: string[]; error: string };
 
-function validatePart(part: any, path = [], anc = []): Problem[] {
+function validatePart(
+  part: any,
+  path: string[] = [],
+  anc: AlgolStatementAnon<any>[] = []
+): Problem[] {
   const problems: Problem[] = [];
   if (
     isEqual(part, ["loopid"]) &&
@@ -51,7 +55,7 @@ function validatePart(part: any, path = [], anc = []): Problem[] {
           list.concat(
             validatePart(part[key], path.concat(key), anc.concat(part))
           ),
-        []
+        [] as Problem[]
       )
     );
   }

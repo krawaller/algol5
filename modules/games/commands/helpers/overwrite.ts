@@ -25,7 +25,10 @@ export default async function overwrite(gameId: string, def: FullDefAnon) {
       const f = await fs.readFile(apath);
       const newFile = f
         .toString()
-        .replace(/ = {[\s\S]*};/, ` = ${makeNice(def[aspect])};`);
+        .replace(
+          / = {[\s\S]*};/,
+          ` = ${makeNice(def[aspect as keyof FullDefAnon])};`
+        );
       return await fs.writeFile(apath, newFile);
     })
   );

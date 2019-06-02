@@ -1,9 +1,14 @@
 import { offsetPos } from "../";
 import { parseOffset } from "./parseOffset";
-import { AlgolBoardAnon, AlgolOffsetBasic, AlgolOffset } from "../../types";
+import { AlgolBoardAnon, AlgolOffsetBasic } from "../../types";
 
-export function posConnections(pos, board: AlgolBoardAnon) {
-  const ret = {};
+type Connections = { [dir: string]: string };
+
+export function posConnections(
+  pos: string,
+  board: AlgolBoardAnon
+): Connections {
+  const ret: Connections = {};
 
   [1, 2, 3, 4, 5, 6, 7, 8].forEach(dir => {
     const newpos = offsetPos(pos, dir, 1, 0, board);
@@ -14,12 +19,12 @@ export function posConnections(pos, board: AlgolBoardAnon) {
 
   let offsets = board.offsets || [];
   if (board.offset) offsets.push(board.offset);
-  offsets = offsets.reduce(
+  let parsedOffsets = offsets.reduce(
     (mem, offset) => mem.concat(parseOffset(offset)),
-    [] as AlgolOffset[]
+    [] as AlgolOffsetBasic[]
   );
 
-  offsets.forEach((offset: AlgolOffsetBasic) => {
+  parsedOffsets.forEach((offset: AlgolOffsetBasic) => {
     const [dirs, forward, right] = offset;
     dirs.forEach(dir => {
       const newpos = offsetPos(pos, dir, forward, right, board);

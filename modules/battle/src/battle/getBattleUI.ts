@@ -24,16 +24,18 @@ export function getBattleUI(
           [id]: {
             ...battle.state.board.units[id],
             icon:
-              dataURIs[game.gameId].icons[battle.state.board.units[id].group]
-          }
+              dataURIs[game.gameId as keyof typeof dataURIs].icons[
+                battle.state.board.units[id].group
+              ],
+          },
         }),
         {}
       ),
-      anim: currentStep.anim || emptyAnim
+      anim: currentStep.anim || emptyAnim,
     },
     endTurn: !!currentStep.LINKS.endTurn,
     commands,
     undo: battle.state.undo && battle.state.undo.command,
-    instruction: getBattleInstruction(game, battle)
+    instruction: getBattleInstruction(game, battle),
   };
 }

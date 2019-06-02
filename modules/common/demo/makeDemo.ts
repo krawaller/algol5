@@ -2,7 +2,8 @@ import {
   AlgolGameAPI,
   AlgolScriptLine,
   AlgolDemo,
-  AlgolAnimCompiled
+  AlgolAnimCompiled,
+  AlgolUnitState,
 } from "../../types";
 import * as jdp from "jsondiffpatch";
 
@@ -19,7 +20,7 @@ export function makeDemo(
   const { initialUI, performAction } = API.newBattle();
   let ui = initialUI;
   let patches: AlgolDemo["patches"] = [];
-  const anims = {};
+  const anims: { [idx: string]: Partial<AlgolAnimCompiled> } = {};
   while (actions.length) {
     const action = (actions.shift() as unknown) as string;
     const newUI =
@@ -38,7 +39,7 @@ export function makeDemo(
       const newAnim: AlgolAnimCompiled = newUI.board.anim || {
           enterFrom: {},
           exitTo: {},
-          ghosts: []
+          ghosts: [],
         },
         anim: Partial<AlgolAnimCompiled> = {};
       if (newAnim.ghosts.length) {
@@ -63,9 +64,12 @@ export function makeDemo(
       [id]: Object.keys(initialUI.board.units[id])
         .filter(key => !["x", "y"].includes(key))
         .reduce(
-          (m, key) => ({ ...m, [key]: initialUI.board.units[id][key] }),
+          (m, key) => ({
+            ...m,
+            [key]: initialUI.board.units[id][key as keyof AlgolUnitState],
+          }),
           {}
-        )
+        ),
     }),
     {}
   );

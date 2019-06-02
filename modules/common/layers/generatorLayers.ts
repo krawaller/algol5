@@ -1,14 +1,20 @@
-import { isAlgolFilterDef, DrawDefAnon } from "../../types";
+import { isAlgolFilterDef, DrawDefAnon, GeneratorDefAnon } from "../../types";
 import { possibilities } from "..";
 
-export function generatorLayers(genDef, player, action) {
+export function generatorLayers(
+  genDef: GeneratorDefAnon,
+  player: 0 | 1 | 2,
+  action: string
+) {
   if (isAlgolFilterDef(genDef)) {
-    return possibilities(genDef.tolayer, player, action);
+    return possibilities(genDef.tolayer, player, action) as string[];
   } else {
-    let names = [];
+    let names: string[] = [];
     Object.keys(genDef.draw).forEach(drawName => {
-      const drawDef: DrawDefAnon = genDef.draw[drawName];
-      const poss = possibilities(drawDef.tolayer, player, action);
+      const drawDef: DrawDefAnon = genDef.draw[
+        drawName as keyof typeof genDef.draw
+      ]!;
+      const poss = possibilities(drawDef.tolayer, player, action) as string[];
       names = names.concat(poss);
       if (drawDef.include && drawDef.include.owner) {
         poss.forEach(

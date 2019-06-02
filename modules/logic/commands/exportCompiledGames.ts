@@ -13,9 +13,7 @@ const games = path.join(__dirname, "../generated");
 
   await fs.writeFile(
     path.join(out, "index.ts"),
-    `${names
-      .map(name => `import ${name} from '../generated/${name}';`)
-      .join("\n")}
+    `${names.map(name => `import ${name} from './indiv/${name}';`).join("\n")}
 const games = {
   ${names.join(", ")}
 };

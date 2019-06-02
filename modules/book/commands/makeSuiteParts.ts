@@ -79,10 +79,19 @@ ${format(JSON.stringify(ctx.context), true)}
 
         ret += `#### Input ${+nSig + 1}-${+nCtx + 1}-${+nTest + 1}\n\n`;
         const inputCode = format(JSON.stringify(suiteTest.expr), true);
-        const resultingCode = format(
-          suite.func(def.def, def.player, def.action, suiteTest.expr),
-          isExpression
-        );
+        let resultCode;
+        try {
+          resultCode = suite.func(
+            def.def,
+            def.player!,
+            (def.action || ctx.action || suiteTest.action) as string,
+            suiteTest.expr
+          );
+        } catch (e) {
+          console.log("------", suite.title, suiteTest.desc, def.action);
+          throw e;
+        }
+        const resultingCode = format(resultCode, isExpression);
         if (suiteTest.desc) {
           ret += `This test demonstrates that: ${suiteTest.desc}\n\n`;
         }
@@ -156,17 +165,17 @@ ${format(assert.sample, true)}
   return ret;
 }
 
-function format(input, isExpression) {
+function format(input: string, isExpression: boolean) {
   try {
     if (isExpression) {
       return prettier
         .format("let e = " + input, {
-          parser: "typescript"
+          parser: "typescript",
         })
         .slice(8, -2);
     } else {
       return prettier.format(input, {
-        parser: "typescript"
+        parser: "typescript",
       });
     }
   } catch (e) {
@@ -175,7 +184,7 @@ function format(input, isExpression) {
   }
 }
 
-function showEval(sentence, res) {
+function showEval(sentence: string, res: any) {
   if (typeof res === "number") {
     return `${sentence} \`${res}\`.\n\n`;
   } else if (typeof res === "string") {
@@ -189,9 +198,9 @@ ${format(JSON.stringify(res), true)}
   }
 }
 
-const indent = n => "".padStart(n * 2, " ");
+const indent = (n: number) => "".padStart(n * 2, " ");
 
-function defDiff(obj, compTo = {}, path = "emptyFullDef", lvl = 0) {
+function defDiff(obj: any, compTo: any = {}, path = "emptyFullDef", lvl = 0) {
   if (typeof obj !== "object") return obj;
   let ret = "";
   ret += `{\n`;

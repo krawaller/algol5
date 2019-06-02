@@ -63,7 +63,7 @@ export function runGameScript(
               if (debug)
                 console.log("N", n, "ACTION", action, "FUNCTION", func);
               const instr = game.instruction[lastFunc](step);
-              const text = getContentText(instr);
+              const text = getContentText(instr).toString();
               if (action.match(/^[a-z]{1,2}[0-9]{1,2}$/)) {
                 expect(text.toLowerCase()).toMatch("select");
               } else if (

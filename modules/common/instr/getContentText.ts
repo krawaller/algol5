@@ -6,10 +6,10 @@ import {
   isAlgolContentUnitType,
   isAlgolContentUnit,
   isAlgolContentLine,
-  isAlgolContentSelect
+  isAlgolContentSelect,
 } from "../../types";
 
-export function getContentText(content: AlgolContentAnon) {
+export function getContentText(content: AlgolContentAnon): string | number {
   if (isAlgolContentText(content)) {
     return content.text;
   }
@@ -20,7 +20,7 @@ export function getContentText(content: AlgolContentAnon) {
     return content.command;
   }
   if (isAlgolContentUnitType(content)) {
-    return content.unittype;
+    return `plr ${content.unittype[1]} ${content.unittype[0]}`;
   }
   if (isAlgolContentUnit(content)) {
     const [group, owner, pos] = content.unit;
@@ -32,4 +32,7 @@ export function getContentText(content: AlgolContentAnon) {
   if (isAlgolContentSelect(content)) {
     return content.select;
   }
+  throw new Error(
+    "Dont know how to make text from this content: " + JSON.stringify(content)
+  );
 }

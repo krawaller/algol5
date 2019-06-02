@@ -3,7 +3,7 @@ import {
   isAlgolContentLine,
   isAlgolContentText,
   AlgolContentLineAnon,
-  AlgolContentText
+  AlgolContentText,
 } from "../../types";
 
 const noSpacesBefore = /[,!\.? ]/;
@@ -40,7 +40,7 @@ export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
           ? ""
           : " ";
       const mergedText = {
-        text: firstText + between + secondText
+        text: firstText + between + secondText,
       };
       items.splice(idx, 2, mergedText);
     }
@@ -50,10 +50,10 @@ export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
       isAlgolContentText(i)
         ? {
             text: (
-              (n && !i.text[0].match(noSpacesBefore) ? " " : "") +
+              (n && !(i.text + "")[0].match(noSpacesBefore) ? " " : "") +
               i.text +
               (n < items.length - 1 ? " " : "")
-            ).replace(/  /, " ")
+            ).replace(/  /, " "),
           }
         : i
     );
@@ -63,7 +63,7 @@ export function collapseContent(content: AlgolContentAnon): AlgolContentAnon {
       (idx = items.findIndex(
         (i, n) =>
           n > 0 &&
-          items[n - 1] &&
+          items[n - 1] !== undefined &&
           !isAlgolContentText(i) &&
           !isAlgolContentText(items[n - 1])
       )) !== -1

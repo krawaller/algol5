@@ -27,7 +27,7 @@ export function executeInstruction(
   player: 1 | 2,
   action: string,
   instr: AlgolInstrAnon
-): string {
+) {
   return executeExpression(
     gameDef,
     player,
@@ -35,7 +35,7 @@ export function executeInstruction(
     executeInstructionInner,
     instr,
     "instr"
-  );
+  ) as string;
 }
 
 function executeInstructionInner(

@@ -89,7 +89,7 @@ function walkFromStart(
     `
     );
   } else {
-    let dirVar = dirMatters ? "DIR" : parse.val(walkDef.dir!);
+    let dirVar = dirMatters ? "DIR" : (parse.val(walkDef.dir!) as string);
     return (
       intro +
       `

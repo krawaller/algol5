@@ -13,8 +13,9 @@ import {
   AlgolPosAnon,
   AlgolSetAnon,
   AlgolDirsAnon,
-  AlgolExpressionAnon,
 } from "../../../../types";
+
+type ExprReturn = string | number | undefined | boolean;
 
 export function executeExpression<_T>(
   gameDef: FullDefAnon,
@@ -26,12 +27,12 @@ export function executeExpression<_T>(
     action: string,
     expression: _T,
     from?: string
-  ) => string,
+  ) => ExprReturn,
   expr: AlgolIfableExpressionAnon<_T>,
   from?: string
-): string {
+): ExprReturn {
   const parse = makeParser(gameDef, player, action, from);
-  const me = (expr: AlgolExpressionAnon<_T>) =>
+  const me = (expr: AlgolIfableExpressionAnon<_T>) =>
     executeExpression(gameDef, player, action, parser, expr, from);
 
   if (isAlgolExpressionIfElse(expr)) {
@@ -105,15 +106,15 @@ export function makeParser(
   from?: string
 ) {
   const parsers = {
-    val: (expr: AlgolValAnon): string | number =>
+    val: (expr: AlgolValAnon): ExprReturn =>
       executeExpression(gameDef, player, action, parseValue, expr, from),
-    bool: (expr: AlgolBoolAnon): string | number =>
+    bool: (expr: AlgolBoolAnon): ExprReturn =>
       executeExpression(gameDef, player, action, parseBool, expr, from),
-    pos: (expr: AlgolPosAnon): string | number =>
+    pos: (expr: AlgolPosAnon): ExprReturn =>
       executeExpression(gameDef, player, action, parsePos, expr, from),
-    set: (expr: AlgolSetAnon): string | number =>
+    set: (expr: AlgolSetAnon): ExprReturn =>
       executeExpression(gameDef, player, action, parseSet, expr, from),
-    dirs: (expr: AlgolDirsAnon): string | number =>
+    dirs: (expr: AlgolDirsAnon): ExprReturn =>
       executeExpression(gameDef, player, action, parseDirs, expr, from),
   };
   return parsers;

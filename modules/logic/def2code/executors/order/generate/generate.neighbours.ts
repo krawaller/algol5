@@ -80,7 +80,7 @@ function findAndDrawNeighboursFromStart(
     // one dir, nothing cares about exactly which
     return `
       ${findAndDrawSingleNeighbour(gameDef, player, action, nghDef, {
-        dirVar: parser.val(nghDef.dir),
+        dirVar: parser.val(nghDef.dir) as number,
         startVar,
       })}
     `;

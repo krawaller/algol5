@@ -4,7 +4,7 @@ import {
   AlgolAnimInnerAnon,
   isAlgolAnimEnterFrom,
   isAlgolAnimExitTo,
-  isAlgolAnimGhost
+  isAlgolAnimGhost,
 } from "../../../../../types";
 
 import { iconRef } from "../../../utils";
@@ -45,7 +45,7 @@ function executeAnimInner(
   if (isAlgolAnimGhost(anim)) {
     const [from, to, icon, owner] = anim.ghost;
     return `anim.ghosts.push([${parser.pos(from)}, ${parser.pos(to)}, ${iconRef(
-      parser.val(icon),
+      parser.val(icon) as string,
       gameDef.graphics.icons
     )}, ${parser.val(owner)}]); `;
   }

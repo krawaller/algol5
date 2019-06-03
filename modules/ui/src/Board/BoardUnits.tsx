@@ -4,7 +4,7 @@ import {
   AlgolUnitState,
   AlgolPosition,
   AlgolIcon,
-  AlgolAnimCompiled
+  AlgolAnimCompiled,
 } from "../../../types";
 
 import { TransitionGroup } from "react-transition-group";
@@ -12,7 +12,7 @@ import { TransitionGroup } from "react-transition-group";
 import { Piece } from "../Piece";
 
 import Transition, {
-  TransitionStatus
+  TransitionStatus,
 } from "react-transition-group/Transition";
 
 type BoardUnitsProps = {
@@ -30,7 +30,7 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
   units,
   anim = { enterFrom: {}, exitTo: {}, ghosts: [] },
   height,
-  width
+  width,
 }) => {
   const targets = anim.ghosts
     .map(([from, to]) => to)
@@ -43,7 +43,7 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
       childFactory={
         child =>
           React.cloneElement(child, {
-            anim
+            anim,
           }) /* to ensure exiting comps get fresh anim */
       }
     >
@@ -51,7 +51,7 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
         .map(id => units[id])
         .map(({ icon, owner, pos, id }) => (
           <Transition
-            key={id + icon}
+            key={id}
             timeout={{ enter: 40, exit: 500 + (targets[pos] ? 0 : 0) }}
             appear={true}
           >

@@ -3,9 +3,22 @@ import { AlgolIcon } from "../../../types";
 import classnames from "classnames";
 
 import { hollows, solids } from "./Icon.shapes";
-import { available, fills, iconBasic, selected, strokes } from "./Icon.styles";
+import {
+  iconContainerAvailable,
+  fills,
+  iconContainerBasic,
+  iconContainerSelected,
+  iconInnerBasic,
+  iconInnerDuringEnter,
+  iconInnerDuringExit,
+  iconInnerTransitionDuration,
+  strokes,
+} from "./Icon.styles";
 
-//const { icon, normal, available, selected } = require("./Icon.css");
+import { TransitionGroup } from "react-transition-group";
+import Transition, {
+  TransitionStatus,
+} from "react-transition-group/Transition";
 
 type IconProps = {
   /** Which type of piece it is */
@@ -17,46 +30,55 @@ type IconProps = {
 };
 
 /**
- * A component to show a playing piece icon. Used by the Piece component.
+ * A component to show a playing piece icon. Used by the Piece component, and by Content showing unit types
  */
 export const Icon: React.FunctionComponent<IconProps> = ({
   owner,
   icon,
-  mode = "normal"
+  mode = "normal",
 }) => {
   return (
     <div
-      key={icon}
-      className={classnames(iconBasic, {
-        [available]: mode === "available",
-        [selected]: mode === "selected"
+      className={classnames(iconContainerBasic, {
+        [iconContainerAvailable]: mode === "available",
+        [iconContainerSelected]: mode === "selected",
       })}
     >
-      <svg
-        viewBox="0 150 300 300"
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-      >
-        <g>
-          <path
-            key={icon + "_solid"}
-            d={solids[icon]}
-            style={{
-              fill: fills[owner],
-              transition: "fill 0.6s ease, stroke 0.6s ease"
-            }}
-          />
-          <path
-            key={icon + "_hollow"}
-            d={hollows[icon]}
-            style={{
-              fill: strokes[owner],
-              transition: "fill 0.6s ease, stroke 0.6s ease"
-            }}
-          />
-        </g>
-      </svg>
+      <TransitionGroup>
+        <Transition
+          key={icon}
+          timeout={{ enter: 20, exit: iconInnerTransitionDuration }}
+        >
+          {(status: TransitionStatus) => (
+            <svg
+              viewBox="0 150 300 300"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{
+                ...iconInnerBasic,
+                ...(status === "exiting" && iconInnerDuringExit),
+                ...(status === "entering" && iconInnerDuringEnter),
+              }}
+            >
+              <g>
+                <path
+                  d={solids[icon]}
+                  style={{
+                    fill: fills[owner],
+                    transition: "fill 0.6s ease, stroke 0.6s ease",
+                  }}
+                />
+                <path
+                  d={hollows[icon]}
+                  style={{
+                    fill: strokes[owner],
+                    transition: "fill 0.6s ease, stroke 0.6s ease",
+                  }}
+                />
+              </g>
+            </svg>
+          )}
+        </Transition>
+      </TransitionGroup>
     </div>
   );
 };

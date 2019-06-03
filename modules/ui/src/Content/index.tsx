@@ -10,7 +10,7 @@ import {
   isAlgolContentSelect,
   isAlgolContentPlayer,
   isAlgolContentEndTurn,
-  isAlgolContentBold
+  isAlgolContentBold,
 } from "../../../types";
 
 import { Icon } from "../Icon";
@@ -26,7 +26,7 @@ const posStyles = {
   backgroundColor: "#EEE",
   padding: "3px",
   border: "1px solid black",
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
 } as const;
 
 /**
@@ -34,13 +34,13 @@ const posStyles = {
  */
 export const Content: React.FunctionComponent<ContentProps> = ({
   content,
-  callback
+  callback,
 }) => {
   if (isAlgolContentLine(content)) {
     return (
       <div
         style={{
-          lineHeight: "2em"
+          lineHeight: "2em",
           // display: "flex",
           // alignItems: "center",
           // whiteSpace: "pre-wrap"
@@ -76,7 +76,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   if (isAlgolContentUnitType(content)) {
     const [icon, owner] = content.unittype;
     return (
-      <span style={{ display: "inline-block", width: "2em" }}>
+      <span style={{ display: "inline-block", width: "2em", height: "2em" }}>
         <Icon owner={owner} icon={icon} />
       </span>
     );

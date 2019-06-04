@@ -66,8 +66,11 @@ export type ReducingActionState<S> = S extends ReducingAction<
   ? S
   : never;
 
-type PayloadReducer<State, Payload> = (state: State, payload: Payload) => State;
-type NakedReducer<State> = (state: State) => State;
+type PayloadReducer<State, Payload> = (
+  state: Readonly<State>,
+  payload: Payload
+) => State;
+type NakedReducer<State> = (state: Readonly<State>) => State;
 export type Reducer<State, Payload> = Payload extends undefined
   ? NakedReducer<State>
   : PayloadReducer<State, Payload>;

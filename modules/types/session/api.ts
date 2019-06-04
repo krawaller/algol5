@@ -1,6 +1,7 @@
 import { AlgolBattleUI } from "./ui";
+import { AlgolBattle } from "./battle";
 
-export type AlgolGameAPI = {
+export type AlgolStatefulGameAPI = {
   newBattle: () => {
     initialUI: AlgolBattleUI;
     performAction: (
@@ -8,4 +9,13 @@ export type AlgolGameAPI = {
       arg?: string
     ) => AlgolBattleUI;
   };
+};
+
+export type AlgolStaticGameAPI = {
+  newBattle: () => AlgolBattle;
+  performAction: (
+    battle: AlgolBattle,
+    action: "endTurn" | "undo" | "mark" | "command",
+    arg?: string
+  ) => AlgolBattle;
 };

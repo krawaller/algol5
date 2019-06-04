@@ -10,12 +10,13 @@ export async function exportGameAPI(gameId: GameId) {
     path.join(out, gameId + ".ts"),
     `
 import ${gameId} from "../../../logic/dist/indiv/${gameId}";
-import { makeGameAPI } from "../../src";
+import { makeStatefulGameAPI, makeStaticGameAPI } from "../../src";
 
-const ${gameId}API = makeGameAPI(${gameId});
+export const statefulAPI = makeStatefulGameAPI(${gameId});
+export const staticAPI = makeStaticGameAPI(${gameId});
 
-export default ${gameId}API;
+export default statefulAPI;
 `
   );
-  console.log("Exporting api for", gameId);
+  console.log("Exporting api:s for", gameId);
 }

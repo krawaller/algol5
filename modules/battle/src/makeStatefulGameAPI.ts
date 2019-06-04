@@ -1,7 +1,7 @@
-import { AlgolGame, AlgolGameAPI } from "../../types";
+import { AlgolGame, AlgolStatefulGameAPI } from "../../types";
 import { newBattle, battleAction, getBattleUI } from "./battle";
 
-export function makeGameAPI(game: AlgolGame): AlgolGameAPI {
+export function makeStatefulGameAPI(game: AlgolGame): AlgolStatefulGameAPI {
   return {
     newBattle: () => {
       let battle = newBattle(game);
@@ -13,8 +13,8 @@ export function makeGameAPI(game: AlgolGame): AlgolGameAPI {
         },
         history() {
           return battle.history;
-        }
+        },
       };
-    }
+    },
   };
 }

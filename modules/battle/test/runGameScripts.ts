@@ -1,10 +1,10 @@
-import { AlgolGameTestSuite, AlgolGameAPI } from "../../types";
+import { AlgolGameTestSuite, AlgolStatefulGameAPI } from "../../types";
 
 const identifyMark = /^[a-z][0-9]+$/;
 
 export function runGameScripts(
   gameId: string,
-  api: AlgolGameAPI,
+  api: AlgolStatefulGameAPI,
   scripts: AlgolGameTestSuite<string, string>
 ) {
   for (const scriptName in scripts) {

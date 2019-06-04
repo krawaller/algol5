@@ -1,1 +1,2 @@
-export * from "./makeGameAPI";
+export * from "./makeStatefulGameAPI";
+export * from "./makeStaticGameAPI";

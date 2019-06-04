@@ -1,5 +1,5 @@
 import {
-  AlgolGameAPI,
+  AlgolStatefulGameAPI,
   AlgolScriptLine,
   AlgolDemo,
   AlgolAnimCompiled,
@@ -10,7 +10,7 @@ import * as jdp from "jsondiffpatch";
 const identifyMark = /^[a-z][0-9]+$/;
 
 export function makeDemo(
-  API: AlgolGameAPI,
+  API: AlgolStatefulGameAPI,
   script: AlgolScriptLine<string, string>[]
 ): AlgolDemo {
   const actions = script.reduce(

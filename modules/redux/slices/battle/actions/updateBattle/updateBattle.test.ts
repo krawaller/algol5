@@ -1,12 +1,9 @@
 import { updateBattle } from "./";
 import { testCreator } from "../../../../utils";
-import { GameId } from "../../../../../games/dist/list";
-import { newBattle } from "../../../../../battle/src/battle"; // TODO - fix better export?
-import amazons from "../../../../../logic/dist/indiv/amazons";
-import aries from "../../../../../logic/dist/indiv/aries";
+import { staticAPI } from "../../../../../battle/dist/apis/amazons";
 
-const prevBattle = newBattle(amazons);
-const nextBattle = newBattle(aries);
+const prevBattle = staticAPI.newBattle();
+const nextBattle = staticAPI.performAction(prevBattle, "mark", "a7");
 const myBattleId = "MYBATTLEID";
 
 testCreator(updateBattle, [
@@ -26,7 +23,7 @@ testCreator(updateBattle, [
       },
     },
     payload: {
-      gameId: "amazons" as GameId,
+      gameId: "amazons",
       battleId: myBattleId,
       battle: nextBattle,
     },

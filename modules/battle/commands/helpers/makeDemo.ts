@@ -1,4 +1,4 @@
-import { makeGameAPI } from "../../src";
+import { makeStatefulGameAPI } from "../../src";
 import gameDefs from "../../../games/dist/lib";
 import { GameId } from "../../../games/dist/list";
 import games from "../../../logic/dist";
@@ -15,7 +15,7 @@ export async function makeDemo(gameId: GameId) {
   const scripts = gameDef.scripts;
   const script: AlgolScriptLine<string, string>[] =
     scripts.demo || scripts[Object.keys(scripts)[0]];
-  const API = makeGameAPI(games[gameId]);
+  const API = makeStatefulGameAPI(games[gameId]);
   const { anims, initial, patches } = demoMaker(API, script);
 
   await fs.ensureDir(out);

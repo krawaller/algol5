@@ -2,10 +2,6 @@ import { GameId } from "../../../games/dist/list";
 import { AlgolArmy, AlgolAnimCompiled } from "../../../types";
 import { ReducingAction } from "../../types";
 
-export enum DemoActionName {
-  INIT_DEMO = "DEMO::INIT_DEMO",
-}
-
 export type DemoAction<Type extends string, Payload> = ReducingAction<
   Type,
   Payload,

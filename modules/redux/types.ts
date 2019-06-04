@@ -3,20 +3,20 @@ import { Draft } from "immer";
 type Guard<T> = (input: any) => input is T;
 
 export type ReducingActionFactory<
-  A extends ReducingAction<string, any, AppState>
+  A extends ReducingAction<string, any, any>
 > = (
   type: ReducingActionType<A>,
   reducer: DraftReducer<A>
 ) => [ReducingActionCreator<A>, Guard<A>];
 
 export type ReducingActionCreator<
-  A extends ReducingAction<string, any, AppState>
+  A extends ReducingAction<string, any, any>
 > = ReducingActionPayload<A> extends undefined
   ? NakedActionCreator<A>
   : PayloadActionCreator<A>;
 
 export interface PayloadActionCreator<
-  A extends ReducingAction<string, any, AppState>
+  A extends ReducingAction<string, any, any>
 > extends WithActionType<ReducingActionType<A>> {
   (payload: ReducingActionPayload<A>): {
     type: ReducingActionType<A>;
@@ -26,10 +26,11 @@ export interface PayloadActionCreator<
 }
 
 import { WithAlgolDemoState } from "./slices/demo/types";
-export type AppState = WithAlgolDemoState;
+import { WithAlgolBattleState } from "./slices/battle/types";
+export type AppState = WithAlgolDemoState & WithAlgolBattleState;
 
 export interface NakedActionCreator<
-  A extends ReducingAction<string, undefined, AppState>
+  A extends ReducingAction<string, undefined, any>
 > extends WithActionType<ReducingActionType<A>> {
   (): {
     type: ReducingActionType<A>;
@@ -66,11 +67,8 @@ export type ReducingActionState<S> = S extends ReducingAction<
   ? S
   : never;
 
-type PayloadReducer<State, Payload> = (
-  state: Readonly<State>,
-  payload: Payload
-) => State;
-type NakedReducer<State> = (state: Readonly<State>) => State;
+type PayloadReducer<State, Payload> = (state: State, payload: Payload) => State;
+type NakedReducer<State> = (state: State) => State;
 export type Reducer<State, Payload> = Payload extends undefined
   ? NakedReducer<State>
   : PayloadReducer<State, Payload>;
@@ -82,19 +80,19 @@ type PayloadDraftReducer<State, Payload> = (
 type NakedDraftReducer<State> = (draft: Draft<State>) => void;
 
 export type DraftReducer<
-  A extends ReducingAction<string, any, AppState>
+  A extends ReducingAction<string, any, any>
 > = ReducingActionPayload<A> extends undefined
   ? NakedDraftReducer<ReducingActionState<A>>
   : PayloadDraftReducer<ReducingActionState<A>, ReducingActionPayload<A>>;
 
 export type ReducingActionTest<
-  A extends ReducingAction<string, any, AppState>
+  A extends ReducingAction<string, any, any>
 > = ReducingActionPayload<A> extends undefined
   ? ReducingNakedActionTest<A>
   : ReducingPayloadActionTest<A>;
 
 export type ReducingNakedActionTest<
-  A extends ReducingAction<string, undefined, AppState>
+  A extends ReducingAction<string, undefined, any>
 > = {
   description: string;
   previous: ReducingActionState<A>;
@@ -102,7 +100,7 @@ export type ReducingNakedActionTest<
 };
 
 export type ReducingPayloadActionTest<
-  A extends ReducingAction<string, any, AppState>
+  A extends ReducingAction<string, any, any>
 > = ReducingNakedActionTest<A> & {
   payload: ReducingActionPayload<A>;
 };

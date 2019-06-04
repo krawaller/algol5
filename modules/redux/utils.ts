@@ -10,9 +10,7 @@ import {
 } from "./types";
 import { produce } from "immer";
 
-export const makeCreatorAndGuard = <
-  A extends ReducingAction<string, any, AppState>
->(
+export const makeCreatorAndGuard = <A extends ReducingAction<string, any, any>>(
   type: ReducingActionType<A>,
   reducer: DraftReducer<A>
 ) => {
@@ -26,12 +24,12 @@ export const makeCreatorAndGuard = <
   } as ReducingActionCreator<A>;
 
   creator.actionType = type;
-  const guard = (action: ReducingAction<string, any, AppState>): action is A =>
+  const guard = (action: ReducingAction<string, any, any>): action is A =>
     action.type === (type as string);
   return <const>[creator, guard];
 };
 
-export const testCreator = <A extends ReducingAction<string, any, AppState>>(
+export const testCreator = <A extends ReducingAction<string, any, any>>(
   creator: ReducingActionCreator<A>,
   tests: ReducingActionTest<A>[]
 ) => {

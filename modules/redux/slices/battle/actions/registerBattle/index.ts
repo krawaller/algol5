@@ -3,19 +3,19 @@ import { BattleAction } from "../../types";
 import { makeCreatorAndGuard } from "../../../../utils";
 import { AlgolBattle } from "../../../../../types";
 
-export type NewBattlePayload = {
+export type RegisterBattlePayload = {
   gameId: GameId;
   battleId: string;
   battle: AlgolBattle;
 };
 
-export type NewBattleAction = BattleAction<
-  "BATTLE::NEW_BATTLE",
-  NewBattlePayload
+export type RegisterBattleAction = BattleAction<
+  "BATTLE::REGISTER_BATTLE",
+  RegisterBattlePayload
 >;
-export const [newBattle, isNewBattleAction] = makeCreatorAndGuard<
-  NewBattleAction
->("BATTLE::NEW_BATTLE", (draft, { gameId, battleId, battle }) => {
+export const [registerBattle, isRegisterBattleAction] = makeCreatorAndGuard<
+  RegisterBattleAction
+>("BATTLE::REGISTER_BATTLE", (draft, { gameId, battleId, battle }) => {
   if (!draft.battle.games[gameId]) {
     draft.battle.games[gameId] = { battles: {} };
   }

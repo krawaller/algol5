@@ -1,11 +1,11 @@
-import { newBattle as newBattleAction } from "./";
+import { registerBattle } from ".";
 import { testCreator } from "../../../../utils";
 import { staticAPI } from "../../../../../battle/dist/apis/amazons";
 
 const battle = staticAPI.newBattle();
 const newBattleId = "NEWBATTLEID";
 
-testCreator(newBattleAction, [
+testCreator(registerBattle, [
   {
     description: "starting a new battle will add it to the state",
     previous: {

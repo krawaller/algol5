@@ -7,6 +7,8 @@ import {
   isAlgolContentUnit,
   isAlgolContentLine,
   isAlgolContentSelect,
+  isAlgolContentEndTurn,
+  isAlgolContentPlayer,
 } from "../../types";
 
 export function getContentText(content: AlgolContentAnon): string | number {
@@ -31,6 +33,12 @@ export function getContentText(content: AlgolContentAnon): string | number {
   }
   if (isAlgolContentSelect(content)) {
     return content.select;
+  }
+  if (isAlgolContentEndTurn(content)) {
+    return content.endTurn;
+  }
+  if (isAlgolContentPlayer(content)) {
+    return `player ${content.player}`;
   }
   throw new Error(
     "Dont know how to make text from this content: " + JSON.stringify(content)

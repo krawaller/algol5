@@ -16,9 +16,9 @@ type StartBattleThunk = ThunkAction<
   ReducingAction<string, any, any>
 >;
 
-export function makeStartBattle(game: AlgolGame): StartBattleThunk {
+export function makeStartBattle(game: AlgolGame): () => StartBattleThunk {
   const staticAPI = makeStaticGameAPI(game);
-  return dispatch => {
+  return () => dispatch => {
     const battleId = Math.random().toString(); // TODO - better?
     dispatch(
       registerBattle({

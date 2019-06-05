@@ -13,7 +13,9 @@ describe("The startBattle thunk", () => {
   test("correctly registers a game", () => {
     const dispatch = jest.fn();
 
-    const newBattleId = startBattle(
+    const thunk = startBattle();
+
+    const newBattleId = thunk(
       dispatch,
       () => ({ battle: initialBattleState }),
       undefined

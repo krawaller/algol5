@@ -32,4 +32,32 @@ testCreator(registerBattle, [
       },
     },
   },
+  {
+    description: "activating will also set it as active battle",
+    previous: {
+      battle: {
+        games: {},
+      },
+    },
+    payload: {
+      gameId: "amazons",
+      battleId: newBattleId,
+      battle,
+      activate: true,
+    },
+    expected: {
+      battle: {
+        games: {
+          amazons: {
+            battles: {
+              [newBattleId]: {
+                battle,
+              },
+            },
+            currentBattle: newBattleId,
+          },
+        },
+      },
+    },
+  },
 ]);

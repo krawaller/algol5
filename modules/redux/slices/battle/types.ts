@@ -20,6 +20,7 @@ export type AlgolGameBattleState = {
   battles: {
     [id: string]: AlgolBattleInfo;
   };
+  currentBattle?: string;
 };
 
 export interface WithAlgolBattleState {

@@ -1,6 +1,7 @@
 import { registerBattle } from ".";
 import { testCreator } from "../../../../utils";
 import { staticAPI } from "../../../../../battle/dist/apis/amazons";
+import { GameId } from "../../../../../games/dist/list";
 
 const battle = staticAPI.newBattle();
 const newBattleId = "NEWBATTLEID";
@@ -25,6 +26,7 @@ testCreator(registerBattle, [
             battles: {
               [newBattleId]: {
                 battle,
+                history: 0,
               },
             },
           },
@@ -40,7 +42,7 @@ testCreator(registerBattle, [
       },
     },
     payload: {
-      gameId: "amazons",
+      gameId: "amazons" as GameId,
       battleId: newBattleId,
       battle,
       activate: true,
@@ -52,6 +54,7 @@ testCreator(registerBattle, [
             battles: {
               [newBattleId]: {
                 battle,
+                history: 0,
               },
             },
             currentBattle: newBattleId,

@@ -14,6 +14,7 @@ export type AlgolBattleState = {
 
 export type AlgolBattleInfo = {
   battle: AlgolBattle;
+  history: number;
 };
 
 export type AlgolGameBattleState = {

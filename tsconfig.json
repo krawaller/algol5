@@ -11,5 +11,6 @@
     "jsx": "react",
     "types": ["node", "jest", "fs-extra", "prettier", "lodash.isequal"]
   },
-  "include": ["modules"]
+  "include": ["modules"],
+  "exclude": ["archive", "dev"]
 }

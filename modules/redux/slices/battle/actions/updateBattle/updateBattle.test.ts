@@ -16,6 +16,7 @@ testCreator(updateBattle, [
             battles: {
               [myBattleId]: {
                 battle: prevBattle,
+                historyFrame: 0,
               },
             },
           },
@@ -34,6 +35,44 @@ testCreator(updateBattle, [
             battles: {
               [myBattleId]: {
                 battle: nextBattle,
+                historyFrame: 0,
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    description: "can optionally also update historyframe",
+    previous: {
+      battle: {
+        games: {
+          amazons: {
+            battles: {
+              [myBattleId]: {
+                battle: prevBattle,
+                historyFrame: 0,
+              },
+            },
+          },
+        },
+      },
+    },
+    payload: {
+      gameId: "amazons",
+      battleId: myBattleId,
+      battle: nextBattle,
+      historyFrame: 1,
+    },
+    expected: {
+      battle: {
+        games: {
+          amazons: {
+            battles: {
+              [myBattleId]: {
+                battle: nextBattle,
+                historyFrame: 1,
               },
             },
           },

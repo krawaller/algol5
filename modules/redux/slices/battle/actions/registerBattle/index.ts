@@ -24,7 +24,7 @@ export const [registerBattle, isRegisterBattleAction] = makeCreatorAndGuard<
     }
     draft.battle.games[gameId]!.battles[battleId] = { battle, historyFrame: 0 };
     if (activate) {
-      draft.battle.games[gameId]!.currentBattle = battleId;
+      draft.battle.games[gameId]!.currentBattleId = battleId;
     }
   }
 );

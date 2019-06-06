@@ -57,7 +57,7 @@ testCreator(registerBattle, [
                 historyFrame: 0,
               },
             },
-            currentBattle: newBattleId,
+            currentBattleId: newBattleId,
           },
         },
       },

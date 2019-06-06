@@ -14,5 +14,5 @@ export type SwitchBattleAction = BattleAction<
 export const [switchBattle, isSwitchBattleAction] = makeCreatorAndGuard<
   SwitchBattleAction
 >("BATTLE::SWITCH_BATTLE", (draft, { gameId, battleId }) => {
-  draft.battle.games[gameId]!.currentBattle = battleId;
+  draft.battle.games[gameId]!.currentBattleId = battleId;
 });

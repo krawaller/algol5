@@ -23,13 +23,13 @@ export function makeMakeMove(
   return (action, arg) => (dispatch, getState) => {
     const currentGame = getState().battle.games[game.gameId as GameId]!;
     const currentBattle =
-      currentGame.battles[currentGame.currentBattle!].battle;
+      currentGame.battles[currentGame.currentBattleId!].battle;
     const newBattle = staticAPI.performAction(currentBattle, action, arg);
     dispatch(
       updateBattle({
         gameId: game.gameId as GameId,
         battle: newBattle,
-        battleId: currentGame.currentBattle!,
+        battleId: currentGame.currentBattleId!,
       })
     );
   };

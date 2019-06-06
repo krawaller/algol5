@@ -21,7 +21,7 @@ export type AlgolGameBattleState = {
   battles: {
     [id: string]: AlgolBattleInfo;
   };
-  currentBattle?: string;
+  currentBattleId?: string;
 };
 
 export interface WithAlgolBattleState {

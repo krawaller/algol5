@@ -13,7 +13,7 @@ testCreator(switchBattle, [
         games: {
           amazons: {
             battles: {},
-            currentBattle: "foo",
+            currentBattleId: "foo",
           },
         },
       },
@@ -27,7 +27,7 @@ testCreator(switchBattle, [
         games: {
           amazons: {
             battles: {},
-            currentBattle: "bar",
+            currentBattleId: "bar",
           },
         },
       },

@@ -25,6 +25,7 @@ describe("The startBattle thunk", () => {
       battle: amazonsAPI.newBattle(),
       battleId: newBattleId,
       gameId: amazons.gameId as GameId,
+      activate: true,
     });
 
     const sentAction = dispatch.mock.calls[0][0];

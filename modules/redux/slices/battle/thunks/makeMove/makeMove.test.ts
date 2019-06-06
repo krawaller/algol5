@@ -21,6 +21,7 @@ describe("The makeMove thunk", () => {
       battle: currentBattle,
       gameId: amazons.gameId as GameId,
       battleId,
+      activate: true,
     };
     const currentState = registerBattle(registerPayload).reducer(
       { battle: initialBattleState },
@@ -36,7 +37,7 @@ describe("The makeMove thunk", () => {
     const dispatch = jest.fn();
     const getState = jest.fn().mockReturnValue(currentState);
 
-    const thunk = makeMove(battleId, "mark", "a7");
+    const thunk = makeMove("mark", "a7");
 
     thunk(dispatch, getState, undefined);
 

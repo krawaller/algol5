@@ -1,4 +1,4 @@
-import { registerBattle } from ".";
+import { goToHistoryFrame } from ".";
 import { testCreator } from "../../../../utils";
 import { staticAPI } from "../../../../../battle/dist/apis/amazons";
 import { GameId } from "../../../../../games/dist/list";
@@ -6,58 +6,39 @@ import { GameId } from "../../../../../games/dist/list";
 const battle = staticAPI.newBattle();
 const newBattleId = "NEWBATTLEID";
 
-testCreator(registerBattle, [
+testCreator(goToHistoryFrame, [
   {
-    description: "starting a new battle will add it to the state",
+    description: "switching battle will change to the new one",
     previous: {
-      battle: {
-        games: {},
-      },
-    },
-    payload: {
-      gameId: "amazons" as GameId,
-      battleId: newBattleId,
-      battle,
-    },
-    expected: {
       battle: {
         games: {
           amazons: {
             battles: {
-              [newBattleId]: {
+              foo: {
                 battle,
                 historyFrame: 0,
               },
             },
+            currentBattle: "foo",
           },
         },
       },
     },
-  },
-  {
-    description: "activating will also set it as active battle",
-    previous: {
-      battle: {
-        games: {},
-      },
-    },
     payload: {
       gameId: "amazons" as GameId,
-      battleId: newBattleId,
-      battle,
-      activate: true,
+      frame: 3,
     },
     expected: {
       battle: {
         games: {
           amazons: {
             battles: {
-              [newBattleId]: {
+              foo: {
                 battle,
-                historyFrame: 0,
+                historyFrame: 3,
               },
             },
-            currentBattle: newBattleId,
+            currentBattle: "foo",
           },
         },
       },

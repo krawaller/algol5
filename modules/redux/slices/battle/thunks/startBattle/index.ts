@@ -25,6 +25,7 @@ export function makeStartBattle(game: AlgolGame): () => StartBattleThunk {
         gameId: game.gameId as GameId,
         battle: staticAPI.newBattle(),
         battleId,
+        activate: true,
       })
     );
     return battleId;

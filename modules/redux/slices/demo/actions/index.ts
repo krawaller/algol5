@@ -4,3 +4,4 @@ export * from "./startDemo";
 export * from "./stepDemo";
 export * from "./stepAllDemos";
 export * from "./stopDemo";
+export * from "./stopAllDemos";

@@ -18,7 +18,10 @@ type MakeMoveThunk = ThunkAction<
 
 export function makeMakeMove(
   game: AlgolGame
-): (action: "command" | "mark" | "endTurn", arg?: string) => MakeMoveThunk {
+): (
+  action: "command" | "mark" | "undo" | "endTurn",
+  arg?: string
+) => MakeMoveThunk {
   const staticAPI = makeStaticGameAPI(game);
   return (action, arg) => (dispatch, getState) => {
     const currentGame = getState().battle.games[game.gameId as GameId]!;

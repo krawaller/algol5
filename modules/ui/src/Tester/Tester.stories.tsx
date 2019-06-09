@@ -4,18 +4,9 @@ import { select } from "@storybook/addon-knobs";
 
 import { Tester } from ".";
 import { GameId, list } from "../../../games/dist/list";
-
-import APIs from "../../../battle/dist/allAPIs";
+import games from "../../../logic/dist/";
 
 storiesOf("Tester", module).add("Test games", () => {
   const gameId = select("Game", list, list[0]) as GameId;
-  return (
-    <Wrapper>
-      <Tester key={gameId} api={APIs[gameId]} />
-    </Wrapper>
-  );
+  return <Tester key={gameId} game={games[gameId]} />;
 });
-
-const Wrapper: React.FunctionComponent<{}> = props => (
-  <div>{props.children}</div>
-);

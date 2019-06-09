@@ -7,7 +7,11 @@ import { BattleUI } from "../BattleUI";
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 
 import { makeStore } from "../../../redux/store";
-import { makeMakeMove, makeStartBattle } from "../../../redux/slices";
+import {
+  makeMakeMove,
+  makeStartBattle,
+  selectCurrentBattleInfo,
+} from "../../../redux/slices";
 import { getBattleUI } from "../../../battle/src/battle";
 import { GameId } from "../../../battle/commands/helpers/_names";
 
@@ -17,15 +21,15 @@ type TesterProps = {
 
 export const Tester = (props: TesterProps) => {
   const { game } = props;
+  const gameId = game.gameId as GameId;
   const [ui, updateUI] = useState<AlgolBattleUI | null>(null);
   const move = useMemo(() => {
     const startBattle = makeStartBattle(game);
     const makeMove = makeMakeMove(game);
     const store = makeStore();
     store.subscribe(() => {
-      const state = store.getState().battle.games[game.gameId as GameId]!;
-      const battleId = state.currentBattleId!;
-      const newUI = getBattleUI(game, state.battles[battleId].battle);
+      const battleState = selectCurrentBattleInfo(store.getState(), gameId)!;
+      const newUI = getBattleUI(game, battleState.battle);
       updateUI(newUI);
     });
     store.dispatch(startBattle());
@@ -35,13 +39,13 @@ export const Tester = (props: TesterProps) => {
     ) => {
       store.dispatch(makeMove(action, arg));
     };
-  }, [game.gameId]);
+  }, [gameId]);
   if (!ui) return null;
   return (
     <React.Fragment>
       <Board
         callback={pos => move("mark", pos)}
-        board={dataURIs[game.gameId as keyof typeof dataURIs]}
+        board={dataURIs[gameId]}
         units={ui.board.units}
         marks={ui.board.marks}
         potentialMarks={ui.board.potentialMarks}

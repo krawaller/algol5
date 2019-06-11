@@ -17,6 +17,7 @@ export type AlgolGameDemoState = {
   frame: number;
   anims: { [patchNum: string]: Partial<AlgolAnimCompiled> };
   playing?: boolean;
+  speed?: number;
   inflated?: boolean;
 };
 

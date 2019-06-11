@@ -43,10 +43,9 @@ describe("the playDemo thunk", () => {
       );
     });
   });
-  describe("when demo in state and hydrated and playing", () => {
+  describe("when demo in state and hydrated", () => {
     beforeEach(() => {
       store.dispatch(initDemo({ demo, gameId: "amazons" }));
-      store.dispatch(startDemo({ gameId: "amazons" }));
       store.dispatch(
         inflateDemo({
           gameId: "amazons",
@@ -54,13 +53,18 @@ describe("the playDemo thunk", () => {
         })
       );
     });
-    test("it will not do anything ever", () => {
-      const thunk = playDemo("amazons", demo);
-      const dispatch = jest.fn();
-      const getState = () => store.getState();
-      thunk(dispatch, getState, undefined);
-      jest.runAllTimers();
-      expect(dispatch).not.toHaveBeenCalled();
+    describe("and playing", () => {
+      beforeEach(() => {
+        store.dispatch(startDemo({ gameId: "amazons" }));
+      });
+      test("it will not do anything ever", () => {
+        const thunk = playDemo("amazons", demo);
+        const dispatch = jest.fn();
+        const getState = () => store.getState();
+        thunk(dispatch, getState, undefined);
+        jest.runAllTimers();
+        expect(dispatch).not.toHaveBeenCalled();
+      });
     });
   });
 });

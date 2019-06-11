@@ -1,5 +1,5 @@
 import { stepDemo } from "./";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 import { GameId } from "../../../../../games/dist/list";
 
 testCreator(stepDemo, [
@@ -13,13 +13,13 @@ testCreator(stepDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: true
-          }
-        }
-      }
+            playing: true,
+          },
+        },
+      },
     },
     payload: {
-      gameId: "amazons" as GameId
+      gameId: "amazons" as GameId,
     },
     expected: {
       demo: {
@@ -29,11 +29,11 @@ testCreator(stepDemo, [
             anims: {},
             frame: 2,
             inflated: true,
-            playing: true
-          }
-        }
-      }
-    }
+            playing: true,
+          },
+        },
+      },
+    },
   },
   {
     description: "Stepping off the last frame loops around",
@@ -45,13 +45,13 @@ testCreator(stepDemo, [
             anims: {},
             frame: 2,
             inflated: true,
-            playing: true
-          }
-        }
-      }
+            playing: true,
+          },
+        },
+      },
     },
     payload: {
-      gameId: "amazons" as GameId
+      gameId: "amazons" as GameId,
     },
     expected: {
       demo: {
@@ -61,11 +61,11 @@ testCreator(stepDemo, [
             anims: {},
             frame: 0,
             inflated: true,
-            playing: true
-          }
-        }
-      }
-    }
+            playing: true,
+          },
+        },
+      },
+    },
   },
   {
     description: "If demo isn't playing nothing happens",
@@ -77,13 +77,13 @@ testCreator(stepDemo, [
             anims: {},
             frame: 2,
             inflated: true,
-            playing: false
-          }
-        }
-      }
+            playing: false,
+          },
+        },
+      },
     },
     payload: {
-      gameId: "amazons" as GameId
+      gameId: "amazons" as GameId,
     },
     expected: {
       demo: {
@@ -93,10 +93,10 @@ testCreator(stepDemo, [
             anims: {},
             frame: 2,
             inflated: true,
-            playing: false
-          }
-        }
-      }
-    }
-  }
+            playing: false,
+          },
+        },
+      },
+    },
+  },
 ]);

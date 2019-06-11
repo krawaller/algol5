@@ -1,5 +1,5 @@
 import { stopDemo } from "./";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 import { GameId } from "../../../../../games/dist/list";
 
 testCreator(stopDemo, [
@@ -13,13 +13,13 @@ testCreator(stopDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: true
-          }
-        }
-      }
+            playing: true,
+          },
+        },
+      },
     },
     payload: {
-      gameId: "amazons" as GameId
+      gameId: "amazons" as GameId,
     },
     expected: {
       demo: {
@@ -29,10 +29,10 @@ testCreator(stopDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: false
-          }
-        }
-      }
-    }
-  }
+            playing: false,
+          },
+        },
+      },
+    },
+  },
 ]);

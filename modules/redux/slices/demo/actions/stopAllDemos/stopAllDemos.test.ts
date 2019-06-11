@@ -1,5 +1,5 @@
 import { stopAllDemos } from "./";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 
 testCreator(stopAllDemos, [
   {
@@ -12,17 +12,17 @@ testCreator(stopAllDemos, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: true
+            playing: true,
           },
           aries: {
             positions: [{}, {}, {}],
             anims: {},
             frame: 1,
             inflated: true,
-            playing: true
-          }
-        }
-      }
+            playing: true,
+          },
+        },
+      },
     },
     expected: {
       demo: {
@@ -32,17 +32,17 @@ testCreator(stopAllDemos, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: false
+            playing: false,
           },
           aries: {
             positions: [{}, {}, {}],
             anims: {},
             frame: 1,
             inflated: true,
-            playing: false
-          }
-        }
-      }
-    }
-  }
+            playing: false,
+          },
+        },
+      },
+    },
+  },
 ]);

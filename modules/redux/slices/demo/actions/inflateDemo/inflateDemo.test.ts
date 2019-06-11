@@ -1,5 +1,5 @@
 import { inflateDemo } from "./";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 import { GameId } from "../../../../../games/dist/list";
 
 testCreator(inflateDemo, [
@@ -13,16 +13,16 @@ testCreator(inflateDemo, [
             anims: {},
             frame: 0,
             inflated: false,
-            playing: true
-          }
-        }
-      }
+            playing: true,
+          },
+        },
+      },
     },
     payload: {
       gameId: "amazons" as GameId,
       positions: [
-        <const>{ unit1: { pos: "a1", group: "pawns", id: "unit1", owner: 1 } }
-      ]
+        <const>{ unit1: { pos: "a1", group: "pawns", id: "unit1", owner: 1 } },
+      ],
     },
     expected: {
       demo: {
@@ -31,17 +31,17 @@ testCreator(inflateDemo, [
             positions: [
               {},
               <const>{
-                unit1: { pos: "a1", group: "pawns", id: "unit1", owner: 1 }
-              }
+                unit1: { pos: "a1", group: "pawns", id: "unit1", owner: 1 },
+              },
             ],
             anims: {},
             frame: 0,
             inflated: true,
-            playing: true
-          }
-        }
-      }
-    }
+            playing: true,
+          },
+        },
+      },
+    },
   },
   {
     description: "Inflating doesn't do anything if already inflated",
@@ -53,16 +53,16 @@ testCreator(inflateDemo, [
             anims: {},
             frame: 0,
             inflated: true,
-            playing: true
-          }
-        }
-      }
+            playing: true,
+          },
+        },
+      },
     },
     payload: {
       gameId: "amazons" as GameId,
       positions: [
-        <const>{ unit1: { pos: "a1", group: "pawns", id: "unit1", owner: 1 } }
-      ]
+        <const>{ unit1: { pos: "a1", group: "pawns", id: "unit1", owner: 1 } },
+      ],
     },
     expected: {
       demo: {
@@ -72,10 +72,10 @@ testCreator(inflateDemo, [
             anims: {},
             frame: 0,
             inflated: true,
-            playing: true
-          }
-        }
-      }
-    }
-  }
+            playing: true,
+          },
+        },
+      },
+    },
+  },
 ]);

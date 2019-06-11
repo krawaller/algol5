@@ -1,5 +1,5 @@
 import { updateBattle } from "./";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 import { staticAPI } from "../../../../../battle/dist/apis/amazons";
 
 const prevBattle = staticAPI.newBattle();

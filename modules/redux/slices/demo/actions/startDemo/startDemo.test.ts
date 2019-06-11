@@ -1,5 +1,5 @@
 import { startDemo } from "./";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 import { GameId } from "../../../../../games/dist/list";
 import { defaultSpeed } from "../../constants";
 

@@ -1,5 +1,5 @@
 import { registerBattle } from ".";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 import { staticAPI } from "../../../../../battle/dist/apis/amazons";
 import { GameId } from "../../../../../games/dist/list";
 

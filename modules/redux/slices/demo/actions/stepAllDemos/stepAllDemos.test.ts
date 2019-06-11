@@ -1,5 +1,5 @@
 import { stepAllDemos } from "./";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 
 testCreator(stepAllDemos, [
   {

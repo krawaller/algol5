@@ -1,22 +1,21 @@
 import { initDemo } from "./";
 import { AlgolDemo } from "../../../../../types";
-import { testCreator } from "../../../../utils";
+import { testCreator } from "../../../../testUtils";
 import { GameId } from "../../../../../games/dist/list";
 
 const dummyDemoDef: AlgolDemo = {
   anims: { 0: { exitTo: { a1: "b2" } } },
   initial: { unit1: { pos: "a1", group: "pawns", id: "unit1", owner: 1 } },
-  patches: []
+  patches: [],
 };
 
 testCreator(initDemo, [
   {
-    description:
-      "Initiating from nothing creates new uninflated entry with playing",
+    description: "Initiating from nothing creates new uninflated entry ",
     previous: { demo: { demos: {} } },
     payload: {
       gameId: "amazons" as GameId,
-      demo: dummyDemoDef
+      demo: dummyDemoDef,
     },
     expected: {
       demo: {
@@ -26,11 +25,11 @@ testCreator(initDemo, [
             anims: dummyDemoDef.anims,
             frame: 0,
             inflated: false,
-            playing: true
-          }
-        }
-      }
-    }
+            playing: false,
+          },
+        },
+      },
+    },
   },
   {
     description: "If already inflated we just set frame to 0",
@@ -41,14 +40,15 @@ testCreator(initDemo, [
             positions: [dummyDemoDef.initial, dummyDemoDef.initial],
             anims: {},
             frame: 5,
-            inflated: true
-          }
-        }
-      }
+            inflated: true,
+            playing: false,
+          },
+        },
+      },
     },
     payload: {
       demo: dummyDemoDef,
-      gameId: "amazons" as GameId
+      gameId: "amazons" as GameId,
     },
     expected: {
       demo: {
@@ -58,10 +58,10 @@ testCreator(initDemo, [
             anims: {},
             frame: 0,
             inflated: true,
-            playing: true
-          }
-        }
-      }
-    }
-  }
+            playing: false,
+          },
+        },
+      },
+    },
+  },
 ]);

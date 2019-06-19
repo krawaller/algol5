@@ -39,7 +39,7 @@ describe("the tickDemo thunk", () => {
     });
   });
   describe("when demo is playing", () => {
-    beforeEach(() => store.dispatch(startDemo({ gameId, id: 666 })));
+    beforeEach(() => store.dispatch(startDemo({ gameId, playId: 666 })));
     test("it steps the demo once", () => {
       expect(store.getState().demo.demos[gameId]!.frame).toBe(0);
       store.dispatch(tickDemo(gameId, 666));

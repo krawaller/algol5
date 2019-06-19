@@ -20,7 +20,7 @@ testCreator(startDemo, [
     },
     payload: {
       gameId: "amazons" as GameId,
-      id: 777,
+      playId: 777,
     },
     expected: {
       demo: {
@@ -30,7 +30,8 @@ testCreator(startDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: 777,
+            playing: true,
+            playId: 777,
             speed: defaultSpeed,
           },
         },
@@ -53,7 +54,7 @@ testCreator(startDemo, [
     },
     payload: {
       gameId: "amazons" as GameId,
-      id: 777,
+      playId: 777,
       speed: 666,
     },
     expected: {
@@ -64,7 +65,8 @@ testCreator(startDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: 777,
+            playing: true,
+            playId: 777,
             speed: 666,
           },
         },

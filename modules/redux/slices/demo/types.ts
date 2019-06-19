@@ -16,7 +16,8 @@ export type AlgolGameDemoState = {
   positions: AlgolArmy[];
   frame: number;
   anims: { [patchNum: string]: Partial<AlgolAnimCompiled> };
-  playing?: number;
+  playing?: boolean;
+  playId?: number;
   speed?: number;
   inflated?: boolean;
 };

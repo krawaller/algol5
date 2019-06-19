@@ -14,7 +14,7 @@ type TickDemoThunk = ThunkAction<
 export const tickDemo = (gameId: GameId, playId: number): TickDemoThunk => {
   return (dispatch, getState) => {
     const demoState = getState().demo.demos[gameId]!;
-    if (demoState.playing === playId) {
+    if (demoState.playId === playId) {
       dispatch(stepDemo({ gameId }));
       setTimeout(() => dispatch(tickDemo(gameId, playId)), demoState.speed);
     }

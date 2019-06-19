@@ -25,8 +25,8 @@ export const playDemo = (gameId: GameId, demo: AlgolDemo): PlayDemoThunk => {
       // if we're already playing we don't need to do anything
       return;
     }
-    const id = Math.random();
-    dispatch(startDemo({ gameId, id })); // sets playing to true and sets speed
+    const playId = Math.random();
+    dispatch(startDemo({ gameId, playId })); // sets playing to true and sets speed
     gameDemoState = getState().demo.demos[gameId];
     if (!gameDemoState!.inflated) {
       setTimeout(() =>
@@ -35,7 +35,7 @@ export const playDemo = (gameId: GameId, demo: AlgolDemo): PlayDemoThunk => {
         )
       );
     }
-    setTimeout(() => dispatch(tickDemo(gameId, id)), gameDemoState!.speed);
-    return id;
+    setTimeout(() => dispatch(tickDemo(gameId, playId)), gameDemoState!.speed);
+    return playId;
   };
 };

@@ -7,13 +7,16 @@ import { defaultSpeed } from "../../constants";
 export type StartDemoPayload = {
   gameId: GameId;
   speed?: number;
-  id: number;
+  playId?: number;
 };
 
 export type StartDemoAction = DemoAction<"DEMO::START_DEMO", StartDemoPayload>;
 export const [startDemo, isStartDemoAction] = makeCreatorAndGuard<
   StartDemoAction
->("DEMO::START_DEMO", (draft, { gameId, speed, id }) => {
-  draft.demo.demos[gameId]!.playing = id;
+>("DEMO::START_DEMO", (draft, { gameId, speed, playId }) => {
+  draft.demo.demos[gameId]!.playing = true;
+  if (playId) {
+    draft.demo.demos[gameId]!.playId = playId;
+  }
   draft.demo.demos[gameId]!.speed = speed || defaultSpeed;
 });

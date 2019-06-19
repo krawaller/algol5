@@ -8,7 +8,8 @@ export const [stepAllDemos, isStepAllDemosAction] = makeCreatorAndGuard<
   for (const demo of Object.values(draft.demo.demos)) {
     if (demo!.playing) {
       demo!.frame++;
-      demo!.frame %= demo!.positions.length;
+      demo!.frame =
+        (demo!.frame + demo!.positions.length) % demo!.positions.length;
     }
   }
 });

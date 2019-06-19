@@ -10,6 +10,8 @@ export type DemoAction<Type extends string, Payload> = ReducingAction<
 
 export type AlgolDemoState = {
   demos: Partial<{ [idx in GameId]: AlgolGameDemoState }>;
+  playId?: number;
+  speed?: number;
 };
 
 export type AlgolGameDemoState = {

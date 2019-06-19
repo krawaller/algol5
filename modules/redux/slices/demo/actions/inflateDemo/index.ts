@@ -14,7 +14,7 @@ export const [inflateDemo, isInflateDemoAction] = makeCreatorAndGuard<
 >("DEMO::INFLATE_DEMO", (draft, { gameId, positions }) => {
   const demo = draft.demo.demos[gameId];
   if (!demo!.inflated) {
-    demo!.positions = demo!.positions.concat(positions);
+    demo!.positions = positions;
     demo!.inflated = true;
   }
 });

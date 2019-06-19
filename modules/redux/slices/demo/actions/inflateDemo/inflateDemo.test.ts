@@ -29,7 +29,6 @@ testCreator(inflateDemo, [
         demos: {
           amazons: {
             positions: [
-              {},
               <const>{
                 unit1: { pos: "a1", group: "pawns", id: "unit1", owner: 1 },
               },

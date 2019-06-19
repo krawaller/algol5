@@ -5,7 +5,7 @@ import { defaultSpeed } from "../../constants";
 
 testCreator(startDemo, [
   {
-    description: "Starting a demo sets playing to true and default speed",
+    description: "Starting a demo sets playing to id and default speed",
     previous: {
       demo: {
         demos: {
@@ -14,13 +14,13 @@ testCreator(startDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: false,
           },
         },
       },
     },
     payload: {
       gameId: "amazons" as GameId,
+      id: 777,
     },
     expected: {
       demo: {
@@ -30,7 +30,7 @@ testCreator(startDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: true,
+            playing: 777,
             speed: defaultSpeed,
           },
         },
@@ -47,13 +47,13 @@ testCreator(startDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: false,
           },
         },
       },
     },
     payload: {
       gameId: "amazons" as GameId,
+      id: 777,
       speed: 666,
     },
     expected: {
@@ -64,7 +64,7 @@ testCreator(startDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: true,
+            playing: 777,
             speed: 666,
           },
         },

@@ -5,7 +5,6 @@ import { makeStore } from "../../../redux/store";
 import {
   AlgolGameDemoState,
   stopAllDemos,
-  startDemo,
   stopDemo,
   stepDemo,
 } from "../../../redux/slices";
@@ -32,7 +31,7 @@ export const Demo = (props: DemoProps) => {
     handleStepBackward,
   } = useMemo(() => {
     const store = makeStore();
-    const handleStart = () => store.dispatch(startDemo({ gameId }));
+    const handleStart = () => store.dispatch(playDemo(gameId, demo));
     const handleStop = () => {
       store.dispatch(stopDemo({ gameId }));
     };
@@ -73,7 +72,7 @@ export const Demo = (props: DemoProps) => {
         anim={{ ...emptyAnim, ...gameDemoState.anims[gameDemoState.frame] }}
       />
       <p>Frame {gameDemoState.frame}</p>
-      <button onClick={handleStart} disabled={gameDemoState.playing}>
+      <button onClick={handleStart} disabled={!!gameDemoState.playing}>
         start
       </button>
       <button onClick={handleStop} disabled={!gameDemoState.playing}>

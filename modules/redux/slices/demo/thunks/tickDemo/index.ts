@@ -11,12 +11,12 @@ type TickDemoThunk = ThunkAction<
   ReducingAction<string, any, any>
 >;
 
-export const tickDemo = (gameId: GameId): TickDemoThunk => {
+export const tickDemo = (gameId: GameId, playId: number): TickDemoThunk => {
   return (dispatch, getState) => {
     const demoState = getState().demo.demos[gameId]!;
-    if (demoState.playing) {
+    if (demoState.playing === playId) {
       dispatch(stepDemo({ gameId }));
-      setTimeout(() => dispatch(tickDemo(gameId)), demoState.speed);
+      setTimeout(() => dispatch(tickDemo(gameId, playId)), demoState.speed);
     }
   };
 };

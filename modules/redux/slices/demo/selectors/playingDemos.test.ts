@@ -6,7 +6,7 @@ describe("the playingDemos selector", () => {
     beforeEach(
       () =>
         (result = playingDemos({
-          demo: { demos: {} }
+          demo: { demos: {} },
         }))
     );
     test("we get 0", () => expect(result).toBe(0));
@@ -21,22 +21,21 @@ describe("the playingDemos selector", () => {
                 anims: {},
                 frame: 0,
                 positions: [],
-                playing: true
+                playing: 666,
               },
               aries: {
                 anims: {},
                 frame: 0,
                 positions: [],
-                playing: false
               },
               atrium: {
                 anims: {},
                 frame: 0,
                 positions: [],
-                playing: true
-              }
-            }
-          }
+                playing: 666,
+              },
+            },
+          },
         }))
     );
     test("we get 2", () => expect(result).toBe(2));

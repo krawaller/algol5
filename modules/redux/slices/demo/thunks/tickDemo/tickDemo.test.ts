@@ -33,20 +33,20 @@ describe("the tickDemo thunk", () => {
   describe("when demo isn't playing", () => {
     test("nothing happens", () => {
       const state = store.getState();
-      store.dispatch(tickDemo(gameId));
+      store.dispatch(tickDemo(gameId, 666));
       jest.runOnlyPendingTimers();
       expect(store.getState()).toEqual(state);
     });
   });
   describe("when demo is playing", () => {
-    beforeEach(() => store.dispatch(startDemo({ gameId })));
+    beforeEach(() => store.dispatch(startDemo({ gameId, id: 666 })));
     test("it steps the demo once", () => {
       expect(store.getState().demo.demos[gameId]!.frame).toBe(0);
-      store.dispatch(tickDemo(gameId));
+      store.dispatch(tickDemo(gameId, 666));
       expect(store.getState().demo.demos[gameId]!.frame).toBe(1);
     });
     test("it steps again after timeout", () => {
-      store.dispatch(tickDemo(gameId));
+      store.dispatch(tickDemo(gameId, 666));
       jest.runOnlyPendingTimers();
       expect(store.getState().demo.demos[gameId]!.frame).toBe(2);
     });

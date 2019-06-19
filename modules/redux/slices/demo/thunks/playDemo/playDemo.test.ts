@@ -24,18 +24,20 @@ describe("the playDemo thunk", () => {
   afterEach(() => jest.clearAllTimers());
   describe("when no demo in state", () => {
     test("will init and start it", () => {
-      store.dispatch(playDemo(gameId, demo));
+      const id = (store.dispatch(playDemo(gameId, demo)) as unknown) as number;
       expect(store.getState()).toEqual(
-        buildState(initDemo({ demo, gameId }), startDemo({ gameId }))
+        buildState(initDemo({ demo, gameId }), startDemo({ gameId, id }))
       );
     });
     test("will inflate it asyncronously", () => {
-      store.dispatch(playDemo("amazons", demo));
+      const id = (store.dispatch(
+        playDemo("amazons", demo)
+      ) as unknown) as number;
       jest.advanceTimersByTime(0);
       expect(store.getState()).toEqual(
         buildState(
           initDemo({ demo, gameId }),
-          startDemo({ gameId }),
+          startDemo({ gameId, id }),
           inflateDemo({
             gameId,
             positions: inflateDemoData(demo).positions,
@@ -56,7 +58,7 @@ describe("the playDemo thunk", () => {
     });
     describe("and playing", () => {
       beforeEach(() => {
-        store.dispatch(startDemo({ gameId }));
+        store.dispatch(startDemo({ gameId, id: 777 }));
       });
       test("it will not do anything ever", () => {
         const state = store.getState();

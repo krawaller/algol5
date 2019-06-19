@@ -8,6 +8,9 @@ import { inflateDemo as inflateDemoData } from "../../../../../common";
 import { buildState } from "../../../../testUtils";
 import { Store } from "redux";
 import { AppState } from "../../../../types";
+import { GameId } from "../../../../../battle/commands/helpers/_names";
+
+const gameId: GameId = "amazons";
 
 let store: Store<AppState, any> & {
   dispatch: {};
@@ -18,14 +21,12 @@ describe("the playDemo thunk", () => {
     jest.useFakeTimers();
     store = makeStore();
   });
+  afterEach(() => jest.clearAllTimers());
   describe("when no demo in state", () => {
     test("will init and start it", () => {
-      store.dispatch(playDemo("amazons", demo));
+      store.dispatch(playDemo(gameId, demo));
       expect(store.getState()).toEqual(
-        buildState(
-          initDemo({ demo, gameId: "amazons" }),
-          startDemo({ gameId: "amazons" })
-        )
+        buildState(initDemo({ demo, gameId }), startDemo({ gameId }))
       );
     });
     test("will inflate it asyncronously", () => {
@@ -33,10 +34,10 @@ describe("the playDemo thunk", () => {
       jest.advanceTimersByTime(0);
       expect(store.getState()).toEqual(
         buildState(
-          initDemo({ demo, gameId: "amazons" }),
-          startDemo({ gameId: "amazons" }),
+          initDemo({ demo, gameId }),
+          startDemo({ gameId }),
           inflateDemo({
-            gameId: "amazons",
+            gameId,
             positions: inflateDemoData(demo).positions,
           })
         )
@@ -45,25 +46,38 @@ describe("the playDemo thunk", () => {
   });
   describe("when demo in state and hydrated", () => {
     beforeEach(() => {
-      store.dispatch(initDemo({ demo, gameId: "amazons" }));
+      store.dispatch(initDemo({ demo, gameId }));
       store.dispatch(
         inflateDemo({
-          gameId: "amazons",
+          gameId,
           positions: inflateDemoData(demo).positions,
         })
       );
     });
     describe("and playing", () => {
       beforeEach(() => {
-        store.dispatch(startDemo({ gameId: "amazons" }));
+        store.dispatch(startDemo({ gameId }));
       });
       test("it will not do anything ever", () => {
-        const thunk = playDemo("amazons", demo);
-        const dispatch = jest.fn();
-        const getState = () => store.getState();
-        thunk(dispatch, getState, undefined);
+        const state = store.getState();
+        store.dispatch(playDemo("amazons", demo));
+        expect(store.getState()).toEqual(state);
         jest.runAllTimers();
-        expect(dispatch).not.toHaveBeenCalled();
+        expect(store.getState()).toEqual(state);
+      });
+    });
+    describe("and not playing", () => {
+      beforeEach(() => {
+        store.dispatch(playDemo(gameId, demo));
+      });
+      test("it steps the demo once", () => {
+        jest.runOnlyPendingTimers();
+        expect(store.getState().demo.demos[gameId]!.frame).toBe(1);
+      });
+      test("it steps again after timeout", () => {
+        jest.runOnlyPendingTimers();
+        jest.runOnlyPendingTimers();
+        expect(store.getState().demo.demos[gameId]!.frame).toBe(2);
       });
     });
   });

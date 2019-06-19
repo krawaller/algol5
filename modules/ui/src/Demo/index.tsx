@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { AlgolDemo } from "../../../types";
 import { GameId } from "../../../games/dist/list";
 import { makeStore } from "../../../redux/store";
-import { AlgolGameDemoState, stopAllDemos } from "../../../redux/slices";
+import {
+  AlgolGameDemoState,
+  stopAllDemos,
+  startDemo,
+  stopDemo,
+  stepDemo,
+} from "../../../redux/slices";
 import { playDemo } from "../../../redux/slices/demo/thunks/playDemo";
 import { Board } from "../Board";
 import dataURIs from "../../../graphics/dist/svgDataURIs";
@@ -18,8 +24,34 @@ export const Demo = (props: DemoProps) => {
   const [gameDemoState, setGameDemoState] = useState<null | AlgolGameDemoState>(
     null
   );
-  useEffect(() => {
+  const {
+    store,
+    handleStart,
+    handleStop,
+    handleStepForward,
+    handleStepBackward,
+  } = useMemo(() => {
     const store = makeStore();
+    const handleStart = () => store.dispatch(startDemo({ gameId }));
+    const handleStop = () => {
+      store.dispatch(stopDemo({ gameId }));
+    };
+    const handleStepForward = () => {
+      store.dispatch(stepDemo({ gameId, force: true }));
+    };
+    const handleStepBackward = () => {
+      store.dispatch(stepDemo({ gameId, force: true, offset: -1 }));
+    };
+    return {
+      store,
+      handleStart,
+      handleStop,
+      handleStepForward,
+      handleStepBackward,
+    };
+  }, [gameId]);
+
+  useEffect(() => {
     store.subscribe(() =>
       setGameDemoState(store.getState().demo.demos[gameId]!)
     );
@@ -29,15 +61,26 @@ export const Demo = (props: DemoProps) => {
     };
   }, [gameId]);
   if (!gameDemoState) return null;
-  console.log(gameDemoState);
+  console.log("Current gameDemoState", gameDemoState);
   return (
-    <Board
-      board={dataURIs[gameId]}
-      marks={[]}
-      potentialMarks={[]}
-      callback={() => {}}
-      units={gameDemoState.positions[gameDemoState.frame]}
-      anim={{ ...emptyAnim, ...gameDemoState.anims[gameDemoState.frame] }}
-    />
+    <React.Fragment>
+      <Board
+        board={dataURIs[gameId]}
+        marks={[]}
+        potentialMarks={[]}
+        callback={() => {}}
+        units={gameDemoState.positions[gameDemoState.frame]}
+        anim={{ ...emptyAnim, ...gameDemoState.anims[gameDemoState.frame] }}
+      />
+      <p>Frame {gameDemoState.frame}</p>
+      <button onClick={handleStart} disabled={gameDemoState.playing}>
+        start
+      </button>
+      <button onClick={handleStop} disabled={!gameDemoState.playing}>
+        stop
+      </button>
+      <button onClick={handleStepForward}>step forward</button>
+      <button onClick={handleStepBackward}>step backward</button>
+    </React.Fragment>
   );
 };

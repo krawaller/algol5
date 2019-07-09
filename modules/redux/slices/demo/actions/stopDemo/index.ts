@@ -9,5 +9,6 @@ export const [stopDemo, isStopDemoAction] = makeCreatorAndGuard<StopDemoAction>(
   "DEMO::STOP_DEMO",
   (draft, { gameId }) => {
     delete draft.demo.demos[gameId]!.playing;
+    delete draft.demo.demos[gameId]!.playId;
   }
 );

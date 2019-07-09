@@ -15,7 +15,9 @@ export const tickDemo = (gameId: GameId, playId: number): TickDemoThunk => {
   return (dispatch, getState) => {
     const demoState = getState().demo.demos[gameId]!;
     if (demoState.playId === playId) {
-      dispatch(stepDemo({ gameId }));
+      if (demoState.playing) {
+        dispatch(stepDemo({ gameId }));
+      }
       setTimeout(() => dispatch(tickDemo(gameId, playId)), demoState.speed);
     }
   };

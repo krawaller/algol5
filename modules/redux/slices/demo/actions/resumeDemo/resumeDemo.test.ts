@@ -1,10 +1,10 @@
-import { stopDemo } from "./";
+import { resumeDemo } from "./";
 import { testCreator } from "../../../../testUtils";
 import { GameId } from "../../../../../games/dist/list";
 
-testCreator(stopDemo, [
+testCreator(resumeDemo, [
   {
-    description: "Stopping a demo sets playing to false and clears playId",
+    description: "Resuming a demo sets playing to true",
     previous: {
       demo: {
         demos: {
@@ -13,7 +13,6 @@ testCreator(stopDemo, [
             anims: {},
             frame: 1,
             inflated: true,
-            playing: true,
             playId: 666,
           },
         },
@@ -30,6 +29,8 @@ testCreator(stopDemo, [
             anims: {},
             frame: 1,
             inflated: true,
+            playId: 666,
+            playing: true,
           },
         },
       },

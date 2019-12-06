@@ -33,7 +33,7 @@ export interface AlgolContentSelect {
 }
 
 export interface AlgolContentPlayer {
-  player: 1 | 2;
+  player: 0 | 1 | 2;
 }
 
 export interface AlgolContentBold {

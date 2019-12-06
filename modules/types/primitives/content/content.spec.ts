@@ -10,5 +10,6 @@ const tests: TestContent[] = [
   { text: "enter passion play" },
   { line: [{ text: "dont go to" }, { pos: "a1" }] },
   { select: "Select" },
-  ["defaultEndTurnInstruction"]
+  ["defaultEndTurnInstruction"],
+  { player: 2 },
 ];

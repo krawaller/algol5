@@ -80,6 +80,8 @@ function executeInstructionInner(
     switch (instr[0]) {
       case "defaultEndTurnInstruction":
         return `defaultInstruction(${player})`;
+      case "otherplayer":
+        return `{ player: ${player === 1 ? 2 : 1} }`;
     }
   }
   if (isAlgolInstrLine(instr)) {

@@ -132,11 +132,16 @@ export const testSuite: AlgolExpressionSuite<
             {
               expr: "queen",
               res: { unittype: ["queen", 1] },
-              desc: "handles icons as string, adding plr"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+              desc: "handles icons as string, adding plr",
+            },
+            {
+              expr: ["otherplayer"],
+              res: { player: 2 },
+              desc: "handles opponent ref",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

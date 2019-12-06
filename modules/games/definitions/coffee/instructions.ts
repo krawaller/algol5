@@ -33,7 +33,9 @@ const coffeeInstructions: CoffeeInstructions = {
           { if: [{ notempty: "horisontal" }, "horisontal"] },
         ],
       },
-      "to give your opponent placing options in that direction",
+      "to give",
+      ["otherplayer"],
+      "placing options in that direction",
     ],
   },
 };

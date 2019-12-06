@@ -588,7 +588,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
               return mem;
             }, [])
         }),
-        { text: "to give your opponent placing options in that direction" }
+        { text: "to give" },
+        { player: 2 },
+        { text: "placing options in that direction" }
       ]
     });
   };
@@ -1169,7 +1171,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
               return mem;
             }, [])
         }),
-        { text: "to give your opponent placing options in that direction" }
+        { text: "to give" },
+        { player: 1 },
+        { text: "placing options in that direction" }
       ]
     });
   };

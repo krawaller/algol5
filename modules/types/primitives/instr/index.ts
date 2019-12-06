@@ -15,7 +15,7 @@ import {
   AlgolInstrPosList,
   AlgolInstrUnitList,
   AlgolInstrUnitTypeSet,
-  AlgolInstrUnitTypePos
+  AlgolInstrUnitTypePos,
 } from "./instr.interfaces";
 
 import { AlgolIfableExpression } from "../../";
@@ -58,6 +58,7 @@ export type AlgolInstrInner<
   | Cmnd
   | Unit
   | ["defaultEndTurnInstruction"]
+  | ["otherplayer"]
   | AlgolInstrVal<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolInstrPluralize<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
   | AlgolInstrPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

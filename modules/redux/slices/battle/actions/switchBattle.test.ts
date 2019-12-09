@@ -1,6 +1,6 @@
-import { switchBattle } from ".";
-import { testCreator } from "../../../../testUtils";
-import { staticAPI } from "../../../../../battle/dist/apis/amazons";
+import { switchBattle } from "./switchBattle";
+import { testCreator } from "../../../testUtils";
+import { staticAPI } from "../../../../battle/dist/apis/amazons";
 
 const battle = staticAPI.newBattle();
 const newBattleId = "NEWBATTLEID";

@@ -1,6 +1,6 @@
-import { updateBattle } from "./";
-import { testCreator } from "../../../../testUtils";
-import { staticAPI } from "../../../../../battle/dist/apis/amazons";
+import { updateBattle } from "./updateBattle";
+import { testCreator } from "../../../testUtils";
+import { staticAPI } from "../../../../battle/dist/apis/amazons";
 
 const prevBattle = staticAPI.newBattle();
 const nextBattle = staticAPI.performAction(prevBattle, "mark", "a7");

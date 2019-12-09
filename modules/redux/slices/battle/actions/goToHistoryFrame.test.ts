@@ -1,6 +1,6 @@
-import { goToHistoryFrame } from ".";
-import { testCreator } from "../../../../testUtils";
-import { staticAPI } from "../../../../../battle/dist/apis/amazons";
+import { goToHistoryFrame } from "./goToHistoryFrame";
+import { testCreator } from "../../../testUtils";
+import { staticAPI } from "../../../../battle/dist/apis/amazons";
 
 const battle = staticAPI.newBattle();
 

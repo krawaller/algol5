@@ -1,6 +1,6 @@
-import { GameId } from "../../../../../games/dist/list";
-import { BattleAction } from "../../types";
-import { makeCreatorAndGuard } from "../../../../utils";
+import { GameId } from "../../../../games/dist/list";
+import { BattleAction } from "../types";
+import { makeCreatorAndGuard } from "../../../utils";
 
 export type SwitchBattlePayload = {
   gameId: GameId;

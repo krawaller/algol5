@@ -1,7 +1,7 @@
-import { registerBattle } from ".";
-import { testCreator } from "../../../../testUtils";
-import { staticAPI } from "../../../../../battle/dist/apis/amazons";
-import { GameId } from "../../../../../games/dist/list";
+import { registerBattle } from "./registerBattle";
+import { testCreator } from "../../../testUtils";
+import { staticAPI } from "../../../../battle/dist/apis/amazons";
+import { GameId } from "../../../../games/dist/list";
 
 const battle = staticAPI.newBattle();
 const newBattleId = "NEWBATTLEID";

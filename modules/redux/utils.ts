@@ -1,14 +1,8 @@
-import {
-  Action,
-  DraftReducer,
-  ActionType,
-  ActionPayload,
-  ActionCreator,
-} from "./types";
+import { Action, DraftReducer, ActionCreator } from "./types";
 import { produce } from "immer";
 
 type FactoryOpts<A extends Action<string, any, any>> = {
-  type: ActionType<A>;
+  type: A["type"];
   reducer: DraftReducer<A>;
 };
 
@@ -20,7 +14,7 @@ export const makeCreatorAndGuard = <A extends Action<string, any, any>>({
     return {
       type,
       payload,
-      reducer: (state, payload: ActionPayload<A>) =>
+      reducer: (state, payload: A["payload"]) =>
         produce(state, draft => reducer(draft, payload)),
     };
   } as ActionCreator<A>;

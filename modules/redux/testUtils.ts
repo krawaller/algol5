@@ -1,11 +1,5 @@
 import { makeStore } from "./store";
-import {
-  AppState,
-  Action,
-  PayloadActionTest,
-  ActionCreator,
-  ActionTest,
-} from "./types";
+import { AppState, Action, ActionCreator, ActionTest } from "./types";
 
 export const buildState = (
   ...actions: Action<string, any, any>[]
@@ -25,9 +19,9 @@ export const testCreator = <A extends Action<string, any, any>>(
   describe(`The ${name} creator`, () => {
     for (const t of tests) {
       test(t.description, () => {
-        const payload = (t as PayloadActionTest<A>).payload;
-        const action = creator(payload);
-        const result = action.reducer(t.previous, payload);
+        const payload = t.payload;
+        const action = creator(payload as any);
+        const result = action.reducer(t.previous, payload as any);
         expect(result).toEqual(t.expected);
       });
     }

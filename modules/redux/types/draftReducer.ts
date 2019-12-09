@@ -1,14 +1,7 @@
 import { Draft } from "immer";
-import { Action, ActionPayload, ActionState } from "./action";
+import { Action, ActionState } from "./action";
 
-type PayloadDraftReducer<State, Payload> = (
-  draft: Draft<State>,
-  payload: Payload
+export type DraftReducer<A extends Action<string, any, any>> = (
+  draft: Draft<ActionState<A>>,
+  payload: A["payload"] extends undefined ? void : A["payload"]
 ) => void;
-type NakedDraftReducer<State> = (draft: Draft<State>) => void;
-
-export type DraftReducer<A extends Action<string, any, any>> = ActionPayload<
-  A
-> extends undefined
-  ? NakedDraftReducer<ActionState<A>>
-  : PayloadDraftReducer<ActionState<A>, ActionPayload<A>>;

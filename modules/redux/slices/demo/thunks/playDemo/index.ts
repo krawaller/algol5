@@ -1,6 +1,6 @@
 import { ThunkAction } from "redux-thunk";
 import { WithAlgolDemoState } from "../../types";
-import { ReducingAction } from "../../../../types";
+import { Action } from "../../../../types";
 import { GameId } from "../../../../../games/dist/list";
 import { AlgolDemo } from "../../../../../types";
 import { initDemo, startDemo, inflateDemo } from "../../actions";
@@ -11,7 +11,7 @@ type PlayDemoThunk = ThunkAction<
   void,
   WithAlgolDemoState,
   undefined,
-  ReducingAction<string, any, any>
+  Action<string, any, any>
 >;
 
 export const playDemo = (gameId: GameId, demo: AlgolDemo): PlayDemoThunk => {

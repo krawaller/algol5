@@ -7,13 +7,13 @@ import { WithAlgolBattleState } from "../../types";
 import { GameId } from "../../../../../games/dist/list";
 
 import { updateBattle } from "../../actions/updateBattle";
-import { ReducingAction } from "../../../../types";
+import { Action } from "../../../../types";
 
 type MakeMoveThunk = ThunkAction<
   void,
   WithAlgolBattleState,
   undefined,
-  ReducingAction<string, any, any>
+  Action<string, any, any>
 >;
 
 export function makeMakeMove(

@@ -1,12 +1,10 @@
-import { ReducingAction, ReducingActionState } from "./types";
+import { Action, ActionState } from "./types";
 import { initialState } from "./initialState";
 
-export const reducer = <A extends ReducingAction<string, any, object>>(
-  state:
-    | ReducingActionState<A>
-    | undefined = (initialState as unknown) as ReducingActionState<A>,
+export const reducer = <A extends Action<string, any, object>>(
+  state: ActionState<A> | undefined = (initialState as unknown) as ActionState<
+    A
+  >,
   { reducer, payload }: A
-): ReducingActionState<A> | undefined =>
-  reducer
-    ? ((reducer(state, payload) as unknown) as ReducingActionState<A>)
-    : state;
+): ActionState<A> | undefined =>
+  reducer ? ((reducer(state, payload) as unknown) as ActionState<A>) : state;

@@ -1,8 +1,8 @@
 import { GameId } from "../../../games/dist/list";
 import { AlgolArmy, AlgolAnimCompiled } from "../../../types";
-import { ReducingAction } from "../../types";
+import { Action } from "../../types";
 
-export type DemoAction<Type extends string, Payload> = ReducingAction<
+export type DemoAction<Type extends string, Payload> = Action<
   Type,
   Payload,
   WithAlgolDemoState

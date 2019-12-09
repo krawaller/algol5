@@ -1,14 +1,14 @@
 import { makeStore } from "./store";
 import {
   AppState,
-  ReducingAction,
-  ReducingPayloadActionTest,
-  ReducingActionCreator,
-  ReducingActionTest,
+  Action,
+  PayloadActionTest,
+  ActionCreator,
+  ActionTest,
 } from "./types";
 
 export const buildState = (
-  ...actions: ReducingAction<string, any, any>[]
+  ...actions: Action<string, any, any>[]
 ): AppState => {
   const store = makeStore();
   for (const action of actions) {
@@ -17,15 +17,15 @@ export const buildState = (
   return store.getState();
 };
 
-export const testCreator = <A extends ReducingAction<string, any, any>>(
-  creator: ReducingActionCreator<A>,
-  tests: ReducingActionTest<A>[]
+export const testCreator = <A extends Action<string, any, any>>(
+  creator: ActionCreator<A>,
+  tests: ActionTest<A>[]
 ) => {
   const name = creator.actionType;
   describe(`The ${name} creator`, () => {
     for (const t of tests) {
       test(t.description, () => {
-        const payload = (t as ReducingPayloadActionTest<A>).payload;
+        const payload = (t as PayloadActionTest<A>).payload;
         const action = creator(payload);
         const result = action.reducer(t.previous, payload);
         expect(result).toEqual(t.expected);

@@ -7,13 +7,13 @@ import { WithAlgolBattleState } from "../../types";
 import { GameId } from "../../../../../games/dist/list";
 
 import { registerBattle } from "../../actions/registerBattle";
-import { ReducingAction } from "../../../../types";
+import { Action } from "../../../../types";
 
 type StartBattleThunk = ThunkAction<
   string,
   WithAlgolBattleState,
   undefined,
-  ReducingAction<string, any, any>
+  Action<string, any, any>
 >;
 
 export function makeStartBattle(game: AlgolGame): () => StartBattleThunk {

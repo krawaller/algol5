@@ -13,7 +13,10 @@ export type GoToHistoryFrameAction = BattleAction<
 >;
 export const [goToHistoryFrame, isGoToHistoryFrameAction] = makeCreatorAndGuard<
   GoToHistoryFrameAction
->("BATTLE::GO_TO_HISTORY_FRAME", (draft, { gameId, historyFrame: frame }) => {
-  const currentGame = draft.battle.games[gameId]!;
-  currentGame.battles[currentGame.currentBattleId!].historyFrame = frame;
+>({
+  type: "BATTLE::GO_TO_HISTORY_FRAME",
+  reducer: (draft, { gameId, historyFrame: frame }) => {
+    const currentGame = draft.battle.games[gameId]!;
+    currentGame.battles[currentGame.currentBattleId!].historyFrame = frame;
+  },
 });

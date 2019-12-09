@@ -13,10 +13,13 @@ export type StartDemoPayload = {
 export type StartDemoAction = DemoAction<"DEMO::START_DEMO", StartDemoPayload>;
 export const [startDemo, isStartDemoAction] = makeCreatorAndGuard<
   StartDemoAction
->("DEMO::START_DEMO", (draft, { gameId, speed, playId }) => {
-  draft.demo.demos[gameId]!.playing = true;
-  if (playId) {
-    draft.demo.demos[gameId]!.playId = playId;
-  }
-  draft.demo.demos[gameId]!.speed = speed || defaultSpeed;
+>({
+  type: "DEMO::START_DEMO",
+  reducer: (draft, { gameId, speed, playId }) => {
+    draft.demo.demos[gameId]!.playing = true;
+    if (playId) {
+      draft.demo.demos[gameId]!.playId = playId;
+    }
+    draft.demo.demos[gameId]!.speed = speed || defaultSpeed;
+  },
 });

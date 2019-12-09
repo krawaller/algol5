@@ -16,13 +16,13 @@ export type UpdateBattleAction = BattleAction<
 >;
 export const [updateBattle, isUpdateBattleAction] = makeCreatorAndGuard<
   UpdateBattleAction
->(
-  "BATTLE::UPDATE_BATTLE",
-  (draft, { gameId, battleId, battle, historyFrame }) => {
+>({
+  type: "BATTLE::UPDATE_BATTLE",
+  reducer: (draft, { gameId, battleId, battle, historyFrame }) => {
     const battleRecord = draft.battle.games[gameId]!.battles[battleId];
     battleRecord.battle = battle;
     if (historyFrame !== undefined) {
       battleRecord.historyFrame = historyFrame;
     }
-  }
-);
+  },
+});

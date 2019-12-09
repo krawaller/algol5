@@ -6,9 +6,11 @@ export type StopDemoPayload = { gameId: GameId };
 
 export type StopDemoAction = DemoAction<"DEMO::STOP_DEMO", StopDemoPayload>;
 export const [stopDemo, isStopDemoAction] = makeCreatorAndGuard<StopDemoAction>(
-  "DEMO::STOP_DEMO",
-  (draft, { gameId }) => {
-    delete draft.demo.demos[gameId]!.playing;
-    delete draft.demo.demos[gameId]!.playId;
+  {
+    type: "DEMO::STOP_DEMO",
+    reducer: (draft, { gameId }) => {
+      delete draft.demo.demos[gameId]!.playing;
+      delete draft.demo.demos[gameId]!.playId;
+    },
   }
 );

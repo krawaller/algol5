@@ -7,10 +7,17 @@ import {
 } from "./types";
 import { produce } from "immer";
 
-export const makeCreatorAndGuard = <A extends ReducingAction<string, any, any>>(
-  type: ReducingActionType<A>,
-  reducer: DraftReducer<A>
-) => {
+type FactoryOpts<A extends ReducingAction<string, any, any>> = {
+  type: ReducingActionType<A>;
+  reducer: DraftReducer<A>;
+};
+
+export const makeCreatorAndGuard = <
+  A extends ReducingAction<string, any, any>
+>({
+  type,
+  reducer,
+}: FactoryOpts<A>) => {
   const creator = function(payload) {
     return {
       type,

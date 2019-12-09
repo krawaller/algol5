@@ -10,13 +10,15 @@ export type StepDemoPayload = {
 
 export type StepDemoAction = DemoAction<"DEMO::STEP_DEMO", StepDemoPayload>;
 export const [stepDemo, isStepDemoAction] = makeCreatorAndGuard<StepDemoAction>(
-  "DEMO::STEP_DEMO",
-  (draft, { gameId, force, offset }) => {
-    let demo = draft.demo.demos[gameId];
-    if (demo!.playing || force) {
-      demo!.frame += offset || 1;
-      demo!.frame =
-        (demo!.frame + demo!.positions.length) % demo!.positions.length;
-    }
+  {
+    type: "DEMO::STEP_DEMO",
+    reducer: (draft, { gameId, force, offset }) => {
+      let demo = draft.demo.demos[gameId];
+      if (demo!.playing || force) {
+        demo!.frame += offset || 1;
+        demo!.frame =
+          (demo!.frame + demo!.positions.length) % demo!.positions.length;
+      }
+    },
   }
 );

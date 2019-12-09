@@ -16,9 +16,9 @@ export type RegisterBattleAction = BattleAction<
 >;
 export const [registerBattle, isRegisterBattleAction] = makeCreatorAndGuard<
   RegisterBattleAction
->(
-  "BATTLE::REGISTER_BATTLE",
-  (draft, { gameId, battleId, battle, activate }) => {
+>({
+  type: "BATTLE::REGISTER_BATTLE",
+  reducer: (draft, { gameId, battleId, battle, activate }) => {
     if (!draft.battle.games[gameId]) {
       draft.battle.games[gameId] = { battles: {} };
     }
@@ -26,5 +26,5 @@ export const [registerBattle, isRegisterBattleAction] = makeCreatorAndGuard<
     if (activate) {
       draft.battle.games[gameId]!.currentBattleId = battleId;
     }
-  }
-);
+  },
+});

@@ -10,6 +10,9 @@ export type SetDemoSpeedAction = DemoAction<
 >;
 export const [setDemoSpeed, isSetDemoSpeedAction] = makeCreatorAndGuard<
   SetDemoSpeedAction
->("DEMO::SET_DEMO_SPEED", (draft, { gameId, speed }) => {
-  draft.demo.demos[gameId]!.speed = speed;
+>({
+  type: "DEMO::SET_DEMO_SPEED",
+  reducer: (draft, { gameId, speed }) => {
+    draft.demo.demos[gameId]!.speed = speed;
+  },
 });

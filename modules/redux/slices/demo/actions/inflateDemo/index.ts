@@ -11,10 +11,13 @@ export type InflateDemoAction = DemoAction<
 >;
 export const [inflateDemo, isInflateDemoAction] = makeCreatorAndGuard<
   InflateDemoAction
->("DEMO::INFLATE_DEMO", (draft, { gameId, positions }) => {
-  const demo = draft.demo.demos[gameId];
-  if (!demo!.inflated) {
-    demo!.positions = positions;
-    demo!.inflated = true;
-  }
+>({
+  type: "DEMO::INFLATE_DEMO",
+  reducer: (draft, { gameId, positions }) => {
+    const demo = draft.demo.demos[gameId];
+    if (!demo!.inflated) {
+      demo!.positions = positions;
+      demo!.inflated = true;
+    }
+  },
 });

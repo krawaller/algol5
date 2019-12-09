@@ -9,8 +9,10 @@ export type ResumeDemoAction = DemoAction<
   ResumeDemoPayload
 >;
 export const [resumeDemo, isResumeDemo] = makeCreatorAndGuard<ResumeDemoAction>(
-  "DEMO::RESUME_DEMO",
-  (draft, { gameId }) => {
-    draft.demo.demos[gameId]!.playing = true;
+  {
+    type: "DEMO::RESUME_DEMO",
+    reducer: (draft, { gameId }) => {
+      draft.demo.demos[gameId]!.playing = true;
+    },
   }
 );

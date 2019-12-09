@@ -86,6 +86,7 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
   };
   game.action.uphill1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -98,6 +99,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.uphill) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectdrop;
+    }
     for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
       .filter(k => k !== MARKS.selectdrop)
       .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
@@ -184,12 +188,14 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.uphill1 = () => defaultInstruction(1);
   game.action.downhill1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -202,6 +208,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.downhill) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectdrop;
+    }
     for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
       .filter(k => k !== MARKS.selectdrop)
       .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
@@ -288,12 +297,14 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.downhill1 = () => defaultInstruction(1);
   game.action.horisontal1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -306,6 +317,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.horisontal) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectdrop;
+    }
     for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
       .filter(k => k !== MARKS.selectdrop)
       .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
@@ -392,12 +406,14 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.horisontal1 = () => defaultInstruction(1);
   game.action.vertical1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -410,6 +426,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.vertical) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectdrop;
+    }
     for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
       .filter(k => k !== MARKS.selectdrop)
       .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
@@ -496,7 +515,8 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.vertical1 = () => defaultInstruction(1);
@@ -669,6 +689,7 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
   };
   game.action.uphill2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -681,6 +702,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.uphill) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectdrop;
+    }
     for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
       .filter(k => k !== MARKS.selectdrop)
       .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
@@ -767,12 +791,14 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.uphill2 = () => defaultInstruction(2);
   game.action.downhill2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -785,6 +811,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.downhill) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectdrop;
+    }
     for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
       .filter(k => k !== MARKS.selectdrop)
       .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
@@ -871,12 +900,14 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.downhill2 = () => defaultInstruction(2);
   game.action.horisontal2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -889,6 +920,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.horisontal) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectdrop;
+    }
     for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
       .filter(k => k !== MARKS.selectdrop)
       .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
@@ -975,12 +1009,14 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.horisontal2 = () => defaultInstruction(2);
   game.action.vertical2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       FOOBAR: step.ARTIFACTS.FOOBAR,
       vertical: step.ARTIFACTS.vertical,
@@ -993,6 +1029,9 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.vertical) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectdrop;
+    }
     for (let LOOPPOS in Object.keys(UNITLAYERS.neutralunits)
       .filter(k => k !== MARKS.selectdrop)
       .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})) {
@@ -1079,7 +1118,8 @@ let game = { gameId: "coffee", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.vertical2 = () => defaultInstruction(2);

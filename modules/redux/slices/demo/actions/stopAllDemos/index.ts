@@ -1,6 +1,6 @@
 import { GameId } from "../../../../../games/dist/list";
 import { DemoAction } from "../../types";
-import { makeCreatorAndGuard } from "../../../../utils";
+import { makeCreatorAndGuard } from "../../../../makeCreatorAndGuard";
 
 export type StopAllDemosAction = DemoAction<"DEMO::STOP_ALL_DEMOS", undefined>;
 export const [stopAllDemos, isStopAllDemosAction] = makeCreatorAndGuard<

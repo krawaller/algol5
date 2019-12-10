@@ -1,6 +1,6 @@
 import { GameId } from "../../../../../games/dist/list";
 import { DemoAction } from "../../types";
-import { makeCreatorAndGuard } from "../../../../utils";
+import { makeCreatorAndGuard } from "../../../../makeCreatorAndGuard";
 import { AlgolDemo } from "../../../../../types";
 
 export type InitDemoPayload = { gameId: GameId; demo: AlgolDemo };

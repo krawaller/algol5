@@ -10,14 +10,14 @@ export const makeCreatorAndGuard = <A extends Action<string, any, any>>({
   type,
   reducer,
 }: FactoryOpts<A>) => {
-  const creator = function(payload) {
+  const creator: ActionCreator<A> = function(payload) {
     return {
       type,
       payload,
       reducer: (state, payload: A["payload"]) =>
         produce(state, draft => reducer(draft, payload)),
     };
-  } as ActionCreator<A>;
+  };
 
   creator.actionType = type;
   const guard = (action: Action<string, any, any>): action is A =>

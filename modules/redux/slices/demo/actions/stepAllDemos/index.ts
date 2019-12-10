@@ -1,5 +1,5 @@
 import { DemoAction } from "../../types";
-import { makeCreatorAndGuard } from "../../../../utils";
+import { makeCreatorAndGuard } from "../../../../makeCreatorAndGuard";
 
 export type StepAllDemosAction = DemoAction<"DEMO::STEP_ALL_DEMOS", undefined>;
 export const [stepAllDemos, isStepAllDemosAction] = makeCreatorAndGuard<

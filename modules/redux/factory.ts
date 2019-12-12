@@ -12,7 +12,7 @@ export const factory = <Payload = void, Type extends string = "UNKNOWN">({
   reducer,
   consequence,
 }: FactoryOpts<Payload, Type>) => {
-  type A = Action<Type, Payload, AppState>;
+  type A = Action<Type, Payload, AppState, AppDeps>;
   const creator = function(payload: Payload) {
     return {
       type,
@@ -24,7 +24,6 @@ export const factory = <Payload = void, Type extends string = "UNKNOWN">({
   };
 
   creator.actionType = type;
-  const guard = (action: AnyAction): action is A =>
-    action.type === (type as string);
+  const guard = (action: any): action is A => action.type === (type as string);
   return [creator, guard] as const;
 };

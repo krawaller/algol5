@@ -12,7 +12,7 @@ export interface Action<
     state: State,
     payload: Payload extends undefined ? void : Payload
   ) => State;
-  consequence?: Consequence<State, Deps>;
+  consequence?: Consequence<State, Deps, Payload, Type>;
   sender?: string;
 }
 

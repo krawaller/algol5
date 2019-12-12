@@ -2,7 +2,7 @@ import { makeStore } from "./store";
 import { AppState, Action, ActionTest } from "./types";
 
 export const buildState = (
-  ...actions: Action<string, any, any>[]
+  ...actions: Action<any, any, any, any>[]
 ): AppState => {
   const store = makeStore();
   for (const action of actions) {
@@ -11,7 +11,7 @@ export const buildState = (
   return store.getState();
 };
 
-export const testCreator = <A extends Action<string, any, any>>(
+export const testCreator = <A extends Action<any, any, any, any>>(
   creator: { actionType: string } & ((p: A["payload"]) => A),
   tests: ActionTest<A>[]
 ) => {

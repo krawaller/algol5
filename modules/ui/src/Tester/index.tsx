@@ -8,8 +8,8 @@ import dataURIs from "../../../graphics/dist/svgDataURIs";
 
 import { makeStore } from "../../../redux/store";
 import {
-  makeMakeMove,
-  makeStartBattle,
+  performMove,
+  initBattle,
   selectCurrentBattleInfo,
 } from "../../../redux/slices";
 import { getBattleUI } from "../../../battle/src/battle";
@@ -24,20 +24,20 @@ export const Tester = (props: TesterProps) => {
   const gameId = game.gameId as GameId;
   const [ui, updateUI] = useState<AlgolBattleUI | null>(null);
   const move = useMemo(() => {
-    const startBattle = makeStartBattle(game);
-    const makeMove = makeMakeMove(game);
     const store = makeStore();
     store.subscribe(() => {
       const battleState = selectCurrentBattleInfo(store.getState(), gameId)!;
-      const newUI = getBattleUI(game, battleState.battle);
-      updateUI(newUI);
+      if (battleState) {
+        const newUI = getBattleUI(game, battleState.battle);
+        updateUI(newUI);
+      }
     });
-    store.dispatch(startBattle());
+    store.dispatch(initBattle({ gameId }));
     return (
       action: "mark" | "command" | "endTurn" | "undo",
       arg: string | undefined
     ) => {
-      store.dispatch(makeMove(action, arg));
+      store.dispatch(performMove({ action, arg, gameId }));
     };
   }, [gameId]);
   if (!ui) return null;

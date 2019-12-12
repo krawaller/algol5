@@ -17,7 +17,7 @@ export type ConsequenceAPI<
   P,
   T extends string
 > = ConsequenceGetterAPI<S, D, P, T> & {
-  dispatch: (action: Action<string, any, S, D>) => void;
+  dispatch: (action: Action<any, any, S, D>) => void;
 };
 
 export type Consequence<
@@ -30,5 +30,5 @@ export type Consequence<
 };
 
 export type ConsequenceGetter<S extends object, D extends object> = (
-  api: ConsequenceGetterAPI<S, D, any, string>
-) => Consequence<S, D, any, string>[];
+  api: ConsequenceGetterAPI<S, D, any, any>
+) => Consequence<S, D, any, any>[];

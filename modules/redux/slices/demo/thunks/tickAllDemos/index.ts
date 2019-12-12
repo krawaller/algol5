@@ -1,13 +1,13 @@
 import { ThunkAction } from "redux-thunk";
 import { WithAlgolDemoState } from "../../types";
-import { Action } from "../../../../types";
+import { Action, AppState, AppDeps } from "../../../../types";
 import { stepAllDemos } from "../../actions";
 
 type TickAllDemosThunk = ThunkAction<
   void,
   WithAlgolDemoState,
   undefined,
-  Action<string, any, any>
+  Action<any, any, AppState, AppDeps>
 >;
 
 export const tickAllDemos = (playId: number): TickAllDemosThunk => {

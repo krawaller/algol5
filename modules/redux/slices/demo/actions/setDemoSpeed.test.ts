@@ -1,6 +1,6 @@
-import { setDemoSpeed } from "./";
-import { testCreator } from "../../../../testUtils";
-import { GameId } from "../../../../../games/dist/list";
+import { setDemoSpeed } from "./setDemoSpeed";
+import { testCreator } from "../../../testUtils";
+import { GameId } from "../../../../games/dist/list";
 
 testCreator(setDemoSpeed, [
   {

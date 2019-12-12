@@ -1,6 +1,6 @@
-import { inflateDemo } from "./";
-import { testCreator } from "../../../../testUtils";
-import { GameId } from "../../../../../games/dist/list";
+import { inflateDemo } from "./inflateDemo";
+import { testCreator } from "../../../testUtils";
+import { GameId } from "../../../../games/dist/list";
 
 testCreator(inflateDemo, [
   {

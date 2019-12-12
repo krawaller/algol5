@@ -1,5 +1,5 @@
-import { GameId } from "../../../../../games/dist/list";
-import { factory } from "../../../../factory";
+import { GameId } from "../../../../games/dist/list";
+import { factory } from "../../../factory";
 
 export const [stopAllDemos, isStopAllDemosAction] = factory({
   type: "DEMO::STOP_ALL_DEMOS",

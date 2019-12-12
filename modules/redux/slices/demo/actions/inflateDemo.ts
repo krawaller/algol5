@@ -1,6 +1,6 @@
-import { GameId } from "../../../../../games/dist/list";
-import { factory } from "../../../../factory";
-import { AlgolArmy } from "../../../../../types";
+import { GameId } from "../../../../games/dist/list";
+import { factory } from "../../../factory";
+import { AlgolArmy } from "../../../../types";
 
 export type InflateDemoPayload = { gameId: GameId; positions: AlgolArmy[] };
 

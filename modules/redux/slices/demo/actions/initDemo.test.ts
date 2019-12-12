@@ -1,7 +1,7 @@
-import { initDemo } from "./";
-import { AlgolDemo } from "../../../../../types";
-import { testCreator } from "../../../../testUtils";
-import { GameId } from "../../../../../games/dist/list";
+import { initDemo } from "./initDemo";
+import { AlgolDemo } from "../../../../types";
+import { testCreator } from "../../../testUtils";
+import { GameId } from "../../../../games/dist/list";
 
 const dummyDemoDef: AlgolDemo = {
   anims: { 0: { exitTo: { a1: "b2" } } },

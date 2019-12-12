@@ -1,6 +1,6 @@
-import { GameId } from "../../../../../games/dist/list";
-import { factory } from "../../../../factory";
-import { AlgolDemo } from "../../../../../types";
+import { GameId } from "../../../../games/dist/list";
+import { factory } from "../../../factory";
+import { AlgolDemo } from "../../../../types";
 
 export type InitDemoPayload = { gameId: GameId; demo: AlgolDemo };
 

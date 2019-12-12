@@ -1,5 +1,5 @@
-import { DemoAction } from "../../types";
-import { factory } from "../../../../factory";
+import { DemoAction } from "../types";
+import { factory } from "../../../factory";
 
 export const [stepAllDemos, isStepAllDemosAction] = factory({
   type: "DEMO::STEP_ALL_DEMOS",

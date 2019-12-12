@@ -1,6 +1,6 @@
-import { stepDemo } from "./";
-import { testCreator } from "../../../../testUtils";
-import { GameId } from "../../../../../games/dist/list";
+import { stepDemo } from "./stepDemo";
+import { testCreator } from "../../../testUtils";
+import { GameId } from "../../../../games/dist/list";
 
 testCreator(stepDemo, [
   {

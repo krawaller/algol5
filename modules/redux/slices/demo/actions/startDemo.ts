@@ -1,7 +1,7 @@
-import { GameId } from "../../../../../games/dist/list";
-import { factory } from "../../../../factory";
+import { GameId } from "../../../../games/dist/list";
+import { factory } from "../../../factory";
 
-import { defaultSpeed } from "../../constants";
+import { defaultSpeed } from "../constants";
 
 export type StartDemoPayload = {
   gameId: GameId;

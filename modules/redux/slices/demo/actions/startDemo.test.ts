@@ -1,7 +1,7 @@
-import { startDemo } from "./";
-import { testCreator } from "../../../../testUtils";
-import { GameId } from "../../../../../games/dist/list";
-import { defaultSpeed } from "../../constants";
+import { startDemo } from "./startDemo";
+import { testCreator } from "../../../testUtils";
+import { GameId } from "../../../../games/dist/list";
+import { defaultSpeed } from "../constants";
 
 testCreator(startDemo, [
   {

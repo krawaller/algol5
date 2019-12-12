@@ -14,7 +14,8 @@ export interface Action<
   sender?: string;
 }
 
-export type ActionState<S> = S extends Action<string, any, infer S> ? S : never;
+export type AnyAction = Action<string, any, any, any>;
+export type ActionState<A> = A extends Action<string, any, infer S> ? S : never;
 export type ActionDeps<A> = A extends Action<string, any, any, infer D>
   ? D
   : never;

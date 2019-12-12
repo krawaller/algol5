@@ -1,6 +1,5 @@
 import { GameId } from "../../../../../games/dist/list";
-import { DemoAction } from "../../types";
-import { makeCreatorAndGuard } from "../../../../makeCreatorAndGuard";
+import { factory } from "../../../../factory";
 
 export type StepDemoPayload = {
   gameId: GameId;
@@ -8,17 +7,14 @@ export type StepDemoPayload = {
   offset?: number;
 };
 
-export type StepDemoAction = DemoAction<"DEMO::STEP_DEMO", StepDemoPayload>;
-export const [stepDemo, isStepDemoAction] = makeCreatorAndGuard<StepDemoAction>(
-  {
-    type: "DEMO::STEP_DEMO",
-    reducer: (draft, { gameId, force, offset }) => {
-      let demo = draft.demo.demos[gameId];
-      if (demo!.playing || force) {
-        demo!.frame += offset || 1;
-        demo!.frame =
-          (demo!.frame + demo!.positions.length) % demo!.positions.length;
-      }
-    },
-  }
-);
+export const [stepDemo, isStepDemoAction] = factory({
+  type: "DEMO::STEP_DEMO",
+  reducer: (draft, { gameId, force, offset }: StepDemoPayload) => {
+    let demo = draft.demo.demos[gameId];
+    if (demo!.playing || force) {
+      demo!.frame += offset || 1;
+      demo!.frame =
+        (demo!.frame + demo!.positions.length) % demo!.positions.length;
+    }
+  },
+});

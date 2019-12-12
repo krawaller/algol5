@@ -1,13 +1,11 @@
 import { GameId } from "../../../../../games/dist/list";
-import { DemoAction } from "../../types";
-import { makeCreatorAndGuard } from "../../../../makeCreatorAndGuard";
+import { factory } from "../../../../factory";
 
 export type PauseDemoPayload = { gameId: GameId };
 
-export type PauseDemoAction = DemoAction<"DEMO::PAUSE_DEMO", PauseDemoPayload>;
-export const [pauseDemo, isPauseDemo] = makeCreatorAndGuard<PauseDemoAction>({
+export const [pauseDemo, isPauseDemo] = factory({
   type: "DEMO::PAUSE_DEMO",
-  reducer: (draft, { gameId }) => {
+  reducer: (draft, { gameId }: PauseDemoPayload) => {
     delete draft.demo.demos[gameId]!.playing;
   },
 });

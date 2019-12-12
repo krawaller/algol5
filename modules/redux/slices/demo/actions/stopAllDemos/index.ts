@@ -1,11 +1,7 @@
 import { GameId } from "../../../../../games/dist/list";
-import { DemoAction } from "../../types";
-import { makeCreatorAndGuard } from "../../../../makeCreatorAndGuard";
+import { factory } from "../../../../factory";
 
-export type StopAllDemosAction = DemoAction<"DEMO::STOP_ALL_DEMOS", undefined>;
-export const [stopAllDemos, isStopAllDemosAction] = makeCreatorAndGuard<
-  StopAllDemosAction
->({
+export const [stopAllDemos, isStopAllDemosAction] = factory({
   type: "DEMO::STOP_ALL_DEMOS",
   reducer: draft => {
     for (const gameId in draft.demo.demos) {

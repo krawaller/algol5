@@ -1,21 +1,14 @@
 import { GameId } from "../../../../games/dist/list";
-import { BattleAction } from "../types";
-import { makeCreatorAndGuard } from "../../../makeCreatorAndGuard";
+import { factory } from "../../../factory";
 
 export type SwitchBattlePayload = {
   gameId: GameId;
   battleId: string;
 };
 
-export type SwitchBattleAction = BattleAction<
-  "BATTLE::SWITCH_BATTLE",
-  SwitchBattlePayload
->;
-export const [switchBattle, isSwitchBattleAction] = makeCreatorAndGuard<
-  SwitchBattleAction
->({
+export const [switchBattle, isSwitchBattleAction] = factory({
   type: "BATTLE::SWITCH_BATTLE",
-  reducer: (draft, { gameId, battleId }) => {
+  reducer: (draft, { gameId, battleId }: SwitchBattlePayload) => {
     draft.battle.games[gameId]!.currentBattleId = battleId;
   },
 });

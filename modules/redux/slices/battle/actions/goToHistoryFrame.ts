@@ -1,21 +1,17 @@
 import { GameId } from "../../../../games/dist/list";
-import { BattleAction } from "../types";
-import { makeCreatorAndGuard } from "../../../makeCreatorAndGuard";
+import { factory } from "../../../factory";
 
 export type GoToHistoryFramePayload = {
   gameId: GameId;
   historyFrame: number;
 };
 
-export type GoToHistoryFrameAction = BattleAction<
-  "BATTLE::GO_TO_HISTORY_FRAME",
-  GoToHistoryFramePayload
->;
-export const [goToHistoryFrame, isGoToHistoryFrameAction] = makeCreatorAndGuard<
-  GoToHistoryFrameAction
->({
+export const [goToHistoryFrame, isGoToHistoryFrameAction] = factory({
   type: "BATTLE::GO_TO_HISTORY_FRAME",
-  reducer: (draft, { gameId, historyFrame: frame }) => {
+  reducer: (
+    draft,
+    { gameId, historyFrame: frame }: GoToHistoryFramePayload
+  ) => {
     const currentGame = draft.battle.games[gameId]!;
     currentGame.battles[currentGame.currentBattleId!].historyFrame = frame;
   },

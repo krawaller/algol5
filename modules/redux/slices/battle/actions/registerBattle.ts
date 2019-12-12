@@ -1,6 +1,5 @@
 import { GameId } from "../../../../games/dist/list";
-import { BattleAction } from "../types";
-import { makeCreatorAndGuard } from "../../../makeCreatorAndGuard";
+import { factory } from "../../../factory";
 import { AlgolBattle } from "../../../../types";
 
 export type RegisterBattlePayload = {
@@ -10,15 +9,12 @@ export type RegisterBattlePayload = {
   activate?: boolean;
 };
 
-export type RegisterBattleAction = BattleAction<
-  "BATTLE::REGISTER_BATTLE",
-  RegisterBattlePayload
->;
-export const [registerBattle, isRegisterBattleAction] = makeCreatorAndGuard<
-  RegisterBattleAction
->({
+export const [registerBattle, isRegisterBattleAction] = factory({
   type: "BATTLE::REGISTER_BATTLE",
-  reducer: (draft, { gameId, battleId, battle, activate }) => {
+  reducer: (
+    draft,
+    { gameId, battleId, battle, activate }: RegisterBattlePayload
+  ) => {
     if (!draft.battle.games[gameId]) {
       draft.battle.games[gameId] = { battles: {} };
     }

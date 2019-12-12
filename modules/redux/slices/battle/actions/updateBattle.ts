@@ -1,6 +1,5 @@
 import { GameId } from "../../../../games/dist/list";
-import { BattleAction } from "../types";
-import { makeCreatorAndGuard } from "../../../makeCreatorAndGuard";
+import { factory } from "../../../factory";
 import { AlgolBattle } from "../../../../types";
 
 export type UpdateBattlePayload = {
@@ -10,15 +9,12 @@ export type UpdateBattlePayload = {
   historyFrame?: number;
 };
 
-export type UpdateBattleAction = BattleAction<
-  "BATTLE::UPDATE_BATTLE",
-  UpdateBattlePayload
->;
-export const [updateBattle, isUpdateBattleAction] = makeCreatorAndGuard<
-  UpdateBattleAction
->({
+export const [updateBattle, isUpdateBattleAction] = factory({
   type: "BATTLE::UPDATE_BATTLE",
-  reducer: (draft, { gameId, battleId, battle, historyFrame }) => {
+  reducer: (
+    draft,
+    { gameId, battleId, battle, historyFrame }: UpdateBattlePayload
+  ) => {
     const battleRecord = draft.battle.games[gameId]!.battles[battleId];
     battleRecord.battle = battle;
     if (historyFrame !== undefined) {

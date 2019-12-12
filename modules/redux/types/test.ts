@@ -2,9 +2,9 @@ import { Action, ActionState } from "./action";
 
 export type ActionTest<A extends Action<string, any, any>> = {
   description: string;
-  previous: ActionState<A>;
-  expected: ActionState<A>;
-} & (A["payload"] extends undefined
+  previous: Partial<ActionState<A>>;
+  expected: Partial<ActionState<A>>;
+} & (A["payload"] extends void
   ? {
       payload?: undefined;
     }

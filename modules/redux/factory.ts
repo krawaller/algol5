@@ -6,13 +6,12 @@ type FactoryOpts<Payload, T> = {
   reducer: (draft: Draft<AppState>, payload: Payload) => void | AppState;
 };
 
-export const factory = <Payload, Type extends string>({
+export const factory = <Payload = void, Type extends string = "UNKNOWN">({
   type,
   reducer,
 }: FactoryOpts<Payload, Type>) => {
-  type P = Payload extends unknown ? void : Payload;
-  type A = Action<Type, P, AppState>;
-  const creator = function(payload: P) {
+  type A = Action<Type, Payload, AppState>;
+  const creator = function(payload: Payload) {
     return {
       type,
       payload,

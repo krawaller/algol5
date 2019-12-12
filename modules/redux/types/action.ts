@@ -1,4 +1,3 @@
-import { Reducer } from "./reducer";
 import { Consequence } from "./consequence";
 
 export interface Action<
@@ -9,7 +8,10 @@ export interface Action<
 > {
   type: Type;
   payload: Payload;
-  reducer: Reducer<State, Payload>;
+  reducer: (
+    state: State,
+    payload: Payload extends undefined ? void : Payload
+  ) => State;
   consequence?: Consequence<State, Deps>;
   sender?: string;
 }

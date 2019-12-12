@@ -1,5 +1,5 @@
 import { makeStore } from "./store";
-import { AppState, Action, ActionCreator, ActionTest } from "./types";
+import { AppState, Action, ActionTest } from "./types";
 
 export const buildState = (
   ...actions: Action<string, any, any>[]
@@ -12,7 +12,7 @@ export const buildState = (
 };
 
 export const testCreator = <A extends Action<string, any, any>>(
-  creator: ActionCreator<A>,
+  creator: { actionType: string } & ((p: A["payload"]) => A),
   tests: ActionTest<A>[]
 ) => {
   const name = creator.actionType;

@@ -1,18 +1,33 @@
-import { createStore, applyMiddleware, Reducer } from "redux";
+import { createStore, applyMiddleware, Reducer, compose } from "redux";
 import thunk from "redux-thunk";
 import { createConsequenceMiddleware } from "./consequenceMiddleware";
 import { reducer } from "./reducer";
 import { initialState } from "./initialState";
-import { AppState } from "./types";
+import { AppState, AppDeps, ConsequenceGetter } from "./types";
+
+import { makeStaticGameAPI } from "../battle/src/";
+import games from "../logic/dist";
+
+const appDeps: AppDeps = {
+  getGameAPI: gameId => Promise.resolve(makeStaticGameAPI(games[gameId])),
+};
+
+const consGetter: ConsequenceGetter<AppState, AppDeps> = ({ action }) =>
+  action.consequence ? [action.consequence] : [];
 
 export const makeStore = () => {
-  const consMdl = createConsequenceMiddleware(
-    ({ action }) => (action.consequence ? [action.consequence] : []),
-    {}
+  const consMdl = createConsequenceMiddleware<AppState, AppDeps>(
+    consGetter,
+    appDeps
   );
+  const enhancers = [applyMiddleware(thunk, consMdl)];
+  const devToolsExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__;
+  if (typeof devToolsExtension === "function") {
+    enhancers.push(devToolsExtension());
+  }
   return createStore(
     reducer as Reducer<AppState, any>,
     initialState,
-    applyMiddleware(thunk, consMdl)
+    compose(...enhancers)
   );
 };

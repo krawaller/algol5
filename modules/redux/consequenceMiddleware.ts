@@ -6,7 +6,8 @@ export const createConsequenceMiddleware = <S extends object, D extends object>(
   deps: D
 ): Middleware => ({ dispatch, getState }) => next => action => {
   next(action);
-  for (const cons of consGetter({ action, getState, deps })) {
+  const consequences = consGetter({ action, getState, deps });
+  for (const cons of consequences) {
     cons({
       action,
       getState,

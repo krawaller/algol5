@@ -144,7 +144,7 @@ let game = { gameId: "uglyduck", action: {}, instruction: {} };
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
-            .concat(Object.keys(TERRAIN.homerow))
+            .concat(Object.keys(TERRAIN.myhomerow))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
@@ -462,7 +462,7 @@ let game = { gameId: "uglyduck", action: {}, instruction: {} };
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
-            .concat(Object.keys(TERRAIN.homerow))
+            .concat(Object.keys(TERRAIN.myhomerow))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)

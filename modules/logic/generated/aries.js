@@ -284,7 +284,8 @@ let game = { gameId: "aries", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      BATTLEVARS: step.BATTLEVARS
+      BATTLEVARS: step.BATTLEVARS,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget1 = step => {
@@ -614,7 +615,8 @@ let game = { gameId: "aries", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      BATTLEVARS: step.BATTLEVARS
+      BATTLEVARS: step.BATTLEVARS,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget2 = step => {

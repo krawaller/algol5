@@ -122,8 +122,8 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
             ? 1
             : Object.keys(UNITLAYERS.oppunits).length ===
               Object.keys(UNITLAYERS.myunits).length
-            ? 2
-            : 0;
+            ? 0
+            : 2;
         LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
         LINKS.endedBy = "boardfull";
       } else {
@@ -162,6 +162,7 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
   };
   game.action.expand1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -173,6 +174,12 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.spawns) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectunit;
+    }
+    if (UNITLAYERS.units[MARKS.selecttarget]) {
+      anim.ghosts.push([MARKS.selectunit, MARKS.selecttarget, "pawn", 1]);
+    }
     for (let LOOPPOS in ARTIFACTS.spawns) {
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
@@ -220,8 +227,8 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
           ? 1
           : Object.keys(UNITLAYERS.oppunits).length ===
             Object.keys(UNITLAYERS.myunits).length
-          ? 2
-          : 0;
+          ? 0
+          : 2;
       LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "boardfull";
     } else {
@@ -234,7 +241,8 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.expand1 = () => defaultInstruction(1);
@@ -553,8 +561,8 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
             ? 2
             : Object.keys(UNITLAYERS.oppunits).length ===
               Object.keys(UNITLAYERS.myunits).length
-            ? 1
-            : 0;
+            ? 0
+            : 1;
         LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
         LINKS.endedBy = "boardfull";
       } else {
@@ -593,6 +601,7 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
   };
   game.action.expand2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       spawndirs: step.ARTIFACTS.spawndirs,
       growstarts: step.ARTIFACTS.growstarts,
@@ -604,6 +613,12 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.spawns) {
+      anim.enterFrom[LOOPPOS] = MARKS.selectunit;
+    }
+    if (UNITLAYERS.units[MARKS.selecttarget]) {
+      anim.ghosts.push([MARKS.selectunit, MARKS.selecttarget, "pawn", 2]);
+    }
     for (let LOOPPOS in ARTIFACTS.spawns) {
       {
         let newunitid = "spawn" + NEXTSPAWNID++;
@@ -651,8 +666,8 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
           ? 2
           : Object.keys(UNITLAYERS.oppunits).length ===
             Object.keys(UNITLAYERS.myunits).length
-          ? 1
-          : 0;
+          ? 0
+          : 1;
       LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
       LINKS.endedBy = "boardfull";
     } else {
@@ -665,7 +680,8 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.expand2 = () => defaultInstruction(2);

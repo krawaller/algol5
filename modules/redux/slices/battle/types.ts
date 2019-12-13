@@ -9,7 +9,7 @@ export type BattleAction<Type extends string, Payload> = Action<
 >;
 
 export type AlgolBattleState = {
-  games: Partial<{ [idx in GameId]: AlgolGameBattleState }>;
+  games: Partial<Record<GameId, AlgolGameBattleState>>;
 };
 
 export type AlgolBattleInfo = {
@@ -18,9 +18,7 @@ export type AlgolBattleInfo = {
 };
 
 export type AlgolGameBattleState = {
-  battles: {
-    [id: string]: AlgolBattleInfo;
-  };
+  battles: Record<string, AlgolBattleInfo>;
   currentBattleId?: string;
 };
 

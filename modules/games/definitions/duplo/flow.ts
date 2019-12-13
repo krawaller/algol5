@@ -1,4 +1,4 @@
-import { DuploFlow } from './_types';
+import { DuploFlow } from "./_types";
 
 const duploFlow: DuploFlow = {
   canalwaysend: { deploy: true },
@@ -12,8 +12,8 @@ const duploFlow: DuploFlow = {
           {
             ifelse: [
               { same: [{ sizeof: "oppunits" }, { sizeof: "myunits" }] },
-              ["otherplayer"],
               0,
+              ["otherplayer"],
             ],
           },
         ],

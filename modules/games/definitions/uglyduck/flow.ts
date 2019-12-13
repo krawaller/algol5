@@ -1,10 +1,10 @@
-import { UglyduckFlow } from './_types';
+import { UglyduckFlow } from "./_types";
 
 const uglyduckFlow: UglyduckFlow = {
   startTurn: { link: "selectunit" },
   endGame: {
     swanhome: {
-      condition: { overlaps: ["mykings", "homerow"] },
+      condition: { overlaps: ["mykings", "myhomerow"] },
       show: { intersect: ["mykings", "myhomerow"] },
     },
   },

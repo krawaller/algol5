@@ -4,13 +4,7 @@ import { createConsequenceMiddleware } from "./consequenceMiddleware";
 import { reducer } from "./reducer";
 import { initialState } from "./initialState";
 import { AppState, AppDeps, ConsequenceGetter } from "./types";
-
-import { makeStaticGameAPI } from "../battle/src/";
-import games from "../logic/dist";
-
-const appDeps: AppDeps = {
-  getGameAPI: gameId => Promise.resolve(makeStaticGameAPI(games[gameId])),
-};
+import { appDeps } from "./appDeps";
 
 const consGetter: ConsequenceGetter<AppState, AppDeps> = ({ action }) =>
   action.consequence ? [action.consequence] : [];

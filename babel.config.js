@@ -9,5 +9,13 @@ module.exports = {
     "@babel/proposal-class-properties",
     // { ...spread }
     "@babel/proposal-object-rest-spread",
+
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        helpers: false,
+        regenerator: true,
+      },
+    ],
   ],
 };

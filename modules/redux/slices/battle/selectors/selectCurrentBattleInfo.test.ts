@@ -2,36 +2,39 @@ import { selectCurrentBattleInfo } from "./selectCurrentBattleInfo";
 
 import amazons from "../../../../logic/dist/indiv/amazons";
 import { makeStaticGameAPI } from "../../../../battle/src";
-import {
-  WithAlgolBattleState,
-  AlgolGameBattleState,
-  AlgolBattleInfo,
-} from "../types";
+import { AlgolBattleInfo } from "../types";
+import { AppState } from "../../../types";
+import { GameId } from "../../../../games/dist/list";
+import { initialGamesState } from "../../games";
+import { initialState } from "../../../initialState";
 
 const amazonsAPI = makeStaticGameAPI(amazons);
 
 describe("the currentBattle selector", () => {
   describe("when there is a battle", () => {
     const battle = amazonsAPI.newBattle();
-    const id = "SOME ID";
+    const gameId: GameId = "amazons";
+    const battleId = "SOME ID";
     const battleInfo: AlgolBattleInfo = {
       battle,
+      gameId,
       historyFrame: 0,
     };
-    const state: WithAlgolBattleState = {
-      battle: {
-        games: {
-          amazons: {
-            currentBattleId: id,
-            battles: {
-              [id]: battleInfo,
-            },
-          },
+    const state: AppState = {
+      ...initialState,
+      games: {
+        ...initialGamesState,
+        [gameId]: {
+          ...initialGamesState[gameId],
+          currentBattleId: battleId,
         },
+      },
+      battles: {
+        [battleId]: battleInfo,
       },
     };
     test("we get the correct battleinfo", () => {
-      expect(selectCurrentBattleInfo(state, "amazons")).toEqual(battleInfo);
+      expect(selectCurrentBattleInfo(state, gameId)).toEqual(battleInfo);
     });
   });
 });

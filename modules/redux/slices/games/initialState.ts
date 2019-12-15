@@ -1,4 +1,4 @@
-import { GameId, list } from "../../../games/dist/list";
+import { list } from "../../../games/dist/list";
 import { AlgolGamesState } from "./types";
 
 export const initialGamesState: AlgolGamesState = list.reduce(

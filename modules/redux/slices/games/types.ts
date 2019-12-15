@@ -4,6 +4,7 @@ export type AlgolGameState = {
   loaded: boolean;
   loading: boolean;
   error?: string;
+  currentBattleId?: string;
 };
 
 export type AlgolGamesState = Record<GameId, AlgolGameState>;

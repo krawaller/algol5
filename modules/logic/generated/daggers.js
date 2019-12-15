@@ -256,7 +256,11 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { selectunit: step.MARKS.selectunit, selectmovetarget: newMarkPos }
+      MARKS: {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: newMarkPos
+      },
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget1 = step => {
@@ -579,7 +583,11 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
       UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
-      MARKS: { selectunit: step.MARKS.selectunit, selectmovetarget: newMarkPos }
+      MARKS: {
+        selectunit: step.MARKS.selectunit,
+        selectmovetarget: newMarkPos
+      },
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmovetarget2 = step => {

@@ -15,12 +15,9 @@ export const [registerBattle, isRegisterBattleAction] = factory({
     draft,
     { gameId, battleId, battle, activate }: RegisterBattlePayload
   ) => {
-    if (!draft.battle.games[gameId]) {
-      draft.battle.games[gameId] = { battles: {} };
-    }
-    draft.battle.games[gameId]!.battles[battleId] = { battle, historyFrame: 0 };
+    draft.battles[battleId] = { battle, historyFrame: 0, gameId };
     if (activate) {
-      draft.battle.games[gameId]!.currentBattleId = battleId;
+      draft.games[gameId]!.currentBattleId = battleId;
     }
   },
 });

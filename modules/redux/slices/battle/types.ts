@@ -1,6 +1,6 @@
-import { GameId } from "../../../games/dist/list";
 import { AlgolBattle } from "../../../types";
 import { Action } from "../../types";
+import { GameId } from "../../../games/dist/list";
 
 export type BattleAction<Type extends string, Payload> = Action<
   Type,
@@ -8,20 +8,12 @@ export type BattleAction<Type extends string, Payload> = Action<
   WithAlgolBattleState
 >;
 
-export type AlgolBattleState = {
-  games: Partial<Record<GameId, AlgolGameBattleState>>;
-};
-
 export type AlgolBattleInfo = {
   battle: AlgolBattle;
   historyFrame: number;
-};
-
-export type AlgolGameBattleState = {
-  battles: Record<string, AlgolBattleInfo>;
-  currentBattleId?: string;
+  gameId: GameId;
 };
 
 export interface WithAlgolBattleState {
-  battle: AlgolBattleState;
+  battles: Record<string, AlgolBattleInfo>;
 }

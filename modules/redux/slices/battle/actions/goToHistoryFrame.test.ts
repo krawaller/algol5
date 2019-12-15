@@ -1,43 +1,33 @@
 import { goToHistoryFrame } from "./goToHistoryFrame";
 import { testCreator } from "../../../testUtils";
 import { staticAPI } from "../../../../battle/dist/apis/amazons";
+import { GameId } from "../../../../games/dist/list";
 
+const gameId: GameId = "amazons";
 const battle = staticAPI.newBattle();
 
 testCreator(goToHistoryFrame, [
   {
-    description: "switching battle will change to the new one",
+    description: "we can switch history frame in a battle",
     previous: {
-      battle: {
-        games: {
-          amazons: {
-            battles: {
-              foo: {
-                battle,
-                historyFrame: 0,
-              },
-            },
-            currentBattleId: "foo",
-          },
+      battles: {
+        foo: {
+          battle,
+          historyFrame: 0,
+          gameId,
         },
       },
     },
     payload: {
-      gameId: "amazons",
+      battleId: "foo",
       historyFrame: 3,
     },
     expected: {
-      battle: {
-        games: {
-          amazons: {
-            battles: {
-              foo: {
-                battle,
-                historyFrame: 3,
-              },
-            },
-            currentBattleId: "foo",
-          },
+      battles: {
+        foo: {
+          battle,
+          historyFrame: 3,
+          gameId,
         },
       },
     },

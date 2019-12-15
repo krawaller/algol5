@@ -9,8 +9,9 @@ export type InitBattlePayload = {
 export const [initBattle, isInitBattleAction] = factory({
   type: "BATTLE::INIT_BATTLE",
   reducer: (draft, { gameId }: InitBattlePayload) => {},
-  consequence: async ({ dispatch, deps, action }) => {
-    const api = await deps.getGameAPI(action.payload.gameId);
+  consequence: ({ dispatch, deps, action }) => {
+    const { gameId } = action.payload;
+    const { api } = deps.loadedGames[gameId]!;
     const battleId = Math.random().toString(); // TODO - better?
     dispatch(
       registerBattle({

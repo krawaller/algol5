@@ -2,44 +2,38 @@ import { registerBattle } from "./registerBattle";
 import { testCreator } from "../../../testUtils";
 import { staticAPI } from "../../../../battle/dist/apis/amazons";
 import { GameId } from "../../../../games/dist/list";
+import { initialGamesState } from "../../games/initialState";
 
 const battle = staticAPI.newBattle();
 const newBattleId = "NEWBATTLEID";
+const gameId: GameId = "amazons";
 
 testCreator(registerBattle, [
   {
     description: "starting a new battle will add it to the state",
     previous: {
-      battle: {
-        games: {},
-      },
+      battles: {},
     },
     payload: {
-      gameId: "amazons" as GameId,
+      gameId,
       battleId: newBattleId,
       battle,
     },
     expected: {
-      battle: {
-        games: {
-          amazons: {
-            battles: {
-              [newBattleId]: {
-                battle,
-                historyFrame: 0,
-              },
-            },
-          },
+      battles: {
+        [newBattleId]: {
+          battle,
+          historyFrame: 0,
+          gameId,
         },
       },
     },
   },
   {
-    description: "activating will also set it as active battle",
+    description: "activating will also set it as active battle for that game",
     previous: {
-      battle: {
-        games: {},
-      },
+      battles: {},
+      games: initialGamesState,
     },
     payload: {
       gameId: "amazons" as GameId,
@@ -48,17 +42,18 @@ testCreator(registerBattle, [
       activate: true,
     },
     expected: {
-      battle: {
-        games: {
-          amazons: {
-            battles: {
-              [newBattleId]: {
-                battle,
-                historyFrame: 0,
-              },
-            },
-            currentBattleId: newBattleId,
-          },
+      battles: {
+        [newBattleId]: {
+          battle,
+          historyFrame: 0,
+          gameId,
+        },
+      },
+      games: {
+        ...initialGamesState,
+        [gameId]: {
+          ...initialGamesState[gameId],
+          currentBattleId: newBattleId,
         },
       },
     },

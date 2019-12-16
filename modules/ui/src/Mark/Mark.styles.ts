@@ -38,4 +38,5 @@ export const pulsateCSS = glitz.injectStyle({
 export const markCSS = glitz.injectStyle({
   cursor: "pointer",
   backgroundImage: `url("data:image/svg+xml;utf8,${svg}")`,
+  backgroundRepeat: "no-repeat",
 });

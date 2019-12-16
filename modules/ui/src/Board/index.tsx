@@ -3,7 +3,7 @@ import * as React from "react";
 import {
   AlgolUnitState,
   AlgolPosition,
-  AlgolAnimCompiled
+  AlgolAnimCompiled,
 } from "../../../types";
 import { emptyAnim } from "../../../common";
 
@@ -26,16 +26,17 @@ export const Board: React.FunctionComponent<BoardProps> = ({
   potentialMarks,
   units,
   callback,
-  anim = emptyAnim
+  anim = emptyAnim,
 }) => {
   const { dataURI, height, width } = board;
   return (
     <div
       style={{
         background: `url("${dataURI}")`,
+        backgroundRepeat: "no-repeat",
         // maintain aspect ratio of board by exploiting that % in padding-top/bottom refers to width
         paddingTop: `${((height + 1) / (width + 1)) * 100}%`,
-        position: "relative"
+        position: "relative",
       }}
     >
       <div

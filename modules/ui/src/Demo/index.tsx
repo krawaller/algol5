@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, memo } from "react";
 import { AlgolDemo } from "../../../types";
 import { GameId } from "../../../games/dist/list";
 import { makeStore } from "../../../redux/store";
@@ -18,7 +18,10 @@ type DemoProps = {
   demo: AlgolDemo;
 };
 
-export const Demo = (props: DemoProps) => {
+const noop = () => {};
+const EMPTYARR = (Object.freeze([]) as unknown) as any[];
+
+export const Demo = memo((props: DemoProps) => {
   const { gameId, demo } = props;
   const [gameDemoState, setGameDemoState] = useState<null | AlgolGameDemoState>(
     null
@@ -60,14 +63,13 @@ export const Demo = (props: DemoProps) => {
     };
   }, [gameId]);
   if (!gameDemoState) return null;
-  console.log("Current gameDemoState", gameDemoState);
   return (
     <React.Fragment>
       <Board
         board={dataURIs[gameId]}
-        marks={[]}
-        potentialMarks={[]}
-        callback={() => {}}
+        marks={EMPTYARR}
+        potentialMarks={EMPTYARR}
+        callback={noop}
         units={gameDemoState.positions[gameDemoState.frame]}
         anim={{ ...emptyAnim, ...gameDemoState.anims[gameDemoState.frame] }}
       />
@@ -82,4 +84,4 @@ export const Demo = (props: DemoProps) => {
       <button onClick={handleStepBackward}>step backward</button>
     </React.Fragment>
   );
-};
+});

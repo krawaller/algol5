@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { memo } from "react";
 
 import {
   AlgolUnitState,
@@ -20,48 +20,48 @@ type BoardProps = {
   anim?: AlgolAnimCompiled;
 };
 
-export const Board: React.FunctionComponent<BoardProps> = ({
-  board,
-  marks,
-  potentialMarks,
-  units,
-  callback,
-  anim = emptyAnim,
-}) => {
-  const { dataURI, height, width } = board;
-  return (
-    <div
-      style={{
-        background: `url("${dataURI}")`,
-        backgroundRepeat: "no-repeat",
-        // maintain aspect ratio of board by exploiting that % in padding-top/bottom refers to width
-        paddingTop: `${((height + 1) / (width + 1)) * 100}%`,
-        position: "relative",
-      }}
-    >
+export const Board: React.FunctionComponent<BoardProps> = memo(
+  ({ board, marks, potentialMarks, units, callback, anim = emptyAnim }) => {
+    const { dataURI, height, width } = board;
+    return (
       <div
-        style={{ position: "absolute", top: 0, width: "100%", height: "100%" }}
+        style={{
+          background: `url("${dataURI}")`,
+          backgroundRepeat: "no-repeat",
+          // maintain aspect ratio of board by exploiting that % in padding-top/bottom refers to width
+          paddingTop: `${((height + 1) / (width + 1)) * 100}%`,
+          position: "relative",
+        }}
       >
-        <BoardMarks
-          callback={callback}
-          width={width}
-          height={height}
-          marks={marks}
-          potentialMarks={potentialMarks}
-          units={units}
-        />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <BoardMarks
+            callback={callback}
+            width={width}
+            height={height}
+            marks={marks}
+            potentialMarks={potentialMarks}
+            units={units}
+          />
 
-        <BoardUnits
-          width={width}
-          height={height}
-          marks={marks}
-          potentialMarks={potentialMarks}
-          units={units}
-          anim={anim}
-        />
+          <BoardUnits
+            width={width}
+            height={height}
+            marks={marks}
+            potentialMarks={potentialMarks}
+            units={units}
+            anim={anim}
+          />
 
-        <BoardGhosts width={width} height={height} ghosts={anim.ghosts} />
+          <BoardGhosts width={width} height={height} ghosts={anim.ghosts} />
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);

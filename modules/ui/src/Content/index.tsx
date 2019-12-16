@@ -46,8 +46,8 @@ export const Content: React.FunctionComponent<ContentProps> = ({
           // whiteSpace: "pre-wrap"
         }}
       >
-        {content.line.map((c, n) => (
-          <Content key={n} content={c} callback={callback} />
+        {content.line.map(c => (
+          <Content key={Math.random()} content={c} callback={callback} />
         ))}
       </div>
     );

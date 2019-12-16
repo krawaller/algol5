@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { AlgolBattleUI, AlgolGame } from "../../../types";
 
 import { Board } from "../Board";
@@ -9,7 +9,7 @@ import dataURIs from "../../../graphics/dist/svgDataURIs";
 import { makeStore } from "../../../redux/store";
 import {
   performMove,
-  initBattle,
+  sideloadGame,
   selectCurrentBattleInfo,
 } from "../../../redux/slices";
 import { getBattleUI } from "../../../battle/src/battle";
@@ -32,12 +32,13 @@ export const Tester = (props: TesterProps) => {
         updateUI(newUI);
       }
     });
-    store.dispatch(initBattle({ gameId }));
+    store.dispatch(sideloadGame({ gameId, game, startNewBattle: true }));
     return (
       action: "mark" | "command" | "endTurn" | "undo",
       arg: string | undefined
     ) => {
-      store.dispatch(performMove({ action, arg, gameId }));
+      const battleId = store.getState().games[gameId].currentBattleId!;
+      store.dispatch(performMove({ action, arg, battleId }));
     };
   }, [gameId]);
   if (!ui) return null;

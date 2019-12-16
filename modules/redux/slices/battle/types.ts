@@ -14,6 +14,8 @@ export type AlgolBattleInfo = {
   gameId: GameId;
 };
 
+export type AlgolBattleState = Record<string, AlgolBattleInfo>;
+
 export interface WithAlgolBattleState {
-  battles: Record<string, AlgolBattleInfo>;
+  battles: AlgolBattleState;
 }

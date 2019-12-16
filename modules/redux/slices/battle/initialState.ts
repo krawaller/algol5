@@ -1,5 +1,3 @@
 import { AlgolBattleState } from "./types";
 
-export const initialBattleState: AlgolBattleState = {
-  games: {},
-};
+export const initialBattleState: AlgolBattleState = {};

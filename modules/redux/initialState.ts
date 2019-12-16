@@ -7,7 +7,7 @@ import {
 } from "./slices";
 
 export const initialState: AppState = {
-  battle: initialBattleState,
+  battles: initialBattleState,
   demo: initialDemoState,
   games: initialGamesState,
 };

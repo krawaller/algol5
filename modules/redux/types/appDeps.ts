@@ -8,5 +8,6 @@ export type AppDeps = {
   loadedGames: Partial<
     Record<GameId, { game: AlgolGame; api: AlgolStaticGameAPI }>
   >;
+  sideloadGame: (gameId: GameId, game: AlgolGame) => void;
   getGameAPI: (gameId: GameId) => Promise<AlgolStaticGameAPI>;
 };

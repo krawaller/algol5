@@ -14,7 +14,7 @@ export const [loadGameInit, isLoadGameInitAction] = factory({
     draft.games[gameId].loaded = false;
     delete draft.games[gameId].error;
   },
-  consequence: async ({ dispatch, deps, action, getState }) => {
+  consequence: ({ dispatch, deps, action, getState }) => {
     const { gameId } = action.payload;
     const { games } = getState();
     // load already in progress

@@ -1,7 +1,6 @@
 import { AlgolBattleInfo } from "../types";
 import { AppState } from "../../../types";
 import { GameId } from "../../../../games/dist/list";
-import { selectGameBattles } from "./selectGameBattles";
 
 // TODO - make it cached
 export const selectCurrentBattleInfo = (
@@ -9,5 +8,5 @@ export const selectCurrentBattleInfo = (
   gameId: GameId
 ): AlgolBattleInfo | null => {
   const game = state.games[gameId];
-  return state.battles[game.currentBattleId!] || null;
+  return (game && state.battles[game.currentBattleId!]) || null;
 };

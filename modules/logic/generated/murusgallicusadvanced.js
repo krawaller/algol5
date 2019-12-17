@@ -636,7 +636,8 @@ let game = { gameId: "murusgallicusadvanced", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmove1 = step => {
@@ -769,7 +770,8 @@ let game = { gameId: "murusgallicusadvanced", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectcrush1 = step => {
@@ -915,7 +917,8 @@ let game = { gameId: "murusgallicusadvanced", action: {}, instruction: {} };
         selectcatapult: step.MARKS.selectcatapult,
         selectfire: newMarkPos
       },
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectfire1 = step => {
@@ -1622,7 +1625,8 @@ let game = { gameId: "murusgallicusadvanced", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectmove2 = step => {
@@ -1755,7 +1759,8 @@ let game = { gameId: "murusgallicusadvanced", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectcrush2 = step => {
@@ -1901,7 +1906,8 @@ let game = { gameId: "murusgallicusadvanced", action: {}, instruction: {} };
         selectcatapult: step.MARKS.selectcatapult,
         selectfire: newMarkPos
       },
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectfire2 = step => {

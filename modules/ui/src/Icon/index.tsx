@@ -49,34 +49,39 @@ export const Icon: React.FunctionComponent<IconProps> = ({
           key={icon}
           timeout={{ enter: 20, exit: iconInnerTransitionDuration }}
         >
-          {(status: TransitionStatus) => (
-            <svg
-              viewBox="0 150 300 300"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{
-                ...iconInnerBasic,
-                ...(status === "exiting" && iconInnerDuringExit),
-                ...(status === "entering" && iconInnerDuringEnter),
-              }}
-            >
-              <g>
-                <path
-                  d={solids[icon]}
-                  style={{
-                    fill: fills[owner],
-                    transition: "fill 0.6s ease, stroke 0.6s ease",
-                  }}
-                />
-                <path
-                  d={hollows[icon]}
-                  style={{
-                    fill: strokes[owner],
-                    transition: "fill 0.6s ease, stroke 0.6s ease",
-                  }}
-                />
-              </g>
-            </svg>
-          )}
+          {(status: TransitionStatus) => {
+            if (status === "exited") {
+              return null;
+            }
+            return (
+              <svg
+                viewBox="0 150 300 300"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  ...iconInnerBasic,
+                  ...(status === "exiting" && iconInnerDuringExit),
+                  ...(status === "entering" && iconInnerDuringEnter),
+                }}
+              >
+                <g>
+                  <path
+                    d={solids[icon]}
+                    style={{
+                      fill: fills[owner],
+                      transition: "fill 0.6s ease, stroke 0.6s ease",
+                    }}
+                  />
+                  <path
+                    d={hollows[icon]}
+                    style={{
+                      fill: strokes[owner],
+                      transition: "fill 0.6s ease, stroke 0.6s ease",
+                    }}
+                  />
+                </g>
+              </svg>
+            );
+          }}
         </Transition>
       </TransitionGroup>
     </div>

@@ -38,7 +38,11 @@ export class BoardGhosts extends React.Component<BoardGhostsProps> {
             {...otherProps}
           >
             {(transition: TransitionStatus) => {
-              const posToShow = transition === "entering" ? ghostFrom : ghostTo;
+                if (transition === "exited") {
+                  return null;
+                }
+                const posToShow =
+                  transition === "entering" ? ghostFrom : ghostTo;
               return (
                 <Piece
                   animating={"ghost"}

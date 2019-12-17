@@ -47,50 +47,52 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
           }) /* to ensure exiting comps get fresh anim */
       }
     >
-      {Object.keys(units)
-        .map(id => units[id])
-        .map(({ icon, owner, pos, id }) => (
-          <Transition
-            key={id}
-            timeout={{ enter: 40, exit: 500 + (targets[pos] ? 0 : 0) }}
-            appear={true}
-          >
-            {(
-              transition: TransitionStatus,
-              { anim }: { anim: AlgolAnimCompiled }
-            ) => {
-              const posToShow =
-                (transition === "entering" && anim.enterFrom[pos]) ||
-                (transition === "exiting" && anim.exitTo[pos]) ||
-                pos;
-              return (
-                <Piece
-                  animating={
-                    anim.enterFrom[pos]
-                      ? "from"
-                      : anim.exitTo[pos]
-                      ? "to"
-                      : undefined
-                  }
-                  transition={transition}
-                  icon={icon as AlgolIcon}
-                  owner={owner}
-                  pos={posToShow}
-                  height={height}
-                  width={width}
-                  mode={
-                    marks.indexOf(pos) !== -1
-                      ? "selected"
-                      : potentialMarks.indexOf(pos) !== -1
-                      ? "available"
-                      : "normal"
-                  }
-                  targetted={targets[pos]}
-                />
-              );
-            }}
-          </Transition>
-        ))}
+      {Object.values(units).map(({ icon, owner, pos, id }) => (
+        <Transition
+          key={id}
+          timeout={{ enter: 40, exit: 500 + (targets[pos] ? 0 : 0) }}
+          appear={true}
+        >
+          {(
+            transition: TransitionStatus,
+            { anim }: { anim: AlgolAnimCompiled }
+          ) => {
+            const posToShow =
+              (transition === "entering" && anim.enterFrom[pos]) ||
+              (transition === "exiting" && anim.exitTo[pos]) ||
+              pos;
+            // short-cirquit initial buggy "exit" render that messes up enter animations
+            if (transition === "exited" && anim.enterFrom[pos]) {
+              return null;
+            }
+            return (
+              <Piece
+                animating={
+                  anim.enterFrom[pos]
+                    ? "from"
+                    : anim.exitTo[pos]
+                    ? "to"
+                    : undefined
+                }
+                transition={transition}
+                icon={icon as AlgolIcon}
+                owner={owner}
+                pos={posToShow}
+                height={height}
+                width={width}
+                mode={
+                  marks.indexOf(pos) !== -1
+                    ? "selected"
+                    : potentialMarks.indexOf(pos) !== -1
+                    ? "available"
+                    : "normal"
+                }
+                targetted={targets[pos]}
+              />
+            );
+          }}
+        </Transition>
+      ))}
     </TransitionGroup>
   );
 };

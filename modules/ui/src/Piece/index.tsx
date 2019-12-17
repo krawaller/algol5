@@ -40,7 +40,7 @@ export const Piece: FunctionComponent<PieceProps> = props => {
     pos,
     animating,
     transition,
-    targetted
+    targetted,
   } = props;
   return (
     <div
@@ -48,11 +48,11 @@ export const Piece: FunctionComponent<PieceProps> = props => {
         ...positionStyles({
           height,
           width,
-          pos
+          pos,
         }),
         ...lifecycleStyles(transition, animating, targetted),
         ...pieceStyles,
-        transition: transitions(transition)
+        transition: transitions(transition),
       }}
     >
       <Icon icon={icon} owner={owner} mode={animating ? "normal" : mode} />

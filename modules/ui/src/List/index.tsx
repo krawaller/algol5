@@ -28,7 +28,7 @@ export const List: React.FunctionComponent<ListProps> = ({ callback }) => {
                 ((boards[gameId].width + 1) / (boards[gameId].height + 1)),
             }}
           >
-            <Demo demo={demos[gameId]} gameId={gameId} />
+            <Demo demo={demos[gameId]} gameId={gameId} intersect />
           </div>
           <div style={styles.infoBox}>
             <h4 style={styles.title}>{meta[gameId].name}</h4>

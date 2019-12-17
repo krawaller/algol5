@@ -23,6 +23,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
+    "react-intersection-observer": "^8.25.2",
     "react-transition-group": "^4.0.0"
   }
 }

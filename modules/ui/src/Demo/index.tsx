@@ -12,17 +12,19 @@ import { playDemo } from "../../../redux/slices/demo/thunks/playDemo";
 import { Board } from "../Board";
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 import { emptyAnim } from "../../../common";
+import { useInView } from "react-intersection-observer";
 
 type DemoProps = {
   gameId: GameId;
   demo: AlgolDemo;
+  intersect?: boolean;
 };
 
 const noop = () => {};
 const EMPTYARR = (Object.freeze([]) as unknown) as any[];
 
 export const Demo = memo((props: DemoProps) => {
-  const { gameId, demo } = props;
+  const { gameId, demo, intersect } = props;
   const [gameDemoState, setGameDemoState] = useState<null | AlgolGameDemoState>(
     null
   );
@@ -62,7 +64,16 @@ export const Demo = memo((props: DemoProps) => {
       store.dispatch(stopAllDemos());
     };
   }, [gameId]);
+  const [inView] = useInView();
   if (!gameDemoState) return null;
+  if (inView && !gameDemoState.playing) {
+    handleStart();
+    console.log("Stopping", gameId);
+  }
+  if (!inView && gameDemoState.playing) {
+    handleStop();
+    console.log("Starting", gameId);
+  }
   return (
     <React.Fragment>
       <Board
@@ -73,15 +84,19 @@ export const Demo = memo((props: DemoProps) => {
         units={gameDemoState.positions[gameDemoState.frame]}
         anim={{ ...emptyAnim, ...gameDemoState.anims[gameDemoState.frame] }}
       />
-      <p>Frame {gameDemoState.frame}</p>
-      <button onClick={handleStart} disabled={!!gameDemoState.playing}>
-        start
-      </button>
-      <button onClick={handleStop} disabled={!gameDemoState.playing}>
-        stop
-      </button>
-      <button onClick={handleStepForward}>step forward</button>
-      <button onClick={handleStepBackward}>step backward</button>
+      {!intersect && (
+        <React.Fragment>
+          <p>Frame {gameDemoState.frame}</p>
+          <button onClick={handleStart} disabled={!!gameDemoState.playing}>
+            start
+          </button>
+          <button onClick={handleStop} disabled={!gameDemoState.playing}>
+            stop
+          </button>
+          <button onClick={handleStepForward}>step forward</button>
+          <button onClick={handleStepBackward}>step backward</button>
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 });

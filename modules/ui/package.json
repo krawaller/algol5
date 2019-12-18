@@ -15,9 +15,7 @@
     "@types/storybook__addon-knobs": "^5.0.0",
     "@types/storybook__react": "^4.0.1",
     "classnames": "^2.2.6",
-    "jest": "^24.7.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "jest": "^24.7.1"
   },
   "dependencies": {
     "react-intersection-observer": "^8.25.2",

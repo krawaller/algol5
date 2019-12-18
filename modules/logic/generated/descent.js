@@ -444,7 +444,8 @@ let game = { gameId: "descent", action: {}, instruction: {} };
       TURN: step.TURN,
       MARKS: { selectdigtarget: newMarkPos },
       TURNVARS: step.TURNVARS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectdigtarget1 = step => {
@@ -968,7 +969,8 @@ let game = { gameId: "descent", action: {}, instruction: {} };
       TURN: step.TURN,
       MARKS: { selectdigtarget: newMarkPos },
       TURNVARS: step.TURNVARS,
-      NEXTSPAWNID: step.NEXTSPAWNID
+      NEXTSPAWNID: step.NEXTSPAWNID,
+      canAlwaysEnd: true
     };
   };
   game.instruction.selectdigtarget2 = step => {

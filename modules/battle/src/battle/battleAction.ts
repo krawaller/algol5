@@ -4,7 +4,7 @@ import {
   battleEndTurn,
   battleUndo,
   battleMark,
-  battleCommand
+  battleCommand,
 } from "./helpers";
 
 export function battleAction(
@@ -13,6 +13,7 @@ export function battleAction(
   action: "endTurn" | "undo" | "mark" | "command",
   arg?: string
 ): AlgolBattle {
+  if (battle.gameEndedBy) return battle;
   if (action === "endTurn") return battleEndTurn(game, battle);
   if (action === "undo") return battleUndo(battle);
   if (action === "mark") return battleMark(game, battle, arg as string);

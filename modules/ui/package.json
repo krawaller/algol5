@@ -3,7 +3,8 @@
     "robot": "npm install; npm run build-storybook",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o dist",
-    "publish-storybook": "cd dist; rm -rf .git; git init; git remote add origin git@github.com:krawaller/chessicals-storybook.git; git checkout -b gh-pages; git add .; git commit -m 'payload'; git push origin gh-pages; rm -rf .git;"
+    "publish-storybook": "cd dist; rm -rf .git; git init; git remote add origin git@github.com:krawaller/chessicals-storybook.git; git checkout -b gh-pages; git add .; git commit -m 'payload'; git push origin gh-pages; rm -rf .git;",
+    "postinstall": "rm -rf node_modules/react"
   },
   "devDependencies": {
     "@glitz/core": "^2.0.6",

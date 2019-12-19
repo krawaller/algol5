@@ -1,8 +1,9 @@
 import React, { useCallback } from "react";
 import classnames from "classnames";
-import { positionStyles } from "../_helpers";
+import { positionStyles } from "../_helpers/positionStyles";
+import styles from "./Mark.css";
 
-import { markCSS, potentialCSS, pulsateCSS } from "./Mark.styles";
+//import { markCSS, potentialCSS, pulsateCSS } from "./Mark.styles";
 
 type MarkProps = {
   /** Height of board */
@@ -28,16 +29,15 @@ export const Mark: React.FunctionComponent<MarkProps> = ({
   callback,
   height,
   width,
-  piece
+  piece,
 }) => {
   const handleClick = useCallback(() => callback(pos), [pos]);
-
   return (
     <div
       onClick={handleClick}
-      className={classnames(markCSS, {
-        [potentialCSS]: potential,
-        [pulsateCSS]: potential && !piece
+      className={classnames(styles.mark, {
+        [styles.potentialMark]: potential,
+        [styles.pulsateMark]: potential && !piece,
       })}
       style={positionStyles({ height, width, pos })}
     />

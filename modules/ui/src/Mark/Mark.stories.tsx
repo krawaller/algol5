@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { boolean, text } from "@storybook/addon-knobs";
 
-import { Mark } from ".";
+import { Mark } from "./Mark";
 
 storiesOf("Mark", module).add("basic usage", () => (
   <div
@@ -10,7 +10,7 @@ storiesOf("Mark", module).add("basic usage", () => (
       width: "100px",
       height: "100px",
       backgroundColor: "brown",
-      position: "relative"
+      position: "relative",
     }}
   >
     <Mark

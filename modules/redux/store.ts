@@ -15,7 +15,9 @@ export const makeStore = () => {
     appDeps
   );
   const enhancers = [applyMiddleware(thunk, consMdl)];
-  const devToolsExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__;
+  const devToolsExtension =
+    typeof window !== "undefined" &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__;
   if (typeof devToolsExtension === "function") {
     enhancers.push(devToolsExtension());
   }

@@ -3,6 +3,7 @@ import { newBattle, battleAction, getBattleUI } from "./battle";
 
 export function makeStatefulGameAPI(game: AlgolGame): AlgolStatefulGameAPI {
   return {
+    gameId: game.gameId,
     newBattle: () => {
       let battle = newBattle(game);
       return {

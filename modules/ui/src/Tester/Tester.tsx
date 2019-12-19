@@ -1,45 +1,35 @@
-import React, { useMemo, useState, useCallback } from "react";
-import { AlgolGame, AlgolBattle } from "../../../types";
+import React, { useReducer } from "react";
+import { AlgolBattle, AlgolStaticGameAPI } from "../../../types";
 
 import { Board } from "../Board";
 import { BattleUI } from "../BattleUI";
 
 import dataURIs from "../../../graphics/dist/svgDataURIs";
 
-import { getBattleUI } from "../../../battle/src/battle";
-import { GameId } from "../../../battle/commands/helpers/_names";
-import { makeStaticGameAPI } from "../../../battle/src";
-
 type TesterProps = {
-  game: AlgolGame;
+  api: AlgolStaticGameAPI;
 };
 
 export const Tester = (props: TesterProps) => {
-  const { game } = props;
-  const api = useMemo(() => makeStaticGameAPI(game), [game]);
-  const gameId = game.gameId as GameId;
-  const [battle, updateBattle] = useState<AlgolBattle>(api.newBattle());
-  const move = useCallback(
-    (
-      action: "mark" | "command" | "endTurn" | "undo",
-      arg: string | undefined
-    ) => {
-      updateBattle(api.performAction(battle, action, arg));
-    },
-    [api, battle]
+  const { api } = props;
+  const [battle, dispatch] = useReducer(
+    (b: AlgolBattle, instr: ["mark" | "command" | "endTurn" | "undo", any]) =>
+      api.performAction(b, instr[0], instr[1]),
+    api.newBattle()
   );
-  const ui = getBattleUI(game, battle);
+
+  const ui = api.getBattleUI(battle);
   return (
     <React.Fragment>
       <Board
-        callback={pos => move("mark", pos)}
-        board={dataURIs[gameId]}
+        callback={pos => dispatch(["mark", pos])}
+        board={dataURIs[api.gameId]}
         units={ui.board.units}
         marks={ui.board.marks}
         potentialMarks={ui.board.potentialMarks}
         anim={ui.board.anim}
       />
-      <BattleUI callback={move} ui={ui} />
+      <BattleUI callback={(action, arg) => dispatch([action, arg])} ui={ui} />
     </React.Fragment>
   );
 };

@@ -1,12 +1,12 @@
+const withCSS = require("@zeit/next-css");
 const path = require("path");
 
-module.exports = {
+module.exports = withCSS({
+  cssModules: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.forEach(rule => {
-      const ruleContainsTs = rule.test.toString().includes("tsx|ts");
-      console.log(ruleContainsTs, rule);
       if (
-        ruleContainsTs &&
+        rule.test.toString().includes("tsx|ts") &&
         rule.use &&
         rule.use.loader === "next-babel-loader"
       ) {
@@ -15,4 +15,4 @@ module.exports = {
     });
     return config;
   },
-};
+});

@@ -6,5 +6,8 @@
   },
   "dependencies": {
     "next": "^9.1.6"
+  },
+  "devDependencies": {
+    "@zeit/next-css": "^1.0.1"
   }
 }

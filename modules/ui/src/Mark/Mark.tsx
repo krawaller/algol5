@@ -3,8 +3,6 @@ import classnames from "classnames";
 import { positionStyles } from "../_helpers/positionStyles";
 import styles from "./Mark.css";
 
-//import { markCSS, potentialCSS, pulsateCSS } from "./Mark.styles";
-
 type MarkProps = {
   /** Height of board */
   height: number;

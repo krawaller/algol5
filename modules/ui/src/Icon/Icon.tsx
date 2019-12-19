@@ -2,23 +2,18 @@ import * as React from "react";
 import { AlgolIcon } from "../../../types";
 import classnames from "classnames";
 
+import containerStyles from "./Icon.container.css";
+import innerStyles from "./Icon.inner.css";
+
 import { hollows, solids } from "./Icon.shapes";
-import {
-  iconContainerAvailable,
-  fills,
-  iconContainerBasic,
-  iconContainerSelected,
-  iconInnerBasic,
-  iconInnerDuringEnter,
-  iconInnerDuringExit,
-  iconInnerTransitionDuration,
-  strokes,
-} from "./Icon.styles";
 
 import { TransitionGroup } from "react-transition-group";
 import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
+
+export const fills = ["lightyellow", "lightpink", "lightsteelblue"];
+export const strokes = ["orange", "darkred", "darkblue"];
 
 type IconProps = {
   /** Which type of piece it is */
@@ -39,15 +34,16 @@ export const Icon: React.FunctionComponent<IconProps> = ({
 }) => {
   return (
     <div
-      className={classnames(iconContainerBasic, {
-        [iconContainerAvailable]: mode === "available",
-        [iconContainerSelected]: mode === "selected",
+      className={classnames(containerStyles.iconContainer, {
+        [containerStyles.iconContainerAvailable]: mode === "available",
+        [containerStyles.iconContainerSelected]: mode === "selected",
       })}
     >
       <TransitionGroup>
         <Transition
           key={icon}
-          timeout={{ enter: 20, exit: iconInnerTransitionDuration }}
+          // exit time here should be in harmony with inner transition duration
+          timeout={{ enter: 20, exit: 500 }}
         >
           {(status: TransitionStatus) => {
             if (status === "exited") {
@@ -57,11 +53,10 @@ export const Icon: React.FunctionComponent<IconProps> = ({
               <svg
                 viewBox="0 150 300 300"
                 xmlns="http://www.w3.org/2000/svg"
-                style={{
-                  ...iconInnerBasic,
-                  ...(status === "exiting" && iconInnerDuringExit),
-                  ...(status === "entering" && iconInnerDuringEnter),
-                }}
+                className={classnames(innerStyles.iconInnerBasic, {
+                  [innerStyles.iconInnerDuringEnter]: status === "entering",
+                  [innerStyles.iconInnerDuringExit]: status === "exiting",
+                })}
               >
                 <g>
                   <path

@@ -2,6 +2,7 @@ const withCSS = require("@zeit/next-css");
 const path = require("path");
 
 module.exports = withCSS({
+  exportTrailingSlash: true,
   cssModules: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.forEach(rule => {

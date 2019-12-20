@@ -1,17 +1,24 @@
 import React from "react";
 
-import amazons from "../../logic/dist/indiv/amazons";
-import { Tester } from "../../ui/src/Tester";
-import { makeStaticGameAPI } from "../../battle/src";
-import { Master } from "../components";
-import graphics from "../../graphics/dist/svgDataURIs/amazons";
+import meta from "../../games/dist/meta";
+import Link from "next/link";
 
-const Home = () => {
+const GameList = () => {
   return (
-    <Master title="OMG YEAH!">
-      <Tester api={makeStaticGameAPI(amazons)} graphics={graphics} />
-    </Master>
+    <ul>
+      {Object.values(meta).map(m => (
+        <li key={m.id}>
+          <h4>
+            <Link href={"/games/" + m.id + "/"}>
+              <a>{m.name}</a>
+            </Link>
+          </h4>
+          <br />
+          {m.tagline}
+        </li>
+      ))}
+    </ul>
   );
 };
 
-export default Home;
+export default GameList;

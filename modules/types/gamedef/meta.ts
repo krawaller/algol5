@@ -1,5 +1,11 @@
+import { GameId } from "../../games/dist/list";
+
 export type AlgolMeta<Command extends string, Mark extends string> = {
   rules?: RuleDescription;
+  id: GameId;
+  name: string;
+  tagline: string;
+  tags: string[];
   [otherMeta: string]: any;
 };
 

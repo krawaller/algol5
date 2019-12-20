@@ -11,7 +11,7 @@ export const Master: FunctionComponent<MasterProps> = ({ title, children }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <h2>Chessicals!</h2>
+      <h2>Chessicals! {title}</h2>
       <hr />
 
       <div className="page-content">{children}</div>

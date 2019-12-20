@@ -19,6 +19,12 @@ export default list;
 `
 );
 
+fs.writeFileSync(
+  path.join(out, "gameList.js"),
+  `module.exports = [${gameIds.map(gid => `"${gid}"`).join(", ")}];
+`
+);
+
 const gpath = path.join(out, "games");
 fs.ensureDirSync(gpath);
 gameIds.forEach(gid => {

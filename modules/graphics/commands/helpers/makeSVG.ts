@@ -124,13 +124,18 @@ ${ret}
   await fs.ensureDir(jsonOut);
   await fs.writeFile(
     path.join(jsonOut, gameId + ".ts"),
-    "export default " +
-      JSON.stringify({
-        height,
-        width,
-        icons: def.graphics.icons,
-        dataURI: svgToMiniDataURI(ret),
-      })
+    `import { AlgolGameGraphics } from "../../../types";\n` +
+      `export const ${gameId}BoardGraphics: AlgolGameGraphics = ${JSON.stringify(
+        {
+          height,
+          width,
+          icons: def.graphics.icons,
+          dataURI: svgToMiniDataURI(ret),
+        },
+        null,
+        2
+      )};\n` +
+      `export default ${gameId}BoardGraphics\n`
   );
   console.log("Generated SVG board and JSON for", gameId);
 }

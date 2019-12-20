@@ -6,6 +6,13 @@ export * from "./generated";
 export * from "./suite";
 export * from "./_args";
 
+export type AlgolGameGraphics = {
+  height: number;
+  width: number;
+  icons: { [group: string]: string };
+  dataURI: string;
+};
+
 export type AlgolIcon =
   | "bishop"
   | "king"

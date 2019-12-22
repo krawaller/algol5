@@ -13,7 +13,7 @@ type BattleUIControlsProps = {
 
 export const BattleUIControls: FunctionComponent<BattleUIControlsProps> = ({
   ui,
-  callback
+  callback,
 }) => (
   <React.Fragment>
     <Content content={ui.instruction} callback={callback} />

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, CSSProperties } from "react";
 import classnames from "classnames";
 import { positionStyles } from "../_helpers/positionStyles";
 import styles from "./Mark.css.js";

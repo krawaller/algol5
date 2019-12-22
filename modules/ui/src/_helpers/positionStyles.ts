@@ -10,7 +10,7 @@ type PositionStylesOpts = {
 export function positionStyles({
   height,
   width,
-  pos
+  pos,
 }: PositionStylesOpts): CSSProperties {
   const { x, y } = pos2coords(pos);
   return {
@@ -18,6 +18,6 @@ export function positionStyles({
     width: `${(1 / (width + 1)) * 100}%`,
     position: "absolute",
     left: `${((x - 0.5) / (width + 1)) * 100}%`,
-    bottom: `${((y - 0.5) / (height + 1)) * 100}%`
+    bottom: `${((y - 0.5) / (height + 1)) * 100}%`,
   };
 }

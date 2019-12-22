@@ -1,14 +1,13 @@
 {
   "scripts": {
     "makeGamePages": "node ./commands/makeGamePages",
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "getUiCSS": "cp ../ui/dist/styles.css public/components.css",
+    "dev": "npm run getUiCSS && next",
+    "build": "npm run getUiCSS && next build",
+    "start": "npm run getUiCSS && next start"
   },
   "dependencies": {
     "next": "^9.1.6"
   },
-  "devDependencies": {
-    "@zeit/next-css": "^1.0.1"
-  }
+  "devDependencies": {}
 }

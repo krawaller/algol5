@@ -1,3 +1,4 @@
+import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
 
 export default class MyDocument extends Document {
@@ -10,7 +11,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <link rel="stylesheet" href="/static/styles/site.css" />
+          <link rel="stylesheet" href="/components.css" />
         </Head>
         <body>
           <Main />

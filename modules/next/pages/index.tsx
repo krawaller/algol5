@@ -9,7 +9,7 @@ const GameList = () => {
       {Object.values(meta).map(m => (
         <li key={m.id}>
           <h4>
-            <Link href={"/games/" + m.id + "/"}>
+            <Link href={"/games/" + m.id}>
               <a>{m.name}</a>
             </Link>
           </h4>

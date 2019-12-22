@@ -1,19 +1,18 @@
-const withCSS = require("@zeit/next-css");
 const path = require("path");
 
-module.exports = withCSS({
+module.exports = {
   exportTrailingSlash: true,
-  cssModules: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    config.module.rules.forEach(rule => {
-      if (
+    const babelRule = config.module.rules.find(
+      rule =>
         rule.test.toString().includes("tsx|ts") &&
         rule.use &&
         rule.use.loader === "next-babel-loader"
-      ) {
-        rule.include.push(path.join(__dirname, "../../"));
-      }
-    });
+    );
+    if (!babelRule) {
+      throw new Error("Couldn't find babel rule!");
+    }
+    babelRule.include.push(path.join(__dirname, "../../"));
     return config;
   },
-});
+};

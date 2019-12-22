@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm install; npm run exportGameAPIs",
+    "robot": "npm install; npm run exportGameAPIs; npm run makeDemo",
     "test": "cd ../..; npx jest modules/battle",
     "megaBundle": "node ./commands/megaBundle",
     "makeDemo": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/battle/commands/makeDemo",

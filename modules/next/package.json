@@ -1,10 +1,13 @@
 {
   "scripts": {
+    "robot": "npm install && npm run prep && npm run build && npm run export",
     "makeGamePages": "node ./commands/makeGamePages",
     "getUiCSS": "cp ../ui/dist/styles.css public/components.css",
-    "dev": "npm run getUiCSS && next",
-    "build": "npm run getUiCSS && next build",
-    "start": "npm run getUiCSS && next start"
+    "prep": "npm run getUiCSS && npm run makeGamePages",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export -o dist"
   },
   "dependencies": {
     "next": "^9.1.6"

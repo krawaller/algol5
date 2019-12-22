@@ -12,21 +12,6 @@ module.exports = ({ config, mode }) => {
       },
     ],
   });
-  config.module.rules = config.module.rules.filter(
-    r => !r.test.toString().match("css")
-  );
-  config.module.rules.push({
-    test: /\.css$/,
-    use: [
-      require.resolve("style-loader"),
-      {
-        loader: require.resolve("css-loader"),
-        options: {
-          modules: true,
-        },
-      },
-    ],
-  });
-  config.resolve.extensions.push(".ts", ".tsx", ".css");
+  config.resolve.extensions.push(".ts", ".tsx");
   return config;
 };

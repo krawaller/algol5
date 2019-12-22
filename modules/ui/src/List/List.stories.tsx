@@ -4,5 +4,11 @@ import { storiesOf } from "@storybook/react";
 import { List } from ".";
 
 storiesOf("List", module).add("List of games", () => {
-  return <List callback={() => {}} />;
+  return (
+    <List
+      callback={gameId => {
+        console.log("Clicked game", gameId);
+      }}
+    />
+  );
 });

@@ -1,0 +1,36 @@
+.gameList {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.gameListItem {
+  position: relative;
+  margin-bottom: 10px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gameListItem > :first-child {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.gameListItem > :last-child {
+  flex-grow: 1;
+}
+
+.gameListInfoBox {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.gameListInfoTitle {
+  font-family: verdana;
+  font-weight: normal;
+  font-size: 30px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}

@@ -3,35 +3,35 @@ import { GameId, list } from "../../../games/dist/list";
 import meta from "../../../games/dist/meta";
 import demos from "../../../battle/dist/allDemos";
 import boards from "../../../graphics/dist/svgDataURIs";
+import css from "./List.css.js";
 
-import { Demo } from "../Demo";
+import { Thumbnail } from "../Thumbnail";
 
 type ListProps = {
   callback: (id: GameId) => void;
 };
-
-import { styles, listItemHeight } from "./List.styles";
 
 /**
  * A component to show a list of games
  */
 export const List: React.FunctionComponent<ListProps> = ({ callback }) => {
   return (
-    <ul style={styles.ul}>
+    <ul className={css.gameList}>
       {list.map(gameId => (
-        <li style={styles.li} key={gameId}>
-          <div
-            style={{
-              ...styles.boardBox,
-              width:
-                listItemHeight *
-                ((boards[gameId].width + 1) / (boards[gameId].height + 1)),
-            }}
-          >
-            <Demo demo={demos[gameId]} gameId={gameId} intersect />
-          </div>
-          <div style={styles.infoBox}>
-            <h4 style={styles.title}>{meta[gameId].name}</h4>
+        <li
+          className={css.gameListItem}
+          key={gameId}
+          onClick={() => callback(gameId)}
+        >
+          <Thumbnail
+            demo={demos[gameId]}
+            gameId={gameId}
+            graphics={boards[gameId]}
+            playing={true}
+          />
+
+          <div className={css.gameListInfoBox}>
+            <h4 className={css.gameListInfoTitle}>{meta[gameId].name}</h4>
             {meta[gameId].tagline}
           </div>
         </li>

@@ -16,6 +16,7 @@ type ThumbnailProps = {
 };
 
 const EMPTYARR: never[] = [];
+const EMPTYOBJ = {};
 const noop = () => {};
 
 export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
@@ -48,9 +49,7 @@ export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
     }
   }, [hydrDemo, playing, count]);
 
-  if (!hydrDemo) return <span>...hydrating...</span>;
-
-  const frame = count % hydrDemo.positions.length;
+  const frame = hydrDemo ? count % hydrDemo.positions.length : 0;
 
   const height = 120;
   return (
@@ -67,8 +66,8 @@ export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
         marks={EMPTYARR}
         potentialMarks={EMPTYARR}
         callback={noop}
-        units={hydrDemo.positions[frame]}
-        anim={{ ...emptyAnim, ...hydrDemo.anims[frame] }}
+        units={hydrDemo ? hydrDemo.positions[frame] : EMPTYOBJ}
+        anim={{ ...emptyAnim, ...(hydrDemo && hydrDemo.anims[frame]) }}
       />
     </div>
   );

@@ -15,6 +15,8 @@ let harvested = "/******** Collected CSS from all UI components ********/\n\n";
 const root = path.join(__dirname, "../src");
 const out = path.join(__dirname, "../dist");
 
+fs.emptyDirSync(out);
+
 const toCheck = [root];
 while (toCheck.length) {
   const p = toCheck.shift();

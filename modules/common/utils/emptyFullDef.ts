@@ -7,28 +7,33 @@ export const emptyFullDef: FullDefAnon = {
     brains: {},
     generators: {},
     grids: {},
-    terrain: {}
+    terrain: {},
   },
   anim: {},
   board: {
     height: 5,
     width: 5,
-    terrain: {}
+    terrain: {},
   },
   instructions: {},
   flow: {
     commands: {},
-    marks: {}
+    marks: {},
   },
   graphics: {
     icons: {},
-    tiles: {}
+    tiles: {},
   },
-  meta: {},
+  meta: {
+    id: "amazons", // OVERRIDE!
+    name: "",
+    tagline: "",
+    tags: [],
+  },
   performance: {
     canAlwaysEnd: {},
-    massiveTree: {}
+    massiveTree: {},
   },
   scripts: {},
-  setup: {}
+  setup: {},
 };

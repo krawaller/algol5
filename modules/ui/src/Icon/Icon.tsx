@@ -53,7 +53,7 @@ export const Icon: React.FunctionComponent<IconProps> = ({
               <svg
                 viewBox="0 150 300 300"
                 xmlns="http://www.w3.org/2000/svg"
-                className={classnames(innerStyles.iconInnerBasic, {
+                className={classnames(innerStyles.iconInner, {
                   [innerStyles.iconInnerDuringEnter]: status === "entering",
                   [innerStyles.iconInnerDuringExit]: status === "exiting",
                 })}

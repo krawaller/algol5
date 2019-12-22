@@ -2,7 +2,7 @@
   "scripts": {
     "postinstall": "link-module-alias",
     "test:unit": "jest modules/**/*.test.ts",
-    "test:ts": "tsc --noEmit",
+    "test:ts": "tsc --noEmit --skipLibCheck",
     "robot": "npm install; cd modules/common; npm run robot; cd ../games; npm run robot; cd ../graphics; npm run robot; cd ../logic; npm run robot; cd ../battle; npm run robot; cd ../ui; npm run robot;"
   },
   "_moduleAliases": {

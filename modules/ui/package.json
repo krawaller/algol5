@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "robot": "npm install; npm run build-storybook",
+    "robot": "npm install; npm run harvestCss",
+    "harvestCss": "node ./commands/harvestCss",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -c .storybook -o dist",
-    "publish-storybook": "cd dist; rm -rf .git; git init; git remote add origin git@github.com:krawaller/chessicals-storybook.git; git checkout -b gh-pages; git add .; git commit -m 'payload'; git push origin gh-pages; rm -rf .git;",
+    "build-storybook": "rm -rf dist/storybook; build-storybook -c .storybook -o dist/storybook",
+    "publish-storybook": "cd dist/storybook; rm -rf .git; git init; git remote add origin git@github.com:krawaller/chessicals-storybook.git; git checkout -b gh-pages; git add .; git commit -m 'payload'; git push origin gh-pages; rm -rf .git;",
     "postinstall": "rm -rf node_modules/react; rm -rf node_modules/react-dom"
   },
   "devDependencies": {

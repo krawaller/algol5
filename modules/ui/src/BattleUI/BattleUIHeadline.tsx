@@ -18,7 +18,7 @@ export const BattleUIHeadline: FunctionComponent<BattleUIHeadlineProps> = ({
     <Content
       content={{
         line: [
-          { text: `${ui.gameId} - Turn ${ui.turnNumber} - ` },
+          { text: `Turn ${ui.turnNumber} - ` },
           { player: ui.player as 1 | 2 },
         ],
       }}

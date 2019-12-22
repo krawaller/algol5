@@ -5,8 +5,6 @@ const list = require("../../games/dist/gameList");
 const out = path.join(__dirname, "../pages/games");
 fs.emptyDirSync(out);
 
-// TODO - fx-extra and ensureEmptyDir
-
 for (const gameId of list) {
   const content = `
   import React from "react";
@@ -21,7 +19,6 @@ for (const gameId of list) {
   export const Game = () => {
     return (
       <Master title={meta.name}>
-        <p>{meta.tagline}</p>
         <Tester api={makeStaticGameAPI(${gameId})} graphics={graphics} />
       </Master>
     );

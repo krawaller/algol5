@@ -19,7 +19,7 @@ const GameList = () => {
         it out!
       </p>
       <hr />
-      <List itemWrapper={Wrapper} />;
+      <List itemWrapper={Wrapper} />
     </div>
   );
 };

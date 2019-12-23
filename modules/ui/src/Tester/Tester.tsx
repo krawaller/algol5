@@ -32,7 +32,9 @@ export const Tester = (props: TesterProps) => {
         potentialMarks={ui.board.potentialMarks}
         anim={ui.board.anim}
       />
-      <BattleUI callback={(action, arg) => dispatch([action, arg])} ui={ui} />
+      <div style={{ padding: "10px" }}>
+        <BattleUI callback={(action, arg) => dispatch([action, arg])} ui={ui} />
+      </div>
     </React.Fragment>
   );
 };

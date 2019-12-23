@@ -12,10 +12,10 @@ export const Master: FunctionComponent<MasterProps> = ({ title, children }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <Link href="/">
+      {/* <Link href="/">
         <a>Chessicals!</a>
       </Link>
-      {" " + title}
+      {" " + title} */}
       <div className="page-content">{children}</div>
     </div>
   );

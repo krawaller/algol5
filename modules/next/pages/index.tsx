@@ -12,7 +12,7 @@ const Wrapper: ListItemWrapper = ({ gameId, children }) => (
 
 const GameList = () => {
   return (
-    <div>
+    <div style={{ padding: 10 }}>
       <h1>Chessicals</h1>
       <p>
         Welcome! This is rather bare bones still, but, click a game below to try

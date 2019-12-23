@@ -51,6 +51,11 @@ export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
         }, FRAME_LENGTH_MS);
       }
     }
+    return () => {
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
+    };
   }, [hydrDemo, inView, count]);
 
   const frame = hydrDemo ? count % hydrDemo.positions.length : 0;

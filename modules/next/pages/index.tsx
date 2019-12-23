@@ -1,24 +1,17 @@
 import React from "react";
 
-import meta from "../../games/dist/meta";
 import Link from "next/link";
 
+import { List, ListItemWrapper } from "../../ui/src/List";
+
+const Wrapper: ListItemWrapper = ({ gameId, children }) => (
+  <Link href={"/games/" + gameId}>
+    <a>{children}</a>
+  </Link>
+);
+
 const GameList = () => {
-  return (
-    <ul>
-      {Object.values(meta).map(m => (
-        <li key={m.id}>
-          <h4>
-            <Link href={"/games/" + m.id}>
-              <a>{m.name}</a>
-            </Link>
-          </h4>
-          <br />
-          {m.tagline}
-        </li>
-      ))}
-    </ul>
-  );
+  return <List itemWrapper={Wrapper} />;
 };
 
 export default GameList;

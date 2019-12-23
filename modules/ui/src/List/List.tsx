@@ -7,20 +7,26 @@ import css from "./List.css.js";
 
 import { ListItem } from "./List.Item";
 
-type ListWrapper = React.FunctionComponent<{ gameId: GameId }>;
+export type ListItemWrapper = React.FunctionComponent<{ gameId: GameId }>;
+
+const noop = () => {};
+const DefaultWrapper: ListItemWrapper = ({ children }) => (
+  <Fragment>{children}</Fragment>
+);
 
 type ListProps = {
-  callback: (id: GameId) => void;
-  Wrapper?: ListWrapper;
+  callback?: (id: GameId) => void;
+  itemWrapper?: ListItemWrapper;
 };
 
 /**
  * A component to show a list of games
  */
 export const List: React.FunctionComponent<ListProps> = ({
-  callback,
-  Wrapper = ({ children }) => <Fragment>{children}</Fragment>,
+  callback = noop,
+  itemWrapper = DefaultWrapper,
 }) => {
+  const Wrapper = itemWrapper;
   return (
     <div className={css.gameList}>
       {list.map(gameId => (

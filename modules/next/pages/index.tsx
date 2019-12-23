@@ -11,7 +11,17 @@ const Wrapper: ListItemWrapper = ({ gameId, children }) => (
 );
 
 const GameList = () => {
-  return <List itemWrapper={Wrapper} />;
+  return (
+    <div>
+      <h1>Chessicals</h1>
+      <p>
+        Welcome! This is rather bare bones still, but, click a game below to try
+        it out!
+      </p>
+      <hr />
+      <List itemWrapper={Wrapper} />;
+    </div>
+  );
 };
 
 export default GameList;

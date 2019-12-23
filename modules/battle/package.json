@@ -6,8 +6,6 @@
     "generateGameTests": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/battle/test/generateGameTests",
     "exportGameAPIs": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/battle/commands/exportGameAPIs"
   },
-  "dependencies": {
-    "workerwrapper": "github:krawaller/workerwrapper"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }

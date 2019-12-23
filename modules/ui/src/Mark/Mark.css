@@ -2,6 +2,7 @@
   cursor: pointer;
   background-repeat: no-repeat;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'><circle cx='25' cy='25' r='21' stroke-width='6' stroke='white' fill='none'></circle></svg>");
+  -webkit-tap-highlight-color: transparent;
 }
 
 .potentialMark {

@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { select, boolean } from "@storybook/addon-knobs";
+import { select } from "@storybook/addon-knobs";
 
 import { Thumbnail } from ".";
 import { GameId, list } from "../../../games/dist/list";
@@ -10,14 +10,20 @@ import dataURIs from "../../../graphics/dist/svgDataURIs";
 
 storiesOf("Thumbnail", module).add("test game thumbnail", () => {
   const gameId = select("Game", list, list[0]) as GameId;
-  const playing = boolean("Playing?", true);
   const demo = demos[gameId];
   return (
-    <Thumbnail
-      demo={demo}
-      playing={playing}
-      graphics={dataURIs[gameId]}
-      gameId={gameId}
-    />
+    <div>
+      <Thumbnail demo={demo} graphics={dataURIs[gameId]} gameId={gameId} />
+      <p
+        style={{
+          width: 150,
+          padding: 5,
+          height: 1000,
+          backgroundColor: "beige",
+        }}
+      >
+        Thumbnail should stop as soon as it is slightly out of bounds!
+      </p>
+    </div>
   );
 });

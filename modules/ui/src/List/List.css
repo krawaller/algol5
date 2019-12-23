@@ -25,7 +25,7 @@
 }
 
 .gameListInfoBox {
-  margin: 10px;
+  margin: 0 10px;
   display: flex;
   flex-direction: column;
 }
@@ -33,7 +33,7 @@
 .gameListInfoTitle {
   font-family: verdana;
   font-weight: normal;
-  font-size: 30px;
+  font-size: 28px;
   margin-top: 0;
   margin-bottom: 10px;
 }

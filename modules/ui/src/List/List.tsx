@@ -1,41 +1,38 @@
-import * as React from "react";
+import React, { Fragment } from "react";
 import { GameId, list } from "../../../games/dist/list";
 import meta from "../../../games/dist/meta";
 import demos from "../../../battle/dist/allDemos";
 import boards from "../../../graphics/dist/svgDataURIs";
 import css from "./List.css.js";
 
-import { Thumbnail } from "../Thumbnail";
+import { ListItem } from "./List.Item";
+
+type ListWrapper = React.FunctionComponent<{ gameId: GameId }>;
 
 type ListProps = {
   callback: (id: GameId) => void;
+  Wrapper?: ListWrapper;
 };
 
 /**
  * A component to show a list of games
  */
-export const List: React.FunctionComponent<ListProps> = ({ callback }) => {
+export const List: React.FunctionComponent<ListProps> = ({
+  callback,
+  Wrapper = ({ children }) => <Fragment>{children}</Fragment>,
+}) => {
   return (
-    <ul className={css.gameList}>
+    <div className={css.gameList}>
       {list.map(gameId => (
-        <li
-          className={css.gameListItem}
-          key={gameId}
-          onClick={() => callback(gameId)}
-        >
-          <Thumbnail
-            demo={demos[gameId]}
-            gameId={gameId}
+        <Wrapper gameId={gameId} key={gameId}>
+          <ListItem
             graphics={boards[gameId]}
-            playing={true}
+            demo={demos[gameId]}
+            meta={meta[gameId]}
+            callback={() => callback(gameId)}
           />
-
-          <div className={css.gameListInfoBox}>
-            <h4 className={css.gameListInfoTitle}>{meta[gameId].name}</h4>
-            {meta[gameId].tagline}
-          </div>
-        </li>
+        </Wrapper>
       ))}
-    </ul>
+    </div>
   );
 };

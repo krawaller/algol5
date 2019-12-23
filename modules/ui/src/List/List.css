@@ -1,5 +1,4 @@
 .gameList {
-  list-style-type: none;
   padding-left: 0;
 }
 
@@ -15,6 +14,10 @@
 .gameListItem > :first-child {
   flex-shrink: 0;
   flex-grow: 0;
+}
+
+.gameListItem:hover {
+  background-color: antiquewhite;
 }
 
 .gameListItem > :last-child {

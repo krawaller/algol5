@@ -1,7 +1,7 @@
 import {
   AlgolBattle,
   AlgolBoardState,
-  AlgolContentAnon
+  AlgolContentAnon,
 } from "../../../../types";
 
 import { emptyAnim } from "../../../../common";
@@ -11,23 +11,23 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
   const winner = {
     win: battle.player,
     lose: battle.player === 1 ? 2 : 1,
-    draw: 0
+    draw: 0,
   }[currentStep.LINKS.endGame as "win" | "lose" | "draw"] as 0 | 1 | 2;
   const finalBoard: AlgolBoardState = {
     marks: currentStep.LINKS.endMarks || [],
     units: currentStep.UNITDATA,
     anim: emptyAnim,
-    potentialMarks: []
+    potentialMarks: [],
   };
   const description: AlgolContentAnon = {
     line: ([
-      { text: "Ended by" },
-      { bold: currentStep.LINKS.endedBy as string }
+      { text: "Ended by " },
+      { bold: currentStep.LINKS.endedBy as string },
     ] as AlgolContentAnon[]).concat(
       winner
         ? [{ text: ", " }, { player: winner as 1 | 2 }, { text: " wins!" }]
         : [{ text: " in a draw!" }]
-    )
+    ),
   };
 
   return {
@@ -38,12 +38,12 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
       turn: currentStep.TURN,
       player: 0,
       board: finalBoard,
-      description
+      description,
     }),
     state: {
       ...battle.state,
       undo: null,
-      board: finalBoard
-    }
+      board: finalBoard,
+    },
   };
 }

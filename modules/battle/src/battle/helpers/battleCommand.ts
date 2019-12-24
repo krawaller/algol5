@@ -1,6 +1,9 @@
 import { AlgolBattle, AlgolGame } from "../../../../types";
 import { emptyAnim } from "../../../../common";
 
+const EMPTYARR: any[] = [];
+const EMPTYOBJ = {};
+
 export function battleCommand(
   game: AlgolGame,
   battle: AlgolBattle,
@@ -8,7 +11,7 @@ export function battleCommand(
 ): AlgolBattle {
   const {
     turn: { steps },
-    state: oldState
+    state: oldState,
   } = battle;
   const oldStepId = oldState.currentStepId;
   const oldStep = steps[oldStepId];
@@ -23,7 +26,7 @@ export function battleCommand(
       currentStepId: newStepId,
       undo: {
         state: oldState,
-        command
+        command,
       },
       entries: oldState.entries.concat({
         player: battle.player,
@@ -35,24 +38,24 @@ export function battleCommand(
             {
               bold: oldState.board.marks.length
                 ? `${command}(${oldState.board.marks.join(", ")})`
-                : command
-            }
-          ]
+                : command,
+            },
+          ],
         },
         board: {
           marks: oldState.board.marks,
           units: newStep.UNITDATA,
           anim: oldStep.anim || emptyAnim,
-          potentialMarks: []
-        }
+          potentialMarks: EMPTYARR,
+        },
       }),
       board: {
-        marks: [],
+        marks: EMPTYARR,
         units: newStep.UNITDATA,
         anim: newStep.anim || emptyAnim,
-        potentialMarks: Object.keys(newStep.LINKS.marks)
+        potentialMarks: Object.keys(newStep.LINKS.marks),
       },
-      markStamps: {}
-    }
+      markStamps: EMPTYOBJ,
+    },
   };
 }

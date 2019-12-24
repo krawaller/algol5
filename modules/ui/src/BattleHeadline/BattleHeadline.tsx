@@ -21,15 +21,29 @@ export const BattleHeadline: FunctionComponent<BattleHeadlineProps> = ({
   currentFrame,
 }) => (
   <div className={css.battleHeadlineContainer}>
-    <Content
-      content={{
-        line: [
-          { text: `Turn ${ui.turnNumber} - ` },
-          { player: ui.player as 0 | 1 | 2 },
-        ],
-      }}
-      callback={noop}
-    />
-    <Stepper max={frameCount} current={currentFrame} onChange={onChooseFrame} />
+    <span className={css.battleHeadlineTurn}>
+      <Content
+        content={
+          ui.turnNumber
+            ? {
+                line: [
+                  { text: `Turn ${ui.turnNumber} - ` },
+                  { player: ui.player as 0 | 1 | 2 },
+                ],
+              }
+            : { line: [{ text: "Start" }] }
+        }
+        callback={noop}
+      />
+    </span>
+    <span className={css.battleHeadlineSlider}>
+      {frameCount > 1 && (
+        <Stepper
+          max={frameCount}
+          current={currentFrame}
+          onChange={onChooseFrame}
+        />
+      )}
+    </span>
   </div>
 );

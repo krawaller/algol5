@@ -2,7 +2,10 @@
   display: flex;
 }
 
-.battleHeadlineContainer > :last-child {
-  margin-left: 15px;
+.battleHeadlineTurn {
+  width: 150px;
+}
+
+.battleHeadlineSlider {
   flex-grow: 1;
 }

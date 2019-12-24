@@ -10,7 +10,7 @@ export function newBattle(game: AlgolGame): AlgolBattle {
     marks: [],
     units: turn.steps.root.UNITDATA,
     anim: emptyAnim,
-    potentialMarks: Object.keys(turn.steps.root.LINKS.marks)
+    potentialMarks: Object.keys(turn.steps.root.LINKS.marks),
   };
   return {
     turn,
@@ -20,19 +20,19 @@ export function newBattle(game: AlgolGame): AlgolBattle {
       {
         player: 0,
         turn: 0,
-        description: { line: [{ text: "Let the battle begin!" }] },
+        description: { line: [{ text: "Initial setup" }] },
         board: {
           ...firstBoard,
-          potentialMarks: []
-        }
-      }
+          potentialMarks: [],
+        },
+      },
     ],
     state: {
       currentStepId: "root",
       entries: [],
       markStamps: {},
       undo: null,
-      board: firstBoard
-    }
+      board: firstBoard,
+    },
   };
 }

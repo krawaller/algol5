@@ -1,9 +1,10 @@
+export * from "./BattleControls";
 import React, { FunctionComponent } from "react";
 import { AlgolBattleUI } from "../../../types";
 
 import { Content } from "../Content";
 
-type BattleUIControlsProps = {
+type BattleControlsProps = {
   ui: AlgolBattleUI;
   callback: (
     action: "endTurn" | "undo" | "mark" | "command",
@@ -11,7 +12,7 @@ type BattleUIControlsProps = {
   ) => void;
 };
 
-export const BattleUIControls: FunctionComponent<BattleUIControlsProps> = ({
+export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   ui,
   callback,
 }) => (

@@ -6,7 +6,8 @@ import {
 } from "../../../types";
 
 import { Board } from "../Board";
-import { BattleUI } from "../BattleUI";
+import { BattleControls } from "../BattleControls";
+import { BattleHeadline } from "../BattleHeadline";
 
 type TesterProps = {
   api: AlgolStaticGameAPI;
@@ -33,7 +34,11 @@ export const Tester = (props: TesterProps) => {
         anim={ui.board.anim}
       />
       <div style={{ padding: "10px" }}>
-        <BattleUI callback={(action, arg) => dispatch([action, arg])} ui={ui} />
+        <BattleHeadline onChooseFrame={() => {}} ui={ui} />
+        <BattleControls
+          callback={(action, arg) => dispatch([action, arg])}
+          ui={ui}
+        />
       </div>
     </React.Fragment>
   );

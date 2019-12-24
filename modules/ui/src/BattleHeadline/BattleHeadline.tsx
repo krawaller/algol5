@@ -3,16 +3,16 @@ import { AlgolBattleUI } from "../../../types";
 
 import { Content } from "../Content";
 
-type BattleUIHeadlineProps = {
+type BattleHeadlineProps = {
   ui: AlgolBattleUI;
-  callback: (action: "mark" | "command" | "endTurn" | "undo") => void;
+  onChooseFrame: (num: number) => void;
 };
 
-// TODO - nice game title from meta (in UI?)
-// title when game is over
-export const BattleUIHeadline: FunctionComponent<BattleUIHeadlineProps> = ({
+const noop = () => {};
+
+export const BattleHeadline: FunctionComponent<BattleHeadlineProps> = ({
   ui,
-  callback,
+  onChooseFrame,
 }) => (
   <div>
     <Content
@@ -22,7 +22,7 @@ export const BattleUIHeadline: FunctionComponent<BattleUIHeadlineProps> = ({
           { player: ui.player as 1 | 2 },
         ],
       }}
-      callback={() => {}}
+      callback={noop}
     />
   </div>
 );

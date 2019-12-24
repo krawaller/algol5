@@ -22,6 +22,7 @@ type BoardUnitsProps = {
   anim?: AlgolAnimCompiled;
   height: number;
   width: number;
+  iconMapper: Record<string, AlgolIcon>;
 };
 
 export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
@@ -31,13 +32,17 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
   anim = { enterFrom: {}, exitTo: {}, ghosts: [] },
   height,
   width,
+  iconMapper,
 }) => {
   const targets = anim.ghosts
     .map(([from, to]) => to)
     .concat(Object.values(anim.exitTo))
-    .reduce((mem, t) => ({ ...mem, [t]: true }), {} as {
-      [pos: string]: boolean;
-    });
+    .reduce(
+      (mem, t) => ({ ...mem, [t]: true }),
+      {} as {
+        [pos: string]: boolean;
+      }
+    );
   return (
     <TransitionGroup
       childFactory={
@@ -47,7 +52,7 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
           }) /* to ensure exiting comps get fresh anim */
       }
     >
-      {Object.values(units).map(({ icon, owner, pos, id }) => (
+      {Object.values(units).map(({ group, owner, pos, id }) => (
         <Transition
           key={id}
           timeout={{ enter: 40, exit: 500 + (targets[pos] ? 0 : 0) }}
@@ -75,7 +80,7 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
                     : undefined
                 }
                 transition={transition}
-                icon={icon as AlgolIcon}
+                icon={iconMapper[group]}
                 owner={owner}
                 pos={posToShow}
                 height={height}

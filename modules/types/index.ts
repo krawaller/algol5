@@ -9,7 +9,7 @@ export * from "./_args";
 export type AlgolGameGraphics = {
   height: number;
   width: number;
-  icons: { [group: string]: string };
+  icons: { [group: string]: AlgolIcon };
   dataURI: string;
 };
 

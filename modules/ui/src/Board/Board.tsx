@@ -4,6 +4,7 @@ import {
   AlgolUnitState,
   AlgolPosition,
   AlgolAnimCompiled,
+  AlgolGameGraphics,
 } from "../../../types";
 import { emptyAnim } from "../../../common";
 
@@ -12,17 +13,28 @@ import { BoardUnits } from "./BoardUnits";
 import { BoardGhosts } from "./BoardGhosts";
 
 type BoardProps = {
-  board: { height: number; width: number; dataURI: string };
+  graphics: AlgolGameGraphics;
   units: { [id: string]: AlgolUnitState };
   marks: AlgolPosition[];
   potentialMarks: AlgolPosition[];
   callback: (pos: string) => void;
   anim?: AlgolAnimCompiled;
+  lookback?: boolean;
 };
 
+const EMPTYARR: any[] = [];
+
 export const Board: React.FunctionComponent<BoardProps> = memo(
-  ({ board, marks, potentialMarks, units, callback, anim = emptyAnim }) => {
-    const { dataURI, height, width } = board;
+  ({
+    graphics,
+    marks,
+    potentialMarks,
+    units,
+    callback,
+    lookback,
+    anim = emptyAnim,
+  }) => {
+    const { dataURI, height, width, icons } = graphics;
     return (
       <div
         style={{
@@ -45,8 +57,8 @@ export const Board: React.FunctionComponent<BoardProps> = memo(
             callback={callback}
             width={width}
             height={height}
-            marks={marks}
-            potentialMarks={potentialMarks}
+            marks={lookback ? EMPTYARR : marks}
+            potentialMarks={lookback ? EMPTYARR : potentialMarks}
             units={units}
           />
 
@@ -57,6 +69,7 @@ export const Board: React.FunctionComponent<BoardProps> = memo(
             potentialMarks={potentialMarks}
             units={units}
             anim={anim}
+            iconMapper={icons}
           />
 
           <BoardGhosts width={width} height={height} ghosts={anim.ghosts} />

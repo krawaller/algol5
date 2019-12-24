@@ -77,7 +77,7 @@ export const Demo = memo((props: DemoProps) => {
   return (
     <React.Fragment>
       <Board
-        board={dataURIs[gameId]}
+        graphics={dataURIs[gameId]}
         marks={EMPTYARR}
         potentialMarks={EMPTYARR}
         callback={noop}

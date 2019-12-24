@@ -72,7 +72,7 @@ export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
     >
       <Board
         key={gameId}
-        board={graphics}
+        graphics={graphics}
         marks={EMPTYARR}
         potentialMarks={EMPTYARR}
         callback={noop}

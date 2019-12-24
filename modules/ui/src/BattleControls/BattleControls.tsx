@@ -1,11 +1,12 @@
 export * from "./BattleControls";
 import React, { FunctionComponent } from "react";
-import { AlgolBattleUI } from "../../../types";
+import { AlgolContentAnon } from "../../../types";
 
 import { Content } from "../Content";
 
 type BattleControlsProps = {
-  ui: AlgolBattleUI;
+  instruction: AlgolContentAnon;
+  undo: string | null;
   callback: (
     action: "endTurn" | "undo" | "mark" | "command",
     arg?: string
@@ -13,14 +14,15 @@ type BattleControlsProps = {
 };
 
 export const BattleControls: FunctionComponent<BattleControlsProps> = ({
-  ui,
+  instruction,
+  undo,
   callback,
 }) => (
   <React.Fragment>
-    <Content content={ui.instruction} callback={callback} />
-    {ui.undo && (
+    <Content content={instruction} callback={callback} />
+    {undo && (
       <div>
-        <button onClick={() => callback("undo")}>Undo {ui.undo}</button>
+        <button onClick={() => callback("undo")}>Undo {undo}</button>
       </div>
     )}
   </React.Fragment>

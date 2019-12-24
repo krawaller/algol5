@@ -1,0 +1,8 @@
+.battleHeadlineContainer {
+  display: flex;
+}
+
+.battleHeadlineContainer > :last-child {
+  margin-left: 15px;
+  flex-grow: 1;
+}

@@ -14,7 +14,7 @@ storiesOf("Board", module)
       <div>
         <p>Board for {gameId}:</p>
         <Board
-          board={dataURIs[gameId]}
+          graphics={dataURIs[gameId]}
           marks={[]}
           potentialMarks={[]}
           units={{}}
@@ -32,20 +32,20 @@ storiesOf("Board", module)
           pos: "b3",
           icon: "knight",
           group: "whatev",
-          owner: 1
+          owner: 1,
         },
         unit2: {
           id: "unit2",
           pos: "c4",
           group: "whatev",
           icon: "pawn",
-          owner: 2
-        }
+          owner: 2,
+        },
       };
 
     return (
       <Board
-        board={dataURIs.murusgallicus}
+        graphics={dataURIs.murusgallicus}
         marks={marks}
         potentialMarks={potentialMarks}
         units={units}

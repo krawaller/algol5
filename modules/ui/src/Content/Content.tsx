@@ -98,6 +98,10 @@ export const Content: React.FunctionComponent<ContentProps> = ({
     const { player } = content;
     if (player === 1) {
       return <span style={{ fontWeight: "bold", color: "red" }}>Player 1</span>;
+    } else if (player === 0) {
+      return (
+        <span style={{ fontWeight: "bold", color: "gold" }}>Player 0</span>
+      );
     }
     return <span style={{ fontWeight: "bold", color: "blue" }}>Player 2</span>;
   }

@@ -10,7 +10,11 @@ storiesOf("Stepper", module).add("basic usage", () => {
     <Parent>
       {(state = max, setState = (n: number) => {}) => (
         <div style={{ width: "250px" }}>
-          <Stepper current={state} max={max} onChange={setState} />
+          <Stepper
+            current={Math.min(state, max)}
+            max={max}
+            onChange={setState}
+          />
           <hr />
           Current value is {state} out of {max}
         </div>

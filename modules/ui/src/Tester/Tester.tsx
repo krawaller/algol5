@@ -1,4 +1,4 @@
-import React, { useReducer, useMemo, useState } from "react";
+import React, { useReducer, useMemo, useState, Fragment } from "react";
 import {
   AlgolBattle,
   AlgolStaticGameAPI,
@@ -9,6 +9,9 @@ import {
 import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
 import { BattleHeadline } from "../BattleHeadline";
+import { Content } from "../Content";
+
+const noop = () => {};
 
 type TesterProps = {
   api: AlgolStaticGameAPI;
@@ -59,7 +62,7 @@ export const Tester = (props: TesterProps) => {
       };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Board
         callback={pos => dispatch(["mark", pos])}
         graphics={graphics}
@@ -69,19 +72,34 @@ export const Tester = (props: TesterProps) => {
         anim={ui.board.anim}
         lookback={lookback}
       />
-      <div style={{ padding: "10px" }}>
+      <Fragment>
         <BattleHeadline
           currentFrame={frame}
           frameCount={battle.history.length}
           onChooseFrame={num => dispatch(["frame", num])}
           ui={ui}
         />
-        <BattleControls
-          callback={(action, arg) => dispatch([action, arg])}
-          undo={ui.undo}
-          instruction={ui.instruction}
-        />
-      </div>
-    </React.Fragment>
+        <div style={{ padding: "10px" }}>
+          {lookback ? (
+            <span
+              style={{
+                backgroundColor: "#CCC",
+                display: "inline-block",
+                padding: "0 5px",
+                borderRadius: "5px",
+              }}
+            >
+              <Content content={ui.instruction} callback={noop} />
+            </span>
+          ) : (
+            <BattleControls
+              callback={(action, arg) => dispatch([action, arg])}
+              undo={ui.undo}
+              instruction={ui.instruction}
+            />
+          )}
+        </div>
+      </Fragment>
+    </Fragment>
   );
 };

@@ -1,5 +1,8 @@
 .battleHeadlineContainer {
   display: flex;
+  background-color: sandybrown;
+  padding: 0 5px;
+  align-items: center;
 }
 
 .battleHeadlineTurn {

@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="stylesheet" href="/components.css" />
           <link rel="stylesheet" href="/site.css" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
         </Head>
         <body>
           <Main />

@@ -3,6 +3,10 @@ import aries from "../../../../logic/dist/indiv/aries";
 
 test("turn/endTurn regular", () => {
   let turn = firstTurn(aries);
+  // have to add step that wasn't added because of performance thingy
+  turn.steps["root-d4-e4-move"] = aries.action["move1"](
+    turn.steps["root-d4-e4"]
+  );
   turn = endTurn(aries, turn, "root-d4-e4-move");
   expect(
     Object.keys(turn.steps.root.LINKS.marks)

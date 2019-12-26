@@ -1,14 +1,8 @@
 {
   "scripts": {
-    "postinstall": "link-module-alias",
     "test:unit": "jest modules/**/*.test.ts",
     "test:ts": "tsc --noEmit --skipLibCheck",
     "robot": "npm install; cd modules/common; npm run robot; cd ../games; npm run robot; cd ../graphics; npm run robot; cd ../logic; npm run robot; cd ../battle; npm run robot; cd ../ui; npm run robot; cd ../next; npm run robot;"
-  },
-  "_moduleAliases": {
-    "algol-types": "./modules/types",
-    "algol-games": "./modules/games",
-    "algol-common": "./modules/common"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",
@@ -32,7 +26,6 @@
     "fs-extra": "^8.1.0",
     "immer": "^3.1.2",
     "jest": "^24.9.0",
-    "link-module-alias": "^1.2.0",
     "prettier": "^1.19.1",
     "typescript": "^3.5.1"
   },

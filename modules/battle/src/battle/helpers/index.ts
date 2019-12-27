@@ -6,3 +6,4 @@ export * from "./battleUndo";
 export * from "./getBattleInstruction";
 export * from "./battleTurnPath";
 export * from "./inflateBattleSave";
+export * from "./makeBattleSave";

@@ -36,17 +36,22 @@ export function runGameScript(
               throw new Error("Game end but lines remaining");
             }
             if (
-              ["startTurn1", "startTurn2"].includes(step.LINKS
-                .endTurn as string)
+              ["startTurn1", "startTurn2"].includes(
+                step.LINKS.endTurn as string
+              )
             ) {
               throw new Error("Expected game to end but it didnt");
             }
-            if (step.LINKS.endGame !== action) {
+            if (step.LINKS.endGame !== action && action !== "endTurn") {
               throw new Error(
-                `Game ended with unexpected winner: ${action} vs ${
-                  step.LINKS.endTurn
-                }`
+                `Game ended with unexpected winner: ${action} vs ${step.LINKS.endTurn}`
               );
+            }
+            if (line.endedBy) {
+              expect(line.endedBy).toEqual(step.LINKS.endedBy);
+            }
+            if (line.endedIn) {
+              expect(line.endedIn).toEqual(step.LINKS.endGame);
             }
           } else {
             if (action === "endTurn") {

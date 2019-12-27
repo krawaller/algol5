@@ -15,11 +15,12 @@ async function setup() {
       await fs.writeFile(
         path.join(out, name + ".test.ts"),
         `
-import { runGameScripts } from "../runGameScripts";
+import { runGameScripts, runGameScriptsStatic } from "../runGameScripts";
 import ${name}Def from "../../../games/dist/games/${name}";
-import ${name}API from "../../dist/apis/${name}";
+import {statefulAPI, staticAPI} from "../../dist/apis/${name}";
 
-runGameScripts("${name}", ${name}API, ${name}Def.scripts);
+runGameScripts("${name}", statefulAPI, ${name}Def.scripts);
+runGameScriptsStatic("${name}", staticAPI, ${name}Def.scripts);
 `
       );
       console.log("Generating test file for", name);

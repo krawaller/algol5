@@ -1,6 +1,23 @@
-import { SemaphorScripts } from './_types';
+import { SemaphorScripts } from "./_types";
 
 const semaphorScripts: SemaphorScripts = {
+  quickWin: [
+    {
+      commands: [
+        "a1",
+        "deploy",
+        "endTurn",
+        "b1",
+        "deploy",
+        "endTurn",
+        "c1",
+        "deploy",
+        "endTurn",
+      ],
+      endedIn: "win",
+      endedBy: "madeline",
+    },
+  ],
   basic: [
     {
       commands: [],

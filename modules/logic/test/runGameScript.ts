@@ -28,9 +28,8 @@ export function runGameScript(
         for (const action of line.commands) {
           let func;
           if (
-            endGames.includes(action) ||
-            (action === "endTurn" &&
-              endGames.includes(step.LINKS.endGame as string))
+            action === "endTurn" &&
+            endGames.includes(step.LINKS.endGame as string)
           ) {
             if (lines.length) {
               throw new Error("Game end but lines remaining");
@@ -42,7 +41,7 @@ export function runGameScript(
             ) {
               throw new Error("Expected game to end but it didnt");
             }
-            if (step.LINKS.endGame !== action && action !== "endTurn") {
+            if (action !== "endTurn") {
               throw new Error(
                 `Game ended with unexpected winner: ${action} vs ${step.LINKS.endTurn}`
               );

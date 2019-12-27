@@ -95,8 +95,9 @@ const semaphorScripts: SemaphorScripts = {
         "endTurn",
         "a2",
         "promote",
+        "endTurn",
       ],
-      include: ["win"],
+      endedIn: "win",
     },
   ],
 };

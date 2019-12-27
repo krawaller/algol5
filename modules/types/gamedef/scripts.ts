@@ -1,7 +1,7 @@
 export type AlgolScriptLine<Command, Position> = {
-  commands: (Command | Position | "endTurn" | "win")[];
-  include?: (Command | Position | "endTurn" | "win")[];
-  exclude?: (Command | Position | "endTurn" | "win")[];
+  commands: (Command | Position | "endTurn")[];
+  include?: (Command | Position | "endTurn")[];
+  exclude?: (Command | Position | "endTurn")[];
   endedBy?: string;
   endedIn?: "win" | "draw" | "lose"
 };

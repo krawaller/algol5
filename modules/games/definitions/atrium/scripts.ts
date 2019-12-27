@@ -1,4 +1,4 @@
-import { AtriumScripts } from './_types';
+import { AtriumScripts } from "./_types";
 
 const atriumScripts: AtriumScripts = {
   basic: [
@@ -38,7 +38,7 @@ const atriumScripts: AtriumScripts = {
       commands: ["b5", "b4", "move", "endTurn"],
       include: ["a3", "b2", "c3", "d1", "d2", "d5"],
     },
-    { commands: ["c3", "c2", "move", "win"] },
+    { commands: ["c3", "c2", "move", "endTurn"], endedIn: "win" },
   ],
 };
 

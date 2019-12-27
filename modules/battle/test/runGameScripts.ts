@@ -20,7 +20,7 @@ export function runGameScripts(
       let { initialUI: ui, performAction } = api.newBattle();
       for (const action of seq) {
         ui =
-          action === "win" || action === "endturn" || action === "endTurn"
+          action === "endTurn"
             ? performAction("endTurn")
             : identifyMark.test(action)
             ? performAction("mark", action)

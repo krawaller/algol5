@@ -1,4 +1,4 @@
-import { DescentScripts } from './_types';
+import { DescentScripts } from "./_types";
 
 const descentScripts: DescentScripts = {
   basic: [
@@ -22,7 +22,7 @@ const descentScripts: DescentScripts = {
       commands: ["d2", "move", "c1", "dig", "endTurn"],
       include: ["b2", "b3", "d1"],
     },
-    { commands: ["b2", "c2", "move", "b2", "dig", "win"] },
+    { commands: ["b2", "c2", "move", "b2", "dig", "endTurn"], endedIn: "win" },
   ],
 };
 

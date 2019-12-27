@@ -1,4 +1,4 @@
-import { KriegScripts } from './_types';
+import { KriegScripts } from "./_types";
 
 const kriegScripts: KriegScripts = {
   basic: [
@@ -18,8 +18,7 @@ const kriegScripts: KriegScripts = {
     { commands: ["b2"], include: ["a2", "b1", "b3"] },
     { commands: ["b3", "move", "endTurn"], include: ["a3", "b4", "c2"] },
     { commands: ["c2"], include: ["b2", "d1"] },
-    { commands: ["d1", "move"], include: ["win"] },
-    { commands: ["win"] },
+    { commands: ["d1", "move", "endTurn"], endedIn: "win" },
   ],
 };
 

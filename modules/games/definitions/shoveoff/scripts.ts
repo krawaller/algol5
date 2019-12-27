@@ -1,4 +1,4 @@
-import { ShoveoffScripts } from './_types';
+import { ShoveoffScripts } from "./_types";
 
 const shoveoffScripts: ShoveoffScripts = {
   basic: [
@@ -107,7 +107,7 @@ const shoveoffScripts: ShoveoffScripts = {
       commands: ["c4", "south", "endTurn"],
       include: ["a1", "a2", "a3", "a4", "b1", "c4", "d1", "d2", "d3", "d4"],
     },
-    { commands: ["a1", "north", "win"] },
+    { commands: ["a1", "north", "endTurn"], endedIn: "win" },
   ],
 };
 

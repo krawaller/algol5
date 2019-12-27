@@ -3,6 +3,7 @@ import {
   AlgolStatefulGameAPI,
   AlgolStaticGameAPI,
 } from "../../types";
+import { makeBattleSave } from "../src/battle/helpers";
 
 const identifyMark = /^[a-z][0-9]+$/;
 
@@ -25,7 +26,6 @@ export function runGameScripts(
             ? performAction("mark", action)
             : performAction("command", action);
       }
-      expect(gameId).toBe(gameId); // TODO - more checks?
     });
   }
 }
@@ -37,9 +37,10 @@ export function runGameScriptsStatic(
 ) {
   for (const scriptName in scripts) {
     test(`Running ${gameId} ${scriptName} static`, () => {
-      const seq = scripts[scriptName]
-        .reduce((mem, line) => mem.concat(line.commands), [] as string[])
-        .slice(0, 5);
+      const seq = scripts[scriptName].reduce(
+        (mem, line) => mem.concat(line.commands),
+        [] as string[]
+      );
       let battle = api.newBattle();
       for (const action of seq) {
         battle =
@@ -49,7 +50,11 @@ export function runGameScriptsStatic(
             ? api.performAction(battle, "mark", action)
             : api.performAction(battle, "command", action);
       }
-      expect(gameId).toBe(gameId); // TODO - more checks?
+      const save = makeBattleSave(battle);
+      if (seq.slice(-1)[0] === "endTurn") {
+        const inflatedBattle = api.fromSave(save);
+        expect(battle).toEqual(inflatedBattle);
+      }
     });
   }
 }

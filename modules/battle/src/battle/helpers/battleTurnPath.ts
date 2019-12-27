@@ -1,4 +1,5 @@
 import { AlgolBattle } from "../../../../types";
+import { stepOptions } from "../../../../common";
 
 // Called from battleEndTurn. Expected to return the indexes of all chosen
 // options in the turn, except for those where there was only one option.
@@ -13,13 +14,7 @@ export const battleTurnPath = (battle: AlgolBattle) => {
     .concat("endTurn");
   while (actions.length) {
     const action = actions.shift()!;
-    const step = battle.turn.steps[stepId];
-    const canEnd = Boolean(step.LINKS.endTurn || step.LINKS.endGame);
-    const allOpts = [
-      ...Object.keys(step.LINKS.marks),
-      ...Object.keys(step.LINKS.commands),
-      ...(canEnd ? ["endTurn"] : []),
-    ].sort();
+    const allOpts = stepOptions(battle.turn.steps[stepId]);
     const actionIdx = allOpts.findIndex(i => i === action);
     if (actionIdx === -1) {
       console.log(stepId, action, allOpts);

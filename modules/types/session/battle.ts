@@ -9,6 +9,7 @@ export type AlgolBattle = {
   history: AlgolHistoryMove[];
   gameEndedBy?: string;
   winner?: 0 | 1 | 2;
+  path: number[];
 };
 
 export type AlgolUndo = {

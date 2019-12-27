@@ -13,6 +13,7 @@ export function newBattle(game: AlgolGame): AlgolBattle {
     potentialMarks: Object.keys(turn.steps.root.LINKS.marks),
   };
   return {
+    path: [],
     turn,
     turnNumber: 1,
     player: 1,

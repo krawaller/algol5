@@ -39,7 +39,11 @@ export const Tester = (props: TesterProps) => {
       } else {
         const newBattle = api.performAction(state.battle, cmnd, instr[1]);
         return {
-          frame: cmnd === "endTurn" ? newBattle.history.length : state.frame,
+          frame: newBattle.gameEndedBy
+            ? newBattle.history.length - 1
+            : cmnd === "endTurn"
+            ? newBattle.history.length
+            : state.frame,
           battle: newBattle,
         };
       }
@@ -60,7 +64,8 @@ export const Tester = (props: TesterProps) => {
         board: battle.history[frame].board,
         instruction: battle.history[frame].description,
       };
-
+  // if we haven't finished, last frame is UI to make new move
+  const frameCount = battle.history.length - (battle.gameEndedBy ? 1 : 0);
   return (
     <Fragment>
       <Board
@@ -75,7 +80,7 @@ export const Tester = (props: TesterProps) => {
       <Fragment>
         <BattleHeadline
           currentFrame={frame}
-          frameCount={battle.history.length}
+          frameCount={frameCount}
           onChooseFrame={num => dispatch(["frame", num])}
           ui={ui}
         />

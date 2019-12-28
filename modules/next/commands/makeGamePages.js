@@ -10,7 +10,7 @@ for (const gameId of list) {
   import React from "react";
   
   import ${gameId} from "../../../../logic/dist/indiv/${gameId}";
-  import { Tester } from "../../../../ui/src/Tester";
+  import { Tester } from "../../../../ui/src/components/Tester";
   import { makeStaticGameAPI } from "../../../../battle/src";
   import { Master } from "../../../components";
   import graphics from "../../../../graphics/dist/svgDataURIs/${gameId}";

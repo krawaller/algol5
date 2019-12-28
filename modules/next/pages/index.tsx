@@ -2,7 +2,7 @@ import React from "react";
 
 import Link from "next/link";
 
-import { List, ListItemWrapper } from "../../ui/src/List";
+import { List, ListItemWrapper } from "../../ui/src/components/List";
 
 const Wrapper: ListItemWrapper = ({ gameId, children }) => (
   <Link href={"/games/" + gameId}>

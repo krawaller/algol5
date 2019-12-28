@@ -37,6 +37,7 @@ export function hydrateStepInTurn(
       delete stepLinks.endTurn;
       stepLinks.endGame = "win";
       stepLinks.endedBy = "starvation";
+      stepLinks.endMarks = Object.keys(step.UNITLAYERS.myunits || {});
       turn.gameEnds.win.push(stepId);
     }
   }

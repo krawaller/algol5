@@ -29,5 +29,6 @@ export type AlgolDirsInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | "ortho"
   | "diag"
   | "rose"
+  | "knight"
   | BasicDir[]
   | AlgolDirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

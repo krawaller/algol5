@@ -13,9 +13,7 @@ export function executeHead(
   ret += `const emptyObj = {}; `;
 
   ret += `
-    const BOARD = boardLayers({ height: ${gameDef.board.height}, width: ${
-    gameDef.board.width
-  } });
+    const BOARD = boardLayers({ height: ${gameDef.board.height}, width: ${gameDef.board.width} });
   `;
 
   ret += `const iconMapping = ${JSON.stringify(gameDef.graphics.icons)};\n`;
@@ -35,7 +33,15 @@ export function executeHead(
   ret += `
     const connections = boardConnections({ height: ${
       gameDef.board.height
-    }, width: ${gameDef.board.width} });
+    }, width: ${gameDef.board.width}${
+    gameDef.board.offset
+      ? `, offset: ${JSON.stringify(gameDef.board.offset)}`
+      : ""
+  }${
+    gameDef.board.offsets
+      ? `, offsets: ${JSON.stringify(gameDef.board.offsets)}`
+      : ""
+  } });
   `;
 
   let offsets = gameDef.board.offsets || [];
@@ -47,14 +53,25 @@ export function executeHead(
       gameDef.board.width
     }, ${JSON.stringify({
       ...gameDef.board.terrain,
-      ...gameDef.AI.terrain
+      ...gameDef.AI.terrain,
     })}); `;
   }
 
+  // TODO - only add if referred?
   ret += `
     const roseDirs = [1,2,3,4,5,6,7,8];
     const orthoDirs = [1,3,5,7];
     const diagDirs = [2,4,6,8];
+    const knightDirs = [
+      "d1f2r1",
+      "d1f2r-1",
+      "d3f2r1",
+      "d3f2r-1",
+      "d5f2r1",
+      "d5f2r-1",
+      "d7f2r1",
+      "d7f2r-1",
+    ];
   `;
 
   return ret;

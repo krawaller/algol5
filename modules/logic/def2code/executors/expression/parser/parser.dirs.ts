@@ -17,6 +17,8 @@ export default function parseDirs(
         return "orthoDirs";
       case "rose":
         return "roseDirs";
+      case "knight":
+        return "knightDirs";
       default:
         throw new Error("Unknown dirs singleton: " + JSON.stringify(expr));
     }

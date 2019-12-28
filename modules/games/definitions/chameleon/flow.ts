@@ -25,34 +25,19 @@ const chameleonFlow: ChameleonFlow = {
       applyEffects: [
         {
           if: [
+            { anyat: ["morph", "selectmovetarget"] },
             {
-              and: [
-                { anyat: ["knights", "selectunit"] },
+              morphat: [
+                "selectunit",
                 {
-                  same: [
-                    { read: ["board", "selectunit", "colour"] },
-                    { read: ["board", "selectmovetarget", "colour"] },
+                  ifelse: [
+                    { anyat: ["knights", "selectunit"] },
+                    "bishops",
+                    "knights",
                   ],
                 },
               ],
             },
-            { morphat: ["selectunit", "bishops"] },
-          ],
-        },
-        {
-          if: [
-            {
-              and: [
-                { anyat: ["bishops", "selectunit"] },
-                {
-                  different: [
-                    { read: ["board", "selectunit", "colour"] },
-                    { read: ["board", "selectmovetarget", "colour"] },
-                  ],
-                },
-              ],
-            },
-            { morphat: ["selectunit", "knights"] },
           ],
         },
         { stompat: ["selectunit", "selectmovetarget"] },
@@ -65,13 +50,14 @@ const chameleonFlow: ChameleonFlow = {
       from: "myunits",
       runGenerators: [
         "findsteptargets",
+        "findmorphtargets",
         { if: [{ anyat: ["knights", "selectunit"] }, "findknighttargets"] },
         { if: [{ anyat: ["bishops", "selectunit"] }, "findbishoptargets"] },
       ],
       link: "selectmovetarget",
     },
     selectmovetarget: {
-      from: "movetarget",
+      from: { union: ["movetarget", "morph"] },
       link: "move",
     },
   },

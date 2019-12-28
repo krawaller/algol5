@@ -11,7 +11,7 @@ import {
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
 const iconMapping = { knights: "knight", bishops: "bishop" };
-const emptyArtifactLayers = { movetarget: {} };
+const emptyArtifactLayers = { movetarget: {}, morph: {} };
 const connections = boardConnections({ height: 5, width: 5, offset: "knight" });
 const relativeDirs = makeRelativeDirs(["knight"]);
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -86,35 +86,20 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   };
   game.action.move1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let ARTIFACTS = {
+      movetarget: step.ARTIFACTS.movetarget,
+      morph: step.ARTIFACTS.morph
+    };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    if (
-      UNITLAYERS.knights[MARKS.selectunit] &&
-      (BOARD.board[MARKS.selectunit] || {}).colour ===
-        (BOARD.board[MARKS.selectmovetarget] || {}).colour
-    ) {
+    if (ARTIFACTS.morph[MARKS.selectmovetarget]) {
       {
         let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            group: "bishops"
-          };
-        }
-      }
-    }
-    if (
-      UNITLAYERS.bishops[MARKS.selectunit] &&
-      (BOARD.board[MARKS.selectunit] || {}).colour !==
-        (BOARD.board[MARKS.selectmovetarget] || {}).colour
-    ) {
-      {
-        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            group: "knights"
+            group: UNITLAYERS.knights[MARKS.selectunit] ? "bishops" : "knights"
           };
         }
       }
@@ -196,7 +181,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     return {
       LINKS,
       MARKS: {},
-      ARTIFACTS: step.ARTIFACTS,
+      ARTIFACTS,
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS
@@ -205,7 +190,8 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetarget: {}
+      movetarget: {},
+      morph: {}
     };
     let LINKS = { marks: {}, commands: {} };
     let MARKS = {
@@ -213,12 +199,25 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     };
     let UNITLAYERS = step.UNITLAYERS;
     {
-      let startconnections = connections[MARKS.selectunit];
-      for (let DIR of roseDirs) {
+      let STARTPOS = MARKS.selectunit;
+      let startconnections = connections[STARTPOS];
+      for (let DIR of UNITLAYERS.knights[STARTPOS] ? orthoDirs : diagDirs) {
         let POS = startconnections[DIR];
         if (POS) {
           if (!UNITLAYERS.myunits[POS]) {
             ARTIFACTS.movetarget[POS] = emptyObj;
+          }
+        }
+      }
+    }
+    {
+      let STARTPOS = MARKS.selectunit;
+      let startconnections = connections[STARTPOS];
+      for (let DIR of UNITLAYERS.knights[STARTPOS] ? diagDirs : orthoDirs) {
+        let POS = startconnections[DIR];
+        if (POS) {
+          if (!UNITLAYERS.myunits[POS]) {
+            ARTIFACTS.morph[POS] = emptyObj;
           }
         }
       }
@@ -252,7 +251,10 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
         }
       }
     }
-    for (const pos of Object.keys(ARTIFACTS.movetarget)) {
+    for (const pos of Object.keys({
+      ...ARTIFACTS.movetarget,
+      ...ARTIFACTS.morph
+    })) {
       LINKS.marks[pos] = "selectmovetarget1";
     }
     return {
@@ -293,6 +295,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     };
   };
   game.instruction.selectmovetarget1 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
@@ -341,23 +344,13 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
                 { pos: MARKS.selectmovetarget }
               ]
             }),
-        UNITLAYERS.knights[MARKS.selectunit] &&
-        (BOARD.board[MARKS.selectunit] || {}).colour ===
-          (BOARD.board[MARKS.selectmovetarget] || {}).colour
+        ARTIFACTS.morph[MARKS.selectmovetarget]
           ? collapseContent({
               line: [
                 { text: ", turning it into a" },
-                { unittype: ["bishop", 1] }
-              ]
-            })
-          : undefined,
-        UNITLAYERS.bishops[MARKS.selectunit] &&
-        (BOARD.board[MARKS.selectunit] || {}).colour !==
-          (BOARD.board[MARKS.selectmovetarget] || {}).colour
-          ? collapseContent({
-              line: [
-                { text: ", turning it into a" },
-                { unittype: ["knight", 1] }
+                UNITLAYERS.knights[MARKS.selectunit]
+                  ? { unittype: ["bishop", 1] }
+                  : { unittype: ["knight", 1] }
               ]
             })
           : undefined
@@ -447,35 +440,20 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   };
   game.action.move2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let ARTIFACTS = {
+      movetarget: step.ARTIFACTS.movetarget,
+      morph: step.ARTIFACTS.morph
+    };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    if (
-      UNITLAYERS.knights[MARKS.selectunit] &&
-      (BOARD.board[MARKS.selectunit] || {}).colour ===
-        (BOARD.board[MARKS.selectmovetarget] || {}).colour
-    ) {
+    if (ARTIFACTS.morph[MARKS.selectmovetarget]) {
       {
         let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            group: "bishops"
-          };
-        }
-      }
-    }
-    if (
-      UNITLAYERS.bishops[MARKS.selectunit] &&
-      (BOARD.board[MARKS.selectunit] || {}).colour !==
-        (BOARD.board[MARKS.selectmovetarget] || {}).colour
-    ) {
-      {
-        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            group: "knights"
+            group: UNITLAYERS.knights[MARKS.selectunit] ? "bishops" : "knights"
           };
         }
       }
@@ -557,7 +535,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     return {
       LINKS,
       MARKS: {},
-      ARTIFACTS: step.ARTIFACTS,
+      ARTIFACTS,
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS
@@ -566,7 +544,8 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetarget: {}
+      movetarget: {},
+      morph: {}
     };
     let LINKS = { marks: {}, commands: {} };
     let MARKS = {
@@ -574,12 +553,25 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     };
     let UNITLAYERS = step.UNITLAYERS;
     {
-      let startconnections = connections[MARKS.selectunit];
-      for (let DIR of roseDirs) {
+      let STARTPOS = MARKS.selectunit;
+      let startconnections = connections[STARTPOS];
+      for (let DIR of UNITLAYERS.knights[STARTPOS] ? orthoDirs : diagDirs) {
         let POS = startconnections[DIR];
         if (POS) {
           if (!UNITLAYERS.myunits[POS]) {
             ARTIFACTS.movetarget[POS] = emptyObj;
+          }
+        }
+      }
+    }
+    {
+      let STARTPOS = MARKS.selectunit;
+      let startconnections = connections[STARTPOS];
+      for (let DIR of UNITLAYERS.knights[STARTPOS] ? diagDirs : orthoDirs) {
+        let POS = startconnections[DIR];
+        if (POS) {
+          if (!UNITLAYERS.myunits[POS]) {
+            ARTIFACTS.morph[POS] = emptyObj;
           }
         }
       }
@@ -613,7 +605,10 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
         }
       }
     }
-    for (const pos of Object.keys(ARTIFACTS.movetarget)) {
+    for (const pos of Object.keys({
+      ...ARTIFACTS.movetarget,
+      ...ARTIFACTS.morph
+    })) {
       LINKS.marks[pos] = "selectmovetarget2";
     }
     return {
@@ -654,6 +649,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     };
   };
   game.instruction.selectmovetarget2 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
@@ -702,23 +698,13 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
                 { pos: MARKS.selectmovetarget }
               ]
             }),
-        UNITLAYERS.knights[MARKS.selectunit] &&
-        (BOARD.board[MARKS.selectunit] || {}).colour ===
-          (BOARD.board[MARKS.selectmovetarget] || {}).colour
+        ARTIFACTS.morph[MARKS.selectmovetarget]
           ? collapseContent({
               line: [
                 { text: ", turning it into a" },
-                { unittype: ["bishop", 2] }
-              ]
-            })
-          : undefined,
-        UNITLAYERS.bishops[MARKS.selectunit] &&
-        (BOARD.board[MARKS.selectunit] || {}).colour !==
-          (BOARD.board[MARKS.selectmovetarget] || {}).colour
-          ? collapseContent({
-              line: [
-                { text: ", turning it into a" },
-                { unittype: ["knight", 2] }
+                UNITLAYERS.knights[MARKS.selectunit]
+                  ? { unittype: ["bishop", 2] }
+                  : { unittype: ["knight", 2] }
               ]
             })
           : undefined

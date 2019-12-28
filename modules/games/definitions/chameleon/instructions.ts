@@ -32,41 +32,18 @@ const chameleonInstructions: ChameleonInstructions = {
       {
         if: [
           {
-            and: [
-              { anyat: ["knights", "selectunit"] },
-              {
-                same: [
-                  { read: ["board", "selectunit", "colour"] },
-                  { read: ["board", "selectmovetarget", "colour"] },
-                ],
-              },
-            ],
+            anyat: ["morph", "selectmovetarget"],
           },
           {
             line: [
               ", turning it into a",
-              { unittype: ["bishops", ["player"]] },
-            ],
-          },
-        ],
-      },
-      {
-        if: [
-          {
-            and: [
-              { anyat: ["bishops", "selectunit"] },
               {
-                different: [
-                  { read: ["board", "selectunit", "colour"] },
-                  { read: ["board", "selectmovetarget", "colour"] },
+                ifelse: [
+                  { anyat: ["knights", "selectunit"] },
+                  { unittype: ["bishops", ["player"]] },
+                  { unittype: ["knights", ["player"]] },
                 ],
               },
-            ],
-          },
-          {
-            line: [
-              ", turning it into a",
-              { unittype: ["knights", ["player"]] },
             ],
           },
         ],

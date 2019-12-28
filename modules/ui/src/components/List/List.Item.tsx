@@ -1,5 +1,5 @@
 import React from "react";
-import css from "./List.css.js";
+import css from "./List.cssProxy";
 
 import { Thumbnail } from "../Thumbnail";
 import { AlgolMeta, AlgolDemo, AlgolGameGraphics } from "../../../../types";

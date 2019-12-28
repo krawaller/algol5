@@ -2,8 +2,8 @@ import * as React from "react";
 import { AlgolIcon } from "../../../../types";
 import classnames from "classnames";
 
-import containerStyles from "./Icon.container.css.js";
-import innerStyles from "./Icon.inner.css.js";
+import containerStyles from "./Icon.container.cssProxy";
+import innerStyles from "./Icon.inner.cssProxy";
 
 import { hollows, solids } from "./Icon.shapes";
 

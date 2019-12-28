@@ -3,7 +3,7 @@ import { GameId, list } from "../../../../games/dist/list";
 import meta from "../../../../games/dist/meta";
 import demos from "../../../../battle/dist/allDemos";
 import boards from "../../../../graphics/dist/svgDataURIs";
-import css from "./List.css.js";
+import css from "./List.cssProxy";
 
 import { ListItem } from "./List.Item";
 

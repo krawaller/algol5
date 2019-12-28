@@ -3,7 +3,7 @@ import { AlgolBattleUI } from "../../../../types";
 
 import { Content } from "../Content";
 import { Stepper } from "../Stepper";
-import css from "./BattleHeadline.css.js";
+import css from "./BattleHeadline.cssProxy";
 
 type BattleHeadlineProps = {
   ui: AlgolBattleUI;

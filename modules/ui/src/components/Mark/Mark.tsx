@@ -1,7 +1,7 @@
 import React, { useCallback, CSSProperties } from "react";
 import classnames from "classnames";
 import { positionStyles } from "../../helpers";
-import styles from "./Mark.css.js";
+import styles from "./Mark.cssProxy";
 
 type MarkProps = {
   /** Height of board */

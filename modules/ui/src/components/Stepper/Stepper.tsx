@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ChangeEvent } from "react";
-import css from "./Stepper.css.js";
+import css from "./Stepper.cssProxy";
 
 type StepperProps = {
   onChange: (num: number) => void;

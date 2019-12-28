@@ -4,7 +4,7 @@ const prettier = require("prettier");
 
 const noCrap = d => Boolean(d) && d !== ".DS_Store" && d !== "node_modules";
 const isCss = p => p.slice(-4) === ".css";
-const isJsCss = p => p.slice(-7) === ".css.js";
+const isJsCss = p => p.slice(-7) === ".cssProxy.js";
 
 const seenClasses = {};
 const seenKeyframes = {};
@@ -58,7 +58,10 @@ while (toCheck.length) {
     const styles = {${classes.map(cls => `"${cls}": "${cls}",\n`).join("")}};
     export default styles
     `;
-    fs.writeFileSync(p + ".js", prettier.format(code, { filepath: "foo.js" }));
+    fs.writeFileSync(
+      p + "Proxy.js",
+      prettier.format(code, { filepath: "foo.js" })
+    );
     builtFiles[p + ".js"] = true;
   } else if (isJsCss(p)) {
     // old file, clean it up!

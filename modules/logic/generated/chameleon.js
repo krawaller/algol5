@@ -11,7 +11,6 @@ import {
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
 const iconMapping = { knights: "knight", bishops: "bishop" };
-const emptyArtifactLayers = { morph: {}, movetarget: {} };
 const connections = boardConnections({ height: 5, width: 5, offset: "knight" });
 const relativeDirs = makeRelativeDirs(["knight"]);
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -48,6 +47,9 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     1
   );
   game.action.startTurn1 = step => {
+    let ARTIFACTS = {
+      invaders: {}
+    };
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -60,6 +62,18 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
       marks: {},
       commands: {}
     };
+    let filtersourcelayer = Object.entries(
+      Object.keys(UNITLAYERS.oppunits)
+        .concat(Object.keys(TERRAIN.mybase))
+        .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+    )
+      .filter(([key, n]) => n === 2)
+      .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {});
+    let filtertargetlayer = ARTIFACTS.invaders;
+    for (let POS in filtersourcelayer) {
+      let filterObj = filtersourcelayer[POS];
+      filtertargetlayer[POS] = filterObj;
+    }
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
       LINKS.marks[pos] = "selectunit1";
     }
@@ -67,12 +81,13 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       LINKS,
       UNITLAYERS,
-      ARTIFACTS: emptyArtifactLayers,
+      ARTIFACTS,
       MARKS: {},
       TURN: step.TURN + 1
     };
   };
   game.instruction.startTurn1 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
@@ -81,15 +96,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
         { unittype: ["bishop", 1] },
         { text: "or" },
         { unittype: ["knight", 1] },
-        Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.oppunits)
-              .concat(Object.keys(TERRAIN.mybase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        ).length === 0
+        Object.keys(ARTIFACTS.invaders).length === 0
           ? { text: "to move" }
           : collapseContent({
               line: [
@@ -98,65 +105,13 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
                   unit: [
                     iconMapping[
                       (
-                        UNITLAYERS.units[
-                          Object.keys(
-                            Object.entries(
-                              Object.keys(UNITLAYERS.oppunits)
-                                .concat(Object.keys(TERRAIN.mybase))
-                                .reduce(
-                                  (mem, k) => ({
-                                    ...mem,
-                                    [k]: (mem[k] || 0) + 1
-                                  }),
-                                  {}
-                                )
-                            )
-                              .filter(([key, n]) => n === 2)
-                              .reduce(
-                                (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                                {}
-                              )
-                          )[0]
-                        ] || {}
+                        UNITLAYERS.units[Object.keys(ARTIFACTS.invaders)[0]] ||
+                        {}
                       ).group
                     ],
-                    (
-                      UNITLAYERS.units[
-                        Object.keys(
-                          Object.entries(
-                            Object.keys(UNITLAYERS.oppunits)
-                              .concat(Object.keys(TERRAIN.mybase))
-                              .reduce(
-                                (mem, k) => ({
-                                  ...mem,
-                                  [k]: (mem[k] || 0) + 1
-                                }),
-                                {}
-                              )
-                          )
-                            .filter(([key, n]) => n === 2)
-                            .reduce(
-                              (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                              {}
-                            )
-                        )[0]
-                      ] || {}
-                    ).owner,
-                    Object.keys(
-                      Object.entries(
-                        Object.keys(UNITLAYERS.oppunits)
-                          .concat(Object.keys(TERRAIN.mybase))
-                          .reduce(
-                            (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                            {}
-                          )
-                      )
-                        .filter(([key, n]) => n === 2)
-                        .reduce(
-                          (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                          {}
-                        )
-                    )[0]
+                    (UNITLAYERS.units[Object.keys(ARTIFACTS.invaders)[0]] || {})
+                      .owner,
+                    Object.keys(ARTIFACTS.invaders)[0]
                   ]
                 },
                 { text: "invader" }
@@ -168,6 +123,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.action.move1 = step => {
     let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
+      invaders: step.ARTIFACTS.invaders,
       morph: step.ARTIFACTS.morph,
       movetarget: step.ARTIFACTS.movetarget
     };
@@ -210,63 +166,17 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
       }
     }
     if (
-      Object.keys(
-        Object.entries(
-          Object.keys(UNITLAYERS.oppunits)
-            .concat(Object.keys(TERRAIN.mybase))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length === 0
+      Object.keys(ARTIFACTS.invaders).length === 0 ||
+      ARTIFACTS.invaders[MARKS.selectmovetarget]
     ) {
       if (
-        Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.oppunits)
-              .concat(Object.keys(TERRAIN.mybase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        ).length !== 0
-      ) {
-        let winner = 2;
-        LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-        LINKS.endedBy = "persistantInvader";
-        LINKS.endMarks = Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.oppunits)
-              .concat(Object.keys(TERRAIN.mybase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        );
-      } else if (
         Object.keys(UNITLAYERS.myunits).length === 1 &&
-        Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.myunits)
-              .concat(Object.keys(TERRAIN.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        ).length !== 0
+        TERRAIN.oppbase[MARKS.selectmovetarget]
       ) {
         let winner = 1;
         LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
         LINKS.endedBy = "loneInvader";
-        LINKS.endMarks = Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.myunits)
-              .concat(Object.keys(TERRAIN.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        );
+        LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
       } else {
         LINKS.endTurn = "startTurn2";
       }
@@ -283,6 +193,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
+      invaders: step.ARTIFACTS.invaders,
       morph: {},
       movetarget: {}
     };
@@ -353,17 +264,10 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     };
   };
   game.instruction.selectunit1 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
-    return Object.keys(
-      Object.entries(
-        Object.keys(UNITLAYERS.oppunits)
-          .concat(Object.keys(TERRAIN.mybase))
-          .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-      )
-        .filter(([key, n]) => n === 2)
-        .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-    ).length === 0
+    return Object.keys(ARTIFACTS.invaders).length === 0
       ? collapseContent({
           line: [
             { text: "Select where to move" },
@@ -390,57 +294,12 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
             {
               unit: [
                 iconMapping[
-                  (
-                    UNITLAYERS.units[
-                      Object.keys(
-                        Object.entries(
-                          Object.keys(UNITLAYERS.oppunits)
-                            .concat(Object.keys(TERRAIN.mybase))
-                            .reduce(
-                              (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                              {}
-                            )
-                        )
-                          .filter(([key, n]) => n === 2)
-                          .reduce(
-                            (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                            {}
-                          )
-                      )[0]
-                    ] || {}
-                  ).group
+                  (UNITLAYERS.units[Object.keys(ARTIFACTS.invaders)[0]] || {})
+                    .group
                 ],
-                (
-                  UNITLAYERS.units[
-                    Object.keys(
-                      Object.entries(
-                        Object.keys(UNITLAYERS.oppunits)
-                          .concat(Object.keys(TERRAIN.mybase))
-                          .reduce(
-                            (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                            {}
-                          )
-                      )
-                        .filter(([key, n]) => n === 2)
-                        .reduce(
-                          (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                          {}
-                        )
-                    )[0]
-                  ] || {}
-                ).owner,
-                Object.keys(
-                  Object.entries(
-                    Object.keys(UNITLAYERS.oppunits)
-                      .concat(Object.keys(TERRAIN.mybase))
-                      .reduce(
-                        (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                        {}
-                      )
-                  )
-                    .filter(([key, n]) => n === 2)
-                    .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-                )[0]
+                (UNITLAYERS.units[Object.keys(ARTIFACTS.invaders)[0]] || {})
+                  .owner,
+                Object.keys(ARTIFACTS.invaders)[0]
               ]
             },
             { text: "invader" }
@@ -551,6 +410,9 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     2
   );
   game.action.startTurn2 = step => {
+    let ARTIFACTS = {
+      invaders: {}
+    };
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
@@ -563,6 +425,18 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
       marks: {},
       commands: {}
     };
+    let filtersourcelayer = Object.entries(
+      Object.keys(UNITLAYERS.oppunits)
+        .concat(Object.keys(TERRAIN.mybase))
+        .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+    )
+      .filter(([key, n]) => n === 2)
+      .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {});
+    let filtertargetlayer = ARTIFACTS.invaders;
+    for (let POS in filtersourcelayer) {
+      let filterObj = filtersourcelayer[POS];
+      filtertargetlayer[POS] = filterObj;
+    }
     for (const pos of Object.keys(UNITLAYERS.myunits)) {
       LINKS.marks[pos] = "selectunit2";
     }
@@ -570,12 +444,13 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
       UNITDATA: step.UNITDATA,
       LINKS,
       UNITLAYERS,
-      ARTIFACTS: emptyArtifactLayers,
+      ARTIFACTS,
       MARKS: {},
       TURN: step.TURN
     };
   };
   game.instruction.startTurn2 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
@@ -584,15 +459,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
         { unittype: ["bishop", 2] },
         { text: "or" },
         { unittype: ["knight", 2] },
-        Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.oppunits)
-              .concat(Object.keys(TERRAIN.mybase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        ).length === 0
+        Object.keys(ARTIFACTS.invaders).length === 0
           ? { text: "to move" }
           : collapseContent({
               line: [
@@ -601,65 +468,13 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
                   unit: [
                     iconMapping[
                       (
-                        UNITLAYERS.units[
-                          Object.keys(
-                            Object.entries(
-                              Object.keys(UNITLAYERS.oppunits)
-                                .concat(Object.keys(TERRAIN.mybase))
-                                .reduce(
-                                  (mem, k) => ({
-                                    ...mem,
-                                    [k]: (mem[k] || 0) + 1
-                                  }),
-                                  {}
-                                )
-                            )
-                              .filter(([key, n]) => n === 2)
-                              .reduce(
-                                (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                                {}
-                              )
-                          )[0]
-                        ] || {}
+                        UNITLAYERS.units[Object.keys(ARTIFACTS.invaders)[0]] ||
+                        {}
                       ).group
                     ],
-                    (
-                      UNITLAYERS.units[
-                        Object.keys(
-                          Object.entries(
-                            Object.keys(UNITLAYERS.oppunits)
-                              .concat(Object.keys(TERRAIN.mybase))
-                              .reduce(
-                                (mem, k) => ({
-                                  ...mem,
-                                  [k]: (mem[k] || 0) + 1
-                                }),
-                                {}
-                              )
-                          )
-                            .filter(([key, n]) => n === 2)
-                            .reduce(
-                              (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                              {}
-                            )
-                        )[0]
-                      ] || {}
-                    ).owner,
-                    Object.keys(
-                      Object.entries(
-                        Object.keys(UNITLAYERS.oppunits)
-                          .concat(Object.keys(TERRAIN.mybase))
-                          .reduce(
-                            (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                            {}
-                          )
-                      )
-                        .filter(([key, n]) => n === 2)
-                        .reduce(
-                          (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                          {}
-                        )
-                    )[0]
+                    (UNITLAYERS.units[Object.keys(ARTIFACTS.invaders)[0]] || {})
+                      .owner,
+                    Object.keys(ARTIFACTS.invaders)[0]
                   ]
                 },
                 { text: "invader" }
@@ -695,6 +510,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.action.move2 = step => {
     let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
+      invaders: step.ARTIFACTS.invaders,
       morph: step.ARTIFACTS.morph,
       movetarget: step.ARTIFACTS.movetarget
     };
@@ -737,63 +553,17 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
       }
     }
     if (
-      Object.keys(
-        Object.entries(
-          Object.keys(UNITLAYERS.oppunits)
-            .concat(Object.keys(TERRAIN.mybase))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length === 0
+      Object.keys(ARTIFACTS.invaders).length === 0 ||
+      ARTIFACTS.invaders[MARKS.selectmovetarget]
     ) {
       if (
-        Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.oppunits)
-              .concat(Object.keys(TERRAIN.mybase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        ).length !== 0
-      ) {
-        let winner = 1;
-        LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-        LINKS.endedBy = "persistantInvader";
-        LINKS.endMarks = Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.oppunits)
-              .concat(Object.keys(TERRAIN.mybase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        );
-      } else if (
         Object.keys(UNITLAYERS.myunits).length === 1 &&
-        Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.myunits)
-              .concat(Object.keys(TERRAIN.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        ).length !== 0
+        TERRAIN.oppbase[MARKS.selectmovetarget]
       ) {
         let winner = 2;
         LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
         LINKS.endedBy = "loneInvader";
-        LINKS.endMarks = Object.keys(
-          Object.entries(
-            Object.keys(UNITLAYERS.myunits)
-              .concat(Object.keys(TERRAIN.oppbase))
-              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-          )
-            .filter(([key, n]) => n === 2)
-            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-        );
+        LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
       } else {
         LINKS.endTurn = "startTurn1";
       }
@@ -810,6 +580,7 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
+      invaders: step.ARTIFACTS.invaders,
       morph: {},
       movetarget: {}
     };
@@ -880,17 +651,10 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     };
   };
   game.instruction.selectunit2 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
-    return Object.keys(
-      Object.entries(
-        Object.keys(UNITLAYERS.oppunits)
-          .concat(Object.keys(TERRAIN.mybase))
-          .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-      )
-        .filter(([key, n]) => n === 2)
-        .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-    ).length === 0
+    return Object.keys(ARTIFACTS.invaders).length === 0
       ? collapseContent({
           line: [
             { text: "Select where to move" },
@@ -917,57 +681,12 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
             {
               unit: [
                 iconMapping[
-                  (
-                    UNITLAYERS.units[
-                      Object.keys(
-                        Object.entries(
-                          Object.keys(UNITLAYERS.oppunits)
-                            .concat(Object.keys(TERRAIN.mybase))
-                            .reduce(
-                              (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                              {}
-                            )
-                        )
-                          .filter(([key, n]) => n === 2)
-                          .reduce(
-                            (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                            {}
-                          )
-                      )[0]
-                    ] || {}
-                  ).group
+                  (UNITLAYERS.units[Object.keys(ARTIFACTS.invaders)[0]] || {})
+                    .group
                 ],
-                (
-                  UNITLAYERS.units[
-                    Object.keys(
-                      Object.entries(
-                        Object.keys(UNITLAYERS.oppunits)
-                          .concat(Object.keys(TERRAIN.mybase))
-                          .reduce(
-                            (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                            {}
-                          )
-                      )
-                        .filter(([key, n]) => n === 2)
-                        .reduce(
-                          (mem, [key]) => ({ ...mem, [key]: emptyObj }),
-                          {}
-                        )
-                    )[0]
-                  ] || {}
-                ).owner,
-                Object.keys(
-                  Object.entries(
-                    Object.keys(UNITLAYERS.oppunits)
-                      .concat(Object.keys(TERRAIN.mybase))
-                      .reduce(
-                        (mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }),
-                        {}
-                      )
-                  )
-                    .filter(([key, n]) => n === 2)
-                    .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-                )[0]
+                (UNITLAYERS.units[Object.keys(ARTIFACTS.invaders)[0]] || {})
+                  .owner,
+                Object.keys(ARTIFACTS.invaders)[0]
               ]
             },
             { text: "invader" }

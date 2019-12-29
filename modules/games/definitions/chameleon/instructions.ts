@@ -10,12 +10,12 @@ const chameleonInstructions: ChameleonInstructions = {
       "knights",
       {
         ifelse: [
-          { isempty: { intersect: ["oppunits", "mybase"] } },
+          { isempty: "invaders" },
           "to move",
           {
             line: [
               "that can reach the",
-              { unitat: { onlyin: { intersect: ["oppunits", "mybase"] } } },
+              { unitat: { onlyin: "invaders" } },
               "invader",
             ],
           },
@@ -25,14 +25,14 @@ const chameleonInstructions: ChameleonInstructions = {
   },
   selectunit: {
     ifelse: [
-      { isempty: { intersect: ["oppunits", "mybase"] } },
+      { isempty: "invaders" },
       { line: ["Select where to move", { unitat: "selectunit" }] },
       {
         line: [
           "Now",
           { unitat: "selectunit" },
           "must expel the",
-          { unitat: { onlyin: { intersect: ["oppunits", "mybase"] } } },
+          { unitat: { onlyin: "invaders" } },
           "invader",
         ],
       },

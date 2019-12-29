@@ -1,6 +1,11 @@
 import { ChameleonGenerators } from "./_types";
 
 const chameleonGenerators: ChameleonGenerators = {
+  findinvaders: {
+    type: "filter",
+    layer: { intersect: ["oppunits", "mybase"] },
+    tolayer: "invaders",
+  },
   findsteptargets: {
     start: "selectunit",
     type: "neighbour",

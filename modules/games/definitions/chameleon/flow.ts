@@ -2,22 +2,18 @@ import { ChameleonFlow } from "./_types";
 
 const chameleonFlow: ChameleonFlow = {
   endGame: {
-    persistantInvader: {
-      condition: { overlaps: ["oppunits", "mybase"] },
-      who: ["otherplayer"],
-      show: { intersect: ["oppunits", "mybase"] },
-    },
     loneInvader: {
       condition: {
         and: [
           { same: [{ sizeof: "myunits" }, 1] },
-          { overlaps: ["myunits", "oppbase"] },
+          { anyat: ["oppbase", "selectmovetarget"] },
         ],
       },
-      show: { intersect: ["myunits", "oppbase"] },
+      show: { single: "selectmovetarget" },
     },
   },
   startTurn: {
+    runGenerator: "findinvaders",
     link: "selectunit",
   },
   commands: {
@@ -43,7 +39,17 @@ const chameleonFlow: ChameleonFlow = {
         { stompat: ["selectunit", "selectmovetarget"] },
       ],
       link: {
-        if: [{ isempty: { intersect: ["oppunits", "mybase"] } }, "endTurn"],
+        if: [
+          {
+            or: [
+              { isempty: "invaders" },
+              {
+                anyat: ["invaders", "selectmovetarget"],
+              },
+            ],
+          },
+          "endTurn",
+        ],
       },
     },
   },

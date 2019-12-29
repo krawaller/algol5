@@ -12,9 +12,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
   ret += executeSection(gameDef, 1, "head", "head");
 
-  ret += `let game = { gameId: '${
-    gameDef.meta.id
-  }', action: {}, instruction: {} }; `;
+  ret += `let game = { gameId: '${gameDef.meta.id}', action: {}, instruction: {} }; `;
 
   ([1, 2] as const).forEach(player => {
     ret += `{ `;
@@ -69,6 +67,22 @@ export function compileGameToCode(gameDef: FullDefAnon) {
         ${executeSection(gameDef, player, markName, "instruction")}
       }; `;
       });
+
+    const hasStarveEnds =
+      Object.entries(gameDef.flow.endGame || {}).filter(
+        ([name, end]) => end.whenStarvation
+      ).length > 0;
+
+    if (hasStarveEnds) {
+      ret += `game.describeStarvation${player} = (step) => {
+        ${executeSection(
+          gameDef,
+          player,
+          "describeStarvation",
+          "describeStarvation"
+        )}
+      }`;
+    }
 
     ret += ` } `;
   });

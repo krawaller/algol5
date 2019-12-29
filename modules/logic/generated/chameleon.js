@@ -389,6 +389,14 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
       ]
     });
   };
+  game.describeStarvation1 = step => {
+    // temp
+    return {
+      name: "someName",
+      who: 1,
+      show: Object.keys(step.UNITLAYERS.myunits)
+    };
+  };
 }
 {
   const groupLayers = {
@@ -775,6 +783,14 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
           : undefined
       ]
     });
+  };
+  game.describeStarvation2 = step => {
+    // temp
+    return {
+      name: "someName",
+      who: 2,
+      show: Object.keys(step.UNITLAYERS.myunits)
+    };
   };
 }
 export default game;

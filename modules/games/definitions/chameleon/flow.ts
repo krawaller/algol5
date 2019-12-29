@@ -2,6 +2,12 @@ import { ChameleonFlow } from "./_types";
 
 const chameleonFlow: ChameleonFlow = {
   endGame: {
+    persistantInvader: {
+      condition: { anyat: ["oppbase", "selectmovetarget"] },
+      who: ["player"],
+      show: { single: "selectmovetarget" },
+      whenStarvation: true,
+    },
     loneInvader: {
       condition: {
         and: [

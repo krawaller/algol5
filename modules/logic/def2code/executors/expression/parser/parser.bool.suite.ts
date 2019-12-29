@@ -24,45 +24,45 @@ export const testSuite: AlgolExpressionSuite<
             { expr: { morethan: [{ value: 3 }, { value: 2 }] }, res: true },
             {
               expr: { indexlist: [{ minus: [2, 1] }, ["true"], ["false"]] },
-              res: false
+              res: false,
             },
             {
               expr: {
-                playercase: [{ playercase: [["true"], ["false"]] }, ["false"]]
+                playercase: [{ playercase: [["true"], ["false"]] }, ["false"]],
               },
-              res: true
+              res: true,
             },
             {
               expr: { ifactionelse: ["someaction", ["true"], ["false"]] },
-              res: true
+              res: true,
             },
             {
               expr: { ifactionelse: ["otheraction", ["true"], ["false"]] },
-              res: false
+              res: false,
             },
             {
               expr: { ifelse: [["true"], ["true"], ["false"]] },
-              res: true
+              res: true,
             },
             {
               expr: { ifelse: [["false"], ["true"], ["false"]] },
-              res: false
+              res: false,
             },
             {
               expr: { same: [{ value: 2 }, { value: 3 }] },
-              res: false
+              res: false,
             },
             {
               expr: { same: [{ value: 2 }, 2] },
-              res: true
+              res: true,
             },
             {
               expr: { different: [{ value: 2 }, { value: 3 }] },
-              res: true
+              res: true,
             },
             {
               expr: { different: [{ value: 2 }, 2] },
-              res: false
+              res: false,
             },
             { expr: { truthy: { value: 0 } }, res: false },
             { expr: { truthy: { value: 1 } }, res: true },
@@ -75,16 +75,25 @@ export const testSuite: AlgolExpressionSuite<
             { expr: { or: [["false"], ["false"], ["false"]] }, res: false },
             { expr: { or: [["false"], ["false"], ["true"]] }, res: true },
             { expr: { not: ["true"] }, res: false },
-            { expr: { not: ["false"] }, res: true }
-          ]
+            { expr: { not: ["false"] }, res: true },
+          ],
+        },
+        {
+          context: {},
+          tests: [
+            { expr: { ortho: 1 }, res: true },
+            { expr: { ortho: { sum: [1, 1] } }, res: false },
+            { expr: { diag: 7 }, res: false },
+            { expr: { diag: { sum: [1, 1] } }, res: true },
+          ],
         },
         {
           context: {
             MARKS: { firstmark: "b2", secondmark: "a1" },
             BOARD: {
               board: { a1: { x: 1, y: 1 }, b2: { x: 2, y: 2 } },
-              dark: {}
-            }
+              dark: {},
+            },
           },
           tests: [
             { expr: { samepos: ["firstmark", "secondmark"] }, res: false },
@@ -94,45 +103,45 @@ export const testSuite: AlgolExpressionSuite<
             { expr: { higher: ["secondmark", "firstmark"] }, res: false },
             {
               expr: { anyat: [{ single: "firstmark" }, "secondmark"] },
-              res: falsy
+              res: falsy,
             },
             {
               expr: { anyat: [{ single: "firstmark" }, "firstmark"] },
-              res: truthy
+              res: truthy,
             },
             {
               expr: { noneat: [{ single: "firstmark" }, "secondmark"] },
-              res: truthy
+              res: truthy,
             },
             {
               expr: { noneat: [{ single: "firstmark" }, "firstmark"] },
-              res: falsy
+              res: falsy,
             },
             { expr: { isempty: "board" }, res: falsy },
             { expr: { notempty: "board" }, res: truthy },
             { expr: { isempty: "dark" }, res: truthy },
-            { expr: { notempty: "dark" }, res: falsy }
-          ]
+            { expr: { notempty: "dark" }, res: falsy },
+          ],
         },
         {
           context: {
             LINKS: {
               commands: {
-                somecmnd: "somecmnd1"
+                somecmnd: "somecmnd1",
               },
               marks: {
-                a2: "somemark1"
-              }
-            }
+                a2: "somemark1",
+              },
+            },
           },
           tests: [
             { expr: { cmndavailable: "somecmnd" }, res: true },
             { expr: { cmndavailable: "anothercmnd" }, res: false },
             { expr: { markavailable: "somemark" }, res: true },
-            { expr: { markavailable: "anothermark" }, res: false }
-          ]
-        }
-      ]
+            { expr: { markavailable: "anothermark" }, res: false },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -146,13 +155,13 @@ export const testSuite: AlgolExpressionSuite<
                   ifelse: [
                     ["true"],
                     { playercase: ["art1", "art2"] },
-                    { playercase: ["art3", "art4"] }
-                  ]
-                }
-              }
-            }
-          }
-        }
+                    { playercase: ["art3", "art4"] },
+                  ],
+                },
+              },
+            },
+          },
+        },
       },
       player: 1,
       action: "someaction",
@@ -163,18 +172,18 @@ export const testSuite: AlgolExpressionSuite<
               art1: { b1: {} },
               art2: { b1: {}, b2: {} },
               art3: { b1: {}, b2: {}, b3: {} },
-              art4: { b2: {} }
-            }
+              art4: { b2: {} },
+            },
           },
           tests: [
             {
               expr: { overlaps: ["art1", "art2", "art3", "art4"] },
-              res: false
+              res: false,
             },
-            { expr: { overlaps: ["art1", "art2", "art3"] }, res: true }
-          ]
-        }
-      ]
-    }
-  ]
+            { expr: { overlaps: ["art1", "art2", "art3"] }, res: true },
+          ],
+        },
+      ],
+    },
+  ],
 };

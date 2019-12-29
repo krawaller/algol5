@@ -7,6 +7,7 @@ import {
   AlgolBoolAnd,
   AlgolBoolAnyAt,
   AlgolBoolCmndAvailable,
+  AlgolBoolDiag,
   AlgolBoolDifferent,
   AlgolBoolFalsy,
   AlgolBoolFurther,
@@ -17,11 +18,12 @@ import {
   AlgolBoolNoneAt,
   AlgolBoolNotEmpty,
   AlgolBoolOr,
+  AlgolBoolOrtho,
   AlgolBoolOverlaps,
   AlgolBoolSame,
   AlgolBoolSamePos,
   AlgolBoolTruthy,
-  AlgolBoolValInList
+  AlgolBoolValInList,
 } from "./bool.interfaces";
 
 import { AlgolExpression } from "../../";
@@ -68,4 +70,6 @@ type AlgolBoolInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolBoolValInList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolBoolMoreThan<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolBoolTruthy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolFalsy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolBoolFalsy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolBoolOrtho<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolBoolDiag<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

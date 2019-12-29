@@ -19,7 +19,9 @@ import {
   isAlgolBoolValInList,
   isAlgolBoolAnd,
   isAlgolBoolOr,
-  isAlgolBoolNot
+  isAlgolBoolNot,
+  isAlgolBoolOrtho,
+  isAlgolBoolDiag,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -45,31 +47,31 @@ export default function parseVal(
   }
   if (isAlgolBoolMoreThan(expr)) {
     const {
-      morethan: [first, second]
+      morethan: [first, second],
     } = expr;
     return `(${parser.val(first)} > ${parser.val(second)})`;
   }
   if (isAlgolBoolSame(expr)) {
     const {
-      same: [first, second]
+      same: [first, second],
     } = expr;
     return `(${parser.val(first)} === ${parser.val(second)})`;
   }
   if (isAlgolBoolDifferent(expr)) {
     const {
-      different: [first, second]
+      different: [first, second],
     } = expr;
     return `(${parser.val(first)} !== ${parser.val(second)})`;
   }
   if (isAlgolBoolSamePos(expr)) {
     const {
-      samepos: [firstPos, secondPas]
+      samepos: [firstPos, secondPas],
     } = expr;
     return `(${parser.pos(firstPos)} === ${parser.pos(secondPas)})`;
   }
   if (isAlgolBoolHigher(expr)) {
     const {
-      higher: [firstPos, secondPos]
+      higher: [firstPos, secondPos],
     } = expr;
     return `(BOARD.board[${parser.pos(firstPos)}].y > BOARD.board[${parser.pos(
       secondPos
@@ -77,7 +79,7 @@ export default function parseVal(
   }
   if (isAlgolBoolFurther(expr)) {
     const {
-      further: [firstPos, secondPos]
+      further: [firstPos, secondPos],
     } = expr;
     return `(BOARD.board[${parser.pos(firstPos)}].x > BOARD.board[${parser.pos(
       secondPos
@@ -102,13 +104,13 @@ export default function parseVal(
   }
   if (isAlgolBoolAnyAt(expr)) {
     const {
-      anyat: [set, pos]
+      anyat: [set, pos],
     } = expr;
     return `${parser.set(set)}[${parser.pos(pos)}]`;
   }
   if (isAlgolBoolNoneAt(expr)) {
     const {
-      noneat: [set, pos]
+      noneat: [set, pos],
     } = expr;
     return `!${parser.set(set)}[${parser.pos(pos)}]`;
   }
@@ -126,7 +128,7 @@ export default function parseVal(
   }
   if (isAlgolBoolValInList(expr)) {
     const {
-      valinlist: [val, ...list]
+      valinlist: [val, ...list],
     } = expr;
     return `[${list.map(v => parser.val(v)).join(", ")}].indexOf(${parser.val(
       val
@@ -143,5 +145,13 @@ export default function parseVal(
   if (isAlgolBoolNot(expr)) {
     const { not: cond } = expr;
     return `!${parser.bool(cond)}`;
+  }
+  if (isAlgolBoolOrtho(expr)) {
+    const { ortho: val } = expr;
+    return `orthoDirs.indexOf(${parser.val(val)}) !== -1`;
+  }
+  if (isAlgolBoolDiag(expr)) {
+    const { diag: val } = expr;
+    return `diagDirs.indexOf(${parser.val(val)}) !== -1`;
   }
 }

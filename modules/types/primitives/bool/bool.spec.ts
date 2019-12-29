@@ -20,20 +20,20 @@ const tests: TestBool[] = [
     ifelse: [
       ["true"],
       { not: ["false"] },
-      { and: [["true"], { not: ["false"] }] }
-    ]
+      { and: [["true"], { not: ["false"] }] },
+    ],
   },
   {
-    ifactionelse: ["mycmnd", ["false"], ["true"]]
+    ifactionelse: ["mycmnd", ["false"], ["true"]],
   },
   {
-    samepos: ["mymark", { onlyin: "mylayer" }]
+    samepos: ["mymark", { onlyin: "mylayer" }],
   },
   {
-    higher: ["mymark", { onlyin: "mylayer" }]
+    higher: ["mymark", { onlyin: "mylayer" }],
   },
   {
-    further: ["mymark", { onlyin: "mylayer" }]
+    further: ["mymark", { onlyin: "mylayer" }],
   },
   { overlaps: ["mylayer", { single: "mymark" }] },
   { isempty: "mylayer" },
@@ -49,5 +49,7 @@ const tests: TestBool[] = [
   { morethan: [3, 5] },
   { truthy: "foo" },
   { falsy: "foo" },
-  { indexlist: [["dir"], ["false"], ["true"]] }
+  { indexlist: [["dir"], ["false"], ["true"]] },
+  { ortho: 7 },
+  { diag: ["dir"] },
 ];

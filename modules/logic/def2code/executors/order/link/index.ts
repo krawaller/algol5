@@ -55,6 +55,7 @@ function executeLinkInner(
       .filter(
         ([name, def]) =>
           def.unlessAction !== action &&
+          !def.whenStarvation &&
           !actionDef.noEndGame &&
           (!def.ifPlayer || def.ifPlayer === player)
       )

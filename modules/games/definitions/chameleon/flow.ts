@@ -42,7 +42,9 @@ const chameleonFlow: ChameleonFlow = {
         },
         { stompat: ["selectunit", "selectmovetarget"] },
       ],
-      link: "endTurn",
+      link: {
+        if: [{ isempty: { intersect: ["oppunits", "mybase"] } }, "endTurn"],
+      },
     },
   },
   marks: {

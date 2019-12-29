@@ -1,7 +1,6 @@
 import { DuploFlow } from "./_types";
 
 const duploFlow: DuploFlow = {
-  canalwaysend: { deploy: true },
   endGame: {
     boardfull: {
       condition: { same: [{ sizeof: "units" }, 64] },

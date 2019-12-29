@@ -29,9 +29,6 @@ export type Flow<
     Turnp,
     Turnv
   >;
-  canalwaysend?: {
-    [name: string]: true;
-  };
   endGame?: {
     [endgamename: string]: EndGameDef<
       Btlp,

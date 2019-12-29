@@ -50,7 +50,6 @@ const chameleonFlow: ChameleonFlow = {
       from: "myunits",
       runGenerators: [
         "findsteptargets",
-        "findmorphtargets",
         { if: [{ anyat: ["knights", "selectunit"] }, "findknighttargets"] },
         { if: [{ anyat: ["bishops", "selectunit"] }, "findbishoptargets"] },
       ],

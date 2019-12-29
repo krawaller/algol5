@@ -4,22 +4,26 @@ const chameleonGenerators: ChameleonGenerators = {
   findsteptargets: {
     start: "selectunit",
     type: "neighbour",
-    dirs: { ifelse: [{ anyat: ["knights", ["start"]] }, "ortho", "diag"] },
+    dirs: "rose",
     draw: {
       neighbours: {
         condition: { noneat: ["myunits", ["target"]] },
-        tolayer: "movetarget",
-      },
-    },
-  },
-  findmorphtargets: {
-    start: "selectunit",
-    type: "neighbour",
-    dirs: { ifelse: [{ anyat: ["knights", ["start"]] }, "diag", "ortho"] },
-    draw: {
-      neighbours: {
-        condition: { noneat: ["myunits", ["target"]] },
-        tolayer: "morph",
+        tolayer: {
+          ifelse: [
+            {
+              or: [
+                {
+                  and: [{ diag: ["dir"] }, { anyat: ["knights", ["start"]] }],
+                },
+                {
+                  and: [{ ortho: ["dir"] }, { anyat: ["bishops", ["start"]] }],
+                },
+              ],
+            },
+            "morph",
+            "movetarget",
+          ],
+        },
       },
     },
   },

@@ -11,7 +11,7 @@ import {
 const emptyObj = {};
 const BOARD = boardLayers({ height: 5, width: 5 });
 const iconMapping = { knights: "knight", bishops: "bishop" };
-const emptyArtifactLayers = { movetarget: {}, morph: {} };
+const emptyArtifactLayers = { morph: {}, movetarget: {} };
 const connections = boardConnections({ height: 5, width: 5, offset: "knight" });
 const relativeDirs = makeRelativeDirs(["knight"]);
 const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -87,8 +87,8 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.action.move1 = step => {
     let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
-      movetarget: step.ARTIFACTS.movetarget,
-      morph: step.ARTIFACTS.morph
+      morph: step.ARTIFACTS.morph,
+      movetarget: step.ARTIFACTS.movetarget
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -190,8 +190,8 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.instruction.move1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetarget: {},
-      morph: {}
+      morph: {},
+      movetarget: {}
     };
     let LINKS = { marks: {}, commands: {} };
     let MARKS = {
@@ -201,23 +201,16 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     {
       let STARTPOS = MARKS.selectunit;
       let startconnections = connections[STARTPOS];
-      for (let DIR of UNITLAYERS.knights[STARTPOS] ? orthoDirs : diagDirs) {
+      for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS) {
           if (!UNITLAYERS.myunits[POS]) {
-            ARTIFACTS.movetarget[POS] = emptyObj;
-          }
-        }
-      }
-    }
-    {
-      let STARTPOS = MARKS.selectunit;
-      let startconnections = connections[STARTPOS];
-      for (let DIR of UNITLAYERS.knights[STARTPOS] ? diagDirs : orthoDirs) {
-        let POS = startconnections[DIR];
-        if (POS) {
-          if (!UNITLAYERS.myunits[POS]) {
-            ARTIFACTS.morph[POS] = emptyObj;
+            ARTIFACTS[
+              (diagDirs.indexOf(DIR) !== -1 && UNITLAYERS.knights[STARTPOS]) ||
+              (orthoDirs.indexOf(DIR) !== -1 && UNITLAYERS.bishops[STARTPOS])
+                ? "morph"
+                : "movetarget"
+            ][POS] = emptyObj;
           }
         }
       }
@@ -441,8 +434,8 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.action.move2 = step => {
     let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
-      movetarget: step.ARTIFACTS.movetarget,
-      morph: step.ARTIFACTS.morph
+      morph: step.ARTIFACTS.morph,
+      movetarget: step.ARTIFACTS.movetarget
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -544,8 +537,8 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
   game.instruction.move2 = () => defaultInstruction(2);
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetarget: {},
-      morph: {}
+      morph: {},
+      movetarget: {}
     };
     let LINKS = { marks: {}, commands: {} };
     let MARKS = {
@@ -555,23 +548,16 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
     {
       let STARTPOS = MARKS.selectunit;
       let startconnections = connections[STARTPOS];
-      for (let DIR of UNITLAYERS.knights[STARTPOS] ? orthoDirs : diagDirs) {
+      for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
         if (POS) {
           if (!UNITLAYERS.myunits[POS]) {
-            ARTIFACTS.movetarget[POS] = emptyObj;
-          }
-        }
-      }
-    }
-    {
-      let STARTPOS = MARKS.selectunit;
-      let startconnections = connections[STARTPOS];
-      for (let DIR of UNITLAYERS.knights[STARTPOS] ? diagDirs : orthoDirs) {
-        let POS = startconnections[DIR];
-        if (POS) {
-          if (!UNITLAYERS.myunits[POS]) {
-            ARTIFACTS.morph[POS] = emptyObj;
+            ARTIFACTS[
+              (diagDirs.indexOf(DIR) !== -1 && UNITLAYERS.knights[STARTPOS]) ||
+              (orthoDirs.indexOf(DIR) !== -1 && UNITLAYERS.bishops[STARTPOS])
+                ? "morph"
+                : "movetarget"
+            ][POS] = emptyObj;
           }
         }
       }

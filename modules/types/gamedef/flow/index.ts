@@ -44,9 +44,6 @@ export type Flow<
       Turnv
     >;
   };
-  endTurn?: {
-    unless: any;
-  };
   commands: {
     [cmndname in Cmnd]: AlgolCommandDef<
       Btlp,
@@ -59,7 +56,7 @@ export type Flow<
       Turnp,
       Turnv,
       Unit
-    >
+    >;
   };
   marks: {
     [markname in Mrk]: AlgolMarkDef<
@@ -72,6 +69,6 @@ export type Flow<
       Mrk,
       Turnp,
       Turnv
-    >
+    >;
   };
 };

@@ -2,7 +2,6 @@ import { CoffeeFlow } from "./_types";
 
 const coffeeFlow: CoffeeFlow = {
   TODO: "use different unit type for placeholders?",
-  endTurn: { unless: { nolegal: ["isempty", "markers"] } },
   endGame: {
     madeline: { condition: { notempty: "winline" }, show: "winline" },
   },

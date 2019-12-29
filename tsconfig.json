@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["es2017"],
     "target": "es5",
     "moduleResolution": "node",
     "allowJs": true,
@@ -12,5 +13,5 @@
     "types": ["node", "jest", "fs-extra", "prettier", "lodash.isequal"]
   },
   "include": ["modules", "global.d.ts"],
-  "exclude": ["archive", "dev"]
+  "exclude": ["archive", "dev", "node_modules", "**/node_modules"]
 }

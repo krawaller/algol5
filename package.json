@@ -2,6 +2,7 @@
   "scripts": {
     "test:unit": "jest",
     "test:ts": "tsc --noEmit --skipLibCheck",
+    "test": "npm run test:ts && npm run test:unit",
     "robot": "npm install; cd modules/common; npm run robot; cd ../games; npm run robot; cd ../graphics; npm run robot; cd ../logic; npm run robot; cd ../battle; npm run robot; cd ../ui; npm run robot; cd ../next; npm run robot;"
   },
   "devDependencies": {

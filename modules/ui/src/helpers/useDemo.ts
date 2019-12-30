@@ -13,7 +13,7 @@ export const useDemo = (demo: AlgolDemo, playing?: boolean) => {
   useEffect(() => {
     setTimeout(() => {
       setHydrDemo(inflateDemo(demo));
-    });
+    }, 0);
   }, [demo]);
 
   // start/stop

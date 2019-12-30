@@ -21,7 +21,8 @@ const noop = () => {};
 
 export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
   const { demo, graphics, gameId } = props;
-  const [ref, inView] = useInView({ threshold: 1 });
+  // types for useInView are bogus, hence the "as" casting
+  const [ref, inView] = useInView({ threshold: 1 } as {});
   const { frame, hydrDemo } = useDemo(demo, inView);
 
   return (

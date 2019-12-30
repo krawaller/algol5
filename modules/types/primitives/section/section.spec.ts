@@ -10,5 +10,4 @@ const testSections: AlgolSection[] = [
   "player",
   "head",
   "instruction",
-  "describeStarvation",
 ];

@@ -23,7 +23,7 @@ export const Stepper: FunctionComponent<StepperProps> = props => {
           step={1}
           value={current}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            onChange(+e.target.value)
+            onChange(+(e.target as any).value)
           }
         />
       </span>

@@ -5,12 +5,14 @@ import {
   AlgolGameGraphics,
   AlgolBattleUI,
   AlgolMeta,
+  AlgolDemo,
 } from "../../../../types";
 
 import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
 import { BattleHeadline } from "../BattleHeadline";
 import { Content } from "../Content";
+import { useDemo } from "../../helpers";
 
 const noop = () => {};
 
@@ -18,10 +20,11 @@ type TesterProps = {
   api: AlgolStaticGameAPI;
   graphics: AlgolGameGraphics;
   meta: AlgolMeta<string, string>;
+  demo: AlgolDemo;
 };
 
 type TesterState = {
-  battle: AlgolBattle;
+  battle: AlgolBattle | null;
   frame: number;
 };
 
@@ -29,32 +32,10 @@ type TesterAction = "mark" | "command" | "endTurn" | "undo" | "frame";
 type TesterCmnd = [TesterAction, any];
 
 export const Tester = (props: TesterProps) => {
-  const { api, graphics, meta } = props;
-  const [{ battle, frame }, dispatch] = useReducer(
-    (state: TesterState, instr: TesterCmnd) => {
-      const [cmnd, arg] = instr;
-      if (cmnd === "frame") {
-        return {
-          battle: state.battle,
-          frame: arg,
-        };
-      } else {
-        const newBattle = api.performAction(state.battle, cmnd, instr[1]);
-        return {
-          frame: newBattle.gameEndedBy
-            ? newBattle.history.length - 1
-            : cmnd === "endTurn"
-            ? newBattle.history.length
-            : state.frame,
-          battle: newBattle,
-        };
-      }
-    },
-    {
-      battle: api.newBattle(),
-      frame: 1,
-    }
-  );
+  const { api, graphics, meta, demo } = props;
+  const [{ battle: localBattle, frame }, dispatch] = useLocal(api);
+  const demoData = useDemo(demo);
+  const battle = localBattle!;
   const battleUi = useMemo(() => api.getBattleUI(battle), [battle]);
   const lookback = frame < battle.history.length;
   const ui: AlgolBattleUI = !lookback
@@ -115,3 +96,31 @@ export const Tester = (props: TesterProps) => {
     </Fragment>
   );
 };
+
+function useLocal(api: AlgolStaticGameAPI) {
+  return useReducer(
+    (state: TesterState, instr: TesterCmnd) => {
+      const [cmnd, arg] = instr;
+      if (cmnd === "frame") {
+        return {
+          battle: state.battle,
+          frame: arg,
+        };
+      } else {
+        const newBattle = api.performAction(state.battle!, cmnd, instr[1]);
+        return {
+          frame: newBattle.gameEndedBy
+            ? newBattle.history.length - 1
+            : cmnd === "endTurn"
+            ? newBattle.history.length
+            : state.frame,
+          battle: newBattle,
+        };
+      }
+    },
+    {
+      battle: api.newBattle(),
+      frame: 1,
+    }
+  );
+}

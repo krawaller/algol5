@@ -15,11 +15,12 @@ for (const gameId of list) {
   import { Master } from "../../../components";
   import graphics from "../../../../graphics/dist/svgDataURIs/${gameId}";
   import meta from "../../../../games/dist/meta/${gameId}";
+  import demo from "../../../../games/dist/demos/${gameId}";
   
   export const Game = () => {
     return (
       <Master title={meta.name}>
-        <Tester api={makeStaticGameAPI(${gameId})} graphics={graphics} meta={meta} />
+        <Tester api={makeStaticGameAPI(${gameId})} graphics={graphics} meta={meta} demo={demo} />
       </Master>
     );
   };

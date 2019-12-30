@@ -4,6 +4,7 @@ import {
   AlgolStaticGameAPI,
 } from "../../types";
 import { makeBattleSave } from "../src/battle/helpers";
+import { parseBattleSave, stringifyBattleSave } from "../src/local";
 
 const identifyMark = /^[a-z][0-9]+$/;
 
@@ -50,7 +51,9 @@ export function runGameScriptsStatic(
             ? api.performAction(battle, "mark", action)
             : api.performAction(battle, "command", action);
       }
-      const save = makeBattleSave(battle);
+      const save = parseBattleSave(
+        stringifyBattleSave(makeBattleSave(battle), 0)
+      );
       if (seq.slice(-1)[0] === "endTurn") {
         const inflatedBattle = api.fromSave(save);
         expect(battle).toEqual(inflatedBattle);

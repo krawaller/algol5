@@ -57,7 +57,9 @@ function executeLinkInner(
           !actionDef.noEndGame &&
           (!def.ifPlayer || def.ifPlayer === player)
       )
-      .sort(([, d1], [, d2]) => (d1.whenStarvation ? 1 : -1))
+      .sort(([, d1], [, d2]) =>
+        d1.whenStarvation && !d2.whenStarvation ? 1 : -1
+      )
       .map(([name, def]) => {
         const winnerCode = parser.val(def.who === undefined ? player : def.who);
         const winnerNumber = Number(winnerCode);

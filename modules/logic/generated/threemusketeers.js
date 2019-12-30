@@ -126,8 +126,7 @@ let game = { gameId: "threemusketeers", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.musketeerline).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "lose";
       LINKS.endedBy = "musketeersinline";
       LINKS.endMarks = Object.keys(UNITLAYERS.kings);
     } else {
@@ -364,8 +363,7 @@ let game = { gameId: "threemusketeers", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.strandedmusketeers).length === 3) {
-      let winner = 1;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "lose";
       LINKS.endedBy = "strandedmusketeers";
     } else {
       LINKS.endTurn = "startTurn1";

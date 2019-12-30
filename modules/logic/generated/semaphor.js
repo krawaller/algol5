@@ -168,8 +168,7 @@ let game = { gameId: "semaphor", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.line).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
@@ -232,8 +231,7 @@ let game = { gameId: "semaphor", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.line).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
@@ -457,8 +455,7 @@ let game = { gameId: "semaphor", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.line).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {
@@ -521,8 +518,7 @@ let game = { gameId: "semaphor", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.line).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.line);
     } else {

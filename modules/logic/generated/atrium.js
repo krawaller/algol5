@@ -138,8 +138,7 @@ let game = { gameId: "atrium", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madewinline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
@@ -372,8 +371,7 @@ let game = { gameId: "atrium", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madewinline";
       LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {

@@ -163,20 +163,19 @@ let game = { gameId: "krieg", action: {}, instruction: {} };
     if (
       Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppcorners)
+          Object.keys(TERRAIN.oppbases)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length !== 0
+      ).length === 2
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "cornerinfiltration";
+      LINKS.endGame = "win";
+      LINKS.endedBy = "occupation";
       LINKS.endMarks = Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppcorners)
+          Object.keys(TERRAIN.oppbases)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
@@ -186,20 +185,19 @@ let game = { gameId: "krieg", action: {}, instruction: {} };
     } else if (
       Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppbases)
+          Object.keys(TERRAIN.oppcorners)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length === 2
+      ).length !== 0
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "occupation";
+      LINKS.endGame = "win";
+      LINKS.endedBy = "cornerinfiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppbases)
+          Object.keys(TERRAIN.oppcorners)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
@@ -479,20 +477,19 @@ let game = { gameId: "krieg", action: {}, instruction: {} };
     if (
       Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppcorners)
+          Object.keys(TERRAIN.oppbases)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length !== 0
+      ).length === 2
     ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "cornerinfiltration";
+      LINKS.endGame = "win";
+      LINKS.endedBy = "occupation";
       LINKS.endMarks = Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppcorners)
+          Object.keys(TERRAIN.oppbases)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
@@ -502,20 +499,19 @@ let game = { gameId: "krieg", action: {}, instruction: {} };
     } else if (
       Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppbases)
+          Object.keys(TERRAIN.oppcorners)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length === 2
+      ).length !== 0
     ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "occupation";
+      LINKS.endGame = "win";
+      LINKS.endedBy = "cornerinfiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppbases)
+          Object.keys(TERRAIN.oppcorners)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )

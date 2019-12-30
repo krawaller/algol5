@@ -171,22 +171,20 @@ let game = { gameId: "gowiththefloe", action: {}, instruction: {} };
         }
       }
     }
-    if (
+    if (Object.keys(UNITLAYERS.seals).length === 0) {
+      LINKS.endGame = "lose";
+      LINKS.endedBy = "sealseaten";
+    } else if (
       Object.keys(ARTIFACTS.canmove).length !==
       Object.keys(UNITLAYERS.seals).length
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "safeseal";
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
           .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
           .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       );
-    } else if (Object.keys(UNITLAYERS.seals).length === 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "sealseaten";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -472,22 +470,20 @@ let game = { gameId: "gowiththefloe", action: {}, instruction: {} };
         }
       }
     }
-    if (
+    if (Object.keys(UNITLAYERS.seals).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "sealseaten";
+    } else if (
       Object.keys(ARTIFACTS.canmove).length !==
       Object.keys(UNITLAYERS.seals).length
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "lose";
       LINKS.endedBy = "safeseal";
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
           .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
           .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       );
-    } else if (Object.keys(UNITLAYERS.seals).length === 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "sealseaten";
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -553,22 +549,20 @@ let game = { gameId: "gowiththefloe", action: {}, instruction: {} };
         }
       }
     }
-    if (
+    if (Object.keys(UNITLAYERS.seals).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "sealseaten";
+    } else if (
       Object.keys(ARTIFACTS.canmove).length !==
       Object.keys(UNITLAYERS.seals).length
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "lose";
       LINKS.endedBy = "safeseal";
       LINKS.endMarks = Object.keys(
         Object.keys(UNITLAYERS.seals)
           .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
           .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       );
-    } else if (Object.keys(UNITLAYERS.seals).length === 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "sealseaten";
     } else {
       LINKS.endTurn = "startTurn1";
     }

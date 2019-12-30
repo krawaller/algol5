@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { AlgolBattleUI } from "../../../../types";
+import { AlgolBattleUI, AlgolContentAnon } from "../../../../types";
 
 import { Content } from "../Content";
 import { Stepper } from "../Stepper";
@@ -10,6 +10,7 @@ type BattleHeadlineProps = {
   onChooseFrame: (num: number) => void;
   currentFrame: number;
   frameCount: number;
+  content?: AlgolContentAnon;
 };
 
 const noop = () => {};
@@ -19,19 +20,21 @@ export const BattleHeadline: FunctionComponent<BattleHeadlineProps> = ({
   onChooseFrame,
   frameCount,
   currentFrame,
+  content,
 }) => (
   <div className={css.battleHeadlineContainer}>
     <span className={css.battleHeadlineTurn}>
       <Content
         content={
-          ui.turnNumber
+          content ||
+          (ui.turnNumber
             ? {
                 line: [
                   { text: `Turn ${ui.turnNumber} - ` },
                   { player: ui.player as 0 | 1 | 2 },
                 ],
               }
-            : { line: [{ text: "Start" }] }
+            : { line: [{ text: "Start" }] })
         }
         callback={noop}
       />

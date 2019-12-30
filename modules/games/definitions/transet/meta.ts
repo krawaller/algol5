@@ -1,8 +1,9 @@
-import { TransetMeta } from './_types';
+import { TransetMeta } from "./_types";
 
 const transetMeta: TransetMeta = {
   id: "transet",
   name: "Transet",
+  source: "http://sagme.blogspot.se/2013/05/transet.html",
   links: ["http://sagme.blogspot.se/2013/05/transet.html"],
   tags: ["infiltration", "differentunits"],
   tagline:

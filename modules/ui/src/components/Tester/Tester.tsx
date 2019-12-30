@@ -106,7 +106,7 @@ export const Tester = (props: TesterProps) => {
           )}
         </div>
       </Fragment>
-      <div style={{ paddingTop: "20px", textAlign: "left" }}>
+      <div style={{ padding: "10px", paddingTop: "20px", textAlign: "left" }}>
         <a href={link} target="_blank">
           External rules
         </a>

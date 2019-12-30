@@ -1,4 +1,4 @@
-import { DaggersMeta } from './_types';
+import { DaggersMeta } from "./_types";
 
 const daggersMeta: DaggersMeta = {
   id: "daggers",
@@ -11,6 +11,7 @@ const daggersMeta: DaggersMeta = {
     "killking",
     "capture",
   ],
+  source: "http://www.di.fc.ul.pt/~jpn/gv/daggers.htm",
   tagline:
     "Will the superior position at the top of the hill beat overwhelming numbers?",
   links: {

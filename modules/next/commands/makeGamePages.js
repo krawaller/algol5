@@ -19,7 +19,7 @@ for (const gameId of list) {
   export const Game = () => {
     return (
       <Master title={meta.name}>
-        <Tester api={makeStaticGameAPI(${gameId})} graphics={graphics} />
+        <Tester api={makeStaticGameAPI(${gameId})} graphics={graphics} link={meta.source} />
       </Master>
     );
   };

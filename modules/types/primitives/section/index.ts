@@ -9,5 +9,4 @@ export type AlgolSection =
   | "startEnd"
   | "cmndInit"
   | "cmndEnd"
-  | "instruction"
-  | "describeStarvation";
+  | "instruction";

@@ -68,22 +68,6 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       }; `;
       });
 
-    const hasStarveEnds =
-      Object.entries(gameDef.flow.endGame || {}).filter(
-        ([name, end]) => end.whenStarvation
-      ).length > 0;
-
-    if (hasStarveEnds) {
-      ret += `game.describeStarvation${player} = (step) => {
-        ${executeSection(
-          gameDef,
-          player,
-          "describeStarvation",
-          "describeStarvation"
-        )}
-      }`;
-    }
-
     ret += ` } `;
   });
 

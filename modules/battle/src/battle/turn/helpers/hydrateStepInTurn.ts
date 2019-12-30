@@ -35,9 +35,17 @@ export function hydrateStepInTurn(
       turn.nextTurns[stepId] = newTurn;
     } else {
       delete stepLinks.endTurn;
-      stepLinks.endGame = "win";
-      stepLinks.endedBy = "starvation";
-      stepLinks.endMarks = Object.keys(step.UNITLAYERS.myunits || {});
+      if (stepLinks.starvation) {
+        stepLinks.endGame = stepLinks.starvation.endGame;
+        stepLinks.endedBy = stepLinks.starvation.endedBy;
+        stepLinks.endMarks =
+          stepLinks.starvation.endMarks ||
+          Object.keys(step.UNITLAYERS.myunits || {});
+      } else {
+        stepLinks.endGame = "win";
+        stepLinks.endedBy = "starvation";
+        stepLinks.endMarks = Object.keys(step.UNITLAYERS.myunits || {});
+      }
       turn.gameEnds.win.push(stepId);
     }
   }

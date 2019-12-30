@@ -17,6 +17,11 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               show: { singles: ["marka1", "marka2"] },
               whenStarvation: true,
             },
+            starvealt2: {
+              condition: { truthy: { turnvar: "gamegoeson" } },
+              show: { singles: ["marka1", "marka2"] },
+              whenStarvation: true,
+            },
             conquer: {
               condition: { truthy: { turnvar: "won" } },
               show: { singles: ["marka1", "marka2"] },
@@ -37,10 +42,10 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
       contexts: [
         {
           context: {
-            TURNVARS: {},
+            TURNVARS: { gamegoeson: true },
             LINKS: {},
             newStepId: "foo",
-            MARKS: {},
+            MARKS: { marka1: "b1", marka2: "b2" },
           },
           tests: [
             {
@@ -50,6 +55,14 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   sample: "LINKS.endTurn",
                   res: "startTurn2",
                   desc: "we can link to endTurn, passing over to next plr",
+                },
+                {
+                  sample: "LINKS.starvation",
+                  res: {
+                    endGame: "win",
+                    endedBy: "starvealt2",
+                    endMarks: ["b1", "b2"],
+                  },
                 },
               ],
             },
@@ -85,6 +98,11 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   sample: "LINKS.endTurn",
                   res: falsy,
                   desc: "we don't set endTurn when game ends",
+                },
+                {
+                  sample: "LINKS.starvation",
+                  res: falsy,
+                  desc: "Since game ended we didn't evaluate starvation stuff",
                 },
               ],
             },

@@ -55,6 +55,10 @@ export function runGameScriptsStatic(
         const inflatedBattle = api.fromSave(save);
         expect(battle).toEqual(inflatedBattle);
       }
+      const lastLine = scripts[scriptName].slice(-1)[0];
+      if (lastLine.endedBy) {
+        expect(battle.gameEndedBy).toEqual(lastLine.endedBy);
+      }
     });
   }
 }

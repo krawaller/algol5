@@ -173,10 +173,16 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
         Object.keys(UNITLAYERS.myunits).length === 1 &&
         TERRAIN.oppbase[MARKS.selectmovetarget]
       ) {
-        let winner = 1;
-        LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+        LINKS.endGame = "win";
         LINKS.endedBy = "loneInvader";
         LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
+      } else if (TERRAIN.oppbase[MARKS.selectmovetarget]) {
+        LINKS.starvation = {
+          endGame: "win",
+          endedBy: "persistentInvader",
+          endMarks: Object.keys({ [MARKS.selectmovetarget]: 1 })
+        };
+        LINKS.endTurn = "startTurn2";
       } else {
         LINKS.endTurn = "startTurn2";
       }
@@ -560,10 +566,16 @@ let game = { gameId: "chameleon", action: {}, instruction: {} };
         Object.keys(UNITLAYERS.myunits).length === 1 &&
         TERRAIN.oppbase[MARKS.selectmovetarget]
       ) {
-        let winner = 2;
-        LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+        LINKS.endGame = "win";
         LINKS.endedBy = "loneInvader";
         LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
+      } else if (TERRAIN.oppbase[MARKS.selectmovetarget]) {
+        LINKS.starvation = {
+          endGame: "win",
+          endedBy: "persistentInvader",
+          endMarks: Object.keys({ [MARKS.selectmovetarget]: 1 })
+        };
+        LINKS.endTurn = "startTurn1";
       } else {
         LINKS.endTurn = "startTurn1";
       }

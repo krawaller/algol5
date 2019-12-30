@@ -3,7 +3,6 @@ import {
   AlgolLinkAnon,
   AlgolLinkInnerAnon,
   AlgolEffectActionDefAnon,
-  AlgolStatementAnon,
 } from "../../../../../types";
 
 import { executeStatement, makeParser } from "../../../executors";
@@ -58,19 +57,47 @@ function executeLinkInner(
           !actionDef.noEndGame &&
           (!def.ifPlayer || def.ifPlayer === player)
       )
-      .map(
-        ([name, def]) => `
-      if (${parser.bool(def.condition)}) { 
-        let winner = ${parser.val(def.who === undefined ? player : def.who)};
-        LINKS.endGame = winner === ${player} ? 'win' : winner ? 'lose' : 'draw';
-        LINKS.endedBy = '${name}';
-        ${
-          def.show
-            ? `LINKS.endMarks = Object.keys(${parser.set(def.show)});`
-            : ""
-        }
-      }`
+      .sort(([, d1], [, d2]) =>
+        d1.whenStarvation && !d2.whenStarvation ? 1 : -1
       )
+      .map(([name, def]) => {
+        const winnerCode = parser.val(def.who === undefined ? player : def.who);
+        const winnerNumber = Number(winnerCode);
+        let winner;
+        if (isNaN(winnerNumber)) {
+          winner =
+            (player === 1
+              ? '["draw", "win", "lose"]'
+              : '["draw", "lose", "win"]') + `[${winnerCode}]`;
+        } else {
+          winner =
+            player === winnerNumber
+              ? "'win'"
+              : winnerNumber === 0
+              ? "'draw'"
+              : "'lose'";
+        }
+        let code = "";
+        if (!def.whenStarvation) {
+          code += `
+          LINKS.endGame = ${winner};
+          LINKS.endedBy = '${name}';
+          ${
+            def.show
+              ? `LINKS.endMarks = Object.keys(${parser.set(def.show)});`
+              : ""
+          }`;
+        } else {
+          code += `LINKS.starvation = {
+            endGame: ${winner},
+            endedBy: '${name}',
+            ${def.show ? `endMarks: Object.keys(${parser.set(def.show)})` : ""}
+          }
+          LINKS.endTurn = "startTurn${player === 1 ? 2 : 1}";
+          `;
+        }
+        return `if (${parser.bool(def.condition)}) { ${code} }`;
+      })
       .concat(`{ LINKS.endTurn = "startTurn${player === 1 ? 2 : 1}"; }`)
       .join(" else ");
   } else {

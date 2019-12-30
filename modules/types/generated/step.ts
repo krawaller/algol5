@@ -7,6 +7,11 @@ export type AlgolStepLinks = {
   endedBy?: string;
   commands: { [idx: string]: string };
   marks: { [idx: string]: string };
+  starvation?: {
+    endGame?: "win" | "lose" | "draw";
+    endMarks?: string[];
+    endedBy?: string;
+  };
 };
 
 export type AlgolStep = {

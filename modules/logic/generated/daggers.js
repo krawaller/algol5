@@ -119,7 +119,10 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
+    if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "regicide";
+    } else if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mycrowns)
@@ -130,8 +133,7 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -142,10 +144,6 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "regicide";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -446,7 +444,10 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
+    if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "regicide";
+    } else if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mycrowns)
@@ -457,8 +458,7 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -469,10 +469,6 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "regicide";
     } else {
       LINKS.endTurn = "startTurn1";
     }

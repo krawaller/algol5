@@ -126,15 +126,15 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
     }
     if (Object.keys(UNITLAYERS.mysoldiers).length > 1) {
       if (Object.keys(UNITLAYERS.units).length === 64) {
-        let winner =
+        LINKS.endGame = ["draw", "win", "lose"][
           Object.keys(UNITLAYERS.myunits).length >
           Object.keys(UNITLAYERS.oppunits).length
             ? 1
             : Object.keys(UNITLAYERS.oppunits).length ===
               Object.keys(UNITLAYERS.myunits).length
             ? 0
-            : 2;
-        LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+            : 2
+        ];
         LINKS.endedBy = "boardfull";
       } else {
         LINKS.endTurn = "startTurn2";
@@ -231,15 +231,15 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
       }
     }
     if (Object.keys(UNITLAYERS.units).length === 64) {
-      let winner =
+      LINKS.endGame = ["draw", "win", "lose"][
         Object.keys(UNITLAYERS.myunits).length >
         Object.keys(UNITLAYERS.oppunits).length
           ? 1
           : Object.keys(UNITLAYERS.oppunits).length ===
             Object.keys(UNITLAYERS.myunits).length
           ? 0
-          : 2;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+          : 2
+      ];
       LINKS.endedBy = "boardfull";
     } else {
       LINKS.endTurn = "startTurn2";
@@ -565,15 +565,15 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
     }
     if (Object.keys(UNITLAYERS.mysoldiers).length > 1) {
       if (Object.keys(UNITLAYERS.units).length === 64) {
-        let winner =
+        LINKS.endGame = ["draw", "lose", "win"][
           Object.keys(UNITLAYERS.myunits).length >
           Object.keys(UNITLAYERS.oppunits).length
             ? 2
             : Object.keys(UNITLAYERS.oppunits).length ===
               Object.keys(UNITLAYERS.myunits).length
             ? 0
-            : 1;
-        LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+            : 1
+        ];
         LINKS.endedBy = "boardfull";
       } else {
         LINKS.endTurn = "startTurn1";
@@ -670,15 +670,15 @@ let game = { gameId: "duplo", action: {}, instruction: {} };
       }
     }
     if (Object.keys(UNITLAYERS.units).length === 64) {
-      let winner =
+      LINKS.endGame = ["draw", "lose", "win"][
         Object.keys(UNITLAYERS.myunits).length >
         Object.keys(UNITLAYERS.oppunits).length
           ? 2
           : Object.keys(UNITLAYERS.oppunits).length ===
             Object.keys(UNITLAYERS.myunits).length
           ? 0
-          : 1;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+          : 1
+      ];
       LINKS.endedBy = "boardfull";
     } else {
       LINKS.endTurn = "startTurn1";

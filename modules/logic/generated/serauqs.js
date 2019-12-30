@@ -195,11 +195,22 @@ let game = { gameId: "serauqs", action: {}, instruction: {} };
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+    if (
+      Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.middle)
+            .concat(
+              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
+            )
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      ).length > 3
+    ) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "tookcenter";
+      LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else if (
       Object.keys(
         Object.entries(
@@ -213,27 +224,13 @@ let game = { gameId: "serauqs", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
-    } else if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.middle)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "tookcenter";
-      LINKS.endMarks = Object.keys(TERRAIN.middle);
+    } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "madeline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -547,11 +544,22 @@ let game = { gameId: "serauqs", action: {}, instruction: {} };
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+    if (
+      Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.middle)
+            .concat(
+              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
+            )
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      ).length > 3
+    ) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "tookcenter";
+      LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else if (
       Object.keys(
         Object.entries(
@@ -565,27 +573,13 @@ let game = { gameId: "serauqs", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length > 3
     ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
-    } else if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.middle)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "tookcenter";
-      LINKS.endMarks = Object.keys(TERRAIN.middle);
+    } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "madeline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
       LINKS.endTurn = "startTurn1";
     }

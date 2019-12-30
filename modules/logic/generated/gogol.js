@@ -182,7 +182,10 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
+    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
+    } else if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -193,8 +196,7 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -205,10 +207,6 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -255,7 +253,10 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
+    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
+    } else if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -266,8 +267,7 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -278,10 +278,6 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -340,7 +336,10 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
+    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
+    } else if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -351,8 +350,7 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -363,10 +361,6 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -850,7 +844,10 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
+    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
+    } else if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -861,8 +858,7 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -873,10 +869,6 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -923,7 +915,10 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
+    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
+    } else if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -934,8 +929,7 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -946,10 +940,6 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -1008,7 +998,10 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
+    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
+    } else if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -1019,8 +1012,7 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       ).length !== 0
     ) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "infiltration";
       LINKS.endMarks = Object.keys(
         Object.entries(
@@ -1031,10 +1023,6 @@ let game = { gameId: "gogol", action: {}, instruction: {} };
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
-    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
-      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }

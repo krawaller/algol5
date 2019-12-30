@@ -179,8 +179,7 @@ let game = { gameId: "shoveoff", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
@@ -270,8 +269,7 @@ let game = { gameId: "shoveoff", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
@@ -361,8 +359,7 @@ let game = { gameId: "shoveoff", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
@@ -452,8 +449,7 @@ let game = { gameId: "shoveoff", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      let winner = 1;
-      LINKS.endGame = winner === 1 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
@@ -767,8 +763,7 @@ let game = { gameId: "shoveoff", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
@@ -858,8 +853,7 @@ let game = { gameId: "shoveoff", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
@@ -949,8 +943,7 @@ let game = { gameId: "shoveoff", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {
@@ -1040,8 +1033,7 @@ let game = { gameId: "shoveoff", action: {}, instruction: {} };
       }
     }
     if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      let winner = 2;
-      LINKS.endGame = winner === 2 ? "win" : winner ? "lose" : "draw";
+      LINKS.endGame = "win";
       LINKS.endedBy = "madeline";
       LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
     } else {

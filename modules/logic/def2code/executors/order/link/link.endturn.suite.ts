@@ -12,30 +12,40 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         flow: {
           ...emptyFullDef.flow,
           endGame: {
+            starvealt: {
+              condition: { truthy: { turnvar: "won" } },
+              show: { singles: ["marka1", "marka2"] },
+              whenStarvation: true,
+            },
+            starvealt2: {
+              condition: { truthy: { turnvar: "gamegoeson" } },
+              show: { singles: ["marka1", "marka2"] },
+              whenStarvation: true,
+            },
             conquer: {
               condition: { truthy: { turnvar: "won" } },
-              show: { singles: ["marka1", "marka2"] }
+              show: { singles: ["marka1", "marka2"] },
             },
             surrender: {
               condition: { truthy: { turnvar: "lost" } },
-              who: ["otherplayer"]
+              who: ["otherplayer"],
             },
             neither: {
               condition: { truthy: { turnvar: "draw" } },
-              who: 0
-            }
-          }
-        }
+              who: 0,
+            },
+          },
+        },
       },
       player: 1,
       action: "someaction",
       contexts: [
         {
           context: {
-            TURNVARS: {},
+            TURNVARS: { gamegoeson: true },
             LINKS: {},
             newStepId: "foo",
-            MARKS: {}
+            MARKS: { marka1: "b1", marka2: "b2" },
           },
           tests: [
             {
@@ -44,20 +54,28 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "LINKS.endTurn",
                   res: "startTurn2",
-                  desc: "we can link to endTurn, passing over to next plr"
-                }
-              ]
-            }
-          ]
+                  desc: "we can link to endTurn, passing over to next plr",
+                },
+                {
+                  sample: "LINKS.starvation",
+                  res: {
+                    endGame: "win",
+                    endedBy: "starvealt2",
+                    endMarks: ["b1", "b2"],
+                  },
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             TURNVARS: { won: "yes" },
             LINKS: {
-              endMarks: {}
+              endMarks: {},
             },
             newStepId: "foo",
-            MARKS: { marka1: "a1", marka2: "a2" }
+            MARKS: { marka1: "a1", marka2: "a2" },
           },
           tests: [
             {
@@ -66,31 +84,36 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "LINKS.endGame",
                   res: "win",
-                  desc: "we can link to winning the game"
+                  desc: "we can link to winning the game",
                 },
                 {
                   sample: "LINKS.endedBy",
-                  res: "conquer"
+                  res: "conquer",
                 },
                 {
                   sample: "LINKS.endMarks",
-                  res: ["a1", "a2"]
+                  res: ["a1", "a2"],
                 },
                 {
                   sample: "LINKS.endTurn",
                   res: falsy,
-                  desc: "we don't set endTurn when game ends"
-                }
-              ]
-            }
-          ]
+                  desc: "we don't set endTurn when game ends",
+                },
+                {
+                  sample: "LINKS.starvation",
+                  res: falsy,
+                  desc: "Since game ended we didn't evaluate starvation stuff",
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             TURNVARS: { lost: "yes" },
             LINKS: {},
             newStepId: "foo",
-            MARKS: {}
+            MARKS: {},
           },
           tests: [
             {
@@ -99,26 +122,26 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "LINKS.endGame",
                   res: "lose",
-                  desc: "we can link to losing endTurn"
+                  desc: "we can link to losing endTurn",
                 },
                 {
                   sample: "LINKS.endedBy",
-                  res: "surrender"
+                  res: "surrender",
                 },
                 {
                   sample: "LINKS.endTurn",
-                  res: falsy
-                }
-              ]
-            }
-          ]
+                  res: falsy,
+                },
+              ],
+            },
+          ],
         },
         {
           context: {
             TURNVARS: { draw: "yes" },
             LINKS: {},
             newStepId: "foo",
-            MARKS: {}
+            MARKS: {},
           },
           tests: [
             {
@@ -127,21 +150,21 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "LINKS.endGame",
                   res: "draw",
-                  desc: "we can link to draw endTurn"
+                  desc: "we can link to draw endTurn",
                 },
                 {
                   sample: "LINKS.endedBy",
-                  res: "neither"
+                  res: "neither",
                 },
                 {
                   sample: "LINKS.endTurn",
-                  res: falsy
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  res: falsy,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

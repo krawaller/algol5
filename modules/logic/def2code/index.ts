@@ -12,9 +12,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
   ret += executeSection(gameDef, 1, "head", "head");
 
-  ret += `let game = { gameId: '${
-    gameDef.meta.id
-  }', action: {}, instruction: {} }; `;
+  ret += `let game = { gameId: '${gameDef.meta.id}', action: {}, instruction: {} }; `;
 
   ([1, 2] as const).forEach(player => {
     ret += `{ `;

@@ -4,6 +4,7 @@ import {
   AlgolStaticGameAPI,
   AlgolGameGraphics,
   AlgolBattleUI,
+  AlgolMeta,
 } from "../../../../types";
 
 import { Board } from "../Board";
@@ -16,7 +17,7 @@ const noop = () => {};
 type TesterProps = {
   api: AlgolStaticGameAPI;
   graphics: AlgolGameGraphics;
-  link: string;
+  meta: AlgolMeta<string, string>;
 };
 
 type TesterState = {
@@ -28,7 +29,7 @@ type TesterAction = "mark" | "command" | "endTurn" | "undo" | "frame";
 type TesterCmnd = [TesterAction, any];
 
 export const Tester = (props: TesterProps) => {
-  const { api, graphics, link } = props;
+  const { api, graphics, meta } = props;
   const [{ battle, frame }, dispatch] = useReducer(
     (state: TesterState, instr: TesterCmnd) => {
       const [cmnd, arg] = instr;
@@ -107,8 +108,8 @@ export const Tester = (props: TesterProps) => {
         </div>
       </Fragment>
       <div style={{ padding: "10px", paddingTop: "20px", textAlign: "left" }}>
-        <a href={link} target="_blank">
-          External rules
+        <a href={meta.source} target="_blank">
+          External rules for {meta.name}
         </a>
       </div>
     </Fragment>

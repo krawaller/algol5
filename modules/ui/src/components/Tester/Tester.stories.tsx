@@ -15,11 +15,6 @@ storiesOf("Tester", module).add("Test games", () => {
   const api = makeStaticGameAPI(games[gameId]);
   const graphics = dataURIs[gameId];
   return (
-    <Tester
-      key={gameId}
-      api={api}
-      graphics={graphics}
-      link={meta[gameId].source}
-    />
+    <Tester key={gameId} api={api} graphics={graphics} meta={meta[gameId]} />
   );
 });

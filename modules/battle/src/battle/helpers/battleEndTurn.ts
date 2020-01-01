@@ -4,6 +4,7 @@ import { battleEndGame } from "./battleEndGame";
 
 import { emptyAnim } from "../../../../common";
 import { battleTurnPath } from "./battleTurnPath";
+import { addStarvationToStep } from "./addStarvationToStep";
 
 export function battleEndTurn(game: AlgolGame, btl: AlgolBattle): AlgolBattle {
   const battle = {
@@ -13,8 +14,14 @@ export function battleEndTurn(game: AlgolGame, btl: AlgolBattle): AlgolBattle {
   const currentStep = battle.turn.steps[battle.state.currentStepId];
 
   if (currentStep.LINKS.endGame) return battleEndGame(battle);
-
   const nextTurn = endTurn(game, battle.turn, battle.state.currentStepId);
+  // Have to repeat starvation code from `.hydrateStepInTurn` here
+  // since it might not have been run if this turn was never fully
+  // hydrated because of performance short circuit
+  if (!nextTurn.canEnd) {
+    addStarvationToStep(currentStep);
+    return battleEndGame(battle);
+  }
   return {
     path: battle.path,
     turnNumber: nextTurn.steps.root.TURN,

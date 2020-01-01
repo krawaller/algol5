@@ -5,4 +5,4 @@ jobs:
       - image: circleci/node:current
     steps:
       - checkout
-      - run: npm run robot
+      - run: npm run robot && npm run test

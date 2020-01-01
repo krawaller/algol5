@@ -1,5 +1,6 @@
 import { AlgolTurn, AlgolGame } from "../../../../../types";
 import { tryToReachTurnEnd, newTurnFromRootStep } from "../helpers";
+import { addStarvationToStep } from "../../helpers";
 
 // removes dead links in this step
 export function hydrateStepInTurn(
@@ -35,17 +36,7 @@ export function hydrateStepInTurn(
       turn.nextTurns[stepId] = newTurn;
     } else {
       delete stepLinks.endTurn;
-      if (stepLinks.starvation) {
-        stepLinks.endGame = stepLinks.starvation.endGame;
-        stepLinks.endedBy = stepLinks.starvation.endedBy;
-        stepLinks.endMarks =
-          stepLinks.starvation.endMarks ||
-          Object.keys(step.UNITLAYERS.myunits || {});
-      } else {
-        stepLinks.endGame = "win";
-        stepLinks.endedBy = "starvation";
-        stepLinks.endMarks = Object.keys(step.UNITLAYERS.myunits || {});
-      }
+      addStarvationToStep(step);
       turn.gameEnds.win.push(stepId);
     }
   }

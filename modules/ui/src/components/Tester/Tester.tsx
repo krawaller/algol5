@@ -1,6 +1,5 @@
-import React, { useReducer, useMemo, Fragment } from "react";
+import React, { useMemo, Fragment } from "react";
 import {
-  AlgolBattle,
   AlgolStaticGameAPI,
   AlgolGameGraphics,
   AlgolBattleUI,
@@ -13,7 +12,7 @@ import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
 import { BattleHeadline } from "../BattleHeadline";
 import { Content } from "../Content";
-import { useDemo } from "../../helpers";
+import { useDemo, useBattle } from "../../helpers";
 import { GameId } from "../../../../games/dist/list";
 import { emptyAnim } from "../../../../common";
 
@@ -30,7 +29,7 @@ type TesterProps = {
 
 export const Tester = (props: TesterProps) => {
   const { api, graphics, meta, demo } = props;
-  const [{ battle, frame }, dispatch] = useLocal(api);
+  const [{ battle, frame }, dispatch] = useBattle(api);
   const { frame: demoFrame, hydrDemo } = useDemo(demo, !battle);
   const battleUi = useMemo(
     () =>
@@ -115,53 +114,6 @@ export const Tester = (props: TesterProps) => {
     </Fragment>
   );
 };
-
-type LocalBattleAction =
-  | "mark"
-  | "command"
-  | "endTurn"
-  | "undo"
-  | "toFrame"
-  | "new";
-type LocalBattleCmnd = [LocalBattleAction, any];
-
-type LocalBattleState = {
-  battle: AlgolBattle | null;
-  frame: number;
-};
-
-function useLocal(api: AlgolStaticGameAPI) {
-  return useReducer(
-    (state: LocalBattleState, instr: LocalBattleCmnd) => {
-      const [cmnd, arg] = instr;
-      if (cmnd === "toFrame") {
-        return {
-          battle: state.battle,
-          frame: arg,
-        };
-      } else if (cmnd === "new") {
-        return {
-          battle: api.newBattle(),
-          frame: 1,
-        };
-      } else {
-        const newBattle = api.performAction(state.battle!, cmnd, instr[1]);
-        return {
-          frame: newBattle.gameEndedBy
-            ? newBattle.history.length - 1
-            : cmnd === "endTurn"
-            ? newBattle.history.length
-            : state.frame,
-          battle: newBattle,
-        };
-      }
-    },
-    {
-      battle: null,
-      frame: 0,
-    }
-  );
-}
 
 const emptyBattleUI: AlgolBattleUI = {
   endTurn: false,

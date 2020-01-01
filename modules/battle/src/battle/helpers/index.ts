@@ -7,3 +7,4 @@ export * from "./getBattleInstruction";
 export * from "./battleTurnPath";
 export * from "./inflateBattleSave";
 export * from "./makeBattleSave";
+export * from "./addStarvationToStep";

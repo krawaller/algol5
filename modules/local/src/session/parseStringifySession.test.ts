@@ -1,5 +1,5 @@
 import { AlgolLocalBattle } from "../../../types";
-import { parseLocalBattle, stringifyLocalBattle } from ".";
+import { parseSession, stringifySession } from ".";
 
 type Test = {
   desc: string;
@@ -38,8 +38,8 @@ const tests: Test[] = [
 describe("the parsing and stringification of AlgolLocalBattle", () => {
   for (const t of tests) {
     it(t.desc, () => {
-      const str = stringifyLocalBattle(t.local, t.method || 0);
-      const result = parseLocalBattle(str);
+      const str = stringifySession(t.local, t.method || 0);
+      const result = parseSession(str);
       expect(result).toEqual(t.local);
     });
   }

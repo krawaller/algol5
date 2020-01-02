@@ -1,4 +1,4 @@
-import { AlgolBattleSave } from "../../../types";
+import { AlgolBattleSave } from "../../../../types";
 import { parsePath } from "./parsePath";
 
 export const parseBattleSave = (str: string): AlgolBattleSave => {

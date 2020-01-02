@@ -1,4 +1,4 @@
-import { AlgolBattleSave } from "../../../types";
+import { AlgolBattleSave } from "../../../../types";
 import { stringifyPath } from "./stringifyPath";
 
 export const stringifyBattleSave = (save: AlgolBattleSave, method: number) => {

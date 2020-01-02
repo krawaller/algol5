@@ -1,11 +1,7 @@
-import { AlgolBattleSave, AlgolLocalBattle } from "../../../types";
-import { stringifyPath } from "./stringifyPath";
+import { AlgolBattleSave, AlgolLocalBattle } from "../../../../types";
 import { stringifyBattleSave } from "./stringifyBattleSave";
 
-export const stringifyLocalBattle = (
-  local: AlgolLocalBattle,
-  method: number
-) => {
+export const stringifySession = (local: AlgolLocalBattle, method: number) => {
   if (method === 0) {
     return (
       "0" +

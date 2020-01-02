@@ -1,8 +1,7 @@
-import { AlgolBattleSave, AlgolLocalBattle } from "../../../types";
-import { parsePath } from "./parsePath";
+import { AlgolLocalBattle } from "../../../../types";
 import { parseBattleSave } from "./parseBattleSave";
 
-export const parseLocalBattle = (str: string): AlgolLocalBattle => {
+export const parseSession = (str: string): AlgolLocalBattle => {
   const method = Number(str[0]);
   if (method === 0) {
     const obj = JSON.parse(str.slice(1));

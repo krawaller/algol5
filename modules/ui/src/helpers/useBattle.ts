@@ -4,6 +4,7 @@ import {
   AlgolBattle,
   AlgolLocalBattle,
 } from "../../../types";
+import { newSessionFromBattle, updateSession } from "../../../local/src";
 
 type BattleAction = "mark" | "command" | "endTurn" | "undo" | "toFrame" | "new";
 type BattleCmnd = [BattleAction, any];
@@ -25,20 +26,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
         };
       } else if (cmnd === "new") {
         const battle = api.newBattle();
-        session.current = {
-          id: Math.random().toString(),
-          created: Date.now(),
-          updated: Date.now(),
-          save: {
-            player: 1,
-            turn: 1,
-            path: [],
-          },
-          screenshot: {
-            marks: [],
-            units: battle.state.board.units,
-          },
-        };
+        session.current = newSessionFromBattle(battle);
         return {
           battle,
           frame: 1,
@@ -51,20 +39,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
           ? battle.history.length
           : state.frame;
         if (cmnd === "endTurn") {
-          session.current = {
-            ...session.current!,
-            updated: Date.now(),
-            screenshot: {
-              marks: battle.state.board.marks,
-              units: battle.state.board.units,
-            },
-            save: {
-              endedBy: battle.gameEndedBy,
-              turn: battle.turnNumber,
-              player: battle.gameEndedBy ? battle.winner! : battle.player,
-              path: battle.path,
-            },
-          };
+          session.current = updateSession(battle, session.current!);
         }
         return {
           frame,

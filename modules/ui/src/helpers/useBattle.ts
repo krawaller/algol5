@@ -4,7 +4,11 @@ import {
   AlgolBattle,
   AlgolLocalBattle,
 } from "../../../types";
-import { newSessionFromBattle, updateSession } from "../../../local/src";
+import {
+  newSessionFromBattle,
+  updateSession,
+  writeSession,
+} from "../../../local/src";
 
 type BattleAction = "mark" | "command" | "endTurn" | "undo" | "toFrame" | "new";
 type BattleCmnd = [BattleAction, any];
@@ -40,6 +44,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
           : state.frame;
         if (cmnd === "endTurn") {
           session.current = updateSession(battle, session.current!);
+          writeSession(api.gameId, session.current);
         }
         return {
           frame,

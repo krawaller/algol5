@@ -4,7 +4,7 @@ import {
   AlgolStaticGameAPI,
 } from "../../types";
 import { makeBattleSave } from "../src/battle/helpers";
-import { parseBattleSave, stringifyBattleSave } from "../src/local";
+import { parseBattleSave, stringifyBattleSave } from "../../local/src";
 
 const identifyMark = /^[a-z][0-9]+$/;
 

@@ -12,11 +12,10 @@ import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
 import { BattleHeadline } from "../BattleHeadline";
 import { Content } from "../Content";
+import { GameLanding } from "../GameLanding";
 import { useDemo, useBattle } from "../../helpers";
 import { GameId } from "../../../../games/dist/list";
 import { emptyAnim } from "../../../../common";
-
-import styles from "./Tester.cssProxy";
 
 const noop = () => {};
 
@@ -87,27 +86,17 @@ export const Tester = (props: TesterProps) => {
               <Content content={ui.instruction} callback={noop} />
             </span>
           ) : battle ? (
-            <BattleControls
-              callback={(action, arg) => dispatch([action, arg])}
-              undo={ui.undo}
-              instruction={ui.instruction}
-            />
+            <Fragment>
+              <BattleControls
+                callback={(action, arg) => dispatch([action, arg])}
+                undo={ui.undo}
+                instruction={ui.instruction}
+              />
+              <hr />
+              <button onClick={() => dispatch(["leave", null])}>Leave</button>
+            </Fragment>
           ) : (
-            <div className={styles.gameLanding}>
-              <button
-                className={styles.gameButtonLink}
-                onClick={() => dispatch(["new", null])}
-              >
-                Start a local game
-              </button>
-              <a
-                href={meta.source}
-                target="_blank"
-                className={styles.gameButtonLink}
-              >
-                Go to rules (external)
-              </a>
-            </div>
+            <GameLanding meta={meta} callback={dispatch} graphics={graphics} />
           )}
         </div>
       </Fragment>

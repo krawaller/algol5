@@ -92,7 +92,7 @@ export const Tester = (props: TesterProps) => {
               instruction={ui.instruction}
             />
           ) : (
-            <GameLanding meta={meta} callback={dispatch} />
+            <GameLanding meta={meta} callback={dispatch} graphics={graphics} />
           )}
         </div>
       </Fragment>

@@ -7,17 +7,17 @@
   transition: opacity 500ms ease, transform 500ms ease;
   transform: scale(1, 1);
   opacity: 1;
-  z-index: 2;
+  /* z-index: 2; */
 }
 
 .iconInnerDuringEnter {
   opacity: 0;
-  z-index: 2;
+  /* z-index: 2; */
   transform: scale(0.1, 0.1);
 }
 
 .iconInnerDuringExit {
   opacity: 0;
-  z-index: 1;
+  /* z-index: 1; */
   transform: scale(0.1, 0.1);
 }

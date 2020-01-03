@@ -86,11 +86,15 @@ export const Tester = (props: TesterProps) => {
               <Content content={ui.instruction} callback={noop} />
             </span>
           ) : battle ? (
-            <BattleControls
-              callback={(action, arg) => dispatch([action, arg])}
-              undo={ui.undo}
-              instruction={ui.instruction}
-            />
+            <Fragment>
+              <BattleControls
+                callback={(action, arg) => dispatch([action, arg])}
+                undo={ui.undo}
+                instruction={ui.instruction}
+              />
+              <hr />
+              <button onClick={() => dispatch(["leave", null])}>Leave</button>
+            </Fragment>
           ) : (
             <GameLanding meta={meta} callback={dispatch} graphics={graphics} />
           )}

@@ -17,7 +17,8 @@ type BattleAction =
   | "undo"
   | "toFrame"
   | "new"
-  | "load";
+  | "load"
+  | "leave";
 type BattleCmnd = [BattleAction, any];
 
 type BattleHookState = {
@@ -50,6 +51,11 @@ export function useBattle(api: AlgolStaticGameAPI) {
         return {
           battle,
           frame,
+        };
+      } else if (cmnd === "leave") {
+        return {
+          battle: null,
+          frame: 0,
         };
       } else {
         const battle = api.performAction(state.battle!, cmnd, instr[1]);

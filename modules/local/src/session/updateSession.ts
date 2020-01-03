@@ -1,6 +1,10 @@
 import { AlgolBattle, AlgolLocalBattle } from "../../../types";
+import { stringifyPath } from "./stringifySession/stringifyPath";
 
-export function updateSession(battle: AlgolBattle, session: AlgolLocalBattle) {
+export function updateSession(
+  battle: AlgolBattle,
+  session: AlgolLocalBattle
+): AlgolLocalBattle {
   return {
     ...session,
     updated: Date.now(),
@@ -8,11 +12,9 @@ export function updateSession(battle: AlgolBattle, session: AlgolLocalBattle) {
       marks: battle.state.board.marks,
       units: battle.state.board.units,
     },
-    save: {
-      endedBy: battle.gameEndedBy,
-      turn: battle.turnNumber,
-      player: battle.gameEndedBy ? battle.winner! : battle.player,
-      path: battle.path,
-    },
+    endedBy: battle.gameEndedBy,
+    turn: battle.turnNumber,
+    player: battle.gameEndedBy ? battle.winner! : battle.player,
+    path: stringifyPath(battle.path, 0),
   };
 }

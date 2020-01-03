@@ -1,0 +1,16 @@
+.sessionListItem {
+  display: flex;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.sessionListItemScreenshot {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 10px;
+}
+
+.sessionListInfo {
+}

@@ -12,11 +12,10 @@ import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
 import { BattleHeadline } from "../BattleHeadline";
 import { Content } from "../Content";
+import { GameLanding } from "../GameLanding";
 import { useDemo, useBattle } from "../../helpers";
 import { GameId } from "../../../../games/dist/list";
 import { emptyAnim } from "../../../../common";
-
-import styles from "./Tester.cssProxy";
 
 const noop = () => {};
 
@@ -93,21 +92,7 @@ export const Tester = (props: TesterProps) => {
               instruction={ui.instruction}
             />
           ) : (
-            <div className={styles.gameLanding}>
-              <button
-                className={styles.gameButtonLink}
-                onClick={() => dispatch(["new", null])}
-              >
-                Start a local game
-              </button>
-              <a
-                href={meta.source}
-                target="_blank"
-                className={styles.gameButtonLink}
-              >
-                Go to rules (external)
-              </a>
-            </div>
+            <GameLanding meta={meta} callback={dispatch} />
           )}
         </div>
       </Fragment>

@@ -10,7 +10,14 @@ import {
   writeSession,
 } from "../../../local/src";
 
-type BattleAction = "mark" | "command" | "endTurn" | "undo" | "toFrame" | "new";
+type BattleAction =
+  | "mark"
+  | "command"
+  | "endTurn"
+  | "undo"
+  | "toFrame"
+  | "new"
+  | "load";
 type BattleCmnd = [BattleAction, any];
 
 type BattleHookState = {
@@ -34,6 +41,15 @@ export function useBattle(api: AlgolStaticGameAPI) {
         return {
           battle,
           frame: 1,
+        };
+      } else if (cmnd === "load") {
+        const battle = api.fromSave(arg);
+        const frame = battle.gameEndedBy
+          ? battle.history.length - 1
+          : battle.history.length;
+        return {
+          battle,
+          frame,
         };
       } else {
         const battle = api.performAction(state.battle!, cmnd, instr[1]);

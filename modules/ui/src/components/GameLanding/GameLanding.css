@@ -38,3 +38,7 @@
   border-image: initial;
   border-radius: 3px;
 }
+
+.gameButtonLink:disabled {
+  color: #999;
+}

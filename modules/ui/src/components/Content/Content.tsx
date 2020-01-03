@@ -19,7 +19,7 @@ type ContentProps = {
   /** The content to show */
   content: AlgolContentAnon;
   /** The callback to use for button clicks */
-  callback: (action: "command" | "endTurn", arg?: string) => void;
+  callback?: (action: "command" | "endTurn", arg?: string) => void;
 };
 
 const posStyles = {
@@ -29,12 +29,14 @@ const posStyles = {
   whiteSpace: "nowrap",
 } as const;
 
+const noop = () => {};
+
 /**
  * Displays some AlgolContent
  */
 export const Content: React.FunctionComponent<ContentProps> = ({
   content,
-  callback,
+  callback = noop,
 }) => {
   if (isAlgolContentLine(content)) {
     return (

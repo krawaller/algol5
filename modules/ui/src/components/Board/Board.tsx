@@ -12,12 +12,14 @@ import { BoardMarks } from "./BoardMarks";
 import { BoardUnits } from "./BoardUnits";
 import { BoardGhosts } from "./BoardGhosts";
 
+const noop = () => {};
+
 type BoardProps = {
   graphics: AlgolGameGraphics;
   units: { [id: string]: AlgolUnitState };
   marks: AlgolPosition[];
   potentialMarks: AlgolPosition[];
-  callback: (pos: string) => void;
+  callback?: (pos: string) => void;
   anim?: AlgolAnimCompiled;
   lookback?: boolean;
 };
@@ -30,7 +32,7 @@ export const Board: React.FunctionComponent<BoardProps> = memo(
     marks,
     potentialMarks,
     units,
-    callback,
+    callback = noop,
     lookback,
     anim = emptyAnim,
   }) => {

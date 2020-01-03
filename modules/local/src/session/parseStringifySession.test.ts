@@ -39,7 +39,7 @@ describe("the parsing and stringification of AlgolLocalBattle", () => {
   for (const t of tests) {
     it(t.desc, () => {
       const str = stringifySession(t.local, t.method || 0);
-      const result = parseSession(str);
+      const result = parseSession(str, t.local.id);
       expect(result).toEqual(t.local);
     });
   }

@@ -17,7 +17,7 @@ import { BattleControls } from "../BattleControls";
 import { BattleHeadline } from "../BattleHeadline";
 import { Content } from "../Content";
 import { GameLanding } from "../GameLanding";
-import { useDemo, useBattle } from "../../helpers";
+import { useDemo, useBattle, PageActions } from "../../helpers";
 import { GameId } from "../../../../games/dist/list";
 import { emptyAnim } from "../../../../common";
 
@@ -26,6 +26,7 @@ type GamePageProps = {
   graphics: AlgolGameGraphics;
   meta: AlgolMeta<string, string>;
   demo: AlgolDemo;
+  actions: PageActions;
 };
 
 export const GamePage = (props: GamePageProps) => {

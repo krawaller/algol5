@@ -24,6 +24,10 @@ storiesOf("GamePage", module).add(
         graphics={graphics}
         meta={meta[gameId]}
         demo={demos[gameId]}
+        actions={{
+          navTo: str => console.log("nav to", str),
+          prefetch: str => console.log("prefetch", str),
+        }}
       />
     );
   }

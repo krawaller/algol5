@@ -13,9 +13,8 @@ import {
 
 import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
-import { BattleHeadline } from "../BattleHeadline";
-import { Content } from "../Content";
 import { GameLanding } from "../GameLanding";
+import { BattleHistory } from "../BattleHistory";
 import { useDemo, useBattle, PageActions } from "../../helpers";
 import { demo2ui, emptyBattleUI } from "../../../../common";
 
@@ -40,7 +39,7 @@ export const GamePage = (props: GamePageProps) => {
         : emptyBattleUI,
     [battle, hydrDemo, demoFrame]
   );
-  const lookback = battle && frame < battle.history.length;
+  const lookback = battle && frame > -1;
   const ui: AlgolBattleUI =
     lookback && battle
       ? {
@@ -51,10 +50,7 @@ export const GamePage = (props: GamePageProps) => {
           instruction: battle.history[frame].description,
         }
       : battleUi;
-  // if we haven't finished, last frame is UI to make new move
-  const frameCount = battle
-    ? battle.history.length - (battle.gameEndedBy ? 1 : 0)
-    : 0;
+  const frameCount = battle ? battle.history.length - 1 : 0;
   return (
     <Fragment>
       <Board
@@ -66,37 +62,26 @@ export const GamePage = (props: GamePageProps) => {
         anim={ui.board.anim}
         lookback={Boolean(lookback)}
       />
-      <Fragment>
-        <BattleHeadline
-          currentFrame={frame}
+      {lookback ? (
+        <BattleHistory
+          actions={actions}
+          content={ui.instruction}
+          frame={Math.max(0, frame)}
           frameCount={frameCount}
-          onChooseFrame={actions.toFrame}
-          ui={ui}
-          content={!battle ? { text: meta.name } : undefined}
+          showBackBtn={!battle!.gameEndedBy}
         />
-        <div style={{ padding: "10px" }}>
-          {lookback ? (
-            <span
-              style={{
-                backgroundColor: "#CCC",
-                display: "inline-block",
-                padding: "0 5px",
-                borderRadius: "5px",
-              }}
-            >
-              <Content content={ui.instruction} />
-            </span>
-          ) : battle ? (
-            <BattleControls
-              actions={actions}
-              undo={ui.undo}
-              instruction={ui.instruction}
-            />
-          ) : (
-            <GameLanding meta={meta} actions={actions} graphics={graphics} />
-          )}
-        </div>
-      </Fragment>
+      ) : battle ? (
+        <BattleControls
+          actions={actions}
+          undo={ui.undo}
+          instruction={ui.instruction}
+          turnNumber={battle.turnNumber}
+          player={battle.player}
+          haveHistory={frameCount > 1}
+        />
+      ) : (
+        <GameLanding meta={meta} actions={actions} graphics={graphics} />
+      )}
     </Fragment>
   );
 };

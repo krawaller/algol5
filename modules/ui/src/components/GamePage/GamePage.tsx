@@ -68,7 +68,7 @@ export const GamePage = (props: GamePageProps) => {
           content={ui.instruction}
           frame={Math.max(0, frame)}
           frameCount={frameCount}
-          showBackBtn={!battle!.gameEndedBy}
+          battleFinished={!!battle!.gameEndedBy}
         />
       ) : battle ? (
         <BattleControls

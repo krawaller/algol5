@@ -1,11 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import { List } from ".";
+import { GameList } from ".";
 
-storiesOf("List", module).add("List of games", () => {
+storiesOf("GameList", module).add("List of games", () => {
   return (
-    <List
+    <GameList
       callback={gameId => {
         console.log("Clicked game", gameId);
       }}

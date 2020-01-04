@@ -1,20 +1,17 @@
 import React from "react";
-import css from "./List.cssProxy";
+import css from "./GameList.cssProxy";
 
 import { Thumbnail } from "../Thumbnail";
 import { AlgolMeta, AlgolDemo, AlgolGameGraphics } from "../../../../types";
 
-type ListItemProps = {
+type GameListItemProps = {
   callback: () => void;
   demo: AlgolDemo;
   meta: AlgolMeta<any, any>;
   graphics: AlgolGameGraphics;
 };
 
-/**
- * A component to show a list of games
- */
-export const ListItem: React.FunctionComponent<ListItemProps> = props => {
+export const GameListItem: React.FunctionComponent<GameListItemProps> = props => {
   const { callback, demo, meta, graphics } = props;
   return (
     <div className={css.gameListItem} key={meta.id} onClick={callback}>

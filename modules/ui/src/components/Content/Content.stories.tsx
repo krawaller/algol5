@@ -14,7 +14,7 @@ storiesOf("Content", module).add("Battle start instructions", () => {
   return (
     <div>
       <p>First instruction when playing {gameId}:</p>
-      <Content content={ui.instruction} callback={() => {}} />
+      <Content content={ui.instruction} />
     </div>
   );
 });

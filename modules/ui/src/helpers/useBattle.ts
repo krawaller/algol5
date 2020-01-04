@@ -1,8 +1,9 @@
-import { useReducer, useRef } from "react";
+import { useReducer, useRef, useMemo } from "react";
 import {
   AlgolStaticGameAPI,
   AlgolBattle,
   AlgolLocalBattle,
+  AlgolBattleSave,
 } from "../../../types";
 import {
   newSessionFromBattle,
@@ -28,7 +29,7 @@ type BattleHookState = {
 
 export function useBattle(api: AlgolStaticGameAPI) {
   const session = useRef<null | AlgolLocalBattle>(null);
-  return useReducer(
+  const [state, dispatch] = useReducer(
     (state: BattleHookState, instr: BattleCmnd) => {
       const [cmnd, arg] = instr;
       if (cmnd === "toFrame") {
@@ -79,4 +80,18 @@ export function useBattle(api: AlgolStaticGameAPI) {
       frame: 0,
     }
   );
+  const actions = useMemo(
+    () => ({
+      mark: (pos: string) => dispatch(["mark", pos]),
+      endTurn: () => dispatch(["endTurn", null]),
+      command: (cmnd: string) => dispatch(["command", cmnd]),
+      undo: () => dispatch(["undo", null]),
+      new: () => dispatch(["new", null]),
+      load: (save: AlgolBattleSave) => dispatch(["load", save]),
+      leave: () => dispatch(["leave", null]),
+      toFrame: (frame: number) => dispatch(["toFrame", frame]),
+    }),
+    []
+  );
+  return [state, actions] as const;
 }

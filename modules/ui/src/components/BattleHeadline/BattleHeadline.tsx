@@ -13,8 +13,6 @@ type BattleHeadlineProps = {
   content?: AlgolContentAnon;
 };
 
-const noop = () => {};
-
 export const BattleHeadline: FunctionComponent<BattleHeadlineProps> = ({
   ui,
   onChooseFrame,
@@ -36,7 +34,6 @@ export const BattleHeadline: FunctionComponent<BattleHeadlineProps> = ({
               }
             : { line: [{ text: "Start" }] })
         }
-        callback={noop}
       />
     </span>
     <span className={css.battleHeadlineSlider}>

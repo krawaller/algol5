@@ -28,7 +28,7 @@ type TesterProps = {
 
 export const Tester = (props: TesterProps) => {
   const { api, graphics, meta, demo } = props;
-  const [{ battle, frame }, dispatch] = useBattle(api);
+  const [{ battle, frame }, actions] = useBattle(api);
   const { frame: demoFrame, hydrDemo } = useDemo(demo, !battle);
   const battleUi = useMemo(
     () =>
@@ -57,7 +57,7 @@ export const Tester = (props: TesterProps) => {
   return (
     <Fragment>
       <Board
-        callback={pos => dispatch(["mark", pos])}
+        callback={actions.mark}
         graphics={graphics}
         units={ui.board.units}
         marks={ui.board.marks}
@@ -69,7 +69,7 @@ export const Tester = (props: TesterProps) => {
         <BattleHeadline
           currentFrame={frame}
           frameCount={frameCount}
-          onChooseFrame={num => dispatch(["toFrame", num])}
+          onChooseFrame={actions.toFrame}
           ui={ui}
           content={!battle ? { text: meta.name } : undefined}
         />
@@ -83,20 +83,20 @@ export const Tester = (props: TesterProps) => {
                 borderRadius: "5px",
               }}
             >
-              <Content content={ui.instruction} callback={noop} />
+              <Content content={ui.instruction} />
             </span>
           ) : battle ? (
             <Fragment>
               <BattleControls
-                callback={(action, arg) => dispatch([action, arg])}
+                actions={actions}
                 undo={ui.undo}
                 instruction={ui.instruction}
               />
               <hr />
-              <button onClick={() => dispatch(["leave", null])}>Leave</button>
+              <button onClick={actions.leave}>Leave</button>
             </Fragment>
           ) : (
-            <GameLanding meta={meta} callback={dispatch} graphics={graphics} />
+            <GameLanding meta={meta} actions={actions} graphics={graphics} />
           )}
         </div>
       </Fragment>

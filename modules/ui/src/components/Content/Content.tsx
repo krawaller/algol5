@@ -15,11 +15,21 @@ import {
 
 import { Icon } from "../Icon";
 
+interface ContentActions {
+  endTurn: () => void;
+  command: (cmnd: string) => void;
+}
+
 type ContentProps = {
   /** The content to show */
   content: AlgolContentAnon;
   /** The callback to use for button clicks */
-  callback?: (action: "command" | "endTurn", arg?: string) => void;
+  actions?: ContentActions;
+};
+
+const noopActions: ContentActions = {
+  endTurn: () => {},
+  command: (cmnd: string) => {},
 };
 
 const posStyles = {
@@ -29,14 +39,12 @@ const posStyles = {
   whiteSpace: "nowrap",
 } as const;
 
-const noop = () => {};
-
 /**
  * Displays some AlgolContent
  */
 export const Content: React.FunctionComponent<ContentProps> = ({
   content,
-  callback = noop,
+  actions = noopActions,
 }) => {
   if (isAlgolContentLine(content)) {
     return (
@@ -49,7 +57,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
         }}
       >
         {content.line.map(c => (
-          <Content key={Math.random()} content={c} callback={callback} />
+          <Content key={Math.random()} content={c} actions={actions} />
         ))}
       </div>
     );
@@ -62,15 +70,13 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   }
   if (isAlgolContentCmnd(content)) {
     return (
-      <button onClick={() => callback("command", content.command)}>
+      <button onClick={() => actions.command(content.command)}>
         {content.command}
       </button>
     );
   }
   if (isAlgolContentEndTurn(content)) {
-    return (
-      <button onClick={() => callback("endTurn")}>{content.endTurn}</button>
-    );
+    return <button onClick={actions.endTurn}>{content.endTurn}</button>;
   }
   if (isAlgolContentBold(content)) {
     return <strong>{content.bold}</strong>;
@@ -92,7 +98,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
     return (
       <span style={posStyles}>
         {pos}{" "}
-        <Content callback={callback} content={{ unittype: [icon, owner] }} />
+        <Content actions={actions} content={{ unittype: [icon, owner] }} />
       </span>
     );
   }

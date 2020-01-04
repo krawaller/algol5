@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { FunctionComponent, useState, useEffect, useMemo } from "react";
 import ReactModal from "react-modal";
 import styles from "./GameLanding.cssProxy";
 import {
@@ -15,14 +10,19 @@ import {
 import { getSessionList } from "../../../../local/src";
 import { SessionList } from "../SessionList";
 
+export interface GameLandingActions {
+  new: () => void;
+  load: (save: AlgolBattleSave) => void;
+}
+
 type GameLandingProps = {
   meta: AlgolMeta<string, string>;
-  callback: (action: ["new", null] | ["load", AlgolBattleSave]) => void;
+  actions: GameLandingActions;
   graphics: AlgolGameGraphics;
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, callback, graphics } = props;
+  const { meta, actions, graphics } = props;
   const [sessions, setSessions] = useState<AlgolLocalBattle[]>([]);
   const updateSessions = () => {
     setSessions(
@@ -38,16 +38,18 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const loadBattle = useCallback((btlSave: AlgolBattleSave) => {
-    closeModal();
-    callback(["load", btlSave]);
-  }, []);
+  const sessionListActions = useMemo(
+    () => ({
+      load: (btlSave: AlgolBattleSave) => {
+        closeModal();
+        actions.load(btlSave);
+      },
+    }),
+    []
+  );
   return (
     <div className={styles.gameLanding}>
-      <button
-        className={styles.gameButtonLink}
-        onClick={() => callback(["new", null])}
-      >
+      <button className={styles.gameButtonLink} onClick={actions.new}>
         Start a local game
       </button>
       <a href={meta.source} target="_blank" className={styles.gameButtonLink}>
@@ -67,7 +69,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           <SessionList
             sessions={sessions}
             graphics={graphics}
-            callback={loadBattle}
+            actions={sessionListActions}
           />
         </div>
       </ReactModal>

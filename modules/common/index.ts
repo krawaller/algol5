@@ -9,12 +9,7 @@ export * from "./entities";
 export * from "./utils";
 export * from "./units";
 export * from "./demo";
+export * from "./empty";
 
 export const truthy = "TRUTHY";
 export const falsy = "FALSY";
-
-export const emptyAnim: AlgolAnimCompiled = {
-  enterFrom: {},
-  exitTo: {},
-  ghosts: [],
-};

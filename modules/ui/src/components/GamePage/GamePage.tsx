@@ -9,7 +9,6 @@ import {
   AlgolBattleUI,
   AlgolMeta,
   AlgolDemo,
-  AlgolHydratedDemo,
 } from "../../../../types";
 
 import { Board } from "../Board";
@@ -18,8 +17,7 @@ import { BattleHeadline } from "../BattleHeadline";
 import { Content } from "../Content";
 import { GameLanding } from "../GameLanding";
 import { useDemo, useBattle, PageActions } from "../../helpers";
-import { GameId } from "../../../../games/dist/list";
-import { emptyAnim } from "../../../../common";
+import { demo2ui, emptyBattleUI } from "../../../../common";
 
 type GamePageProps = {
   api: AlgolStaticGameAPI;
@@ -106,34 +104,3 @@ export const GamePage = (props: GamePageProps) => {
     </Fragment>
   );
 };
-
-const emptyBattleUI: AlgolBattleUI = {
-  endTurn: false,
-  commands: [],
-  gameId: "foo" as GameId,
-  instruction: undefined,
-  player: 0,
-  undo: null,
-  turnNumber: 1,
-  board: {
-    anim: emptyAnim,
-    marks: [],
-    potentialMarks: [],
-    units: {},
-  },
-};
-
-function demo2ui(demo: AlgolHydratedDemo, frame: number): AlgolBattleUI {
-  return {
-    ...emptyBattleUI,
-    board: {
-      anim: {
-        ...emptyAnim,
-        ...demo.anims[frame],
-      },
-      marks: [],
-      potentialMarks: [],
-      units: demo.positions[frame],
-    },
-  };
-}

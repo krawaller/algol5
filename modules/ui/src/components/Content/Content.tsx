@@ -1,4 +1,6 @@
-import * as React from "react";
+import React from "react";
+import classNames from "classnames";
+import css from "./Content.cssProxy";
 import {
   AlgolContentAnon,
   isAlgolContentLine,
@@ -21,9 +23,7 @@ interface ContentActions {
 }
 
 type ContentProps = {
-  /** The content to show */
   content: AlgolContentAnon;
-  /** The callback to use for button clicks */
   actions?: ContentActions;
 };
 
@@ -31,13 +31,6 @@ const noopActions: ContentActions = {
   endTurn: () => {},
   command: (cmnd: string) => {},
 };
-
-const posStyles = {
-  backgroundColor: "#EEE",
-  padding: "3px",
-  border: "1px solid black",
-  whiteSpace: "nowrap",
-} as const;
 
 /**
  * Displays some AlgolContent
@@ -48,25 +41,20 @@ export const Content: React.FunctionComponent<ContentProps> = ({
 }) => {
   if (isAlgolContentLine(content)) {
     return (
-      <div
-        style={{
-          lineHeight: "2em",
-          // display: "flex",
-          // alignItems: "center",
-          // whiteSpace: "pre-wrap"
-        }}
-      >
+      <span className={css.contentLine}>
         {content.line.map(c => (
           <Content key={Math.random()} content={c} actions={actions} />
         ))}
-      </div>
+      </span>
     );
   }
   if (isAlgolContentText(content)) {
     return <span>{content.text}</span>;
   }
   if (isAlgolContentSelect(content)) {
-    return <span className="selectInstruction">{content.select}</span>;
+    return (
+      <span className={css.contentSelectInstruction}>{content.select}</span>
+    );
   }
   if (isAlgolContentCmnd(content)) {
     return (
@@ -84,19 +72,19 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   if (isAlgolContentUnitType(content)) {
     const [icon, owner] = content.unittype;
     return (
-      <span style={{ display: "inline-block", width: "2em", height: "2em" }}>
+      <span className={css.contentUnitType}>
         <Icon owner={owner} icon={icon} />
       </span>
     );
   }
   if (isAlgolContentPos(content)) {
     const { pos } = content;
-    return <span style={posStyles}>{pos}</span>;
+    return <span className={css.contentPosition}>{pos}</span>;
   }
   if (isAlgolContentUnit(content)) {
     const [icon, owner, pos] = content.unit;
     return (
-      <span style={posStyles}>
+      <span className={css.contentPosition}>
         {pos}{" "}
         <Content actions={actions} content={{ unittype: [icon, owner] }} />
       </span>
@@ -105,13 +93,23 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   if (isAlgolContentPlayer(content)) {
     const { player } = content;
     if (player === 1) {
-      return <span style={{ fontWeight: "bold", color: "red" }}>Player 1</span>;
+      return (
+        <span className={classNames(css.contentPlayer, css.contentPlayer1)}>
+          Player 1
+        </span>
+      );
     } else if (player === 0) {
       return (
-        <span style={{ fontWeight: "bold", color: "gold" }}>Player 0</span>
+        <span className={classNames(css.contentPlayer, css.contentPlayer0)}>
+          Player 0
+        </span>
       );
     }
-    return <span style={{ fontWeight: "bold", color: "blue" }}>Player 2</span>;
+    return (
+      <span className={classNames(css.contentPlayer, css.contentPlayer2)}>
+        Player 2
+      </span>
+    );
   }
   return null;
 };

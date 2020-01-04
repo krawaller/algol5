@@ -10,7 +10,7 @@ for (const gameId of list) {
   import React from "react";
   
   import ${gameId} from "../../../../logic/dist/indiv/${gameId}";
-  import { Tester } from "../../../../ui/src/components/Tester";
+  import { GamePage } from "../../../../ui/src/components/GamePage";
   import { makeStaticGameAPI } from "../../../../battle/src";
   import { Master } from "../../../components";
   import graphics from "../../../../graphics/dist/svgDataURIs/${gameId}";
@@ -20,7 +20,7 @@ for (const gameId of list) {
   export const Game = () => {
     return (
       <Master title={meta.name}>
-        <Tester api={makeStaticGameAPI(${gameId})} graphics={graphics} meta={meta} demo={demo} />
+        <GamePage api={makeStaticGameAPI(${gameId})} graphics={graphics} meta={meta} demo={demo} />
       </Master>
     );
   };

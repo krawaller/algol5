@@ -1,3 +1,7 @@
+/*
+ * Used in the Next app as a "homepage" for the individual games.
+ */
+
 import React, { useMemo, Fragment } from "react";
 import {
   AlgolStaticGameAPI,
@@ -17,16 +21,14 @@ import { useDemo, useBattle } from "../../helpers";
 import { GameId } from "../../../../games/dist/list";
 import { emptyAnim } from "../../../../common";
 
-const noop = () => {};
-
-type TesterProps = {
+type GamePageProps = {
   api: AlgolStaticGameAPI;
   graphics: AlgolGameGraphics;
   meta: AlgolMeta<string, string>;
   demo: AlgolDemo;
 };
 
-export const Tester = (props: TesterProps) => {
+export const GamePage = (props: GamePageProps) => {
   const { api, graphics, meta, demo } = props;
   const [{ battle, frame }, actions] = useBattle(api);
   const { frame: demoFrame, hydrDemo } = useDemo(demo, !battle);

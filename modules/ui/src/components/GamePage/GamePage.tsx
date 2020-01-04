@@ -87,15 +87,11 @@ export const GamePage = (props: GamePageProps) => {
               <Content content={ui.instruction} />
             </span>
           ) : battle ? (
-            <Fragment>
-              <BattleControls
-                actions={actions}
-                undo={ui.undo}
-                instruction={ui.instruction}
-              />
-              <hr />
-              <button onClick={actions.leave}>Leave</button>
-            </Fragment>
+            <BattleControls
+              actions={actions}
+              undo={ui.undo}
+              instruction={ui.instruction}
+            />
           ) : (
             <GameLanding meta={meta} actions={actions} graphics={graphics} />
           )}

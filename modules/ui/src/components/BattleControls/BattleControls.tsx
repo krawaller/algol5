@@ -1,11 +1,12 @@
 export * from "./BattleControls";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, Fragment } from "react";
 import { AlgolContentAnon } from "../../../../types";
 
 import { Content } from "../Content";
 
 export interface BattleControlsActions {
   undo: () => void;
+  leave: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
 }
@@ -21,12 +22,14 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   undo,
   actions,
 }) => (
-  <React.Fragment>
+  <Fragment>
     <Content content={instruction} actions={actions} />
     {undo && (
       <div>
         <button onClick={actions.undo}>Undo {undo}</button>
       </div>
     )}
-  </React.Fragment>
+    <hr />
+    <button onClick={actions.leave}>Leave</button>
+  </Fragment>
 );

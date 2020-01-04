@@ -1,0 +1,36 @@
+.contentLine {
+  line-height: 2em;
+}
+
+.contentPosition {
+  background-color: #eee;
+  padding: 3px;
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+.contentPlayer {
+  font-weight: bold;
+}
+
+.contentPlayer0 {
+  color: gold;
+}
+
+.contentPlayer1 {
+  color: red;
+}
+
+.contentPlayer2 {
+  color: blue;
+}
+
+.contentUnitType {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+}
+
+.contentSelectInstruction {
+  color: inherit;
+}

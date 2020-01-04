@@ -2,18 +2,25 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import React, { FunctionComponent } from "react";
-import { GameList, ListItemWrapper } from "../GameList";
+import React, { FunctionComponent, useCallback } from "react";
+import { GameList } from "../GameList";
 import css from "./TitlePage.cssProxy";
+import { usePrefetchGames } from "./TitlePage.prefetch";
 
-export type ItemWrapper = ListItemWrapper;
+import { PageActions } from "../../helpers";
+import { GameId } from "../../../../games/dist/list";
+
 type TitlePageProps = {
-  // NextJS will pass in a link as wrapper, that we just pass on to GameList
-  itemWrapper: ListItemWrapper;
+  actions: PageActions;
 };
 
 export const TitlePage: FunctionComponent<TitlePageProps> = props => {
-  const { itemWrapper } = props;
+  const { actions } = props;
+  const navToGame = useCallback(
+    (gameId: GameId) => actions.navTo(`/games/${gameId}`),
+    [actions]
+  );
+  usePrefetchGames(actions);
   return (
     <div className={css.titlePage}>
       <h1>Chessicals</h1>
@@ -22,7 +29,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
         it out!
       </p>
       <hr />
-      <GameList itemWrapper={itemWrapper} />
+      <GameList callback={navToGame} />
     </div>
   );
 };

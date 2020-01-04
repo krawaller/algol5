@@ -1,17 +1,10 @@
 import React from "react";
 
-import Link from "next/link";
-
-import { TitlePage, ItemWrapper } from "../../ui/src/components/TitlePage";
-
-const Wrapper: ItemWrapper = ({ gameId, children }) => (
-  <Link href={"/games/" + gameId}>
-    <a>{children}</a>
-  </Link>
-);
+import { pageActions } from "../helpers";
+import { TitlePage } from "../../ui/src/components/TitlePage";
 
 const IndexPage = () => {
-  return <TitlePage itemWrapper={Wrapper} />;
+  return <TitlePage actions={pageActions} />;
 };
 
 export default IndexPage;

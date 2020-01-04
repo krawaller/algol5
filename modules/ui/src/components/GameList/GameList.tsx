@@ -3,9 +3,9 @@ import { GameId, list } from "../../../../games/dist/list";
 import meta from "../../../../games/dist/meta";
 import demos from "../../../../battle/dist/allDemos";
 import boards from "../../../../graphics/dist/svgDataURIs";
-import css from "./List.cssProxy";
+import css from "./GameList.cssProxy";
 
-import { ListItem } from "./List.Item";
+import { GameListItem } from "./GameList.Item";
 
 export type ListItemWrapper = React.FunctionComponent<{ gameId: GameId }>;
 
@@ -22,7 +22,7 @@ type ListProps = {
 /**
  * A component to show a list of games
  */
-export const List: React.FunctionComponent<ListProps> = ({
+export const GameList: React.FunctionComponent<ListProps> = ({
   callback = noop,
   itemWrapper = DefaultWrapper,
 }) => {
@@ -31,7 +31,7 @@ export const List: React.FunctionComponent<ListProps> = ({
     <div className={css.gameList}>
       {list.map(gameId => (
         <Wrapper gameId={gameId} key={gameId}>
-          <ListItem
+          <GameListItem
             graphics={boards[gameId]}
             demo={demos[gameId]}
             meta={meta[gameId]}

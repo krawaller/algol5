@@ -2,7 +2,7 @@ import React from "react";
 
 import Link from "next/link";
 
-import { List, ListItemWrapper } from "../../ui/src/components/List";
+import { GameList, ListItemWrapper } from "../../ui/src/components/GameList";
 
 const Wrapper: ListItemWrapper = ({ gameId, children }) => (
   <Link href={"/games/" + gameId}>
@@ -10,7 +10,7 @@ const Wrapper: ListItemWrapper = ({ gameId, children }) => (
   </Link>
 );
 
-const GameList = () => {
+const TitlePage = () => {
   return (
     <div style={{ padding: 10 }}>
       <h1>Chessicals</h1>
@@ -19,9 +19,9 @@ const GameList = () => {
         it out!
       </p>
       <hr />
-      <List itemWrapper={Wrapper} />
+      <GameList itemWrapper={Wrapper} />
     </div>
   );
 };
 
-export default GameList;
+export default TitlePage;

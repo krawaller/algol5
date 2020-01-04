@@ -14,7 +14,7 @@ const DefaultWrapper: ListItemWrapper = ({ children }) => (
   <Fragment>{children}</Fragment>
 );
 
-type ListProps = {
+export type ListProps = {
   callback?: (id: GameId) => void;
   itemWrapper?: ListItemWrapper;
 };

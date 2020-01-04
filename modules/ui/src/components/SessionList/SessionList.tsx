@@ -10,20 +10,23 @@ import { Board } from "../Board";
 import { parsePath } from "../../../../local/src/session/parseSession/parsePath";
 import { SessionInfo } from "./SessionList.Info";
 
+export interface SessionListActions {
+  load: (save: AlgolBattleSave) => void;
+}
+
 type SessionListProps = {
   sessions: AlgolLocalBattle[];
   graphics: AlgolGameGraphics;
-  callback?: (session: AlgolBattleSave) => void;
+  actions: SessionListActions;
 };
 
 const EMPTYARR: string[] = [];
-const noop = () => {};
 
 /**
  * A component to show a list of sessions
  */
 export const SessionList: React.FunctionComponent<SessionListProps> = ({
-  callback = noop,
+  actions,
   sessions,
   graphics,
 }) => {
@@ -33,7 +36,7 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
         <div
           className={css.sessionListItem}
           onClick={() =>
-            callback({
+            actions.load({
               endedBy: session.endedBy,
               player: session.player,
               turn: session.turn,

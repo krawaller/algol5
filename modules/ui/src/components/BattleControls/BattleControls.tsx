@@ -4,25 +4,28 @@ import { AlgolContentAnon } from "../../../../types";
 
 import { Content } from "../Content";
 
+export interface BattleControlsActions {
+  undo: () => void;
+  endTurn: () => void;
+  command: (cmnd: string) => void;
+}
+
 type BattleControlsProps = {
   instruction: AlgolContentAnon;
   undo: string | null;
-  callback: (
-    action: "endTurn" | "undo" | "mark" | "command",
-    arg?: string
-  ) => void;
+  actions: BattleControlsActions;
 };
 
 export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   instruction,
   undo,
-  callback,
+  actions,
 }) => (
   <React.Fragment>
-    <Content content={instruction} callback={callback} />
+    <Content content={instruction} actions={actions} />
     {undo && (
       <div>
-        <button onClick={() => callback("undo")}>Undo {undo}</button>
+        <button onClick={actions.undo}>Undo {undo}</button>
       </div>
     )}
   </React.Fragment>

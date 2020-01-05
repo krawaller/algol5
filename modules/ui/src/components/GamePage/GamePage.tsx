@@ -14,8 +14,9 @@ import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
-import { useBattle, PageActions } from "../../helpers";
+import { PageActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
+import { useBattle } from "./GamePage.useBattle";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { Content } from "../Content";
 

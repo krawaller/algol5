@@ -4,12 +4,12 @@ import {
   AlgolBattle,
   AlgolLocalBattle,
   AlgolBattleSave,
-} from "../../../types";
+} from "../../../../types";
 import {
   newSessionFromBattle,
   updateSession,
   writeSession,
-} from "../../../local/src";
+} from "../../../../local/src";
 
 type BattleAction =
   | "mark"

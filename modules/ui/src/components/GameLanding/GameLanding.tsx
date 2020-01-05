@@ -9,7 +9,6 @@ import ReactModal from "react-modal";
 import styles from "./GameLanding.cssProxy";
 import {
   AlgolMeta,
-  AlgolBattleSave,
   AlgolLocalBattle,
   AlgolGameGraphics,
 } from "../../../../types";
@@ -18,7 +17,7 @@ import { SessionList } from "../SessionList";
 
 export interface GameLandingActions {
   new: () => void;
-  load: (save: AlgolBattleSave) => void;
+  load: (session: AlgolLocalBattle) => void;
   navTo: (path: string) => void;
 }
 
@@ -47,9 +46,9 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   };
   const sessionListActions = useMemo(
     () => ({
-      load: (btlSave: AlgolBattleSave) => {
+      load: (session: AlgolLocalBattle) => {
         closeModal();
-        actions.load(btlSave);
+        actions.load(session);
       },
     }),
     []

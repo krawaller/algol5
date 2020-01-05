@@ -3,12 +3,12 @@ import {
   AlgolStaticGameAPI,
   AlgolBattle,
   AlgolLocalBattle,
-  AlgolBattleSave,
 } from "../../../../types";
 import {
   newSessionFromBattle,
   updateSession,
   writeSession,
+  session2battle,
 } from "../../../../local/src";
 
 type BattleAction =
@@ -33,11 +33,13 @@ export function useBattle(api: AlgolStaticGameAPI) {
     (state: BattleHookState, instr: BattleCmnd) => {
       const [cmnd, arg] = instr;
       if (cmnd === "toFrame") {
+        // user chose a new frame (in history view)
         return {
           battle: state.battle,
           frame: arg,
         };
       } else if (cmnd === "new") {
+        // user started a new local battle! initiate it
         const battle = api.newBattle();
         session.current = newSessionFromBattle(battle);
         return {
@@ -45,18 +47,23 @@ export function useBattle(api: AlgolStaticGameAPI) {
           frame: -1,
         };
       } else if (cmnd === "load") {
-        const battle = api.fromSave(arg);
+        // user chose a battle in the list of saved battles. we load it
+        // and set it as current battle.
+        const session: AlgolLocalBattle = arg;
+        const battle = session2battle(session, api);
         const frame = battle.gameEndedBy ? battle.history.length - 1 : -1;
         return {
           battle,
           frame,
         };
       } else if (cmnd === "leave") {
+        // user leaves the battle. will cause app to return to game landing
         return {
           battle: null,
           frame: -1,
         };
       } else {
+        // action was mark, command or endTurn. passing it on to game API
         const battle = api.performAction(state.battle!, cmnd, instr[1]);
         const frame = battle.gameEndedBy ? battle.history.length - 1 : -1;
         if (cmnd === "endTurn") {
@@ -81,7 +88,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       command: (cmnd: string) => dispatch(["command", cmnd]),
       undo: () => dispatch(["undo", null]),
       new: () => dispatch(["new", null]),
-      load: (save: AlgolBattleSave) => dispatch(["load", save]),
+      load: (session: AlgolLocalBattle) => dispatch(["load", session]),
       leaveBattle: () => dispatch(["leave", null]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
       seeHistory: () => dispatch(["toFrame", 0]),

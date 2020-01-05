@@ -4,7 +4,7 @@ import css from "./Breadcrumbs.cssProxy";
 
 const noop = () => {};
 
-type Crumb = {
+export type Crumb = {
   content: ReactNode;
   onClick?: () => void;
 };

@@ -2,7 +2,7 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { Fragment, useMemo } from "react";
+import React, { Fragment, useMemo, ReactNode } from "react";
 import {
   AlgolStaticGameAPI,
   AlgolGameGraphics,
@@ -16,6 +16,8 @@ import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { useBattle, PageActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
+import { Breadcrumbs, Crumb } from "../Breadcrumbs";
+import { Content } from "../Content";
 
 type GamePageProps = {
   api: AlgolStaticGameAPI;
@@ -35,6 +37,57 @@ export const GamePage = (props: GamePageProps) => {
   const ui = useUI(api, battle, frame, demo);
   const lookback = battle && frame > -1;
   const frameCount = battle ? battle.history.length - 1 : 0;
+
+  let crumbs: Crumb[];
+  let body: ReactNode;
+  if (lookback) {
+    // We are currently watching the history of a battle
+    crumbs = [
+      { content: meta.name, onClick: actions.leaveBattle },
+      { content: "local" },
+      { content: battle!.gameEndedBy ? "finished" : "history" },
+    ];
+    body = (
+      <BattleHistory
+        actions={actions}
+        content={ui.instruction}
+        frame={Math.max(0, frame)}
+        frameCount={frameCount}
+        battleFinished={Boolean(battle!.gameEndedBy)}
+      />
+    );
+  } else if (battle) {
+    // We are actively playing an ongoing battle
+    crumbs = [
+      { content: meta.name, onClick: actions.leaveBattle },
+      { content: "local" },
+      {
+        content: (
+          <Content
+            content={{
+              line: [
+                { text: `turn ${battle.turnNumber}, ` },
+                { player: battle.player },
+              ],
+            }}
+          />
+        ),
+      },
+    ];
+    body = (
+      <BattleControls
+        actions={actions}
+        undo={ui.undo}
+        instruction={ui.instruction}
+        haveHistory={frameCount > 1}
+      />
+    );
+  } else {
+    // No battle active, we're just at the game landing page
+    crumbs = [{ content: meta.name }];
+    body = <GameLanding meta={meta} actions={actions} graphics={graphics} />;
+  }
+
   return (
     <Fragment>
       <Board
@@ -46,28 +99,8 @@ export const GamePage = (props: GamePageProps) => {
         anim={ui.board.anim}
         lookback={Boolean(lookback)}
       />
-      {lookback ? (
-        <BattleHistory
-          actions={actions}
-          content={ui.instruction}
-          frame={Math.max(0, frame)}
-          frameCount={frameCount}
-          battleFinished={Boolean(battle!.gameEndedBy)}
-          meta={meta}
-        />
-      ) : battle ? (
-        <BattleControls
-          actions={actions}
-          undo={ui.undo}
-          instruction={ui.instruction}
-          turnNumber={battle.turnNumber}
-          player={battle.player}
-          haveHistory={frameCount > 1}
-          meta={meta}
-        />
-      ) : (
-        <GameLanding meta={meta} actions={actions} graphics={graphics} />
-      )}
+      <Breadcrumbs crumbs={crumbs} actions={actions} />
+      {body}
     </Fragment>
   );
 };

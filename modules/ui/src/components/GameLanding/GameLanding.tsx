@@ -15,7 +15,6 @@ import {
 } from "../../../../types";
 import { getSessionList } from "../../../../local/src";
 import { SessionList } from "../SessionList";
-import { Breadcrumbs } from "../Breadcrumbs";
 
 export interface GameLandingActions {
   new: () => void;
@@ -57,7 +56,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   );
   return (
     <Fragment>
-      <Breadcrumbs actions={actions} crumbs={[{ content: meta.name }]} />
       <div className={styles.gameLanding}>
         <button className={styles.gameButtonLink} onClick={actions.new}>
           Start a local game

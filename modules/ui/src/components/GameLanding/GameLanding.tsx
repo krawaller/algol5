@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useState, useEffect, useMemo } from "react";
+import React, {
+  FunctionComponent,
+  useState,
+  useEffect,
+  useMemo,
+  Fragment,
+} from "react";
 import ReactModal from "react-modal";
 import styles from "./GameLanding.cssProxy";
 import {
@@ -9,10 +15,12 @@ import {
 } from "../../../../types";
 import { getSessionList } from "../../../../local/src";
 import { SessionList } from "../SessionList";
+import { Breadcrumbs } from "../Breadcrumbs";
 
 export interface GameLandingActions {
   new: () => void;
   load: (save: AlgolBattleSave) => void;
+  navTo: (path: string) => void;
 }
 
 type GameLandingProps = {
@@ -48,31 +56,34 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
     []
   );
   return (
-    <div className={styles.gameLanding}>
-      <button className={styles.gameButtonLink} onClick={actions.new}>
-        Start a local game
-      </button>
-      <a href={meta.source} target="_blank" className={styles.gameButtonLink}>
-        Go to rules (external)
-      </a>
-      <button
-        className={styles.gameButtonLink}
-        disabled={isModalOpen || sessions.length === 0}
-        onClick={openModal}
-      >
-        Load game
-      </button>
-      <ReactModal isOpen={isModalOpen} onRequestClose={closeModal}>
-        <div>
-          <button onClick={closeModal}>Back</button>
-          <hr />
-          <SessionList
-            sessions={sessions}
-            graphics={graphics}
-            actions={sessionListActions}
-          />
-        </div>
-      </ReactModal>
-    </div>
+    <Fragment>
+      <Breadcrumbs actions={actions} crumbs={[{ content: meta.name }]} />
+      <div className={styles.gameLanding}>
+        <button className={styles.gameButtonLink} onClick={actions.new}>
+          Start a local game
+        </button>
+        <a href={meta.source} target="_blank" className={styles.gameButtonLink}>
+          Go to rules (external)
+        </a>
+        <button
+          className={styles.gameButtonLink}
+          disabled={isModalOpen || sessions.length === 0}
+          onClick={openModal}
+        >
+          Load game
+        </button>
+        <ReactModal isOpen={isModalOpen} onRequestClose={closeModal}>
+          <div>
+            <button onClick={closeModal}>Back</button>
+            <hr />
+            <SessionList
+              sessions={sessions}
+              graphics={graphics}
+              actions={sessionListActions}
+            />
+          </div>
+        </ReactModal>
+      </div>
+    </Fragment>
   );
 };

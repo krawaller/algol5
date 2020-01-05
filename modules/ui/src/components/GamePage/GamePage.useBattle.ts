@@ -25,10 +25,10 @@ type BattleCmnd = [BattleAction, any];
 type BattleHookState = {
   battle: AlgolBattle | null;
   frame: number;
+  session: AlgolLocalBattle | null;
 };
 
 export function useBattle(api: AlgolStaticGameAPI) {
-  const session = useRef<null | AlgolLocalBattle>(null);
   const [state, dispatch] = useReducer(
     (state: BattleHookState, instr: BattleCmnd) => {
       const [cmnd, arg] = instr;
@@ -36,15 +36,16 @@ export function useBattle(api: AlgolStaticGameAPI) {
         // user chose a new frame (in history view)
         return {
           battle: state.battle,
+          session: state.session,
           frame: arg,
         };
       } else if (cmnd === "new") {
         // user started a new local battle! initiate it
         const battle = api.newBattle();
-        session.current = newSessionFromBattle(battle);
         return {
           battle,
           frame: -1,
+          session: newSessionFromBattle(battle),
         };
       } else if (cmnd === "load") {
         // user chose a battle in the list of saved battles. we load it
@@ -55,10 +56,13 @@ export function useBattle(api: AlgolStaticGameAPI) {
         return {
           battle,
           frame,
+          session,
         };
       } else if (cmnd === "leave") {
+        // TODO - leave battle vs session
         // user leaves the battle. will cause app to return to game landing
         return {
+          session: null,
           battle: null,
           frame: -1,
         };
@@ -66,19 +70,22 @@ export function useBattle(api: AlgolStaticGameAPI) {
         // action was mark, command or endTurn. passing it on to game API
         const battle = api.performAction(state.battle!, cmnd, instr[1]);
         const frame = battle.gameEndedBy ? battle.history.length - 1 : -1;
+        let session = state.session;
         if (cmnd === "endTurn") {
-          session.current = updateSession(battle, session.current!);
-          writeSession(api.gameId, session.current);
+          session = updateSession(battle, state.session!);
+          writeSession(api.gameId, session);
         }
         return {
           frame,
           battle,
+          session,
         };
       }
     },
     {
       battle: null,
       frame: -1,
+      session: null,
     }
   );
   const actions = useMemo(

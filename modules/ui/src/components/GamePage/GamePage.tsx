@@ -2,11 +2,10 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { useMemo, Fragment } from "react";
+import React, { Fragment } from "react";
 import {
   AlgolStaticGameAPI,
   AlgolGameGraphics,
-  AlgolBattleUI,
   AlgolMeta,
   AlgolDemo,
 } from "../../../../types";
@@ -15,8 +14,8 @@ import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
-import { useDemo, useBattle, PageActions } from "../../helpers";
-import { demo2ui, emptyBattleUI } from "../../../../common";
+import { useBattle, PageActions } from "../../helpers";
+import { useUI } from "./GamePage.useUI";
 
 type GamePageProps = {
   api: AlgolStaticGameAPI;
@@ -29,27 +28,8 @@ type GamePageProps = {
 export const GamePage = (props: GamePageProps) => {
   const { api, graphics, meta, demo } = props;
   const [{ battle, frame }, actions] = useBattle(api);
-  const { frame: demoFrame, hydrDemo } = useDemo(demo, !battle);
-  const battleUi = useMemo(
-    () =>
-      battle
-        ? api.getBattleUI(battle)
-        : hydrDemo
-        ? demo2ui(hydrDemo, demoFrame)
-        : emptyBattleUI,
-    [battle, hydrDemo, demoFrame]
-  );
+  const ui = useUI(api, battle, frame, demo);
   const lookback = battle && frame > -1;
-  const ui: AlgolBattleUI =
-    lookback && battle
-      ? {
-          ...battleUi,
-          turnNumber: battle.history[frame].turn,
-          player: battle.history[frame].player,
-          board: battle.history[frame].board,
-          instruction: battle.history[frame].description,
-        }
-      : battleUi;
   const frameCount = battle ? battle.history.length - 1 : 0;
   return (
     <Fragment>

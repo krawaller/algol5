@@ -1,8 +1,9 @@
 export * from "./BattleControls";
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolContentAnon } from "../../../../types";
+import { AlgolContentAnon, AlgolMeta } from "../../../../types";
 
 import { Content } from "../Content";
+import { Breadcrumbs } from "../Breadcrumbs";
 
 export interface BattleControlsActions {
   undo: () => void;
@@ -10,6 +11,7 @@ export interface BattleControlsActions {
   endTurn: () => void;
   command: (cmnd: string) => void;
   seeHistory: () => void;
+  navTo: (path: string) => void;
 }
 
 type BattleControlsProps = {
@@ -19,6 +21,7 @@ type BattleControlsProps = {
   haveHistory?: boolean;
   turnNumber: number;
   player: 0 | 1 | 2;
+  meta: AlgolMeta<string, string>;
 };
 
 export const BattleControls: FunctionComponent<BattleControlsProps> = ({
@@ -28,13 +31,21 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   haveHistory,
   turnNumber,
   player,
+  meta,
 }) => {
   const headline: AlgolContentAnon = {
-    line: [{ text: `Turn ${turnNumber} - ` }, { player }, { text: ": " }],
+    line: [{ text: `turn ${turnNumber}, ` }, { player }],
   };
   return (
     <Fragment>
-      <Content content={headline} />
+      <Breadcrumbs
+        actions={actions}
+        crumbs={[
+          { content: meta.name, onClick: actions.leaveBattle },
+          { content: "local" },
+          { content: <Content content={headline} /> },
+        ]}
+      />
       <Content content={instruction} actions={actions} />
       {undo && (
         <div>

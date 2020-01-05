@@ -1,0 +1,20 @@
+.breadcrumbsContainer {
+  display: flex;
+  background-color: sandybrown;
+  padding: 0 5px;
+  align-items: center;
+  line-height: 2em;
+}
+
+.breadcrumb {
+  font-size: 11px;
+}
+
+.breadcrumbClickable {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.breadcrumbDivider {
+  margin: 0 10px;
+}

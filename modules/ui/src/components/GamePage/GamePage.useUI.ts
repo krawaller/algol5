@@ -17,6 +17,7 @@ export const useUI = (
 ): AlgolBattleUI => {
   const inGameLobby = mode === "gamelobby";
   const inHistory = mode === "history";
+  const inBattleLobby = mode === "battlelobby";
   const { frame: demoFrame, hydrDemo } = useDemo(demo, inGameLobby);
   return useMemo(() => {
     if (inGameLobby) {
@@ -24,16 +25,29 @@ export const useUI = (
     } else if (battle) {
       // if statement is mostly for TS inference, battle should always be defined here
       const battleUi = api.getBattleUI(battle);
-      return inHistory
-        ? {
-            ...battleUi,
-            turnNumber: battle!.history[battleFrame].turn,
-            player: battle!.history[battleFrame].player,
-            board: battle!.history[battleFrame].board,
-            instruction: battle!.history[battleFrame].description,
-          }
-        : battleUi;
+      if (inHistory) {
+        return {
+          ...battleUi,
+          turnNumber: battle!.history[battleFrame].turn,
+          player: battle!.history[battleFrame].player,
+          board: battle!.history[battleFrame].board,
+          instruction: battle!.history[battleFrame].description,
+        };
+      }
+      if (inBattleLobby) {
+        battleUi.board.marks = [];
+        battleUi.board.potentialMarks = [];
+      }
+      return battleUi;
     }
     return emptyBattleUI;
-  }, [battle, hydrDemo, demoFrame, battleFrame, inGameLobby, inHistory]);
+  }, [
+    battle,
+    hydrDemo,
+    demoFrame,
+    battleFrame,
+    inGameLobby,
+    inHistory,
+    inBattleLobby,
+  ]);
 };

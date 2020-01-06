@@ -12,6 +12,7 @@ import {
 
 import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
+import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
 import { PageActions } from "../../helpers";
@@ -30,7 +31,7 @@ type GamePageProps = {
 
 export const GamePage = (props: GamePageProps) => {
   const { api, graphics, meta, demo, actions: pageActions } = props;
-  const [{ battle, frame, mode }, battleActions] = useBattle(api);
+  const [{ battle, frame, mode, session }, battleActions] = useBattle(api);
   const actions = useMemo(() => ({ ...pageActions, ...battleActions }), [
     pageActions,
     battleActions,
@@ -44,7 +45,7 @@ export const GamePage = (props: GamePageProps) => {
     // We are currently watching the history of a battle
     crumbs = [
       { content: meta.name, onClick: actions.toGameLobby },
-      { content: "local" },
+      { content: session!.id, onClick: actions.toBattleLobby },
       { content: battle!.gameEndedBy ? "finished" : "history" },
     ];
     body = (
@@ -56,11 +57,23 @@ export const GamePage = (props: GamePageProps) => {
         battleFinished={Boolean(battle!.gameEndedBy)}
       />
     );
+  } else if (mode === "battlelobby") {
+    crumbs = [
+      { content: meta.name, onClick: actions.toGameLobby },
+      { content: session!.id },
+    ];
+    body = (
+      <BattleLanding
+        actions={actions}
+        session={session!}
+        haveHistory={frameCount > 1}
+      />
+    );
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
     crumbs = [
       { content: meta.name, onClick: actions.toGameLobby },
-      { content: "local" },
+      { content: session!.id, onClick: actions.toBattleLobby },
       {
         content: (
           <Content
@@ -85,7 +98,14 @@ export const GamePage = (props: GamePageProps) => {
   } else {
     // No battle active, we're just at the game landing page
     crumbs = [{ content: meta.name }];
-    body = <GameLanding meta={meta} actions={actions} graphics={graphics} />;
+    body = (
+      <GameLanding
+        meta={meta}
+        actions={actions}
+        graphics={graphics}
+        session={session}
+      />
+    );
   }
 
   return (

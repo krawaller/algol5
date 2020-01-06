@@ -30,21 +30,20 @@ type GamePageProps = {
 
 export const GamePage = (props: GamePageProps) => {
   const { api, graphics, meta, demo, actions: pageActions } = props;
-  const [{ battle, frame }, battleActions] = useBattle(api);
+  const [{ battle, frame, mode }, battleActions] = useBattle(api);
   const actions = useMemo(() => ({ ...pageActions, ...battleActions }), [
     pageActions,
     battleActions,
   ]);
-  const ui = useUI(api, battle, frame, demo);
-  const lookback = battle && frame > -1;
+  const ui = useUI(api, battle, frame, demo, mode);
   const frameCount = battle ? battle.history.length - 1 : 0;
 
   let crumbs: Crumb[];
   let body: ReactNode;
-  if (lookback) {
+  if (mode === "history") {
     // We are currently watching the history of a battle
     crumbs = [
-      { content: meta.name, onClick: actions.leaveBattle },
+      { content: meta.name, onClick: actions.toGameLobby },
       { content: "local" },
       { content: battle!.gameEndedBy ? "finished" : "history" },
     ];
@@ -57,18 +56,18 @@ export const GamePage = (props: GamePageProps) => {
         battleFinished={Boolean(battle!.gameEndedBy)}
       />
     );
-  } else if (battle) {
+  } else if (mode === "playing") {
     // We are actively playing an ongoing battle
     crumbs = [
-      { content: meta.name, onClick: actions.leaveBattle },
+      { content: meta.name, onClick: actions.toGameLobby },
       { content: "local" },
       {
         content: (
           <Content
             content={{
               line: [
-                { text: `turn ${battle.turnNumber}, ` },
-                { player: battle.player },
+                { text: `turn ${battle!.turnNumber}, ` },
+                { player: battle!.player },
               ],
             }}
           />
@@ -98,7 +97,7 @@ export const GamePage = (props: GamePageProps) => {
         marks={ui.board.marks}
         potentialMarks={ui.board.potentialMarks}
         anim={ui.board.anim}
-        lookback={Boolean(lookback)}
+        lookback={mode === "history"}
       />
       <Breadcrumbs crumbs={crumbs} actions={actions} />
       {body}

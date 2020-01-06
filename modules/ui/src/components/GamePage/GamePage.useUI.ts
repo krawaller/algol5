@@ -12,32 +12,28 @@ export const useUI = (
   api: AlgolStaticGameAPI,
   battle: AlgolBattle | null,
   battleFrame: number,
-  demo: AlgolDemo
+  demo: AlgolDemo,
+  mode: "gamelobby" | "battlelobby" | "playing" | "history"
 ): AlgolBattleUI => {
-  const { frame: demoFrame, hydrDemo } = useDemo(demo, !battle);
-
-  const battleUi = useMemo(
-    () =>
-      battle
-        ? // If we have an ongoing battle, make UI for that
-          api.getBattleUI(battle)
-        : hydrDemo
-        ? // Otherwise, if we have a hydrated demo, use that
-          demo2ui(hydrDemo, demoFrame)
-        : // Otherwise just use an empty UI
-          emptyBattleUI,
-    [battle, hydrDemo, demoFrame]
-  );
-  const lookback = battle && battleFrame > -1;
-  return lookback && battle
-    ? // if we are looking at battle history, adapt the UI for the frame we're looking at
-      {
-        ...battleUi,
-        turnNumber: battle.history[battleFrame].turn,
-        player: battle.history[battleFrame].player,
-        board: battle.history[battleFrame].board,
-        instruction: battle.history[battleFrame].description,
-      }
-    : // otherwise use the generated UI as is
-      battleUi;
+  const inGameLobby = mode === "gamelobby";
+  const inHistory = mode === "history";
+  const { frame: demoFrame, hydrDemo } = useDemo(demo, inGameLobby);
+  return useMemo(() => {
+    if (inGameLobby) {
+      return hydrDemo ? demo2ui(hydrDemo, demoFrame) : emptyBattleUI;
+    } else if (battle) {
+      // if statement is mostly for TS inference, battle should always be defined here
+      const battleUi = api.getBattleUI(battle);
+      return inHistory
+        ? {
+            ...battleUi,
+            turnNumber: battle!.history[battleFrame].turn,
+            player: battle!.history[battleFrame].player,
+            board: battle!.history[battleFrame].board,
+            instruction: battle!.history[battleFrame].description,
+          }
+        : battleUi;
+    }
+    return emptyBattleUI;
+  }, [battle, hydrDemo, demoFrame, battleFrame, inGameLobby, inHistory]);
 };

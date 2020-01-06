@@ -58,17 +58,12 @@ export const GamePage = (props: GamePageProps) => {
       />
     );
   } else if (mode === "battlelobby") {
+    // we are on the landing page for a created/loaded session
     crumbs = [
       { content: meta.name, onClick: actions.toGameLobby },
       { content: session!.id },
     ];
-    body = (
-      <BattleLanding
-        actions={actions}
-        session={session!}
-        haveHistory={frameCount > 1}
-      />
-    );
+    body = <BattleLanding actions={actions} session={session!} meta={meta} />;
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
     crumbs = [

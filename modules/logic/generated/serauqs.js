@@ -27,7 +27,12 @@ const knightDirs = [
   "d7f2r1",
   "d7f2r-1"
 ];
-let game = { gameId: "serauqs", action: {}, instruction: {} };
+let game = {
+  gameId: "serauqs",
+  action: {},
+  instruction: {},
+  commands: { promote: {}, move: {} }
+};
 {
   const groupLayers = {
     soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]],

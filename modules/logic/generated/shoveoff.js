@@ -49,7 +49,12 @@ const knightDirs = [
   "d7f2r1",
   "d7f2r-1"
 ];
-let game = { gameId: "shoveoff", action: {}, instruction: {} };
+let game = {
+  gameId: "shoveoff",
+  action: {},
+  instruction: {},
+  commands: { north: {}, south: {}, east: {}, west: {} }
+};
 {
   const groupLayers = {
     soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]

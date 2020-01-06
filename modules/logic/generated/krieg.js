@@ -27,7 +27,12 @@ const knightDirs = [
   "d7f2r1",
   "d7f2r-1"
 ];
-let game = { gameId: "krieg", action: {}, instruction: {} };
+let game = {
+  gameId: "krieg",
+  action: {},
+  instruction: {},
+  commands: { move: {} }
+};
 {
   const groupLayers = {
     notfrozens: [

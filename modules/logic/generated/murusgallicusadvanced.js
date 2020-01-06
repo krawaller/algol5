@@ -34,7 +34,12 @@ const knightDirs = [
   "d7f2r1",
   "d7f2r-1"
 ];
-let game = { gameId: "murusgallicusadvanced", action: {}, instruction: {} };
+let game = {
+  gameId: "murusgallicusadvanced",
+  action: {},
+  instruction: {},
+  commands: { move: {}, crush: {}, sacrifice: {}, fire: {} }
+};
 {
   const groupLayers = {
     towers: [

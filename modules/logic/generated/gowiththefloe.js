@@ -48,7 +48,12 @@ const knightDirs = [
   "d7f2r1",
   "d7f2r-1"
 ];
-let game = { gameId: "gowiththefloe", action: {}, instruction: {} };
+let game = {
+  gameId: "gowiththefloe",
+  action: {},
+  instruction: {},
+  commands: { move: {}, eat: {} }
+};
 {
   const groupLayers = {
     seals: [

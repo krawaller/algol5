@@ -50,6 +50,7 @@ storiesOf("Board", module)
         potentialMarks={potentialMarks}
         units={units}
         callback={pos => console.log("CLICKED", pos)}
+        active
       />
     );
   });

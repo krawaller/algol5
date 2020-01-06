@@ -6,10 +6,10 @@ import { Content } from "../Content";
 
 export interface BattleControlsActions {
   undo: () => void;
-  leaveBattle: () => void;
+  toGameLobby: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
-  seeHistory: () => void;
+  toHistory: () => void;
   navTo: (path: string) => void;
 }
 
@@ -35,9 +35,9 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
         </div>
       )}
       <hr />
-      <button onClick={actions.leaveBattle}>Leave battle</button>
+      <button onClick={actions.toGameLobby}>Leave battle</button>
       &nbsp;
-      <button disabled={!haveHistory} onClick={actions.seeHistory}>
+      <button disabled={!haveHistory} onClick={actions.toHistory}>
         See history
       </button>
     </Fragment>

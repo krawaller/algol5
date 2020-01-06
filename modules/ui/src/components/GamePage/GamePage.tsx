@@ -12,10 +12,12 @@ import {
 
 import { Board } from "../Board";
 import { BattleControls } from "../BattleControls";
+import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
-import { useBattle, PageActions } from "../../helpers";
+import { PageActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
+import { useBattle } from "./GamePage.useBattle";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { Content } from "../Content";
 
@@ -29,22 +31,21 @@ type GamePageProps = {
 
 export const GamePage = (props: GamePageProps) => {
   const { api, graphics, meta, demo, actions: pageActions } = props;
-  const [{ battle, frame }, battleActions] = useBattle(api);
+  const [{ battle, frame, mode, session }, battleActions] = useBattle(api);
   const actions = useMemo(() => ({ ...pageActions, ...battleActions }), [
     pageActions,
     battleActions,
   ]);
-  const ui = useUI(api, battle, frame, demo);
-  const lookback = battle && frame > -1;
+  const ui = useUI(api, battle, frame, demo, mode);
   const frameCount = battle ? battle.history.length - 1 : 0;
 
   let crumbs: Crumb[];
   let body: ReactNode;
-  if (lookback) {
+  if (mode === "history") {
     // We are currently watching the history of a battle
     crumbs = [
-      { content: meta.name, onClick: actions.leaveBattle },
-      { content: "local" },
+      { content: meta.name, onClick: actions.toGameLobby },
+      { content: session!.id, onClick: actions.toBattleLobby },
       { content: battle!.gameEndedBy ? "finished" : "history" },
     ];
     body = (
@@ -56,18 +57,25 @@ export const GamePage = (props: GamePageProps) => {
         battleFinished={Boolean(battle!.gameEndedBy)}
       />
     );
-  } else if (battle) {
+  } else if (mode === "battlelobby") {
+    // we are on the landing page for a created/loaded session
+    crumbs = [
+      { content: meta.name, onClick: actions.toGameLobby },
+      { content: session!.id },
+    ];
+    body = <BattleLanding actions={actions} session={session!} meta={meta} />;
+  } else if (mode === "playing") {
     // We are actively playing an ongoing battle
     crumbs = [
-      { content: meta.name, onClick: actions.leaveBattle },
-      { content: "local" },
+      { content: meta.name, onClick: actions.toGameLobby },
+      { content: session!.id, onClick: actions.toBattleLobby },
       {
         content: (
           <Content
             content={{
               line: [
-                { text: `turn ${battle.turnNumber}, ` },
-                { player: battle.player },
+                { text: `turn ${battle!.turnNumber}, ` },
+                { player: battle!.player },
               ],
             }}
           />
@@ -85,7 +93,14 @@ export const GamePage = (props: GamePageProps) => {
   } else {
     // No battle active, we're just at the game landing page
     crumbs = [{ content: meta.name }];
-    body = <GameLanding meta={meta} actions={actions} graphics={graphics} />;
+    body = (
+      <GameLanding
+        meta={meta}
+        actions={actions}
+        graphics={graphics}
+        session={session}
+      />
+    );
   }
 
   return (
@@ -97,7 +112,7 @@ export const GamePage = (props: GamePageProps) => {
         marks={ui.board.marks}
         potentialMarks={ui.board.potentialMarks}
         anim={ui.board.anim}
-        lookback={Boolean(lookback)}
+        active={mode === "playing"}
       />
       <Breadcrumbs crumbs={crumbs} actions={actions} />
       {body}

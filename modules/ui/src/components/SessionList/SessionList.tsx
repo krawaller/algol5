@@ -1,17 +1,12 @@
 import React from "react";
 import css from "./SessionList.cssProxy";
 
-import {
-  AlgolBattleSave,
-  AlgolGameGraphics,
-  AlgolLocalBattle,
-} from "../../../../types";
+import { AlgolGameGraphics, AlgolLocalBattle } from "../../../../types";
 import { Board } from "../Board";
-import { parsePath } from "../../../../local/src/session/parseSession/parsePath";
 import { SessionInfo } from "./SessionList.Info";
 
 export interface SessionListActions {
-  load: (save: AlgolBattleSave) => void;
+  load: (session: AlgolLocalBattle) => void;
 }
 
 type SessionListProps = {
@@ -34,15 +29,9 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
     <div>
       {sessions.map(session => (
         <div
+          key={session.id}
           className={css.sessionListItem}
-          onClick={() =>
-            actions.load({
-              endedBy: session.endedBy,
-              player: session.player,
-              turn: session.turn,
-              path: parsePath(session.path, 0),
-            })
-          }
+          onClick={() => actions.load(session)}
         >
           <div className={css.sessionListItemScreenshot}>
             <Board

@@ -9,7 +9,6 @@ import ReactModal from "react-modal";
 import styles from "./GameLanding.cssProxy";
 import {
   AlgolMeta,
-  AlgolBattleSave,
   AlgolLocalBattle,
   AlgolGameGraphics,
 } from "../../../../types";
@@ -18,18 +17,20 @@ import { SessionList } from "../SessionList";
 
 export interface GameLandingActions {
   new: () => void;
-  load: (save: AlgolBattleSave) => void;
+  load: (session: AlgolLocalBattle) => void;
   navTo: (path: string) => void;
+  toBattleLobby: () => void;
 }
 
 type GameLandingProps = {
   meta: AlgolMeta<string, string>;
   actions: GameLandingActions;
   graphics: AlgolGameGraphics;
+  session: null | AlgolLocalBattle;
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, actions, graphics } = props;
+  const { meta, actions, graphics, session } = props;
   const [sessions, setSessions] = useState<AlgolLocalBattle[]>([]);
   const updateSessions = () => {
     setSessions(
@@ -47,9 +48,9 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   };
   const sessionListActions = useMemo(
     () => ({
-      load: (btlSave: AlgolBattleSave) => {
+      load: (session: AlgolLocalBattle) => {
         closeModal();
-        actions.load(btlSave);
+        actions.load(session);
       },
     }),
     []
@@ -70,6 +71,9 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         >
           Load game
         </button>
+        {session && (
+          <button onClick={actions.toBattleLobby}>Back to {session.id}</button>
+        )}
         <ReactModal isOpen={isModalOpen} onRequestClose={closeModal}>
           <div>
             <button onClick={closeModal}>Back</button>

@@ -1,11 +1,15 @@
 import { AlgolBattle, AlgolLocalBattle } from "../../../types";
 import { stringifyPath } from "./stringifySession/stringifyPath";
 
+const letters =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const randomLetter = () => letters[Math.floor(Math.random() * letters.length)];
+
 export function newSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
   return {
-    id: Math.random().toString(),
+    // TODO - make ID generation more robust
+    id: `L${randomLetter()}${randomLetter()}${randomLetter()}`,
     created: Date.now(),
-    updated: Date.now(),
     player: 1,
     turn: 1,
     path: stringifyPath([], 0),

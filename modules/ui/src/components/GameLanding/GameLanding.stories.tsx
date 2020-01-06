@@ -13,6 +13,7 @@ storiesOf("GameLanding", module).add("init game", () => {
     new: () => console.log("new game"),
     load: save => console.log("loading save", save),
     navTo: path => console.log("navigating to", path),
+    toBattleLobby: () => console.log("to battle lobby"),
   };
   return (
     <GameLanding
@@ -20,6 +21,7 @@ storiesOf("GameLanding", module).add("init game", () => {
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}
       actions={actions}
+      session={null}
     />
   );
 });

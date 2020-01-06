@@ -7,8 +7,8 @@ import css from "./BattleHistory.cssProxy";
 
 interface BattleHistoryActions {
   toFrame: (frame: number) => void;
-  toGameLobby: () => void;
   toBattleControls: () => void;
+  toBattleLobby: () => void;
   navTo: (path: string) => void;
 }
 
@@ -27,11 +27,10 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
       <Stepper max={frameCount} current={frame} onChange={actions.toFrame} />
       <Content content={content} />
       <br />
-      {battleFinished ? (
-        <button onClick={actions.toGameLobby}>Leave battle</button>
-      ) : (
-        <button onClick={actions.toBattleControls}>Back to battle</button>
+      {!battleFinished && (
+        <button onClick={actions.toBattleControls}>Continue playing</button>
       )}
+      <button onClick={actions.toBattleLobby}>Session info</button>
     </div>
   );
 };

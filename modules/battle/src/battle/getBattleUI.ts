@@ -33,7 +33,7 @@ export function getBattleUI(
       ),
       anim: currentStep.anim || emptyAnim,
     },
-    endTurn: !!currentStep.LINKS.endTurn,
+    endTurn: Boolean(currentStep.LINKS.endTurn || currentStep.LINKS.endGame),
     commands: Object.entries(game.commands)
       .map(
         ([cmnd, info]) =>

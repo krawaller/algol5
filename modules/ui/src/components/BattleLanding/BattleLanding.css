@@ -1,0 +1,11 @@
+.battleLandingContent {
+  font-size: 12px;
+}
+
+.battleLandingButtons {
+  margin-top: 10px;
+}
+
+.battleLandingButtons > button:not(:first-child) {
+  margin-left: 10px;
+}

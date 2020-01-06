@@ -1,12 +1,12 @@
 export * from "./BattleControls";
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolContentAnon, AlgolMeta } from "../../../../types";
-
+import { AlgolBattleUI } from "../../../../types";
 import { Content } from "../Content";
+import css from "./BattleControls.cssProxy";
 
 export interface BattleControlsActions {
   undo: () => void;
-  toGameLobby: () => void;
+  toBattleLobby: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
   toHistory: () => void;
@@ -14,32 +14,43 @@ export interface BattleControlsActions {
 }
 
 type BattleControlsProps = {
-  instruction: AlgolContentAnon;
-  undo: string | null;
+  ui: AlgolBattleUI;
   actions: BattleControlsActions;
   haveHistory?: boolean;
 };
 
 export const BattleControls: FunctionComponent<BattleControlsProps> = ({
-  instruction,
-  undo,
+  ui,
   actions,
   haveHistory,
 }) => {
   return (
     <Fragment>
-      <Content content={instruction} actions={actions} />
-      {undo && (
-        <div>
-          <button onClick={actions.undo}>Undo {undo}</button>
-        </div>
-      )}
-      <hr />
-      <button onClick={actions.toGameLobby}>Leave battle</button>
-      &nbsp;
-      <button disabled={!haveHistory} onClick={actions.toHistory}>
-        See history
-      </button>
+      <div className={css.battleControlPanel}>
+        <button disabled={!Boolean(ui.undo)} onClick={actions.undo}>
+          Undo
+        </button>
+        {Object.entries(ui.commands).map(([cmnd, info]) => (
+          <button
+            disabled={!info.available}
+            onClick={() => actions.command(cmnd)}
+            key={cmnd}
+          >
+            {cmnd}
+          </button>
+        ))}
+        <button
+          disabled={!Boolean(ui.endTurn) || ui.winner !== undefined}
+          onClick={actions.endTurn}
+        >
+          End turn
+        </button>
+        <button disabled={!haveHistory} onClick={actions.toHistory}>
+          History
+        </button>
+        <button onClick={actions.toBattleLobby}>Session info</button>
+      </div>
+      <Content content={ui.instruction} actions={actions} />
     </Fragment>
   );
 };

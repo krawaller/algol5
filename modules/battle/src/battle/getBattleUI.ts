@@ -10,7 +10,7 @@ export function getBattleUI(
   battle: AlgolBattle
 ): AlgolBattleUI {
   const currentStep = battle.turn.steps[battle.state.currentStepId];
-  const commands = Object.keys(currentStep.LINKS.commands);
+  const availableCmnds = Object.keys(currentStep.LINKS.commands);
   return {
     player: battle.player,
     winner: battle.winner,
@@ -34,7 +34,12 @@ export function getBattleUI(
       anim: currentStep.anim || emptyAnim,
     },
     endTurn: !!currentStep.LINKS.endTurn,
-    commands,
+    commands: Object.entries(game.commands)
+      .map(
+        ([cmnd, info]) =>
+          [cmnd, { ...info, available: availableCmnds.includes(cmnd) }] as const
+      )
+      .reduce((mem, [cmnd, info]) => ({ ...mem, [cmnd]: info }), {}),
     undo: battle.state.undo && battle.state.undo.command,
     instruction: getBattleInstruction(game, battle),
   };

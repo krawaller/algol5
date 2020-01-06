@@ -4,7 +4,7 @@ import { emptyAnim } from "./emptyAnim";
 
 export const emptyBattleUI: AlgolBattleUI = {
   endTurn: false,
-  commands: [],
+  commands: {},
   gameId: "foo" as GameId,
   instruction: undefined,
   player: 0,

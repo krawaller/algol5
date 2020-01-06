@@ -9,6 +9,7 @@ import {
   updateSession,
   writeSession,
   session2battle,
+  deleteSession,
 } from "../../../../local/src";
 
 type BattleAction =
@@ -133,6 +134,10 @@ export function useBattle(api: AlgolStaticGameAPI) {
       toGameLobby: () => dispatch(["gamelobby", null]),
       toBattleLobby: () => dispatch(["battlelobby", null]),
       toBattleControls: () => dispatch(["play", null]),
+      deleteSession: (session: AlgolLocalBattle) => {
+        deleteSession(api.gameId, session!.id);
+        dispatch(["gamelobby", null]);
+      },
     }),
     []
   );

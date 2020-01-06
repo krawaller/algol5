@@ -23,7 +23,8 @@ type BattleAction =
   | "history"
   | "play"
   | "new"
-  | "load";
+  | "load"
+  | "deleteCurrentSession";
 type BattleCmnd = [BattleAction, any];
 
 type BattleHookState = {
@@ -95,6 +96,14 @@ export function useBattle(api: AlgolStaticGameAPI) {
           ...state,
           mode: "playing",
         };
+      } else if (cmnd === "deleteCurrentSession") {
+        deleteSession(api.gameId, state.session!.id);
+        return {
+          battle: null,
+          session: null,
+          frame: 0,
+          mode: "gamelobby",
+        };
       } else {
         // action was mark, command or endTurn. passing it on to game API
         const battle = api.performAction(state.battle!, cmnd, instr[1]);
@@ -134,10 +143,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       toGameLobby: () => dispatch(["gamelobby", null]),
       toBattleLobby: () => dispatch(["battlelobby", null]),
       toBattleControls: () => dispatch(["play", null]),
-      deleteSession: (session: AlgolLocalBattle) => {
-        deleteSession(api.gameId, session!.id);
-        dispatch(["gamelobby", null]);
-      },
+      deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
     }),
     []
   );

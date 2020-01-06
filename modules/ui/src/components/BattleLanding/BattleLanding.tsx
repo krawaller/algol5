@@ -5,7 +5,7 @@ import { SessionStatus } from "../SessionStatus";
 interface BattleLandingActions {
   toHistory: () => void;
   toBattleControls: () => void;
-  deleteSession: (session: AlgolLocalBattle) => void;
+  deleteCurrentSession: () => void;
 }
 
 type BattleLandingProps = {
@@ -46,10 +46,10 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         onClick={() => {
           if (
             confirm(
-              "Are you sure you want to delete the session? It will be forever lost!"
+              "Are you sure you want to delete this session? It will be forever lost!"
             )
           ) {
-            actions.deleteSession(session);
+            actions.deleteCurrentSession();
           }
         }}
       >

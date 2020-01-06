@@ -21,7 +21,7 @@ type BoardProps = {
   potentialMarks: AlgolPosition[];
   callback?: (pos: string) => void;
   anim?: AlgolAnimCompiled;
-  lookback?: boolean;
+  active?: boolean; // Whether or not we want the user to be able to make choices in the board
 };
 
 const EMPTYARR: any[] = [];
@@ -33,7 +33,7 @@ export const Board: React.FunctionComponent<BoardProps> = memo(
     potentialMarks,
     units,
     callback = noop,
-    lookback,
+    active,
     anim = emptyAnim,
   }) => {
     const { dataURI, height, width, icons } = graphics;
@@ -59,8 +59,8 @@ export const Board: React.FunctionComponent<BoardProps> = memo(
             callback={callback}
             width={width}
             height={height}
-            marks={lookback ? EMPTYARR : marks}
-            potentialMarks={lookback ? EMPTYARR : potentialMarks}
+            marks={active ? marks : EMPTYARR}
+            potentialMarks={active ? potentialMarks : EMPTYARR}
             units={units}
           />
 

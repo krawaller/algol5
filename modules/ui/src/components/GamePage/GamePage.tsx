@@ -97,7 +97,7 @@ export const GamePage = (props: GamePageProps) => {
         marks={ui.board.marks}
         potentialMarks={ui.board.potentialMarks}
         anim={ui.board.anim}
-        lookback={mode === "history"}
+        active={mode === "playing"}
       />
       <Breadcrumbs crumbs={crumbs} actions={actions} />
       {body}

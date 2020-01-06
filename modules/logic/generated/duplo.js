@@ -34,7 +34,12 @@ const knightDirs = [
   "d7f2r1",
   "d7f2r-1"
 ];
-let game = { gameId: "duplo", action: {}, instruction: {} };
+let game = {
+  gameId: "duplo",
+  action: {},
+  instruction: {},
+  commands: { deploy: {}, expand: {} }
+};
 {
   const groupLayers = {
     soldiers: [

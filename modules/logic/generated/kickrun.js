@@ -27,7 +27,12 @@ const knightDirs = [
   "d7f2r1",
   "d7f2r-1"
 ];
-let game = { gameId: "kickrun", action: {}, instruction: {} };
+let game = {
+  gameId: "kickrun",
+  action: {},
+  instruction: {},
+  commands: { move: {} }
+};
 {
   const groupLayers = {
     runners: [

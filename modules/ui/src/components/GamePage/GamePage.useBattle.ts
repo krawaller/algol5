@@ -53,7 +53,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
           battle,
           frame: -1,
           session: newSessionFromBattle(battle),
-          mode: "battlelobby",
+          mode: "playing", // could also go to "battlelobby" here, but this means less clicks! :D
         };
       } else if (cmnd === "load") {
         // user chose a battle in the list of saved battles. we load it
@@ -71,7 +71,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
               battle,
               session,
               frame: -1,
-              mode: "battlelobby",
+              mode: "playing", // could also go to "battlelobby" here, but this means less clicks! :D
             };
       } else if (cmnd === "gamelobby") {
         return {

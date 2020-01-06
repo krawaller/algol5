@@ -13,4 +13,7 @@ export type AlgolGame = {
   instruction: {
     [funcName: string]: (step: AlgolStep) => AlgolContentAnon;
   };
+  commands: Record<string, AlgolCommandInfo>;
 };
+
+export type AlgolCommandInfo = {};

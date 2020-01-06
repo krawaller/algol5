@@ -58,26 +58,28 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   return (
     <Fragment>
       <div className={styles.gameLanding}>
-        <button className={styles.gameButtonLink} onClick={actions.new}>
-          Start a local game
+        <button onClick={() => (sessions.length ? openModal() : actions.new())}>
+          Local
         </button>
-        <a href={meta.source} target="_blank" className={styles.gameButtonLink}>
-          Go to rules (external)
+        <button onClick={() => alert("Not implemented yet! Sorry! :D")}>
+          Remote
+        </button>
+        <a href={meta.source} target="_blank">
+          <button>Go to rules (external)</button>
         </a>
-        <button
-          className={styles.gameButtonLink}
-          disabled={isModalOpen || sessions.length === 0}
-          onClick={openModal}
-        >
-          Load game
-        </button>
         {session && (
           <button onClick={actions.toBattleLobby}>Back to {session.id}</button>
         )}
         <ReactModal isOpen={isModalOpen} onRequestClose={closeModal}>
           <div>
-            <button onClick={closeModal}>Back</button>
-            <hr />
+            <button
+              onClick={closeModal}
+              className={styles.gameLandingModalCloser}
+            >
+              X
+            </button>
+            <button onClick={actions.new}>Start new {meta.name} session</button>
+            <p>...or click a previous session below to load it!</p>
             <SessionList
               sessions={sessions}
               graphics={graphics}

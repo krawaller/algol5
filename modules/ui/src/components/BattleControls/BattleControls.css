@@ -1,0 +1,7 @@
+.battleControlPanel {
+  margin-bottom: 10px;
+}
+
+.battleControlPanel > button:not(:first-child) {
+  margin-left: 10px;
+}

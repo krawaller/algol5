@@ -34,7 +34,12 @@ const knightDirs = [
   "d7f2r1",
   "d7f2r-1"
 ];
-let game = { gameId: "jostle", action: {}, instruction: {} };
+let game = {
+  gameId: "jostle",
+  action: {},
+  instruction: {},
+  commands: { jostle: {} }
+};
 {
   const groupLayers = {
     checkers: [

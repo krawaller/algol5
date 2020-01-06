@@ -20,6 +20,7 @@ import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { Content } from "../Content";
+import css from "./GamePage.cssProxy";
 
 type GamePageProps = {
   api: AlgolStaticGameAPI;
@@ -83,12 +84,7 @@ export const GamePage = (props: GamePageProps) => {
       },
     ];
     body = (
-      <BattleControls
-        actions={actions}
-        undo={ui.undo}
-        instruction={ui.instruction}
-        haveHistory={frameCount > 1}
-      />
+      <BattleControls actions={actions} ui={ui} haveHistory={frameCount > 1} />
     );
   } else {
     // No battle active, we're just at the game landing page
@@ -115,7 +111,7 @@ export const GamePage = (props: GamePageProps) => {
         active={mode === "playing"}
       />
       <Breadcrumbs crumbs={crumbs} actions={actions} />
-      {body}
+      <div className={css.gamePageBodyContainer}>{body}</div>
     </Fragment>
   );
 };

@@ -122,6 +122,7 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
     if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
       LINKS.endGame = "win";
       LINKS.endedBy = "regicide";
+      LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
     } else if (
       Object.keys(
         Object.entries(
@@ -447,6 +448,7 @@ let game = { gameId: "daggers", action: {}, instruction: {} };
     if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
       LINKS.endGame = "win";
       LINKS.endedBy = "regicide";
+      LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
     } else if (
       Object.keys(
         Object.entries(

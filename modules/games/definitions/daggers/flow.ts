@@ -1,4 +1,4 @@
-import { DaggersFlow } from './_types';
+import { DaggersFlow } from "./_types";
 
 const daggersFlow: DaggersFlow = {
   endGame: {
@@ -6,7 +6,10 @@ const daggersFlow: DaggersFlow = {
       condition: { overlaps: ["mycrowns", "oppbase"] },
       show: { intersect: ["mycrowns", "oppbase"] },
     },
-    regicide: { condition: { same: [{ sizeof: "oppcrowns" }, 1] } },
+    regicide: {
+      condition: { same: [{ sizeof: "oppcrowns" }, 1] },
+      show: { single: "selectmovetarget" },
+    },
   },
   startTurn: { link: "selectunit" },
   marks: {

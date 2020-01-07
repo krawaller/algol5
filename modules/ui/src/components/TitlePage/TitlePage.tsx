@@ -16,6 +16,7 @@ import { Modal } from "../Modal";
 import { Page } from "../Page";
 import base64TitlePic from "../../../base64/title.png.proxy";
 import styles from "./TitlePage.cssProxy";
+import { Button } from "../Button";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -50,12 +51,12 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             there is! We've got {list.length} games and counting!
           </div>
           <div className={styles.titlePageButtonContainer}>
-            <button onClick={openModal}>Play a game</button>
-            <button
+            <Button onClick={openModal}>Play a game</Button>
+            <Button
               onClick={() => alert("It rules! What more do u need to know?")}
             >
               About the site
-            </button>
+            </Button>
           </div>
           <Modal
             isOpen={isModalOpen}

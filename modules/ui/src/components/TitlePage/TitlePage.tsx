@@ -10,6 +10,7 @@ import { PageActions } from "../../helpers";
 import { GameId } from "../../../../games/dist/list";
 
 import { Page } from "../Page";
+import base64TitlePic from "../../../base64/title.png.proxy";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -24,7 +25,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
   usePrefetchGames(actions);
   return (
     <Page
-      top={<img src="/images/title.png" />}
+      top={<img src={base64TitlePic} />}
       strip={<div>Welcome!</div>}
       body={
         <Fragment>

@@ -13,7 +13,9 @@ storiesOf("Thumbnail", module).add("test game thumbnail", () => {
   const demo = demos[gameId];
   return (
     <div>
-      <Thumbnail demo={demo} graphics={dataURIs[gameId]} gameId={gameId} />
+      <div style={{ width: 150, height: 150 }}>
+        <Thumbnail demo={demo} graphics={dataURIs[gameId]} gameId={gameId} />
+      </div>
       <p
         style={{
           width: 150,

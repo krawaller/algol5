@@ -15,8 +15,9 @@ export const GameListItem: React.FunctionComponent<GameListItemProps> = props =>
   const { callback, demo, meta, graphics } = props;
   return (
     <div className={css.gameListItem} key={meta.id} onClick={callback}>
-      <Thumbnail demo={demo} gameId={meta.id} graphics={graphics} />
-
+      <div>
+        <Thumbnail demo={demo} gameId={meta.id} graphics={graphics} />
+      </div>
       <div className={css.gameListInfoBox}>
         <h4 className={css.gameListInfoTitle}>{meta.name}</h4>
         {meta.tagline}

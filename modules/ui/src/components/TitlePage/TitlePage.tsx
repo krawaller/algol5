@@ -2,13 +2,14 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import React, { FunctionComponent, useCallback } from "react";
+import React, { FunctionComponent, useCallback, Fragment } from "react";
 import { GameList } from "../GameList";
-import css from "./TitlePage.cssProxy";
 import { usePrefetchGames } from "./TitlePage.prefetch";
 
 import { PageActions } from "../../helpers";
 import { GameId } from "../../../../games/dist/list";
+
+import { Page } from "../Page";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -22,15 +23,20 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
   );
   usePrefetchGames(actions);
   return (
-    <div className={css.titlePage}>
-      <h1>Chessicals</h1>
-      <p>
-        Welcome! This is rather bare bones still, but, click a game below to try
-        it out!
-      </p>
-      <hr />
-      <GameList callback={navToGame} />
-    </div>
+    <Page
+      top={<img src="/images/title.png" />}
+      strip={<div>Welcome!</div>}
+      body={
+        <Fragment>
+          <p>
+            Welcome! This is rather bare bones still, but, click a game below to
+            try it out!
+          </p>
+          <hr />
+          <GameList callback={navToGame} />
+        </Fragment>
+      }
+    />
   );
 };
 

@@ -1,3 +1,15 @@
-.titlePage {
-  padding: 10px;
+.titlePageModalCloser {
+  float: right;
+  background-color: lightcoral;
+}
+
+.titlePageButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.titlePageButtonContainer button:not(:last-child) {
+  margin-right: 10px;
 }

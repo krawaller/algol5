@@ -14,6 +14,7 @@ import {
 import { getSessionList } from "../../../../local/src";
 import { SessionList } from "../SessionList";
 import { Modal } from "../Modal";
+import { Button } from "../Button";
 
 export interface GameLandingActions {
   new: () => void;
@@ -58,21 +59,23 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   return (
     <Fragment>
       <div className={styles.gameLanding}>
-        <button onClick={() => (sessions.length ? openModal() : actions.new())}>
+        <Button onClick={() => (sessions.length ? openModal() : actions.new())}>
           Local
-        </button>
-        <button onClick={() => alert("Not implemented yet! Sorry! :D")}>
+        </Button>
+        <Button onClick={() => alert("Not implemented yet! Sorry! :D")}>
           Remote
-        </button>
+        </Button>
         <a href={meta.source} target="_blank">
-          <button>Go to rules (external)</button>
+          <Button>Go to rules (external)</Button>
         </a>
         {session && (
-          <button onClick={actions.toBattleLobby}>Back to {session.id}</button>
+          <Button onClick={actions.toBattleLobby}>
+            Back to current session
+          </Button>
         )}
         <Modal isOpen={isModalOpen} onClose={closeModal} title="Play locally">
           <div>
-            <button onClick={actions.new}>Start new {meta.name} session</button>
+            <Button onClick={actions.new}>Start new {meta.name} session</Button>
             <p>...or click a previous session below to load it!</p>
             <SessionList
               sessions={sessions}

@@ -7,4 +7,5 @@
 .gameLanding > button,
 .gameLanding > a {
   margin: 10px;
+  text-decoration: none;
 }

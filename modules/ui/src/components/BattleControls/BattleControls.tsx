@@ -3,6 +3,7 @@ import React, { FunctionComponent, Fragment } from "react";
 import { AlgolBattleUI } from "../../../../types";
 import { Content } from "../Content";
 import css from "./BattleControls.cssProxy";
+import { Button } from "../Button";
 
 export interface BattleControlsActions {
   undo: () => void;
@@ -27,30 +28,32 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   return (
     <Fragment>
       <div className={css.battleControlPanel}>
-        <button disabled={!Boolean(ui.undo)} onClick={actions.undo}>
+        <Button disabled={!Boolean(ui.undo)} onClick={actions.undo}>
           Undo
-        </button>
+        </Button>
         {Object.entries(ui.commands).map(([cmnd, info]) => (
-          <button
+          <Button
             disabled={!info.available}
             onClick={() => actions.command(cmnd)}
             key={cmnd}
           >
             {cmnd}
-          </button>
+          </Button>
         ))}
-        <button
+        <Button
           disabled={!Boolean(ui.endTurn) || ui.winner !== undefined}
           onClick={actions.endTurn}
         >
           End turn
-        </button>
-        <button disabled={!haveHistory} onClick={actions.toHistory}>
+        </Button>
+        {/* <Button disabled={!haveHistory} onClick={actions.toHistory}>
           History
-        </button>
-        <button onClick={actions.toBattleLobby}>Session info</button>
+        </Button>
+        <Button onClick={actions.toBattleLobby}>Session info</Button> */}
       </div>
-      <Content content={ui.instruction} actions={actions} />
+      <div className={css.battleControlHint}>
+        <Content content={ui.instruction} actions={actions} />
+      </div>
     </Fragment>
   );
 };

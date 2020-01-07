@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ChangeEvent } from "react";
 import css from "./Stepper.cssProxy";
+import { Button } from "../Button";
 
 type StepperProps = {
   onChange: (num: number) => void;
@@ -11,9 +12,9 @@ export const Stepper: FunctionComponent<StepperProps> = props => {
   const { onChange, max, current } = props;
   return (
     <span className={css.stepperContainer}>
-      <button disabled={current === 0} onClick={() => onChange(current - 1)}>
+      <Button disabled={current === 0} onClick={() => onChange(current - 1)}>
         &lt;
-      </button>
+      </Button>
       <span className={css.stepperRangeContainer}>
         <input
           className={css.stepperRange}
@@ -27,9 +28,9 @@ export const Stepper: FunctionComponent<StepperProps> = props => {
           }
         />
       </span>
-      <button disabled={current === max} onClick={() => onChange(current + 1)}>
+      <Button disabled={current === max} onClick={() => onChange(current + 1)}>
         &gt;
-      </button>
+      </Button>
     </span>
   );
 };

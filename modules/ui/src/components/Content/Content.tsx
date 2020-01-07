@@ -16,6 +16,7 @@ import {
 } from "../../../../types";
 
 import { Icon } from "../Icon";
+import { Button } from "../Button";
 
 interface ContentActions {
   endTurn: () => void;
@@ -58,13 +59,13 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   }
   if (isAlgolContentCmnd(content)) {
     return (
-      <button onClick={() => actions.command(content.command)}>
+      <Button onClick={() => actions.command(content.command)}>
         {content.command}
-      </button>
+      </Button>
     );
   }
   if (isAlgolContentEndTurn(content)) {
-    return <button onClick={actions.endTurn}>{content.endTurn}</button>;
+    return <Button onClick={actions.endTurn}>{content.endTurn}</Button>;
   }
   if (isAlgolContentBold(content)) {
     return <strong>{content.bold}</strong>;

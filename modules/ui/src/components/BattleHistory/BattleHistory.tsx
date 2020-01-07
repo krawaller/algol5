@@ -4,6 +4,7 @@ import { Content } from "../Content";
 import { Stepper } from "../Stepper";
 
 import css from "./BattleHistory.cssProxy";
+import { Button } from "../Button";
 
 interface BattleHistoryActions {
   toFrame: (frame: number) => void;
@@ -28,9 +29,9 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
       <Content content={content} />
       <br />
       {!battleFinished && (
-        <button onClick={actions.toBattleControls}>Continue playing</button>
+        <Button onClick={actions.toBattleControls}>Continue playing</Button>
       )}
-      <button onClick={actions.toBattleLobby}>Session info</button>
+      <Button onClick={actions.toBattleLobby}>Session info</Button>
     </div>
   );
 };

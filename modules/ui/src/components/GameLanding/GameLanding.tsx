@@ -69,7 +69,9 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           <Button>Go to rules (external)</Button>
         </a>
         {session && (
-          <Button onClick={actions.toBattleLobby}>Back to {session.id}</Button>
+          <Button onClick={actions.toBattleLobby}>
+            Back to current session
+          </Button>
         )}
         <Modal isOpen={isModalOpen} onClose={closeModal} title="Play locally">
           <div>

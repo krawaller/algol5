@@ -46,8 +46,8 @@ export const GamePage = (props: GamePageProps) => {
     // We are currently watching the history of a battle
     crumbs = [
       { content: meta.name, onClick: actions.toGameLobby },
-      { content: session!.id, onClick: actions.toBattleLobby },
-      { content: battle!.gameEndedBy ? "finished" : "history" },
+      { content: "session", onClick: actions.toBattleLobby },
+      { content: "history" },
     ];
     body = (
       <BattleHistory
@@ -62,14 +62,14 @@ export const GamePage = (props: GamePageProps) => {
     // we are on the landing page for a created/loaded session
     crumbs = [
       { content: meta.name, onClick: actions.toGameLobby },
-      { content: session!.id },
+      { content: "session" },
     ];
     body = <BattleLanding actions={actions} session={session!} meta={meta} />;
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
     crumbs = [
       { content: meta.name, onClick: actions.toGameLobby },
-      { content: session!.id, onClick: actions.toBattleLobby },
+      { content: "session", onClick: actions.toBattleLobby },
       {
         content: (
           <Content

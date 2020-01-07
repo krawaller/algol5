@@ -1,0 +1,25 @@
+.pageContainer {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.pageTop {
+  background-color: saddlebrown; /* should be same as board border */
+}
+
+.pageStrip {
+  background-color: sandybrown;
+  height: 2em;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.pageBody {
+  padding: 10px;
+}
+
+.pageContainer img {
+  max-width: 100%;
+}

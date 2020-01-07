@@ -3,6 +3,7 @@
     "robot": "npm install && npm run prep && npm run build && npm run export",
     "makeGamePages": "node ./commands/makeGamePages",
     "getUiCSS": "cp ../ui/dist/styles.css public/components.css",
+    "getStatic": "cp -a ../ui/src/static/. ./public",
     "prep": "npm run getUiCSS && npm run makeGamePages",
     "dev": "next",
     "build": "next build",

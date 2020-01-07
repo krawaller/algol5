@@ -79,4 +79,10 @@
   outline: none;
 
   font: 400 11px system-ui;
+
+  text-decoration: none;
+}
+
+a > .button {
+  text-decoration: none;
 }

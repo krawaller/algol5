@@ -3,6 +3,7 @@ import { AlgolLocalBattle, AlgolMeta } from "../../../../types";
 import { SessionStatus } from "../SessionStatus";
 
 import css from "./BattleLanding.cssProxy";
+import { Button } from "../Button";
 
 interface BattleLandingActions {
   toHistory: () => void;
@@ -28,7 +29,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           able to view the session history here, and reload the session from the{" "}
           {meta.name} lobby.
         </div>
-        <button onClick={actions.toBattleControls}>Start playing</button>
+        <Button onClick={actions.toBattleControls}>Start playing</Button>
       </Fragment>
     );
   }
@@ -44,10 +45,10 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
       </div>
       <div className={css.battleLandingButtons}>
         {!session.endedBy && (
-          <button onClick={actions.toBattleControls}>Continue playing</button>
+          <Button onClick={actions.toBattleControls}>Continue playing</Button>
         )}
-        <button onClick={actions.toHistory}>See history</button>
-        <button
+        <Button onClick={actions.toHistory}>See history</Button>
+        <Button
           onClick={() => {
             if (
               confirm(
@@ -59,7 +60,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           }}
         >
           Delete session
-        </button>
+        </Button>
       </div>
     </Fragment>
   );

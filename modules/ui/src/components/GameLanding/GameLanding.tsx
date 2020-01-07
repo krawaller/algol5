@@ -5,7 +5,6 @@ import React, {
   useMemo,
   Fragment,
 } from "react";
-import ReactModal from "react-modal";
 import styles from "./GameLanding.cssProxy";
 import {
   AlgolMeta,
@@ -14,6 +13,7 @@ import {
 } from "../../../../types";
 import { getSessionList } from "../../../../local/src";
 import { SessionList } from "../SessionList";
+import { Modal } from "../Modal";
 
 export interface GameLandingActions {
   new: () => void;
@@ -70,14 +70,8 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         {session && (
           <button onClick={actions.toBattleLobby}>Back to {session.id}</button>
         )}
-        <ReactModal isOpen={isModalOpen} onRequestClose={closeModal}>
+        <Modal isOpen={isModalOpen} onClose={closeModal} title="Play locally">
           <div>
-            <button
-              onClick={closeModal}
-              className={styles.gameLandingModalCloser}
-            >
-              X
-            </button>
             <button onClick={actions.new}>Start new {meta.name} session</button>
             <p>...or click a previous session below to load it!</p>
             <SessionList
@@ -86,7 +80,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
               actions={sessionListActions}
             />
           </div>
-        </ReactModal>
+        </Modal>
       </div>
     </Fragment>
   );

@@ -1,4 +1,4 @@
-import { SerauqsInstructions } from './_types';
+import { SerauqsInstructions } from "./_types";
 
 const serauqsInstructions: SerauqsInstructions = {
   startTurn: {
@@ -14,8 +14,7 @@ const serauqsInstructions: SerauqsInstructions = {
       {
         line: [
           "Select",
-          "where to",
-          "move",
+          "where to move",
           { unitat: "selectunit" },
           {
             if: [

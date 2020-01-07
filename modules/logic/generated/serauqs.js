@@ -292,8 +292,7 @@ let game = {
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "where to" },
-            { command: "move" },
+            { text: "where to move" },
             {
               unit: [
                 iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
@@ -641,8 +640,7 @@ let game = {
       ? collapseContent({
           line: [
             { select: "Select" },
-            { text: "where to" },
-            { command: "move" },
+            { text: "where to move" },
             {
               unit: [
                 iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],

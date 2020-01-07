@@ -2,9 +2,10 @@
   "scripts": {
     "robot": "npm install && npm run prep && npm run build && npm run export",
     "makeGamePages": "node ./commands/makeGamePages",
+    "getResources": "rm -rf ./public; mkdir public; npm run getUiCSS; npm run getStatic",
     "getUiCSS": "cp ../ui/dist/styles.css public/components.css",
     "getStatic": "cp -a ../ui/src/static/. ./public",
-    "prep": "npm run getUiCSS && npm run makeGamePages",
+    "prep": "npm run getResources && npm run makeGamePages",
     "dev": "next",
     "build": "next build",
     "start": "next start",

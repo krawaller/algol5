@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react";
 import { UniversalPortal } from "@jesstelford/react-portal-universal";
 import css from "./Modal.cssProxy";
+import { Button } from "../Button";
 
 type ModalProps = {
   isOpen: boolean;
@@ -22,9 +23,7 @@ export const Modal: FunctionComponent<ModalProps> = props => {
         <div onClick={e => e.stopPropagation()} className={css.modalContainer}>
           <div className={css.modalHeader}>
             {title}
-            <button className={css.modalCloseButton} onClick={onClose}>
-              X
-            </button>
+            <Button onClick={onClose}>X</Button>
           </div>
           <div className={css.modalContent}>{children}</div>
         </div>

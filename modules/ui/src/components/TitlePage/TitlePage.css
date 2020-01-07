@@ -13,3 +13,12 @@
 .titlePageButtonContainer button:not(:last-child) {
   margin-right: 10px;
 }
+
+.titlePageSchpiel {
+  font-size: 12px;
+}
+
+.titlePageStrip {
+  text-align: center;
+  width: 100%;
+}

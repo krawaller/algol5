@@ -10,10 +10,9 @@ import React, {
 } from "react";
 import { GameList } from "../GameList";
 import { usePrefetchGames } from "./TitlePage.prefetch";
-import ReactModal from "react-modal";
 import { PageActions } from "../../helpers";
 import { GameId, list } from "../../../../games/dist/list";
-
+import { Modal } from "../Modal";
 import { Page } from "../Page";
 import base64TitlePic from "../../../base64/title.png.proxy";
 import styles from "./TitlePage.cssProxy";
@@ -39,13 +38,17 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
   return (
     <Page
       top={<img src={base64TitlePic} />}
-      strip={<div>Welcome!</div>}
+      strip={
+        <div className={styles.titlePageStrip}>
+          An interactive ode to abstract games
+        </div>
+      }
       body={
         <Fragment>
-          <p>
+          <div className={styles.titlePageSchpiel}>
             Congratulations! You've found the AWESOMEST abstract board game site
             there is! We've got {list.length} games and counting!
-          </p>
+          </div>
           <div className={styles.titlePageButtonContainer}>
             <button onClick={openModal}>Play a game</button>
             <button
@@ -54,16 +57,13 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
               About the site
             </button>
           </div>
-          <ReactModal isOpen={isModalOpen} onRequestClose={closeModal}>
-            <button
-              onClick={closeModal}
-              className={styles.titlePageModalCloser}
-            >
-              X
-            </button>
-            <p>Pick your poison! :D</p>
-            <GameList callback={navToGame} />
-          </ReactModal>
+          <Modal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            title="Pick your poison!"
+          >
+            {<GameList callback={navToGame} />}
+          </Modal>
         </Fragment>
       }
     />

@@ -7,8 +7,6 @@ import { useInView } from "react-intersection-observer";
 
 import { useDemo } from "../../helpers";
 
-const THUMBNAIL_HEIGHT_PX = 120;
-
 type ThumbnailProps = {
   demo: AlgolDemo;
   gameId: GameId;
@@ -26,15 +24,7 @@ export const Thumbnail: FunctionComponent<ThumbnailProps> = props => {
   const { frame, hydrDemo } = useDemo(demo, inView);
 
   return (
-    <div
-      ref={ref}
-      style={{
-        width:
-          THUMBNAIL_HEIGHT_PX * ((graphics.width + 1) / (graphics.height + 1)),
-        height: THUMBNAIL_HEIGHT_PX,
-        position: "relative",
-      }}
-    >
+    <div ref={ref}>
       <Board
         key={gameId}
         graphics={graphics}

@@ -1,0 +1,40 @@
+.modalOverlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(255, 255, 255, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  height: 90%;
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.modalHeader {
+  background-color: green;
+  padding: 5px;
+}
+
+.modalCloseButton {
+  background-color: lightcoral;
+  float: right;
+}
+
+.modalContent {
+  padding: 10px;
+  overflow: scroll;
+}

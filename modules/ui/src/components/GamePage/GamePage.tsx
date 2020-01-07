@@ -2,7 +2,7 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { Fragment, useMemo, ReactNode } from "react";
+import React, { useMemo, ReactNode } from "react";
 import {
   AlgolStaticGameAPI,
   AlgolGameGraphics,
@@ -11,6 +11,7 @@ import {
 } from "../../../../types";
 
 import { Board } from "../Board";
+import { Page } from "../Page";
 import { BattleControls } from "../BattleControls";
 import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
@@ -20,7 +21,6 @@ import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { Content } from "../Content";
-import css from "./GamePage.cssProxy";
 
 type GamePageProps = {
   api: AlgolStaticGameAPI;
@@ -100,18 +100,20 @@ export const GamePage = (props: GamePageProps) => {
   }
 
   return (
-    <Fragment>
-      <Board
-        callback={actions.mark}
-        graphics={graphics}
-        units={ui.board.units}
-        marks={ui.board.marks}
-        potentialMarks={ui.board.potentialMarks}
-        anim={ui.board.anim}
-        active={mode === "playing"}
-      />
-      <Breadcrumbs crumbs={crumbs} actions={actions} />
-      <div className={css.gamePageBodyContainer}>{body}</div>
-    </Fragment>
+    <Page
+      top={
+        <Board
+          callback={actions.mark}
+          graphics={graphics}
+          units={ui.board.units}
+          marks={ui.board.marks}
+          potentialMarks={ui.board.potentialMarks}
+          anim={ui.board.anim}
+          active={mode === "playing"}
+        />
+      }
+      strip={<Breadcrumbs crumbs={crumbs} actions={actions} />}
+      body={body}
+    />
   );
 };

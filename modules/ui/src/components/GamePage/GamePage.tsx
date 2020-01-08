@@ -64,7 +64,14 @@ export const GamePage = (props: GamePageProps) => {
       { content: meta.name, onClick: actions.toGameLobby },
       { content: "session" },
     ];
-    body = <BattleLanding actions={actions} session={session!} meta={meta} />;
+    body = (
+      <BattleLanding
+        battle={battle!}
+        actions={actions}
+        session={session!}
+        meta={meta}
+      />
+    );
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
     crumbs = [

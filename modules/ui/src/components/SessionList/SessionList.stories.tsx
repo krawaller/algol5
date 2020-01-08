@@ -23,18 +23,11 @@ storiesOf("SessionList", module).add("SessionList component", () => {
         localStorage:
       </div>
       <hr />
-      {sessions.length ? (
-        <SessionList
-          sessions={sessions}
-          graphics={dataURIs[gameId]}
-          actions={actions}
-        />
-      ) : (
-        <p>
-          No battles found. To populate, start some in the <code>Tester</code>{" "}
-          story!{" "}
-        </p>
-      )}
+      <SessionList
+        sessions={sessions}
+        graphics={dataURIs[gameId]}
+        actions={actions}
+      />
     </Fragment>
   );
 });

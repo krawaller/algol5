@@ -1,0 +1,11 @@
+.localSession {
+  text-align: center;
+}
+
+.localSessionDivider:after {
+  content: "or";
+  height: 2em;
+  display: block;
+  line-height: 2em;
+  color: grey;
+}

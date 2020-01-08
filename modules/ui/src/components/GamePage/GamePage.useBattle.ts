@@ -53,7 +53,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
           battle,
           frame: -1,
           session: newSessionFromBattle(battle),
-          mode: "playing", // could also go to "battlelobby" here, but this means less clicks! :D
+          mode: "battlelobby", // could also go to "playing" here for less clicks, but this way battlelanding is introduced
         };
       } else if (cmnd === "load") {
         // user chose a battle in the list of saved battles. we load it

@@ -12,9 +12,9 @@ import {
   AlgolGameGraphics,
 } from "../../../../types";
 import { getSessionList } from "../../../../local/src";
-import { SessionList } from "../SessionList";
 import { Modal } from "../Modal";
 import { Button } from "../Button";
+import { LocalSession, LocalSessionActions } from "../LocalSession";
 
 export interface GameLandingActions {
   new: () => void;
@@ -47,11 +47,16 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const sessionListActions = useMemo(
-    () => ({
+  // hack actions to close modal when chosen
+  const localSessionActions = useMemo(
+    (): LocalSessionActions => ({
       load: (session: AlgolLocalBattle) => {
         closeModal();
         actions.load(session);
+      },
+      new: () => {
+        closeModal();
+        actions.new();
       },
     }),
     []
@@ -59,10 +64,8 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   return (
     <Fragment>
       <div className={styles.gameLanding}>
-        <Button onClick={() => (sessions.length ? openModal() : actions.new())}>
-          Local
-        </Button>
-        <Button onClick={() => alert("Not implemented yet! Sorry! :D")}>
+        <Button onClick={openModal}>Local</Button>
+        <Button notImplemented="Online play will come in a future version!">
           Remote
         </Button>
         <a href={meta.source} target="_blank">
@@ -74,15 +77,11 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           </Button>
         )}
         <Modal isOpen={isModalOpen} onClose={closeModal} title="Play locally">
-          <div>
-            <Button onClick={actions.new}>Start new {meta.name} session</Button>
-            <p>...or click a previous session below to load it!</p>
-            <SessionList
-              sessions={sessions}
-              graphics={graphics}
-              actions={sessionListActions}
-            />
-          </div>
+          <LocalSession
+            actions={localSessionActions}
+            sessions={sessions}
+            graphics={graphics}
+          />
         </Modal>
       </div>
     </Fragment>

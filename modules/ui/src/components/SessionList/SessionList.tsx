@@ -27,23 +27,30 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
 }) => {
   return (
     <div>
-      {sessions.map(session => (
-        <div
-          key={session.id}
-          className={css.sessionListItem}
-          onClick={() => actions.load(session)}
-        >
-          <div className={css.sessionListItemScreenshot}>
-            <Board
-              graphics={graphics}
-              potentialMarks={EMPTYARR}
-              marks={session.screenshot.marks}
-              units={session.screenshot.units}
-            />
+      <div className={css.sessionListInstruction}>
+        Click a previous session below to load it!
+      </div>
+      {sessions.length === 0 ? (
+        <div className={css.sessionListEmpty}>No saved sessions found</div>
+      ) : (
+        sessions.map(session => (
+          <div
+            key={session.id}
+            className={css.sessionListItem}
+            onClick={() => actions.load(session)}
+          >
+            <div className={css.sessionListItemScreenshot}>
+              <Board
+                graphics={graphics}
+                potentialMarks={EMPTYARR}
+                marks={session.screenshot.marks}
+                units={session.screenshot.units}
+              />
+            </div>
+            <SessionInfo session={session} />
           </div>
-          <SessionInfo session={session} />
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 };

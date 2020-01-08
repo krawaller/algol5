@@ -80,7 +80,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           <LocalSession
             actions={localSessionActions}
             sessions={sessions}
-            meta={meta}
             graphics={graphics}
           />
         </Modal>

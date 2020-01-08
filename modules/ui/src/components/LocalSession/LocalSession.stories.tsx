@@ -17,7 +17,6 @@ storiesOf("LocalSession", module).add("LocalSession creator for game", () => {
   };
   return (
     <LocalSession
-      meta={meta[gameId]}
       actions={actions}
       sessions={sessions}
       graphics={dataURIs[gameId]}

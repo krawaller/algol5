@@ -1,5 +1,9 @@
 /* Mostly stolen from Blueprint button */
 
+.buttonNotImplemented {
+  text-decoration: line-through !important;
+}
+
 .button:hover {
   background-clip: padding-box;
   background-color: #ebf1f5;

@@ -1,9 +1,11 @@
-import React, { FunctionComponent, Fragment } from "react";
-import { AlgolLocalBattle, AlgolMeta } from "../../../../types";
+import React, { FunctionComponent, Fragment, useState, useMemo } from "react";
+import { AlgolLocalBattle, AlgolMeta, AlgolBattle } from "../../../../types";
 import { SessionStatus } from "../SessionStatus";
 
 import css from "./BattleLanding.cssProxy";
 import { Button } from "../Button";
+import { Modal } from "../Modal";
+import { ExportBattle } from "../ExportBattle";
 
 interface BattleLandingActions {
   toHistory: () => void;
@@ -14,11 +16,20 @@ interface BattleLandingActions {
 type BattleLandingProps = {
   actions: BattleLandingActions;
   session: AlgolLocalBattle;
+  battle: AlgolBattle;
   meta: AlgolMeta<string, string>;
 };
 
 export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
-  const { session, actions, meta } = props;
+  const { session, actions, meta, battle } = props;
+  const [isModalOpen, setModal] = useState<boolean>(false);
+  const { closeModal, openModal } = useMemo(
+    () => ({
+      closeModal: () => setModal(false),
+      openModal: () => setModal(true),
+    }),
+    [setModal]
+  );
   if (!session.updated) {
     // New session!
     return (
@@ -48,6 +59,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           <Button onClick={actions.toBattleControls}>Continue playing</Button>
         )}
         <Button onClick={actions.toHistory}>See history</Button>
+        <Button onClick={openModal}>Export</Button>
         <Button
           onClick={() => {
             if (
@@ -61,6 +73,9 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         >
           Delete session
         </Button>
+        <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">
+          <ExportBattle battle={battle} meta={meta} session={session} />
+        </Modal>
       </div>
     </Fragment>
   );

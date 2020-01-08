@@ -29,8 +29,8 @@ export const ExportBattle: FunctionComponent<ExportBattleProps> = props => {
   return (
     <div>
       <div className={css.exportBattleInstruction}>
-        Use the string below to import this {meta.name} session in another
-        browser!
+        Save the string below to (soon) be able to import this {meta.name}{" "}
+        session in another browser!
       </div>
       <div className={css.exportBattleInputContainer}>
         <input className={css.exportBattleInput} value={str} onChange={noop} />

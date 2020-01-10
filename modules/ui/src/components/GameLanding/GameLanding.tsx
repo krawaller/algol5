@@ -65,12 +65,10 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
     <Fragment>
       <div className={styles.gameLanding}>
         <Button onClick={openModal}>Local</Button>
-        <Button notImplemented="Online play will come in a future version!">
+        <Button disabled="Online play will come in a future version!">
           Remote
         </Button>
-        <a href={meta.source} target="_blank">
-          <Button>Go to rules (external)</Button>
-        </a>
+        <Button href={meta.source}>Go to rules (external)</Button>
         {session && (
           <Button onClick={actions.toBattleLobby}>
             Back to current session

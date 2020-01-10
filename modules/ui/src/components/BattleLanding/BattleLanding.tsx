@@ -6,6 +6,8 @@ import css from "./BattleLanding.cssProxy";
 import { Button } from "../Button";
 import { Modal } from "../Modal";
 import { ExportBattle } from "../ExportBattle";
+import { BattleLandingNewSession } from "./BattleLanding.NewSession";
+import { BattleLandingOngoing } from "./BattleLanding.Ongoing";
 
 interface BattleLandingActions {
   toHistory: () => void;
@@ -30,36 +32,40 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
     }),
     [setModal]
   );
-  if (!session.updated) {
-    // New session!
-    return (
-      <Fragment>
-        <div className={css.battleLandingContent}>
-          You're playing a new {meta.name} session with id{" "}
-          <code>{session.id}</code>. Once the first turn is completed you'll be
-          able to view the session history here, and reload the session from the{" "}
-          {meta.name} lobby.
-        </div>
-        <Button onClick={actions.toBattleControls}>Start playing</Button>
-      </Fragment>
-    );
-  }
   return (
     <Fragment>
       <div className={css.battleLandingContent}>
-        <div>Session ID: {session.id}</div>
-        <div>Created: {new Date(session.created).toString().slice(0, 10)}</div>
-        <div>Updated: {new Date(session.updated).toString().slice(0, 10)}</div>
-        <div>
-          Status: <SessionStatus session={session} />
-        </div>
+        {session.updated ? (
+          <BattleLandingOngoing session={session} />
+        ) : (
+          <BattleLandingNewSession meta={meta} session={session} />
+        )}
       </div>
       <div className={css.battleLandingButtons}>
-        {!session.endedBy && (
-          <Button onClick={actions.toBattleControls}>Continue playing</Button>
-        )}
-        <Button onClick={actions.toHistory}>See history</Button>
-        <Button onClick={openModal}>Export</Button>
+        <Button
+          disabled={session.endedBy && "This session is finished!"}
+          onClick={actions.toBattleControls}
+        >
+          Play
+        </Button>
+        <Button
+          disabled={
+            !session.updated &&
+            "You can see the history after the first turn is finished!"
+          }
+          onClick={actions.toHistory}
+        >
+          See history
+        </Button>
+        <Button
+          disabled={
+            !session.updated &&
+            "You can export the session after the first turn is finished!"
+          }
+          onClick={openModal}
+        >
+          Export
+        </Button>
         <Button
           onClick={() => {
             if (
@@ -73,10 +79,10 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         >
           Delete session
         </Button>
-        <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">
-          <ExportBattle battle={battle} meta={meta} session={session} />
-        </Modal>
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">
+        <ExportBattle battle={battle} meta={meta} session={session} />
+      </Modal>
     </Fragment>
   );
 };

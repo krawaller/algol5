@@ -4,8 +4,6 @@
   align-items: center;
 }
 
-.gameLanding > button,
-.gameLanding > a {
+.gameLanding > * {
   margin: 10px;
-  text-decoration: none;
 }

@@ -1,3 +1,7 @@
+.battleHistoryContainer {
+  text-align: center;
+}
+
 .battleHistoryContainer button:not(:last-child) {
   margin-right: 10px;
 }

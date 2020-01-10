@@ -41,6 +41,7 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
           </Button>
         ))}
         <Button
+          big
           disabled={!Boolean(ui.endTurn) || ui.winner !== undefined}
           onClick={actions.endTurn}
         >

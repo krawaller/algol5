@@ -64,7 +64,9 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   return (
     <Fragment>
       <div className={styles.gameLanding}>
-        <Button onClick={openModal}>Local</Button>
+        <Button big onClick={openModal}>
+          Local
+        </Button>
         <Button disabled="Online play will come in a future version!">
           Remote
         </Button>

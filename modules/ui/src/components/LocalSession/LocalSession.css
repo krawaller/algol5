@@ -1,4 +1,5 @@
 .localSession {
+  padding-top: 20px; /* or maybe Modal should have this padding at the top always? */
   text-align: center;
 }
 

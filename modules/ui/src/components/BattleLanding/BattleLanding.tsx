@@ -43,6 +43,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
       </div>
       <div className={css.battleLandingButtons}>
         <Button
+          big
           disabled={session.endedBy && "This session is finished!"}
           onClick={actions.toBattleControls}
         >

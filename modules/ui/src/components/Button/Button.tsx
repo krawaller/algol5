@@ -21,10 +21,10 @@ export const Button: FunctionComponent<ButtonProps> = props => {
         : typeof disabled === "string"
         ? () => alert(disabled)
         : (e: MouseEvent) => {
-            preventDoubleTapZoom(e);
             onClick(e);
+            preventDoubleTapZoom(e);
           },
-    [href, disabled]
+    [href, disabled, onClick]
   );
 
   const button = (

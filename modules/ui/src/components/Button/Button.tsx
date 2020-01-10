@@ -1,5 +1,6 @@
 import React, { FunctionComponent, MouseEvent } from "react";
 import classNames from "classnames";
+import { preventDoubleTapZoom } from "./Button.preventDoubleTap";
 
 type ButtonProps = {
   disabled?: boolean | string;
@@ -20,6 +21,8 @@ export const Button: FunctionComponent<ButtonProps> = props => {
       : onClick;
   const button = (
     <button
+      // Having a touch handler also makes :active work on iOS
+      onTouchStart={preventDoubleTapZoom}
       onClick={handler}
       className={classNames(css.button, {
         [css.buttonDisabled]: disabled,

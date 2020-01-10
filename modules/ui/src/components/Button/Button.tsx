@@ -14,18 +14,15 @@ const noop = () => {};
 
 export const Button: FunctionComponent<ButtonProps> = props => {
   const { disabled, onClick = noop, children, href, big } = props;
-  const handler = useMemo(
-    () =>
-      href || disabled === true
-        ? noop
-        : typeof disabled === "string"
-        ? () => alert(disabled)
-        : (e: MouseEvent) => {
-            preventDoubleTapZoom(e);
-            onClick(e);
-          },
-    [href, disabled]
-  );
+  const handler =
+    href || disabled === true
+      ? noop
+      : typeof disabled === "string"
+      ? () => alert(disabled)
+      : (e: MouseEvent) => {
+          onClick(e);
+          preventDoubleTapZoom(e);
+        };
 
   const button = (
     <button

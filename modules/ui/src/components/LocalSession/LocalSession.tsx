@@ -25,7 +25,7 @@ export const LocalSession: FunctionComponent<LocalSession> = props => {
     <div className={css.localSession}>
       <Button onClick={actions.new}>New local hotseat session</Button>
       <div className={css.localSessionDivider} />
-      <Button notImplemented="AI is in the works, but remote play will be implemented first.">
+      <Button disabled="AI is in the works, but remote play will be implemented first.">
         Versus AI
       </Button>
       <div className={css.localSessionDivider} />

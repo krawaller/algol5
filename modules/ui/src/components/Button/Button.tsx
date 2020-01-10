@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent } from "react";
+import React, { FunctionComponent, MouseEvent, useMemo } from "react";
 import classNames from "classnames";
 import { preventDoubleTapZoom } from "./Button.preventDoubleTap";
 
@@ -14,12 +14,19 @@ const noop = () => {};
 
 export const Button: FunctionComponent<ButtonProps> = props => {
   const { disabled, onClick = noop, children, href, big } = props;
-  const handler =
-    href || disabled === true
-      ? noop
-      : typeof disabled === "string"
-      ? () => alert(disabled)
-      : onClick;
+  const handler = useMemo(
+    () =>
+      href || disabled === true
+        ? noop
+        : typeof disabled === "string"
+        ? () => alert(disabled)
+        : (e: MouseEvent) => {
+            preventDoubleTapZoom(e);
+            onClick(e);
+          },
+    [href, disabled]
+  );
+
   const button = (
     <button
       // Having a touch handler also makes :active work on iOS

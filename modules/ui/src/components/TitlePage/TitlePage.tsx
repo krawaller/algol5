@@ -17,9 +17,19 @@ import { Page } from "../Page";
 import base64TitlePic from "../../../base64/title.png.proxy";
 import styles from "./TitlePage.cssProxy";
 import { Button } from "../Button";
+import TitlePageNews from "./TitlePage.News";
+import TitlePageAbout from "./TitlePage.about";
 
 type TitlePageProps = {
   actions: PageActions;
+};
+
+type ModalContent = "games" | "news" | "about";
+
+const modalTitles: Record<ModalContent, string> = {
+  games: "Pick your poison!",
+  news: "News",
+  about: "About the site",
 };
 
 export const TitlePage: FunctionComponent<TitlePageProps> = props => {
@@ -29,41 +39,44 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
     [actions]
   );
   usePrefetchGames(actions);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const openModal = () => {
-    setIsModalOpen(true);
+  const [modalContent, setModalContent] = useState<false | ModalContent>(false);
+  const openModal = (content: ModalContent) => {
+    setModalContent(content);
   };
   const closeModal = () => {
-    setIsModalOpen(false);
+    setModalContent(false);
   };
+  const modal =
+    modalContent === "games" ? (
+      <GameList callback={navToGame} />
+    ) : modalContent === "news" ? (
+      <TitlePageNews />
+    ) : modalContent === "about" ? (
+      <TitlePageAbout />
+    ) : null;
   return (
     <Page
       top={<img src={base64TitlePic} />}
       strip={
         <div className={styles.titlePageStrip}>
-          An interactive ode to abstract games
+          A passion-powered collection of {list.length} abstract games
         </div>
       }
       body={
         <Fragment>
-          <div className={styles.titlePageSchpiel}>
-            Congratulations! You've found the AWESOMEST abstract board game site
-            there is! We've got {list.length} games and counting!
-          </div>
           <div className={styles.titlePageButtonContainer}>
-            <Button onClick={openModal}>Play a game</Button>
-            <Button
-              onClick={() => alert("It rules! What more do u need to know?")}
-            >
-              About the site
+            <Button big onClick={() => openModal("games")}>
+              Play a game!
             </Button>
+            <Button onClick={() => openModal("about")}>About</Button>
+            <Button onClick={() => openModal("news")}>News</Button>
           </div>
           <Modal
-            isOpen={isModalOpen}
+            isOpen={Boolean(modalContent)}
             onClose={closeModal}
-            title="Pick your poison!"
+            title={modalContent ? modalTitles[modalContent] : ""}
           >
-            {<GameList callback={navToGame} />}
+            {modal}
           </Modal>
         </Fragment>
       }

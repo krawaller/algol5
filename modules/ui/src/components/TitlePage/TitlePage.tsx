@@ -10,13 +10,15 @@ import React, {
 } from "react";
 import { GameList } from "../GameList";
 import { usePrefetchGames } from "./TitlePage.prefetch";
-import { PageActions } from "../../helpers";
+import { PageActions, useModal } from "../../helpers";
 import { GameId, list } from "../../../../games/dist/list";
 import { Modal } from "../Modal";
 import { Page } from "../Page";
 import base64TitlePic from "../../../base64/title.png.proxy";
 import styles from "./TitlePage.cssProxy";
 import { Button } from "../Button";
+import TitlePageNews from "./TitlePage.News";
+import TitlePageAbout from "./TitlePage.About";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -29,41 +31,47 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
     [actions]
   );
   usePrefetchGames(actions);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const [isGameModalOpen, openGameModal, closeGameModal] = useModal();
+  const [isNewsModalOpen, openNewsModal, closeNewsModal] = useModal();
+  const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
+
   return (
     <Page
       top={<img src={base64TitlePic} />}
       strip={
         <div className={styles.titlePageStrip}>
-          An interactive ode to abstract games
+          A passion-powered collection of {list.length} abstract games
         </div>
       }
       body={
         <Fragment>
-          <div className={styles.titlePageSchpiel}>
-            Congratulations! You've found the AWESOMEST abstract board game site
-            there is! We've got {list.length} games and counting!
-          </div>
           <div className={styles.titlePageButtonContainer}>
-            <Button onClick={openModal}>Play a game</Button>
-            <Button
-              onClick={() => alert("It rules! What more do u need to know?")}
-            >
-              About the site
+            <Button big disabled={isGameModalOpen} onClick={openGameModal}>
+              Play a game!
+            </Button>
+            <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
+              About
+            </Button>
+            <Button disabled={isNewsModalOpen} onClick={openNewsModal}>
+              News
             </Button>
           </div>
           <Modal
-            isOpen={isModalOpen}
-            onClose={closeModal}
-            title="Pick your poison!"
+            isOpen={isGameModalOpen}
+            onClose={closeGameModal}
+            title="Pick your poison"
           >
-            {<GameList callback={navToGame} />}
+            <GameList callback={navToGame} />
+          </Modal>
+          <Modal
+            isOpen={isAboutModalOpen}
+            onClose={closeAboutModal}
+            title="About the site"
+          >
+            <TitlePageAbout />
+          </Modal>
+          <Modal isOpen={isNewsModalOpen} onClose={closeNewsModal} title="News">
+            <TitlePageNews />
           </Modal>
         </Fragment>
       }

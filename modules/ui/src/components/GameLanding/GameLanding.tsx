@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useMemo,
   Fragment,
+  useCallback,
 } from "react";
 import styles from "./GameLanding.cssProxy";
 import {
@@ -15,6 +16,8 @@ import { getSessionList } from "../../../../local/src";
 import { Modal } from "../Modal";
 import { Button } from "../Button";
 import { LocalSession, LocalSessionActions } from "../LocalSession";
+import { useModal } from "../../helpers";
+import GameLandingAbout from "./GameLanding.About";
 
 export interface GameLandingActions {
   new: () => void;
@@ -33,29 +36,25 @@ type GameLandingProps = {
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   const { meta, actions, graphics, session } = props;
   const [sessions, setSessions] = useState<AlgolLocalBattle[]>([]);
-  const updateSessions = () => {
+  const updateSessions = useCallback(() => {
     setSessions(
       getSessionList(meta.id, false).concat(getSessionList(meta.id, true))
     );
-  };
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  }, [meta.id]);
+  const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal(
+    to => to && updateSessions()
+  );
+  const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
   useEffect(updateSessions, []);
-  const openModal = () => {
-    updateSessions();
-    setIsModalOpen(true);
-  };
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-  // hack actions to close modal when chosen
+  // hack actions to close game modal when chosen a game
   const localSessionActions = useMemo(
     (): LocalSessionActions => ({
       load: (session: AlgolLocalBattle) => {
-        closeModal();
+        closeSessionModal();
         actions.load(session);
       },
       new: () => {
-        closeModal();
+        closeSessionModal();
         actions.new();
       },
     }),
@@ -63,27 +62,42 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   );
   return (
     <Fragment>
-      <div className={styles.gameLanding}>
-        <Button big onClick={openModal}>
+      <div className={styles.gameLandingQuote}>{meta.tagline}</div>
+      <div className={styles.gameLandingButtons}>
+        <Button big onClick={openSessionModal}>
           Local
         </Button>
         <Button disabled="Online play will come in a future version!">
           Remote
         </Button>
-        <Button href={meta.source}>Go to rules (external)</Button>
+        <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
+          About
+        </Button>
+        <Button href={meta.source}>Rules (external)</Button>
         {session && (
           <Button onClick={actions.toBattleLobby}>
             Back to current session
           </Button>
         )}
-        <Modal isOpen={isModalOpen} onClose={closeModal} title="Play locally">
-          <LocalSession
-            actions={localSessionActions}
-            sessions={sessions}
-            graphics={graphics}
-          />
-        </Modal>
       </div>
+      <Modal
+        isOpen={isSessionModalOpen}
+        onClose={closeSessionModal}
+        title="Play locally"
+      >
+        <LocalSession
+          actions={localSessionActions}
+          sessions={sessions}
+          graphics={graphics}
+        />
+      </Modal>
+      <Modal
+        isOpen={isAboutModalOpen}
+        onClose={closeAboutModal}
+        title={"About " + meta.name}
+      >
+        <GameLandingAbout />
+      </Modal>
     </Fragment>
   );
 };

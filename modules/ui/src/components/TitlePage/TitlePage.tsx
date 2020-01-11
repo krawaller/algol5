@@ -10,7 +10,7 @@ import React, {
 } from "react";
 import { GameList } from "../GameList";
 import { usePrefetchGames } from "./TitlePage.prefetch";
-import { PageActions } from "../../helpers";
+import { PageActions, useModal } from "../../helpers";
 import { GameId, list } from "../../../../games/dist/list";
 import { Modal } from "../Modal";
 import { Page } from "../Page";
@@ -24,14 +24,6 @@ type TitlePageProps = {
   actions: PageActions;
 };
 
-type ModalContent = "games" | "news" | "about";
-
-const modalTitles: Record<ModalContent, string> = {
-  games: "Pick your poison!",
-  news: "News",
-  about: "About the site",
-};
-
 export const TitlePage: FunctionComponent<TitlePageProps> = props => {
   const { actions } = props;
   const navToGame = useCallback(
@@ -39,21 +31,10 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
     [actions]
   );
   usePrefetchGames(actions);
-  const [modalContent, setModalContent] = useState<false | ModalContent>(false);
-  const openModal = (content: ModalContent) => {
-    setModalContent(content);
-  };
-  const closeModal = () => {
-    setModalContent(false);
-  };
-  const modal =
-    modalContent === "games" ? (
-      <GameList callback={navToGame} />
-    ) : modalContent === "news" ? (
-      <TitlePageNews />
-    ) : modalContent === "about" ? (
-      <TitlePageAbout />
-    ) : null;
+  const [isGameModalOpen, openGameModal, closeGameModal] = useModal();
+  const [isNewsModalOpen, openNewsModal, closeNewsModal] = useModal();
+  const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
+
   return (
     <Page
       top={<img src={base64TitlePic} />}
@@ -65,18 +46,32 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
       body={
         <Fragment>
           <div className={styles.titlePageButtonContainer}>
-            <Button big onClick={() => openModal("games")}>
+            <Button big disabled={isGameModalOpen} onClick={openGameModal}>
               Play a game!
             </Button>
-            <Button onClick={() => openModal("about")}>About</Button>
-            <Button onClick={() => openModal("news")}>News</Button>
+            <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
+              About
+            </Button>
+            <Button disabled={isNewsModalOpen} onClick={openNewsModal}>
+              News
+            </Button>
           </div>
           <Modal
-            isOpen={Boolean(modalContent)}
-            onClose={closeModal}
-            title={modalContent ? modalTitles[modalContent] : ""}
+            isOpen={isGameModalOpen}
+            onClose={closeGameModal}
+            title="Pick your poison"
           >
-            {modal}
+            <GameList callback={navToGame} />
+          </Modal>
+          <Modal
+            isOpen={isAboutModalOpen}
+            onClose={closeAboutModal}
+            title="About the site"
+          >
+            <TitlePageAbout />
+          </Modal>
+          <Modal isOpen={isNewsModalOpen} onClose={closeNewsModal} title="News">
+            <TitlePageNews />
           </Modal>
         </Fragment>
       }

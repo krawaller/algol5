@@ -24,7 +24,8 @@ type BattleAction =
   | "play"
   | "new"
   | "load"
-  | "deleteCurrentSession";
+  | "deleteCurrentSession"
+  | "fork";
 type BattleCmnd = [BattleAction, any];
 
 type BattleHookState = {
@@ -104,6 +105,9 @@ export function useBattle(api: AlgolStaticGameAPI) {
           frame: 0,
           mode: "gamelobby",
         };
+      } else if (cmnd === "fork") {
+        alert("Not implemented yet!");
+        return state;
       } else {
         // action was mark, command or endTurn. passing it on to game API
         const battle = api.performAction(state.battle!, cmnd, instr[1]);
@@ -144,6 +148,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       toBattleLobby: () => dispatch(["battlelobby", null]),
       toBattleControls: () => dispatch(["play", null]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
+      fork: () => dispatch(["fork", null]),
     }),
     []
   );

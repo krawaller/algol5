@@ -11,6 +11,7 @@ interface BattleHistoryActions {
   toBattleControls: () => void;
   toBattleLobby: () => void;
   navTo: (path: string) => void;
+  fork: () => void;
 }
 
 type BattleHistoryProps = {
@@ -27,11 +28,22 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
     <div className={css.battleHistoryContainer}>
       <Stepper max={frameCount} current={frame} onChange={actions.toFrame} />
       <Content content={content} />
-      <br />
-      {!battleFinished && (
+      <div className={css.battleHistoryButtons}>
+        <Button
+          onClick={actions.fork}
+          disabled={
+            battleFinished && frame === frameCount
+              ? "Cannot fork a finished battle!"
+              : false
+          }
+        >
+          Fork from here
+        </Button>
+        {/* {!battleFinished && (
         <Button onClick={actions.toBattleControls}>Continue playing</Button>
       )}
-      <Button onClick={actions.toBattleLobby}>Session info</Button>
+      <Button onClick={actions.toBattleLobby}>Session info</Button> */}
+      </div>
     </div>
   );
 };

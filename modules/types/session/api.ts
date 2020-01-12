@@ -1,5 +1,5 @@
 import { AlgolBattleUI } from "./ui";
-import { AlgolBattle } from "./battle";
+import { AlgolBattle, AlgolHistoryMove } from "./battle";
 import { GameId } from "../../games/dist/list";
 import { AlgolBattleSave } from "./save";
 
@@ -21,6 +21,7 @@ export type AlgolStaticGameAPI = {
   gameId: GameId;
   newBattle: () => AlgolBattle;
   fromSave: (save: AlgolBattleSave) => AlgolBattle;
+  fromFrame: (frame: AlgolHistoryMove) => AlgolBattle;
   performAction: (
     battle: AlgolBattle,
     action: "endTurn" | "undo" | "mark" | "command",

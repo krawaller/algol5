@@ -8,6 +8,7 @@ export type AlgolLocalBattle = {
   player: 0 | 1 | 2;
   turn: number;
   endedBy?: string;
+  type: "normal" | "fork" | "imported";
   screenshot: {
     marks: string[];
     units: AlgolArmy;

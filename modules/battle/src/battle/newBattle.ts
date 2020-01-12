@@ -19,6 +19,7 @@ export function newBattle(game: AlgolGame): AlgolBattle {
     player: 1,
     history: [
       {
+        path: [],
         player: 0,
         turn: 0,
         description: { line: [{ text: "Initial setup" }] },

@@ -10,6 +10,7 @@ import {
   writeSession,
   session2battle,
   deleteSession,
+  forkSessionFromBattle,
 } from "../../../../local/src";
 
 type BattleAction =
@@ -24,7 +25,8 @@ type BattleAction =
   | "play"
   | "new"
   | "load"
-  | "deleteCurrentSession";
+  | "deleteCurrentSession"
+  | "fork";
 type BattleCmnd = [BattleAction, any];
 
 type BattleHookState = {
@@ -104,6 +106,16 @@ export function useBattle(api: AlgolStaticGameAPI) {
           frame: 0,
           mode: "gamelobby",
         };
+      } else if (cmnd === "fork") {
+        const historyFrame = state.battle!.history[state.frame];
+        const battle = api.fromFrame(historyFrame);
+        const session = forkSessionFromBattle(battle);
+        return {
+          battle,
+          session,
+          frame: 0,
+          mode: "battlelobby",
+        };
       } else {
         // action was mark, command or endTurn. passing it on to game API
         const battle = api.performAction(state.battle!, cmnd, instr[1]);
@@ -144,6 +156,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       toBattleLobby: () => dispatch(["battlelobby", null]),
       toBattleControls: () => dispatch(["play", null]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
+      fork: () => dispatch(["fork", null]),
     }),
     []
   );

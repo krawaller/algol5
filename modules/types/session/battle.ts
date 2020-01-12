@@ -27,11 +27,12 @@ type AlgolBattleState = {
   };
 };
 
-type AlgolHistoryMove = {
+export type AlgolHistoryMove = {
   player: 0 | 1 | 2;
   turn: number;
   description: AlgolContentAnon;
   board: AlgolBoardState;
+  path: number[];
 };
 
 export type AlgolBoardState = {

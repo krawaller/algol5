@@ -10,6 +10,7 @@ export function newSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
     // TODO - make ID generation more robust
     id: `L${randomLetter()}${randomLetter()}${randomLetter()}`,
     created: Date.now(),
+    type: "normal",
     player: 1,
     turn: 1,
     path: stringifyPath([], 0),

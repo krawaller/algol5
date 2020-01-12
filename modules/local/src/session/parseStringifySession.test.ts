@@ -15,6 +15,7 @@ const tests: Test[] = [
     desc: "basic",
     local: {
       created: 123,
+      type: "normal",
       id: "666",
       updated: 456,
       path: stringifyPath([1, 2, 3], 0),

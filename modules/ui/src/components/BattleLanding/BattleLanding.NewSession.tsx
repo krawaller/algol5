@@ -12,7 +12,7 @@ export const BattleLandingNewSession: FunctionComponent<BattleLandingNewSession>
     <Fragment>
       You're playing a forked {meta.name} session with id{" "}
       <code>{session.id}</code>. It was created from a point in time in another
-      session, from which it is now independent. (TODO: non-lame phrasing...)
+      session, from which it is now independent.
     </Fragment>
   ) : (
     <Fragment>

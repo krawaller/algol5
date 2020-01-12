@@ -9,24 +9,17 @@ type ButtonProps = {
   big?: boolean;
 };
 import css from "./Button.cssProxy";
-
-const noop = () => {};
+import { useButtonClickHandler } from "./Button.handler";
 
 export const Button: FunctionComponent<ButtonProps> = props => {
-  const { disabled, onClick = noop, children, href, big } = props;
-  const handler = useMemo(
-    () =>
-      href || disabled === true
-        ? noop
-        : typeof disabled === "string"
-        ? () => alert(disabled)
-        : (e: MouseEvent) => {
-            onClick(e);
-            preventDoubleTapZoom(e);
-          },
-    [href, disabled, onClick]
-  );
-
+  const {
+    disabled,
+    onClick = preventDoubleTapZoom,
+    children,
+    href,
+    big,
+  } = props;
+  const handler = useButtonClickHandler({ href, disabled, onClick });
   const button = (
     <button
       // Having a touch handler also makes :active work on iOS

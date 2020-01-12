@@ -32,6 +32,7 @@ type AlgolHistoryMove = {
   turn: number;
   description: AlgolContentAnon;
   board: AlgolBoardState;
+  path: number[];
 };
 
 export type AlgolBoardState = {

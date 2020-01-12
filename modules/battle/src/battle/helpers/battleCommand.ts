@@ -29,6 +29,7 @@ export function battleCommand(
         command,
       },
       entries: oldState.entries.concat({
+        path: battle.path,
         player: battle.player,
         turn: newStep.TURN,
         description: {

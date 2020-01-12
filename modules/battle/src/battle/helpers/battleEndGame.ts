@@ -35,6 +35,7 @@ export function battleEndGame(battle: AlgolBattle): AlgolBattle {
     gameEndedBy: currentStep.LINKS.endedBy,
     winner,
     history: battle.history.concat(battle.state.entries).concat({
+      path: battle.path,
       turn: currentStep.TURN,
       player: 0,
       board: finalBoard,

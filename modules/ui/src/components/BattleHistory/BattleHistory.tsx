@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { AlgolContentAnon } from "../../../../types";
+import { AlgolContentAnon, AlgolBattle } from "../../../../types";
 import { Content } from "../Content";
 import { Stepper } from "../Stepper";
 
@@ -17,13 +17,14 @@ interface BattleHistoryActions {
 type BattleHistoryProps = {
   content: AlgolContentAnon;
   frame: number;
-  frameCount: number;
   actions: BattleHistoryActions;
-  battleFinished: boolean;
+  battle: AlgolBattle;
 };
 
 export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
-  const { content, frame, frameCount, actions, battleFinished } = props;
+  const { content, frame, actions, battle } = props;
+  const frameCount = battle.history.length - 1;
+  const historyFrame = battle.history[frame];
   return (
     <div className={css.battleHistoryContainer}>
       <Stepper max={frameCount} current={frame} onChange={actions.toFrame} />
@@ -32,14 +33,15 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
         <Button
           onClick={actions.fork}
           disabled={
-            battleFinished && frame === frameCount
+            battle.gameEndedBy && frame === frameCount
               ? "Cannot fork a finished battle!"
-              : frame === 0
+              : frame === 0 ||
+                (historyFrame.turn === 1 && historyFrame.player === 1)
               ? "Cannot fork the beginning of a battle"
               : false
           }
         >
-          Fork from here
+          Fork from this turn
         </Button>
         {/* {!battleFinished && (
         <Button onClick={actions.toBattleControls}>Continue playing</Button>

@@ -54,8 +54,7 @@ export const GamePage = (props: GamePageProps) => {
         actions={actions}
         content={ui.instruction}
         frame={Math.max(0, frame)}
-        frameCount={frameCount}
-        battleFinished={Boolean(battle!.gameEndedBy)}
+        battle={battle!}
       />
     );
   } else if (mode === "battlelobby") {

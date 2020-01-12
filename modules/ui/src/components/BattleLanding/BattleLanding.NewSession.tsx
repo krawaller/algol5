@@ -8,7 +8,13 @@ type BattleLandingNewSession = {
 
 export const BattleLandingNewSession: FunctionComponent<BattleLandingNewSession> = props => {
   const { meta, session } = props;
-  return (
+  return session.type === "fork" ? (
+    <Fragment>
+      You're playing a forked {meta.name} session with id{" "}
+      <code>{session.id}</code>. It was created from a point in time in another
+      session, from which it is now independent. (TODO: non-lame phrasing...)
+    </Fragment>
+  ) : (
     <Fragment>
       You're playing a new {meta.name} session with id <code>{session.id}</code>
       . Once the first turn is completed you'll be able to view the session

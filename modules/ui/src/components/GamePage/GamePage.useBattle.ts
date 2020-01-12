@@ -10,6 +10,7 @@ import {
   writeSession,
   session2battle,
   deleteSession,
+  forkSessionFromBattle,
 } from "../../../../local/src";
 
 type BattleAction =
@@ -106,8 +107,15 @@ export function useBattle(api: AlgolStaticGameAPI) {
           mode: "gamelobby",
         };
       } else if (cmnd === "fork") {
-        alert("Not implemented yet!");
-        return state;
+        const historyFrame = state.battle!.history[state.frame];
+        const battle = api.fromFrame(historyFrame);
+        const session = forkSessionFromBattle(battle);
+        return {
+          battle,
+          session,
+          frame: 0,
+          mode: "battlelobby",
+        };
       } else {
         // action was mark, command or endTurn. passing it on to game API
         const battle = api.performAction(state.battle!, cmnd, instr[1]);

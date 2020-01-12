@@ -34,6 +34,8 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
           disabled={
             battleFinished && frame === frameCount
               ? "Cannot fork a finished battle!"
+              : frame === 0
+              ? "Cannot fork the beginning of a battle"
               : false
           }
         >

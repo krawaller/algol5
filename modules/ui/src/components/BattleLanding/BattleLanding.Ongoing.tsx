@@ -11,7 +11,8 @@ export const BattleLandingOngoing: FunctionComponent<BattleLandingOngoing> = pro
   return (
     <Fragment>
       <div>
-        Session ID <code>{session.id}</code>, created{" "}
+        Session ID <code>{session.id}</code>,{" "}
+        {session.type === "normal" ? "created" : "forked"}{" "}
         {new Date(session.created).toString().slice(0, 10)}, updated{" "}
         {new Date(session.updated!).toString().slice(0, 10)}
       </div>

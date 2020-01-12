@@ -65,13 +65,13 @@ export function useBattle(api: AlgolStaticGameAPI) {
               battle,
               session,
               frame: battle.history.length - 1,
-              mode: "history",
+              mode: "battlelobby", // could also go to "history" here
             }
           : {
               battle,
               session,
               frame: -1,
-              mode: "playing", // could also go to "battlelobby" here, but this means less clicks! :D
+              mode: "battlelobby", // could also go directly to "playing" here
             };
       } else if (cmnd === "gamelobby") {
         return {

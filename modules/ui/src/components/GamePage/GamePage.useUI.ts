@@ -35,7 +35,9 @@ export const useUI = (
         };
       }
       if (inBattleLobby) {
-        battleUi.board.marks = [];
+        if (!battle.gameEndedBy) {
+          battleUi.board.marks = [];
+        }
         battleUi.board.potentialMarks = [];
       }
       return battleUi;

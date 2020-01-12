@@ -8,6 +8,7 @@ import {
 import { stringifyBattleSave } from "../../../../local/src";
 
 import css from "./ExportBattle.cssProxy";
+import { Input } from "../Input";
 
 type ExportBattleProps = {
   meta: AlgolMeta<string, string>;
@@ -33,7 +34,7 @@ export const ExportBattle: FunctionComponent<ExportBattleProps> = props => {
         session in another browser!
       </div>
       <div className={css.exportBattleInputContainer}>
-        <input className={css.exportBattleInput} value={str} onChange={noop} />
+        <Input autoSelect value={str} onChange={noop} />
       </div>
     </div>
   );

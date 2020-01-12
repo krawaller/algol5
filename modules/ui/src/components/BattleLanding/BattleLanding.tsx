@@ -1,6 +1,5 @@
 import React, { FunctionComponent, Fragment, useState, useMemo } from "react";
 import { AlgolLocalBattle, AlgolMeta, AlgolBattle } from "../../../../types";
-import { SessionStatus } from "../SessionStatus";
 
 import css from "./BattleLanding.cssProxy";
 import { Button } from "../Button";
@@ -56,7 +55,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           }
           onClick={actions.toHistory}
         >
-          See history
+          History
         </Button>
         <Button
           disabled={
@@ -78,7 +77,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
             }
           }}
         >
-          Delete session
+          Delete
         </Button>
       </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">

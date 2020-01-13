@@ -14,10 +14,20 @@ type InputProps = {
   onEnter?: () => void;
   autoFocus?: boolean;
   autoSelect?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
 };
 
 export const Input: FunctionComponent<InputProps> = props => {
-  const { value, onChange, autoFocus, autoSelect, onEnter } = props;
+  const {
+    value,
+    onChange,
+    autoFocus,
+    autoSelect,
+    onEnter,
+    disabled,
+    placeholder,
+  } = props;
   const ref = useRef<HTMLInputElement>(null);
   const haveSelected = useRef<boolean>(false);
   useEffect(() => {
@@ -33,7 +43,9 @@ export const Input: FunctionComponent<InputProps> = props => {
   }, []);
   return (
     <input
+      placeholder={placeholder}
       ref={ref}
+      disabled={disabled}
       onKeyDown={handleEnter}
       onChange={onChange}
       value={value}

@@ -1,6 +1,7 @@
-import { SemaphorMeta } from './_types';
+import { SemaphorMeta } from "./_types";
 
 const semaphorMeta: SemaphorMeta = {
+  code: "F",
   id: "semaphor",
   name: "Semaphor",
   source: "http://www.di.fc.ul.pt/~jpn/gv/semaphor.htm",

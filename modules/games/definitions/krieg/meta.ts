@@ -1,6 +1,7 @@
-import { KriegMeta } from './_types';
+import { KriegMeta } from "./_types";
 
 const kriegMeta: KriegMeta = {
+  code: "Q",
   id: "krieg",
   name: "Krieg",
   source: "http://www.di.fc.ul.pt/~jpn/gv/krieg.htm",

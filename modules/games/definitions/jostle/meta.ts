@@ -1,6 +1,7 @@
-import { JostleMeta } from './_types';
+import { JostleMeta } from "./_types";
 
 const jostleMeta: JostleMeta = {
+  code: "s",
   id: "jostle",
   name: "Jostle",
   source: "http://www.marksteeregames.com/Jostle_Go_rules.pdf",

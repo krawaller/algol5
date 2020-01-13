@@ -1,6 +1,7 @@
 import { DaggersMeta } from "./_types";
 
 const daggersMeta: DaggersMeta = {
+  code: "P",
   id: "daggers",
   name: "Daggers",
   tags: [

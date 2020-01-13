@@ -1,6 +1,7 @@
-import { OrthokonMeta } from './_types';
+import { OrthokonMeta } from "./_types";
 
 const orthokonMeta: OrthokonMeta = {
+  code: "u",
   id: "orthokon",
   name: "Orthokon",
   source: "http://www.di.fc.ul.pt/~jpn/gv/orthokon.htm",

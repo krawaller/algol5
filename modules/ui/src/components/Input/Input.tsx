@@ -10,7 +10,8 @@ import css from "./Input.cssProxy";
 
 type InputProps = {
   value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onValue?: (str: string) => void;
   onEnter?: () => void;
   autoFocus?: boolean;
   autoSelect?: boolean;
@@ -22,6 +23,7 @@ export const Input: FunctionComponent<InputProps> = props => {
   const {
     value,
     onChange,
+    onValue,
     autoFocus,
     autoSelect,
     onEnter,
@@ -41,13 +43,23 @@ export const Input: FunctionComponent<InputProps> = props => {
       onEnter();
     }
   }, []);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (onChange) {
+        onChange(e);
+      } else if (onValue) {
+        onValue(e.target.value);
+      }
+    },
+    [onChange, onValue]
+  );
   return (
     <input
       placeholder={placeholder}
       ref={ref}
       disabled={disabled}
       onKeyDown={handleEnter}
-      onChange={onChange}
+      onChange={handleChange}
       value={value}
       type="text"
       className={css.input}

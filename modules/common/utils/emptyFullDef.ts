@@ -25,6 +25,7 @@ export const emptyFullDef: FullDefAnon = {
     tiles: {},
   },
   meta: {
+    code: "", // ADD UNIQUE!
     id: "amazons", // OVERRIDE!
     name: "",
     tagline: "",

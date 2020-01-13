@@ -1,6 +1,7 @@
-import { MurusgallicusMeta } from './_types';
+import { MurusgallicusMeta } from "./_types";
 
 const murusgallicusMeta: MurusgallicusMeta = {
+  code: "v",
   id: "murusgallicus",
   name: "Murus Gallicus",
   source:

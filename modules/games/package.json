@@ -1,7 +1,7 @@
 {
   "name": "algol-games",
   "scripts": {
-    "robot": "npm install; npm run export",
+    "robot": "npm install; npm run export; npm run checkCodes; npm run validate;",
     "export": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/export",
     "revise": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/revise",
     "retemplateAll": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/retemplateAll",
@@ -10,7 +10,8 @@
     "fake": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/fake",
     "watch": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/watch",
     "validate": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/validate",
-    "test": "cd ../..; npx jest modules/games/test"
+    "test": "cd ../..; npx jest modules/games/test",
+    "checkCodes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/checkCodes"
   },
   "devDependencies": {
     "watchr": "^4.1.0"

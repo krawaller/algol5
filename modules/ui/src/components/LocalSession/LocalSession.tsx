@@ -7,10 +7,12 @@ import {
 } from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
+import { ImportBattle } from "../ImportBattle";
 
 export interface LocalSessionActions {
   new: () => void;
   load: (session: AlgolLocalBattle) => void;
+  import: (str: string) => void;
 }
 
 type LocalSession = {
@@ -30,6 +32,8 @@ export const LocalSession: FunctionComponent<LocalSession> = props => {
       <Button disabled="AI is in the works, but remote play will be implemented first.">
         Versus AI
       </Button>
+      <div className={css.localSessionDivider} />
+      <ImportBattle actions={actions} />
       <div className={css.localSessionDivider} />
       <SessionList sessions={sessions} graphics={graphics} actions={actions} />
     </div>

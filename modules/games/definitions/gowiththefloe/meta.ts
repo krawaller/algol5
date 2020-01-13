@@ -1,6 +1,7 @@
 import { GowiththefloeMeta } from "./_types";
 
 const gowiththefloeMeta: GowiththefloeMeta = {
+  code: "N",
   id: "gowiththefloe",
   name: "Go with the floe",
   tags: [],

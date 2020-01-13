@@ -6,7 +6,7 @@ export const session2battle = (
   api: AlgolStaticGameAPI
 ) =>
   api.fromSave({
-    endedBy: session.endedBy,
+    ended: Boolean(session.endedBy),
     player: session.player,
     turn: session.turn,
     path: parsePath(session.path, 0),

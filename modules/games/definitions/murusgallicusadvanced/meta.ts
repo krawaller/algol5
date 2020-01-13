@@ -1,6 +1,7 @@
-import { MurusgallicusadvancedMeta } from './_types';
+import { MurusgallicusadvancedMeta } from "./_types";
 
 const murusgallicusadvancedMeta: MurusgallicusadvancedMeta = {
+  code: "U",
   id: "murusgallicusadvanced",
   name: "Murus Gallicus Advanced",
   source: "https://boardgamegeek.com/thread/844020/advanced-murus-gallicus",

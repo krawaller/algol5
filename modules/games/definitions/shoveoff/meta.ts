@@ -1,6 +1,7 @@
-import { ShoveoffMeta } from './_types';
+import { ShoveoffMeta } from "./_types";
 
 const shoveoffMeta: ShoveoffMeta = {
+  code: "b",
   id: "shoveoff",
   name: "Shove off",
   source: "https://boardgamegeek.com/boardgame/20522/shove",

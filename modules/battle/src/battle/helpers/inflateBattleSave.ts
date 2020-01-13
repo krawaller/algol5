@@ -48,8 +48,8 @@ const battleOptions = (battle: AlgolBattle) => {
 
 const done = (battle: AlgolBattle, save: AlgolBattleSave) =>
   battle.turnNumber > save.turn ||
-  (save.endedBy
-    ? battle.gameEndedBy === save.endedBy && battle.winner === save.player
+  (save.ended
+    ? !!battle.gameEndedBy && battle.winner === save.player
     : battle.turnNumber === save.turn && battle.player === save.player);
 
 const fastForward = (

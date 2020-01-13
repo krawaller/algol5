@@ -18,12 +18,14 @@ import { Button } from "../Button";
 import { LocalSession, LocalSessionActions } from "../LocalSession";
 import { useModal } from "../../helpers";
 import GameLandingAbout from "./GameLanding.About";
+import GameLandingRules from "./GameLanding.Rules";
 
 export interface GameLandingActions {
   new: () => void;
   load: (session: AlgolLocalBattle) => void;
   navTo: (path: string) => void;
   toBattleLobby: () => void;
+  import: (str: string) => void;
 }
 
 type GameLandingProps = {
@@ -42,8 +44,9 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
     );
   }, [meta.id]);
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal(
-    to => to && updateSessions()
+    to => to && updateSessions() // update session when session modal closes (since user made a choice)
   );
+  const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
   const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
   useEffect(updateSessions, []);
   // hack actions to close game modal when chosen a game
@@ -56,6 +59,10 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       new: () => {
         closeSessionModal();
         actions.new();
+      },
+      import: (str: string) => {
+        closeSessionModal();
+        actions.import(str);
       },
     }),
     []
@@ -73,7 +80,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         <Button disabled={isAboutModalOpen} onClick={openAboutModal}>
           About
         </Button>
-        <Button href={meta.source}>Rules (external)</Button>
+        <Button onClick={openRulesModal}>Rules</Button>
         {session && (
           <Button onClick={actions.toBattleLobby}>
             Back to current session
@@ -97,6 +104,13 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         title={"About " + meta.name}
       >
         <GameLandingAbout />
+      </Modal>
+      <Modal
+        isOpen={isRulesModalOpen}
+        onClose={closeRulesModal}
+        title={"How to play " + meta.name}
+      >
+        <GameLandingRules meta={meta} />
       </Modal>
     </Fragment>
   );

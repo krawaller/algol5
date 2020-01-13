@@ -18,7 +18,7 @@ const tests: InflationGameSuite[] = [
   [
     semaphor,
     {
-      win: { player: 1, turn: 2, path: [7, 4, 10], endedBy: "madeline" },
+      win: { player: 1, turn: 2, path: [7, 4, 10], ended: true },
     },
   ],
 ];

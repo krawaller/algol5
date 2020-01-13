@@ -1,6 +1,7 @@
-import { DescentMeta } from './_types';
+import { DescentMeta } from "./_types";
 
 const descentMeta: DescentMeta = {
+  code: "c",
   id: "descent",
   name: "Descent",
   source: "https://www.boardgamegeek.com/boardgame/150586/descent",

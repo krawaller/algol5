@@ -1,6 +1,7 @@
 import { TransetMeta } from "./_types";
 
 const transetMeta: TransetMeta = {
+  code: "z",
   id: "transet",
   name: "Transet",
   source: "http://sagme.blogspot.se/2013/05/transet.html",

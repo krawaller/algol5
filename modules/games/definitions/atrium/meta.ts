@@ -1,6 +1,7 @@
 import { AtriumMeta } from "./_types";
 
 const atriumMeta: AtriumMeta = {
+  code: "e",
   id: "atrium",
   name: "Atrium",
   source: "http://www.di.fc.ul.pt/~jpn/gv/atrium.htm",

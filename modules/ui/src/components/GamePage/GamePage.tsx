@@ -115,7 +115,7 @@ export const GamePage = (props: GamePageProps) => {
           marks={ui.board.marks}
           potentialMarks={ui.board.potentialMarks}
           anim={ui.board.anim}
-          active={mode === "playing"}
+          active={mode === "playing" && !battle!.gameEndedBy}
         />
       }
       strip={<Breadcrumbs crumbs={crumbs} actions={actions} />}

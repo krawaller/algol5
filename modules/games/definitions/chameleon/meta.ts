@@ -1,6 +1,7 @@
 import { ChameleonMeta } from "./_types";
 
 const chameleonMeta: ChameleonMeta = {
+  code: "E",
   id: "chameleon",
   performance: { canAlwaysEnd: {} },
   name: "Chameleon",

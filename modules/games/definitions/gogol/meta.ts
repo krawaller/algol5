@@ -1,6 +1,7 @@
-import { GogolMeta } from './_types';
+import { GogolMeta } from "./_types";
 
 const gogolMeta: GogolMeta = {
+  code: "Y",
   id: "gogol",
   name: "Gogol",
   source: "http://www.di.fc.ul.pt/~jpn/gv/gogol.htm",

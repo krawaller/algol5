@@ -1,6 +1,7 @@
-import { CoffeeMeta } from './_types';
+import { CoffeeMeta } from "./_types";
 
 const coffeeMeta: CoffeeMeta = {
+  code: "l",
   id: "coffee",
   name: "Coffee",
   source:

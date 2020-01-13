@@ -1,6 +1,7 @@
-import { KickrunMeta } from './_types';
+import { KickrunMeta } from "./_types";
 
 const kickrunMeta: KickrunMeta = {
+  code: "r",
   id: "kickrun",
   name: "Kick & run",
   source: "http://www.di.fc.ul.pt/~jpn/gv/kickrun.htm",

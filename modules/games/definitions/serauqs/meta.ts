@@ -1,6 +1,7 @@
 import { SerauqsMeta } from "./_types";
 
 const serauqsMeta: SerauqsMeta = {
+  code: "C",
   id: "serauqs",
   TODO: "maybe can move lines?",
   name: "Serauqs",

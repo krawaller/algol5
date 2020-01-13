@@ -7,6 +7,7 @@ export type AlgolMeta<Command extends string, Mark extends string> = {
   tagline: string;
   tags: string[];
   [otherMeta: string]: any;
+  code: string;
 };
 
 export type RuleObject = {

@@ -14,6 +14,7 @@ type InputButtonProps = {
   buttonDisabled?: boolean;
   autoFocus?: boolean;
   autoSelect?: boolean;
+  placeholder?: string;
 };
 
 export const InputButton: FunctionComponent<InputButtonProps> = props => {
@@ -28,6 +29,7 @@ export const InputButton: FunctionComponent<InputButtonProps> = props => {
     children,
     autoFocus,
     autoSelect,
+    placeholder,
   } = props;
   return (
     <div className={css.inputButton}>
@@ -39,6 +41,7 @@ export const InputButton: FunctionComponent<InputButtonProps> = props => {
         disabled={inputDisabled}
         autoFocus={autoFocus}
         autoSelect={autoSelect}
+        placeholder={placeholder}
       />
       <Button onClick={onClick} disabled={buttonDisabled}>
         {children}

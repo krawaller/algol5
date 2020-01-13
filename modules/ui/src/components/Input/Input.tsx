@@ -38,11 +38,14 @@ export const Input: FunctionComponent<InputProps> = props => {
       haveSelected.current = true;
     }
   }, [ref.current, haveSelected.current, autoSelect]);
-  const handleEnter = useCallback((e: KeyboardEvent) => {
-    if (e.key === "Enter" && onEnter) {
-      onEnter();
-    }
-  }, []);
+  const handleEnter = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Enter" && onEnter) {
+        onEnter();
+      }
+    },
+    [onEnter]
+  );
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       if (onChange) {

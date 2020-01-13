@@ -4,11 +4,11 @@ import { parsePath } from "./parsePath";
 export const parseBattleSave = (str: string): AlgolBattleSave => {
   const method = Number(str[0]);
   if (method === 0) {
-    const [, player, endedBy, turn, pathStr] = str.split("|");
+    const [, player, ended, turn, pathStr] = str.split("|");
     return {
       player: Number(player) as 0 | 1 | 2,
       turn: Number(turn),
-      endedBy,
+      ended: Boolean(ended),
       path: parsePath(pathStr, method),
     };
   }

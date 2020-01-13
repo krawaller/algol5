@@ -22,7 +22,7 @@ const noop = () => {};
 export const ExportBattle: FunctionComponent<ExportBattleProps> = props => {
   const { meta, battle, session } = props;
   const save: AlgolBattleSave = {
-    endedBy: session.endedBy,
+    ended: Boolean(session.endedBy),
     player: session.player,
     turn: session.turn,
     path: battle.path,

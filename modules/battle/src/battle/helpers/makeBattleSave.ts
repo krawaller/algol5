@@ -4,5 +4,5 @@ export const makeBattleSave = (battle: AlgolBattle): AlgolBattleSave => ({
   player: battle.gameEndedBy ? battle.winner! : battle.player,
   turn: battle.turnNumber,
   path: battle.path,
-  endedBy: battle.gameEndedBy,
+  ended: !!battle.gameEndedBy,
 });

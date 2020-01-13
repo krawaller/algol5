@@ -25,6 +25,7 @@ export interface GameLandingActions {
   load: (session: AlgolLocalBattle) => void;
   navTo: (path: string) => void;
   toBattleLobby: () => void;
+  import: (str: string) => void;
 }
 
 type GameLandingProps = {
@@ -58,6 +59,10 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       new: () => {
         closeSessionModal();
         actions.new();
+      },
+      import: (str: string) => {
+        closeSessionModal();
+        actions.import(str);
       },
     }),
     []

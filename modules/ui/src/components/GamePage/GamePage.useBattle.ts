@@ -157,6 +157,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       toBattleControls: () => dispatch(["play", null]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
       fork: () => dispatch(["fork", null]),
+      import: (str: string) => alert("Not implemented yet!"),
     }),
     []
   );

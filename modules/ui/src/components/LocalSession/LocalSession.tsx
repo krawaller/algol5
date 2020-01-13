@@ -11,6 +11,7 @@ import { SessionList } from "../SessionList";
 export interface LocalSessionActions {
   new: () => void;
   load: (session: AlgolLocalBattle) => void;
+  import: (str: string) => void;
 }
 
 type LocalSession = {

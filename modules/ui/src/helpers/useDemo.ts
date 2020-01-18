@@ -4,7 +4,14 @@ import { inflateDemo } from "../../../common";
 
 const FRAME_LENGTH_MS = 1500;
 
-export const useDemo = (demo: AlgolDemo, playing?: boolean) => {
+type UseDemoOptions = {
+  demo: AlgolDemo;
+  playing?: boolean;
+  restart?: boolean;
+};
+
+export const useDemo = (opts: UseDemoOptions) => {
+  const { demo, playing, restart } = opts;
   const [count, setCount] = useState(0);
   const [hydrDemo, setHydrDemo] = useState<AlgolHydratedDemo | null>(null);
   const timeout = useRef<null | ReturnType<typeof setTimeout>>();
@@ -22,6 +29,9 @@ export const useDemo = (demo: AlgolDemo, playing?: boolean) => {
       if (timeout.current) {
         clearTimeout(timeout.current);
         timeout.current = null;
+        if (restart) {
+          setCount(0);
+        }
       }
     } else if (hydrDemo) {
       if (!timeout.current) {
@@ -36,7 +46,7 @@ export const useDemo = (demo: AlgolDemo, playing?: boolean) => {
         clearTimeout(timeout.current);
       }
     };
-  }, [hydrDemo, playing, count]);
+  }, [hydrDemo, playing, count, restart]);
 
   const frame = hydrDemo ? count % hydrDemo.positions.length : 0;
 

@@ -11,7 +11,7 @@ type InputButtonProps = {
   onEnter?: () => void;
   onClick?: () => void;
   inputDisabled?: boolean;
-  buttonDisabled?: boolean;
+  buttonDisabled?: boolean | string;
   autoFocus?: boolean;
   autoSelect?: boolean;
   placeholder?: string;

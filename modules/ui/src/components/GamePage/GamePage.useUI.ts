@@ -18,7 +18,11 @@ export const useUI = (
   const inGameLobby = mode === "gamelobby";
   const inHistory = mode === "history";
   const inBattleLobby = mode === "battlelobby";
-  const { frame: demoFrame, hydrDemo } = useDemo(demo, inGameLobby);
+  const { frame: demoFrame, hydrDemo } = useDemo({
+    demo,
+    playing: inGameLobby,
+    restart: true,
+  });
   return useMemo(() => {
     if (inGameLobby) {
       return hydrDemo ? demo2ui(hydrDemo, demoFrame) : emptyBattleUI;

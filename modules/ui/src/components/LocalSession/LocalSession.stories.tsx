@@ -10,17 +10,20 @@ import dataURIs from "../../../../graphics/dist/svgDataURIs";
 storiesOf("LocalSession", module).add("LocalSession creator for game", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   const finished = boolean("Finished", false);
+  const hasPrevious = boolean("Previous battle", false);
   const sessions = getSessionList(gameId, finished);
   const actions: LocalSessionActions = {
     load: save => console.log("Save", save),
     new: () => console.log("New!"),
     import: (str: string) => console.log("Import", str),
+    continuePrevious: () => console.log("Previous!"),
   };
   return (
     <LocalSession
       actions={actions}
       sessions={sessions}
       graphics={dataURIs[gameId]}
+      hasPrevious={hasPrevious}
     />
   );
 });

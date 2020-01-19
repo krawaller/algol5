@@ -26,17 +26,18 @@ export interface GameLandingActions {
   navTo: (path: string) => void;
   toBattleLobby: () => void;
   import: (str: string) => void;
+  continuePrevious: () => void;
 }
 
 type GameLandingProps = {
   meta: AlgolMeta<string, string>;
   actions: GameLandingActions;
   graphics: AlgolGameGraphics;
-  session: null | AlgolLocalBattle;
+  hasPrevious: boolean;
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, actions, graphics, session } = props;
+  const { meta, actions, graphics, hasPrevious } = props;
   const [sessions, setSessions] = useState<AlgolLocalBattle[]>([]);
   const updateSessions = useCallback(() => {
     setSessions(
@@ -64,6 +65,10 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         closeSessionModal();
         actions.import(str);
       },
+      continuePrevious: () => {
+        closeSessionModal();
+        actions.continuePrevious();
+      },
     }),
     []
   );
@@ -81,11 +86,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           About
         </Button>
         <Button onClick={openRulesModal}>Rules</Button>
-        {session && (
-          <Button onClick={actions.toBattleLobby}>
-            Back to current session
-          </Button>
-        )}
       </div>
       <Modal
         isOpen={isSessionModalOpen}
@@ -96,6 +96,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           actions={localSessionActions}
           sessions={sessions}
           graphics={graphics}
+          hasPrevious={hasPrevious}
         />
       </Modal>
       <Modal

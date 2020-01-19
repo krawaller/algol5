@@ -32,7 +32,10 @@ type GamePageProps = {
 
 export const GamePage = (props: GamePageProps) => {
   const { api, graphics, meta, demo, actions: pageActions } = props;
-  const [{ battle, frame, mode, session }, battleActions] = useBattle(api);
+  const [
+    { battle, frame, mode, session, hasPrevious },
+    battleActions,
+  ] = useBattle(api);
   const actions = useMemo(() => ({ ...pageActions, ...battleActions }), [
     pageActions,
     battleActions,
@@ -100,7 +103,7 @@ export const GamePage = (props: GamePageProps) => {
         meta={meta}
         actions={actions}
         graphics={graphics}
-        session={session}
+        hasPrevious={hasPrevious}
       />
     );
   }

@@ -26,7 +26,8 @@ type BattleAction =
   | "new"
   | "load"
   | "deleteCurrentSession"
-  | "fork";
+  | "fork"
+  | "continuePrevious";
 type BattleCmnd = [BattleAction, any];
 
 type BattleHookState = {
@@ -34,6 +35,7 @@ type BattleHookState = {
   frame: number;
   session: AlgolLocalBattle | null;
   mode: "gamelobby" | "battlelobby" | "playing" | "history";
+  hasPrevious: boolean;
 };
 
 export function useBattle(api: AlgolStaticGameAPI) {
@@ -47,6 +49,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
           session: state.session,
           frame: arg,
           mode: "history",
+          hasPrevious: true,
         };
       } else if (cmnd === "new") {
         // user started a new local battle! initiate it
@@ -56,6 +59,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
           frame: -1,
           session: newSessionFromBattle(battle),
           mode: "battlelobby", // could also go to "playing" here for less clicks, but this way battlelanding is introduced
+          hasPrevious: true,
         };
       } else if (cmnd === "load") {
         // user chose a battle in the list of saved battles. we load it
@@ -68,12 +72,14 @@ export function useBattle(api: AlgolStaticGameAPI) {
               session,
               frame: battle.history.length - 1,
               mode: "battlelobby", // could also go to "history" here
+              hasPrevious: true,
             }
           : {
               battle,
               session,
               frame: -1,
               mode: "battlelobby", // could also go directly to "playing" here
+              hasPrevious: true,
             };
       } else if (cmnd === "gamelobby") {
         return {
@@ -105,6 +111,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
           session: null,
           frame: 0,
           mode: "gamelobby",
+          hasPrevious: false,
         };
       } else if (cmnd === "fork") {
         const historyFrame = state.battle!.history[state.frame];
@@ -114,6 +121,14 @@ export function useBattle(api: AlgolStaticGameAPI) {
           battle,
           session,
           frame: 0,
+          mode: "battlelobby",
+          hasPrevious: true,
+        };
+      } else if (cmnd === "continuePrevious") {
+        // TODO - right now this just continues battle in memory.
+        // But should read this from disc too!
+        return {
+          ...state,
           mode: "battlelobby",
         };
       } else {
@@ -130,6 +145,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
           battle,
           session,
           mode: "playing",
+          hasPrevious: true,
         };
       }
     },
@@ -140,6 +156,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       frame: -1,
       session: null,
       mode: "gamelobby",
+      hasPrevious: false, // TODO - read from disc
     }
   );
   const actions = useMemo(
@@ -158,6 +175,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
       fork: () => dispatch(["fork", null]),
       import: (str: string) => alert("Not implemented yet!"),
+      continuePrevious: () => dispatch(["continuePrevious", null]),
     }),
     []
   );

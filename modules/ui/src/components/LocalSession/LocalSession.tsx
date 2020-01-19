@@ -13,20 +13,29 @@ export interface LocalSessionActions {
   new: () => void;
   load: (session: AlgolLocalBattle) => void;
   import: (str: string) => void;
+  continuePrevious: () => void;
 }
 
-type LocalSession = {
+type LocalSessionProps = {
   sessions: AlgolLocalBattle[];
   graphics: AlgolGameGraphics;
   actions: LocalSessionActions;
+  hasPrevious: boolean;
 };
 
-export const LocalSession: FunctionComponent<LocalSession> = props => {
-  const { actions, sessions, graphics } = props;
+export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
+  const { actions, sessions, graphics, hasPrevious } = props;
   return (
     <div className={css.localSession}>
       <Button big onClick={actions.new}>
         New local hotseat session
+      </Button>
+      <div className={css.localSessionDivider} />
+      <Button
+        disabled={!hasPrevious && "No previous battle found for this game."}
+        onClick={actions.continuePrevious}
+      >
+        Load last battle
       </Button>
       <div className={css.localSessionDivider} />
       <Button disabled="AI is in the works, but remote play will be implemented first.">

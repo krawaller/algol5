@@ -1,5 +1,7 @@
 import { GameId } from "../../../games/dist/list";
-import { getSessionStorageKey } from "./getSessionStorageKey";
+import { getSessionStorageKey } from "./keys/getSessionStorageKey";
+import { getLatestSessionId } from "./getLatestSessionId";
+import { setLatestSessionId } from "./setLatestSessionId";
 
 export const deleteSession = (gameId: GameId, sessionId: string) => {
   const activeKey = getSessionStorageKey(gameId);
@@ -11,4 +13,8 @@ export const deleteSession = (gameId: GameId, sessionId: string) => {
 
   localStorage.setItem(activeKey, JSON.stringify(activeList));
   localStorage.setItem(finishedKey, JSON.stringify(finishedList));
+
+  if (getLatestSessionId(gameId) === sessionId) {
+    setLatestSessionId(gameId, null);
+  }
 };

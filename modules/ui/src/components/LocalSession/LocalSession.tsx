@@ -1,10 +1,6 @@
 import React, { FunctionComponent } from "react";
 import css from "./LocalSession.cssProxy";
-import {
-  AlgolLocalBattle,
-  AlgolGameGraphics,
-  AlgolMeta,
-} from "../../../../types";
+import { AlgolLocalBattle, AlgolGameGraphics } from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";

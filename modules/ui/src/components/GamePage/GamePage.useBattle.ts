@@ -11,6 +11,9 @@ import {
   session2battle,
   deleteSession,
   forkSessionFromBattle,
+  getLatestSessionId,
+  getSessionById,
+  setLatestSessionId,
 } from "../../../../local/src";
 
 type BattleAction =
@@ -39,116 +42,131 @@ type BattleHookState = {
 };
 
 export function useBattle(api: AlgolStaticGameAPI) {
-  const [state, dispatch] = useReducer(
-    (state: BattleHookState, instr: BattleCmnd): BattleHookState => {
-      const [cmnd, arg] = instr;
-      if (cmnd === "toFrame") {
-        // user chose a new frame in history view
-        return {
-          battle: state.battle,
-          session: state.session,
-          frame: arg,
-          mode: "history",
-          hasPrevious: true,
-        };
-      } else if (cmnd === "new") {
-        // user started a new local battle! initiate it
-        const battle = api.newBattle();
-        return {
-          battle,
-          frame: -1,
-          session: newSessionFromBattle(battle),
-          mode: "battlelobby", // could also go to "playing" here for less clicks, but this way battlelanding is introduced
-          hasPrevious: true,
-        };
-      } else if (cmnd === "load") {
-        // user chose a battle in the list of saved battles. we load it
-        // and set it as current battle.
-        const session: AlgolLocalBattle = arg;
-        const battle = session2battle(session, api);
-        return battle.gameEndedBy
-          ? {
-              battle,
-              session,
-              frame: battle.history.length - 1,
-              mode: "battlelobby", // could also go to "history" here
-              hasPrevious: true,
-            }
-          : {
-              battle,
-              session,
-              frame: -1,
-              mode: "battlelobby", // could also go directly to "playing" here
-              hasPrevious: true,
-            };
-      } else if (cmnd === "gamelobby") {
-        return {
-          ...state, // keep eventual battle and session, will allow for "continue" button
-          mode: "gamelobby",
-        };
-      } else if (cmnd === "history") {
-        const frame =
-          typeof arg === "number" ? arg : state.battle!.history.length - 1;
-        return {
-          ...state,
-          frame,
-          mode: "history",
-        };
-      } else if (cmnd === "battlelobby") {
-        return {
-          ...state,
-          mode: "battlelobby",
-        };
-      } else if (cmnd === "play") {
-        return {
-          ...state,
-          mode: "playing",
-        };
-      } else if (cmnd === "deleteCurrentSession") {
-        deleteSession(api.gameId, state.session!.id);
-        return {
-          battle: null,
-          session: null,
-          frame: 0,
-          mode: "gamelobby",
-          hasPrevious: false,
-        };
-      } else if (cmnd === "fork") {
-        const historyFrame = state.battle!.history[state.frame];
-        const battle = api.fromFrame(historyFrame);
-        const session = forkSessionFromBattle(battle);
-        return {
-          battle,
-          session,
-          frame: 0,
-          mode: "battlelobby",
-          hasPrevious: true,
-        };
-      } else if (cmnd === "continuePrevious") {
-        // TODO - right now this just continues battle in memory.
-        // But should read this from disc too!
+  const reducer = (
+    state: BattleHookState,
+    instr: BattleCmnd
+  ): BattleHookState => {
+    const [cmnd, arg] = instr;
+    if (cmnd === "toFrame") {
+      // user chose a new frame in history view
+      return {
+        battle: state.battle,
+        session: state.session,
+        frame: arg,
+        mode: "history",
+        hasPrevious: true,
+      };
+    } else if (cmnd === "new") {
+      // user started a new local battle! initiate it
+      const battle = api.newBattle();
+      const session = newSessionFromBattle(battle);
+      setLatestSessionId(api.gameId, session.id);
+      return {
+        battle,
+        frame: -1,
+        session,
+        mode: "battlelobby", // could also go to "playing" here for less clicks, but this way battlelanding is introduced
+        hasPrevious: true,
+      };
+    } else if (cmnd === "load") {
+      // user chose a battle in the list of saved battles. we load it
+      // and set it as current battle.
+      const session: AlgolLocalBattle = arg;
+      setLatestSessionId(api.gameId, session.id);
+      const battle = session2battle(session, api);
+      return battle.gameEndedBy
+        ? {
+            battle,
+            session,
+            frame: battle.history.length - 1,
+            mode: "battlelobby", // could also go to "history" here
+            hasPrevious: true,
+          }
+        : {
+            battle,
+            session,
+            frame: -1,
+            mode: "battlelobby", // could also go directly to "playing" here
+            hasPrevious: true,
+          };
+    } else if (cmnd === "gamelobby") {
+      return {
+        ...state, // keep eventual battle and session, will allow for "continue" button
+        mode: "gamelobby",
+      };
+    } else if (cmnd === "history") {
+      const frame =
+        typeof arg === "number" ? arg : state.battle!.history.length - 1;
+      return {
+        ...state,
+        frame,
+        mode: "history",
+      };
+    } else if (cmnd === "battlelobby") {
+      return {
+        ...state,
+        mode: "battlelobby",
+      };
+    } else if (cmnd === "play") {
+      return {
+        ...state,
+        mode: "playing",
+      };
+    } else if (cmnd === "deleteCurrentSession") {
+      deleteSession(api.gameId, state.session!.id);
+      return {
+        battle: null,
+        session: null,
+        frame: 0,
+        mode: "gamelobby",
+        hasPrevious: false,
+      };
+    } else if (cmnd === "fork") {
+      const historyFrame = state.battle!.history[state.frame];
+      const battle = api.fromFrame(historyFrame);
+      const session = forkSessionFromBattle(battle);
+      setLatestSessionId(api.gameId, session.id);
+      return {
+        battle,
+        session,
+        frame: 0,
+        mode: "battlelobby",
+        hasPrevious: true,
+      };
+    } else if (cmnd === "continuePrevious") {
+      if (state.battle) {
+        // still have a battle in memory, so just go back to that
         return {
           ...state,
           mode: "battlelobby",
         };
       } else {
-        // action was mark, command or endTurn. passing it on to game API
-        const battle = api.performAction(state.battle!, cmnd, instr[1]);
-        const frame = battle.gameEndedBy ? battle.history.length - 1 : -1;
-        let session = state.session;
-        if (cmnd === "endTurn") {
-          session = updateSession(battle, state.session!);
-          writeSession(api.gameId, session);
-        }
-        return {
-          frame,
-          battle,
-          session,
-          mode: "playing",
-          hasPrevious: true,
-        };
+        // load the last session from disk
+        // (we know we have one since otherwise this cmnd wouldn't be available)
+        const lastSessionId = getLatestSessionId(api.gameId)!;
+        const session = getSessionById(api.gameId, lastSessionId);
+        return reducer(state, ["load", session]);
       }
-    },
+    } else {
+      // action was mark, command or endTurn. passing it on to game API
+      const battle = api.performAction(state.battle!, cmnd, instr[1]);
+      const frame = battle.gameEndedBy ? battle.history.length - 1 : -1;
+      let session = state.session;
+      if (cmnd === "endTurn") {
+        session = updateSession(battle, state.session!);
+        writeSession(api.gameId, session);
+      }
+      return {
+        frame,
+        battle,
+        session,
+        mode: "playing",
+        hasPrevious: true,
+      };
+    }
+  };
+  const [state, dispatch] = useReducer(
+    reducer,
     // initial state is in the game lobby with nothing in memory.
     // (at which point useUi renders a demo)
     {
@@ -156,7 +174,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       frame: -1,
       session: null,
       mode: "gamelobby",
-      hasPrevious: false, // TODO - read from disc
+      hasPrevious: !!getLatestSessionId(api.gameId),
     }
   );
   const actions = useMemo(

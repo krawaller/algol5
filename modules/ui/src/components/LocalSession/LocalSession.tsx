@@ -1,10 +1,6 @@
 import React, { FunctionComponent } from "react";
 import css from "./LocalSession.cssProxy";
-import {
-  AlgolLocalBattle,
-  AlgolGameGraphics,
-  AlgolMeta,
-} from "../../../../types";
+import { AlgolLocalBattle, AlgolGameGraphics } from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
@@ -35,7 +31,7 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
         disabled={!hasPrevious && "No previous battle found for this game."}
         onClick={actions.continuePrevious}
       >
-        Load last battle
+        Load previous battle
       </Button>
       <div className={css.localSessionDivider} />
       <Button disabled="AI is in the works, but remote play will be implemented first.">

@@ -1,8 +1,9 @@
 import { GameId } from "../../../games/dist/list";
+import { getSessionStorageKey } from "./getSessionStorageKey";
 
 export const deleteSession = (gameId: GameId, sessionId: string) => {
-  const activeKey = `Algol_${gameId}_active`;
-  const finishedKey = `Algol_${gameId}_finished`;
+  const activeKey = getSessionStorageKey(gameId);
+  const finishedKey = getSessionStorageKey(gameId, true);
   const activeList = JSON.parse(localStorage.getItem(activeKey) || "{}");
   const finishedList = JSON.parse(localStorage.getItem(finishedKey) || "{}");
   delete activeList[sessionId];

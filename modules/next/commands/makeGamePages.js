@@ -12,9 +12,8 @@ for (const gameId of list) {
 import React, { Fragment } from "react";
 
 import Head from "next/head";
-import ${gameId} from "../../../../logic/dist/indiv/${gameId}";
+import api from "../../../../battle/dist/apis/${gameId}/static";
 import { GamePage } from "../../../../ui/src/components/GamePage";
-import { makeStaticGameAPI } from "../../../../battle/src";
 import { pageActions } from "../../../helpers";
 import graphics from "../../../../graphics/dist/svgDataURIs/${gameId}";
 import meta from "../../../../games/dist/meta/${gameId}";
@@ -27,7 +26,7 @@ export const Game = () => {
         <title>{meta.name}</title>
       </Head>
       <GamePage
-        api={makeStaticGameAPI(${gameId})}
+        api={api}
         graphics={graphics}
         meta={meta}
         demo={demo}

@@ -2,12 +2,7 @@
  * Used in the Next app as the main Index page for the app
  */
 
-import React, {
-  FunctionComponent,
-  useCallback,
-  Fragment,
-  useState,
-} from "react";
+import React, { FunctionComponent, useCallback, Fragment } from "react";
 import { GameList } from "../GameList";
 import { usePrefetchGames } from "./TitlePage.prefetch";
 import { PageActions, useModal } from "../../helpers";

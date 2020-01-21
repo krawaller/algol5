@@ -35,9 +35,11 @@ while (toCheck.length) {
     harvested += `/* ------- Harvested from ${name} -------- */\n\n` + content;
     const classes = [
       ...new Set(
-        content.match(/([^0-9A-Za-z]|^)\.[A-Za-z_-][A-Za-z0-9_-]*/g) || []
+        (
+          content.match(/([^0-9A-Za-z]|^)\.[A-Za-z_-][A-Za-z0-9_-]*/g) || []
+        ).map(cls => cls.replace("\n", "").replace(/^.*\./, ""))
       ),
-    ].map(cls => cls.replace("\n", "").replace(/^.*\./, ""));
+    ];
     for (const cls of classes) {
       if (seenClasses[cls]) {
         throw new Error(`Duplicate class ${cls} in ${name}`);

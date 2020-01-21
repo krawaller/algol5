@@ -16,7 +16,7 @@ const tests: Test[] = [
       type: "normal",
       id: "666",
       updated: 456,
-      path: stringifyPath([1, 2, 3], 0),
+      path: [1, 2, 3],
       player: 1,
       turn: 7,
       screenshot: {

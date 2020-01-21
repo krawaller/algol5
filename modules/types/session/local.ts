@@ -4,7 +4,7 @@ export type AlgolLocalBattle = {
   id: string;
   created: number;
   updated?: number;
-  path: string;
+  path: number[];
   player: 0 | 1 | 2;
   turn: number;
   endedBy?: string;

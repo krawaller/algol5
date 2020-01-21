@@ -1,5 +1,4 @@
 import { AlgolBattle, AlgolLocalBattle } from "../../../types";
-import { stringifyPath } from "../../../encoding/path";
 import { newSessionId } from "./newSessionId";
 
 export function forkSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
@@ -9,7 +8,7 @@ export function forkSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
     type: "fork",
     player: battle.player,
     turn: battle.turnNumber,
-    path: stringifyPath(battle.path, 0),
+    path: battle.path,
     screenshot: {
       marks: [],
       units: battle.state.board.units,

@@ -1,4 +1,4 @@
-import { AlgolLocalBattle } from "../../../../types";
+import { AlgolLocalBattle } from "../../types";
 
 export const parseSession = (str: string, id: string): AlgolLocalBattle => {
   const method = Number(str[0]);

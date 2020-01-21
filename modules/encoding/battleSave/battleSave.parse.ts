@@ -1,5 +1,5 @@
-import { AlgolBattleSave } from "../../../../types";
-import { parsePath } from "./parsePath";
+import { AlgolBattleSave } from "../../types";
+import { parsePath } from "../path/path.parse";
 
 export const parseBattleSave = (str: string): AlgolBattleSave => {
   const method = Number(str[0]);

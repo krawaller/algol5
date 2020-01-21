@@ -5,10 +5,9 @@ import {
   AlgolLocalBattle,
   AlgolMeta,
 } from "../../../../types";
-import { stringifyBattleSave } from "../../../../local/src";
+import { stringifyBattleSave } from "../../../../encoding/battleSave";
 
 import css from "./ExportBattle.cssProxy";
-import { Input } from "../Input";
 import { InputButton } from "../InputButton";
 
 type ExportBattleProps = {

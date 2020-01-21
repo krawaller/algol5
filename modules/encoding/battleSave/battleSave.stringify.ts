@@ -1,5 +1,8 @@
-import { AlgolBattleSave } from "../../../../types";
-import { stringifyPath } from "./stringifyPath";
+import { AlgolBattleSave } from "../../types";
+import { stringifyPath } from "../path/path.stringify";
+
+const endedPlrCodes = ["X", "f", "G"];
+const ongoingPlrCodes = ["g", "r", "M"];
 
 export const stringifyBattleSave = (save: AlgolBattleSave, method: number) => {
   const { path, player, turn, ended } = save;

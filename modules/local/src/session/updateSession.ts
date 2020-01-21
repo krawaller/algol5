@@ -1,5 +1,5 @@
 import { AlgolBattle, AlgolLocalBattle } from "../../../types";
-import { stringifyPath } from "./stringifySession/stringifyPath";
+import { stringifyPath } from "../../../encoding/path";
 
 export function updateSession(
   battle: AlgolBattle,

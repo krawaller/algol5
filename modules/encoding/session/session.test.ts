@@ -1,8 +1,6 @@
-import { AlgolLocalBattle } from "../../../types";
+import { AlgolLocalBattle } from "../../types";
 import { parseSession, stringifySession } from ".";
-import { parseBattleSave } from "./parseSession";
-import { stringifyBattleSave } from "./stringifySession";
-import { stringifyPath } from "./stringifySession/stringifyPath";
+import { stringifyPath } from "../path";
 
 type Test = {
   desc: string;

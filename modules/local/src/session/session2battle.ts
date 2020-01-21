@@ -1,5 +1,5 @@
 import { AlgolLocalBattle, AlgolStaticGameAPI } from "../../../types";
-import { parsePath } from "./parseSession/parsePath";
+import { parsePath } from "../../../encoding/path";
 
 export const session2battle = (
   session: AlgolLocalBattle,

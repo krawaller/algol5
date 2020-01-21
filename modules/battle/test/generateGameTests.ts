@@ -17,7 +17,8 @@ async function setup() {
         `
 import { runGameScripts, runGameScriptsStatic } from "../runGameScripts";
 import ${name}Def from "../../../games/dist/games/${name}";
-import {statefulAPI, staticAPI} from "../../dist/apis/${name}";
+import statefulAPI from "../../dist/apis/${name}/stateful";
+import staticAPI from "../../dist/apis/${name}/static";
 
 runGameScripts("${name}", statefulAPI, ${name}Def.scripts);
 runGameScriptsStatic("${name}", staticAPI, ${name}Def.scripts);

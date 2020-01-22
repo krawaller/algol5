@@ -25,5 +25,5 @@ export const parseBattleSave = (str: string): AlgolBattleSave => {
       path: parsePath(encodedPath, method),
     };
   }
-  throw new Error("Unknown parse method");
+  throw new Error(`Unknown parse method "${method}"`);
 };

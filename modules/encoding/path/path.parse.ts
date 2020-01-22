@@ -1,5 +1,5 @@
-import { AlgolBattleSave } from "../../../../types";
-import { pathReplacements } from "../helpers";
+import { AlgolBattleSave } from "../../types";
+import { pathReplacements } from "./path.replacements";
 
 export const parsePath = (
   str: string,

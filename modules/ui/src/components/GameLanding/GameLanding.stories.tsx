@@ -15,7 +15,10 @@ storiesOf("GameLanding", module).add("init game", () => {
     load: save => console.log("loading save", save),
     navTo: path => console.log("navigating to", path),
     toBattleLobby: () => console.log("to battle lobby"),
-    import: (str: string) => console.log("Import", str),
+    import: (str: string) => {
+      console.log("Import", str);
+      return true;
+    },
     continuePrevious: () => console.log("previous"),
   };
   return (

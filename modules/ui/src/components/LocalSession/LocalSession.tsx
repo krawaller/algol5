@@ -31,7 +31,7 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
         disabled={!hasPrevious && "No previous battle found for this game."}
         onClick={actions.continuePrevious}
       >
-        Load previous battle
+        Load last battle
       </Button>
       <div className={css.localSessionDivider} />
       <Button disabled="AI is in the works, but remote play will be implemented first.">

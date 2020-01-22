@@ -3,6 +3,7 @@ import {
   AlgolStaticGameAPI,
   AlgolBattle,
   AlgolLocalBattle,
+  AlgolBattleSave,
 } from "../../../../types";
 import {
   newSessionFromBattle,
@@ -15,6 +16,8 @@ import {
   getSessionById,
   setLatestSessionId,
 } from "../../../../local/src";
+import { parseSeed } from "../../../../encoding/seed";
+import { importSessionFromBattle } from "../../../../local/src/session/importSessionFromBattle";
 
 type BattleAction =
   | "mark"
@@ -30,6 +33,7 @@ type BattleAction =
   | "load"
   | "deleteCurrentSession"
   | "fork"
+  | "import"
   | "continuePrevious";
 type BattleCmnd = [BattleAction, any];
 
@@ -126,6 +130,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       const battle = api.fromFrame(historyFrame);
       const session = forkSessionFromBattle(battle);
       setLatestSessionId(api.gameId, session.id);
+      writeSession(api.gameId, session);
       return {
         battle,
         session,
@@ -147,6 +152,19 @@ export function useBattle(api: AlgolStaticGameAPI) {
         const session = getSessionById(api.gameId, lastSessionId);
         return reducer(state, ["load", session]);
       }
+    } else if (cmnd === "import") {
+      const save: AlgolBattleSave = arg;
+      const battle = api.fromSave(save);
+      const session = importSessionFromBattle(battle);
+      setLatestSessionId(api.gameId, session.id);
+      writeSession(api.gameId, session);
+      return {
+        frame: -1,
+        battle,
+        session,
+        mode: "battlelobby",
+        hasPrevious: true,
+      };
     } else {
       // action was mark, command or endTurn. passing it on to game API
       const battle = api.performAction(state.battle!, cmnd, instr[1]);
@@ -192,7 +210,16 @@ export function useBattle(api: AlgolStaticGameAPI) {
       toBattleControls: () => dispatch(["play", null]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
       fork: () => dispatch(["fork", null]),
-      import: (str: string) => alert("Not implemented yet!"),
+      import: (str: string) => {
+        const save = parseSeed(str, api.gameId);
+        // TODO - proper error handling via given action
+        if (save instanceof Error) {
+          alert(save.message);
+          return false;
+        }
+        dispatch(["import", save]);
+        return true;
+      },
       continuePrevious: () => dispatch(["continuePrevious", null]),
     }),
     []

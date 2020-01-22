@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, Fragment } from "react";
 import { AlgolLocalBattle } from "../../../../types";
 import css from "./SessionList.cssProxy";
 import { SessionStatus } from "../SessionStatus";
@@ -17,8 +17,12 @@ export const SessionInfo: FunctionComponent<SessionInfoProps> = ({
       {session.type === "fork" ? "Forked" : "Created"}:{" "}
       {new Date(session.created).toString().slice(0, 10)}
       <br />
-      Updated: {new Date(session.updated!).toString().slice(0, 10)}
-      <br />
+      {session.updated && (
+        <Fragment>
+          Updated: {new Date(session.updated!).toString().slice(0, 10)}
+          <br />
+        </Fragment>
+      )}
       <SessionStatus session={session} />
     </div>
   );

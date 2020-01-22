@@ -5,11 +5,14 @@ import {
   AlgolLocalBattle,
   AlgolMeta,
 } from "../../../../types";
-import { stringifyBattleSave } from "../../../../local/src";
+
+// TODO - just showing import for now, can't make clipboard copying to work reliably :/
 
 import css from "./ExportBattle.cssProxy";
-import { Input } from "../Input";
 import { InputButton } from "../InputButton";
+import { stringifySeed } from "../../../../encoding/seed/seed.stringify";
+import { clipboardCopy } from "../../helpers";
+import { Input } from "../Input";
 
 type ExportBattleProps = {
   meta: AlgolMeta<string, string>;
@@ -27,25 +30,27 @@ export const ExportBattle: FunctionComponent<ExportBattleProps> = props => {
     turn: session.turn,
     path: battle.path,
   };
-  const str = stringifyBattleSave(save, 0);
+  const str = stringifySeed(save, meta.id, 0);
   const handleClick = useCallback(() => {
-    alert("Copied to clipboard (or would have been if this was implemented)!");
-  }, []);
+    clipboardCopy(str);
+    alert("Copied to clipboard!");
+  }, [str]);
   return (
     <div>
       <div className={css.exportBattleInstruction}>
-        Save the string below to (soon) be able to import this {meta.name}{" "}
-        session in another browser!
+        Save the string below somewhere, and then you can import in later in a
+        different browser!
       </div>
       <div className={css.exportBattleInputContainer}>
-        <InputButton
+        <Input value={str} onChange={noop} />
+        {/* <InputButton
           autoSelect
           value={str}
           onChange={noop}
           onClick={handleClick}
         >
           Copy
-        </InputButton>
+        </InputButton> */}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import { AlgolBattleSave } from "../../../../types";
-import { pathReplacements } from "../helpers/pathReplacements";
+import { AlgolBattleSave } from "../../types";
+import { pathReplacements } from "./path.replacements";
 
 export const stringifyPath = (
   path: AlgolBattleSave["path"],

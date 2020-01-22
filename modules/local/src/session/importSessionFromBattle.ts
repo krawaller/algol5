@@ -1,16 +1,19 @@
 import { AlgolBattle, AlgolLocalBattle } from "../../../types";
 import { newSessionId } from "./newSessionId";
 
-export function forkSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
+export function importSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
   return {
     id: newSessionId(),
     created: Date.now(),
-    type: "fork",
+    type: "imported",
     player: battle.player,
     turn: battle.turnNumber,
     path: battle.path,
+    ...(battle.gameEndedBy && {
+      endedBy: battle.gameEndedBy,
+    }),
     screenshot: {
-      marks: [],
+      marks: battle.gameEndedBy ? battle.state.board.marks : [],
       units: battle.state.board.units,
     },
   };

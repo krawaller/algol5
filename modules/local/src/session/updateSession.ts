@@ -1,5 +1,4 @@
 import { AlgolBattle, AlgolLocalBattle } from "../../../types";
-import { stringifyPath } from "./stringifySession/stringifyPath";
 
 export function updateSession(
   battle: AlgolBattle,
@@ -15,6 +14,6 @@ export function updateSession(
     endedBy: battle.gameEndedBy,
     turn: battle.turnNumber,
     player: battle.gameEndedBy ? battle.winner! : battle.player,
-    path: stringifyPath(battle.path, 0),
+    path: battle.path,
   };
 }

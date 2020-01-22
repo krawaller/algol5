@@ -1,5 +1,5 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolLocalBattle, AlgolMeta } from "../../../../types";
+import { AlgolLocalBattle } from "../../../../types";
 import { SessionStatus } from "../SessionStatus";
 
 type BattleLandingOngoing = {
@@ -12,9 +12,17 @@ export const BattleLandingOngoing: FunctionComponent<BattleLandingOngoing> = pro
     <Fragment>
       <div>
         Session ID <code>{session.id}</code>,{" "}
-        {session.type === "normal" ? "created" : "forked"}{" "}
-        {new Date(session.created).toString().slice(0, 10)}, updated{" "}
-        {new Date(session.updated!).toString().slice(0, 10)}
+        {session.type === "normal"
+          ? "created"
+          : session.type === "fork"
+          ? "forked"
+          : "imported"}{" "}
+        {new Date(session.created).toString().slice(0, 10)}
+        {session.updated && (
+          <Fragment>
+            , updated {new Date(session.updated!).toString().slice(0, 10)}
+          </Fragment>
+        )}
       </div>
       <div>
         Status: <SessionStatus session={session} />

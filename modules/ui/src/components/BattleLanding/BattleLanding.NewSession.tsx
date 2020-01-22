@@ -14,6 +14,11 @@ export const BattleLandingNewSession: FunctionComponent<BattleLandingNewSession>
       <code>{session.id}</code>. It was created from a point in time in another
       session, from which it is now independent.
     </Fragment>
+  ) : session.type === "imported" ? (
+    <Fragment>
+      This is an imported {meta.name} session, given the new id{" "}
+      <code>{session.id}</code>.
+    </Fragment>
   ) : (
     <Fragment>
       You're playing a new {meta.name} session with id <code>{session.id}</code>

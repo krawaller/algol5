@@ -1,6 +1,6 @@
 import { AlgolLocalBattle } from "../../../types";
 import { GameId } from "../../../games/dist/list";
-import { parseSession } from "../session";
+import { parseSession } from "../../../encoding/session";
 import { getSessionStorageKey } from "./keys/getSessionStorageKey";
 
 export const getSessionList = (

@@ -1,8 +1,5 @@
-import { AlgolLocalBattle } from "../../../types";
+import { AlgolLocalBattle } from "../../types";
 import { parseSession, stringifySession } from ".";
-import { parseBattleSave } from "./parseSession";
-import { stringifyBattleSave } from "./stringifySession";
-import { stringifyPath } from "./stringifySession/stringifyPath";
 
 type Test = {
   desc: string;
@@ -14,11 +11,11 @@ const tests: Test[] = [
   {
     desc: "basic",
     local: {
-      created: 123,
+      created: 1579671300000,
       type: "normal",
       id: "666",
-      updated: 456,
-      path: stringifyPath([1, 2, 3], 0),
+      updated: 1579666300000,
+      path: [1, 2, 3],
       player: 1,
       turn: 7,
       screenshot: {

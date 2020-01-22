@@ -34,7 +34,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
   return (
     <Fragment>
       <div className={css.battleLandingContent}>
-        {session.updated ? (
+        {session.updated || session.type === "imported" ? (
           <BattleLandingOngoing session={session} />
         ) : (
           <BattleLandingNewSession meta={meta} session={session} />

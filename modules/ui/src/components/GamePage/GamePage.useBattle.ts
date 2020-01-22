@@ -130,6 +130,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       const battle = api.fromFrame(historyFrame);
       const session = forkSessionFromBattle(battle);
       setLatestSessionId(api.gameId, session.id);
+      writeSession(api.gameId, session);
       return {
         battle,
         session,
@@ -155,6 +156,8 @@ export function useBattle(api: AlgolStaticGameAPI) {
       const save: AlgolBattleSave = arg;
       const battle = api.fromSave(save);
       const session = importSessionFromBattle(battle);
+      setLatestSessionId(api.gameId, session.id);
+      writeSession(api.gameId, session);
       return {
         frame: -1,
         battle,

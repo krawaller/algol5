@@ -18,8 +18,10 @@ export const parseSeed = (str: string, expectedGameId: GameId) => {
     return parseBattleSave(str.slice(1));
   } else {
     return new Error(
-      `This seed is not for ${id2name[expectedGameId]}, it is for ${
-        codeId ? id2name[codeId as GameId] : "an unknown game"
+      `This seed is not valid for ${id2name[expectedGameId]}. ${
+        codeId
+          ? `It might be for ${id2name[codeId as GameId]}!`
+          : "Unable to determine which game it is for."
       }`
     );
   }

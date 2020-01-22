@@ -4,6 +4,7 @@ export * from "./gamedef";
 export * from "./session";
 export * from "./generated";
 export * from "./suite";
+export * from "./screenshot";
 export * from "./_args";
 
 export type AlgolGameGraphics = {

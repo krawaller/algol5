@@ -1,4 +1,4 @@
-import { AlgolArmy } from "../generated";
+import { AlgolScreenshot } from "../screenshot";
 
 export type AlgolLocalBattle = {
   id: string;
@@ -9,8 +9,5 @@ export type AlgolLocalBattle = {
   turn: number;
   endedBy?: string;
   type: "normal" | "fork" | "imported";
-  screenshot: {
-    marks: string[];
-    units: AlgolArmy;
-  };
+  screenshot: AlgolScreenshot;
 };

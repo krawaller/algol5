@@ -11,10 +11,10 @@ const tests: Test[] = [
   {
     desc: "basic",
     local: {
-      created: 123,
+      created: 1579671300000,
       type: "normal",
       id: "666",
-      updated: 456,
+      updated: 1579666300000,
       path: [1, 2, 3],
       player: 1,
       turn: 7,

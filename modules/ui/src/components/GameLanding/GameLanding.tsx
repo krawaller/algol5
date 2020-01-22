@@ -25,7 +25,7 @@ export interface GameLandingActions {
   load: (session: AlgolLocalBattle) => void;
   navTo: (path: string) => void;
   toBattleLobby: () => void;
-  import: (str: string) => void;
+  import: (str: string) => boolean;
   continuePrevious: () => void;
 }
 
@@ -62,8 +62,8 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         actions.new();
       },
       import: (str: string) => {
-        closeSessionModal();
-        actions.import(str);
+        // only close modal if import succeeded
+        actions.import(str) && closeSessionModal();
       },
       continuePrevious: () => {
         closeSessionModal();

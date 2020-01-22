@@ -5,10 +5,10 @@ import {
   AlgolLocalBattle,
   AlgolMeta,
 } from "../../../../types";
-import { stringifyBattleSave } from "../../../../encoding/battleSave";
 
 import css from "./ExportBattle.cssProxy";
 import { InputButton } from "../InputButton";
+import { stringifySeed } from "../../../../encoding/seed/seed.stringify";
 
 type ExportBattleProps = {
   meta: AlgolMeta<string, string>;
@@ -26,7 +26,7 @@ export const ExportBattle: FunctionComponent<ExportBattleProps> = props => {
     turn: session.turn,
     path: battle.path,
   };
-  const str = stringifyBattleSave(save, 0);
+  const str = stringifySeed(save, meta.id, 0);
   const handleClick = useCallback(() => {
     alert("Copied to clipboard (or would have been if this was implemented)!");
   }, []);

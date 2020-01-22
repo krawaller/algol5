@@ -12,7 +12,11 @@ export const BattleLandingOngoing: FunctionComponent<BattleLandingOngoing> = pro
     <Fragment>
       <div>
         Session ID <code>{session.id}</code>,{" "}
-        {session.type === "normal" ? "created" : "forked"}{" "}
+        {session.type === "normal"
+          ? "created"
+          : session.type === "fork"
+          ? "forked"
+          : "imported"}{" "}
         {new Date(session.created).toString().slice(0, 10)}, updated{" "}
         {new Date(session.updated!).toString().slice(0, 10)}
       </div>

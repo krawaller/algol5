@@ -6,6 +6,7 @@ export * from "./generated";
 export * from "./suite";
 export * from "./screenshot";
 export * from "./_args";
+export * from "./error";
 
 export type AlgolGameGraphics = {
   height: number;

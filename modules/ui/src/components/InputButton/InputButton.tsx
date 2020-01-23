@@ -10,6 +10,7 @@ type InputButtonProps = {
   onValue?: (str: string) => void;
   onEnter?: () => void;
   onClick?: () => void;
+  onError?: (err: Error) => void;
   inputDisabled?: boolean;
   buttonDisabled?: boolean | string;
   autoFocus?: boolean;
@@ -24,6 +25,7 @@ export const InputButton: FunctionComponent<InputButtonProps> = props => {
     onValue,
     onEnter,
     onClick,
+    onError,
     inputDisabled,
     buttonDisabled,
     children,
@@ -43,7 +45,7 @@ export const InputButton: FunctionComponent<InputButtonProps> = props => {
         autoSelect={autoSelect}
         placeholder={placeholder}
       />
-      <Button onClick={onClick} disabled={buttonDisabled}>
+      <Button onClick={onClick} disabled={buttonDisabled} onError={onError}>
         {children}
       </Button>
     </div>

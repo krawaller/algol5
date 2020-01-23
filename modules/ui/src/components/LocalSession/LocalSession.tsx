@@ -1,6 +1,10 @@
 import React, { FunctionComponent } from "react";
 import css from "./LocalSession.cssProxy";
-import { AlgolLocalBattle, AlgolGameGraphics } from "../../../../types";
+import {
+  AlgolLocalBattle,
+  AlgolGameGraphics,
+  AlgolError,
+} from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
@@ -10,6 +14,7 @@ export interface LocalSessionActions {
   load: (session: AlgolLocalBattle) => void;
   import: (str: string) => void;
   continuePrevious: () => void;
+  error: (err: AlgolError) => void;
 }
 
 type LocalSessionProps = {

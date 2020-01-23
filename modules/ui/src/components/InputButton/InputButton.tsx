@@ -40,6 +40,7 @@ export const InputButton: FunctionComponent<InputButtonProps> = props => {
         onChange={onChange}
         onValue={onValue}
         onEnter={onEnter}
+        onError={onError}
         disabled={inputDisabled}
         autoFocus={autoFocus}
         autoSelect={autoSelect}

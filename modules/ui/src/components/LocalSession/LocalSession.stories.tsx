@@ -15,8 +15,9 @@ storiesOf("LocalSession", module).add("LocalSession creator for game", () => {
   const actions: LocalSessionActions = {
     load: save => console.log("Save", save),
     new: () => console.log("New!"),
-    import: (str: string) => console.log("Import", str),
+    import: str => console.log("Import", str),
     continuePrevious: () => console.log("Previous!"),
+    error: err => console.log("Error", err),
   };
   return (
     <LocalSession

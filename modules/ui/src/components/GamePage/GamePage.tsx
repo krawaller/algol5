@@ -2,12 +2,13 @@
  * Used in the Next app as a "homepage" for the individual games.
  */
 
-import React, { useMemo, ReactNode } from "react";
+import React, { useMemo, ReactNode, useState } from "react";
 import {
   AlgolStaticGameAPI,
   AlgolGameGraphics,
   AlgolMeta,
   AlgolDemo,
+  AlgolError,
 } from "../../../../types";
 
 import { Board } from "../Board";
@@ -36,10 +37,11 @@ export const GamePage = (props: GamePageProps) => {
     { battle, frame, mode, session, hasPrevious },
     battleActions,
   ] = useBattle(api);
-  const actions = useMemo(() => ({ ...pageActions, ...battleActions }), [
-    pageActions,
-    battleActions,
-  ]);
+  const [error, setError] = useState<AlgolError>();
+  const actions = useMemo(
+    () => ({ ...pageActions, ...battleActions, error: setError }),
+    [pageActions, battleActions]
+  );
   const ui = useUI(api, battle, frame, demo, mode);
   const frameCount = battle ? battle.history.length - 1 : 0;
 
@@ -110,6 +112,7 @@ export const GamePage = (props: GamePageProps) => {
 
   return (
     <Page
+      error={error}
       top={
         <Board
           callback={actions.mark}

@@ -1,13 +1,15 @@
 import { useMemo, MouseEvent } from "react";
 import { preventDoubleTapZoom } from "./Button.preventDoubleTap";
+import { AlgolError } from "../../../../types";
 
 export const useButtonClickHandler = (opts: {
   href?: string;
   disabled?: boolean | string;
   onClick: (e: MouseEvent) => void;
-  onError?: (err: Error) => void;
+  onError?: (err: AlgolError) => void;
+  controlId?: string;
 }) => {
-  const { href, disabled, onClick, onError } = opts;
+  const { href, disabled, onClick, onError, controlId } = opts;
   return useMemo(() => {
     if (href || disabled === true) {
       return preventDoubleTapZoom;
@@ -21,7 +23,9 @@ export const useButtonClickHandler = (opts: {
         try {
           onClick(e);
         } catch (err) {
-          onError(err);
+          const decError: AlgolError = err;
+          decError.controlId = controlId; // watermark error with triggering control
+          onError(decError);
         }
       };
     }
@@ -29,5 +33,5 @@ export const useButtonClickHandler = (opts: {
       preventDoubleTapZoom(e);
       onClick(e);
     };
-  }, [href, disabled, onClick, onError]);
+  }, [href, disabled, onClick, onError, controlId]);
 };

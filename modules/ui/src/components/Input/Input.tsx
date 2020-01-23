@@ -19,6 +19,7 @@ type InputProps = {
   autoSelect?: boolean;
   disabled?: boolean;
   placeholder?: string;
+  controlId?: string;
 };
 
 export const Input: FunctionComponent<InputProps> = props => {
@@ -32,6 +33,7 @@ export const Input: FunctionComponent<InputProps> = props => {
     onError,
     disabled,
     placeholder,
+    controlId,
   } = props;
   const ref = useRef<HTMLInputElement>(null);
   const haveSelected = useRef<boolean>(false);
@@ -48,14 +50,16 @@ export const Input: FunctionComponent<InputProps> = props => {
           try {
             onEnter();
           } catch (e) {
-            onError(e);
+            const decoratedError: AlgolError = e;
+            decoratedError.controlId = controlId;
+            onError(decoratedError);
           }
         } else {
           onEnter();
         }
       }
     },
-    [onEnter, onError]
+    [onEnter, onError, controlId]
   );
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

@@ -3,24 +3,24 @@ const AlgolErrorSymbol = Symbol("AlgolError");
 export type AlgolError = Error & {
   [AlgolErrorSymbol]?: true;
   meta?: any;
-  id?: string;
+  errorId?: string;
   stack?: string;
+  controlId?: string;
 };
 
 export const isAlgolError = (err: AlgolError) => err[AlgolErrorSymbol] === true;
 
 type DecorateErrorOpts = {
-  id: string;
+  errorId: string;
   message: string;
   meta?: any;
-  err: AlgolError;
+  err: Error;
 };
 
 export const decorateError = (opts: DecorateErrorOpts) => {
-  const { id, message, meta, err } = opts;
-  const decoratedError: AlgolError = new Error();
-  decoratedError.stack = err.stack;
-  decoratedError.id = id;
+  const { errorId: id, message, meta, err } = opts;
+  const decoratedError: AlgolError = err;
+  decoratedError.errorId = id;
   decoratedError.message = message;
   decoratedError.meta = meta;
   decoratedError[AlgolErrorSymbol] = true;
@@ -28,7 +28,7 @@ export const decorateError = (opts: DecorateErrorOpts) => {
 };
 
 type NewAlgolErrorOpts = {
-  id: string;
+  errorId: string;
   message: string;
   meta?: any;
 };

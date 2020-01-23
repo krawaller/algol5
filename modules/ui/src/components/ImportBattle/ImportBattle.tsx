@@ -23,6 +23,7 @@ export const ImportBattle: FunctionComponent<ImportBattleProps> = props => {
       onValue={setField}
       buttonDisabled={!field ? "Enter a savestring!" : false}
       placeholder="Enter savestring"
+      controlId="import-seed-input-button"
     >
       Import
     </InputButton>

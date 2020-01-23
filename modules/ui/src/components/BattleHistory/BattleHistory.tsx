@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { AlgolContentAnon, AlgolBattle } from "../../../../types";
+import { AlgolContentAnon, AlgolBattle, AlgolError } from "../../../../types";
 import { Content } from "../Content";
 import { Stepper } from "../Stepper";
 
@@ -12,6 +12,7 @@ interface BattleHistoryActions {
   toBattleLobby: () => void;
   navTo: (path: string) => void;
   fork: () => void;
+  error: (err: AlgolError) => void;
 }
 
 type BattleHistoryProps = {
@@ -32,6 +33,8 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
       <div className={css.battleHistoryButtons}>
         <Button
           onClick={actions.fork}
+          onError={actions.error}
+          controlId="fork-history-frame-button"
           disabled={
             battle.gameEndedBy && frame === frameCount
               ? "Cannot fork a finished battle!"

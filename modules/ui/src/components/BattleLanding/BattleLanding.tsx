@@ -1,5 +1,10 @@
 import React, { FunctionComponent, Fragment, useState, useMemo } from "react";
-import { AlgolLocalBattle, AlgolMeta, AlgolBattle } from "../../../../types";
+import {
+  AlgolLocalBattle,
+  AlgolMeta,
+  AlgolBattle,
+  AlgolError,
+} from "../../../../types";
 
 import css from "./BattleLanding.cssProxy";
 import { Button } from "../Button";
@@ -12,6 +17,7 @@ interface BattleLandingActions {
   toHistory: () => void;
   toBattleControls: () => void;
   deleteCurrentSession: () => void;
+  error: (err: AlgolError) => void;
 }
 
 type BattleLandingProps = {
@@ -68,6 +74,8 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           Export
         </Button>
         <Button
+          onError={actions.error}
+          controlId="delete-session-button"
           onClick={() => {
             if (
               confirm(

@@ -16,10 +16,4 @@ describe("the seed encoding", () => {
     const decoded = parseSeed(encoded, gameId);
     expect(decoded).toEqual(save);
   });
-  it("returns error for wrong game", () => {
-    const encoded = stringifySeed(save, gameId);
-    const decoded = parseSeed(encoded, "jostle");
-    expect(decoded).toBeInstanceOf(Error);
-    expect((decoded as Error).message).toContain("Jostle");
-  });
 });

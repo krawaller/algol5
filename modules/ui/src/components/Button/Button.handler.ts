@@ -5,18 +5,29 @@ export const useButtonClickHandler = (opts: {
   href?: string;
   disabled?: boolean | string;
   onClick: (e: MouseEvent) => void;
+  onError?: (err: Error) => void;
 }) => {
-  const { href, disabled, onClick } = opts;
-  return useMemo(
-    () =>
-      href || disabled === true
-        ? preventDoubleTapZoom
-        : typeof disabled === "string"
-        ? () => alert(disabled)
-        : (e: MouseEvent) => {
-            onClick(e);
-            preventDoubleTapZoom(e);
-          },
-    [href, disabled, onClick]
-  );
+  const { href, disabled, onClick, onError } = opts;
+  return useMemo(() => {
+    if (href || disabled === true) {
+      return preventDoubleTapZoom;
+    }
+    if (typeof disabled === "string") {
+      return () => alert(disabled); // TODO - replace with Toaster action?
+    }
+    if (onError) {
+      return (e: MouseEvent) => {
+        preventDoubleTapZoom(e);
+        try {
+          onClick(e);
+        } catch (err) {
+          onError(err);
+        }
+      };
+    }
+    return (e: MouseEvent) => {
+      preventDoubleTapZoom(e);
+      onClick(e);
+    };
+  }, [href, disabled, onClick, onError]);
 };

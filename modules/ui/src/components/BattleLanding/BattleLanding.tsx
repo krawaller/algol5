@@ -31,6 +31,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
     }),
     [setModal]
   );
+  const stillFirstTurn = battle.turnNumber === 1 && battle.player === 1;
   return (
     <Fragment>
       <div className={css.battleLandingContent}>
@@ -50,7 +51,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         </Button>
         <Button
           disabled={
-            !session.updated &&
+            stillFirstTurn &&
             "You can see the history after the first turn is finished!"
           }
           onClick={actions.toHistory}
@@ -59,7 +60,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         </Button>
         <Button
           disabled={
-            !session.updated &&
+            stillFirstTurn &&
             "You can export the session after the first turn is finished!"
           }
           onClick={openModal}

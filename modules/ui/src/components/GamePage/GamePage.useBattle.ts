@@ -4,6 +4,7 @@ import {
   AlgolBattle,
   AlgolLocalBattle,
   AlgolBattleSave,
+  decorateError,
 } from "../../../../types";
 import {
   newSessionFromBattle,
@@ -212,13 +213,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       fork: () => dispatch(["fork", null]),
       import: (str: string) => {
         const save = parseSeed(str, api.gameId);
-        // TODO - proper error handling via given action
-        if (save instanceof Error) {
-          alert(save.message);
-          return false;
-        }
         dispatch(["import", save]);
-        return true;
       },
       continuePrevious: () => dispatch(["continuePrevious", null]),
     }),

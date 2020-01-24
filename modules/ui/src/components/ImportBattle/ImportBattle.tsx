@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useState } from "react";
 import { InputButton } from "../InputButton";
+import { AlgolError } from "../../../../types";
 
-interface ImportBattleActions {
+export interface ImportBattleActions {
   import: (str: string) => void;
+  error: (err: AlgolError) => void;
 }
 
 type ImportBattleProps = {
@@ -16,10 +18,12 @@ export const ImportBattle: FunctionComponent<ImportBattleProps> = props => {
     <InputButton
       onClick={() => actions.import(field)}
       onEnter={() => actions.import(field)}
+      onError={actions.error}
       value={field}
       onValue={setField}
       buttonDisabled={!field ? "Enter a savestring!" : false}
       placeholder="Enter savestring"
+      controlId="import-seed-input-button"
     >
       Import
     </InputButton>

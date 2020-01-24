@@ -14,8 +14,12 @@ export const SessionInfo: FunctionComponent<SessionInfoProps> = ({
     <div className={css.sessionListInfo}>
       ID: {session.id}
       <br />
-      {session.type === "fork" ? "Forked" : "Created"}:{" "}
-      {new Date(session.created).toString().slice(0, 10)}
+      {session.type === "fork"
+        ? "Forked"
+        : session.type === "imported"
+        ? "Imported"
+        : "Created"}
+      : {new Date(session.created).toString().slice(0, 10)}
       <br />
       {session.updated && (
         <Fragment>

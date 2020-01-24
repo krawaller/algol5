@@ -2,6 +2,7 @@ import { GameId } from "../../games/dist/list";
 import id2code from "../../games/dist/id2code";
 import id2name from "../../games/dist/id2name";
 import { parseBattleSave } from "../battleSave";
+import { decorateError, NewAlgolError } from "../../types";
 
 export const parseSeed = (str: string, expectedGameId: GameId) => {
   const expectedCode = Object.entries(id2code)
@@ -15,14 +16,26 @@ export const parseSeed = (str: string, expectedGameId: GameId) => {
     .pop();
 
   if (code === expectedCode) {
-    return parseBattleSave(str.slice(1));
+    try {
+      const battle = parseBattleSave(str.slice(1));
+      return battle;
+    } catch (err) {
+      throw decorateError({
+        err,
+        errorId: "import-save-parse-failed",
+        message: "Failed to parse the import seed!",
+        meta: { seed: str, gameId: expectedGameId },
+      });
+    }
   } else {
-    return new Error(
-      `This seed is not valid for ${id2name[expectedGameId]}. ${
+    throw NewAlgolError({
+      errorId: "import-wrong-seed-code",
+      message: `This seed is not valid for ${id2name[expectedGameId]}. ${
         codeId
           ? `It might be for ${id2name[codeId as GameId]}!`
           : "Unable to determine which game it is for."
-      }`
-    );
+      }`,
+      meta: { seed: str, gameId: expectedGameId },
+    });
   }
 };

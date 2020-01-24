@@ -7,16 +7,19 @@ import React, {
   useCallback,
 } from "react";
 import css from "./Input.cssProxy";
+import { AlgolError } from "../../../../types";
 
 type InputProps = {
   value: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onValue?: (str: string) => void;
   onEnter?: () => void;
+  onError?: (err: AlgolError) => void;
   autoFocus?: boolean;
   autoSelect?: boolean;
   disabled?: boolean;
   placeholder?: string;
+  controlId?: string;
 };
 
 export const Input: FunctionComponent<InputProps> = props => {
@@ -27,8 +30,10 @@ export const Input: FunctionComponent<InputProps> = props => {
     autoFocus,
     autoSelect,
     onEnter,
+    onError,
     disabled,
     placeholder,
+    controlId,
   } = props;
   const ref = useRef<HTMLInputElement>(null);
   const haveSelected = useRef<boolean>(false);
@@ -41,10 +46,20 @@ export const Input: FunctionComponent<InputProps> = props => {
   const handleEnter = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Enter" && onEnter) {
-        onEnter();
+        if (onError) {
+          try {
+            onEnter();
+          } catch (e) {
+            const decoratedError: AlgolError = e;
+            decoratedError.controlId = controlId;
+            onError(decoratedError);
+          }
+        } else {
+          onEnter();
+        }
       }
     },
-    [onEnter]
+    [onEnter, onError, controlId]
   );
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

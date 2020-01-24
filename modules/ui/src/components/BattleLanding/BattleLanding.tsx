@@ -1,5 +1,10 @@
 import React, { FunctionComponent, Fragment, useState, useMemo } from "react";
-import { AlgolLocalBattle, AlgolMeta, AlgolBattle } from "../../../../types";
+import {
+  AlgolLocalBattle,
+  AlgolMeta,
+  AlgolBattle,
+  AlgolError,
+} from "../../../../types";
 
 import css from "./BattleLanding.cssProxy";
 import { Button } from "../Button";
@@ -12,6 +17,7 @@ interface BattleLandingActions {
   toHistory: () => void;
   toBattleControls: () => void;
   deleteCurrentSession: () => void;
+  error: (err: AlgolError) => void;
 }
 
 type BattleLandingProps = {
@@ -31,6 +37,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
     }),
     [setModal]
   );
+  const stillFirstTurn = battle.turnNumber === 1 && battle.player === 1;
   return (
     <Fragment>
       <div className={css.battleLandingContent}>
@@ -50,7 +57,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         </Button>
         <Button
           disabled={
-            !session.updated &&
+            stillFirstTurn &&
             "You can see the history after the first turn is finished!"
           }
           onClick={actions.toHistory}
@@ -59,7 +66,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         </Button>
         <Button
           disabled={
-            !session.updated &&
+            stillFirstTurn &&
             "You can export the session after the first turn is finished!"
           }
           onClick={openModal}
@@ -67,6 +74,8 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           Export
         </Button>
         <Button
+          onError={actions.error}
+          controlId="delete-session-button"
           onClick={() => {
             if (
               confirm(

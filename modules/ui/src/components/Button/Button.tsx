@@ -1,4 +1,4 @@
-import React, { FunctionComponent, MouseEvent, useMemo } from "react";
+import React, { FunctionComponent, MouseEvent } from "react";
 import classNames from "classnames";
 import { preventDoubleTapZoom } from "./Button.preventDoubleTap";
 
@@ -7,7 +7,10 @@ type ButtonProps = {
   onClick?: (e: MouseEvent) => void;
   href?: string;
   big?: boolean;
+  onError?: (err: Error) => void;
+  controlId?: string;
 };
+
 import css from "./Button.cssProxy";
 import { useButtonClickHandler } from "./Button.handler";
 
@@ -18,8 +21,16 @@ export const Button: FunctionComponent<ButtonProps> = props => {
     children,
     href,
     big,
+    onError,
+    controlId,
   } = props;
-  const handler = useButtonClickHandler({ href, disabled, onClick });
+  const handler = useButtonClickHandler({
+    href,
+    disabled,
+    onClick,
+    onError,
+    controlId,
+  });
   const button = (
     <button
       // Having a touch handler also makes :active work on iOS

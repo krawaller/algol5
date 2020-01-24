@@ -10,11 +10,13 @@ type InputButtonProps = {
   onValue?: (str: string) => void;
   onEnter?: () => void;
   onClick?: () => void;
+  onError?: (err: Error) => void;
   inputDisabled?: boolean;
   buttonDisabled?: boolean | string;
   autoFocus?: boolean;
   autoSelect?: boolean;
   placeholder?: string;
+  controlId?: string;
 };
 
 export const InputButton: FunctionComponent<InputButtonProps> = props => {
@@ -24,12 +26,14 @@ export const InputButton: FunctionComponent<InputButtonProps> = props => {
     onValue,
     onEnter,
     onClick,
+    onError,
     inputDisabled,
     buttonDisabled,
     children,
     autoFocus,
     autoSelect,
     placeholder,
+    controlId,
   } = props;
   return (
     <div className={css.inputButton}>
@@ -38,12 +42,19 @@ export const InputButton: FunctionComponent<InputButtonProps> = props => {
         onChange={onChange}
         onValue={onValue}
         onEnter={onEnter}
+        onError={onError}
+        controlId={controlId}
         disabled={inputDisabled}
         autoFocus={autoFocus}
         autoSelect={autoSelect}
         placeholder={placeholder}
       />
-      <Button onClick={onClick} disabled={buttonDisabled}>
+      <Button
+        onClick={onClick}
+        disabled={buttonDisabled}
+        controlId={controlId}
+        onError={onError}
+      >
         {children}
       </Button>
     </div>

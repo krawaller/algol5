@@ -11,6 +11,7 @@ import {
   AlgolMeta,
   AlgolLocalBattle,
   AlgolGameGraphics,
+  AlgolError,
 } from "../../../../types";
 import { getSessionList } from "../../../../local/src";
 import { Modal } from "../Modal";
@@ -25,8 +26,9 @@ export interface GameLandingActions {
   load: (session: AlgolLocalBattle) => void;
   navTo: (path: string) => void;
   toBattleLobby: () => void;
-  import: (str: string) => boolean;
+  import: (str: string) => void;
   continuePrevious: () => void;
+  error: (err: AlgolError) => void;
 }
 
 type GameLandingProps = {
@@ -54,21 +56,22 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   const localSessionActions = useMemo(
     (): LocalSessionActions => ({
       load: (session: AlgolLocalBattle) => {
-        closeSessionModal();
         actions.load(session);
+        closeSessionModal();
       },
       new: () => {
-        closeSessionModal();
         actions.new();
+        closeSessionModal();
       },
       import: (str: string) => {
-        // only close modal if import succeeded
-        actions.import(str) && closeSessionModal();
+        actions.import(str);
+        closeSessionModal();
       },
       continuePrevious: () => {
         closeSessionModal();
         actions.continuePrevious();
       },
+      error: actions.error,
     }),
     []
   );

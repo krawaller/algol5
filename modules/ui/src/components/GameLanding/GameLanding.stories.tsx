@@ -17,9 +17,9 @@ storiesOf("GameLanding", module).add("init game", () => {
     toBattleLobby: () => console.log("to battle lobby"),
     import: (str: string) => {
       console.log("Import", str);
-      return true;
     },
     continuePrevious: () => console.log("previous"),
+    error: err => console.log("error", err),
   };
   return (
     <GameLanding

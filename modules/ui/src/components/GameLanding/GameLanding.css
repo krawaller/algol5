@@ -1,13 +1,3 @@
-.gameLandingButtons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.gameLandingButtons > * {
-  margin: 10px;
-}
-
 .gameLandingQuote {
   text-align: center;
 }

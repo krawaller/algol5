@@ -1,0 +1,15 @@
+.buttonGroupContainer {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.buttonGroupContainer > button {
+  margin-bottom: 10px;
+}
+
+.buttonGroupContainer > button:not(:first-child) {
+  margin-left: 10px;
+}

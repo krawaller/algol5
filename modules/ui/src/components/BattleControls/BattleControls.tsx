@@ -4,6 +4,7 @@ import { AlgolBattleUI, AlgolError } from "../../../../types";
 import { Content } from "../Content";
 import css from "./BattleControls.cssProxy";
 import { Button } from "../Button";
+import { ButtonGroup } from "../ButtonGroup";
 
 export interface BattleControlsActions {
   undo: () => void;
@@ -28,7 +29,7 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
 }) => {
   return (
     <Fragment>
-      <div className={css.battleControlPanel}>
+      <ButtonGroup>
         <Button disabled={!Boolean(ui.undo)} onClick={actions.undo}>
           Undo
         </Button>
@@ -52,7 +53,7 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
           History
         </Button>
         <Button onClick={actions.toBattleLobby}>Session info</Button> */}
-      </div>
+      </ButtonGroup>
       <div className={css.battleControlHint}>
         <Content content={ui.instruction} actions={actions} />
       </div>

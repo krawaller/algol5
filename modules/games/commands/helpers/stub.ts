@@ -1,5 +1,6 @@
 import * as fs from "fs-extra";
 import * as path from "path";
+import prettier from "prettier";
 
 import templateAI from "./templates/ai";
 import templateAnalysis from "./templates/analysis";
@@ -44,6 +45,6 @@ function template(
 ) {
   return fs.writeFile(
     path.join(defPath, gameId, name + ".ts"),
-    template(gameId)
+    prettier.format(template(gameId), { filepath: "foo.ts" })
   );
 }

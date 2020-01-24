@@ -1,4 +1,4 @@
-import { OrthokonAnim } from './_types';
+import { OrthokonAnim } from "./_types";
 
 const orthokonAnim: OrthokonAnim = {};
 

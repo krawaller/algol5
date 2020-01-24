@@ -1,4 +1,4 @@
-import { KriegGenerators } from './_types';
+import { KriegGenerators } from "./_types";
 
 const kriegGenerators: KriegGenerators = {
   findmovetargets: {
@@ -13,13 +13,13 @@ const kriegGenerators: KriegGenerators = {
           ifelse: [
             { anyat: ["northwest", ["start"]] },
             [1, 3, 5, 7, 8],
-            "ortho",
-          ],
-        },
-      ],
+            "ortho"
+          ]
+        }
+      ]
     },
-    draw: { neighbours: { tolayer: "movetargets" } },
-  },
+    draw: { neighbours: { tolayer: "movetargets" } }
+  }
 };
 
 export default kriegGenerators;

@@ -1,8 +1,8 @@
-import { DescentGraphics } from './_types';
+import { DescentGraphics } from "./_types";
 
 const descentGraphics: DescentGraphics = {
   icons: { pawns: "pawn", knights: "knight", rooks: "rook" },
-  tiles: {},
+  tiles: {}
 };
 
 export default descentGraphics;

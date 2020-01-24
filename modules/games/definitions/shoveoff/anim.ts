@@ -1,4 +1,4 @@
-import { ShoveoffAnim } from './_types';
+import { ShoveoffAnim } from "./_types";
 
 const shoveoffAnim: ShoveoffAnim = {};
 

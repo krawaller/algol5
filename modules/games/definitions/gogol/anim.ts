@@ -1,4 +1,4 @@
-import { GogolAnim } from './_types';
+import { GogolAnim } from "./_types";
 
 const gogolAnim: GogolAnim = {};
 

@@ -1,4 +1,4 @@
-import { ThreemusketeersGenerators } from './_types';
+import { ThreemusketeersGenerators } from "./_types";
 
 const threemusketeersGenerators: ThreemusketeersGenerators = {
   findstrandedmusketeers: {
@@ -9,9 +9,9 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
     draw: {
       start: {
         condition: { falsy: ["neighbourcount"] },
-        tolayer: "strandedmusketeers",
-      },
-    },
+        tolayer: "strandedmusketeers"
+      }
+    }
   },
   findmusketeerline: {
     type: "walker",
@@ -21,9 +21,9 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
     draw: {
       start: {
         condition: { same: [2, ["totalcount"]] },
-        tolayer: "musketeerline",
-      },
-    },
+        tolayer: "musketeerline"
+      }
+    }
   },
   findmovetargets: {
     type: "neighbour",
@@ -32,11 +32,11 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
     condition: {
       playercase: [
         { anyat: ["oppunits", ["target"]] },
-        { noneat: ["units", ["target"]] },
-      ],
+        { noneat: ["units", ["target"]] }
+      ]
     },
-    draw: { neighbours: { tolayer: "movetargets" } },
-  },
+    draw: { neighbours: { tolayer: "movetargets" } }
+  }
 };
 
 export default threemusketeersGenerators;

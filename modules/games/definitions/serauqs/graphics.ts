@@ -1,8 +1,8 @@
-import { SerauqsGraphics } from './_types';
+import { SerauqsGraphics } from "./_types";
 
 const serauqsGraphics: SerauqsGraphics = {
   icons: { soldiers: "pawn", wild: "king" },
-  tiles: { corners: "grass", middle: "castle" },
+  tiles: { corners: "grass", middle: "castle" }
 };
 
 export default serauqsGraphics;

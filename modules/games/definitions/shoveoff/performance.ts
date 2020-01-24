@@ -1,5 +1,8 @@
-import { ShoveoffPerformance } from './_types';
+import { ShoveoffPerformance } from "./_types";
 
-const shoveoffPerformance: ShoveoffPerformance = { canAlwaysEnd: {}, massiveTree: {} };
+const shoveoffPerformance: ShoveoffPerformance = {
+  canAlwaysEnd: {},
+  massiveTree: {}
+};
 
 export default shoveoffPerformance;

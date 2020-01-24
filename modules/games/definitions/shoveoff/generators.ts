@@ -1,4 +1,4 @@
-import { ShoveoffGenerators } from './_types';
+import { ShoveoffGenerators } from "./_types";
 
 const shoveoffGenerators: ShoveoffGenerators = {
   findaffected: {
@@ -10,9 +10,9 @@ const shoveoffGenerators: ShoveoffGenerators = {
         condition: { same: [["walklength"], 3] },
         unlessover: "oppunits",
         tolayer: "targetedgepoints",
-        include: { dir: { reldir: [["dir"], 5] } },
-      },
-    },
+        include: { dir: { reldir: [["dir"], 5] } }
+      }
+    }
   },
   findresults: {
     type: "walker",
@@ -30,12 +30,12 @@ const shoveoffGenerators: ShoveoffGenerators = {
                 { same: [["dir"], 3] },
                 "squishwest",
                 {
-                  ifelse: [{ same: [["dir"], 5] }, "squishnorth", "squisheast"],
-                },
-              ],
-            },
-          ],
-        },
+                  ifelse: [{ same: [["dir"], 5] }, "squishnorth", "squisheast"]
+                }
+              ]
+            }
+          ]
+        }
       },
       steps: {
         condition: { different: [["step"], 1] },
@@ -47,11 +47,11 @@ const shoveoffGenerators: ShoveoffGenerators = {
               ifelse: [
                 { same: [["dir"], 3] },
                 "pushwest",
-                { ifelse: [{ same: [["dir"], 5] }, "pushnorth", "pusheast"] },
-              ],
-            },
-          ],
-        },
+                { ifelse: [{ same: [["dir"], 5] }, "pushnorth", "pusheast"] }
+              ]
+            }
+          ]
+        }
       },
       last: {
         tolayer: {
@@ -62,13 +62,13 @@ const shoveoffGenerators: ShoveoffGenerators = {
               ifelse: [
                 { same: [["dir"], 3] },
                 "spawnwest",
-                { ifelse: [{ same: [["dir"], 5] }, "spawnnorth", "spawneast"] },
-              ],
-            },
-          ],
-        },
-      },
-    },
+                { ifelse: [{ same: [["dir"], 5] }, "spawnnorth", "spawneast"] }
+              ]
+            }
+          ]
+        }
+      }
+    }
   },
   findfourinarow: {
     type: "walker",
@@ -79,10 +79,10 @@ const shoveoffGenerators: ShoveoffGenerators = {
     draw: {
       steps: {
         condition: { same: [["walklength"], 4] },
-        tolayer: "fourinarow",
-      },
-    },
-  },
+        tolayer: "fourinarow"
+      }
+    }
+  }
 };
 
 export default shoveoffGenerators;

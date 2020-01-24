@@ -1,4 +1,4 @@
-import { SemaphorAnim } from './_types';
+import { SemaphorAnim } from "./_types";
 
 const semaphorAnim: SemaphorAnim = {};
 

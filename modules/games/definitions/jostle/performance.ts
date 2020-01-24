@@ -1,5 +1,8 @@
-import { JostlePerformance } from './_types';
+import { JostlePerformance } from "./_types";
 
-const jostlePerformance: JostlePerformance = { canAlwaysEnd: {}, massiveTree: {} };
+const jostlePerformance: JostlePerformance = {
+  canAlwaysEnd: {},
+  massiveTree: {}
+};
 
 export default jostlePerformance;

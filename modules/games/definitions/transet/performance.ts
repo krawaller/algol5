@@ -1,5 +1,8 @@
-import { TransetPerformance } from './_types';
+import { TransetPerformance } from "./_types";
 
-const transetPerformance: TransetPerformance = { canAlwaysEnd: {}, massiveTree: {} };
+const transetPerformance: TransetPerformance = {
+  canAlwaysEnd: {},
+  massiveTree: {}
+};
 
 export default transetPerformance;

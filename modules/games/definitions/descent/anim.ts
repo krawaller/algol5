@@ -1,4 +1,4 @@
-import { DescentAnim } from './_types';
+import { DescentAnim } from "./_types";
 
 const descentAnim: DescentAnim = {};
 

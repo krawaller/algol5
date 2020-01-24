@@ -1,11 +1,11 @@
-import { ThreemusketeersInstructions } from './_types';
+import { ThreemusketeersInstructions } from "./_types";
 
 const threemusketeersInstructions: ThreemusketeersInstructions = {
   startTurn: {
     playercase: [
       { line: ["Select", "which", "kings", "to move"] },
-      { line: ["Select", "which", "pawns", "to move"] },
-    ],
+      { line: ["Select", "which", "pawns", "to move"] }
+    ]
   },
   selectunit: {
     playercase: [
@@ -15,18 +15,18 @@ const threemusketeersInstructions: ThreemusketeersInstructions = {
           { unittype: ["pawns", 2] },
           "adjacent to",
           { unitat: "selectunit" },
-          "to attack",
-        ],
+          "to attack"
+        ]
       },
       {
         line: [
           "Select",
           "an empty space adjacent to",
           { unitat: "selectunit" },
-          "to move to",
-        ],
-      },
-    ],
+          "to move to"
+        ]
+      }
+    ]
   },
   selectmovetarget: {
     playercase: [
@@ -37,8 +37,8 @@ const threemusketeersInstructions: ThreemusketeersInstructions = {
           "to make",
           { unitat: "selectunit" },
           "attack",
-          { unitat: "selectmovetarget" },
-        ],
+          { unitat: "selectmovetarget" }
+        ]
       },
       {
         line: [
@@ -47,11 +47,11 @@ const threemusketeersInstructions: ThreemusketeersInstructions = {
           "to make",
           { unitat: "selectunit" },
           "go to",
-          "selectmovetarget",
-        ],
-      },
-    ],
-  },
+          "selectmovetarget"
+        ]
+      }
+    ]
+  }
 };
 
 export default threemusketeersInstructions;

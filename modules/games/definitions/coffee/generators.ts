@@ -1,4 +1,4 @@
-import { CoffeeGenerators } from './_types';
+import { CoffeeGenerators } from "./_types";
 
 const coffeeGenerators: CoffeeGenerators = {
   findgeneratees: {
@@ -19,11 +19,11 @@ const coffeeGenerators: CoffeeGenerators = {
             "vertical",
             "uphill",
             "horisontal",
-            "downhill",
-          ],
-        },
-      },
-    },
+            "downhill"
+          ]
+        }
+      }
+    }
   },
   findwinlines: {
     type: "walker",
@@ -32,9 +32,9 @@ const coffeeGenerators: CoffeeGenerators = {
     steps: "myunits",
     startasstep: true,
     draw: {
-      steps: { condition: { same: [4, ["walklength"]] }, tolayer: "winline" },
-    },
-  },
+      steps: { condition: { same: [4, ["walklength"]] }, tolayer: "winline" }
+    }
+  }
 };
 
 export default coffeeGenerators;

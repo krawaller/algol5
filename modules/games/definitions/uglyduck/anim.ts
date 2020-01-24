@@ -1,4 +1,4 @@
-import { UglyduckAnim } from './_types';
+import { UglyduckAnim } from "./_types";
 
 const uglyduckAnim: UglyduckAnim = {};
 

@@ -1,4 +1,4 @@
-import { JostleGenerators } from './_types';
+import { JostleGenerators } from "./_types";
 
 const jostleGenerators: JostleGenerators = {
   findinitial: {
@@ -15,13 +15,13 @@ const jostleGenerators: JostleGenerators = {
               ifelse: [
                 { anyat: ["oppunits", ["target"]] },
                 "initialenemy",
-                "initialfriend",
-              ],
-            },
-          ],
-        },
-      },
-    },
+                "initialfriend"
+              ]
+            }
+          ]
+        }
+      }
+    }
   },
   findnew: {
     type: "neighbour",
@@ -31,15 +31,11 @@ const jostleGenerators: JostleGenerators = {
     draw: {
       neighbours: {
         tolayer: {
-          ifelse: [
-            { anyat: ["oppunits", ["target"]] },
-            "newenemy",
-            "newfriend",
-          ],
-        },
-      },
-    },
-  },
+          ifelse: [{ anyat: ["oppunits", ["target"]] }, "newenemy", "newfriend"]
+        }
+      }
+    }
+  }
 };
 
 export default jostleGenerators;

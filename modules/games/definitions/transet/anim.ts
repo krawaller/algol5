@@ -1,4 +1,4 @@
-import { TransetAnim } from './_types';
+import { TransetAnim } from "./_types";
 
 const transetAnim: TransetAnim = {};
 

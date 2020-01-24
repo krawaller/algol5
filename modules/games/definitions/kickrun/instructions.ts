@@ -1,4 +1,4 @@
-import { KickrunInstructions } from './_types';
+import { KickrunInstructions } from "./_types";
 
 const kickrunInstructions: KickrunInstructions = {
   startTurn: { line: ["Select", "runners", "or", "sidekickers", "to move"] },
@@ -12,7 +12,7 @@ const kickrunInstructions: KickrunInstructions = {
         ifelse: [
           { anyat: ["runners", "selectunit"] },
           {
-            line: ["slide", { unitat: "selectunit" }, "to", "selectmovetarget"],
+            line: ["slide", { unitat: "selectunit" }, "to", "selectmovetarget"]
           },
           {
             line: [
@@ -23,15 +23,15 @@ const kickrunInstructions: KickrunInstructions = {
                 ifelse: [
                   { anyat: ["units", "selectmovetarget"] },
                   { line: ["capture", { unitat: "selectmovetarget" }] },
-                  "selectmovetarget",
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+                  "selectmovetarget"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };
 
 export default kickrunInstructions;

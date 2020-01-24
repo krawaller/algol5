@@ -1,20 +1,20 @@
-import { GogolInstructions } from './_types';
+import { GogolInstructions } from "./_types";
 
 const gogolInstructions: GogolInstructions = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 1] },
       { line: ["Select", "kings", "or", "soldiers", "to move"] },
-      { line: ["Select", "where to deploy your", "kings"] },
-    ],
+      { line: ["Select", "where to deploy your", "kings"] }
+    ]
   },
   selectkingdeploy: {
     line: [
       "Press",
       "deploy",
       "to spawn",
-      { unittypepos: ["kings", ["player"], "selectkingdeploy"] },
-    ],
+      { unittypepos: ["kings", ["player"], "selectkingdeploy"] }
+    ]
   },
   selectunit: {
     ifelse: [
@@ -26,18 +26,18 @@ const gogolInstructions: GogolInstructions = {
           {
             orlist: [
               { if: [{ notempty: "kingwalk" }, { value: "move" }] },
-              { if: [{ notempty: "jumptargets" }, { value: "jump" }] },
-            ],
+              { if: [{ notempty: "jumptargets" }, { value: "jump" }] }
+            ]
           },
           "your",
           "kings",
           {
             if: [
               { overlaps: ["nokings", { union: ["kingwalk", "jumptargets"] }] },
-              "without making a forbidden configuration",
-            ],
-          },
-        ],
+              "without making a forbidden configuration"
+            ]
+          }
+        ]
       },
       {
         line: [
@@ -49,12 +49,12 @@ const gogolInstructions: GogolInstructions = {
           {
             if: [
               { notempty: "nosoldiers" },
-              "without making a forbidden configuration",
-            ],
-          },
-        ],
-      },
-    ],
+              "without making a forbidden configuration"
+            ]
+          }
+        ]
+      }
+    ]
   },
   selectjumptarget: {
     line: [
@@ -65,8 +65,8 @@ const gogolInstructions: GogolInstructions = {
       "jump to",
       "selectjumptarget",
       "and kill",
-      { unitat: { onlyin: "splashed" } },
-    ],
+      { unitat: { onlyin: "splashed" } }
+    ]
   },
   selectmovetarget: {
     line: [
@@ -76,9 +76,9 @@ const gogolInstructions: GogolInstructions = {
       { unitat: "selectunit" },
       "go",
       "to",
-      "selectmovetarget",
-    ],
-  },
+      "selectmovetarget"
+    ]
+  }
 };
 
 export default gogolInstructions;

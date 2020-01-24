@@ -9,16 +9,12 @@ const daggersInstructions: DaggersInstructions = {
         ifelse: [
           { anyat: ["mycrowns", "selectunit"] },
           {
-            line: [
-              "an empty neighbour to move",
-              { unitat: "selectunit" },
-              "to",
-            ],
+            line: ["an empty neighbour to move", { unitat: "selectunit" }, "to"]
           },
-          { line: ["where to slide", { unitat: "selectunit" }] },
-        ],
-      },
-    ],
+          { line: ["where to slide", { unitat: "selectunit" }] }
+        ]
+      }
+    ]
   },
   selectmovetarget: {
     line: [
@@ -40,24 +36,24 @@ const daggersInstructions: DaggersInstructions = {
                   {
                     if: [
                       { higher: ["selectunit", "selectmovetarget"] },
-                      "downhill",
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+                      "downhill"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         ifelse: [
           { anyat: ["units", "selectmovetarget"] },
           { line: ["and kill", { unitat: "selectmovetarget" }] },
-          { line: ["to", "selectmovetarget"] },
-        ],
-      },
-    ],
-  },
+          { line: ["to", "selectmovetarget"] }
+        ]
+      }
+    ]
+  }
 };
 
 export default daggersInstructions;

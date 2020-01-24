@@ -1,4 +1,4 @@
-import { AtriumAnim } from './_types';
+import { AtriumAnim } from "./_types";
 
 const atriumAnim: AtriumAnim = {};
 

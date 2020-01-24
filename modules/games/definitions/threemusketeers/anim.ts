@@ -1,4 +1,4 @@
-import { ThreemusketeersAnim } from './_types';
+import { ThreemusketeersAnim } from "./_types";
 
 const threemusketeersAnim: ThreemusketeersAnim = {};
 

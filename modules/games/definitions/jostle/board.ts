@@ -1,4 +1,4 @@
-import { JostleBoard } from './_types';
+import { JostleBoard } from "./_types";
 
 const jostleBoard: JostleBoard = { height: 10, width: 10, terrain: {} };
 

@@ -8,8 +8,8 @@ const kriegAI: KriegAI = {
       dirs: {
         playercase: [
           { ifelse: [{ anyat: ["oppbases", ["start"]] }, [4], [3, 5]] },
-          { ifelse: [{ anyat: ["oppbases", ["start"]] }, [8], [7, 1]] },
-        ],
+          { ifelse: [{ anyat: ["oppbases", ["start"]] }, [8], [7, 1]] }
+        ]
       },
       ifover: { union: ["oppbases", "oppcorners"] },
       draw: {
@@ -21,20 +21,20 @@ const kriegAI: KriegAI = {
                 ifelse: [
                   { anyat: ["units", ["target"]] },
                   "myfrozenguardedthreat",
-                  "myfrozenfreethreat",
-                ],
+                  "myfrozenfreethreat"
+                ]
               },
               {
                 ifelse: [
                   { anyat: ["units", ["target"]] },
                   "mymoverguardedthreat",
-                  "mymoverfreethreat",
-                ],
-              },
-            ],
-          },
-        },
-      },
+                  "mymoverfreethreat"
+                ]
+              }
+            ]
+          }
+        }
+      }
     },
     findoppthreats: {
       type: "neighbour",
@@ -42,8 +42,8 @@ const kriegAI: KriegAI = {
       dirs: {
         playercase: [
           { ifelse: [{ anyat: ["mybases", ["start"]] }, [8], [7, 1]] },
-          { ifelse: [{ anyat: ["mybases", ["start"]] }, [4], [3, 5]] },
-        ],
+          { ifelse: [{ anyat: ["mybases", ["start"]] }, [4], [3, 5]] }
+        ]
       },
       ifover: { union: ["mybases", "mycorners"] },
       draw: {
@@ -55,21 +55,21 @@ const kriegAI: KriegAI = {
                 ifelse: [
                   { anyat: ["units", ["target"]] },
                   "oppfrozenguardedthreat",
-                  "oppfrozenfreethreat",
-                ],
+                  "oppfrozenfreethreat"
+                ]
               },
               {
                 ifelse: [
                   { anyat: ["units", ["target"]] },
                   "oppmoverguardedthreat",
-                  "oppmoverfreethreat",
-                ],
-              },
-            ],
-          },
-        },
-      },
-    },
+                  "oppmoverfreethreat"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
   },
   aspects: {
     myfrozenguardedthreat: { sizeof: "myfrozenguardedthreat" },
@@ -84,8 +84,8 @@ const kriegAI: KriegAI = {
     oppmoverfreethreat: { sizeof: "oppmoverfreethreat" },
     oppfrozeninfiltrators: { sizeof: { intersect: ["oppfrozens", "mybases"] } },
     oppfreeinfiltrators: {
-      sizeof: { intersect: ["oppnotfrozens", "mybases"] },
-    },
+      sizeof: { intersect: ["oppnotfrozens", "mybases"] }
+    }
   },
   brains: {
     Fred: {
@@ -96,7 +96,7 @@ const kriegAI: KriegAI = {
         mymoverguardedthreat: 3,
         mymoverfreethreat: 4,
         myfrozeninfiltrators: 5,
-        myfreeinfiltrators: 6,
+        myfreeinfiltrators: 6
       },
       minus: {
         oppfrozenguardedthreat: 1,
@@ -104,10 +104,10 @@ const kriegAI: KriegAI = {
         oppmoverguardedthreat: 3,
         oppmoverfreethreat: 4,
         oppfrozeninfiltrators: 5,
-        oppfreeinfiltrators: 6,
-      },
-    },
-  },
+        oppfreeinfiltrators: 6
+      }
+    }
+  }
 };
 
 export default kriegAI;

@@ -1,4 +1,4 @@
-import { DaggersAnim } from './_types';
+import { DaggersAnim } from "./_types";
 
 const daggersAnim: DaggersAnim = {};
 

@@ -1,4 +1,4 @@
-import { DuploGraphics } from './_types';
+import { DuploGraphics } from "./_types";
 
 const duploGraphics: DuploGraphics = { icons: { soldiers: "pawn" }, tiles: {} };
 

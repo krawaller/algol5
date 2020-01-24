@@ -1,4 +1,4 @@
-import { KickrunFlow } from './_types';
+import { KickrunFlow } from "./_types";
 
 const kickrunFlow: KickrunFlow = {
   startTurn: { link: "selectunit" },
@@ -6,22 +6,22 @@ const kickrunFlow: KickrunFlow = {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      link: "selectmovetarget",
+      link: "selectmovetarget"
     },
-    selectmovetarget: { from: "movetargets", link: "move" },
+    selectmovetarget: { from: "movetargets", link: "move" }
   },
   commands: {
     move: {
       applyEffect: { stompat: ["selectunit", "selectmovetarget"] },
-      link: "endTurn",
-    },
+      link: "endTurn"
+    }
   },
   endGame: {
     infiltration: {
       condition: { overlaps: ["myrunners", "oppcorners"] },
-      show: { intersect: ["myrunners", "oppcorners"] },
-    },
-  },
+      show: { intersect: ["myrunners", "oppcorners"] }
+    }
+  }
 };
 
 export default kickrunFlow;

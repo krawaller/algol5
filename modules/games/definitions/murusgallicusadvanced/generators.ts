@@ -1,22 +1,27 @@
-import { MurusgallicusadvancedGenerators } from './_types';
+import { MurusgallicusadvancedGenerators } from "./_types";
 
 const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {
     type: "walker",
     start: "selectcatapult",
-    dirs: { playercase: [[7, 8, 1, 2, 3], [3, 4, 5, 6, 7]] },
+    dirs: {
+      playercase: [
+        [7, 8, 1, 2, 3],
+        [3, 4, 5, 6, 7]
+      ]
+    },
     max: 3,
     draw: {
       steps: {
         condition: {
           and: [
             { morethan: [["step"], 1] },
-            { noneat: ["myunits", ["target"]] },
-          ],
+            { noneat: ["myunits", ["target"]] }
+          ]
         },
-        tolayer: "firetargets",
-      },
-    },
+        tolayer: "firetargets"
+      }
+    }
   },
   findmovetargets: {
     type: "walker",
@@ -27,12 +32,12 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
     draw: {
       steps: {
         condition: {
-          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }],
+          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }]
         },
         tolayer: "movetargets",
-        include: { dir: ["dir"] },
-      },
-    },
+        include: { dir: ["dir"] }
+      }
+    }
   },
   findmoveresults: {
     type: "neighbour",
@@ -47,12 +52,12 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
               ifelse: [
                 { anyat: ["mytowers", "selectmove"] },
                 "madecatapults",
-                "madetowers",
-              ],
+                "madetowers"
+              ]
             },
-            "madewalls",
-          ],
-        },
+            "madewalls"
+          ]
+        }
       },
       neighbours: {
         tolayer: {
@@ -62,22 +67,22 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
               ifelse: [
                 { anyat: ["mytowers", ["target"]] },
                 "madecatapults",
-                "madetowers",
-              ],
+                "madetowers"
+              ]
             },
-            "madewalls",
-          ],
-        },
-      },
-    },
+            "madewalls"
+          ]
+        }
+      }
+    }
   },
   findcrushtargets: {
     type: "neighbour",
     start: "selecttower",
     dirs: "rose",
     ifover: { union: ["oppcatapults", "oppwalls"] },
-    draw: { neighbours: { tolayer: "crushtargets" } },
-  },
+    draw: { neighbours: { tolayer: "crushtargets" } }
+  }
 };
 
 export default murusgallicusadvancedGenerators;

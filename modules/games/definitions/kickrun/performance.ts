@@ -1,5 +1,8 @@
-import { KickrunPerformance } from './_types';
+import { KickrunPerformance } from "./_types";
 
-const kickrunPerformance: KickrunPerformance = { canAlwaysEnd: {}, massiveTree: {} };
+const kickrunPerformance: KickrunPerformance = {
+  canAlwaysEnd: {},
+  massiveTree: {}
+};
 
 export default kickrunPerformance;

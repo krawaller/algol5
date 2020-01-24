@@ -1,4 +1,4 @@
-import { DaggersGenerators } from './_types';
+import { DaggersGenerators } from "./_types";
 
 const daggersGenerators: DaggersGenerators = {
   findcrowntargets: {
@@ -8,9 +8,9 @@ const daggersGenerators: DaggersGenerators = {
     draw: {
       neighbours: {
         condition: { noneat: ["myunits", ["target"]] },
-        tolayer: "movetarget",
-      },
-    },
+        tolayer: "movetarget"
+      }
+    }
   },
   finddaggertargets: {
     type: "walker",
@@ -28,16 +28,16 @@ const daggersGenerators: DaggersGenerators = {
               not: {
                 and: [
                   { valinlist: [["dir"], 1, 5] },
-                  { anyat: ["oppdaggers", ["target"]] },
-                ],
-              },
-            },
-          ],
+                  { anyat: ["oppdaggers", ["target"]] }
+                ]
+              }
+            }
+          ]
         },
-        tolayer: "movetarget",
-      },
-    },
-  },
+        tolayer: "movetarget"
+      }
+    }
+  }
 };
 
 export default daggersGenerators;

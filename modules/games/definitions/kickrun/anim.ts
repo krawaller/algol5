@@ -1,4 +1,4 @@
-import { KickrunAnim } from './_types';
+import { KickrunAnim } from "./_types";
 
 const kickrunAnim: KickrunAnim = {};
 

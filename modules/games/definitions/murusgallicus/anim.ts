@@ -1,4 +1,4 @@
-import { MurusgallicusAnim } from './_types';
+import { MurusgallicusAnim } from "./_types";
 
 const murusgallicusAnim: MurusgallicusAnim = {
   move: [
@@ -6,11 +6,11 @@ const murusgallicusAnim: MurusgallicusAnim = {
     {
       forposin: [
         "madetowers",
-        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] },
-      ],
-    },
+        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] }
+      ]
+    }
   ],
-  crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }],
+  crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }]
 };
 
 export default murusgallicusAnim;

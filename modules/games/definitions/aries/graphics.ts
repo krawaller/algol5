@@ -1,5 +1,8 @@
-import { AriesGraphics } from './_types';
+import { AriesGraphics } from "./_types";
 
-const ariesGraphics: AriesGraphics = { tiles: { corner: "playercolour" }, icons: { soldiers: "rook" } };
+const ariesGraphics: AriesGraphics = {
+  tiles: { corner: "playercolour" },
+  icons: { soldiers: "rook" }
+};
 
 export default ariesGraphics;

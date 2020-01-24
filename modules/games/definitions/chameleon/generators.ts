@@ -4,7 +4,7 @@ const chameleonGenerators: ChameleonGenerators = {
   findinvaders: {
     type: "filter",
     layer: { intersect: ["oppunits", "mybase"] },
-    tolayer: "invaders",
+    tolayer: "invaders"
   },
   findsteptargets: {
     start: "selectunit",
@@ -17,20 +17,18 @@ const chameleonGenerators: ChameleonGenerators = {
           ifelse: [
             {
               or: [
+                { and: [{ diag: ["dir"] }, { anyat: ["knights", ["start"]] }] },
                 {
-                  and: [{ diag: ["dir"] }, { anyat: ["knights", ["start"]] }],
-                },
-                {
-                  and: [{ ortho: ["dir"] }, { anyat: ["bishops", ["start"]] }],
-                },
-              ],
+                  and: [{ ortho: ["dir"] }, { anyat: ["bishops", ["start"]] }]
+                }
+              ]
             },
             "morph",
-            "movetarget",
-          ],
-        },
-      },
-    },
+            "movetarget"
+          ]
+        }
+      }
+    }
   },
   findbishoptargets: {
     start: "selectunit",
@@ -41,9 +39,9 @@ const chameleonGenerators: ChameleonGenerators = {
       steps: { tolayer: "movetarget" },
       block: {
         condition: { noneat: ["myunits", ["target"]] },
-        tolayer: "movetarget",
-      },
-    },
+        tolayer: "movetarget"
+      }
+    }
   },
   findknighttargets: {
     start: "selectunit",
@@ -52,10 +50,10 @@ const chameleonGenerators: ChameleonGenerators = {
     draw: {
       neighbours: {
         condition: { noneat: ["myunits", ["target"]] },
-        tolayer: "movetarget",
-      },
-    },
-  },
+        tolayer: "movetarget"
+      }
+    }
+  }
 };
 
 export default chameleonGenerators;

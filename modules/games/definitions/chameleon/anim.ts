@@ -1,7 +1,5 @@
-import { ChameleonAnim } from './_types';
+import { ChameleonAnim } from "./_types";
 
-const chameleonAnim: ChameleonAnim = {
-
-};
+const chameleonAnim: ChameleonAnim = {};
 
 export default chameleonAnim;

@@ -1,4 +1,4 @@
-import { SerauqsAnim } from './_types';
+import { SerauqsAnim } from "./_types";
 
 const serauqsAnim: SerauqsAnim = {};
 

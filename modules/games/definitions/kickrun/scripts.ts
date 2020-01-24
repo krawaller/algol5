@@ -1,4 +1,4 @@
-import { KickrunScripts } from './_types';
+import { KickrunScripts } from "./_types";
 
 const kickrunScripts: KickrunScripts = {
   basic: [
@@ -8,8 +8,8 @@ const kickrunScripts: KickrunScripts = {
     { commands: ["d1", "move", "endTurn"], include: ["a2", "a3", "b1", "c2"] },
     { commands: ["c2"], include: ["c3", "d1", "d2"] },
     { commands: ["d1", "move", "endTurn"], include: ["c5", "e3", "e4", "e5"] },
-    { commands: ["e4"], include: ["a4", "b4", "c2", "c4", "d3", "d4"] },
-  ],
+    { commands: ["e4"], include: ["a4", "b4", "c2", "c4", "d3", "d4"] }
+  ]
 };
 
 export default kickrunScripts;

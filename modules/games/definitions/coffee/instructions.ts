@@ -1,4 +1,4 @@
-import { CoffeeInstructions } from './_types';
+import { CoffeeInstructions } from "./_types";
 
 const coffeeInstructions: CoffeeInstructions = {
   startTurn: {
@@ -9,18 +9,18 @@ const coffeeInstructions: CoffeeInstructions = {
           "Select",
           "any square to place the first",
           "soldiers",
-          "of the game",
-        ],
+          "of the game"
+        ]
       },
       {
         line: [
           "Select",
           { unittype: ["soldiers", 0] },
           "to turn into",
-          "soldiers",
-        ],
-      },
-    ],
+          "soldiers"
+        ]
+      }
+    ]
   },
   selectdrop: {
     line: [
@@ -30,14 +30,14 @@ const coffeeInstructions: CoffeeInstructions = {
           { if: [{ notempty: "uphill" }, "uphill"] },
           { if: [{ notempty: "downhill" }, "downhill"] },
           { if: [{ notempty: "vertical" }, "vertical"] },
-          { if: [{ notempty: "horisontal" }, "horisontal"] },
-        ],
+          { if: [{ notempty: "horisontal" }, "horisontal"] }
+        ]
       },
       "to give",
       ["otherplayer"],
-      "placing options in that direction",
-    ],
-  },
+      "placing options in that direction"
+    ]
+  }
 };
 
 export default coffeeInstructions;

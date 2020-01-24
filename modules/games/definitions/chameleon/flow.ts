@@ -5,22 +5,19 @@ const chameleonFlow: ChameleonFlow = {
     persistentInvader: {
       condition: { anyat: ["oppbase", "selectmovetarget"] },
       show: { single: "selectmovetarget" },
-      whenStarvation: true,
+      whenStarvation: true
     },
     loneInvader: {
       condition: {
         and: [
           { same: [{ sizeof: "myunits" }, 1] },
-          { anyat: ["oppbase", "selectmovetarget"] },
-        ],
+          { anyat: ["oppbase", "selectmovetarget"] }
+        ]
       },
-      show: { single: "selectmovetarget" },
-    },
+      show: { single: "selectmovetarget" }
+    }
   },
-  startTurn: {
-    runGenerator: "findinvaders",
-    link: "selectunit",
-  },
+  startTurn: { runGenerator: "findinvaders", link: "selectunit" },
   commands: {
     move: {
       applyEffects: [
@@ -34,29 +31,27 @@ const chameleonFlow: ChameleonFlow = {
                   ifelse: [
                     { anyat: ["knights", "selectunit"] },
                     "bishops",
-                    "knights",
-                  ],
-                },
-              ],
-            },
-          ],
+                    "knights"
+                  ]
+                }
+              ]
+            }
+          ]
         },
-        { stompat: ["selectunit", "selectmovetarget"] },
+        { stompat: ["selectunit", "selectmovetarget"] }
       ],
       link: {
         if: [
           {
             or: [
               { isempty: "invaders" },
-              {
-                anyat: ["invaders", "selectmovetarget"],
-              },
-            ],
+              { anyat: ["invaders", "selectmovetarget"] }
+            ]
           },
-          "endTurn",
-        ],
-      },
-    },
+          "endTurn"
+        ]
+      }
+    }
   },
   marks: {
     selectunit: {
@@ -64,15 +59,15 @@ const chameleonFlow: ChameleonFlow = {
       runGenerators: [
         "findsteptargets",
         { if: [{ anyat: ["knights", "selectunit"] }, "findknighttargets"] },
-        { if: [{ anyat: ["bishops", "selectunit"] }, "findbishoptargets"] },
+        { if: [{ anyat: ["bishops", "selectunit"] }, "findbishoptargets"] }
       ],
-      link: "selectmovetarget",
+      link: "selectmovetarget"
     },
     selectmovetarget: {
       from: { union: ["movetarget", "morph"] },
-      link: "move",
-    },
-  },
+      link: "move"
+    }
+  }
 };
 
 export default chameleonFlow;

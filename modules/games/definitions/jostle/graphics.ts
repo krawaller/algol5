@@ -1,5 +1,8 @@
-import { JostleGraphics } from './_types';
+import { JostleGraphics } from "./_types";
 
-const jostleGraphics: JostleGraphics = { icons: { checkers: "pawn" }, tiles: {} };
+const jostleGraphics: JostleGraphics = {
+  icons: { checkers: "pawn" },
+  tiles: {}
+};
 
 export default jostleGraphics;

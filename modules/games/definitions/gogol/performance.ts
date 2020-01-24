@@ -1,12 +1,12 @@
-import { GogolPerformance } from './_types';
+import { GogolPerformance } from "./_types";
 
 const gogolPerformance: GogolPerformance = {
   canAlwaysEnd: {
     selectmovetarget: true,
     selectkingdeploy: true,
-    selectjumptarget: true,
+    selectjumptarget: true
   },
-  massiveTree: {},
+  massiveTree: {}
 };
 
 export default gogolPerformance;

@@ -1,26 +1,26 @@
-import { AriesFlow } from './_types';
+import { AriesFlow } from "./_types";
 
 const ariesFlow: AriesFlow = {
   startTurn: { link: "selectunit" },
   endGame: {
     invade: {
       condition: { overlaps: ["oppcorner", "myunits"] },
-      show: { intersect: ["oppcorner", "myunits"] },
-    },
+      show: { intersect: ["oppcorner", "myunits"] }
+    }
   },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      link: "selectmovetarget",
+      link: "selectmovetarget"
     },
     selectmovetarget: {
       from: "movetargets",
       runGenerator: {
-        if: [{ anyat: ["oppunits", "selectmovetarget"] }, "findpushresults"],
+        if: [{ anyat: ["oppunits", "selectmovetarget"] }, "findpushresults"]
       },
-      link: "move",
-    },
+      link: "move"
+    }
   },
   commands: {
     move: {
@@ -31,15 +31,15 @@ const ariesFlow: AriesFlow = {
           pushin: [
             "beingpushed",
             { read: ["movetargets", "selectmovetarget", "dir"] },
-            1,
-          ],
+            1
+          ]
         },
         { killin: "squished" },
-        { moveat: ["selectunit", "selectmovetarget"] },
+        { moveat: ["selectunit", "selectmovetarget"] }
       ],
-      link: "endTurn",
-    },
-  },
+      link: "endTurn"
+    }
+  }
 };
 
 export default ariesFlow;

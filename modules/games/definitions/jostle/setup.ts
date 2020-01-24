@@ -1,4 +1,4 @@
-import { JostleSetup } from './_types';
+import { JostleSetup } from "./_types";
 
 const jostleSetup: JostleSetup = {
   checkers: {
@@ -18,7 +18,7 @@ const jostleSetup: JostleSetup = {
       "g8",
       "h3",
       "h5",
-      "h7",
+      "h7"
     ],
     "2": [
       "c3",
@@ -36,9 +36,9 @@ const jostleSetup: JostleSetup = {
       "g7",
       "h4",
       "h6",
-      "h8",
-    ],
-  },
+      "h8"
+    ]
+  }
 };
 
 export default jostleSetup;

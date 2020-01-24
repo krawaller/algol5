@@ -1,4 +1,4 @@
-import { JostleAnim } from './_types';
+import { JostleAnim } from "./_types";
 
 const jostleAnim: JostleAnim = {};
 

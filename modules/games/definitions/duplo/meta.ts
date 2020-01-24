@@ -9,7 +9,7 @@ const duploMeta: DuploMeta = {
   year: 2002,
   tags: [],
   tagline: "A fierce battle of extending lines",
-  performance: { canAlwaysEnd: {} },
+  performance: { canAlwaysEnd: {} }
 };
 
 export default duploMeta;

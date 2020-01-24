@@ -1,4 +1,4 @@
-import { CoffeeSetup } from './_types';
+import { CoffeeSetup } from "./_types";
 
 const coffeeSetup: CoffeeSetup = {};
 

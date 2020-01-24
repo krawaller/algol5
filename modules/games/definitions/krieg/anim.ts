@@ -1,4 +1,4 @@
-import { KriegAnim } from './_types';
+import { KriegAnim } from "./_types";
 
 const kriegAnim: KriegAnim = {};
 

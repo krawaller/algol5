@@ -9,7 +9,7 @@ const jostleMeta: JostleMeta = {
   tagline:
     "Be the last one to make a valid move which can only be to a more valuable position",
   author: "Mark Steere",
-  year: 2010,
+  year: 2010
 };
 
 export default jostleMeta;

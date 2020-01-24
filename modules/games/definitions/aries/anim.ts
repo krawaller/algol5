@@ -1,4 +1,4 @@
-import { AriesAnim } from './_types';
+import { AriesAnim } from "./_types";
 
 const ariesAnim: AriesAnim = {};
 

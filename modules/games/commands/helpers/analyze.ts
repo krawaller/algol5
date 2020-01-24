@@ -1,6 +1,6 @@
 import * as fs from "fs-extra";
 import * as path from "path";
-
+import prettier from "prettier";
 import fake from "./fake";
 
 import {
@@ -248,8 +248,11 @@ export type ${capId}Position = ${boardPositions(
     .map(t => `"${t}"`)
     .join(" | ")};
 `;
-
-  await fs.writeFile(path.join(gameDefPath, "_types.ts"), analysis);
+  const code = "// Generated file, do not edit here!\n" + analysis;
+  await fs.writeFile(
+    path.join(gameDefPath, "_types.ts"),
+    prettier.format(code, { filepath: "foo.ts" })
+  );
   console.log("Analysed", gameId);
   dateStamp();
 }

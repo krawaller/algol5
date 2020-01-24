@@ -1,4 +1,4 @@
-import { AmazonsInstructions } from './_types';
+import { AmazonsInstructions } from "./_types";
 
 const amazonsInstructions: AmazonsInstructions = {
   startTurn: { line: ["Select", "queen", "to move and fire with"] },
@@ -10,8 +10,8 @@ const amazonsInstructions: AmazonsInstructions = {
       "to make",
       { unitat: "selectunit" },
       "go to",
-      "selectmovetarget",
-    ],
+      "selectmovetarget"
+    ]
   },
   move: "Now select where to fire at",
   selectfiretarget: {
@@ -19,9 +19,9 @@ const amazonsInstructions: AmazonsInstructions = {
       "Press",
       "fire",
       "to spawn",
-      { unittypeset: ["fires", 0, { single: "selectfiretarget" }] },
-    ],
-  },
+      { unittypeset: ["fires", 0, { single: "selectfiretarget" }] }
+    ]
+  }
 };
 
 export default amazonsInstructions;

@@ -3,7 +3,7 @@ import { CoffeeFlow } from "./_types";
 const coffeeFlow: CoffeeFlow = {
   TODO: "use different unit type for placeholders?",
   endGame: {
-    madeline: { condition: { notempty: "winline" }, show: "winline" },
+    madeline: { condition: { notempty: "winline" }, show: "winline" }
   },
   startTurn: { link: "selectdrop" },
   marks: {
@@ -14,9 +14,9 @@ const coffeeFlow: CoffeeFlow = {
         { if: [{ notempty: "uphill" }, "uphill"] },
         { if: [{ notempty: "downhill" }, "downhill"] },
         { if: [{ notempty: "vertical" }, "vertical"] },
-        { if: [{ notempty: "horisontal" }, "horisontal"] },
-      ],
-    },
+        { if: [{ notempty: "horisontal" }, "horisontal"] }
+      ]
+    }
   },
   commands: {
     uphill: {
@@ -26,13 +26,13 @@ const coffeeFlow: CoffeeFlow = {
           ifelse: [
             { noneat: ["units", "selectdrop"] },
             { spawnat: ["selectdrop", "soldiers", ["player"]] },
-            { adoptat: ["selectdrop", ["player"]] },
-          ],
+            { adoptat: ["selectdrop", ["player"]] }
+          ]
         },
-        { spawnin: ["uphill", "soldiers", 0] },
+        { spawnin: ["uphill", "soldiers", 0] }
       ],
       runGenerator: "findwinlines",
-      link: "endTurn",
+      link: "endTurn"
     },
     downhill: {
       applyEffects: [
@@ -41,13 +41,13 @@ const coffeeFlow: CoffeeFlow = {
           ifelse: [
             { noneat: ["units", "selectdrop"] },
             { spawnat: ["selectdrop", "soldiers", ["player"]] },
-            { adoptat: ["selectdrop", ["player"]] },
-          ],
+            { adoptat: ["selectdrop", ["player"]] }
+          ]
         },
-        { spawnin: ["downhill", "soldiers", 0] },
+        { spawnin: ["downhill", "soldiers", 0] }
       ],
       runGenerator: "findwinlines",
-      link: "endTurn",
+      link: "endTurn"
     },
     horisontal: {
       applyEffects: [
@@ -56,13 +56,13 @@ const coffeeFlow: CoffeeFlow = {
           ifelse: [
             { noneat: ["units", "selectdrop"] },
             { spawnat: ["selectdrop", "soldiers", ["player"]] },
-            { adoptat: ["selectdrop", ["player"]] },
-          ],
+            { adoptat: ["selectdrop", ["player"]] }
+          ]
         },
-        { spawnin: ["horisontal", "soldiers", 0] },
+        { spawnin: ["horisontal", "soldiers", 0] }
       ],
       runGenerator: "findwinlines",
-      link: "endTurn",
+      link: "endTurn"
     },
     vertical: {
       applyEffects: [
@@ -71,15 +71,15 @@ const coffeeFlow: CoffeeFlow = {
           ifelse: [
             { noneat: ["units", "selectdrop"] },
             { spawnat: ["selectdrop", "soldiers", ["player"]] },
-            { adoptat: ["selectdrop", ["player"]] },
-          ],
+            { adoptat: ["selectdrop", ["player"]] }
+          ]
         },
-        { spawnin: ["vertical", "soldiers", 0] },
+        { spawnin: ["vertical", "soldiers", 0] }
       ],
       runGenerator: "findwinlines",
-      link: "endTurn",
-    },
-  },
+      link: "endTurn"
+    }
+  }
 };
 
 export default coffeeFlow;

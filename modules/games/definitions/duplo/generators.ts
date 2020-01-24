@@ -1,4 +1,9 @@
-import { DuploGenerators } from './_types';
+// Here you define the generators (artifact creators) for your game.
+// The type analyser will look at this file to see what generators are available,
+// and also what artifact layers there are. When you add/remove a generator or
+// change the names of the layers you draw to, rerun the type analyser!
+
+import { DuploGenerators } from "./_types";
 
 const duploGenerators: DuploGenerators = {
   findspawndirs: {
@@ -9,9 +14,9 @@ const duploGenerators: DuploGenerators = {
       neighbours: {
         condition: { noneat: ["myunits", ["target"]] },
         tolayer: "spawndirs",
-        include: { dir: ["dir"] },
-      },
-    },
+        include: { dir: ["dir"] }
+      }
+    }
   },
   findgrowstarts: {
     type: "walker",
@@ -21,9 +26,9 @@ const duploGenerators: DuploGenerators = {
     draw: {
       start: {
         tolayer: "growstarts",
-        include: { dir: { reldir: [["dir"], 5] }, strength: ["walklength"] },
-      },
-    },
+        include: { dir: { reldir: [["dir"], 5] }, strength: ["walklength"] }
+      }
+    }
   },
   findexpandpoints: {
     type: "walker",
@@ -38,13 +43,13 @@ const duploGenerators: DuploGenerators = {
       steps: {
         condition: { same: [["step"], ["max"]] },
         tolayer: "targets",
-        include: { dir: { reldir: [["dir"], 5] } },
+        include: { dir: { reldir: [["dir"], 5] } }
       },
       block: {
         tolayer: "potentialopptargets",
-        include: { dir: ["dir"], strength: ["max"] },
-      },
-    },
+        include: { dir: ["dir"], strength: ["max"] }
+      }
+    }
   },
   findoppstrengths: {
     type: "walker",
@@ -57,9 +62,9 @@ const duploGenerators: DuploGenerators = {
       start: {
         tolayer: "targets",
         condition: { different: [["stopreason"], "reachedmax"] },
-        include: { dir: { reldir: [["dir"], 5] } },
-      },
-    },
+        include: { dir: { reldir: [["dir"], 5] } }
+      }
+    }
   },
   findspawns: {
     type: "walker",
@@ -68,9 +73,9 @@ const duploGenerators: DuploGenerators = {
     blocks: "units",
     draw: {
       start: { condition: { noneat: ["units", ["start"]] }, tolayer: "spawns" },
-      steps: { tolayer: "spawns" },
-    },
-  },
+      steps: { tolayer: "spawns" }
+    }
+  }
 };
 
 export default duploGenerators;

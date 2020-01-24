@@ -1,4 +1,4 @@
-import { DuploSetup } from './_types';
+import { DuploSetup } from "./_types";
 
 const duploSetup: DuploSetup = {};
 

@@ -1,22 +1,32 @@
-import { MurusgallicusadvancedGenerators } from './_types';
+// Here you define the generators (artifact creators) for your game.
+// The type analyser will look at this file to see what generators are available,
+// and also what artifact layers there are. When you add/remove a generator or
+// change the names of the layers you draw to, rerun the type analyser!
+
+import { MurusgallicusadvancedGenerators } from "./_types";
 
 const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
   findfiretargets: {
     type: "walker",
     start: "selectcatapult",
-    dirs: { playercase: [[7, 8, 1, 2, 3], [3, 4, 5, 6, 7]] },
+    dirs: {
+      playercase: [
+        [7, 8, 1, 2, 3],
+        [3, 4, 5, 6, 7]
+      ]
+    },
     max: 3,
     draw: {
       steps: {
         condition: {
           and: [
             { morethan: [["step"], 1] },
-            { noneat: ["myunits", ["target"]] },
-          ],
+            { noneat: ["myunits", ["target"]] }
+          ]
         },
-        tolayer: "firetargets",
-      },
-    },
+        tolayer: "firetargets"
+      }
+    }
   },
   findmovetargets: {
     type: "walker",
@@ -27,12 +37,12 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
     draw: {
       steps: {
         condition: {
-          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }],
+          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }]
         },
         tolayer: "movetargets",
-        include: { dir: ["dir"] },
-      },
-    },
+        include: { dir: ["dir"] }
+      }
+    }
   },
   findmoveresults: {
     type: "neighbour",
@@ -47,12 +57,12 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
               ifelse: [
                 { anyat: ["mytowers", "selectmove"] },
                 "madecatapults",
-                "madetowers",
-              ],
+                "madetowers"
+              ]
             },
-            "madewalls",
-          ],
-        },
+            "madewalls"
+          ]
+        }
       },
       neighbours: {
         tolayer: {
@@ -62,22 +72,22 @@ const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
               ifelse: [
                 { anyat: ["mytowers", ["target"]] },
                 "madecatapults",
-                "madetowers",
-              ],
+                "madetowers"
+              ]
             },
-            "madewalls",
-          ],
-        },
-      },
-    },
+            "madewalls"
+          ]
+        }
+      }
+    }
   },
   findcrushtargets: {
     type: "neighbour",
     start: "selecttower",
     dirs: "rose",
     ifover: { union: ["oppcatapults", "oppwalls"] },
-    draw: { neighbours: { tolayer: "crushtargets" } },
-  },
+    draw: { neighbours: { tolayer: "crushtargets" } }
+  }
 };
 
 export default murusgallicusadvancedGenerators;

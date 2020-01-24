@@ -1,4 +1,9 @@
-import { AmazonsGenerators } from './_types';
+// Here you define the generators (artifact creators) for your game.
+// The type analyser will look at this file to see what generators are available,
+// and also what artifact layers there are. When you add/remove a generator or
+// change the names of the layers you draw to, rerun the type analyser!
+
+import { AmazonsGenerators } from "./_types";
 
 const amazonsGenerators: AmazonsGenerators = {
   findmovetargets: {
@@ -6,7 +11,7 @@ const amazonsGenerators: AmazonsGenerators = {
     dirs: "rose",
     start: "selectunit",
     blocks: "units",
-    draw: { steps: { tolayer: "movetargets" } },
+    draw: { steps: { tolayer: "movetargets" } }
   },
   findfiretargets: {
     type: "walker",
@@ -15,9 +20,9 @@ const amazonsGenerators: AmazonsGenerators = {
     blocks: "units",
     draw: {
       start: { tolayer: "firedfrom" },
-      steps: { tolayer: "firetargets" },
-    },
-  },
+      steps: { tolayer: "firetargets" }
+    }
+  }
 };
 
 export default amazonsGenerators;

@@ -16,12 +16,12 @@ const chameleonInstructions: ChameleonInstructions = {
             line: [
               "that can reach the",
               { unitat: { onlyin: "invaders" } },
-              "invader",
-            ],
-          },
-        ],
-      },
-    ],
+              "invader"
+            ]
+          }
+        ]
+      }
+    ]
   },
   selectunit: {
     ifelse: [
@@ -33,10 +33,10 @@ const chameleonInstructions: ChameleonInstructions = {
           { unitat: "selectunit" },
           "must expel the",
           { unitat: { onlyin: "invaders" } },
-          "invader",
-        ],
-      },
-    ],
+          "invader"
+        ]
+      }
+    ]
   },
   selectmovetarget: {
     line: [
@@ -55,16 +55,16 @@ const chameleonInstructions: ChameleonInstructions = {
               {
                 if: [
                   { anyat: ["mybase", "selectmovetarget"] },
-                  ", expelling the invader",
-                ],
+                  ", expelling the invader"
+                ]
               },
               {
                 if: [
                   { anyat: ["oppbase", "selectmovetarget"] },
-                  "in her own base",
-                ],
-              },
-            ],
+                  "in her own base"
+                ]
+              }
+            ]
           },
           {
             line: [
@@ -74,19 +74,17 @@ const chameleonInstructions: ChameleonInstructions = {
                 ifelse: [
                   { anyat: ["oppbase", "selectmovetarget"] },
                   "to invade the opponent base at",
-                  "to",
-                ],
+                  "to"
+                ]
               },
-              "selectmovetarget",
-            ],
-          },
-        ],
+              "selectmovetarget"
+            ]
+          }
+        ]
       },
       {
         if: [
-          {
-            anyat: ["morph", "selectmovetarget"],
-          },
+          { anyat: ["morph", "selectmovetarget"] },
           {
             line: [
               ", turning it into a",
@@ -94,15 +92,15 @@ const chameleonInstructions: ChameleonInstructions = {
                 ifelse: [
                   { anyat: ["knights", "selectunit"] },
                   { unittype: ["bishops", ["player"]] },
-                  { unittype: ["knights", ["player"]] },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+                  { unittype: ["knights", ["player"]] }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };
 
 export default chameleonInstructions;

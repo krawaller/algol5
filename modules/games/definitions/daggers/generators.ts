@@ -1,4 +1,9 @@
-import { DaggersGenerators } from './_types';
+// Here you define the generators (artifact creators) for your game.
+// The type analyser will look at this file to see what generators are available,
+// and also what artifact layers there are. When you add/remove a generator or
+// change the names of the layers you draw to, rerun the type analyser!
+
+import { DaggersGenerators } from "./_types";
 
 const daggersGenerators: DaggersGenerators = {
   findcrowntargets: {
@@ -8,9 +13,9 @@ const daggersGenerators: DaggersGenerators = {
     draw: {
       neighbours: {
         condition: { noneat: ["myunits", ["target"]] },
-        tolayer: "movetarget",
-      },
-    },
+        tolayer: "movetarget"
+      }
+    }
   },
   finddaggertargets: {
     type: "walker",
@@ -28,16 +33,16 @@ const daggersGenerators: DaggersGenerators = {
               not: {
                 and: [
                   { valinlist: [["dir"], 1, 5] },
-                  { anyat: ["oppdaggers", ["target"]] },
-                ],
-              },
-            },
-          ],
+                  { anyat: ["oppdaggers", ["target"]] }
+                ]
+              }
+            }
+          ]
         },
-        tolayer: "movetarget",
-      },
-    },
-  },
+        tolayer: "movetarget"
+      }
+    }
+  }
 };
 
 export default daggersGenerators;

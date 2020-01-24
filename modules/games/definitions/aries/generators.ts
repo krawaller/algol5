@@ -1,4 +1,9 @@
-import { AriesGenerators } from './_types';
+// Here you define the generators (artifact creators) for your game.
+// The type analyser will look at this file to see what generators are available,
+// and also what artifact layers there are. When you add/remove a generator or
+// change the names of the layers you draw to, rerun the type analyser!
+
+import { AriesGenerators } from "./_types";
 
 const ariesGenerators: AriesGenerators = {
   findmovetargets: {
@@ -14,14 +19,14 @@ const ariesGenerators: AriesGenerators = {
           not: {
             and: [
               { samepos: [["target"], { battlepos: "pushsquare" }] },
-              { same: [{ idat: "selectunit" }, { battlevar: "pusheeid" }] },
-            ],
-          },
+              { same: [{ idat: "selectunit" }, { battlevar: "pusheeid" }] }
+            ]
+          }
         },
         tolayer: "movetargets",
-        include: { dir: ["dir"] },
-      },
-    },
+        include: { dir: ["dir"] }
+      }
+    }
   },
   findpushresults: {
     type: "walker",
@@ -35,10 +40,10 @@ const ariesGenerators: AriesGenerators = {
       steps: { tolayer: "beingpushed" },
       last: {
         condition: { valinlist: [["stopreason"], "hitblock", "outofbounds"] },
-        tolayer: "squished",
-      },
-    },
-  },
+        tolayer: "squished"
+      }
+    }
+  }
 };
 
 export default ariesGenerators;

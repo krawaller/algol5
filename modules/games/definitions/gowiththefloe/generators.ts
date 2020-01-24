@@ -1,4 +1,9 @@
-import { GowiththefloeGenerators } from './_types';
+// Here you define the generators (artifact creators) for your game.
+// The type analyser will look at this file to see what generators are available,
+// and also what artifact layers there are. When you add/remove a generator or
+// change the names of the layers you draw to, rerun the type analyser!
+
+import { GowiththefloeGenerators } from "./_types";
 
 const gowiththefloeGenerators: GowiththefloeGenerators = {
   findeattargets: {
@@ -6,7 +11,7 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
     dirs: "rose",
     start: "selectunit",
     ifover: "seals",
-    draw: { neighbours: { tolayer: "eattargets" } },
+    draw: { neighbours: { tolayer: "eattargets" } }
   },
   findmovetargets: {
     type: "walker",
@@ -18,9 +23,9 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
       steps: {
         unlessover: "holes",
         tolayer: "movetargets",
-        include: { dir: ["dir"] },
-      },
-    },
+        include: { dir: ["dir"] }
+      }
+    }
   },
   findsealsmoves: {
     type: "walker",
@@ -31,9 +36,9 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
     draw: {
       start: {
         condition: { morethan: [["totalcount"], 0] },
-        tolayer: "canmove",
-      },
-    },
+        tolayer: "canmove"
+      }
+    }
   },
   findcracks: {
     type: "walker",
@@ -42,9 +47,9 @@ const gowiththefloeGenerators: GowiththefloeGenerators = {
     blocks: { single: "selectunit" },
     draw: {
       steps: { unlessover: "holes", tolayer: "cracks" },
-      block: { tolayer: "cracks" },
-    },
-  },
+      block: { tolayer: "cracks" }
+    }
+  }
 };
 
 export default gowiththefloeGenerators;

@@ -1,4 +1,4 @@
-import { SemaphorSetup } from './_types';
+import { SemaphorSetup } from "./_types";
 
 const semaphorSetup: SemaphorSetup = {};
 

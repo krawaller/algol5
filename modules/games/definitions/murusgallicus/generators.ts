@@ -1,4 +1,9 @@
-import { MurusgallicusGenerators } from './_types';
+// Here you define the generators (artifact creators) for your game.
+// The type analyser will look at this file to see what generators are available,
+// and also what artifact layers there are. When you add/remove a generator or
+// change the names of the layers you draw to, rerun the type analyser!
+
+import { MurusgallicusGenerators } from "./_types";
 
 const murusgallicusGenerators: MurusgallicusGenerators = {
   findmovetargets: {
@@ -10,12 +15,12 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
     draw: {
       steps: {
         condition: {
-          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }],
+          and: [{ same: [["walklength"], 2] }, { same: [["step"], 2] }]
         },
         tolayer: "movetargets",
-        include: { dir: ["dir"] },
-      },
-    },
+        include: { dir: ["dir"] }
+      }
+    }
   },
   findmoveresults: {
     type: "neighbour",
@@ -27,28 +32,28 @@ const murusgallicusGenerators: MurusgallicusGenerators = {
           ifelse: [
             { anyat: ["myunits", "selectmove"] },
             "madetowers",
-            "madewalls",
-          ],
-        },
+            "madewalls"
+          ]
+        }
       },
       neighbours: {
         tolayer: {
           ifelse: [
             { anyat: ["myunits", ["target"]] },
             "madetowers",
-            "madewalls",
-          ],
-        },
-      },
-    },
+            "madewalls"
+          ]
+        }
+      }
+    }
   },
   findcrushtargets: {
     type: "neighbour",
     start: "selecttower",
     dirs: "rose",
     ifover: "oppwalls",
-    draw: { neighbours: { tolayer: "crushtargets" } },
-  },
+    draw: { neighbours: { tolayer: "crushtargets" } }
+  }
 };
 
 export default murusgallicusGenerators;

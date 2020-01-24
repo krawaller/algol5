@@ -37,7 +37,7 @@ const orthokonScripts: OrthokonScripts = {
     { commands: ["d2", "d1", "move", "endTurn"] },
     { commands: ["b1", "c1", "move", "endTurn"] },
     { commands: ["c3", "d2", "move", "endTurn"] },
-    { commands: ["d4", "c3", "move", "endTurn"], endedIn: "win" },
+    { commands: ["d4", "c3", "move", "endTurn"], endedIn: "win" }
   ],
   basic: [
     { commands: [], include: ["a1", "b1", "c1", "d1"] },
@@ -45,10 +45,10 @@ const orthokonScripts: OrthokonScripts = {
     { commands: ["c3", "move", "endTurn"], include: ["a4", "b4", "d4"] },
     {
       commands: ["d4", "d2", "move", "endTurn"],
-      include: ["b1", "c1", "c3", "c4"],
+      include: ["b1", "c1", "c3", "c4"]
     },
-    { commands: ["b1"], include: ["a1", "a2", "b3", "d3"] },
-  ],
+    { commands: ["b1"], include: ["a1", "a2", "b3", "d3"] }
+  ]
 };
 
 export default orthokonScripts;

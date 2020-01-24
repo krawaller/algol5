@@ -1,4 +1,9 @@
-import { ThreemusketeersGenerators } from './_types';
+// Here you define the generators (artifact creators) for your game.
+// The type analyser will look at this file to see what generators are available,
+// and also what artifact layers there are. When you add/remove a generator or
+// change the names of the layers you draw to, rerun the type analyser!
+
+import { ThreemusketeersGenerators } from "./_types";
 
 const threemusketeersGenerators: ThreemusketeersGenerators = {
   findstrandedmusketeers: {
@@ -9,9 +14,9 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
     draw: {
       start: {
         condition: { falsy: ["neighbourcount"] },
-        tolayer: "strandedmusketeers",
-      },
-    },
+        tolayer: "strandedmusketeers"
+      }
+    }
   },
   findmusketeerline: {
     type: "walker",
@@ -21,9 +26,9 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
     draw: {
       start: {
         condition: { same: [2, ["totalcount"]] },
-        tolayer: "musketeerline",
-      },
-    },
+        tolayer: "musketeerline"
+      }
+    }
   },
   findmovetargets: {
     type: "neighbour",
@@ -32,11 +37,11 @@ const threemusketeersGenerators: ThreemusketeersGenerators = {
     condition: {
       playercase: [
         { anyat: ["oppunits", ["target"]] },
-        { noneat: ["units", ["target"]] },
-      ],
+        { noneat: ["units", ["target"]] }
+      ]
     },
-    draw: { neighbours: { tolayer: "movetargets" } },
-  },
+    draw: { neighbours: { tolayer: "movetargets" } }
+  }
 };
 
 export default threemusketeersGenerators;

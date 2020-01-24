@@ -1,18 +1,18 @@
-import { DescentFlow } from './_types';
+import { DescentFlow } from "./_types";
 
 const descentFlow: DescentFlow = {
   endGame: {
-    madeline: { condition: { notempty: "winline" }, show: "winline" },
+    madeline: { condition: { notempty: "winline" }, show: "winline" }
   },
   startTurn: { link: "selectunit" },
   marks: {
     selectunit: {
       from: "myunits",
       runGenerator: "findmovetargets",
-      link: "selectmovetarget",
+      link: "selectmovetarget"
     },
     selectmovetarget: { from: "movetargets", link: "move" },
-    selectdigtarget: { from: "digtargets", link: "dig" },
+    selectdigtarget: { from: "digtargets", link: "dig" }
   },
   commands: {
     move: {
@@ -20,23 +20,20 @@ const descentFlow: DescentFlow = {
       applyEffects: [
         { setturnpos: ["movedto", "selectmovetarget"] },
         {
-          setturnvar: [
-            "heightfrom",
-            { read: ["units", "selectunit", "group"] },
-          ],
+          setturnvar: ["heightfrom", { read: ["units", "selectunit", "group"] }]
         },
         {
           setturnvar: [
             "heightto",
-            { read: ["units", "selectmovetarget", "group"] },
-          ],
+            { read: ["units", "selectmovetarget", "group"] }
+          ]
         },
         { morphat: ["selectunit", { turnvar: "heightto" }] },
         { killat: "selectmovetarget" },
         { moveat: ["selectunit", "selectmovetarget"] },
-        { spawnat: ["selectunit", { turnvar: "heightfrom" }, 0] },
+        { spawnat: ["selectunit", { turnvar: "heightfrom" }, 0] }
       ],
-      link: "selectdigtarget",
+      link: "selectdigtarget"
     },
     dig: {
       applyEffect: {
@@ -50,17 +47,17 @@ const descentFlow: DescentFlow = {
                 ifelse: [
                   { anyat: ["knights", "selectdigtarget"] },
                   "pawns",
-                  "knights",
-                ],
-              },
-            ],
-          },
-        ],
+                  "knights"
+                ]
+              }
+            ]
+          }
+        ]
       },
       runGenerator: "findwinlines",
-      link: "endTurn",
-    },
-  },
+      link: "endTurn"
+    }
+  }
 };
 
 export default descentFlow;

@@ -1,4 +1,4 @@
-import { GowiththefloeBoard } from './_types';
+import { GowiththefloeBoard } from "./_types";
 
 const gowiththefloeBoard: GowiththefloeBoard = {
   height: 8,
@@ -16,9 +16,9 @@ const gowiththefloeBoard: GowiththefloeBoard = {
       "h1",
       "h2",
       "h7",
-      "h8",
-    ],
-  },
+      "h8"
+    ]
+  }
 };
 
 export default gowiththefloeBoard;

@@ -1,4 +1,4 @@
-import { GogolBoard } from './_types';
+import { GogolBoard } from "./_types";
 
 const gogolBoard: GogolBoard = {
   height: 8,
@@ -9,9 +9,9 @@ const gogolBoard: GogolBoard = {
       { rect: ["a1", "a8"] },
       { rect: ["h1", "h8"] },
       { rect: ["b8", "g8"] },
-      { rect: ["b1", "g1"] },
-    ],
-  },
+      { rect: ["b1", "g1"] }
+    ]
+  }
 };
 
 export default gogolBoard;

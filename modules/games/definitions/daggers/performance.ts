@@ -2,7 +2,7 @@ import { DaggersPerformance } from "./_types";
 
 const daggersPerformance: DaggersPerformance = {
   canAlwaysEnd: { selectmovetarget: true },
-  massiveTree: {},
+  massiveTree: {}
 };
 
 export default daggersPerformance;

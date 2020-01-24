@@ -1,5 +1,8 @@
-import { AmazonsPerformance } from './_types';
+import { AmazonsPerformance } from "./_types";
 
-const amazonsPerformance: AmazonsPerformance = { canAlwaysEnd: { selectmovetarget: true }, massiveTree: {} };
+const amazonsPerformance: AmazonsPerformance = {
+  canAlwaysEnd: { selectmovetarget: true },
+  massiveTree: {}
+};
 
 export default amazonsPerformance;

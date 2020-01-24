@@ -1,8 +1,8 @@
-import { TransetInstructions } from './_types';
+import { TransetInstructions } from "./_types";
 
 const transetInstructions: TransetInstructions = {
   startTurn: {
-    line: ["Select", "pinets", ",", "piokers", "or", "piases", "to move"],
+    line: ["Select", "pinets", ",", "piokers", "or", "piases", "to move"]
   },
   selectunit: {
     line: [
@@ -12,40 +12,36 @@ const transetInstructions: TransetInstructions = {
           {
             if: [
               { notempty: "movetargets" },
-              { line: ["where to move", { unitat: "selectunit" }] },
-            ],
+              { line: ["where to move", { unitat: "selectunit" }] }
+            ]
           },
           {
             if: [
               { markavailable: "selectswapunit" },
               {
-                line: [
-                  "another unit to swap",
-                  { unitat: "selectunit" },
-                  "with",
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+                line: ["another unit to swap", { unitat: "selectunit" }, "with"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   selectmovetarget: {
     ifelse: [
       {
         and: [
           { anyat: ["units", "selectmovetarget"] },
-          { noneat: ["oppbase", "selectmovetarget"] },
-        ],
+          { noneat: ["oppbase", "selectmovetarget"] }
+        ]
       },
       {
         line: [
           "Select",
           "where",
           { unitat: "selectmovetarget" },
-          "should end up",
-        ],
+          "should end up"
+        ]
       },
       {
         line: [
@@ -54,10 +50,10 @@ const transetInstructions: TransetInstructions = {
           "to make",
           { unitat: "selectunit" },
           "go to",
-          "selectmovetarget",
-        ],
-      },
-    ],
+          "selectmovetarget"
+        ]
+      }
+    ]
   },
   selectdeportdestination: {
     line: [
@@ -70,8 +66,8 @@ const transetInstructions: TransetInstructions = {
       "and deport",
       { unitat: "selectmovetarget" },
       "to",
-      "selectdeportdestination",
-    ],
+      "selectdeportdestination"
+    ]
   },
   selectswapunit: {
     line: [
@@ -80,8 +76,8 @@ const transetInstructions: TransetInstructions = {
       { unitat: "selectunit" },
       "to step to.",
       { unitat: "selectswapunit" },
-      "will step in the opposite direction",
-    ],
+      "will step in the opposite direction"
+    ]
   },
   selectswap1target: {
     line: [
@@ -94,9 +90,9 @@ const transetInstructions: TransetInstructions = {
       "and",
       { unitat: "selectswapunit" },
       "to",
-      { pos: { onlyin: "swap2step" } },
-    ],
-  },
+      { pos: { onlyin: "swap2step" } }
+    ]
+  }
 };
 
 export default transetInstructions;

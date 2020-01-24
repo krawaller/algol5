@@ -1,5 +1,8 @@
-import { KriegPerformance } from './_types';
+import { KriegPerformance } from "./_types";
 
-const kriegPerformance: KriegPerformance = { canAlwaysEnd: {}, massiveTree: {} };
+const kriegPerformance: KriegPerformance = {
+  canAlwaysEnd: {},
+  massiveTree: {}
+};
 
 export default kriegPerformance;

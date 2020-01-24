@@ -8,7 +8,7 @@ const chameleonMeta: ChameleonMeta = {
   tags: [],
   tagline: "Chamachamachameleon!",
   source:
-    "https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess",
+    "https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess"
 };
 
 export default chameleonMeta;

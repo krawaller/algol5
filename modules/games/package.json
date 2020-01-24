@@ -1,7 +1,7 @@
 {
   "name": "algol-games",
   "scripts": {
-    "robot": "npm install; npm run export; npm run checkCodes; npm run validate;",
+    "robot": "npm install; npm run export;",
     "export": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/export",
     "revise": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/revise",
     "retemplate": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/retemplate",

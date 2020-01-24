@@ -20,6 +20,7 @@ import { LocalSession, LocalSessionActions } from "../LocalSession";
 import { useModal } from "../../helpers";
 import GameLandingAbout from "./GameLanding.About";
 import GameLandingRules from "./GameLanding.Rules";
+import { ButtonGroup } from "../ButtonGroup";
 
 export interface GameLandingActions {
   new: () => void;
@@ -78,7 +79,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   return (
     <Fragment>
       <div className={styles.gameLandingQuote}>{meta.tagline}</div>
-      <div className={styles.gameLandingButtons}>
+      <ButtonGroup>
         <Button big onClick={openSessionModal}>
           Local
         </Button>
@@ -89,7 +90,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           About
         </Button>
         <Button onClick={openRulesModal}>Rules</Button>
-      </div>
+      </ButtonGroup>
       <Modal
         isOpen={isSessionModalOpen}
         onClose={closeSessionModal}

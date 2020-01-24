@@ -1,12 +1,3 @@
-.battleControlPanel {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
 .battleControlHint {
   text-align: center;
-}
-
-.battleControlPanel > button:not(:first-child) {
-  margin-left: 10px;
 }

@@ -12,6 +12,7 @@ import { Modal } from "../Modal";
 import { ExportBattle } from "../ExportBattle";
 import { BattleLandingNewSession } from "./BattleLanding.NewSession";
 import { BattleLandingOngoing } from "./BattleLanding.Ongoing";
+import { ButtonGroup } from "../ButtonGroup";
 
 interface BattleLandingActions {
   toHistory: () => void;
@@ -47,7 +48,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           <BattleLandingNewSession meta={meta} session={session} />
         )}
       </div>
-      <div className={css.battleLandingButtons}>
+      <ButtonGroup>
         <Button
           big
           disabled={session.endedBy && "This session is finished!"}
@@ -88,7 +89,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         >
           Delete
         </Button>
-      </div>
+      </ButtonGroup>
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">
         <ExportBattle battle={battle} meta={meta} session={session} />
       </Modal>

@@ -2,13 +2,14 @@ import React, { FunctionComponent, MouseEvent } from "react";
 import classNames from "classnames";
 import { preventDoubleTapZoom } from "./Button.preventDoubleTap";
 
-type ButtonProps = {
+export type ButtonProps = {
   disabled?: boolean | string;
   onClick?: (e: MouseEvent) => void;
   href?: string;
   big?: boolean;
   onError?: (err: Error) => void;
   controlId?: string;
+  text?: string;
 };
 
 import css from "./Button.cssProxy";
@@ -23,6 +24,7 @@ export const Button: FunctionComponent<ButtonProps> = props => {
     big,
     onError,
     controlId,
+    text,
   } = props;
   const handler = useButtonClickHandler({
     href,
@@ -41,7 +43,7 @@ export const Button: FunctionComponent<ButtonProps> = props => {
         [css.buttonBig]: big,
       })}
     >
-      {children}
+      {text || children}
     </button>
   );
   return href ? (

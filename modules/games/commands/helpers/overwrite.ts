@@ -29,7 +29,8 @@ export default async function overwrite(gameId: string, def: FullDefAnon) {
           / = {[\s\S]*};/,
           ` = ${makeNice(def[aspect as keyof FullDefAnon])};`
         );
-      return await fs.writeFile(apath, newFile);
+      const code = prettier.format(newFile, { filepath: "foo.ts" });
+      return await fs.writeFile(apath, code);
     })
   );
   console.log("Overwrote definitions for", gameId);

@@ -2,19 +2,35 @@ import { AlgolLocalBattle } from "../../../types";
 import { parsePath } from "../path";
 import { parseTimestamp } from "../timestamp";
 import { parseSprites } from "../sprites";
+import { sessionCodes } from "./session.codes";
 
 export const parseSession = (str: string, id: string): AlgolLocalBattle => {
   const method = Number(str[0]);
   if (method === 0) {
-    const obj = JSON.parse(str.slice(1)) as AlgolLocalBattle;
-    obj.id = id;
-    obj.path = parsePath((obj.path as unknown) as string, method);
-    obj.sprites = parseSprites((obj.sprites as unknown) as string);
-    obj.created = parseTimestamp((obj.created as unknown) as string);
-    if (obj.updated) {
-      obj.updated = parseTimestamp((obj.updated as unknown) as string);
-    }
-    return obj;
+    const [
+      methodCodeTurn,
+      encodedPath,
+      encodedSprites,
+      encodedCreated,
+      encodedUpdated,
+      endedBy,
+    ] = str.split("\n");
+    const status = sessionCodes[methodCodeTurn[1]];
+    return {
+      id,
+      player: status[0],
+      turn: parseInt(methodCodeTurn.slice(2), 36),
+      type: status[1],
+      path: parsePath(encodedPath, 0),
+      sprites: parseSprites(encodedSprites),
+      created: parseTimestamp(encodedCreated),
+      ...(encodedUpdated && {
+        updated: parseTimestamp(encodedUpdated),
+      }),
+      ...(endedBy && {
+        endedBy, // TODO - encode this too, just for fun?
+      }),
+    };
   }
   throw new Error("Unknown parse method");
 };

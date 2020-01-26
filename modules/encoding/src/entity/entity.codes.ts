@@ -1,8 +1,14 @@
 import { AlgolIcon } from "../../../types/gamedef";
 
-type Code = ["icon", AlgolIcon, 0 | 1 | 2, "none" | "mark" | "pot"] | ["mark"];
+export type AlgolBoardEntityCode =
+  | ["icon", AlgolIcon, 0 | 1 | 2, "none" | "mark" | "pot"]
+  | ["mark"]
+  | ["pot"]
+  | ["row", 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10]
+  | ["skip", 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9]
+  | ["repeat", 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9];
 
-export const codes: Record<string, Code> = {
+export const codes: Record<string, AlgolBoardEntityCode> = {
   x: ["icon", "bishop", 0, "none"],
   N: ["icon", "bishop", 1, "none"],
   a: ["icon", "bishop", 2, "none"],
@@ -54,8 +60,35 @@ export const codes: Record<string, Code> = {
   Y: ["icon", "queen", 0, "mark"],
   O: ["icon", "queen", 1, "mark"],
   k: ["icon", "queen", 2, "mark"],
-  n: ["icon", "queen", 0, "mark"],
-  L: ["icon", "queen", 1, "mark"],
-  K: ["icon", "queen", 2, "mark"],
+  n: ["icon", "queen", 0, "pot"],
+  L: ["icon", "queen", 1, "pot"],
+  K: ["icon", "queen", 2, "pot"],
   E: ["mark"],
+  I: ["pot"],
+  P: ["row", 2],
+  m: ["row", 3],
+  _: ["row", 4],
+  "-": ["row", 5],
+  ".": ["row", 6],
+  ":": ["row", 7],
+  9: ["row", 8],
+  "!": ["row", 9],
+  "=": ["row", 10],
+  "?": ["skip", 1],
+  o: ["skip", 2],
+  p: ["skip", 3],
+  v: ["skip", 4],
+  "(": ["skip", 5],
+  "+": ["skip", 6],
+  "[": ["skip", 7],
+  ";": ["skip", 8],
+  "*": ["skip", 9],
+  ")": ["repeat", 2],
+  "]": ["repeat", 3],
+  "<": ["repeat", 4],
+  ">": ["repeat", 5],
+  ",": ["repeat", 6],
+  "&": ["repeat", 7],
+  "'": ["repeat", 8],
+  "}": ["repeat", 9],
 };

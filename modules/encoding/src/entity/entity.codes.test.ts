@@ -20,4 +20,19 @@ describe("the entity codes", () => {
       }
     }
   }
+  for (const row of [2, 3, 4, 5, 6, 7, 8, 9, 10]) {
+    test(`contains [row, ${row}]`, () => {
+      expect(allCodes).toContainEqual(["row", row]);
+    });
+  }
+  for (const row of [1, 2, 3, 4, 5, 6, 7, 8, 9]) {
+    test(`contains [skip, ${row}]`, () => {
+      expect(allCodes).toContainEqual(["skip", row]);
+    });
+  }
+  for (const row of [2, 3, 4, 5, 6, 7, 8, 9]) {
+    test(`contains [repeat, ${row}]`, () => {
+      expect(allCodes).toContainEqual(["repeat", row]);
+    });
+  }
 });

@@ -31,7 +31,8 @@ let game = {
   gameId: "krieg",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { notfrozens: "knight", frozens: "knight" }
 };
 {
   const groupLayers = {

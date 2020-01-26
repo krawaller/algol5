@@ -53,7 +53,8 @@ let game = {
   gameId: "shoveoff",
   action: {},
   instruction: {},
-  commands: { north: {}, south: {}, east: {}, west: {} }
+  commands: { north: {}, south: {}, east: {}, west: {} },
+  iconMap: { soldiers: "pawn" }
 };
 {
   const groupLayers = {

@@ -32,7 +32,8 @@ let game = {
   gameId: "semaphor",
   action: {},
   instruction: {},
-  commands: { deploy: {}, promote: {} }
+  commands: { deploy: {}, promote: {} },
+  iconMap: { kings: "king", pawns: "pawn", bishops: "bishop" }
 };
 {
   const groupLayers = {

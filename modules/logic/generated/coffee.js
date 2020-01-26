@@ -39,7 +39,8 @@ let game = {
   gameId: "coffee",
   action: {},
   instruction: {},
-  commands: { uphill: {}, downhill: {}, horisontal: {}, vertical: {} }
+  commands: { uphill: {}, downhill: {}, horisontal: {}, vertical: {} },
+  iconMap: { soldiers: "pawn" }
 };
 {
   const groupLayers = {

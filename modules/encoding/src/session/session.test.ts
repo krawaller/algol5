@@ -1,4 +1,4 @@
-import { AlgolLocalBattle } from "../../types";
+import { AlgolLocalBattle } from "../../../types";
 import { parseSession, stringifySession } from ".";
 
 type Test = {
@@ -18,17 +18,7 @@ const tests: Test[] = [
       path: [1, 2, 3],
       player: 1,
       turn: 7,
-      screenshot: {
-        marks: [],
-        units: {
-          unit1: {
-            group: "gnurps",
-            id: "unit1",
-            owner: 1,
-            pos: "a1",
-          },
-        },
-      },
+      sprites: [{ pos: "a1", unit: { owner: 1, icon: "king" } }],
     },
   },
 ];

@@ -1,7 +1,11 @@
-import { AlgolBattle, AlgolLocalBattle } from "../../../types";
+import { AlgolBattle, AlgolLocalBattle, AlgolIconMap } from "../../../types";
 import { newSessionId } from "./newSessionId";
+import { board2sprites } from "../../../encoding/src/sprites";
 
-export function forkSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
+export function forkSessionFromBattle(
+  battle: AlgolBattle,
+  iconMap: AlgolIconMap
+): AlgolLocalBattle {
   return {
     id: newSessionId(),
     created: Date.now(),
@@ -9,9 +13,10 @@ export function forkSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
     player: battle.player,
     turn: battle.turnNumber,
     path: battle.path,
-    screenshot: {
+    sprites: board2sprites({
       marks: [],
       units: battle.state.board.units,
-    },
+      iconMap: iconMap,
+    }),
   };
 }

@@ -1,4 +1,5 @@
 import { Layer } from "../";
+import { AlgolIcon } from "../gamedef";
 
 export type AlgolStepLinks = {
   endTurn?: "startTurn1" | "startTurn2";
@@ -36,7 +37,7 @@ export type AlgolUnitState = {
   pos: string;
   id: string;
   group: string;
-  icon?: string;
+  icon?: AlgolIcon;
   owner: 0 | 1 | 2;
   from?: string; // TODO <--- kill
 };

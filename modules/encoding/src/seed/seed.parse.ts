@@ -1,8 +1,8 @@
-import { GameId } from "../../games/dist/list";
-import id2code from "../../games/dist/id2code";
-import id2name from "../../games/dist/id2name";
+import { GameId } from "../../../games/dist/list";
+import id2code from "../../../games/dist/id2code";
+import id2name from "../../../games/dist/id2name";
 import { parseBattleSave } from "../battleSave";
-import { decorateError, NewAlgolError } from "../../types";
+import { decorateError, NewAlgolError } from "../../../types";
 
 export const parseSeed = (str: string, expectedGameId: GameId) => {
   const expectedCode = Object.entries(id2code)

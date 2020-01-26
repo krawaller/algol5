@@ -10,7 +10,7 @@ import {
 
 import css from "./ExportBattle.cssProxy";
 import { InputButton } from "../InputButton";
-import { stringifySeed } from "../../../../encoding/seed/seed.stringify";
+import { stringifySeed } from "../../../../encoding/src/seed/seed.stringify";
 import { clipboardCopy } from "../../helpers";
 import { Input } from "../Input";
 

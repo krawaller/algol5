@@ -38,7 +38,8 @@ let game = {
   gameId: "murusgallicusadvanced",
   action: {},
   instruction: {},
-  commands: { move: {}, crush: {}, sacrifice: {}, fire: {} }
+  commands: { move: {}, crush: {}, sacrifice: {}, fire: {} },
+  iconMap: { towers: "rook", walls: "pawn", catapults: "queen" }
 };
 {
   const groupLayers = {

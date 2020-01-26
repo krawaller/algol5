@@ -30,7 +30,8 @@ let game = {
   gameId: "chameleon",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { knights: "knight", bishops: "bishop" }
 };
 {
   const groupLayers = {

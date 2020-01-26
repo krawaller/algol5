@@ -32,7 +32,8 @@ let game = {
   gameId: "descent",
   action: {},
   instruction: {},
-  commands: { move: {}, dig: {} }
+  commands: { move: {}, dig: {} },
+  iconMap: { pawns: "pawn", knights: "knight", rooks: "rook" }
 };
 {
   const groupLayers = {

@@ -1,4 +1,4 @@
-import { AlgolLocalBattle, AlgolBattleSave } from "../../types";
+import { AlgolLocalBattle, AlgolBattleSave } from "../../../types";
 import { parseTimestamp, stringifyTimestamp } from ".";
 
 type Test = {

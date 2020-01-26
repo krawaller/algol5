@@ -1,4 +1,4 @@
-import { AlgolScreenshot } from "../screenshot";
+import { AlgolSprite } from "../screenshot";
 
 export type AlgolLocalBattle = {
   id: string;
@@ -9,5 +9,5 @@ export type AlgolLocalBattle = {
   turn: number;
   endedBy?: string;
   type: "normal" | "fork" | "imported";
-  screenshot: AlgolScreenshot;
+  sprites: AlgolSprite[];
 };

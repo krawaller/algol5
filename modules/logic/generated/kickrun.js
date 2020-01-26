@@ -31,7 +31,8 @@ let game = {
   gameId: "kickrun",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { runners: "bishop", sidekickers: "pawn" }
 };
 {
   const groupLayers = {

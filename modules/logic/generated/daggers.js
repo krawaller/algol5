@@ -31,7 +31,8 @@ let game = {
   gameId: "daggers",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { daggers: "bishop", crowns: "king" }
 };
 {
   const groupLayers = {

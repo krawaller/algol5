@@ -32,7 +32,8 @@ let game = {
   gameId: "orthokon",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { soldiers: "pawn" }
 };
 {
   const groupLayers = {

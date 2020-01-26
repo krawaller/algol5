@@ -52,7 +52,7 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
           }) /* to ensure exiting comps get fresh anim */
       }
     >
-      {Object.values(units).map(({ group, owner, pos, id }) => (
+      {Object.values(units).map(({ group, owner, pos, id, icon }) => (
         <Transition
           key={id}
           timeout={{ enter: 40, exit: 500 + (targets[pos] ? 0 : 0) }}
@@ -80,7 +80,7 @@ export const BoardUnits: React.FunctionComponent<BoardUnitsProps> = ({
                     : undefined
                 }
                 transition={transition}
-                icon={iconMapper[group]}
+                icon={icon || iconMapper[group]}
                 owner={owner}
                 pos={posToShow}
                 height={height}

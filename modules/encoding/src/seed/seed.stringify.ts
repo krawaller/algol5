@@ -1,6 +1,6 @@
-import { AlgolBattleSave } from "../../types";
-import { GameId } from "../../games/dist/list";
-import id2code from "../../games/dist/id2code";
+import { AlgolBattleSave } from "../../../types";
+import { GameId } from "../../../games/dist/list";
+import id2code from "../../../games/dist/id2code";
 import { stringifyBattleSave } from "../battleSave";
 
 export const stringifySeed = (

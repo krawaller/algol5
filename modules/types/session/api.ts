@@ -2,6 +2,7 @@ import { AlgolBattleUI } from "./ui";
 import { AlgolBattle, AlgolHistoryMove } from "./battle";
 import { GameId } from "../../games/dist/list";
 import { AlgolBattleSave } from "./save";
+import { AlgolIconMap } from "..";
 
 export type AlgolStatefulGameAPI = {
   gameId: GameId;
@@ -28,4 +29,5 @@ export type AlgolStaticGameAPI = {
     arg?: string
   ) => AlgolBattle;
   getBattleUI: (battle: AlgolBattle) => AlgolBattleUI;
+  iconMap: AlgolIconMap;
 };

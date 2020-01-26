@@ -8,10 +8,12 @@ export * from "./screenshot";
 export * from "./_args";
 export * from "./error";
 
+export type AlgolIconMap = Record<string, AlgolIcon>;
+
 export type AlgolGameGraphics = {
   height: number;
   width: number;
-  icons: { [group: string]: AlgolIcon };
+  icons: AlgolIconMap;
   dataURI: string;
 };
 

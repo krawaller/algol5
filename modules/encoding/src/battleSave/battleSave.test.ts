@@ -1,4 +1,4 @@
-import { AlgolBattleSave } from "../../types";
+import { AlgolBattleSave } from "../../../types";
 import { parseBattleSave, stringifyBattleSave } from ".";
 
 type Test = {

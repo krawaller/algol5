@@ -26,15 +26,17 @@ export const useDemo = (opts: UseDemoOptions) => {
   const timeout = useRef<null | ReturnType<typeof setTimeout>>();
   const frameCount = demo.patches.length + 1;
 
-  // initial hydration (for performance on initial screen, make them pop one at a time)
+  // initial hydration (for performance with many demos running, make them pop one at a time)
   useEffect(() => {
-    setHydrInfo({
-      ...hydrInfo,
-      demo: {
-        anims: demo.anims,
-        positions: [demo.initial],
-      },
-    });
+    setTimeout(() => {
+      setHydrInfo({
+        ...hydrInfo,
+        demo: {
+          anims: demo.anims,
+          positions: [demo.initial],
+        },
+      });
+    }, 10);
   }, [demo]);
 
   // start/stop

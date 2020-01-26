@@ -1,13 +1,13 @@
-import { AlgolBoardEntity } from "../../../types";
-import { codes, AlgolBoardEntityCode } from "./entity.codes";
+import { AlgolSprite } from "../../../types";
+import { codes, AlgolSpriteCode } from "./sprite.codes";
 import { coords2pos } from "../../../common";
 
-export const parseEntities = (str: string): AlgolBoardEntity[] => {
+export const parseSprites = (str: string): AlgolSprite[] => {
   let x = 1;
   let y = 1;
-  const ret: AlgolBoardEntity[] = [];
+  const ret: AlgolSprite[] = [];
   const reprs = str.split("").map(c => codes[c]);
-  let previous: AlgolBoardEntityCode | null = null;
+  let previous: AlgolSpriteCode | null = null;
   for (const code of reprs) {
     let pos = coords2pos({ x, y });
     switch (code[0]) {
@@ -49,10 +49,7 @@ export const parseEntities = (str: string): AlgolBoardEntity[] => {
   return ret;
 };
 
-const code2entity = (
-  code: AlgolBoardEntityCode,
-  pos: string
-): AlgolBoardEntity => {
+const code2entity = (code: AlgolSpriteCode, pos: string): AlgolSprite => {
   switch (code[0]) {
     case "icon":
       return {

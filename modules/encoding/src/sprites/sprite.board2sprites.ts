@@ -1,22 +1,15 @@
-import {
-  AlgolBoardState,
-  AlgolBoardEntity,
-  AlgolIconMap,
-  AlgolArmy,
-} from "../../../types";
-import { sortEntities } from "./entity.sort";
+import { AlgolSprite, AlgolIconMap, AlgolArmy } from "../../../types";
+import { sortSprites } from "./sprite.sort";
 
-type Board2EntitiesOpts = {
+type Board2SpritesOpts = {
   units: AlgolArmy;
   iconMap: AlgolIconMap;
   marks: string[];
   potentialMarks?: string[];
 };
 
-export const board2entities = (
-  opts: Board2EntitiesOpts
-): AlgolBoardEntity[] => {
-  const entityByPos: Record<string, AlgolBoardEntity> = {};
+export const board2sprites = (opts: Board2SpritesOpts): AlgolSprite[] => {
+  const entityByPos: Record<string, AlgolSprite> = {};
   const { units, iconMap, marks, potentialMarks = [] } = opts;
   for (const pos of potentialMarks) {
     entityByPos[pos] = { pos, mark: "pot" };
@@ -35,5 +28,5 @@ export const board2entities = (
       },
     };
   }
-  return sortEntities(Object.values(entityByPos));
+  return sortSprites(Object.values(entityByPos));
 };

@@ -1,9 +1,9 @@
-import { sortEntities } from "./entity.sort";
-import { AlgolBoardEntity } from "../../../types";
+import { sortSprites } from "./sprite.sort";
+import { AlgolSprite } from "../../../types";
 
-describe("the sortEntities encoding helper", () => {
+describe("the sortSprites encoding helper", () => {
   test("sorts by ascending y, ascending x", () => {
-    const entities: AlgolBoardEntity[] = [
+    const entities: AlgolSprite[] = [
       { pos: "c7" },
       { pos: "a10" },
       { pos: "c3" },
@@ -11,7 +11,7 @@ describe("the sortEntities encoding helper", () => {
       { pos: "a1" },
       { pos: "b4" },
     ];
-    expect(sortEntities(entities)).toEqual([
+    expect(sortSprites(entities)).toEqual([
       { pos: "a1" },
       { pos: "c1" },
       { pos: "c3" },

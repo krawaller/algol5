@@ -1,4 +1,4 @@
-import { codes } from "../src/entity/entity.codes";
+import { codes } from "../src/sprites/sprite.codes";
 
 const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lower = "abcdefghijklmnopqrstuvwxyz";

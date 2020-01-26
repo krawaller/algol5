@@ -1,7 +1,7 @@
 import { AlgolLocalBattle } from "../../../types";
 import { parsePath } from "../path";
 import { parseTimestamp } from "../timestamp";
-import { parseEntities } from "../entity";
+import { parseSprites } from "../sprites";
 
 export const parseSession = (str: string, id: string): AlgolLocalBattle => {
   const method = Number(str[0]);
@@ -9,7 +9,7 @@ export const parseSession = (str: string, id: string): AlgolLocalBattle => {
     const obj = JSON.parse(str.slice(1)) as AlgolLocalBattle;
     obj.id = id;
     obj.path = parsePath((obj.path as unknown) as string, method);
-    obj.sprites = parseEntities((obj.sprites as unknown) as string);
+    obj.sprites = parseSprites((obj.sprites as unknown) as string);
     obj.created = parseTimestamp((obj.created as unknown) as string);
     if (obj.updated) {
       obj.updated = parseTimestamp((obj.updated as unknown) as string);

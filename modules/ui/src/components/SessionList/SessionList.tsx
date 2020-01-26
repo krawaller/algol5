@@ -4,7 +4,7 @@ import css from "./SessionList.cssProxy";
 import { AlgolGameGraphics, AlgolLocalBattle } from "../../../../types";
 import { Board } from "../Board";
 import { SessionInfo } from "./SessionList.Info";
-import { entities2board } from "../../../../encoding/src/entity/entity.entities2board";
+import { sprites2board } from "../../../../encoding/src/sprites/sprite.sprites2board";
 
 export interface SessionListActions {
   load: (session: AlgolLocalBattle) => void;
@@ -35,7 +35,7 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
         <div className={css.sessionListEmpty}>No saved sessions found</div>
       ) : (
         sessions.map(session => {
-          const board = entities2board(session.sprites);
+          const board = sprites2board(session.sprites);
           return (
             <div
               key={session.id}

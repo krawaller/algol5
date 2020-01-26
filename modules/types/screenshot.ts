@@ -7,7 +7,7 @@ export type AlgolScreenshot = {
   units: AlgolArmy;
 };
 
-export type AlgolBoardEntity = {
+export type AlgolSprite = {
   pos: string;
   mark?: "mark" | "pot";
   unit?: {

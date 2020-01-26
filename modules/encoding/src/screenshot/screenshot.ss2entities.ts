@@ -1,14 +1,10 @@
-import {
-  AlgolScreenshot,
-  AlgolBoardEntity,
-  AlgolIconMap,
-} from "../../../types";
+import { AlgolScreenshot, AlgolSprite, AlgolIconMap } from "../../../types";
 
 export const screenshot2entities = (
   screenshot: AlgolScreenshot,
   iconMap: AlgolIconMap
-): AlgolBoardEntity[] => {
-  const entityByPos: Record<string, AlgolBoardEntity> = {};
+): AlgolSprite[] => {
+  const entityByPos: Record<string, AlgolSprite> = {};
   for (const pos of screenshot.marks) {
     entityByPos[pos] = { pos, mark: "mark" };
   }

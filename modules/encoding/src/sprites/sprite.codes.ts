@@ -1,6 +1,6 @@
 import { AlgolIcon } from "../../../types/gamedef";
 
-export type AlgolBoardEntityCode =
+export type AlgolSpriteCode =
   | ["icon", AlgolIcon, 0 | 1 | 2, "none" | "mark" | "pot"]
   | ["mark"]
   | ["pot"]
@@ -8,7 +8,7 @@ export type AlgolBoardEntityCode =
   | ["skip", 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9]
   | ["repeat", 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9];
 
-export const codes: Record<string, AlgolBoardEntityCode> = {
+export const codes: Record<string, AlgolSpriteCode> = {
   x: ["icon", "bishop", 0, "none"],
   N: ["icon", "bishop", 1, "none"],
   a: ["icon", "bishop", 2, "none"],

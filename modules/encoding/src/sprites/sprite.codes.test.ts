@@ -1,7 +1,7 @@
-import { codes } from "./entity.codes";
+import { codes } from "./sprite.codes";
 import { AlgolIcon } from "../../../types/gamedef";
 
-describe("the entity codes", () => {
+describe("the sprite codes", () => {
   const allCodes = Object.values(codes);
   const icons: AlgolIcon[] = [
     "pawn",

@@ -1,7 +1,7 @@
-import { AlgolBoardEntity } from "../../../types";
+import { AlgolSprite } from "../../../types";
 import { pos2coords } from "../../../common";
 
-export const sortEntities = (entities: AlgolBoardEntity[]) =>
+export const sortSprites = (entities: AlgolSprite[]) =>
   entities.slice().sort((e1, e2) => {
     const c1 = pos2coords(e1.pos);
     const c2 = pos2coords(e2.pos);

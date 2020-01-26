@@ -1,5 +1,5 @@
 import { AlgolBattle, AlgolLocalBattle } from "../../../types";
-import { board2entities } from "../../../encoding/src/entity";
+import { board2sprites } from "../../../encoding/src/sprites";
 
 export function updateSession(
   battle: AlgolBattle,
@@ -8,7 +8,7 @@ export function updateSession(
   return {
     ...session,
     updated: Date.now(),
-    sprites: board2entities({
+    sprites: board2sprites({
       marks: battle.state.board.marks,
       units: battle.state.board.units,
       iconMap: battle.iconMap,

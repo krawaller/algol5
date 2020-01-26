@@ -1,13 +1,13 @@
-import { AlgolBoardEntity } from "../../../types";
-import { code2char } from "./entity.code2char";
+import { AlgolSprite } from "../../../types";
+import { code2char } from "./sprite.code2char";
 import { pos2coords } from "../../../common";
-import { sortEntities } from "./entity.sort";
+import { sortSprites } from "./sprite.sort";
 
-export const stringifyEntities = (entities: AlgolBoardEntity[]) => {
+export const stringifySprites = (sprites: AlgolSprite[]) => {
   let x = 1;
   let y = 1;
   let str = "";
-  for (const entity of sortEntities(entities)) {
+  for (const entity of sortSprites(sprites)) {
     const c = pos2coords(entity.pos);
     if (c.y !== y) {
       str += code2char(["row", c.y as any]);

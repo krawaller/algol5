@@ -1,4 +1,4 @@
-import { codes, AlgolBoardEntityCode } from "./entity.codes";
+import { codes, AlgolSpriteCode } from "./sprite.codes";
 
 const mapper = Object.entries(codes)
   .map(([key, val]) => [val.toString(), key])
@@ -10,7 +10,7 @@ const mapper = Object.entries(codes)
     {} as Record<string, string>
   );
 
-export const code2char = (code: AlgolBoardEntityCode) => {
+export const code2char = (code: AlgolSpriteCode) => {
   const key = mapper[code.toString()];
   if (!key) {
     throw new Error("Failed to convert entity code to proper character");

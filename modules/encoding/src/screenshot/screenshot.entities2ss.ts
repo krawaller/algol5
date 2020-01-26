@@ -1,6 +1,6 @@
-import { AlgolBoardEntity, AlgolScreenshot } from "../../../types";
+import { AlgolSprite, AlgolScreenshot } from "../../../types";
 
-export const entities2screenshot = (entities: AlgolBoardEntity[]) => {
+export const entities2screenshot = (entities: AlgolSprite[]) => {
   const screenshot: AlgolScreenshot = {
     units: {},
     marks: [],

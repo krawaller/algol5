@@ -1,10 +1,10 @@
-import { stringifyEntities, parseEntities } from ".";
-import { AlgolBoardEntity } from "../../../types";
-import { sortEntities } from "./entity.sort";
+import { stringifySprites, parseSprites } from ".";
+import { AlgolSprite } from "../../../types";
+import { sortSprites } from "./sprite.sort";
 
 type Test = {
   desc: string;
-  entities: AlgolBoardEntity[];
+  entities: AlgolSprite[];
 };
 
 const tests: Test[] = [
@@ -26,11 +26,9 @@ const tests: Test[] = [
 
 describe("encoding board entities", () => {
   for (const t of tests) {
-    const code = stringifyEntities(t.entities);
+    const code = stringifySprites(t.entities);
     test(`Handled ${t.desc} via ${code}`, () => {
-      expect(sortEntities(t.entities)).toEqual(
-        sortEntities(parseEntities(code))
-      );
+      expect(sortSprites(t.entities)).toEqual(sortSprites(parseSprites(code)));
     });
   }
 });

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { AlgolDemo, AlgolHydratedDemo } from "../../../types";
-import { inflateDemo } from "../../../common";
+import { AlgolDemo, AlgolHydratedDemo, AlgolDemoPatch } from "../../../types";
+import { hydrateDemoFrame } from "../../../common";
 
 const FRAME_LENGTH_MS = 1500;
 
@@ -10,34 +10,62 @@ type UseDemoOptions = {
   restart?: boolean;
 };
 
+type HydrationInfo = {
+  demo: AlgolHydratedDemo | null;
+  patches: AlgolDemoPatch[];
+  count: number;
+};
+
 export const useDemo = (opts: UseDemoOptions) => {
   const { demo, playing, restart } = opts;
-  const [count, setCount] = useState(0);
-  const [hydrDemo, setHydrDemo] = useState<AlgolHydratedDemo | null>(null);
+  const [hydrInfo, setHydrInfo] = useState<HydrationInfo>({
+    demo: null,
+    patches: demo.patches,
+    count: 0,
+  });
   const timeout = useRef<null | ReturnType<typeof setTimeout>>();
+  const frameCount = demo.patches.length + 1;
 
-  // initial hydration
+  // initial hydration (for performance with many demos running, make them pop one at a time)
   useEffect(() => {
     setTimeout(() => {
-      setHydrDemo(inflateDemo(demo));
+      setHydrInfo({
+        ...hydrInfo,
+        demo: {
+          anims: demo.anims,
+          positions: [demo.initial],
+        },
+      });
     }, 0);
   }, [demo]);
 
   // start/stop
   useEffect(() => {
     if (!playing) {
+      // user stopped the demo. clear eventual timeout, and eventually restart count
       if (timeout.current) {
         clearTimeout(timeout.current);
         timeout.current = null;
         if (restart) {
-          setCount(0);
+          setHydrInfo({
+            ...hydrInfo,
+            count: 0,
+          });
         }
       }
-    } else if (hydrDemo) {
+    } else if (hydrInfo.demo) {
+      // we're playing, should tick!
       if (!timeout.current) {
         timeout.current = setTimeout(() => {
           timeout.current = null;
-          setCount(cur => cur + 1);
+          setHydrInfo({
+            ...hydrInfo,
+            ...(hydrInfo.patches.length && {
+              demo: hydrateDemoFrame(hydrInfo.demo!, hydrInfo.patches[0]),
+              patches: hydrInfo.patches.slice(1),
+            }),
+            count: (hydrInfo.count + 1) % frameCount,
+          });
         }, FRAME_LENGTH_MS);
       }
     }
@@ -46,9 +74,7 @@ export const useDemo = (opts: UseDemoOptions) => {
         clearTimeout(timeout.current);
       }
     };
-  }, [hydrDemo, playing, count, restart]);
+  }, [hydrInfo.patches, hydrInfo.demo, hydrInfo.count, playing, restart]);
 
-  const frame = hydrDemo ? count % hydrDemo.positions.length : 0;
-
-  return { frame, hydrDemo };
+  return { frame: hydrInfo.count, hydrDemo: hydrInfo.demo };
 };

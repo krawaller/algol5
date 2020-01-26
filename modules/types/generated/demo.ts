@@ -1,6 +1,6 @@
 import { AlgolArmy, AlgolAnimCompiled } from "../";
 
-interface Delta {
+export interface AlgolDemoPatch {
   // from jsondiffpatch
   [key: string]: any;
   [key: number]: any;
@@ -8,7 +8,7 @@ interface Delta {
 
 export type AlgolDemo = {
   initial: AlgolArmy;
-  patches: Delta[];
+  patches: AlgolDemoPatch[];
   anims: { [patchNum: string]: Partial<AlgolAnimCompiled> };
 };
 

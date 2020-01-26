@@ -1,4 +1,4 @@
-import { AlgolTurn, AlgolArmy, AlgolContentAnon } from "../";
+import { AlgolTurn, AlgolArmy, AlgolContentAnon, AlgolIconMap } from "../";
 import { AlgolAnimCompiled } from "../generated";
 
 export type AlgolBattle = {
@@ -10,6 +10,7 @@ export type AlgolBattle = {
   gameEndedBy?: string;
   winner?: 0 | 1 | 2;
   path: number[];
+  iconMap: AlgolIconMap;
 };
 
 export type AlgolUndo = {

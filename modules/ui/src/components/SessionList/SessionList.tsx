@@ -4,6 +4,7 @@ import css from "./SessionList.cssProxy";
 import { AlgolGameGraphics, AlgolLocalBattle } from "../../../../types";
 import { Board } from "../Board";
 import { SessionInfo } from "./SessionList.Info";
+import { entities2board } from "../../../../encoding/src/entity/entity.entities2board";
 
 export interface SessionListActions {
   load: (session: AlgolLocalBattle) => void;
@@ -33,23 +34,26 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
       {sessions.length === 0 ? (
         <div className={css.sessionListEmpty}>No saved sessions found</div>
       ) : (
-        sessions.map(session => (
-          <div
-            key={session.id}
-            className={css.sessionListItem}
-            onClick={() => actions.load(session)}
-          >
-            <div className={css.sessionListItemScreenshot}>
-              <Board
-                graphics={graphics}
-                potentialMarks={EMPTYARR}
-                marks={session.screenshot.marks}
-                units={session.screenshot.units}
-              />
+        sessions.map(session => {
+          const board = entities2board(session.sprites);
+          return (
+            <div
+              key={session.id}
+              className={css.sessionListItem}
+              onClick={() => actions.load(session)}
+            >
+              <div className={css.sessionListItemScreenshot}>
+                <Board
+                  graphics={graphics}
+                  potentialMarks={EMPTYARR}
+                  marks={board.marks}
+                  units={board.units}
+                />
+              </div>
+              <SessionInfo session={session} />
             </div>
-            <SessionInfo session={session} />
-          </div>
-        ))
+          );
+        })
       )}
     </div>
   );

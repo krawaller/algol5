@@ -18,18 +18,7 @@ const tests: Test[] = [
       path: [1, 2, 3],
       player: 1,
       turn: 7,
-      screenshot: {
-        marks: [],
-        potentialMarks: [],
-        units: {
-          unit1: {
-            group: "gnurps",
-            id: "unit1",
-            owner: 1,
-            pos: "a1",
-          },
-        },
-      },
+      sprites: [{ pos: "a1", unit: { owner: 1, icon: "king" } }],
     },
   },
 ];

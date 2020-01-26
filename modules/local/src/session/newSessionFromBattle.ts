@@ -1,5 +1,6 @@
 import { AlgolBattle, AlgolLocalBattle } from "../../../types";
 import { newSessionId } from "./newSessionId";
+import { board2entities } from "../../../encoding/src/entity";
 
 export function newSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
   return {
@@ -9,10 +10,10 @@ export function newSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
     player: 1,
     turn: 1,
     path: [],
-    screenshot: {
+    sprites: board2entities({
       marks: [],
       units: battle.state.board.units,
-      potentialMarks: [],
-    },
+      iconMap: battle.iconMap,
+    }),
   };
 }

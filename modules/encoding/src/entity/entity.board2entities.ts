@@ -2,21 +2,30 @@ import {
   AlgolBoardState,
   AlgolBoardEntity,
   AlgolIconMap,
+  AlgolArmy,
 } from "../../../types";
 import { sortEntities } from "./entity.sort";
 
+type Board2EntitiesOpts = {
+  units: AlgolArmy;
+  iconMap: AlgolIconMap;
+  marks: string[];
+  potentialMarks?: string[];
+};
+
 export const board2entities = (
-  board: AlgolBoardState,
-  iconMap: AlgolIconMap
+  opts: Board2EntitiesOpts
 ): AlgolBoardEntity[] => {
   const entityByPos: Record<string, AlgolBoardEntity> = {};
-  for (const pos of board.potentialMarks) {
+  const { units, iconMap, marks, potentialMarks = [] } = opts;
+  for (const pos of potentialMarks) {
     entityByPos[pos] = { pos, mark: "pot" };
   }
-  for (const pos of board.marks) {
+
+  for (const pos of marks) {
     entityByPos[pos] = { pos, mark: "mark" };
   }
-  for (const unit of Object.values(board.units)) {
+  for (const unit of Object.values(units)) {
     entityByPos[unit.pos] = {
       ...entityByPos[unit.pos],
       pos: unit.pos,

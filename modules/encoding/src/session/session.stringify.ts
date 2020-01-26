@@ -2,6 +2,7 @@ import { AlgolLocalBattle } from "../../../types";
 import { stringifyPath } from "../path";
 import { stringifyScreenshot } from "../screenshot";
 import { stringifyTimestamp } from "../timestamp";
+import { stringifyEntities } from "../entity";
 
 export const stringifySession = (local: AlgolLocalBattle, method: number) => {
   if (method === 0) {
@@ -11,7 +12,7 @@ export const stringifySession = (local: AlgolLocalBattle, method: number) => {
       JSON.stringify({
         ...data,
         path: stringifyPath(data.path, 0),
-        screenshot: stringifyScreenshot(data.screenshot, method),
+        sprites: stringifyEntities(data.sprites),
         created: stringifyTimestamp(data.created),
         ...(data.updated && {
           updated: stringifyTimestamp(data.updated),

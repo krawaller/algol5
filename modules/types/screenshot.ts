@@ -8,7 +8,7 @@ export type AlgolScreenshot = {
 
 export type AlgolBoardEntity = {
   pos: string;
-  mark?: boolean;
+  mark?: "mark" | "pot";
   unit?: {
     icon: AlgolIcon;
     owner: 0 | 1 | 2;

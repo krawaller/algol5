@@ -31,7 +31,8 @@ let game = {
   gameId: "serauqs",
   action: {},
   instruction: {},
-  commands: { promote: {}, move: {} }
+  commands: { promote: {}, move: {} },
+  iconMap: { soldiers: "pawn", wild: "king" }
 };
 {
   const groupLayers = {

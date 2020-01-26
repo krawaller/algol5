@@ -52,7 +52,8 @@ let game = {
   gameId: "gowiththefloe",
   action: {},
   instruction: {},
-  commands: { move: {}, eat: {} }
+  commands: { move: {}, eat: {} },
+  iconMap: { seals: "king", bears: "queen", holes: "pawn" }
 };
 {
   const groupLayers = {

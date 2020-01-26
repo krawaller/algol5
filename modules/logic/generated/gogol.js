@@ -30,7 +30,8 @@ let game = {
   gameId: "gogol",
   action: {},
   instruction: {},
-  commands: { deploy: {}, move: {}, jump: {} }
+  commands: { deploy: {}, move: {}, jump: {} },
+  iconMap: { kings: "king", soldiers: "pawn" }
 };
 {
   const groupLayers = {

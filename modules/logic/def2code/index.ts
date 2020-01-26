@@ -18,7 +18,9 @@ export function compileGameToCode(gameDef: FullDefAnon) {
     gameDef.flow.commands
   )
     .map(c => `${c}: {}`)
-    .join(", ")} } }; `;
+    .join(", ")} },
+    iconMap: ${JSON.stringify(gameDef.graphics.icons)}
+  }; `;
 
   ([1, 2] as const).forEach(player => {
     ret += `{ `;

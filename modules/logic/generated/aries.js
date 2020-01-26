@@ -31,7 +31,8 @@ let game = {
   gameId: "aries",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { soldiers: "rook" }
 };
 {
   const groupLayers = {

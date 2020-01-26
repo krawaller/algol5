@@ -32,7 +32,8 @@ let game = {
   gameId: "atrium",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { kings: "king", queens: "queen" }
 };
 {
   const groupLayers = {

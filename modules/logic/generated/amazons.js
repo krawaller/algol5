@@ -32,7 +32,8 @@ let game = {
   gameId: "amazons",
   action: {},
   instruction: {},
-  commands: { move: {}, fire: {} }
+  commands: { move: {}, fire: {} },
+  iconMap: { queens: "queen", fires: "pawn" }
 };
 {
   const groupLayers = {

@@ -31,7 +31,8 @@ let game = {
   gameId: "transet",
   action: {},
   instruction: {},
-  commands: { move: {}, swap: {} }
+  commands: { move: {}, swap: {} },
+  iconMap: { pinets: "pawn", piokers: "bishop", piases: "king" }
 };
 {
   const groupLayers = {

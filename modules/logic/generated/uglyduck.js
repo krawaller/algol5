@@ -31,7 +31,8 @@ let game = {
   gameId: "uglyduck",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { soldiers: "pawn", kings: "king" }
 };
 {
   const groupLayers = {

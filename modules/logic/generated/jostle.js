@@ -38,7 +38,8 @@ let game = {
   gameId: "jostle",
   action: {},
   instruction: {},
-  commands: { jostle: {} }
+  commands: { jostle: {} },
+  iconMap: { checkers: "pawn" }
 };
 {
   const groupLayers = {

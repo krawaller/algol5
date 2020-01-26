@@ -36,7 +36,8 @@ let game = {
   gameId: "threemusketeers",
   action: {},
   instruction: {},
-  commands: { move: {} }
+  commands: { move: {} },
+  iconMap: { pawns: "pawn", kings: "king" }
 };
 {
   const groupLayers = {

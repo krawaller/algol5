@@ -38,7 +38,8 @@ let game = {
   gameId: "duplo",
   action: {},
   instruction: {},
-  commands: { deploy: {}, expand: {} }
+  commands: { deploy: {}, expand: {} },
+  iconMap: { soldiers: "pawn" }
 };
 {
   const groupLayers = {

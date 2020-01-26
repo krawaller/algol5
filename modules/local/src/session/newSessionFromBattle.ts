@@ -12,6 +12,7 @@ export function newSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
     screenshot: {
       marks: [],
       units: battle.state.board.units,
+      potentialMarks: [],
     },
   };
 }

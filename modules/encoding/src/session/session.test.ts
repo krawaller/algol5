@@ -20,6 +20,7 @@ const tests: Test[] = [
       turn: 7,
       screenshot: {
         marks: [],
+        potentialMarks: [],
         units: {
           unit1: {
             group: "gnurps",

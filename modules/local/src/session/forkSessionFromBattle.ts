@@ -12,6 +12,7 @@ export function forkSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
     screenshot: {
       marks: [],
       units: battle.state.board.units,
+      potentialMarks: [],
     },
   };
 }

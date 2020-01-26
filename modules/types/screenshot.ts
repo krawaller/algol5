@@ -3,6 +3,7 @@ import { AlgolIcon } from "./gamedef";
 
 export type AlgolScreenshot = {
   marks: string[];
+  potentialMarks: string[];
   units: AlgolArmy;
 };
 

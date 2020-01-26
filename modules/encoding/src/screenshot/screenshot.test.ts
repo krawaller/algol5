@@ -20,6 +20,7 @@ const tests: Test[] = [
         },
       },
       marks: ["a2"],
+      potentialMarks: [],
     },
   },
 ];

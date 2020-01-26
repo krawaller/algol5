@@ -4,11 +4,15 @@ export const entities2screenshot = (entities: AlgolBoardEntity[]) => {
   const screenshot: AlgolScreenshot = {
     units: {},
     marks: [],
+    potentialMarks: [],
   };
   let unitCount = 0;
   for (const entity of entities) {
-    if (entity.mark) {
+    if (entity.mark === "mark") {
       screenshot.marks.push(entity.pos);
+    }
+    if (entity.mark === "pot") {
+      screenshot.potentialMarks.push(entity.pos);
     }
     if (entity.unit) {
       const unitId = `unit${++unitCount}`;

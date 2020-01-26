@@ -9,7 +9,8 @@ export function updateSession(
     updated: Date.now(),
     screenshot: {
       marks: battle.state.board.marks,
-      units: battle.state.board.units, // TODO - ensure icon here?
+      potentialMarks: [],
+      units: battle.state.board.units,
     },
     endedBy: battle.gameEndedBy,
     turn: battle.turnNumber,

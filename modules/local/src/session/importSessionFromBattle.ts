@@ -15,6 +15,7 @@ export function importSessionFromBattle(battle: AlgolBattle): AlgolLocalBattle {
     screenshot: {
       marks: battle.gameEndedBy ? battle.state.board.marks : [],
       units: battle.state.board.units,
+      potentialMarks: [],
     },
   };
 }

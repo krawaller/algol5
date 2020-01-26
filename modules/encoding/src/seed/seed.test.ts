@@ -1,5 +1,5 @@
-import { AlgolBattleSave } from "../../types";
-import { GameId } from "../../games/dist/list";
+import { AlgolBattleSave } from "../../../types";
+import { GameId } from "../../../games/dist/list";
 import { stringifySeed } from "./seed.stringify";
 import { parseSeed } from "./seed.parse";
 

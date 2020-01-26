@@ -1,4 +1,4 @@
-import { AlgolLocalBattle } from "../../types";
+import { AlgolLocalBattle } from "../../../types";
 import { parseSession, stringifySession } from ".";
 
 type Test = {

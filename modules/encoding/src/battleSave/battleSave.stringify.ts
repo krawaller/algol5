@@ -1,4 +1,4 @@
-import { AlgolBattleSave } from "../../types";
+import { AlgolBattleSave } from "../../../types";
 import { stringifyPath } from "../path/path.stringify";
 import { endedPlrCodes, ongoingPlrCodes } from "./battleSave.codes";
 

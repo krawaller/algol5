@@ -7,7 +7,7 @@ import { makeBattleSave } from "../src/battle/helpers";
 import {
   parseBattleSave,
   stringifyBattleSave,
-} from "../../encoding/battleSave";
+} from "../../encoding/src/battleSave";
 
 const identifyMark = /^[a-z][0-9]+$/;
 

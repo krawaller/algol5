@@ -1,4 +1,4 @@
-import { AlgolScreenshot } from "../../types";
+import { AlgolScreenshot } from "../../../types";
 
 export const stringifyScreenshot = (
   screenshot: AlgolScreenshot,

@@ -1,4 +1,4 @@
-import { AlgolLocalBattle } from "../../types";
+import { AlgolLocalBattle } from "../../../types";
 import { parsePath } from "../path";
 import { parseScreenshot } from "../screenshot";
 import { parseTimestamp } from "../timestamp";

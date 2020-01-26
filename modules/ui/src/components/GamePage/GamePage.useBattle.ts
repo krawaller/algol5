@@ -17,7 +17,7 @@ import {
   getSessionById,
   setLatestSessionId,
 } from "../../../../local/src";
-import { parseSeed } from "../../../../encoding/seed";
+import { parseSeed } from "../../../../encoding/src/seed";
 import { importSessionFromBattle } from "../../../../local/src/session/importSessionFromBattle";
 
 type BattleAction =

@@ -1,4 +1,4 @@
-import { AlgolScreenshot } from "../../types";
+import { AlgolScreenshot } from "../../../types";
 import { parseScreenshot, stringifyScreenshot } from ".";
 
 type Test = {

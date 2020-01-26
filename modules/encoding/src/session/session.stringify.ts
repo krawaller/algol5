@@ -1,6 +1,5 @@
 import { AlgolLocalBattle } from "../../../types";
 import { stringifyPath } from "../path";
-import { stringifyScreenshot } from "../screenshot";
 import { stringifyTimestamp } from "../timestamp";
 import { stringifySprites } from "../sprites";
 

@@ -64,7 +64,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
     } else if (cmnd === "new") {
       // user started a new local battle! initiate it
       const battle = api.newBattle();
-      const session = newSessionFromBattle(battle);
+      const session = newSessionFromBattle(battle, api.iconMap);
       setLatestSessionId(api.gameId, session.id);
       return {
         battle,
@@ -129,7 +129,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
     } else if (cmnd === "fork") {
       const historyFrame = state.battle!.history[state.frame];
       const battle = api.fromFrame(historyFrame);
-      const session = forkSessionFromBattle(battle);
+      const session = forkSessionFromBattle(battle, api.iconMap);
       setLatestSessionId(api.gameId, session.id);
       writeSession(api.gameId, session);
       return {
@@ -156,7 +156,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
     } else if (cmnd === "import") {
       const save: AlgolBattleSave = arg;
       const battle = api.fromSave(save);
-      const session = importSessionFromBattle(battle);
+      const session = importSessionFromBattle(battle, api.iconMap);
       setLatestSessionId(api.gameId, session.id);
       writeSession(api.gameId, session);
       return {
@@ -172,7 +172,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       const frame = battle.gameEndedBy ? battle.history.length - 1 : -1;
       let session = state.session;
       if (cmnd === "endTurn") {
-        session = updateSession(battle, state.session!);
+        session = updateSession(battle, state.session!, api.iconMap);
         writeSession(api.gameId, session);
       }
       return {

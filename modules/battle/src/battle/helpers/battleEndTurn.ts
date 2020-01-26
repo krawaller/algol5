@@ -40,6 +40,5 @@ export function battleEndTurn(game: AlgolGame, btl: AlgolBattle): AlgolBattle {
         potentialMarks: Object.keys(nextTurn.steps.root.LINKS.marks),
       },
     },
-    iconMap: game.iconMap,
   };
 }

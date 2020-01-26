@@ -36,6 +36,5 @@ export function newBattle(game: AlgolGame): AlgolBattle {
       undo: null,
       board: firstBoard,
     },
-    iconMap: game.iconMap,
   };
 }

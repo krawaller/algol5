@@ -1,9 +1,10 @@
-import { AlgolBattle, AlgolLocalBattle } from "../../../types";
+import { AlgolBattle, AlgolLocalBattle, AlgolIconMap } from "../../../types";
 import { board2sprites } from "../../../encoding/src/sprites";
 
 export function updateSession(
   battle: AlgolBattle,
-  session: AlgolLocalBattle
+  session: AlgolLocalBattle,
+  iconMap: AlgolIconMap
 ): AlgolLocalBattle {
   return {
     ...session,
@@ -11,7 +12,7 @@ export function updateSession(
     sprites: board2sprites({
       marks: battle.state.board.marks,
       units: battle.state.board.units,
-      iconMap: battle.iconMap,
+      iconMap: iconMap,
     }),
     endedBy: battle.gameEndedBy,
     turn: battle.turnNumber,

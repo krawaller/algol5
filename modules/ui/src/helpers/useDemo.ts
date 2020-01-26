@@ -36,7 +36,7 @@ export const useDemo = (opts: UseDemoOptions) => {
           positions: [demo.initial],
         },
       });
-    }, 10);
+    }, 0);
   }, [demo]);
 
   // start/stop
@@ -57,6 +57,7 @@ export const useDemo = (opts: UseDemoOptions) => {
       // we're playing, should tick!
       if (!timeout.current) {
         timeout.current = setTimeout(() => {
+          timeout.current = null;
           setHydrInfo({
             ...hydrInfo,
             ...(hydrInfo.patches.length && {
@@ -65,7 +66,6 @@ export const useDemo = (opts: UseDemoOptions) => {
             }),
             count: (hydrInfo.count + 1) % frameCount,
           });
-          timeout.current = null;
         }, FRAME_LENGTH_MS);
       }
     }
@@ -74,7 +74,7 @@ export const useDemo = (opts: UseDemoOptions) => {
         clearTimeout(timeout.current);
       }
     };
-  }, [hydrInfo.patches, hydrInfo.demo, hydrInfo, playing, restart]);
+  }, [hydrInfo.patches, hydrInfo.demo, hydrInfo.count, playing, restart]);
 
   return { frame: hydrInfo.count, hydrDemo: hydrInfo.demo };
 };

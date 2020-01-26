@@ -4,15 +4,14 @@ import { select, boolean } from "@storybook/addon-knobs";
 
 import { SessionList } from ".";
 import { GameId, list } from "../../../../games/dist/list";
-import { getSessionList } from "../../../../local/src";
 
 import dataURIs from "../../../../graphics/dist/svgDataURIs";
 import { SessionListActions } from "./SessionList";
+import meta from "../../../../games/dist/meta";
 
 storiesOf("SessionList", module).add("SessionList component", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   const finished = boolean("Finished", false);
-  const sessions = getSessionList(gameId, finished);
   const actions: SessionListActions = {
     load: save => console.log("Save", save),
   };
@@ -24,9 +23,9 @@ storiesOf("SessionList", module).add("SessionList component", () => {
       </div>
       <hr />
       <SessionList
-        sessions={sessions}
         graphics={dataURIs[gameId]}
         actions={actions}
+        meta={meta[gameId]}
       />
     </Fragment>
   );

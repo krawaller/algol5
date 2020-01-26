@@ -41,18 +41,10 @@ type GameLandingProps = {
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   const { meta, actions, graphics, hasPrevious } = props;
-  const [sessions, setSessions] = useState<AlgolLocalBattle[]>([]);
-  const updateSessions = useCallback(() => {
-    setSessions(
-      getSessionList(meta.id, false).concat(getSessionList(meta.id, true))
-    );
-  }, [meta.id]);
-  const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal(
-    to => to && updateSessions() // update session when session modal closes (since user made a choice)
-  );
+  const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
   const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
   const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
-  useEffect(updateSessions, []);
+
   // hack actions to close game modal when chosen a game
   const localSessionActions = useMemo(
     (): LocalSessionActions => ({
@@ -98,7 +90,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       >
         <LocalSession
           actions={localSessionActions}
-          sessions={sessions}
+          meta={meta}
           graphics={graphics}
           hasPrevious={hasPrevious}
         />

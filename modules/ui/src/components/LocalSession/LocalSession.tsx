@@ -4,6 +4,7 @@ import {
   AlgolLocalBattle,
   AlgolGameGraphics,
   AlgolError,
+  AlgolMeta,
 } from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
@@ -18,14 +19,14 @@ export interface LocalSessionActions {
 }
 
 type LocalSessionProps = {
-  sessions: AlgolLocalBattle[];
   graphics: AlgolGameGraphics;
   actions: LocalSessionActions;
   hasPrevious: boolean;
+  meta: AlgolMeta<string, string>;
 };
 
 export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
-  const { actions, sessions, graphics, hasPrevious } = props;
+  const { actions, meta, graphics, hasPrevious } = props;
   return (
     <div className={css.localSession}>
       <Button
@@ -52,7 +53,7 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
       <div className={css.localSessionDivider} />
       <ImportBattle actions={actions} />
       <div className={css.localSessionDivider} />
-      <SessionList sessions={sessions} graphics={graphics} actions={actions} />
+      <SessionList meta={meta} graphics={graphics} actions={actions} />
     </div>
   );
 };

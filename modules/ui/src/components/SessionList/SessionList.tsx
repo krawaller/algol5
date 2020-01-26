@@ -7,11 +7,10 @@ import {
   AlgolMeta,
   AlgolError,
 } from "../../../../types";
-import { Board } from "../Board";
-import { SessionInfo } from "./SessionList.Info";
-import { sprites2board } from "../../../../encoding/src/sprites/sprite.sprites2board";
 import { getSessionList } from "../../../../local/src";
-import { SessionListError } from "./SessionList.Error";
+import { SessionListFullError } from "./SessionList.FullError";
+import { SessionListLineError } from "./SessionList.LineError";
+import { SessionListItem } from "./SessionList.Item";
 
 export interface SessionListActions {
   load: (session: AlgolLocalBattle) => void;
@@ -23,10 +22,8 @@ type SessionListProps = {
   meta: AlgolMeta<string, string>;
 };
 
-const EMPTYARR: string[] = [];
-
 type SessionInfo = {
-  sessions: AlgolLocalBattle[];
+  sessions: (AlgolLocalBattle | AlgolError)[];
   status: "initial" | "loaded" | "error";
   error?: AlgolError;
 };
@@ -64,7 +61,7 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
     return null;
   }
   if (sessionInfo.status === "error") {
-    return <SessionListError error={sessionInfo.error!} />;
+    return <SessionListFullError error={sessionInfo.error!} />;
   }
   return (
     <div>
@@ -75,23 +72,15 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
         <div className={css.sessionListEmpty}>No saved sessions found</div>
       ) : (
         sessionInfo.sessions.map(session => {
-          const board = sprites2board(session.sprites);
+          if (session instanceof Error) {
+            return <SessionListLineError graphics={graphics} error={session} />;
+          }
           return (
-            <div
-              key={session.id}
-              className={css.sessionListItem}
-              onClick={() => actions.load(session)}
-            >
-              <div className={css.sessionListItemScreenshot}>
-                <Board
-                  graphics={graphics}
-                  potentialMarks={EMPTYARR}
-                  marks={board.marks}
-                  units={board.units}
-                />
-              </div>
-              <SessionInfo session={session} />
-            </div>
+            <SessionListItem
+              session={session}
+              graphics={graphics}
+              actions={actions}
+            />
           );
         })
       )}

@@ -3,11 +3,11 @@ import { AlgolLocalBattle } from "../../../../types";
 import css from "./SessionList.cssProxy";
 import { SessionStatus } from "../SessionStatus";
 
-type SessionInfoProps = {
+type SessionItemInfoProps = {
   session: AlgolLocalBattle;
 };
 
-export const SessionInfo: FunctionComponent<SessionInfoProps> = ({
+export const SessionItemInfo: FunctionComponent<SessionItemInfoProps> = ({
   session,
 }) => {
   return (

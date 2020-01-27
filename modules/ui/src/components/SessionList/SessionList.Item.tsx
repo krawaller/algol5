@@ -26,6 +26,7 @@ export const SessionListItem: FunctionComponent<SessionListItemProps> = props =>
       key={session.id}
       className={css.sessionListItem}
       onClick={() => actions.loadLocalSession(session)}
+      title="Click to load this session"
     >
       <div className={css.sessionListItemScreenshot}>
         <Board

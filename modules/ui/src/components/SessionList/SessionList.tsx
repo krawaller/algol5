@@ -6,6 +6,7 @@ import {
   AlgolLocalBattle,
   AlgolMeta,
   AlgolError,
+  AlgolErrorReporter,
 } from "../../../../types";
 import { getSessionList } from "../../../../local/src";
 import { SessionListFullError } from "./SessionList.FullError";
@@ -14,6 +15,7 @@ import { SessionListItem } from "./SessionList.Item";
 
 export interface SessionListActions {
   loadLocalSession: (session: AlgolLocalBattle) => void;
+  reportError: AlgolErrorReporter;
 }
 
 type SessionListProps = {
@@ -71,12 +73,20 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
       {sessionInfo.sessions.length === 0 ? (
         <div className={css.sessionListEmpty}>No saved sessions found</div>
       ) : (
-        sessionInfo.sessions.map(session => {
+        sessionInfo.sessions.map((session, n) => {
           if (session instanceof Error) {
-            return <SessionListLineError graphics={graphics} error={session} />;
+            return (
+              <SessionListLineError
+                key={n + (session.stack || "") + session.message}
+                actions={actions}
+                graphics={graphics}
+                error={session}
+              />
+            );
           }
           return (
             <SessionListItem
+              key={session.id}
               session={session}
               graphics={graphics}
               actions={actions}

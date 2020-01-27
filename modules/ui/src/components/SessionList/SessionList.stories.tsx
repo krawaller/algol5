@@ -14,6 +14,7 @@ storiesOf("SessionList", module).add("SessionList component", () => {
   const finished = boolean("Finished", false);
   const actions: SessionListActions = {
     loadLocalSession: save => console.log("Save", save),
+    reportError: (error, level) => console.log("Reported error", error, level),
   };
   return (
     <Fragment>

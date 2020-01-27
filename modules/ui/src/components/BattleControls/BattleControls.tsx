@@ -1,6 +1,6 @@
 export * from "./BattleControls";
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolBattleUI, AlgolError } from "../../../../types";
+import { AlgolBattleUI, AlgolErrorReporter } from "../../../../types";
 import { Content } from "../Content";
 import css from "./BattleControls.cssProxy";
 import { Button } from "../Button";
@@ -13,7 +13,7 @@ export interface BattleControlsActions {
   command: (cmnd: string) => void;
   toHistory: () => void;
   navTo: (path: string) => void;
-  error: (err: AlgolError) => void;
+  error: AlgolErrorReporter;
 }
 
 type BattleControlsProps = {

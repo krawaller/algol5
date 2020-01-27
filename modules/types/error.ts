@@ -8,6 +8,8 @@ export type AlgolError = Error & {
   controlId?: string;
 };
 
+export type AlgolErrorReporter = (err: AlgolError) => void;
+
 export const isAlgolError = (obj: any): obj is AlgolError =>
   (((obj || {}) as unknown) as AlgolError)[AlgolErrorSymbol] === true;
 

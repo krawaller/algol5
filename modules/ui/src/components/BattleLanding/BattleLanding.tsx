@@ -3,7 +3,7 @@ import {
   AlgolLocalBattle,
   AlgolMeta,
   AlgolBattle,
-  AlgolError,
+  AlgolErrorReporter,
 } from "../../../../types";
 
 import css from "./BattleLanding.cssProxy";
@@ -18,7 +18,7 @@ interface BattleLandingActions {
   toHistory: () => void;
   toBattleControls: () => void;
   deleteCurrentSession: () => void;
-  error: (err: AlgolError) => void;
+  error: AlgolErrorReporter;
 }
 
 type BattleLandingProps = {

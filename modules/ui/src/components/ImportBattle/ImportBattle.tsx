@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState } from "react";
 import { InputButton } from "../InputButton";
-import { AlgolError } from "../../../../types";
+import { AlgolErrorReporter } from "../../../../types";
 
 export interface ImportBattleActions {
   import: (str: string) => void;
-  error: (err: AlgolError) => void;
+  error: AlgolErrorReporter;
 }
 
 type ImportBattleProps = {

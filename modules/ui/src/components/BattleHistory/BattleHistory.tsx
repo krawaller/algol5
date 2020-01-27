@@ -1,5 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { AlgolContentAnon, AlgolBattle, AlgolError } from "../../../../types";
+import {
+  AlgolContentAnon,
+  AlgolBattle,
+  AlgolErrorReporter,
+} from "../../../../types";
 import { Content } from "../Content";
 import { Stepper } from "../Stepper";
 
@@ -12,7 +16,7 @@ interface BattleHistoryActions {
   toBattleLobby: () => void;
   navTo: (path: string) => void;
   fork: () => void;
-  error: (err: AlgolError) => void;
+  error: AlgolErrorReporter;
 }
 
 type BattleHistoryProps = {

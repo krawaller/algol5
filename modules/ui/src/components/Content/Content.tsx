@@ -13,7 +13,7 @@ import {
   isAlgolContentPlayer,
   isAlgolContentEndTurn,
   isAlgolContentBold,
-  AlgolError,
+  AlgolErrorReporter,
 } from "../../../../types";
 
 import { Icon } from "../Icon";
@@ -22,7 +22,7 @@ import { Button } from "../Button";
 interface ContentActions {
   endTurn: () => void;
   command: (cmnd: string) => void;
-  error: (err: AlgolError) => void;
+  error: AlgolErrorReporter;
 }
 
 type ContentProps = {

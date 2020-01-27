@@ -3,8 +3,8 @@ import css from "./LocalSession.cssProxy";
 import {
   AlgolLocalBattle,
   AlgolGameGraphics,
-  AlgolError,
   AlgolMeta,
+  AlgolErrorReporter,
 } from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
@@ -15,7 +15,7 @@ export interface LocalSessionActions {
   load: (session: AlgolLocalBattle) => void;
   import: (str: string) => void;
   continuePrevious: () => void;
-  error: (err: AlgolError) => void;
+  error: AlgolErrorReporter;
 }
 
 type LocalSessionProps = {

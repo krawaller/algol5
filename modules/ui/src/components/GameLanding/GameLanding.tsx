@@ -1,19 +1,11 @@
-import React, {
-  FunctionComponent,
-  useState,
-  useEffect,
-  useMemo,
-  Fragment,
-  useCallback,
-} from "react";
+import React, { FunctionComponent, useMemo, Fragment } from "react";
 import styles from "./GameLanding.cssProxy";
 import {
   AlgolMeta,
   AlgolLocalBattle,
   AlgolGameGraphics,
-  AlgolError,
+  AlgolErrorReporter,
 } from "../../../../types";
-import { getSessionList } from "../../../../local/src";
 import { Modal } from "../Modal";
 import { Button } from "../Button";
 import { LocalSession, LocalSessionActions } from "../LocalSession";
@@ -29,7 +21,7 @@ export interface GameLandingActions {
   toBattleLobby: () => void;
   import: (str: string) => void;
   continuePrevious: () => void;
-  error: (err: AlgolError) => void;
+  error: AlgolErrorReporter;
 }
 
 type GameLandingProps = {

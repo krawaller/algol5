@@ -18,7 +18,7 @@ interface BattleLandingActions {
   toHistory: () => void;
   toBattleControls: () => void;
   deleteCurrentSession: () => void;
-  error: AlgolErrorReporter;
+  reportError: AlgolErrorReporter;
 }
 
 type BattleLandingProps = {
@@ -75,7 +75,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           Export
         </Button>
         <Button
-          onError={actions.error}
+          onError={actions.reportError}
           controlId="delete-session-button"
           onClick={() => {
             if (

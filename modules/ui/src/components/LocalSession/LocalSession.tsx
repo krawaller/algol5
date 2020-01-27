@@ -15,7 +15,7 @@ export interface LocalSessionActions {
   load: (session: AlgolLocalBattle) => void;
   import: (str: string) => void;
   continuePrevious: () => void;
-  error: AlgolErrorReporter;
+  reportError: AlgolErrorReporter;
 }
 
 type LocalSessionProps = {
@@ -32,7 +32,7 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
       <Button
         big
         onClick={actions.new}
-        onError={actions.error}
+        onError={actions.reportError}
         controlId="new-local-session-button"
       >
         New local hotseat session
@@ -42,7 +42,7 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
         disabled={!hasPrevious && "No previous battle found for this game."}
         onClick={actions.continuePrevious}
         controlId="continue-previous-battle"
-        onError={actions.error}
+        onError={actions.reportError}
       >
         Load last battle
       </Button>

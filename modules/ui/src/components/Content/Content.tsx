@@ -22,7 +22,7 @@ import { Button } from "../Button";
 interface ContentActions {
   endTurn: () => void;
   command: (cmnd: string) => void;
-  error: AlgolErrorReporter;
+  reportError: AlgolErrorReporter;
 }
 
 type ContentProps = {
@@ -33,7 +33,7 @@ type ContentProps = {
 const noopActions: ContentActions = {
   endTurn: () => {},
   command: () => {},
-  error: () => {},
+  reportError: () => {},
 };
 
 /**
@@ -65,7 +65,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
       <Button
         onClick={() => actions.command(content.command)}
         controlId={`content-command-${content.command}-button`}
-        onError={actions.error}
+        onError={actions.reportError}
       >
         {content.command}
       </Button>
@@ -76,7 +76,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
       <Button
         onClick={actions.endTurn}
         controlId="content-end-turn-button"
-        onError={actions.error}
+        onError={actions.reportError}
       >
         {content.endTurn}
       </Button>

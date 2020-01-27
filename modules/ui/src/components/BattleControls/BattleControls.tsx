@@ -13,7 +13,7 @@ export interface BattleControlsActions {
   command: (cmnd: string) => void;
   toHistory: () => void;
   navTo: (path: string) => void;
-  error: AlgolErrorReporter;
+  reportError: AlgolErrorReporter;
 }
 
 type BattleControlsProps = {

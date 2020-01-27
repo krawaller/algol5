@@ -4,7 +4,7 @@ import { AlgolErrorReporter } from "../../../../types";
 
 export interface ImportBattleActions {
   import: (str: string) => void;
-  error: AlgolErrorReporter;
+  reportError: AlgolErrorReporter;
 }
 
 type ImportBattleProps = {
@@ -18,7 +18,7 @@ export const ImportBattle: FunctionComponent<ImportBattleProps> = props => {
     <InputButton
       onClick={() => actions.import(field)}
       onEnter={() => actions.import(field)}
-      onError={actions.error}
+      onError={actions.reportError}
       value={field}
       onValue={setField}
       buttonDisabled={!field ? "Enter a savestring!" : false}

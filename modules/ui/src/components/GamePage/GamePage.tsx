@@ -44,8 +44,10 @@ export const GamePage = (props: GamePageProps) => {
     () => ({
       ...pageActions,
       ...battleActions,
-      error: (error: AlgolError, level: AlgolErrorReportLevel = "warning") =>
-        setErrorReport({ error, level }),
+      reportError: (
+        error: AlgolError,
+        level: AlgolErrorReportLevel = "warning"
+      ) => setErrorReport({ error, level }),
     }),
     [pageActions, battleActions]
   );

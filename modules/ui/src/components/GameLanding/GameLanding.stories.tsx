@@ -19,7 +19,7 @@ storiesOf("GameLanding", module).add("init game", () => {
       console.log("Import", str);
     },
     continuePrevious: () => console.log("previous"),
-    error: err => console.log("error", err),
+    reportError: err => console.log("error", err),
   };
   return (
     <GameLanding

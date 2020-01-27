@@ -21,7 +21,7 @@ export interface GameLandingActions {
   toBattleLobby: () => void;
   import: (str: string) => void;
   continuePrevious: () => void;
-  error: AlgolErrorReporter;
+  reportError: AlgolErrorReporter;
 }
 
 type GameLandingProps = {
@@ -56,7 +56,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         closeSessionModal();
         actions.continuePrevious();
       },
-      error: actions.error,
+      reportError: actions.reportError,
     }),
     []
   );

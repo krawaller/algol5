@@ -16,7 +16,7 @@ interface BattleHistoryActions {
   toBattleLobby: () => void;
   navTo: (path: string) => void;
   fork: () => void;
-  error: AlgolErrorReporter;
+  reportError: AlgolErrorReporter;
 }
 
 type BattleHistoryProps = {
@@ -37,7 +37,7 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
       <div className={css.battleHistoryButtons}>
         <Button
           onClick={actions.fork}
-          onError={actions.error}
+          onError={actions.reportError}
           controlId="fork-history-frame-button"
           disabled={
             battle.gameEndedBy && frame === frameCount

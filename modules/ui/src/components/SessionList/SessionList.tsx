@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import css from "./SessionList.cssProxy";
 
 import {
@@ -12,10 +12,13 @@ import {
   getSessionList,
   SessionOrFail,
   isSessionLoadFail,
+  deleteSession,
 } from "../../../../local/src";
 import { SessionListFullError } from "./SessionList.FullError";
 import { SessionListLineError } from "./SessionList.LineError";
 import { SessionListItem } from "./SessionList.Item";
+import { ButtonGroup } from "../ButtonGroup";
+import { Button } from "../Button";
 
 export interface SessionListActions {
   loadLocalSession: (session: AlgolLocalBattle) => void;
@@ -46,7 +49,7 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
     sessions: [],
     status: "initial",
   });
-  useEffect(() => {
+  const readSessions = useCallback(() => {
     try {
       const sessions = getSessionList(meta.id, false).concat(
         getSessionList(meta.id, true)
@@ -62,13 +65,29 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
         error: err,
       });
     }
-  }, [meta.id]);
+  }, [meta, setSessionInfo]);
+
+  useEffect(readSessions, [readSessions]);
+
+  const errorIds = useMemo(
+    () => sessionInfo.sessions.filter(isSessionLoadFail).map(fail => fail.id),
+    [sessionInfo]
+  );
+
+  const purgeErrorLines = useCallback(() => {
+    for (const errorId of errorIds) {
+      deleteSession(meta.id, errorId);
+    }
+    readSessions();
+  }, [errorIds]);
+
   if (sessionInfo.status === "initial") {
     return null;
   }
   if (sessionInfo.status === "error") {
     return <SessionListFullError error={sessionInfo.error!} />;
   }
+
   return (
     <div>
       <div className={css.sessionListInstruction}>
@@ -98,6 +117,16 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
             />
           );
         })
+      )}
+      {errorIds.length > 0 && (
+        <ButtonGroup>
+          <Button
+            onClick={purgeErrorLines}
+            controlId="session-list-remove-error-lines-btn"
+          >
+            Remove corruped session saves
+          </Button>
+        </ButtonGroup>
       )}
     </div>
   );

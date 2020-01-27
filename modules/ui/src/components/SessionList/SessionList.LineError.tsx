@@ -1,34 +1,52 @@
 import React, { FunctionComponent } from "react";
 import {
-  AlgolError,
   AlgolGameGraphics,
   AlgolErrorReporter,
+  decorateError,
+  AlgolMeta,
 } from "../../../../types";
 import css from "./SessionList.cssProxy";
 import { Board } from "../Board";
+import { SessionLoadFail } from "../../../../local/src";
 
 interface SessionListLineErrorActions {
   reportError: AlgolErrorReporter;
 }
 
 type SessionListLineErrorProps = {
-  error: AlgolError;
+  fail: SessionLoadFail;
   graphics: AlgolGameGraphics;
   actions: SessionListLineErrorActions;
+  meta: AlgolMeta<string, string>;
 };
 
 const EMPTYARR: string[] = [];
 const EMPTYOBJ = {};
 
 // TODO - button to purge corrupt save data?
+// TODO - preserve more metadata about error. we need the original save string and game id
 
 export const SessionListLineError: FunctionComponent<SessionListLineErrorProps> = props => {
-  const { error, graphics, actions } = props;
+  const { fail, graphics, actions, meta } = props;
   return (
     <div
       className={css.sessionListItem}
       title="Click to report"
-      onClick={() => actions.reportError(error, "severe")}
+      onClick={() =>
+        actions.reportError(
+          decorateError({
+            err: fail.error,
+            description: `Something has happened to this ${meta.name} save file, and it couldn't be correctly read.`,
+            errorId: "local-save-parse-error",
+            meta: {
+              gameId: meta.id,
+              saveStr: fail.str,
+              saveId: fail.id,
+            },
+          }),
+          "severe"
+        )
+      }
     >
       <div className={css.sessionListItemScreenshot}>
         <Board

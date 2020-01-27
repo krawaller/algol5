@@ -17,8 +17,8 @@ export const Page: FunctionComponent<PageProps> = props => {
   useEffect(() => {
     if (
       errorReport &&
-      errorReport.level !== "silent" &&
-      !shown.has(errorReport.error)
+      errorReport.level !== "silent"
+      // && !shown.has(errorReport.error) // TODO - we still want to show modal, but not resend error
     ) {
       shown.add(errorReport.error);
       // TODO - show error nicer, send it somewhere?

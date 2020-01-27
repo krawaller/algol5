@@ -8,7 +8,11 @@ import {
   AlgolError,
   AlgolErrorReporter,
 } from "../../../../types";
-import { getSessionList } from "../../../../local/src";
+import {
+  getSessionList,
+  SessionOrFail,
+  isSessionLoadFail,
+} from "../../../../local/src";
 import { SessionListFullError } from "./SessionList.FullError";
 import { SessionListLineError } from "./SessionList.LineError";
 import { SessionListItem } from "./SessionList.Item";
@@ -25,7 +29,7 @@ type SessionListProps = {
 };
 
 type SessionInfo = {
-  sessions: (AlgolLocalBattle | AlgolError)[];
+  sessions: SessionOrFail[];
   status: "initial" | "loaded" | "error";
   error?: AlgolError;
 };
@@ -73,14 +77,15 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
       {sessionInfo.sessions.length === 0 ? (
         <div className={css.sessionListEmpty}>No saved sessions found</div>
       ) : (
-        sessionInfo.sessions.map((session, n) => {
-          if (session instanceof Error) {
+        sessionInfo.sessions.map(session => {
+          if (isSessionLoadFail(session)) {
             return (
               <SessionListLineError
-                key={n + (session.stack || "") + session.message}
+                key={session.id}
                 actions={actions}
                 graphics={graphics}
-                error={session}
+                fail={session}
+                meta={meta}
               />
             );
           }

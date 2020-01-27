@@ -6,6 +6,10 @@ type SessionListFullErrorProps = {
   error: AlgolError;
 };
 
+// TODO: add reporting functionality
+// TODO: add way to purge corrupted save data
+// TODO: add way to purge corrupted lines?
+
 export const SessionListFullError: FunctionComponent<SessionListFullErrorProps> = ({
   error,
 }) => {

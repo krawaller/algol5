@@ -1,24 +1,17 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import css from "./SessionList.cssProxy";
 
 import {
   AlgolGameGraphics,
   AlgolLocalBattle,
   AlgolMeta,
-  AlgolError,
   AlgolErrorReporter,
 } from "../../../../types";
 import {
   getSessionList,
-  SessionOrFail,
   isSessionLoadFail,
   deleteSession,
 } from "../../../../local/src";
-import { SessionListFullError } from "./SessionList.FullError";
-import { SessionListLineError } from "./SessionList.LineError";
-import { SessionListItem } from "./SessionList.Item";
-import { ButtonGroup } from "../ButtonGroup";
-import { Button } from "../Button";
+import { SessionListInner, SessionInfo } from "./SessionList.Inner";
 
 export interface SessionListActions {
   loadLocalSession: (session: AlgolLocalBattle) => void;
@@ -29,12 +22,6 @@ type SessionListProps = {
   graphics: AlgolGameGraphics;
   actions: SessionListActions;
   meta: AlgolMeta<string, string>;
-};
-
-type SessionInfo = {
-  sessions: SessionOrFail[];
-  status: "initial" | "loaded" | "error";
-  error?: AlgolError;
 };
 
 /**
@@ -81,62 +68,21 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
     readSessions();
   }, [errorIds]);
 
-  if (sessionInfo.status === "initial") {
-    return null;
-  }
-  if (sessionInfo.status === "error") {
-    return (
-      <SessionListFullError
-        meta={meta}
-        actions={{
-          ...actions,
-          updateList: readSessions,
-        }}
-        error={sessionInfo.error!}
-      />
-    );
-  }
+  const innerActions = useMemo(
+    () => ({
+      ...actions,
+      purgeErrorLines,
+      updateList: readSessions,
+    }),
+    [purgeErrorLines]
+  );
 
   return (
-    <div>
-      <div className={css.sessionListInstruction}>
-        Click a previous session below to load it!
-      </div>
-      {sessionInfo.sessions.length === 0 ? (
-        <div className={css.sessionListEmpty}>No saved sessions found</div>
-      ) : (
-        sessionInfo.sessions.map(session => {
-          if (isSessionLoadFail(session)) {
-            return (
-              <SessionListLineError
-                key={session.id}
-                actions={actions}
-                graphics={graphics}
-                fail={session}
-                meta={meta}
-              />
-            );
-          }
-          return (
-            <SessionListItem
-              key={session.id}
-              session={session}
-              graphics={graphics}
-              actions={actions}
-            />
-          );
-        })
-      )}
-      {errorIds.length > 0 && (
-        <ButtonGroup>
-          <Button
-            onClick={purgeErrorLines}
-            controlId="session-list-remove-error-lines-btn"
-          >
-            Remove corruped session saves
-          </Button>
-        </ButtonGroup>
-      )}
-    </div>
+    <SessionListInner
+      actions={innerActions}
+      graphics={graphics}
+      meta={meta}
+      sessionInfo={sessionInfo}
+    />
   );
 };

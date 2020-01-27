@@ -4,3 +4,4 @@ export * from "./deleteSession";
 export * from "./getSessionById";
 export * from "./setLatestSessionId";
 export * from "./getLatestSessionId";
+export * from "./deleteGameSessions";

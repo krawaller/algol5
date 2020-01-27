@@ -85,7 +85,16 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
     return null;
   }
   if (sessionInfo.status === "error") {
-    return <SessionListFullError error={sessionInfo.error!} />;
+    return (
+      <SessionListFullError
+        meta={meta}
+        actions={{
+          ...actions,
+          updateList: readSessions,
+        }}
+        error={sessionInfo.error!}
+      />
+    );
   }
 
   return (

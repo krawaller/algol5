@@ -15,12 +15,12 @@ import GameLandingRules from "./GameLanding.Rules";
 import { ButtonGroup } from "../ButtonGroup";
 
 export interface GameLandingActions {
-  new: () => void;
-  load: (session: AlgolLocalBattle) => void;
+  newLocalBattle: () => void;
+  loadLocalSession: (session: AlgolLocalBattle) => void;
   navTo: (path: string) => void;
   toBattleLobby: () => void;
-  import: (str: string) => void;
-  continuePrevious: () => void;
+  importSession: (str: string) => void;
+  continuePreviousSession: () => void;
   reportError: AlgolErrorReporter;
 }
 
@@ -40,21 +40,21 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   // hack actions to close game modal when chosen a game
   const localSessionActions = useMemo(
     (): LocalSessionActions => ({
-      load: (session: AlgolLocalBattle) => {
-        actions.load(session);
+      loadLocalSession: (session: AlgolLocalBattle) => {
+        actions.loadLocalSession(session);
         closeSessionModal();
       },
-      new: () => {
-        actions.new();
+      newLocalBattle: () => {
+        actions.newLocalBattle();
         closeSessionModal();
       },
-      import: (str: string) => {
-        actions.import(str);
+      importSession: (str: string) => {
+        actions.importSession(str);
         closeSessionModal();
       },
-      continuePrevious: () => {
+      continuePreviousSession: () => {
         closeSessionModal();
-        actions.continuePrevious();
+        actions.continuePreviousSession();
       },
       reportError: actions.reportError,
     }),

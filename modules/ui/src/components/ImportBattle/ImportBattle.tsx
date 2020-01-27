@@ -3,7 +3,7 @@ import { InputButton } from "../InputButton";
 import { AlgolErrorReporter } from "../../../../types";
 
 export interface ImportBattleActions {
-  import: (str: string) => void;
+  importSession: (str: string) => void;
   reportError: AlgolErrorReporter;
 }
 
@@ -16,8 +16,8 @@ export const ImportBattle: FunctionComponent<ImportBattleProps> = props => {
   const [field, setField] = useState<string>("");
   return (
     <InputButton
-      onClick={() => actions.import(field)}
-      onEnter={() => actions.import(field)}
+      onClick={() => actions.importSession(field)}
+      onEnter={() => actions.importSession(field)}
       onError={actions.reportError}
       value={field}
       onValue={setField}

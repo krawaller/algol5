@@ -5,7 +5,7 @@ import { ImportBattleActions } from "./ImportBattle";
 
 storiesOf("ImportBattle", module).add("basic usage", () => {
   const actions: ImportBattleActions = {
-    import: str => console.log("Importing", str),
+    importSession: str => console.log("Importing", str),
     reportError: err => console.log("Error", err),
   };
   return (

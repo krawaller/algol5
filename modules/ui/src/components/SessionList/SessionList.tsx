@@ -13,7 +13,7 @@ import { SessionListLineError } from "./SessionList.LineError";
 import { SessionListItem } from "./SessionList.Item";
 
 export interface SessionListActions {
-  load: (session: AlgolLocalBattle) => void;
+  loadLocalSession: (session: AlgolLocalBattle) => void;
 }
 
 type SessionListProps = {

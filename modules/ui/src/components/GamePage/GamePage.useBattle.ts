@@ -35,7 +35,7 @@ type BattleAction =
   | "deleteCurrentSession"
   | "fork"
   | "import"
-  | "continuePrevious";
+  | "continuePreviousSession";
 type BattleCmnd = [BattleAction, any];
 
 type BattleHookState = {
@@ -139,7 +139,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
         mode: "battlelobby",
         hasPrevious: true,
       };
-    } else if (cmnd === "continuePrevious") {
+    } else if (cmnd === "continuePreviousSession") {
       if (state.battle) {
         // still have a battle in memory, so just go back to that
         return {
@@ -201,21 +201,23 @@ export function useBattle(api: AlgolStaticGameAPI) {
       mark: (pos: string) => dispatch(["mark", pos]),
       endTurn: () => dispatch(["endTurn", null]),
       command: (cmnd: string) => dispatch(["command", cmnd]),
-      undo: () => dispatch(["undo", null]),
-      new: () => dispatch(["new", null]),
-      load: (session: AlgolLocalBattle) => dispatch(["load", session]),
+      undoBattleCommand: () => dispatch(["undo", null]),
+      newLocalBattle: () => dispatch(["new", null]),
+      loadLocalSession: (session: AlgolLocalBattle) =>
+        dispatch(["load", session]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
       toHistory: (atFrame?: number) => dispatch(["history", atFrame]),
       toGameLobby: () => dispatch(["gamelobby", null]),
       toBattleLobby: () => dispatch(["battlelobby", null]),
       toBattleControls: () => dispatch(["play", null]),
       deleteCurrentSession: () => dispatch(["deleteCurrentSession", null]),
-      fork: () => dispatch(["fork", null]),
-      import: (str: string) => {
+      forkSession: () => dispatch(["fork", null]),
+      importSession: (str: string) => {
         const save = parseSeed(str, api.gameId);
         dispatch(["import", save]);
       },
-      continuePrevious: () => dispatch(["continuePrevious", null]),
+      continuePreviousSession: () =>
+        dispatch(["continuePreviousSession", null]),
     }),
     []
   );

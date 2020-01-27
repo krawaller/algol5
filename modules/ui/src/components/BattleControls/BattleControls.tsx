@@ -7,7 +7,7 @@ import { Button } from "../Button";
 import { ButtonGroup } from "../ButtonGroup";
 
 export interface BattleControlsActions {
-  undo: () => void;
+  undoBattleCommand: () => void;
   toBattleLobby: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
@@ -30,7 +30,10 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   return (
     <Fragment>
       <ButtonGroup>
-        <Button disabled={!Boolean(ui.undo)} onClick={actions.undo}>
+        <Button
+          disabled={!Boolean(ui.undo)}
+          onClick={actions.undoBattleCommand}
+        >
           Undo
         </Button>
         {Object.entries(ui.commands).map(([cmnd, info]) => (

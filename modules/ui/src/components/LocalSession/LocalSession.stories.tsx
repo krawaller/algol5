@@ -10,10 +10,10 @@ storiesOf("LocalSession", module).add("LocalSession creator for game", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   const hasPrevious = boolean("Previous battle", false);
   const actions: LocalSessionActions = {
-    load: save => console.log("Save", save),
-    new: () => console.log("New!"),
-    import: str => console.log("Import", str),
-    continuePrevious: () => console.log("Previous!"),
+    loadLocalSession: save => console.log("Save", save),
+    newLocalBattle: () => console.log("New!"),
+    importSession: str => console.log("Import", str),
+    continuePreviousSession: () => console.log("Previous!"),
     reportError: err => console.log("Error", err),
   };
   return (

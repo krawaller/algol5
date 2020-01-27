@@ -11,10 +11,10 @@ import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
 
 export interface LocalSessionActions {
-  new: () => void;
-  load: (session: AlgolLocalBattle) => void;
-  import: (str: string) => void;
-  continuePrevious: () => void;
+  newLocalBattle: () => void;
+  loadLocalSession: (session: AlgolLocalBattle) => void;
+  importSession: (str: string) => void;
+  continuePreviousSession: () => void;
   reportError: AlgolErrorReporter;
 }
 
@@ -31,7 +31,7 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
     <div className={css.localSession}>
       <Button
         big
-        onClick={actions.new}
+        onClick={actions.newLocalBattle}
         onError={actions.reportError}
         controlId="new-local-session-button"
       >
@@ -40,7 +40,7 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
       <div className={css.localSessionDivider} />
       <Button
         disabled={!hasPrevious && "No previous battle found for this game."}
-        onClick={actions.continuePrevious}
+        onClick={actions.continuePreviousSession}
         controlId="continue-previous-battle"
         onError={actions.reportError}
       >

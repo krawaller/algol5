@@ -7,7 +7,7 @@ import { Board } from "../Board";
 import { SessionItemInfo } from "./SessionList.ItemInfo";
 
 interface SessionListItemActions {
-  load: (session: AlgolLocalBattle) => void;
+  loadLocalSession: (session: AlgolLocalBattle) => void;
 }
 
 type SessionListItemProps = {
@@ -25,7 +25,7 @@ export const SessionListItem: FunctionComponent<SessionListItemProps> = props =>
     <div
       key={session.id}
       className={css.sessionListItem}
-      onClick={() => actions.load(session)}
+      onClick={() => actions.loadLocalSession(session)}
     >
       <div className={css.sessionListItemScreenshot}>
         <Board

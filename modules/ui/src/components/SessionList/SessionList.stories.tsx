@@ -13,7 +13,7 @@ storiesOf("SessionList", module).add("SessionList component", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   const finished = boolean("Finished", false);
   const actions: SessionListActions = {
-    load: save => console.log("Save", save),
+    loadLocalSession: save => console.log("Save", save),
   };
   return (
     <Fragment>

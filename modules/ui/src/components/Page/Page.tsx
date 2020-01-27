@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode, useEffect } from "react";
 
 import css from "./Page.cssProxy";
-import { AlgolError, isAlgolError } from "../../../../types";
+import { AlgolError } from "../../../../types";
 
 type PageProps = {
   top: ReactNode;
@@ -18,9 +18,7 @@ export const Page: FunctionComponent<PageProps> = props => {
     if (error && !shown.has(error)) {
       shown.add(error);
       // TODO - show error nicer, send it somewhere?
-      alert(
-        (isAlgolError(error) && error.message) || "Something went wrong! :/"
-      );
+      alert(error.description || "Something went wrong! :/");
     }
   }, [error]);
   return (

@@ -23,14 +23,14 @@ export const parseSeed = (str: string, expectedGameId: GameId) => {
       throw decorateError({
         err,
         errorId: "import-save-parse-failed",
-        message: "Failed to parse the import seed!",
+        description: "Failed to parse the import seed!",
         meta: { seed: str, gameId: expectedGameId },
       });
     }
   } else {
     throw NewAlgolError({
       errorId: "import-wrong-seed-code",
-      message: `This seed is not valid for ${id2name[expectedGameId]}. ${
+      description: `This seed is not valid for ${id2name[expectedGameId]}. ${
         codeId
           ? `It might be for ${id2name[codeId as GameId]}!`
           : "Unable to determine which game it is for."

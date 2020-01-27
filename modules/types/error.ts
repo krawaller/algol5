@@ -9,7 +9,17 @@ export type AlgolError = Error & {
   description?: string;
 };
 
-export type AlgolErrorReporter = (err: AlgolError, silent?: boolean) => void;
+export type AlgolErrorReport = {
+  error: AlgolError;
+  level: AlgolErrorReportLevel;
+};
+
+export type AlgolErrorReportLevel = "silent" | "warning" | "severe";
+
+export type AlgolErrorReporter = (
+  err: AlgolError,
+  level?: AlgolErrorReportLevel
+) => void;
 
 export const isAlgolError = (obj: any): obj is AlgolError =>
   (((obj || {}) as unknown) as AlgolError)[AlgolErrorSymbol] === true;

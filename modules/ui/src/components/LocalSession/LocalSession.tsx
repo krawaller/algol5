@@ -3,35 +3,36 @@ import css from "./LocalSession.cssProxy";
 import {
   AlgolLocalBattle,
   AlgolGameGraphics,
-  AlgolError,
+  AlgolMeta,
+  AlgolErrorReporter,
 } from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
 
 export interface LocalSessionActions {
-  new: () => void;
-  load: (session: AlgolLocalBattle) => void;
-  import: (str: string) => void;
-  continuePrevious: () => void;
-  error: (err: AlgolError) => void;
+  newLocalBattle: () => void;
+  loadLocalSession: (session: AlgolLocalBattle) => void;
+  importSession: (str: string) => void;
+  continuePreviousSession: () => void;
+  reportError: AlgolErrorReporter;
 }
 
 type LocalSessionProps = {
-  sessions: AlgolLocalBattle[];
   graphics: AlgolGameGraphics;
   actions: LocalSessionActions;
   hasPrevious: boolean;
+  meta: AlgolMeta<string, string>;
 };
 
 export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
-  const { actions, sessions, graphics, hasPrevious } = props;
+  const { actions, meta, graphics, hasPrevious } = props;
   return (
     <div className={css.localSession}>
       <Button
         big
-        onClick={actions.new}
-        onError={actions.error}
+        onClick={actions.newLocalBattle}
+        onError={actions.reportError}
         controlId="new-local-session-button"
       >
         New local hotseat session
@@ -39,9 +40,9 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
       <div className={css.localSessionDivider} />
       <Button
         disabled={!hasPrevious && "No previous battle found for this game."}
-        onClick={actions.continuePrevious}
+        onClick={actions.continuePreviousSession}
         controlId="continue-previous-battle"
-        onError={actions.error}
+        onError={actions.reportError}
       >
         Load last battle
       </Button>
@@ -52,7 +53,7 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
       <div className={css.localSessionDivider} />
       <ImportBattle actions={actions} />
       <div className={css.localSessionDivider} />
-      <SessionList sessions={sessions} graphics={graphics} actions={actions} />
+      <SessionList meta={meta} graphics={graphics} actions={actions} />
     </div>
   );
 };

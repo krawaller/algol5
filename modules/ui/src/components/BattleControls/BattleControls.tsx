@@ -1,19 +1,19 @@
 export * from "./BattleControls";
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolBattleUI, AlgolError } from "../../../../types";
+import { AlgolBattleUI, AlgolErrorReporter } from "../../../../types";
 import { Content } from "../Content";
 import css from "./BattleControls.cssProxy";
 import { Button } from "../Button";
 import { ButtonGroup } from "../ButtonGroup";
 
 export interface BattleControlsActions {
-  undo: () => void;
+  undoBattleCommand: () => void;
   toBattleLobby: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
   toHistory: () => void;
   navTo: (path: string) => void;
-  error: (err: AlgolError) => void;
+  reportError: AlgolErrorReporter;
 }
 
 type BattleControlsProps = {
@@ -30,7 +30,10 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   return (
     <Fragment>
       <ButtonGroup>
-        <Button disabled={!Boolean(ui.undo)} onClick={actions.undo}>
+        <Button
+          disabled={!Boolean(ui.undo)}
+          onClick={actions.undoBattleCommand}
+        >
           Undo
         </Button>
         {Object.entries(ui.commands).map(([cmnd, info]) => (

@@ -9,6 +9,8 @@ import {
   AlgolMeta,
   AlgolDemo,
   AlgolError,
+  AlgolErrorReport,
+  AlgolErrorReportLevel,
 } from "../../../../types";
 
 import { Board } from "../Board";
@@ -37,9 +39,16 @@ export const GamePage = (props: GamePageProps) => {
     { battle, frame, mode, session, hasPrevious },
     battleActions,
   ] = useBattle(api);
-  const [error, setError] = useState<AlgolError>();
+  const [errorReport, setErrorReport] = useState<AlgolErrorReport>();
   const actions = useMemo(
-    () => ({ ...pageActions, ...battleActions, error: setError }),
+    () => ({
+      ...pageActions,
+      ...battleActions,
+      reportError: (
+        error: AlgolError,
+        level: AlgolErrorReportLevel = "warning"
+      ) => setErrorReport({ error, level }),
+    }),
     [pageActions, battleActions]
   );
   const ui = useUI(api, battle, frame, demo, mode);
@@ -112,7 +121,7 @@ export const GamePage = (props: GamePageProps) => {
 
   return (
     <Page
-      error={error}
+      errorReport={errorReport}
       top={
         <Board
           callback={actions.mark}

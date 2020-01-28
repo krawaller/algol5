@@ -4,30 +4,92 @@ import { select, boolean } from "@storybook/addon-knobs";
 
 import { SessionList } from ".";
 import { GameId, list } from "../../../../games/dist/list";
-import { getSessionList } from "../../../../local/src";
 
 import dataURIs from "../../../../graphics/dist/svgDataURIs";
 import { SessionListActions } from "./SessionList";
+import meta from "../../../../games/dist/meta";
+import {
+  SessionListInner,
+  SessionListInnerActions,
+  SessionInfo,
+} from "./SessionList.Inner";
+import { SessionLoadFail } from "../../../../local/src";
+import { AlgolLocalBattle } from "../../../../types";
 
-storiesOf("SessionList", module).add("SessionList component", () => {
-  const gameId = select("Game", list, list[0]) as GameId;
-  const finished = boolean("Finished", false);
-  const sessions = getSessionList(gameId, finished);
-  const actions: SessionListActions = {
-    load: save => console.log("Save", save),
-  };
-  return (
-    <Fragment>
-      <div>
-        Listing {finished ? "finished" : "ongoing"} battles of {gameId} from
-        localStorage:
-      </div>
-      <hr />
-      <SessionList
-        sessions={sessions}
-        graphics={dataURIs[gameId]}
-        actions={actions}
+const innerActions: SessionListInnerActions = {
+  loadLocalSession: save => console.log("Save", save),
+  reportError: (error, level) => console.log("Reported error", error, level),
+  updateList: () => console.log("Updating list"),
+  purgeErrorLines: () => console.log("Purging"),
+};
+
+storiesOf("SessionList", module)
+  .add("Real component, reading localStorage", () => {
+    const gameId = select("Game", list, list[0]) as GameId;
+    const finished = boolean("Finished", false);
+    const actions: SessionListActions = {
+      loadLocalSession: save => console.log("Save", save),
+      reportError: (error, level) =>
+        console.log("Reported error", error, level),
+    };
+    return (
+      <Fragment>
+        <div>
+          Listing {finished ? "finished" : "ongoing"} battles of {gameId} from
+          localStorage:
+        </div>
+        <hr />
+        <SessionList
+          graphics={dataURIs[gameId]}
+          actions={actions}
+          meta={meta[gameId]}
+        />
+      </Fragment>
+    );
+  })
+  .add("Hacked data, with one failing line", () => {
+    const fakeSession: AlgolLocalBattle = {
+      created: Date.now(),
+      id: "foo",
+      sprites: [
+        { pos: "a1", unit: { icon: "pawn", owner: 1 } },
+        { pos: "c3", unit: { icon: "knight", owner: 2 } },
+      ],
+      path: [],
+      player: 1,
+      turn: 7,
+      type: "normal",
+    };
+    const fakeLoadFail: SessionLoadFail = {
+      error: new Error(),
+      id: "gnurp",
+      str: "foo",
+    };
+    const sessionInfo: SessionInfo = {
+      status: "loaded",
+      sessions: [fakeSession, fakeLoadFail],
+    };
+    return (
+      <SessionListInner
+        actions={innerActions}
+        meta={meta.atrium}
+        graphics={dataURIs.atrium}
+        sessionInfo={sessionInfo}
       />
-    </Fragment>
-  );
-});
+    );
+  })
+  .add("Hacked data, total load fail", () => {
+    const sessionInfo: SessionInfo = {
+      status: "error",
+      sessions: [],
+      error: new Error(),
+    };
+    return (
+      <SessionListInner
+        actions={innerActions}
+        meta={meta.atrium}
+        graphics={dataURIs.atrium}
+        sessionInfo={sessionInfo}
+      />
+    );
+  });

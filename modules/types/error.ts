@@ -6,22 +6,36 @@ export type AlgolError = Error & {
   errorId?: string;
   stack?: string;
   controlId?: string;
+  description?: string;
 };
 
-export const isAlgolError = (err: AlgolError) => err[AlgolErrorSymbol] === true;
+export type AlgolErrorReport = {
+  error: AlgolError;
+  level: AlgolErrorReportLevel;
+};
+
+export type AlgolErrorReportLevel = "silent" | "warning" | "severe";
+
+export type AlgolErrorReporter = (
+  err: AlgolError,
+  level?: AlgolErrorReportLevel
+) => void;
+
+export const isAlgolError = (obj: any): obj is AlgolError =>
+  (((obj || {}) as unknown) as AlgolError)[AlgolErrorSymbol] === true;
 
 type DecorateErrorOpts = {
   errorId: string;
-  message: string;
+  description: string;
   meta?: any;
   err: Error;
 };
 
 export const decorateError = (opts: DecorateErrorOpts) => {
-  const { errorId: id, message, meta, err } = opts;
+  const { errorId: id, description, meta, err } = opts;
   const decoratedError: AlgolError = err;
   decoratedError.errorId = id;
-  decoratedError.message = message;
+  decoratedError.description = description;
   decoratedError.meta = meta;
   decoratedError[AlgolErrorSymbol] = true;
   return decoratedError;
@@ -29,7 +43,7 @@ export const decorateError = (opts: DecorateErrorOpts) => {
 
 type NewAlgolErrorOpts = {
   errorId: string;
-  message: string;
+  description: string;
   meta?: any;
 };
 

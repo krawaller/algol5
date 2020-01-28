@@ -11,15 +11,15 @@ storiesOf("GameLanding", module).add("init game", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   const hasPrevious = boolean("Previous battle", false);
   const actions: GameLandingActions = {
-    new: () => console.log("new game"),
-    load: save => console.log("loading save", save),
+    newLocalBattle: () => console.log("new battle"),
+    loadLocalSession: save => console.log("loading save", save),
     navTo: path => console.log("navigating to", path),
     toBattleLobby: () => console.log("to battle lobby"),
-    import: (str: string) => {
+    importSession: (str: string) => {
       console.log("Import", str);
     },
-    continuePrevious: () => console.log("previous"),
-    error: err => console.log("error", err),
+    continuePreviousSession: () => console.log("previous"),
+    reportError: err => console.log("error", err),
   };
   return (
     <GameLanding

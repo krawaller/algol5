@@ -1,28 +1,30 @@
 import React, { FunctionComponent, ReactNode, useEffect } from "react";
 
 import css from "./Page.cssProxy";
-import { AlgolError, isAlgolError } from "../../../../types";
+import { AlgolError, AlgolErrorReport } from "../../../../types";
 
 type PageProps = {
   top: ReactNode;
   strip: ReactNode;
   body: ReactNode;
-  error?: AlgolError;
+  errorReport?: AlgolErrorReport;
 };
 
 const shown = new WeakSet<AlgolError>();
 
 export const Page: FunctionComponent<PageProps> = props => {
-  const { top, strip, body, error } = props;
+  const { top, strip, body, errorReport } = props;
   useEffect(() => {
-    if (error && !shown.has(error)) {
-      shown.add(error);
+    if (
+      errorReport &&
+      errorReport.level !== "silent"
+      // && !shown.has(errorReport.error) // TODO - we still want to show modal, but not resend error
+    ) {
+      shown.add(errorReport.error);
       // TODO - show error nicer, send it somewhere?
-      alert(
-        (isAlgolError(error) && error.message) || "Something went wrong! :/"
-      );
+      alert(errorReport.error.description || "Something went wrong! :/");
     }
-  }, [error]);
+  }, [errorReport]);
   return (
     <div className={css.pageContainer}>
       <div className={css.pageTop}>{top}</div>

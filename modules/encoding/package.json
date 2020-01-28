@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "robot": "echo 'encoding module robot is a noop'",
     "showUnusedCodes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/encoding/commands/showUnusedCodes"
   }
 }

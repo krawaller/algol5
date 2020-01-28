@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm install; npm run harvestCss; npm run encodeImages;",
+    "robot": "npm run harvestCss; npm run encodeImages;",
     "harvestCss": "node ./commands/harvestCss",
     "encodeImages": "node ./commands/encodeImages",
     "storybook": "npm run harvestCss; start-storybook -s ./src/static -p 6006",

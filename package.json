@@ -3,7 +3,8 @@
     "test:unit": "jest",
     "test:ts": "tsc --noEmit --skipLibCheck",
     "test": "npm run test:ts && npm run test:unit",
-    "robot": "npm install; cd modules/common; npm run robot; cd ../games; npm run robot; cd ../graphics; npm run robot; cd ../logic; npm run robot; cd ../battle; npm run robot; cd ../ui; npm run robot; cd ../next; npm run robot;"
+    "installAll": "npm install; cd modules/common; npm run install; cd ../games; npm run install; cd ../graphics; npm run install; cd ../logic; npm run install; cd ../battle; npm run install; cd ../ui; npm run install; cd ../next; npm run install;",
+    "robot": "cd modules/common; npm run robot; cd modules/local; npm run robot; cd modules/encoding; npm run robot; cd ../games; npm run robot; cd ../graphics; npm run robot; cd ../logic; npm run robot; cd ../battle; npm run robot; cd ../ui; npm run robot; cd ../next; npm run robot;"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

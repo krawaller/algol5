@@ -1,11 +1,12 @@
 {
   "scripts": {
-    "robot": "npm install; npm run makeSVG",
+    "robot": "npm run makeSVG",
     "clean": "rm -rf dist; mkdir dist;",
     "makeSVG": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/makeSVG"
   },
   "dependencies": {},
   "devDependencies": {
-    "mini-svg-data-uri": "^1.0.3"
+    "mini-svg-data-uri": "^1.0.3",
+    "xml-formatter": "^1.2.0"
   }
 }

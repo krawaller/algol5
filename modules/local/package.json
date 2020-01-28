@@ -1,1 +1,5 @@
-{}
+{
+  "scripts": {
+    "robot": "echo 'local module robot is a noop'"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm install && npm run prep && npm run build && npm run export",
+    "robot": "npm run prep && npm run build && npm run export",
     "makeGamePages": "node ./commands/makeGamePages",
     "getResources": "rm -rf ./public; mkdir public; npm run getUiCSS; npm run getStatic",
     "getUiCSS": "cp ../ui/dist/styles.css public/components.css",
@@ -13,6 +13,5 @@
   },
   "dependencies": {
     "next": "^9.1.6"
-  },
-  "devDependencies": {}
+  }
 }

@@ -10,6 +10,7 @@ export * from "./empty";
 export * from "./empty-dark";
 export * from "./water";
 export * from "./water-dark";
+export * from "./_helpers";
 
 import { castle } from "./castle";
 import { castleDark } from "./castle-dark";

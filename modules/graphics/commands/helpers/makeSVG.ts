@@ -4,6 +4,8 @@ import { Layer, FullDefAnon } from "../../../types";
 import * as fs from "fs-extra";
 import * as path from "path";
 import svgToMiniDataURI from "mini-svg-data-uri";
+import { allPics } from "../../picdata";
+import formatXml from "xml-formatter";
 
 function tileAtPos(
   layers: { [name: string]: Layer },
@@ -44,80 +46,64 @@ export async function makeSVG(gameId: string) {
   const tilemap = def.graphics.tiles;
 
   let ret = "";
+  let frame = "";
 
   // edge background
-  ret += `  <rect x="0" y="0" width="${side * width +
+  frame += `<rect x="0" y="0" width="${side * width +
     edge * 2}" height="${side * height + edge * 2}" fill="${
     tileColors.edge
-  }" stroke="none" />\n`;
+  }" stroke="none" />`;
 
   // empty background!
-  ret += `  <rect x="${edge}" y="${edge}" width="${side *
+  frame += `<rect x="${edge}" y="${edge}" width="${side *
     width}" height="${side * height}" fill="${
     tileColors.empty
-  }" stroke="none" />\n`;
+  }" stroke="none" />`;
+
+  let squares = "";
+  let defs = "";
+  let used: Record<string, boolean> = {};
 
   for (let row = 1; row <= height; row++) {
     let drawY = edge + (height - row) * side;
-    ret += `  <text x="${edge / 2}" y="${drawY +
+    frame += `<text x="${edge / 2}" y="${drawY +
       (3 * edge) /
-        2}" fill="white" text-anchor="middle" dy="-.4em">${row}</text>\n`;
-    ret += `  <text x="${width * side + (3 * edge) / 2}" y="${drawY +
+        2}" fill="white" text-anchor="middle" dy="-.4em">${row}</text>`;
+    frame += `<text x="${width * side + (3 * edge) / 2}" y="${drawY +
       (3 * edge) /
-        2}" fill="white" text-anchor="middle" dy="-.4em">${row}</text>\n`;
+        2}" fill="white" text-anchor="middle" dy="-.4em">${row}</text>`;
     for (let col = 1; col <= width; col++) {
       let drawX = edge + (col - 1) * side;
       if (row === 1) {
         const colName = coords2pos({ x: col, y: 1 })[0];
-        ret += `  <text x="${drawX + side / 2}" y="${edge /
-          2}" fill="white" text-anchor="middle" dy="+.2em">${colName}</text>\n`;
-        ret += `  <text x="${drawX + side / 2}" y="${side * height +
+        frame += `<text x="${drawX + side / 2}" y="${edge /
+          2}" fill="white" text-anchor="middle" dy="+.2em">${colName}</text>`;
+        frame += `<text x="${drawX + side / 2}" y="${side * height +
           (3 * edge) /
-            2}" fill="white" text-anchor="middle" dy="+.2em">${colName}</text>\n`;
+            2}" fill="white" text-anchor="middle" dy="+.2em">${colName}</text>`;
       }
       let tile = tileAtPos(layers, tilemap, coords2pos({ x: col, y: row }));
       let isDark = !((col + (row % 2)) % 2);
-      // doing this as a switch so it'll be easier to add feature-specific details
-      switch (tile) {
-        case "castle":
-          ret += `  <rect x="${drawX}" y="${drawY}" width="${side}" height="${side}" fill="${
-            tileColors.castle
-          }"/>\n`;
-          break;
-        case "water":
-          ret += `  <rect x="${drawX}" y="${drawY}" width="${side}" height="${side}" fill="${
-            tileColors.water
-          }"/>\n`;
-          break;
-        case "grass":
-          ret += `  <rect x="${drawX}" y="${drawY}" width="${side}" height="${side}" fill="${
-            tileColors.grass
-          }"/>\n`;
-          break;
-        case "empty":
-          // just let the background bleed through for now
-          break;
-        case "player1base":
-          ret += `  <rect x="${drawX}" y="${drawY}" width="${side}" height="${side}" fill="${
-            tileColors.player1base
-          }"/>\n`;
-          break;
-        case "player2base":
-          ret += `  <rect x="${drawX}" y="${drawY}" width="${side}" height="${side}" fill="${
-            tileColors.player2base
-          }"/>\n`;
-          break;
-      }
-      if (isDark) {
-        ret += `  <rect x="${drawX}" y="${drawY}" width="${side}" height="${side}" fill="black" fill-opacity="0.08"/>\n`;
+      if (!(tile === "empty" && !isDark)) {
+        const id = tile + (isDark ? "Dark" : "");
+        squares += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
+        if (!used[id]) {
+          used[id] = true;
+          const pic = allPics[id as keyof typeof allPics];
+          if (!pic) {
+            throw new Error(`Unknown pic ${id}`);
+          }
+          defs += pic;
+        }
       }
     }
   }
+  ret += `<defs>${defs}</defs><g>${frame}</g><g>${squares}</g>`;
 
   ret = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${side * width +
-    edge * 2} ${side * height + edge * 2}">
-${ret}
-</svg>`;
+    edge * 2} ${side * height + edge * 2}">${ret}</svg>`;
+
+  ret = formatXml(ret);
 
   await fs.ensureDir(boardOut);
   await fs.writeFile(path.join(boardOut, gameId + ".svg"), ret);

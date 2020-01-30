@@ -4,7 +4,7 @@ import { Layer, FullDefAnon } from "../../../types";
 import * as fs from "fs-extra";
 import * as path from "path";
 import svgToMiniDataURI from "mini-svg-data-uri";
-import { allPics } from "../../picdata";
+import { allTiles } from "../../picdata";
 import formatXml from "xml-formatter";
 
 function tileAtPos(
@@ -39,7 +39,7 @@ const tileColors = {
 const boardOut = path.join(__dirname, "../../dist/svgBoards");
 const jsonOut = path.join(__dirname, "../../dist/svgDataURIs");
 
-export async function makeSVG(gameId: string) {
+export async function makeBoardSVG(gameId: string) {
   const def = lib[gameId];
   const { height, width, terrain } = def.board;
   const layers = terrainLayers(height, width, terrain!);
@@ -89,7 +89,7 @@ export async function makeSVG(gameId: string) {
         squares += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
         if (!used[id]) {
           used[id] = true;
-          const pic = allPics[id as keyof typeof allPics];
+          const pic = allTiles[id as keyof typeof allTiles];
           if (!pic) {
             throw new Error(`Unknown pic ${id}`);
           }

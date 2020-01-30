@@ -1,19 +1,15 @@
 import * as React from "react";
 import { AlgolIcon } from "../../../../types";
+import { iconDataURIs } from "../../../../graphics/dist/iconDataURIs";
 import classnames from "classnames";
 
 import containerStyles from "./Icon.container.cssProxy";
 import innerStyles from "./Icon.inner.cssProxy";
 
-import { hollows, solids } from "./Icon.shapes";
-
 import { TransitionGroup } from "react-transition-group";
 import Transition, {
   TransitionStatus,
 } from "react-transition-group/Transition";
-
-export const fills = ["lightyellow", "lightpink", "lightsteelblue"];
-export const strokes = ["orange", "darkred", "darkblue"];
 
 type IconProps = {
   /** Which type of piece it is */
@@ -41,7 +37,7 @@ export const Icon: React.FunctionComponent<IconProps> = ({
     >
       <TransitionGroup>
         <Transition
-          key={icon}
+          key={icon + owner}
           // exit time here should be in harmony with inner transition duration
           timeout={{ enter: 20, exit: 500 }}
         >
@@ -50,31 +46,17 @@ export const Icon: React.FunctionComponent<IconProps> = ({
               return null;
             }
             return (
-              <svg
-                viewBox="0 150 300 300"
-                xmlns="http://www.w3.org/2000/svg"
+              <div
+                style={{
+                  background: `url("${
+                    iconDataURIs[(icon + owner) as keyof typeof iconDataURIs]
+                  }")`,
+                }}
                 className={classnames(innerStyles.iconInner, {
                   [innerStyles.iconInnerDuringEnter]: status === "entering",
                   [innerStyles.iconInnerDuringExit]: status === "exiting",
                 })}
-              >
-                <g>
-                  <path
-                    d={solids[icon]}
-                    style={{
-                      fill: fills[owner],
-                      transition: "fill 0.6s ease, stroke 0.6s ease",
-                    }}
-                  />
-                  <path
-                    d={hollows[icon]}
-                    style={{
-                      fill: strokes[owner],
-                      transition: "fill 0.6s ease, stroke 0.6s ease",
-                    }}
-                  />
-                </g>
-              </svg>
+              />
             );
           }}
         </Transition>

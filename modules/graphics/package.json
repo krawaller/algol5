@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "robot": "npm run makeSVG",
+    "robot": "npm run makeBoardSVG; npm run exportIcons;",
     "clean": "rm -rf dist; mkdir dist;",
-    "makeSVG": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/makeSVG"
+    "makeBoardSVG": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/makeBoardSVG",
+    "exportIcons": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportIcons"
   },
   "dependencies": {},
   "devDependencies": {

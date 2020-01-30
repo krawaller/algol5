@@ -41,7 +41,7 @@ export const Icon: React.FunctionComponent<IconProps> = ({
     >
       <TransitionGroup>
         <Transition
-          key={icon}
+          key={icon + owner}
           // exit time here should be in harmony with inner transition duration
           timeout={{ enter: 20, exit: 500 }}
         >
@@ -51,7 +51,7 @@ export const Icon: React.FunctionComponent<IconProps> = ({
             }
             return (
               <svg
-                viewBox="0 150 300 300"
+                viewBox="0 0 300 300"
                 xmlns="http://www.w3.org/2000/svg"
                 className={classnames(innerStyles.iconInner, {
                   [innerStyles.iconInnerDuringEnter]: status === "entering",
@@ -63,14 +63,12 @@ export const Icon: React.FunctionComponent<IconProps> = ({
                     d={solids[icon]}
                     style={{
                       fill: fills[owner],
-                      transition: "fill 0.6s ease, stroke 0.6s ease",
                     }}
                   />
                   <path
                     d={hollows[icon]}
                     style={{
                       fill: strokes[owner],
-                      transition: "fill 0.6s ease, stroke 0.6s ease",
                     }}
                   />
                 </g>

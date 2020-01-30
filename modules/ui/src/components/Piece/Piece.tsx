@@ -28,7 +28,7 @@ type PieceProps = {
 };
 
 /**
- * A component to show a playing piece icon. Used by the Piece component.
+ * A component to show a playing piece icon. Used by the BoardUnit component.
  */
 export const Piece: FunctionComponent<PieceProps> = props => {
   const {

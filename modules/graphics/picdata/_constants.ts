@@ -1,4 +1,5 @@
 export const svgPicSide = 50;
+export const svgFrameSide = 25;
 
 export const colours = {
   empty: "bisque",
@@ -14,6 +15,7 @@ export const colours = {
   player2base: "blue",
   player2baseDark: "#1200eb",
   edge: "saddlebrown",
+  edgeText: "bisque",
   player0iconFill: "lightyellow",
   player0iconStroke: "orange",
   player1iconFill: "lightpink",

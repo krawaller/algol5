@@ -22,4 +22,7 @@ export const colours = {
   player1iconStroke: "darkred",
   player2iconFill: "lightsteelblue",
   player2iconStroke: "darkblue",
+  markSelected: "white",
+  markPotential: "white",
+  markPotentialHover: "white",
 };

@@ -1,14 +1,16 @@
-import React, { useCallback, CSSProperties } from "react";
+import React, { useCallback, CSSProperties, useRef } from "react";
 import classnames from "classnames";
 import { positionStyles } from "../../helpers";
 import styles from "./Mark.cssProxy";
+import { allMarkDataURIs } from "../../../../graphics/dist/allMarkDataURIs";
+import { useHover } from "../../helpers/useHover";
 
 type MarkProps = {
   /** Height of board */
   height: number;
   /** Width of board */
   width: number;
-  /** Whether or not the mark is potential (or selected) */
+  /** Whether or not the mark is potential (otherwise selected) */
   potential: boolean;
   /** The position of the mark (will be passed to callback) */
   pos: string;
@@ -30,14 +32,26 @@ export const Mark: React.FunctionComponent<MarkProps> = ({
   piece,
 }) => {
   const handleClick = useCallback(() => callback(pos), [pos]);
+  const [hoverRef, isHovered] = useHover<HTMLDivElement>();
+  const bg =
+    allMarkDataURIs[
+      potential && isHovered
+        ? "potentialHoverMark"
+        : potential
+        ? "potentialMark"
+        : "selectedMark"
+    ];
   return (
     <div
+      ref={hoverRef}
       onClick={handleClick}
       className={classnames(styles.mark, {
-        [styles.potentialMark]: potential,
         [styles.pulsateMark]: potential && !piece,
       })}
-      style={positionStyles({ height, width, pos })}
+      style={{
+        ...positionStyles({ height, width, pos }),
+        backgroundImage: `url("${bg}")`,
+      }}
     />
   );
 };

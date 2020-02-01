@@ -24,7 +24,7 @@ const crossHairs = [
   )
   .join("");
 
-export const potentialHoverMark = `<g id="potentialHoverMark" >
+export const potentialHoverMark = `<g id="potentialHoverMark" opacity="${opacity}">
   ${crossHairs}
-  <circle cx="${at}" cy="${at}" r="${radius}" stroke-width="${width}" stroke="${clr}" stroke-opacity="${opacity}" fill="none"></circle>
+  <circle cx="${at}" cy="${at}" r="${radius}" stroke-width="${width}" stroke="${clr}" fill="none"></circle>
 </g>`;

@@ -1,7 +1,7 @@
 import { AlgolSprite } from "../../../types";
 import { code2char } from "./sprite.code2char";
 import { pos2coords } from "../../../common";
-import { sortSprites } from "./sprite.sort";
+import { sortSprites } from "../../../common/sprites/sprite.sort";
 
 export const stringifySprites = (sprites: AlgolSprite[]) => {
   let x = 1;

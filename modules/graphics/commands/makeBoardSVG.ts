@@ -8,7 +8,7 @@ const gameId = (process.argv[2] as unknown) as GameId;
 (async () => {
   if (!gameId) {
     console.log("---- Generating SVG board for all games ----");
-    await Promise.all(list.map(makeBoardSVG));
+    await Promise.all(list.map(id => makeBoardSVG(id)));
     await fs.writeFile(
       path.join(__dirname, "../dist/svgDataURIs.ts"),
       `import { GameId } from "../../games/dist/list";\n` +

@@ -1,6 +1,6 @@
 import { AlgolBattle, AlgolLocalBattle, AlgolIconMap } from "../../../types";
 import { newSessionId } from "./newSessionId";
-import { board2sprites } from "../../../encoding/src/sprites";
+import { board2sprites } from "../../../common";
 
 export function forkSessionFromBattle(
   battle: AlgolBattle,

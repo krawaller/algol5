@@ -1,5 +1,5 @@
-import { AlgolSprite } from "../../../types";
-import { pos2coords } from "../../../common";
+import { AlgolSprite } from "../../types";
+import { pos2coords } from "..";
 
 export const sortSprites = (entities: AlgolSprite[]) =>
   entities.slice().sort((e1, e2) => {

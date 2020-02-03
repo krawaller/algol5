@@ -7,6 +7,7 @@ import { allTiles, colours, svgPicSide, svgFrameSide } from "../../picdata";
 import formatXml from "xml-formatter";
 import { tileAtPos } from "./tileAtPos";
 import { makeBoardFrame } from "./makeBoardFrame";
+import { AlgolSprite } from "../../../types";
 
 const side = svgPicSide;
 const edge = svgFrameSide;
@@ -14,7 +15,7 @@ const edge = svgFrameSide;
 const boardOut = path.join(__dirname, "../../dist/svgBoards");
 const jsonOut = path.join(__dirname, "../../dist/svgDataURIs");
 
-export async function makeBoardSVG(gameId: string) {
+export async function makeBoardSVG(gameId: string, sprites?: AlgolSprite[]) {
   const def = lib[gameId];
   const { height, width, terrain } = def.board;
   const layers = terrainLayers(height, width, terrain!);

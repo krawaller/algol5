@@ -1,5 +1,5 @@
 import { AlgolBattle, AlgolLocalBattle, AlgolIconMap } from "../../../types";
-import { board2sprites } from "../../../encoding/src/sprites";
+import { board2sprites } from "../../../common";
 
 export function updateSession(
   battle: AlgolBattle,

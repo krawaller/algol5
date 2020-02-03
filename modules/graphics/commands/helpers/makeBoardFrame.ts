@@ -2,6 +2,8 @@ import { AlgolBoardAnon } from "../../../types";
 import { svgFrameSide, svgPicSide, colours } from "../../picdata";
 import { coords2pos } from "../../../common";
 
+// TODO - allow truncation
+
 export function makeBoardFrame(board: AlgolBoardAnon) {
   const { height, width } = board;
   let frame = "";
@@ -44,7 +46,7 @@ export function makeBoardFrame(board: AlgolBoardAnon) {
       }
     }
   }
-  return frame;
+  return `<g>${frame}</g>`;
 }
 
 const svgText = (

@@ -1,48 +1,74 @@
 import { AlgolBoardAnon } from "../../../types";
 import { svgFrameSide, svgPicSide, colours } from "../../picdata";
-import { coords2pos } from "../../../common";
+import { coords2pos, pos2coords } from "../../../common";
+import { getBounds } from "./getBounds";
 
-// TODO - allow truncation
+type makeBoardFrameOpts = {
+  board: AlgolBoardAnon;
+  from: string;
+  to: string;
+};
 
-export function makeBoardFrame(board: AlgolBoardAnon) {
+export function makeBoardFrame(opts: makeBoardFrameOpts) {
+  const { board, from, to } = opts;
   const { height, width } = board;
+
+  const { startCol, startRow, stopCol, stopRow } = getBounds({
+    height,
+    width,
+    from,
+    to,
+    pad: true,
+  });
+
   let frame = "";
 
   // edge background
-  frame += `<rect x="0" y="0" width="${svgPicSide * width +
-    svgFrameSide * 2}" height="${svgPicSide * height +
-    svgFrameSide * 2}" fill="${colours.edge}" stroke="none" />`;
+  frame += `<rect x="0" y="0" width="${(width + 2) *
+    svgPicSide}" height="${(height + 2) * svgPicSide}" fill="${
+    colours.edge
+  }" stroke="none" />`;
 
-  for (let row = 1; row <= height; row++) {
-    let drawY = svgFrameSide + (height - row) * svgPicSide;
-    frame += svgText(
-      svgFrameSide / 2,
-      drawY + (3 * svgFrameSide) / 2,
-      -0.4,
-      row
-    );
-    frame += svgText(
-      width * svgPicSide + (3 * svgFrameSide) / 2,
-      drawY + (3 * svgFrameSide) / 2,
-      -0.4,
-      row
-    );
-    for (let col = 1; col <= width; col++) {
-      let drawX = svgFrameSide + (col - 1) * svgPicSide;
-      if (row === 1) {
-        const colName = coords2pos({ x: col, y: 1 })[0].toUpperCase();
+  for (let row = startRow; row <= stopRow; row++) {
+    let drawY = (height - row + 1.5) * svgPicSide;
+    if (row > 0 && row <= height) {
+      // left side row numbers
+      if (startCol === 0) {
+        frame += svgText(svgPicSide - svgFrameSide / 2, drawY, 0.1, row);
+      }
+      // right side row numbers
+      if (stopCol === width + 1) {
         frame += svgText(
-          drawX + svgPicSide / 2,
-          svgFrameSide / 2,
-          0.3,
-          colName
+          (width + 1) * svgPicSide + svgFrameSide / 2,
+          drawY,
+          0.1,
+          row
         );
-        frame += svgText(
-          drawX + svgPicSide / 2,
-          svgPicSide * height + (3 * svgFrameSide) / 2,
-          0.3,
-          colName
-        );
+      }
+    }
+    for (let col = startCol; col <= stopCol; col++) {
+      if (col > 0 && col <= width) {
+        let drawX = col * svgPicSide;
+        // top column names
+        if (row === height + 1) {
+          const colName = coords2pos({ x: col, y: 1 })[0].toUpperCase();
+          frame += svgText(
+            drawX + svgPicSide / 2,
+            svgPicSide - svgFrameSide / 2,
+            0.3,
+            colName
+          );
+        }
+        // bottom column names
+        if (row === 0) {
+          const colName = coords2pos({ x: col, y: 1 })[0].toUpperCase();
+          frame += svgText(
+            drawX + svgPicSide / 2,
+            svgPicSide * (height + 1) + svgFrameSide / 2, //+ (3 * svgFrameSide) / 2,
+            0.3,
+            colName
+          );
+        }
       }
     }
   }

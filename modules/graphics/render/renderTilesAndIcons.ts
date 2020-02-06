@@ -1,19 +1,13 @@
-import lib from "../../../games/dist/lib";
-import { coords2pos, terrainLayers } from "../../../common";
-import {
-  allTiles,
-  colours,
-  svgPicSide,
-  allMarks,
-  allIcons,
-} from "../../sprites";
+import lib from "../../games/dist/lib";
+import { coords2pos, terrainLayers } from "../../common";
+import { allTiles, colours, svgPicSide, allMarks, allIcons } from "../sprites";
 import { tileAtPos } from "./tileAtPos";
-import { AlgolSprite } from "../../../types";
+import { AlgolSprite } from "../../types";
 import { getBounds } from "./getBounds";
 
 const side = svgPicSide;
 
-type MakeBoardInnerOpts = {
+type RenderTilesAndIconsOpts = {
   gameId: string;
   sprites?: AlgolSprite[];
   from: string;
@@ -21,13 +15,7 @@ type MakeBoardInnerOpts = {
   pad?: boolean;
 };
 
-// const sprites: AlgolSprite[] = [
-//   { unit: { owner: 1, icon: "queen" }, pos: "b3" },
-//   { unit: { owner: 0, icon: "rook" }, pos: "c5", mark: "mark" },
-//   { pos: "e1", mark: "pot" },
-// ];
-
-export function makeBoardInner(opts: MakeBoardInnerOpts) {
+export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
   const { gameId, from, to, pad, sprites = [] } = opts;
   const def = lib[gameId];
   const { height, width, terrain } = def.board;

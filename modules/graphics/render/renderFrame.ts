@@ -1,15 +1,15 @@
-import { AlgolBoardAnon } from "../../../types";
-import { svgFrameSide, svgPicSide, colours } from "../../sprites";
-import { coords2pos, pos2coords } from "../../../common";
+import { AlgolBoardAnon } from "../../types";
+import { svgFrameSide, svgPicSide, colours } from "../sprites";
+import { coords2pos } from "../../common";
 import { getBounds } from "./getBounds";
 
-type makeBoardFrameOpts = {
+type RenderFrameOpts = {
   board: AlgolBoardAnon;
   from: string;
   to: string;
 };
 
-export function makeBoardFrame(opts: makeBoardFrameOpts) {
+export function renderFrame(opts: RenderFrameOpts) {
   const { board, from, to } = opts;
   const { height, width } = board;
 

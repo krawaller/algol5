@@ -1,12 +1,12 @@
-import lib from "../../../games/dist/lib";
-import { svgPicSide, svgFrameSide } from "../../sprites";
+import lib from "../../games/dist/lib";
+import { svgPicSide, svgFrameSide } from "../sprites";
 import formatXml from "xml-formatter";
-import { makeBoardFrame } from "./makeBoardFrame";
-import { AlgolSprite } from "../../../types";
-import { makeBoardInner } from "./makeBoardInner";
+import { renderFrame } from "./renderFrame";
+import { AlgolSprite } from "../../types";
+import { renderTilesAndIcons } from "./renderTilesAndIcons";
 import { getBounds } from "./getBounds";
 
-type MakeBoardOpts = {
+type RenderOpts = {
   gameId: string;
   sprites?: AlgolSprite[];
   from?: string;
@@ -14,13 +14,13 @@ type MakeBoardOpts = {
   pad?: boolean;
 };
 
-export function makeBoard(opts: MakeBoardOpts) {
+export function render(opts: RenderOpts) {
   const { gameId, from = "a1", to = "k14", pad = true } = opts;
   const def = lib[gameId];
   const { height, width } = def.board;
 
-  const frame = makeBoardFrame({ board: def.board, from, to });
-  const inner = makeBoardInner({ gameId, from, to, pad });
+  const frame = renderFrame({ board: def.board, from, to });
+  const inner = renderTilesAndIcons({ gameId, from, to, pad });
 
   const { xStart, picWidth, picHeight, stopRow } = getBounds({
     height,

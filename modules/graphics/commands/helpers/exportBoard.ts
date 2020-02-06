@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 import lib from "../../../games/dist/lib";
 import svgToMiniDataURI from "mini-svg-data-uri";
-import { makeBoard } from "./makeBoard";
+import { render } from "../../render";
 
 const boardOut = path.join(__dirname, "../../dist/svgBoards");
 const jsonOut = path.join(__dirname, "../../dist/svgDataURIs");
@@ -11,7 +11,7 @@ export async function exportBoard(gameId: string) {
   const def = lib[gameId];
   const { height, width } = def.board;
 
-  const boardSVG = makeBoard({ gameId });
+  const boardSVG = render({ gameId });
 
   await fs.ensureDir(boardOut);
   await fs.writeFile(path.join(boardOut, gameId + ".svg"), boardSVG);

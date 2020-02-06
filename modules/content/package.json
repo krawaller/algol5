@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "robot": "echo 'nothing yet'",
+    "writeGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeGame.ts",
+    "stubGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/stubGame.ts"
+  }
+}

@@ -1,0 +1,1 @@
+Orthokon! Take over your opponent's army before she steals yours. More yabber about the game to come!

@@ -34,7 +34,6 @@ export function render(opts: RenderOpts) {
     (height - stopRow + 1) * svgPicSide + (pad ? svgPicSide - svgFrameSide : 0);
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${xStart} ${calcYstart} ${picWidth} ${picHeight}">${frame}${inner}</svg>`;
-  //const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${0} ${0} ${800} ${800}">${frame}${inner}</svg>`;
 
   return formatXml(svg);
 }

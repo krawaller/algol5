@@ -1,4 +1,4 @@
-import { AlgolSprite, AlgolIconMap, AlgolArmy } from "../../../types";
+import { AlgolSprite, AlgolIconMap, AlgolArmy } from "../../types";
 import { sortSprites } from "./sprite.sort";
 
 type Board2SpritesOpts = {

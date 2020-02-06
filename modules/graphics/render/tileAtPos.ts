@@ -1,4 +1,4 @@
-import { Layer, FullDefAnon } from "../../../types";
+import { Layer, FullDefAnon } from "../../types";
 
 export function tileAtPos(
   layers: { [name: string]: Layer },

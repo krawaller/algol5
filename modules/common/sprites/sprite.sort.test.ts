@@ -1,5 +1,5 @@
 import { sortSprites } from "./sprite.sort";
-import { AlgolSprite } from "../../../types";
+import { AlgolSprite } from "../../types";
 
 describe("the sortSprites encoding helper", () => {
   test("sorts by ascending y, ascending x", () => {

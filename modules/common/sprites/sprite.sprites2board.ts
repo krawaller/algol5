@@ -1,5 +1,5 @@
-import { AlgolSprite, AlgolBoardState } from "../../../types";
-import { emptyAnim } from "../../../common";
+import { AlgolSprite, AlgolBoardState } from "../../types";
+import { emptyAnim } from "..";
 
 export const sprites2board = (sprites: AlgolSprite[]) => {
   const ret: AlgolBoardState = {

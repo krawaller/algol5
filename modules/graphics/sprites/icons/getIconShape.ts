@@ -1,10 +1,5 @@
-import {
-  solids,
-  hollows,
-  colours,
-  svgPicSide,
-  stolenShapeSide,
-} from "../../picdata";
+import { colours, svgPicSide } from "..";
+import { solids, hollows, stolenShapeSide } from "./stolenShapes";
 import { processPath } from "./processPath";
 
 export const getIconShape = (icon: keyof typeof solids, owner: 0 | 1 | 2) => {

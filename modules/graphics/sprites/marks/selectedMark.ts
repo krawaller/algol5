@@ -23,7 +23,4 @@ const crossHairs = [
   )
   .join("");
 
-export const selectedMark = `<g id="selectedMark">
-  ${crossHairs}
-  <circle cx="${at}" cy="${at}" r="${radius}" stroke-width="${width}" stroke="${clr}" fill="none"></circle>
-</g>`;
+export const selectedMark = `<g id="selectedMark">${crossHairs}<circle cx="${at}" cy="${at}" r="${radius}" stroke-width="${width}" stroke="${clr}" fill="none"/></g>`;

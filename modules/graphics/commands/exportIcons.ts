@@ -2,43 +2,33 @@ import fs, { writeFileSync } from "fs-extra";
 import prettier from "prettier";
 import path from "path";
 import svgToMiniDataURI from "mini-svg-data-uri";
-import { icons } from "../picdata";
-import { getIconShape } from "./helpers/getIconShape";
+import { allIcons } from "../sprites";
 
 const out = path.join(__dirname, "../dist");
 
 fs.emptyDirSync(path.join(out, "iconSVGs"));
 fs.emptyDirSync(path.join(out, "exportedIconSVGs"));
 
+const iconNames = Object.keys(allIcons);
 const iconSVGs: Record<string, string> = {};
 
-for (const icon of icons) {
-  for (const owner of [0, 1, 2] as (0 | 1 | 2)[]) {
-    const def = getIconShape(icon, owner);
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">${def}</svg>`;
-    writeFileSync(path.join(out, "iconSVGs", `${icon}${owner}.svg`), svg);
-    const exp = `export const ${icon}${owner}SVG = '${svg}';\n`;
-    writeFileSync(
-      path.join(out, "exportedIconSVGs", `${icon}${owner}SVG.ts`),
-      exp
-    );
-    iconSVGs[icon + owner] = svg;
-  }
+for (const icon of iconNames) {
+  const def = allIcons[icon];
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">${def}</svg>`;
+  writeFileSync(path.join(out, "iconSVGs", `${icon}.svg`), svg);
+  const exp = `export const ${icon}SVG = '${svg}';\n`;
+  writeFileSync(path.join(out, "exportedIconSVGs", `${icon}SVG.ts`), exp);
+  iconSVGs[icon] = svg;
 }
 
-const ownedIcons = icons
-  .map(icon => icon + "0")
-  .concat(icons.map(icon => icon + "1"))
-  .concat(icons.map(icon => icon + "2"));
-
-const collection = `${ownedIcons
+const collection = `${iconNames
   .map(icon => `export * from './exportedIconSVGs/${icon}SVG'`)
   .join("\n")}
-${ownedIcons
+${iconNames
   .map(icon => `import { ${icon}SVG } from './exportedIconSVGs/${icon}SVG'`)
   .join("\n")}
 export const allIcons = {
-${ownedIcons.map(icon => `${icon}SVG`).join(", ")}
+${iconNames.map(icon => `${icon}SVG`).join(", ")}
 };`;
 fs.writeFileSync(
   path.join(out, "allIconSVGs.ts"),
@@ -46,7 +36,7 @@ fs.writeFileSync(
 );
 
 const dataURIs = `export const iconDataURIs = {
-  ${ownedIcons
+  ${iconNames
     .map(icon => `${icon}: "${svgToMiniDataURI(iconSVGs[icon])}"`)
     .join(", ")}
 };

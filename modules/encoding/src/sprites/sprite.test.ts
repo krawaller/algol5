@@ -1,6 +1,6 @@
 import { stringifySprites, parseSprites } from ".";
 import { AlgolSprite } from "../../../types";
-import { sortSprites } from "./sprite.sort";
+import { sortSprites } from "../../../common/sprites/sprite.sort";
 
 type Test = {
   desc: string;

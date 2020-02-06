@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "robot": "npm run makeBoardSVG; npm run exportIcons; npm run exportMarks",
+    "robot": "npm run exportIcons; npm run exportMarks; npm run exportBoards",
     "clean": "rm -rf dist; mkdir dist;",
-    "makeBoardSVG": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/makeBoardSVG",
+    "exportBoards": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportBoards",
     "exportIcons": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportIcons",
     "exportMarks": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportMarks"
   },

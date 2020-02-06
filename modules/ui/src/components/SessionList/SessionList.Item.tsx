@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 
 import css from "./SessionList.cssProxy";
-import { sprites2board } from "../../../../encoding/src/sprites/sprite.sprites2board";
+import { sprites2board } from "../../../../common/sprites/sprite.sprites2board";
 import { AlgolLocalBattle, AlgolGameGraphics } from "../../../../types";
 import { Board } from "../Board";
 import { SessionItemInfo } from "./SessionList.ItemInfo";

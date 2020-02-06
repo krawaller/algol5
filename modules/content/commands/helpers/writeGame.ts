@@ -4,7 +4,7 @@ import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";
 
 export const writeGame = (gameId: GameId) => {
-  const out = path.join(__dirname, `../../dist/${gameId}`);
+  const out = path.join(__dirname, `../../dist/games/${gameId}`);
   fs.ensureDirSync(out);
   const source = path.join(__dirname, `../../games/${gameId}`);
   const content: Record<string, string> = {};

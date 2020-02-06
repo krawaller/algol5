@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from "react";
 
-export const GameLandingAbout: FunctionComponent = () => {
-  return (
-    <div>
-      Lorem ipsum etc etc! Here there'll be some babble about this particular
-      game.
-    </div>
-  );
+type GameLandingAbout = {
+  html: string;
+};
+
+export const GameLandingAbout: FunctionComponent<GameLandingAbout> = props => {
+  const { html } = props;
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
 };
 
 export default GameLandingAbout;

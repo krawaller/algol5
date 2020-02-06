@@ -1,5 +1,5 @@
 import lib from "../../../games/dist/lib";
-import { svgPicSide, svgFrameSide } from "../../picdata";
+import { svgPicSide, svgFrameSide } from "../../sprites";
 import formatXml from "xml-formatter";
 import { makeBoardFrame } from "./makeBoardFrame";
 import { AlgolSprite } from "../../../types";

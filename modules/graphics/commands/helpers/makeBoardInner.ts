@@ -6,7 +6,7 @@ import {
   svgPicSide,
   allMarks,
   allIcons,
-} from "../../picdata";
+} from "../../sprites";
 import { tileAtPos } from "./tileAtPos";
 import { AlgolSprite } from "../../../types";
 import { getBounds } from "./getBounds";

@@ -2,7 +2,7 @@ import fs, { writeFileSync } from "fs-extra";
 import prettier from "prettier";
 import path from "path";
 import svgToMiniDataURI from "mini-svg-data-uri";
-import { allIcons } from "../picdata";
+import { allIcons } from "../sprites";
 
 const out = path.join(__dirname, "../dist");
 

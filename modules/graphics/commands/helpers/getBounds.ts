@@ -1,5 +1,5 @@
 import { pos2coords } from "../../../common";
-import { svgPicSide, svgFrameSide } from "../../picdata";
+import { svgPicSide, svgFrameSide } from "../../sprites";
 
 const side = svgPicSide;
 const edge = svgFrameSide;

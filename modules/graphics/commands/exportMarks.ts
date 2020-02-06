@@ -3,8 +3,8 @@ import prettier from "prettier";
 import path from "path";
 import svgToMiniDataURI from "mini-svg-data-uri";
 
-import { allMarks } from "../picdata/marks";
-import { svgPicSide } from "../picdata";
+import { allMarks } from "../sprites/marks";
+import { svgPicSide } from "../sprites";
 
 const out = path.join(__dirname, "../dist");
 

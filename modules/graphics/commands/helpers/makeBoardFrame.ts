@@ -1,5 +1,5 @@
 import { AlgolBoardAnon } from "../../../types";
-import { svgFrameSide, svgPicSide, colours } from "../../picdata";
+import { svgFrameSide, svgPicSide, colours } from "../../sprites";
 import { coords2pos, pos2coords } from "../../../common";
 import { getBounds } from "./getBounds";
 

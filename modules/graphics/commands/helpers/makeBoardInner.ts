@@ -1,9 +1,10 @@
 import lib from "../../../games/dist/lib";
 import { coords2pos, terrainLayers } from "../../../common";
-import { allTiles, colours, svgPicSide } from "../../picdata";
+import { allTiles, colours, svgPicSide, allMarks } from "../../picdata";
 import { tileAtPos } from "./tileAtPos";
 import { AlgolSprite } from "../../../types";
 import { getBounds } from "./getBounds";
+import { allIcons } from "../../dist/allIconSVGs";
 
 const side = svgPicSide;
 
@@ -15,14 +16,30 @@ type MakeBoardInnerOpts = {
   pad?: boolean;
 };
 
+const sprites: AlgolSprite[] = [
+  { unit: { owner: 2, icon: "pawn" }, pos: "b3" },
+  { unit: { owner: 0, icon: "rook" }, pos: "c5", mark: "mark" },
+  { pos: "e1", mark: "pot" },
+];
+
 export function makeBoardInner(opts: MakeBoardInnerOpts) {
-  const { gameId, sprites = [], from, to, pad } = opts;
+  const { gameId, from, to, pad } = opts;
   const def = lib[gameId];
   const { height, width, terrain } = def.board;
   const layers = terrainLayers(height, width, terrain!);
   const tilemap = def.graphics.tiles;
 
+  const spritesPerPos = sprites.reduce(
+    (memo, sprite) => ({
+      ...memo,
+      [sprite.pos]: sprite,
+    }),
+    {} as Record<string, AlgolSprite>
+  );
+
   let squares = "";
+  let icons = "";
+  let marks = "";
   let defs = "";
   let used: Record<string, boolean> = {};
 
@@ -54,7 +71,8 @@ export function makeBoardInner(opts: MakeBoardInnerOpts) {
       col++
     ) {
       let drawX = col * side;
-      let tile = tileAtPos(layers, tilemap, coords2pos({ x: col, y: row }));
+      const pos = coords2pos({ x: col, y: row });
+      let tile = tileAtPos(layers, tilemap, pos);
       let isDark = !((col + (row % 2)) % 2);
       if (!(tile === "empty" && !isDark)) {
         const id = tile + (isDark ? "Dark" : "");
@@ -68,8 +86,35 @@ export function makeBoardInner(opts: MakeBoardInnerOpts) {
           defs += pic;
         }
       }
+      if (spritesPerPos[pos]) {
+        const sprite = spritesPerPos[pos];
+        if (sprite.unit) {
+          const id = `${sprite.unit.icon}${sprite.unit.owner}`;
+          const name = `${id}SVG` as keyof typeof allIcons;
+          if (!used[name]) {
+            used[name] = true;
+            const def = allIcons[name];
+            defs += def;
+          }
+          icons += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
+        }
+        if (sprite.mark) {
+          const name =
+            sprite.mark === "mark"
+              ? "selectedMark"
+              : sprite.mark === "pot"
+              ? "potentialMark"
+              : ("foo" as keyof typeof allMarks);
+          if (!used[name]) {
+            used[name] = true;
+            const def = allMarks[name];
+            defs += def;
+          }
+          marks += `<use href="#${name}" x="${drawX}" y="${drawY}" />`;
+        }
+      }
     }
   }
 
-  return `<defs>${defs}</defs><g>${background}</g><g>${squares}</g>`;
+  return `<defs>${defs}</defs><g>${background}</g><g>${squares}${icons}${marks}</g>`;
 }

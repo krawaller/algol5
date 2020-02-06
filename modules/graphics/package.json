@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm run exportBoards; npm run exportIcons; npm run exportMarks",
+    "robot": "npm run exportIcons; npm run exportMarks; npm run exportBoards",
     "clean": "rm -rf dist; mkdir dist;",
     "exportBoards": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportBoards",
     "exportIcons": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/graphics/commands/exportIcons",

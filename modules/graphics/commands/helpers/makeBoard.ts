@@ -6,8 +6,6 @@ import { AlgolSprite } from "../../../types";
 import { makeBoardInner } from "./makeBoardInner";
 import { getBounds } from "./getBounds";
 
-const edge = svgFrameSide;
-
 type MakeBoardOpts = {
   gameId: string;
   sprites?: AlgolSprite[];
@@ -17,25 +15,14 @@ type MakeBoardOpts = {
 };
 
 export function makeBoard(opts: MakeBoardOpts) {
-  const { gameId, from = "a1", to = "h7", pad = true } = opts;
+  const { gameId, from = "a1", to = "k14", pad = true } = opts;
   const def = lib[gameId];
   const { height, width } = def.board;
 
   const frame = makeBoardFrame({ board: def.board, from, to });
   const inner = makeBoardInner({ gameId, from, to, pad });
 
-  const {
-    xStart,
-    yStart,
-    xEnd,
-    yEnd,
-    picWidth,
-    picHeight,
-    startCol,
-    startRow,
-    stopCol,
-    stopRow,
-  } = getBounds({
+  const { xStart, picWidth, picHeight, stopRow } = getBounds({
     height,
     width,
     from,

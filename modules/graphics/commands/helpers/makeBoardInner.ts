@@ -1,10 +1,15 @@
 import lib from "../../../games/dist/lib";
 import { coords2pos, terrainLayers } from "../../../common";
-import { allTiles, colours, svgPicSide, allMarks } from "../../picdata";
+import {
+  allTiles,
+  colours,
+  svgPicSide,
+  allMarks,
+  allIcons,
+} from "../../picdata";
 import { tileAtPos } from "./tileAtPos";
 import { AlgolSprite } from "../../../types";
 import { getBounds } from "./getBounds";
-import { allIcons } from "../../dist/allIconSVGs";
 
 const side = svgPicSide;
 
@@ -16,14 +21,14 @@ type MakeBoardInnerOpts = {
   pad?: boolean;
 };
 
-const sprites: AlgolSprite[] = [
-  { unit: { owner: 2, icon: "pawn" }, pos: "b3" },
-  { unit: { owner: 0, icon: "rook" }, pos: "c5", mark: "mark" },
-  { pos: "e1", mark: "pot" },
-];
+// const sprites: AlgolSprite[] = [
+//   { unit: { owner: 1, icon: "queen" }, pos: "b3" },
+//   { unit: { owner: 0, icon: "rook" }, pos: "c5", mark: "mark" },
+//   { pos: "e1", mark: "pot" },
+// ];
 
 export function makeBoardInner(opts: MakeBoardInnerOpts) {
-  const { gameId, from, to, pad } = opts;
+  const { gameId, from, to, pad, sprites = [] } = opts;
   const def = lib[gameId];
   const { height, width, terrain } = def.board;
   const layers = terrainLayers(height, width, terrain!);
@@ -90,10 +95,9 @@ export function makeBoardInner(opts: MakeBoardInnerOpts) {
         const sprite = spritesPerPos[pos];
         if (sprite.unit) {
           const id = `${sprite.unit.icon}${sprite.unit.owner}`;
-          const name = `${id}SVG` as keyof typeof allIcons;
-          if (!used[name]) {
-            used[name] = true;
-            const def = allIcons[name];
+          if (!used[id]) {
+            used[id] = true;
+            const def = allIcons[id];
             defs += def;
           }
           icons += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
@@ -116,5 +120,5 @@ export function makeBoardInner(opts: MakeBoardInnerOpts) {
     }
   }
 
-  return `<defs>${defs}</defs><g>${background}</g><g>${squares}${icons}${marks}</g>`;
+  return `<defs>${defs}</defs><g>${background}</g><g>${squares}${marks}${icons}</g>`;
 }

@@ -15,11 +15,11 @@ type RenderOpts = {
 };
 
 export function render(opts: RenderOpts) {
-  const { board, tileMap, from = "a1", to = "k14", pad = true } = opts;
+  const { board, tileMap, from = "a1", to = "k14", pad = true, sprites } = opts;
   const { height, width } = board;
 
   const frame = renderFrame({ board, from, to });
-  const inner = renderTilesAndIcons({ board, tileMap, from, to, pad });
+  const inner = renderTilesAndIcons({ board, tileMap, from, to, pad, sprites });
 
   const { xStart, picWidth, picHeight, stopRow } = getBounds({
     height,

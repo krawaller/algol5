@@ -14,7 +14,7 @@ import { Generators } from "./generators";
 import { Graphics } from "./graphics";
 import { AlgolBoard } from "./board";
 import { AI } from "./ai";
-import { Setup } from "./setup";
+import { AlgolSetup } from "./setup";
 import { Instructions } from "./instructions";
 import { AlgolMeta } from "./meta";
 import { Flow } from "./flow";
@@ -105,7 +105,7 @@ export type FullDef<
     Unit
   >;
   board: AlgolBoard<BoardHeight, BoardWidth, Grid, Position, Terrain>;
-  setup: Setup<Position, Unit>;
+  setup: AlgolSetup<Position, Unit>;
   graphics: Graphics<Terrain, Unit>;
   grids?: { [g in Grid]: any };
   instructions: Instructions<

@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -155,7 +155,7 @@ export type ShoveoffScripts = AlgolGameTestSuite<
   ShoveoffCommand,
   ShoveoffPosition
 >;
-export type ShoveoffSetup = Setup<ShoveoffPosition, ShoveoffUnit>;
+export type ShoveoffSetup = AlgolSetup<ShoveoffPosition, ShoveoffUnit>;
 
 export type ShoveoffDefinition = FullDef<
   ShoveoffAiArtifactLayer,

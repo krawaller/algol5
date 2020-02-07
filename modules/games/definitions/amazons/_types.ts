@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -122,7 +122,7 @@ export type AmazonsScripts = AlgolGameTestSuite<
   AmazonsCommand,
   AmazonsPosition
 >;
-export type AmazonsSetup = Setup<AmazonsPosition, AmazonsUnit>;
+export type AmazonsSetup = AlgolSetup<AmazonsPosition, AmazonsUnit>;
 
 export type AmazonsDefinition = FullDef<
   AmazonsAiArtifactLayer,

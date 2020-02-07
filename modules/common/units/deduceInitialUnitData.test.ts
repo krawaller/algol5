@@ -1,8 +1,8 @@
-import { SetupAnon } from "../../types";
+import { AlgolSetupAnon } from "../../types";
 import { deduceInitialUnitData } from "..";
 
 type unitDataTest = {
-  setup: SetupAnon;
+  setup: AlgolSetupAnon;
   expected: {
     [unitid: string]: {
       [prop: string]: string | number;
@@ -15,8 +15,8 @@ const unitLayerTests: unitDataTest[] = [
     setup: {
       dorks: {
         1: ["a1"],
-        2: ["b1", { datasites: [{ strength: 3 }, "c1"] }]
-      }
+        2: ["b1", { datasites: [{ strength: 3 }, "c1"] }],
+      },
     },
     expected: {
       unit1: {
@@ -25,7 +25,7 @@ const unitLayerTests: unitDataTest[] = [
         group: "dorks",
         pos: "a1",
         x: 1,
-        y: 1
+        y: 1,
       },
       unit2: {
         id: "unit2",
@@ -33,7 +33,7 @@ const unitLayerTests: unitDataTest[] = [
         group: "dorks",
         pos: "b1",
         x: 2,
-        y: 1
+        y: 1,
       },
       unit3: {
         id: "unit3",
@@ -42,10 +42,10 @@ const unitLayerTests: unitDataTest[] = [
         pos: "c1",
         x: 3,
         y: 1,
-        strength: 3
-      }
-    }
-  }
+        strength: 3,
+      },
+    },
+  },
 ];
 
 test("deduceInitialUnitData", () =>

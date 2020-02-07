@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -149,7 +149,7 @@ export type MurusgallicusScripts = AlgolGameTestSuite<
   MurusgallicusCommand,
   MurusgallicusPosition
 >;
-export type MurusgallicusSetup = Setup<
+export type MurusgallicusSetup = AlgolSetup<
   MurusgallicusPosition,
   MurusgallicusUnit
 >;

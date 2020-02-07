@@ -2,7 +2,7 @@ import {
   offsetPos,
   boardConnections,
   makeRelativeDirs,
-  deduceInitialUnitData,
+  setup2army,
   boardLayers,
   terrainLayers,
   collapseContent,
@@ -285,7 +285,7 @@ let game = {
     });
   };
   game.newBattle = () => {
-    let UNITDATA = deduceInitialUnitData({
+    let UNITDATA = setup2army({
       kings: { "1": ["a1", "c3", "e5"] },
       pawns: { "2": [{ holerect: ["a1", "e5", "a1", "c3", "e5"] }] }
     });

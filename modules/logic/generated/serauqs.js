@@ -2,7 +2,7 @@ import {
   offsetPos,
   boardConnections,
   makeRelativeDirs,
-  deduceInitialUnitData,
+  setup2army,
   boardLayers,
   terrainLayers,
   collapseContent,
@@ -426,7 +426,7 @@ let game = {
         });
   };
   game.newBattle = () => {
-    let UNITDATA = deduceInitialUnitData({
+    let UNITDATA = setup2army({
       soldiers: { "1": [{ rect: ["a1", "d1"] }], "2": [{ rect: ["a4", "d4"] }] }
     });
     let UNITLAYERS = {

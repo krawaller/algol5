@@ -11,9 +11,7 @@ export function executeNewBattle(
   let ret = "";
   const hasSetup = Object.keys(gameDef.setup).length > 0;
   if (hasSetup) {
-    ret += `let UNITDATA = deduceInitialUnitData(${JSON.stringify(
-      gameDef.setup
-    )});
+    ret += `let UNITDATA = setup2army(${JSON.stringify(gameDef.setup)});
     ${updateUnitLayers(gameDef, 2, "newBattle", true)}`;
   }
   return (

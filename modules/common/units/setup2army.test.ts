@@ -1,5 +1,5 @@
 import { AlgolSetupAnon } from "../../types";
-import { deduceInitialUnitData } from "..";
+import { setup2army } from "..";
 
 type unitDataTest = {
   setup: AlgolSetupAnon;
@@ -50,5 +50,5 @@ const unitLayerTests: unitDataTest[] = [
 
 test("deduceInitialUnitData", () =>
   unitLayerTests.forEach(({ setup, expected }) =>
-    expect(deduceInitialUnitData(setup)).toEqual(expected)
+    expect(setup2army(setup)).toEqual(expected)
   ));

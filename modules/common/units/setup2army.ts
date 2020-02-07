@@ -1,14 +1,10 @@
-import { processEntity } from "../";
+import { processEntity } from "..";
 import { AlgolSetupAnon, AlgolArmy } from "../../types";
-import { AlgolIcon } from "../../types/gamedef";
 
 /*
 the initial unit data blob
 */
-export function deduceInitialUnitData(
-  setup: AlgolSetupAnon,
-  groupAsIcon?: boolean
-): AlgolArmy {
+export function setup2army(setup: AlgolSetupAnon): AlgolArmy {
   let id = 1;
   return Object.keys(setup).reduce((mem, group) => {
     let defsbyplr = setup[group]!;
@@ -22,7 +18,6 @@ export function deduceInitialUnitData(
             ...{
               id: newid,
               group: group,
-              icon: groupAsIcon ? (group as AlgolIcon) : undefined,
               owner: parseInt(plr) as 0 | 1 | 2,
             },
           };

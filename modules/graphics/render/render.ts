@@ -1,13 +1,13 @@
-import lib from "../../games/dist/lib";
 import { svgPicSide, svgFrameSide } from "../sprites";
 import formatXml from "xml-formatter";
 import { renderFrame } from "./renderFrame";
-import { AlgolSprite } from "../../types";
+import { AlgolSprite, AlgolBoardAnon, AlgolTileMap } from "../../types";
 import { renderTilesAndIcons } from "./renderTilesAndIcons";
 import { getBounds } from "./getBounds";
 
 type RenderOpts = {
-  gameId: string;
+  board: AlgolBoardAnon;
+  tileMap: AlgolTileMap;
   sprites?: AlgolSprite[];
   from?: string;
   to?: string;
@@ -15,12 +15,11 @@ type RenderOpts = {
 };
 
 export function render(opts: RenderOpts) {
-  const { gameId, from = "a1", to = "k14", pad = true } = opts;
-  const def = lib[gameId];
-  const { height, width } = def.board;
+  const { board, tileMap, from = "a1", to = "k14", pad = true } = opts;
+  const { height, width } = board;
 
-  const frame = renderFrame({ board: def.board, from, to });
-  const inner = renderTilesAndIcons({ gameId, from, to, pad });
+  const frame = renderFrame({ board, from, to });
+  const inner = renderTilesAndIcons({ board, tileMap, from, to, pad });
 
   const { xStart, picWidth, picHeight, stopRow } = getBounds({
     height,

@@ -48,7 +48,7 @@ const unitLayerTests: unitDataTest[] = [
   },
 ];
 
-test("deduceInitialUnitData", () =>
+test("setup2army", () =>
   unitLayerTests.forEach(({ setup, expected }) =>
     expect(setup2army(setup)).toEqual(expected)
   ));

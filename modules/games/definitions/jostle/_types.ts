@@ -40,8 +40,11 @@ export type JostleUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
+  | "checkers"
   | "mycheckers"
-  | "oppcheckers";
+  | "oppcheckers"
+  | "neutralcheckers";
 export type JostleGenerator = "findinitial" | "findnew";
 export type JostleArtifactLayer =
   | "movetargets"

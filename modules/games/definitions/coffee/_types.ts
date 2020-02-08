@@ -41,7 +41,10 @@ export type CoffeeUnitLayer =
   | "myunits"
   | "oppunits"
   | "neutralunits"
-  | "soldiers";
+  | "soldiers"
+  | "mysoldiers"
+  | "oppsoldiers"
+  | "neutralsoldiers";
 export type CoffeeGenerator = "findgeneratees" | "findwinlines";
 export type CoffeeArtifactLayer =
   | "FOOBAR"

@@ -40,12 +40,15 @@ export type MurusgallicusUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "towers"
   | "mytowers"
   | "opptowers"
+  | "neutraltowers"
   | "walls"
   | "mywalls"
-  | "oppwalls";
+  | "oppwalls"
+  | "neutralwalls";
 export type MurusgallicusGenerator =
   | "findmovetargets"
   | "findmoveresults"

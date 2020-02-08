@@ -43,9 +43,19 @@ export type GowiththefloeUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "seals"
+  | "myseals"
+  | "oppseals"
+  | "neutralseals"
   | "bears"
-  | "holes";
+  | "mybears"
+  | "oppbears"
+  | "neutralbears"
+  | "holes"
+  | "myholes"
+  | "oppholes"
+  | "neutralholes";
 export type GowiththefloeGenerator =
   | "findeattargets"
   | "findmovetargets"

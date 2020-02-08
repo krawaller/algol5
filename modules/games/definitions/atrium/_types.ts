@@ -40,10 +40,15 @@ export type AtriumUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
+  | "kings"
   | "mykings"
   | "oppkings"
+  | "neutralkings"
+  | "queens"
   | "myqueens"
-  | "oppqueens";
+  | "oppqueens"
+  | "neutralqueens";
 export type AtriumGenerator = "findmovetargets" | "findwinlines";
 export type AtriumArtifactLayer = "movetargets" | "winline";
 export type AtriumTerrainLayer = never;

@@ -40,9 +40,11 @@ export type DuploUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "soldiers"
   | "mysoldiers"
-  | "oppsoldiers";
+  | "oppsoldiers"
+  | "neutralsoldiers";
 export type DuploGenerator =
   | "findspawndirs"
   | "findgrowstarts"

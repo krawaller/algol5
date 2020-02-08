@@ -36,7 +36,23 @@ export type SemaphorMark = "selectdeploytarget" | "selectunit";
 export type SemaphorCommand = "deploy" | "promote";
 export type SemaphorPhaseCommand = never;
 export type SemaphorPhase = "startTurn" | SemaphorMark;
-export type SemaphorUnitLayer = "units" | "kings" | "pawns" | "bishops";
+export type SemaphorUnitLayer =
+  | "units"
+  | "myunits"
+  | "oppunits"
+  | "neutralunits"
+  | "kings"
+  | "mykings"
+  | "oppkings"
+  | "neutralkings"
+  | "pawns"
+  | "mypawns"
+  | "opppawns"
+  | "neutralpawns"
+  | "bishops"
+  | "mybishops"
+  | "oppbishops"
+  | "neutralbishops";
 export type SemaphorGenerator = "findlines";
 export type SemaphorArtifactLayer = "line";
 export type SemaphorTerrainLayer = never;

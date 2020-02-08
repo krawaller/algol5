@@ -40,10 +40,15 @@ export type KriegUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
+  | "notfrozens"
   | "mynotfrozens"
   | "oppnotfrozens"
+  | "neutralnotfrozens"
+  | "frozens"
   | "myfrozens"
-  | "oppfrozens";
+  | "oppfrozens"
+  | "neutralfrozens";
 export type KriegGenerator = "findmovetargets";
 export type KriegArtifactLayer = "movetargets";
 export type KriegTerrainLayer =

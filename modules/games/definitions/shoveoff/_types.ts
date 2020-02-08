@@ -41,7 +41,15 @@ export type ShoveoffMark = "selectpushpoint";
 export type ShoveoffCommand = "north" | "south" | "east" | "west";
 export type ShoveoffPhaseCommand = never;
 export type ShoveoffPhase = "startTurn" | ShoveoffMark;
-export type ShoveoffUnitLayer = "units" | "myunits" | "oppunits";
+export type ShoveoffUnitLayer =
+  | "units"
+  | "myunits"
+  | "oppunits"
+  | "neutralunits"
+  | "soldiers"
+  | "mysoldiers"
+  | "oppsoldiers"
+  | "neutralsoldiers";
 export type ShoveoffGenerator =
   | "findaffected"
   | "findresults"

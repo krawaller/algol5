@@ -45,8 +45,19 @@ export type TransetUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "pinets"
-  | "piokers";
+  | "mypinets"
+  | "opppinets"
+  | "neutralpinets"
+  | "piokers"
+  | "mypiokers"
+  | "opppiokers"
+  | "neutralpiokers"
+  | "piases"
+  | "mypiases"
+  | "opppiases"
+  | "neutralpiases";
 export type TransetGenerator =
   | "findswap2step"
   | "findswap1steps"

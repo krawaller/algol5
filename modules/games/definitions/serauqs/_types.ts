@@ -40,9 +40,15 @@ export type SerauqsUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
+  | "soldiers"
+  | "mysoldiers"
+  | "oppsoldiers"
+  | "neutralsoldiers"
   | "wild"
   | "mywild"
-  | "oppwild";
+  | "oppwild"
+  | "neutralwild";
 export type SerauqsGenerator = "findmovetargets" | "findwinline";
 export type SerauqsArtifactLayer = "movetargets" | "winline";
 export type SerauqsTerrainLayer =

@@ -40,8 +40,15 @@ export type ThreemusketeersUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "pawns"
-  | "kings";
+  | "mypawns"
+  | "opppawns"
+  | "neutralpawns"
+  | "kings"
+  | "mykings"
+  | "oppkings"
+  | "neutralkings";
 export type ThreemusketeersGenerator =
   | "findstrandedmusketeers"
   | "findmusketeerline"

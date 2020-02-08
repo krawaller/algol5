@@ -2,7 +2,8 @@
   "name": "algol-common",
   "devDependencies": {},
   "scripts": {
-    "robot": "echo 'common module robot is a noop'"
+    "robot": "echo 'common module robot is a noop'",
+    "clean": "echo 'common module clean is a noop'"
   },
   "dependencies": {
     "jsondiffpatch": "^0.3.11",

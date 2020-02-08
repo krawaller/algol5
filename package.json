@@ -3,7 +3,7 @@
     "test:unit": "jest",
     "test:ts": "tsc --noEmit --skipLibCheck",
     "test": "npm run test:ts && npm run test:unit",
-    "installAll": "npm install; cd modules/common; npm install; cd ../games; npm install; cd ../graphics; npm install; cd ../common; npm install; cd ../logic; npm install; cd ../battle; npm install; cd ../ui; npm install; cd ../next; npm install;",
+    "installAll": "npm install; cd modules/common; npm install; cd ../games; npm install; cd ../content; npm install; cd ../graphics; npm install; cd ../common; npm install; cd ../logic; npm install; cd ../battle; npm install; cd ../ui; npm install; cd ../next; npm install;",
     "robot": "cd modules/common; npm run robot; cd modules/local; npm run robot; cd modules/encoding; npm run robot; cd ../games; npm run robot; cd ../graphics; npm run robot; cd ../content; npm run robot; cd ../logic; npm run robot; cd ../battle; npm run robot; cd ../ui; npm run robot; cd ../next; npm run robot;"
   },
   "devDependencies": {

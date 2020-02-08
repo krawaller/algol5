@@ -1,0 +1,1 @@
+Aries! Push your opponent's rooks off the board and invade her corner. More yabber about the game to come!

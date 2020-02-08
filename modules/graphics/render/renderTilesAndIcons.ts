@@ -1,14 +1,14 @@
-import lib from "../../games/dist/lib";
 import { coords2pos, terrainLayers } from "../../common";
 import { allTiles, colours, svgPicSide, allMarks, allIcons } from "../sprites";
 import { tileAtPos } from "./tileAtPos";
-import { AlgolSprite } from "../../types";
+import { AlgolSprite, AlgolBoardAnon, AlgolTileMap } from "../../types";
 import { getBounds } from "./getBounds";
 
 const side = svgPicSide;
 
 type RenderTilesAndIconsOpts = {
-  gameId: string;
+  board: AlgolBoardAnon;
+  tileMap: AlgolTileMap;
   sprites?: AlgolSprite[];
   from: string;
   to: string;
@@ -16,11 +16,9 @@ type RenderTilesAndIconsOpts = {
 };
 
 export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
-  const { gameId, from, to, pad, sprites = [] } = opts;
-  const def = lib[gameId];
-  const { height, width, terrain } = def.board;
+  const { board, tileMap, from, to, pad, sprites = [] } = opts;
+  const { height, width, terrain } = board;
   const layers = terrainLayers(height, width, terrain!);
-  const tilemap = def.graphics.tiles;
 
   const spritesPerPos = sprites.reduce(
     (memo, sprite) => ({
@@ -65,7 +63,7 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
     ) {
       let drawX = col * side;
       const pos = coords2pos({ x: col, y: row });
-      let tile = tileAtPos(layers, tilemap, pos);
+      let tile = tileAtPos(layers, tileMap, pos);
       let isDark = !((col + (row % 2)) % 2);
       if (!(tile === "empty" && !isDark)) {
         const id = tile + (isDark ? "Dark" : "");

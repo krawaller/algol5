@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -135,7 +135,7 @@ export type DescentScripts = AlgolGameTestSuite<
   DescentCommand,
   DescentPosition
 >;
-export type DescentSetup = Setup<DescentPosition, DescentUnit>;
+export type DescentSetup = AlgolSetup<DescentPosition, DescentUnit>;
 
 export type DescentDefinition = FullDef<
   DescentAiArtifactLayer,

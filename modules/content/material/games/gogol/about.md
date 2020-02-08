@@ -1,0 +1,1 @@
+Gogol! Use your units that can move anywhere to hunt down the enemy king. More yabber about the game to come!

@@ -9,10 +9,10 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
 } from "../../../types";
 
 export type AriesBoardHeight = 8;
@@ -121,7 +121,7 @@ export type AriesInstructions = Instructions<
 export type AriesMeta = AlgolMeta<AriesCommand, AriesMark>;
 export type AriesPerformance = AlgolPerformance<AriesCommand, AriesMark>;
 export type AriesScripts = AlgolGameTestSuite<AriesCommand, AriesPosition>;
-export type AriesSetup = Setup<AriesPosition, AriesUnit>;
+export type AriesSetup = AlgolSetup<AriesPosition, AriesUnit>;
 
 export type AriesDefinition = FullDef<
   AriesAiArtifactLayer,

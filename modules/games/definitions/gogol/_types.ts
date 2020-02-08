@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -148,7 +148,7 @@ export type GogolInstructions = Instructions<
 export type GogolMeta = AlgolMeta<GogolCommand, GogolMark>;
 export type GogolPerformance = AlgolPerformance<GogolCommand, GogolMark>;
 export type GogolScripts = AlgolGameTestSuite<GogolCommand, GogolPosition>;
-export type GogolSetup = Setup<GogolPosition, GogolUnit>;
+export type GogolSetup = AlgolSetup<GogolPosition, GogolUnit>;
 
 export type GogolDefinition = FullDef<
   GogolAiArtifactLayer,

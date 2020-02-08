@@ -1,0 +1,1 @@
+Jostle! Be the last one to make a valid move which can only be to a more valuable position. More yabber about the game to come!

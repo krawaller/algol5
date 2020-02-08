@@ -1,0 +1,1 @@
+Amazons! Make sure your opponent is trapped first as you burn the board together. More yabber about the game to come!

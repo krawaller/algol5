@@ -25,16 +25,22 @@ import { useBattle } from "./GamePage.useBattle";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { Content } from "../Content";
 
+type GamePageHTML = {
+  about: string;
+  rules: string;
+};
+
 type GamePageProps = {
   api: AlgolStaticGameAPI;
   graphics: AlgolGameGraphics;
   meta: AlgolMeta<string, string>;
   demo: AlgolDemo;
   actions: PageActions;
+  html: GamePageHTML;
 };
 
 export const GamePage = (props: GamePageProps) => {
-  const { api, graphics, meta, demo, actions: pageActions } = props;
+  const { api, graphics, meta, demo, actions: pageActions, html } = props;
   const [
     { battle, frame, mode, session, hasPrevious },
     battleActions,
@@ -115,6 +121,7 @@ export const GamePage = (props: GamePageProps) => {
         actions={actions}
         graphics={graphics}
         hasPrevious={hasPrevious}
+        html={html}
       />
     );
   }

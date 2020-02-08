@@ -1,0 +1,1 @@
+Shove off! Shove the others off the board to form a line in your colour. More yabber about the game to come!

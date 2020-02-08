@@ -1,12 +1,18 @@
 import React, { FunctionComponent } from "react";
+import { Markdown } from "../Markdown";
 
-export const GameLandingAbout: FunctionComponent = () => {
-  return (
-    <div>
-      Lorem ipsum etc etc! Here there'll be some babble about this particular
-      game.
-    </div>
-  );
+export interface GameLandingAboutActions {
+  navTo: (path: string) => void;
+}
+
+type GameLandingAbout = {
+  actions: GameLandingAboutActions;
+  html: string;
+};
+
+export const GameLandingAbout: FunctionComponent<GameLandingAbout> = props => {
+  const { html, actions } = props;
+  return <Markdown actions={actions} html={html} />;
 };
 
 export default GameLandingAbout;

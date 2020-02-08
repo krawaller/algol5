@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -132,7 +132,7 @@ export type ChameleonScripts = AlgolGameTestSuite<
   ChameleonCommand,
   ChameleonPosition
 >;
-export type ChameleonSetup = Setup<ChameleonPosition, ChameleonUnit>;
+export type ChameleonSetup = AlgolSetup<ChameleonPosition, ChameleonUnit>;
 
 export type ChameleonDefinition = FullDef<
   ChameleonAiArtifactLayer,

@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -134,7 +134,7 @@ export type SerauqsScripts = AlgolGameTestSuite<
   SerauqsCommand,
   SerauqsPosition
 >;
-export type SerauqsSetup = Setup<SerauqsPosition, SerauqsUnit>;
+export type SerauqsSetup = AlgolSetup<SerauqsPosition, SerauqsUnit>;
 
 export type SerauqsDefinition = FullDef<
   SerauqsAiArtifactLayer,

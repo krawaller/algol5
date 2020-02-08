@@ -8,32 +8,6 @@ export * from "./screenshot";
 export * from "./_args";
 export * from "./error";
 
-export type AlgolIconMap = Record<string, AlgolIcon>;
-
-export type AlgolGameGraphics = {
-  height: number;
-  width: number;
-  icons: AlgolIconMap;
-  dataURI: string;
-};
-
-export type AlgolIcon =
-  | "bishop"
-  | "king"
-  | "pawn"
-  | "queen"
-  | "knight"
-  | "rook";
-
-export const icons: AlgolIcon[] = [
-  "knight",
-  "pawn",
-  "rook",
-  "king",
-  "queen",
-  "bishop",
-];
-
 export type SaveData = {
   gameId: string;
   turnNumber: number;

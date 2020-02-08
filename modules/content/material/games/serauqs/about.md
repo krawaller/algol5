@@ -1,0 +1,1 @@
+Serauqs! Form a winning pattern without helping your opponent to do the same. More yabber about the game to come!

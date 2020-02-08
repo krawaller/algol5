@@ -24,15 +24,21 @@ export interface GameLandingActions {
   reportError: AlgolErrorReporter;
 }
 
+type GameLandingHTML = {
+  about: string;
+  rules: string;
+};
+
 type GameLandingProps = {
   meta: AlgolMeta<string, string>;
   actions: GameLandingActions;
   graphics: AlgolGameGraphics;
   hasPrevious: boolean;
+  html: GameLandingHTML;
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, actions, graphics, hasPrevious } = props;
+  const { meta, actions, graphics, hasPrevious, html } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
   const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
   const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
@@ -92,14 +98,14 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         onClose={closeAboutModal}
         title={"About " + meta.name}
       >
-        <GameLandingAbout />
+        <GameLandingAbout html={html.about} />
       </Modal>
       <Modal
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}
         title={"How to play " + meta.name}
       >
-        <GameLandingRules meta={meta} />
+        <GameLandingRules html={html.rules} meta={meta} actions={actions} />
       </Modal>
     </Fragment>
   );

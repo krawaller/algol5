@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -128,7 +128,7 @@ export type DaggersScripts = AlgolGameTestSuite<
   DaggersCommand,
   DaggersPosition
 >;
-export type DaggersSetup = Setup<DaggersPosition, DaggersUnit>;
+export type DaggersSetup = AlgolSetup<DaggersPosition, DaggersUnit>;
 
 export type DaggersDefinition = FullDef<
   DaggersAiArtifactLayer,

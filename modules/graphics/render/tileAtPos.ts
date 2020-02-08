@@ -11,7 +11,7 @@ export function tileAtPos(
         ? { 1: "player1base", 2: "player2base" }[
             layers[name][pos].owner as 1 | 2
           ]
-        : tilemap[name]
+        : (tilemap[name] as string)
       : mem;
   }, "empty");
 }

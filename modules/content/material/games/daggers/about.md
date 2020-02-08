@@ -1,0 +1,1 @@
+Daggers! Will the superior position at the top of the hill beat overwhelming numbers?. More yabber about the game to come!

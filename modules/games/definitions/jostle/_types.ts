@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  Setup,
+  AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -123,7 +123,7 @@ export type JostleInstructions = Instructions<
 export type JostleMeta = AlgolMeta<JostleCommand, JostleMark>;
 export type JostlePerformance = AlgolPerformance<JostleCommand, JostleMark>;
 export type JostleScripts = AlgolGameTestSuite<JostleCommand, JostlePosition>;
-export type JostleSetup = Setup<JostlePosition, JostleUnit>;
+export type JostleSetup = AlgolSetup<JostlePosition, JostleUnit>;
 
 export type JostleDefinition = FullDef<
   JostleAiArtifactLayer,

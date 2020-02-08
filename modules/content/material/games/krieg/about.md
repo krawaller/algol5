@@ -1,0 +1,1 @@
+Krieg! Outmanouver your opponent to gain access to her corner. More yabber about the game to come!

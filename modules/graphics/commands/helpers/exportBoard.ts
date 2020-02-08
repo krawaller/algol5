@@ -11,7 +11,7 @@ export async function exportBoard(gameId: string) {
   const def = lib[gameId];
   const { height, width } = def.board;
 
-  const boardSVG = render({ gameId });
+  const boardSVG = render({ board: def.board, tileMap: def.graphics.tiles });
 
   await fs.ensureDir(boardOut);
   await fs.writeFile(path.join(boardOut, gameId + ".svg"), boardSVG);

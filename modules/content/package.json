@@ -3,5 +3,9 @@
     "robot": "npm run writeGame",
     "writeGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeGame.ts",
     "stubGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/stubGame.ts"
+  },
+  "dependencies": {
+    "front-matter": "^3.1.0",
+    "marked": "^0.8.0"
   }
 }

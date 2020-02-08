@@ -31,7 +31,7 @@ export type AmazonsAnim = AlgolAnimCollection<
 >;
 
 export type AmazonsTerrain = never;
-export type AmazonsUnit = "queens" | "fires";
+export type AmazonsUnit = "amazons" | "fires";
 export type AmazonsMark =
   | "selectunit"
   | "selectmovetarget"
@@ -39,7 +39,7 @@ export type AmazonsMark =
 export type AmazonsCommand = "move" | "fire";
 export type AmazonsPhaseCommand = "move";
 export type AmazonsPhase = "startTurn" | AmazonsMark | AmazonsPhaseCommand;
-export type AmazonsUnitLayer = "units" | "myunits" | "oppunits" | "queens";
+export type AmazonsUnitLayer = "units" | "myunits" | "oppunits" | "amazons";
 export type AmazonsGenerator = "findmovetargets" | "findfiretargets";
 export type AmazonsArtifactLayer = "movetargets" | "firedfrom" | "firetargets";
 export type AmazonsTerrainLayer = never;

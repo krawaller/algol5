@@ -10,7 +10,7 @@ import {
 } from "../../common";
 const emptyObj = {};
 const BOARD = boardLayers({ height: 10, width: 10 });
-const iconMapping = { queens: "queen", fires: "pawn" };
+const iconMapping = { amazons: "queen", fires: "pawn" };
 const emptyArtifactLayers = { movetargets: {}, firedfrom: {}, firetargets: {} };
 const connections = boardConnections({ height: 10, width: 10 });
 const relativeDirs = makeRelativeDirs([]);
@@ -33,14 +33,14 @@ let game = {
   action: {},
   instruction: {},
   commands: { move: {}, fire: {} },
-  iconMap: { queens: "queen", fires: "pawn" }
+  iconMap: { amazons: "queen", fires: "pawn" }
 };
 {
   const groupLayers = {
-    queens: [
-      ["units", "queens"],
-      ["units", "myunits", "queens"],
-      ["units", "oppunits", "queens"]
+    amazons: [
+      ["units", "amazons"],
+      ["units", "myunits", "amazons"],
+      ["units", "oppunits", "amazons"]
     ],
     fires: [["units"], ["units", "myunits"], ["units", "oppunits"]]
   };
@@ -50,7 +50,7 @@ let game = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      queens: oldUnitLayers.queens
+      amazons: oldUnitLayers.amazons
     };
     let LINKS = {
       marks: {},
@@ -74,7 +74,7 @@ let game = {
       line: [
         { select: "Select" },
         { unittype: ["queen", 1] },
-        { text: "to move and fire with" }
+        { text: "to move and fire with, dofus!" }
       ]
     });
   };
@@ -97,7 +97,7 @@ let game = {
         };
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, amazons: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -157,7 +157,7 @@ let game = {
         owner: 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, amazons: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -304,10 +304,10 @@ let game = {
 }
 {
   const groupLayers = {
-    queens: [
-      ["units", "queens"],
-      ["units", "oppunits", "queens"],
-      ["units", "myunits", "queens"]
+    amazons: [
+      ["units", "amazons"],
+      ["units", "oppunits", "amazons"],
+      ["units", "myunits", "amazons"]
     ],
     fires: [["units"], ["units", "oppunits"], ["units", "myunits"]]
   };
@@ -317,7 +317,7 @@ let game = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
-      queens: oldUnitLayers.queens
+      amazons: oldUnitLayers.amazons
     };
     let LINKS = {
       marks: {},
@@ -341,15 +341,18 @@ let game = {
       line: [
         { select: "Select" },
         { unittype: ["queen", 2] },
-        { text: "to move and fire with" }
+        { text: "to move and fire with, dofus!" }
       ]
     });
   };
   game.newBattle = () => {
     let UNITDATA = setup2army({
-      queens: { "1": ["d10", "g10", "a7", "j7"], "2": ["a4", "d1", "g1", "j4"] }
+      amazons: {
+        "1": ["d10", "g10", "a7", "j7"],
+        "2": ["a4", "d1", "g1", "j4"]
+      }
     });
-    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
+    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, amazons: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -383,7 +386,7 @@ let game = {
         };
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, amazons: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -443,7 +446,7 @@ let game = {
         owner: 0
       };
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, queens: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, amazons: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;

@@ -14,7 +14,7 @@ export const arrangements: AlgolArrangements<AmazonsPosition, AmazonsUnit> = {
     marks: ["a1"],
     potentialMarks: ["a2", "a3"],
     setup: {
-      queens: {
+      amazons: {
         1: ["a1", "b5", "c6"],
       },
       fires: {

@@ -40,10 +40,15 @@ export type UglyduckUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
+  | "soldiers"
   | "mysoldiers"
   | "oppsoldiers"
+  | "neutralsoldiers"
+  | "kings"
   | "mykings"
-  | "oppkings";
+  | "oppkings"
+  | "neutralkings";
 export type UglyduckGenerator = "findmovetargets";
 export type UglyduckArtifactLayer = "movetargets";
 export type UglyduckTerrainLayer =

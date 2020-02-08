@@ -74,7 +74,7 @@ let game = {
       line: [
         { select: "Select" },
         { unittype: ["queen", 1] },
-        { text: "to move and fire with, dofus!" }
+        { text: "to move and fire with" }
       ]
     });
   };
@@ -341,7 +341,7 @@ let game = {
       line: [
         { select: "Select" },
         { unittype: ["queen", 2] },
-        { text: "to move and fire with, dofus!" }
+        { text: "to move and fire with" }
       ]
     });
   };

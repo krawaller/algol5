@@ -39,7 +39,19 @@ export type AmazonsMark =
 export type AmazonsCommand = "move" | "fire";
 export type AmazonsPhaseCommand = "move";
 export type AmazonsPhase = "startTurn" | AmazonsMark | AmazonsPhaseCommand;
-export type AmazonsUnitLayer = "units" | "myunits" | "oppunits" | "amazons";
+export type AmazonsUnitLayer =
+  | "units"
+  | "myunits"
+  | "oppunits"
+  | "neutralunits"
+  | "amazons"
+  | "myamazons"
+  | "oppamazons"
+  | "neutralamazons"
+  | "fires"
+  | "myfires"
+  | "oppfires"
+  | "neutralfires";
 export type AmazonsGenerator = "findmovetargets" | "findfiretargets";
 export type AmazonsArtifactLayer = "movetargets" | "firedfrom" | "firetargets";
 export type AmazonsTerrainLayer = never;

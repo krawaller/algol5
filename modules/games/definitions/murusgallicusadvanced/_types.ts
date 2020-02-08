@@ -51,15 +51,19 @@ export type MurusgallicusadvancedUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "towers"
   | "mytowers"
   | "opptowers"
+  | "neutraltowers"
   | "walls"
   | "mywalls"
   | "oppwalls"
+  | "neutralwalls"
   | "catapults"
   | "mycatapults"
-  | "oppcatapults";
+  | "oppcatapults"
+  | "neutralcatapults";
 export type MurusgallicusadvancedGenerator =
   | "findfiretargets"
   | "findmovetargets"

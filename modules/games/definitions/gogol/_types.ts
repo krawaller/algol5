@@ -44,11 +44,15 @@ export type GogolUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "kings"
   | "mykings"
   | "oppkings"
+  | "neutralkings"
+  | "soldiers"
   | "mysoldiers"
-  | "oppsoldiers";
+  | "oppsoldiers"
+  | "neutralsoldiers";
 export type GogolGenerator =
   | "findforbiddenkingspots"
   | "findforbiddensoldierspots"

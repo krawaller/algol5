@@ -5,10 +5,10 @@
   },
   "scripts": {
     "robot": "npm run compile; npm run exportCompiledGames; npm run generateGameTests; npm run generateSuiteTests;",
+    "clean": "rm -rf dist; mkdir dist; rm -rf generated; mkdir generated; rm -rf test/generatedGameTests; mkdir test/generatedGameTests; rm -rf test/generatedSuiteTests; mkdir test/generatedSuiteTests",
     "exportSuites": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/commands/exportSuites",
     "exportCompiledGames": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/commands/exportCompiledGames",
     "compile": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/commands/compile",
-    "clean": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/commands/clean",
     "generateSuiteTests": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/test/generateSuiteTests",
     "generateGameTests": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/logic/test/generateGameTests"
   }

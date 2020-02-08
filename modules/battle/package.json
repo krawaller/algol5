@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "clean": "rm -rf dist; mkdir dist; rm -rf test/generatedTests; mkdir test/generatedTests",
     "robot": "npm run exportGameAPIs; npm run makeDemo; npm run generateGameTests;",
     "makeDemo": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/battle/commands/makeDemo",
     "generateGameTests": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/battle/test/generateGameTests",

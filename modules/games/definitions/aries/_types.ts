@@ -12,7 +12,7 @@ import {
   AlgolSetup,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance,
+  AlgolPerformance
 } from "../../../types";
 
 export type AriesBoardHeight = 8;
@@ -36,7 +36,15 @@ export type AriesMark = "selectunit" | "selectmovetarget";
 export type AriesCommand = "move";
 export type AriesPhaseCommand = never;
 export type AriesPhase = "startTurn" | AriesMark;
-export type AriesUnitLayer = "units" | "myunits" | "oppunits";
+export type AriesUnitLayer =
+  | "units"
+  | "myunits"
+  | "oppunits"
+  | "neutralunits"
+  | "soldiers"
+  | "mysoldiers"
+  | "oppsoldiers"
+  | "neutralsoldiers";
 export type AriesGenerator = "findmovetargets" | "findpushresults";
 export type AriesArtifactLayer = "movetargets" | "beingpushed" | "squished";
 export type AriesTerrainLayer =

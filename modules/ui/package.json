@@ -1,6 +1,7 @@
 {
   "scripts": {
     "robot": "npm run harvestCss; npm run encodeImages;",
+    "clean": "rm -rf dist; mkdir dist; rm -rf base64; mkdir base64; rm -rf node_modules/.cache/storybook",
     "harvestCss": "node ./commands/harvestCss",
     "encodeImages": "node ./commands/encodeImages",
     "storybook": "npm run harvestCss; start-storybook -s ./src/static -p 6006",

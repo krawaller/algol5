@@ -17,7 +17,6 @@ import {
   terrainLayerNames,
   possibilities,
   emptyArtifactLayers,
-  emptyUnitLayers,
   find,
 } from "../../../common";
 import dateStamp from "./datestamp";
@@ -49,7 +48,12 @@ export default async function analyze(def: FullDefAnon | string) {
     return poss.filter(l => l !== "endTurn").length > 0;
   });
 
-  const myUnitLayerNames = Object.keys(emptyUnitLayers(def));
+  const myUnitLayerNames = ["units"]
+    .concat(Object.keys(def.graphics.icons))
+    .reduce(
+      (mem, u) => mem.concat([u, `my${u}`, `opp${u}`, `neutral${u}`]),
+      [] as string[]
+    );
   const myTerrainLayerNames = terrainLayerNames(def.board);
   const myArtifactLayerNames = Object.keys(emptyArtifactLayers(def.generators));
   const myGeneratorNames = Object.keys(generators);

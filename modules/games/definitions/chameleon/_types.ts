@@ -40,8 +40,15 @@ export type ChameleonUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "knights"
-  | "bishops";
+  | "myknights"
+  | "oppknights"
+  | "neutralknights"
+  | "bishops"
+  | "mybishops"
+  | "oppbishops"
+  | "neutralbishops";
 export type ChameleonGenerator =
   | "findinvaders"
   | "findsteptargets"

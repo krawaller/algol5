@@ -44,12 +44,15 @@ export type DescentUnitLayer =
   | "pawns"
   | "mypawns"
   | "opppawns"
+  | "neutralpawns"
   | "knights"
   | "myknights"
   | "oppknights"
+  | "neutralknights"
   | "rooks"
   | "myrooks"
-  | "opprooks";
+  | "opprooks"
+  | "neutralrooks";
 export type DescentGenerator =
   | "findmovetargets"
   | "finddigtargets"

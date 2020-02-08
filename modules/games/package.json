@@ -2,6 +2,7 @@
   "name": "algol-games",
   "scripts": {
     "robot": "npm run export;",
+    "clean": "rm -rf dist; mkdir dist;",
     "export": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/export",
     "revise": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/revise",
     "retemplate": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/retemplate",

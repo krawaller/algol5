@@ -40,11 +40,15 @@ export type DaggersUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "daggers"
   | "mydaggers"
   | "oppdaggers"
+  | "neutraldaggers"
+  | "crowns"
   | "mycrowns"
-  | "oppcrowns";
+  | "oppcrowns"
+  | "neutralcrowns";
 export type DaggersGenerator = "findcrowntargets" | "finddaggertargets";
 export type DaggersArtifactLayer = "movetarget";
 export type DaggersTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";

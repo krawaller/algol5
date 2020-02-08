@@ -40,9 +40,15 @@ export type KickrunUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
+  | "neutralunits"
   | "runners"
   | "myrunners"
-  | "opprunners";
+  | "opprunners"
+  | "neutralrunners"
+  | "sidekickers"
+  | "mysidekickers"
+  | "oppsidekickers"
+  | "neutralsidekickers";
 export type KickrunGenerator = "findmovetargets";
 export type KickrunArtifactLayer = "movetargets";
 export type KickrunTerrainLayer =

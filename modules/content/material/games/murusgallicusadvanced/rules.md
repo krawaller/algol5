@@ -1,1 +1,1 @@
-How to play Murus Gallicus Advanced! (soon)
+Soon we will show the rules for Murus Gallicus Advanced here! In the meantime you can read them [extlink:url=https://boardgamegeek.com/thread/844020/advanced-murus-gallicus,text=here].

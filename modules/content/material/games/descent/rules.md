@@ -1,1 +1,1 @@
-How to play Descent! (soon)
+Soon we will show the rules for Descent here! In the meantime you can read them [extlink:url=https://www.boardgamegeek.com/boardgame/150586/descent,text=here].

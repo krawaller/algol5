@@ -13,7 +13,7 @@ export const stubGame = (gameId: GameId) => {
     );
     writeFileSync(
       path.join(out, `rules.md`),
-      `How to play ${meta[gameId].name}! (soon)`
+      `Soon we will show the rules for ${meta[gameId].name} here! In the meantime you can read them [extlink:url=${meta[gameId].source},text=here].`
     );
     fs.ensureDirSync(path.join(out, `pics`));
     const cap = gameId[0].toUpperCase() + gameId.slice(1);

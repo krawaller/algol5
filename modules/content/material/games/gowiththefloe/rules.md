@@ -1,1 +1,1 @@
-How to play Go with the floe! (soon)
+Soon we will show the rules for Go with the floe here! In the meantime you can read them [extlink:url=https://nestorgames.com/rulebooks/gowiththefloe_EN.pdf,text=here].

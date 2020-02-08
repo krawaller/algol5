@@ -105,7 +105,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         onClose={closeRulesModal}
         title={"How to play " + meta.name}
       >
-        <GameLandingRules html={html.rules} meta={meta} />
+        <GameLandingRules html={html.rules} meta={meta} actions={actions} />
       </Modal>
     </Fragment>
   );

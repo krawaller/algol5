@@ -7,7 +7,7 @@ import { Markdown, MarkdownActions } from ".";
 
 storiesOf("Markdown", module).add("Showing html for game rules/about", () => {
   const actions: MarkdownActions = {
-    navigateTo: (url: string) => console.log("Navigate to", url),
+    navTo: (url: string) => console.log("Navigate to", url),
   };
   const gameId = select("Game", list, list[0]) as GameId;
   const kind = select("Content", ["rules", "about"], "rules");

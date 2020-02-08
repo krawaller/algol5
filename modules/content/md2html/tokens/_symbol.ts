@@ -6,6 +6,7 @@ export type TokenHandlerOpts = {
   arrs: AlgolArrangements;
   gameId: GameId;
   yaml: Record<string, any>;
+  picPath: string;
 };
 
 export type TokenHandler = (opts: TokenHandlerOpts) => string;

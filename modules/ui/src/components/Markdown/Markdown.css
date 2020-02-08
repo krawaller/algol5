@@ -9,3 +9,27 @@
 
 .md-arr {
 }
+
+.md-img {
+  max-width: 100%;
+  position: relative;
+}
+
+.md-img > img {
+  max-width: 100%;
+}
+
+.md-img-info {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  right: 0;
+  text-align: right;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-family: verdana;
+  font-size: 10px;
+}

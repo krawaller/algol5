@@ -7,10 +7,11 @@ type InsertTokenOpts = {
   arrs: AlgolArrangements;
   gameId: GameId;
   yaml: Record<string, string>;
+  picPath: string;
 };
 
 export const insertTokens = (opts: InsertTokenOpts) => {
-  const { md, arrs, gameId, yaml } = opts;
+  const { md, arrs, gameId, yaml, picPath } = opts;
   return md.replace(
     /\[([A-Z]*):?([^\]]*)]/g,
     (_: string, token: string, instr: string) => {
@@ -30,6 +31,7 @@ export const insertTokens = (opts: InsertTokenOpts) => {
         arrs,
         gameId,
         yaml,
+        picPath,
       });
     }
   );

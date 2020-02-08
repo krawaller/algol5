@@ -7,7 +7,8 @@
     "robot": "cd modules/common; npm run robot; cd modules/local; npm run robot; cd modules/encoding; npm run robot; cd ../games; npm run robot; cd ../graphics; npm run robot; cd ../content; npm run robot; cd ../logic; npm run robot; cd ../battle; npm run robot; cd ../ui; npm run robot; cd ../next; npm run robot;",
     "clean": "cd modules/common; npm run clean; cd modules/local; npm run clean; cd modules/encoding; npm run clean; cd ../games; npm run clean; cd ../graphics; npm run clean; cd ../content; npm run clean; cd ../logic; npm run clean; cd ../battle; npm run clean; cd ../ui; npm run clean; cd ../next; npm run clean;",
     "stub": "./commands/stub.sh",
-    "process": "./commands/process.sh"
+    "process": "./commands/process.sh",
+    "ltest": "./commands/ltest.sh"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

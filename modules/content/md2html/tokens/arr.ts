@@ -19,7 +19,7 @@ export const arr: TokenHandler = opts => {
     arrangement: arrs[args.name],
     iconMap: def.graphics.icons,
   });
-  return render({
+  const svg = render({
     board: def.board,
     tileMap: def.graphics.tiles,
     sprites,
@@ -27,4 +27,5 @@ export const arr: TokenHandler = opts => {
     to: args.to,
     pad: args.pad != "false",
   });
+  return `<div class="md-arr">\n${svg}\n</div>`;
 };

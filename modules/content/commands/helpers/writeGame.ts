@@ -1,5 +1,5 @@
 import { GameId } from "../../../games/dist/list";
-import { md2html } from "./md2html";
+import { md2html } from "../../md2html";
 import path from "path";
 import fs, { readFileSync, writeFileSync } from "fs-extra";
 import { AlgolArrangements } from "../../../types";

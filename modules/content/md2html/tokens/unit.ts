@@ -18,8 +18,11 @@ export const unit: TokenHandler = opts => {
   if (!owner) {
     throw new Error(`Have to provide unit owner`);
   }
-  if (owner !== "0" && owner !== "1" && owner !== "2") {
-    throw new Error(`Illegal owner "${owner}", must be 0/1/2!`);
+  const okOwners = ["0", "1", "2", "01", "02", "12"];
+  if (!okOwners.includes(owner)) {
+    throw new Error(
+      `Illegal owner "${owner}", must be one of ${okOwners.join(",")}`
+    );
   }
   const svg = allIcons[`${icon}${owner}SVG` as keyof typeof allIcons];
   return `<span class="md-icon-svg">\n${svg}\n</span>`;

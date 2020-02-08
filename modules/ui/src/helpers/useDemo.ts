@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { AlgolDemo, AlgolHydratedDemo, AlgolDemoPatch } from "../../../types";
-import { hydrateDemoFrame } from "../../../common";
+import { hydrateDemoFrame, emptyDemo } from "../../../common";
 
 const FRAME_LENGTH_MS = 1500;
 
@@ -17,7 +17,7 @@ type HydrationInfo = {
 };
 
 export const useDemo = (opts: UseDemoOptions) => {
-  const { demo, playing, restart } = opts;
+  const { demo = emptyDemo, playing, restart } = opts;
   const [hydrInfo, setHydrInfo] = useState<HydrationInfo>({
     demo: null,
     patches: demo.patches,

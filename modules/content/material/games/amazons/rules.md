@@ -1,4 +1,4 @@
-Soon we will show the rules for Amazons here! In the meantime you can read them [extlink:url=http://www.chessvariants.org/other.dir/amazons.html,text=here].
+Soon we will show the rules for Amazons here! In the meantime you can read them [EXTLINK:url=http://www.chessvariants.org/other.dir/amazons.html,text=here].
 
 (pls excuse nonsense below here, just trying out the content engine!)
 

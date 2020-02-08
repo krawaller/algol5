@@ -1,1 +1,1 @@
-Soon we will show the rules for Aries here! In the meantime you can read them [extlink:url=http://www.di.fc.ul.pt/~jpn/gv/aries.htm,text=here].
+Soon we will show the rules for Aries here! In the meantime you can read them [EXTLINK:url=http://www.di.fc.ul.pt/~jpn/gv/aries.htm,text=here].

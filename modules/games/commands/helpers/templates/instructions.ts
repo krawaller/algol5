@@ -3,7 +3,7 @@ export default function templateInstructions(gameId: string) {
   return `import { ${capId}Instructions } from './_types';
 
 const ${gameId}Instructions: ${capId}Instructions = {
-
+  startTurn: { line: ["Go!"] }
 };
 
 export default ${gameId}Instructions;

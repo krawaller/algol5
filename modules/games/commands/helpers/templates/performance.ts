@@ -3,7 +3,8 @@ export default function templatePerformance(gameId: string) {
   return `import { ${capId}Performance } from './_types';
 
 const ${gameId}Performance: ${capId}Performance = {
-  canAlwaysEnd: {}
+  canAlwaysEnd: {},
+  massiveTree: {}
 };
 
 export default ${gameId}Performance;

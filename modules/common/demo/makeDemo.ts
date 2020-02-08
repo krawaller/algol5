@@ -11,7 +11,7 @@ const identifyMark = /^[a-z][0-9]+$/;
 
 export function makeDemo(
   API: AlgolStatefulGameAPI,
-  script: AlgolScriptLine<string, string>[]
+  script: AlgolScriptLine<string, string>[] = []
 ): AlgolDemo {
   const actions = script.reduce(
     (mem, line) => mem.concat(line.commands),

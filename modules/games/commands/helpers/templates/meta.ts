@@ -4,10 +4,11 @@ export default function templateMeta(gameId: string) {
 
 const ${gameId}Meta: ${capId}Meta = {
   id: "${gameId}",
-  performance: { canAlwaysEnd: {} },
-  name: "",
+  name: "${capId}",
   tags: [],
-  tagline: "",
+  tagline: "An awesome game!",
+  source: "http://some.url.to.rules",
+  code: "" // this must be a unique character! try 'npm run checkCodes'
 };
 
 export default ${gameId}Meta;

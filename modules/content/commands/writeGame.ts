@@ -12,7 +12,7 @@ if (!gameId) {
     writeGame(gameId);
   }
   console.log("---- All game contents written ----");
-} else if (!fs.existsSync(path.join(__dirname, "../games", gameId))) {
+} else if (!fs.existsSync(path.join(__dirname, "../material/games", gameId))) {
   console.log(`Game "${gameId}" has no content!`);
 } else {
   writeGame(gameId);

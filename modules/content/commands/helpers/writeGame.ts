@@ -7,9 +7,9 @@ import { AlgolArrangements } from "../../../types";
 export const writeGame = (gameId: GameId) => {
   const out = path.join(__dirname, `../../dist/games/${gameId}`);
   fs.ensureDirSync(out);
-  const source = path.join(__dirname, `../../games/${gameId}`);
+  const source = path.join(__dirname, `../../material/games/${gameId}`);
   const content: Record<string, string> = {};
-  const arrs: AlgolArrangements = require(`../../games/${gameId}/arrangements`)
+  const arrs: AlgolArrangements = require(`../../material/games/${gameId}/arrangements`)
     .arrangements;
   for (const file of ["about", "rules"]) {
     const md = readFileSync(path.join(source, `${file}.md`)).toString();

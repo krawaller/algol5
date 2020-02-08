@@ -4,7 +4,7 @@ import path from "path";
 import fs, { writeFileSync } from "fs-extra";
 
 export const stubGame = (gameId: GameId) => {
-  const out = path.join(__dirname, `../../games/${gameId}`);
+  const out = path.join(__dirname, `../../material/games/${gameId}`);
   if (!fs.existsSync(out)) {
     fs.ensureDirSync(out);
     writeFileSync(
@@ -21,11 +21,11 @@ export const stubGame = (gameId: GameId) => {
       path.join(out, "arrangements.ts"),
       `// File created by the stubGame command
 
-import { AlgolArrangements } from "../../../types";
+import { AlgolArrangements } from "../../../../types";
 import {
   ${cap}Position,
   ${cap}Unit,
-} from "../../../games/dist/games/${gameId}";
+} from "../../../../games/dist/games/${gameId}";
 
 // Add your arrangements in this object, and then you can refer to them
 // from the markdown files. Those references will be replaced by a

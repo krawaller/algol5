@@ -11,9 +11,11 @@ export const writeGame = (gameId: GameId) => {
   const content: Record<string, string> = {};
   const arrs: AlgolArrangements = require(`../../material/games/${gameId}/arrangements`)
     .arrangements;
+  const picPath = path.join(source, "pics");
+  fs.ensureDirSync(picPath);
   for (const file of ["about", "rules"]) {
     const md = readFileSync(path.join(source, `${file}.md`)).toString();
-    const html = md2html({ md, arrs, gameId });
+    const html = md2html({ md, arrs, gameId, picPath });
     writeFileSync(path.join(out, `${file}.html`), html);
     const exported = `export const ${file} = \`${html}\`\n`;
     writeFileSync(path.join(out, `${file}.ts`), exported);

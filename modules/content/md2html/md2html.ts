@@ -1,9 +1,9 @@
 import prettier from "prettier";
 import { AlgolArrangements } from "../../types";
 import { GameId } from "../../games/dist/list";
-import marked from "marked";
 import fm from "front-matter";
 import { insertTokens } from "./md2html.insertTokens";
+import { processMarkdown } from "./md2html.processMarkdown";
 
 type Md2htmlOpts = {
   md: string;
@@ -16,6 +16,7 @@ export const md2html = (opts: Md2htmlOpts) => {
   const { body: md, attributes: yaml } = fm(orig);
   let ret = md;
   ret = insertTokens({ md, yaml, arrs, gameId });
+  ret = processMarkdown({ md: ret });
   const html = `<div>${ret}</div>`;
   const nice = prettier
     .format(html, { filepath: "foo.html" })

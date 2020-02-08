@@ -1,1 +1,1 @@
-How to play Murus Gallicus! (soon)
+Soon we will show the rules for Murus Gallicus here! In the meantime you can read them [EXTLINK:url=https://boardgamegeek.com/filepage/46316/murus-gallicus-detailed-rules,text=here].

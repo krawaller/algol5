@@ -1,1 +1,1 @@
-How to play Chameleon! (soon)
+Soon we will show the rules for Chameleon here! In the meantime you can read them [EXTLINK:url=https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess,text=here].

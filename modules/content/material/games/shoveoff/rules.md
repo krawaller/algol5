@@ -1,1 +1,1 @@
-How to play Shove off! (soon)
+Soon we will show the rules for Shove off here! In the meantime you can read them [EXTLINK:url=https://boardgamegeek.com/boardgame/20522/shove,text=here].

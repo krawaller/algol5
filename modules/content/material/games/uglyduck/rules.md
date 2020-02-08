@@ -1,1 +1,1 @@
-How to play Ugly duck! (soon)
+Soon we will show the rules for Ugly duck here! In the meantime you can read them [EXTLINK:url=http://www.di.fc.ul.pt/~jpn/gv/uglyduck.htm,text=here].

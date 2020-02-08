@@ -1,1 +1,1 @@
-How to play Coffee! (soon)
+Soon we will show the rules for Coffee here! In the meantime you can read them [EXTLINK:url=https://www.boardgamegeek.com/filepage/64972/coffee-rules-nestorgames,text=here].

@@ -23,7 +23,10 @@ storiesOf("GameLanding", module).add("init game", () => {
   };
   return (
     <GameLanding
-      html={{ about: "", rules: "" }}
+      html={{
+        about: "text about " + gameId + " would be here",
+        rules: "rules for " + gameId + " would be here",
+      }}
       key={gameId}
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}

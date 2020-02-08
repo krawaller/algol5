@@ -1,1 +1,1 @@
-How to play Atrium! (soon)
+Soon we will show the rules for Atrium here! In the meantime you can read them [EXTLINK:url=http://www.di.fc.ul.pt/~jpn/gv/atrium.htm,text=here].

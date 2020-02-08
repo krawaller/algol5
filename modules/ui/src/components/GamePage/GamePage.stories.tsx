@@ -17,6 +17,10 @@ storiesOf("GamePage", module).add(
     const gameId = select("Game", list, list[0]) as GameId;
     const api = makeStaticGameAPI(games[gameId]);
     const graphics = dataURIs[gameId];
+    const html = {
+      about: "text about " + gameId + " would be here",
+      rules: "rules for " + gameId + " would be here",
+    };
     return (
       <GamePage
         key={gameId}
@@ -24,7 +28,7 @@ storiesOf("GamePage", module).add(
         graphics={graphics}
         meta={meta[gameId]}
         demo={demos[gameId]}
-        html={{ rules: "", about: "" }}
+        html={html}
         actions={{
           navTo: str => console.log("nav to", str),
           prefetch: str => console.log("prefetch", str),

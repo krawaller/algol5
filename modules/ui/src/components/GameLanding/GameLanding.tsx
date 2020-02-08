@@ -10,9 +10,8 @@ import { Modal } from "../Modal";
 import { Button } from "../Button";
 import { LocalSession, LocalSessionActions } from "../LocalSession";
 import { useModal } from "../../helpers";
-import GameLandingAbout from "./GameLanding.About";
-import GameLandingRules from "./GameLanding.Rules";
 import { ButtonGroup } from "../ButtonGroup";
+import { Markdown } from "../Markdown";
 
 export interface GameLandingActions {
   newLocalBattle: () => void;
@@ -98,14 +97,14 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         onClose={closeAboutModal}
         title={"About " + meta.name}
       >
-        <GameLandingAbout html={html.about} />
+        <Markdown actions={actions} html={html.about} />
       </Modal>
       <Modal
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}
         title={"How to play " + meta.name}
       >
-        <GameLandingRules html={html.rules} meta={meta} actions={actions} />
+        <Markdown actions={actions} html={html.rules} />
       </Modal>
     </Fragment>
   );

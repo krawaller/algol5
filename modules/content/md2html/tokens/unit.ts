@@ -22,5 +22,5 @@ export const unit: TokenHandler = opts => {
     throw new Error(`Illegal owner "${owner}", must be 0/1/2!`);
   }
   const svg = allIcons[`${icon}${owner}SVG` as keyof typeof allIcons];
-  return `<span class="icon-svg">\n${svg}\n</span>`;
+  return `<span class="md-icon-svg">\n${svg}\n</span>`;
 };

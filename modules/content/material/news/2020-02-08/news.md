@@ -1,6 +1,7 @@
 ---
-date: "2020-02-08"
-blurb: "What a day!! :D"
+id: "2020-02-08"
+title: "2020-02-08"
+blurb: "What a day!!"
 thumbnail: "testthumb.png"
 ---
 

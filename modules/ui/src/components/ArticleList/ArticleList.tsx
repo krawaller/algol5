@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import css from "./ArticleList.cssProxy";
+import { ArticleListItem } from "./ArticleList.Item";
 
 export interface ArticleListActions {
   foo: () => void;
@@ -18,13 +19,9 @@ type ArticleListProps = {
 export const ArticleList: FunctionComponent<ArticleListProps> = props => {
   const { actions, list } = props;
   return (
-    <div className={css.articleListContainer}>
-      {list.map(item => (
-        <div key={item.id}>
-          <h3>{item.title}</h3>
-          <img src={item.thumbdata} />
-          {item.blurb}
-        </div>
+    <div className={css.articleList}>
+      {list.reverse().map(item => (
+        <ArticleListItem key={item.id} item={item} actions={actions} />
       ))}
     </div>
   );

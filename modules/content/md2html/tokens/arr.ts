@@ -1,4 +1,4 @@
-import { TokenHandler } from "./_symbol";
+import { TokenHandler } from "./_handler";
 import { arrangement2sprites } from "../../../common/sprites/sprite.arrangement2sprites";
 import { render } from "../../../graphics/render";
 import lib from "../../../games/dist/lib";

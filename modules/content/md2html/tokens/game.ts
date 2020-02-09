@@ -1,4 +1,4 @@
-import { TokenHandler } from "./_symbol";
+import { TokenHandler } from "./_handler";
 import lib from "../../../games/dist/lib";
 import { allIcons } from "../../../graphics/dist/allIconSVGs";
 

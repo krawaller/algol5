@@ -5,7 +5,8 @@
     "writeGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeGame.ts",
     "stubGame": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/stubGame.ts",
     "stubNews": "node ./commands/stubNews",
-    "writeNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeNews.ts"
+    "writeNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/writeNews.ts",
+    "listNews": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/content/commands/listNews.ts"
   },
   "dependencies": {
     "front-matter": "^3.1.0",

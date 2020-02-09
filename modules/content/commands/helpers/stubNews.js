@@ -15,7 +15,8 @@ const stubNews = date => {
     fs.writeFileSync(
       path.join(out, `news.md`),
       `---
-date: "${date}"
+id: "${date}
+title: "${date}"
 blurb: "Add short description here!"
 thumbnail: "picToUseAsThumbnail.png"
 ---

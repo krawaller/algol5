@@ -32,7 +32,8 @@ export const writeNews = (date: string) => {
   writeFileSync(path.join(out, `news.ts`), exported);
 
   const listing = `export const listing = {
-    date: \`${date}\`,
+    id: \`${date}\`,
+    title: \`${date}\`,
     blurb: \`${yaml.blurb}\`,
     thumbdata: \`${thumbdata}\`
 };

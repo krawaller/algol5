@@ -7,7 +7,8 @@ module.exports = importGameImages = gameId => {
     `../../../content/material/games/${gameId}/pics`
   );
   if (fs.existsSync(source)) {
-    const target = path.join(__dirname, `../../public/images/${gameId}`);
+    const target = path.join(__dirname, `../../public/images/games/${gameId}`);
+    fs.ensureDir(path.join(__dirname, `../../public/images/games`));
     fs.removeSync(target);
     fs.copySync(source, target);
     console.log("images imported for", gameId);

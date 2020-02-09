@@ -8,6 +8,9 @@ import lib from "../../../games/dist/lib";
 
 export const arr: TokenHandler = opts => {
   const { args, arrs, gameId } = opts;
+  if (!gameId) {
+    throw new Error("ARR token but no gameId!");
+  }
   const def = lib[gameId];
   if (!args.name) {
     throw new Error("Have to provide arrangement name!");

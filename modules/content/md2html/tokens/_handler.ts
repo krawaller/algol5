@@ -4,7 +4,7 @@ import { GameId } from "../../../games/dist/list";
 export type TokenHandlerOpts = {
   args: Record<string, string>;
   arrs: AlgolArrangements;
-  gameId: GameId;
+  gameId?: GameId;
   yaml: Record<string, any>;
   picSourcePath: string;
   picRefPath?: string;

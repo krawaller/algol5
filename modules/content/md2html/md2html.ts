@@ -7,14 +7,14 @@ import { processMarkdown } from "./md2html.processMarkdown";
 
 type Md2htmlOpts = {
   md: string;
-  arrs: AlgolArrangements;
-  gameId: GameId;
+  arrs?: AlgolArrangements;
+  gameId?: GameId;
   picSourcePath: string;
   picRefPath: string;
 };
 
 export const md2html = (opts: Md2htmlOpts) => {
-  const { md: orig, arrs, gameId, picSourcePath, picRefPath } = opts;
+  const { md: orig, arrs = {}, gameId, picSourcePath, picRefPath } = opts;
   const { body: md, attributes: yaml } = fm(orig);
   let ret = md;
   ret = insertTokens({ md, yaml, arrs, gameId, picSourcePath, picRefPath });

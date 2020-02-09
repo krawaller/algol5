@@ -15,7 +15,7 @@ export const writeGame = (gameId: GameId) => {
   fs.ensureDirSync(picSourcePath);
   for (const file of ["about", "rules"]) {
     const md = readFileSync(path.join(source, `${file}.md`)).toString();
-    const picRefPath = `/images/${gameId}/`;
+    const picRefPath = `/images/games/${gameId}/`;
     const html = md2html({ md, arrs, gameId, picSourcePath, picRefPath });
     writeFileSync(path.join(out, `${file}.html`), html);
     const exported = `export const ${file} = \`${html}\`\n`;

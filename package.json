@@ -10,7 +10,8 @@
     "process": "./commands/process.sh",
     "ltest": "./commands/ltest.sh",
     "app": "cd modules/next; npm run dev",
-    "watch": "cd modules/games; npm run watch"
+    "watch": "cd modules/games; npm run watch",
+    "storybook": "cd modules/ui; npm run storybook"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

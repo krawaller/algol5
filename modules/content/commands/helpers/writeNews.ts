@@ -38,4 +38,5 @@ export const writeNews = (date: string) => {
 };
 `;
   writeFileSync(path.join(out, "listing.ts"), listing);
+  console.log("Wrote news", date);
 };

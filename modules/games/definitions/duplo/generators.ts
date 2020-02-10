@@ -61,7 +61,7 @@ const duploGenerators: DuploGenerators = {
     draw: {
       start: {
         tolayer: "targets",
-        condition: { different: [["stopreason"], "reachedmax"] },
+        condition: { not: { stoppedBecause: "reachedmax" } },
         include: { dir: { reldir: [["dir"], 5] } },
       },
     },

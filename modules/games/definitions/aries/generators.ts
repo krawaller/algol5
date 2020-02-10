@@ -39,7 +39,12 @@ const ariesGenerators: AriesGenerators = {
     draw: {
       steps: { tolayer: "beingpushed" },
       last: {
-        condition: { valinlist: [["stopreason"], "hitblock", "outofbounds"] },
+        condition: {
+          or: [
+            { stoppedBecause: "hitblock" },
+            { stoppedBecause: "outofbounds" },
+          ],
+        },
         tolayer: "squished",
       },
     },

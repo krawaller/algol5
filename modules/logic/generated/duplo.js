@@ -339,16 +339,23 @@ let game = {
       let BLOCKS = UNITLAYERS.oppunits;
       for (let STARTPOS in ARTIFACTS.growstarts) {
         let DIR = (ARTIFACTS.growstarts[STARTPOS] || {}).dir;
+        let STOPREASON = "";
         let MAX = (ARTIFACTS.growstarts[STARTPOS] || {}).strength;
         let POS = "faux";
         connections.faux[DIR] = STARTPOS;
         let LENGTH = 0;
         let STEP = 0;
         while (
-          LENGTH < MAX &&
-          (POS = connections[POS][DIR]) &&
-          !BLOCKS[POS] &&
-          allowedsteps[POS]
+          !(STOPREASON =
+            LENGTH === MAX
+              ? "reachedmax"
+              : !(POS = connections[POS][DIR])
+              ? "outofbounds"
+              : BLOCKS[POS]
+              ? "hitblock"
+              : !allowedsteps[POS]
+              ? "nomoresteps"
+              : null)
         ) {
           LENGTH++;
           STEP++;
@@ -383,7 +390,7 @@ let game = {
           LENGTH++;
         }
         POS = STARTPOS;
-        if (STOPREASON !== "reachedmax") {
+        if (!(STOPREASON === "reachedmax")) {
           ARTIFACTS.targets[POS] = { dir: relativeDirs[DIR][5] };
         }
       }
@@ -778,16 +785,23 @@ let game = {
       let BLOCKS = UNITLAYERS.oppunits;
       for (let STARTPOS in ARTIFACTS.growstarts) {
         let DIR = (ARTIFACTS.growstarts[STARTPOS] || {}).dir;
+        let STOPREASON = "";
         let MAX = (ARTIFACTS.growstarts[STARTPOS] || {}).strength;
         let POS = "faux";
         connections.faux[DIR] = STARTPOS;
         let LENGTH = 0;
         let STEP = 0;
         while (
-          LENGTH < MAX &&
-          (POS = connections[POS][DIR]) &&
-          !BLOCKS[POS] &&
-          allowedsteps[POS]
+          !(STOPREASON =
+            LENGTH === MAX
+              ? "reachedmax"
+              : !(POS = connections[POS][DIR])
+              ? "outofbounds"
+              : BLOCKS[POS]
+              ? "hitblock"
+              : !allowedsteps[POS]
+              ? "nomoresteps"
+              : null)
         ) {
           LENGTH++;
           STEP++;
@@ -822,7 +836,7 @@ let game = {
           LENGTH++;
         }
         POS = STARTPOS;
-        if (STOPREASON !== "reachedmax") {
+        if (!(STOPREASON === "reachedmax")) {
           ARTIFACTS.targets[POS] = { dir: relativeDirs[DIR][5] };
         }
       }

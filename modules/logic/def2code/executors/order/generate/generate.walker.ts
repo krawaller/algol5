@@ -124,7 +124,12 @@ function walkInDir(
       [walkDef.draw.steps, walkDef.draw.all, walkDef.draw.counted],
       ["totalcount"]
     ) && !contains([walkDef.draw.steps, walkDef.draw.all], ["walklength"]);
-  const needsStopReason = contains(walkDef, ["stopreason"]);
+  const needsStopReason = // TODO - simplify when we have functional contains!
+    contains(walkDef, ["stopreason"]) ||
+    contains(walkDef, "reachedmax") ||
+    contains(walkDef, "outofbounds") ||
+    contains(walkDef, "hitblock") ||
+    contains(walkDef, "nomoresteps");
   const needsWalkLength =
     walkDef.draw.last ||
     walkDef.draw.counted ||

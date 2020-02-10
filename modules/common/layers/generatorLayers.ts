@@ -10,11 +10,15 @@ export function generatorLayers(
     return possibilities(genDef.tolayer, player, action) as string[];
   } else {
     let names: string[] = [];
-    Object.keys(genDef.draw).forEach(drawName => {
+    Object.keys(genDef.draw || {}).forEach(drawName => {
       const drawDef: DrawDefAnon = genDef.draw[
         drawName as keyof typeof genDef.draw
       ]!;
-      const poss = possibilities(drawDef.tolayer, player, action) as string[];
+      const poss = possibilities(
+        drawDef.tolayer || "NEVER",
+        player,
+        action
+      ) as string[];
       names = names.concat(poss);
       if (drawDef.include && drawDef.include.owner) {
         poss.forEach(

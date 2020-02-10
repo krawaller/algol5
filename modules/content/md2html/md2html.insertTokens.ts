@@ -1,17 +1,12 @@
-import { AlgolArrangements } from "../../types";
-import { GameId } from "../../games/dist/list";
 import { tokenHandlers } from "./tokens";
+import { TokenHandlerOpts } from "./tokens/_handler";
 
 type InsertTokenOpts = {
   md: string;
-  arrs: AlgolArrangements;
-  gameId: GameId;
-  yaml: Record<string, string>;
-  picPath: string;
-};
+} & Omit<TokenHandlerOpts, "args">;
 
 export const insertTokens = (opts: InsertTokenOpts) => {
-  const { md, arrs, gameId, yaml, picPath } = opts;
+  const { md, arrs, gameId, yaml, picSourcePath, picRefPath } = opts;
   return md.replace(
     /\[([A-Z]{3,}):?([^\]]*)]/g,
     (_: string, token: string, instr: string) => {
@@ -31,7 +26,8 @@ export const insertTokens = (opts: InsertTokenOpts) => {
         arrs,
         gameId,
         yaml,
-        picPath,
+        picSourcePath,
+        picRefPath,
       });
     }
   );

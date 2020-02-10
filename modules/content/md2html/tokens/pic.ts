@@ -1,11 +1,12 @@
 import fs from "fs-extra";
 import path from "path";
-import { TokenHandler } from "./_symbol";
+import { TokenHandler } from "./_handler";
+import { encodePic } from "../../utils";
 
 // Takes a PIC token and inlines it as dataURI image. expects `name`, `cred` and `title`
 
 export const pic: TokenHandler = opts => {
-  const { args, picPath, gameId } = opts;
+  const { args, picSourcePath, gameId, picRefPath } = opts;
   const { name, inline, title, cred } = args;
   if (!name) {
     throw new Error("Have to provide picture filename");
@@ -16,14 +17,16 @@ export const pic: TokenHandler = opts => {
   if (!title) {
     throw new Error("Must provide title for image " + name);
   }
-  if (!fs.existsSync(picPath)) {
-    throw new Error("Could not find " + picPath);
+  if (!fs.existsSync(picSourcePath)) {
+    throw new Error("Could not find " + picSourcePath);
   }
   let src;
   if (inline) {
-    src = encodePic(path.join(picPath, name));
+    src = encodePic(path.join(picSourcePath, name));
   } else {
-    // TODO - paths for non-game images
+    if (!picRefPath) {
+      throw new Error("Refered pic " + name + " but no picRefPath provided!");
+    }
     src = `/images/${gameId}/${name}`;
   }
   return `<div class="md-img"><img src="${src}" alt="${title}" title="${title}" />${
@@ -31,23 +34,4 @@ export const pic: TokenHandler = opts => {
       ? `<div class="md-img-info"><span>${title}</span><span>${cred}</span></div>`
       : ""
   }</div>`;
-};
-
-const support = ["png", "svg", "jpg"];
-
-const encodePic = (filePath: string) => {
-  const ext = path.extname(filePath).substr(1);
-  if (support.includes(ext)) {
-    let data;
-    try {
-      data = fs.readFileSync(filePath);
-    } catch (e) {
-      throw new Error("Failed to read picture " + filePath);
-    }
-    const base64 = `data:image/${
-      ext === "svg" ? "svg+xml" : ext
-    };base64,${data.toString("base64")}`;
-    return base64;
-  }
-  throw new Error(`Extension ${ext} not supported`);
 };

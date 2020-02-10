@@ -1,4 +1,4 @@
-import { TokenHandler } from "./_symbol";
+import { TokenHandler } from "./_handler";
 import lib from "../../../games/dist/lib";
 import { allIcons } from "../../../graphics/dist/allIconSVGs";
 
@@ -7,6 +7,9 @@ import { allIcons } from "../../../graphics/dist/allIconSVGs";
 export const unit: TokenHandler = opts => {
   const { args, gameId } = opts;
   const { group, owner } = args;
+  if (!gameId) {
+    throw new Error("Cannot refer unit group without providing gameId!");
+  }
   const def = lib[gameId];
   if (!group) {
     throw new Error("Have to provide unit group");

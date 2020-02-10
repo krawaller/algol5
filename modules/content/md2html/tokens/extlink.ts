@@ -1,4 +1,4 @@
-import { TokenHandler } from "./_symbol";
+import { TokenHandler } from "./_handler";
 
 // Takes an EXTLINK token and turns it into clickable link. expects `url` and `text` argument
 

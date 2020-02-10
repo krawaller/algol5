@@ -1,4 +1,4 @@
-import { TokenHandler } from "./_symbol";
+import { TokenHandler } from "./_handler";
 import { arrangement2sprites } from "../../../common/sprites/sprite.arrangement2sprites";
 import { render } from "../../../graphics/render";
 import lib from "../../../games/dist/lib";
@@ -8,6 +8,9 @@ import lib from "../../../games/dist/lib";
 
 export const arr: TokenHandler = opts => {
   const { args, arrs, gameId } = opts;
+  if (!gameId) {
+    throw new Error("ARR token but no gameId!");
+  }
   const def = lib[gameId];
   if (!args.name) {
     throw new Error("Have to provide arrangement name!");

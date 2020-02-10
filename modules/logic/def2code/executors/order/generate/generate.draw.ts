@@ -9,6 +9,21 @@ export default function draw(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  drawDef: DrawDefAnon[] | DrawDefAnon | undefined,
+  posVar = "POS"
+) {
+  if (Array.isArray(drawDef)) {
+    return drawDef
+      .map(def => `{ ${drawSingle(gameDef, player, action, def, posVar)} }`)
+      .join("\n");
+  }
+  return drawSingle(gameDef, player, action, drawDef, posVar);
+}
+
+function drawSingle(
+  gameDef: FullDefAnon,
+  player: 1 | 2,
+  action: string,
   drawDef: DrawDefAnon | undefined,
   posVar = "POS"
 ) {

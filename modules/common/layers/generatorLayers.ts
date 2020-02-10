@@ -10,10 +10,10 @@ export function generatorLayers(
     return possibilities(genDef.tolayer, player, action) as string[];
   } else {
     let names: string[] = [];
-    Object.keys(genDef.draw || {}).forEach(drawName => {
-      const drawDef: DrawDefAnon = genDef.draw[
-        drawName as keyof typeof genDef.draw
-      ]!;
+    const defs: DrawDefAnon[] = Object.values(genDef.draw || {})
+      .filter(exists)
+      .flat();
+    for (const drawDef of defs) {
       const poss = possibilities(
         drawDef.tolayer || "NEVER",
         player,
@@ -25,7 +25,11 @@ export function generatorLayers(
           p => (names = names.concat([`my${p}`, `opp${p}`, `neutral${p}`]))
         );
       }
-    });
+    }
     return names;
   }
+}
+
+function exists<T>(a: T | undefined | null): a is T {
+  return a != null;
 }

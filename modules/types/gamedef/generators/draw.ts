@@ -1,6 +1,6 @@
 import { AlgolVal, AlgolBool, AlgolSet } from "../../";
 
-export type DrawDefAnon = DrawDef<
+export type DrawDefAnon = DrawDefInner<
   string,
   string,
   string,
@@ -13,6 +13,40 @@ export type DrawDefAnon = DrawDef<
 >;
 
 export type DrawDef<
+  ArtifactLayer,
+  BattlePos,
+  BattleVar,
+  Command,
+  Grid,
+  Layer,
+  Mark,
+  TurnPos,
+  TurnVar
+> =
+  | DrawDefInner<
+      ArtifactLayer,
+      BattlePos,
+      BattleVar,
+      Command,
+      Grid,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
+    >
+  | DrawDefInner<
+      ArtifactLayer,
+      BattlePos,
+      BattleVar,
+      Command,
+      Grid,
+      Layer,
+      Mark,
+      TurnPos,
+      TurnVar
+    >[];
+
+export type DrawDefInner<
   ArtifactLayer,
   BattlePos,
   BattleVar,

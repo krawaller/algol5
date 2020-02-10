@@ -18,7 +18,11 @@ export function isWalkerDef(gen: GeneratorDefAnon): gen is WalkerDefAnon {
   return (gen as WalkerDefAnon).type === "walker";
 }
 
-export type AlgolWalkerStop = "LENGTH" | "BOUNDS" | "STEPS" | "BLOCKS";
+export type AlgolWalkerStop =
+  | "reachedmax"
+  | "outofbounds"
+  | "nomoresteps"
+  | "hitblock";
 
 export type WalkerDef<
   ArtifactLayer,

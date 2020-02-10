@@ -35,7 +35,7 @@ const ariesGenerators: AriesGenerators = {
     steps: "oppunits",
     blocks: "myunits",
     startasstep: true,
-    stopPrio: ["LENGTH", "BOUNDS", "BLOCKS", "STEPS"],
+    stopPrio: ["reachedmax", "outofbounds", "hitblock", "nomoresteps"],
     draw: {
       steps: { tolayer: "beingpushed" },
       last: {

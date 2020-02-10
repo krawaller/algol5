@@ -37,7 +37,7 @@ const duploGenerators: DuploGenerators = {
     startasstep: true,
     blocks: "oppunits",
     steps: { subtract: ["board", "units"] },
-    stopPrio: ["LENGTH", "BOUNDS", "BLOCKS", "STEPS"],
+    stopPrio: ["reachedmax", "outofbounds", "hitblock", "nomoresteps"],
     max: { read: ["growstarts", ["start"], "strength"] },
     draw: {
       steps: {

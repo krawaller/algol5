@@ -22,6 +22,7 @@ import {
   AlgolBoolFalsy,
   AlgolBoolDiag,
   AlgolBoolOrtho,
+  AlgolBoolStoppedBecause,
 } from "./bool.interfaces";
 
 type s = string;
@@ -67,3 +68,13 @@ export type AlgolBoolTruthyAnon = AlgolBoolTruthy<s, s, s, s, s, s, s, s>;
 export type AlgolBoolFalsyAnon = AlgolBoolFalsy<s, s, s, s, s, s, s, s>;
 export type AlgolBoolOrthoAnon = AlgolBoolOrtho<s, s, s, s, s, s, s, s>;
 export type AlgolBoolDiagAnon = AlgolBoolDiag<s, s, s, s, s, s, s, s>;
+export type AlgolBoolStoppedBecauseAnon = AlgolBoolStoppedBecause<
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s
+>;

@@ -21,6 +21,7 @@ import {
   AlgolBoolFalsyAnon,
   AlgolBoolDiagAnon,
   AlgolBoolOrthoAnon,
+  AlgolBoolStoppedBecauseAnon,
 } from "./bool.anon";
 
 export function isAlgolBoolNot(expr: AlgolBoolAnon): expr is AlgolBoolNotAnon {
@@ -141,4 +142,10 @@ export function isAlgolBoolDiag(
   expr: AlgolBoolAnon
 ): expr is AlgolBoolDiagAnon {
   return (expr as AlgolBoolDiagAnon).diag !== undefined;
+}
+
+export function isAlgolBoolStoppedBecause(
+  expr: AlgolBoolAnon
+): expr is AlgolBoolStoppedBecauseAnon {
+  return (expr as AlgolBoolStoppedBecauseAnon).stoppedBecause !== undefined;
 }

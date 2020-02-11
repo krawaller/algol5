@@ -4,7 +4,8 @@ import {
   isAlgolPosMark,
   isAlgolPosOnlyIn,
   isAlgolPosBattlePos,
-  isAlgolPosTurnPos
+  isAlgolPosTurnPos,
+  isAlgolPosOffset,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -48,5 +49,13 @@ export default function parsePos(
   if (isAlgolPosTurnPos(expr)) {
     const { turnpos: posname } = expr;
     return `TURNVARS[${parser.val(posname)}]`;
+  }
+  if (isAlgolPosOffset(expr)) {
+    const {
+      offset: [pos, dir, forw, right],
+    } = expr;
+    return `offsetPos(${parser.pos(pos)}, ${parser.val(dir)}, ${parser.val(
+      forw
+    )}, ${parser.val(right)})`;
   }
 }

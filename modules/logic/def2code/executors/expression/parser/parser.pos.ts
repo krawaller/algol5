@@ -55,7 +55,7 @@ export default function parsePos(
       offset: [pos, dir, forw, right],
     } = expr;
     return `offsetPos(${parser.pos(pos)}, ${parser.val(dir)}, ${parser.val(
-      forw
-    )}, ${parser.val(right)})`;
+      forw || 1
+    )}, ${parser.val(right || 0)})`;
   }
 }

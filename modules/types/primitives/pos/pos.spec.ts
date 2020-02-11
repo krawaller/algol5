@@ -25,4 +25,6 @@ const tests: TestPos[] = [
   { onlyin: "mylayer" },
   { indexlist: [["dir"], "mymark", { mark: "mymark" }] },
   { offset: ["mymark", 4, 1, 0] },
+  { offset: ["mymark", 4, 1] },
+  { offset: ["mymark", 4] },
 ];

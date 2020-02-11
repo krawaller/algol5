@@ -45,6 +45,8 @@ export const testSuite: AlgolExpressionSuite<AlgolPosAnon, string> = {
           tests: [
             { expr: ["looppos"], res: "a1" },
             { expr: { offset: [["looppos"], 1, 1, 1] }, res: "b2" },
+            { expr: { offset: [["looppos"], 1, 2] }, res: "a3" },
+            { expr: { offset: [["looppos"], 1] }, res: "a2" },
             { expr: { offset: [["looppos"], 7, 1, -1] }, res: "Z0" },
           ],
         },

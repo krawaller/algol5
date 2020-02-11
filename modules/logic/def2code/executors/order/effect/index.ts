@@ -163,7 +163,7 @@ function executeEffectInner(
     } = effect;
     const newPos = `offsetPos(${parser.pos(pos)}, ${parser.val(
       dir
-    )}, ${parser.val(dist)}, 0, {height: ${gameDef.board.height}, width: ${
+    )}, ${parser.val(dist || 1)}, 0, {height: ${gameDef.board.height}, width: ${
       gameDef.board.width
     }})`;
     return `{
@@ -234,7 +234,7 @@ function executeEffectInner(
     const {
       pushin: [set, dir, dist],
     } = effect;
-    return me({ forposin: [set, { pushat: [["looppos"], dir, dist] }] });
+    return me({ forposin: [set, { pushat: [["looppos"], dir, dist || 1] }] });
   }
   if (isAlgolEffectMorphAt(effect)) {
     const {

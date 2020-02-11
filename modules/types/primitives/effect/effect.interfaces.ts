@@ -142,11 +142,47 @@ export interface AlgolEffectPushAt<
   Turnp,
   Turnv
 > {
-  pushat: [
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+  pushat: // pos, dir, distance
+  | [
+        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolVal<
+          string | number,
+          Btlp,
+          Btlv,
+          Cmnd,
+          Grid,
+          Layer,
+          Mrk,
+          Turnp,
+          Turnv
+        >,
+        AlgolVal<
+          string | number,
+          Btlp,
+          Btlv,
+          Cmnd,
+          Grid,
+          Layer,
+          Mrk,
+          Turnp,
+          Turnv
+        >
+      ]
+    // pos, dir (distance will default to 1)
+    | [
+        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolVal<
+          string | number,
+          Btlp,
+          Btlv,
+          Cmnd,
+          Grid,
+          Layer,
+          Mrk,
+          Turnp,
+          Turnv
+        >
+      ];
 }
 
 export interface AlgolEffectPushIn<
@@ -159,11 +195,47 @@ export interface AlgolEffectPushIn<
   Turnp,
   Turnv
 > {
-  pushin: [
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+  pushin: // set, dir, distance
+  | [
+        AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolVal<
+          string | number,
+          Btlp,
+          Btlv,
+          Cmnd,
+          Grid,
+          Layer,
+          Mrk,
+          Turnp,
+          Turnv
+        >,
+        AlgolVal<
+          string | number,
+          Btlp,
+          Btlv,
+          Cmnd,
+          Grid,
+          Layer,
+          Mrk,
+          Turnp,
+          Turnv
+        >
+      ]
+    // set, dir (distance defaults to 1)
+    | [
+        AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolVal<
+          string | number,
+          Btlp,
+          Btlv,
+          Cmnd,
+          Grid,
+          Layer,
+          Mrk,
+          Turnp,
+          Turnv
+        >
+      ];
 }
 
 export interface AlgolEffectKillIn<

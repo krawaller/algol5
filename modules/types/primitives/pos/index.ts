@@ -8,7 +8,8 @@ import {
   AlgolPosBattlePos,
   AlgolPosMark,
   AlgolPosOnlyIn,
-  AlgolPosTurnPos
+  AlgolPosTurnPos,
+  AlgolPosOffset,
 } from "./pos.interface";
 
 export type AlgolPos<
@@ -40,4 +41,5 @@ type AlgolPosInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolPosMark<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolPosOnlyIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolPosBattlePos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolPosTurnPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolPosTurnPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolPosOffset<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

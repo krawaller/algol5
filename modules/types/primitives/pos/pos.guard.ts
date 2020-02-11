@@ -3,7 +3,8 @@ import {
   AlgolPosBattlePosAnon,
   AlgolPosMarkAnon,
   AlgolPosOnlyInAnon,
-  AlgolPosTurnPosAnon
+  AlgolPosTurnPosAnon,
+  AlgolPosOffsetAnon,
 } from "./pos.anon";
 
 export function isAlgolPosMark(expr: AlgolPosAnon): expr is AlgolPosMarkAnon {
@@ -26,4 +27,10 @@ export function isAlgolPosTurnPos(
   expr: AlgolPosAnon
 ): expr is AlgolPosTurnPosAnon {
   return (expr as AlgolPosTurnPosAnon).turnpos !== undefined;
+}
+
+export function isAlgolPosOffset(
+  expr: AlgolPosAnon
+): expr is AlgolPosOffsetAnon {
+  return (expr as AlgolPosOffsetAnon).offset !== undefined;
 }

@@ -1,4 +1,4 @@
-import { AlgolPos, AlgolVal } from "../";
+import { AlgolPos, AlgolVal, AlgolSet } from "../";
 
 export interface AlgolAnimEnterFrom<
   Btlp extends string,
@@ -16,6 +16,22 @@ export interface AlgolAnimEnterFrom<
   ];
 }
 
+export interface AlgolAnimEnterIn<
+  Btlp extends string,
+  Btlv extends string,
+  Cmnd extends string,
+  Grid extends string,
+  Layer extends string,
+  Mrk extends string,
+  Turnp extends string,
+  Turnv extends string
+> {
+  enterin: [
+    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
 export interface AlgolAnimExitTo<
   Btlp extends string,
   Btlv extends string,
@@ -28,6 +44,22 @@ export interface AlgolAnimExitTo<
 > {
   exitto: [
     AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  ];
+}
+
+export interface AlgolAnimExitIn<
+  Btlp extends string,
+  Btlv extends string,
+  Cmnd extends string,
+  Grid extends string,
+  Layer extends string,
+  Mrk extends string,
+  Turnp extends string,
+  Turnv extends string
+> {
+  exitin: [
+    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
     AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   ];
 }

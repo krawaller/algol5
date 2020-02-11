@@ -1,8 +1,10 @@
 import {
   AlgolAnimAnon,
   AlgolAnimEnterFromAnon,
+  AlgolAnimEnterInAnon,
   AlgolAnimExitToAnon,
-  AlgolAnimGhostAnon
+  AlgolAnimExitInAnon,
+  AlgolAnimGhostAnon,
 } from "./anim.anon";
 
 export function isAlgolAnimEnterFrom(
@@ -11,10 +13,22 @@ export function isAlgolAnimEnterFrom(
   return (expr as AlgolAnimEnterFromAnon).enterfrom !== undefined;
 }
 
+export function isAlgolAnimEnterIn(
+  expr: AlgolAnimAnon
+): expr is AlgolAnimEnterInAnon {
+  return (expr as AlgolAnimEnterInAnon).enterin !== undefined;
+}
+
 export function isAlgolAnimExitTo(
   expr: AlgolAnimAnon
 ): expr is AlgolAnimExitToAnon {
   return (expr as AlgolAnimExitToAnon).exitto !== undefined;
+}
+
+export function isAlgolAnimExitIn(
+  expr: AlgolAnimAnon
+): expr is AlgolAnimExitInAnon {
+  return (expr as AlgolAnimExitInAnon).exitin !== undefined;
 }
 
 export function isAlgolAnimGhost(

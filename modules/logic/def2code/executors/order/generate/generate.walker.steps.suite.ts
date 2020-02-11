@@ -66,7 +66,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             start: "marka1",
             steps: { single: "marka2" },
             blocks: { single: "marka3" },
-            stopPrio: ["LENGTH", "BOUNDS", "BLOCKS", "STEPS"],
+            stopPrio: ["reachedmax", "outofbounds", "hitblock", "nomoresteps"],
             draw: {
               steps: { tolayer: "flarps" },
               start: {

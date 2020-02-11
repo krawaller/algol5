@@ -5,6 +5,8 @@ import {
   isAlgolAnimEnterFrom,
   isAlgolAnimExitTo,
   isAlgolAnimGhost,
+  isAlgolAnimEnterIn,
+  isAlgolAnimExitIn,
 } from "../../../../../types";
 
 import { iconRef } from "../../../utils";
@@ -33,6 +35,18 @@ function executeAnimInner(
   action: string,
   anim: AlgolAnimInnerAnon
 ): string {
+  if (isAlgolAnimEnterIn(anim)) {
+    const [set, from] = anim.enterin;
+    return executeAnim(gameDef, player, action, {
+      forposin: [set, { enterfrom: [["looppos"], from] }],
+    });
+  }
+  if (isAlgolAnimExitIn(anim)) {
+    const [set, to] = anim.exitin;
+    return executeAnim(gameDef, player, action, {
+      forposin: [set, { exitto: [["looppos"], to] }],
+    });
+  }
   const parser = makeParser(gameDef, player, action);
   if (isAlgolAnimEnterFrom(anim)) {
     const [where, from] = anim.enterfrom;

@@ -79,6 +79,7 @@ let game = {
   };
   game.action.move1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       beingpushed: step.ARTIFACTS.beingpushed,
@@ -88,6 +89,14 @@ let game = {
     let BATTLEVARS = { ...step.BATTLEVARS };
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.squished) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squished[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     BATTLEVARS.pusheeid = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).id;
     BATTLEVARS.pushsquare = MARKS.selectmovetarget;
     for (let LOOPPOS in ARTIFACTS.beingpushed) {
@@ -159,7 +168,8 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      BATTLEVARS
+      BATTLEVARS,
+      anim
     };
   };
   game.instruction.move1 = () => defaultInstruction(1);
@@ -258,21 +268,16 @@ let game = {
       {
         let allowedsteps = UNITLAYERS.oppunits;
         let BLOCKS = UNITLAYERS.myunits;
+        let DIR =
+          relativeDirs[1][
+            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
+          ];
         let walkedsquares = [];
         let STOPREASON = "";
         let POS = "faux";
-        connections.faux[
-          relativeDirs[1][
-            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
-          ]
-        ] = MARKS.selectmovetarget;
+        connections.faux[DIR] = MARKS.selectmovetarget;
         while (
-          !(STOPREASON = !(POS =
-            connections[POS][
-              relativeDirs[1][
-                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
-              ]
-            ])
+          !(STOPREASON = !(POS = connections[POS][DIR])
             ? "outofbounds"
             : BLOCKS[POS]
             ? "hitblock"
@@ -286,7 +291,7 @@ let game = {
         let WALKLENGTH = walkedsquares.length;
         if (WALKLENGTH) {
           if (STOPREASON === "hitblock" || STOPREASON === "outofbounds") {
-            ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = { dir: DIR };
           }
         }
       }
@@ -409,6 +414,7 @@ let game = {
   };
   game.action.move2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
       beingpushed: step.ARTIFACTS.beingpushed,
@@ -418,6 +424,14 @@ let game = {
     let BATTLEVARS = { ...step.BATTLEVARS };
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
+    for (let LOOPPOS in ARTIFACTS.squished) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squished[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     BATTLEVARS.pusheeid = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).id;
     BATTLEVARS.pushsquare = MARKS.selectmovetarget;
     for (let LOOPPOS in ARTIFACTS.beingpushed) {
@@ -489,7 +503,8 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      BATTLEVARS
+      BATTLEVARS,
+      anim
     };
   };
   game.instruction.move2 = () => defaultInstruction(2);
@@ -588,21 +603,16 @@ let game = {
       {
         let allowedsteps = UNITLAYERS.oppunits;
         let BLOCKS = UNITLAYERS.myunits;
+        let DIR =
+          relativeDirs[1][
+            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
+          ];
         let walkedsquares = [];
         let STOPREASON = "";
         let POS = "faux";
-        connections.faux[
-          relativeDirs[1][
-            (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
-          ]
-        ] = MARKS.selectmovetarget;
+        connections.faux[DIR] = MARKS.selectmovetarget;
         while (
-          !(STOPREASON = !(POS =
-            connections[POS][
-              relativeDirs[1][
-                (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir
-              ]
-            ])
+          !(STOPREASON = !(POS = connections[POS][DIR])
             ? "outofbounds"
             : BLOCKS[POS]
             ? "hitblock"
@@ -616,7 +626,7 @@ let game = {
         let WALKLENGTH = walkedsquares.length;
         if (WALKLENGTH) {
           if (STOPREASON === "hitblock" || STOPREASON === "outofbounds") {
-            ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+            ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = { dir: DIR };
           }
         }
       }

@@ -46,6 +46,7 @@ const ariesGenerators: AriesGenerators = {
           ],
         },
         tolayer: "squished",
+        include: { dir: ["dir"] },
       },
     },
   },

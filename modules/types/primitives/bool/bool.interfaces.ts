@@ -2,6 +2,7 @@ import { PosPos, SetPos, ValVal } from "../_signatures";
 import { AlgolBool } from "./";
 import { AlgolSet } from "../set";
 import { AlgolVal } from "../value";
+import { AlgolWalkerStop } from "../../gamedef";
 
 export interface AlgolBoolNot<
   Btlp,
@@ -360,6 +361,29 @@ export interface AlgolBoolDiag<
 > {
   diag: AlgolVal<
     string | number,
+    Btlp,
+    Btlv,
+    Cmnd,
+    Grid,
+    Layer,
+    Mrk,
+    Turnp,
+    Turnv
+  >;
+}
+
+export interface AlgolBoolStoppedBecause<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  stoppedBecause: AlgolVal<
+    AlgolWalkerStop,
     Btlp,
     Btlv,
     Cmnd,

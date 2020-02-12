@@ -26,3 +26,4 @@ npm run writeGame "$gameId"
 
 cd ../next;
 npm run makeGamePages
+npm run importGameImages

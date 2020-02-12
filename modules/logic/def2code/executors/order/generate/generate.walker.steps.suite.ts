@@ -12,7 +12,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         board: {
           ...emptyFullDef.board,
           height: 4,
-          width: 4
+          width: 4,
         },
         generators: {
           withSteps: {
@@ -20,7 +20,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             dir: 1,
             start: "marka1",
             steps: { singles: ["marka2", "marka3"] },
-            draw: { steps: { tolayer: "flarps" } }
+            draw: { steps: { tolayer: "flarps" } },
           },
           startAsStep: {
             type: "walker",
@@ -28,7 +28,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             start: "marka1",
             startasstep: true,
             steps: { singles: ["marka1", "marka2", "marka3"] },
-            draw: { steps: { tolayer: "flarps" } }
+            draw: { steps: { tolayer: "flarps" } },
           },
           startAsStepWithCount: {
             type: "walker",
@@ -36,7 +36,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             start: "marka1",
             startasstep: true,
             steps: { singles: ["marka1", "marka2", "marka3"] },
-            draw: { steps: { tolayer: "flarps", include: { n: ["step"] } } }
+            draw: { steps: { tolayer: "flarps", include: { n: ["step"] } } },
           },
           startAsStepNoSteps: {
             type: "walker",
@@ -44,7 +44,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             start: "marka1",
             startasstep: true,
             steps: { single: "marka2" },
-            draw: { steps: { tolayer: "flarps" } }
+            draw: { steps: { tolayer: "flarps" } },
           },
           stepsBeforeBlocks: {
             type: "walker",
@@ -56,9 +56,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               steps: { tolayer: "flarps" },
               start: {
                 tolayer: "flarps",
-                include: { because: ["stopreason"] }
-              }
-            }
+                include: { because: ["stopreason"] },
+              },
+            },
           },
           blocksBeforeSteps: {
             type: "walker",
@@ -66,16 +66,16 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             start: "marka1",
             steps: { single: "marka2" },
             blocks: { single: "marka3" },
-            testblocksbeforesteps: true,
+            stopPrio: ["reachedmax", "outofbounds", "hitblock", "nomoresteps"],
             draw: {
               steps: { tolayer: "flarps" },
               start: {
                 tolayer: "flarps",
-                include: { because: ["stopreason"] }
-              }
-            }
-          }
-        }
+                include: { because: ["stopreason"] },
+              },
+            },
+          },
+        },
       },
       player: 1,
       action: "someaction",
@@ -88,9 +88,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               marka3: "a3",
               marka4: "a4",
               markb1: "b1",
-              markd4: "d4"
+              markd4: "d4",
             },
-            ARTIFACTS: { flarps: {} }
+            ARTIFACTS: { flarps: {} },
           },
           tests: [
             {
@@ -99,9 +99,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "ARTIFACTS.flarps",
                   res: { a2: {}, a3: {} },
-                  desc: "It doesnt mark beyond given steps"
-                }
-              ]
+                  desc: "It doesnt mark beyond given steps",
+                },
+              ],
             },
             {
               expr: { generators: ["startAsStep"] },
@@ -109,9 +109,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "ARTIFACTS.flarps",
                   res: { a1: {}, a2: {}, a3: {} },
-                  desc: "It can be told to include start in steps"
-                }
-              ]
+                  desc: "It can be told to include start in steps",
+                },
+              ],
             },
             {
               expr: { generators: ["startAsStepWithCount"] },
@@ -119,9 +119,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "ARTIFACTS.flarps",
                   res: { a1: { n: 1 }, a2: { n: 2 }, a3: { n: 3 } },
-                  desc: "Stepcount is adjusted when including start in steps"
-                }
-              ]
+                  desc: "Stepcount is adjusted when including start in steps",
+                },
+              ],
             },
             {
               expr: { generators: ["startAsStepNoSteps"] },
@@ -130,9 +130,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   sample: "ARTIFACTS.flarps",
                   res: {},
                   desc:
-                    "If include start as step and no step at start, it draws nothing"
-                }
-              ]
+                    "If include start as step and no step at start, it draws nothing",
+                },
+              ],
             },
             {
               expr: { generators: ["stepsBeforeBlocks"] },
@@ -140,9 +140,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "ARTIFACTS.flarps",
                   res: { a2: {}, a1: { because: "nomoresteps" } },
-                  desc: "It checks steps before blocks by default"
-                }
-              ]
+                  desc: "It checks steps before blocks by default",
+                },
+              ],
             },
             {
               expr: { generators: ["blocksBeforeSteps"] },
@@ -150,13 +150,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "ARTIFACTS.flarps",
                   res: { a2: {}, a1: { because: "hitblock" } },
-                  desc: "It can be told to check blocks before steps"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "It can be told to check blocks before steps",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

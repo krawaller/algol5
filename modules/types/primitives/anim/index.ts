@@ -2,8 +2,12 @@ import { AlgolStatement } from "../../";
 
 import {
   AlgolAnimEnterFrom,
+  AlgolAnimEnterIn,
   AlgolAnimExitTo,
-  AlgolAnimGhost
+  AlgolAnimExitIn,
+  AlgolAnimGhost,
+  AlgolAnimGhostFromIn,
+  AlgolAnimGhostToIn,
 } from "./anim.interfaces";
 
 export * from "./anim.interfaces";
@@ -44,5 +48,9 @@ export type AlgolAnimInner<
   Unit extends string
 > =
   | AlgolAnimEnterFrom<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolAnimEnterIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolAnimExitTo<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolAnimGhost<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
+  | AlgolAnimExitIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolAnimGhost<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolAnimGhostFromIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolAnimGhostToIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;

@@ -14,29 +14,19 @@ const murusgallicusadvancedAnim: MurusgallicusadvancedAnim = {
   sacrifice: [{ exitto: ["selecttower", "selectcrush"] }],
   crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }],
   move: [
-    { forposin: ["madewalls", { enterfrom: [["looppos"], "selecttower"] }] },
-    {
-      forposin: [
-        "madetowers",
-        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] }
-      ]
-    },
-    {
-      forposin: [
-        "madecatapults",
-        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] }
-      ]
-    }
+    { enterin: ["madewalls", "selecttower"] },
+    { ghosttoin: ["madetowers", "selecttower", "walls", ["player"]] },
+    { ghosttoin: ["madecatapults", "selecttower", "walls", ["player"]] },
   ],
   fire: [
     {
       ifelse: [
         { noneat: ["oppunits", "selectfire"] },
         { enterfrom: ["selectfire", "selectcatapult"] },
-        { ghost: ["selectcatapult", "selectfire", "walls", ["player"]] }
-      ]
-    }
-  ]
+        { ghost: ["selectcatapult", "selectfire", "walls", ["player"]] },
+      ],
+    },
+  ],
 };
 
 export default murusgallicusadvancedAnim;

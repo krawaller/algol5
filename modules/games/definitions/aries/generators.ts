@@ -19,14 +19,14 @@ const ariesGenerators: AriesGenerators = {
           not: {
             and: [
               { samepos: [["target"], { battlepos: "pushsquare" }] },
-              { same: [{ idat: "selectunit" }, { battlevar: "pusheeid" }] }
-            ]
-          }
+              { same: [{ idat: "selectunit" }, { battlevar: "pusheeid" }] },
+            ],
+          },
         },
         tolayer: "movetargets",
-        include: { dir: ["dir"] }
-      }
-    }
+        include: { dir: ["dir"] },
+      },
+    },
   },
   findpushresults: {
     type: "walker",
@@ -35,15 +35,20 @@ const ariesGenerators: AriesGenerators = {
     steps: "oppunits",
     blocks: "myunits",
     startasstep: true,
-    testblocksbeforesteps: true,
+    stopPrio: ["reachedmax", "outofbounds", "hitblock", "nomoresteps"],
     draw: {
       steps: { tolayer: "beingpushed" },
       last: {
-        condition: { valinlist: [["stopreason"], "hitblock", "outofbounds"] },
-        tolayer: "squished"
-      }
-    }
-  }
+        condition: {
+          or: [
+            { stoppedBecause: "hitblock" },
+            { stoppedBecause: "outofbounds" },
+          ],
+        },
+        tolayer: "squished",
+      },
+    },
+  },
 };
 
 export default ariesGenerators;

@@ -12,4 +12,11 @@ type TestAnim = AlgolAnim<
   "unit"
 >;
 
-const test: TestAnim[] = [{ enterfrom: ["mymark1", "mymark2"] }];
+const test: TestAnim[] = [
+  { enterfrom: ["mymark1", "mymark2"] },
+  { enterin: ["layer", "mymark1"] },
+  { exitin: ["layer", "mymark2"] },
+  { exitto: ["mymark1", "mymark2"] },
+  { ghost: ["mymark1", "mymark2", "unit", 1] },
+  { ghostfromin: ["layer", "mymark2", "unit", 1] },
+];

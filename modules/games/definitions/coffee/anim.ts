@@ -11,18 +11,10 @@
 import { CoffeeAnim } from "./_types";
 
 const coffeeAnim: CoffeeAnim = {
-  downhill: [
-    { forposin: ["downhill", { enterfrom: [["looppos"], "selectdrop"] }] }
-  ],
-  uphill: [
-    { forposin: ["uphill", { enterfrom: [["looppos"], "selectdrop"] }] }
-  ],
-  horisontal: [
-    { forposin: ["horisontal", { enterfrom: [["looppos"], "selectdrop"] }] }
-  ],
-  vertical: [
-    { forposin: ["vertical", { enterfrom: [["looppos"], "selectdrop"] }] }
-  ]
+  downhill: [{ enterin: ["downhill", "selectdrop"] }],
+  uphill: [{ enterin: ["uphill", "selectdrop"] }],
+  horisontal: [{ enterin: ["horisontal", "selectdrop"] }],
+  vertical: [{ enterin: ["vertical", "selectdrop"] }],
 };
 
 export default coffeeAnim;

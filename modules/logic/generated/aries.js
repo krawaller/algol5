@@ -285,7 +285,7 @@ let game = {
         }
         let WALKLENGTH = walkedsquares.length;
         if (WALKLENGTH) {
-          if (["hitblock", "outofbounds"].indexOf(STOPREASON) !== -1) {
+          if (STOPREASON === "hitblock" || STOPREASON === "outofbounds") {
             ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = emptyObj;
           }
         }
@@ -615,7 +615,7 @@ let game = {
         }
         let WALKLENGTH = walkedsquares.length;
         if (WALKLENGTH) {
-          if (["hitblock", "outofbounds"].indexOf(STOPREASON) !== -1) {
+          if (STOPREASON === "hitblock" || STOPREASON === "outofbounds") {
             ARTIFACTS.squished[walkedsquares[WALKLENGTH - 1]] = emptyObj;
           }
         }

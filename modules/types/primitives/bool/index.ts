@@ -24,6 +24,7 @@ import {
   AlgolBoolSamePos,
   AlgolBoolTruthy,
   AlgolBoolValInList,
+  AlgolBoolStoppedBecause,
 } from "./bool.interfaces";
 
 import { AlgolExpression } from "../../";
@@ -72,4 +73,5 @@ type AlgolBoolInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolBoolTruthy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolBoolFalsy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolBoolOrtho<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolDiag<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolBoolDiag<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolBoolStoppedBecause<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

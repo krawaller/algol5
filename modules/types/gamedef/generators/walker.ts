@@ -18,6 +18,12 @@ export function isWalkerDef(gen: GeneratorDefAnon): gen is WalkerDefAnon {
   return (gen as WalkerDefAnon).type === "walker";
 }
 
+export type AlgolWalkerStop =
+  | "reachedmax"
+  | "outofbounds"
+  | "nomoresteps"
+  | "hitblock";
+
 export type WalkerDef<
   ArtifactLayer,
   Btlp,
@@ -45,7 +51,7 @@ export type WalkerDef<
   start?: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
   starts?: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
   steps?: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  testblocksbeforesteps?: boolean;
+  stopPrio?: AlgolWalkerStop[];
   blocks?: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
   count?: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
   startasstep?: boolean;

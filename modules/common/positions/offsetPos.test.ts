@@ -1,5 +1,5 @@
 import { offsetPos } from "..";
-import { AlgolBoardAnon } from "../../types";
+import { AlgolBoardAnon, isAlgolExpressionIfActionElse } from "../../types";
 
 const testBoard: AlgolBoardAnon = { height: 3, width: 4 };
 
@@ -15,10 +15,15 @@ const offsetTests: OffsetTest[] = [
   { pos: "c1", dir: 8, forward: 1, right: 0, expected: "b2" },
   { pos: "c1", dir: 8, forward: 2, right: 0, expected: "a3" },
   { pos: "c1", dir: 8, forward: 3, right: 0, expected: false },
-  { pos: "c1", dir: 7, forward: 1, right: 1, expected: "b2" }
+  { pos: "c1", dir: 7, forward: 1, right: 1, expected: "b2" },
 ];
 
-test("offsetPos", () =>
+test("offsetPos with board", () =>
   offsetTests.forEach(({ pos, dir, forward, right, expected }) =>
     expect(offsetPos(pos, dir, forward, right, testBoard)).toEqual(expected)
   ));
+
+test("offsetPos without board", () => {
+  const outside = offsetPos("a1", 6, 1, 0);
+  expect(outside).toEqual("Z0");
+});

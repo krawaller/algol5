@@ -141,6 +141,15 @@ export const testSuite: AlgolExpressionSuite<
             { expr: { markavailable: "anothermark" }, res: false },
           ],
         },
+        {
+          context: {
+            STOPREASON: "outofbounds",
+          },
+          tests: [
+            { expr: { stoppedBecause: "outofbounds" }, res: true },
+            { expr: { stoppedBecause: "reachedmax" }, res: false },
+          ],
+        },
       ],
     },
     {

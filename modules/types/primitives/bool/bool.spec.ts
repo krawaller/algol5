@@ -52,4 +52,5 @@ const tests: TestBool[] = [
   { indexlist: [["dir"], ["false"], ["true"]] },
   { ortho: 7 },
   { diag: ["dir"] },
+  { stoppedBecause: "nomoresteps" },
 ];

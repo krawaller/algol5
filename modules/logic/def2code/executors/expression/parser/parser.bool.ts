@@ -22,6 +22,7 @@ import {
   isAlgolBoolNot,
   isAlgolBoolOrtho,
   isAlgolBoolDiag,
+  isAlgolBoolStoppedBecause,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -44,6 +45,12 @@ export default function parseVal(
       default:
         throw new Error("Unknown bool singleton: " + expr);
     }
+  }
+  if (isAlgolBoolStoppedBecause(expr)) {
+    const { stoppedBecause: reason } = expr;
+    return parser.bool({
+      same: [["stopreason"], reason],
+    });
   }
   if (isAlgolBoolMoreThan(expr)) {
     const {

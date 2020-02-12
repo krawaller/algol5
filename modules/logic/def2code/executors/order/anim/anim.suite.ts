@@ -11,16 +11,19 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         ...emptyFullDef,
         graphics: {
           ...emptyFullDef.graphics,
-          icons: { gnurps: "pawn" }
-        }
+          icons: { gnurps: "pawn" },
+        },
       },
       player: 1,
       action: "mycmnd",
       contexts: [
         {
           context: {
-            MARKS: { mark1: "a1", mark2: "b2" },
-            anim: { enterFrom: {}, exitTo: {}, ghosts: [] }
+            MARKS: { mark1: "a1", mark2: "b2", mark3: "c3" },
+            UNITLAYERS: {
+              units: { a1: { id: "unit1" }, b2: { id: "unit2" } },
+            },
+            anim: { enterFrom: {}, exitTo: {}, ghosts: [] },
           },
           tests: [
             {
@@ -29,9 +32,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "anim.enterFrom",
                   res: { a1: "b2" },
-                  desc: "we can make enterFrom anims"
-                }
-              ]
+                  desc: "we can make enterFrom anims",
+                },
+              ],
             },
             {
               expr: { anims: [{ exitto: ["mark1", "mark2"] }] },
@@ -39,24 +42,70 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "anim.exitTo",
                   res: { a1: "b2" },
-                  desc: "we can make exitTo anims"
-                }
-              ]
+                  desc: "we can make exitTo anims",
+                },
+              ],
             },
             {
               expr: {
-                anims: [{ ghost: ["mark1", "mark2", "gnurps", ["player"]] }]
+                anims: [{ ghost: ["mark1", "mark2", "gnurps", ["player"]] }],
               },
               asserts: [
                 {
                   sample: "anim.ghosts",
-                  res: [["a1", "b2", "pawn", 1]]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  res: [["a1", "b2", "pawn", 1]],
+                },
+              ],
+            },
+            {
+              expr: {
+                anims: [
+                  { enterin: ["units", { offset: [["looppos"], 1, 1, 0] }] },
+                  { exitin: ["units", { offset: [["looppos"], 1, 1, 0] }] },
+                ],
+              },
+              asserts: [
+                {
+                  sample: "anim.enterFrom",
+                  res: { a1: "a2", b2: "b3" },
+                },
+                {
+                  sample: "anim.exitTo",
+                  res: { a1: "a2", b2: "b3" },
+                },
+              ],
+            },
+            {
+              expr: {
+                anims: [{ ghostfromin: ["units", "mark3", "gnurps", 1] }],
+              },
+              asserts: [
+                {
+                  sample: "anim.ghosts",
+                  res: [
+                    ["a1", "c3", "pawn", 1],
+                    ["b2", "c3", "pawn", 1],
+                  ],
+                },
+              ],
+            },
+            {
+              expr: {
+                anims: [{ ghosttoin: ["units", "mark3", "gnurps", 1] }],
+              },
+              asserts: [
+                {
+                  sample: "anim.ghosts",
+                  res: [
+                    ["c3", "a1", "pawn", 1],
+                    ["c3", "b2", "pawn", 1],
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

@@ -1,4 +1,8 @@
-import { FullDefAnon, WalkerDefAnon } from "../../../../../types";
+import {
+  FullDefAnon,
+  WalkerDefAnon,
+  AlgolWalkerStop,
+} from "../../../../../types";
 import { contains } from "../../../utils";
 import draw from "./generate.draw";
 import { makeParser } from "../../../executors";
@@ -7,6 +11,13 @@ import { makeParser } from "../../../executors";
 draw directly in whileloop if:
 def.draw.steps and def.draw.all doesn't contain walklength or totalcount
 */
+
+const defaultStopPrio: AlgolWalkerStop[] = [
+  "reachedmax",
+  "outofbounds",
+  "nomoresteps",
+  "hitblock",
+];
 
 export default function executeWalker(
   gameDef: FullDefAnon,
@@ -113,7 +124,12 @@ function walkInDir(
       [walkDef.draw.steps, walkDef.draw.all, walkDef.draw.counted],
       ["totalcount"]
     ) && !contains([walkDef.draw.steps, walkDef.draw.all], ["walklength"]);
-  const needsStopReason = contains(walkDef, ["stopreason"]);
+  const needsStopReason = // TODO - simplify when we have functional contains!
+    contains(walkDef, ["stopreason"]) ||
+    contains(walkDef, "reachedmax") ||
+    contains(walkDef, "outofbounds") ||
+    contains(walkDef, "hitblock") ||
+    contains(walkDef, "nomoresteps");
   const needsWalkLength =
     walkDef.draw.last ||
     walkDef.draw.counted ||
@@ -196,12 +212,11 @@ function walkInDir(
   if (walkDef.draw.block) {
     if (contains(walkDef.draw.block, ["step"]))
       ret += "let STEP = WALKLENGTH + 1; ";
+    const prio = walkDef.stopPrio || defaultStopPrio;
+    const blockBeforeStep =
+      prio.indexOf("hitblock") < prio.indexOf("nomoresteps");
     const drawBlockCond = ["BLOCKS[POS]"]
-      .concat(
-        walkDef.steps && !walkDef.testblocksbeforesteps
-          ? "allowedsteps[POS]"
-          : []
-      )
+      .concat(walkDef.steps && !blockBeforeStep ? "allowedsteps[POS]" : [])
       .join(" && ");
     ret += `if (${drawBlockCond}){`;
     ret += draw(gameDef, player, action, walkDef.draw.block);
@@ -287,21 +302,20 @@ function calcStopReason(
   blocksVar = "BLOCKS"
 ) {
   let ret = "";
-  if (genDef.max) {
-    ret += 'LENGTH === MAX ? "reachedmax" : ';
-  }
-  ret += "!(POS=connections[POS][" + dirVar + ']) ? "outofbounds" : ';
-  /*if (genDef.type==='floater'){
-    ret += 'REACHED[POS] ? "alreadyreached" : '
-  }*/
-  if (genDef.blocks && genDef.steps && genDef.testblocksbeforesteps) {
-    ret += blocksVar + '[POS] ? "hitblock" : ';
-  }
-  if (genDef.steps) {
-    ret += '!allowedsteps[POS] ? "nomoresteps" : ';
-  }
-  if (genDef.blocks && !genDef.testblocksbeforesteps) {
-    ret += blocksVar + '[POS] ? "hitblock" : ';
+  const prio = genDef.stopPrio || defaultStopPrio;
+  for (const stop of prio) {
+    if (stop === "reachedmax" && genDef.max) {
+      ret += 'LENGTH === MAX ? "reachedmax" : ';
+    }
+    if (stop === "outofbounds") {
+      ret += "!(POS=connections[POS][" + dirVar + ']) ? "outofbounds" : ';
+    }
+    if (stop === "nomoresteps" && genDef.steps) {
+      ret += '!allowedsteps[POS] ? "nomoresteps" : ';
+    }
+    if (stop === "hitblock" && genDef.blocks) {
+      ret += blocksVar + '[POS] ? "hitblock" : ';
+    }
   }
   return "(" + ret + " null)";
 }
@@ -314,22 +328,21 @@ function calcStopCondition(
   dirVar: string | number = "DIR",
   blocksVar = "BLOCKS"
 ) {
+  const prio = genDef.stopPrio || defaultStopPrio;
   let conds = [];
-  if (genDef.max) {
-    conds.push("LENGTH < MAX");
-  }
-  conds.push("(POS=connections[POS][" + dirVar + "])");
-  /*if (genDef.type==='floater'){
-    conds.push('!REACHED[POS]')
-  }*/
-  if (genDef.blocks && genDef.steps && genDef.testblocksbeforesteps) {
-    conds.push("!" + blocksVar + "[POS]");
-  }
-  if (genDef.steps) {
-    conds.push("allowedsteps[POS]");
-  }
-  if (genDef.blocks && !genDef.testblocksbeforesteps) {
-    conds.push("!" + blocksVar + "[POS]");
+  for (const stop of prio) {
+    if (stop === "reachedmax" && genDef.max) {
+      conds.push("LENGTH < MAX");
+    }
+    if (stop === "outofbounds") {
+      conds.push("(POS=connections[POS][" + dirVar + "])");
+    }
+    if (stop === "nomoresteps" && genDef.steps) {
+      conds.push("allowedsteps[POS]");
+    }
+    if (stop === "hitblock" && genDef.blocks) {
+      conds.push("!" + blocksVar + "[POS]");
+    }
   }
   return conds.join(" && ");
 }

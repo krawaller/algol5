@@ -82,3 +82,22 @@ export interface AlgolAnimGhost<
     AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   ];
 }
+
+export interface AlgolAnimGhostIn<
+  Btlp extends string,
+  Btlv extends string,
+  Cmnd extends string,
+  Grid extends string,
+  Layer extends string,
+  Mrk extends string,
+  Turnp extends string,
+  Turnv extends string,
+  Unit extends string
+> {
+  ghostin: [
+    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+    AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  ];
+}

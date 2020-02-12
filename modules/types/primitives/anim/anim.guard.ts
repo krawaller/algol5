@@ -5,6 +5,7 @@ import {
   AlgolAnimExitToAnon,
   AlgolAnimExitInAnon,
   AlgolAnimGhostAnon,
+  AlgolAnimGhostInAnon,
 } from "./anim.anon";
 
 export function isAlgolAnimEnterFrom(
@@ -35,4 +36,10 @@ export function isAlgolAnimGhost(
   expr: AlgolAnimAnon
 ): expr is AlgolAnimGhostAnon {
   return (expr as AlgolAnimGhostAnon).ghost !== undefined;
+}
+
+export function isAlgolAnimGhostIn(
+  expr: AlgolAnimAnon
+): expr is AlgolAnimGhostInAnon {
+  return (expr as AlgolAnimGhostInAnon).ghostin !== undefined;
 }

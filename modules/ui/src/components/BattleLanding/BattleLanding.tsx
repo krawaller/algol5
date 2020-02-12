@@ -41,13 +41,6 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
   const stillFirstTurn = battle.turnNumber === 1 && battle.player === 1;
   return (
     <Fragment>
-      <div className={css.battleLandingContent}>
-        {session.updated || session.type === "imported" ? (
-          <BattleLandingOngoing session={session} />
-        ) : (
-          <BattleLandingNewSession meta={meta} session={session} />
-        )}
-      </div>
       <ButtonGroup>
         <Button
           big
@@ -90,6 +83,13 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           Delete
         </Button>
       </ButtonGroup>
+      <div className={css.battleLandingContent}>
+        {session.updated || session.type === "imported" ? (
+          <BattleLandingOngoing session={session} />
+        ) : (
+          <BattleLandingNewSession meta={meta} session={session} />
+        )}
+      </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">
         <ExportBattle battle={battle} meta={meta} session={session} />
       </Modal>

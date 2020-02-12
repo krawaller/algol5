@@ -14,6 +14,7 @@ import styles from "./TitlePage.cssProxy";
 import { Button } from "../Button";
 import TitlePageNews from "./TitlePage.News";
 import TitlePageAbout from "./TitlePage.About";
+import { ButtonGroup } from "../ButtonGroup";
 
 type TitlePageProps = {
   actions: PageActions;
@@ -40,7 +41,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
       }
       body={
         <Fragment>
-          <div className={styles.titlePageButtonContainer}>
+          <ButtonGroup>
             <Button big disabled={isGameModalOpen} onClick={openGameModal}>
               Play a game!
             </Button>
@@ -50,7 +51,7 @@ export const TitlePage: FunctionComponent<TitlePageProps> = props => {
             <Button disabled={isNewsModalOpen} onClick={openNewsModal}>
               News
             </Button>
-          </div>
+          </ButtonGroup>
           <Modal
             isOpen={isGameModalOpen}
             onClose={closeGameModal}

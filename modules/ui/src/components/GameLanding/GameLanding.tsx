@@ -67,7 +67,6 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
   );
   return (
     <Fragment>
-      <div className={styles.gameLandingQuote}>{meta.tagline}</div>
       <ButtonGroup>
         <Button big onClick={openSessionModal}>
           Local
@@ -80,6 +79,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         </Button>
         <Button onClick={openRulesModal}>Rules</Button>
       </ButtonGroup>
+      <div className={styles.gameLandingQuote}>{meta.tagline}</div>
       <Modal
         isOpen={isSessionModalOpen}
         onClose={closeSessionModal}

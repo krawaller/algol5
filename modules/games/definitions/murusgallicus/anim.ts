@@ -13,12 +13,7 @@ import { MurusgallicusAnim } from "./_types";
 const murusgallicusAnim: MurusgallicusAnim = {
   move: [
     { enterin: ["madewalls", "selecttower"] },
-    {
-      forposin: [
-        "madetowers",
-        { ghost: ["selecttower", ["looppos"], "walls", ["player"]] },
-      ],
-    },
+    { ghosttoin: ["madetowers", "selecttower", "walls", ["player"]] },
   ],
   crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }],
 };

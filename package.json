@@ -11,7 +11,8 @@
     "ltest": "./commands/ltest.sh",
     "app": "cd modules/next; npm run dev",
     "watch": "cd modules/games; npm run watch",
-    "storybook": "cd modules/ui; npm run storybook"
+    "storybook": "cd modules/ui; npm run storybook",
+    "css": "cd modules/ui; npm run harvestCss; cd ../next; npm run getUiCSS"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.5",

@@ -10,6 +10,47 @@
 
 import { ShoveoffAnim } from "./_types";
 
-const shoveoffAnim: ShoveoffAnim = {};
+const shoveoffAnim: ShoveoffAnim = {
+  north: [
+    {
+      exitin: [
+        "squishnorth",
+        {
+          offset: [["looppos"], { read: ["squishnorth", ["looppos"], "dir"] }],
+        },
+      ],
+    },
+  ],
+  east: [
+    {
+      exitin: [
+        "squisheast",
+        {
+          offset: [["looppos"], { read: ["squisheast", ["looppos"], "dir"] }],
+        },
+      ],
+    },
+  ],
+  south: [
+    {
+      exitin: [
+        "squishsouth",
+        {
+          offset: [["looppos"], { read: ["squishsouth", ["looppos"], "dir"] }],
+        },
+      ],
+    },
+  ],
+  west: [
+    {
+      exitin: [
+        "squishwest",
+        {
+          offset: [["looppos"], { read: ["squishwest", ["looppos"], "dir"] }],
+        },
+      ],
+    },
+  ],
+};
 
 export default shoveoffAnim;

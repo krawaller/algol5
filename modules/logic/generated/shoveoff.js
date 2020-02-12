@@ -114,6 +114,7 @@ let game = {
   };
   game.action.north1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -133,6 +134,14 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
+    for (let LOOPPOS in ARTIFACTS.squishnorth) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squishnorth[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
     ];
@@ -198,12 +207,14 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.north1 = () => defaultInstruction(1);
   game.action.south1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -223,6 +234,14 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
+    for (let LOOPPOS in ARTIFACTS.squishsouth) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squishsouth[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
     ];
@@ -288,12 +307,14 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.south1 = () => defaultInstruction(1);
   game.action.east1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -313,6 +334,14 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
+    for (let LOOPPOS in ARTIFACTS.squisheast) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squisheast[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
     ];
@@ -378,12 +407,14 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.east1 = () => defaultInstruction(1);
   game.action.west1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -403,6 +434,14 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
+    for (let LOOPPOS in ARTIFACTS.squishwest) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squishwest[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
     ];
@@ -468,7 +507,8 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.west1 = () => defaultInstruction(1);
@@ -545,7 +585,7 @@ let game = {
             : DIR === 5
             ? "squishnorth"
             : "squisheast"
-        ][POS] = emptyObj;
+        ][POS] = { dir: relativeDirs[DIR][5] };
         if (WALKLENGTH) {
           ARTIFACTS[
             DIR === 1
@@ -696,6 +736,7 @@ let game = {
   };
   game.action.north2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -715,6 +756,14 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
+    for (let LOOPPOS in ARTIFACTS.squishnorth) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squishnorth[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
     ];
@@ -780,12 +829,14 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.north2 = () => defaultInstruction(2);
   game.action.south2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -805,6 +856,14 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
+    for (let LOOPPOS in ARTIFACTS.squishsouth) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squishsouth[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
     ];
@@ -870,12 +929,14 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.south2 = () => defaultInstruction(2);
   game.action.east2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -895,6 +956,14 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
+    for (let LOOPPOS in ARTIFACTS.squisheast) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squisheast[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
     ];
@@ -960,12 +1029,14 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.east2 = () => defaultInstruction(2);
   game.action.west2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       targetedgepoints: step.ARTIFACTS.targetedgepoints,
       squishsouth: step.ARTIFACTS.squishsouth,
@@ -985,6 +1056,14 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
+    for (let LOOPPOS in ARTIFACTS.squishwest) {
+      anim.exitTo[LOOPPOS] = offsetPos(
+        LOOPPOS,
+        (ARTIFACTS.squishwest[LOOPPOS] || {}).dir,
+        1,
+        0
+      );
+    }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
     ];
@@ -1050,7 +1129,8 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.west2 = () => defaultInstruction(2);
@@ -1127,7 +1207,7 @@ let game = {
             : DIR === 5
             ? "squishnorth"
             : "squisheast"
-        ][POS] = emptyObj;
+        ][POS] = { dir: relativeDirs[DIR][5] };
         if (WALKLENGTH) {
           ARTIFACTS[
             DIR === 1

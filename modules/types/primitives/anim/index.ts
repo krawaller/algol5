@@ -6,7 +6,8 @@ import {
   AlgolAnimExitTo,
   AlgolAnimExitIn,
   AlgolAnimGhost,
-  AlgolAnimGhostIn,
+  AlgolAnimGhostFromIn,
+  AlgolAnimGhostToIn,
 } from "./anim.interfaces";
 
 export * from "./anim.interfaces";
@@ -51,4 +52,5 @@ export type AlgolAnimInner<
   | AlgolAnimExitTo<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolAnimExitIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolAnimGhost<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolAnimGhostIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
+  | AlgolAnimGhostFromIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+  | AlgolAnimGhostToIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;

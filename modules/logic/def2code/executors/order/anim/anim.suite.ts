@@ -19,7 +19,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
       contexts: [
         {
           context: {
-            MARKS: { mark1: "a1", mark2: "b2" },
+            MARKS: { mark1: "a1", mark2: "b2", mark3: "c3" },
             UNITLAYERS: {
               units: { a1: { id: "unit1" }, b2: { id: "unit2" } },
             },
@@ -72,6 +72,34 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "anim.exitTo",
                   res: { a1: "a2", b2: "b3" },
+                },
+              ],
+            },
+            {
+              expr: {
+                anims: [{ ghostfromin: ["units", "mark3", "gnurps", 1] }],
+              },
+              asserts: [
+                {
+                  sample: "anim.ghosts",
+                  res: [
+                    ["a1", "c3", "pawn", 1],
+                    ["b2", "c3", "pawn", 1],
+                  ],
+                },
+              ],
+            },
+            {
+              expr: {
+                anims: [{ ghosttoin: ["units", "mark3", "gnurps", 1] }],
+              },
+              asserts: [
+                {
+                  sample: "anim.ghosts",
+                  res: [
+                    ["c3", "a1", "pawn", 1],
+                    ["c3", "b2", "pawn", 1],
+                  ],
                 },
               ],
             },

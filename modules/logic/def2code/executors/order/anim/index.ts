@@ -7,6 +7,8 @@ import {
   isAlgolAnimGhost,
   isAlgolAnimEnterIn,
   isAlgolAnimExitIn,
+  isAlgolAnimGhostFromIn,
+  isAlgolAnimGhostToIn,
 } from "../../../../../types";
 
 import { iconRef } from "../../../utils";
@@ -45,6 +47,18 @@ function executeAnimInner(
     const [set, to] = anim.exitin;
     return executeAnim(gameDef, player, action, {
       forposin: [set, { exitto: [["looppos"], to] }],
+    });
+  }
+  if (isAlgolAnimGhostFromIn(anim)) {
+    const [set, to, icon, owner] = anim.ghostfromin;
+    return executeAnim(gameDef, player, action, {
+      forposin: [set, { ghost: [["looppos"], to, icon, owner] }],
+    });
+  }
+  if (isAlgolAnimGhostToIn(anim)) {
+    const [set, from, icon, owner] = anim.ghosttoin;
+    return executeAnim(gameDef, player, action, {
+      forposin: [set, { ghost: [from, ["looppos"], icon, owner] }],
     });
   }
   const parser = makeParser(gameDef, player, action);

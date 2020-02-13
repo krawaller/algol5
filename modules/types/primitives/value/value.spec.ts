@@ -31,10 +31,11 @@ const tests: TestVal[] = [
   { value: { value: "BAR" } },
   { ifelse: [["true"], "FOO", { value: "BAR" }] },
   {
-    ifactionelse: ["mycmnd", "FOO", "BAR"]
+    ifactionelse: ["mycmnd", "FOO", "BAR"],
   },
   { playercase: ["FOO", "BAR"] },
   { read: ["mylayer", "mymark", "someProp"] },
+  { loopread: "poo" },
   { battlevar: "mybattlev" },
   { turnvar: "myturnv" },
   { idat: "mymark" },
@@ -50,7 +51,7 @@ const tests: TestVal[] = [
   { gridin: ["mygrid", "mylayer"] },
   ["dir"],
   ["offsetdir"],
-  ["countsofar"]
+  ["countsofar"],
 ];
 
 const tests2: TestNumberVal[] = [
@@ -65,5 +66,5 @@ const tests2: TestNumberVal[] = [
   ["otherplayer"],
   { sum: [3, 4, ["totalcount"]] },
   { prod: [3, 4, ["totalcount"]] },
-  { minus: [3, 4, ["totalcount"]] }
+  { minus: [3, 4, ["totalcount"]] },
 ];

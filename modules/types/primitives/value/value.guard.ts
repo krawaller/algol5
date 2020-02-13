@@ -13,7 +13,8 @@ import {
   AlgolValSizeOfAnon,
   AlgolValSumAnon,
   AlgolValTurnVarAnon,
-  AlgolValValueAnon
+  AlgolValValueAnon,
+  AlgolValLoopReadAnon,
 } from "./value.anon";
 
 export function isAlgolValValue(expr: AlgolValAnon): expr is AlgolValValueAnon {
@@ -84,4 +85,10 @@ export function isAlgolValProd(expr: AlgolValAnon): expr is AlgolValProdAnon {
 
 export function isAlgolValMinus(expr: AlgolValAnon): expr is AlgolValMinusAnon {
   return (expr as AlgolValMinusAnon).minus !== undefined;
+}
+
+export function isAlgolValLoopRead(
+  expr: AlgolValAnon
+): expr is AlgolValLoopReadAnon {
+  return (expr as AlgolValLoopReadAnon).loopread !== undefined;
 }

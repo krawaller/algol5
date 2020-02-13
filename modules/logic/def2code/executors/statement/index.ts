@@ -11,6 +11,7 @@ import {
   isAlgolStatementForPosIn,
   isAlgolStatementForIdIn,
 } from "../../../../types";
+import { contains } from "../../../../common";
 import { makeParser } from "../expression";
 
 export function executeStatement<_T>(
@@ -85,6 +86,10 @@ export function executeStatement<_T>(
     const {
       forposin: [set, repeatStatement],
     } = statement;
+    if (needsLoopSet(repeatStatement)) {
+      return `{ const LOOPSET = ${exprParser.set(set)};
+        for(let LOOPPOS in LOOPSET) { ${me(repeatStatement)} } }`;
+    }
     return `for(let LOOPPOS in ${exprParser.set(set)}) { ${me(
       repeatStatement
     )} }`;
@@ -104,4 +109,11 @@ export function executeStatement<_T>(
   }
 
   return finalParser(gameDef, player, action, statement, from);
+}
+
+function needsLoopSet(expr: any) {
+  const isLoopSet = (e: any) => {
+    return Array.isArray(e) && e.length === 1 && e[0] === "loopset";
+  };
+  return contains(expr, isLoopSet);
 }

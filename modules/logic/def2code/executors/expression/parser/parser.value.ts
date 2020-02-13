@@ -14,7 +14,8 @@ import {
   isAlgolValPos,
   isAlgolValGridAt,
   isAlgolValGridIn,
-  isAlgolValRelDir
+  isAlgolValRelDir,
+  isAlgolValLoopRead,
 } from "../../../../../types";
 
 import { makeParser } from "../";
@@ -92,7 +93,7 @@ export default function parseVal(
   }
   if (isAlgolValRead(expr)) {
     const {
-      read: [layer, pos, prop]
+      read: [layer, pos, prop],
     } = expr;
     const parsedPos = parser.pos(pos) + "";
     const parsedProp = parser.val(prop) + "";
@@ -108,9 +109,13 @@ export default function parseVal(
     const { idat: pos } = expr;
     return parser.val({ read: ["units", pos, "id"] });
   }
+  if (isAlgolValLoopRead(expr)) {
+    const { loopread: prop } = expr;
+    return parser.val({ read: [["loopset"], ["looppos"], prop] });
+  }
   if (isAlgolValHarvest(expr)) {
     const {
-      harvest: [set, prop]
+      harvest: [set, prop],
     } = expr;
     return `Object.entries(${parser.set(
       set
@@ -126,13 +131,13 @@ export default function parseVal(
   }
   if (isAlgolValGridAt(expr)) {
     const {
-      gridat: [gridname, pos]
+      gridat: [gridname, pos],
     } = expr;
     return `GRIDS[${parser.val(gridname)}][${parser.pos(pos)}]`;
   }
   if (isAlgolValGridIn(expr)) {
     const {
-      gridin: [gridname, set]
+      gridin: [gridname, set],
     } = expr;
     return `Object.keys(${parser.set(
       set
@@ -140,7 +145,7 @@ export default function parseVal(
   }
   if (isAlgolValRelDir(expr)) {
     const {
-      reldir: [dir, rel]
+      reldir: [dir, rel],
     } = expr;
     return `relativeDirs[${parser.val(dir)}][${parser.val(rel)}]`;
   }

@@ -1,1 +1,1 @@
-export * from "./exportBoard";
+export * from "./makeGameGraphics";

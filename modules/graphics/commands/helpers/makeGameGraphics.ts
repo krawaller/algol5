@@ -7,7 +7,7 @@ import { render } from "../../render";
 const boardOut = path.join(__dirname, "../../dist/svgBoards");
 const jsonOut = path.join(__dirname, "../../dist/svgDataURIs");
 
-export async function exportBoard(gameId: string) {
+export async function makeGameGraphics(gameId: string) {
   const def = lib[gameId];
   const { height, width } = def.board;
 

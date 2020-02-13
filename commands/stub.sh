@@ -13,7 +13,8 @@ npm run generateGameTests
 npm run exportCompiledGames
 
 cd ../graphics;
-npm run exportGameGraphics "$gameId"
+npm run makeGameGraphics "$gameId"
+npm run exportGameGraphics
 
 cd ../battle;
 npm run exportGameAPIs

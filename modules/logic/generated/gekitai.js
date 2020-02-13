@@ -36,11 +36,15 @@ let game = {
   iconMap: { markers: "pawn" }
 };
 {
-  const groupLayers = { markers: [["units"], ["units"], ["units"]] };
+  const groupLayers = {
+    markers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
+  };
   game.action.startTurn1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
-      units: oldUnitLayers.units
+      units: oldUnitLayers.units,
+      myunits: oldUnitLayers.oppunits,
+      oppunits: oldUnitLayers.myunits
     };
     let LINKS = {
       marks: {},
@@ -105,7 +109,7 @@ let game = {
         }
       }
     }
-    UNITLAYERS = { units: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -113,7 +117,10 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    {
+    if (Object.keys(UNITLAYERS.myunits).length === 8) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "allout";
+    } else {
       LINKS.endTurn = "startTurn2";
     }
     return {
@@ -198,11 +205,15 @@ let game = {
   };
 }
 {
-  const groupLayers = { markers: [["units"], ["units"], ["units"]] };
+  const groupLayers = {
+    markers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+  };
   game.action.startTurn2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
-      units: oldUnitLayers.units
+      units: oldUnitLayers.units,
+      myunits: oldUnitLayers.oppunits,
+      oppunits: oldUnitLayers.myunits
     };
     let LINKS = {
       marks: {},
@@ -233,7 +244,7 @@ let game = {
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA: {},
-      UNITLAYERS: { units: {} }
+      UNITLAYERS: { units: {}, myunits: {}, oppunits: {} }
     });
   };
   game.action.drop2 = step => {
@@ -275,7 +286,7 @@ let game = {
         }
       }
     }
-    UNITLAYERS = { units: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -283,7 +294,10 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    {
+    if (Object.keys(UNITLAYERS.myunits).length === 8) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "allout";
+    } else {
       LINKS.endTurn = "startTurn1";
     }
     return {

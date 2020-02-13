@@ -10,6 +10,7 @@ import {
   isAlgolStatementMulti,
   isAlgolStatementForPosIn,
   isAlgolStatementForIdIn,
+  isAlgolValLoopRead,
 } from "../../../../types";
 import { contains } from "../../../../common";
 import { makeParser } from "../expression";
@@ -112,8 +113,9 @@ export function executeStatement<_T>(
 }
 
 function needsLoopSet(expr: any) {
-  const isLoopSet = (e: any) => {
-    return Array.isArray(e) && e.length === 1 && e[0] === "loopset";
-  };
-  return contains(expr, isLoopSet);
+  return contains(expr, checker);
 }
+const isLoopSet = (e: any) => {
+  return Array.isArray(e) && e.length === 1 && e[0] === "loopset";
+};
+const checker = (e: any) => isLoopSet(e) || isAlgolValLoopRead(e);

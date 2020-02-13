@@ -92,20 +92,20 @@ let game = {
     for (let LOOPPOS in ARTIFACTS.death) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    for (let LOOPPOS in ARTIFACTS.push) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(
-              LOOPPOS,
-              (ARTIFACTS.push[LOOPPOS] || {}).pushdir,
-              1,
-              0,
-              { height: 6, width: 6 }
-            )
-          };
+    {
+      const LOOPSET = ARTIFACTS.push;
+      for (let LOOPPOS in LOOPSET) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, (LOOPSET[LOOPPOS] || {}).pushdir, 1, 0, {
+                height: 6,
+                width: 6
+              })
+            };
+          }
         }
       }
     }
@@ -269,20 +269,20 @@ let game = {
     for (let LOOPPOS in ARTIFACTS.death) {
       delete UNITDATA[(UNITLAYERS.units[LOOPPOS] || {}).id];
     }
-    for (let LOOPPOS in ARTIFACTS.push) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(
-              LOOPPOS,
-              (ARTIFACTS.push[LOOPPOS] || {}).pushdir,
-              1,
-              0,
-              { height: 6, width: 6 }
-            )
-          };
+    {
+      const LOOPSET = ARTIFACTS.push;
+      for (let LOOPPOS in LOOPSET) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, (LOOPSET[LOOPPOS] || {}).pushdir, 1, 0, {
+                height: 6,
+                width: 6
+              })
+            };
+          }
         }
       }
     }

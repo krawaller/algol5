@@ -15,7 +15,7 @@ const gekitaiFlow: GekitaiFlow = {
       applyEffects: [
         { spawnat: ["selectdroptarget", "markers"] },
         { killin: "death" },
-        { pushin: ["push", { read: ["push", ["looppos"], "pushdir"] }] },
+        { pushin: ["push", { loopread: "pushdir" }] },
       ],
     },
   },

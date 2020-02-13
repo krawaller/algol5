@@ -13,13 +13,34 @@ const containsTests: ContainsTest[] = [
   {
     haystack: [1, { a: ["x", { foo: "BAR" }] }],
     needle: { foo: "BAR" },
-    found: true
+    found: true,
   },
   {
     haystack: [1, { a: ["x", { foo: "BUZ" }] }],
     needle: { foo: "BAR" },
-    found: false
-  }
+    found: false,
+  },
+  {
+    haystack: [1, 2, 3],
+    needle: (v: any) => v === 4,
+    found: false,
+  },
+  {
+    haystack: [1, 2, 3, 4],
+    needle: (v: any) => v === 4,
+    found: true,
+  },
+  {
+    haystack: [1, 2, 3, { poop: 4 }],
+    needle: (v: any) => v === 4,
+    found: true,
+  },
+  {
+    haystack: [1, 2, 3, { poop: 4 }],
+    needle: (v: any) =>
+      typeof v === "object" && v.hasOwnProperty("poop") && v.poop === 4,
+    found: true,
+  },
 ];
 
 test("contains", () =>

@@ -169,28 +169,6 @@ let game = {
     if (
       Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppbases)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length === 2
-    ) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "occupation";
-      LINKS.endMarks = Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppbases)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      );
-    } else if (
-      Object.keys(
-        Object.entries(
           Object.keys(TERRAIN.oppcorners)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
@@ -204,6 +182,28 @@ let game = {
       LINKS.endMarks = Object.keys(
         Object.entries(
           Object.keys(TERRAIN.oppcorners)
+            .concat(Object.keys(UNITLAYERS.myunits))
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      );
+    } else if (
+      Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.oppbases)
+            .concat(Object.keys(UNITLAYERS.myunits))
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      ).length === 2
+    ) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "occupation";
+      LINKS.endMarks = Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.oppbases)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )
@@ -483,28 +483,6 @@ let game = {
     if (
       Object.keys(
         Object.entries(
-          Object.keys(TERRAIN.oppbases)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length === 2
-    ) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "occupation";
-      LINKS.endMarks = Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppbases)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      );
-    } else if (
-      Object.keys(
-        Object.entries(
           Object.keys(TERRAIN.oppcorners)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
@@ -518,6 +496,28 @@ let game = {
       LINKS.endMarks = Object.keys(
         Object.entries(
           Object.keys(TERRAIN.oppcorners)
+            .concat(Object.keys(UNITLAYERS.myunits))
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      );
+    } else if (
+      Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.oppbases)
+            .concat(Object.keys(UNITLAYERS.myunits))
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      ).length === 2
+    ) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "occupation";
+      LINKS.endMarks = Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.oppbases)
             .concat(Object.keys(UNITLAYERS.myunits))
             .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
         )

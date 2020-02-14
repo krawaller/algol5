@@ -125,11 +125,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "regicide";
-      LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mycrowns)
@@ -151,6 +147,10 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "regicide";
+      LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -451,11 +451,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "regicide";
-      LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mycrowns)
@@ -477,6 +473,10 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (Object.keys(UNITLAYERS.oppcrowns).length === 1) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "regicide";
+      LINKS.endMarks = Object.keys({ [MARKS.selectmovetarget]: 1 });
     } else {
       LINKS.endTurn = "startTurn1";
     }

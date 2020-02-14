@@ -188,10 +188,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -213,6 +210,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -259,10 +259,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -284,6 +281,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -342,10 +342,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -367,6 +364,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -850,10 +850,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -875,6 +872,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -921,10 +921,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -946,6 +943,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -1004,10 +1004,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -1029,6 +1026,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }

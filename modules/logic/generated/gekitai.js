@@ -155,17 +155,17 @@ let game = {
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "winline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+    if (Object.keys(ARTIFACTS.loseline).length !== 0) {
       LINKS.endGame = "lose";
       LINKS.endedBy = "suicide";
       LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
     } else if (Object.keys(UNITLAYERS.myunits).length === 8) {
       LINKS.endGame = "win";
       LINKS.endedBy = "allout";
+    } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "winline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -379,17 +379,17 @@ let game = {
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "winline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+    if (Object.keys(ARTIFACTS.loseline).length !== 0) {
       LINKS.endGame = "lose";
       LINKS.endedBy = "suicide";
       LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
     } else if (Object.keys(UNITLAYERS.myunits).length === 8) {
       LINKS.endGame = "win";
       LINKS.endedBy = "allout";
+    } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "winline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else {
       LINKS.endTurn = "startTurn1";
     }

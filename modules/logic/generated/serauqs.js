@@ -201,22 +201,10 @@ let game = {
         }
       }
     }
-    if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.middle)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
+    if (Object.keys(ARTIFACTS.winline).length !== 0) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "tookcenter";
-      LINKS.endMarks = Object.keys(TERRAIN.middle);
+      LINKS.endedBy = "madeline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else if (
       Object.keys(
         Object.entries(
@@ -233,10 +221,22 @@ let game = {
       LINKS.endGame = "win";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
-    } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+    } else if (
+      Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.middle)
+            .concat(
+              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
+            )
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      ).length > 3
+    ) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      LINKS.endedBy = "tookcenter";
+      LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -549,22 +549,10 @@ let game = {
         }
       }
     }
-    if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.middle)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
+    if (Object.keys(ARTIFACTS.winline).length !== 0) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "tookcenter";
-      LINKS.endMarks = Object.keys(TERRAIN.middle);
+      LINKS.endedBy = "madeline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else if (
       Object.keys(
         Object.entries(
@@ -581,10 +569,22 @@ let game = {
       LINKS.endGame = "win";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
-    } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+    } else if (
+      Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.middle)
+            .concat(
+              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
+            )
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      ).length > 3
+    ) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      LINKS.endedBy = "tookcenter";
+      LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else {
       LINKS.endTurn = "startTurn1";
     }

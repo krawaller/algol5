@@ -18,6 +18,7 @@ const gekitaiGenerators: GekitaiGenerators = {
         {
           condition: { stoppedBecause: "outofbounds" },
           tolayer: "death",
+          include: { pushdir: ["dir"] },
         },
         {
           condition: { stoppedBecause: "nomoresteps" },

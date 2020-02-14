@@ -12,44 +12,16 @@ import { ShoveoffAnim } from "./_types";
 
 const shoveoffAnim: ShoveoffAnim = {
   north: [
-    {
-      exitin: [
-        "squishnorth",
-        {
-          offset: [["looppos"], { read: ["squishnorth", ["looppos"], "dir"] }],
-        },
-      ],
-    },
+    { exitin: ["squishnorth", { offset: [["looppos"], { loopread: "dir" }] }] },
   ],
   east: [
-    {
-      exitin: [
-        "squisheast",
-        {
-          offset: [["looppos"], { read: ["squisheast", ["looppos"], "dir"] }],
-        },
-      ],
-    },
+    { exitin: ["squisheast", { offset: [["looppos"], { loopread: "dir" }] }] },
   ],
   south: [
-    {
-      exitin: [
-        "squishsouth",
-        {
-          offset: [["looppos"], { read: ["squishsouth", ["looppos"], "dir"] }],
-        },
-      ],
-    },
+    { exitin: ["squishsouth", { offset: [["looppos"], { loopread: "dir" }] }] },
   ],
   west: [
-    {
-      exitin: [
-        "squishwest",
-        {
-          offset: [["looppos"], { read: ["squishwest", ["looppos"], "dir"] }],
-        },
-      ],
-    },
+    { exitin: ["squishwest", { offset: [["looppos"], { loopread: "dir" }] }] },
   ],
 };
 

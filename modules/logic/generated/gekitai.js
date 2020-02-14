@@ -72,6 +72,7 @@ let game = {
   };
   game.action.drop1 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       death: step.ARTIFACTS.death,
       push: step.ARTIFACTS.push
@@ -80,6 +81,17 @@ let game = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    {
+      const LOOPSET = ARTIFACTS.death;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).pushdir,
+          1,
+          0
+        );
+      }
+    }
     {
       let newunitid = "spawn" + NEXTSPAWNID++;
       UNITDATA[newunitid] = {
@@ -130,7 +142,8 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.drop1 = () => defaultInstruction(1);
@@ -168,7 +181,7 @@ let game = {
         if (WALKLENGTH) {
           {
             if (STOPREASON === "outofbounds") {
-              ARTIFACTS.death[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+              ARTIFACTS.death[walkedsquares[WALKLENGTH - 1]] = { pushdir: DIR };
             }
           }
           {
@@ -249,6 +262,7 @@ let game = {
   };
   game.action.drop2 = step => {
     let LINKS = { marks: {}, commands: {} };
+    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       death: step.ARTIFACTS.death,
       push: step.ARTIFACTS.push
@@ -257,6 +271,17 @@ let game = {
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
     let MARKS = step.MARKS;
+    {
+      const LOOPSET = ARTIFACTS.death;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).pushdir,
+          1,
+          0
+        );
+      }
+    }
     {
       let newunitid = "spawn" + NEXTSPAWNID++;
       UNITDATA[newunitid] = {
@@ -307,7 +332,8 @@ let game = {
       TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
-      NEXTSPAWNID
+      NEXTSPAWNID,
+      anim
     };
   };
   game.instruction.drop2 = () => defaultInstruction(2);
@@ -345,7 +371,7 @@ let game = {
         if (WALKLENGTH) {
           {
             if (STOPREASON === "outofbounds") {
-              ARTIFACTS.death[walkedsquares[WALKLENGTH - 1]] = emptyObj;
+              ARTIFACTS.death[walkedsquares[WALKLENGTH - 1]] = { pushdir: DIR };
             }
           }
           {

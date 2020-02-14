@@ -89,13 +89,16 @@ let game = {
     let BATTLEVARS = { ...step.BATTLEVARS };
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    for (let LOOPPOS in ARTIFACTS.squished) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squished[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squished;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     BATTLEVARS.pusheeid = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).id;
     BATTLEVARS.pushsquare = MARKS.selectmovetarget;
@@ -424,13 +427,16 @@ let game = {
     let BATTLEVARS = { ...step.BATTLEVARS };
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    for (let LOOPPOS in ARTIFACTS.squished) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squished[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squished;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     BATTLEVARS.pusheeid = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).id;
     BATTLEVARS.pushsquare = MARKS.selectmovetarget;

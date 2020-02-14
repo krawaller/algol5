@@ -134,13 +134,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishnorth) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishnorth[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishnorth;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
@@ -234,13 +237,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishsouth) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishsouth[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishsouth;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
@@ -334,13 +340,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squisheast) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squisheast[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squisheast;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
@@ -434,13 +443,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishwest) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishwest[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishwest;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
@@ -756,13 +768,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishnorth) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishnorth[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishnorth;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
@@ -856,13 +871,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishsouth) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishsouth[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishsouth;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
@@ -956,13 +974,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squisheast) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squisheast[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squisheast;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
@@ -1056,13 +1077,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishwest) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishwest[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishwest;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id

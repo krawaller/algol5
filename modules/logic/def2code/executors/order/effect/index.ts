@@ -163,9 +163,7 @@ function executeEffectInner(
     } = effect;
     const newPos = `offsetPos(${parser.pos(pos)}, ${parser.val(
       dir
-    )}, ${parser.val(dist || 1)}, 0, {height: ${gameDef.board.height}, width: ${
-      gameDef.board.width
-    }})`;
+    )}, ${parser.val(dist || 1)}, 0, dimensions)`;
     return `{
       let unitid = (UNITLAYERS.units[${parser.pos(pos)}] || {}).id;
       if (unitid){

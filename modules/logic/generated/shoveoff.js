@@ -9,7 +9,8 @@ import {
   defaultInstruction
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 4, width: 4 });
+const dimensions = { height: 4, width: 4 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { soldiers: "pawn" };
 const emptyArtifactLayers = {
   targetedgepoints: {},
@@ -154,7 +155,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
           };
         }
       }
@@ -257,7 +258,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
           };
         }
       }
@@ -360,7 +361,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
           };
         }
       }
@@ -463,7 +464,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
           };
         }
       }
@@ -788,7 +789,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
           };
         }
       }
@@ -891,7 +892,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
           };
         }
       }
@@ -994,7 +995,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
           };
         }
       }
@@ -1097,7 +1098,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
           };
         }
       }

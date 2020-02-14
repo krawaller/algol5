@@ -9,7 +9,8 @@ import {
   defaultInstruction
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 6, width: 6 });
+const dimensions = { height: 6, width: 6 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { markers: "pawn" };
 const emptyArtifactLayers = { winline: {}, loseline: {}, death: {}, push: {} };
 const connections = boardConnections({ height: 6, width: 6 });
@@ -114,10 +115,13 @@ let game = {
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, (LOOPSET[LOOPPOS] || {}).pushdir, 1, 0, {
-                height: 6,
-                width: 6
-              })
+              pos: offsetPos(
+                LOOPPOS,
+                (LOOPSET[LOOPPOS] || {}).pushdir,
+                1,
+                0,
+                dimensions
+              )
             };
           }
         }
@@ -338,10 +342,13 @@ let game = {
           if (unitid) {
             UNITDATA[unitid] = {
               ...UNITDATA[unitid],
-              pos: offsetPos(LOOPPOS, (LOOPSET[LOOPPOS] || {}).pushdir, 1, 0, {
-                height: 6,
-                width: 6
-              })
+              pos: offsetPos(
+                LOOPPOS,
+                (LOOPSET[LOOPPOS] || {}).pushdir,
+                1,
+                0,
+                dimensions
+              )
             };
           }
         }

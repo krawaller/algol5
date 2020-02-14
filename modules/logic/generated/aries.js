@@ -9,7 +9,8 @@ import {
   defaultInstruction
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 8, width: 8 });
+const dimensions = { height: 8, width: 8 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { soldiers: "rook" };
 const emptyArtifactLayers = { movetargets: {}, beingpushed: {}, squished: {} };
 const connections = boardConnections({ height: 8, width: 8 });
@@ -113,7 +114,7 @@ let game = {
               (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
               1,
               0,
-              { height: 8, width: 8 }
+              dimensions
             )
           };
         }
@@ -451,7 +452,7 @@ let game = {
               (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
               1,
               0,
-              { height: 8, width: 8 }
+              dimensions
             )
           };
         }

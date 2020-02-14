@@ -9,7 +9,8 @@ import {
   defaultInstruction
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 3, width: 4 });
+const dimensions = { height: 3, width: 4 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { kings: "king", pawns: "pawn", bishops: "bishop" };
 const emptyArtifactLayers = { line: {} };
 const connections = boardConnections({ height: 3, width: 4 });

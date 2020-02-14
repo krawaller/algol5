@@ -11,9 +11,10 @@ export function executeHead(
   let ret = "\n";
 
   ret += `const emptyObj = {}; `;
+  ret += `const dimensions = { height: ${gameDef.board.height}, width: ${gameDef.board.width} }; `;
 
   ret += `
-    const BOARD = boardLayers({ height: ${gameDef.board.height}, width: ${gameDef.board.width} });
+    const BOARD = boardLayers(dimensions);
   `;
 
   ret += `const iconMapping = ${JSON.stringify(gameDef.graphics.icons)};\n`;

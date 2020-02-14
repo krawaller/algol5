@@ -9,7 +9,8 @@ import {
   defaultInstruction
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 5, width: 5 });
+const dimensions = { height: 5, width: 5 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { soldiers: "pawn" };
 const emptyArtifactLayers = {
   FOOBAR: {},

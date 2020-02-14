@@ -9,7 +9,8 @@ import {
   defaultInstruction
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 7, width: 8 });
+const dimensions = { height: 7, width: 8 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { towers: "rook", walls: "pawn", catapults: "queen" };
 const emptyArtifactLayers = {
   firetargets: {},

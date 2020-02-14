@@ -10,7 +10,7 @@ import {
   AlgolSetSingles,
   AlgolSetSubtract,
   AlgolSetUnion,
-  AlgolSetExceptPos
+  AlgolSetExceptPos,
 } from "./set.interface";
 
 import { AlgolExpression } from "../../";
@@ -39,6 +39,7 @@ export type AlgolSet<
 type AlgolSetInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | Layer
   | ["empty"]
+  | ["loopset"]
   | AlgolSetLayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetSingle<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolSetSingles<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>

@@ -8,12 +8,12 @@ import {
   isAlgolSetIntersect,
   isAlgolSetGroupAt,
   isAlgolSetSingles,
-  isAlgolSetExceptPos
+  isAlgolSetExceptPos,
 } from "../../../../../types";
 import {
   emptyArtifactLayers,
   terrainLayers,
-  emptyUnitLayers
+  emptyUnitLayers,
 } from "../../../../../common";
 
 import { makeParser } from "../";
@@ -39,7 +39,7 @@ export default function parseSet(
         gameDef.board.width,
         {
           ...gameDef.board.terrain,
-          ...gameDef.AI.terrain
+          ...gameDef.AI.terrain,
         },
         player
       )[name]
@@ -59,6 +59,8 @@ export default function parseSet(
     switch (expr[0]) {
       case "empty":
         return "emptyObj";
+      case "loopset":
+        return "LOOPSET";
       default:
         throw new Error(`Unknown set singleton: ${JSON.stringify(expr)}`);
     }
@@ -86,7 +88,7 @@ export default function parseSet(
 
   if (isAlgolSetSubtract(expr)) {
     const {
-      subtract: [target, ...remove]
+      subtract: [target, ...remove],
     } = expr;
     // array of all keys in target object
     const targetKeys = `Object.keys(${parser.set(target)})`;
@@ -102,7 +104,7 @@ export default function parseSet(
 
   if (isAlgolSetIntersect(expr)) {
     const {
-      intersect: [first, ...rest]
+      intersect: [first, ...rest],
     } = expr;
     // build an array of all keys, including duplicates
     const keysArr = `Object.keys(${parser.set(first)})${rest
@@ -125,7 +127,7 @@ export default function parseSet(
 
   if (isAlgolSetExceptPos(expr)) {
     const {
-      exceptpos: [set, pos]
+      exceptpos: [set, pos],
     } = expr;
     // array of all keys in target object
     const targetKeys = `Object.keys(${parser.set(set)})`;

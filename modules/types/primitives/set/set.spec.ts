@@ -14,6 +14,7 @@ type TestPos = AlgolSet<
 const tests: TestPos[] = [
   "mylayer",
   ["empty"],
+  ["loopset"],
   { layer: "mylayer" },
   { layer: { value: "mylayer" } },
   { playercase: ["mylayer", { layer: "mylayer" }] },
@@ -27,5 +28,5 @@ const tests: TestPos[] = [
   { intersect: ["mylayer", { single: "mymark" }, { single: "mymark" }] },
   { ifactionelse: ["mycmnd", "mylayer", "mylayer"] },
   { indexlist: [["dir"], "mylayer", { layer: "mylayer" }] },
-  { exceptpos: ["mylayer", "mymark"] }
+  { exceptpos: ["mylayer", "mymark"] },
 ];

@@ -14,7 +14,8 @@ import {
   AlgolValSizeOf,
   AlgolValSum,
   AlgolValTurnVar,
-  AlgolValValue
+  AlgolValValue,
+  AlgolValLoopRead,
 } from "./value.interface";
 
 export type AlgolValValueAnon = AlgolValValue<
@@ -162,6 +163,16 @@ export type AlgolValProdAnon = AlgolValProd<
   string
 >;
 export type AlgolValMinusAnon = AlgolValMinus<
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string
+>;
+export type AlgolValLoopReadAnon = AlgolValLoopRead<
   string,
   string,
   string,

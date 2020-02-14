@@ -7,7 +7,7 @@ import { analyseGame } from "../../common";
 export function compileGameToCode(gameDef: FullDefAnon) {
   const analysis = analyseGame(gameDef);
 
-  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction} from '../../common';
+  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction, roseDirs, orthoDirs, diagDirs, knightDirs} from '../../common';
   `;
 
   ret += executeSection(gameDef, 1, "head", "head");

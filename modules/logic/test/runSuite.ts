@@ -50,6 +50,10 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                           ? ["neutral", "my", "opp"]
                           : ["neutral", "opp", "my"],
                       gameDef: def,
+                      dimensions: {
+                        height: def.board.height,
+                        width: def.board.width,
+                      },
                     };
                 const fullContext = {
                   ...extraContext,

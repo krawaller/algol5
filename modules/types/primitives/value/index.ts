@@ -18,7 +18,8 @@ import {
   AlgolValSizeOf,
   AlgolValSum,
   AlgolValTurnVar,
-  AlgolValValue
+  AlgolValValue,
+  AlgolValLoopRead,
 } from "./value.interface";
 
 export type AlgolVal<
@@ -71,4 +72,5 @@ type AlgolValInner<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | AlgolValHarvest<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValSum<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
   | AlgolValProd<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValMinus<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolValMinus<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+  | AlgolValLoopRead<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;

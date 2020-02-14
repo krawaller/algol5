@@ -6,26 +6,18 @@ import {
   boardLayers,
   terrainLayers,
   collapseContent,
-  defaultInstruction
+  defaultInstruction,
+  roseDirs,
+  orthoDirs,
+  diagDirs,
+  knightDirs
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 8, width: 8 });
+const dimensions = { height: 8, width: 8 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { kings: "king", soldiers: "pawn" };
 const connections = boardConnections({ height: 8, width: 8 });
 const relativeDirs = makeRelativeDirs([]);
-const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
-const orthoDirs = [1, 3, 5, 7];
-const diagDirs = [2, 4, 6, 8];
-const knightDirs = [
-  "d1f2r1",
-  "d1f2r-1",
-  "d3f2r1",
-  "d3f2r-1",
-  "d5f2r1",
-  "d5f2r-1",
-  "d7f2r1",
-  "d7f2r-1"
-];
 let game = {
   gameId: "gogol",
   action: {},
@@ -188,10 +180,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -213,6 +202,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -259,10 +251,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -284,6 +273,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -342,10 +334,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -367,6 +356,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -850,10 +842,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -875,6 +864,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -921,10 +913,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -946,6 +935,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -1004,10 +996,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else if (
+    if (
       Object.keys(
         Object.entries(
           Object.keys(UNITLAYERS.mykings)
@@ -1029,6 +1018,9 @@ let game = {
           .filter(([key, n]) => n === 2)
           .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
       );
+    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "kingkill";
     } else {
       LINKS.endTurn = "startTurn1";
     }

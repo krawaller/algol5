@@ -6,27 +6,19 @@ import {
   boardLayers,
   terrainLayers,
   collapseContent,
-  defaultInstruction
+  defaultInstruction,
+  roseDirs,
+  orthoDirs,
+  diagDirs,
+  knightDirs
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 4, width: 4 });
+const dimensions = { height: 4, width: 4 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { soldiers: "pawn", wild: "king" };
 const emptyArtifactLayers = { movetargets: {}, winline: {} };
 const connections = boardConnections({ height: 4, width: 4 });
 const relativeDirs = makeRelativeDirs([]);
-const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
-const orthoDirs = [1, 3, 5, 7];
-const diagDirs = [2, 4, 6, 8];
-const knightDirs = [
-  "d1f2r1",
-  "d1f2r-1",
-  "d3f2r1",
-  "d3f2r-1",
-  "d5f2r1",
-  "d5f2r-1",
-  "d7f2r1",
-  "d7f2r-1"
-];
 let game = {
   gameId: "serauqs",
   action: {},
@@ -201,22 +193,10 @@ let game = {
         }
       }
     }
-    if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.middle)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
+    if (Object.keys(ARTIFACTS.winline).length !== 0) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "tookcenter";
-      LINKS.endMarks = Object.keys(TERRAIN.middle);
+      LINKS.endedBy = "madeline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else if (
       Object.keys(
         Object.entries(
@@ -233,10 +213,22 @@ let game = {
       LINKS.endGame = "win";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
-    } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+    } else if (
+      Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.middle)
+            .concat(
+              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
+            )
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      ).length > 3
+    ) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      LINKS.endedBy = "tookcenter";
+      LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -549,22 +541,10 @@ let game = {
         }
       }
     }
-    if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.middle)
-            .concat(
-              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
-            )
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length > 3
-    ) {
+    if (Object.keys(ARTIFACTS.winline).length !== 0) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "tookcenter";
-      LINKS.endMarks = Object.keys(TERRAIN.middle);
+      LINKS.endedBy = "madeline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
     } else if (
       Object.keys(
         Object.entries(
@@ -581,10 +561,22 @@ let game = {
       LINKS.endGame = "win";
       LINKS.endedBy = "madex";
       LINKS.endMarks = Object.keys(TERRAIN.corners);
-    } else if (Object.keys(ARTIFACTS.winline).length !== 0) {
+    } else if (
+      Object.keys(
+        Object.entries(
+          Object.keys(TERRAIN.middle)
+            .concat(
+              Object.keys({ ...UNITLAYERS.myunits, ...UNITLAYERS.oppwild })
+            )
+            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+        )
+          .filter(([key, n]) => n === 2)
+          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+      ).length > 3
+    ) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      LINKS.endedBy = "tookcenter";
+      LINKS.endMarks = Object.keys(TERRAIN.middle);
     } else {
       LINKS.endTurn = "startTurn1";
     }

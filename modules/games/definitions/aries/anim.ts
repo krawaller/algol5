@@ -13,10 +13,7 @@ import { AriesAnim } from "./_types";
 const ariesAnim: AriesAnim = {
   move: [
     {
-      exitin: [
-        "squished",
-        { offset: [["looppos"], { read: ["squished", ["looppos"], "dir"] }] },
-      ],
+      exitin: ["squished", { offset: [["looppos"], { loopread: "dir" }] }],
     },
   ],
 };

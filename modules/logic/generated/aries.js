@@ -6,27 +6,19 @@ import {
   boardLayers,
   terrainLayers,
   collapseContent,
-  defaultInstruction
+  defaultInstruction,
+  roseDirs,
+  orthoDirs,
+  diagDirs,
+  knightDirs
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 8, width: 8 });
+const dimensions = { height: 8, width: 8 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { soldiers: "rook" };
 const emptyArtifactLayers = { movetargets: {}, beingpushed: {}, squished: {} };
 const connections = boardConnections({ height: 8, width: 8 });
 const relativeDirs = makeRelativeDirs([]);
-const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
-const orthoDirs = [1, 3, 5, 7];
-const diagDirs = [2, 4, 6, 8];
-const knightDirs = [
-  "d1f2r1",
-  "d1f2r-1",
-  "d3f2r1",
-  "d3f2r-1",
-  "d5f2r1",
-  "d5f2r-1",
-  "d7f2r1",
-  "d7f2r-1"
-];
 let game = {
   gameId: "aries",
   action: {},
@@ -89,13 +81,16 @@ let game = {
     let BATTLEVARS = { ...step.BATTLEVARS };
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    for (let LOOPPOS in ARTIFACTS.squished) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squished[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squished;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     BATTLEVARS.pusheeid = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).id;
     BATTLEVARS.pushsquare = MARKS.selectmovetarget;
@@ -110,7 +105,7 @@ let game = {
               (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
               1,
               0,
-              { height: 8, width: 8 }
+              dimensions
             )
           };
         }
@@ -424,13 +419,16 @@ let game = {
     let BATTLEVARS = { ...step.BATTLEVARS };
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    for (let LOOPPOS in ARTIFACTS.squished) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squished[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squished;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     BATTLEVARS.pusheeid = (UNITLAYERS.units[MARKS.selectmovetarget] || {}).id;
     BATTLEVARS.pushsquare = MARKS.selectmovetarget;
@@ -445,7 +443,7 @@ let game = {
               (ARTIFACTS.movetargets[MARKS.selectmovetarget] || {}).dir,
               1,
               0,
-              { height: 8, width: 8 }
+              dimensions
             )
           };
         }

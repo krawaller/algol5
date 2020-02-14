@@ -6,10 +6,15 @@ import {
   boardLayers,
   terrainLayers,
   collapseContent,
-  defaultInstruction
+  defaultInstruction,
+  roseDirs,
+  orthoDirs,
+  diagDirs,
+  knightDirs
 } from "../../common";
 const emptyObj = {};
-const BOARD = boardLayers({ height: 4, width: 4 });
+const dimensions = { height: 4, width: 4 };
+const BOARD = boardLayers(dimensions);
 const iconMapping = { soldiers: "pawn" };
 const emptyArtifactLayers = {
   targetedgepoints: {},
@@ -36,19 +41,6 @@ const TERRAIN = terrainLayers(4, 4, {
   eastedge: [{ rect: ["d1", "d4"] }],
   edge: [{ holerect: ["a1", "d4", "b2", "b3", "c2", "c3"] }]
 });
-const roseDirs = [1, 2, 3, 4, 5, 6, 7, 8];
-const orthoDirs = [1, 3, 5, 7];
-const diagDirs = [2, 4, 6, 8];
-const knightDirs = [
-  "d1f2r1",
-  "d1f2r-1",
-  "d3f2r1",
-  "d3f2r-1",
-  "d5f2r1",
-  "d5f2r-1",
-  "d7f2r1",
-  "d7f2r-1"
-];
 let game = {
   gameId: "shoveoff",
   action: {},
@@ -134,13 +126,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishnorth) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishnorth[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishnorth;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
@@ -151,7 +146,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
           };
         }
       }
@@ -234,13 +229,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishsouth) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishsouth[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishsouth;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
@@ -251,7 +249,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
           };
         }
       }
@@ -334,13 +332,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squisheast) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squisheast[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squisheast;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
@@ -351,7 +352,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
           };
         }
       }
@@ -434,13 +435,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishwest) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishwest[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishwest;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
@@ -451,7 +455,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
           };
         }
       }
@@ -756,13 +760,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishnorth) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishnorth[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishnorth;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
@@ -773,7 +780,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
           };
         }
       }
@@ -856,13 +863,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishsouth) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishsouth[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishsouth;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
@@ -873,7 +883,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 5, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
           };
         }
       }
@@ -956,13 +966,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squisheast) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squisheast[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squisheast;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
@@ -973,7 +986,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 3, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
           };
         }
       }
@@ -1056,13 +1069,16 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    for (let LOOPPOS in ARTIFACTS.squishwest) {
-      anim.exitTo[LOOPPOS] = offsetPos(
-        LOOPPOS,
-        (ARTIFACTS.squishwest[LOOPPOS] || {}).dir,
-        1,
-        0
-      );
+    {
+      const LOOPSET = ARTIFACTS.squishwest;
+      for (let LOOPPOS in LOOPSET) {
+        anim.exitTo[LOOPPOS] = offsetPos(
+          LOOPPOS,
+          (LOOPSET[LOOPPOS] || {}).dir,
+          1,
+          0
+        );
+      }
     }
     delete UNITDATA[
       (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
@@ -1073,7 +1089,7 @@ let game = {
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 7, 1, 0, { height: 4, width: 4 })
+            pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
           };
         }
       }

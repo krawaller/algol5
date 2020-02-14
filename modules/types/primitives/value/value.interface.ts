@@ -31,6 +31,19 @@ export interface AlgolValRead<
   read: SetPosVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
 }
 
+export interface AlgolValLoopRead<
+  Btlp,
+  Btlv,
+  Cmnd,
+  Grid,
+  Layer,
+  Mrk,
+  Turnp,
+  Turnv
+> {
+  loopread: AlgolVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+}
+
 export interface AlgolValBattleVar<
   Btlp,
   Btlv,

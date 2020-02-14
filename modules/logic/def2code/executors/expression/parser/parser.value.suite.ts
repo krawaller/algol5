@@ -24,46 +24,46 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
             { expr: { ifactionelse: ["someaction", 1, 666] }, res: 1 },
             {
               expr: { ifactionelse: ["otheraction", 1, { value: 666 }] },
-              res: 666
+              res: 666,
             },
             { expr: { prod: [{ minus: [5, 3] }, 5, 3] }, res: 30 },
             {
               expr: { indexlist: [{ minus: [2, 1] }, "foo", { value: "bar" }] },
-              res: "bar"
+              res: "bar",
             },
             { expr: { ifelse: [["true"], { value: 1 }, 2] }, res: 1 },
             { expr: { ifelse: [["false"], 1, { value: 2 }] }, res: 2 },
             { expr: { sum: [1, 2, { value: 4 }] }, res: 7 },
             { expr: { reldir: [1, 3] }, res: 3 },
-            { expr: { reldir: [2, 1] }, res: 2 }
-          ]
+            { expr: { reldir: [2, 1] }, res: 2 },
+          ],
         },
         { context: { DIR: 666 }, tests: [{ expr: ["dir"], res: 666 }] },
         {
           context: { DIR: "d4f2r-1" },
-          tests: [{ expr: ["offsetdir"], res: 4 }]
+          tests: [{ expr: ["offsetdir"], res: 4 }],
         },
         {
           context: { TURNVARS: { foo: 666 } },
-          tests: [{ expr: { turnvar: { value: "foo" } }, res: 666 }]
+          tests: [{ expr: { turnvar: { value: "foo" } }, res: 666 }],
         },
         {
           context: { BATTLEVARS: { foo: 666 } },
-          tests: [{ expr: { battlevar: { value: "foo" } }, res: 666 }]
+          tests: [{ expr: { battlevar: { value: "foo" } }, res: 666 }],
         },
         {
           context: { MARKS: { somemark: "wee" } },
           tests: [
             { expr: { sizeof: { single: "somemark" } }, res: 1 },
-            { expr: { pos: "somemark" }, res: "wee" }
-          ]
+            { expr: { pos: "somemark" }, res: "wee" },
+          ],
         },
         {
           context: {
             MARKS: { mymark: "a1" },
-            UNITLAYERS: { units: { a1: { id: 666 } } }
+            UNITLAYERS: { units: { a1: { id: 666 } } },
           },
-          tests: [{ expr: { idat: "mymark" }, res: 666 }]
+          tests: [{ expr: { idat: "mymark" }, res: 666 }],
         },
         {
           context: {
@@ -76,7 +76,7 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
             STEP: 6,
             LOOPID: 7,
             TURN: 8,
-            CURRENTCOUNT: 9
+            CURRENTCOUNT: 9,
           },
           tests: [
             { expr: ["walklength"], res: 1 },
@@ -88,13 +88,13 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
             { expr: ["step"], res: 6 },
             { expr: ["loopid"], res: 7 },
             { expr: ["turn"], res: 8 },
-            { expr: ["countsofar"], res: 9 }
-          ]
+            { expr: ["countsofar"], res: 9 },
+          ],
         },
         {
           context: {
             GRIDS: { meep: { a1: 3, c2: 5 } },
-            MARKS: { mymark: "a1", othermark: "c2" }
+            MARKS: { mymark: "a1", othermark: "c2" },
           },
           tests: [
             { expr: { gridat: ["meep", "mymark"] }, res: 3 },
@@ -103,14 +103,14 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
               expr: {
                 gridin: [
                   "meep",
-                  { union: [{ single: "mymark" }, { single: "othermark" }] }
-                ]
+                  { union: [{ single: "mymark" }, { single: "othermark" }] },
+                ],
               },
-              res: 8
-            }
-          ]
-        }
-      ]
+              res: 8,
+            },
+          ],
+        },
+      ],
     },
     {
       def: emptyFullDef,
@@ -122,10 +122,10 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
           tests: [
             { expr: ["player"], res: 2 },
             { expr: ["otherplayer"], res: 1 },
-            { expr: { playercase: [666, { value: "yes" }] }, res: "yes" }
-          ]
-        }
-      ]
+            { expr: { playercase: [666, { value: "yes" }] }, res: "yes" },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -133,9 +133,9 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
         board: {
           ...emptyFullDef.board,
           terrain: {
-            flurp: []
-          }
-        }
+            flurp: [],
+          },
+        },
       },
       player: 1,
       action: "someaction",
@@ -143,20 +143,32 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
         {
           context: {
             TERRAIN: { flurp: { a1: { foo: "bar" } } },
-            MARKS: { there: "a1" }
+            MARKS: { there: "a1" },
           },
-          tests: [{ expr: { read: ["flurp", "there", "foo"] }, res: "bar" }]
+          tests: [{ expr: { read: ["flurp", "there", "foo"] }, res: "bar" }],
         },
         {
           context: {
-            TERRAIN: { flurp: { a1: { wee: 5 }, b2: { wee: 2 } } }
+            TERRAIN: { flurp: { a1: { wee: 5 }, b2: { wee: 2 } } },
           },
           tests: [
             { expr: { harvest: ["flurp", { value: "wee" }] }, res: 7 },
-            { expr: { sizeof: "flurp" }, res: 2 }
-          ]
-        }
-      ]
-    }
-  ]
+            { expr: { sizeof: "flurp" }, res: 2 },
+          ],
+        },
+        {
+          context: {
+            LOOPSET: { a1: { gnurp: "foo" } },
+            LOOPPOS: "a1",
+          },
+          tests: [
+            {
+              expr: { loopread: { value: "gnurp" } },
+              res: "foo",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

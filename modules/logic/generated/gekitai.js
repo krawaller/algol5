@@ -11,7 +11,7 @@ import {
 const emptyObj = {};
 const BOARD = boardLayers({ height: 6, width: 6 });
 const iconMapping = { markers: "pawn" };
-const emptyArtifactLayers = { death: {}, push: {} };
+const emptyArtifactLayers = { winline: {}, loseline: {}, death: {}, push: {} };
 const connections = boardConnections({ height: 6, width: 6 });
 const relativeDirs = makeRelativeDirs([]);
 const TERRAIN = terrainLayers(6, 6, {});
@@ -75,7 +75,9 @@ let game = {
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       death: step.ARTIFACTS.death,
-      push: step.ARTIFACTS.push
+      push: step.ARTIFACTS.push,
+      winline: {},
+      loseline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -129,7 +131,39 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (Object.keys(UNITLAYERS.myunits).length === 8) {
+    {
+      for (let STARTPOS in UNITLAYERS.units) {
+        let allowedsteps = UNITLAYERS.myunits[STARTPOS]
+          ? UNITLAYERS.myunits
+          : UNITLAYERS.oppunits;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = "faux";
+          connections.faux[DIR] = STARTPOS;
+          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            if (WALKLENGTH > 2) {
+              ARTIFACTS[UNITLAYERS.myunits[STARTPOS] ? "winline" : "loseline"][
+                POS
+              ] = emptyObj;
+            }
+          }
+        }
+      }
+    }
+    if (Object.keys(ARTIFACTS.winline).length !== 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "winline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+    } else if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+      LINKS.endGame = "lose";
+      LINKS.endedBy = "suicide";
+      LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
+    } else if (Object.keys(UNITLAYERS.myunits).length === 8) {
       LINKS.endGame = "win";
       LINKS.endedBy = "allout";
     } else {
@@ -265,7 +299,9 @@ let game = {
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       death: step.ARTIFACTS.death,
-      push: step.ARTIFACTS.push
+      push: step.ARTIFACTS.push,
+      winline: {},
+      loseline: {}
     };
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
@@ -319,7 +355,39 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (Object.keys(UNITLAYERS.myunits).length === 8) {
+    {
+      for (let STARTPOS in UNITLAYERS.units) {
+        let allowedsteps = UNITLAYERS.myunits[STARTPOS]
+          ? UNITLAYERS.myunits
+          : UNITLAYERS.oppunits;
+        for (let DIR of roseDirs) {
+          let walkedsquares = [];
+          let POS = "faux";
+          connections.faux[DIR] = STARTPOS;
+          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+            walkedsquares.push(POS);
+          }
+          let WALKLENGTH = walkedsquares.length;
+          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+            POS = walkedsquares[walkstepper];
+            if (WALKLENGTH > 2) {
+              ARTIFACTS[UNITLAYERS.myunits[STARTPOS] ? "winline" : "loseline"][
+                POS
+              ] = emptyObj;
+            }
+          }
+        }
+      }
+    }
+    if (Object.keys(ARTIFACTS.winline).length !== 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "winline";
+      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+    } else if (Object.keys(ARTIFACTS.loseline).length !== 0) {
+      LINKS.endGame = "lose";
+      LINKS.endedBy = "suicide";
+      LINKS.endMarks = Object.keys(ARTIFACTS.loseline);
+    } else if (Object.keys(UNITLAYERS.myunits).length === 8) {
       LINKS.endGame = "win";
       LINKS.endedBy = "allout";
     } else {

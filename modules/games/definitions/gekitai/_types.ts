@@ -45,8 +45,8 @@ export type GekitaiUnitLayer =
   | "mymarkers"
   | "oppmarkers"
   | "neutralmarkers";
-export type GekitaiGenerator = "findpushconsequences";
-export type GekitaiArtifactLayer = "death" | "push";
+export type GekitaiGenerator = "findendline" | "findpushconsequences";
+export type GekitaiArtifactLayer = "winline" | "loseline" | "death" | "push";
 export type GekitaiTerrainLayer = never;
 export type GekitaiLayer =
   | CommonLayer

@@ -6,6 +6,23 @@
 import { GekitaiGenerators } from "./_types";
 
 const gekitaiGenerators: GekitaiGenerators = {
+  findendline: {
+    type: "walker",
+    starts: "units",
+    dirs: "rose",
+    steps: {
+      ifelse: [{ anyat: ["myunits", ["start"]] }, "myunits", "oppunits"],
+    },
+    startasstep: true,
+    draw: {
+      steps: {
+        condition: { morethan: [["walklength"], 2] },
+        tolayer: {
+          ifelse: [{ anyat: ["myunits", ["start"]] }, "winline", "loseline"],
+        },
+      },
+    },
+  },
   findpushconsequences: {
     type: "walker",
     start: "selectdroptarget",

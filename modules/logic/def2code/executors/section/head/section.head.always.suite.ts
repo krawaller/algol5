@@ -21,13 +21,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           tests: [
             {
               expr: "head",
-              naked: true,
+              naked: false,
               asserts: [
-                {
-                  sample: "dimensions",
-                  res: { height: 1, width: 2 },
-                  desc: "dimensions constant was set up",
-                },
                 {
                   sample: "roseDirs",
                   res: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -42,6 +37,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                   sample: "diagDirs",
                   res: [2, 4, 6, 8],
                   desc: "diagonal dir constant was set up",
+                },
+              ],
+            },
+            {
+              expr: "head",
+              naked: true,
+              asserts: [
+                {
+                  sample: "dimensions",
+                  res: { height: 1, width: 2 },
+                  desc: "dimensions constant was set up",
                 },
                 {
                   sample: "BOARD",

@@ -30,6 +30,6 @@ export const getIconShape = (
   }
   const mask = `<mask id="rside"><rect x="${svgPicSide /
     2}" y="0" height="${svgPicSide}" width="${svgPicSide}" fill="white" /></mask>`;
-  const def = `<g id="${name}">${mask}<g mask="url(#rside)">${fill}${stroke}</g></g>`;
+  const def = `<g id="${name}H">${mask}<g mask="url(#rside)">${fill}${stroke}</g></g>`;
   return def;
 };

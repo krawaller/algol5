@@ -27,7 +27,7 @@ export const pic: TokenHandler = opts => {
     if (!picRefPath) {
       throw new Error("Refered pic " + name + " but no picRefPath provided!");
     }
-    src = `/images/${gameId}/${name}`;
+    src = `/images/games/${gameId}/${name}`;
   }
   return `<div class="md-img"><img src="${src}" alt="${title}" title="${title}" />${
     cred

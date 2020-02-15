@@ -8,7 +8,7 @@ type InsertTokenOpts = {
 export const insertTokens = (opts: InsertTokenOpts) => {
   const { md, arrs, gameId, yaml, picSourcePath, picRefPath } = opts;
   return md.replace(
-    /\[([A-Z]{3,}):?([^\]]*)]/g,
+    /\[([A-Z]{2,}):?([^\]]*)]/g,
     (_: string, token: string, instr: string) => {
       const args = instr.split(",").reduce(
         (memo, arg) => ({

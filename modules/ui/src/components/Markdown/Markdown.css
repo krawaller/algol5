@@ -33,3 +33,30 @@
   font-family: verdana;
   font-size: 10px;
 }
+
+.md-pos {
+  background-color: #eee;
+  padding: 3px;
+  border: 1px solid black;
+  white-space: nowrap;
+}
+
+.md-plr {
+  font-weight: bold;
+}
+
+.md-plr-0 {
+  color: gold;
+}
+
+.md-plr-1 {
+  color: red;
+}
+
+.md-plr-2 {
+  color: blue;
+}
+
+.md-outcome {
+  font-weight: bold;
+}

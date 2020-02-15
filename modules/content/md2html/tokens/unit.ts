@@ -2,13 +2,20 @@ import { TokenHandler } from "./_handler";
 import lib from "../../../games/dist/lib";
 import { allIcons } from "../../../graphics/dist/allIconSVGs";
 
-// Takes an UNIT token and turns it into an SVG pic! Expects args `group` and `owner`
+// Takes an UNIT token and turns it into an SVG pic! Expects args `group` and `owner`,
+// and optionally gameId
 
 export const unit: TokenHandler = opts => {
-  const { args, gameId } = opts;
-  const { group, owner } = args;
+  const { args, gameId: thisGameId } = opts;
+  let { group, owner, gameId } = args;
   if (!gameId) {
-    throw new Error("Cannot refer unit group without providing gameId!");
+    if (thisGameId) {
+      gameId = thisGameId;
+    } else {
+      throw new Error(
+        "Cannot refer unit group without providing gameId when there is no contextual id!"
+      );
+    }
   }
   const def = lib[gameId];
   if (!group) {

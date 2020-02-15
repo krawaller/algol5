@@ -1,14 +1,17 @@
 import { TokenHandler } from "./_handler";
 import lib from "../../../games/dist/lib";
-import { allIcons } from "../../../graphics/dist/allIconSVGs";
 
 // Takes an GAME token and turns it into clickable link (unless the current game)
 
 export const game: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
-  const { gameId } = args;
+  let { gameId } = args;
   if (!gameId) {
-    throw new Error("Have to provide gameId");
+    if (thisGameId) {
+      gameId = thisGameId!;
+    } else {
+      throw new Error("Game ref but no gameId or default gameId");
+    }
   }
   const def = lib[gameId];
   if (!def) {

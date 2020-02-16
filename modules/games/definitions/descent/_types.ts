@@ -31,7 +31,7 @@ export type DescentAnim = AlgolAnimCollection<
 >;
 
 export type DescentTerrain = never;
-export type DescentUnit = "pawns" | "knights" | "rooks";
+export type DescentUnit = "lvl3" | "lvl2" | "lvl1" | "lvl0";
 export type DescentMark = "selectunit" | "selectmovetarget" | "selectdigtarget";
 export type DescentCommand = "move" | "dig";
 export type DescentPhaseCommand = "move";
@@ -41,18 +41,22 @@ export type DescentUnitLayer =
   | "myunits"
   | "oppunits"
   | "neutralunits"
-  | "pawns"
-  | "mypawns"
-  | "opppawns"
-  | "neutralpawns"
-  | "knights"
-  | "myknights"
-  | "oppknights"
-  | "neutralknights"
-  | "rooks"
-  | "myrooks"
-  | "opprooks"
-  | "neutralrooks";
+  | "lvl3"
+  | "mylvl3"
+  | "opplvl3"
+  | "neutrallvl3"
+  | "lvl2"
+  | "mylvl2"
+  | "opplvl2"
+  | "neutrallvl2"
+  | "lvl1"
+  | "mylvl1"
+  | "opplvl1"
+  | "neutrallvl1"
+  | "lvl0"
+  | "mylvl0"
+  | "opplvl0"
+  | "neutrallvl0";
 export type DescentGenerator =
   | "findmovetargets"
   | "finddigtargets"

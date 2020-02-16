@@ -18,7 +18,7 @@ export const endgame: TokenHandler = opts => {
     throw new Error("ENDGAME must have a name!");
   }
   const ends = lib[gameId].flow.endGame || {};
-  if (!ends[name]) {
+  if (!ends[name] && name !== "starvation") {
     throw new Error(`Game ${gameId} does not have endGame ${name}`);
   }
   return `<code class="md-endgame" data-endgame="${name}" >${name}</code>`;

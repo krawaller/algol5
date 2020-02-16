@@ -12,25 +12,42 @@ const descentGenerators: DescentGenerators = {
     start: "selectunit",
     condition: {
       ifelse: [
-        { anyat: ["rooks", "selectunit"] },
-        { noneat: ["pawns", ["target"]] },
+        { anyat: ["lvl3", "selectunit"] },
+        {
+          and: [
+            { noneat: ["lvl1", ["target"]] },
+            { noneat: ["lvl0", ["target"]] },
+          ],
+        },
         {
           ifelse: [
-            { anyat: ["pawns", "selectunit"] },
-            { noneat: ["rooks", ["target"]] },
-            ["true"]
-          ]
-        }
-      ]
+            { anyat: ["lvl2", "selectunit"] },
+            { noneat: ["lvl0", ["target"]] },
+            {
+              ifelse: [
+                { anyat: ["lvl1", "selectunit"] },
+                { noneat: ["lvl3", ["target"]] },
+                {
+                  and: [
+                    { noneat: ["lvl2", ["target"]] },
+                    { noneat: ["lvl3", ["target"]] },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
-    draw: { neighbours: { ifover: "neutralunits", tolayer: "movetargets" } }
+    draw: { neighbours: { ifover: "neutralunits", tolayer: "movetargets" } },
   },
   finddigtargets: {
     type: "neighbour",
     dirs: "rose",
     start: { turnpos: "movedto" },
     ifover: "neutralunits",
-    draw: { neighbours: { tolayer: "digtargets" } }
+    unlessover: "lvl0",
+    draw: { neighbours: { tolayer: "digtargets" } },
   },
   findwinlines: {
     type: "walker",
@@ -39,20 +56,26 @@ const descentGenerators: DescentGenerators = {
     startasstep: true,
     steps: {
       ifelse: [
-        { anyat: ["myrooks", ["start"]] },
-        "myrooks",
+        { anyat: ["mylvl3", ["start"]] },
+        "mylvl3",
         {
-          ifelse: [{ anyat: ["myknights", ["start"]] }, "myknights", "mypawns"]
-        }
-      ]
+          ifelse: [
+            { anyat: ["mylvl2", ["start"]] },
+            "mylvl2",
+            {
+              ifelse: [{ anyat: ["mylvl1", ["start"]] }, "mylvl1", "mylvl0"],
+            },
+          ],
+        },
+      ],
     },
     draw: {
       steps: {
         condition: { morethan: [["walklength"], 2] },
-        tolayer: "winline"
-      }
-    }
-  }
+        tolayer: "winline",
+      },
+    },
+  },
 };
 
 export default descentGenerators;

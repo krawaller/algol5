@@ -9,6 +9,7 @@ import { dim } from "./dim";
 import { plr } from "./plr";
 import { cmnd } from "./cmnd";
 import { endgame } from "./endgame";
+import { setup } from "./setup";
 
 export const tokenHandlers = {
   arr,
@@ -22,4 +23,5 @@ export const tokenHandlers = {
   plr,
   cmnd,
   endgame,
+  setup,
 };

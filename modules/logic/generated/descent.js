@@ -15,7 +15,12 @@ import {
 const emptyObj = {};
 const dimensions = { height: 4, width: 4 };
 const BOARD = boardLayers(dimensions);
-const iconMapping = { pawns: "pawn", knights: "knight", rooks: "rook" };
+const iconMapping = {
+  lvl3: "queen",
+  lvl2: "rook",
+  lvl1: "knight",
+  lvl0: "pawn"
+};
 const emptyArtifactLayers = { movetargets: {}, digtargets: {}, winline: {} };
 const connections = boardConnections({ height: 4, width: 4 });
 const relativeDirs = makeRelativeDirs([]);
@@ -25,24 +30,29 @@ let game = {
   action: {},
   instruction: {},
   commands: { move: {}, dig: {} },
-  iconMap: { pawns: "pawn", knights: "knight", rooks: "rook" }
+  iconMap: { lvl3: "queen", lvl2: "rook", lvl1: "knight", lvl0: "pawn" }
 };
 {
   const groupLayers = {
-    pawns: [
-      ["units", "neutralunits", "pawns"],
-      ["units", "myunits", "pawns", "mypawns"],
-      ["units", "oppunits", "pawns", "opppawns"]
+    lvl3: [
+      ["units", "neutralunits", "lvl3"],
+      ["units", "myunits", "lvl3", "mylvl3"],
+      ["units", "oppunits", "lvl3", "opplvl3"]
     ],
-    knights: [
-      ["units", "neutralunits", "knights"],
-      ["units", "myunits", "knights", "myknights"],
-      ["units", "oppunits", "knights", "oppknights"]
+    lvl2: [
+      ["units", "neutralunits", "lvl2"],
+      ["units", "myunits", "lvl2", "mylvl2"],
+      ["units", "oppunits", "lvl2", "opplvl2"]
     ],
-    rooks: [
-      ["units", "neutralunits", "rooks"],
-      ["units", "myunits", "rooks", "myrooks"],
-      ["units", "oppunits", "rooks", "opprooks"]
+    lvl1: [
+      ["units", "neutralunits", "lvl1"],
+      ["units", "myunits", "lvl1", "mylvl1"],
+      ["units", "oppunits", "lvl1", "opplvl1"]
+    ],
+    lvl0: [
+      ["units", "neutralunits", "lvl0"],
+      ["units", "myunits", "lvl0", "mylvl0"],
+      ["units", "oppunits", "lvl0", "opplvl0"]
     ]
   };
   game.action.startTurn1 = step => {
@@ -52,15 +62,18 @@ let game = {
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
       neutralunits: oldUnitLayers.neutralunits,
-      pawns: oldUnitLayers.pawns,
-      mypawns: oldUnitLayers.opppawns,
-      opppawns: oldUnitLayers.mypawns,
-      knights: oldUnitLayers.knights,
-      myknights: oldUnitLayers.oppknights,
-      oppknights: oldUnitLayers.myknights,
-      rooks: oldUnitLayers.rooks,
-      myrooks: oldUnitLayers.opprooks,
-      opprooks: oldUnitLayers.myrooks
+      lvl3: oldUnitLayers.lvl3,
+      mylvl3: oldUnitLayers.opplvl3,
+      opplvl3: oldUnitLayers.mylvl3,
+      lvl2: oldUnitLayers.lvl2,
+      mylvl2: oldUnitLayers.opplvl2,
+      opplvl2: oldUnitLayers.mylvl2,
+      lvl1: oldUnitLayers.lvl1,
+      mylvl1: oldUnitLayers.opplvl1,
+      opplvl1: oldUnitLayers.mylvl1,
+      lvl0: oldUnitLayers.lvl0,
+      mylvl0: oldUnitLayers.opplvl0,
+      opplvl0: oldUnitLayers.mylvl0
     };
     let LINKS = {
       marks: {},
@@ -87,14 +100,17 @@ let game = {
         { select: "Select" },
         collapseContent({
           line: [
-            Object.keys(UNITLAYERS.mypawns).length !== 0
-              ? { unittype: ["pawn", 1] }
+            Object.keys(UNITLAYERS.mylvl3).length !== 0
+              ? { unittype: ["queen", 1] }
               : undefined,
-            Object.keys(UNITLAYERS.myknights).length !== 0
+            Object.keys(UNITLAYERS.mylvl2).length !== 0
+              ? { unittype: ["rook", 1] }
+              : undefined,
+            Object.keys(UNITLAYERS.mylvl1).length !== 0
               ? { unittype: ["knight", 1] }
               : undefined,
-            Object.keys(UNITLAYERS.myrooks).length !== 0
-              ? { unittype: ["rook", 1] }
+            Object.keys(UNITLAYERS.mylvl0).length !== 0
+              ? { unittype: ["pawn", 1] }
               : undefined
           ]
             .filter(i => !!i)
@@ -159,15 +175,18 @@ let game = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      pawns: {},
-      mypawns: {},
-      opppawns: {},
-      knights: {},
-      myknights: {},
-      oppknights: {},
-      rooks: {},
-      myrooks: {},
-      opprooks: {}
+      lvl3: {},
+      mylvl3: {},
+      opplvl3: {},
+      lvl2: {},
+      mylvl2: {},
+      opplvl2: {},
+      lvl1: {},
+      mylvl1: {},
+      opplvl1: {},
+      lvl0: {},
+      mylvl0: {},
+      opplvl0: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -180,7 +199,7 @@ let game = {
       let startconnections = connections[TURNVARS["movedto"]];
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
-        if (POS && UNITLAYERS.neutralunits[POS]) {
+        if (POS && UNITLAYERS.neutralunits[POS] && !UNITLAYERS.lvl0[POS]) {
           ARTIFACTS.digtargets[POS] = emptyObj;
         }
       }
@@ -207,9 +226,9 @@ let game = {
         { text: "a neighbouring" },
         collapseContent({
           line: [
+            { unittype: ["queen", 0] },
             { unittype: ["rook", 0] },
-            { unittype: ["knight", 0] },
-            { unittype: ["pawn", 0] }
+            { unittype: ["knight", 0] }
           ]
             .filter(i => !!i)
             .reduce((mem, i, n, list) => {
@@ -236,19 +255,17 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    if (UNITLAYERS.pawns[MARKS.selectdigtarget]) {
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectdigtarget] || {}).id];
-    } else {
-      {
-        let unitid = (UNITLAYERS.units[MARKS.selectdigtarget] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            group: UNITLAYERS.knights[MARKS.selectdigtarget]
-              ? "pawns"
-              : "knights"
-          };
-        }
+    {
+      let unitid = (UNITLAYERS.units[MARKS.selectdigtarget] || {}).id;
+      if (unitid) {
+        UNITDATA[unitid] = {
+          ...UNITDATA[unitid],
+          group: UNITLAYERS.lvl3[MARKS.selectdigtarget]
+            ? "lvl2"
+            : UNITLAYERS.lvl2[MARKS.selectdigtarget]
+            ? "lvl1"
+            : "lvl0"
+        };
       }
     }
     UNITLAYERS = {
@@ -256,15 +273,18 @@ let game = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      pawns: {},
-      mypawns: {},
-      opppawns: {},
-      knights: {},
-      myknights: {},
-      oppknights: {},
-      rooks: {},
-      myrooks: {},
-      opprooks: {}
+      lvl3: {},
+      mylvl3: {},
+      opplvl3: {},
+      lvl2: {},
+      mylvl2: {},
+      opplvl2: {},
+      lvl1: {},
+      mylvl1: {},
+      opplvl1: {},
+      lvl0: {},
+      mylvl0: {},
+      opplvl0: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -275,11 +295,13 @@ let game = {
     }
     {
       for (let STARTPOS in UNITLAYERS.myunits) {
-        let allowedsteps = UNITLAYERS.myrooks[STARTPOS]
-          ? UNITLAYERS.myrooks
-          : UNITLAYERS.myknights[STARTPOS]
-          ? UNITLAYERS.myknights
-          : UNITLAYERS.mypawns;
+        let allowedsteps = UNITLAYERS.mylvl3[STARTPOS]
+          ? UNITLAYERS.mylvl3
+          : UNITLAYERS.mylvl2[STARTPOS]
+          ? UNITLAYERS.mylvl2
+          : UNITLAYERS.mylvl1[STARTPOS]
+          ? UNITLAYERS.mylvl1
+          : UNITLAYERS.mylvl0;
         for (let DIR of roseDirs) {
           let walkedsquares = [];
           let POS = "faux";
@@ -331,11 +353,13 @@ let game = {
         let POS = startconnections[DIR];
         if (
           POS &&
-          (UNITLAYERS.rooks[MARKS.selectunit]
-            ? !UNITLAYERS.pawns[POS]
-            : UNITLAYERS.pawns[MARKS.selectunit]
-            ? !UNITLAYERS.rooks[POS]
-            : true)
+          (UNITLAYERS.lvl3[MARKS.selectunit]
+            ? !UNITLAYERS.lvl1[POS] && !UNITLAYERS.lvl0[POS]
+            : UNITLAYERS.lvl2[MARKS.selectunit]
+            ? !UNITLAYERS.lvl0[POS]
+            : UNITLAYERS.lvl1[MARKS.selectunit]
+            ? !UNITLAYERS.lvl3[POS]
+            : !UNITLAYERS.lvl2[POS] && !UNITLAYERS.lvl3[POS])
         ) {
           if (UNITLAYERS.neutralunits[POS]) {
             ARTIFACTS.movetargets[POS] = emptyObj;
@@ -365,12 +389,19 @@ let game = {
         { select: "Select" },
         collapseContent({
           line: [
-            !UNITLAYERS.mypawns[MARKS.selectunit]
+            !UNITLAYERS.lvl3[MARKS.selectunit] &&
+            !UNITLAYERS.lvl2[MARKS.selectunit]
+              ? { unittype: ["pawn", 0] }
+              : undefined,
+            !UNITLAYERS.lvl3[MARKS.selectunit]
+              ? { unittype: ["knight", 0] }
+              : undefined,
+            !UNITLAYERS.lvl0[MARKS.selectunit]
               ? { unittype: ["rook", 0] }
               : undefined,
-            { unittype: ["knight", 0] },
-            !UNITLAYERS.myrooks[MARKS.selectunit]
-              ? { unittype: ["pawn", 0] }
+            !UNITLAYERS.lvl0[MARKS.selectunit] &&
+            !UNITLAYERS.lvl1[MARKS.selectunit]
+              ? { unittype: ["queen", 0] }
               : undefined
           ]
             .filter(i => !!i)
@@ -431,8 +462,11 @@ let game = {
         (UNITLAYERS.units[MARKS.selectunit] || {}).group ===
         (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
           ? { text: "walk" }
-          : UNITLAYERS.rooks[MARKS.selectunit] ||
-            UNITLAYERS.pawns[MARKS.selectmovetarget]
+          : UNITLAYERS.lvl3[MARKS.selectunit] ||
+            (UNITLAYERS.lvl2[MARKS.selectunit] &&
+              UNITLAYERS.lvl1[MARKS.selectmovetarget]) ||
+            (UNITLAYERS.lvl1[MARKS.selectunit] &&
+              UNITLAYERS.lvl0[MARKS.selectmovetarget])
           ? { text: "descend" }
           : { text: "climb" },
         { text: "to" },
@@ -458,7 +492,26 @@ let game = {
   game.instruction.selectdigtarget1 = step => {
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
-    return UNITLAYERS.rooks[MARKS.selectdigtarget]
+    return UNITLAYERS.lvl3[MARKS.selectdigtarget]
+      ? collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "dig" },
+            { text: "to turn" },
+            {
+              unit: [
+                iconMapping[
+                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner,
+                MARKS.selectdigtarget
+              ]
+            },
+            { text: "to" },
+            { unittype: ["rook", 0] }
+          ]
+        })
+      : UNITLAYERS.lvl2[MARKS.selectdigtarget]
       ? collapseContent({
           line: [
             { text: "Press" },
@@ -477,8 +530,7 @@ let game = {
             { unittype: ["knight", 0] }
           ]
         })
-      : UNITLAYERS.knights[MARKS.selectdigtarget]
-      ? collapseContent({
+      : collapseContent({
           line: [
             { text: "Press" },
             { command: "dig" },
@@ -495,41 +547,30 @@ let game = {
             { text: "to" },
             { unittype: ["pawn", 0] }
           ]
-        })
-      : collapseContent({
-          line: [
-            { text: "Press" },
-            { command: "dig" },
-            { text: "to destroy" },
-            {
-              unit: [
-                iconMapping[
-                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
-                ],
-                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner,
-                MARKS.selectdigtarget
-              ]
-            }
-          ]
         });
   };
 }
 {
   const groupLayers = {
-    pawns: [
-      ["units", "neutralunits", "pawns"],
-      ["units", "oppunits", "pawns", "opppawns"],
-      ["units", "myunits", "pawns", "mypawns"]
+    lvl3: [
+      ["units", "neutralunits", "lvl3"],
+      ["units", "oppunits", "lvl3", "opplvl3"],
+      ["units", "myunits", "lvl3", "mylvl3"]
     ],
-    knights: [
-      ["units", "neutralunits", "knights"],
-      ["units", "oppunits", "knights", "oppknights"],
-      ["units", "myunits", "knights", "myknights"]
+    lvl2: [
+      ["units", "neutralunits", "lvl2"],
+      ["units", "oppunits", "lvl2", "opplvl2"],
+      ["units", "myunits", "lvl2", "mylvl2"]
     ],
-    rooks: [
-      ["units", "neutralunits", "rooks"],
-      ["units", "oppunits", "rooks", "opprooks"],
-      ["units", "myunits", "rooks", "myrooks"]
+    lvl1: [
+      ["units", "neutralunits", "lvl1"],
+      ["units", "oppunits", "lvl1", "opplvl1"],
+      ["units", "myunits", "lvl1", "mylvl1"]
+    ],
+    lvl0: [
+      ["units", "neutralunits", "lvl0"],
+      ["units", "oppunits", "lvl0", "opplvl0"],
+      ["units", "myunits", "lvl0", "mylvl0"]
     ]
   };
   game.action.startTurn2 = step => {
@@ -539,15 +580,18 @@ let game = {
       myunits: oldUnitLayers.oppunits,
       oppunits: oldUnitLayers.myunits,
       neutralunits: oldUnitLayers.neutralunits,
-      pawns: oldUnitLayers.pawns,
-      mypawns: oldUnitLayers.opppawns,
-      opppawns: oldUnitLayers.mypawns,
-      knights: oldUnitLayers.knights,
-      myknights: oldUnitLayers.oppknights,
-      oppknights: oldUnitLayers.myknights,
-      rooks: oldUnitLayers.rooks,
-      myrooks: oldUnitLayers.opprooks,
-      opprooks: oldUnitLayers.myrooks
+      lvl3: oldUnitLayers.lvl3,
+      mylvl3: oldUnitLayers.opplvl3,
+      opplvl3: oldUnitLayers.mylvl3,
+      lvl2: oldUnitLayers.lvl2,
+      mylvl2: oldUnitLayers.opplvl2,
+      opplvl2: oldUnitLayers.mylvl2,
+      lvl1: oldUnitLayers.lvl1,
+      mylvl1: oldUnitLayers.opplvl1,
+      opplvl1: oldUnitLayers.mylvl1,
+      lvl0: oldUnitLayers.lvl0,
+      mylvl0: oldUnitLayers.opplvl0,
+      opplvl0: oldUnitLayers.mylvl0
     };
     let LINKS = {
       marks: {},
@@ -574,14 +618,17 @@ let game = {
         { select: "Select" },
         collapseContent({
           line: [
-            Object.keys(UNITLAYERS.mypawns).length !== 0
-              ? { unittype: ["pawn", 2] }
+            Object.keys(UNITLAYERS.mylvl3).length !== 0
+              ? { unittype: ["queen", 2] }
               : undefined,
-            Object.keys(UNITLAYERS.myknights).length !== 0
+            Object.keys(UNITLAYERS.mylvl2).length !== 0
+              ? { unittype: ["rook", 2] }
+              : undefined,
+            Object.keys(UNITLAYERS.mylvl1).length !== 0
               ? { unittype: ["knight", 2] }
               : undefined,
-            Object.keys(UNITLAYERS.myrooks).length !== 0
-              ? { unittype: ["rook", 2] }
+            Object.keys(UNITLAYERS.mylvl0).length !== 0
+              ? { unittype: ["pawn", 2] }
               : undefined
           ]
             .filter(i => !!i)
@@ -601,7 +648,7 @@ let game = {
   };
   game.newBattle = () => {
     let UNITDATA = setup2army({
-      rooks: {
+      lvl3: {
         "0": [{ rect: ["a2", "d3"] }, "b4", "c1"],
         "1": ["a1", "c4", "d1"],
         "2": ["a4", "b1", "d4"]
@@ -612,15 +659,18 @@ let game = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      pawns: {},
-      mypawns: {},
-      opppawns: {},
-      knights: {},
-      myknights: {},
-      oppknights: {},
-      rooks: {},
-      myrooks: {},
-      opprooks: {}
+      lvl3: {},
+      mylvl3: {},
+      opplvl3: {},
+      lvl2: {},
+      mylvl2: {},
+      opplvl2: {},
+      lvl1: {},
+      mylvl1: {},
+      opplvl1: {},
+      lvl0: {},
+      mylvl0: {},
+      opplvl0: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -683,15 +733,18 @@ let game = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      pawns: {},
-      mypawns: {},
-      opppawns: {},
-      knights: {},
-      myknights: {},
-      oppknights: {},
-      rooks: {},
-      myrooks: {},
-      opprooks: {}
+      lvl3: {},
+      mylvl3: {},
+      opplvl3: {},
+      lvl2: {},
+      mylvl2: {},
+      opplvl2: {},
+      lvl1: {},
+      mylvl1: {},
+      opplvl1: {},
+      lvl0: {},
+      mylvl0: {},
+      opplvl0: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -704,7 +757,7 @@ let game = {
       let startconnections = connections[TURNVARS["movedto"]];
       for (let DIR of roseDirs) {
         let POS = startconnections[DIR];
-        if (POS && UNITLAYERS.neutralunits[POS]) {
+        if (POS && UNITLAYERS.neutralunits[POS] && !UNITLAYERS.lvl0[POS]) {
           ARTIFACTS.digtargets[POS] = emptyObj;
         }
       }
@@ -731,9 +784,9 @@ let game = {
         { text: "a neighbouring" },
         collapseContent({
           line: [
+            { unittype: ["queen", 0] },
             { unittype: ["rook", 0] },
-            { unittype: ["knight", 0] },
-            { unittype: ["pawn", 0] }
+            { unittype: ["knight", 0] }
           ]
             .filter(i => !!i)
             .reduce((mem, i, n, list) => {
@@ -760,19 +813,17 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let MARKS = step.MARKS;
-    if (UNITLAYERS.pawns[MARKS.selectdigtarget]) {
-      delete UNITDATA[(UNITLAYERS.units[MARKS.selectdigtarget] || {}).id];
-    } else {
-      {
-        let unitid = (UNITLAYERS.units[MARKS.selectdigtarget] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            group: UNITLAYERS.knights[MARKS.selectdigtarget]
-              ? "pawns"
-              : "knights"
-          };
-        }
+    {
+      let unitid = (UNITLAYERS.units[MARKS.selectdigtarget] || {}).id;
+      if (unitid) {
+        UNITDATA[unitid] = {
+          ...UNITDATA[unitid],
+          group: UNITLAYERS.lvl3[MARKS.selectdigtarget]
+            ? "lvl2"
+            : UNITLAYERS.lvl2[MARKS.selectdigtarget]
+            ? "lvl1"
+            : "lvl0"
+        };
       }
     }
     UNITLAYERS = {
@@ -780,15 +831,18 @@ let game = {
       myunits: {},
       oppunits: {},
       neutralunits: {},
-      pawns: {},
-      mypawns: {},
-      opppawns: {},
-      knights: {},
-      myknights: {},
-      oppknights: {},
-      rooks: {},
-      myrooks: {},
-      opprooks: {}
+      lvl3: {},
+      mylvl3: {},
+      opplvl3: {},
+      lvl2: {},
+      mylvl2: {},
+      opplvl2: {},
+      lvl1: {},
+      mylvl1: {},
+      opplvl1: {},
+      lvl0: {},
+      mylvl0: {},
+      opplvl0: {}
     };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
@@ -799,11 +853,13 @@ let game = {
     }
     {
       for (let STARTPOS in UNITLAYERS.myunits) {
-        let allowedsteps = UNITLAYERS.myrooks[STARTPOS]
-          ? UNITLAYERS.myrooks
-          : UNITLAYERS.myknights[STARTPOS]
-          ? UNITLAYERS.myknights
-          : UNITLAYERS.mypawns;
+        let allowedsteps = UNITLAYERS.mylvl3[STARTPOS]
+          ? UNITLAYERS.mylvl3
+          : UNITLAYERS.mylvl2[STARTPOS]
+          ? UNITLAYERS.mylvl2
+          : UNITLAYERS.mylvl1[STARTPOS]
+          ? UNITLAYERS.mylvl1
+          : UNITLAYERS.mylvl0;
         for (let DIR of roseDirs) {
           let walkedsquares = [];
           let POS = "faux";
@@ -855,11 +911,13 @@ let game = {
         let POS = startconnections[DIR];
         if (
           POS &&
-          (UNITLAYERS.rooks[MARKS.selectunit]
-            ? !UNITLAYERS.pawns[POS]
-            : UNITLAYERS.pawns[MARKS.selectunit]
-            ? !UNITLAYERS.rooks[POS]
-            : true)
+          (UNITLAYERS.lvl3[MARKS.selectunit]
+            ? !UNITLAYERS.lvl1[POS] && !UNITLAYERS.lvl0[POS]
+            : UNITLAYERS.lvl2[MARKS.selectunit]
+            ? !UNITLAYERS.lvl0[POS]
+            : UNITLAYERS.lvl1[MARKS.selectunit]
+            ? !UNITLAYERS.lvl3[POS]
+            : !UNITLAYERS.lvl2[POS] && !UNITLAYERS.lvl3[POS])
         ) {
           if (UNITLAYERS.neutralunits[POS]) {
             ARTIFACTS.movetargets[POS] = emptyObj;
@@ -889,12 +947,19 @@ let game = {
         { select: "Select" },
         collapseContent({
           line: [
-            !UNITLAYERS.mypawns[MARKS.selectunit]
+            !UNITLAYERS.lvl3[MARKS.selectunit] &&
+            !UNITLAYERS.lvl2[MARKS.selectunit]
+              ? { unittype: ["pawn", 0] }
+              : undefined,
+            !UNITLAYERS.lvl3[MARKS.selectunit]
+              ? { unittype: ["knight", 0] }
+              : undefined,
+            !UNITLAYERS.lvl0[MARKS.selectunit]
               ? { unittype: ["rook", 0] }
               : undefined,
-            { unittype: ["knight", 0] },
-            !UNITLAYERS.myrooks[MARKS.selectunit]
-              ? { unittype: ["pawn", 0] }
+            !UNITLAYERS.lvl0[MARKS.selectunit] &&
+            !UNITLAYERS.lvl1[MARKS.selectunit]
+              ? { unittype: ["queen", 0] }
               : undefined
           ]
             .filter(i => !!i)
@@ -955,8 +1020,11 @@ let game = {
         (UNITLAYERS.units[MARKS.selectunit] || {}).group ===
         (UNITLAYERS.units[MARKS.selectmovetarget] || {}).group
           ? { text: "walk" }
-          : UNITLAYERS.rooks[MARKS.selectunit] ||
-            UNITLAYERS.pawns[MARKS.selectmovetarget]
+          : UNITLAYERS.lvl3[MARKS.selectunit] ||
+            (UNITLAYERS.lvl2[MARKS.selectunit] &&
+              UNITLAYERS.lvl1[MARKS.selectmovetarget]) ||
+            (UNITLAYERS.lvl1[MARKS.selectunit] &&
+              UNITLAYERS.lvl0[MARKS.selectmovetarget])
           ? { text: "descend" }
           : { text: "climb" },
         { text: "to" },
@@ -982,7 +1050,26 @@ let game = {
   game.instruction.selectdigtarget2 = step => {
     let MARKS = step.MARKS;
     let UNITLAYERS = step.UNITLAYERS;
-    return UNITLAYERS.rooks[MARKS.selectdigtarget]
+    return UNITLAYERS.lvl3[MARKS.selectdigtarget]
+      ? collapseContent({
+          line: [
+            { text: "Press" },
+            { command: "dig" },
+            { text: "to turn" },
+            {
+              unit: [
+                iconMapping[
+                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
+                ],
+                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner,
+                MARKS.selectdigtarget
+              ]
+            },
+            { text: "to" },
+            { unittype: ["rook", 0] }
+          ]
+        })
+      : UNITLAYERS.lvl2[MARKS.selectdigtarget]
       ? collapseContent({
           line: [
             { text: "Press" },
@@ -1001,8 +1088,7 @@ let game = {
             { unittype: ["knight", 0] }
           ]
         })
-      : UNITLAYERS.knights[MARKS.selectdigtarget]
-      ? collapseContent({
+      : collapseContent({
           line: [
             { text: "Press" },
             { command: "dig" },
@@ -1018,22 +1104,6 @@ let game = {
             },
             { text: "to" },
             { unittype: ["pawn", 0] }
-          ]
-        })
-      : collapseContent({
-          line: [
-            { text: "Press" },
-            { command: "dig" },
-            { text: "to destroy" },
-            {
-              unit: [
-                iconMapping[
-                  (UNITLAYERS.units[MARKS.selectdigtarget] || {}).group
-                ],
-                (UNITLAYERS.units[MARKS.selectdigtarget] || {}).owner,
-                MARKS.selectdigtarget
-              ]
-            }
           ]
         });
   };

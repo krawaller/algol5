@@ -174,19 +174,24 @@ let game = {
           let WALKLENGTH = walkedsquares.length;
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
-            if (4 === WALKLENGTH) {
+            if (WALKLENGTH > 3) {
               ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else {
-      LINKS.endTurn = "startTurn2";
+    if (
+      Object.keys(ARTIFACTS.winline).length !== 0 ||
+      Object.keys(ARTIFACTS.uphill).length !== 0
+    ) {
+      if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
     }
     return {
       LINKS,
@@ -282,19 +287,24 @@ let game = {
           let WALKLENGTH = walkedsquares.length;
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
-            if (4 === WALKLENGTH) {
+            if (WALKLENGTH > 3) {
               ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else {
-      LINKS.endTurn = "startTurn2";
+    if (
+      Object.keys(ARTIFACTS.winline).length !== 0 ||
+      Object.keys(ARTIFACTS.downhill).length !== 0
+    ) {
+      if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
     }
     return {
       LINKS,
@@ -390,19 +400,24 @@ let game = {
           let WALKLENGTH = walkedsquares.length;
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
-            if (4 === WALKLENGTH) {
+            if (WALKLENGTH > 3) {
               ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else {
-      LINKS.endTurn = "startTurn2";
+    if (
+      Object.keys(ARTIFACTS.winline).length !== 0 ||
+      Object.keys(ARTIFACTS.horisontal).length !== 0
+    ) {
+      if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
     }
     return {
       LINKS,
@@ -498,19 +513,24 @@ let game = {
           let WALKLENGTH = walkedsquares.length;
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
-            if (4 === WALKLENGTH) {
+            if (WALKLENGTH > 3) {
               ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else {
-      LINKS.endTurn = "startTurn2";
+    if (
+      Object.keys(ARTIFACTS.winline).length !== 0 ||
+      Object.keys(ARTIFACTS.vertical).length !== 0
+    ) {
+      if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
     }
     return {
       LINKS,
@@ -559,18 +579,10 @@ let game = {
         }
       }
     }
-    if (Object.keys(ARTIFACTS.uphill).length !== 0) {
-      LINKS.commands.uphill = "uphill1";
-    }
-    if (Object.keys(ARTIFACTS.downhill).length !== 0) {
-      LINKS.commands.downhill = "downhill1";
-    }
-    if (Object.keys(ARTIFACTS.vertical).length !== 0) {
-      LINKS.commands.vertical = "vertical1";
-    }
-    if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
-      LINKS.commands.horisontal = "horisontal1";
-    }
+    LINKS.commands.uphill = "uphill1";
+    LINKS.commands.downhill = "downhill1";
+    LINKS.commands.vertical = "vertical1";
+    LINKS.commands.horisontal = "horisontal1";
     return {
       LINKS,
       ARTIFACTS,
@@ -773,19 +785,24 @@ let game = {
           let WALKLENGTH = walkedsquares.length;
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
-            if (4 === WALKLENGTH) {
+            if (WALKLENGTH > 3) {
               ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else {
-      LINKS.endTurn = "startTurn1";
+    if (
+      Object.keys(ARTIFACTS.winline).length !== 0 ||
+      Object.keys(ARTIFACTS.uphill).length !== 0
+    ) {
+      if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
     }
     return {
       LINKS,
@@ -881,19 +898,24 @@ let game = {
           let WALKLENGTH = walkedsquares.length;
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
-            if (4 === WALKLENGTH) {
+            if (WALKLENGTH > 3) {
               ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else {
-      LINKS.endTurn = "startTurn1";
+    if (
+      Object.keys(ARTIFACTS.winline).length !== 0 ||
+      Object.keys(ARTIFACTS.downhill).length !== 0
+    ) {
+      if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
     }
     return {
       LINKS,
@@ -989,19 +1011,24 @@ let game = {
           let WALKLENGTH = walkedsquares.length;
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
-            if (4 === WALKLENGTH) {
+            if (WALKLENGTH > 3) {
               ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else {
-      LINKS.endTurn = "startTurn1";
+    if (
+      Object.keys(ARTIFACTS.winline).length !== 0 ||
+      Object.keys(ARTIFACTS.horisontal).length !== 0
+    ) {
+      if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
     }
     return {
       LINKS,
@@ -1097,19 +1124,24 @@ let game = {
           let WALKLENGTH = walkedsquares.length;
           for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
             POS = walkedsquares[walkstepper];
-            if (4 === WALKLENGTH) {
+            if (WALKLENGTH > 3) {
               ARTIFACTS.winline[POS] = emptyObj;
             }
           }
         }
       }
     }
-    if (Object.keys(ARTIFACTS.winline).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.winline);
-    } else {
-      LINKS.endTurn = "startTurn1";
+    if (
+      Object.keys(ARTIFACTS.winline).length !== 0 ||
+      Object.keys(ARTIFACTS.vertical).length !== 0
+    ) {
+      if (Object.keys(ARTIFACTS.winline).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.winline);
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
     }
     return {
       LINKS,
@@ -1158,18 +1190,10 @@ let game = {
         }
       }
     }
-    if (Object.keys(ARTIFACTS.uphill).length !== 0) {
-      LINKS.commands.uphill = "uphill2";
-    }
-    if (Object.keys(ARTIFACTS.downhill).length !== 0) {
-      LINKS.commands.downhill = "downhill2";
-    }
-    if (Object.keys(ARTIFACTS.vertical).length !== 0) {
-      LINKS.commands.vertical = "vertical2";
-    }
-    if (Object.keys(ARTIFACTS.horisontal).length !== 0) {
-      LINKS.commands.horisontal = "horisontal2";
-    }
+    LINKS.commands.uphill = "uphill2";
+    LINKS.commands.downhill = "downhill2";
+    LINKS.commands.vertical = "vertical2";
+    LINKS.commands.horisontal = "horisontal2";
     return {
       LINKS,
       ARTIFACTS,

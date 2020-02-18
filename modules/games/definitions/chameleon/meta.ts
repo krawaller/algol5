@@ -3,12 +3,11 @@ import { ChameleonMeta } from "./_types";
 const chameleonMeta: ChameleonMeta = {
   code: "E",
   id: "chameleon",
-  performance: { canAlwaysEnd: {} },
   name: "Chameleon",
   tags: [],
-  tagline: "Chamachamachameleon!",
+  tagline: "Shapeshift your way into the opponent base!",
   source:
-    "https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess"
+    "https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess",
 };
 
 export default chameleonMeta;

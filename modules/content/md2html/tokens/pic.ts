@@ -11,14 +11,14 @@ export const pic: TokenHandler = opts => {
   if (!name) {
     throw new Error("Have to provide picture filename");
   }
+  if (!fs.existsSync(picSourcePath)) {
+    throw new Error("Could not find " + picSourcePath);
+  }
   if (!cred) {
     throw new Error("Must provide cred for image " + name);
   }
   if (!title) {
     throw new Error("Must provide title for image " + name);
-  }
-  if (!fs.existsSync(picSourcePath)) {
-    throw new Error("Could not find " + picSourcePath);
   }
   let src;
   if (inline) {

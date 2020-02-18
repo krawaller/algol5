@@ -11,7 +11,8 @@
     "fake": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/fake",
     "watch": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/watch",
     "validate": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/validate",
-    "checkCodes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/checkCodes"
+    "checkCodes": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/checkCodes",
+    "unusedCode": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/games/commands/unusedCode"
   },
   "devDependencies": {
     "watchr": "^4.1.0"

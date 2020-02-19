@@ -7,7 +7,7 @@ import { MomentumGraphics } from "./_types";
 
 const momentumGraphics: MomentumGraphics = {
   icons: {
-    stones: "rook",
+    stones: "pawn",
   },
   tiles: {},
 };

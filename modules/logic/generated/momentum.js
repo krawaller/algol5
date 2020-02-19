@@ -15,7 +15,7 @@ import {
 const emptyObj = {};
 const dimensions = { height: 7, width: 7 };
 const BOARD = boardLayers(dimensions);
-const iconMapping = { stones: "rook" };
+const iconMapping = { stones: "pawn" };
 const emptyArtifactLayers = { doomed: {}, pushed: {} };
 const connections = boardConnections({ height: 7, width: 7 });
 const relativeDirs = makeRelativeDirs([]);
@@ -25,7 +25,7 @@ let game = {
   action: {},
   instruction: {},
   commands: { drop: {} },
-  iconMap: { stones: "rook" }
+  iconMap: { stones: "pawn" }
 };
 {
   const groupLayers = {

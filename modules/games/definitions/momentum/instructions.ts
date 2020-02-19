@@ -11,7 +11,7 @@ const momentumInstructions: MomentumInstructions = {
           {
             line: [
               "one of your",
-              { value: { sizeof: "myunits" } },
+              { value: { minus: [8, { sizeof: "myunits" }] } },
               "remaining units",
             ],
           },
@@ -20,7 +20,33 @@ const momentumInstructions: MomentumInstructions = {
     ],
   },
   selectdroptarget: {
-    line: ["Press", "drop", "to spawn a unit at", "selectdroptarget"],
+    line: [
+      "Press",
+      "drop",
+      "to",
+      {
+        andlist: [
+          {
+            line: [
+              "spawn",
+              { unittypepos: ["stones", ["player"], "selectdroptarget"] },
+            ],
+          },
+          {
+            if: [
+              { notempty: "pushed" },
+              { line: ["push", { unitlist: "pushed" }] },
+            ],
+          },
+          {
+            if: [
+              { notempty: "doomed" },
+              { line: ["kill", { unitlist: "doomed" }] },
+            ],
+          },
+        ],
+      },
+    ],
   },
 };
 

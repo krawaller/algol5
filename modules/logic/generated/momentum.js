@@ -29,14 +29,19 @@ let game = {
 };
 {
   const groupLayers = {
-    stones: [["units"], ["units", "myunits"], ["units", "oppunits"]]
+    stones: [
+      ["units", "stones"],
+      ["units", "myunits", "stones"],
+      ["units", "oppunits", "stones"]
+    ]
   };
   game.action.startTurn1 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
-      oppunits: oldUnitLayers.myunits
+      oppunits: oldUnitLayers.myunits,
+      stones: oldUnitLayers.stones
     };
     let LINKS = {
       marks: {},
@@ -69,7 +74,7 @@ let game = {
           : collapseContent({
               line: [
                 { text: "one of your" },
-                { text: Object.keys(UNITLAYERS.myunits).length },
+                { text: 8 - Object.keys(UNITLAYERS.myunits).length },
                 { text: "remaining units" }
               ]
             })
@@ -130,7 +135,7 @@ let game = {
         }
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, stones: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -212,27 +217,107 @@ let game = {
     };
   };
   game.instruction.selectdroptarget1 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "drop" },
-        { text: "to spawn a unit at" },
-        { pos: MARKS.selectdroptarget }
+        { text: "to" },
+        collapseContent({
+          line: [
+            collapseContent({
+              line: [
+                { text: "spawn" },
+                { unit: ["pawn", 1, MARKS.selectdroptarget] }
+              ]
+            }),
+            Object.keys(ARTIFACTS.pushed).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "push" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.pushed)
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            iconMapping[UNITLAYERS.units[p].group],
+                            UNITLAYERS.units[p].owner,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    })
+                  ]
+                })
+              : undefined,
+            Object.keys(ARTIFACTS.doomed).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "kill" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.doomed)
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            iconMapping[UNITLAYERS.units[p].group],
+                            UNITLAYERS.units[p].owner,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    })
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " and " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
       ]
     });
   };
 }
 {
   const groupLayers = {
-    stones: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+    stones: [
+      ["units", "stones"],
+      ["units", "oppunits", "stones"],
+      ["units", "myunits", "stones"]
+    ]
   };
   game.action.startTurn2 = step => {
     const oldUnitLayers = step.UNITLAYERS;
     let UNITLAYERS = {
       units: oldUnitLayers.units,
       myunits: oldUnitLayers.oppunits,
-      oppunits: oldUnitLayers.myunits
+      oppunits: oldUnitLayers.myunits,
+      stones: oldUnitLayers.stones
     };
     let LINKS = {
       marks: {},
@@ -265,7 +350,7 @@ let game = {
           : collapseContent({
               line: [
                 { text: "one of your" },
-                { text: Object.keys(UNITLAYERS.myunits).length },
+                { text: 8 - Object.keys(UNITLAYERS.myunits).length },
                 { text: "remaining units" }
               ]
             })
@@ -277,7 +362,7 @@ let game = {
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA: {},
-      UNITLAYERS: { units: {}, myunits: {}, oppunits: {} }
+      UNITLAYERS: { units: {}, myunits: {}, oppunits: {}, stones: {} }
     });
   };
   game.action.drop2 = step => {
@@ -334,7 +419,7 @@ let game = {
         }
       }
     }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, stones: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
@@ -416,13 +501,88 @@ let game = {
     };
   };
   game.instruction.selectdroptarget2 = step => {
+    let ARTIFACTS = step.ARTIFACTS;
     let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
         { text: "Press" },
         { command: "drop" },
-        { text: "to spawn a unit at" },
-        { pos: MARKS.selectdroptarget }
+        { text: "to" },
+        collapseContent({
+          line: [
+            collapseContent({
+              line: [
+                { text: "spawn" },
+                { unit: ["pawn", 2, MARKS.selectdroptarget] }
+              ]
+            }),
+            Object.keys(ARTIFACTS.pushed).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "push" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.pushed)
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            iconMapping[UNITLAYERS.units[p].group],
+                            UNITLAYERS.units[p].owner,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    })
+                  ]
+                })
+              : undefined,
+            Object.keys(ARTIFACTS.doomed).length !== 0
+              ? collapseContent({
+                  line: [
+                    { text: "kill" },
+                    collapseContent({
+                      line: Object.keys(ARTIFACTS.doomed)
+                        .filter(p => UNITLAYERS.units[p])
+                        .map(p => ({
+                          unit: [
+                            iconMapping[UNITLAYERS.units[p].group],
+                            UNITLAYERS.units[p].owner,
+                            p
+                          ]
+                        }))
+                        .reduce((mem, i, n, list) => {
+                          mem.push(i);
+                          if (n === list.length - 2) {
+                            mem.push({ text: " and " });
+                          } else if (n < list.length - 2) {
+                            mem.push({ text: ", " });
+                          }
+                          return mem;
+                        }, [])
+                    })
+                  ]
+                })
+              : undefined
+          ]
+            .filter(i => !!i)
+            .reduce((mem, i, n, list) => {
+              mem.push(i);
+              if (n === list.length - 2) {
+                mem.push({ text: " and " });
+              } else if (n < list.length - 2) {
+                mem.push({ text: ", " });
+              }
+              return mem;
+            }, [])
+        })
       ]
     });
   };

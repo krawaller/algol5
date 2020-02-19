@@ -6,6 +6,8 @@ So in spite of being a very new game, we anticipate Gekitai remaining a favourit
 
 The game was added to [ME] in February 2020 during a lunch lecture for programmers at a top Fortune 500 company, showing off the versatility of the engine and how easy it is to add a new game.
 
+If Gekitai tickles your fancy you should also check out [GAME:gameId=gekitai], which shares a similar drop-push flow.
+
 External links:
 
 - [EXTLINK:text=BGG entry,url=https://boardgamegeek.com/boardgame/295449/gekitai]

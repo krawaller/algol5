@@ -3,11 +3,11 @@ import lib from "../../../games/dist/lib";
 import { allIcons } from "../../../graphics/dist/allIconSVGs";
 
 // Takes an UNIT token and turns it into an SVG pic! Expects args `group` and `owner`,
-// and optionally gameId
+// and optionally gameId and pos
 
 export const unit: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
-  let { group, owner, gameId } = args;
+  let { group, owner, gameId, pos } = args;
   if (!gameId) {
     if (thisGameId) {
       gameId = thisGameId;
@@ -35,5 +35,9 @@ export const unit: TokenHandler = opts => {
     );
   }
   const svg = allIcons[`${icon}${owner}SVG` as keyof typeof allIcons];
-  return `<span class="md-icon-svg">\n${svg}\n</span>`;
+  const innerHtml = `<span class="md-icon-svg">\n${svg}\n</span>`;
+  if (!pos) {
+    return innerHtml;
+  }
+  return `<span class="md-pos-with-unit" data-pos="${pos}">${pos} ${innerHtml}</span>`;
 };

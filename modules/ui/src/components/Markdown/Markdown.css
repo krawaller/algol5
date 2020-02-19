@@ -34,7 +34,8 @@
   font-size: 10px;
 }
 
-.md-pos {
+.md-pos,
+.md-pos-with-unit {
   background-color: #eee;
   padding: 3px;
   border: 1px solid black;

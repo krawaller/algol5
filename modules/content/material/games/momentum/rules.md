@@ -1,0 +1,1 @@
+Soon we will show the rules for Momentum here! In the meantime you can read them [EXTLINK:url=http://some.url.to.rules,text=here].

@@ -25,7 +25,7 @@ else
 
   if [ "$what" = "graphics" ] || [ "$what" = "" ]; then
     cd ../graphics;
-    npm run exportGameGraphics "$gameId";
+    npm run makeGameGraphics "$gameId";
   fi
 
   if [ "$what" = "demo" ] || [ "$what" = "" ]; then

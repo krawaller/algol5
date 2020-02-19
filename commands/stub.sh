@@ -20,6 +20,7 @@ cd ../battle;
 npm run exportGameAPIs
 npm run generateGameTests
 npm run makeDemo "$gameId"
+npm run exportDemos
 
 cd ../content;
 npm run stubGame "$gameId"

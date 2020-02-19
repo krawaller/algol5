@@ -19,7 +19,13 @@ export const insertTokens = (opts: InsertTokenOpts) => {
       );
       const fToken = token.toLowerCase() as keyof typeof tokenHandlers;
       if (!tokenHandlers[fToken]) {
-        throw new Error(`Unknown token: ${fToken}`);
+        throw new Error(
+          `Unknown token "${token}"! Available tokens: ${Object.keys(
+            tokenHandlers
+          )
+            .map(n => n.toUpperCase())
+            .join(", ")}`
+        );
       }
       return tokenHandlers[fToken]({
         args,

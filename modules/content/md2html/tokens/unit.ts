@@ -19,14 +19,21 @@ export const unit: TokenHandler = opts => {
   }
   const def = lib[gameId];
   if (!group) {
-    throw new Error("Have to provide unit group");
+    const groups = Object.keys(def.graphics.icons);
+    if (groups.length === 1) {
+      group = groups[0];
+    } else {
+      throw new Error(
+        "Have to provide unit group since there is more than 1 in the game"
+      );
+    }
   }
   const icon = def.graphics.icons[group as keyof typeof def.graphics.icons];
   if (!icon) {
     throw new Error(`No group "${group}" in graphics for ${gameId} `);
   }
   if (!owner) {
-    throw new Error(`Have to provide unit owner`);
+    owner = "12";
   }
   const okOwners = ["0", "1", "2", "01", "02", "12"];
   if (!okOwners.includes(owner)) {

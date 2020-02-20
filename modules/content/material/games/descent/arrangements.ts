@@ -11,8 +11,6 @@ import {
 // generated SVG when the content is written to html.
 export const arrangements: AlgolArrangements<DescentPosition, DescentUnit> = {
   levels: {
-    marks: [],
-    potentialMarks: [],
     setup: {
       lvl3: { 0: ["a1"] },
       lvl2: { 0: ["b1"] },

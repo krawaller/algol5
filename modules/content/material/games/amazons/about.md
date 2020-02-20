@@ -11,3 +11,4 @@ Links:
 - [EXTLINK:text=World of Abstract Games entry,url=http://www.di.fc.ul.pt/~jpn/gv/amazons.htm]
 - [EXTLINK:text=BGG entry,url=https://boardgamegeek.com/boardgame/2125/amazons]
 - [EXTLINK:text=Play at Little Golem,url=http://www.littlegolem.net/jsp/games/gamedetail.jsp?gtidEQUALSamzn]
+- [EXTLINK:text=Play at Super Duper Games,url=http://superdupergames.org/main.html?pageEQUALSlistgames#amazons]

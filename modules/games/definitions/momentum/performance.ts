@@ -2,7 +2,8 @@ import { MomentumPerformance } from "./_types";
 
 const momentumPerformance: MomentumPerformance = {
   canAlwaysEnd: {},
-  massiveTree: {}
+  massiveTree: {},
+  noEndGameCheck: ["pie"],
 };
 
 export default momentumPerformance;

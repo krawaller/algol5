@@ -11,7 +11,7 @@ export const arrangement2sprites = (
   opts: Arrangement2spritesOpts
 ): AlgolSprite[] => {
   const { arrangement, iconMap } = opts;
-  const { marks, potentialMarks, setup } = arrangement;
+  const { marks = [], potentialMarks = [], setup } = arrangement;
   const units = setup2army(setup);
   return board2sprites({
     iconMap,

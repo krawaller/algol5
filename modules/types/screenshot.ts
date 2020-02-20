@@ -20,8 +20,8 @@ export type AlgolArrangement<
   Position extends string = string,
   Unit extends string = AlgolIcon
 > = {
-  marks: Position[];
-  potentialMarks: Position[];
+  marks?: Position[];
+  potentialMarks?: Position[];
   setup: AlgolSetup<Position, Unit>;
 };
 

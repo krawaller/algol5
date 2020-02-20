@@ -123,9 +123,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    {
-      LINKS.endTurn = "startTurn2";
-    }
+    LINKS.endTurn = "startTurn2";
     return {
       LINKS,
       MARKS: {},
@@ -471,9 +469,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    {
-      LINKS.endTurn = "startTurn1";
-    }
+    LINKS.endTurn = "startTurn1";
     return {
       LINKS,
       MARKS: {},

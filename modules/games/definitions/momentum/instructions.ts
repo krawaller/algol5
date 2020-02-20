@@ -2,23 +2,52 @@ import { MomentumInstructions } from "./_types";
 
 const momentumInstructions: MomentumInstructions = {
   startTurn: {
-    line: [
-      "Select where to drop",
+    orlist: [
       {
-        ifelse: [
-          { same: [{ sizeof: "myunits" }, 7] },
-          { line: ["your last remaining unit"] },
+        line: [
+          "Select where to drop",
           {
-            line: [
-              "one of your",
-              { value: { minus: [8, { sizeof: "myunits" }] } },
-              "remaining units",
+            ifelse: [
+              { same: [{ sizeof: "myunits" }, 7] },
+              {
+                line: [
+                  "your last remaining",
+                  { unittype: ["stones", ["player"]] },
+                ],
+              },
+              {
+                line: [
+                  "one of your",
+                  { value: { minus: [8, { sizeof: "myunits" }] } },
+                  "remaining",
+                  { unittype: ["stones", ["player"]] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        ifplayer: [
+          2,
+          {
+            if: [
+              { same: [["turn"], 1] },
+              {
+                line: [
+                  "press",
+                  "pie",
+                  "to take over",
+                  { unitat: { onlyin: "units" } },
+                ],
+              },
             ],
           },
         ],
       },
     ],
   },
+
   selectdroptarget: {
     line: [
       "Press",

@@ -12,7 +12,6 @@ import {
 export const arrangements: AlgolArrangements<MomentumPosition, MomentumUnit> = {
   beforepush1: {
     marks: ["d5"],
-    potentialMarks: [],
     setup: {
       stones: {
         1: ["c6", "e6", "e5", "g5", "a4", "b5"],
@@ -21,8 +20,6 @@ export const arrangements: AlgolArrangements<MomentumPosition, MomentumUnit> = {
     },
   },
   afterpush1: {
-    marks: [],
-    potentialMarks: [],
     setup: {
       stones: {
         1: ["c6", "f7", "e5", "a4", "a5", "d5"],

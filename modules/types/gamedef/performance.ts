@@ -5,4 +5,5 @@ export type AlgolPerformance<Command extends string, Mark extends string> = {
   massiveTree?: Partial<
     { [actionName in Command | Mark | "startTurn"]: boolean }
   >;
+  noEndGameCheck?: Command[];
 };

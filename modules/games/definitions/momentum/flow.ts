@@ -7,9 +7,18 @@ const momentumFlow: MomentumFlow = {
     },
   },
   startTurn: {
-    link: "selectdroptarget",
+    links: [
+      "selectdroptarget",
+      {
+        ifplayer: [2, { if: [{ same: [["turn"], 1] }, "pie"] }],
+      },
+    ],
   },
   commands: {
+    pie: {
+      applyEffect: { adoptat: [{ onlyin: "oppunits" }, ["player"]] },
+      link: "endTurn",
+    },
     drop: {
       applyEffects: [
         { spawnat: ["selectdroptarget", "stones"] },

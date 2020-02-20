@@ -12,7 +12,6 @@ import {
 export const arrangements: AlgolArrangements<GekitaiPosition, GekitaiUnit> = {
   beforepush1: {
     marks: ["b2"],
-    potentialMarks: [],
     setup: {
       markers: {
         1: ["a1", "c2", "e3"],
@@ -21,8 +20,6 @@ export const arrangements: AlgolArrangements<GekitaiPosition, GekitaiUnit> = {
     },
   },
   afterpush1: {
-    marks: [],
-    potentialMarks: [],
     setup: {
       markers: {
         1: ["b2", "c2", "e3"],

@@ -4,7 +4,7 @@ Afterwards the momentum of the dropped unit travels outwards in all 8 directions
 
 [ARR:name=beforepush1,from=a5,to=g7]
 
-If [PLR:who=1] made a [CMND:name=drop] at [POS:at=a5] in this board state, this would be the result:
+If [PLR:who=1] made a [CMND:name=drop] at [POS:at=d5] in this board state, this would be the result:
 
 [ARR:name=afterpush1,from=a5,to=g7]
 

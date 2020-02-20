@@ -1,13 +1,13 @@
-Soon we will show the rules for Amazons here! In the meantime you can read them [EXTLINK:url=http://www.chessvariants.org/other.dir/amazons.html,text=here].
+Amazons is played on a {DIM} board with the following setup:
 
-(pls excuse nonsense below here, just trying out the content engine!)
+{SETUP}
 
-How to play [GAME:gameId=amazons]! Much more fun than [GAME:gameId=serauqs]
+Each player controls 4 {UNIT:group=amazons}, who move like chess queens.
 
-Cannot walk across [UNIT:group=fires,who=0] since they burn.
+On their turn a player must first {CMND:name=move} a {UNIT:group=amazons}. They cannot pass or capture any other unit.
 
-The [UNIT:group=amazons] works like this:
+After moving they must {CMND:name=fire} a {UNIT:group=fires,owner=0} from the square they moved to. They can fire just like they move - along any straight line, not crossing any other units.
 
-Look here!
+The last player to be able to make a turn wins!
 
-[ARR:name=gnork,from=b3,to=f5]
+Draws are not possible.

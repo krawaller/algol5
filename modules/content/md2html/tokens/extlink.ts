@@ -8,5 +8,8 @@ export const extlink: TokenHandler = opts => {
   if (!url) {
     throw new Error("Have to provide extlink url!");
   }
-  return `<a class="md-external-link" href="${url}" target="_blank" rel="noopener">${text}</a>`;
+  return `<a class="md-external-link" href="${url.replace(
+    /EQUALS/g,
+    "="
+  )}" target="_blank" rel="noopener">${text}</a>`;
 };

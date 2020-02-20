@@ -7,7 +7,7 @@ import { encodePic } from "../../utils";
 
 export const pic: TokenHandler = opts => {
   const { args, picSourcePath, gameId, picRefPath } = opts;
-  const { name, inline, title, cred } = args;
+  let { name, inline, title, cred } = args;
   if (!name) {
     throw new Error("Have to provide picture filename");
   }
@@ -20,6 +20,7 @@ export const pic: TokenHandler = opts => {
   if (!title) {
     throw new Error("Must provide title for image " + name);
   }
+  title = title.replace(/COMMA/g, ",");
   let src;
   if (inline) {
     src = encodePic(path.join(picSourcePath, name));

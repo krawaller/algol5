@@ -152,7 +152,6 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    let TURN = step.TURN;
     let MARKS = step.MARKS;
     {
       let newunitid = "spawn" + NEXTSPAWNID++;
@@ -180,39 +179,12 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
-      Object.keys(
-        Object.entries(
-          Object.keys(UNITLAYERS.mykings)
-            .concat(Object.keys(TERRAIN.opphomerow))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length !== 0
-    ) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "infiltration";
-      LINKS.endMarks = Object.keys(
-        Object.entries(
-          Object.keys(UNITLAYERS.mykings)
-            .concat(Object.keys(TERRAIN.opphomerow))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      );
-    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else {
-      LINKS.endTurn = "startTurn2";
-    }
+    LINKS.endTurn = "startTurn2";
     return {
       LINKS,
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
-      TURN,
+      TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
       NEXTSPAWNID
@@ -814,7 +786,6 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     let UNITDATA = { ...step.UNITDATA };
     let NEXTSPAWNID = step.NEXTSPAWNID;
-    let TURN = step.TURN;
     let MARKS = step.MARKS;
     {
       let newunitid = "spawn" + NEXTSPAWNID++;
@@ -842,39 +813,12 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (
-      Object.keys(
-        Object.entries(
-          Object.keys(UNITLAYERS.mykings)
-            .concat(Object.keys(TERRAIN.opphomerow))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length !== 0
-    ) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "infiltration";
-      LINKS.endMarks = Object.keys(
-        Object.entries(
-          Object.keys(UNITLAYERS.mykings)
-            .concat(Object.keys(TERRAIN.opphomerow))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      );
-    } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
-    } else {
-      LINKS.endTurn = "startTurn1";
-    }
+    LINKS.endTurn = "startTurn1";
     return {
       LINKS,
       MARKS: {},
       ARTIFACTS: step.ARTIFACTS,
-      TURN,
+      TURN: step.TURN,
       UNITDATA,
       UNITLAYERS,
       NEXTSPAWNID

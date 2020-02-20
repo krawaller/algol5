@@ -453,12 +453,7 @@ let game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    if (Object.keys(UNITLAYERS.myunits).length === 8) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "allout";
-    } else {
-      LINKS.endTurn = "startTurn1";
-    }
+    LINKS.endTurn = "startTurn1";
     return {
       LINKS,
       MARKS: {},

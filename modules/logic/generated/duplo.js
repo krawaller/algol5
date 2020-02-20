@@ -123,20 +123,7 @@ let game = {
       }
     }
     if (Object.keys(UNITLAYERS.mysoldiers).length > 1) {
-      if (Object.keys(UNITLAYERS.units).length === 64) {
-        LINKS.endGame = ["draw", "win", "lose"][
-          Object.keys(UNITLAYERS.myunits).length >
-          Object.keys(UNITLAYERS.oppunits).length
-            ? 1
-            : Object.keys(UNITLAYERS.oppunits).length ===
-              Object.keys(UNITLAYERS.myunits).length
-            ? 0
-            : 2
-        ];
-        LINKS.endedBy = "boardfull";
-      } else {
-        LINKS.endTurn = "startTurn2";
-      }
+      LINKS.endTurn = "startTurn2";
     } else {
       for (const pos of Object.keys(
         Object.keys(BOARD.board)
@@ -569,20 +556,7 @@ let game = {
       }
     }
     if (Object.keys(UNITLAYERS.mysoldiers).length > 1) {
-      if (Object.keys(UNITLAYERS.units).length === 64) {
-        LINKS.endGame = ["draw", "lose", "win"][
-          Object.keys(UNITLAYERS.myunits).length >
-          Object.keys(UNITLAYERS.oppunits).length
-            ? 2
-            : Object.keys(UNITLAYERS.oppunits).length ===
-              Object.keys(UNITLAYERS.myunits).length
-            ? 0
-            : 1
-        ];
-        LINKS.endedBy = "boardfull";
-      } else {
-        LINKS.endTurn = "startTurn1";
-      }
+      LINKS.endTurn = "startTurn1";
     } else {
       for (const pos of Object.keys(
         Object.keys(BOARD.board)

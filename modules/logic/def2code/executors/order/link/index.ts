@@ -50,11 +50,13 @@ function executeLinkInner(
 `;
   } else if (name === "endTurn") {
     // ------------- Linking to next turn, have to check win conditions
+    if ((gameDef.performance.noEndGameCheck || []).includes(action)) {
+      return `LINKS.endTurn = "startTurn${player === 1 ? 2 : 1}"; `;
+    }
     return Object.entries(gameDef.flow.endGame || {})
       .filter(
         ([name, def]) =>
           def.unlessAction !== action &&
-          !actionDef.noEndGame &&
           (!def.ifPlayer || def.ifPlayer === player)
       )
       .sort(([, d1], [, d2]) =>

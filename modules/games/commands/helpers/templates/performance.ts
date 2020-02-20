@@ -4,7 +4,8 @@ export default function templatePerformance(gameId: string) {
 
 const ${gameId}Performance: ${capId}Performance = {
   canAlwaysEnd: {},
-  massiveTree: {}
+  massiveTree: {},
+  noEndGameCheck: []
 };
 
 export default ${gameId}Performance;

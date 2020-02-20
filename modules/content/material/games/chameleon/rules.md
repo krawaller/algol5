@@ -2,22 +2,22 @@ Chameleon is played on a [DIM] board with the following setup:
 
 [SETUP]
 
-Players take turn to move one of their [UNIT:group=knights,owner=12] or [UNIT:group=bishops,owner=12]:
+Players take turn to move one of their [UNIT:group=knights] or [UNIT:group=bishops]:
 
-- A [UNIT:group=knights,owner=12] moves like a chess knight or a chess king
-- A [UNIT:group=bishops,owner=12] moves like a chess bishop or a chess king
+- A [UNIT:group=knights] moves like a chess knight or a chess king
+- A [UNIT:group=bishops] moves like a chess bishop or a chess king
 
 Both units capture opponent units by replacement.
 
 Here's the twist:
 
-- When you move from a light square to a dark square or vice versa, the unit will become a [UNIT:group=knights,owner=12]
-- When you move from light to light or dark to dark, the unit becomes a [UNIT:group=bishops,owner=12]
+- When you move from a light square to a dark square or vice versa, the unit will become a [UNIT:group=knights]
+- When you move from light to light or dark to dark, the unit becomes a [UNIT:group=bishops]
 
 This can also be phrased like this:
 
-- A [UNIT:group=knights,owner=12] becomes a [UNIT:group=bishops,owner=12] when it takes a diagonal "king" step
-- A [UNIT:group=bishops,owner=12] becomes a [UNIT:group=knights,owner=12] when it takes an orthogonal "king" step
+- A [UNIT:group=knights] becomes a [UNIT:group=bishops] when it takes a diagonal "king" step
+- A [UNIT:group=bishops] becomes a [UNIT:group=knights] when it takes an orthogonal "king" step
 
 There are three win conditions:
 

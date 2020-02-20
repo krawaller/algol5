@@ -2,12 +2,12 @@ import { TokenHandler } from "./_handler";
 import lib from "../../../games/dist/lib";
 import { allIcons } from "../../../graphics/dist/allIconSVGs";
 
-// Takes an UNIT token and turns it into an SVG pic! Expects args `group` and `owner`,
-// and optionally gameId and pos
+// Takes an UNIT token and turns it into an SVG pic! Expects args `group` and `who`,
+// and optionally gameId and at
 
 export const unit: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
-  let { group, owner, gameId, pos } = args;
+  let { group, who, gameId, at } = args;
   if (!gameId) {
     if (thisGameId) {
       gameId = thisGameId;
@@ -32,19 +32,19 @@ export const unit: TokenHandler = opts => {
   if (!icon) {
     throw new Error(`No group "${group}" in graphics for ${gameId} `);
   }
-  if (!owner) {
-    owner = "12";
+  if (!who) {
+    who = "12";
   }
   const okOwners = ["0", "1", "2", "01", "02", "12"];
-  if (!okOwners.includes(owner)) {
+  if (!okOwners.includes(who)) {
     throw new Error(
-      `Illegal owner "${owner}", must be one of ${okOwners.join(",")}`
+      `Illegal 'who' "${who}", must be one of ${okOwners.join(",")}`
     );
   }
-  const svg = allIcons[`${icon}${owner}SVG` as keyof typeof allIcons];
+  const svg = allIcons[`${icon}${who}SVG` as keyof typeof allIcons];
   const innerHtml = `<span class="md-icon-svg">\n${svg}\n</span>`;
-  if (!pos) {
+  if (!at) {
     return innerHtml;
   }
-  return `<span class="md-pos-with-unit" data-pos="${pos}">${pos} ${innerHtml}</span>`;
+  return `<span class="md-pos-with-unit" data-pos="${at}">${at} ${innerHtml}</span>`;
 };

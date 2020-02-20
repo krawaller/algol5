@@ -10,7 +10,7 @@ So if [PLR:who=1] were to [CMND] at [POS:at=b2] in this board state...
 
 [ARR:name=afterpush1,from=a1,to=f3]
 
-The [POS:at=a1] and [POS:at=a2] units were both pushed off board, and [POS:at=b3] was pushed to [POS:at=b4]. Nothing happened to [POS:at=c2], since the [POS:at=d2] unit blocks the push.
+Both [UNIT:at=a1,who=1] and [UNIT:at=a2,who=2] were pushed off board, and [UNIT:at=b3,who=2] was pushed to [POS:at=b4]. Nothing happened to [POS:at=c2], since the [POS:at=d2] unit blocks the push.
 
 After a drop we check for the following in order:
 

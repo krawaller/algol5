@@ -1,10 +1,12 @@
-Momentum is played on an initially empty [DIM] board. Players take turn to [CMND] a [UNIT] onto the board.
+Momentum is played on an initially empty [DIM] board. Players take turn to [CMND:name=drop] a [UNIT] onto the board.
+
+After the first [CMND:name=drop] by [PLR:who=1], [PLR:who=2] can choose [CMND:name=pie] to take over the placed [UNIT:who=1].
 
 Afterwards the momentum of the dropped unit travels outwards in all 8 directions, going through adjacent units, and the last dropped unit in each line will be pushed.
 
 [ARR:name=beforepush1,from=a5,to=g7]
 
-If [PLR:who=1] made a [CMND] at [POS:at=d5] in this board state, this would be the result:
+If [PLR:who=1] made a [CMND:name=drop] at [POS:at=d5] in this board state, this would be the result:
 
 [ARR:name=afterpush1,from=a5,to=g7]
 

@@ -24,7 +24,7 @@ let game = {
   gameId: "momentum",
   action: {},
   instruction: {},
-  commands: { drop: {} },
+  commands: { pie: {}, drop: {} },
   iconMap: { stones: "pawn" }
 };
 {
@@ -68,17 +68,38 @@ let game = {
     let UNITLAYERS = step.UNITLAYERS;
     return collapseContent({
       line: [
-        { text: "Select where to drop" },
-        Object.keys(UNITLAYERS.myunits).length === 7
-          ? collapseContent({ line: [{ text: "your last remaining unit" }] })
-          : collapseContent({
-              line: [
-                { text: "one of your" },
-                { text: 8 - Object.keys(UNITLAYERS.myunits).length },
-                { text: "remaining units" }
-              ]
-            })
+        collapseContent({
+          line: [
+            { text: "Select where to drop" },
+            Object.keys(UNITLAYERS.myunits).length === 7
+              ? collapseContent({
+                  line: [
+                    { text: "your last remaining" },
+                    { unittype: ["pawn", 1] }
+                  ]
+                })
+              : collapseContent({
+                  line: [
+                    { text: "one of your" },
+                    { text: 8 - Object.keys(UNITLAYERS.myunits).length },
+                    { text: "remaining" },
+                    { unittype: ["pawn", 1] }
+                  ]
+                })
+          ]
+        }),
+        undefined
       ]
+        .filter(i => !!i)
+        .reduce((mem, i, n, list) => {
+          mem.push(i);
+          if (n === list.length - 2) {
+            mem.push({ text: " or " });
+          } else if (n < list.length - 2) {
+            mem.push({ text: ", " });
+          }
+          return mem;
+        }, [])
     });
   };
   game.action.drop1 = step => {
@@ -323,6 +344,7 @@ let game = {
       marks: {},
       commands: {}
     };
+    let TURN = step.TURN;
     for (const pos of Object.keys(
       Object.keys(BOARD.board)
         .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
@@ -330,31 +352,75 @@ let game = {
     )) {
       LINKS.marks[pos] = "selectdroptarget2";
     }
+    if (TURN === 1) {
+      LINKS.commands.pie = "pie2";
+    }
     return {
       UNITDATA: step.UNITDATA,
       LINKS,
       UNITLAYERS,
       ARTIFACTS: emptyArtifactLayers,
       MARKS: {},
-      TURN: step.TURN,
+      TURN,
       NEXTSPAWNID: step.NEXTSPAWNID
     };
   };
   game.instruction.startTurn2 = step => {
     let UNITLAYERS = step.UNITLAYERS;
+    let TURN = step.TURN;
     return collapseContent({
       line: [
-        { text: "Select where to drop" },
-        Object.keys(UNITLAYERS.myunits).length === 7
-          ? collapseContent({ line: [{ text: "your last remaining unit" }] })
-          : collapseContent({
+        collapseContent({
+          line: [
+            { text: "Select where to drop" },
+            Object.keys(UNITLAYERS.myunits).length === 7
+              ? collapseContent({
+                  line: [
+                    { text: "your last remaining" },
+                    { unittype: ["pawn", 2] }
+                  ]
+                })
+              : collapseContent({
+                  line: [
+                    { text: "one of your" },
+                    { text: 8 - Object.keys(UNITLAYERS.myunits).length },
+                    { text: "remaining" },
+                    { unittype: ["pawn", 2] }
+                  ]
+                })
+          ]
+        }),
+        TURN === 1
+          ? collapseContent({
               line: [
-                { text: "one of your" },
-                { text: 8 - Object.keys(UNITLAYERS.myunits).length },
-                { text: "remaining units" }
+                { text: "press" },
+                { command: "pie" },
+                { text: "to take over" },
+                {
+                  unit: [
+                    iconMapping[
+                      (UNITLAYERS.units[Object.keys(UNITLAYERS.units)[0]] || {})
+                        .group
+                    ],
+                    (UNITLAYERS.units[Object.keys(UNITLAYERS.units)[0]] || {})
+                      .owner,
+                    Object.keys(UNITLAYERS.units)[0]
+                  ]
+                }
               ]
             })
+          : undefined
       ]
+        .filter(i => !!i)
+        .reduce((mem, i, n, list) => {
+          mem.push(i);
+          if (n === list.length - 2) {
+            mem.push({ text: " or " });
+          } else if (n < list.length - 2) {
+            mem.push({ text: ", " });
+          }
+          return mem;
+        }, [])
     });
   };
   game.newBattle = () => {
@@ -365,6 +431,45 @@ let game = {
       UNITLAYERS: { units: {}, myunits: {}, oppunits: {}, stones: {} }
     });
   };
+  game.action.pie2 = step => {
+    let LINKS = { marks: {}, commands: {} };
+    let UNITLAYERS = step.UNITLAYERS;
+    let UNITDATA = { ...step.UNITDATA };
+    {
+      let unitid = (UNITLAYERS.units[Object.keys(UNITLAYERS.oppunits)[0]] || {})
+        .id;
+      if (unitid) {
+        UNITDATA[unitid] = {
+          ...UNITDATA[unitid],
+          owner: 2
+        };
+      }
+    }
+    UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, stones: {} };
+    for (let unitid in UNITDATA) {
+      const currentunit = UNITDATA[unitid];
+      const { group, pos, owner } = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
+    }
+    if (Object.keys(UNITLAYERS.myunits).length === 8) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "allout";
+    } else {
+      LINKS.endTurn = "startTurn1";
+    }
+    return {
+      LINKS,
+      MARKS: {},
+      ARTIFACTS: step.ARTIFACTS,
+      TURN: step.TURN,
+      UNITDATA,
+      UNITLAYERS,
+      NEXTSPAWNID: step.NEXTSPAWNID
+    };
+  };
+  game.instruction.pie2 = () => defaultInstruction(2);
   game.action.drop2 = step => {
     let LINKS = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };

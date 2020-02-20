@@ -13,7 +13,11 @@ export const stubGame = (gameId: GameId) => {
     );
     writeFileSync(
       path.join(out, `rules.md`),
-      `Soon we will show the rules for ${meta[gameId].name} here! In the meantime you can read them [EXTLINK:url=${meta[gameId].source},text=here].`
+      `${meta[gameId].name} is played on a {DIM} board with the following setup:
+
+{SETUP}
+
+Soon we will show the rules for ${meta[gameId].name} here! In the meantime you can read them {EXTLINK:url=${meta[gameId].source},text=here}.`
     );
     fs.ensureDirSync(path.join(out, `pics`));
     const cap = gameId[0].toUpperCase() + gameId.slice(1);

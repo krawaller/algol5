@@ -60,22 +60,25 @@ export function renderGradient(opts: RenderGradientOpts) {
     (height - stopRow + 1) * svgPicSide + (svgPicSide - svgFrameSide);
   if (startRow > 0) {
     defs += bottomGradient;
-    grads += `<rect fill="url(#bottomGradient)" x="${xStart}" y="${bottomY +
+    grads += `<rect fill="url(#bottomGradient)" x="${xStart - 1}" y="${bottomY +
       picHeight -
-      svgFrameSide}" width="${xEnd - xStart}" height="${svgFrameSide}" />`;
+      svgFrameSide}" width="${xEnd - xStart + 2}" height="${svgFrameSide}" />`;
   }
   if (stopCol - 1 < width) {
     defs += rightGradient;
     grads += `<rect fill="url(#rightGradient)" x="${xEnd -
-      svgFrameSide}" y="${bottomY}" width="${svgFrameSide}" height="${picHeight}" />`;
+      svgFrameSide -
+      1}" y="${bottomY}" width="${svgFrameSide + 2}" height="${picHeight}" />`;
   }
   if (stopRow - 1 < height) {
     defs += topGradient;
-    grads += `<rect fill="url(#topGradient)" x="${xStart}" y="${bottomY}" width="${picWidth}" height="${svgFrameSide}" />`;
+    grads += `<rect fill="url(#topGradient)" x="${xStart -
+      1}" y="${bottomY}" width="${picWidth + 2}" height="${svgFrameSide}" />`;
   }
   if (startCol > 0) {
     defs += leftGradient;
-    grads += `<rect fill="url(#leftGradient)" x="${xStart}" y="${bottomY}" width="${svgFrameSide}" height="${picHeight}" />`;
+    grads += `<rect fill="url(#leftGradient)" x="${xStart -
+      1}" y="${bottomY}" width="${svgFrameSide + 2}" height="${picHeight}" />`;
   }
   return defs ? `<defs>${defs}</defs><g>${grads}</g>` : "";
 }

@@ -4,9 +4,15 @@ On her turn a player selects a neutral {UNIT:who=0} on the board to make into he
 
 On the very first turn of the game there are no {UNIT:who=0}, so {PLR:who=1} gets to place a {UNIT:who=1} in any location.
 
+<div class="md-example">
+
+In this game {PLR:who=1} first placed {UNIT:at=b2,who=1} and chose {CMND:name=uphill}. {PLR:who=2} then chose {UNIT:at=d4,who=2} and {CMND:name=horisontal}.
+
 {ARR:name=example1}
 
-In this game {PLR:who=1} first placed {UNIT:at=b2,who=1} and chose {CMND:name=uphill}. {PLR:who=2} then chose {UNIT:at=d4,who=2} and {CMND:name=horisontal}. Now {PLR:who=1} gets to pick between {POS:at=a4}, {POS:at=b4}, {POS:at=c4} or {POS:at=e4}.
+Now {PLR:who=1} gets to pick between {POS:at=a4}, {POS:at=b4}, {POS:at=c4} or {POS:at=e4}.
+
+</div>
 
 There are two endgame conditions:
 

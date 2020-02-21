@@ -65,10 +65,28 @@
 .md-2col {
   display: flex;
   justify-content: space-between;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .md-2col > * {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 49%;
+}
+
+.md-example {
+  background-color: #bbb;
+  padding: 12px;
+  border-radius: 4px;
   margin-top: 1em;
   margin-bottom: 1em;
-  width: 49%;
+}
+
+.md-example > :first-child {
+  margin-top: 0;
+}
+
+.md-example > :last-child {
+  margin-bottom: 0;
 }

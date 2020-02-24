@@ -11,11 +11,28 @@ export const writeGame = (gameId: GameId) => {
   const content: Record<string, string> = {};
   const arrs: AlgolArrangements = require(`../../material/games/${gameId}/arrangements`)
     .arrangements;
+  const links: Record<
+    string,
+    string
+  > = require(`../../material/games/${gameId}/links`).links;
   const picSourcePath = path.join(source, "pics");
   fs.ensureDirSync(picSourcePath);
   const allGamePreloads = [];
   for (const file of ["about", "rules"]) {
-    const md = readFileSync(path.join(source, `${file}.md`)).toString();
+    let md = readFileSync(path.join(source, `${file}.md`)).toString();
+    if (file === "about") {
+      const entries = Object.entries(links);
+      if (entries.length) {
+        md +=
+          `\n\nExternal links:\n\n` +
+          entries
+            .map(
+              ([text, url]) =>
+                `- {EXTLINK:text=${text},url=${url.replace(/=/g, "EQUALS")}}`
+            )
+            .join("\n");
+      }
+    }
     const picRefPath = `/images/games/${gameId}/`;
     const { html, preloads } = md2html({
       md,

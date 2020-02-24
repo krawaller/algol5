@@ -2,6 +2,8 @@ Gekitai is played on an initially empty {DIM} board. Each player has 8 offboard 
 
 A newly dropped unit will **push** adjacent units, unless there is another unit in the way behind it. Units pushed off the board are removed.
 
+<div class="md-example">
+
 So if {PLR:who=1} were to {CMND} at {POS:at=b2} in this board state...
 
 {ARR:name=beforepush1,from=a1,to=f3}
@@ -10,7 +12,9 @@ So if {PLR:who=1} were to {CMND} at {POS:at=b2} in this board state...
 
 {ARR:name=afterpush1,from=a1,to=f3}
 
-Both {UNIT:at=a1,who=1} and {UNIT:at=a2,who=2} were pushed off board, and {UNIT:at=b3,who=2} was pushed to {POS:at=b4}. Nothing happened to {POS:at=c2}, since the {POS:at=d2} unit blocks the push.
+Both {UNIT:at=a1,who=1} and {UNIT:at=a2,who=2} were pushed off board, and {UNIT:at=b3,who=2} was pushed to {POS:at=b4}. {UNIT:at=c2,who=1} stays put since {UNIT:at=d2,who=2} blocks the push.
+
+</div>
 
 After a drop we check for the following in order:
 

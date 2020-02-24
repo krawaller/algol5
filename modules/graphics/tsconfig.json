@@ -1,6 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "types": ["./graph-global.d.ts"]
-  }
+  "compilerOptions": {},
+  "include": ["./graph-global.d.ts"]
 }

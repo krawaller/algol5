@@ -10,23 +10,23 @@ type RenderGradientOpts = {
 };
 
 const bottomGradient = `<linearGradient id="bottomGradient" x1="0" x2="0" y1="0" y2="1">
-<stop offset="0%" stop-color="white" stop-opacity="0"/>
-<stop offset="100%" stop-color="white" stop-opacity="1"/>
+<stop offset="0%" stop-color="black" stop-opacity="0"/>
+<stop offset="100%" stop-color="black" stop-opacity="1"/>
 </linearGradient>`.replace(/\n/g, "");
 
 const topGradient = `<linearGradient id="topGradient" x1="0" x2="0" y1="1" y2="0">
-<stop offset="0%" stop-color="white" stop-opacity="0"/>
-<stop offset="100%" stop-color="white" stop-opacity="1"/>
+<stop offset="0%" stop-color="black" stop-opacity="0"/>
+<stop offset="100%" stop-color="black" stop-opacity="1"/>
 </linearGradient>`.replace(/\n/g, "");
 
 const rightGradient = `<linearGradient id="rightGradient" x1="0" x2="1" y1="0" y2="0">
-<stop offset="0%" stop-color="white" stop-opacity="0"/>
-<stop offset="100%" stop-color="white" stop-opacity="1"/>
+<stop offset="0%" stop-color="black" stop-opacity="0"/>
+<stop offset="100%" stop-color="black" stop-opacity="1"/>
 </linearGradient>`.replace(/\n/g, "");
 
 const leftGradient = `<linearGradient id="leftGradient" x1="1" x2="0" y1="0" y2="0">
-<stop offset="0%" stop-color="white" stop-opacity="0"/>
-<stop offset="100%" stop-color="white" stop-opacity="1"/>
+<stop offset="0%" stop-color="black" stop-opacity="0"/>
+<stop offset="100%" stop-color="black" stop-opacity="1"/>
 </linearGradient>`.replace(/\n/g, "");
 
 export function renderGradient(opts: RenderGradientOpts) {
@@ -40,8 +40,6 @@ export function renderGradient(opts: RenderGradientOpts) {
     stopCol,
     xStart,
     xEnd,
-    yStart,
-    yEnd,
     picHeight,
     picWidth,
   } = getBounds({
@@ -60,22 +58,31 @@ export function renderGradient(opts: RenderGradientOpts) {
     (height - stopRow + 1) * svgPicSide + (svgPicSide - svgFrameSide);
   if (startRow > 0) {
     defs += bottomGradient;
-    grads += `<rect fill="url(#bottomGradient)" x="${xStart}" y="${bottomY +
+    grads += `<rect fill="url(#bottomGradient)" x="${xStart - 1}" y="${bottomY +
       picHeight -
-      svgFrameSide}" width="${xEnd - xStart}" height="${svgFrameSide}" />`;
+      svgFrameSide}" width="${xEnd - xStart + 2}" height="${svgFrameSide}" />`;
   }
   if (stopCol - 1 < width) {
     defs += rightGradient;
     grads += `<rect fill="url(#rightGradient)" x="${xEnd -
-      svgFrameSide}" y="${bottomY}" width="${svgFrameSide}" height="${picHeight}" />`;
+      svgFrameSide -
+      1}" y="${bottomY}" width="${svgFrameSide + 2}" height="${picHeight}" />`;
   }
   if (stopRow - 1 < height) {
     defs += topGradient;
-    grads += `<rect fill="url(#topGradient)" x="${xStart}" y="${bottomY}" width="${picWidth}" height="${svgFrameSide}" />`;
+    grads += `<rect fill="url(#topGradient)" x="${xStart -
+      1}" y="${bottomY}" width="${picWidth + 2}" height="${svgFrameSide}" />`;
   }
   if (startCol > 0) {
     defs += leftGradient;
-    grads += `<rect fill="url(#leftGradient)" x="${xStart}" y="${bottomY}" width="${svgFrameSide}" height="${picHeight}" />`;
+    grads += `<rect fill="url(#leftGradient)" x="${xStart -
+      1}" y="${bottomY}" width="${svgFrameSide + 2}" height="${picHeight}" />`;
   }
-  return defs ? `<defs>${defs}</defs><g>${grads}</g>` : "";
+  if (!defs) {
+    return "";
+  }
+  const calcYstart =
+    (height - stopRow + 1) * svgPicSide + (pad ? svgPicSide - svgFrameSide : 0);
+  const rect = `<rect fill="white" x=${xStart} y=${calcYstart} width=${picWidth} height=${picHeight} />`;
+  return `<defs>${defs}</defs><g>${rect}${grads}</g>`;
 }

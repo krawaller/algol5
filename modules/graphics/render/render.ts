@@ -30,10 +30,19 @@ export function render(opts: RenderOpts) {
     to,
     pad,
   });
-
   const calcYstart =
     (height - stopRow + 1) * svgPicSide + (pad ? svgPicSide - svgFrameSide : 0);
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${xStart} ${calcYstart} ${picWidth} ${picHeight}">${frame}${inner}${gradients}</svg>`;
+
+  const rand =
+    "M" +
+    Math.random()
+      .toString()
+      .slice(1);
+  const content = gradients
+    ? `<mask id="${rand}">${gradients}</mask><g mask="url(#${rand})">${frame}${inner}</g>`
+    : `${frame}${inner}`;
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${xStart} ${calcYstart} ${picWidth} ${picHeight}">${content}</svg>`;
 
   return formatXml(svg);
 }

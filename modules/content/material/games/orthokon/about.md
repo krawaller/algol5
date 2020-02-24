@@ -1,4 +1,4 @@
-Orthokon was invented by L. Lynn Smith in 2001.
+Orthokon was invented by Larry Lynn Smith in 2001.
 
 {PIC:name=orthokon.png,cred=Photo by Kátia Kurianski,title=Plush Orthokon!}
 

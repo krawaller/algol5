@@ -20,13 +20,16 @@ import meta from "../../../../games/dist/meta/${gameId}";
 import demo from "../../../../battle/dist/demos/${gameId}";
 import { about } from "../../../../content/dist/games/${gameId}/about";
 import { rules } from "../../../../content/dist/games/${gameId}/rules";
+import { preloads } from "../../../../content/dist/games/${gameId}/preloads";
 const html = { about, rules };
 
 export const Game = () => {
+  const preloadTags = preloads.map(url => <link key={url} rel="preload" as="image" href={url} /> )
   return (
     <Fragment>
       <Head>
         <title>{meta.name}</title>
+        {preloadTags}
       </Head>
       <GamePage
         api={api}

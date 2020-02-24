@@ -21,14 +21,17 @@ export const writeGame = (gameId: GameId) => {
   for (const file of ["about", "rules"]) {
     let md = readFileSync(path.join(source, `${file}.md`)).toString();
     if (file === "about") {
-      md +=
-        `\nExternal links:\n\n` +
-        Object.entries(links)
-          .map(
-            ([text, url]) =>
-              `- {EXTLINK:text=${text},url=${url.replace(/=/g, "EQUALS")}}`
-          )
-          .join("\n");
+      const entries = Object.entries(links);
+      if (entries.length) {
+        md +=
+          `\n\nExternal links:\n\n` +
+          entries
+            .map(
+              ([text, url]) =>
+                `- {EXTLINK:text=${text},url=${url.replace(/=/g, "EQUALS")}}`
+            )
+            .join("\n");
+      }
     }
     const picRefPath = `/images/games/${gameId}/`;
     const { html, preloads } = md2html({

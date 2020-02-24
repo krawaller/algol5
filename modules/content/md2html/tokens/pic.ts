@@ -6,7 +6,7 @@ import { encodePic } from "../../utils";
 // Takes a PIC token and inlines it as dataURI image. expects `name`, `cred` and `title`
 
 export const pic: TokenHandler = opts => {
-  const { args, picSourcePath, gameId, picRefPath } = opts;
+  const { args, picSourcePath, picRefPath } = opts;
   let { name, inline, title, cred } = args;
   if (!name) {
     throw new Error("Have to provide picture filename");
@@ -28,7 +28,7 @@ export const pic: TokenHandler = opts => {
     if (!picRefPath) {
       throw new Error("Refered pic " + name + " but no picRefPath provided!");
     }
-    src = `/images/games/${gameId}/${name}`;
+    src = `${picRefPath}/${name}`.replace("//", "/");
   }
   return `<div class="md-img"><img src="${src}" alt="${title}" title="${title}" />${
     cred

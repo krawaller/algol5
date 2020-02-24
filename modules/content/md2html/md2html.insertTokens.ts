@@ -1,3 +1,4 @@
+import path from "path";
 import { tokenHandlers } from "./tokens";
 import { TokenHandlerOpts } from "./tokens/_handler";
 
@@ -7,7 +8,8 @@ type InsertTokenOpts = {
 
 export const insertTokens = (opts: InsertTokenOpts) => {
   const { md, arrs, gameId, yaml, picSourcePath, picRefPath } = opts;
-  return md.replace(
+  const preloads: string[] = [];
+  const markdown = md.replace(
     /\{([A-Z]{2,}):?([^\}]*)\}/g,
     (_: string, token: string, instr: string) => {
       const args = instr.split(",").reduce(
@@ -27,6 +29,9 @@ export const insertTokens = (opts: InsertTokenOpts) => {
             .join(", ")}`
         );
       }
+      if (fToken === "pic" && picRefPath && args.name) {
+        preloads.push(path.join(picRefPath, args.name));
+      }
       return tokenHandlers[fToken]({
         args,
         arrs,
@@ -37,4 +42,5 @@ export const insertTokens = (opts: InsertTokenOpts) => {
       });
     }
   );
+  return { markdown, preloads };
 };

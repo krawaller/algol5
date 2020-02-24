@@ -25,7 +25,7 @@ export const writeNews = (date: string) => {
   const thumbdata = encodePic(thumbPath);
   const picRefPath = `/images/news/${date}`;
 
-  const html = md2html({ md, picSourcePath, picRefPath });
+  const { html } = md2html({ md, picSourcePath, picRefPath });
   writeFileSync(path.join(out, `news.html`), html);
 
   const exported = `export const news = \`${html}\`\n`;

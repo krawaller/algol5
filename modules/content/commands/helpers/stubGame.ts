@@ -11,6 +11,7 @@ export const stubGame = (gameId: GameId) => {
       path.join(out, `about.md`),
       `${meta[gameId].name}! ${meta[gameId].tagline}. More yabber about the game to come!`
     );
+    writeFileSync(path.join(out, `links.ts`), `export const links = {};\n`);
     writeFileSync(
       path.join(out, `rules.md`),
       `${meta[gameId].name} is played on a {DIM} board with the following setup:

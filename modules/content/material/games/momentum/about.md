@@ -7,7 +7,3 @@ Games of Momentum are typically very fast, as players take turn to drop their un
 If you enjoy Momentum make sure to also try {GAME:gameId=gekitai}, which plays very similarly!
 
 Momentum was added to {ME} during a lunch lecture at {EXTLINK:url=https://www.edument.se/,text=Edument}, showing off the engine to their programmers.
-
-- {EXTLINK:url=https://nestorgames.com/#momentum_detail,text=Nestor Games entry}
-- {EXTLINK:url=https://boardgamegeek.com/boardgame/73091/momentum,text=BGG entry}
-- {EXTLINK:url=http://www.iggamecenter.com/info/en/momentum.html,text=IG Game center entry}

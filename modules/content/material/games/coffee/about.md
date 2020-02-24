@@ -11,9 +11,3 @@ Since the board inevitably fills up, Coffee always maintain a cutthroat pace and
 When you buy Coffee from Nestor Games you get both a hex and a square board (and enough pieces to play both in parallell), where {ME} implements only the latter.
 
 The Nestor version have you dictate opponent options through putting a rod on your newly deployed unit (which gives a coffee bean look, hence the game name), while in {ME} the opponent options are represented by neutral units instead.
-
-Links:
-
-- {EXTLINK:text=Nestor games entry,url=https://nestorgames.com/#coffee_detail}
-- {EXTLINK:text=BGG entry,url=http://www.boardgamegeek.com/boardgame/94746}
-- {EXTLINK:text=IG Game Center entry,url=http://www.iggamecenter.com/info/en/coffee.html}

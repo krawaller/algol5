@@ -19,6 +19,7 @@ const iconMapping = { seals: "king", bears: "queen", holes: "pawn" };
 const emptyArtifactLayers = {
   eattargets: {},
   movetargets: {},
+  jumptargets: {},
   canmove: {},
   cracks: {}
 };
@@ -44,7 +45,7 @@ let game = {
   gameId: "gowiththefloe",
   action: {},
   instruction: {},
-  commands: { move: {}, eat: {} },
+  commands: { move: {}, jump: {}, eat: {} },
   iconMap: { seals: "king", bears: "queen", holes: "pawn" }
 };
 {
@@ -105,6 +106,7 @@ let game = {
     let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
+      jumptargets: step.ARTIFACTS.jumptargets,
       cracks: step.ARTIFACTS.cracks,
       canmove: {}
     };
@@ -197,9 +199,104 @@ let game = {
     };
   };
   game.instruction.move1 = () => defaultInstruction(1);
+  game.action.jump1 = step => {
+    let LINKS = { marks: {}, commands: {} };
+    let ARTIFACTS = {
+      movetargets: step.ARTIFACTS.movetargets,
+      jumptargets: step.ARTIFACTS.jumptargets,
+      canmove: {}
+    };
+    let UNITLAYERS = step.UNITLAYERS;
+    let UNITDATA = { ...step.UNITDATA };
+    let NEXTSPAWNID = step.NEXTSPAWNID;
+    let MARKS = step.MARKS;
+    {
+      let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+      if (unitid) {
+        UNITDATA[unitid] = {
+          ...UNITDATA[unitid],
+          pos: MARKS.selectjumptarget
+        };
+      }
+    }
+    {
+      let newunitid = "spawn" + NEXTSPAWNID++;
+      UNITDATA[newunitid] = {
+        pos: MARKS.selectunit,
+        id: newunitid,
+        group: "holes",
+        owner: 0
+      };
+    }
+    UNITLAYERS = {
+      units: {},
+      myunits: {},
+      oppunits: {},
+      seals: {},
+      bears: {},
+      holes: {}
+    };
+    for (let unitid in UNITDATA) {
+      const currentunit = UNITDATA[unitid];
+      const { group, pos, owner } = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
+    }
+    {
+      for (let STARTPOS in UNITLAYERS.seals) {
+        for (let DIR of roseDirs) {
+          let MAX = 2;
+          let POS = STARTPOS;
+          let walkpositionstocount = Object.keys(TERRAIN.nowater)
+            .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
+            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+          let CURRENTCOUNT = 0;
+          let LENGTH = 0;
+          while (LENGTH < MAX && (POS = connections[POS][DIR])) {
+            CURRENTCOUNT += walkpositionstocount[POS] ? 1 : 0;
+            LENGTH++;
+          }
+          let TOTALCOUNT = CURRENTCOUNT;
+          POS = STARTPOS;
+          if (TOTALCOUNT > 0) {
+            ARTIFACTS.canmove[POS] = emptyObj;
+          }
+        }
+      }
+    }
+    if (Object.keys(UNITLAYERS.seals).length === 0) {
+      LINKS.endGame = "lose";
+      LINKS.endedBy = "sealseaten";
+    } else if (
+      Object.keys(ARTIFACTS.canmove).length !==
+      Object.keys(UNITLAYERS.seals).length
+    ) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "safeseal";
+      LINKS.endMarks = Object.keys(
+        Object.keys(UNITLAYERS.seals)
+          .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+      );
+    } else {
+      LINKS.endTurn = "startTurn2";
+    }
+    return {
+      LINKS,
+      MARKS: {},
+      ARTIFACTS,
+      TURN: step.TURN,
+      UNITDATA,
+      UNITLAYERS,
+      NEXTSPAWNID
+    };
+  };
+  game.instruction.jump1 = () => defaultInstruction(1);
   game.action.selectunit1 = (step, newMarkPos) => {
     let ARTIFACTS = {
-      movetargets: {}
+      movetargets: {},
+      jumptargets: {}
     };
     let LINKS = { marks: {}, commands: {} };
     let MARKS = {
@@ -210,7 +307,8 @@ let game = {
       let BLOCKS = {
         ...UNITLAYERS.seals,
         ...UNITLAYERS.bears,
-        ...TERRAIN.water
+        ...TERRAIN.water,
+        ...UNITLAYERS.holes
       };
       for (let DIR of roseDirs) {
         let MAX = 2;
@@ -218,14 +316,53 @@ let game = {
         let LENGTH = 0;
         while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
           LENGTH++;
-          if (!UNITLAYERS.holes[POS]) {
-            ARTIFACTS.movetargets[POS] = { dir: DIR };
+          ARTIFACTS.movetargets[POS] = { dir: DIR };
+        }
+      }
+    }
+    {
+      let allowedsteps = UNITLAYERS.holes;
+      let BLOCKS = Object.keys(BOARD.board)
+        .filter(
+          k =>
+            !UNITLAYERS.units.hasOwnProperty(k) &&
+            !TERRAIN.water.hasOwnProperty(k) &&
+            !UNITLAYERS.holes.hasOwnProperty(k)
+        )
+        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+      for (let DIR of roseDirs) {
+        let walkedsquares = [];
+        let STOPREASON = "";
+        let MAX = 1;
+        let POS = MARKS.selectunit;
+        let LENGTH = 0;
+        while (
+          !(STOPREASON = !(POS = connections[POS][DIR])
+            ? "outofbounds"
+            : BLOCKS[POS]
+            ? "hitblock"
+            : !allowedsteps[POS]
+            ? "nomoresteps"
+            : LENGTH === MAX
+            ? "reachedmax"
+            : null)
+        ) {
+          walkedsquares.push(POS);
+          LENGTH++;
+        }
+        let WALKLENGTH = walkedsquares.length;
+        if (BLOCKS[POS]) {
+          if (WALKLENGTH === 1) {
+            ARTIFACTS.jumptargets[POS] = emptyObj;
           }
         }
       }
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
       LINKS.marks[pos] = "selectmovetarget1";
+    }
+    for (const pos of Object.keys(ARTIFACTS.jumptargets)) {
+      LINKS.marks[pos] = "selectjumptarget1";
     }
     return {
       LINKS,
@@ -257,6 +394,7 @@ let game = {
   game.action.selectmovetarget1 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
+      jumptargets: step.ARTIFACTS.jumptargets,
       cracks: {}
     };
     let LINKS = { marks: {}, commands: {} };
@@ -264,7 +402,6 @@ let game = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
     };
-    let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = { [MARKS.selectunit]: 1 };
       let POS = MARKS.selectmovetarget;
@@ -277,9 +414,7 @@ let game = {
           ]) &&
         !BLOCKS[POS]
       ) {
-        if (!UNITLAYERS.holes[POS]) {
-          ARTIFACTS.cracks[POS] = emptyObj;
-        }
+        ARTIFACTS.cracks[POS] = emptyObj;
       }
       if (BLOCKS[POS]) {
         ARTIFACTS.cracks[POS] = emptyObj;
@@ -289,7 +424,7 @@ let game = {
     return {
       LINKS,
       ARTIFACTS,
-      UNITLAYERS,
+      UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
@@ -314,6 +449,42 @@ let game = {
         },
         { text: "to" },
         { pos: MARKS.selectmovetarget }
+      ]
+    });
+  };
+  game.action.selectjumptarget1 = (step, newMarkPos) => {
+    let LINKS = { marks: {}, commands: {} };
+    LINKS.commands.jump = "jump1";
+    return {
+      LINKS,
+      ARTIFACTS: step.ARTIFACTS,
+      UNITLAYERS: step.UNITLAYERS,
+      UNITDATA: step.UNITDATA,
+      TURN: step.TURN,
+      MARKS: {
+        selectunit: step.MARKS.selectunit,
+        selectjumptarget: newMarkPos
+      },
+      NEXTSPAWNID: step.NEXTSPAWNID
+    };
+  };
+  game.instruction.selectjumptarget1 = step => {
+    let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "jump" },
+        { text: "to make" },
+        {
+          unit: [
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            MARKS.selectunit
+          ]
+        },
+        { text: "jump to" },
+        { pos: MARKS.selectjumptarget }
       ]
     });
   };
@@ -403,6 +574,7 @@ let game = {
     let LINKS = { marks: {}, commands: {} };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
+      jumptargets: step.ARTIFACTS.jumptargets,
       eattargets: step.ARTIFACTS.eattargets,
       cracks: step.ARTIFACTS.cracks,
       canmove: {}
@@ -496,11 +668,107 @@ let game = {
     };
   };
   game.instruction.move2 = () => defaultInstruction(2);
+  game.action.jump2 = step => {
+    let LINKS = { marks: {}, commands: {} };
+    let ARTIFACTS = {
+      movetargets: step.ARTIFACTS.movetargets,
+      jumptargets: step.ARTIFACTS.jumptargets,
+      eattargets: step.ARTIFACTS.eattargets,
+      canmove: {}
+    };
+    let UNITLAYERS = step.UNITLAYERS;
+    let UNITDATA = { ...step.UNITDATA };
+    let NEXTSPAWNID = step.NEXTSPAWNID;
+    let MARKS = step.MARKS;
+    {
+      let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+      if (unitid) {
+        UNITDATA[unitid] = {
+          ...UNITDATA[unitid],
+          pos: MARKS.selectjumptarget
+        };
+      }
+    }
+    {
+      let newunitid = "spawn" + NEXTSPAWNID++;
+      UNITDATA[newunitid] = {
+        pos: MARKS.selectunit,
+        id: newunitid,
+        group: "holes",
+        owner: 0
+      };
+    }
+    UNITLAYERS = {
+      units: {},
+      myunits: {},
+      oppunits: {},
+      seals: {},
+      bears: {},
+      holes: {}
+    };
+    for (let unitid in UNITDATA) {
+      const currentunit = UNITDATA[unitid];
+      const { group, pos, owner } = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
+    }
+    {
+      for (let STARTPOS in UNITLAYERS.seals) {
+        for (let DIR of roseDirs) {
+          let MAX = 2;
+          let POS = STARTPOS;
+          let walkpositionstocount = Object.keys(TERRAIN.nowater)
+            .filter(k => !UNITLAYERS.holes.hasOwnProperty(k))
+            .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+          let CURRENTCOUNT = 0;
+          let LENGTH = 0;
+          while (LENGTH < MAX && (POS = connections[POS][DIR])) {
+            CURRENTCOUNT += walkpositionstocount[POS] ? 1 : 0;
+            LENGTH++;
+          }
+          let TOTALCOUNT = CURRENTCOUNT;
+          POS = STARTPOS;
+          if (TOTALCOUNT > 0) {
+            ARTIFACTS.canmove[POS] = emptyObj;
+          }
+        }
+      }
+    }
+    if (Object.keys(UNITLAYERS.seals).length === 0) {
+      LINKS.endGame = "win";
+      LINKS.endedBy = "sealseaten";
+    } else if (
+      Object.keys(ARTIFACTS.canmove).length !==
+      Object.keys(UNITLAYERS.seals).length
+    ) {
+      LINKS.endGame = "lose";
+      LINKS.endedBy = "safeseal";
+      LINKS.endMarks = Object.keys(
+        Object.keys(UNITLAYERS.seals)
+          .filter(k => !ARTIFACTS.canmove.hasOwnProperty(k))
+          .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
+      );
+    } else {
+      LINKS.endTurn = "startTurn1";
+    }
+    return {
+      LINKS,
+      MARKS: {},
+      ARTIFACTS,
+      TURN: step.TURN,
+      UNITDATA,
+      UNITLAYERS,
+      NEXTSPAWNID
+    };
+  };
+  game.instruction.jump2 = () => defaultInstruction(2);
   game.action.eat2 = step => {
     let LINKS = { marks: {}, commands: {} };
     let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
+      jumptargets: step.ARTIFACTS.jumptargets,
       eattargets: step.ARTIFACTS.eattargets,
       canmove: {}
     };
@@ -579,6 +847,7 @@ let game = {
   game.action.selectunit2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: {},
+      jumptargets: {},
       eattargets: {}
     };
     let LINKS = { marks: {}, commands: {} };
@@ -590,7 +859,8 @@ let game = {
       let BLOCKS = {
         ...UNITLAYERS.seals,
         ...UNITLAYERS.bears,
-        ...TERRAIN.water
+        ...TERRAIN.water,
+        ...UNITLAYERS.holes
       };
       for (let DIR of roseDirs) {
         let MAX = 2;
@@ -598,8 +868,44 @@ let game = {
         let LENGTH = 0;
         while (LENGTH < MAX && (POS = connections[POS][DIR]) && !BLOCKS[POS]) {
           LENGTH++;
-          if (!UNITLAYERS.holes[POS]) {
-            ARTIFACTS.movetargets[POS] = { dir: DIR };
+          ARTIFACTS.movetargets[POS] = { dir: DIR };
+        }
+      }
+    }
+    {
+      let allowedsteps = UNITLAYERS.holes;
+      let BLOCKS = Object.keys(BOARD.board)
+        .filter(
+          k =>
+            !UNITLAYERS.units.hasOwnProperty(k) &&
+            !TERRAIN.water.hasOwnProperty(k) &&
+            !UNITLAYERS.holes.hasOwnProperty(k)
+        )
+        .reduce((m, k) => ({ ...m, [k]: emptyObj }), {});
+      for (let DIR of roseDirs) {
+        let walkedsquares = [];
+        let STOPREASON = "";
+        let MAX = 1;
+        let POS = MARKS.selectunit;
+        let LENGTH = 0;
+        while (
+          !(STOPREASON = !(POS = connections[POS][DIR])
+            ? "outofbounds"
+            : BLOCKS[POS]
+            ? "hitblock"
+            : !allowedsteps[POS]
+            ? "nomoresteps"
+            : LENGTH === MAX
+            ? "reachedmax"
+            : null)
+        ) {
+          walkedsquares.push(POS);
+          LENGTH++;
+        }
+        let WALKLENGTH = walkedsquares.length;
+        if (BLOCKS[POS]) {
+          if (WALKLENGTH === 1) {
+            ARTIFACTS.jumptargets[POS] = emptyObj;
           }
         }
       }
@@ -615,6 +921,9 @@ let game = {
     }
     for (const pos of Object.keys(ARTIFACTS.movetargets)) {
       LINKS.marks[pos] = "selectmovetarget2";
+    }
+    for (const pos of Object.keys(ARTIFACTS.jumptargets)) {
+      LINKS.marks[pos] = "selectjumptarget2";
     }
     for (const pos of Object.keys(ARTIFACTS.eattargets)) {
       LINKS.marks[pos] = "selecteattarget2";
@@ -656,6 +965,7 @@ let game = {
   game.action.selectmovetarget2 = (step, newMarkPos) => {
     let ARTIFACTS = {
       movetargets: step.ARTIFACTS.movetargets,
+      jumptargets: step.ARTIFACTS.jumptargets,
       eattargets: step.ARTIFACTS.eattargets,
       cracks: {}
     };
@@ -664,7 +974,6 @@ let game = {
       selectunit: step.MARKS.selectunit,
       selectmovetarget: newMarkPos
     };
-    let UNITLAYERS = step.UNITLAYERS;
     {
       let BLOCKS = { [MARKS.selectunit]: 1 };
       let POS = MARKS.selectmovetarget;
@@ -677,9 +986,7 @@ let game = {
           ]) &&
         !BLOCKS[POS]
       ) {
-        if (!UNITLAYERS.holes[POS]) {
-          ARTIFACTS.cracks[POS] = emptyObj;
-        }
+        ARTIFACTS.cracks[POS] = emptyObj;
       }
       if (BLOCKS[POS]) {
         ARTIFACTS.cracks[POS] = emptyObj;
@@ -689,7 +996,7 @@ let game = {
     return {
       LINKS,
       ARTIFACTS,
-      UNITLAYERS,
+      UNITLAYERS: step.UNITLAYERS,
       UNITDATA: step.UNITDATA,
       TURN: step.TURN,
       MARKS,
@@ -714,6 +1021,42 @@ let game = {
         },
         { text: "to" },
         { pos: MARKS.selectmovetarget }
+      ]
+    });
+  };
+  game.action.selectjumptarget2 = (step, newMarkPos) => {
+    let LINKS = { marks: {}, commands: {} };
+    LINKS.commands.jump = "jump2";
+    return {
+      LINKS,
+      ARTIFACTS: step.ARTIFACTS,
+      UNITLAYERS: step.UNITLAYERS,
+      UNITDATA: step.UNITDATA,
+      TURN: step.TURN,
+      MARKS: {
+        selectunit: step.MARKS.selectunit,
+        selectjumptarget: newMarkPos
+      },
+      NEXTSPAWNID: step.NEXTSPAWNID
+    };
+  };
+  game.instruction.selectjumptarget2 = step => {
+    let MARKS = step.MARKS;
+    let UNITLAYERS = step.UNITLAYERS;
+    return collapseContent({
+      line: [
+        { text: "Press" },
+        { command: "jump" },
+        { text: "to make" },
+        {
+          unit: [
+            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+            MARKS.selectunit
+          ]
+        },
+        { text: "jump to" },
+        { pos: MARKS.selectjumptarget }
       ]
     });
   };

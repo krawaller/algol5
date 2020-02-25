@@ -6,4 +6,6 @@ export const links = {
   "Zillions of Games entry":
     "http://www.zillionsofgames.com/cgi-bin/zilligames/submissions.cgi?do=show;id=876",
   "Play at Dagaz Project": "https://glukkazan.github.io/arrange/musketeers.htm",
+  "Play at IG Game Center":
+    "http://www.iggamecenter.com/info/en/threemusk.html",
 };

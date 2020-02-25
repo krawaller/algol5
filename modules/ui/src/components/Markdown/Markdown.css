@@ -34,6 +34,10 @@
   font-size: 10px;
 }
 
+.md-img-info a {
+  color: white !important;
+}
+
 .md-pos,
 .md-pos-with-unit {
   background-color: #eee;

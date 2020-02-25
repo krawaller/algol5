@@ -7,7 +7,7 @@ import { encodePic } from "../../utils";
 
 export const pic: TokenHandler = opts => {
   const { args, picSourcePath, picRefPath } = opts;
-  let { name, inline, title, cred } = args;
+  let { name, inline, title, cred, credurl } = args;
   if (!name) {
     throw new Error("Have to provide picture filename");
   }
@@ -30,9 +30,12 @@ export const pic: TokenHandler = opts => {
     }
     src = `${picRefPath}/${name}`.replace("//", "/");
   }
-  return `<div class="md-img"><img src="${src}" alt="${title}" title="${title}" />${
-    cred
-      ? `<div class="md-img-info"><span>${title}</span><span>${cred}</span></div>`
-      : ""
-  }</div>`;
+  return `<div class="md-img"><img src="${src}" alt="${title}" title="${title}" /><div class="md-img-info"><span>${title}</span>${
+    credurl
+      ? `<span><a href="${credurl.replace(
+          /EQUALS/g,
+          "="
+        )}" target="_blank" rel="noopener">${cred}</a></span>`
+      : `<span>${cred}</span>`
+  }</div></div>`;
 };

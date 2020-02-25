@@ -1,4 +1,4 @@
-{PIC:name=granite.jpg,title=Gekitai in granite,cred=Photo by Scott Brady}
+{PIC:name=granite.jpg,title=Gekitai in granite,cred=Photo by Scott Brady,credurl=https://www.boardgamegeek.com/image/5200489/gekitai}
 
 Gekitai, which is japanese for "repel", is a game by Scott Brady introduced in 2020. We were immediately smitten by how the simple rules offered deep strategies, and how the dual win conditions made the choices even more delicious.
 

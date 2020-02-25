@@ -1,6 +1,6 @@
 Momentum is another great game from Philip Leduc, the mastermind behind the splendid {GAME:gameId=murusgallicus}.
 
-{PIC:name=momentum.jpg,cred=Photo by Nestor Games,title=The Nestor edition}
+{PIC:name=momentum.jpg,cred=Photo by Nestor Games,title=The Nestor edition,credurl=https://nestorgames.com/#momentum_detail}
 
 Games of Momentum are typically very fast, as players take turn to drop their units onto the board, pushing each other around as they try to get all pieces out.
 

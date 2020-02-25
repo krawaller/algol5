@@ -62,7 +62,8 @@
   font-weight: bold;
 }
 
-.md-2col {
+.md-2col,
+.md-3col {
   display: flex;
   justify-content: space-between;
   margin-top: 1em;
@@ -73,6 +74,12 @@
   margin-top: 0;
   margin-bottom: 0;
   width: 49%;
+}
+
+.md-3col > * {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 32%;
 }
 
 .md-example {

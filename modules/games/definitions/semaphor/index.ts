@@ -5,7 +5,7 @@ import { SemaphorDefinition } from "./_types";
 import semaphorAI from "./ai";
 import semaphorAnim from "./anim";
 import semaphorBoard from "./board";
-import semaphorSetup from "./setup";
+import semaphorSetupBook from "./setups";
 import semaphorGraphics from "./graphics";
 import semaphorInstruction from "./instructions";
 import semaphorMeta from "./meta";
@@ -18,14 +18,14 @@ const semaphorDefinition: SemaphorDefinition = {
   AI: semaphorAI,
   anim: semaphorAnim,
   board: semaphorBoard,
-  setup: semaphorSetup,
+  setups: semaphorSetupBook,
   graphics: semaphorGraphics,
   instructions: semaphorInstruction,
   generators: semaphorGenerators,
   meta: semaphorMeta,
   performance: semaphorPerformance,
   flow: semaphorFlow,
-  scripts: semaphorScripts
+  scripts: semaphorScripts,
 };
 
 export default semaphorDefinition;

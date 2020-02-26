@@ -5,7 +5,7 @@ import { ChameleonDefinition } from "./_types";
 import chameleonAI from "./ai";
 import chameleonAnim from "./anim";
 import chameleonBoard from "./board";
-import chameleonSetup from "./setup";
+import chameleonSetupBook from "./setups";
 import chameleonGraphics from "./graphics";
 import chameleonInstruction from "./instructions";
 import chameleonMeta from "./meta";
@@ -18,14 +18,14 @@ const chameleonDefinition: ChameleonDefinition = {
   AI: chameleonAI,
   anim: chameleonAnim,
   board: chameleonBoard,
-  setup: chameleonSetup,
+  setups: chameleonSetupBook,
   graphics: chameleonGraphics,
   instructions: chameleonInstruction,
   generators: chameleonGenerators,
   meta: chameleonMeta,
   performance: chameleonPerformance,
   flow: chameleonFlow,
-  scripts: chameleonScripts
+  scripts: chameleonScripts,
 };
 
 export default chameleonDefinition;

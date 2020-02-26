@@ -5,7 +5,7 @@ import { CoffeeDefinition } from "./_types";
 import coffeeAI from "./ai";
 import coffeeAnim from "./anim";
 import coffeeBoard from "./board";
-import coffeeSetup from "./setup";
+import coffeeSetupBook from "./setups";
 import coffeeGraphics from "./graphics";
 import coffeeInstruction from "./instructions";
 import coffeeMeta from "./meta";
@@ -18,14 +18,14 @@ const coffeeDefinition: CoffeeDefinition = {
   AI: coffeeAI,
   anim: coffeeAnim,
   board: coffeeBoard,
-  setup: coffeeSetup,
+  setups: coffeeSetupBook,
   graphics: coffeeGraphics,
   instructions: coffeeInstruction,
   generators: coffeeGenerators,
   meta: coffeeMeta,
   performance: coffeePerformance,
   flow: coffeeFlow,
-  scripts: coffeeScripts
+  scripts: coffeeScripts,
 };
 
 export default coffeeDefinition;

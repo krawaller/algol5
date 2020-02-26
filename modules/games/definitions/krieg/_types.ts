@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -141,7 +141,7 @@ export type KriegInstructions = Instructions<
 export type KriegMeta = AlgolMeta<KriegCommand, KriegMark>;
 export type KriegPerformance = AlgolPerformance<KriegCommand, KriegMark>;
 export type KriegScripts = AlgolGameTestSuite<KriegCommand, KriegPosition>;
-export type KriegSetup = AlgolSetup<KriegPosition, KriegUnit>;
+export type KriegSetupBook = AlgolSetupBook<KriegPosition, KriegUnit>;
 
 export type KriegDefinition = FullDef<
   KriegAiArtifactLayer,

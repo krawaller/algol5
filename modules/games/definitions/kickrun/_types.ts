@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -136,7 +136,7 @@ export type KickrunScripts = AlgolGameTestSuite<
   KickrunCommand,
   KickrunPosition
 >;
-export type KickrunSetup = AlgolSetup<KickrunPosition, KickrunUnit>;
+export type KickrunSetupBook = AlgolSetupBook<KickrunPosition, KickrunUnit>;
 
 export type KickrunDefinition = FullDef<
   KickrunAiArtifactLayer,

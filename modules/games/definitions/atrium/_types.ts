@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -125,7 +125,7 @@ export type AtriumInstructions = Instructions<
 export type AtriumMeta = AlgolMeta<AtriumCommand, AtriumMark>;
 export type AtriumPerformance = AlgolPerformance<AtriumCommand, AtriumMark>;
 export type AtriumScripts = AlgolGameTestSuite<AtriumCommand, AtriumPosition>;
-export type AtriumSetup = AlgolSetup<AtriumPosition, AtriumUnit>;
+export type AtriumSetupBook = AlgolSetupBook<AtriumPosition, AtriumUnit>;
 
 export type AtriumDefinition = FullDef<
   AtriumAiArtifactLayer,

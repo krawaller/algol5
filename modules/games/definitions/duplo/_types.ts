@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -131,7 +131,7 @@ export type DuploInstructions = Instructions<
 export type DuploMeta = AlgolMeta<DuploCommand, DuploMark>;
 export type DuploPerformance = AlgolPerformance<DuploCommand, DuploMark>;
 export type DuploScripts = AlgolGameTestSuite<DuploCommand, DuploPosition>;
-export type DuploSetup = AlgolSetup<DuploPosition, DuploUnit>;
+export type DuploSetupBook = AlgolSetupBook<DuploPosition, DuploUnit>;
 
 export type DuploDefinition = FullDef<
   DuploAiArtifactLayer,

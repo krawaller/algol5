@@ -5,7 +5,7 @@ import { GogolDefinition } from "./_types";
 import gogolAI from "./ai";
 import gogolAnim from "./anim";
 import gogolBoard from "./board";
-import gogolSetup from "./setup";
+import gogolSetupBook from "./setups";
 import gogolGraphics from "./graphics";
 import gogolInstruction from "./instructions";
 import gogolMeta from "./meta";
@@ -18,14 +18,14 @@ const gogolDefinition: GogolDefinition = {
   AI: gogolAI,
   anim: gogolAnim,
   board: gogolBoard,
-  setup: gogolSetup,
+  setups: gogolSetupBook,
   graphics: gogolGraphics,
   instructions: gogolInstruction,
   generators: gogolGenerators,
   meta: gogolMeta,
   performance: gogolPerformance,
   flow: gogolFlow,
-  scripts: gogolScripts
+  scripts: gogolScripts,
 };
 
 export default gogolDefinition;

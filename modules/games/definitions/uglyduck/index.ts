@@ -5,7 +5,7 @@ import { UglyduckDefinition } from "./_types";
 import uglyduckAI from "./ai";
 import uglyduckAnim from "./anim";
 import uglyduckBoard from "./board";
-import uglyduckSetup from "./setup";
+import uglyduckSetupBook from "./setups";
 import uglyduckGraphics from "./graphics";
 import uglyduckInstruction from "./instructions";
 import uglyduckMeta from "./meta";
@@ -18,14 +18,14 @@ const uglyduckDefinition: UglyduckDefinition = {
   AI: uglyduckAI,
   anim: uglyduckAnim,
   board: uglyduckBoard,
-  setup: uglyduckSetup,
+  setups: uglyduckSetupBook,
   graphics: uglyduckGraphics,
   instructions: uglyduckInstruction,
   generators: uglyduckGenerators,
   meta: uglyduckMeta,
   performance: uglyduckPerformance,
   flow: uglyduckFlow,
-  scripts: uglyduckScripts
+  scripts: uglyduckScripts,
 };
 
 export default uglyduckDefinition;

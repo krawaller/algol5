@@ -5,7 +5,7 @@ import { MurusgallicusadvancedDefinition } from "./_types";
 import murusgallicusadvancedAI from "./ai";
 import murusgallicusadvancedAnim from "./anim";
 import murusgallicusadvancedBoard from "./board";
-import murusgallicusadvancedSetup from "./setup";
+import murusgallicusadvancedSetupBook from "./setups";
 import murusgallicusadvancedGraphics from "./graphics";
 import murusgallicusadvancedInstruction from "./instructions";
 import murusgallicusadvancedMeta from "./meta";
@@ -18,14 +18,14 @@ const murusgallicusadvancedDefinition: MurusgallicusadvancedDefinition = {
   AI: murusgallicusadvancedAI,
   anim: murusgallicusadvancedAnim,
   board: murusgallicusadvancedBoard,
-  setup: murusgallicusadvancedSetup,
+  setups: murusgallicusadvancedSetupBook,
   graphics: murusgallicusadvancedGraphics,
   instructions: murusgallicusadvancedInstruction,
   generators: murusgallicusadvancedGenerators,
   meta: murusgallicusadvancedMeta,
   performance: murusgallicusadvancedPerformance,
   flow: murusgallicusadvancedFlow,
-  scripts: murusgallicusadvancedScripts
+  scripts: murusgallicusadvancedScripts,
 };
 
 export default murusgallicusadvancedDefinition;

@@ -5,7 +5,7 @@ import { KriegDefinition } from "./_types";
 import kriegAI from "./ai";
 import kriegAnim from "./anim";
 import kriegBoard from "./board";
-import kriegSetup from "./setup";
+import kriegSetupBook from "./setup";
 import kriegGraphics from "./graphics";
 import kriegInstruction from "./instructions";
 import kriegMeta from "./meta";
@@ -18,14 +18,14 @@ const kriegDefinition: KriegDefinition = {
   AI: kriegAI,
   anim: kriegAnim,
   board: kriegBoard,
-  setup: kriegSetup,
+  setups: kriegSetupBook,
   graphics: kriegGraphics,
   instructions: kriegInstruction,
   generators: kriegGenerators,
   meta: kriegMeta,
   performance: kriegPerformance,
   flow: kriegFlow,
-  scripts: kriegScripts
+  scripts: kriegScripts,
 };
 
 export default kriegDefinition;

@@ -5,7 +5,7 @@ import { TransetDefinition } from "./_types";
 import transetAI from "./ai";
 import transetAnim from "./anim";
 import transetBoard from "./board";
-import transetSetup from "./setup";
+import transetSetupBook from "./setups";
 import transetGraphics from "./graphics";
 import transetInstruction from "./instructions";
 import transetMeta from "./meta";
@@ -18,14 +18,14 @@ const transetDefinition: TransetDefinition = {
   AI: transetAI,
   anim: transetAnim,
   board: transetBoard,
-  setup: transetSetup,
+  setups: transetSetupBook,
   graphics: transetGraphics,
   instructions: transetInstruction,
   generators: transetGenerators,
   meta: transetMeta,
   performance: transetPerformance,
   flow: transetFlow,
-  scripts: transetScripts
+  scripts: transetScripts,
 };
 
 export default transetDefinition;

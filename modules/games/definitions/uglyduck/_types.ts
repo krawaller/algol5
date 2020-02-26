@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -139,7 +139,7 @@ export type UglyduckScripts = AlgolGameTestSuite<
   UglyduckCommand,
   UglyduckPosition
 >;
-export type UglyduckSetup = AlgolSetup<UglyduckPosition, UglyduckUnit>;
+export type UglyduckSetupBook = AlgolSetupBook<UglyduckPosition, UglyduckUnit>;
 
 export type UglyduckDefinition = FullDef<
   UglyduckAiArtifactLayer,

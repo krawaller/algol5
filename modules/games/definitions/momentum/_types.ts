@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -130,7 +130,7 @@ export type MomentumScripts = AlgolGameTestSuite<
   MomentumCommand,
   MomentumPosition
 >;
-export type MomentumSetup = AlgolSetup<MomentumPosition, MomentumUnit>;
+export type MomentumSetupBook = AlgolSetupBook<MomentumPosition, MomentumUnit>;
 
 export type MomentumDefinition = FullDef<
   MomentumAiArtifactLayer,

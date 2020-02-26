@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -127,7 +127,7 @@ export type GekitaiScripts = AlgolGameTestSuite<
   GekitaiCommand,
   GekitaiPosition
 >;
-export type GekitaiSetup = AlgolSetup<GekitaiPosition, GekitaiUnit>;
+export type GekitaiSetupBook = AlgolSetupBook<GekitaiPosition, GekitaiUnit>;
 
 export type GekitaiDefinition = FullDef<
   GekitaiAiArtifactLayer,

@@ -5,7 +5,7 @@ import lib from "../../../games/dist/lib";
 
 export const game: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
-  let { gameId } = args;
+  let { id: gameId } = args;
   if (!gameId) {
     if (thisGameId) {
       gameId = thisGameId!;

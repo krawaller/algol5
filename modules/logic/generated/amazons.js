@@ -337,13 +337,8 @@ let game = {
       ]
     });
   };
-  game.newBattle = () => {
-    let UNITDATA = setup2army({
-      amazons: {
-        "1": ["d10", "g10", "a7", "j7"],
-        "2": ["a4", "d1", "g1", "j4"]
-      }
-    });
+  game.newBattle = setup => {
+    let UNITDATA = setup2army(setup);
     let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, amazons: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];

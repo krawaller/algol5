@@ -510,19 +510,28 @@ let game = {
           ]
         });
   };
-  game.newBattle = () => {
+  game.newBattle = setup => {
+    let UNITDATA = setup2army(setup);
+    let UNITLAYERS = {
+      units: {},
+      myunits: {},
+      oppunits: {},
+      soldiers: {},
+      mysoldiers: {},
+      oppsoldiers: {}
+    };
+    for (let unitid in UNITDATA) {
+      const currentunit = UNITDATA[unitid];
+      const { group, pos, owner } = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
+    }
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,
-      UNITDATA: {},
-      UNITLAYERS: {
-        units: {},
-        myunits: {},
-        oppunits: {},
-        soldiers: {},
-        mysoldiers: {},
-        oppsoldiers: {}
-      }
+      UNITDATA,
+      UNITLAYERS
     });
   };
   game.action.deploy2 = step => {

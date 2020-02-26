@@ -641,12 +641,8 @@ let game = {
       ]
     });
   };
-  game.newBattle = () => {
-    let UNITDATA = setup2army({
-      pinets: { "1": ["a1", "e1"], "2": ["a5", "e5"] },
-      piokers: { "1": ["b1", "d1"], "2": ["b5", "d5"] },
-      piases: { "1": ["c1"], "2": ["c5"] }
-    });
+  game.newBattle = setup => {
+    let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
       myunits: {},

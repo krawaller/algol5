@@ -646,14 +646,8 @@ let game = {
       ]
     });
   };
-  game.newBattle = () => {
-    let UNITDATA = setup2army({
-      lvl3: {
-        "0": [{ rect: ["a2", "d3"] }, "b4", "c1"],
-        "1": ["a1", "c4", "d1"],
-        "2": ["a4", "b1", "d4"]
-      }
-    });
+  game.newBattle = setup => {
+    let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
       myunits: {},

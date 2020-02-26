@@ -415,10 +415,8 @@ let game = {
           ]
         });
   };
-  game.newBattle = () => {
-    let UNITDATA = setup2army({
-      soldiers: { "1": [{ rect: ["a1", "d1"] }], "2": [{ rect: ["a4", "d4"] }] }
-    });
+  game.newBattle = setup => {
+    let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
       myunits: {},

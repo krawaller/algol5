@@ -1,10 +1,13 @@
 import { GameId } from "./_names";
-import * as fs from "fs-extra";
-import * as path from "path";
+import gameDefs from "../../../games/dist/lib";
+import fs from "fs-extra";
+import path from "path";
 
 const out = path.join(__dirname, "../../dist/apis");
 
 export async function exportGameAPI(gameId: GameId) {
+  const def = gameDefs[gameId];
+  const setupBook = JSON.stringify(def.setups, null, 2);
   await fs.ensureDir(out);
   const me = path.join(out, gameId);
   await fs.emptyDir(me);
@@ -14,7 +17,7 @@ export async function exportGameAPI(gameId: GameId) {
 import ${gameId} from "../../../../logic/dist/indiv/${gameId}";
 import { makeStaticGameAPI } from "../../../src";
 
-export const staticAPI = makeStaticGameAPI(${gameId});
+export const staticAPI = makeStaticGameAPI(${gameId}, ${setupBook});
 export default staticAPI;
 `
   );
@@ -24,7 +27,7 @@ export default staticAPI;
 import ${gameId} from "../../../../logic/dist/indiv/${gameId}";
 import { makeStatefulGameAPI } from "../../../src";
 
-export const statefulAPI = makeStatefulGameAPI(${gameId});
+export const statefulAPI = makeStatefulGameAPI(${gameId}, ${setupBook});
 export default statefulAPI;
 `
   );

@@ -4,14 +4,19 @@ import {
   AlgolStatefulGameAPISession,
   AlgolBattle,
   AlgolBattleSave,
+  AlgolSetupBookAnon,
 } from "../../types";
 import { newBattle, battleAction, getBattleUI } from "./battle";
 import { inflateBattleSave } from "./battle/helpers";
 
-export function makeStatefulGameAPI(game: AlgolGame): AlgolStatefulGameAPI {
+export function makeStatefulGameAPI(
+  game: AlgolGame,
+  setups: AlgolSetupBookAnon
+): AlgolStatefulGameAPI {
   return {
     gameId: game.gameId,
-    newBattle: () => fromBattle(game, newBattle(game)),
+    // TODO - variants choices selecting which setup
+    newBattle: () => fromBattle(game, newBattle(game, setups.basic)),
     fromSave: (save: AlgolBattleSave) =>
       fromBattle(game, inflateBattleSave(game, save)),
   };

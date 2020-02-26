@@ -2,7 +2,7 @@ import { GowiththefloeInstructions } from "./_types";
 
 const gowiththefloeInstructions: GowiththefloeInstructions = {
   startTurn: {
-    line: ["Select", { playercase: ["seals", "bears"] }, "to move"]
+    line: ["Select", { playercase: ["seals", "bears"] }, "to move"],
   },
   selectunit: {
     line: [
@@ -12,10 +12,10 @@ const gowiththefloeInstructions: GowiththefloeInstructions = {
       {
         ifplayer: [
           2,
-          { line: ["or a neighbouring", { unittype: ["seals", 1] }, "to eat"] }
-        ]
-      }
-    ]
+          { line: ["or a neighbouring", { unittype: ["seals", 1] }, "to eat"] },
+        ],
+      },
+    ],
   },
   selectmovetarget: {
     line: [
@@ -24,8 +24,18 @@ const gowiththefloeInstructions: GowiththefloeInstructions = {
       "to move the",
       { unitat: "selectunit" },
       "to",
-      "selectmovetarget"
-    ]
+      "selectmovetarget",
+    ],
+  },
+  selectjumptarget: {
+    line: [
+      "Press",
+      "jump",
+      "to make",
+      { unitat: "selectunit" },
+      "jump to",
+      "selectjumptarget",
+    ],
   },
   selecteattarget: {
     line: [
@@ -35,9 +45,9 @@ const gowiththefloeInstructions: GowiththefloeInstructions = {
       { unitat: "selectunit" },
       "consume",
       { unitat: "selecteattarget" },
-      ", removing both units from the battle"
-    ]
-  }
+      ", removing both units from the battle",
+    ],
+  },
 };
 
 export default gowiththefloeInstructions;

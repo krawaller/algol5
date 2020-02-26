@@ -1,7 +1,6 @@
 import { GowiththefloeFlow } from "./_types";
 
 const gowiththefloeFlow: GowiththefloeFlow = {
-  STATUS: "wip",
   startTurn: { link: "selectunit" },
   endGame: {
     safeseal: {
@@ -14,21 +13,42 @@ const gowiththefloeFlow: GowiththefloeFlow = {
   marks: {
     selectunit: {
       from: "myunits",
-      runGenerators: ["findmovetargets", { ifplayer: [2, "findeattargets"] }],
-      links: ["selectmovetarget", { ifplayer: [2, "selecteattarget"] }],
+      runGenerators: [
+        "findmovetargets",
+        "findjumptargets",
+        { ifplayer: [2, "findeattargets"] },
+      ],
+      links: [
+        "selectmovetarget",
+        "selectjumptarget",
+        { ifplayer: [2, "selecteattarget"] },
+      ],
     },
     selectmovetarget: {
       from: "movetargets",
       runGenerator: "findcracks",
       link: "move",
     },
+    selectjumptarget: {
+      from: "jumptargets",
+      link: "jump",
+    },
     selecteattarget: { from: "eattargets", link: "eat" },
   },
+
   commands: {
     move: {
       applyEffects: [
         { moveat: ["selectunit", "selectmovetarget"] },
         { spawnin: ["cracks", "holes", 0] },
+      ],
+      runGenerator: "findsealsmoves",
+      link: "endTurn",
+    },
+    jump: {
+      applyEffects: [
+        { moveat: ["selectunit", "selectjumptarget"] },
+        { spawnat: ["selectunit", "holes", 0] },
       ],
       runGenerator: "findsealsmoves",
       link: "endTurn",

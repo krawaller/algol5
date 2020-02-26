@@ -1,6 +1,6 @@
 Chameleon was invented by Mitsuo Yamamoto in 2019. As with all his games he makes and sells beautiful ceramic versions through {EXTLINK:text=LOGY games,url=http://www.logygames.com/}.
 
-{PIC:name=chameleon.jpg,title=Ceramic Chameleon,cred=Picture by LOGY games}
+{PIC:name=chameleon.jpg,title=Ceramic Chameleon,cred=Picture by LOGY games,credurl=https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess}
 
 Chameleon was funded by a {EXTLINK:text=Kickstarter campaign,url=https://www.kickstarter.com/projects/logygames/chameleon-a-modern-version-of-chess}, which typically is the best opportunity to place international orders for LOGY games (although they do ship worldwide from their site too).
 

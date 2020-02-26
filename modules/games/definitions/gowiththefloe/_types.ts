@@ -35,8 +35,9 @@ export type GowiththefloeUnit = "seals" | "bears" | "holes";
 export type GowiththefloeMark =
   | "selectunit"
   | "selectmovetarget"
+  | "selectjumptarget"
   | "selecteattarget";
-export type GowiththefloeCommand = "move" | "eat";
+export type GowiththefloeCommand = "move" | "jump" | "eat";
 export type GowiththefloePhaseCommand = never;
 export type GowiththefloePhase = "startTurn" | GowiththefloeMark;
 export type GowiththefloeUnitLayer =
@@ -59,11 +60,13 @@ export type GowiththefloeUnitLayer =
 export type GowiththefloeGenerator =
   | "findeattargets"
   | "findmovetargets"
+  | "findjumptargets"
   | "findsealsmoves"
   | "findcracks";
 export type GowiththefloeArtifactLayer =
   | "eattargets"
   | "movetargets"
+  | "jumptargets"
   | "canmove"
   | "cracks";
 export type GowiththefloeTerrainLayer = "water" | "nowater";

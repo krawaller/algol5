@@ -20,14 +20,6 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             flurps: "knight",
           },
         },
-        setups: {
-          basic: {
-            flurps: {
-              1: ["a1"],
-              2: ["b2"],
-            },
-          },
-        },
         flow: {
           ...emptyFullDef.flow,
           endGame: {
@@ -45,7 +37,14 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "battle",
       contexts: [
         {
-          context: {},
+          context: {
+            setup: {
+              flurps: {
+                1: ["a1"],
+                2: ["b2"],
+              },
+            },
+          },
           envelope:
             "let game = { action: { startTurn1: a => ({...a, sentToStart1: true }) } };",
           tests: [

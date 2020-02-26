@@ -38,7 +38,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
     }; `;
 
     if (player === 2) {
-      ret += `game.newBattle = () => {
+      ret += `game.newBattle = (setup) => {
         ${executeSection(gameDef, player, "startTurn", "newBattle")}
       }; `;
     }

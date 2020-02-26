@@ -36,5 +36,5 @@ export const emptyFullDef: FullDefAnon = {
     massiveTree: {},
   },
   scripts: {},
-  setup: {},
+  setups: { basic: {} },
 };

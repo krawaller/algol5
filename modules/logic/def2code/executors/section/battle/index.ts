@@ -9,9 +9,10 @@ export function executeNewBattle(
   action: string
 ): string {
   let ret = "";
-  const hasSetup = Object.keys(gameDef.setup).length > 0;
+  // TODO - get which setup as input
+  const hasSetup = Object.keys(gameDef.setups.basic).length > 0;
   if (hasSetup) {
-    ret += `let UNITDATA = setup2army(${JSON.stringify(gameDef.setup)});
+    ret += `let UNITDATA = setup2army(${JSON.stringify(gameDef.setups.basic)});
     ${updateUnitLayers(gameDef, 2, "newBattle", true)}`;
   }
   return (

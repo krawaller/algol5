@@ -12,7 +12,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "battle",
       contexts: [
         {
-          context: {},
+          context: {
+            setup: {},
+          },
           envelope: "let game = { action: { startTurn1: a => a } };",
           tests: [
             {
@@ -21,13 +23,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.BATTLEVARS",
                   res: undefined,
-                  desc: "game isn't using battlevars so we don't seed id"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  desc: "game isn't using battlevars so we don't seed id",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -36,16 +38,18 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.flow,
           commands: {
             gnurp: {
-              applyEffect: { setbattlevar: ["somevar", 666] }
-            }
-          }
-        }
+              applyEffect: { setbattlevar: ["somevar", 666] },
+            },
+          },
+        },
       },
       player: 1,
       action: "battle",
       contexts: [
         {
-          context: {},
+          context: {
+            setup: {},
+          },
           envelope: "let game = { action: { startTurn1: a => a } };",
           tests: [
             {
@@ -54,13 +58,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.BATTLEVARS",
                   res: {},
-                  desc: "game uses battlevars so we seed it to empty obj"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "game uses battlevars so we seed it to empty obj",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

@@ -9,15 +9,19 @@ describe("the analyseGame function (test with gowiththefloe)", () => {
       "startTurn",
       "selectunit",
       "selectmovetarget",
-      "move"
+      "selectjumptarget",
+      "move",
+      "jump",
     ]);
     expect(Object.keys(result[2])).toEqual([
       "startTurn",
       "selectunit",
       "selectmovetarget",
+      "selectjumptarget",
       "selecteattarget",
       "move",
-      "eat"
+      "jump",
+      "eat",
     ]);
   });
 
@@ -48,10 +52,14 @@ describe("the analyseGame function (test with gowiththefloe)", () => {
   it("maps used generators per action (test with gowiththefloe)", () => {
     const result = analyseGame(goWithTheFloe);
     expect(result[1].startTurn.generators).toEqual([]);
-    expect(result[1].selectunit.generators).toEqual(["findmovetargets"]);
+    expect(result[1].selectunit.generators).toEqual([
+      "findmovetargets",
+      "findjumptargets",
+    ]);
     expect(result[2].selectunit.generators).toEqual([
       "findmovetargets",
-      "findeattargets"
+      "findjumptargets",
+      "findeattargets",
     ]);
     expect(result[1].selectmovetarget.generators).toEqual(["findcracks"]);
     expect(result[1].move.generators).toEqual(["findsealsmoves"]);
@@ -61,10 +69,14 @@ describe("the analyseGame function (test with gowiththefloe)", () => {
   it("maps added artifacts per action (test with gowiththefloe)", () => {
     const result = analyseGame(goWithTheFloe);
     expect(result[1].startTurn.addedArtifacts).toEqual([]);
-    expect(result[1].selectunit.addedArtifacts).toEqual(["movetargets"]);
+    expect(result[1].selectunit.addedArtifacts).toEqual([
+      "movetargets",
+      "jumptargets",
+    ]);
     expect(result[2].selectunit.addedArtifacts).toEqual([
       "movetargets",
-      "eattargets"
+      "jumptargets",
+      "eattargets",
     ]);
     expect(result[1].selectmovetarget.addedArtifacts).toEqual(["cracks"]);
     expect(result[1].move.addedArtifacts).toEqual(["canmove"]);
@@ -75,24 +87,38 @@ describe("the analyseGame function (test with gowiththefloe)", () => {
     const result = analyseGame(goWithTheFloe);
     expect(result[1].startTurn.priorArtifacts).toEqual([]);
     expect(result[1].selectunit.priorArtifacts).toEqual([]);
-    expect(result[1].selectmovetarget.priorArtifacts).toEqual(["movetargets"]);
-    expect(result[1].move.priorArtifacts).toEqual(["movetargets", "cracks"]);
+    expect(result[1].selectmovetarget.priorArtifacts).toEqual([
+      "movetargets",
+      "jumptargets",
+    ]);
+    expect(result[1].move.priorArtifacts).toEqual([
+      "movetargets",
+      "jumptargets",
+      "cracks",
+    ]);
 
     expect(result[2].startTurn.priorArtifacts).toEqual([]);
     expect(result[2].selectunit.priorArtifacts).toEqual([]);
     expect(result[2].selectmovetarget.priorArtifacts).toEqual([
       "movetargets",
-      "eattargets"
+      "jumptargets",
+      "eattargets",
     ]);
     expect(result[2].move.priorArtifacts).toEqual([
       "movetargets",
+      "jumptargets",
       "eattargets",
-      "cracks"
+      "cracks",
     ]);
     expect(result[2].selecteattarget.priorArtifacts).toEqual([
       "movetargets",
-      "eattargets"
+      "jumptargets",
+      "eattargets",
     ]);
-    expect(result[2].eat.priorArtifacts).toEqual(["movetargets", "eattargets"]);
+    expect(result[2].eat.priorArtifacts).toEqual([
+      "movetargets",
+      "jumptargets",
+      "eattargets",
+    ]);
   });
 });

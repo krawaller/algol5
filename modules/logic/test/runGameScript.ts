@@ -59,7 +59,7 @@ export function runGameScript(
               func = step.LINKS.marks[action] || step.LINKS.commands[action];
             }
             if (!func) {
-              console.log("OH NO", step.LINKS);
+              console.log("OH NO", step.LINKS, line);
               throw new Error(
                 "Failed to find function! " + JSON.stringify({ action, func })
               );

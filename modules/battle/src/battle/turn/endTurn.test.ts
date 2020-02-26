@@ -1,8 +1,9 @@
 import { firstTurn, endTurn } from "../turn";
 import aries from "../../../../logic/dist/indiv/aries";
+import ariesDef from "../../../../games/dist/games/aries";
 
 test("turn/endTurn regular", () => {
-  let turn = firstTurn(aries);
+  let turn = firstTurn(aries, ariesDef.setups.basic);
   // have to add step that wasn't added because of performance thingy
   turn.steps["root-d4-e4-move"] = aries.action["move1"](
     turn.steps["root-d4-e4"]

@@ -1,8 +1,9 @@
 import { firstTurn } from "../turn";
 import aries from "../../../../logic/dist/indiv/aries";
+import ariesDef from "../../../../games/dist/games/aries";
 
 test("turn/firstTurn", () => {
-  const res = firstTurn(aries);
+  const res = firstTurn(aries, ariesDef.setups.basic);
   const actions = Object.keys(res.steps.root.LINKS.commands).concat(
     Object.keys(res.steps.root.LINKS.marks)
   );

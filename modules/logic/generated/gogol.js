@@ -247,7 +247,7 @@ let game = {
       );
     } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
+      LINKS.endedBy = "regicide";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -330,7 +330,7 @@ let game = {
       );
     } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
+      LINKS.endedBy = "regicide";
     } else {
       LINKS.endTurn = "startTurn2";
     }
@@ -881,7 +881,7 @@ let game = {
       );
     } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
+      LINKS.endedBy = "regicide";
     } else {
       LINKS.endTurn = "startTurn1";
     }
@@ -964,7 +964,7 @@ let game = {
       );
     } else if (TURN > 1 && Object.keys(UNITLAYERS.oppkings).length === 0) {
       LINKS.endGame = "win";
-      LINKS.endedBy = "kingkill";
+      LINKS.endedBy = "regicide";
     } else {
       LINKS.endTurn = "startTurn1";
     }

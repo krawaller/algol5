@@ -11,3 +11,9 @@ export type AlgolSetup<Position extends string, Unit extends string> = Partial<
 >;
 
 export type AlgolSetupAnon = AlgolSetup<string, string>;
+
+export type AlgolSetupBook<Position extends string, Unit extends string> = {
+  basic: AlgolSetup<Position, Unit>;
+} & Record<string, AlgolSetup<Position, Unit>>;
+
+export type AlgolSetupBookAnon = AlgolSetupBook<string, string>;

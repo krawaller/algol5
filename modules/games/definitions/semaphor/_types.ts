@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -138,7 +138,7 @@ export type SemaphorScripts = AlgolGameTestSuite<
   SemaphorCommand,
   SemaphorPosition
 >;
-export type SemaphorSetup = AlgolSetup<SemaphorPosition, SemaphorUnit>;
+export type SemaphorSetupBook = AlgolSetupBook<SemaphorPosition, SemaphorUnit>;
 
 export type SemaphorDefinition = FullDef<
   SemaphorAiArtifactLayer,

@@ -5,7 +5,7 @@ import { GowiththefloeDefinition } from "./_types";
 import gowiththefloeAI from "./ai";
 import gowiththefloeAnim from "./anim";
 import gowiththefloeBoard from "./board";
-import gowiththefloeSetup from "./setup";
+import gowiththefloeSetupBook from "./setups";
 import gowiththefloeGraphics from "./graphics";
 import gowiththefloeInstruction from "./instructions";
 import gowiththefloeMeta from "./meta";
@@ -18,14 +18,14 @@ const gowiththefloeDefinition: GowiththefloeDefinition = {
   AI: gowiththefloeAI,
   anim: gowiththefloeAnim,
   board: gowiththefloeBoard,
-  setup: gowiththefloeSetup,
+  setups: gowiththefloeSetupBook,
   graphics: gowiththefloeGraphics,
   instructions: gowiththefloeInstruction,
   generators: gowiththefloeGenerators,
   meta: gowiththefloeMeta,
   performance: gowiththefloePerformance,
   flow: gowiththefloeFlow,
-  scripts: gowiththefloeScripts
+  scripts: gowiththefloeScripts,
 };
 
 export default gowiththefloeDefinition;

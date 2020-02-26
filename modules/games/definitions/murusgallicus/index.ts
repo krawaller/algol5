@@ -5,7 +5,7 @@ import { MurusgallicusDefinition } from "./_types";
 import murusgallicusAI from "./ai";
 import murusgallicusAnim from "./anim";
 import murusgallicusBoard from "./board";
-import murusgallicusSetup from "./setup";
+import murusgallicusSetupBook from "./setups";
 import murusgallicusGraphics from "./graphics";
 import murusgallicusInstruction from "./instructions";
 import murusgallicusMeta from "./meta";
@@ -18,14 +18,14 @@ const murusgallicusDefinition: MurusgallicusDefinition = {
   AI: murusgallicusAI,
   anim: murusgallicusAnim,
   board: murusgallicusBoard,
-  setup: murusgallicusSetup,
+  setups: murusgallicusSetupBook,
   graphics: murusgallicusGraphics,
   instructions: murusgallicusInstruction,
   generators: murusgallicusGenerators,
   meta: murusgallicusMeta,
   performance: murusgallicusPerformance,
   flow: murusgallicusFlow,
-  scripts: murusgallicusScripts
+  scripts: murusgallicusScripts,
 };
 
 export default murusgallicusDefinition;

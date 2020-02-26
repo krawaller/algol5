@@ -5,7 +5,7 @@ import { ShoveoffDefinition } from "./_types";
 import shoveoffAI from "./ai";
 import shoveoffAnim from "./anim";
 import shoveoffBoard from "./board";
-import shoveoffSetup from "./setup";
+import shoveoffSetupBook from "./setups";
 import shoveoffGraphics from "./graphics";
 import shoveoffInstruction from "./instructions";
 import shoveoffMeta from "./meta";
@@ -18,14 +18,14 @@ const shoveoffDefinition: ShoveoffDefinition = {
   AI: shoveoffAI,
   anim: shoveoffAnim,
   board: shoveoffBoard,
-  setup: shoveoffSetup,
+  setups: shoveoffSetupBook,
   graphics: shoveoffGraphics,
   instructions: shoveoffInstruction,
   generators: shoveoffGenerators,
   meta: shoveoffMeta,
   performance: shoveoffPerformance,
   flow: shoveoffFlow,
-  scripts: shoveoffScripts
+  scripts: shoveoffScripts,
 };
 
 export default shoveoffDefinition;

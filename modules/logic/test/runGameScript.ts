@@ -7,6 +7,7 @@ import {
   AlgolScriptLine,
 } from "../../types";
 import { getContentText } from "../../common";
+import games from "../../games/dist/lib";
 
 const endGames = ["win", "lose", "draw"];
 
@@ -19,7 +20,7 @@ export function runGameScript(
   for (const scriptName in scripts) {
     test(`Game - ${id} - ${scriptName}`, () => {
       const lines = scripts[scriptName];
-      let step: AlgolStep = game.newBattle();
+      let step: AlgolStep = game.newBattle(games[id].setups.basic);
       let n = 0;
       let lastFunc = "startTurn1";
       while (lines.length) {

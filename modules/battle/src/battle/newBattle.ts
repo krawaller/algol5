@@ -1,11 +1,16 @@
-import { AlgolBattle, AlgolGame, AlgolBoardState } from "../../../types";
+import {
+  AlgolBattle,
+  AlgolGame,
+  AlgolBoardState,
+  AlgolSetupAnon,
+} from "../../../types";
 
 import { emptyAnim } from "../../../common";
 
 import { firstTurn } from "./turn";
 
-export function newBattle(game: AlgolGame): AlgolBattle {
-  const turn = firstTurn(game);
+export function newBattle(game: AlgolGame, setup: AlgolSetupAnon): AlgolBattle {
+  const turn = firstTurn(game, setup);
   const firstBoard: AlgolBoardState = {
     marks: [],
     units: turn.steps.root.UNITDATA,

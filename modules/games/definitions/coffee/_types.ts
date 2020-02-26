@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -127,7 +127,7 @@ export type CoffeeInstructions = Instructions<
 export type CoffeeMeta = AlgolMeta<CoffeeCommand, CoffeeMark>;
 export type CoffeePerformance = AlgolPerformance<CoffeeCommand, CoffeeMark>;
 export type CoffeeScripts = AlgolGameTestSuite<CoffeeCommand, CoffeePosition>;
-export type CoffeeSetup = AlgolSetup<CoffeePosition, CoffeeUnit>;
+export type CoffeeSetupBook = AlgolSetupBook<CoffeePosition, CoffeeUnit>;
 
 export type CoffeeDefinition = FullDef<
   CoffeeAiArtifactLayer,

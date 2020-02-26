@@ -7,7 +7,7 @@ import { render } from "../../../graphics/render";
 
 export const setup: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
-  let { gameId } = args;
+  let { gameId, name = "basic" } = args;
   if (!gameId) {
     if (thisGameId) {
       gameId = thisGameId;
@@ -21,7 +21,7 @@ export const setup: TokenHandler = opts => {
     arrangement: {
       marks: [],
       potentialMarks: [],
-      setup: def.setup,
+      setup: def.setups[name],
     },
     iconMap: def.graphics.icons,
   });

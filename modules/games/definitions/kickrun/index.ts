@@ -5,7 +5,7 @@ import { KickrunDefinition } from "./_types";
 import kickrunAI from "./ai";
 import kickrunAnim from "./anim";
 import kickrunBoard from "./board";
-import kickrunSetup from "./setup";
+import kickrunSetupBook from "./setups";
 import kickrunGraphics from "./graphics";
 import kickrunInstruction from "./instructions";
 import kickrunMeta from "./meta";
@@ -18,14 +18,14 @@ const kickrunDefinition: KickrunDefinition = {
   AI: kickrunAI,
   anim: kickrunAnim,
   board: kickrunBoard,
-  setup: kickrunSetup,
+  setups: kickrunSetupBook,
   graphics: kickrunGraphics,
   instructions: kickrunInstruction,
   generators: kickrunGenerators,
   meta: kickrunMeta,
   performance: kickrunPerformance,
   flow: kickrunFlow,
-  scripts: kickrunScripts
+  scripts: kickrunScripts,
 };
 
 export default kickrunDefinition;

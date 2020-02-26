@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -144,7 +144,7 @@ export type TransetScripts = AlgolGameTestSuite<
   TransetCommand,
   TransetPosition
 >;
-export type TransetSetup = AlgolSetup<TransetPosition, TransetUnit>;
+export type TransetSetupBook = AlgolSetupBook<TransetPosition, TransetUnit>;
 
 export type TransetDefinition = FullDef<
   TransetAiArtifactLayer,

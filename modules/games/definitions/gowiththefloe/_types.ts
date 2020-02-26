@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -159,7 +159,7 @@ export type GowiththefloeScripts = AlgolGameTestSuite<
   GowiththefloeCommand,
   GowiththefloePosition
 >;
-export type GowiththefloeSetup = AlgolSetup<
+export type GowiththefloeSetupBook = AlgolSetupBook<
   GowiththefloePosition,
   GowiththefloeUnit
 >;

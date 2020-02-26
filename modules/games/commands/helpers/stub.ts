@@ -13,7 +13,7 @@ import templatePerformance from "./templates/performance";
 import templateFlow from "./templates/flow";
 import templateGenerators from "./templates/generators";
 import templateScripts from "./templates/scripts";
-import templateSetup from "./templates/setup";
+import templateSetup from "./templates/setups";
 import templateIndex from "./templates/index";
 
 import { defPath } from "./_paths";
@@ -32,7 +32,7 @@ export default async function stub(gameId: string) {
     template(gameId, templateMeta, "meta"),
     template(gameId, templatePerformance, "performance"),
     template(gameId, templateScripts, "scripts"),
-    template(gameId, templateSetup, "setup"),
+    template(gameId, templateSetup, "setups"),
     template(gameId, templateIndex, "index"),
   ]);
   return console.log("Stubbed", gameId);

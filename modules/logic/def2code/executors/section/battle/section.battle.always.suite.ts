@@ -12,19 +12,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         board: {
           ...emptyFullDef.board,
           height: 3,
-          width: 3
+          width: 3,
         },
         graphics: {
           ...emptyFullDef.graphics,
           icons: {
-            flurps: "knight"
-          }
-        },
-        setup: {
-          flurps: {
-            1: ["a1"],
-            2: ["b2"]
-          }
+            flurps: "knight",
+          },
         },
         flow: {
           ...emptyFullDef.flow,
@@ -32,18 +26,25 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             gnork: {
               condition: {
                 isempty: {
-                  union: ["myflurps"]
-                }
-              }
-            }
-          }
-        }
+                  union: ["myflurps"],
+                },
+              },
+            },
+          },
+        },
       },
       player: 2,
       action: "battle",
       contexts: [
         {
-          context: {},
+          context: {
+            setup: {
+              flurps: {
+                1: ["a1"],
+                2: ["b2"],
+              },
+            },
+          },
           envelope:
             "let game = { action: { startTurn1: a => ({...a, sentToStart1: true }) } };",
           tests: [
@@ -53,12 +54,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.sentToStart1",
                   res: true,
-                  desc: "we pass result of calling game.action.startTurn1"
+                  desc: "we pass result of calling game.action.startTurn1",
                 },
                 {
                   sample: "returnVal.TURN",
                   res: 0,
-                  desc: "seed with turn 0 since startTurn1 will add +1"
+                  desc: "seed with turn 0 since startTurn1 will add +1",
                 },
                 {
                   sample: "returnVal.UNITDATA",
@@ -69,7 +70,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                       owner: 1,
                       pos: "a1",
                       x: 1,
-                      y: 1
+                      y: 1,
                     },
                     unit2: {
                       id: "unit2",
@@ -77,10 +78,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                       owner: 2,
                       pos: "b2",
                       x: 2,
-                      y: 2
-                    }
+                      y: 2,
+                    },
                   },
-                  desc: "initial unitdata was seeded"
+                  desc: "initial unitdata was seeded",
                 },
                 {
                   sample: "returnVal.UNITLAYERS",
@@ -92,7 +93,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         owner: 1,
                         pos: "a1",
                         x: 1,
-                        y: 1
+                        y: 1,
                       },
                       b2: {
                         id: "unit2",
@@ -100,8 +101,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         owner: 2,
                         pos: "b2",
                         x: 2,
-                        y: 2
-                      }
+                        y: 2,
+                      },
                     },
                     oppflurps: {
                       a1: {
@@ -110,8 +111,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         owner: 1,
                         pos: "a1",
                         x: 1,
-                        y: 1
-                      }
+                        y: 1,
+                      },
                     },
                     myflurps: {
                       b2: {
@@ -120,17 +121,17 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                         owner: 2,
                         pos: "b2",
                         x: 2,
-                        y: 2
-                      }
-                    }
+                        y: 2,
+                      },
+                    },
                   },
-                  desc: "we send plr2 layers since startTurn1 will switch"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "we send plr2 layers since startTurn1 will switch",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

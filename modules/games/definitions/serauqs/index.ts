@@ -5,7 +5,7 @@ import { SerauqsDefinition } from "./_types";
 import serauqsAI from "./ai";
 import serauqsAnim from "./anim";
 import serauqsBoard from "./board";
-import serauqsSetup from "./setup";
+import serauqsSetupBook from "./setups";
 import serauqsGraphics from "./graphics";
 import serauqsInstruction from "./instructions";
 import serauqsMeta from "./meta";
@@ -18,14 +18,14 @@ const serauqsDefinition: SerauqsDefinition = {
   AI: serauqsAI,
   anim: serauqsAnim,
   board: serauqsBoard,
-  setup: serauqsSetup,
+  setups: serauqsSetupBook,
   graphics: serauqsGraphics,
   instructions: serauqsInstruction,
   generators: serauqsGenerators,
   meta: serauqsMeta,
   performance: serauqsPerformance,
   flow: serauqsFlow,
-  scripts: serauqsScripts
+  scripts: serauqsScripts,
 };
 
 export default serauqsDefinition;

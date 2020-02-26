@@ -5,7 +5,7 @@ import { JostleDefinition } from "./_types";
 import jostleAI from "./ai";
 import jostleAnim from "./anim";
 import jostleBoard from "./board";
-import jostleSetup from "./setup";
+import jostleSetupBook from "./setups";
 import jostleGraphics from "./graphics";
 import jostleInstruction from "./instructions";
 import jostleMeta from "./meta";
@@ -18,14 +18,14 @@ const jostleDefinition: JostleDefinition = {
   AI: jostleAI,
   anim: jostleAnim,
   board: jostleBoard,
-  setup: jostleSetup,
+  setups: jostleSetupBook,
   graphics: jostleGraphics,
   instructions: jostleInstruction,
   generators: jostleGenerators,
   meta: jostleMeta,
   performance: jostlePerformance,
   flow: jostleFlow,
-  scripts: jostleScripts
+  scripts: jostleScripts,
 };
 
 export default jostleDefinition;

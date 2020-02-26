@@ -276,11 +276,8 @@ let game = {
       ]
     });
   };
-  game.newBattle = () => {
-    let UNITDATA = setup2army({
-      kings: { "1": ["a1", "c3", "e5"] },
-      pawns: { "2": [{ holerect: ["a1", "e5", "a1", "c3", "e5"] }] }
-    });
+  game.newBattle = setup => {
+    let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
       myunits: {},

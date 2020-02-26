@@ -9,22 +9,16 @@ export function executeNewBattle(
   action: string
 ): string {
   let ret = "";
-  const hasSetup = Object.keys(gameDef.setup).length > 0;
-  if (hasSetup) {
-    ret += `let UNITDATA = setup2army(${JSON.stringify(gameDef.setup)});
+  ret += `let UNITDATA = setup2army(setup);
     ${updateUnitLayers(gameDef, 2, "newBattle", true)}`;
-  }
+
   return (
     ret +
     `return game.action.startTurn1({
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: 1," : ""}
-    ${referencesBattleVars(gameDef) ? "BATTLEVARS: {}, " : ""} TURN: 0, ${
-      hasSetup ? "UNITDATA, " : "UNITDATA: {}, "
-    } ${
-      hasSetup
-        ? "UNITLAYERS, "
-        : `UNITLAYERS: ${JSON.stringify(emptyUnitLayers(gameDef))}, `
-    }
+    ${
+      referencesBattleVars(gameDef) ? "BATTLEVARS: {}, " : ""
+    } TURN: 0, UNITDATA, UNITLAYERS
   });`
   );
 }

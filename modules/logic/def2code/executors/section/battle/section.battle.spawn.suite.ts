@@ -12,7 +12,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       action: "battle",
       contexts: [
         {
-          context: {},
+          context: {
+            setup: {},
+          },
           envelope: "let game = { action: { startTurn1: a => a } };",
           tests: [
             {
@@ -21,13 +23,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.NEXTSPAWNID",
                   res: undefined,
-                  desc: "game isn't using spawn so we don't seed id"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  desc: "game isn't using spawn so we don't seed id",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -36,16 +38,18 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           ...emptyFullDef.flow,
           commands: {
             gnurp: {
-              applyEffect: { spawnat: ["somemark", "someunit"] }
-            }
-          }
-        }
+              applyEffect: { spawnat: ["somemark", "someunit"] },
+            },
+          },
+        },
       },
       player: 1,
       action: "battle",
       contexts: [
         {
-          context: {},
+          context: {
+            setup: {},
+          },
           envelope: "let game = { action: { startTurn1: a => a } };",
           tests: [
             {
@@ -54,13 +58,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.NEXTSPAWNID",
                   res: 1,
-                  desc: "game uses spawning so we seed id"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "game uses spawning so we seed id",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

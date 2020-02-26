@@ -5,7 +5,7 @@ import { DuploDefinition } from "./_types";
 import duploAI from "./ai";
 import duploAnim from "./anim";
 import duploBoard from "./board";
-import duploSetup from "./setup";
+import duploSetupBook from "./setups";
 import duploGraphics from "./graphics";
 import duploInstruction from "./instructions";
 import duploMeta from "./meta";
@@ -18,14 +18,14 @@ const duploDefinition: DuploDefinition = {
   AI: duploAI,
   anim: duploAnim,
   board: duploBoard,
-  setup: duploSetup,
+  setups: duploSetupBook,
   graphics: duploGraphics,
   instructions: duploInstruction,
   generators: duploGenerators,
   meta: duploMeta,
   performance: duploPerformance,
   flow: duploFlow,
-  scripts: duploScripts
+  scripts: duploScripts,
 };
 
 export default duploDefinition;

@@ -5,7 +5,7 @@ import { AtriumDefinition } from "./_types";
 import atriumAI from "./ai";
 import atriumAnim from "./anim";
 import atriumBoard from "./board";
-import atriumSetup from "./setup";
+import atriumSetupBook from "./setups";
 import atriumGraphics from "./graphics";
 import atriumInstruction from "./instructions";
 import atriumMeta from "./meta";
@@ -18,14 +18,14 @@ const atriumDefinition: AtriumDefinition = {
   AI: atriumAI,
   anim: atriumAnim,
   board: atriumBoard,
-  setup: atriumSetup,
+  setups: atriumSetupBook,
   graphics: atriumGraphics,
   instructions: atriumInstruction,
   generators: atriumGenerators,
   meta: atriumMeta,
   performance: atriumPerformance,
   flow: atriumFlow,
-  scripts: atriumScripts
+  scripts: atriumScripts,
 };
 
 export default atriumDefinition;

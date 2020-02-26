@@ -5,7 +5,7 @@ import { AriesDefinition } from "./_types";
 import ariesAI from "./ai";
 import ariesAnim from "./anim";
 import ariesBoard from "./board";
-import ariesSetup from "./setup";
+import ariesSetupBook from "./setups";
 import ariesGraphics from "./graphics";
 import ariesInstruction from "./instructions";
 import ariesMeta from "./meta";
@@ -18,14 +18,14 @@ const ariesDefinition: AriesDefinition = {
   AI: ariesAI,
   anim: ariesAnim,
   board: ariesBoard,
-  setup: ariesSetup,
+  setups: ariesSetupBook,
   graphics: ariesGraphics,
   instructions: ariesInstruction,
   generators: ariesGenerators,
   meta: ariesMeta,
   performance: ariesPerformance,
   flow: ariesFlow,
-  scripts: ariesScripts
+  scripts: ariesScripts,
 };
 
 export default ariesDefinition;

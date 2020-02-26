@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -146,7 +146,7 @@ export type ThreemusketeersScripts = AlgolGameTestSuite<
   ThreemusketeersCommand,
   ThreemusketeersPosition
 >;
-export type ThreemusketeersSetup = AlgolSetup<
+export type ThreemusketeersSetupBook = AlgolSetupBook<
   ThreemusketeersPosition,
   ThreemusketeersUnit
 >;

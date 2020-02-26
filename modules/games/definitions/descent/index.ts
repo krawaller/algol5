@@ -5,7 +5,7 @@ import { DescentDefinition } from "./_types";
 import descentAI from "./ai";
 import descentAnim from "./anim";
 import descentBoard from "./board";
-import descentSetup from "./setup";
+import descentSetupBook from "./setups";
 import descentGraphics from "./graphics";
 import descentInstruction from "./instructions";
 import descentMeta from "./meta";
@@ -18,14 +18,14 @@ const descentDefinition: DescentDefinition = {
   AI: descentAI,
   anim: descentAnim,
   board: descentBoard,
-  setup: descentSetup,
+  setups: descentSetupBook,
   graphics: descentGraphics,
   instructions: descentInstruction,
   generators: descentGenerators,
   meta: descentMeta,
   performance: descentPerformance,
   flow: descentFlow,
-  scripts: descentScripts
+  scripts: descentScripts,
 };
 
 export default descentDefinition;

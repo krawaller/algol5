@@ -5,7 +5,7 @@ import { AmazonsDefinition } from "./_types";
 import amazonsAI from "./ai";
 import amazonsAnim from "./anim";
 import amazonsBoard from "./board";
-import amazonsSetup from "./setup";
+import amazonsSetupBook from "./setups";
 import amazonsGraphics from "./graphics";
 import amazonsInstruction from "./instructions";
 import amazonsMeta from "./meta";
@@ -18,14 +18,14 @@ const amazonsDefinition: AmazonsDefinition = {
   AI: amazonsAI,
   anim: amazonsAnim,
   board: amazonsBoard,
-  setup: amazonsSetup,
+  setups: amazonsSetupBook,
   graphics: amazonsGraphics,
   instructions: amazonsInstruction,
   generators: amazonsGenerators,
   meta: amazonsMeta,
   performance: amazonsPerformance,
   flow: amazonsFlow,
-  scripts: amazonsScripts
+  scripts: amazonsScripts,
 };
 
 export default amazonsDefinition;

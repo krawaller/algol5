@@ -281,12 +281,21 @@ let game = {
   game.instruction.startTurn2 = step => {
     return collapseContent({ line: [{ text: "Select where to drop a unit" }] });
   };
-  game.newBattle = () => {
+  game.newBattle = setup => {
+    let UNITDATA = setup2army(setup);
+    let UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+    for (let unitid in UNITDATA) {
+      const currentunit = UNITDATA[unitid];
+      const { group, pos, owner } = currentunit;
+      for (const layer of groupLayers[group][owner]) {
+        UNITLAYERS[layer][pos] = currentunit;
+      }
+    }
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,
-      UNITDATA: {},
-      UNITLAYERS: { units: {}, myunits: {}, oppunits: {} }
+      UNITDATA,
+      UNITLAYERS
     });
   };
   game.action.drop2 = step => {

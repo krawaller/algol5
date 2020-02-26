@@ -7,7 +7,7 @@ import { ${capId}Definition } from './_types';
 import ${gameId}AI from './ai';
 import ${gameId}Anim from './anim';
 import ${gameId}Board from './board';
-import ${gameId}Setup from './setup';
+import ${gameId}SetupBook from './setup';
 import ${gameId}Graphics from './graphics';
 import ${gameId}Instruction from './instructions';
 import ${gameId}Meta from './meta';
@@ -20,7 +20,7 @@ const ${gameId}Definition: ${capId}Definition = {
   AI: ${gameId}AI,
   anim: ${gameId}Anim,
   board: ${gameId}Board,
-  setup: ${gameId}Setup,
+  setups: ${gameId}SetupBook,
   graphics: ${gameId}Graphics,
   instructions: ${gameId}Instruction,
   generators: ${gameId}Generators,

@@ -9,7 +9,7 @@ import {
   Graphics,
   Instructions,
   AlgolMeta,
-  AlgolSetup,
+  AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
   AlgolPerformance
@@ -130,7 +130,7 @@ export type OrthokonScripts = AlgolGameTestSuite<
   OrthokonCommand,
   OrthokonPosition
 >;
-export type OrthokonSetup = AlgolSetup<OrthokonPosition, OrthokonUnit>;
+export type OrthokonSetupBook = AlgolSetupBook<OrthokonPosition, OrthokonUnit>;
 
 export type OrthokonDefinition = FullDef<
   OrthokonAiArtifactLayer,

@@ -1,4 +1,5 @@
 import { AlgolStep, AlgolStepLinks, AlgolGame } from "../../types";
+import games from "../../games/dist/lib";
 
 export function runGameRandomly(
   id: string,
@@ -7,7 +8,7 @@ export function runGameRandomly(
 ) {
   test(`Game - ${id} - random play, max ${max} moves`, () => {
     let remaining = max;
-    let step: AlgolStep = game.newBattle();
+    let step: AlgolStep = game.newBattle(games[id].setups.basic);
     let actionObj = getActionObj(step.LINKS);
     let actions = Object.keys(actionObj);
 

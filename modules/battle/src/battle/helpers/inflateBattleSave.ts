@@ -1,5 +1,6 @@
 import { AlgolGame, AlgolBattle, AlgolBattleSave } from "../../../../types";
 import { stepOptions } from "../../../../common";
+import lib from "../../../../games/dist/lib";
 import { battleAction } from "../battleAction";
 import { newBattle } from "../newBattle";
 
@@ -8,7 +9,7 @@ export const inflateBattleSave = (
   save: AlgolBattleSave
 ): AlgolBattle => {
   const actions = save.path.slice();
-  let battle = newBattle(game);
+  let battle = newBattle(game, lib[game.gameId].setups.basic);
   let safetyValve = 0;
   do {
     if (battle.turnNumber > save.turn) {

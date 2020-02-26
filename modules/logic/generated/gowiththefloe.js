@@ -543,11 +543,8 @@ let game = {
       ]
     });
   };
-  game.newBattle = () => {
-    let UNITDATA = setup2army({
-      seals: { "1": ["b2", "b7"] },
-      bears: { "2": ["g2", "g7"] }
-    });
+  game.newBattle = setup => {
+    let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
       myunits: {},

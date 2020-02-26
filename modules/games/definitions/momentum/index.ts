@@ -5,7 +5,7 @@ import { MomentumDefinition } from "./_types";
 import momentumAI from "./ai";
 import momentumAnim from "./anim";
 import momentumBoard from "./board";
-import momentumSetup from "./setup";
+import momentumSetupBook from "./setups";
 import momentumGraphics from "./graphics";
 import momentumInstruction from "./instructions";
 import momentumMeta from "./meta";
@@ -18,14 +18,14 @@ const momentumDefinition: MomentumDefinition = {
   AI: momentumAI,
   anim: momentumAnim,
   board: momentumBoard,
-  setup: momentumSetup,
+  setups: momentumSetupBook,
   graphics: momentumGraphics,
   instructions: momentumInstruction,
   generators: momentumGenerators,
   meta: momentumMeta,
   performance: momentumPerformance,
   flow: momentumFlow,
-  scripts: momentumScripts
+  scripts: momentumScripts,
 };
 
 export default momentumDefinition;

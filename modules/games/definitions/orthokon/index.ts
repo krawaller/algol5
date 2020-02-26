@@ -5,7 +5,7 @@ import { OrthokonDefinition } from "./_types";
 import orthokonAI from "./ai";
 import orthokonAnim from "./anim";
 import orthokonBoard from "./board";
-import orthokonSetup from "./setup";
+import orthokonSetupBook from "./setups";
 import orthokonGraphics from "./graphics";
 import orthokonInstruction from "./instructions";
 import orthokonMeta from "./meta";
@@ -18,14 +18,14 @@ const orthokonDefinition: OrthokonDefinition = {
   AI: orthokonAI,
   anim: orthokonAnim,
   board: orthokonBoard,
-  setup: orthokonSetup,
+  setups: orthokonSetupBook,
   graphics: orthokonGraphics,
   instructions: orthokonInstruction,
   generators: orthokonGenerators,
   meta: orthokonMeta,
   performance: orthokonPerformance,
   flow: orthokonFlow,
-  scripts: orthokonScripts
+  scripts: orthokonScripts,
 };
 
 export default orthokonDefinition;

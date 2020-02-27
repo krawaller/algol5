@@ -34,1269 +34,1277 @@ const emptyArtifactLayers = {
 };
 const connections = boardConnections({ height: 4, width: 4 });
 const relativeDirs = makeRelativeDirs([]);
-const TERRAIN = terrainLayers(4, 4, {
-  southedge: [{ rect: ["a1", "d1"] }],
-  northedge: [{ rect: ["a4", "d4"] }],
-  westedge: [{ rect: ["a1", "a4"] }],
-  eastedge: [{ rect: ["d1", "d4"] }],
-  edge: [{ holerect: ["a1", "d4", "b2", "b3", "c2", "c3"] }]
-});
-let game = {
-  gameId: "shoveoff",
-  action: {},
-  instruction: {},
-  commands: { north: {}, south: {}, east: {}, west: {} },
-  iconMap: { soldiers: "pawn" }
+let TERRAIN1;
+let TERRAIN2;
+const groupLayers1 = {
+  soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
 };
-{
-  const groupLayers = {
-    soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
-  };
-  game.action.startTurn1 = step => {
-    let LINKS = {
-      marks: {},
-      commands: {}
-    };
-    for (const pos of Object.keys(TERRAIN.edge)) {
-      LINKS.marks[pos] = "selectpushpoint1";
-    }
-    const oldUnitLayers = step.UNITLAYERS;
-    return {
-      UNITDATA: step.UNITDATA,
-      LINKS,
-      UNITLAYERS: {
-        units: oldUnitLayers.units,
-        myunits: oldUnitLayers.oppunits,
-        oppunits: oldUnitLayers.myunits
-      },
-      ARTIFACTS: emptyArtifactLayers,
-      MARKS: {},
-      TURN: step.TURN + 1,
-      NEXTSPAWNID: step.NEXTSPAWNID
-    };
-  };
-  game.instruction.startTurn1 = step => {
-    let UNITLAYERS = step.UNITLAYERS;
-    return collapseContent({
-      line: [
-        { select: "Select" },
-        { text: "where to shove in" },
-        Object.keys(UNITLAYERS.myunits).length === 7
-          ? collapseContent({
-              line: [{ text: "your last off-board" }, { unittype: ["pawn", 1] }]
-            })
-          : Object.keys(UNITLAYERS.myunits).length === 8
-          ? collapseContent({
-              line: [{ text: "a" }, { unittype: ["pawn", 0] }]
-            })
-          : collapseContent({
-              line: [
-                { text: "one of your" },
-                { text: 8 - Object.keys(UNITLAYERS.myunits).length },
-                collapseContent({
-                  line: [
-                    { text: "remaining off-board" },
-                    { unittype: ["pawn", 1] }
-                  ]
-                })
-              ]
-            })
-      ]
-    });
-  };
-  game.action.north1 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
-    let ARTIFACTS = {
-      targetedgepoints: step.ARTIFACTS.targetedgepoints,
-      squishsouth: step.ARTIFACTS.squishsouth,
-      squishwest: step.ARTIFACTS.squishwest,
-      squishnorth: step.ARTIFACTS.squishnorth,
-      squisheast: step.ARTIFACTS.squisheast,
-      pushsouth: step.ARTIFACTS.pushsouth,
-      pushwest: step.ARTIFACTS.pushwest,
-      pushnorth: step.ARTIFACTS.pushnorth,
-      pusheast: step.ARTIFACTS.pusheast,
-      spawnsouth: step.ARTIFACTS.spawnsouth,
-      spawnwest: step.ARTIFACTS.spawnwest,
-      spawnnorth: step.ARTIFACTS.spawnnorth,
-      spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: {}
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let NEXTSPAWNID = step.NEXTSPAWNID;
-    {
-      const LOOPSET = ARTIFACTS.squishnorth;
-      for (let LOOPPOS in LOOPSET) {
-        anim.exitTo[LOOPPOS] = offsetPos(
-          LOOPPOS,
-          (LOOPSET[LOOPPOS] || {}).dir,
-          1,
-          0
-        );
-      }
-    }
-    delete UNITDATA[
-      (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
-    ];
-    for (let LOOPPOS in ARTIFACTS.pushnorth) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
-          };
-        }
-      }
-    }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: Object.keys(ARTIFACTS.spawnnorth)[0],
-        id: newunitid,
-        group: "soldiers",
-        owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
-      };
-    }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    {
-      let allowedsteps = UNITLAYERS.myunits;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        for (let DIR of roseDirs) {
-          let walkedsquares = [];
-          let POS = "faux";
-          connections.faux[DIR] = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          let WALKLENGTH = walkedsquares.length;
-          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-            POS = walkedsquares[walkstepper];
-            if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = emptyObj;
-            }
-          }
-        }
-      }
-    }
-    if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
-    } else {
-      LINKS.endTurn = "startTurn2";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-      NEXTSPAWNID,
-      anim
-    };
-  };
-  game.instruction.north1 = () => defaultInstruction(1);
-  game.action.south1 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
-    let ARTIFACTS = {
-      targetedgepoints: step.ARTIFACTS.targetedgepoints,
-      squishsouth: step.ARTIFACTS.squishsouth,
-      squishwest: step.ARTIFACTS.squishwest,
-      squishnorth: step.ARTIFACTS.squishnorth,
-      squisheast: step.ARTIFACTS.squisheast,
-      pushsouth: step.ARTIFACTS.pushsouth,
-      pushwest: step.ARTIFACTS.pushwest,
-      pushnorth: step.ARTIFACTS.pushnorth,
-      pusheast: step.ARTIFACTS.pusheast,
-      spawnsouth: step.ARTIFACTS.spawnsouth,
-      spawnwest: step.ARTIFACTS.spawnwest,
-      spawnnorth: step.ARTIFACTS.spawnnorth,
-      spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: {}
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let NEXTSPAWNID = step.NEXTSPAWNID;
-    {
-      const LOOPSET = ARTIFACTS.squishsouth;
-      for (let LOOPPOS in LOOPSET) {
-        anim.exitTo[LOOPPOS] = offsetPos(
-          LOOPPOS,
-          (LOOPSET[LOOPPOS] || {}).dir,
-          1,
-          0
-        );
-      }
-    }
-    delete UNITDATA[
-      (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
-    ];
-    for (let LOOPPOS in ARTIFACTS.pushsouth) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
-          };
-        }
-      }
-    }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: Object.keys(ARTIFACTS.spawnsouth)[0],
-        id: newunitid,
-        group: "soldiers",
-        owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
-      };
-    }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    {
-      let allowedsteps = UNITLAYERS.myunits;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        for (let DIR of roseDirs) {
-          let walkedsquares = [];
-          let POS = "faux";
-          connections.faux[DIR] = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          let WALKLENGTH = walkedsquares.length;
-          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-            POS = walkedsquares[walkstepper];
-            if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = emptyObj;
-            }
-          }
-        }
-      }
-    }
-    if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
-    } else {
-      LINKS.endTurn = "startTurn2";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-      NEXTSPAWNID,
-      anim
-    };
-  };
-  game.instruction.south1 = () => defaultInstruction(1);
-  game.action.east1 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
-    let ARTIFACTS = {
-      targetedgepoints: step.ARTIFACTS.targetedgepoints,
-      squishsouth: step.ARTIFACTS.squishsouth,
-      squishwest: step.ARTIFACTS.squishwest,
-      squishnorth: step.ARTIFACTS.squishnorth,
-      squisheast: step.ARTIFACTS.squisheast,
-      pushsouth: step.ARTIFACTS.pushsouth,
-      pushwest: step.ARTIFACTS.pushwest,
-      pushnorth: step.ARTIFACTS.pushnorth,
-      pusheast: step.ARTIFACTS.pusheast,
-      spawnsouth: step.ARTIFACTS.spawnsouth,
-      spawnwest: step.ARTIFACTS.spawnwest,
-      spawnnorth: step.ARTIFACTS.spawnnorth,
-      spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: {}
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let NEXTSPAWNID = step.NEXTSPAWNID;
-    {
-      const LOOPSET = ARTIFACTS.squisheast;
-      for (let LOOPPOS in LOOPSET) {
-        anim.exitTo[LOOPPOS] = offsetPos(
-          LOOPPOS,
-          (LOOPSET[LOOPPOS] || {}).dir,
-          1,
-          0
-        );
-      }
-    }
-    delete UNITDATA[
-      (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
-    ];
-    for (let LOOPPOS in ARTIFACTS.pusheast) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
-          };
-        }
-      }
-    }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: Object.keys(ARTIFACTS.spawneast)[0],
-        id: newunitid,
-        group: "soldiers",
-        owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
-      };
-    }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    {
-      let allowedsteps = UNITLAYERS.myunits;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        for (let DIR of roseDirs) {
-          let walkedsquares = [];
-          let POS = "faux";
-          connections.faux[DIR] = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          let WALKLENGTH = walkedsquares.length;
-          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-            POS = walkedsquares[walkstepper];
-            if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = emptyObj;
-            }
-          }
-        }
-      }
-    }
-    if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
-    } else {
-      LINKS.endTurn = "startTurn2";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-      NEXTSPAWNID,
-      anim
-    };
-  };
-  game.instruction.east1 = () => defaultInstruction(1);
-  game.action.west1 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
-    let ARTIFACTS = {
-      targetedgepoints: step.ARTIFACTS.targetedgepoints,
-      squishsouth: step.ARTIFACTS.squishsouth,
-      squishwest: step.ARTIFACTS.squishwest,
-      squishnorth: step.ARTIFACTS.squishnorth,
-      squisheast: step.ARTIFACTS.squisheast,
-      pushsouth: step.ARTIFACTS.pushsouth,
-      pushwest: step.ARTIFACTS.pushwest,
-      pushnorth: step.ARTIFACTS.pushnorth,
-      pusheast: step.ARTIFACTS.pusheast,
-      spawnsouth: step.ARTIFACTS.spawnsouth,
-      spawnwest: step.ARTIFACTS.spawnwest,
-      spawnnorth: step.ARTIFACTS.spawnnorth,
-      spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: {}
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let NEXTSPAWNID = step.NEXTSPAWNID;
-    {
-      const LOOPSET = ARTIFACTS.squishwest;
-      for (let LOOPPOS in LOOPSET) {
-        anim.exitTo[LOOPPOS] = offsetPos(
-          LOOPPOS,
-          (LOOPSET[LOOPPOS] || {}).dir,
-          1,
-          0
-        );
-      }
-    }
-    delete UNITDATA[
-      (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
-    ];
-    for (let LOOPPOS in ARTIFACTS.pushwest) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
-          };
-        }
-      }
-    }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: Object.keys(ARTIFACTS.spawnwest)[0],
-        id: newunitid,
-        group: "soldiers",
-        owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
-      };
-    }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    {
-      let allowedsteps = UNITLAYERS.myunits;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        for (let DIR of roseDirs) {
-          let walkedsquares = [];
-          let POS = "faux";
-          connections.faux[DIR] = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          let WALKLENGTH = walkedsquares.length;
-          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-            POS = walkedsquares[walkstepper];
-            if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = emptyObj;
-            }
-          }
-        }
-      }
-    }
-    if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
-    } else {
-      LINKS.endTurn = "startTurn2";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-      NEXTSPAWNID,
-      anim
-    };
-  };
-  game.instruction.west1 = () => defaultInstruction(1);
-  game.action.selectpushpoint1 = (step, newMarkPos) => {
-    let ARTIFACTS = {
-      targetedgepoints: {},
-      squishsouth: {},
-      squishwest: {},
-      squishnorth: {},
-      squisheast: {},
-      pushsouth: {},
-      pushwest: {},
-      pushnorth: {},
-      pusheast: {},
-      spawnsouth: {},
-      spawnwest: {},
-      spawnnorth: {},
-      spawneast: {}
-    };
-    let LINKS = { marks: {}, commands: {} };
-    let MARKS = {
-      selectpushpoint: newMarkPos
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    {
-      for (let DIR of orthoDirs) {
-        let walkedsquares = [];
-        let POS = MARKS.selectpushpoint;
-        while ((POS = connections[POS][DIR])) {
-          walkedsquares.push(POS);
-        }
-        let WALKLENGTH = walkedsquares.length;
-        if (WALKLENGTH) {
-          if (
-            WALKLENGTH === 3 &&
-            !UNITLAYERS.oppunits[walkedsquares[WALKLENGTH - 1]]
-          ) {
-            ARTIFACTS.targetedgepoints[walkedsquares[WALKLENGTH - 1]] = {
-              dir: relativeDirs[DIR][5]
-            };
-          }
-        }
-      }
-    }
-    {
-      for (let STARTPOS in ARTIFACTS.targetedgepoints) {
-        let DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {}).dir;
-        let walkedsquares = [];
-        let POS = "faux";
-        connections.faux[DIR] = STARTPOS;
-        let STEP = 0;
-        while ((POS = connections[POS][DIR])) {
-          walkedsquares.push(POS);
-          STEP++;
-          if (STEP !== 1) {
-            ARTIFACTS[
-              DIR === 1
-                ? "pushsouth"
-                : DIR === 3
-                ? "pushwest"
-                : DIR === 5
-                ? "pushnorth"
-                : "pusheast"
-            ][POS] = emptyObj;
-          }
-        }
-        let WALKLENGTH = walkedsquares.length;
-        POS = STARTPOS;
-        ARTIFACTS[
-          DIR === 1
-            ? "squishsouth"
-            : DIR === 3
-            ? "squishwest"
-            : DIR === 5
-            ? "squishnorth"
-            : "squisheast"
-        ][POS] = { dir: relativeDirs[DIR][5] };
-        if (WALKLENGTH) {
-          ARTIFACTS[
-            DIR === 1
-              ? "spawnsouth"
-              : DIR === 3
-              ? "spawnwest"
-              : DIR === 5
-              ? "spawnnorth"
-              : "spawneast"
-          ][walkedsquares[WALKLENGTH - 1]] = emptyObj;
-        }
-      }
-    }
-    if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
-      LINKS.commands.south = "south1";
-    }
-    if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
-      LINKS.commands.north = "north1";
-    }
-    if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
-      LINKS.commands.west = "west1";
-    }
-    if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
-      LINKS.commands.east = "east1";
-    }
-    return {
-      LINKS,
-      ARTIFACTS,
-      UNITLAYERS,
-      UNITDATA: step.UNITDATA,
-      TURN: step.TURN,
-      MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
-    };
-  };
-  game.instruction.selectpushpoint1 = step => {
-    let ARTIFACTS = step.ARTIFACTS;
-    let MARKS = step.MARKS;
-    return collapseContent({
-      line: [
-        { text: "Press" },
-        collapseContent({
-          line: [
-            Object.keys(ARTIFACTS.spawnsouth).length !== 0
-              ? { command: "south" }
-              : undefined,
-            Object.keys(ARTIFACTS.spawnnorth).length !== 0
-              ? { command: "north" }
-              : undefined,
-            Object.keys(ARTIFACTS.spawnwest).length !== 0
-              ? { command: "west" }
-              : undefined,
-            Object.keys(ARTIFACTS.spawneast).length !== 0
-              ? { command: "east" }
-              : undefined
-          ]
-            .filter(i => !!i)
-            .reduce((mem, i, n, list) => {
-              mem.push(i);
-              if (n === list.length - 2) {
-                mem.push({ text: " or " });
-              } else if (n < list.length - 2) {
-                mem.push({ text: ", " });
-              }
-              return mem;
-            }, [])
-        }),
-        {
-          text: "to shove in that direction and make room for the new unit at"
-        },
-        { pos: MARKS.selectpushpoint }
-      ]
-    });
-  };
-}
-{
-  const groupLayers = {
-    soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
-  };
-  game.action.startTurn2 = step => {
-    let LINKS = {
-      marks: {},
-      commands: {}
-    };
-    for (const pos of Object.keys(TERRAIN.edge)) {
-      LINKS.marks[pos] = "selectpushpoint2";
-    }
-    const oldUnitLayers = step.UNITLAYERS;
-    return {
-      UNITDATA: step.UNITDATA,
-      LINKS,
-      UNITLAYERS: {
-        units: oldUnitLayers.units,
-        myunits: oldUnitLayers.oppunits,
-        oppunits: oldUnitLayers.myunits
-      },
-      ARTIFACTS: emptyArtifactLayers,
-      MARKS: {},
-      TURN: step.TURN,
-      NEXTSPAWNID: step.NEXTSPAWNID
-    };
-  };
-  game.instruction.startTurn2 = step => {
-    let UNITLAYERS = step.UNITLAYERS;
-    return collapseContent({
-      line: [
-        { select: "Select" },
-        { text: "where to shove in" },
-        Object.keys(UNITLAYERS.myunits).length === 7
-          ? collapseContent({
-              line: [{ text: "your last off-board" }, { unittype: ["pawn", 2] }]
-            })
-          : Object.keys(UNITLAYERS.myunits).length === 8
-          ? collapseContent({
-              line: [{ text: "a" }, { unittype: ["pawn", 0] }]
-            })
-          : collapseContent({
-              line: [
-                { text: "one of your" },
-                { text: 8 - Object.keys(UNITLAYERS.myunits).length },
-                collapseContent({
-                  line: [
-                    { text: "remaining off-board" },
-                    { unittype: ["pawn", 2] }
-                  ]
-                })
-              ]
-            })
-      ]
-    });
-  };
-  game.newBattle = setup => {
+const groupLayers2 = {
+  soldiers: [["units"], ["units", "oppunits"], ["units", "myunits"]]
+};
+const game = {
+  gameId: "shoveoff",
+  commands: { north: {}, south: {}, east: {}, west: {} },
+  iconMap: iconMapping,
+  newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
+      for (const layer of groupLayers2[group][owner]) {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
+    let terrain = {
+      southedge: [{ rect: ["a1", "d1"] }],
+      northedge: [{ rect: ["a4", "d4"] }],
+      westedge: [{ rect: ["a1", "a4"] }],
+      eastedge: [{ rect: ["d1", "d4"] }],
+      edge: [{ holerect: ["a1", "d4", "b2", "b3", "c2", "c3"] }]
+    };
+    TERRAIN1 = terrainLayers(4, 4, terrain, 1);
+    TERRAIN2 = terrainLayers(4, 4, terrain, 2);
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA,
       UNITLAYERS
     });
-  };
-  game.action.north2 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
-    let ARTIFACTS = {
-      targetedgepoints: step.ARTIFACTS.targetedgepoints,
-      squishsouth: step.ARTIFACTS.squishsouth,
-      squishwest: step.ARTIFACTS.squishwest,
-      squishnorth: step.ARTIFACTS.squishnorth,
-      squisheast: step.ARTIFACTS.squisheast,
-      pushsouth: step.ARTIFACTS.pushsouth,
-      pushwest: step.ARTIFACTS.pushwest,
-      pushnorth: step.ARTIFACTS.pushnorth,
-      pusheast: step.ARTIFACTS.pusheast,
-      spawnsouth: step.ARTIFACTS.spawnsouth,
-      spawnwest: step.ARTIFACTS.spawnwest,
-      spawnnorth: step.ARTIFACTS.spawnnorth,
-      spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: {}
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let NEXTSPAWNID = step.NEXTSPAWNID;
-    {
-      const LOOPSET = ARTIFACTS.squishnorth;
-      for (let LOOPPOS in LOOPSET) {
-        anim.exitTo[LOOPPOS] = offsetPos(
-          LOOPPOS,
-          (LOOPSET[LOOPPOS] || {}).dir,
-          1,
-          0
-        );
-      }
-    }
-    delete UNITDATA[
-      (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
-    ];
-    for (let LOOPPOS in ARTIFACTS.pushnorth) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
-          };
-        }
-      }
-    }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: Object.keys(ARTIFACTS.spawnnorth)[0],
-        id: newunitid,
-        group: "soldiers",
-        owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
+  },
+  action: {
+    startTurn1: step => {
+      let LINKS = {
+        marks: {},
+        commands: {}
       };
-    }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
+      for (const pos of Object.keys(TERRAIN1.edge)) {
+        LINKS.marks[pos] = "selectpushpoint1";
       }
-    }
-    {
-      let allowedsteps = UNITLAYERS.myunits;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        for (let DIR of roseDirs) {
+      const oldUnitLayers = step.UNITLAYERS;
+      return {
+        UNITDATA: step.UNITDATA,
+        LINKS,
+        UNITLAYERS: {
+          units: oldUnitLayers.units,
+          myunits: oldUnitLayers.oppunits,
+          oppunits: oldUnitLayers.myunits
+        },
+        ARTIFACTS: emptyArtifactLayers,
+        MARKS: {},
+        TURN: step.TURN + 1,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    startTurn2: step => {
+      let LINKS = {
+        marks: {},
+        commands: {}
+      };
+      for (const pos of Object.keys(TERRAIN2.edge)) {
+        LINKS.marks[pos] = "selectpushpoint2";
+      }
+      const oldUnitLayers = step.UNITLAYERS;
+      return {
+        UNITDATA: step.UNITDATA,
+        LINKS,
+        UNITLAYERS: {
+          units: oldUnitLayers.units,
+          myunits: oldUnitLayers.oppunits,
+          oppunits: oldUnitLayers.myunits
+        },
+        ARTIFACTS: emptyArtifactLayers,
+        MARKS: {},
+        TURN: step.TURN,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectpushpoint1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        targetedgepoints: {},
+        squishsouth: {},
+        squishwest: {},
+        squishnorth: {},
+        squisheast: {},
+        pushsouth: {},
+        pushwest: {},
+        pushnorth: {},
+        pusheast: {},
+        spawnsouth: {},
+        spawnwest: {},
+        spawnnorth: {},
+        spawneast: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectpushpoint: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        for (let DIR of orthoDirs) {
           let walkedsquares = [];
-          let POS = "faux";
-          connections.faux[DIR] = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+          let POS = MARKS.selectpushpoint;
+          while ((POS = connections[POS][DIR])) {
             walkedsquares.push(POS);
           }
           let WALKLENGTH = walkedsquares.length;
-          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-            POS = walkedsquares[walkstepper];
-            if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = emptyObj;
+          if (WALKLENGTH) {
+            if (
+              WALKLENGTH === 3 &&
+              !UNITLAYERS.oppunits[walkedsquares[WALKLENGTH - 1]]
+            ) {
+              ARTIFACTS.targetedgepoints[walkedsquares[WALKLENGTH - 1]] = {
+                dir: relativeDirs[DIR][5]
+              };
             }
           }
         }
       }
-    }
-    if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
-    } else {
-      LINKS.endTurn = "startTurn1";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-      NEXTSPAWNID,
-      anim
-    };
-  };
-  game.instruction.north2 = () => defaultInstruction(2);
-  game.action.south2 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
-    let ARTIFACTS = {
-      targetedgepoints: step.ARTIFACTS.targetedgepoints,
-      squishsouth: step.ARTIFACTS.squishsouth,
-      squishwest: step.ARTIFACTS.squishwest,
-      squishnorth: step.ARTIFACTS.squishnorth,
-      squisheast: step.ARTIFACTS.squisheast,
-      pushsouth: step.ARTIFACTS.pushsouth,
-      pushwest: step.ARTIFACTS.pushwest,
-      pushnorth: step.ARTIFACTS.pushnorth,
-      pusheast: step.ARTIFACTS.pusheast,
-      spawnsouth: step.ARTIFACTS.spawnsouth,
-      spawnwest: step.ARTIFACTS.spawnwest,
-      spawnnorth: step.ARTIFACTS.spawnnorth,
-      spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: {}
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let NEXTSPAWNID = step.NEXTSPAWNID;
-    {
-      const LOOPSET = ARTIFACTS.squishsouth;
-      for (let LOOPPOS in LOOPSET) {
-        anim.exitTo[LOOPPOS] = offsetPos(
-          LOOPPOS,
-          (LOOPSET[LOOPPOS] || {}).dir,
-          1,
-          0
-        );
-      }
-    }
-    delete UNITDATA[
-      (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
-    ];
-    for (let LOOPPOS in ARTIFACTS.pushsouth) {
       {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
-          };
-        }
-      }
-    }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: Object.keys(ARTIFACTS.spawnsouth)[0],
-        id: newunitid,
-        group: "soldiers",
-        owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
-      };
-    }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    {
-      let allowedsteps = UNITLAYERS.myunits;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        for (let DIR of roseDirs) {
+        for (let STARTPOS in ARTIFACTS.targetedgepoints) {
+          let DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {}).dir;
           let walkedsquares = [];
           let POS = "faux";
           connections.faux[DIR] = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+          let STEP = 0;
+          while ((POS = connections[POS][DIR])) {
+            walkedsquares.push(POS);
+            STEP++;
+            if (STEP !== 1) {
+              ARTIFACTS[
+                DIR === 1
+                  ? "pushsouth"
+                  : DIR === 3
+                  ? "pushwest"
+                  : DIR === 5
+                  ? "pushnorth"
+                  : "pusheast"
+              ][POS] = emptyObj;
+            }
+          }
+          let WALKLENGTH = walkedsquares.length;
+          POS = STARTPOS;
+          ARTIFACTS[
+            DIR === 1
+              ? "squishsouth"
+              : DIR === 3
+              ? "squishwest"
+              : DIR === 5
+              ? "squishnorth"
+              : "squisheast"
+          ][POS] = { dir: relativeDirs[DIR][5] };
+          if (WALKLENGTH) {
+            ARTIFACTS[
+              DIR === 1
+                ? "spawnsouth"
+                : DIR === 3
+                ? "spawnwest"
+                : DIR === 5
+                ? "spawnnorth"
+                : "spawneast"
+            ][walkedsquares[WALKLENGTH - 1]] = emptyObj;
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
+        LINKS.commands.south = "south1";
+      }
+      if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
+        LINKS.commands.north = "north1";
+      }
+      if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
+        LINKS.commands.west = "west1";
+      }
+      if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
+        LINKS.commands.east = "east1";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        NEXTSPAWNID: step.NEXTSPAWNID
+      };
+    },
+    selectpushpoint2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        targetedgepoints: {},
+        squishsouth: {},
+        squishwest: {},
+        squishnorth: {},
+        squisheast: {},
+        pushsouth: {},
+        pushwest: {},
+        pushnorth: {},
+        pusheast: {},
+        spawnsouth: {},
+        spawnwest: {},
+        spawnnorth: {},
+        spawneast: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectpushpoint: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        for (let DIR of orthoDirs) {
+          let walkedsquares = [];
+          let POS = MARKS.selectpushpoint;
+          while ((POS = connections[POS][DIR])) {
             walkedsquares.push(POS);
           }
           let WALKLENGTH = walkedsquares.length;
-          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-            POS = walkedsquares[walkstepper];
-            if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = emptyObj;
+          if (WALKLENGTH) {
+            if (
+              WALKLENGTH === 3 &&
+              !UNITLAYERS.oppunits[walkedsquares[WALKLENGTH - 1]]
+            ) {
+              ARTIFACTS.targetedgepoints[walkedsquares[WALKLENGTH - 1]] = {
+                dir: relativeDirs[DIR][5]
+              };
             }
           }
         }
       }
-    }
-    if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
-    } else {
-      LINKS.endTurn = "startTurn1";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-      NEXTSPAWNID,
-      anim
-    };
-  };
-  game.instruction.south2 = () => defaultInstruction(2);
-  game.action.east2 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
-    let ARTIFACTS = {
-      targetedgepoints: step.ARTIFACTS.targetedgepoints,
-      squishsouth: step.ARTIFACTS.squishsouth,
-      squishwest: step.ARTIFACTS.squishwest,
-      squishnorth: step.ARTIFACTS.squishnorth,
-      squisheast: step.ARTIFACTS.squisheast,
-      pushsouth: step.ARTIFACTS.pushsouth,
-      pushwest: step.ARTIFACTS.pushwest,
-      pushnorth: step.ARTIFACTS.pushnorth,
-      pusheast: step.ARTIFACTS.pusheast,
-      spawnsouth: step.ARTIFACTS.spawnsouth,
-      spawnwest: step.ARTIFACTS.spawnwest,
-      spawnnorth: step.ARTIFACTS.spawnnorth,
-      spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: {}
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let NEXTSPAWNID = step.NEXTSPAWNID;
-    {
-      const LOOPSET = ARTIFACTS.squisheast;
-      for (let LOOPPOS in LOOPSET) {
-        anim.exitTo[LOOPPOS] = offsetPos(
-          LOOPPOS,
-          (LOOPSET[LOOPPOS] || {}).dir,
-          1,
-          0
-        );
-      }
-    }
-    delete UNITDATA[
-      (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
-    ];
-    for (let LOOPPOS in ARTIFACTS.pusheast) {
       {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
-          };
-        }
-      }
-    }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: Object.keys(ARTIFACTS.spawneast)[0],
-        id: newunitid,
-        group: "soldiers",
-        owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
-      };
-    }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    {
-      let allowedsteps = UNITLAYERS.myunits;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        for (let DIR of roseDirs) {
+        for (let STARTPOS in ARTIFACTS.targetedgepoints) {
+          let DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {}).dir;
           let walkedsquares = [];
           let POS = "faux";
           connections.faux[DIR] = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+          let STEP = 0;
+          while ((POS = connections[POS][DIR])) {
             walkedsquares.push(POS);
-          }
-          let WALKLENGTH = walkedsquares.length;
-          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-            POS = walkedsquares[walkstepper];
-            if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = emptyObj;
+            STEP++;
+            if (STEP !== 1) {
+              ARTIFACTS[
+                DIR === 1
+                  ? "pushsouth"
+                  : DIR === 3
+                  ? "pushwest"
+                  : DIR === 5
+                  ? "pushnorth"
+                  : "pusheast"
+              ][POS] = emptyObj;
             }
           }
+          let WALKLENGTH = walkedsquares.length;
+          POS = STARTPOS;
+          ARTIFACTS[
+            DIR === 1
+              ? "squishsouth"
+              : DIR === 3
+              ? "squishwest"
+              : DIR === 5
+              ? "squishnorth"
+              : "squisheast"
+          ][POS] = { dir: relativeDirs[DIR][5] };
+          if (WALKLENGTH) {
+            ARTIFACTS[
+              DIR === 1
+                ? "spawnsouth"
+                : DIR === 3
+                ? "spawnwest"
+                : DIR === 5
+                ? "spawnnorth"
+                : "spawneast"
+            ][walkedsquares[WALKLENGTH - 1]] = emptyObj;
+          }
         }
       }
-    }
-    if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
-    } else {
-      LINKS.endTurn = "startTurn1";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-      NEXTSPAWNID,
-      anim
-    };
-  };
-  game.instruction.east2 = () => defaultInstruction(2);
-  game.action.west2 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
-    let ARTIFACTS = {
-      targetedgepoints: step.ARTIFACTS.targetedgepoints,
-      squishsouth: step.ARTIFACTS.squishsouth,
-      squishwest: step.ARTIFACTS.squishwest,
-      squishnorth: step.ARTIFACTS.squishnorth,
-      squisheast: step.ARTIFACTS.squisheast,
-      pushsouth: step.ARTIFACTS.pushsouth,
-      pushwest: step.ARTIFACTS.pushwest,
-      pushnorth: step.ARTIFACTS.pushnorth,
-      pusheast: step.ARTIFACTS.pusheast,
-      spawnsouth: step.ARTIFACTS.spawnsouth,
-      spawnwest: step.ARTIFACTS.spawnwest,
-      spawnnorth: step.ARTIFACTS.spawnnorth,
-      spawneast: step.ARTIFACTS.spawneast,
-      fourinarow: {}
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let NEXTSPAWNID = step.NEXTSPAWNID;
-    {
-      const LOOPSET = ARTIFACTS.squishwest;
-      for (let LOOPPOS in LOOPSET) {
-        anim.exitTo[LOOPPOS] = offsetPos(
-          LOOPPOS,
-          (LOOPSET[LOOPPOS] || {}).dir,
-          1,
-          0
-        );
+      if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
+        LINKS.commands.south = "south2";
       }
-    }
-    delete UNITDATA[
-      (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
-    ];
-    for (let LOOPPOS in ARTIFACTS.pushwest) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
-          };
-        }
+      if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
+        LINKS.commands.north = "north2";
       }
-    }
-    {
-      let newunitid = "spawn" + NEXTSPAWNID++;
-      UNITDATA[newunitid] = {
-        pos: Object.keys(ARTIFACTS.spawnwest)[0],
-        id: newunitid,
-        group: "soldiers",
-        owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
+      if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
+        LINKS.commands.west = "west2";
+      }
+      if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
+        LINKS.commands.east = "east2";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS,
+        NEXTSPAWNID: step.NEXTSPAWNID
       };
-    }
-    UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    {
-      let allowedsteps = UNITLAYERS.myunits;
-      for (let STARTPOS in UNITLAYERS.myunits) {
-        for (let DIR of roseDirs) {
-          let walkedsquares = [];
-          let POS = "faux";
-          connections.faux[DIR] = STARTPOS;
-          while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
-            walkedsquares.push(POS);
-          }
-          let WALKLENGTH = walkedsquares.length;
-          for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
-            POS = walkedsquares[walkstepper];
-            if (WALKLENGTH === 4) {
-              ARTIFACTS.fourinarow[POS] = emptyObj;
-            }
-          }
+    },
+    north1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        targetedgepoints: step.ARTIFACTS.targetedgepoints,
+        squishsouth: step.ARTIFACTS.squishsouth,
+        squishwest: step.ARTIFACTS.squishwest,
+        squishnorth: step.ARTIFACTS.squishnorth,
+        squisheast: step.ARTIFACTS.squisheast,
+        pushsouth: step.ARTIFACTS.pushsouth,
+        pushwest: step.ARTIFACTS.pushwest,
+        pushnorth: step.ARTIFACTS.pushnorth,
+        pusheast: step.ARTIFACTS.pusheast,
+        spawnsouth: step.ARTIFACTS.spawnsouth,
+        spawnwest: step.ARTIFACTS.spawnwest,
+        spawnnorth: step.ARTIFACTS.spawnnorth,
+        spawneast: step.ARTIFACTS.spawneast,
+        fourinarow: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      {
+        const LOOPSET = ARTIFACTS.squishnorth;
+        for (let LOOPPOS in LOOPSET) {
+          anim.exitTo[LOOPPOS] = offsetPos(
+            LOOPPOS,
+            (LOOPSET[LOOPPOS] || {}).dir,
+            1,
+            0
+          );
         }
       }
-    }
-    if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "madeline";
-      LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
-    } else {
-      LINKS.endTurn = "startTurn1";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS,
-      NEXTSPAWNID,
-      anim
-    };
-  };
-  game.instruction.west2 = () => defaultInstruction(2);
-  game.action.selectpushpoint2 = (step, newMarkPos) => {
-    let ARTIFACTS = {
-      targetedgepoints: {},
-      squishsouth: {},
-      squishwest: {},
-      squishnorth: {},
-      squisheast: {},
-      pushsouth: {},
-      pushwest: {},
-      pushnorth: {},
-      pusheast: {},
-      spawnsouth: {},
-      spawnwest: {},
-      spawnnorth: {},
-      spawneast: {}
-    };
-    let LINKS = { marks: {}, commands: {} };
-    let MARKS = {
-      selectpushpoint: newMarkPos
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    {
-      for (let DIR of orthoDirs) {
-        let walkedsquares = [];
-        let POS = MARKS.selectpushpoint;
-        while ((POS = connections[POS][DIR])) {
-          walkedsquares.push(POS);
-        }
-        let WALKLENGTH = walkedsquares.length;
-        if (WALKLENGTH) {
-          if (
-            WALKLENGTH === 3 &&
-            !UNITLAYERS.oppunits[walkedsquares[WALKLENGTH - 1]]
-          ) {
-            ARTIFACTS.targetedgepoints[walkedsquares[WALKLENGTH - 1]] = {
-              dir: relativeDirs[DIR][5]
+      delete UNITDATA[
+        (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
+      ];
+      for (let LOOPPOS in ARTIFACTS.pushnorth) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
             };
           }
         }
       }
-    }
-    {
-      for (let STARTPOS in ARTIFACTS.targetedgepoints) {
-        let DIR = (ARTIFACTS.targetedgepoints[STARTPOS] || {}).dir;
-        let walkedsquares = [];
-        let POS = "faux";
-        connections.faux[DIR] = STARTPOS;
-        let STEP = 0;
-        while ((POS = connections[POS][DIR])) {
-          walkedsquares.push(POS);
-          STEP++;
-          if (STEP !== 1) {
-            ARTIFACTS[
-              DIR === 1
-                ? "pushsouth"
-                : DIR === 3
-                ? "pushwest"
-                : DIR === 5
-                ? "pushnorth"
-                : "pusheast"
-            ][POS] = emptyObj;
-          }
-        }
-        let WALKLENGTH = walkedsquares.length;
-        POS = STARTPOS;
-        ARTIFACTS[
-          DIR === 1
-            ? "squishsouth"
-            : DIR === 3
-            ? "squishwest"
-            : DIR === 5
-            ? "squishnorth"
-            : "squisheast"
-        ][POS] = { dir: relativeDirs[DIR][5] };
-        if (WALKLENGTH) {
-          ARTIFACTS[
-            DIR === 1
-              ? "spawnsouth"
-              : DIR === 3
-              ? "spawnwest"
-              : DIR === 5
-              ? "spawnnorth"
-              : "spawneast"
-          ][walkedsquares[WALKLENGTH - 1]] = emptyObj;
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: Object.keys(ARTIFACTS.spawnnorth)[0],
+          id: newunitid,
+          group: "soldiers",
+          owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
+        };
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
         }
       }
-    }
-    if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
-      LINKS.commands.south = "south2";
-    }
-    if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
-      LINKS.commands.north = "north2";
-    }
-    if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
-      LINKS.commands.west = "west2";
-    }
-    if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
-      LINKS.commands.east = "east2";
-    }
-    return {
-      LINKS,
-      ARTIFACTS,
-      UNITLAYERS,
-      UNITDATA: step.UNITDATA,
-      TURN: step.TURN,
-      MARKS,
-      NEXTSPAWNID: step.NEXTSPAWNID
-    };
-  };
-  game.instruction.selectpushpoint2 = step => {
-    let ARTIFACTS = step.ARTIFACTS;
-    let MARKS = step.MARKS;
-    return collapseContent({
-      line: [
-        { text: "Press" },
-        collapseContent({
-          line: [
-            Object.keys(ARTIFACTS.spawnsouth).length !== 0
-              ? { command: "south" }
-              : undefined,
-            Object.keys(ARTIFACTS.spawnnorth).length !== 0
-              ? { command: "north" }
-              : undefined,
-            Object.keys(ARTIFACTS.spawnwest).length !== 0
-              ? { command: "west" }
-              : undefined,
-            Object.keys(ARTIFACTS.spawneast).length !== 0
-              ? { command: "east" }
-              : undefined
-          ]
-            .filter(i => !!i)
-            .reduce((mem, i, n, list) => {
-              mem.push(i);
-              if (n === list.length - 2) {
-                mem.push({ text: " or " });
-              } else if (n < list.length - 2) {
-                mem.push({ text: ", " });
+      {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in UNITLAYERS.myunits) {
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.fourinarow[POS] = emptyObj;
               }
-              return mem;
-            }, [])
-        }),
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    south1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        targetedgepoints: step.ARTIFACTS.targetedgepoints,
+        squishsouth: step.ARTIFACTS.squishsouth,
+        squishwest: step.ARTIFACTS.squishwest,
+        squishnorth: step.ARTIFACTS.squishnorth,
+        squisheast: step.ARTIFACTS.squisheast,
+        pushsouth: step.ARTIFACTS.pushsouth,
+        pushwest: step.ARTIFACTS.pushwest,
+        pushnorth: step.ARTIFACTS.pushnorth,
+        pusheast: step.ARTIFACTS.pusheast,
+        spawnsouth: step.ARTIFACTS.spawnsouth,
+        spawnwest: step.ARTIFACTS.spawnwest,
+        spawnnorth: step.ARTIFACTS.spawnnorth,
+        spawneast: step.ARTIFACTS.spawneast,
+        fourinarow: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      {
+        const LOOPSET = ARTIFACTS.squishsouth;
+        for (let LOOPPOS in LOOPSET) {
+          anim.exitTo[LOOPPOS] = offsetPos(
+            LOOPPOS,
+            (LOOPSET[LOOPPOS] || {}).dir,
+            1,
+            0
+          );
+        }
+      }
+      delete UNITDATA[
+        (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
+      ];
+      for (let LOOPPOS in ARTIFACTS.pushsouth) {
         {
-          text: "to shove in that direction and make room for the new unit at"
-        },
-        { pos: MARKS.selectpushpoint }
-      ]
-    });
-  };
-}
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
+            };
+          }
+        }
+      }
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: Object.keys(ARTIFACTS.spawnsouth)[0],
+          id: newunitid,
+          group: "soldiers",
+          owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
+        };
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in UNITLAYERS.myunits) {
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.fourinarow[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    east1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        targetedgepoints: step.ARTIFACTS.targetedgepoints,
+        squishsouth: step.ARTIFACTS.squishsouth,
+        squishwest: step.ARTIFACTS.squishwest,
+        squishnorth: step.ARTIFACTS.squishnorth,
+        squisheast: step.ARTIFACTS.squisheast,
+        pushsouth: step.ARTIFACTS.pushsouth,
+        pushwest: step.ARTIFACTS.pushwest,
+        pushnorth: step.ARTIFACTS.pushnorth,
+        pusheast: step.ARTIFACTS.pusheast,
+        spawnsouth: step.ARTIFACTS.spawnsouth,
+        spawnwest: step.ARTIFACTS.spawnwest,
+        spawnnorth: step.ARTIFACTS.spawnnorth,
+        spawneast: step.ARTIFACTS.spawneast,
+        fourinarow: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      {
+        const LOOPSET = ARTIFACTS.squisheast;
+        for (let LOOPPOS in LOOPSET) {
+          anim.exitTo[LOOPPOS] = offsetPos(
+            LOOPPOS,
+            (LOOPSET[LOOPPOS] || {}).dir,
+            1,
+            0
+          );
+        }
+      }
+      delete UNITDATA[
+        (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
+      ];
+      for (let LOOPPOS in ARTIFACTS.pusheast) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
+            };
+          }
+        }
+      }
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: Object.keys(ARTIFACTS.spawneast)[0],
+          id: newunitid,
+          group: "soldiers",
+          owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
+        };
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in UNITLAYERS.myunits) {
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.fourinarow[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    west1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        targetedgepoints: step.ARTIFACTS.targetedgepoints,
+        squishsouth: step.ARTIFACTS.squishsouth,
+        squishwest: step.ARTIFACTS.squishwest,
+        squishnorth: step.ARTIFACTS.squishnorth,
+        squisheast: step.ARTIFACTS.squisheast,
+        pushsouth: step.ARTIFACTS.pushsouth,
+        pushwest: step.ARTIFACTS.pushwest,
+        pushnorth: step.ARTIFACTS.pushnorth,
+        pusheast: step.ARTIFACTS.pusheast,
+        spawnsouth: step.ARTIFACTS.spawnsouth,
+        spawnwest: step.ARTIFACTS.spawnwest,
+        spawnnorth: step.ARTIFACTS.spawnnorth,
+        spawneast: step.ARTIFACTS.spawneast,
+        fourinarow: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      {
+        const LOOPSET = ARTIFACTS.squishwest;
+        for (let LOOPPOS in LOOPSET) {
+          anim.exitTo[LOOPPOS] = offsetPos(
+            LOOPPOS,
+            (LOOPSET[LOOPPOS] || {}).dir,
+            1,
+            0
+          );
+        }
+      }
+      delete UNITDATA[
+        (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
+      ];
+      for (let LOOPPOS in ARTIFACTS.pushwest) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
+            };
+          }
+        }
+      }
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: Object.keys(ARTIFACTS.spawnwest)[0],
+          id: newunitid,
+          group: "soldiers",
+          owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 1 : 0
+        };
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in UNITLAYERS.myunits) {
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.fourinarow[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    north2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        targetedgepoints: step.ARTIFACTS.targetedgepoints,
+        squishsouth: step.ARTIFACTS.squishsouth,
+        squishwest: step.ARTIFACTS.squishwest,
+        squishnorth: step.ARTIFACTS.squishnorth,
+        squisheast: step.ARTIFACTS.squisheast,
+        pushsouth: step.ARTIFACTS.pushsouth,
+        pushwest: step.ARTIFACTS.pushwest,
+        pushnorth: step.ARTIFACTS.pushnorth,
+        pusheast: step.ARTIFACTS.pusheast,
+        spawnsouth: step.ARTIFACTS.spawnsouth,
+        spawnwest: step.ARTIFACTS.spawnwest,
+        spawnnorth: step.ARTIFACTS.spawnnorth,
+        spawneast: step.ARTIFACTS.spawneast,
+        fourinarow: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      {
+        const LOOPSET = ARTIFACTS.squishnorth;
+        for (let LOOPPOS in LOOPSET) {
+          anim.exitTo[LOOPPOS] = offsetPos(
+            LOOPPOS,
+            (LOOPSET[LOOPPOS] || {}).dir,
+            1,
+            0
+          );
+        }
+      }
+      delete UNITDATA[
+        (UNITLAYERS.units[Object.keys(ARTIFACTS.squishnorth)[0]] || {}).id
+      ];
+      for (let LOOPPOS in ARTIFACTS.pushnorth) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, 1, 1, 0, dimensions)
+            };
+          }
+        }
+      }
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: Object.keys(ARTIFACTS.spawnnorth)[0],
+          id: newunitid,
+          group: "soldiers",
+          owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
+        };
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in UNITLAYERS.myunits) {
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.fourinarow[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    south2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        targetedgepoints: step.ARTIFACTS.targetedgepoints,
+        squishsouth: step.ARTIFACTS.squishsouth,
+        squishwest: step.ARTIFACTS.squishwest,
+        squishnorth: step.ARTIFACTS.squishnorth,
+        squisheast: step.ARTIFACTS.squisheast,
+        pushsouth: step.ARTIFACTS.pushsouth,
+        pushwest: step.ARTIFACTS.pushwest,
+        pushnorth: step.ARTIFACTS.pushnorth,
+        pusheast: step.ARTIFACTS.pusheast,
+        spawnsouth: step.ARTIFACTS.spawnsouth,
+        spawnwest: step.ARTIFACTS.spawnwest,
+        spawnnorth: step.ARTIFACTS.spawnnorth,
+        spawneast: step.ARTIFACTS.spawneast,
+        fourinarow: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      {
+        const LOOPSET = ARTIFACTS.squishsouth;
+        for (let LOOPPOS in LOOPSET) {
+          anim.exitTo[LOOPPOS] = offsetPos(
+            LOOPPOS,
+            (LOOPSET[LOOPPOS] || {}).dir,
+            1,
+            0
+          );
+        }
+      }
+      delete UNITDATA[
+        (UNITLAYERS.units[Object.keys(ARTIFACTS.squishsouth)[0]] || {}).id
+      ];
+      for (let LOOPPOS in ARTIFACTS.pushsouth) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, 5, 1, 0, dimensions)
+            };
+          }
+        }
+      }
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: Object.keys(ARTIFACTS.spawnsouth)[0],
+          id: newunitid,
+          group: "soldiers",
+          owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
+        };
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in UNITLAYERS.myunits) {
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.fourinarow[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    east2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        targetedgepoints: step.ARTIFACTS.targetedgepoints,
+        squishsouth: step.ARTIFACTS.squishsouth,
+        squishwest: step.ARTIFACTS.squishwest,
+        squishnorth: step.ARTIFACTS.squishnorth,
+        squisheast: step.ARTIFACTS.squisheast,
+        pushsouth: step.ARTIFACTS.pushsouth,
+        pushwest: step.ARTIFACTS.pushwest,
+        pushnorth: step.ARTIFACTS.pushnorth,
+        pusheast: step.ARTIFACTS.pusheast,
+        spawnsouth: step.ARTIFACTS.spawnsouth,
+        spawnwest: step.ARTIFACTS.spawnwest,
+        spawnnorth: step.ARTIFACTS.spawnnorth,
+        spawneast: step.ARTIFACTS.spawneast,
+        fourinarow: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      {
+        const LOOPSET = ARTIFACTS.squisheast;
+        for (let LOOPPOS in LOOPSET) {
+          anim.exitTo[LOOPPOS] = offsetPos(
+            LOOPPOS,
+            (LOOPSET[LOOPPOS] || {}).dir,
+            1,
+            0
+          );
+        }
+      }
+      delete UNITDATA[
+        (UNITLAYERS.units[Object.keys(ARTIFACTS.squisheast)[0]] || {}).id
+      ];
+      for (let LOOPPOS in ARTIFACTS.pusheast) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, 3, 1, 0, dimensions)
+            };
+          }
+        }
+      }
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: Object.keys(ARTIFACTS.spawneast)[0],
+          id: newunitid,
+          group: "soldiers",
+          owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
+        };
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in UNITLAYERS.myunits) {
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.fourinarow[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID,
+        anim
+      };
+    },
+    west2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
+      let ARTIFACTS = {
+        targetedgepoints: step.ARTIFACTS.targetedgepoints,
+        squishsouth: step.ARTIFACTS.squishsouth,
+        squishwest: step.ARTIFACTS.squishwest,
+        squishnorth: step.ARTIFACTS.squishnorth,
+        squisheast: step.ARTIFACTS.squisheast,
+        pushsouth: step.ARTIFACTS.pushsouth,
+        pushwest: step.ARTIFACTS.pushwest,
+        pushnorth: step.ARTIFACTS.pushnorth,
+        pusheast: step.ARTIFACTS.pusheast,
+        spawnsouth: step.ARTIFACTS.spawnsouth,
+        spawnwest: step.ARTIFACTS.spawnwest,
+        spawnnorth: step.ARTIFACTS.spawnnorth,
+        spawneast: step.ARTIFACTS.spawneast,
+        fourinarow: {}
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let NEXTSPAWNID = step.NEXTSPAWNID;
+      {
+        const LOOPSET = ARTIFACTS.squishwest;
+        for (let LOOPPOS in LOOPSET) {
+          anim.exitTo[LOOPPOS] = offsetPos(
+            LOOPPOS,
+            (LOOPSET[LOOPPOS] || {}).dir,
+            1,
+            0
+          );
+        }
+      }
+      delete UNITDATA[
+        (UNITLAYERS.units[Object.keys(ARTIFACTS.squishwest)[0]] || {}).id
+      ];
+      for (let LOOPPOS in ARTIFACTS.pushwest) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              pos: offsetPos(LOOPPOS, 7, 1, 0, dimensions)
+            };
+          }
+        }
+      }
+      {
+        let newunitid = "spawn" + NEXTSPAWNID++;
+        UNITDATA[newunitid] = {
+          pos: Object.keys(ARTIFACTS.spawnwest)[0],
+          id: newunitid,
+          group: "soldiers",
+          owner: 8 > Object.keys(UNITLAYERS.myunits).length ? 2 : 0
+        };
+      }
+      UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      {
+        let allowedsteps = UNITLAYERS.myunits;
+        for (let STARTPOS in UNITLAYERS.myunits) {
+          for (let DIR of roseDirs) {
+            let walkedsquares = [];
+            let POS = "faux";
+            connections.faux[DIR] = STARTPOS;
+            while ((POS = connections[POS][DIR]) && allowedsteps[POS]) {
+              walkedsquares.push(POS);
+            }
+            let WALKLENGTH = walkedsquares.length;
+            for (let walkstepper = 0; walkstepper < WALKLENGTH; walkstepper++) {
+              POS = walkedsquares[walkstepper];
+              if (WALKLENGTH === 4) {
+                ARTIFACTS.fourinarow[POS] = emptyObj;
+              }
+            }
+          }
+        }
+      }
+      if (Object.keys(ARTIFACTS.fourinarow).length !== 0) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "madeline";
+        LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS,
+        NEXTSPAWNID,
+        anim
+      };
+    }
+  },
+  instruction: {
+    startTurn1: step => {
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { select: "Select" },
+          { text: "where to shove in" },
+          Object.keys(UNITLAYERS.myunits).length === 7
+            ? collapseContent({
+                line: [
+                  { text: "your last off-board" },
+                  { unittype: ["pawn", 1] }
+                ]
+              })
+            : Object.keys(UNITLAYERS.myunits).length === 8
+            ? collapseContent({
+                line: [{ text: "a" }, { unittype: ["pawn", 0] }]
+              })
+            : collapseContent({
+                line: [
+                  { text: "one of your" },
+                  { text: 8 - Object.keys(UNITLAYERS.myunits).length },
+                  collapseContent({
+                    line: [
+                      { text: "remaining off-board" },
+                      { unittype: ["pawn", 1] }
+                    ]
+                  })
+                ]
+              })
+        ]
+      });
+    },
+    north1: () => defaultInstruction(1),
+    south1: () => defaultInstruction(1),
+    east1: () => defaultInstruction(1),
+    west1: () => defaultInstruction(1),
+    selectpushpoint1: step => {
+      let ARTIFACTS = step.ARTIFACTS;
+      let MARKS = step.MARKS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          collapseContent({
+            line: [
+              Object.keys(ARTIFACTS.spawnsouth).length !== 0
+                ? { command: "south" }
+                : undefined,
+              Object.keys(ARTIFACTS.spawnnorth).length !== 0
+                ? { command: "north" }
+                : undefined,
+              Object.keys(ARTIFACTS.spawnwest).length !== 0
+                ? { command: "west" }
+                : undefined,
+              Object.keys(ARTIFACTS.spawneast).length !== 0
+                ? { command: "east" }
+                : undefined
+            ]
+              .filter(i => !!i)
+              .reduce((mem, i, n, list) => {
+                mem.push(i);
+                if (n === list.length - 2) {
+                  mem.push({ text: " or " });
+                } else if (n < list.length - 2) {
+                  mem.push({ text: ", " });
+                }
+                return mem;
+              }, [])
+          }),
+          {
+            text: "to shove in that direction and make room for the new unit at"
+          },
+          { pos: MARKS.selectpushpoint }
+        ]
+      });
+    },
+    startTurn2: step => {
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { select: "Select" },
+          { text: "where to shove in" },
+          Object.keys(UNITLAYERS.myunits).length === 7
+            ? collapseContent({
+                line: [
+                  { text: "your last off-board" },
+                  { unittype: ["pawn", 2] }
+                ]
+              })
+            : Object.keys(UNITLAYERS.myunits).length === 8
+            ? collapseContent({
+                line: [{ text: "a" }, { unittype: ["pawn", 0] }]
+              })
+            : collapseContent({
+                line: [
+                  { text: "one of your" },
+                  { text: 8 - Object.keys(UNITLAYERS.myunits).length },
+                  collapseContent({
+                    line: [
+                      { text: "remaining off-board" },
+                      { unittype: ["pawn", 2] }
+                    ]
+                  })
+                ]
+              })
+        ]
+      });
+    },
+    north2: () => defaultInstruction(2),
+    south2: () => defaultInstruction(2),
+    east2: () => defaultInstruction(2),
+    west2: () => defaultInstruction(2),
+    selectpushpoint2: step => {
+      let ARTIFACTS = step.ARTIFACTS;
+      let MARKS = step.MARKS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          collapseContent({
+            line: [
+              Object.keys(ARTIFACTS.spawnsouth).length !== 0
+                ? { command: "south" }
+                : undefined,
+              Object.keys(ARTIFACTS.spawnnorth).length !== 0
+                ? { command: "north" }
+                : undefined,
+              Object.keys(ARTIFACTS.spawnwest).length !== 0
+                ? { command: "west" }
+                : undefined,
+              Object.keys(ARTIFACTS.spawneast).length !== 0
+                ? { command: "east" }
+                : undefined
+            ]
+              .filter(i => !!i)
+              .reduce((mem, i, n, list) => {
+                mem.push(i);
+                if (n === list.length - 2) {
+                  mem.push({ text: " or " });
+                } else if (n < list.length - 2) {
+                  mem.push({ text: ", " });
+                }
+                return mem;
+              }, [])
+          }),
+          {
+            text: "to shove in that direction and make room for the new unit at"
+          },
+          { pos: MARKS.selectpushpoint }
+        ]
+      });
+    }
+  }
+};
 export default game;

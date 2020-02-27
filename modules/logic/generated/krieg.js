@@ -19,381 +19,37 @@ const iconMapping = { notfrozens: "knight", frozens: "knight" };
 const emptyArtifactLayers = { movetargets: {} };
 const connections = boardConnections({ height: 4, width: 4 });
 const relativeDirs = makeRelativeDirs([]);
-let game = {
-  gameId: "krieg",
-  action: {},
-  instruction: {},
-  commands: { move: {} },
-  iconMap: { notfrozens: "knight", frozens: "knight" }
+let TERRAIN1;
+let TERRAIN2;
+const groupLayers1 = {
+  notfrozens: [
+    ["units"],
+    ["units", "myunits", "mynotfrozens"],
+    ["units", "oppunits", "oppnotfrozens"]
+  ],
+  frozens: [
+    ["units"],
+    ["units", "myunits", "myfrozens"],
+    ["units", "oppunits", "oppfrozens"]
+  ]
 };
-{
-  const groupLayers = {
-    notfrozens: [
-      ["units"],
-      ["units", "myunits", "mynotfrozens"],
-      ["units", "oppunits", "oppnotfrozens"]
-    ],
-    frozens: [
-      ["units"],
-      ["units", "myunits", "myfrozens"],
-      ["units", "oppunits", "oppfrozens"]
-    ]
-  };
-  const TERRAIN = terrainLayers(
-    4,
-    4,
-    {
-      southeast: ["a4", "c2"],
-      northwest: ["b3", "d1"],
-      corners: { "1": ["a4"], "2": ["d1"] },
-      bases: { "1": ["b4", "a3", "b3"], "2": ["c2", "d2", "c1"] }
-    },
-    1
-  );
-  game.action.startTurn1 = step => {
-    const oldUnitLayers = step.UNITLAYERS;
-    let UNITLAYERS = {
-      units: oldUnitLayers.units,
-      myunits: oldUnitLayers.oppunits,
-      oppunits: oldUnitLayers.myunits,
-      mynotfrozens: oldUnitLayers.oppnotfrozens,
-      oppnotfrozens: oldUnitLayers.mynotfrozens,
-      myfrozens: oldUnitLayers.oppfrozens,
-      oppfrozens: oldUnitLayers.myfrozens
-    };
-    let LINKS = {
-      marks: {},
-      commands: {}
-    };
-    for (const pos of Object.keys(UNITLAYERS.mynotfrozens)) {
-      LINKS.marks[pos] = "selectunit1";
-    }
-    return {
-      UNITDATA: step.UNITDATA,
-      LINKS,
-      UNITLAYERS,
-      ARTIFACTS: emptyArtifactLayers,
-      MARKS: {},
-      TURN: step.TURN + 1
-    };
-  };
-  game.instruction.startTurn1 = step => {
-    let UNITLAYERS = step.UNITLAYERS;
-    let TURN = step.TURN;
-    return TURN > 1
-      ? collapseContent({
-          line: [
-            { select: "Select" },
-            { unittype: ["knight", 1] },
-            { text: "to move (except" },
-            {
-              unit: [
-                iconMapping[
-                  (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
-                    .group
-                ],
-                (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
-                  .owner,
-                Object.keys(UNITLAYERS.myfrozens)[0]
-              ]
-            },
-            { text: "who moved last turn)" }
-          ]
-        })
-      : collapseContent({
-          line: [
-            { select: "Select" },
-            { unittype: ["knight", 1] },
-            { text: "to move" }
-          ]
-        });
-  };
-  game.action.move1 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.myfrozens) {
-      {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
-        if (unitid) {
-          UNITDATA[unitid] = {
-            ...UNITDATA[unitid],
-            group: "notfrozens"
-          };
-        }
-      }
-    }
-    {
-      let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
-      if (unitid) {
-        UNITDATA[unitid] = {
-          ...UNITDATA[unitid],
-          group: "frozens"
-        };
-      }
-    }
-    {
-      let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
-      if (unitid) {
-        UNITDATA[unitid] = {
-          ...UNITDATA[unitid],
-          pos: MARKS.selectmove
-        };
-      }
-    }
-    UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      mynotfrozens: {},
-      oppnotfrozens: {},
-      myfrozens: {},
-      oppfrozens: {}
-    };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppcorners)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length !== 0
-    ) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "cornerinfiltration";
-      LINKS.endMarks = Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppcorners)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      );
-    } else if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppbases)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length === 2
-    ) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "occupation";
-      LINKS.endMarks = Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppbases)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      );
-    } else {
-      LINKS.endTurn = "startTurn2";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS: step.ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS
-    };
-  };
-  game.instruction.move1 = () => defaultInstruction(1);
-  game.action.selectunit1 = (step, newMarkPos) => {
-    let ARTIFACTS = {
-      movetargets: {}
-    };
-    let LINKS = { marks: {}, commands: {} };
-    let MARKS = {
-      selectunit: newMarkPos
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    {
-      let STARTPOS = MARKS.selectunit;
-      let startconnections = connections[STARTPOS];
-      for (let DIR of TERRAIN.southeast[STARTPOS]
-        ? [1, 3, 4, 5, 7]
-        : TERRAIN.northwest[STARTPOS]
-        ? [1, 3, 5, 7, 8]
-        : orthoDirs) {
-        let POS = startconnections[DIR];
-        if (POS && !UNITLAYERS.units[POS]) {
-          ARTIFACTS.movetargets[POS] = emptyObj;
-        }
-      }
-    }
-    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.marks[pos] = "selectmove1";
-    }
-    return {
-      LINKS,
-      ARTIFACTS,
-      UNITLAYERS,
-      UNITDATA: step.UNITDATA,
-      TURN: step.TURN,
-      MARKS
-    };
-  };
-  game.instruction.selectunit1 = step => {
-    let MARKS = step.MARKS;
-    let UNITLAYERS = step.UNITLAYERS;
-    return collapseContent({
-      line: [
-        { select: "Select" },
-        { text: "an empty square to move" },
-        {
-          unit: [
-            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-            MARKS.selectunit
-          ]
-        },
-        { text: "to" }
-      ]
-    });
-  };
-  game.action.selectmove1 = (step, newMarkPos) => {
-    let LINKS = { marks: {}, commands: {} };
-    LINKS.commands.move = "move1";
-    return {
-      LINKS,
-      ARTIFACTS: step.ARTIFACTS,
-      UNITLAYERS: step.UNITLAYERS,
-      UNITDATA: step.UNITDATA,
-      TURN: step.TURN,
-      MARKS: { selectunit: step.MARKS.selectunit, selectmove: newMarkPos }
-    };
-  };
-  game.instruction.selectmove1 = step => {
-    let MARKS = step.MARKS;
-    let UNITLAYERS = step.UNITLAYERS;
-    return collapseContent({
-      line: [
-        { text: "Press" },
-        { command: "move" },
-        { text: "to make" },
-        {
-          unit: [
-            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-            MARKS.selectunit
-          ]
-        },
-        { text: "go" },
-        TERRAIN.oppbases[MARKS.selectmove] &&
-        !TERRAIN.oppbases[MARKS.selectunit]
-          ? collapseContent({
-              line: [
-                { text: "into the opponent base at" },
-                { pos: MARKS.selectmove }
-              ]
-            })
-          : collapseContent({
-              line: [{ text: "to" }, { pos: MARKS.selectmove }]
-            })
-      ]
-    });
-  };
-}
-{
-  const groupLayers = {
-    notfrozens: [
-      ["units"],
-      ["units", "oppunits", "oppnotfrozens"],
-      ["units", "myunits", "mynotfrozens"]
-    ],
-    frozens: [
-      ["units"],
-      ["units", "oppunits", "oppfrozens"],
-      ["units", "myunits", "myfrozens"]
-    ]
-  };
-  const TERRAIN = terrainLayers(
-    4,
-    4,
-    {
-      southeast: ["a4", "c2"],
-      northwest: ["b3", "d1"],
-      corners: { "1": ["a4"], "2": ["d1"] },
-      bases: { "1": ["b4", "a3", "b3"], "2": ["c2", "d2", "c1"] }
-    },
-    2
-  );
-  game.action.startTurn2 = step => {
-    const oldUnitLayers = step.UNITLAYERS;
-    let UNITLAYERS = {
-      units: oldUnitLayers.units,
-      myunits: oldUnitLayers.oppunits,
-      oppunits: oldUnitLayers.myunits,
-      mynotfrozens: oldUnitLayers.oppnotfrozens,
-      oppnotfrozens: oldUnitLayers.mynotfrozens,
-      myfrozens: oldUnitLayers.oppfrozens,
-      oppfrozens: oldUnitLayers.myfrozens
-    };
-    let LINKS = {
-      marks: {},
-      commands: {}
-    };
-    for (const pos of Object.keys(UNITLAYERS.mynotfrozens)) {
-      LINKS.marks[pos] = "selectunit2";
-    }
-    return {
-      UNITDATA: step.UNITDATA,
-      LINKS,
-      UNITLAYERS,
-      ARTIFACTS: emptyArtifactLayers,
-      MARKS: {},
-      TURN: step.TURN
-    };
-  };
-  game.instruction.startTurn2 = step => {
-    let UNITLAYERS = step.UNITLAYERS;
-    let TURN = step.TURN;
-    return TURN > 1
-      ? collapseContent({
-          line: [
-            { select: "Select" },
-            { unittype: ["knight", 2] },
-            { text: "to move (except" },
-            {
-              unit: [
-                iconMapping[
-                  (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
-                    .group
-                ],
-                (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
-                  .owner,
-                Object.keys(UNITLAYERS.myfrozens)[0]
-              ]
-            },
-            { text: "who moved last turn)" }
-          ]
-        })
-      : collapseContent({
-          line: [
-            { select: "Select" },
-            { unittype: ["knight", 2] },
-            { text: "to move" }
-          ]
-        });
-  };
-  game.newBattle = setup => {
+const groupLayers2 = {
+  notfrozens: [
+    ["units"],
+    ["units", "oppunits", "oppnotfrozens"],
+    ["units", "myunits", "mynotfrozens"]
+  ],
+  frozens: [
+    ["units"],
+    ["units", "oppunits", "oppfrozens"],
+    ["units", "myunits", "myfrozens"]
+  ]
+};
+const game = {
+  gameId: "krieg",
+  commands: { move: {} },
+  iconMap: iconMapping,
+  newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
@@ -407,217 +63,551 @@ let game = {
     for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid];
       const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
+      for (const layer of groupLayers2[group][owner]) {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
+    let terrain = {
+      southeast: ["a4", "c2"],
+      northwest: ["b3", "d1"],
+      corners: { "1": ["a4"], "2": ["d1"] },
+      bases: { "1": ["b4", "a3", "b3"], "2": ["c2", "d2", "c1"] }
+    };
+    TERRAIN1 = terrainLayers(4, 4, terrain, 1);
+    TERRAIN2 = terrainLayers(4, 4, terrain, 2);
     return game.action.startTurn1({
       TURN: 0,
       UNITDATA,
       UNITLAYERS
     });
-  };
-  game.action.move2 = step => {
-    let LINKS = { marks: {}, commands: {} };
-    let UNITLAYERS = step.UNITLAYERS;
-    let UNITDATA = { ...step.UNITDATA };
-    let MARKS = step.MARKS;
-    for (let LOOPPOS in UNITLAYERS.myfrozens) {
+  },
+  action: {
+    startTurn1: step => {
+      const oldUnitLayers = step.UNITLAYERS;
+      let UNITLAYERS = {
+        units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
+        mynotfrozens: oldUnitLayers.oppnotfrozens,
+        oppnotfrozens: oldUnitLayers.mynotfrozens,
+        myfrozens: oldUnitLayers.oppfrozens,
+        oppfrozens: oldUnitLayers.myfrozens
+      };
+      let LINKS = {
+        marks: {},
+        commands: {}
+      };
+      for (const pos of Object.keys(UNITLAYERS.mynotfrozens)) {
+        LINKS.marks[pos] = "selectunit1";
+      }
+      return {
+        UNITDATA: step.UNITDATA,
+        LINKS,
+        UNITLAYERS,
+        ARTIFACTS: emptyArtifactLayers,
+        MARKS: {},
+        TURN: step.TURN + 1
+      };
+    },
+    startTurn2: step => {
+      const oldUnitLayers = step.UNITLAYERS;
+      let UNITLAYERS = {
+        units: oldUnitLayers.units,
+        myunits: oldUnitLayers.oppunits,
+        oppunits: oldUnitLayers.myunits,
+        mynotfrozens: oldUnitLayers.oppnotfrozens,
+        oppnotfrozens: oldUnitLayers.mynotfrozens,
+        myfrozens: oldUnitLayers.oppfrozens,
+        oppfrozens: oldUnitLayers.myfrozens
+      };
+      let LINKS = {
+        marks: {},
+        commands: {}
+      };
+      for (const pos of Object.keys(UNITLAYERS.mynotfrozens)) {
+        LINKS.marks[pos] = "selectunit2";
+      }
+      return {
+        UNITDATA: step.UNITDATA,
+        LINKS,
+        UNITLAYERS,
+        ARTIFACTS: emptyArtifactLayers,
+        MARKS: {},
+        TURN: step.TURN
+      };
+    },
+    selectunit1: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
       {
-        let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+        let STARTPOS = MARKS.selectunit;
+        let startconnections = connections[STARTPOS];
+        for (let DIR of TERRAIN1.southeast[STARTPOS]
+          ? [1, 3, 4, 5, 7]
+          : TERRAIN1.northwest[STARTPOS]
+          ? [1, 3, 5, 7, 8]
+          : orthoDirs) {
+          let POS = startconnections[DIR];
+          if (POS && !UNITLAYERS.units[POS]) {
+            ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+        LINKS.marks[pos] = "selectmove1";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS
+      };
+    },
+    selectmove1: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.move = "move1";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: { selectunit: step.MARKS.selectunit, selectmove: newMarkPos }
+      };
+    },
+    selectunit2: (step, newMarkPos) => {
+      let ARTIFACTS = {
+        movetargets: {}
+      };
+      let LINKS = { marks: {}, commands: {} };
+      let MARKS = {
+        selectunit: newMarkPos
+      };
+      let UNITLAYERS = step.UNITLAYERS;
+      {
+        let STARTPOS = MARKS.selectunit;
+        let startconnections = connections[STARTPOS];
+        for (let DIR of TERRAIN2.southeast[STARTPOS]
+          ? [1, 3, 4, 5, 7]
+          : TERRAIN2.northwest[STARTPOS]
+          ? [1, 3, 5, 7, 8]
+          : orthoDirs) {
+          let POS = startconnections[DIR];
+          if (POS && !UNITLAYERS.units[POS]) {
+            ARTIFACTS.movetargets[POS] = emptyObj;
+          }
+        }
+      }
+      for (const pos of Object.keys(ARTIFACTS.movetargets)) {
+        LINKS.marks[pos] = "selectmove2";
+      }
+      return {
+        LINKS,
+        ARTIFACTS,
+        UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS
+      };
+    },
+    selectmove2: (step, newMarkPos) => {
+      let LINKS = { marks: {}, commands: {} };
+      LINKS.commands.move = "move2";
+      return {
+        LINKS,
+        ARTIFACTS: step.ARTIFACTS,
+        UNITLAYERS: step.UNITLAYERS,
+        UNITDATA: step.UNITDATA,
+        TURN: step.TURN,
+        MARKS: { selectunit: step.MARKS.selectunit, selectmove: newMarkPos }
+      };
+    },
+    move1: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let MARKS = step.MARKS;
+      for (let LOOPPOS in UNITLAYERS.myfrozens) {
+        {
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              group: "notfrozens"
+            };
+          }
+        }
+      }
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
         if (unitid) {
           UNITDATA[unitid] = {
             ...UNITDATA[unitid],
-            group: "notfrozens"
+            group: "frozens"
           };
         }
       }
-    }
-    {
-      let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
-      if (unitid) {
-        UNITDATA[unitid] = {
-          ...UNITDATA[unitid],
-          group: "frozens"
-        };
-      }
-    }
-    {
-      let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
-      if (unitid) {
-        UNITDATA[unitid] = {
-          ...UNITDATA[unitid],
-          pos: MARKS.selectmove
-        };
-      }
-    }
-    UNITLAYERS = {
-      units: {},
-      myunits: {},
-      oppunits: {},
-      mynotfrozens: {},
-      oppnotfrozens: {},
-      myfrozens: {},
-      oppfrozens: {}
-    };
-    for (let unitid in UNITDATA) {
-      const currentunit = UNITDATA[unitid];
-      const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
-        UNITLAYERS[layer][pos] = currentunit;
-      }
-    }
-    if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppcorners)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length !== 0
-    ) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "cornerinfiltration";
-      LINKS.endMarks = Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppcorners)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      );
-    } else if (
-      Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppbases)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      ).length === 2
-    ) {
-      LINKS.endGame = "win";
-      LINKS.endedBy = "occupation";
-      LINKS.endMarks = Object.keys(
-        Object.entries(
-          Object.keys(TERRAIN.oppbases)
-            .concat(Object.keys(UNITLAYERS.myunits))
-            .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
-        )
-          .filter(([key, n]) => n === 2)
-          .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
-      );
-    } else {
-      LINKS.endTurn = "startTurn1";
-    }
-    return {
-      LINKS,
-      MARKS: {},
-      ARTIFACTS: step.ARTIFACTS,
-      TURN: step.TURN,
-      UNITDATA,
-      UNITLAYERS
-    };
-  };
-  game.instruction.move2 = () => defaultInstruction(2);
-  game.action.selectunit2 = (step, newMarkPos) => {
-    let ARTIFACTS = {
-      movetargets: {}
-    };
-    let LINKS = { marks: {}, commands: {} };
-    let MARKS = {
-      selectunit: newMarkPos
-    };
-    let UNITLAYERS = step.UNITLAYERS;
-    {
-      let STARTPOS = MARKS.selectunit;
-      let startconnections = connections[STARTPOS];
-      for (let DIR of TERRAIN.southeast[STARTPOS]
-        ? [1, 3, 4, 5, 7]
-        : TERRAIN.northwest[STARTPOS]
-        ? [1, 3, 5, 7, 8]
-        : orthoDirs) {
-        let POS = startconnections[DIR];
-        if (POS && !UNITLAYERS.units[POS]) {
-          ARTIFACTS.movetargets[POS] = emptyObj;
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            pos: MARKS.selectmove
+          };
         }
       }
-    }
-    for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-      LINKS.marks[pos] = "selectmove2";
-    }
-    return {
-      LINKS,
-      ARTIFACTS,
-      UNITLAYERS,
-      UNITDATA: step.UNITDATA,
-      TURN: step.TURN,
-      MARKS
-    };
-  };
-  game.instruction.selectunit2 = step => {
-    let MARKS = step.MARKS;
-    let UNITLAYERS = step.UNITLAYERS;
-    return collapseContent({
-      line: [
-        { select: "Select" },
-        { text: "an empty square to move" },
+      UNITLAYERS = {
+        units: {},
+        myunits: {},
+        oppunits: {},
+        mynotfrozens: {},
+        oppnotfrozens: {},
+        myfrozens: {},
+        oppfrozens: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers1[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      if (
+        Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN1.oppcorners)
+              .concat(Object.keys(UNITLAYERS.myunits))
+              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+        ).length !== 0
+      ) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "cornerinfiltration";
+        LINKS.endMarks = Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN1.oppcorners)
+              .concat(Object.keys(UNITLAYERS.myunits))
+              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+        );
+      } else if (
+        Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN1.oppbases)
+              .concat(Object.keys(UNITLAYERS.myunits))
+              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+        ).length === 2
+      ) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "occupation";
+        LINKS.endMarks = Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN1.oppbases)
+              .concat(Object.keys(UNITLAYERS.myunits))
+              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+        );
+      } else {
+        LINKS.endTurn = "startTurn2";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS: step.ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS
+      };
+    },
+    move2: step => {
+      let LINKS = { marks: {}, commands: {} };
+      let UNITLAYERS = step.UNITLAYERS;
+      let UNITDATA = { ...step.UNITDATA };
+      let MARKS = step.MARKS;
+      for (let LOOPPOS in UNITLAYERS.myfrozens) {
         {
-          unit: [
-            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-            MARKS.selectunit
-          ]
-        },
-        { text: "to" }
-      ]
-    });
-  };
-  game.action.selectmove2 = (step, newMarkPos) => {
-    let LINKS = { marks: {}, commands: {} };
-    LINKS.commands.move = "move2";
-    return {
-      LINKS,
-      ARTIFACTS: step.ARTIFACTS,
-      UNITLAYERS: step.UNITLAYERS,
-      UNITDATA: step.UNITDATA,
-      TURN: step.TURN,
-      MARKS: { selectunit: step.MARKS.selectunit, selectmove: newMarkPos }
-    };
-  };
-  game.instruction.selectmove2 = step => {
-    let MARKS = step.MARKS;
-    let UNITLAYERS = step.UNITLAYERS;
-    return collapseContent({
-      line: [
-        { text: "Press" },
-        { command: "move" },
-        { text: "to make" },
-        {
-          unit: [
-            iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
-            (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
-            MARKS.selectunit
-          ]
-        },
-        { text: "go" },
-        TERRAIN.oppbases[MARKS.selectmove] &&
-        !TERRAIN.oppbases[MARKS.selectunit]
-          ? collapseContent({
-              line: [
-                { text: "into the opponent base at" },
-                { pos: MARKS.selectmove }
-              ]
-            })
-          : collapseContent({
-              line: [{ text: "to" }, { pos: MARKS.selectmove }]
-            })
-      ]
-    });
-  };
-}
+          let unitid = (UNITLAYERS.units[LOOPPOS] || {}).id;
+          if (unitid) {
+            UNITDATA[unitid] = {
+              ...UNITDATA[unitid],
+              group: "notfrozens"
+            };
+          }
+        }
+      }
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            group: "frozens"
+          };
+        }
+      }
+      {
+        let unitid = (UNITLAYERS.units[MARKS.selectunit] || {}).id;
+        if (unitid) {
+          UNITDATA[unitid] = {
+            ...UNITDATA[unitid],
+            pos: MARKS.selectmove
+          };
+        }
+      }
+      UNITLAYERS = {
+        units: {},
+        myunits: {},
+        oppunits: {},
+        mynotfrozens: {},
+        oppnotfrozens: {},
+        myfrozens: {},
+        oppfrozens: {}
+      };
+      for (let unitid in UNITDATA) {
+        const currentunit = UNITDATA[unitid];
+        const { group, pos, owner } = currentunit;
+        for (const layer of groupLayers2[group][owner]) {
+          UNITLAYERS[layer][pos] = currentunit;
+        }
+      }
+      if (
+        Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN2.oppcorners)
+              .concat(Object.keys(UNITLAYERS.myunits))
+              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+        ).length !== 0
+      ) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "cornerinfiltration";
+        LINKS.endMarks = Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN2.oppcorners)
+              .concat(Object.keys(UNITLAYERS.myunits))
+              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+        );
+      } else if (
+        Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN2.oppbases)
+              .concat(Object.keys(UNITLAYERS.myunits))
+              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+        ).length === 2
+      ) {
+        LINKS.endGame = "win";
+        LINKS.endedBy = "occupation";
+        LINKS.endMarks = Object.keys(
+          Object.entries(
+            Object.keys(TERRAIN2.oppbases)
+              .concat(Object.keys(UNITLAYERS.myunits))
+              .reduce((mem, k) => ({ ...mem, [k]: (mem[k] || 0) + 1 }), {})
+          )
+            .filter(([key, n]) => n === 2)
+            .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
+        );
+      } else {
+        LINKS.endTurn = "startTurn1";
+      }
+      return {
+        LINKS,
+        MARKS: {},
+        ARTIFACTS: step.ARTIFACTS,
+        TURN: step.TURN,
+        UNITDATA,
+        UNITLAYERS
+      };
+    }
+  },
+  instruction: {
+    startTurn1: step => {
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURN = step.TURN;
+      return TURN > 1
+        ? collapseContent({
+            line: [
+              { select: "Select" },
+              { unittype: ["knight", 1] },
+              { text: "to move (except" },
+              {
+                unit: [
+                  iconMapping[
+                    (
+                      UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] ||
+                      {}
+                    ).group
+                  ],
+                  (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
+                    .owner,
+                  Object.keys(UNITLAYERS.myfrozens)[0]
+                ]
+              },
+              { text: "who moved last turn)" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { select: "Select" },
+              { unittype: ["knight", 1] },
+              { text: "to move" }
+            ]
+          });
+    },
+    move1: () => defaultInstruction(1),
+    selectunit1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { select: "Select" },
+          { text: "an empty square to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          },
+          { text: "to" }
+        ]
+      });
+    },
+    selectmove1: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "move" },
+          { text: "to make" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          },
+          { text: "go" },
+          TERRAIN1.oppbases[MARKS.selectmove] &&
+          !TERRAIN1.oppbases[MARKS.selectunit]
+            ? collapseContent({
+                line: [
+                  { text: "into the opponent base at" },
+                  { pos: MARKS.selectmove }
+                ]
+              })
+            : collapseContent({
+                line: [{ text: "to" }, { pos: MARKS.selectmove }]
+              })
+        ]
+      });
+    },
+    startTurn2: step => {
+      let UNITLAYERS = step.UNITLAYERS;
+      let TURN = step.TURN;
+      return TURN > 1
+        ? collapseContent({
+            line: [
+              { select: "Select" },
+              { unittype: ["knight", 2] },
+              { text: "to move (except" },
+              {
+                unit: [
+                  iconMapping[
+                    (
+                      UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] ||
+                      {}
+                    ).group
+                  ],
+                  (UNITLAYERS.units[Object.keys(UNITLAYERS.myfrozens)[0]] || {})
+                    .owner,
+                  Object.keys(UNITLAYERS.myfrozens)[0]
+                ]
+              },
+              { text: "who moved last turn)" }
+            ]
+          })
+        : collapseContent({
+            line: [
+              { select: "Select" },
+              { unittype: ["knight", 2] },
+              { text: "to move" }
+            ]
+          });
+    },
+    move2: () => defaultInstruction(2),
+    selectunit2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { select: "Select" },
+          { text: "an empty square to move" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          },
+          { text: "to" }
+        ]
+      });
+    },
+    selectmove2: step => {
+      let MARKS = step.MARKS;
+      let UNITLAYERS = step.UNITLAYERS;
+      return collapseContent({
+        line: [
+          { text: "Press" },
+          { command: "move" },
+          { text: "to make" },
+          {
+            unit: [
+              iconMapping[(UNITLAYERS.units[MARKS.selectunit] || {}).group],
+              (UNITLAYERS.units[MARKS.selectunit] || {}).owner,
+              MARKS.selectunit
+            ]
+          },
+          { text: "go" },
+          TERRAIN2.oppbases[MARKS.selectmove] &&
+          !TERRAIN2.oppbases[MARKS.selectunit]
+            ? collapseContent({
+                line: [
+                  { text: "into the opponent base at" },
+                  { pos: MARKS.selectmove }
+                ]
+              })
+            : collapseContent({
+                line: [{ text: "to" }, { pos: MARKS.selectmove }]
+              })
+        ]
+      });
+    }
+  }
+};
 export default game;

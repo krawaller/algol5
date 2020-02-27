@@ -10,6 +10,32 @@ export const testSuite: AlgolExpressionSuite<
   func: parserTester("set"),
   defs: [
     {
+      def: {
+        ...emptyFullDef,
+        board: {
+          ...emptyFullDef.board,
+          terrain: {
+            boo: { 1: ["a1"], 2: ["b2"] },
+            wee: { 1: ["a1"], 2: ["b2"] },
+          },
+        },
+      },
+      player: 2,
+      action: "someaction",
+      contexts: [
+        {
+          context: { TERRAIN2: { myboo: { a1: { boo: 1 } } } },
+          tests: [
+            {
+              expr: "myboo",
+              res: { a1: { boo: 1 } },
+              desc: "plr2 terrain ref",
+            },
+          ],
+        },
+      ],
+    },
+    {
       def: emptyFullDef,
       player: 1,
       action: "someaction",
@@ -82,14 +108,14 @@ export const testSuite: AlgolExpressionSuite<
           tests: [{ expr: "gnurp", res: { g1: { gnurp: 1 } } }],
         },
         {
-          context: { TERRAIN: { myboo: { a1: { boo: 1 } } } },
+          context: { TERRAIN1: { myboo: { a1: { boo: 1 } } } },
           tests: [{ expr: "myboo", res: { a1: { boo: 1 } } }],
         },
         {
           context: {
             ARTIFACTS: { gnurp: { a1: {}, b1: {} } },
             BOARD: { board: { a1: {}, b1: {}, c1: {}, d1: {} } },
-            TERRAIN: { boo: { b1: {} }, wee: { c1: {} } },
+            TERRAIN1: { boo: { b1: {} }, wee: { c1: {} } },
           },
           tests: [
             {

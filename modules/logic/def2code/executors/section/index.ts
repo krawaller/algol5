@@ -3,7 +3,6 @@ import { executeMarkEnd, executeMarkInit } from "./mark";
 import { executeStartInit, executeStartEnd } from "./start";
 import { executeCmndInit, executeCmndEnd } from "./cmnd";
 import { executeNewBattle } from "./battle";
-import { executePlayer } from "./player";
 import { executeHead } from "./head";
 import { executeOrderSection } from "./section.orders";
 import { executeInstructionSection } from "./instruction";
@@ -31,8 +30,6 @@ export function executeSection(
       return executeCmndInit(gameDef, player, action);
     case "cmndEnd":
       return executeCmndEnd(gameDef, player, action);
-    case "player":
-      return executePlayer(gameDef, player, action);
     case "head":
       return executeHead(gameDef, player, action);
     case "instruction":

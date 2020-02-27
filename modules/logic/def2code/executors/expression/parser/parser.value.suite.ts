@@ -142,14 +142,14 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
       contexts: [
         {
           context: {
-            TERRAIN: { flurp: { a1: { foo: "bar" } } },
+            TERRAIN1: { flurp: { a1: { foo: "bar" } } },
             MARKS: { there: "a1" },
           },
           tests: [{ expr: { read: ["flurp", "there", "foo"] }, res: "bar" }],
         },
         {
           context: {
-            TERRAIN: { flurp: { a1: { wee: 5 }, b2: { wee: 2 } } },
+            TERRAIN1: { flurp: { a1: { wee: 5 }, b2: { wee: 2 } } },
           },
           tests: [
             { expr: { harvest: ["flurp", { value: "wee" }] }, res: 7 },

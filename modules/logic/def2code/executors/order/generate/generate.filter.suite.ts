@@ -14,32 +14,32 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           height: 3,
           width: 3,
           terrain: {
-            rocks: []
-          }
+            rocks: [],
+          },
         },
         generators: {
           noConditionFilter: {
             type: "filter",
             layer: "rocks",
-            tolayer: "flarps"
+            tolayer: "flarps",
           },
           singlePosCondition: {
             type: "filter",
             layer: "rocks",
             tolayer: "flarps",
             condition: {
-              same: [{ read: ["rocks", ["target"], "cool"] }, "yes"]
-            }
+              same: [{ read: ["rocks", ["target"], "cool"] }, "yes"],
+            },
           },
           matchCondition: {
             type: "filter",
             layer: "rocks",
             tolayer: "flarps",
             matching: {
-              cool: { is: "yes" }
-            }
-          }
-        }
+              cool: { is: "yes" },
+            },
+          },
+        },
       },
       player: 1,
       action: "someaction",
@@ -47,13 +47,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             MARKS: { mymark: "a1" },
-            TERRAIN: {
+            TERRAIN1: {
               rocks: {
                 a1: { cool: "yes" },
-                b2: {}
-              }
+                b2: {},
+              },
             },
-            ARTIFACTS: { flarps: {} }
+            ARTIFACTS: { flarps: {} },
           },
           tests: [
             {
@@ -61,31 +61,31 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "ARTIFACTS.flarps",
-                  res: { a1: { cool: "yes" }, b2: {} }
-                }
-              ]
+                  res: { a1: { cool: "yes" }, b2: {} },
+                },
+              ],
             },
             {
               expr: { generators: ["singlePosCondition"] },
               asserts: [
                 {
                   sample: "ARTIFACTS.flarps",
-                  res: { a1: { cool: "yes" } }
-                }
-              ]
+                  res: { a1: { cool: "yes" } },
+                },
+              ],
             },
             {
               expr: { generators: ["matchCondition"] },
               asserts: [
                 {
                   sample: "ARTIFACTS.flarps",
-                  res: { a1: { cool: "yes" } }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  res: { a1: { cool: "yes" } },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

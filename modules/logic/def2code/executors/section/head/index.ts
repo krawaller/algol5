@@ -1,5 +1,8 @@
 import { FullDefAnon } from "../../../../../types";
-import { emptyArtifactLayers } from "../../../../../common";
+import {
+  emptyArtifactLayers,
+  groupLayersForPlayer,
+} from "../../../../../common";
 
 // TODO - decide on boardLayers func
 
@@ -50,6 +53,14 @@ export function executeHead(
   ret += `const relativeDirs = makeRelativeDirs(${JSON.stringify(offsets)}); `;
 
   ret += `let TERRAIN1; let TERRAIN2;`;
+
+  ret += `const groupLayers1 = ${JSON.stringify(
+    groupLayersForPlayer(gameDef, 1)
+  )}; `;
+
+  ret += `const groupLayers2 = ${JSON.stringify(
+    groupLayersForPlayer(gameDef, 2)
+  )}; `;
 
   return ret;
 }

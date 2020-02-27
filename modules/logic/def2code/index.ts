@@ -19,7 +19,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
   )
     .map(c => `${c}: {}`)
     .join(", ")} },
-    iconMap: ${JSON.stringify(gameDef.graphics.icons)}
+    iconMap: iconMapping
   }; `;
 
   ([1, 2] as const).forEach(player => {

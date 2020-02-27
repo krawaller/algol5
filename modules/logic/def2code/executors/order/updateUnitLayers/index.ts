@@ -19,7 +19,7 @@ export function updateUnitLayers(
   for (let unitid in UNITDATA) {
       const currentunit = UNITDATA[unitid]
       const { group, pos, owner } = currentunit;
-      for (const layer of groupLayers[group][owner]) {
+      for (const layer of groupLayers${player}[group][owner]) {
         UNITLAYERS[layer][pos] = currentunit;
       }
   }

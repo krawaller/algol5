@@ -90,8 +90,11 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                   const relativeDirs = makeRelativeDirs(gameDef.board.offsets);
                   const emptyObj = {};
                   `;
-                  pre += `const groupLayers = ${JSON.stringify(
-                    groupLayersForPlayer(def, player)
+                  pre += `const groupLayers1 = ${JSON.stringify(
+                    groupLayersForPlayer(def, 1)
+                  )}; `;
+                  pre += `const groupLayers2 = ${JSON.stringify(
+                    groupLayersForPlayer(def, 2)
                   )}; `;
                   pre += `const iconMapping = gameDef.graphics.icons; `;
                 }

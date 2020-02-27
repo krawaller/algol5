@@ -33,18 +33,17 @@ export default function parseSet(
     if (emptyArtifactLayers(gameDef.generators)[name]) {
       return `ARTIFACTS.${name}`;
     }
-    if (
-      terrainLayers(
-        gameDef.board.height,
-        gameDef.board.width,
-        {
-          ...gameDef.board.terrain,
-          ...gameDef.AI.terrain,
-        },
-        player
-      )[name]
-    ) {
-      return `TERRAIN.${name}`;
+    const terrain = terrainLayers(
+      gameDef.board.height,
+      gameDef.board.width,
+      {
+        ...gameDef.board.terrain,
+        ...gameDef.AI.terrain,
+      },
+      player
+    );
+    if (terrain[name]) {
+      return `TERRAIN${player}.${name}`;
     }
     if (emptyUnitLayers(gameDef)[name]) {
       return `UNITLAYERS.${name}`;

@@ -30,9 +30,7 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           context: {
             setup: {},
           },
-          envelope: `let game = { action: { startTurn1: a => a } }; let board = ${JSON.stringify(
-            board
-          )}; `,
+          envelope: `let game = { action: { startTurn1: a => a } }; `,
           tests: [
             {
               expr: "newBattle",

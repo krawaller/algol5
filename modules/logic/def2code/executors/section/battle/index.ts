@@ -1,5 +1,4 @@
 import { FullDefAnon } from "../../../../../types";
-import { emptyUnitLayers } from "../../../../../common";
 import { updateUnitLayers } from "../../order/updateUnitLayers";
 import { usesSpawn, referencesBattleVars } from "../sectionUtils";
 
@@ -11,6 +10,9 @@ export function executeNewBattle(
   let ret = "";
   ret += `let UNITDATA = setup2army(setup);
     ${updateUnitLayers(gameDef, 2, "newBattle", true)}`;
+
+  ret += `TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, ${1}); `;
+  ret += `TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, ${2}); `;
 
   return (
     ret +

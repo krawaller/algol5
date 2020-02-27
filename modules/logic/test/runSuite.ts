@@ -54,6 +54,8 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                         height: def.board.height,
                         width: def.board.width,
                       },
+                      TERRAIN1: undefined,
+                      TERRAIN2: undefined,
                     };
                 const fullContext = {
                   ...extraContext,

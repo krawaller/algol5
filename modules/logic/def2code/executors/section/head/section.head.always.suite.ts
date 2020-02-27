@@ -21,6 +21,21 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
           tests: [
             {
               expr: "head",
+              asserts: [
+                {
+                  sample: "TERRAIN1",
+                  res: undefined,
+                  desc: "TERRAIN1 is undefined but variable exists",
+                },
+                {
+                  sample: "TERRAIN2",
+                  res: undefined,
+                  desc: "TERRAIN2 is undefined but variable exists",
+                },
+              ],
+            },
+            {
+              expr: "head",
               naked: false,
               asserts: [
                 {

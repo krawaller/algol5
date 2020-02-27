@@ -1,5 +1,4 @@
-import * as path from "path";
-import * as prettier from "prettier";
+import prettier from "prettier";
 import { executeSection } from "./executors/section";
 import { FullDefAnon } from "../../types";
 import { analyseGame } from "../../common";
@@ -7,80 +6,95 @@ import { analyseGame } from "../../common";
 export function compileGameToCode(gameDef: FullDefAnon) {
   const analysis = analyseGame(gameDef);
 
-  let ret = `import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction, roseDirs, orthoDirs, diagDirs, knightDirs} from '../../common';
-  `;
-
-  ret += executeSection(gameDef, 1, "head", "head");
-
-  ret += `let game = { gameId: '${
-    gameDef.meta.id
-  }', action: {}, instruction: {}, commands: { ${Object.keys(
-    gameDef.flow.commands
-  )
+  const cmndInfo = Object.keys(gameDef.flow.commands)
     .map(c => `${c}: {}`)
-    .join(", ")} },
-    iconMap: iconMapping
-  }; `;
+    .join(", ");
 
-  ([1, 2] as const).forEach(player => {
-    ret += `game.action.startTurn${player} = (step) => {
-      ${executeSection(gameDef, player, "startTurn", "startInit")}
-      ${executeSection(gameDef, player, "startTurn", "orders")}
-      ${executeSection(gameDef, player, "startTurn", "startEnd")}
-    }; `;
-
-    ret += `game.instruction.startTurn${player} = (step) => {
+  const instructions = ([1, 2] as const).flatMap(player => [
+    `startTurn${player}: (step) => {
       ${executeSection(gameDef, player, "startTurn", "instruction")}
-    }; `;
-
-    if (player === 2) {
-      ret += `game.newBattle = (setup) => {
-        ${executeSection(gameDef, player, "startTurn", "newBattle")}
-      }; `;
-    }
-
-    Object.keys(gameDef.flow.commands)
+    }`,
+    ...Object.keys(gameDef.flow.commands)
       .filter(c => analysis[player][c])
-      .forEach(cmndName => {
-        ret += `game.action.${cmndName + player} = (step) => {
-        ${executeSection(gameDef, player, cmndName, "cmndInit")}
-        ${executeSection(gameDef, player, cmndName, "orders")}
-        ${executeSection(gameDef, player, cmndName, "cmndEnd")}
-      }; `;
+      .map(cmndName =>
+        gameDef.instructions[cmndName]
+          ? `${cmndName + player}: (step) => {${executeSection(
+              gameDef,
+              player,
+              cmndName,
+              "instruction"
+            )}}`
+          : `${cmndName + player}: () => defaultInstruction(${player})`
+      ),
+    ...Object.keys(gameDef.flow.marks)
+      .filter(c => analysis[player][c])
+      .map(
+        markName => `${markName + player}: (step) => {
+        ${executeSection(gameDef, player, markName, "instruction")}
+      }`
+      ),
+  ]);
 
-        if (gameDef.instructions[cmndName]) {
-          ret += `game.instruction.${cmndName + player} = (step) => {
-          ${executeSection(gameDef, player, cmndName, "instruction")}
-        }; `;
-        } else {
-          ret += `game.instruction.${cmndName +
-            player} = () => defaultInstruction(${player}); `;
-        }
-      });
-
+  const marks = ([1, 2] as const).flatMap(player =>
     Object.keys(gameDef.flow.marks)
       .filter(m => analysis[player][m])
-      .forEach(markName => {
-        ret += `game.action.${markName + player} = (step, newMarkPos) => {
+      .map(
+        markName => `${markName + player}: (step, newMarkPos) => {
         ${executeSection(gameDef, player, markName, "markInit")}
         ${executeSection(gameDef, player, markName, "orders")}
         ${executeSection(gameDef, player, markName, "markEnd")}
-      }; `;
+      }`
+      )
+  );
 
-        ret += `game.instruction.${markName + player} = (step) => {
-        ${executeSection(gameDef, player, markName, "instruction")}
-      }; `;
-      });
+  const commands = ([1, 2] as const).flatMap(player =>
+    Object.keys(gameDef.flow.commands)
+      .filter(c => analysis[player][c])
+      .map(
+        cmndName =>
+          `${cmndName + player}: (step) => {
+        ${executeSection(gameDef, player, cmndName, "cmndInit")}
+        ${executeSection(gameDef, player, cmndName, "orders")}
+        ${executeSection(gameDef, player, cmndName, "cmndEnd")}
+      }`
+      )
+  );
+
+  const starts = ([1, 2] as const).map(
+    player => `startTurn${player}: (step) => {
+    ${executeSection(gameDef, player, "startTurn", "startInit")}
+    ${executeSection(gameDef, player, "startTurn", "orders")}
+    ${executeSection(gameDef, player, "startTurn", "startEnd")}
+  } `
+  );
+
+  const code = `
+
+import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction, roseDirs, orthoDirs, diagDirs, knightDirs} from '../../common'
+
+${executeSection(gameDef, 1, "head", "head")}
+
+const game = {
+  gameId: '${gameDef.meta.id}',
+  commands: { ${cmndInfo} },
+  iconMap: iconMapping,
+  newBattle: (setup) => {
+    ${executeSection(gameDef, 2, "startTurn", "newBattle")}
+  },
+  action: {
+    ${starts.join(", ")},
+    ${marks.join(", ")},
+    ${commands.join(", ")}
+  },
+  instruction: {
+    ${instructions.join(", ")}
+  }
+};
+
+export default game; 
+`;
+
+  return prettier.format(code.replace(/[\n\r]( *[\n\r])*/g, "\n"), {
+    parser: "typescript",
   });
-
-  ret += "export default game; ";
-
-  ret = ret
-    // .replace(/(let |const )LINKS =/g, "$1LINKS: AlgolStepLinks =")
-    // .replace(/\.owner([^a-z])/g, ".owner as 0 | 1 | 2$1")
-    // .replace(/ offsetPos\(/g, " <string>offsetPos(")
-    // .replace(/let MARKS = \{ .../g, "let MARKS: {[idx:string]: string} = {...")
-    .replace(/[\n\r]( *[\n\r])*/g, "\n");
-
-  return prettier.format(ret, { parser: "typescript" });
 }

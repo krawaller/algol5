@@ -23,8 +23,6 @@ export function compileGameToCode(gameDef: FullDefAnon) {
   }; `;
 
   ([1, 2] as const).forEach(player => {
-    ret += `{ `;
-
     ret += `game.action.startTurn${player} = (step) => {
       ${executeSection(gameDef, player, "startTurn", "startInit")}
       ${executeSection(gameDef, player, "startTurn", "orders")}
@@ -73,8 +71,6 @@ export function compileGameToCode(gameDef: FullDefAnon) {
         ${executeSection(gameDef, player, markName, "instruction")}
       }; `;
       });
-
-    ret += ` } `;
   });
 
   ret += "export default game; ";

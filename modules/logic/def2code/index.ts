@@ -25,8 +25,6 @@ export function compileGameToCode(gameDef: FullDefAnon) {
   ([1, 2] as const).forEach(player => {
     ret += `{ `;
 
-    ret += executeSection(gameDef, player, "player", "player");
-
     ret += `game.action.startTurn${player} = (step) => {
       ${executeSection(gameDef, player, "startTurn", "startInit")}
       ${executeSection(gameDef, player, "startTurn", "orders")}

@@ -22,3 +22,7 @@ export type AlgolBoard<
 };
 
 export type AlgolBoardAnon = AlgolBoard<number, number, string, string, string>;
+
+export type AlgolBoardBookAnon = {
+  basic: AlgolBoardAnon;
+} & Record<string, AlgolBoardAnon>;

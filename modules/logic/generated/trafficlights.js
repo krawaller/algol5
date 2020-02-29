@@ -56,7 +56,7 @@ const groupLayers2 = {
   ]
 };
 const game = {
-  gameId: "semaphor",
+  gameId: "trafficlights",
   commands: { deploy: {}, promote: {} },
   iconMap: iconMapping,
   newBattle: setup => {

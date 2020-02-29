@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { SemaphorAnim } from "./_types";
+import { TrafficlightsAnim } from "./_types";
 
-const semaphorAnim: SemaphorAnim = {};
+const trafficlightsAnim: TrafficlightsAnim = {};
 
-export default semaphorAnim;
+export default trafficlightsAnim;

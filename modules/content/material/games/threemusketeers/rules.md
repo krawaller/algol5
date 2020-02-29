@@ -4,7 +4,7 @@ Three Musketeers is played on a {DIM} board with the following setup:
 
 {PLR:who=1} can {CMND} a {UNIT:group=kings,who=1} one orthogonal step to any square occupied by an enemy {UNIT:group=pawns,who=2}, which is captured. The {UNIT:group=kings,who=1} cannot move to an empty square.
 
-{PLR:who=2} can {CMND} a {UNIT:group=kings,who=1} one orthogonal step to a vacant square.
+{PLR:who=2} can {CMND} a {UNIT:group=pawns,who=2} one orthogonal step to a vacant square.
 
 The game can end in two ways:
 

@@ -7,6 +7,9 @@ const out = path.join(__dirname, "../../dist/apis");
 
 export async function exportGameAPI(gameId: GameId) {
   const def = gameDefs[gameId];
+  if (!def) {
+    throw new Error(`Failed to find game ${gameId}`);
+  }
   const setupBook = JSON.stringify(def.setups, null, 2);
   await fs.ensureDir(out);
   const me = path.join(out, gameId);

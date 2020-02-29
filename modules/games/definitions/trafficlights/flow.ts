@@ -1,32 +1,32 @@
-import { SemaphorFlow } from "./_types";
+import { TrafficlightsFlow } from "./_types";
 
-const semaphorFlow: SemaphorFlow = {
+const trafficlightsFlow: TrafficlightsFlow = {
   startTurn: { links: ["selectdeploytarget", "selectunit"] },
   endGame: { madeline: { condition: { notempty: "line" }, show: "line" } },
   marks: {
     selectdeploytarget: {
       from: { subtract: ["board", "units"] },
-      link: "deploy"
+      link: "deploy",
     },
-    selectunit: { from: { union: ["pawns", "bishops"] }, link: "promote" }
+    selectunit: { from: { union: ["pawns", "bishops"] }, link: "promote" },
   },
   commands: {
     deploy: {
       applyEffect: { spawnat: ["selectdeploytarget", "pawns", 0] },
       runGenerator: "findlines",
-      link: "endTurn"
+      link: "endTurn",
     },
     promote: {
       applyEffect: {
         morphat: [
           "selectunit",
-          { ifelse: [{ anyat: ["pawns", "selectunit"] }, "bishops", "kings"] }
-        ]
+          { ifelse: [{ anyat: ["pawns", "selectunit"] }, "bishops", "kings"] },
+        ],
       },
       runGenerator: "findlines",
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
-export default semaphorFlow;
+export default trafficlightsFlow;

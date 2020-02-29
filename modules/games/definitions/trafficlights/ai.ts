@@ -1,13 +1,13 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { SemaphorAI } from "./_types";
+import { TrafficlightsAI } from "./_types";
 
-const semaphorAI: SemaphorAI = {
+const trafficlightsAI: TrafficlightsAI = {
   brains: {},
   generators: {},
   aspects: {},
   grids: {},
-  terrain: {}
+  terrain: {},
 };
 
-export default semaphorAI;
+export default trafficlightsAI;

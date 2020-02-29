@@ -1,6 +1,6 @@
 import { inflateBattleSave } from ".";
 import atrium from "../../../../logic/dist/indiv/atrium";
-import semaphor from "../../../../logic/dist/indiv/semaphor";
+import trafficlights from "../../../../logic/dist/indiv/trafficlights";
 import { AlgolBattleSave, AlgolGame } from "../../../../types";
 
 type InflationTest = Record<string, AlgolBattleSave>;
@@ -16,7 +16,7 @@ const tests: InflationGameSuite[] = [
     },
   ],
   [
-    semaphor,
+    trafficlights,
     {
       win: { player: 1, turn: 2, path: [7, 4, 10], ended: true },
     },

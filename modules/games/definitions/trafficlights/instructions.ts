@@ -1,6 +1,6 @@
-import { SemaphorInstructions } from "./_types";
+import { TrafficlightsInstructions } from "./_types";
 
-const semaphorInstructions: SemaphorInstructions = {
+const trafficlightsInstructions: TrafficlightsInstructions = {
   startTurn: {
     line: [
       "Select",
@@ -9,8 +9,8 @@ const semaphorInstructions: SemaphorInstructions = {
           {
             if: [
               { different: [{ sizeof: "units" }, 12] },
-              { line: ["empty square to deploy to"] }
-            ]
+              { line: ["empty square to deploy to"] },
+            ],
           },
           {
             if: [
@@ -21,22 +21,22 @@ const semaphorInstructions: SemaphorInstructions = {
                   { unittype: ["pawns", 0] },
                   "or",
                   { unittype: ["bishops", 0] },
-                  "to promote"
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                  "to promote",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   selectdeploytarget: {
     line: [
       "Press",
       "deploy",
       "to spawn",
-      { unittypepos: ["pawns", 0, "selectdeploytarget"] }
-    ]
+      { unittypepos: ["pawns", 0, "selectdeploytarget"] },
+    ],
   },
   selectunit: {
     line: [
@@ -49,11 +49,11 @@ const semaphorInstructions: SemaphorInstructions = {
         ifelse: [
           { anyat: ["pawns", "selectunit"] },
           { unittype: ["bishops", 0] },
-          { unittype: ["kings", 0] }
-        ]
-      }
-    ]
-  }
+          { unittype: ["kings", 0] },
+        ],
+      },
+    ],
+  },
 };
 
-export default semaphorInstructions;
+export default trafficlightsInstructions;

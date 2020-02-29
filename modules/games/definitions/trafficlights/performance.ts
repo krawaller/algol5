@@ -1,8 +1,8 @@
-import { SemaphorPerformance } from "./_types";
+import { TrafficlightsPerformance } from "./_types";
 
-const semaphorPerformance: SemaphorPerformance = {
+const trafficlightsPerformance: TrafficlightsPerformance = {
   canAlwaysEnd: {},
-  massiveTree: {}
+  massiveTree: {},
 };
 
-export default semaphorPerformance;
+export default trafficlightsPerformance;

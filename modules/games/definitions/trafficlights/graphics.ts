@@ -3,11 +3,11 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { SemaphorGraphics } from "./_types";
+import { TrafficlightsGraphics } from "./_types";
 
-const semaphorGraphics: SemaphorGraphics = {
+const trafficlightsGraphics: TrafficlightsGraphics = {
   icons: { kings: "king", pawns: "pawn", bishops: "bishop" },
-  tiles: {}
+  tiles: {},
 };
 
-export default semaphorGraphics;
+export default trafficlightsGraphics;

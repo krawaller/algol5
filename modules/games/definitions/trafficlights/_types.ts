@@ -15,28 +15,28 @@ import {
   AlgolPerformance
 } from "../../../types";
 
-export type SemaphorBoardHeight = 3;
-export type SemaphorBoardWidth = 4;
+export type TrafficlightsBoardHeight = 3;
+export type TrafficlightsBoardWidth = 4;
 
-export type SemaphorAnim = AlgolAnimCollection<
-  SemaphorBattlePos,
-  SemaphorBattleVar,
-  SemaphorCommand,
-  SemaphorGrid,
-  SemaphorLayer,
-  SemaphorMark,
-  SemaphorTurnPos,
-  SemaphorTurnVar,
-  SemaphorUnit
+export type TrafficlightsAnim = AlgolAnimCollection<
+  TrafficlightsBattlePos,
+  TrafficlightsBattleVar,
+  TrafficlightsCommand,
+  TrafficlightsGrid,
+  TrafficlightsLayer,
+  TrafficlightsMark,
+  TrafficlightsTurnPos,
+  TrafficlightsTurnVar,
+  TrafficlightsUnit
 >;
 
-export type SemaphorTerrain = never;
-export type SemaphorUnit = "kings" | "pawns" | "bishops";
-export type SemaphorMark = "selectdeploytarget" | "selectunit";
-export type SemaphorCommand = "deploy" | "promote";
-export type SemaphorPhaseCommand = never;
-export type SemaphorPhase = "startTurn" | SemaphorMark;
-export type SemaphorUnitLayer =
+export type TrafficlightsTerrain = never;
+export type TrafficlightsUnit = "kings" | "pawns" | "bishops";
+export type TrafficlightsMark = "selectdeploytarget" | "selectunit";
+export type TrafficlightsCommand = "deploy" | "promote";
+export type TrafficlightsPhaseCommand = never;
+export type TrafficlightsPhase = "startTurn" | TrafficlightsMark;
+export type TrafficlightsUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -53,136 +53,145 @@ export type SemaphorUnitLayer =
   | "mybishops"
   | "oppbishops"
   | "neutralbishops";
-export type SemaphorGenerator = "findlines";
-export type SemaphorArtifactLayer = "line";
-export type SemaphorTerrainLayer = never;
-export type SemaphorLayer =
+export type TrafficlightsGenerator = "findlines";
+export type TrafficlightsArtifactLayer = "line";
+export type TrafficlightsTerrainLayer = never;
+export type TrafficlightsLayer =
   | CommonLayer
-  | SemaphorUnitLayer
-  | SemaphorArtifactLayer;
-export type SemaphorBattlePos = never;
-export type SemaphorBattleVar = never;
-export type SemaphorTurnPos = never;
-export type SemaphorTurnVar = never;
+  | TrafficlightsUnitLayer
+  | TrafficlightsArtifactLayer;
+export type TrafficlightsBattlePos = never;
+export type TrafficlightsBattleVar = never;
+export type TrafficlightsTurnPos = never;
+export type TrafficlightsTurnVar = never;
 
-export type SemaphorGenerators = Generators<
-  SemaphorArtifactLayer,
-  SemaphorBattlePos,
-  SemaphorBattleVar,
-  SemaphorCommand,
-  SemaphorGenerator,
-  SemaphorGrid,
-  SemaphorLayer,
-  SemaphorMark,
-  SemaphorTurnPos,
-  SemaphorTurnVar
+export type TrafficlightsGenerators = Generators<
+  TrafficlightsArtifactLayer,
+  TrafficlightsBattlePos,
+  TrafficlightsBattleVar,
+  TrafficlightsCommand,
+  TrafficlightsGenerator,
+  TrafficlightsGrid,
+  TrafficlightsLayer,
+  TrafficlightsMark,
+  TrafficlightsTurnPos,
+  TrafficlightsTurnVar
 >;
-export type SemaphorFlow = Flow<
-  SemaphorBattlePos,
-  SemaphorBattleVar,
-  SemaphorCommand,
-  SemaphorGenerator,
-  SemaphorGrid,
-  SemaphorLayer,
-  SemaphorMark,
-  SemaphorTurnPos,
-  SemaphorTurnVar,
-  SemaphorUnit
+export type TrafficlightsFlow = Flow<
+  TrafficlightsBattlePos,
+  TrafficlightsBattleVar,
+  TrafficlightsCommand,
+  TrafficlightsGenerator,
+  TrafficlightsGrid,
+  TrafficlightsLayer,
+  TrafficlightsMark,
+  TrafficlightsTurnPos,
+  TrafficlightsTurnVar,
+  TrafficlightsUnit
 >;
-export type SemaphorBoard = AlgolBoard<
-  SemaphorBoardHeight,
-  SemaphorBoardWidth,
-  SemaphorGrid,
-  SemaphorPosition,
-  SemaphorTerrain
+export type TrafficlightsBoard = AlgolBoard<
+  TrafficlightsBoardHeight,
+  TrafficlightsBoardWidth,
+  TrafficlightsGrid,
+  TrafficlightsPosition,
+  TrafficlightsTerrain
 >;
-export type SemaphorAI = AI<
-  SemaphorAiArtifactLayer,
-  SemaphorAiAspect,
-  SemaphorAiBrain,
-  SemaphorAiGenerator,
-  SemaphorAiGrid,
-  SemaphorAiTerrain,
-  SemaphorAiTerrainLayer,
-  SemaphorBattlePos,
-  SemaphorBattleVar,
-  SemaphorBoardHeight,
-  SemaphorBoardWidth,
-  SemaphorCommand,
-  SemaphorGrid,
-  SemaphorLayer,
-  SemaphorMark,
-  SemaphorPosition,
-  SemaphorTurnPos,
-  SemaphorTurnVar
+export type TrafficlightsAI = AI<
+  TrafficlightsAiArtifactLayer,
+  TrafficlightsAiAspect,
+  TrafficlightsAiBrain,
+  TrafficlightsAiGenerator,
+  TrafficlightsAiGrid,
+  TrafficlightsAiTerrain,
+  TrafficlightsAiTerrainLayer,
+  TrafficlightsBattlePos,
+  TrafficlightsBattleVar,
+  TrafficlightsBoardHeight,
+  TrafficlightsBoardWidth,
+  TrafficlightsCommand,
+  TrafficlightsGrid,
+  TrafficlightsLayer,
+  TrafficlightsMark,
+  TrafficlightsPosition,
+  TrafficlightsTurnPos,
+  TrafficlightsTurnVar
 >;
-export type SemaphorGraphics = Graphics<SemaphorTerrain, SemaphorUnit>;
-export type SemaphorInstructions = Instructions<
-  SemaphorBattlePos,
-  SemaphorBattleVar,
-  SemaphorCommand,
-  SemaphorGrid,
-  SemaphorLayer,
-  SemaphorMark,
-  SemaphorPhase,
-  SemaphorTurnPos,
-  SemaphorTurnVar,
-  SemaphorUnit
+export type TrafficlightsGraphics = Graphics<
+  TrafficlightsTerrain,
+  TrafficlightsUnit
 >;
-export type SemaphorMeta = AlgolMeta<SemaphorCommand, SemaphorMark>;
-export type SemaphorPerformance = AlgolPerformance<
-  SemaphorCommand,
-  SemaphorMark
+export type TrafficlightsInstructions = Instructions<
+  TrafficlightsBattlePos,
+  TrafficlightsBattleVar,
+  TrafficlightsCommand,
+  TrafficlightsGrid,
+  TrafficlightsLayer,
+  TrafficlightsMark,
+  TrafficlightsPhase,
+  TrafficlightsTurnPos,
+  TrafficlightsTurnVar,
+  TrafficlightsUnit
 >;
-export type SemaphorScripts = AlgolGameTestSuite<
-  SemaphorCommand,
-  SemaphorPosition
+export type TrafficlightsMeta = AlgolMeta<
+  TrafficlightsCommand,
+  TrafficlightsMark
 >;
-export type SemaphorSetupBook = AlgolSetupBook<SemaphorPosition, SemaphorUnit>;
-
-export type SemaphorDefinition = FullDef<
-  SemaphorAiArtifactLayer,
-  SemaphorAiAspect,
-  SemaphorAiBrain,
-  SemaphorAiGenerator,
-  SemaphorAiGrid,
-  SemaphorAiTerrain,
-  SemaphorAiTerrainLayer,
-  SemaphorArtifactLayer,
-  SemaphorBattlePos,
-  SemaphorBattleVar,
-  SemaphorBoardHeight,
-  SemaphorBoardWidth,
-  SemaphorCommand,
-  SemaphorGenerator,
-  SemaphorGrid,
-  SemaphorLayer,
-  SemaphorMark,
-  SemaphorPhase,
-  SemaphorPosition,
-  SemaphorTerrain,
-  SemaphorTurnPos,
-  SemaphorTurnVar,
-  SemaphorUnit
+export type TrafficlightsPerformance = AlgolPerformance<
+  TrafficlightsCommand,
+  TrafficlightsMark
+>;
+export type TrafficlightsScripts = AlgolGameTestSuite<
+  TrafficlightsCommand,
+  TrafficlightsPosition
+>;
+export type TrafficlightsSetupBook = AlgolSetupBook<
+  TrafficlightsPosition,
+  TrafficlightsUnit
 >;
 
-export type SemaphorGrid = never;
+export type TrafficlightsDefinition = FullDef<
+  TrafficlightsAiArtifactLayer,
+  TrafficlightsAiAspect,
+  TrafficlightsAiBrain,
+  TrafficlightsAiGenerator,
+  TrafficlightsAiGrid,
+  TrafficlightsAiTerrain,
+  TrafficlightsAiTerrainLayer,
+  TrafficlightsArtifactLayer,
+  TrafficlightsBattlePos,
+  TrafficlightsBattleVar,
+  TrafficlightsBoardHeight,
+  TrafficlightsBoardWidth,
+  TrafficlightsCommand,
+  TrafficlightsGenerator,
+  TrafficlightsGrid,
+  TrafficlightsLayer,
+  TrafficlightsMark,
+  TrafficlightsPhase,
+  TrafficlightsPosition,
+  TrafficlightsTerrain,
+  TrafficlightsTurnPos,
+  TrafficlightsTurnVar,
+  TrafficlightsUnit
+>;
 
-export type SemaphorAiGenerator = never;
+export type TrafficlightsGrid = never;
 
-export type SemaphorAiAspect = never;
+export type TrafficlightsAiGenerator = never;
 
-export type SemaphorAiGrid = never;
+export type TrafficlightsAiAspect = never;
 
-export type SemaphorAiArtifactLayer = never;
+export type TrafficlightsAiGrid = never;
 
-export type SemaphorAiBrain = never;
+export type TrafficlightsAiArtifactLayer = never;
 
-export type SemaphorAiTerrainLayer = never;
+export type TrafficlightsAiBrain = never;
 
-export type SemaphorAiTerrain = never;
+export type TrafficlightsAiTerrainLayer = never;
 
-export type SemaphorPosition =
+export type TrafficlightsAiTerrain = never;
+
+export type TrafficlightsPosition =
   | "a1"
   | "a2"
   | "a3"

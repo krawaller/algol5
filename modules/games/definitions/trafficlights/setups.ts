@@ -1,5 +1,5 @@
-import { SemaphorSetupBook } from "./_types";
+import { TrafficlightsSetupBook } from "./_types";
 
-const semaphorSetupBook: SemaphorSetupBook = { basic: {} };
+const trafficlightsSetupBook: TrafficlightsSetupBook = { basic: {} };
 
-export default semaphorSetupBook;
+export default trafficlightsSetupBook;

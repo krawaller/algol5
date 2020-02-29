@@ -1,6 +1,6 @@
-import { SemaphorScripts } from "./_types";
+import { TrafficlightsScripts } from "./_types";
 
-const semaphorScripts: SemaphorScripts = {
+const trafficlightsScripts: TrafficlightsScripts = {
   quickWin: [
     {
       commands: [
@@ -12,11 +12,11 @@ const semaphorScripts: SemaphorScripts = {
         "endTurn",
         "c1",
         "deploy",
-        "endTurn"
+        "endTurn",
       ],
       endedIn: "win",
-      endedBy: "madeline"
-    }
+      endedBy: "madeline",
+    },
   ],
   basic: [
     {
@@ -33,8 +33,8 @@ const semaphorScripts: SemaphorScripts = {
         "c3",
         "d1",
         "d2",
-        "d3"
-      ]
+        "d3",
+      ],
     },
     { commands: ["c2"], include: ["deploy"] },
     {
@@ -51,8 +51,8 @@ const semaphorScripts: SemaphorScripts = {
         "c3",
         "d1",
         "d2",
-        "d3"
-      ]
+        "d3",
+      ],
     },
     { commands: ["c2"], include: ["promote"] },
     {
@@ -68,8 +68,8 @@ const semaphorScripts: SemaphorScripts = {
         "c3",
         "d1",
         "d2",
-        "d3"
-      ]
+        "d3",
+      ],
     },
     {
       commands: [
@@ -81,9 +81,9 @@ const semaphorScripts: SemaphorScripts = {
         "endTurn",
         "b2",
         "promote",
-        "endTurn"
+        "endTurn",
       ],
-      include: ["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"]
+      include: ["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"],
     },
     {
       commands: [
@@ -95,11 +95,11 @@ const semaphorScripts: SemaphorScripts = {
         "endTurn",
         "a2",
         "promote",
-        "endTurn"
+        "endTurn",
       ],
-      endedIn: "win"
-    }
-  ]
+      endedIn: "win",
+    },
+  ],
 };
 
-export default semaphorScripts;
+export default trafficlightsScripts;

@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { SemaphorGenerators } from "./_types";
+import { TrafficlightsGenerators } from "./_types";
 
-const semaphorGenerators: SemaphorGenerators = {
+const trafficlightsGenerators: TrafficlightsGenerators = {
   findlines: {
     type: "walker",
     dirs: [1, 2, 3, 4],
@@ -13,9 +13,9 @@ const semaphorGenerators: SemaphorGenerators = {
     steps: { groupat: ["start"] },
     startasstep: true,
     draw: {
-      steps: { condition: { morethan: [["walklength"], 2] }, tolayer: "line" }
-    }
-  }
+      steps: { condition: { morethan: [["walklength"], 2] }, tolayer: "line" },
+    },
+  },
 };
 
-export default semaphorGenerators;
+export default trafficlightsGenerators;

@@ -1,5 +1,9 @@
-import { SemaphorBoard } from "./_types";
+import { TrafficlightsBoard } from "./_types";
 
-const semaphorBoard: SemaphorBoard = { width: 4, height: 3, terrain: {} };
+const trafficlightsBoard: TrafficlightsBoard = {
+  width: 4,
+  height: 3,
+  terrain: {},
+};
 
-export default semaphorBoard;
+export default trafficlightsBoard;

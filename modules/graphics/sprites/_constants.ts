@@ -6,7 +6,7 @@ export const colours = {
   emptyDark: "#ebd3b4",
   castle: "grey",
   castleDark: "#757575",
-  grass: "green",
+  grass: "#399e39",
   grassDark: "#007f01",
   water: "lightblue",
   waterDark: "#9fc7d4",

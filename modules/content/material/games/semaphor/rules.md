@@ -1,1 +1,8 @@
-Soon we will show the rules for Semaphor here! In the meantime you can read them {EXTLINK:url=http://www.di.fc.ul.pt/~jpn/gv/semaphor.htm,text=here}.
+{GAME} is played on an inially empty {DIM} board.
+
+Each turn a player does one of the following:
+
+- {CMND:name=deploy} a {UNIT:group=pawns,who=0} to an empty square
+- {CMND:name=promote} a {UNIT:group=pawns,who=0} to a {UNIT:group=bishops,who=0} or a {UNIT:group=bishops,who=0} to a {UNIT:group=kings,who=0}.
+
+If this makes 3 of the same units in a line (including diagonals), the player wins!

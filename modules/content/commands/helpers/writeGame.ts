@@ -34,7 +34,7 @@ export const writeGame = (gameId: GameId) => {
       }
     }
     const picRefPath = `/images/games/${gameId}/`;
-    const { html, preloads } = md2html({
+    const { html, preloads, updated } = md2html({
       md,
       arrs,
       gameId,
@@ -43,7 +43,10 @@ export const writeGame = (gameId: GameId) => {
     });
     allGamePreloads.push(...preloads);
     writeFileSync(path.join(out, `${file}.html`), html);
-    const exported = `export const ${file} = \`${html}\`\n`;
+    const exported = `export const ${file} = {
+  updated: "${updated}",
+  html: \`${html}\`
+}\n`;
     writeFileSync(path.join(out, `${file}.ts`), exported);
     content[file] = html;
   }

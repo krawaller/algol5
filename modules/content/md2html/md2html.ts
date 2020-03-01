@@ -29,5 +29,9 @@ export const md2html = (opts: Md2htmlOpts) => {
   const nice = prettier
     .format(html, { filepath: "foo.html" })
     .replace(/\n$/, "");
-  return { html: nice, preloads: preloads };
+  const date =
+    yaml.updated instanceof Date
+      ? yaml.updated.toISOString().slice(0, 10)
+      : yaml.updated;
+  return { html: nice, preloads: preloads, updated: date };
 };

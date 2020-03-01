@@ -21,12 +21,19 @@ storiesOf("GameLanding", module).add("init game", () => {
     continuePreviousSession: () => console.log("previous"),
     reportError: err => console.log("error", err),
   };
+  const content = {
+    about: {
+      updated: "2020-02-03",
+      html: "text about " + gameId + " would be here",
+    },
+    rules: {
+      updated: "2020-02-03",
+      html: "rules for " + gameId + " would be here",
+    },
+  };
   return (
     <GameLanding
-      html={{
-        about: "text about " + gameId + " would be here",
-        rules: "rules for " + gameId + " would be here",
-      }}
+      content={content}
       key={gameId}
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}

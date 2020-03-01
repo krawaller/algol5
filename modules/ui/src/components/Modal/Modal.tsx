@@ -7,10 +7,11 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   title: string;
+  subtitle?: string;
 };
 
 export const Modal: FunctionComponent<ModalProps> = props => {
-  const { isOpen, onClose, title, children } = props;
+  const { isOpen, onClose, title, children, subtitle } = props;
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onEsc);
@@ -23,7 +24,10 @@ export const Modal: FunctionComponent<ModalProps> = props => {
         <div onClick={e => e.stopPropagation()} className={css.modalContainer}>
           <div className={css.modalHeader}>
             {title}
-            <Button onClick={onClose}>X</Button>
+            <div>
+              <span className={css.modalSubtitle}>{subtitle}</span>
+              <Button onClick={onClose}>X</Button>
+            </div>
           </div>
           <div className={css.modalContent}>{children}</div>
         </div>

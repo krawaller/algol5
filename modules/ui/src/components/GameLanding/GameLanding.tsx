@@ -24,8 +24,14 @@ export interface GameLandingActions {
 }
 
 type GameLandingHTML = {
-  about: string;
-  rules: string;
+  about: {
+    html: string;
+    updated: string;
+  };
+  rules: {
+    html: string;
+    updated: string;
+  };
 };
 
 type GameLandingProps = {
@@ -33,11 +39,11 @@ type GameLandingProps = {
   actions: GameLandingActions;
   graphics: AlgolGameGraphics;
   hasPrevious: boolean;
-  html: GameLandingHTML;
+  content: GameLandingHTML;
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, actions, graphics, hasPrevious, html } = props;
+  const { meta, actions, graphics, hasPrevious, content } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
   const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
   const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
@@ -96,15 +102,17 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         isOpen={isAboutModalOpen}
         onClose={closeAboutModal}
         title={"About " + meta.name}
+        subtitle={`updated ${content.about.updated}`}
       >
-        <Markdown actions={actions} html={html.about} />
+        <Markdown actions={actions} html={content.about.html} />
       </Modal>
       <Modal
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}
         title={"How to play " + meta.name}
+        subtitle={`updated ${content.rules.updated}`}
       >
-        <Markdown actions={actions} html={html.rules} />
+        <Markdown actions={actions} html={content.rules.html} />
       </Modal>
     </Fragment>
   );

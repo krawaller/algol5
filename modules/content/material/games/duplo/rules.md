@@ -1,3 +1,7 @@
+---
+updated: 2020-03-01
+---
+
 {GAME} is played on an initially empty {DIM} board.
 
 In their first turn players each {CMND:name=deploy} two {UNIT} anywhere on the board.

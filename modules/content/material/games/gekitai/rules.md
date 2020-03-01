@@ -1,4 +1,8 @@
-Gekitai is played on an initially empty {DIM} board. Each player has 8 offboard {UNIT}, which they take turn to {CMND} onto the board on any empty square.
+---
+updated: 2020-02-20
+---
+
+{GAME} is played on an initially empty {DIM} board. Each player has 8 offboard {UNIT}, which they take turn to {CMND} onto the board on any empty square.
 
 A newly dropped unit will **push** adjacent units, unless there is another unit in the way behind it. Units pushed off the board are removed.
 

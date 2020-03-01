@@ -1,3 +1,7 @@
+---
+updated: 2020-02-29
+---
+
 {GAME} was published in 1981 by Competitive Games, without designer credit.
 
 {PIC:name=serauqs.jpg,cred=Photo by Thomas MacLaney,credurl=https://boardgamegeek.com/image/100208/serauqs,title=The Competitive Games edition}

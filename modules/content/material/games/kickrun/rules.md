@@ -1,3 +1,7 @@
+---
+updated: 2020-02-24
+---
+
 Kick & run is played on a {DIM} board with the following setup:
 
 {SETUP}

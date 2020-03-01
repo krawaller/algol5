@@ -1,3 +1,7 @@
+---
+updated: 2020-02-29
+---
+
 The origins of {GAME} is unknown, but it appears to be old since {EXTLINK:url=https://www.chessvariants.com/small.dir/krieg.html,text=Jeff Zeitlin wrote} that it was available on the {EXTLINK:url=https://www.chessprogramming.org/PDP-8,text=PDP-8 computer}.
 
 {PIC:name=pdp8.png,title=A PDP-8 computer,cred=Photo from ResearchGate,credurl=https://www.researchgate.net/figure/PDP-8-e-one-of-the-first-affordable-minicomputer_fig2_332022770}

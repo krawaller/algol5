@@ -1,4 +1,8 @@
-Ugly duck was invented in 2001 by Dan Troyka. The name refers to the HC Andersen story of the ugly duckling turning into a beautiful swan, which happens in the game as units reaching the opponent base are promoted.
+---
+updated: 2020-02-24
+---
+
+{GAME} was invented in 2001 by Dan Troyka. The name refers to the HC Andersen story of the ugly duckling turning into a beautiful swan, which happens in the game as units reaching the opponent base are promoted.
 
 {PIC:name=audiobook.png,title=Detail from audiobook cover,cred=Image by Sony Music,credurl=https://www.bokus.com/bok/9789189129566/the-ugly-duckling/}
 

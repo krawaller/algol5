@@ -1,4 +1,8 @@
-Amazons is played on a {DIM} board with the following setup:
+---
+updated: 2020-02-20
+---
+
+{GAME} is played on a {DIM} board with the following setup:
 
 {SETUP}
 

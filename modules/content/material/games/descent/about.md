@@ -1,4 +1,8 @@
-This tight, elegant stacking game was invented by Rey Alicea in 2013. {ME} doesn't support stacking games as such, so we let the various unit types represent the different stack heights.
+---
+updated: 2020-02-26
+---
+
+{GAME} is a tight, elegant stacking game invented by Rey Alicea in 2013. {ME} doesn't support stacking games as such, so we let the various unit types represent the different stack heights.
 
 {PIC:name=render.jpg,title=Ready to descend!,cred=Render by Rey Alicea,credurl=https://www.boardgamegeek.com/image/2446200/descent}
 

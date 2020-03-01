@@ -1,3 +1,7 @@
+---
+updated: 2020-03-01
+---
+
 {GAME} was invented by Walter Joris around Y2K, and published in his amazing book {EXTLINK:text=100 strategic games for pen and paper,url=https://www.amazon.com/100-Strategic-Games-Walter-Joris/dp/1842227270}
 
 {PIC:name=walterart.png,cred=Art by Walter Joris,title=He does abstract art too!,credurl=https://www.flickr.com/photos/waljoris/49173405073/}

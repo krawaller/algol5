@@ -12,17 +12,34 @@ const duploFlow: DuploFlow = {
             ifelse: [
               { same: [{ sizeof: "oppunits" }, { sizeof: "myunits" }] },
               0,
-              ["otherplayer"]
-            ]
-          }
-        ]
-      }
-    }
+              ["otherplayer"],
+            ],
+          },
+        ],
+      },
+    },
+    nomoremoves: {
+      whenStarvation: true,
+      condition: ["true"],
+      who: {
+        ifelse: [
+          { morethan: [{ sizeof: "myunits" }, { sizeof: "oppunits" }] },
+          ["player"],
+          {
+            ifelse: [
+              { same: [{ sizeof: "oppunits" }, { sizeof: "myunits" }] },
+              0,
+              ["otherplayer"],
+            ],
+          },
+        ],
+      },
+    },
   },
   startTurn: {
     link: {
-      ifelse: [{ morethan: [["turn"], 1] }, "selectunit", "selectdeploy"]
-    }
+      ifelse: [{ morethan: [["turn"], 1] }, "selectunit", "selectdeploy"],
+    },
   },
   marks: {
     selectdeploy: { from: { subtract: ["board", "units"] }, link: "deploy" },
@@ -32,15 +49,15 @@ const duploFlow: DuploFlow = {
         "findspawndirs",
         "findgrowstarts",
         "findexpandpoints",
-        "findoppstrengths"
+        "findoppstrengths",
       ],
-      link: "selecttarget"
+      link: "selecttarget",
     },
     selecttarget: {
       from: "targets",
       runGenerator: "findspawns",
-      link: "expand"
-    }
+      link: "expand",
+    },
   },
   commands: {
     deploy: {
@@ -49,9 +66,9 @@ const duploFlow: DuploFlow = {
         ifelse: [
           { morethan: [{ sizeof: "mysoldiers" }, 1] },
           "endTurn",
-          "selectdeploy"
-        ]
-      }
+          "selectdeploy",
+        ],
+      },
     },
     expand: {
       applyEffects: [
@@ -60,8 +77,8 @@ const duploFlow: DuploFlow = {
             "spawns",
             "soldiers",
             ["player"],
-            { from: { pos: "selectunit" } }
-          ]
+            { from: { pos: "selectunit" } },
+          ],
         },
         {
           if: [
@@ -74,17 +91,17 @@ const duploFlow: DuploFlow = {
                     "selecttarget",
                     "soldiers",
                     0,
-                    { from: { pos: "selectunit" } }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+                    { from: { pos: "selectunit" } },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default duploFlow;

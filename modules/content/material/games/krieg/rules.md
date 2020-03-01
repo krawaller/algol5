@@ -1,3 +1,7 @@
+---
+updated: 2020-02-29
+---
+
 {GAME} is played on a {DIM} board with the following initial setup:
 
 {SETUP}

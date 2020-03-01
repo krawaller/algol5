@@ -21,7 +21,7 @@ import demo from "../../../../battle/dist/demos/${gameId}";
 import { about } from "../../../../content/dist/games/${gameId}/about";
 import { rules } from "../../../../content/dist/games/${gameId}/rules";
 import { preloads } from "../../../../content/dist/games/${gameId}/preloads";
-const html = { about, rules };
+const content = { about, rules };
 
 export const Game = () => {
   const preloadTags = preloads.map(url => <link key={url} rel="preload" as="image" href={url} /> )
@@ -33,7 +33,7 @@ export const Game = () => {
       </Head>
       <GamePage
         api={api}
-        html={html}
+        content={content}
         graphics={graphics}
         meta={meta}
         demo={demo}

@@ -1,4 +1,8 @@
-Chameleon is played on a {DIM} board with the following setup:
+---
+updated: 2020-02-18
+---
+
+{GAME} is played on a {DIM} board with the following setup:
 
 {SETUP}
 

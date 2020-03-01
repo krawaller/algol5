@@ -1,4 +1,8 @@
-Coffee is played on an initially empty {DIM} board. Players take turn to place a {UNIT}, trying to be the first to make 4 in a row (in any direction, including diagonals).
+---
+updated: 2020-02-24
+---
+
+{GAME} is played on an initially empty {DIM} board. Players take turn to place a {UNIT}, trying to be the first to make 4 in a row (in any direction, including diagonals).
 
 On her turn a player selects a neutral {UNIT:who=0} on the board to make into her own {UNIT}. Any other{UNIT:who=0} are removed. Next the player must choose whether to place new neutral {UNIT:who=0} on all free squares {CMND:name=uphill}, {CMND:name=downhill}, {CMND:name=horisontal} or {CMND:name=vertical} from the chosen unit. These new neutral units will then serve as placement options for the opponent! You cannot select a direction that doesn't yield any {UNIT:who=0}.
 

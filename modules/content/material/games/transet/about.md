@@ -1,4 +1,8 @@
-Transet, formerly Kwinta, was invented by Harm van Veen in the 1960:s.
+---
+updated: 2020-02-25
+---
+
+{GAME}, formerly Kwinta, was invented by Harm van Veen in the 1960:s.
 
 {PIC:name=kwinta-small.png,cred=Pic rescued by Trabsact Sagme Diaries,title=Old ad for the game,credurl=http://sagme.blogspot.com/2013/05/transet.html}
 

@@ -1,4 +1,8 @@
-Atrium is played on a {DIM} board with the following starting setup:
+---
+updated: 2020-02-18
+---
+
+{GAME} is played on a {DIM} board with the following starting setup:
 
 {SETUP}
 

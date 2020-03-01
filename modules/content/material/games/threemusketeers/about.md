@@ -1,4 +1,8 @@
-Three Musketeers was invented by Haar Hoolim in 1969, and first published in Sid Sackson's legendary book {EXTLINK:url=https://en.wikipedia.org/wiki/A_Gamut_of_Games,text=A Gamut of Games}.
+---
+updated: 2020-02-25
+---
+
+{GAME} was invented by Haar Hoolim in 1969, and first published in Sid Sackson's legendary book {EXTLINK:url=https://en.wikipedia.org/wiki/A_Gamut_of_Games,text=A Gamut of Games}.
 
 The rules are simple to the point of being banal, but the asymmetry and hidden depths still make for a rather intriguing game!
 

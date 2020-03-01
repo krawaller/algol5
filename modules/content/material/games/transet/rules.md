@@ -1,4 +1,8 @@
-Transet is played on a {DIM} board with the following setup:
+---
+updated: 2020-02-25
+---
+
+{GAME} is played on a {DIM} board with the following setup:
 
 {SETUP}
 

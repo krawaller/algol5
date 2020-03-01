@@ -1,3 +1,7 @@
+---
+updated: 2020-02-29
+---
+
 {GAME} is played on a {DIM} board with the following setup:
 
 {SETUP}
@@ -14,7 +18,7 @@ They then immediately win if their units - optionally also including the opponen
 
 <div class="md-example">
 
-These three examples are all a win for {PLR:who=2}:
+These examples are all a win for {PLR:who=2}:
 
 <div class="md-3col">
 {ARR:name=cornerwin}

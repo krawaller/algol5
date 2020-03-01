@@ -1,3 +1,7 @@
+---
+updated: 2020-02-29
+---
+
 {GAME} is played on an inially empty {DIM} board.
 
 Each turn a player does one of the following:

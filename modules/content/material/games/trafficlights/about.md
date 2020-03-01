@@ -1,3 +1,7 @@
+---
+updated: 2020-02-29
+---
+
 {GAME} was created by Alan Parr in 1985, and has been published by UK company Fiendish Games.
 
 {PIC:name=plushtraffic-half.jpg,cred=Photo and sewing by Kátia Kurianski,credurl=https://boardgamegeek.com/image/2698334/traffic-lights,title=Plush Traffic Lights}

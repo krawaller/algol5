@@ -1,4 +1,8 @@
-Momentum is played on an initially empty {DIM} board. Players take turn to {CMND:name=drop} a {UNIT} onto the board.
+---
+updated: 2020-02-24
+---
+
+{GAME} is played on an initially empty {DIM} board. Players take turn to {CMND:name=drop} a {UNIT} onto the board.
 
 After the first {CMND:name=drop} by {PLR:who=1}, {PLR:who=2} can choose {CMND:name=pie} to take over the placed {UNIT:who=1}.
 

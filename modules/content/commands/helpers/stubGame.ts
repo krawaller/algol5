@@ -9,16 +9,24 @@ export const stubGame = (gameId: GameId) => {
     fs.ensureDirSync(out);
     writeFileSync(
       path.join(out, `about.md`),
-      `${meta[gameId].name}! ${meta[gameId].tagline}. More yabber about the game to come!`
+      `---
+updated: ${new Date().toISOString().slice(0, 10)}
+---
+{GAME}! ${meta[gameId].tagline}. More yabber about the game to come!`
     );
     writeFileSync(path.join(out, `links.ts`), `export const links = {};\n`);
     writeFileSync(
       path.join(out, `rules.md`),
-      `${meta[gameId].name} is played on a {DIM} board with the following setup:
+      `---
+updated: ${new Date().toISOString().slice(0, 10)}
+---
+{GAME} is played on a {DIM} board with the following setup:
 
 {SETUP}
 
-Soon we will show the rules for ${meta[gameId].name} here! In the meantime you can read them {EXTLINK:url=${meta[gameId].source},text=here}.`
+Soon we will show the rules for {GAME} here! In the meantime you can read them {EXTLINK:url=${
+        meta[gameId].source
+      },text=here}.`
     );
     fs.ensureDirSync(path.join(out, `pics`));
     const cap = gameId[0].toUpperCase() + gameId.slice(1);

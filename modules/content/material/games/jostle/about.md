@@ -1,1 +1,9 @@
-Jostle! Be the last one to make a valid move which can only be to a more valuable position. More yabber about the game to come!
+---
+updated: 2020-03-01
+---
+
+{GAME} was invented by Mark Steere in 2010.
+
+{PIC:name=endgame.jpg,cred=Photo by Gurgeh,credurl=https://boardgamegeek.com/image/4085449/jostle,title=A win for blue}
+
+The ruleset is tiny but rather fascinating, making each move a balance act of limiting the opponents options while maximizing your own.

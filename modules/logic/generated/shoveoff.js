@@ -13,8 +13,6 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 4, width: 4 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { soldiers: "pawn" };
 const emptyArtifactLayers = {
   targetedgepoints: {},
@@ -32,10 +30,7 @@ const emptyArtifactLayers = {
   spawneast: {},
   fourinarow: {}
 };
-const connections = boardConnections({ height: 4, width: 4 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [["units"], ["units", "myunits"], ["units", "oppunits"]]
 };
@@ -46,6 +41,14 @@ const game = {
   gameId: "shoveoff",
   commands: { north: {}, south: {}, east: {}, west: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
@@ -56,15 +59,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {
-      southedge: [{ rect: ["a1", "d1"] }],
-      northedge: [{ rect: ["a4", "d4"] }],
-      westedge: [{ rect: ["a1", "a4"] }],
-      eastedge: [{ rect: ["d1", "d4"] }],
-      edge: [{ holerect: ["a1", "d4", "b2", "b3", "c2", "c3"] }]
-    };
-    TERRAIN1 = terrainLayers(4, 4, terrain, 1);
-    TERRAIN2 = terrainLayers(4, 4, terrain, 2);
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,

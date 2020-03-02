@@ -13,8 +13,6 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 8, width: 8 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { soldiers: "pawn" };
 const emptyArtifactLayers = {
   spawndirs: {},
@@ -23,10 +21,7 @@ const emptyArtifactLayers = {
   potentialopptargets: {},
   spawns: {}
 };
-const connections = boardConnections({ height: 8, width: 8 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   soldiers: [
     ["units", "soldiers"],
@@ -45,6 +40,14 @@ const game = {
   gameId: "duplo",
   commands: { deploy: {}, expand: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
@@ -62,9 +65,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {};
-    TERRAIN1 = terrainLayers(8, 8, terrain, 1);
-    TERRAIN2 = terrainLayers(8, 8, terrain, 2);
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,
@@ -617,6 +617,20 @@ const game = {
             : 2
         ];
         LINKS.endedBy = "boardfull";
+      } else if (true) {
+        LINKS.starvation = {
+          endGame: ["draw", "win", "lose"][
+            Object.keys(UNITLAYERS.myunits).length >
+            Object.keys(UNITLAYERS.oppunits).length
+              ? 1
+              : Object.keys(UNITLAYERS.oppunits).length ===
+                Object.keys(UNITLAYERS.myunits).length
+              ? 0
+              : 2
+          ],
+          endedBy: "nomoremoves"
+        };
+        LINKS.endTurn = "startTurn2";
       } else {
         LINKS.endTurn = "startTurn2";
       }
@@ -753,6 +767,20 @@ const game = {
             : 1
         ];
         LINKS.endedBy = "boardfull";
+      } else if (true) {
+        LINKS.starvation = {
+          endGame: ["draw", "lose", "win"][
+            Object.keys(UNITLAYERS.myunits).length >
+            Object.keys(UNITLAYERS.oppunits).length
+              ? 2
+              : Object.keys(UNITLAYERS.oppunits).length ===
+                Object.keys(UNITLAYERS.myunits).length
+              ? 0
+              : 1
+          ],
+          endedBy: "nomoremoves"
+        };
+        LINKS.endTurn = "startTurn1";
       } else {
         LINKS.endTurn = "startTurn1";
       }

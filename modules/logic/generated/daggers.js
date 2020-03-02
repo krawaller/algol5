@@ -13,14 +13,9 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 8, width: 8 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { daggers: "bishop", crowns: "king" };
 const emptyArtifactLayers = { movetarget: {} };
-const connections = boardConnections({ height: 8, width: 8 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   daggers: [
     ["units", "daggers"],
@@ -49,6 +44,14 @@ const game = {
   gameId: "daggers",
   commands: { move: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
@@ -68,11 +71,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {
-      base: { "1": [{ rect: ["a8", "h8"] }], "2": [{ rect: ["a1", "h1"] }] }
-    };
-    TERRAIN1 = terrainLayers(8, 8, terrain, 1);
-    TERRAIN2 = terrainLayers(8, 8, terrain, 2);
     return game.action.startTurn1({
       TURN: 0,
       UNITDATA,

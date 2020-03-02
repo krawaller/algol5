@@ -13,8 +13,6 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 7, width: 8 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { towers: "rook", walls: "pawn", catapults: "queen" };
 const emptyArtifactLayers = {
   firetargets: {},
@@ -24,10 +22,7 @@ const emptyArtifactLayers = {
   madewalls: {},
   crushtargets: {}
 };
-const connections = boardConnections({ height: 7, width: 8 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   towers: [
     ["units", "towers"],
@@ -66,6 +61,14 @@ const game = {
   gameId: "murusgallicusadvanced",
   commands: { move: {}, crush: {}, sacrifice: {}, fire: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
@@ -89,11 +92,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {
-      homerow: { "1": [{ rect: ["a1", "h1"] }], "2": [{ rect: ["a7", "h7"] }] }
-    };
-    TERRAIN1 = terrainLayers(7, 8, terrain, 1);
-    TERRAIN2 = terrainLayers(7, 8, terrain, 2);
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,

@@ -16,7 +16,10 @@ storiesOf("GamePage", module).add(
   "Used for individual game pages in the app",
   () => {
     const gameId = select("Game", list, list[0]) as GameId;
-    const api = makeStaticGameAPI(games[gameId], defs[gameId].setups);
+    const def = defs[gameId];
+    const api = makeStaticGameAPI(games[gameId], def.setups, {
+      basic: def.board,
+    });
     const graphics = dataURIs[gameId];
     const content = {
       about: {

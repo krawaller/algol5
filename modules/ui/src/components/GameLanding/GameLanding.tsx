@@ -101,7 +101,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       <Modal
         isOpen={isAboutModalOpen}
         onClose={closeAboutModal}
-        title={"About " + meta.name}
+        title={"About the game"}
         subtitle={`updated ${content.about.updated}`}
       >
         <Markdown actions={actions} html={content.about.html} />
@@ -109,7 +109,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
       <Modal
         isOpen={isRulesModalOpen}
         onClose={closeRulesModal}
-        title={"How to play " + meta.name}
+        title={"How to play"}
         subtitle={`updated ${content.rules.updated}`}
       >
         <Markdown actions={actions} html={content.rules.html} />

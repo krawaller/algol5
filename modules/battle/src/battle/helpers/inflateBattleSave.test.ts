@@ -1,5 +1,6 @@
 import { inflateBattleSave } from ".";
 import atrium from "../../../../logic/dist/indiv/atrium";
+import defs from "../../../../games/dist/lib";
 import trafficlights from "../../../../logic/dist/indiv/trafficlights";
 import { AlgolBattleSave, AlgolGame } from "../../../../types";
 
@@ -25,6 +26,7 @@ const tests: InflationGameSuite[] = [
 
 describe("the inflateBattle helper", () => {
   for (const [game, suite] of tests) {
+    game.setBoard(defs[game.gameId].board);
     for (const [name, save] of Object.entries(suite)) {
       it(`correctly inflates ${game.gameId} test ${name}`, () => {
         const battle = inflateBattleSave(game, save);

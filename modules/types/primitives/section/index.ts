@@ -9,4 +9,5 @@ export type AlgolSection =
   | "startEnd"
   | "cmndInit"
   | "cmndEnd"
-  | "instruction";
+  | "instruction"
+  | "setBoard";

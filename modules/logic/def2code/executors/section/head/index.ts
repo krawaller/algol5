@@ -14,11 +14,6 @@ export function executeHead(
   let ret = "\n";
 
   ret += `const emptyObj = {}; `;
-  ret += `const dimensions = { height: ${gameDef.board.height}, width: ${gameDef.board.width} }; `;
-
-  ret += `
-    const BOARD = boardLayers(dimensions);
-  `;
 
   ret += `const iconMapping = ${JSON.stringify(gameDef.graphics.icons)};\n`;
 
@@ -34,25 +29,7 @@ export function executeHead(
   `;
   }
 
-  ret += `
-    const connections = boardConnections({ height: ${
-      gameDef.board.height
-    }, width: ${gameDef.board.width}${
-    gameDef.board.offset
-      ? `, offset: ${JSON.stringify(gameDef.board.offset)}`
-      : ""
-  }${
-    gameDef.board.offsets
-      ? `, offsets: ${JSON.stringify(gameDef.board.offsets)}`
-      : ""
-  } });
-  `;
-
-  let offsets = gameDef.board.offsets || [];
-  if (gameDef.board.offset) offsets.push(gameDef.board.offset);
-  ret += `const relativeDirs = makeRelativeDirs(${JSON.stringify(offsets)}); `;
-
-  ret += `let TERRAIN1; let TERRAIN2;`;
+  ret += `let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions; `;
 
   ret += `const groupLayers1 = ${JSON.stringify(
     groupLayersForPlayer(gameDef, 1)

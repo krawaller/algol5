@@ -13,14 +13,9 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 7, width: 7 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { stones: "pawn" };
 const emptyArtifactLayers = { doomed: {}, pushed: {} };
-const connections = boardConnections({ height: 7, width: 7 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   stones: [
     ["units", "stones"],
@@ -39,6 +34,14 @@ const game = {
   gameId: "momentum",
   commands: { pie: {}, drop: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, stones: {} };
@@ -49,9 +52,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {};
-    TERRAIN1 = terrainLayers(7, 7, terrain, 1);
-    TERRAIN2 = terrainLayers(7, 7, terrain, 2);
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,

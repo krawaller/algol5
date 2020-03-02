@@ -11,15 +11,6 @@ export function executeNewBattle(
   ret += `let UNITDATA = setup2army(setup);
     ${updateUnitLayers(gameDef, 2, "newBattle", true)}`;
 
-  ret += `let terrain = ${JSON.stringify(gameDef.board.terrain) || {}}; `;
-
-  ret += `TERRAIN1 = terrainLayers(${gameDef.board.height}, ${
-    gameDef.board.width
-  }, terrain, ${1}); `;
-  ret += `TERRAIN2 = terrainLayers(${gameDef.board.height}, ${
-    gameDef.board.width
-  }, terrain, ${2}); `;
-
   return (
     ret +
     `return game.action.startTurn1({

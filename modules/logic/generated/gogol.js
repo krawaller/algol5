@@ -13,13 +13,8 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 8, width: 8 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { kings: "king", soldiers: "pawn" };
-const connections = boardConnections({ height: 8, width: 8 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   kings: [
     ["units", "kings"],
@@ -48,6 +43,14 @@ const game = {
   gameId: "gogol",
   commands: { deploy: {}, move: {}, jump: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
@@ -67,17 +70,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {
-      homerow: { "1": [{ rect: ["a1", "h1"] }], "2": [{ rect: ["a8", "h8"] }] },
-      edges: [
-        { rect: ["a1", "a8"] },
-        { rect: ["h1", "h8"] },
-        { rect: ["b8", "g8"] },
-        { rect: ["b1", "g1"] }
-      ]
-    };
-    TERRAIN1 = terrainLayers(8, 8, terrain, 1);
-    TERRAIN2 = terrainLayers(8, 8, terrain, 2);
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,

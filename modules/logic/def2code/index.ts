@@ -78,8 +78,11 @@ const game = {
   gameId: '${gameDef.meta.id}',
   commands: { ${cmndInfo} },
   iconMap: iconMapping,
+  setBoard: (board) => {
+    ${executeSection(gameDef, 2, "setBoard", "setBoard")}
+  },
   newBattle: (setup) => {
-    ${executeSection(gameDef, 2, "startTurn", "newBattle")}
+    ${executeSection(gameDef, 2, "newBattle", "newBattle")}
   },
   action: {
     ${starts.join(", ")},

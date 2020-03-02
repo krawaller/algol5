@@ -23,7 +23,7 @@ export const Modal: FunctionComponent<ModalProps> = props => {
       <div className={css.modalOverlay} onClick={onClose}>
         <div onClick={e => e.stopPropagation()} className={css.modalContainer}>
           <div className={css.modalHeader}>
-            {title}
+            <span className={css.modalTitle}>{title}</span>
             <div>
               <span className={css.modalSubtitle}>{subtitle}</span>
               <Button onClick={onClose}>X</Button>

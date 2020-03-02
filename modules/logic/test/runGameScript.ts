@@ -19,8 +19,10 @@ export function runGameScript(
 ) {
   for (const scriptName in scripts) {
     test(`Game - ${id} - ${scriptName}`, () => {
+      const def = games[id];
       const lines = scripts[scriptName];
-      let step: AlgolStep = game.newBattle(games[id].setups.basic);
+      game.setBoard(def.board);
+      let step: AlgolStep = game.newBattle(def.setups.basic);
       let n = 0;
       let lastFunc = "startTurn1";
       while (lines.length) {

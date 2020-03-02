@@ -11,6 +11,7 @@ export async function exportGameAPI(gameId: GameId) {
     throw new Error(`Failed to find game ${gameId}`);
   }
   const setupBook = JSON.stringify(def.setups, null, 2);
+  const boardBook = JSON.stringify({ basic: def.board }, null, 2); // TODO - actual book soon!
   await fs.ensureDir(out);
   const me = path.join(out, gameId);
   await fs.emptyDir(me);
@@ -20,7 +21,7 @@ export async function exportGameAPI(gameId: GameId) {
 import ${gameId} from "../../../../logic/dist/indiv/${gameId}";
 import { makeStaticGameAPI } from "../../../src";
 
-export const staticAPI = makeStaticGameAPI(${gameId}, ${setupBook});
+export const staticAPI = makeStaticGameAPI(${gameId}, ${setupBook}, ${boardBook});
 export default staticAPI;
 `
   );
@@ -30,7 +31,7 @@ export default staticAPI;
 import ${gameId} from "../../../../logic/dist/indiv/${gameId}";
 import { makeStatefulGameAPI } from "../../../src";
 
-export const statefulAPI = makeStatefulGameAPI(${gameId}, ${setupBook});
+export const statefulAPI = makeStatefulGameAPI(${gameId}, ${setupBook}, ${boardBook});
 export default statefulAPI;
 `
   );

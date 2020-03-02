@@ -1,8 +1,12 @@
 import { executeSection } from "..";
 import { emptyFullDef } from "../../../../../common";
-import { AlgolStatementSuite, AlgolSection } from "../../../../../types";
+import {
+  AlgolStatementSuite,
+  AlgolSection,
+  AlgolBoardAnon,
+} from "../../../../../types";
 
-const board = {
+const board: AlgolBoardAnon = {
   ...emptyFullDef.board,
   height: 2,
   width: 2,
@@ -15,7 +19,7 @@ const board = {
 };
 
 export const testSuite: AlgolStatementSuite<AlgolSection> = {
-  title: "Section - Battle - Terrain",
+  title: "Section - Board - Terrain",
   func: executeSection,
   defs: [
     {
@@ -24,16 +28,16 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         board,
       },
       player: 1,
-      action: "battle",
+      action: "board",
       contexts: [
         {
-          context: {
-            setup: {},
-          },
-          envelope: `let game = { action: { startTurn1: a => a } }; `,
+          context: { board },
+          envelope:
+            "let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions; ",
           tests: [
             {
-              expr: "newBattle",
+              expr: "setBoard",
+              naked: true,
               asserts: [
                 {
                   sample: "TERRAIN1",
@@ -53,7 +57,27 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                       b1: { pos: "b1", x: 2, y: 1 },
                     },
                   },
-                  desc: "got correct terrain",
+                  desc: "got correct terrain1",
+                },
+                {
+                  sample: "TERRAIN2",
+                  res: {
+                    flurp: {
+                      a1: { owner: 1, pos: "a1", x: 1, y: 1 },
+                      b2: { owner: 2, pos: "b2", x: 2, y: 2 },
+                    },
+                    oppflurp: {
+                      a1: { owner: 1, pos: "a1", x: 1, y: 1 },
+                    },
+                    myflurp: {
+                      b2: { owner: 2, pos: "b2", x: 2, y: 2 },
+                    },
+                    noflurp: {
+                      a2: { pos: "a2", x: 1, y: 2 },
+                      b1: { pos: "b1", x: 2, y: 1 },
+                    },
+                  },
+                  desc: "got correct terrain2",
                 },
               ],
             },

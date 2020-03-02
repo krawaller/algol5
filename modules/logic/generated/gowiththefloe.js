@@ -13,8 +13,6 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 8, width: 8 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { seals: "king", bears: "queen", holes: "pawn" };
 const emptyArtifactLayers = {
   eattargets: {},
@@ -23,10 +21,7 @@ const emptyArtifactLayers = {
   canmove: {},
   cracks: {}
 };
-const connections = boardConnections({ height: 8, width: 8 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   seals: [
     ["units", "seals"],
@@ -65,6 +60,14 @@ const game = {
   gameId: "gowiththefloe",
   commands: { move: {}, jump: {}, eat: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
@@ -82,24 +85,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {
-      water: [
-        "a1",
-        "a2",
-        "a7",
-        "a8",
-        "b1",
-        "b8",
-        "g1",
-        "g8",
-        "h1",
-        "h2",
-        "h7",
-        "h8"
-      ]
-    };
-    TERRAIN1 = terrainLayers(8, 8, terrain, 1);
-    TERRAIN2 = terrainLayers(8, 8, terrain, 2);
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,

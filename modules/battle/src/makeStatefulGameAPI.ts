@@ -5,20 +5,28 @@ import {
   AlgolBattle,
   AlgolBattleSave,
   AlgolSetupBookAnon,
+  AlgolBoardBookAnon,
 } from "../../types";
 import { newBattle, battleAction, getBattleUI } from "./battle";
 import { inflateBattleSave } from "./battle/helpers";
 
 export function makeStatefulGameAPI(
   game: AlgolGame,
-  setups: AlgolSetupBookAnon
+  setups: AlgolSetupBookAnon,
+  boards: AlgolBoardBookAnon
 ): AlgolStatefulGameAPI {
   return {
     gameId: game.gameId,
-    // TODO - variants choices selecting which setup
-    newBattle: () => fromBattle(game, newBattle(game, setups.basic)),
-    fromSave: (save: AlgolBattleSave) =>
-      fromBattle(game, inflateBattleSave(game, save)),
+    newBattle: () => {
+      // TODO - variants choices selecting which setup and board
+      game.setBoard(boards.basic);
+      return fromBattle(game, newBattle(game, setups.basic));
+    },
+    fromSave: (save: AlgolBattleSave) => {
+      // TODO - read board and variant from save
+      game.setBoard(boards.basic);
+      return fromBattle(game, inflateBattleSave(game, save));
+    },
   };
 }
 

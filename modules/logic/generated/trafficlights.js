@@ -13,14 +13,9 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 3, width: 4 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { kings: "king", pawns: "pawn", bishops: "bishop" };
 const emptyArtifactLayers = { line: {} };
-const connections = boardConnections({ height: 3, width: 4 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   kings: [
     ["units", "kings"],
@@ -59,6 +54,14 @@ const game = {
   gameId: "trafficlights",
   commands: { deploy: {}, promote: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = { units: {}, kings: {}, pawns: {}, bishops: {} };
@@ -69,9 +72,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {};
-    TERRAIN1 = terrainLayers(3, 4, terrain, 1);
-    TERRAIN2 = terrainLayers(3, 4, terrain, 2);
     return game.action.startTurn1({
       NEXTSPAWNID: 1,
       TURN: 0,

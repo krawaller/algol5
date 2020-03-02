@@ -1,9 +1,10 @@
 import { AlgolStep, AlgolContentAnon, AlgolIconMap } from "../";
 import { GameId } from "../../games/dist/list";
-import { AlgolSetupAnon } from "../gamedef";
+import { AlgolSetupAnon, AlgolBoardAnon } from "../gamedef";
 
 export type AlgolGame = {
   gameId: GameId;
+  setBoard: (board: AlgolBoardAnon) => void;
   newBattle: (setup: AlgolSetupAnon) => AlgolStep;
   action: {
     [funcName: string]: (

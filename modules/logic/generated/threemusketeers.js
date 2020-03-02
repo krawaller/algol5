@@ -13,18 +13,13 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const dimensions = { height: 5, width: 5 };
-const BOARD = boardLayers(dimensions);
 const iconMapping = { pawns: "pawn", kings: "king" };
 const emptyArtifactLayers = {
   strandedmusketeers: {},
   musketeerline: {},
   movetargets: {}
 };
-const connections = boardConnections({ height: 5, width: 5 });
-const relativeDirs = makeRelativeDirs([]);
-let TERRAIN1;
-let TERRAIN2;
+let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
   pawns: [
     ["units", "pawns"],
@@ -53,6 +48,14 @@ const game = {
   gameId: "threemusketeers",
   commands: { move: {} },
   iconMap: iconMapping,
+  setBoard: board => {
+    TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);
+    TERRAIN2 = terrainLayers(board.height, board.width, board.terrain, 2);
+    dimensions = { height: board.height, width: board.width };
+    BOARD = boardLayers(dimensions);
+    connections = boardConnections(board);
+    relativeDirs = makeRelativeDirs(board);
+  },
   newBattle: setup => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
@@ -69,9 +72,6 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    let terrain = {};
-    TERRAIN1 = terrainLayers(5, 5, terrain, 1);
-    TERRAIN2 = terrainLayers(5, 5, terrain, 2);
     return game.action.startTurn1({
       TURN: 0,
       UNITDATA,

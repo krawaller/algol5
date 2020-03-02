@@ -22,9 +22,11 @@ export function makeStatefulGameAPI(
       game.setBoard(boards.basic);
       return fromBattle(game, newBattle(game, setups.basic));
     },
-    fromSave: (
-      save: AlgolBattleSave // TODO - read variant from save
-    ) => fromBattle(game, inflateBattleSave(game, save)),
+    fromSave: (save: AlgolBattleSave) => {
+      // TODO - read board and variant from save
+      game.setBoard(boards.basic);
+      return fromBattle(game, inflateBattleSave(game, save));
+    },
   };
 }
 

@@ -19,7 +19,10 @@ export function makeStaticGameAPI(
       game.setBoard(boards.basic);
       return newBattle(game, setups.basic);
     },
-    fromSave: save => inflateBattleSave(game, save), // TODO - read variant from save
+    fromSave: save => {
+      game.setBoard(boards.basic); // TODO - read variant from save
+      return inflateBattleSave(game, save);
+    },
     performAction: (battle, action, arg) =>
       battleAction(game, battle, action, arg),
     getBattleUI: battle => getBattleUI(game, battle),

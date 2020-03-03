@@ -12,11 +12,13 @@ export const testSuite: AlgolExpressionSuite<
     {
       def: {
         ...emptyFullDef,
-        board: {
-          ...emptyFullDef.board,
-          terrain: {
-            boo: { 1: ["a1"], 2: ["b2"] },
-            wee: { 1: ["a1"], 2: ["b2"] },
+        boards: {
+          basic: {
+            ...emptyFullDef.boards.basic,
+            terrain: {
+              boo: { 1: ["a1"], 2: ["b2"] },
+              wee: { 1: ["a1"], 2: ["b2"] },
+            },
           },
         },
       },
@@ -82,11 +84,13 @@ export const testSuite: AlgolExpressionSuite<
     {
       def: {
         ...emptyFullDef,
-        board: {
-          ...emptyFullDef.board,
-          terrain: {
-            boo: { 1: ["a1"], 2: ["b2"] },
-            wee: { 1: ["a1"], 2: ["b2"] },
+        boards: {
+          basic: {
+            ...emptyFullDef.boards.basic,
+            terrain: {
+              boo: { 1: ["a1"], 2: ["b2"] },
+              wee: { 1: ["a1"], 2: ["b2"] },
+            },
           },
         },
         generators: {

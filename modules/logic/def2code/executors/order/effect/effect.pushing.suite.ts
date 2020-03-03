@@ -9,10 +9,12 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
     {
       def: {
         ...emptyFullDef,
-        board: {
-          ...emptyFullDef.board,
-          height: 5,
-          width: 5,
+        boards: {
+          basic: {
+            ...emptyFullDef.boards.basic,
+            height: 5,
+            width: 5,
+          },
         },
       },
       player: 1,

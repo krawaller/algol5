@@ -130,10 +130,12 @@ export const testSuite: AlgolExpressionSuite<AlgolValAnon> = {
     {
       def: {
         ...emptyFullDef,
-        board: {
-          ...emptyFullDef.board,
-          terrain: {
-            flurp: [],
+        boards: {
+          basic: {
+            ...emptyFullDef.boards.basic,
+            terrain: {
+              flurp: [],
+            },
           },
         },
       },

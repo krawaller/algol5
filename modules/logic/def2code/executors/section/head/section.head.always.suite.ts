@@ -9,10 +9,12 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
     {
       def: {
         ...emptyFullDef,
-        board: {
-          ...emptyFullDef.board,
-          height: 1,
-          width: 2,
+        boards: {
+          basic: {
+            ...emptyFullDef.boards.basic,
+            height: 1,
+            width: 2,
+          },
         },
       },
       contexts: [

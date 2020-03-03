@@ -7,7 +7,7 @@ import {
 } from "../../../../../types";
 
 const board: AlgolBoardAnon = {
-  ...emptyFullDef.board,
+  ...emptyFullDef.boards.basic,
   height: 2,
   width: 2,
   terrain: {
@@ -25,7 +25,9 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
     {
       def: {
         ...emptyFullDef,
-        board,
+        boards: {
+          basic: board,
+        },
       },
       player: 1,
       action: "board",

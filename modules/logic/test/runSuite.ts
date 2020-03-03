@@ -51,8 +51,8 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                           : ["neutral", "opp", "my"],
                       gameDef: def,
                       dimensions: {
-                        height: def.board.height,
-                        width: def.board.width,
+                        height: def.boards.basic.height,
+                        width: def.boards.basic.width,
                       },
                       TERRAIN1: undefined,
                       TERRAIN2: undefined,

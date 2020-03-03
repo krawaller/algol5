@@ -12,7 +12,7 @@ export * from "./anim";
 
 import { Generators } from "./generators";
 import { Graphics } from "./graphics";
-import { AlgolBoard } from "./board";
+import { AlgolBoardBookAnon } from "./board";
 import { AI } from "./ai";
 import { AlgolSetupBook } from "./setup";
 import { Instructions } from "./instructions";
@@ -104,7 +104,7 @@ export type FullDef<
     TurnVar,
     Unit
   >;
-  board: AlgolBoard<BoardHeight, BoardWidth, Grid, Position, Terrain>;
+  boards: AlgolBoardBookAnon;
   setups: AlgolSetupBook<Position, Unit>;
   graphics: Graphics<Terrain, Unit>;
   grids?: { [g in Grid]: any };

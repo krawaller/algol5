@@ -86,8 +86,8 @@ export function runSuite<T, U>(suite: AlgolSuite) {
 
                 if (!suiteTest.naked) {
                   pre += `
-                  const connections = boardConnections(gameDef.board);
-                  const relativeDirs = makeRelativeDirs(gameDef.board);
+                  const connections = boardConnections(gameDef.boards.basic);
+                  const relativeDirs = makeRelativeDirs(gameDef.boards.basic);
                   const emptyObj = {};
                   `;
                   pre += `const groupLayers1 = ${JSON.stringify(

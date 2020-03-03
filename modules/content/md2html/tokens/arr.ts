@@ -12,7 +12,7 @@ export const arr: TokenHandler = opts => {
     throw new Error("ARR token but no gameId!");
   }
   const def = lib[gameId];
-  const { name, board = "name", from, to, pad } = args;
+  const { name, board = "basic", from, to, pad } = args;
   if (!name) {
     throw new Error("Have to provide arrangement name!");
   }

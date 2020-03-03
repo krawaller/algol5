@@ -4,7 +4,7 @@ import { MomentumDefinition } from "./_types";
 
 import momentumAI from "./ai";
 import momentumAnim from "./anim";
-import momentumBoard from "./board";
+import momentumBoardBook from "./boards";
 import momentumSetupBook from "./setups";
 import momentumGraphics from "./graphics";
 import momentumInstruction from "./instructions";
@@ -17,7 +17,7 @@ import momentumGenerators from "./generators";
 const momentumDefinition: MomentumDefinition = {
   AI: momentumAI,
   anim: momentumAnim,
-  board: momentumBoard,
+  boards: momentumBoardBook,
   setups: momentumSetupBook,
   graphics: momentumGraphics,
   instructions: momentumInstruction,

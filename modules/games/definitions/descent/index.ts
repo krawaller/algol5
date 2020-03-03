@@ -4,7 +4,7 @@ import { DescentDefinition } from "./_types";
 
 import descentAI from "./ai";
 import descentAnim from "./anim";
-import descentBoard from "./board";
+import descentBoardBook from "./boards";
 import descentSetupBook from "./setups";
 import descentGraphics from "./graphics";
 import descentInstruction from "./instructions";
@@ -17,7 +17,7 @@ import descentGenerators from "./generators";
 const descentDefinition: DescentDefinition = {
   AI: descentAI,
   anim: descentAnim,
-  board: descentBoard,
+  boards: descentBoardBook,
   setups: descentSetupBook,
   graphics: descentGraphics,
   instructions: descentInstruction,

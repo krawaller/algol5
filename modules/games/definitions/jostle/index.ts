@@ -4,7 +4,7 @@ import { JostleDefinition } from "./_types";
 
 import jostleAI from "./ai";
 import jostleAnim from "./anim";
-import jostleBoard from "./board";
+import jostleBoardBook from "./boards";
 import jostleSetupBook from "./setups";
 import jostleGraphics from "./graphics";
 import jostleInstruction from "./instructions";
@@ -17,7 +17,7 @@ import jostleGenerators from "./generators";
 const jostleDefinition: JostleDefinition = {
   AI: jostleAI,
   anim: jostleAnim,
-  board: jostleBoard,
+  boards: jostleBoardBook,
   setups: jostleSetupBook,
   graphics: jostleGraphics,
   instructions: jostleInstruction,

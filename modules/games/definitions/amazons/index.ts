@@ -4,7 +4,7 @@ import { AmazonsDefinition } from "./_types";
 
 import amazonsAI from "./ai";
 import amazonsAnim from "./anim";
-import amazonsBoard from "./board";
+import amazonsBoardBook from "./boards";
 import amazonsSetupBook from "./setups";
 import amazonsGraphics from "./graphics";
 import amazonsInstruction from "./instructions";
@@ -17,7 +17,7 @@ import amazonsGenerators from "./generators";
 const amazonsDefinition: AmazonsDefinition = {
   AI: amazonsAI,
   anim: amazonsAnim,
-  board: amazonsBoard,
+  boards: amazonsBoardBook,
   setups: amazonsSetupBook,
   graphics: amazonsGraphics,
   instructions: amazonsInstruction,

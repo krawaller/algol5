@@ -4,7 +4,7 @@ import { DaggersDefinition } from "./_types";
 
 import daggersAI from "./ai";
 import daggersAnim from "./anim";
-import daggersBoard from "./board";
+import daggersBoardBook from "./boards";
 import daggersSetupBook from "./setups";
 import daggersGraphics from "./graphics";
 import daggersInstruction from "./instructions";
@@ -17,7 +17,7 @@ import daggersGenerators from "./generators";
 const daggersDefinition: DaggersDefinition = {
   AI: daggersAI,
   anim: daggersAnim,
-  board: daggersBoard,
+  boards: daggersBoardBook,
   setups: daggersSetupBook,
   graphics: daggersGraphics,
   instructions: daggersInstruction,

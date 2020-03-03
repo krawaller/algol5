@@ -4,7 +4,7 @@ import { ChameleonDefinition } from "./_types";
 
 import chameleonAI from "./ai";
 import chameleonAnim from "./anim";
-import chameleonBoard from "./board";
+import chameleonBoardBook from "./boards";
 import chameleonSetupBook from "./setups";
 import chameleonGraphics from "./graphics";
 import chameleonInstruction from "./instructions";
@@ -17,7 +17,7 @@ import chameleonGenerators from "./generators";
 const chameleonDefinition: ChameleonDefinition = {
   AI: chameleonAI,
   anim: chameleonAnim,
-  board: chameleonBoard,
+  boards: chameleonBoardBook,
   setups: chameleonSetupBook,
   graphics: chameleonGraphics,
   instructions: chameleonInstruction,

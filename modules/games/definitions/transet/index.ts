@@ -4,7 +4,7 @@ import { TransetDefinition } from "./_types";
 
 import transetAI from "./ai";
 import transetAnim from "./anim";
-import transetBoard from "./board";
+import transetBoardBook from "./boards";
 import transetSetupBook from "./setups";
 import transetGraphics from "./graphics";
 import transetInstruction from "./instructions";
@@ -17,7 +17,7 @@ import transetGenerators from "./generators";
 const transetDefinition: TransetDefinition = {
   AI: transetAI,
   anim: transetAnim,
-  board: transetBoard,
+  boards: transetBoardBook,
   setups: transetSetupBook,
   graphics: transetGraphics,
   instructions: transetInstruction,

@@ -4,7 +4,7 @@ import { GekitaiDefinition } from "./_types";
 
 import gekitaiAI from "./ai";
 import gekitaiAnim from "./anim";
-import gekitaiBoard from "./board";
+import gekitaiBoardBook from "./boards";
 import gekitaiSetupBook from "./setups";
 import gekitaiGraphics from "./graphics";
 import gekitaiInstruction from "./instructions";
@@ -17,7 +17,7 @@ import gekitaiGenerators from "./generators";
 const gekitaiDefinition: GekitaiDefinition = {
   AI: gekitaiAI,
   anim: gekitaiAnim,
-  board: gekitaiBoard,
+  boards: gekitaiBoardBook,
   setups: gekitaiSetupBook,
   graphics: gekitaiGraphics,
   instructions: gekitaiInstruction,

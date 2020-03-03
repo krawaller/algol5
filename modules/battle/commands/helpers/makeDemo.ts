@@ -15,9 +15,11 @@ export async function makeDemo(gameId: GameId) {
   const scripts = gameDef.scripts;
   const script: AlgolScriptLine<string, string>[] =
     scripts.demo || scripts[Object.keys(scripts)[0]];
-  const API = makeStatefulGameAPI(games[gameId], gameDef.setups, {
-    basic: gameDef.board,
-  });
+  const API = makeStatefulGameAPI(
+    games[gameId],
+    gameDef.setups,
+    gameDef.boards
+  );
   const { anims, initial, patches } = demoMaker(API, script);
 
   await fs.ensureDir(out);

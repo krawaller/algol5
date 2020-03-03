@@ -11,7 +11,7 @@ export async function exportGameAPI(gameId: GameId) {
     throw new Error(`Failed to find game ${gameId}`);
   }
   const setupBook = JSON.stringify(def.setups, null, 2);
-  const boardBook = JSON.stringify({ basic: def.board }, null, 2); // TODO - actual book soon!
+  const boardBook = JSON.stringify(def.boards, null, 2);
   await fs.ensureDir(out);
   const me = path.join(out, gameId);
   await fs.emptyDir(me);

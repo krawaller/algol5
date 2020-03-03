@@ -26,7 +26,7 @@ const tests: InflationGameSuite[] = [
 
 describe("the inflateBattle helper", () => {
   for (const [game, suite] of tests) {
-    game.setBoard(defs[game.gameId].board);
+    game.setBoard(defs[game.gameId].boards.basic);
     for (const [name, save] of Object.entries(suite)) {
       it(`correctly inflates ${game.gameId} test ${name}`, () => {
         const battle = inflateBattleSave(game, save);

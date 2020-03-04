@@ -6,7 +6,7 @@ const gekitaiMeta: GekitaiMeta = {
   tags: [],
   tagline: "Push your opponent as you race for dual win conditions",
   source: "http://some.url.to.rules",
-  code: "x", // this must be a unique character! try 'npm run checkCodes'
+  code: "x"
 };
 
 export default gekitaiMeta;

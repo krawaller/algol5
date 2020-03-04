@@ -1,10 +1,7 @@
-const amazonsVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { AmazonsVariantBook } from "./_types";
+
+const amazonsVariantBook: AmazonsVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default amazonsVariantsBook;
+export default amazonsVariantBook;

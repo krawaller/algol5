@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type KriegBoardHeight = 4;
@@ -73,6 +74,17 @@ export type KriegBattlePos = never;
 export type KriegBattleVar = never;
 export type KriegTurnPos = never;
 export type KriegTurnVar = never;
+
+export type KriegBoardName = "basic";
+export type KriegSetupName = "basic";
+export type KriegRulesetName = "basic";
+export type KriegVariantName = "basic";
+
+export type KriegVariantBook = AlgolVariantBook<
+  KriegBoardName,
+  KriegRulesetName,
+  KriegSetupName
+>;
 
 export type KriegGenerators = Generators<
   KriegArtifactLayer,

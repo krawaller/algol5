@@ -8,27 +8,27 @@ const serauqsFlow: SerauqsFlow = {
         morethan: [
           {
             sizeof: {
-              intersect: ["corners", { union: ["myunits", "oppwild"] }],
-            },
+              intersect: ["corners", { union: ["myunits", "oppwild"] }]
+            }
           },
-          3,
-        ],
+          3
+        ]
       },
-      show: "corners",
+      show: "corners"
     },
     tookcenter: {
       condition: {
         morethan: [
           {
             sizeof: {
-              intersect: ["middle", { union: ["myunits", "oppwild"] }],
-            },
+              intersect: ["middle", { union: ["myunits", "oppwild"] }]
+            }
           },
-          3,
-        ],
+          3
+        ]
       },
-      show: "middle",
-    },
+      show: "middle"
+    }
   },
   startTurn: { link: "selectunit" },
   marks: {
@@ -36,22 +36,22 @@ const serauqsFlow: SerauqsFlow = {
       from: "myunits",
       runGenerator: "findmovetargets",
       link: {
-        ifelse: [{ morethan: [["turn"], 1] }, "selectmovetarget", "promote"],
-      },
+        ifelse: [{ morethan: [["turn"], 1] }, "selectmovetarget", "promote"]
+      }
     },
-    selectmovetarget: { from: "movetargets", link: "move" },
+    selectmovetarget: { from: "movetargets", link: "move" }
   },
   commands: {
     promote: {
       applyEffect: { morphat: ["selectunit", "wild"] },
-      link: "endTurn",
+      link: "endTurn"
     },
     move: {
       applyEffect: { moveat: ["selectunit", "selectmovetarget"] },
       runGenerator: "findwinline",
-      link: "endTurn",
-    },
-  },
+      link: "endTurn"
+    }
+  }
 };
 
 export default serauqsFlow;

@@ -13,9 +13,9 @@ import { MurusgallicusAnim } from "./_types";
 const murusgallicusAnim: MurusgallicusAnim = {
   move: [
     { enterin: ["madewalls", "selecttower"] },
-    { ghosttoin: ["madetowers", "selecttower", "walls", ["player"]] },
+    { ghosttoin: ["madetowers", "selecttower", "walls", ["player"]] }
   ],
-  crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }],
+  crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }]
 };
 
 export default murusgallicusAnim;

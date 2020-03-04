@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type OrthokonBoardHeight = 4;
@@ -56,6 +57,17 @@ export type OrthokonBattlePos = never;
 export type OrthokonBattleVar = never;
 export type OrthokonTurnPos = never;
 export type OrthokonTurnVar = never;
+
+export type OrthokonBoardName = "basic";
+export type OrthokonSetupName = "basic";
+export type OrthokonRulesetName = "basic";
+export type OrthokonVariantName = "basic";
+
+export type OrthokonVariantBook = AlgolVariantBook<
+  OrthokonBoardName,
+  OrthokonRulesetName,
+  OrthokonSetupName
+>;
 
 export type OrthokonGenerators = Generators<
   OrthokonArtifactLayer,

@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type TrafficlightsBoardHeight = 3;
@@ -64,6 +65,17 @@ export type TrafficlightsBattlePos = never;
 export type TrafficlightsBattleVar = never;
 export type TrafficlightsTurnPos = never;
 export type TrafficlightsTurnVar = never;
+
+export type TrafficlightsBoardName = "basic";
+export type TrafficlightsSetupName = "basic";
+export type TrafficlightsRulesetName = "basic";
+export type TrafficlightsVariantName = "basic";
+
+export type TrafficlightsVariantBook = AlgolVariantBook<
+  TrafficlightsBoardName,
+  TrafficlightsRulesetName,
+  TrafficlightsSetupName
+>;
 
 export type TrafficlightsGenerators = Generators<
   TrafficlightsArtifactLayer,

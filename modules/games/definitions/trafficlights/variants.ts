@@ -1,10 +1,7 @@
-const trafficlightsVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { TrafficlightsVariantBook } from "./_types";
+
+const trafficlightsVariantBook: TrafficlightsVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default trafficlightsVariantsBook;
+export default trafficlightsVariantBook;

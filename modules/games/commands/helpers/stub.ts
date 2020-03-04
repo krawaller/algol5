@@ -25,7 +25,7 @@ export default async function stub(gameId: string) {
     template(gameId, templateAI, "ai"),
     template(gameId, templateAnim, "anim"),
     template(gameId, templateAnalysis, "_types"),
-    template(gameId, templateBoard, "board"),
+    template(gameId, templateBoard, "boards"),
     template(gameId, templateFlow, "flow"),
     template(gameId, templateGenerators, "generators"),
     template(gameId, templateGraphics, "graphics"),

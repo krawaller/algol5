@@ -7,7 +7,7 @@ import { DescentGraphics } from "./_types";
 
 const descentGraphics: DescentGraphics = {
   icons: { lvl3: "queen", lvl2: "rook", lvl1: "knight", lvl0: "pawn" },
-  tiles: {},
+  tiles: {}
 };
 
 export default descentGraphics;

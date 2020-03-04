@@ -14,7 +14,7 @@ const coffeeAnim: CoffeeAnim = {
   downhill: [{ enterin: ["downhill", "selectdrop"] }],
   uphill: [{ enterin: ["uphill", "selectdrop"] }],
   horisontal: [{ enterin: ["horisontal", "selectdrop"] }],
-  vertical: [{ enterin: ["vertical", "selectdrop"] }],
+  vertical: [{ enterin: ["vertical", "selectdrop"] }]
 };
 
 export default coffeeAnim;

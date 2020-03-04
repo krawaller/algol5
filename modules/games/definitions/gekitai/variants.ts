@@ -1,10 +1,7 @@
-const gekitaiVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { GekitaiVariantBook } from "./_types";
+
+const gekitaiVariantBook: GekitaiVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default gekitaiVariantsBook;
+export default gekitaiVariantBook;

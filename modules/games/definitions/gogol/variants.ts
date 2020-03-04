@@ -1,10 +1,7 @@
-const gogolVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { GogolVariantBook } from "./_types";
+
+const gogolVariantBook: GogolVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default gogolVariantsBook;
+export default gogolVariantBook;

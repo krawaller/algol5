@@ -27,7 +27,7 @@ const trafficlightsDefinition: TrafficlightsDefinition = {
   performance: trafficlightsPerformance,
   flow: trafficlightsFlow,
   scripts: trafficlightsScripts,
-  variants: trafficlightsVariantsBook,
+  variants: trafficlightsVariantsBook
 };
 
 export default trafficlightsDefinition;

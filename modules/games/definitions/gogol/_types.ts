@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type GogolBoardHeight = 8;
@@ -84,6 +85,17 @@ export type GogolBattlePos = never;
 export type GogolBattleVar = never;
 export type GogolTurnPos = never;
 export type GogolTurnVar = never;
+
+export type GogolBoardName = "basic";
+export type GogolSetupName = "basic";
+export type GogolRulesetName = "basic";
+export type GogolVariantName = "basic";
+
+export type GogolVariantBook = AlgolVariantBook<
+  GogolBoardName,
+  GogolRulesetName,
+  GogolSetupName
+>;
 
 export type GogolGenerators = Generators<
   GogolArtifactLayer,

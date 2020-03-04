@@ -27,7 +27,7 @@ const descentDefinition: DescentDefinition = {
   performance: descentPerformance,
   flow: descentFlow,
   scripts: descentScripts,
-  variants: descentVariantsBook,
+  variants: descentVariantsBook
 };
 
 export default descentDefinition;

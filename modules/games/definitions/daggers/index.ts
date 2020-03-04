@@ -27,7 +27,7 @@ const daggersDefinition: DaggersDefinition = {
   performance: daggersPerformance,
   flow: daggersFlow,
   scripts: daggersScripts,
-  variants: daggersVariantsBook,
+  variants: daggersVariantsBook
 };
 
 export default daggersDefinition;

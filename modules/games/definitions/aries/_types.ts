@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type AriesBoardHeight = 8;
@@ -61,6 +62,17 @@ export type AriesBattlePos = "pushsquare";
 export type AriesBattleVar = "pusheeid";
 export type AriesTurnPos = never;
 export type AriesTurnVar = never;
+
+export type AriesBoardName = "basic";
+export type AriesSetupName = "basic";
+export type AriesRulesetName = "basic";
+export type AriesVariantName = "basic";
+
+export type AriesVariantBook = AlgolVariantBook<
+  AriesBoardName,
+  AriesRulesetName,
+  AriesSetupName
+>;
 
 export type AriesGenerators = Generators<
   AriesArtifactLayer,

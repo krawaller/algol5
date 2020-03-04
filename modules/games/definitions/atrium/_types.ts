@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type AtriumBoardHeight = 5;
@@ -57,6 +58,17 @@ export type AtriumBattlePos = never;
 export type AtriumBattleVar = never;
 export type AtriumTurnPos = never;
 export type AtriumTurnVar = never;
+
+export type AtriumBoardName = "basic";
+export type AtriumSetupName = "basic";
+export type AtriumRulesetName = "basic";
+export type AtriumVariantName = "basic";
+
+export type AtriumVariantBook = AlgolVariantBook<
+  AtriumBoardName,
+  AtriumRulesetName,
+  AtriumSetupName
+>;
 
 export type AtriumGenerators = Generators<
   AtriumArtifactLayer,

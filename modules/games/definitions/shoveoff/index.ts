@@ -27,7 +27,7 @@ const shoveoffDefinition: ShoveoffDefinition = {
   performance: shoveoffPerformance,
   flow: shoveoffFlow,
   scripts: shoveoffScripts,
-  variants: shoveoffVariantsBook,
+  variants: shoveoffVariantsBook
 };
 
 export default shoveoffDefinition;

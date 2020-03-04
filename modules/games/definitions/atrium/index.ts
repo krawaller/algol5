@@ -27,7 +27,7 @@ const atriumDefinition: AtriumDefinition = {
   performance: atriumPerformance,
   flow: atriumFlow,
   scripts: atriumScripts,
-  variants: atriumVariantsBook,
+  variants: atriumVariantsBook
 };
 
 export default atriumDefinition;

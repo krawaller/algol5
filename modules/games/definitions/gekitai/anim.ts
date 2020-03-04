@@ -12,8 +12,8 @@ import { GekitaiAnim } from "./_types";
 
 const gekitaiAnim: GekitaiAnim = {
   drop: [
-    { exitin: ["death", { offset: [["looppos"], { loopread: "pushdir" }] }] },
-  ],
+    { exitin: ["death", { offset: [["looppos"], { loopread: "pushdir" }] }] }
+  ]
 };
 
 export default gekitaiAnim;

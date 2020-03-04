@@ -6,10 +6,8 @@
 import { MomentumGraphics } from "./_types";
 
 const momentumGraphics: MomentumGraphics = {
-  icons: {
-    stones: "pawn",
-  },
-  tiles: {},
+  icons: { stones: "pawn" },
+  tiles: {}
 };
 
 export default momentumGraphics;

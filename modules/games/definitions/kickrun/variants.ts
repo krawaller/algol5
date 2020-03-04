@@ -1,10 +1,7 @@
-const kickrunVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { KickrunVariantBook } from "./_types";
+
+const kickrunVariantBook: KickrunVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default kickrunVariantsBook;
+export default kickrunVariantBook;

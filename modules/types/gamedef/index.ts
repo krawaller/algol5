@@ -9,6 +9,7 @@ export * from "./setup";
 export * from "./graphics";
 export * from "./performance";
 export * from "./anim";
+export * from "./variants";
 
 import { Generators } from "./generators";
 import { Graphics } from "./graphics";

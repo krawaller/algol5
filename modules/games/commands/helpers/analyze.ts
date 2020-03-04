@@ -126,7 +126,14 @@ export default async function analyze(def: FullDefAnon | string) {
     )
   );
 
-  const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, AlgolSetupBook, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
+  const boardNames = Object.keys(def.boards);
+  const setupNames = Object.keys(def.setups);
+  const rulesetNames = Array.from(
+    new Set(Object.values(def.variants).map(v => v.ruleset))
+  );
+  const variantNames = Object.keys(def.variants);
+
+  const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, AlgolSetupBook, AlgolGameTestSuite, FullDef, AlgolPerformance, AlgolVariantBook } from '../../../types';
 
 export type ${capId}BoardHeight = ${maxHeight};
 export type ${capId}BoardWidth = ${maxWidth};
@@ -193,6 +200,21 @@ export type ${capId}TurnPos = ${
 export type ${capId}TurnVar = ${
     turnvar.length ? turnvar.map(t => `"${t}"`).join(" | ") : "never"
   };
+
+export type ${capId}BoardName = ${boardNames.map(n => `"${n}"`).join(" | ")};
+export type ${capId}SetupName = ${setupNames.map(n => `"${n}"`).join(" | ")};
+export type ${capId}RulesetName = ${rulesetNames
+    .map(n => `"${n}"`)
+    .join(" | ")};
+export type ${capId}VariantName = ${variantNames
+    .map(n => `"${n}"`)
+    .join(" | ")};
+
+export type ${capId}VariantBook = AlgolVariantBook<${typeSignature(
+    "AlgolVariantBook",
+    gameId
+  )}>;
+
  
 export type ${capId}Generators = Generators<${typeSignature(
     "Generators",

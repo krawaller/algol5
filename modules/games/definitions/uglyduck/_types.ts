@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type UglyduckBoardHeight = 5;
@@ -65,6 +66,17 @@ export type UglyduckBattlePos = never;
 export type UglyduckBattleVar = never;
 export type UglyduckTurnPos = never;
 export type UglyduckTurnVar = never;
+
+export type UglyduckBoardName = "basic";
+export type UglyduckSetupName = "basic";
+export type UglyduckRulesetName = "basic";
+export type UglyduckVariantName = "basic";
+
+export type UglyduckVariantBook = AlgolVariantBook<
+  UglyduckBoardName,
+  UglyduckRulesetName,
+  UglyduckSetupName
+>;
 
 export type UglyduckGenerators = Generators<
   UglyduckArtifactLayer,

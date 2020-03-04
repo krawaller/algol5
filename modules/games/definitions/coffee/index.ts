@@ -27,7 +27,7 @@ const coffeeDefinition: CoffeeDefinition = {
   performance: coffeePerformance,
   flow: coffeeFlow,
   scripts: coffeeScripts,
-  variants: coffeeVariantsBook,
+  variants: coffeeVariantsBook
 };
 
 export default coffeeDefinition;

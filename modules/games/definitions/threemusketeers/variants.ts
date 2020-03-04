@@ -1,10 +1,7 @@
-const threemusketeersVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { ThreemusketeersVariantBook } from "./_types";
+
+const threemusketeersVariantBook: ThreemusketeersVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default threemusketeersVariantsBook;
+export default threemusketeersVariantBook;

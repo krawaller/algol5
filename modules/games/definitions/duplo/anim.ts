@@ -16,10 +16,10 @@ const duploAnim: DuploAnim = {
     {
       if: [
         { anyat: ["units", "selecttarget"] },
-        { ghost: ["selectunit", "selecttarget", "soldiers", ["player"]] },
-      ],
-    },
-  ],
+        { ghost: ["selectunit", "selecttarget", "soldiers", ["player"]] }
+      ]
+    }
+  ]
 };
 
 export default duploAnim;

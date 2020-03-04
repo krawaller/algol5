@@ -27,7 +27,7 @@ const gogolDefinition: GogolDefinition = {
   performance: gogolPerformance,
   flow: gogolFlow,
   scripts: gogolScripts,
-  variants: gogolVariantsBook,
+  variants: gogolVariantsBook
 };
 
 export default gogolDefinition;

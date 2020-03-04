@@ -2,7 +2,7 @@ import { TrafficlightsPerformance } from "./_types";
 
 const trafficlightsPerformance: TrafficlightsPerformance = {
   canAlwaysEnd: {},
-  massiveTree: {},
+  massiveTree: {}
 };
 
 export default trafficlightsPerformance;

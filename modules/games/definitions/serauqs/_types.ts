@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type SerauqsBoardHeight = 4;
@@ -69,6 +70,17 @@ export type SerauqsBattlePos = never;
 export type SerauqsBattleVar = never;
 export type SerauqsTurnPos = never;
 export type SerauqsTurnVar = never;
+
+export type SerauqsBoardName = "basic";
+export type SerauqsSetupName = "basic";
+export type SerauqsRulesetName = "basic";
+export type SerauqsVariantName = "basic";
+
+export type SerauqsVariantBook = AlgolVariantBook<
+  SerauqsBoardName,
+  SerauqsRulesetName,
+  SerauqsSetupName
+>;
 
 export type SerauqsGenerators = Generators<
   SerauqsArtifactLayer,

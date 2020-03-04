@@ -27,7 +27,7 @@ const chameleonDefinition: ChameleonDefinition = {
   performance: chameleonPerformance,
   flow: chameleonFlow,
   scripts: chameleonScripts,
-  variants: chameleonVariantsBook,
+  variants: chameleonVariantsBook
 };
 
 export default chameleonDefinition;

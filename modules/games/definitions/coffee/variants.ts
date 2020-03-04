@@ -1,10 +1,7 @@
-const coffeeVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { CoffeeVariantBook } from "./_types";
+
+const coffeeVariantBook: CoffeeVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default coffeeVariantsBook;
+export default coffeeVariantBook;

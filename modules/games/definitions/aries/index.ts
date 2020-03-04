@@ -27,7 +27,7 @@ const ariesDefinition: AriesDefinition = {
   performance: ariesPerformance,
   flow: ariesFlow,
   scripts: ariesScripts,
-  variants: ariesVariantsBook,
+  variants: ariesVariantsBook
 };
 
 export default ariesDefinition;

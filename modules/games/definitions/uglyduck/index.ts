@@ -27,7 +27,7 @@ const uglyduckDefinition: UglyduckDefinition = {
   performance: uglyduckPerformance,
   flow: uglyduckFlow,
   scripts: uglyduckScripts,
-  variants: uglyduckVariantsBook,
+  variants: uglyduckVariantsBook
 };
 
 export default uglyduckDefinition;

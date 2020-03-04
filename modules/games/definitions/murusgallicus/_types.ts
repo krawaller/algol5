@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type MurusgallicusBoardHeight = 7;
@@ -72,6 +73,17 @@ export type MurusgallicusBattlePos = never;
 export type MurusgallicusBattleVar = never;
 export type MurusgallicusTurnPos = never;
 export type MurusgallicusTurnVar = never;
+
+export type MurusgallicusBoardName = "basic";
+export type MurusgallicusSetupName = "basic";
+export type MurusgallicusRulesetName = "basic";
+export type MurusgallicusVariantName = "basic";
+
+export type MurusgallicusVariantBook = AlgolVariantBook<
+  MurusgallicusBoardName,
+  MurusgallicusRulesetName,
+  MurusgallicusSetupName
+>;
 
 export type MurusgallicusGenerators = Generators<
   MurusgallicusArtifactLayer,

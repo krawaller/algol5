@@ -27,7 +27,7 @@ const serauqsDefinition: SerauqsDefinition = {
   performance: serauqsPerformance,
   flow: serauqsFlow,
   scripts: serauqsScripts,
-  variants: serauqsVariantsBook,
+  variants: serauqsVariantsBook
 };
 
 export default serauqsDefinition;

@@ -27,7 +27,7 @@ const amazonsDefinition: AmazonsDefinition = {
   performance: amazonsPerformance,
   flow: amazonsFlow,
   scripts: amazonsScripts,
-  variants: amazonsVariantsBook,
+  variants: amazonsVariantsBook
 };
 
 export default amazonsDefinition;

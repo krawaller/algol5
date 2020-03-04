@@ -1,10 +1,7 @@
-const atriumVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { AtriumVariantBook } from "./_types";
+
+const atriumVariantBook: AtriumVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default atriumVariantsBook;
+export default atriumVariantBook;

@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type MomentumBoardHeight = 7;
@@ -56,6 +57,17 @@ export type MomentumBattlePos = never;
 export type MomentumBattleVar = never;
 export type MomentumTurnPos = never;
 export type MomentumTurnVar = never;
+
+export type MomentumBoardName = "basic";
+export type MomentumSetupName = "basic";
+export type MomentumRulesetName = "basic";
+export type MomentumVariantName = "basic";
+
+export type MomentumVariantBook = AlgolVariantBook<
+  MomentumBoardName,
+  MomentumRulesetName,
+  MomentumSetupName
+>;
 
 export type MomentumGenerators = Generators<
   MomentumArtifactLayer,

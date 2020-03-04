@@ -6,10 +6,8 @@
 import { GekitaiGraphics } from "./_types";
 
 const gekitaiGraphics: GekitaiGraphics = {
-  icons: {
-    markers: "pawn",
-  },
-  tiles: {},
+  icons: { markers: "pawn" },
+  tiles: {}
 };
 
 export default gekitaiGraphics;

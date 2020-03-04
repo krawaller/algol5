@@ -27,7 +27,7 @@ const threemusketeersDefinition: ThreemusketeersDefinition = {
   performance: threemusketeersPerformance,
   flow: threemusketeersFlow,
   scripts: threemusketeersScripts,
-  variants: threemusketeersVariantsBook,
+  variants: threemusketeersVariantsBook
 };
 
 export default threemusketeersDefinition;

@@ -1,10 +1,7 @@
-const murusgallicusadvancedVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { MurusgallicusadvancedVariantBook } from "./_types";
+
+const murusgallicusadvancedVariantBook: MurusgallicusadvancedVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default murusgallicusadvancedVariantsBook;
+export default murusgallicusadvancedVariantBook;

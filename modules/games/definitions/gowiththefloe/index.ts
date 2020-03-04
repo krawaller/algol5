@@ -27,7 +27,7 @@ const gowiththefloeDefinition: GowiththefloeDefinition = {
   performance: gowiththefloePerformance,
   flow: gowiththefloeFlow,
   scripts: gowiththefloeScripts,
-  variants: gowiththefloeVariantsBook,
+  variants: gowiththefloeVariantsBook
 };
 
 export default gowiththefloeDefinition;

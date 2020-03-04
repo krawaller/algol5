@@ -27,7 +27,7 @@ const kickrunDefinition: KickrunDefinition = {
   performance: kickrunPerformance,
   flow: kickrunFlow,
   scripts: kickrunScripts,
-  variants: kickrunVariantsBook,
+  variants: kickrunVariantsBook
 };
 
 export default kickrunDefinition;

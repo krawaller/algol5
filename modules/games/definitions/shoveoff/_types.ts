@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type ShoveoffBoardHeight = 4;
@@ -89,6 +90,17 @@ export type ShoveoffBattlePos = never;
 export type ShoveoffBattleVar = never;
 export type ShoveoffTurnPos = never;
 export type ShoveoffTurnVar = never;
+
+export type ShoveoffBoardName = "basic";
+export type ShoveoffSetupName = "basic";
+export type ShoveoffRulesetName = "basic";
+export type ShoveoffVariantName = "basic";
+
+export type ShoveoffVariantBook = AlgolVariantBook<
+  ShoveoffBoardName,
+  ShoveoffRulesetName,
+  ShoveoffSetupName
+>;
 
 export type ShoveoffGenerators = Generators<
   ShoveoffArtifactLayer,

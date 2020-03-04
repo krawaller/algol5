@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type GowiththefloeBoardHeight = 8;
@@ -79,6 +80,17 @@ export type GowiththefloeBattlePos = never;
 export type GowiththefloeBattleVar = never;
 export type GowiththefloeTurnPos = never;
 export type GowiththefloeTurnVar = never;
+
+export type GowiththefloeBoardName = "basic";
+export type GowiththefloeSetupName = "basic";
+export type GowiththefloeRulesetName = "basic";
+export type GowiththefloeVariantName = "basic";
+
+export type GowiththefloeVariantBook = AlgolVariantBook<
+  GowiththefloeBoardName,
+  GowiththefloeRulesetName,
+  GowiththefloeSetupName
+>;
 
 export type GowiththefloeGenerators = Generators<
   GowiththefloeArtifactLayer,

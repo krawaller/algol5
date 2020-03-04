@@ -1,10 +1,7 @@
-const serauqsVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { SerauqsVariantBook } from "./_types";
+
+const serauqsVariantBook: SerauqsVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default serauqsVariantsBook;
+export default serauqsVariantBook;

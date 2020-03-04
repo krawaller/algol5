@@ -1,10 +1,7 @@
-const transetVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { TransetVariantBook } from "./_types";
+
+const transetVariantBook: TransetVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default transetVariantsBook;
+export default transetVariantBook;

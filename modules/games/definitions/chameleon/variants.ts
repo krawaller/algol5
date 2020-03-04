@@ -1,10 +1,7 @@
-const chameleonVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { ChameleonVariantBook } from "./_types";
+
+const chameleonVariantBook: ChameleonVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default chameleonVariantsBook;
+export default chameleonVariantBook;

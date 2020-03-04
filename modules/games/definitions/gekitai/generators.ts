@@ -11,17 +11,17 @@ const gekitaiGenerators: GekitaiGenerators = {
     starts: "units",
     dirs: "rose",
     steps: {
-      ifelse: [{ anyat: ["myunits", ["start"]] }, "myunits", "oppunits"],
+      ifelse: [{ anyat: ["myunits", ["start"]] }, "myunits", "oppunits"]
     },
     startasstep: true,
     draw: {
       steps: {
         condition: { morethan: [["walklength"], 2] },
         tolayer: {
-          ifelse: [{ anyat: ["myunits", ["start"]] }, "winline", "loseline"],
-        },
-      },
-    },
+          ifelse: [{ anyat: ["myunits", ["start"]] }, "winline", "loseline"]
+        }
+      }
+    }
   },
   findpushconsequences: {
     type: "walker",
@@ -35,16 +35,16 @@ const gekitaiGenerators: GekitaiGenerators = {
         {
           condition: { stoppedBecause: "outofbounds" },
           tolayer: "death",
-          include: { pushdir: ["dir"] },
+          include: { pushdir: ["dir"] }
         },
         {
           condition: { stoppedBecause: "nomoresteps" },
           tolayer: "push",
-          include: { pushdir: ["dir"] },
-        },
-      ],
-    },
-  },
+          include: { pushdir: ["dir"] }
+        }
+      ]
+    }
+  }
 };
 
 export default gekitaiGenerators;

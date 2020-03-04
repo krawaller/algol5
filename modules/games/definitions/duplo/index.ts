@@ -27,7 +27,7 @@ const duploDefinition: DuploDefinition = {
   performance: duploPerformance,
   flow: duploFlow,
   scripts: duploScripts,
-  variants: duploVariantsBook,
+  variants: duploVariantsBook
 };
 
 export default duploDefinition;

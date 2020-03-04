@@ -27,7 +27,7 @@ const gekitaiDefinition: GekitaiDefinition = {
   performance: gekitaiPerformance,
   flow: gekitaiFlow,
   scripts: gekitaiScripts,
-  variants: gekitaiVariantsBook,
+  variants: gekitaiVariantsBook
 };
 
 export default gekitaiDefinition;

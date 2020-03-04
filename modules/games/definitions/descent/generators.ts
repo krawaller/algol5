@@ -16,8 +16,8 @@ const descentGenerators: DescentGenerators = {
         {
           and: [
             { noneat: ["lvl1", ["target"]] },
-            { noneat: ["lvl0", ["target"]] },
-          ],
+            { noneat: ["lvl0", ["target"]] }
+          ]
         },
         {
           ifelse: [
@@ -30,16 +30,16 @@ const descentGenerators: DescentGenerators = {
                 {
                   and: [
                     { noneat: ["lvl2", ["target"]] },
-                    { noneat: ["lvl3", ["target"]] },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
+                    { noneat: ["lvl3", ["target"]] }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
-    draw: { neighbours: { ifover: "neutralunits", tolayer: "movetargets" } },
+    draw: { neighbours: { ifover: "neutralunits", tolayer: "movetargets" } }
   },
   finddigtargets: {
     type: "neighbour",
@@ -47,7 +47,7 @@ const descentGenerators: DescentGenerators = {
     start: { turnpos: "movedto" },
     ifover: "neutralunits",
     unlessover: "lvl0",
-    draw: { neighbours: { tolayer: "digtargets" } },
+    draw: { neighbours: { tolayer: "digtargets" } }
   },
   findwinlines: {
     type: "walker",
@@ -62,20 +62,18 @@ const descentGenerators: DescentGenerators = {
           ifelse: [
             { anyat: ["mylvl2", ["start"]] },
             "mylvl2",
-            {
-              ifelse: [{ anyat: ["mylvl1", ["start"]] }, "mylvl1", "mylvl0"],
-            },
-          ],
-        },
-      ],
+            { ifelse: [{ anyat: ["mylvl1", ["start"]] }, "mylvl1", "mylvl0"] }
+          ]
+        }
+      ]
     },
     draw: {
       steps: {
         condition: { morethan: [["walklength"], 2] },
-        tolayer: "winline",
-      },
-    },
-  },
+        tolayer: "winline"
+      }
+    }
+  }
 };
 
 export default descentGenerators;

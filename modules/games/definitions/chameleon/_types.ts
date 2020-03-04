@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type ChameleonBoardHeight = 5;
@@ -65,6 +66,17 @@ export type ChameleonBattlePos = never;
 export type ChameleonBattleVar = never;
 export type ChameleonTurnPos = never;
 export type ChameleonTurnVar = never;
+
+export type ChameleonBoardName = "basic";
+export type ChameleonSetupName = "basic";
+export type ChameleonRulesetName = "basic";
+export type ChameleonVariantName = "basic";
+
+export type ChameleonVariantBook = AlgolVariantBook<
+  ChameleonBoardName,
+  ChameleonRulesetName,
+  ChameleonSetupName
+>;
 
 export type ChameleonGenerators = Generators<
   ChameleonArtifactLayer,

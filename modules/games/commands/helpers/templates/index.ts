@@ -7,7 +7,7 @@ import { ${capId}Definition } from './_types';
 import ${gameId}AI from './ai';
 import ${gameId}Anim from './anim';
 import ${gameId}BoardBook from './boards';
-import ${gameId}SetupBook from './setup';
+import ${gameId}SetupBook from './setups';
 import ${gameId}Graphics from './graphics';
 import ${gameId}Instruction from './instructions';
 import ${gameId}Meta from './meta';

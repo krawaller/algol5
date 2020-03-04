@@ -27,7 +27,7 @@ const jostleDefinition: JostleDefinition = {
   performance: jostlePerformance,
   flow: jostleFlow,
   scripts: jostleScripts,
-  variants: jostleVariantsBook,
+  variants: jostleVariantsBook
 };
 
 export default jostleDefinition;

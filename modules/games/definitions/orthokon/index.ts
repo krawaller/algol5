@@ -27,7 +27,7 @@ const orthokonDefinition: OrthokonDefinition = {
   performance: orthokonPerformance,
   flow: orthokonFlow,
   scripts: orthokonScripts,
-  variants: orthokonVariantsBook,
+  variants: orthokonVariantsBook
 };
 
 export default orthokonDefinition;

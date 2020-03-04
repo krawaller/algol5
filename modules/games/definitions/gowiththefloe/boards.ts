@@ -1,5 +1,9 @@
 import { AlgolBoardBookAnon } from "../../../types";
 
+// This is the source of truth for what terrain layers are available.
+// Whenever you update this definition you should also regenerate
+// the graphics from the graphics module.
+
 const gowiththefloeBoardBook: AlgolBoardBookAnon = {
   basic: {
     height: 8,
@@ -17,10 +21,10 @@ const gowiththefloeBoardBook: AlgolBoardBookAnon = {
         "h1",
         "h2",
         "h7",
-        "h8",
-      ],
-    },
-  },
+        "h8"
+      ]
+    }
+  }
 };
 
 export default gowiththefloeBoardBook;

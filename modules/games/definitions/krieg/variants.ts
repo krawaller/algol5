@@ -1,10 +1,7 @@
-const kriegVariantsBook = {
-  basic: {
-    ruleset: "basic",
-    board: "basic",
-    setup: "basic",
-    desc: "basic",
-  },
+import { KriegVariantBook } from "./_types";
+
+const kriegVariantBook: KriegVariantBook = {
+  basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 
-export default kriegVariantsBook;
+export default kriegVariantBook;

@@ -12,8 +12,8 @@ import { MomentumAnim } from "./_types";
 
 const momentumAnim: MomentumAnim = {
   drop: [
-    { exitin: ["doomed", { offset: [["looppos"], { loopread: "pushdir" }] }] },
-  ],
+    { exitin: ["doomed", { offset: [["looppos"], { loopread: "pushdir" }] }] }
+  ]
 };
 
 export default momentumAnim;

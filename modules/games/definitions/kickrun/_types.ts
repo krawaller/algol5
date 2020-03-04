@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type KickrunBoardHeight = 5;
@@ -65,6 +66,17 @@ export type KickrunBattlePos = never;
 export type KickrunBattleVar = never;
 export type KickrunTurnPos = never;
 export type KickrunTurnVar = never;
+
+export type KickrunBoardName = "basic";
+export type KickrunSetupName = "basic";
+export type KickrunRulesetName = "basic";
+export type KickrunVariantName = "basic";
+
+export type KickrunVariantBook = AlgolVariantBook<
+  KickrunBoardName,
+  KickrunRulesetName,
+  KickrunSetupName
+>;
 
 export type KickrunGenerators = Generators<
   KickrunArtifactLayer,

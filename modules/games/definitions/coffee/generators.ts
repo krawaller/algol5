@@ -24,11 +24,11 @@ const coffeeGenerators: CoffeeGenerators = {
             "vertical",
             "uphill",
             "horisontal",
-            "downhill",
-          ],
-        },
-      },
-    },
+            "downhill"
+          ]
+        }
+      }
+    }
   },
   findwinlines: {
     type: "walker",
@@ -39,10 +39,10 @@ const coffeeGenerators: CoffeeGenerators = {
     draw: {
       steps: {
         condition: { morethan: [["walklength"], 3] },
-        tolayer: "winline",
-      },
-    },
-  },
+        tolayer: "winline"
+      }
+    }
+  }
 };
 
 export default coffeeGenerators;

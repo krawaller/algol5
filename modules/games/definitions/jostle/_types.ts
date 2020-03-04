@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type JostleBoardHeight = 10;
@@ -58,6 +59,17 @@ export type JostleBattlePos = never;
 export type JostleBattleVar = never;
 export type JostleTurnPos = never;
 export type JostleTurnVar = never;
+
+export type JostleBoardName = "basic";
+export type JostleSetupName = "basic";
+export type JostleRulesetName = "basic";
+export type JostleVariantName = "basic";
+
+export type JostleVariantBook = AlgolVariantBook<
+  JostleBoardName,
+  JostleRulesetName,
+  JostleSetupName
+>;
 
 export type JostleGenerators = Generators<
   JostleArtifactLayer,

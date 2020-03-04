@@ -12,20 +12,20 @@ const momentumInstructions: MomentumInstructions = {
               {
                 line: [
                   "your last remaining",
-                  { unittype: ["stones", ["player"]] },
-                ],
+                  { unittype: ["stones", ["player"]] }
+                ]
               },
               {
                 line: [
                   "one of your",
                   { value: { minus: [8, { sizeof: "myunits" }] } },
                   "remaining",
-                  { unittype: ["stones", ["player"]] },
-                ],
-              },
-            ],
-          },
-        ],
+                  { unittype: ["stones", ["player"]] }
+                ]
+              }
+            ]
+          }
+        ]
       },
       {
         ifplayer: [
@@ -38,16 +38,15 @@ const momentumInstructions: MomentumInstructions = {
                   "press",
                   "pie",
                   "to take over",
-                  { unitat: { onlyin: "units" } },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+                  { unitat: { onlyin: "units" } }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
-
   selectdroptarget: {
     line: [
       "Press",
@@ -58,25 +57,25 @@ const momentumInstructions: MomentumInstructions = {
           {
             line: [
               "spawn",
-              { unittypepos: ["stones", ["player"], "selectdroptarget"] },
-            ],
+              { unittypepos: ["stones", ["player"], "selectdroptarget"] }
+            ]
           },
           {
             if: [
               { notempty: "pushed" },
-              { line: ["push", { unitlist: "pushed" }] },
-            ],
+              { line: ["push", { unitlist: "pushed" }] }
+            ]
           },
           {
             if: [
               { notempty: "doomed" },
-              { line: ["kill", { unitlist: "doomed" }] },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+              { line: ["kill", { unitlist: "doomed" }] }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };
 
 export default momentumInstructions;

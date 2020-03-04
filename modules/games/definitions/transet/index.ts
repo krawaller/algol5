@@ -27,7 +27,7 @@ const transetDefinition: TransetDefinition = {
   performance: transetPerformance,
   flow: transetFlow,
   scripts: transetScripts,
-  variants: transetVariantsBook,
+  variants: transetVariantsBook
 };
 
 export default transetDefinition;

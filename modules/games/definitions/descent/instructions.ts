@@ -9,11 +9,11 @@ const descentInstructions: DescentInstructions = {
           { if: [{ notempty: "mylvl3" }, "lvl3"] },
           { if: [{ notempty: "mylvl2" }, "lvl2"] },
           { if: [{ notempty: "mylvl1" }, "lvl1"] },
-          { if: [{ notempty: "mylvl0" }, "lvl0"] },
-        ],
+          { if: [{ notempty: "mylvl0" }, "lvl0"] }
+        ]
       },
-      "to move and dig with",
-    ],
+      "to move and dig with"
+    ]
   },
   selectunit: {
     line: [
@@ -25,35 +25,35 @@ const descentInstructions: DescentInstructions = {
               {
                 and: [
                   { noneat: ["lvl3", "selectunit"] },
-                  { noneat: ["lvl2", "selectunit"] },
-                ],
+                  { noneat: ["lvl2", "selectunit"] }
+                ]
               },
-              { unittype: ["lvl0", 0] },
-            ],
+              { unittype: ["lvl0", 0] }
+            ]
           },
           {
-            if: [{ noneat: ["lvl3", "selectunit"] }, { unittype: ["lvl1", 0] }],
+            if: [{ noneat: ["lvl3", "selectunit"] }, { unittype: ["lvl1", 0] }]
           },
           {
-            if: [{ noneat: ["lvl0", "selectunit"] }, { unittype: ["lvl2", 0] }],
+            if: [{ noneat: ["lvl0", "selectunit"] }, { unittype: ["lvl2", 0] }]
           },
           {
             if: [
               {
                 and: [
                   { noneat: ["lvl0", "selectunit"] },
-                  { noneat: ["lvl1", "selectunit"] },
-                ],
+                  { noneat: ["lvl1", "selectunit"] }
+                ]
               },
-              { unittype: ["lvl3", 0] },
-            ],
-          },
-        ],
+              { unittype: ["lvl3", 0] }
+            ]
+          }
+        ]
       },
       "to move",
       { unitat: "selectunit" },
-      "to",
-    ],
+      "to"
+    ]
   },
   selectmovetarget: {
     line: [
@@ -66,8 +66,8 @@ const descentInstructions: DescentInstructions = {
           {
             same: [
               { read: ["units", "selectunit", "group"] },
-              { read: ["units", "selectmovetarget", "group"] },
-            ],
+              { read: ["units", "selectmovetarget", "group"] }
+            ]
           },
           "walk",
           {
@@ -78,26 +78,26 @@ const descentInstructions: DescentInstructions = {
                   {
                     and: [
                       { anyat: ["lvl2", "selectunit"] },
-                      { anyat: ["lvl1", "selectmovetarget"] },
-                    ],
+                      { anyat: ["lvl1", "selectmovetarget"] }
+                    ]
                   },
                   {
                     and: [
                       { anyat: ["lvl1", "selectunit"] },
-                      { anyat: ["lvl0", "selectmovetarget"] },
-                    ],
-                  },
-                ],
+                      { anyat: ["lvl0", "selectmovetarget"] }
+                    ]
+                  }
+                ]
               },
               "descend",
-              "climb",
-            ],
-          },
-        ],
+              "climb"
+            ]
+          }
+        ]
       },
       "to",
-      "selectmovetarget",
-    ],
+      "selectmovetarget"
+    ]
   },
   move: {
     line: [
@@ -108,11 +108,11 @@ const descentInstructions: DescentInstructions = {
         orlist: [
           { unittype: ["lvl3", 0] },
           { unittype: ["lvl2", 0] },
-          { unittype: ["lvl1", 0] },
-        ],
+          { unittype: ["lvl1", 0] }
+        ]
       },
-      "to dig",
-    ],
+      "to dig"
+    ]
   },
   selectdigtarget: {
     ifelse: [
@@ -124,8 +124,8 @@ const descentInstructions: DescentInstructions = {
           "to turn",
           { unitat: "selectdigtarget" },
           "to",
-          { unittype: ["lvl2", 0] },
-        ],
+          { unittype: ["lvl2", 0] }
+        ]
       },
       {
         ifelse: [
@@ -137,8 +137,8 @@ const descentInstructions: DescentInstructions = {
               "to turn",
               { unitat: "selectdigtarget" },
               "to",
-              { unittype: ["lvl1", 0] },
-            ],
+              { unittype: ["lvl1", 0] }
+            ]
           },
           {
             line: [
@@ -147,13 +147,13 @@ const descentInstructions: DescentInstructions = {
               "to turn",
               { unitat: "selectdigtarget" },
               "to",
-              { unittype: ["lvl0", 0] },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+              { unittype: ["lvl0", 0] }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };
 
 export default descentInstructions;

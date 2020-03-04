@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type AmazonsBoardHeight = 10;
@@ -63,6 +64,17 @@ export type AmazonsBattlePos = never;
 export type AmazonsBattleVar = never;
 export type AmazonsTurnPos = never;
 export type AmazonsTurnVar = never;
+
+export type AmazonsBoardName = "basic";
+export type AmazonsSetupName = "basic";
+export type AmazonsRulesetName = "basic";
+export type AmazonsVariantName = "basic";
+
+export type AmazonsVariantBook = AlgolVariantBook<
+  AmazonsBoardName,
+  AmazonsRulesetName,
+  AmazonsSetupName
+>;
 
 export type AmazonsGenerators = Generators<
   AmazonsArtifactLayer,

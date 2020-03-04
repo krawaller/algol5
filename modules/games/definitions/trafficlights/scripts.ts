@@ -12,11 +12,11 @@ const trafficlightsScripts: TrafficlightsScripts = {
         "endTurn",
         "c1",
         "deploy",
-        "endTurn",
+        "endTurn"
       ],
       endedIn: "win",
-      endedBy: "madeline",
-    },
+      endedBy: "madeline"
+    }
   ],
   basic: [
     {
@@ -33,8 +33,8 @@ const trafficlightsScripts: TrafficlightsScripts = {
         "c3",
         "d1",
         "d2",
-        "d3",
-      ],
+        "d3"
+      ]
     },
     { commands: ["c2"], include: ["deploy"] },
     {
@@ -51,8 +51,8 @@ const trafficlightsScripts: TrafficlightsScripts = {
         "c3",
         "d1",
         "d2",
-        "d3",
-      ],
+        "d3"
+      ]
     },
     { commands: ["c2"], include: ["promote"] },
     {
@@ -68,8 +68,8 @@ const trafficlightsScripts: TrafficlightsScripts = {
         "c3",
         "d1",
         "d2",
-        "d3",
-      ],
+        "d3"
+      ]
     },
     {
       commands: [
@@ -81,9 +81,9 @@ const trafficlightsScripts: TrafficlightsScripts = {
         "endTurn",
         "b2",
         "promote",
-        "endTurn",
+        "endTurn"
       ],
-      include: ["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"],
+      include: ["a1", "a2", "a3", "b1", "b3", "c1", "c3", "d1", "d2", "d3"]
     },
     {
       commands: [
@@ -95,11 +95,11 @@ const trafficlightsScripts: TrafficlightsScripts = {
         "endTurn",
         "a2",
         "promote",
-        "endTurn",
+        "endTurn"
       ],
-      endedIn: "win",
-    },
-  ],
+      endedIn: "win"
+    }
+  ]
 };
 
 export default trafficlightsScripts;

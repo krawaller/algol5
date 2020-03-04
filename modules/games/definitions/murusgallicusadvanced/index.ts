@@ -27,7 +27,7 @@ const murusgallicusadvancedDefinition: MurusgallicusadvancedDefinition = {
   performance: murusgallicusadvancedPerformance,
   flow: murusgallicusadvancedFlow,
   scripts: murusgallicusadvancedScripts,
-  variants: murusgallicusadvancedVariantsBook,
+  variants: murusgallicusadvancedVariantsBook
 };
 
 export default murusgallicusadvancedDefinition;

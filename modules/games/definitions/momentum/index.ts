@@ -27,7 +27,7 @@ const momentumDefinition: MomentumDefinition = {
   performance: momentumPerformance,
   flow: momentumFlow,
   scripts: momentumScripts,
-  variants: momentumVariantsBook,
+  variants: momentumVariantsBook
 };
 
 export default momentumDefinition;

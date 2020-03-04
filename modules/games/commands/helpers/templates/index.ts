@@ -15,6 +15,7 @@ import ${gameId}Performance from './performance';
 import ${gameId}Flow from './flow';
 import ${gameId}Scripts from './scripts';
 import ${gameId}Generators from './generators';
+import ${gameId}VariantsBook from './variants';
 
 const ${gameId}Definition: ${capId}Definition = {
   AI: ${gameId}AI,
@@ -28,6 +29,7 @@ const ${gameId}Definition: ${capId}Definition = {
   performance: ${gameId}Performance,
   flow: ${gameId}Flow,
   scripts: ${gameId}Scripts,
+  variants: ${gameId}VariantsBook
 };
 
 export default ${gameId}Definition;

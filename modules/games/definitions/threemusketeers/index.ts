@@ -4,7 +4,7 @@ import { ThreemusketeersDefinition } from "./_types";
 
 import threemusketeersAI from "./ai";
 import threemusketeersAnim from "./anim";
-import threemusketeersBoard from "./board";
+import threemusketeersBoardBook from "./boards";
 import threemusketeersSetupBook from "./setups";
 import threemusketeersGraphics from "./graphics";
 import threemusketeersInstruction from "./instructions";
@@ -17,7 +17,7 @@ import threemusketeersGenerators from "./generators";
 const threemusketeersDefinition: ThreemusketeersDefinition = {
   AI: threemusketeersAI,
   anim: threemusketeersAnim,
-  board: threemusketeersBoard,
+  boards: threemusketeersBoardBook,
   setups: threemusketeersSetupBook,
   graphics: threemusketeersGraphics,
   instructions: threemusketeersInstruction,

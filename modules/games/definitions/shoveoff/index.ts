@@ -4,7 +4,7 @@ import { ShoveoffDefinition } from "./_types";
 
 import shoveoffAI from "./ai";
 import shoveoffAnim from "./anim";
-import shoveoffBoard from "./board";
+import shoveoffBoardBook from "./boards";
 import shoveoffSetupBook from "./setups";
 import shoveoffGraphics from "./graphics";
 import shoveoffInstruction from "./instructions";
@@ -17,7 +17,7 @@ import shoveoffGenerators from "./generators";
 const shoveoffDefinition: ShoveoffDefinition = {
   AI: shoveoffAI,
   anim: shoveoffAnim,
-  board: shoveoffBoard,
+  boards: shoveoffBoardBook,
   setups: shoveoffSetupBook,
   graphics: shoveoffGraphics,
   instructions: shoveoffInstruction,

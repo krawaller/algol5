@@ -3,9 +3,7 @@ import atriumDef from "../../../../games/dist/games/atrium";
 import { makeStaticGameAPI } from "../../makeStaticGameAPI";
 import { battleTurnPath } from ".";
 
-const atriumAPI = makeStaticGameAPI(atrium, atriumDef.setups, {
-  basic: atriumDef.board,
-});
+const atriumAPI = makeStaticGameAPI(atrium, atriumDef.setups, atriumDef.boards);
 
 describe("the battleTurnPath helper", () => {
   it("gets correct path from atrium (1)", () => {

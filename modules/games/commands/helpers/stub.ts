@@ -5,7 +5,7 @@ import prettier from "prettier";
 import templateAI from "./templates/ai";
 import templateAnalysis from "./templates/analysis";
 import templateAnim from "./templates/anim";
-import templateBoard from "./templates/board";
+import templateBoard from "./templates/boards";
 import templateGraphics from "./templates/graphics";
 import templateInstructions from "./templates/instructions";
 import templateMeta from "./templates/meta";

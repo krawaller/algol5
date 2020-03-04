@@ -9,17 +9,19 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
     {
       def: {
         ...emptyFullDef,
-        board: {
-          ...emptyFullDef.board,
-          height: 3,
-          width: 3
+        boards: {
+          basic: {
+            ...emptyFullDef.boards.basic,
+            height: 3,
+            width: 3,
+          },
         },
         generators: {
           singleDirAndStartDrawNeighbours: {
             type: "neighbour",
             dir: 1,
             start: "mymark",
-            draw: { neighbours: { tolayer: "flarps" } }
+            draw: { neighbours: { tolayer: "flarps" } },
           },
           singleDirAndStartDrawNeighboursAndStart: {
             type: "neighbour",
@@ -27,26 +29,26 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             start: "mymark",
             draw: {
               neighbours: { tolayer: "flarps" },
-              start: { tolayer: "blarps" }
-            }
+              start: { tolayer: "blarps" },
+            },
           },
           singleStartOrthoDrawNeighbours: {
             type: "neighbour",
             dirs: "ortho",
             start: "mymark",
-            draw: { neighbours: { tolayer: "flarps" } }
+            draw: { neighbours: { tolayer: "flarps" } },
           },
           multiStartsDrawNeighbours: {
             type: "neighbour",
             dir: 1,
             starts: { singles: ["mymark", "myothermark"] },
-            draw: { neighbours: { tolayer: "flarps" } }
+            draw: { neighbours: { tolayer: "flarps" } },
           },
           multiStartMultiDirDrawNeighbours: {
             type: "neighbour",
             dirs: [1, 3],
             starts: { singles: ["mymark", "myothermark"] },
-            draw: { neighbours: { tolayer: "flarps" } }
+            draw: { neighbours: { tolayer: "flarps" } },
           },
           singleStartMultiDirInclNeighCount: {
             type: "neighbour",
@@ -55,11 +57,11 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
             draw: {
               start: {
                 tolayer: "flarps",
-                include: { n: ["neighbourcount"] }
-              }
-            }
-          }
-        }
+                include: { n: ["neighbourcount"] },
+              },
+            },
+          },
+        },
       },
       player: 1,
       action: "someaction",
@@ -67,7 +69,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             MARKS: { mymark: "a1", myothermark: "b1" },
-            ARTIFACTS: { flarps: {}, blarps: {} }
+            ARTIFACTS: { flarps: {}, blarps: {} },
           },
           tests: [
             {
@@ -75,45 +77,45 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "ARTIFACTS.flarps",
-                  res: { a2: {} }
-                }
-              ]
+                  res: { a2: {} },
+                },
+              ],
             },
             {
               expr: { generators: ["singleDirAndStartDrawNeighboursAndStart"] },
               asserts: [
                 {
                   sample: "ARTIFACTS",
-                  res: { flarps: { a2: {} }, blarps: { a1: {} } }
-                }
-              ]
+                  res: { flarps: { a2: {} }, blarps: { a1: {} } },
+                },
+              ],
             },
             {
               expr: { generators: ["singleStartOrthoDrawNeighbours"] },
               asserts: [
                 {
                   sample: "ARTIFACTS.flarps",
-                  res: { a2: {}, b1: {} }
-                }
-              ]
+                  res: { a2: {}, b1: {} },
+                },
+              ],
             },
             {
               expr: { generators: ["multiStartsDrawNeighbours"] },
               asserts: [
                 {
                   sample: "ARTIFACTS.flarps",
-                  res: { a2: {}, b2: {} }
-                }
-              ]
+                  res: { a2: {}, b2: {} },
+                },
+              ],
             },
             {
               expr: { generators: ["multiStartMultiDirDrawNeighbours"] },
               asserts: [
                 {
                   sample: "ARTIFACTS.flarps",
-                  res: { a2: {}, b1: {}, b2: {}, c1: {} }
-                }
-              ]
+                  res: { a2: {}, b1: {}, b2: {}, c1: {} },
+                },
+              ],
             },
             {
               expr: { generators: ["singleStartMultiDirInclNeighCount"] },
@@ -121,13 +123,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "ARTIFACTS.flarps",
                   res: { a1: { n: 3 } },
-                  desc: "We can access neighbour count in start draw"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "We can access neighbour count in start draw",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

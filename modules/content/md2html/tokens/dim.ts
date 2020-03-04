@@ -5,16 +5,16 @@ import lib from "../../../games/dist/lib";
 
 export const dim: TokenHandler = opts => {
   const { args, gameId } = opts;
-  let { x, y } = args;
+  let { x, y, board = "basic" } = args;
   if (!x || !y) {
     if (!gameId) {
       throw new Error(
         "Incomplete DIM, must pass x and y when there's no gameId!"
       );
     }
-    const board = lib[gameId].board;
-    x = board.width.toString();
-    y = board.height.toString();
+    const boardDef = lib[gameId].boards[board];
+    x = boardDef.width.toString();
+    y = boardDef.height.toString();
   }
   return `<span class="md-dim" data-dim-x="${x}" data-dim-y="${y}" >${x}&times;${y}</span>`;
 };

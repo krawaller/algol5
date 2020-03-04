@@ -12,7 +12,7 @@ import {
 } from "../../../../../types";
 import {
   emptyArtifactLayers,
-  terrainLayers,
+  terrainLayerNamesForBook,
   emptyUnitLayers,
 } from "../../../../../common";
 
@@ -33,16 +33,8 @@ export default function parseSet(
     if (emptyArtifactLayers(gameDef.generators)[name]) {
       return `ARTIFACTS.${name}`;
     }
-    const terrain = terrainLayers(
-      gameDef.board.height,
-      gameDef.board.width,
-      {
-        ...gameDef.board.terrain,
-        ...gameDef.AI.terrain,
-      },
-      player
-    );
-    if (terrain[name]) {
+    const terrainNames = terrainLayerNamesForBook(gameDef.boards);
+    if (terrainNames.includes(name)) {
       return `TERRAIN${player}.${name}`;
     }
     if (emptyUnitLayers(gameDef)[name]) {

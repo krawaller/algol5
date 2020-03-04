@@ -4,7 +4,7 @@ import { UglyduckDefinition } from "./_types";
 
 import uglyduckAI from "./ai";
 import uglyduckAnim from "./anim";
-import uglyduckBoard from "./board";
+import uglyduckBoardBook from "./boards";
 import uglyduckSetupBook from "./setups";
 import uglyduckGraphics from "./graphics";
 import uglyduckInstruction from "./instructions";
@@ -17,7 +17,7 @@ import uglyduckGenerators from "./generators";
 const uglyduckDefinition: UglyduckDefinition = {
   AI: uglyduckAI,
   anim: uglyduckAnim,
-  board: uglyduckBoard,
+  boards: uglyduckBoardBook,
   setups: uglyduckSetupBook,
   graphics: uglyduckGraphics,
   instructions: uglyduckInstruction,

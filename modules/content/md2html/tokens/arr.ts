@@ -12,23 +12,24 @@ export const arr: TokenHandler = opts => {
     throw new Error("ARR token but no gameId!");
   }
   const def = lib[gameId];
-  if (!args.name) {
+  const { name, board = "basic", from, to, pad } = args;
+  if (!name) {
     throw new Error("Have to provide arrangement name!");
   }
-  if (!arrs[args.name]) {
-    throw new Error(`Arrangement "${args.name}" could not be found!`);
+  if (!arrs[name]) {
+    throw new Error(`Arrangement "${name}" could not be found!`);
   }
   const sprites = arrangement2sprites({
-    arrangement: arrs[args.name],
+    arrangement: arrs[name],
     iconMap: def.graphics.icons,
   });
   const svg = render({
-    board: def.board,
+    board: def.boards[board],
     tileMap: def.graphics.tiles,
     sprites,
-    from: args.from,
-    to: args.to,
-    pad: args.pad != "false",
+    from: from,
+    to: to,
+    pad: pad != "false",
   });
   return `<div class="md-arr">\n${svg}\n</div>`;
 };

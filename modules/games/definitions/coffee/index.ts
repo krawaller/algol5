@@ -4,7 +4,7 @@ import { CoffeeDefinition } from "./_types";
 
 import coffeeAI from "./ai";
 import coffeeAnim from "./anim";
-import coffeeBoard from "./board";
+import coffeeBoardBook from "./boards";
 import coffeeSetupBook from "./setups";
 import coffeeGraphics from "./graphics";
 import coffeeInstruction from "./instructions";
@@ -17,7 +17,7 @@ import coffeeGenerators from "./generators";
 const coffeeDefinition: CoffeeDefinition = {
   AI: coffeeAI,
   anim: coffeeAnim,
-  board: coffeeBoard,
+  boards: coffeeBoardBook,
   setups: coffeeSetupBook,
   graphics: coffeeGraphics,
   instructions: coffeeInstruction,

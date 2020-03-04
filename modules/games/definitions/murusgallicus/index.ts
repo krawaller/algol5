@@ -4,7 +4,7 @@ import { MurusgallicusDefinition } from "./_types";
 
 import murusgallicusAI from "./ai";
 import murusgallicusAnim from "./anim";
-import murusgallicusBoard from "./board";
+import murusgallicusBoardBook from "./boards";
 import murusgallicusSetupBook from "./setups";
 import murusgallicusGraphics from "./graphics";
 import murusgallicusInstruction from "./instructions";
@@ -17,7 +17,7 @@ import murusgallicusGenerators from "./generators";
 const murusgallicusDefinition: MurusgallicusDefinition = {
   AI: murusgallicusAI,
   anim: murusgallicusAnim,
-  board: murusgallicusBoard,
+  boards: murusgallicusBoardBook,
   setups: murusgallicusSetupBook,
   graphics: murusgallicusGraphics,
   instructions: murusgallicusInstruction,

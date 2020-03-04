@@ -10,10 +10,12 @@ export const emptyFullDef: FullDefAnon = {
     terrain: {},
   },
   anim: {},
-  board: {
-    height: 5,
-    width: 5,
-    terrain: {},
+  boards: {
+    basic: {
+      height: 5,
+      width: 5,
+      terrain: {},
+    },
   },
   instructions: {},
   flow: {

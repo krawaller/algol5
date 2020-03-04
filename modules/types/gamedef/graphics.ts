@@ -44,8 +44,13 @@ export type AlgolTileMap<Terrain extends string = string> = Partial<
 >;
 
 export type AlgolGameGraphics = {
-  height: number;
-  width: number;
   icons: AlgolIconMap;
-  dataURI: string;
+  boards: Record<
+    string,
+    {
+      height: number;
+      width: number;
+      dataURI: string;
+    }
+  >;
 };

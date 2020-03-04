@@ -21,7 +21,7 @@ export function runGameScript(
     test(`Game - ${id} - ${scriptName}`, () => {
       const def = games[id];
       const lines = scripts[scriptName];
-      game.setBoard(def.board);
+      game.setBoard(def.boards.basic);
       let step: AlgolStep = game.newBattle(def.setups.basic);
       let n = 0;
       let lastFunc = "startTurn1";

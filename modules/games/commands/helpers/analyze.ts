@@ -18,6 +18,7 @@ import {
   possibilities,
   emptyArtifactLayers,
   find,
+  terrainLayerNamesForBook,
 } from "../../../common";
 import dateStamp from "./datestamp";
 
@@ -31,8 +32,19 @@ export default async function analyze(def: FullDefAnon | string) {
   const gameId = def.meta.id;
   const gameDefPath = path.join(defPath, gameId);
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
-  const { board, graphics, generators, flow } = def;
-  const terrains = Object.keys(board.terrain || {});
+  const { boards, graphics, generators, flow } = def;
+  const { maxHeight, maxWidth } = Object.values(boards).reduce(
+    (memo, board) => ({
+      maxHeight: Math.max(memo.maxHeight, board.height),
+      maxWidth: Math.max(memo.maxWidth, board.width),
+    }),
+    { maxHeight: 0, maxWidth: 0 }
+  );
+  const terrains = Array.from(
+    new Set(
+      Object.values(boards).flatMap(board => Object.keys(board.terrain || {}))
+    )
+  );
   const units = Object.keys(graphics.icons);
   const marks = Object.keys(flow.marks);
   const commands = Object.keys(flow.commands);
@@ -54,7 +66,7 @@ export default async function analyze(def: FullDefAnon | string) {
       (mem, u) => mem.concat([u, `my${u}`, `opp${u}`, `neutral${u}`]),
       [] as string[]
     );
-  const myTerrainLayerNames = terrainLayerNames(def.board);
+  const myTerrainLayerNames = terrainLayerNamesForBook(def.boards);
   const myArtifactLayerNames = Object.keys(emptyArtifactLayers(def.generators));
   const myGeneratorNames = Object.keys(generators);
 
@@ -72,7 +84,7 @@ export default async function analyze(def: FullDefAnon | string) {
 
   const aiTerrainNames = Object.keys(AI.terrain || {});
   const aiTerrainLayers = terrainLayerNames({
-    ...def.board,
+    ...def.boards.basic,
     terrain: AI.terrain,
   });
   const aiGenerators = Object.keys(AI.generators || {});
@@ -116,8 +128,8 @@ export default async function analyze(def: FullDefAnon | string) {
 
   const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, AlgolSetupBook, AlgolGameTestSuite, FullDef, AlgolPerformance } from '../../../types';
 
-export type ${capId}BoardHeight = ${def.board.height};
-export type ${capId}BoardWidth = ${def.board.width};
+export type ${capId}BoardHeight = ${maxHeight};
+export type ${capId}BoardWidth = ${maxWidth};
 
 export type ${capId}Anim = AlgolAnimCollection<${typeSignature(
     "AlgolAnimCollection",
@@ -248,10 +260,7 @@ export type ${capId}AiTerrain = ${
       : "never"
   };
 
-export type ${capId}Position = ${boardPositions(
-    def.board.height,
-    def.board.width
-  )
+export type ${capId}Position = ${boardPositions(maxHeight, maxWidth)
     .map(t => `"${t}"`)
     .join(" | ")};
 `;

@@ -22,6 +22,7 @@ type BoardProps = {
   callback?: (pos: string) => void;
   anim?: AlgolAnimCompiled;
   active?: boolean; // Whether or not we want the user to be able to make choices in the board
+  name?: string;
 };
 
 const EMPTYARR: any[] = [];
@@ -35,8 +36,10 @@ export const Board: React.FunctionComponent<BoardProps> = memo(
     callback = noop,
     active,
     anim = emptyAnim,
+    name = "basic",
   }) => {
-    const { dataURI, height, width, icons } = graphics;
+    const { boards, icons } = graphics;
+    const { dataURI, height, width } = boards[name];
     return (
       <div
         style={{

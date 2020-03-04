@@ -4,7 +4,7 @@ import { GogolDefinition } from "./_types";
 
 import gogolAI from "./ai";
 import gogolAnim from "./anim";
-import gogolBoard from "./board";
+import gogolBoardBook from "./boards";
 import gogolSetupBook from "./setups";
 import gogolGraphics from "./graphics";
 import gogolInstruction from "./instructions";
@@ -17,7 +17,7 @@ import gogolGenerators from "./generators";
 const gogolDefinition: GogolDefinition = {
   AI: gogolAI,
   anim: gogolAnim,
-  board: gogolBoard,
+  boards: gogolBoardBook,
   setups: gogolSetupBook,
   graphics: gogolGraphics,
   instructions: gogolInstruction,

@@ -4,7 +4,7 @@ import { GowiththefloeDefinition } from "./_types";
 
 import gowiththefloeAI from "./ai";
 import gowiththefloeAnim from "./anim";
-import gowiththefloeBoard from "./board";
+import gowiththefloeBoardBook from "./boards";
 import gowiththefloeSetupBook from "./setups";
 import gowiththefloeGraphics from "./graphics";
 import gowiththefloeInstruction from "./instructions";
@@ -17,7 +17,7 @@ import gowiththefloeGenerators from "./generators";
 const gowiththefloeDefinition: GowiththefloeDefinition = {
   AI: gowiththefloeAI,
   anim: gowiththefloeAnim,
-  board: gowiththefloeBoard,
+  boards: gowiththefloeBoardBook,
   setups: gowiththefloeSetupBook,
   graphics: gowiththefloeGraphics,
   instructions: gowiththefloeInstruction,

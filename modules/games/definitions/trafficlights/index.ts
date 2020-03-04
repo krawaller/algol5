@@ -4,7 +4,7 @@ import { TrafficlightsDefinition } from "./_types";
 
 import trafficlightsAI from "./ai";
 import trafficlightsAnim from "./anim";
-import trafficlightsBoard from "./board";
+import trafficlightsBoardBook from "./boards";
 import trafficlightsSetupBook from "./setups";
 import trafficlightsGraphics from "./graphics";
 import trafficlightsInstruction from "./instructions";
@@ -17,7 +17,7 @@ import trafficlightsGenerators from "./generators";
 const trafficlightsDefinition: TrafficlightsDefinition = {
   AI: trafficlightsAI,
   anim: trafficlightsAnim,
-  board: trafficlightsBoard,
+  boards: trafficlightsBoardBook,
   setups: trafficlightsSetupBook,
   graphics: trafficlightsGraphics,
   instructions: trafficlightsInstruction,

@@ -9,19 +9,21 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
     {
       def: {
         ...emptyFullDef,
-        board: {
-          ...emptyFullDef.board,
-          height: 3,
-          width: 3
+        boards: {
+          basic: {
+            ...emptyFullDef.boards.basic,
+            height: 3,
+            width: 3,
+          },
         },
         generators: {
           simpleOrthoReacher: {
             type: "neighbour",
             dirs: "ortho",
             start: "markb2",
-            draw: { neighbours: { tolayer: "neighbours" } }
-          }
-        }
+            draw: { neighbours: { tolayer: "neighbours" } },
+          },
+        },
       },
       player: 1,
       action: "someaction",
@@ -29,7 +31,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         {
           context: {
             MARKS: { markb2: "b2" },
-            ARTIFACTS: { neighbours: {} }
+            ARTIFACTS: { neighbours: {} },
           },
           tests: [
             {
@@ -38,9 +40,9 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "ARTIFACTS.neighbours",
                   res: { a2: {}, b1: {}, b3: {}, c2: {} },
-                  desc: "Generator is run if if is truthy"
-                }
-              ]
+                  desc: "Generator is run if if is truthy",
+                },
+              ],
             },
             {
               expr: { generators: [{ ifplayer: [2, "simpleOrthoReacher"] }] },
@@ -48,13 +50,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "ARTIFACTS.neighbours",
                   res: {},
-                  desc: "Generator is not run if if is falsy"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "Generator is not run if if is falsy",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

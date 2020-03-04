@@ -4,7 +4,7 @@ import { DuploDefinition } from "./_types";
 
 import duploAI from "./ai";
 import duploAnim from "./anim";
-import duploBoard from "./board";
+import duploBoardBook from "./boards";
 import duploSetupBook from "./setups";
 import duploGraphics from "./graphics";
 import duploInstruction from "./instructions";
@@ -17,7 +17,7 @@ import duploGenerators from "./generators";
 const duploDefinition: DuploDefinition = {
   AI: duploAI,
   anim: duploAnim,
-  board: duploBoard,
+  boards: duploBoardBook,
   setups: duploSetupBook,
   graphics: duploGraphics,
   instructions: duploInstruction,

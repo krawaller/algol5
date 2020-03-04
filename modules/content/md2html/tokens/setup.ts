@@ -7,7 +7,7 @@ import { render } from "../../../graphics/render";
 
 export const setup: TokenHandler = opts => {
   const { args, gameId: thisGameId } = opts;
-  let { gameId, name = "basic" } = args;
+  let { gameId, name = "basic", board = "basic" } = args;
   if (!gameId) {
     if (thisGameId) {
       gameId = thisGameId;
@@ -26,7 +26,7 @@ export const setup: TokenHandler = opts => {
     iconMap: def.graphics.icons,
   });
   const svg = render({
-    board: def.board,
+    board: def.boards[board],
     tileMap: def.graphics.tiles,
     sprites,
     from: args.from,

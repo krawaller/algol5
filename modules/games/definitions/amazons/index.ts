@@ -13,6 +13,7 @@ import amazonsPerformance from "./performance";
 import amazonsFlow from "./flow";
 import amazonsScripts from "./scripts";
 import amazonsGenerators from "./generators";
+import amazonsVariantsBook from "./variants";
 
 const amazonsDefinition: AmazonsDefinition = {
   AI: amazonsAI,
@@ -26,6 +27,7 @@ const amazonsDefinition: AmazonsDefinition = {
   performance: amazonsPerformance,
   flow: amazonsFlow,
   scripts: amazonsScripts,
+  variants: amazonsVariantsBook,
 };
 
 export default amazonsDefinition;

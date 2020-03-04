@@ -1,4 +1,4 @@
-const murusgallicusadvancedVariantsBook = {
+const murusgallicusVariantsBook = {
   basic: {
     ruleset: "basic",
     board: "basic",
@@ -7,4 +7,4 @@ const murusgallicusadvancedVariantsBook = {
   },
 };
 
-export default murusgallicusadvancedVariantsBook;
+export default murusgallicusVariantsBook;

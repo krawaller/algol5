@@ -13,6 +13,7 @@ import atriumPerformance from "./performance";
 import atriumFlow from "./flow";
 import atriumScripts from "./scripts";
 import atriumGenerators from "./generators";
+import atriumVariantsBook from "./variants";
 
 const atriumDefinition: AtriumDefinition = {
   AI: atriumAI,
@@ -26,6 +27,7 @@ const atriumDefinition: AtriumDefinition = {
   performance: atriumPerformance,
   flow: atriumFlow,
   scripts: atriumScripts,
+  variants: atriumVariantsBook,
 };
 
 export default atriumDefinition;

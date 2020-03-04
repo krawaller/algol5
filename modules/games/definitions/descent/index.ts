@@ -13,6 +13,7 @@ import descentPerformance from "./performance";
 import descentFlow from "./flow";
 import descentScripts from "./scripts";
 import descentGenerators from "./generators";
+import descentVariantsBook from "./variants";
 
 const descentDefinition: DescentDefinition = {
   AI: descentAI,
@@ -26,6 +27,7 @@ const descentDefinition: DescentDefinition = {
   performance: descentPerformance,
   flow: descentFlow,
   scripts: descentScripts,
+  variants: descentVariantsBook,
 };
 
 export default descentDefinition;

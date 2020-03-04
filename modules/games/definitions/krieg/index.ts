@@ -13,6 +13,7 @@ import kriegPerformance from "./performance";
 import kriegFlow from "./flow";
 import kriegScripts from "./scripts";
 import kriegGenerators from "./generators";
+import kriegVariantsBook from "./variants";
 
 const kriegDefinition: KriegDefinition = {
   AI: kriegAI,
@@ -26,6 +27,7 @@ const kriegDefinition: KriegDefinition = {
   performance: kriegPerformance,
   flow: kriegFlow,
   scripts: kriegScripts,
+  variants: kriegVariantsBook,
 };
 
 export default kriegDefinition;

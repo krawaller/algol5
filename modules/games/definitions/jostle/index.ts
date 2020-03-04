@@ -13,6 +13,7 @@ import jostlePerformance from "./performance";
 import jostleFlow from "./flow";
 import jostleScripts from "./scripts";
 import jostleGenerators from "./generators";
+import jostleVariantsBook from "./variants";
 
 const jostleDefinition: JostleDefinition = {
   AI: jostleAI,
@@ -26,6 +27,7 @@ const jostleDefinition: JostleDefinition = {
   performance: jostlePerformance,
   flow: jostleFlow,
   scripts: jostleScripts,
+  variants: jostleVariantsBook,
 };
 
 export default jostleDefinition;

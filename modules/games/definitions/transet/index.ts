@@ -13,6 +13,7 @@ import transetPerformance from "./performance";
 import transetFlow from "./flow";
 import transetScripts from "./scripts";
 import transetGenerators from "./generators";
+import transetVariantsBook from "./variants";
 
 const transetDefinition: TransetDefinition = {
   AI: transetAI,
@@ -26,6 +27,7 @@ const transetDefinition: TransetDefinition = {
   performance: transetPerformance,
   flow: transetFlow,
   scripts: transetScripts,
+  variants: transetVariantsBook,
 };
 
 export default transetDefinition;

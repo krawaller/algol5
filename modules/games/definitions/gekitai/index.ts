@@ -13,6 +13,7 @@ import gekitaiPerformance from "./performance";
 import gekitaiFlow from "./flow";
 import gekitaiScripts from "./scripts";
 import gekitaiGenerators from "./generators";
+import gekitaiVariantsBook from "./variants";
 
 const gekitaiDefinition: GekitaiDefinition = {
   AI: gekitaiAI,
@@ -26,6 +27,7 @@ const gekitaiDefinition: GekitaiDefinition = {
   performance: gekitaiPerformance,
   flow: gekitaiFlow,
   scripts: gekitaiScripts,
+  variants: gekitaiVariantsBook,
 };
 
 export default gekitaiDefinition;

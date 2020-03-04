@@ -13,6 +13,7 @@ import orthokonPerformance from "./performance";
 import orthokonFlow from "./flow";
 import orthokonScripts from "./scripts";
 import orthokonGenerators from "./generators";
+import orthokonVariantsBook from "./variants";
 
 const orthokonDefinition: OrthokonDefinition = {
   AI: orthokonAI,
@@ -26,6 +27,7 @@ const orthokonDefinition: OrthokonDefinition = {
   performance: orthokonPerformance,
   flow: orthokonFlow,
   scripts: orthokonScripts,
+  variants: orthokonVariantsBook,
 };
 
 export default orthokonDefinition;

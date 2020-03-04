@@ -13,6 +13,7 @@ import gowiththefloePerformance from "./performance";
 import gowiththefloeFlow from "./flow";
 import gowiththefloeScripts from "./scripts";
 import gowiththefloeGenerators from "./generators";
+import gowiththefloeVariantsBook from "./variants";
 
 const gowiththefloeDefinition: GowiththefloeDefinition = {
   AI: gowiththefloeAI,
@@ -26,6 +27,7 @@ const gowiththefloeDefinition: GowiththefloeDefinition = {
   performance: gowiththefloePerformance,
   flow: gowiththefloeFlow,
   scripts: gowiththefloeScripts,
+  variants: gowiththefloeVariantsBook,
 };
 
 export default gowiththefloeDefinition;

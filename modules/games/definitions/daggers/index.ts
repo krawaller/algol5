@@ -13,6 +13,7 @@ import daggersPerformance from "./performance";
 import daggersFlow from "./flow";
 import daggersScripts from "./scripts";
 import daggersGenerators from "./generators";
+import daggersVariantsBook from "./variants";
 
 const daggersDefinition: DaggersDefinition = {
   AI: daggersAI,
@@ -26,6 +27,7 @@ const daggersDefinition: DaggersDefinition = {
   performance: daggersPerformance,
   flow: daggersFlow,
   scripts: daggersScripts,
+  variants: daggersVariantsBook,
 };
 
 export default daggersDefinition;

@@ -13,6 +13,7 @@ import ariesPerformance from "./performance";
 import ariesFlow from "./flow";
 import ariesScripts from "./scripts";
 import ariesGenerators from "./generators";
+import ariesVariantsBook from "./variants";
 
 const ariesDefinition: AriesDefinition = {
   AI: ariesAI,
@@ -26,6 +27,7 @@ const ariesDefinition: AriesDefinition = {
   performance: ariesPerformance,
   flow: ariesFlow,
   scripts: ariesScripts,
+  variants: ariesVariantsBook,
 };
 
 export default ariesDefinition;

@@ -13,6 +13,7 @@ import gogolPerformance from "./performance";
 import gogolFlow from "./flow";
 import gogolScripts from "./scripts";
 import gogolGenerators from "./generators";
+import gogolVariantsBook from "./variants";
 
 const gogolDefinition: GogolDefinition = {
   AI: gogolAI,
@@ -26,6 +27,7 @@ const gogolDefinition: GogolDefinition = {
   performance: gogolPerformance,
   flow: gogolFlow,
   scripts: gogolScripts,
+  variants: gogolVariantsBook,
 };
 
 export default gogolDefinition;

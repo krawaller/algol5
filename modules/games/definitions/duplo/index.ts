@@ -13,6 +13,7 @@ import duploPerformance from "./performance";
 import duploFlow from "./flow";
 import duploScripts from "./scripts";
 import duploGenerators from "./generators";
+import duploVariantsBook from "./variants";
 
 const duploDefinition: DuploDefinition = {
   AI: duploAI,
@@ -26,6 +27,7 @@ const duploDefinition: DuploDefinition = {
   performance: duploPerformance,
   flow: duploFlow,
   scripts: duploScripts,
+  variants: duploVariantsBook,
 };
 
 export default duploDefinition;

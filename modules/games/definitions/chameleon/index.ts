@@ -13,6 +13,7 @@ import chameleonPerformance from "./performance";
 import chameleonFlow from "./flow";
 import chameleonScripts from "./scripts";
 import chameleonGenerators from "./generators";
+import chameleonVariantsBook from "./variants";
 
 const chameleonDefinition: ChameleonDefinition = {
   AI: chameleonAI,
@@ -26,6 +27,7 @@ const chameleonDefinition: ChameleonDefinition = {
   performance: chameleonPerformance,
   flow: chameleonFlow,
   scripts: chameleonScripts,
+  variants: chameleonVariantsBook,
 };
 
 export default chameleonDefinition;

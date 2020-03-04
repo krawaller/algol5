@@ -13,6 +13,7 @@ import momentumPerformance from "./performance";
 import momentumFlow from "./flow";
 import momentumScripts from "./scripts";
 import momentumGenerators from "./generators";
+import momentumVariantsBook from "./variants";
 
 const momentumDefinition: MomentumDefinition = {
   AI: momentumAI,
@@ -26,6 +27,7 @@ const momentumDefinition: MomentumDefinition = {
   performance: momentumPerformance,
   flow: momentumFlow,
   scripts: momentumScripts,
+  variants: momentumVariantsBook
 };
 
 export default momentumDefinition;

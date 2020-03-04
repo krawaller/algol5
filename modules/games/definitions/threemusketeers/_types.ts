@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type ThreemusketeersBoardHeight = 5;
@@ -66,6 +67,17 @@ export type ThreemusketeersBattlePos = never;
 export type ThreemusketeersBattleVar = never;
 export type ThreemusketeersTurnPos = never;
 export type ThreemusketeersTurnVar = never;
+
+export type ThreemusketeersBoardName = "basic";
+export type ThreemusketeersSetupName = "basic";
+export type ThreemusketeersRulesetName = "basic";
+export type ThreemusketeersVariantName = "basic";
+
+export type ThreemusketeersVariantBook = AlgolVariantBook<
+  ThreemusketeersBoardName,
+  ThreemusketeersRulesetName,
+  ThreemusketeersSetupName
+>;
 
 export type ThreemusketeersGenerators = Generators<
   ThreemusketeersArtifactLayer,

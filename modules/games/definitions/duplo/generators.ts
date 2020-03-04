@@ -14,9 +14,9 @@ const duploGenerators: DuploGenerators = {
       neighbours: {
         condition: { noneat: ["myunits", ["target"]] },
         tolayer: "spawndirs",
-        include: { dir: ["dir"] },
-      },
-    },
+        include: { dir: ["dir"] }
+      }
+    }
   },
   findgrowstarts: {
     type: "walker",
@@ -26,9 +26,9 @@ const duploGenerators: DuploGenerators = {
     draw: {
       start: {
         tolayer: "growstarts",
-        include: { dir: { reldir: [["dir"], 5] }, strength: ["walklength"] },
-      },
-    },
+        include: { dir: { reldir: [["dir"], 5] }, strength: ["walklength"] }
+      }
+    }
   },
   findexpandpoints: {
     type: "walker",
@@ -43,13 +43,13 @@ const duploGenerators: DuploGenerators = {
       steps: {
         condition: { same: [["step"], ["max"]] },
         tolayer: "targets",
-        include: { dir: { reldir: [["dir"], 5] } },
+        include: { dir: { reldir: [["dir"], 5] } }
       },
       block: {
         tolayer: "potentialopptargets",
-        include: { dir: ["dir"], strength: ["max"] },
-      },
-    },
+        include: { dir: ["dir"], strength: ["max"] }
+      }
+    }
   },
   findoppstrengths: {
     type: "walker",
@@ -62,9 +62,9 @@ const duploGenerators: DuploGenerators = {
       start: {
         tolayer: "targets",
         condition: { not: { stoppedBecause: "reachedmax" } },
-        include: { dir: { reldir: [["dir"], 5] } },
-      },
-    },
+        include: { dir: { reldir: [["dir"], 5] } }
+      }
+    }
   },
   findspawns: {
     type: "walker",
@@ -73,9 +73,9 @@ const duploGenerators: DuploGenerators = {
     blocks: "units",
     draw: {
       start: { condition: { noneat: ["units", ["start"]] }, tolayer: "spawns" },
-      steps: { tolayer: "spawns" },
-    },
-  },
+      steps: { tolayer: "spawns" }
+    }
+  }
 };
 
 export default duploGenerators;

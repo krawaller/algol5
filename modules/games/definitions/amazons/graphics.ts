@@ -7,7 +7,7 @@ import { AmazonsGraphics } from "./_types";
 
 const amazonsGraphics: AmazonsGraphics = {
   icons: { amazons: "queen", fires: "pawn" },
-  tiles: {},
+  tiles: {}
 };
 
 export default amazonsGraphics;

@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type DaggersBoardHeight = 8;
@@ -61,6 +62,17 @@ export type DaggersBattlePos = never;
 export type DaggersBattleVar = never;
 export type DaggersTurnPos = never;
 export type DaggersTurnVar = never;
+
+export type DaggersBoardName = "basic";
+export type DaggersSetupName = "basic";
+export type DaggersRulesetName = "basic";
+export type DaggersVariantName = "basic";
+
+export type DaggersVariantBook = AlgolVariantBook<
+  DaggersBoardName,
+  DaggersRulesetName,
+  DaggersSetupName
+>;
 
 export type DaggersGenerators = Generators<
   DaggersArtifactLayer,

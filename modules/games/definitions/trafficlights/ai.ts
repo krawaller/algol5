@@ -7,7 +7,7 @@ const trafficlightsAI: TrafficlightsAI = {
   generators: {},
   aspects: {},
   grids: {},
-  terrain: {},
+  terrain: {}
 };
 
 export default trafficlightsAI;

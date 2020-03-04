@@ -24,10 +24,10 @@ const momentumScripts: MomentumScripts = {
         "endTurn",
         "d4",
         "drop",
-        "endTurn",
-      ],
-    },
-  ],
+        "endTurn"
+      ]
+    }
+  ]
 };
 
 export default momentumScripts;

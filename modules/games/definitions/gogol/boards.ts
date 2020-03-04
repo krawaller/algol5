@@ -1,5 +1,9 @@
 import { AlgolBoardBookAnon } from "../../../types";
 
+// This is the source of truth for what terrain layers are available.
+// Whenever you update this definition you should also regenerate
+// the graphics from the graphics module.
+
 const gogolBoardBook: AlgolBoardBookAnon = {
   basic: {
     height: 8,
@@ -10,10 +14,10 @@ const gogolBoardBook: AlgolBoardBookAnon = {
         { rect: ["a1", "a8"] },
         { rect: ["h1", "h8"] },
         { rect: ["b8", "g8"] },
-        { rect: ["b1", "g1"] },
-      ],
-    },
-  },
+        { rect: ["b1", "g1"] }
+      ]
+    }
+  }
 };
 
 export default gogolBoardBook;

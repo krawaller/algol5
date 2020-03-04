@@ -16,17 +16,17 @@ const murusgallicusadvancedAnim: MurusgallicusadvancedAnim = {
   move: [
     { enterin: ["madewalls", "selecttower"] },
     { ghosttoin: ["madetowers", "selecttower", "walls", ["player"]] },
-    { ghosttoin: ["madecatapults", "selecttower", "walls", ["player"]] },
+    { ghosttoin: ["madecatapults", "selecttower", "walls", ["player"]] }
   ],
   fire: [
     {
       ifelse: [
         { noneat: ["oppunits", "selectfire"] },
         { enterfrom: ["selectfire", "selectcatapult"] },
-        { ghost: ["selectcatapult", "selectfire", "walls", ["player"]] },
-      ],
-    },
-  ],
+        { ghost: ["selectcatapult", "selectfire", "walls", ["player"]] }
+      ]
+    }
+  ]
 };
 
 export default murusgallicusadvancedAnim;

@@ -14,6 +14,7 @@ import templateFlow from "./templates/flow";
 import templateGenerators from "./templates/generators";
 import templateScripts from "./templates/scripts";
 import templateSetup from "./templates/setups";
+import templateVariants from "./templates/variants";
 import templateIndex from "./templates/index";
 
 import { defPath } from "./_paths";
@@ -24,7 +25,7 @@ export default async function stub(gameId: string) {
     template(gameId, templateAI, "ai"),
     template(gameId, templateAnim, "anim"),
     template(gameId, templateAnalysis, "_types"),
-    template(gameId, templateBoard, "board"),
+    template(gameId, templateBoard, "boards"),
     template(gameId, templateFlow, "flow"),
     template(gameId, templateGenerators, "generators"),
     template(gameId, templateGraphics, "graphics"),
@@ -33,6 +34,7 @@ export default async function stub(gameId: string) {
     template(gameId, templatePerformance, "performance"),
     template(gameId, templateScripts, "scripts"),
     template(gameId, templateSetup, "setups"),
+    template(gameId, templateVariants, "variants"),
     template(gameId, templateIndex, "index"),
   ]);
   return console.log("Stubbed", gameId);

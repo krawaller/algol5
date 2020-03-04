@@ -13,6 +13,7 @@ import coffeePerformance from "./performance";
 import coffeeFlow from "./flow";
 import coffeeScripts from "./scripts";
 import coffeeGenerators from "./generators";
+import coffeeVariantsBook from "./variants";
 
 const coffeeDefinition: CoffeeDefinition = {
   AI: coffeeAI,
@@ -26,6 +27,7 @@ const coffeeDefinition: CoffeeDefinition = {
   performance: coffeePerformance,
   flow: coffeeFlow,
   scripts: coffeeScripts,
+  variants: coffeeVariantsBook
 };
 
 export default coffeeDefinition;

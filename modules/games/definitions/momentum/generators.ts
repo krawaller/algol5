@@ -16,16 +16,16 @@ const momentumGenerators: MomentumGenerators = {
         {
           condition: { stoppedBecause: "outofbounds" },
           tolayer: "doomed",
-          include: { pushdir: ["dir"] },
+          include: { pushdir: ["dir"] }
         },
         {
           condition: { stoppedBecause: "nomoresteps" },
           tolayer: "pushed",
-          include: { pushdir: ["dir"] },
-        },
-      ],
-    },
-  },
+          include: { pushdir: ["dir"] }
+        }
+      ]
+    }
+  }
 };
 
 export default momentumGenerators;

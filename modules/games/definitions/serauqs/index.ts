@@ -13,6 +13,7 @@ import serauqsPerformance from "./performance";
 import serauqsFlow from "./flow";
 import serauqsScripts from "./scripts";
 import serauqsGenerators from "./generators";
+import serauqsVariantsBook from "./variants";
 
 const serauqsDefinition: SerauqsDefinition = {
   AI: serauqsAI,
@@ -26,6 +27,7 @@ const serauqsDefinition: SerauqsDefinition = {
   performance: serauqsPerformance,
   flow: serauqsFlow,
   scripts: serauqsScripts,
+  variants: serauqsVariantsBook
 };
 
 export default serauqsDefinition;

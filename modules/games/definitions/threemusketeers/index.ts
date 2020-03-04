@@ -13,6 +13,7 @@ import threemusketeersPerformance from "./performance";
 import threemusketeersFlow from "./flow";
 import threemusketeersScripts from "./scripts";
 import threemusketeersGenerators from "./generators";
+import threemusketeersVariantsBook from "./variants";
 
 const threemusketeersDefinition: ThreemusketeersDefinition = {
   AI: threemusketeersAI,
@@ -26,6 +27,7 @@ const threemusketeersDefinition: ThreemusketeersDefinition = {
   performance: threemusketeersPerformance,
   flow: threemusketeersFlow,
   scripts: threemusketeersScripts,
+  variants: threemusketeersVariantsBook
 };
 
 export default threemusketeersDefinition;

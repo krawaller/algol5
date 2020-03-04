@@ -13,6 +13,7 @@ import shoveoffPerformance from "./performance";
 import shoveoffFlow from "./flow";
 import shoveoffScripts from "./scripts";
 import shoveoffGenerators from "./generators";
+import shoveoffVariantsBook from "./variants";
 
 const shoveoffDefinition: ShoveoffDefinition = {
   AI: shoveoffAI,
@@ -26,6 +27,7 @@ const shoveoffDefinition: ShoveoffDefinition = {
   performance: shoveoffPerformance,
   flow: shoveoffFlow,
   scripts: shoveoffScripts,
+  variants: shoveoffVariantsBook
 };
 
 export default shoveoffDefinition;

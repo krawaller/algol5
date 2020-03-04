@@ -13,6 +13,7 @@ import trafficlightsPerformance from "./performance";
 import trafficlightsFlow from "./flow";
 import trafficlightsScripts from "./scripts";
 import trafficlightsGenerators from "./generators";
+import trafficlightsVariantsBook from "./variants";
 
 const trafficlightsDefinition: TrafficlightsDefinition = {
   AI: trafficlightsAI,
@@ -26,6 +27,7 @@ const trafficlightsDefinition: TrafficlightsDefinition = {
   performance: trafficlightsPerformance,
   flow: trafficlightsFlow,
   scripts: trafficlightsScripts,
+  variants: trafficlightsVariantsBook
 };
 
 export default trafficlightsDefinition;

@@ -9,9 +9,9 @@ const gekitaiInstructions: GekitaiInstructions = {
       "to drop a",
       { unittype: ["markers", ["player"]] },
       "at",
-      "selectdroptarget",
-    ],
-  },
+      "selectdroptarget"
+    ]
+  }
 };
 
 export default gekitaiInstructions;

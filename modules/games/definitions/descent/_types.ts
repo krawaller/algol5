@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type DescentBoardHeight = 4;
@@ -71,6 +72,17 @@ export type DescentBattlePos = never;
 export type DescentBattleVar = never;
 export type DescentTurnPos = "movedto";
 export type DescentTurnVar = "heightto" | "heightfrom";
+
+export type DescentBoardName = "basic";
+export type DescentSetupName = "basic";
+export type DescentRulesetName = "basic";
+export type DescentVariantName = "basic";
+
+export type DescentVariantBook = AlgolVariantBook<
+  DescentBoardName,
+  DescentRulesetName,
+  DescentSetupName
+>;
 
 export type DescentGenerators = Generators<
   DescentArtifactLayer,

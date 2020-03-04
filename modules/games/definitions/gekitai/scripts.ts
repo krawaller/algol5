@@ -12,10 +12,10 @@ const gekitaiScripts: GekitaiScripts = {
         "endTurn",
         "b2",
         "drop",
-        "endTurn",
-      ],
-    },
-  ],
+        "endTurn"
+      ]
+    }
+  ]
 };
 
 export default gekitaiScripts;

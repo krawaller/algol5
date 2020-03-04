@@ -7,7 +7,7 @@ import { TrafficlightsGraphics } from "./_types";
 
 const trafficlightsGraphics: TrafficlightsGraphics = {
   icons: { kings: "king", pawns: "pawn", bishops: "bishop" },
-  tiles: {},
+  tiles: {}
 };
 
 export default trafficlightsGraphics;

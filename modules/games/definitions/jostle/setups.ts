@@ -19,7 +19,7 @@ const jostleSetupBook: JostleSetupBook = {
         "g8",
         "h3",
         "h5",
-        "h7",
+        "h7"
       ],
       "2": [
         "c3",
@@ -37,10 +37,10 @@ const jostleSetupBook: JostleSetupBook = {
         "g7",
         "h4",
         "h6",
-        "h8",
-      ],
-    },
-  },
+        "h8"
+      ]
+    }
+  }
 };
 
 export default jostleSetupBook;

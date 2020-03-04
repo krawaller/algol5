@@ -120,6 +120,7 @@ const signatures = {
   AlgolPerformance: ["Command", "Mark"],
   AlgolGameTestSuite: ["Command", "Position"],
   AlgolSetupBook: ["Position", "Unit"],
+  AlgolVariantBook: ["BoardName", "RulesetName", "SetupName"],
   Generators: [
     "ArtifactLayer",
     "BattlePos",

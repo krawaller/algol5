@@ -4,10 +4,10 @@ const gogolPerformance: GogolPerformance = {
   canAlwaysEnd: {
     selectmovetarget: true,
     selectkingdeploy: true,
-    selectjumptarget: true,
+    selectjumptarget: true
   },
   massiveTree: {},
-  noEndGameCheck: ["deploy"],
+  noEndGameCheck: ["deploy"]
 };
 
 export default gogolPerformance;

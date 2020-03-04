@@ -13,6 +13,7 @@ import uglyduckPerformance from "./performance";
 import uglyduckFlow from "./flow";
 import uglyduckScripts from "./scripts";
 import uglyduckGenerators from "./generators";
+import uglyduckVariantsBook from "./variants";
 
 const uglyduckDefinition: UglyduckDefinition = {
   AI: uglyduckAI,
@@ -26,6 +27,7 @@ const uglyduckDefinition: UglyduckDefinition = {
   performance: uglyduckPerformance,
   flow: uglyduckFlow,
   scripts: uglyduckScripts,
+  variants: uglyduckVariantsBook
 };
 
 export default uglyduckDefinition;

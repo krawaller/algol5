@@ -13,6 +13,7 @@ import kickrunPerformance from "./performance";
 import kickrunFlow from "./flow";
 import kickrunScripts from "./scripts";
 import kickrunGenerators from "./generators";
+import kickrunVariantsBook from "./variants";
 
 const kickrunDefinition: KickrunDefinition = {
   AI: kickrunAI,
@@ -26,6 +27,7 @@ const kickrunDefinition: KickrunDefinition = {
   performance: kickrunPerformance,
   flow: kickrunFlow,
   scripts: kickrunScripts,
+  variants: kickrunVariantsBook
 };
 
 export default kickrunDefinition;

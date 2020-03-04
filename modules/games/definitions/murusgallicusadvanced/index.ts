@@ -13,6 +13,7 @@ import murusgallicusadvancedPerformance from "./performance";
 import murusgallicusadvancedFlow from "./flow";
 import murusgallicusadvancedScripts from "./scripts";
 import murusgallicusadvancedGenerators from "./generators";
+import murusgallicusadvancedVariantsBook from "./variants";
 
 const murusgallicusadvancedDefinition: MurusgallicusadvancedDefinition = {
   AI: murusgallicusadvancedAI,
@@ -26,6 +27,7 @@ const murusgallicusadvancedDefinition: MurusgallicusadvancedDefinition = {
   performance: murusgallicusadvancedPerformance,
   flow: murusgallicusadvancedFlow,
   scripts: murusgallicusadvancedScripts,
+  variants: murusgallicusadvancedVariantsBook
 };
 
 export default murusgallicusadvancedDefinition;

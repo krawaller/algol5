@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type CoffeeBoardHeight = 5;
@@ -59,6 +60,17 @@ export type CoffeeBattlePos = never;
 export type CoffeeBattleVar = never;
 export type CoffeeTurnPos = never;
 export type CoffeeTurnVar = never;
+
+export type CoffeeBoardName = "basic";
+export type CoffeeSetupName = "basic";
+export type CoffeeRulesetName = "basic";
+export type CoffeeVariantName = "basic";
+
+export type CoffeeVariantBook = AlgolVariantBook<
+  CoffeeBoardName,
+  CoffeeRulesetName,
+  CoffeeSetupName
+>;
 
 export type CoffeeGenerators = Generators<
   CoffeeArtifactLayer,

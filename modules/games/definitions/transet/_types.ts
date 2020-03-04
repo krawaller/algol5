@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type TransetBoardHeight = 5;
@@ -73,6 +74,17 @@ export type TransetBattlePos = never;
 export type TransetBattleVar = never;
 export type TransetTurnPos = never;
 export type TransetTurnVar = never;
+
+export type TransetBoardName = "basic";
+export type TransetSetupName = "basic";
+export type TransetRulesetName = "basic";
+export type TransetVariantName = "basic";
+
+export type TransetVariantBook = AlgolVariantBook<
+  TransetBoardName,
+  TransetRulesetName,
+  TransetSetupName
+>;
 
 export type TransetGenerators = Generators<
   TransetArtifactLayer,

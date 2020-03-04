@@ -12,17 +12,17 @@ import { ShoveoffAnim } from "./_types";
 
 const shoveoffAnim: ShoveoffAnim = {
   north: [
-    { exitin: ["squishnorth", { offset: [["looppos"], { loopread: "dir" }] }] },
+    { exitin: ["squishnorth", { offset: [["looppos"], { loopread: "dir" }] }] }
   ],
   east: [
-    { exitin: ["squisheast", { offset: [["looppos"], { loopread: "dir" }] }] },
+    { exitin: ["squisheast", { offset: [["looppos"], { loopread: "dir" }] }] }
   ],
   south: [
-    { exitin: ["squishsouth", { offset: [["looppos"], { loopread: "dir" }] }] },
+    { exitin: ["squishsouth", { offset: [["looppos"], { loopread: "dir" }] }] }
   ],
   west: [
-    { exitin: ["squishwest", { offset: [["looppos"], { loopread: "dir" }] }] },
-  ],
+    { exitin: ["squishwest", { offset: [["looppos"], { loopread: "dir" }] }] }
+  ]
 };
 
 export default shoveoffAnim;

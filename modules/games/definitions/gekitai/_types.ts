@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type GekitaiBoardHeight = 6;
@@ -56,6 +57,17 @@ export type GekitaiBattlePos = never;
 export type GekitaiBattleVar = never;
 export type GekitaiTurnPos = never;
 export type GekitaiTurnVar = never;
+
+export type GekitaiBoardName = "basic";
+export type GekitaiSetupName = "basic";
+export type GekitaiRulesetName = "basic";
+export type GekitaiVariantName = "basic";
+
+export type GekitaiVariantBook = AlgolVariantBook<
+  GekitaiBoardName,
+  GekitaiRulesetName,
+  GekitaiSetupName
+>;
 
 export type GekitaiGenerators = Generators<
   GekitaiArtifactLayer,

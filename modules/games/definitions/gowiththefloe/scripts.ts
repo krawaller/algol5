@@ -5,12 +5,12 @@ const gowiththefloeScripts: GowiththefloeScripts = {
     { commands: [], include: ["b2", "b7"] },
     {
       commands: ["b7"],
-      include: ["a6", "b5", "b6", "c6", "c7", "c8", "d5", "d7"],
+      include: ["a6", "b5", "b6", "c6", "c7", "c8", "d5", "d7"]
     },
     { commands: ["d5", "move", "endTurn"], include: ["g2", "g7"] },
     {
       commands: ["g7"],
-      include: ["e5", "e7", "f6", "f7", "f8", "g5", "g6", "h6"],
+      include: ["e5", "e7", "f6", "f7", "f8", "g5", "g6", "h6"]
     },
     { commands: ["e5", "move", "endTurn"], include: ["b2", "d5"] },
     {
@@ -27,8 +27,8 @@ const gowiththefloeScripts: GowiththefloeScripts = {
         "e4",
         "e6",
         "f3",
-        "f7",
-      ],
+        "f7"
+      ]
     },
     { commands: ["d3", "move", "endTurn"], include: ["e5", "g2"] },
     {
@@ -45,8 +45,8 @@ const gowiththefloeScripts: GowiththefloeScripts = {
         "f4",
         "f5",
         "g3",
-        "g5",
-      ],
+        "g5"
+      ]
     },
     { commands: ["c3", "jump", "endTurn"], include: ["b2", "d3"] },
     {
@@ -62,8 +62,8 @@ const gowiththefloeScripts: GowiththefloeScripts = {
         "e4",
         "f1",
         "f3",
-        "f5",
-      ],
+        "f5"
+      ]
     },
     { commands: ["e4", "move", "endTurn"], include: ["c3", "g2"] },
     {
@@ -80,13 +80,13 @@ const gowiththefloeScripts: GowiththefloeScripts = {
         "c5",
         "d2",
         "e1",
-        "e3",
-      ],
+        "e3"
+      ]
     },
     { commands: ["b2", "eat", "endTurn"], include: ["e4"] },
     {
       commands: ["e4"],
-      include: ["c2", "c4", "e2", "e3", "e6", "f3", "f4", "f5", "g4", "g6"],
+      include: ["c2", "c4", "e2", "e3", "e6", "f3", "f4", "f5", "g4", "g6"]
     },
     { commands: ["c4", "jump", "endTurn"], include: ["g2"] },
     { commands: ["g2", "e2", "move", "endTurn"], include: ["c4"] },
@@ -96,10 +96,10 @@ const gowiththefloeScripts: GowiththefloeScripts = {
     { commands: ["d2", "c3", "move", "endTurn"], include: ["b4"] },
     {
       commands: ["b4"],
-      include: ["a3", "a4", "a5", "b2", "b3", "b5", "b6", "d6"],
+      include: ["a3", "a4", "a5", "b2", "b3", "b5", "b6", "d6"]
     },
-    { commands: ["d6", "jump", "endTurn"], include: ["c3"] },
-  ],
+    { commands: ["d6", "jump", "endTurn"], include: ["c3"] }
+  ]
 };
 
 export default gowiththefloeScripts;

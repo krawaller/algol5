@@ -12,7 +12,8 @@ import {
   AlgolSetupBook,
   AlgolGameTestSuite,
   FullDef,
-  AlgolPerformance
+  AlgolPerformance,
+  AlgolVariantBook
 } from "../../../types";
 
 export type DuploBoardHeight = 8;
@@ -63,6 +64,17 @@ export type DuploBattlePos = never;
 export type DuploBattleVar = never;
 export type DuploTurnPos = never;
 export type DuploTurnVar = never;
+
+export type DuploBoardName = "basic";
+export type DuploSetupName = "basic";
+export type DuploRulesetName = "basic";
+export type DuploVariantName = "basic";
+
+export type DuploVariantBook = AlgolVariantBook<
+  DuploBoardName,
+  DuploRulesetName,
+  DuploSetupName
+>;
 
 export type DuploGenerators = Generators<
   DuploArtifactLayer,

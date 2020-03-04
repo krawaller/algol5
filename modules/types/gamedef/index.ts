@@ -21,6 +21,7 @@ import { Flow } from "./flow";
 import { AlgolGameTestSuite } from "./scripts";
 import { AlgolPerformance } from "./performance";
 import { AlgolAnimCollection } from "./anim";
+import { AlgolVariantBook } from "./variants";
 
 export type FullDefAnon = FullDef<
   string,
@@ -106,6 +107,7 @@ export type FullDef<
   >;
   boards: AlgolBoardBookAnon;
   setups: AlgolSetupBook<Position, Unit>;
+  variants: AlgolVariantBook<string, string, string>;
   graphics: Graphics<Terrain, Unit>;
   grids?: { [g in Grid]: any };
   instructions: Instructions<

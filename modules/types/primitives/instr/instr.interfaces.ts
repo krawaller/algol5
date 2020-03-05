@@ -3,195 +3,60 @@ import { AlgolInstr } from "./";
 import { AlgolVal } from "../value";
 import { AlgolPos } from "../pos";
 import { AlgolSet } from "../set";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolInstrPluralize<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
+export interface AlgolInstrPluralize<Blob extends AlgolGameBlobAnon> {
   pluralize: [
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
-    AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
+    AlgolVal<Blob, string | number>,
+    AlgolInstr<Blob>,
+    AlgolInstr<Blob>
   ];
 }
 
-export interface AlgolInstrVal<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  value: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolInstrVal<Blob extends AlgolGameBlobAnon> {
+  value: AlgolVal<Blob, string | number>;
 }
 
-export interface AlgolInstrUnitAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  unitat: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolInstrUnitAt<Blob extends AlgolGameBlobAnon> {
+  unitat: AlgolPos<Blob>;
 }
 
-export interface AlgolInstrPos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  pos: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolInstrPos<Blob extends AlgolGameBlobAnon> {
+  pos: AlgolPos<Blob>;
 }
 
-export interface AlgolInstrOrList<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  orlist: AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
+export interface AlgolInstrOrList<Blob extends AlgolGameBlobAnon> {
+  orlist: AlgolInstr<Blob>[];
 }
 
-export interface AlgolInstrAndList<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  andlist: AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
+export interface AlgolInstrAndList<Blob extends AlgolGameBlobAnon> {
+  andlist: AlgolInstr<Blob>[];
 }
 
-export interface AlgolInstrLine<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  line: AlgolInstr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>[];
+export interface AlgolInstrLine<Blob extends AlgolGameBlobAnon> {
+  line: AlgolInstr<Blob>[];
 }
 
-export interface AlgolInstrUnitType<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  unittype: [
-    Unit,
-    AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolInstrUnitType<Blob extends AlgolGameBlobAnon> {
+  unittype: [Blob["unit"], AlgolVal<Blob, 0 | 1 | 2>];
 }
 
 export interface AlgolInstrText {
   text: string;
 }
 
-export interface AlgolInstrPosList<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  poslist: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolInstrPosList<Blob extends AlgolGameBlobAnon> {
+  poslist: AlgolSet<Blob>;
 }
 
-export interface AlgolInstrUnitList<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  unitlist: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolInstrUnitList<Blob extends AlgolGameBlobAnon> {
+  unitlist: AlgolSet<Blob>;
 }
 
-export interface AlgolInstrUnitTypeSet<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  unittypeset: [
-    Unit,
-    AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolInstrUnitTypeSet<Blob extends AlgolGameBlobAnon> {
+  unittypeset: [Blob["unit"], AlgolVal<Blob, 0 | 1 | 2>, AlgolSet<Blob>];
 }
 
-export interface AlgolInstrUnitTypePos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  unittypepos: [
-    Unit,
-    AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolInstrUnitTypePos<Blob extends AlgolGameBlobAnon> {
+  unittypepos: [Blob["unit"], AlgolVal<Blob, 0 | 1 | 2>, AlgolPos<Blob>];
 }

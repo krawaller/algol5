@@ -1,29 +1,14 @@
 export * from "./link.anon";
 
 import { AlgolStatement } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolLink<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = AlgolStatement<
-  AlgolLinkInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+export type AlgolLink<Blob extends AlgolGameBlobAnon> = AlgolStatement<
+  Blob,
+  AlgolLinkInner<Blob>
 >;
 
-export type AlgolLinkInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
-  | Cmnd
-  | Mrk
+export type AlgolLinkInner<Blob extends AlgolGameBlobAnon> =
+  | Blob["cmnd"]
+  | Blob["mrk"]
   | "endTurn";

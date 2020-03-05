@@ -1,17 +1,21 @@
 import { AlgolBool } from "./";
+import { AlgolGameBlob } from "../../blob";
 
-type TestBool = AlgolBool<
+type TestBlob = AlgolGameBlob<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygen",
   "mygrid",
   "mylayer",
   "mymark",
+  "myruleset",
   "myturnp",
-  "myturnv"
+  "myturnv",
+  "myunit"
 >;
 
-const tests: TestBool[] = [
+const tests: AlgolBool<TestBlob>[] = [
   ["true"],
   { not: ["false"] },
   { and: [["true"], { not: ["false"] }] },

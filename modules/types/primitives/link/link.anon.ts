@@ -1,6 +1,5 @@
 import { AlgolLink, AlgolLinkInner } from "./";
+import { AlgolGameBlobAnon } from "../../blob";
 
-type s = string;
-
-export type AlgolLinkAnon = AlgolLink<s, s, s, s, s, s, s, s>;
-export type AlgolLinkInnerAnon = AlgolLinkInner<s, s, s, s, s, s, s, s>;
+export type AlgolLinkAnon = AlgolLink<AlgolGameBlobAnon>;
+export type AlgolLinkInnerAnon = AlgolLinkInner<AlgolGameBlobAnon>;

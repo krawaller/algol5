@@ -1,18 +1,21 @@
 import { AlgolAnim } from "./";
+import { AlgolGameBlob } from "../../blob";
 
-type TestAnim = AlgolAnim<
+type TestBlob = AlgolGameBlob<
   "btlpos",
   "btlval",
   "cmnd1" | "cmnd2",
+  "gen",
   "grid",
   "layer",
   "mymark1" | "mymark2",
+  "myruleset",
   "turnpos",
   "turnval",
   "unit"
 >;
 
-const test: TestAnim[] = [
+const test: AlgolAnim<TestBlob>[] = [
   { enterfrom: ["mymark1", "mymark2"] },
   { enterin: ["layer", "mymark1"] },
   { exitin: ["layer", "mymark2"] },

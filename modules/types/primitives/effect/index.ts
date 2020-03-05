@@ -28,63 +28,37 @@ import {
   AlgolEffectMorphIn,
   AlgolEffectAdoptAt,
   AlgolEffectAdoptId,
-  AlgolEffectAdoptIn
+  AlgolEffectAdoptIn,
 } from "./effect.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolEffect<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> = AlgolStatement<
-  AlgolEffectInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+export type AlgolEffect<Blob extends AlgolGameBlobAnon> = AlgolStatement<
+  Blob,
+  AlgolEffectInner<Blob>
 >;
 
-export type AlgolEffectInner<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> =
-  | AlgolEffectMoveAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectMoveId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectStompAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectStompId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSetTurnPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSetBattlePos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSetTurnVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSetBattleVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectPushIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectPushAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectKillIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectKillAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectKillId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSetAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSetIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSetId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectMorphAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolEffectMorphIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolEffectMorphId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolEffectAdoptAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectAdoptIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectAdoptId<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolEffectSpawnAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolEffectSpawnIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>;
+export type AlgolEffectInner<Blob extends AlgolGameBlobAnon> =
+  | AlgolEffectMoveAt<Blob>
+  | AlgolEffectMoveId<Blob>
+  | AlgolEffectStompAt<Blob>
+  | AlgolEffectStompId<Blob>
+  | AlgolEffectSetTurnPos<Blob>
+  | AlgolEffectSetBattlePos<Blob>
+  | AlgolEffectSetTurnVar<Blob>
+  | AlgolEffectSetBattleVar<Blob>
+  | AlgolEffectPushIn<Blob>
+  | AlgolEffectPushAt<Blob>
+  | AlgolEffectKillIn<Blob>
+  | AlgolEffectKillAt<Blob>
+  | AlgolEffectKillId<Blob>
+  | AlgolEffectSetAt<Blob>
+  | AlgolEffectSetIn<Blob>
+  | AlgolEffectSetId<Blob>
+  | AlgolEffectMorphAt<Blob>
+  | AlgolEffectMorphIn<Blob>
+  | AlgolEffectMorphId<Blob>
+  | AlgolEffectAdoptAt<Blob>
+  | AlgolEffectAdoptIn<Blob>
+  | AlgolEffectAdoptId<Blob>
+  | AlgolEffectSpawnAt<Blob>
+  | AlgolEffectSpawnIn<Blob>;

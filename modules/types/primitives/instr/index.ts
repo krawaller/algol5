@@ -19,76 +19,30 @@ import {
 } from "./instr.interfaces";
 
 import { AlgolIfableExpression } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolInstr<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> = AlgolIfableExpression<
-  AlgolInstrInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+export type AlgolInstr<Blob extends AlgolGameBlobAnon> = AlgolIfableExpression<
+  Blob,
+  AlgolInstrInner<Blob>
 >;
 
-export type AlgolInstrInner<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> =
+export type AlgolInstrInner<Blob extends AlgolGameBlobAnon> =
   | string
   | number
-  | Cmnd
-  | Unit
+  | Blob["cmnd"]
+  | Blob["unit"]
   | ["defaultEndTurnInstruction"]
   | ["otherplayer"]
-  | AlgolInstrVal<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolInstrPluralize<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolInstrPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolInstrUnitAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolInstrLine<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolInstrOrList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolInstrAndList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolInstrUnitType<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv, Unit>
-  | AlgolInstrPosList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolInstrUnitList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolInstrUnitTypeSet<
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv,
-      Unit
-    >
-  | AlgolInstrUnitTypePos<
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv,
-      Unit
-    >
+  | AlgolInstrVal<Blob>
+  | AlgolInstrPluralize<Blob>
+  | AlgolInstrPos<Blob>
+  | AlgolInstrUnitAt<Blob>
+  | AlgolInstrLine<Blob>
+  | AlgolInstrOrList<Blob>
+  | AlgolInstrAndList<Blob>
+  | AlgolInstrUnitType<Blob>
+  | AlgolInstrPosList<Blob>
+  | AlgolInstrUnitList<Blob>
+  | AlgolInstrUnitTypeSet<Blob>
+  | AlgolInstrUnitTypePos<Blob>
   | AlgolInstrText;

@@ -1,6 +1,7 @@
 import { AlgolGenRef } from "./";
+import { AlgolGameBlob } from "../../blob";
 
-type TestEffect = AlgolGenRef<
+type TestBlob = AlgolGameBlob<
   "mybattlep",
   "mybattlev",
   "mycmnd",
@@ -8,18 +9,20 @@ type TestEffect = AlgolGenRef<
   "mygrid",
   "mylayer",
   "mymark",
+  "myruleset",
   "myturnp",
-  "myturnv"
+  "myturnv",
+  "myunit"
 >;
 
-const tests: TestEffect[] = [
+const tests: AlgolGenRef<TestBlob>[] = [
   { playercase: ["mygen1", { ifaction: ["mycmnd", "mygen2"] }] },
   { multi: ["mygen1", { ifplayer: [2, "mygen2"] }] },
   {
     ifelse: [
       { anyat: ["mylayer", "mymark"] },
       "mygen1",
-      { if: [["true"], "mygen2"] }
-    ]
-  }
+      { if: [["true"], "mygen2"] },
+    ],
+  },
 ];

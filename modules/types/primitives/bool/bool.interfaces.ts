@@ -67,15 +67,15 @@ export interface AlgolBoolMarkAvailable<Blob extends AlgolGameBlobAnon> {
 }
 
 export interface AlgolBoolSame<Blob extends AlgolGameBlobAnon> {
-  same: [AlgolVal<Blob, number>];
+  same: [AlgolVal<Blob, string | number>, AlgolVal<Blob, string | number>];
 }
 
 export interface AlgolBoolDifferent<Blob extends AlgolGameBlobAnon> {
-  different: [AlgolVal<Blob, number>];
+  different: [AlgolVal<Blob, string | number>, AlgolVal<Blob, string | number>];
 }
 
 export interface AlgolBoolMoreThan<Blob extends AlgolGameBlobAnon> {
-  morethan: [AlgolVal<Blob, number>];
+  morethan: [AlgolVal<Blob, number>, AlgolVal<Blob, string | number>];
 }
 
 export interface AlgolBoolValInList<Blob extends AlgolGameBlobAnon> {

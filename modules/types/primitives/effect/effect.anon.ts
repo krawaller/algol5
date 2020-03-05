@@ -24,275 +24,43 @@ import {
   AlgolEffectMorphIn,
   AlgolEffectAdoptAt,
   AlgolEffectAdoptId,
-  AlgolEffectAdoptIn
+  AlgolEffectAdoptIn,
 } from "./effect.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolEffectAnon = AlgolEffect<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolEffectAnon = AlgolEffect<AlgolGameBlobAnon>;
 
-export type AlgolEffectInnerAnon = AlgolEffectInner<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolEffectInnerAnon = AlgolEffectInner<AlgolGameBlobAnon>;
 
-export type AlgolEffectMoveAtAnon = AlgolEffectMoveAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectMoveIdAnon = AlgolEffectMoveId<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectStompAtAnon = AlgolEffectStompAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectStompIdAnon = AlgolEffectStompId<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolEffectMoveAtAnon = AlgolEffectMoveAt<AlgolGameBlobAnon>;
+export type AlgolEffectMoveIdAnon = AlgolEffectMoveId<AlgolGameBlobAnon>;
+export type AlgolEffectStompAtAnon = AlgolEffectStompAt<AlgolGameBlobAnon>;
+export type AlgolEffectStompIdAnon = AlgolEffectStompId<AlgolGameBlobAnon>;
 export type AlgolEffectSetTurnPosAnon = AlgolEffectSetTurnPos<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon
 >;
 export type AlgolEffectSetBattlePosAnon = AlgolEffectSetBattlePos<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon
 >;
 export type AlgolEffectSetTurnVarAnon = AlgolEffectSetTurnVar<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon
 >;
 export type AlgolEffectSetBattleVarAnon = AlgolEffectSetBattleVar<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon
 >;
-export type AlgolEffectPushAtAnon = AlgolEffectPushAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectPushInAnon = AlgolEffectPushIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectKillInAnon = AlgolEffectKillIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectKillIdAnon = AlgolEffectKillId<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectKillAtAnon = AlgolEffectKillAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectSetAtAnon = AlgolEffectSetAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectSetInAnon = AlgolEffectSetIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectSetIdAnon = AlgolEffectSetId<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectSpawnAtAnon = AlgolEffectSpawnAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectSpawnInAnon = AlgolEffectSpawnIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectMorphAtAnon = AlgolEffectMorphAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectMorphInAnon = AlgolEffectMorphIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectMorphIdAnon = AlgolEffectMorphId<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectAdoptAtAnon = AlgolEffectAdoptAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectAdoptInAnon = AlgolEffectAdoptIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolEffectAdoptIdAnon = AlgolEffectAdoptId<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolEffectPushAtAnon = AlgolEffectPushAt<AlgolGameBlobAnon>;
+export type AlgolEffectPushInAnon = AlgolEffectPushIn<AlgolGameBlobAnon>;
+export type AlgolEffectKillInAnon = AlgolEffectKillIn<AlgolGameBlobAnon>;
+export type AlgolEffectKillIdAnon = AlgolEffectKillId<AlgolGameBlobAnon>;
+export type AlgolEffectKillAtAnon = AlgolEffectKillAt<AlgolGameBlobAnon>;
+export type AlgolEffectSetAtAnon = AlgolEffectSetAt<AlgolGameBlobAnon>;
+export type AlgolEffectSetInAnon = AlgolEffectSetIn<AlgolGameBlobAnon>;
+export type AlgolEffectSetIdAnon = AlgolEffectSetId<AlgolGameBlobAnon>;
+export type AlgolEffectSpawnAtAnon = AlgolEffectSpawnAt<AlgolGameBlobAnon>;
+export type AlgolEffectSpawnInAnon = AlgolEffectSpawnIn<AlgolGameBlobAnon>;
+export type AlgolEffectMorphAtAnon = AlgolEffectMorphAt<AlgolGameBlobAnon>;
+export type AlgolEffectMorphInAnon = AlgolEffectMorphIn<AlgolGameBlobAnon>;
+export type AlgolEffectMorphIdAnon = AlgolEffectMorphId<AlgolGameBlobAnon>;
+export type AlgolEffectAdoptAtAnon = AlgolEffectAdoptAt<AlgolGameBlobAnon>;
+export type AlgolEffectAdoptInAnon = AlgolEffectAdoptIn<AlgolGameBlobAnon>;
+export type AlgolEffectAdoptIdAnon = AlgolEffectAdoptId<AlgolGameBlobAnon>;

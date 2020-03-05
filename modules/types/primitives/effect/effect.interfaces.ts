@@ -2,496 +2,153 @@ import { PosPos, ValPos, PosVal, SetVal, ValVal } from "../_signatures";
 import { AlgolSet } from "../set";
 import { AlgolVal } from "../value";
 import { AlgolPos } from "../pos";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolEffectKillId<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  killid: AlgolVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectKillId<Blob extends AlgolGameBlobAnon> {
+  killid: AlgolVal<Blob, string>;
 }
 
-export interface AlgolEffectMoveAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  moveat: PosPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectMoveAt<Blob extends AlgolGameBlobAnon> {
+  moveat: [AlgolPos<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolEffectMoveId<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  moveid: ValPos<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectMoveId<Blob extends AlgolGameBlobAnon> {
+  moveid: [AlgolVal<Blob, string>, AlgolPos<Blob>];
 }
 
-export interface AlgolEffectStompAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  stompat: PosPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectStompAt<Blob extends AlgolGameBlobAnon> {
+  stompat: [AlgolPos<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolEffectStompId<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  stompid: ValPos<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectStompId<Blob extends AlgolGameBlobAnon> {
+  stompid: [AlgolVal<Blob, string>, AlgolPos<Blob>];
 }
 
-export interface AlgolEffectSetTurnPos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  setturnpos: [
-    AlgolVal<Turnp, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolEffectSetTurnPos<Blob extends AlgolGameBlobAnon> {
+  setturnpos: [AlgolVal<Blob, Blob["turnp"]>, AlgolPos<Blob>];
 }
 
-export interface AlgolEffectSetBattlePos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  setbattlepos: [
-    AlgolVal<Btlp, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolEffectSetBattlePos<Blob extends AlgolGameBlobAnon> {
+  setbattlepos: [AlgolVal<Blob, Blob["btlp"]>, AlgolPos<Blob>];
 }
 
-export interface AlgolEffectSetTurnVar<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  setturnvar: [
-    AlgolVal<Turnv, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolEffectSetTurnVar<Blob extends AlgolGameBlobAnon> {
+  setturnvar: [AlgolVal<Blob, Blob["turnv"]>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolEffectSetBattleVar<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  setbattlevar: [
-    AlgolVal<Btlv, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolEffectSetBattleVar<Blob extends AlgolGameBlobAnon> {
+  setbattlevar: [AlgolVal<Blob, Blob["btlv"]>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolEffectPushAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
+export interface AlgolEffectPushAt<Blob extends AlgolGameBlobAnon> {
   pushat: // pos, dir, distance
   | [
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<
-          string | number,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >,
-        AlgolVal<
-          string | number,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >
+        AlgolPos<Blob>,
+        AlgolVal<Blob, string | number>,
+        AlgolVal<Blob, string | number>
       ]
     // pos, dir (distance will default to 1)
-    | [
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<
-          string | number,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >
-      ];
+    | [AlgolPos<Blob>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolEffectPushIn<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
+export interface AlgolEffectPushIn<Blob extends AlgolGameBlobAnon> {
   pushin: // set, dir, distance
   | [
-        AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<
-          string | number,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >,
-        AlgolVal<
-          string | number,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >
+        AlgolSet<Blob>,
+        AlgolVal<Blob, string | number>,
+        AlgolVal<Blob, string | number>
       ]
     // set, dir (distance defaults to 1)
-    | [
-        AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<
-          string | number,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >
-      ];
+    | [AlgolSet<Blob>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolEffectKillIn<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  killin: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectKillIn<Blob extends AlgolGameBlobAnon> {
+  killin: AlgolSet<Blob>;
 }
 
-export interface AlgolEffectKillAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  killat: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectKillAt<Blob extends AlgolGameBlobAnon> {
+  killat: AlgolPos<Blob>;
 }
 
-export interface AlgolEffectSetAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
+export interface AlgolEffectSetAt<Blob extends AlgolGameBlobAnon> {
   setat: [
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolPos<Blob>,
+    AlgolVal<Blob, string | number>,
+    AlgolVal<Blob, string | number>
   ];
 }
 
-export interface AlgolEffectSetIn<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
+export interface AlgolEffectSetIn<Blob extends AlgolGameBlobAnon> {
   setin: [
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolSet<Blob>,
+    AlgolVal<Blob, string | number>,
+    AlgolVal<Blob, string | number>
   ];
 }
 
-export interface AlgolEffectSetId<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
+export interface AlgolEffectSetId<Blob extends AlgolGameBlobAnon> {
   setid: [
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolVal<Blob, string | number>,
+    AlgolVal<Blob, string | number>,
+    AlgolVal<Blob, string | number>
   ];
 }
 
-export interface AlgolEffectSpawnAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
+export interface AlgolEffectSpawnAt<Blob extends AlgolGameBlobAnon> {
   spawnat:
+    | [AlgolPos<Blob>, AlgolVal<Blob, Blob["unit"]>]
+    | [AlgolPos<Blob>, AlgolVal<Blob, Blob["unit"]>, undefined, undefined]
+    | [AlgolPos<Blob>, AlgolVal<Blob, Blob["unit"]>, AlgolVal<Blob, 0 | 1 | 2>]
     | [
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-      ]
-    | [
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        undefined,
+        AlgolPos<Blob>,
+        AlgolVal<Blob, Blob["unit"]>,
+        AlgolVal<Blob, 0 | 1 | 2>,
         undefined
       ]
     | [
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-      ]
-    | [
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        undefined
-      ]
-    | [
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolPos<Blob>,
+        AlgolVal<Blob, Blob["unit"]>,
+        AlgolVal<Blob, 0 | 1 | 2>,
         {
-          [prop: string]: AlgolVal<
-            string | number,
-            Btlp,
-            Btlv,
-            Cmnd,
-            Grid,
-            Layer,
-            Mrk,
-            Turnp,
-            Turnv
-          >;
+          [prop: string]: AlgolVal<Blob, string | number>;
         }
       ];
 }
 
-export interface AlgolEffectSpawnIn<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
+export interface AlgolEffectSpawnIn<Blob extends AlgolGameBlobAnon> {
   spawnin:
+    | [AlgolSet<Blob>, AlgolVal<Blob, Blob["unit"]>]
+    | [AlgolSet<Blob>, AlgolVal<Blob, Blob["unit"]>, AlgolVal<Blob, 0 | 1 | 2>]
     | [
-        AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-      ]
-    | [
-        AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-      ]
-    | [
-        AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-        AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolSet<Blob>,
+        AlgolVal<Blob, Blob["unit"]>,
+        AlgolVal<Blob, 0 | 1 | 2>,
         {
-          [prop: string]: AlgolVal<
-            string | number,
-            Btlp,
-            Btlv,
-            Cmnd,
-            Grid,
-            Layer,
-            Mrk,
-            Turnp,
-            Turnv
-          >;
+          [prop: string]: AlgolVal<Blob, string | number>;
         }
       ];
 }
 
-export interface AlgolEffectMorphAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  morphat: PosVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectMorphAt<Blob extends AlgolGameBlobAnon> {
+  morphat: [AlgolPos<Blob>, AlgolVal<Blob, Blob["unit"]>];
 }
 
-export interface AlgolEffectMorphIn<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  morphin: SetVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectMorphIn<Blob extends AlgolGameBlobAnon> {
+  morphin: [AlgolSet<Blob>, AlgolVal<Blob, Blob["unit"]>];
 }
 
-export interface AlgolEffectMorphId<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> {
-  morphid: [
-    AlgolVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolEffectMorphId<Blob extends AlgolGameBlobAnon> {
+  morphid: [AlgolVal<Blob, string>, AlgolVal<Blob, Blob["unit"]>];
 }
 
-export interface AlgolEffectAdoptAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  adoptat: PosVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectAdoptAt<Blob extends AlgolGameBlobAnon> {
+  adoptat: [AlgolPos<Blob>, AlgolVal<Blob, 0 | 1 | 2>];
 }
 
-export interface AlgolEffectAdoptIn<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  adoptin: SetVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolEffectAdoptIn<Blob extends AlgolGameBlobAnon> {
+  adoptin: [AlgolSet<Blob>, AlgolVal<Blob, 0 | 1 | 2>];
 }
 
-export interface AlgolEffectAdoptId<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  adoptid: [
-    AlgolVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolEffectAdoptId<Blob extends AlgolGameBlobAnon> {
+  adoptid: [AlgolVal<Blob, string>, AlgolVal<Blob, 0 | 1 | 2>];
 }

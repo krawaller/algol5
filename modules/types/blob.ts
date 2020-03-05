@@ -2,6 +2,7 @@ export type AlgolGameBlob<
   Btlp,
   Btlv,
   Cmnd,
+  Gen,
   Grid,
   Layer,
   Mrk,
@@ -13,6 +14,7 @@ export type AlgolGameBlob<
   btlp: Btlp;
   btlv: Btlv;
   cmnd: Cmnd;
+  gen: Gen;
   grid: Grid;
   layer: Layer;
   mrk: Mrk;
@@ -23,4 +25,4 @@ export type AlgolGameBlob<
 };
 
 type s = string;
-export type AlgolGameBlobAnon = AlgolGameBlob<s, s, s, s, s, s, s, s, s, s>;
+export type AlgolGameBlobAnon = AlgolGameBlob<s, s, s, s, s, s, s, s, s, s, s>;

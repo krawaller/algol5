@@ -4,41 +4,22 @@ import {
   AlgolOrderRunGenerators,
   AlgolOrderDoEffects,
   AlgolOrderLinks,
-  AlgolOrderAnims
+  AlgolOrderAnims,
 } from "./order.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
 type s = string;
 
-export type AlgolOrderAnon = AlgolOrder<s, s, s, s, s, s, s, s, s, s>;
+export type AlgolOrderAnon = AlgolOrder<AlgolGameBlobAnon>;
 
-export type AlgolOrderInnerAnon = AlgolOrderInner<s, s, s, s, s, s, s, s, s, s>;
+export type AlgolOrderInnerAnon = AlgolOrderInner<AlgolGameBlobAnon>;
 
 export type AlgolOrderRunGeneratorsAnon = AlgolOrderRunGenerators<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon
 >;
 
-export type AlgolOrderDoEffectsAnon = AlgolOrderDoEffects<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
->;
+export type AlgolOrderDoEffectsAnon = AlgolOrderDoEffects<AlgolGameBlobAnon>;
 
-export type AlgolOrderLinksAnon = AlgolOrderLinks<s, s, s, s, s, s, s, s, s, s>;
+export type AlgolOrderLinksAnon = AlgolOrderLinks<AlgolGameBlobAnon>;
 
-export type AlgolOrderAnimsAnon = AlgolOrderAnims<s, s, s, s, s, s, s, s, s, s>;
+export type AlgolOrderAnimsAnon = AlgolOrderAnims<AlgolGameBlobAnon>;

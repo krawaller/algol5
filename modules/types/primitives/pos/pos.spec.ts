@@ -5,6 +5,7 @@ type TestBlob = AlgolGameBlob<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygen",
   "mygrid",
   "mylayer",
   "mymark",

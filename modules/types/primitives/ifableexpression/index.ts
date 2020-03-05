@@ -7,97 +7,18 @@ import {
   AlgolIfableExpressionIfPlayer,
   AlgolIfableExpressionIfAction,
 } from "./ifableexpression.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
 export * from "./ifableexpression.interfaces";
 export * from "./ifableexpression.guard";
 export * from "./ifableexpression.anon";
 
-export type AlgolIfableExpression<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> =
+export type AlgolIfableExpression<Blob extends AlgolGameBlobAnon, _T> =
   | _T
-  | AlgolIfableExpressionIf<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolIfableExpressionIfAction<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolIfableExpressionIfPlayer<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolIfableExpressionIfActionElse<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolIfableExpressionIfElse<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolIfableExpressionIndexList<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolIfableExpressionPlayerCase<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
+  | AlgolIfableExpressionIf<Blob, _T>
+  | AlgolIfableExpressionIfAction<Blob, _T>
+  | AlgolIfableExpressionIfPlayer<Blob, _T>
+  | AlgolIfableExpressionIfActionElse<Blob, _T>
+  | AlgolIfableExpressionIfElse<Blob, _T>
+  | AlgolIfableExpressionIndexList<Blob, _T>
+  | AlgolIfableExpressionPlayerCase<Blob, _T>;

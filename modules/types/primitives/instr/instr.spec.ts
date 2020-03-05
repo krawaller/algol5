@@ -1,18 +1,21 @@
 import { AlgolInstr } from "./";
+import { AlgolGameBlob } from "../../blob";
 
-type TestInstruction = AlgolInstr<
+type TestBlob = AlgolGameBlob<
   "mybattlep",
   "mybattlev",
   "mycmnd",
+  "mygen",
   "mygrid",
   "mylayer",
   "mymark",
+  "myruleset",
   "myturnp",
   "myturnv",
   "myunit"
 >;
 
-const tests: TestInstruction[] = [
+const tests: AlgolInstr<TestBlob>[] = [
   "myunit",
   { line: ["woo", { line: ["bar"] }] },
   { orlist: ["wee", { if: [["true"], "bar"] }] },

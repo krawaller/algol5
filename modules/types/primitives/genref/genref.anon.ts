@@ -1,7 +1,6 @@
 import { AlgolGenRef, AlgolGenRefInner } from "./";
+import { AlgolGameBlobAnon } from "../../blob";
 
-type s = string;
+export type AlgolGenRefAnon = AlgolGenRef<AlgolGameBlobAnon>;
 
-export type AlgolGenRefAnon = AlgolGenRef<s, s, s, s, s, s, s, s, s>;
-
-export type AlgolGenRefInnerAnon = AlgolGenRefInner<s, s, s, s, s, s, s, s, s>;
+export type AlgolGenRefInnerAnon = AlgolGenRefInner<AlgolGameBlobAnon>;

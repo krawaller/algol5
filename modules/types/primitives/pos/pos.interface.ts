@@ -1,124 +1,50 @@
 import { AlgolVal } from "../value";
 import { AlgolSet } from "../set";
 import { AlgolPos } from ".";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolPosMark<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  mark: AlgolVal<Mrk, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolPosMark<Blob extends AlgolGameBlobAnon> {
+  mark: AlgolVal<Blob, Blob["mrk"]>;
 }
 
-export interface AlgolPosBattlePos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  battlepos: AlgolVal<Btlp, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolPosBattlePos<Blob extends AlgolGameBlobAnon> {
+  battlepos: AlgolVal<Blob, Blob["btlp"]>;
 }
 
-export interface AlgolPosTurnPos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  turnpos: AlgolVal<Turnp, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolPosTurnPos<Blob extends AlgolGameBlobAnon> {
+  turnpos: AlgolVal<Blob, Blob["turnp"]>;
 }
 
-export interface AlgolPosOnlyIn<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  onlyin: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolPosOnlyIn<Blob extends AlgolGameBlobAnon> {
+  onlyin: AlgolSet<Blob>;
 }
 
-export interface AlgolPosOffset<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
+export interface AlgolPosOffset<Blob extends AlgolGameBlobAnon> {
   offset: // pos, dir, forward, right
   | [
         // pos
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolPos<Blob>,
         // dir
-        AlgolVal<
-          1 | 2 | 3 | 4 | 5 | 6 | 7 | 8,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >,
+        AlgolVal<Blob, 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>,
         // steps forward
-        AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolVal<Blob, number>,
         // steps right
-        AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+        AlgolVal<Blob, number>
       ]
     // pos, dir, forward (right defaults to 0)
     | [
         // pos
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolPos<Blob>,
         // dir
-        AlgolVal<
-          1 | 2 | 3 | 4 | 5 | 6 | 7 | 8,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >,
+        AlgolVal<Blob, 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>,
         // steps forward
-        AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+        AlgolVal<Blob, number>
       ]
     // pos, dir (forward defaults to 1, right to 0)
     | [
         // pos
-        AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
+        AlgolPos<Blob>,
         // dir
-        AlgolVal<
-          1 | 2 | 3 | 4 | 5 | 6 | 7 | 8,
-          Btlp,
-          Btlv,
-          Cmnd,
-          Grid,
-          Layer,
-          Mrk,
-          Turnp,
-          Turnv
-        >
+        AlgolVal<Blob, 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>
       ];
 }

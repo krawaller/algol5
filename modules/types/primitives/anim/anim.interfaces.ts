@@ -1,122 +1,45 @@
 import { AlgolPos, AlgolVal, AlgolSet } from "../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolAnimEnterFrom<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string
-> {
-  enterfrom: [
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolAnimEnterFrom<Blob extends AlgolGameBlobAnon> {
+  enterfrom: [AlgolPos<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolAnimEnterIn<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string
-> {
-  enterin: [
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolAnimEnterIn<Blob extends AlgolGameBlobAnon> {
+  enterin: [AlgolSet<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolAnimExitTo<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string
-> {
-  exitto: [
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolAnimExitTo<Blob extends AlgolGameBlobAnon> {
+  exitto: [AlgolPos<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolAnimExitIn<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string
-> {
-  exitin: [
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolAnimExitIn<Blob extends AlgolGameBlobAnon> {
+  exitin: [AlgolSet<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolAnimGhost<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string,
-  Unit extends string
-> {
+export interface AlgolAnimGhost<Blob extends AlgolGameBlobAnon> {
   ghost: [
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolPos<Blob>,
+    AlgolPos<Blob>,
+    AlgolVal<Blob, Blob["unit"]>,
+    AlgolVal<Blob, 0 | 1 | 2>
   ];
 }
 
-export interface AlgolAnimGhostFromIn<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string,
-  Unit extends string
-> {
+export interface AlgolAnimGhostFromIn<Blob extends AlgolGameBlobAnon> {
   ghostfromin: [
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolSet<Blob>,
+    AlgolPos<Blob>,
+    AlgolVal<Blob, Blob["unit"]>,
+    AlgolVal<Blob, 0 | 1 | 2>
   ];
 }
 
-export interface AlgolAnimGhostToIn<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string,
-  Unit extends string
-> {
+export interface AlgolAnimGhostToIn<Blob extends AlgolGameBlobAnon> {
   ghosttoin: [
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<Unit, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolVal<0 | 1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolSet<Blob>,
+    AlgolPos<Blob>,
+    AlgolVal<Blob, Blob["unit"]>,
+    AlgolVal<Blob, 0 | 1 | 2>
   ];
 }

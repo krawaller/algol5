@@ -8,114 +8,49 @@ import {
   AlgolStatementIfActionElse,
   AlgolStatementIfElse,
   AlgolStatementIfPlayer,
-  AlgolStatementPlayerCase
+  AlgolStatementPlayerCase,
 } from "./statement.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
 type s = string;
 
-export type AlgolStatementAnon<_T> = AlgolStatement<_T, s, s, s, s, s, s, s, s>;
+export type AlgolStatementAnon<_T> = AlgolStatement<AlgolGameBlobAnon, _T>;
 export type AlgolStatementMultiAnon<_T> = AlgolStatementMulti<
-  _T,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon,
+  _T
 >;
 export type AlgolStatementForIdInAnon<_T> = AlgolStatementForIdIn<
-  _T,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon,
+  _T
 >;
 export type AlgolStatementForPosInAnon<_T> = AlgolStatementForPosIn<
-  _T,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon,
+  _T
 >;
 
 export type AlgolStatementIfElseAnon<_T> = AlgolStatementIfElse<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
-export type AlgolStatementIfAnon<_T> = AlgolStatementIf<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolStatementIfAnon<_T> = AlgolStatementIf<AlgolGameBlobAnon, _T>;
 
 export type AlgolStatementPlayerCaseAnon<_T> = AlgolStatementPlayerCase<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
 export type AlgolStatementIfPlayerAnon<_T> = AlgolStatementIfPlayer<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
 export type AlgolStatementIfActionAnon<_T> = AlgolStatementIfAction<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
 export type AlgolStatementIfActionElseAnon<_T> = AlgolStatementIfActionElse<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;

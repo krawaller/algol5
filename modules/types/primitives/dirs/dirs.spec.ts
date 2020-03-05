@@ -1,17 +1,20 @@
 import { AlgolDirs } from "./";
+import { AlgolGameBlob } from "../../blob";
 
-type TestDirs = AlgolDirs<
+type TestBlob = AlgolGameBlob<
   "mybattlep",
   "mybattlev",
   "mycmnd",
   "mygrid",
   "mylayer",
   "mymark",
+  "myruleset",
   "myturnp",
-  "myturnv"
+  "myturnv",
+  "myunit"
 >;
 
-const tests: TestDirs[] = [
+const tests: AlgolDirs<TestBlob>[] = [
   [1, 2, 3],
   "ortho",
   "diag",

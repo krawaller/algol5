@@ -1,209 +1,65 @@
 import { AlgolVal } from ".";
 
-import { SetPosVal, ValVal, SetVal } from "../_signatures";
 import { AlgolPos } from "../pos";
 import { AlgolSet } from "../set";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolValValue<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  value: AlgolVal<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolValValue<Blob extends AlgolGameBlobAnon, _T> {
+  value: AlgolVal<Blob, _T>;
 }
 
-export interface AlgolValRead<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  read: SetPosVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolValRead<Blob extends AlgolGameBlobAnon> {
+  read: [AlgolSet<Blob>, AlgolPos<Blob>, AlgolVal<Blob, string>];
 }
 
-export interface AlgolValLoopRead<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  loopread: AlgolVal<string, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolValLoopRead<Blob extends AlgolGameBlobAnon> {
+  loopread: AlgolVal<Blob, string>;
 }
 
-export interface AlgolValBattleVar<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  battlevar: AlgolVal<Btlv, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolValBattleVar<Blob extends AlgolGameBlobAnon> {
+  battlevar: AlgolVal<Blob, Blob["btlv"]>;
 }
 
-export interface AlgolValTurnVar<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  turnvar: AlgolVal<Turnv, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolValTurnVar<Blob extends AlgolGameBlobAnon> {
+  turnvar: AlgolVal<Blob, Blob["turnv"]>;
 }
 
-export interface AlgolValIdAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  idat: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolValIdAt<Blob extends AlgolGameBlobAnon> {
+  idat: AlgolPos<Blob>;
 }
 
-export interface AlgolValPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
-  pos: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolValPos<Blob extends AlgolGameBlobAnon> {
+  pos: AlgolPos<Blob>;
 }
 
-export interface AlgolValRelDir<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  reldir: ValVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolValRelDir<Blob extends AlgolGameBlobAnon> {
+  reldir: [AlgolVal<Blob, string | number>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolValGridIn<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  gridin: [
-    AlgolVal<Grid, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolValGridIn<Blob extends AlgolGameBlobAnon> {
+  gridin: [AlgolVal<Blob, Blob["grid"]>, AlgolSet<Blob>];
 }
 
-export interface AlgolValGridAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  gridat: [
-    AlgolVal<Grid, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolValGridAt<Blob extends AlgolGameBlobAnon> {
+  gridat: [AlgolVal<Blob, Blob["grid"]>, AlgolPos<Blob>];
 }
 
-export interface AlgolValSizeOf<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  sizeof: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolValSizeOf<Blob extends AlgolGameBlobAnon> {
+  sizeof: AlgolSet<Blob>;
 }
 
-export interface AlgolValHarvest<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  harvest: SetVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolValHarvest<Blob extends AlgolGameBlobAnon> {
+  harvest: [AlgolSet<Blob>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolValSum<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
-  sum: AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolValSum<Blob extends AlgolGameBlobAnon> {
+  sum: AlgolVal<Blob, number>[];
 }
 
-export interface AlgolValProd<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  prod: AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolValProd<Blob extends AlgolGameBlobAnon> {
+  prod: AlgolVal<Blob, number>[];
 }
 
-export interface AlgolValMinus<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  minus: AlgolVal<number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolValMinus<Blob extends AlgolGameBlobAnon> {
+  minus: AlgolVal<Blob, number>[];
 }

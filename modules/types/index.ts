@@ -7,6 +7,7 @@ export * from "./suite";
 export * from "./screenshot";
 export * from "./_args";
 export * from "./error";
+export * from "./blob";
 
 export type SaveData = {
   gameId: string;

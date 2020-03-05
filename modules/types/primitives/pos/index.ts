@@ -11,35 +11,20 @@ import {
   AlgolPosTurnPos,
   AlgolPosOffset,
 } from "./pos.interface";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolPos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = AlgolExpression<
-  AlgolPosInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+export type AlgolPos<Blob extends AlgolGameBlobAnon> = AlgolExpression<
+  Blob,
+  AlgolPosInner<Blob>
 >;
 
-type AlgolPosInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
-  | Mrk
+type AlgolPosInner<Blob extends AlgolGameBlobAnon> =
+  | Blob["mrk"]
   | ["start"]
   | ["target"]
   | ["looppos"]
-  | AlgolPosMark<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolPosOnlyIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolPosBattlePos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolPosTurnPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolPosOffset<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolPosMark<Blob>
+  | AlgolPosOnlyIn<Blob>
+  | AlgolPosBattlePos<Blob>
+  | AlgolPosTurnPos<Blob>
+  | AlgolPosOffset<Blob>;

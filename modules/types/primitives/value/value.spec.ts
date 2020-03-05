@@ -1,28 +1,22 @@
 import { AlgolVal } from "./";
+import { AlgolGameBlob } from "../../blob";
 
-type TestVal = AlgolVal<
-  "FOO" | "BAR",
+type TestBlob = AlgolGameBlob<
   "mybattlep",
   "mybattlev",
   "mycmnd",
   "mygrid",
   "mylayer",
   "mymark",
+  "myruleset",
   "myturnp",
-  "myturnv"
+  "myturnv",
+  "myunit"
 >;
 
-type TestNumberVal = AlgolVal<
-  number,
-  "mybattlep",
-  "mybattlev",
-  "mycmnd",
-  "mygrid",
-  "mylayer",
-  "mymark",
-  "myturnp",
-  "myturnv"
->;
+type TestVal = AlgolVal<TestBlob, "FOO" | "BAR">;
+
+type TestNumberVal = AlgolVal<TestBlob, number>;
 
 const tests: TestVal[] = [
   "FOO",

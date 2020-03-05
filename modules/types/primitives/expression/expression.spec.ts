@@ -1,19 +1,23 @@
 import { AlgolExpression } from "./";
+import { AlgolGameBlob } from "../../blob";
 
-type TestExpression = AlgolExpression<
-  "GNURP" | "FNURP",
+type TestBlob = AlgolGameBlob<
   "mybattlep",
   "mybattlev",
   "mycmnd",
   "mygrid",
   "mylayer",
   "mymark",
+  "myrule",
   "myturnp",
-  "myturnv"
+  "myturnv",
+  "myunit"
 >;
+
+type TestExpression = AlgolExpression<TestBlob, "GNURP" | "FNURP">;
 
 const tests: TestExpression[] = [
   "GNURP",
   { ifelse: [{ anyat: ["mylayer", "mymark"] }, "GNURP", "FNURP"] },
-  { indexlist: [["dir"], "GNURP", { playercase: ["GNURP", "FNURP"] }] }
+  { indexlist: [["dir"], "GNURP", { playercase: ["GNURP", "FNURP"] }] },
 ];

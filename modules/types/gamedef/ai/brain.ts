@@ -1,56 +1,18 @@
 import { AlgolVal, Partial } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type Brain<
-  AiAspect extends string,
-  AiGenerator extends string,
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string
-> = {
-  generators?: AlgolVal<
-    AiGenerator,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >[];
+type AiAspect = string; // TODO - add to blob?
+
+export type Brain<Blob extends AlgolGameBlobAnon> = {
+  generators?: AlgolVal<Blob, Blob["gen"]>[]; // TODO - AI-generator only?
   plus: Partial<
     {
-      [a in AiAspect]: AlgolVal<
-        number,
-        Btlp,
-        Btlv,
-        Cmnd,
-        Grid,
-        Layer,
-        Mrk,
-        Turnp,
-        Turnv
-      >
+      [a in AiAspect]: AlgolVal<Blob, number>;
     }
   >;
   minus: Partial<
     {
-      [a in AiAspect]: AlgolVal<
-        number,
-        Btlp,
-        Btlv,
-        Cmnd,
-        Grid,
-        Layer,
-        Mrk,
-        Turnp,
-        Turnv
-      >
+      [a in AiAspect]: AlgolVal<Blob, number>;
     }
   >;
 };

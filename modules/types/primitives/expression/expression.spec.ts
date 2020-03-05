@@ -1,21 +1,7 @@
 import { AlgolExpression } from "./";
-import { AlgolGameBlob } from "../../blob";
+import { AlgolTestBlob } from "../../blob";
 
-type TestBlob = AlgolGameBlob<
-  "mybattlep",
-  "mybattlev",
-  "mycmnd",
-  "mygen",
-  "mygrid",
-  "mylayer",
-  "mymark",
-  "myrule",
-  "myturnp",
-  "myturnv",
-  "myunit"
->;
-
-type TestExpression = AlgolExpression<TestBlob, "GNURP" | "FNURP">;
+type TestExpression = AlgolExpression<AlgolTestBlob, "GNURP" | "FNURP">;
 
 const tests: TestExpression[] = [
   "GNURP",

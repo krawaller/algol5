@@ -1,4 +1,5 @@
 export type AlgolGameBlob<
+  ArtifactLayer,
   Btlp,
   Btlv,
   Cmnd,
@@ -11,6 +12,7 @@ export type AlgolGameBlob<
   Turnv,
   Unit
 > = {
+  artifactLayer: ArtifactLayer;
   btlp: Btlp;
   btlv: Btlv;
   cmnd: Cmnd;
@@ -25,4 +27,32 @@ export type AlgolGameBlob<
 };
 
 type s = string;
-export type AlgolGameBlobAnon = AlgolGameBlob<s, s, s, s, s, s, s, s, s, s, s>;
+export type AlgolGameBlobAnon = AlgolGameBlob<
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s,
+  s
+>;
+
+export type AlgolTestBlob = AlgolGameBlob<
+  "myartifactlayer",
+  "mybattlep",
+  "mybattlev",
+  "mycmnd",
+  "mygen",
+  "mygrid",
+  "mylayer",
+  "mymark",
+  "myrule",
+  "myturnp",
+  "myturnv",
+  "myunit"
+>;

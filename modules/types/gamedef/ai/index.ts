@@ -1,27 +1,15 @@
 import { AlgolVal, Generators, TerrainDef, AlgolGrid } from "../../";
 
 import { Brain } from "./brain";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AI<
-  AiArtifactLayer extends string,
-  AiAspect extends string,
-  AiBrain extends string,
-  AiGenerator extends string,
-  AiGrid extends string,
-  AiTerrain extends string,
-  AiTerrainLayer extends string,
-  Btlp extends string,
-  Btlv extends string,
-  BoardHeight extends number,
-  BoardWidth extends number,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Position extends string,
-  Turnp extends string,
-  Turnv extends string
-> = {
+type AiTerrain = string;
+type AiGrid = string;
+type AiArtifactLayer = string;
+type BoardHeight = number;
+type BoardWidth = number;
+
+export type AI<Blob extends AlgolGameBlobAnon> = {
   terrain?: { [t in AiTerrain]: TerrainDef<Position> };
   grids?: { [s in AiGrid]: AlgolGrid<BoardHeight, BoardWidth> };
   generators?: Generators<
@@ -47,7 +35,7 @@ export type AI<
       Mrk,
       Turnp,
       Turnv
-    >
+    >;
   };
   brains: {
     [b in AiBrain]: Brain<
@@ -61,6 +49,6 @@ export type AI<
       Mrk,
       Turnp,
       Turnv
-    >
+    >;
   };
 };

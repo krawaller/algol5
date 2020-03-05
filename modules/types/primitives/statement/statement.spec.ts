@@ -2,6 +2,7 @@ import { AlgolStatement } from "./";
 import { AlgolGameBlob } from "../../blob";
 
 type TestBlob = AlgolGameBlob<
+  "myartifactlayer",
   "mybattlep",
   "mybattlev",
   "mycmnd",

@@ -1,28 +1,14 @@
 import { AlgolGenRef } from "./";
-import { AlgolGameBlob } from "../../blob";
+import { AlgolTestBlob } from "../../blob";
 
-type TestBlob = AlgolGameBlob<
-  "mybattlep",
-  "mybattlev",
-  "mycmnd",
-  "mygen1" | "mygen2",
-  "mygrid",
-  "mylayer",
-  "mymark",
-  "myruleset",
-  "myturnp",
-  "myturnv",
-  "myunit"
->;
-
-const tests: AlgolGenRef<TestBlob>[] = [
-  { playercase: ["mygen1", { ifaction: ["mycmnd", "mygen2"] }] },
-  { multi: ["mygen1", { ifplayer: [2, "mygen2"] }] },
+const tests: AlgolGenRef<AlgolTestBlob>[] = [
+  { playercase: ["mygen", { ifaction: ["mycmnd", "mygen"] }] },
+  { multi: ["mygen", { ifplayer: [2, "mygen"] }] },
   {
     ifelse: [
       { anyat: ["mylayer", "mymark"] },
-      "mygen1",
-      { if: [["true"], "mygen2"] },
+      "mygen",
+      { if: [["true"], "mygen"] },
     ],
   },
 ];

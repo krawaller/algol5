@@ -1,9 +1,8 @@
-export type Graphics<
-  Terrain extends string = string,
-  Unit extends string = string
-> = {
-  icons: AlgolIconMap<Unit>;
-  tiles: AlgolTileMap<Terrain>;
+import { AlgolGameBlobAnon } from "../blob";
+
+export type Graphics<Blob extends AlgolGameBlobAnon> = {
+  icons: AlgolIconMap<Blob>;
+  tiles: AlgolTileMap<Blob>;
 };
 
 export const algolIcons = {
@@ -35,12 +34,11 @@ export function isAlgolTile(str: string): str is AlgolTile {
 }
 export type AlgolTile = keyof typeof algolTiles;
 
-export type AlgolIconMap<Unit extends string = string> = Record<
-  Unit,
-  AlgolIcon
->;
-export type AlgolTileMap<Terrain extends string = string> = Partial<
-  Record<Terrain, AlgolTile>
+export type AlgolIconMap<
+  Blob extends AlgolGameBlobAnon = AlgolGameBlobAnon
+> = Record<Blob["unit"], AlgolIcon>;
+export type AlgolTileMap<Blob extends AlgolGameBlobAnon> = Partial<
+  Record<Blob["terrain"], AlgolTile>
 >;
 
 export type AlgolGameGraphics = {

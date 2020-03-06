@@ -1,11 +1,12 @@
 import { AlgolEntity } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type TerrainDef<Position extends string> =
+export type TerrainDef<Blob extends AlgolGameBlobAnon> =
   | Partial<{
-      0: AlgolEntity<Position>[];
-      1: AlgolEntity<Position>[];
-      2: AlgolEntity<Position>[];
+      0: AlgolEntity<Blob>[];
+      1: AlgolEntity<Blob>[];
+      2: AlgolEntity<Blob>[];
     }>
-  | AlgolEntity<Position>[];
+  | AlgolEntity<Blob>[];
 
-export type TerrainDefAnon = TerrainDef<string>;
+export type TerrainDefAnon = TerrainDef<AlgolGameBlobAnon>;

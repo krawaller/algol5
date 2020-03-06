@@ -1,25 +1,6 @@
 import { AlgolEffectActionDef } from "./action";
+import { AlgolGameBlobAnon } from "../../../blob";
 
 export type AlgolCommandDef<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Gen,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> = AlgolEffectActionDef<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Gen,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
->;
+  Blob extends AlgolGameBlobAnon
+> = AlgolEffectActionDef<Blob>;

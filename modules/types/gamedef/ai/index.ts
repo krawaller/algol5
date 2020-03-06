@@ -3,52 +3,22 @@ import { AlgolVal, Generators, TerrainDef, AlgolGrid } from "../../";
 import { Brain } from "./brain";
 import { AlgolGameBlobAnon } from "../../blob";
 
+type AiAspect = string;
+type AiBrain = string;
 type AiTerrain = string;
 type AiGrid = string;
-type AiArtifactLayer = string;
+type AiGenerator = string;
 type BoardHeight = number;
 type BoardWidth = number;
 
 export type AI<Blob extends AlgolGameBlobAnon> = {
-  terrain?: { [t in AiTerrain]: TerrainDef<Position> };
+  terrain?: { [t in AiTerrain]: TerrainDef<Blob["pos"]> };
   grids?: { [s in AiGrid]: AlgolGrid<BoardHeight, BoardWidth> };
-  generators?: Generators<
-    AiArtifactLayer,
-    Btlp,
-    Btlv,
-    Cmnd,
-    AiGenerator,
-    Grid | AiGrid,
-    Layer | AiTerrainLayer | AiArtifactLayer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+  generators?: Generators<Blob>; // TODO with ai stuff! :/
   aspects: {
-    [a in AiAspect]: AlgolVal<
-      AiGenerator,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid | AiGrid,
-      Layer | AiTerrainLayer | AiArtifactLayer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
+    [a in AiAspect]: AlgolVal<Blob, AiGenerator>;
   };
   brains: {
-    [b in AiBrain]: Brain<
-      AiAspect,
-      AiGenerator,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid | AiGrid,
-      Layer | AiTerrainLayer | AiArtifactLayer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
+    [b in AiBrain]: Brain<Blob>;
   };
 };

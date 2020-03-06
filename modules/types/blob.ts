@@ -1,5 +1,6 @@
 export type AlgolGameBlob<
   ArtifactLayer,
+  Board,
   Btlp,
   Btlv,
   Cmnd,
@@ -7,12 +8,17 @@ export type AlgolGameBlob<
   Grid,
   Layer,
   Mrk,
+  Phase,
+  Pos,
   Ruleset,
+  Setup,
+  Terrain,
   Turnp,
   Turnv,
   Unit
 > = {
   artifactLayer: ArtifactLayer;
+  board: Board;
   btlp: Btlp;
   btlv: Btlv;
   cmnd: Cmnd;
@@ -20,7 +26,11 @@ export type AlgolGameBlob<
   grid: Grid;
   layer: Layer;
   mrk: Mrk;
+  phase: Phase;
+  pos: Pos;
   ruleset: Ruleset;
+  setup: Setup;
+  terrain: Terrain;
   turnp: Turnp;
   turnv: Turnv;
   unit: Unit;
@@ -29,12 +39,17 @@ export type AlgolGameBlob<
 type s = string;
 export type AlgolGameBlobAnon = AlgolGameBlob<
   s,
+  "basic" | s, // board
   s,
   s,
   s,
   s,
   s,
   s,
+  s,
+  s,
+  "basic" | s, // rule
+  "basic" | s, // setup
   s,
   s,
   s,
@@ -44,6 +59,7 @@ export type AlgolGameBlobAnon = AlgolGameBlob<
 
 export type AlgolTestBlob = AlgolGameBlob<
   "myartifactlayer",
+  "myboard" | "basic",
   "mybattlep",
   "mybattlev",
   "mycmnd",
@@ -51,7 +67,11 @@ export type AlgolTestBlob = AlgolGameBlob<
   "mygrid",
   "mylayer",
   "mymark",
-  "myrule",
+  "myphase",
+  "mypos",
+  "myrule" | "basic",
+  "mysetup" | "basic",
+  "myterrain",
   "myturnp",
   "myturnv",
   "myunit"

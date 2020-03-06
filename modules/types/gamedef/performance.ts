@@ -1,9 +1,11 @@
-export type AlgolPerformance<Command extends string, Mark extends string> = {
+import { AlgolGameBlobAnon } from "../blob";
+
+export type AlgolPerformance<Blob extends AlgolGameBlobAnon> = {
   canAlwaysEnd: Partial<
-    { [actionName in Command | Mark | "startTurn"]: boolean }
+    { [actionName in Blob["cmnd"] | Blob["mrk"] | "startTurn"]: boolean }
   >;
   massiveTree?: Partial<
-    { [actionName in Command | Mark | "startTurn"]: boolean }
+    { [actionName in Blob["cmnd"] | Blob["mrk"] | "startTurn"]: boolean }
   >;
-  noEndGameCheck?: Command[];
+  noEndGameCheck?: Blob["cmnd"][];
 };

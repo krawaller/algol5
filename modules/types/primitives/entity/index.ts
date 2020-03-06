@@ -13,14 +13,15 @@ import {
   AlgolEntityDataSites,
   AlgolEntityHoleRect,
   AlgolEntityRect,
-  AlgolEntitySites
+  AlgolEntitySites,
 } from "./entity.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolEntity<Position extends string> =
-  | Position
-  | AlgolEntityDataHoleRect<Position>
-  | AlgolEntityDataRect<Position>
-  | AlgolEntityDataSites<Position>
-  | AlgolEntityHoleRect<Position>
-  | AlgolEntityRect<Position>
-  | AlgolEntitySites<Position>;
+export type AlgolEntity<Blob extends AlgolGameBlobAnon> =
+  | Blob["pos"]
+  | AlgolEntityDataHoleRect<Blob>
+  | AlgolEntityDataRect<Blob>
+  | AlgolEntityDataSites<Blob>
+  | AlgolEntityHoleRect<Blob>
+  | AlgolEntityRect<Blob>
+  | AlgolEntitySites<Blob>;

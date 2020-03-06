@@ -1,25 +1,27 @@
+import { AlgolGameBlobAnon } from "../../blob";
+
 type Data = { [idx: string]: number | string };
 
-export interface AlgolEntitySites<Position extends string> {
-  sites: Position[];
+export interface AlgolEntitySites<Blob extends AlgolGameBlobAnon> {
+  sites: Blob["pos"][];
 }
 
-export interface AlgolEntityDataSites<Position extends string> {
-  datasites: [Data, ...Position[]];
+export interface AlgolEntityDataSites<Blob extends AlgolGameBlobAnon> {
+  datasites: [Data, ...Blob["pos"][]];
 }
 
-export interface AlgolEntityRect<Position extends string> {
-  rect: [Position, Position];
+export interface AlgolEntityRect<Blob extends AlgolGameBlobAnon> {
+  rect: [Blob["pos"], Blob["pos"]];
 }
 
-export interface AlgolEntityDataRect<Position extends string> {
-  datarect: [Data, Position, Position];
+export interface AlgolEntityDataRect<Blob extends AlgolGameBlobAnon> {
+  datarect: [Data, Blob["pos"], Blob["pos"]];
 }
 
-export interface AlgolEntityHoleRect<Position extends string> {
-  holerect: [Position, Position, ...Position[]];
+export interface AlgolEntityHoleRect<Blob extends AlgolGameBlobAnon> {
+  holerect: [Blob["pos"], Blob["pos"], ...Blob["pos"][]];
 }
 
-export interface AlgolEntityDataHoleRect<Position extends string> {
-  dataholerect: [Data, Position, Position, ...Position[]];
+export interface AlgolEntityDataHoleRect<Blob extends AlgolGameBlobAnon> {
+  dataholerect: [Data, Blob["pos"], Blob["pos"], ...Blob["pos"][]];
 }

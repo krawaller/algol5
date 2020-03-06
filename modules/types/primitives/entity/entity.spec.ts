@@ -1,15 +1,14 @@
 import { AlgolEntity } from "./";
+import { AlgolTestBlob } from "../../blob";
 
-type TestPosition = "a1" | "b2" | "c3" | "d4";
-
-type TestEntity = AlgolEntity<TestPosition>;
+type TestEntity = AlgolEntity<AlgolTestBlob>;
 
 const testEntities: TestEntity[] = [
-  "c3",
-  { sites: ["a1", "c3", "d4"] },
-  { datasites: [{ foo: "bar" }, "b2", "d4", "a1"] },
-  { rect: ["a1", "b2"] },
-  { datarect: [{ foo: "bar" }, "b2", "d4"] },
-  { holerect: ["a1", "c3", "b2"] },
-  { dataholerect: [{ baz: 777 }, "a1", "c3", "b2"] }
+  "mypos",
+  { sites: ["mypos"] },
+  { datasites: [{ foo: "bar" }, "mypos", "mypos"] },
+  { rect: ["mypos", "mypos"] },
+  { datarect: [{ foo: "bar" }, "mypos", "mypos"] },
+  { holerect: ["mypos", "mypos", "mypos"] },
+  { dataholerect: [{ baz: 777 }, "mypos", "mypos", "mypos"] },
 ];

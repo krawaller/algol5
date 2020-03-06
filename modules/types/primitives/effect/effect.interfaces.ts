@@ -1,4 +1,3 @@
-import { PosPos, ValPos, PosVal, SetVal, ValVal } from "../_signatures";
 import { AlgolSet } from "../set";
 import { AlgolVal } from "../value";
 import { AlgolPos } from "../pos";

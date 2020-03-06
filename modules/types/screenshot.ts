@@ -1,5 +1,6 @@
 import { AlgolArmy } from "./generated";
 import { AlgolIcon, AlgolSetup } from "./gamedef";
+import { AlgolGameBlobAnon } from "./blob";
 
 export type AlgolScreenshot = {
   marks: string[];
@@ -16,16 +17,13 @@ export type AlgolSprite = {
   };
 };
 
-export type AlgolArrangement<
-  Position extends string = string,
-  Unit extends string = AlgolIcon
-> = {
+export type AlgolArrangement<Blob extends AlgolGameBlobAnon> = {
   marks?: Position[];
   potentialMarks?: Position[];
-  setup: AlgolSetup<Position, Unit>;
+  setup: AlgolSetup<Blob>;
 };
 
-export type AlgolArrangements<
-  Position extends string = string,
-  Unit extends string = AlgolIcon
-> = Record<string, AlgolArrangement<Position, Unit>>;
+export type AlgolArrangements<Blob extends AlgolGameBlobAnon> = Record<
+  string,
+  AlgolArrangement<Blob>
+>;

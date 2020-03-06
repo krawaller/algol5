@@ -12,7 +12,7 @@ type BoardHeight = number;
 type BoardWidth = number;
 
 export type AI<Blob extends AlgolGameBlobAnon> = {
-  terrain?: { [t in AiTerrain]: TerrainDef<Blob["pos"]> };
+  terrain?: { [t in AiTerrain]: TerrainDef<Blob> };
   grids?: { [s in AiGrid]: AlgolGrid<BoardHeight, BoardWidth> };
   generators?: Generators<Blob>; // TODO with ai stuff! :/
   aspects: {

@@ -1,14 +1,19 @@
 import { coords2pos, terrainLayers } from "../../common";
 import { allTiles, colours, svgPicSide, allMarks, allIcons } from "../sprites";
 import { tileAtPos } from "./tileAtPos";
-import { AlgolSprite, AlgolBoardAnon, AlgolTileMap } from "../../types";
+import {
+  AlgolSprite,
+  AlgolBoardAnon,
+  AlgolTileMap,
+  AlgolGameBlobAnon,
+} from "../../types";
 import { getBounds } from "./getBounds";
 
 const side = svgPicSide;
 
 type RenderTilesAndIconsOpts = {
   board: AlgolBoardAnon;
-  tileMap: AlgolTileMap;
+  tileMap: AlgolTileMap<AlgolGameBlobAnon>;
   sprites?: AlgolSprite[];
   from: string;
   to: string;

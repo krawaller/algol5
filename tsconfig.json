@@ -12,6 +12,13 @@
     "jsx": "react",
     "types": ["node", "jest", "fs-extra", "prettier", "lodash.isequal"]
   },
-  "include": ["modules", "global.d.ts"],
-  "exclude": ["archive", "dev", "node_modules", "**/node_modules"]
+  "include": ["modules/types", "modules/games/definitions", "global.d.ts"],
+  "exclude": [
+    "archive",
+    "dev",
+    "node_modules",
+    "**/node_modules",
+    "dist",
+    "commands"
+  ]
 }

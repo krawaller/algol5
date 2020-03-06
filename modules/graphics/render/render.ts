@@ -1,14 +1,19 @@
 import { svgPicSide, svgFrameSide } from "../sprites";
 import formatXml from "xml-formatter";
 import { renderFrame } from "./renderFrame";
-import { AlgolSprite, AlgolBoardAnon, AlgolTileMap } from "../../types";
+import {
+  AlgolSprite,
+  AlgolBoardAnon,
+  AlgolTileMap,
+  AlgolGameBlobAnon,
+} from "../../types";
 import { renderTilesAndIcons } from "./renderTilesAndIcons";
 import { getBounds } from "./getBounds";
 import { renderGradient } from "./renderGradients";
 
 type RenderOpts = {
   board: AlgolBoardAnon;
-  tileMap: AlgolTileMap;
+  tileMap: AlgolTileMap<AlgolGameBlobAnon>;
   sprites?: AlgolSprite[];
   from?: string;
   to?: string;

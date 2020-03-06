@@ -10,9 +10,9 @@ export default function templateAnim(gameId: string) {
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { ${capId}Anim } from './_types';
+import { ${capId}Definition } from './_types';
 
-const ${gameId}Anim: ${capId}Anim = {
+const ${gameId}Anim: ${capId}Definition['anim'] = {
 
 };
 

@@ -2,9 +2,9 @@ import { newCode } from "../newCode";
 
 export default function templateMeta(gameId: string) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
-  return `import { ${capId}Meta } from './_types';
+  return `import { ${capId}Definition } from './_types';
 
-const ${gameId}Meta: ${capId}Meta = {
+const ${gameId}Meta: ${capId}Definition['meta'] = {
   id: "${gameId}",
   name: "${capId}",
   tags: [],

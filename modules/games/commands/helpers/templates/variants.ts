@@ -1,9 +1,9 @@
 export default function templateVariants(gameId: string) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
   return `
-import { ${capId}VariantBook } from "./_types";
+import { ${capId}Definition } from "./_types";
 
-const ${gameId}VariantBook: ${capId}VariantBook = {
+const ${gameId}VariantBook: ${capId}Definition['variants'] = {
   basic: {
     ruleset: "basic",
     board: "basic",

@@ -1,8 +1,8 @@
 export default function templateFlow(gameId: string) {
   const capId = gameId[0].toUpperCase().concat(gameId.slice(1));
-  return `import { ${capId}Flow } from './_types';
+  return `import { ${capId}Definition } from './_types';
 
-const ${gameId}Flow: ${capId}Flow = {
+const ${gameId}Flow: ${capId}Definition['flow'] = {
   startTurn: {
 
   },

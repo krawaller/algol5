@@ -85,7 +85,7 @@ export default async function analyze(def: FullDefAnon | string) {
   const aiTerrainNames = Object.keys(AI.terrain || {});
   const aiTerrainLayers = terrainLayerNames({
     ...def.boards.basic,
-    terrain: AI.terrain,
+    //terrain: AI.terrain, // TODO - AI terrain, how to handle
   });
   const aiGenerators = Object.keys(AI.generators || {});
   const aiAspects = Object.keys(AI.aspects);
@@ -133,158 +133,103 @@ export default async function analyze(def: FullDefAnon | string) {
   );
   const variantNames = Object.keys(def.variants);
 
-  const analysis = `import { CommonLayer, Generators, Flow, AlgolBoard, AI, AlgolAnimCollection, Graphics, Instructions, AlgolMeta, AlgolSetupBook, AlgolGameTestSuite, FullDef, AlgolPerformance, AlgolVariantBook } from '../../../types';
+  const analysis = `import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type ${capId}BoardHeight = ${maxHeight};
-export type ${capId}BoardWidth = ${maxWidth};
+type ${capId}BoardHeight = ${maxHeight};
+type ${capId}BoardWidth = ${maxWidth};
 
-export type ${capId}Anim = AlgolAnimCollection<${typeSignature(
-    "AlgolAnimCollection",
-    gameId
-  )}>;
-
-export type ${capId}Terrain = ${
+type ${capId}Terrain = ${
     terrains.length ? terrains.map(t => `"${t}"`).join(" | ") : "never"
   };
-export type ${capId}Unit = ${
+type ${capId}Unit = ${
     units.length ? units.map(t => `"${t}"`).join(" | ") : "never"
   };
-export type ${capId}Mark = ${
+type ${capId}Mark = ${
     marks.length ? marks.map(t => `"${t}"`).join(" | ") : "never"
   };
-export type ${capId}Command = ${
+type ${capId}Command = ${
     commands.length ? commands.map(t => `"${t}"`).join(" | ") : "never"
   };
-export type ${capId}PhaseCommand = ${
+type ${capId}PhaseCommand = ${
     nonEndCommands.length
       ? nonEndCommands.map(t => `"${t}"`).join(" | ")
       : "never"
   };
-export type ${capId}Phase = "startTurn" | ${capId}Mark${
+type ${capId}Phase = "startTurn" | ${capId}Mark${
     nonEndCommands.length ? ` | ${capId}PhaseCommand` : ""
   };
-export type ${capId}UnitLayer = ${
+type ${capId}UnitLayer = ${
     myUnitLayerNames.length
       ? myUnitLayerNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
-export type ${capId}Generator = ${
+type ${capId}Generator = ${
     myGeneratorNames.length
       ? myGeneratorNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
-export type ${capId}ArtifactLayer = ${
+type ${capId}ArtifactLayer = ${
     myArtifactLayerNames.length
       ? myArtifactLayerNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
-export type ${capId}TerrainLayer = ${
+type ${capId}TerrainLayer = ${
     myTerrainLayerNames.length
       ? myTerrainLayerNames.map(t => `"${t}"`).join(" | ")
       : "never"
   };
-export type ${capId}Layer = CommonLayer${
+type ${capId}Layer = CommonLayer${
     myUnitLayerNames.length ? ` | ${capId}UnitLayer` : ""
   }${myArtifactLayerNames.length ? ` | ${capId}ArtifactLayer` : ""}${
     myTerrainLayerNames.length ? ` | ${capId}TerrainLayer` : ""
   };
-export type ${capId}BattlePos = ${
+type ${capId}BattlePos = ${
     battlepos.length ? battlepos.map(t => `"${t}"`).join(" | ") : "never"
   };
-export type ${capId}BattleVar = ${
+type ${capId}BattleVar = ${
     battlevar.length ? battlevar.map(t => `"${t}"`).join(" | ") : "never"
   };
-export type ${capId}TurnPos = ${
+type ${capId}TurnPos = ${
     turnpos.length ? turnpos.map(t => `"${t}"`).join(" | ") : "never"
   };
-export type ${capId}TurnVar = ${
+type ${capId}TurnVar = ${
     turnvar.length ? turnvar.map(t => `"${t}"`).join(" | ") : "never"
   };
 
-export type ${capId}BoardName = ${boardNames.map(n => `"${n}"`).join(" | ")};
-export type ${capId}SetupName = ${setupNames.map(n => `"${n}"`).join(" | ")};
-export type ${capId}RulesetName = ${rulesetNames
-    .map(n => `"${n}"`)
-    .join(" | ")};
-export type ${capId}VariantName = ${variantNames
-    .map(n => `"${n}"`)
-    .join(" | ")};
+type ${capId}BoardName = ${boardNames.map(n => `"${n}"`).join(" | ")};
+type ${capId}SetupName = ${setupNames.map(n => `"${n}"`).join(" | ")};
+type ${capId}RulesetName = ${rulesetNames.map(n => `"${n}"`).join(" | ")};
+type ${capId}VariantName = ${variantNames.map(n => `"${n}"`).join(" | ")};
 
-export type ${capId}VariantBook = AlgolVariantBook<${typeSignature(
-    "AlgolVariantBook",
-    gameId
-  )}>;
-
- 
-export type ${capId}Generators = Generators<${typeSignature(
-    "Generators",
-    gameId
-  )}>;
-export type ${capId}Flow = Flow<${typeSignature("Flow", gameId)}>;
-export type ${capId}Board = AlgolBoard<${typeSignature("AlgolBoard", gameId)}>;
-export type ${capId}AI = AI<${typeSignature("AI", gameId)}>;
-export type ${capId}Graphics = Graphics<${typeSignature("Graphics", gameId)}>;
-export type ${capId}Instructions = Instructions<${typeSignature(
-    "Instructions",
-    gameId
-  )}>;
-export type ${capId}Meta = AlgolMeta<${typeSignature("AlgolMeta", gameId)}>;
-export type ${capId}Performance = AlgolPerformance<${typeSignature(
-    "AlgolPerformance",
-    gameId
-  )}>;
-export type ${capId}Scripts = AlgolGameTestSuite<${typeSignature(
-    "AlgolGameTestSuite",
-    gameId
-  )}>;
-export type ${capId}SetupBook = AlgolSetupBook<${typeSignature(
-    "AlgolSetupBook",
-    gameId
-  )}>;
-
-export type ${capId}Definition = FullDef<${typeSignature("FullDef", gameId)}>;
-
-export type ${capId}Grid = ${
+type ${capId}Grid = ${
     gridNames.length ? gridNames.map(t => `"${t}"`).join(" | ") : "never"
   };
 
-export type ${capId}AiGenerator = ${
-    aiGenerators.length ? aiGenerators.map(t => `"${t}"`).join(" | ") : "never"
-  };
-
-export type ${capId}AiAspect = ${
-    aiAspects.length ? aiAspects.map(t => `"${t}"`).join(" | ") : "never"
-  };
-
-export type ${capId}AiGrid = ${
-    aiGrids.length ? aiGrids.map(t => `"${t}"`).join(" | ") : "never"
-  };
-
-export type ${capId}AiArtifactLayer = ${
-    aiArtifactLayerNames.length
-      ? aiArtifactLayerNames.map(t => `"${t}"`).join(" | ")
-      : "never"
-  };
-
-export type ${capId}AiBrain = ${
-    aiBrains.length ? aiBrains.map(t => `"${t}"`).join(" | ") : "never"
-  };
-
-export type ${capId}AiTerrainLayer = ${
-    aiTerrainLayers.length
-      ? aiTerrainLayers.map(t => `"${t}"`).join(" | ")
-      : "never"
-  };
-
-export type ${capId}AiTerrain = ${
-    aiTerrainNames.length
-      ? aiTerrainNames.map(t => `"${t}"`).join(" | ")
-      : "never"
-  };
-
-export type ${capId}Position = ${boardPositions(maxHeight, maxWidth)
+type ${capId}Position = ${boardPositions(maxHeight, maxWidth)
     .map(t => `"${t}"`)
     .join(" | ")};
+
+type ${capId}Blob = AlgolGameBlob<
+  ${capId}ArtifactLayer,
+  ${capId}BoardName,
+  ${capId}BattlePos,
+  ${capId}BattleVar,
+  ${capId}Command,
+  ${capId}Generator,
+  ${capId}Grid,
+  ${capId}Layer,
+  ${capId}Mark,
+  ${capId}Phase,
+  ${capId}Position,
+  ${capId}RulesetName,
+  ${capId}SetupName,
+  ${capId}Terrain,
+  ${capId}TurnPos,
+  ${capId}TurnVar,
+  ${capId}Unit
+>;
+
+export type ${capId}Definition = FullDef<${capId}Blob>;
 `;
   const code = "// Generated file, do not edit here!\n" + analysis;
   await fs.writeFile(

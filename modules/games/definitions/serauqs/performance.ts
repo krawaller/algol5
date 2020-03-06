@@ -1,6 +1,6 @@
-import { SerauqsPerformance } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsPerformance: SerauqsPerformance = {
+const serauqsPerformance: SerauqsDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {},
   noEndGameCheck: ["promote"]

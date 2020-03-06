@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { TrafficlightsGenerators } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsGenerators: TrafficlightsGenerators = {
+const trafficlightsGenerators: TrafficlightsDefinition["generators"] = {
   findlines: {
     type: "walker",
     dirs: [1, 2, 3, 4],

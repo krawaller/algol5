@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { ThreemusketeersGenerators } from "./_types";
+import { ThreemusketeersDefinition } from "./_types";
 
-const threemusketeersGenerators: ThreemusketeersGenerators = {
+const threemusketeersGenerators: ThreemusketeersDefinition["generators"] = {
   findstrandedmusketeers: {
     type: "neighbour",
     dirs: "ortho",

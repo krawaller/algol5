@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { AriesGraphics } from "./_types";
+import { AriesDefinition } from "./_types";
 
-const ariesGraphics: AriesGraphics = {
+const ariesGraphics: AriesDefinition["graphics"] = {
   tiles: { corner: "playercolour" },
   icons: { soldiers: "rook" }
 };

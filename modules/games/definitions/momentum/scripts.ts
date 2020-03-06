@@ -1,6 +1,6 @@
-import { MomentumScripts } from "./_types";
+import { MomentumDefinition } from "./_types";
 
-const momentumScripts: MomentumScripts = {
+const momentumScripts: MomentumDefinition["scripts"] = {
   basic: [
     {
       commands: [

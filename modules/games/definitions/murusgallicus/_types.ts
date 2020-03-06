@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type MurusgallicusBoardHeight = 7;
-export type MurusgallicusBoardWidth = 8;
+type MurusgallicusBoardHeight = 7;
+type MurusgallicusBoardWidth = 8;
 
-export type MurusgallicusAnim = AlgolAnimCollection<
-  MurusgallicusBattlePos,
-  MurusgallicusBattleVar,
-  MurusgallicusCommand,
-  MurusgallicusGrid,
-  MurusgallicusLayer,
-  MurusgallicusMark,
-  MurusgallicusTurnPos,
-  MurusgallicusTurnVar,
-  MurusgallicusUnit
->;
-
-export type MurusgallicusTerrain = "homerow";
-export type MurusgallicusUnit = "towers" | "walls";
-export type MurusgallicusMark = "selecttower" | "selectmove" | "selectcrush";
-export type MurusgallicusCommand = "move" | "crush";
-export type MurusgallicusPhaseCommand = never;
-export type MurusgallicusPhase = "startTurn" | MurusgallicusMark;
-export type MurusgallicusUnitLayer =
+type MurusgallicusTerrain = "homerow";
+type MurusgallicusUnit = "towers" | "walls";
+type MurusgallicusMark = "selecttower" | "selectmove" | "selectcrush";
+type MurusgallicusCommand = "move" | "crush";
+type MurusgallicusPhaseCommand = never;
+type MurusgallicusPhase = "startTurn" | MurusgallicusMark;
+type MurusgallicusUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -50,187 +23,38 @@ export type MurusgallicusUnitLayer =
   | "mywalls"
   | "oppwalls"
   | "neutralwalls";
-export type MurusgallicusGenerator =
+type MurusgallicusGenerator =
   | "findmovetargets"
   | "findmoveresults"
   | "findcrushtargets";
-export type MurusgallicusArtifactLayer =
+type MurusgallicusArtifactLayer =
   | "movetargets"
   | "madetowers"
   | "madewalls"
   | "crushtargets";
-export type MurusgallicusTerrainLayer =
+type MurusgallicusTerrainLayer =
   | "homerow"
   | "myhomerow"
   | "opphomerow"
   | "nohomerow";
-export type MurusgallicusLayer =
+type MurusgallicusLayer =
   | CommonLayer
   | MurusgallicusUnitLayer
   | MurusgallicusArtifactLayer
   | MurusgallicusTerrainLayer;
-export type MurusgallicusBattlePos = never;
-export type MurusgallicusBattleVar = never;
-export type MurusgallicusTurnPos = never;
-export type MurusgallicusTurnVar = never;
+type MurusgallicusBattlePos = never;
+type MurusgallicusBattleVar = never;
+type MurusgallicusTurnPos = never;
+type MurusgallicusTurnVar = never;
 
-export type MurusgallicusBoardName = "basic";
-export type MurusgallicusSetupName = "basic";
-export type MurusgallicusRulesetName = "basic";
-export type MurusgallicusVariantName = "basic";
+type MurusgallicusBoardName = "basic";
+type MurusgallicusSetupName = "basic";
+type MurusgallicusRulesetName = "basic";
+type MurusgallicusVariantName = "basic";
 
-export type MurusgallicusVariantBook = AlgolVariantBook<
-  MurusgallicusBoardName,
-  MurusgallicusRulesetName,
-  MurusgallicusSetupName
->;
+type MurusgallicusGrid = never;
 
-export type MurusgallicusGenerators = Generators<
-  MurusgallicusArtifactLayer,
-  MurusgallicusBattlePos,
-  MurusgallicusBattleVar,
-  MurusgallicusCommand,
-  MurusgallicusGenerator,
-  MurusgallicusGrid,
-  MurusgallicusLayer,
-  MurusgallicusMark,
-  MurusgallicusTurnPos,
-  MurusgallicusTurnVar
->;
-export type MurusgallicusFlow = Flow<
-  MurusgallicusBattlePos,
-  MurusgallicusBattleVar,
-  MurusgallicusCommand,
-  MurusgallicusGenerator,
-  MurusgallicusGrid,
-  MurusgallicusLayer,
-  MurusgallicusMark,
-  MurusgallicusTurnPos,
-  MurusgallicusTurnVar,
-  MurusgallicusUnit
->;
-export type MurusgallicusBoard = AlgolBoard<
-  MurusgallicusBoardHeight,
-  MurusgallicusBoardWidth,
-  MurusgallicusGrid,
-  MurusgallicusPosition,
-  MurusgallicusTerrain
->;
-export type MurusgallicusAI = AI<
-  MurusgallicusAiArtifactLayer,
-  MurusgallicusAiAspect,
-  MurusgallicusAiBrain,
-  MurusgallicusAiGenerator,
-  MurusgallicusAiGrid,
-  MurusgallicusAiTerrain,
-  MurusgallicusAiTerrainLayer,
-  MurusgallicusBattlePos,
-  MurusgallicusBattleVar,
-  MurusgallicusBoardHeight,
-  MurusgallicusBoardWidth,
-  MurusgallicusCommand,
-  MurusgallicusGrid,
-  MurusgallicusLayer,
-  MurusgallicusMark,
-  MurusgallicusPosition,
-  MurusgallicusTurnPos,
-  MurusgallicusTurnVar
->;
-export type MurusgallicusGraphics = Graphics<
-  MurusgallicusTerrain,
-  MurusgallicusUnit
->;
-export type MurusgallicusInstructions = Instructions<
-  MurusgallicusBattlePos,
-  MurusgallicusBattleVar,
-  MurusgallicusCommand,
-  MurusgallicusGrid,
-  MurusgallicusLayer,
-  MurusgallicusMark,
-  MurusgallicusPhase,
-  MurusgallicusTurnPos,
-  MurusgallicusTurnVar,
-  MurusgallicusUnit
->;
-export type MurusgallicusMeta = AlgolMeta<
-  MurusgallicusCommand,
-  MurusgallicusMark
->;
-export type MurusgallicusPerformance = AlgolPerformance<
-  MurusgallicusCommand,
-  MurusgallicusMark
->;
-export type MurusgallicusScripts = AlgolGameTestSuite<
-  MurusgallicusCommand,
-  MurusgallicusPosition
->;
-export type MurusgallicusSetupBook = AlgolSetupBook<
-  MurusgallicusPosition,
-  MurusgallicusUnit
->;
-
-export type MurusgallicusDefinition = FullDef<
-  MurusgallicusAiArtifactLayer,
-  MurusgallicusAiAspect,
-  MurusgallicusAiBrain,
-  MurusgallicusAiGenerator,
-  MurusgallicusAiGrid,
-  MurusgallicusAiTerrain,
-  MurusgallicusAiTerrainLayer,
-  MurusgallicusArtifactLayer,
-  MurusgallicusBattlePos,
-  MurusgallicusBattleVar,
-  MurusgallicusBoardHeight,
-  MurusgallicusBoardWidth,
-  MurusgallicusCommand,
-  MurusgallicusGenerator,
-  MurusgallicusGrid,
-  MurusgallicusLayer,
-  MurusgallicusMark,
-  MurusgallicusPhase,
-  MurusgallicusPosition,
-  MurusgallicusTerrain,
-  MurusgallicusTurnPos,
-  MurusgallicusTurnVar,
-  MurusgallicusUnit
->;
-
-export type MurusgallicusGrid = never;
-
-export type MurusgallicusAiGenerator =
-  | "findmymoves"
-  | "findoppmoves"
-  | "findoppthreats";
-
-export type MurusgallicusAiAspect =
-  | "mymoves"
-  | "mytowerpos"
-  | "mywallpos"
-  | "oppmoves"
-  | "mytowercount"
-  | "oppwinmoves"
-  | "opplightthreats"
-  | "oppheavythreats";
-
-export type MurusgallicusAiGrid = "basic1" | "basic2";
-
-export type MurusgallicusAiArtifactLayer =
-  | "mymoves"
-  | "oppmoves"
-  | "oppheavythreats"
-  | "opplightthreats";
-
-export type MurusgallicusAiBrain = "Steve" | "Joe" | "Clive";
-
-export type MurusgallicusAiTerrainLayer =
-  | "threatrow"
-  | "mythreatrow"
-  | "oppthreatrow"
-  | "nothreatrow";
-
-export type MurusgallicusAiTerrain = "threatrow";
-
-export type MurusgallicusPosition =
+type MurusgallicusPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -287,3 +111,25 @@ export type MurusgallicusPosition =
   | "h5"
   | "h6"
   | "h7";
+
+type MurusgallicusBlob = AlgolGameBlob<
+  MurusgallicusArtifactLayer,
+  MurusgallicusBoardName,
+  MurusgallicusBattlePos,
+  MurusgallicusBattleVar,
+  MurusgallicusCommand,
+  MurusgallicusGenerator,
+  MurusgallicusGrid,
+  MurusgallicusLayer,
+  MurusgallicusMark,
+  MurusgallicusPhase,
+  MurusgallicusPosition,
+  MurusgallicusRulesetName,
+  MurusgallicusSetupName,
+  MurusgallicusTerrain,
+  MurusgallicusTurnPos,
+  MurusgallicusTurnVar,
+  MurusgallicusUnit
+>;
+
+export type MurusgallicusDefinition = FullDef<MurusgallicusBlob>;

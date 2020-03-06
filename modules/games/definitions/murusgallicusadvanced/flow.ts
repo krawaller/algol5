@@ -1,6 +1,6 @@
-import { MurusgallicusadvancedFlow } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
 
-const murusgallicusadvancedFlow: MurusgallicusadvancedFlow = {
+const murusgallicusadvancedFlow: MurusgallicusadvancedDefinition["flow"] = {
   startTurn: { links: ["selecttower", "selectcatapult"] },
   endGame: {
     infiltration: {

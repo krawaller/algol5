@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { DaggersAnim } from "./_types";
+import { DaggersDefinition } from "./_types";
 
-const daggersAnim: DaggersAnim = {};
+const daggersAnim: DaggersDefinition["anim"] = {};
 
 export default daggersAnim;

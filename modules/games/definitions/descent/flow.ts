@@ -1,6 +1,6 @@
-import { DescentFlow } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentFlow: DescentFlow = {
+const descentFlow: DescentDefinition["flow"] = {
   endGame: {
     madeline: { condition: { notempty: "winline" }, show: "winline" }
   },

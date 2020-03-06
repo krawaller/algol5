@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { DescentGraphics } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentGraphics: DescentGraphics = {
+const descentGraphics: DescentDefinition["graphics"] = {
   icons: { lvl3: "queen", lvl2: "rook", lvl1: "knight", lvl0: "pawn" },
   tiles: {}
 };

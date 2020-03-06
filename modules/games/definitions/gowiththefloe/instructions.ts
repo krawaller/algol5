@@ -1,6 +1,6 @@
-import { GowiththefloeInstructions } from "./_types";
+import { GowiththefloeDefinition } from "./_types";
 
-const gowiththefloeInstructions: GowiththefloeInstructions = {
+const gowiththefloeInstructions: GowiththefloeDefinition["instructions"] = {
   startTurn: {
     line: ["Select", { playercase: ["seals", "bears"] }, "to move"]
   },

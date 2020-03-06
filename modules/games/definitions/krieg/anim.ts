@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { KriegAnim } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegAnim: KriegAnim = {};
+const kriegAnim: KriegDefinition["anim"] = {};
 
 export default kriegAnim;

@@ -1,6 +1,6 @@
-import { AriesInstructions } from "./_types";
+import { AriesDefinition } from "./_types";
 
-const ariesInstructions: AriesInstructions = {
+const ariesInstructions: AriesDefinition["instructions"] = {
   startTurn: { line: ["Select", "soldiers", "to move"] },
   selectunit: {
     line: [

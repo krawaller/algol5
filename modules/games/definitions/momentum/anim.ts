@@ -8,9 +8,9 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { MomentumAnim } from "./_types";
+import { MomentumDefinition } from "./_types";
 
-const momentumAnim: MomentumAnim = {
+const momentumAnim: MomentumDefinition["anim"] = {
   drop: [
     { exitin: ["doomed", { offset: [["looppos"], { loopread: "pushdir" }] }] }
   ]

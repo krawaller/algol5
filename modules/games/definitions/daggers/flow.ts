@@ -1,6 +1,6 @@
-import { DaggersFlow } from "./_types";
+import { DaggersDefinition } from "./_types";
 
-const daggersFlow: DaggersFlow = {
+const daggersFlow: DaggersDefinition["flow"] = {
   endGame: {
     infiltration: {
       condition: { overlaps: ["mycrowns", "oppbase"] },

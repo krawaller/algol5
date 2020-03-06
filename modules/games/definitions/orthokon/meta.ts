@@ -1,6 +1,6 @@
-import { OrthokonMeta } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonMeta: OrthokonMeta = {
+const orthokonMeta: OrthokonDefinition["meta"] = {
   code: "u",
   id: "orthokon",
   name: "Orthokon",

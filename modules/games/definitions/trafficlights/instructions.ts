@@ -1,6 +1,6 @@
-import { TrafficlightsInstructions } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsInstructions: TrafficlightsInstructions = {
+const trafficlightsInstructions: TrafficlightsDefinition["instructions"] = {
   startTurn: {
     line: [
       "Select",

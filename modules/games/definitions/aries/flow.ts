@@ -1,6 +1,6 @@
-import { AriesFlow } from "./_types";
+import { AriesDefinition } from "./_types";
 
-const ariesFlow: AriesFlow = {
+const ariesFlow: AriesDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   endGame: {
     invade: {

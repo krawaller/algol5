@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type AtriumBoardHeight = 5;
-export type AtriumBoardWidth = 5;
+type AtriumBoardHeight = 5;
+type AtriumBoardWidth = 5;
 
-export type AtriumAnim = AlgolAnimCollection<
-  AtriumBattlePos,
-  AtriumBattleVar,
-  AtriumCommand,
-  AtriumGrid,
-  AtriumLayer,
-  AtriumMark,
-  AtriumTurnPos,
-  AtriumTurnVar,
-  AtriumUnit
->;
-
-export type AtriumTerrain = never;
-export type AtriumUnit = "kings" | "queens";
-export type AtriumMark = "selectunit" | "selectmovetarget";
-export type AtriumCommand = "move";
-export type AtriumPhaseCommand = never;
-export type AtriumPhase = "startTurn" | AtriumMark;
-export type AtriumUnitLayer =
+type AtriumTerrain = never;
+type AtriumUnit = "kings" | "queens";
+type AtriumMark = "selectunit" | "selectmovetarget";
+type AtriumCommand = "move";
+type AtriumPhaseCommand = never;
+type AtriumPhase = "startTurn" | AtriumMark;
+type AtriumUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -50,138 +23,23 @@ export type AtriumUnitLayer =
   | "myqueens"
   | "oppqueens"
   | "neutralqueens";
-export type AtriumGenerator = "findmovetargets" | "findwinlines";
-export type AtriumArtifactLayer = "movetargets" | "winline";
-export type AtriumTerrainLayer = never;
-export type AtriumLayer = CommonLayer | AtriumUnitLayer | AtriumArtifactLayer;
-export type AtriumBattlePos = never;
-export type AtriumBattleVar = never;
-export type AtriumTurnPos = never;
-export type AtriumTurnVar = never;
+type AtriumGenerator = "findmovetargets" | "findwinlines";
+type AtriumArtifactLayer = "movetargets" | "winline";
+type AtriumTerrainLayer = never;
+type AtriumLayer = CommonLayer | AtriumUnitLayer | AtriumArtifactLayer;
+type AtriumBattlePos = never;
+type AtriumBattleVar = never;
+type AtriumTurnPos = never;
+type AtriumTurnVar = never;
 
-export type AtriumBoardName = "basic";
-export type AtriumSetupName = "basic";
-export type AtriumRulesetName = "basic";
-export type AtriumVariantName = "basic";
+type AtriumBoardName = "basic";
+type AtriumSetupName = "basic";
+type AtriumRulesetName = "basic";
+type AtriumVariantName = "basic";
 
-export type AtriumVariantBook = AlgolVariantBook<
-  AtriumBoardName,
-  AtriumRulesetName,
-  AtriumSetupName
->;
+type AtriumGrid = never;
 
-export type AtriumGenerators = Generators<
-  AtriumArtifactLayer,
-  AtriumBattlePos,
-  AtriumBattleVar,
-  AtriumCommand,
-  AtriumGenerator,
-  AtriumGrid,
-  AtriumLayer,
-  AtriumMark,
-  AtriumTurnPos,
-  AtriumTurnVar
->;
-export type AtriumFlow = Flow<
-  AtriumBattlePos,
-  AtriumBattleVar,
-  AtriumCommand,
-  AtriumGenerator,
-  AtriumGrid,
-  AtriumLayer,
-  AtriumMark,
-  AtriumTurnPos,
-  AtriumTurnVar,
-  AtriumUnit
->;
-export type AtriumBoard = AlgolBoard<
-  AtriumBoardHeight,
-  AtriumBoardWidth,
-  AtriumGrid,
-  AtriumPosition,
-  AtriumTerrain
->;
-export type AtriumAI = AI<
-  AtriumAiArtifactLayer,
-  AtriumAiAspect,
-  AtriumAiBrain,
-  AtriumAiGenerator,
-  AtriumAiGrid,
-  AtriumAiTerrain,
-  AtriumAiTerrainLayer,
-  AtriumBattlePos,
-  AtriumBattleVar,
-  AtriumBoardHeight,
-  AtriumBoardWidth,
-  AtriumCommand,
-  AtriumGrid,
-  AtriumLayer,
-  AtriumMark,
-  AtriumPosition,
-  AtriumTurnPos,
-  AtriumTurnVar
->;
-export type AtriumGraphics = Graphics<AtriumTerrain, AtriumUnit>;
-export type AtriumInstructions = Instructions<
-  AtriumBattlePos,
-  AtriumBattleVar,
-  AtriumCommand,
-  AtriumGrid,
-  AtriumLayer,
-  AtriumMark,
-  AtriumPhase,
-  AtriumTurnPos,
-  AtriumTurnVar,
-  AtriumUnit
->;
-export type AtriumMeta = AlgolMeta<AtriumCommand, AtriumMark>;
-export type AtriumPerformance = AlgolPerformance<AtriumCommand, AtriumMark>;
-export type AtriumScripts = AlgolGameTestSuite<AtriumCommand, AtriumPosition>;
-export type AtriumSetupBook = AlgolSetupBook<AtriumPosition, AtriumUnit>;
-
-export type AtriumDefinition = FullDef<
-  AtriumAiArtifactLayer,
-  AtriumAiAspect,
-  AtriumAiBrain,
-  AtriumAiGenerator,
-  AtriumAiGrid,
-  AtriumAiTerrain,
-  AtriumAiTerrainLayer,
-  AtriumArtifactLayer,
-  AtriumBattlePos,
-  AtriumBattleVar,
-  AtriumBoardHeight,
-  AtriumBoardWidth,
-  AtriumCommand,
-  AtriumGenerator,
-  AtriumGrid,
-  AtriumLayer,
-  AtriumMark,
-  AtriumPhase,
-  AtriumPosition,
-  AtriumTerrain,
-  AtriumTurnPos,
-  AtriumTurnVar,
-  AtriumUnit
->;
-
-export type AtriumGrid = never;
-
-export type AtriumAiGenerator = never;
-
-export type AtriumAiAspect = never;
-
-export type AtriumAiGrid = never;
-
-export type AtriumAiArtifactLayer = never;
-
-export type AtriumAiBrain = never;
-
-export type AtriumAiTerrainLayer = never;
-
-export type AtriumAiTerrain = never;
-
-export type AtriumPosition =
+type AtriumPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -207,3 +65,25 @@ export type AtriumPosition =
   | "e3"
   | "e4"
   | "e5";
+
+type AtriumBlob = AlgolGameBlob<
+  AtriumArtifactLayer,
+  AtriumBoardName,
+  AtriumBattlePos,
+  AtriumBattleVar,
+  AtriumCommand,
+  AtriumGenerator,
+  AtriumGrid,
+  AtriumLayer,
+  AtriumMark,
+  AtriumPhase,
+  AtriumPosition,
+  AtriumRulesetName,
+  AtriumSetupName,
+  AtriumTerrain,
+  AtriumTurnPos,
+  AtriumTurnVar,
+  AtriumUnit
+>;
+
+export type AtriumDefinition = FullDef<AtriumBlob>;

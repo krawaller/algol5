@@ -1,6 +1,6 @@
-import { MomentumMeta } from "./_types";
+import { MomentumDefinition } from "./_types";
 
-const momentumMeta: MomentumMeta = {
+const momentumMeta: MomentumDefinition["meta"] = {
   id: "momentum",
   name: "Momentum",
   tags: [],

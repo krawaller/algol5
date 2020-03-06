@@ -1,6 +1,6 @@
-import { AriesMeta } from "./_types";
+import { AriesDefinition } from "./_types";
 
-const ariesMeta: AriesMeta = {
+const ariesMeta: AriesDefinition["meta"] = {
   code: "p",
   id: "aries",
   name: "Aries",

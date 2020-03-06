@@ -1,6 +1,6 @@
-import { ShoveoffPerformance } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffPerformance: ShoveoffPerformance = {
+const shoveoffPerformance: ShoveoffDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

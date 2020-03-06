@@ -1,6 +1,6 @@
-import { AmazonsPerformance } from "./_types";
+import { AmazonsDefinition } from "./_types";
 
-const amazonsPerformance: AmazonsPerformance = {
+const amazonsPerformance: AmazonsDefinition["performance"] = {
   canAlwaysEnd: { selectmovetarget: true },
   massiveTree: {}
 };

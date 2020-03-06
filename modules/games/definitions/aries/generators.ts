@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { AriesGenerators } from "./_types";
+import { AriesDefinition } from "./_types";
 
-const ariesGenerators: AriesGenerators = {
+const ariesGenerators: AriesDefinition["generators"] = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",

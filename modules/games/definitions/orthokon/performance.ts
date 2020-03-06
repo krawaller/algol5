@@ -1,6 +1,6 @@
-import { OrthokonPerformance } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonPerformance: OrthokonPerformance = {
+const orthokonPerformance: OrthokonDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

@@ -1,6 +1,6 @@
-import { OrthokonSetupBook } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonSetupBook: OrthokonSetupBook = {
+const orthokonSetupBook: OrthokonDefinition["setups"] = {
   basic: {
     soldiers: { "1": [{ rect: ["a1", "d1"] }], "2": [{ rect: ["a4", "d4"] }] }
   }

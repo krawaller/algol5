@@ -1,6 +1,6 @@
-import { DaggersMeta } from "./_types";
+import { DaggersDefinition } from "./_types";
 
-const daggersMeta: DaggersMeta = {
+const daggersMeta: DaggersDefinition["meta"] = {
   code: "P",
   id: "daggers",
   name: "Daggers",

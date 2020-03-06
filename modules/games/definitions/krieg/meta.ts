@@ -1,6 +1,6 @@
-import { KriegMeta } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegMeta: KriegMeta = {
+const kriegMeta: KriegDefinition["meta"] = {
   code: "Q",
   id: "krieg",
   name: "Krieg",

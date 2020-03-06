@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { KriegGenerators } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegGenerators: KriegGenerators = {
+const kriegGenerators: KriegDefinition["generators"] = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",

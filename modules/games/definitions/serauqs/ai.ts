@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { SerauqsAI } from "./_types";
+import { SerauqsDefinition } from "./_types";
+type SerauqsAI = any; // SerauqsDefinition['AI']
 
 const serauqsAI: SerauqsAI = {
   brains: {},

@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type ChameleonBoardHeight = 5;
-export type ChameleonBoardWidth = 5;
+type ChameleonBoardHeight = 5;
+type ChameleonBoardWidth = 5;
 
-export type ChameleonAnim = AlgolAnimCollection<
-  ChameleonBattlePos,
-  ChameleonBattleVar,
-  ChameleonCommand,
-  ChameleonGrid,
-  ChameleonLayer,
-  ChameleonMark,
-  ChameleonTurnPos,
-  ChameleonTurnVar,
-  ChameleonUnit
->;
-
-export type ChameleonTerrain = "base";
-export type ChameleonUnit = "knights" | "bishops";
-export type ChameleonMark = "selectunit" | "selectmovetarget";
-export type ChameleonCommand = "move";
-export type ChameleonPhaseCommand = never;
-export type ChameleonPhase = "startTurn" | ChameleonMark;
-export type ChameleonUnitLayer =
+type ChameleonTerrain = "base";
+type ChameleonUnit = "knights" | "bishops";
+type ChameleonMark = "selectunit" | "selectmovetarget";
+type ChameleonCommand = "move";
+type ChameleonPhaseCommand = never;
+type ChameleonPhase = "startTurn" | ChameleonMark;
+type ChameleonUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -50,155 +23,31 @@ export type ChameleonUnitLayer =
   | "mybishops"
   | "oppbishops"
   | "neutralbishops";
-export type ChameleonGenerator =
+type ChameleonGenerator =
   | "findinvaders"
   | "findsteptargets"
   | "findbishoptargets"
   | "findknighttargets";
-export type ChameleonArtifactLayer = "invaders" | "morph" | "movetarget";
-export type ChameleonTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
-export type ChameleonLayer =
+type ChameleonArtifactLayer = "invaders" | "morph" | "movetarget";
+type ChameleonTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
+type ChameleonLayer =
   | CommonLayer
   | ChameleonUnitLayer
   | ChameleonArtifactLayer
   | ChameleonTerrainLayer;
-export type ChameleonBattlePos = never;
-export type ChameleonBattleVar = never;
-export type ChameleonTurnPos = never;
-export type ChameleonTurnVar = never;
+type ChameleonBattlePos = never;
+type ChameleonBattleVar = never;
+type ChameleonTurnPos = never;
+type ChameleonTurnVar = never;
 
-export type ChameleonBoardName = "basic";
-export type ChameleonSetupName = "basic";
-export type ChameleonRulesetName = "basic";
-export type ChameleonVariantName = "basic";
+type ChameleonBoardName = "basic";
+type ChameleonSetupName = "basic";
+type ChameleonRulesetName = "basic";
+type ChameleonVariantName = "basic";
 
-export type ChameleonVariantBook = AlgolVariantBook<
-  ChameleonBoardName,
-  ChameleonRulesetName,
-  ChameleonSetupName
->;
+type ChameleonGrid = never;
 
-export type ChameleonGenerators = Generators<
-  ChameleonArtifactLayer,
-  ChameleonBattlePos,
-  ChameleonBattleVar,
-  ChameleonCommand,
-  ChameleonGenerator,
-  ChameleonGrid,
-  ChameleonLayer,
-  ChameleonMark,
-  ChameleonTurnPos,
-  ChameleonTurnVar
->;
-export type ChameleonFlow = Flow<
-  ChameleonBattlePos,
-  ChameleonBattleVar,
-  ChameleonCommand,
-  ChameleonGenerator,
-  ChameleonGrid,
-  ChameleonLayer,
-  ChameleonMark,
-  ChameleonTurnPos,
-  ChameleonTurnVar,
-  ChameleonUnit
->;
-export type ChameleonBoard = AlgolBoard<
-  ChameleonBoardHeight,
-  ChameleonBoardWidth,
-  ChameleonGrid,
-  ChameleonPosition,
-  ChameleonTerrain
->;
-export type ChameleonAI = AI<
-  ChameleonAiArtifactLayer,
-  ChameleonAiAspect,
-  ChameleonAiBrain,
-  ChameleonAiGenerator,
-  ChameleonAiGrid,
-  ChameleonAiTerrain,
-  ChameleonAiTerrainLayer,
-  ChameleonBattlePos,
-  ChameleonBattleVar,
-  ChameleonBoardHeight,
-  ChameleonBoardWidth,
-  ChameleonCommand,
-  ChameleonGrid,
-  ChameleonLayer,
-  ChameleonMark,
-  ChameleonPosition,
-  ChameleonTurnPos,
-  ChameleonTurnVar
->;
-export type ChameleonGraphics = Graphics<ChameleonTerrain, ChameleonUnit>;
-export type ChameleonInstructions = Instructions<
-  ChameleonBattlePos,
-  ChameleonBattleVar,
-  ChameleonCommand,
-  ChameleonGrid,
-  ChameleonLayer,
-  ChameleonMark,
-  ChameleonPhase,
-  ChameleonTurnPos,
-  ChameleonTurnVar,
-  ChameleonUnit
->;
-export type ChameleonMeta = AlgolMeta<ChameleonCommand, ChameleonMark>;
-export type ChameleonPerformance = AlgolPerformance<
-  ChameleonCommand,
-  ChameleonMark
->;
-export type ChameleonScripts = AlgolGameTestSuite<
-  ChameleonCommand,
-  ChameleonPosition
->;
-export type ChameleonSetupBook = AlgolSetupBook<
-  ChameleonPosition,
-  ChameleonUnit
->;
-
-export type ChameleonDefinition = FullDef<
-  ChameleonAiArtifactLayer,
-  ChameleonAiAspect,
-  ChameleonAiBrain,
-  ChameleonAiGenerator,
-  ChameleonAiGrid,
-  ChameleonAiTerrain,
-  ChameleonAiTerrainLayer,
-  ChameleonArtifactLayer,
-  ChameleonBattlePos,
-  ChameleonBattleVar,
-  ChameleonBoardHeight,
-  ChameleonBoardWidth,
-  ChameleonCommand,
-  ChameleonGenerator,
-  ChameleonGrid,
-  ChameleonLayer,
-  ChameleonMark,
-  ChameleonPhase,
-  ChameleonPosition,
-  ChameleonTerrain,
-  ChameleonTurnPos,
-  ChameleonTurnVar,
-  ChameleonUnit
->;
-
-export type ChameleonGrid = never;
-
-export type ChameleonAiGenerator = never;
-
-export type ChameleonAiAspect = never;
-
-export type ChameleonAiGrid = never;
-
-export type ChameleonAiArtifactLayer = never;
-
-export type ChameleonAiBrain = never;
-
-export type ChameleonAiTerrainLayer = never;
-
-export type ChameleonAiTerrain = never;
-
-export type ChameleonPosition =
+type ChameleonPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -224,3 +73,25 @@ export type ChameleonPosition =
   | "e3"
   | "e4"
   | "e5";
+
+type ChameleonBlob = AlgolGameBlob<
+  ChameleonArtifactLayer,
+  ChameleonBoardName,
+  ChameleonBattlePos,
+  ChameleonBattleVar,
+  ChameleonCommand,
+  ChameleonGenerator,
+  ChameleonGrid,
+  ChameleonLayer,
+  ChameleonMark,
+  ChameleonPhase,
+  ChameleonPosition,
+  ChameleonRulesetName,
+  ChameleonSetupName,
+  ChameleonTerrain,
+  ChameleonTurnPos,
+  ChameleonTurnVar,
+  ChameleonUnit
+>;
+
+export type ChameleonDefinition = FullDef<ChameleonBlob>;

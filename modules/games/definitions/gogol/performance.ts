@@ -1,6 +1,6 @@
-import { GogolPerformance } from "./_types";
+import { GogolDefinition } from "./_types";
 
-const gogolPerformance: GogolPerformance = {
+const gogolPerformance: GogolDefinition["performance"] = {
   canAlwaysEnd: {
     selectmovetarget: true,
     selectkingdeploy: true,

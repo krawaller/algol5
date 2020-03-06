@@ -1,6 +1,6 @@
-import { AmazonsFlow } from "./_types";
+import { AmazonsDefinition } from "./_types";
 
-const amazonsFlow: AmazonsFlow = {
+const amazonsFlow: AmazonsDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   marks: {
     selectunit: {

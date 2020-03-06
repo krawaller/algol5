@@ -1,6 +1,6 @@
-import { AmazonsScripts } from "./_types";
+import { AmazonsDefinition } from "./_types";
 
-const amazonsScripts: AmazonsScripts = {
+const amazonsScripts: AmazonsDefinition["scripts"] = {
   basic: [
     {
       commands: ["d10"],

@@ -1,6 +1,6 @@
-import { GekitaiVariantBook } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiVariantBook: GekitaiVariantBook = {
+const gekitaiVariantBook: GekitaiDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

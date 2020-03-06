@@ -1,6 +1,6 @@
-import { ShoveoffFlow } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffFlow: ShoveoffFlow = {
+const shoveoffFlow: ShoveoffDefinition["flow"] = {
   TODO: "findaffected SHOULD BE AN OFFSET",
   endGame: {
     madeline: { condition: { notempty: "fourinarow" }, show: "fourinarow" }

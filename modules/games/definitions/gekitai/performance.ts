@@ -1,6 +1,6 @@
-import { GekitaiPerformance } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiPerformance: GekitaiPerformance = {
+const gekitaiPerformance: GekitaiDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

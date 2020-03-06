@@ -1,6 +1,6 @@
-import { DescentPerformance } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentPerformance: DescentPerformance = {
+const descentPerformance: DescentDefinition["performance"] = {
   canAlwaysEnd: { selectdigtarget: true },
   massiveTree: {}
 };

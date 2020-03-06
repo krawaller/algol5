@@ -1,6 +1,6 @@
-import { ShoveoffInstructions } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffInstructions: ShoveoffInstructions = {
+const shoveoffInstructions: ShoveoffDefinition["instructions"] = {
   startTurn: {
     line: [
       "Select",

@@ -1,6 +1,6 @@
-import { TransetMeta } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetMeta: TransetMeta = {
+const transetMeta: TransetDefinition["meta"] = {
   code: "z",
   id: "transet",
   name: "Transet",

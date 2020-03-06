@@ -1,6 +1,6 @@
-import { SerauqsVariantBook } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsVariantBook: SerauqsVariantBook = {
+const serauqsVariantBook: SerauqsDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

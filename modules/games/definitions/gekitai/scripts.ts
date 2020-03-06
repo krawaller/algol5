@@ -1,6 +1,6 @@
-import { GekitaiScripts } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiScripts: GekitaiScripts = {
+const gekitaiScripts: GekitaiDefinition["scripts"] = {
   basic: [
     {
       commands: [

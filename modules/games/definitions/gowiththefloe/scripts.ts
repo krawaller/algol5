@@ -1,6 +1,6 @@
-import { GowiththefloeScripts } from "./_types";
+import { GowiththefloeDefinition } from "./_types";
 
-const gowiththefloeScripts: GowiththefloeScripts = {
+const gowiththefloeScripts: GowiththefloeDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["b2", "b7"] },
     {

@@ -1,6 +1,6 @@
-import { AtriumScripts } from "./_types";
+import { AtriumDefinition } from "./_types";
 
-const atriumScripts: AtriumScripts = {
+const atriumScripts: AtriumDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["a2", "a3", "c5", "d1", "d5", "e2"] },
     { commands: ["e2"], include: ["d2", "e1"] },

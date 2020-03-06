@@ -1,6 +1,6 @@
-import { TransetScripts } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetScripts: TransetScripts = {
+const transetScripts: TransetDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["a1", "b1", "c1", "d1", "e1"] },
     { commands: ["c1"], include: ["b2", "c2", "d2"] },

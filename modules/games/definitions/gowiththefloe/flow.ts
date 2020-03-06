@@ -1,6 +1,6 @@
-import { GowiththefloeFlow } from "./_types";
+import { GowiththefloeDefinition } from "./_types";
 
-const gowiththefloeFlow: GowiththefloeFlow = {
+const gowiththefloeFlow: GowiththefloeDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   endGame: {
     safeseal: {

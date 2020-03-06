@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { MurusgallicusGenerators } from "./_types";
+import { MurusgallicusDefinition } from "./_types";
 
-const murusgallicusGenerators: MurusgallicusGenerators = {
+const murusgallicusGenerators: MurusgallicusDefinition["generators"] = {
   findmovetargets: {
     type: "walker",
     dirs: "rose",

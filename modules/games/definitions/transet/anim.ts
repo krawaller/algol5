@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { TransetAnim } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetAnim: TransetAnim = {};
+const transetAnim: TransetDefinition["anim"] = {};
 
 export default transetAnim;

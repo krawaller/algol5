@@ -1,6 +1,6 @@
-import { AmazonsMeta } from "./_types";
+import { AmazonsDefinition } from "./_types";
 
-const amazonsMeta: AmazonsMeta = {
+const amazonsMeta: AmazonsDefinition["meta"] = {
   code: "Z",
   id: "amazons",
   name: "Amazons",

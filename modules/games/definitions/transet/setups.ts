@@ -1,6 +1,6 @@
-import { TransetSetupBook } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetSetupBook: TransetSetupBook = {
+const transetSetupBook: TransetDefinition["setups"] = {
   basic: {
     pinets: { "1": ["a1", "e1"], "2": ["a5", "e5"] },
     piokers: { "1": ["b1", "d1"], "2": ["b5", "d5"] },

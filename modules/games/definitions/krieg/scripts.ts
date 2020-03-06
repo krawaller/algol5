@@ -1,6 +1,6 @@
-import { KriegScripts } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegScripts: KriegScripts = {
+const kriegScripts: KriegDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["a3", "b3", "b4"] },
     { commands: ["b3"], include: ["b2", "c3"] },

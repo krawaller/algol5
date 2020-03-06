@@ -1,6 +1,6 @@
-import { GowiththefloeMeta } from "./_types";
+import { GowiththefloeDefinition } from "./_types";
 
-const gowiththefloeMeta: GowiththefloeMeta = {
+const gowiththefloeMeta: GowiththefloeDefinition["meta"] = {
   code: "N",
   id: "gowiththefloe",
   name: "Go with the floe",

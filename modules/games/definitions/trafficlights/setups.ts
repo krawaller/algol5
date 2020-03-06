@@ -1,5 +1,5 @@
-import { TrafficlightsSetupBook } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsSetupBook: TrafficlightsSetupBook = { basic: {} };
+const trafficlightsSetupBook: TrafficlightsDefinition["setups"] = { basic: {} };
 
 export default trafficlightsSetupBook;

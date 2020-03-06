@@ -1,6 +1,6 @@
-import { AriesVariantBook } from "./_types";
+import { AriesDefinition } from "./_types";
 
-const ariesVariantBook: AriesVariantBook = {
+const ariesVariantBook: AriesDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

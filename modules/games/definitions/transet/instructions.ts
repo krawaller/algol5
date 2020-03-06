@@ -1,6 +1,6 @@
-import { TransetInstructions } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetInstructions: TransetInstructions = {
+const transetInstructions: TransetDefinition["instructions"] = {
   startTurn: {
     line: ["Select", "pinets", ",", "piokers", "or", "piases", "to move"]
   },

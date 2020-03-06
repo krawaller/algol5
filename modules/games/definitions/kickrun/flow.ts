@@ -1,6 +1,6 @@
-import { KickrunFlow } from "./_types";
+import { KickrunDefinition } from "./_types";
 
-const kickrunFlow: KickrunFlow = {
+const kickrunFlow: KickrunDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   marks: {
     selectunit: {

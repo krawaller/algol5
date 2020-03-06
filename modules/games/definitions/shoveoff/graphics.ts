@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { ShoveoffGraphics } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffGraphics: ShoveoffGraphics = {
+const shoveoffGraphics: ShoveoffDefinition["graphics"] = {
   icons: { soldiers: "pawn" },
   tiles: {}
 };

@@ -1,6 +1,6 @@
-import { ShoveoffSetupBook } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffSetupBook: ShoveoffSetupBook = {
+const shoveoffSetupBook: ShoveoffDefinition["setups"] = {
   basic: { soldiers: { "0": [{ rect: ["a1", "d4"] }] } }
 };
 

@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { UglyduckGenerators } from "./_types";
+import { UglyduckDefinition } from "./_types";
 
-const uglyduckGenerators: UglyduckGenerators = {
+const uglyduckGenerators: UglyduckDefinition["generators"] = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",

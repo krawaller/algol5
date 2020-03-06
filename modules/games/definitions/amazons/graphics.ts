@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { AmazonsGraphics } from "./_types";
+import { AmazonsDefinition } from "./_types";
 
-const amazonsGraphics: AmazonsGraphics = {
+const amazonsGraphics: AmazonsDefinition["graphics"] = {
   icons: { amazons: "queen", fires: "pawn" },
   tiles: {}
 };

@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type DescentBoardHeight = 4;
-export type DescentBoardWidth = 4;
+type DescentBoardHeight = 4;
+type DescentBoardWidth = 4;
 
-export type DescentAnim = AlgolAnimCollection<
-  DescentBattlePos,
-  DescentBattleVar,
-  DescentCommand,
-  DescentGrid,
-  DescentLayer,
-  DescentMark,
-  DescentTurnPos,
-  DescentTurnVar,
-  DescentUnit
->;
-
-export type DescentTerrain = never;
-export type DescentUnit = "lvl3" | "lvl2" | "lvl1" | "lvl0";
-export type DescentMark = "selectunit" | "selectmovetarget" | "selectdigtarget";
-export type DescentCommand = "move" | "dig";
-export type DescentPhaseCommand = "move";
-export type DescentPhase = "startTurn" | DescentMark | DescentPhaseCommand;
-export type DescentUnitLayer =
+type DescentTerrain = never;
+type DescentUnit = "lvl3" | "lvl2" | "lvl1" | "lvl0";
+type DescentMark = "selectunit" | "selectmovetarget" | "selectdigtarget";
+type DescentCommand = "move" | "dig";
+type DescentPhaseCommand = "move";
+type DescentPhase = "startTurn" | DescentMark | DescentPhaseCommand;
+type DescentUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -58,147 +31,23 @@ export type DescentUnitLayer =
   | "mylvl0"
   | "opplvl0"
   | "neutrallvl0";
-export type DescentGenerator =
-  | "findmovetargets"
-  | "finddigtargets"
-  | "findwinlines";
-export type DescentArtifactLayer = "movetargets" | "digtargets" | "winline";
-export type DescentTerrainLayer = never;
-export type DescentLayer =
-  | CommonLayer
-  | DescentUnitLayer
-  | DescentArtifactLayer;
-export type DescentBattlePos = never;
-export type DescentBattleVar = never;
-export type DescentTurnPos = "movedto";
-export type DescentTurnVar = "heightto" | "heightfrom";
+type DescentGenerator = "findmovetargets" | "finddigtargets" | "findwinlines";
+type DescentArtifactLayer = "movetargets" | "digtargets" | "winline";
+type DescentTerrainLayer = never;
+type DescentLayer = CommonLayer | DescentUnitLayer | DescentArtifactLayer;
+type DescentBattlePos = never;
+type DescentBattleVar = never;
+type DescentTurnPos = "movedto";
+type DescentTurnVar = "heightto" | "heightfrom";
 
-export type DescentBoardName = "basic";
-export type DescentSetupName = "basic";
-export type DescentRulesetName = "basic";
-export type DescentVariantName = "basic";
+type DescentBoardName = "basic";
+type DescentSetupName = "basic";
+type DescentRulesetName = "basic";
+type DescentVariantName = "basic";
 
-export type DescentVariantBook = AlgolVariantBook<
-  DescentBoardName,
-  DescentRulesetName,
-  DescentSetupName
->;
+type DescentGrid = never;
 
-export type DescentGenerators = Generators<
-  DescentArtifactLayer,
-  DescentBattlePos,
-  DescentBattleVar,
-  DescentCommand,
-  DescentGenerator,
-  DescentGrid,
-  DescentLayer,
-  DescentMark,
-  DescentTurnPos,
-  DescentTurnVar
->;
-export type DescentFlow = Flow<
-  DescentBattlePos,
-  DescentBattleVar,
-  DescentCommand,
-  DescentGenerator,
-  DescentGrid,
-  DescentLayer,
-  DescentMark,
-  DescentTurnPos,
-  DescentTurnVar,
-  DescentUnit
->;
-export type DescentBoard = AlgolBoard<
-  DescentBoardHeight,
-  DescentBoardWidth,
-  DescentGrid,
-  DescentPosition,
-  DescentTerrain
->;
-export type DescentAI = AI<
-  DescentAiArtifactLayer,
-  DescentAiAspect,
-  DescentAiBrain,
-  DescentAiGenerator,
-  DescentAiGrid,
-  DescentAiTerrain,
-  DescentAiTerrainLayer,
-  DescentBattlePos,
-  DescentBattleVar,
-  DescentBoardHeight,
-  DescentBoardWidth,
-  DescentCommand,
-  DescentGrid,
-  DescentLayer,
-  DescentMark,
-  DescentPosition,
-  DescentTurnPos,
-  DescentTurnVar
->;
-export type DescentGraphics = Graphics<DescentTerrain, DescentUnit>;
-export type DescentInstructions = Instructions<
-  DescentBattlePos,
-  DescentBattleVar,
-  DescentCommand,
-  DescentGrid,
-  DescentLayer,
-  DescentMark,
-  DescentPhase,
-  DescentTurnPos,
-  DescentTurnVar,
-  DescentUnit
->;
-export type DescentMeta = AlgolMeta<DescentCommand, DescentMark>;
-export type DescentPerformance = AlgolPerformance<DescentCommand, DescentMark>;
-export type DescentScripts = AlgolGameTestSuite<
-  DescentCommand,
-  DescentPosition
->;
-export type DescentSetupBook = AlgolSetupBook<DescentPosition, DescentUnit>;
-
-export type DescentDefinition = FullDef<
-  DescentAiArtifactLayer,
-  DescentAiAspect,
-  DescentAiBrain,
-  DescentAiGenerator,
-  DescentAiGrid,
-  DescentAiTerrain,
-  DescentAiTerrainLayer,
-  DescentArtifactLayer,
-  DescentBattlePos,
-  DescentBattleVar,
-  DescentBoardHeight,
-  DescentBoardWidth,
-  DescentCommand,
-  DescentGenerator,
-  DescentGrid,
-  DescentLayer,
-  DescentMark,
-  DescentPhase,
-  DescentPosition,
-  DescentTerrain,
-  DescentTurnPos,
-  DescentTurnVar,
-  DescentUnit
->;
-
-export type DescentGrid = never;
-
-export type DescentAiGenerator = never;
-
-export type DescentAiAspect = never;
-
-export type DescentAiGrid = never;
-
-export type DescentAiArtifactLayer = never;
-
-export type DescentAiBrain = never;
-
-export type DescentAiTerrainLayer = never;
-
-export type DescentAiTerrain = never;
-
-export type DescentPosition =
+type DescentPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -215,3 +64,25 @@ export type DescentPosition =
   | "d2"
   | "d3"
   | "d4";
+
+type DescentBlob = AlgolGameBlob<
+  DescentArtifactLayer,
+  DescentBoardName,
+  DescentBattlePos,
+  DescentBattleVar,
+  DescentCommand,
+  DescentGenerator,
+  DescentGrid,
+  DescentLayer,
+  DescentMark,
+  DescentPhase,
+  DescentPosition,
+  DescentRulesetName,
+  DescentSetupName,
+  DescentTerrain,
+  DescentTurnPos,
+  DescentTurnVar,
+  DescentUnit
+>;
+
+export type DescentDefinition = FullDef<DescentBlob>;

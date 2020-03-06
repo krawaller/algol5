@@ -1,6 +1,6 @@
-import { DescentInstructions } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentInstructions: DescentInstructions = {
+const descentInstructions: DescentDefinition["instructions"] = {
   startTurn: {
     line: [
       "Select",

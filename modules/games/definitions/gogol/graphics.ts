@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { GogolGraphics } from "./_types";
+import { GogolDefinition } from "./_types";
 
-const gogolGraphics: GogolGraphics = {
+const gogolGraphics: GogolDefinition["graphics"] = {
   tiles: { homerow: "playercolour" },
   icons: { kings: "king", soldiers: "pawn" }
 };

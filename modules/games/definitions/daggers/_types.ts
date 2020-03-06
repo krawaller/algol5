@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type DaggersBoardHeight = 8;
-export type DaggersBoardWidth = 8;
+type DaggersBoardHeight = 8;
+type DaggersBoardWidth = 8;
 
-export type DaggersAnim = AlgolAnimCollection<
-  DaggersBattlePos,
-  DaggersBattleVar,
-  DaggersCommand,
-  DaggersGrid,
-  DaggersLayer,
-  DaggersMark,
-  DaggersTurnPos,
-  DaggersTurnVar,
-  DaggersUnit
->;
-
-export type DaggersTerrain = "base";
-export type DaggersUnit = "daggers" | "crowns";
-export type DaggersMark = "selectunit" | "selectmovetarget";
-export type DaggersCommand = "move";
-export type DaggersPhaseCommand = never;
-export type DaggersPhase = "startTurn" | DaggersMark;
-export type DaggersUnitLayer =
+type DaggersTerrain = "base";
+type DaggersUnit = "daggers" | "crowns";
+type DaggersMark = "selectunit" | "selectmovetarget";
+type DaggersCommand = "move";
+type DaggersPhaseCommand = never;
+type DaggersPhase = "startTurn" | DaggersMark;
+type DaggersUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -50,145 +23,27 @@ export type DaggersUnitLayer =
   | "mycrowns"
   | "oppcrowns"
   | "neutralcrowns";
-export type DaggersGenerator = "findcrowntargets" | "finddaggertargets";
-export type DaggersArtifactLayer = "movetarget";
-export type DaggersTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
-export type DaggersLayer =
+type DaggersGenerator = "findcrowntargets" | "finddaggertargets";
+type DaggersArtifactLayer = "movetarget";
+type DaggersTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
+type DaggersLayer =
   | CommonLayer
   | DaggersUnitLayer
   | DaggersArtifactLayer
   | DaggersTerrainLayer;
-export type DaggersBattlePos = never;
-export type DaggersBattleVar = never;
-export type DaggersTurnPos = never;
-export type DaggersTurnVar = never;
+type DaggersBattlePos = never;
+type DaggersBattleVar = never;
+type DaggersTurnPos = never;
+type DaggersTurnVar = never;
 
-export type DaggersBoardName = "basic";
-export type DaggersSetupName = "basic";
-export type DaggersRulesetName = "basic";
-export type DaggersVariantName = "basic";
+type DaggersBoardName = "basic";
+type DaggersSetupName = "basic";
+type DaggersRulesetName = "basic";
+type DaggersVariantName = "basic";
 
-export type DaggersVariantBook = AlgolVariantBook<
-  DaggersBoardName,
-  DaggersRulesetName,
-  DaggersSetupName
->;
+type DaggersGrid = never;
 
-export type DaggersGenerators = Generators<
-  DaggersArtifactLayer,
-  DaggersBattlePos,
-  DaggersBattleVar,
-  DaggersCommand,
-  DaggersGenerator,
-  DaggersGrid,
-  DaggersLayer,
-  DaggersMark,
-  DaggersTurnPos,
-  DaggersTurnVar
->;
-export type DaggersFlow = Flow<
-  DaggersBattlePos,
-  DaggersBattleVar,
-  DaggersCommand,
-  DaggersGenerator,
-  DaggersGrid,
-  DaggersLayer,
-  DaggersMark,
-  DaggersTurnPos,
-  DaggersTurnVar,
-  DaggersUnit
->;
-export type DaggersBoard = AlgolBoard<
-  DaggersBoardHeight,
-  DaggersBoardWidth,
-  DaggersGrid,
-  DaggersPosition,
-  DaggersTerrain
->;
-export type DaggersAI = AI<
-  DaggersAiArtifactLayer,
-  DaggersAiAspect,
-  DaggersAiBrain,
-  DaggersAiGenerator,
-  DaggersAiGrid,
-  DaggersAiTerrain,
-  DaggersAiTerrainLayer,
-  DaggersBattlePos,
-  DaggersBattleVar,
-  DaggersBoardHeight,
-  DaggersBoardWidth,
-  DaggersCommand,
-  DaggersGrid,
-  DaggersLayer,
-  DaggersMark,
-  DaggersPosition,
-  DaggersTurnPos,
-  DaggersTurnVar
->;
-export type DaggersGraphics = Graphics<DaggersTerrain, DaggersUnit>;
-export type DaggersInstructions = Instructions<
-  DaggersBattlePos,
-  DaggersBattleVar,
-  DaggersCommand,
-  DaggersGrid,
-  DaggersLayer,
-  DaggersMark,
-  DaggersPhase,
-  DaggersTurnPos,
-  DaggersTurnVar,
-  DaggersUnit
->;
-export type DaggersMeta = AlgolMeta<DaggersCommand, DaggersMark>;
-export type DaggersPerformance = AlgolPerformance<DaggersCommand, DaggersMark>;
-export type DaggersScripts = AlgolGameTestSuite<
-  DaggersCommand,
-  DaggersPosition
->;
-export type DaggersSetupBook = AlgolSetupBook<DaggersPosition, DaggersUnit>;
-
-export type DaggersDefinition = FullDef<
-  DaggersAiArtifactLayer,
-  DaggersAiAspect,
-  DaggersAiBrain,
-  DaggersAiGenerator,
-  DaggersAiGrid,
-  DaggersAiTerrain,
-  DaggersAiTerrainLayer,
-  DaggersArtifactLayer,
-  DaggersBattlePos,
-  DaggersBattleVar,
-  DaggersBoardHeight,
-  DaggersBoardWidth,
-  DaggersCommand,
-  DaggersGenerator,
-  DaggersGrid,
-  DaggersLayer,
-  DaggersMark,
-  DaggersPhase,
-  DaggersPosition,
-  DaggersTerrain,
-  DaggersTurnPos,
-  DaggersTurnVar,
-  DaggersUnit
->;
-
-export type DaggersGrid = never;
-
-export type DaggersAiGenerator = never;
-
-export type DaggersAiAspect = never;
-
-export type DaggersAiGrid = never;
-
-export type DaggersAiArtifactLayer = never;
-
-export type DaggersAiBrain = never;
-
-export type DaggersAiTerrainLayer = never;
-
-export type DaggersAiTerrain = never;
-
-export type DaggersPosition =
+type DaggersPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -253,3 +108,25 @@ export type DaggersPosition =
   | "h6"
   | "h7"
   | "h8";
+
+type DaggersBlob = AlgolGameBlob<
+  DaggersArtifactLayer,
+  DaggersBoardName,
+  DaggersBattlePos,
+  DaggersBattleVar,
+  DaggersCommand,
+  DaggersGenerator,
+  DaggersGrid,
+  DaggersLayer,
+  DaggersMark,
+  DaggersPhase,
+  DaggersPosition,
+  DaggersRulesetName,
+  DaggersSetupName,
+  DaggersTerrain,
+  DaggersTurnPos,
+  DaggersTurnVar,
+  DaggersUnit
+>;
+
+export type DaggersDefinition = FullDef<DaggersBlob>;

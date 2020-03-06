@@ -1,6 +1,6 @@
-import { DescentVariantBook } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentVariantBook: DescentVariantBook = {
+const descentVariantBook: DescentDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

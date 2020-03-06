@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type AriesBoardHeight = 8;
-export type AriesBoardWidth = 8;
+type AriesBoardHeight = 8;
+type AriesBoardWidth = 8;
 
-export type AriesAnim = AlgolAnimCollection<
-  AriesBattlePos,
-  AriesBattleVar,
-  AriesCommand,
-  AriesGrid,
-  AriesLayer,
-  AriesMark,
-  AriesTurnPos,
-  AriesTurnVar,
-  AriesUnit
->;
-
-export type AriesTerrain = "corner";
-export type AriesUnit = "soldiers";
-export type AriesMark = "selectunit" | "selectmovetarget";
-export type AriesCommand = "move";
-export type AriesPhaseCommand = never;
-export type AriesPhase = "startTurn" | AriesMark;
-export type AriesUnitLayer =
+type AriesTerrain = "corner";
+type AriesUnit = "soldiers";
+type AriesMark = "selectunit" | "selectmovetarget";
+type AriesCommand = "move";
+type AriesPhaseCommand = never;
+type AriesPhase = "startTurn" | AriesMark;
+type AriesUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -46,146 +19,27 @@ export type AriesUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-export type AriesGenerator = "findmovetargets" | "findpushresults";
-export type AriesArtifactLayer = "movetargets" | "beingpushed" | "squished";
-export type AriesTerrainLayer =
-  | "corner"
-  | "mycorner"
-  | "oppcorner"
-  | "nocorner";
-export type AriesLayer =
+type AriesGenerator = "findmovetargets" | "findpushresults";
+type AriesArtifactLayer = "movetargets" | "beingpushed" | "squished";
+type AriesTerrainLayer = "corner" | "mycorner" | "oppcorner" | "nocorner";
+type AriesLayer =
   | CommonLayer
   | AriesUnitLayer
   | AriesArtifactLayer
   | AriesTerrainLayer;
-export type AriesBattlePos = "pushsquare";
-export type AriesBattleVar = "pusheeid";
-export type AriesTurnPos = never;
-export type AriesTurnVar = never;
+type AriesBattlePos = "pushsquare";
+type AriesBattleVar = "pusheeid";
+type AriesTurnPos = never;
+type AriesTurnVar = never;
 
-export type AriesBoardName = "basic";
-export type AriesSetupName = "basic";
-export type AriesRulesetName = "basic";
-export type AriesVariantName = "basic";
+type AriesBoardName = "basic";
+type AriesSetupName = "basic";
+type AriesRulesetName = "basic";
+type AriesVariantName = "basic";
 
-export type AriesVariantBook = AlgolVariantBook<
-  AriesBoardName,
-  AriesRulesetName,
-  AriesSetupName
->;
+type AriesGrid = never;
 
-export type AriesGenerators = Generators<
-  AriesArtifactLayer,
-  AriesBattlePos,
-  AriesBattleVar,
-  AriesCommand,
-  AriesGenerator,
-  AriesGrid,
-  AriesLayer,
-  AriesMark,
-  AriesTurnPos,
-  AriesTurnVar
->;
-export type AriesFlow = Flow<
-  AriesBattlePos,
-  AriesBattleVar,
-  AriesCommand,
-  AriesGenerator,
-  AriesGrid,
-  AriesLayer,
-  AriesMark,
-  AriesTurnPos,
-  AriesTurnVar,
-  AriesUnit
->;
-export type AriesBoard = AlgolBoard<
-  AriesBoardHeight,
-  AriesBoardWidth,
-  AriesGrid,
-  AriesPosition,
-  AriesTerrain
->;
-export type AriesAI = AI<
-  AriesAiArtifactLayer,
-  AriesAiAspect,
-  AriesAiBrain,
-  AriesAiGenerator,
-  AriesAiGrid,
-  AriesAiTerrain,
-  AriesAiTerrainLayer,
-  AriesBattlePos,
-  AriesBattleVar,
-  AriesBoardHeight,
-  AriesBoardWidth,
-  AriesCommand,
-  AriesGrid,
-  AriesLayer,
-  AriesMark,
-  AriesPosition,
-  AriesTurnPos,
-  AriesTurnVar
->;
-export type AriesGraphics = Graphics<AriesTerrain, AriesUnit>;
-export type AriesInstructions = Instructions<
-  AriesBattlePos,
-  AriesBattleVar,
-  AriesCommand,
-  AriesGrid,
-  AriesLayer,
-  AriesMark,
-  AriesPhase,
-  AriesTurnPos,
-  AriesTurnVar,
-  AriesUnit
->;
-export type AriesMeta = AlgolMeta<AriesCommand, AriesMark>;
-export type AriesPerformance = AlgolPerformance<AriesCommand, AriesMark>;
-export type AriesScripts = AlgolGameTestSuite<AriesCommand, AriesPosition>;
-export type AriesSetupBook = AlgolSetupBook<AriesPosition, AriesUnit>;
-
-export type AriesDefinition = FullDef<
-  AriesAiArtifactLayer,
-  AriesAiAspect,
-  AriesAiBrain,
-  AriesAiGenerator,
-  AriesAiGrid,
-  AriesAiTerrain,
-  AriesAiTerrainLayer,
-  AriesArtifactLayer,
-  AriesBattlePos,
-  AriesBattleVar,
-  AriesBoardHeight,
-  AriesBoardWidth,
-  AriesCommand,
-  AriesGenerator,
-  AriesGrid,
-  AriesLayer,
-  AriesMark,
-  AriesPhase,
-  AriesPosition,
-  AriesTerrain,
-  AriesTurnPos,
-  AriesTurnVar,
-  AriesUnit
->;
-
-export type AriesGrid = never;
-
-export type AriesAiGenerator = never;
-
-export type AriesAiAspect = never;
-
-export type AriesAiGrid = never;
-
-export type AriesAiArtifactLayer = never;
-
-export type AriesAiBrain = never;
-
-export type AriesAiTerrainLayer = never;
-
-export type AriesAiTerrain = never;
-
-export type AriesPosition =
+type AriesPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -250,3 +104,25 @@ export type AriesPosition =
   | "h6"
   | "h7"
   | "h8";
+
+type AriesBlob = AlgolGameBlob<
+  AriesArtifactLayer,
+  AriesBoardName,
+  AriesBattlePos,
+  AriesBattleVar,
+  AriesCommand,
+  AriesGenerator,
+  AriesGrid,
+  AriesLayer,
+  AriesMark,
+  AriesPhase,
+  AriesPosition,
+  AriesRulesetName,
+  AriesSetupName,
+  AriesTerrain,
+  AriesTurnPos,
+  AriesTurnVar,
+  AriesUnit
+>;
+
+export type AriesDefinition = FullDef<AriesBlob>;

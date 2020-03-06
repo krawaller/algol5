@@ -1,48 +1,21 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type ShoveoffBoardHeight = 4;
-export type ShoveoffBoardWidth = 4;
+type ShoveoffBoardHeight = 4;
+type ShoveoffBoardWidth = 4;
 
-export type ShoveoffAnim = AlgolAnimCollection<
-  ShoveoffBattlePos,
-  ShoveoffBattleVar,
-  ShoveoffCommand,
-  ShoveoffGrid,
-  ShoveoffLayer,
-  ShoveoffMark,
-  ShoveoffTurnPos,
-  ShoveoffTurnVar,
-  ShoveoffUnit
->;
-
-export type ShoveoffTerrain =
+type ShoveoffTerrain =
   | "southedge"
   | "northedge"
   | "westedge"
   | "eastedge"
   | "edge";
-export type ShoveoffUnit = "soldiers";
-export type ShoveoffMark = "selectpushpoint";
-export type ShoveoffCommand = "north" | "south" | "east" | "west";
-export type ShoveoffPhaseCommand = never;
-export type ShoveoffPhase = "startTurn" | ShoveoffMark;
-export type ShoveoffUnitLayer =
+type ShoveoffUnit = "soldiers";
+type ShoveoffMark = "selectpushpoint";
+type ShoveoffCommand = "north" | "south" | "east" | "west";
+type ShoveoffPhaseCommand = never;
+type ShoveoffPhase = "startTurn" | ShoveoffMark;
+type ShoveoffUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -51,11 +24,8 @@ export type ShoveoffUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-export type ShoveoffGenerator =
-  | "findaffected"
-  | "findresults"
-  | "findfourinarow";
-export type ShoveoffArtifactLayer =
+type ShoveoffGenerator = "findaffected" | "findresults" | "findfourinarow";
+type ShoveoffArtifactLayer =
   | "targetedgepoints"
   | "squishsouth"
   | "squishwest"
@@ -70,7 +40,7 @@ export type ShoveoffArtifactLayer =
   | "spawnnorth"
   | "spawneast"
   | "fourinarow";
-export type ShoveoffTerrainLayer =
+type ShoveoffTerrainLayer =
   | "southedge"
   | "northedge"
   | "westedge"
@@ -81,145 +51,24 @@ export type ShoveoffTerrainLayer =
   | "nowestedge"
   | "noeastedge"
   | "noedge";
-export type ShoveoffLayer =
+type ShoveoffLayer =
   | CommonLayer
   | ShoveoffUnitLayer
   | ShoveoffArtifactLayer
   | ShoveoffTerrainLayer;
-export type ShoveoffBattlePos = never;
-export type ShoveoffBattleVar = never;
-export type ShoveoffTurnPos = never;
-export type ShoveoffTurnVar = never;
+type ShoveoffBattlePos = never;
+type ShoveoffBattleVar = never;
+type ShoveoffTurnPos = never;
+type ShoveoffTurnVar = never;
 
-export type ShoveoffBoardName = "basic";
-export type ShoveoffSetupName = "basic";
-export type ShoveoffRulesetName = "basic";
-export type ShoveoffVariantName = "basic";
+type ShoveoffBoardName = "basic";
+type ShoveoffSetupName = "basic";
+type ShoveoffRulesetName = "basic";
+type ShoveoffVariantName = "basic";
 
-export type ShoveoffVariantBook = AlgolVariantBook<
-  ShoveoffBoardName,
-  ShoveoffRulesetName,
-  ShoveoffSetupName
->;
+type ShoveoffGrid = never;
 
-export type ShoveoffGenerators = Generators<
-  ShoveoffArtifactLayer,
-  ShoveoffBattlePos,
-  ShoveoffBattleVar,
-  ShoveoffCommand,
-  ShoveoffGenerator,
-  ShoveoffGrid,
-  ShoveoffLayer,
-  ShoveoffMark,
-  ShoveoffTurnPos,
-  ShoveoffTurnVar
->;
-export type ShoveoffFlow = Flow<
-  ShoveoffBattlePos,
-  ShoveoffBattleVar,
-  ShoveoffCommand,
-  ShoveoffGenerator,
-  ShoveoffGrid,
-  ShoveoffLayer,
-  ShoveoffMark,
-  ShoveoffTurnPos,
-  ShoveoffTurnVar,
-  ShoveoffUnit
->;
-export type ShoveoffBoard = AlgolBoard<
-  ShoveoffBoardHeight,
-  ShoveoffBoardWidth,
-  ShoveoffGrid,
-  ShoveoffPosition,
-  ShoveoffTerrain
->;
-export type ShoveoffAI = AI<
-  ShoveoffAiArtifactLayer,
-  ShoveoffAiAspect,
-  ShoveoffAiBrain,
-  ShoveoffAiGenerator,
-  ShoveoffAiGrid,
-  ShoveoffAiTerrain,
-  ShoveoffAiTerrainLayer,
-  ShoveoffBattlePos,
-  ShoveoffBattleVar,
-  ShoveoffBoardHeight,
-  ShoveoffBoardWidth,
-  ShoveoffCommand,
-  ShoveoffGrid,
-  ShoveoffLayer,
-  ShoveoffMark,
-  ShoveoffPosition,
-  ShoveoffTurnPos,
-  ShoveoffTurnVar
->;
-export type ShoveoffGraphics = Graphics<ShoveoffTerrain, ShoveoffUnit>;
-export type ShoveoffInstructions = Instructions<
-  ShoveoffBattlePos,
-  ShoveoffBattleVar,
-  ShoveoffCommand,
-  ShoveoffGrid,
-  ShoveoffLayer,
-  ShoveoffMark,
-  ShoveoffPhase,
-  ShoveoffTurnPos,
-  ShoveoffTurnVar,
-  ShoveoffUnit
->;
-export type ShoveoffMeta = AlgolMeta<ShoveoffCommand, ShoveoffMark>;
-export type ShoveoffPerformance = AlgolPerformance<
-  ShoveoffCommand,
-  ShoveoffMark
->;
-export type ShoveoffScripts = AlgolGameTestSuite<
-  ShoveoffCommand,
-  ShoveoffPosition
->;
-export type ShoveoffSetupBook = AlgolSetupBook<ShoveoffPosition, ShoveoffUnit>;
-
-export type ShoveoffDefinition = FullDef<
-  ShoveoffAiArtifactLayer,
-  ShoveoffAiAspect,
-  ShoveoffAiBrain,
-  ShoveoffAiGenerator,
-  ShoveoffAiGrid,
-  ShoveoffAiTerrain,
-  ShoveoffAiTerrainLayer,
-  ShoveoffArtifactLayer,
-  ShoveoffBattlePos,
-  ShoveoffBattleVar,
-  ShoveoffBoardHeight,
-  ShoveoffBoardWidth,
-  ShoveoffCommand,
-  ShoveoffGenerator,
-  ShoveoffGrid,
-  ShoveoffLayer,
-  ShoveoffMark,
-  ShoveoffPhase,
-  ShoveoffPosition,
-  ShoveoffTerrain,
-  ShoveoffTurnPos,
-  ShoveoffTurnVar,
-  ShoveoffUnit
->;
-
-export type ShoveoffGrid = never;
-
-export type ShoveoffAiGenerator = never;
-
-export type ShoveoffAiAspect = never;
-
-export type ShoveoffAiGrid = never;
-
-export type ShoveoffAiArtifactLayer = never;
-
-export type ShoveoffAiBrain = never;
-
-export type ShoveoffAiTerrainLayer = never;
-
-export type ShoveoffAiTerrain = never;
-
-export type ShoveoffPosition =
+type ShoveoffPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -236,3 +85,25 @@ export type ShoveoffPosition =
   | "d2"
   | "d3"
   | "d4";
+
+type ShoveoffBlob = AlgolGameBlob<
+  ShoveoffArtifactLayer,
+  ShoveoffBoardName,
+  ShoveoffBattlePos,
+  ShoveoffBattleVar,
+  ShoveoffCommand,
+  ShoveoffGenerator,
+  ShoveoffGrid,
+  ShoveoffLayer,
+  ShoveoffMark,
+  ShoveoffPhase,
+  ShoveoffPosition,
+  ShoveoffRulesetName,
+  ShoveoffSetupName,
+  ShoveoffTerrain,
+  ShoveoffTurnPos,
+  ShoveoffTurnVar,
+  ShoveoffUnit
+>;
+
+export type ShoveoffDefinition = FullDef<ShoveoffBlob>;

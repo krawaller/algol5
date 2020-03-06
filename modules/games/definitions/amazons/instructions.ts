@@ -1,6 +1,6 @@
-import { AmazonsInstructions } from "./_types";
+import { AmazonsDefinition } from "./_types";
 
-const amazonsInstructions: AmazonsInstructions = {
+const amazonsInstructions: AmazonsDefinition["instructions"] = {
   startTurn: { line: ["Select", "amazons", "to move and fire with"] },
   selectunit: { line: ["Select", "where to move", { unitat: "selectunit" }] },
   selectmovetarget: {

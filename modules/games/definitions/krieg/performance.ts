@@ -1,6 +1,6 @@
-import { KriegPerformance } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegPerformance: KriegPerformance = {
+const kriegPerformance: KriegDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

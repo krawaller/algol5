@@ -1,6 +1,6 @@
-import { ThreemusketeersPerformance } from "./_types";
+import { ThreemusketeersDefinition } from "./_types";
 
-const threemusketeersPerformance: ThreemusketeersPerformance = {
+const threemusketeersPerformance: ThreemusketeersDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

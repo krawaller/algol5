@@ -8,9 +8,9 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { MurusgallicusAnim } from "./_types";
+import { MurusgallicusDefinition } from "./_types";
 
-const murusgallicusAnim: MurusgallicusAnim = {
+const murusgallicusAnim: MurusgallicusDefinition["anim"] = {
   move: [
     { enterin: ["madewalls", "selecttower"] },
     { ghosttoin: ["madetowers", "selecttower", "walls", ["player"]] }

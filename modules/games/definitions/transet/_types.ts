@@ -1,48 +1,21 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type TransetBoardHeight = 5;
-export type TransetBoardWidth = 5;
+type TransetBoardHeight = 5;
+type TransetBoardWidth = 5;
 
-export type TransetAnim = AlgolAnimCollection<
-  TransetBattlePos,
-  TransetBattleVar,
-  TransetCommand,
-  TransetGrid,
-  TransetLayer,
-  TransetMark,
-  TransetTurnPos,
-  TransetTurnVar,
-  TransetUnit
->;
-
-export type TransetTerrain = "base";
-export type TransetUnit = "pinets" | "piokers" | "piases";
-export type TransetMark =
+type TransetTerrain = "base";
+type TransetUnit = "pinets" | "piokers" | "piases";
+type TransetMark =
   | "selectunit"
   | "selectmovetarget"
   | "selectdeportdestination"
   | "selectswapunit"
   | "selectswap1target";
-export type TransetCommand = "move" | "swap";
-export type TransetPhaseCommand = never;
-export type TransetPhase = "startTurn" | TransetMark;
-export type TransetUnitLayer =
+type TransetCommand = "move" | "swap";
+type TransetPhaseCommand = never;
+type TransetPhase = "startTurn" | TransetMark;
+type TransetUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -59,148 +32,27 @@ export type TransetUnitLayer =
   | "mypiases"
   | "opppiases"
   | "neutralpiases";
-export type TransetGenerator =
-  | "findswap2step"
-  | "findswap1steps"
-  | "findmovetargets";
-export type TransetArtifactLayer = "swap2step" | "swap1steps" | "movetargets";
-export type TransetTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
-export type TransetLayer =
+type TransetGenerator = "findswap2step" | "findswap1steps" | "findmovetargets";
+type TransetArtifactLayer = "swap2step" | "swap1steps" | "movetargets";
+type TransetTerrainLayer = "base" | "mybase" | "oppbase" | "nobase";
+type TransetLayer =
   | CommonLayer
   | TransetUnitLayer
   | TransetArtifactLayer
   | TransetTerrainLayer;
-export type TransetBattlePos = never;
-export type TransetBattleVar = never;
-export type TransetTurnPos = never;
-export type TransetTurnVar = never;
+type TransetBattlePos = never;
+type TransetBattleVar = never;
+type TransetTurnPos = never;
+type TransetTurnVar = never;
 
-export type TransetBoardName = "basic";
-export type TransetSetupName = "basic";
-export type TransetRulesetName = "basic";
-export type TransetVariantName = "basic";
+type TransetBoardName = "basic";
+type TransetSetupName = "basic";
+type TransetRulesetName = "basic";
+type TransetVariantName = "basic";
 
-export type TransetVariantBook = AlgolVariantBook<
-  TransetBoardName,
-  TransetRulesetName,
-  TransetSetupName
->;
+type TransetGrid = never;
 
-export type TransetGenerators = Generators<
-  TransetArtifactLayer,
-  TransetBattlePos,
-  TransetBattleVar,
-  TransetCommand,
-  TransetGenerator,
-  TransetGrid,
-  TransetLayer,
-  TransetMark,
-  TransetTurnPos,
-  TransetTurnVar
->;
-export type TransetFlow = Flow<
-  TransetBattlePos,
-  TransetBattleVar,
-  TransetCommand,
-  TransetGenerator,
-  TransetGrid,
-  TransetLayer,
-  TransetMark,
-  TransetTurnPos,
-  TransetTurnVar,
-  TransetUnit
->;
-export type TransetBoard = AlgolBoard<
-  TransetBoardHeight,
-  TransetBoardWidth,
-  TransetGrid,
-  TransetPosition,
-  TransetTerrain
->;
-export type TransetAI = AI<
-  TransetAiArtifactLayer,
-  TransetAiAspect,
-  TransetAiBrain,
-  TransetAiGenerator,
-  TransetAiGrid,
-  TransetAiTerrain,
-  TransetAiTerrainLayer,
-  TransetBattlePos,
-  TransetBattleVar,
-  TransetBoardHeight,
-  TransetBoardWidth,
-  TransetCommand,
-  TransetGrid,
-  TransetLayer,
-  TransetMark,
-  TransetPosition,
-  TransetTurnPos,
-  TransetTurnVar
->;
-export type TransetGraphics = Graphics<TransetTerrain, TransetUnit>;
-export type TransetInstructions = Instructions<
-  TransetBattlePos,
-  TransetBattleVar,
-  TransetCommand,
-  TransetGrid,
-  TransetLayer,
-  TransetMark,
-  TransetPhase,
-  TransetTurnPos,
-  TransetTurnVar,
-  TransetUnit
->;
-export type TransetMeta = AlgolMeta<TransetCommand, TransetMark>;
-export type TransetPerformance = AlgolPerformance<TransetCommand, TransetMark>;
-export type TransetScripts = AlgolGameTestSuite<
-  TransetCommand,
-  TransetPosition
->;
-export type TransetSetupBook = AlgolSetupBook<TransetPosition, TransetUnit>;
-
-export type TransetDefinition = FullDef<
-  TransetAiArtifactLayer,
-  TransetAiAspect,
-  TransetAiBrain,
-  TransetAiGenerator,
-  TransetAiGrid,
-  TransetAiTerrain,
-  TransetAiTerrainLayer,
-  TransetArtifactLayer,
-  TransetBattlePos,
-  TransetBattleVar,
-  TransetBoardHeight,
-  TransetBoardWidth,
-  TransetCommand,
-  TransetGenerator,
-  TransetGrid,
-  TransetLayer,
-  TransetMark,
-  TransetPhase,
-  TransetPosition,
-  TransetTerrain,
-  TransetTurnPos,
-  TransetTurnVar,
-  TransetUnit
->;
-
-export type TransetGrid = never;
-
-export type TransetAiGenerator = never;
-
-export type TransetAiAspect = never;
-
-export type TransetAiGrid = never;
-
-export type TransetAiArtifactLayer = never;
-
-export type TransetAiBrain = never;
-
-export type TransetAiTerrainLayer = never;
-
-export type TransetAiTerrain = never;
-
-export type TransetPosition =
+type TransetPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -226,3 +78,25 @@ export type TransetPosition =
   | "e3"
   | "e4"
   | "e5";
+
+type TransetBlob = AlgolGameBlob<
+  TransetArtifactLayer,
+  TransetBoardName,
+  TransetBattlePos,
+  TransetBattleVar,
+  TransetCommand,
+  TransetGenerator,
+  TransetGrid,
+  TransetLayer,
+  TransetMark,
+  TransetPhase,
+  TransetPosition,
+  TransetRulesetName,
+  TransetSetupName,
+  TransetTerrain,
+  TransetTurnPos,
+  TransetTurnVar,
+  TransetUnit
+>;
+
+export type TransetDefinition = FullDef<TransetBlob>;

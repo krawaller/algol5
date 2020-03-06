@@ -1,6 +1,6 @@
-import { ChameleonInstructions } from "./_types";
+import { ChameleonDefinition } from "./_types";
 
-const chameleonInstructions: ChameleonInstructions = {
+const chameleonInstructions: ChameleonDefinition["instructions"] = {
   startTurn: {
     line: [
       "Select",

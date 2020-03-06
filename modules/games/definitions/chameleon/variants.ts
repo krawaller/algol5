@@ -1,6 +1,6 @@
-import { ChameleonVariantBook } from "./_types";
+import { ChameleonDefinition } from "./_types";
 
-const chameleonVariantBook: ChameleonVariantBook = {
+const chameleonVariantBook: ChameleonDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

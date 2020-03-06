@@ -1,6 +1,6 @@
-import { GowiththefloePerformance } from "./_types";
+import { GowiththefloeDefinition } from "./_types";
 
-const gowiththefloePerformance: GowiththefloePerformance = {
+const gowiththefloePerformance: GowiththefloeDefinition["performance"] = {
   canAlwaysEnd: { selectmovetarget: true, selecteattarget: true },
   massiveTree: {}
 };

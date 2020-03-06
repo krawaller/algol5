@@ -1,6 +1,6 @@
-import { DaggersScripts } from "./_types";
+import { DaggersDefinition } from "./_types";
 
-const daggersScripts: DaggersScripts = {
+const daggersScripts: DaggersDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["c7", "d7", "d8", "e7", "e8", "f7"] },
     {

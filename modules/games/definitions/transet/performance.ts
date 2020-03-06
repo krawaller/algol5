@@ -1,6 +1,6 @@
-import { TransetPerformance } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetPerformance: TransetPerformance = {
+const transetPerformance: TransetDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

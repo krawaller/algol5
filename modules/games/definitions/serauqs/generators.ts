@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { SerauqsGenerators } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsGenerators: SerauqsGenerators = {
+const serauqsGenerators: SerauqsDefinition["generators"] = {
   findmovetargets: {
     type: "neighbour",
     start: "selectunit",

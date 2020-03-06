@@ -1,6 +1,6 @@
-import { KickrunVariantBook } from "./_types";
+import { KickrunDefinition } from "./_types";
 
-const kickrunVariantBook: KickrunVariantBook = {
+const kickrunVariantBook: KickrunDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

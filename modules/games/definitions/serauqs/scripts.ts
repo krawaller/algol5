@@ -1,6 +1,6 @@
-import { SerauqsScripts } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsScripts: SerauqsScripts = {
+const serauqsScripts: SerauqsDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["a1", "b1", "c1", "d1"] },
     { commands: ["d1"], include: ["promote"] },

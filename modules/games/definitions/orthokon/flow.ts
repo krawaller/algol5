@@ -1,6 +1,6 @@
-import { OrthokonFlow } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonFlow: OrthokonFlow = {
+const orthokonFlow: OrthokonDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   marks: {
     selectunit: {

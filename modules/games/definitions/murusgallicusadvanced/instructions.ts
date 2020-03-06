@@ -1,6 +1,6 @@
-import { MurusgallicusadvancedInstructions } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
 
-const murusgallicusadvancedInstructions: MurusgallicusadvancedInstructions = {
+const murusgallicusadvancedInstructions: MurusgallicusadvancedDefinition["instructions"] = {
   startTurn: { line: ["Select", "towers", "or", "catapults", "to act with"] },
   selecttower: {
     line: [

@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type GekitaiBoardHeight = 6;
-export type GekitaiBoardWidth = 6;
+type GekitaiBoardHeight = 6;
+type GekitaiBoardWidth = 6;
 
-export type GekitaiAnim = AlgolAnimCollection<
-  GekitaiBattlePos,
-  GekitaiBattleVar,
-  GekitaiCommand,
-  GekitaiGrid,
-  GekitaiLayer,
-  GekitaiMark,
-  GekitaiTurnPos,
-  GekitaiTurnVar,
-  GekitaiUnit
->;
-
-export type GekitaiTerrain = never;
-export type GekitaiUnit = "markers";
-export type GekitaiMark = "selectdroptarget";
-export type GekitaiCommand = "drop";
-export type GekitaiPhaseCommand = never;
-export type GekitaiPhase = "startTurn" | GekitaiMark;
-export type GekitaiUnitLayer =
+type GekitaiTerrain = never;
+type GekitaiUnit = "markers";
+type GekitaiMark = "selectdroptarget";
+type GekitaiCommand = "drop";
+type GekitaiPhaseCommand = never;
+type GekitaiPhase = "startTurn" | GekitaiMark;
+type GekitaiUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -46,144 +19,23 @@ export type GekitaiUnitLayer =
   | "mymarkers"
   | "oppmarkers"
   | "neutralmarkers";
-export type GekitaiGenerator = "findendline" | "findpushconsequences";
-export type GekitaiArtifactLayer = "winline" | "loseline" | "death" | "push";
-export type GekitaiTerrainLayer = never;
-export type GekitaiLayer =
-  | CommonLayer
-  | GekitaiUnitLayer
-  | GekitaiArtifactLayer;
-export type GekitaiBattlePos = never;
-export type GekitaiBattleVar = never;
-export type GekitaiTurnPos = never;
-export type GekitaiTurnVar = never;
+type GekitaiGenerator = "findendline" | "findpushconsequences";
+type GekitaiArtifactLayer = "winline" | "loseline" | "death" | "push";
+type GekitaiTerrainLayer = never;
+type GekitaiLayer = CommonLayer | GekitaiUnitLayer | GekitaiArtifactLayer;
+type GekitaiBattlePos = never;
+type GekitaiBattleVar = never;
+type GekitaiTurnPos = never;
+type GekitaiTurnVar = never;
 
-export type GekitaiBoardName = "basic";
-export type GekitaiSetupName = "basic";
-export type GekitaiRulesetName = "basic";
-export type GekitaiVariantName = "basic";
+type GekitaiBoardName = "basic";
+type GekitaiSetupName = "basic";
+type GekitaiRulesetName = "basic";
+type GekitaiVariantName = "basic";
 
-export type GekitaiVariantBook = AlgolVariantBook<
-  GekitaiBoardName,
-  GekitaiRulesetName,
-  GekitaiSetupName
->;
+type GekitaiGrid = never;
 
-export type GekitaiGenerators = Generators<
-  GekitaiArtifactLayer,
-  GekitaiBattlePos,
-  GekitaiBattleVar,
-  GekitaiCommand,
-  GekitaiGenerator,
-  GekitaiGrid,
-  GekitaiLayer,
-  GekitaiMark,
-  GekitaiTurnPos,
-  GekitaiTurnVar
->;
-export type GekitaiFlow = Flow<
-  GekitaiBattlePos,
-  GekitaiBattleVar,
-  GekitaiCommand,
-  GekitaiGenerator,
-  GekitaiGrid,
-  GekitaiLayer,
-  GekitaiMark,
-  GekitaiTurnPos,
-  GekitaiTurnVar,
-  GekitaiUnit
->;
-export type GekitaiBoard = AlgolBoard<
-  GekitaiBoardHeight,
-  GekitaiBoardWidth,
-  GekitaiGrid,
-  GekitaiPosition,
-  GekitaiTerrain
->;
-export type GekitaiAI = AI<
-  GekitaiAiArtifactLayer,
-  GekitaiAiAspect,
-  GekitaiAiBrain,
-  GekitaiAiGenerator,
-  GekitaiAiGrid,
-  GekitaiAiTerrain,
-  GekitaiAiTerrainLayer,
-  GekitaiBattlePos,
-  GekitaiBattleVar,
-  GekitaiBoardHeight,
-  GekitaiBoardWidth,
-  GekitaiCommand,
-  GekitaiGrid,
-  GekitaiLayer,
-  GekitaiMark,
-  GekitaiPosition,
-  GekitaiTurnPos,
-  GekitaiTurnVar
->;
-export type GekitaiGraphics = Graphics<GekitaiTerrain, GekitaiUnit>;
-export type GekitaiInstructions = Instructions<
-  GekitaiBattlePos,
-  GekitaiBattleVar,
-  GekitaiCommand,
-  GekitaiGrid,
-  GekitaiLayer,
-  GekitaiMark,
-  GekitaiPhase,
-  GekitaiTurnPos,
-  GekitaiTurnVar,
-  GekitaiUnit
->;
-export type GekitaiMeta = AlgolMeta<GekitaiCommand, GekitaiMark>;
-export type GekitaiPerformance = AlgolPerformance<GekitaiCommand, GekitaiMark>;
-export type GekitaiScripts = AlgolGameTestSuite<
-  GekitaiCommand,
-  GekitaiPosition
->;
-export type GekitaiSetupBook = AlgolSetupBook<GekitaiPosition, GekitaiUnit>;
-
-export type GekitaiDefinition = FullDef<
-  GekitaiAiArtifactLayer,
-  GekitaiAiAspect,
-  GekitaiAiBrain,
-  GekitaiAiGenerator,
-  GekitaiAiGrid,
-  GekitaiAiTerrain,
-  GekitaiAiTerrainLayer,
-  GekitaiArtifactLayer,
-  GekitaiBattlePos,
-  GekitaiBattleVar,
-  GekitaiBoardHeight,
-  GekitaiBoardWidth,
-  GekitaiCommand,
-  GekitaiGenerator,
-  GekitaiGrid,
-  GekitaiLayer,
-  GekitaiMark,
-  GekitaiPhase,
-  GekitaiPosition,
-  GekitaiTerrain,
-  GekitaiTurnPos,
-  GekitaiTurnVar,
-  GekitaiUnit
->;
-
-export type GekitaiGrid = never;
-
-export type GekitaiAiGenerator = never;
-
-export type GekitaiAiAspect = never;
-
-export type GekitaiAiGrid = never;
-
-export type GekitaiAiArtifactLayer = never;
-
-export type GekitaiAiBrain = never;
-
-export type GekitaiAiTerrainLayer = never;
-
-export type GekitaiAiTerrain = never;
-
-export type GekitaiPosition =
+type GekitaiPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -220,3 +72,25 @@ export type GekitaiPosition =
   | "f4"
   | "f5"
   | "f6";
+
+type GekitaiBlob = AlgolGameBlob<
+  GekitaiArtifactLayer,
+  GekitaiBoardName,
+  GekitaiBattlePos,
+  GekitaiBattleVar,
+  GekitaiCommand,
+  GekitaiGenerator,
+  GekitaiGrid,
+  GekitaiLayer,
+  GekitaiMark,
+  GekitaiPhase,
+  GekitaiPosition,
+  GekitaiRulesetName,
+  GekitaiSetupName,
+  GekitaiTerrain,
+  GekitaiTurnPos,
+  GekitaiTurnVar,
+  GekitaiUnit
+>;
+
+export type GekitaiDefinition = FullDef<GekitaiBlob>;

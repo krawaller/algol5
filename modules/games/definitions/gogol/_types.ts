@@ -1,47 +1,20 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type GogolBoardHeight = 8;
-export type GogolBoardWidth = 8;
+type GogolBoardHeight = 8;
+type GogolBoardWidth = 8;
 
-export type GogolAnim = AlgolAnimCollection<
-  GogolBattlePos,
-  GogolBattleVar,
-  GogolCommand,
-  GogolGrid,
-  GogolLayer,
-  GogolMark,
-  GogolTurnPos,
-  GogolTurnVar,
-  GogolUnit
->;
-
-export type GogolTerrain = "homerow" | "edges";
-export type GogolUnit = "kings" | "soldiers";
-export type GogolMark =
+type GogolTerrain = "homerow" | "edges";
+type GogolUnit = "kings" | "soldiers";
+type GogolMark =
   | "selectkingdeploy"
   | "selectunit"
   | "selectmovetarget"
   | "selectjumptarget";
-export type GogolCommand = "deploy" | "move" | "jump";
-export type GogolPhaseCommand = never;
-export type GogolPhase = "startTurn" | GogolMark;
-export type GogolUnitLayer =
+type GogolCommand = "deploy" | "move" | "jump";
+type GogolPhaseCommand = never;
+type GogolPhase = "startTurn" | GogolMark;
+type GogolUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -54,14 +27,14 @@ export type GogolUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-export type GogolGenerator =
+type GogolGenerator =
   | "findforbiddenkingspots"
   | "findforbiddensoldierspots"
   | "findkingwalktargets"
   | "findadjacentenemies"
   | "findsplashed"
   | "findjumptargets";
-export type GogolArtifactLayer =
+type GogolArtifactLayer =
   | "nokings"
   | "nosoldiers"
   | "kingwalk"
@@ -69,146 +42,31 @@ export type GogolArtifactLayer =
   | "splashed"
   | "willdie"
   | "jumptargets";
-export type GogolTerrainLayer =
+type GogolTerrainLayer =
   | "homerow"
   | "myhomerow"
   | "opphomerow"
   | "edges"
   | "nohomerow"
   | "noedges";
-export type GogolLayer =
+type GogolLayer =
   | CommonLayer
   | GogolUnitLayer
   | GogolArtifactLayer
   | GogolTerrainLayer;
-export type GogolBattlePos = never;
-export type GogolBattleVar = never;
-export type GogolTurnPos = never;
-export type GogolTurnVar = never;
+type GogolBattlePos = never;
+type GogolBattleVar = never;
+type GogolTurnPos = never;
+type GogolTurnVar = never;
 
-export type GogolBoardName = "basic";
-export type GogolSetupName = "basic";
-export type GogolRulesetName = "basic";
-export type GogolVariantName = "basic";
+type GogolBoardName = "basic";
+type GogolSetupName = "basic";
+type GogolRulesetName = "basic";
+type GogolVariantName = "basic";
 
-export type GogolVariantBook = AlgolVariantBook<
-  GogolBoardName,
-  GogolRulesetName,
-  GogolSetupName
->;
+type GogolGrid = never;
 
-export type GogolGenerators = Generators<
-  GogolArtifactLayer,
-  GogolBattlePos,
-  GogolBattleVar,
-  GogolCommand,
-  GogolGenerator,
-  GogolGrid,
-  GogolLayer,
-  GogolMark,
-  GogolTurnPos,
-  GogolTurnVar
->;
-export type GogolFlow = Flow<
-  GogolBattlePos,
-  GogolBattleVar,
-  GogolCommand,
-  GogolGenerator,
-  GogolGrid,
-  GogolLayer,
-  GogolMark,
-  GogolTurnPos,
-  GogolTurnVar,
-  GogolUnit
->;
-export type GogolBoard = AlgolBoard<
-  GogolBoardHeight,
-  GogolBoardWidth,
-  GogolGrid,
-  GogolPosition,
-  GogolTerrain
->;
-export type GogolAI = AI<
-  GogolAiArtifactLayer,
-  GogolAiAspect,
-  GogolAiBrain,
-  GogolAiGenerator,
-  GogolAiGrid,
-  GogolAiTerrain,
-  GogolAiTerrainLayer,
-  GogolBattlePos,
-  GogolBattleVar,
-  GogolBoardHeight,
-  GogolBoardWidth,
-  GogolCommand,
-  GogolGrid,
-  GogolLayer,
-  GogolMark,
-  GogolPosition,
-  GogolTurnPos,
-  GogolTurnVar
->;
-export type GogolGraphics = Graphics<GogolTerrain, GogolUnit>;
-export type GogolInstructions = Instructions<
-  GogolBattlePos,
-  GogolBattleVar,
-  GogolCommand,
-  GogolGrid,
-  GogolLayer,
-  GogolMark,
-  GogolPhase,
-  GogolTurnPos,
-  GogolTurnVar,
-  GogolUnit
->;
-export type GogolMeta = AlgolMeta<GogolCommand, GogolMark>;
-export type GogolPerformance = AlgolPerformance<GogolCommand, GogolMark>;
-export type GogolScripts = AlgolGameTestSuite<GogolCommand, GogolPosition>;
-export type GogolSetupBook = AlgolSetupBook<GogolPosition, GogolUnit>;
-
-export type GogolDefinition = FullDef<
-  GogolAiArtifactLayer,
-  GogolAiAspect,
-  GogolAiBrain,
-  GogolAiGenerator,
-  GogolAiGrid,
-  GogolAiTerrain,
-  GogolAiTerrainLayer,
-  GogolArtifactLayer,
-  GogolBattlePos,
-  GogolBattleVar,
-  GogolBoardHeight,
-  GogolBoardWidth,
-  GogolCommand,
-  GogolGenerator,
-  GogolGrid,
-  GogolLayer,
-  GogolMark,
-  GogolPhase,
-  GogolPosition,
-  GogolTerrain,
-  GogolTurnPos,
-  GogolTurnVar,
-  GogolUnit
->;
-
-export type GogolGrid = never;
-
-export type GogolAiGenerator = never;
-
-export type GogolAiAspect = never;
-
-export type GogolAiGrid = never;
-
-export type GogolAiArtifactLayer = never;
-
-export type GogolAiBrain = never;
-
-export type GogolAiTerrainLayer = never;
-
-export type GogolAiTerrain = never;
-
-export type GogolPosition =
+type GogolPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -273,3 +131,25 @@ export type GogolPosition =
   | "h6"
   | "h7"
   | "h8";
+
+type GogolBlob = AlgolGameBlob<
+  GogolArtifactLayer,
+  GogolBoardName,
+  GogolBattlePos,
+  GogolBattleVar,
+  GogolCommand,
+  GogolGenerator,
+  GogolGrid,
+  GogolLayer,
+  GogolMark,
+  GogolPhase,
+  GogolPosition,
+  GogolRulesetName,
+  GogolSetupName,
+  GogolTerrain,
+  GogolTurnPos,
+  GogolTurnVar,
+  GogolUnit
+>;
+
+export type GogolDefinition = FullDef<GogolBlob>;

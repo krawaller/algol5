@@ -1,6 +1,6 @@
-import { DaggersSetupBook } from "./_types";
+import { DaggersDefinition } from "./_types";
 
-const daggersSetupBook: DaggersSetupBook = {
+const daggersSetupBook: DaggersDefinition["setups"] = {
   basic: {
     crowns: { "1": ["d8", "e8"], "2": ["c1", "f1"] },
     daggers: {

@@ -1,6 +1,6 @@
-import { JostleFlow } from "./_types";
+import { JostleDefinition } from "./_types";
 
-const jostleFlow: JostleFlow = {
+const jostleFlow: JostleDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   marks: {
     selectunit: {

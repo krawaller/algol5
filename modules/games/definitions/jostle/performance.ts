@@ -1,6 +1,6 @@
-import { JostlePerformance } from "./_types";
+import { JostleDefinition } from "./_types";
 
-const jostlePerformance: JostlePerformance = {
+const jostlePerformance: JostleDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { MurusgallicusadvancedAI } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
+type MurusgallicusadvancedAI = any; // MurusgallicusadvancedDefinition['AI']
 
 const murusgallicusadvancedAI: MurusgallicusadvancedAI = {
   brains: {},

@@ -1,6 +1,6 @@
-import { OrthokonInstructions } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonInstructions: OrthokonInstructions = {
+const orthokonInstructions: OrthokonDefinition["instructions"] = {
   startTurn: { line: ["Select", "which", "soldiers", "to move"] },
   selectunit: { line: ["Select", "where to move", { unitat: "selectunit" }] },
   selectmovetarget: {

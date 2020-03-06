@@ -1,6 +1,6 @@
-import { ThreemusketeersInstructions } from "./_types";
+import { ThreemusketeersDefinition } from "./_types";
 
-const threemusketeersInstructions: ThreemusketeersInstructions = {
+const threemusketeersInstructions: ThreemusketeersDefinition["instructions"] = {
   startTurn: {
     playercase: [
       { line: ["Select", "which", "kings", "to move"] },

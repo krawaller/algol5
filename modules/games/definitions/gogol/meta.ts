@@ -1,6 +1,6 @@
-import { GogolMeta } from "./_types";
+import { GogolDefinition } from "./_types";
 
-const gogolMeta: GogolMeta = {
+const gogolMeta: GogolDefinition["meta"] = {
   code: "Y",
   id: "gogol",
   name: "Gogol",

@@ -1,6 +1,6 @@
-import { CoffeeFlow } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeeFlow: CoffeeFlow = {
+const coffeeFlow: CoffeeDefinition["flow"] = {
   TODO: "use different unit type for placeholders?",
   endGame: {
     madeline: { condition: { notempty: "winline" }, show: "winline" }

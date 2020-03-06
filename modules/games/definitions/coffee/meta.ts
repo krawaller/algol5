@@ -1,6 +1,6 @@
-import { CoffeeMeta } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeeMeta: CoffeeMeta = {
+const coffeeMeta: CoffeeDefinition["meta"] = {
   code: "l",
   id: "coffee",
   name: "Coffee",

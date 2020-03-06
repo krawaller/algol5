@@ -1,6 +1,6 @@
-import { ChameleonMeta } from "./_types";
+import { ChameleonDefinition } from "./_types";
 
-const chameleonMeta: ChameleonMeta = {
+const chameleonMeta: ChameleonDefinition["meta"] = {
   code: "E",
   id: "chameleon",
   name: "Chameleon",

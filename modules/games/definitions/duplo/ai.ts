@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { DuploAI } from "./_types";
+import { DuploDefinition } from "./_types";
+type DuploAI = any; // DuploDefinition['AI']
 
 const duploAI: DuploAI = {
   brains: {},

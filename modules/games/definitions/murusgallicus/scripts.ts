@@ -1,6 +1,6 @@
-import { MurusgallicusScripts } from "./_types";
+import { MurusgallicusDefinition } from "./_types";
 
-const murusgallicusScripts: MurusgallicusScripts = {
+const murusgallicusScripts: MurusgallicusDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"] },
     { commands: ["a1"], include: ["a3", "c3"] },

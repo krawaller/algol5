@@ -1,6 +1,6 @@
-import { DescentMeta } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentMeta: DescentMeta = {
+const descentMeta: DescentDefinition["meta"] = {
   code: "c",
   id: "descent",
   name: "Descent",

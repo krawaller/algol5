@@ -1,54 +1,21 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type MurusgallicusadvancedBoardHeight = 7;
-export type MurusgallicusadvancedBoardWidth = 8;
+type MurusgallicusadvancedBoardHeight = 7;
+type MurusgallicusadvancedBoardWidth = 8;
 
-export type MurusgallicusadvancedAnim = AlgolAnimCollection<
-  MurusgallicusadvancedBattlePos,
-  MurusgallicusadvancedBattleVar,
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedGrid,
-  MurusgallicusadvancedLayer,
-  MurusgallicusadvancedMark,
-  MurusgallicusadvancedTurnPos,
-  MurusgallicusadvancedTurnVar,
-  MurusgallicusadvancedUnit
->;
-
-export type MurusgallicusadvancedTerrain = "homerow";
-export type MurusgallicusadvancedUnit = "towers" | "walls" | "catapults";
-export type MurusgallicusadvancedMark =
+type MurusgallicusadvancedTerrain = "homerow";
+type MurusgallicusadvancedUnit = "towers" | "walls" | "catapults";
+type MurusgallicusadvancedMark =
   | "selecttower"
   | "selectmove"
   | "selectcrush"
   | "selectcatapult"
   | "selectfire";
-export type MurusgallicusadvancedCommand =
-  | "move"
-  | "crush"
-  | "sacrifice"
-  | "fire";
-export type MurusgallicusadvancedPhaseCommand = never;
-export type MurusgallicusadvancedPhase =
-  | "startTurn"
-  | MurusgallicusadvancedMark;
-export type MurusgallicusadvancedUnitLayer =
+type MurusgallicusadvancedCommand = "move" | "crush" | "sacrifice" | "fire";
+type MurusgallicusadvancedPhaseCommand = never;
+type MurusgallicusadvancedPhase = "startTurn" | MurusgallicusadvancedMark;
+type MurusgallicusadvancedUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -65,171 +32,41 @@ export type MurusgallicusadvancedUnitLayer =
   | "mycatapults"
   | "oppcatapults"
   | "neutralcatapults";
-export type MurusgallicusadvancedGenerator =
+type MurusgallicusadvancedGenerator =
   | "findfiretargets"
   | "findmovetargets"
   | "findmoveresults"
   | "findcrushtargets";
-export type MurusgallicusadvancedArtifactLayer =
+type MurusgallicusadvancedArtifactLayer =
   | "firetargets"
   | "movetargets"
   | "madecatapults"
   | "madetowers"
   | "madewalls"
   | "crushtargets";
-export type MurusgallicusadvancedTerrainLayer =
+type MurusgallicusadvancedTerrainLayer =
   | "homerow"
   | "myhomerow"
   | "opphomerow"
   | "nohomerow";
-export type MurusgallicusadvancedLayer =
+type MurusgallicusadvancedLayer =
   | CommonLayer
   | MurusgallicusadvancedUnitLayer
   | MurusgallicusadvancedArtifactLayer
   | MurusgallicusadvancedTerrainLayer;
-export type MurusgallicusadvancedBattlePos = never;
-export type MurusgallicusadvancedBattleVar = never;
-export type MurusgallicusadvancedTurnPos = never;
-export type MurusgallicusadvancedTurnVar = never;
+type MurusgallicusadvancedBattlePos = never;
+type MurusgallicusadvancedBattleVar = never;
+type MurusgallicusadvancedTurnPos = never;
+type MurusgallicusadvancedTurnVar = never;
 
-export type MurusgallicusadvancedBoardName = "basic";
-export type MurusgallicusadvancedSetupName = "basic";
-export type MurusgallicusadvancedRulesetName = "basic";
-export type MurusgallicusadvancedVariantName = "basic";
+type MurusgallicusadvancedBoardName = "basic";
+type MurusgallicusadvancedSetupName = "basic";
+type MurusgallicusadvancedRulesetName = "basic";
+type MurusgallicusadvancedVariantName = "basic";
 
-export type MurusgallicusadvancedVariantBook = AlgolVariantBook<
-  MurusgallicusadvancedBoardName,
-  MurusgallicusadvancedRulesetName,
-  MurusgallicusadvancedSetupName
->;
+type MurusgallicusadvancedGrid = never;
 
-export type MurusgallicusadvancedGenerators = Generators<
-  MurusgallicusadvancedArtifactLayer,
-  MurusgallicusadvancedBattlePos,
-  MurusgallicusadvancedBattleVar,
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedGenerator,
-  MurusgallicusadvancedGrid,
-  MurusgallicusadvancedLayer,
-  MurusgallicusadvancedMark,
-  MurusgallicusadvancedTurnPos,
-  MurusgallicusadvancedTurnVar
->;
-export type MurusgallicusadvancedFlow = Flow<
-  MurusgallicusadvancedBattlePos,
-  MurusgallicusadvancedBattleVar,
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedGenerator,
-  MurusgallicusadvancedGrid,
-  MurusgallicusadvancedLayer,
-  MurusgallicusadvancedMark,
-  MurusgallicusadvancedTurnPos,
-  MurusgallicusadvancedTurnVar,
-  MurusgallicusadvancedUnit
->;
-export type MurusgallicusadvancedBoard = AlgolBoard<
-  MurusgallicusadvancedBoardHeight,
-  MurusgallicusadvancedBoardWidth,
-  MurusgallicusadvancedGrid,
-  MurusgallicusadvancedPosition,
-  MurusgallicusadvancedTerrain
->;
-export type MurusgallicusadvancedAI = AI<
-  MurusgallicusadvancedAiArtifactLayer,
-  MurusgallicusadvancedAiAspect,
-  MurusgallicusadvancedAiBrain,
-  MurusgallicusadvancedAiGenerator,
-  MurusgallicusadvancedAiGrid,
-  MurusgallicusadvancedAiTerrain,
-  MurusgallicusadvancedAiTerrainLayer,
-  MurusgallicusadvancedBattlePos,
-  MurusgallicusadvancedBattleVar,
-  MurusgallicusadvancedBoardHeight,
-  MurusgallicusadvancedBoardWidth,
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedGrid,
-  MurusgallicusadvancedLayer,
-  MurusgallicusadvancedMark,
-  MurusgallicusadvancedPosition,
-  MurusgallicusadvancedTurnPos,
-  MurusgallicusadvancedTurnVar
->;
-export type MurusgallicusadvancedGraphics = Graphics<
-  MurusgallicusadvancedTerrain,
-  MurusgallicusadvancedUnit
->;
-export type MurusgallicusadvancedInstructions = Instructions<
-  MurusgallicusadvancedBattlePos,
-  MurusgallicusadvancedBattleVar,
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedGrid,
-  MurusgallicusadvancedLayer,
-  MurusgallicusadvancedMark,
-  MurusgallicusadvancedPhase,
-  MurusgallicusadvancedTurnPos,
-  MurusgallicusadvancedTurnVar,
-  MurusgallicusadvancedUnit
->;
-export type MurusgallicusadvancedMeta = AlgolMeta<
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedMark
->;
-export type MurusgallicusadvancedPerformance = AlgolPerformance<
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedMark
->;
-export type MurusgallicusadvancedScripts = AlgolGameTestSuite<
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedPosition
->;
-export type MurusgallicusadvancedSetupBook = AlgolSetupBook<
-  MurusgallicusadvancedPosition,
-  MurusgallicusadvancedUnit
->;
-
-export type MurusgallicusadvancedDefinition = FullDef<
-  MurusgallicusadvancedAiArtifactLayer,
-  MurusgallicusadvancedAiAspect,
-  MurusgallicusadvancedAiBrain,
-  MurusgallicusadvancedAiGenerator,
-  MurusgallicusadvancedAiGrid,
-  MurusgallicusadvancedAiTerrain,
-  MurusgallicusadvancedAiTerrainLayer,
-  MurusgallicusadvancedArtifactLayer,
-  MurusgallicusadvancedBattlePos,
-  MurusgallicusadvancedBattleVar,
-  MurusgallicusadvancedBoardHeight,
-  MurusgallicusadvancedBoardWidth,
-  MurusgallicusadvancedCommand,
-  MurusgallicusadvancedGenerator,
-  MurusgallicusadvancedGrid,
-  MurusgallicusadvancedLayer,
-  MurusgallicusadvancedMark,
-  MurusgallicusadvancedPhase,
-  MurusgallicusadvancedPosition,
-  MurusgallicusadvancedTerrain,
-  MurusgallicusadvancedTurnPos,
-  MurusgallicusadvancedTurnVar,
-  MurusgallicusadvancedUnit
->;
-
-export type MurusgallicusadvancedGrid = never;
-
-export type MurusgallicusadvancedAiGenerator = never;
-
-export type MurusgallicusadvancedAiAspect = never;
-
-export type MurusgallicusadvancedAiGrid = never;
-
-export type MurusgallicusadvancedAiArtifactLayer = never;
-
-export type MurusgallicusadvancedAiBrain = never;
-
-export type MurusgallicusadvancedAiTerrainLayer = never;
-
-export type MurusgallicusadvancedAiTerrain = never;
-
-export type MurusgallicusadvancedPosition =
+type MurusgallicusadvancedPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -286,3 +123,27 @@ export type MurusgallicusadvancedPosition =
   | "h5"
   | "h6"
   | "h7";
+
+type MurusgallicusadvancedBlob = AlgolGameBlob<
+  MurusgallicusadvancedArtifactLayer,
+  MurusgallicusadvancedBoardName,
+  MurusgallicusadvancedBattlePos,
+  MurusgallicusadvancedBattleVar,
+  MurusgallicusadvancedCommand,
+  MurusgallicusadvancedGenerator,
+  MurusgallicusadvancedGrid,
+  MurusgallicusadvancedLayer,
+  MurusgallicusadvancedMark,
+  MurusgallicusadvancedPhase,
+  MurusgallicusadvancedPosition,
+  MurusgallicusadvancedRulesetName,
+  MurusgallicusadvancedSetupName,
+  MurusgallicusadvancedTerrain,
+  MurusgallicusadvancedTurnPos,
+  MurusgallicusadvancedTurnVar,
+  MurusgallicusadvancedUnit
+>;
+
+export type MurusgallicusadvancedDefinition = FullDef<
+  MurusgallicusadvancedBlob
+>;

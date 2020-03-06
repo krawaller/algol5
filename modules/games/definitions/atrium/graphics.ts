@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { AtriumGraphics } from "./_types";
+import { AtriumDefinition } from "./_types";
 
-const atriumGraphics: AtriumGraphics = {
+const atriumGraphics: AtriumDefinition["graphics"] = {
   icons: { kings: "king", queens: "queen" },
   tiles: {}
 };

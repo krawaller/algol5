@@ -1,6 +1,6 @@
-import { AriesPerformance } from "./_types";
+import { AriesDefinition } from "./_types";
 
-const ariesPerformance: AriesPerformance = {
+const ariesPerformance: AriesDefinition["performance"] = {
   canAlwaysEnd: { selectmovetarget: true },
   massiveTree: {}
 };

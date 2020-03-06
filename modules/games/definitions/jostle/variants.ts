@@ -1,6 +1,6 @@
-import { JostleVariantBook } from "./_types";
+import { JostleDefinition } from "./_types";
 
-const jostleVariantBook: JostleVariantBook = {
+const jostleVariantBook: JostleDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

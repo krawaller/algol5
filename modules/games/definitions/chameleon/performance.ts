@@ -1,6 +1,6 @@
-import { ChameleonPerformance } from "./_types";
+import { ChameleonDefinition } from "./_types";
 
-const chameleonPerformance: ChameleonPerformance = {
+const chameleonPerformance: ChameleonDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

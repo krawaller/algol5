@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { KickrunAnim } from "./_types";
+import { KickrunDefinition } from "./_types";
 
-const kickrunAnim: KickrunAnim = {};
+const kickrunAnim: KickrunDefinition["anim"] = {};
 
 export default kickrunAnim;

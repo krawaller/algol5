@@ -8,9 +8,9 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { CoffeeAnim } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeeAnim: CoffeeAnim = {
+const coffeeAnim: CoffeeDefinition["anim"] = {
   downhill: [{ enterin: ["downhill", "selectdrop"] }],
   uphill: [{ enterin: ["uphill", "selectdrop"] }],
   horisontal: [{ enterin: ["horisontal", "selectdrop"] }],

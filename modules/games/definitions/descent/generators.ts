@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { DescentGenerators } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentGenerators: DescentGenerators = {
+const descentGenerators: DescentDefinition["generators"] = {
   findmovetargets: {
     type: "neighbour",
     dirs: "rose",

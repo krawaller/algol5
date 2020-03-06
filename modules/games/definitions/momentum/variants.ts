@@ -1,6 +1,6 @@
-import { MomentumVariantBook } from "./_types";
+import { MomentumDefinition } from "./_types";
 
-const momentumVariantBook: MomentumVariantBook = {
+const momentumVariantBook: MomentumDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

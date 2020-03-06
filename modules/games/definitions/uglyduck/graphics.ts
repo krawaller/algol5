@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { UglyduckGraphics } from "./_types";
+import { UglyduckDefinition } from "./_types";
 
-const uglyduckGraphics: UglyduckGraphics = {
+const uglyduckGraphics: UglyduckDefinition["graphics"] = {
   icons: { soldiers: "pawn", kings: "king" },
   tiles: { homerow: "playercolour" }
 };

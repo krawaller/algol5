@@ -1,6 +1,6 @@
-import { DuploMeta } from "./_types";
+import { DuploDefinition } from "./_types";
 
-const duploMeta: DuploMeta = {
+const duploMeta: DuploDefinition["meta"] = {
   code: "n",
   id: "duplo",
   name: "Duplo",

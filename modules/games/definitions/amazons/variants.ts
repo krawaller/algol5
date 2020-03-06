@@ -1,6 +1,6 @@
-import { AmazonsVariantBook } from "./_types";
+import { AmazonsDefinition } from "./_types";
 
-const amazonsVariantBook: AmazonsVariantBook = {
+const amazonsVariantBook: AmazonsDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

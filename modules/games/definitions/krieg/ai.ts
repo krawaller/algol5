@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { KriegAI } from "./_types";
+import { KriegDefinition } from "./_types";
+type KriegAI = any; // KriegDefinition['AI']
 
 const kriegAI: KriegAI = {
   generators: {

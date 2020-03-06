@@ -1,46 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type AmazonsBoardHeight = 10;
-export type AmazonsBoardWidth = 10;
+type AmazonsBoardHeight = 10;
+type AmazonsBoardWidth = 10;
 
-export type AmazonsAnim = AlgolAnimCollection<
-  AmazonsBattlePos,
-  AmazonsBattleVar,
-  AmazonsCommand,
-  AmazonsGrid,
-  AmazonsLayer,
-  AmazonsMark,
-  AmazonsTurnPos,
-  AmazonsTurnVar,
-  AmazonsUnit
->;
-
-export type AmazonsTerrain = never;
-export type AmazonsUnit = "amazons" | "fires";
-export type AmazonsMark =
-  | "selectunit"
-  | "selectmovetarget"
-  | "selectfiretarget";
-export type AmazonsCommand = "move" | "fire";
-export type AmazonsPhaseCommand = "move";
-export type AmazonsPhase = "startTurn" | AmazonsMark | AmazonsPhaseCommand;
-export type AmazonsUnitLayer =
+type AmazonsTerrain = never;
+type AmazonsUnit = "amazons" | "fires";
+type AmazonsMark = "selectunit" | "selectmovetarget" | "selectfiretarget";
+type AmazonsCommand = "move" | "fire";
+type AmazonsPhaseCommand = "move";
+type AmazonsPhase = "startTurn" | AmazonsMark | AmazonsPhaseCommand;
+type AmazonsUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -53,148 +23,23 @@ export type AmazonsUnitLayer =
   | "myfires"
   | "oppfires"
   | "neutralfires";
-export type AmazonsGenerator = "findmovetargets" | "findfiretargets";
-export type AmazonsArtifactLayer = "movetargets" | "firedfrom" | "firetargets";
-export type AmazonsTerrainLayer = never;
-export type AmazonsLayer =
-  | CommonLayer
-  | AmazonsUnitLayer
-  | AmazonsArtifactLayer;
-export type AmazonsBattlePos = never;
-export type AmazonsBattleVar = never;
-export type AmazonsTurnPos = never;
-export type AmazonsTurnVar = never;
+type AmazonsGenerator = "findmovetargets" | "findfiretargets";
+type AmazonsArtifactLayer = "movetargets" | "firedfrom" | "firetargets";
+type AmazonsTerrainLayer = never;
+type AmazonsLayer = CommonLayer | AmazonsUnitLayer | AmazonsArtifactLayer;
+type AmazonsBattlePos = never;
+type AmazonsBattleVar = never;
+type AmazonsTurnPos = never;
+type AmazonsTurnVar = never;
 
-export type AmazonsBoardName = "basic";
-export type AmazonsSetupName = "basic";
-export type AmazonsRulesetName = "basic";
-export type AmazonsVariantName = "basic";
+type AmazonsBoardName = "basic";
+type AmazonsSetupName = "basic";
+type AmazonsRulesetName = "basic";
+type AmazonsVariantName = "basic";
 
-export type AmazonsVariantBook = AlgolVariantBook<
-  AmazonsBoardName,
-  AmazonsRulesetName,
-  AmazonsSetupName
->;
+type AmazonsGrid = never;
 
-export type AmazonsGenerators = Generators<
-  AmazonsArtifactLayer,
-  AmazonsBattlePos,
-  AmazonsBattleVar,
-  AmazonsCommand,
-  AmazonsGenerator,
-  AmazonsGrid,
-  AmazonsLayer,
-  AmazonsMark,
-  AmazonsTurnPos,
-  AmazonsTurnVar
->;
-export type AmazonsFlow = Flow<
-  AmazonsBattlePos,
-  AmazonsBattleVar,
-  AmazonsCommand,
-  AmazonsGenerator,
-  AmazonsGrid,
-  AmazonsLayer,
-  AmazonsMark,
-  AmazonsTurnPos,
-  AmazonsTurnVar,
-  AmazonsUnit
->;
-export type AmazonsBoard = AlgolBoard<
-  AmazonsBoardHeight,
-  AmazonsBoardWidth,
-  AmazonsGrid,
-  AmazonsPosition,
-  AmazonsTerrain
->;
-export type AmazonsAI = AI<
-  AmazonsAiArtifactLayer,
-  AmazonsAiAspect,
-  AmazonsAiBrain,
-  AmazonsAiGenerator,
-  AmazonsAiGrid,
-  AmazonsAiTerrain,
-  AmazonsAiTerrainLayer,
-  AmazonsBattlePos,
-  AmazonsBattleVar,
-  AmazonsBoardHeight,
-  AmazonsBoardWidth,
-  AmazonsCommand,
-  AmazonsGrid,
-  AmazonsLayer,
-  AmazonsMark,
-  AmazonsPosition,
-  AmazonsTurnPos,
-  AmazonsTurnVar
->;
-export type AmazonsGraphics = Graphics<AmazonsTerrain, AmazonsUnit>;
-export type AmazonsInstructions = Instructions<
-  AmazonsBattlePos,
-  AmazonsBattleVar,
-  AmazonsCommand,
-  AmazonsGrid,
-  AmazonsLayer,
-  AmazonsMark,
-  AmazonsPhase,
-  AmazonsTurnPos,
-  AmazonsTurnVar,
-  AmazonsUnit
->;
-export type AmazonsMeta = AlgolMeta<AmazonsCommand, AmazonsMark>;
-export type AmazonsPerformance = AlgolPerformance<AmazonsCommand, AmazonsMark>;
-export type AmazonsScripts = AlgolGameTestSuite<
-  AmazonsCommand,
-  AmazonsPosition
->;
-export type AmazonsSetupBook = AlgolSetupBook<AmazonsPosition, AmazonsUnit>;
-
-export type AmazonsDefinition = FullDef<
-  AmazonsAiArtifactLayer,
-  AmazonsAiAspect,
-  AmazonsAiBrain,
-  AmazonsAiGenerator,
-  AmazonsAiGrid,
-  AmazonsAiTerrain,
-  AmazonsAiTerrainLayer,
-  AmazonsArtifactLayer,
-  AmazonsBattlePos,
-  AmazonsBattleVar,
-  AmazonsBoardHeight,
-  AmazonsBoardWidth,
-  AmazonsCommand,
-  AmazonsGenerator,
-  AmazonsGrid,
-  AmazonsLayer,
-  AmazonsMark,
-  AmazonsPhase,
-  AmazonsPosition,
-  AmazonsTerrain,
-  AmazonsTurnPos,
-  AmazonsTurnVar,
-  AmazonsUnit
->;
-
-export type AmazonsGrid = never;
-
-export type AmazonsAiGenerator = "findroads" | "findreach";
-
-export type AmazonsAiAspect = "myroads" | "mydomain" | "opproads" | "oppdomain";
-
-export type AmazonsAiGrid = never;
-
-export type AmazonsAiArtifactLayer =
-  | "myroads"
-  | "opproads"
-  | "myreach"
-  | "oppreach";
-
-export type AmazonsAiBrain = "Steve";
-
-export type AmazonsAiTerrainLayer = never;
-
-export type AmazonsAiTerrain = never;
-
-export type AmazonsPosition =
+type AmazonsPosition =
   | "a1"
   | "a10"
   | "a2"
@@ -295,3 +140,25 @@ export type AmazonsPosition =
   | "j7"
   | "j8"
   | "j9";
+
+type AmazonsBlob = AlgolGameBlob<
+  AmazonsArtifactLayer,
+  AmazonsBoardName,
+  AmazonsBattlePos,
+  AmazonsBattleVar,
+  AmazonsCommand,
+  AmazonsGenerator,
+  AmazonsGrid,
+  AmazonsLayer,
+  AmazonsMark,
+  AmazonsPhase,
+  AmazonsPosition,
+  AmazonsRulesetName,
+  AmazonsSetupName,
+  AmazonsTerrain,
+  AmazonsTurnPos,
+  AmazonsTurnVar,
+  AmazonsUnit
+>;
+
+export type AmazonsDefinition = FullDef<AmazonsBlob>;

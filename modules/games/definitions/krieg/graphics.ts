@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { KriegGraphics } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegGraphics: KriegGraphics = {
+const kriegGraphics: KriegDefinition["graphics"] = {
   tiles: { corners: "playercolour", bases: "castle" },
   icons: { notfrozens: "knight", frozens: "rook" }
 };

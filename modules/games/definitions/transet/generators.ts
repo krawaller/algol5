@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { TransetGenerators } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetGenerators: TransetGenerators = {
+const transetGenerators: TransetDefinition["generators"] = {
   findswap2step: {
     type: "neighbour",
     start: "selectswapunit",

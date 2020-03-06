@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { MurusgallicusadvancedGraphics } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
 
-const murusgallicusadvancedGraphics: MurusgallicusadvancedGraphics = {
+const murusgallicusadvancedGraphics: MurusgallicusadvancedDefinition["graphics"] = {
   tiles: { homerow: "playercolour" },
   icons: { towers: "rook", walls: "pawn", catapults: "queen" }
 };

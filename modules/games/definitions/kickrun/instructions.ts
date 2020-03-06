@@ -1,6 +1,6 @@
-import { KickrunInstructions } from "./_types";
+import { KickrunDefinition } from "./_types";
 
-const kickrunInstructions: KickrunInstructions = {
+const kickrunInstructions: KickrunDefinition["instructions"] = {
   startTurn: { line: ["Select", "runners", "or", "sidekickers", "to move"] },
   selectunit: { line: ["Select", "where to move", { unitat: "selectunit" }] },
   selectmovetarget: {

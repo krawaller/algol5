@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { GogolAI } from "./_types";
+import { GogolDefinition } from "./_types";
+type GogolAI = any; // GogolDefinition['AI']
 
 const gogolAI: GogolAI = {
   brains: {},

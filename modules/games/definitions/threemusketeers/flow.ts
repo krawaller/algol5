@@ -1,6 +1,6 @@
-import { ThreemusketeersFlow } from "./_types";
+import { ThreemusketeersDefinition } from "./_types";
 
-const threemusketeersFlow: ThreemusketeersFlow = {
+const threemusketeersFlow: ThreemusketeersDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   endGame: {
     musketeersinline: {

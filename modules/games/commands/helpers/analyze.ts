@@ -5,7 +5,6 @@ import fake from "./fake";
 
 import {
   FullDefAnon,
-  typeSignature,
   isAlgolPosTurnPos,
   isAlgolPosBattlePos,
   isAlgolValBattleVar,
@@ -19,6 +18,7 @@ import {
   emptyArtifactLayers,
   find,
   terrainLayerNamesForBook,
+  rulesetNames,
 } from "../../../common";
 import dateStamp from "./datestamp";
 
@@ -128,9 +128,7 @@ export default async function analyze(def: FullDefAnon | string) {
 
   const boardNames = Object.keys(def.boards);
   const setupNames = Object.keys(def.setups);
-  const rulesetNames = Array.from(
-    new Set(Object.values(def.variants).map(v => v.ruleset))
-  );
+  const myRulesetNames = rulesetNames(def);
   const variantNames = Object.keys(def.variants);
 
   const analysis = `import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
@@ -198,7 +196,7 @@ type ${capId}TurnVar = ${
 
 type ${capId}BoardName = ${boardNames.map(n => `"${n}"`).join(" | ")};
 type ${capId}SetupName = ${setupNames.map(n => `"${n}"`).join(" | ")};
-type ${capId}RulesetName = ${rulesetNames.map(n => `"${n}"`).join(" | ")};
+type ${capId}RulesetName = ${myRulesetNames.map(n => `"${n}"`).join(" | ")};
 type ${capId}VariantName = ${variantNames.map(n => `"${n}"`).join(" | ")};
 
 type ${capId}Grid = ${

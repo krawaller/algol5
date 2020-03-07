@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type JostleBoardHeight = 10;
-export type JostleBoardWidth = 10;
+type JostleBoardHeight = 10;
+type JostleBoardWidth = 10;
 
-export type JostleAnim = AlgolAnimCollection<
-  JostleBattlePos,
-  JostleBattleVar,
-  JostleCommand,
-  JostleGrid,
-  JostleLayer,
-  JostleMark,
-  JostleTurnPos,
-  JostleTurnVar,
-  JostleUnit
->;
-
-export type JostleTerrain = never;
-export type JostleUnit = "checkers";
-export type JostleMark = "selectunit" | "selectmovetarget";
-export type JostleCommand = "jostle";
-export type JostlePhaseCommand = never;
-export type JostlePhase = "startTurn" | JostleMark;
-export type JostleUnitLayer =
+type JostleTerrain = never;
+type JostleUnit = "checkers";
+type JostleMark = "selectunit" | "selectmovetarget";
+type JostleCommand = "jostle";
+type JostlePhaseCommand = never;
+type JostlePhase = "startTurn" | JostleMark;
+type JostleUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -46,143 +19,28 @@ export type JostleUnitLayer =
   | "mycheckers"
   | "oppcheckers"
   | "neutralcheckers";
-export type JostleGenerator = "findinitial" | "findnew";
-export type JostleArtifactLayer =
+type JostleGenerator = "findinitial" | "findnew";
+type JostleArtifactLayer =
   | "movetargets"
   | "initialenemy"
   | "initialfriend"
   | "newenemy"
   | "newfriend";
-export type JostleTerrainLayer = never;
-export type JostleLayer = CommonLayer | JostleUnitLayer | JostleArtifactLayer;
-export type JostleBattlePos = never;
-export type JostleBattleVar = never;
-export type JostleTurnPos = never;
-export type JostleTurnVar = never;
+type JostleTerrainLayer = never;
+type JostleLayer = CommonLayer | JostleUnitLayer | JostleArtifactLayer;
+type JostleBattlePos = never;
+type JostleBattleVar = never;
+type JostleTurnPos = never;
+type JostleTurnVar = never;
 
-export type JostleBoardName = "basic";
-export type JostleSetupName = "basic";
-export type JostleRulesetName = "basic";
-export type JostleVariantName = "basic";
+type JostleBoardName = "basic";
+type JostleSetupName = "basic";
+type JostleRulesetName = "basic";
+type JostleVariantName = "basic";
 
-export type JostleVariantBook = AlgolVariantBook<
-  JostleBoardName,
-  JostleRulesetName,
-  JostleSetupName
->;
+type JostleGrid = never;
 
-export type JostleGenerators = Generators<
-  JostleArtifactLayer,
-  JostleBattlePos,
-  JostleBattleVar,
-  JostleCommand,
-  JostleGenerator,
-  JostleGrid,
-  JostleLayer,
-  JostleMark,
-  JostleTurnPos,
-  JostleTurnVar
->;
-export type JostleFlow = Flow<
-  JostleBattlePos,
-  JostleBattleVar,
-  JostleCommand,
-  JostleGenerator,
-  JostleGrid,
-  JostleLayer,
-  JostleMark,
-  JostleTurnPos,
-  JostleTurnVar,
-  JostleUnit
->;
-export type JostleBoard = AlgolBoard<
-  JostleBoardHeight,
-  JostleBoardWidth,
-  JostleGrid,
-  JostlePosition,
-  JostleTerrain
->;
-export type JostleAI = AI<
-  JostleAiArtifactLayer,
-  JostleAiAspect,
-  JostleAiBrain,
-  JostleAiGenerator,
-  JostleAiGrid,
-  JostleAiTerrain,
-  JostleAiTerrainLayer,
-  JostleBattlePos,
-  JostleBattleVar,
-  JostleBoardHeight,
-  JostleBoardWidth,
-  JostleCommand,
-  JostleGrid,
-  JostleLayer,
-  JostleMark,
-  JostlePosition,
-  JostleTurnPos,
-  JostleTurnVar
->;
-export type JostleGraphics = Graphics<JostleTerrain, JostleUnit>;
-export type JostleInstructions = Instructions<
-  JostleBattlePos,
-  JostleBattleVar,
-  JostleCommand,
-  JostleGrid,
-  JostleLayer,
-  JostleMark,
-  JostlePhase,
-  JostleTurnPos,
-  JostleTurnVar,
-  JostleUnit
->;
-export type JostleMeta = AlgolMeta<JostleCommand, JostleMark>;
-export type JostlePerformance = AlgolPerformance<JostleCommand, JostleMark>;
-export type JostleScripts = AlgolGameTestSuite<JostleCommand, JostlePosition>;
-export type JostleSetupBook = AlgolSetupBook<JostlePosition, JostleUnit>;
-
-export type JostleDefinition = FullDef<
-  JostleAiArtifactLayer,
-  JostleAiAspect,
-  JostleAiBrain,
-  JostleAiGenerator,
-  JostleAiGrid,
-  JostleAiTerrain,
-  JostleAiTerrainLayer,
-  JostleArtifactLayer,
-  JostleBattlePos,
-  JostleBattleVar,
-  JostleBoardHeight,
-  JostleBoardWidth,
-  JostleCommand,
-  JostleGenerator,
-  JostleGrid,
-  JostleLayer,
-  JostleMark,
-  JostlePhase,
-  JostlePosition,
-  JostleTerrain,
-  JostleTurnPos,
-  JostleTurnVar,
-  JostleUnit
->;
-
-export type JostleGrid = never;
-
-export type JostleAiGenerator = never;
-
-export type JostleAiAspect = never;
-
-export type JostleAiGrid = never;
-
-export type JostleAiArtifactLayer = never;
-
-export type JostleAiBrain = never;
-
-export type JostleAiTerrainLayer = never;
-
-export type JostleAiTerrain = never;
-
-export type JostlePosition =
+type JostlePosition =
   | "a1"
   | "a10"
   | "a2"
@@ -283,3 +141,25 @@ export type JostlePosition =
   | "j7"
   | "j8"
   | "j9";
+
+type JostleBlob = AlgolGameBlob<
+  JostleArtifactLayer,
+  JostleBoardName,
+  JostleBattlePos,
+  JostleBattleVar,
+  JostleCommand,
+  JostleGenerator,
+  JostleGrid,
+  JostleLayer,
+  JostleMark,
+  JostlePhase,
+  JostlePosition,
+  JostleRulesetName,
+  JostleSetupName,
+  JostleTerrain,
+  JostleTurnPos,
+  JostleTurnVar,
+  JostleUnit
+>;
+
+export type JostleDefinition = FullDef<JostleBlob>;

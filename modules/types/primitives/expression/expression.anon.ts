@@ -1,16 +1,6 @@
 import { AlgolExpression } from "./";
 
-export type AlgolExpressionAnon<_T> = AlgolExpression<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolExpressionAnon<_T> = AlgolExpression<AlgolGameBlobAnon, _T>;
 
 // ------- former logical
 
@@ -20,51 +10,24 @@ import {
   AlgolExpressionIndexList,
   AlgolExpressionPlayerCase,
 } from "./expression.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
 export type AlgolExpressionIfElseAnon<_T> = AlgolExpressionIfElse<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
 export type AlgolExpressionPlayerCaseAnon<_T> = AlgolExpressionPlayerCase<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
 export type AlgolExpressionIfActionElseAnon<_T> = AlgolExpressionIfActionElse<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
 export type AlgolExpressionIndexListAnon<_T> = AlgolExpressionIndexList<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;

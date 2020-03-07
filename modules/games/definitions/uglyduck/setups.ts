@@ -1,6 +1,6 @@
-import { UglyduckSetupBook } from "./_types";
+import { UglyduckDefinition } from "./_types";
 
-const uglyduckSetupBook: UglyduckSetupBook = {
+const uglyduckSetupBook: UglyduckDefinition["setups"] = {
   basic: {
     soldiers: { "1": [{ rect: ["a1", "e1"] }], "2": [{ rect: ["a5", "e5"] }] }
   }

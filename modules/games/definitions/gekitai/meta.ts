@@ -1,6 +1,6 @@
-import { GekitaiMeta } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiMeta: GekitaiMeta = {
+const gekitaiMeta: GekitaiDefinition["meta"] = {
   id: "gekitai",
   name: "Gekitai",
   tags: [],

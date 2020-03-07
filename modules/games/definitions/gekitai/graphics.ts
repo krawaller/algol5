@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { GekitaiGraphics } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiGraphics: GekitaiGraphics = {
+const gekitaiGraphics: GekitaiDefinition["graphics"] = {
   icons: { markers: "pawn" },
   tiles: {}
 };

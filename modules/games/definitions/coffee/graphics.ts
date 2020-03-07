@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { CoffeeGraphics } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeeGraphics: CoffeeGraphics = {
+const coffeeGraphics: CoffeeDefinition["graphics"] = {
   icons: { soldiers: "pawn" },
   tiles: {}
 };

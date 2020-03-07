@@ -1,6 +1,6 @@
-import { DuploScripts } from "./_types";
+import { DuploDefinition } from "./_types";
 
-const duploScripts: DuploScripts = {
+const duploScripts: DuploDefinition["scripts"] = {
   basic: [
     {
       commands: [],

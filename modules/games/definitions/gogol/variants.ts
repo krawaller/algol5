@@ -1,6 +1,6 @@
-import { GogolVariantBook } from "./_types";
+import { GogolDefinition } from "./_types";
 
-const gogolVariantBook: GogolVariantBook = {
+const gogolVariantBook: GogolDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

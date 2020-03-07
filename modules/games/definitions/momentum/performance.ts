@@ -1,6 +1,6 @@
-import { MomentumPerformance } from "./_types";
+import { MomentumDefinition } from "./_types";
 
-const momentumPerformance: MomentumPerformance = {
+const momentumPerformance: MomentumDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {},
   noEndGameCheck: ["pie"]

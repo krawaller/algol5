@@ -2,156 +2,69 @@ import { AlgolIfableExpression } from "./";
 
 import { AlgolBool } from "../bool";
 import { AlgolVal } from "../value";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolIfableExpressionIf<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  if: [
-    AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolIfableExpressionIf<Blob extends AlgolGameBlobAnon, _T> {
+  if: [AlgolBool<Blob>, AlgolIfableExpression<Blob, _T>];
 }
 
 export interface AlgolIfableExpressionIfPlayer<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+  Blob extends AlgolGameBlobAnon,
+  _T
 > {
-  ifplayer: [
-    AlgolVal<1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+  ifplayer: [AlgolVal<Blob, 1 | 2>, AlgolIfableExpression<Blob, _T>];
 }
 
 export interface AlgolIfableExpressionIfAction<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+  Blob extends AlgolGameBlobAnon,
+  _T
 > {
   ifaction: [
-    AlgolVal<
-      "start" | Mrk | Cmnd,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >,
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolVal<Blob, "start" | Blob["mrk"] | Blob["cmnd"]>,
+    AlgolIfableExpression<Blob, _T>
   ];
 }
 
 // ------- proxies from AlgolExpression
 
 export interface AlgolIfableExpressionIfElse<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+  Blob extends AlgolGameBlobAnon,
+  _T
 > {
   ifelse: [
-    AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolBool<Blob>,
+    AlgolIfableExpression<Blob, _T>,
+    AlgolIfableExpression<Blob, _T>
   ];
 }
 
 export interface AlgolIfableExpressionPlayerCase<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+  Blob extends AlgolGameBlobAnon,
+  _T
 > {
   playercase: [
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolIfableExpression<Blob, _T>,
+    AlgolIfableExpression<Blob, _T>
   ];
 }
 
 export interface AlgolIfableExpressionIfActionElse<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+  Blob extends AlgolGameBlobAnon,
+  _T
 > {
   ifactionelse: [
-    AlgolVal<
-      "start" | Mrk | Cmnd,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >,
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolIfableExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolVal<Blob, "start" | Blob["mrk"] | Blob["cmnd"]>,
+    AlgolIfableExpression<Blob, _T>,
+    AlgolIfableExpression<Blob, _T>
   ];
 }
 
 export interface AlgolIfableExpressionIndexList<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+  Blob extends AlgolGameBlobAnon,
+  _T
 > {
   indexlist: [
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    ...AlgolIfableExpression<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >[]
+    AlgolVal<Blob, string | number>,
+    ...AlgolIfableExpression<Blob, _T>[]
   ];
 }

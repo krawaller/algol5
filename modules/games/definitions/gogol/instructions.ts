@@ -1,6 +1,6 @@
-import { GogolInstructions } from "./_types";
+import { GogolDefinition } from "./_types";
 
-const gogolInstructions: GogolInstructions = {
+const gogolInstructions: GogolDefinition["instructions"] = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 1] },

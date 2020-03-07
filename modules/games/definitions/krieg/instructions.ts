@@ -1,6 +1,6 @@
-import { KriegInstructions } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegInstructions: KriegInstructions = {
+const kriegInstructions: KriegDefinition["instructions"] = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 1] },

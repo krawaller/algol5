@@ -1,6 +1,6 @@
-import { TrafficlightsPerformance } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsPerformance: TrafficlightsPerformance = {
+const trafficlightsPerformance: TrafficlightsDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

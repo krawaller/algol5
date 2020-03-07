@@ -1,6 +1,6 @@
-import { SerauqsMeta } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsMeta: SerauqsMeta = {
+const serauqsMeta: SerauqsDefinition["meta"] = {
   code: "C",
   id: "serauqs",
   TODO: "maybe can move lines?",

@@ -21,30 +21,14 @@ import {
   AlgolValValue,
   AlgolValLoopRead,
 } from "./value.interface";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolVal<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = AlgolExpression<
-  AlgolValInner<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+export type AlgolVal<Blob extends AlgolGameBlobAnon, _T> = AlgolExpression<
+  Blob,
+  AlgolValInner<Blob, _T>
 >;
 
-type AlgolValInner<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
+type AlgolValInner<Blob extends AlgolGameBlobAnon, _T> =
   | _T
   | ["dir"]
   | ["offsetdir"]
@@ -59,18 +43,18 @@ type AlgolValInner<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
   | ["walklength"]
   | ["max"]
   | ["step"]
-  | AlgolValValue<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValRead<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValBattleVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValTurnVar<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValIdAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValRelDir<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValGridAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValGridIn<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValSizeOf<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValHarvest<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValSum<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValProd<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValMinus<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolValLoopRead<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolValValue<Blob, _T>
+  | AlgolValRead<Blob>
+  | AlgolValBattleVar<Blob>
+  | AlgolValTurnVar<Blob>
+  | AlgolValIdAt<Blob>
+  | AlgolValPos<Blob>
+  | AlgolValRelDir<Blob>
+  | AlgolValGridAt<Blob>
+  | AlgolValGridIn<Blob>
+  | AlgolValSizeOf<Blob>
+  | AlgolValHarvest<Blob>
+  | AlgolValSum<Blob>
+  | AlgolValProd<Blob>
+  | AlgolValMinus<Blob>
+  | AlgolValLoopRead<Blob>;

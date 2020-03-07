@@ -1,6 +1,6 @@
-import { CoffeePerformance } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeePerformance: CoffeePerformance = {
+const coffeePerformance: CoffeeDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

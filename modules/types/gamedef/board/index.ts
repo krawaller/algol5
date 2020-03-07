@@ -5,24 +5,22 @@ export * from "./offset";
 import { TerrainDef } from "./terrain";
 import { AlgolGrid } from "./grid";
 import { AlgolOffset } from "./offset";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolBoard<
-  BoardHeight extends number,
-  BoardWidth extends number,
-  Grid extends string,
-  Position extends string,
-  Terrain extends string
-> = {
-  height: BoardHeight;
-  width: BoardWidth;
+export type AlgolBoard<Blob extends AlgolGameBlobAnon> = {
+  height: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+  width: 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
   offsets?: AlgolOffset[];
   offset?: AlgolOffset;
-  terrain?: { [terrain in Terrain]: TerrainDef<Position> };
-  grids?: { [name in Grid]: AlgolGrid<BoardHeight, BoardWidth> };
+  terrain?: { [terrain in Blob["terrain"]]: TerrainDef<Blob> };
+  grids?: { [name in Blob["grid"]]: AlgolGrid<number, number> }; // TODO - grid number safety?
 };
 
-export type AlgolBoardAnon = AlgolBoard<number, number, string, string, string>;
+export type AlgolBoardAnon = AlgolBoard<AlgolGameBlobAnon>;
 
-export type AlgolBoardBookAnon = {
-  basic: AlgolBoardAnon;
-} & Record<string, AlgolBoardAnon>;
+export type AlgolBoardBook<Blob extends AlgolGameBlobAnon> = Record<
+  Blob["board"],
+  AlgolBoard<Blob>
+>;
+
+export type AlgolBoardBookAnon = AlgolBoardBook<AlgolGameBlobAnon>;

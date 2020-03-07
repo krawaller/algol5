@@ -1,17 +1,8 @@
 import { GeneratorDefAnon } from "./";
 import { AlgolBool, AlgolVal, AlgolSet, AlgolMatcher } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolFilterDefAnon = AlgolFilterDef<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolFilterDefAnon = AlgolFilterDef<AlgolGameBlobAnon>;
 
 export function isAlgolFilterDef(
   gen: GeneratorDefAnon
@@ -19,41 +10,12 @@ export function isAlgolFilterDef(
   return (gen as AlgolFilterDefAnon).type === "filter";
 }
 
-export type AlgolFilterDef<
-  ArtifactLayer,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = {
+export type AlgolFilterDef<Blob extends AlgolGameBlobAnon> = {
   type: "filter";
-  layer: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  condition?: AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  tolayer: AlgolVal<
-    ArtifactLayer,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+  layer: AlgolSet<Blob>;
+  condition?: AlgolBool<Blob>;
+  tolayer: AlgolVal<Blob, Blob["artifactLayer"]>;
   matching?: {
-    [prop: string]: AlgolMatcher<
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
+    [prop: string]: AlgolMatcher<Blob>;
   };
 };

@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { DaggersAI } from "./_types";
+import { DaggersDefinition } from "./_types";
+type DaggersAI = any; // DaggersDefinition['AI']
 
 const daggersAI: DaggersAI = {
   brains: {},

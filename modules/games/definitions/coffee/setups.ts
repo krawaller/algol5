@@ -1,5 +1,5 @@
-import { CoffeeSetupBook } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeeSetupBook: CoffeeSetupBook = { basic: {} };
+const coffeeSetupBook: CoffeeDefinition["setups"] = { basic: {} };
 
 export default coffeeSetupBook;

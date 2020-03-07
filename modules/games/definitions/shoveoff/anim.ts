@@ -8,9 +8,9 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { ShoveoffAnim } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffAnim: ShoveoffAnim = {
+const shoveoffAnim: ShoveoffDefinition["anim"] = {
   north: [
     { exitin: ["squishnorth", { offset: [["looppos"], { loopread: "dir" }] }] }
   ],

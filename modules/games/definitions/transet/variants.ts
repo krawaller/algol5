@@ -1,6 +1,6 @@
-import { TransetVariantBook } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetVariantBook: TransetVariantBook = {
+const transetVariantBook: TransetDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

@@ -1,6 +1,6 @@
-import { KickrunMeta } from "./_types";
+import { KickrunDefinition } from "./_types";
 
-const kickrunMeta: KickrunMeta = {
+const kickrunMeta: KickrunDefinition["meta"] = {
   code: "r",
   id: "kickrun",
   name: "Kick & run",

@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { KickrunGenerators } from "./_types";
+import { KickrunDefinition } from "./_types";
 
-const kickrunGenerators: KickrunGenerators = {
+const kickrunGenerators: KickrunDefinition["generators"] = {
   findmovetargets: {
     type: "walker",
     start: "selectunit",

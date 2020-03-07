@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { GekitaiGenerators } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiGenerators: GekitaiGenerators = {
+const gekitaiGenerators: GekitaiDefinition["generators"] = {
   findendline: {
     type: "walker",
     starts: "units",

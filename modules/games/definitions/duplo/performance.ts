@@ -1,6 +1,6 @@
-import { DuploPerformance } from "./_types";
+import { DuploDefinition } from "./_types";
 
-const duploPerformance: DuploPerformance = {
+const duploPerformance: DuploDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: { selectdeploy: true },
   noEndGameCheck: ["deploy"]

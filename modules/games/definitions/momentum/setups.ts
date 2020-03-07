@@ -1,5 +1,5 @@
-import { MomentumSetupBook } from "./_types";
+import { MomentumDefinition } from "./_types";
 
-const momentumSetupBook: MomentumSetupBook = { basic: {} };
+const momentumSetupBook: MomentumDefinition["setups"] = { basic: {} };
 
 export default momentumSetupBook;

@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { JostleAI } from "./_types";
+import { JostleDefinition } from "./_types";
+type JostleAI = any; // JostleDefinition['AI']
 
 const jostleAI: JostleAI = {
   brains: {},

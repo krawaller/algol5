@@ -1,6 +1,6 @@
-import { TransetFlow } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetFlow: TransetFlow = {
+const transetFlow: TransetDefinition["flow"] = {
   endGame: {
     infiltration: {
       condition: { overlaps: ["myunits", "oppbase"] },

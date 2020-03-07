@@ -3,32 +3,17 @@ export * from "./dirs.anon";
 import { AlgolExpression } from "../../";
 import { BasicDir } from "../../gamedef";
 import { AlgolDirsList } from "./dirs.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolDirs<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = AlgolExpression<
-  AlgolDirsInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+export type AlgolDirs<Blob extends AlgolGameBlobAnon> = AlgolExpression<
+  Blob,
+  AlgolDirsInner<Blob>
 >;
 
-export type AlgolDirsInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
+export type AlgolDirsInner<Blob extends AlgolGameBlobAnon> =
   | "ortho"
   | "diag"
   | "rose"
   | "knight"
   | BasicDir[]
-  | AlgolDirsList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolDirsList<Blob>;

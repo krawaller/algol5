@@ -1,6 +1,6 @@
-import { GekitaiFlow } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiFlow: GekitaiFlow = {
+const gekitaiFlow: GekitaiDefinition["flow"] = {
   endGame: {
     allout: { condition: { same: [{ sizeof: "myunits" }, 8] }, prio: 2 },
     suicide: {

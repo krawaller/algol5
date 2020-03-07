@@ -1,6 +1,6 @@
-import { CoffeeInstructions } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeeInstructions: CoffeeInstructions = {
+const coffeeInstructions: CoffeeDefinition["instructions"] = {
   startTurn: {
     ifelse: [
       { isempty: "neutralunits" },

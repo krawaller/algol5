@@ -1,6 +1,6 @@
-import { DescentScripts } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentScripts: DescentScripts = {
+const descentScripts: DescentDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["a1", "c4", "d1"] },
     { commands: ["c4"], include: ["b3", "b4", "c3", "d3"] },

@@ -1,6 +1,6 @@
-import { GowiththefloeVariantBook } from "./_types";
+import { GowiththefloeDefinition } from "./_types";
 
-const gowiththefloeVariantBook: GowiththefloeVariantBook = {
+const gowiththefloeVariantBook: GowiththefloeDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { ChameleonAnim } from "./_types";
+import { ChameleonDefinition } from "./_types";
 
-const chameleonAnim: ChameleonAnim = {};
+const chameleonAnim: ChameleonDefinition["anim"] = {};
 
 export default chameleonAnim;

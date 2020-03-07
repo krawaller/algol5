@@ -1,6 +1,6 @@
-import { KriegVariantBook } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegVariantBook: KriegVariantBook = {
+const kriegVariantBook: KriegDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

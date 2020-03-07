@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { KickrunGraphics } from "./_types";
+import { KickrunDefinition } from "./_types";
 
-const kickrunGraphics: KickrunGraphics = {
+const kickrunGraphics: KickrunDefinition["graphics"] = {
   tiles: { corners: "playercolour" },
   icons: { runners: "bishop", sidekickers: "pawn" }
 };

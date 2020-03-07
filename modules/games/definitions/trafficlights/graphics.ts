@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { TrafficlightsGraphics } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsGraphics: TrafficlightsGraphics = {
+const trafficlightsGraphics: TrafficlightsDefinition["graphics"] = {
   icons: { kings: "king", pawns: "pawn", bishops: "bishop" },
   tiles: {}
 };

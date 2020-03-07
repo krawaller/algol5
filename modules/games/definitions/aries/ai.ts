@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { AriesAI } from "./_types";
+import { AriesDefinition } from "./_types";
+type AriesAI = any; // AriesDefinition['AI']
 
 const ariesAI: AriesAI = {
   brains: {},

@@ -1,6 +1,6 @@
-import { TrafficlightsScripts } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsScripts: TrafficlightsScripts = {
+const trafficlightsScripts: TrafficlightsDefinition["scripts"] = {
   quickWin: [
     {
       commands: [

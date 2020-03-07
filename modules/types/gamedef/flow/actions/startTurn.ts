@@ -1,38 +1,9 @@
 import { AlgolLink, AlgolGenRef } from "../../../";
+import { AlgolGameBlobAnon } from "../../../blob";
 
-export type AlgolStartTurnDef<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Gen,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = {
-  link?: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  links?: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
-  runGenerator?: AlgolGenRef<
-    Btlp,
-    Btlv,
-    Cmnd,
-    Gen,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
-  runGenerators?: AlgolGenRef<
-    Btlp,
-    Btlv,
-    Cmnd,
-    Gen,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >[];
+export type AlgolStartTurnDef<Blob extends AlgolGameBlobAnon> = {
+  link?: AlgolLink<Blob>;
+  links?: AlgolLink<Blob>[];
+  runGenerator?: AlgolGenRef<Blob>;
+  runGenerators?: AlgolGenRef<Blob>[];
 };

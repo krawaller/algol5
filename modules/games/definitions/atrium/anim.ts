@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { AtriumAnim } from "./_types";
+import { AtriumDefinition } from "./_types";
 
-const atriumAnim: AtriumAnim = {};
+const atriumAnim: AtriumDefinition["anim"] = {};
 
 export default atriumAnim;

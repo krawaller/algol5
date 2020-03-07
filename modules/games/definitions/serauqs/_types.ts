@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type SerauqsBoardHeight = 4;
-export type SerauqsBoardWidth = 4;
+type SerauqsBoardHeight = 4;
+type SerauqsBoardWidth = 4;
 
-export type SerauqsAnim = AlgolAnimCollection<
-  SerauqsBattlePos,
-  SerauqsBattleVar,
-  SerauqsCommand,
-  SerauqsGrid,
-  SerauqsLayer,
-  SerauqsMark,
-  SerauqsTurnPos,
-  SerauqsTurnVar,
-  SerauqsUnit
->;
-
-export type SerauqsTerrain = "base" | "corners" | "middle";
-export type SerauqsUnit = "soldiers" | "wild";
-export type SerauqsMark = "selectunit" | "selectmovetarget";
-export type SerauqsCommand = "promote" | "move";
-export type SerauqsPhaseCommand = never;
-export type SerauqsPhase = "startTurn" | SerauqsMark;
-export type SerauqsUnitLayer =
+type SerauqsTerrain = "base" | "corners" | "middle";
+type SerauqsUnit = "soldiers" | "wild";
+type SerauqsMark = "selectunit" | "selectmovetarget";
+type SerauqsCommand = "promote" | "move";
+type SerauqsPhaseCommand = never;
+type SerauqsPhase = "startTurn" | SerauqsMark;
+type SerauqsUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -50,9 +23,9 @@ export type SerauqsUnitLayer =
   | "mywild"
   | "oppwild"
   | "neutralwild";
-export type SerauqsGenerator = "findmovetargets" | "findwinline";
-export type SerauqsArtifactLayer = "movetargets" | "winline";
-export type SerauqsTerrainLayer =
+type SerauqsGenerator = "findmovetargets" | "findwinline";
+type SerauqsArtifactLayer = "movetargets" | "winline";
+type SerauqsTerrainLayer =
   | "base"
   | "mybase"
   | "oppbase"
@@ -61,142 +34,24 @@ export type SerauqsTerrainLayer =
   | "nobase"
   | "nocorners"
   | "nomiddle";
-export type SerauqsLayer =
+type SerauqsLayer =
   | CommonLayer
   | SerauqsUnitLayer
   | SerauqsArtifactLayer
   | SerauqsTerrainLayer;
-export type SerauqsBattlePos = never;
-export type SerauqsBattleVar = never;
-export type SerauqsTurnPos = never;
-export type SerauqsTurnVar = never;
+type SerauqsBattlePos = never;
+type SerauqsBattleVar = never;
+type SerauqsTurnPos = never;
+type SerauqsTurnVar = never;
 
-export type SerauqsBoardName = "basic";
-export type SerauqsSetupName = "basic";
-export type SerauqsRulesetName = "basic";
-export type SerauqsVariantName = "basic";
+type SerauqsBoardName = "basic";
+type SerauqsSetupName = "basic";
+type SerauqsRulesetName = "basic";
+type SerauqsVariantName = "basic";
 
-export type SerauqsVariantBook = AlgolVariantBook<
-  SerauqsBoardName,
-  SerauqsRulesetName,
-  SerauqsSetupName
->;
+type SerauqsGrid = never;
 
-export type SerauqsGenerators = Generators<
-  SerauqsArtifactLayer,
-  SerauqsBattlePos,
-  SerauqsBattleVar,
-  SerauqsCommand,
-  SerauqsGenerator,
-  SerauqsGrid,
-  SerauqsLayer,
-  SerauqsMark,
-  SerauqsTurnPos,
-  SerauqsTurnVar
->;
-export type SerauqsFlow = Flow<
-  SerauqsBattlePos,
-  SerauqsBattleVar,
-  SerauqsCommand,
-  SerauqsGenerator,
-  SerauqsGrid,
-  SerauqsLayer,
-  SerauqsMark,
-  SerauqsTurnPos,
-  SerauqsTurnVar,
-  SerauqsUnit
->;
-export type SerauqsBoard = AlgolBoard<
-  SerauqsBoardHeight,
-  SerauqsBoardWidth,
-  SerauqsGrid,
-  SerauqsPosition,
-  SerauqsTerrain
->;
-export type SerauqsAI = AI<
-  SerauqsAiArtifactLayer,
-  SerauqsAiAspect,
-  SerauqsAiBrain,
-  SerauqsAiGenerator,
-  SerauqsAiGrid,
-  SerauqsAiTerrain,
-  SerauqsAiTerrainLayer,
-  SerauqsBattlePos,
-  SerauqsBattleVar,
-  SerauqsBoardHeight,
-  SerauqsBoardWidth,
-  SerauqsCommand,
-  SerauqsGrid,
-  SerauqsLayer,
-  SerauqsMark,
-  SerauqsPosition,
-  SerauqsTurnPos,
-  SerauqsTurnVar
->;
-export type SerauqsGraphics = Graphics<SerauqsTerrain, SerauqsUnit>;
-export type SerauqsInstructions = Instructions<
-  SerauqsBattlePos,
-  SerauqsBattleVar,
-  SerauqsCommand,
-  SerauqsGrid,
-  SerauqsLayer,
-  SerauqsMark,
-  SerauqsPhase,
-  SerauqsTurnPos,
-  SerauqsTurnVar,
-  SerauqsUnit
->;
-export type SerauqsMeta = AlgolMeta<SerauqsCommand, SerauqsMark>;
-export type SerauqsPerformance = AlgolPerformance<SerauqsCommand, SerauqsMark>;
-export type SerauqsScripts = AlgolGameTestSuite<
-  SerauqsCommand,
-  SerauqsPosition
->;
-export type SerauqsSetupBook = AlgolSetupBook<SerauqsPosition, SerauqsUnit>;
-
-export type SerauqsDefinition = FullDef<
-  SerauqsAiArtifactLayer,
-  SerauqsAiAspect,
-  SerauqsAiBrain,
-  SerauqsAiGenerator,
-  SerauqsAiGrid,
-  SerauqsAiTerrain,
-  SerauqsAiTerrainLayer,
-  SerauqsArtifactLayer,
-  SerauqsBattlePos,
-  SerauqsBattleVar,
-  SerauqsBoardHeight,
-  SerauqsBoardWidth,
-  SerauqsCommand,
-  SerauqsGenerator,
-  SerauqsGrid,
-  SerauqsLayer,
-  SerauqsMark,
-  SerauqsPhase,
-  SerauqsPosition,
-  SerauqsTerrain,
-  SerauqsTurnPos,
-  SerauqsTurnVar,
-  SerauqsUnit
->;
-
-export type SerauqsGrid = never;
-
-export type SerauqsAiGenerator = never;
-
-export type SerauqsAiAspect = never;
-
-export type SerauqsAiGrid = never;
-
-export type SerauqsAiArtifactLayer = never;
-
-export type SerauqsAiBrain = never;
-
-export type SerauqsAiTerrainLayer = never;
-
-export type SerauqsAiTerrain = never;
-
-export type SerauqsPosition =
+type SerauqsPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -213,3 +68,25 @@ export type SerauqsPosition =
   | "d2"
   | "d3"
   | "d4";
+
+type SerauqsBlob = AlgolGameBlob<
+  SerauqsArtifactLayer,
+  SerauqsBoardName,
+  SerauqsBattlePos,
+  SerauqsBattleVar,
+  SerauqsCommand,
+  SerauqsGenerator,
+  SerauqsGrid,
+  SerauqsLayer,
+  SerauqsMark,
+  SerauqsPhase,
+  SerauqsPosition,
+  SerauqsRulesetName,
+  SerauqsSetupName,
+  SerauqsTerrain,
+  SerauqsTurnPos,
+  SerauqsTurnVar,
+  SerauqsUnit
+>;
+
+export type SerauqsDefinition = FullDef<SerauqsBlob>;

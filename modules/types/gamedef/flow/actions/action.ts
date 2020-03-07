@@ -1,75 +1,17 @@
 import { AlgolGenRef, AlgolLink } from "../../../";
 import { AlgolEffect } from "../../../";
+import { AlgolGameBlobAnon } from "../../../blob";
 
-export type AlgolActionDef<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Gen,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = {
-  link?: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  links?: AlgolLink<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
-  runGenerator?: AlgolGenRef<
-    Btlp,
-    Btlv,
-    Cmnd,
-    Gen,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
-  runGenerators?: AlgolGenRef<
-    Btlp,
-    Btlv,
-    Cmnd,
-    Gen,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >[];
+export type AlgolActionDef<Blob extends AlgolGameBlobAnon> = {
+  link?: AlgolLink<Blob>;
+  links?: AlgolLink<Blob>[];
+  runGenerator?: AlgolGenRef<Blob>;
+  runGenerators?: AlgolGenRef<Blob>[];
 };
 
 export type AlgolEffectActionDef<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Gen,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv,
-  Unit
-> = AlgolActionDef<Btlp, Btlv, Cmnd, Gen, Grid, Layer, Mrk, Turnp, Turnv> & {
-  applyEffects?: AlgolEffect<
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv,
-    Unit
-  >[];
-  applyEffect?: AlgolEffect<
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv,
-    Unit
-  >;
+  Blob extends AlgolGameBlobAnon
+> = AlgolActionDef<Blob> & {
+  applyEffects?: AlgolEffect<Blob>[];
+  applyEffect?: AlgolEffect<Blob>;
 };

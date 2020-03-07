@@ -1,6 +1,7 @@
 import { GameId } from "../../games/dist/list";
+import { AlgolGameBlobAnon } from "../blob";
 
-export type AlgolMeta<Command extends string, Mark extends string> = {
+export type AlgolMeta<Blob extends AlgolGameBlobAnon> = {
   rules?: RuleDescription;
   id: GameId;
   name: string;

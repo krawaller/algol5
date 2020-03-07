@@ -1,6 +1,6 @@
-import { TrafficlightsFlow } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsFlow: TrafficlightsFlow = {
+const trafficlightsFlow: TrafficlightsDefinition["flow"] = {
   startTurn: { links: ["selectdeploytarget", "selectunit"] },
   endGame: { madeline: { condition: { notempty: "line" }, show: "line" } },
   marks: {

@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type ThreemusketeersBoardHeight = 5;
-export type ThreemusketeersBoardWidth = 5;
+type ThreemusketeersBoardHeight = 5;
+type ThreemusketeersBoardWidth = 5;
 
-export type ThreemusketeersAnim = AlgolAnimCollection<
-  ThreemusketeersBattlePos,
-  ThreemusketeersBattleVar,
-  ThreemusketeersCommand,
-  ThreemusketeersGrid,
-  ThreemusketeersLayer,
-  ThreemusketeersMark,
-  ThreemusketeersTurnPos,
-  ThreemusketeersTurnVar,
-  ThreemusketeersUnit
->;
-
-export type ThreemusketeersTerrain = never;
-export type ThreemusketeersUnit = "pawns" | "kings";
-export type ThreemusketeersMark = "selectunit" | "selectmovetarget";
-export type ThreemusketeersCommand = "move";
-export type ThreemusketeersPhaseCommand = never;
-export type ThreemusketeersPhase = "startTurn" | ThreemusketeersMark;
-export type ThreemusketeersUnitLayer =
+type ThreemusketeersTerrain = never;
+type ThreemusketeersUnit = "pawns" | "kings";
+type ThreemusketeersMark = "selectunit" | "selectmovetarget";
+type ThreemusketeersCommand = "move";
+type ThreemusketeersPhaseCommand = never;
+type ThreemusketeersPhase = "startTurn" | ThreemusketeersMark;
+type ThreemusketeersUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -50,162 +23,32 @@ export type ThreemusketeersUnitLayer =
   | "mykings"
   | "oppkings"
   | "neutralkings";
-export type ThreemusketeersGenerator =
+type ThreemusketeersGenerator =
   | "findstrandedmusketeers"
   | "findmusketeerline"
   | "findmovetargets";
-export type ThreemusketeersArtifactLayer =
+type ThreemusketeersArtifactLayer =
   | "strandedmusketeers"
   | "musketeerline"
   | "movetargets";
-export type ThreemusketeersTerrainLayer = never;
-export type ThreemusketeersLayer =
+type ThreemusketeersTerrainLayer = never;
+type ThreemusketeersLayer =
   | CommonLayer
   | ThreemusketeersUnitLayer
   | ThreemusketeersArtifactLayer;
-export type ThreemusketeersBattlePos = never;
-export type ThreemusketeersBattleVar = never;
-export type ThreemusketeersTurnPos = never;
-export type ThreemusketeersTurnVar = never;
+type ThreemusketeersBattlePos = never;
+type ThreemusketeersBattleVar = never;
+type ThreemusketeersTurnPos = never;
+type ThreemusketeersTurnVar = never;
 
-export type ThreemusketeersBoardName = "basic";
-export type ThreemusketeersSetupName = "basic";
-export type ThreemusketeersRulesetName = "basic";
-export type ThreemusketeersVariantName = "basic";
+type ThreemusketeersBoardName = "basic";
+type ThreemusketeersSetupName = "basic";
+type ThreemusketeersRulesetName = "basic";
+type ThreemusketeersVariantName = "basic";
 
-export type ThreemusketeersVariantBook = AlgolVariantBook<
-  ThreemusketeersBoardName,
-  ThreemusketeersRulesetName,
-  ThreemusketeersSetupName
->;
+type ThreemusketeersGrid = never;
 
-export type ThreemusketeersGenerators = Generators<
-  ThreemusketeersArtifactLayer,
-  ThreemusketeersBattlePos,
-  ThreemusketeersBattleVar,
-  ThreemusketeersCommand,
-  ThreemusketeersGenerator,
-  ThreemusketeersGrid,
-  ThreemusketeersLayer,
-  ThreemusketeersMark,
-  ThreemusketeersTurnPos,
-  ThreemusketeersTurnVar
->;
-export type ThreemusketeersFlow = Flow<
-  ThreemusketeersBattlePos,
-  ThreemusketeersBattleVar,
-  ThreemusketeersCommand,
-  ThreemusketeersGenerator,
-  ThreemusketeersGrid,
-  ThreemusketeersLayer,
-  ThreemusketeersMark,
-  ThreemusketeersTurnPos,
-  ThreemusketeersTurnVar,
-  ThreemusketeersUnit
->;
-export type ThreemusketeersBoard = AlgolBoard<
-  ThreemusketeersBoardHeight,
-  ThreemusketeersBoardWidth,
-  ThreemusketeersGrid,
-  ThreemusketeersPosition,
-  ThreemusketeersTerrain
->;
-export type ThreemusketeersAI = AI<
-  ThreemusketeersAiArtifactLayer,
-  ThreemusketeersAiAspect,
-  ThreemusketeersAiBrain,
-  ThreemusketeersAiGenerator,
-  ThreemusketeersAiGrid,
-  ThreemusketeersAiTerrain,
-  ThreemusketeersAiTerrainLayer,
-  ThreemusketeersBattlePos,
-  ThreemusketeersBattleVar,
-  ThreemusketeersBoardHeight,
-  ThreemusketeersBoardWidth,
-  ThreemusketeersCommand,
-  ThreemusketeersGrid,
-  ThreemusketeersLayer,
-  ThreemusketeersMark,
-  ThreemusketeersPosition,
-  ThreemusketeersTurnPos,
-  ThreemusketeersTurnVar
->;
-export type ThreemusketeersGraphics = Graphics<
-  ThreemusketeersTerrain,
-  ThreemusketeersUnit
->;
-export type ThreemusketeersInstructions = Instructions<
-  ThreemusketeersBattlePos,
-  ThreemusketeersBattleVar,
-  ThreemusketeersCommand,
-  ThreemusketeersGrid,
-  ThreemusketeersLayer,
-  ThreemusketeersMark,
-  ThreemusketeersPhase,
-  ThreemusketeersTurnPos,
-  ThreemusketeersTurnVar,
-  ThreemusketeersUnit
->;
-export type ThreemusketeersMeta = AlgolMeta<
-  ThreemusketeersCommand,
-  ThreemusketeersMark
->;
-export type ThreemusketeersPerformance = AlgolPerformance<
-  ThreemusketeersCommand,
-  ThreemusketeersMark
->;
-export type ThreemusketeersScripts = AlgolGameTestSuite<
-  ThreemusketeersCommand,
-  ThreemusketeersPosition
->;
-export type ThreemusketeersSetupBook = AlgolSetupBook<
-  ThreemusketeersPosition,
-  ThreemusketeersUnit
->;
-
-export type ThreemusketeersDefinition = FullDef<
-  ThreemusketeersAiArtifactLayer,
-  ThreemusketeersAiAspect,
-  ThreemusketeersAiBrain,
-  ThreemusketeersAiGenerator,
-  ThreemusketeersAiGrid,
-  ThreemusketeersAiTerrain,
-  ThreemusketeersAiTerrainLayer,
-  ThreemusketeersArtifactLayer,
-  ThreemusketeersBattlePos,
-  ThreemusketeersBattleVar,
-  ThreemusketeersBoardHeight,
-  ThreemusketeersBoardWidth,
-  ThreemusketeersCommand,
-  ThreemusketeersGenerator,
-  ThreemusketeersGrid,
-  ThreemusketeersLayer,
-  ThreemusketeersMark,
-  ThreemusketeersPhase,
-  ThreemusketeersPosition,
-  ThreemusketeersTerrain,
-  ThreemusketeersTurnPos,
-  ThreemusketeersTurnVar,
-  ThreemusketeersUnit
->;
-
-export type ThreemusketeersGrid = never;
-
-export type ThreemusketeersAiGenerator = never;
-
-export type ThreemusketeersAiAspect = never;
-
-export type ThreemusketeersAiGrid = never;
-
-export type ThreemusketeersAiArtifactLayer = never;
-
-export type ThreemusketeersAiBrain = never;
-
-export type ThreemusketeersAiTerrainLayer = never;
-
-export type ThreemusketeersAiTerrain = never;
-
-export type ThreemusketeersPosition =
+type ThreemusketeersPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -231,3 +74,25 @@ export type ThreemusketeersPosition =
   | "e3"
   | "e4"
   | "e5";
+
+type ThreemusketeersBlob = AlgolGameBlob<
+  ThreemusketeersArtifactLayer,
+  ThreemusketeersBoardName,
+  ThreemusketeersBattlePos,
+  ThreemusketeersBattleVar,
+  ThreemusketeersCommand,
+  ThreemusketeersGenerator,
+  ThreemusketeersGrid,
+  ThreemusketeersLayer,
+  ThreemusketeersMark,
+  ThreemusketeersPhase,
+  ThreemusketeersPosition,
+  ThreemusketeersRulesetName,
+  ThreemusketeersSetupName,
+  ThreemusketeersTerrain,
+  ThreemusketeersTurnPos,
+  ThreemusketeersTurnVar,
+  ThreemusketeersUnit
+>;
+
+export type ThreemusketeersDefinition = FullDef<ThreemusketeersBlob>;

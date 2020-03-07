@@ -1,6 +1,6 @@
-import { CoffeeScripts } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeeScripts: CoffeeScripts = {
+const coffeeScripts: CoffeeDefinition["scripts"] = {
   basic: [
     {
       commands: [],

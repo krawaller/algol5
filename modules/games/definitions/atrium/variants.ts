@@ -1,6 +1,6 @@
-import { AtriumVariantBook } from "./_types";
+import { AtriumDefinition } from "./_types";
 
-const atriumVariantBook: AtriumVariantBook = {
+const atriumVariantBook: AtriumDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

@@ -1,6 +1,6 @@
-import { KriegSetupBook } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegSetupBook: KriegSetupBook = {
+const kriegSetupBook: KriegDefinition["setups"] = {
   basic: {
     notfrozens: {
       "1": ["a4", "b4", "a3", "b3"],

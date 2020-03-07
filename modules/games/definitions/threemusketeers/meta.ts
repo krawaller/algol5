@@ -1,6 +1,6 @@
-import { ThreemusketeersMeta } from "./_types";
+import { ThreemusketeersDefinition } from "./_types";
 
-const threemusketeersMeta: ThreemusketeersMeta = {
+const threemusketeersMeta: ThreemusketeersDefinition["meta"] = {
   code: "R",
   id: "threemusketeers",
   name: "Three Musketeers",

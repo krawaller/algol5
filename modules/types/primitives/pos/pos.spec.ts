@@ -1,17 +1,7 @@
 import { AlgolPos } from "./";
+import { AlgolTestBlob } from "../../blob";
 
-type TestPos = AlgolPos<
-  "mybattlep",
-  "mybattlev",
-  "mycmnd",
-  "mygrid",
-  "mylayer",
-  "mymark",
-  "myturnp",
-  "myturnv"
->;
-
-const tests: TestPos[] = [
+const tests: AlgolPos<AlgolTestBlob>[] = [
   "mymark",
   ["start"],
   ["looppos"],

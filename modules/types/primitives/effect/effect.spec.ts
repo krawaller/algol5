@@ -1,18 +1,7 @@
 import { AlgolEffect } from "./";
+import { AlgolTestBlob } from "../../blob";
 
-type TestEffect = AlgolEffect<
-  "mybattlep",
-  "mybattlev",
-  "mycmnd",
-  "mygrid",
-  "mylayer",
-  "mymark",
-  "myturnp",
-  "myturnv",
-  "myunit"
->;
-
-const tests: TestEffect[] = [
+const tests: AlgolEffect<AlgolTestBlob>[] = [
   { moveat: ["mymark", { onlyin: "mylayer" }] },
   { setturnpos: ["myturnp", "mymark"] },
   { spawnat: ["mymark", "myunit"] },

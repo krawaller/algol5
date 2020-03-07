@@ -1,74 +1,25 @@
 import { GeneratorDefAnon } from "./";
 import { DrawDef } from "./draw";
 import { AlgolPos, AlgolSet, AlgolBool, AlgolVal, AlgolDirs } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type NeighbourDefAnon = NeighbourDef<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type NeighbourDefAnon = NeighbourDef<AlgolGameBlobAnon>;
 
 export function isNeighbourDef(gen: GeneratorDefAnon): gen is NeighbourDefAnon {
   return (gen as NeighbourDefAnon).type === "neighbour";
 }
 
-export type NeighbourDef<
-  ArtifactLayer,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = {
+export type NeighbourDef<Blob extends AlgolGameBlobAnon> = {
   type: "neighbour";
-  dir?: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
-  dirs?: AlgolDirs<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  start?: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  starts?: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  condition?: AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  ifover?: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
-  unlessover?: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  dir?: AlgolVal<Blob, string | number>;
+  dirs?: AlgolDirs<Blob>;
+  start?: AlgolPos<Blob>;
+  starts?: AlgolSet<Blob>;
+  condition?: AlgolBool<Blob>;
+  ifover?: AlgolSet<Blob>;
+  unlessover?: AlgolSet<Blob>;
   draw: {
-    start?: DrawDef<
-      ArtifactLayer,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
-    neighbours?: DrawDef<
-      ArtifactLayer,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
+    start?: DrawDef<Blob>;
+    neighbours?: DrawDef<Blob>;
   };
 };

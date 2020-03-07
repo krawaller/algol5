@@ -12,74 +12,29 @@ import {
   AlgolInstrPosList,
   AlgolInstrUnitList,
   AlgolInstrUnitTypeSet,
-  AlgolInstrUnitTypePos
+  AlgolInstrUnitTypePos,
 } from "./instr.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
 type s = string;
 
-export type AlgolInstrAnon = AlgolInstr<s, s, s, s, s, s, s, s, s>;
-export type AlgolInstrInnerAnon = AlgolInstrInner<s, s, s, s, s, s, s, s, s>;
+export type AlgolInstrAnon = AlgolInstr<AlgolGameBlobAnon>;
+export type AlgolInstrInnerAnon = AlgolInstrInner<AlgolGameBlobAnon>;
 
-export type AlgolInstrValAnon = AlgolInstrVal<s, s, s, s, s, s, s, s>;
-export type AlgolInstrPluralizeAnon = AlgolInstrPluralize<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
->;
-export type AlgolInstrPosAnon = AlgolInstrPos<s, s, s, s, s, s, s, s>;
-export type AlgolInstrUnitAtAnon = AlgolInstrUnitAt<s, s, s, s, s, s, s, s>;
-export type AlgolInstrLineAnon = AlgolInstrLine<s, s, s, s, s, s, s, s, s>;
-export type AlgolInstrOrListAnon = AlgolInstrOrList<s, s, s, s, s, s, s, s, s>;
-export type AlgolInstrAndListAnon = AlgolInstrAndList<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
->;
-export type AlgolInstrUnitTypeAnon = AlgolInstrUnitType<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
->;
+export type AlgolInstrValAnon = AlgolInstrVal<AlgolGameBlobAnon>;
+export type AlgolInstrPluralizeAnon = AlgolInstrPluralize<AlgolGameBlobAnon>;
+export type AlgolInstrPosAnon = AlgolInstrPos<AlgolGameBlobAnon>;
+export type AlgolInstrUnitAtAnon = AlgolInstrUnitAt<AlgolGameBlobAnon>;
+export type AlgolInstrLineAnon = AlgolInstrLine<AlgolGameBlobAnon>;
+export type AlgolInstrOrListAnon = AlgolInstrOrList<AlgolGameBlobAnon>;
+export type AlgolInstrAndListAnon = AlgolInstrAndList<AlgolGameBlobAnon>;
+export type AlgolInstrUnitTypeAnon = AlgolInstrUnitType<AlgolGameBlobAnon>;
 
-export type AlgolInstrPosListAnon = AlgolInstrPosList<s, s, s, s, s, s, s, s>;
-export type AlgolInstrUnitListAnon = AlgolInstrUnitList<s, s, s, s, s, s, s, s>;
+export type AlgolInstrPosListAnon = AlgolInstrPosList<AlgolGameBlobAnon>;
+export type AlgolInstrUnitListAnon = AlgolInstrUnitList<AlgolGameBlobAnon>;
 export type AlgolInstrUnitTypeSetAnon = AlgolInstrUnitTypeSet<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon
 >;
 export type AlgolInstrUnitTypePosAnon = AlgolInstrUnitTypePos<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon
 >;

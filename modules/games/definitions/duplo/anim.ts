@@ -8,9 +8,9 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { DuploAnim } from "./_types";
+import { DuploDefinition } from "./_types";
 
-const duploAnim: DuploAnim = {
+const duploAnim: DuploDefinition["anim"] = {
   expand: [
     { enterin: ["spawns", "selectunit"] },
     {

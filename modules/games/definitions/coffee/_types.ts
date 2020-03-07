@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type CoffeeBoardHeight = 5;
-export type CoffeeBoardWidth = 5;
+type CoffeeBoardHeight = 5;
+type CoffeeBoardWidth = 5;
 
-export type CoffeeAnim = AlgolAnimCollection<
-  CoffeeBattlePos,
-  CoffeeBattleVar,
-  CoffeeCommand,
-  CoffeeGrid,
-  CoffeeLayer,
-  CoffeeMark,
-  CoffeeTurnPos,
-  CoffeeTurnVar,
-  CoffeeUnit
->;
-
-export type CoffeeTerrain = never;
-export type CoffeeUnit = "soldiers";
-export type CoffeeMark = "selectdrop";
-export type CoffeeCommand = "uphill" | "downhill" | "horisontal" | "vertical";
-export type CoffeePhaseCommand = never;
-export type CoffeePhase = "startTurn" | CoffeeMark;
-export type CoffeeUnitLayer =
+type CoffeeTerrain = never;
+type CoffeeUnit = "soldiers";
+type CoffeeMark = "selectdrop";
+type CoffeeCommand = "uphill" | "downhill" | "horisontal" | "vertical";
+type CoffeePhaseCommand = never;
+type CoffeePhase = "startTurn" | CoffeeMark;
+type CoffeeUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -46,144 +19,29 @@ export type CoffeeUnitLayer =
   | "mysoldiers"
   | "oppsoldiers"
   | "neutralsoldiers";
-export type CoffeeGenerator = "findgeneratees" | "findwinlines";
-export type CoffeeArtifactLayer =
+type CoffeeGenerator = "findgeneratees" | "findwinlines";
+type CoffeeArtifactLayer =
   | "FOOBAR"
   | "vertical"
   | "uphill"
   | "horisontal"
   | "downhill"
   | "winline";
-export type CoffeeTerrainLayer = never;
-export type CoffeeLayer = CommonLayer | CoffeeUnitLayer | CoffeeArtifactLayer;
-export type CoffeeBattlePos = never;
-export type CoffeeBattleVar = never;
-export type CoffeeTurnPos = never;
-export type CoffeeTurnVar = never;
+type CoffeeTerrainLayer = never;
+type CoffeeLayer = CommonLayer | CoffeeUnitLayer | CoffeeArtifactLayer;
+type CoffeeBattlePos = never;
+type CoffeeBattleVar = never;
+type CoffeeTurnPos = never;
+type CoffeeTurnVar = never;
 
-export type CoffeeBoardName = "basic";
-export type CoffeeSetupName = "basic";
-export type CoffeeRulesetName = "basic";
-export type CoffeeVariantName = "basic";
+type CoffeeBoardName = "basic";
+type CoffeeSetupName = "basic";
+type CoffeeRulesetName = "basic";
+type CoffeeVariantName = "basic";
 
-export type CoffeeVariantBook = AlgolVariantBook<
-  CoffeeBoardName,
-  CoffeeRulesetName,
-  CoffeeSetupName
->;
+type CoffeeGrid = never;
 
-export type CoffeeGenerators = Generators<
-  CoffeeArtifactLayer,
-  CoffeeBattlePos,
-  CoffeeBattleVar,
-  CoffeeCommand,
-  CoffeeGenerator,
-  CoffeeGrid,
-  CoffeeLayer,
-  CoffeeMark,
-  CoffeeTurnPos,
-  CoffeeTurnVar
->;
-export type CoffeeFlow = Flow<
-  CoffeeBattlePos,
-  CoffeeBattleVar,
-  CoffeeCommand,
-  CoffeeGenerator,
-  CoffeeGrid,
-  CoffeeLayer,
-  CoffeeMark,
-  CoffeeTurnPos,
-  CoffeeTurnVar,
-  CoffeeUnit
->;
-export type CoffeeBoard = AlgolBoard<
-  CoffeeBoardHeight,
-  CoffeeBoardWidth,
-  CoffeeGrid,
-  CoffeePosition,
-  CoffeeTerrain
->;
-export type CoffeeAI = AI<
-  CoffeeAiArtifactLayer,
-  CoffeeAiAspect,
-  CoffeeAiBrain,
-  CoffeeAiGenerator,
-  CoffeeAiGrid,
-  CoffeeAiTerrain,
-  CoffeeAiTerrainLayer,
-  CoffeeBattlePos,
-  CoffeeBattleVar,
-  CoffeeBoardHeight,
-  CoffeeBoardWidth,
-  CoffeeCommand,
-  CoffeeGrid,
-  CoffeeLayer,
-  CoffeeMark,
-  CoffeePosition,
-  CoffeeTurnPos,
-  CoffeeTurnVar
->;
-export type CoffeeGraphics = Graphics<CoffeeTerrain, CoffeeUnit>;
-export type CoffeeInstructions = Instructions<
-  CoffeeBattlePos,
-  CoffeeBattleVar,
-  CoffeeCommand,
-  CoffeeGrid,
-  CoffeeLayer,
-  CoffeeMark,
-  CoffeePhase,
-  CoffeeTurnPos,
-  CoffeeTurnVar,
-  CoffeeUnit
->;
-export type CoffeeMeta = AlgolMeta<CoffeeCommand, CoffeeMark>;
-export type CoffeePerformance = AlgolPerformance<CoffeeCommand, CoffeeMark>;
-export type CoffeeScripts = AlgolGameTestSuite<CoffeeCommand, CoffeePosition>;
-export type CoffeeSetupBook = AlgolSetupBook<CoffeePosition, CoffeeUnit>;
-
-export type CoffeeDefinition = FullDef<
-  CoffeeAiArtifactLayer,
-  CoffeeAiAspect,
-  CoffeeAiBrain,
-  CoffeeAiGenerator,
-  CoffeeAiGrid,
-  CoffeeAiTerrain,
-  CoffeeAiTerrainLayer,
-  CoffeeArtifactLayer,
-  CoffeeBattlePos,
-  CoffeeBattleVar,
-  CoffeeBoardHeight,
-  CoffeeBoardWidth,
-  CoffeeCommand,
-  CoffeeGenerator,
-  CoffeeGrid,
-  CoffeeLayer,
-  CoffeeMark,
-  CoffeePhase,
-  CoffeePosition,
-  CoffeeTerrain,
-  CoffeeTurnPos,
-  CoffeeTurnVar,
-  CoffeeUnit
->;
-
-export type CoffeeGrid = never;
-
-export type CoffeeAiGenerator = never;
-
-export type CoffeeAiAspect = never;
-
-export type CoffeeAiGrid = never;
-
-export type CoffeeAiArtifactLayer = never;
-
-export type CoffeeAiBrain = never;
-
-export type CoffeeAiTerrainLayer = never;
-
-export type CoffeeAiTerrain = never;
-
-export type CoffeePosition =
+type CoffeePosition =
   | "a1"
   | "a2"
   | "a3"
@@ -209,3 +67,25 @@ export type CoffeePosition =
   | "e3"
   | "e4"
   | "e5";
+
+type CoffeeBlob = AlgolGameBlob<
+  CoffeeArtifactLayer,
+  CoffeeBoardName,
+  CoffeeBattlePos,
+  CoffeeBattleVar,
+  CoffeeCommand,
+  CoffeeGenerator,
+  CoffeeGrid,
+  CoffeeLayer,
+  CoffeeMark,
+  CoffeePhase,
+  CoffeePosition,
+  CoffeeRulesetName,
+  CoffeeSetupName,
+  CoffeeTerrain,
+  CoffeeTurnPos,
+  CoffeeTurnVar,
+  CoffeeUnit
+>;
+
+export type CoffeeDefinition = FullDef<CoffeeBlob>;

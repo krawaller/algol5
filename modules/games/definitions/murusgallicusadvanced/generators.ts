@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { MurusgallicusadvancedGenerators } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
 
-const murusgallicusadvancedGenerators: MurusgallicusadvancedGenerators = {
+const murusgallicusadvancedGenerators: MurusgallicusadvancedDefinition["generators"] = {
   findfiretargets: {
     type: "walker",
     start: "selectcatapult",

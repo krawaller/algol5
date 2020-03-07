@@ -1,8 +1,7 @@
 import { AlgolMatcherIs, AlgolMatcherIsnt } from "./matcher.interfaces";
 import { AlgolMatcher } from ".";
+import { AlgolGameBlobAnon } from "../../blob";
 
-type s = string;
-
-export type AlgolMatcherAnon = AlgolMatcher<s, s, s, s, s, s, s, s>;
-export type AlgolMatcherIsAnon = AlgolMatcherIs<s, s, s, s, s, s, s, s>;
-export type AlgolMatcherIsntAnon = AlgolMatcherIsnt<s, s, s, s, s, s, s, s>;
+export type AlgolMatcherAnon = AlgolMatcher<AlgolGameBlobAnon>;
+export type AlgolMatcherIsAnon = AlgolMatcherIs<AlgolGameBlobAnon>;
+export type AlgolMatcherIsntAnon = AlgolMatcherIsnt<AlgolGameBlobAnon>;

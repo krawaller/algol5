@@ -1,6 +1,6 @@
-import { MurusgallicusPerformance } from "./_types";
+import { MurusgallicusDefinition } from "./_types";
 
-const murusgallicusPerformance: MurusgallicusPerformance = {
+const murusgallicusPerformance: MurusgallicusDefinition["performance"] = {
   canAlwaysEnd: { selectmove: true, selectcrush: true },
   massiveTree: {}
 };

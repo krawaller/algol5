@@ -1,6 +1,6 @@
-import { GogolScripts } from "./_types";
+import { GogolDefinition } from "./_types";
 
-const gogolScripts: GogolScripts = {
+const gogolScripts: GogolDefinition["scripts"] = {
   basic: [
     {
       commands: [],

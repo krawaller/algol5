@@ -1,6 +1,6 @@
-import { KickrunScripts } from "./_types";
+import { KickrunDefinition } from "./_types";
 
-const kickrunScripts: KickrunScripts = {
+const kickrunScripts: KickrunDefinition["scripts"] = {
   basic: [
     { commands: ["c1"], include: ["c2", "d1"] },
     { commands: ["c2", "move", "endTurn"], include: ["c5", "d5", "e3", "e4"] },

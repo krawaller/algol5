@@ -1,66 +1,24 @@
 import { AlgolVal, Generators, TerrainDef, AlgolGrid } from "../../";
 
 import { Brain } from "./brain";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AI<
-  AiArtifactLayer extends string,
-  AiAspect extends string,
-  AiBrain extends string,
-  AiGenerator extends string,
-  AiGrid extends string,
-  AiTerrain extends string,
-  AiTerrainLayer extends string,
-  Btlp extends string,
-  Btlv extends string,
-  BoardHeight extends number,
-  BoardWidth extends number,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Position extends string,
-  Turnp extends string,
-  Turnv extends string
-> = {
-  terrain?: { [t in AiTerrain]: TerrainDef<Position> };
+type AiAspect = string;
+type AiBrain = string;
+type AiTerrain = string;
+type AiGrid = string;
+type AiGenerator = string;
+type BoardHeight = number;
+type BoardWidth = number;
+
+export type AI<Blob extends AlgolGameBlobAnon> = {
+  terrain?: { [t in AiTerrain]: TerrainDef<Blob> };
   grids?: { [s in AiGrid]: AlgolGrid<BoardHeight, BoardWidth> };
-  generators?: Generators<
-    AiArtifactLayer,
-    Btlp,
-    Btlv,
-    Cmnd,
-    AiGenerator,
-    Grid | AiGrid,
-    Layer | AiTerrainLayer | AiArtifactLayer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+  generators?: Generators<Blob>; // TODO with ai stuff! :/
   aspects: {
-    [a in AiAspect]: AlgolVal<
-      AiGenerator,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid | AiGrid,
-      Layer | AiTerrainLayer | AiArtifactLayer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
+    [a in AiAspect]: AlgolVal<Blob, AiGenerator>;
   };
   brains: {
-    [b in AiBrain]: Brain<
-      AiAspect,
-      AiGenerator,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid | AiGrid,
-      Layer | AiTerrainLayer | AiArtifactLayer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
+    [b in AiBrain]: Brain<Blob>;
   };
 };

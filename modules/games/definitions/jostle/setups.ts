@@ -1,6 +1,6 @@
-import { JostleSetupBook } from "./_types";
+import { JostleDefinition } from "./_types";
 
-const jostleSetupBook: JostleSetupBook = {
+const jostleSetupBook: JostleDefinition["setups"] = {
   basic: {
     checkers: {
       "1": [

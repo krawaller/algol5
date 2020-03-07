@@ -1,19 +1,21 @@
 import { AlgolEntity } from "../";
+import { AlgolGameBlobAnon } from "../blob";
 
-export type AlgolSetup<Position extends string, Unit extends string> = Partial<
+export type AlgolSetup<Blob extends AlgolGameBlobAnon> = Partial<
   {
-    [unit in Unit]: Partial<{
-      0: AlgolEntity<Position>[];
-      1: AlgolEntity<Position>[];
-      2: AlgolEntity<Position>[];
+    [unit in Blob["unit"]]: Partial<{
+      0: AlgolEntity<Blob>[];
+      1: AlgolEntity<Blob>[];
+      2: AlgolEntity<Blob>[];
     }>;
   }
 >;
 
-export type AlgolSetupAnon = AlgolSetup<string, string>;
+export type AlgolSetupAnon = AlgolSetup<AlgolGameBlobAnon>;
 
-export type AlgolSetupBook<Position extends string, Unit extends string> = {
-  basic: AlgolSetup<Position, Unit>;
-} & Record<string, AlgolSetup<Position, Unit>>;
+export type AlgolSetupBook<Blob extends AlgolGameBlobAnon> = Record<
+  Blob["setup"],
+  AlgolSetup<Blob>
+>;
 
-export type AlgolSetupBookAnon = AlgolSetupBook<string, string>;
+export type AlgolSetupBookAnon = AlgolSetupBook<AlgolGameBlobAnon>;

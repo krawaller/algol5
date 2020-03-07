@@ -17,168 +17,26 @@ import {
   AlgolValValue,
   AlgolValLoopRead,
 } from "./value.interface";
+import { AlgolGameBlobAnon } from "../../blob";
 
 export type AlgolValValueAnon = AlgolValValue<
-  string | number,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  string | number
 >;
 
-export type AlgolValAnon = AlgolVal<
-  string | number,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolValAnon = AlgolVal<AlgolGameBlobAnon, string | number>;
 
-export type AlgolValReadAnon = AlgolValRead<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValBattleVarAnon = AlgolValBattleVar<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValTurnVarAnon = AlgolValTurnVar<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValIdAtAnon = AlgolValIdAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValPosAnon = AlgolValPos<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValRelDirAnon = AlgolValRelDir<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValGridAtAnon = AlgolValGridAt<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValGridInAnon = AlgolValGridIn<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValSizeOfAnon = AlgolValSizeOf<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValHarvestAnon = AlgolValHarvest<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValSumAnon = AlgolValSum<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValProdAnon = AlgolValProd<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValMinusAnon = AlgolValMinus<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
-export type AlgolValLoopReadAnon = AlgolValLoopRead<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type AlgolValReadAnon = AlgolValRead<AlgolGameBlobAnon>;
+export type AlgolValBattleVarAnon = AlgolValBattleVar<AlgolGameBlobAnon>;
+export type AlgolValTurnVarAnon = AlgolValTurnVar<AlgolGameBlobAnon>;
+export type AlgolValIdAtAnon = AlgolValIdAt<AlgolGameBlobAnon>;
+export type AlgolValPosAnon = AlgolValPos<AlgolGameBlobAnon>;
+export type AlgolValRelDirAnon = AlgolValRelDir<AlgolGameBlobAnon>;
+export type AlgolValGridAtAnon = AlgolValGridAt<AlgolGameBlobAnon>;
+export type AlgolValGridInAnon = AlgolValGridIn<AlgolGameBlobAnon>;
+export type AlgolValSizeOfAnon = AlgolValSizeOf<AlgolGameBlobAnon>;
+export type AlgolValHarvestAnon = AlgolValHarvest<AlgolGameBlobAnon>;
+export type AlgolValSumAnon = AlgolValSum<AlgolGameBlobAnon>;
+export type AlgolValProdAnon = AlgolValProd<AlgolGameBlobAnon>;
+export type AlgolValMinusAnon = AlgolValMinus<AlgolGameBlobAnon>;
+export type AlgolValLoopReadAnon = AlgolValLoopRead<AlgolGameBlobAnon>;

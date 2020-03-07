@@ -1,47 +1,10 @@
 import { AlgolVal } from "../value";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolMatcherIs<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  is: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolMatcherIs<Blob extends AlgolGameBlobAnon> {
+  is: AlgolVal<Blob, string | number>;
 }
 
-export interface AlgolMatcherIsnt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  isnt: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolMatcherIsnt<Blob extends AlgolGameBlobAnon> {
+  isnt: AlgolVal<Blob, string | number>;
 }

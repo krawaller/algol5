@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { OrthokonGenerators } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonGenerators: OrthokonGenerators = {
+const orthokonGenerators: OrthokonDefinition["generators"] = {
   findvictims: {
     type: "neighbour",
     start: "selectmovetarget",

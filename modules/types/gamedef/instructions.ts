@@ -1,26 +1,6 @@
 import { AlgolInstr } from "../";
+import { AlgolGameBlobAnon } from "../blob";
 
-export type Instructions<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Phase extends string,
-  Turnp extends string,
-  Turnv extends string,
-  Unit extends string
-> = {
-  [phase in Phase]: AlgolInstr<
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv,
-    Unit
-  >
+export type Instructions<Blob extends AlgolGameBlobAnon> = {
+  [phase in Blob["phase"]]: AlgolInstr<Blob>;
 };

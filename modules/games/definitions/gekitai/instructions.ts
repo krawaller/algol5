@@ -1,6 +1,6 @@
-import { GekitaiInstructions } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiInstructions: GekitaiInstructions = {
+const gekitaiInstructions: GekitaiDefinition["instructions"] = {
   startTurn: { line: ["Select where to drop a unit"] },
   selectdroptarget: {
     line: [

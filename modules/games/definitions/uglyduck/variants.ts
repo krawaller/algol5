@@ -1,6 +1,6 @@
-import { UglyduckVariantBook } from "./_types";
+import { UglyduckDefinition } from "./_types";
 
-const uglyduckVariantBook: UglyduckVariantBook = {
+const uglyduckVariantBook: UglyduckDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

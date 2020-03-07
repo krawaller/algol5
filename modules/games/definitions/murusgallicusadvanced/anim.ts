@@ -8,9 +8,9 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { MurusgallicusadvancedAnim } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
 
-const murusgallicusadvancedAnim: MurusgallicusadvancedAnim = {
+const murusgallicusadvancedAnim: MurusgallicusadvancedDefinition["anim"] = {
   sacrifice: [{ exitto: ["selecttower", "selectcrush"] }],
   crush: [{ ghost: ["selecttower", "selectcrush", "walls", ["player"]] }],
   move: [

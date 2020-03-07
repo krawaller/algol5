@@ -1,6 +1,6 @@
-import { UglyduckMeta } from "./_types";
+import { UglyduckDefinition } from "./_types";
 
-const uglyduckMeta: UglyduckMeta = {
+const uglyduckMeta: UglyduckDefinition["meta"] = {
   code: "o",
   name: "Ugly duck",
   id: "uglyduck",

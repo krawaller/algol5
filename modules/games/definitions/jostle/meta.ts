@@ -1,6 +1,6 @@
-import { JostleMeta } from "./_types";
+import { JostleDefinition } from "./_types";
 
-const jostleMeta: JostleMeta = {
+const jostleMeta: JostleDefinition["meta"] = {
   code: "s",
   id: "jostle",
   name: "Jostle",

@@ -1,6 +1,6 @@
-import { ShoveoffMeta } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffMeta: ShoveoffMeta = {
+const shoveoffMeta: ShoveoffDefinition["meta"] = {
   code: "b",
   id: "shoveoff",
   name: "Shove off",

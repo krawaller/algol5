@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type UglyduckBoardHeight = 5;
-export type UglyduckBoardWidth = 5;
+type UglyduckBoardHeight = 5;
+type UglyduckBoardWidth = 5;
 
-export type UglyduckAnim = AlgolAnimCollection<
-  UglyduckBattlePos,
-  UglyduckBattleVar,
-  UglyduckCommand,
-  UglyduckGrid,
-  UglyduckLayer,
-  UglyduckMark,
-  UglyduckTurnPos,
-  UglyduckTurnVar,
-  UglyduckUnit
->;
-
-export type UglyduckTerrain = "homerow";
-export type UglyduckUnit = "soldiers" | "kings";
-export type UglyduckMark = "selectunit" | "selectmovetarget";
-export type UglyduckCommand = "move";
-export type UglyduckPhaseCommand = never;
-export type UglyduckPhase = "startTurn" | UglyduckMark;
-export type UglyduckUnitLayer =
+type UglyduckTerrain = "homerow";
+type UglyduckUnit = "soldiers" | "kings";
+type UglyduckMark = "selectunit" | "selectmovetarget";
+type UglyduckCommand = "move";
+type UglyduckPhaseCommand = never;
+type UglyduckPhase = "startTurn" | UglyduckMark;
+type UglyduckUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -50,152 +23,31 @@ export type UglyduckUnitLayer =
   | "mykings"
   | "oppkings"
   | "neutralkings";
-export type UglyduckGenerator = "findmovetargets";
-export type UglyduckArtifactLayer = "movetargets";
-export type UglyduckTerrainLayer =
+type UglyduckGenerator = "findmovetargets";
+type UglyduckArtifactLayer = "movetargets";
+type UglyduckTerrainLayer =
   | "homerow"
   | "myhomerow"
   | "opphomerow"
   | "nohomerow";
-export type UglyduckLayer =
+type UglyduckLayer =
   | CommonLayer
   | UglyduckUnitLayer
   | UglyduckArtifactLayer
   | UglyduckTerrainLayer;
-export type UglyduckBattlePos = never;
-export type UglyduckBattleVar = never;
-export type UglyduckTurnPos = never;
-export type UglyduckTurnVar = never;
+type UglyduckBattlePos = never;
+type UglyduckBattleVar = never;
+type UglyduckTurnPos = never;
+type UglyduckTurnVar = never;
 
-export type UglyduckBoardName = "basic";
-export type UglyduckSetupName = "basic";
-export type UglyduckRulesetName = "basic";
-export type UglyduckVariantName = "basic";
+type UglyduckBoardName = "basic";
+type UglyduckSetupName = "basic";
+type UglyduckRulesetName = "basic";
+type UglyduckVariantName = "basic";
 
-export type UglyduckVariantBook = AlgolVariantBook<
-  UglyduckBoardName,
-  UglyduckRulesetName,
-  UglyduckSetupName
->;
+type UglyduckGrid = never;
 
-export type UglyduckGenerators = Generators<
-  UglyduckArtifactLayer,
-  UglyduckBattlePos,
-  UglyduckBattleVar,
-  UglyduckCommand,
-  UglyduckGenerator,
-  UglyduckGrid,
-  UglyduckLayer,
-  UglyduckMark,
-  UglyduckTurnPos,
-  UglyduckTurnVar
->;
-export type UglyduckFlow = Flow<
-  UglyduckBattlePos,
-  UglyduckBattleVar,
-  UglyduckCommand,
-  UglyduckGenerator,
-  UglyduckGrid,
-  UglyduckLayer,
-  UglyduckMark,
-  UglyduckTurnPos,
-  UglyduckTurnVar,
-  UglyduckUnit
->;
-export type UglyduckBoard = AlgolBoard<
-  UglyduckBoardHeight,
-  UglyduckBoardWidth,
-  UglyduckGrid,
-  UglyduckPosition,
-  UglyduckTerrain
->;
-export type UglyduckAI = AI<
-  UglyduckAiArtifactLayer,
-  UglyduckAiAspect,
-  UglyduckAiBrain,
-  UglyduckAiGenerator,
-  UglyduckAiGrid,
-  UglyduckAiTerrain,
-  UglyduckAiTerrainLayer,
-  UglyduckBattlePos,
-  UglyduckBattleVar,
-  UglyduckBoardHeight,
-  UglyduckBoardWidth,
-  UglyduckCommand,
-  UglyduckGrid,
-  UglyduckLayer,
-  UglyduckMark,
-  UglyduckPosition,
-  UglyduckTurnPos,
-  UglyduckTurnVar
->;
-export type UglyduckGraphics = Graphics<UglyduckTerrain, UglyduckUnit>;
-export type UglyduckInstructions = Instructions<
-  UglyduckBattlePos,
-  UglyduckBattleVar,
-  UglyduckCommand,
-  UglyduckGrid,
-  UglyduckLayer,
-  UglyduckMark,
-  UglyduckPhase,
-  UglyduckTurnPos,
-  UglyduckTurnVar,
-  UglyduckUnit
->;
-export type UglyduckMeta = AlgolMeta<UglyduckCommand, UglyduckMark>;
-export type UglyduckPerformance = AlgolPerformance<
-  UglyduckCommand,
-  UglyduckMark
->;
-export type UglyduckScripts = AlgolGameTestSuite<
-  UglyduckCommand,
-  UglyduckPosition
->;
-export type UglyduckSetupBook = AlgolSetupBook<UglyduckPosition, UglyduckUnit>;
-
-export type UglyduckDefinition = FullDef<
-  UglyduckAiArtifactLayer,
-  UglyduckAiAspect,
-  UglyduckAiBrain,
-  UglyduckAiGenerator,
-  UglyduckAiGrid,
-  UglyduckAiTerrain,
-  UglyduckAiTerrainLayer,
-  UglyduckArtifactLayer,
-  UglyduckBattlePos,
-  UglyduckBattleVar,
-  UglyduckBoardHeight,
-  UglyduckBoardWidth,
-  UglyduckCommand,
-  UglyduckGenerator,
-  UglyduckGrid,
-  UglyduckLayer,
-  UglyduckMark,
-  UglyduckPhase,
-  UglyduckPosition,
-  UglyduckTerrain,
-  UglyduckTurnPos,
-  UglyduckTurnVar,
-  UglyduckUnit
->;
-
-export type UglyduckGrid = never;
-
-export type UglyduckAiGenerator = never;
-
-export type UglyduckAiAspect = never;
-
-export type UglyduckAiGrid = never;
-
-export type UglyduckAiArtifactLayer = never;
-
-export type UglyduckAiBrain = never;
-
-export type UglyduckAiTerrainLayer = never;
-
-export type UglyduckAiTerrain = never;
-
-export type UglyduckPosition =
+type UglyduckPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -221,3 +73,25 @@ export type UglyduckPosition =
   | "e3"
   | "e4"
   | "e5";
+
+type UglyduckBlob = AlgolGameBlob<
+  UglyduckArtifactLayer,
+  UglyduckBoardName,
+  UglyduckBattlePos,
+  UglyduckBattleVar,
+  UglyduckCommand,
+  UglyduckGenerator,
+  UglyduckGrid,
+  UglyduckLayer,
+  UglyduckMark,
+  UglyduckPhase,
+  UglyduckPosition,
+  UglyduckRulesetName,
+  UglyduckSetupName,
+  UglyduckTerrain,
+  UglyduckTurnPos,
+  UglyduckTurnVar,
+  UglyduckUnit
+>;
+
+export type UglyduckDefinition = FullDef<UglyduckBlob>;

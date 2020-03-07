@@ -1,5 +1,5 @@
-import { GekitaiSetupBook } from "./_types";
+import { GekitaiDefinition } from "./_types";
 
-const gekitaiSetupBook: GekitaiSetupBook = { basic: {} };
+const gekitaiSetupBook: GekitaiDefinition["setups"] = { basic: {} };
 
 export default gekitaiSetupBook;

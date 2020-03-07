@@ -8,50 +8,11 @@ import {
   AlgolExpressionIndexList,
   AlgolExpressionPlayerCase,
 } from "./expression.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolExpression<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> =
+export type AlgolExpression<Blob extends AlgolGameBlobAnon, _T> =
   | _T
-  | AlgolExpressionIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolExpressionPlayerCase<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolExpressionIfActionElse<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolExpressionIndexList<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
+  | AlgolExpressionIfElse<Blob, _T>
+  | AlgolExpressionPlayerCase<Blob, _T>
+  | AlgolExpressionIfActionElse<Blob, _T>
+  | AlgolExpressionIndexList<Blob, _T>;

@@ -1,6 +1,6 @@
-import { ShoveoffScripts } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffScripts: ShoveoffScripts = {
+const shoveoffScripts: ShoveoffDefinition["scripts"] = {
   basic: [
     {
       commands: [],

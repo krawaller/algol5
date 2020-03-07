@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { AtriumAI } from "./_types";
+import { AtriumDefinition } from "./_types";
+type AtriumAI = any; // AtriumDefinition['AI']
 
 const atriumAI: AtriumAI = {
   brains: {},

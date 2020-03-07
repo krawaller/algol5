@@ -1,22 +1,11 @@
 import { AlgolAnim } from "./";
+import { AlgolTestBlob } from "../../blob";
 
-type TestAnim = AlgolAnim<
-  "btlpos",
-  "btlval",
-  "cmnd1" | "cmnd2",
-  "grid",
-  "layer",
-  "mymark1" | "mymark2",
-  "turnpos",
-  "turnval",
-  "unit"
->;
-
-const test: TestAnim[] = [
-  { enterfrom: ["mymark1", "mymark2"] },
-  { enterin: ["layer", "mymark1"] },
-  { exitin: ["layer", "mymark2"] },
-  { exitto: ["mymark1", "mymark2"] },
-  { ghost: ["mymark1", "mymark2", "unit", 1] },
-  { ghostfromin: ["layer", "mymark2", "unit", 1] },
+const test: AlgolAnim<AlgolTestBlob>[] = [
+  { enterfrom: ["mymark", "mymark"] },
+  { enterin: ["mylayer", "mymark"] },
+  { exitin: ["mylayer", "mymark"] },
+  { exitto: ["mymark", "mymark"] },
+  { ghost: ["mymark", "mymark", "myunit", 1] },
+  { ghostfromin: ["mylayer", "mymark", "myunit", 1] },
 ];

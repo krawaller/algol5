@@ -1,6 +1,6 @@
-import { OrthokonVariantBook } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonVariantBook: OrthokonVariantBook = {
+const orthokonVariantBook: OrthokonDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

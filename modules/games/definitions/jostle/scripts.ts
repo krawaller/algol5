@@ -1,6 +1,6 @@
-import { JostleScripts } from "./_types";
+import { JostleDefinition } from "./_types";
 
-const jostleScripts: JostleScripts = {
+const jostleScripts: JostleDefinition["scripts"] = {
   basic: [
     {
       commands: [],

@@ -1,6 +1,6 @@
-import { DuploFlow } from "./_types";
+import { DuploDefinition } from "./_types";
 
-const duploFlow: DuploFlow = {
+const duploFlow: DuploDefinition["flow"] = {
   endGame: {
     boardfull: {
       condition: { same: [{ sizeof: "units" }, 64] },

@@ -1,6 +1,6 @@
-import { MurusgallicusadvancedSetupBook } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
 
-const murusgallicusadvancedSetupBook: MurusgallicusadvancedSetupBook = {
+const murusgallicusadvancedSetupBook: MurusgallicusadvancedDefinition["setups"] = {
   basic: {
     towers: { "1": [{ rect: ["a1", "h1"] }], "2": [{ rect: ["a7", "h7"] }] }
   }

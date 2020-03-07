@@ -1,15 +1,8 @@
 import { AlgolIfableExpression } from "./";
 
 export type AlgolIfableExpressionAnon<_T> = AlgolIfableExpression<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
 import {
@@ -17,43 +10,17 @@ import {
   AlgolIfableExpressionIfAction,
   AlgolIfableExpressionIfPlayer,
 } from "./ifableexpression.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
 export type AlgolIfableExpressionIfAnon<_T> = AlgolIfableExpressionIf<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
+  AlgolGameBlobAnon,
+  _T
 >;
 
 export type AlgolIfableExpressionIfPlayerAnon<
   _T
-> = AlgolIfableExpressionIfPlayer<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+> = AlgolIfableExpressionIfPlayer<AlgolGameBlobAnon, _T>;
 
 export type AlgolIfableExpressionIfActionAnon<
   _T
-> = AlgolIfableExpressionIfAction<
-  _T,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+> = AlgolIfableExpressionIfAction<AlgolGameBlobAnon, _T>;

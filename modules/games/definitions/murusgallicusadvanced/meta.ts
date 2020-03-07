@@ -1,6 +1,6 @@
-import { MurusgallicusadvancedMeta } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
 
-const murusgallicusadvancedMeta: MurusgallicusadvancedMeta = {
+const murusgallicusadvancedMeta: MurusgallicusadvancedDefinition["meta"] = {
   code: "U",
   id: "murusgallicusadvanced",
   name: "Murus Gallicus Advanced",

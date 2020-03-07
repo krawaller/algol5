@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { JostleGraphics } from "./_types";
+import { JostleDefinition } from "./_types";
 
-const jostleGraphics: JostleGraphics = {
+const jostleGraphics: JostleDefinition["graphics"] = {
   icons: { checkers: "pawn" },
   tiles: {}
 };

@@ -2,83 +2,31 @@ import { AlgolExpression } from "./";
 
 import { AlgolBool } from "../bool";
 import { AlgolVal } from "../value";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolExpressionIfElse<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
+export interface AlgolExpressionIfElse<Blob extends AlgolGameBlobAnon, _T> {
   ifelse: [
-    AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolBool<Blob>,
+    AlgolExpression<Blob, _T>,
+    AlgolExpression<Blob, _T>
   ];
 }
 
-export interface AlgolExpressionPlayerCase<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  playercase: [
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolExpressionPlayerCase<Blob extends AlgolGameBlobAnon, _T> {
+  playercase: [AlgolExpression<Blob, _T>, AlgolExpression<Blob, _T>];
 }
 
 export interface AlgolExpressionIfActionElse<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+  Blob extends AlgolGameBlobAnon,
+  _T
 > {
   ifactionelse: [
-    AlgolVal<
-      "start" | Mrk | Cmnd,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >,
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolVal<Blob, "start" | Blob["mrk"] | Blob["cmnd"]>,
+    AlgolExpression<Blob, _T>,
+    AlgolExpression<Blob, _T>
   ];
 }
 
-export interface AlgolExpressionIndexList<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  indexlist: [
-    AlgolVal<string | number, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    ...AlgolExpression<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[]
-  ];
+export interface AlgolExpressionIndexList<Blob extends AlgolGameBlobAnon, _T> {
+  indexlist: [AlgolVal<Blob, string | number>, ...AlgolExpression<Blob, _T>[]];
 }

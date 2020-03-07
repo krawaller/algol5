@@ -28,50 +28,35 @@ import {
 } from "./bool.interfaces";
 
 import { AlgolExpression } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolBool<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = AlgolExpression<
-  AlgolBoolInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+export type AlgolBool<Blob extends AlgolGameBlobAnon> = AlgolExpression<
+  Blob,
+  AlgolBoolInner<Blob>
 >;
 
-type AlgolBoolInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
+type AlgolBoolInner<Blob extends AlgolGameBlobAnon> =
   | ["true"]
   | ["false"]
-  | AlgolBoolNot<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolAnd<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolOr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolSamePos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolHigher<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolFurther<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolOverlaps<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolIsEmpty<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolNotEmpty<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolAnyAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolNoneAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolMarkAvailable<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolCmndAvailable<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolSame<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolDifferent<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolValInList<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolMoreThan<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolTruthy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolFalsy<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolOrtho<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolDiag<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolBoolStoppedBecause<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolBoolNot<Blob>
+  | AlgolBoolAnd<Blob>
+  | AlgolBoolOr<Blob>
+  | AlgolBoolSamePos<Blob>
+  | AlgolBoolHigher<Blob>
+  | AlgolBoolFurther<Blob>
+  | AlgolBoolOverlaps<Blob>
+  | AlgolBoolIsEmpty<Blob>
+  | AlgolBoolNotEmpty<Blob>
+  | AlgolBoolAnyAt<Blob>
+  | AlgolBoolNoneAt<Blob>
+  | AlgolBoolMarkAvailable<Blob>
+  | AlgolBoolCmndAvailable<Blob>
+  | AlgolBoolSame<Blob>
+  | AlgolBoolDifferent<Blob>
+  | AlgolBoolValInList<Blob>
+  | AlgolBoolMoreThan<Blob>
+  | AlgolBoolTruthy<Blob>
+  | AlgolBoolFalsy<Blob>
+  | AlgolBoolOrtho<Blob>
+  | AlgolBoolDiag<Blob>
+  | AlgolBoolStoppedBecause<Blob>;

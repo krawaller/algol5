@@ -1,5 +1,5 @@
-import { DuploSetupBook } from "./_types";
+import { DuploDefinition } from "./_types";
 
-const duploSetupBook: DuploSetupBook = { basic: {} };
+const duploSetupBook: DuploDefinition["setups"] = { basic: {} };
 
 export default duploSetupBook;

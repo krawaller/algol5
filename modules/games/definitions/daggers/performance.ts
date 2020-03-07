@@ -1,6 +1,6 @@
-import { DaggersPerformance } from "./_types";
+import { DaggersDefinition } from "./_types";
 
-const daggersPerformance: DaggersPerformance = {
+const daggersPerformance: DaggersDefinition["performance"] = {
   canAlwaysEnd: { selectmovetarget: true },
   massiveTree: {}
 };

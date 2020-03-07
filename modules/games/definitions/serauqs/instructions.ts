@@ -1,6 +1,6 @@
-import { SerauqsInstructions } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsInstructions: SerauqsInstructions = {
+const serauqsInstructions: SerauqsDefinition["instructions"] = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 1] },

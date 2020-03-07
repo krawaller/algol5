@@ -1,6 +1,6 @@
-import { ThreemusketeersScripts } from "./_types";
+import { ThreemusketeersDefinition } from "./_types";
 
-const threemusketeersScripts: ThreemusketeersScripts = {
+const threemusketeersScripts: ThreemusketeersDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["a1", "c3", "e5"] },
     { commands: ["c3"], include: ["b3", "c2", "c4", "d3"] },

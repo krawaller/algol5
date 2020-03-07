@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { GowiththefloeGenerators } from "./_types";
+import { GowiththefloeDefinition } from "./_types";
 
-const gowiththefloeGenerators: GowiththefloeGenerators = {
+const gowiththefloeGenerators: GowiththefloeDefinition["generators"] = {
   findeattargets: {
     type: "neighbour",
     dirs: "rose",

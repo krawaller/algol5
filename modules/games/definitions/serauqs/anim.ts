@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { SerauqsAnim } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsAnim: SerauqsAnim = {};
+const serauqsAnim: SerauqsDefinition["anim"] = {};
 
 export default serauqsAnim;

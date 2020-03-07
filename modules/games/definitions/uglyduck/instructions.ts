@@ -1,6 +1,6 @@
-import { UglyduckInstructions } from "./_types";
+import { UglyduckDefinition } from "./_types";
 
-const uglyduckInstructions: UglyduckInstructions = {
+const uglyduckInstructions: UglyduckDefinition["instructions"] = {
   startTurn: {
     line: [
       "Select",

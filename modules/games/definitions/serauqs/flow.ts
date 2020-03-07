@@ -1,6 +1,6 @@
-import { SerauqsFlow } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsFlow: SerauqsFlow = {
+const serauqsFlow: SerauqsDefinition["flow"] = {
   endGame: {
     madeline: { condition: { notempty: "winline" }, show: "winline" },
     madex: {

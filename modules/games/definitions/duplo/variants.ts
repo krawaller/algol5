@@ -1,6 +1,6 @@
-import { DuploVariantBook } from "./_types";
+import { DuploDefinition } from "./_types";
 
-const duploVariantBook: DuploVariantBook = {
+const duploVariantBook: DuploDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

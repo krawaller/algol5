@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { ChameleonGraphics } from "./_types";
+import { ChameleonDefinition } from "./_types";
 
-const chameleonGraphics: ChameleonGraphics = {
+const chameleonGraphics: ChameleonDefinition["graphics"] = {
   icons: { knights: "knight", bishops: "bishop" },
   tiles: { base: "playercolour" }
 };

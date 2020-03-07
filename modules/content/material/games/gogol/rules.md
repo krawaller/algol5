@@ -1,5 +1,5 @@
 ---
-updated: 2020-02-25
+updated: 2020-03-05
 ---
 
 {GAME} is played on a {DIM} board with the following setup:
@@ -17,10 +17,10 @@ Both {UNIT:group=soldiers} and {UNIT:group=kings} can instead {CMND:name=jump} o
 
 There are two win conditions:
 
-- {ENDGAME:name=infiltration}: Move your {UNIT:group=kings} to the opponent base
-- {ENDGAME:name=infiltration}: Kill the opponent king
+- {ENDGAME:name=infiltration}: Get your {UNIT:group=kings} to the opponent base
+- {ENDGAME:name=regicide}: Kill the opponent {UNIT:group=kings}
 
-Players may never make any of these three forbidden patterns:
+Players may never make any of the 3 forbidden patterns:
 
 <div class="md-3col">
 {ARR:name=homerow,from=d1,to=f3}
@@ -30,6 +30,6 @@ Players may never make any of these three forbidden patterns:
 
 From left to right:
 
-- {UNIT:group=kings} adjacent to a friendly {UNIT:group=soldiers} in the home base
+- {UNIT:group=kings} next to friendly {UNIT:group=soldiers} iside home base
 - {UNIT:group=kings} in front of home base with 3 friendly {UNIT:group=soldiers} behind
-- {UNIT:group=kings} on left/right board edge adjacent to friendly {UNIT:group=soldiers} in the same column
+- {UNIT:group=kings} on left/right board edge next to friendly {UNIT:group=soldiers} in same column

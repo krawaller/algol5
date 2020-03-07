@@ -1,6 +1,6 @@
-import { AtriumMeta } from "./_types";
+import { AtriumDefinition } from "./_types";
 
-const atriumMeta: AtriumMeta = {
+const atriumMeta: AtriumDefinition["meta"] = {
   code: "e",
   id: "atrium",
   name: "Atrium",

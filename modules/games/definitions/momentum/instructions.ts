@@ -1,6 +1,6 @@
-import { MomentumInstructions } from "./_types";
+import { MomentumDefinition } from "./_types";
 
-const momentumInstructions: MomentumInstructions = {
+const momentumInstructions: MomentumDefinition["instructions"] = {
   startTurn: {
     orlist: [
       {

@@ -8,9 +8,9 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { GowiththefloeAnim } from "./_types";
+import { GowiththefloeDefinition } from "./_types";
 
-const gowiththefloeAnim: GowiththefloeAnim = {
+const gowiththefloeAnim: GowiththefloeDefinition["anim"] = {
   eat: [{ exitto: ["selectunit", "selecteattarget"] }]
 };
 

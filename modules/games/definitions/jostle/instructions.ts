@@ -1,6 +1,6 @@
-import { JostleInstructions } from "./_types";
+import { JostleDefinition } from "./_types";
 
-const jostleInstructions: JostleInstructions = {
+const jostleInstructions: JostleDefinition["instructions"] = {
   startTurn: { line: ["Select", "which", "checkers", "to jostle"] },
   selectunit: {
     line: [

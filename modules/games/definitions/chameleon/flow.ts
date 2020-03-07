@@ -1,6 +1,6 @@
-import { ChameleonFlow } from "./_types";
+import { ChameleonDefinition } from "./_types";
 
-const chameleonFlow: ChameleonFlow = {
+const chameleonFlow: ChameleonDefinition["flow"] = {
   endGame: {
     persistentInvader: {
       condition: { anyat: ["oppbase", "selectmovetarget"] },

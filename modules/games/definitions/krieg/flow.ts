@@ -1,6 +1,6 @@
-import { KriegFlow } from "./_types";
+import { KriegDefinition } from "./_types";
 
-const kriegFlow: KriegFlow = {
+const kriegFlow: KriegDefinition["flow"] = {
   marks: {
     selectunit: {
       from: "mynotfrozens",

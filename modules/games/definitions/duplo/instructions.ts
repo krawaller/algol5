@@ -1,6 +1,6 @@
-import { DuploInstructions } from "./_types";
+import { DuploDefinition } from "./_types";
 
-const duploInstructions: DuploInstructions = {
+const duploInstructions: DuploDefinition["instructions"] = {
   startTurn: {
     ifelse: [
       { morethan: [["turn"], 1] },

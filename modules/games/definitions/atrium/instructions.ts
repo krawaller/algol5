@@ -1,6 +1,6 @@
-import { AtriumInstructions } from "./_types";
+import { AtriumDefinition } from "./_types";
 
-const atriumInstructions: AtriumInstructions = {
+const atriumInstructions: AtriumDefinition["instructions"] = {
   startTurn: { line: ["Select", "a", "king", "or", "queen", "to move"] },
   selectunit: {
     line: [

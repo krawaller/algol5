@@ -1,6 +1,6 @@
-import { DaggersInstructions } from "./_types";
+import { DaggersDefinition } from "./_types";
 
-const daggersInstructions: DaggersInstructions = {
+const daggersInstructions: DaggersDefinition["instructions"] = {
   startTurn: { line: ["Select", "a", "daggers", "or", "crowns", "to move"] },
   selectunit: {
     line: [

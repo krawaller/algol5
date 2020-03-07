@@ -1,11 +1,15 @@
-export type AlgolVariant<Board, Ruleset, Setup> = {
-  ruleset: Ruleset;
-  setup: Setup;
-  board: Board;
+import { AlgolGameBlobAnon } from "../blob";
+
+export type AlgolVariant<Blob extends AlgolGameBlobAnon> = {
+  ruleset: Blob["ruleset"];
+  setup: Blob["setup"];
+  board: Blob["board"];
   desc: string;
 };
 
-export type AlgolVariantBook<Board, Ruleset, Setup> = Record<
+export type AlgolVariantBook<Blob extends AlgolGameBlobAnon> = Record<
   string,
-  AlgolVariant<Board, Ruleset, Setup>
-> & { basic: AlgolVariant<Board, Ruleset, Setup> };
+  AlgolVariant<Blob>
+>;
+
+export type AlgolVariantBookAnon = AlgolVariantBook<AlgolGameBlobAnon>;

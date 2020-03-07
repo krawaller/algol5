@@ -1,15 +1,17 @@
-export type AlgolScriptLine<Command, Position> = {
-  commands: (Command | Position | "endTurn")[];
-  include?: (Command | Position | "endTurn")[];
-  exclude?: (Command | Position | "endTurn")[];
+import { AlgolGameBlobAnon } from "../blob";
+
+export type AlgolScriptLine<Blob extends AlgolGameBlobAnon> = {
+  commands: (Blob["cmnd"] | Blob["pos"] | "endTurn")[];
+  include?: (Blob["cmnd"] | Blob["pos"] | "endTurn")[];
+  exclude?: (Blob["cmnd"] | Blob["pos"] | "endTurn")[];
   endedBy?: string;
-  endedIn?: "win" | "draw" | "lose"
+  endedIn?: "win" | "draw" | "lose";
 };
-export type Test<Command, Position> = [
+export type Test<Blob extends AlgolGameBlobAnon> = [
   string,
   string,
-  AlgolScriptLine<Command, Position>[]
+  AlgolScriptLine<Blob>[]
 ];
-export type AlgolGameTestSuite<Command, Position> = {
-  [desc: string]: AlgolScriptLine<Command, Position>[];
+export type AlgolGameTestSuite<Blob extends AlgolGameBlobAnon> = {
+  [desc: string]: AlgolScriptLine<Blob>[];
 };

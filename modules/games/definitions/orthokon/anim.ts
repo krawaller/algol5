@@ -8,8 +8,8 @@
 //   Useful for showing "shots", or the source of a change. You need to specify unit type and
 //   owner for each ghost, as well as source and destination.
 
-import { OrthokonAnim } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonAnim: OrthokonAnim = {};
+const orthokonAnim: OrthokonDefinition["anim"] = {};
 
 export default orthokonAnim;

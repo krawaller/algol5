@@ -1,6 +1,6 @@
-import { DescentSetupBook } from "./_types";
+import { DescentDefinition } from "./_types";
 
-const descentSetupBook: DescentSetupBook = {
+const descentSetupBook: DescentDefinition["setups"] = {
   basic: {
     lvl3: {
       "0": [{ rect: ["a2", "d3"] }, "b4", "c1"],

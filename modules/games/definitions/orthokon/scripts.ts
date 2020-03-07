@@ -1,6 +1,6 @@
-import { OrthokonScripts } from "./_types";
+import { OrthokonDefinition } from "./_types";
 
-const orthokonScripts: OrthokonScripts = {
+const orthokonScripts: OrthokonDefinition["scripts"] = {
   demo: [
     { commands: ["c1", "c3", "move", "endTurn"] },
     { commands: ["b4", "b2", "move", "endTurn"] },

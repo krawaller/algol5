@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { AmazonsAI } from "./_types";
+import { AmazonsDefinition } from "./_types";
+type AmazonsAI = any; // AmazonsDefinition['AI']
 
 const amazonsAI: AmazonsAI = {
   generators: {

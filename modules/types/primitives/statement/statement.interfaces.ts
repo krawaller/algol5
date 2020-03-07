@@ -1,170 +1,51 @@
 import { AlgolSet, AlgolVal, AlgolBool } from "../../";
 import { AlgolStatement } from "./";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolStatementForPosIn<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  forposin: [AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>, _T];
+export interface AlgolStatementForPosIn<Blob extends AlgolGameBlobAnon, _T> {
+  forposin: [AlgolSet<Blob>, _T];
 }
 
-export interface AlgolStatementForIdIn<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  foridin: [AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>, _T];
+export interface AlgolStatementForIdIn<Blob extends AlgolGameBlobAnon, _T> {
+  foridin: [AlgolSet<Blob>, _T];
 }
 
-export interface AlgolStatementMulti<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  multi: AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolStatementMulti<Blob extends AlgolGameBlobAnon, _T> {
+  multi: AlgolStatement<Blob, _T>[];
 }
 
 // ---- former logical
 
-export interface AlgolStatementIfElse<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  ifelse: [
-    AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolStatementIfElse<Blob extends AlgolGameBlobAnon, _T> {
+  ifelse: [AlgolBool<Blob>, AlgolStatement<Blob, _T>, AlgolStatement<Blob, _T>];
 }
 
-export interface AlgolStatementIf<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  if: [
-    AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolStatementIf<Blob extends AlgolGameBlobAnon, _T> {
+  if: [AlgolBool<Blob>, AlgolStatement<Blob, _T>];
 }
 
-export interface AlgolStatementIfPlayer<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  ifplayer: [
-    AlgolVal<1 | 2, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolStatementIfPlayer<Blob extends AlgolGameBlobAnon, _T> {
+  ifplayer: [AlgolVal<Blob, 1 | 2>, AlgolStatement<Blob, _T>];
 }
 
-export interface AlgolStatementIfAction<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
+export interface AlgolStatementIfAction<Blob extends AlgolGameBlobAnon, _T> {
   ifaction: [
-    AlgolVal<
-      "start" | Mrk | Cmnd,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >,
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolVal<Blob, "start" | Blob["mrk"] | Blob["cmnd"]>,
+    AlgolStatement<Blob, _T>
   ];
 }
 
-export interface AlgolStatementPlayerCase<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  playercase: [
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolStatementPlayerCase<Blob extends AlgolGameBlobAnon, _T> {
+  playercase: [AlgolStatement<Blob, _T>, AlgolStatement<Blob, _T>];
 }
 
 export interface AlgolStatementIfActionElse<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+  Blob extends AlgolGameBlobAnon,
+  _T
 > {
   ifactionelse: [
-    AlgolVal<
-      "start" | Mrk | Cmnd,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >,
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolStatement<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
+    AlgolVal<Blob, "start" | Blob["mrk"] | Blob["cmnd"]>,
+    AlgolStatement<Blob, _T>,
+    AlgolStatement<Blob, _T>
   ];
 }

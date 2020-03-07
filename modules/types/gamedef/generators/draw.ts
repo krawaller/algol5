@@ -1,114 +1,18 @@
 import { AlgolVal, AlgolBool, AlgolSet } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type DrawDefAnon = DrawDefInner<
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
->;
+export type DrawDefAnon = DrawDefInner<AlgolGameBlobAnon>;
 
-export type DrawDef<
-  ArtifactLayer,
-  BattlePos,
-  BattleVar,
-  Command,
-  Grid,
-  Layer,
-  Mark,
-  TurnPos,
-  TurnVar
-> =
-  | DrawDefInner<
-      ArtifactLayer,
-      BattlePos,
-      BattleVar,
-      Command,
-      Grid,
-      Layer,
-      Mark,
-      TurnPos,
-      TurnVar
-    >
-  | DrawDefInner<
-      ArtifactLayer,
-      BattlePos,
-      BattleVar,
-      Command,
-      Grid,
-      Layer,
-      Mark,
-      TurnPos,
-      TurnVar
-    >[];
+export type DrawDef<Blob extends AlgolGameBlobAnon> =
+  | DrawDefInner<Blob>
+  | DrawDefInner<Blob>[];
 
-export type DrawDefInner<
-  ArtifactLayer,
-  BattlePos,
-  BattleVar,
-  Command,
-  Grid,
-  Layer,
-  Mark,
-  TurnPos,
-  TurnVar
-> = {
-  tolayer: AlgolVal<
-    ArtifactLayer,
-    BattlePos,
-    BattleVar,
-    Command,
-    Grid,
-    Layer,
-    Mark,
-    TurnPos,
-    TurnVar
-  >;
+export type DrawDefInner<Blob extends AlgolGameBlobAnon> = {
+  tolayer: AlgolVal<Blob, Blob["artifactLayer"]>;
   include?: {
-    [idx: string]: AlgolVal<
-      string | number,
-      BattlePos,
-      BattleVar,
-      Command,
-      Grid,
-      Layer,
-      Mark,
-      TurnPos,
-      TurnVar
-    >;
+    [idx: string]: AlgolVal<Blob, string | number>;
   };
-  condition?: AlgolBool<
-    BattlePos,
-    BattleVar,
-    Command,
-    Grid,
-    Layer,
-    Mark,
-    TurnPos,
-    TurnVar
-  >;
-  ifover?: AlgolSet<
-    BattlePos,
-    BattleVar,
-    Command,
-    Grid,
-    Layer,
-    Mark,
-    TurnPos,
-    TurnVar
-  >;
-  unlessover?: AlgolSet<
-    BattlePos,
-    BattleVar,
-    Command,
-    Grid,
-    Layer,
-    Mark,
-    TurnPos,
-    TurnVar
-  >;
+  condition?: AlgolBool<Blob>;
+  ifover?: AlgolSet<Blob>;
+  unlessover?: AlgolSet<Blob>;
 };

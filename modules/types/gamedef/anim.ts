@@ -1,27 +1,8 @@
 import { AlgolAnim } from "../";
+import { AlgolGameBlobAnon } from "../blob";
 
-export type AlgolAnimCollection<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string,
-  Unit extends string
-> = Partial<
+export type AlgolAnimCollection<Blob extends AlgolGameBlobAnon> = Partial<
   {
-    [cmnd in Cmnd]: AlgolAnim<
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv,
-      Unit
-    >[]
+    [cmnd in Blob["cmnd"]]: AlgolAnim<Blob>[];
   }
 >;

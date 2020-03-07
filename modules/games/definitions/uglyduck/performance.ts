@@ -1,6 +1,6 @@
-import { UglyduckPerformance } from "./_types";
+import { UglyduckDefinition } from "./_types";
 
-const uglyduckPerformance: UglyduckPerformance = {
+const uglyduckPerformance: UglyduckDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

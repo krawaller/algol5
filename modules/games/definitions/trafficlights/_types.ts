@@ -1,43 +1,16 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type TrafficlightsBoardHeight = 3;
-export type TrafficlightsBoardWidth = 4;
+type TrafficlightsBoardHeight = 3;
+type TrafficlightsBoardWidth = 4;
 
-export type TrafficlightsAnim = AlgolAnimCollection<
-  TrafficlightsBattlePos,
-  TrafficlightsBattleVar,
-  TrafficlightsCommand,
-  TrafficlightsGrid,
-  TrafficlightsLayer,
-  TrafficlightsMark,
-  TrafficlightsTurnPos,
-  TrafficlightsTurnVar,
-  TrafficlightsUnit
->;
-
-export type TrafficlightsTerrain = never;
-export type TrafficlightsUnit = "kings" | "pawns" | "bishops";
-export type TrafficlightsMark = "selectdeploytarget" | "selectunit";
-export type TrafficlightsCommand = "deploy" | "promote";
-export type TrafficlightsPhaseCommand = never;
-export type TrafficlightsPhase = "startTurn" | TrafficlightsMark;
-export type TrafficlightsUnitLayer =
+type TrafficlightsTerrain = never;
+type TrafficlightsUnit = "kings" | "pawns" | "bishops";
+type TrafficlightsMark = "selectdeploytarget" | "selectunit";
+type TrafficlightsCommand = "deploy" | "promote";
+type TrafficlightsPhaseCommand = never;
+type TrafficlightsPhase = "startTurn" | TrafficlightsMark;
+type TrafficlightsUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -54,156 +27,26 @@ export type TrafficlightsUnitLayer =
   | "mybishops"
   | "oppbishops"
   | "neutralbishops";
-export type TrafficlightsGenerator = "findlines";
-export type TrafficlightsArtifactLayer = "line";
-export type TrafficlightsTerrainLayer = never;
-export type TrafficlightsLayer =
+type TrafficlightsGenerator = "findlines";
+type TrafficlightsArtifactLayer = "line";
+type TrafficlightsTerrainLayer = never;
+type TrafficlightsLayer =
   | CommonLayer
   | TrafficlightsUnitLayer
   | TrafficlightsArtifactLayer;
-export type TrafficlightsBattlePos = never;
-export type TrafficlightsBattleVar = never;
-export type TrafficlightsTurnPos = never;
-export type TrafficlightsTurnVar = never;
+type TrafficlightsBattlePos = never;
+type TrafficlightsBattleVar = never;
+type TrafficlightsTurnPos = never;
+type TrafficlightsTurnVar = never;
 
-export type TrafficlightsBoardName = "basic";
-export type TrafficlightsSetupName = "basic";
-export type TrafficlightsRulesetName = "basic";
-export type TrafficlightsVariantName = "basic";
+type TrafficlightsBoardName = "basic";
+type TrafficlightsSetupName = "basic";
+type TrafficlightsRulesetName = "basic";
+type TrafficlightsVariantName = "basic";
 
-export type TrafficlightsVariantBook = AlgolVariantBook<
-  TrafficlightsBoardName,
-  TrafficlightsRulesetName,
-  TrafficlightsSetupName
->;
+type TrafficlightsGrid = never;
 
-export type TrafficlightsGenerators = Generators<
-  TrafficlightsArtifactLayer,
-  TrafficlightsBattlePos,
-  TrafficlightsBattleVar,
-  TrafficlightsCommand,
-  TrafficlightsGenerator,
-  TrafficlightsGrid,
-  TrafficlightsLayer,
-  TrafficlightsMark,
-  TrafficlightsTurnPos,
-  TrafficlightsTurnVar
->;
-export type TrafficlightsFlow = Flow<
-  TrafficlightsBattlePos,
-  TrafficlightsBattleVar,
-  TrafficlightsCommand,
-  TrafficlightsGenerator,
-  TrafficlightsGrid,
-  TrafficlightsLayer,
-  TrafficlightsMark,
-  TrafficlightsTurnPos,
-  TrafficlightsTurnVar,
-  TrafficlightsUnit
->;
-export type TrafficlightsBoard = AlgolBoard<
-  TrafficlightsBoardHeight,
-  TrafficlightsBoardWidth,
-  TrafficlightsGrid,
-  TrafficlightsPosition,
-  TrafficlightsTerrain
->;
-export type TrafficlightsAI = AI<
-  TrafficlightsAiArtifactLayer,
-  TrafficlightsAiAspect,
-  TrafficlightsAiBrain,
-  TrafficlightsAiGenerator,
-  TrafficlightsAiGrid,
-  TrafficlightsAiTerrain,
-  TrafficlightsAiTerrainLayer,
-  TrafficlightsBattlePos,
-  TrafficlightsBattleVar,
-  TrafficlightsBoardHeight,
-  TrafficlightsBoardWidth,
-  TrafficlightsCommand,
-  TrafficlightsGrid,
-  TrafficlightsLayer,
-  TrafficlightsMark,
-  TrafficlightsPosition,
-  TrafficlightsTurnPos,
-  TrafficlightsTurnVar
->;
-export type TrafficlightsGraphics = Graphics<
-  TrafficlightsTerrain,
-  TrafficlightsUnit
->;
-export type TrafficlightsInstructions = Instructions<
-  TrafficlightsBattlePos,
-  TrafficlightsBattleVar,
-  TrafficlightsCommand,
-  TrafficlightsGrid,
-  TrafficlightsLayer,
-  TrafficlightsMark,
-  TrafficlightsPhase,
-  TrafficlightsTurnPos,
-  TrafficlightsTurnVar,
-  TrafficlightsUnit
->;
-export type TrafficlightsMeta = AlgolMeta<
-  TrafficlightsCommand,
-  TrafficlightsMark
->;
-export type TrafficlightsPerformance = AlgolPerformance<
-  TrafficlightsCommand,
-  TrafficlightsMark
->;
-export type TrafficlightsScripts = AlgolGameTestSuite<
-  TrafficlightsCommand,
-  TrafficlightsPosition
->;
-export type TrafficlightsSetupBook = AlgolSetupBook<
-  TrafficlightsPosition,
-  TrafficlightsUnit
->;
-
-export type TrafficlightsDefinition = FullDef<
-  TrafficlightsAiArtifactLayer,
-  TrafficlightsAiAspect,
-  TrafficlightsAiBrain,
-  TrafficlightsAiGenerator,
-  TrafficlightsAiGrid,
-  TrafficlightsAiTerrain,
-  TrafficlightsAiTerrainLayer,
-  TrafficlightsArtifactLayer,
-  TrafficlightsBattlePos,
-  TrafficlightsBattleVar,
-  TrafficlightsBoardHeight,
-  TrafficlightsBoardWidth,
-  TrafficlightsCommand,
-  TrafficlightsGenerator,
-  TrafficlightsGrid,
-  TrafficlightsLayer,
-  TrafficlightsMark,
-  TrafficlightsPhase,
-  TrafficlightsPosition,
-  TrafficlightsTerrain,
-  TrafficlightsTurnPos,
-  TrafficlightsTurnVar,
-  TrafficlightsUnit
->;
-
-export type TrafficlightsGrid = never;
-
-export type TrafficlightsAiGenerator = never;
-
-export type TrafficlightsAiAspect = never;
-
-export type TrafficlightsAiGrid = never;
-
-export type TrafficlightsAiArtifactLayer = never;
-
-export type TrafficlightsAiBrain = never;
-
-export type TrafficlightsAiTerrainLayer = never;
-
-export type TrafficlightsAiTerrain = never;
-
-export type TrafficlightsPosition =
+type TrafficlightsPosition =
   | "a1"
   | "a2"
   | "a3"
@@ -216,3 +59,25 @@ export type TrafficlightsPosition =
   | "d1"
   | "d2"
   | "d3";
+
+type TrafficlightsBlob = AlgolGameBlob<
+  TrafficlightsArtifactLayer,
+  TrafficlightsBoardName,
+  TrafficlightsBattlePos,
+  TrafficlightsBattleVar,
+  TrafficlightsCommand,
+  TrafficlightsGenerator,
+  TrafficlightsGrid,
+  TrafficlightsLayer,
+  TrafficlightsMark,
+  TrafficlightsPhase,
+  TrafficlightsPosition,
+  TrafficlightsRulesetName,
+  TrafficlightsSetupName,
+  TrafficlightsTerrain,
+  TrafficlightsTurnPos,
+  TrafficlightsTurnVar,
+  TrafficlightsUnit
+>;
+
+export type TrafficlightsDefinition = FullDef<TrafficlightsBlob>;

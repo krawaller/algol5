@@ -1,6 +1,6 @@
-import { ThreemusketeersVariantBook } from "./_types";
+import { ThreemusketeersDefinition } from "./_types";
 
-const threemusketeersVariantBook: ThreemusketeersVariantBook = {
+const threemusketeersVariantBook: ThreemusketeersDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

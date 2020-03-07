@@ -1,110 +1,36 @@
 import { AlgolSet } from "./";
 import { AlgolVal } from "../value";
 import { AlgolPos } from "../pos";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export interface AlgolSetLayer<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  layer: AlgolVal<Layer, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolSetLayer<Blob extends AlgolGameBlobAnon> {
+  layer: AlgolVal<Blob, Blob["layer"]>;
 }
 
-export interface AlgolSetSingle<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  single: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolSetSingle<Blob extends AlgolGameBlobAnon> {
+  single: AlgolPos<Blob>;
 }
 
-export interface AlgolSetSingles<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  singles: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolSetSingles<Blob extends AlgolGameBlobAnon> {
+  singles: AlgolPos<Blob>[];
 }
 
-export interface AlgolSetGroupAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  groupat: AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolSetGroupAt<Blob extends AlgolGameBlobAnon> {
+  groupat: AlgolPos<Blob>;
 }
 
-export interface AlgolSetUnion<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  union: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolSetUnion<Blob extends AlgolGameBlobAnon> {
+  union: AlgolSet<Blob>[];
 }
 
-export interface AlgolSetIntersect<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  intersect: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolSetIntersect<Blob extends AlgolGameBlobAnon> {
+  intersect: AlgolSet<Blob>[];
 }
 
-export interface AlgolSetSubtract<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  subtract: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolSetSubtract<Blob extends AlgolGameBlobAnon> {
+  subtract: AlgolSet<Blob>[];
 }
 
-export interface AlgolSetExceptPos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  exceptpos: [
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  ];
+export interface AlgolSetExceptPos<Blob extends AlgolGameBlobAnon> {
+  exceptpos: [AlgolSet<Blob>, AlgolPos<Blob>];
 }

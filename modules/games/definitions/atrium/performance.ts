@@ -1,6 +1,6 @@
-import { AtriumPerformance } from "./_types";
+import { AtriumDefinition } from "./_types";
 
-const atriumPerformance: AtriumPerformance = {
+const atriumPerformance: AtriumDefinition["performance"] = {
   canAlwaysEnd: {},
   massiveTree: {}
 };

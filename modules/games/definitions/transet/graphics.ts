@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { TransetGraphics } from "./_types";
+import { TransetDefinition } from "./_types";
 
-const transetGraphics: TransetGraphics = {
+const transetGraphics: TransetDefinition["graphics"] = {
   icons: { pinets: "pawn", piokers: "bishop", piases: "king" },
   tiles: { base: "playercolour" }
 };

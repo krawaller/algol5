@@ -1,6 +1,7 @@
 // AI is not yet reimplemented in the new engine. Never mind this file, for now! :)
 
-import { OrthokonAI } from "./_types";
+import { OrthokonDefinition } from "./_types";
+type OrthokonAI = any; // OrthokonDefinition['AI']
 
 const orthokonAI: OrthokonAI = {
   aspects: { headcount: { sizeof: "myunits" } },

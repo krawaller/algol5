@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { ShoveoffGenerators } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffGenerators: ShoveoffGenerators = {
+const shoveoffGenerators: ShoveoffDefinition["generators"] = {
   findaffected: {
     type: "walker",
     start: "selectpushpoint",

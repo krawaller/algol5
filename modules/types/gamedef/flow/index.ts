@@ -1,71 +1,21 @@
 import { AlgolStartTurnDef, AlgolCommandDef, AlgolMarkDef } from "./actions";
 import { EndGameDef } from "./endGame";
+import { AlgolGameBlobAnon } from "../../blob";
 
 export * from "./actions";
 
-export type Flow<
-  Btlp extends string,
-  Btlv extends string,
-  Cmnd extends string,
-  Gen extends string,
-  Grid extends string,
-  Layer extends string,
-  Mrk extends string,
-  Turnp extends string,
-  Turnv extends string,
-  Unit extends string
-> = {
+export type Flow<Blob extends AlgolGameBlobAnon> = {
   flow?: any;
   TODO?: string;
   STATUS?: string;
-  startTurn?: AlgolStartTurnDef<
-    Btlp,
-    Btlv,
-    Cmnd,
-    Gen,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+  startTurn?: AlgolStartTurnDef<Blob>;
   endGame?: {
-    [endgamename: string]: EndGameDef<
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
+    [endgamename: string]: EndGameDef<Blob>;
   };
   commands: {
-    [cmndname in Cmnd]: AlgolCommandDef<
-      Btlp,
-      Btlv,
-      Cmnd,
-      Gen,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv,
-      Unit
-    >;
+    [cmndname in Blob["cmnd"]]: AlgolCommandDef<Blob>;
   };
   marks: {
-    [markname in Mrk]: AlgolMarkDef<
-      Btlp,
-      Btlv,
-      Cmnd,
-      Gen,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >;
+    [markname in Blob["mrk"]]: AlgolMarkDef<Blob>;
   };
 };

@@ -10,47 +10,18 @@ import {
   AlgolStatementPlayerCase,
   AlgolStatementIf,
   AlgolStatementIfPlayer,
-  AlgolStatementIfAction
+  AlgolStatementIfAction,
 } from "./statement.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolStatement<
-  _T,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> =
+export type AlgolStatement<Blob extends AlgolGameBlobAnon, _T> =
   | _T
-  | AlgolStatementIfElse<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolStatementPlayerCase<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolStatementIfActionElse<
-      _T,
-      Btlp,
-      Btlv,
-      Cmnd,
-      Grid,
-      Layer,
-      Mrk,
-      Turnp,
-      Turnv
-    >
-  | AlgolStatementIf<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolStatementIfAction<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolStatementIfPlayer<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolStatementForIdIn<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolStatementForPosIn<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolStatementMulti<_T, Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolStatementIfElse<Blob, _T>
+  | AlgolStatementPlayerCase<Blob, _T>
+  | AlgolStatementIfActionElse<Blob, _T>
+  | AlgolStatementIf<Blob, _T>
+  | AlgolStatementIfAction<Blob, _T>
+  | AlgolStatementIfPlayer<Blob, _T>
+  | AlgolStatementForIdIn<Blob, _T>
+  | AlgolStatementForPosIn<Blob, _T>
+  | AlgolStatementMulti<Blob, _T>;

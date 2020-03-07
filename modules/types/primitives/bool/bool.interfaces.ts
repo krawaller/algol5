@@ -1,396 +1,94 @@
-import { PosPos, SetPos, ValVal } from "../_signatures";
 import { AlgolBool } from "./";
 import { AlgolSet } from "../set";
 import { AlgolVal } from "../value";
 import { AlgolWalkerStop } from "../../gamedef";
+import { AlgolGameBlobAnon } from "../../blob";
+import { AlgolPos } from "../pos";
 
-export interface AlgolBoolNot<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  not: AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolBoolNot<Blob extends AlgolGameBlobAnon> {
+  not: AlgolBool<Blob>;
 }
 
-export interface AlgolBoolAnd<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  and: AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolBoolAnd<Blob extends AlgolGameBlobAnon> {
+  and: AlgolBool<Blob>[];
 }
 
-export interface AlgolBoolOr<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> {
-  or: AlgolBool<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[];
+export interface AlgolBoolOr<Blob extends AlgolGameBlobAnon> {
+  or: AlgolBool<Blob>[];
 }
 
-export interface AlgolBoolSamePos<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  samepos: PosPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolBoolSamePos<Blob extends AlgolGameBlobAnon> {
+  samepos: [AlgolPos<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolBoolHigher<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  higher: PosPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolBoolHigher<Blob extends AlgolGameBlobAnon> {
+  higher: [AlgolPos<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolBoolFurther<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  further: PosPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolBoolFurther<Blob extends AlgolGameBlobAnon> {
+  further: [AlgolPos<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolBoolOverlaps<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  overlaps: [
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-    ...AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>[]
-  ];
+export interface AlgolBoolOverlaps<Blob extends AlgolGameBlobAnon> {
+  overlaps: [AlgolSet<Blob>, AlgolSet<Blob>, ...AlgolSet<Blob>[]];
 }
 
-export interface AlgolBoolIsEmpty<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  isempty: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolBoolIsEmpty<Blob extends AlgolGameBlobAnon> {
+  isempty: AlgolSet<Blob>;
 }
 
-export interface AlgolBoolNotEmpty<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  notempty: AlgolSet<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolBoolNotEmpty<Blob extends AlgolGameBlobAnon> {
+  notempty: AlgolSet<Blob>;
 }
 
-export interface AlgolBoolAnyAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  anyat: SetPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolBoolAnyAt<Blob extends AlgolGameBlobAnon> {
+  anyat: [AlgolSet<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolBoolNoneAt<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  noneat: SetPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+export interface AlgolBoolNoneAt<Blob extends AlgolGameBlobAnon> {
+  noneat: [AlgolSet<Blob>, AlgolPos<Blob>];
 }
 
-export interface AlgolBoolCmndAvailable<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  cmndavailable: AlgolVal<
-    Cmnd | "endTurn",
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolCmndAvailable<Blob extends AlgolGameBlobAnon> {
+  cmndavailable: AlgolVal<Blob, Blob["cmnd"] | "endTurn">;
 }
 
-export interface AlgolBoolTruthy<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  truthy: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolTruthy<Blob extends AlgolGameBlobAnon> {
+  truthy: AlgolVal<Blob, string | number>;
 }
 
-export interface AlgolBoolFalsy<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  falsy: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolFalsy<Blob extends AlgolGameBlobAnon> {
+  falsy: AlgolVal<Blob, string | number>;
 }
 
-export interface AlgolBoolMarkAvailable<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  markavailable: AlgolVal<
-    Mrk,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolMarkAvailable<Blob extends AlgolGameBlobAnon> {
+  markavailable: AlgolVal<Blob, Blob["mrk"]>;
 }
 
-export interface AlgolBoolSame<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  same: ValVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolSame<Blob extends AlgolGameBlobAnon> {
+  same: [AlgolVal<Blob, string | number>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolBoolDifferent<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  different: ValVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolDifferent<Blob extends AlgolGameBlobAnon> {
+  different: [AlgolVal<Blob, string | number>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolBoolMoreThan<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  morethan: ValVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolMoreThan<Blob extends AlgolGameBlobAnon> {
+  morethan: [AlgolVal<Blob, number>, AlgolVal<Blob, string | number>];
 }
 
-export interface AlgolBoolValInList<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  valinlist: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >[];
+export interface AlgolBoolValInList<Blob extends AlgolGameBlobAnon> {
+  valinlist: AlgolVal<Blob, string | number>[];
 }
 
-export interface AlgolBoolOrtho<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  ortho: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolOrtho<Blob extends AlgolGameBlobAnon> {
+  ortho: AlgolVal<Blob, string | number>;
 }
 
-export interface AlgolBoolDiag<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  diag: AlgolVal<
-    string | number,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolDiag<Blob extends AlgolGameBlobAnon> {
+  diag: AlgolVal<Blob, string | number>;
 }
 
-export interface AlgolBoolStoppedBecause<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> {
-  stoppedBecause: AlgolVal<
-    AlgolWalkerStop,
-    Btlp,
-    Btlv,
-    Cmnd,
-    Grid,
-    Layer,
-    Mrk,
-    Turnp,
-    Turnv
-  >;
+export interface AlgolBoolStoppedBecause<Blob extends AlgolGameBlobAnon> {
+  stoppedBecause: AlgolVal<Blob, AlgolWalkerStop>;
 }

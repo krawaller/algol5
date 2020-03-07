@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { SerauqsGraphics } from "./_types";
+import { SerauqsDefinition } from "./_types";
 
-const serauqsGraphics: SerauqsGraphics = {
+const serauqsGraphics: SerauqsDefinition["graphics"] = {
   icons: { soldiers: "pawn", wild: "king" },
   tiles: { corners: "grass", middle: "castle" }
 };

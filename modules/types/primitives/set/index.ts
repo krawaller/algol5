@@ -14,37 +14,22 @@ import {
 } from "./set.interface";
 
 import { AlgolExpression } from "../../";
+import { AlgolGameBlobAnon } from "../../blob";
 
-export type AlgolSet<
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
-> = AlgolExpression<
-  AlgolSetInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>,
-  Btlp,
-  Btlv,
-  Cmnd,
-  Grid,
-  Layer,
-  Mrk,
-  Turnp,
-  Turnv
+export type AlgolSet<Blob extends AlgolGameBlobAnon> = AlgolExpression<
+  Blob,
+  AlgolSetInner<Blob>
 >;
 
-type AlgolSetInner<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv> =
-  | Layer
+type AlgolSetInner<Blob extends AlgolGameBlobAnon> =
+  | Blob["layer"]
   | ["empty"]
   | ["loopset"]
-  | AlgolSetLayer<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetSingle<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetSingles<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetGroupAt<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetUnion<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetIntersect<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetSubtract<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>
-  | AlgolSetExceptPos<Btlp, Btlv, Cmnd, Grid, Layer, Mrk, Turnp, Turnv>;
+  | AlgolSetLayer<Blob>
+  | AlgolSetSingle<Blob>
+  | AlgolSetSingles<Blob>
+  | AlgolSetGroupAt<Blob>
+  | AlgolSetUnion<Blob>
+  | AlgolSetIntersect<Blob>
+  | AlgolSetSubtract<Blob>
+  | AlgolSetExceptPos<Blob>;

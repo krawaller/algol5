@@ -1,6 +1,6 @@
-import { ShoveoffVariantBook } from "./_types";
+import { ShoveoffDefinition } from "./_types";
 
-const shoveoffVariantBook: ShoveoffVariantBook = {
+const shoveoffVariantBook: ShoveoffDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

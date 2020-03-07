@@ -1,17 +1,7 @@
 import { AlgolMatcher } from "./";
+import { AlgolTestBlob } from "../../blob";
 
-type TestMatcher = AlgolMatcher<
-  "mybattlep",
-  "mybattlev",
-  "mycmnd",
-  "mygrid",
-  "mylayer",
-  "mymark",
-  "myturnp",
-  "myturnv"
->;
-
-const tests: TestMatcher[] = [
+const tests: AlgolMatcher<AlgolTestBlob>[] = [
   { is: { read: ["mylayer", "mymark", "foo"] } },
-  { isnt: { turnvar: "myturnv" } }
+  { isnt: { turnvar: "myturnv" } },
 ];

@@ -1,6 +1,6 @@
-import { MurusgallicusadvancedVariantBook } from "./_types";
+import { MurusgallicusadvancedDefinition } from "./_types";
 
-const murusgallicusadvancedVariantBook: MurusgallicusadvancedVariantBook = {
+const murusgallicusadvancedVariantBook: MurusgallicusadvancedDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

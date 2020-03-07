@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { DaggersGraphics } from "./_types";
+import { DaggersDefinition } from "./_types";
 
-const daggersGraphics: DaggersGraphics = {
+const daggersGraphics: DaggersDefinition["graphics"] = {
   tiles: { base: "playercolour" },
   icons: { daggers: "bishop", crowns: "king" }
 };

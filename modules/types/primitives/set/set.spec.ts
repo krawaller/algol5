@@ -1,17 +1,7 @@
 import { AlgolSet } from "./";
+import { AlgolTestBlob } from "../../blob";
 
-type TestPos = AlgolSet<
-  "mybattlep",
-  "mybattlev",
-  "mycmnd",
-  "mygrid",
-  "mylayer",
-  "mymark",
-  "myturnp",
-  "myturnv"
->;
-
-const tests: TestPos[] = [
+const tests: AlgolSet<AlgolTestBlob>[] = [
   "mylayer",
   ["empty"],
   ["loopset"],

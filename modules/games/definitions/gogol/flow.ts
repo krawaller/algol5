@@ -1,6 +1,6 @@
-import { GogolFlow } from "./_types";
+import { GogolDefinition } from "./_types";
 
-const gogolFlow: GogolFlow = {
+const gogolFlow: GogolDefinition["flow"] = {
   startTurn: {
     runGenerators: ["findforbiddenkingspots", "findforbiddensoldierspots"],
     link: {

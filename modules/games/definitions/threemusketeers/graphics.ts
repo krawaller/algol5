@@ -3,9 +3,9 @@
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { ThreemusketeersGraphics } from "./_types";
+import { ThreemusketeersDefinition } from "./_types";
 
-const threemusketeersGraphics: ThreemusketeersGraphics = {
+const threemusketeersGraphics: ThreemusketeersDefinition["graphics"] = {
   icons: { pawns: "pawn", kings: "king" },
   tiles: {}
 };

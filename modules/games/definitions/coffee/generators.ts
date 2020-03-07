@@ -3,9 +3,9 @@
 // and also what artifact layers there are. When you add/remove a generator or
 // change the names of the layers you draw to, rerun the type analyser!
 
-import { CoffeeGenerators } from "./_types";
+import { CoffeeDefinition } from "./_types";
 
-const coffeeGenerators: CoffeeGenerators = {
+const coffeeGenerators: CoffeeDefinition["generators"] = {
   findgeneratees: {
     type: "walker",
     dirs: "rose",

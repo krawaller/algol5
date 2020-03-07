@@ -1,6 +1,6 @@
-import { MomentumFlow } from "./_types";
+import { MomentumDefinition } from "./_types";
 
-const momentumFlow: MomentumFlow = {
+const momentumFlow: MomentumDefinition["flow"] = {
   endGame: { allout: { condition: { same: [{ sizeof: "myunits" }, 8] } } },
   startTurn: {
     links: [

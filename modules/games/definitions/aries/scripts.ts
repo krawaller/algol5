@@ -1,6 +1,6 @@
-import { AriesScripts } from "./_types";
+import { AriesDefinition } from "./_types";
 
-const ariesScripts: AriesScripts = {
+const ariesScripts: AriesDefinition["scripts"] = {
   basic: [
     { commands: [], include: ["a4", "b4", "c4", "d1", "d2", "d3", "d4"] },
     {

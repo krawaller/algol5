@@ -24,57 +24,37 @@ import {
   AlgolBoolOrtho,
   AlgolBoolStoppedBecause,
 } from "./bool.interfaces";
+import { AlgolGameBlobAnon } from "../../blob";
 
 type s = string;
 
-export type AlgolBoolAnon = AlgolBool<s, s, s, s, s, s, s, s>;
+export type AlgolBoolAnon = AlgolBool<AlgolGameBlobAnon>;
 
-export type AlgolBoolNotAnon = AlgolBoolNot<s, s, s, s, s, s, s, s>;
-export type AlgolBoolAndAnon = AlgolBoolAnd<s, s, s, s, s, s, s, s>;
-export type AlgolBoolOrAnon = AlgolBoolOr<s, s, s, s, s, s, s, s>;
-export type AlgolBoolSamePosAnon = AlgolBoolSamePos<s, s, s, s, s, s, s, s>;
-export type AlgolBoolHigherAnon = AlgolBoolHigher<s, s, s, s, s, s, s, s>;
-export type AlgolBoolFurtherAnon = AlgolBoolFurther<s, s, s, s, s, s, s, s>;
-export type AlgolBoolOverlapsAnon = AlgolBoolOverlaps<s, s, s, s, s, s, s, s>;
-export type AlgolBoolIsEmptyAnon = AlgolBoolIsEmpty<s, s, s, s, s, s, s, s>;
-export type AlgolBoolNotEmptyAnon = AlgolBoolNotEmpty<s, s, s, s, s, s, s, s>;
-export type AlgolBoolAnyAtAnon = AlgolBoolAnyAt<s, s, s, s, s, s, s, s>;
-export type AlgolBoolNoneAtAnon = AlgolBoolNoneAt<s, s, s, s, s, s, s, s>;
+export type AlgolBoolNotAnon = AlgolBoolNot<AlgolGameBlobAnon>;
+export type AlgolBoolAndAnon = AlgolBoolAnd<AlgolGameBlobAnon>;
+export type AlgolBoolOrAnon = AlgolBoolOr<AlgolGameBlobAnon>;
+export type AlgolBoolSamePosAnon = AlgolBoolSamePos<AlgolGameBlobAnon>;
+export type AlgolBoolHigherAnon = AlgolBoolHigher<AlgolGameBlobAnon>;
+export type AlgolBoolFurtherAnon = AlgolBoolFurther<AlgolGameBlobAnon>;
+export type AlgolBoolOverlapsAnon = AlgolBoolOverlaps<AlgolGameBlobAnon>;
+export type AlgolBoolIsEmptyAnon = AlgolBoolIsEmpty<AlgolGameBlobAnon>;
+export type AlgolBoolNotEmptyAnon = AlgolBoolNotEmpty<AlgolGameBlobAnon>;
+export type AlgolBoolAnyAtAnon = AlgolBoolAnyAt<AlgolGameBlobAnon>;
+export type AlgolBoolNoneAtAnon = AlgolBoolNoneAt<AlgolGameBlobAnon>;
 export type AlgolBoolMarkAvailableAnon = AlgolBoolMarkAvailable<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon
 >;
 export type AlgolBoolCmndAvailableAnon = AlgolBoolCmndAvailable<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon
 >;
-export type AlgolBoolSameAnon = AlgolBoolSame<s, s, s, s, s, s, s, s>;
-export type AlgolBoolDifferentAnon = AlgolBoolDifferent<s, s, s, s, s, s, s, s>;
-export type AlgolBoolValInListAnon = AlgolBoolValInList<s, s, s, s, s, s, s, s>;
-export type AlgolBoolMoreThanAnon = AlgolBoolMoreThan<s, s, s, s, s, s, s, s>;
-export type AlgolBoolTruthyAnon = AlgolBoolTruthy<s, s, s, s, s, s, s, s>;
-export type AlgolBoolFalsyAnon = AlgolBoolFalsy<s, s, s, s, s, s, s, s>;
-export type AlgolBoolOrthoAnon = AlgolBoolOrtho<s, s, s, s, s, s, s, s>;
-export type AlgolBoolDiagAnon = AlgolBoolDiag<s, s, s, s, s, s, s, s>;
+export type AlgolBoolSameAnon = AlgolBoolSame<AlgolGameBlobAnon>;
+export type AlgolBoolDifferentAnon = AlgolBoolDifferent<AlgolGameBlobAnon>;
+export type AlgolBoolValInListAnon = AlgolBoolValInList<AlgolGameBlobAnon>;
+export type AlgolBoolMoreThanAnon = AlgolBoolMoreThan<AlgolGameBlobAnon>;
+export type AlgolBoolTruthyAnon = AlgolBoolTruthy<AlgolGameBlobAnon>;
+export type AlgolBoolFalsyAnon = AlgolBoolFalsy<AlgolGameBlobAnon>;
+export type AlgolBoolOrthoAnon = AlgolBoolOrtho<AlgolGameBlobAnon>;
+export type AlgolBoolDiagAnon = AlgolBoolDiag<AlgolGameBlobAnon>;
 export type AlgolBoolStoppedBecauseAnon = AlgolBoolStoppedBecause<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
+  AlgolGameBlobAnon
 >;

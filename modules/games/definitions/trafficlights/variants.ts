@@ -1,6 +1,6 @@
-import { TrafficlightsVariantBook } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsVariantBook: TrafficlightsVariantBook = {
+const trafficlightsVariantBook: TrafficlightsDefinition["variants"] = {
   basic: { ruleset: "basic", board: "basic", setup: "basic", desc: "basic" }
 };
 

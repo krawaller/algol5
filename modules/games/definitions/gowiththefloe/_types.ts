@@ -1,47 +1,20 @@
 // Generated file, do not edit here!
-import {
-  CommonLayer,
-  Generators,
-  Flow,
-  AlgolBoard,
-  AI,
-  AlgolAnimCollection,
-  Graphics,
-  Instructions,
-  AlgolMeta,
-  AlgolSetupBook,
-  AlgolGameTestSuite,
-  FullDef,
-  AlgolPerformance,
-  AlgolVariantBook
-} from "../../../types";
+import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
-export type GowiththefloeBoardHeight = 8;
-export type GowiththefloeBoardWidth = 8;
+type GowiththefloeBoardHeight = 8;
+type GowiththefloeBoardWidth = 8;
 
-export type GowiththefloeAnim = AlgolAnimCollection<
-  GowiththefloeBattlePos,
-  GowiththefloeBattleVar,
-  GowiththefloeCommand,
-  GowiththefloeGrid,
-  GowiththefloeLayer,
-  GowiththefloeMark,
-  GowiththefloeTurnPos,
-  GowiththefloeTurnVar,
-  GowiththefloeUnit
->;
-
-export type GowiththefloeTerrain = "water";
-export type GowiththefloeUnit = "seals" | "bears" | "holes";
-export type GowiththefloeMark =
+type GowiththefloeTerrain = "water";
+type GowiththefloeUnit = "seals" | "bears" | "holes";
+type GowiththefloeMark =
   | "selectunit"
   | "selectmovetarget"
   | "selectjumptarget"
   | "selecteattarget";
-export type GowiththefloeCommand = "move" | "jump" | "eat";
-export type GowiththefloePhaseCommand = never;
-export type GowiththefloePhase = "startTurn" | GowiththefloeMark;
-export type GowiththefloeUnitLayer =
+type GowiththefloeCommand = "move" | "jump" | "eat";
+type GowiththefloePhaseCommand = never;
+type GowiththefloePhase = "startTurn" | GowiththefloeMark;
+type GowiththefloeUnitLayer =
   | "units"
   | "myunits"
   | "oppunits"
@@ -58,167 +31,37 @@ export type GowiththefloeUnitLayer =
   | "myholes"
   | "oppholes"
   | "neutralholes";
-export type GowiththefloeGenerator =
+type GowiththefloeGenerator =
   | "findeattargets"
   | "findmovetargets"
   | "findjumptargets"
   | "findsealsmoves"
   | "findcracks";
-export type GowiththefloeArtifactLayer =
+type GowiththefloeArtifactLayer =
   | "eattargets"
   | "movetargets"
   | "jumptargets"
   | "canmove"
   | "cracks";
-export type GowiththefloeTerrainLayer = "water" | "nowater";
-export type GowiththefloeLayer =
+type GowiththefloeTerrainLayer = "water" | "nowater";
+type GowiththefloeLayer =
   | CommonLayer
   | GowiththefloeUnitLayer
   | GowiththefloeArtifactLayer
   | GowiththefloeTerrainLayer;
-export type GowiththefloeBattlePos = never;
-export type GowiththefloeBattleVar = never;
-export type GowiththefloeTurnPos = never;
-export type GowiththefloeTurnVar = never;
+type GowiththefloeBattlePos = never;
+type GowiththefloeBattleVar = never;
+type GowiththefloeTurnPos = never;
+type GowiththefloeTurnVar = never;
 
-export type GowiththefloeBoardName = "basic";
-export type GowiththefloeSetupName = "basic";
-export type GowiththefloeRulesetName = "basic";
-export type GowiththefloeVariantName = "basic";
+type GowiththefloeBoardName = "basic";
+type GowiththefloeSetupName = "basic";
+type GowiththefloeRulesetName = "basic";
+type GowiththefloeVariantName = "basic";
 
-export type GowiththefloeVariantBook = AlgolVariantBook<
-  GowiththefloeBoardName,
-  GowiththefloeRulesetName,
-  GowiththefloeSetupName
->;
+type GowiththefloeGrid = never;
 
-export type GowiththefloeGenerators = Generators<
-  GowiththefloeArtifactLayer,
-  GowiththefloeBattlePos,
-  GowiththefloeBattleVar,
-  GowiththefloeCommand,
-  GowiththefloeGenerator,
-  GowiththefloeGrid,
-  GowiththefloeLayer,
-  GowiththefloeMark,
-  GowiththefloeTurnPos,
-  GowiththefloeTurnVar
->;
-export type GowiththefloeFlow = Flow<
-  GowiththefloeBattlePos,
-  GowiththefloeBattleVar,
-  GowiththefloeCommand,
-  GowiththefloeGenerator,
-  GowiththefloeGrid,
-  GowiththefloeLayer,
-  GowiththefloeMark,
-  GowiththefloeTurnPos,
-  GowiththefloeTurnVar,
-  GowiththefloeUnit
->;
-export type GowiththefloeBoard = AlgolBoard<
-  GowiththefloeBoardHeight,
-  GowiththefloeBoardWidth,
-  GowiththefloeGrid,
-  GowiththefloePosition,
-  GowiththefloeTerrain
->;
-export type GowiththefloeAI = AI<
-  GowiththefloeAiArtifactLayer,
-  GowiththefloeAiAspect,
-  GowiththefloeAiBrain,
-  GowiththefloeAiGenerator,
-  GowiththefloeAiGrid,
-  GowiththefloeAiTerrain,
-  GowiththefloeAiTerrainLayer,
-  GowiththefloeBattlePos,
-  GowiththefloeBattleVar,
-  GowiththefloeBoardHeight,
-  GowiththefloeBoardWidth,
-  GowiththefloeCommand,
-  GowiththefloeGrid,
-  GowiththefloeLayer,
-  GowiththefloeMark,
-  GowiththefloePosition,
-  GowiththefloeTurnPos,
-  GowiththefloeTurnVar
->;
-export type GowiththefloeGraphics = Graphics<
-  GowiththefloeTerrain,
-  GowiththefloeUnit
->;
-export type GowiththefloeInstructions = Instructions<
-  GowiththefloeBattlePos,
-  GowiththefloeBattleVar,
-  GowiththefloeCommand,
-  GowiththefloeGrid,
-  GowiththefloeLayer,
-  GowiththefloeMark,
-  GowiththefloePhase,
-  GowiththefloeTurnPos,
-  GowiththefloeTurnVar,
-  GowiththefloeUnit
->;
-export type GowiththefloeMeta = AlgolMeta<
-  GowiththefloeCommand,
-  GowiththefloeMark
->;
-export type GowiththefloePerformance = AlgolPerformance<
-  GowiththefloeCommand,
-  GowiththefloeMark
->;
-export type GowiththefloeScripts = AlgolGameTestSuite<
-  GowiththefloeCommand,
-  GowiththefloePosition
->;
-export type GowiththefloeSetupBook = AlgolSetupBook<
-  GowiththefloePosition,
-  GowiththefloeUnit
->;
-
-export type GowiththefloeDefinition = FullDef<
-  GowiththefloeAiArtifactLayer,
-  GowiththefloeAiAspect,
-  GowiththefloeAiBrain,
-  GowiththefloeAiGenerator,
-  GowiththefloeAiGrid,
-  GowiththefloeAiTerrain,
-  GowiththefloeAiTerrainLayer,
-  GowiththefloeArtifactLayer,
-  GowiththefloeBattlePos,
-  GowiththefloeBattleVar,
-  GowiththefloeBoardHeight,
-  GowiththefloeBoardWidth,
-  GowiththefloeCommand,
-  GowiththefloeGenerator,
-  GowiththefloeGrid,
-  GowiththefloeLayer,
-  GowiththefloeMark,
-  GowiththefloePhase,
-  GowiththefloePosition,
-  GowiththefloeTerrain,
-  GowiththefloeTurnPos,
-  GowiththefloeTurnVar,
-  GowiththefloeUnit
->;
-
-export type GowiththefloeGrid = never;
-
-export type GowiththefloeAiGenerator = never;
-
-export type GowiththefloeAiAspect = never;
-
-export type GowiththefloeAiGrid = never;
-
-export type GowiththefloeAiArtifactLayer = never;
-
-export type GowiththefloeAiBrain = never;
-
-export type GowiththefloeAiTerrainLayer = never;
-
-export type GowiththefloeAiTerrain = never;
-
-export type GowiththefloePosition =
+type GowiththefloePosition =
   | "a1"
   | "a2"
   | "a3"
@@ -283,3 +126,25 @@ export type GowiththefloePosition =
   | "h6"
   | "h7"
   | "h8";
+
+type GowiththefloeBlob = AlgolGameBlob<
+  GowiththefloeArtifactLayer,
+  GowiththefloeBoardName,
+  GowiththefloeBattlePos,
+  GowiththefloeBattleVar,
+  GowiththefloeCommand,
+  GowiththefloeGenerator,
+  GowiththefloeGrid,
+  GowiththefloeLayer,
+  GowiththefloeMark,
+  GowiththefloePhase,
+  GowiththefloePosition,
+  GowiththefloeRulesetName,
+  GowiththefloeSetupName,
+  GowiththefloeTerrain,
+  GowiththefloeTurnPos,
+  GowiththefloeTurnVar,
+  GowiththefloeUnit
+>;
+
+export type GowiththefloeDefinition = FullDef<GowiththefloeBlob>;

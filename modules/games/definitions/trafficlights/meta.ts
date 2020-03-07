@@ -1,6 +1,6 @@
-import { TrafficlightsMeta } from "./_types";
+import { TrafficlightsDefinition } from "./_types";
 
-const trafficlightsMeta: TrafficlightsMeta = {
+const trafficlightsMeta: TrafficlightsDefinition["meta"] = {
   code: "F",
   id: "trafficlights",
   name: "Traffic Lights",

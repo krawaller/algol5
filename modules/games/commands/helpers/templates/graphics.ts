@@ -5,9 +5,9 @@ export default function templateGraphics(gameId: string) {
 // groups are available in your game. Add a group here, run the type analysis and it will be added
 // to the types for the game!
 
-import { ${capId}Graphics } from './_types';
+import { ${capId}Definition } from './_types';
 
-const ${gameId}Graphics: ${capId}Graphics = {
+const ${gameId}Graphics: ${capId}Definition['graphics'] = {
   icons: {
 
   },

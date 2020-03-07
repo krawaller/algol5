@@ -1,6 +1,6 @@
-import { UglyduckFlow } from "./_types";
+import { UglyduckDefinition } from "./_types";
 
-const uglyduckFlow: UglyduckFlow = {
+const uglyduckFlow: UglyduckDefinition["flow"] = {
   startTurn: { link: "selectunit" },
   endGame: {
     swanhome: {

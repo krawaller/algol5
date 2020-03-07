@@ -1,21 +1,9 @@
 import { AlgolOrder } from "./";
+import { AlgolGameBlob, AlgolTestBlob } from "../../blob";
 
-type TestOrders = AlgolOrder<
-  "mybattlep",
-  "mybattlev",
-  "mycmnd",
-  "mygen",
-  "mygrid",
-  "mylayer",
-  "mymark",
-  "myturnp",
-  "myturnv",
-  "myunit"
->;
-
-const tests: TestOrders[] = [
+const tests: AlgolOrder<AlgolTestBlob>[] = [
   ["unitLayers"],
   { generators: ["mygen"] },
   { effects: [{ killat: "mymark" }] },
-  { ifaction: ["mycmnd", ["unitLayers"]] }
+  { ifaction: ["mycmnd", ["unitLayers"]] },
 ];

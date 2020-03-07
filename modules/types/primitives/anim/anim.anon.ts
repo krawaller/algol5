@@ -8,36 +8,17 @@ import {
   AlgolAnimGhostToIn,
 } from "./anim.interfaces";
 import { AlgolAnim, AlgolAnimInner } from "./";
+import { AlgolGameBlobAnon } from "../../blob";
 
 type s = string;
 
-export type AlgolAnimAnon = AlgolAnim<s, s, s, s, s, s, s, s, s>;
-export type AlgolAnimInnerAnon = AlgolAnimInner<s, s, s, s, s, s, s, s, s>;
+export type AlgolAnimAnon = AlgolAnim<AlgolGameBlobAnon>;
+export type AlgolAnimInnerAnon = AlgolAnimInner<AlgolGameBlobAnon>;
 
-export type AlgolAnimEnterFromAnon = AlgolAnimEnterFrom<s, s, s, s, s, s, s, s>;
-export type AlgolAnimEnterInAnon = AlgolAnimEnterIn<s, s, s, s, s, s, s, s>;
-export type AlgolAnimExitToAnon = AlgolAnimExitTo<s, s, s, s, s, s, s, s>;
-export type AlgolAnimExitInAnon = AlgolAnimExitIn<s, s, s, s, s, s, s, s>;
-export type AlgolAnimGhostAnon = AlgolAnimGhost<s, s, s, s, s, s, s, s, s>;
-export type AlgolAnimGhostFromInAnon = AlgolAnimGhostFromIn<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
->;
-export type AlgolAnimGhostToInAnon = AlgolAnimGhostToIn<
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s,
-  s
->;
+export type AlgolAnimEnterFromAnon = AlgolAnimEnterFrom<AlgolGameBlobAnon>;
+export type AlgolAnimEnterInAnon = AlgolAnimEnterIn<AlgolGameBlobAnon>;
+export type AlgolAnimExitToAnon = AlgolAnimExitTo<AlgolGameBlobAnon>;
+export type AlgolAnimExitInAnon = AlgolAnimExitIn<AlgolGameBlobAnon>;
+export type AlgolAnimGhostAnon = AlgolAnimGhost<AlgolGameBlobAnon>;
+export type AlgolAnimGhostFromInAnon = AlgolAnimGhostFromIn<AlgolGameBlobAnon>;
+export type AlgolAnimGhostToInAnon = AlgolAnimGhostToIn<AlgolGameBlobAnon>;

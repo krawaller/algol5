@@ -50,7 +50,7 @@ export function executeOrderSection(
     orders.push({ links });
   }
 
-  return executeOrder(gameDef, player, action, {
+  return executeOrder(gameDef, player, action, ruleset, {
     multi: orders,
   });
 }

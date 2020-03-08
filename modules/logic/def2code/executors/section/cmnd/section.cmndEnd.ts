@@ -12,7 +12,7 @@ export function executeCmndEnd(
   action: string,
   ruleset: string
 ): string {
-  const usage = orderUsage(gameDef, player, action);
+  const usage = orderUsage(gameDef, player, action, ruleset);
 
   const hasAnim = !!gameDef.anim[action];
 

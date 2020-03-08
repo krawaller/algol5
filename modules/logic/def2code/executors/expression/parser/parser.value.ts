@@ -24,10 +24,11 @@ export default function parseVal(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   expr: AlgolValAnon,
   from?: string
 ) {
-  const parser = makeParser(gameDef, player, action, "value");
+  const parser = makeParser(gameDef, player, action, ruleset, "value");
 
   if (typeof expr === "string") {
     return `"${expr}"`;

@@ -9,7 +9,7 @@ export function executeMarkInit(
   ruleset: string
 ): string {
   let ret = "";
-  const usage = orderUsage(gameDef, player, action);
+  const usage = orderUsage(gameDef, player, action, ruleset);
   const analysis = analyseGame(gameDef)[player][action];
 
   if (usage.ARTIFACTS) {

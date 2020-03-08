@@ -11,12 +11,14 @@ export function executeLink(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   link: AlgolLinkAnon
 ): string {
   return executeStatement(
     gameDef,
     player,
     action,
+    ruleset,
     executeLinkInner,
     link,
     "link"
@@ -27,6 +29,7 @@ function executeLinkInner(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   name: AlgolLinkInnerAnon
 ): string {
   const actionDef: AlgolEffectActionDefAnon =
@@ -34,7 +37,7 @@ function executeLinkInner(
     gameDef.flow.marks[action] ||
     (action === "startTurn" && gameDef.flow.startTurn) ||
     {}; // To allow tests to reference non-existing things
-  const parser = makeParser(gameDef, player, action);
+  const parser = makeParser(gameDef, player, action, ruleset);
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     // ------------- Linking to a command
     return `

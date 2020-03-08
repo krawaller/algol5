@@ -16,7 +16,7 @@ export function executeStartEnd(
   const startDef = gameDef.flow.startTurn;
   const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));
 
-  const usage = orderUsage(gameDef, player, action);
+  const usage = orderUsage(gameDef, player, action, ruleset);
 
   return `
   ${!usage.UNITLAYERS ? "const oldUnitLayers = step.UNITLAYERS; " : ""}

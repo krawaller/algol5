@@ -13,7 +13,7 @@ export function executeMarkEnd(
   action: string,
   ruleset: string
 ): string {
-  const usage = orderUsage(gameDef, player, action);
+  const usage = orderUsage(gameDef, player, action, ruleset);
   const analysis = analyseGame(gameDef);
 
   return `

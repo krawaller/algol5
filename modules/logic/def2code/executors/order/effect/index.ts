@@ -35,12 +35,14 @@ export function executeEffect(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   effect: AlgolEffectAnon
 ): string {
   return executeStatement(
     gameDef,
     player,
     action,
+    ruleset,
     executeEffectInner,
     effect,
     "effect"
@@ -51,11 +53,12 @@ function executeEffectInner(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   effect: AlgolEffectInnerAnon
 ): string {
   const parser = makeParser(gameDef, player, action, "effect");
   const me = (efct: AlgolEffectAnon) =>
-    executeEffect(gameDef, player, action, efct);
+    executeEffect(gameDef, player, action, ruleset, efct);
 
   // -------------------------- Primitive effects --------------------------
 

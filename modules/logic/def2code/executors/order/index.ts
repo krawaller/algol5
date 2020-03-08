@@ -5,7 +5,7 @@ import {
   isAlgolOrderLinks,
   isAlgolOrderDoEffects,
   isAlgolOrderRunGenerators,
-  isAlgolOrderAnims
+  isAlgolOrderAnims,
 } from "../../../../types";
 
 import { executeStatement } from "../";
@@ -20,12 +20,14 @@ export function executeOrder(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   order: AlgolOrderAnon
 ): string {
   return executeStatement(
     gameDef,
     player,
     action,
+    ruleset,
     executeOrderInner,
     order,
     "order"
@@ -36,7 +38,9 @@ function executeOrderInner(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
-  order: AlgolOrderInnerAnon
+  ruleset: string,
+  order: AlgolOrderInnerAnon,
+  from?: string
 ): string {
   if (Array.isArray(order)) {
     switch (order[0]) {
@@ -45,19 +49,23 @@ function executeOrderInner(
     }
   }
   if (isAlgolOrderLinks(order)) {
-    return executeLink(gameDef, player, action, { multi: order.links });
+    return executeLink(gameDef, player, action, ruleset, {
+      multi: order.links,
+    });
   }
   if (isAlgolOrderDoEffects(order)) {
-    return executeEffect(gameDef, player, action, { multi: order.effects });
+    return executeEffect(gameDef, player, action, ruleset, {
+      multi: order.effects,
+    });
   }
   if (isAlgolOrderRunGenerators(order)) {
-    return executeGenerator(gameDef, player, action, {
-      multi: order.generators
+    return executeGenerator(gameDef, player, action, ruleset, {
+      multi: order.generators,
     });
   }
   if (isAlgolOrderAnims(order)) {
-    return executeAnim(gameDef, player, action, {
-      multi: order.anims
+    return executeAnim(gameDef, player, action, ruleset, {
+      multi: order.anims,
     });
   }
   throw new Error("Unknown order: " + JSON.stringify(order));

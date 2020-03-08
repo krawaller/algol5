@@ -15,7 +15,7 @@ export function executeCmndInit(
   // Always init a new LINKS object for each step
   ret += `let LINKS = { marks: {}, commands: {} }; `;
 
-  const usage = orderUsage(gameDef, player, action);
+  const usage = orderUsage(gameDef, player, action, ruleset);
 
   const analysis = analyseGame(gameDef)[player][action];
 

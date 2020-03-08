@@ -16,7 +16,7 @@ export function executeInstructionSection(
     );
   }
 
-  const code = executeInstruction(gameDef, player, action, instrDef);
+  const code = executeInstruction(gameDef, player, action, ruleset, instrDef);
   const usage = codeUsage(code);
 
   let ret = "";

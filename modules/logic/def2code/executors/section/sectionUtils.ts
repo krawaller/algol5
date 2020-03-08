@@ -86,40 +86,38 @@ const vars: Vars[] = [
 ];
 
 export function codeUsage(code: string): { [v in Vars]: Deed } {
-  return vars.reduce(
-    (mem, v) => {
-      if (!code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^A-Za-z_$0-9]`))) {
-        return mem;
-      } else if (code.match(new RegExp(`delete\\s${v}[^A-Za-z_$0-9]`))) {
-        return {
-          ...mem,
-          [v]: "mutates" as Deed,
-        };
-      } else if (
-        code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^;\\)=]*\\s*=[^=]`))
-      ) {
-        return {
-          ...mem,
-          [v]: "mutates" as Deed,
-        };
-      } else {
-        return {
-          ...mem,
-          [v]: "reads" as Deed,
-        };
-      }
+  return vars.reduce((mem, v) => {
+    if (!code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^A-Za-z_$0-9]`))) {
       return mem;
-    },
-    {} as { [v in Vars]: Deed }
-  );
+    } else if (code.match(new RegExp(`delete\\s${v}[^A-Za-z_$0-9]`))) {
+      return {
+        ...mem,
+        [v]: "mutates" as Deed,
+      };
+    } else if (
+      code.match(new RegExp(`(^|[^A-Za-z_$0-9])${v}[^;\\)=]*\\s*=[^=]`))
+    ) {
+      return {
+        ...mem,
+        [v]: "mutates" as Deed,
+      };
+    } else {
+      return {
+        ...mem,
+        [v]: "reads" as Deed,
+      };
+    }
+    return mem;
+  }, {} as { [v in Vars]: Deed });
 }
 
 export function orderUsage(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): { [v: string]: Deed } {
-  const code = executeOrderSection(gameDef, player, action);
+  const code = executeOrderSection(gameDef, player, action, ruleset);
 
   return codeUsage(code);
 }

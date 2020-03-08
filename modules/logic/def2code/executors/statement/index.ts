@@ -19,10 +19,12 @@ export function executeStatement<_T>(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   finalParser: (
     gameDef: FullDefAnon,
     player: 1 | 2,
     action: string,
+    ruleset: string,
     statement: _T,
     from?: string
   ) => string,
@@ -31,7 +33,7 @@ export function executeStatement<_T>(
 ): string {
   const exprParser = makeParser(gameDef, player, action, from);
   const me = (expr: AlgolStatementAnon<_T>) =>
-    executeStatement(gameDef, player, action, finalParser, expr, from);
+    executeStatement(gameDef, player, action, ruleset, finalParser, expr, from);
 
   if (isAlgolStatementIfElse(statement)) {
     const {
@@ -109,7 +111,7 @@ export function executeStatement<_T>(
     return `for(let LOOPPOS in ${setcode}) { ${loopInner} }`;
   }
 
-  return finalParser(gameDef, player, action, statement, from);
+  return finalParser(gameDef, player, action, ruleset, statement, from);
 }
 
 function needsLoopSet(expr: any) {

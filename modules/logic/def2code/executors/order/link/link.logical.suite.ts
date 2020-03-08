@@ -12,16 +12,17 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         flow: {
           ...emptyFullDef.flow,
           commands: {
-            mycmnd: {}
-          }
-        }
+            mycmnd: {},
+          },
+        },
       },
       player: 1,
+      ruleset: "coolrulez",
       action: "startTurn",
       contexts: [
         {
           context: {
-            LINKS: { commands: { othercmnd: "foo" } }
+            LINKS: { commands: { othercmnd: "foo" } },
           },
           tests: [
             {
@@ -29,10 +30,10 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "LINKS.commands",
-                  res: { mycmnd: "mycmnd1", othercmnd: "foo" },
-                  desc: "link is performed if if is truthy"
-                }
-              ]
+                  res: { mycmnd: "mycmnd_coolrulez_1", othercmnd: "foo" },
+                  desc: "link is performed if if is truthy",
+                },
+              ],
             },
             {
               expr: { links: [{ ifplayer: [2, "mycmnd"] }] },
@@ -40,13 +41,13 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "LINKS.commands",
                   res: { othercmnd: "foo" },
-                  desc: "link is not performed if if is falsy"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "link is not performed if if is falsy",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

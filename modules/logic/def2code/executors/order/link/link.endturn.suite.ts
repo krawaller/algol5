@@ -39,6 +39,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
       },
       player: 1,
       action: "someaction",
+      ruleset: "hyperrulez",
       contexts: [
         {
           context: {
@@ -53,7 +54,7 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "LINKS.endTurn",
-                  res: "startTurn2",
+                  res: "startTurn_hyperrulez_2",
                   desc: "we can link to endTurn, passing over to next plr",
                 },
                 {

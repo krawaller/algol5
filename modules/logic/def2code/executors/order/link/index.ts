@@ -41,20 +41,20 @@ function executeLinkInner(
   if (gameDef && gameDef.flow.commands && gameDef.flow.commands[name]) {
     // ------------- Linking to a command
     return `
-      LINKS.commands.${name} = '${name + player}';
+      LINKS.commands.${name} = '${name}_${ruleset}_${player}';
     `;
   } else if (gameDef && gameDef.flow.marks && gameDef.flow.marks[name]) {
     // ------------- Linking to a mark
     const markDef = gameDef.flow.marks[name];
     return `
     for(const pos of Object.keys(${parser.set(markDef.from)})) {
-      LINKS.marks[pos] = '${name + player}';
+      LINKS.marks[pos] = '${name}_${ruleset}_${player}';
     }
 `;
   } else if (name === "endTurn") {
     // ------------- Linking to next turn, have to check win conditions
     if ((gameDef.performance.noEndGameCheck || []).includes(action)) {
-      return `LINKS.endTurn = "startTurn${player === 1 ? 2 : 1}"; `;
+      return `LINKS.endTurn = "startTurn_${ruleset}_${player === 1 ? 2 : 1}"; `;
     }
     return Object.entries(gameDef.flow.endGame || {})
       .filter(
@@ -105,12 +105,14 @@ function executeLinkInner(
             endedBy: '${name}',
             ${def.show ? `endMarks: Object.keys(${parser.set(def.show)})` : ""}
           }
-          LINKS.endTurn = "startTurn${player === 1 ? 2 : 1}";
+          LINKS.endTurn = "startTurn_${ruleset}_${player === 1 ? 2 : 1}";
           `;
         }
         return `if (${parser.bool(def.condition)}) { ${code} }`;
       })
-      .concat(`{ LINKS.endTurn = "startTurn${player === 1 ? 2 : 1}"; }`)
+      .concat(
+        `{ LINKS.endTurn = "startTurn_${ruleset}_${player === 1 ? 2 : 1}"; }`
+      )
       .join(" else ");
   } else {
     throw "Unknown link: " + name;

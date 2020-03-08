@@ -4,9 +4,9 @@ import ariesDef from "../../../../games/dist/games/aries";
 
 test("turn/endTurn regular", () => {
   aries.setBoard(ariesDef.boards.basic);
-  let turn = firstTurn(aries, ariesDef.setups.basic);
+  let turn = firstTurn(aries, ariesDef.setups.basic, "basic");
   // have to add step that wasn't added because of performance thingy
-  turn.steps["root-d4-e4-move"] = aries.action["move1"](
+  turn.steps["root-d4-e4-move"] = aries.action["move_basic_1"](
     turn.steps["root-d4-e4"]
   );
   turn = endTurn(aries, turn, "root-d4-e4-move");

@@ -12,20 +12,21 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         graphics: {
           ...emptyFullDef.graphics,
           icons: {
-            gnurps: "bishop"
-          }
+            gnurps: "bishop",
+          },
         },
         flow: {
           ...emptyFullDef.flow,
           commands: {
             someCmnd: {
               applyEffect: { killid: "unit1" },
-              link: "endTurn"
-            }
-          }
-        }
+              link: "endTurn",
+            },
+          },
+        },
       },
       player: 1,
+      ruleset: "gnarprulez",
       action: "someCmnd",
       contexts: [
         {
@@ -33,10 +34,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
             newStepId: "foo",
             UNITDATA: {
               unit1: { pos: "a2", group: "gnurps", owner: 1 },
-              unit2: { pos: "c3", group: "gnurps", foo: "bar", owner: 2 }
+              unit2: { pos: "c3", group: "gnurps", foo: "bar", owner: 2 },
             },
             UNITLAYERS: { units: {} },
-            LINKS: {}
+            LINKS: {},
           },
           tests: [
             {
@@ -44,24 +45,24 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
               asserts: [
                 {
                   sample: "LINKS",
-                  res: { endTurn: "startTurn2" }
+                  res: { endTurn: "startTurn_gnarprulez_2" },
                 },
                 {
                   sample: "UNITDATA.unit1",
-                  res: undefined
+                  res: undefined,
                 },
                 {
                   sample: "UNITLAYERS.units",
                   res: {
-                    c3: { pos: "c3", foo: "bar", owner: 2, group: "gnurps" }
+                    c3: { pos: "c3", foo: "bar", owner: 2, group: "gnurps" },
                   },
-                  desc: "the unit layers were updated"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "the unit layers were updated",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

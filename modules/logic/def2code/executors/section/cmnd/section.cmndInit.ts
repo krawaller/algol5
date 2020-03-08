@@ -5,7 +5,8 @@ import { analyseGame, emptyAnim } from "../../../../../common";
 export function executeCmndInit(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   const def = gameDef.flow.commands[action];
 

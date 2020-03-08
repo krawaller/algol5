@@ -5,7 +5,8 @@ import { usesSpawn, referencesBattleVars } from "../sectionUtils";
 export function executeNewBattle(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   let ret = "";
   ret += `let UNITDATA = setup2army(setup);
@@ -13,7 +14,7 @@ export function executeNewBattle(
 
   return (
     ret +
-    `return game.action.startTurn1({
+    `return game.action[\`startTurn_\${ruleset}_1\`]({
     ${usesSpawn(gameDef) ? "NEXTSPAWNID: 1," : ""}
     ${
       referencesBattleVars(gameDef) ? "BATTLEVARS: {}, " : ""

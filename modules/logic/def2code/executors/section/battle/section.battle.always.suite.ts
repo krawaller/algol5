@@ -46,9 +46,10 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 2: ["b2"],
               },
             },
+            ruleset: "someRuleset",
           },
           envelope:
-            "let game = { action: { startTurn1: a => ({...a, sentToStart1: true }) } };",
+            "let game = { action: { startTurn_someRuleset_1: a => ({...a, sentToStart1: true }) } };",
           tests: [
             {
               expr: "newBattle",
@@ -56,7 +57,8 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
                 {
                   sample: "returnVal.sentToStart1",
                   res: true,
-                  desc: "we pass result of calling game.action.startTurn1",
+                  desc:
+                    "we pass result of calling game.action.startTurn_someRuleset_1",
                 },
                 {
                   sample: "returnVal.TURN",

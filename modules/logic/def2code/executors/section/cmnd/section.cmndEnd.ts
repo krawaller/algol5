@@ -9,7 +9,8 @@ import {
 export function executeCmndEnd(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   const usage = orderUsage(gameDef, player, action);
 

@@ -5,7 +5,7 @@ import { AlgolSetupAnon, AlgolBoardAnon } from "../gamedef";
 export type AlgolGame = {
   gameId: GameId;
   setBoard: (board: AlgolBoardAnon) => void;
-  newBattle: (setup: AlgolSetupAnon) => AlgolStep;
+  newBattle: (setup: AlgolSetupAnon, ruleset: string) => AlgolStep;
   action: {
     [funcName: string]: (
       step: Partial<AlgolStep>,

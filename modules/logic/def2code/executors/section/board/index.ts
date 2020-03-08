@@ -3,7 +3,8 @@ import { FullDefAnon } from "../../../../../types";
 export function executeSetBoard(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   return `
     TERRAIN1 = terrainLayers(board.height, board.width, board.terrain, 1);

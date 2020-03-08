@@ -12,7 +12,13 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
   const instructions = ([1, 2] as const).flatMap(player => [
     `startTurn${player}: (step) => {
-      ${executeSection(gameDef, player, "startTurn", "instruction")}
+      ${executeSection(
+        gameDef,
+        player,
+        "startTurn",
+        "anyruleset",
+        "instruction"
+      )}
     }`,
     ...Object.keys(gameDef.flow.commands)
       .filter(c => analysis[player][c])
@@ -22,6 +28,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
               gameDef,
               player,
               cmndName,
+              "basic",
               "instruction"
             )}}`
           : `${cmndName + player}: () => defaultInstruction(${player})`
@@ -30,7 +37,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       .filter(c => analysis[player][c])
       .map(
         markName => `${markName + player}: (step) => {
-        ${executeSection(gameDef, player, markName, "instruction")}
+        ${executeSection(gameDef, player, markName, "basic", "instruction")}
       }`
       ),
   ]);
@@ -40,9 +47,9 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       .filter(m => analysis[player][m])
       .map(
         markName => `${markName + player}: (step, newMarkPos) => {
-        ${executeSection(gameDef, player, markName, "markInit")}
-        ${executeSection(gameDef, player, markName, "orders")}
-        ${executeSection(gameDef, player, markName, "markEnd")}
+        ${executeSection(gameDef, player, markName, "basic", "markInit")}
+        ${executeSection(gameDef, player, markName, "basic", "orders")}
+        ${executeSection(gameDef, player, markName, "basic", "markEnd")}
       }`
       )
   );
@@ -53,18 +60,18 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       .map(
         cmndName =>
           `${cmndName + player}: (step) => {
-        ${executeSection(gameDef, player, cmndName, "cmndInit")}
-        ${executeSection(gameDef, player, cmndName, "orders")}
-        ${executeSection(gameDef, player, cmndName, "cmndEnd")}
+        ${executeSection(gameDef, player, cmndName, "basic", "cmndInit")}
+        ${executeSection(gameDef, player, cmndName, "basic", "orders")}
+        ${executeSection(gameDef, player, cmndName, "basic", "cmndEnd")}
       }`
       )
   );
 
   const starts = ([1, 2] as const).map(
     player => `startTurn${player}: (step) => {
-    ${executeSection(gameDef, player, "startTurn", "startInit")}
-    ${executeSection(gameDef, player, "startTurn", "orders")}
-    ${executeSection(gameDef, player, "startTurn", "startEnd")}
+    ${executeSection(gameDef, player, "startTurn", "basic", "startInit")}
+    ${executeSection(gameDef, player, "startTurn", "basic", "orders")}
+    ${executeSection(gameDef, player, "startTurn", "basic", "startEnd")}
   } `
   );
 
@@ -72,17 +79,17 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
 import {offsetPos, boardConnections, makeRelativeDirs, setup2army, boardLayers, terrainLayers, collapseContent, defaultInstruction, roseDirs, orthoDirs, diagDirs, knightDirs} from '../../common'
 
-${executeSection(gameDef, 1, "head", "head")}
+${executeSection(gameDef, 1, "head", "basic", "head")}
 
 const game = {
   gameId: '${gameDef.meta.id}',
   commands: { ${cmndInfo} },
   iconMap: iconMapping,
   setBoard: (board) => {
-    ${executeSection(gameDef, 2, "setBoard", "setBoard")}
+    ${executeSection(gameDef, 2, "setBoard", "basic", "setBoard")}
   },
-  newBattle: (setup) => {
-    ${executeSection(gameDef, 2, "newBattle", "newBattle")}
+  newBattle: (setup, ruleset) => {
+    ${executeSection(gameDef, 2, "newBattle", "basic", "newBattle")}
   },
   action: {
     ${starts.join(", ")},

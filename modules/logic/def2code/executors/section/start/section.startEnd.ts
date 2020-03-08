@@ -4,13 +4,14 @@ import {
   referencesBattleVars,
   referencesTurnVars,
   usesSpawn,
-  orderUsage
+  orderUsage,
 } from "../sectionUtils";
 
 export function executeStartEnd(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   const startDef = gameDef.flow.startTurn;
   const unitLayerNames = Object.keys(emptyUnitLayers(gameDef));

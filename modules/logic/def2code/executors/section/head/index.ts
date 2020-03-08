@@ -9,7 +9,8 @@ import {
 export function executeHead(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   let ret = "\n";
 

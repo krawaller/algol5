@@ -8,8 +8,8 @@ import {
 
 const board: AlgolBoardAnon = {
   ...emptyFullDef.boards.basic,
-  height: 2,
-  width: 2,
+  height: 2 as any,
+  width: 2 as any,
   terrain: {
     flurp: {
       1: ["a1"],

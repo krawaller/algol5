@@ -5,7 +5,8 @@ import { analyseGame } from "../../../../../common";
 export function executeMarkInit(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   let ret = "";
   const usage = orderUsage(gameDef, player, action);

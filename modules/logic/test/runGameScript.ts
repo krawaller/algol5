@@ -5,6 +5,7 @@ import {
   AlgolStepLinks,
   AlgolContentLineAnon,
   AlgolScriptLine,
+  AlgolGameBlobAnon,
 } from "../../types";
 import { getContentText } from "../../common";
 import games from "../../games/dist/lib";
@@ -14,20 +15,22 @@ const endGames = ["win", "lose", "draw"];
 export function runGameScript(
   id: string,
   game: AlgolGame,
-  scripts: AlgolGameTestSuite<string, string>,
+  scripts: AlgolGameTestSuite<AlgolGameBlobAnon>,
   debug?: boolean
 ) {
   for (const scriptName in scripts) {
     test(`Game - ${id} - ${scriptName}`, () => {
       const def = games[id];
       const lines = scripts[scriptName];
+      // TODO - let scripts define board, setup, ruleset via variant
+      const ruleset = "basic";
       game.setBoard(def.boards.basic);
-      let step: AlgolStep = game.newBattle(def.setups.basic);
+      let step: AlgolStep = game.newBattle(def.setups.basic, ruleset);
       let n = 0;
-      let lastFunc = "startTurn1";
+      let lastFunc = `startTurn_${ruleset}_1`;
       while (lines.length) {
         n++;
-        const line = lines.shift() as AlgolScriptLine<string, string>;
+        const line = lines.shift() as AlgolScriptLine<AlgolGameBlobAnon>;
         for (const action of line.commands) {
           let func;
           if (
@@ -38,7 +41,7 @@ export function runGameScript(
               throw new Error("Game end but lines remaining");
             }
             if (
-              ["startTurn1", "startTurn2"].includes(
+              [`startTurn_${ruleset}_1`, `startTurn_${ruleset}_2`].includes(
                 step.LINKS.endTurn as string
               )
             ) {

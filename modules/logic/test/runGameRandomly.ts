@@ -8,7 +8,8 @@ export function runGameRandomly(
 ) {
   test(`Game - ${id} - random play, max ${max} moves`, () => {
     let remaining = max;
-    let step: AlgolStep = game.newBattle(games[id].setups.basic);
+    game.setBoard(games[id].boards.basic);
+    let step: AlgolStep = game.newBattle(games[id].setups.basic, "basic");
     let actionObj = getActionObj(step.LINKS);
     let actions = Object.keys(actionObj);
 

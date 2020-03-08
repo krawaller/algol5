@@ -17,7 +17,7 @@ export function makeStaticGameAPI(
     newBattle: () => {
       // TODO - variants choices selecting which setup and board
       game.setBoard(boards.basic);
-      return newBattle(game, setups.basic);
+      return newBattle(game, setups.basic, "basic");
     },
     fromSave: save => {
       game.setBoard(boards.basic); // TODO - read variant from save

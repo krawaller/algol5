@@ -9,7 +9,8 @@ export const inflateBattleSave = (
   save: AlgolBattleSave
 ): AlgolBattle => {
   const actions = save.path.slice();
-  let battle = newBattle(game, lib[game.gameId].setups.basic);
+  // TODO - variants! :D
+  let battle = newBattle(game, lib[game.gameId].setups.basic, "basic");
   let safetyValve = 0;
   do {
     if (battle.turnNumber > save.turn) {

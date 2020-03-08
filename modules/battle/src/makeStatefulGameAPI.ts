@@ -20,7 +20,7 @@ export function makeStatefulGameAPI(
     newBattle: () => {
       // TODO - variants choices selecting which setup and board
       game.setBoard(boards.basic);
-      return fromBattle(game, newBattle(game, setups.basic));
+      return fromBattle(game, newBattle(game, setups.basic, "basic"));
     },
     fromSave: (save: AlgolBattleSave) => {
       // TODO - read board and variant from save

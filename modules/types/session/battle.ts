@@ -10,6 +10,7 @@ export type AlgolBattle = {
   gameEndedBy?: string;
   winner?: 0 | 1 | 2;
   path: number[];
+  ruleset: string;
 };
 
 export type AlgolUndo = {

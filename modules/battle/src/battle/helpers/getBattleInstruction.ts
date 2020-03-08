@@ -7,7 +7,11 @@ export function getBattleInstruction(
   const { currentStepId } = battle.state;
   const currentStep = battle.turn.steps[currentStepId];
   if (currentStepId === "root") {
-    return game.instruction["startTurn" + battle.player](currentStep);
+    const funcName = `startTurn_${battle.ruleset}_${battle.player}`;
+    if (!game.instruction[funcName]) {
+      throw new Error(`Couldnt find function ${funcName}`);
+    }
+    return game.instruction[funcName](currentStep);
   }
   if (battle.gameEndedBy) {
     if (battle.winner === 0) {
@@ -15,8 +19,8 @@ export function getBattleInstruction(
         line: [
           { text: "Game ended in a draw through " },
           { bold: battle.gameEndedBy },
-          { text: "!" }
-        ]
+          { text: "!" },
+        ],
       };
     } else {
       return {
@@ -24,8 +28,8 @@ export function getBattleInstruction(
           { player: 1 },
           { text: " won through " },
           { bold: battle.gameEndedBy },
-          { text: "!" }
-        ]
+          { text: "!" },
+        ],
       };
     }
   }

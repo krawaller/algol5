@@ -2,6 +2,7 @@ import {
   AlgolGameTestSuite,
   AlgolStatefulGameAPI,
   AlgolStaticGameAPI,
+  AlgolGameBlobAnon,
 } from "../../types";
 import { makeBattleSave } from "../src/battle/helpers";
 import {
@@ -14,7 +15,7 @@ const identifyMark = /^[a-z][0-9]+$/;
 export function runGameScripts(
   gameId: string,
   api: AlgolStatefulGameAPI,
-  scripts: AlgolGameTestSuite<string, string>
+  scripts: AlgolGameTestSuite<AlgolGameBlobAnon>
 ) {
   for (const scriptName in scripts) {
     test(`Running ${gameId} ${scriptName} stateful`, () => {
@@ -37,7 +38,7 @@ export function runGameScripts(
 export function runGameScriptsStatic(
   gameId: string,
   api: AlgolStaticGameAPI,
-  scripts: AlgolGameTestSuite<string, string>
+  scripts: AlgolGameTestSuite<AlgolGameBlobAnon>
 ) {
   for (const scriptName in scripts) {
     test(`Running ${gameId} ${scriptName} static`, () => {

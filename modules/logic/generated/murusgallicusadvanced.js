@@ -69,7 +69,7 @@ const game = {
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
   },
-  newBattle: setup => {
+  newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
@@ -92,7 +92,7 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    return game.action.startTurn1({
+    return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA,
@@ -100,7 +100,7 @@ const game = {
     });
   },
   action: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -121,10 +121,10 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.mytowers)) {
-        LINKS.marks[pos] = "selecttower1";
+        LINKS.marks[pos] = "selecttower_basic_1";
       }
       for (const pos of Object.keys(UNITLAYERS.mycatapults)) {
-        LINKS.marks[pos] = "selectcatapult1";
+        LINKS.marks[pos] = "selectcatapult_basic_1";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -136,7 +136,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -157,10 +157,10 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.mytowers)) {
-        LINKS.marks[pos] = "selecttower2";
+        LINKS.marks[pos] = "selecttower_basic_2";
       }
       for (const pos of Object.keys(UNITLAYERS.mycatapults)) {
-        LINKS.marks[pos] = "selectcatapult2";
+        LINKS.marks[pos] = "selectcatapult_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -172,7 +172,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selecttower1: (step, newMarkPos) => {
+    selecttower_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {},
         crushtargets: {}
@@ -221,10 +221,10 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmove1";
+        LINKS.marks[pos] = "selectmove_basic_1";
       }
       for (const pos of Object.keys(ARTIFACTS.crushtargets)) {
-        LINKS.marks[pos] = "selectcrush1";
+        LINKS.marks[pos] = "selectcrush_basic_1";
       }
       return {
         LINKS,
@@ -236,7 +236,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectmove1: (step, newMarkPos) => {
+    selectmove_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         crushtargets: step.ARTIFACTS.crushtargets,
@@ -273,7 +273,7 @@ const game = {
             : "madewalls"
         ][STARTPOS] = emptyObj;
       }
-      LINKS.commands.move = "move1";
+      LINKS.commands.move = "move_basic_1";
       return {
         LINKS,
         ARTIFACTS,
@@ -285,16 +285,16 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selectcrush1: (step, newMarkPos) => {
+    selectcrush_basic_1: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
         selecttower: step.MARKS.selecttower,
         selectcrush: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
-      LINKS.commands.crush = "crush1";
+      LINKS.commands.crush = "crush_basic_1";
       if (UNITLAYERS.oppcatapults[MARKS.selectcrush]) {
-        LINKS.commands.sacrifice = "sacrifice1";
+        LINKS.commands.sacrifice = "sacrifice_basic_1";
       }
       return {
         LINKS,
@@ -307,7 +307,7 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selectcatapult1: (step, newMarkPos) => {
+    selectcatapult_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         firetargets: {}
       };
@@ -332,7 +332,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.firetargets)) {
-        LINKS.marks[pos] = "selectfire1";
+        LINKS.marks[pos] = "selectfire_basic_1";
       }
       return {
         LINKS,
@@ -344,9 +344,9 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectfire1: (step, newMarkPos) => {
+    selectfire_basic_1: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.fire = "fire1";
+      LINKS.commands.fire = "fire_basic_1";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -361,7 +361,7 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selecttower2: (step, newMarkPos) => {
+    selecttower_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {},
         crushtargets: {}
@@ -410,10 +410,10 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmove2";
+        LINKS.marks[pos] = "selectmove_basic_2";
       }
       for (const pos of Object.keys(ARTIFACTS.crushtargets)) {
-        LINKS.marks[pos] = "selectcrush2";
+        LINKS.marks[pos] = "selectcrush_basic_2";
       }
       return {
         LINKS,
@@ -425,7 +425,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectmove2: (step, newMarkPos) => {
+    selectmove_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         crushtargets: step.ARTIFACTS.crushtargets,
@@ -462,7 +462,7 @@ const game = {
             : "madewalls"
         ][STARTPOS] = emptyObj;
       }
-      LINKS.commands.move = "move2";
+      LINKS.commands.move = "move_basic_2";
       return {
         LINKS,
         ARTIFACTS,
@@ -474,16 +474,16 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selectcrush2: (step, newMarkPos) => {
+    selectcrush_basic_2: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
       let MARKS = {
         selecttower: step.MARKS.selecttower,
         selectcrush: newMarkPos
       };
       let UNITLAYERS = step.UNITLAYERS;
-      LINKS.commands.crush = "crush2";
+      LINKS.commands.crush = "crush_basic_2";
       if (UNITLAYERS.oppcatapults[MARKS.selectcrush]) {
-        LINKS.commands.sacrifice = "sacrifice2";
+        LINKS.commands.sacrifice = "sacrifice_basic_2";
       }
       return {
         LINKS,
@@ -496,7 +496,7 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selectcatapult2: (step, newMarkPos) => {
+    selectcatapult_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         firetargets: {}
       };
@@ -521,7 +521,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.firetargets)) {
-        LINKS.marks[pos] = "selectfire2";
+        LINKS.marks[pos] = "selectfire_basic_2";
       }
       return {
         LINKS,
@@ -533,9 +533,9 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectfire2: (step, newMarkPos) => {
+    selectfire_basic_2: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.fire = "fire2";
+      LINKS.commands.fire = "fire_basic_2";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -550,7 +550,7 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    move1: step => {
+    move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -651,7 +651,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -664,7 +664,7 @@ const game = {
         anim
       };
     },
-    crush1: step => {
+    crush_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
@@ -737,7 +737,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -750,7 +750,7 @@ const game = {
         anim
       };
     },
-    sacrifice1: step => {
+    sacrifice_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
@@ -811,7 +811,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -824,7 +824,7 @@ const game = {
         anim
       };
     },
-    fire1: step => {
+    fire_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
@@ -916,7 +916,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -929,7 +929,7 @@ const game = {
         anim
       };
     },
-    move2: step => {
+    move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -1030,7 +1030,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -1043,7 +1043,7 @@ const game = {
         anim
       };
     },
-    crush2: step => {
+    crush_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
@@ -1116,7 +1116,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -1129,7 +1129,7 @@ const game = {
         anim
       };
     },
-    sacrifice2: step => {
+    sacrifice_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
@@ -1190,7 +1190,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -1203,7 +1203,7 @@ const game = {
         anim
       };
     },
-    fire2: step => {
+    fire_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
@@ -1295,7 +1295,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -1310,7 +1310,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       return collapseContent({
         line: [
           { select: "Select" },
@@ -1321,11 +1321,11 @@ const game = {
         ]
       });
     },
-    move1: () => defaultInstruction(1),
-    crush1: () => defaultInstruction(1),
-    sacrifice1: () => defaultInstruction(1),
-    fire1: () => defaultInstruction(1),
-    selecttower1: step => {
+    move_basic_1: () => defaultInstruction(1),
+    crush_basic_1: () => defaultInstruction(1),
+    sacrifice_basic_1: () => defaultInstruction(1),
+    fire_basic_1: () => defaultInstruction(1),
+    selecttower_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -1371,7 +1371,7 @@ const game = {
         ]
       });
     },
-    selectmove1: step => {
+    selectmove_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -1483,7 +1483,7 @@ const game = {
         ]
       });
     },
-    selectcrush1: step => {
+    selectcrush_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -1559,7 +1559,7 @@ const game = {
         ]
       });
     },
-    selectcatapult1: step => {
+    selectcatapult_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -1576,7 +1576,7 @@ const game = {
         ]
       });
     },
-    selectfire1: step => {
+    selectfire_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -1636,7 +1636,7 @@ const game = {
         ]
       });
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       return collapseContent({
         line: [
           { select: "Select" },
@@ -1647,11 +1647,11 @@ const game = {
         ]
       });
     },
-    move2: () => defaultInstruction(2),
-    crush2: () => defaultInstruction(2),
-    sacrifice2: () => defaultInstruction(2),
-    fire2: () => defaultInstruction(2),
-    selecttower2: step => {
+    move_basic_2: () => defaultInstruction(2),
+    crush_basic_2: () => defaultInstruction(2),
+    sacrifice_basic_2: () => defaultInstruction(2),
+    fire_basic_2: () => defaultInstruction(2),
+    selecttower_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -1697,7 +1697,7 @@ const game = {
         ]
       });
     },
-    selectmove2: step => {
+    selectmove_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -1809,7 +1809,7 @@ const game = {
         ]
       });
     },
-    selectcrush2: step => {
+    selectcrush_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -1885,7 +1885,7 @@ const game = {
         ]
       });
     },
-    selectcatapult2: step => {
+    selectcatapult_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -1902,7 +1902,7 @@ const game = {
         ]
       });
     },
-    selectfire2: step => {
+    selectfire_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({

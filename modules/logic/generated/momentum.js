@@ -42,7 +42,7 @@ const game = {
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
   },
-  newBattle: setup => {
+  newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = { units: {}, myunits: {}, oppunits: {}, stones: {} };
     for (let unitid in UNITDATA) {
@@ -52,7 +52,7 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    return game.action.startTurn1({
+    return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA,
@@ -60,7 +60,7 @@ const game = {
     });
   },
   action: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -77,7 +77,7 @@ const game = {
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
           .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
-        LINKS.marks[pos] = "selectdroptarget1";
+        LINKS.marks[pos] = "selectdroptarget_basic_1";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -89,7 +89,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -107,10 +107,10 @@ const game = {
           .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
           .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
       )) {
-        LINKS.marks[pos] = "selectdroptarget2";
+        LINKS.marks[pos] = "selectdroptarget_basic_2";
       }
       if (TURN === 1) {
-        LINKS.commands.pie = "pie2";
+        LINKS.commands.pie = "pie_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -122,7 +122,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectdroptarget1: (step, newMarkPos) => {
+    selectdroptarget_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         doomed: {},
         pushed: {}
@@ -166,7 +166,7 @@ const game = {
           }
         }
       }
-      LINKS.commands.drop = "drop1";
+      LINKS.commands.drop = "drop_basic_1";
       return {
         LINKS,
         ARTIFACTS,
@@ -177,7 +177,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectdroptarget2: (step, newMarkPos) => {
+    selectdroptarget_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         doomed: {},
         pushed: {}
@@ -221,7 +221,7 @@ const game = {
           }
         }
       }
-      LINKS.commands.drop = "drop2";
+      LINKS.commands.drop = "drop_basic_2";
       return {
         LINKS,
         ARTIFACTS,
@@ -232,7 +232,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    drop1: step => {
+    drop_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -298,7 +298,7 @@ const game = {
         LINKS.endGame = "win";
         LINKS.endedBy = "allout";
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -311,7 +311,7 @@ const game = {
         anim
       };
     },
-    pie2: step => {
+    pie_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -334,7 +334,7 @@ const game = {
           UNITLAYERS[layer][pos] = currentunit;
         }
       }
-      LINKS.endTurn = "startTurn1";
+      LINKS.endTurn = "startTurn_basic_1";
       return {
         LINKS,
         MARKS: {},
@@ -345,7 +345,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    drop2: step => {
+    drop_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -411,7 +411,7 @@ const game = {
         LINKS.endGame = "win";
         LINKS.endedBy = "allout";
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -426,7 +426,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
@@ -464,8 +464,8 @@ const game = {
           }, [])
       });
     },
-    drop1: () => defaultInstruction(1),
-    selectdroptarget1: step => {
+    drop_basic_1: () => defaultInstruction(1),
+    selectdroptarget_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -551,7 +551,7 @@ const game = {
         ]
       });
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       let UNITLAYERS = step.UNITLAYERS;
       let TURN = step.TURN;
       return collapseContent({
@@ -611,9 +611,9 @@ const game = {
           }, [])
       });
     },
-    pie2: () => defaultInstruction(2),
-    drop2: () => defaultInstruction(2),
-    selectdroptarget2: step => {
+    pie_basic_2: () => defaultInstruction(2),
+    drop_basic_2: () => defaultInstruction(2),
+    selectdroptarget_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;

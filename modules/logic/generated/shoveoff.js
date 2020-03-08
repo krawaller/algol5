@@ -49,7 +49,7 @@ const game = {
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
   },
-  newBattle: setup => {
+  newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = { units: {}, myunits: {}, oppunits: {} };
     for (let unitid in UNITDATA) {
@@ -59,7 +59,7 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    return game.action.startTurn1({
+    return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA,
@@ -67,13 +67,13 @@ const game = {
     });
   },
   action: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       let LINKS = {
         marks: {},
         commands: {}
       };
       for (const pos of Object.keys(TERRAIN1.edge)) {
-        LINKS.marks[pos] = "selectpushpoint1";
+        LINKS.marks[pos] = "selectpushpoint_basic_1";
       }
       const oldUnitLayers = step.UNITLAYERS;
       return {
@@ -90,13 +90,13 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       let LINKS = {
         marks: {},
         commands: {}
       };
       for (const pos of Object.keys(TERRAIN2.edge)) {
-        LINKS.marks[pos] = "selectpushpoint2";
+        LINKS.marks[pos] = "selectpushpoint_basic_2";
       }
       const oldUnitLayers = step.UNITLAYERS;
       return {
@@ -113,7 +113,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectpushpoint1: (step, newMarkPos) => {
+    selectpushpoint_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         targetedgepoints: {},
         squishsouth: {},
@@ -201,16 +201,16 @@ const game = {
         }
       }
       if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
-        LINKS.commands.south = "south1";
+        LINKS.commands.south = "south_basic_1";
       }
       if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
-        LINKS.commands.north = "north1";
+        LINKS.commands.north = "north_basic_1";
       }
       if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
-        LINKS.commands.west = "west1";
+        LINKS.commands.west = "west_basic_1";
       }
       if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
-        LINKS.commands.east = "east1";
+        LINKS.commands.east = "east_basic_1";
       }
       return {
         LINKS,
@@ -222,7 +222,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectpushpoint2: (step, newMarkPos) => {
+    selectpushpoint_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         targetedgepoints: {},
         squishsouth: {},
@@ -310,16 +310,16 @@ const game = {
         }
       }
       if (Object.keys(ARTIFACTS.spawnsouth).length !== 0) {
-        LINKS.commands.south = "south2";
+        LINKS.commands.south = "south_basic_2";
       }
       if (Object.keys(ARTIFACTS.spawnnorth).length !== 0) {
-        LINKS.commands.north = "north2";
+        LINKS.commands.north = "north_basic_2";
       }
       if (Object.keys(ARTIFACTS.spawnwest).length !== 0) {
-        LINKS.commands.west = "west2";
+        LINKS.commands.west = "west_basic_2";
       }
       if (Object.keys(ARTIFACTS.spawneast).length !== 0) {
-        LINKS.commands.east = "east2";
+        LINKS.commands.east = "east_basic_2";
       }
       return {
         LINKS,
@@ -331,7 +331,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    north1: step => {
+    north_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -420,7 +420,7 @@ const game = {
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -433,7 +433,7 @@ const game = {
         anim
       };
     },
-    south1: step => {
+    south_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -522,7 +522,7 @@ const game = {
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -535,7 +535,7 @@ const game = {
         anim
       };
     },
-    east1: step => {
+    east_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -624,7 +624,7 @@ const game = {
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -637,7 +637,7 @@ const game = {
         anim
       };
     },
-    west1: step => {
+    west_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -726,7 +726,7 @@ const game = {
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -739,7 +739,7 @@ const game = {
         anim
       };
     },
-    north2: step => {
+    north_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -828,7 +828,7 @@ const game = {
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -841,7 +841,7 @@ const game = {
         anim
       };
     },
-    south2: step => {
+    south_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -930,7 +930,7 @@ const game = {
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -943,7 +943,7 @@ const game = {
         anim
       };
     },
-    east2: step => {
+    east_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -1032,7 +1032,7 @@ const game = {
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -1045,7 +1045,7 @@ const game = {
         anim
       };
     },
-    west2: step => {
+    west_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -1134,7 +1134,7 @@ const game = {
         LINKS.endedBy = "madeline";
         LINKS.endMarks = Object.keys(ARTIFACTS.fourinarow);
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -1149,7 +1149,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
@@ -1181,11 +1181,11 @@ const game = {
         ]
       });
     },
-    north1: () => defaultInstruction(1),
-    south1: () => defaultInstruction(1),
-    east1: () => defaultInstruction(1),
-    west1: () => defaultInstruction(1),
-    selectpushpoint1: step => {
+    north_basic_1: () => defaultInstruction(1),
+    south_basic_1: () => defaultInstruction(1),
+    east_basic_1: () => defaultInstruction(1),
+    west_basic_1: () => defaultInstruction(1),
+    selectpushpoint_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       return collapseContent({
@@ -1224,7 +1224,7 @@ const game = {
         ]
       });
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
         line: [
@@ -1256,11 +1256,11 @@ const game = {
         ]
       });
     },
-    north2: () => defaultInstruction(2),
-    south2: () => defaultInstruction(2),
-    east2: () => defaultInstruction(2),
-    west2: () => defaultInstruction(2),
-    selectpushpoint2: step => {
+    north_basic_2: () => defaultInstruction(2),
+    south_basic_2: () => defaultInstruction(2),
+    east_basic_2: () => defaultInstruction(2),
+    west_basic_2: () => defaultInstruction(2),
+    selectpushpoint_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       return collapseContent({

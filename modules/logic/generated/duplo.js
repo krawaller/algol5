@@ -48,7 +48,7 @@ const game = {
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
   },
-  newBattle: setup => {
+  newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
@@ -65,7 +65,7 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    return game.action.startTurn1({
+    return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA,
@@ -73,7 +73,7 @@ const game = {
     });
   },
   action: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -90,7 +90,7 @@ const game = {
       let TURN = step.TURN + 1;
       if (TURN > 1) {
         for (const pos of Object.keys(UNITLAYERS.myunits)) {
-          LINKS.marks[pos] = "selectunit1";
+          LINKS.marks[pos] = "selectunit_basic_1";
         }
       } else {
         for (const pos of Object.keys(
@@ -98,7 +98,7 @@ const game = {
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
             .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
         )) {
-          LINKS.marks[pos] = "selectdeploy1";
+          LINKS.marks[pos] = "selectdeploy_basic_1";
         }
       }
       return {
@@ -111,7 +111,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -128,7 +128,7 @@ const game = {
       let TURN = step.TURN;
       if (TURN > 1) {
         for (const pos of Object.keys(UNITLAYERS.myunits)) {
-          LINKS.marks[pos] = "selectunit2";
+          LINKS.marks[pos] = "selectunit_basic_2";
         }
       } else {
         for (const pos of Object.keys(
@@ -136,7 +136,7 @@ const game = {
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
             .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
         )) {
-          LINKS.marks[pos] = "selectdeploy2";
+          LINKS.marks[pos] = "selectdeploy_basic_2";
         }
       }
       return {
@@ -149,9 +149,9 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectdeploy1: (step, newMarkPos) => {
+    selectdeploy_basic_1: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.deploy = "deploy1";
+      LINKS.commands.deploy = "deploy_basic_1";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -163,7 +163,7 @@ const game = {
         massiveTree: true
       };
     },
-    selectunit1: (step, newMarkPos) => {
+    selectunit_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         spawndirs: {},
         growstarts: {},
@@ -267,7 +267,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.targets)) {
-        LINKS.marks[pos] = "selecttarget1";
+        LINKS.marks[pos] = "selecttarget_basic_1";
       }
       return {
         LINKS,
@@ -279,7 +279,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selecttarget1: (step, newMarkPos) => {
+    selecttarget_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         spawndirs: step.ARTIFACTS.spawndirs,
         growstarts: step.ARTIFACTS.growstarts,
@@ -311,7 +311,7 @@ const game = {
           ARTIFACTS.spawns[POS] = emptyObj;
         }
       }
-      LINKS.commands.expand = "expand1";
+      LINKS.commands.expand = "expand_basic_1";
       return {
         LINKS,
         ARTIFACTS,
@@ -322,9 +322,9 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectdeploy2: (step, newMarkPos) => {
+    selectdeploy_basic_2: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.deploy = "deploy2";
+      LINKS.commands.deploy = "deploy_basic_2";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -336,7 +336,7 @@ const game = {
         massiveTree: true
       };
     },
-    selectunit2: (step, newMarkPos) => {
+    selectunit_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         spawndirs: {},
         growstarts: {},
@@ -440,7 +440,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.targets)) {
-        LINKS.marks[pos] = "selecttarget2";
+        LINKS.marks[pos] = "selecttarget_basic_2";
       }
       return {
         LINKS,
@@ -452,7 +452,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selecttarget2: (step, newMarkPos) => {
+    selecttarget_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         spawndirs: step.ARTIFACTS.spawndirs,
         growstarts: step.ARTIFACTS.growstarts,
@@ -484,7 +484,7 @@ const game = {
           ARTIFACTS.spawns[POS] = emptyObj;
         }
       }
-      LINKS.commands.expand = "expand2";
+      LINKS.commands.expand = "expand_basic_2";
       return {
         LINKS,
         ARTIFACTS,
@@ -495,7 +495,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    deploy1: step => {
+    deploy_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -526,14 +526,14 @@ const game = {
         }
       }
       if (Object.keys(UNITLAYERS.mysoldiers).length > 1) {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       } else {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
             .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
         )) {
-          LINKS.marks[pos] = "selectdeploy1";
+          LINKS.marks[pos] = "selectdeploy_basic_1";
         }
       }
       return {
@@ -546,7 +546,7 @@ const game = {
         NEXTSPAWNID
       };
     },
-    expand1: step => {
+    expand_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -630,9 +630,9 @@ const game = {
           ],
           endedBy: "nomoremoves"
         };
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -645,7 +645,7 @@ const game = {
         anim
       };
     },
-    deploy2: step => {
+    deploy_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -676,14 +676,14 @@ const game = {
         }
       }
       if (Object.keys(UNITLAYERS.mysoldiers).length > 1) {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       } else {
         for (const pos of Object.keys(
           Object.keys(BOARD.board)
             .filter(k => !UNITLAYERS.units.hasOwnProperty(k))
             .reduce((m, k) => ({ ...m, [k]: emptyObj }), {})
         )) {
-          LINKS.marks[pos] = "selectdeploy2";
+          LINKS.marks[pos] = "selectdeploy_basic_2";
         }
       }
       return {
@@ -696,7 +696,7 @@ const game = {
         NEXTSPAWNID
       };
     },
-    expand2: step => {
+    expand_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -780,9 +780,9 @@ const game = {
           ],
           endedBy: "nomoremoves"
         };
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -797,7 +797,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       let TURN = step.TURN;
       return TURN > 1
         ? collapseContent({
@@ -810,7 +810,7 @@ const game = {
             ]
           });
     },
-    deploy1: step => {
+    deploy_basic_1: step => {
       let UNITLAYERS = step.UNITLAYERS;
       return Object.keys(UNITLAYERS.myunits).length === 1
         ? collapseContent({
@@ -822,8 +822,8 @@ const game = {
           })
         : defaultInstruction(1);
     },
-    expand1: () => defaultInstruction(1),
-    selectdeploy1: step => {
+    expand_basic_1: () => defaultInstruction(1),
+    selectdeploy_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -839,10 +839,10 @@ const game = {
         ]
       });
     },
-    selectunit1: step => {
+    selectunit_basic_1: step => {
       return { text: "Now select which square to expand to" };
     },
-    selecttarget1: step => {
+    selecttarget_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -859,7 +859,7 @@ const game = {
         ]
       });
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       let TURN = step.TURN;
       return TURN > 1
         ? collapseContent({
@@ -872,7 +872,7 @@ const game = {
             ]
           });
     },
-    deploy2: step => {
+    deploy_basic_2: step => {
       let UNITLAYERS = step.UNITLAYERS;
       return Object.keys(UNITLAYERS.myunits).length === 1
         ? collapseContent({
@@ -884,8 +884,8 @@ const game = {
           })
         : defaultInstruction(2);
     },
-    expand2: () => defaultInstruction(2),
-    selectdeploy2: step => {
+    expand_basic_2: () => defaultInstruction(2),
+    selectdeploy_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -901,10 +901,10 @@ const game = {
         ]
       });
     },
-    selectunit2: step => {
+    selectunit_basic_2: step => {
       return { text: "Now select which square to expand to" };
     },
-    selecttarget2: step => {
+    selecttarget_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({

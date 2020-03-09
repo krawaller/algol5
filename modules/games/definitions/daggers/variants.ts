@@ -1,13 +1,13 @@
 import { DaggersDefinition } from "./_types";
 
-const daggersVariantBook: DaggersDefinition["variants"] = {
-  basic: {
+const daggersVariantBook: DaggersDefinition["variants"] = [
+  {
     ruleset: "basic",
     board: "basic",
     setup: "basic",
     desc: "regular",
-    code: "A",
+    code: "a",
   },
-};
+];
 
 export default daggersVariantBook;

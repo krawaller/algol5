@@ -6,7 +6,7 @@ import {
   AlgolBattleSave,
   AlgolSetupBookAnon,
   AlgolBoardBookAnon,
-  AlgolVariantBookAnon,
+  AlgolVariantAnon,
 } from "../../types";
 import { newBattle, battleAction, getBattleUI } from "./battle";
 import { inflateBattleSave } from "./battle/helpers";
@@ -15,7 +15,7 @@ export function makeStatefulGameAPI(
   game: AlgolGame,
   setups: AlgolSetupBookAnon,
   boards: AlgolBoardBookAnon,
-  variants: AlgolVariantBookAnon
+  variants: AlgolVariantAnon[]
 ): AlgolStatefulGameAPI {
   return {
     gameId: game.gameId,

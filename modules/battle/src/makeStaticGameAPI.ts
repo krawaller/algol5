@@ -3,7 +3,7 @@ import {
   AlgolStaticGameAPI,
   AlgolSetupBookAnon,
   AlgolBoardBookAnon,
-  AlgolVariantBookAnon,
+  AlgolVariantAnon,
 } from "../../types";
 import { newBattle, battleAction, getBattleUI } from "./battle";
 import { inflateBattleSave } from "./battle/helpers";
@@ -12,7 +12,7 @@ export function makeStaticGameAPI(
   game: AlgolGame,
   setups: AlgolSetupBookAnon,
   boards: AlgolBoardBookAnon,
-  variants: AlgolVariantBookAnon
+  variants: AlgolVariantAnon[]
 ): AlgolStaticGameAPI {
   return {
     gameId: game.gameId,

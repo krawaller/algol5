@@ -16,9 +16,10 @@ import {
 export function possibilities<_T>(
   input: AlgolIfableExpressionAnon<_T> | AlgolStatementAnon<_T>,
   player: 0 | 1 | 2 = 0,
-  action: string = "any"
+  action: string = "any",
+  ruleset: string = "basic"
 ): _T[] {
-  const listWithDuplicates = possibilitiesInner(input, player, action);
+  const listWithDuplicates = possibilitiesInner(input, player, action, ruleset);
   const possAsKeys = listWithDuplicates.reduce(
     (mem, poss) => ({ ...mem, [JSON.stringify(poss)]: 1 }),
     {}
@@ -29,15 +30,16 @@ export function possibilities<_T>(
 function possibilitiesInner<_T>(
   input: AlgolIfableExpressionAnon<_T> | AlgolStatementAnon<_T>,
   player: 0 | 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): _T[] {
   const expr = input as AlgolIfableExpressionAnon<_T>;
   if (isAlgolExpressionIfElse(expr)) {
     const {
       ifelse: [test, whenTruthy, whenFalsy],
     } = expr;
-    return possibilitiesInner(whenTruthy, player, action).concat(
-      possibilitiesInner(whenFalsy, player, action)
+    return possibilitiesInner(whenTruthy, player, action, ruleset).concat(
+      possibilitiesInner(whenFalsy, player, action, ruleset)
     );
   }
 
@@ -47,9 +49,9 @@ function possibilitiesInner<_T>(
     } = expr;
     let poss: any[] = [];
     if (action === "any" || action === testAction)
-      poss = poss.concat(possibilitiesInner(whenYes, player, action));
+      poss = poss.concat(possibilitiesInner(whenYes, player, action, ruleset));
     if (action === "any" || action !== testAction)
-      poss = poss.concat(possibilitiesInner(whenNo, player, action));
+      poss = poss.concat(possibilitiesInner(whenNo, player, action, ruleset));
     return poss;
   }
 
@@ -59,9 +61,9 @@ function possibilitiesInner<_T>(
     } = expr;
     let poss: any[] = [];
     if (player !== 2)
-      poss = poss.concat(possibilitiesInner(plr1, player, action));
+      poss = poss.concat(possibilitiesInner(plr1, player, action, ruleset));
     if (player !== 1)
-      poss = poss.concat(possibilitiesInner(plr2, player, action));
+      poss = poss.concat(possibilitiesInner(plr2, player, action, ruleset));
     return poss;
   }
 
@@ -70,7 +72,7 @@ function possibilitiesInner<_T>(
       indexlist: [idx, ...opts],
     } = expr;
     return opts.reduce(
-      (mem, o) => mem.concat(possibilitiesInner(o, player, action)),
+      (mem, o) => mem.concat(possibilitiesInner(o, player, action, ruleset)),
       [] as any[]
     );
   }
@@ -79,7 +81,9 @@ function possibilitiesInner<_T>(
     const {
       if: [test, opt],
     } = expr;
-    return ([] as any[]).concat(possibilitiesInner(opt, player, action));
+    return ([] as any[]).concat(
+      possibilitiesInner(opt, player, action, ruleset)
+    );
   }
 
   if (isAlgolIfableExpressionIfPlayer(expr)) {
@@ -87,7 +91,7 @@ function possibilitiesInner<_T>(
       ifplayer: [plr, opt],
     } = expr;
     return player === plr
-      ? ([] as any[]).concat(possibilitiesInner(opt, player, action))
+      ? ([] as any[]).concat(possibilitiesInner(opt, player, action, ruleset))
       : [];
   }
 
@@ -96,7 +100,7 @@ function possibilitiesInner<_T>(
       ifaction: [testAction, opt],
     } = expr;
     return action === testAction || action === "any"
-      ? ([] as any[]).concat(possibilitiesInner(opt, player, action))
+      ? ([] as any[]).concat(possibilitiesInner(opt, player, action, ruleset))
       : [];
   }
 
@@ -108,20 +112,21 @@ function possibilitiesInner<_T>(
     const {
       foridin: [set, repeatStatement],
     } = statement;
-    return possibilitiesInner(repeatStatement, player, action);
+    return possibilitiesInner(repeatStatement, player, action, ruleset);
   }
 
   if (isAlgolStatementForPosIn(statement)) {
     const {
       forposin: [set, repeatStatement],
     } = statement;
-    return possibilitiesInner(repeatStatement, player, action);
+    return possibilitiesInner(repeatStatement, player, action, ruleset);
   }
 
   if (isAlgolStatementMulti(statement)) {
     const { multi: children } = statement;
     return children.reduce(
-      (mem, child) => mem.concat(possibilitiesInner(child, player, action)),
+      (mem, child) =>
+        mem.concat(possibilitiesInner(child, player, action, ruleset)),
       [] as any[]
     );
   }

@@ -4,7 +4,8 @@ import { possibilities } from "..";
 export function actionGenerators(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string[] {
   const def: AlgolEffectActionDefAnon =
     gameDef.flow.commands[action] ||
@@ -15,7 +16,8 @@ export function actionGenerators(
   return (def.runGenerators || [])
     .concat(def.runGenerator || [])
     .reduce(
-      (mem, genName) => mem.concat(possibilities(genName, player, action)),
+      (mem, genName) =>
+        mem.concat(possibilities(genName, player, action, ruleset)),
       [] as string[]
     );
 }

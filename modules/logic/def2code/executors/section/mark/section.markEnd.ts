@@ -26,7 +26,7 @@ export function executeMarkEnd(
       ${
         usage.MARKS
           ? "MARKS, "
-          : `MARKS: { ${analysis[player][action].priorMarks
+          : `MARKS: { ${analysis[ruleset][player][action].priorMarks
               .map(m => `${m}: step.MARKS.${m}, `)
               .join("")} ${action}: newMarkPos }, `
       }

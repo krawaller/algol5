@@ -17,7 +17,7 @@ export function executeCmndInit(
 
   const usage = orderUsage(gameDef, player, action, ruleset);
 
-  const analysis = analyseGame(gameDef)[player][action];
+  const analysis = analyseGame(gameDef)[ruleset][player][action];
 
   if (!!gameDef.anim[action]) {
     ret += `let anim = ${JSON.stringify(emptyAnim)}; `;

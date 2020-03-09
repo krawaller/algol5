@@ -11,7 +11,7 @@ export function executeStartInit(
   let ret = "";
   const usage = orderUsage(gameDef, player, action, ruleset);
 
-  const analysis = analyseGame(gameDef)[player].startTurn;
+  const analysis = analyseGame(gameDef)[ruleset][player].startTurn;
 
   if (usage.ARTIFACTS) {
     if (analysis.addedArtifacts.length) {

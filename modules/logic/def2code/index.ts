@@ -22,7 +22,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
       ${executeSection(gameDef, player, "startTurn", ruleset, "instruction")}
     }`,
     ...Object.keys(gameDef.flow.commands)
-      .filter(c => analysis[player][c])
+      .filter(c => analysis[ruleset][player][c])
       .map(cmndName =>
         gameDef.instructions[cmndName]
           ? `${cmndName}_${ruleset}_${player}: (step) => {${executeSection(
@@ -35,7 +35,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
           : `${cmndName}_${ruleset}_${player}: () => defaultInstruction(${player})`
       ),
     ...Object.keys(gameDef.flow.marks)
-      .filter(c => analysis[player][c])
+      .filter(c => analysis[ruleset][player][c])
       .map(
         markName => `${markName}_${ruleset}_${player}: (step) => {
         ${executeSection(gameDef, player, markName, ruleset, "instruction")}
@@ -45,7 +45,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
   const marks = combos.flatMap(([ruleset, player]) =>
     Object.keys(gameDef.flow.marks)
-      .filter(m => analysis[player][m])
+      .filter(m => analysis[ruleset][player][m])
       .map(
         markName => `${markName}_${ruleset}_${player}: (step, newMarkPos) => {
         ${executeSection(gameDef, player, markName, ruleset, "markInit")}
@@ -57,7 +57,7 @@ export function compileGameToCode(gameDef: FullDefAnon) {
 
   const commands = combos.flatMap(([ruleset, player]) =>
     Object.keys(gameDef.flow.commands)
-      .filter(c => analysis[player][c])
+      .filter(c => analysis[ruleset][player][c])
       .map(
         cmndName =>
           `${cmndName}_${ruleset}_${player}: (step) => {

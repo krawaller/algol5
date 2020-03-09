@@ -10,7 +10,7 @@ export function executeMarkInit(
 ): string {
   let ret = "";
   const usage = orderUsage(gameDef, player, action, ruleset);
-  const analysis = analyseGame(gameDef)[player][action];
+  const analysis = analyseGame(gameDef)[ruleset][player][action];
 
   if (usage.ARTIFACTS) {
     ret += `let ARTIFACTS = {

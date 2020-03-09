@@ -7,17 +7,17 @@ const def: FullDefAnon = {
   flow: {
     ...emptyFullDef.flow,
     startTurn: {
-      link: { playercase: ["foo", "bar"] }
-    }
-  }
+      link: { playercase: ["foo", "bar"] },
+    },
+  },
 };
 
-const tests: [string, 1 | 2, string[]][] = [
-  ["startTurn", 1, ["foo"]],
-  ["startTurn", 2, ["bar"]]
+const tests: [string, 1 | 2, string, string[]][] = [
+  ["startTurn", 1, "basic", ["foo"]],
+  ["startTurn", 2, "basic", ["bar"]],
 ];
 
 test("actionLinks", () =>
-  tests.forEach(([action, plr, expected]) =>
-    expect(actionLinks(def, plr, action)).toEqual(expected)
+  tests.forEach(([action, plr, ruleset, expected]) =>
+    expect(actionLinks(def, plr, action, ruleset)).toEqual(expected)
   ));

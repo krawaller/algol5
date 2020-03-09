@@ -7,6 +7,7 @@ import {
   isAlgolExpressionIfElse,
   isAlgolIfableExpressionIfPlayer,
   isAlgolIfableExpressionIfAction,
+  isAlgolIfableExpressionIfRuleset,
   AlgolStatementAnon,
   isAlgolStatementForIdIn,
   isAlgolStatementForPosIn,
@@ -100,6 +101,15 @@ function possibilitiesInner<_T>(
       ifaction: [testAction, opt],
     } = expr;
     return action === testAction || action === "any"
+      ? ([] as any[]).concat(possibilitiesInner(opt, player, action, ruleset))
+      : [];
+  }
+
+  if (isAlgolIfableExpressionIfRuleset(expr)) {
+    const {
+      ifruleset: [testRuleset, opt],
+    } = expr;
+    return ruleset === testRuleset || ruleset === "any"
       ? ([] as any[]).concat(possibilitiesInner(opt, player, action, ruleset))
       : [];
   }

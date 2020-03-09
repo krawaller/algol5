@@ -82,6 +82,16 @@ const possTests: PossTest<
     action: "anotheraction",
     poss: [],
   },
+  {
+    expr: { ifruleset: ["somerulez", "FOO"] },
+    ruleset: "somerulez",
+    poss: ["FOO"],
+  },
+  {
+    expr: { ifruleset: ["somerulez", "FOO"] },
+    ruleset: "otherrulez",
+    poss: [],
+  },
 ];
 
 test("possibilities", () =>

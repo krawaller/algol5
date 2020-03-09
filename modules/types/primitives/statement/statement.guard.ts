@@ -10,6 +10,7 @@ import {
   AlgolStatementIfPlayerAnon,
   AlgolStatementPlayerCaseAnon,
   AlgolStatementIfRulesetAnon,
+  AlgolStatementIfRulesetElseAnon,
 } from "./statement.anon";
 
 export function isAlgolStatementForIdIn<_T>(
@@ -73,5 +74,13 @@ export function isAlgolStatementIfActionElse<_T>(
 ): expr is AlgolStatementIfActionElseAnon<_T> {
   return (
     (expr as AlgolStatementIfActionElseAnon<_T>).ifactionelse !== undefined
+  );
+}
+
+export function isAlgolStatementIfRulesetElse<_T>(
+  expr: AlgolStatementAnon<_T>
+): expr is AlgolStatementIfRulesetElseAnon<_T> {
+  return (
+    (expr as AlgolStatementIfRulesetElseAnon<_T>).ifrulesetelse !== undefined
   );
 }

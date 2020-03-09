@@ -12,6 +12,7 @@ import {
   isAlgolStatementForPosIn,
   isAlgolStatementForIdIn,
   isAlgolValLoopRead,
+  isAlgolStatementIfRulesetElse,
 } from "../../../../types";
 import { contains } from "../../../../common";
 import { makeParser } from "../expression";
@@ -51,6 +52,13 @@ export function executeStatement<_T>(
       ifactionelse: [testAction, whenYes, whenNo],
     } = statement;
     return me(testAction === action ? whenYes : whenNo);
+  }
+
+  if (isAlgolStatementIfRulesetElse(statement)) {
+    const {
+      ifrulesetelse: [testRuleset, whenYes, whenNo],
+    } = statement;
+    return me(testRuleset === ruleset ? whenYes : whenNo);
   }
 
   if (isAlgolStatementPlayerCase(statement)) {

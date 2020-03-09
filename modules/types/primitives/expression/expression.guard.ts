@@ -3,6 +3,7 @@ import {
   AlgolExpressionIfElseAnon,
   AlgolExpressionPlayerCaseAnon,
   AlgolExpressionIndexListAnon,
+  AlgolExpressionIfRulesetElseAnon,
 } from "./expression.anon";
 
 // ---- former logical guards
@@ -24,6 +25,14 @@ export function isAlgolExpressionIfActionElse<_T>(
 ): expr is AlgolExpressionIfActionElseAnon<_T> {
   return (
     (expr as AlgolExpressionIfActionElseAnon<_T>).ifactionelse !== undefined
+  );
+}
+
+export function isAlgolExpressionIfRulesetElse<_T>(
+  expr: any
+): expr is AlgolExpressionIfRulesetElseAnon<_T> {
+  return (
+    (expr as AlgolExpressionIfRulesetElseAnon<_T>).ifrulesetelse !== undefined
   );
 }
 

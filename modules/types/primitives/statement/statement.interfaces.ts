@@ -53,3 +53,14 @@ export interface AlgolStatementIfActionElse<
     AlgolStatement<Blob, _T>
   ];
 }
+
+export interface AlgolStatementIfRulesetElse<
+  Blob extends AlgolGameBlobAnon,
+  _T
+> {
+  ifrulesetelse: [
+    AlgolVal<Blob, Blob["ruleset"]>,
+    AlgolStatement<Blob, _T>,
+    AlgolStatement<Blob, _T>
+  ];
+}

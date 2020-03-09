@@ -12,6 +12,7 @@ import {
   AlgolStatementIfPlayer,
   AlgolStatementIfAction,
   AlgolStatementIfRuleset,
+  AlgolStatementIfRulesetElse,
 } from "./statement.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -26,4 +27,5 @@ export type AlgolStatement<Blob extends AlgolGameBlobAnon, _T> =
   | AlgolStatementForIdIn<Blob, _T>
   | AlgolStatementForPosIn<Blob, _T>
   | AlgolStatementMulti<Blob, _T>
-  | AlgolStatementIfRuleset<Blob, _T>;
+  | AlgolStatementIfRuleset<Blob, _T>
+  | AlgolStatementIfRulesetElse<Blob, _T>;

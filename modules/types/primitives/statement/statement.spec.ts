@@ -7,4 +7,5 @@ const tests: TestStatement[] = [
   "GNURP",
   { if: [{ anyat: ["mylayer", "mymark"] }, "GNURP"] },
   { ifruleset: ["myrule", "FNURP"] },
+  { ifrulesetelse: ["myrule", "FNURP", "GNURP"] },
 ];

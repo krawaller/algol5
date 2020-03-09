@@ -10,6 +10,7 @@ import {
   AlgolStatementIfPlayer,
   AlgolStatementIfRuleset,
   AlgolStatementPlayerCase,
+  AlgolStatementIfRulesetElse,
 } from "./statement.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -57,6 +58,11 @@ export type AlgolStatementIfRulesetAnon<_T> = AlgolStatementIfRuleset<
 >;
 
 export type AlgolStatementIfActionElseAnon<_T> = AlgolStatementIfActionElse<
+  AlgolGameBlobAnon,
+  _T
+>;
+
+export type AlgolStatementIfRulesetElseAnon<_T> = AlgolStatementIfRulesetElse<
   AlgolGameBlobAnon,
   _T
 >;

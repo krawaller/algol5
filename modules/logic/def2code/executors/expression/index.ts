@@ -14,6 +14,7 @@ import {
   AlgolPosAnon,
   AlgolSetAnon,
   AlgolDirsAnon,
+  isAlgolExpressionIfRulesetElse,
 } from "../../../../types";
 
 type ExprReturn = string | number | undefined | boolean;
@@ -49,7 +50,16 @@ export function executeExpression<_T>(
     const {
       ifactionelse: [testAction, whenYes, whenNo],
     } = expr;
+    // TODO - testAction is dynamic? fix type?
     return me(testAction === action ? whenYes : whenNo);
+  }
+
+  if (isAlgolExpressionIfRulesetElse(expr)) {
+    const {
+      ifrulesetelse: [testRuleset, whenYes, whenNo],
+    } = expr;
+    // TODO - testRuleset is dynamic? fix type?
+    return me(testRuleset === ruleset ? whenYes : whenNo);
   }
 
   if (isAlgolExpressionPlayerCase(expr)) {

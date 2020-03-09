@@ -92,6 +92,16 @@ const possTests: PossTest<
     ruleset: "otherrulez",
     poss: [],
   },
+  {
+    expr: { ifrulesetelse: ["somerulez", "FOO", "BAR"] },
+    ruleset: "somerulez",
+    poss: ["FOO"],
+  },
+  {
+    expr: { ifrulesetelse: ["somerulez", "FOO", "BAR"] },
+    ruleset: "otherrulez",
+    poss: ["BAR"],
+  },
 ];
 
 test("possibilities", () =>

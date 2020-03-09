@@ -12,6 +12,7 @@ import {
   isAlgolStatementForIdIn,
   isAlgolStatementForPosIn,
   isAlgolStatementMulti,
+  isAlgolExpressionIfRulesetElse,
 } from "../../types";
 
 export function possibilities<_T>(
@@ -52,6 +53,18 @@ function possibilitiesInner<_T>(
     if (action === "any" || action === testAction)
       poss = poss.concat(possibilitiesInner(whenYes, player, action, ruleset));
     if (action === "any" || action !== testAction)
+      poss = poss.concat(possibilitiesInner(whenNo, player, action, ruleset));
+    return poss;
+  }
+
+  if (isAlgolExpressionIfRulesetElse(expr)) {
+    const {
+      ifrulesetelse: [testRuleset, whenYes, whenNo],
+    } = expr;
+    let poss: any[] = [];
+    if (ruleset === "any" || ruleset === testRuleset)
+      poss = poss.concat(possibilitiesInner(whenYes, player, action, ruleset));
+    if (ruleset === "any" || ruleset !== testRuleset)
       poss = poss.concat(possibilitiesInner(whenNo, player, action, ruleset));
     return poss;
   }

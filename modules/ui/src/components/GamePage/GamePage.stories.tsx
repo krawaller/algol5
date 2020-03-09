@@ -17,7 +17,12 @@ storiesOf("GamePage", module).add(
   () => {
     const gameId = select("Game", list, list[0]) as GameId;
     const def = defs[gameId];
-    const api = makeStaticGameAPI(games[gameId], def.setups, def.boards);
+    const api = makeStaticGameAPI(
+      games[gameId],
+      def.setups,
+      def.boards,
+      def.variants
+    );
     const graphics = dataURIs[gameId];
     const content = {
       about: {

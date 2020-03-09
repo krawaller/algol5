@@ -8,6 +8,8 @@ export type AlgolVariant<Blob extends AlgolGameBlobAnon> = {
   code: string;
 };
 
+export type AlgolVariantAnon = AlgolVariant<AlgolGameBlobAnon>;
+
 export type AlgolVariantBook<Blob extends AlgolGameBlobAnon> = Record<
   string,
   AlgolVariant<Blob>

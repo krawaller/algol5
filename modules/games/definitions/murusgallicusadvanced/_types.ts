@@ -61,8 +61,8 @@ type MurusgallicusadvancedTurnVar = never;
 
 type MurusgallicusadvancedBoardName = "basic";
 type MurusgallicusadvancedSetupName = "basic";
-type MurusgallicusadvancedRulesetName = "basic";
-type MurusgallicusadvancedVariantName = "basic";
+type MurusgallicusadvancedRulesetName = "basic" | "advanced";
+type MurusgallicusadvancedVariantName = "basic" | "advanced";
 
 type MurusgallicusadvancedGrid = never;
 

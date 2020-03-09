@@ -9,6 +9,7 @@ import {
   AlgolIfableExpressionIf,
   AlgolIfableExpressionIfAction,
   AlgolIfableExpressionIfPlayer,
+  AlgolIfableExpressionIfRuleset,
 } from "./ifableexpression.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -24,3 +25,7 @@ export type AlgolIfableExpressionIfPlayerAnon<
 export type AlgolIfableExpressionIfActionAnon<
   _T
 > = AlgolIfableExpressionIfAction<AlgolGameBlobAnon, _T>;
+
+export type AlgolIfableExpressionIfRulesetAnon<
+  _T
+> = AlgolIfableExpressionIfRuleset<AlgolGameBlobAnon, _T>;

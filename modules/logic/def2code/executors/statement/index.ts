@@ -7,6 +7,7 @@ import {
   isAlgolStatementIf,
   isAlgolStatementIfPlayer,
   isAlgolStatementIfAction,
+  isAlgolStatementIfRuleset,
   isAlgolStatementMulti,
   isAlgolStatementForPosIn,
   isAlgolStatementForIdIn,
@@ -78,6 +79,13 @@ export function executeStatement<_T>(
       ifaction: [forAction, val],
     } = statement;
     return forAction === action ? me(val) : "";
+  }
+
+  if (isAlgolStatementIfRuleset(statement)) {
+    const {
+      ifruleset: [forRuleset, val],
+    } = statement;
+    return forRuleset === ruleset ? me(val) : "";
   }
 
   if (isAlgolStatementMulti(statement)) {

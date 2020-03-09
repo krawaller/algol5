@@ -8,6 +8,7 @@ import {
   isAlgolIfableExpressionIf,
   isAlgolIfableExpressionIfPlayer,
   isAlgolIfableExpressionIfAction,
+  isAlgolIfableExpressionIfRuleset,
   AlgolValAnon,
   AlgolBoolAnon,
   AlgolPosAnon,
@@ -88,6 +89,13 @@ export function executeExpression<_T>(
       ifaction: [forAction, val],
     } = expr;
     return forAction === action ? me(val) : "undefined";
+  }
+
+  if (isAlgolIfableExpressionIfRuleset(expr)) {
+    const {
+      ifruleset: [forRuleset, val],
+    } = expr;
+    return forRuleset === ruleset ? me(val) : "undefined";
   }
 
   return parser(gameDef, player, action, ruleset, expr, from);

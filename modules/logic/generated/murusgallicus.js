@@ -57,7 +57,7 @@ const game = {
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
   },
-  newBattle: setup => {
+  newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
@@ -77,7 +77,7 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    return game.action.startTurn1({
+    return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA,
@@ -85,7 +85,7 @@ const game = {
     });
   },
   action: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -103,7 +103,7 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.mytowers)) {
-        LINKS.marks[pos] = "selecttower1";
+        LINKS.marks[pos] = "selecttower_basic_1";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -115,7 +115,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -133,7 +133,7 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.mytowers)) {
-        LINKS.marks[pos] = "selecttower2";
+        LINKS.marks[pos] = "selecttower_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -145,7 +145,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selecttower1: (step, newMarkPos) => {
+    selecttower_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {},
         crushtargets: {}
@@ -191,10 +191,10 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmove1";
+        LINKS.marks[pos] = "selectmove_basic_1";
       }
       for (const pos of Object.keys(ARTIFACTS.crushtargets)) {
-        LINKS.marks[pos] = "selectcrush1";
+        LINKS.marks[pos] = "selectcrush_basic_1";
       }
       return {
         LINKS,
@@ -206,7 +206,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectmove1: (step, newMarkPos) => {
+    selectmove_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         crushtargets: step.ARTIFACTS.crushtargets,
@@ -234,7 +234,7 @@ const game = {
           UNITLAYERS.myunits[MARKS.selectmove] ? "madetowers" : "madewalls"
         ][STARTPOS] = emptyObj;
       }
-      LINKS.commands.move = "move1";
+      LINKS.commands.move = "move_basic_1";
       return {
         LINKS,
         ARTIFACTS,
@@ -246,9 +246,9 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selectcrush1: (step, newMarkPos) => {
+    selectcrush_basic_1: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.crush = "crush1";
+      LINKS.commands.crush = "crush_basic_1";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -260,7 +260,7 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selecttower2: (step, newMarkPos) => {
+    selecttower_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {},
         crushtargets: {}
@@ -306,10 +306,10 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmove2";
+        LINKS.marks[pos] = "selectmove_basic_2";
       }
       for (const pos of Object.keys(ARTIFACTS.crushtargets)) {
-        LINKS.marks[pos] = "selectcrush2";
+        LINKS.marks[pos] = "selectcrush_basic_2";
       }
       return {
         LINKS,
@@ -321,7 +321,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectmove2: (step, newMarkPos) => {
+    selectmove_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: step.ARTIFACTS.movetargets,
         crushtargets: step.ARTIFACTS.crushtargets,
@@ -349,7 +349,7 @@ const game = {
           UNITLAYERS.myunits[MARKS.selectmove] ? "madetowers" : "madewalls"
         ][STARTPOS] = emptyObj;
       }
-      LINKS.commands.move = "move2";
+      LINKS.commands.move = "move_basic_2";
       return {
         LINKS,
         ARTIFACTS,
@@ -361,9 +361,9 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    selectcrush2: (step, newMarkPos) => {
+    selectcrush_basic_2: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.crush = "crush2";
+      LINKS.commands.crush = "crush_basic_2";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -375,7 +375,7 @@ const game = {
         canAlwaysEnd: true
       };
     },
-    move1: step => {
+    move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -458,7 +458,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -471,7 +471,7 @@ const game = {
         anim
       };
     },
-    crush1: step => {
+    crush_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
@@ -529,7 +529,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -542,7 +542,7 @@ const game = {
         anim
       };
     },
-    move2: step => {
+    move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -625,7 +625,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -638,7 +638,7 @@ const game = {
         anim
       };
     },
-    crush2: step => {
+    crush_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let UNITLAYERS = step.UNITLAYERS;
@@ -696,7 +696,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -711,7 +711,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       return collapseContent({
         line: [
           { select: "Select" },
@@ -720,9 +720,9 @@ const game = {
         ]
       });
     },
-    move1: () => defaultInstruction(1),
-    crush1: () => defaultInstruction(1),
-    selecttower1: step => {
+    move_basic_1: () => defaultInstruction(1),
+    crush_basic_1: () => defaultInstruction(1),
+    selecttower_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -766,7 +766,7 @@ const game = {
         ]
       });
     },
-    selectmove1: step => {
+    selectmove_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -849,7 +849,7 @@ const game = {
         ]
       });
     },
-    selectcrush1: step => {
+    selectcrush_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -877,7 +877,7 @@ const game = {
         ]
       });
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       return collapseContent({
         line: [
           { select: "Select" },
@@ -886,9 +886,9 @@ const game = {
         ]
       });
     },
-    move2: () => defaultInstruction(2),
-    crush2: () => defaultInstruction(2),
-    selecttower2: step => {
+    move_basic_2: () => defaultInstruction(2),
+    crush_basic_2: () => defaultInstruction(2),
+    selecttower_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -932,7 +932,7 @@ const game = {
         ]
       });
     },
-    selectmove2: step => {
+    selectmove_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
@@ -1015,7 +1015,7 @@ const game = {
         ]
       });
     },
-    selectcrush2: step => {
+    selectcrush_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -1042,6 +1042,51 @@ const game = {
           }
         ]
       });
+    }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "y"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 7,
+      width: 8,
+      terrain: {
+        homerow: {
+          "1": [
+            {
+              rect: ["a1", "h1"]
+            }
+          ],
+          "2": [
+            {
+              rect: ["a7", "h7"]
+            }
+          ]
+        }
+      }
+    }
+  },
+  setups: {
+    basic: {
+      towers: {
+        "1": [
+          {
+            rect: ["a1", "h1"]
+          }
+        ],
+        "2": [
+          {
+            rect: ["a7", "h7"]
+          }
+        ]
+      }
     }
   }
 };

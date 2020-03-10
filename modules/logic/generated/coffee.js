@@ -49,7 +49,7 @@ const game = {
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
   },
-  newBattle: setup => {
+  newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
@@ -65,7 +65,7 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    return game.action.startTurn1({
+    return game.action[`startTurn_${ruleset}_1`]({
       NEXTSPAWNID: 1,
       TURN: 0,
       UNITDATA,
@@ -73,7 +73,7 @@ const game = {
     });
   },
   action: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -91,7 +91,7 @@ const game = {
           ? BOARD.board
           : UNITLAYERS.neutralunits
       )) {
-        LINKS.marks[pos] = "selectdrop1";
+        LINKS.marks[pos] = "selectdrop_basic_1";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -103,7 +103,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -121,7 +121,7 @@ const game = {
           ? BOARD.board
           : UNITLAYERS.neutralunits
       )) {
-        LINKS.marks[pos] = "selectdrop2";
+        LINKS.marks[pos] = "selectdrop_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -133,7 +133,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectdrop1: (step, newMarkPos) => {
+    selectdrop_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         FOOBAR: {},
         vertical: {},
@@ -168,10 +168,10 @@ const game = {
           }
         }
       }
-      LINKS.commands.uphill = "uphill1";
-      LINKS.commands.downhill = "downhill1";
-      LINKS.commands.vertical = "vertical1";
-      LINKS.commands.horisontal = "horisontal1";
+      LINKS.commands.uphill = "uphill_basic_1";
+      LINKS.commands.downhill = "downhill_basic_1";
+      LINKS.commands.vertical = "vertical_basic_1";
+      LINKS.commands.horisontal = "horisontal_basic_1";
       return {
         LINKS,
         ARTIFACTS,
@@ -182,7 +182,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    selectdrop2: (step, newMarkPos) => {
+    selectdrop_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         FOOBAR: {},
         vertical: {},
@@ -217,10 +217,10 @@ const game = {
           }
         }
       }
-      LINKS.commands.uphill = "uphill2";
-      LINKS.commands.downhill = "downhill2";
-      LINKS.commands.vertical = "vertical2";
-      LINKS.commands.horisontal = "horisontal2";
+      LINKS.commands.uphill = "uphill_basic_2";
+      LINKS.commands.downhill = "downhill_basic_2";
+      LINKS.commands.vertical = "vertical_basic_2";
+      LINKS.commands.horisontal = "horisontal_basic_2";
       return {
         LINKS,
         ARTIFACTS,
@@ -231,7 +231,7 @@ const game = {
         NEXTSPAWNID: step.NEXTSPAWNID
       };
     },
-    uphill1: step => {
+    uphill_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -329,7 +329,7 @@ const game = {
           LINKS.endedBy = "madeline";
           LINKS.endMarks = Object.keys(ARTIFACTS.winline);
         } else {
-          LINKS.endTurn = "startTurn2";
+          LINKS.endTurn = "startTurn_basic_2";
         }
       }
       return {
@@ -343,7 +343,7 @@ const game = {
         anim
       };
     },
-    downhill1: step => {
+    downhill_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -441,7 +441,7 @@ const game = {
           LINKS.endedBy = "madeline";
           LINKS.endMarks = Object.keys(ARTIFACTS.winline);
         } else {
-          LINKS.endTurn = "startTurn2";
+          LINKS.endTurn = "startTurn_basic_2";
         }
       }
       return {
@@ -455,7 +455,7 @@ const game = {
         anim
       };
     },
-    horisontal1: step => {
+    horisontal_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -553,7 +553,7 @@ const game = {
           LINKS.endedBy = "madeline";
           LINKS.endMarks = Object.keys(ARTIFACTS.winline);
         } else {
-          LINKS.endTurn = "startTurn2";
+          LINKS.endTurn = "startTurn_basic_2";
         }
       }
       return {
@@ -567,7 +567,7 @@ const game = {
         anim
       };
     },
-    vertical1: step => {
+    vertical_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -665,7 +665,7 @@ const game = {
           LINKS.endedBy = "madeline";
           LINKS.endMarks = Object.keys(ARTIFACTS.winline);
         } else {
-          LINKS.endTurn = "startTurn2";
+          LINKS.endTurn = "startTurn_basic_2";
         }
       }
       return {
@@ -679,7 +679,7 @@ const game = {
         anim
       };
     },
-    uphill2: step => {
+    uphill_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -777,7 +777,7 @@ const game = {
           LINKS.endedBy = "madeline";
           LINKS.endMarks = Object.keys(ARTIFACTS.winline);
         } else {
-          LINKS.endTurn = "startTurn1";
+          LINKS.endTurn = "startTurn_basic_1";
         }
       }
       return {
@@ -791,7 +791,7 @@ const game = {
         anim
       };
     },
-    downhill2: step => {
+    downhill_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -889,7 +889,7 @@ const game = {
           LINKS.endedBy = "madeline";
           LINKS.endMarks = Object.keys(ARTIFACTS.winline);
         } else {
-          LINKS.endTurn = "startTurn1";
+          LINKS.endTurn = "startTurn_basic_1";
         }
       }
       return {
@@ -903,7 +903,7 @@ const game = {
         anim
       };
     },
-    horisontal2: step => {
+    horisontal_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -1001,7 +1001,7 @@ const game = {
           LINKS.endedBy = "madeline";
           LINKS.endMarks = Object.keys(ARTIFACTS.winline);
         } else {
-          LINKS.endTurn = "startTurn1";
+          LINKS.endTurn = "startTurn_basic_1";
         }
       }
       return {
@@ -1015,7 +1015,7 @@ const game = {
         anim
       };
     },
-    vertical2: step => {
+    vertical_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let anim = { enterFrom: {}, exitTo: {}, ghosts: [] };
       let ARTIFACTS = {
@@ -1113,7 +1113,7 @@ const game = {
           LINKS.endedBy = "madeline";
           LINKS.endMarks = Object.keys(ARTIFACTS.winline);
         } else {
-          LINKS.endTurn = "startTurn1";
+          LINKS.endTurn = "startTurn_basic_1";
         }
       }
       return {
@@ -1129,7 +1129,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       let UNITLAYERS = step.UNITLAYERS;
       return Object.keys(UNITLAYERS.neutralunits).length === 0
         ? collapseContent({
@@ -1149,11 +1149,11 @@ const game = {
             ]
           });
     },
-    uphill1: () => defaultInstruction(1),
-    downhill1: () => defaultInstruction(1),
-    horisontal1: () => defaultInstruction(1),
-    vertical1: () => defaultInstruction(1),
-    selectdrop1: step => {
+    uphill_basic_1: () => defaultInstruction(1),
+    downhill_basic_1: () => defaultInstruction(1),
+    horisontal_basic_1: () => defaultInstruction(1),
+    vertical_basic_1: () => defaultInstruction(1),
+    selectdrop_basic_1: step => {
       let ARTIFACTS = step.ARTIFACTS;
       return collapseContent({
         line: [
@@ -1190,7 +1190,7 @@ const game = {
         ]
       });
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       let UNITLAYERS = step.UNITLAYERS;
       return Object.keys(UNITLAYERS.neutralunits).length === 0
         ? collapseContent({
@@ -1210,11 +1210,11 @@ const game = {
             ]
           });
     },
-    uphill2: () => defaultInstruction(2),
-    downhill2: () => defaultInstruction(2),
-    horisontal2: () => defaultInstruction(2),
-    vertical2: () => defaultInstruction(2),
-    selectdrop2: step => {
+    uphill_basic_2: () => defaultInstruction(2),
+    downhill_basic_2: () => defaultInstruction(2),
+    horisontal_basic_2: () => defaultInstruction(2),
+    vertical_basic_2: () => defaultInstruction(2),
+    selectdrop_basic_2: step => {
       let ARTIFACTS = step.ARTIFACTS;
       return collapseContent({
         line: [
@@ -1251,6 +1251,25 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "z"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 5,
+      width: 5,
+      terrain: {}
+    }
+  },
+  setups: {
+    basic: {}
   }
 };
 export default game;

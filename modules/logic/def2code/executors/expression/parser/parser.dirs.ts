@@ -6,6 +6,7 @@ export default function parseDirs(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   expr: AlgolDirsAnon,
   from?: string
 ) {

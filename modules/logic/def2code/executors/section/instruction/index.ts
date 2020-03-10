@@ -5,7 +5,8 @@ import { codeUsage } from "../sectionUtils";
 export function executeInstructionSection(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   const instrDef = gameDef.instructions[action];
 
@@ -15,7 +16,7 @@ export function executeInstructionSection(
     );
   }
 
-  const code = executeInstruction(gameDef, player, action, instrDef);
+  const code = executeInstruction(gameDef, player, action, ruleset, instrDef);
   const usage = codeUsage(code);
 
   let ret = "";

@@ -1,6 +1,5 @@
 import { AlgolGame, AlgolBattle, AlgolBattleSave } from "../../../../types";
 import { stepOptions } from "../../../../common";
-import lib from "../../../../games/dist/lib";
 import { battleAction } from "../battleAction";
 import { newBattle } from "../newBattle";
 
@@ -9,7 +8,12 @@ export const inflateBattleSave = (
   save: AlgolBattleSave
 ): AlgolBattle => {
   const actions = save.path.slice();
-  let battle = newBattle(game, lib[game.gameId].setups.basic);
+  const code = game.variants[0].code; // TODO - read code from save!
+  const variant = game.variants.find(v => v.code === code);
+  if (!variant) {
+    throw new Error(`Couldnt find ${game.gameId} variant with code "${code}"`);
+  }
+  let battle = newBattle(game, game.setups[variant.setup], variant);
   let safetyValve = 0;
   do {
     if (battle.turnNumber > save.turn) {

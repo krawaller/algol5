@@ -9,6 +9,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
       def,
       player: defPlayer,
       action: defAction,
+      ruleset: defRuleset,
       contexts,
       skip,
     } of suite.defs) {
@@ -20,6 +21,7 @@ export function runSuite<T, U>(suite: AlgolSuite) {
           envelope,
           player: ctxPlayer,
           action: ctxAction,
+          ruleset: ctxRuleset,
         } of contexts) {
           if (!skip) {
             for (const suiteTest of tests) {
@@ -28,7 +30,15 @@ export function runSuite<T, U>(suite: AlgolSuite) {
                 const player = suiteTest.player || ctxPlayer || defPlayer || 1;
                 const action =
                   suiteTest.action || ctxAction || defAction || "action";
-                const code = suite.func(def, player, action, suiteTest.expr);
+                const ruleset =
+                  suiteTest.ruleset || ctxRuleset || defRuleset || "basic";
+                const code = suite.func(
+                  def,
+                  player,
+                  action,
+                  ruleset,
+                  suiteTest.expr
+                );
                 const extraContext = suiteTest.naked
                   ? {}
                   : {

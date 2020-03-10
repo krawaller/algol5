@@ -52,7 +52,7 @@ const game = {
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
   },
-  newBattle: setup => {
+  newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
@@ -70,14 +70,14 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    return game.action.startTurn1({
+    return game.action[`startTurn_${ruleset}_1`]({
       TURN: 0,
       UNITDATA,
       UNITLAYERS
     });
   },
   action: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -93,7 +93,7 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.mynotfrozens)) {
-        LINKS.marks[pos] = "selectunit1";
+        LINKS.marks[pos] = "selectunit_basic_1";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -104,7 +104,7 @@ const game = {
         TURN: step.TURN + 1
       };
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -120,7 +120,7 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.mynotfrozens)) {
-        LINKS.marks[pos] = "selectunit2";
+        LINKS.marks[pos] = "selectunit_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -131,7 +131,7 @@ const game = {
         TURN: step.TURN
       };
     },
-    selectunit1: (step, newMarkPos) => {
+    selectunit_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {}
       };
@@ -155,7 +155,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmove1";
+        LINKS.marks[pos] = "selectmove_basic_1";
       }
       return {
         LINKS,
@@ -166,9 +166,9 @@ const game = {
         MARKS
       };
     },
-    selectmove1: (step, newMarkPos) => {
+    selectmove_basic_1: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.move = "move1";
+      LINKS.commands.move = "move_basic_1";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -178,7 +178,7 @@ const game = {
         MARKS: { selectunit: step.MARKS.selectunit, selectmove: newMarkPos }
       };
     },
-    selectunit2: (step, newMarkPos) => {
+    selectunit_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {}
       };
@@ -202,7 +202,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmove2";
+        LINKS.marks[pos] = "selectmove_basic_2";
       }
       return {
         LINKS,
@@ -213,9 +213,9 @@ const game = {
         MARKS
       };
     },
-    selectmove2: (step, newMarkPos) => {
+    selectmove_basic_2: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.move = "move2";
+      LINKS.commands.move = "move_basic_2";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -225,7 +225,7 @@ const game = {
         MARKS: { selectunit: step.MARKS.selectunit, selectmove: newMarkPos }
       };
     },
-    move1: step => {
+    move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -320,7 +320,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -331,7 +331,7 @@ const game = {
         UNITLAYERS
       };
     },
-    move2: step => {
+    move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -426,7 +426,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -439,7 +439,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       let UNITLAYERS = step.UNITLAYERS;
       let TURN = step.TURN;
       return TURN > 1
@@ -472,8 +472,8 @@ const game = {
             ]
           });
     },
-    move1: () => defaultInstruction(1),
-    selectunit1: step => {
+    move_basic_1: () => defaultInstruction(1),
+    selectunit_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -491,7 +491,7 @@ const game = {
         ]
       });
     },
-    selectmove1: step => {
+    selectmove_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -521,7 +521,7 @@ const game = {
         ]
       });
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       let UNITLAYERS = step.UNITLAYERS;
       let TURN = step.TURN;
       return TURN > 1
@@ -554,8 +554,8 @@ const game = {
             ]
           });
     },
-    move2: () => defaultInstruction(2),
-    selectunit2: step => {
+    move_basic_2: () => defaultInstruction(2),
+    selectunit_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -573,7 +573,7 @@ const game = {
         ]
       });
     },
-    selectmove2: step => {
+    selectmove_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -602,6 +602,41 @@ const game = {
               })
         ]
       });
+    }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "j"
+    }
+  ],
+  boards: {
+    basic: {
+      width: 4,
+      height: 4,
+      terrain: {
+        southeast: ["a4", "c2"],
+        northwest: ["b3", "d1"],
+        corners: {
+          "1": ["a4"],
+          "2": ["d1"]
+        },
+        bases: {
+          "1": ["b4", "a3", "b3"],
+          "2": ["c2", "d2", "c1"]
+        }
+      }
+    }
+  },
+  setups: {
+    basic: {
+      notfrozens: {
+        "1": ["a4", "b4", "a3", "b3"],
+        "2": ["c2", "c1", "d2", "d1"]
+      }
     }
   }
 };

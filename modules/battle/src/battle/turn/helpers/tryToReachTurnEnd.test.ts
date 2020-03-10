@@ -4,7 +4,7 @@ import ariesDef from "../../../../../games/dist/games/aries";
 
 test("tryToReachTurnEnd", () => {
   aries.setBoard(ariesDef.boards.basic);
-  const rootStep = aries.newBattle(ariesDef.setups.basic);
+  const rootStep = aries.newBattle(ariesDef.setups.basic, "basic");
   let turn = newTurnFromRootStep(rootStep);
   turn = tryToReachTurnEnd(aries, turn);
   expect(turn.canEnd).toBe(true);

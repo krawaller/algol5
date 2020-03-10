@@ -9,6 +9,7 @@ import {
   AlgolExpressionIfElse,
   AlgolExpressionIndexList,
   AlgolExpressionPlayerCase,
+  AlgolExpressionIfRulesetElse,
 } from "./expression.interfaces";
 import { AlgolGameBlobAnon } from "../../blob";
 
@@ -23,6 +24,11 @@ export type AlgolExpressionPlayerCaseAnon<_T> = AlgolExpressionPlayerCase<
 >;
 
 export type AlgolExpressionIfActionElseAnon<_T> = AlgolExpressionIfActionElse<
+  AlgolGameBlobAnon,
+  _T
+>;
+
+export type AlgolExpressionIfRulesetElseAnon<_T> = AlgolExpressionIfRulesetElse<
   AlgolGameBlobAnon,
   _T
 >;

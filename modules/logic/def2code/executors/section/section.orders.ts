@@ -12,7 +12,8 @@ import { executeOrder } from "../";
 export function executeOrderSection(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   const def: AlgolEffectActionDefAnon =
     gameDef.flow.commands[action] ||
@@ -49,7 +50,7 @@ export function executeOrderSection(
     orders.push({ links });
   }
 
-  return executeOrder(gameDef, player, action, {
+  return executeOrder(gameDef, player, action, ruleset, {
     multi: orders,
   });
 }

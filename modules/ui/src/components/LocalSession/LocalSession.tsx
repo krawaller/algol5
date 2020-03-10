@@ -5,6 +5,7 @@ import {
   AlgolGameGraphics,
   AlgolMeta,
   AlgolErrorReporter,
+  AlgolGameBlobAnon,
 } from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
@@ -22,7 +23,7 @@ type LocalSessionProps = {
   graphics: AlgolGameGraphics;
   actions: LocalSessionActions;
   hasPrevious: boolean;
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
 };
 
 export const LocalSession: FunctionComponent<LocalSessionProps> = props => {

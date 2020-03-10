@@ -3,14 +3,19 @@ import {
   AlgolGame,
   AlgolBoardState,
   AlgolSetupAnon,
+  AlgolVariantAnon,
 } from "../../../types";
 
 import { emptyAnim } from "../../../common";
 
 import { firstTurn } from "./turn";
 
-export function newBattle(game: AlgolGame, setup: AlgolSetupAnon): AlgolBattle {
-  const turn = firstTurn(game, setup);
+export function newBattle(
+  game: AlgolGame,
+  setup: AlgolSetupAnon,
+  variant: AlgolVariantAnon
+): AlgolBattle {
+  const turn = firstTurn(game, setup, variant.ruleset);
   const firstBoard: AlgolBoardState = {
     marks: [],
     units: turn.steps.root.UNITDATA,
@@ -18,6 +23,7 @@ export function newBattle(game: AlgolGame, setup: AlgolSetupAnon): AlgolBattle {
     potentialMarks: Object.keys(turn.steps.root.LINKS.marks),
   };
   return {
+    variant,
     path: [],
     turn,
     turnNumber: 1,

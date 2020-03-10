@@ -31,10 +31,11 @@ export default function parseVal(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   expr: AlgolBoolAnon,
   from?: string
 ) {
-  const parser = makeParser(gameDef, player, action, "bool");
+  const parser = makeParser(gameDef, player, action, ruleset, "bool");
 
   if (Array.isArray(expr)) {
     switch (expr[0]) {

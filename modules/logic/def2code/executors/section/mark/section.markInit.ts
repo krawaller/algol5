@@ -5,11 +5,12 @@ import { analyseGame } from "../../../../../common";
 export function executeMarkInit(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
   let ret = "";
-  const usage = orderUsage(gameDef, player, action);
-  const analysis = analyseGame(gameDef)[player][action];
+  const usage = orderUsage(gameDef, player, action, ruleset);
+  const analysis = analyseGame(gameDef)[ruleset][player][action];
 
   if (usage.ARTIFACTS) {
     ret += `let ARTIFACTS = {

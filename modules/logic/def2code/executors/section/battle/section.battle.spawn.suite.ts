@@ -10,12 +10,13 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
       def: emptyFullDef,
       player: 1,
       action: "battle",
+      ruleset: "megarulez",
       contexts: [
         {
           context: {
             setup: {},
           },
-          envelope: "let game = { action: { startTurn1: a => a } };",
+          envelope: "let game = { action: { startTurn_megarulez_1: a => a } };",
           tests: [
             {
               expr: "newBattle",
@@ -44,13 +45,15 @@ export const testSuite: AlgolStatementSuite<AlgolSection> = {
         },
       },
       player: 1,
+      ruleset: "superrulez",
       action: "battle",
       contexts: [
         {
           context: {
             setup: {},
           },
-          envelope: "let game = { action: { startTurn1: a => a } };",
+          envelope:
+            "let game = { action: { startTurn_superrulez_1: a => a } };",
           tests: [
             {
               expr: "newBattle",

@@ -23,9 +23,10 @@ export default function executeWalker(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   walkDef: WalkerDefAnon
 ) {
-  const parser = makeParser(gameDef, player, action);
+  const parser = makeParser(gameDef, player, action, ruleset);
   const intro = `
     ${
       walkDef.steps && needLevel(walkDef.steps, "start")
@@ -42,7 +43,7 @@ export default function executeWalker(
     return `{
         ${intro}
         for(let STARTPOS in ${parser.set(walkDef.starts)}) {
-          ${walkFromStart(gameDef, player, action, walkDef, {
+          ${walkFromStart(gameDef, player, action, ruleset, walkDef, {
             startVar: "STARTPOS",
           })}
         }
@@ -52,14 +53,14 @@ export default function executeWalker(
     return `{
       ${intro}
       let STARTPOS = ${parser.pos(walkDef.start!)};
-      ${walkFromStart(gameDef, player, action, walkDef, {
+      ${walkFromStart(gameDef, player, action, ruleset, walkDef, {
         startVar: "STARTPOS",
       })}
     }`;
   } else {
     return `{
       ${intro}
-      ${walkFromStart(gameDef, player, action, walkDef, {
+      ${walkFromStart(gameDef, player, action, ruleset, walkDef, {
         startVar: parser.pos(walkDef.start!) as string,
       })}
     }`;
@@ -70,10 +71,11 @@ function walkFromStart(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset,
   walkDef: WalkerDefAnon,
   { startVar }: { startVar: string }
 ) {
-  const parse = makeParser(gameDef, player, action);
+  const parse = makeParser(gameDef, player, action, ruleset);
   const dirMatters = contains(walkDef.draw, ["dir"]);
   const intro = `
     ${
@@ -92,7 +94,7 @@ function walkFromStart(
       intro +
       `
       for(let DIR of ${parse.dirs(walkDef.dirs)}){
-        ${walkInDir(gameDef, player, action, walkDef, {
+        ${walkInDir(gameDef, player, action, ruleset, walkDef, {
           dirVar: "DIR",
           startVar,
         })}
@@ -105,7 +107,10 @@ function walkFromStart(
       intro +
       `
       ${dirMatters ? `let DIR = ${parse.val(walkDef.dir!)}; ` : ""}
-      ${walkInDir(gameDef, player, action, walkDef, { dirVar, startVar })}
+      ${walkInDir(gameDef, player, action, ruleset, walkDef, {
+        dirVar,
+        startVar,
+      })}
     `
     );
   }
@@ -115,10 +120,11 @@ function walkInDir(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset,
   walkDef: WalkerDefAnon,
   { dirVar, startVar }: { dirVar: string | number; startVar: string }
 ) {
-  const parser = makeParser(gameDef, player, action);
+  const parser = makeParser(gameDef, player, action, ruleset);
   const drawDuringWhile =
     !contains(
       [walkDef.draw.steps, walkDef.draw.all, walkDef.draw.counted],
@@ -195,11 +201,11 @@ function walkInDir(
 
   if (drawDuringWhile) {
     if (needStepVarInLoop) ret += "STEP++; ";
-    ret += draw(gameDef, player, action, walkDef.draw.steps);
-    ret += draw(gameDef, player, action, walkDef.draw.all);
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.steps);
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.all);
     if (walkDef.draw.counted) {
       ret += `if (walkpositionstocount[POS]){`;
-      ret += draw(gameDef, player, action, walkDef.draw.counted);
+      ret += draw(gameDef, player, action, ruleset, walkDef.draw.counted);
       ret += `}`;
     }
   }
@@ -219,15 +225,15 @@ function walkInDir(
       .concat(walkDef.steps && !blockBeforeStep ? "allowedsteps[POS]" : [])
       .join(" && ");
     ret += `if (${drawBlockCond}){`;
-    ret += draw(gameDef, player, action, walkDef.draw.block);
-    ret += draw(gameDef, player, action, walkDef.draw.all);
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.block);
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.all);
     ret += `}`;
   }
 
   if (walkDef.draw.start || walkDef.draw.all) {
     ret += `POS = ${startVar}; `;
-    ret += draw(gameDef, player, action, walkDef.draw.start, "POS");
-    ret += draw(gameDef, player, action, walkDef.draw.all, "POS");
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.start, "POS");
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.all, "POS");
   }
 
   const drawWalkAfterLoop =
@@ -244,11 +250,11 @@ function walkInDir(
     ret += `POS=walkedsquares[walkstepper]; `;
     if (needStepsAfterLoop) ret += `STEP++; `;
     if (countSoFar) ret += `CURRENTCOUNT = countedwalkpositions[walkstepper];`;
-    ret += draw(gameDef, player, action, walkDef.draw.steps);
-    ret += draw(gameDef, player, action, walkDef.draw.all);
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.steps);
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.all);
     if (walkDef.draw.counted) {
       ret += `if (walkpositionstocount[POS]){`;
-      ret += draw(gameDef, player, action, walkDef.draw.counted);
+      ret += draw(gameDef, player, action, ruleset, walkDef.draw.counted);
       ret += `}`;
     }
     ret += "}";
@@ -256,7 +262,7 @@ function walkInDir(
 
   if (walkDef.draw.counted) {
     ret += "if (walkpositionstocount[POS]){";
-    ret += draw(gameDef, player, action, walkDef.draw.counted);
+    ret += draw(gameDef, player, action, ruleset, walkDef.draw.counted);
     ret += "}";
   }
 
@@ -270,6 +276,7 @@ function walkInDir(
       gameDef,
       player,
       action,
+      ruleset,
       walkDef.draw.last,
       lastNeedsPos ? "POS" : "walkedsquares[WALKLENGTH-1]"
     );

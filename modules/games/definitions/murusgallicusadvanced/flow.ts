@@ -1,37 +1,44 @@
 import { MurusgallicusadvancedDefinition } from "./_types";
 
 const murusgallicusadvancedFlow: MurusgallicusadvancedDefinition["flow"] = {
-  startTurn: { links: ["selecttower", "selectcatapult"] },
+  startTurn: {
+    links: ["selecttower", { ifruleset: ["advanced", "selectcatapult"] }],
+  },
   endGame: {
     infiltration: {
       condition: { overlaps: ["myunits", "opphomerow"] },
-      show: { intersect: ["myunits", "opphomerow"] }
-    }
+      show: { intersect: ["myunits", "opphomerow"] },
+    },
   },
   marks: {
     selecttower: {
       from: "mytowers",
       runGenerators: ["findmovetargets", "findcrushtargets"],
-      links: ["selectmove", "selectcrush"]
+      links: ["selectmove", "selectcrush"],
     },
     selectmove: {
       from: "movetargets",
       runGenerator: "findmoveresults",
-      link: "move"
+      link: "move",
     },
     selectcrush: {
       from: "crushtargets",
       links: [
         "crush",
-        { if: [{ anyat: ["oppcatapults", "selectcrush"] }, "sacrifice"] }
-      ]
+        {
+          ifruleset: [
+            "advanced",
+            { if: [{ anyat: ["oppcatapults", "selectcrush"] }, "sacrifice"] },
+          ],
+        },
+      ],
     },
     selectcatapult: {
       from: "mycatapults",
       runGenerator: "findfiretargets",
-      link: "selectfire"
+      link: "selectfire",
     },
-    selectfire: { from: "firetargets", link: "fire" }
+    selectfire: { from: "firetargets", link: "fire" },
   },
   commands: {
     move: {
@@ -39,9 +46,9 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedDefinition["flow"] = {
         { killat: "selecttower" },
         { morphin: ["madecatapults", "catapults"] },
         { morphin: ["madetowers", "towers"] },
-        { spawnin: ["madewalls", "walls", ["player"]] }
+        { spawnin: ["madewalls", "walls", ["player"]] },
       ],
-      link: "endTurn"
+      link: "endTurn",
     },
     crush: {
       applyEffects: [
@@ -50,18 +57,18 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedDefinition["flow"] = {
           ifelse: [
             { anyat: ["oppcatapults", "selectcrush"] },
             { morphat: ["selectcrush", "towers"] },
-            { killat: "selectcrush" }
-          ]
-        }
+            { killat: "selectcrush" },
+          ],
+        },
       ],
-      link: "endTurn"
+      link: "endTurn",
     },
     sacrifice: {
       applyEffects: [
         { morphat: ["selectcrush", "walls"] },
-        { killat: "selecttower" }
+        { killat: "selecttower" },
       ],
-      link: "endTurn"
+      link: "endTurn",
     },
     fire: {
       applyEffects: [
@@ -79,21 +86,21 @@ const murusgallicusadvancedFlow: MurusgallicusadvancedDefinition["flow"] = {
                       ifelse: [
                         { anyat: ["oppcatapults", "selectfire"] },
                         "towers",
-                        "walls"
-                      ]
-                    }
-                  ]
+                        "walls",
+                      ],
+                    },
+                  ],
                 },
-                { spawnat: ["selectfire", "walls", ["player"]] }
-              ]
-            }
-          ]
+                { spawnat: ["selectfire", "walls", ["player"]] },
+              ],
+            },
+          ],
         },
-        { morphat: ["selectcatapult", "towers"] }
+        { morphat: ["selectcatapult", "towers"] },
       ],
-      link: "endTurn"
-    }
-  }
+      link: "endTurn",
+    },
+  },
 };
 
 export default murusgallicusadvancedFlow;

@@ -26,12 +26,14 @@ export function executeInstruction(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   instr: AlgolInstrAnon
 ) {
   return executeExpression(
     gameDef,
     player,
     action,
+    ruleset,
     executeInstructionInner,
     instr,
     "instr"
@@ -42,11 +44,12 @@ function executeInstructionInner(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   instr: AlgolInstrInnerAnon
 ): string {
-  const exprParser = makeParser(gameDef, player, action);
+  const exprParser = makeParser(gameDef, player, action, ruleset);
   const me = (i: AlgolInstrAnon) =>
-    executeInstruction(gameDef, player, action, i);
+    executeInstruction(gameDef, player, action, ruleset, i);
 
   if (!instr) {
     return "undefined";

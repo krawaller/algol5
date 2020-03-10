@@ -12,16 +12,17 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         flow: {
           ...emptyFullDef.flow,
           commands: {
-            mycmnd: {}
-          }
-        }
+            mycmnd: {},
+          },
+        },
       },
       player: 1,
+      ruleset: "megarulez",
       action: "startTurn",
       contexts: [
         {
           context: {
-            LINKS: { commands: { foo: "bar" } }
+            LINKS: { commands: { foo: "bar" } },
           },
           tests: [
             {
@@ -29,14 +30,14 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "LINKS.commands",
-                  res: { mycmnd: "mycmnd1", foo: "bar" },
-                  desc: "we can link to a cmnd from start"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  res: { mycmnd: "mycmnd_megarulez_1", foo: "bar" },
+                  desc: "we can link to a cmnd from start",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -44,16 +45,17 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
         flow: {
           ...emptyFullDef.flow,
           commands: {
-            mycmnd: {}
-          }
-        }
+            mycmnd: {},
+          },
+        },
       },
       player: 2,
       action: "someaction",
+      ruleset: "superrulez",
       contexts: [
         {
           context: {
-            LINKS: { commands: { foo: "bar" } }
+            LINKS: { commands: { foo: "bar" } },
           },
           tests: [
             {
@@ -61,14 +63,14 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
               asserts: [
                 {
                   sample: "LINKS.commands",
-                  res: { mycmnd: "mycmnd2", foo: "bar" },
-                  desc: "we can link to a cmnd from non-start (and as 2nd plr)"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  res: { mycmnd: "mycmnd_superrulez_2", foo: "bar" },
+                  desc: "we can link to a cmnd from non-start (and as 2nd plr)",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

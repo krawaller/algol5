@@ -4,7 +4,7 @@ import ariesDef from "../../../../games/dist/games/aries";
 
 test("turn/firstTurn", () => {
   aries.setBoard(ariesDef.boards.basic);
-  const res = firstTurn(aries, ariesDef.setups.basic);
+  const res = firstTurn(aries, ariesDef.setups.basic, "basic");
   const actions = Object.keys(res.steps.root.LINKS.commands).concat(
     Object.keys(res.steps.root.LINKS.marks)
   );

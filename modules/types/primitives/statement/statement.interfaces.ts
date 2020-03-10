@@ -35,6 +35,10 @@ export interface AlgolStatementIfAction<Blob extends AlgolGameBlobAnon, _T> {
   ];
 }
 
+export interface AlgolStatementIfRuleset<Blob extends AlgolGameBlobAnon, _T> {
+  ifruleset: [AlgolVal<Blob, Blob["ruleset"]>, AlgolStatement<Blob, _T>];
+}
+
 export interface AlgolStatementPlayerCase<Blob extends AlgolGameBlobAnon, _T> {
   playercase: [AlgolStatement<Blob, _T>, AlgolStatement<Blob, _T>];
 }
@@ -45,6 +49,17 @@ export interface AlgolStatementIfActionElse<
 > {
   ifactionelse: [
     AlgolVal<Blob, "start" | Blob["mrk"] | Blob["cmnd"]>,
+    AlgolStatement<Blob, _T>,
+    AlgolStatement<Blob, _T>
+  ];
+}
+
+export interface AlgolStatementIfRulesetElse<
+  Blob extends AlgolGameBlobAnon,
+  _T
+> {
+  ifrulesetelse: [
+    AlgolVal<Blob, Blob["ruleset"]>,
     AlgolStatement<Blob, _T>,
     AlgolStatement<Blob, _T>
   ];

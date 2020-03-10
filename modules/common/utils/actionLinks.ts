@@ -4,7 +4,8 @@ import { possibilities } from "..";
 export function actionLinks(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string[] {
   const def: AlgolEffectActionDefAnon =
     gameDef.flow.commands[action] ||
@@ -15,7 +16,8 @@ export function actionLinks(
   return (def.links || [])
     .concat(def.link || [])
     .reduce(
-      (mem, linkName) => mem.concat(possibilities(linkName, player, action)),
+      (mem, linkName) =>
+        mem.concat(possibilities(linkName, player, action, ruleset)),
       [] as string[]
     );
 }

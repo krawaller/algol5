@@ -22,10 +22,11 @@ export default function parseSet(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   expr: AlgolSetAnon,
   from?: string
 ) {
-  const parser = makeParser(gameDef, player, action, "set");
+  const parser = makeParser(gameDef, player, action, ruleset, "set");
 
   if (typeof expr === "string") {
     const name = expr.replace(/^"|"$/g, ""); // since might be value processed

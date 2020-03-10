@@ -13,18 +13,19 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           ...emptyFullDef.flow,
           marks: {
             somemark: {
-              from: "units"
-            }
-          }
-        }
+              from: "units",
+            },
+          },
+        },
       },
       player: 1,
+      ruleset: "1337rulez",
       action: "startTurn",
       contexts: [
         {
           context: {
             UNITLAYERS: { units: { a1: {}, b2: {} } },
-            LINKS: { marks: { gnork: "bork" } }
+            LINKS: { marks: { gnork: "bork" } },
           },
           tests: [
             {
@@ -34,16 +35,16 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                   sample: "LINKS.marks",
                   res: {
                     gnork: "bork",
-                    a1: "somemark1",
-                    b2: "somemark1"
+                    a1: "somemark_1337rulez_1",
+                    b2: "somemark_1337rulez_1",
                   },
-                  desc: "we can link to a mark from start"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  desc: "we can link to a mark from start",
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       def: {
@@ -52,19 +53,20 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
           ...emptyFullDef.flow,
           marks: {
             somemark: {
-              from: "units"
-            }
-          }
-        }
+              from: "units",
+            },
+          },
+        },
       },
       player: 2,
       action: "someaction",
+      ruleset: "superrulez",
       contexts: [
         {
           context: {
             UNITLAYERS: { units: { a1: {}, b2: {} } },
             LINKS: { marks: {} },
-            newStepId: "foo"
+            newStepId: "foo",
           },
           tests: [
             {
@@ -73,16 +75,16 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
                 {
                   sample: "LINKS.marks",
                   res: {
-                    a1: "somemark2",
-                    b2: "somemark2"
+                    a1: "somemark_superrulez_2",
+                    b2: "somemark_superrulez_2",
                   },
-                  desc: "we can link to a mark from non-start"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  desc: "we can link to a mark from non-start",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

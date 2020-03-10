@@ -6,7 +6,6 @@ import { GamePage } from ".";
 import { GameId, list } from "../../../../games/dist/list";
 import games from "../../../../logic/dist";
 import meta from "../../../../games/dist/meta";
-import defs from "../../../../games/dist/lib";
 import demos from "../../../../battle/dist/allDemos";
 
 import dataURIs from "../../../../graphics/dist/svgDataURIs";
@@ -16,8 +15,7 @@ storiesOf("GamePage", module).add(
   "Used for individual game pages in the app",
   () => {
     const gameId = select("Game", list, list[0]) as GameId;
-    const def = defs[gameId];
-    const api = makeStaticGameAPI(games[gameId], def.setups, def.boards);
+    const api = makeStaticGameAPI(games[gameId]);
     const graphics = dataURIs[gameId];
     const content = {
       about: {

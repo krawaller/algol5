@@ -7,10 +7,12 @@ import {
   isAlgolStatementIf,
   isAlgolStatementIfPlayer,
   isAlgolStatementIfAction,
+  isAlgolStatementIfRuleset,
   isAlgolStatementMulti,
   isAlgolStatementForPosIn,
   isAlgolStatementForIdIn,
   isAlgolValLoopRead,
+  isAlgolStatementIfRulesetElse,
 } from "../../../../types";
 import { contains } from "../../../../common";
 import { makeParser } from "../expression";
@@ -19,19 +21,29 @@ export function executeStatement<_T>(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   finalParser: (
     gameDef: FullDefAnon,
     player: 1 | 2,
     action: string,
+    ruleset: string,
     statement: _T,
     from?: string
   ) => string,
   statement: AlgolStatementAnon<_T>,
   from?: string
 ): string {
+  if (!ruleset) {
+    console.error("STATEMENT", statement);
+    throw new Error(
+      `Statement executor didnt receive ruleset! Action: ${action}, Statement: ${JSON.stringify(
+        statement
+      )}`
+    );
+  }
   const exprParser = makeParser(gameDef, player, action, from);
   const me = (expr: AlgolStatementAnon<_T>) =>
-    executeStatement(gameDef, player, action, finalParser, expr, from);
+    executeStatement(gameDef, player, action, ruleset, finalParser, expr, from);
 
   if (isAlgolStatementIfElse(statement)) {
     const {
@@ -48,6 +60,18 @@ export function executeStatement<_T>(
       ifactionelse: [testAction, whenYes, whenNo],
     } = statement;
     return me(testAction === action ? whenYes : whenNo);
+  }
+
+  if (isAlgolStatementIfRulesetElse(statement)) {
+    const {
+      ifrulesetelse: [testRuleset, whenYes, whenNo],
+    } = statement;
+    console.log("IFRULESETELSE", testRuleset === ruleset, {
+      testRuleset,
+      whenYes,
+      whenNo,
+    });
+    return me(testRuleset === ruleset ? whenYes : whenNo);
   }
 
   if (isAlgolStatementPlayerCase(statement)) {
@@ -76,6 +100,13 @@ export function executeStatement<_T>(
       ifaction: [forAction, val],
     } = statement;
     return forAction === action ? me(val) : "";
+  }
+
+  if (isAlgolStatementIfRuleset(statement)) {
+    const {
+      ifruleset: [forRuleset, val],
+    } = statement;
+    return forRuleset === ruleset ? me(val) : "";
   }
 
   if (isAlgolStatementMulti(statement)) {
@@ -109,7 +140,7 @@ export function executeStatement<_T>(
     return `for(let LOOPPOS in ${setcode}) { ${loopInner} }`;
   }
 
-  return finalParser(gameDef, player, action, statement, from);
+  return finalParser(gameDef, player, action, ruleset, statement, from);
 }
 
 function needsLoopSet(expr: any) {

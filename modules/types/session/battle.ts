@@ -1,5 +1,6 @@
 import { AlgolTurn, AlgolArmy, AlgolContentAnon } from "../";
 import { AlgolAnimCompiled } from "../generated";
+import { AlgolVariantAnon } from "../gamedef";
 
 export type AlgolBattle = {
   turn: AlgolTurn;
@@ -10,6 +11,7 @@ export type AlgolBattle = {
   gameEndedBy?: string;
   winner?: 0 | 1 | 2;
   path: number[];
+  variant: AlgolVariantAnon;
 };
 
 export type AlgolUndo = {

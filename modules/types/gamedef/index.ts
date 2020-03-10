@@ -22,7 +22,7 @@ import { Flow } from "./flow";
 import { AlgolGameTestSuite } from "./scripts";
 import { AlgolPerformance } from "./performance";
 import { AlgolAnimCollection } from "./anim";
-import { AlgolVariantBook } from "./variants";
+import { AlgolVariant } from "./variants";
 import { AlgolGameBlobAnon } from "../blob";
 
 export type FullDefAnon = FullDef<AlgolGameBlobAnon>;
@@ -32,7 +32,7 @@ export type FullDef<Blob extends AlgolGameBlobAnon> = {
   anim: AlgolAnimCollection<Blob>;
   boards: AlgolBoardBook<Blob>;
   setups: AlgolSetupBook<Blob>;
-  variants: AlgolVariantBook<Blob>;
+  variants: AlgolVariant<Blob>[];
   graphics: Graphics<Blob>;
   grids?: { [g in Blob["grid"]]: any }; // TODO - grid inside board? type?
   instructions: Instructions<Blob>;

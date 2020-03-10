@@ -12,31 +12,32 @@ export function executeSection(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   section: AlgolSection
 ): string {
   switch (section) {
     case "newBattle":
-      return executeNewBattle(gameDef, player, action);
+      return executeNewBattle(gameDef, player, action, ruleset);
     case "markInit":
-      return executeMarkInit(gameDef, player, action);
+      return executeMarkInit(gameDef, player, action, ruleset);
     case "markEnd":
-      return executeMarkEnd(gameDef, player, action);
+      return executeMarkEnd(gameDef, player, action, ruleset);
     case "orders":
-      return executeOrderSection(gameDef, player, action);
+      return executeOrderSection(gameDef, player, action, ruleset);
     case "startInit":
-      return executeStartInit(gameDef, player, action);
+      return executeStartInit(gameDef, player, action, ruleset);
     case "startEnd":
-      return executeStartEnd(gameDef, player, action);
+      return executeStartEnd(gameDef, player, action, ruleset);
     case "cmndInit":
-      return executeCmndInit(gameDef, player, action);
+      return executeCmndInit(gameDef, player, action, ruleset);
     case "cmndEnd":
-      return executeCmndEnd(gameDef, player, action);
+      return executeCmndEnd(gameDef, player, action, ruleset);
     case "head":
-      return executeHead(gameDef, player, action);
+      return executeHead(gameDef, player, action, ruleset);
     case "instruction":
-      return executeInstructionSection(gameDef, player, action);
+      return executeInstructionSection(gameDef, player, action, ruleset);
     case "setBoard":
-      return executeSetBoard(gameDef, player, action);
+      return executeSetBoard(gameDef, player, action, ruleset);
     default:
       throw new Error("Unknown section: " + JSON.stringify(section));
   }

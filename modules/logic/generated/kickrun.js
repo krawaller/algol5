@@ -44,7 +44,7 @@ const game = {
     connections = boardConnections(board);
     relativeDirs = makeRelativeDirs(board);
   },
-  newBattle: setup => {
+  newBattle: (setup, ruleset) => {
     let UNITDATA = setup2army(setup);
     let UNITLAYERS = {
       units: {},
@@ -61,14 +61,14 @@ const game = {
         UNITLAYERS[layer][pos] = currentunit;
       }
     }
-    return game.action.startTurn1({
+    return game.action[`startTurn_${ruleset}_1`]({
       TURN: 0,
       UNITDATA,
       UNITLAYERS
     });
   },
   action: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -83,7 +83,7 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
-        LINKS.marks[pos] = "selectunit1";
+        LINKS.marks[pos] = "selectunit_basic_1";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -94,7 +94,7 @@ const game = {
         TURN: step.TURN + 1
       };
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       const oldUnitLayers = step.UNITLAYERS;
       let UNITLAYERS = {
         units: oldUnitLayers.units,
@@ -109,7 +109,7 @@ const game = {
         commands: {}
       };
       for (const pos of Object.keys(UNITLAYERS.myunits)) {
-        LINKS.marks[pos] = "selectunit2";
+        LINKS.marks[pos] = "selectunit_basic_2";
       }
       return {
         UNITDATA: step.UNITDATA,
@@ -120,7 +120,7 @@ const game = {
         TURN: step.TURN
       };
     },
-    selectunit1: (step, newMarkPos) => {
+    selectunit_basic_1: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {}
       };
@@ -155,7 +155,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmovetarget1";
+        LINKS.marks[pos] = "selectmovetarget_basic_1";
       }
       return {
         LINKS,
@@ -166,9 +166,9 @@ const game = {
         MARKS
       };
     },
-    selectmovetarget1: (step, newMarkPos) => {
+    selectmovetarget_basic_1: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.move = "move1";
+      LINKS.commands.move = "move_basic_1";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -181,7 +181,7 @@ const game = {
         }
       };
     },
-    selectunit2: (step, newMarkPos) => {
+    selectunit_basic_2: (step, newMarkPos) => {
       let ARTIFACTS = {
         movetargets: {}
       };
@@ -216,7 +216,7 @@ const game = {
         }
       }
       for (const pos of Object.keys(ARTIFACTS.movetargets)) {
-        LINKS.marks[pos] = "selectmovetarget2";
+        LINKS.marks[pos] = "selectmovetarget_basic_2";
       }
       return {
         LINKS,
@@ -227,9 +227,9 @@ const game = {
         MARKS
       };
     },
-    selectmovetarget2: (step, newMarkPos) => {
+    selectmovetarget_basic_2: (step, newMarkPos) => {
       let LINKS = { marks: {}, commands: {} };
-      LINKS.commands.move = "move2";
+      LINKS.commands.move = "move_basic_2";
       return {
         LINKS,
         ARTIFACTS: step.ARTIFACTS,
@@ -242,7 +242,7 @@ const game = {
         }
       };
     },
-    move1: step => {
+    move_basic_1: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -295,7 +295,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn2";
+        LINKS.endTurn = "startTurn_basic_2";
       }
       return {
         LINKS,
@@ -306,7 +306,7 @@ const game = {
         UNITLAYERS
       };
     },
-    move2: step => {
+    move_basic_2: step => {
       let LINKS = { marks: {}, commands: {} };
       let UNITLAYERS = step.UNITLAYERS;
       let UNITDATA = { ...step.UNITDATA };
@@ -359,7 +359,7 @@ const game = {
             .reduce((mem, [key]) => ({ ...mem, [key]: emptyObj }), {})
         );
       } else {
-        LINKS.endTurn = "startTurn1";
+        LINKS.endTurn = "startTurn_basic_1";
       }
       return {
         LINKS,
@@ -372,7 +372,7 @@ const game = {
     }
   },
   instruction: {
-    startTurn1: step => {
+    startTurn_basic_1: step => {
       return collapseContent({
         line: [
           { select: "Select" },
@@ -383,8 +383,8 @@ const game = {
         ]
       });
     },
-    move1: () => defaultInstruction(1),
-    selectunit1: step => {
+    move_basic_1: () => defaultInstruction(1),
+    selectunit_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -401,7 +401,7 @@ const game = {
         ]
       });
     },
-    selectmovetarget1: step => {
+    selectmovetarget_basic_1: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -462,7 +462,7 @@ const game = {
         ]
       });
     },
-    startTurn2: step => {
+    startTurn_basic_2: step => {
       return collapseContent({
         line: [
           { select: "Select" },
@@ -473,8 +473,8 @@ const game = {
         ]
       });
     },
-    move2: () => defaultInstruction(2),
-    selectunit2: step => {
+    move_basic_2: () => defaultInstruction(2),
+    selectunit_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -491,7 +491,7 @@ const game = {
         ]
       });
     },
-    selectmovetarget2: step => {
+    selectmovetarget_basic_2: step => {
       let MARKS = step.MARKS;
       let UNITLAYERS = step.UNITLAYERS;
       return collapseContent({
@@ -551,6 +551,39 @@ const game = {
               })
         ]
       });
+    }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "m"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 5,
+      width: 5,
+      terrain: {
+        corners: {
+          "1": ["a1"],
+          "2": ["e5"]
+        }
+      }
+    }
+  },
+  setups: {
+    basic: {
+      runners: {
+        "1": ["a2", "b1"],
+        "2": ["d5", "e4"]
+      },
+      sidekickers: {
+        "1": ["a1", "c1", "a3"],
+        "2": ["c5", "e5", "e3"]
+      }
     }
   }
 };

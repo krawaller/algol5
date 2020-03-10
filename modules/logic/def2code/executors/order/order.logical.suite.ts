@@ -9,45 +9,46 @@ export const testSuite: AlgolStatementSuite<AlgolOrderAnon> = {
     {
       def: emptyFullDef,
       player: 1,
+      ruleset: "flurprulez",
       action: "somemark",
       contexts: [
         {
           context: {
             newStepId: "foo",
             UNITDATA: { unit1: {} },
-            LINKS: {}
+            LINKS: {},
           },
           tests: [
             {
               expr: {
                 multi: [
                   { effects: [{ killid: "unit1" }] },
-                  { links: ["endTurn"] }
-                ]
+                  { links: ["endTurn"] },
+                ],
               },
               asserts: [
                 {
                   sample: "LINKS",
-                  res: { endTurn: "startTurn2" }
+                  res: { endTurn: "startTurn_flurprulez_2" },
                 },
                 {
                   sample: "UNITDATA.unit1",
-                  res: undefined
-                }
-              ]
+                  res: undefined,
+                },
+              ],
             },
             {
               expr: { if: [["false"], { effects: [{ killid: "unit1" }] }] },
               asserts: [
                 {
                   sample: "UNITDATA.unit1",
-                  res: truthy
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  res: truthy,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

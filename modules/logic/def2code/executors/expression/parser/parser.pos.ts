@@ -14,10 +14,11 @@ export default function parsePos(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   expr: AlgolPosAnon,
   from?: string
 ) {
-  const parser = makeParser(gameDef, player, action, "pos");
+  const parser = makeParser(gameDef, player, action, ruleset, "pos");
 
   if (typeof expr === "string") {
     return `MARKS.${expr}`;

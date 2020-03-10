@@ -8,11 +8,13 @@ import {
   isAlgolIfableExpressionIf,
   isAlgolIfableExpressionIfPlayer,
   isAlgolIfableExpressionIfAction,
+  isAlgolIfableExpressionIfRuleset,
   AlgolValAnon,
   AlgolBoolAnon,
   AlgolPosAnon,
   AlgolSetAnon,
   AlgolDirsAnon,
+  isAlgolExpressionIfRulesetElse,
 } from "../../../../types";
 
 type ExprReturn = string | number | undefined | boolean;
@@ -21,19 +23,25 @@ export function executeExpression<_T>(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   parser: (
     gameDef: FullDefAnon,
     player: 1 | 2,
     action: string,
+    ruleset: string,
     expression: _T,
     from?: string
   ) => ExprReturn,
   expr: AlgolIfableExpressionAnon<_T>,
   from?: string
 ): ExprReturn {
-  const parse = makeParser(gameDef, player, action, from);
+  if (!ruleset) {
+    console.log("BLAH", expr);
+    throw new Error(`OMG OGM ${gameDef.meta.id}, ${action}`);
+  }
+  const parse = makeParser(gameDef, player, action, ruleset, from);
   const me = (expr: AlgolIfableExpressionAnon<_T>) =>
-    executeExpression(gameDef, player, action, parser, expr, from);
+    executeExpression(gameDef, player, action, ruleset, parser, expr, from);
 
   if (isAlgolExpressionIfElse(expr)) {
     const {
@@ -46,7 +54,16 @@ export function executeExpression<_T>(
     const {
       ifactionelse: [testAction, whenYes, whenNo],
     } = expr;
+    // TODO - testAction is dynamic? fix type?
     return me(testAction === action ? whenYes : whenNo);
+  }
+
+  if (isAlgolExpressionIfRulesetElse(expr)) {
+    const {
+      ifrulesetelse: [testRuleset, whenYes, whenNo],
+    } = expr;
+    // TODO - testRuleset is dynamic? fix type?
+    return me(testRuleset === ruleset ? whenYes : whenNo); // TODO - why TS unhappy here?!
   }
 
   if (isAlgolExpressionPlayerCase(expr)) {
@@ -88,7 +105,14 @@ export function executeExpression<_T>(
     return forAction === action ? me(val) : "undefined";
   }
 
-  return parser(gameDef, player, action, expr, from);
+  if (isAlgolIfableExpressionIfRuleset(expr)) {
+    const {
+      ifruleset: [forRuleset, val],
+    } = expr;
+    return forRuleset === ruleset ? me(val) : "undefined";
+  }
+
+  return parser(gameDef, player, action, ruleset, expr, from);
 }
 
 // ------- parser
@@ -103,19 +127,47 @@ export function makeParser(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   from?: string
 ) {
+  if (!ruleset) {
+    throw new Error(`Parser didnt receive ruleset! Action: ${action}`);
+  }
   const parsers = {
     val: (expr: AlgolValAnon): ExprReturn =>
-      executeExpression(gameDef, player, action, parseValue, expr, from),
+      executeExpression(
+        gameDef,
+        player,
+        action,
+        ruleset,
+        parseValue,
+        expr,
+        from
+      ),
     bool: (expr: AlgolBoolAnon): ExprReturn =>
-      executeExpression(gameDef, player, action, parseBool, expr, from),
+      executeExpression(
+        gameDef,
+        player,
+        action,
+        ruleset,
+        parseBool,
+        expr,
+        from
+      ),
     pos: (expr: AlgolPosAnon): ExprReturn =>
-      executeExpression(gameDef, player, action, parsePos, expr, from),
+      executeExpression(gameDef, player, action, ruleset, parsePos, expr, from),
     set: (expr: AlgolSetAnon): ExprReturn =>
-      executeExpression(gameDef, player, action, parseSet, expr, from),
+      executeExpression(gameDef, player, action, ruleset, parseSet, expr, from),
     dirs: (expr: AlgolDirsAnon): ExprReturn =>
-      executeExpression(gameDef, player, action, parseDirs, expr, from),
+      executeExpression(
+        gameDef,
+        player,
+        action,
+        ruleset,
+        parseDirs,
+        expr,
+        from
+      ),
   };
   return parsers;
 }
@@ -123,8 +175,14 @@ export function makeParser(
 export const parserTester = <T>(
   type: "set" | "bool" | "val" | "pos" | "dirs"
 ) => {
-  const ret = (def: FullDefAnon, player: 1 | 2, action: string, input: T) => {
-    const parser: any = makeParser(def, player, action)[type];
+  const ret = (
+    def: FullDefAnon,
+    player: 1 | 2,
+    action: string,
+    ruleset: string,
+    input: T
+  ) => {
+    const parser: any = makeParser(def, player, action, ruleset)[type];
     return parser(input);
   };
   ret.funcName = "parse" + type[0].toUpperCase() + type.slice(1);

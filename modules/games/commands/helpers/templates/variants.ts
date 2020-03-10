@@ -3,15 +3,16 @@ export default function templateVariants(gameId: string) {
   return `
 import { ${capId}Definition } from "./_types";
 
-const ${gameId}VariantBook: ${capId}Definition['variants'] = {
-  basic: {
+const ${gameId}Variants: ${capId}Definition['variants'] = [
+  {
     ruleset: "basic",
     board: "basic",
     setup: "basic",
-    desc: "basic",
+    desc: "regular",
+    code: "r"
   },
-};
+];
 
-export default ${gameId}VariantBook;
+export default ${gameId}Variants;
 `;
 }

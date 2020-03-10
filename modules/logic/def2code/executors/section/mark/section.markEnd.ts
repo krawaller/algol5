@@ -10,9 +10,10 @@ import {
 export function executeMarkEnd(
   gameDef: FullDefAnon,
   player: 1 | 2,
-  action: string
+  action: string,
+  ruleset: string
 ): string {
-  const usage = orderUsage(gameDef, player, action);
+  const usage = orderUsage(gameDef, player, action, ruleset);
   const analysis = analyseGame(gameDef);
 
   return `
@@ -25,7 +26,7 @@ export function executeMarkEnd(
       ${
         usage.MARKS
           ? "MARKS, "
-          : `MARKS: { ${analysis[player][action].priorMarks
+          : `MARKS: { ${analysis[ruleset][player][action].priorMarks
               .map(m => `${m}: step.MARKS.${m}, `)
               .join("")} ${action}: newMarkPos }, `
       }

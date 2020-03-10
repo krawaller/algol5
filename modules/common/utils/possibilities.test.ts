@@ -6,6 +6,7 @@ type PossTest<_T> = {
   poss: AlgolIfableExpressionAnon<_T>[];
   player?: 0 | 1 | 2;
   action?: string;
+  ruleset?: string;
 };
 
 const possTests: PossTest<
@@ -81,9 +82,32 @@ const possTests: PossTest<
     action: "anotheraction",
     poss: [],
   },
+  {
+    expr: { ifruleset: ["somerulez", "FOO"] },
+    ruleset: "somerulez",
+    poss: ["FOO"],
+  },
+  {
+    expr: { ifruleset: ["somerulez", "FOO"] },
+    ruleset: "otherrulez",
+    poss: [],
+  },
+  {
+    expr: { ifrulesetelse: ["somerulez", "FOO", "BAR"] },
+    ruleset: "somerulez",
+    poss: ["FOO"],
+  },
+  {
+    expr: { ifrulesetelse: ["somerulez", "FOO", "BAR"] },
+    ruleset: "otherrulez",
+    poss: ["BAR"],
+  },
 ];
 
 test("possibilities", () =>
-  possTests.forEach(({ expr, poss, player = 0, action = "any" }) =>
-    expect(possibilities(expr, player as 0 | 1 | 2, action)).toEqual(poss)
+  possTests.forEach(
+    ({ expr, poss, player = 0, action = "any", ruleset = "basic" }) =>
+      expect(possibilities(expr, player as 0 | 1 | 2, action, ruleset)).toEqual(
+        poss
+      )
   ));

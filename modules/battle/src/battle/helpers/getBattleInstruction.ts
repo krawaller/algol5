@@ -7,7 +7,7 @@ export function getBattleInstruction(
   const { currentStepId } = battle.state;
   const currentStep = battle.turn.steps[currentStepId];
   if (currentStepId === "root") {
-    const funcName = `startTurn_${battle.ruleset}_${battle.player}`;
+    const funcName = `startTurn_${battle.variant.ruleset}_${battle.player}`;
     if (!game.instruction[funcName]) {
       throw new Error(`Couldnt find function ${funcName}`);
     }

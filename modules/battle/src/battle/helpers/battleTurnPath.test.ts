@@ -1,14 +1,8 @@
 import atrium from "../../../../logic/dist/indiv/atrium";
-import atriumDef from "../../../../games/dist/games/atrium";
 import { makeStaticGameAPI } from "../../makeStaticGameAPI";
 import { battleTurnPath } from ".";
 
-const atriumAPI = makeStaticGameAPI(
-  atrium,
-  atriumDef.setups,
-  atriumDef.boards,
-  atriumDef.variants
-);
+const atriumAPI = makeStaticGameAPI(atrium);
 
 describe("the battleTurnPath helper", () => {
   it("gets correct path from atrium (1)", () => {

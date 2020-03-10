@@ -23,7 +23,7 @@ export function battleEndTurn(game: AlgolGame, btl: AlgolBattle): AlgolBattle {
     return battleEndGame(battle);
   }
   return {
-    ruleset: battle.ruleset,
+    variant: battle.variant,
     path: battle.path,
     turnNumber: nextTurn.steps.root.TURN,
     player: battle.player === 1 ? 2 : 1,

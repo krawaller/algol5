@@ -12,9 +12,10 @@ export default function executeFilter(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset,
   filterDef: AlgolFilterDefAnon
 ) {
-  const parser = makeParser(gameDef, player, action);
+  const parser = makeParser(gameDef, player, action, ruleset);
   const toLayerDependsOnTarget = contains(filterDef.tolayer, "target");
   const assignTargetLayerVar = `let filtertargetlayer=${parser.set(
     filterDef.tolayer as AlgolSetAnon
@@ -24,23 +25,20 @@ export default function executeFilter(
     : []
   )
     .concat(
-      Object.keys(filterDef.matching || {}).reduce(
-        (mem, propName) => {
-          const matcher = filterDef.matching![propName];
-          if (isAlgolMatcherIs(matcher)) {
-            return mem.concat(
-              `filterObj.${propName} === ${parser.val(matcher.is)}`
-            );
-          } else if (isAlgolMatcherIsnt(matcher)) {
-            return mem.concat(
-              `filterObj.${propName} !== ${parser.val(matcher.isnt)}`
-            );
-          } else {
-            throw new Error("Unknown matcher: " + JSON.stringify(matcher));
-          }
-        },
-        [] as string[]
-      )
+      Object.keys(filterDef.matching || {}).reduce((mem, propName) => {
+        const matcher = filterDef.matching![propName];
+        if (isAlgolMatcherIs(matcher)) {
+          return mem.concat(
+            `filterObj.${propName} === ${parser.val(matcher.is)}`
+          );
+        } else if (isAlgolMatcherIsnt(matcher)) {
+          return mem.concat(
+            `filterObj.${propName} !== ${parser.val(matcher.isnt)}`
+          );
+        } else {
+          throw new Error("Unknown matcher: " + JSON.stringify(matcher));
+        }
+      }, [] as string[])
     )
     .join(" && ");
   return `

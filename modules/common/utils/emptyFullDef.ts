@@ -39,12 +39,13 @@ export const emptyFullDef: FullDefAnon = {
   },
   scripts: {},
   setups: { basic: {} },
-  variants: {
-    basic: {
+  variants: [
+    {
       ruleset: "basic",
       board: "basic",
       setup: "basic",
       desc: "basic",
+      code: "X",
     },
-  },
+  ],
 };

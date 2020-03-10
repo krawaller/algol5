@@ -8,7 +8,6 @@ import {
   AlgolGameBlobAnon,
 } from "../../types";
 import { getContentText } from "../../common";
-import games from "../../games/dist/lib";
 
 const endGames = ["win", "lose", "draw"];
 
@@ -20,12 +19,12 @@ export function runGameScript(
 ) {
   for (const scriptName in scripts) {
     test(`Game - ${id} - ${scriptName}`, () => {
-      const def = games[id];
       const lines = scripts[scriptName];
-      // TODO - let scripts define board, setup, ruleset via variant
-      const ruleset = "basic";
-      game.setBoard(def.boards.basic);
-      let step: AlgolStep = game.newBattle(def.setups.basic, ruleset);
+      const code = game.variants[0].code; // TODO - read variant code from script
+      const variant = game.variants.find(v => v.code === code);
+      const { ruleset, board, setup } = variant;
+      game.setBoard(game.boards[board]);
+      let step: AlgolStep = game.newBattle(game.setups[setup], ruleset);
       let n = 0;
       let lastFunc = `startTurn_${ruleset}_1`;
       while (lines.length) {

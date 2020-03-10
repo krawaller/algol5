@@ -104,7 +104,7 @@ export function analyseGame(gameDef: FullDefAnon): AnalysisBook {
           }
         }
       }
-      ret[ruleset][plr] = plrAnalysis;
+      ret[ruleset][plr as keyof typeof ret[string]] = plrAnalysis;
     }
   }
   return ret;

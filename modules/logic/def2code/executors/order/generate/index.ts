@@ -40,13 +40,13 @@ function executeGeneratorInner(
 ) {
   const genDef: GeneratorDefAnon = gameDef.generators[genRef as string];
   if (isNeighbourDef(genDef)) {
-    return executeNeighbours(gameDef, player, action, genDef);
+    return executeNeighbours(gameDef, player, action, ruleset, genDef);
   }
   if (isWalkerDef(genDef)) {
-    return executeWalker(gameDef, player, action, genDef);
+    return executeWalker(gameDef, player, action, ruleset, genDef);
   }
   if (isAlgolFilterDef(genDef)) {
-    return executeFilter(gameDef, player, action, genDef);
+    return executeFilter(gameDef, player, action, ruleset, genDef);
   }
   throw "Unknown generator def: " + JSON.stringify(genDef);
 }

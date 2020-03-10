@@ -9,26 +9,31 @@ export default function draw(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   drawDef: DrawDefAnon[] | DrawDefAnon | undefined,
   posVar = "POS"
 ) {
   if (Array.isArray(drawDef)) {
     return drawDef
-      .map(def => `{ ${drawSingle(gameDef, player, action, def, posVar)} }`)
+      .map(
+        def =>
+          `{ ${drawSingle(gameDef, player, action, ruleset, def, posVar)} }`
+      )
       .join("\n");
   }
-  return drawSingle(gameDef, player, action, drawDef, posVar);
+  return drawSingle(gameDef, player, action, ruleset, drawDef, posVar);
 }
 
 function drawSingle(
   gameDef: FullDefAnon,
   player: 1 | 2,
   action: string,
+  ruleset: string,
   drawDef: DrawDefAnon | undefined,
   posVar = "POS"
 ) {
   if (!drawDef) return "";
-  const parser = makeParser(gameDef, player, action);
+  const parser = makeParser(gameDef, player, action, ruleset);
   let conds = [];
   if (drawDef.condition) conds.push(parser.bool(drawDef.condition));
   if (drawDef.unlessover)

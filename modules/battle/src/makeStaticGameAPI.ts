@@ -12,7 +12,8 @@ export function makeStaticGameAPI(game: AlgolGame): AlgolStaticGameAPI {
         throw new Error(`Couldnt find variant with code "${code}"`);
       }
       game.setBoard(boards[variant.board]);
-      return newBattle(game, setups[variant.setup], variant);
+      const battle = newBattle(game, setups[variant.setup], variant);
+      return battle;
     },
     fromSave: save => {
       game.setBoard(boards.basic); // TODO - read variant from save

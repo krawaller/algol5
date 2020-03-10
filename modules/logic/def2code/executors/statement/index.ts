@@ -33,6 +33,14 @@ export function executeStatement<_T>(
   statement: AlgolStatementAnon<_T>,
   from?: string
 ): string {
+  if (!ruleset) {
+    console.error("STATEMENT", statement);
+    throw new Error(
+      `Statement executor didnt receive ruleset! Action: ${action}, Statement: ${JSON.stringify(
+        statement
+      )}`
+    );
+  }
   const exprParser = makeParser(gameDef, player, action, from);
   const me = (expr: AlgolStatementAnon<_T>) =>
     executeStatement(gameDef, player, action, ruleset, finalParser, expr, from);
@@ -58,6 +66,11 @@ export function executeStatement<_T>(
     const {
       ifrulesetelse: [testRuleset, whenYes, whenNo],
     } = statement;
+    console.log("IFRULESETELSE", testRuleset === ruleset, {
+      testRuleset,
+      whenYes,
+      whenNo,
+    });
     return me(testRuleset === ruleset ? whenYes : whenNo);
   }
 

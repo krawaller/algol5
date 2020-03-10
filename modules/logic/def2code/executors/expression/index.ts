@@ -35,7 +35,11 @@ export function executeExpression<_T>(
   expr: AlgolIfableExpressionAnon<_T>,
   from?: string
 ): ExprReturn {
-  const parse = makeParser(gameDef, player, action, from);
+  if (!ruleset) {
+    console.log("BLAH", expr);
+    throw new Error(`OMG OGM ${gameDef.meta.id}, ${action}`);
+  }
+  const parse = makeParser(gameDef, player, action, ruleset, from);
   const me = (expr: AlgolIfableExpressionAnon<_T>) =>
     executeExpression(gameDef, player, action, ruleset, parser, expr, from);
 
@@ -59,7 +63,7 @@ export function executeExpression<_T>(
       ifrulesetelse: [testRuleset, whenYes, whenNo],
     } = expr;
     // TODO - testRuleset is dynamic? fix type?
-    return me(testRuleset === ruleset ? whenYes : whenNo);
+    return me(testRuleset === ruleset ? whenYes : whenNo); // TODO - why TS unhappy here?!
   }
 
   if (isAlgolExpressionPlayerCase(expr)) {
@@ -126,6 +130,9 @@ export function makeParser(
   ruleset: string,
   from?: string
 ) {
+  if (!ruleset) {
+    throw new Error(`Parser didnt receive ruleset! Action: ${action}`);
+  }
   const parsers = {
     val: (expr: AlgolValAnon): ExprReturn =>
       executeExpression(

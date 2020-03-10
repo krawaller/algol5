@@ -2,4 +2,4 @@
 updated: 2020-02-08
 ---
 
-Soon we will show the rules for {GAME} here! In the meantime you can read them {EXTLINK:url=https://boardgamegeek.com/filepage/46316/murus-gallicus-detailed-rules,text=here}.
+Soon we will show the rules for Murus Gallicus Advanced here! In the meantime you can read them {EXTLINK:url=https://boardgamegeek.com/thread/844020/advanced-murus-gallicus,text=here}.

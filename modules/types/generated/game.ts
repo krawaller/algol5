@@ -1,6 +1,12 @@
 import { AlgolStep, AlgolContentAnon, AlgolIconMap } from "../";
 import { GameId } from "../../games/dist/list";
-import { AlgolSetupAnon, AlgolBoardAnon } from "../gamedef";
+import {
+  AlgolSetupAnon,
+  AlgolBoardAnon,
+  AlgolVariantAnon,
+  AlgolSetupBookAnon,
+  AlgolBoardBookAnon,
+} from "../gamedef";
 
 export type AlgolGame = {
   gameId: GameId;
@@ -15,8 +21,11 @@ export type AlgolGame = {
   instruction: {
     [funcName: string]: (step: AlgolStep) => AlgolContentAnon;
   };
-  commands: Record<string, AlgolCommandInfo>;
+  commands: Record<string, AlgolCommandInfo>; // TODO - per plr/ruleset/sth?
   iconMap: AlgolIconMap;
+  variants: AlgolVariantAnon[];
+  setups: AlgolSetupBookAnon;
+  boards: AlgolBoardBookAnon;
 };
 
 export type AlgolCommandInfo = {};

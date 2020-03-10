@@ -1097,6 +1097,47 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "s"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 8,
+      width: 8,
+      terrain: {
+        water: [
+          "a1",
+          "a2",
+          "a7",
+          "a8",
+          "b1",
+          "b8",
+          "g1",
+          "g8",
+          "h1",
+          "h2",
+          "h7",
+          "h8"
+        ]
+      }
+    }
+  },
+  setups: {
+    basic: {
+      seals: {
+        "1": ["b2", "b7"]
+      },
+      bears: {
+        "2": ["g2", "g7"]
+      }
+    }
   }
 };
 export default game;

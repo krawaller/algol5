@@ -1043,6 +1043,51 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "y"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 7,
+      width: 8,
+      terrain: {
+        homerow: {
+          "1": [
+            {
+              rect: ["a1", "h1"]
+            }
+          ],
+          "2": [
+            {
+              rect: ["a7", "h7"]
+            }
+          ]
+        }
+      }
+    }
+  },
+  setups: {
+    basic: {
+      towers: {
+        "1": [
+          {
+            rect: ["a1", "h1"]
+          }
+        ],
+        "2": [
+          {
+            rect: ["a7", "h7"]
+          }
+        ]
+      }
+    }
   }
 };
 export default game;

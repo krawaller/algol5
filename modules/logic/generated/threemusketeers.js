@@ -474,6 +474,36 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "t"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 5,
+      width: 5,
+      terrain: {}
+    }
+  },
+  setups: {
+    basic: {
+      kings: {
+        "1": ["a1", "c3", "e5"]
+      },
+      pawns: {
+        "2": [
+          {
+            holerect: ["a1", "e5", "a1", "c3", "e5"]
+          }
+        ]
+      }
+    }
   }
 };
 export default game;

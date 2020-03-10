@@ -630,6 +630,57 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "a"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 8,
+      width: 8,
+      terrain: {
+        base: {
+          "1": [
+            {
+              rect: ["a8", "h8"]
+            }
+          ],
+          "2": [
+            {
+              rect: ["a1", "h1"]
+            }
+          ]
+        }
+      }
+    }
+  },
+  setups: {
+    basic: {
+      crowns: {
+        "1": ["d8", "e8"],
+        "2": ["c1", "f1"]
+      },
+      daggers: {
+        "1": [
+          {
+            rect: ["c7", "f7"]
+          }
+        ],
+        "2": [
+          "c3",
+          "f3",
+          {
+            rect: ["b2", "g2"]
+          }
+        ]
+      }
+    }
   }
 };
 export default game;

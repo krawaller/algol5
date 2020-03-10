@@ -494,6 +494,25 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "u"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 6,
+      width: 6,
+      terrain: {}
+    }
+  },
+  setups: {
+    basic: {}
   }
 };
 export default game;

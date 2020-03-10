@@ -1155,6 +1155,51 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "r"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 5,
+      width: 5,
+      terrain: {
+        base: {
+          "1": [
+            {
+              rect: ["a1", "e1"]
+            }
+          ],
+          "2": [
+            {
+              rect: ["a5", "e5"]
+            }
+          ]
+        }
+      }
+    }
+  },
+  setups: {
+    basic: {
+      pinets: {
+        "1": ["a1", "e1"],
+        "2": ["a5", "e5"]
+      },
+      piokers: {
+        "1": ["b1", "d1"],
+        "2": ["b5", "d5"]
+      },
+      piases: {
+        "1": ["c1"],
+        "2": ["c5"]
+      }
+    }
   }
 };
 export default game;

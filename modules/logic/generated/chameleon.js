@@ -792,6 +792,52 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "w"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 5,
+      width: 5,
+      terrain: {
+        base: {
+          "1": [
+            {
+              rect: ["a1", "e1"]
+            }
+          ],
+          "2": [
+            {
+              rect: ["a5", "e5"]
+            }
+          ]
+        }
+      },
+      offset: "knight"
+    }
+  },
+  setups: {
+    basic: {
+      knights: {
+        "1": [
+          {
+            rect: ["a1", "e1"]
+          }
+        ],
+        "2": [
+          {
+            rect: ["a5", "e5"]
+          }
+        ]
+      }
+    }
   }
 };
 export default game;

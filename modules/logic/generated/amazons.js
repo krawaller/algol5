@@ -578,6 +578,30 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "f"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 10,
+      width: 10,
+      terrain: {}
+    }
+  },
+  setups: {
+    basic: {
+      amazons: {
+        "1": ["d10", "g10", "a7", "j7"],
+        "2": ["a4", "d1", "g1", "j4"]
+      }
+    }
   }
 };
 export default game;

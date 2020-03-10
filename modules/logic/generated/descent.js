@@ -1106,6 +1106,37 @@ const game = {
             ]
           });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "m"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 4,
+      width: 4,
+      terrain: {}
+    }
+  },
+  setups: {
+    basic: {
+      lvl3: {
+        "0": [
+          {
+            rect: ["a2", "d3"]
+          },
+          "b4",
+          "c1"
+        ],
+        "1": ["a1", "c4", "d1"],
+        "2": ["a4", "b1", "d4"]
+      }
+    }
   }
 };
 export default game;

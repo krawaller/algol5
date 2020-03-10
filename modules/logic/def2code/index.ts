@@ -99,7 +99,10 @@ const game = {
   },
   instruction: {
     ${instructions.join(", ")}
-  }
+  },
+  variants: ${JSON.stringify(gameDef.variants, null, 2)},
+  boards: ${JSON.stringify(gameDef.boards, null, 2)},
+  setups: ${JSON.stringify(gameDef.setups, null, 2)}
 };
 
 export default game; 

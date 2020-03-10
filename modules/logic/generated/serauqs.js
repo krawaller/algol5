@@ -678,6 +678,57 @@ const game = {
         ]
       });
     }
+  },
+  variants: [
+    {
+      ruleset: "basic",
+      board: "basic",
+      setup: "basic",
+      desc: "regular",
+      code: "c"
+    }
+  ],
+  boards: {
+    basic: {
+      height: 4,
+      width: 4,
+      terrain: {
+        base: {
+          "1": [
+            {
+              rect: ["a1", "d1"]
+            }
+          ],
+          "2": [
+            {
+              rect: ["a4", "d4"]
+            }
+          ]
+        },
+        corners: ["a1", "a4", "d1", "d4"],
+        middle: [
+          {
+            rect: ["b2", "c3"]
+          }
+        ]
+      }
+    }
+  },
+  setups: {
+    basic: {
+      soldiers: {
+        "1": [
+          {
+            rect: ["a1", "d1"]
+          }
+        ],
+        "2": [
+          {
+            rect: ["a4", "d4"]
+          }
+        ]
+      }
+    }
   }
 };
 export default game;

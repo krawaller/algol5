@@ -40,9 +40,9 @@ type MurusgallicusadvancedGenerator =
 type MurusgallicusadvancedArtifactLayer =
   | "firetargets"
   | "movetargets"
-  | "madecatapults"
   | "madetowers"
   | "madewalls"
+  | "madecatapults"
   | "crushtargets";
 type MurusgallicusadvancedTerrainLayer =
   | "homerow"

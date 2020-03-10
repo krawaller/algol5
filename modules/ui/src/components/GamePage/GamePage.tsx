@@ -11,6 +11,7 @@ import {
   AlgolError,
   AlgolErrorReport,
   AlgolErrorReportLevel,
+  AlgolGameBlobAnon,
 } from "../../../../types";
 
 import { Board } from "../Board";
@@ -39,7 +40,7 @@ type GamePageHTML = {
 type GamePageProps = {
   api: AlgolStaticGameAPI;
   graphics: AlgolGameGraphics;
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
   demo: AlgolDemo;
   actions: PageActions;
   content: GamePageHTML;

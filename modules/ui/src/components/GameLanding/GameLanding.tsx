@@ -5,6 +5,7 @@ import {
   AlgolLocalBattle,
   AlgolGameGraphics,
   AlgolErrorReporter,
+  AlgolGameBlobAnon,
 } from "../../../../types";
 import { Modal } from "../Modal";
 import { Button } from "../Button";
@@ -35,7 +36,7 @@ type GameLandingHTML = {
 };
 
 type GameLandingProps = {
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
   actions: GameLandingActions;
   graphics: AlgolGameGraphics;
   hasPrevious: boolean;

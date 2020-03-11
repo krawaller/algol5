@@ -2,7 +2,6 @@ import React, { FunctionComponent } from "react";
 import { AlgolErrorReporter, AlgolVariantAnon } from "../../../../types";
 import { Button } from "../Button";
 import { ButtonGroup } from "../ButtonGroup";
-import css from "./LocalSession.cssProxy";
 
 export interface VariantSelectorActions {
   newLocalBattle: (code: string) => void;

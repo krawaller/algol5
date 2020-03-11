@@ -2,7 +2,7 @@ import { makeStatefulGameAPI } from "../../src";
 import gameDefs from "../../../games/dist/lib";
 import { GameId } from "../../../games/dist/list";
 import games from "../../../logic/dist";
-import { AlgolScriptLine } from "../../../types";
+import { AlgolScriptLine, AlgolGameBlobAnon } from "../../../types";
 import * as fs from "fs-extra";
 import * as path from "path";
 
@@ -13,13 +13,8 @@ const out = path.join(__dirname, "../../dist/demos");
 export async function makeDemo(gameId: GameId) {
   const gameDef = gameDefs[gameId];
   const scripts = gameDef.scripts;
-  const script: AlgolScriptLine<string, string>[] =
-    scripts.demo || scripts[Object.keys(scripts)[0]];
-  const API = makeStatefulGameAPI(
-    games[gameId],
-    gameDef.setups,
-    gameDef.boards
-  );
+  const script: AlgolScriptLine<AlgolGameBlobAnon>[] = scripts[0].lines;
+  const API = makeStatefulGameAPI(games[gameId]);
   const { anims, initial, patches } = demoMaker(API, script);
 
   await fs.ensureDir(out);

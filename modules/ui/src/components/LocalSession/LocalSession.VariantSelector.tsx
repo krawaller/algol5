@@ -29,20 +29,19 @@ export const VariantSelector: FunctionComponent<VariantSelectorProps> = props =>
     );
   }
   return (
-    <>
-      <div className={css.localSessionHeader}>New session</div>
-      <ButtonGroup>
-        {variants.map((v, n) => (
-          <Button
-            big={n === 0}
-            onClick={() => actions.newLocalBattle(variants[n].code)}
-            onError={actions.reportError}
-            controlId="new-local-session-button"
-          >
-            {v.desc[0].toUpperCase() + v.desc.slice(1)}
-          </Button>
-        ))}
-      </ButtonGroup>
-    </>
+    <ButtonGroup noBottomMargin>
+      {variants.map((v, n) => (
+        <Button
+          big={n === 0}
+          onClick={() => actions.newLocalBattle(variants[n].code)}
+          onError={actions.reportError}
+          controlId="new-local-session-button"
+        >
+          {n
+            ? v.desc[0].toUpperCase() + v.desc.slice(1)
+            : `New ${v.desc} session`}
+        </Button>
+      ))}
+    </ButtonGroup>
   );
 };

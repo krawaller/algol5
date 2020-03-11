@@ -7,7 +7,7 @@ import { AlgolVariantAnon } from "../gamedef";
 
 export type AlgolStatefulGameAPI = {
   gameId: GameId;
-  newBattle: () => AlgolStatefulGameAPISession;
+  newBattle: (code?: string) => AlgolStatefulGameAPISession;
   fromSave: (save: AlgolBattleSave) => AlgolStatefulGameAPISession;
 };
 
@@ -23,7 +23,7 @@ export type AlgolStatefulGameAPISession = {
 
 export type AlgolStaticGameAPI = {
   gameId: GameId;
-  newBattle: () => AlgolBattle;
+  newBattle: (code?: string) => AlgolBattle;
   fromSave: (save: AlgolBattleSave) => AlgolBattle;
   fromFrame: (frame: AlgolHistoryMove) => AlgolBattle;
   performAction: (

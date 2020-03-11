@@ -5,6 +5,7 @@ import { select, boolean } from "@storybook/addon-knobs";
 import { LocalSession, LocalSessionActions } from ".";
 import meta from "../../../../games/dist/meta";
 import dataURIs from "../../../../graphics/dist/svgDataURIs";
+import { AlgolVariantAnon } from "../../../../types";
 
 storiesOf("LocalSession", module).add("LocalSession creator for game", () => {
   const gameId = select("Game", list, list[0]) as GameId;
@@ -16,12 +17,22 @@ storiesOf("LocalSession", module).add("LocalSession creator for game", () => {
     continuePreviousSession: () => console.log("Previous!"),
     reportError: err => console.log("Error", err),
   };
+  const variants: AlgolVariantAnon[] = [
+    {
+      board: "regular",
+      code: "x",
+      desc: "regular",
+      ruleset: "regular",
+      setup: "regular",
+    },
+  ];
   return (
     <LocalSession
       actions={actions}
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}
       hasPrevious={hasPrevious}
+      variants={variants}
     />
   );
 });

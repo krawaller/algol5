@@ -63,7 +63,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       };
     } else if (cmnd === "new") {
       // user started a new local battle! initiate it
-      const battle = api.newBattle();
+      const battle = api.newBattle(arg);
       const session = newSessionFromBattle(battle, api.iconMap);
       setLatestSessionId(api.gameId, session.id);
       return {
@@ -202,7 +202,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       endTurn: () => dispatch(["endTurn", null]),
       command: (cmnd: string) => dispatch(["command", cmnd]),
       undoBattleCommand: () => dispatch(["undo", null]),
-      newLocalBattle: () => dispatch(["new", null]),
+      newLocalBattle: (code: string) => dispatch(["new", code]),
       loadLocalSession: (session: AlgolLocalBattle) =>
         dispatch(["load", session]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),

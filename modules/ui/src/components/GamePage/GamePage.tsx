@@ -129,6 +129,7 @@ export const GamePage = (props: GamePageProps) => {
         graphics={graphics}
         hasPrevious={hasPrevious}
         content={content}
+        variants={api.variants}
       />
     );
   }

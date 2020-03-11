@@ -6,6 +6,7 @@ import {
   AlgolGameGraphics,
   AlgolErrorReporter,
   AlgolGameBlobAnon,
+  AlgolVariantAnon,
 } from "../../../../types";
 import { Modal } from "../Modal";
 import { Button } from "../Button";
@@ -15,7 +16,7 @@ import { ButtonGroup } from "../ButtonGroup";
 import { Markdown } from "../Markdown";
 
 export interface GameLandingActions {
-  newLocalBattle: () => void;
+  newLocalBattle: (code: string) => void;
   loadLocalSession: (session: AlgolLocalBattle) => void;
   navTo: (path: string) => void;
   toBattleLobby: () => void;
@@ -41,10 +42,11 @@ type GameLandingProps = {
   graphics: AlgolGameGraphics;
   hasPrevious: boolean;
   content: GameLandingHTML;
+  variants: AlgolVariantAnon[];
 };
 
 export const GameLanding: FunctionComponent<GameLandingProps> = props => {
-  const { meta, actions, graphics, hasPrevious, content } = props;
+  const { meta, actions, graphics, hasPrevious, content, variants } = props;
   const [isSessionModalOpen, openSessionModal, closeSessionModal] = useModal();
   const [isRulesModalOpen, openRulesModal, closeRulesModal] = useModal();
   const [isAboutModalOpen, openAboutModal, closeAboutModal] = useModal();
@@ -56,8 +58,8 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         actions.loadLocalSession(session);
         closeSessionModal();
       },
-      newLocalBattle: () => {
-        actions.newLocalBattle();
+      newLocalBattle: (code: string) => {
+        actions.newLocalBattle(code);
         closeSessionModal();
       },
       importSession: (str: string) => {
@@ -97,6 +99,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
           meta={meta}
           graphics={graphics}
           hasPrevious={hasPrevious}
+          variants={variants}
         />
       </Modal>
       <Modal

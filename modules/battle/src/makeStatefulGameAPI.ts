@@ -37,4 +37,6 @@ const fromBattle = (
     battle = battleAction(game, battle, action, arg);
     return getBattleUI(game, battle);
   },
+  variants: game.variants,
+  iconMap: game.iconMap,
 });

@@ -24,5 +24,6 @@ export function makeStaticGameAPI(game: AlgolGame): AlgolStaticGameAPI {
     getBattleUI: battle => getBattleUI(game, battle),
     fromFrame: frame => inflateBattleSave(game, frame),
     iconMap: game.iconMap,
+    variants: game.variants,
   };
 }

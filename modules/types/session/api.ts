@@ -3,6 +3,7 @@ import { AlgolBattle, AlgolHistoryMove } from "./battle";
 import { GameId } from "../../games/dist/list";
 import { AlgolBattleSave } from "./save";
 import { AlgolIconMap } from "..";
+import { AlgolVariantAnon } from "../gamedef";
 
 export type AlgolStatefulGameAPI = {
   gameId: GameId;
@@ -16,6 +17,8 @@ export type AlgolStatefulGameAPISession = {
     action: "endTurn" | "undo" | "mark" | "command",
     arg?: string
   ) => AlgolBattleUI;
+  variants: AlgolVariantAnon[];
+  iconMap: AlgolIconMap;
 };
 
 export type AlgolStaticGameAPI = {
@@ -30,4 +33,5 @@ export type AlgolStaticGameAPI = {
   ) => AlgolBattle;
   getBattleUI: (battle: AlgolBattle) => AlgolBattleUI;
   iconMap: AlgolIconMap;
+  variants: AlgolVariantAnon[];
 };

@@ -18,8 +18,8 @@ export type AlgolSprite = {
 };
 
 export type AlgolArrangement<Blob extends AlgolGameBlobAnon> = {
-  marks?: Position[];
-  potentialMarks?: Position[];
+  marks?: Blob["pos"][];
+  potentialMarks?: Blob["pos"][];
   setup: AlgolSetup<Blob>;
 };
 

@@ -1,15 +1,12 @@
 // File created by the stubGame command
 
 import { AlgolArrangements } from "../../../../types";
-import {
-  GekitaiPosition,
-  GekitaiUnit,
-} from "../../../../games/dist/games/gekitai";
+import { GekitaiBlob } from "../../../../games/dist/games/gekitai";
 
 // Add your arrangements in this object, and then you can refer to them
 // from the markdown files. Those references will be replaced by a
 // generated SVG when the content is written to html.
-export const arrangements: AlgolArrangements<GekitaiPosition, GekitaiUnit> = {
+export const arrangements: AlgolArrangements<GekitaiBlob> = {
   beforepush1: {
     marks: ["b2"],
     setup: {

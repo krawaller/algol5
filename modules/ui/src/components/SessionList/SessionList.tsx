@@ -5,6 +5,8 @@ import {
   AlgolLocalBattle,
   AlgolMeta,
   AlgolErrorReporter,
+  AlgolGameBlobAnon,
+  AlgolVariantAnon,
 } from "../../../../types";
 import {
   getSessionList,
@@ -21,7 +23,8 @@ export interface SessionListActions {
 type SessionListProps = {
   graphics: AlgolGameGraphics;
   actions: SessionListActions;
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
+  variants: AlgolVariantAnon[];
 };
 
 /**
@@ -31,6 +34,7 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
   actions,
   graphics,
   meta,
+  variants,
 }) => {
   const [sessionInfo, setSessionInfo] = useState<SessionInfo>({
     sessions: [],
@@ -83,6 +87,7 @@ export const SessionList: React.FunctionComponent<SessionListProps> = ({
       graphics={graphics}
       meta={meta}
       sessionInfo={sessionInfo}
+      variants={variants}
     />
   );
 };

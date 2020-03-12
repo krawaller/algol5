@@ -14,7 +14,7 @@ import {
   SessionInfo,
 } from "./SessionList.Inner";
 import { SessionLoadFail } from "../../../../local/src";
-import { AlgolLocalBattle } from "../../../../types";
+import { AlgolLocalBattle, AlgolVariantAnon } from "../../../../types";
 
 const innerActions: SessionListInnerActions = {
   loadLocalSession: save => console.log("Save", save),
@@ -22,6 +22,16 @@ const innerActions: SessionListInnerActions = {
   updateList: () => console.log("Updating list"),
   purgeErrorLines: () => console.log("Purging"),
 };
+
+const variants: AlgolVariantAnon[] = [
+  {
+    desc: "regular",
+    board: "board",
+    setup: "setup",
+    ruleset: "ruleset",
+    code: "c",
+  },
+];
 
 storiesOf("SessionList", module)
   .add("Real component, reading localStorage", () => {
@@ -43,6 +53,7 @@ storiesOf("SessionList", module)
           graphics={dataURIs[gameId]}
           actions={actions}
           meta={meta[gameId]}
+          variants={variants}
         />
       </Fragment>
     );
@@ -59,6 +70,7 @@ storiesOf("SessionList", module)
       player: 1,
       turn: 7,
       type: "normal",
+      variantCode: "c",
     };
     const fakeLoadFail: SessionLoadFail = {
       error: new Error(),
@@ -75,6 +87,7 @@ storiesOf("SessionList", module)
         meta={meta.atrium}
         graphics={dataURIs.atrium}
         sessionInfo={sessionInfo}
+        variants={variants}
       />
     );
   })
@@ -90,6 +103,7 @@ storiesOf("SessionList", module)
         meta={meta.atrium}
         graphics={dataURIs.atrium}
         sessionInfo={sessionInfo}
+        variants={variants}
       />
     );
   });

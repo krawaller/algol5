@@ -4,6 +4,7 @@ import {
   AlgolMeta,
   AlgolBattle,
   AlgolErrorReporter,
+  AlgolGameBlobAnon,
 } from "../../../../types";
 
 import css from "./BattleLanding.cssProxy";
@@ -25,7 +26,7 @@ type BattleLandingProps = {
   actions: BattleLandingActions;
   session: AlgolLocalBattle;
   battle: AlgolBattle;
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
 };
 
 export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
@@ -85,7 +86,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
       </ButtonGroup>
       <div className={css.battleLandingContent}>
         {session.updated || session.type === "imported" ? (
-          <BattleLandingOngoing session={session} />
+          <BattleLandingOngoing session={session} variant={battle.variant} />
         ) : (
           <BattleLandingNewSession meta={meta} session={session} />
         )}

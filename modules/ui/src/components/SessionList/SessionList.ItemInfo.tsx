@@ -1,18 +1,21 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolLocalBattle } from "../../../../types";
+import { AlgolLocalBattle, AlgolVariantAnon } from "../../../../types";
 import css from "./SessionList.cssProxy";
 import { SessionStatus } from "../SessionStatus";
 
 type SessionItemInfoProps = {
   session: AlgolLocalBattle;
+  variant: AlgolVariantAnon;
 };
 
 export const SessionItemInfo: FunctionComponent<SessionItemInfoProps> = ({
   session,
+  variant,
 }) => {
   return (
     <div className={css.sessionListInfo}>
-      ID: {session.id}
+      {variant.desc[0].toUpperCase()}
+      {variant.desc.slice(1)} battle ID {session.id}
       <br />
       {session.type === "fork"
         ? "Forked"

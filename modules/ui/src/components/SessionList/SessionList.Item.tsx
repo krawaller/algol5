@@ -2,7 +2,11 @@ import React, { FunctionComponent } from "react";
 
 import css from "./SessionList.cssProxy";
 import { sprites2board } from "../../../../common/sprites/sprite.sprites2board";
-import { AlgolLocalBattle, AlgolGameGraphics } from "../../../../types";
+import {
+  AlgolLocalBattle,
+  AlgolGameGraphics,
+  AlgolVariantAnon,
+} from "../../../../types";
 import { Board } from "../Board";
 import { SessionItemInfo } from "./SessionList.ItemInfo";
 
@@ -14,12 +18,13 @@ type SessionListItemProps = {
   session: AlgolLocalBattle;
   actions: SessionListItemActions;
   graphics: AlgolGameGraphics;
+  variant: AlgolVariantAnon;
 };
 
 const EMPTYARR: string[] = [];
 
 export const SessionListItem: FunctionComponent<SessionListItemProps> = props => {
-  const { session, actions, graphics } = props;
+  const { session, actions, graphics, variant } = props;
   const board = sprites2board(session.sprites);
   return (
     <div
@@ -36,7 +41,7 @@ export const SessionListItem: FunctionComponent<SessionListItemProps> = props =>
           units={board.units}
         />
       </div>
-      <SessionItemInfo session={session} />
+      <SessionItemInfo session={session} variant={variant} />
     </div>
   );
 };

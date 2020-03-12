@@ -50,7 +50,12 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
       <div className={css.localSessionDivider} />
       <ImportBattle actions={actions} />
       <div className={css.localSessionDivider} />
-      <SessionList meta={meta} graphics={graphics} actions={actions} />
+      <SessionList
+        meta={meta}
+        graphics={graphics}
+        actions={actions}
+        variants={variants}
+      />
     </div>
   );
 };

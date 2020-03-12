@@ -4,6 +4,7 @@ import {
   AlgolBattleSave,
   AlgolLocalBattle,
   AlgolMeta,
+  AlgolGameBlobAnon,
 } from "../../../../types";
 
 // TODO - just showing import for now, can't make clipboard copying to work reliably :/
@@ -15,7 +16,7 @@ import { clipboardCopy } from "../../helpers";
 import { Input } from "../Input";
 
 type ExportBattleProps = {
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
   battle: AlgolBattle;
   session: AlgolLocalBattle;
 };
@@ -25,6 +26,7 @@ const noop = () => {};
 export const ExportBattle: FunctionComponent<ExportBattleProps> = props => {
   const { meta, battle, session } = props;
   const save: AlgolBattleSave = {
+    variantCode: battle.variant.code,
     ended: Boolean(session.endedBy),
     player: session.player,
     turn: session.turn,

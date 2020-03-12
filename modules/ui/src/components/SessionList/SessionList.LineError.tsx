@@ -4,6 +4,7 @@ import {
   AlgolErrorReporter,
   decorateError,
   AlgolMeta,
+  AlgolGameBlobAnon,
 } from "../../../../types";
 import css from "./SessionList.cssProxy";
 import { Board } from "../Board";
@@ -17,7 +18,7 @@ type SessionListLineErrorProps = {
   fail: SessionLoadFail;
   graphics: AlgolGameGraphics;
   actions: SessionListLineErrorActions;
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
 };
 
 const EMPTYARR: string[] = [];

@@ -1,5 +1,5 @@
 ---
-updated: 2020-03-05
+updated: 2020-03-12
 ---
 
 {GAME} is played on a {DIM} board with the following setup:
@@ -30,6 +30,6 @@ Players may never make any of the 3 forbidden patterns:
 
 From left to right:
 
-- {UNIT:group=kings} next to friendly {UNIT:group=soldiers} iside home base
+- {UNIT:group=kings} next to friendly {UNIT:group=soldiers} inside home base
 - {UNIT:group=kings} in front of home base with 3 friendly {UNIT:group=soldiers} behind
 - {UNIT:group=kings} on left/right board edge next to friendly {UNIT:group=soldiers} in same column

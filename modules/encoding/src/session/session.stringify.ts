@@ -7,7 +7,10 @@ import { codeForSession } from "./session.codes";
 export const stringifySession = (local: AlgolLocalBattle, method: number) => {
   if (method === 0) {
     return [
-      "0" + codeForSession(local.player, local.type) + local.turn.toString(36),
+      "0" +
+        codeForSession(local.player, local.type) +
+        local.variantCode +
+        local.turn.toString(36),
       stringifyPath(local.path, 0),
       stringifySprites(local.sprites),
       stringifyTimestamp(local.created),

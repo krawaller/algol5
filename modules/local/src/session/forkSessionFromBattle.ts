@@ -8,6 +8,7 @@ export function forkSessionFromBattle(
 ): AlgolLocalBattle {
   return {
     id: newSessionId(),
+    variantCode: battle.variant.code,
     created: Date.now(),
     type: "fork",
     player: battle.player,

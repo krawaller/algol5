@@ -31,8 +31,9 @@ export const VariantSelector: FunctionComponent<VariantSelectorProps> = props =>
     <ButtonGroup noBottomMargin>
       {variants.map((v, n) => (
         <Button
+          key={v.code}
           big={n === 0}
-          onClick={() => actions.newLocalBattle(variants[n].code)}
+          onClick={() => actions.newLocalBattle(v.code)}
           onError={actions.reportError}
           controlId="new-local-session-button"
         >

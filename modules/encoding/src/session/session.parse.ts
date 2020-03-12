@@ -19,7 +19,8 @@ export const parseSession = (str: string, id: string): AlgolLocalBattle => {
     return {
       id,
       player: status[0],
-      turn: parseInt(methodCodeTurn.slice(2), 36),
+      variantCode: methodCodeTurn[2],
+      turn: parseInt(methodCodeTurn.slice(3), 36),
       type: status[1],
       path: parsePath(encodedPath, 0),
       sprites: parseSprites(encodedSprites),

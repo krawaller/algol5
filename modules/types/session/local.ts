@@ -2,6 +2,7 @@ import { AlgolSprite } from "../screenshot";
 
 export type AlgolLocalBattle = {
   id: string;
+  variantCode: string;
   created: number;
   updated?: number;
   path: number[];

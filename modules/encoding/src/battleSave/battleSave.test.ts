@@ -15,6 +15,7 @@ const tests: Test[] = [
       player: 1,
       turn: 7,
       ended: false,
+      variantCode: "p",
     },
   },
   {
@@ -24,6 +25,7 @@ const tests: Test[] = [
       player: 0,
       turn: 75,
       ended: true,
+      variantCode: "b",
     },
   },
 ];

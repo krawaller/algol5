@@ -18,6 +18,7 @@ export function makeStaticGameAPI(game: AlgolGame): AlgolStaticGameAPI {
     fromSave: save => {
       const variant = variants.find(v => v.code === save.variantCode);
       if (!variant) {
+        console.error(save);
         throw new Error(
           `Couldnt find variant with code "${save.variantCode}" when inflating save`
         );

@@ -9,6 +9,7 @@ export function newSessionFromBattle(
   return {
     id: newSessionId(),
     created: Date.now(),
+    variantCode: battle.variant.code,
     type: "normal",
     player: 1,
     turn: 1,

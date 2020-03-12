@@ -128,7 +128,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
       };
     } else if (cmnd === "fork") {
       const historyFrame = state.battle!.history[state.frame];
-      const battle = api.fromFrame(historyFrame);
+      const battle = api.fromFrame(historyFrame, state.battle!.variant.code);
       const session = forkSessionFromBattle(battle, api.iconMap);
       setLatestSessionId(api.gameId, session.id);
       writeSession(api.gameId, session);

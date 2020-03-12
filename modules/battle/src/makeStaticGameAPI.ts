@@ -16,13 +16,23 @@ export function makeStaticGameAPI(game: AlgolGame): AlgolStaticGameAPI {
       return battle;
     },
     fromSave: save => {
-      game.setBoard(boards.basic); // TODO - read variant from save
+      const variant = variants.find(v => v.code === save.variantCode);
+      if (!variant) {
+        throw new Error(
+          `Couldnt find variant with code "${save.variantCode}" when inflating save`
+        );
+      }
+      game.setBoard(boards[variant.board]);
       return inflateBattleSave(game, save);
     },
     performAction: (battle, action, arg) =>
       battleAction(game, battle, action, arg),
     getBattleUI: battle => getBattleUI(game, battle),
-    fromFrame: frame => inflateBattleSave(game, frame),
+    fromFrame: (frame, variantCode: string) =>
+      inflateBattleSave(game, {
+        ...frame,
+        variantCode,
+      }),
     iconMap: game.iconMap,
     variants: game.variants,
   };

@@ -25,7 +25,7 @@ export type AlgolStaticGameAPI = {
   gameId: GameId;
   newBattle: (code?: string) => AlgolBattle;
   fromSave: (save: AlgolBattleSave) => AlgolBattle;
-  fromFrame: (frame: AlgolHistoryMove) => AlgolBattle;
+  fromFrame: (frame: AlgolHistoryMove, code: string) => AlgolBattle;
   performAction: (
     battle: AlgolBattle,
     action: "endTurn" | "undo" | "mark" | "command",

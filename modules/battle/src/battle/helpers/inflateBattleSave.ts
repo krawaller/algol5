@@ -8,7 +8,7 @@ export const inflateBattleSave = (
   save: AlgolBattleSave
 ): AlgolBattle => {
   const actions = save.path.slice();
-  const code = game.variants[0].code; // TODO - read code from save!
+  const code = save.variantCode;
   const variant = game.variants.find(v => v.code === code);
   if (!variant) {
     throw new Error(`Couldnt find ${game.gameId} variant with code "${code}"`);

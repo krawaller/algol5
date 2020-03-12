@@ -22,7 +22,7 @@ export function runGameScripts(
       const seq = script.lines
         .reduce((mem, line) => mem.concat(line.commands), [] as string[])
         .slice(0, 5);
-      let { initialUI: ui, performAction } = api.newBattle();
+      let { initialUI: ui, performAction } = api.newBattle(script.variantCode);
       for (const action of seq) {
         ui =
           action === "endTurn"
@@ -46,7 +46,7 @@ export function runGameScriptsStatic(
         (mem, line) => mem.concat(line.commands),
         [] as string[]
       );
-      let battle = api.newBattle();
+      let battle = api.newBattle(script.variantCode);
       for (const action of seq) {
         battle =
           action === "win" || action === "endturn" || action === "endTurn"

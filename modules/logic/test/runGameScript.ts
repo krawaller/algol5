@@ -20,8 +20,9 @@ export function runGameScript(
   for (const script of scripts) {
     test(`Game - ${id} - ${script.desc}`, () => {
       const lines = script.lines;
-      const code = game.variants[0].code; // TODO - read variant code from script
-      const variant = game.variants.find(v => v.code === code);
+      const code = script.variantCode;
+      const variant =
+        game.variants.find(v => v.code === code) || game.variants[0];
       const { ruleset, board, setup } = variant;
       game.setBoard(game.boards[board]);
       let step: AlgolStep = game.newBattle(game.setups[setup], ruleset);

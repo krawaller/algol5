@@ -42,7 +42,7 @@ type TrafficlightsTurnVar = never;
 type TrafficlightsBoardName = "basic";
 type TrafficlightsSetupName = "basic";
 type TrafficlightsRulesetName = "basic";
-type TrafficlightsVariantName = "basic";
+type TrafficlightsVariantName = "regular";
 
 type TrafficlightsGrid = never;
 
@@ -60,7 +60,7 @@ type TrafficlightsPosition =
   | "d2"
   | "d3";
 
-type TrafficlightsBlob = AlgolGameBlob<
+export type TrafficlightsBlob = AlgolGameBlob<
   TrafficlightsArtifactLayer,
   TrafficlightsBoardName,
   TrafficlightsBattlePos,

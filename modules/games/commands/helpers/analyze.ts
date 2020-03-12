@@ -129,7 +129,7 @@ export default async function analyze(def: FullDefAnon | string) {
   const boardNames = Object.keys(def.boards);
   const setupNames = Object.keys(def.setups);
   const myRulesetNames = rulesetNames(def);
-  const variantNames = Object.keys(def.variants);
+  const variantNames = def.variants.map(v => v.desc);
 
   const analysis = `import { CommonLayer, FullDef, AlgolGameBlob } from "../../../types";
 
@@ -207,7 +207,7 @@ type ${capId}Position = ${boardPositions(maxHeight, maxWidth)
     .map(t => `"${t}"`)
     .join(" | ")};
 
-type ${capId}Blob = AlgolGameBlob<
+export type ${capId}Blob = AlgolGameBlob<
   ${capId}ArtifactLayer,
   ${capId}BoardName,
   ${capId}BattlePos,

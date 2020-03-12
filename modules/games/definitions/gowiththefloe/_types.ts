@@ -57,7 +57,7 @@ type GowiththefloeTurnVar = never;
 type GowiththefloeBoardName = "basic";
 type GowiththefloeSetupName = "basic";
 type GowiththefloeRulesetName = "basic";
-type GowiththefloeVariantName = "basic";
+type GowiththefloeVariantName = "regular";
 
 type GowiththefloeGrid = never;
 
@@ -127,7 +127,7 @@ type GowiththefloePosition =
   | "h7"
   | "h8";
 
-type GowiththefloeBlob = AlgolGameBlob<
+export type GowiththefloeBlob = AlgolGameBlob<
   GowiththefloeArtifactLayer,
   GowiththefloeBoardName,
   GowiththefloeBattlePos,

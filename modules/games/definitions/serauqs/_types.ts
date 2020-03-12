@@ -47,7 +47,7 @@ type SerauqsTurnVar = never;
 type SerauqsBoardName = "basic";
 type SerauqsSetupName = "basic";
 type SerauqsRulesetName = "basic";
-type SerauqsVariantName = "basic";
+type SerauqsVariantName = "regular";
 
 type SerauqsGrid = never;
 
@@ -69,7 +69,7 @@ type SerauqsPosition =
   | "d3"
   | "d4";
 
-type SerauqsBlob = AlgolGameBlob<
+export type SerauqsBlob = AlgolGameBlob<
   SerauqsArtifactLayer,
   SerauqsBoardName,
   SerauqsBattlePos,

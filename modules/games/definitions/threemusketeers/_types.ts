@@ -44,7 +44,7 @@ type ThreemusketeersTurnVar = never;
 type ThreemusketeersBoardName = "basic";
 type ThreemusketeersSetupName = "basic";
 type ThreemusketeersRulesetName = "basic";
-type ThreemusketeersVariantName = "basic";
+type ThreemusketeersVariantName = "regular";
 
 type ThreemusketeersGrid = never;
 
@@ -75,7 +75,7 @@ type ThreemusketeersPosition =
   | "e4"
   | "e5";
 
-type ThreemusketeersBlob = AlgolGameBlob<
+export type ThreemusketeersBlob = AlgolGameBlob<
   ThreemusketeersArtifactLayer,
   ThreemusketeersBoardName,
   ThreemusketeersBattlePos,

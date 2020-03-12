@@ -31,7 +31,7 @@ type OrthokonTurnVar = never;
 type OrthokonBoardName = "basic";
 type OrthokonSetupName = "basic";
 type OrthokonRulesetName = "basic";
-type OrthokonVariantName = "basic";
+type OrthokonVariantName = "regular";
 
 type OrthokonGrid = never;
 
@@ -53,7 +53,7 @@ type OrthokonPosition =
   | "d3"
   | "d4";
 
-type OrthokonBlob = AlgolGameBlob<
+export type OrthokonBlob = AlgolGameBlob<
   OrthokonArtifactLayer,
   OrthokonBoardName,
   OrthokonBattlePos,

@@ -48,7 +48,7 @@ type TransetTurnVar = never;
 type TransetBoardName = "basic";
 type TransetSetupName = "basic";
 type TransetRulesetName = "basic";
-type TransetVariantName = "basic";
+type TransetVariantName = "regular";
 
 type TransetGrid = never;
 
@@ -79,7 +79,7 @@ type TransetPosition =
   | "e4"
   | "e5";
 
-type TransetBlob = AlgolGameBlob<
+export type TransetBlob = AlgolGameBlob<
   TransetArtifactLayer,
   TransetBoardName,
   TransetBattlePos,

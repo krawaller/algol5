@@ -39,7 +39,7 @@ type DaggersTurnVar = never;
 type DaggersBoardName = "basic";
 type DaggersSetupName = "basic";
 type DaggersRulesetName = "basic";
-type DaggersVariantName = "basic";
+type DaggersVariantName = "regular";
 
 type DaggersGrid = never;
 
@@ -109,7 +109,7 @@ type DaggersPosition =
   | "h7"
   | "h8";
 
-type DaggersBlob = AlgolGameBlob<
+export type DaggersBlob = AlgolGameBlob<
   DaggersArtifactLayer,
   DaggersBoardName,
   DaggersBattlePos,

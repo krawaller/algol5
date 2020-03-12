@@ -35,7 +35,7 @@ type AriesTurnVar = never;
 type AriesBoardName = "basic";
 type AriesSetupName = "basic";
 type AriesRulesetName = "basic";
-type AriesVariantName = "basic";
+type AriesVariantName = "regular";
 
 type AriesGrid = never;
 
@@ -105,7 +105,7 @@ type AriesPosition =
   | "h7"
   | "h8";
 
-type AriesBlob = AlgolGameBlob<
+export type AriesBlob = AlgolGameBlob<
   AriesArtifactLayer,
   AriesBoardName,
   AriesBattlePos,

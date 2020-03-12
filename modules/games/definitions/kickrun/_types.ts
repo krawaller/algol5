@@ -39,7 +39,7 @@ type KickrunTurnVar = never;
 type KickrunBoardName = "basic";
 type KickrunSetupName = "basic";
 type KickrunRulesetName = "basic";
-type KickrunVariantName = "basic";
+type KickrunVariantName = "regular";
 
 type KickrunGrid = never;
 
@@ -70,7 +70,7 @@ type KickrunPosition =
   | "e4"
   | "e5";
 
-type KickrunBlob = AlgolGameBlob<
+export type KickrunBlob = AlgolGameBlob<
   KickrunArtifactLayer,
   KickrunBoardName,
   KickrunBattlePos,

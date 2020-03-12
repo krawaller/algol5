@@ -35,7 +35,7 @@ type AtriumTurnVar = never;
 type AtriumBoardName = "basic";
 type AtriumSetupName = "basic";
 type AtriumRulesetName = "basic";
-type AtriumVariantName = "basic";
+type AtriumVariantName = "regular";
 
 type AtriumGrid = never;
 
@@ -66,7 +66,7 @@ type AtriumPosition =
   | "e4"
   | "e5";
 
-type AtriumBlob = AlgolGameBlob<
+export type AtriumBlob = AlgolGameBlob<
   AtriumArtifactLayer,
   AtriumBoardName,
   AtriumBattlePos,

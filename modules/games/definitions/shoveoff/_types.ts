@@ -64,7 +64,7 @@ type ShoveoffTurnVar = never;
 type ShoveoffBoardName = "basic";
 type ShoveoffSetupName = "basic";
 type ShoveoffRulesetName = "basic";
-type ShoveoffVariantName = "basic";
+type ShoveoffVariantName = "regular";
 
 type ShoveoffGrid = never;
 
@@ -86,7 +86,7 @@ type ShoveoffPosition =
   | "d3"
   | "d4";
 
-type ShoveoffBlob = AlgolGameBlob<
+export type ShoveoffBlob = AlgolGameBlob<
   ShoveoffArtifactLayer,
   ShoveoffBoardName,
   ShoveoffBattlePos,

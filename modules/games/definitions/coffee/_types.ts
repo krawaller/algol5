@@ -37,7 +37,7 @@ type CoffeeTurnVar = never;
 type CoffeeBoardName = "basic";
 type CoffeeSetupName = "basic";
 type CoffeeRulesetName = "basic";
-type CoffeeVariantName = "basic";
+type CoffeeVariantName = "regular";
 
 type CoffeeGrid = never;
 
@@ -68,7 +68,7 @@ type CoffeePosition =
   | "e4"
   | "e5";
 
-type CoffeeBlob = AlgolGameBlob<
+export type CoffeeBlob = AlgolGameBlob<
   CoffeeArtifactLayer,
   CoffeeBoardName,
   CoffeeBattlePos,

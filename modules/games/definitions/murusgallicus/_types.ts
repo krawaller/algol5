@@ -61,8 +61,8 @@ type MurusgallicusTurnVar = never;
 
 type MurusgallicusBoardName = "basic";
 type MurusgallicusSetupName = "basic";
-type MurusgallicusRulesetName = "basic" | "advanced";
-type MurusgallicusVariantName = "basic" | "advanced";
+type MurusgallicusRulesetName = "advanced" | "basic";
+type MurusgallicusVariantName = "advanced" | "regular";
 
 type MurusgallicusGrid = never;
 
@@ -124,7 +124,7 @@ type MurusgallicusPosition =
   | "h6"
   | "h7";
 
-type MurusgallicusBlob = AlgolGameBlob<
+export type MurusgallicusBlob = AlgolGameBlob<
   MurusgallicusArtifactLayer,
   MurusgallicusBoardName,
   MurusgallicusBattlePos,

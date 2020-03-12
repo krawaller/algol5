@@ -1,15 +1,12 @@
 // File created by the stubGame command
 
 import { AlgolArrangements } from "../../../../types";
-import {
-  SerauqsPosition,
-  SerauqsUnit,
-} from "../../../../games/dist/games/serauqs";
+import { SerauqsBlob } from "../../../../games/dist/games/serauqs";
 
 // Add your arrangements in this object, and then you can refer to them
 // from the markdown files. Those references will be replaced by a
 // generated SVG when the content is written to html.
-export const arrangements: AlgolArrangements<SerauqsPosition, SerauqsUnit> = {
+export const arrangements: AlgolArrangements<SerauqsBlob> = {
   cornerwin: {
     setup: {
       soldiers: {

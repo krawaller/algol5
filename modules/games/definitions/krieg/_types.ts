@@ -51,7 +51,7 @@ type KriegTurnVar = never;
 type KriegBoardName = "basic";
 type KriegSetupName = "basic";
 type KriegRulesetName = "basic";
-type KriegVariantName = "basic";
+type KriegVariantName = "regular";
 
 type KriegGrid = never;
 
@@ -73,7 +73,7 @@ type KriegPosition =
   | "d3"
   | "d4";
 
-type KriegBlob = AlgolGameBlob<
+export type KriegBlob = AlgolGameBlob<
   KriegArtifactLayer,
   KriegBoardName,
   KriegBattlePos,

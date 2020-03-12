@@ -41,7 +41,7 @@ type DuploTurnVar = never;
 type DuploBoardName = "basic";
 type DuploSetupName = "basic";
 type DuploRulesetName = "basic";
-type DuploVariantName = "basic";
+type DuploVariantName = "regular";
 
 type DuploGrid = never;
 
@@ -111,7 +111,7 @@ type DuploPosition =
   | "h7"
   | "h8";
 
-type DuploBlob = AlgolGameBlob<
+export type DuploBlob = AlgolGameBlob<
   DuploArtifactLayer,
   DuploBoardName,
   DuploBattlePos,

@@ -43,7 +43,7 @@ type UglyduckTurnVar = never;
 type UglyduckBoardName = "basic";
 type UglyduckSetupName = "basic";
 type UglyduckRulesetName = "basic";
-type UglyduckVariantName = "basic";
+type UglyduckVariantName = "regular";
 
 type UglyduckGrid = never;
 
@@ -74,7 +74,7 @@ type UglyduckPosition =
   | "e4"
   | "e5";
 
-type UglyduckBlob = AlgolGameBlob<
+export type UglyduckBlob = AlgolGameBlob<
   UglyduckArtifactLayer,
   UglyduckBoardName,
   UglyduckBattlePos,

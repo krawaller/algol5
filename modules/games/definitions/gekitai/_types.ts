@@ -31,7 +31,7 @@ type GekitaiTurnVar = never;
 type GekitaiBoardName = "basic";
 type GekitaiSetupName = "basic";
 type GekitaiRulesetName = "basic";
-type GekitaiVariantName = "basic";
+type GekitaiVariantName = "regular";
 
 type GekitaiGrid = never;
 
@@ -73,7 +73,7 @@ type GekitaiPosition =
   | "f5"
   | "f6";
 
-type GekitaiBlob = AlgolGameBlob<
+export type GekitaiBlob = AlgolGameBlob<
   GekitaiArtifactLayer,
   GekitaiBoardName,
   GekitaiBattlePos,

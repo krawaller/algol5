@@ -43,7 +43,7 @@ type ChameleonTurnVar = never;
 type ChameleonBoardName = "basic";
 type ChameleonSetupName = "basic";
 type ChameleonRulesetName = "basic";
-type ChameleonVariantName = "basic";
+type ChameleonVariantName = "regular";
 
 type ChameleonGrid = never;
 
@@ -74,7 +74,7 @@ type ChameleonPosition =
   | "e4"
   | "e5";
 
-type ChameleonBlob = AlgolGameBlob<
+export type ChameleonBlob = AlgolGameBlob<
   ChameleonArtifactLayer,
   ChameleonBoardName,
   ChameleonBattlePos,

@@ -35,15 +35,12 @@ Soon we will show the rules for {GAME} here! In the meantime you can read them {
       `// File created by the stubGame command
 
 import { AlgolArrangements } from "../../../../types";
-import {
-  ${cap}Position,
-  ${cap}Unit,
-} from "../../../../games/dist/games/${gameId}";
+import { ${cap}Blob } from "../../../../games/dist/games/${gameId}";
 
 // Add your arrangements in this object, and then you can refer to them
 // from the markdown files. Those references will be replaced by a
 // generated SVG when the content is written to html.
-export const arrangements: AlgolArrangements<${cap}Position, ${cap}Unit> = {};`
+export const arrangements: AlgolArrangements<${cap}Blob> = {};`
     );
   }
 };

@@ -36,7 +36,7 @@ type JostleTurnVar = never;
 type JostleBoardName = "basic";
 type JostleSetupName = "basic";
 type JostleRulesetName = "basic";
-type JostleVariantName = "basic";
+type JostleVariantName = "regular";
 
 type JostleGrid = never;
 
@@ -142,7 +142,7 @@ type JostlePosition =
   | "j8"
   | "j9";
 
-type JostleBlob = AlgolGameBlob<
+export type JostleBlob = AlgolGameBlob<
   JostleArtifactLayer,
   JostleBoardName,
   JostleBattlePos,

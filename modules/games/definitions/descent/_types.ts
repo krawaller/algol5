@@ -43,7 +43,7 @@ type DescentTurnVar = "heightto" | "heightfrom";
 type DescentBoardName = "basic";
 type DescentSetupName = "basic";
 type DescentRulesetName = "basic";
-type DescentVariantName = "basic";
+type DescentVariantName = "regular";
 
 type DescentGrid = never;
 
@@ -65,7 +65,7 @@ type DescentPosition =
   | "d3"
   | "d4";
 
-type DescentBlob = AlgolGameBlob<
+export type DescentBlob = AlgolGameBlob<
   DescentArtifactLayer,
   DescentBoardName,
   DescentBattlePos,

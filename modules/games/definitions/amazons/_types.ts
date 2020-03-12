@@ -35,7 +35,7 @@ type AmazonsTurnVar = never;
 type AmazonsBoardName = "basic";
 type AmazonsSetupName = "basic";
 type AmazonsRulesetName = "basic";
-type AmazonsVariantName = "basic";
+type AmazonsVariantName = "regular";
 
 type AmazonsGrid = never;
 
@@ -141,7 +141,7 @@ type AmazonsPosition =
   | "j8"
   | "j9";
 
-type AmazonsBlob = AlgolGameBlob<
+export type AmazonsBlob = AlgolGameBlob<
   AmazonsArtifactLayer,
   AmazonsBoardName,
   AmazonsBattlePos,

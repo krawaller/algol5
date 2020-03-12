@@ -31,7 +31,7 @@ type MomentumTurnVar = never;
 type MomentumBoardName = "basic";
 type MomentumSetupName = "basic";
 type MomentumRulesetName = "basic";
-type MomentumVariantName = "basic";
+type MomentumVariantName = "regular";
 
 type MomentumGrid = never;
 
@@ -86,7 +86,7 @@ type MomentumPosition =
   | "g6"
   | "g7";
 
-type MomentumBlob = AlgolGameBlob<
+export type MomentumBlob = AlgolGameBlob<
   MomentumArtifactLayer,
   MomentumBoardName,
   MomentumBattlePos,

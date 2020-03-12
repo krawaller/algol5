@@ -62,7 +62,7 @@ type GogolTurnVar = never;
 type GogolBoardName = "basic";
 type GogolSetupName = "basic";
 type GogolRulesetName = "basic";
-type GogolVariantName = "basic";
+type GogolVariantName = "regular";
 
 type GogolGrid = never;
 
@@ -132,7 +132,7 @@ type GogolPosition =
   | "h7"
   | "h8";
 
-type GogolBlob = AlgolGameBlob<
+export type GogolBlob = AlgolGameBlob<
   GogolArtifactLayer,
   GogolBoardName,
   GogolBattlePos,

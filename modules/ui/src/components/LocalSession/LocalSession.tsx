@@ -6,13 +6,15 @@ import {
   AlgolMeta,
   AlgolErrorReporter,
   AlgolGameBlobAnon,
+  AlgolVariantAnon,
 } from "../../../../types";
 import { Button } from "../Button";
 import { SessionList } from "../SessionList";
 import { ImportBattle } from "../ImportBattle";
+import { VariantSelector } from "./LocalSession.VariantSelector";
 
 export interface LocalSessionActions {
-  newLocalBattle: () => void;
+  newLocalBattle: (code: string) => void;
   loadLocalSession: (session: AlgolLocalBattle) => void;
   importSession: (str: string) => void;
   continuePreviousSession: () => void;
@@ -24,20 +26,14 @@ type LocalSessionProps = {
   actions: LocalSessionActions;
   hasPrevious: boolean;
   meta: AlgolMeta<AlgolGameBlobAnon>;
+  variants: AlgolVariantAnon[];
 };
 
 export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
-  const { actions, meta, graphics, hasPrevious } = props;
+  const { actions, meta, graphics, hasPrevious, variants } = props;
   return (
     <div className={css.localSession}>
-      <Button
-        big
-        onClick={actions.newLocalBattle}
-        onError={actions.reportError}
-        controlId="new-local-session-button"
-      >
-        New local hotseat session
-      </Button>
+      <VariantSelector variants={variants} actions={actions} />
       <div className={css.localSessionDivider} />
       <Button
         disabled={!hasPrevious && "No previous battle found for this game."}
@@ -54,7 +50,12 @@ export const LocalSession: FunctionComponent<LocalSessionProps> = props => {
       <div className={css.localSessionDivider} />
       <ImportBattle actions={actions} />
       <div className={css.localSessionDivider} />
-      <SessionList meta={meta} graphics={graphics} actions={actions} />
+      <SessionList
+        meta={meta}
+        graphics={graphics}
+        actions={actions}
+        variants={variants}
+      />
     </div>
   );
 };

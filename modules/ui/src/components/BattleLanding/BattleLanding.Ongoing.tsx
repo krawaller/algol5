@@ -1,17 +1,18 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolLocalBattle } from "../../../../types";
+import { AlgolLocalBattle, AlgolVariantAnon } from "../../../../types";
 import { SessionStatus } from "../SessionStatus";
 
 type BattleLandingOngoing = {
   session: AlgolLocalBattle;
+  variant: AlgolVariantAnon;
 };
 
 export const BattleLandingOngoing: FunctionComponent<BattleLandingOngoing> = props => {
-  const { session } = props;
+  const { session, variant } = props;
   return (
     <Fragment>
       <div>
-        Session ID <code>{session.id}</code>,{" "}
+        Session ID <code>{session.id}</code>, {variant.desc},{" "}
         {session.type === "normal"
           ? "created"
           : session.type === "fork"

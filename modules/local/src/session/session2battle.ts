@@ -9,4 +9,5 @@ export const session2battle = (
     player: session.player,
     turn: session.turn,
     path: session.path,
+    variantCode: session.variantCode,
   });

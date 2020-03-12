@@ -17,9 +17,9 @@ export function runGameScripts(
   api: AlgolStatefulGameAPI,
   scripts: AlgolGameTestSuite<AlgolGameBlobAnon>
 ) {
-  for (const scriptName in scripts) {
-    test(`Running ${gameId} ${scriptName} stateful`, () => {
-      const seq = scripts[scriptName]
+  for (const script of scripts) {
+    test(`Running ${gameId} ${script.desc} stateful`, () => {
+      const seq = script.lines
         .reduce((mem, line) => mem.concat(line.commands), [] as string[])
         .slice(0, 5);
       let { initialUI: ui, performAction } = api.newBattle();
@@ -40,9 +40,9 @@ export function runGameScriptsStatic(
   api: AlgolStaticGameAPI,
   scripts: AlgolGameTestSuite<AlgolGameBlobAnon>
 ) {
-  for (const scriptName in scripts) {
-    test(`Running ${gameId} ${scriptName} static`, () => {
-      const seq = scripts[scriptName].reduce(
+  for (const script of scripts) {
+    test(`Running ${gameId} ${script.desc} static`, () => {
+      const seq = script.lines.reduce(
         (mem, line) => mem.concat(line.commands),
         [] as string[]
       );
@@ -62,7 +62,7 @@ export function runGameScriptsStatic(
         const inflatedBattle = api.fromSave(save);
         expect(battle).toEqual(inflatedBattle);
       }
-      const lastLine = scripts[scriptName].slice(-1)[0];
+      const lastLine = script.lines.slice(-1)[0];
       if (lastLine.endedBy) {
         expect(battle.gameEndedBy).toEqual(lastLine.endedBy);
       }

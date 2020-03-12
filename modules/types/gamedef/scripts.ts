@@ -12,6 +12,12 @@ export type Test<Blob extends AlgolGameBlobAnon> = [
   string,
   AlgolScriptLine<Blob>[]
 ];
-export type AlgolGameTestSuite<Blob extends AlgolGameBlobAnon> = {
-  [desc: string]: AlgolScriptLine<Blob>[];
+export type AlgolGameTestSuite<Blob extends AlgolGameBlobAnon> = AlgolGameTest<
+  Blob
+>[];
+
+export type AlgolGameTest<Blob extends AlgolGameBlobAnon> = {
+  desc: string;
+  variantCode?: string;
+  lines: AlgolScriptLine<Blob>[];
 };

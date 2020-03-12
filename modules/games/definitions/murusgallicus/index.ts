@@ -27,7 +27,7 @@ const murusgallicusDefinition: MurusgallicusDefinition = {
   performance: murusgallicusPerformance,
   flow: murusgallicusFlow,
   scripts: murusgallicusScripts,
-  variants: murusgallicusVariantsBook
+  variants: murusgallicusVariantsBook,
 };
 
 export default murusgallicusDefinition;

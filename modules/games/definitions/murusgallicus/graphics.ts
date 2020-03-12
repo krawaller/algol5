@@ -7,7 +7,7 @@ import { MurusgallicusDefinition } from "./_types";
 
 const murusgallicusGraphics: MurusgallicusDefinition["graphics"] = {
   tiles: { homerow: "playercolour" },
-  icons: { towers: "rook", walls: "pawn" }
+  icons: { towers: "rook", walls: "pawn", catapults: "queen" },
 };
 
 export default murusgallicusGraphics;

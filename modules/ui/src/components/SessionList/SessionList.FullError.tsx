@@ -4,6 +4,7 @@ import {
   AlgolErrorReporter,
   decorateError,
   AlgolMeta,
+  AlgolGameBlobAnon,
 } from "../../../../types";
 import css from "./SessionList.cssProxy";
 import { ButtonGroup } from "../ButtonGroup";
@@ -18,7 +19,7 @@ interface SessionListFullErrorActions {
 type SessionListFullErrorProps = {
   error: AlgolError;
   actions: SessionListFullErrorActions;
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
 };
 
 export const SessionListFullError: FunctionComponent<SessionListFullErrorProps> = ({

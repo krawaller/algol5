@@ -5,9 +5,14 @@ type MurusgallicusBoardHeight = 7;
 type MurusgallicusBoardWidth = 8;
 
 type MurusgallicusTerrain = "homerow";
-type MurusgallicusUnit = "towers" | "walls";
-type MurusgallicusMark = "selecttower" | "selectmove" | "selectcrush";
-type MurusgallicusCommand = "move" | "crush";
+type MurusgallicusUnit = "towers" | "walls" | "catapults";
+type MurusgallicusMark =
+  | "selecttower"
+  | "selectmove"
+  | "selectcrush"
+  | "selectcatapult"
+  | "selectfire";
+type MurusgallicusCommand = "move" | "crush" | "sacrifice" | "fire";
 type MurusgallicusPhaseCommand = never;
 type MurusgallicusPhase = "startTurn" | MurusgallicusMark;
 type MurusgallicusUnitLayer =
@@ -22,15 +27,22 @@ type MurusgallicusUnitLayer =
   | "walls"
   | "mywalls"
   | "oppwalls"
-  | "neutralwalls";
+  | "neutralwalls"
+  | "catapults"
+  | "mycatapults"
+  | "oppcatapults"
+  | "neutralcatapults";
 type MurusgallicusGenerator =
+  | "findfiretargets"
   | "findmovetargets"
   | "findmoveresults"
   | "findcrushtargets";
 type MurusgallicusArtifactLayer =
+  | "firetargets"
   | "movetargets"
   | "madetowers"
   | "madewalls"
+  | "madecatapults"
   | "crushtargets";
 type MurusgallicusTerrainLayer =
   | "homerow"
@@ -49,8 +61,8 @@ type MurusgallicusTurnVar = never;
 
 type MurusgallicusBoardName = "basic";
 type MurusgallicusSetupName = "basic";
-type MurusgallicusRulesetName = "basic";
-type MurusgallicusVariantName = "basic";
+type MurusgallicusRulesetName = "basic" | "advanced";
+type MurusgallicusVariantName = "basic" | "advanced";
 
 type MurusgallicusGrid = never;
 

@@ -17,9 +17,9 @@ export function runGameScript(
   scripts: AlgolGameTestSuite<AlgolGameBlobAnon>,
   debug?: boolean
 ) {
-  for (const scriptName in scripts) {
-    test(`Game - ${id} - ${scriptName}`, () => {
-      const lines = scripts[scriptName];
+  for (const script of scripts) {
+    test(`Game - ${id} - ${script.desc}`, () => {
+      const lines = script.lines;
       const code = game.variants[0].code; // TODO - read variant code from script
       const variant = game.variants.find(v => v.code === code);
       const { ruleset, board, setup } = variant;

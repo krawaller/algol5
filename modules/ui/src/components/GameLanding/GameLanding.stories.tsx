@@ -6,12 +6,13 @@ import { GameLanding, GameLandingActions } from ".";
 import { GameId, list } from "../../../../games/dist/list";
 import meta from "../../../../games/dist/meta";
 import dataURIs from "../../../../graphics/dist/svgDataURIs";
+import { AlgolVariantAnon } from "../../../../types";
 
 storiesOf("GameLanding", module).add("init game", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   const hasPrevious = boolean("Previous battle", false);
   const actions: GameLandingActions = {
-    newLocalBattle: () => console.log("new battle"),
+    newLocalBattle: (code: string) => console.log("new battle", code),
     loadLocalSession: save => console.log("loading save", save),
     navTo: path => console.log("navigating to", path),
     toBattleLobby: () => console.log("to battle lobby"),
@@ -31,6 +32,15 @@ storiesOf("GameLanding", module).add("init game", () => {
       html: "rules for " + gameId + " would be here",
     },
   };
+  const variants: AlgolVariantAnon[] = [
+    {
+      board: "regular",
+      code: "x",
+      desc: "regular",
+      ruleset: "regular",
+      setup: "regular",
+    },
+  ];
   return (
     <GameLanding
       content={content}
@@ -39,6 +49,7 @@ storiesOf("GameLanding", module).add("init game", () => {
       graphics={dataURIs[gameId]}
       actions={actions}
       hasPrevious={hasPrevious}
+      variants={variants}
     />
   );
 });

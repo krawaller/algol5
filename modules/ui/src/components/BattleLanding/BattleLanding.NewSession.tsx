@@ -1,9 +1,13 @@
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolLocalBattle, AlgolMeta } from "../../../../types";
+import {
+  AlgolLocalBattle,
+  AlgolMeta,
+  AlgolGameBlobAnon,
+} from "../../../../types";
 
 type BattleLandingNewSession = {
   session: AlgolLocalBattle;
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
 };
 
 export const BattleLandingNewSession: FunctionComponent<BattleLandingNewSession> = props => {

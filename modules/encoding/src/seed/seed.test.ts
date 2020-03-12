@@ -9,6 +9,7 @@ describe("the seed encoding", () => {
     path: [1, 2, 3, 4, 5, 6],
     player: 1,
     turn: 27,
+    variantCode: "w",
   };
   const gameId: GameId = "chameleon";
   it("handles regular case", () => {

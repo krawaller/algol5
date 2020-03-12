@@ -5,4 +5,5 @@ export const makeBattleSave = (battle: AlgolBattle): AlgolBattleSave => ({
   turn: battle.turnNumber,
   path: battle.path,
   ended: Boolean(battle.gameEndedBy),
+  variantCode: battle.variant.code,
 });

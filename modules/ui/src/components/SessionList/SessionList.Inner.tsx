@@ -7,6 +7,8 @@ import {
   AlgolMeta,
   AlgolError,
   AlgolErrorReporter,
+  AlgolGameBlobAnon,
+  AlgolVariantAnon,
 } from "../../../../types";
 import { SessionOrFail, isSessionLoadFail } from "../../../../local/src";
 import { SessionListFullError } from "./SessionList.FullError";
@@ -25,8 +27,9 @@ export interface SessionListInnerActions {
 type SessionListInnerProps = {
   graphics: AlgolGameGraphics;
   actions: SessionListInnerActions;
-  meta: AlgolMeta<string, string>;
+  meta: AlgolMeta<AlgolGameBlobAnon>;
   sessionInfo: SessionInfo;
+  variants: AlgolVariantAnon[];
 };
 
 export type SessionInfo = {
@@ -40,6 +43,7 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
   graphics,
   meta,
   sessionInfo,
+  variants,
 }) => {
   if (sessionInfo.status === "initial") {
     return null;
@@ -83,6 +87,7 @@ export const SessionListInner: React.FunctionComponent<SessionListInnerProps> = 
               session={session}
               graphics={graphics}
               actions={actions}
+              variant={variants.find(v => v.code === session.variantCode)!}
             />
           );
         })

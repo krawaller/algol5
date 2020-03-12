@@ -2,4 +2,4 @@
 updated: 2020-02-08
 ---
 
-{GAME}! Topple your towers in a battle of wits where the forces stay balanced throughout the game. More yabber about the game to come!
+Murus Gallicus Advanced! More Murus Gallicus - now with catapults too!. More yabber about the game to come!

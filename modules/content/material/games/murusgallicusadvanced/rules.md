@@ -1,5 +1,0 @@
----
-updated: 2020-02-08
----
-
-Soon we will show the rules for Murus Gallicus Advanced here! In the meantime you can read them {EXTLINK:url=https://boardgamegeek.com/thread/844020/advanced-murus-gallicus,text=here}.

@@ -7,9 +7,22 @@ in the future.
 */
 
 import React, { FunctionComponent } from "react";
+import classNames from "classnames";
 import css from "./ButtonGroup.cssProxy";
 
-export const ButtonGroup: FunctionComponent = props => {
-  const { children } = props;
-  return <div className={css.buttonGroupContainer}>{children}</div>;
+type ButtonGroupProps = {
+  noBottomMargin?: boolean;
+};
+
+export const ButtonGroup: FunctionComponent<ButtonGroupProps> = props => {
+  const { children, noBottomMargin } = props;
+  return (
+    <div
+      className={classNames(css.buttonGroupContainer, {
+        [css.buttonGroupContainerNoBottomMargin]: noBottomMargin,
+      })}
+    >
+      {children}
+    </div>
+  );
 };

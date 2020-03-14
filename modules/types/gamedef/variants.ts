@@ -1,4 +1,5 @@
 import { AlgolGameBlobAnon } from "../blob";
+import { AlgolArrangement } from "../screenshot";
 
 export type AlgolVariant<Blob extends AlgolGameBlobAnon> = {
   ruleset: Blob["ruleset"];
@@ -6,6 +7,7 @@ export type AlgolVariant<Blob extends AlgolGameBlobAnon> = {
   board: Blob["board"];
   desc: string;
   code: string;
+  arr?: AlgolArrangement<Blob>;
 };
 
 export type AlgolVariantAnon = AlgolVariant<AlgolGameBlobAnon>;

@@ -29,9 +29,9 @@ export const Game = () => {
     <Fragment>
       <Head>
         <meta property="og:site_name" content="Chessicals"/>
-        <meta propert="og:image" content="/images/games/${gameId}/${gameId}_${def.variants[0].code}_active.svg"/>
-        <meta propert="og:title" content="Play ${def.meta.name} online"/>
-        <meta propert="og:description" content="Play the abstract board game ${def.meta.name} at Chessicals! ${def.meta.tagline}"/>
+        <meta property="og:image" content="/images/games/${gameId}/${gameId}_${def.variants[0].code}_active.svg"/>
+        <meta property="og:title" content="Play ${def.meta.name} online"/>
+        <meta property="og:description" content="Play the abstract board game ${def.meta.name} at Chessicals! ${def.meta.tagline}"/>
         <title>{meta.name}</title>
         {preloadTags}
       </Head>

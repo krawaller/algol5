@@ -8,6 +8,8 @@ const murusgallicusVariantBook: MurusgallicusDefinition["variants"] = [
     desc: "regular",
     code: "x",
     arr: {
+      marks: ["c3"],
+      potentialMarks: ["e3", "a5", "e5"],
       setup: {
         towers: {
           "1": ["e1", "g1", "h1", "b2", "c2", "b3", "c3"],
@@ -27,6 +29,8 @@ const murusgallicusVariantBook: MurusgallicusDefinition["variants"] = [
     desc: "advanced",
     code: "k",
     arr: {
+      marks: ["c3"],
+      potentialMarks: ["a3", "a5", "c5", "e5", "c6", "f6"],
       setup: {
         towers: {
           "1": ["g1", "d3", "c4"],

@@ -8,6 +8,8 @@ const threemusketeersVariantBook: ThreemusketeersDefinition["variants"] = [
     desc: "regular",
     code: "t",
     arr: {
+      marks: ["c3"],
+      potentialMarks: ["c2", "d3", "c4"],
       setup: {
         pawns: {
           "2": [

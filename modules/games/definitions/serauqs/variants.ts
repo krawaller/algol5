@@ -8,6 +8,8 @@ const serauqsVariantBook: SerauqsDefinition["variants"] = [
     desc: "regular",
     code: "c",
     arr: {
+      marks: ["b3"],
+      potentialMarks: ["a2", "c2", "b4", "c4"],
       setup: {
         soldiers: {
           "1": ["b1", "a3", "b3"],

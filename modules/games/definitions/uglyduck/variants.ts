@@ -8,6 +8,8 @@ const uglyduckVariantBook: UglyduckDefinition["variants"] = [
     desc: "regular",
     code: "y",
     arr: {
+      marks: ["b4"],
+      potentialMarks: ["a3", "c3"],
       setup: {
         soldiers: {
           "1": ["c1", "d1", "b2", "b3"],

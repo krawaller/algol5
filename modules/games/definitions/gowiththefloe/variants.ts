@@ -8,6 +8,8 @@ const gowiththefloeVariantBook: GowiththefloeDefinition["variants"] = [
     desc: "regular",
     code: "s",
     arr: {
+      marks: ["c7"],
+      potentialMarks: ["a5", "c5", "e5", "c6", "d6", "c8", "d8"],
       setup: {
         holes: {
           "0": [

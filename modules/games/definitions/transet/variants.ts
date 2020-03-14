@@ -8,6 +8,8 @@ const transetVariantBook: TransetDefinition["variants"] = [
     desc: "regular",
     code: "r",
     arr: {
+      marks: ["c5"],
+      potentialMarks: ["d3", "a4", "b4", "c4", "d4", "b5"],
       setup: {
         piokers: {
           "1": ["b1", "e2"],

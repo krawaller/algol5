@@ -8,6 +8,26 @@ const amazonsVariantBook: AmazonsDefinition["variants"] = [
     desc: "regular",
     code: "f",
     arr: {
+      marks: ["j4"],
+      potentialMarks: [
+        "g1",
+        "j1",
+        "h2",
+        "j2",
+        "i3",
+        "j3",
+        "i4",
+        "i5",
+        "j5",
+        "h6",
+        "j6",
+        "g7",
+        "j7",
+        "f8",
+        "j8",
+        "j9",
+        "j10",
+      ],
       setup: {
         fires: {
           "0": [

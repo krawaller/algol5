@@ -8,6 +8,8 @@ const ariesVariantBook: AriesDefinition["variants"] = [
     desc: "regular",
     code: "e",
     arr: {
+      marks: ["c7"],
+      potentialMarks: ["c4", "c5", "c6", "a7", "b7", "d7", "e7", "c8"],
       setup: {
         soldiers: {
           "1": ["a1", "b1", "a2", "a3", "c3", "a4", "b4", "c7", "d8"],

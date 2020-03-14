@@ -8,6 +8,8 @@ const kriegVariantBook: KriegDefinition["variants"] = [
     desc: "regular",
     code: "j",
     arr: {
+      marks: ["a3"],
+      potentialMarks: ["a2", "a4"],
       setup: {
         notfrozens: {
           "1": ["a3", "c3", "b4"],

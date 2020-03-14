@@ -8,6 +8,8 @@ const shoveoffVariantBook: ShoveoffDefinition["variants"] = [
     desc: "regular",
     code: "a",
     arr: {
+      marks: [],
+      potentialMarks: ["a1", "c1", "d1", "d2", "a3", "a4", "b4", "c4", "d4"],
       setup: {
         soldiers: {
           "0": ["c1", "a2", "b2", "d3", "a4", "c4"],

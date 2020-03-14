@@ -8,6 +8,8 @@ const jostleVariantBook: JostleDefinition["variants"] = [
     desc: "regular",
     code: "w",
     arr: {
+      marks: [],
+      potentialMarks: ["f3", "h5", "c6", "g6", "i6", "e8"],
       setup: {
         checkers: {
           "1": [

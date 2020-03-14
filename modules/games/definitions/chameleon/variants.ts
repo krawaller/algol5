@@ -8,6 +8,19 @@ const chameleonVariantBook: ChameleonDefinition["variants"] = [
     desc: "regular",
     code: "w",
     arr: {
+      marks: ["d4"],
+      potentialMarks: [
+        "a1",
+        "b2",
+        "c3",
+        "d3",
+        "e3",
+        "c4",
+        "e4",
+        "c5",
+        "d5",
+        "e5",
+      ],
       setup: {
         knights: {
           "1": ["a1", "c4"],

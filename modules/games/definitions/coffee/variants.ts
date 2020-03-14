@@ -9,7 +9,7 @@ const coffeeVariantBook: CoffeeDefinition["variants"] = [
     code: "z",
     arr: {
       marks: [],
-      potentialMarks: [],
+      potentialMarks: ["b2", "b3", "b4", "b5"],
       setup: {
         soldiers: {
           "0": ["b2", "b3", "b4", "b5"],

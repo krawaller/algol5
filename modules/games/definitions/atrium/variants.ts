@@ -8,6 +8,8 @@ const atriumVariantBook: AtriumDefinition["variants"] = [
     desc: "regular",
     code: "x",
     arr: {
+      marks: ["b2"],
+      potentialMarks: ["a2", "c2"],
       setup: {
         kings: {
           "1": ["b2", "d2", "c4"],

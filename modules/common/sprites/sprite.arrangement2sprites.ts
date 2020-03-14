@@ -1,9 +1,14 @@
-import { AlgolSprite, AlgolArrangement, AlgolIconMap } from "../../types";
+import {
+  AlgolSprite,
+  AlgolArrangement,
+  AlgolIconMap,
+  AlgolGameBlobAnon,
+} from "../../types";
 import { setup2army } from "../units";
 import { board2sprites } from "./sprite.board2sprites";
 
 type Arrangement2spritesOpts = {
-  arrangement: AlgolArrangement;
+  arrangement: AlgolArrangement<AlgolGameBlobAnon>;
   iconMap: AlgolIconMap;
 };
 

@@ -1,10 +1,11 @@
 {
   "scripts": {
-    "robot": "npm run prep && npm run build && npm run export",
+    "robot": "npm run prep && npm run build && npm run export && npm run renderActionShots",
     "clean": "rm -rf dist; mkdir dist; rm -rf .next; rm -rf public; mkdir public;",
-    "makeGamePages": "node ./commands/makeGamePages",
+    "makeGamePages": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/next/commands/makeGamePages",
     "importGameImages": "node ./commands/importGameImages",
     "importNewsImages": "node ./commands/importNewsImages",
+    "renderActionShots": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/next/commands/renderActionShots",
     "getResources": "rm -rf ./public; mkdir public; npm run getUiCSS; npm run getStatic",
     "getUiCSS": "cp ../ui/dist/styles.css public/components.css",
     "getStatic": "cp -a ../ui/src/static/. ./public",

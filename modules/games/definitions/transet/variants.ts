@@ -7,6 +7,22 @@ const transetVariantBook: TransetDefinition["variants"] = [
     setup: "basic",
     desc: "regular",
     code: "r",
+    arr: {
+      setup: {
+        piokers: {
+          "1": ["b1", "e2"],
+          "2": ["d3", "b5"],
+        },
+        pinets: {
+          "1": ["e1", "a2"],
+          "2": ["a4", "e5"],
+        },
+        piases: {
+          "1": ["c3"],
+          "2": ["c5"],
+        },
+      },
+    },
   },
 ];
 

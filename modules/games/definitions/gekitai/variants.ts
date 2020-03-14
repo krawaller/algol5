@@ -7,6 +7,14 @@ const gekitaiVariantBook: GekitaiDefinition["variants"] = [
     setup: "basic",
     desc: "regular",
     code: "u",
+    arr: {
+      setup: {
+        markers: {
+          "1": ["a1", "b2", "d2", "d4"],
+          "2": ["a2", "f4", "f5", "b6"],
+        },
+      },
+    },
   },
 ];
 

@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs-extra");
 
-module.exports = importGameImages = gameId => {
+module.exports = gameId => {
   const source = path.join(
     __dirname,
     `../../../content/material/games/${gameId}/pics`

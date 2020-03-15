@@ -33,7 +33,7 @@ export const Game = () => {
     <Fragment>
       <Head>
         <meta property="og:site_name" content="Chessicals"/>
-        <meta property="og:image" content="/images/games/${gameId}/${gameId}_${def.variants[0].code}_active.svg"/>
+        <meta property="og:image" content="/images/games/${gameId}/${gameId}_${def.variants[0].code}_active.png"/>
         <meta property="og:title" content="Play ${def.meta.name} online"/>
         <meta property="og:description" content="${metaDesc}"/>
         <title>{meta.name}</title>

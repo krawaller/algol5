@@ -6,3 +6,4 @@ export * from "./actionGenerators";
 export * from "./find";
 export * from "./stepOptions";
 export * from "./rulesetNames";
+export * from "./punctuate";

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "robot": "npm run prep && npm run build && npm run export && npm run renderActionShots",
+    "robot": "npm run prep && npm run build && npm run export",
     "clean": "rm -rf dist; mkdir dist; rm -rf .next; rm -rf public; mkdir public;",
     "makeGamePages": "cd ../..; npx babel-node --extensions '.ts','.js' ./modules/next/commands/makeGamePages",
     "importGameImages": "node ./commands/importGameImages",
@@ -9,13 +9,17 @@
     "getResources": "rm -rf ./public; mkdir public; npm run getUiCSS; npm run getStatic",
     "getUiCSS": "cp ../ui/dist/styles.css public/components.css",
     "getStatic": "cp -a ../ui/src/static/. ./public",
-    "prep": "npm run getResources && npm run makeGamePages && npm run importGameImages && npm run importNewsImages",
+    "prep": "npm run getResources && npm run makeGamePages && npm run importGameImages && npm run importNewsImages && npm run renderActionShots",
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "export": "next export -o dist"
+    "export": "next export -o dist",
+    "deploy": "./commands/deploy.sh"
   },
   "dependencies": {
     "next": "^9.1.6"
+  },
+  "devDependencies": {
+    "svgexport": "^0.4.0"
   }
 }

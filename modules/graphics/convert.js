@@ -1,8 +1,8 @@
-const { createCanvas, loadImage, Image } = require("canvas");
+const { createCanvas, loadImage } = require("canvas");
 const fs = require("fs-extra");
 const path = require("path");
 
-export const svg2png = async svgPath => {
+const svg2png = async svgPath => {
   const buffer = await fs.readFile(svgPath);
   const img = await loadImage(buffer);
   img.width *= 2;
@@ -22,3 +22,5 @@ export const svg2png = async svgPath => {
   ctx.drawImage(img, 0, 0, width, height);
   return canvas.createPNGStream();
 };
+
+module.exports = svg2png;

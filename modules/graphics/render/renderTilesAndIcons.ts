@@ -18,10 +18,19 @@ type RenderTilesAndIconsOpts = {
   from: string;
   to: string;
   pad?: boolean;
+  definitionStrategy?: "inline" | "group";
 };
 
 export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
-  const { board, tileMap, from, to, pad, sprites = [] } = opts;
+  const {
+    board,
+    tileMap,
+    from,
+    to,
+    pad,
+    sprites = [],
+    definitionStrategy,
+  } = opts;
   const { height, width, terrain } = board;
   const layers = terrainLayers(height, width, terrain!);
 
@@ -72,26 +81,37 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
       let isDark = !((col + (row % 2)) % 2);
       if (!(tile === "empty" && !isDark)) {
         const id = tile + (isDark ? "Dark" : "");
-        squares += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
-        if (!used[id]) {
-          used[id] = true;
-          const pic = allTiles[id as keyof typeof allTiles];
-          if (!pic) {
-            throw new Error(`Unknown pic ${id}`);
+        const pic = allTiles[id as keyof typeof allTiles];
+        if (!pic) {
+          throw new Error(`Unknown tile ${id}`);
+        }
+        if (definitionStrategy === "inline") {
+          squares += `<svg x="${drawX}" y="${drawY}">${pic}</svg>`;
+        } else {
+          squares += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
+          if (!used[id]) {
+            used[id] = true;
+            defs += pic;
           }
-          defs += pic;
         }
       }
       if (spritesPerPos[pos]) {
         const sprite = spritesPerPos[pos];
         if (sprite.unit) {
           const id = `${sprite.unit.icon}${sprite.unit.owner}`;
-          if (!used[id]) {
-            used[id] = true;
-            const def = allIcons[id];
-            defs += def;
+          const pic = allIcons[id as keyof typeof allTiles];
+          if (!pic) {
+            throw new Error(`Unknown sprite ${id}`);
           }
-          icons += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
+          if (definitionStrategy === "inline") {
+            icons += `<svg x="${drawX}" y="${drawY}">${pic}</svg>`;
+          } else {
+            if (!used[id]) {
+              used[id] = true;
+              defs += pic;
+            }
+            icons += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
+          }
         }
         if (sprite.mark) {
           const name =
@@ -100,16 +120,25 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
               : sprite.mark === "pot"
               ? "potentialMark"
               : ("foo" as keyof typeof allMarks);
-          if (!used[name]) {
-            used[name] = true;
-            const def = allMarks[name];
-            defs += def;
+          const pic = allMarks[name];
+          if (!pic) {
+            throw new Error(`Unknown mark ${name}`);
           }
-          marks += `<use href="#${name}" x="${drawX}" y="${drawY}" />`;
+          if (definitionStrategy === "inline") {
+            marks += `<svg x="${drawX}" y="${drawY}">${pic}</svg>`;
+          } else {
+            if (!used[name]) {
+              used[name] = true;
+              defs += pic;
+            }
+            marks += `<use href="#${name}" x="${drawX}" y="${drawY}" />`;
+          }
         }
       }
     }
   }
 
-  return `<defs>${defs}</defs><g>${background}</g><g>${squares}${marks}${icons}</g>`;
+  return `${
+    definitionStrategy === "group" ? `<defs>${defs}</defs>` : ""
+  }<g>${background}</g><g>${squares}${marks}${icons}</g>`;
 }

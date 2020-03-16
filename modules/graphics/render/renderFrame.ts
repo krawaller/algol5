@@ -72,7 +72,7 @@ export function renderFrame(opts: RenderFrameOpts) {
       }
     }
   }
-  return `<g>${frame}</g>`;
+  return `<g font-weight="normal" font-family="fantasy">${frame}</g>`;
 }
 
 const svgText = (
@@ -81,4 +81,4 @@ const svgText = (
   dyEm: number,
   content: string | number
 ) =>
-  `<text font-family="fantasy" x="${x}" y="${y}" fill="${colours.edgeText}" text-anchor="middle" dy="${dyEm}em">${content}</text>`;
+  `<text x="${x}" y="${y}" fill="${colours.edgeText}" text-anchor="middle" dy="${dyEm}em">${content}</text>`;

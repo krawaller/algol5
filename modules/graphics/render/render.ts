@@ -18,14 +18,31 @@ type RenderOpts = {
   from?: string;
   to?: string;
   pad?: boolean;
+  definitionStrategy?: "inline" | "group";
 };
 
 export function render(opts: RenderOpts) {
-  const { board, tileMap, from = "a1", to = "k14", pad = true, sprites } = opts;
+  const {
+    board,
+    tileMap,
+    from = "a1",
+    to = "k14",
+    pad = true,
+    sprites,
+    definitionStrategy = "group",
+  } = opts;
   const { height, width } = board;
 
   const frame = renderFrame({ board, from, to });
-  const inner = renderTilesAndIcons({ board, tileMap, from, to, pad, sprites });
+  const inner = renderTilesAndIcons({
+    board,
+    tileMap,
+    from,
+    to,
+    pad,
+    sprites,
+    definitionStrategy,
+  });
   const gradients = renderGradient({ board, from, to, pad });
 
   const { xStart, picWidth, picHeight, stopRow } = getBounds({
@@ -49,5 +66,5 @@ export function render(opts: RenderOpts) {
 
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${xStart} ${calcYstart} ${picWidth} ${picHeight}">${content}</svg>`;
 
-  return formatXml(svg);
+  return formatXml(svg, {});
 }

@@ -7,7 +7,7 @@ import { KriegDefinition } from "./_types";
 
 const kriegGraphics: KriegDefinition["graphics"] = {
   tiles: { corners: "playercolour", bases: "castle" },
-  icons: { notfrozens: "knight", frozens: "rook" }
+  icons: { notfrozens: "pawn", frozens: "rook" },
 };
 
 export default kriegGraphics;

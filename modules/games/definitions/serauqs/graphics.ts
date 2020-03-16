@@ -7,7 +7,7 @@ import { SerauqsDefinition } from "./_types";
 
 const serauqsGraphics: SerauqsDefinition["graphics"] = {
   icons: { soldiers: "pawn", wild: "king" },
-  tiles: { corners: "grass", middle: "castle" }
+  tiles: { corners: "castle", middle: "grass" },
 };
 
 export default serauqsGraphics;

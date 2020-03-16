@@ -706,7 +706,55 @@ const game = {
       board: "basic",
       setup: "basic",
       desc: "regular",
-      code: "k"
+      code: "k",
+      arr: {
+        marks: [],
+        potentialMarks: [
+          "b1",
+          "d1",
+          "f1",
+          "g1",
+          "b2",
+          "c2",
+          "d2",
+          "e2",
+          "f2",
+          "g2",
+          "a3",
+          "b3",
+          "d3",
+          "f3",
+          "g3",
+          "b4",
+          "d4",
+          "e4",
+          "f4",
+          "g4",
+          "a5",
+          "b5",
+          "c5",
+          "d5",
+          "f5",
+          "g5",
+          "a6",
+          "d6",
+          "e6",
+          "f6",
+          "a7",
+          "b7",
+          "c7",
+          "d7",
+          "e7",
+          "f7",
+          "g7"
+        ],
+        setup: {
+          stones: {
+            "1": ["a1", "c1", "e1", "c4", "b6", "c6"],
+            "2": ["a2", "c3", "e3", "a4", "e5", "g6"]
+          }
+        }
+      }
     }
   ],
   boards: {

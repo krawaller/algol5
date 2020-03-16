@@ -13,7 +13,7 @@ import {
   knightDirs
 } from "../../common";
 const emptyObj = {};
-const iconMapping = { notfrozens: "knight", frozens: "rook" };
+const iconMapping = { notfrozens: "pawn", frozens: "rook" };
 const emptyArtifactLayers = { movetargets: {} };
 let TERRAIN1, TERRAIN2, connections, relativeDirs, BOARD, dimensions;
 const groupLayers1 = {
@@ -446,7 +446,7 @@ const game = {
         ? collapseContent({
             line: [
               { select: "Select" },
-              { unittype: ["knight", 1] },
+              { unittype: ["pawn", 1] },
               { text: "to move (except" },
               {
                 unit: [
@@ -467,7 +467,7 @@ const game = {
         : collapseContent({
             line: [
               { select: "Select" },
-              { unittype: ["knight", 1] },
+              { unittype: ["pawn", 1] },
               { text: "to move" }
             ]
           });
@@ -528,7 +528,7 @@ const game = {
         ? collapseContent({
             line: [
               { select: "Select" },
-              { unittype: ["knight", 2] },
+              { unittype: ["pawn", 2] },
               { text: "to move (except" },
               {
                 unit: [
@@ -549,7 +549,7 @@ const game = {
         : collapseContent({
             line: [
               { select: "Select" },
-              { unittype: ["knight", 2] },
+              { unittype: ["pawn", 2] },
               { text: "to move" }
             ]
           });
@@ -610,7 +610,21 @@ const game = {
       board: "basic",
       setup: "basic",
       desc: "regular",
-      code: "j"
+      code: "j",
+      arr: {
+        marks: ["a3"],
+        potentialMarks: ["a2", "a4"],
+        setup: {
+          notfrozens: {
+            "1": ["a3", "c3", "b4"],
+            "2": ["b1", "d1", "c2"]
+          },
+          frozens: {
+            "1": ["b3"],
+            "2": ["d3"]
+          }
+        }
+      }
     }
   ],
   boards: {

@@ -3,7 +3,7 @@ import fs from "fs-extra";
 import lib from "../../../games/dist/lib";
 import { render } from "../../../graphics/render";
 import { arrangement2sprites } from "../../../common";
-import svg2png from "../../../graphics/convert";
+import svg2png from "../../../graphics/svg2png";
 
 export const renderActionShots = async (gameId: string) => {
   const target = path.join(__dirname, `../../public/images/games/${gameId}`);

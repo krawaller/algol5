@@ -18,11 +18,19 @@ type RenderTilesAndIconsOpts = {
   from: string;
   to: string;
   pad?: boolean;
-  inline?: boolean;
+  definitionStrategy?: "inline" | "group";
 };
 
 export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
-  const { board, tileMap, from, to, pad, sprites = [], inline } = opts;
+  const {
+    board,
+    tileMap,
+    from,
+    to,
+    pad,
+    sprites = [],
+    definitionStrategy,
+  } = opts;
   const { height, width, terrain } = board;
   const layers = terrainLayers(height, width, terrain!);
 
@@ -77,7 +85,7 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
         if (!pic) {
           throw new Error(`Unknown tile ${id}`);
         }
-        if (inline) {
+        if (definitionStrategy === "inline") {
           squares += `<svg x="${drawX}" y="${drawY}">${pic}</svg>`;
         } else {
           squares += `<use href="#${id}" x="${drawX}" y="${drawY}" />`;
@@ -95,7 +103,7 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
           if (!pic) {
             throw new Error(`Unknown sprite ${id}`);
           }
-          if (inline) {
+          if (definitionStrategy === "inline") {
             icons += `<svg x="${drawX}" y="${drawY}">${pic}</svg>`;
           } else {
             if (!used[id]) {
@@ -116,7 +124,7 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
           if (!pic) {
             throw new Error(`Unknown mark ${name}`);
           }
-          if (inline) {
+          if (definitionStrategy === "inline") {
             marks += `<svg x="${drawX}" y="${drawY}">${pic}</svg>`;
           } else {
             if (!used[name]) {
@@ -131,6 +139,6 @@ export function renderTilesAndIcons(opts: RenderTilesAndIconsOpts) {
   }
 
   return `${
-    inline ? "" : `<defs>${defs}</defs>`
+    definitionStrategy === "group" ? `<defs>${defs}</defs>` : ""
   }<g>${background}</g><g>${squares}${marks}${icons}</g>`;
 }

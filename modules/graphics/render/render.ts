@@ -18,7 +18,7 @@ type RenderOpts = {
   from?: string;
   to?: string;
   pad?: boolean;
-  inline?: boolean;
+  definitionStrategy?: "inline" | "group";
 };
 
 export function render(opts: RenderOpts) {
@@ -29,7 +29,7 @@ export function render(opts: RenderOpts) {
     to = "k14",
     pad = true,
     sprites,
-    inline,
+    definitionStrategy = "group",
   } = opts;
   const { height, width } = board;
 
@@ -41,7 +41,7 @@ export function render(opts: RenderOpts) {
     to,
     pad,
     sprites,
-    inline,
+    definitionStrategy,
   });
   const gradients = renderGradient({ board, from, to, pad });
 

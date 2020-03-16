@@ -25,7 +25,7 @@ export const renderActionShots = async (gameId: string) => {
       tileMap: def.graphics.tiles,
       sprites,
       pad: true,
-      inline: true,
+      definitionStrategy: "inline",
     });
     fs.writeFileSync(
       path.join(target, `${gameId}_${variant.code}_active.svg`),

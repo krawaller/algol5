@@ -19,7 +19,7 @@ export const SessionViewSelector: FunctionComponent<SessionViewSelectorProps> = 
   return (
     <ButtonGroup merged noBottomMargin>
       <Button
-        text="Move"
+        text="Play"
         onClick={actions.toBattleControls}
         active={mode === "playing"}
       />

@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { GameId, list } from "../../../../games/dist/list";
 import { select, boolean } from "@storybook/addon-knobs";
-import { LocalSession, LocalSessionActions } from ".";
+import { NewLocalSession, NewLocalSessionActions } from ".";
 import meta from "../../../../games/dist/meta";
 import dataURIs from "../../../../graphics/dist/svgDataURIs";
 import { AlgolVariantAnon } from "../../../../types";
@@ -10,7 +10,7 @@ import { AlgolVariantAnon } from "../../../../types";
 storiesOf("LocalSession", module).add("LocalSession creator for game", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   const hasPrevious = boolean("Previous battle", false);
-  const actions: LocalSessionActions = {
+  const actions: NewLocalSessionActions = {
     loadLocalSession: save => console.log("Save", save),
     newLocalBattle: () => console.log("New!"),
     importSession: str => console.log("Import", str),
@@ -27,7 +27,7 @@ storiesOf("LocalSession", module).add("LocalSession creator for game", () => {
     },
   ];
   return (
-    <LocalSession
+    <NewLocalSession
       actions={actions}
       meta={meta[gameId]}
       graphics={dataURIs[gameId]}

@@ -1,9 +1,9 @@
-.localSession {
+.newLocalSession {
   padding-top: 20px; /* or maybe Modal should have this padding at the top always? */
   text-align: center;
 }
 
-.localSessionDivider:after {
+.newLocalSessionDivider:after {
   content: "or";
   height: 2em;
   display: block;
@@ -11,6 +11,6 @@
   color: grey;
 }
 
-.localSessionHeader {
+.newLocalSessionHeader {
   margin-bottom: 1em;
 }

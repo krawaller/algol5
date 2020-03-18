@@ -6,11 +6,23 @@
   flex-wrap: wrap;
 }
 
+.buttonGroupContainerMerged > button:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.buttonGroupContainerMerged > button:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -1px;
+}
+
 .buttonGroupContainer > button {
   margin-bottom: 10px;
 }
 
-.buttonGroupContainer > button:not(:first-child) {
+.buttonGroupContainer:not(.buttonGroupContainerMerged)
+  > button:not(:first-child) {
   margin-left: 10px;
 }
 

@@ -13,23 +13,23 @@ export const useUI = (
   battle: AlgolBattle | null,
   battleFrame: number,
   demo: AlgolDemo,
-  mode: "gamelobby" | "battlelobby" | "playing" | "history"
+  mode: "gamelobby" | "battlelobby" | "playing" | "history" | "battlehelp"
 ): AlgolBattleUI => {
-  const inGameLobby = mode === "gamelobby";
-  const inHistory = mode === "history";
-  const inBattleLobby = mode === "battlelobby";
   const { frame: demoFrame, hydrDemo } = useDemo({
     demo,
-    playing: inGameLobby,
+    playing: mode === "gamelobby",
     restart: true,
   });
   return useMemo(() => {
-    if (inGameLobby) {
+    if (mode === "gamelobby") {
       return hydrDemo ? demo2ui(hydrDemo, demoFrame) : emptyBattleUI;
     } else if (battle) {
       // if statement is mostly for TS inference, battle should always be defined here
       const battleUi = api.getBattleUI(battle);
-      if (inHistory) {
+      if (mode === "playing") {
+        return battleUi;
+      }
+      if (mode === "history") {
         return {
           ...battleUi,
           turnNumber: battle!.history[battleFrame].turn,
@@ -38,22 +38,15 @@ export const useUI = (
           instruction: battle!.history[battleFrame].description,
         };
       }
-      if (inBattleLobby) {
-        if (!battle.gameEndedBy) {
-          battleUi.board.marks = [];
-        }
-        battleUi.board.potentialMarks = [];
-      }
-      return battleUi;
+      return {
+        ...battleUi,
+        board: {
+          ...battleUi.board,
+          potentialMarks: [],
+          marks: battle.gameEndedBy ? battleUi.board.marks : [],
+        },
+      };
     }
     return emptyBattleUI;
-  }, [
-    battle,
-    hydrDemo,
-    demoFrame,
-    battleFrame,
-    inGameLobby,
-    inHistory,
-    inBattleLobby,
-  ]);
+  }, [battle, hydrDemo, demoFrame, battleFrame, mode]);
 };

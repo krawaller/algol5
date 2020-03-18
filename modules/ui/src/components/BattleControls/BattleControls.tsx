@@ -1,31 +1,25 @@
 export * from "./BattleControls";
 import React, { FunctionComponent, Fragment } from "react";
-import { AlgolBattleUI, AlgolErrorReporter } from "../../../../types";
-import { Content } from "../Content";
-import css from "./BattleControls.cssProxy";
+import { AlgolBattleUI } from "../../../../types";
 import { Button } from "../Button";
 import { ButtonGroup } from "../ButtonGroup";
+import { Content } from "../Content";
+import css from "./BattleControls.cssProxy";
 
 export interface BattleControlsActions {
   undoBattleCommand: () => void;
-  toBattleLobby: () => void;
   endTurn: () => void;
   command: (cmnd: string) => void;
-  toHistory: () => void;
-  navTo: (path: string) => void;
-  reportError: AlgolErrorReporter;
 }
 
 type BattleControlsProps = {
   ui: AlgolBattleUI;
   actions: BattleControlsActions;
-  haveHistory?: boolean;
 };
 
 export const BattleControls: FunctionComponent<BattleControlsProps> = ({
   ui,
   actions,
-  haveHistory,
 }) => {
   return (
     <Fragment>
@@ -52,14 +46,12 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
         >
           End turn
         </Button>
-        {/* <Button disabled={!haveHistory} onClick={actions.toHistory}>
-          History
-        </Button>
-        <Button onClick={actions.toBattleLobby}>Session info</Button> */}
       </ButtonGroup>
-      <div className={css.battleControlHint}>
-        <Content content={ui.instruction} actions={actions} />
-      </div>
+      {ui.winner !== undefined && (
+        <div className={css.battleControlsContent}>
+          <Content content={ui.instruction} />
+        </div>
+      )}
     </Fragment>
   );
 };

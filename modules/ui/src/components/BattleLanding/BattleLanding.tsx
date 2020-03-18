@@ -11,13 +11,10 @@ import css from "./BattleLanding.cssProxy";
 import { Button } from "../Button";
 import { Modal } from "../Modal";
 import { ExportBattle } from "../ExportBattle";
-import { BattleLandingNewSession } from "./BattleLanding.NewSession";
 import { BattleLandingOngoing } from "./BattleLanding.Ongoing";
 import { ButtonGroup } from "../ButtonGroup";
 
 interface BattleLandingActions {
-  toHistory: () => void;
-  toBattleControls: () => void;
   deleteCurrentSession: () => void;
   reportError: AlgolErrorReporter;
 }
@@ -42,23 +39,10 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
   const stillFirstTurn = battle.turnNumber === 1 && battle.player === 1;
   return (
     <Fragment>
+      <div className={css.battleLandingContent}>
+        <BattleLandingOngoing session={session} variant={battle.variant} />
+      </div>
       <ButtonGroup>
-        <Button
-          big
-          disabled={session.endedBy && "This session is finished!"}
-          onClick={actions.toBattleControls}
-        >
-          Play
-        </Button>
-        <Button
-          disabled={
-            stillFirstTurn &&
-            "You can see the history after the first turn is finished!"
-          }
-          onClick={actions.toHistory}
-        >
-          History
-        </Button>
         <Button
           disabled={
             stillFirstTurn &&
@@ -84,13 +68,6 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
           Delete
         </Button>
       </ButtonGroup>
-      <div className={css.battleLandingContent}>
-        {session.updated || session.type === "imported" ? (
-          <BattleLandingOngoing session={session} variant={battle.variant} />
-        ) : (
-          <BattleLandingNewSession meta={meta} session={session} />
-        )}
-      </div>
       <Modal isOpen={isModalOpen} onClose={closeModal} title="Export session">
         <ExportBattle battle={battle} meta={meta} session={session} />
       </Modal>

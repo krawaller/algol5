@@ -12,9 +12,6 @@ import { Button } from "../Button";
 
 interface BattleHistoryActions {
   toFrame: (frame: number) => void;
-  toBattleControls: () => void;
-  toBattleLobby: () => void;
-  navTo: (path: string) => void;
   forkSession: () => void;
   reportError: AlgolErrorReporter;
 }
@@ -30,6 +27,13 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
   const { content, frame, actions, battle } = props;
   const frameCount = battle.history.length - 1;
   const historyFrame = battle.history[frame];
+  if (frameCount === 0) {
+    return (
+      <div className={css.battleHistoryContainer}>
+        After the first turn you will be able to replay the battle history here!
+      </div>
+    );
+  }
   return (
     <div className={css.battleHistoryContainer}>
       <Stepper max={frameCount} current={frame} onChange={actions.toFrame} />
@@ -50,10 +54,6 @@ export const BattleHistory: FunctionComponent<BattleHistoryProps> = props => {
         >
           Fork from this turn
         </Button>
-        {/* {!battleFinished && (
-        <Button onClick={actions.toBattleControls}>Continue playing</Button>
-      )}
-      <Button onClick={actions.toBattleLobby}>Session info</Button> */}
       </div>
     </div>
   );

@@ -28,6 +28,7 @@ type BattleAction =
   | "toFrame"
   | "gamelobby"
   | "battlelobby"
+  | "battlehelp"
   | "history"
   | "play"
   | "new"
@@ -42,7 +43,7 @@ type BattleHookState = {
   battle: AlgolBattle | null;
   frame: number;
   session: AlgolLocalBattle | null;
-  mode: "gamelobby" | "battlelobby" | "playing" | "history";
+  mode: "gamelobby" | "battlelobby" | "playing" | "history" | "battlehelp";
   hasPrevious: boolean;
 };
 
@@ -70,7 +71,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
         battle,
         frame: -1,
         session,
-        mode: "battlelobby", // could also go to "playing" here for less clicks, but this way battlelanding is introduced
+        mode: "playing", // think about whether to go to "playing" or "battlelobby" here
         hasPrevious: true,
       };
     } else if (cmnd === "load") {
@@ -84,14 +85,14 @@ export function useBattle(api: AlgolStaticGameAPI) {
             battle,
             session,
             frame: battle.history.length - 1,
-            mode: "battlelobby", // could also go to "history" here
+            mode: "history", // what is the best?
             hasPrevious: true,
           }
         : {
             battle,
             session,
             frame: -1,
-            mode: "battlelobby", // could also go directly to "playing" here
+            mode: "playing", // what is the best?
             hasPrevious: true,
           };
     } else if (cmnd === "gamelobby") {
@@ -116,6 +117,11 @@ export function useBattle(api: AlgolStaticGameAPI) {
       return {
         ...state,
         mode: "playing",
+      };
+    } else if (cmnd === "battlehelp") {
+      return {
+        ...state,
+        mode: "battlehelp",
       };
     } else if (cmnd === "deleteCurrentSession") {
       deleteSession(api.gameId, state.session!.id);
@@ -207,6 +213,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
         dispatch(["load", session]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
       toHistory: (atFrame?: number) => dispatch(["history", atFrame]),
+      toBattleHelp: () => dispatch(["battlehelp", null]),
       toGameLobby: () => dispatch(["gamelobby", null]),
       toBattleLobby: () => dispatch(["battlelobby", null]),
       toBattleControls: () => dispatch(["play", null]),

@@ -12,14 +12,16 @@ import css from "./ButtonGroup.cssProxy";
 
 type ButtonGroupProps = {
   noBottomMargin?: boolean;
+  merged?: boolean;
 };
 
 export const ButtonGroup: FunctionComponent<ButtonGroupProps> = props => {
-  const { children, noBottomMargin } = props;
+  const { children, noBottomMargin, merged } = props;
   return (
     <div
       className={classNames(css.buttonGroupContainer, {
         [css.buttonGroupContainerNoBottomMargin]: noBottomMargin,
+        [css.buttonGroupContainerMerged]: merged,
       })}
     >
       {children}

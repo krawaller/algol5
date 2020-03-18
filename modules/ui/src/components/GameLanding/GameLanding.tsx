@@ -10,7 +10,7 @@ import {
 } from "../../../../types";
 import { Modal } from "../Modal";
 import { Button } from "../Button";
-import { LocalSession, LocalSessionActions } from "../LocalSession";
+import { NewLocalSession, NewLocalSessionActions } from "../NewLocalSession";
 import { useModal } from "../../helpers";
 import { ButtonGroup } from "../ButtonGroup";
 import { Markdown } from "../Markdown";
@@ -53,7 +53,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
 
   // hack actions to close game modal when chosen a game
   const localSessionActions = useMemo(
-    (): LocalSessionActions => ({
+    (): NewLocalSessionActions => ({
       loadLocalSession: (session: AlgolLocalBattle) => {
         actions.loadLocalSession(session);
         closeSessionModal();
@@ -94,7 +94,7 @@ export const GameLanding: FunctionComponent<GameLandingProps> = props => {
         onClose={closeSessionModal}
         title="Play locally"
       >
-        <LocalSession
+        <NewLocalSession
           actions={localSessionActions}
           meta={meta}
           graphics={graphics}

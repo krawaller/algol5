@@ -24,7 +24,8 @@ import { PageActions } from "../../helpers";
 import { useUI } from "./GamePage.useUI";
 import { useBattle } from "./GamePage.useBattle";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
-import { Content } from "../Content";
+import { BattleHelp } from "../BattleHelp";
+import { SessionViewSelector } from "../SessionViewSelector";
 
 type GamePageHTML = {
   about: {
@@ -67,15 +68,20 @@ export const GamePage = (props: GamePageProps) => {
   const ui = useUI(api, battle, frame, demo, mode);
   const frameCount = battle ? battle.history.length - 1 : 0;
 
-  let crumbs: Crumb[];
+  const crumbs: Crumb[] = [
+    {
+      content: meta.name,
+      onClick: mode !== "gamelobby" ? actions.toGameLobby : undefined,
+    },
+  ];
+  if (mode !== "gamelobby") {
+    crumbs.push({
+      content: "",
+    });
+  }
   let body: ReactNode;
   if (mode === "history") {
     // We are currently watching the history of a battle
-    crumbs = [
-      { content: meta.name, onClick: actions.toGameLobby },
-      { content: "session", onClick: actions.toBattleLobby },
-      { content: "history" },
-    ];
     body = (
       <BattleHistory
         actions={actions}
@@ -86,10 +92,6 @@ export const GamePage = (props: GamePageProps) => {
     );
   } else if (mode === "battlelobby") {
     // we are on the landing page for a created/loaded session
-    crumbs = [
-      { content: meta.name, onClick: actions.toGameLobby },
-      { content: "session" },
-    ];
     body = (
       <BattleLanding
         battle={battle!}
@@ -100,28 +102,18 @@ export const GamePage = (props: GamePageProps) => {
     );
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
-    crumbs = [
-      { content: meta.name, onClick: actions.toGameLobby },
-      { content: "session", onClick: actions.toBattleLobby },
-      {
-        content: (
-          <Content
-            content={{
-              line: [
-                { text: `turn ${battle!.turnNumber}, ` },
-                { player: battle!.player },
-              ],
-            }}
-          />
-        ),
-      },
-    ];
+    body = <BattleControls actions={actions} ui={ui} />;
+  } else if (mode === "battlehelp") {
+    // watching help page for ongoing battle
     body = (
-      <BattleControls actions={actions} ui={ui} haveHistory={frameCount > 1} />
+      <BattleHelp
+        actions={actions}
+        instruction={ui.instruction}
+        content={content}
+      />
     );
   } else {
     // No battle active, we're just at the game landing page
-    crumbs = [{ content: meta.name }];
     body = (
       <GameLanding
         meta={meta}
@@ -133,6 +125,10 @@ export const GamePage = (props: GamePageProps) => {
       />
     );
   }
+
+  let viewSelector = mode !== "gamelobby" && (
+    <SessionViewSelector mode={mode} actions={actions} />
+  );
 
   return (
     <Page
@@ -148,7 +144,12 @@ export const GamePage = (props: GamePageProps) => {
           active={mode === "playing" && !battle!.gameEndedBy}
         />
       }
-      strip={<Breadcrumbs crumbs={crumbs} actions={actions} />}
+      strip={
+        <>
+          <Breadcrumbs crumbs={crumbs} actions={actions} />
+          {viewSelector}
+        </>
+      }
       body={body}
     />
   );

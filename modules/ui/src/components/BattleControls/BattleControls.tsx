@@ -3,6 +3,8 @@ import React, { FunctionComponent, Fragment } from "react";
 import { AlgolBattleUI } from "../../../../types";
 import { Button } from "../Button";
 import { ButtonGroup } from "../ButtonGroup";
+import { Content } from "../Content";
+import css from "./BattleControls.cssProxy";
 
 export interface BattleControlsActions {
   undoBattleCommand: () => void;
@@ -45,6 +47,11 @@ export const BattleControls: FunctionComponent<BattleControlsProps> = ({
           End turn
         </Button>
       </ButtonGroup>
+      {ui.winner !== undefined && (
+        <div className={css.battleControlsContent}>
+          <Content content={ui.instruction} />
+        </div>
+      )}
     </Fragment>
   );
 };

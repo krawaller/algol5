@@ -69,8 +69,16 @@ export const GamePage = (props: GamePageProps) => {
   const frameCount = battle ? battle.history.length - 1 : 0;
 
   const crumbs: Crumb[] = [
-    { content: meta.name, onClick: actions.toGameLobby },
+    {
+      content: meta.name,
+      onClick: mode !== "gamelobby" ? actions.toGameLobby : undefined,
+    },
   ];
+  if (mode !== "gamelobby") {
+    crumbs.push({
+      content: "",
+    });
+  }
   let body: ReactNode;
   if (mode === "history") {
     // We are currently watching the history of a battle

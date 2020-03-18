@@ -71,7 +71,7 @@ export function useBattle(api: AlgolStaticGameAPI) {
         battle,
         frame: -1,
         session,
-        mode: "battlelobby", // could also go to "playing" here for less clicks, but this way battlelanding is introduced
+        mode: "playing", // think about whether to go to "playing" or "battlelobby" here
         hasPrevious: true,
       };
     } else if (cmnd === "load") {
@@ -85,14 +85,14 @@ export function useBattle(api: AlgolStaticGameAPI) {
             battle,
             session,
             frame: battle.history.length - 1,
-            mode: "battlelobby", // could also go to "history" here
+            mode: "history", // what is the best?
             hasPrevious: true,
           }
         : {
             battle,
             session,
             frame: -1,
-            mode: "battlelobby", // could also go directly to "playing" here
+            mode: "playing", // what is the best?
             hasPrevious: true,
           };
     } else if (cmnd === "gamelobby") {

@@ -18,7 +18,7 @@ type SessionViewSelectorProps = {
 export const SessionViewSelector: FunctionComponent<SessionViewSelectorProps> = props => {
   const { actions, view } = props;
   return (
-    <ButtonGroup>
+    <ButtonGroup merged>
       <Button
         text="Play"
         onClick={actions.toBattleControls}

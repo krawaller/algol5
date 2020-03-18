@@ -94,9 +94,7 @@ export const GamePage = (props: GamePageProps) => {
     );
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
-    body = (
-      <BattleControls actions={actions} ui={ui} haveHistory={frameCount > 1} />
-    );
+    body = <BattleControls actions={actions} ui={ui} />;
   } else if (mode === "battlehelp") {
     // watching help page for ongoing battle
     body = (

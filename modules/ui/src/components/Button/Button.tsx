@@ -10,6 +10,7 @@ export type ButtonProps = {
   onError?: (err: Error) => void;
   controlId?: string;
   text?: string;
+  active?: boolean;
 };
 
 import css from "./Button.cssProxy";
@@ -25,6 +26,7 @@ export const Button: FunctionComponent<ButtonProps> = props => {
     onError,
     controlId,
     text,
+    active,
   } = props;
   const handler = useButtonClickHandler({
     href,
@@ -41,6 +43,7 @@ export const Button: FunctionComponent<ButtonProps> = props => {
       className={classNames(css.button, {
         [css.buttonDisabled]: disabled,
         [css.buttonBig]: big,
+        [css.buttonActive]: active,
       })}
     >
       {text || children}

@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import css from "./SessionViewSelector.cssProxy";
 import { ButtonGroup } from "../ButtonGroup";
 import { Button } from "../Button";
 

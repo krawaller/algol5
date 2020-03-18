@@ -17,13 +17,17 @@
   margin-left: -1px;
 }
 
-.buttonGroupContainer > button {
+.buttonGroupContainer:not(.buttonGroupContainerMerged) > button {
   margin-bottom: 10px;
 }
 
 .buttonGroupContainer:not(.buttonGroupContainerMerged)
   > button:not(:first-child) {
   margin-left: 10px;
+}
+
+.buttonGroupContainerMerged:not(.buttonGroupContainerNoBottomMargin) {
+  margin-bottom: 10px;
 }
 
 .buttonGroupContainerNoBottomMargin {

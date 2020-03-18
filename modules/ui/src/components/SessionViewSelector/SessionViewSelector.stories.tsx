@@ -4,7 +4,7 @@ import { select } from "@storybook/addon-knobs";
 
 import { SessionViewSelector, SessionViewSelectorActions } from ".";
 
-const views = ["help", "info", "controls", "history"] as const;
+const views = ["history", "playing", "battlelobby", "battlehelp"] as const;
 
 storiesOf("SessionViewSelector", module).add(
   "A common SessionViewSelector component",
@@ -18,7 +18,7 @@ storiesOf("SessionViewSelector", module).add(
     const view = select("View", views, views[0]);
     return (
       <div style={{ padding: 10 }}>
-        <SessionViewSelector actions={actions} view={view} />
+        <SessionViewSelector actions={actions} mode={view} />
       </div>
     );
   }

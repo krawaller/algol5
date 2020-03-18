@@ -11,32 +11,32 @@ export interface SessionViewSelectorActions {
 
 type SessionViewSelectorProps = {
   actions: SessionViewSelectorActions;
-  view: "history" | "controls" | "info" | "help";
+  mode: "history" | "playing" | "battlelobby" | "battlehelp";
 };
 
 export const SessionViewSelector: FunctionComponent<SessionViewSelectorProps> = props => {
-  const { actions, view } = props;
+  const { actions, mode } = props;
   return (
-    <ButtonGroup merged>
+    <ButtonGroup merged noBottomMargin>
       <Button
-        text="Play"
+        text="Move"
         onClick={actions.toBattleControls}
-        active={view === "controls"}
+        active={mode === "playing"}
       />
       <Button
         text="History"
         onClick={actions.toHistory}
-        active={view === "history"}
+        active={mode === "history"}
       />
       <Button
         text="Help"
         onClick={actions.toBattleHelp}
-        active={view === "help"}
+        active={mode === "battlehelp"}
       />
       <Button
         text="Session"
         onClick={actions.toBattleLobby}
-        active={view === "info"}
+        active={mode === "battlelobby"}
       />
     </ButtonGroup>
   );

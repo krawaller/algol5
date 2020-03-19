@@ -4,7 +4,6 @@ import {
   AlgolBattle,
   AlgolLocalBattle,
   AlgolBattleSave,
-  decorateError,
 } from "../../../../types";
 import {
   newSessionFromBattle,
@@ -28,7 +27,6 @@ type BattleAction =
   | "toFrame"
   | "gamelobby"
   | "battlelobby"
-  | "battlehelp"
   | "history"
   | "play"
   | "new"
@@ -43,7 +41,7 @@ type BattleHookState = {
   battle: AlgolBattle | null;
   frame: number;
   session: AlgolLocalBattle | null;
-  mode: "gamelobby" | "battlelobby" | "playing" | "history" | "battlehelp";
+  mode: "gamelobby" | "battlelobby" | "playing" | "history";
   hasPrevious: boolean;
 };
 
@@ -117,11 +115,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
       return {
         ...state,
         mode: "playing",
-      };
-    } else if (cmnd === "battlehelp") {
-      return {
-        ...state,
-        mode: "battlehelp",
       };
     } else if (cmnd === "deleteCurrentSession") {
       deleteSession(api.gameId, state.session!.id);
@@ -213,7 +206,6 @@ export function useBattle(api: AlgolStaticGameAPI) {
         dispatch(["load", session]),
       toFrame: (frame: number) => dispatch(["toFrame", frame]),
       toHistory: (atFrame?: number) => dispatch(["history", atFrame]),
-      toBattleHelp: () => dispatch(["battlehelp", null]),
       toGameLobby: () => dispatch(["gamelobby", null]),
       toBattleLobby: () => dispatch(["battlelobby", null]),
       toBattleControls: () => dispatch(["play", null]),

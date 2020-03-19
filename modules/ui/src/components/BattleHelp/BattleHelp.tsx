@@ -34,7 +34,7 @@ export const BattleHelp: FunctionComponent<BattleHelpProps> = props => {
         <Content content={instruction} />
       </div>
       <ButtonGroup>
-        <Button onClick={openRulesModal}>Rules</Button>
+        <Button onClick={openRulesModal}>See full rules</Button>
       </ButtonGroup>
       <Modal
         isOpen={isRulesModalOpen}

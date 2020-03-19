@@ -6,12 +6,11 @@ export interface SessionViewSelectorActions {
   toHistory: () => void;
   toBattleControls: () => void;
   toBattleLobby: () => void;
-  toBattleHelp: () => void;
 }
 
 type SessionViewSelectorProps = {
   actions: SessionViewSelectorActions;
-  mode: "history" | "playing" | "battlelobby" | "battlehelp";
+  mode: "history" | "playing" | "battlelobby";
 };
 
 export const SessionViewSelector: FunctionComponent<SessionViewSelectorProps> = props => {
@@ -27,11 +26,6 @@ export const SessionViewSelector: FunctionComponent<SessionViewSelectorProps> = 
         text="History"
         onClick={actions.toHistory}
         active={mode === "history"}
-      />
-      <Button
-        text="Help"
-        onClick={actions.toBattleHelp}
-        active={mode === "battlehelp"}
       />
       <Button
         text="Session"

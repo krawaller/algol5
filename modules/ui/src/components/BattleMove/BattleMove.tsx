@@ -45,6 +45,7 @@ export const BattleMove: FunctionComponent<BattleMoveProps> = props => {
           big
           text="?"
           active={showHelp}
+          intent="primary"
           onClick={() => setShowHelp(!showHelp)}
         />
       </div>

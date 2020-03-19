@@ -13,7 +13,6 @@ import {
   isAlgolContentPlayer,
   isAlgolContentEndTurn,
   isAlgolContentBold,
-  AlgolErrorReporter,
 } from "../../../../types";
 
 import { Icon } from "../Icon";
@@ -22,7 +21,6 @@ import { Button } from "../Button";
 interface ContentActions {
   endTurn: () => void;
   command: (cmnd: string) => void;
-  reportError: AlgolErrorReporter;
 }
 
 type ContentProps = {
@@ -33,7 +31,6 @@ type ContentProps = {
 const noopActions: ContentActions = {
   endTurn: () => {},
   command: () => {},
-  reportError: () => {},
 };
 
 /**
@@ -65,7 +62,6 @@ export const Content: React.FunctionComponent<ContentProps> = ({
       <Button
         onClick={() => actions.command(content.command)}
         controlId={`content-command-${content.command}-button`}
-        onError={actions.reportError}
       >
         {content.command}
       </Button>
@@ -73,11 +69,7 @@ export const Content: React.FunctionComponent<ContentProps> = ({
   }
   if (isAlgolContentEndTurn(content)) {
     return (
-      <Button
-        onClick={actions.endTurn}
-        controlId="content-end-turn-button"
-        onError={actions.reportError}
-      >
+      <Button onClick={actions.endTurn} controlId="content-end-turn-button">
         {content.endTurn}
       </Button>
     );

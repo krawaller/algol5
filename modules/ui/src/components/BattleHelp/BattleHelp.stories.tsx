@@ -8,6 +8,9 @@ import { BattleHelp, BattleHelpActions } from ".";
 
 const actions: BattleHelpActions = {
   navTo: url => console.log("Nav to", url),
+  undoBattleCommand: () => console.log("undo"),
+  endTurn: () => console.log("endTurn"),
+  command: (cmnd: string) => console.log("cmnd", cmnd),
 };
 
 storiesOf("BattleHelp", module).add("A common BattleHelp component", () => {

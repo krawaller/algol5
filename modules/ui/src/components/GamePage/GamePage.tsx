@@ -16,7 +16,6 @@ import {
 
 import { Board } from "../Board";
 import { Page } from "../Page";
-import { BattleControls } from "../BattleControls";
 import { BattleLanding } from "../BattleLanding";
 import { GameLanding } from "../GameLanding";
 import { BattleHistory } from "../BattleHistory";
@@ -26,6 +25,7 @@ import { useBattle } from "./GamePage.useBattle";
 import { Breadcrumbs, Crumb } from "../Breadcrumbs";
 import { BattleHelp } from "../BattleHelp";
 import { SessionViewSelector } from "../SessionViewSelector";
+import { BattleMove } from "../BattleMove";
 
 type GamePageHTML = {
   about: {
@@ -102,16 +102,7 @@ export const GamePage = (props: GamePageProps) => {
     );
   } else if (mode === "playing") {
     // We are actively playing an ongoing battle
-    body = <BattleControls actions={actions} ui={ui} />;
-  } else if (mode === "battlehelp") {
-    // watching help page for ongoing battle
-    body = (
-      <BattleHelp
-        actions={actions}
-        instruction={ui.instruction}
-        content={content}
-      />
-    );
+    body = <BattleMove actions={actions} ui={ui} content={content} />;
   } else {
     // No battle active, we're just at the game landing page
     body = (

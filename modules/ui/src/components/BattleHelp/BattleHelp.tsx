@@ -10,6 +10,9 @@ import { ButtonGroup } from "../ButtonGroup";
 
 export interface BattleHelpActions {
   navTo: (path: string) => void;
+  undoBattleCommand: () => void;
+  endTurn: () => void;
+  command: (cmnd: string) => void;
 }
 
 export interface BattleHelpContent {
@@ -31,10 +34,10 @@ export const BattleHelp: FunctionComponent<BattleHelpProps> = props => {
   return (
     <>
       <div className={css.battleHelpContentContainer}>
-        <Content content={instruction} />
+        <Content content={instruction} actions={actions} />
       </div>
       <ButtonGroup>
-        <Button onClick={openRulesModal}>Rules</Button>
+        <Button onClick={openRulesModal}>See full rules</Button>
       </ButtonGroup>
       <Modal
         isOpen={isRulesModalOpen}

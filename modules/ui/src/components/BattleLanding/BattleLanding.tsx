@@ -54,6 +54,7 @@ export const BattleLanding: FunctionComponent<BattleLandingProps> = props => {
         </Button>
         <Button
           onError={actions.reportError}
+          intent="danger"
           controlId="delete-session-button"
           onClick={() => {
             if (

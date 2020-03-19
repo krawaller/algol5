@@ -1,6 +1,10 @@
 .pageContainer {
   max-width: 450px;
   margin: 0 auto;
+  height: 100vh;
+  max-height: 1000px;
+  display: flex;
+  flex-direction: column;
 }
 
 .pageTop {
@@ -19,6 +23,8 @@
 .pageBody {
   padding: 10px;
   padding-top: 20px;
+  flex-grow: 1;
+  position: relative;
 }
 
 .pageContainer img {

@@ -4,27 +4,23 @@ import { select } from "@storybook/addon-knobs";
 import { GameId, list } from "../../../../games/dist/list";
 import allStatefulAPIs from "../../../../battle/dist/allStatefulAPIs";
 
-import { BattleHelp, BattleHelpActions } from ".";
+import { BattleMove, BattleMoveActions } from ".";
 
-const actions: BattleHelpActions = {
+const actions: BattleMoveActions = {
   navTo: url => console.log("Nav to", url),
   undoBattleCommand: () => console.log("undo"),
   endTurn: () => console.log("endTurn"),
   command: (cmnd: string) => console.log("cmnd", cmnd),
 };
 
-storiesOf("BattleHelp", module).add("A common BattleHelp component", () => {
+storiesOf("BattleMove", module).add("A common BattleMove component", () => {
   const gameId = select("Game", list, list[0]) as GameId;
   const { rules } = require(`../../../../content/dist/games/${gameId}/rules`);
   const api = allStatefulAPIs[gameId];
-  const { instruction } = api.newBattle().initialUI;
+  const ui = api.newBattle().initialUI;
   return (
-    <div style={{ padding: 10 }}>
-      <BattleHelp
-        actions={actions}
-        content={{ rules }}
-        instruction={instruction}
-      />
+    <div style={{ padding: 10, height: 400, position: "relative" }}>
+      <BattleMove actions={actions} content={{ rules }} ui={ui} />
     </div>
   );
 });

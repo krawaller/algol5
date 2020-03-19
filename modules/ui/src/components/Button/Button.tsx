@@ -11,6 +11,7 @@ export type ButtonProps = {
   controlId?: string;
   text?: string;
   active?: boolean;
+  intent?: "primary" | "";
 };
 
 import css from "./Button.cssProxy";
@@ -27,6 +28,7 @@ export const Button: FunctionComponent<ButtonProps> = props => {
     controlId,
     text,
     active,
+    intent,
   } = props;
   const handler = useButtonClickHandler({
     href,
@@ -44,6 +46,7 @@ export const Button: FunctionComponent<ButtonProps> = props => {
         [css.buttonDisabled]: disabled,
         [css.buttonBig]: big,
         [css.buttonActive]: active,
+        [css.buttonPrimary]: intent === "primary",
       })}
     >
       {text || children}

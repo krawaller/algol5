@@ -96,3 +96,17 @@
   cursor: not-allowed;
   color: rgba(92, 112, 128, 0.6);
 }
+
+.buttonPrimary {
+  background-color: #137cbd;
+  background-image: none;
+  color: white;
+}
+
+.buttonPrimary.buttonDisabled {
+  background-color: rgba(19, 124, 189, 0.5);
+}
+
+.buttonPrimary.buttonActive {
+  background-color: #0e5a8a;
+}
